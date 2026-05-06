@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-05-13",
+    "version": "2022-09-08-preview",
     "title": "ConfidentialLedger",
     "description": "Microsoft Azure Confidential Compute Ledger Control Plane REST API version 2020-12-01-preview."
   },
@@ -44,7 +44,7 @@
         "summary": "Retrieves a list of available API operations under this Resource Provider.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -57,7 +57,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure. 404 - NotFound (Confidential Ledger does not exist.)",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -80,10 +80,10 @@
         "operationId": "CheckNameAvailability",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "nameAvailabilityRequest",
@@ -91,7 +91,7 @@
             "description": "Name availability request payload.",
             "required": true,
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/CheckNameAvailabilityRequest"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/CheckNameAvailabilityRequest"
             }
           }
         ],
@@ -99,13 +99,13 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/CheckNameAvailabilityResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/CheckNameAvailabilityResponse"
             }
           },
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -126,13 +126,13 @@
         "operationId": "Ledger_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/LedgerNameParameter"
@@ -148,7 +148,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure. 404 - NotFound (Confidential Ledger does not exist.)",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -168,13 +168,13 @@
         "x-ms-long-running-operation": true,
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/LedgerNameParameter"
@@ -185,17 +185,7 @@
             "description": "The request was successful; the Confidential Ledger is deleted."
           },
           "202": {
-            "description": "The Confidential Ledger resource will be deleted asynchronously",
-            "headers": {
-              "Location": {
-                "description": "The URL to check the status of the asynchronous operation.",
-                "type": "string"
-              },
-              "Azure-AsyncOperation": {
-                "description": "The URL to check the status of the asynchronous operation.",
-                "type": "string"
-              }
-            }
+            "description": "The Confidential Ledger resource will be deleted asynchronously"
           },
           "204": {
             "description": "The request was successful; Confidential Ledger does not exist."
@@ -203,7 +193,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure. 409 - Conflict(Confidential Ledger is in a non-terminal state due to an ongoing operation.)",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -226,13 +216,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/LedgerNameParameter"
@@ -260,7 +250,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure. 404 - NotFound (Confidential Ledger could not be created/updated)",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -280,13 +270,13 @@
         "x-ms-long-running-operation": true,
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/LedgerNameParameter"
@@ -314,7 +304,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure. 404 - NotFound (Confidential Ledger could not be created/updated)",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -335,13 +325,13 @@
         "operationId": "Ledger_ListByResourceGroup",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "type": "string",
@@ -360,7 +350,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure. 404 - NotFound (Confidential Ledger does not exist.)",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -374,7 +364,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ConfidentialLedger/ledgers": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ConfidentialLedger/ledgers/": {
       "get": {
         "tags": [
           "Confidential Ledger"
@@ -384,10 +374,10 @@
         "operationId": "Ledger_ListBySubscription",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "type": "string",
@@ -406,7 +396,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure. 404 - NotFound (Confidential Ledger does not exist.)",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -454,8 +444,9 @@
         }
       }
     },
-    "Resource": {
+    "AclResource": {
       "description": "An Azure resource.",
+      "x-ms-client-name": "Resource",
       "x-ms-azure-resource": true,
       "type": "object",
       "properties": {
@@ -476,7 +467,7 @@
         },
         "systemData": {
           "description": "Metadata pertaining to creation and last modification of the resource",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
         }
       }
@@ -675,7 +666,7 @@
       "description": "Confidential Ledger. Contains the properties of Confidential Ledger Resource.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/AclResource"
         },
         {
           "$ref": "#/definitions/ResourceLocation"
@@ -710,30 +701,6 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
-      "maxLength": 90,
-      "minLength": 3,
-      "x-ms-parameter-location": "method"
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The API version to be used with the HTTP request."
-    },
     "LedgerNameParameter": {
       "name": "ledgerName",
       "in": "path",
