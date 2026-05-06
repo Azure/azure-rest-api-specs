@@ -369,13 +369,6 @@ model IotDpsPropertiesDescription {
   deviceRegistryNamespaces?: DeviceRegistryNamespaceDescription[];
 
   /**
-   * The ADR linking state of the provisioning service.
-   */
-  @visibility(Lifecycle.Read)
-  @added(Versions.v2026_06_01_preview)
-  adrLinkState?: AdrLinkingState;
-
-  /**
    * Allocation policy to be used by this provisioning service.
    */
   allocationPolicy?: AllocationPolicy;
@@ -551,6 +544,13 @@ model DeviceRegistryNamespaceDescription {
       type: "Microsoft.ManagedIdentity/userAssignedIdentities";
     }
   ]>;
+
+  /**
+   * The ADR linking state of this namespace.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_06_01_preview)
+  adrLinkState?: AdrLinkingState;
 }
 
 /**
