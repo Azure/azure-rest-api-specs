@@ -29750,7 +29750,6 @@ components:
       type: object
       required:
         - type
-        - agent_name
         - start_time
       properties:
         description:
@@ -29763,10 +29762,10 @@ components:
           description: The source type for this source, which is Traces.
         agent_id:
           type: string
-          description: The unique agent ID used to filter traces. Optional — when omitted, traces are filtered by `agent_name` (and `agent_version` if specified).
+          description: The unique agent ID used to filter traces. Provide either `agent_id` or `agent_name` — at least one is required.
         agent_name:
           type: string
-          description: The agent name to fetch traces for.
+          description: The agent name to fetch traces for. Provide either `agent_id` or `agent_name` — at least one is required.
         agent_version:
           type: string
           description: The agent version. If not specified, traces for ALL versions of the agent are included within the time window.
@@ -29789,7 +29788,6 @@ components:
       type: object
       required:
         - type
-        - agent_name
         - start_time
       properties:
         description:
@@ -29802,10 +29800,10 @@ components:
           description: The source type for this source, which is Traces.
         agent_id:
           type: string
-          description: The unique agent ID used to filter traces. Optional — when omitted, traces are filtered by `agent_name` (and `agent_version` if specified).
+          description: The unique agent ID used to filter traces. Provide either `agent_id` or `agent_name` — at least one is required.
         agent_name:
           type: string
-          description: The agent name to fetch traces for.
+          description: The agent name to fetch traces for. Provide either `agent_id` or `agent_name` — at least one is required.
         agent_version:
           type: string
           description: The agent version. If not specified, traces for ALL versions of the agent are included within the time window.
