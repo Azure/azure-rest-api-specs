@@ -4,3 +4,4 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 
 @@clientName(Microsoft.HorizonDb, "HorizonDBMgmtClient", "python");
+@@clientName(Microsoft.HorizonDb, "HorizonDBMgmtClient", "csharp");
