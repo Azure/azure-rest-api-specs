@@ -727,9 +727,6 @@ model Model {
   /** The asset identifier. */
   assetId?: string;
 
-  /** Default deployment template for the model. */
-  defaultDeploymentTemplate?: ModelDeploymentTemplateDetails;
-
   /** List of allowed deployment templates for the model. */
   allowedDeploymentTemplates?: ModelDeploymentTemplateDetails[];
 }
