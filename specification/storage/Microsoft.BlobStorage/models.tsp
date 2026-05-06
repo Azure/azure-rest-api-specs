@@ -2528,23 +2528,9 @@ model BlobPrefix {
   @Xml.name("Name") name: BlobName;
 }
 
-/** Represents an array of blobs. */
-model BlobHierarchyListSegment {
-  /** The blob items */
-  @pageItems
-  @Xml.name("Blob")
-  @Xml.unwrapped
-  blobItems: BlobItem[];
-
-  /** The blob prefixes. */
-  @Xml.name("BlobPrefix")
-  @Xml.unwrapped
-  blobPrefixes?: BlobPrefix[];
-}
-
-/** An enumeration of blobs */
+/** An enumeration of blobs. */
 @Xml.name("EnumerationResults")
-model ListBlobsHierarchySegmentResponse {
+model ListBlobsHierarchicalResponse {
   /** The service endpoint. */
   @Xml.attribute
   @Xml.name("ServiceEndpoint")
@@ -2567,9 +2553,15 @@ model ListBlobsHierarchySegmentResponse {
   /** The max results of the blobs. */
   @Xml.name("MaxResults") maxResults?: int32;
 
-  /** The blob segment. */
+  /** The blob items. */
+  @pageItems
   @Xml.name("Blobs")
-  segment: BlobHierarchyListSegment;
+  blobItems: BlobItem[];
+
+  /** The blob prefixes. */
+  @Xml.name("BlobPrefix")
+  @Xml.unwrapped
+  blobPrefixes?: BlobPrefix[];
 
   /** The next marker of the blobs. */
   @continuationToken
