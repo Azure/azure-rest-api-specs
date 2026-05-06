@@ -236,6 +236,9 @@ union MemoryItemKind {
 
   @doc("Summary of chat conversations.")
   chat_summary: "chat_summary",
+
+  @doc("Routine procedures extracted from conversations.")
+  procedural: "procedural",
 }
 
 @doc("A single memory item stored in the memory store, containing content and metadata.")
