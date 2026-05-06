@@ -95,24 +95,27 @@ interface Workbenches {
    * This is a long-running operation that returns 202 Accepted.
    * Returns 204 if the workbench is already in the target state.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "LRO POST with no response body requires 202+204 per Swagger LintDiff PostResponseCodes rule"
   @tag("Workbenches")
-  start is ArmResourceActionNoResponseContentAsync<Workbench, void>;
+  start is ArmResourceActionAsync<Workbench, void, void>;
 
   /**
    * Stops a running workbench resource.
    * This is a long-running operation that returns 202 Accepted.
    * Returns 204 if the workbench is already in the target state.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "LRO POST with no response body requires 202+204 per Swagger LintDiff PostResponseCodes rule"
   @tag("Workbenches")
-  stop is ArmResourceActionNoResponseContentAsync<Workbench, void>;
+  stop is ArmResourceActionAsync<Workbench, void, void>;
 
   /**
    * Restarts a running workbench resource.
    * This is a long-running operation that returns 202 Accepted.
    * Returns 204 if the workbench is already in the target state.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "LRO POST with no response body requires 202+204 per Swagger LintDiff PostResponseCodes rule"
   @tag("Workbenches")
-  restart is ArmResourceActionNoResponseContentAsync<Workbench, void>;
+  restart is ArmResourceActionAsync<Workbench, void, void>;
 }
 
 @@maxLength(Workbench.name, 63);
