@@ -2891,7 +2891,7 @@ paths:
               $ref: '#/components/schemas/EvaluatorGenerationJobCreate'
         description: The job to create.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - Evaluations=V1Preview
     get:
       operationId: EvaluatorGenerationJobs_list
@@ -2995,7 +2995,7 @@ paths:
       tags:
         - EvaluatorGenerationJobs
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - Evaluations=V1Preview
   /evaluator_generation_jobs/{jobId}:
     get:
@@ -3047,7 +3047,7 @@ paths:
       tags:
         - EvaluatorGenerationJobs
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - Evaluations=V1Preview
     delete:
       operationId: EvaluatorGenerationJobs_delete
@@ -3088,7 +3088,7 @@ paths:
       tags:
         - EvaluatorGenerationJobs
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - Evaluations=V1Preview
   /evaluator_generation_jobs/{jobId}:cancel:
     post:
@@ -3133,7 +3133,7 @@ paths:
       tags:
         - EvaluatorGenerationJobs
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - Evaluations=V1Preview
   /evaluators:
     get:
@@ -6718,7 +6718,7 @@ paths:
               required:
                 - name
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - Skills=V1Preview
     get:
       operationId: Skills_listSkills
@@ -6814,7 +6814,7 @@ paths:
       tags:
         - Skills
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - Skills=V1Preview
   /skills/{name}:
     get:
@@ -6858,7 +6858,7 @@ paths:
       tags:
         - Skills
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - Skills=V1Preview
     post:
       operationId: Skills_updateSkill
@@ -6928,7 +6928,7 @@ paths:
                     with a maximum length of 512 characters.
                   x-oaiTypeLabel: map
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - Skills=V1Preview
     delete:
       operationId: Skills_deleteSkill
@@ -6971,7 +6971,7 @@ paths:
       tags:
         - Skills
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - Skills=V1Preview
   /skills/{name}:download:
     get:
@@ -7016,7 +7016,7 @@ paths:
       tags:
         - Skills
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - Skills=V1Preview
   /skills:import:
     post:
@@ -7062,7 +7062,7 @@ paths:
               format: binary
         description: The zip package used to create the skill.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - Skills=V1Preview
   /toolboxes:
     get:
@@ -7159,7 +7159,7 @@ paths:
       tags:
         - Toolboxes
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - Toolboxes=V1Preview
   /toolboxes/{name}:
     get:
@@ -7203,7 +7203,7 @@ paths:
       tags:
         - Toolboxes
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - Toolboxes=V1Preview
     patch:
       operationId: updateToolbox
@@ -7247,7 +7247,7 @@ paths:
             schema:
               $ref: '#/components/schemas/UpdateToolboxRequest'
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - Toolboxes=V1Preview
     delete:
       operationId: deleteToolbox
@@ -7286,7 +7286,7 @@ paths:
       tags:
         - Toolboxes
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - Toolboxes=V1Preview
   /toolboxes/{name}/versions:
     post:
@@ -7358,7 +7358,7 @@ paths:
               required:
                 - tools
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - Toolboxes=V1Preview
     get:
       operationId: listToolboxVersions
@@ -7460,7 +7460,7 @@ paths:
       tags:
         - Toolboxes
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - Toolboxes=V1Preview
   /toolboxes/{name}/versions/{version}:
     get:
@@ -7510,7 +7510,7 @@ paths:
       tags:
         - Toolboxes
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - Toolboxes=V1Preview
     delete:
       operationId: deleteToolboxVersion
@@ -7555,7 +7555,7 @@ paths:
       tags:
         - Toolboxes
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - Toolboxes=V1Preview
 security:
   - OAuth2Auth:
@@ -11719,7 +11719,7 @@ components:
             - $ref: '#/components/schemas/EvaluationRuleAction'
           description: Definition of the evaluation rule action.
           x-ms-foundry-meta:
-            conditional_previews:
+            required_previews:
               - Evaluations=V1Preview
         filter:
           allOf:

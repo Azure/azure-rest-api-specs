@@ -8,7 +8,7 @@ using TypeSpec.OpenAPI;
 namespace Azure.AI.Projects;
 
 const ToolboxesRequiredPreviews = #{
-  conditional_previews: #[FoundryFeaturesOptInKeys.toolboxes_v1_preview],
+  required_previews: #[FoundryFeaturesOptInKeys.toolboxes_v1_preview],
 };
 
 @doc("Policy configuration for a toolbox, including content safety and other governance settings.")

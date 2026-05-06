@@ -3,7 +3,7 @@ using TypeSpec.Http;
 namespace Azure.AI.Projects;
 
 const SkillsRequiredPreviews = #{
-  conditional_previews: #[FoundryFeaturesOptInKeys.skills_v1_preview],
+  required_previews: #[FoundryFeaturesOptInKeys.skills_v1_preview],
 };
 
 alias CreateSkillRequest = {

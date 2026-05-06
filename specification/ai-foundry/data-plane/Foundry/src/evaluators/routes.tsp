@@ -187,7 +187,7 @@ interface Evaluators {
 // ============================================================================
 
 const EvaluatorGenerationJobsRequiredPreviews = #{
-  conditional_previews: #[
+  required_previews: #[
     FoundryFeaturesOptInKeys.evaluations_v1_preview
   ],
 };
