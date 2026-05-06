@@ -1,4 +1,5 @@
 import "@azure-tools/typespec-client-generator-core";
+import "./alternate-type-stubs.tsp";
 import "./Compute/client.tsp";
 import "./ComputeDisk/client.tsp";
 import "./ComputeGallery/main.tsp";
@@ -10,19 +11,6 @@ using Compute;
 using ComputeDisk;
 using ComputeGallery;
 using ComputeSku;
-
-// ── region: alternate-type stub models ──
-// Stub declarations for `Azure.ResourceManager.Models` types referenced by
-// `@@alternateType` decorators in the per-service client.tsp files (e.g. mapping
-// Common.SubResource → Azure.ResourceManager.Models.SubResource for csharp).
-// These are TypeSpec-only placeholders — the .NET emitter resolves them to the
-// real ARM common types from `Azure.ResourceManager` at generation time and the
-// stubs themselves never appear in the emitted SDK or wire payload.
-namespace Azure.ResourceManager.Models {
-  model SubResource {}
-  model WritableSubResource {}
-}
-// ── endregion ──
 
 /**
  * Compute Client
