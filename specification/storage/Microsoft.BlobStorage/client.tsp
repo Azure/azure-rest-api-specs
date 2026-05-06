@@ -108,6 +108,19 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   "rust"
 );
 
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(BlobServiceClient, "omitEndpointMethod", true, "rust");
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(BlobContainerClient, "omitEndpointMethod", true, "rust");
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(BlobClient, "omitEndpointMethod", true, "rust");
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(AppendBlobClient, "omitEndpointMethod", true, "rust");
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(BlockBlobClient, "omitEndpointMethod", true, "rust");
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(PageBlobClient, "omitEndpointMethod", true, "rust");
+
 @@usage(BlobName, Usage.output, "rust");
 
 @@alternateType(BlobItem.name, string, "rust");
