@@ -215,6 +215,24 @@ union PrivateEndpointIPVersionType {
 }
 
 /**
+ * The billing sku of the private endpoint.
+ */
+@added(Versions.v2025_07_01)
+union PrivateEndpointBillingSku {
+  string,
+
+  /**
+   * PayAsYouGo sku is the default price for private endpoints.
+   */
+  PayAsYouGo: "PayAsYouGo",
+
+  /**
+   * Fixed sku is best for high data processing private endpoints.
+   */
+  Fixed: "Fixed",
+}
+
+/**
  * Name of a load balancer SKU.
  */
 union LoadBalancerSkuName {
@@ -2862,6 +2880,12 @@ model PrivateEndpointProperties {
    * The custom name of the network interface attached to the private endpoint.
    */
   customNetworkInterfaceName?: string;
+
+  /**
+   * The billing sku of the private endpoint.
+   */
+  @added(Versions.v2025_07_01)
+  billingSku?: PrivateEndpointBillingSku;
 }
 
 /**
