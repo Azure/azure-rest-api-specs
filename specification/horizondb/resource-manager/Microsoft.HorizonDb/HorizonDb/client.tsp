@@ -5,4 +5,4 @@ using Azure.ClientGenerator.Core;
 
 @@clientName(Microsoft.HorizonDb, "HorizonDBMgmtClient", "python");
 @@clientName(Microsoft.HorizonDb, "HorizonDBMgmtClient", "csharp");
-@@clientName(HorizonDbClusterData, "HorizonDBClusterData", "csharp");
+@@clientName(HorizonDbClusterData, "HorizonDbClusterData", "csharp");
