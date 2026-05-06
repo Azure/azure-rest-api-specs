@@ -2540,7 +2540,7 @@ paths:
       tags:
         - DataGenerationJobs
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - DataGenerationJobs=V1Preview
     post:
       operationId: DataGenerationJobs_create
@@ -2602,7 +2602,7 @@ paths:
               $ref: '#/components/schemas/DataGenerationJob'
         description: The job to create.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - DataGenerationJobs=V1Preview
   /data_generation_jobs/{jobId}:
     get:
@@ -2654,7 +2654,7 @@ paths:
       tags:
         - DataGenerationJobs
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - DataGenerationJobs=V1Preview
     delete:
       operationId: DataGenerationJobs_delete
@@ -2694,7 +2694,7 @@ paths:
       tags:
         - DataGenerationJobs
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - DataGenerationJobs=V1Preview
   /data_generation_jobs/{jobId}:cancel:
     post:
@@ -2739,7 +2739,7 @@ paths:
       tags:
         - DataGenerationJobs
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - DataGenerationJobs=V1Preview
   /datasets:
     get:
@@ -5016,7 +5016,7 @@ paths:
                 - name
                 - definition
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     get:
       operationId: listMemoryStores
@@ -5112,7 +5112,7 @@ paths:
       tags:
         - Memory Stores
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
   /memory_stores/{name}:
     post:
@@ -5172,7 +5172,7 @@ paths:
                     type: string
                   description: Arbitrary key-value metadata to associate with the memory store.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     get:
       operationId: getMemoryStore
@@ -5215,7 +5215,7 @@ paths:
       tags:
         - Memory Stores
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     delete:
       operationId: deleteMemoryStore
@@ -5258,7 +5258,7 @@ paths:
       tags:
         - Memory Stores
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
   /memory_stores/{name}/updates/{update_id}:
     get:
@@ -5308,7 +5308,7 @@ paths:
       tags:
         - Memory Stores
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
   /memory_stores/{name}:delete_scope:
     post:
@@ -5364,7 +5364,7 @@ paths:
               required:
                 - scope
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
   /memory_stores/{name}:search_memories:
     post:
@@ -5432,7 +5432,7 @@ paths:
               required:
                 - scope
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
   /memory_stores/{name}:update_memories:
     post:
@@ -5512,7 +5512,7 @@ paths:
               required:
                 - scope
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
   /openai/v1/conversations:
     post:
@@ -10932,7 +10932,7 @@ components:
         - $ref: '#/components/schemas/MemoryItem'
       description: A memory item containing a summary extracted from conversations.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     ClusterInsightResult:
       type: object
@@ -12327,7 +12327,7 @@ components:
           type: boolean
           description: Whether the memory store was successfully deleted.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     DeleteResponseResult:
       type: object
@@ -14943,7 +14943,7 @@ components:
           chat_summary: '#/components/schemas/ChatSummaryMemoryItem'
       description: A single memory item stored in the memory store, containing content and metadata.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     MemoryItemKind:
       anyOf:
@@ -14954,7 +14954,7 @@ components:
             - chat_summary
       description: Memory item kind.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     MemoryOperation:
       type: object
@@ -14972,7 +14972,7 @@ components:
           description: The memory item to create, update, or delete.
       description: Represents a single memory operation (create, update, or delete) performed on a memory item.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     MemoryOperationKind:
       anyOf:
@@ -14984,7 +14984,7 @@ components:
             - delete
       description: Memory operation kind.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     MemorySearchItem:
       type: object
@@ -14997,7 +14997,7 @@ components:
           description: Retrieved memory item.
       description: A retrieved memory item from memory search.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     MemorySearchOptions:
       type: object
@@ -15008,7 +15008,7 @@ components:
           description: Maximum number of memory items to return.
       description: Memory search options.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     MemorySearchPreviewTool:
       type: object
@@ -15160,7 +15160,7 @@ components:
         - $ref: '#/components/schemas/MemoryStoreDefinition'
       description: Default memory store implementation.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     MemoryStoreDefaultOptions:
       type: object
@@ -15181,7 +15181,7 @@ components:
           default: true
       description: Default memory store configurations.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     MemoryStoreDefinition:
       type: object
@@ -15198,7 +15198,7 @@ components:
           default: '#/components/schemas/MemoryStoreDefaultDefinition'
       description: Base definition for memory store configurations.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     MemoryStoreDeleteScopeResponse:
       type: object
@@ -15224,7 +15224,7 @@ components:
           description: Whether the deletion operation was successful.
       description: Response for deleting memories from a scope.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     MemoryStoreKind:
       anyOf:
@@ -15234,7 +15234,7 @@ components:
             - default
       description: The type of memory store implementation to use.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     MemoryStoreObject:
       type: object
@@ -15281,7 +15281,7 @@ components:
           description: The definition of the memory store.
       description: A memory store that can store and retrieve user memories.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     MemoryStoreOperationUsage:
       type: object
@@ -15319,7 +15319,7 @@ components:
           description: The total number of tokens used.
       description: Usage statistics of a memory store operation.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     MemoryStoreSearchResponse:
       type: object
@@ -15342,7 +15342,7 @@ components:
           description: Usage statistics associated with the memory search operation.
       description: Memory search response.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     MemoryStoreUpdateCompletedResult:
       type: object
@@ -15361,7 +15361,7 @@ components:
           description: Usage statistics associated with the memory update operation.
       description: Memory update result.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     MemoryStoreUpdateResponse:
       type: object
@@ -15389,7 +15389,7 @@ components:
           description: Error object that describes the error when status is "failed".
       description: Provides the status of a memory store update operation.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     MemoryStoreUpdateStatus:
       anyOf:
@@ -15403,7 +15403,7 @@ components:
             - superseded
       description: Status of a memory store update operation.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     Message:
       type: object
@@ -32455,7 +32455,7 @@ components:
         - $ref: '#/components/schemas/MemoryItem'
       description: A memory item specifically containing user profile information extracted from conversations, such as preferences, interests, and personal details.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     VersionIndicator:
       type: object

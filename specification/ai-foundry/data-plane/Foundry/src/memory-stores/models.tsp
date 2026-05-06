@@ -7,7 +7,7 @@ using TypeSpec.OpenAPI;
 namespace Azure.AI.Projects;
 
 const MemoryStoreRequiredPreviews = #{
-  conditional_previews: #[FoundryFeaturesOptInKeys.memory_stores_v1_preview],
+  required_previews: #[FoundryFeaturesOptInKeys.memory_stores_v1_preview],
 };
 
 union MemoryStoreObjectType {
