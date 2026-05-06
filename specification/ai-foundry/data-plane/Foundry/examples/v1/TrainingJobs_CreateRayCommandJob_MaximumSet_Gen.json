@@ -1,0 +1,64 @@
+{
+  "title": "TrainingJobs_CreateRayCommandJob_MaximumSet",
+  "operationId": "TrainingJobs_Create",
+  "parameters": {
+    "api-version": "v1",
+    "Operation-Id": "create-ray-command-job-01",
+    "Foundry-Features": "Jobs=V1Preview",
+    "job": {
+      "name": "ray-command-job-01",
+      "properties": {
+        "jobType": "Command",
+        "displayName": "interactive-ray-4node",
+        "description": "Interactive Ray command job (4 nodes)",
+        "tags": {
+          "scenario": "interactive-ray"
+        },
+        "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.CognitiveServices/accounts/my-account/computes/my-cluster",
+        "command": "python -c \"import time; print('Ray cluster ready'); time.sleep(86400)\"",
+        "environmentImageReference": "mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu20.04",
+        "distribution": {
+          "distributionType": "Ray",
+          "port": 6379,
+          "includeDashboard": true,
+          "dashboardPort": 8265,
+          "enableRemoteAccessClientServer": true,
+          "clientServerPort": 10001
+        },
+        "resources": {
+          "instanceCount": 4
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "ray-command-job-01",
+        "type": "Microsoft.MachineLearningServices/workspaces/training_jobs",
+        "properties": {
+          "jobType": "Command",
+          "displayName": "interactive-ray-4node",
+          "description": "Interactive Ray command job (4 nodes)",
+          "tags": {
+            "scenario": "interactive-ray"
+          },
+          "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.CognitiveServices/accounts/my-account/computes/my-cluster",
+          "command": "python -c \"import time; print('Ray cluster ready'); time.sleep(86400)\"",
+          "environmentImageReference": "mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu20.04",
+          "distribution": {
+            "distributionType": "Ray",
+            "port": 6379,
+            "includeDashboard": true,
+            "dashboardPort": 8265,
+            "enableRemoteAccessClientServer": true,
+            "clientServerPort": 10001
+          },
+          "resources": {
+            "instanceCount": 4
+          }
+        }
+      }
+    }
+  }
+}

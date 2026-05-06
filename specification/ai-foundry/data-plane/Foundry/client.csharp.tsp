@@ -1,5 +1,4 @@
 import "./src/common/service.tsp";
-import "./src/clusters/routes.tsp";
 import "./src/connections/routes.tsp";
 import "./src/datasets/routes.tsp";
 import "./src/indexes/routes.tsp";

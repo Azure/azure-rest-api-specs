@@ -9,7 +9,6 @@ import "./src/evaluation-rules/routes.tsp";
 
 // Stable operation (GA routes) without preview features
 import "./src/connections/routes.tsp";
-import "./src/clusters/routes.tsp";
 import "./src/datasets/routes.tsp";
 import "./src/deployments/routes.tsp";
 import "./src/indexes/routes.tsp";
@@ -178,65 +177,8 @@ using Azure.AI.Projects;
 // Models sub-client
 // --------------------------------------------------------------------------------
 
-@@clientName(Models.createSftTrainingJob, "create_sft_training_job", "python");
-@@clientName(Models.createPreferenceTrainingJob,
-  "create_preference_training_job",
-  "python"
-);
-@@clientName(Models.createKtoTrainingJob, "create_kto_training_job", "python");
-@@clientName(Models.createRewardModelTrainingJob,
-  "create_reward_model_training_job",
-  "python"
-);
-@@clientName(Models.createGrpoTrainingJob,
-  "create_grpo_training_job",
-  "python"
-);
-@@clientName(Models.createPolicyGradientTrainingJob,
-  "create_policy_gradient_training_job",
-  "python"
-);
-@@clientName(Models.createPpoTrainingJob, "create_ppo_training_job", "python");
-@@clientName(Models.createSftTrainingJob, "createSftTrainingJob", "javascript");
-@@clientName(Models.createPreferenceTrainingJob,
-  "createPreferenceTrainingJob",
-  "javascript"
-);
-@@clientName(Models.createKtoTrainingJob, "createKtoTrainingJob", "javascript");
-@@clientName(Models.createRewardModelTrainingJob,
-  "createRewardModelTrainingJob",
-  "javascript"
-);
-@@clientName(Models.createGrpoTrainingJob,
-  "createGrpoTrainingJob",
-  "javascript"
-);
-@@clientName(Models.createPolicyGradientTrainingJob,
-  "createPolicyGradientTrainingJob",
-  "javascript"
-);
-@@clientName(Models.createPpoTrainingJob, "createPpoTrainingJob", "javascript");
-
-// --------------------------------------------------------------------------------
-// Clusters sub-client
-// --------------------------------------------------------------------------------
-
-@@clientName(Clusters.startRaySession,
-  "start_ray_session",
-  "python"
-);
-@@clientName(Clusters.stopRaySession,
-  "stop_ray_session",
-  "python"
-);
-@@clientName(Clusters.startRaySession,
-  "startRaySession",
-  "javascript"
-);
-@@clientName(Clusters.stopRaySession,
-  "stopRaySession",
-  "javascript"
-);
+@@clientName(Models.createTrainingJob, "create_training_job", "python");
+@@clientName(Models.createTrainingJob, "createTrainingJob", "javascript");
 
 // --------------------------------------------------------------------------------
 // Datasets sub-client

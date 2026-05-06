@@ -4,7 +4,6 @@ import "./src/agents-session-files/routes.tsp";
 import "./src/agents-invocations/routes.tsp";
 import "./src/common/custom-types.tsp";
 import "./src/common/service.tsp";
-import "./src/clusters/routes.tsp";
 import "./src/connections/routes.tsp";
 import "./src/datasets/routes.tsp";
 import "./src/deployments/routes.tsp";

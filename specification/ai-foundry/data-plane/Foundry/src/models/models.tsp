@@ -521,8 +521,13 @@ model PpoTrainingRuntimeConfiguration {
   packaging?: ModelTrainingPackagingConfiguration;
 }
 
-@doc("Request body for creating a managed SFT training job from a base model.")
-model SftModelTrainingJobCreate {
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Use an extensible string discriminator for managed model training job types."
+@doc("Base request body for creating a managed training job from a base model.")
+@discriminator("type")
+model ModelTrainingJobCreate {
+  @doc("Managed training job type.")
+  type: string;
+
   @doc("Optional name of the model to create. If omitted, the service generates one.")
   name?: string;
 
@@ -537,181 +542,97 @@ model SftModelTrainingJobCreate {
 
   @doc("Base model asset reference.")
   `model`: string;
+
+  @doc("Compute placement for the managed training job.")
+  compute: ModelTrainingComputeConfiguration;
+}
+
+@doc("Request body for creating a managed SFT training job from a base model.")
+model SftTrainingJob extends ModelTrainingJobCreate {
+  @doc("Managed training job type, always 'sft'.")
+  type: "sft";
 
   @doc("Training and optional evaluation datasets.")
   dataset: SftTrainingDatasetConfiguration;
 
   @doc("Runtime options for managed SFT.")
   runtime?: SftTrainingRuntimeConfiguration;
-
-  @doc("Compute placement for the managed training job.")
-  compute: ModelTrainingComputeConfiguration;
 }
 
 @doc("Request body for creating a managed pairwise preference training job from a base model.")
-model PreferenceModelTrainingJobCreate {
+model PreferenceTrainingJob extends ModelTrainingJobCreate {
+  @doc("Managed training job type, always 'preference'.")
+  type: "preference";
+
   @doc("Preference optimization algorithm to run.")
   algorithm: PreferenceTrainingAlgorithm;
-
-  @doc("Optional name of the model to create. If omitted, the service generates one.")
-  name?: string;
-
-  @doc("Optional version of the model to create. If omitted, the service generates one.")
-  version?: string;
-
-  @doc("Optional description for the model to create.")
-  description?: string;
-
-  @doc("Optional tags for the model to create.")
-  tags?: Record<string>;
-
-  @doc("Base model asset reference.")
-  `model`: string;
 
   @doc("Training and optional evaluation datasets.")
   dataset: PairwisePreferenceDatasetConfiguration;
 
   @doc("Runtime options for managed pairwise preference training.")
   runtime?: PreferenceTrainingRuntimeConfiguration;
-
-  @doc("Compute placement for the managed training job.")
-  compute: ModelTrainingComputeConfiguration;
 }
 
 @doc("Request body for creating a managed KTO training job from a base model.")
-model KtoModelTrainingJobCreate {
-  @doc("Optional name of the model to create. If omitted, the service generates one.")
-  name?: string;
-
-  @doc("Optional version of the model to create. If omitted, the service generates one.")
-  version?: string;
-
-  @doc("Optional description for the model to create.")
-  description?: string;
-
-  @doc("Optional tags for the model to create.")
-  tags?: Record<string>;
-
-  @doc("Base model asset reference.")
-  `model`: string;
+model KtoTrainingJob extends ModelTrainingJobCreate {
+  @doc("Managed training job type, always 'kto'.")
+  type: "kto";
 
   @doc("Training and optional evaluation datasets.")
   dataset: KtoTrainingDatasetConfiguration;
 
   @doc("Runtime options for managed KTO.")
   runtime?: KtoTrainingRuntimeConfiguration;
-
-  @doc("Compute placement for the managed training job.")
-  compute: ModelTrainingComputeConfiguration;
 }
 
 @doc("Request body for creating a managed reward-model training job from a base model.")
-model RewardModelTrainingJobCreate {
-  @doc("Optional name of the reward model to create. If omitted, the service generates one.")
-  name?: string;
-
-  @doc("Optional version of the reward model to create. If omitted, the service generates one.")
-  version?: string;
-
-  @doc("Optional description for the reward model to create.")
-  description?: string;
-
-  @doc("Optional tags for the reward model to create.")
-  tags?: Record<string>;
-
-  @doc("Base model asset reference.")
-  `model`: string;
+model RewardModelTrainingJob extends ModelTrainingJobCreate {
+  @doc("Managed training job type, always 'reward_model'.")
+  type: "reward_model";
 
   @doc("Training and optional evaluation datasets.")
   dataset: RewardModelTrainingDatasetConfiguration;
 
   @doc("Runtime options for managed reward-model training.")
   runtime?: RewardModelTrainingRuntimeConfiguration;
-
-  @doc("Compute placement for the managed training job.")
-  compute: ModelTrainingComputeConfiguration;
 }
 
 @doc("Request body for creating a managed GRPO training job from a base model.")
-model GrpoModelTrainingJobCreate {
-  @doc("Optional name of the model to create. If omitted, the service generates one.")
-  name?: string;
-
-  @doc("Optional version of the model to create. If omitted, the service generates one.")
-  version?: string;
-
-  @doc("Optional description for the model to create.")
-  description?: string;
-
-  @doc("Optional tags for the model to create.")
-  tags?: Record<string>;
-
-  @doc("Base model asset reference.")
-  `model`: string;
+model GrpoTrainingJob extends ModelTrainingJobCreate {
+  @doc("Managed training job type, always 'grpo'.")
+  type: "grpo";
 
   @doc("Training and optional evaluation datasets.")
   dataset: GrpoTrainingDatasetConfiguration;
 
   @doc("Runtime options for managed GRPO.")
   runtime: GrpoTrainingRuntimeConfiguration;
-
-  @doc("Compute placement for the managed training job.")
-  compute: ModelTrainingComputeConfiguration;
 }
 
 @doc("Request body for creating a managed online policy-gradient training job from a base model.")
-model PolicyGradientModelTrainingJobCreate {
+model PolicyGradientTrainingJob extends ModelTrainingJobCreate {
+  @doc("Managed training job type, always 'policy_gradient'.")
+  type: "policy_gradient";
+
   @doc("Policy-gradient algorithm to run.")
   algorithm: PolicyGradientTrainingAlgorithm;
-
-  @doc("Optional name of the model to create. If omitted, the service generates one.")
-  name?: string;
-
-  @doc("Optional version of the model to create. If omitted, the service generates one.")
-  version?: string;
-
-  @doc("Optional description for the model to create.")
-  description?: string;
-
-  @doc("Optional tags for the model to create.")
-  tags?: Record<string>;
-
-  @doc("Base model asset reference.")
-  `model`: string;
 
   @doc("Training and optional evaluation datasets.")
   dataset: GrpoTrainingDatasetConfiguration;
 
   @doc("Runtime options for managed online policy-gradient training.")
   runtime: PolicyGradientTrainingRuntimeConfiguration;
-
-  @doc("Compute placement for the managed training job.")
-  compute: ModelTrainingComputeConfiguration;
 }
 
 @doc("Request body for creating a managed PPO training job from a base model.")
-model PpoModelTrainingJobCreate {
-  @doc("Optional name of the model to create. If omitted, the service generates one.")
-  name?: string;
-
-  @doc("Optional version of the model to create. If omitted, the service generates one.")
-  version?: string;
-
-  @doc("Optional description for the model to create.")
-  description?: string;
-
-  @doc("Optional tags for the model to create.")
-  tags?: Record<string>;
-
-  @doc("Base model asset reference.")
-  `model`: string;
+model PpoTrainingJob extends ModelTrainingJobCreate {
+  @doc("Managed training job type, always 'ppo'.")
+  type: "ppo";
 
   @doc("Training and optional evaluation datasets.")
   dataset: GrpoTrainingDatasetConfiguration;
 
   @doc("Runtime options for managed PPO.")
   runtime: PpoTrainingRuntimeConfiguration;
-
-  @doc("Compute placement for the managed training job.")
-  compute: ModelTrainingComputeConfiguration;
 }

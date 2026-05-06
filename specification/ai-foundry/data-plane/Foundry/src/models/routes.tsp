@@ -14,9 +14,27 @@ alias ModelTrainingAcceptedResponse = Foundations.AcceptedResponse &
 @tag("Models")
 interface Models {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Managed model training is a product action that creates an underlying training job resource."
-  @doc("Create a model by running managed supervised fine-tuning.")
+  @doc("Create a model by running managed model training.")
   @post
-  @route("/models:create_sft_training_job")
+  @route("/models:create_training_job")
+  @pollingOperation(Models.getTrainingOperationResult)
+  createTrainingJob is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.jobs_v1_preview,
+    {
+      @doc("Idempotency key used to safely retry managed model training.")
+      @header("Operation-Id")
+      operationId?: string;
+
+      @doc("The managed model training job to create.")
+      @bodyRoot
+      job: ModelTrainingJobCreate;
+    },
+    ModelTrainingAcceptedResponse
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Managed model training is a product action that creates an underlying training job resource."
+  @doc("Create a model by running managed supervised fine-tuning.")
+  @overload(Models.createTrainingJob)
   @pollingOperation(Models.getTrainingOperationResult)
   createSftTrainingJob is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
@@ -25,17 +43,16 @@ interface Models {
       @header("Operation-Id")
       operationId?: string;
 
-      @doc("The managed SFT model training request.")
+      @doc("The managed SFT model training job to create.")
       @bodyRoot
-      request: SftModelTrainingJobCreate;
+      job: SftTrainingJob;
     },
     ModelTrainingAcceptedResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Managed model training is a product action that creates an underlying training job resource."
   @doc("Create a model by running managed pairwise preference training.")
-  @post
-  @route("/models:create_preference_training_job")
+  @overload(Models.createTrainingJob)
   @pollingOperation(Models.getTrainingOperationResult)
   createPreferenceTrainingJob is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
@@ -46,15 +63,14 @@ interface Models {
 
       @doc("The managed pairwise preference model training request.")
       @bodyRoot
-      request: PreferenceModelTrainingJobCreate;
+      job: PreferenceTrainingJob;
     },
     ModelTrainingAcceptedResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Managed model training is a product action that creates an underlying training job resource."
   @doc("Create a model by running managed KTO training.")
-  @post
-  @route("/models:create_kto_training_job")
+  @overload(Models.createTrainingJob)
   @pollingOperation(Models.getTrainingOperationResult)
   createKtoTrainingJob is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
@@ -65,15 +81,14 @@ interface Models {
 
       @doc("The managed KTO model training request.")
       @bodyRoot
-      request: KtoModelTrainingJobCreate;
+      job: KtoTrainingJob;
     },
     ModelTrainingAcceptedResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Managed model training is a product action that creates an underlying training job resource."
   @doc("Create a reward model by running managed reward-model training.")
-  @post
-  @route("/models:create_reward_model_training_job")
+  @overload(Models.createTrainingJob)
   @pollingOperation(Models.getTrainingOperationResult)
   createRewardModelTrainingJob is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
@@ -84,15 +99,14 @@ interface Models {
 
       @doc("The managed reward-model training request.")
       @bodyRoot
-      request: RewardModelTrainingJobCreate;
+      job: RewardModelTrainingJob;
     },
     ModelTrainingAcceptedResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Managed model training is a product action that creates an underlying training job resource."
   @doc("Create a model by running managed GRPO training.")
-  @post
-  @route("/models:create_grpo_training_job")
+  @overload(Models.createTrainingJob)
   @pollingOperation(Models.getTrainingOperationResult)
   createGrpoTrainingJob is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
@@ -103,15 +117,14 @@ interface Models {
 
       @doc("The managed GRPO model training request.")
       @bodyRoot
-      request: GrpoModelTrainingJobCreate;
+      job: GrpoTrainingJob;
     },
     ModelTrainingAcceptedResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Managed model training is a product action that creates an underlying training job resource."
   @doc("Create a model by running managed online policy-gradient training.")
-  @post
-  @route("/models:create_policy_gradient_training_job")
+  @overload(Models.createTrainingJob)
   @pollingOperation(Models.getTrainingOperationResult)
   createPolicyGradientTrainingJob is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
@@ -122,15 +135,14 @@ interface Models {
 
       @doc("The managed online policy-gradient model training request.")
       @bodyRoot
-      request: PolicyGradientModelTrainingJobCreate;
+      job: PolicyGradientTrainingJob;
     },
     ModelTrainingAcceptedResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Managed model training is a product action that creates an underlying training job resource."
   @doc("Create a model by running managed PPO training.")
-  @post
-  @route("/models:create_ppo_training_job")
+  @overload(Models.createTrainingJob)
   @pollingOperation(Models.getTrainingOperationResult)
   createPpoTrainingJob is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.jobs_v1_preview,
@@ -141,7 +153,7 @@ interface Models {
 
       @doc("The managed PPO model training request.")
       @bodyRoot
-      request: PpoModelTrainingJobCreate;
+      job: PpoTrainingJob;
     },
     ModelTrainingAcceptedResponse
   >;

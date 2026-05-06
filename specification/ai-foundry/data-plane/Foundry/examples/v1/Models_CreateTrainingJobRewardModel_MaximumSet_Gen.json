@@ -1,25 +1,27 @@
 {
-    "title": "Models_CreateKtoTrainingJob_MaximumSet",
-    "operationId": "Models_createKtoTrainingJob",
+    "title": "Models_CreateTrainingJobRewardModel_MaximumSet",
+    "operationId": "Models_createTrainingJob",
     "parameters": {
         "api-version": "v1",
-        "Operation-Id": "create-my-kto-training-job-01",
+        "Operation-Id": "create-my-reward-model-training-job-01",
         "Foundry-Features": "Jobs=V1Preview",
-        "request": {
-            "name": "qwen-feedback-kto",
+        "job": {
+            "type": "reward_model",
+            "name": "qwen-helpfulness-reward-model",
             "version": "1",
-            "description": "KTO model trained from binary desirability feedback",
+            "description": "Reward model trained from pairwise helpfulness preferences",
             "tags": {
-                "algorithm": "kto"
+                "algorithm": "reward_model"
             },
             "model": "azureai://registries/azureml/models/qwen-base/versions/1",
             "dataset": {
-                "train": "azureai://accounts/my-account/projects/my-project/data/kto-train/versions/1",
-                "eval": "azureai://accounts/my-account/projects/my-project/data/kto-eval/versions/1",
+                "kind": "pairwise",
+                "train": "azureai://accounts/my-account/projects/my-project/data/reward-train/versions/1",
+                "eval": "azureai://accounts/my-account/projects/my-project/data/reward-eval/versions/1",
                 "columns": {
                     "prompt": "prompt",
-                    "response": "response",
-                    "label": "is_desirable"
+                    "chosen": "chosen",
+                    "rejected": "rejected"
                 },
                 "dataFormat": {
                     "chatTemplate": "chatml"
@@ -27,19 +29,15 @@
             },
             "runtime": {
                 "framework": "trl",
-                "desirableWeight": 1.0,
-                "undesirableWeight": 1.33,
+                "loss": "bradley_terry",
                 "hyperparameters": {
-                    "learning_rate": 0.00005,
-                    "beta": 0.1
+                    "learning_rate": 0.00002,
+                    "num_train_epochs": 2
                 },
                 "lora": {
-                    "rank": 16,
-                    "alpha": 32,
+                    "rank": 8,
+                    "alpha": 16,
                     "targetModules": "auto"
-                },
-                "packaging": {
-                    "mode": "merged_model"
                 }
             },
             "compute": {
@@ -55,10 +53,10 @@
     "responses": {
         "202": {
             "headers": {
-                "Operation-Location": "https://my-account.services.ai.azure.com/api/projects/my-project/models/operations/create-my-kto-training-job-01/result?api-version=v1"
+                "Operation-Location": "https://my-account.services.ai.azure.com/api/projects/my-project/models/operations/create-my-reward-model-training-job-01/result?api-version=v1"
             },
             "body": {
-                "operationId": "create-my-kto-training-job-01",
+                "operationId": "create-my-reward-model-training-job-01",
                 "status": "queued"
             }
         }

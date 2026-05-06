@@ -27,9 +27,6 @@
       "name": "Agents"
     },
     {
-      "name": "Clusters"
-    },
-    {
       "name": "Connections"
     },
     {
@@ -959,183 +956,6 @@
               }
             }
           }
-        }
-      }
-    },
-    "/clusters/{clusterName}/ray_sessions/{sessionName}:stop": {
-      "post": {
-        "operationId": "Clusters_stopRaySession",
-        "description": "Stop an interactive Ray session on a compute cluster.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Jobs=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "clusterName",
-            "in": "path",
-            "required": true,
-            "description": "The compute cluster name.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "sessionName",
-            "in": "path",
-            "required": true,
-            "description": "The Ray session name.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded."
-          },
-          "202": {
-            "description": "Response returned when a job cancel operation is accepted asynchronously.",
-            "headers": {
-              "Location": {
-                "required": true,
-                "description": "URL to poll for the final result of the cancel operation.",
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Operation-Location": {
-                "required": false,
-                "description": "URL to poll for the status of the cancel operation.",
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Retry-After": {
-                "required": false,
-                "description": "Suggested delay in seconds before polling.",
-                "schema": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Clusters"
-        ]
-      }
-    },
-    "/clusters/{clusterName}:start_ray_session": {
-      "post": {
-        "operationId": "Clusters_startRaySession",
-        "description": "Start an interactive Ray session on a compute cluster.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Jobs=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "clusterName",
-            "in": "path",
-            "required": true,
-            "description": "The compute cluster name.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "Operation-Id",
-            "in": "header",
-            "required": false,
-            "description": "Idempotency key used to safely retry Ray session startup.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Job"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Clusters"
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RaySessionStart"
-              }
-            }
-          },
-          "description": "Ray session start request."
         }
       }
     },
@@ -7331,10 +7151,10 @@
         ]
       }
     },
-    "/models:create_grpo_training_job": {
+    "/models:create_training_job": {
       "post": {
-        "operationId": "Models_createGrpoTrainingJob",
-        "description": "Create a model by running managed GRPO training.",
+        "operationId": "Models_createTrainingJob",
+        "description": "Create a model by running managed model training.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -7408,521 +7228,11 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/GrpoModelTrainingJobCreate"
+                "$ref": "#/components/schemas/ModelTrainingJobCreate"
               }
             }
           },
-          "description": "The managed GRPO model training request."
-        }
-      }
-    },
-    "/models:create_kto_training_job": {
-      "post": {
-        "operationId": "Models_createKtoTrainingJob",
-        "description": "Create a model by running managed KTO training.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Jobs=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "Operation-Id",
-            "in": "header",
-            "required": false,
-            "description": "Idempotency key used to safely retry managed model training.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Operation-Location": {
-                "required": true,
-                "description": "The location for monitoring the operation state.",
-                "schema": {
-                  "type": "string",
-                  "format": "uri"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ModelTrainingOperation"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Models"
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/KtoModelTrainingJobCreate"
-              }
-            }
-          },
-          "description": "The managed KTO model training request."
-        }
-      }
-    },
-    "/models:create_policy_gradient_training_job": {
-      "post": {
-        "operationId": "Models_createPolicyGradientTrainingJob",
-        "description": "Create a model by running managed online policy-gradient training.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Jobs=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "Operation-Id",
-            "in": "header",
-            "required": false,
-            "description": "Idempotency key used to safely retry managed model training.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Operation-Location": {
-                "required": true,
-                "description": "The location for monitoring the operation state.",
-                "schema": {
-                  "type": "string",
-                  "format": "uri"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ModelTrainingOperation"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Models"
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PolicyGradientModelTrainingJobCreate"
-              }
-            }
-          },
-          "description": "The managed online policy-gradient model training request."
-        }
-      }
-    },
-    "/models:create_ppo_training_job": {
-      "post": {
-        "operationId": "Models_createPpoTrainingJob",
-        "description": "Create a model by running managed PPO training.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Jobs=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "Operation-Id",
-            "in": "header",
-            "required": false,
-            "description": "Idempotency key used to safely retry managed model training.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Operation-Location": {
-                "required": true,
-                "description": "The location for monitoring the operation state.",
-                "schema": {
-                  "type": "string",
-                  "format": "uri"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ModelTrainingOperation"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Models"
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PpoModelTrainingJobCreate"
-              }
-            }
-          },
-          "description": "The managed PPO model training request."
-        }
-      }
-    },
-    "/models:create_preference_training_job": {
-      "post": {
-        "operationId": "Models_createPreferenceTrainingJob",
-        "description": "Create a model by running managed pairwise preference training.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Jobs=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "Operation-Id",
-            "in": "header",
-            "required": false,
-            "description": "Idempotency key used to safely retry managed model training.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Operation-Location": {
-                "required": true,
-                "description": "The location for monitoring the operation state.",
-                "schema": {
-                  "type": "string",
-                  "format": "uri"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ModelTrainingOperation"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Models"
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PreferenceModelTrainingJobCreate"
-              }
-            }
-          },
-          "description": "The managed pairwise preference model training request."
-        }
-      }
-    },
-    "/models:create_reward_model_training_job": {
-      "post": {
-        "operationId": "Models_createRewardModelTrainingJob",
-        "description": "Create a reward model by running managed reward-model training.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Jobs=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "Operation-Id",
-            "in": "header",
-            "required": false,
-            "description": "Idempotency key used to safely retry managed model training.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Operation-Location": {
-                "required": true,
-                "description": "The location for monitoring the operation state.",
-                "schema": {
-                  "type": "string",
-                  "format": "uri"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ModelTrainingOperation"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Models"
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RewardModelTrainingJobCreate"
-              }
-            }
-          },
-          "description": "The managed reward-model training request."
-        }
-      }
-    },
-    "/models:create_sft_training_job": {
-      "post": {
-        "operationId": "Models_createSftTrainingJob",
-        "description": "Create a model by running managed supervised fine-tuning.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Jobs=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "Operation-Id",
-            "in": "header",
-            "required": false,
-            "description": "Idempotency key used to safely retry managed model training.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Operation-Location": {
-                "required": true,
-                "description": "The location for monitoring the operation state.",
-                "schema": {
-                  "type": "string",
-                  "format": "uri"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ModelTrainingOperation"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Models"
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SftModelTrainingJobCreate"
-              }
-            }
-          },
-          "description": "The managed SFT model training request."
+          "description": "The managed model training job to create."
         }
       }
     },
@@ -21546,65 +20856,6 @@
         },
         "description": "Details of a function tool call."
       },
-      "GrpoModelTrainingJobCreate": {
-        "type": "object",
-        "required": [
-          "model",
-          "dataset",
-          "runtime",
-          "compute"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Optional name of the model to create. If omitted, the service generates one."
-          },
-          "version": {
-            "type": "string",
-            "description": "Optional version of the model to create. If omitted, the service generates one."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional description for the model to create."
-          },
-          "tags": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "Optional tags for the model to create."
-          },
-          "model": {
-            "type": "string",
-            "description": "Base model asset reference."
-          },
-          "dataset": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/GrpoTrainingDatasetConfiguration"
-              }
-            ],
-            "description": "Training and optional evaluation datasets."
-          },
-          "runtime": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/GrpoTrainingRuntimeConfiguration"
-              }
-            ],
-            "description": "Runtime options for managed GRPO."
-          },
-          "compute": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ModelTrainingComputeConfiguration"
-              }
-            ],
-            "description": "Compute placement for the managed training job."
-          }
-        },
-        "description": "Request body for creating a managed GRPO training job from a base model."
-      },
       "GrpoTrainingColumnMapping": {
         "type": "object",
         "required": [
@@ -21709,6 +20960,45 @@
           }
         },
         "description": "Dataset configuration for managed GRPO training."
+      },
+      "GrpoTrainingJob": {
+        "type": "object",
+        "required": [
+          "type",
+          "dataset",
+          "runtime"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "grpo"
+            ],
+            "description": "Managed training job type, always 'grpo'."
+          },
+          "dataset": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GrpoTrainingDatasetConfiguration"
+              }
+            ],
+            "description": "Training and optional evaluation datasets."
+          },
+          "runtime": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GrpoTrainingRuntimeConfiguration"
+              }
+            ],
+            "description": "Runtime options for managed GRPO."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ModelTrainingJobCreate"
+          }
+        ],
+        "description": "Request body for creating a managed GRPO training job from a base model."
       },
       "GrpoTrainingRuntimeConfiguration": {
         "type": "object",
@@ -23148,64 +22438,6 @@
         },
         "description": "Column mapping for KTO feedback datasets. Keys are logical fields expected by KTO; values are the exact column names in the referenced dataset asset."
       },
-      "KtoModelTrainingJobCreate": {
-        "type": "object",
-        "required": [
-          "model",
-          "dataset",
-          "compute"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Optional name of the model to create. If omitted, the service generates one."
-          },
-          "version": {
-            "type": "string",
-            "description": "Optional version of the model to create. If omitted, the service generates one."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional description for the model to create."
-          },
-          "tags": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "Optional tags for the model to create."
-          },
-          "model": {
-            "type": "string",
-            "description": "Base model asset reference."
-          },
-          "dataset": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/KtoTrainingDatasetConfiguration"
-              }
-            ],
-            "description": "Training and optional evaluation datasets."
-          },
-          "runtime": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/KtoTrainingRuntimeConfiguration"
-              }
-            ],
-            "description": "Runtime options for managed KTO."
-          },
-          "compute": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ModelTrainingComputeConfiguration"
-              }
-            ],
-            "description": "Compute placement for the managed training job."
-          }
-        },
-        "description": "Request body for creating a managed KTO training job from a base model."
-      },
       "KtoTrainingConfiguration": {
         "type": "object",
         "required": [
@@ -23276,6 +22508,44 @@
           }
         },
         "description": "Dataset configuration for managed KTO training."
+      },
+      "KtoTrainingJob": {
+        "type": "object",
+        "required": [
+          "type",
+          "dataset"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "kto"
+            ],
+            "description": "Managed training job type, always 'kto'."
+          },
+          "dataset": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/KtoTrainingDatasetConfiguration"
+              }
+            ],
+            "description": "Training and optional evaluation datasets."
+          },
+          "runtime": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/KtoTrainingRuntimeConfiguration"
+              }
+            ],
+            "description": "Runtime options for managed KTO."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ModelTrainingJobCreate"
+          }
+        ],
+        "description": "Request body for creating a managed KTO training job from a base model."
       },
       "KtoTrainingRuntimeConfiguration": {
         "type": "object",
@@ -24347,6 +23617,64 @@
           }
         },
         "description": "Compute placement for a managed model training job."
+      },
+      "ModelTrainingJobCreate": {
+        "type": "object",
+        "required": [
+          "type",
+          "model",
+          "compute"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Managed training job type."
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional name of the model to create. If omitted, the service generates one."
+          },
+          "version": {
+            "type": "string",
+            "description": "Optional version of the model to create. If omitted, the service generates one."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional description for the model to create."
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Optional tags for the model to create."
+          },
+          "model": {
+            "type": "string",
+            "description": "Base model asset reference."
+          },
+          "compute": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ModelTrainingComputeConfiguration"
+              }
+            ],
+            "description": "Compute placement for the managed training job."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "sft": "#/components/schemas/SftTrainingJob",
+            "preference": "#/components/schemas/PreferenceTrainingJob",
+            "kto": "#/components/schemas/KtoTrainingJob",
+            "reward_model": "#/components/schemas/RewardModelTrainingJob",
+            "grpo": "#/components/schemas/GrpoTrainingJob",
+            "policy_gradient": "#/components/schemas/PolicyGradientTrainingJob",
+            "ppo": "#/components/schemas/PpoTrainingJob"
+          }
+        },
+        "description": "Base request body for creating a managed training job from a base model."
       },
       "ModelTrainingOperation": {
         "type": "object",
@@ -44981,16 +44309,30 @@
         },
         "description": "Represents the response for a pending upload request"
       },
-      "PolicyGradientModelTrainingJobCreate": {
+      "PolicyGradientTrainingAlgorithm": {
+        "type": "string",
+        "enum": [
+          "rloo",
+          "reinforce_pp"
+        ],
+        "description": "Policy-gradient algorithm used by managed online reinforcement training."
+      },
+      "PolicyGradientTrainingJob": {
         "type": "object",
         "required": [
+          "type",
           "algorithm",
-          "model",
           "dataset",
-          "runtime",
-          "compute"
+          "runtime"
         ],
         "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "policy_gradient"
+            ],
+            "description": "Managed training job type, always 'policy_gradient'."
+          },
           "algorithm": {
             "allOf": [
               {
@@ -44998,29 +44340,6 @@
               }
             ],
             "description": "Policy-gradient algorithm to run."
-          },
-          "name": {
-            "type": "string",
-            "description": "Optional name of the model to create. If omitted, the service generates one."
-          },
-          "version": {
-            "type": "string",
-            "description": "Optional version of the model to create. If omitted, the service generates one."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional description for the model to create."
-          },
-          "tags": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "Optional tags for the model to create."
-          },
-          "model": {
-            "type": "string",
-            "description": "Base model asset reference."
           },
           "dataset": {
             "allOf": [
@@ -45037,25 +44356,14 @@
               }
             ],
             "description": "Runtime options for managed online policy-gradient training."
-          },
-          "compute": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ModelTrainingComputeConfiguration"
-              }
-            ],
-            "description": "Compute placement for the managed training job."
           }
         },
-        "description": "Request body for creating a managed online policy-gradient training job from a base model."
-      },
-      "PolicyGradientTrainingAlgorithm": {
-        "type": "string",
-        "enum": [
-          "rloo",
-          "reinforce_pp"
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ModelTrainingJobCreate"
+          }
         ],
-        "description": "Policy-gradient algorithm used by managed online reinforcement training."
+        "description": "Request body for creating a managed online policy-gradient training job from a base model."
       },
       "PolicyGradientTrainingRuntimeConfiguration": {
         "type": "object",
@@ -45153,65 +44461,6 @@
         },
         "description": "Critic or value model configuration for managed PPO training."
       },
-      "PpoModelTrainingJobCreate": {
-        "type": "object",
-        "required": [
-          "model",
-          "dataset",
-          "runtime",
-          "compute"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Optional name of the model to create. If omitted, the service generates one."
-          },
-          "version": {
-            "type": "string",
-            "description": "Optional version of the model to create. If omitted, the service generates one."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional description for the model to create."
-          },
-          "tags": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "Optional tags for the model to create."
-          },
-          "model": {
-            "type": "string",
-            "description": "Base model asset reference."
-          },
-          "dataset": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/GrpoTrainingDatasetConfiguration"
-              }
-            ],
-            "description": "Training and optional evaluation datasets."
-          },
-          "runtime": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PpoTrainingRuntimeConfiguration"
-              }
-            ],
-            "description": "Runtime options for managed PPO."
-          },
-          "compute": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ModelTrainingComputeConfiguration"
-              }
-            ],
-            "description": "Compute placement for the managed training job."
-          }
-        },
-        "description": "Request body for creating a managed PPO training job from a base model."
-      },
       "PpoTrainingConfiguration": {
         "type": "object",
         "required": [
@@ -45265,6 +44514,45 @@
           }
         ],
         "description": "Proximal policy optimization training recipe."
+      },
+      "PpoTrainingJob": {
+        "type": "object",
+        "required": [
+          "type",
+          "dataset",
+          "runtime"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "ppo"
+            ],
+            "description": "Managed training job type, always 'ppo'."
+          },
+          "dataset": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GrpoTrainingDatasetConfiguration"
+              }
+            ],
+            "description": "Training and optional evaluation datasets."
+          },
+          "runtime": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PpoTrainingRuntimeConfiguration"
+              }
+            ],
+            "description": "Runtime options for managed PPO."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ModelTrainingJobCreate"
+          }
+        ],
+        "description": "Request body for creating a managed PPO training job from a base model."
       },
       "PpoTrainingRuntimeConfiguration": {
         "type": "object",
@@ -45345,15 +44633,31 @@
         },
         "description": "Runtime options for managed PPO training."
       },
-      "PreferenceModelTrainingJobCreate": {
+      "PreferenceTrainingAlgorithm": {
+        "type": "string",
+        "enum": [
+          "dpo",
+          "orpo",
+          "cpo",
+          "simpo"
+        ],
+        "description": "Preference optimization algorithm used by managed pairwise preference training."
+      },
+      "PreferenceTrainingJob": {
         "type": "object",
         "required": [
+          "type",
           "algorithm",
-          "model",
-          "dataset",
-          "compute"
+          "dataset"
         ],
         "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "preference"
+            ],
+            "description": "Managed training job type, always 'preference'."
+          },
           "algorithm": {
             "allOf": [
               {
@@ -45361,29 +44665,6 @@
               }
             ],
             "description": "Preference optimization algorithm to run."
-          },
-          "name": {
-            "type": "string",
-            "description": "Optional name of the model to create. If omitted, the service generates one."
-          },
-          "version": {
-            "type": "string",
-            "description": "Optional version of the model to create. If omitted, the service generates one."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional description for the model to create."
-          },
-          "tags": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "Optional tags for the model to create."
-          },
-          "model": {
-            "type": "string",
-            "description": "Base model asset reference."
           },
           "dataset": {
             "allOf": [
@@ -45400,27 +44681,14 @@
               }
             ],
             "description": "Runtime options for managed pairwise preference training."
-          },
-          "compute": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ModelTrainingComputeConfiguration"
-              }
-            ],
-            "description": "Compute placement for the managed training job."
           }
         },
-        "description": "Request body for creating a managed pairwise preference training job from a base model."
-      },
-      "PreferenceTrainingAlgorithm": {
-        "type": "string",
-        "enum": [
-          "dpo",
-          "orpo",
-          "cpo",
-          "simpo"
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ModelTrainingJobCreate"
+          }
         ],
-        "description": "Preference optimization algorithm used by managed pairwise preference training."
+        "description": "Request body for creating a managed pairwise preference training job from a base model."
       },
       "PreferenceTrainingRuntimeConfiguration": {
         "type": "object",
@@ -45723,48 +44991,6 @@
           }
         ],
         "description": "Ray distribution configuration."
-      },
-      "RaySessionStart": {
-        "type": "object",
-        "required": [
-          "instanceCount"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Optional session name. If omitted, the service uses the Operation-Id header or generates one."
-          },
-          "displayName": {
-            "type": "string",
-            "description": "Optional display name for the generated Ray session job."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional description for the generated Ray session job."
-          },
-          "tags": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "Optional tags to attach to the generated Ray session job."
-          },
-          "instanceCount": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of compute nodes to reserve for the interactive Ray session."
-          },
-          "enableRemoteAccessClientServer": {
-            "type": "boolean",
-            "description": "Whether to expose the Ray Client server port through the AML proxy for remote access. When true, the Ray Client port is registered as an interactive endpoint, enabling remote ray.init() connections via the WebSocket-TCP bridge. When false or omitted, the Ray Client port is not accessible externally."
-          },
-          "clientServerPort": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The port for the Ray Client server. Defaults to 10001. Only relevant when enableRemoteAccessClientServer is true."
-          }
-        },
-        "description": "Request body for starting an interactive Ray session on a compute cluster."
       },
       "RecurrenceSchedule": {
         "type": "object",
@@ -46253,36 +45479,19 @@
         },
         "description": "Dataset configuration for managed reward-model training."
       },
-      "RewardModelTrainingJobCreate": {
+      "RewardModelTrainingJob": {
         "type": "object",
         "required": [
-          "model",
-          "dataset",
-          "compute"
+          "type",
+          "dataset"
         ],
         "properties": {
-          "name": {
+          "type": {
             "type": "string",
-            "description": "Optional name of the reward model to create. If omitted, the service generates one."
-          },
-          "version": {
-            "type": "string",
-            "description": "Optional version of the reward model to create. If omitted, the service generates one."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional description for the reward model to create."
-          },
-          "tags": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "Optional tags for the reward model to create."
-          },
-          "model": {
-            "type": "string",
-            "description": "Base model asset reference."
+            "enum": [
+              "reward_model"
+            ],
+            "description": "Managed training job type, always 'reward_model'."
           },
           "dataset": {
             "allOf": [
@@ -46299,16 +45508,13 @@
               }
             ],
             "description": "Runtime options for managed reward-model training."
-          },
-          "compute": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ModelTrainingComputeConfiguration"
-              }
-            ],
-            "description": "Compute placement for the managed training job."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ModelTrainingJobCreate"
+          }
+        ],
         "description": "Request body for creating a managed reward-model training job from a base model."
       },
       "RewardModelTrainingLoss": {
@@ -46772,64 +45978,6 @@
         ],
         "description": "Scored response dataset for managed reward-model training."
       },
-      "SftModelTrainingJobCreate": {
-        "type": "object",
-        "required": [
-          "model",
-          "dataset",
-          "compute"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Optional name of the model to create. If omitted, the service generates one."
-          },
-          "version": {
-            "type": "string",
-            "description": "Optional version of the model to create. If omitted, the service generates one."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional description for the model to create."
-          },
-          "tags": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "Optional tags for the model to create."
-          },
-          "model": {
-            "type": "string",
-            "description": "Base model asset reference."
-          },
-          "dataset": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SftTrainingDatasetConfiguration"
-              }
-            ],
-            "description": "Training and optional evaluation datasets."
-          },
-          "runtime": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SftTrainingRuntimeConfiguration"
-              }
-            ],
-            "description": "Runtime options for managed SFT."
-          },
-          "compute": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ModelTrainingComputeConfiguration"
-              }
-            ],
-            "description": "Compute placement for the managed training job."
-          }
-        },
-        "description": "Request body for creating a managed SFT training job from a base model."
-      },
       "SftTrainingColumnMapping": {
         "type": "object",
         "required": [
@@ -46913,6 +46061,44 @@
           }
         },
         "description": "Dataset configuration for managed supervised fine tuning."
+      },
+      "SftTrainingJob": {
+        "type": "object",
+        "required": [
+          "type",
+          "dataset"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "sft"
+            ],
+            "description": "Managed training job type, always 'sft'."
+          },
+          "dataset": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SftTrainingDatasetConfiguration"
+              }
+            ],
+            "description": "Training and optional evaluation datasets."
+          },
+          "runtime": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SftTrainingRuntimeConfiguration"
+              }
+            ],
+            "description": "Runtime options for managed SFT."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ModelTrainingJobCreate"
+          }
+        ],
+        "description": "Request body for creating a managed SFT training job from a base model."
       },
       "SftTrainingRuntimeConfiguration": {
         "type": "object",
