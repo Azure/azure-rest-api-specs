@@ -388,7 +388,6 @@ model CertificatePolicy {
    * The platform managed property. This feature is currently intended for internal use only.
    */
   @added(Versions.v2026_03_01_preview)
-  @encodedName("application/json", "platform_managed")
   platformManaged?: PlatformManaged;
 }
 
@@ -400,7 +399,6 @@ model PlatformManaged {
   /**
    * The certificate usage.
    */
-  @encodedName("application/json", "certificate_usage")
   certificateUsage: string;
 
   /**
