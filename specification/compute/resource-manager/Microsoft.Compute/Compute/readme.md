@@ -243,6 +243,11 @@ directive:
       - BodyTopLevelProperties
     reason: Placement (introduced in version 2025-04-01) is an ARM level property
   - where:
+      - $.definitions.InterconnectBlock
+    suppress:
+      - BodyTopLevelProperties
+    reason: Placement is an ARM level property
+  - where:
       - $.definitions.StorageProfile.properties.alignRegionalDisksToVMZone
     suppress:
       - EnumInsteadOfBoolean
@@ -403,6 +408,10 @@ suppressions:
   - code: ParametersInPointGet
     reason: Existing GET operation uses query parameters for backward compatibility.
     from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/interconnectBlocks/{interconnectBlockName}"].get.parameters
+  - code: ParametersInPointGet
+    reason: Existing GET operation uses query parameters for backward compatibility.
+    from: ComputeRP.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}"].get.parameters
   - code: ParametersInPointGet
     reason: Existing GET operation uses query parameters for backward compatibility.
@@ -487,6 +496,10 @@ suppressions:
     reason: Existing delete response codes maintained for backward compatibility.
     from: ComputeRP.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}/hosts/{hostName}"].delete
+  - code: DeleteResponseCodes
+    reason: Existing delete response codes maintained for backward compatibility.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/interconnectBlocks/{interconnectBlockName}"].delete
   - code: DeleteResponseCodes
     reason: Existing delete response codes maintained for backward compatibility.
     from: ComputeRP.json
