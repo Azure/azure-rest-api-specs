@@ -3236,3 +3236,26 @@ op protectionPolicyOperationStatusesGet(
 @@scope(ProtectionContainerRefreshOperationResults.get, "!csharp");
 @@scope(ValidateOperation.trigger, "!csharp");
 @@scope(OperationOperationGroup.validate, "!csharp");
+
+// C# naming fixes: acronym casing
+@@clientName(AzureVmWorkloadSQLInstanceProtectedItem,
+  "VmWorkloadSqlInstanceProtectedItem",
+  "csharp"
+);
+@@clientName(AzureVmWorkloadSAPHanaScaleoutProtectableItem,
+  "VmWorkloadSapHanaScaleoutProtectableItem",
+  "csharp"
+);
+@@clientName(ThreatInfo.threatURI, "ThreatUri", "csharp");
+
+// C# naming fixes: contextual naming
+@@clientName(ThreatInfo, "BackupThreatInfo", "csharp");
+@@clientName(ThreatStatus, "BackupThreatStatus", "csharp");
+@@clientName(ThreatSeverity, "BackupThreatSeverity", "csharp");
+@@clientName(ThreatState, "BackupThreatState", "csharp");
+@@clientName(SourceSideScanInfo, "BackupSourceSideScanInfo", "csharp");
+@@clientName(DatabaseInRP, "BackupDatabaseInRecoveryPoint", "csharp");
+@@clientName(InstanceProtectionReadiness,
+  "BackupInstanceProtectionReadiness",
+  "csharp"
+);
