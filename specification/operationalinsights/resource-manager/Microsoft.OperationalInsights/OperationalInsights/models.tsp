@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.Core;
 using Azure.ResourceManager.Foundations;
@@ -479,6 +481,7 @@ union TablePlanEnum {
 /**
  * The protection level of the table. Determines the default data access isolation behavior.
  */
+@added(Versions.v2026_03_01)
 union TableProtectionLevelEnum {
   string,
 
@@ -2284,6 +2287,7 @@ model TableProperties {
   /**
    * The protection level of the table. Determines the default data access isolation behavior.
    */
+  @added(Versions.v2026_03_01)
   protectionLevel?: TableProtectionLevelEnum;
 
   /**
@@ -2872,6 +2876,7 @@ model WorkspaceFeatures {
    * Enable Data authorization mode for the workspace.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2026_03_01)
   dataAuthorizationMode?: boolean | null;
 }
 
