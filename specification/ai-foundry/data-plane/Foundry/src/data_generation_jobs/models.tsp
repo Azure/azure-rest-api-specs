@@ -121,15 +121,15 @@ union DataGenerationJobOutputType {
 model DataGenerationTokenUsage {
   @doc("The number of prompt tokens used.")
   @visibility(Lifecycle.Read)
-  prompt_tokens?: int64;
+  prompt_tokens: int64;
 
   @doc("The number of completion tokens generated.")
   @visibility(Lifecycle.Read)
-  completion_tokens?: int64;
+  completion_tokens: int64;
 
   @doc("Total number of tokens used.")
   @visibility(Lifecycle.Read)
-  total_tokens?: int64;
+  total_tokens: int64;
 }
 
 @doc("The supported scenarios for a data generation job.")
