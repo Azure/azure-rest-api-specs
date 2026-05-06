@@ -174,7 +174,7 @@ interface TrainingJobAttempts {
 
       @doc("The attempt identifier.")
       @path
-      attemptId: string;
+      attemptId: int32;
     },
     JobAttempt
   >;
@@ -285,7 +285,7 @@ interface TrainingJobAttemptArtifacts {
 
       @doc("The attempt identifier.")
       @path
-      attemptId: string;
+      attemptId: int32;
 
       ...JobArtifactListQueryParameters;
     },
@@ -305,7 +305,7 @@ interface TrainingJobAttemptArtifacts {
 
       @doc("The attempt identifier.")
       @path
-      attemptId: string;
+      attemptId: int32;
 
       @doc("The artifact path.")
       @query
@@ -327,7 +327,7 @@ interface TrainingJobAttemptArtifacts {
 
       @doc("The attempt identifier.")
       @path
-      attemptId: string;
+      attemptId: int32;
 
       @doc("The artifact path.")
       @query
@@ -349,7 +349,7 @@ interface TrainingJobAttemptArtifacts {
 
       @doc("The attempt identifier.")
       @path
-      attemptId: string;
+      attemptId: int32;
 
       ...JobArtifactContentInfoByPrefixQueryParameters;
     },
@@ -370,7 +370,7 @@ interface TrainingJobAttemptArtifacts {
 
       @doc("The attempt identifier.")
       @path
-      attemptId: string;
+      attemptId: int32;
 
       @doc("The artifact path.")
       @query
@@ -508,7 +508,7 @@ interface TrainingJobAttemptMetrics {
 
       @doc("The attempt identifier.")
       @path
-      attemptId: string;
+      attemptId: int32;
 
       ...JobMetricListQueryParameters;
     },
@@ -528,7 +528,7 @@ interface TrainingJobAttemptMetrics {
 
       @doc("The attempt identifier.")
       @path
-      attemptId: string;
+      attemptId: int32;
     },
     Azure.Core.Page<JobMetricLastValue>
   >;
@@ -546,7 +546,7 @@ interface TrainingJobAttemptMetrics {
 
       @doc("The attempt identifier.")
       @path
-      attemptId: string;
+      attemptId: int32;
 
       @doc("The metric name.")
       @path
@@ -570,7 +570,7 @@ interface TrainingJobAttemptMetrics {
 
       @doc("The attempt identifier.")
       @path
-      attemptId: string;
+      attemptId: int32;
 
       @doc("The metric name.")
       @path
@@ -594,7 +594,7 @@ interface TrainingJobAttemptMetrics {
 
       @doc("The attempt identifier.")
       @path
-      attemptId: string;
+      attemptId: int32;
 
       @doc("The metric name.")
       @path
@@ -618,7 +618,7 @@ interface TrainingJobAttemptMetrics {
 
       @doc("The attempt identifier.")
       @path
-      attemptId: string;
+      attemptId: int32;
 
       @doc("The metric name.")
       @path
@@ -681,7 +681,7 @@ interface TrainingJobAttemptOutputs {
 
       @doc("The attempt identifier.")
       @path
-      attemptId: string;
+      attemptId: int32;
 
     },
     Azure.Core.Page<JobOutputReference>
@@ -700,7 +700,7 @@ interface TrainingJobAttemptOutputs {
 
       @doc("The attempt identifier.")
       @path
-      attemptId: string;
+      attemptId: int32;
 
       @doc("The output name.")
       @path
