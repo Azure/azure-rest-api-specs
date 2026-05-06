@@ -20,25 +20,6 @@ using Microsoft.Monitor;
 // Pattern: https://github.com/Azure/azure-rest-api-specs/pull/40791
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API is defined in a separate spec for Microsoft.Monitor namespace (specification/monitor/resource-manager/Microsoft.Monitor/Operations)"
 namespace Microsoft.Monitor {
-  // ===== AzureMonitorWorkspace create-specific model =====
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Write-specific model intentionally omits server-side read-only fields including provisioningState"
-  @doc("Azure Monitor Workspace properties for create/update operations, omitting server-side read-only fields (accountId, metrics, provisioningState, defaultIngestionSettings, privateEndpointConnections).")
-  model AzureMonitorWorkspacePropertiesCreate {
-    /** Gets or sets allow or disallow public network access to Azure Monitor Workspace */
-    publicNetworkAccess?: PublicNetworkAccess;
-  }
-
-  @doc("Azure Monitor Workspace resource for create/update operations.")
-  model AzureMonitorWorkspaceResourceCreate
-    is Azure.ResourceManager.TrackedResource<AzureMonitorWorkspacePropertiesCreate> {
-    @doc("The name of the Azure Monitor Workspace. The name is case insensitive")
-    @key("azureMonitorWorkspaceName")
-    @path
-    @segment("accounts")
-    @pattern("^(?!-)[a-zA-Z0-9-]+[^-]$")
-    name: string;
-  }
-
   // ===== Issue create-specific models =====
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Write-specific model intentionally omits server-side read-only fields including provisioningState"
   @doc("Issue properties for create/update operations, omitting server-side read-only fields (investigations, investigationsCount, provisioningState).")
@@ -111,38 +92,8 @@ namespace Microsoft.Monitor {
     @doc("A list of related resources")
     value: RelatedResourceCreate[];
   }
-
-  // ===== MetricsContainer create-specific models =====
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Write-specific model intentionally omits server-side read-only fields including provisioningState"
-  @doc("Metrics container properties for create/update operations, omitting server-side read-only fields (provisioningState).")
-  model MetricsContainerPropertiesCreate {
-    /** Metrics limits. */
-    limits?: MetricsLimits;
-
-    /** The version of Metrics Query Service that this AMW will use for all metric queries. */
-    @added(Versions.v2025_10_03)
-    @example("1.0", #{ title: "Version example" })
-    version?: string;
-  }
-
-  @parentResource(AzureMonitorWorkspaceResource)
-  @doc("Metrics container resource for create/update operations.")
-  model MetricsContainerResourceCreate
-    is Azure.ResourceManager.ProxyResource<MetricsContainerPropertiesCreate> {
-    @doc("The name of the metrics container. Always 'default'.")
-    @key("metricsContainerName")
-    @path
-    @segment("metricsContainers")
-    @pattern("^default$")
-    name: string;
-  }
 }
 
-// JavaScript SDK: use write-specific models for resource operations to omit server-side read-only fields
-@@alternateType(AzureMonitorWorkspaces.createOrUpdate::parameters.resource,
-  AzureMonitorWorkspaceResourceCreate,
-  "javascript"
-);
 @@alternateType(Issue.create::parameters.resource,
   IssueResourceCreate,
   "javascript"
@@ -157,9 +108,5 @@ namespace Microsoft.Monitor {
 );
 @@alternateType(Issue.addOrUpdateResources::parameters.body,
   RelatedResourcesCreate,
-  "javascript"
-);
-@@alternateType(MetricsContainers.createOrUpdate::parameters.resource,
-  MetricsContainerResourceCreate,
   "javascript"
 );
