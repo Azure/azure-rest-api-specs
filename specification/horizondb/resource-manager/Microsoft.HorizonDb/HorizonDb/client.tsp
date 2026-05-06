@@ -35,7 +35,7 @@ using Azure.ClientGenerator.Core;
 @@clientName(Microsoft.HorizonDb.OptionalPropertiesUpdateableProperties, "HorizonDBOptionalPropertiesUpdateableProperties");
 @@clientName(Microsoft.HorizonDb.ParameterProperties, "HorizonDBParameterProperties");
 @@clientName(Microsoft.HorizonDb.ParameterProperties, "HorizonDBParameterProperties");
-@@clientName(Microsoft.HorizonDb.PointInTimeUTC, "HorizonDBPointInTimeUtc");
+@@clientName(Microsoft.HorizonDb.HorizonDbClusterProperties.PointInTimeUTC, "HorizonDBPointInTimeUtc");
 @@clientName(Microsoft.HorizonDb.PrivateEndpointConnectionResource, "HorizonDBPrivateEndpointConnection");
 @@clientName(Microsoft.HorizonDb.PrivateEndpointConnectionUpdate, "HorizonDBPrivateEndpointConnectionPatch");
 @@clientName(Microsoft.HorizonDb.ProvisioningState, "HorizonDBProvisioningState");
