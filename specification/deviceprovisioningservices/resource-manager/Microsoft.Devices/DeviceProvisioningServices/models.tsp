@@ -355,6 +355,7 @@ model IotDpsPropertiesDescription {
   /**
    * The Device Registry namespace that is linked to the provisioning service.
    */
+  @visibility(Lifecycle.Read)
   deviceRegistryNamespace?: DeviceRegistryNamespaceDescription;
 
   /**
