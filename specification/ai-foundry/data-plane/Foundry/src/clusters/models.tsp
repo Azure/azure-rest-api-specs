@@ -18,4 +18,10 @@ model InteractiveRayJobCreate {
 
   @doc("Number of compute nodes to reserve for the interactive Ray session.")
   instanceCount: int32;
+
+  @doc("Whether to expose the Ray Client server port through the AML proxy for remote access. When true, the Ray Client port is registered as an interactive endpoint, enabling remote ray.init() connections via the WebSocket-TCP bridge. When false or omitted, the Ray Client port is not accessible externally.")
+  enableRemoteAccessClientServer?: boolean;
+
+  @doc("The port for the Ray Client server. Defaults to 10001. Only relevant when enableRemoteAccessClientServer is true.")
+  clientServerPort?: int32;
 }

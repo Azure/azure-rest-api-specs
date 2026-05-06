@@ -26672,6 +26672,15 @@
             "type": "integer",
             "format": "int32",
             "description": "Number of compute nodes to reserve for the interactive Ray session."
+          },
+          "enableRemoteAccessClientServer": {
+            "type": "boolean",
+            "description": "Whether to expose the Ray Client server port through the AML proxy for remote access. When true, the Ray Client port is registered as an interactive endpoint, enabling remote ray.init() connections via the WebSocket-TCP bridge. When false or omitted, the Ray Client port is not accessible externally."
+          },
+          "clientServerPort": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The port for the Ray Client server. Defaults to 10001. Only relevant when enableRemoteAccessClientServer is true."
           }
         },
         "description": "Request body for creating an interactive Ray command job on a compute cluster."
@@ -50320,6 +50329,15 @@
           "workerNodeAdditionalArgs": {
             "type": "string",
             "description": "Additional arguments passed to ray start on worker nodes."
+          },
+          "enableRemoteAccessClientServer": {
+            "type": "boolean",
+            "description": "Whether to expose the Ray Client server port through the AML proxy for remote access. When true, the Ray Client port is registered as an interactive endpoint, enabling remote ray.init() connections via the WebSocket-TCP bridge. When false or omitted, the Ray Client port is not accessible externally."
+          },
+          "clientServerPort": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The port for the Ray Client server. Defaults to 10001. Only relevant when enableRemoteAccessClientServer is true."
           }
         },
         "allOf": [
