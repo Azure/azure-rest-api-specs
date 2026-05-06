@@ -97,9 +97,9 @@ model ModelTrainingOperation {
   error?: ApiError;
 }
 
-@doc("Column mapping for managed SFT datasets. The training dataset must contain chat messages for each training example.")
+@doc("Column mapping for managed SFT datasets. Keys are logical fields expected by SFT; values are the exact column names in the referenced dataset asset. The training dataset must contain chat messages for each training example.")
 model SftTrainingColumnMapping {
-  @doc("Column containing chat messages used for supervised fine tuning.")
+  @doc("Actual dataset column name containing chat messages used for supervised fine tuning, for example 'messages' or 'conversation_json'.")
   messages: string;
 }
 
@@ -111,19 +111,19 @@ model SftTrainingDatasetConfiguration {
   @doc("Optional evaluation dataset asset reference.")
   eval?: string;
 
-  @doc("Mapping from SFT training fields to dataset columns.")
+  @doc("Mapping from SFT logical fields to actual dataset column names. SFT requires the 'messages' logical field.")
   columns: SftTrainingColumnMapping;
 
   @doc("Conversational data formatting options.")
   dataFormat?: TrainingDataFormatConfiguration;
 }
 
-@doc("Column mapping for managed GRPO datasets. The training dataset must contain prompts; reference answers or reward context can be passed to the judge.")
+@doc("Column mapping for managed online RL prompt datasets. Keys are logical fields expected by GRPO, RLOO, REINFORCE++, and PPO; values are the exact column names in the referenced dataset asset. The training dataset must contain prompts; reference answers or reward context can be passed to the judge.")
 model GrpoTrainingColumnMapping {
-  @doc("Column containing prompts for rollout generation.")
+  @doc("Actual dataset column name containing prompts for rollout generation, for example 'prompt', 'question', or 'problem'.")
   prompt: string;
 
-  @doc("Column containing reference answers or reward context passed to the judge.")
+  @doc("Actual dataset column name containing reference answers or reward context passed to the judge, for example 'answer' or 'reference'.")
   reference?: string;
 }
 
@@ -135,7 +135,7 @@ model GrpoTrainingDatasetConfiguration {
   @doc("Optional evaluation dataset asset reference.")
   eval?: string;
 
-  @doc("Mapping from GRPO training fields to dataset columns.")
+  @doc("Mapping from online RL logical fields to actual dataset column names. GRPO, policy-gradient, and PPO require the 'prompt' logical field and can optionally map 'reference'.")
   columns: GrpoTrainingColumnMapping;
 
   @doc("Conversational data formatting options.")
@@ -166,15 +166,15 @@ union PolicyGradientTrainingAlgorithm {
   reinforce_pp: "reinforce_pp",
 }
 
-@doc("Column mapping for pairwise preference datasets.")
+@doc("Column mapping for pairwise preference datasets. Keys are logical fields expected by preference training; values are the exact column names in the referenced dataset asset.")
 model PairwisePreferenceColumnMapping {
-  @doc("Column containing prompts.")
+  @doc("Actual dataset column name containing prompts, for example 'prompt' or 'question'.")
   prompt: string;
 
-  @doc("Column containing the preferred response.")
+  @doc("Actual dataset column name containing the preferred response, for example 'chosen', 'accepted_answer', or 'good_response'.")
   chosen: string;
 
-  @doc("Column containing the rejected response.")
+  @doc("Actual dataset column name containing the rejected response, for example 'rejected', 'rejected_answer', or 'bad_response'.")
   rejected: string;
 }
 
@@ -186,22 +186,22 @@ model PairwisePreferenceDatasetConfiguration {
   @doc("Optional evaluation dataset asset reference.")
   eval?: string;
 
-  @doc("Mapping from pairwise preference fields to dataset columns.")
+  @doc("Mapping from pairwise preference logical fields to actual dataset column names. DPO, ORPO, CPO, and SimPO require 'prompt', 'chosen', and 'rejected'.")
   columns: PairwisePreferenceColumnMapping;
 
   @doc("Conversational data formatting options.")
   dataFormat?: TrainingDataFormatConfiguration;
 }
 
-@doc("Column mapping for KTO feedback datasets.")
+@doc("Column mapping for KTO feedback datasets. Keys are logical fields expected by KTO; values are the exact column names in the referenced dataset asset.")
 model KtoFeedbackColumnMapping {
-  @doc("Column containing prompts.")
+  @doc("Actual dataset column name containing prompts, for example 'prompt' or 'question'.")
   prompt: string;
 
-  @doc("Column containing responses.")
+  @doc("Actual dataset column name containing responses, for example 'response', 'completion', or 'answer'.")
   response: string;
 
-  @doc("Column containing the binary desirability label.")
+  @doc("Actual dataset column name containing the binary desirability label, for example 'label' or 'is_desirable'.")
   label: string;
 }
 
@@ -213,22 +213,22 @@ model KtoTrainingDatasetConfiguration {
   @doc("Optional evaluation dataset asset reference.")
   eval?: string;
 
-  @doc("Mapping from KTO fields to dataset columns.")
+  @doc("Mapping from KTO logical fields to actual dataset column names. KTO requires 'prompt', 'response', and 'label'.")
   columns: KtoFeedbackColumnMapping;
 
   @doc("Conversational data formatting options.")
   dataFormat?: TrainingDataFormatConfiguration;
 }
 
-@doc("Column mapping for scored reward-model datasets.")
+@doc("Column mapping for scored reward-model datasets. Keys are logical fields expected by scored reward-model training; values are the exact column names in the referenced dataset asset.")
 model ScoredRewardModelColumnMapping {
-  @doc("Column containing prompts.")
+  @doc("Actual dataset column name containing prompts, for example 'prompt' or 'question'.")
   prompt: string;
 
-  @doc("Column containing responses.")
+  @doc("Actual dataset column name containing responses, for example 'response' or 'completion'.")
   response: string;
 
-  @doc("Column containing numeric reward scores.")
+  @doc("Actual dataset column name containing numeric reward scores, for example 'score' or 'reward'.")
   score: string;
 }
 
@@ -252,7 +252,7 @@ model PairwiseRewardModelTrainingDatasetConfiguration
   @doc("Optional evaluation dataset asset reference.")
   eval?: string;
 
-  @doc("Mapping from pairwise preference fields to dataset columns.")
+  @doc("Mapping from pairwise reward-model logical fields to actual dataset column names. Pairwise reward-model training requires 'prompt', 'chosen', and 'rejected'.")
   columns: PairwisePreferenceColumnMapping;
 
   @doc("Conversational data formatting options.")
@@ -271,7 +271,7 @@ model ScoredRewardModelTrainingDatasetConfiguration
   @doc("Optional evaluation dataset asset reference.")
   eval?: string;
 
-  @doc("Mapping from scored response fields to dataset columns.")
+  @doc("Mapping from scored reward-model logical fields to actual dataset column names. Scored reward-model training requires 'prompt', 'response', and 'score'.")
   columns: ScoredRewardModelColumnMapping;
 
   @doc("Conversational data formatting options.")
@@ -445,7 +445,7 @@ model GrpoTrainingRuntimeConfiguration {
   @doc("Algorithm-specific hyperparameters passed through to the selected framework.")
   hyperparameters?: Record<unknown>;
 
-  @doc("Judge used to score generated completions during GRPO training.")
+  @doc("Judge used to score generated completions during GRPO training. Required for GRPO.")
   judge: TrainingRewardConfiguration;
 
   @doc("LoRA adapter configuration.")
@@ -472,7 +472,7 @@ model PolicyGradientTrainingRuntimeConfiguration {
   @doc("Algorithm-specific hyperparameters passed through to the selected framework.")
   hyperparameters?: Record<unknown>;
 
-  @doc("Judge used to score generated completions during online training.")
+  @doc("Judge used to score generated completions during online policy-gradient training. Required for RLOO and REINFORCE++.")
   judge: TrainingRewardConfiguration;
 
   @doc("Reference policy used for KL anchoring.")
@@ -481,7 +481,7 @@ model PolicyGradientTrainingRuntimeConfiguration {
   @doc("LoRA adapter configuration.")
   lora?: TrainingLoraConfiguration;
 
-  @doc("Rollout generation configuration.")
+  @doc("Rollout generation configuration. Required for RLOO and REINFORCE++.")
   rollout: TrainingRolloutConfiguration;
 
   @doc("Evaluation configuration.")
@@ -499,7 +499,7 @@ model PpoTrainingRuntimeConfiguration {
   @doc("Algorithm-specific hyperparameters passed through to the selected framework.")
   hyperparameters?: Record<unknown>;
 
-  @doc("Judge used to score generated completions during PPO training.")
+  @doc("Judge used to score generated completions during PPO training. Required for PPO.")
   judge: TrainingRewardConfiguration;
 
   @doc("Reference policy used for KL anchoring.")
@@ -511,7 +511,7 @@ model PpoTrainingRuntimeConfiguration {
   @doc("LoRA adapter configuration.")
   lora?: TrainingLoraConfiguration;
 
-  @doc("Rollout generation configuration.")
+  @doc("Rollout generation configuration. Required for PPO.")
   rollout: TrainingRolloutConfiguration;
 
   @doc("Evaluation configuration.")
