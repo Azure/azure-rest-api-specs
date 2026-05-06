@@ -25,7 +25,7 @@ interface LocationsOperationGroup {
   getCapabilities is ArmProviderActionSync<
     Response = ArmResponse<CapabilitiesResult>,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter,
+    Parameters = LocationResourceParameter,
     Error = ErrorResponse
   >;
   /**
@@ -37,7 +37,7 @@ interface LocationsOperationGroup {
   listUsages is ArmProviderActionSync<
     Response = ArmResponse<UsagesListResult>,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter,
+    Parameters = LocationResourceParameter,
     Error = ErrorResponse
   >;
   /**
@@ -49,7 +49,7 @@ interface LocationsOperationGroup {
   listBillingSpecs is ArmProviderActionSync<
     Response = BillingResponseListResult,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter,
+    Parameters = LocationResourceParameter,
     Error = ErrorResponse
   >;
   /**
@@ -77,7 +77,7 @@ interface LocationsOperationGroup {
     Request = NameAvailabilityCheckRequestParameters,
     Response = NameAvailabilityCheckResult,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter,
+    Parameters = LocationResourceParameter,
     Error = ErrorResponse
   >;
   /**
@@ -89,7 +89,7 @@ interface LocationsOperationGroup {
     Request = ClusterCreateRequestValidationParameters,
     Response = ClusterCreateValidationResult,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter,
+    Parameters = LocationResourceParameter,
     Error = ErrorResponse
   >;
 }

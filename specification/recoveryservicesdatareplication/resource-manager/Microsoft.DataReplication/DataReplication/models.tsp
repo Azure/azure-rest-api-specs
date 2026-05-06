@@ -1495,22 +1495,6 @@ model PrivateLinkServiceConnectionState {
 }
 
 /**
- * Represents private endpoint connection proxy request.
- */
-model PrivateEndpointConnectionProxyProperties {
-  /**
-   * Gets or sets the provisioning state of the private endpoint connection proxy.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
-
-  /**
-   * Represent remote private endpoint information for the private endpoint connection proxy.
-   */
-  remotePrivateEndpoint?: RemotePrivateEndpoint;
-}
-
-/**
  * Represent remote private endpoint information for the private endpoint connection proxy.
  */
 model RemotePrivateEndpoint {

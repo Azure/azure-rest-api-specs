@@ -391,7 +391,7 @@ alias CommonParameters = {
     The maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. If the value is larger than 30, the default will be used instead.".
     """)
   @query
-  @clientName("timeOutInSeconds", "java")
+  @clientName("timeOut", "java")
   @clientName("timeout", "go,csharp")
   @clientName("service_timeout", "python")
   @encode("seconds", int32)
