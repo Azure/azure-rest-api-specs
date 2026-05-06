@@ -1,5 +1,11 @@
 namespace Microsoft.SaaS;
 
+/** The provisioning state of the SaaS resource. */
+union SaasProvisioningState {
+  string,
+  Azure.ResourceManager.ResourceProvisioningState,
+}
+
 /** The SaaS Subscription Status. */
 union SaasResourceStatus {
   string,

@@ -5,8 +5,10 @@ using Azure.ResourceManager;
 namespace Microsoft.SaaS;
 
 /** SaaS resource properties for GA API version 2026-04-01. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Uses status enum instead of provisioningState"
 model SaasResourceProperties {
+  /** The status of the last provisioning operation performed on the resource. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: SaasProvisioningState;
   /** The SaaS subscription id. Server-assigned. */
   @visibility(Lifecycle.Read)
   subscriptionId?: string;

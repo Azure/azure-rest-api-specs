@@ -124,9 +124,6 @@
               }
             }
           },
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -1290,6 +1287,37 @@
         }
       }
     },
+    "SaasProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the SaaS resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "SaasProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "SaasResource": {
       "type": "object",
       "description": "SaaS ARM tracked resource for GA API version 2026-04-01. Inherits standard ARM envelope (id, name, type, location, tags, systemData).",
@@ -1330,6 +1358,11 @@
       "type": "object",
       "description": "SaaS resource properties for GA API version 2026-04-01.",
       "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/SaasProvisioningState",
+          "description": "The status of the last provisioning operation performed on the resource.",
+          "readOnly": true
+        },
         "subscriptionId": {
           "type": "string",
           "description": "The SaaS subscription id. Server-assigned.",

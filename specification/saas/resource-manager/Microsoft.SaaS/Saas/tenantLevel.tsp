@@ -76,8 +76,5 @@ interface SaasOperationResults {
         @statusCode statusCode: 202;
         @header("Retry-After") retryAfter?: int32;
       }
-    | {
-        @statusCode statusCode: 204;
-      }
     | ErrorResponse;
 }
