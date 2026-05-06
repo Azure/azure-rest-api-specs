@@ -915,7 +915,9 @@ model VMSizePropertiesWithAdditionalProperties {
 
 // ── VM→Vm casing renames on GalleryInVMAccessControlProfile path parameters (C# backward compat) ──
 // TODO: figure out the correct @@clientName target syntax for ResourceNameParameter-derived path params.
-// Currently the C# methods expose `inVMAccessControlProfileName` / `inVMAccessControlProfileVersionName` (KeyName casing).
+// Renaming the resource model's `.name` property does flip the path parameter casing in operations,
+// but it also surfaces a new public `Name` property on the corresponding *Data model — unacceptable.
+// Tracked as a "Known issue" on the SDK PR; awaiting team input.
 
 // ── IP→Ip casing renames (C# backward compat) ──
 @@clientName(VirtualMachineIpTag, "VirtualMachineIPTag", "csharp");
