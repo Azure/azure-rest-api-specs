@@ -2168,6 +2168,12 @@ model SiteProperties {
   daprConfig?: DaprConfig;
 
   /**
+   * AI integration configuration for the app.
+   */
+  @added(Versions.v2026_03_15)
+  aiIntegration?: AiIntegration;
+
+  /**
    * Workload profile name for function app to execute on.
    */
   workloadProfileName?: string;
@@ -3666,6 +3672,102 @@ model DaprConfig {
    * Enables API logging for the Dapr sidecar
    */
   enableApiLogging?: boolean;
+}
+
+/**
+ * AI integration configuration for the app.
+ */
+@added(Versions.v2026_03_15)
+model AiIntegration {
+  /**
+   * Relative path to the API specification file from /home in site files.
+   */
+  apiSpecPath?: string;
+
+  /**
+   * MCP configuration.
+   */
+  mcp?: McpSettings;
+
+  /**
+   * External auth configuration for the MCP endpoint (used when EasyAuth is not enabled).
+   */
+  siteAuth?: SiteAuthInfo;
+}
+
+/**
+ * MCP configuration settings.
+ */
+@added(Versions.v2026_03_15)
+model McpSettings {
+  /**
+   * Array of MCP server configurations. This array is replaced in its entirety on update; individual servers cannot be patched independently. An empty array signals that MCP should be disabled/deleted.
+   */
+  @identifiers(#["name"])
+  servers?: McpServerConfig[];
+}
+
+/**
+ * Configuration for an individual MCP server.
+ */
+@added(Versions.v2026_03_15)
+model McpServerConfig {
+  /**
+   * The name of the MCP server.
+   */
+  name?: string;
+
+  /**
+   * The description of the MCP server.
+   */
+  description?: string;
+
+  /**
+   * Whether the MCP server is enabled. Defaults to true when not specified on creation.
+   */
+  enabled?: boolean;
+
+  /**
+   * The endpoint path for the MCP server.
+   */
+  endpoint?: string;
+
+  /**
+   * The list of tools exposed by this MCP server.
+   */
+  toolList?: string[];
+}
+
+/**
+ * External auth configuration for the MCP endpoint (used when EasyAuth is not enabled).
+ * At minimum, `scopes` and either `wellKnownOpenIdConfiguration` or `issuer` must be provided.
+ */
+@added(Versions.v2026_03_15)
+model SiteAuthInfo {
+  /**
+   * JWKS URL for verifying JWT signatures.
+   */
+  jwksUri?: url;
+
+  /**
+   * Expected 'iss' claim. Required for custom site authentication if `wellKnownOpenIdConfiguration` is not provided.
+   */
+  issuer?: string;
+
+  /**
+   * Expected 'aud' claim.
+   */
+  audience?: string;
+
+  /**
+   * OIDC metadata URL. Required for custom site authentication if `issuer` is not provided.
+   */
+  wellKnownOpenIdConfiguration?: url;
+
+  /**
+   * OAuth scopes for Protected Resource Metadata (PRM). Required for custom site authentication.
+   */
+  scopes?: string[];
 }
 
 /**
@@ -9535,6 +9637,12 @@ model SitePatchResourceProperties {
    * Configuration of the app.
    */
   siteConfig?: SiteConfig;
+
+  /**
+   * AI integration configuration for the app.
+   */
+  @added(Versions.v2026_03_15)
+  aiIntegration?: AiIntegration;
 
   /**
    * Azure Traffic Manager hostnames associated with the app. Read-only.
