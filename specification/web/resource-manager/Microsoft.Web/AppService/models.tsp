@@ -3718,9 +3718,9 @@ model McpServerConfig {
   description?: string;
 
   /**
-   * Whether the MCP server is enabled. Defaults to true.
+   * Whether the MCP server is enabled. Defaults to true when not specified on creation.
    */
-  enabled?: boolean = true;
+  enabled?: boolean;
 
   /**
    * The endpoint path for the MCP server.
@@ -3735,16 +3735,17 @@ model McpServerConfig {
 
 /**
  * External auth configuration for the MCP endpoint (used when EasyAuth is not enabled).
+ * At minimum, `scopes` and either `wellKnownOpenIdConfiguration` or `issuer` must be provided.
  */
 @added(Versions.v2026_03_15)
 model SiteAuthInfo {
   /**
    * JWKS URL for verifying JWT signatures.
    */
-  jwksUri?: string;
+  jwksUri?: url;
 
   /**
-   * Expected 'iss' claim.
+   * Expected 'iss' claim. Required for custom site authentication if `wellKnownOpenIdConfiguration` is not provided.
    */
   issuer?: string;
 
@@ -3754,12 +3755,12 @@ model SiteAuthInfo {
   audience?: string;
 
   /**
-   * OIDC metadata URL.
+   * OIDC metadata URL. Required for custom site authentication if `issuer` is not provided.
    */
-  wellKnownOpenIdConfiguration?: string;
+  wellKnownOpenIdConfiguration?: url;
 
   /**
-   * OAuth scopes for PRM.
+   * OAuth scopes for Protected Resource Metadata (PRM). Required for custom site authentication.
    */
   scopes?: string[];
 }

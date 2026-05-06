@@ -48270,8 +48270,7 @@
         },
         "enabled": {
           "type": "boolean",
-          "description": "Whether the MCP server is enabled. Defaults to true.",
-          "default": true
+          "description": "Whether the MCP server is enabled. Defaults to true when not specified on creation."
         },
         "endpoint": {
           "type": "string",
@@ -52072,15 +52071,16 @@
     },
     "SiteAuthInfo": {
       "type": "object",
-      "description": "External auth configuration for the MCP endpoint (used when EasyAuth is not enabled).",
+      "description": "External auth configuration for the MCP endpoint (used when EasyAuth is not enabled).\nAt minimum, `scopes` and either `wellKnownOpenIdConfiguration` or `issuer` must be provided.",
       "properties": {
         "jwksUri": {
           "type": "string",
+          "format": "uri",
           "description": "JWKS URL for verifying JWT signatures."
         },
         "issuer": {
           "type": "string",
-          "description": "Expected 'iss' claim."
+          "description": "Expected 'iss' claim. Required for custom site authentication if `wellKnownOpenIdConfiguration` is not provided."
         },
         "audience": {
           "type": "string",
@@ -52088,11 +52088,12 @@
         },
         "wellKnownOpenIdConfiguration": {
           "type": "string",
-          "description": "OIDC metadata URL."
+          "format": "uri",
+          "description": "OIDC metadata URL. Required for custom site authentication if `issuer` is not provided."
         },
         "scopes": {
           "type": "array",
-          "description": "OAuth scopes for PRM.",
+          "description": "OAuth scopes for Protected Resource Metadata (PRM). Required for custom site authentication.",
           "items": {
             "type": "string"
           }
