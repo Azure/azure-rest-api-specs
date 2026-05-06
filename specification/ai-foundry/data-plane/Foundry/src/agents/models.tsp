@@ -416,9 +416,28 @@ model CodeConfiguration {
   @doc("The entry point command and arguments for the code execution.")
   entry_point: string[];
 
+  @doc("""
+    How package dependencies are resolved at deployment time. Defaults to `bundled`,
+    where the caller bundles all dependencies into the uploaded zip and the service
+    performs no remote build. `remote_build` instructs the service to build
+    dependencies remotely from the manifest included in the uploaded zip.
+    """)
+  dependency_resolution: CodeDependencyResolution = CodeDependencyResolution.bundled;
+
   @visibility(Lifecycle.Read)
   @doc("The SHA-256 hex digest of the uploaded code zip. Set by the service from the `x-ms-code-zip-sha256` request header; read-only in responses and never accepted in request payloads.")
   content_hash?: string;
+}
+
+@doc("How package dependencies are resolved at deployment time for a code-based hosted agent.")
+union CodeDependencyResolution {
+  string,
+
+  @doc("The caller has bundled all dependencies into the uploaded zip; the service performs no remote build.")
+  bundled: "bundled",
+
+  @doc("The service builds dependencies remotely from the manifest included in the uploaded zip.")
+  remote_build: "remote_build",
 }
 
 @doc("The hosted agent definition.")

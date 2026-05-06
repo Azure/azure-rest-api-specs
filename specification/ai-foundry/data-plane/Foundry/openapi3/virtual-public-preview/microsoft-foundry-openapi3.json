@@ -16529,7 +16529,8 @@
         "type": "object",
         "required": [
           "runtime",
-          "entry_point"
+          "entry_point",
+          "dependency_resolution"
         ],
         "properties": {
           "runtime": {
@@ -16543,6 +16544,15 @@
             },
             "description": "The entry point command and arguments for the code execution."
           },
+          "dependency_resolution": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CodeDependencyResolution"
+              }
+            ],
+            "description": "How package dependencies are resolved at deployment time. Defaults to `bundled`,\nwhere the caller bundles all dependencies into the uploaded zip and the service\nperforms no remote build. `remote_build` instructs the service to build\ndependencies remotely from the manifest included in the uploaded zip.",
+            "default": "bundled"
+          },
           "content_hash": {
             "type": "string",
             "description": "The SHA-256 hex digest of the uploaded code zip. Set by the service from the `x-ms-code-zip-sha256` request header; read-only in responses and never accepted in request payloads.",
@@ -16555,6 +16565,21 @@
             "CodeAgents=V1Preview"
           ]
         }
+      },
+      "CodeDependencyResolution": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "bundled",
+              "remote_build"
+            ]
+          }
+        ],
+        "description": "How package dependencies are resolved at deployment time for a code-based hosted agent."
       },
       "CompletionMessageToolCallChunk": {
         "type": "object",
