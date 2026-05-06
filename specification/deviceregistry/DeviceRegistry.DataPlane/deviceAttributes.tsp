@@ -42,6 +42,14 @@ model DeviceAttribute {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   name: DeviceAttributeName;
 
+  /**
+   * The UUID of the device that this attribute belongs to. Used to verify that the device attribute
+   * matches the reverse lookup document and is not for an older device that was deleted and
+   * re-created with the same `deviceName`.
+   */
+  @visibility(Lifecycle.Read)
+  deviceUuid?: string;
+
   /** The cloud service that reports this device attribute. */
   reportedBy: DeviceAttributeReportedBy;
 }
