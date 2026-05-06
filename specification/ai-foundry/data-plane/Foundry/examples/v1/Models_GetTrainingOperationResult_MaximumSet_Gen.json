@@ -1,0 +1,29 @@
+{
+  "title": "Models_GetTrainingOperationResult_MaximumSet",
+  "operationId": "Models_getTrainingOperationResult",
+  "parameters": {
+    "api-version": "v1",
+    "Foundry-Features": "Jobs=V1Preview",
+    "operationId": "create-my-grpo-training-job-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "operationId": "create-my-grpo-training-job-01",
+        "status": "succeeded",
+        "result": {
+          "id": "azureai://accounts/my-account/projects/my-project/models/qwen-reasoning-grpo/versions/1",
+          "name": "qwen-reasoning-grpo",
+          "version": "1",
+          "description": "GRPO model trained for reasoning tasks",
+          "tags": {
+            "algorithm": "grpo"
+          },
+          "uri": "azureml://locations/eastus2/workspaces/00000000-0000-0000-0000-000000000000/models/qwen-reasoning-grpo/versions/1",
+          "baseModel": "azureai://registries/azureml/models/qwen-base/versions/1",
+          "trainingJob": "grpo-qwen-reasoning-01"
+        }
+      }
+    }
+  }
+}

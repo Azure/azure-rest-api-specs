@@ -1,0 +1,46 @@
+{
+    "title": "Clusters_CreateInteractiveRayJob_MaximumSet",
+    "operationId": "Clusters_createInteractiveRayJob",
+    "parameters": {
+        "api-version": "v1",
+        "Foundry-Features": "Jobs=V1Preview",
+        "clusterName": "my-cluster",
+        "Operation-Id": "create-ray-job-01",
+        "request": {
+            "name": "ray-job-01",
+            "displayName": "ray-4node",
+            "description": "Interactive Ray job (4 nodes)",
+            "tags": {
+                "scenario": "interactive-ray"
+            },
+            "instanceCount": 4
+        }
+    },
+    "responses": {
+        "201": {
+            "body": {
+                "name": "ray-job-01",
+                "properties": {
+                    "jobType": "Command",
+                    "displayName": "ray-4node",
+                    "description": "Interactive Ray job (4 nodes)",
+                    "tags": {
+                        "scenario": "interactive-ray"
+                    },
+                    "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.CognitiveServices/accounts/my-account/computes/my-cluster",
+                    "command": "python -c \"import time; print('Ray cluster ready'); time.sleep(86400)\"",
+                    "environmentImageReference": "mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu20.04",
+                    "distribution": {
+                        "distributionType": "Ray",
+                        "port": 6379,
+                        "includeDashboard": true,
+                        "dashboardPort": 8265
+                    },
+                    "resources": {
+                        "instanceCount": 4
+                    }
+                }
+            }
+        }
+    }
+}

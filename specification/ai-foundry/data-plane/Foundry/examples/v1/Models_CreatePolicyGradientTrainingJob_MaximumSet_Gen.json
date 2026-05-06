@@ -1,0 +1,77 @@
+{
+    "title": "Models_CreatePolicyGradientTrainingJob_MaximumSet",
+    "operationId": "Models_createPolicyGradientTrainingJob",
+    "parameters": {
+        "api-version": "v1",
+        "Operation-Id": "create-my-rloo-training-job-01",
+        "Foundry-Features": "Jobs=V1Preview",
+        "request": {
+            "algorithm": "rloo",
+            "name": "qwen-rloo-math",
+            "version": "1",
+            "description": "RLOO policy model trained with a built-in math verifier",
+            "tags": {
+                "algorithm": "rloo"
+            },
+            "model": "azureai://registries/azureml/models/qwen-base/versions/1",
+            "dataset": {
+                "train": "azureai://accounts/my-account/projects/my-project/data/math-prompts-train/versions/1",
+                "eval": "azureai://accounts/my-account/projects/my-project/data/math-prompts-eval/versions/1",
+                "columns": {
+                    "prompt": "prompt",
+                    "reference": "answer"
+                },
+                "dataFormat": {
+                    "chatTemplate": "chatml"
+                }
+            },
+            "runtime": {
+                "framework": "verl",
+                "judge": {
+                    "kind": "builtin",
+                    "type": "math_equivalence"
+                },
+                "reference": {
+                    "kind": "base_model"
+                },
+                "rollout": {
+                    "engine": "vllm",
+                    "numGenerations": 8,
+                    "maxCompletionLength": 512,
+                    "temperature": 0.7,
+                    "topP": 0.95,
+                    "batchSize": 64,
+                    "tensorParallelSize": 2
+                },
+                "hyperparameters": {
+                    "learning_rate": 0.00001,
+                    "kl_coefficient": 0.02
+                },
+                "lora": {
+                    "rank": 16,
+                    "alpha": 32,
+                    "targetModules": "auto"
+                }
+            },
+            "compute": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.CognitiveServices/accounts/my-account/computes/my-cluster",
+                "resources": {
+                    "instanceCount": 4,
+                    "instanceType": "Standard_NC96ads_A100_v4"
+                },
+                "gpuCount": 32
+            }
+        }
+    },
+    "responses": {
+        "202": {
+            "headers": {
+                "Operation-Location": "https://my-account.services.ai.azure.com/api/projects/my-project/models/operations/create-my-rloo-training-job-01/result?api-version=v1"
+            },
+            "body": {
+                "operationId": "create-my-rloo-training-job-01",
+                "status": "queued"
+            }
+        }
+    }
+}

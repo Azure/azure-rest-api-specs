@@ -9,10 +9,12 @@ import "./src/evaluation-rules/routes.tsp";
 
 // Stable operation (GA routes) without preview features
 import "./src/connections/routes.tsp";
+import "./src/clusters/routes.tsp";
 import "./src/datasets/routes.tsp";
 import "./src/deployments/routes.tsp";
 import "./src/indexes/routes.tsp";
 import "./src/mlflow/routes.tsp";
+import "./src/models/routes.tsp";
 
 // Beta operations (preview routes, requiring opt-in request header)
 import "./src/evaluation-taxonomies/routes.tsp";
@@ -171,6 +173,62 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 @@clientName(Azure.AI.Projects.Insight.id, "insight_id");
 @@clientName(InsightsGetParams.id, "insight_id");
+
+// --------------------------------------------------------------------------------
+// Models sub-client
+// --------------------------------------------------------------------------------
+
+@@clientName(Models.createSftTrainingJob, "create_sft_training_job", "python");
+@@clientName(Models.createPreferenceTrainingJob,
+  "create_preference_training_job",
+  "python"
+);
+@@clientName(Models.createKtoTrainingJob, "create_kto_training_job", "python");
+@@clientName(Models.createRewardModelTrainingJob,
+  "create_reward_model_training_job",
+  "python"
+);
+@@clientName(Models.createGrpoTrainingJob,
+  "create_grpo_training_job",
+  "python"
+);
+@@clientName(Models.createPolicyGradientTrainingJob,
+  "create_policy_gradient_training_job",
+  "python"
+);
+@@clientName(Models.createPpoTrainingJob, "create_ppo_training_job", "python");
+@@clientName(Models.createSftTrainingJob, "createSftTrainingJob", "javascript");
+@@clientName(Models.createPreferenceTrainingJob,
+  "createPreferenceTrainingJob",
+  "javascript"
+);
+@@clientName(Models.createKtoTrainingJob, "createKtoTrainingJob", "javascript");
+@@clientName(Models.createRewardModelTrainingJob,
+  "createRewardModelTrainingJob",
+  "javascript"
+);
+@@clientName(Models.createGrpoTrainingJob,
+  "createGrpoTrainingJob",
+  "javascript"
+);
+@@clientName(Models.createPolicyGradientTrainingJob,
+  "createPolicyGradientTrainingJob",
+  "javascript"
+);
+@@clientName(Models.createPpoTrainingJob, "createPpoTrainingJob", "javascript");
+
+// --------------------------------------------------------------------------------
+// Clusters sub-client
+// --------------------------------------------------------------------------------
+
+@@clientName(Clusters.createInteractiveRayJob,
+  "create_interactive_ray_job",
+  "python"
+);
+@@clientName(Clusters.createInteractiveRayJob,
+  "createInteractiveRayJob",
+  "javascript"
+);
 
 // --------------------------------------------------------------------------------
 // Datasets sub-client

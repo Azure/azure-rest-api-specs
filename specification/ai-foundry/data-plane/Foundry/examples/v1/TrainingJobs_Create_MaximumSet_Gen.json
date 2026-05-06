@@ -20,8 +20,8 @@
         "codeId": "azureai://accounts/my-account/projects/my-project/data/my-training-code/versions/1",
         "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.CognitiveServices/accounts/my-account/computes/my-cluster",
         "training": {
-          "algorithm": "Grpo",
-          "framework": "Trl",
+          "algorithm": "grpo",
+          "framework": "trl",
           "model": "azureai://registries/azureml/models/qwen-base/versions/1",
           "dataset": {
             "train": "azureai://accounts/my-account/projects/my-project/data/train-dataset/versions/1",
@@ -34,10 +34,16 @@
               "messages": "messages"
             },
             "dataFormat": {
-              "chatTemplate": "Chatml"
+              "chatTemplate": "chatml"
             }
           },
+          "hyperparameters": {
+            "learning_rate": 0.0001,
+            "num_train_epochs": 3,
+            "per_device_train_batch_size": 2
+          },
           "reward": {
+            "kind": "inline_function",
             "inline_function": {
               "def": "def score(samples, **kwargs):\n    return [1.0 for _ in samples]",
               "runtime": {
@@ -55,12 +61,12 @@
             "quantize": true
           },
           "rollout": {
-            "engine": "Vllm",
+            "engine": "vllm",
             "tensorParallelSize": 2,
             "gpuMemoryUtilization": 0.9
           },
           "eval": {
-            "benchmark": "Gsm8k",
+            "benchmark": "gsm8k",
             "everyNSteps": 100
           }
         },
@@ -127,8 +133,10 @@
           "codeId": "azureai://accounts/my-account/projects/my-project/data/my-training-code/versions/1",
           "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.CognitiveServices/accounts/my-account/computes/my-cluster",
           "training": {
-            "algorithm": "Grpo",
-            "framework": "Trl",
+            "algorithm": "grpo",
+            "framework": "trl",
+            "resolvedFramework": "trl",
+            "frameworkVersion": "0.21.0",
             "model": "azureai://registries/azureml/models/qwen-base/versions/1",
             "dataset": {
               "train": "azureai://accounts/my-account/projects/my-project/data/train-dataset/versions/1",
@@ -141,10 +149,16 @@
                 "messages": "messages"
               },
               "dataFormat": {
-                "chatTemplate": "Chatml"
+                "chatTemplate": "chatml"
               }
             },
+            "hyperparameters": {
+              "learning_rate": 0.0001,
+              "num_train_epochs": 3,
+              "per_device_train_batch_size": 2
+            },
             "reward": {
+              "kind": "inline_function",
               "inline_function": {
                 "def": "def score(samples, **kwargs):\n    return [1.0 for _ in samples]",
                 "runtime": {
@@ -162,12 +176,12 @@
               "quantize": true
             },
             "rollout": {
-              "engine": "Vllm",
+              "engine": "vllm",
               "tensorParallelSize": 2,
               "gpuMemoryUtilization": 0.9
             },
             "eval": {
-              "benchmark": "Gsm8k",
+              "benchmark": "gsm8k",
               "everyNSteps": 100
             }
           },

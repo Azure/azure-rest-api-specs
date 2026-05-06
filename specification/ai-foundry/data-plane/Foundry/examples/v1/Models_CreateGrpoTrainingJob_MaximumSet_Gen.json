@@ -1,0 +1,83 @@
+{
+  "title": "Models_CreateGrpoTrainingJob_MaximumSet",
+  "operationId": "Models_createGrpoTrainingJob",
+  "parameters": {
+    "api-version": "v1",
+    "Operation-Id": "create-my-grpo-training-job-01",
+    "Foundry-Features": "Jobs=V1Preview",
+    "request": {
+      "name": "qwen-reasoning-grpo",
+      "version": "1",
+      "description": "GRPO model trained for reasoning tasks",
+      "tags": {
+        "algorithm": "grpo"
+      },
+      "model": "azureai://registries/azureml/models/qwen-base/versions/1",
+      "dataset": {
+        "train": "azureai://accounts/my-account/projects/my-project/data/train-dataset/versions/1",
+        "eval": "azureai://accounts/my-account/projects/my-project/data/eval-dataset/versions/1",
+        "columns": {
+          "prompt": "prompt",
+          "reference": "reference"
+        },
+        "dataFormat": {
+          "chatTemplate": "chatml"
+        }
+      },
+      "runtime": {
+        "framework": "verl",
+        "hyperparameters": {
+          "learning_rate": 0.00001,
+          "num_generations": 8,
+          "max_completion_length": 512
+        },
+        "judge": {
+          "kind": "inline_function",
+          "inline_function": {
+            "def": "def score(samples, **kwargs):\n    return [1.0 for _ in samples]",
+            "runtime": {
+              "pip": [
+                "numpy>=1.26"
+              ]
+            }
+          }
+        },
+        "lora": {
+          "rank": 16,
+          "alpha": 32,
+          "dropout": 0.05,
+          "targetModules": "auto",
+          "quantize": true
+        },
+        "rollout": {
+          "engine": "vllm",
+          "tensorParallelSize": 2,
+          "gpuMemoryUtilization": 0.9
+        },
+        "eval": {
+          "benchmark": "gsm8k",
+          "everyNSteps": 100
+        }
+      },
+      "compute": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.CognitiveServices/accounts/my-account/computes/my-cluster",
+        "resources": {
+          "instanceCount": 4,
+          "instanceType": "Standard_NC96ads_A100_v4"
+        },
+        "gpuCount": 32
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "https://my-account.services.ai.azure.com/api/projects/my-project/models/operations/create-my-grpo-training-job-01/result?api-version=v1"
+      },
+      "body": {
+        "operationId": "create-my-grpo-training-job-01",
+        "status": "queued"
+      }
+    }
+  }
+}

@@ -36,6 +36,9 @@
       "name": "Agent Invocations"
     },
     {
+      "name": "Clusters"
+    },
+    {
       "name": "Connections"
     },
     {
@@ -61,6 +64,9 @@
     },
     {
       "name": "Memory Stores"
+    },
+    {
+      "name": "Models"
     },
     {
       "name": "Conversations"
@@ -3040,6 +3046,90 @@
               }
             }
           }
+        }
+      }
+    },
+    "/clusters/{clusterName}:create_interactive_ray_job": {
+      "post": {
+        "operationId": "Clusters_createInteractiveRayJob",
+        "description": "Create an interactive Ray command job on a compute cluster.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "description": "The compute cluster name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Operation-Id",
+            "in": "header",
+            "required": false,
+            "description": "Idempotency key used to safely retry interactive Ray job creation.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Job"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Clusters"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InteractiveRayJobCreate"
+              }
+            }
+          },
+          "description": "Interactive Ray job creation request."
         }
       }
     },
@@ -9775,6 +9865,665 @@
               }
             }
           }
+        }
+      }
+    },
+    "/models/operations/{operationId}/result": {
+      "get": {
+        "operationId": "Models_getTrainingOperationResult",
+        "description": "Poll the result of a managed model training operation.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "description": "The managed model training operation identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModelTrainingOperation"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Models"
+        ]
+      }
+    },
+    "/models:create_grpo_training_job": {
+      "post": {
+        "operationId": "Models_createGrpoTrainingJob",
+        "description": "Create a model by running managed GRPO training.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "Operation-Id",
+            "in": "header",
+            "required": false,
+            "description": "Idempotency key used to safely retry managed model training.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "required": true,
+                "description": "The location for monitoring the operation state.",
+                "schema": {
+                  "type": "string",
+                  "format": "uri"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModelTrainingOperation"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Models"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GrpoModelTrainingJobCreate"
+              }
+            }
+          },
+          "description": "The managed GRPO model training request."
+        }
+      }
+    },
+    "/models:create_kto_training_job": {
+      "post": {
+        "operationId": "Models_createKtoTrainingJob",
+        "description": "Create a model by running managed KTO training.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "Operation-Id",
+            "in": "header",
+            "required": false,
+            "description": "Idempotency key used to safely retry managed model training.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "required": true,
+                "description": "The location for monitoring the operation state.",
+                "schema": {
+                  "type": "string",
+                  "format": "uri"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModelTrainingOperation"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Models"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/KtoModelTrainingJobCreate"
+              }
+            }
+          },
+          "description": "The managed KTO model training request."
+        }
+      }
+    },
+    "/models:create_policy_gradient_training_job": {
+      "post": {
+        "operationId": "Models_createPolicyGradientTrainingJob",
+        "description": "Create a model by running managed online policy-gradient training.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "Operation-Id",
+            "in": "header",
+            "required": false,
+            "description": "Idempotency key used to safely retry managed model training.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "required": true,
+                "description": "The location for monitoring the operation state.",
+                "schema": {
+                  "type": "string",
+                  "format": "uri"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModelTrainingOperation"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Models"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PolicyGradientModelTrainingJobCreate"
+              }
+            }
+          },
+          "description": "The managed online policy-gradient model training request."
+        }
+      }
+    },
+    "/models:create_ppo_training_job": {
+      "post": {
+        "operationId": "Models_createPpoTrainingJob",
+        "description": "Create a model by running managed PPO training.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "Operation-Id",
+            "in": "header",
+            "required": false,
+            "description": "Idempotency key used to safely retry managed model training.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "required": true,
+                "description": "The location for monitoring the operation state.",
+                "schema": {
+                  "type": "string",
+                  "format": "uri"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModelTrainingOperation"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Models"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PpoModelTrainingJobCreate"
+              }
+            }
+          },
+          "description": "The managed PPO model training request."
+        }
+      }
+    },
+    "/models:create_preference_training_job": {
+      "post": {
+        "operationId": "Models_createPreferenceTrainingJob",
+        "description": "Create a model by running managed pairwise preference training.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "Operation-Id",
+            "in": "header",
+            "required": false,
+            "description": "Idempotency key used to safely retry managed model training.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "required": true,
+                "description": "The location for monitoring the operation state.",
+                "schema": {
+                  "type": "string",
+                  "format": "uri"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModelTrainingOperation"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Models"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PreferenceModelTrainingJobCreate"
+              }
+            }
+          },
+          "description": "The managed pairwise preference model training request."
+        }
+      }
+    },
+    "/models:create_reward_model_training_job": {
+      "post": {
+        "operationId": "Models_createRewardModelTrainingJob",
+        "description": "Create a reward model by running managed reward-model training.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "Operation-Id",
+            "in": "header",
+            "required": false,
+            "description": "Idempotency key used to safely retry managed model training.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "required": true,
+                "description": "The location for monitoring the operation state.",
+                "schema": {
+                  "type": "string",
+                  "format": "uri"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModelTrainingOperation"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Models"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RewardModelTrainingJobCreate"
+              }
+            }
+          },
+          "description": "The managed reward-model training request."
+        }
+      }
+    },
+    "/models:create_sft_training_job": {
+      "post": {
+        "operationId": "Models_createSftTrainingJob",
+        "description": "Create a model by running managed supervised fine-tuning.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "Operation-Id",
+            "in": "header",
+            "required": false,
+            "description": "Idempotency key used to safely retry managed model training.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "required": true,
+                "description": "The location for monitoring the operation state.",
+                "schema": {
+                  "type": "string",
+                  "format": "uri"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModelTrainingOperation"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Models"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SftModelTrainingJobCreate"
+              }
+            }
+          },
+          "description": "The managed SFT model training request."
         }
       }
     },
@@ -20437,6 +21186,27 @@
         },
         "description": "A base class for connection credentials"
       },
+      "BaseModelReferenceConfiguration": {
+        "type": "object",
+        "required": [
+          "kind"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "base_model"
+            ],
+            "description": "Reference policy kind, always 'base_model'."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ModelTrainingReferenceConfiguration"
+          }
+        ],
+        "description": "Use the submitted base model as the reference policy."
+      },
       "BenchmarkName": {
         "anyOf": [
           {
@@ -21160,10 +21930,10 @@
           {
             "type": "string",
             "enum": [
-              "Chatml",
+              "chatml",
               "llama-3",
-              "Zephyr",
-              "Gemma",
+              "zephyr",
+              "gemma",
               "phi-3"
             ]
           }
@@ -21776,6 +22546,43 @@
           }
         ],
         "description": "CosmosDB Vector Store Index Definition"
+      },
+      "CpoTrainingConfiguration": {
+        "type": "object",
+        "required": [
+          "algorithm"
+        ],
+        "properties": {
+          "algorithm": {
+            "type": "string",
+            "enum": [
+              "cpo"
+            ],
+            "description": "Training algorithm, always 'cpo'."
+          },
+          "lora": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingLoraConfiguration"
+              }
+            ],
+            "description": "LoRA adapter configuration."
+          },
+          "eval": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingEvalConfiguration"
+              }
+            ],
+            "description": "Evaluation configuration."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TrainingConfiguration"
+          }
+        ],
+        "description": "Contrastive preference optimization training recipe."
       },
       "CreateAgentFromManifestRequest": {
         "type": "object",
@@ -22738,10 +23545,48 @@
           "mapping": {
             "PyTorch": "#/components/schemas/PyTorchDistribution",
             "Mpi": "#/components/schemas/MpiDistribution",
-            "TensorFlow": "#/components/schemas/TensorFlowDistribution"
+            "TensorFlow": "#/components/schemas/TensorFlowDistribution",
+            "Ray": "#/components/schemas/RayDistribution"
           }
         },
-        "description": "Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, or null."
+        "description": "Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, Ray, or null."
+      },
+      "DpoTrainingConfiguration": {
+        "type": "object",
+        "required": [
+          "algorithm"
+        ],
+        "properties": {
+          "algorithm": {
+            "type": "string",
+            "enum": [
+              "dpo"
+            ],
+            "description": "Training algorithm, always 'dpo'."
+          },
+          "lora": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingLoraConfiguration"
+              }
+            ],
+            "description": "LoRA adapter configuration."
+          },
+          "eval": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingEvalConfiguration"
+              }
+            ],
+            "description": "Evaluation configuration."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TrainingConfiguration"
+          }
+        ],
+        "description": "Direct preference optimization training recipe."
       },
       "EntraAuthorizationScheme": {
         "type": "object",
@@ -24554,6 +25399,32 @@
         },
         "description": "Evaluator Definition"
       },
+      "ExplicitModelReferenceConfiguration": {
+        "type": "object",
+        "required": [
+          "kind",
+          "model"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "model"
+            ],
+            "description": "Reference policy kind, always 'model'."
+          },
+          "model": {
+            "type": "string",
+            "description": "Reference model asset URI."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ModelTrainingReferenceConfiguration"
+          }
+        ],
+        "description": "Use an explicit model as the reference policy."
+      },
       "FabricDataAgentToolCall": {
         "type": "object",
         "required": [
@@ -24790,6 +25661,240 @@
           }
         },
         "description": "Details of a function tool call."
+      },
+      "GrpoModelTrainingJobCreate": {
+        "type": "object",
+        "required": [
+          "model",
+          "dataset",
+          "runtime",
+          "compute"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional name of the model to create. If omitted, the service generates one."
+          },
+          "version": {
+            "type": "string",
+            "description": "Optional version of the model to create. If omitted, the service generates one."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional description for the model to create."
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Optional tags for the model to create."
+          },
+          "model": {
+            "type": "string",
+            "description": "Base model asset reference."
+          },
+          "dataset": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GrpoTrainingDatasetConfiguration"
+              }
+            ],
+            "description": "Training and optional evaluation datasets."
+          },
+          "runtime": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GrpoTrainingRuntimeConfiguration"
+              }
+            ],
+            "description": "Runtime options for managed GRPO."
+          },
+          "compute": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ModelTrainingComputeConfiguration"
+              }
+            ],
+            "description": "Compute placement for the managed training job."
+          }
+        },
+        "description": "Request body for creating a managed GRPO training job from a base model."
+      },
+      "GrpoTrainingColumnMapping": {
+        "type": "object",
+        "required": [
+          "prompt"
+        ],
+        "properties": {
+          "prompt": {
+            "type": "string",
+            "description": "Column containing prompts for rollout generation."
+          },
+          "reference": {
+            "type": "string",
+            "description": "Column containing reference answers or reward context passed to the judge."
+          }
+        },
+        "description": "Column mapping for managed GRPO datasets. The training dataset must contain prompts; reference answers or reward context can be passed to the judge."
+      },
+      "GrpoTrainingConfiguration": {
+        "type": "object",
+        "required": [
+          "algorithm",
+          "reward"
+        ],
+        "properties": {
+          "algorithm": {
+            "type": "string",
+            "enum": [
+              "grpo"
+            ],
+            "description": "Training algorithm, always 'grpo'."
+          },
+          "reward": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingRewardConfiguration"
+              }
+            ],
+            "description": "Reward signal configuration."
+          },
+          "lora": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingLoraConfiguration"
+              }
+            ],
+            "description": "LoRA adapter configuration."
+          },
+          "rollout": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingRolloutConfiguration"
+              }
+            ],
+            "description": "Rollout generation configuration."
+          },
+          "eval": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingEvalConfiguration"
+              }
+            ],
+            "description": "Evaluation configuration."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TrainingConfiguration"
+          }
+        ],
+        "description": "Group relative policy optimization training recipe."
+      },
+      "GrpoTrainingDatasetConfiguration": {
+        "type": "object",
+        "required": [
+          "train",
+          "columns"
+        ],
+        "properties": {
+          "train": {
+            "type": "string",
+            "description": "Training dataset asset reference."
+          },
+          "eval": {
+            "type": "string",
+            "description": "Optional evaluation dataset asset reference."
+          },
+          "columns": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GrpoTrainingColumnMapping"
+              }
+            ],
+            "description": "Mapping from GRPO training fields to dataset columns."
+          },
+          "dataFormat": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingDataFormatConfiguration"
+              }
+            ],
+            "description": "Conversational data formatting options."
+          }
+        },
+        "description": "Dataset configuration for managed GRPO training."
+      },
+      "GrpoTrainingRuntimeConfiguration": {
+        "type": "object",
+        "required": [
+          "judge"
+        ],
+        "properties": {
+          "framework": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingFramework"
+              }
+            ],
+            "description": "Training framework implementation. If omitted, the service selects a compatible framework."
+          },
+          "hyperparameters": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Algorithm-specific hyperparameters passed through to the selected framework."
+          },
+          "judge": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingRewardConfiguration"
+              }
+            ],
+            "description": "Judge used to score generated completions during GRPO training."
+          },
+          "lora": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingLoraConfiguration"
+              }
+            ],
+            "description": "LoRA adapter configuration."
+          },
+          "rollout": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingRolloutConfiguration"
+              }
+            ],
+            "description": "Rollout generation configuration."
+          },
+          "eval": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingEvalConfiguration"
+              }
+            ],
+            "description": "Evaluation configuration."
+          },
+          "reference": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ModelTrainingReferenceConfiguration"
+              }
+            ],
+            "description": "Reference policy used for KL anchoring."
+          },
+          "packaging": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ModelTrainingPackagingConfiguration"
+              }
+            ],
+            "description": "Model artifact packaging options."
+          }
+        },
+        "description": "Runtime options for managed GRPO training."
       },
       "HeaderIsolationKeySource": {
         "type": "object",
@@ -25537,6 +26642,39 @@
           }
         },
         "description": "Metadata about the insights."
+      },
+      "InteractiveRayJobCreate": {
+        "type": "object",
+        "required": [
+          "instanceCount"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional job name. If omitted, the service uses the Operation-Id header or generates one."
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Optional display name for the generated Ray job."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional description for the generated Ray job."
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Optional tags to attach to the generated Ray job."
+          },
+          "instanceCount": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of compute nodes to reserve for the interactive Ray session."
+          }
+        },
+        "description": "Request body for creating an interactive Ray command job on a compute cluster."
       },
       "IsolationKeySource": {
         "type": "object",
@@ -26336,6 +27474,211 @@
           }
         ],
         "description": "Type of a job."
+      },
+      "KtoFeedbackColumnMapping": {
+        "type": "object",
+        "required": [
+          "prompt",
+          "response",
+          "label"
+        ],
+        "properties": {
+          "prompt": {
+            "type": "string",
+            "description": "Column containing prompts."
+          },
+          "response": {
+            "type": "string",
+            "description": "Column containing responses."
+          },
+          "label": {
+            "type": "string",
+            "description": "Column containing the binary desirability label."
+          }
+        },
+        "description": "Column mapping for KTO feedback datasets."
+      },
+      "KtoModelTrainingJobCreate": {
+        "type": "object",
+        "required": [
+          "model",
+          "dataset",
+          "compute"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional name of the model to create. If omitted, the service generates one."
+          },
+          "version": {
+            "type": "string",
+            "description": "Optional version of the model to create. If omitted, the service generates one."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional description for the model to create."
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Optional tags for the model to create."
+          },
+          "model": {
+            "type": "string",
+            "description": "Base model asset reference."
+          },
+          "dataset": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/KtoTrainingDatasetConfiguration"
+              }
+            ],
+            "description": "Training and optional evaluation datasets."
+          },
+          "runtime": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/KtoTrainingRuntimeConfiguration"
+              }
+            ],
+            "description": "Runtime options for managed KTO."
+          },
+          "compute": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ModelTrainingComputeConfiguration"
+              }
+            ],
+            "description": "Compute placement for the managed training job."
+          }
+        },
+        "description": "Request body for creating a managed KTO training job from a base model."
+      },
+      "KtoTrainingConfiguration": {
+        "type": "object",
+        "required": [
+          "algorithm"
+        ],
+        "properties": {
+          "algorithm": {
+            "type": "string",
+            "enum": [
+              "kto"
+            ],
+            "description": "Training algorithm, always 'kto'."
+          },
+          "lora": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingLoraConfiguration"
+              }
+            ],
+            "description": "LoRA adapter configuration."
+          },
+          "eval": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingEvalConfiguration"
+              }
+            ],
+            "description": "Evaluation configuration."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TrainingConfiguration"
+          }
+        ],
+        "description": "Kahneman-Tversky optimization training recipe."
+      },
+      "KtoTrainingDatasetConfiguration": {
+        "type": "object",
+        "required": [
+          "train",
+          "columns"
+        ],
+        "properties": {
+          "train": {
+            "type": "string",
+            "description": "Training dataset asset reference."
+          },
+          "eval": {
+            "type": "string",
+            "description": "Optional evaluation dataset asset reference."
+          },
+          "columns": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/KtoFeedbackColumnMapping"
+              }
+            ],
+            "description": "Mapping from KTO fields to dataset columns."
+          },
+          "dataFormat": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingDataFormatConfiguration"
+              }
+            ],
+            "description": "Conversational data formatting options."
+          }
+        },
+        "description": "Dataset configuration for managed KTO training."
+      },
+      "KtoTrainingRuntimeConfiguration": {
+        "type": "object",
+        "properties": {
+          "framework": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingFramework"
+              }
+            ],
+            "description": "Training framework implementation. If omitted, the service selects a compatible framework."
+          },
+          "hyperparameters": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Algorithm-specific hyperparameters passed through to the selected framework."
+          },
+          "desirableWeight": {
+            "type": "number",
+            "format": "double",
+            "description": "Weight applied to desirable examples."
+          },
+          "undesirableWeight": {
+            "type": "number",
+            "format": "double",
+            "description": "Weight applied to undesirable examples."
+          },
+          "lora": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingLoraConfiguration"
+              }
+            ],
+            "description": "LoRA adapter configuration."
+          },
+          "eval": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingEvalConfiguration"
+              }
+            ],
+            "description": "Evaluation configuration."
+          },
+          "packaging": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ModelTrainingPackagingConfiguration"
+              }
+            ],
+            "description": "Model artifact packaging options."
+          }
+        },
+        "description": "Runtime options for managed KTO training."
       },
       "ListViewType": {
         "anyOf": [
@@ -27264,6 +28607,59 @@
         "additionalProperties": {},
         "description": "Generic MLflow compatibility response payload."
       },
+      "Model": {
+        "type": "object",
+        "required": [
+          "name",
+          "version"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Asset ID, a unique identifier for the model asset.",
+            "readOnly": true
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the model asset.",
+            "readOnly": true
+          },
+          "version": {
+            "type": "string",
+            "description": "The version of the model asset.",
+            "readOnly": true
+          },
+          "description": {
+            "type": "string",
+            "description": "The model asset description text.",
+            "readOnly": true
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Tags associated with the model asset.",
+            "readOnly": true
+          },
+          "uri": {
+            "type": "string",
+            "description": "URI of the registered model artifact.",
+            "readOnly": true
+          },
+          "baseModel": {
+            "type": "string",
+            "description": "Base model used to create this model, when the model was produced by managed training.",
+            "readOnly": true
+          },
+          "trainingJob": {
+            "type": "string",
+            "description": "Backing training job that produced this model, when available.",
+            "readOnly": true
+          }
+        },
+        "description": "Model asset produced by managed model training."
+      },
       "ModelDeployment": {
         "type": "object",
         "required": [
@@ -27385,6 +28781,146 @@
         },
         "description": "Represents a set of parameters used to control the sampling behavior of a language model during text generation."
       },
+      "ModelTrainingComputeConfiguration": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Compute resource ID used to run the managed training job."
+          },
+          "resources": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/JobResourceConfiguration"
+              }
+            ],
+            "description": "Compute resource configuration for the managed training job."
+          },
+          "gpuCount": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of GPUs requested by the managed training job."
+          },
+          "distribution": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DistributionConfiguration"
+              }
+            ],
+            "description": "Distribution configuration for the managed training job."
+          },
+          "queueSettings": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/QueueSettings"
+              }
+            ],
+            "description": "Queue settings for the managed training job."
+          },
+          "userAssignedIdentityId": {
+            "type": "string",
+            "description": "ARM resource ID of a user-assigned managed identity attached to the Foundry project."
+          }
+        },
+        "description": "Compute placement for a managed model training job."
+      },
+      "ModelTrainingOperation": {
+        "type": "object",
+        "required": [
+          "operationId",
+          "status"
+        ],
+        "properties": {
+          "operationId": {
+            "type": "string",
+            "description": "Operation identifier for the managed model training request."
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ModelTrainingOperationStatus"
+              }
+            ],
+            "description": "Managed model training operation status."
+          },
+          "result": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Model"
+              }
+            ],
+            "description": "The model produced by managed training when the operation succeeds."
+          },
+          "error": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.Error"
+              }
+            ],
+            "description": "Error object that describes the failure when status is 'failed'."
+          }
+        },
+        "description": "Status resource for a managed model training operation."
+      },
+      "ModelTrainingOperationStatus": {
+        "type": "string",
+        "enum": [
+          "queued",
+          "in_progress",
+          "succeeded",
+          "failed",
+          "canceled"
+        ],
+        "description": "Status of a managed model training operation."
+      },
+      "ModelTrainingPackagingConfiguration": {
+        "type": "object",
+        "properties": {
+          "mode": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ModelTrainingPackagingMode"
+              }
+            ],
+            "description": "How the trained model artifact should be packaged.",
+            "default": "merged_model"
+          }
+        },
+        "description": "Model artifact packaging options."
+      },
+      "ModelTrainingPackagingMode": {
+        "type": "string",
+        "enum": [
+          "merged_model",
+          "adapter",
+          "model_and_adapter"
+        ],
+        "description": "Output packaging for a managed model training job."
+      },
+      "ModelTrainingReferenceConfiguration": {
+        "type": "object",
+        "required": [
+          "kind"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "description": "Reference policy kind."
+          }
+        },
+        "discriminator": {
+          "propertyName": "kind",
+          "mapping": {
+            "base_model": "#/components/schemas/BaseModelReferenceConfiguration",
+            "model": "#/components/schemas/ExplicitModelReferenceConfiguration",
+            "none": "#/components/schemas/NoReferenceConfiguration"
+          }
+        },
+        "description": "Reference policy used for preference optimization or online reinforcement training."
+      },
       "MonthlyRecurrenceSchedule": {
         "type": "object",
         "required": [
@@ -27462,6 +28998,27 @@
           }
         ],
         "description": "Credentials that do not require authentication"
+      },
+      "NoReferenceConfiguration": {
+        "type": "object",
+        "required": [
+          "kind"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "none"
+            ],
+            "description": "Reference policy kind, always 'none'."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ModelTrainingReferenceConfiguration"
+          }
+        ],
+        "description": "Disable reference policy or KL anchoring."
       },
       "OAuthConsentRequestOutputItem": {
         "type": "object",
@@ -47257,6 +48814,43 @@
         ],
         "description": "The output of an OpenAPI tool call."
       },
+      "OrpoTrainingConfiguration": {
+        "type": "object",
+        "required": [
+          "algorithm"
+        ],
+        "properties": {
+          "algorithm": {
+            "type": "string",
+            "enum": [
+              "orpo"
+            ],
+            "description": "Training algorithm, always 'orpo'."
+          },
+          "lora": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingLoraConfiguration"
+              }
+            ],
+            "description": "LoRA adapter configuration."
+          },
+          "eval": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingEvalConfiguration"
+              }
+            ],
+            "description": "Evaluation configuration."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TrainingConfiguration"
+          }
+        ],
+        "description": "Odds ratio preference optimization training recipe."
+      },
       "OtlpTelemetryEndpoint": {
         "type": "object",
         "required": [
@@ -47813,6 +49407,110 @@
         },
         "description": "Paged collection of ScheduleRun items"
       },
+      "PairwisePreferenceColumnMapping": {
+        "type": "object",
+        "required": [
+          "prompt",
+          "chosen",
+          "rejected"
+        ],
+        "properties": {
+          "prompt": {
+            "type": "string",
+            "description": "Column containing prompts."
+          },
+          "chosen": {
+            "type": "string",
+            "description": "Column containing the preferred response."
+          },
+          "rejected": {
+            "type": "string",
+            "description": "Column containing the rejected response."
+          }
+        },
+        "description": "Column mapping for pairwise preference datasets."
+      },
+      "PairwisePreferenceDatasetConfiguration": {
+        "type": "object",
+        "required": [
+          "train",
+          "columns"
+        ],
+        "properties": {
+          "train": {
+            "type": "string",
+            "description": "Training dataset asset reference."
+          },
+          "eval": {
+            "type": "string",
+            "description": "Optional evaluation dataset asset reference."
+          },
+          "columns": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PairwisePreferenceColumnMapping"
+              }
+            ],
+            "description": "Mapping from pairwise preference fields to dataset columns."
+          },
+          "dataFormat": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingDataFormatConfiguration"
+              }
+            ],
+            "description": "Conversational data formatting options."
+          }
+        },
+        "description": "Dataset configuration for managed pairwise preference training."
+      },
+      "PairwiseRewardModelTrainingDatasetConfiguration": {
+        "type": "object",
+        "required": [
+          "kind",
+          "train",
+          "columns"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "pairwise"
+            ],
+            "description": "Reward-model dataset kind, always 'pairwise'."
+          },
+          "train": {
+            "type": "string",
+            "description": "Training dataset asset reference."
+          },
+          "eval": {
+            "type": "string",
+            "description": "Optional evaluation dataset asset reference."
+          },
+          "columns": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PairwisePreferenceColumnMapping"
+              }
+            ],
+            "description": "Mapping from pairwise preference fields to dataset columns."
+          },
+          "dataFormat": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingDataFormatConfiguration"
+              }
+            ],
+            "description": "Conversational data formatting options."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RewardModelTrainingDatasetConfiguration"
+          }
+        ],
+        "description": "Pairwise preference dataset for managed reward-model training."
+      },
       "PatchAgentRequest": {
         "type": "object",
         "properties": {
@@ -47896,6 +49594,498 @@
           }
         },
         "description": "Represents the response for a pending upload request"
+      },
+      "PolicyGradientModelTrainingJobCreate": {
+        "type": "object",
+        "required": [
+          "algorithm",
+          "model",
+          "dataset",
+          "runtime",
+          "compute"
+        ],
+        "properties": {
+          "algorithm": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PolicyGradientTrainingAlgorithm"
+              }
+            ],
+            "description": "Policy-gradient algorithm to run."
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional name of the model to create. If omitted, the service generates one."
+          },
+          "version": {
+            "type": "string",
+            "description": "Optional version of the model to create. If omitted, the service generates one."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional description for the model to create."
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Optional tags for the model to create."
+          },
+          "model": {
+            "type": "string",
+            "description": "Base model asset reference."
+          },
+          "dataset": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GrpoTrainingDatasetConfiguration"
+              }
+            ],
+            "description": "Training and optional evaluation datasets."
+          },
+          "runtime": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PolicyGradientTrainingRuntimeConfiguration"
+              }
+            ],
+            "description": "Runtime options for managed online policy-gradient training."
+          },
+          "compute": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ModelTrainingComputeConfiguration"
+              }
+            ],
+            "description": "Compute placement for the managed training job."
+          }
+        },
+        "description": "Request body for creating a managed online policy-gradient training job from a base model."
+      },
+      "PolicyGradientTrainingAlgorithm": {
+        "type": "string",
+        "enum": [
+          "rloo",
+          "reinforce_pp"
+        ],
+        "description": "Policy-gradient algorithm used by managed online reinforcement training."
+      },
+      "PolicyGradientTrainingRuntimeConfiguration": {
+        "type": "object",
+        "required": [
+          "judge",
+          "rollout"
+        ],
+        "properties": {
+          "framework": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingFramework"
+              }
+            ],
+            "description": "Training framework implementation. If omitted, the service selects a compatible framework."
+          },
+          "hyperparameters": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Algorithm-specific hyperparameters passed through to the selected framework."
+          },
+          "judge": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingRewardConfiguration"
+              }
+            ],
+            "description": "Judge used to score generated completions during online training."
+          },
+          "reference": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ModelTrainingReferenceConfiguration"
+              }
+            ],
+            "description": "Reference policy used for KL anchoring."
+          },
+          "lora": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingLoraConfiguration"
+              }
+            ],
+            "description": "LoRA adapter configuration."
+          },
+          "rollout": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingRolloutConfiguration"
+              }
+            ],
+            "description": "Rollout generation configuration."
+          },
+          "eval": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingEvalConfiguration"
+              }
+            ],
+            "description": "Evaluation configuration."
+          },
+          "packaging": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ModelTrainingPackagingConfiguration"
+              }
+            ],
+            "description": "Model artifact packaging options."
+          }
+        },
+        "description": "Runtime options for managed online policy-gradient training."
+      },
+      "PpoCriticConfiguration": {
+        "type": "object",
+        "properties": {
+          "model": {
+            "type": "string",
+            "description": "Optional critic model asset reference. If omitted, the service initializes the critic from the policy model."
+          },
+          "valueLossCoefficient": {
+            "type": "number",
+            "format": "double",
+            "description": "Value loss coefficient."
+          },
+          "gamma": {
+            "type": "number",
+            "format": "double",
+            "description": "GAE discount factor."
+          },
+          "lambda": {
+            "type": "number",
+            "format": "double",
+            "description": "GAE lambda."
+          }
+        },
+        "description": "Critic or value model configuration for managed PPO training."
+      },
+      "PpoModelTrainingJobCreate": {
+        "type": "object",
+        "required": [
+          "model",
+          "dataset",
+          "runtime",
+          "compute"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional name of the model to create. If omitted, the service generates one."
+          },
+          "version": {
+            "type": "string",
+            "description": "Optional version of the model to create. If omitted, the service generates one."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional description for the model to create."
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Optional tags for the model to create."
+          },
+          "model": {
+            "type": "string",
+            "description": "Base model asset reference."
+          },
+          "dataset": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GrpoTrainingDatasetConfiguration"
+              }
+            ],
+            "description": "Training and optional evaluation datasets."
+          },
+          "runtime": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PpoTrainingRuntimeConfiguration"
+              }
+            ],
+            "description": "Runtime options for managed PPO."
+          },
+          "compute": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ModelTrainingComputeConfiguration"
+              }
+            ],
+            "description": "Compute placement for the managed training job."
+          }
+        },
+        "description": "Request body for creating a managed PPO training job from a base model."
+      },
+      "PpoTrainingConfiguration": {
+        "type": "object",
+        "required": [
+          "algorithm",
+          "reward"
+        ],
+        "properties": {
+          "algorithm": {
+            "type": "string",
+            "enum": [
+              "ppo"
+            ],
+            "description": "Training algorithm, always 'ppo'."
+          },
+          "reward": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingRewardConfiguration"
+              }
+            ],
+            "description": "Reward signal configuration."
+          },
+          "lora": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingLoraConfiguration"
+              }
+            ],
+            "description": "LoRA adapter configuration."
+          },
+          "rollout": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingRolloutConfiguration"
+              }
+            ],
+            "description": "Rollout generation configuration."
+          },
+          "eval": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingEvalConfiguration"
+              }
+            ],
+            "description": "Evaluation configuration."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TrainingConfiguration"
+          }
+        ],
+        "description": "Proximal policy optimization training recipe."
+      },
+      "PpoTrainingRuntimeConfiguration": {
+        "type": "object",
+        "required": [
+          "judge",
+          "rollout"
+        ],
+        "properties": {
+          "framework": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingFramework"
+              }
+            ],
+            "description": "Training framework implementation. If omitted, the service selects a compatible framework."
+          },
+          "hyperparameters": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Algorithm-specific hyperparameters passed through to the selected framework."
+          },
+          "judge": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingRewardConfiguration"
+              }
+            ],
+            "description": "Judge used to score generated completions during PPO training."
+          },
+          "reference": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ModelTrainingReferenceConfiguration"
+              }
+            ],
+            "description": "Reference policy used for KL anchoring."
+          },
+          "critic": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PpoCriticConfiguration"
+              }
+            ],
+            "description": "Critic or value model configuration."
+          },
+          "lora": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingLoraConfiguration"
+              }
+            ],
+            "description": "LoRA adapter configuration."
+          },
+          "rollout": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingRolloutConfiguration"
+              }
+            ],
+            "description": "Rollout generation configuration."
+          },
+          "eval": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingEvalConfiguration"
+              }
+            ],
+            "description": "Evaluation configuration."
+          },
+          "packaging": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ModelTrainingPackagingConfiguration"
+              }
+            ],
+            "description": "Model artifact packaging options."
+          }
+        },
+        "description": "Runtime options for managed PPO training."
+      },
+      "PreferenceModelTrainingJobCreate": {
+        "type": "object",
+        "required": [
+          "algorithm",
+          "model",
+          "dataset",
+          "compute"
+        ],
+        "properties": {
+          "algorithm": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PreferenceTrainingAlgorithm"
+              }
+            ],
+            "description": "Preference optimization algorithm to run."
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional name of the model to create. If omitted, the service generates one."
+          },
+          "version": {
+            "type": "string",
+            "description": "Optional version of the model to create. If omitted, the service generates one."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional description for the model to create."
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Optional tags for the model to create."
+          },
+          "model": {
+            "type": "string",
+            "description": "Base model asset reference."
+          },
+          "dataset": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PairwisePreferenceDatasetConfiguration"
+              }
+            ],
+            "description": "Training and optional evaluation datasets."
+          },
+          "runtime": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PreferenceTrainingRuntimeConfiguration"
+              }
+            ],
+            "description": "Runtime options for managed pairwise preference training."
+          },
+          "compute": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ModelTrainingComputeConfiguration"
+              }
+            ],
+            "description": "Compute placement for the managed training job."
+          }
+        },
+        "description": "Request body for creating a managed pairwise preference training job from a base model."
+      },
+      "PreferenceTrainingAlgorithm": {
+        "type": "string",
+        "enum": [
+          "dpo",
+          "orpo",
+          "cpo",
+          "simpo"
+        ],
+        "description": "Preference optimization algorithm used by managed pairwise preference training."
+      },
+      "PreferenceTrainingRuntimeConfiguration": {
+        "type": "object",
+        "properties": {
+          "framework": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingFramework"
+              }
+            ],
+            "description": "Training framework implementation. If omitted, the service selects a compatible framework."
+          },
+          "hyperparameters": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Algorithm-specific hyperparameters passed through to the selected framework."
+          },
+          "reference": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ModelTrainingReferenceConfiguration"
+              }
+            ],
+            "description": "Reference policy used by algorithms that require KL anchoring or a reference model."
+          },
+          "lora": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingLoraConfiguration"
+              }
+            ],
+            "description": "LoRA adapter configuration."
+          },
+          "eval": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingEvalConfiguration"
+              }
+            ],
+            "description": "Evaluation configuration."
+          },
+          "packaging": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ModelTrainingPackagingConfiguration"
+              }
+            ],
+            "description": "Model artifact packaging options."
+          }
+        },
+        "description": "Runtime options for managed pairwise preference training."
       },
       "PromptAgentDefinition": {
         "type": "object",
@@ -48091,6 +50281,53 @@
           }
         },
         "description": "Configuration for Responsible AI (RAI) content filtering and safety features."
+      },
+      "RayDistribution": {
+        "type": "object",
+        "required": [
+          "distributionType"
+        ],
+        "properties": {
+          "distributionType": {
+            "type": "string",
+            "enum": [
+              "Ray"
+            ],
+            "description": "Specifies the type of distribution framework."
+          },
+          "port": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The port of the head Ray process."
+          },
+          "address": {
+            "type": "string",
+            "description": "The address of the Ray head node."
+          },
+          "includeDashboard": {
+            "type": "boolean",
+            "description": "Whether to start the Ray dashboard GUI."
+          },
+          "dashboardPort": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The port to bind the dashboard server to."
+          },
+          "headNodeAdditionalArgs": {
+            "type": "string",
+            "description": "Additional arguments passed to ray start on the head node."
+          },
+          "workerNodeAdditionalArgs": {
+            "type": "string",
+            "description": "Additional arguments passed to ray start on worker nodes."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DistributionConfiguration"
+          }
+        ],
+        "description": "Ray distribution configuration."
       },
       "RecurrenceSchedule": {
         "type": "object",
@@ -48421,6 +50658,60 @@
         ],
         "description": "Represents the parameters for red team taxonomy item generation."
       },
+      "ReinforcePpTrainingConfiguration": {
+        "type": "object",
+        "required": [
+          "algorithm",
+          "reward"
+        ],
+        "properties": {
+          "algorithm": {
+            "type": "string",
+            "enum": [
+              "reinforce_pp"
+            ],
+            "description": "Training algorithm, always 'reinforce_pp'."
+          },
+          "reward": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingRewardConfiguration"
+              }
+            ],
+            "description": "Reward signal configuration."
+          },
+          "lora": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingLoraConfiguration"
+              }
+            ],
+            "description": "LoRA adapter configuration."
+          },
+          "rollout": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingRolloutConfiguration"
+              }
+            ],
+            "description": "Rollout generation configuration."
+          },
+          "eval": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingEvalConfiguration"
+              }
+            ],
+            "description": "Evaluation configuration."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TrainingConfiguration"
+          }
+        ],
+        "description": "REINFORCE++ training recipe."
+      },
       "ResponseRetrievalItemGenerationParams": {
         "type": "object",
         "required": [
@@ -48468,6 +50759,187 @@
         ],
         "description": "Represents the parameters for response retrieval item generation."
       },
+      "RewardModelTrainingConfiguration": {
+        "type": "object",
+        "required": [
+          "algorithm"
+        ],
+        "properties": {
+          "algorithm": {
+            "type": "string",
+            "enum": [
+              "reward_model"
+            ],
+            "description": "Training algorithm, always 'reward_model'."
+          },
+          "lora": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingLoraConfiguration"
+              }
+            ],
+            "description": "LoRA adapter configuration."
+          },
+          "eval": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingEvalConfiguration"
+              }
+            ],
+            "description": "Evaluation configuration."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TrainingConfiguration"
+          }
+        ],
+        "description": "Reward model training recipe."
+      },
+      "RewardModelTrainingDatasetConfiguration": {
+        "type": "object",
+        "required": [
+          "kind"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "description": "Reward-model dataset kind."
+          }
+        },
+        "discriminator": {
+          "propertyName": "kind",
+          "mapping": {
+            "pairwise": "#/components/schemas/PairwiseRewardModelTrainingDatasetConfiguration",
+            "scored": "#/components/schemas/ScoredRewardModelTrainingDatasetConfiguration"
+          }
+        },
+        "description": "Dataset configuration for managed reward-model training."
+      },
+      "RewardModelTrainingJobCreate": {
+        "type": "object",
+        "required": [
+          "model",
+          "dataset",
+          "compute"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional name of the reward model to create. If omitted, the service generates one."
+          },
+          "version": {
+            "type": "string",
+            "description": "Optional version of the reward model to create. If omitted, the service generates one."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional description for the reward model to create."
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Optional tags for the reward model to create."
+          },
+          "model": {
+            "type": "string",
+            "description": "Base model asset reference."
+          },
+          "dataset": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RewardModelTrainingDatasetConfiguration"
+              }
+            ],
+            "description": "Training and optional evaluation datasets."
+          },
+          "runtime": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RewardModelTrainingRuntimeConfiguration"
+              }
+            ],
+            "description": "Runtime options for managed reward-model training."
+          },
+          "compute": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ModelTrainingComputeConfiguration"
+              }
+            ],
+            "description": "Compute placement for the managed training job."
+          }
+        },
+        "description": "Request body for creating a managed reward-model training job from a base model."
+      },
+      "RewardModelTrainingLoss": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "bradley_terry",
+              "regression"
+            ]
+          }
+        ],
+        "description": "Loss function used for reward-model training."
+      },
+      "RewardModelTrainingRuntimeConfiguration": {
+        "type": "object",
+        "properties": {
+          "framework": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingFramework"
+              }
+            ],
+            "description": "Training framework implementation. If omitted, the service selects a compatible framework."
+          },
+          "hyperparameters": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Algorithm-specific hyperparameters passed through to the selected framework."
+          },
+          "loss": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RewardModelTrainingLoss"
+              }
+            ],
+            "description": "Loss function used for reward-model training."
+          },
+          "lora": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingLoraConfiguration"
+              }
+            ],
+            "description": "LoRA adapter configuration."
+          },
+          "eval": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingEvalConfiguration"
+              }
+            ],
+            "description": "Evaluation configuration."
+          },
+          "packaging": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ModelTrainingPackagingConfiguration"
+              }
+            ],
+            "description": "Model artifact packaging options."
+          }
+        },
+        "description": "Runtime options for managed reward-model training."
+      },
       "RiskCategory": {
         "anyOf": [
           {
@@ -48490,6 +50962,60 @@
           }
         ],
         "description": "Risk category for the attack objective."
+      },
+      "RlooTrainingConfiguration": {
+        "type": "object",
+        "required": [
+          "algorithm",
+          "reward"
+        ],
+        "properties": {
+          "algorithm": {
+            "type": "string",
+            "enum": [
+              "rloo"
+            ],
+            "description": "Training algorithm, always 'rloo'."
+          },
+          "reward": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingRewardConfiguration"
+              }
+            ],
+            "description": "Reward signal configuration."
+          },
+          "lora": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingLoraConfiguration"
+              }
+            ],
+            "description": "LoRA adapter configuration."
+          },
+          "rollout": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingRolloutConfiguration"
+              }
+            ],
+            "description": "Rollout generation configuration."
+          },
+          "eval": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingEvalConfiguration"
+              }
+            ],
+            "description": "Evaluation configuration."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TrainingConfiguration"
+          }
+        ],
+        "description": "REINFORCE leave-one-out training recipe."
       },
       "SASCredentials": {
         "type": "object",
@@ -48739,6 +51265,76 @@
         ],
         "description": "Type of the task."
       },
+      "ScoredRewardModelColumnMapping": {
+        "type": "object",
+        "required": [
+          "prompt",
+          "response",
+          "score"
+        ],
+        "properties": {
+          "prompt": {
+            "type": "string",
+            "description": "Column containing prompts."
+          },
+          "response": {
+            "type": "string",
+            "description": "Column containing responses."
+          },
+          "score": {
+            "type": "string",
+            "description": "Column containing numeric reward scores."
+          }
+        },
+        "description": "Column mapping for scored reward-model datasets."
+      },
+      "ScoredRewardModelTrainingDatasetConfiguration": {
+        "type": "object",
+        "required": [
+          "kind",
+          "train",
+          "columns"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "scored"
+            ],
+            "description": "Reward-model dataset kind, always 'scored'."
+          },
+          "train": {
+            "type": "string",
+            "description": "Training dataset asset reference."
+          },
+          "eval": {
+            "type": "string",
+            "description": "Optional evaluation dataset asset reference."
+          },
+          "columns": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ScoredRewardModelColumnMapping"
+              }
+            ],
+            "description": "Mapping from scored response fields to dataset columns."
+          },
+          "dataFormat": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingDataFormatConfiguration"
+              }
+            ],
+            "description": "Conversational data formatting options."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RewardModelTrainingDatasetConfiguration"
+          }
+        ],
+        "description": "Scored response dataset for managed reward-model training."
+      },
       "SessionDirectoryEntry": {
         "type": "object",
         "required": [
@@ -48834,6 +51430,191 @@
             "AgentEndpoints=V1Preview"
           ]
         }
+      },
+      "SftModelTrainingJobCreate": {
+        "type": "object",
+        "required": [
+          "model",
+          "dataset",
+          "compute"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional name of the model to create. If omitted, the service generates one."
+          },
+          "version": {
+            "type": "string",
+            "description": "Optional version of the model to create. If omitted, the service generates one."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional description for the model to create."
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Optional tags for the model to create."
+          },
+          "model": {
+            "type": "string",
+            "description": "Base model asset reference."
+          },
+          "dataset": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SftTrainingDatasetConfiguration"
+              }
+            ],
+            "description": "Training and optional evaluation datasets."
+          },
+          "runtime": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SftTrainingRuntimeConfiguration"
+              }
+            ],
+            "description": "Runtime options for managed SFT."
+          },
+          "compute": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ModelTrainingComputeConfiguration"
+              }
+            ],
+            "description": "Compute placement for the managed training job."
+          }
+        },
+        "description": "Request body for creating a managed SFT training job from a base model."
+      },
+      "SftTrainingColumnMapping": {
+        "type": "object",
+        "required": [
+          "messages"
+        ],
+        "properties": {
+          "messages": {
+            "type": "string",
+            "description": "Column containing chat messages used for supervised fine tuning."
+          }
+        },
+        "description": "Column mapping for managed SFT datasets. The training dataset must contain chat messages for each training example."
+      },
+      "SftTrainingConfiguration": {
+        "type": "object",
+        "required": [
+          "algorithm"
+        ],
+        "properties": {
+          "algorithm": {
+            "type": "string",
+            "enum": [
+              "sft"
+            ],
+            "description": "Training algorithm, always 'sft'."
+          },
+          "lora": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingLoraConfiguration"
+              }
+            ],
+            "description": "LoRA adapter configuration."
+          },
+          "eval": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingEvalConfiguration"
+              }
+            ],
+            "description": "Evaluation configuration."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TrainingConfiguration"
+          }
+        ],
+        "description": "Supervised fine-tuning recipe."
+      },
+      "SftTrainingDatasetConfiguration": {
+        "type": "object",
+        "required": [
+          "train",
+          "columns"
+        ],
+        "properties": {
+          "train": {
+            "type": "string",
+            "description": "Training dataset asset reference."
+          },
+          "eval": {
+            "type": "string",
+            "description": "Optional evaluation dataset asset reference."
+          },
+          "columns": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SftTrainingColumnMapping"
+              }
+            ],
+            "description": "Mapping from SFT training fields to dataset columns."
+          },
+          "dataFormat": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingDataFormatConfiguration"
+              }
+            ],
+            "description": "Conversational data formatting options."
+          }
+        },
+        "description": "Dataset configuration for managed supervised fine tuning."
+      },
+      "SftTrainingRuntimeConfiguration": {
+        "type": "object",
+        "properties": {
+          "framework": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingFramework"
+              }
+            ],
+            "description": "Training framework implementation. If omitted, the service selects a compatible framework."
+          },
+          "hyperparameters": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Algorithm-specific hyperparameters passed through to the selected framework."
+          },
+          "lora": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingLoraConfiguration"
+              }
+            ],
+            "description": "LoRA adapter configuration."
+          },
+          "eval": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingEvalConfiguration"
+              }
+            ],
+            "description": "Evaluation configuration."
+          },
+          "packaging": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ModelTrainingPackagingConfiguration"
+              }
+            ],
+            "description": "Model artifact packaging options."
+          }
+        },
+        "description": "Runtime options for managed supervised fine tuning."
       },
       "SharepointGroundingToolCall": {
         "type": "object",
@@ -48975,6 +51756,43 @@
           }
         ],
         "description": "The input definition information for a sharepoint tool as used to configure an agent."
+      },
+      "SimPoTrainingConfiguration": {
+        "type": "object",
+        "required": [
+          "algorithm"
+        ],
+        "properties": {
+          "algorithm": {
+            "type": "string",
+            "enum": [
+              "simpo"
+            ],
+            "description": "Training algorithm, always 'simpo'."
+          },
+          "lora": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingLoraConfiguration"
+              }
+            ],
+            "description": "LoRA adapter configuration."
+          },
+          "eval": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingEvalConfiguration"
+              }
+            ],
+            "description": "Evaluation configuration."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TrainingConfiguration"
+          }
+        ],
+        "description": "Simple preference optimization training recipe."
       },
       "SkillObject": {
         "type": "object",
@@ -49889,21 +52707,73 @@
           {
             "type": "string",
             "enum": [
-              "Sft",
-              "Dpo",
-              "Kto",
-              "Orpo",
-              "Cpo",
-              "SimPo",
-              "Grpo",
-              "Ppo",
-              "Rloo",
-              "ReinforcePp",
-              "RewardModel"
+              "sft",
+              "dpo",
+              "kto",
+              "orpo",
+              "cpo",
+              "simpo",
+              "grpo",
+              "ppo",
+              "rloo",
+              "reinforce_pp",
+              "reward_model"
             ]
           }
         ],
         "description": "Training algorithm used by a declarative training job."
+      },
+      "TrainingBuiltinRewardConfiguration": {
+        "type": "object",
+        "required": [
+          "kind",
+          "type"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "builtin"
+            ],
+            "description": "Reward or judge signal kind, always 'builtin'."
+          },
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingBuiltinRewardType"
+              }
+            ],
+            "description": "Built-in reward or verifier type."
+          },
+          "configuration": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Optional verifier configuration."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TrainingRewardConfiguration"
+          }
+        ],
+        "description": "Built-in reward or verifier used as a judge."
+      },
+      "TrainingBuiltinRewardType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "exact_match",
+              "regex",
+              "math_equivalence",
+              "unit_tests"
+            ]
+          }
+        ],
+        "description": "Built-in reward or verifier type."
       },
       "TrainingColumnMapping": {
         "type": "object",
@@ -49931,6 +52801,35 @@
         },
         "description": "Mapping from logical training fields to columns in the dataset."
       },
+      "TrainingCompositeRewardConfiguration": {
+        "type": "object",
+        "required": [
+          "kind",
+          "rewards"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "composite"
+            ],
+            "description": "Reward or judge signal kind, always 'composite'."
+          },
+          "rewards": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TrainingWeightedRewardConfiguration"
+            },
+            "description": "Weighted reward signals to combine."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TrainingRewardConfiguration"
+          }
+        ],
+        "description": "Composite reward or judge made from multiple weighted reward signals."
+      },
       "TrainingConfiguration": {
         "type": "object",
         "required": [
@@ -49953,7 +52852,21 @@
                 "$ref": "#/components/schemas/TrainingFramework"
               }
             ],
-            "description": "Training framework. If omitted, the service selects a compatible framework."
+            "description": "Training framework implementation. If omitted, the service selects a compatible framework for the algorithm and records the resolved framework on the job."
+          },
+          "resolvedFramework": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingFramework"
+              }
+            ],
+            "description": "Training framework resolved by the service.",
+            "readOnly": true
+          },
+          "frameworkVersion": {
+            "type": "string",
+            "description": "Version of the resolved training framework used by the service.",
+            "readOnly": true
           },
           "model": {
             "type": "string",
@@ -49967,37 +52880,26 @@
             ],
             "description": "Training and optional evaluation datasets."
           },
-          "reward": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TrainingRewardConfiguration"
-              }
-            ],
-            "description": "Reward signal configuration."
-          },
-          "lora": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TrainingLoraConfiguration"
-              }
-            ],
-            "description": "LoRA adapter configuration."
-          },
-          "rollout": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TrainingRolloutConfiguration"
-              }
-            ],
-            "description": "Rollout generation configuration."
-          },
-          "eval": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TrainingEvalConfiguration"
-              }
-            ],
-            "description": "Evaluation configuration."
+          "hyperparameters": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Algorithm-specific hyperparameters. Strongly typed SDK helpers may project common hyperparameters into richer language-specific types."
+          }
+        },
+        "discriminator": {
+          "propertyName": "algorithm",
+          "mapping": {
+            "sft": "#/components/schemas/SftTrainingConfiguration",
+            "dpo": "#/components/schemas/DpoTrainingConfiguration",
+            "kto": "#/components/schemas/KtoTrainingConfiguration",
+            "orpo": "#/components/schemas/OrpoTrainingConfiguration",
+            "cpo": "#/components/schemas/CpoTrainingConfiguration",
+            "simpo": "#/components/schemas/SimPoTrainingConfiguration",
+            "grpo": "#/components/schemas/GrpoTrainingConfiguration",
+            "ppo": "#/components/schemas/PpoTrainingConfiguration",
+            "rloo": "#/components/schemas/RlooTrainingConfiguration",
+            "reinforce_pp": "#/components/schemas/ReinforcePpTrainingConfiguration",
+            "reward_model": "#/components/schemas/RewardModelTrainingConfiguration"
           }
         },
         "description": "Declarative training recipe. When specified, command must be omitted and environmentImageReference is optional."
@@ -50053,6 +52955,36 @@
         },
         "description": "Dataset configuration for a declarative training job."
       },
+      "TrainingDeploymentRewardConfiguration": {
+        "type": "object",
+        "required": [
+          "kind",
+          "deployment"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "deployment"
+            ],
+            "description": "Reward or judge signal kind, always 'deployment'."
+          },
+          "deployment": {
+            "type": "string",
+            "description": "Model deployment name or resource reference used as the judge."
+          },
+          "rubric": {
+            "type": "string",
+            "description": "Rubric or scoring instruction for the judge deployment."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TrainingRewardConfiguration"
+          }
+        ],
+        "description": "Model deployment used as an LLM judge."
+      },
       "TrainingEntryPointReference": {
         "type": "object",
         "required": [
@@ -50074,12 +53006,12 @@
           {
             "type": "string",
             "enum": [
-              "Gsm8k",
-              "Mmlu",
-              "Humaneval",
-              "Mbpp",
-              "Arc",
-              "Hellaswag"
+              "gsm8k",
+              "mmlu",
+              "humaneval",
+              "mbpp",
+              "arc",
+              "hellaswag"
             ]
           }
         ],
@@ -50108,6 +53040,39 @@
         },
         "description": "Evaluation configuration for a declarative training job."
       },
+      "TrainingEvaluatorRewardConfiguration": {
+        "type": "object",
+        "required": [
+          "kind",
+          "evaluator"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "evaluator"
+            ],
+            "description": "Reward or judge signal kind, always 'evaluator'."
+          },
+          "evaluator": {
+            "type": "string",
+            "description": "Evaluator asset reference."
+          },
+          "inputMapping": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Optional evaluator input mapping."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TrainingRewardConfiguration"
+          }
+        ],
+        "description": "Foundry evaluator used as a judge."
+      },
       "TrainingFramework": {
         "anyOf": [
           {
@@ -50116,16 +53081,46 @@
           {
             "type": "string",
             "enum": [
-              "Trl",
-              "Verl",
-              "OpenRlhf",
-              "NemoRl",
-              "Slime",
-              "TorchForge"
+              "trl",
+              "verl",
+              "open_rlhf",
+              "nemo_rl",
+              "slime",
+              "torch_forge"
             ]
           }
         ],
         "description": "Training framework used to lower a declarative training job into an execution command."
+      },
+      "TrainingFunctionRewardConfiguration": {
+        "type": "object",
+        "required": [
+          "kind",
+          "function"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "function"
+            ],
+            "description": "Reward or judge signal kind, always 'function'."
+          },
+          "function": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingEntryPointReference"
+              }
+            ],
+            "description": "Python callable used to compute reward scores."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TrainingRewardConfiguration"
+          }
+        ],
+        "description": "Python callable used as a judge."
       },
       "TrainingInlineFunctionConfiguration": {
         "type": "object",
@@ -50147,6 +53142,36 @@
           }
         },
         "description": "Inline Python function definition for custom training logic."
+      },
+      "TrainingInlineFunctionRewardConfiguration": {
+        "type": "object",
+        "required": [
+          "kind",
+          "inline_function"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "inline_function"
+            ],
+            "description": "Reward or judge signal kind, always 'inline_function'."
+          },
+          "inline_function": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingInlineFunctionConfiguration"
+              }
+            ],
+            "description": "Inline Python function used to compute reward scores."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TrainingRewardConfiguration"
+          }
+        ],
+        "description": "Inline Python function used as a judge."
       },
       "TrainingInlineFunctionRuntime": {
         "type": "object",
@@ -50254,31 +53279,56 @@
         },
         "description": "LoRA adapter configuration for parameter-efficient fine tuning."
       },
-      "TrainingRewardConfiguration": {
+      "TrainingModelRewardConfiguration": {
         "type": "object",
+        "required": [
+          "kind",
+          "model"
+        ],
         "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "model"
+            ],
+            "description": "Reward or judge signal kind, always 'model'."
+          },
           "model": {
             "type": "string",
-            "description": "Reward model asset reference."
-          },
-          "function": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TrainingEntryPointReference"
-              }
-            ],
-            "description": "Python callable used to compute reward scores."
-          },
-          "inline_function": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TrainingInlineFunctionConfiguration"
-              }
-            ],
-            "description": "Inline Python function used to compute reward scores."
+            "description": "Reward model asset reference used to compute scores."
           }
         },
-        "description": "Reward signal configuration for reinforcement or reward model training."
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TrainingRewardConfiguration"
+          }
+        ],
+        "description": "Learned reward model used as a judge."
+      },
+      "TrainingRewardConfiguration": {
+        "type": "object",
+        "required": [
+          "kind"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "description": "Reward or judge signal kind."
+          }
+        },
+        "discriminator": {
+          "propertyName": "kind",
+          "mapping": {
+            "model": "#/components/schemas/TrainingModelRewardConfiguration",
+            "function": "#/components/schemas/TrainingFunctionRewardConfiguration",
+            "inline_function": "#/components/schemas/TrainingInlineFunctionRewardConfiguration",
+            "builtin": "#/components/schemas/TrainingBuiltinRewardConfiguration",
+            "evaluator": "#/components/schemas/TrainingEvaluatorRewardConfiguration",
+            "deployment": "#/components/schemas/TrainingDeploymentRewardConfiguration",
+            "composite": "#/components/schemas/TrainingCompositeRewardConfiguration"
+          }
+        },
+        "description": "Reward or judge signal configuration for reinforcement or reward model training."
       },
       "TrainingRolloutConfiguration": {
         "type": "object",
@@ -50293,6 +53343,48 @@
               }
             ],
             "description": "Rollout inference engine."
+          },
+          "numGenerations": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of completions to generate for each prompt."
+          },
+          "maxPromptLength": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Maximum prompt length in tokens."
+          },
+          "maxCompletionLength": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Maximum completion length in tokens."
+          },
+          "temperature": {
+            "type": "number",
+            "format": "double",
+            "description": "Sampling temperature for rollout generation."
+          },
+          "topP": {
+            "type": "number",
+            "format": "double",
+            "description": "Nucleus sampling probability for rollout generation."
+          },
+          "stop": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Stop sequences for rollout generation."
+          },
+          "batchSize": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Rollout batch size."
+          },
+          "seed": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Random seed for rollout generation."
           },
           "tensorParallelSize": {
             "type": "integer",
@@ -50316,14 +53408,37 @@
           {
             "type": "string",
             "enum": [
-              "Vllm",
-              "Sglang",
-              "Hf",
-              "MegatronInference"
+              "vllm",
+              "sglang",
+              "hf",
+              "megatron_inference"
             ]
           }
         ],
         "description": "Inference engine used for rollout generation during online reinforcement learning."
+      },
+      "TrainingWeightedRewardConfiguration": {
+        "type": "object",
+        "required": [
+          "reward"
+        ],
+        "properties": {
+          "reward": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TrainingRewardConfiguration"
+              }
+            ],
+            "description": "Reward signal."
+          },
+          "weight": {
+            "type": "number",
+            "format": "double",
+            "description": "Weight applied to this reward signal.",
+            "default": 1
+          }
+        },
+        "description": "Weighted reward signal used in a composite judge."
       },
       "TreatmentEffectType": {
         "anyOf": [

@@ -1,0 +1,66 @@
+{
+    "title": "Models_CreateKtoTrainingJob_MaximumSet",
+    "operationId": "Models_createKtoTrainingJob",
+    "parameters": {
+        "api-version": "v1",
+        "Operation-Id": "create-my-kto-training-job-01",
+        "Foundry-Features": "Jobs=V1Preview",
+        "request": {
+            "name": "qwen-feedback-kto",
+            "version": "1",
+            "description": "KTO model trained from binary desirability feedback",
+            "tags": {
+                "algorithm": "kto"
+            },
+            "model": "azureai://registries/azureml/models/qwen-base/versions/1",
+            "dataset": {
+                "train": "azureai://accounts/my-account/projects/my-project/data/kto-train/versions/1",
+                "eval": "azureai://accounts/my-account/projects/my-project/data/kto-eval/versions/1",
+                "columns": {
+                    "prompt": "prompt",
+                    "response": "response",
+                    "label": "is_desirable"
+                },
+                "dataFormat": {
+                    "chatTemplate": "chatml"
+                }
+            },
+            "runtime": {
+                "framework": "trl",
+                "desirableWeight": 1.0,
+                "undesirableWeight": 1.33,
+                "hyperparameters": {
+                    "learning_rate": 0.00005,
+                    "beta": 0.1
+                },
+                "lora": {
+                    "rank": 16,
+                    "alpha": 32,
+                    "targetModules": "auto"
+                },
+                "packaging": {
+                    "mode": "merged_model"
+                }
+            },
+            "compute": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.CognitiveServices/accounts/my-account/computes/my-cluster",
+                "resources": {
+                    "instanceCount": 2,
+                    "instanceType": "Standard_NC96ads_A100_v4"
+                },
+                "gpuCount": 16
+            }
+        }
+    },
+    "responses": {
+        "202": {
+            "headers": {
+                "Operation-Location": "https://my-account.services.ai.azure.com/api/projects/my-project/models/operations/create-my-kto-training-job-01/result?api-version=v1"
+            },
+            "body": {
+                "operationId": "create-my-kto-training-job-01",
+                "status": "queued"
+            }
+        }
+    }
+}

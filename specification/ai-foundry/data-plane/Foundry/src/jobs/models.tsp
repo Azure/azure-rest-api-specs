@@ -8,7 +8,7 @@ using TypeSpec.Http;
 namespace Azure.AI.Projects;
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Use an extensible union instead of a plain string"
-@doc("Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, or null.")
+@doc("Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, Ray, or null.")
 @discriminator("distributionType")
 model DistributionConfiguration {
   @doc("Specifies the type of distribution framework.")
@@ -43,6 +43,30 @@ model TensorFlowDistribution extends DistributionConfiguration {
 
   @doc("Number of parameter server tasks.")
   parameterServerCount?: int32;
+}
+
+@doc("Ray distribution configuration.")
+model RayDistribution extends DistributionConfiguration {
+  @doc("Specifies the type of distribution framework.")
+  distributionType: "Ray";
+
+  @doc("The port of the head Ray process.")
+  port?: int32;
+
+  @doc("The address of the Ray head node.")
+  address?: string;
+
+  @doc("Whether to start the Ray dashboard GUI.")
+  includeDashboard?: boolean;
+
+  @doc("The port to bind the dashboard server to.")
+  dashboardPort?: int32;
+
+  @doc("Additional arguments passed to ray start on the head node.")
+  headNodeAdditionalArgs?: string;
+
+  @doc("Additional arguments passed to ray start on worker nodes.")
+  workerNodeAdditionalArgs?: string;
 }
 
 @doc("Enum to determine the input/output data delivery mode.")
@@ -202,37 +226,37 @@ union TrainingAlgorithm {
   string,
 
   @doc("Supervised fine tuning.")
-  Sft: "Sft",
+  Sft: "sft",
 
   @doc("Direct preference optimization.")
-  Dpo: "Dpo",
+  Dpo: "dpo",
 
   @doc("Kahneman-Tversky optimization.")
-  Kto: "Kto",
+  Kto: "kto",
 
   @doc("Odds ratio preference optimization.")
-  Orpo: "Orpo",
+  Orpo: "orpo",
 
   @doc("Contrastive preference optimization.")
-  Cpo: "Cpo",
+  Cpo: "cpo",
 
   @doc("Simple preference optimization.")
-  SimPo: "SimPo",
+  SimPo: "simpo",
 
   @doc("Group relative policy optimization.")
-  Grpo: "Grpo",
+  Grpo: "grpo",
 
   @doc("Proximal policy optimization.")
-  Ppo: "Ppo",
+  Ppo: "ppo",
 
   @doc("REINFORCE leave-one-out.")
-  Rloo: "Rloo",
+  Rloo: "rloo",
 
   @doc("REINFORCE++.")
-  ReinforcePp: "ReinforcePp",
+  ReinforcePp: "reinforce_pp",
 
   @doc("Reward model training.")
-  RewardModel: "RewardModel",
+  RewardModel: "reward_model",
 }
 
 @doc("Training framework used to lower a declarative training job into an execution command.")
@@ -240,22 +264,22 @@ union TrainingFramework {
   string,
 
   @doc("TRL framework.")
-  Trl: "Trl",
+  Trl: "trl",
 
   @doc("VERL framework.")
-  Verl: "Verl",
+  Verl: "verl",
 
   @doc("OpenRLHF framework.")
-  OpenRlhf: "OpenRlhf",
+  OpenRlhf: "open_rlhf",
 
   @doc("NeMo RL framework.")
-  NemoRl: "NemoRl",
+  NemoRl: "nemo_rl",
 
   @doc("Slime framework.")
-  Slime: "Slime",
+  Slime: "slime",
 
   @doc("TorchForge framework.")
-  TorchForge: "TorchForge",
+  TorchForge: "torch_forge",
 }
 
 @doc("Chat template used to format conversational training data.")
@@ -263,16 +287,16 @@ union ChatTemplate {
   string,
 
   @doc("ChatML template.")
-  Chatml: "Chatml",
+  Chatml: "chatml",
 
   @doc("Llama 3 chat template.")
   Llama3: "llama-3",
 
   @doc("Zephyr chat template.")
-  Zephyr: "Zephyr",
+  Zephyr: "zephyr",
 
   @doc("Gemma chat template.")
-  Gemma: "Gemma",
+  Gemma: "gemma",
 
   @doc("Phi 3 chat template.")
   Phi3: "phi-3",
@@ -341,17 +365,113 @@ model TrainingInlineFunctionConfiguration {
   runtime?: TrainingInlineFunctionRuntime;
 }
 
-@doc("Reward signal configuration for reinforcement or reward model training.")
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Use an extensible union for forward-compatible reward and judge kinds."
+@doc("Reward or judge signal configuration for reinforcement or reward model training.")
+@discriminator("kind")
 model TrainingRewardConfiguration {
-  @doc("Reward model asset reference.")
-  `model`?: string;
+  @doc("Reward or judge signal kind.")
+  kind: string;
+}
+
+@doc("Learned reward model used as a judge.")
+model TrainingModelRewardConfiguration extends TrainingRewardConfiguration {
+  @doc("Reward or judge signal kind, always 'model'.")
+  kind: "model";
+
+  @doc("Reward model asset reference used to compute scores.")
+  `model`: string;
+}
+
+@doc("Python callable used as a judge.")
+model TrainingFunctionRewardConfiguration extends TrainingRewardConfiguration {
+  @doc("Reward or judge signal kind, always 'function'.")
+  kind: "function";
 
   @doc("Python callable used to compute reward scores.")
-  function?: TrainingEntryPointReference;
+  function: TrainingEntryPointReference;
+}
+
+@doc("Inline Python function used as a judge.")
+model TrainingInlineFunctionRewardConfiguration
+  extends TrainingRewardConfiguration {
+  @doc("Reward or judge signal kind, always 'inline_function'.")
+  kind: "inline_function";
 
   @doc("Inline Python function used to compute reward scores.")
   @encodedName("application/json", "inline_function")
-  inlineFunction?: TrainingInlineFunctionConfiguration;
+  inlineFunction: TrainingInlineFunctionConfiguration;
+}
+
+@doc("Built-in reward or verifier type.")
+union TrainingBuiltinRewardType {
+  string,
+
+  @doc("Exact string match verifier.")
+  exact_match: "exact_match",
+
+  @doc("Regular expression verifier.")
+  regex: "regex",
+
+  @doc("Math equivalence verifier.")
+  math_equivalence: "math_equivalence",
+
+  @doc("Unit test verifier for code generation tasks.")
+  unit_tests: "unit_tests",
+}
+
+@doc("Built-in reward or verifier used as a judge.")
+model TrainingBuiltinRewardConfiguration extends TrainingRewardConfiguration {
+  @doc("Reward or judge signal kind, always 'builtin'.")
+  kind: "builtin";
+
+  @doc("Built-in reward or verifier type.")
+  type: TrainingBuiltinRewardType;
+
+  @doc("Optional verifier configuration.")
+  configuration?: Record<unknown>;
+}
+
+@doc("Foundry evaluator used as a judge.")
+model TrainingEvaluatorRewardConfiguration extends TrainingRewardConfiguration {
+  @doc("Reward or judge signal kind, always 'evaluator'.")
+  kind: "evaluator";
+
+  @doc("Evaluator asset reference.")
+  evaluator: string;
+
+  @doc("Optional evaluator input mapping.")
+  inputMapping?: Record<string>;
+}
+
+@doc("Model deployment used as an LLM judge.")
+model TrainingDeploymentRewardConfiguration
+  extends TrainingRewardConfiguration {
+  @doc("Reward or judge signal kind, always 'deployment'.")
+  kind: "deployment";
+
+  @doc("Model deployment name or resource reference used as the judge.")
+  deployment: string;
+
+  @doc("Rubric or scoring instruction for the judge deployment.")
+  rubric?: string;
+}
+
+@doc("Weighted reward signal used in a composite judge.")
+model TrainingWeightedRewardConfiguration {
+  @doc("Reward signal.")
+  reward: TrainingRewardConfiguration;
+
+  @doc("Weight applied to this reward signal.")
+  weight?: float64 = 1.0;
+}
+
+@doc("Composite reward or judge made from multiple weighted reward signals.")
+model TrainingCompositeRewardConfiguration extends TrainingRewardConfiguration {
+  @doc("Reward or judge signal kind, always 'composite'.")
+  kind: "composite";
+
+  @doc("Weighted reward signals to combine.")
+  rewards: TrainingWeightedRewardConfiguration[];
 }
 
 @doc("LoRA adapter configuration for parameter-efficient fine tuning.")
@@ -377,22 +497,46 @@ union TrainingRolloutEngine {
   string,
 
   @doc("vLLM inference engine.")
-  Vllm: "Vllm",
+  Vllm: "vllm",
 
   @doc("SGLang inference engine.")
-  Sglang: "Sglang",
+  Sglang: "sglang",
 
   @doc("Hugging Face generate-based inference.")
-  Hf: "Hf",
+  Hf: "hf",
 
   @doc("Megatron-Core native inference.")
-  MegatronInference: "MegatronInference",
+  MegatronInference: "megatron_inference",
 }
 
 @doc("Rollout generation configuration for online reinforcement learning.")
 model TrainingRolloutConfiguration {
   @doc("Rollout inference engine.")
   engine: TrainingRolloutEngine;
+
+  @doc("Number of completions to generate for each prompt.")
+  numGenerations?: int32;
+
+  @doc("Maximum prompt length in tokens.")
+  maxPromptLength?: int32;
+
+  @doc("Maximum completion length in tokens.")
+  maxCompletionLength?: int32;
+
+  @doc("Sampling temperature for rollout generation.")
+  temperature?: float64;
+
+  @doc("Nucleus sampling probability for rollout generation.")
+  topP?: float64;
+
+  @doc("Stop sequences for rollout generation.")
+  stop?: string[];
+
+  @doc("Rollout batch size.")
+  batchSize?: int32;
+
+  @doc("Random seed for rollout generation.")
+  seed?: int32;
 
   @doc("Tensor parallel size used by the rollout engine.")
   tensorParallelSize?: int32 = 1;
@@ -406,22 +550,22 @@ union TrainingEvalBenchmark {
   string,
 
   @doc("Grade School Math 8K benchmark.")
-  Gsm8k: "Gsm8k",
+  Gsm8k: "gsm8k",
 
   @doc("Massive Multitask Language Understanding benchmark.")
-  Mmlu: "Mmlu",
+  Mmlu: "mmlu",
 
   @doc("Human-written code generation benchmark.")
-  Humaneval: "Humaneval",
+  Humaneval: "humaneval",
 
   @doc("Mostly Basic Python Programs benchmark.")
-  Mbpp: "Mbpp",
+  Mbpp: "mbpp",
 
   @doc("AI2 Reasoning Challenge benchmark.")
-  Arc: "Arc",
+  Arc: "arc",
 
   @doc("HellaSwag commonsense inference benchmark.")
-  Hellaswag: "Hellaswag",
+  Hellaswag: "hellaswag",
 }
 
 @doc("Evaluation configuration for a declarative training job.")
@@ -436,13 +580,23 @@ model TrainingEvalConfiguration {
   everyNSteps?: int32;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Use an extensible union for forward-compatible training algorithms."
 @doc("Declarative training recipe. When specified, command must be omitted and environmentImageReference is optional.")
+@discriminator("algorithm")
 model TrainingConfiguration {
   @doc("Training algorithm.")
   algorithm: TrainingAlgorithm;
 
-  @doc("Training framework. If omitted, the service selects a compatible framework.")
+  @doc("Training framework implementation. If omitted, the service selects a compatible framework for the algorithm and records the resolved framework on the job.")
   framework?: TrainingFramework;
+
+  @doc("Training framework resolved by the service.")
+  @visibility(Lifecycle.Read)
+  resolvedFramework?: TrainingFramework;
+
+  @doc("Version of the resolved training framework used by the service.")
+  @visibility(Lifecycle.Read)
+  frameworkVersion?: string;
 
   @doc("Base model asset reference.")
   `model`: string;
@@ -450,14 +604,161 @@ model TrainingConfiguration {
   @doc("Training and optional evaluation datasets.")
   dataset: TrainingDatasetConfiguration;
 
+  @doc("Algorithm-specific hyperparameters. Strongly typed SDK helpers may project common hyperparameters into richer language-specific types.")
+  hyperparameters?: Record<unknown>;
+}
+
+@doc("Supervised fine-tuning recipe.")
+model SftTrainingConfiguration extends TrainingConfiguration {
+  @doc("Training algorithm, always 'sft'.")
+  algorithm: "sft";
+
+  @doc("LoRA adapter configuration.")
+  lora?: TrainingLoraConfiguration;
+
+  @doc("Evaluation configuration.")
+  eval?: TrainingEvalConfiguration;
+}
+
+@doc("Direct preference optimization training recipe.")
+model DpoTrainingConfiguration extends TrainingConfiguration {
+  @doc("Training algorithm, always 'dpo'.")
+  algorithm: "dpo";
+
+  @doc("LoRA adapter configuration.")
+  lora?: TrainingLoraConfiguration;
+
+  @doc("Evaluation configuration.")
+  eval?: TrainingEvalConfiguration;
+}
+
+@doc("Kahneman-Tversky optimization training recipe.")
+model KtoTrainingConfiguration extends TrainingConfiguration {
+  @doc("Training algorithm, always 'kto'.")
+  algorithm: "kto";
+
+  @doc("LoRA adapter configuration.")
+  lora?: TrainingLoraConfiguration;
+
+  @doc("Evaluation configuration.")
+  eval?: TrainingEvalConfiguration;
+}
+
+@doc("Odds ratio preference optimization training recipe.")
+model OrpoTrainingConfiguration extends TrainingConfiguration {
+  @doc("Training algorithm, always 'orpo'.")
+  algorithm: "orpo";
+
+  @doc("LoRA adapter configuration.")
+  lora?: TrainingLoraConfiguration;
+
+  @doc("Evaluation configuration.")
+  eval?: TrainingEvalConfiguration;
+}
+
+@doc("Contrastive preference optimization training recipe.")
+model CpoTrainingConfiguration extends TrainingConfiguration {
+  @doc("Training algorithm, always 'cpo'.")
+  algorithm: "cpo";
+
+  @doc("LoRA adapter configuration.")
+  lora?: TrainingLoraConfiguration;
+
+  @doc("Evaluation configuration.")
+  eval?: TrainingEvalConfiguration;
+}
+
+@doc("Simple preference optimization training recipe.")
+model SimPoTrainingConfiguration extends TrainingConfiguration {
+  @doc("Training algorithm, always 'simpo'.")
+  algorithm: "simpo";
+
+  @doc("LoRA adapter configuration.")
+  lora?: TrainingLoraConfiguration;
+
+  @doc("Evaluation configuration.")
+  eval?: TrainingEvalConfiguration;
+}
+
+@doc("Group relative policy optimization training recipe.")
+model GrpoTrainingConfiguration extends TrainingConfiguration {
+  @doc("Training algorithm, always 'grpo'.")
+  algorithm: "grpo";
+
   @doc("Reward signal configuration.")
-  reward?: TrainingRewardConfiguration;
+  reward: TrainingRewardConfiguration;
 
   @doc("LoRA adapter configuration.")
   lora?: TrainingLoraConfiguration;
 
   @doc("Rollout generation configuration.")
   rollout?: TrainingRolloutConfiguration;
+
+  @doc("Evaluation configuration.")
+  eval?: TrainingEvalConfiguration;
+}
+
+@doc("Proximal policy optimization training recipe.")
+model PpoTrainingConfiguration extends TrainingConfiguration {
+  @doc("Training algorithm, always 'ppo'.")
+  algorithm: "ppo";
+
+  @doc("Reward signal configuration.")
+  reward: TrainingRewardConfiguration;
+
+  @doc("LoRA adapter configuration.")
+  lora?: TrainingLoraConfiguration;
+
+  @doc("Rollout generation configuration.")
+  rollout?: TrainingRolloutConfiguration;
+
+  @doc("Evaluation configuration.")
+  eval?: TrainingEvalConfiguration;
+}
+
+@doc("REINFORCE leave-one-out training recipe.")
+model RlooTrainingConfiguration extends TrainingConfiguration {
+  @doc("Training algorithm, always 'rloo'.")
+  algorithm: "rloo";
+
+  @doc("Reward signal configuration.")
+  reward: TrainingRewardConfiguration;
+
+  @doc("LoRA adapter configuration.")
+  lora?: TrainingLoraConfiguration;
+
+  @doc("Rollout generation configuration.")
+  rollout?: TrainingRolloutConfiguration;
+
+  @doc("Evaluation configuration.")
+  eval?: TrainingEvalConfiguration;
+}
+
+@doc("REINFORCE++ training recipe.")
+model ReinforcePpTrainingConfiguration extends TrainingConfiguration {
+  @doc("Training algorithm, always 'reinforce_pp'.")
+  algorithm: "reinforce_pp";
+
+  @doc("Reward signal configuration.")
+  reward: TrainingRewardConfiguration;
+
+  @doc("LoRA adapter configuration.")
+  lora?: TrainingLoraConfiguration;
+
+  @doc("Rollout generation configuration.")
+  rollout?: TrainingRolloutConfiguration;
+
+  @doc("Evaluation configuration.")
+  eval?: TrainingEvalConfiguration;
+}
+
+@doc("Reward model training recipe.")
+model RewardModelTrainingConfiguration extends TrainingConfiguration {
+  @doc("Training algorithm, always 'reward_model'.")
+  algorithm: "reward_model";
+
+  @doc("LoRA adapter configuration.")
+  lora?: TrainingLoraConfiguration;
 
   @doc("Evaluation configuration.")
   eval?: TrainingEvalConfiguration;

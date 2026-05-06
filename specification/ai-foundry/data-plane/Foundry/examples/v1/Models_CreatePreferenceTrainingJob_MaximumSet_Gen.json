@@ -1,0 +1,71 @@
+{
+  "title": "Models_CreatePreferenceTrainingJob_MaximumSet",
+  "operationId": "Models_createPreferenceTrainingJob",
+  "parameters": {
+    "api-version": "v1",
+    "Operation-Id": "create-my-dpo-training-job-01",
+    "Foundry-Features": "Jobs=V1Preview",
+    "request": {
+      "algorithm": "dpo",
+      "name": "qwen-helpful-dpo",
+      "version": "1",
+      "description": "DPO model trained from pairwise preferences",
+      "tags": {
+        "algorithm": "dpo"
+      },
+      "model": "azureai://registries/azureml/models/qwen-base/versions/1",
+      "dataset": {
+        "train": "azureai://accounts/my-account/projects/my-project/data/preference-train/versions/1",
+        "eval": "azureai://accounts/my-account/projects/my-project/data/preference-eval/versions/1",
+        "columns": {
+          "prompt": "prompt",
+          "chosen": "chosen",
+          "rejected": "rejected"
+        },
+        "dataFormat": {
+          "chatTemplate": "chatml"
+        }
+      },
+      "runtime": {
+        "framework": "trl",
+        "reference": {
+          "kind": "base_model"
+        },
+        "hyperparameters": {
+          "learning_rate": 0.00005,
+          "beta": 0.1
+        },
+        "lora": {
+          "rank": 16,
+          "alpha": 32,
+          "targetModules": "auto"
+        },
+        "eval": {
+          "dataset": "azureai://accounts/my-account/projects/my-project/data/preference-eval/versions/1"
+        },
+        "packaging": {
+          "mode": "model_and_adapter"
+        }
+      },
+      "compute": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.CognitiveServices/accounts/my-account/computes/my-cluster",
+        "resources": {
+          "instanceCount": 2,
+          "instanceType": "Standard_NC96ads_A100_v4"
+        },
+        "gpuCount": 16
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "https://my-account.services.ai.azure.com/api/projects/my-project/models/operations/create-my-dpo-training-job-01/result?api-version=v1"
+      },
+      "body": {
+        "operationId": "create-my-dpo-training-job-01",
+        "status": "queued"
+      }
+    }
+  }
+}
