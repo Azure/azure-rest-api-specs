@@ -411,6 +411,12 @@ model IotDpsPropertiesDescription {
    * Portal endpoint to enable CORS for this provisioning service.
    */
   portalOperationsHostName?: string;
+
+  /**
+   * Disables all authentication methods other than Azure RBAC
+   */
+  @added(Versions.v2026_06_01_preview)
+  disableLocalAuth?: boolean;
 }
 
 /**
@@ -936,111 +942,4 @@ union AdrLinkingState {
    * The linked Device Registry namespace has been deleted.
    */
   NamespaceDeleted: "NamespaceDeleted",
-}
-
-/**
- * The managed identity configuration for ADR communication.
- */
-@added(Versions.v2026_06_01_preview)
-model InboundCallerIdentity {
-  /**
-   * The type of managed identity: SystemAssigned or UserAssigned.
-   */
-  type: InboundCallerIdentityType;
-
-  /**
-   * The ARM resource ID of the user-assigned identity. Required when type is UserAssigned.
-   */
-  userAssignedIdentity?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
-    }
-  ]>;
-}
-
-/**
- * The type of managed identity for inbound caller identity.
- */
-@added(Versions.v2026_06_01_preview)
-union InboundCallerIdentityType {
-  string,
-
-  /** System-assigned managed identity. */
-  SystemAssigned: "SystemAssigned",
-
-  /** User-assigned managed identity. */
-  UserAssigned: "UserAssigned",
-}
-
-/**
- * Request body for the initiateLink action.
- */
-@added(Versions.v2026_06_01_preview)
-model LinkInitiateRequest {
-  /**
-   * The ARM resource ID of the Device Registry namespace to link.
-   */
-  namespaceResourceId: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.DeviceRegistry/namespaces";
-    }
-  ]>;
-
-  /**
-   * The unique identifier of the Device Registry namespace.
-   */
-  namespaceUuid: string;
-
-  /**
-   * The data address for the link.
-   */
-  dataAddress: string;
-
-  /**
-   * The managed identity the resource should use for ADR communication.
-   */
-  inboundCallerIdentity: InboundCallerIdentity;
-}
-
-/**
- * Request body for the notifyLink action.
- */
-@added(Versions.v2026_06_01_preview)
-model LinkNotifyRequest {
-  /**
-   * The action to perform: commit, fail, or namespaceDeleted.
-   */
-  action: string;
-
-  /**
-   * The error code if the action is fail.
-   */
-  errorCode?: string;
-
-  /**
-   * The reason for the action.
-   */
-  reason?: string;
-}
-
-/**
- * Request body for the updateLink action.
- */
-@added(Versions.v2026_06_01_preview)
-model LinkUpdateRequest {
-  /**
-   * The managed identity the resource should use for ADR communication.
-   */
-  inboundCallerIdentity?: InboundCallerIdentity;
-}
-
-/**
- * Response body for the preflightLink action.
- */
-@added(Versions.v2026_06_01_preview)
-model LinkPreflightResponse {
-  /**
-   * The current ADR linking state.
-   */
-  adrLinkState?: AdrLinkingState;
 }

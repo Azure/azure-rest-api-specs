@@ -332,6 +332,12 @@
           "DPSCreateWithNamespace": {
             "$ref": "./examples/DPSCreateWithNamespace.json"
           },
+          "DPSCreate_DisableLocalAuthFalse": {
+            "$ref": "./examples/DPSCreate_DisableLocalAuthFalse.json"
+          },
+          "DPSCreate_DisableLocalAuthTrue": {
+            "$ref": "./examples/DPSCreate_DisableLocalAuthTrue.json"
+          },
           "DPSUpdate": {
             "$ref": "./examples/DPSUpdate.json"
           }
@@ -397,6 +403,9 @@
         "x-ms-examples": {
           "DPSPatch": {
             "$ref": "./examples/DPSPatch.json"
+          },
+          "DPSPatch_DisableLocalAuth": {
+            "$ref": "./examples/DPSPatch_DisableLocalAuth.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1087,77 +1096,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/initiateLink": {
-      "post": {
-        "operationId": "ProvisioningServiceDescriptions_InitiateLink",
-        "tags": [
-          "ProvisioningServiceDescriptions"
-        ],
-        "description": "Initiate ADR linking for the provisioning service.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "provisioningServiceName",
-            "in": "path",
-            "description": "Name of the provisioning service to retrieve.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/LinkInitiateRequest"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "204": {
-            "description": "Azure operation completed successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DPSLinkInitiate": {
-            "$ref": "./examples/DPSLinkInitiate.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-internal": true
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/keys/{keyName}/listkeys": {
       "post": {
         "operationId": "IotDpsResource_ListKeysForKeyName",
@@ -1260,77 +1198,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/notifyLink": {
-      "post": {
-        "operationId": "ProvisioningServiceDescriptions_NotifyLink",
-        "tags": [
-          "ProvisioningServiceDescriptions"
-        ],
-        "description": "Notify the provisioning service of ADR linking status changes.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "provisioningServiceName",
-            "in": "path",
-            "description": "Name of the provisioning service to retrieve.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/LinkNotifyRequest"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "204": {
-            "description": "Azure operation completed successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DPSLinkNotify": {
-            "$ref": "./examples/DPSLinkNotify.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-internal": true
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/operationresults/{operationId}": {
       "get": {
         "operationId": "IotDpsResource_GetOperationResult",
@@ -1387,53 +1254,6 @@
             "$ref": "./examples/DPSGetOperationResult.json"
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/preflightLink": {
-      "post": {
-        "operationId": "ProvisioningServiceDescriptions_PreflightLink",
-        "tags": [
-          "ProvisioningServiceDescriptions"
-        ],
-        "description": "Preflight check for ADR linking. Returns linking state and service details.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "provisioningServiceName",
-            "in": "path",
-            "description": "Name of the provisioning service to retrieve.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/LinkPreflightResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DPSLinkPreflight": {
-            "$ref": "./examples/DPSLinkPreflight.json"
-          }
-        },
-        "x-ms-internal": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{resourceName}/privateEndpointConnections": {
@@ -1838,59 +1658,6 @@
           "nextLinkName": "nextLink"
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/updateLink": {
-      "post": {
-        "operationId": "ProvisioningServiceDescriptions_UpdateLink",
-        "tags": [
-          "ProvisioningServiceDescriptions"
-        ],
-        "description": "Update the ADR link configuration for the provisioning service.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "provisioningServiceName",
-            "in": "path",
-            "description": "Name of the provisioning service to retrieve.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/LinkUpdateRequest"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Azure operation completed successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DPSLinkUpdate": {
-            "$ref": "./examples/DPSLinkUpdate.json"
-          }
-        },
-        "x-ms-internal": true
-      }
     }
   },
   "definitions": {
@@ -2238,55 +2005,6 @@
         }
       }
     },
-    "InboundCallerIdentity": {
-      "type": "object",
-      "description": "The managed identity configuration for ADR communication.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/InboundCallerIdentityType",
-          "description": "The type of managed identity: SystemAssigned or UserAssigned."
-        },
-        "userAssignedIdentity": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The ARM resource ID of the user-assigned identity. Required when type is UserAssigned.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
-              }
-            ]
-          }
-        }
-      },
-      "required": [
-        "type"
-      ]
-    },
-    "InboundCallerIdentityType": {
-      "type": "string",
-      "description": "The type of managed identity for inbound caller identity.",
-      "enum": [
-        "SystemAssigned",
-        "UserAssigned"
-      ],
-      "x-ms-enum": {
-        "name": "InboundCallerIdentityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "SystemAssigned",
-            "value": "SystemAssigned",
-            "description": "System-assigned managed identity."
-          },
-          {
-            "name": "UserAssigned",
-            "value": "UserAssigned",
-            "description": "User-assigned managed identity."
-          }
-        ]
-      }
-    },
     "IotDpsPropertiesDescription": {
       "type": "object",
       "description": "the service specific properties of a provisioning service, including keys, linked iot hubs, current state, and system generated properties such as hostname and idScope",
@@ -2374,6 +2092,10 @@
         "portalOperationsHostName": {
           "type": "string",
           "description": "Portal endpoint to enable CORS for this provisioning service."
+        },
+        "disableLocalAuth": {
+          "type": "boolean",
+          "description": "Disables all authentication methods other than Azure RBAC"
         }
       }
     },
@@ -2527,83 +2249,6 @@
       "x-ms-enum": {
         "name": "IpFilterTargetType",
         "modelAsString": false
-      }
-    },
-    "LinkInitiateRequest": {
-      "type": "object",
-      "description": "Request body for the initiateLink action.",
-      "properties": {
-        "namespaceResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The ARM resource ID of the Device Registry namespace to link.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.DeviceRegistry/namespaces"
-              }
-            ]
-          }
-        },
-        "namespaceUuid": {
-          "type": "string",
-          "description": "The unique identifier of the Device Registry namespace."
-        },
-        "dataAddress": {
-          "type": "string",
-          "description": "The data address for the link."
-        },
-        "inboundCallerIdentity": {
-          "$ref": "#/definitions/InboundCallerIdentity",
-          "description": "The managed identity the resource should use for ADR communication."
-        }
-      },
-      "required": [
-        "namespaceResourceId",
-        "namespaceUuid",
-        "dataAddress",
-        "inboundCallerIdentity"
-      ]
-    },
-    "LinkNotifyRequest": {
-      "type": "object",
-      "description": "Request body for the notifyLink action.",
-      "properties": {
-        "action": {
-          "type": "string",
-          "description": "The action to perform: commit, fail, or namespaceDeleted."
-        },
-        "errorCode": {
-          "type": "string",
-          "description": "The error code if the action is fail."
-        },
-        "reason": {
-          "type": "string",
-          "description": "The reason for the action."
-        }
-      },
-      "required": [
-        "action"
-      ]
-    },
-    "LinkPreflightResponse": {
-      "type": "object",
-      "description": "Response body for the preflightLink action.",
-      "properties": {
-        "adrLinkState": {
-          "$ref": "#/definitions/AdrLinkingState",
-          "description": "The current ADR linking state."
-        }
-      }
-    },
-    "LinkUpdateRequest": {
-      "type": "object",
-      "description": "Request body for the updateLink action.",
-      "properties": {
-        "inboundCallerIdentity": {
-          "$ref": "#/definitions/InboundCallerIdentity",
-          "description": "The managed identity the resource should use for ADR communication."
-        }
       }
     },
     "NameAvailabilityInfo": {

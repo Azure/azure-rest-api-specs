@@ -210,60 +210,6 @@ interface ProvisioningServiceDescriptions {
     },
     Error = ErrorDetails
   >;
-
-  /**
-   * Preflight check for ADR linking. Returns linking state and service details.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for x-ms-internal marking"
-  @extension("x-ms-internal", true)
-  @added(Versions.v2026_06_01_preview)
-  @action("preflightLink")
-  preflightLink is ArmResourceActionSync<
-    ProvisioningServiceDescription,
-    void,
-    ArmResponse<LinkPreflightResponse>
-  >;
-
-  /**
-   * Initiate ADR linking for the provisioning service.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for x-ms-internal marking"
-  @extension("x-ms-internal", true)
-  @added(Versions.v2026_06_01_preview)
-  @action("initiateLink")
-  initiateLink is ArmResourceActionAsync<
-    ProvisioningServiceDescription,
-    LinkInitiateRequest,
-    void,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-  >;
-
-  /**
-   * Notify the provisioning service of ADR linking status changes.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for x-ms-internal marking"
-  @extension("x-ms-internal", true)
-  @added(Versions.v2026_06_01_preview)
-  @action("notifyLink")
-  notifyLink is ArmResourceActionAsync<
-    ProvisioningServiceDescription,
-    LinkNotifyRequest,
-    void,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-  >;
-
-  /**
-   * Update the ADR link configuration for the provisioning service.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for x-ms-internal marking"
-  @extension("x-ms-internal", true)
-  @added(Versions.v2026_06_01_preview)
-  @action("updateLink")
-  updateLink is ArmResourceActionSync<
-    ProvisioningServiceDescription,
-    LinkUpdateRequest,
-    void
-  >;
 }
 
 @@doc(ProvisioningServiceDescription.name,
