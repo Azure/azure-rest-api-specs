@@ -355,7 +355,16 @@ model IotDpsPropertiesDescription {
   /**
    * The Device Registry namespace that is linked to the provisioning service.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Version-scoped property using remove/rename/add pattern for version-specific visibility"
+  @removed(Versions.v2026_06_01_preview)
+  @renamedFrom(Versions.v2026_06_01_preview, "deviceRegistryNamespace")
+  deviceRegistryNamespace_v2025_02_01_preview?: DeviceRegistryNamespaceDescription;
+
+  /**
+   * The Device Registry namespace that is linked to the provisioning service.
+   */
   @visibility(Lifecycle.Read)
+  @added(Versions.v2026_06_01_preview)
   deviceRegistryNamespace?: DeviceRegistryNamespaceDescription;
 
   /**
