@@ -496,6 +496,13 @@ enum ImmutabilityPolicySetting {
   /** The immutability policy is unlocked. */
   Unlocked: "Unlocked",
 }
+/** The multipart body parameter. */
+alias MultipartBodyParameterGo = {
+  /** The body of the request. */
+  @body
+  @encode("bytes")
+  body: bytes;
+};
 /** Represents an array of signed identifiers */
 @clientName("SignedIdentifiers", "go")
 model SignedIdentifiersGo is Array<SignedIdentifier>;
@@ -521,6 +528,10 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@alternateType(ExpiryTimeParameter.expiresOn, string, "go");
 @@alternateType(ImmutabilityPolicyModeParameter.immutabilityPolicyMode,
   ImmutabilityPolicySetting,
+  "go"
+);
+@@alternateType(MultipartBodyParameter.body,
+  MultipartBodyParameterGo.body,
   "go"
 );
 @@alternateType(RehydratePriorityResponseHeader.rehydratePriority,
