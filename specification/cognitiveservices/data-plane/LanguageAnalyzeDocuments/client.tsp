@@ -592,5 +592,6 @@ namespace Language.AnalyzeTextClientCustomizations;
   "csharp"
 );
 @@clientName(redactionCharacter.equals, "EqualSign", "csharp");
+@@clientName(EntityMaskPolicy, "EntityMaskRedactionPolicy", "csharp");
 
 @@clientName(DocumentWarning.targetRef, "TargetReference", "csharp");
