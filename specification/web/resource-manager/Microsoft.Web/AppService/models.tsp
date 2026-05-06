@@ -2088,6 +2088,11 @@ model SiteProperties {
   enabled?: boolean;
 
   /**
+   * <code>true</code> if site scoped certificates are enabled; otherwise, <code>false</code>.
+   */
+  siteScopedCertificatesEnabled?: boolean = false;
+
+  /**
    * Enabled hostnames for the app.Hostnames need to be assigned (see HostNames) AND enabled. Otherwise,
    * the app is not served on those hostnames.
    */
@@ -9466,6 +9471,11 @@ model SitePatchResourceProperties {
    * <code>true</code> if the app is enabled; otherwise, <code>false</code>. Setting this value to false disables the app (takes the app offline).
    */
   enabled?: boolean;
+
+  /**
+   * <code>true</code> if site scoped certificates are enabled; otherwise, <code>false</code>.
+   */
+  siteScopedCertificatesEnabled?: boolean = false;
 
   /**
    * Enabled hostnames for the app.Hostnames need to be assigned (see HostNames) AND enabled. Otherwise,
