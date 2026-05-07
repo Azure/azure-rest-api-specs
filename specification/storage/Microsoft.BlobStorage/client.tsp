@@ -979,6 +979,138 @@ op setAccessPolicyRequiredContainerAcl is StorageOperationNoBody<
   "rust"
 );
 
+/** ----- This section overrides operations for Rust to omit structured message parameters ----- */
+/** The Append Block operation commits a new block of data to the end of an append blob. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
+@put
+@sharedRoute
+@route("?comp=appendblock")
+op appendBlockNoStructuredMessage is StorageOperationRequestBody<
+  {
+    /** The data to upload. */
+    ...BodyParameter;
+
+    ...TimeoutParameter;
+    ...ContentLengthParameter;
+    ...ContentMd5Parameter;
+    ...ContentCrc64Parameter;
+    ...LeaseIdOptionalParameter;
+    ...BlobConditionMaxSizeParameter;
+    ...BlobConditionAppendPosParameter;
+    ...EncryptionKeyParameter;
+    ...EncryptionKeySha256Parameter;
+    ...EncryptionAlgorithmParameter;
+    ...EncryptionScopeParameter;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
+    ...IfNoneMatchParameter;
+    ...IfMatchParameter;
+    ...IfTagsParameter;
+  },
+  {
+    @statusCode statusCode: 201;
+    ...EtagResponseHeader;
+    ...LastModifiedResponseHeader;
+    ...ContentMd5ResponseHeader;
+    ...ContentCrc64ResponseHeader;
+    ...BlobAppendOffsetResponseHeader;
+    ...BlobCommittedBlockCountResponseHeader;
+    ...RequestServerEncryptedResponseHeader;
+    ...EncryptionKeySha256ResponseHeader;
+    ...EncryptionScopeResponseHeader;
+  },
+  "application/octet-stream"
+>;
+
+@@override(AppendBlob.appendBlock, appendBlockNoStructuredMessage, "rust");
+
+/** The Stage Block operation creates a new block to be committed as part of a blob. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
+@put
+@sharedRoute
+@route("?comp=block")
+op stageBlockNoStructuredMessage is StorageOperationRequestBody<
+  {
+    ...BlockIdParameter;
+    ...ContentLengthParameter;
+    ...ContentMd5Parameter;
+    ...ContentCrc64Parameter;
+    ...BodyParameter;
+    ...TimeoutParameter;
+    ...LeaseIdOptionalParameter;
+    ...EncryptionKeyParameter;
+    ...EncryptionKeySha256Parameter;
+    ...EncryptionAlgorithmParameter;
+    ...EncryptionScopeParameter;
+  },
+  {
+    @statusCode statusCode: 201;
+    ...ContentMd5ResponseHeader;
+    ...ContentCrc64ResponseHeader;
+    ...RequestServerEncryptedResponseHeader;
+    ...EncryptionKeySha256ResponseHeader;
+    ...EncryptionScopeResponseHeader;
+  },
+  "application/octet-stream"
+>;
+
+@@override(BlockBlob.stageBlock, stageBlockNoStructuredMessage, "rust");
+
+/** The Upload Pages operation writes a range of pages to a page blob. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
+@put
+@sharedRoute
+@route("?comp=page")
+op uploadPagesNoStructuredMessage is StorageOperationRequestBody<
+  {
+    /** The data to upload. */
+    ...BodyParameter;
+
+    ...ContentLengthParameter;
+    ...ContentMd5Parameter;
+    ...ContentCrc64Parameter;
+    ...TimeoutParameter;
+    ...RangeParameterRequired;
+    ...LeaseIdOptionalParameter;
+    ...EncryptionKeyParameter;
+    ...EncryptionKeySha256Parameter;
+    ...EncryptionAlgorithmParameter;
+    ...EncryptionScopeParameter;
+    ...IfSequenceNumberLessThanOrEqualToParameter;
+    ...IfSequenceNumberLessThanParameter;
+    ...IfSequenceNumberEqualToParameter;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
+    ...IfNoneMatchParameter;
+    ...IfMatchParameter;
+    ...IfTagsParameter;
+    ...PageWriteParameter<"update">;
+  },
+  {
+    @statusCode statusCode: 201;
+    ...EtagResponseHeader;
+    ...LastModifiedResponseHeader;
+    ...ContentMd5ResponseHeader;
+    ...ContentCrc64ResponseHeader;
+    ...BlobSequenceNumberResponseHeader;
+    ...RequestServerEncryptedResponseHeader;
+    ...EncryptionKeySha256ResponseHeader;
+    ...EncryptionScopeResponseHeader;
+  },
+  "application/octet-stream"
+>;
+
+@@override(PageBlob.uploadPages, uploadPagesNoStructuredMessage, "rust");
+
 /** An HTTP byte range, e.g. "bytes=0-1023". */
 @alternateType(
   {
