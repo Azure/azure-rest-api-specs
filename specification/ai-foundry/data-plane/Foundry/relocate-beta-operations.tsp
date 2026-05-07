@@ -85,6 +85,13 @@ interface TrainingJobs {}
 @@clientLocation(Azure.AI.Projects.TrainingJobs.beginCancel, TrainingJobs);
 @@clientLocation(Azure.AI.Projects.TrainingJobs.showServices, TrainingJobs);
 
+@@clientLocation(Azure.AI.Projects.TrainingJobOperations.getOperationResult,
+  TrainingJobs
+);
+@@clientLocation(Azure.AI.Projects.TrainingJobOperations.getOperationStatus,
+  TrainingJobs
+);
+
 @@clientLocation(Azure.AI.Projects.TrainingJobAttempts.listAttempts,
   TrainingJobs
 );
@@ -99,6 +106,9 @@ interface TrainingJobs {}
   TrainingJobs
 );
 @@clientLocation(Azure.AI.Projects.TrainingJobAttemptArtifacts.getAttemptArtifactContentInfo,
+  TrainingJobs
+);
+@@clientLocation(Azure.AI.Projects.TrainingJobAttemptArtifacts.getAttemptArtifactContentInfoByPrefix,
   TrainingJobs
 );
 @@clientLocation(Azure.AI.Projects.TrainingJobAttemptArtifacts.downloadAttemptArtifact,
