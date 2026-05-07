@@ -3095,7 +3095,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/FilterBlobResponse"
+              "$ref": "#/definitions/FilteredBlobResponse"
             },
             "headers": {
               "Date": {
@@ -11989,7 +11989,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/FilterBlobResponse"
+              "$ref": "#/definitions/FilteredBlobResponse"
             },
             "headers": {
               "Date": {
@@ -12382,7 +12382,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ListBlobsHierarchySegmentResponse"
+              "$ref": "#/definitions/ListBlobsHierarchicalResponse"
             },
             "headers": {
               "Date": {
@@ -15368,57 +15368,6 @@
         ]
       }
     },
-    "BlobFlatListSegment": {
-      "type": "object",
-      "description": "The blob flat list segment.",
-      "properties": {
-        "Blob": {
-          "type": "array",
-          "description": "The blob items.",
-          "items": {
-            "$ref": "#/definitions/BlobItem"
-          },
-          "xml": {
-            "wrapped": false
-          },
-          "x-ms-client-name": "blobItems"
-        }
-      },
-      "required": [
-        "Blob"
-      ]
-    },
-    "BlobHierarchyListSegment": {
-      "type": "object",
-      "description": "Represents an array of blobs.",
-      "properties": {
-        "Blob": {
-          "type": "array",
-          "description": "The blob items",
-          "items": {
-            "$ref": "#/definitions/BlobItem"
-          },
-          "xml": {
-            "wrapped": false
-          },
-          "x-ms-client-name": "blobItems"
-        },
-        "BlobPrefix": {
-          "type": "array",
-          "description": "The blob prefixes.",
-          "items": {
-            "$ref": "#/definitions/BlobPrefix"
-          },
-          "xml": {
-            "wrapped": false
-          },
-          "x-ms-client-name": "blobPrefixes"
-        }
-      },
-      "required": [
-        "Blob"
-      ]
-    },
     "BlobItem": {
       "type": "object",
       "description": "An Azure Storage Blob",
@@ -16387,7 +16336,31 @@
         "name": "Blob"
       }
     },
-    "FilterBlobResponse": {
+    "FilterBlobsIncludeItem": {
+      "type": "string",
+      "description": "The filter blobs includes.",
+      "enum": [
+        "none",
+        "versions"
+      ],
+      "x-ms-enum": {
+        "name": "FilterBlobsIncludeItem",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "None",
+            "value": "none",
+            "description": "The filter includes no versions."
+          },
+          {
+            "name": "Versions",
+            "value": "versions",
+            "description": "The filter includes n versions."
+          }
+        ]
+      }
+    },
+    "FilteredBlobResponse": {
       "type": "object",
       "description": "The result of a Filter Blobs API call",
       "properties": {
@@ -16428,30 +16401,6 @@
       ],
       "xml": {
         "name": "EnumerationResults"
-      }
-    },
-    "FilterBlobsIncludeItem": {
-      "type": "string",
-      "description": "The filter blobs includes.",
-      "enum": [
-        "none",
-        "versions"
-      ],
-      "x-ms-enum": {
-        "name": "FilterBlobsIncludeItem",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "None",
-            "value": "none",
-            "description": "The filter includes no versions."
-          },
-          {
-            "name": "Versions",
-            "value": "versions",
-            "description": "The filter includes n versions."
-          }
-        ]
       }
     },
     "GeoReplication": {
@@ -16663,9 +16612,9 @@
         ]
       }
     },
-    "ListBlobsHierarchySegmentResponse": {
+    "ListBlobsHierarchicalResponse": {
       "type": "object",
-      "description": "An enumeration of blobs",
+      "description": "An enumeration of blobs.",
       "properties": {
         "ServiceEndpoint": {
           "type": "string",
@@ -16705,9 +16654,26 @@
           "x-ms-client-name": "maxResults"
         },
         "Blobs": {
-          "$ref": "#/definitions/BlobHierarchyListSegment",
-          "description": "The blob segment.",
-          "x-ms-client-name": "segment"
+          "type": "array",
+          "description": "The blob items.",
+          "items": {
+            "$ref": "#/definitions/BlobItem"
+          },
+          "xml": {
+            "wrapped": true
+          },
+          "x-ms-client-name": "blobItems"
+        },
+        "BlobPrefix": {
+          "type": "array",
+          "description": "The blob prefixes.",
+          "items": {
+            "$ref": "#/definitions/BlobPrefix"
+          },
+          "xml": {
+            "wrapped": false
+          },
+          "x-ms-client-name": "blobPrefixes"
         },
         "NextMarker": {
           "type": "string",
@@ -16890,7 +16856,7 @@
     },
     "ListContainersResponse": {
       "type": "object",
-      "description": "The list containers response",
+      "description": "The list containers response.",
       "properties": {
         "ServiceEndpoint": {
           "type": "string",
