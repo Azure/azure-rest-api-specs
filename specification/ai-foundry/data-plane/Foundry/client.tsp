@@ -12,8 +12,10 @@ import "./src/connections/routes.tsp";
 import "./src/datasets/routes.tsp";
 import "./src/deployments/routes.tsp";
 import "./src/indexes/routes.tsp";
-import "./src/mlflow/routes.tsp";
 import "./src/models/routes.tsp";
+
+// Beta SDK operations without preview feature headers
+import "./src/mlflow/routes.tsp";
 
 // Beta operations (preview routes, requiring opt-in request header)
 import "./src/evaluation-taxonomies/routes.tsp";
