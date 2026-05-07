@@ -350,6 +350,7 @@ op privateLinkResourcesGetCustomization(
   "ArmSecurityStandards",
   "go"
 );
+@@clientLocation(SecurityStandards.get, "ArmSecurityStandards", "go");
 @@clientLocation(SecurityStandards.delete, "ArmSecurityStandards", "go");
 @@clientLocation(SecurityStandards.list, "ArmSecurityStandards", "go");
 @@clientName(SecurityStandardsAPI.SecurityStandardProperties,
