@@ -68,8 +68,8 @@ using Microsoft.DocumentDB;
   "MongoClusterFirewallRuleProperties",
   "csharp"
 );
-@@clientName(FirewallRuleProperties.startIpAddress, "startIPAddress");
-@@clientName(FirewallRuleProperties.endIpAddress, "endIPAddress");
+@@clientName(FirewallRuleProperties.startIpAddress, "startIPAddress", "csharp");
+@@clientName(FirewallRuleProperties.endIpAddress, "endIPAddress", "csharp");
 @@clientName(PrivateEndpointConnectionResource,
   "MongoClusterPrivateEndpointConnectionResource",
   "csharp"
@@ -97,6 +97,7 @@ using Microsoft.DocumentDB;
 );
 @@clientName(DataApiMode, "MongoClusterDataApiMode", "csharp");
 @@clientName(DatabaseRole, "MongoClusterDatabaseRole", "csharp");
+@@clientName(NetworkBypassMode, "MongoClusterNetworkBypassMode", "csharp");
 @@clientName(EntraIdentityProvider,
   "MongoClusterEntraIdentityProvider",
   "csharp"

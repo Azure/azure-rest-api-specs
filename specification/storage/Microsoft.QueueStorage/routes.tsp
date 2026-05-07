@@ -334,6 +334,7 @@ interface Queue {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+  #suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "The sdk has been generated with the appropriate customizations"
   @delete
   @route("messages")
   clear is StorageOperationNoBody<
