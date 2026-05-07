@@ -169,7 +169,7 @@ model SoftDeletedSqlDatabaseGetResult
     Resource = SoftDeletedSqlDatabaseGetResult,
     KeyName = "databaseName",
     SegmentName = "softDeletedSqlDatabases",
-    NamePattern = "^[^/\\\\#?]+$"
+    NamePattern = ""
   >;
 }
 
@@ -235,7 +235,7 @@ model SoftDeletedSqlContainerGetResult
     Resource = SoftDeletedSqlContainerGetResult,
     KeyName = "containerName",
     SegmentName = "softDeletedSqlContainers",
-    NamePattern = "^[^/\\\\#?]+$"
+    NamePattern = ""
   >;
 }
 
@@ -395,7 +395,6 @@ interface SoftDeletedSqlDatabases {
     /**
      * Cosmos DB SQL database name.
      */
-    @pattern("^[^/\\\\#?]+$")
     @path
     databaseName: string,
   ): ArmResponse<SoftDeletedSqlDatabaseGetResult> | Azure.ResourceManager.CommonTypes.ErrorResponse;
@@ -447,7 +446,6 @@ interface SoftDeletedSqlDatabases {
     /**
      * Cosmos DB SQL database name.
      */
-    @pattern("^[^/\\\\#?]+$")
     @path
     databaseName: string,
 
@@ -484,7 +482,6 @@ interface SoftDeletedSqlDatabases {
     /**
      * Cosmos DB SQL database name.
      */
-    @pattern("^[^/\\\\#?]+$")
     @path
     databaseName: string,
 
@@ -529,14 +526,12 @@ interface SoftDeletedSqlContainers {
     /**
      * Cosmos DB SQL database name.
      */
-    @pattern("^[^/\\\\#?]+$")
     @path
     databaseName: string,
 
     /**
      * Cosmos DB SQL container name.
      */
-    @pattern("^[^/\\\\#?]+$")
     @path
     containerName: string,
   ): ArmResponse<SoftDeletedSqlContainerGetResult> | Azure.ResourceManager.CommonTypes.ErrorResponse;
@@ -566,7 +561,6 @@ interface SoftDeletedSqlContainers {
     /**
      * Cosmos DB SQL database name.
      */
-    @pattern("^[^/\\\\#?]+$")
     @path
     databaseName: string,
   ): ArmResponse<SoftDeletedSqlContainersListResult> | Azure.ResourceManager.CommonTypes.ErrorResponse;
@@ -595,14 +589,12 @@ interface SoftDeletedSqlContainers {
     /**
      * Cosmos DB SQL database name.
      */
-    @pattern("^[^/\\\\#?]+$")
     @path
     databaseName: string,
 
     /**
      * Cosmos DB SQL container name.
      */
-    @pattern("^[^/\\\\#?]+$")
     @path
     containerName: string,
 
@@ -639,14 +631,12 @@ interface SoftDeletedSqlContainers {
     /**
      * Cosmos DB SQL database name.
      */
-    @pattern("^[^/\\\\#?]+$")
     @path
     databaseName: string,
 
     /**
      * Cosmos DB SQL container name.
      */
-    @pattern("^[^/\\\\#?]+$")
     @path
     containerName: string,
 
