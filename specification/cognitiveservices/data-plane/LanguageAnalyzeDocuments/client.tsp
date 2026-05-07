@@ -520,6 +520,10 @@ namespace Language.AnalyzeTextClientCustomizations;
   "AbstractiveSummarizationActionContent",
   "csharp"
 );
+@@clientName(AbstractiveSummarizationTaskParameters.loggingOptOut
+  "ShouldLog",
+  "csharp"
+);
 
 @@clientName(ExtractiveSummarizationLROTask,
   "ExtractiveSummarizationOperationAction",
