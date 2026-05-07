@@ -2168,79 +2168,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/changeRing": {
-      "post": {
-        "operationId": "Clusters_ChangeRing",
-        "tags": [
-          "Clusters"
-        ],
-        "description": "Changes ring of a cluster",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "clusterName",
-            "in": "path",
-            "description": "The name of the cluster.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "changeRingRequest",
-            "in": "body",
-            "description": "Change ring request payload",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ChangeRingRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Cluster"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Change cluster ring": {
-            "$ref": "./examples/ChangeClusterRing.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/configureRemoteSupport": {
       "post": {
         "operationId": "Clusters_ConfigureRemoteSupport",
@@ -4965,23 +4892,6 @@
             "description": "The system will notify the user when update content becomes available."
           }
         ]
-      }
-    },
-    "ChangeRingRequest": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ChangeRingRequestProperties"
-        }
-      }
-    },
-    "ChangeRingRequestProperties": {
-      "type": "object",
-      "properties": {
-        "targetRing": {
-          "type": "string",
-          "description": "The target ring for the cluster."
-        }
       }
     },
     "CheckUpdatesRequest": {
