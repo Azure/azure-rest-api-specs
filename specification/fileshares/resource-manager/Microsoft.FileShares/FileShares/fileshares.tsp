@@ -182,7 +182,7 @@ model FileShareProperties {
   @doc("Protocol settings specific NFS.")
   nfsProtocolProperties?: NfsProtocolProperties;
 
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   @doc("The set of properties for control public access.")
   publicAccessProperties?: PublicAccessProperties;
 
