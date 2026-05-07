@@ -1127,44 +1127,11 @@
           "type": "boolean",
           "description": "Whether this is the default accelerator configuration.",
           "default": false
-        },
-        "failureThreshold": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of consecutive failures required to consider the probe as failed."
-        },
-        "successThreshold": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of consecutive successes required to consider the probe as successful."
-        },
-        "path": {
-          "type": "string",
-          "description": "The path for the probe request."
-        },
-        "port": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The port number for the probe."
-        },
-        "scheme": {
-          "type": "string",
-          "description": "The scheme for the probe (e.g., HTTP, HTTPS)."
-        },
-        "httpMethod": {
-          "type": "string",
-          "description": "The HTTP method for the probe request."
         }
       },
       "required": [
         "acceleratorType",
-        "numberOfAcceleratorsPerModelInstance",
-        "failureThreshold",
-        "successThreshold",
-        "path",
-        "port",
-        "scheme",
-        "httpMethod"
+        "numberOfAcceleratorsPerModelInstance"
       ]
     },
     "AssetVersion": {
@@ -1551,11 +1518,44 @@
           "type": "string",
           "format": "duration",
           "description": "The timeout duration for each probe."
+        },
+        "failureThreshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of consecutive failures required to consider the probe as failed."
+        },
+        "successThreshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of consecutive successes required to consider the probe as successful."
+        },
+        "path": {
+          "type": "string",
+          "description": "The path for the probe request."
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port number for the probe."
+        },
+        "scheme": {
+          "type": "string",
+          "description": "The scheme for the probe (e.g., HTTP, HTTPS)."
+        },
+        "httpMethod": {
+          "type": "string",
+          "description": "The HTTP method for the probe request."
         }
       },
       "required": [
         "period",
-        "timeout"
+        "timeout",
+        "failureThreshold",
+        "successThreshold",
+        "path",
+        "port",
+        "scheme",
+        "httpMethod"
       ]
     },
     "Prompt": {
