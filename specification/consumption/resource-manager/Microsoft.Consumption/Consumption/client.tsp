@@ -313,6 +313,23 @@ using Azure.Core;
 @@alternateType(BudgetProperties.amount, decimal | null, "csharp");
 @@alternateType(BudgetProperties.timeGrain, TimeGrainType | null, "csharp");
 @@alternateType(BudgetProperties.category, CategoryType | null, "csharp");
+// Restore the v1.x SDK base type: ConsumptionReservationRecommendation must
+// inherit ResourceData. The cleaner approach
+// `@@Legacy.hierarchyBuilding(ReservationRecommendation, Foundations.Resource, "csharp")`
+// crashes the MPG generator with
+// `System.InvalidOperationException: Sequence contains no matching element`
+// in `InheritableSystemObjectModelVisitor.UpdateFullConstructor`, because
+// `ReservationRecommendation` is not bound to an `@armResourceOperations`
+// resource (its routes are list-only on `ReservationRecommendationsOperationGroup`)
+// and the visitor cannot synthesize a ResourceData base for a non-resource
+// model that already spreads `Foundations.Resource`.
+//
+// Workaround: declare csharp-only TypeSpec replacement models that `extends`
+// `Foundations.Resource` (which the MPG generator translates to
+// `: ResourceData`), redeclare every non-Resource property, re-declare the
+// Legacy / Modern discriminator subclasses against the new base, then swap
+// them in for csharp via @@alternateType so OpenAPI / other languages stay
+// unchanged.
 @@alternateType(ReservationRecommendation,
   ConsumptionReservationRecommendation,
   "csharp"
@@ -326,14 +343,6 @@ using Azure.Core;
   "csharp"
 );
 
-// Restore the v1.x SDK base type: ConsumptionReservationRecommendation must
-// inherit ResourceData. The spec model uses `...Foundations.Resource` (spread)
-// instead of `extends Foundations.Resource`, so the C# MPG generator emits a
-// plain class. Declare TypeSpec replacements that use `extends` (which the
-// MPG generator translates to `: ResourceData`), redeclare every non-Resource
-// property, and re-declare the Legacy / Modern discriminator subclasses
-// against the new base. Then swap them in for C# only via @@alternateType so
-// OpenAPI / other languages stay unchanged.
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
