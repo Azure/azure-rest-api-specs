@@ -12,3 +12,28 @@ namespace Microsoft.Monitor;
 // Shared models (EvaluationType, BaselineProperties, Signal, etc.) remain public
 // because they are also used by the public Slis interface.
 @@access(SloView.sliSignalPreview, Access.internal);
+
+// Rename ambiguous/generic types to be SLI-prefixed in the C# SDK so that they
+// are unambiguous within the broader Azure.ResourceManager.Monitor.* namespace
+// family and don't collide with similarly named types in other Azure SDKs.
+@@clientName(AmwAccount, "SliAmwAccount", "csharp");
+@@clientName(Baseline, "SliBaseline", "csharp");
+@@clientName(BaselineProperties, "SliBaselineProperties", "csharp");
+@@clientName(Category, "SliCategory", "csharp");
+@@clientName(Condition, "SliCondition", "csharp");
+@@clientName(ConditionOperator, "SliConditionOperator", "csharp");
+@@clientName(EvaluationCalculationType, "SliEvaluationCalculationType", "csharp");
+@@clientName(EvaluationType, "SliEvaluationType", "csharp");
+@@clientName(ExecutionState, "SliExecutionState", "csharp");
+@@clientName(Metric, "SliMetric", "csharp");
+@@clientName(ProvisioningState, "SliProvisioningState", "csharp");
+@@clientName(SamplingType, "SliSamplingType", "csharp");
+@@clientName(ScalarFunction, "SliScalarFunction", "csharp");
+@@clientName(Signal, "SliSignal", "csharp");
+@@clientName(SignalSource, "SliSignalSource", "csharp");
+
+// Per Azure SDK naming guidelines, DateTimeOffset properties must end in `On` or `At`.
+@@clientName(SliResource.streamingRuleLastUpdatedTimestamp,
+  "StreamingRuleLastUpdatedOn",
+  "csharp"
+);
