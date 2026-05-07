@@ -7,9 +7,31 @@
     "resourceGroupName": "rgfleets",
     "fleetName": "fleet1",
     "managedNamespaceName": "namespace1",
-    "properties": {},
-    "tags": {
-      "tag2": "tagValue2"
+    "properties": {
+      "tags": {
+        "tag2": "tagValue2"
+      },
+      "properties": {
+        "managedNamespaceProperties": {
+          "labels": {
+            "key1": "updatedValue1",
+            "newKey": "newValue"
+          }
+        },
+        "propagationPolicy": {
+          "type": "Placement",
+          "placementProfile": {
+            "defaultClusterResourcePlacement": {
+              "rolloutStrategy": {
+                "type": "External",
+                "clusterUpdateStrategy": {
+                  "name": "my-staged-update-strategy"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "responses": {
@@ -21,7 +43,8 @@
         "properties": {
           "managedNamespaceProperties": {
             "labels": {
-              "key1": "value1"
+              "key1": "updatedValue1",
+              "newKey": "newValue"
             },
             "annotations": {
               "key2": "value2"
@@ -89,6 +112,12 @@
                       "effect": "NoSchedule"
                     }
                   ]
+                },
+                "rolloutStrategy": {
+                  "type": "External",
+                  "clusterUpdateStrategy": {
+                    "name": "my-staged-update-strategy"
+                  }
                 }
               }
             }

@@ -48,17 +48,17 @@ model UpdateStage {
   afterStageWaitInSeconds?: int32;
 
   @doc("""
-  Limits the number of member (cluster) upgrade failures tolerated within this stage.
-  Failures are evaluated over all members within all groups within this stage. 
-  Accepts either:
-    • A fixed count n, where n >= 0
-    • A percentage p%, where 0 <= p <= 100
-      Percentage resolves at stage start using: resolvedThreshold = ceil(p * N), 
-      where p is the percentage as a decimal and N is the number of members in this stage at scope start.
-  Examples:
-    • "3"   --> up to 3 member upgrade failures are tolerated within this stage. The 4th failure would cause the entire stage to fail.
-    • "25%" --> up to 25% of the members in this stage can fail their upgrade before the stage is considered failed.
-  """)
+    Limits the number of member (cluster) upgrade failures tolerated within this stage.
+    Failures are evaluated over all members within all groups within this stage. 
+    Accepts either:
+      • A fixed count n, where n >= 0
+      • A percentage p%, where 0 <= p <= 100
+        Percentage resolves at stage start using: resolvedThreshold = ceil(p * N), 
+        where p is the percentage as a decimal and N is the number of members in this stage at scope start.
+    Examples:
+      • "3"   --> up to 3 member upgrade failures are tolerated within this stage. The 4th failure would cause the entire stage to fail.
+      • "25%" --> up to 25% of the members in this stage can fail their upgrade before the stage is considered failed.
+    """)
   @pattern("^(?:0|[1-9]\\d*|(?:0|[1-9]\\d?|100)%)$")
   @added(Versions.v2026_05_01_preview)
   maxAllowedFailures?: string;
@@ -123,17 +123,17 @@ model UpdateGroup {
   name: string;
 
   @doc("""
-  Limits the number of member (cluster) upgrade failures tolerated within this group.
-  Failures are evaluated over members within this group only. 
-  Accepts either:
-    • A fixed count n, where n >= 0
-    • A percentage p%, where 0 <= p <= 100
-      Percentage resolves at stage start using: resolvedThreshold = ceil(p * N), 
-      where p is the percentage as als decimal and N is the number of members in this group at scope start.
-  Examples:
-    • "3"   --> up to 3 member upgrade failures are tolerated within this group. The 4th failure would cause the entire stage to fail.
-    • "25%" --> up to 25% of the members in this group can fail their upgrade before the group is considered failed.
-  """)
+    Limits the number of member (cluster) upgrade failures tolerated within this group.
+    Failures are evaluated over members within this group only. 
+    Accepts either:
+      • A fixed count n, where n >= 0
+      • A percentage p%, where 0 <= p <= 100
+        Percentage resolves at stage start using: resolvedThreshold = ceil(p * N), 
+        where p is the percentage as als decimal and N is the number of members in this group at scope start.
+    Examples:
+      • "3"   --> up to 3 member upgrade failures are tolerated within this group. The 4th failure would cause the entire stage to fail.
+      • "25%" --> up to 25% of the members in this group can fail their upgrade before the group is considered failed.
+    """)
   @pattern("^(?:0|[1-9]\\d*|(?:0|[1-9]\\d?|100)%)$")
   @added(Versions.v2026_05_01_preview)
   maxAllowedFailures?: string;
