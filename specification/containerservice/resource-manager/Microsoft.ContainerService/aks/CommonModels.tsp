@@ -3251,7 +3251,7 @@ model ManagedClusterSecurityProfileDefender {
   /**
    * Microsoft Defender settings for security gating, validates container images eligibility for deployment based on Defender for Containers security findings. Using Admission Controller, it either audits or prevents the deployment of images that do not meet security standards.
    */
-  @added(Versions.v2026_03_02_preview)
+  @added(Versions.v2026_03_01)
   securityGating?: ManagedClusterSecurityProfileDefenderSecurityGating;
 }
 
@@ -3268,7 +3268,7 @@ model ManagedClusterSecurityProfileDefenderSecurityMonitoring {
 /**
  * Microsoft Defender settings for security gating, validates container images eligibility for deployment based on Defender for Containers security findings. Using Admission Controller, it either audits or prevents the deployment of images that do not meet security standards.
  */
-@added(Versions.v2026_03_02_preview)
+@added(Versions.v2026_03_01)
 model ManagedClusterSecurityProfileDefenderSecurityGating {
   /**
    * Whether to enable Defender security gating. When enabled, the gating feature will scan container images and audit or block the deployment of images that do not meet security standards according to the configured security rules.
@@ -3288,7 +3288,7 @@ model ManagedClusterSecurityProfileDefenderSecurityGating {
 }
 
 /** Identity information used by Defender security gating to access container registries. */
-@added(Versions.v2026_03_02_preview)
+@added(Versions.v2026_03_01)
 model ManagedClusterSecurityProfileDefenderSecurityGatingIdentitiesItem {
   /**
    * The container registry for which the identity will be used; the identity specified here should have a federated identity credential attached to it.
