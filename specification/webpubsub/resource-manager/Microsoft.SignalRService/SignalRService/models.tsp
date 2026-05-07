@@ -85,19 +85,15 @@ union PrivateLinkServiceConnectionStatus {
 union CreatedByType {
   string,
   /** The entity was created by a user. */
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Member has an inline doc comment immediately above."
   User: "User",
 
   /** The entity was created by an application. */
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Member has an inline doc comment immediately above."
   Application: "Application",
 
   /** The entity was created by a managed identity. */
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Member has an inline doc comment immediately above."
   ManagedIdentity: "ManagedIdentity",
 
   /** The entity was created by a key. */
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Member has an inline doc comment immediately above."
   Key: "Key",
 }
 
