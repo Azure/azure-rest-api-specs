@@ -5802,6 +5802,76 @@
           "description": "Session minutes remaining (if available)",
           "minimum": 0,
           "readOnly": true
+        },
+        "remainingFileCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Remaining file count (if totals are final)",
+          "minimum": 0,
+          "readOnly": true
+        },
+        "remainingDirectoryCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Remaining directory count (if totals are final)",
+          "minimum": 0,
+          "readOnly": true
+        },
+        "remainingDeleteCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Remaining delete count (if totals are final)",
+          "minimum": 0,
+          "readOnly": true
+        },
+        "remainingLogicalSizeBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Remaining logical size in bytes (if totals are final)",
+          "minimum": 0,
+          "readOnly": true
+        },
+        "isRemainingFinal": {
+          "type": "boolean",
+          "description": "Whether the remaining counts are final",
+          "readOnly": true
+        },
+        "recentItemsPerSecond": {
+          "type": "number",
+          "format": "double",
+          "description": "Recent throughput in items per second",
+          "readOnly": true
+        },
+        "recentMegabytesPerSecond": {
+          "type": "number",
+          "format": "double",
+          "description": "Recent throughput in megabytes per second",
+          "readOnly": true
+        },
+        "inProgressLargeFilePath": {
+          "type": "string",
+          "description": "Path of large file currently in progress",
+          "readOnly": true
+        },
+        "inProgressLargeFileSizeBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Size in bytes of large file currently in progress",
+          "minimum": 0,
+          "readOnly": true
+        },
+        "inProgressLargeFilePercentComplete": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Percent complete (0-100) of large file currently in progress",
+          "minimum": 0,
+          "maximum": 100,
+          "readOnly": true
+        },
+        "warning": {
+          "$ref": "#/definitions/ServerEndpointSyncSessionWarningType",
+          "description": "Warning type (if any)",
+          "readOnly": true
         }
       }
     },
@@ -5838,6 +5908,28 @@
           {
             "name": "InitialFullDownload",
             "value": "InitialFullDownload"
+          }
+        ]
+      }
+    },
+    "ServerEndpointSyncSessionWarningType": {
+      "type": "string",
+      "description": "Warning types for sync sessions.",
+      "enum": [
+        "NoWarning",
+        "BlockedByLargeFile"
+      ],
+      "x-ms-enum": {
+        "name": "ServerEndpointSyncSessionWarningType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NoWarning",
+            "value": "NoWarning"
+          },
+          {
+            "name": "BlockedByLargeFile",
+            "value": "BlockedByLargeFile"
           }
         ]
       }
