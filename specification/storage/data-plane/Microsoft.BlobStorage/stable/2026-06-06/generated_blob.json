@@ -15426,6 +15426,37 @@
         ]
       }
     },
+    "BlobHierarchyList": {
+      "type": "object",
+      "description": "Represents an array of blobs.",
+      "properties": {
+        "Blob": {
+          "type": "array",
+          "description": "The blob items.",
+          "items": {
+            "$ref": "#/definitions/BlobItem"
+          },
+          "xml": {
+            "wrapped": false
+          },
+          "x-ms-client-name": "blobItems"
+        },
+        "BlobPrefix": {
+          "type": "array",
+          "description": "The blob prefixes.",
+          "items": {
+            "$ref": "#/definitions/BlobPrefix"
+          },
+          "xml": {
+            "wrapped": false
+          },
+          "x-ms-client-name": "blobPrefixes"
+        }
+      },
+      "required": [
+        "Blob"
+      ]
+    },
     "BlobItem": {
       "type": "object",
       "description": "An Azure Storage Blob",
@@ -16717,26 +16748,9 @@
           "x-ms-client-name": "maxResults"
         },
         "Blobs": {
-          "type": "array",
-          "description": "The blob items.",
-          "items": {
-            "$ref": "#/definitions/BlobItem"
-          },
-          "xml": {
-            "wrapped": true
-          },
-          "x-ms-client-name": "blobItems"
-        },
-        "BlobPrefix": {
-          "type": "array",
-          "description": "The blob prefixes.",
-          "items": {
-            "$ref": "#/definitions/BlobPrefix"
-          },
-          "xml": {
-            "wrapped": false
-          },
-          "x-ms-client-name": "blobPrefixes"
+          "$ref": "#/definitions/BlobHierarchyList",
+          "description": "The list of hierarchical blobs.",
+          "x-ms-client-name": "hierarchicalList"
         },
         "NextMarker": {
           "type": "string",
