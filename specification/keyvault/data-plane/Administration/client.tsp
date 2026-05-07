@@ -5,7 +5,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-@TypeSpec.Versioning.useDependency(KeyVault.Versions.`v7.6_preview.2`)
+@TypeSpec.Versioning.useDependency(KeyVault.Versions.v2026_01_01_preview)
 namespace ClientCustomizations;
 
 //Java customizations
@@ -78,6 +78,28 @@ interface KeyVaultClient {
   getSettings is KeyVault.getSettings;
 }
 
+@client(
+  {
+    name: "KeyVaultEkmRestClient",
+    service: KeyVault,
+  },
+  "csharp"
+)
+interface KeyVaultEkmRestClient {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  getEkmConnection is KeyVault.getEkmConnection;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  getEkmCertificate is KeyVault.getEkmCertificate;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  checkEkmConnection is KeyVault.checkEkmConnection;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  createEkmConnection is KeyVault.createEkmConnection;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  updateEkmConnection is KeyVault.updateEkmConnection;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  deleteEkmConnection is KeyVault.deleteEkmConnection;
+}
+
 @@access(KeyVault.fullBackup, Access.internal, "csharp");
 @@access(KeyVault.fullRestoreOperation, Access.internal, "csharp");
 @@access(KeyVault.fullBackupStatus, Access.internal, "csharp");
@@ -98,6 +120,13 @@ interface KeyVaultClient {
 @@access(KeyVault.RoleAssignments.create, Access.internal, "csharp");
 @@access(KeyVault.RoleAssignments.get, Access.internal, "csharp");
 @@access(KeyVault.RoleAssignments.listForScope, Access.internal, "csharp");
+
+@@access(KeyVault.getEkmConnection, Access.internal, "csharp");
+@@access(KeyVault.getEkmCertificate, Access.internal, "csharp");
+@@access(KeyVault.checkEkmConnection, Access.internal, "csharp");
+@@access(KeyVault.createEkmConnection, Access.internal, "csharp");
+@@access(KeyVault.updateEkmConnection, Access.internal, "csharp");
+@@access(KeyVault.deleteEkmConnection, Access.internal, "csharp");
 
 @@clientName(KeyVault.Setting.type, "SettingType", "csharp");
 @@clientName(KeyVault.Setting.value, "Content", "csharp");
