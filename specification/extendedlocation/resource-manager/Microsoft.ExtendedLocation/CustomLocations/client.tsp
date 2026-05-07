@@ -17,7 +17,10 @@ using Azure.ResourceManager;
   "csharp"
 );
 @@clientName(HostType, "CustomLocationHostType", "csharp");
-@@clientName(EnabledResourceType, "CustomLocationEnabledResourceType", "csharp");
+@@clientName(EnabledResourceType,
+  "CustomLocationEnabledResourceType",
+  "csharp"
+);
 @@clientName(EnabledResourceTypePropertiesTypesMetadataItem,
   "CustomLocationEnabledResourceTypeMetadata",
   "csharp"
@@ -38,10 +41,7 @@ using Azure.ResourceManager;
 );
 
 // Rename CustomLocationOperation to avoid AZC0033 naming violation
-@@clientName(customLocationOperation,
-  "CustomLocationOperationInfo",
-  "csharp"
-);
+@@clientName(customLocationOperation, "CustomLocationOperationInfo", "csharp");
 
 // Fix camelCase resource/model names to PascalCase for C#
 @@clientName(customLocation, "CustomLocation", "csharp");
