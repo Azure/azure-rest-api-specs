@@ -40,7 +40,6 @@ namespace Microsoft.Monitor {
     /**
      * Properties related to the metrics container in the Azure Monitor Workspace
      */
-    @visibility(Lifecycle.Read)
     metrics?: AzureMonitorWorkspaceMetrics;
 
     /**
