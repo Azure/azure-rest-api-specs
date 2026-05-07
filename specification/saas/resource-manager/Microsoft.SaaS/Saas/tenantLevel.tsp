@@ -73,5 +73,6 @@ interface SaasOperationResults {
   ): ArmResponse<SaasResource> | {
     @statusCode statusCode: 202;
     @header("Retry-After") retryAfter?: int32;
+    @header("Location") location?: string;
   } | ErrorResponse;
 }
