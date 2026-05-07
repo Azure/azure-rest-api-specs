@@ -137,3 +137,12 @@ namespace Azure.ResourceManager.Models {
   Azure.ResourceManager.Models.SubResource,
   "csharp"
 );
+
+@@clientName(FirewallRuleProperties.startIpAddress,
+  "$DO_NOT_NORMALIZE$startIpAddress",
+  "javascript"
+);
+@@clientName(FirewallRuleProperties.endIpAddress,
+  "$DO_NOT_NORMALIZE$endIpAddress",
+  "javascript"
+);
