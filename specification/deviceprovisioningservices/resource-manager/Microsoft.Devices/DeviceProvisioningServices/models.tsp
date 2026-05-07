@@ -546,6 +546,24 @@ model DeviceRegistryNamespaceDescription {
   ]>;
 
   /**
+   * Unique identifier of the linked Device Registry namespace.
+   */
+  @added(Versions.v2026_06_01_preview)
+  namespaceUuid: Azure.Core.uuid;
+
+  /**
+   * Data endpoint exposed by the linked Device Registry namespace.
+   */
+  @added(Versions.v2026_06_01_preview)
+  dataEndpoint: string;
+
+  /**
+   * Azure region of the linked Device Registry namespace.
+   */
+  @added(Versions.v2026_06_01_preview)
+  region?: Azure.Core.azureLocation;
+
+  /**
    * The ADR linking state of this namespace.
    */
   @visibility(Lifecycle.Read)
