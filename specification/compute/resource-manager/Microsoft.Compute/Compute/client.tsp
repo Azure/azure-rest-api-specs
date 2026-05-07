@@ -846,7 +846,7 @@ model VMSizePropertiesWithAdditionalProperties {
   "csharp"
 );
 @@clientName(VMScaleSetLifecycleHookEventTargetResource,
-  "VmScaleSetLifecycleHookEventTargetResource",
+  "VmScaleSetLifecycleHookEventTarget",
   "csharp"
 );
 @@clientName(VMScaleSetLifecycleHookEventProperties,
