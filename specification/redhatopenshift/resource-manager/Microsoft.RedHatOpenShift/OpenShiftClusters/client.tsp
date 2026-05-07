@@ -2,93 +2,96 @@ import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
+using Azure.Core;
+using Microsoft.RedHatOpenShift;
 
 @@clientName(Microsoft.RedHatOpenShift,
   "AzureRedHatOpenShiftClient",
   "javascript,python"
 );
 
-@@clientName(Microsoft.RedHatOpenShift.APIServerProfile,
+@@clientName(APIServerProfile, "ApiServerProfile", "java");
+@@clientName(EffectiveOutboundIP, "EffectiveOutboundIp", "java");
+@@clientName(PreconfiguredNSG, "PreconfiguredNsg", "java");
+@@clientName(NetworkProfile.preconfiguredNSG, "preconfiguredNsg", "java");
+
+//@@clientName(Microsoft.RedHatOpenShift, "RedHatOpenShiftManagementClient", "csharp");
+@@clientName(APIServerProfile, "OpenShiftApiServerProfile", "csharp");
+@@clientName(ProvisioningState, "OpenShiftClusterProvisioningState", "csharp");
+@@clientName(Visibility, "OpenShiftVisibility", "csharp");
+@@clientName(NetworkProfile, "OpenShiftNetworkProfile", "csharp");
+@@clientName(ClusterProfile, "OpenShiftClusterProfile", "csharp");
+@@clientName(MasterProfile, "OpenShiftMasterProfile", "csharp");
+@@clientName(WorkerProfile, "OpenShiftWorkerProfile", "csharp");
+@@clientName(IngressProfile, "OpenShiftIngressProfile", "csharp");
+@@clientName(LoadBalancerProfile, "OpenShiftLoadBalancerProfile", "csharp");
+@@clientName(ServicePrincipalProfile,
+  "OpenShiftServicePrincipalProfile",
+  "csharp"
+);
+@@clientName(OutboundType, "OpenShiftOutboundType", "csharp");
+@@clientName(OutboundType.Loadbalancer, "LoadBalancer", "csharp");
+@@clientName(EncryptionAtHost, "OpenShiftEncryptionAtHost", "csharp");
+@@clientName(FipsValidatedModules, "OpenShiftFipsValidatedModule", "csharp");
+@@clientName(PreconfiguredNSG, "OpenShiftPreconfiguredNsg", "csharp");
+@@clientName(PlatformWorkloadIdentity,
+  "OpenShiftPlatformWorkloadIdentity",
+  "csharp"
+);
+@@clientName(PlatformWorkloadIdentityProfile,
+  "OpenShiftPlatformWorkloadIdentityProfile",
+  "csharp"
+);
+@@clientName(PlatformWorkloadIdentityRole,
+  "OpenShiftPlatformWorkloadIdentityRole",
+  "csharp"
+);
+@@clientName(ConsoleProfile, "OpenShiftConsoleProfile", "csharp");
+@@clientName(ManagedOutboundIPs, "OpenShiftManagedOutboundIPs", "csharp");
+@@clientName(OpenShiftClusterProperties.apiserverProfile,
   "ApiServerProfile",
-  "java"
-);
-@@clientName(Microsoft.RedHatOpenShift.EffectiveOutboundIP,
-  "EffectiveOutboundIp",
-  "java"
-);
-@@clientName(Microsoft.RedHatOpenShift.PreconfiguredNSG,
-  "PreconfiguredNsg",
-  "java"
-);
-@@clientName(Microsoft.RedHatOpenShift.NetworkProfile.preconfiguredNSG,
-  "preconfiguredNsg",
-  "java"
-);
-
-// ---- C# rename mappings (preserve names from previous AutoRest-based SDK) ----
-@@clientName(Microsoft.RedHatOpenShift, "RedHatOpenShiftManagementClient", "csharp");
-
-@@clientName(Microsoft.RedHatOpenShift.APIServerProfile, "OpenShiftApiServerProfile", "csharp");
-@@clientName(Microsoft.RedHatOpenShift.ProvisioningState, "OpenShiftClusterProvisioningState", "csharp");
-@@clientName(Microsoft.RedHatOpenShift.Visibility, "OpenShiftVisibility", "csharp");
-@@clientName(Microsoft.RedHatOpenShift.NetworkProfile, "OpenShiftNetworkProfile", "csharp");
-@@clientName(Microsoft.RedHatOpenShift.ClusterProfile, "OpenShiftClusterProfile", "csharp");
-@@clientName(Microsoft.RedHatOpenShift.MasterProfile, "OpenShiftMasterProfile", "csharp");
-@@clientName(Microsoft.RedHatOpenShift.WorkerProfile, "OpenShiftWorkerProfile", "csharp");
-@@clientName(Microsoft.RedHatOpenShift.IngressProfile, "OpenShiftIngressProfile", "csharp");
-@@clientName(Microsoft.RedHatOpenShift.LoadBalancerProfile, "OpenShiftLoadBalancerProfile", "csharp");
-@@clientName(Microsoft.RedHatOpenShift.ServicePrincipalProfile, "OpenShiftServicePrincipalProfile", "csharp");
-@@clientName(Microsoft.RedHatOpenShift.OutboundType, "OpenShiftOutboundType", "csharp");
-@@clientName(Microsoft.RedHatOpenShift.OutboundType.Loadbalancer, "LoadBalancer", "csharp");
-@@clientName(Microsoft.RedHatOpenShift.EncryptionAtHost, "OpenShiftEncryptionAtHost", "csharp");
-@@clientName(Microsoft.RedHatOpenShift.FipsValidatedModules, "OpenShiftFipsValidatedModules", "csharp");
-@@clientName(Microsoft.RedHatOpenShift.PreconfiguredNSG, "OpenShiftPreconfiguredNsg", "csharp");
-@@clientName(Microsoft.RedHatOpenShift.PlatformWorkloadIdentity, "OpenShiftPlatformWorkloadIdentity", "csharp");
-@@clientName(Microsoft.RedHatOpenShift.PlatformWorkloadIdentityProfile, "OpenShiftPlatformWorkloadIdentityProfile", "csharp");
-@@clientName(Microsoft.RedHatOpenShift.PlatformWorkloadIdentityRole, "OpenShiftPlatformWorkloadIdentityRole", "csharp");
-@@clientName(Microsoft.RedHatOpenShift.ConsoleProfile, "OpenShiftConsoleProfile", "csharp");
-@@clientName(Microsoft.RedHatOpenShift.ManagedOutboundIPs, "OpenShiftManagedOutboundIPs", "csharp");
-
-// Property casing fixes for C#
-@@clientName(Microsoft.RedHatOpenShift.OpenShiftClusterProperties.apiserverProfile,
-  "apiServerProfile",
   "csharp"
 );
-@@clientName(Microsoft.RedHatOpenShift.NetworkProfile.preconfiguredNSG,
-  "preconfiguredNsg",
+@@clientName(NetworkProfile.preconfiguredNSG, "PreconfiguredNsg", "csharp");
+@@clientName(NetworkProfile.preconfiguredNSG, "PreconfiguredNsg", "csharp");
+@@clientName(PlatformWorkloadIdentityRoleSet,
+  "OpenShiftPlatformWorkloadIdentityRoleSet",
   "csharp"
 );
 
-// arm-id formatted properties (mirrors autorest format-by-name-rules)
-@@alternateType(Microsoft.RedHatOpenShift.MasterProfile.subnetId,
+@@alternateType(MasterProfile.subnetId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(Microsoft.RedHatOpenShift.MasterProfile.diskEncryptionSetId,
+@@alternateType(MasterProfile.diskEncryptionSetId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(Microsoft.RedHatOpenShift.WorkerProfile.subnetId,
+@@alternateType(WorkerProfile.subnetId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(Microsoft.RedHatOpenShift.WorkerProfile.diskEncryptionSetId,
+@@alternateType(WorkerProfile.diskEncryptionSetId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(Microsoft.RedHatOpenShift.ClusterProfile.resourceGroupId,
+@@alternateType(ClusterProfile.resourceGroupId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(Microsoft.RedHatOpenShift.PlatformWorkloadIdentity.resourceId,
+@@alternateType(PlatformWorkloadIdentity.resourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(Microsoft.RedHatOpenShift.PlatformWorkloadIdentityRole.roleDefinitionId,
+@@alternateType(PlatformWorkloadIdentityRole.roleDefinitionId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(Microsoft.RedHatOpenShift.EffectiveOutboundIP.id,
+@@alternateType(EffectiveOutboundIP.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
+@@alternateType(APIServerProfile.url, url, "csharp");
+@@alternateType(APIServerProfile.ip, ipV4Address, "csharp");
+@@alternateType(ConsoleProfile.url, url, "csharp");
+@@alternateType(IngressProfile.ip, ipV4Address, "csharp");
