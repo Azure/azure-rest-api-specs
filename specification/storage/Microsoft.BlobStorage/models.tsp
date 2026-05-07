@@ -2141,7 +2141,7 @@ enum BlobCopySourceTags {
 
 /** The copy source authorization header parameter. */
 alias CopySourceAuthorizationParameter = {
-  /** The Bearer Token that authorizes the copy source. */
+  /** Only the Bearer authorization scheme is supported, and the value must be a valid OAuth access token for the copy source. */
   @header("x-ms-copy-source-authorization")
   copySourceAuthorization?: string;
 };
@@ -2646,7 +2646,7 @@ alias MetadataHeaders = {
 
 // NOTE: this does not explicitly let emitters know that this is a special type of header used for collection of object replication headers. Logic should be handwritten to handle this.
 alias ObjectReplicationHeaders = {
-  /** Specifies the object replication rules. */
+  /** The object replication status headers. */
   @alternateType(Record<string>, "rust,javascript,python,go")
   @header("x-ms-or")
   objectReplicationRules?: string;

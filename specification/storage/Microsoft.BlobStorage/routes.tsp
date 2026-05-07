@@ -683,12 +683,12 @@ interface Blob {
     ...RangeParameter,
     ...LeaseIdOptionalParameter,
 
-    /** When set to true, the service returns the MD5 hash for the range, as long as the range is less than or equal to 4 MiB in size. */
+    /** When set to true and specified together with the `Range` header, the service returns the MD5 hash for the range, as long as the range is less than or equal to 4 MiB in size. */
     @clientName("rangeGetContentMD5", "javascript")
     @header("x-ms-range-get-content-md5")
     rangeGetContentMd5?: boolean,
 
-    /** When set to true, the service returns the CRC64 hash for the range, as long as the range is less than or equal to 4 MiB in size. */
+    /** When set to true and the request includes a Range header, the service returns the CRC64 hash for the range, as long as the range is less than or equal to 4 MiB in size. */
     @header("x-ms-range-get-content-crc64")
     rangeGetContentCrc64?: boolean,
 
@@ -909,7 +909,7 @@ interface Blob {
     }
   >;
 
-  /** Deletes the specified blob. */
+  /** Deletes the specified blob. If blob soft delete is enabled, the blob is marked for deletion and can be recovered until the retention period expires. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @delete
