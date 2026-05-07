@@ -520,7 +520,7 @@ namespace Language.AnalyzeTextClientCustomizations;
   "AbstractiveSummarizationActionContent",
   "csharp"
 );
-@@clientName(AbstractiveSummarizationTaskParameters.loggingOptOut
+@@clientName(AbstractiveSummarizationTaskParameters.loggingOptOut,
   "ShouldLog",
   "csharp"
 );
@@ -593,6 +593,10 @@ namespace Language.AnalyzeTextClientCustomizations;
 );
 @@clientName(analyzeDocumentsCancelJob,
   "AnalyzeDocumentsCancelOperation",
+  "csharp"
+);
+@@clientName(SummaryLengthBucket,
+  "SummarySize",
   "csharp"
 );
 @@clientName(redactionCharacter.equals, "EqualSign", "csharp");
