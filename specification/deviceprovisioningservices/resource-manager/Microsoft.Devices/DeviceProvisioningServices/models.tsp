@@ -566,9 +566,8 @@ model DeviceRegistryNamespaceDescription {
   /**
    * The ADR linking state of this namespace.
    */
-  @visibility(Lifecycle.Read)
   @added(Versions.v2026_06_01_preview)
-  adrLinkState?: AdrLinkingState;
+  adrLinkState: AdrLinkingState;
 }
 
 /**
