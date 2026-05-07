@@ -3039,7 +3039,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/FilterBlobSegment"
+              "$ref": "#/definitions/FilterBlobResponse"
             },
             "headers": {
               "Date": {
@@ -6612,7 +6612,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ListContainersSegmentResponse"
+              "$ref": "#/definitions/ListContainersResponse"
             },
             "headers": {
               "Date": {
@@ -11753,7 +11753,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/FilterBlobSegment"
+              "$ref": "#/definitions/FilterBlobResponse"
             },
             "headers": {
               "Date": {
@@ -16099,7 +16099,7 @@
         "name": "Blob"
       }
     },
-    "FilterBlobSegment": {
+    "FilterBlobResponse": {
       "type": "object",
       "description": "The result of the Find Blobs by Tags API.",
       "properties": {
@@ -16264,11 +16264,13 @@
       "properties": {
         "Start": {
           "type": "string",
+          "format": "date-time",
           "description": "The date-time the key is active.",
           "x-ms-client-name": "start"
         },
         "Expiry": {
           "type": "string",
+          "format": "date-time",
           "description": "The date-time the key expires.",
           "x-ms-client-name": "expiry"
         }
@@ -16538,9 +16540,15 @@
           "x-ms-client-name": "maxResults"
         },
         "Blobs": {
-          "$ref": "#/definitions/BlobFlatListSegment",
+          "type": "array",
           "description": "The list of blobs.",
-          "x-ms-client-name": "segment"
+          "items": {
+            "$ref": "#/definitions/BlobItem"
+          },
+          "xml": {
+            "wrapped": true
+          },
+          "x-ms-client-name": "blobItems"
         },
         "NextMarker": {
           "type": "string",
@@ -16587,7 +16595,7 @@
         ]
       }
     },
-    "ListContainersSegmentResponse": {
+    "ListContainersResponse": {
       "type": "object",
       "description": "The result of the List Containers API.",
       "properties": {
@@ -17932,13 +17940,13 @@
         },
         "SignedStart": {
           "type": "string",
-          "format": "date-time-rfc7231",
+          "format": "date-time",
           "description": "The date-time the key is active.",
           "x-ms-client-name": "signedStart"
         },
         "SignedExpiry": {
           "type": "string",
-          "format": "date-time-rfc7231",
+          "format": "date-time",
           "description": "The date-time the key expires.",
           "x-ms-client-name": "signedExpiry"
         },

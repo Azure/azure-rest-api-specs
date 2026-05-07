@@ -469,7 +469,7 @@ model SignedIdentifier {
 
 /** The result of the Find Blobs by Tags API. */
 @Xml.name("EnumerationResults")
-model FilterBlobSegment {
+model FilterBlobResponse {
   /** The service endpoint. */
   @Xml.attribute
   @Xml.name("ServiceEndpoint")
@@ -479,9 +479,12 @@ model FilterBlobSegment {
   @Xml.name("Where") where: string;
 
   /** The list of filtered blobs. */
-  @Xml.name("Blobs") blobs: FilterBlobItem[];
+  @pageItems
+  @Xml.name("Blobs")
+  blobs: FilterBlobItem[];
 
   /** An opaque string value that identifies the portion of the result set to be returned with the next operation. Use this value in the next request to continue the listing operation. */
+  @continuationToken
   @Xml.name("NextMarker")
   nextMarker?: string;
 }
@@ -580,7 +583,7 @@ enum SkuName {
 
 /** The result of the List Containers API. */
 @Xml.name("EnumerationResults")
-model ListContainersSegmentResponse {
+model ListContainersResponse {
   /** The service endpoint. */
   @Xml.attribute
   @Xml.name("ServiceEndpoint")
@@ -713,10 +716,10 @@ union GeoReplicationStatusType {
 /** Key information. */
 model KeyInfo {
   /** The date-time the key is active. */
-  @Xml.name("Start") start: string;
+  @Xml.name("Start") start: utcDateTime;
 
   /** The date-time the key expires. */
-  @Xml.name("Expiry") expiry: string;
+  @Xml.name("Expiry") expiry: utcDateTime;
 
   /** The delegated user tenant ID in Entra ID. */
   @Xml.name("DelegatedUserTid")
@@ -733,12 +736,10 @@ model UserDelegationKey {
   @Xml.name("SignedTid") signedTid: uuid;
 
   /** The date-time the key is active. */
-  @encode("rfc7231")
   @Xml.name("SignedStart")
   signedStart: utcDateTime;
 
   /** The date-time the key expires. */
-  @encode("rfc7231")
   @Xml.name("SignedExpiry")
   signedExpiry: utcDateTime;
 
@@ -1312,8 +1313,9 @@ model ListBlobsResponse {
   @Xml.name("MaxResults") maxResults?: int32;
 
   /** The list of blobs. */
+  @pageItems
   @Xml.name("Blobs")
-  segment: BlobFlatListSegment;
+  blobItems: BlobItem[];
 
   /** An opaque string value that identifies the portion of the result set to be returned with the next operation. Use this value in the next request to continue the listing operation. */
   @continuationToken
@@ -2763,6 +2765,7 @@ alias StructuredBodyTypeResponseHeader = {
 
 alias StructuredContentLengthParameter = {
   /** Required if the request body is a structured message. Specifies the length of the blob/file content inside the message body. Will always be smaller than Content-Length. */
+  @access(Access.internal)
   @header("x-ms-structured-content-length")
   structuredContentLength?: int64;
 };
