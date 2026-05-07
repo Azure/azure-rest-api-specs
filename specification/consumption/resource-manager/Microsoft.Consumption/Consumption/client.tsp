@@ -282,26 +282,20 @@ using Azure.Core;
   azureLocation,
   "csharp"
 );
-@@alternateType(ReservationRecommendationDetailsModel.etag,
-  EtagProperty.etag,
-  "csharp"
-);
-@@alternateType(Budget.eTag, EtagProperty.etag, "csharp");
-@@alternateType(Balance.etag, EtagProperty.etag, "csharp");
-@@alternateType(UsageDetail.etag, EtagProperty.etag, "csharp");
-@@alternateType(ChargeSummary.eTag, EtagProperty.etag, "csharp");
-@@alternateType(ManagementGroupAggregatedCostResult.etag,
-  EtagProperty.etag,
-  "csharp"
-);
-@@alternateType(EventSummary.eTag, EtagProperty.etag, "csharp");
-@@alternateType(LotSummary.eTag, EtagProperty.etag, "csharp");
-@@alternateType(ReservationDetail.etag, EtagProperty.etag, "csharp");
-@@alternateType(ReservationSummary.etag, EtagProperty.etag, "csharp");
-@@alternateType(Marketplace.etag, EtagProperty.etag, "csharp");
-@@alternateType(CreditSummary.eTag, EtagProperty.etag, "csharp");
-@@alternateType(PriceSheetResult.etag, EtagProperty.etag, "csharp");
-@@alternateType(TagsResult.eTag, EtagProperty.etag, "csharp");
+@@alternateType(ReservationRecommendationDetailsModel.etag, eTag, "csharp");
+@@alternateType(Budget.eTag, eTag, "csharp");
+@@alternateType(Balance.etag, eTag, "csharp");
+@@alternateType(UsageDetail.etag, eTag, "csharp");
+@@alternateType(ChargeSummary.eTag, eTag, "csharp");
+@@alternateType(ManagementGroupAggregatedCostResult.etag, eTag, "csharp");
+@@alternateType(EventSummary.eTag, eTag, "csharp");
+@@alternateType(LotSummary.eTag, eTag, "csharp");
+@@alternateType(ReservationDetail.etag, eTag, "csharp");
+@@alternateType(ReservationSummary.etag, eTag, "csharp");
+@@alternateType(Marketplace.etag, eTag, "csharp");
+@@alternateType(CreditSummary.eTag, eTag, "csharp");
+@@alternateType(PriceSheetResult.etag, eTag, "csharp");
+@@alternateType(TagsResult.eTag, eTag, "csharp");
 @@alternateType(LegacyUsageDetailProperties.meterId, uuid, "csharp");
 @@alternateType(ModernUsageDetailProperties.meterId, uuid, "csharp");
 @@alternateType(LegacyReservationRecommendationProperties.meterId,
@@ -356,7 +350,7 @@ model ConsumptionReservationRecommendation
 
   /** The etag for the resource. */
   @visibility(Lifecycle.Read)
-  etag?: EtagProperty.etag;
+  etag?: eTag;
 
   /** Resource tags. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
