@@ -178,6 +178,10 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
   "go"
 );
 @@clientName(ShareSmbSettings, "SMBSettings", "go");
+@@clientName(Storage.File.UserDelegationKey.signedDelegatedUserTid,
+  "signedDelegatedUserTenantID",
+  "go"
+);
 @@clientName(SmbMultichannel, "SMBMultichannel", "go");
 @@clientName(StorageServiceProperties.cors, "CORS", "go");
 @@clientName(UserDelegationKey.signedOid, "SignedOID", "go");
