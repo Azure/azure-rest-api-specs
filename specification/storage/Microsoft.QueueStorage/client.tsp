@@ -170,8 +170,8 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
   "nextVisibleOn",
   "javascript"
 );
-@@alternateType(AccessPolicy.start, string, "javascript");
-@@alternateType(AccessPolicy.expiry, string, "javascript");
+@@alternateType(AccessPolicy.start, string, "javascript, python");
+@@alternateType(AccessPolicy.expiry, string, "javascript, python");
 @@clientName(AccessPolicy.start, "startsOn", "javascript");
 @@clientName(AccessPolicy.expiry, "expiresOn", "javascript");
 @@clientName(AccessPolicy.permission, "permissions", "javascript");

@@ -154,7 +154,7 @@ interface Service {
       /** Include this parameter to specify that the container's metadata be returned as part of the response body. */
       @query include?: Array<ListContainersIncludeType>;
     },
-    ListContainersSegmentResponse
+    ListContainersResponse
   >;
 
   /** Retrieves a user delegation key for the Blob service. This is only a valid operation when using bearer token authentication. */
@@ -202,7 +202,8 @@ interface Service {
   submitBatch(
     /** Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
     @header("Content-Type")
-    @alternateType(string, "javascript,csharp")
+    @alternateType(string, "javascript,csharp,go")
+    @clientName("multipartContentType", "go")
     contentType: "multipart/mixed",
 
     ...ApiVersionHeader,
@@ -218,6 +219,7 @@ interface Service {
     /** The media type of the body of the response. For batch requests, this is multipart/mixed; boundary=batchresponse_GUID */
     #suppress "@typespec/http/content-type-ignored" "Template for existing API"
     @header("Content-Type")
+    @alternateType(string, "go")
     contentType: "multipart/mixed";
 
     ...ApiVersionHeader;
@@ -229,6 +231,7 @@ interface Service {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
+  @list
   @route("?comp=blobs")
   findBlobsByTags is StorageOperationResponseBody<
     {
@@ -241,7 +244,7 @@ interface Service {
     {
       /** The filter blobs enumeration results */
       @body
-      enumerationResults: FilterBlobSegment;
+      enumerationResults: FilterBlobResponse;
     }
   >;
 }
@@ -447,7 +450,8 @@ interface Container {
   submitBatch(
     /** Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
     @header("Content-Type")
-    @alternateType(string, "javascript")
+    @alternateType(string, "javascript,go")
+    @clientName("multipartContentType", "go")
     contentType: "multipart/mixed",
 
     ...ApiVersionHeader,
@@ -462,6 +466,7 @@ interface Container {
 
     /** Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
     @header("Content-Type")
+    @alternateType(string, "go")
     contentType: "multipart/mixed";
 
     ...RequestIdResponseHeader;
@@ -472,6 +477,7 @@ interface Container {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
+  @list
   @route("?restype=container&comp=blobs")
   findBlobsByTags is StorageOperationResponseBody<
     {
@@ -484,7 +490,7 @@ interface Container {
     {
       /** The container filter blob enumeration results */
       @body
-      enumerationResults: FilterBlobSegment;
+      enumerationResults: FilterBlobResponse;
     }
   >;
 
