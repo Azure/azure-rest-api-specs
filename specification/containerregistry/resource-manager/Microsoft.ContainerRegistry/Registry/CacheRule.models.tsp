@@ -15,6 +15,12 @@ model CacheRuleProperties {
   credentialSetResourceId?: string;
 
   /**
+   * Authentication configuration used by the cache rule to access the upstream source repository.
+   */
+  @added(Versions.vLatestPreview)
+  additionalAuthenticationProperties?: AdditionalAuthenticationProperties;
+
+  /**
    * Source repository pulled from upstream.
    */
   sourceRepository?: string;
@@ -37,6 +43,42 @@ model CacheRuleProperties {
    */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+}
+
+/**
+ * The type of authentication configuration used by a cache rule to access an upstream registry.
+ */
+union AdditionalAuthenticationType {
+  string,
+
+  /**
+   * Google Artifact Registry (GAR) authentication via workload identity federation.
+   */
+  GoogleArtifactRegistry: "GoogleArtifactRegistry",
+}
+
+/**
+ * Authentication configuration used by a cache rule to access an upstream registry.
+ */
+@discriminator("type")
+model AdditionalAuthenticationProperties {
+  /**
+   * Authentication type discriminator.
+   */
+  type: AdditionalAuthenticationType;
+}
+
+/**
+ * Google Artifact Registry (GAR) authentication configuration.
+ */
+model GarAuthenticationProperties extends AdditionalAuthenticationProperties {
+  type: "GoogleArtifactRegistry";
+  // The following 3 properties are necessary to build the audience for the GAR token.
+  // They are specific to the customer.  The final value will be of the form:
+  // '//iam.googleapis.com/projects/{ProjectNumber}/locations/global/workloadIdentityPools/{WorkloadIdentityPool}/providers/{WorkloadIdentityProvider}'
+  projectNumber: string;
+  workloadIdentityPool: string;
+  workloadIdentityProvider: string;
 }
 
 /**
@@ -66,6 +108,12 @@ model CacheRuleUpdateProperties {
    * The ARM resource ID of the credential store which is associated with the Cache rule.
    */
   credentialSetResourceId?: string;
+
+  /**
+   * Authentication configuration used by the cache rule to access the upstream source repository.
+   */
+  @added(Versions.vLatestPreview)
+  additionalAuthenticationProperties?: AdditionalAuthenticationProperties;
 }
 
 /**
