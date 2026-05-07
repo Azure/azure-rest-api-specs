@@ -102,19 +102,25 @@ interface CrossTenantVaultMappingStatus {
 // Cross-tenant pass-through operations (split per operationId prefix)
 // ============================================================
 
-// Shared parent-parameter models for the LegacyOperations aliases below.
-// Each model captures only the path-segment params for a common ARM URL prefix
-// in the cross-tenant vault hierarchy. Standard scope (ApiVersion/Subscription/
-// ResourceGroup) and `Azure.ResourceManager.Legacy.Provider` are spread directly
-// in each Ops alias so they emit in the correct URL order (scope → provider → segments).
-// Note: @key is intentionally omitted because TypeSpec disallows multiple @key
-// fields on a named model. URL emission only requires @path + @segment on parent params.
+// Shared parameter aliases for the LegacyOperations aliases below.
+// `StandardResourceGroupParams` captures the standard scope plus the legacy
+// provider segment used by every cross-tenant operation. The `*ParentParameters`
+// aliases capture only the path-segment params for each common ARM URL prefix in
+// the cross-tenant vault hierarchy. They are spread together in each Ops alias so
+// the URL is emitted in the correct order (scope → provider → segments).
+// Aliases (rather than `model`) keep these out of the generated SDK model surface.
+
+alias StandardResourceGroupParams = {
+  ...ApiVersionParameter;
+  ...SubscriptionIdParameter;
+  ...ResourceGroupParameter;
+  ...Azure.ResourceManager.Legacy.Provider;
+};
 
 /**
  * Path segment parameters under /vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}.
  */
-@added(Versions.v2026_03_31_preview)
-model CrossTenantVaultMappingParentParameters {
+alias CrossTenantVaultMappingParentParameters = {
   @doc("The name of the recovery services vault.")
   @path
   @segment("vaults")
@@ -125,13 +131,12 @@ model CrossTenantVaultMappingParentParameters {
   @segment("backupCrossTenantVaultMappings")
   @pattern("^[A-Za-z][A-Za-z0-9]{1,99}$")
   crossTenantVaultMappingName: string;
-}
+};
 
 /**
  * Path segment parameters extending the mapping parent down to a backup protection container.
  */
-@added(Versions.v2026_03_31_preview)
-model CrossTenantContainerParentParameters {
+alias CrossTenantContainerParentParameters = {
   ...CrossTenantVaultMappingParentParameters;
 
   @doc("Fabric name associated with the backed up items.")
@@ -143,56 +148,48 @@ model CrossTenantContainerParentParameters {
   @path
   @segment("protectionContainers")
   containerName: string;
-}
+};
 
 /**
  * Path segment parameters extending the container parent down to a protected item.
  */
-@added(Versions.v2026_03_31_preview)
-model CrossTenantProtectedItemParentParameters {
+alias CrossTenantProtectedItemParentParameters = {
   ...CrossTenantContainerParentParameters;
 
   @doc("Backed up item name.")
   @path
   @segment("protectedItems")
   protectedItemName: string;
-}
+};
 
 /**
  * Path segment parameters extending the mapping parent down to a vault credential certificate.
  */
-@added(Versions.v2026_03_31_preview)
-model CrossTenantVaultCredentialParentParameters {
+alias CrossTenantVaultCredentialParentParameters = {
   ...CrossTenantVaultMappingParentParameters;
 
   @doc("Name identifier for the certificate.")
   @path
   @segment("vaultCredentials")
   certificateName: string;
-}
+};
 
 // LegacyOperations alias for routes parented at /vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/<child>
-// The first model arg captures the parent path; the second declares the child segment used by @segmentOf for list URLs.
-@added(Versions.v2026_03_31_preview)
-@armResourceOperations
-interface BackupProtectedItemsFromCrossTenantVaultOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-        ...CrossTenantVaultMappingParentParameters,
-      },
-      {
-        @doc("Backup managed item name.")
-        @path
-        @segment("backupProtectedItems")
-        @key
-        protectedItemName: string,
-      },
-      ResourceName = "BackupProtectedItemsFromCrossTenantVault"
-    > {}
+// The first arg captures the parent path; the second declares the child segment used by @segmentOf for list URLs.
+alias BackupProtectedItemsFromCrossTenantVaultOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...StandardResourceGroupParams;
+    ...CrossTenantVaultMappingParentParameters;
+  },
+  {
+    @doc("Backup managed item name.")
+    @path
+    @segment("backupProtectedItems")
+    @key
+    protectedItemName: string;
+  },
+  ResourceName = "BackupProtectedItemsFromCrossTenantVault"
+>;
 
 @added(Versions.v2026_03_31_preview)
 @armResourceOperations
@@ -232,48 +229,36 @@ interface ProtectedItemFromCrossTenantVault {
 
 // LegacyOperations alias for routes parented at the protected-item resource (5 levels deep,
 // child = protectedItems/{protectedItemName}).
-@added(Versions.v2026_03_31_preview)
-@armResourceOperations
-interface ProtectedItemFromCrossTenantVaultOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-        ...CrossTenantContainerParentParameters,
-      },
-      {
-        @doc("Backed up item name whose details are to be fetched.")
-        @path
-        @segment("protectedItems")
-        @key
-        protectedItemName: string,
-      },
-      ResourceName = "ProtectedItemFromCrossTenantVault"
-    > {}
+alias ProtectedItemFromCrossTenantVaultOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...StandardResourceGroupParams;
+    ...CrossTenantContainerParentParameters;
+  },
+  {
+    @doc("Backed up item name whose details are to be fetched.")
+    @path
+    @segment("protectedItems")
+    @key
+    protectedItemName: string;
+  },
+  ResourceName = "ProtectedItemFromCrossTenantVault"
+>;
 
 // LegacyOperations alias for routes parented at /vaults/{}/backupCrossTenantVaultMappings/{}/backupFabrics/{}/protectionContainers/{}/protectedItems/{}/<child>
-@added(Versions.v2026_03_31_preview)
-@armResourceOperations
-interface CrossTenantVaultRecoveryPointsOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-        ...CrossTenantProtectedItemParentParameters,
-      },
-      {
-        @doc("RecoveryPointID represents the backed up data to be fetched.")
-        @path
-        @segment("recoveryPoints")
-        @key
-        recoveryPointId: string,
-      },
-      ResourceName = "CrossTenantVaultRecoveryPoints"
-    > {}
+alias CrossTenantVaultRecoveryPointsOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...StandardResourceGroupParams;
+    ...CrossTenantProtectedItemParentParameters;
+  },
+  {
+    @doc("RecoveryPointID represents the backed up data to be fetched.")
+    @path
+    @segment("recoveryPoints")
+    @key
+    recoveryPointId: string;
+  },
+  ResourceName = "CrossTenantVaultRecoveryPoints"
+>;
 
 @added(Versions.v2026_03_31_preview)
 @armResourceOperations
@@ -325,26 +310,20 @@ interface RestoresFromCrossTenantVault {
 
 // LegacyOperations alias for routes parented at the protected-item resource
 // (5 levels deep, child = operationResults/{operationId}).
-@added(Versions.v2026_03_31_preview)
-@armResourceOperations
-interface ProtectedItemOperationResultsFromCrossTenantVaultOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-        ...CrossTenantProtectedItemParentParameters,
-      },
-      {
-        @doc("OperationID which represents the operation whose result needs to be fetched.")
-        @path
-        @segment("operationResults")
-        @key
-        operationId: string,
-      },
-      ResourceName = "ProtectedItemOperationResultsFromCrossTenantVault"
-    > {}
+alias ProtectedItemOperationResultsFromCrossTenantVaultOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...StandardResourceGroupParams;
+    ...CrossTenantProtectedItemParentParameters;
+  },
+  {
+    @doc("OperationID which represents the operation whose result needs to be fetched.")
+    @path
+    @segment("operationResults")
+    @key
+    operationId: string;
+  },
+  ResourceName = "ProtectedItemOperationResultsFromCrossTenantVault"
+>;
 
 @added(Versions.v2026_03_31_preview)
 @armResourceOperations
@@ -361,26 +340,20 @@ interface ProtectedItemOperationResultsFromCrossTenantVault {
 
 // LegacyOperations alias for routes parented at the protected-item resource
 // (5 levels deep, child = operationsStatus/{operationId}).
-@added(Versions.v2026_03_31_preview)
-@armResourceOperations
-interface ProtectedItemOperationStatusesFromCrossTenantVaultOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-        ...CrossTenantProtectedItemParentParameters,
-      },
-      {
-        @doc("OperationID represents the operation whose status needs to be fetched.")
-        @path
-        @segment("operationsStatus")
-        @key
-        operationId: string,
-      },
-      ResourceName = "ProtectedItemOperationStatusesFromCrossTenantVault"
-    > {}
+alias ProtectedItemOperationStatusesFromCrossTenantVaultOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...StandardResourceGroupParams;
+    ...CrossTenantProtectedItemParentParameters;
+  },
+  {
+    @doc("OperationID represents the operation whose status needs to be fetched.")
+    @path
+    @segment("operationsStatus")
+    @key
+    operationId: string;
+  },
+  ResourceName = "ProtectedItemOperationStatusesFromCrossTenantVault"
+>;
 
 @added(Versions.v2026_03_31_preview)
 @armResourceOperations
@@ -393,30 +366,23 @@ interface ProtectedItemOperationStatusesFromCrossTenantVault {
   get is ProtectedItemOperationStatusesFromCrossTenantVaultOps.Read<OperationStatus>;
 }
 
-@added(Versions.v2026_03_31_preview)
 // LegacyOperations alias for routes parented at the mapping resource,
 // child = backupJobs/{jobName}. Used by both BackupJobsFromCrossTenantVault.list
 // and JobDetailsFromCrossTenantVault.get.
-@added(Versions.v2026_03_31_preview)
-@armResourceOperations
-interface BackupJobsFromCrossTenantVaultOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-        ...CrossTenantVaultMappingParentParameters,
-      },
-      {
-        @doc("Name of the job whose details are to be fetched.")
-        @path
-        @segment("backupJobs")
-        @key
-        jobName: string,
-      },
-      ResourceName = "BackupJobsFromCrossTenantVault"
-    > {}
+alias BackupJobsFromCrossTenantVaultOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...StandardResourceGroupParams;
+    ...CrossTenantVaultMappingParentParameters;
+  },
+  {
+    @doc("Name of the job whose details are to be fetched.")
+    @path
+    @segment("backupJobs")
+    @key
+    jobName: string;
+  },
+  ResourceName = "BackupJobsFromCrossTenantVault"
+>;
 
 @added(Versions.v2026_03_31_preview)
 @armResourceOperations
@@ -488,26 +454,20 @@ interface ValidateOperationFromCrossTenantVault {
 
 // LegacyOperations alias for routes parented at the mapping resource,
 // child = backupValidateOperationResults/{operationId}.
-@added(Versions.v2026_03_31_preview)
-@armResourceOperations
-interface ValidateOperationResultFromCrossTenantVaultOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-        ...CrossTenantVaultMappingParentParameters,
-      },
-      {
-        @doc("OperationID which represents the operation whose result needs to be fetched.")
-        @path
-        @segment("backupValidateOperationResults")
-        @key
-        operationId: string,
-      },
-      ResourceName = "ValidateOperationResultFromCrossTenantVault"
-    > {}
+alias ValidateOperationResultFromCrossTenantVaultOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...StandardResourceGroupParams;
+    ...CrossTenantVaultMappingParentParameters;
+  },
+  {
+    @doc("OperationID which represents the operation whose result needs to be fetched.")
+    @path
+    @segment("backupValidateOperationResults")
+    @key
+    operationId: string;
+  },
+  ResourceName = "ValidateOperationResultFromCrossTenantVault"
+>;
 
 @added(Versions.v2026_03_31_preview)
 @armResourceOperations
@@ -527,26 +487,20 @@ interface ValidateOperationResultFromCrossTenantVault {
 
 // LegacyOperations alias for routes parented at the mapping resource,
 // child = backupValidateOperationsStatuses/{operationId}.
-@added(Versions.v2026_03_31_preview)
-@armResourceOperations
-interface ValidateOperationStatusFromCrossTenantVaultOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-        ...CrossTenantVaultMappingParentParameters,
-      },
-      {
-        @doc("OperationID represents the operation whose status needs to be fetched.")
-        @path
-        @segment("backupValidateOperationsStatuses")
-        @key
-        operationId: string,
-      },
-      ResourceName = "ValidateOperationStatusFromCrossTenantVault"
-    > {}
+alias ValidateOperationStatusFromCrossTenantVaultOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...StandardResourceGroupParams;
+    ...CrossTenantVaultMappingParentParameters;
+  },
+  {
+    @doc("OperationID represents the operation whose status needs to be fetched.")
+    @path
+    @segment("backupValidateOperationsStatuses")
+    @key
+    operationId: string;
+  },
+  ResourceName = "ValidateOperationStatusFromCrossTenantVault"
+>;
 
 @added(Versions.v2026_03_31_preview)
 @armResourceOperations
@@ -634,26 +588,20 @@ model CrossTenantJobResourceList {
 
 // LegacyOperations alias for routes parented at the mapping resource,
 // child = vaultCredentials/{certificateName}.
-@added(Versions.v2026_03_31_preview)
-@armResourceOperations
-interface CrossTenantVaultCredentialOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-        ...CrossTenantVaultMappingParentParameters,
-      },
-      {
-        @doc("Name identifier for the certificate.")
-        @path
-        @segment("vaultCredentials")
-        @key
-        certificateName: string,
-      },
-      ResourceName = "CrossTenantVaultCredential"
-    > {}
+alias CrossTenantVaultCredentialOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...StandardResourceGroupParams;
+    ...CrossTenantVaultMappingParentParameters;
+  },
+  {
+    @doc("Name identifier for the certificate.")
+    @path
+    @segment("vaultCredentials")
+    @key
+    certificateName: string;
+  },
+  ResourceName = "CrossTenantVaultCredential"
+>;
 
 @added(Versions.v2026_03_31_preview)
 @armResourceOperations
@@ -676,26 +624,20 @@ interface CrossTenantVaultCredential {
 
 // LegacyOperations alias for routes parented at the certificate resource,
 // child = operationResults/{operationId}.
-@added(Versions.v2026_03_31_preview)
-@armResourceOperations
-interface CrossTenantVaultCredentialOperationResultsOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-        ...CrossTenantVaultCredentialParentParameters,
-      },
-      {
-        @doc("Operation ID returned in the Location header of the generate call.")
-        @path
-        @segment("operationResults")
-        @key
-        operationId: string,
-      },
-      ResourceName = "CrossTenantVaultCredentialOperationResults"
-    > {}
+alias CrossTenantVaultCredentialOperationResultsOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...StandardResourceGroupParams;
+    ...CrossTenantVaultCredentialParentParameters;
+  },
+  {
+    @doc("Operation ID returned in the Location header of the generate call.")
+    @path
+    @segment("operationResults")
+    @key
+    operationId: string;
+  },
+  ResourceName = "CrossTenantVaultCredentialOperationResults"
+>;
 
 @added(Versions.v2026_03_31_preview)
 @armResourceOperations
@@ -717,26 +659,20 @@ interface CrossTenantVaultCredentialOperationResults {
 
 // LegacyOperations alias for routes parented at the certificate resource,
 // child = operationStatus/{operationId} (singular, distinct from other status routes).
-@added(Versions.v2026_03_31_preview)
-@armResourceOperations
-interface CrossTenantVaultCredentialOperationStatusesOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-        ...CrossTenantVaultCredentialParentParameters,
-      },
-      {
-        @doc("Operation ID returned in the Azure-AsyncOperation header of the generate call.")
-        @path
-        @segment("operationStatus")
-        @key
-        operationId: string,
-      },
-      ResourceName = "CrossTenantVaultCredentialOperationStatuses"
-    > {}
+alias CrossTenantVaultCredentialOperationStatusesOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...StandardResourceGroupParams;
+    ...CrossTenantVaultCredentialParentParameters;
+  },
+  {
+    @doc("Operation ID returned in the Azure-AsyncOperation header of the generate call.")
+    @path
+    @segment("operationStatus")
+    @key
+    operationId: string;
+  },
+  ResourceName = "CrossTenantVaultCredentialOperationStatuses"
+>;
 
 @added(Versions.v2026_03_31_preview)
 @armResourceOperations
