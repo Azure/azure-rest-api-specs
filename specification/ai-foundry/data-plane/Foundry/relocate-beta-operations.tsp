@@ -76,69 +76,62 @@ interface Toolsets {}
 @@clientLocation(Azure.AI.Projects.Toolsets.listToolsets, Toolsets);
 @@clientLocation(Azure.AI.Projects.Toolsets.deleteToolset, Toolsets);
 
-namespace Model {
-  interface TrainingJobs {}
-}
+interface TrainingJobs {}
 
-@@clientLocation(Azure.AI.Projects.TrainingJobs.create, Model.TrainingJobs);
-@@clientLocation(Azure.AI.Projects.TrainingJobs.list, Model.TrainingJobs);
-@@clientLocation(Azure.AI.Projects.TrainingJobs.get, Model.TrainingJobs);
-@@clientLocation(Azure.AI.Projects.TrainingJobs.beginDelete,
-  Model.TrainingJobs
-);
-@@clientLocation(Azure.AI.Projects.TrainingJobs.beginCancel,
-  Model.TrainingJobs
-);
+@@clientLocation(Azure.AI.Projects.TrainingJobs.create, TrainingJobs);
+@@clientLocation(Azure.AI.Projects.TrainingJobs.list, TrainingJobs);
+@@clientLocation(Azure.AI.Projects.TrainingJobs.get, TrainingJobs);
+@@clientLocation(Azure.AI.Projects.TrainingJobs.beginDelete, TrainingJobs);
+@@clientLocation(Azure.AI.Projects.TrainingJobs.beginCancel, TrainingJobs);
+@@clientLocation(Azure.AI.Projects.TrainingJobs.showServices, TrainingJobs);
 
 @@clientLocation(Azure.AI.Projects.TrainingJobAttempts.listAttempts,
-  Model.TrainingJobs
+  TrainingJobs
 );
 @@clientLocation(Azure.AI.Projects.TrainingJobAttempts.getAttempt,
-  Model.TrainingJobs
+  TrainingJobs
 );
 
 @@clientLocation(Azure.AI.Projects.TrainingJobAttemptArtifacts.listAttemptArtifacts,
-  Model.TrainingJobs
+  TrainingJobs
 );
 @@clientLocation(Azure.AI.Projects.TrainingJobAttemptArtifacts.getAttemptArtifactMetadata,
-  Model.TrainingJobs
+  TrainingJobs
 );
 @@clientLocation(Azure.AI.Projects.TrainingJobAttemptArtifacts.getAttemptArtifactContentInfo,
-  Model.TrainingJobs
+  TrainingJobs
 );
 @@clientLocation(Azure.AI.Projects.TrainingJobAttemptArtifacts.downloadAttemptArtifact,
-  Model.TrainingJobs
+  TrainingJobs
 );
 
 @@clientLocation(Azure.AI.Projects.TrainingJobAttemptMetrics.listAttemptMetrics,
-  Model.TrainingJobs
+  TrainingJobs
 );
 @@clientLocation(Azure.AI.Projects.TrainingJobAttemptMetrics.getAttemptMetricLastValues,
-  Model.TrainingJobs
+  TrainingJobs
 );
 @@clientLocation(Azure.AI.Projects.TrainingJobAttemptMetrics.getAttemptMetric,
-  Model.TrainingJobs
+  TrainingJobs
 );
 @@clientLocation(Azure.AI.Projects.TrainingJobAttemptMetrics.getAttemptMetricAggregates,
-  Model.TrainingJobs
+  TrainingJobs
 );
 @@clientLocation(Azure.AI.Projects.TrainingJobAttemptMetrics.getAttemptMetricSamples,
-  Model.TrainingJobs
+  TrainingJobs
 );
 @@clientLocation(Azure.AI.Projects.TrainingJobAttemptMetrics.getAttemptMetricSample,
-  Model.TrainingJobs
+  TrainingJobs
 );
 
 @@clientLocation(Azure.AI.Projects.TrainingJobOutputs.listOutputs,
-  Model.TrainingJobs
+  TrainingJobs
 );
-@@clientLocation(Azure.AI.Projects.TrainingJobOutputs.getOutput,
-  Model.TrainingJobs
-);
+@@clientLocation(Azure.AI.Projects.TrainingJobOutputs.getOutput, TrainingJobs);
 
 @@clientLocation(Azure.AI.Projects.TrainingJobAttemptOutputs.listAttemptOutputs,
-  Model.TrainingJobs
+  TrainingJobs
 );
 @@clientLocation(Azure.AI.Projects.TrainingJobAttemptOutputs.getAttemptOutput,
-  Model.TrainingJobs
+  TrainingJobs
 );

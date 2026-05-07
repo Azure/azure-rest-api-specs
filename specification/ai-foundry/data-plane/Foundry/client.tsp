@@ -259,16 +259,8 @@ using Azure.AI.Projects;
 @@access(InteractiveRayJobTrainingConfiguration, Access.public);
 @@usage(InteractiveRayJobFramework, Usage.input);
 @@access(InteractiveRayJobFramework, Access.public);
-@@clientName(Azure.AI.Projects.Beta.Model, "model", "python");
-@@clientName(Azure.AI.Projects.Beta.Model, "model", "javascript");
-@@clientName(Azure.AI.Projects.Beta.Model.TrainingJobs,
-  "training_jobs",
-  "python"
-);
-@@clientName(Azure.AI.Projects.Beta.Model.TrainingJobs,
-  "trainingJobs",
-  "javascript"
-);
+@@clientName(Azure.AI.Projects.Beta.TrainingJobs, "training_jobs", "python");
+@@clientName(Azure.AI.Projects.Beta.TrainingJobs, "trainingJobs", "javascript");
 @@clientName(Azure.AI.Projects.TrainingJobs.beginDelete,
   "begin_delete",
   "python"
