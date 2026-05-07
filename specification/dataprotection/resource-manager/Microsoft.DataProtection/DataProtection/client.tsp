@@ -445,6 +445,10 @@ using Microsoft.DataProtection;
   "BackupDataSourceParametersList",
   "csharp"
 );
+@@clientName(PostgreSqlFlexibleServerBackupDatasourceParameters,
+  "PostgreSqlFlexibleServerBackupDataSourceSettings",
+  "csharp"
+);
 @@clientName(ProtectionStatusDetails,
   "BackupInstanceProtectionStatusDetails",
   "csharp"
@@ -602,6 +606,7 @@ using Microsoft.DataProtection;
   "FetchSecondaryRPsRequestContent",
   "csharp"
 );
+@@clientName(ResumeProtectionRequest, "ResumeProtectionContent", "csharp");
 @@clientName(StopProtectionRequest, "StopProtectionContent", "csharp");
 @@clientName(SuspendBackupRequest, "SuspendBackupContent", "csharp");
 @@clientName(CrossRegionRestoreJobsRequest,
@@ -678,6 +683,10 @@ using Microsoft.DataProtection;
 );
 @@clientName(BackupInstanceResources.find, "FindRestorableTimeRange", "csharp");
 @@clientName(BackupInstanceResources.find::parameters.body,
+  "content",
+  "csharp"
+);
+@@clientName(BackupInstanceResources.resumeProtection::parameters.body,
   "content",
   "csharp"
 );
