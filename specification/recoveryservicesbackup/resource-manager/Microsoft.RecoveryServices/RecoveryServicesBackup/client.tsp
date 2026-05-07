@@ -373,7 +373,7 @@ using Microsoft.RecoveryServices;
   "ResourceGuardProxyOperation",
   "java"
 );
-@@clientName(ResourceGuardProxies.get, "list", "java");
+@@clientName(ResourceGuardProxies.get, "list", "java,javascript");
 @@clientLocation(ResourceGuardProxy.get, "ResourceGuardProxyOperation", "java");
 @@clientLocation(ResourceGuardProxy.delete,
   "ResourceGuardProxyOperation",
