@@ -871,7 +871,7 @@ model AgentCard {
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
 )
-model CreateAgentVersionFromCodeRequest {
+model CreateAgentVersionFromCodeMetadata {
   @doc("A human-readable description of the agent.")
   @maxLength(512)
   description?: string;
@@ -889,7 +889,7 @@ model CreateAgentVersionFromCodeRequest {
 )
 model CreateAgentVersionFromCodeContent {
   /** JSON metadata including description and hosted definition. */
-  metadata: HttpPart<CreateAgentVersionFromCodeRequest>;
+  metadata: HttpPart<CreateAgentVersionFromCodeMetadata>;
 
   /** The code zip file (max 250 MB). */
   code: HttpPart<bytes>;
@@ -921,7 +921,7 @@ model DownloadAgentCodeResponse {
 
   @doc("The zip code package content.")
   @body
-  body: bytes;
+  content: bytes;
 }
 
 // ══════════════════════════════════════════════════════════
