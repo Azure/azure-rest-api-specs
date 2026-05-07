@@ -10,7 +10,6 @@ using Azure.ClientGenerator.Core;
 @@clientName(Microsoft.HorizonDb.CreateModePool, "HorizonDBCreateModePool");
 @@clientName(Microsoft.HorizonDb.HorizonDbCluster, "HorizonDBCluster");
 @@clientName(Microsoft.HorizonDb.HorizonDbClusterForPatchUpdate, "HorizonDBClusterForPatchUpdate");
-@@clientName(Microsoft.HorizonDb.HorizonDbClusterListResult, "HorizonDBClusterListResult");
 @@clientName(Microsoft.HorizonDb.HorizonDbClusterParameterGroupConnectionProperties, "HorizonDBClusterParameterGroupConnectionProperties");
 @@clientName(Microsoft.HorizonDb.HorizonDbClusterProperties, "HorizonDBClusterProperties");
 @@clientName(Microsoft.HorizonDb.HorizonDbClusterPropertiesForPatchUpdate, "HorizonDBClusterPropertiesForPatchUpdate");
