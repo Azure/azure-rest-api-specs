@@ -5085,6 +5085,40 @@
         ]
       }
     },
+    "QueryStatisticsProperties": {
+      "type": "object",
+      "description": "Properties of a query execution statistics.",
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "Database name of the database in which this query was executed.",
+          "readOnly": true
+        },
+        "queryId": {
+          "type": "string",
+          "description": "Unique query id (unique within one database).",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "description": "The start time for the metric (ISO-8601 format).",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "description": "The end time for the metric (ISO-8601 format).",
+          "readOnly": true
+        },
+        "intervals": {
+          "type": "array",
+          "description": "List of intervals with appropriate metric data",
+          "items": {
+            "$ref": "#/definitions/QueryMetricInterval"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "QueryTimeGrainType": {
       "type": "string",
       "description": "Interval type (length).",

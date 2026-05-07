@@ -10935,7 +10935,6 @@ model QueryStatistics extends CommonTypes.ProxyResource {
 /**
  * Properties of a query execution statistics.
  */
-@Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
 model QueryStatisticsProperties {
   /**
    * Database name of the database in which this query was executed.
