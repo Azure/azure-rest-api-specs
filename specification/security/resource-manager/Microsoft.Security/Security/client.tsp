@@ -344,7 +344,7 @@ op privateLinkResourcesGetCustomization(
 
 @@clientName(SecurityOperatorsAPI.SecurityOperator, "OperatorResource", "go");
 @@clientName(SecurityStandardsAPI.SecurityStandard,
-  "ArmSecurityStandard",
+  "ArmSecurityStandards",
   "go"
 );
 @@clientName(SecurityStandardsAPI.SecurityStandardProperties,
