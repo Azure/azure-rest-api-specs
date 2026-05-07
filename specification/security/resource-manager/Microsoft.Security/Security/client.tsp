@@ -341,7 +341,10 @@ op privateLinkResourcesGetCustomization(
   privateLinkResourcesGetCustomization,
   "!python,!java"
 );
-
+@@clientName(SecurityStandardsAPI.SecurityStandard,
+  "ArmSecurityStandard",
+  "go"
+);
 @@clientName(SecurityOperatorsAPI.SecurityOperator, "OperatorResource", "go");
 @@clientLocation(SecurityStandards.createOrUpdate,
   "ArmSecurityStandards",
