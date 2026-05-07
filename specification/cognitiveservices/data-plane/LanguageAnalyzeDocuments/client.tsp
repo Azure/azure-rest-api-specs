@@ -603,3 +603,5 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(EntityMaskPolicy, "EntityMaskRedactionPolicy", "csharp");
 
 @@clientName(DocumentWarning.targetRef, "TargetReference", "csharp");
+
+@@clientName(PiiDomain.phi, "Health", "csharp");
