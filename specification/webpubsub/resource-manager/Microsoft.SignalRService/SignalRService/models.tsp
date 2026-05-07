@@ -84,6 +84,7 @@ union PrivateLinkServiceConnectionStatus {
  */
 union CreatedByType {
   string,
+
   /** The entity was created by a user. */
   User: "User",
 
