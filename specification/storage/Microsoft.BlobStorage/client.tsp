@@ -1111,63 +1111,6 @@ op uploadPagesNoStructuredMessage is StorageOperationRequestBody<
 
 @@override(PageBlob.uploadPages, uploadPagesNoStructuredMessage, "rust");
 
-/** The Upload Block Blob operation updates the content of an existing block blob. */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-#suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-#suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
-@put
-@sharedRoute
-op uploadNoStructuredMessage is StorageOperationRequestBody<
-  {
-    ...MetadataHeaders;
-    ...BodyParameter;
-    ...TimeoutParameter;
-    ...ContentMd5Parameter;
-    ...ContentLengthParameter;
-    ...BlobContentTypeParameter;
-    ...BlobContentEncodingParameter;
-    ...BlobContentLanguageParameter;
-    ...BlobContentMd5Parameter;
-    ...BlobCacheControlParameter;
-    ...LeaseIdOptionalParameter;
-    ...BlobContentDispositionParameter;
-    ...EncryptionKeyParameter;
-    ...EncryptionKeySha256Parameter;
-    ...EncryptionAlgorithmParameter;
-    ...EncryptionScopeParameter;
-    ...AccessTierHeader;
-    ...IfModifiedSinceParameter;
-    ...IfUnmodifiedSinceParameter;
-    ...IfNoneMatchParameter;
-    ...IfMatchParameter;
-    ...IfTagsParameter;
-    ...BlobTagsHeaderParameter;
-    ...ImmutabilityPolicyExpiryParameter;
-    ...ImmutabilityPolicyModeParameter;
-    ...LegalHoldOptionalParameter;
-    ...ContentCrc64Parameter;
-
-    /** The type of the blob. */
-    @header("x-ms-blob-type")
-    blobType: "BlockBlob";
-  },
-  {
-    @statusCode statusCode: 201;
-    ...EtagResponseHeader;
-    ...LastModifiedResponseHeader;
-    ...ContentMd5ResponseHeader;
-    ...ContentCrc64ResponseHeader;
-    ...VersionIdResponseHeader;
-    ...RequestServerEncryptedResponseHeader;
-    ...EncryptionKeySha256ResponseHeader;
-    ...EncryptionScopeResponseHeader;
-  },
-  "application/octet-stream"
->;
-
-@@override(BlockBlob.upload, uploadNoStructuredMessage, "rust");
-
 /** An HTTP byte range, e.g. "bytes=0-1023". */
 @alternateType(
   {
