@@ -216,6 +216,14 @@ namespace Azure.AI.Projects {
   @@clientName(PatchAgentRequest, "PatchAgentOptions");
   @@access(Agents.patchAgentObject, Access.internal);
   @@access(Agents.getSessionLogStream, Access.internal);
+
+  // --------------------------------------------------------------------------------
+  // Hide Agent administration opertaions, containing the foundry features
+  // --------------------------------------------------------------------------------
+  @@access(Agents.createAgentVersionFromCode, Access.internal);
+  @@access(Agents.downloadAgentVersionCode, Access.internal);
+  @@access(Agents.downloadAgentCode, Access.internal);
+
   // --------------------------------------------------------------------------------
   // Hide session opertaions, containing the foundry features
   // --------------------------------------------------------------------------------
