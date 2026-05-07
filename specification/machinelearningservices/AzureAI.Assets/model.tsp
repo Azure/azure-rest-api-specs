@@ -67,6 +67,9 @@ model DeploymentTemplate is AssetVersion {
   @doc("List of allowed instance types for the deployment.")
   allowedInstanceType: string[];
 
+  @doc("Accelerator configurations for the deployment template.")
+  acceleratorMaps?: AcceleratorMap[];
+
   @doc("Default instance type for the deployment.")
   defaultInstanceType: string;
 

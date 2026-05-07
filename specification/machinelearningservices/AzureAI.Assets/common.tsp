@@ -61,6 +61,18 @@ model ProbeSettings {
 
   @doc("The timeout duration for each probe.")
   timeout: duration;
+}
+
+@doc("Accelerator configuration for a model instance.")
+model AcceleratorMap {
+  @doc("The type of accelerator (e.g. GPU, FPGA).")
+  acceleratorType: string;
+
+  @doc("Number of accelerators allocated per model instance.")
+  numberOfAcceleratorsPerModelInstance: int32;
+
+  @doc("Whether this is the default accelerator configuration.")
+  default?: boolean = false;
 
   @doc("The number of consecutive failures required to consider the probe as failed.")
   failureThreshold: int32;
