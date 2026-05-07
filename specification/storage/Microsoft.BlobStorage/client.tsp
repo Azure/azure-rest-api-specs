@@ -1111,7 +1111,7 @@ op uploadPagesNoStructuredMessage is StorageOperationRequestBody<
 
 @@override(PageBlob.uploadPages, uploadPagesNoStructuredMessage, "rust");
 
-/** An HTTP byte range, e.g. "bytes=0-1023". */
+/** An HTTP byte range, e.g. "bytes=0-1023". *
 @alternateType(
   {
     identity: "crate::models::HttpRange",
