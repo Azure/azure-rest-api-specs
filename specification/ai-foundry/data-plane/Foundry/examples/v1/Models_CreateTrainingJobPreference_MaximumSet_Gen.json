@@ -4,7 +4,7 @@
   "parameters": {
     "api-version": "v1",
     "Operation-Id": "create-my-dpo-training-job-01",
-    "Foundry-Features": "Jobs=V1Preview",
+    "Foundry-Features": "TrainingJobs=V1Preview",
     "job": {
       "type": "preference",
       "algorithm": "dpo",
@@ -23,7 +23,7 @@
           "chosen": "chosen",
           "rejected": "rejected"
         },
-        "dataFormat": {
+        "data_format": {
           "chatTemplate": "chatml"
         }
       },
@@ -54,7 +54,7 @@
           "instanceCount": 2,
           "instanceType": "Standard_NC96ads_A100_v4"
         },
-        "gpuCount": 16
+        "gpu_count": 16
       }
     }
   },
@@ -64,7 +64,7 @@
         "Operation-Location": "https://my-account.services.ai.azure.com/api/projects/my-project/models/operations/create-my-dpo-training-job-01/result?api-version=v1"
       },
       "body": {
-        "operationId": "create-my-dpo-training-job-01",
+        "operation_id": "create-my-dpo-training-job-01",
         "status": "queued"
       }
     }

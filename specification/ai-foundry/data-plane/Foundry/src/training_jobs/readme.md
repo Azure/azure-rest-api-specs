@@ -1,6 +1,6 @@
 <!-- cSpell:ignore TypeSpec -->
 
-# Foundry Jobs TypeSpec
+# Foundry Training Jobs TypeSpec
 
 > see https://aka.ms/autorest
 

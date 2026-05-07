@@ -1,5 +1,5 @@
 import "../common/models.tsp";
-import "../jobs/models.tsp";
+import "../training_jobs/models.tsp";
 
 using TypeSpec.Rest;
 
@@ -14,16 +14,16 @@ model ModelTrainingComputeConfiguration {
   resources?: JobResourceConfiguration;
 
   @doc("Number of GPUs requested by the managed training job.")
-  gpuCount?: int32;
+  gpu_count?: int32;
 
   @doc("Distribution configuration for the managed training job.")
   distribution?: DistributionConfiguration;
 
   @doc("Queue settings for the managed training job.")
-  queueSettings?: QueueSettings;
+  queue_settings?: QueueSettings;
 
   @doc("ARM resource ID of a user-assigned managed identity attached to the Foundry project.")
-  userAssignedIdentityId?: string;
+  user_assigned_identity_id?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
@@ -57,11 +57,11 @@ model Model {
 
   @doc("Base model used to create this model, when the model was produced by managed training.")
   @visibility(Lifecycle.Read)
-  baseModel?: string;
+  base_model?: string;
 
   @doc("Backing training job that produced this model, when available.")
   @visibility(Lifecycle.Read)
-  trainingJob?: string;
+  training_job?: string;
 }
 
 @doc("Status of a managed model training operation.")
@@ -82,7 +82,7 @@ union ModelTrainingOperationStatus {
 @doc("Status resource for a managed model training operation.")
 model ModelTrainingOperation {
   @doc("Operation identifier for the managed model training request.")
-  operationId: string;
+  operation_id: string;
 
   @doc("Managed model training operation status.")
   @Azure.Core.lroStatus
@@ -115,7 +115,7 @@ model SftTrainingDatasetConfiguration {
   columns: SftTrainingColumnMapping;
 
   @doc("Conversational data formatting options.")
-  dataFormat?: TrainingDataFormatConfiguration;
+  data_format?: TrainingDataFormatConfiguration;
 }
 
 @doc("Column mapping for managed online RL prompt datasets. Keys are logical fields expected by GRPO, RLOO, REINFORCE++, and PPO; values are the exact column names in the referenced dataset asset. The training dataset must contain prompts; reference answers or reward context can be passed to the judge.")
@@ -139,7 +139,7 @@ model GrpoTrainingDatasetConfiguration {
   columns: GrpoTrainingColumnMapping;
 
   @doc("Conversational data formatting options.")
-  dataFormat?: TrainingDataFormatConfiguration;
+  data_format?: TrainingDataFormatConfiguration;
 }
 
 @doc("Preference optimization algorithm used by managed pairwise preference training.")
@@ -190,7 +190,7 @@ model PairwisePreferenceDatasetConfiguration {
   columns: PairwisePreferenceColumnMapping;
 
   @doc("Conversational data formatting options.")
-  dataFormat?: TrainingDataFormatConfiguration;
+  data_format?: TrainingDataFormatConfiguration;
 }
 
 @doc("Column mapping for KTO feedback datasets. Keys are logical fields expected by KTO; values are the exact column names in the referenced dataset asset.")
@@ -217,7 +217,7 @@ model KtoTrainingDatasetConfiguration {
   columns: KtoFeedbackColumnMapping;
 
   @doc("Conversational data formatting options.")
-  dataFormat?: TrainingDataFormatConfiguration;
+  data_format?: TrainingDataFormatConfiguration;
 }
 
 @doc("Column mapping for scored reward-model datasets. Keys are logical fields expected by scored reward-model training; values are the exact column names in the referenced dataset asset.")
@@ -256,7 +256,7 @@ model PairwiseRewardModelTrainingDatasetConfiguration
   columns: PairwisePreferenceColumnMapping;
 
   @doc("Conversational data formatting options.")
-  dataFormat?: TrainingDataFormatConfiguration;
+  data_format?: TrainingDataFormatConfiguration;
 }
 
 @doc("Scored response dataset for managed reward-model training.")
@@ -275,7 +275,7 @@ model ScoredRewardModelTrainingDatasetConfiguration
   columns: ScoredRewardModelColumnMapping;
 
   @doc("Conversational data formatting options.")
-  dataFormat?: TrainingDataFormatConfiguration;
+  data_format?: TrainingDataFormatConfiguration;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Use an extensible union for forward-compatible reference policy kinds."
@@ -344,7 +344,7 @@ model PpoCriticConfiguration {
   `model`?: string;
 
   @doc("Value loss coefficient.")
-  valueLossCoefficient?: float64;
+  value_loss_coefficient?: float64;
 
   @doc("GAE discount factor.")
   gamma?: float64;
@@ -401,10 +401,10 @@ model KtoTrainingRuntimeConfiguration {
   hyperparameters?: Record<unknown>;
 
   @doc("Weight applied to desirable examples.")
-  desirableWeight?: float64;
+  desirable_weight?: float64;
 
   @doc("Weight applied to undesirable examples.")
-  undesirableWeight?: float64;
+  undesirable_weight?: float64;
 
   @doc("LoRA adapter configuration.")
   lora?: TrainingLoraConfiguration;

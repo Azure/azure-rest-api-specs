@@ -1,78 +1,78 @@
 {
-    "title": "Models_CreateTrainingJobPpo_MaximumSet",
-    "operationId": "Models_createTrainingJob",
-    "parameters": {
-        "api-version": "v1",
-        "Operation-Id": "create-my-ppo-training-job-01",
-        "Foundry-Features": "Jobs=V1Preview",
-        "job": {
-            "type": "ppo",
-            "name": "qwen-ppo-helpfulness",
-            "version": "1",
-            "description": "PPO policy model trained with a reward model judge",
-            "tags": {
-                "algorithm": "ppo"
-            },
-            "model": "azureai://registries/azureml/models/qwen-base/versions/1",
-            "dataset": {
-                "train": "azureai://accounts/my-account/projects/my-project/data/helpfulness-prompts-train/versions/1",
-                "eval": "azureai://accounts/my-account/projects/my-project/data/helpfulness-prompts-eval/versions/1",
-                "columns": {
-                    "prompt": "prompt",
-                    "reference": "reference"
-                },
-                "dataFormat": {
-                    "chatTemplate": "chatml"
-                }
-            },
-            "runtime": {
-                "framework": "open_rlhf",
-                "judge": {
-                    "kind": "model",
-                    "model": "azureai://accounts/my-account/projects/my-project/models/qwen-helpfulness-reward-model/versions/1"
-                },
-                "reference": {
-                    "kind": "base_model"
-                },
-                "critic": {
-                    "valueLossCoefficient": 0.1,
-                    "gamma": 1.0,
-                    "lambda": 0.95
-                },
-                "rollout": {
-                    "engine": "vllm",
-                    "numGenerations": 4,
-                    "maxCompletionLength": 512,
-                    "temperature": 0.8,
-                    "topP": 0.95,
-                    "batchSize": 64,
-                    "tensorParallelSize": 2
-                },
-                "hyperparameters": {
-                    "learning_rate": 0.000005,
-                    "clip_range": 0.2,
-                    "kl_coefficient": 0.02
-                }
-            },
-            "compute": {
-                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.CognitiveServices/accounts/my-account/computes/my-cluster",
-                "resources": {
-                    "instanceCount": 4,
-                    "instanceType": "Standard_NC96ads_A100_v4"
-                },
-                "gpuCount": 32
-            }
+  "title": "Models_CreateTrainingJobPpo_MaximumSet",
+  "operationId": "Models_createTrainingJob",
+  "parameters": {
+    "api-version": "v1",
+    "Operation-Id": "create-my-ppo-training-job-01",
+    "Foundry-Features": "TrainingJobs=V1Preview",
+    "job": {
+      "type": "ppo",
+      "name": "qwen-ppo-helpfulness",
+      "version": "1",
+      "description": "PPO policy model trained with a reward model judge",
+      "tags": {
+        "algorithm": "ppo"
+      },
+      "model": "azureai://registries/azureml/models/qwen-base/versions/1",
+      "dataset": {
+        "train": "azureai://accounts/my-account/projects/my-project/data/helpfulness-prompts-train/versions/1",
+        "eval": "azureai://accounts/my-account/projects/my-project/data/helpfulness-prompts-eval/versions/1",
+        "columns": {
+          "prompt": "prompt",
+          "reference": "reference"
+        },
+        "data_format": {
+          "chatTemplate": "chatml"
         }
-    },
-    "responses": {
-        "202": {
-            "headers": {
-                "Operation-Location": "https://my-account.services.ai.azure.com/api/projects/my-project/models/operations/create-my-ppo-training-job-01/result?api-version=v1"
-            },
-            "body": {
-                "operationId": "create-my-ppo-training-job-01",
-                "status": "queued"
-            }
+      },
+      "runtime": {
+        "framework": "open_rlhf",
+        "judge": {
+          "kind": "model",
+          "model": "azureai://accounts/my-account/projects/my-project/models/qwen-helpfulness-reward-model/versions/1"
+        },
+        "reference": {
+          "kind": "base_model"
+        },
+        "critic": {
+          "value_loss_coefficient": 0.1,
+          "gamma": 1,
+          "lambda": 0.95
+        },
+        "rollout": {
+          "engine": "vllm",
+          "numGenerations": 4,
+          "maxCompletionLength": 512,
+          "temperature": 0.8,
+          "topP": 0.95,
+          "batchSize": 64,
+          "tensorParallelSize": 2
+        },
+        "hyperparameters": {
+          "learning_rate": 0.000005,
+          "clip_range": 0.2,
+          "kl_coefficient": 0.02
         }
+      },
+      "compute": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.CognitiveServices/accounts/my-account/computes/my-cluster",
+        "resources": {
+          "instanceCount": 4,
+          "instanceType": "Standard_NC96ads_A100_v4"
+        },
+        "gpu_count": 32
+      }
     }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "https://my-account.services.ai.azure.com/api/projects/my-project/models/operations/create-my-ppo-training-job-01/result?api-version=v1"
+      },
+      "body": {
+        "operation_id": "create-my-ppo-training-job-01",
+        "status": "queued"
+      }
+    }
+  }
 }

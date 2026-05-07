@@ -2,6 +2,7 @@
 
 import "../common/models.tsp";
 import "../common/service.tsp";
+import "../servicepatterns.tsp";
 
 using TypeSpec.Http;
 
@@ -9,46 +10,46 @@ namespace Azure.AI.Projects;
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Use an extensible union instead of a plain string"
 @doc("Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, Ray, or null.")
-@discriminator("distributionType")
+@discriminator("distribution_type")
 model DistributionConfiguration {
   @doc("Specifies the type of distribution framework.")
-  distributionType: string;
+  distribution_type: string;
 }
 
 @doc("PyTorch distribution configuration.")
 model PyTorchDistribution extends DistributionConfiguration {
   @doc("Specifies the type of distribution framework.")
-  distributionType: "PyTorch";
+  distribution_type: "pytorch";
 
   @doc("Number of processes per node.")
-  processCountPerInstance?: int32;
+  process_count_per_instance?: int32;
 }
 
 @doc("MPI distribution configuration.")
 model MpiDistribution extends DistributionConfiguration {
   @doc("Specifies the type of distribution framework.")
-  distributionType: "Mpi";
+  distribution_type: "mpi";
 
   @doc("Number of processes per MPI node.")
-  processCountPerNode?: int32;
+  process_count_per_node?: int32;
 }
 
 @doc("TensorFlow distribution configuration.")
 model TensorFlowDistribution extends DistributionConfiguration {
   @doc("Specifies the type of distribution framework.")
-  distributionType: "TensorFlow";
+  distribution_type: "tensorflow";
 
   @doc("Number of workers. If not specified, will default to the instance count.")
-  workerCount?: int32;
+  worker_count?: int32;
 
   @doc("Number of parameter server tasks.")
-  parameterServerCount?: int32;
+  parameter_server_count?: int32;
 }
 
 @doc("Ray distribution configuration.")
 model RayDistribution extends DistributionConfiguration {
   @doc("Specifies the type of distribution framework.")
-  distributionType: "Ray";
+  distribution_type: "ray";
 
   @doc("The port of the head Ray process.")
   port?: int32;
@@ -57,22 +58,22 @@ model RayDistribution extends DistributionConfiguration {
   address?: string;
 
   @doc("Whether to start the Ray dashboard GUI.")
-  includeDashboard?: boolean;
+  include_dashboard?: boolean;
 
   @doc("The port to bind the dashboard server to.")
-  dashboardPort?: int32;
+  dashboard_port?: int32;
 
   @doc("Additional arguments passed to ray start on the head node.")
-  headNodeAdditionalArgs?: string;
+  head_node_additional_args?: string;
 
   @doc("Additional arguments passed to ray start on worker nodes.")
-  workerNodeAdditionalArgs?: string;
+  worker_node_additional_args?: string;
 
   @doc("Whether to expose the Ray Client server port through the AML proxy for remote access. When true, the Ray Client port is registered as an interactive endpoint, enabling remote ray.init() connections via the WebSocket-TCP bridge. When false or omitted, the Ray Client port is not accessible externally.")
-  enableRemoteAccessClientServer?: boolean;
+  enable_remote_access_client_server?: boolean;
 
-  @doc("The port for the Ray Client server. Defaults to 10001. Only relevant when enableRemoteAccessClientServer is true.")
-  clientServerPort?: int32;
+  @doc("The port for the Ray Client server. Defaults to 10001. Only relevant when enable_remote_access_client_server is true.")
+  client_server_port?: int32;
 }
 
 @doc("Enum to determine the input/output data delivery mode.")
@@ -80,19 +81,19 @@ union InputOutputModes {
   string,
 
   @doc("Read-only mount mode.")
-  ReadOnlyMount: "ReadOnlyMount",
+  read_only_mount: "read_only_mount",
 
   @doc("Read-write mount mode.")
-  ReadWriteMount: "ReadWriteMount",
+  read_write_mount: "read_write_mount",
 
   @doc("Download mode.")
-  Download: "Download",
+  download: "download",
 
   @doc("Direct mode.")
-  Direct: "Direct",
+  direct: "direct",
 
   @doc("Upload mode.")
-  Upload: "Upload",
+  upload: "upload",
 }
 
 @doc("Type of job input/output asset.")
@@ -100,27 +101,25 @@ union AssetTypes {
   string,
 
   @doc("URI file asset.")
-  UriFile: "uri_file",
+  uri_file: "uri_file",
 
   @doc("URI folder asset.")
-  UriFolder: "uri_folder",
+  uri_folder: "uri_folder",
 
   @doc("Safetensors model asset.")
-  SafetensorsModel: "safetensors_model",
+  safetensors_model: "safetensors_model",
 
   @doc("Literal value (inputs only).")
-  Literal: "literal",
+  literal: "literal",
 }
 
 @doc("Job input definition.")
 model Input {
   @doc("Specifies the type of job input.")
-  @encodedName("application/json", "jobInputType")
-  type: AssetTypes;
+  job_input_type: AssetTypes;
 
   @doc("Input Asset URI. Required for uri_file, uri_folder, and safetensors_model types.")
-  @encodedName("application/json", "uri")
-  path?: string;
+  uri?: string;
 
   @doc("Input Asset Delivery Mode. Applies to uri-based inputs.")
   mode?: InputOutputModes;
@@ -132,23 +131,22 @@ model Input {
 @doc("Job output definition.")
 model Output {
   @doc("Specifies the type of job output.")
-  @encodedName("application/json", "jobOutputType")
-  type: AssetTypes;
+  job_output_type: AssetTypes;
 
   @doc("Output Asset Delivery Mode.")
   mode?: InputOutputModes;
 
   @doc("Name of the output data asset to register.")
-  assetName?: string;
+  asset_name?: string;
 
   @doc("Version of the output data asset to register.")
-  assetVersion?: string;
+  asset_version?: string;
 
   @doc("Output Asset URI.")
   uri?: string;
 
   @doc("Base model ID. Applies to safetensors_model outputs.")
-  baseModelId?: string;
+  base_model_id?: string;
 
   @doc("Description for the output.")
   description?: string;
@@ -156,28 +154,39 @@ model Output {
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Use an extensible union instead of a plain string"
 @doc("Nodes that user would like to start the service on.")
-@discriminator("nodesValueType")
+@discriminator("nodes_value_type")
 model NodeCollection {
   @doc("Type of the Nodes value.")
-  nodesValueType: string;
+  nodes_value_type: string;
 }
 
 @doc("All nodes means the service will be running on all of the nodes of the job.")
 model AllNodes extends NodeCollection {
   @doc("Type of the Nodes value.")
-  nodesValueType: "All";
+  nodes_value_type: "all";
+}
+
+@doc("Job service endpoint type.")
+union JobServiceType {
+  string,
+
+  @doc("Studio endpoint.")
+  studio: "studio",
+
+  @doc("Experiment tracking endpoint.")
+  tracking: "tracking",
 }
 
 @doc("Job endpoint definition.")
 model JobService {
   @doc("Endpoint type.")
-  jobServiceType?: string;
+  job_service_type?: JobServiceType;
 
   @doc("Port for endpoint.")
   port?: int32;
 
   @doc("Url for endpoint.")
-  endpoint?: string;
+  endpoint?: url;
 
   @doc("Additional properties to set on the endpoint.")
   properties?: Record<string>;
@@ -191,40 +200,41 @@ model JobService {
 
   @doc("Any error in the service.")
   @visibility(Lifecycle.Read)
-  errorMessage?: string;
+  error_message?: string;
 }
 
 @doc("Compute Resource configuration for the job.")
 model JobResourceConfiguration {
   @doc("Optional number of instances or nodes used by the compute target.")
-  instanceCount?: int32;
+  instance_count?: int32;
 
   @doc("Optional type of VM used as supported by the compute target.")
-  instanceType?: string;
+  instance_type?: string;
 
   @doc("Additional properties bag.")
   properties?: Record<unknown>;
 
   @doc("Size of the docker container's shared memory block. This should be in the format of (number)(unit) where number as to be greater than 0 and the unit can be one of b(bytes), k(kilobytes), m(megabytes), or g(gigabytes).")
-  shmSize?: string;
+  shm_size?: string;
 
   @doc("Extra arguments to pass to the Docker run command. This would override any parameters that have already been set by the system, or in this section. This parameter is only supported for Azure ML compute types.")
-  dockerArgs?: string;
+  docker_args?: string;
 }
 
 @doc("Command Job limit class.")
 model CommandJobLimits {
   @doc("JobLimit type.")
-  jobLimitsType: "Command";
+  job_limits_type: "command";
 
   @doc("The max run duration in ISO 8601 format, after which the job will be cancelled. Only supports duration with precision as low as Seconds.")
+  @encode(DurationKnownEncoding.ISO8601)
   timeout?: duration;
 }
 
 @doc("Queue settings for the job.")
 model QueueSettings {
   @doc("Controls the compute job tier.")
-  jobTier?: string;
+  job_tier?: string;
 }
 
 @doc("Training algorithm used by a declarative training job.")
@@ -232,37 +242,37 @@ union TrainingAlgorithm {
   string,
 
   @doc("Supervised fine tuning.")
-  Sft: "sft",
+  sft: "sft",
 
   @doc("Direct preference optimization.")
-  Dpo: "dpo",
+  dpo: "dpo",
 
   @doc("Kahneman-Tversky optimization.")
-  Kto: "kto",
+  kto: "kto",
 
   @doc("Odds ratio preference optimization.")
-  Orpo: "orpo",
+  orpo: "orpo",
 
   @doc("Contrastive preference optimization.")
-  Cpo: "cpo",
+  cpo: "cpo",
 
   @doc("Simple preference optimization.")
-  SimPo: "simpo",
+  simpo: "simpo",
 
   @doc("Group relative policy optimization.")
-  Grpo: "grpo",
+  grpo: "grpo",
 
   @doc("Proximal policy optimization.")
-  Ppo: "ppo",
+  ppo: "ppo",
 
   @doc("REINFORCE leave-one-out.")
-  Rloo: "rloo",
+  rloo: "rloo",
 
   @doc("REINFORCE++.")
-  ReinforcePp: "reinforce_pp",
+  reinforce_pp: "reinforce_pp",
 
   @doc("Reward model training.")
-  RewardModel: "reward_model",
+  reward_model: "reward_model",
 }
 
 @doc("Training framework used to lower a declarative training job into an execution command.")
@@ -270,22 +280,22 @@ union TrainingFramework {
   string,
 
   @doc("TRL framework.")
-  Trl: "trl",
+  trl: "trl",
 
   @doc("VERL framework.")
-  Verl: "verl",
+  verl: "verl",
 
   @doc("OpenRLHF framework.")
-  OpenRlhf: "open_rlhf",
+  open_rlhf: "open_rlhf",
 
   @doc("NeMo RL framework.")
-  NemoRl: "nemo_rl",
+  nemo_rl: "nemo_rl",
 
   @doc("Slime framework.")
-  Slime: "slime",
+  slime: "slime",
 
   @doc("TorchForge framework.")
-  TorchForge: "torch_forge",
+  torch_forge: "torch_forge",
 }
 
 @doc("Chat template used to format conversational training data.")
@@ -293,19 +303,19 @@ union ChatTemplate {
   string,
 
   @doc("ChatML template.")
-  Chatml: "chatml",
+  chatml: "chatml",
 
   @doc("Llama 3 chat template.")
-  Llama3: "llama-3",
+  llama_3: "llama_3",
 
   @doc("Zephyr chat template.")
-  Zephyr: "zephyr",
+  zephyr: "zephyr",
 
   @doc("Gemma chat template.")
-  Gemma: "gemma",
+  gemma: "gemma",
 
   @doc("Phi 3 chat template.")
-  Phi3: "phi-3",
+  phi_3: "phi_3",
 }
 
 @doc("Mapping from logical training fields to columns in the dataset.")
@@ -338,10 +348,10 @@ model TrainingColumnMapping {
 @doc("Formatting options for conversational training data.")
 model TrainingDataFormatConfiguration {
   @doc("Built-in chat template to apply to the dataset.")
-  chatTemplate?: ChatTemplate;
+  chat_template?: ChatTemplate;
 
   @doc("Path to a custom chat template relative to the job's code directory.")
-  chatTemplatePath?: string;
+  chat_template_path?: string;
 }
 
 @doc("Dataset configuration for a declarative training job.")
@@ -356,13 +366,13 @@ model TrainingDatasetConfiguration {
   columns?: TrainingColumnMapping;
 
   @doc("Conversational data formatting options.")
-  dataFormat?: TrainingDataFormatConfiguration;
+  data_format?: TrainingDataFormatConfiguration;
 }
 
 @doc("Reference to a Python callable relative to the job's code directory.")
 model TrainingEntryPointReference {
   @doc("Path to the Python callable in module/file.py:function format.")
-  entryPoint: string;
+  entry_point: string;
 }
 
 @doc("Python runtime dependencies for an inline function.")
@@ -380,12 +390,37 @@ model TrainingInlineFunctionConfiguration {
   runtime?: TrainingInlineFunctionRuntime;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Use an extensible union for forward-compatible reward and judge kinds."
+@doc("Reward or judge signal kind.")
+union TrainingRewardKind {
+  string,
+
+  @doc("Learned reward model judge.")
+  `model`: "model",
+
+  @doc("Python callable judge.")
+  function: "function",
+
+  @doc("Inline Python callable judge.")
+  inline_function: "inline_function",
+
+  @doc("Built-in reward or verifier judge.")
+  builtin: "builtin",
+
+  @doc("Foundry evaluator judge.")
+  evaluator: "evaluator",
+
+  @doc("Model deployment judge.")
+  deployment: "deployment",
+
+  @doc("Composite judge.")
+  composite: "composite",
+}
+
 @doc("Reward or judge signal configuration for reinforcement or reward model training.")
 @discriminator("kind")
 model TrainingRewardConfiguration {
   @doc("Reward or judge signal kind.")
-  kind: string;
+  kind: TrainingRewardKind;
 }
 
 @doc("Learned reward model used as a judge.")
@@ -413,8 +448,7 @@ model TrainingInlineFunctionRewardConfiguration
   kind: "inline_function";
 
   @doc("Inline Python function used to compute reward scores.")
-  @encodedName("application/json", "inline_function")
-  inlineFunction: TrainingInlineFunctionConfiguration;
+  inline_function: TrainingInlineFunctionConfiguration;
 }
 
 @doc("Built-in reward or verifier type.")
@@ -455,7 +489,7 @@ model TrainingEvaluatorRewardConfiguration extends TrainingRewardConfiguration {
   evaluator: string;
 
   @doc("Optional evaluator input mapping.")
-  inputMapping?: Record<string>;
+  input_mapping?: Record<string>;
 }
 
 @doc("Model deployment used as an LLM judge.")
@@ -495,13 +529,13 @@ model TrainingLoraConfiguration {
   rank: int32;
 
   @doc("LoRA scaling factor.")
-  alpha?: int32;
+  alpha?: int32 = 16;
 
   @doc("Dropout applied to adapter inputs.")
   dropout?: float64 = 0.05;
 
   @doc("Linear layers that receive adapters. Use 'auto' to let the framework choose defaults.")
-  targetModules?: string = "auto";
+  target_modules?: string = "auto";
 
   @doc("Whether to enable QLoRA 4-bit base weight loading.")
   quantize?: boolean = false;
@@ -512,16 +546,16 @@ union TrainingRolloutEngine {
   string,
 
   @doc("vLLM inference engine.")
-  Vllm: "vllm",
+  vllm: "vllm",
 
   @doc("SGLang inference engine.")
-  Sglang: "sglang",
+  sglang: "sglang",
 
   @doc("Hugging Face generate-based inference.")
-  Hf: "hf",
+  hf: "hf",
 
   @doc("Megatron-Core native inference.")
-  MegatronInference: "megatron_inference",
+  megatron_inference: "megatron_inference",
 }
 
 @doc("Rollout generation configuration for online reinforcement learning.")
@@ -530,34 +564,34 @@ model TrainingRolloutConfiguration {
   engine: TrainingRolloutEngine;
 
   @doc("Number of completions to generate for each prompt.")
-  numGenerations?: int32;
+  num_generations?: int32;
 
   @doc("Maximum prompt length in tokens.")
-  maxPromptLength?: int32;
+  max_prompt_length?: int32;
 
   @doc("Maximum completion length in tokens.")
-  maxCompletionLength?: int32;
+  max_completion_length?: int32;
 
   @doc("Sampling temperature for rollout generation.")
   temperature?: float64;
 
   @doc("Nucleus sampling probability for rollout generation.")
-  topP?: float64;
+  top_p?: float64;
 
   @doc("Stop sequences for rollout generation.")
   stop?: string[];
 
   @doc("Rollout batch size.")
-  batchSize?: int32;
+  batch_size?: int32;
 
   @doc("Random seed for rollout generation.")
   seed?: int32;
 
   @doc("Tensor parallel size used by the rollout engine.")
-  tensorParallelSize?: int32 = 1;
+  tensor_parallel_size?: int32 = 1;
 
   @doc("GPU memory utilization target for the rollout engine, between 0.0 and 1.0.")
-  gpuMemoryUtilization?: float64;
+  gpu_memory_utilization?: float64;
 }
 
 @doc("Built-in evaluation benchmark.")
@@ -565,22 +599,22 @@ union TrainingEvalBenchmark {
   string,
 
   @doc("Grade School Math 8K benchmark.")
-  Gsm8k: "gsm8k",
+  gsm8k: "gsm8k",
 
   @doc("Massive Multitask Language Understanding benchmark.")
-  Mmlu: "mmlu",
+  mmlu: "mmlu",
 
   @doc("Human-written code generation benchmark.")
-  Humaneval: "humaneval",
+  humaneval: "humaneval",
 
   @doc("Mostly Basic Python Programs benchmark.")
-  Mbpp: "mbpp",
+  mbpp: "mbpp",
 
   @doc("AI2 Reasoning Challenge benchmark.")
-  Arc: "arc",
+  arc: "arc",
 
   @doc("HellaSwag commonsense inference benchmark.")
-  Hellaswag: "hellaswag",
+  hellaswag: "hellaswag",
 }
 
 @doc("Evaluation configuration for a declarative training job.")
@@ -592,11 +626,11 @@ model TrainingEvalConfiguration {
   dataset?: string;
 
   @doc("Evaluation frequency in training steps. Omit for end-of-training only.")
-  everyNSteps?: int32;
+  every_n_steps?: int32;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Use an extensible union for forward-compatible training algorithms."
-@doc("Declarative training recipe. When specified, command must be omitted and environmentImageReference is optional.")
+@doc("Declarative training recipe. When specified, command must be omitted and environment_image_reference is optional.")
 @discriminator("algorithm")
 model TrainingConfiguration {
   @doc("Training algorithm.")
@@ -607,11 +641,11 @@ model TrainingConfiguration {
 
   @doc("Training framework resolved by the service.")
   @visibility(Lifecycle.Read)
-  resolvedFramework?: TrainingFramework;
+  resolved_framework?: TrainingFramework;
 
   @doc("Version of the resolved training framework used by the service.")
   @visibility(Lifecycle.Read)
-  frameworkVersion?: string;
+  framework_version?: string;
 
   @doc("Base model asset reference.")
   `model`: string;
@@ -783,27 +817,27 @@ model RewardModelTrainingConfiguration extends TrainingConfiguration {
 model SystemData {
   @doc("The identity that created the resource.")
   @visibility(Lifecycle.Read)
-  createdBy?: string;
+  created_by?: string;
 
   @doc("The type of identity that created the resource.")
   @visibility(Lifecycle.Read)
-  createdByType?: string;
+  created_by_type?: string;
 
   @doc("The timestamp of resource creation (UTC).")
   @visibility(Lifecycle.Read)
-  createdAt?: utcDateTime;
+  created_at?: FoundryTimestamp;
 
   @doc("The identity that last modified the resource.")
   @visibility(Lifecycle.Read)
-  lastModifiedBy?: string;
+  last_modified_by?: string;
 
   @doc("The type of identity that last modified the resource.")
   @visibility(Lifecycle.Read)
-  lastModifiedByType?: string;
+  last_modified_by_type?: string;
 
   @doc("The timestamp of resource last modification (UTC).")
   @visibility(Lifecycle.Read)
-  lastModifiedAt?: utcDateTime;
+  last_modified_at?: FoundryTimestamp;
 }
 
 @doc("Type of a job.")
@@ -811,33 +845,33 @@ union JobType {
   string,
 
   @doc("Command job.")
-  Command: "Command",
+  command: "command",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Use an extensible union instead of a plain string"
 @doc("Base properties of a Job.")
-@discriminator("jobType")
+@discriminator("job_type")
 model JobProperties {
   @doc("Job type.")
-  jobType: string;
+  job_type: string;
 }
 
 @doc("Properties of a Command Job.")
 model CommandJob extends JobProperties {
   @doc("Job type.")
-  jobType: "Command";
+  job_type: "command";
 
   @doc("The command to execute on startup of the job. Required when training is not specified, and must be omitted when training is specified.")
   command?: string;
 
   @doc("ACR path or Azure ML environment reference. Required when training is not specified.")
-  environmentImageReference?: string;
+  environment_image_reference?: string;
 
   @doc("Declarative training recipe. When specified, the service compiles the recipe into the command and environment used for execution.")
   training?: TrainingConfiguration;
 
   @doc("Display name of job.")
-  displayName?: string;
+  display_name?: string;
 
   @doc("The asset description text.")
   description?: string;
@@ -849,12 +883,10 @@ model CommandJob extends JobProperties {
   properties?: Record<string>;
 
   @doc("Code asset reference.")
-  @encodedName("application/json", "codeId")
-  code?: string;
+  code_id?: string;
 
   @doc("Compute resource ID.")
-  @encodedName("application/json", "computeId")
-  compute: string;
+  compute_id: string;
 
   @doc("Mapping of input data bindings used in the job.")
   inputs?: Record<Input>;
@@ -863,13 +895,13 @@ model CommandJob extends JobProperties {
   outputs?: Record<Output>;
 
   @doc("Environment variables included in the job.")
-  environmentVariables?: Record<string>;
+  environment_variables?: Record<string>;
 
   @doc("Compute Resource configuration for the job.")
   resources?: JobResourceConfiguration;
 
   @doc("Number of GPUs requested by the training job.")
-  gpuCount?: int32;
+  gpu_count?: int32;
 
   @doc("Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, or null.")
   distribution?: DistributionConfiguration;
@@ -878,10 +910,10 @@ model CommandJob extends JobProperties {
   limits?: CommandJobLimits;
 
   @doc("Queue settings for the job.")
-  queueSettings?: QueueSettings;
+  queue_settings?: QueueSettings;
 
   @doc("user-assigned managed identity")
-  userAssignedIdentityId?: string;
+  user_assigned_identity_id?: string;
 
   @doc("Status of the job.")
   @visibility(Lifecycle.Read)
@@ -909,7 +941,7 @@ model Job {
 
   @doc("Metadata pertaining to creation and last modification of the resource.")
   @visibility(Lifecycle.Read)
-  systemData?: SystemData;
+  system_data?: SystemData;
 }
 
 @doc("Request body for creating a training job.")
@@ -931,11 +963,11 @@ model JobDeleteAcceptedResponse {
 
   @doc("URL to poll for the status of the delete operation.")
   @header("Operation-Location")
-  operationLocation?: string;
+  operation_location?: string;
 
   @doc("Suggested delay in seconds before polling.")
   @header("Retry-After")
-  retryAfter?: int32;
+  retry_after?: int32;
 }
 
 @doc("Response returned when a job cancel operation is accepted asynchronously.")
@@ -948,11 +980,11 @@ model JobCancelAcceptedResponse {
 
   @doc("URL to poll for the status of the cancel operation.")
   @header("Operation-Location")
-  operationLocation?: string;
+  operation_location?: string;
 
   @doc("Suggested delay in seconds before polling.")
   @header("Retry-After")
-  retryAfter?: int32;
+  retry_after?: int32;
 }
 
 @doc("Status of an asynchronous training job operation.")
@@ -960,19 +992,19 @@ union JobOperationStatus {
   string,
 
   @doc("Operation is being processed.")
-  InProgress: "InProgress",
+  in_progress: "in_progress",
 
   @doc("Operation is deleting resources.")
-  Deleting: "Deleting",
+  deleting: "deleting",
 
   @doc("Operation completed successfully.")
-  Succeeded: "Succeeded",
+  succeeded: "succeeded",
 
   @doc("Operation failed.")
-  Failed: "Failed",
+  failed: "failed",
 
   @doc("Operation was canceled.")
-  Canceled: "Canceled",
+  canceled: "canceled",
 }
 
 @doc("Error details for an asynchronous training job operation.")
@@ -1007,15 +1039,15 @@ model JobOperationResource {
 
   @doc("Operation start time.")
   @visibility(Lifecycle.Read)
-  startTime?: utcDateTime;
+  started_at?: FoundryTimestamp;
 
   @doc("Operation end time.")
   @visibility(Lifecycle.Read)
-  endTime?: utcDateTime;
+  ended_at?: FoundryTimestamp;
 
   @doc("Operation completion percentage from 0 to 100.")
   @visibility(Lifecycle.Read)
-  percentComplete?: float64;
+  percent_complete?: float64;
 
   @doc("Operation error information.")
   @visibility(Lifecycle.Read)
@@ -1032,7 +1064,7 @@ model JobOperationAcceptedResponse {
 
   @doc("URL to poll for the operation status.")
   @header("Operation-Location")
-  operationLocation?: string;
+  operation_location?: string;
 }
 
 @doc("Specifies which jobs to include in a list result based on their lifecycle state.")
@@ -1040,13 +1072,13 @@ union ListViewType {
   string,
 
   @doc("Show only active (non-archived) jobs.")
-  ActiveOnly: "ActiveOnly",
+  active_only: "active_only",
 
   @doc("Show only archived jobs.")
-  ArchivedOnly: "ArchivedOnly",
+  archived_only: "archived_only",
 
   @doc("Show all jobs regardless of archived state.")
-  All: "All",
+  all: "all",
 }
 
 @doc("Status of a job execution attempt.")
@@ -1054,19 +1086,19 @@ union JobAttemptStatus {
   string,
 
   @doc("The attempt is queued.")
-  Queued: "Queued",
+  queued: "queued",
 
   @doc("The attempt is running.")
-  Running: "Running",
+  running: "running",
 
   @doc("The attempt completed successfully.")
-  Completed: "Completed",
+  completed: "completed",
 
   @doc("The attempt failed.")
-  Failed: "Failed",
+  failed: "failed",
 
   @doc("The attempt was canceled.")
-  Canceled: "Canceled",
+  canceled: "canceled",
 }
 
 @doc("Warning emitted during a job attempt.")
@@ -1097,7 +1129,7 @@ model JobAttemptError {
 model TrainingJobService {
   @doc("Service type.")
   @visibility(Lifecycle.Read)
-  type?: string;
+  type?: JobServiceType;
 
   @doc("Service port.")
   @visibility(Lifecycle.Read)
@@ -1113,7 +1145,7 @@ model TrainingJobService {
 
   @doc("Service endpoint URI.")
   @visibility(Lifecycle.Read)
-  endpoint?: string;
+  endpoint?: url;
 
   @doc("Additional service properties.")
   @visibility(Lifecycle.Read)
@@ -1131,19 +1163,19 @@ model TrainingJobServiceCollection {
 model JobAttemptComputeDetails {
   @doc("Virtual machine size used for this attempt.")
   @visibility(Lifecycle.Read)
-  vmSize?: string;
+  vm_size?: string;
 
   @doc("Instance type used for this attempt.")
   @visibility(Lifecycle.Read)
-  instanceType?: string;
+  instance_type?: string;
 
   @doc("Number of instances allocated to this attempt.")
   @visibility(Lifecycle.Read)
-  instanceCount?: int32;
+  instance_count?: int32;
 
   @doc("Number of GPUs allocated to this attempt.")
   @visibility(Lifecycle.Read)
-  gpuCount?: int32;
+  gpu_count?: int32;
 
   @doc("Region where this attempt was placed.")
   @visibility(Lifecycle.Read)
@@ -1162,7 +1194,7 @@ model JobAttempt {
 
   @doc("The job name this attempt belongs to.")
   @visibility(Lifecycle.Read)
-  jobName: string;
+  job_name: string;
 
   @doc("The attempt status.")
   @visibility(Lifecycle.Read)
@@ -1170,31 +1202,32 @@ model JobAttempt {
 
   @doc("Additional status reason.")
   @visibility(Lifecycle.Read)
-  statusReason?: string;
+  status_reason?: string;
 
   @doc("Time the attempt started.")
   @visibility(Lifecycle.Read)
-  startTimeUtc?: utcDateTime;
+  started_at?: FoundryTimestamp;
 
   @doc("Time the attempt ended.")
   @visibility(Lifecycle.Read)
-  endTimeUtc?: utcDateTime;
+  ended_at?: FoundryTimestamp;
 
   @doc("Most recent time the attempt started running.")
   @visibility(Lifecycle.Read)
-  lastStartTimeUtc?: utcDateTime;
+  last_started_at?: FoundryTimestamp;
 
   @doc("Total compute duration consumed by the attempt.")
   @visibility(Lifecycle.Read)
-  computeDuration?: duration;
+  @encode(DurationKnownEncoding.ISO8601)
+  compute_duration?: duration;
 
   @doc("Queueing details associated with the attempt.")
   @visibility(Lifecycle.Read)
-  queueingInfo?: Record<unknown>;
+  queueing_info?: Record<unknown>;
 
   @doc("Compute details associated with the attempt.")
   @visibility(Lifecycle.Read)
-  computeDetails?: JobAttemptComputeDetails;
+  compute_details?: JobAttemptComputeDetails;
 
   @doc("Terminal error for the attempt, if any.")
   @visibility(Lifecycle.Read)
@@ -1206,7 +1239,7 @@ model JobAttempt {
 
   @doc("Whether this attempt is the current attempt for the job.")
   @visibility(Lifecycle.Read)
-  isCurrent?: boolean;
+  is_latest?: boolean;
 }
 
 @doc("Type of a job artifact.")
@@ -1214,10 +1247,10 @@ union JobArtifactType {
   string,
 
   @doc("A file artifact.")
-  File: "File",
+  file: "file",
 
   @doc("A directory artifact.")
-  Directory: "Directory",
+  directory: "directory",
 }
 
 @doc("Metadata for an artifact produced by or attached to a job.")
@@ -1228,7 +1261,7 @@ model JobArtifact {
 
   @doc("Artifact type.")
   @visibility(Lifecycle.Read)
-  type?: JobArtifactType;
+  type: JobArtifactType;
 
   @doc("Artifact size in bytes.")
   @visibility(Lifecycle.Read)
@@ -1236,11 +1269,11 @@ model JobArtifact {
 
   @doc("Time the artifact was created.")
   @visibility(Lifecycle.Read)
-  createdTimeUtc?: utcDateTime;
+  created_at?: FoundryTimestamp;
 
   @doc("Time the artifact was last updated.")
   @visibility(Lifecycle.Read)
-  updatedTimeUtc?: utcDateTime;
+  updated_at?: FoundryTimestamp;
 }
 
 @doc("Content access information for a job artifact.")
@@ -1251,15 +1284,15 @@ model JobArtifactContentInfo {
 
   @doc("Download URI for the artifact content.")
   @visibility(Lifecycle.Read)
-  contentUri?: url;
+  content_uri: url;
 
   @doc("MIME type of the content.")
   @visibility(Lifecycle.Read)
-  contentType?: string;
+  content_type?: string;
 
   @doc("Time the content URI expires.")
   @visibility(Lifecycle.Read)
-  expiresAtUtc?: utcDateTime;
+  expires_at?: FoundryTimestamp;
 }
 
 @doc("The kind of metric emitted by a job.")
@@ -1267,13 +1300,13 @@ union JobMetricType {
   string,
 
   @doc("Scalar metric values.")
-  Scalar: "Scalar",
+  `scalar`: "scalar",
 
   @doc("Table metric values.")
-  Table: "Table",
+  table: "table",
 
   @doc("Image metric values.")
-  Image: "Image",
+  image: "image",
 }
 
 @doc("Metadata for a metric emitted by a job or run.")
@@ -1284,7 +1317,7 @@ model JobMetric {
 
   @doc("Metric type.")
   @visibility(Lifecycle.Read)
-  metricType?: JobMetricType;
+  metric_type?: JobMetricType;
 
   @doc("Column metadata for structured metric values.")
   @visibility(Lifecycle.Read)
@@ -1295,7 +1328,7 @@ model JobMetric {
 model JobMetricPoint {
   @doc("Metric identifier.")
   @visibility(Lifecycle.Read)
-  metricId?: string;
+  metric_id?: string;
 
   @doc("Metric step.")
   @visibility(Lifecycle.Read)
@@ -1303,7 +1336,7 @@ model JobMetricPoint {
 
   @doc("Time the metric point was created.")
   @visibility(Lifecycle.Read)
-  createdUtc?: utcDateTime;
+  created_at?: FoundryTimestamp;
 
   @doc("Metric data values.")
   @visibility(Lifecycle.Read)
@@ -1329,11 +1362,11 @@ model JobMetricAggregate {
 
   @doc("Aggregate window start.")
   @visibility(Lifecycle.Read)
-  startUtc?: utcDateTime;
+  started_at?: FoundryTimestamp;
 
   @doc("Aggregate window end.")
   @visibility(Lifecycle.Read)
-  endUtc?: utcDateTime;
+  ended_at?: FoundryTimestamp;
 
   @doc("Aggregate values.")
   @visibility(Lifecycle.Read)
@@ -1371,43 +1404,29 @@ model JobOutputReference {
 
   @doc("Registered asset name, if the output produced an asset.")
   @visibility(Lifecycle.Read)
-  assetName?: string;
+  asset_name?: string;
 
   @doc("Registered asset version, if the output produced an asset.")
   @visibility(Lifecycle.Read)
-  assetVersion?: string;
+  asset_version?: string;
 
   @doc("Base model ID for model outputs.")
   @visibility(Lifecycle.Read)
-  baseModelId?: string;
+  base_model_id?: string;
 
   @doc("Output description.")
   @visibility(Lifecycle.Read)
   description?: string;
 }
 
-alias JobPagedListQueryParameters = {
-  @doc("Maximum number of items to return.")
-  @query
-  limit?: int32;
+alias JobPagedListQueryParameters = CommonPageQueryParameters;
 
-  @doc("Continuation token returned by a previous list request.")
-  @query
-  @continuationToken
-  skipToken?: string;
-};
-
-alias JobContinuationListQueryParameters = {
-  @doc("Continuation token returned by a previous list request.")
-  @query
-  @continuationToken
-  skipToken?: string;
-};
+alias JobContinuationListQueryParameters = CommonPageQueryParameters;
 
 alias JobArtifactListQueryParameters = JobPagedListQueryParameters & {
   @doc("Artifact path prefix to list.")
   @query
-  pathPrefix?: string;
+  path_prefix?: string;
 };
 
 alias JobMetricListQueryParameters = JobPagedListQueryParameters;
@@ -1415,36 +1434,33 @@ alias JobMetricListQueryParameters = JobPagedListQueryParameters;
 alias JobArtifactContentInfoByPrefixQueryParameters = {
   @doc("Artifact path prefix to list download information for. If omitted, download information is returned for the artifact root.")
   @query
-  pathPrefix?: string;
+  path_prefix?: string;
 
-  @doc("Continuation token returned by a previous list request.")
-  @query
-  @continuationToken
-  skipToken?: string;
+  ...CommonPageQueryParameters;
 };
 
 alias JobServicesQueryParameters = {
   @doc("Node identifier whose service endpoints should be returned. If omitted, leader-node services are returned.")
   @query
-  nodeId?: int32;
+  node_id?: int32;
 };
 
 alias JobMetricQueryParameters = {
   @doc("Start of the metric time range.")
   @query
-  startTimeUtc?: utcDateTime;
+  started_at?: FoundryTimestamp;
 
   @doc("End of the metric time range.")
   @query
-  endTimeUtc?: utcDateTime;
+  ended_at?: FoundryTimestamp;
 
   @doc("Minimum metric step to include.")
   @query
-  minStep?: int64;
+  min_step?: int64;
 
   @doc("Maximum metric step to include.")
   @query
-  maxStep?: int64;
+  max_step?: int64;
 
   @doc("Maximum number of metric points to return.")
   @query

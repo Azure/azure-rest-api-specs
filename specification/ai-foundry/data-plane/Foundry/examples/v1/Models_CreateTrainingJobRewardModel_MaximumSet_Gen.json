@@ -1,64 +1,64 @@
 {
-    "title": "Models_CreateTrainingJobRewardModel_MaximumSet",
-    "operationId": "Models_createTrainingJob",
-    "parameters": {
-        "api-version": "v1",
-        "Operation-Id": "create-my-reward-model-training-job-01",
-        "Foundry-Features": "Jobs=V1Preview",
-        "job": {
-            "type": "reward_model",
-            "name": "qwen-helpfulness-reward-model",
-            "version": "1",
-            "description": "Reward model trained from pairwise helpfulness preferences",
-            "tags": {
-                "algorithm": "reward_model"
-            },
-            "model": "azureai://registries/azureml/models/qwen-base/versions/1",
-            "dataset": {
-                "kind": "pairwise",
-                "train": "azureai://accounts/my-account/projects/my-project/data/reward-train/versions/1",
-                "eval": "azureai://accounts/my-account/projects/my-project/data/reward-eval/versions/1",
-                "columns": {
-                    "prompt": "prompt",
-                    "chosen": "chosen",
-                    "rejected": "rejected"
-                },
-                "dataFormat": {
-                    "chatTemplate": "chatml"
-                }
-            },
-            "runtime": {
-                "framework": "trl",
-                "loss": "bradley_terry",
-                "hyperparameters": {
-                    "learning_rate": 0.00002,
-                    "num_train_epochs": 2
-                },
-                "lora": {
-                    "rank": 8,
-                    "alpha": 16,
-                    "targetModules": "auto"
-                }
-            },
-            "compute": {
-                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.CognitiveServices/accounts/my-account/computes/my-cluster",
-                "resources": {
-                    "instanceCount": 2,
-                    "instanceType": "Standard_NC96ads_A100_v4"
-                },
-                "gpuCount": 16
-            }
+  "title": "Models_CreateTrainingJobRewardModel_MaximumSet",
+  "operationId": "Models_createTrainingJob",
+  "parameters": {
+    "api-version": "v1",
+    "Operation-Id": "create-my-reward-model-training-job-01",
+    "Foundry-Features": "TrainingJobs=V1Preview",
+    "job": {
+      "type": "reward_model",
+      "name": "qwen-helpfulness-reward-model",
+      "version": "1",
+      "description": "Reward model trained from pairwise helpfulness preferences",
+      "tags": {
+        "algorithm": "reward_model"
+      },
+      "model": "azureai://registries/azureml/models/qwen-base/versions/1",
+      "dataset": {
+        "kind": "pairwise",
+        "train": "azureai://accounts/my-account/projects/my-project/data/reward-train/versions/1",
+        "eval": "azureai://accounts/my-account/projects/my-project/data/reward-eval/versions/1",
+        "columns": {
+          "prompt": "prompt",
+          "chosen": "chosen",
+          "rejected": "rejected"
+        },
+        "data_format": {
+          "chatTemplate": "chatml"
         }
-    },
-    "responses": {
-        "202": {
-            "headers": {
-                "Operation-Location": "https://my-account.services.ai.azure.com/api/projects/my-project/models/operations/create-my-reward-model-training-job-01/result?api-version=v1"
-            },
-            "body": {
-                "operationId": "create-my-reward-model-training-job-01",
-                "status": "queued"
-            }
+      },
+      "runtime": {
+        "framework": "trl",
+        "loss": "bradley_terry",
+        "hyperparameters": {
+          "learning_rate": 0.00002,
+          "num_train_epochs": 2
+        },
+        "lora": {
+          "rank": 8,
+          "alpha": 16,
+          "targetModules": "auto"
         }
+      },
+      "compute": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.CognitiveServices/accounts/my-account/computes/my-cluster",
+        "resources": {
+          "instanceCount": 2,
+          "instanceType": "Standard_NC96ads_A100_v4"
+        },
+        "gpu_count": 16
+      }
     }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "https://my-account.services.ai.azure.com/api/projects/my-project/models/operations/create-my-reward-model-training-job-01/result?api-version=v1"
+      },
+      "body": {
+        "operation_id": "create-my-reward-model-training-job-01",
+        "status": "queued"
+      }
+    }
+  }
 }

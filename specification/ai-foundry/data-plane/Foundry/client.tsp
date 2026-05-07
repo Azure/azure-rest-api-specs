@@ -23,7 +23,7 @@ import "./src/memory-stores/routes.tsp";
 import "./src/red-teams/routes.tsp";
 import "./src/schedules/routes.tsp";
 import "./src/toolsets/routes.tsp";
-import "./src/jobs/routes.tsp";
+import "./src/training_jobs/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
 import "./relocate-beta-operations.tsp";

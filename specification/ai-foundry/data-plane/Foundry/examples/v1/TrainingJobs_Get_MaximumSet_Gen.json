@@ -5,7 +5,7 @@
     "api-version": "v1",
     "name": "my_training_job_01",
     "x-ms-client-request-id": "cf35b680-dc80-4815-ab83-9364acc3bce6",
-    "Foundry-Features": "Jobs=V1Preview"
+    "Foundry-Features": "TrainingJobs=V1Preview"
   },
   "responses": {
     "200": {
@@ -14,9 +14,9 @@
         "name": "my_training_job_01",
         "type": "Microsoft.MachineLearningServices/workspaces/training_jobs",
         "properties": {
-          "jobType": "Command",
+          "job_type": "command",
           "command": "python train.py --data ${{inputs.training_data}} --output ${{outputs.model}}",
-          "environmentImageReference": "mcr.microsoft.com/azureml/openmpi4.1.0-cuda11.8-cudnn8-ubuntu22.04:latest",
+          "environment_image_reference": "mcr.microsoft.com/azureml/openmpi4.1.0-cuda11.8-cudnn8-ubuntu22.04:latest",
           "displayName": "My Training Job",
           "description": "A sample command job for training",
           "tags": {
@@ -29,23 +29,23 @@
           "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.MachineLearningServices/workspaces/my-ws/computes/my-cluster",
           "inputs": {
             "training_data": {
-              "jobInputType": "uri_folder",
+              "job_input_type": "uri_folder",
               "uri": "azureai://datastores/mystore/paths/data/train",
-              "mode": "ReadOnlyMount"
+              "mode": "read_only_mount"
             },
             "learning_rate": {
-              "jobInputType": "literal",
+              "job_input_type": "literal",
               "value": "0.001"
             }
           },
           "outputs": {
             "model": {
-              "jobOutputType": "uri_folder",
-              "mode": "ReadWriteMount",
-              "assetName": "my-trained-model",
-              "assetVersion": "1",
+              "job_output_type": "uri_folder",
+              "mode": "read_write_mount",
+              "asset_name": "my-trained-model",
+              "asset_version": "1",
               "uri": "azureai://datastores/workspaceblobstore/paths/outputs/model",
-              "baseModelId": "azureai:qwen-base-model:1",
+              "base_model_id": "azureai:qwen-base-model:1",
               "description": "Trained model output"
             }
           },
@@ -53,7 +53,7 @@
             "AZUREML_DATASET_FILE": "/mnt/data/train.csv"
           },
           "distribution": {
-            "distributionType": "PyTorch",
+            "distributionType": "pytorch",
             "processCountPerInstance": 4
           },
           "resources": {
@@ -63,33 +63,33 @@
             "dockerArgs": "--privileged"
           },
           "limits": {
-            "jobLimitsType": "Command",
+            "job_limits_type": "command",
             "timeout": "PT2H30M"
           },
           "services": {
-            "Studio": {
-              "jobServiceType": "Studio",
+            "studio": {
+              "job_service_type": "studio",
               "port": 8080,
               "endpoint": "https://studio.example.com"
             },
-            "Tracking": {
-              "jobServiceType": "Tracking"
+            "tracking": {
+              "job_service_type": "tracking"
             }
           },
-          "queueSettings": {
+          "queue_settings": {
             "jobTier": "Standard"
           },
-          "userAssignedIdentityId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/my-identity",
-          "status": "Running",
+          "user_assigned_identity_id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/my-identity",
+          "status": "running",
           "isArchived": false
         },
-        "systemData": {
-          "createdAt": "2020-01-01T12:34:56.999Z",
-          "createdBy": "user@example.com",
-          "createdByType": "User",
-          "lastModifiedAt": "2020-01-01T12:34:56.999Z",
-          "lastModifiedBy": "user@example.com",
-          "lastModifiedByType": "User"
+        "system_data": {
+          "created_at": 1577882096,
+          "created_by": "user@example.com",
+          "created_by_type": "User",
+          "last_modified_at": 1577882096,
+          "last_modified_by": "user@example.com",
+          "last_modified_by_type": "User"
         }
       }
     }

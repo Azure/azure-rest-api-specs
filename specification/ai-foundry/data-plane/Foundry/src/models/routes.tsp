@@ -1,6 +1,6 @@
 import "./models.tsp";
 import "../common/models.tsp";
-import "../jobs/models.tsp";
+import "../training_jobs/models.tsp";
 
 using TypeSpec.Http;
 using Azure.Core;
@@ -19,11 +19,11 @@ interface Models {
   @route("/models:create_training_job")
   @pollingOperation(Models.getTrainingOperationResult)
   createTrainingJob is FoundryDataPlaneRequiredPreviewOperation<
-    FoundryFeaturesOptInKeys.jobs_v1_preview,
+    FoundryFeaturesOptInKeys.training_jobs_v1_preview,
     {
       @doc("Idempotency key used to safely retry managed model training.")
       @header("Operation-Id")
-      operationId?: string;
+      operation_id?: string;
 
       @doc("The managed model training job to create.")
       @bodyRoot
@@ -37,11 +37,11 @@ interface Models {
   @overload(Models.createTrainingJob)
   @pollingOperation(Models.getTrainingOperationResult)
   createSftTrainingJob is FoundryDataPlaneRequiredPreviewOperation<
-    FoundryFeaturesOptInKeys.jobs_v1_preview,
+    FoundryFeaturesOptInKeys.training_jobs_v1_preview,
     {
       @doc("Idempotency key used to safely retry managed model training.")
       @header("Operation-Id")
-      operationId?: string;
+      operation_id?: string;
 
       @doc("The managed SFT model training job to create.")
       @bodyRoot
@@ -55,11 +55,11 @@ interface Models {
   @overload(Models.createTrainingJob)
   @pollingOperation(Models.getTrainingOperationResult)
   createPreferenceTrainingJob is FoundryDataPlaneRequiredPreviewOperation<
-    FoundryFeaturesOptInKeys.jobs_v1_preview,
+    FoundryFeaturesOptInKeys.training_jobs_v1_preview,
     {
       @doc("Idempotency key used to safely retry managed model training.")
       @header("Operation-Id")
-      operationId?: string;
+      operation_id?: string;
 
       @doc("The managed pairwise preference model training request.")
       @bodyRoot
@@ -73,11 +73,11 @@ interface Models {
   @overload(Models.createTrainingJob)
   @pollingOperation(Models.getTrainingOperationResult)
   createKtoTrainingJob is FoundryDataPlaneRequiredPreviewOperation<
-    FoundryFeaturesOptInKeys.jobs_v1_preview,
+    FoundryFeaturesOptInKeys.training_jobs_v1_preview,
     {
       @doc("Idempotency key used to safely retry managed model training.")
       @header("Operation-Id")
-      operationId?: string;
+      operation_id?: string;
 
       @doc("The managed KTO model training request.")
       @bodyRoot
@@ -91,11 +91,11 @@ interface Models {
   @overload(Models.createTrainingJob)
   @pollingOperation(Models.getTrainingOperationResult)
   createRewardModelTrainingJob is FoundryDataPlaneRequiredPreviewOperation<
-    FoundryFeaturesOptInKeys.jobs_v1_preview,
+    FoundryFeaturesOptInKeys.training_jobs_v1_preview,
     {
       @doc("Idempotency key used to safely retry managed model training.")
       @header("Operation-Id")
-      operationId?: string;
+      operation_id?: string;
 
       @doc("The managed reward-model training request.")
       @bodyRoot
@@ -109,11 +109,11 @@ interface Models {
   @overload(Models.createTrainingJob)
   @pollingOperation(Models.getTrainingOperationResult)
   createGrpoTrainingJob is FoundryDataPlaneRequiredPreviewOperation<
-    FoundryFeaturesOptInKeys.jobs_v1_preview,
+    FoundryFeaturesOptInKeys.training_jobs_v1_preview,
     {
       @doc("Idempotency key used to safely retry managed model training.")
       @header("Operation-Id")
-      operationId?: string;
+      operation_id?: string;
 
       @doc("The managed GRPO model training request.")
       @bodyRoot
@@ -127,11 +127,11 @@ interface Models {
   @overload(Models.createTrainingJob)
   @pollingOperation(Models.getTrainingOperationResult)
   createPolicyGradientTrainingJob is FoundryDataPlaneRequiredPreviewOperation<
-    FoundryFeaturesOptInKeys.jobs_v1_preview,
+    FoundryFeaturesOptInKeys.training_jobs_v1_preview,
     {
       @doc("Idempotency key used to safely retry managed model training.")
       @header("Operation-Id")
-      operationId?: string;
+      operation_id?: string;
 
       @doc("The managed online policy-gradient model training request.")
       @bodyRoot
@@ -145,11 +145,11 @@ interface Models {
   @overload(Models.createTrainingJob)
   @pollingOperation(Models.getTrainingOperationResult)
   createPpoTrainingJob is FoundryDataPlaneRequiredPreviewOperation<
-    FoundryFeaturesOptInKeys.jobs_v1_preview,
+    FoundryFeaturesOptInKeys.training_jobs_v1_preview,
     {
       @doc("Idempotency key used to safely retry managed model training.")
       @header("Operation-Id")
-      operationId?: string;
+      operation_id?: string;
 
       @doc("The managed PPO model training request.")
       @bodyRoot
@@ -161,13 +161,13 @@ interface Models {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundry model training operations are exposed as product-action polling routes under models."
   @doc("Poll the result of a managed model training operation.")
   @get
-  @route("/models/operations/{operationId}/result")
+  @route("/models/operations/{operation_id}/result")
   getTrainingOperationResult is FoundryDataPlaneRequiredPreviewOperation<
-    FoundryFeaturesOptInKeys.jobs_v1_preview,
+    FoundryFeaturesOptInKeys.training_jobs_v1_preview,
     {
       @doc("The managed model training operation identifier.")
       @path
-      operationId: string;
+      operation_id: string;
     },
     ModelTrainingOperation
   >;

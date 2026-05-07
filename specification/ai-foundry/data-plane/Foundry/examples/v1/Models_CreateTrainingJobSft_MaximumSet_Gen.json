@@ -4,7 +4,7 @@
   "parameters": {
     "api-version": "v1",
     "Operation-Id": "create-my-sft-training-job-01",
-    "Foundry-Features": "Jobs=V1Preview",
+    "Foundry-Features": "TrainingJobs=V1Preview",
     "job": {
       "type": "sft",
       "name": "qwen-medical-sft",
@@ -20,7 +20,7 @@
         "columns": {
           "messages": "messages"
         },
-        "dataFormat": {
+        "data_format": {
           "chatTemplate": "chatml"
         }
       },
@@ -49,7 +49,7 @@
           "instanceCount": 2,
           "instanceType": "Standard_NC6s_v3"
         },
-        "gpuCount": 4
+        "gpu_count": 4
       }
     }
   },
@@ -59,7 +59,7 @@
         "Operation-Location": "https://my-account.services.ai.azure.com/api/projects/my-project/models/operations/create-my-sft-training-job-01/result?api-version=v1"
       },
       "body": {
-        "operationId": "create-my-sft-training-job-01",
+        "operation_id": "create-my-sft-training-job-01",
         "status": "queued"
       }
     }

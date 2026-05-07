@@ -4,10 +4,10 @@
   "parameters": {
     "api-version": "v1",
     "Operation-Id": "create-my-training-job-01",
-    "Foundry-Features": "Jobs=V1Preview",
+    "Foundry-Features": "TrainingJobs=V1Preview",
     "job": {
       "properties": {
-        "jobType": "Command",
+        "job_type": "command",
         "displayName": "My Training Job",
         "description": "A sample declarative training job",
         "tags": {
@@ -36,7 +36,7 @@
               "label": "label",
               "score": "score"
             },
-            "dataFormat": {
+            "data_format": {
               "chatTemplate": "chatml"
             }
           },
@@ -75,23 +75,23 @@
         },
         "inputs": {
           "extra_context": {
-            "jobInputType": "uri_folder",
+            "job_input_type": "uri_folder",
             "uri": "azureai://datastores/mystore/paths/data/context",
-            "mode": "ReadOnlyMount"
+            "mode": "read_only_mount"
           },
           "learning_rate": {
-            "jobInputType": "literal",
+            "job_input_type": "literal",
             "value": "0.001"
           }
         },
         "outputs": {
           "model": {
-            "jobOutputType": "safetensors_model",
-            "mode": "ReadWriteMount",
-            "assetName": "my-trained-model",
-            "assetVersion": "1",
+            "job_output_type": "safetensors_model",
+            "mode": "read_write_mount",
+            "asset_name": "my-trained-model",
+            "asset_version": "1",
             "uri": "azureai://datastores/workspaceblobstore/paths/outputs/model",
-            "baseModelId": "azureai://registries/azureml/models/qwen-base/versions/1",
+            "base_model_id": "azureai://registries/azureml/models/qwen-base/versions/1",
             "description": "Trained model output"
           }
         },
@@ -104,15 +104,15 @@
           "shmSize": "2g",
           "dockerArgs": "--privileged"
         },
-        "gpuCount": 4,
+        "gpu_count": 4,
         "limits": {
-          "jobLimitsType": "Command",
+          "job_limits_type": "command",
           "timeout": "PT2H30M"
         },
-        "queueSettings": {
+        "queue_settings": {
           "jobTier": "Standard"
         },
-        "userAssignedIdentityId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/my-identity"
+        "user_assigned_identity_id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/my-identity"
       }
     }
   },
@@ -123,7 +123,7 @@
         "name": "my_training_job_01",
         "type": "Microsoft.MachineLearningServices/workspaces/training_jobs",
         "properties": {
-          "jobType": "Command",
+          "job_type": "command",
           "displayName": "My Training Job",
           "description": "A sample declarative training job",
           "tags": {
@@ -154,7 +154,7 @@
                 "label": "label",
                 "score": "score"
               },
-              "dataFormat": {
+              "data_format": {
                 "chatTemplate": "chatml"
               }
             },
@@ -193,23 +193,23 @@
           },
           "inputs": {
             "extra_context": {
-              "jobInputType": "uri_folder",
+              "job_input_type": "uri_folder",
               "uri": "azureai://datastores/mystore/paths/data/context",
-              "mode": "ReadOnlyMount"
+              "mode": "read_only_mount"
             },
             "learning_rate": {
-              "jobInputType": "literal",
+              "job_input_type": "literal",
               "value": "0.001"
             }
           },
           "outputs": {
             "model": {
-              "jobOutputType": "safetensors_model",
-              "mode": "ReadWriteMount",
-              "assetName": "my-trained-model",
-              "assetVersion": "1",
+              "job_output_type": "safetensors_model",
+              "mode": "read_write_mount",
+              "asset_name": "my-trained-model",
+              "asset_version": "1",
               "uri": "azureai://datastores/workspaceblobstore/paths/outputs/model",
-              "baseModelId": "azureai://registries/azureml/models/qwen-base/versions/1",
+              "base_model_id": "azureai://registries/azureml/models/qwen-base/versions/1",
               "description": "Trained model output"
             }
           },
@@ -222,24 +222,24 @@
             "shmSize": "2g",
             "dockerArgs": "--privileged"
           },
-          "gpuCount": 4,
+          "gpu_count": 4,
           "limits": {
-            "jobLimitsType": "Command",
+            "job_limits_type": "command",
             "timeout": "PT2H30M"
           },
-          "queueSettings": {
+          "queue_settings": {
             "jobTier": "Standard"
           },
-          "userAssignedIdentityId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/my-identity",
+          "user_assigned_identity_id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/my-identity",
           "status": "NotStarted"
         },
-        "systemData": {
-          "createdAt": "2020-01-01T12:34:56.999Z",
-          "createdBy": "user@example.com",
-          "createdByType": "User",
-          "lastModifiedAt": "2020-01-01T12:34:56.999Z",
-          "lastModifiedBy": "user@example.com",
-          "lastModifiedByType": "User"
+        "system_data": {
+          "created_at": 1577882096,
+          "created_by": "user@example.com",
+          "created_by_type": "User",
+          "last_modified_at": 1577882096,
+          "last_modified_by": "user@example.com",
+          "last_modified_by_type": "User"
         }
       }
     }
