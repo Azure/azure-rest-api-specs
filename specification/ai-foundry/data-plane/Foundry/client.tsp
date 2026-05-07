@@ -202,7 +202,7 @@ using Azure.AI.Projects;
 @@clientName(Models.listVersions, "listVersions");
 @@clientName(Models.getVersion, "get");
 @@clientName(Models.deleteVersion, "delete");
-@@clientName(Models.createOrUpdateVersion, "createOrUpdate");
+@@clientName(Models.createOrUpdateVersion, "update");
 @@clientName(Models.startPendingUpload, "pendingUpload");
 @@clientName(Models.getCredentials, "getCredentials");
 

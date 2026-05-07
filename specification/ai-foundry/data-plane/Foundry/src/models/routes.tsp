@@ -3,6 +3,7 @@ import "../servicepatterns.tsp";
 import "../common/models.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
@@ -18,6 +19,16 @@ interface Models
       ListModelVersionsParameters,
       ListModelVersionsParameters
     > {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
+  @doc("Update an existing ModelVersion with the given version id", ModelVersion)
+  @operationId("Models_updateVersion")
+  @patch
+  createOrUpdateVersion is Azure.Core.Foundations.ResourceOperation<
+    ModelVersion,
+    InputParameters<UpdateModelVersionRequest>,
+    Azure.Core.Foundations.ResourceCreatedOrOkResponse<ModelVersion>
+  >;
+
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom async creation action"
   @doc("Creates a model version asynchronously with blob content validation. Returns 202 Accepted with a Location header for polling.")
   @route("/models/{name}/versions/{version}/createAsync")

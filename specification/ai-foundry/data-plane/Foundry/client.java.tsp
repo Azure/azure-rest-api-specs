@@ -102,7 +102,7 @@ namespace Azure.AI.Projects;
 @@clientName(Models.listVersions, "listModelVersions");
 @@clientName(Models.listLatest, "listLatestModelVersions");
 @@clientName(Models.deleteVersion, "deleteModelVersion");
-@@clientName(Models.createOrUpdateVersion, "createOrUpdateModelVersion");
+@@clientName(Models.createOrUpdateVersion, "updateModelVersion");
 @@clientName(Models.createAsync, "createModelVersionAsync");
 @@clientName(Models.startPendingUpload, "startModelPendingUpload");
 @@clientName(Models.getCredentials, "getModelCredentials");
