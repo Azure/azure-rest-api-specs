@@ -97,19 +97,6 @@ namespace Model {
   Model.TrainingJobs
 );
 
-@@clientLocation(Azure.AI.Projects.TrainingJobArtifacts.listArtifacts,
-  Model.TrainingJobs
-);
-@@clientLocation(Azure.AI.Projects.TrainingJobArtifacts.getArtifactMetadata,
-  Model.TrainingJobs
-);
-@@clientLocation(Azure.AI.Projects.TrainingJobArtifacts.getArtifactContentInfo,
-  Model.TrainingJobs
-);
-@@clientLocation(Azure.AI.Projects.TrainingJobArtifacts.downloadArtifact,
-  Model.TrainingJobs
-);
-
 @@clientLocation(Azure.AI.Projects.TrainingJobAttemptArtifacts.listAttemptArtifacts,
   Model.TrainingJobs
 );
@@ -120,25 +107,6 @@ namespace Model {
   Model.TrainingJobs
 );
 @@clientLocation(Azure.AI.Projects.TrainingJobAttemptArtifacts.downloadAttemptArtifact,
-  Model.TrainingJobs
-);
-
-@@clientLocation(Azure.AI.Projects.TrainingJobMetrics.listMetrics,
-  Model.TrainingJobs
-);
-@@clientLocation(Azure.AI.Projects.TrainingJobMetrics.getMetricLastValues,
-  Model.TrainingJobs
-);
-@@clientLocation(Azure.AI.Projects.TrainingJobMetrics.getMetric,
-  Model.TrainingJobs
-);
-@@clientLocation(Azure.AI.Projects.TrainingJobMetrics.getMetricAggregates,
-  Model.TrainingJobs
-);
-@@clientLocation(Azure.AI.Projects.TrainingJobMetrics.getMetricSamples,
-  Model.TrainingJobs
-);
-@@clientLocation(Azure.AI.Projects.TrainingJobMetrics.getMetricSample,
   Model.TrainingJobs
 );
 

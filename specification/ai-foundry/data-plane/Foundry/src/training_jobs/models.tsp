@@ -298,6 +298,15 @@ union TrainingFramework {
   torch_forge: "torch_forge",
 }
 
+@doc("Training framework supported by the interactive Ray job convenience model.")
+union InteractiveRayJobFramework {
+  @doc("Slime framework.")
+  slime: "slime",
+
+  @doc("VERL framework.")
+  verl: "verl",
+}
+
 @doc("Chat template used to format conversational training data.")
 union ChatTemplate {
   string,
@@ -813,6 +822,36 @@ model RewardModelTrainingConfiguration extends TrainingConfiguration {
   eval?: TrainingEvalConfiguration;
 }
 
+@doc("Declarative training recipe for an interactive Ray job. The framework is limited to Slime and VERL.")
+model InteractiveRayJobTrainingConfiguration {
+  @doc("Training algorithm.")
+  algorithm: TrainingAlgorithm;
+
+  @doc("Training framework implementation for the interactive Ray job.")
+  framework: InteractiveRayJobFramework;
+
+  @doc("Base model asset reference.")
+  `model`: string;
+
+  @doc("Training and optional evaluation datasets.")
+  dataset: TrainingDatasetConfiguration;
+
+  @doc("Algorithm-specific hyperparameters.")
+  hyperparameters?: Record<unknown>;
+
+  @doc("Reward or judge signal configuration for reinforcement or reward model training.")
+  reward?: TrainingRewardConfiguration;
+
+  @doc("LoRA adapter configuration.")
+  lora?: TrainingLoraConfiguration;
+
+  @doc("Rollout generation configuration.")
+  rollout?: TrainingRolloutConfiguration;
+
+  @doc("Evaluation configuration.")
+  eval?: TrainingEvalConfiguration;
+}
+
 @doc("Metadata pertaining to creation and last modification of the resource.")
 model SystemData {
   @doc("The identity that created the resource.")
@@ -920,6 +959,66 @@ model CommandJob extends JobProperties {
   status?: string;
 }
 
+@doc("Properties of an interactive Ray training job. This is an SDK convenience shape for creating a command job with Ray distribution.")
+model InteractiveRayJobProperties {
+  @doc("Job type, always 'command'.")
+  job_type: "command";
+
+  @doc("The command to execute on startup of the interactive Ray job. Required when training is not specified, and must be omitted when training is specified.")
+  command?: string;
+
+  @doc("ACR path or Azure ML environment reference. Required when training is not specified.")
+  environment_image_reference?: string;
+
+  @doc("Declarative training recipe for Slime or VERL running on Ray.")
+  training?: InteractiveRayJobTrainingConfiguration;
+
+  @doc("Display name of job.")
+  display_name?: string;
+
+  @doc("The asset description text.")
+  description?: string;
+
+  @doc("Tag dictionary. Tags can be added, removed, and updated.")
+  tags?: Record<string>;
+
+  @doc("The asset property dictionary.")
+  properties?: Record<string>;
+
+  @doc("Code asset reference.")
+  code_id?: string;
+
+  @doc("Compute resource ID.")
+  compute_id: string;
+
+  @doc("Mapping of input data bindings used in the job.")
+  inputs?: Record<Input>;
+
+  @doc("Mapping of output data bindings used in the job.")
+  outputs?: Record<Output>;
+
+  @doc("Environment variables included in the job.")
+  environment_variables?: Record<string>;
+
+  @doc("Compute Resource configuration for the job.")
+  resources?: JobResourceConfiguration;
+
+  @doc("Number of GPUs requested by the training job.")
+  gpu_count?: int32;
+
+  @doc("Ray distribution configuration for the interactive job.")
+  distribution: RayDistribution;
+
+  @doc("Command Job limit.")
+  limits?: CommandJobLimits;
+
+  @doc("Queue settings for the job.")
+  queue_settings?: QueueSettings;
+
+  @doc("User-assigned managed identity.")
+  user_assigned_identity_id?: string;
+}
+
 @doc("Training job resource.")
 @Rest.resource("training_jobs")
 model Job {
@@ -951,6 +1050,15 @@ model JobCreate {
 
   @doc("Properties of the job.")
   properties: JobProperties;
+}
+
+@doc("Request body for creating an interactive Ray training job. This SDK convenience model uses the same /training_jobs create operation as other command jobs.")
+model InteractiveRayJob {
+  @doc("The name of the interactive Ray job. This is case-sensitive.")
+  name: string;
+
+  @doc("Properties of the interactive Ray job.")
+  properties: InteractiveRayJobProperties;
 }
 
 @doc("Response returned when a job delete operation is accepted asynchronously.")

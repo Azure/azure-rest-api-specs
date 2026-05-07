@@ -250,6 +250,15 @@ using Azure.AI.Projects;
 @@clientName(Azure.AI.Projects.TrainingJobs.list, "list", "python");
 @@clientName(Azure.AI.Projects.TrainingJobs.create, "create", "python");
 @@clientName(Azure.AI.Projects.TrainingJobs.create, "create", "javascript");
+@@alternateType(JobCreate, InteractiveRayJob);
+@@usage(InteractiveRayJob, Usage.input);
+@@access(InteractiveRayJob, Access.public);
+@@usage(InteractiveRayJobProperties, Usage.input);
+@@access(InteractiveRayJobProperties, Access.public);
+@@usage(InteractiveRayJobTrainingConfiguration, Usage.input);
+@@access(InteractiveRayJobTrainingConfiguration, Access.public);
+@@usage(InteractiveRayJobFramework, Usage.input);
+@@access(InteractiveRayJobFramework, Access.public);
 @@clientName(Azure.AI.Projects.Beta.Model, "model", "python");
 @@clientName(Azure.AI.Projects.Beta.Model, "model", "javascript");
 @@clientName(Azure.AI.Projects.Beta.Model.TrainingJobs,
