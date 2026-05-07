@@ -5198,7 +5198,7 @@
       "description": "Certificate configuration for update operations. Only includes updatable fields.",
       "properties": {
         "leafCertificateConfiguration": {
-          "$ref": "#/definitions/LeafCertificateConfiguration",
+          "$ref": "#/definitions/LeafCertificateConfigurationUpdate",
           "description": "The leaf certificate configuration."
         }
       }
@@ -6254,6 +6254,19 @@
       "required": [
         "validityPeriodInDays"
       ]
+    },
+    "LeafCertificateConfigurationUpdate": {
+      "type": "object",
+      "description": "Leaf certificate configuration for update operations.",
+      "properties": {
+        "validityPeriodInDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The validity period in days.",
+          "minimum": 7,
+          "maximum": 30
+        }
+      }
     },
     "ManagementAction": {
       "type": "object",
