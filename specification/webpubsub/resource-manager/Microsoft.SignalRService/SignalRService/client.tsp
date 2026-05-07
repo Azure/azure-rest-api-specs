@@ -29,11 +29,6 @@ using Microsoft.SignalRService;
 @@clientName(NetworkACL, "NetworkAcl", "java");
 @@clientName(IPRule, "IpRule", "java");
 @@clientName(PrivateEndpointACL, "PrivateEndpointAcl", "java");
-@@clientName(Microsoft.SignalRService.WebPubSubResource, "ResourceInfo", "go");
-@@clientName(Microsoft.SignalRService.WebPubSubResourceList,
-  "ResourceInfoList",
-  "go"
-);
 @@clientName(EventHandler, "WebPubSubEventHandler", "csharp");
 @@clientName(WebPubSubRequestType.RESTAPI, "RestApi", "csharp");
 @@clientName(ProvisioningState, "WebPubSubProvisioningState", "csharp");
