@@ -6097,7 +6097,7 @@ model ManagedComputeUsageListResult {
    * Per-SKU managed compute quota usage entries.
    */
   @pageItems
-  @identifiers(#["id"])
+  @identifiers(#["name"])
   value?: ManagedComputeUsage[];
 }
 
