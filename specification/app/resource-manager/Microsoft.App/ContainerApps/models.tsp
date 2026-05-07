@@ -23,7 +23,6 @@ model Object is Record<unknown>;
  */
 model WorkflowFiles is Object;
 
-
 /**
  * Custom domain verification Id of a subscription
  */
