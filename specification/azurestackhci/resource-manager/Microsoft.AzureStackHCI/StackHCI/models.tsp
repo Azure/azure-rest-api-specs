@@ -1935,6 +1935,7 @@ model ClusterProperties {
    */
   @visibility(Lifecycle.Read)
   @added(Versions.v2026_04_01_preview)
+  @removed(Versions.v2026_04_30)
   ring?: string;
 
   /**
@@ -8121,6 +8122,7 @@ model OsImageProperties {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model PlatformUpdateProperties {
   /**
    * Represents applicable platform updates.
@@ -8133,6 +8135,7 @@ model PlatformUpdateProperties {
  * Represents details of a specific platform update.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model PlatformUpdateDetails {
   /**
    * Represents validated solution recipe version of a platform update.
@@ -8155,6 +8158,7 @@ model PlatformUpdateDetails {
  * Represents details of a specific platform update payload.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model PlatformPayload {
   /**
    * Represents url of a platform update payload.

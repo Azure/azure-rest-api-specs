@@ -5210,11 +5210,6 @@
           "description": "Unique, immutable resource id.",
           "readOnly": true
         },
-        "ring": {
-          "type": "string",
-          "description": "The ring to which this cluster belongs to.",
-          "readOnly": true
-        },
         "cloudManagementEndpoint": {
           "type": "string",
           "description": "Endpoint configured for management from the Azure portal."
@@ -9102,70 +9097,6 @@
           "description": "The IPv4 address assigned to each physical server on your Azure Stack HCI cluster."
         }
       }
-    },
-    "PlatformPayload": {
-      "type": "object",
-      "description": "Represents details of a specific platform update payload.",
-      "properties": {
-        "payloadUrl": {
-          "type": "string",
-          "description": "Represents url of a platform update payload."
-        },
-        "payloadHash": {
-          "type": "string",
-          "description": "Represents hash of a platform update payload."
-        },
-        "payloadPackageSizeInBytes": {
-          "type": "string",
-          "description": "Represents size in bytes of a platform update payload."
-        },
-        "payloadIdentifier": {
-          "type": "string",
-          "description": "Represents identifier of a platform update payload."
-        }
-      }
-    },
-    "PlatformUpdateDetails": {
-      "type": "object",
-      "description": "Represents details of a specific platform update.",
-      "properties": {
-        "validatedSolutionRecipeVersion": {
-          "type": "string",
-          "description": "Represents validated solution recipe version of a platform update."
-        },
-        "platformVersion": {
-          "type": "string",
-          "description": "Represents version of a platform update."
-        },
-        "platformPayloads": {
-          "type": "array",
-          "description": "Represents the platform payloads of a platform update.",
-          "items": {
-            "$ref": "#/definitions/PlatformPayload"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "platformPayloads"
-      ]
-    },
-    "PlatformUpdateProperties": {
-      "type": "object",
-      "description": "Represents properties of a platform update resource.",
-      "properties": {
-        "platformUpdateDetails": {
-          "type": "array",
-          "description": "Represents applicable platform updates.",
-          "items": {
-            "$ref": "#/definitions/PlatformUpdateDetails"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "platformUpdateDetails"
-      ]
     },
     "PrecheckResult": {
       "type": "object",
