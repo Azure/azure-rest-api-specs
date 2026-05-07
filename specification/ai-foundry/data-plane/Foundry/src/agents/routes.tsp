@@ -165,7 +165,7 @@ interface Agents {
       @path agent_name: string;
 
       /** If true, force-deletes the agent even if its versions have active sessions (hosted agents), cascading deletion to all associated sessions. Defaults to false. */
-      @query force?: boolean;
+      @query force?: boolean = false;
     },
     DeleteAgentResponse
   >;
@@ -261,7 +261,7 @@ interface Agents {
       @path agent_version: string;
 
       /** If true, force-deletes the version even if it has active sessions (hosted agents), cascading deletion to all associated sessions. Defaults to false. */
-      @query force?: boolean;
+      @query force?: boolean = false;
     },
     DeleteAgentVersionResponse
   >;
