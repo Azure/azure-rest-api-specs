@@ -412,7 +412,7 @@ model IotDpsPropertiesDescription {
    * Disables all authentication methods other than Azure RBAC
    */
   @added(Versions.v2026_06_01_preview)
-  disableLocalAuth?: boolean;
+  disableLocalAuth?: boolean = false;
 }
 
 /**
