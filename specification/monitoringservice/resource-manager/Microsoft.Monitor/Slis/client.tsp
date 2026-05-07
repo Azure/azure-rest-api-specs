@@ -31,6 +31,10 @@ namespace Microsoft.Monitor;
 @@clientName(ScalarFunction, "SliScalarFunction", "csharp");
 @@clientName(Signal, "SliSignal", "csharp");
 @@clientName(SignalSource, "SliSignalSource", "csharp");
+@@clientName(SpatialAggregation, "SliSpatialAggregation", "csharp");
+@@clientName(SpatialAggregationType, "SliSpatialAggregationType", "csharp");
+@@clientName(TemporalAggregation, "SliTemporalAggregation", "csharp");
+@@clientName(TemporalAggregationType, "SliTemporalAggregationType", "csharp");
 
 // Per Azure SDK naming guidelines, DateTimeOffset properties must end in `On` or `At`.
 @@clientName(SliResource.streamingRuleLastUpdatedTimestamp,
