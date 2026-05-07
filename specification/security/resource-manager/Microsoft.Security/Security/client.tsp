@@ -367,7 +367,10 @@ op privateLinkResourcesGetCustomization(
   "ArmActionType",
   "java,go"
 );
-@@clientName(StandardsAPI.StandardList, "armStandardList", "go");
+@@clientName(SecurityStandardsAPI.SecurityStandardList,
+  "armStandardList",
+  "go"
+);
 
 @@clientName(IoTSecurityAPI.RecommendationType.IoT_ACRAuthentication,
   "IoTAcrauthentication",
