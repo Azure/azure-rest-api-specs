@@ -9,6 +9,9 @@ using TypeSpec.Versioning;
 
 namespace Customizations;
 
+@@alternateType(KeyInfo.start, string, "python,csharp,javascript,go");
+@@alternateType(KeyInfo.expiry, string, "python,csharp,javascript,go");
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
 @client(
   {
@@ -131,8 +134,14 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@clientNamespace(Storage.Blob.PageBlob, "Azure.Storage.Blobs", "rust,go");
 
 @@clientName(Storage.Blob.BlockBlob.upload, "upload_internal", "rust");
+@@access(Storage.Blob.BlockBlob.upload, Access.internal, "rust");
 @@clientName(Storage.Blob.Blob.download, "download_internal", "rust");
+@@access(Storage.Blob.Blob.download, Access.internal, "rust");
 
+@@clientName(BlobProperties.customerProvidedKeySha256,
+  "encryptionKeySha256",
+  "rust"
+);
 @@clientName(MetadataHeaders.metadata, "metadata", "rust");
 @@clientName(ObjectReplicationHeaders.objectReplicationRules,
   "objectReplicationRules",
@@ -143,8 +152,8 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   "python, csharp, javascript"
 );
 
-@@alternateType(AccessPolicy.start, string, "javascript");
-@@alternateType(AccessPolicy.expiry, string, "javascript");
+@@alternateType(AccessPolicy.start, string, "javascript, python");
+@@alternateType(AccessPolicy.expiry, string, "javascript, python");
 @@alternateType(UserDelegationKey.signedStart, string, "javascript");
 @@alternateType(UserDelegationKey.signedExpiry, string, "javascript");
 @@alternateType(MultipartBodyParameter.body, string, "javascript");
@@ -184,16 +193,13 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@clientName(UserDelegationKey.signedTid, "signedTenantId", "javascript");
 @@clientName(UserDelegationKey.signedStart, "signedStartsOn", "javascript");
 @@clientName(UserDelegationKey.signedExpiry, "signedExpiresOn", "javascript");
-@@clientName(FilterBlobSegment.nextMarker, "continuationToken", "javascript");
-@@clientName(ListContainersSegmentResponse.NextMarker,
+@@clientName(FilterBlobResponse.nextMarker, "continuationToken", "javascript");
+@@clientName(ListContainersResponse.NextMarker,
   "continuationToken",
   "javascript"
 );
 @@clientName(MaxResultsParameter.maxresults, "maxPageSize", "javascript");
-@@clientName(ListContainersSegmentResponse.maxResults,
-  "maxPageSize",
-  "javascript"
-);
+@@clientName(ListContainersResponse.maxResults, "maxPageSize", "javascript");
 @@clientName(ListBlobsResponse.nextMarker, "continuationToken", "javascript");
 @@clientName(ListBlobsResponse.maxResults, "maxPageSize", "javascript");
 @@clientName(PageList.nextMarker, "continuationToken", "javascript");
@@ -490,6 +496,13 @@ enum ImmutabilityPolicySetting {
   /** The immutability policy is unlocked. */
   Unlocked: "Unlocked",
 }
+/** The multipart body parameter. */
+alias MultipartBodyParameterGo = {
+  /** The body of the request. */
+  @body
+  @encode("bytes")
+  body: bytes;
+};
 /** Represents an array of signed identifiers */
 @clientName("SignedIdentifiers", "go")
 model SignedIdentifiersGo is Array<SignedIdentifier>;
@@ -515,6 +528,10 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@alternateType(ExpiryTimeParameter.expiresOn, string, "go");
 @@alternateType(ImmutabilityPolicyModeParameter.immutabilityPolicyMode,
   ImmutabilityPolicySetting,
+  "go"
+);
+@@alternateType(MultipartBodyParameter.body,
+  MultipartBodyParameterGo.body,
   "go"
 );
 @@alternateType(RehydratePriorityResponseHeader.rehydratePriority,
