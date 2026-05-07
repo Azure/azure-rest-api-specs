@@ -32,7 +32,6 @@ interface MosaicCollectionsTileSetList {
     {
       ...CollectionMosaicFilterQueryParameters;
       ...CollectionSubDatasetQueryParameters;
-      ...CollectionQueryParameter;
 
       /**
        * STAC Collection Identifier
@@ -60,7 +59,6 @@ interface MosaicCollectionsTileSetMetadata {
     {
       ...CollectionMosaicFilterQueryParameters;
       ...CollectionSubDatasetQueryParameters;
-      ...CollectionQueryParameter;
 
       /**
        * STAC Collection Identifier
@@ -765,7 +763,6 @@ interface MosaicCollectionsAssetsForTiles {
       ...MosaicSearchQueryParameters;
       ...CollectionMosaicFilterQueryParameters;
       ...CollectionSubDatasetQueryParameters;
-      ...CollectionQueryParameter;
       ...ZxyPathParameters;
 
       /**
@@ -802,7 +799,6 @@ interface MosaicCollectionsAssetsForTileMatrixSets {
       ...MosaicSearchQueryParameters;
       ...CollectionMosaicFilterQueryParameters;
       ...CollectionSubDatasetQueryParameters;
-      ...CollectionQueryParameter;
 
       /**
        * Identifier selecting one of the TileMatrixSetId supported
@@ -841,7 +837,6 @@ interface MosaicCollectionsAssetsForBbox {
       ...MosaicSearchQueryParameters;
       ...CollectionMosaicFilterQueryParameters;
       ...CollectionSubDatasetQueryParameters;
-      ...CollectionQueryParameter;
       ...BoundingBoxPathParameters;
 
       /**
@@ -1236,7 +1231,6 @@ interface MosaicCollectionsPoint {
       ...MosaicSearchQueryParameters;
       ...CollectionMosaicFilterQueryParameters;
       ...CollectionSubDatasetQueryParameters;
-      ...CollectionQueryParameter;
 
       /**
        * STAC Collection Identifier
@@ -1291,7 +1285,6 @@ interface MosaicCollectionsPointAssets {
       ...MosaicSearchQueryParameters;
       ...CollectionMosaicFilterQueryParameters;
       ...CollectionSubDatasetQueryParameters;
-      ...CollectionQueryParameter;
 
       /**
        * STAC Collection Identifier
