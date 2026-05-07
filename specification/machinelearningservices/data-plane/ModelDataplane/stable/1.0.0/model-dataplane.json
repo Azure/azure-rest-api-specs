@@ -1179,30 +1179,6 @@
     }
   },
   "definitions": {
-    "AcceleratorMap": {
-      "type": "object",
-      "description": "Accelerator configuration for a model instance.",
-      "properties": {
-        "acceleratorType": {
-          "type": "string",
-          "description": "The type of accelerator (e.g. GPU, FPGA)."
-        },
-        "numberOfAcceleratorsPerModelInstance": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of accelerators allocated per model instance."
-        },
-        "default": {
-          "type": "boolean",
-          "description": "Whether this is the default accelerator configuration.",
-          "default": false
-        }
-      },
-      "required": [
-        "acceleratorType",
-        "numberOfAcceleratorsPerModelInstance"
-      ]
-    },
     "Artifact": {
       "type": "object",
       "description": "An artifact reference within an asset.",
@@ -2503,13 +2479,6 @@
         "assetId": {
           "type": "string",
           "description": "The asset ID of the deployment template."
-        },
-        "acceleratorMaps": {
-          "type": "array",
-          "description": "Accelerator configurations for the deployment template.",
-          "items": {
-            "$ref": "#/definitions/AcceleratorMap"
-          }
         }
       }
     },
