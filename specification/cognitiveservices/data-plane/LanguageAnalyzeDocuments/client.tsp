@@ -605,3 +605,5 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(DocumentWarning.targetRef, "TargetReference", "csharp");
 
 @@clientName(PiiDomain.phi, "Health", "csharp");
+
+@@clientName(PiiCategories.URL, "Url", "csharp");
