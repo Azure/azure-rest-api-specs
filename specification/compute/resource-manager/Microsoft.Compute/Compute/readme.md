@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2026-04-01
+tag: package-2026-04-01-only
 
 directive:
   - where:
@@ -376,6 +376,10 @@ suppressions:
   - code: XMSSecretInResponse
     reason: Existing secret fields maintained for backward compatibility.
     from: ComputeRP.json
+  - code: SchemaTypeAndFormat
+    reason: runAsPassword is correctly modeled as a password secret; suppress this format-only breaking-change notification.
+    from: ComputeRP.json
+    where: $.definitions.VirtualMachineRunCommandProperties.properties.runAsPassword
   - code: LroLocationHeader
     reason: Existing LRO operation does not include Location header for backward compatibility.
     from: ComputeRP.json
