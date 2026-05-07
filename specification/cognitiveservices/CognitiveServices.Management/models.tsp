@@ -6050,22 +6050,10 @@ model ManagedComputeDeploymentInfo {
 @added(Versions.v2026_03_15_preview)
 model ManagedComputeUsage {
   /**
-   * Fully qualified resource ID for the managed compute usage.
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
    * The name information for the metric.
    */
   @visibility(Lifecycle.Read)
   name?: MetricName;
-
-  /**
-   * The resource type.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
 
   /**
    * The unit of the metric.
@@ -6109,7 +6097,7 @@ model ManagedComputeUsageListResult {
    * Per-SKU managed compute quota usage entries.
    */
   @pageItems
-  @identifiers(#["id"])
+  @identifiers(#["name.value"])
   value?: ManagedComputeUsage[];
 }
 
