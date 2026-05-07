@@ -6,6 +6,7 @@ import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
+using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -14,25 +15,11 @@ using TypeSpec.Versioning;
 namespace Microsoft.ContainerInstance;
 
 /**
- * The provisioning state of a resource.
+ * The provisioning state of a SandboxGroup resource.
  */
-union ProvisioningState {
+union SandboxGroupProvisioningState {
   string,
-
-  /**
-   * Resource has been created.
-   */
-  Succeeded: "Succeeded",
-
-  /**
-   * Resource creation failed.
-   */
-  Failed: "Failed",
-
-  /**
-   * Resource creation was canceled.
-   */
-  Canceled: "Canceled",
+  Azure.ResourceManager.ResourceProvisioningState,
 
   /**
    * The resource is being updated.
@@ -57,7 +44,11 @@ model SubnetReference {
   /**
    * The ARM resource ID of the subnet. The caller must have `Microsoft.Network/virtualNetworks/subnets/join/action` permission on this subnet (enforced via a linked access check at create/update time).
    */
-  id: string;
+  id: armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/virtualNetworks/subnets";
+    }
+  ]>;
 }
 
 /**
@@ -78,18 +69,19 @@ model SandboxGroupProperties {
    * The status of the last operation.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: SandboxGroupProvisioningState;
 
   /**
    * The network profile of the SandboxGroup.
    */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   networkProfile?: SandboxGroupNetworkProfile;
 
   /**
    * The ARM resource ID of the management resource group associated with this SandboxGroup.
    */
   @visibility(Lifecycle.Read)
-  managementResourceGroupId?: string;
+  managementResourceGroupId?: armResourceIdentifier;
 }
 
 /**
@@ -104,7 +96,7 @@ model SandboxGroup
    */
   @maxLength(63)
   @minLength(1)
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]$")
+  @pattern("^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?$")
   @key("sandboxGroupName")
   @segment("sandboxGroups")
   @path
@@ -131,7 +123,7 @@ model SandboxGroupAccessToken {
   /**
    * The endpoint URL to use with the access token.
    */
-  endpoint: string;
+  endpoint: url;
 
   /**
    * The access token used to authenticate against the endpoint.
@@ -143,21 +135,6 @@ model SandboxGroupAccessToken {
    * The UTC date and time at which the access token expires.
    */
   notAfter: utcDateTime;
-}
-
-/**
- * The response of a SandboxGroup list operation.
- */
-model SandboxGroupListResult {
-  /**
-   * The SandboxGroup items on this page
-   */
-  value: SandboxGroup[];
-
-  /**
-   * The link to the next page of items
-   */
-  nextLink?: string;
 }
 
 @armResourceOperations
@@ -191,7 +168,8 @@ interface SandboxGroups {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     SandboxGroup,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = SandboxGroup> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
   >;
 
   /**
@@ -199,13 +177,17 @@ interface SandboxGroups {
    */
   @summary("Update a SandboxGroup")
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<SandboxGroup, SandboxGroupTagsUpdate>;
+  update is ArmCustomPatchAsync<
+    SandboxGroup,
+    SandboxGroupTagsUpdate,
+    Error = CloudError
+  >;
 
   /**
    * Delete a SandboxGroup
    */
   @summary("Delete a SandboxGroup")
-  delete is ArmResourceDeleteWithoutOkAsync<SandboxGroup>;
+  delete is ArmResourceDeleteWithoutOkAsync<SandboxGroup, Error = CloudError>;
 
   /**
    * Get an access token and endpoint for connecting to the SandboxGroup.

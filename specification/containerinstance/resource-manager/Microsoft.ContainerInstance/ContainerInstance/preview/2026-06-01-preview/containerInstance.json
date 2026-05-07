@@ -1952,7 +1952,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]$"
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?$"
           }
         ],
         "responses": {
@@ -2000,7 +2000,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]$"
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?$"
           },
           {
             "name": "resource",
@@ -2039,7 +2039,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2079,7 +2079,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]$"
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?$"
           },
           {
             "name": "properties",
@@ -2115,7 +2115,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2155,7 +2155,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]$"
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?$"
           }
         ],
         "responses": {
@@ -2179,7 +2179,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2220,7 +2220,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]$"
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?$"
           }
         ],
         "responses": {
@@ -5062,54 +5062,6 @@
         "port"
       ]
     },
-    "ProvisioningState": {
-      "type": "string",
-      "description": "The provisioning state of a resource.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "Updating",
-        "Deleting",
-        "Accepted"
-      ],
-      "x-ms-enum": {
-        "name": "ProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          },
-          {
-            "name": "Updating",
-            "value": "Updating",
-            "description": "The resource is being updated."
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "The resource is being deleted."
-          },
-          {
-            "name": "Accepted",
-            "value": "Accepted",
-            "description": "The resource provisioning request was accepted but not yet started."
-          }
-        ]
-      }
-    },
     "Resource": {
       "type": "object",
       "description": "The Resource model definition.",
@@ -5271,6 +5223,7 @@
       "properties": {
         "endpoint": {
           "type": "string",
+          "format": "uri",
           "description": "The endpoint URL to use with the access token."
         },
         "accessToken": {
@@ -5330,19 +5283,72 @@
       "description": "Properties of a SandboxGroup.",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/SandboxGroupProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
         },
         "networkProfile": {
           "$ref": "#/definitions/SandboxGroupNetworkProfile",
-          "description": "The network profile of the SandboxGroup."
+          "description": "The network profile of the SandboxGroup.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "managementResourceGroupId": {
           "type": "string",
+          "format": "arm-id",
           "description": "The ARM resource ID of the management resource group associated with this SandboxGroup.",
           "readOnly": true
         }
+      }
+    },
+    "SandboxGroupProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a SandboxGroup resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "SandboxGroupProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource provisioning request was accepted but not yet started."
+          }
+        ]
       }
     },
     "SandboxGroupTagsUpdate": {
@@ -5499,7 +5505,15 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The ARM resource ID of the subnet. The caller must have `Microsoft.Network/virtualNetworks/subnets/join/action` permission on this subnet (enforced via a linked access check at create/update time)."
+          "format": "arm-id",
+          "description": "The ARM resource ID of the subnet. The caller must have `Microsoft.Network/virtualNetworks/subnets/join/action` permission on this subnet (enforced via a linked access check at create/update time).",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          }
         }
       },
       "required": [
