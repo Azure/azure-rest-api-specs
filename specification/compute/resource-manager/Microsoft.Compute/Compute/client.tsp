@@ -2005,7 +2005,7 @@ union ComputeUsageUnit {
   url,
   "csharp"
 );
-@@alternateType(CommunityGalleryInfo.publisherUri, url, "csharp");
+@@clientName(CommunityGalleryInfo.publisherUri, "publisherUriString", "csharp");
 @@alternateType(CommunityGalleryMetadata.privacyStatementUri, url, "csharp");
 @@alternateType(CommunityGalleryImageProperties.privacyStatementUri,
   url,
