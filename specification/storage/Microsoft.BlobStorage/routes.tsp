@@ -699,7 +699,6 @@ interface Blob {
     rangeGetContentCrc64?: boolean,
 
     /** Specifies the response content should be returned as a structured message and specifies the message schema version and properties. */
-    @access(Access.internal)
     @header("x-ms-structured-body")
     structuredBodyType?: string,
 
