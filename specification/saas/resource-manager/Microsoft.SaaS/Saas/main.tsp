@@ -20,7 +20,7 @@ using Azure.ResourceManager;
 @armProviderNamespace
 @service(#{ title: "SaaS" })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.SaaS;
 
 /** API versions */
