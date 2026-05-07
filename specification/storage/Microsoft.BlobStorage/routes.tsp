@@ -141,7 +141,6 @@ interface Service {
   /** The List Containers Segment operation returns a list of the containers under the specified account */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-  @get
   @list
   @route("?comp=list")
   listContainers is StorageOperationResponseBody<
@@ -230,7 +229,6 @@ interface Service {
   /** The Filter Blobs operation enables callers to list blobs across all containers whose tags match a given search expression. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-  @get
   @list
   @route("?comp=blobs")
   findBlobsByTags is StorageOperationResponseBody<
