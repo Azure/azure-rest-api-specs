@@ -1157,7 +1157,6 @@ union RehydratePriority {
 }
 
 /** The blob metadata. */
-// TODO: check if this needs an unwrapped decorator
 #suppress "@azure-tools/typespec-autorest/unsupported-param-type" "Existing API"
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Existing API"
 model BlobMetadata is Record<string> {
