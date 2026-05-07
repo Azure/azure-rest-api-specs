@@ -19,6 +19,8 @@ import "./SCEnvironmentRecord.tsp";
 import "./SCClusterRecord.tsp";
 import "./ConnectorResource.tsp";
 import "./TopicRecord.tsp";
+import "./NetworkGatewayResource.tsp";
+import "./AccessPointResource.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;
@@ -53,6 +55,11 @@ enum Versions {
    * The 2025-08-18-preview API version.
    */
   v2025_08_18_preview: "2025-08-18-preview",
+
+  /**
+   * The 2026-05-01-preview API version.
+   */
+  v2026_05_01_preview: "2026-05-01-preview",
 }
 
 interface Operations {
