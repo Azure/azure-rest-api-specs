@@ -29,6 +29,7 @@ enum Versions {
   @useDependency(LiftrBase.Storage.Versions.v1_preview)
   v2_preview: "2024-11-01-preview",
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-version-progression" "Existing API"
   @doc("Version 1 stable")
   @useDependency(LiftrBase.Versions.v1_stable)
   @useDependency(LiftrBase.Storage.Versions.v1_preview)
