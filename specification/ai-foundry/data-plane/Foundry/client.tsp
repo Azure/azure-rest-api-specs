@@ -296,6 +296,11 @@ using Azure.AI.Projects;
 @@usage(SessionFileWriteResponse, Usage.output);
 @@access(SessionFileWriteResponse, Access.public);
 
+// Exclude these operations entirely from emitted Python SDK
+@@scope(Agents.createAgentFromCode, "!(python)");
+
+@@clientName(DownloadAgentCodeResponse, "DownloadAgentCodeResult", "python");
+
 // --------------------------------------------------------------------------------
 // To support custom client-side handling of "opt-in" to preview features.
 // --------------------------------------------------------------------------------
