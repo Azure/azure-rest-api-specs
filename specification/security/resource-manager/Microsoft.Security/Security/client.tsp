@@ -343,10 +343,12 @@ op privateLinkResourcesGetCustomization(
 );
 
 @@clientName(SecurityOperatorsAPI.SecurityOperator, "OperatorResource", "go");
-@@clientName(SecurityStandardsAPI.SecurityStandard,
+@@clientLocation(SecurityStandards.createOrUpdate,
   "ArmSecurityStandards",
   "go"
 );
+@@clientLocation(SecurityStandards.delete, "ArmSecurityStandards", "go");
+@@clientLocation(SecurityStandards.list, "ArmSecurityStandards", "go");
 @@clientName(SecurityStandardsAPI.SecurityStandardProperties,
   "ArmSecurityStandardProperties",
   "go"
@@ -368,7 +370,7 @@ op privateLinkResourcesGetCustomization(
   "java,go"
 );
 @@clientName(SecurityStandardsAPI.SecurityStandardList,
-  "armStandardList",
+  "ArmSecurityStandardList",
   "go"
 );
 
