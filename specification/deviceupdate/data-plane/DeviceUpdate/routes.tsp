@@ -59,7 +59,7 @@ interface DeviceUpdateOperationGroup {
   @pollingOperation(DeviceUpdateOperationGroup.getOperationStatus)
   @extension(
     "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "location" }
+    #{ `final-state-via`: "operation-location" }
   )
   importUpdate is ServiceOperation<
     {
@@ -135,7 +135,7 @@ interface DeviceUpdateOperationGroup {
   @pollingOperation(DeviceUpdateOperationGroup.getOperationStatus)
   @extension(
     "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "location" }
+    #{ `final-state-via`: "operation-location" }
   )
   deleteUpdate is ServiceOperation<
     {
@@ -586,7 +586,7 @@ interface DeviceManagementOperationGroup {
   @pollingOperation(DeviceManagementOperationGroup.getOperationStatus)
   @extension(
     "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "location" }
+    #{ `final-state-via`: "operation-location" }
   )
   importDevices is ServiceOperation<
     {
