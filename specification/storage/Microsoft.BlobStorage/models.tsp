@@ -481,8 +481,7 @@ model FilteredBlobResponse {
   /** The blob segment. */
   @pageItems
   @Xml.name("Blobs")
-  // TODO: We want this to be blob_items but that causes an emitter conflict. Will standup in a separate PR.
-  blobs: FilterBlobItem[];
+  blobItems: FilterBlobItem[];
 
   /** The next marker of the blobs. */
   @continuationToken
