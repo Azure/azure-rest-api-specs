@@ -74,6 +74,7 @@ interface Workbenches {
   /**
    * Updates a workbench associated with the project.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-patch-body" "Using full Workbench class for PATCH to match existing Compute/Cluster pattern"
   @tag("Workbenches")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<Workbench, PatchModel = Workbench>;
