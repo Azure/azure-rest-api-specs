@@ -1,5 +1,4 @@
 import "../common/models.tsp";
-import "../evaluations/models.tsp";
 import "../red-teams/models.tsp";
 
 using Azure.Core.Experimental;
@@ -34,6 +33,17 @@ model DeleteEvalRunResponse {
 
   @doc("Whether the eval was successfully deleted.")
   deleted?: boolean;
+}
+
+@doc("The level at which evaluation is performed.")
+union EvaluationLevel {
+  @doc("Evaluation is performed at the turn level.")
+  turn: "turn",
+
+  @doc("Evaluation is performed at the conversation level.")
+  conversation: "conversation",
+
+  string,
 }
 
 /** Grader Azure AI Evaluator definition for foundry evaluators. */
