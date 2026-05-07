@@ -731,10 +731,25 @@ model Model {
   allowedDeploymentTemplates?: ModelDeploymentTemplateDetails[];
 }
 
+/** Accelerator configuration for a model instance. */
+model AcceleratorMap {
+  /** The type of accelerator (e.g. GPU, FPGA). */
+  acceleratorType: string;
+
+  /** Number of accelerators allocated per model instance. */
+  numberOfAcceleratorsPerModelInstance: int32;
+
+  /** Whether this is the default accelerator configuration. */
+  default?: boolean = false;
+}
+
 /** Details of a deployment template reference. */
 model ModelDeploymentTemplateDetails {
   /** The asset ID of the deployment template. */
   assetId?: string;
+
+  /** Accelerator configurations for the deployment template. */
+  acceleratorMaps?: AcceleratorMap[];
 }
 
 /** A service response. */
