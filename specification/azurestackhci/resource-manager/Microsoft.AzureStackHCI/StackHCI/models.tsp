@@ -2755,6 +2755,7 @@ model SoftwareAssuranceChangeRequestProperties {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model ChangeRingRequest {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: ChangeRingRequestProperties;
@@ -2762,6 +2763,7 @@ model ChangeRingRequest {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model ChangeRingRequestProperties {
   /**
    * The target ring for the cluster.
