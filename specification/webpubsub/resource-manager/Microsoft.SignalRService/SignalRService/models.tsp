@@ -82,15 +82,17 @@ union PrivateLinkServiceConnectionStatus {
 /**
  * The type of identity that created the resource.
  */
-union CreatedByType {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+enum CreatedByType {
+  /** The entity was created by a user. */
   User: "User",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** The entity was created by an application. */
   Application: "Application",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** The entity was created by a managed identity. */
   ManagedIdentity: "ManagedIdentity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** The entity was created by a key. */
   Key: "Key",
 }
 
