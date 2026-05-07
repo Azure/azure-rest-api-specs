@@ -552,7 +552,7 @@ model DeviceRegistryNamespaceDescription {
   namespaceUuid: Azure.Core.uuid;
 
   /**
-   * Data endpoint exposed by the linked Device Registry namespace.
+   * The data plane endpoint of the linked Azure Device Registry namespace.
    */
   @added(Versions.v2026_06_01_preview)
   dataEndpoint: string;
