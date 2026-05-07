@@ -153,7 +153,9 @@ interface Agents {
   >;
 
   /**
-   * Deletes an agent.
+   * Deletes an agent. For hosted agents, if any version has active sessions, the request
+   * is rejected with HTTP 409 unless `force` is set to true. When force is true, all
+   * associated sessions are cascade-deleted along with the agent and its versions.
    */
   @delete
   @route("/agents/{agent_name}")
@@ -161,6 +163,9 @@ interface Agents {
     {
       /** The name of the agent to delete. */
       @path agent_name: string;
+
+      /** If true, force-deletes the agent even if its versions have active sessions (hosted agents), cascading deletion to all associated sessions. Defaults to false. */
+      @query force?: boolean;
     },
     DeleteAgentResponse
   >;
@@ -241,7 +246,9 @@ interface Agents {
   >;
 
   /**
-   * Deletes a specific version of an agent.
+   * Deletes a specific version of an agent. For hosted agents, if the version has active
+   * sessions, the request is rejected with HTTP 409 unless `force` is set to true. When
+   * force is true, all sessions associated with this version are cascade-deleted.
    */
   @delete
   @route("/agents/{agent_name}/versions/{agent_version}")
@@ -252,6 +259,9 @@ interface Agents {
 
       /** The version of the agent to delete */
       @path agent_version: string;
+
+      /** If true, force-deletes the version even if it has active sessions (hosted agents), cascading deletion to all associated sessions. Defaults to false. */
+      @query force?: boolean;
     },
     DeleteAgentVersionResponse
   >;
