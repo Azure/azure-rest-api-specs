@@ -76,7 +76,7 @@ interface Workbenches {
    */
   @tag("Workbenches")
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<Workbench, PatchModel = WorkbenchUpdate>;
+  update is ArmCustomPatchAsync<Workbench, PatchModel = Workbench>;
 
   /**
    * Deletes the specified workbench associated with the project.
