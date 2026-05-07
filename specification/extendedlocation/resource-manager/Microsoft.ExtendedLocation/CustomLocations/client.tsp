@@ -31,6 +31,11 @@ using Azure.ResourceManager;
 );
 
 // Map custom Identity model to ARM common type ManagedServiceIdentity
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
 @@alternateType(customLocation.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
