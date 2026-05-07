@@ -76,7 +76,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PreflightResult"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -633,7 +636,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PreflightResult"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1254,6 +1260,19 @@
           }
         ]
       }
+    },
+    "PreflightResult": {
+      "type": "object",
+      "description": "Preflight validation result.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The status of the preflight validation."
+        }
+      },
+      "required": [
+        "status"
+      ]
     },
     "SaasNameAvailabilityRequest": {
       "type": "object",

@@ -56,7 +56,7 @@ interface SaasTenantLevelPreflight {
 
     /** The preflight request body. */
     @body body: unknown,
-  ): OkResponse | ErrorResponse;
+  ): ArmResponse<PreflightResult> | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Custom operation status route"
