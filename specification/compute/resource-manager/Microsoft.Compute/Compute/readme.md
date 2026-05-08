@@ -37,6 +37,8 @@ openapi-type: arm
 tag: package-2026-04-01
 
 directive:
+  - suppress: MULTIPLE_API_VERSION
+    reason: The default Compute package tag intentionally combines multiple RP swaggers with different API versions.
   - where:
       - $.definitions.VirtualMachine.properties
     suppress:
@@ -380,6 +382,10 @@ suppressions:
     reason: runAsPassword is correctly modeled as a password secret; suppress this format-only breaking-change notification.
     from: ComputeRP.json
     where: $.definitions.VirtualMachineRunCommandProperties.properties.runAsPassword
+  - code: TypeFormatChanged
+    reason: runAsPassword is correctly modeled as a password secret; suppress this format-only OAD breaking-change notification.
+    from: ComputeRP.json
+    where: $.definitions.VirtualMachineRunCommandProperties.properties.runAsPassword.format
   - code: LroLocationHeader
     reason: Existing LRO operation does not include Location header for backward compatibility.
     from: ComputeRP.json
