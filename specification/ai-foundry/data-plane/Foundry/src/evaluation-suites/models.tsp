@@ -326,11 +326,11 @@ model EvaluationSuiteGenerationJob
 
 @doc("Token usage summary for an evaluation suite generation job.")
 model EvaluationSuiteGenerationTokenUsage {
-  @doc("Number of prompt tokens consumed.")
-  prompt_tokens?: int64;
+  @doc("Number of input tokens consumed.")
+  input_tokens?: int64;
 
-  @doc("Number of completion tokens consumed.")
-  completion_tokens?: int64;
+  @doc("Number of output tokens consumed.")
+  output_tokens?: int64;
 
   @doc("Total tokens consumed.")
   total_tokens?: int64;
