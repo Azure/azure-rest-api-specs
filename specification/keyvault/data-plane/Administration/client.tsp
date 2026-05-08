@@ -121,7 +121,7 @@ interface KeyVaultEkmRestClient {
 @@access(KeyVault.RoleAssignments.get, Access.internal, "csharp");
 @@access(KeyVault.RoleAssignments.listForScope, Access.internal, "csharp");
 
-@@access(KeyVault.getEkmConnection, Access.public, "csharp");
+@@access(KeyVault.getEkmConnection, Access.internal, "csharp");
 @@protocolAPI(KeyVault.getEkmConnection, false, "csharp");
 @@access(KeyVault.getEkmCertificate, Access.public, "csharp");
 @@access(KeyVault.checkEkmConnection, Access.public, "csharp");
