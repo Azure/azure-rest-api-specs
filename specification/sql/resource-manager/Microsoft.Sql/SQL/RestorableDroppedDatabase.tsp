@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * A restorable dropped database resource.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
 @Azure.ResourceManager.Legacy.feature(Features.RestorableDroppedDatabases)
 model RestorableDroppedDatabase
@@ -33,6 +34,7 @@ model RestorableDroppedDatabase
   sku?: Sku;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 @Azure.ResourceManager.Legacy.feature(Features.RestorableDroppedDatabases)
 interface RestorableDroppedDatabases {

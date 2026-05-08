@@ -13,6 +13,7 @@ namespace Microsoft.Sql;
 /**
  * A long term retention backup for a managed database.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @subscriptionResource
 @Azure.ResourceManager.Legacy.feature(
   Features.LongTermRetentionManagedInstanceBackups
@@ -65,6 +66,7 @@ alias ManagedInstanceLongTermRetentionBackupOps = Azure.ResourceManager.Legacy.L
   }
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
 @Azure.ResourceManager.Legacy.feature(
   Features.LongTermRetentionManagedInstanceBackups
@@ -141,6 +143,7 @@ alias LongTermRetentionManagedInstanceBackupOps = Azure.ResourceManager.Legacy.L
   }
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 @Azure.ResourceManager.Legacy.feature(
   Features.LongTermRetentionManagedInstanceBackups

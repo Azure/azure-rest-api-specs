@@ -14,6 +14,7 @@ namespace Microsoft.Sql;
 /**
  * A managed database resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ManagedInstance)
 @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabases)
 model ManagedDatabase
@@ -31,6 +32,7 @@ interface ManagedDatabases {
   /**
    * Gets a managed database.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedDatabases")
   @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabases)
   get is ArmResourceRead<ManagedDatabase>;
@@ -39,6 +41,7 @@ interface ManagedDatabases {
    * Creates a new database or updates an existing database.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedDatabases")
   @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabases)
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
@@ -53,6 +56,7 @@ interface ManagedDatabases {
   /**
    * Updates an existing database.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @tag("ManagedDatabases")
   @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabases)
@@ -65,6 +69,7 @@ interface ManagedDatabases {
    * Deletes a managed database.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedDatabases")
   @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabases)
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -75,6 +80,7 @@ interface ManagedDatabases {
   /**
    * Gets a list of managed databases.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedDatabases")
   @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabases)
   listByInstance is ArmResourceListByParent<ManagedDatabase>;
@@ -82,6 +88,7 @@ interface ManagedDatabases {
   /**
    * List managed database columns
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedDatabaseColumns")
   @list
   @get
@@ -123,6 +130,7 @@ interface ManagedDatabases {
   /**
    * Cancels a managed database move operation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedDatabases")
   @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabases)
   cancelMove is ArmResourceActionAsyncBase<
@@ -135,6 +143,7 @@ interface ManagedDatabases {
   /**
    * Completes a managed database move operation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedDatabases")
   @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabases)
   completeMove is ArmResourceActionAsyncBase<
@@ -147,6 +156,7 @@ interface ManagedDatabases {
   /**
    * Completes the restore operation on a managed database.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedDatabases")
   @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabases)
   completeRestore is ArmResourceActionAsyncBase<
@@ -159,6 +169,7 @@ interface ManagedDatabases {
   /**
    * Reevaluates the inaccessibility state of a managed database.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedDatabases")
   @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabases)
   reevaluateInaccessibleDatabaseState is ArmResourceActionAsync<
@@ -170,6 +181,7 @@ interface ManagedDatabases {
   /**
    * Starts a managed database move operation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedDatabases")
   @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabases)
   startMove is ArmResourceActionAsyncBase<
@@ -182,6 +194,7 @@ interface ManagedDatabases {
   /**
    * Gets a list of security events.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedDatabaseSecurityEvents")
   @list
   @get
@@ -221,6 +234,7 @@ interface ManagedDatabases {
   /**
    * Gets the sensitivity labels of a given database
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedDatabaseSensitivityLabels")
   @list
   @get
@@ -254,6 +268,7 @@ interface ManagedDatabases {
    */
   #suppress "@typespec/http/patch-implicit-optional" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedDatabaseSensitivityLabels")
   @patch
   @action("currentSensitivityLabels")
@@ -269,6 +284,7 @@ interface ManagedDatabases {
   /**
    * Gets the sensitivity labels of a given database
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedDatabaseSensitivityLabels")
   @list
   @get
@@ -304,6 +320,7 @@ interface ManagedDatabases {
    */
   #suppress "@typespec/http/patch-implicit-optional" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedDatabaseSensitivityLabels")
   @patch
   @action("recommendedSensitivityLabels")
@@ -319,6 +336,7 @@ interface ManagedDatabases {
   /**
    * Gets the sensitivity labels of a given database
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedDatabaseSensitivityLabels")
   @list
   @get

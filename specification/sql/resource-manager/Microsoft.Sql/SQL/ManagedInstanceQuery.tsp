@@ -14,6 +14,7 @@ namespace Microsoft.Sql;
 /**
  * Database query.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ManagedDatabase)
 @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseQueries)
 model ManagedInstanceQuery
@@ -26,6 +27,7 @@ model ManagedInstanceQuery
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
 @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseQueries)
 interface ManagedInstanceQueries {

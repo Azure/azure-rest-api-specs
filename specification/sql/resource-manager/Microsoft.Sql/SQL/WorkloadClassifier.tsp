@@ -14,6 +14,7 @@ namespace Microsoft.Sql;
 /**
  * Workload classifier operations for a data warehouse
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(WorkloadGroup)
 @Azure.ResourceManager.Legacy.feature(Features.WorkloadClassifiers)
 model WorkloadClassifier
@@ -26,6 +27,7 @@ model WorkloadClassifier
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 @Azure.ResourceManager.Legacy.feature(Features.WorkloadClassifiers)
 interface WorkloadClassifiers {

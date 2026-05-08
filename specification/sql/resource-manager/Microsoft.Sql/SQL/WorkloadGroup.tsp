@@ -14,6 +14,7 @@ namespace Microsoft.Sql;
 /**
  * Workload group operations for a data warehouse
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Database)
 @Azure.ResourceManager.Legacy.feature(Features.WorkloadGroups)
 model WorkloadGroup
@@ -26,6 +27,7 @@ model WorkloadGroup
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 @Azure.ResourceManager.Legacy.feature(Features.WorkloadGroups)
 interface WorkloadGroups {

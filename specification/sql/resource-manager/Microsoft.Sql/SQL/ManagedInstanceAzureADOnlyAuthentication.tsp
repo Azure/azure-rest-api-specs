@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * Azure Active Directory only authentication.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ManagedInstance)
 @Azure.ResourceManager.Legacy.feature(
   Features.ManagedInstanceAzureADOnlyAuthentications
@@ -31,6 +32,7 @@ model ManagedInstanceAzureADOnlyAuthentication
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 @Azure.ResourceManager.Legacy.feature(
   Features.ManagedInstanceAzureADOnlyAuthentications

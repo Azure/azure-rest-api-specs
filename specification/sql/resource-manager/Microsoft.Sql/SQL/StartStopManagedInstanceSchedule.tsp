@@ -14,6 +14,7 @@ namespace Microsoft.Sql;
 /**
  * Managed instance's Start/Stop schedule.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ManagedInstance)
 @Azure.ResourceManager.Legacy.feature(
   Features.StartStopManagedInstanceSchedules
@@ -29,6 +30,7 @@ model StartStopManagedInstanceSchedule
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 @Azure.ResourceManager.Legacy.feature(
   Features.StartStopManagedInstanceSchedules

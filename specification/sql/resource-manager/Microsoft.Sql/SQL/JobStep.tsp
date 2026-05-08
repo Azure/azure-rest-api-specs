@@ -14,6 +14,7 @@ namespace Microsoft.Sql;
 /**
  * A job step.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Job)
 @Azure.ResourceManager.Legacy.feature(Features.JobSteps)
 model JobStep is Azure.ResourceManager.ProxyResource<JobStepProperties> {
@@ -59,6 +60,7 @@ alias JobStepOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
 @Azure.ResourceManager.Legacy.feature(Features.JobSteps)
 interface JobSteps {
@@ -126,6 +128,7 @@ alias JobStepOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
 @Azure.ResourceManager.Legacy.feature(Features.JobSteps)
 interface JobStepOperationGroup {

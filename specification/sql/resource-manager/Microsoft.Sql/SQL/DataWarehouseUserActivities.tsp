@@ -14,6 +14,7 @@ namespace Microsoft.Sql;
 /**
  * User activities of a data warehouse
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Database)
 @Azure.ResourceManager.Legacy.feature(Features.DataWarehouseUserActivities)
 model DataWarehouseUserActivities
@@ -27,6 +28,7 @@ model DataWarehouseUserActivities
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
 @Azure.ResourceManager.Legacy.feature(Features.DataWarehouseUserActivities)
 interface DataWarehouseUserActivitiesOperationGroup {

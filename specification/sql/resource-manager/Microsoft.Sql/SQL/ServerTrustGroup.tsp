@@ -13,6 +13,7 @@ namespace Microsoft.Sql;
 /**
  * A server trust group.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ResourceGroupLocationResource)
 @Azure.ResourceManager.Legacy.feature(Features.ServerTrustGroups)
 model ServerTrustGroup
@@ -47,6 +48,7 @@ alias ServerTrustGroupsOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 @Azure.ResourceManager.Legacy.feature(Features.ServerTrustGroups)
 interface ServerTrustGroups {

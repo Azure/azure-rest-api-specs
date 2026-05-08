@@ -14,6 +14,7 @@ namespace Microsoft.Sql;
 /**
  * The differential backup interval in hours. This is how many interval hours between each differential backup will be supported. This is only applicable to live databases but not dropped databases.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.BackupShortTermRetentionPolicies)
 union DiffBackupIntervalInHours {
   int32,
@@ -181,6 +182,7 @@ union RecommendedActionCurrentState {
 /**
  * The column data type.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.DatabaseColumns)
 union ColumnDataType {
   string,
@@ -359,6 +361,7 @@ union ColumnDataType {
 /**
  * The table temporal type.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.DatabaseColumns)
 union TableTemporalType {
   string,
@@ -3230,6 +3233,7 @@ enum LegacyDataMaskingFunction {
 /**
  * The masking function that is used for the data masking rule.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_02_01_preview)
 @Azure.ResourceManager.Legacy.feature(Features.DataMaskingRules)
 union DataMaskingFunction {
@@ -3480,6 +3484,7 @@ enum LegacyDataMaskingRuleState {
 /**
  * The rule state. Used to delete a rule. To delete an existing rule, specify the schemaName, tableName, columnName, maskingFunction, and specify ruleState as disabled. However, if the rule doesn't already exist, the rule will be created with ruleState set to enabled, regardless of the provided value of ruleState.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_02_01_preview)
 @Azure.ResourceManager.Legacy.feature(Features.DataMaskingRules)
 union DataMaskingRuleState {
@@ -4197,6 +4202,7 @@ enum CheckNameAvailabilityReason {
  * Properties of a short term retention policy
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.BackupShortTermRetentionPolicies)
 model BackupShortTermRetentionPolicyProperties {
   /**
@@ -4214,6 +4220,7 @@ model BackupShortTermRetentionPolicyProperties {
  * Properties of a server blob auditing policy.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.BlobAuditing)
 model ServerBlobAuditingPolicyProperties {
   /**
@@ -4366,6 +4373,7 @@ model ServerBlobAuditingPolicyProperties {
  * Properties of a database blob auditing policy.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.BlobAuditing)
 model DatabaseBlobAuditingPolicyProperties {
   /**
@@ -4503,6 +4511,7 @@ model DatabaseBlobAuditingPolicyProperties {
  * Properties of an extended database blob auditing policy.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.BlobAuditing)
 model ExtendedDatabaseBlobAuditingPolicyProperties {
   /**
@@ -4645,6 +4654,7 @@ model ExtendedDatabaseBlobAuditingPolicyProperties {
  * Properties of an extended server blob auditing policy.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.BlobAuditing)
 model ExtendedServerBlobAuditingPolicyProperties {
   /**
@@ -5143,6 +5153,7 @@ model RecommendedActionMetricInfo {
  * Database-level Automatic Tuning properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.DatabaseAutomaticTuning)
 model DatabaseAutomaticTuningProperties {
   /**
@@ -5166,6 +5177,7 @@ model DatabaseAutomaticTuningProperties {
 /**
  * Automatic tuning properties for individual advisors.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.DatabaseAutomaticTuning)
 model AutomaticTuningOptions {
   /**
@@ -5222,6 +5234,7 @@ model DatabaseColumnProperties {
  * Contains the operation result properties for import/export operation.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.DatabaseExtensions)
 model ImportExportExtensionsOperationResultProperties {
   /**
@@ -5314,6 +5327,7 @@ model PrivateEndpointConnectionRequestStatus {
  * An Import, Export, or PolybaseImport resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.DatabaseExtensions)
 model DatabaseExtensions extends CommonTypes.ProxyResource {
   /**
@@ -5325,6 +5339,7 @@ model DatabaseExtensions extends CommonTypes.ProxyResource {
 /**
  * Contains the database information after a successful Import, Export, or PolybaseImport
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.DatabaseExtensions)
 model DatabaseExtensionsProperties {
   /**
@@ -5416,6 +5431,7 @@ model NetworkIsolationSettings {
  * A database operation.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.DatabaseOperations)
 model DatabaseOperation extends CommonTypes.ProxyResource {
   /**
@@ -5427,6 +5443,7 @@ model DatabaseOperation extends CommonTypes.ProxyResource {
 /**
  * The properties of a database operation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.DatabaseOperations)
 model DatabaseOperationProperties {
   /**
@@ -5525,6 +5542,7 @@ model DatabaseOperationProperties {
 /**
  * The phase details properties of a database operation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.DatabaseOperations)
 model PhaseDetails {
   /**
@@ -5574,6 +5592,7 @@ model Sku {
 /**
  * Azure Active Directory identity configuration for a resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.Databases)
 model DatabaseIdentity {
   /**
@@ -5598,6 +5617,7 @@ model DatabaseIdentity {
 /**
  * Azure Active Directory identity configuration for a resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.Databases)
 model DatabaseUserIdentity {
   /**
@@ -5619,6 +5639,7 @@ model DatabaseUserIdentity {
  * The database's properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.Databases)
 model DatabaseProperties {
   /**
@@ -5997,6 +6018,7 @@ model DatabaseKey {
  * A database update resource.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.Databases)
 model DatabaseUpdate {
   /**
@@ -6024,6 +6046,7 @@ model DatabaseUpdate {
 /**
  * A database update properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.Databases)
 model DatabaseUpdateProperties {
   /**
@@ -6342,6 +6365,7 @@ model DatabaseUpdateProperties {
 /**
  * Contains the information necessary to perform export database operation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.Databases)
 model ExportDatabaseDefinition {
   /**
@@ -6469,6 +6493,7 @@ model ImportExportOperationResultProperties {
 /**
  * Contains the information necessary to perform import operation for existing database.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.Databases)
 model ImportExistingDatabaseDefinition {
   /**
@@ -6518,6 +6543,7 @@ model ImportExistingDatabaseDefinition {
 /**
  * Contains the information necessary to perform a resource move (rename).
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.Databases)
 model ResourceMoveDefinition {
   /**
@@ -7048,6 +7074,7 @@ model DatabaseTableProperties {
  * Usage metric of a database.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.DatabaseUsages)
 model DatabaseUsage extends CommonTypes.ProxyResource {
   /**
@@ -7059,6 +7086,7 @@ model DatabaseUsage extends CommonTypes.ProxyResource {
 /**
  * Properties of a database usage.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.DatabaseUsages)
 model DatabaseUsageProperties {
   /**
@@ -7260,6 +7288,7 @@ model DatabaseVulnerabilityAssessmentScanExportProperties {
  * The properties of a database data masking policy.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.DataMaskingPolicies)
 model DataMaskingPolicyProperties {
   /**
@@ -7289,6 +7318,7 @@ model DataMaskingPolicyProperties {
  * A database data masking rule.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.DataMaskingRules)
 model DataMaskingRule extends CommonTypes.ProxyResource {
   /**
@@ -7312,6 +7342,7 @@ model DataMaskingRule extends CommonTypes.ProxyResource {
 /**
  * The properties of a database data masking rule.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.DataMaskingRules)
 model DataMaskingRuleProperties {
   /**
@@ -7396,6 +7427,7 @@ model DataMaskingRuleProperties {
  * User activities of a data warehouse. This currently includes the count of running or suspended queries. For more information, please view the sys.dm_pdw_exec_requests dynamic management view (DMV).
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.DataWarehouseUserActivities)
 model DataWarehouseUserActivitiesProperties {
   /**
@@ -7409,6 +7441,7 @@ model DataWarehouseUserActivitiesProperties {
  * The properties of a deleted server.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.DeletedServers)
 model DeletedServerProperties {
   /**
@@ -7441,6 +7474,7 @@ model DeletedServerProperties {
  * The properties of a distributed availability group.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.DistributedAvailabilityGroups)
 model DistributedAvailabilityGroupProperties {
   /**
@@ -7507,6 +7541,7 @@ model DistributedAvailabilityGroupProperties {
 /**
  * Database specific information
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.DistributedAvailabilityGroups)
 model DistributedAvailabilityGroupDatabase {
   /**
@@ -7645,6 +7680,7 @@ model DistributedAvailabilityGroupDatabase {
 /**
  * Certificate information
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.DistributedAvailabilityGroups)
 model CertificateInfo {
   /**
@@ -7664,6 +7700,7 @@ model CertificateInfo {
 /**
  * Distributed availability group failover.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.DistributedAvailabilityGroups)
 model DistributedAvailabilityGroupsFailoverRequest {
   /**
@@ -7676,6 +7713,7 @@ model DistributedAvailabilityGroupsFailoverRequest {
 /**
  * Distributed availability group failover request.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.DistributedAvailabilityGroups)
 model DistributedAvailabilityGroupSetRole {
   /**
@@ -7695,6 +7733,7 @@ model DistributedAvailabilityGroupSetRole {
  * A elastic pool operation.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ElasticPoolOperations)
 model ElasticPoolOperation extends CommonTypes.ProxyResource {
   /**
@@ -7706,6 +7745,7 @@ model ElasticPoolOperation extends CommonTypes.ProxyResource {
 /**
  * The properties of a elastic pool operation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ElasticPoolOperations)
 model ElasticPoolOperationProperties {
   /**
@@ -7799,6 +7839,7 @@ model ElasticPoolOperationProperties {
  * Properties of an elastic pool
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ElasticPools)
 model ElasticPoolProperties {
   /**
@@ -7875,6 +7916,7 @@ model ElasticPoolProperties {
 /**
  * Per database settings of an elastic pool.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ElasticPools)
 model ElasticPoolPerDatabaseSettings {
   /**
@@ -7896,6 +7938,7 @@ model ElasticPoolPerDatabaseSettings {
 /**
  * An elastic pool update.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ElasticPools)
 model ElasticPoolUpdate {
   /**
@@ -7918,6 +7961,7 @@ model ElasticPoolUpdate {
 /**
  * Properties of an elastic pool
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ElasticPools)
 model ElasticPoolUpdateProperties {
   /**
@@ -7982,6 +8026,7 @@ model ElasticPoolUpdateProperties {
  * Properties for an encryption protector execution.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.EncryptionProtectors)
 model EncryptionProtectorProperties {
   /**
@@ -8028,6 +8073,7 @@ model EncryptionProtectorProperties {
  * The properties of an endpoint certificate.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.EndpointCertificates)
 model EndpointCertificateProperties {
   /**
@@ -8040,6 +8086,7 @@ model EndpointCertificateProperties {
  * Properties of a failover group.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.FailoverGroups)
 model FailoverGroupProperties {
   /**
@@ -8088,6 +8135,7 @@ model FailoverGroupProperties {
 /**
  * Read-write endpoint of the failover group instance.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.FailoverGroups)
 model FailoverGroupReadWriteEndpoint {
   /**
@@ -8104,6 +8152,7 @@ model FailoverGroupReadWriteEndpoint {
 /**
  * Read-only endpoint of the failover group instance.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.FailoverGroups)
 model FailoverGroupReadOnlyEndpoint {
   /**
@@ -8124,6 +8173,7 @@ model FailoverGroupReadOnlyEndpoint {
 /**
  * Partner server information for the failover group.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.FailoverGroups)
 model PartnerInfo {
   /**
@@ -8151,6 +8201,7 @@ model PartnerInfo {
 /**
  * A failover group update request.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.FailoverGroups)
 model FailoverGroupUpdate {
   /**
@@ -8168,6 +8219,7 @@ model FailoverGroupUpdate {
 /**
  * Properties of a failover group update.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.FailoverGroups)
 model FailoverGroupUpdateProperties {
   /**
@@ -8205,6 +8257,7 @@ model FailoverGroupUpdateProperties {
  * The properties of a server firewall rule.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.FirewallRules)
 model ServerFirewallRuleProperties {
   /**
@@ -8258,6 +8311,7 @@ model ResourceWithWritableName {
 /**
  * A list of server firewall rules.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.FirewallRules)
 model FirewallRuleList {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -8268,6 +8322,7 @@ model FirewallRuleList {
  * The properties of the geo backup policy.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.GeoBackupPolicies)
 model GeoBackupPolicyProperties {
   /**
@@ -8286,6 +8341,7 @@ model GeoBackupPolicyProperties {
  * Properties of a instance failover group.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.InstanceFailoverGroups)
 model InstanceFailoverGroupProperties {
   /**
@@ -8332,6 +8388,7 @@ model InstanceFailoverGroupProperties {
 /**
  * Read-write endpoint of the failover group instance.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.InstanceFailoverGroups)
 model InstanceFailoverGroupReadWriteEndpoint {
   /**
@@ -8348,6 +8405,7 @@ model InstanceFailoverGroupReadWriteEndpoint {
 /**
  * Read-only endpoint of the failover group instance.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.InstanceFailoverGroups)
 model InstanceFailoverGroupReadOnlyEndpoint {
   /**
@@ -8359,6 +8417,7 @@ model InstanceFailoverGroupReadOnlyEndpoint {
 /**
  * Partner region information for the failover group.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.InstanceFailoverGroups)
 model PartnerRegionInfo {
   /**
@@ -8376,6 +8435,7 @@ model PartnerRegionInfo {
 /**
  * Pairs of Managed Instances in the failover group.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.InstanceFailoverGroups)
 model ManagedInstancePairInfo {
   /**
@@ -8393,6 +8453,7 @@ model ManagedInstancePairInfo {
  * The properties of a instance pool operation.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.InstancePoolOperations)
 model InstancePoolOperationProperties {
   /**
@@ -8480,6 +8541,7 @@ model InstancePoolOperationProperties {
  * Properties of an instance pool.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.InstancePools)
 model InstancePoolProperties {
   /**
@@ -8517,6 +8579,7 @@ model InstancePoolProperties {
 /**
  * An update to an Instance pool.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.InstancePools)
 model InstancePoolUpdate {
   /**
@@ -8541,6 +8604,7 @@ model InstancePoolUpdate {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.IPv6FirewallRules)
 model IPv6ServerFirewallRuleProperties {
   /**
@@ -8559,6 +8623,7 @@ model IPv6ServerFirewallRuleProperties {
 /**
  * Azure Active Directory identity configuration for a resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.JobAgents)
 model JobAgentIdentity {
   /**
@@ -8582,6 +8647,7 @@ model JobAgentIdentity {
 /**
  * Azure Active Directory identity configuration for a resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.JobAgents)
 model JobAgentUserAssignedIdentity {
   /**
@@ -8603,6 +8669,7 @@ model JobAgentUserAssignedIdentity {
  * Properties of a job agent.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.JobAgents)
 model JobAgentProperties {
   /**
@@ -8621,6 +8688,7 @@ model JobAgentProperties {
 /**
  * An update to an Azure SQL job agent.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.JobAgents)
 model JobAgentUpdate {
   /**
@@ -8644,6 +8712,7 @@ model JobAgentUpdate {
  * Properties of a job credential.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.JobCredentials)
 model JobCredentialProperties {
   /**
@@ -8773,6 +8842,7 @@ model JobExecutionTarget {
  * Properties of job agent private endpoint.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.JobPrivateEndpoints)
 model JobPrivateEndpointProperties {
   /**
@@ -8795,6 +8865,7 @@ model JobPrivateEndpointProperties {
  * Properties of a job.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.Jobs)
 model JobProperties {
   /**
@@ -8817,6 +8888,7 @@ model JobProperties {
 /**
  * Scheduling properties of a job.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.Jobs)
 model JobSchedule {
   /**
@@ -8869,6 +8941,7 @@ model JobSchedule {
  * Properties of a job step.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.JobSteps)
 model JobStepProperties {
   /**
@@ -8906,6 +8979,7 @@ model JobStepProperties {
 /**
  * The action to be executed by a job step.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.JobSteps)
 model JobStepAction {
   /**
@@ -8927,6 +9001,7 @@ model JobStepAction {
 /**
  * The output configuration of a job step.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.JobSteps)
 model JobStepOutput {
   /**
@@ -8975,6 +9050,7 @@ model JobStepOutput {
 /**
  * The execution options of a job step.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.JobSteps)
 model JobStepExecutionOptions {
   /**
@@ -9007,6 +9083,7 @@ model JobStepExecutionOptions {
  * Properties of job target group.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.JobTargetGroups)
 model JobTargetGroupProperties {
   /**
@@ -9019,6 +9096,7 @@ model JobTargetGroupProperties {
 /**
  * A job target, for example a specific database or a container of databases that is evaluated during job execution.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.JobTargetGroups)
 model JobTarget {
   /**
@@ -9062,6 +9140,7 @@ model JobTarget {
  * The properties of a database ledger digest upload settings.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LedgerDigestUploads)
 model LedgerDigestUploadsProperties {
   /**
@@ -9079,6 +9158,7 @@ model LedgerDigestUploadsProperties {
 /**
  * The location capability.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model LocationCapabilities {
   /**
@@ -9127,6 +9207,7 @@ model LocationCapabilities {
 /**
  * The server capability
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model ServerVersionCapability {
   /**
@@ -9162,6 +9243,7 @@ model ServerVersionCapability {
 /**
  * The edition capability.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model EditionCapability {
   /**
@@ -9216,6 +9298,7 @@ model EditionCapability {
 /**
  * The service objectives capability.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model ServiceObjectiveCapability {
   /**
@@ -9328,6 +9411,7 @@ model ServiceObjectiveCapability {
 /**
  * The maximum size range capability.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model MaxSizeRangeCapability {
   /**
@@ -9369,6 +9453,7 @@ model MaxSizeRangeCapability {
 /**
  * The maximum size capability.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model MaxSizeCapability {
   /**
@@ -9387,6 +9472,7 @@ model MaxSizeCapability {
 /**
  * The log size capability.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model LogSizeCapability {
   /**
@@ -9405,6 +9491,7 @@ model LogSizeCapability {
 /**
  * The performance level capability.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model PerformanceLevelCapability {
   /**
@@ -9423,6 +9510,7 @@ model PerformanceLevelCapability {
 /**
  * The license type capability
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model LicenseTypeCapability {
   /**
@@ -9446,6 +9534,7 @@ model LicenseTypeCapability {
 /**
  * Supported auto pause delay time range
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model AutoPauseDelayTimeRange {
   /**
@@ -9488,6 +9577,7 @@ model AutoPauseDelayTimeRange {
 /**
  * The min capacity capability
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model MinCapacityCapability {
   /**
@@ -9511,6 +9601,7 @@ model MinCapacityCapability {
 /**
  * The maintenance configuration capability
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model MaintenanceConfigurationCapability {
   /**
@@ -9540,6 +9631,7 @@ model MaintenanceConfigurationCapability {
 /**
  * The zone pinning capability
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model ZonePinningCapability {
   /**
@@ -9563,6 +9655,7 @@ model ZonePinningCapability {
 /**
  * Supported free limit exhaustion behavior options
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model FreeLimitExhaustionBehaviorCapability {
   /**
@@ -9581,6 +9674,7 @@ model FreeLimitExhaustionBehaviorCapability {
 /**
  * The read scale capability.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model ReadScaleCapability {
   /**
@@ -9604,6 +9698,7 @@ model ReadScaleCapability {
 /**
  * The storage account type capability.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model StorageCapability {
   /**
@@ -9627,6 +9722,7 @@ model StorageCapability {
 /**
  * The elastic pool edition capability.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model ElasticPoolEditionCapability {
   /**
@@ -9669,6 +9765,7 @@ model ElasticPoolEditionCapability {
 /**
  * The Elastic Pool performance level capability.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model ElasticPoolPerformanceLevelCapability {
   /**
@@ -9775,6 +9872,7 @@ model ElasticPoolPerformanceLevelCapability {
 /**
  * The max per-database performance level capability.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model ElasticPoolPerDatabaseMaxPerformanceLevelCapability {
   /**
@@ -9811,6 +9909,7 @@ model ElasticPoolPerDatabaseMaxPerformanceLevelCapability {
 /**
  * The minimum per-database performance level capability.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model ElasticPoolPerDatabaseMinPerformanceLevelCapability {
   /**
@@ -9840,6 +9939,7 @@ model ElasticPoolPerDatabaseMinPerformanceLevelCapability {
 /**
  * Supported auto pause delay time range
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model PerDatabaseAutoPauseDelayTimeRange {
   /**
@@ -9882,6 +9982,7 @@ model PerDatabaseAutoPauseDelayTimeRange {
 /**
  * The managed instance capability
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model ManagedInstanceVersionCapability {
   /**
@@ -9917,6 +10018,7 @@ model ManagedInstanceVersionCapability {
 /**
  * The managed server capability
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model ManagedInstanceEditionCapability {
   /**
@@ -9959,6 +10061,7 @@ model ManagedInstanceEditionCapability {
 /**
  * The managed server family capability.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model ManagedInstanceFamilyCapability {
   /**
@@ -10006,6 +10109,7 @@ model ManagedInstanceFamilyCapability {
 /**
  * The managed instance virtual cores capability.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model ManagedInstanceVcoresCapability {
   /**
@@ -10136,6 +10240,7 @@ model ManagedInstanceVcoresCapability {
 /**
  * The maximum limit range capability.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model MaxLimitRangeCapability {
   /**
@@ -10171,6 +10276,7 @@ model MaxLimitRangeCapability {
 /**
  * The maintenance configuration capability
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model ManagedInstanceMaintenanceConfigurationCapability {
   /**
@@ -10194,6 +10300,7 @@ model ManagedInstanceMaintenanceConfigurationCapability {
 /**
  * The instance pool capability
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model InstancePoolEditionCapability {
   /**
@@ -10223,6 +10330,7 @@ model InstancePoolEditionCapability {
 /**
  * The instance pool family capability.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model InstancePoolFamilyCapability {
   /**
@@ -10258,6 +10366,7 @@ model InstancePoolFamilyCapability {
 /**
  * The managed instance virtual cores capability.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model InstancePoolVcoresCapability {
   /**
@@ -10293,6 +10402,7 @@ model InstancePoolVcoresCapability {
 /**
  * The job agent version capability.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model JobAgentVersionCapability {
   /**
@@ -10323,6 +10433,7 @@ model JobAgentVersionCapability {
 /**
  * The job agent edition capability.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model JobAgentEditionCapability {
   /**
@@ -10353,6 +10464,7 @@ model JobAgentEditionCapability {
 /**
  * The job agent service level objective capability.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LocationCapabilities)
 model JobAgentServiceLevelObjectiveCapability {
   /**
@@ -10383,6 +10495,7 @@ model JobAgentServiceLevelObjectiveCapability {
  * Properties of a long term retention backup
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LongTermRetentionBackups)
 model LongTermRetentionBackupProperties {
   /**
@@ -10467,6 +10580,7 @@ model LongTermRetentionBackupProperties {
 /**
  * Contains the information necessary to change long term retention backup access tier and related operation mode.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LongTermRetentionBackups)
 model ChangeLongTermRetentionBackupAccessTierParameters {
   /**
@@ -10483,6 +10597,7 @@ model ChangeLongTermRetentionBackupAccessTierParameters {
 /**
  * Contains the information necessary to perform long term retention backup copy operation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LongTermRetentionBackups)
 model CopyLongTermRetentionBackupParameters {
   /**
@@ -10494,6 +10609,7 @@ model CopyLongTermRetentionBackupParameters {
 /**
  * Contains the properties to perform long term retention backup copy operation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LongTermRetentionBackups)
 model CopyLongTermRetentionBackupParametersProperties {
   /**
@@ -10537,6 +10653,7 @@ model CopyLongTermRetentionBackupParametersProperties {
  * A LongTermRetentionBackup operation result resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LongTermRetentionBackups)
 model LongTermRetentionBackupOperationResult extends CommonTypes.ProxyResource {
   /**
@@ -10548,6 +10665,7 @@ model LongTermRetentionBackupOperationResult extends CommonTypes.ProxyResource {
 /**
  * Contains the operation result properties for long term retention backup operation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LongTermRetentionBackups)
 model LongTermRetentionOperationResultProperties {
   /**
@@ -10597,6 +10715,7 @@ model LongTermRetentionOperationResultProperties {
 /**
  * Contains the information necessary to perform long term retention backup update operation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LongTermRetentionBackups)
 model UpdateLongTermRetentionBackupParameters {
   /**
@@ -10608,6 +10727,7 @@ model UpdateLongTermRetentionBackupParameters {
 /**
  * Contains the properties to perform long term retention backup copy operation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LongTermRetentionBackups)
 model UpdateLongTermRetentionBackupParametersProperties {
   /**
@@ -10621,6 +10741,7 @@ model UpdateLongTermRetentionBackupParametersProperties {
  * Properties of a long term retention backup
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(
   Features.LongTermRetentionManagedInstanceBackups
 )
@@ -10682,6 +10803,7 @@ model ManagedInstanceLongTermRetentionBackupProperties {
  * Properties of a long term retention policy
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LongTermRetentionPolicies)
 model LongTermRetentionPolicyProperties {
   /**
@@ -10719,6 +10841,7 @@ model LongTermRetentionPolicyProperties {
  * Maintenance window options properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.MaintenanceWindowOptions)
 model MaintenanceWindowOptionsProperties {
   /**
@@ -10782,6 +10905,7 @@ model MaintenanceWindowTimeRange {
  * Maintenance windows resource properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.MaintenanceWindows)
 model MaintenanceWindowsProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -10804,6 +10928,7 @@ model ManagedBackupShortTermRetentionPolicyProperties {
  * Contains the operation result properties for managed database move operation.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseMoveOperations)
 model ManagedDatabaseMoveOperationResultProperties {
   /**
@@ -10908,6 +11033,7 @@ model ManagedDatabaseMoveOperationResultProperties {
  * Properties of a database query.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseQueries)
 model QueryProperties {
   /**
@@ -10919,11 +11045,13 @@ model QueryProperties {
 /**
  * Execution statistics for one particular query
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseQueries)
 model ManagedInstanceQueryStatistics is Azure.Core.Page<QueryStatistics>;
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseQueries)
 model QueryStatistics extends CommonTypes.ProxyResource {
   /**
@@ -11059,6 +11187,7 @@ model QueryMetricProperties {
  * The managed database's restore details properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseRestoreDetails)
 model ManagedDatabaseRestoreDetailsProperties {
   /**
@@ -11205,6 +11334,7 @@ model ManagedDatabaseRestoreDetailsProperties {
 /**
  * The managed database's restore details backup set properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseRestoreDetails)
 model ManagedDatabaseRestoreDetailsBackupSetProperties {
   /**
@@ -11250,6 +11380,7 @@ model ManagedDatabaseRestoreDetailsBackupSetProperties {
 /**
  * The managed database's restore details unrestorable file properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseRestoreDetails)
 model ManagedDatabaseRestoreDetailsUnrestorableFileProperties {
   /**
@@ -11263,6 +11394,7 @@ model ManagedDatabaseRestoreDetailsUnrestorableFileProperties {
  * The managed database's properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabases)
 model ManagedDatabaseProperties {
   /**
@@ -11411,6 +11543,7 @@ model ManagedDatabaseProperties {
 /**
  * Managed Database Extended Accessibility Information
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabases)
 model ManagedDatabaseExtendedAccessibilityInfo {
   /**
@@ -11441,6 +11574,7 @@ model ManagedDatabaseExtendedAccessibilityInfo {
 /**
  * An managed database update.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabases)
 model ManagedDatabaseUpdate {
   /**
@@ -11458,6 +11592,7 @@ model ManagedDatabaseUpdate {
 /**
  * Contains the information necessary to perform a managed database move.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabases)
 model ManagedDatabaseMoveDefinition {
   /**
@@ -11469,6 +11604,7 @@ model ManagedDatabaseMoveDefinition {
 /**
  * Contains the information necessary to perform a complete database restore operation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabases)
 model CompleteDatabaseRestoreDefinition {
   /**
@@ -11480,6 +11616,7 @@ model CompleteDatabaseRestoreDefinition {
 /**
  * Contains the information necessary to start a managed database move.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabases)
 model ManagedDatabaseStartMoveDefinition {
   /**
@@ -11497,6 +11634,7 @@ model ManagedDatabaseStartMoveDefinition {
  * Properties of a security alert policy.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(
   Features.ManagedDatabaseSecurityAlertPolicies
 )
@@ -11548,6 +11686,7 @@ model SecurityAlertPolicyProperties {
 /**
  * A list of security events.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseSecurityEvents)
 model SecurityEventCollection is Azure.Core.Page<SecurityEvent>;
 
@@ -11555,6 +11694,7 @@ model SecurityEventCollection is Azure.Core.Page<SecurityEvent>;
  * A security event.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseSecurityEvents)
 model SecurityEvent extends CommonTypes.ProxyResource {
   /**
@@ -11566,6 +11706,7 @@ model SecurityEvent extends CommonTypes.ProxyResource {
 /**
  * The properties of a security event.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseSecurityEvents)
 model SecurityEventProperties {
   /**
@@ -11627,6 +11768,7 @@ model SecurityEventProperties {
 /**
  * The properties of a security event sql injection additional properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseSecurityEvents)
 model SecurityEventSqlInjectionAdditionalProperties {
   /**
@@ -11820,6 +11962,7 @@ model RecommendedSensitivityLabelUpdateProperties {
  * Properties of a transparent data encryption.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(
   Features.ManagedDatabaseTransparentDataEncryption
 )
@@ -11834,6 +11977,7 @@ model ManagedTransparentDataEncryptionProperties {
  * The properties of a managed instance administrator.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedInstanceAdministrators)
 model ManagedInstanceAdministratorProperties {
   /**
@@ -11864,6 +12008,7 @@ model ManagedInstanceAdministratorProperties {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(
   Features.ManagedInstanceAzureADOnlyAuthentications
 )
@@ -11878,6 +12023,7 @@ model ManagedInstanceAzureADOnlyAuthProperties {
 /**
  * The properties of managed instance DTC.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedInstanceDtcs)
 model ManagedInstanceDtcProperties {
   /**
@@ -11917,6 +12063,7 @@ model ManagedInstanceDtcProperties {
 /**
  * The Security Settings of managed instance DTC.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedInstanceDtcs)
 model ManagedInstanceDtcSecuritySettings {
   /**
@@ -11948,6 +12095,7 @@ model ManagedInstanceDtcSecuritySettings {
 /**
  * The Transaction Manager Communication Settings of managed instance DTC.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedInstanceDtcs)
 model ManagedInstanceDtcTransactionManagerCommunicationSettings {
   /**
@@ -11970,6 +12118,7 @@ model ManagedInstanceDtcTransactionManagerCommunicationSettings {
  * Properties for an encryption protector execution.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(
   Features.ManagedInstanceEncryptionProtectors
 )
@@ -12006,6 +12155,7 @@ model ManagedInstanceEncryptionProtectorProperties {
  * Properties for a key execution.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedInstanceKeys)
 model ManagedInstanceKeyProperties {
   /**
@@ -12044,6 +12194,7 @@ model ManagedInstanceKeyProperties {
  * Properties of a long term retention policy
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(
   Features.ManagedInstanceLongTermRetentionPolicies
 )
@@ -12078,6 +12229,7 @@ model ManagedInstanceLongTermRetentionPolicyProperties {
  * The properties of a managed instance operation.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedInstanceOperations)
 model ManagedInstanceOperationProperties {
   /**
@@ -12176,6 +12328,7 @@ model ManagedInstanceOperationProperties {
 /**
  * The parameters of a managed instance operation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedInstanceOperations)
 model ManagedInstanceOperationParametersPair {
   /**
@@ -12192,6 +12345,7 @@ model ManagedInstanceOperationParametersPair {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedInstanceOperations)
 model UpsertManagedServerOperationParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -12208,6 +12362,7 @@ model UpsertManagedServerOperationParameters {
 /**
  * The steps of a managed instance operation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedInstanceOperations)
 model ManagedInstanceOperationSteps {
   /**
@@ -12230,6 +12385,7 @@ model ManagedInstanceOperationSteps {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedInstanceOperations)
 model UpsertManagedServerOperationStepWithEstimatesAndDuration {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
@@ -12303,6 +12459,7 @@ model ManagedInstancePrivateLinkServiceConnectionStateProperty {
  * Properties of a private link resource.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(
   Features.ManagedInstancePrivateLinkResources
 )
@@ -12378,6 +12535,7 @@ model UserIdentity {
 /**
  * The properties of a managed instance.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
 model ManagedInstanceProperties {
   /**
@@ -12638,6 +12796,7 @@ model ManagedInstanceProperties {
 /**
  * A private endpoint connection under a managed instance
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
 model ManagedInstancePecProperty {
   /**
@@ -12656,6 +12815,7 @@ model ManagedInstancePecProperty {
 /**
  * Properties of a active directory administrator.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
 model ManagedInstanceExternalAdministrator {
   /**
@@ -12695,6 +12855,7 @@ model ManagedInstanceExternalAdministrator {
 /**
  * The managed instance's service principal configuration for a resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
 model ServicePrincipal {
   /**
@@ -12724,6 +12885,7 @@ model ServicePrincipal {
 /**
  * An update request for an Azure SQL Database managed instance.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
 model ManagedInstanceUpdate {
   /**
@@ -12751,6 +12913,7 @@ model ManagedInstanceUpdate {
 /**
  * A collection of endpoints that the managed instance service requires outbound network access to.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
 model OutboundEnvironmentEndpointCollection
   is Azure.Core.Page<OutboundEnvironmentEndpoint>;
@@ -12758,6 +12921,7 @@ model OutboundEnvironmentEndpointCollection
 /**
  * An endpoint that the managed instance service requires outbound network access to.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
 model OutboundEnvironmentEndpoint {
   /**
@@ -12777,6 +12941,7 @@ model OutboundEnvironmentEndpoint {
 /**
  * A domain name that the managed instance service needs to communicate with, along with additional details.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
 model EndpointDependency {
   /**
@@ -12796,6 +12961,7 @@ model EndpointDependency {
 /**
  * A domain name that the managed instance service needs to communicate with, along with additional details.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
 model EndpointDetail {
   /**
@@ -12810,6 +12976,7 @@ model EndpointDetail {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
 model RefreshExternalGovernanceStatusOperationResultMI
   extends CommonTypes.ProxyResource {
@@ -12823,6 +12990,7 @@ model RefreshExternalGovernanceStatusOperationResultMI
  * Contains the operation result properties for refresh external governance status operation.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
 model RefreshExternalGovernanceStatusOperationResultPropertiesMI {
   /**
@@ -12866,10 +13034,12 @@ model RefreshExternalGovernanceStatusOperationResultPropertiesMI {
 /**
  * A list of top resource consuming queries on managed instance
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
 model TopQueriesListResult is Azure.Core.Page<TopQueries>;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
 model TopQueries {
   /**
@@ -12918,6 +13088,7 @@ model TopQueries {
 /**
  * Validate azure key vault encryption key.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
 model ManagedInstanceValidateAzureKeyVaultEncryptionKeyRequest {
   /**
@@ -12959,6 +13130,7 @@ model TdeCertificateProperties {
  * Properties of a managed instance vulnerability assessment.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(
   Features.ManagedInstanceVulnerabilityAssessments
 )
@@ -12993,6 +13165,7 @@ model ManagedInstanceVulnerabilityAssessmentProperties {
  * The properties of a database ledger digest upload settings.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedLedgerDigestUploads)
 model ManagedLedgerDigestUploadsProperties {
   /**
@@ -13011,6 +13184,7 @@ model ManagedLedgerDigestUploadsProperties {
  * Properties of a managed server DNS alias.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedServerDnsAliases)
 model ManagedServerDnsAliasProperties {
   /**
@@ -13029,6 +13203,7 @@ model ManagedServerDnsAliasProperties {
 /**
  * A managed server dns alias creation request.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedServerDnsAliases)
 model ManagedServerDnsAliasCreation {
   /**
@@ -13040,6 +13215,7 @@ model ManagedServerDnsAliasCreation {
 /**
  * A managed server DNS alias acquisition request.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedServerDnsAliases)
 model ManagedServerDnsAliasAcquisition {
   /**
@@ -13051,6 +13227,7 @@ model ManagedServerDnsAliasAcquisition {
 /**
  * The properties of an NSP config.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(
   Features.NetworkSecurityPerimeterConfigurations
 )
@@ -13074,6 +13251,7 @@ model NetworkSecurityPerimeterConfigurationProperties {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(
   Features.NetworkSecurityPerimeterConfigurations
 )
@@ -13088,6 +13266,7 @@ model NSPConfigPerimeter {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(
   Features.NetworkSecurityPerimeterConfigurations
 )
@@ -13100,6 +13279,7 @@ model NSPConfigAssociation {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(
   Features.NetworkSecurityPerimeterConfigurations
 )
@@ -13116,6 +13296,7 @@ model NSPConfigProfile {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(
   Features.NetworkSecurityPerimeterConfigurations
 )
@@ -13128,6 +13309,7 @@ model NSPConfigAccessRule {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(
   Features.NetworkSecurityPerimeterConfigurations
 )
@@ -13148,6 +13330,7 @@ model NSPConfigAccessRuleProperties {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(
   Features.NetworkSecurityPerimeterConfigurations
 )
@@ -13162,6 +13345,7 @@ model NSPConfigNetworkSecurityPerimeterRule {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(
   Features.NetworkSecurityPerimeterConfigurations
 )
@@ -13174,6 +13358,7 @@ model NSPProvisioningIssue {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(
   Features.NetworkSecurityPerimeterConfigurations
 )
@@ -13193,6 +13378,7 @@ model NSPProvisioningIssueProperties {
 /**
  * SQL REST API operation definition.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.Operations)
 model Operation {
   /**
@@ -13224,6 +13410,7 @@ model Operation {
 /**
  * Display metadata associated with the operation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.Operations)
 model OperationDisplay {
   /**
@@ -13254,6 +13441,7 @@ model OperationDisplay {
 /**
  * The properties of an outbound firewall rule.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.OutboundFirewallRules)
 model OutboundFirewallRuleProperties {
   /**
@@ -13322,6 +13510,7 @@ model PrivateLinkServiceConnectionStateProperty {
  * Properties of a private link resource.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.PrivateLinkResources)
 model PrivateLinkResourceProperties {
   /**
@@ -13347,6 +13536,7 @@ model PrivateLinkResourceProperties {
  * The recoverable database's properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.RecoverableDatabases)
 model RecoverableDatabaseProperties {
   /**
@@ -13385,6 +13575,7 @@ model RecoverableDatabaseProperties {
  * The recoverable managed database's properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.RecoverableManagedDatabases)
 model RecoverableManagedDatabaseProperties {
   /**
@@ -13398,6 +13589,7 @@ model RecoverableManagedDatabaseProperties {
  * Properties of a replication link.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ReplicationLinks)
 model ReplicationLinkProperties {
   /**
@@ -13477,6 +13669,7 @@ model ReplicationLinkProperties {
  * A replication link update request.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ReplicationLinks)
 model ReplicationLinkUpdate extends CommonTypes.ProxyResource {
   /**
@@ -13488,6 +13681,7 @@ model ReplicationLinkUpdate extends CommonTypes.ProxyResource {
 /**
  * Properties of a replication link update.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ReplicationLinks)
 model ReplicationLinkUpdateProperties {
   /**
@@ -13500,6 +13694,7 @@ model ReplicationLinkUpdateProperties {
  * The restorable dropped database's properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.RestorableDroppedDatabases)
 model RestorableDroppedDatabaseProperties {
   /**
@@ -13552,6 +13747,7 @@ model RestorableDroppedDatabaseProperties {
  * The restorable dropped managed database's properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(
   Features.RestorableDroppedManagedDatabases
 )
@@ -13588,6 +13784,7 @@ model RestorableDroppedManagedDatabaseProperties {
  * Properties of a database restore point
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.RestorePoints)
 model RestorePointProperties {
   /**
@@ -13620,6 +13817,7 @@ model RestorePointProperties {
 /**
  * Contains the information necessary to perform a create database restore point operation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.RestorePoints)
 model CreateDatabaseRestorePointDefinition {
   /**
@@ -13632,6 +13830,7 @@ model CreateDatabaseRestorePointDefinition {
  * Server-level Automatic Tuning properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ServerAutomaticTuning)
 model AutomaticTuningServerProperties {
   /**
@@ -13655,6 +13854,7 @@ model AutomaticTuningServerProperties {
 /**
  * Automatic tuning properties for individual advisors.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ServerAutomaticTuning)
 model AutomaticTuningServerOptions {
   /**
@@ -13685,6 +13885,7 @@ model AutomaticTuningServerOptions {
  * Properties of a active directory administrator.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ServerAzureADAdministrators)
 model AdministratorProperties {
   /**
@@ -13722,6 +13923,7 @@ model AdministratorProperties {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ServerAzureADOnlyAuthentications)
 model AzureADOnlyAuthProperties {
   /**
@@ -13734,6 +13936,7 @@ model AzureADOnlyAuthProperties {
 /**
  * The properties of server configuration option.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ServerConfigurationOptions)
 model ServerConfigurationOptionProperties {
   /**
@@ -13753,6 +13956,7 @@ model ServerConfigurationOptionProperties {
  * The properties of a server connection policy.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ServerConnectionPolicies)
 model ServerConnectionPolicyProperties {
   /**
@@ -13765,6 +13969,7 @@ model ServerConnectionPolicyProperties {
  * Properties of a server DevOps audit settings.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ServerDevOpsAudit)
 model ServerDevOpsAuditSettingsProperties {
   /**
@@ -13820,6 +14025,7 @@ model ServerDevOpsAuditSettingsProperties {
  * Properties of a server DNS alias.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ServerDnsAliases)
 model ServerDnsAliasProperties {
   /**
@@ -13832,6 +14038,7 @@ model ServerDnsAliasProperties {
 /**
  * A server dns alias acquisition request.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ServerDnsAliases)
 model ServerDnsAliasAcquisition {
   /**
@@ -13844,6 +14051,7 @@ model ServerDnsAliasAcquisition {
  * Properties for a server key execution.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ServerKeys)
 model ServerKeyProperties {
   /**
@@ -13894,6 +14102,7 @@ model ServerKeyProperties {
  * A server operation.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ServerOperations)
 model ServerOperation extends CommonTypes.ProxyResource {
   /**
@@ -13905,6 +14114,7 @@ model ServerOperation extends CommonTypes.ProxyResource {
 /**
  * The properties of a server operation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ServerOperations)
 model ServerOperationProperties {
   /**
@@ -13991,6 +14201,7 @@ model ServerOperationProperties {
 /**
  * A request to check whether the specified name for a resource is available.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.Servers)
 model CheckNameAvailabilityRequest {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -14002,6 +14213,7 @@ model CheckNameAvailabilityRequest {
 /**
  * The result of a name availability check.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.Servers)
 model CheckNameAvailabilityResponse {
   /**
@@ -14033,6 +14245,7 @@ model CheckNameAvailabilityResponse {
  * The properties of a server.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.Servers)
 model ServerProperties {
   /**
@@ -14141,6 +14354,7 @@ model ServerProperties {
 /**
  * A private endpoint connection under a server
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.Servers)
 model ServerPrivateEndpointConnection {
   /**
@@ -14159,6 +14373,7 @@ model ServerPrivateEndpointConnection {
 /**
  * Properties of a active directory administrator.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.Servers)
 model ServerExternalAdministrator {
   /**
@@ -14198,6 +14413,7 @@ model ServerExternalAdministrator {
 /**
  * An update request for an Azure SQL Database server.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.Servers)
 model ServerUpdate {
   /**
@@ -14220,6 +14436,7 @@ model ServerUpdate {
 /**
  * Contains the information necessary to perform import operation for new database.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.Servers)
 model ImportNewDatabaseDefinition {
   /**
@@ -14294,6 +14511,7 @@ model ImportNewDatabaseDefinition {
  * An RefreshExternalGovernanceStatus operation result resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.Servers)
 model RefreshExternalGovernanceStatusOperationResult
   extends CommonTypes.ProxyResource {
@@ -14306,6 +14524,7 @@ model RefreshExternalGovernanceStatusOperationResult
 /**
  * Contains the operation result properties for refresh external governance status operation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.Servers)
 model RefreshExternalGovernanceStatusOperationResultProperties {
   /**
@@ -14350,6 +14569,7 @@ model RefreshExternalGovernanceStatusOperationResultProperties {
  * The properties of a server trust certificate.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ServerTrustCertificates)
 model ServerTrustCertificateProperties {
   /**
@@ -14374,6 +14594,7 @@ model ServerTrustCertificateProperties {
  * Properties of a server trust group.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ServerTrustGroups)
 model ServerTrustGroupProperties {
   /**
@@ -14391,6 +14612,7 @@ model ServerTrustGroupProperties {
 /**
  * Server info for the server trust group.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ServerTrustGroups)
 model ServerInfo {
   /**
@@ -14403,6 +14625,7 @@ model ServerInfo {
  * Usage metric of a server.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ServerUsages)
 model ServerUsage extends CommonTypes.ProxyResource {
   /**
@@ -14414,6 +14637,7 @@ model ServerUsage extends CommonTypes.ProxyResource {
 /**
  * Properties of a server usage.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ServerUsages)
 model ServerUsageProperties {
   /**
@@ -14445,6 +14669,7 @@ model ServerUsageProperties {
  * Properties of a server Vulnerability Assessment.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ServerVulnerabilityAssessments)
 model ServerVulnerabilityAssessmentProperties {
   /**
@@ -14477,6 +14702,7 @@ model ServerVulnerabilityAssessmentProperties {
  * Sql agent configuration properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.SqlAgent)
 model SqlAgentConfigurationProperties {
   /**
@@ -14489,6 +14715,7 @@ model SqlAgentConfigurationProperties {
  * Properties of managed instance's Start/Stop schedule.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(
   Features.StartStopManagedInstanceSchedules
 )
@@ -14525,6 +14752,7 @@ model StartStopManagedInstanceScheduleProperties {
 /**
  * Schedule info describing when the server should be started or stopped.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(
   Features.StartStopManagedInstanceSchedules
 )
@@ -14554,6 +14782,7 @@ model ScheduleItem {
  * Properties of a subscription usage.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.SubscriptionUsages)
 model SubscriptionUsageProperties {
   /**
@@ -14585,6 +14814,7 @@ model SubscriptionUsageProperties {
  * Synapse link workspace resource
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.SynapseLinkWorkspaces)
 model SynapseLinkWorkspace extends CommonTypes.ProxyResource {
   /**
@@ -14596,6 +14826,7 @@ model SynapseLinkWorkspace extends CommonTypes.ProxyResource {
 /**
  * Properties of a Synapse link workspaces
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.SynapseLinkWorkspaces)
 model SynapseLinkWorkspaceProperties {
   /**
@@ -14608,6 +14839,7 @@ model SynapseLinkWorkspaceProperties {
 /**
  * Properties of a Synapse link workspaces
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.SynapseLinkWorkspaces)
 model SynapseLinkWorkspaceInfoProperties {
   /**
@@ -14625,6 +14857,7 @@ model SynapseLinkWorkspaceInfoProperties {
  * Properties of an Azure SQL Database sync agent.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.SyncAgents)
 model SyncAgentProperties {
   /**
@@ -14675,6 +14908,7 @@ model SyncAgentProperties {
 /**
  * Properties of an Azure SQL Database sync agent key.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.SyncAgents)
 model SyncAgentKeyProperties {
   /**
@@ -14689,6 +14923,7 @@ model SyncAgentKeyProperties {
  * An Azure SQL Database sync agent linked database.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.SyncAgents)
 model SyncAgentLinkedDatabase extends CommonTypes.ProxyResource {
   /**
@@ -14700,6 +14935,7 @@ model SyncAgentLinkedDatabase extends CommonTypes.ProxyResource {
 /**
  * Properties of an Azure SQL Database sync agent linked database.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.SyncAgents)
 model SyncAgentLinkedDatabaseProperties {
   /**
@@ -14742,12 +14978,14 @@ model SyncAgentLinkedDatabaseProperties {
 /**
  * A list of sync database ID properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.SyncGroups)
 model SyncDatabaseIdListResult is Azure.Core.Page<SyncDatabaseIdProperties>;
 
 /**
  * Properties of the sync database id.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.SyncGroups)
 model SyncDatabaseIdProperties {
   /**
@@ -14761,6 +14999,7 @@ model SyncDatabaseIdProperties {
  * Properties of a sync group with support to MI.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.SyncGroups)
 model SyncGroupProperties {
   /**
@@ -14833,6 +15072,7 @@ model SyncGroupProperties {
 /**
  * Properties of sync group schema.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.SyncGroups)
 model SyncGroupSchema {
   /**
@@ -14850,6 +15090,7 @@ model SyncGroupSchema {
 /**
  * Properties of table in sync group schema.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.SyncGroups)
 model SyncGroupSchemaTable {
   /**
@@ -14867,6 +15108,7 @@ model SyncGroupSchemaTable {
 /**
  * Properties of column in sync group table.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.SyncGroups)
 model SyncGroupSchemaTableColumn {
   /**
@@ -14994,12 +15236,14 @@ model SyncFullSchemaTableColumn {
 /**
  * A list of sync group log properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.SyncGroups)
 model SyncGroupLogListResult is Azure.Core.Page<SyncGroupLogProperties>;
 
 /**
  * Properties of an Azure SQL Database sync group log.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.SyncGroups)
 model SyncGroupLogProperties {
   /**
@@ -15045,6 +15289,7 @@ model SyncGroupLogProperties {
  * Properties of a sync member with support to MI.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.SyncMembers)
 model SyncMemberProperties {
   /**
@@ -15117,6 +15362,7 @@ model SyncMemberProperties {
  * The properties of a time zone.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.TimeZones)
 model TimeZoneProperties {
   /**
@@ -15136,6 +15382,7 @@ model TimeZoneProperties {
  * Properties of a transparent data encryption scan.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.TransparentDataEncryptions)
 model TransparentDataEncryptionProperties {
   /**
@@ -15152,12 +15399,14 @@ model TransparentDataEncryptionProperties {
 /**
  * A list of usages.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.Usages)
 model UsageListResult is Azure.Core.Page<Usage>;
 
 /**
  * ARM usage.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.Usages)
 model Usage {
   /**
@@ -15206,6 +15455,7 @@ model Usage {
 /**
  * ARM Usage Name
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.Usages)
 model Name {
   /**
@@ -15223,6 +15473,7 @@ model Name {
  * The properties of a virtual cluster.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.VirtualClusters)
 model VirtualClusterProperties {
   /**
@@ -15246,6 +15497,7 @@ model VirtualClusterProperties {
 /**
  * An update request for virtual cluster.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.VirtualClusters)
 model VirtualClusterUpdate {
   /**
@@ -15264,6 +15516,7 @@ model VirtualClusterUpdate {
  * A refresh DNS servers operation.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.VirtualClusters)
 model UpdateVirtualClusterDnsServersOperation
   extends CommonTypes.ProxyResource {
@@ -15276,6 +15529,7 @@ model UpdateVirtualClusterDnsServersOperation
 /**
  * The properties of dns servers on virtual cluster.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.VirtualClusters)
 model VirtualClusterDnsServersProperties {
   /**
@@ -15289,6 +15543,7 @@ model VirtualClusterDnsServersProperties {
  * Properties of a virtual network rule.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.VirtualNetworkRules)
 model VirtualNetworkRuleProperties {
   /**
@@ -15312,6 +15567,7 @@ model VirtualNetworkRuleProperties {
  * Workload classifier definition. For more information look at sys.workload_management_workload_classifiers (DMV).
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.WorkloadClassifiers)
 model WorkloadClassifierProperties {
   /**
@@ -15349,6 +15605,7 @@ model WorkloadClassifierProperties {
  * Workload group definition. For more information look at sys.workload_management_workload_groups (DMV).
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.WorkloadGroups)
 model WorkloadGroupProperties {
   /**
@@ -15385,6 +15642,7 @@ model WorkloadGroupProperties {
 /**
  * The properties that are supported in the $filter operation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseSecurityEvents)
 model SecurityEventsFilterParameters {
   /**
@@ -15402,6 +15660,7 @@ model SecurityEventsFilterParameters {
 /**
  * A list of long term retention backups.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.LongTermRetentionBackups)
 model LongTermRetentionBackupListResult {
   /**
@@ -15422,6 +15681,7 @@ model LongTermRetentionBackupListResult {
 /**
  * List of managed database move operations.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseMoveOperations)
 model ManagedDatabaseMoveOperationListResult {
   /**
@@ -15443,6 +15703,7 @@ model ManagedDatabaseMoveOperationListResult {
  * List of managed database move operations.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(
   Features.ManagedInstanceAzureADOnlyAuthentications
 )
@@ -15465,6 +15726,7 @@ model ManagedInstanceAzureADOnlyAuthListResult {
 /**
  * A list of distributed availability groups in instance.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.DistributedAvailabilityGroups)
 model DistributedAvailabilityGroupsListResult {
   /**
@@ -15485,6 +15747,7 @@ model DistributedAvailabilityGroupsListResult {
 /**
  * A list of server trust certificates in instance.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ServerTrustCertificates)
 model ServerTrustCertificatesListResult {
   /**
@@ -15505,6 +15768,7 @@ model ServerTrustCertificatesListResult {
 /**
  * A list of active directory administrators.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ServerAzureADAdministrators)
 model AdministratorListResult {
   /**
@@ -15525,6 +15789,7 @@ model AdministratorListResult {
 /**
  * A list of the server's Advanced Threat Protection configurations.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(
   Features.ServerAdvancedThreatProtectionSettings
 )
@@ -15548,6 +15813,7 @@ model LogicalServerAdvancedThreatProtectionListResult {
  * A list of active directory only authentications.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ServerAzureADOnlyAuthentications)
 model AzureADOnlyAuthListResult {
   /**
@@ -15568,6 +15834,7 @@ model AzureADOnlyAuthListResult {
 /**
  * Import export operation extensions list.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.DatabaseExtensions)
 model ImportExportExtensionsOperationListResult {
   /**
@@ -15588,6 +15855,7 @@ model ImportExportExtensionsOperationListResult {
 /**
  * A list of the database's security alert policies.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.DatabaseSecurityAlertPolicies)
 model DatabaseSecurityAlertListResult {
   /**
@@ -15628,6 +15896,7 @@ model SQLVulnerabilityAssessmentScanListResult {
 /**
  * A list of server DevOps audit settings.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ServerDevOpsAudit)
 model ServerDevOpsAuditSettingsListResult {
   /**
@@ -15648,6 +15917,7 @@ model ServerDevOpsAuditSettingsListResult {
 /**
  * A list of the server's security alert policies.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.ServerSecurityAlertPolicies)
 model LogicalServerSecurityAlertPolicyListResult {
   /**
@@ -15668,6 +15938,7 @@ model LogicalServerSecurityAlertPolicyListResult {
 /**
  * Result of the request to list SQL operations.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.Operations)
 model OperationListResult {
   /**
@@ -15689,6 +15960,7 @@ model OperationListResult {
  * A Server ImportExport operation result resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.Servers)
 @added(Versions.v2025_02_01_preview)
 model ServerImportExportOperationResult extends CommonTypes.ProxyResource {
@@ -15701,6 +15973,7 @@ model ServerImportExportOperationResult extends CommonTypes.ProxyResource {
 /**
  * Contains the operation result properties for import/export operation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.Servers)
 @added(Versions.v2025_02_01_preview)
 model ServerImportExportOperationResultProperties {

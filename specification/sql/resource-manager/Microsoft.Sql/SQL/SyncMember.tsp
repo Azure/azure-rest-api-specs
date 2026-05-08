@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
 /**
  * An Azure SQL Database sync member.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(SyncGroup)
 @Azure.ResourceManager.Legacy.feature(Features.SyncMembers)
 model SyncMember is Azure.ResourceManager.ProxyResource<SyncMemberProperties> {
@@ -33,6 +34,7 @@ model SyncMember is Azure.ResourceManager.ProxyResource<SyncMemberProperties> {
   identity?: DataSyncParticipantIdentity;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 @Azure.ResourceManager.Legacy.feature(Features.SyncMembers)
 interface SyncMembers {

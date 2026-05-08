@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
  * A failover group.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
 @Azure.ResourceManager.Legacy.feature(Features.FailoverGroups)
 model FailoverGroup
@@ -41,6 +42,7 @@ model FailoverGroup
   location?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 @Azure.ResourceManager.Legacy.feature(Features.FailoverGroups)
 interface FailoverGroups {

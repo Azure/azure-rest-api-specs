@@ -14,6 +14,7 @@ namespace Microsoft.Sql;
 /**
  * A long term retention policy.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ManagedDatabase)
 @Azure.ResourceManager.Legacy.feature(
   Features.ManagedInstanceLongTermRetentionPolicies
@@ -29,6 +30,7 @@ model ManagedInstanceLongTermRetentionPolicy
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 @Azure.ResourceManager.Legacy.feature(
   Features.ManagedInstanceLongTermRetentionPolicies

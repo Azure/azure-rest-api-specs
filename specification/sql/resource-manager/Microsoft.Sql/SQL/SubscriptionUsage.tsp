@@ -13,6 +13,7 @@ namespace Microsoft.Sql;
 /**
  * Usage Metric of a Subscription in a Location.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @subscriptionResource
 @Azure.ResourceManager.Legacy.feature(Features.SubscriptionUsages)
 model SubscriptionUsage
@@ -46,6 +47,7 @@ alias SubscriptionUsagesOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 @Azure.ResourceManager.Legacy.feature(Features.SubscriptionUsages)
 interface SubscriptionUsages {

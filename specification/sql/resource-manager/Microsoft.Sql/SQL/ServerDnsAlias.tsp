@@ -14,6 +14,7 @@ namespace Microsoft.Sql;
 /**
  * A server DNS alias.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
 @Azure.ResourceManager.Legacy.feature(Features.ServerDnsAliases)
 model ServerDnsAlias
@@ -26,6 +27,7 @@ model ServerDnsAlias
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 @Azure.ResourceManager.Legacy.feature(Features.ServerDnsAliases)
 interface ServerDnsAliases {

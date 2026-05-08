@@ -13,6 +13,7 @@ namespace Microsoft.Sql;
 /**
  * A long term retention backup.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @subscriptionResource
 @Azure.ResourceManager.Legacy.feature(Features.LongTermRetentionBackups)
 model LongTermRetentionBackup
@@ -63,6 +64,7 @@ alias LongTermRetentionBackupOps = Azure.ResourceManager.Legacy.LegacyOperations
   }
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 @Azure.ResourceManager.Legacy.feature(Features.LongTermRetentionBackups)
 interface LongTermRetentionBackups {
@@ -205,6 +207,7 @@ alias LongTermRetentionBackupOperationGroupOps = Azure.ResourceManager.Legacy.Le
   }
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
 @Azure.ResourceManager.Legacy.feature(Features.LongTermRetentionBackups)
 interface LongTermRetentionBackupOperationGroup {

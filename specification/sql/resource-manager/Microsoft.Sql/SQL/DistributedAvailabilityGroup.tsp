@@ -14,6 +14,7 @@ namespace Microsoft.Sql;
 /**
  * Distributed availability group between box and Sql Managed Instance.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ManagedInstance)
 @Azure.ResourceManager.Legacy.feature(Features.DistributedAvailabilityGroups)
 model DistributedAvailabilityGroup
@@ -26,6 +27,7 @@ model DistributedAvailabilityGroup
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 @Azure.ResourceManager.Legacy.feature(Features.DistributedAvailabilityGroups)
 interface DistributedAvailabilityGroups {

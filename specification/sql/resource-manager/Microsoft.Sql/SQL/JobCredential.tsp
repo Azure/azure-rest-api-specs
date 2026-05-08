@@ -14,6 +14,7 @@ namespace Microsoft.Sql;
 /**
  * A stored credential that can be used by a job to connect to target databases.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(JobAgent)
 @Azure.ResourceManager.Legacy.feature(Features.JobCredentials)
 model JobCredential
@@ -26,6 +27,7 @@ model JobCredential
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 @Azure.ResourceManager.Legacy.feature(Features.JobCredentials)
 interface JobCredentials {

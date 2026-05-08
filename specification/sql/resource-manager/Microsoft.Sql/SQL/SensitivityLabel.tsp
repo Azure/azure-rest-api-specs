@@ -72,6 +72,7 @@ alias SensitivityLabelOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {}
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
 @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseSensitivityLabels)
 interface SensitivityLabels {
@@ -174,6 +175,7 @@ alias SensitivityLabelOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOpe
   {}
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
 @Azure.ResourceManager.Legacy.feature(Features.SensitivityLabels)
 interface SensitivityLabelOperationGroup {

@@ -14,6 +14,7 @@ namespace Microsoft.Sql;
 /**
  * An elastic pool.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
 @Azure.ResourceManager.Legacy.feature(Features.ElasticPools)
 model ElasticPool
@@ -51,6 +52,7 @@ interface ElasticPools {
   /**
    * Gets an elastic pool.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ElasticPools")
   @Azure.ResourceManager.Legacy.feature(Features.ElasticPools)
   get is ArmResourceRead<ElasticPool>;
@@ -59,6 +61,7 @@ interface ElasticPools {
    * Creates or updates an elastic pool.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @tag("ElasticPools")
   @Azure.ResourceManager.Legacy.feature(Features.ElasticPools)
@@ -73,6 +76,7 @@ interface ElasticPools {
   /**
    * Updates an elastic pool.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @tag("ElasticPools")
   @Azure.ResourceManager.Legacy.feature(Features.ElasticPools)
@@ -82,6 +86,7 @@ interface ElasticPools {
    * Deletes an elastic pool.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ElasticPools")
   @Azure.ResourceManager.Legacy.feature(Features.ElasticPools)
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -92,6 +97,7 @@ interface ElasticPools {
   /**
    * Gets all elastic pools in a server.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ElasticPools")
   @Azure.ResourceManager.Legacy.feature(Features.ElasticPools)
   listByServer is ArmResourceListByParent<
@@ -108,6 +114,7 @@ interface ElasticPools {
   /**
    * Gets a list of databases in an elastic pool.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Databases")
   @list
   @get
@@ -122,6 +129,7 @@ interface ElasticPools {
   /**
    * Gets a list of operations performed on the elastic pool.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ElasticPoolOperations")
   @list
   @get
@@ -136,6 +144,7 @@ interface ElasticPools {
   /**
    * Cancels the asynchronous operation on the elastic pool.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ElasticPoolOperations")
   @Azure.ResourceManager.Legacy.feature(Features.ElasticPoolOperations)
   cancel is ArmResourceActionSync<
@@ -156,6 +165,7 @@ interface ElasticPools {
   /**
    * Failovers an elastic pool.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ElasticPools")
   @Azure.ResourceManager.Legacy.feature(Features.ElasticPools)
   failover is ArmResourceActionAsyncBase<

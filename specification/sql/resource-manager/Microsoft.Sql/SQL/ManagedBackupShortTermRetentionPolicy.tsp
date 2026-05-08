@@ -54,6 +54,7 @@ alias ManagedBackupShortTermRetentionPolicyOps = Azure.ResourceManager.Legacy.Le
   }
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 @Azure.ResourceManager.Legacy.feature(
   Features.ManagedBackupShortTermRetentionPolicies
@@ -117,6 +118,7 @@ alias ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicyOps = Azure.
   }
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 @Azure.ResourceManager.Legacy.feature(
   Features.ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies

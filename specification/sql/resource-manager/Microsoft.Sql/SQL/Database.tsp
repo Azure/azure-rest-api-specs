@@ -15,6 +15,7 @@ namespace Microsoft.Sql;
 /**
  * A database resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
 @Azure.ResourceManager.Legacy.feature(Features.Databases)
 model Database is Azure.ResourceManager.TrackedResource<DatabaseProperties> {
@@ -69,6 +70,7 @@ interface Databases {
   /**
    * Gets a database.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Databases")
   @Azure.ResourceManager.Legacy.feature(Features.Databases)
   get is ArmResourceRead<
@@ -92,6 +94,7 @@ interface Databases {
    * Creates a new database or updates an existing database.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @tag("Databases")
   @Azure.ResourceManager.Legacy.feature(Features.Databases)
@@ -106,6 +109,7 @@ interface Databases {
   /**
    * Updates an existing database.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @tag("Databases")
   @Azure.ResourceManager.Legacy.feature(Features.Databases)
@@ -115,6 +119,7 @@ interface Databases {
    * Deletes the database.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Databases")
   @Azure.ResourceManager.Legacy.feature(Features.Databases)
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -125,6 +130,7 @@ interface Databases {
   /**
    * Gets a list of databases.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Databases")
   @Azure.ResourceManager.Legacy.feature(Features.Databases)
   listByServer is ArmResourceListByParent<
@@ -168,6 +174,7 @@ interface Databases {
   /**
    * List database columns
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("DatabaseColumns")
   @list
   @get
@@ -209,6 +216,7 @@ interface Databases {
   /**
    * Revalidates an existing encryption protector for a particular database.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("DatabaseEncryptionProtectorRevalidate")
   @Azure.ResourceManager.Legacy.feature(
     Features.DatabaseEncryptionProtectorRevalidate
@@ -231,6 +239,7 @@ interface Databases {
   /**
    * Reverts an existing encryption protector for a particular database.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.ResourceManager.Legacy.feature(
     Features.DatabaseEncryptionProtectorRevert
   )
@@ -253,6 +262,7 @@ interface Databases {
   /**
    * Gets a list of operations performed on the database.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("DatabaseOperations")
   @list
   @get
@@ -267,6 +277,7 @@ interface Databases {
   /**
    * Cancels the asynchronous operation on the database.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("DatabaseOperations")
   @Azure.ResourceManager.Legacy.feature(Features.DatabaseOperations)
   cancel is ArmResourceActionSync<
@@ -287,6 +298,7 @@ interface Databases {
   /**
    * Exports a database.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Databases")
   @Azure.ResourceManager.Legacy.feature(Features.Databases)
   export is ArmResourceActionAsync<
@@ -298,6 +310,7 @@ interface Databases {
   /**
    * Failovers a database.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Databases")
   @Azure.ResourceManager.Legacy.feature(Features.Databases)
   failover is ArmResourceActionAsyncBase<
@@ -317,6 +330,7 @@ interface Databases {
   /**
    * Imports a bacpac into a new database.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("import")
   @tag("Databases")
   @Azure.ResourceManager.Legacy.feature(Features.Databases)
@@ -329,6 +343,7 @@ interface Databases {
   /**
    * Renames a database.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("move")
   @tag("Databases")
   @Azure.ResourceManager.Legacy.feature(Features.Databases)
@@ -337,6 +352,7 @@ interface Databases {
   /**
    * Pauses a database.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Databases")
   @Azure.ResourceManager.Legacy.feature(Features.Databases)
   pause is ArmResourceActionAsync<Database, void, Response = Database>;
@@ -344,6 +360,7 @@ interface Databases {
   /**
    * Resumes a database.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Databases")
   @Azure.ResourceManager.Legacy.feature(Features.Databases)
   resume is ArmResourceActionAsync<Database, void, Response = Database>;
@@ -351,6 +368,7 @@ interface Databases {
   /**
    * Upgrades a data warehouse.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Databases")
   @Azure.ResourceManager.Legacy.feature(Features.Databases)
   upgradeDataWarehouse is ArmResourceActionAsyncBase<
@@ -363,6 +381,7 @@ interface Databases {
   /**
    * Gets database usages.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("DatabaseUsages")
   @list
   @get
@@ -378,6 +397,7 @@ interface Databases {
    * Creates a restore point for a data warehouse.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("RestorePoints")
   @action("restorePoints")
   @Azure.ResourceManager.Legacy.feature(Features.RestorePoints)
@@ -394,6 +414,7 @@ interface Databases {
   /**
    * Gets the sensitivity labels of a given database
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SensitivityLabels")
   @list
   @get
@@ -425,6 +446,7 @@ interface Databases {
    */
   #suppress "@typespec/http/patch-implicit-optional" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SensitivityLabels")
   @patch
   @action("currentSensitivityLabels")
@@ -438,6 +460,7 @@ interface Databases {
   /**
    * Gets the sensitivity labels of a given database
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SensitivityLabels")
   @list
   @get
@@ -471,6 +494,7 @@ interface Databases {
    */
   #suppress "@typespec/http/patch-implicit-optional" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SensitivityLabels")
   @patch
   @action("recommendedSensitivityLabels")
@@ -484,6 +508,7 @@ interface Databases {
   /**
    * Gets the sensitivity labels of a given database
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SensitivityLabels")
   @list
   @get
@@ -505,6 +530,7 @@ interface Databases {
   /**
    * Gets all synapselink workspaces for a database.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SynapseLinkWorkspaces")
   @list
   @get

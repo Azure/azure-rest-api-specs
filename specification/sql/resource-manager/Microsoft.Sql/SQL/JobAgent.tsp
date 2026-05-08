@@ -14,6 +14,7 @@ namespace Microsoft.Sql;
 /**
  * An Azure SQL job agent.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
 @Azure.ResourceManager.Legacy.feature(Features.JobAgents)
 model JobAgent is Azure.ResourceManager.TrackedResource<JobAgentProperties> {
@@ -42,6 +43,7 @@ interface JobAgents {
   /**
    * Gets a job agent.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("JobAgents")
   @Azure.ResourceManager.Legacy.feature(Features.JobAgents)
   get is ArmResourceRead<JobAgent>;
@@ -50,6 +52,7 @@ interface JobAgents {
    * Creates or updates a job agent.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("JobAgents")
   @Azure.ResourceManager.Legacy.feature(Features.JobAgents)
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
@@ -64,6 +67,7 @@ interface JobAgents {
   /**
    * Updates a job agent.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @tag("JobAgents")
   @Azure.ResourceManager.Legacy.feature(Features.JobAgents)
@@ -73,6 +77,7 @@ interface JobAgents {
    * Deletes a job agent.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("JobAgents")
   @Azure.ResourceManager.Legacy.feature(Features.JobAgents)
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -83,6 +88,7 @@ interface JobAgents {
   /**
    * Gets a list of job agents in a server.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("JobAgents")
   @Azure.ResourceManager.Legacy.feature(Features.JobAgents)
   listByServer is ArmResourceListByParent<JobAgent>;
@@ -90,6 +96,7 @@ interface JobAgents {
   /**
    * Lists all executions in a job agent.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("JobExecutions")
   @list
   @get

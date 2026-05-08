@@ -13,6 +13,7 @@ namespace Microsoft.Sql;
 /**
  * A managed database move operation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ResourceGroupLocationResource)
 @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseMoveOperations)
 model ManagedDatabaseMoveOperationResult
@@ -47,6 +48,7 @@ alias ManagedDatabaseMoveOperationResultsOps = Azure.ResourceManager.Legacy.Lega
   }
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
 @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseMoveOperations)
 interface ManagedDatabaseMoveOperationResults {

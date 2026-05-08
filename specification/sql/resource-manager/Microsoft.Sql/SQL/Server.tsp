@@ -13,6 +13,7 @@ namespace Microsoft.Sql;
 /**
  * An Azure SQL Database server.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.Servers)
 model Server is Azure.ResourceManager.TrackedResource<ServerProperties> {
   ...ResourceNameParameter<
@@ -41,6 +42,7 @@ interface Servers {
   /**
    * Gets a server.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Servers")
   @Azure.ResourceManager.Legacy.feature(Features.Servers)
   get is ArmResourceRead<
@@ -58,6 +60,7 @@ interface Servers {
    * Creates or updates a server.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Servers")
   @Azure.ResourceManager.Legacy.feature(Features.Servers)
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
@@ -72,6 +75,7 @@ interface Servers {
   /**
    * Updates a server.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @tag("Servers")
   @Azure.ResourceManager.Legacy.feature(Features.Servers)
@@ -81,6 +85,7 @@ interface Servers {
    * Deletes a server.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Servers")
   @Azure.ResourceManager.Legacy.feature(Features.Servers)
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -91,6 +96,7 @@ interface Servers {
   /**
    * Gets a list of servers in a resource groups.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Servers")
   @Azure.ResourceManager.Legacy.feature(Features.Servers)
   listByResourceGroup is ArmResourceListByParent<
@@ -107,6 +113,7 @@ interface Servers {
   /**
    * Gets a list of all servers in the subscription.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Servers")
   @Azure.ResourceManager.Legacy.feature(Features.Servers)
   list is ArmListBySubscription<
@@ -123,6 +130,7 @@ interface Servers {
   /**
    * Gets a list of inaccessible databases in a logical server
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Databases")
   @list
   @get
@@ -139,6 +147,7 @@ interface Servers {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("FirewallRules")
   @put
   @action("firewallRules")
@@ -152,6 +161,7 @@ interface Servers {
   /**
    * Gets a list of replication links.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ReplicationLinks")
   @list
   @get
@@ -166,6 +176,7 @@ interface Servers {
   /**
    * Gets a list of operations performed on the server.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ServerOperations")
   @list
   @get
@@ -180,6 +191,7 @@ interface Servers {
   /**
    * Imports a bacpac into a new database.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Servers")
   @action("import")
   @Azure.ResourceManager.Legacy.feature(Features.Servers)
@@ -192,6 +204,7 @@ interface Servers {
   /**
    * Refresh external governance enablement status.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Servers")
   @action("refreshExternalGovernanceStatus")
   @Azure.ResourceManager.Legacy.feature(Features.Servers)
@@ -204,6 +217,7 @@ interface Servers {
   /**
    * Gets server usages.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ServerUsages")
   @list
   @get
@@ -218,6 +232,7 @@ interface Servers {
   /**
    * Creates a TDE certificate for a given server.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("TdeCertificates")
   @action("tdeCertificates")
   @Azure.ResourceManager.Legacy.feature(Features.TdeCertificates)

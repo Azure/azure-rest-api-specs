@@ -14,6 +14,7 @@ namespace Microsoft.Sql;
 /**
  * A managed instance key.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ManagedInstance)
 @Azure.ResourceManager.Legacy.feature(Features.ManagedInstanceKeys)
 model ManagedInstanceKey
@@ -33,6 +34,7 @@ model ManagedInstanceKey
   kind?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 @Azure.ResourceManager.Legacy.feature(Features.ManagedInstanceKeys)
 interface ManagedInstanceKeys {

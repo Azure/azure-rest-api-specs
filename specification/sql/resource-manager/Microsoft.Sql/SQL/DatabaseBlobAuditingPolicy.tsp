@@ -14,6 +14,7 @@ namespace Microsoft.Sql;
 /**
  * A database blob auditing policy.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Database)
 @Azure.ResourceManager.Legacy.feature(Features.BlobAuditing)
 model DatabaseBlobAuditingPolicy
@@ -55,6 +56,7 @@ alias DatabaseBlobAuditingPoliciesOps = Azure.ResourceManager.Legacy.LegacyOpera
   DatabaseBlobAuditingPolicyNameAlias
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
 @Azure.ResourceManager.Legacy.feature(Features.BlobAuditing)
 interface DatabaseBlobAuditingPolicies {

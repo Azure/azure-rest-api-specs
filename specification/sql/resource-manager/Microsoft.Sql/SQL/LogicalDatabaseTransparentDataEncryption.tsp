@@ -14,6 +14,7 @@ namespace Microsoft.Sql;
 /**
  * A logical database transparent data encryption scan state.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Database)
 @Azure.ResourceManager.Legacy.feature(Features.TransparentDataEncryptions)
 model LogicalDatabaseTransparentDataEncryption
@@ -28,6 +29,7 @@ model LogicalDatabaseTransparentDataEncryption
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
 @Azure.ResourceManager.Legacy.feature(Features.TransparentDataEncryptions)
 interface LogicalDatabaseTransparentDataEncryptions {
