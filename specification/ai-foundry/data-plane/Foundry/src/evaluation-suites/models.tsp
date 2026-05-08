@@ -272,8 +272,8 @@ model FileEvaluationSuiteJobSource extends EvaluationSuiteJobSource {
 
 @doc("Caller-supplied inputs for an evaluation suite generation job.")
 model EvaluationSuiteGenerationJobInputs {
-  @doc("The suite name to create.")
-  name: string;
+  @doc("The evaluation suite name to create.")
+  evaluation_suite_name: string;
 
   @doc("Source materials for generation — agent context, prompts, traces, or datasets.")
   sources: EvaluationSuiteJobSource[];
@@ -291,8 +291,8 @@ model EvaluationSuiteGenerationJobInputs {
   initialization_parameters?: Record<unknown>;
 
   @doc("""
-    Optional data generation options. Controls how the evaluation dataset is generated.
-    If omitted, the service uses sensible defaults.
+    Data generation options. Controls how the evaluation dataset is generated.
+    If omitted, defaults are used (simple_qna, 100 max_samples).
     """)
   data_generation_options?: EvaluationSuiteDataGenerationOptions;
 }
@@ -302,7 +302,9 @@ model EvaluationSuiteDataGenerationOptions {
   @doc("The data generation type. Defaults to 'simple_qna' if not specified.")
   type?: DataGenerationType;
 
-  @doc("Maximum number of samples to generate.")
+  @doc("Maximum number of samples to generate. Valid range: 15-1000.")
+  @minValue(15)
+  @maxValue(1000)
   max_samples?: int32;
 }
 
@@ -316,4 +318,20 @@ model EvaluationSuiteGenerationJob
   @doc("The timestamp when the job finished, represented in Unix time.")
   @visibility(Lifecycle.Read)
   finished_at?: FoundryTimestamp;
+
+  @doc("Token consumption summary. Populated on terminal states.")
+  @visibility(Lifecycle.Read)
+  usage?: EvaluationSuiteGenerationTokenUsage;
+}
+
+@doc("Token usage summary for an evaluation suite generation job.")
+model EvaluationSuiteGenerationTokenUsage {
+  @doc("Number of prompt tokens consumed.")
+  prompt_tokens?: int64;
+
+  @doc("Number of completion tokens consumed.")
+  completion_tokens?: int64;
+
+  @doc("Total tokens consumed.")
+  total_tokens?: int64;
 }
