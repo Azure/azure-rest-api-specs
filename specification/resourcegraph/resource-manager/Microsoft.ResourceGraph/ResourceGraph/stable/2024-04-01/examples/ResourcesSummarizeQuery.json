@@ -1,0 +1,35 @@
+{
+  "operationId": "Resources",
+  "description": "A summarizing query on resources.",
+  "parameters": {
+    "api-version": "2024-04-01",
+    "query": {
+      "query": "Resources | project id, name, type, location | summarize by location",
+      "subscriptions": [
+        "cfbbd179-59d2-4052-aa06-9270a38aa9d6"
+      ]
+    }
+  },
+  "title": "Summarize resources by location",
+  "responses": {
+    "200": {
+      "body": {
+        "count": 3,
+        "data": [
+          {
+            "location": "centralus"
+          },
+          {
+            "location": "eastus"
+          },
+          {
+            "location": "westus"
+          }
+        ],
+        "facets": [],
+        "resultTruncated": "false",
+        "totalRecords": 3
+      }
+    }
+  }
+}

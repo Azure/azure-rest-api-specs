@@ -8,23 +8,18 @@ import "./models.common.images.tsp";
 using TypeSpec.Http;
 namespace Microsoft.PlanetaryComputer;
 
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "STAC queryable definitions contain mixed types (objects, booleans, strings)"
+@doc("Queryable definitions response.")
+model QueryableDefinitionsResponse is Record<unknown>;
+
 interface StacCollectionAssets {
   /**
    * Create a new asset in the Collection metadata and write the associated
    * file to managed storage.
-   *
-   * Args:
-   *     request: The incoming request.
-   *     asset: The Asset object to write, without a valid href to the asset.
-   *     file: The file to write.
-   *     collection_id: The ID of the collection to write the asset to.
-   *     content_type: The content type of the request.
-   *
-   * Returns:
-   *     A Response object containing the newly created asset.
    */
   #suppress "@azure-tools/typespec-azure-core/byos" ""
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "STAC specification"
   @summary("Create Collection Asset")
   @tag("STAC Collection Configuration")
   @route("/stac/collections/{collectionId}/assets")
@@ -49,36 +44,26 @@ interface StacCollectionAssets {
        * Multi-part form data
        */
       @multipartBody
-      body: FormData;
+      body: StacAssetData;
     },
     {
       ...CreatedResponse;
 
       @body
       body: StacCollection;
-    } | StacCollection
+    }
   >;
   /**
    * Update an existing asset in a given collection.
-   *
-   * Args:
-   *     request: The incoming request.
-   *     asset: The Asset object to update.
-   *     file: The file to update (optional).
-   *     collection_id: The ID of the collection to update the asset in.
-   *     asset_id: The ID of the asset to update.
-   *     content_type: The content type of the request.
-   *
-   * Returns:
-   *     A Response object containing the updated asset.
    */
   #suppress "@azure-tools/typespec-azure-core/byos" ""
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "STAC specification"
   @summary("Update Collection Asset")
   @tag("STAC Collection Configuration")
   @route("/stac/collections/{collectionId}/assets/{assetId}")
   @put
-  createOrReplace is Azure.Core.Foundations.Operation<
+  replace is Azure.Core.Foundations.Operation<
     {
       /**
        * STAC Collection ID
@@ -106,25 +91,12 @@ interface StacCollectionAssets {
        * Multi-part form data
        */
       @multipartBody
-      body: FormData;
+      body: StacAssetData;
     },
-    {
-      ...CreatedResponse;
-
-      @body
-      body: StacCollection;
-    } | StacCollection
+    StacCollection
   >;
   /**
    * Delete an asset from a given collection.
-   *
-   * Args:
-   *     request: The incoming request.
-   *     collection_id: The ID of the collection to delete the asset from.
-   *     asset_id: The ID of the asset to delete.
-   *
-   * Returns:
-   *     A Response object indicating the success of the deletion.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @summary("Delete Collection Asset")
@@ -149,20 +121,13 @@ interface StacCollectionAssets {
       @pattern(".*")
       assetId: string;
     },
-    OkResponse | NoContentResponse
+    StacCollection
   >;
 }
 
 interface StacCollectionThumbnails {
   /**
    * Get thumbnail for given collection.
-   *
-   * Args:
-   *     request: The incoming request.
-   *     collection_id: The ID of the collection to retrieve assets for.
-   *
-   * Returns:
-   *     thumbnail image
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @summary("Get Collection Thumbnail")
@@ -187,7 +152,6 @@ interface StacCollectionThumbnails {
       | ImageJp2Response
       | ImageTiffResponse
       | ApplicationXbinaryResponse
-      | NoContentResponse
   >;
 }
 
@@ -233,7 +197,7 @@ interface StacCollectionMosaics {
       @pattern(".*")
       collectionId: string;
     },
-    Mosaic[] | NoContentResponse
+    StacMosaic[]
   >;
   /**
    * Add a mosaic definition to a given collection
@@ -257,14 +221,14 @@ interface StacCollectionMosaics {
        * Mosaic definition to be created or updated.
        */
       @body
-      body: Mosaic;
+      body: StacMosaic;
     },
     {
       ...CreatedResponse;
 
       @body
-      body: Mosaic;
-    } | Mosaic
+      body: StacMosaic;
+    }
   >;
   /**
    * Get a mosaic definition from a given collection
@@ -292,7 +256,7 @@ interface StacCollectionMosaics {
       @pattern(".*")
       mosaicId: string;
     },
-    Mosaic
+    StacMosaic
   >;
   /**
    * Update a mosaic definition from a given collection
@@ -302,7 +266,7 @@ interface StacCollectionMosaics {
   @tag("STAC Collection Configuration")
   @route("/stac/collections/{collectionId}/configurations/mosaics/{mosaicId}")
   @put
-  createOrReplace is Azure.Core.Foundations.Operation<
+  replace is Azure.Core.Foundations.Operation<
     {
       /**
        * Unique identifier for the STAC collection.
@@ -324,14 +288,9 @@ interface StacCollectionMosaics {
        * Mosaic definition to be created or updated.
        */
       @body
-      body: Mosaic;
+      body: StacMosaic;
     },
-    {
-      ...CreatedResponse;
-
-      @body
-      body: Mosaic;
-    } | Mosaic
+    StacMosaic
   >;
   /**
    * Delete a mosaic definition from a given collection
@@ -359,7 +318,7 @@ interface StacCollectionMosaics {
       @pattern(".*")
       mosaicId: string;
     },
-    OkResponse | NoContentResponse
+    OkResponse
   >;
 }
 
@@ -382,7 +341,7 @@ interface StacCollectionRenderOptions {
       @pattern(".*")
       collectionId: string;
     },
-    RenderOption[] | NoContentResponse
+    RenderOption[]
   >;
   /**
    * Add a render option for a given collection
@@ -413,7 +372,7 @@ interface StacCollectionRenderOptions {
 
       @body
       body: RenderOption;
-    } | RenderOption
+    }
   >;
   /**
    * Get a render option for a given collection
@@ -441,7 +400,7 @@ interface StacCollectionRenderOptions {
       @pattern(".*")
       renderOptionId: string;
     },
-    RenderOption[]
+    RenderOption
   >;
   /**
    * Update a render option for a given collection
@@ -451,7 +410,7 @@ interface StacCollectionRenderOptions {
   @tag("STAC Collection Configuration")
   @route("/stac/collections/{collectionId}/configurations/render-options/{renderOptionId}")
   @put
-  createOrReplace is Azure.Core.Foundations.Operation<
+  replace is Azure.Core.Foundations.Operation<
     {
       /**
        * Unique identifier for the STAC collection.
@@ -475,12 +434,7 @@ interface StacCollectionRenderOptions {
       @body
       body: RenderOption;
     },
-    {
-      ...CreatedResponse;
-
-      @body
-      body: RenderOption;
-    } | RenderOption
+    RenderOption
   >;
   /**
    * Delete a render option for a given collection
@@ -508,7 +462,7 @@ interface StacCollectionRenderOptions {
       @pattern(".*")
       renderOptionId: string;
     },
-    OkResponse | NoContentResponse
+    OkResponse
   >;
 }
 
@@ -521,7 +475,7 @@ interface StacCollectionTileSettings {
   @tag("STAC Collection Configuration")
   @route("/stac/collections/{collectionId}/configurations/tile-settings")
   @get
-  getAll is Azure.Core.Foundations.Operation<
+  get is Azure.Core.Foundations.Operation<
     {
       /**
        * Unique identifier for the STAC collection.
@@ -565,12 +519,6 @@ interface StacCollectionTileSettings {
 interface StacCollectionPartitionTypes {
   /**
    * Get the partitiontype for a GeoCatalog Collection.
-   *
-   * Args:
-   *     collection_id: the collection id to get the partitiontype for.
-   *
-   * Returns:
-   *     The partitiontype for the collection.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @summary("Get Partitiontype")
@@ -597,13 +545,6 @@ interface StacCollectionPartitionTypes {
    * Ideal partitioning schemes result in partitions of roughly 100k items each.
    *
    * The default partitioning scheme is "none" which does not partition items.
-   *
-   * Args:
-   *     collection_id: the collection id to add the partitiontype to.
-   *     partitiontype: the partitiontype to add.
-   *
-   * Returns:
-   *     None
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
@@ -627,47 +568,133 @@ interface StacCollectionPartitionTypes {
       @body
       body: PartitionType;
     },
-    PartitionType | NoContentResponse
+    OkResponse
   >;
 }
 
-interface GeoCatalogAzmapsToken {
+interface StacQueryables {
   /**
-   * Fetch a token for the Azure Maps API service based on the current
-   * service identity. This token is used for the Explorer to authenticate
-   * with the Azure Maps API service.
+   * List all queryables in the GeoCatalog instance
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Get Azmaps Token")
-  @tag("GeoCatalog Instance Configuration")
-  @route("/geocatalog/map/token")
+  @summary("Queryables")
+  @tag("SpatioTemporal Asset Catalog (STAC) API")
+  @route("/stac/queryables")
   @get
-  get is Azure.Core.Foundations.Operation<{}, AzMapsToken>;
-}
+  getAll is Azure.Core.Foundations.Operation<{}, QueryableDefinitionsResponse>;
+  /**
+   * Delete queryables by name for specified collection.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Delete Queryables")
+  @tag("STAC Collection Configuration")
+  @route("/stac/collections/{collectionId}/queryables/{queryableName}")
+  @delete
+  delete is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * Unique identifier for the STAC collection.
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      collectionId: string;
 
-interface GeoCatalogAzmapsClient {
+      /**
+       * Name of the queryable property to operate on.
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      queryableName: string;
+    },
+    OkResponse
+  >;
   /**
-   * Fetch the client id for the Azure Maps API service based on the current
-   * on the current identity. This client id is used for the Explorer to
-   * authenticate with the Azure Maps API service.
+   * List all queryables in a given collection
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Get Azmaps Client Id")
-  @tag("GeoCatalog Instance Configuration")
-  @route("/geocatalog/map/id")
+  @summary("Collection Queryables")
+  @tag("SpatioTemporal Asset Catalog (STAC) API")
+  @route("/stac/collections/{collectionId}/queryables")
   @get
-  getId is Azure.Core.Foundations.Operation<{}, AzMapsClientId>;
-}
+  getAllByCollection is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * Collection ID
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      collectionId: string;
+    },
+    QueryableDefinitionsResponse
+  >;
+  /**
+   * Set queryables for a collection given a list of queryable definitions
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @summary("Set Collection Queryables")
+  @tag("SpatioTemporal Asset Catalog (STAC) API")
+  @route("/stac/collections/{collectionId}/queryables")
+  @post
+  create is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * Unique identifier for the STAC collection.
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      collectionId: string;
 
-interface GeoCatalogAuthConfigOperations {
+      /**
+       * Request queryable definition body
+       */
+      #suppress "@azure-tools/typespec-azure-core/request-body-problem" ""
+      @body
+      body: StacQueryable[];
+    },
+    {
+      ...CreatedResponse;
+
+      @body
+      body: StacQueryable[];
+    }
+  >;
   /**
-   * Get the app id and tenant id information to make a MSAL request for this
-   * GeoCatalog instance.
+   * Updates a queryable given a queryable definition and
+   * corresponding collection id.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Get Auth Config")
-  @tag("GeoCatalog Instance Configuration")
-  @route("/geocatalog/auth")
-  @get
-  get is Azure.Core.Foundations.Operation<{}, AuthConfig>;
+  @summary("Update Collection Queryables")
+  @tag("STAC Collection Configuration")
+  @route("/stac/collections/{collectionId}/queryables/{queryableName}")
+  @put
+  replace is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * Unique identifier for the STAC collection.
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      collectionId: string;
+
+      /**
+       * Name of the queryable property to operate on.
+       */
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      queryableName: string;
+
+      /**
+       * Request queryable definition body
+       */
+      @body
+      body: StacQueryable;
+    },
+    StacQueryable
+  >;
 }

@@ -16,6 +16,7 @@ using Microsoft.DBforMySQL;
 @@clientName(ServerVersion.`8.0.21`, "Eight021", "javascript,go,csharp");
 @@clientName(ServerVersion.`5.7`, "FIVE7", "python");
 @@clientName(ServerVersion.`8.0.21`, "EIGHT0_21", "python");
+@@clientName(ServerVersion.`8.4`, "EIGHT4", "python");
 
 // Java SDK compatibility fixes for TypeSpec migration
 @@clientName(Microsoft.DBforMySQL.MySQLServerIdentity, "Identity", "java");

@@ -277,11 +277,14 @@ using Microsoft.Cdn;
 @@clientName(CidrIpAddress, "cidrIpAddress");
 @@clientName(PolicySettings, "policySettings");
 
-@@clientLocation(Profiles.checkEndpointNameAvailability, "AFDProfiles");
-@@clientLocation(Profiles.listResourceUsage, "AFDProfiles");
-@@clientLocation(Profiles.checkHostNameAvailability, "AFDProfiles");
-@@clientLocation(Profiles.validateSecret, "AFDProfiles");
-@@clientLocation(Profiles.upgrade, "AFDProfiles");
+@@clientLocation(Profiles.checkEndpointNameAvailability,
+  "AFDProfiles",
+  "!java"
+);
+@@clientLocation(Profiles.listResourceUsage, "AFDProfiles", "!java");
+@@clientLocation(Profiles.checkHostNameAvailability, "AFDProfiles", "!java");
+@@clientLocation(Profiles.validateSecret, "AFDProfiles", "!java");
+@@clientLocation(Profiles.upgrade, "AFDProfiles", "!java");
 @@clientLocation(Profiles.getLogAnalyticsMetrics, "LogAnalytics");
 @@clientLocation(Profiles.getLogAnalyticsRankings, "LogAnalytics");
 @@clientLocation(Profiles.getLogAnalyticsLocations, "LogAnalytics");
@@ -289,12 +292,15 @@ using Microsoft.Cdn;
 @@clientLocation(Profiles.getWafLogAnalyticsMetrics, "LogAnalytics");
 @@clientLocation(Profiles.getWafLogAnalyticsRankings, "LogAnalytics");
 @@clientName(Profiles.profilesListResourceUsage, "ListResourceUsage");
-@@clientLocation(AFDDomains.get, "AFDCustomDomains");
-@@clientLocation(AFDDomains.create, "AFDCustomDomains");
-@@clientLocation(AFDDomains.update, "AFDCustomDomains");
-@@clientLocation(AFDDomains.delete, "AFDCustomDomains");
-@@clientLocation(AFDDomains.listByProfile, "AFDCustomDomains");
-@@clientLocation(AFDDomains.refreshValidationToken, "AFDCustomDomains");
+@@clientLocation(AFDDomains.get, "AFDCustomDomains", "!java");
+@@clientLocation(AFDDomains.create, "AFDCustomDomains", "!java");
+@@clientLocation(AFDDomains.update, "AFDCustomDomains", "!java");
+@@clientLocation(AFDDomains.delete, "AFDCustomDomains", "!java");
+@@clientLocation(AFDDomains.listByProfile, "AFDCustomDomains", "!java");
+@@clientLocation(AFDDomains.refreshValidationToken,
+  "AFDCustomDomains",
+  "!java"
+);
 @@clientLocation(CdnWebApplicationFirewallPolicies.get, "Policies");
 @@clientLocation(CdnWebApplicationFirewallPolicies.createOrUpdate, "Policies");
 @@clientLocation(CdnWebApplicationFirewallPolicies.update, "Policies");

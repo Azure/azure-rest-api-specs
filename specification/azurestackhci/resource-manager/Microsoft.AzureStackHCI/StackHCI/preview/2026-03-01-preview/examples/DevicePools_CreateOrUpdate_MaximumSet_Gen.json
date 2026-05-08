@@ -1,0 +1,71 @@
+{
+  "title": "DevicePools_CreateOrUpdate_MaximumSet",
+  "operationId": "DevicePools_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-03-01-preview",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "ArcInstance-rg",
+    "devicePoolName": "devicePool1",
+    "resource": {
+      "properties": {},
+      "location": "eastus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "devices": [
+            {
+              "deviceResourceId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine-1",
+              "claimedBy": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/clusters/cluster-1"
+            }
+          ],
+          "customLocationResourceId": "/subscriptions/59341aac-5917-4ae1-90b3-75f41394d9e2/resourceGroups/BridgeRunner-eus/providers/Microsoft.ExtendedLocation/customLocations/bridgerunnercl-eus"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/devicePools/devicePool-1",
+        "name": "devicePool-1",
+        "type": "rgf",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2024-11-14T10:46:55.167Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-11-14T10:46:55.167Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "devices": [
+            {
+              "deviceResourceId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine-1",
+              "claimedBy": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/clusters/cluster-1"
+            }
+          ],
+          "customLocationResourceId": "/subscriptions/59341aac-5917-4ae1-90b3-75f41394d9e2/resourceGroups/BridgeRunner-eus/providers/Microsoft.ExtendedLocation/customLocations/bridgerunnercl-eus"
+        },
+        "location": "klpaid",
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/devicePools/devicePool-1",
+        "name": "eb",
+        "type": "rgf",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2024-11-14T10:46:55.167Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-11-14T10:46:55.167Z"
+        }
+      }
+    }
+  }
+}

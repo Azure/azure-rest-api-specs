@@ -252,14 +252,12 @@ model AppServiceCertificateOrderProperties {
    * Certificate last issuance time.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastCertificateIssuanceTime?: utcDateTime;
 
   /**
    * Certificate expiration time.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expirationTime?: utcDateTime;
 
   /**
@@ -278,7 +276,6 @@ model AppServiceCertificateOrderProperties {
    * Time stamp when the certificate would be auto renewed next
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   nextAutoRenewalTimeStamp?: utcDateTime;
 
   /**
@@ -341,14 +338,12 @@ model CertificateDetails {
    * Date Certificate is valid from.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   notBefore?: utcDateTime;
 
   /**
    * Date Certificate is valid to.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   notAfter?: utcDateTime;
 
   /**
@@ -549,14 +544,12 @@ model AppServiceCertificateOrderPatchResourceProperties {
    * Certificate last issuance time.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastCertificateIssuanceTime?: utcDateTime;
 
   /**
    * Certificate expiration time.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expirationTime?: utcDateTime;
 
   /**
@@ -575,7 +568,6 @@ model AppServiceCertificateOrderPatchResourceProperties {
    * Time stamp when the certificate would be auto renewed next
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   nextAutoRenewalTimeStamp?: utcDateTime;
 
   /**
@@ -747,7 +739,6 @@ model CertificateOrderAction {
    * Time at which the certificate action was performed.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdAt?: utcDateTime;
 }
 
@@ -763,7 +754,6 @@ model CertificateEmail {
   /**
    * Time stamp.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   timeStamp?: utcDateTime;
 }
 

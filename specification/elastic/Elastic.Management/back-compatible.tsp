@@ -66,7 +66,7 @@ using Microsoft.Elastic;
 @@clientName(ElasticMonitorResources.listAssociatedTrafficFiltersList, "list");
 @@clientLocation(ElasticMonitorResources.createAndAssociateIPFilterCreate,
   "createAndAssociateIPFilter",
-  "!csharp"
+  "!csharp,!java"
 );
 @@clientName(ElasticMonitorResources.createAndAssociateIPFilterCreate,
   "Create"

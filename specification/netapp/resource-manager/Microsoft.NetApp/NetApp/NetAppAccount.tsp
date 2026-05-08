@@ -6,6 +6,7 @@ import "./models.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ResourceManager;
+using Azure.Core;
 using Http;
 using Versioning;
 using Rest;
@@ -55,6 +56,14 @@ model AccountProperties {
   activeDirectories?: ActiveDirectory[];
 
   /**
+   * Entra ID configuration for the account.
+   */
+  @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_01_15_preview)
+  entraIdConfig?: EntraIdConfig;
+
+  /**
    * Encryption settings
    */
   encryption?: AccountEncryption;
@@ -82,24 +91,184 @@ model AccountProperties {
   /**
    * LDAP Configuration for the account.
    */
-  @added(Versions.v2025_07_01_preview)
-  @removed(Versions.v2025_08_01)
-  @added(Versions.v2025_08_01_preview)
-  @removed(Versions.v2025_08_01)
-  @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_09_01)
+  @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_01_15_preview)
   ldapConfiguration?: LdapConfiguration;
+}
+
+alias PatchModel<
+  ResourceModel extends {},
+  UnneededProperties extends string = "name" | "properties"
+> = OptionalProperties<UpdateableProperties<OmitDefaults<OmitProperties<
+  ResourceModel,
+  UnneededProperties
+>>>>;
+
+/**
+ * NetApp account patch resource
+ */
+@removed(Versions.v2026_01_15_preview)
+@renamedFrom(Versions.v2026_01_15_preview, "NetAppAccountPatch")
+model NetAppAccountPatchStable {
+  /**
+   * Resource location
+   */
+  location?: string;
+
+  /**
+   * Resource Id
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * Resource name
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Resource type
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * Resource tags
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  tags?: Record<string>;
+
+  /**
+   * NetApp Account properties
+   */
+  properties?: AccountProperties;
+
+  /**
+   * The identity used for the resource.
+   */
+  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
+}
+
+/**
+ * NetApp account patch resource
+ */
+@added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
+model NetAppAccountPatch is PatchModel<NetAppAccount> {
+  /**
+   * NetApp Account properties
+   */
+  properties?: AccountPropertiesPatch;
+}
+
+/**
+ * NetApp account patch properties
+ */
+model AccountPropertiesPatch is PatchModel<AccountProperties, "entraIdConfig"> {
+  /**
+   * Entra ID configuration for the account.
+   */
+  @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_01_15_preview)
+  entraIdConfig?: EntraIdConfigPatch;
+}
+
+/**
+ * Entra ID Patch configuration for the account.
+ */
+@added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
+model EntraIdConfigPatch is PatchModel<EntraIdConfig, "entraIdAkvConfig"> {
+  /**
+   * Using AKV config, certificate will be fetched, which will contain private key & public certificate, that correspond to the public certificate which is uploaded on the application created by customer. This will be used further for authentication.
+   */
+  entraIdAkvConfig?: EntraIdAkvConfigPatch;
+}
+
+/**
+ * Entra ID Patch configuration for the account.
+ */
+@added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
+model EntraIdAkvConfigPatch is PatchModel<EntraIdAkvConfig>;
+
+/**
+ * Entra ID configuration for the account.
+ */
+@added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
+model EntraIdConfig {
+  /**
+   * ApplicationId of the app created by customer to provide authentication and required API permissions for Microsoft Graph endpoint.
+   */
+  @minLength(36)
+  @maxLength(36)
+  @pattern("^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")
+  applicationId: string;
+
+  /**
+   * Domain of the Active directory synced to Entra ID for hybrid identities.
+   */
+  @maxLength(255)
+  @pattern("^(?=.*[a-zA-Z])(?!.*\\.\\.)(?!.*-\\.)(?!.*\\.-)[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?)+$")
+  domain: string;
+
+  /**
+   * Using ServerNamePrefix, FQDN (Fully Qualified Domain Name) will be generated for SMB share, using this FQDN, SMB Share will be mounted on Entra Joined VM.
+   */
+  @minLength(1)
+  @maxLength(10)
+  @pattern("^[A-Za-z0-9](?:[A-Za-z0-9-]{0,8}[A-Za-z0-9])?$")
+  serverNamePrefix: string;
+
+  /**
+   * Using AKV config, certificate will be fetched, which will contain private key & public certificate, that correspond to the public certificate which is uploaded on the application created by customer. This will be used further for authentication.
+   */
+  entraIdAkvConfig?: EntraIdAkvConfig;
+}
+
+/**
+ * Using AKV config, certificate will be fetched, which will contain private key & public certificate, that correspond to the public certificate which is uploaded on the application created by customer. This will be used further for authentication.
+ */
+@added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
+model EntraIdAkvConfig {
+  /**
+   * The Azure Key Vault URI where the Entra ID credentials are stored.
+   */
+  azureKeyVaultUri: url;
+
+  /**
+   * The name of the certificate in Azure Key Vault.
+   */
+  @minLength(1)
+  @maxLength(127)
+  certificateName: string;
+
+  /**
+   * The ARM resource identifier of the user assigned identity used to authenticate with key vault.
+   */
+  userAssignedIdentity?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
 }
 
 /**
  * LDAP configuration
  */
-@added(Versions.v2025_07_01_preview)
-@removed(Versions.v2025_08_01)
-@added(Versions.v2025_08_01_preview)
-@removed(Versions.v2025_08_01)
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_09_01)
+@added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 model LdapConfiguration {
   /**
    * Name of the LDAP configuration domain
@@ -111,7 +280,50 @@ model LdapConfiguration {
   /**
    * List of LDAP server IP addresses (IPv4 only) for the LDAP domain.
    */
-  ldapServers?: string[];
+  ldapServers?: ipV4Address[];
+
+  /**
+   * Specifies whether or not the LDAP traffic needs to be secured via TLS.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  ldapOverTLS?: boolean;
+
+  /**
+   * When LDAP over SSL/TLS is enabled, the LDAP client is required to have base64 encoded ldap servers CA certificate.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  @maxLength(10240)
+  @minLength(1)
+  @secret
+  serverCACertificate?: string;
+
+  /**
+   * The CN host name used while generating the certificate, LDAP Over TLS requires the CN host name to create DNS host entry.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  @maxLength(255)
+  certificateCNHost?: string | null;
+}
+
+/**
+ * LDAP configuration for PATCH operations (no default values)
+ */
+@added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
+model LdapConfigurationPatch {
+  /**
+   * Name of the LDAP configuration domain
+   */
+  @maxLength(255)
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9.-]{0,253}[a-zA-Z0-9]$")
+  domain?: string;
+
+  /**
+   * List of LDAP server IP addresses (IPv4 only) for the LDAP domain.
+   */
+  ldapServers?: ipV4Address[];
 
   /**
    * Specifies whether or not the LDAP traffic needs to be secured via TLS.
@@ -379,53 +591,9 @@ model EncryptionIdentity {
   userAssignedIdentity?: string;
 
   /**
-   * ClientId of the multi-tenant AAD Application. Used to access cross-tenant keyvaults.
+   * ClientId of the multi-tenant Entra ID Application. Used to access cross-tenant keyvaults.
    */
   federatedClientId?: string;
-}
-
-/**
- * NetApp account patch resource
- */
-model NetAppAccountPatch {
-  /**
-   * Resource location
-   */
-  location?: string;
-
-  /**
-   * Resource Id
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * Resource name
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * Resource type
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * Resource tags
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  tags?: Record<string>;
-
-  /**
-   * NetApp Account properties
-   */
-  properties?: AccountProperties;
-
-  /**
-   * The identity used for the resource.
-   */
-  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 }
 
 /**
@@ -525,6 +693,31 @@ interface NetAppAccounts {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @patch(#{ implicitOptionality: false })
+  @removed(Versions.v2025_12_15_preview)
+  @renamedFrom(Versions.v2025_12_15_preview, "update")
+  @added(Versions.v2026_01_01)
+  @removed(Versions.v2026_01_15_preview)
+  @renamedFrom(Versions.v2026_01_15_preview, "update")
+  @sharedRoute
+  updatePrevious is ArmCustomPatchAsync<
+    NetAppAccount,
+    PatchModel = NetAppAccountPatchStable,
+    Response = ArmResponse<NetAppAccount> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetAppAccount> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @bodyRoot
+      _: NetAppAccount;
+    })
+  >;
+
+  /**
+   * Patch the specified NetApp account
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @patch(#{ implicitOptionality: false })
+  @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_01_15_preview)
+  @sharedRoute
   update is ArmCustomPatchAsync<
     NetAppAccount,
     PatchModel = NetAppAccountPatch,
@@ -636,6 +829,9 @@ interface NetAppAccounts {
   "NetApp Account object supplied in the body of the operation."
 );
 @@doc(NetAppAccounts.update::parameters.properties,
+  "NetApp Account object supplied in the body of the operation."
+);
+@@doc(NetAppAccounts.updatePrevious::parameters.properties,
   "NetApp Account object supplied in the body of the operation."
 );
 @@doc(NetAppAccounts.transitionToCmk::parameters.body,

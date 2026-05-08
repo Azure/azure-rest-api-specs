@@ -12,48 +12,31 @@ namespace Microsoft.DevTestLab;
 /**
  * Properties of an artifact source.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@Azure.ResourceManager.Legacy.customAzureResource
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model ArtifactSource extends Resource {
-  @visibility(Lifecycle.Read)
-  @path
-  @key
-  @segment("artifactsources")
-  name: string;
+@parentResource(Lab)
+model ArtifactSource
+  is Azure.ResourceManager.ProxyResource<ArtifactSourceProperties, false> {
+  ...ResourceNameParameter<
+    Resource = ArtifactSource,
+    KeyName = "artifactSourceName",
+    SegmentName = "artifactsources",
+    NamePattern = ""
+  >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
-  properties: ArtifactSourceProperties;
+  /**
+   * The geo-location where the resource lives
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  location?: string;
 }
-
-@armResourceOperations
-interface ArtifactSourceOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-
-        /** The name of the lab. */
-        @path @segment("labs") labName: string,
-      },
-      KeysOf<ResourceNameParameter<
-        Resource = ArtifactSource,
-        KeyName = "name",
-        SegmentName = "artifactsources",
-        NamePattern = ""
-      >>
-    > {}
 
 @armResourceOperations
 interface ArtifactSources {
   /**
    * Get artifact source.
    */
-  get is ArtifactSourceOps.Read<
+  get is ArmResourceRead<
     ArtifactSource,
     Parameters = {
       /**
@@ -67,14 +50,14 @@ interface ArtifactSources {
   /**
    * Create or replace an existing artifact source.
    */
-  createOrUpdate is ArtifactSourceOps.CreateOrUpdateSync<ArtifactSource>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<ArtifactSource>;
 
   /**
    * Allows modifying tags of artifact sources. All other properties will be ignored.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "ArtifactSourceFragment contains tags as expected by the patch operation."
   @patch(#{ implicitOptionality: false })
-  update is ArtifactSourceOps.CustomPatchSync<
+  update is ArmCustomPatchSync<
     ArtifactSource,
     PatchModel = ArtifactSourceFragment
   >;
@@ -82,12 +65,12 @@ interface ArtifactSources {
   /**
    * Delete artifact source.
    */
-  delete is ArtifactSourceOps.DeleteSync<ArtifactSource>;
+  delete is ArmResourceDeleteSync<ArtifactSource>;
 
   /**
    * List artifact sources in a given lab.
    */
-  list is ArtifactSourceOps.List<
+  list is ArmResourceListByParent<
     ArtifactSource,
     Parameters = {
       /**

@@ -88,79 +88,85 @@ using Microsoft.MachineLearningServices;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
 @@Legacy.clientDefaultValue(DatastoresCreateOrUpdateParameters.skipValidation,
   false,
-  "python"
+  "python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Legacy.clientDefaultValue(DatastoresListParameters.count, 30, "python");
+@@Legacy.clientDefaultValue(DatastoresListParameters.count,
+  30,
+  "python,javascript"
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
 @@Legacy.clientDefaultValue(DatastoresListParameters.orderByAsc,
   false,
-  "python"
+  "python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
 @@Legacy.clientDefaultValue(EndpointResourceListParameters.includeOnlineEndpoints,
   false,
-  "python"
+  "python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
 @@Legacy.clientDefaultValue(EndpointResourceListParameters.includeServerlessEndpoints,
   false,
-  "python"
+  "python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
 @@Legacy.clientDefaultValue(EndpointResourceListParameters.includeConnections,
   false,
-  "python"
+  "python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Legacy.clientDefaultValue(FeaturesListParameters.pageSize, 1000, "python");
+@@Legacy.clientDefaultValue(FeaturesListParameters.pageSize,
+  1000,
+  "python,javascript"
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
 @@Legacy.clientDefaultValue(FeaturesetContainersListParameters.pageSize,
   20,
-  "python"
+  "python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
 @@Legacy.clientDefaultValue(FeaturesetVersionsListParameters.pageSize,
   20,
-  "python"
+  "python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
 @@Legacy.clientDefaultValue(FeaturestoreEntityContainersListParameters.pageSize,
   20,
-  "python"
+  "python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
 @@Legacy.clientDefaultValue(FeaturestoreEntityVersionsListParameters.pageSize,
   20,
-  "python"
+  "python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
 @@Legacy.clientDefaultValue(WorkspaceConnectionListParameters.includeAll,
   false,
-  "python"
+  "python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
 @@Legacy.clientDefaultValue(WorkspacesDeleteParameters.forceToPurge,
   false,
-  "python"
+  "python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
 @@Legacy.clientDefaultValue(SchedulesListParameters.listViewType,
   "EnabledOnly",
-  "python"
+  "python,javascript"
 );
 
 @@clientName(Microsoft.MachineLearningServices,

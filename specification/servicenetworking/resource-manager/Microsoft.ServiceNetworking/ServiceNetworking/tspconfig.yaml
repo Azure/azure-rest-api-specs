@@ -10,7 +10,6 @@ linter:
     "@azure-tools/typespec-azure-resource-manager/arm-common-types-version": "New rule"
 options:
   "@azure-tools/typespec-autorest":
-    azure-resource-provider-folder: "resource-manager"
     emit-common-types-schema: "never"
     emitter-output-dir: "{project-root}"
     output-file: "{version-status}/{version}/TrafficController.json"
@@ -47,3 +46,7 @@ options:
   "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.ServiceNetworking"
     emitter-output-dir: "{output-dir}/sdk/servicenetworking/{namespace}"
+  "@azure-typespec/http-client-csharp-provisioning":
+    namespace: "Azure.Provisioning.ServiceNetworking"
+    emitter-output-dir: "{output-dir}/sdk/servicenetworking/{namespace}"
+    api-version: "2025-01-01"

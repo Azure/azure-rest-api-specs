@@ -13,6 +13,9 @@ import "./routes.tiler.image-exports.tsp";
 import "./routes.tiler.items.tsp";
 import "./routes.tiler.map-legends.tsp";
 import "./routes.tiler.mosaics.tsp";
+import "./routes.tiler.mosaic.collections.tsp";
+import "./routes.tiler.mosaic.items.tsp";
+import "./routes.tiler.mosaic.searches.tsp";
 import "./routes.tiler.tile-matrix-sets.tsp";
 
 // SAS
@@ -24,7 +27,14 @@ import "./inma.tsp";
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-@server("https://contoso-catalog.gwhqfdeddydpareu.uksouth.geocatalog.spatio.azure.com")
+@server(
+  "{endpoint}",
+  "Microsoft Planetary Computer Pro",
+  {
+    @doc("GeoCatalog endpoint, e.g. https://contoso-catalog.gwhqfdeddydpareu.uksouth.geocatalog.spatio.azure.com")
+    endpoint: url,
+  }
+)
 @useAuth(
   OAuth2Auth<[
     {

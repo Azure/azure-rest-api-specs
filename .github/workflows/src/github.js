@@ -1,4 +1,3 @@
-import { inspect } from "util";
 import { toPercent } from "../../shared/src/math.js";
 import { Duration, formatDuration, getDuration, subtract } from "../../shared/src/time.js";
 
@@ -8,20 +7,6 @@ import { Duration, formatDuration, getDuration, subtract } from "../../shared/sr
  * @typedef {RestEndpointMethodTypes["actions"]["listWorkflowRunsForRepo"]["response"]["data"]["workflow_runs"]} WorkflowRuns
  * @typedef {RestEndpointMethodTypes["repos"]["listCommitStatusesForRef"]["response"]["data"]} CommitStatuses
  */
-
-/**
- * Writes content to the GitHub Actions summary
- * @param {string} content - Markdown content to add to the summary
- * @param {typeof import("@actions/core")} core - GitHub Actions core library
- */
-export async function writeToActionsSummary(content, core) {
-  try {
-    await core.summary.addRaw(content).write();
-    core.info("Successfully wrote to the GitHub Actions summary");
-  } catch (error) {
-    throw new Error(`Failed to write to the GitHub Actions summary: ${inspect(error)}`);
-  }
-}
 
 /**
  * @param {import("@octokit/endpoint").endpoint} endpoint

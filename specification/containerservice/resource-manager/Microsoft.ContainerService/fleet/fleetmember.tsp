@@ -112,7 +112,6 @@ interface FleetMembers {
   @sharedRoute
   @added(Versions.v2023_03_15_preview)
   @removed(Versions.v2023_06_15_preview)
-  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     FleetMember,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -131,7 +130,6 @@ interface FleetMembers {
     "x-ms-long-running-operation-options",
     #{ `final-state-via`: "original-uri" }
   )
-  @patch(#{ implicitOptionality: true })
   updateAsync is ArmCustomPatchAsync<
     FleetMember,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

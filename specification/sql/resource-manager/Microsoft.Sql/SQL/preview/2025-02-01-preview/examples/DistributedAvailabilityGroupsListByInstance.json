@@ -1,0 +1,89 @@
+{
+  "parameters": {
+    "api-version": "2025-02-01-preview",
+    "managedInstanceName": "testcl",
+    "resourceGroupName": "testrg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "dag",
+            "type": "Microsoft.Sql/managedInstances/distributedAvailabilityGroups",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testcl/distributedAvailabilityGroups/dag",
+            "properties": {
+              "databases": [
+                {
+                  "connectedState": "CONNECTED",
+                  "databaseName": "testdb",
+                  "instanceRedoReplicationLagSeconds": 1,
+                  "instanceReplicaId": "4713ed91-1e8c-497d-9bd4-d8a3935ae49a",
+                  "instanceSendReplicationLagSeconds": 1,
+                  "lastBackupLsn": "71000009405700001",
+                  "lastBackupTime": "2023-08-01T00:00:00Z",
+                  "lastCommitLsn": "71000009407900004",
+                  "lastCommitTime": "2023-08-01T00:00:00Z",
+                  "lastHardenedLsn": "71000009408100001",
+                  "lastHardenedTime": "2023-08-01T00:00:00Z",
+                  "lastReceivedLsn": "71000009407900001",
+                  "lastReceivedTime": "2023-08-01T00:00:00Z",
+                  "partnerReplicaId": "8ffa9723-a1ec-4323-b929-c4aedee3894b",
+                  "replicaState": "Catchup",
+                  "synchronizationHealth": "HEALTHY"
+                }
+              ],
+              "distributedAvailabilityGroupId": "c856cff5-a6fe-418e-8894-17799cc20f5d",
+              "distributedAvailabilityGroupName": "dag",
+              "failoverMode": "None",
+              "instanceAvailabilityGroupName": "testcl",
+              "instanceLinkRole": "Primary",
+              "partnerAvailabilityGroupName": "BoxLocalAg1",
+              "partnerEndpoint": "TCP://SERVER:7022",
+              "partnerLinkRole": "Secondary",
+              "replicationMode": "Async",
+              "seedingMode": "Automatic"
+            }
+          },
+          {
+            "name": "dag2",
+            "type": "Microsoft.Sql/managedInstances/distributedAvailabilityGroups",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testcl/distributedAvailabilityGroups/dag2",
+            "properties": {
+              "databases": [
+                {
+                  "connectedState": "CONNECTED",
+                  "databaseName": "testdb2",
+                  "instanceReplicaId": "81608df4-0840-4219-b3ae-9cc46be9dae9",
+                  "lastBackupLsn": "71000009405700001",
+                  "lastBackupTime": "2023-08-01T00:00:00Z",
+                  "lastCommitLsn": "71000009407900004",
+                  "lastCommitTime": "2023-08-01T00:00:00Z",
+                  "lastHardenedLsn": "71000009408100001",
+                  "lastHardenedTime": "2023-08-01T00:00:00Z",
+                  "lastReceivedLsn": "71000009407900001",
+                  "lastReceivedTime": "2023-08-01T00:00:00Z",
+                  "partnerReplicaId": "57bc3421-e77a-4fdc-8a62-af105c4b1e38",
+                  "replicaState": "Seeding",
+                  "seedingProgress": "80%",
+                  "synchronizationHealth": "HEALTHY"
+                }
+              ],
+              "distributedAvailabilityGroupId": "8a52d869-c17e-4546-ab03-e038569e672a",
+              "distributedAvailabilityGroupName": "dag2",
+              "instanceAvailabilityGroupName": "testcl2",
+              "instanceLinkRole": "Secondary",
+              "partnerAvailabilityGroupName": "BoxLocalAg2",
+              "partnerEndpoint": "TCP://SERVER:7022",
+              "partnerLinkRole": "Primary",
+              "replicationMode": "Async"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "DistributedAvailabilityGroups_ListByInstance",
+  "title": "Lists all distributed availability groups in instance."
+}

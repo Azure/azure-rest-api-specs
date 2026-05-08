@@ -2,52 +2,133 @@
   "title": "StacItems_Update",
   "operationId": "StacItems_Update",
   "parameters": {
-    "collectionId": "{{collectionId}}",
-    "itemId": "{{itemId}}",
+    "collectionId": "naip-atl",
+    "itemId": "ga_m_3308421_se_16_060_20211114_test",
     "api-version": "2025-04-30-preview",
     "body": {
-      "id": "{{itemId}}",
-      "collection": "{{collectionId}}",
+      "id": "ga_m_3308421_se_16_060_20211114_test",
+      "bbox": [
+        -84.44157,
+        33.621853,
+        -84.370894,
+        33.690654
+      ],
       "type": "Feature",
+      "links": [
+        {
+          "rel": "collection",
+          "type": "application/json",
+          "href": "https://Sanitized.sanitized_label.sanitized_location.geocatalog.spatio.azure.com/stac/collections/naip-atl"
+        },
+        {
+          "rel": "parent",
+          "type": "application/json",
+          "href": "https://Sanitized.sanitized_label.sanitized_location.geocatalog.spatio.azure.com/stac/collections/naip-atl"
+        },
+        {
+          "rel": "root",
+          "type": "application/json",
+          "href": "https://Sanitized.sanitized_label.sanitized_location.geocatalog.spatio.azure.com/stac/"
+        },
+        {
+          "rel": "self",
+          "type": "application/geo+json",
+          "href": "https://Sanitized.sanitized_label.sanitized_location.geocatalog.spatio.azure.com/stac/collections/naip-atl/items/ga_m_3308421_se_16_060_20211114_test"
+        }
+      ],
       "assets": {
-        "sample_external": null,
-        "sample_user": {
-          "href": "https://sample.blob.core.windows.net/samples/4MB.jp2",
-          "title": "Sample storage account Image (4MB)",
-          "type": "image/jp2",
+        "image": {
+          "href": "https://SANITIZED.blob.core.windows.net/naip-atl-bde3e846/08a/ga_m_3308421_se_16_060_20211114_test/image.tif",
+          "type": "image/tiff; application=geotiff; profile=cloud-optimized",
           "roles": [
             "data"
-          ]
+          ],
+          "title": "RGBIR COG tile"
         }
       },
+      "_msft:ts": "2025-10-28T17:52:49.659975Z",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -84.372943,
+              33.621853
+            ],
+            [
+              -84.370894,
+              33.689211
+            ],
+            [
+              -84.439575,
+              33.690654
+            ],
+            [
+              -84.44157,
+              33.623293
+            ],
+            [
+              -84.372943,
+              33.621853
+            ]
+          ]
+        ]
+      },
+      "_msft:etag": "73fab31c-2e93-422b-b30a-7d259590992f",
+      "collection": "naip-atl",
       "properties": {
-        "datetime": "2021-12-15T00:00:00Z",
-        "naip:year": "2021"
-      }
+        "gsd": 0.6,
+        "datetime": "2021-11-14T16:00:00Z",
+        "naip:year": "2021",
+        "proj:bbox": [
+          737334.0,
+          3723324.0,
+          743706.0,
+          3730800.0
+        ],
+        "proj:epsg": 26916,
+        "naip:state": "ga",
+        "proj:shape": [
+          12460,
+          10620
+        ],
+        "proj:transform": [
+          0.6,
+          0.0,
+          737334.0,
+          0.0,
+          -0.6,
+          3730800.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "platform": "Imagery"
+      },
+      "stac_extensions": [
+        "https://stac-extensions.github.io/projection/v1.1.0/schema.json"
+      ],
+      "stac_version": "1.0.0"
     }
   },
   "responses": {
     "202": {
       "headers": {
-        "operation-location": "https://contoso.com/operationstatus"
+        "Location": "https://example.geocatalog.spatio.azure.com/inma/operations/00000000-0000-0000-0000-000000000000?api-version=2025-04-30-preview",
+        "operation-location": "https://example.geocatalog.spatio.azure.com/inma/operations/00000000-0000-0000-0000-000000000000?api-version=2025-04-30-preview"
       },
       "body": {
-        "id": "30e6744d-81a3-44e2-8a85-0325365272ae",
+        "id": "00000000-0000-0000-0000-000000000000",
         "status": "Pending",
-        "type": "Update",
         "statusHistory": [
           {
             "status": "Pending",
-            "timestamp": "2024-10-09T09:31:24.1968201Z"
+            "timestamp": "2025-10-28T18:42:56.121267Z"
           }
         ],
-        "creationTime": "2024-10-09T09:31:24.1968185Z",
-        "additionalInformation": {
-          "totalItems": "0",
-          "totalPendingItems": "0",
-          "totalSuccessfulItems": "0",
-          "totalFailedItems": "0"
-        }
+        "type": "UpdateItem",
+        "creationTime": "2025-10-28T18:42:56.1212642Z",
+        "collectionId": "naip-atl"
       }
     }
   }

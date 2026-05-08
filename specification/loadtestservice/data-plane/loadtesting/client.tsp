@@ -6,7 +6,7 @@ using TypeSpec.Rest;
 using Azure.ClientGenerator.Core;
 using Microsoft.LoadTestService;
 
-@useDependency(APIVersions.v2025_11_01_preview)
+@useDependency(APIVersions.v2026_04_01)
 namespace Customizations;
 
 // Client customizations should be kept in this file only and not in other files
@@ -68,6 +68,11 @@ namespace Customizations;
 @@clientName(Test.publicIPDisabled, "publicIpDisabled", "csharp,java");
 @@clientName(TestRun.publicIPDisabled, "publicIpDisabled", "csharp,java");
 @@clientName(PFMetrics, "PfMetrics", "csharp,java");
+
+@@clientName(CreatedByType.GitHubWorkflows,
+  "GithubWorkflows",
+  "csharp,java,python"
+);
 
 // Suggestion to rename properties in TestRunStatistics for better explanation
 @@clientName(TestRunStatistics.errorPct, "errorPercentage", "csharp,java");
@@ -165,20 +170,15 @@ interface AdministrationOperations {
   deleteTestFile is LoadTestAdministration.deleteTestFile;
   deleteTest is LoadTestAdministration.deleteTest;
 
-  createOrUpdateTestProfile is TestProfileAdministration.createOrUpdateTestProfile;
-  deleteTestProfile is TestProfileAdministration.deleteTestProfile;
-  getTestProfile is TestProfileAdministration.getTestProfile;
-  listTestProfiles is TestProfileAdministration.listTestProfiles;
-
   createOrUpdateTrigger is TriggerAdministration.createOrUpdateTrigger;
   deleteTrigger is TriggerAdministration.deleteTrigger;
   getTrigger is TriggerAdministration.getTrigger;
-  listTriggers is TriggerAdministration.listTrigger;
+  listTriggers is TriggerAdministration.listTriggers;
 
   createOrUpdateNotificationRule is NotificationRuleAdministration.createOrUpdateNotificationRule;
   deleteNotificationRule is NotificationRuleAdministration.deleteNotificationRule;
   getNotificationRule is NotificationRuleAdministration.getNotificationRule;
-  listNotificationRules is NotificationRuleAdministration.listNotificationRule;
+  listNotificationRules is NotificationRuleAdministration.listNotificationRules;
 
   @action("clone")
   cloneTest is LoadTestAdministration.cloneTest;
@@ -219,16 +219,6 @@ interface TestRunOperations {
   listTestRuns is LoadTestRun.listTestRuns;
   @clientName("stopTestRun", "javascript,python,java,csharp,go")
   stop is LoadTestRun.stop;
-
-  @clientName("begin_test_profile_run", "python")
-  @access(Access.internal, "python,csharp,java") // NOTE: These are overridden to LRO methods so original methods are made internal
-  createOrUpdateTestProfileRun is TestProfileRunAdministration.createOrUpdateTestProfileRun;
-  deleteTestProfileRun is TestProfileRunAdministration.deleteTestProfileRun;
-  getTestProfileRun is TestProfileRunAdministration.getTestProfileRun;
-  listTestProfileRuns is TestProfileRunAdministration.listTestProfileRuns;
-  @clientName("stopTestProfileRun", "javascript,python,java,csharp,go")
-  @action("stop")
-  stopTestProfileRun is TestProfileRunAdministration.stop;
 
   getLatestTestRunInsights is LoadTestRun.getLatestInsights;
   updateLatestTestRunInsights is LoadTestRun.updateLatestInsights;

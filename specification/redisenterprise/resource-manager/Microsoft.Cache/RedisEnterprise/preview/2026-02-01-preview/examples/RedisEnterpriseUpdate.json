@@ -1,0 +1,119 @@
+{
+  "parameters": {
+    "api-version": "2026-02-01-preview",
+    "clusterName": "cache1",
+    "parameters": {
+      "properties": {
+        "minimumTlsVersion": "1.2",
+        "publicNetworkAccess": "Enabled",
+        "maintenanceConfiguration": {
+          "maintenanceWindows": [
+            {
+              "type": "Weekly",
+              "duration": "PT6H",
+              "startHourUtc": 3,
+              "schedule": {
+                "dayOfWeek": "Monday"
+              }
+            },
+            {
+              "type": "Weekly",
+              "duration": "PT6H",
+              "startHourUtc": 3,
+              "schedule": {
+                "dayOfWeek": "Tuesday"
+              }
+            },
+            {
+              "type": "Weekly",
+              "duration": "PT6H",
+              "startHourUtc": 3,
+              "schedule": {
+                "dayOfWeek": "Wednesday"
+              }
+            }
+          ]
+        }
+      },
+      "sku": {
+        "name": "EnterpriseFlash_F300",
+        "capacity": 9
+      },
+      "tags": {
+        "tag1": "value1"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "cache1",
+        "type": "Microsoft.Cache/redisEnterprise",
+        "id": "/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1",
+        "identity": {
+          "type": "None"
+        },
+        "kind": "v1",
+        "location": "West US",
+        "properties": {
+          "hostName": "cache1.westus.something.azure.com",
+          "minimumTlsVersion": "1.2",
+          "provisioningState": "Updating",
+          "publicNetworkAccess": "Enabled",
+          "maintenanceConfiguration": {
+            "maintenanceWindows": [
+              {
+                "type": "Weekly",
+                "duration": "PT6H",
+                "startHourUtc": 3,
+                "schedule": {
+                  "dayOfWeek": "Monday"
+                }
+              },
+              {
+                "type": "Weekly",
+                "duration": "PT6H",
+                "startHourUtc": 3,
+                "schedule": {
+                  "dayOfWeek": "Tuesday"
+                }
+              },
+              {
+                "type": "Weekly",
+                "duration": "PT6H",
+                "startHourUtc": 3,
+                "schedule": {
+                  "dayOfWeek": "Wednesday"
+                }
+              }
+            ]
+          },
+          "redisVersion": "5",
+          "resourceState": "Updating"
+        },
+        "sku": {
+          "name": "EnterpriseFlash_F300",
+          "capacity": 9
+        },
+        "tags": {
+          "tag1": "value1"
+        },
+        "zones": [
+          "1",
+          "2",
+          "3"
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/providers/Microsoft.Cache/...pathToOperationStatus...",
+        "Location": "https://management.azure.com/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/providers/Microsoft.Cache/...pathToOperationResult..."
+      }
+    }
+  },
+  "operationId": "RedisEnterprise_Update",
+  "title": "RedisEnterpriseUpdate"
+}
