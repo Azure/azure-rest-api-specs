@@ -12,7 +12,6 @@ import "./src/connections/routes.tsp";
 import "./src/datasets/routes.tsp";
 import "./src/deployments/routes.tsp";
 import "./src/indexes/routes.tsp";
-import "./src/models/routes.tsp";
 
 // Beta SDK operations without preview feature headers
 import "./src/mlflow/routes.tsp";
@@ -22,6 +21,7 @@ import "./src/evaluation-taxonomies/routes.tsp";
 import "./src/evaluators/routes.tsp";
 import "./src/insights/routes.tsp";
 import "./src/memory-stores/routes.tsp";
+import "./src/models/routes.tsp";
 import "./src/red-teams/routes.tsp";
 import "./src/schedules/routes.tsp";
 import "./src/toolsets/routes.tsp";

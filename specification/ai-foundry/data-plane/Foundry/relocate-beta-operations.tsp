@@ -76,6 +76,21 @@ interface Toolsets {}
 @@clientLocation(Azure.AI.Projects.Toolsets.listToolsets, Toolsets);
 @@clientLocation(Azure.AI.Projects.Toolsets.deleteToolset, Toolsets);
 
+interface Models {}
+@@clientLocation(Azure.AI.Projects.Models.createTrainingJob, Models);
+@@clientLocation(Azure.AI.Projects.Models.createSftTrainingJob, Models);
+@@clientLocation(Azure.AI.Projects.Models.createPreferenceTrainingJob, Models);
+@@clientLocation(Azure.AI.Projects.Models.createKtoTrainingJob, Models);
+@@clientLocation(Azure.AI.Projects.Models.createRewardModelTrainingJob,
+  Models
+);
+@@clientLocation(Azure.AI.Projects.Models.createGrpoTrainingJob, Models);
+@@clientLocation(Azure.AI.Projects.Models.createPolicyGradientTrainingJob,
+  Models
+);
+@@clientLocation(Azure.AI.Projects.Models.createPpoTrainingJob, Models);
+@@clientLocation(Azure.AI.Projects.Models.getTrainingOperationResult, Models);
+
 namespace Mlflow {
   interface Experiments {}
   interface Runs {}
