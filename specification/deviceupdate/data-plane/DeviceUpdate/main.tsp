@@ -41,6 +41,7 @@ namespace DeviceUpdateClient;
 /**
  * Azure Active Directory OAuth2 Flow
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Name kept as-is to match the original swagger securityDefinitions key 'azure_auth'."
 @doc("Azure Active Directory OAuth2 Flow")
 model azure_auth
   is OAuth2Auth<[

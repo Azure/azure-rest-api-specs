@@ -139,6 +139,7 @@ using DeviceUpdateClient;
 // Hoist `instanceId` from per-operation parameter to client-constructor
 // parameter, matching the original swagger's
 // `x-ms-parameter-location: "client"` on `InstanceIdParameter`.
+/** Client-level options for `DeviceUpdateClient`. */
 model DeviceUpdateClientOptions {
   /** The Device Update for IoT Hub account instance identifier. */
   instanceId: string;
