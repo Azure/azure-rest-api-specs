@@ -588,6 +588,10 @@ model SignalStatus {
   @visibility(Lifecycle.Read)
   @doc("Error message if the signal status cannot be retrieved")
   error?: string;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Additional context as provided by the submitter")
+  additionalContext?: string4096;
 }
 
 @doc("Alert configuration for an entity")
@@ -852,6 +856,36 @@ model PrometheusMetricsSignal extends SignalInstanceProperties {
   >>;
 }
 
+@added(Versions.v2026_05_01_preview)
+model AzureResourceHealthSignalStatus extends SignalStatus {
+  @visibility(Lifecycle.Read)
+  @doc("Availability status of the Azure resource as reported by Azure Resource Health.")
+  availabilityStatus?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("When a context field is set to Platform, this field will reflect if the event was planned or unplanned.")
+  category?: string256;
+
+  @visibility(Lifecycle.Read)
+  @doc("Detailed status of the Azure resource as reported by Azure Resource Health.")
+  detailedStatus?: string4096;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("Azure resource health signal configuration")
+model AzureResourceHealthSignal {
+  @doc("Whether to automatically add a signal for the Azure resource's availability status from Azure Resource Health. Defaults to Enabled.")
+  enabled?: ResourceHealthAvailabilityStatusSignalBehavior = ResourceHealthAvailabilityStatusSignalBehavior.Enabled;
+
+  @visibility(Lifecycle.Read)
+  @doc("The unique name of the Azure resource health signal. System assigned.")
+  signalName?: string256;
+
+  @visibility(Lifecycle.Read)
+  @doc("Current status of the Azure resource health signal.")
+  status?: AzureResourceHealthSignalStatus;
+}
+
 @added(Versions.v2026_01_01_preview)
 @doc("A grouping of Azure resource signals")
 model AzureResourceSignals {
@@ -870,6 +904,10 @@ model AzureResourceSignals {
   @maxItems(50)
   @identifiers(#["name"])
   signals?: AzureResourceSignal[];
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Optional configuration for automatically adding a signal based on the resource's availability state in Azure Resource Health.")
+  resourceHealth?: AzureResourceHealthSignal;
 }
 
 @added(Versions.v2026_01_01_preview)
@@ -1076,6 +1114,9 @@ model DiscoveryRuleProperties {
   @doc("Whether to add all recommended signals to the discovered entities.")
   addRecommendedSignals: DiscoveryRuleRecommendedSignalsBehavior;
 
+  @doc("Specification of the discovery rule defining how entities are discovered.")
+  specification: DiscoveryRuleSpecification;
+
   @added(Versions.v2026_01_01_preview)
   @doc("Specification of the discovery rule defining how entities are discovered.")
   specification: DiscoveryRuleSpecification;
@@ -1159,6 +1200,17 @@ union DiscoveryRuleRecommendedSignalsBehavior {
   Enabled: "Enabled",
 
   @doc("Do not automatically add recommended signals")
+  Disabled: "Disabled",
+}
+
+@doc("Resource health availability status signal behaviour")
+union ResourceHealthAvailabilityStatusSignalBehavior {
+  string,
+
+  @doc("Automatically add resource health availability status signal")
+  Enabled: "Enabled",
+
+  @doc("Do not automatically add resource health availability status signal")
   Disabled: "Disabled",
 }
 
