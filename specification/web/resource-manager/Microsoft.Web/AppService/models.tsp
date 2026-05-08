@@ -1,11 +1,13 @@
 import "@typespec/versioning";
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
@@ -2103,6 +2105,11 @@ model SiteProperties {
   enabled?: boolean;
 
   /**
+   * <code>true</code> if site scoped certificates are enabled; otherwise, <code>false</code>.
+   */
+  siteScopedCertificatesEnabled?: boolean = false;
+
+  /**
    * Enabled hostnames for the app.Hostnames need to be assigned (see HostNames) AND enabled. Otherwise,
    * the app is not served on those hostnames.
    */
@@ -2176,6 +2183,12 @@ model SiteProperties {
    * Dapr configuration of the app.
    */
   daprConfig?: DaprConfig;
+
+  /**
+   * AI integration configuration for the app.
+   */
+  @added(Versions.v2026_03_15)
+  aiIntegration?: AiIntegration;
 
   /**
    * Workload profile name for function app to execute on.
@@ -3682,6 +3695,102 @@ model DaprConfig {
    * Enables API logging for the Dapr sidecar
    */
   enableApiLogging?: boolean;
+}
+
+/**
+ * AI integration configuration for the app.
+ */
+@added(Versions.v2026_03_15)
+model AiIntegration {
+  /**
+   * Relative path to the API specification file from /home in site files.
+   */
+  apiSpecPath?: string;
+
+  /**
+   * MCP configuration.
+   */
+  mcp?: McpSettings;
+
+  /**
+   * External auth configuration for the MCP endpoint (used when EasyAuth is not enabled).
+   */
+  siteAuth?: SiteAuthInfo;
+}
+
+/**
+ * MCP configuration settings.
+ */
+@added(Versions.v2026_03_15)
+model McpSettings {
+  /**
+   * Array of MCP server configurations. This array is replaced in its entirety on update; individual servers cannot be patched independently. An empty array signals that MCP should be disabled/deleted.
+   */
+  @identifiers(#["name"])
+  servers?: McpServerConfig[];
+}
+
+/**
+ * Configuration for an individual MCP server.
+ */
+@added(Versions.v2026_03_15)
+model McpServerConfig {
+  /**
+   * The name of the MCP server.
+   */
+  name?: string;
+
+  /**
+   * The description of the MCP server.
+   */
+  description?: string;
+
+  /**
+   * Whether the MCP server is enabled. Defaults to true when not specified on creation.
+   */
+  enabled?: boolean;
+
+  /**
+   * The endpoint path for the MCP server.
+   */
+  endpoint?: string;
+
+  /**
+   * The list of tools exposed by this MCP server.
+   */
+  toolList?: string[];
+}
+
+/**
+ * External auth configuration for the MCP endpoint (used when EasyAuth is not enabled).
+ * At minimum, `scopes` and either `wellKnownOpenIdConfiguration` or `issuer` must be provided.
+ */
+@added(Versions.v2026_03_15)
+model SiteAuthInfo {
+  /**
+   * JWKS URL for verifying JWT signatures.
+   */
+  jwksUri?: url;
+
+  /**
+   * Expected 'iss' claim. Required for custom site authentication if `wellKnownOpenIdConfiguration` is not provided.
+   */
+  issuer?: string;
+
+  /**
+   * Expected 'aud' claim.
+   */
+  audience?: string;
+
+  /**
+   * OIDC metadata URL. Required for custom site authentication if `issuer` is not provided.
+   */
+  wellKnownOpenIdConfiguration?: url;
+
+  /**
+   * OAuth scopes for Protected Resource Metadata (PRM). Required for custom site authentication.
+   */
+  scopes?: string[];
 }
 
 /**
@@ -8483,7 +8592,9 @@ model StaticSite {
   /**
    * A user's github repository token. This is used to setup the Github Actions workflow file and API secrets.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Using x-ms-secret without format:password to match existing swagger."
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Using x-ms-secret extension directly to avoid format:password from @secret."
+  @extension("x-ms-secret", true)
   repositoryToken?: string;
 
   /**
@@ -9487,6 +9598,11 @@ model SitePatchResourceProperties {
   enabled?: boolean;
 
   /**
+   * <code>true</code> if site scoped certificates are enabled; otherwise, <code>false</code>.
+   */
+  siteScopedCertificatesEnabled?: boolean = false;
+
+  /**
    * Enabled hostnames for the app.Hostnames need to be assigned (see HostNames) AND enabled. Otherwise,
    * the app is not served on those hostnames.
    */
@@ -9544,6 +9660,12 @@ model SitePatchResourceProperties {
    * Configuration of the app.
    */
   siteConfig?: SiteConfig;
+
+  /**
+   * AI integration configuration for the app.
+   */
+  @added(Versions.v2026_03_15)
+  aiIntegration?: AiIntegration;
 
   /**
    * Azure Traffic Manager hostnames associated with the app. Read-only.
@@ -16267,4 +16389,63 @@ model StorageMount {
    * KV reference to the credentials to connect to the share.
    */
   credentialsKeyVaultReference?: KeyVaultReferenceWithStatus;
+}
+
+/**
+ * Properties of a static sites asynchronous operation status.
+ */
+model StaticSitesOperationStatusProperties {
+  /**
+   * The current status of the asynchronous operation performed. For example, Running, Succeeded, Failed
+   */
+  @visibility(Lifecycle.Read)
+  status?: string;
+
+  /**
+   * The start time of the asynchronous operation.
+   */
+  startTime?: string;
+
+  /**
+   * The end time of the asynchronous operation.
+   */
+  endTime?: string;
+
+  /**
+   * The generic properties of a staticSite.
+   */
+  staticSiteProperties?: StaticSite;
+
+  /**
+   * Error details for the asynchronous operation, if any.
+   */
+  error?: ErrorResponse;
+}
+
+/**
+ * Status object for a static sites asynchronous operation.
+ */
+model StaticSitesOperationStatus {
+  /**
+   * The fully qualified ID for the staticSitesOperationStatus.  For example, /subscriptions/{subscriptionId}/providers/Microsoft.Web/staticSitesOperationStatuses/{operationId}
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * The type of the resource.  For example, Microsoft.Web/staticSitesOperationStatuses
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * The name of the staticSitesOperationStatus. For example, a1f6e015-a5de-468f-ad54-9c75638d7134
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Properties of the async operation status.
+   */
+  properties?: StaticSitesOperationStatusProperties;
 }
