@@ -310,6 +310,18 @@ using Azure.AI.Projects;
 @@clientName(SessionFileWriteResponse, "SessionFileWriteResult", "python");
 
 // --------------------------------------------------------------------------------
+// Evaluation Taxonomies sub-client
+// --------------------------------------------------------------------------------
+
+@@clientName(Target, "EvaluationTarget");
+
+// --------------------------------------------------------------------------------
+// RedTeam sub-client
+// --------------------------------------------------------------------------------
+
+@@clientName(TargetConfig, "RedTeamTargetConfig");
+
+// --------------------------------------------------------------------------------
 // To support custom client-side handling of "opt-in" to preview features.
 // --------------------------------------------------------------------------------
 
