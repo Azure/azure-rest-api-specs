@@ -146,5 +146,7 @@ model DeviceUpdateClientOptions {
 }
 
 @@clientInitialization(DeviceUpdateClient,
-  { parameters: DeviceUpdateClientOptions }
+  {
+    parameters: DeviceUpdateClientOptions,
+  }
 );

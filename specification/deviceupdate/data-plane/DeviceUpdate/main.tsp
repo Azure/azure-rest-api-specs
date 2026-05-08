@@ -33,7 +33,8 @@ using Azure.Core;
      */
     @extension("x-ms-parameter-grouping", #{ name: "account-options" })
     @extension("x-ms-parameter-location", "client")
-    endpoint: url,
+    @format("url")
+    endpoint: string,
   }
 )
 namespace DeviceUpdateClient;
@@ -46,9 +47,9 @@ namespace DeviceUpdateClient;
 model azure_auth
   is OAuth2Auth<[
     {
-      type: OAuth2FlowType.implicit,
-      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
-      scopes: ["https://api.adu.microsoft.com/.default"],
+      type: OAuth2FlowType.implicit;
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize";
+      scopes: ["https://api.adu.microsoft.com/.default"];
     }
   ]>;
 
