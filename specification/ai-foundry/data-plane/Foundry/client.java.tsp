@@ -108,6 +108,13 @@ namespace Azure.AI.Projects;
 @@clientName(Models.startPendingUpload, "startModelPendingUpload");
 @@clientName(Models.getCredentials, "getModelCredentials");
 
+//Evaluator generation jobs
+@@clientName(EvaluatorGenerationJobs.create, "createGenerationJob");
+@@clientName(EvaluatorGenerationJobs.get, "getGenerationJob");
+@@clientName(EvaluatorGenerationJobs.list, "listGenerationJobs");
+@@clientName(EvaluatorGenerationJobs.cancel, "cancelGenerationJob");
+@@clientName(EvaluatorGenerationJobs.delete, "deleteGenerationJob");
+
 // --------------------------------------------------------------------------------
 // Renames - models
 // --------------------------------------------------------------------------------
