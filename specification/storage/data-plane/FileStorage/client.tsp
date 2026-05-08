@@ -148,6 +148,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@clientName(NfsResponseHeaders.nfsFileType, "NFSFileType", "go");
 @@clientName(NfsTimestampResponseHeaders.fileId, "ID", "go");
 @@clientName(NfsTimestampResponseHeaders.fileParentId, "ParentID", "go");
+@@clientName(OptionalBody.optionalBody, "Optionalbody", "go");
 @@clientName(RequestServerEncryptedResponseHeader.requestServerEncrypted,
   "IsServerEncrypted",
   "go"
