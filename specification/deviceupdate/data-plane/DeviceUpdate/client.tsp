@@ -135,3 +135,15 @@ using DeviceUpdateClient;
 @@clientLocation(DeviceManagementOperationGroup.listHealthOfDevices,
   "DeviceManagement"
 );
+
+// Hoist `instanceId` from per-operation parameter to client-constructor
+// parameter, matching the original swagger's
+// `x-ms-parameter-location: "client"` on `InstanceIdParameter`.
+model DeviceUpdateClientOptions {
+  /** The Device Update for IoT Hub account instance identifier. */
+  instanceId: string;
+}
+
+@@clientInitialization(DeviceUpdateClient,
+  { parameters: DeviceUpdateClientOptions }
+);

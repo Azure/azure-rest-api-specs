@@ -20,9 +20,13 @@
       {
         "name": "endpoint",
         "in": "path",
+        "description": "The Device Update for IoT Hub account endpoint (hostname only, no protocol).",
         "required": true,
         "type": "string",
         "format": "uri",
+        "x-ms-parameter-grouping": {
+          "name": "account-options"
+        },
         "x-ms-skip-url-encoding": true
       }
     ]
@@ -35,21 +39,20 @@
   ],
   "security": [
     {
-      "AadOauth2Auth": [
+      "azure_auth": [
         "https://api.adu.microsoft.com/.default"
       ]
     }
   ],
   "securityDefinitions": {
-    "AadOauth2Auth": {
+    "azure_auth": {
       "type": "oauth2",
-      "description": "The Azure Active Directory OAuth2 Flow",
-      "flow": "accessCode",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "https://api.adu.microsoft.com/.default": ""
-      },
-      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+      }
     }
   },
   "tags": [
@@ -80,7 +83,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "filter",
@@ -109,6 +116,7 @@
             "$ref": "./examples/DeviceManagement_ListDeviceClasses.json"
           }
         },
+        "x-ms-odata": "#/definitions/DeviceClassFilter",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -130,7 +138,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "deviceClassId",
@@ -178,7 +190,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "deviceClassId",
@@ -232,7 +248,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "deviceClassId",
@@ -276,7 +296,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "deviceClassId",
@@ -326,7 +350,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "filter",
@@ -355,6 +383,7 @@
             "$ref": "./examples/DeviceManagement_ListHealthOfDevices.json"
           }
         },
+        "x-ms-odata": "#/definitions/DeviceHealthFilter",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -376,7 +405,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           }
         ],
         "responses": {
@@ -419,7 +452,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "operationId",
@@ -467,7 +504,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "operationId",
@@ -526,7 +567,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "operationId",
@@ -576,7 +621,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "filter",
@@ -605,6 +654,7 @@
             "$ref": "./examples/DeviceManagement_ListDevices.json"
           }
         },
+        "x-ms-odata": "#/definitions/DeviceFilter",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -626,7 +676,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "deviceId",
@@ -673,7 +727,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "deviceId",
@@ -727,7 +785,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "importType",
@@ -784,7 +846,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "orderby",
@@ -814,6 +880,7 @@
             "$ref": "./examples/DeviceManagement_ListGroups.json"
           }
         },
+        "x-ms-odata": "#/definitions/GroupOrderBy",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -835,7 +902,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "groupId",
@@ -880,7 +951,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "groupId",
@@ -924,7 +999,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "groupId",
@@ -974,7 +1053,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "groupId",
@@ -1011,6 +1094,7 @@
             "$ref": "./examples/DeviceManagement_ListDeploymentsForGroup.json"
           }
         },
+        "x-ms-odata": "#/definitions/DeploymentOrderBy",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1032,7 +1116,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "groupId",
@@ -1084,7 +1172,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "groupId",
@@ -1145,7 +1237,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "groupId",
@@ -1196,7 +1292,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "groupId",
@@ -1250,7 +1350,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "groupId",
@@ -1286,6 +1390,7 @@
             "$ref": "./examples/DeviceManagement_ListDeviceClassSubgroupsForGroup.json"
           }
         },
+        "x-ms-odata": "#/definitions/DeviceClassSubgroupFilter",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1307,7 +1412,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "groupId",
@@ -1359,7 +1468,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "groupId",
@@ -1410,7 +1523,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "groupId",
@@ -1464,7 +1581,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "groupId",
@@ -1508,6 +1629,7 @@
             "$ref": "./examples/DeviceManagement_ListDeploymentsForDeviceClassSubgroup.json"
           }
         },
+        "x-ms-odata": "#/definitions/DeploymentOrderBy",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1529,7 +1651,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "groupId",
@@ -1588,7 +1714,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "groupId",
@@ -1646,7 +1776,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "groupId",
@@ -1707,7 +1841,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "groupId",
@@ -1768,7 +1906,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "groupId",
@@ -1818,6 +1960,7 @@
             "$ref": "./examples/DeviceManagement_ListDeviceStatesForDeviceClassSubgroupDeployment.json"
           }
         },
+        "x-ms-odata": "#/definitions/DeploymentDeviceStatesFilter",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1839,7 +1982,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "groupId",
@@ -1900,7 +2047,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "groupId",
@@ -1954,7 +2105,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "groupId",
@@ -2001,7 +2156,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "filter",
@@ -2038,6 +2197,7 @@
             "$ref": "./examples/DeviceManagement_ListOperationStatuses.json"
           }
         },
+        "x-ms-odata": "#/definitions/OperationFilter",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -2059,7 +2219,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "operationId",
@@ -2076,6 +2240,9 @@
             "description": "Defines the If-None-Match condition. The operation will be performed only if\nthe ETag on the server does not match this value.",
             "required": false,
             "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "access-condition"
+            },
             "x-ms-client-name": "ifNoneMatch"
           }
         ],
@@ -2122,7 +2289,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           }
         ],
         "responses": {
@@ -2162,7 +2333,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "search",
@@ -2198,6 +2373,7 @@
             "$ref": "./examples/DeviceUpdate_ListUpdates.json"
           }
         },
+        "x-ms-odata": "#/definitions/UpdateFilter",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -2219,7 +2395,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "filter",
@@ -2256,6 +2436,7 @@
             "$ref": "./examples/DeviceUpdate_ListOperationStatuses.json"
           }
         },
+        "x-ms-odata": "#/definitions/OperationFilter",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -2277,7 +2458,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "operationId",
@@ -2294,6 +2479,9 @@
             "description": "Defines the If-None-Match condition. The operation will be performed only if\nthe ETag on the server does not match this value.",
             "required": false,
             "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "access-condition"
+            },
             "x-ms-client-name": "ifNoneMatch"
           }
         ],
@@ -2340,7 +2528,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           }
         ],
         "responses": {
@@ -2383,7 +2575,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "provider",
@@ -2433,7 +2629,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "provider",
@@ -2476,6 +2676,7 @@
             "$ref": "./examples/DeviceUpdate_ListVersions.json"
           }
         },
+        "x-ms-odata": "#/definitions/UpdateFilter",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -2497,7 +2698,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "provider",
@@ -2526,6 +2731,9 @@
             "description": "Defines the If-None-Match condition. The operation will be performed only if\nthe ETag on the server does not match this value.",
             "required": false,
             "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "access-condition"
+            },
             "x-ms-client-name": "ifNoneMatch"
           }
         ],
@@ -2564,7 +2772,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "provider",
@@ -2633,7 +2845,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "provider",
@@ -2697,7 +2913,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "provider",
@@ -2733,6 +2953,9 @@
             "description": "Defines the If-None-Match condition. The operation will be performed only if\nthe ETag on the server does not match this value.",
             "required": false,
             "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "access-condition"
+            },
             "x-ms-client-name": "ifNoneMatch"
           }
         ],
@@ -2773,7 +2996,11 @@
             "in": "path",
             "description": "The Device Update for IoT Hub account instance identifier.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "account-options"
+            },
+            "x-ms-skip-url-encoding": true
           },
           {
             "name": "updateToImport",
@@ -4841,6 +5068,34 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "azure_auth": {
+      "type": "object",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "OAuth2 authentication",
+          "enum": [
+            "oauth2"
+          ]
+        },
+        "flows": {
+          "type": "array",
+          "description": "Supported OAuth2 flows",
+          "items": {}
+        },
+        "defaultScopes": {
+          "type": "array",
+          "description": "Oauth2 scopes of every flow. Overridden by scope definitions in specific flows",
+          "items": {}
+        }
+      },
+      "required": [
+        "type",
+        "flows",
+        "defaultScopes"
       ]
     }
   },

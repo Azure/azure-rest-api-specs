@@ -9,28 +9,46 @@
  */
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "./routes.tsp";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
 using Azure.Core;
 
 /**
  * Device Update for IoT Hub is an Azure service that enables customers to publish updates for their IoT devices to the cloud, and then deploy that update to their devices (approve updates to groups of devices managed and provisioned in IoT Hub). It leverages the proven security and reliability of the Windows Update platform, optimized for IoT devices. It works globally and knows when and how to update devices, enabling customers to focus on their business goals and let Device Update for IoT Hub handle the updates.
  */
-@useAuth(AadOauth2Auth<["https://api.adu.microsoft.com/.default"]>)
+@useAuth(azure_auth)
 @service(#{ title: "DeviceUpdateClient" })
 @versioned(Versions)
 @server(
   "https://{endpoint}",
   "Device Update for IoT Hub is an Azure service that enables customers to publish updates for their IoT devices to the cloud, and then deploy that update to their devices (approve updates to groups of devices managed and provisioned in IoT Hub). It leverages the proven security and reliability of the Windows Update platform, optimized for IoT devices. It works globally and knows when and how to update devices, enabling customers to focus on their business goals and let Device Update for IoT Hub handle the updates.",
   {
+    /**
+     * The Device Update for IoT Hub account endpoint (hostname only, no protocol).
+     */
+    @extension("x-ms-parameter-grouping", #{ name: "account-options" })
     endpoint: url,
   }
 )
 namespace DeviceUpdateClient;
+
+/**
+ * Azure Active Directory OAuth2 Flow
+ */
+@doc("Azure Active Directory OAuth2 Flow")
+model azure_auth
+  is OAuth2Auth<[
+    {
+      type: OAuth2FlowType.implicit,
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
+      scopes: ["https://api.adu.microsoft.com/.default"],
+    }
+  ]>;
 
 /**
  * The available API versions.

@@ -26,12 +26,15 @@ interface DeviceUpdateOperationGroup {
   @route("/deviceUpdate/{instanceId}/updates")
   @get
   @list
+  @extension("x-ms-odata", "#/definitions/UpdateFilter")
   listUpdates is ServiceOperation<
     {
       /**
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -67,6 +70,8 @@ interface DeviceUpdateOperationGroup {
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -95,6 +100,8 @@ interface DeviceUpdateOperationGroup {
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -120,6 +127,7 @@ interface DeviceUpdateOperationGroup {
        * the ETag on the server does not match this value.
        */
       @header("If-None-Match")
+      @extension("x-ms-parameter-grouping", #{ name: "access-condition" })
       ifNoneMatch?: string;
     },
     Update
@@ -143,6 +151,8 @@ interface DeviceUpdateOperationGroup {
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -183,6 +193,8 @@ interface DeviceUpdateOperationGroup {
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
     },
     StringsList
@@ -201,6 +213,8 @@ interface DeviceUpdateOperationGroup {
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -219,12 +233,15 @@ interface DeviceUpdateOperationGroup {
   @route("/deviceUpdate/{instanceId}/updates/providers/{provider}/names/{name}/versions")
   @get
   @list
+  @extension("x-ms-odata", "#/definitions/UpdateFilter")
   listVersions is ServiceOperation<
     {
       /**
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -261,6 +278,8 @@ interface DeviceUpdateOperationGroup {
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -296,6 +315,8 @@ interface DeviceUpdateOperationGroup {
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -327,6 +348,7 @@ interface DeviceUpdateOperationGroup {
        * the ETag on the server does not match this value.
        */
       @header("If-None-Match")
+      @extension("x-ms-parameter-grouping", #{ name: "access-condition" })
       ifNoneMatch?: string;
     },
     UpdateFile
@@ -341,12 +363,15 @@ interface DeviceUpdateOperationGroup {
   @route("/deviceUpdate/{instanceId}/updates/operations")
   @get
   @list
+  @extension("x-ms-odata", "#/definitions/OperationFilter")
   listOperationStatuses is ServiceOperation<
     {
       /**
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -379,6 +404,8 @@ interface DeviceUpdateOperationGroup {
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -394,6 +421,7 @@ interface DeviceUpdateOperationGroup {
        * the ETag on the server does not match this value.
        */
       @header("If-None-Match")
+      @extension("x-ms-parameter-grouping", #{ name: "access-condition" })
       ifNoneMatch?: string;
     },
     {
@@ -420,12 +448,15 @@ interface DeviceManagementOperationGroup {
   @route("/deviceUpdate/{instanceId}/management/deviceClasses")
   @get
   @list
+  @extension("x-ms-odata", "#/definitions/DeviceClassFilter")
   listDeviceClasses is ServiceOperation<
     {
       /**
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -449,6 +480,8 @@ interface DeviceManagementOperationGroup {
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -472,6 +505,8 @@ interface DeviceManagementOperationGroup {
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -515,6 +550,8 @@ interface DeviceManagementOperationGroup {
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -539,6 +576,8 @@ interface DeviceManagementOperationGroup {
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -557,12 +596,15 @@ interface DeviceManagementOperationGroup {
   @route("/deviceUpdate/{instanceId}/management/devices")
   @get
   @list
+  @extension("x-ms-odata", "#/definitions/DeviceFilter")
   listDevices is ServiceOperation<
     {
       /**
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -594,6 +636,8 @@ interface DeviceManagementOperationGroup {
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -627,6 +671,8 @@ interface DeviceManagementOperationGroup {
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -651,6 +697,8 @@ interface DeviceManagementOperationGroup {
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -681,6 +729,8 @@ interface DeviceManagementOperationGroup {
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
     },
     UpdateCompliance
@@ -694,12 +744,15 @@ interface DeviceManagementOperationGroup {
   @route("/deviceUpdate/{instanceId}/management/groups")
   @get
   @list
+  @extension("x-ms-odata", "#/definitions/GroupOrderBy")
   listGroups is ServiceOperation<
     {
       /**
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -725,6 +778,8 @@ interface DeviceManagementOperationGroup {
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -754,6 +809,8 @@ interface DeviceManagementOperationGroup {
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -779,6 +836,8 @@ interface DeviceManagementOperationGroup {
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -804,6 +863,8 @@ interface DeviceManagementOperationGroup {
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -822,12 +883,15 @@ interface DeviceManagementOperationGroup {
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deployments")
   @get
   @list
+  @extension("x-ms-odata", "#/definitions/DeploymentOrderBy")
   listDeploymentsForGroup is ServiceOperation<
     {
       /**
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -857,6 +921,8 @@ interface DeviceManagementOperationGroup {
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -886,6 +952,8 @@ interface DeviceManagementOperationGroup {
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -922,6 +990,8 @@ interface DeviceManagementOperationGroup {
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -948,12 +1018,15 @@ interface DeviceManagementOperationGroup {
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups")
   @get
   @list
+  @extension("x-ms-odata", "#/definitions/DeviceClassSubgroupFilter")
   listDeviceClassSubgroupsForGroup is ServiceOperation<
     {
       /**
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -987,6 +1060,8 @@ interface DeviceManagementOperationGroup {
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -1023,6 +1098,8 @@ interface DeviceManagementOperationGroup {
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -1054,6 +1131,8 @@ interface DeviceManagementOperationGroup {
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -1084,6 +1163,8 @@ interface DeviceManagementOperationGroup {
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -1108,12 +1189,15 @@ interface DeviceManagementOperationGroup {
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments")
   @get
   @list
+  @extension("x-ms-odata", "#/definitions/DeploymentOrderBy")
   listDeploymentsForDeviceClassSubgroup is ServiceOperation<
     {
       /**
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -1149,6 +1233,8 @@ interface DeviceManagementOperationGroup {
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -1184,6 +1270,8 @@ interface DeviceManagementOperationGroup {
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -1219,6 +1307,8 @@ interface DeviceManagementOperationGroup {
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -1255,6 +1345,8 @@ interface DeviceManagementOperationGroup {
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -1286,12 +1378,15 @@ interface DeviceManagementOperationGroup {
   @route("/deviceUpdate/{instanceId}/management/groups/{groupId}/deviceClassSubgroups/{deviceClassId}/deployments/{deploymentId}/devicestates")
   @get
   @list
+  @extension("x-ms-odata", "#/definitions/DeploymentDeviceStatesFilter")
   listDeviceStatesForDeviceClassSubgroupDeployment is ServiceOperation<
     {
       /**
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -1334,6 +1429,8 @@ interface DeviceManagementOperationGroup {
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -1349,6 +1446,7 @@ interface DeviceManagementOperationGroup {
        * the ETag on the server does not match this value.
        */
       @header("If-None-Match")
+      @extension("x-ms-parameter-grouping", #{ name: "access-condition" })
       ifNoneMatch?: string;
     },
     {
@@ -1370,12 +1468,15 @@ interface DeviceManagementOperationGroup {
   @route("/deviceUpdate/{instanceId}/management/operations")
   @get
   @list
+  @extension("x-ms-odata", "#/definitions/OperationFilter")
   listOperationStatuses is ServiceOperation<
     {
       /**
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -1408,6 +1509,8 @@ interface DeviceManagementOperationGroup {
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -1443,6 +1546,8 @@ interface DeviceManagementOperationGroup {
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -1470,6 +1575,8 @@ interface DeviceManagementOperationGroup {
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
     },
     LogCollectionList
@@ -1487,6 +1594,8 @@ interface DeviceManagementOperationGroup {
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -1508,12 +1617,15 @@ interface DeviceManagementOperationGroup {
   @route("/deviceUpdate/{instanceId}/management/deviceDiagnostics/deviceHealth")
   @get
   @list
+  @extension("x-ms-odata", "#/definitions/DeviceHealthFilter")
   listHealthOfDevices is ServiceOperation<
     {
       /**
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -1541,6 +1653,8 @@ interface DeploymentManagementOperationGroup {
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
@@ -1570,6 +1684,8 @@ interface DeploymentManagementOperationGroup {
        * The Device Update for IoT Hub account instance identifier.
        */
       @path
+      @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+      @extension("x-ms-skip-url-encoding", true)
       instanceId: string;
 
       /**
