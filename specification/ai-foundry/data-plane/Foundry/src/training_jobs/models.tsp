@@ -1035,8 +1035,7 @@ model Job {
   @visibility(Lifecycle.Read)
   type?: string;
 
-  @doc("Properties of the job.")
-  properties: JobProperties;
+  ...CommandJob;
 
   @doc("Metadata pertaining to creation and last modification of the resource.")
   @visibility(Lifecycle.Read)
@@ -1048,8 +1047,7 @@ model JobCreate {
   @doc("The name of the training job. This is case-sensitive.")
   name: string;
 
-  @doc("Properties of the job.")
-  properties: JobProperties;
+  ...CommandJob;
 }
 
 @doc("Request body for creating an interactive Ray training job. This SDK convenience model uses the same /training_jobs create operation as other command jobs.")
@@ -1057,8 +1055,7 @@ model InteractiveRayJob {
   @doc("The name of the interactive Ray job. This is case-sensitive.")
   name: string;
 
-  @doc("Properties of the interactive Ray job.")
-  properties: InteractiveRayJobProperties;
+  ...InteractiveRayJobProperties;
 }
 
 @doc("Response returned when a job delete operation is accepted asynchronously.")

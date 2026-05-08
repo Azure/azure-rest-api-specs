@@ -6,7 +6,22 @@
     "Operation-Id": "create-my-training-job-01",
     "Foundry-Features": "TrainingJobs=V1Preview",
     "job": {
-      "properties": {
+      "name": "my_training_job_01",
+      "job_type": "command",
+      "training": {
+        "algorithm": "sft",
+        "model": "azureai://registries/azureml/models/qwen-base/versions/1",
+        "dataset": {
+          "train": "azureai://accounts/my-account/projects/my-project/data/train-dataset/versions/1"
+        }
+      },
+      "compute_id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.CognitiveServices/accounts/my-account/computes/my-cluster"
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "my_training_job_01",
         "job_type": "command",
         "training": {
           "algorithm": "sft",
@@ -15,25 +30,7 @@
             "train": "azureai://accounts/my-account/projects/my-project/data/train-dataset/versions/1"
           }
         },
-        "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.CognitiveServices/accounts/my-account/computes/my-cluster"
-      }
-    }
-  },
-  "responses": {
-    "201": {
-      "body": {
-        "name": "my_training_job_01",
-        "properties": {
-          "job_type": "command",
-          "training": {
-            "algorithm": "sft",
-            "model": "azureai://registries/azureml/models/qwen-base/versions/1",
-            "dataset": {
-              "train": "azureai://accounts/my-account/projects/my-project/data/train-dataset/versions/1"
-            }
-          },
-          "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.CognitiveServices/accounts/my-account/computes/my-cluster"
-        }
+        "compute_id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.CognitiveServices/accounts/my-account/computes/my-cluster"
       }
     }
   }

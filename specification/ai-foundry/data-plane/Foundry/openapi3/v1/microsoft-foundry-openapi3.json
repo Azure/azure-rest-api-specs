@@ -17043,141 +17043,6 @@
         ],
         "description": "Code-based evaluator definition using python code"
       },
-      "CommandJob": {
-        "type": "object",
-        "required": [
-          "job_type",
-          "compute_id"
-        ],
-        "properties": {
-          "job_type": {
-            "type": "string",
-            "enum": [
-              "command"
-            ],
-            "description": "Job type."
-          },
-          "command": {
-            "type": "string",
-            "description": "The command to execute on startup of the job. Required when training is not specified, and must be omitted when training is specified."
-          },
-          "environment_image_reference": {
-            "type": "string",
-            "description": "ACR path or Azure ML environment reference. Required when training is not specified."
-          },
-          "training": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TrainingConfiguration"
-              }
-            ],
-            "description": "Declarative training recipe. When specified, the service compiles the recipe into the command and environment used for execution."
-          },
-          "display_name": {
-            "type": "string",
-            "description": "Display name of job."
-          },
-          "description": {
-            "type": "string",
-            "description": "The asset description text."
-          },
-          "tags": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "Tag dictionary. Tags can be added, removed, and updated."
-          },
-          "properties": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "The asset property dictionary."
-          },
-          "code_id": {
-            "type": "string",
-            "description": "Code asset reference."
-          },
-          "compute_id": {
-            "type": "string",
-            "description": "Compute resource ID."
-          },
-          "inputs": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/Input"
-            },
-            "description": "Mapping of input data bindings used in the job."
-          },
-          "outputs": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/Output"
-            },
-            "description": "Mapping of output data bindings used in the job."
-          },
-          "environment_variables": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "Environment variables included in the job."
-          },
-          "resources": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/JobResourceConfiguration"
-              }
-            ],
-            "description": "Compute Resource configuration for the job."
-          },
-          "gpu_count": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of GPUs requested by the training job."
-          },
-          "distribution": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DistributionConfiguration"
-              }
-            ],
-            "description": "Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, or null."
-          },
-          "limits": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/CommandJobLimits"
-              }
-            ],
-            "description": "Command Job limit."
-          },
-          "queue_settings": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/QueueSettings"
-              }
-            ],
-            "description": "Queue settings for the job."
-          },
-          "user_assigned_identity_id": {
-            "type": "string",
-            "description": "user-assigned managed identity"
-          },
-          "status": {
-            "type": "string",
-            "description": "Status of the job.",
-            "readOnly": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/JobProperties"
-          }
-        ],
-        "description": "Properties of a Command Job."
-      },
       "CommandJobLimits": {
         "type": "object",
         "required": [
@@ -21032,7 +20897,8 @@
         "type": "object",
         "required": [
           "name",
-          "properties"
+          "job_type",
+          "compute_id"
         ],
         "properties": {
           "name": {
@@ -21050,13 +20916,125 @@
             "description": "The resource type.",
             "readOnly": true
           },
-          "properties": {
+          "job_type": {
+            "type": "string",
+            "enum": [
+              "command"
+            ],
+            "description": "Job type."
+          },
+          "command": {
+            "type": "string",
+            "description": "The command to execute on startup of the job. Required when training is not specified, and must be omitted when training is specified."
+          },
+          "environment_image_reference": {
+            "type": "string",
+            "description": "ACR path or Azure ML environment reference. Required when training is not specified."
+          },
+          "training": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/JobProperties"
+                "$ref": "#/components/schemas/TrainingConfiguration"
               }
             ],
-            "description": "Properties of the job."
+            "description": "Declarative training recipe. When specified, the service compiles the recipe into the command and environment used for execution."
+          },
+          "display_name": {
+            "type": "string",
+            "description": "Display name of job."
+          },
+          "description": {
+            "type": "string",
+            "description": "The asset description text."
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Tag dictionary. Tags can be added, removed, and updated."
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "The asset property dictionary."
+          },
+          "code_id": {
+            "type": "string",
+            "description": "Code asset reference."
+          },
+          "compute_id": {
+            "type": "string",
+            "description": "Compute resource ID."
+          },
+          "inputs": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Input"
+            },
+            "description": "Mapping of input data bindings used in the job."
+          },
+          "outputs": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Output"
+            },
+            "description": "Mapping of output data bindings used in the job."
+          },
+          "environment_variables": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Environment variables included in the job."
+          },
+          "resources": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/JobResourceConfiguration"
+              }
+            ],
+            "description": "Compute Resource configuration for the job."
+          },
+          "gpu_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of GPUs requested by the training job."
+          },
+          "distribution": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DistributionConfiguration"
+              }
+            ],
+            "description": "Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, or null."
+          },
+          "limits": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CommandJobLimits"
+              }
+            ],
+            "description": "Command Job limit."
+          },
+          "queue_settings": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/QueueSettings"
+              }
+            ],
+            "description": "Queue settings for the job."
+          },
+          "user_assigned_identity_id": {
+            "type": "string",
+            "description": "user-assigned managed identity"
+          },
+          "status": {
+            "type": "string",
+            "description": "Status of the job.",
+            "readOnly": true
           },
           "system_data": {
             "allOf": [
@@ -21387,20 +21365,133 @@
         "type": "object",
         "required": [
           "name",
-          "properties"
+          "job_type",
+          "compute_id"
         ],
         "properties": {
           "name": {
             "type": "string",
             "description": "The name of the training job. This is case-sensitive."
           },
-          "properties": {
+          "job_type": {
+            "type": "string",
+            "enum": [
+              "command"
+            ],
+            "description": "Job type."
+          },
+          "command": {
+            "type": "string",
+            "description": "The command to execute on startup of the job. Required when training is not specified, and must be omitted when training is specified."
+          },
+          "environment_image_reference": {
+            "type": "string",
+            "description": "ACR path or Azure ML environment reference. Required when training is not specified."
+          },
+          "training": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/JobProperties"
+                "$ref": "#/components/schemas/TrainingConfiguration"
               }
             ],
-            "description": "Properties of the job."
+            "description": "Declarative training recipe. When specified, the service compiles the recipe into the command and environment used for execution."
+          },
+          "display_name": {
+            "type": "string",
+            "description": "Display name of job."
+          },
+          "description": {
+            "type": "string",
+            "description": "The asset description text."
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Tag dictionary. Tags can be added, removed, and updated."
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "The asset property dictionary."
+          },
+          "code_id": {
+            "type": "string",
+            "description": "Code asset reference."
+          },
+          "compute_id": {
+            "type": "string",
+            "description": "Compute resource ID."
+          },
+          "inputs": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Input"
+            },
+            "description": "Mapping of input data bindings used in the job."
+          },
+          "outputs": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Output"
+            },
+            "description": "Mapping of output data bindings used in the job."
+          },
+          "environment_variables": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Environment variables included in the job."
+          },
+          "resources": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/JobResourceConfiguration"
+              }
+            ],
+            "description": "Compute Resource configuration for the job."
+          },
+          "gpu_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of GPUs requested by the training job."
+          },
+          "distribution": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DistributionConfiguration"
+              }
+            ],
+            "description": "Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, or null."
+          },
+          "limits": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CommandJobLimits"
+              }
+            ],
+            "description": "Command Job limit."
+          },
+          "queue_settings": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/QueueSettings"
+              }
+            ],
+            "description": "Queue settings for the job."
+          },
+          "user_assigned_identity_id": {
+            "type": "string",
+            "description": "user-assigned managed identity"
+          },
+          "status": {
+            "type": "string",
+            "description": "Status of the job.",
+            "readOnly": true
           }
         },
         "description": "Request body for creating a training job."
@@ -21728,25 +21819,6 @@
           }
         },
         "description": "Named output produced by a job."
-      },
-      "JobProperties": {
-        "type": "object",
-        "required": [
-          "job_type"
-        ],
-        "properties": {
-          "job_type": {
-            "type": "string",
-            "description": "Job type."
-          }
-        },
-        "discriminator": {
-          "propertyName": "job_type",
-          "mapping": {
-            "command": "#/components/schemas/CommandJob"
-          }
-        },
-        "description": "Base properties of a Job."
       },
       "JobResourceConfiguration": {
         "type": "object",
