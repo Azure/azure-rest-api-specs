@@ -15370,7 +15370,7 @@
     },
     "BlobHierarchyList": {
       "type": "object",
-      "description": "Represents a list of blobs.",
+      "description": "Represents an array of blobs.",
       "properties": {
         "Blob": {
           "type": "array",
@@ -16369,7 +16369,7 @@
     },
     "FilterBlobsIncludeItem": {
       "type": "string",
-      "description": "The filter blobs includes.",
+      "description": "Specifies what type of blobs should be returned as part of the filter operation.",
       "enum": [
         "none",
         "versions"
@@ -16386,7 +16386,7 @@
           {
             "name": "Versions",
             "value": "versions",
-            "description": "The filter includes n versions."
+            "description": "The filter includes versions."
           }
         ]
       }
@@ -16434,33 +16434,6 @@
         "name": "EnumerationResults"
       }
     },
-<<<<<<< HEAD
-=======
-    "FilterBlobsIncludeItem": {
-      "type": "string",
-      "description": "Specifies what type of blobs should be returned as part of the filter operation.",
-      "enum": [
-        "none",
-        "versions"
-      ],
-      "x-ms-enum": {
-        "name": "FilterBlobsIncludeItem",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "None",
-            "value": "none",
-            "description": "The filter includes no versions."
-          },
-          {
-            "name": "Versions",
-            "value": "versions",
-            "description": "The filter includes versions."
-          }
-        ]
-      }
-    },
->>>>>>> main
     "GeoReplication": {
       "type": "object",
       "description": "Geo-replication information for the secondary storage service.",
@@ -16672,11 +16645,7 @@
     },
     "ListBlobsHierarchicalResponse": {
       "type": "object",
-<<<<<<< HEAD
-      "description": "An enumeration of blobs.",
-=======
       "description": "The result of the List Blobs Hierarchical API.",
->>>>>>> main
       "properties": {
         "ServiceEndpoint": {
           "type": "string",
@@ -16716,15 +16685,9 @@
           "x-ms-client-name": "maxResults"
         },
         "Blobs": {
-<<<<<<< HEAD
           "$ref": "#/definitions/BlobHierarchyList",
           "description": "The list of hierarchical blobs.",
           "x-ms-client-name": "hierarchicalList"
-=======
-          "$ref": "#/definitions/BlobHierarchyListSegment",
-          "description": "The list of blobs.",
-          "x-ms-client-name": "segment"
->>>>>>> main
         },
         "NextMarker": {
           "type": "string",
@@ -16907,11 +16870,7 @@
     },
     "ListContainersResponse": {
       "type": "object",
-<<<<<<< HEAD
-      "description": "The list containers response.",
-=======
       "description": "The result of the List Containers API.",
->>>>>>> main
       "properties": {
         "ServiceEndpoint": {
           "type": "string",
