@@ -5912,28 +5912,6 @@
         ]
       }
     },
-    "ServerEndpointSyncSessionWarningType": {
-      "type": "string",
-      "description": "Warning types for sync sessions.",
-      "enum": [
-        "NoWarning",
-        "BlockedByLargeFile"
-      ],
-      "x-ms-enum": {
-        "name": "ServerEndpointSyncSessionWarningType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NoWarning",
-            "value": "NoWarning"
-          },
-          {
-            "name": "BlockedByLargeFile",
-            "value": "BlockedByLargeFile"
-          }
-        ]
-      }
-    },
     "ServerEndpointSyncSessionStatus": {
       "type": "object",
       "description": "Sync Session status object.",
@@ -5993,6 +5971,30 @@
           "description": "Sync mode",
           "readOnly": true
         }
+      }
+    },
+    "ServerEndpointSyncSessionWarningType": {
+      "type": "string",
+      "description": "Warning types for sync sessions.",
+      "enum": [
+        "NoWarning",
+        "BlockedByLargeFile"
+      ],
+      "x-ms-enum": {
+        "name": "ServerEndpointSyncSessionWarningType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NoWarning",
+            "value": "NoWarning",
+            "description": "No warning"
+          },
+          {
+            "name": "BlockedByLargeFile",
+            "value": "BlockedByLargeFile",
+            "description": "Sync is blocked by a large file"
+          }
+        ]
       }
     },
     "ServerEndpointSyncStatus": {
