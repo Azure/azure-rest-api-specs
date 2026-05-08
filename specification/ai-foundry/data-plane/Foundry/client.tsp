@@ -273,7 +273,9 @@ using Azure.AI.Projects;
 @@clientName(Skills.updateSkill, "update");
 @@clientName(Skills.deleteSkill, "delete");
 
+@@clientName(SkillObject, "SkillDetails", "python");
 @@clientName(DeleteSkillResponse, "DeleteSkillResult", "python");
+@@clientName(DownloadSkillResponse, "DownloadSkillResult", "python"); 
 
 // --------------------------------------------------------------------------------
 // Connections sub‐client
