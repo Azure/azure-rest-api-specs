@@ -69,10 +69,19 @@ interface TrainingJobs {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
   @doc("Get a training job by name.")
   @get
-  get is Azure.Core.Foundations.ResourceOperation<
-    Job,
-    TrainingJobGetQueryParams,
-    Azure.Core.Foundations.ResourceOkResponse<Job>
+  @route("/training_jobs/{job_name}")
+  get is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.training_jobs_v1_preview,
+    {
+      @doc("The training job name.")
+      @path
+      job_name: string;
+
+      @doc("Additional related data to include in the response. Use latest_attempt to inline the latest execution attempt.")
+      @query
+      include?: TrainingJobInclude;
+    },
+    OkResponse<Job>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job services are projected from run history service instances."
@@ -113,10 +122,13 @@ interface TrainingJobs {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Delete LRO returns 202 with Location header, 204 with no body"
   @doc("Delete a training job by name. Returns 202 Accepted with Location and Operation-Location headers to poll for completion, or 204 if the job does not exist.")
   @delete
-  beginDelete is Azure.Core.Foundations.ResourceOperation<
-    Job,
+  @route("/training_jobs/{job_name}")
+  beginDelete is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.training_jobs_v1_preview,
     {
-      ...TrainingJobsPreviewHeader;
+      @doc("The training job name.")
+      @path
+      job_name: string;
     },
     JobDeleteAcceptedResponse | Http.NoContentResponse
   >;
@@ -125,12 +137,13 @@ interface TrainingJobs {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Cancel LRO returns 200 or 202 with Location header, no body"
   @doc("Cancel a training job by name. Returns 200 if cancelled immediately, or 202 Accepted with Location and Operation-Location headers to poll for completion.")
   @post
-  @Rest.action("cancel")
-  @actionSeparator(":")
-  beginCancel is Azure.Core.Foundations.ResourceOperation<
-    Job,
+  @route("/training_jobs/{job_name}:cancel")
+  beginCancel is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.training_jobs_v1_preview,
     {
-      ...TrainingJobsPreviewHeader;
+      @doc("The training job name.")
+      @path
+      job_name: string;
     },
     Http.OkResponse | JobCancelAcceptedResponse
   >;

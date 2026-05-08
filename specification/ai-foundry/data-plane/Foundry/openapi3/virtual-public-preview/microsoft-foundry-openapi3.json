@@ -14804,6 +14804,162 @@
         ]
       }
     },
+    "/training_jobs/{job_name}": {
+      "get": {
+        "operationId": "TrainingJobs_get",
+        "description": "Get a training job by name.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "TrainingJobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "job_name",
+            "in": "path",
+            "required": true,
+            "description": "The training job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "required": false,
+            "description": "Additional related data to include in the response. Use latest_attempt to inline the latest execution attempt.",
+            "schema": {
+              "$ref": "#/components/schemas/TrainingJobInclude"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Job"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "TrainingJobs"
+        ]
+      },
+      "delete": {
+        "operationId": "TrainingJobs_beginDelete",
+        "description": "Delete a training job by name. Returns 202 Accepted with Location and Operation-Location headers to poll for completion, or 204 if the job does not exist.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "TrainingJobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "job_name",
+            "in": "path",
+            "required": true,
+            "description": "The training job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Response returned when a job delete operation is accepted asynchronously.",
+            "headers": {
+              "Location": {
+                "required": true,
+                "description": "URL to poll for the final result of the delete operation.",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Operation-Location": {
+                "required": false,
+                "description": "URL to poll for the status of the delete operation.",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Retry-After": {
+                "required": false,
+                "description": "Suggested delay in seconds before polling.",
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "TrainingJobs"
+        ]
+      }
+    },
     "/training_jobs/{job_name}/attempts": {
       "get": {
         "operationId": "TrainingJobAttempts_listAttempts",
@@ -16857,184 +17013,12 @@
         ]
       }
     },
-    "/training_jobs/{name}": {
-      "get": {
-        "operationId": "TrainingJobs_get",
-        "description": "Get a training job by name.",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the training job. This is case-sensitive.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "TrainingJobs=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "include",
-            "in": "query",
-            "required": false,
-            "description": "Additional related data to include in the response. Use latest_attempt to inline the latest execution attempt.",
-            "schema": {
-              "$ref": "#/components/schemas/TrainingJobInclude"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Job"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": false,
-                "description": "String error code indicating what went wrong.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "TrainingJobs"
-        ]
-      },
-      "delete": {
-        "operationId": "TrainingJobs_beginDelete",
-        "description": "Delete a training job by name. Returns 202 Accepted with Location and Operation-Location headers to poll for completion, or 204 if the job does not exist.",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the training job. This is case-sensitive.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "TrainingJobs=V1Preview"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Response returned when a job delete operation is accepted asynchronously.",
-            "headers": {
-              "Location": {
-                "required": true,
-                "description": "URL to poll for the final result of the delete operation.",
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Operation-Location": {
-                "required": false,
-                "description": "URL to poll for the status of the delete operation.",
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Retry-After": {
-                "required": false,
-                "description": "Suggested delay in seconds before polling.",
-                "schema": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            }
-          },
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": false,
-                "description": "String error code indicating what went wrong.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "TrainingJobs"
-        ]
-      }
-    },
-    "/training_jobs/{name}:cancel": {
+    "/training_jobs/{job_name}:cancel": {
       "post": {
         "operationId": "TrainingJobs_beginCancel",
         "description": "Cancel a training job by name. Returns 200 if cancelled immediately, or 202 Accepted with Location and Operation-Location headers to poll for completion.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the training job. This is case-sensitive.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "Foundry-Features",
             "in": "header",
             "required": true,
@@ -17045,6 +17029,25 @@
                 "TrainingJobs=V1Preview"
               ]
             }
+          },
+          {
+            "name": "job_name",
+            "in": "path",
+            "required": true,
+            "description": "The training job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -17080,19 +17083,10 @@
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": false,
-                "description": "String error code indicating what went wrong.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
