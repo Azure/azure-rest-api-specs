@@ -858,6 +858,7 @@ model AgentCard {
 
   @doc("The set of skills that an agent can perform.")
   @maxItems(16)
+  @minItems(1)
   skills: AgentCardSkill[];
 }
 
