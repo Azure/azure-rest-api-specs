@@ -3039,7 +3039,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/FilterBlobResponse"
+              "$ref": "#/definitions/FilteredBlobResponse"
             },
             "headers": {
               "Date": {
@@ -11753,7 +11753,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/FilterBlobResponse"
+              "$ref": "#/definitions/FilteredBlobResponse"
             },
             "headers": {
               "Date": {
@@ -12132,7 +12132,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ListBlobsHierarchySegmentResponse"
+              "$ref": "#/definitions/ListBlobsHierarchicalResponse"
             },
             "headers": {
               "Date": {
@@ -15080,29 +15080,9 @@
         ]
       }
     },
-    "BlobFlatListSegment": {
+    "BlobHierarchyList": {
       "type": "object",
-      "description": "The blob flat list segment.",
-      "properties": {
-        "Blob": {
-          "type": "array",
-          "description": "The blob items.",
-          "items": {
-            "$ref": "#/definitions/BlobItem"
-          },
-          "xml": {
-            "wrapped": false
-          },
-          "x-ms-client-name": "blobItems"
-        }
-      },
-      "required": [
-        "Blob"
-      ]
-    },
-    "BlobHierarchyListSegment": {
-      "type": "object",
-      "description": "Represents a list of blobs.",
+      "description": "Represents an array of blobs.",
       "properties": {
         "Blob": {
           "type": "array",
@@ -16099,7 +16079,31 @@
         "name": "Blob"
       }
     },
-    "FilterBlobResponse": {
+    "FilterBlobsIncludeItem": {
+      "type": "string",
+      "description": "Specifies what type of blobs should be returned as part of the filter operation.",
+      "enum": [
+        "none",
+        "versions"
+      ],
+      "x-ms-enum": {
+        "name": "FilterBlobsIncludeItem",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "None",
+            "value": "none",
+            "description": "The filter includes no versions."
+          },
+          {
+            "name": "Versions",
+            "value": "versions",
+            "description": "The filter includes versions."
+          }
+        ]
+      }
+    },
+    "FilteredBlobResponse": {
       "type": "object",
       "description": "The result of the Find Blobs by Tags API.",
       "properties": {
@@ -16125,7 +16129,7 @@
           "xml": {
             "wrapped": true
           },
-          "x-ms-client-name": "blobs"
+          "x-ms-client-name": "blobItems"
         },
         "NextMarker": {
           "type": "string",
@@ -16140,30 +16144,6 @@
       ],
       "xml": {
         "name": "EnumerationResults"
-      }
-    },
-    "FilterBlobsIncludeItem": {
-      "type": "string",
-      "description": "Specifies what type of blobs should be returned as part of the filter operation.",
-      "enum": [
-        "none",
-        "versions"
-      ],
-      "x-ms-enum": {
-        "name": "FilterBlobsIncludeItem",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "None",
-            "value": "none",
-            "description": "The filter includes no versions."
-          },
-          {
-            "name": "Versions",
-            "value": "versions",
-            "description": "The filter includes versions."
-          }
-        ]
       }
     },
     "GeoReplication": {
@@ -16370,7 +16350,7 @@
         ]
       }
     },
-    "ListBlobsHierarchySegmentResponse": {
+    "ListBlobsHierarchicalResponse": {
       "type": "object",
       "description": "The result of the List Blobs Hierarchical API.",
       "properties": {
@@ -16412,9 +16392,9 @@
           "x-ms-client-name": "maxResults"
         },
         "Blobs": {
-          "$ref": "#/definitions/BlobHierarchyListSegment",
-          "description": "The list of blobs.",
-          "x-ms-client-name": "segment"
+          "$ref": "#/definitions/BlobHierarchyList",
+          "description": "The list of hierarchical blobs.",
+          "x-ms-client-name": "hierarchicalList"
         },
         "NextMarker": {
           "type": "string",

@@ -244,7 +244,7 @@ interface Service {
     {
       /** The filter blobs enumeration results. */
       @body
-      enumerationResults: FilterBlobResponse;
+      enumerationResults: FilteredBlobResponse;
     }
   >;
 }
@@ -490,7 +490,7 @@ interface Container {
     {
       /** The container filter blob enumeration results. */
       @body
-      enumerationResults: FilterBlobResponse;
+      enumerationResults: FilteredBlobResponse;
     }
   >;
 
@@ -651,7 +651,7 @@ interface Container {
     {
       /** The list of blobs in the container. */
       @body
-      enumerationResults: ListBlobsHierarchySegmentResponse;
+      enumerationResults: ListBlobsHierarchicalResponse;
     }
   >;
 
