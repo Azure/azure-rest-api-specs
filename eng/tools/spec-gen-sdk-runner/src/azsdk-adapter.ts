@@ -1,4 +1,3 @@
-import path from "node:path";
 import { EmitterCheckResult } from "./emitter-check.js";
 import { ExecutionReport, ExecutionReportPackage, ExecutionResult } from "./types.js";
 
@@ -74,21 +73,18 @@ export function parseAzsdkResponse<T>(output: string): T {
   return JSON.parse(jsonText) as T;
 }
 
-/**
- * Extracts the artifact path from an azsdk pkg pack response message.
- * The message format is: "Pack completed successfully. Artifact: /path/to/artifact"
- */
-function extractArtifactPath(packResponse: AzsdkPackResponse): string {
-  if (!packResponse.message) {
-    return "";
-  }
-  const artifactPrefix = "Artifact: ";
-  const artifactIndex = packResponse.message.indexOf(artifactPrefix);
-  if (artifactIndex === -1) {
-    return "";
-  }
-  return packResponse.message.slice(artifactIndex + artifactPrefix.length).trim();
-}
+// Deferred: extractArtifactPath will be re-enabled when stagedArtifactsFolder is published as pipeline artifact
+// function extractArtifactPath(packResponse: AzsdkPackResponse): string {
+//   if (!packResponse.message) {
+//     return "";
+//   }
+//   const artifactPrefix = "Artifact: ";
+//   const artifactIndex = packResponse.message.indexOf(artifactPrefix);
+//   if (artifactIndex === -1) {
+//     return "";
+//   }
+//   return packResponse.message.slice(artifactIndex + artifactPrefix.length).trim();
+// }
 
 /**
  * Builds an ExecutionReport from azsdk-cli generate/pack responses and
@@ -130,8 +126,8 @@ export function buildExecutionReport(
   }
 
   // Build package info from typespec-metadata and pack response
-  const artifactPath = packResponse ? extractArtifactPath(packResponse) : "";
-  const artifactDir = artifactPath ? path.dirname(artifactPath) : undefined;
+  //const artifactPath = packResponse ? extractArtifactPath(packResponse) : "";
+  //const artifactDir = artifactPath ? path.dirname(artifactPath) : undefined;
   const pkg: ExecutionReportPackage = {
     packageName: emitterCheck.packageName ?? generateResponse?.package_name ?? "",
     // Deferring apiview artifact processing until we create it for Rust by azsdk-cli
@@ -143,7 +139,9 @@ export function buildExecutionReport(
   return {
     packages: [pkg],
     executionResult,
-    stagedArtifactsFolder: artifactDir,
+    // deferred setting stagedArtifactsFolder so that pack output will not be published as pipeline artifact
+    // we might emit a markdown summary telling user exactly what to put into their app using https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html
+    stagedArtifactsFolder: undefined,
     generateFromTypeSpec: true,
   };
 }

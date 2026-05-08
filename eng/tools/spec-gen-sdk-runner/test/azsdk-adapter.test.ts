@@ -184,14 +184,14 @@ describe("buildExecutionReport", () => {
     expect(report.executionResult).toBe("succeeded");
   });
 
-  test("extracts artifact directory from pack response", () => {
+  test("stagedArtifactsFolder is undefined (deferred) even with pack response", () => {
     const report = buildExecutionReport(
       succeededGenerate,
       succeededPack,
       enabledEmitter,
       succeededBuild,
     );
-    expect(report.stagedArtifactsFolder).toBe("/tmp/artifacts");
+    expect(report.stagedArtifactsFolder).toBeUndefined();
   });
 
   test("stagedArtifactsFolder is undefined when no pack response", () => {
