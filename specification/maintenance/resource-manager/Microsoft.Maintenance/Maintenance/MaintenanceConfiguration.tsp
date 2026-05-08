@@ -135,7 +135,9 @@ interface MaintenanceConfigurationOperationGroup {
    */
   delete is MaintenanceConfigurationOperationGroupOps.DeleteSync<
     MaintenanceConfiguration,
-    Response = ArmResponse<MaintenanceConfiguration> | ArmDeletedNoContentResponse,
+    Response =
+      | ArmResponse<MaintenanceConfiguration>
+      | ArmDeletedNoContentResponse,
     ErrorType = MaintenanceError
   >;
 

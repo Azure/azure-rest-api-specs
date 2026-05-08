@@ -50,10 +50,12 @@ interface SolutionResources {
     Extension.ScopeParameter,
     SolutionResource,
     PatchModel = SolutionPatchRequestBody,
-    Response = ArmResourceUpdatedResponse<SolutionResource> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = SolutionResource>> & {
-      @bodyRoot
-      _: SolutionResource;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<SolutionResource>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = SolutionResource>> & {
+          @bodyRoot
+          _: SolutionResource;
+        }),
     OptionalRequestBody = true
   >;
 

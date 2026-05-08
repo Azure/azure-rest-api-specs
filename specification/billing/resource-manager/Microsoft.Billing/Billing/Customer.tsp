@@ -302,11 +302,13 @@ interface Customers {
     Customer,
     CustomerPolicy,
     CustomerPolicy,
-    Response = ArmResourceCreatedResponse<
-      CustomerPolicy,
-      ArmLroLocationHeader<FinalResult = CustomerPolicy> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmResponse<CustomerPolicy>
+    Response =
+      | ArmResourceCreatedResponse<
+          CustomerPolicy,
+          ArmLroLocationHeader<FinalResult = CustomerPolicy> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmResponse<CustomerPolicy>
   >;
 
   /**

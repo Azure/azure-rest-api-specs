@@ -54,19 +54,21 @@ interface AuthorizationProviderContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<AuthorizationProviderContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    }) | (ArmCreatedResponse<AuthorizationProviderContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    })
+    Response =
+      | (ArmResponse<AuthorizationProviderContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          etag: string;
+        })
+      | (ArmCreatedResponse<AuthorizationProviderContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          etag: string;
+        })
   >;
 
   /**

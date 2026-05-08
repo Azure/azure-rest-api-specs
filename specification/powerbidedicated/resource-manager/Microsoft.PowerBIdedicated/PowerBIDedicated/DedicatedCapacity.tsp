@@ -54,11 +54,13 @@ interface Capacities {
   update is ArmCustomPatchAsync<
     DedicatedCapacity,
     PatchModel = DedicatedCapacityUpdateParameters,
-    Response = ArmResponse<DedicatedCapacity> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = DedicatedCapacity> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: DedicatedCapacity;
-    }),
+    Response =
+      | ArmResponse<DedicatedCapacity>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = DedicatedCapacity> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: DedicatedCapacity;
+        }),
     Error = ErrorResponse
   >;
 
@@ -68,7 +70,10 @@ interface Capacities {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     DedicatedCapacity,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = ErrorResponse
   >;
 

@@ -52,11 +52,14 @@ interface DnsForwardingRulesets {
       @header
       ifNoneMatch?: string;
     },
-    Response = ArmResourceUpdatedResponse<DnsForwardingRuleset> | ArmResourceCreatedResponse<
-      DnsForwardingRuleset,
-      ArmLroLocationHeader<FinalResult = DnsForwardingRuleset> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse,
+    Response =
+      | ArmResourceUpdatedResponse<DnsForwardingRuleset>
+      | ArmResourceCreatedResponse<
+          DnsForwardingRuleset,
+          ArmLroLocationHeader<FinalResult = DnsForwardingRuleset> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse,
     Error = CloudError
   >;
 
@@ -90,7 +93,10 @@ interface DnsForwardingRulesets {
       @header
       ifMatch?: string;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 

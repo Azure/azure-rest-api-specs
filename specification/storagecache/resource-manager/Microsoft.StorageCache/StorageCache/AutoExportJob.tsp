@@ -70,8 +70,10 @@ interface AutoExportJobs {
   @tag("autoExportJobs")
   delete is ArmResourceDeleteWithoutOkAsync<
     AutoExportJob,
-    Response = ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<FinalResult = void> &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse,
     Error = ErrorResponse
   >;
 

@@ -134,11 +134,13 @@ interface FluxConfigurations {
   update is FluxConfigurationOperationGroupOps.CustomPatchAsync<
     FluxConfiguration,
     PatchModel = FluxConfigurationPatch,
-    Response = ArmResponse<FluxConfiguration> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = FluxConfiguration> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: FluxConfiguration;
-    })
+    Response =
+      | ArmResponse<FluxConfiguration>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = FluxConfiguration> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: FluxConfiguration;
+        })
   >;
 
   /**
@@ -157,8 +159,11 @@ interface FluxConfigurations {
       @query("forceDelete")
       forceDelete?: boolean;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**

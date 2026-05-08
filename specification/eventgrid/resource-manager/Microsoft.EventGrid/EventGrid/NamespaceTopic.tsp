@@ -49,11 +49,13 @@ interface NamespaceTopics {
   update is ArmCustomPatchAsync<
     NamespaceTopic,
     PatchModel = NamespaceTopicUpdateParameters,
-    Response = ArmResponse<NamespaceTopic> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = NamespaceTopic> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: NamespaceTopic;
-    })
+    Response =
+      | ArmResponse<NamespaceTopic>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = NamespaceTopic> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: NamespaceTopic;
+        })
   >;
 
   /**
@@ -63,7 +65,10 @@ interface NamespaceTopics {
   @summary("Delete a namespace topic.")
   delete is ArmResourceDeleteWithoutOkAsync<
     NamespaceTopic,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

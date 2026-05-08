@@ -77,11 +77,13 @@ interface Vaults {
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     Vault,
     Request = VaultCreateOrUpdateParameters,
-    Response = Vault | ArmResourceCreatedResponse<
-      Vault,
-      LroHeaders = ArmLroLocationHeader<FinalResult = Vault> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >,
+    Response =
+      | Vault
+      | ArmResourceCreatedResponse<
+          Vault,
+          LroHeaders = ArmLroLocationHeader<FinalResult = Vault> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >,
     Error = CloudError
   >;
 
@@ -139,7 +141,9 @@ interface Vaults {
   updateAccessPolicy is VaultsOps.ActionSync<
     Vault,
     Request = VaultAccessPolicyParameters,
-    Response = ArmResponse<VaultAccessPolicyParameters> | ArmResourceCreatedSyncResponse<VaultAccessPolicyParameters>,
+    Response =
+      | ArmResponse<VaultAccessPolicyParameters>
+      | ArmResourceCreatedSyncResponse<VaultAccessPolicyParameters>,
     OverrideErrorType = CloudError
   >;
 

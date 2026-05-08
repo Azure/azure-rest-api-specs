@@ -100,16 +100,18 @@ interface InferenceGroups {
   @summary("Create or update InferenceGroup (asynchronous).")
   createOrUpdate is InferenceGroupOps.CreateOrUpdateAsync<
     InferenceGroup,
-    Response = ArmResourceUpdatedResponse<InferenceGroup> | (ArmResourceCreatedResponse<
-      InferenceGroup,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = InferenceGroup>
-    > & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<InferenceGroup>
+      | (ArmResourceCreatedResponse<
+          InferenceGroup,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = InferenceGroup>
+        > & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
   >;
 
   /**
@@ -120,14 +122,16 @@ interface InferenceGroups {
   update is InferenceGroupOps.CustomPatchAsync<
     InferenceGroup,
     PatchModel = PartialMinimalTrackedResourceWithSku,
-    Response = ArmResourceUpdatedResponse<InferenceGroup> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = InferenceGroup>> &
-      Azure.Core.Foundations.RetryAfterHeader & {
-        /**
-         * Timeout for the client to use when polling the asynchronous operation.
-         */
-        @header("x-ms-async-operation-timeout")
-        timeout: duration;
-      })
+    Response =
+      | ArmResourceUpdatedResponse<InferenceGroup>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = InferenceGroup>> &
+          Azure.Core.Foundations.RetryAfterHeader & {
+            /**
+             * Timeout for the client to use when polling the asynchronous operation.
+             */
+            @header("x-ms-async-operation-timeout")
+            timeout: duration;
+          })
   >;
 
   /**
@@ -137,13 +141,16 @@ interface InferenceGroups {
   @summary("Delete InferenceGroup (asynchronous).")
   delete is InferenceGroupOps.DeleteWithoutOkAsync<
     InferenceGroup,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**

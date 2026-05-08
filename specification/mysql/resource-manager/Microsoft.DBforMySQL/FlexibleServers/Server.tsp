@@ -52,11 +52,14 @@ interface Servers {
   @Azure.Core.useFinalStateVia("original-uri")
   create is ArmResourceCreateOrReplaceAsync<
     Server,
-    Response = ArmResourceUpdatedResponse<Server> | ArmResourceCreatedResponse<
-      Server,
-      ArmLroLocationHeader<FinalResult = Server> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<Server>
+      | ArmResourceCreatedResponse<
+          Server,
+          ArmLroLocationHeader<FinalResult = Server> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -73,8 +76,11 @@ interface Servers {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Server,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -99,8 +105,10 @@ interface Servers {
   failover is ArmResourceActionAsyncBase<
     Server,
     void,
-    OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader>,
+
+      | OkResponse
+      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+          ArmLroLocationHeader>,
     Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
   >;
 
@@ -119,8 +127,10 @@ interface Servers {
   restart is ArmResourceActionAsyncBase<
     Server,
     ServerRestartParameter,
-    OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader>,
+
+      | OkResponse
+      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+          ArmLroLocationHeader>,
     Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
   >;
 
@@ -130,8 +140,10 @@ interface Servers {
   start is ArmResourceActionAsyncBase<
     Server,
     void,
-    OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader>,
+
+      | OkResponse
+      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+          ArmLroLocationHeader>,
     Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
   >;
 
@@ -141,8 +153,10 @@ interface Servers {
   stop is ArmResourceActionAsyncBase<
     Server,
     void,
-    OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader>,
+
+      | OkResponse
+      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+          ArmLroLocationHeader>,
     Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
   >;
 
@@ -153,8 +167,10 @@ interface Servers {
   resetGtid is ArmResourceActionAsyncBase<
     Server,
     ServerGtidSetParameter,
-    OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader>,
+
+      | OkResponse
+      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+          ArmLroLocationHeader>,
     Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
   >;
 

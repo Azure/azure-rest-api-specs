@@ -62,9 +62,11 @@ interface Licenses {
   @tag("licenses")
   delete is ArmResourceDeleteWithoutOkAsync<
     License,
-    Response = (ArmDeletedResponse &
-      ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader) | ArmDeletedNoContentResponse
+    Response =
+      | (ArmDeletedResponse &
+          ArmLroLocationHeader &
+          Azure.Core.Foundations.RetryAfterHeader)
+      | ArmDeletedNoContentResponse
   >;
 
   /**

@@ -73,11 +73,13 @@ interface VirtualMachineScaleSetExtensions {
   update is ComputeCustomPatchAsync<
     VirtualMachineScaleSetExtension,
     VirtualMachineScaleSetExtensionUpdate,
-    Response = ArmResponse<VirtualMachineScaleSetExtension> | ArmResourceCreatedResponse<
-      VirtualMachineScaleSetExtension,
-      LroHeaders = ArmLroLocationHeader<FinalResult = VirtualMachineScaleSetExtension> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | ArmResponse<VirtualMachineScaleSetExtension>
+      | ArmResourceCreatedResponse<
+          VirtualMachineScaleSetExtension,
+          LroHeaders = ArmLroLocationHeader<FinalResult = VirtualMachineScaleSetExtension> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**

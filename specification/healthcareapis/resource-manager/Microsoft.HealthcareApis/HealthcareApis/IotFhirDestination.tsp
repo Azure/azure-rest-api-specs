@@ -54,14 +54,17 @@ interface IotFhirDestinations {
   @tag("IotConnectors")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     IotFhirDestination,
-    Response = ArmResourceUpdatedResponse<IotFhirDestination> | ArmResourceCreatedResponse<
-      IotFhirDestination,
-      ArmLroLocationHeader<FinalResult = IotFhirDestination> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | (ArmAcceptedLroResponse & {
-      @bodyRoot
-      _: IotFhirDestination;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<IotFhirDestination>
+      | ArmResourceCreatedResponse<
+          IotFhirDestination,
+          ArmLroLocationHeader<FinalResult = IotFhirDestination> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | (ArmAcceptedLroResponse & {
+          @bodyRoot
+          _: IotFhirDestination;
+        }),
     Error = ErrorDetails
   >;
 
@@ -72,7 +75,10 @@ interface IotFhirDestinations {
   @tag("IotConnectors")
   delete is ArmResourceDeleteWithoutOkAsync<
     IotFhirDestination,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = Error
   >;
 

@@ -77,11 +77,13 @@ interface PrivateEndpointConnections {
     PrivateEndpointConnection,
     Request = PrivateEndpointConnection,
     Result = void,
-    Response = ArmResponse<PrivateEndpointConnection> | ArmResourceCreatedResponse<
-      PrivateEndpointConnection,
-      LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >,
+    Response =
+      | ArmResponse<PrivateEndpointConnection>
+      | ArmResourceCreatedResponse<
+          PrivateEndpointConnection,
+          LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >,
     Parameters = {
       /**
        * The type of the parent resource. This can be either \'topics\', \'domains\', or \'partnerNamespaces\' or \'namespaces\'.

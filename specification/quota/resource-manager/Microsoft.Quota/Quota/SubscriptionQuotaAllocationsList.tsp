@@ -92,8 +92,10 @@ interface SubscriptionQuotaAllocationsLists {
   update is SubscriptionQuotaAllocationsListsOps.CustomPatchAsync<
     SubscriptionQuotaAllocationsList,
     PatchModel = SubscriptionQuotaAllocationsList,
-    Response = ArmResponse<SubscriptionQuotaAllocationsList> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = SubscriptionQuotaAllocationsList> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResponse<SubscriptionQuotaAllocationsList>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = SubscriptionQuotaAllocationsList> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 }
 

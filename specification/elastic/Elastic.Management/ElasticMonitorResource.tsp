@@ -113,10 +113,12 @@ interface ElasticMonitorResources {
   update is ElasticMonitorUpdateResourceOps.CustomPatchAsync<
     ElasticMonitorResource,
     PatchModel = ElasticMonitorResourceUpdateParameters,
-    Response = ArmResponse<ElasticMonitorResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ElasticMonitorResource>> & {
-      @bodyRoot
-      _: ElasticMonitorResource;
-    }),
+    Response =
+      | ArmResponse<ElasticMonitorResource>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ElasticMonitorResource>> & {
+          @bodyRoot
+          _: ElasticMonitorResource;
+        }),
     OptionalRequestBody = true
   >;
 
@@ -126,7 +128,10 @@ interface ElasticMonitorResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ElasticMonitorResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = ResourceProviderDefaultErrorResponse
   >;
 

@@ -122,10 +122,12 @@ interface WorkerPoolResources {
   @summary("Create or update a multi-role pool.")
   createOrUpdateMultiRolePool is WorkerPoolResourceOps.CreateOrUpdateAsync<
     WorkerPoolResource,
-    Response = ArmResourceUpdatedResponse<WorkerPoolResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WorkerPoolResource>> & {
-      @bodyRoot
-      _: WorkerPoolResource;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<WorkerPoolResource>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WorkerPoolResource>> & {
+          @bodyRoot
+          _: WorkerPoolResource;
+        }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -139,10 +141,12 @@ interface WorkerPoolResources {
   updateMultiRolePool is WorkerPoolResourceOps.CustomPatchSync<
     WorkerPoolResource,
     PatchModel = WorkerPoolResource,
-    Response = ArmResponse<WorkerPoolResource> | (AcceptedResponse & {
-      @bodyRoot
-      _: WorkerPoolResource;
-    }),
+    Response =
+      | ArmResponse<WorkerPoolResource>
+      | (AcceptedResponse & {
+          @bodyRoot
+          _: WorkerPoolResource;
+        }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -263,10 +267,12 @@ interface AppServiceEnvironments {
   @summary("Create or update a worker pool.")
   createOrUpdateWorkerPool is AppServiceEnvironmentOps.CreateOrUpdateAsync<
     WorkerPoolResource,
-    Response = ArmResourceUpdatedResponse<WorkerPoolResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WorkerPoolResource>> & {
-      @bodyRoot
-      _: WorkerPoolResource;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<WorkerPoolResource>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WorkerPoolResource>> & {
+          @bodyRoot
+          _: WorkerPoolResource;
+        }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -280,10 +286,12 @@ interface AppServiceEnvironments {
   updateWorkerPool is AppServiceEnvironmentOps.CustomPatchSync<
     WorkerPoolResource,
     PatchModel = WorkerPoolResource,
-    Response = ArmResponse<WorkerPoolResource> | (AcceptedResponse & {
-      @bodyRoot
-      _: WorkerPoolResource;
-    }),
+    Response =
+      | ArmResponse<WorkerPoolResource>
+      | (AcceptedResponse & {
+          @bodyRoot
+          _: WorkerPoolResource;
+        }),
     OverrideErrorType = DefaultErrorResponse
   >;
 

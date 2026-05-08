@@ -106,19 +106,21 @@ interface DiagnosticContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<DiagnosticContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    }) | (ArmResourceCreatedSyncResponse<DiagnosticContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    })
+    Response =
+      | (ArmResponse<DiagnosticContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          etag: string;
+        })
+      | (ArmResourceCreatedSyncResponse<DiagnosticContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          etag: string;
+        })
   >;
 
   /**
@@ -262,19 +264,21 @@ interface Diagnostic {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<DiagnosticContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    }) | (ArmCreatedResponse<DiagnosticContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    })
+    Response =
+      | (ArmResponse<DiagnosticContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          etag: string;
+        })
+      | (ArmCreatedResponse<DiagnosticContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          etag: string;
+        })
   >;
 
   /**
@@ -426,19 +430,21 @@ interface WorkspaceDiagnostic {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<DiagnosticContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    }) | (ArmCreatedResponse<DiagnosticContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    })
+    Response =
+      | (ArmResponse<DiagnosticContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          etag: string;
+        })
+      | (ArmCreatedResponse<DiagnosticContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          etag: string;
+        })
   >;
 
   /**
@@ -598,19 +604,21 @@ interface WorkspaceApiDiagnostic {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<DiagnosticContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    }) | (ArmCreatedResponse<DiagnosticContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    })
+    Response =
+      | (ArmResponse<DiagnosticContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          etag: string;
+        })
+      | (ArmCreatedResponse<DiagnosticContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          etag: string;
+        })
   >;
 
   /**

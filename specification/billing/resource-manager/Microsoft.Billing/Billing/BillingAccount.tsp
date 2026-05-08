@@ -319,11 +319,13 @@ interface BillingAccounts {
     BillingAccount,
     DocumentDownloadRequest[],
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
-    Response = ArmResponse<DocumentDownloadResult> | ArmAcceptedLroResponse<
-      "Resource operation accepted.",
-      ArmLroLocationHeader<FinalResult = DocumentDownloadResult> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | ArmResponse<DocumentDownloadResult>
+      | ArmAcceptedLroResponse<
+          "Resource operation accepted.",
+          ArmLroLocationHeader<FinalResult = DocumentDownloadResult> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**

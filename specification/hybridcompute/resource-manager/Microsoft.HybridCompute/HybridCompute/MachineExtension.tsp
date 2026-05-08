@@ -38,8 +38,10 @@ interface MachineExtensions {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     MachineExtension,
-    Response = ArmResourceUpdatedResponse<MachineExtension> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = MachineExtension> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<MachineExtension>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = MachineExtension> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -59,8 +61,11 @@ interface MachineExtensions {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     MachineExtension,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**

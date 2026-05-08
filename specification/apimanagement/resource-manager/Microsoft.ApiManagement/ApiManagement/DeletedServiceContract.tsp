@@ -50,10 +50,13 @@ interface DeletedServiceContracts {
   purge is ArmResourceDeleteWithoutOkAsync<
     DeletedServiceContract,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = DeletedServiceContract>> & {
-      @bodyRoot
-      _: DeletedServiceContract;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = DeletedServiceContract>> & {
+          @bodyRoot
+          _: DeletedServiceContract;
+        })
+      | ArmDeletedNoContentResponse
   >;
 }
 

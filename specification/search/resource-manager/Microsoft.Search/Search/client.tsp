@@ -624,14 +624,17 @@ op SharedPrivateLinkResourcesCreateOrUpdateCustomization(
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   params?: `search-management-request-options`,
-): ArmResourceUpdatedResponse<SharedPrivateLinkResource> | ArmAcceptedLroResponse<
-  "Resource operation accepted.",
-  ArmAsyncOperationHeader<
-    ArmOperationStatus<never, ResourceProvisioningState>,
-    string,
-    SharedPrivateLinkResource
-  >
-> | CloudError;
+):
+  | ArmResourceUpdatedResponse<SharedPrivateLinkResource>
+  | ArmAcceptedLroResponse<
+      "Resource operation accepted.",
+      ArmAsyncOperationHeader<
+        ArmOperationStatus<never, ResourceProvisioningState>,
+        string,
+        SharedPrivateLinkResource
+      >
+    >
+  | CloudError;
 
 /**
  * Initiates the deletion of the shared private link resource from the search service.

@@ -85,7 +85,9 @@ interface ConnectionSettings {
   update is ArmCustomPatchSync<
     ConnectionSetting,
     PatchModel = ConnectionSetting,
-    Response = ArmResponse<ConnectionSetting> | ArmResourceCreatedSyncResponse<ConnectionSetting>,
+    Response =
+      | ArmResponse<ConnectionSetting>
+      | ArmResourceCreatedSyncResponse<ConnectionSetting>,
     Error = Error
   >;
 

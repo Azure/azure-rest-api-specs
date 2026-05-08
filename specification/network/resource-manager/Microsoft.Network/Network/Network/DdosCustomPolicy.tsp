@@ -73,7 +73,10 @@ interface DdosCustomPolicies {
   @tag("ddosCustomPolicies")
   delete is ArmResourceDeleteWithoutOkAsync<
     DdosCustomPolicy,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 }

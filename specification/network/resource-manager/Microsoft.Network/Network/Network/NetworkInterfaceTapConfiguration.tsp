@@ -40,7 +40,10 @@ interface NetworkInterfaceTapConfigurations {
   @tag("Network Interfaces")
   delete is ArmResourceDeleteWithoutOkAsync<
     NetworkInterfaceTapConfiguration,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 

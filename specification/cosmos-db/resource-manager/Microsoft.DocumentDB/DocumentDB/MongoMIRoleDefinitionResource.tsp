@@ -42,8 +42,10 @@ interface MongoMIRoleDefinitionResources {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createUpdateMongoMIRoleDefinition is ArmResourceCreateOrReplaceAsync<
     MongoMIRoleDefinitionResource,
-    Response = ArmResourceUpdatedResponse<MongoMIRoleDefinitionResource> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = MongoMIRoleDefinitionResource> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<MongoMIRoleDefinitionResource>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = MongoMIRoleDefinitionResource> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -53,7 +55,10 @@ interface MongoMIRoleDefinitionResources {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deleteMongoMIRoleDefinition is ArmResourceDeleteWithoutOkAsync<
     MongoMIRoleDefinitionResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+      | ArmDeletedNoContentResponse
   >;
 
   /**

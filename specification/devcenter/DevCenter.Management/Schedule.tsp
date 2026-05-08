@@ -49,10 +49,12 @@ interface Schedules {
       $top?: int32;
     },
     LroHeaders = ArmLroLocationHeader,
-    Response = Schedule | ArmAcceptedLroResponse<
-      "Resource update request accepted.",
-      ArmLroLocationHeader<FinalResult = Schedule>
-    >
+    Response =
+      | Schedule
+      | ArmAcceptedLroResponse<
+          "Resource update request accepted.",
+          ArmLroLocationHeader<FinalResult = Schedule>
+        >
   >;
 
   @doc("Deletes a Schedule.")

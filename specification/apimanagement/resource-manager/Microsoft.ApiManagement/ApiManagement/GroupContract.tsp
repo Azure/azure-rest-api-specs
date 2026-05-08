@@ -195,19 +195,21 @@ interface GroupContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<GroupContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    }) | (ArmCreatedResponse<GroupContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    })
+    Response =
+      | (ArmResponse<GroupContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          etag: string;
+        })
+      | (ArmCreatedResponse<GroupContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          etag: string;
+        })
   >;
 
   /**
@@ -331,7 +333,9 @@ interface GroupContracts {
   create is GroupContractOps.CreateOrUpdateSync<
     GroupContract,
     Request = void,
-    Response = ArmResponse<UserContract> | ArmResourceCreatedSyncResponse<UserContract>,
+    Response =
+      | ArmResponse<UserContract>
+      | ArmResourceCreatedSyncResponse<UserContract>,
     Parameters = {
       /**
        * User identifier. Must be unique in the current API Management service instance.
@@ -438,19 +442,21 @@ interface WorkspaceGroup {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<GroupContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    }) | (ArmResourceCreatedSyncResponse<GroupContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    })
+    Response =
+      | (ArmResponse<GroupContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          etag: string;
+        })
+      | (ArmResourceCreatedSyncResponse<GroupContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          etag: string;
+        })
   >;
 
   /**
@@ -575,7 +581,9 @@ interface WorkspaceGroup {
   create is WorkspaceGroupOps.CreateOrUpdateSync<
     GroupContract,
     Request = void,
-    Response = ArmResponse<UserContract> | ArmResourceCreatedSyncResponse<UserContract>,
+    Response =
+      | ArmResponse<UserContract>
+      | ArmResourceCreatedSyncResponse<UserContract>,
     Parameters = {
       /**
        * User identifier. Must be unique in the current API Management service instance.

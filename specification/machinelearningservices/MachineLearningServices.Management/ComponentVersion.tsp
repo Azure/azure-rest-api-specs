@@ -72,16 +72,18 @@ interface ComponentVersions {
   @summary("Create or update version.")
   createOrUpdate is ComponentVersionOps.CreateOrUpdateAsync<
     ComponentVersion,
-    Response = ArmResourceUpdatedResponse<ComponentVersion> | (ArmResourceCreatedResponse<
-      ComponentVersion,
-      ArmAsyncOperationHeader
-    > & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<ComponentVersion>
+      | (ArmResourceCreatedResponse<
+          ComponentVersion,
+          ArmAsyncOperationHeader
+        > & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
   >;
 
   /**
@@ -91,13 +93,16 @@ interface ComponentVersions {
   @summary("Delete version.")
   delete is ComponentVersionOps.DeleteWithoutOkAsync<
     ComponentVersion,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**

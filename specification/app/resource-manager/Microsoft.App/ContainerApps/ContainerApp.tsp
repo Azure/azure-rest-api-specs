@@ -93,7 +93,10 @@ interface ContainerApps {
   @summary("Delete a Container App.")
   delete is ArmResourceDeleteWithoutOkAsync<
     ContainerApp,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

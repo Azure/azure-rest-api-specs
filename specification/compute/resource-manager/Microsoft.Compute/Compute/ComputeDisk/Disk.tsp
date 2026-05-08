@@ -69,10 +69,12 @@ interface Disks {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     Disk,
-    Response = ArmResourceUpdatedResponse<Disk> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Disk> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot _: Disk;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<Disk>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Disk> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot _: Disk;
+        })
   >;
 
   /**
@@ -83,10 +85,12 @@ interface Disks {
   update is ComputeCustomPatchAsync<
     Disk,
     DiskUpdate,
-    Response = ArmResponse<Disk> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Disk> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot _: Disk;
-    })
+    Response =
+      | ArmResponse<Disk>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Disk> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot _: Disk;
+        })
   >;
 
   /**

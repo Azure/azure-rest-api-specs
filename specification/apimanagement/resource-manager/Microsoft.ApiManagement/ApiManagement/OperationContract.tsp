@@ -106,19 +106,21 @@ interface OperationContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<OperationContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    }) | (ArmResourceCreatedSyncResponse<OperationContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    })
+    Response =
+      | (ArmResponse<OperationContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          etag: string;
+        })
+      | (ArmResourceCreatedSyncResponse<OperationContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          etag: string;
+        })
   >;
 
   /**
@@ -285,19 +287,21 @@ interface WorkspaceApiOperation {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<OperationContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    }) | (ArmCreatedResponse<OperationContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    })
+    Response =
+      | (ArmResponse<OperationContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          etag: string;
+        })
+      | (ArmCreatedResponse<OperationContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          etag: string;
+        })
   >;
 
   /**

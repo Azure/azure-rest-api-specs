@@ -90,7 +90,10 @@ interface VirtualNetworkGateways {
   @tag("VirtualNetworkGateways")
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualNetworkGateway,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 

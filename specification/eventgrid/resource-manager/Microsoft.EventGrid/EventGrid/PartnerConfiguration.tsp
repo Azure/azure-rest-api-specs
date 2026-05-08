@@ -51,7 +51,9 @@ interface PartnerConfigurations {
   update is ArmCustomPatchAsync<
     PartnerConfiguration,
     PatchModel = PartnerConfigurationUpdateParameters,
-    Response = PartnerConfiguration | ArmResourceCreatedResponse<PartnerConfiguration>
+    Response =
+      | PartnerConfiguration
+      | ArmResourceCreatedResponse<PartnerConfiguration>
   >;
 
   /**
@@ -61,7 +63,10 @@ interface PartnerConfigurations {
   @summary("Delete a partner configuration.")
   delete is ArmResourceDeleteWithoutOkAsync<
     PartnerConfiguration,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

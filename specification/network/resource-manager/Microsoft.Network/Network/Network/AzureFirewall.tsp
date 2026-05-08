@@ -86,7 +86,10 @@ interface AzureFirewalls {
   @tag("AzureFirewalls")
   delete is ArmResourceDeleteWithoutOkAsync<
     AzureFirewall,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 

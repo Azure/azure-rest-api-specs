@@ -64,7 +64,10 @@ interface DscpConfigurations {
   @tag("DscpConfiguration")
   delete is ArmResourceDeleteWithoutOkAsync<
     DscpConfiguration,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 

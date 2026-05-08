@@ -60,7 +60,10 @@ interface VirtualNetworks {
   @tag("VirtualNetworks")
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualNetwork,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 

@@ -46,8 +46,10 @@ interface Extensions {
   update is ArmCustomPatchAsync<
     Extension,
     PatchModel = ExtensionPatch,
-    Response = Extension | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | Extension
+      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -58,8 +60,11 @@ interface Extensions {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     Extension,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**

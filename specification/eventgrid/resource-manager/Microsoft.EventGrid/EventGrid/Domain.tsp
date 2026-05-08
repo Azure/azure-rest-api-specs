@@ -65,13 +65,15 @@ interface Domains {
   update is ArmCustomPatchAsync<
     Domain,
     PatchModel = DomainUpdateParameters,
-    Response = {
-      @body body: void;
-    } | ArmResourceCreatedResponse<
-      Domain,
-      LroHeaders = ArmLroLocationHeader<FinalResult = Domain> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | {
+          @body body: void;
+        }
+      | ArmResourceCreatedResponse<
+          Domain,
+          LroHeaders = ArmLroLocationHeader<FinalResult = Domain> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**
@@ -81,7 +83,10 @@ interface Domains {
   @summary("Delete a domain.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Domain,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

@@ -114,8 +114,10 @@ interface StorageAccounts {
       Azure.ResourceManager.Foundations.DefaultBaseParameters<StorageAccount>
     >,
     StorageAccountCreateParameters,
-    Response = ArmResourceUpdatedResponse<StorageAccount> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StorageAccount> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResourceUpdatedResponse<StorageAccount>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StorageAccount> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     ErrorResponse = ErrorResponse
   >;
 
@@ -267,11 +269,13 @@ interface StorageAccounts {
     StorageAccount,
     BlobRestoreParameters,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<StorageAccount>,
-    Response = ArmResponse<BlobRestoreStatus> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BlobRestoreStatus> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: BlobRestoreStatus;
-    }),
+    Response =
+      | ArmResponse<BlobRestoreStatus>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BlobRestoreStatus> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: BlobRestoreStatus;
+        }),
     Error = ErrorResponse
   >;
 

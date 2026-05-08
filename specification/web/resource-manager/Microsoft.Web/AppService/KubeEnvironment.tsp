@@ -62,7 +62,9 @@ interface KubeEnvironments {
   update is ArmCustomPatchSync<
     KubeEnvironment,
     PatchModel = KubeEnvironmentPatchResource,
-    Response = ArmResponse<KubeEnvironment> | ArmResourceCreatedSyncResponse<KubeEnvironment>,
+    Response =
+      | ArmResponse<KubeEnvironment>
+      | ArmResourceCreatedSyncResponse<KubeEnvironment>,
     Error = DefaultErrorResponse
   >;
 
@@ -73,7 +75,10 @@ interface KubeEnvironments {
   @summary("Delete a Kubernetes Environment.")
   delete is ArmResourceDeleteWithoutOkAsync<
     KubeEnvironment,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = DefaultErrorResponse
   >;
 

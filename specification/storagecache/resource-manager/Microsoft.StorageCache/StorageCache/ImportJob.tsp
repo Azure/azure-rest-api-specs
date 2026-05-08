@@ -69,8 +69,10 @@ interface ImportJobs {
   @tag("importJobs")
   delete is ArmResourceDeleteWithoutOkAsync<
     ImportJob,
-    Response = ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<FinalResult = void> &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse,
     Error = ErrorResponse
   >;
 

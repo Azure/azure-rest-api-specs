@@ -93,7 +93,10 @@ interface VirtualWans {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualWAN,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -149,10 +152,12 @@ interface VirtualWans {
     VirtualWAN,
     GetVpnSitesConfigurationRequest,
     Result = void,
-    Response = {
-      @body body: void;
-    } | ArmAcceptedLroResponse<LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmLroLocationHeader<FinalResult = void>>,
+    Response =
+      | {
+          @body body: void;
+        }
+      | ArmAcceptedLroResponse<LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+          ArmLroLocationHeader<FinalResult = void>>,
     OverrideErrorType = CloudError
   >;
 

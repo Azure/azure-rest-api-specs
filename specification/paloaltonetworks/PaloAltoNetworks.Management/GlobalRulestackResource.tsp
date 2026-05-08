@@ -72,8 +72,11 @@ interface GlobalRulestackResources {
   delete is ArmResourceDeleteWithoutOkAsync<
     GlobalRulestackResource,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmNoContentResponse
   >;
 
   /**

@@ -62,8 +62,11 @@ interface NewRelicMonitorResources {
       @query("userEmail")
       userEmail: string;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -112,8 +115,10 @@ interface NewRelicMonitorResources {
   switchBilling is ArmResourceActionSync<
     NewRelicMonitorResource,
     SwitchBillingRequest,
-    ArmResponse<NewRelicMonitorResource> | (AcceptedResponse &
-      Azure.Core.Foundations.RetryAfterHeader) | NoContentResponse
+
+      | ArmResponse<NewRelicMonitorResource>
+      | (AcceptedResponse & Azure.Core.Foundations.RetryAfterHeader)
+      | NoContentResponse
   >;
 
   /**

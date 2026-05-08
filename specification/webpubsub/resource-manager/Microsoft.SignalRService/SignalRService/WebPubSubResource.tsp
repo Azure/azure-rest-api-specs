@@ -54,12 +54,15 @@ interface WebPubSubResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     WebPubSubResource,
-    Response = ArmResponse<WebPubSubResource> | ArmResourceCreatedResponse<
-      WebPubSubResource,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = WebPubSubResource>
-    > | {
-      @statusCode statusCode: 202;
-    }
+    Response =
+      | ArmResponse<WebPubSubResource>
+      | ArmResourceCreatedResponse<
+          WebPubSubResource,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = WebPubSubResource>
+        >
+      | {
+          @statusCode statusCode: 202;
+        }
   >;
 
   /**
@@ -113,10 +116,12 @@ interface WebPubSubResources {
   regenerateKey is ArmResourceActionSync<
     WebPubSubResource,
     RegenerateKeyParameters,
-    Response = WebPubSubKeys | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WebPubSubKeys>> & {
-      @bodyRoot
-      _: WebPubSubKeys;
-    })
+    Response =
+      | WebPubSubKeys
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WebPubSubKeys>> & {
+          @bodyRoot
+          _: WebPubSubKeys;
+        })
   >;
 
   /**

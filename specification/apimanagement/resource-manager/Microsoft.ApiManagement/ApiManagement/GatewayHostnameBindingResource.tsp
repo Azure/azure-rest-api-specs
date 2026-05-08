@@ -50,11 +50,13 @@ interface GatewayHostnameBindingResources {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<GatewayHostnameBindingResource> &
-      ArmCombinedLroHeaders<FinalResult = GatewayHostnameBindingResource>) | ArmResourceCreatedResponse<
-      GatewayHostnameBindingResource,
-      LroHeaders = ArmCombinedLroHeaders<FinalResult = GatewayHostnameBindingResource>
-    >
+    Response =
+      | (ArmResponse<GatewayHostnameBindingResource> &
+          ArmCombinedLroHeaders<FinalResult = GatewayHostnameBindingResource>)
+      | ArmResourceCreatedResponse<
+          GatewayHostnameBindingResource,
+          LroHeaders = ArmCombinedLroHeaders<FinalResult = GatewayHostnameBindingResource>
+        >
   >;
 
   /**
@@ -72,8 +74,10 @@ interface GatewayHostnameBindingResources {
       @header("If-Match")
       `If-Match`: string;
     },
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader> | NoContentResponse
+    Response =
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | NoContentResponse
   >;
 
   /**

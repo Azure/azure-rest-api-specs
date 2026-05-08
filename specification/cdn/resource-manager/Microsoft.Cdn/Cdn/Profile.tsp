@@ -51,10 +51,13 @@ interface Profiles {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   create is ArmResourceCreateOrReplaceAsync<
     Profile,
-    Response = ArmResourceUpdatedResponse<Profile> | ArmResourceCreatedResponse<Profile> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Profile>> & {
-      @bodyRoot
-      _: Profile;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<Profile>
+      | ArmResourceCreatedResponse<Profile>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Profile>> & {
+          @bodyRoot
+          _: Profile;
+        })
   >;
 
   /**
@@ -65,10 +68,12 @@ interface Profiles {
   update is ArmCustomPatchAsync<
     Profile,
     PatchModel = ProfileUpdateParameters,
-    Response = ArmResponse<Profile> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Profile>> & {
-      @bodyRoot
-      _: Profile;
-    })
+    Response =
+      | ArmResponse<Profile>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Profile>> & {
+          @bodyRoot
+          _: Profile;
+        })
   >;
 
   /**
@@ -77,7 +82,10 @@ interface Profiles {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Profile,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -137,10 +145,12 @@ interface Profiles {
   upgrade is ArmResourceActionAsyncBase<
     Profile,
     ProfileUpgradeParameters,
-    ArmResponse<Profile> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Profile>> & {
-      @bodyRoot
-      _: Profile;
-    }),
+
+      | ArmResponse<Profile>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Profile>> & {
+          @bodyRoot
+          _: Profile;
+        }),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Profile>
   >;
 

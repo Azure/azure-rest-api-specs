@@ -49,10 +49,13 @@ interface PrivateEndpointConnections {
   @OpenAPI.externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639408.aspx")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     PrivateEndpointConnection,
-    Response = ArmResourceUpdatedResponse<PrivateEndpointConnection> | ArmResourceCreatedSyncResponse<PrivateEndpointConnection> | (AcceptedResponse & {
-      @bodyRoot
-      _: PrivateEndpointConnection;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<PrivateEndpointConnection>
+      | ArmResourceCreatedSyncResponse<PrivateEndpointConnection>
+      | (AcceptedResponse & {
+          @bodyRoot
+          _: PrivateEndpointConnection;
+        })
   >;
 
   /**
@@ -63,7 +66,10 @@ interface PrivateEndpointConnections {
   @OpenAPI.externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639389.aspx")
   delete is ArmResourceDeleteWithoutOkAsync<
     PrivateEndpointConnection,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

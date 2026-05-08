@@ -50,7 +50,10 @@ interface InboundNatRules {
   @tag("LoadBalancers")
   delete is ArmResourceDeleteWithoutOkAsync<
     InboundNatRule,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 

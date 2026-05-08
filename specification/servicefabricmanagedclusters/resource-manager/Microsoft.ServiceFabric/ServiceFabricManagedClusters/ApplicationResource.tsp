@@ -53,10 +53,12 @@ interface Applications {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Day 0 Property"
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     ApplicationResource,
-    Response = ArmResourceUpdatedResponse<ApplicationResource> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ApplicationResource>> & {
-      @bodyRoot
-      _: ApplicationResource;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<ApplicationResource>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ApplicationResource>> & {
+          @bodyRoot
+          _: ApplicationResource;
+        })
   >;
 
   /**
@@ -67,10 +69,12 @@ interface Applications {
   update is ArmCustomPatchAsync<
     ApplicationResource,
     PatchModel = ApplicationUpdateParameters,
-    Response = ArmResourceUpdatedResponse<ApplicationResource> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ApplicationResource>> & {
-      @bodyRoot
-      _: ApplicationResource;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<ApplicationResource>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ApplicationResource>> & {
+          @bodyRoot
+          _: ApplicationResource;
+        })
   >;
 
   /**
@@ -78,7 +82,9 @@ interface Applications {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     ApplicationResource,
-    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+      | ArmDeletedNoContentResponse
   >;
 
   /**

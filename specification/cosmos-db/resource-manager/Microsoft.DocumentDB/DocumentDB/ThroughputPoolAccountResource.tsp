@@ -42,7 +42,9 @@ interface ThroughputPoolAccountResources {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     ThroughputPoolAccountResource,
-    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+      | ArmDeletedNoContentResponse
   >;
 
   /**

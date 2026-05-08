@@ -50,16 +50,18 @@ interface ServerlessEndpoints {
   @summary("Create or update Serverless Endpoint (asynchronous).")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ServerlessEndpoint,
-    Response = ArmResourceUpdatedResponse<ServerlessEndpoint> | (ArmResourceCreatedResponse<
-      ServerlessEndpoint,
-      LroHeaders = ArmAsyncOperationHeader<ServerlessEndpoint>
-    > & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<ServerlessEndpoint>
+      | (ArmResourceCreatedResponse<
+          ServerlessEndpoint,
+          LroHeaders = ArmAsyncOperationHeader<ServerlessEndpoint>
+        > & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
   >;
 
   /**
@@ -70,14 +72,16 @@ interface ServerlessEndpoints {
   update is ArmCustomPatchAsync<
     ServerlessEndpoint,
     PatchModel = PartialMinimalTrackedResourceWithSkuAndIdentity,
-    Response = ArmResourceUpdatedResponse<ServerlessEndpoint> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ServerlessEndpoint>> &
-      Azure.Core.Foundations.RetryAfterHeader & {
-        /**
-         * Timeout for the client to use when polling the asynchronous operation.
-         */
-        @header("x-ms-async-operation-timeout")
-        timeout: duration;
-      })
+    Response =
+      | ArmResourceUpdatedResponse<ServerlessEndpoint>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ServerlessEndpoint>> &
+          Azure.Core.Foundations.RetryAfterHeader & {
+            /**
+             * Timeout for the client to use when polling the asynchronous operation.
+             */
+            @header("x-ms-async-operation-timeout")
+            timeout: duration;
+          })
   >;
 
   /**
@@ -86,13 +90,15 @@ interface ServerlessEndpoints {
   @summary("Delete Serverless Endpoint (asynchronous).")
   delete is ArmResourceDeleteWithoutOkAsync<
     ServerlessEndpoint,
-    Response = (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**

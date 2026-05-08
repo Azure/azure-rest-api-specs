@@ -60,11 +60,14 @@ interface ManagedInstances {
   @tag("ManagedInstances")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ManagedInstance,
-    Response = ArmResourceUpdatedResponse<ManagedInstance> | ArmResourceCreatedResponse<
-      ManagedInstance,
-      ArmLroLocationHeader<FinalResult = ManagedInstance> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<ManagedInstance>
+      | ArmResourceCreatedResponse<
+          ManagedInstance,
+          ArmLroLocationHeader<FinalResult = ManagedInstance> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -84,7 +87,10 @@ interface ManagedInstances {
   @tag("ManagedInstances")
   delete is ArmResourceDeleteWithoutOkAsync<
     ManagedInstance,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

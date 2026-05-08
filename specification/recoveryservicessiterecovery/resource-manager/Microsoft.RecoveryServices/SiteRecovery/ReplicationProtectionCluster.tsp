@@ -78,9 +78,11 @@ interface ReplicationProtectionClusters {
   @summary("Create Replication protection Cluster.")
   create is ReplicationProtectionClusterOps.CreateOrUpdateAsync<
     ReplicationProtectionCluster,
-    Response = ArmResourceUpdatedResponse<ReplicationProtectionCluster> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ReplicationProtectionCluster> &
-      ArmAsyncOperationHeader<FinalResult = ReplicationProtectionCluster> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<ReplicationProtectionCluster>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ReplicationProtectionCluster> &
+          ArmAsyncOperationHeader<FinalResult = ReplicationProtectionCluster> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -89,9 +91,11 @@ interface ReplicationProtectionClusters {
   @summary("Purge the replication protection cluster.")
   purge is ReplicationProtectionClusterOps.DeleteWithoutOkAsync<
     ReplicationProtectionCluster,
-    Response = ArmDeleteAcceptedLroResponse<ArmLroLocationHeader &
-      ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader &
+          ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**

@@ -46,10 +46,12 @@ interface PrivateEndpointConnections {
   @operationId("DiskAccesses_UpdateAPrivateEndpointConnection")
   updateAPrivateEndpointConnection is ComputeResourceCreateOrReplaceAsync<
     PrivateEndpointConnection,
-    Response = ArmResourceUpdatedResponse<PrivateEndpointConnection> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot _: PrivateEndpointConnection;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<PrivateEndpointConnection>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot _: PrivateEndpointConnection;
+        })
   >;
 
   /**

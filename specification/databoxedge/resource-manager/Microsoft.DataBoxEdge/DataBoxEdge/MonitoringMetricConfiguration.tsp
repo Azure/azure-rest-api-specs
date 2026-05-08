@@ -49,8 +49,10 @@ interface MonitoringMetricConfigurations {
   @summary("Creates a new metric configuration or updates an existing one for a role.")
   createOrUpdate is MonitoringMetricConfigurationsNonListOps.CreateOrUpdateAsync<
     MonitoringMetricConfiguration,
-    Response = ArmResourceUpdatedResponse<MonitoringMetricConfiguration> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = MonitoringMetricConfiguration> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResourceUpdatedResponse<MonitoringMetricConfiguration>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = MonitoringMetricConfiguration> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
 
@@ -62,7 +64,10 @@ interface MonitoringMetricConfigurations {
   @summary("deletes a new metric configuration for a role.")
   delete is MonitoringMetricConfigurationsNonListOps.DeleteWithoutOkAsync<
     MonitoringMetricConfiguration,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     OverrideErrorType = CloudError
   >;
 

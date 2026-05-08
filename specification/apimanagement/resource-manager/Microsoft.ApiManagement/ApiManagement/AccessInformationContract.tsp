@@ -212,8 +212,10 @@ interface AccessInformationContracts {
     AccessInformationContract,
     Request = DeployConfigurationParameters,
     Result = void,
-    Response = ArmResponse<OperationResultContract> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationResultContract> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResponse<OperationResultContract>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationResultContract> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -228,7 +230,9 @@ interface AccessInformationContracts {
     AccessInformationContract,
     Request = SaveConfigurationParameter,
     Result = void,
-    Response = ArmResponse<OperationResultContract> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationResultContract>>
+    Response =
+      | ArmResponse<OperationResultContract>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationResultContract>>
   >;
 
   /**
@@ -238,7 +242,9 @@ interface AccessInformationContracts {
     AccessInformationContract,
     DeployConfigurationParameters,
     Result = void,
-    Response = OperationResultContract | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationResultContract>>
+    Response =
+      | OperationResultContract
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationResultContract>>
   >;
 
   /**

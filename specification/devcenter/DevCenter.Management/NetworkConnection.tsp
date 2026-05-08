@@ -36,10 +36,12 @@ interface NetworkConnections {
     NetworkConnection,
     PatchModel = NetworkConnectionUpdate,
     LroHeaders = ArmLroLocationHeader,
-    Response = NetworkConnection | ArmAcceptedLroResponse<
-      "Resource update request accepted.",
-      ArmLroLocationHeader<FinalResult = NetworkConnection>
-    >
+    Response =
+      | NetworkConnection
+      | ArmAcceptedLroResponse<
+          "Resource update request accepted.",
+          ArmLroLocationHeader<FinalResult = NetworkConnection>
+        >
   >;
 
   @doc("Deletes a Network Connections resource.")

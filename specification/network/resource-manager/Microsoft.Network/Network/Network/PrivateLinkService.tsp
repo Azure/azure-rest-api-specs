@@ -49,7 +49,10 @@ interface PrivateLinkServices {
   @tag("PrivateLinkServices")
   delete is ArmResourceDeleteWithoutOkAsync<
     PrivateLinkService,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = Error
   >;
 

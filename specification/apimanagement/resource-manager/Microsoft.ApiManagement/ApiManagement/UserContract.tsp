@@ -75,19 +75,21 @@ interface UserContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<UserContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    }) | (ArmCreatedResponse<UserContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    })
+    Response =
+      | (ArmResponse<UserContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          etag: string;
+        })
+      | (ArmCreatedResponse<UserContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          etag: string;
+        })
   >;
 
   /**
@@ -145,7 +147,9 @@ interface UserContracts {
       @query("appType")
       appType?: AppType;
     },
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void>> | NoContentResponse
+    Response =
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void>>
+      | NoContentResponse
   >;
 
   /**

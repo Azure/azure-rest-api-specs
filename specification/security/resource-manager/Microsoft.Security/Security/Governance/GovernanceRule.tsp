@@ -93,7 +93,10 @@ interface GovernanceRules {
   delete is Azure.ResourceManager.Extension.DeleteWithoutOkAsync<
     Azure.ResourceManager.Extension.ScopeParameter,
     GovernanceRule,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -125,11 +128,13 @@ interface GovernanceRules {
   @get
   operationResults is GovernanceRuleOperationResultsOps.Read<
     OperationResult,
-    Response = ArmResponse<OperationResult> | (AcceptedResponse & {
-      @doc("Location URL for the execution status")
-      @header("Location")
-      location: string;
-    }),
+    Response =
+      | ArmResponse<OperationResult>
+      | (AcceptedResponse & {
+          @doc("Location URL for the execution status")
+          @header("Location")
+          location: string;
+        }),
     ErrorType = CloudError
   >;
 }

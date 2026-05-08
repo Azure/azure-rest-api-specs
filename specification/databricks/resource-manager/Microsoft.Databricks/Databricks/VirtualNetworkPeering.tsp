@@ -64,7 +64,10 @@ interface VirtualNetworkPeerings {
   @operationId("vNetPeering_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualNetworkPeering,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = ErrorResponse
   >;
 

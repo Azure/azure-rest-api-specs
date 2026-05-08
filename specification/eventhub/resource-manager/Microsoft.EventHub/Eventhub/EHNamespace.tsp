@@ -52,10 +52,13 @@ interface EHNamespaces {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     EHNamespace,
-    Response = ArmResourceUpdatedResponse<EHNamespace> | ArmResourceCreatedResponse<
-      EHNamespace,
-      ArmAsyncOperationHeader<FinalResult = EHNamespace>
-    > | ArmAcceptedLroResponse,
+    Response =
+      | ArmResourceUpdatedResponse<EHNamespace>
+      | ArmResourceCreatedResponse<
+          EHNamespace,
+          ArmAsyncOperationHeader<FinalResult = EHNamespace>
+        >
+      | ArmAcceptedLroResponse,
     Error = ErrorResponse
   >;
 
@@ -68,8 +71,10 @@ interface EHNamespaces {
   update is ArmCustomPatchSync<
     EHNamespace,
     PatchModel = EHNamespace,
-    Response = ArmResponse<EHNamespace> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = EHNamespace> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResponse<EHNamespace>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = EHNamespace> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = ErrorResponse
   >;
 
@@ -80,8 +85,11 @@ interface EHNamespaces {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing DELETE operation response codes match the original OpenAPI specification. Changing would be a breaking change for existing clients."
   delete is ArmResourceDeleteWithoutOkAsync<
     EHNamespace,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse,
     Error = ErrorResponse
   >;
 

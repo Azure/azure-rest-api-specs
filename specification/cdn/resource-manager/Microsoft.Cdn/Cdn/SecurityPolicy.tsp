@@ -40,11 +40,14 @@ interface SecurityPolicies {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     SecurityPolicy,
-    Response = ArmResourceUpdatedResponse<SecurityPolicy> | ArmResourceCreatedResponse<SecurityPolicy> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = SecurityPolicy> &
-      ArmLroLocationHeader<FinalResult = SecurityPolicy>> & {
-      @bodyRoot
-      _: SecurityPolicy;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<SecurityPolicy>
+      | ArmResourceCreatedResponse<SecurityPolicy>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = SecurityPolicy> &
+          ArmLroLocationHeader<FinalResult = SecurityPolicy>> & {
+          @bodyRoot
+          _: SecurityPolicy;
+        })
   >;
 
   /**
@@ -55,11 +58,13 @@ interface SecurityPolicies {
   patch is ArmCustomPatchAsync<
     SecurityPolicy,
     PatchModel = SecurityPolicyUpdateParameters,
-    Response = ArmResponse<SecurityPolicy> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = SecurityPolicy> &
-      ArmLroLocationHeader<FinalResult = SecurityPolicy>> & {
-      @bodyRoot
-      _: SecurityPolicy;
-    })
+    Response =
+      | ArmResponse<SecurityPolicy>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = SecurityPolicy> &
+          ArmLroLocationHeader<FinalResult = SecurityPolicy>> & {
+          @bodyRoot
+          _: SecurityPolicy;
+        })
   >;
 
   /**
@@ -69,9 +74,12 @@ interface SecurityPolicies {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     SecurityPolicy,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+          ArmLroLocationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**

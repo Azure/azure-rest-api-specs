@@ -52,7 +52,10 @@ interface PrivateEndpointConnections {
   @tag("PrivateLinkServices")
   deletePrivateEndpointConnection is ArmResourceDeleteWithoutOkAsync<
     Common.PrivateEndpointConnection,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = Error
   >;
 

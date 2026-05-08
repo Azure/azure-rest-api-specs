@@ -56,11 +56,13 @@ interface TaskRuns {
   update is ArmCustomPatchAsync<
     TaskRun,
     PatchModel = TaskRunUpdateParameters,
-    Response = TaskRun | ArmResourceCreatedResponse<
-      TaskRun,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = TaskRun> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | TaskRun
+      | ArmResourceCreatedResponse<
+          TaskRun,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = TaskRun> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**

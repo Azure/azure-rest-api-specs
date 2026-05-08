@@ -54,11 +54,13 @@ interface PartnerNamespaces {
   update is ArmCustomPatchAsync<
     PartnerNamespace,
     PatchModel = PartnerNamespaceUpdateParameters,
-    Response = OkResponse | ArmResourceCreatedResponse<
-      PartnerNamespace,
-      LroHeaders = ArmLroLocationHeader<FinalResult = PartnerNamespace> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | OkResponse
+      | ArmResourceCreatedResponse<
+          PartnerNamespace,
+          LroHeaders = ArmLroLocationHeader<FinalResult = PartnerNamespace> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**
@@ -68,7 +70,10 @@ interface PartnerNamespaces {
   @summary("Delete a partner namespace.")
   delete is ArmResourceDeleteWithoutOkAsync<
     PartnerNamespace,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

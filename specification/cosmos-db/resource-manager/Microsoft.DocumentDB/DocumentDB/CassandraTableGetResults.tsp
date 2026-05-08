@@ -46,8 +46,10 @@ interface CassandraTableGetResultsOperationGroup {
   createUpdateCassandraTable is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     CassandraTableGetResults,
     Request = CassandraTableCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<CassandraTableGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = CassandraTableGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<CassandraTableGetResults>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = CassandraTableGetResults> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -55,7 +57,9 @@ interface CassandraTableGetResultsOperationGroup {
    */
   deleteCassandraTable is ArmResourceDeleteWithoutOkAsync<
     CassandraTableGetResults,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | NoContentResponse
+    Response =
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+      | NoContentResponse
   >;
 
   /**

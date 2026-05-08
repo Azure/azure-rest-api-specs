@@ -65,15 +65,18 @@ interface AppServiceEnvironmentResources {
   @summary("Create or update an App Service Environment.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AppServiceEnvironmentResource,
-    Response = ArmResourceUpdatedResponse<AppServiceEnvironmentResource> | ArmResourceCreatedResponse<
-      AppServiceEnvironmentResource,
-      ArmLroLocationHeader<FinalResult = AppServiceEnvironmentResource> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = AppServiceEnvironmentResource>> &
-      Azure.Core.Foundations.RetryAfterHeader & {
-        @bodyRoot
-        _: AppServiceEnvironmentResource;
-      }),
+    Response =
+      | ArmResourceUpdatedResponse<AppServiceEnvironmentResource>
+      | ArmResourceCreatedResponse<
+          AppServiceEnvironmentResource,
+          ArmLroLocationHeader<FinalResult = AppServiceEnvironmentResource> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = AppServiceEnvironmentResource>> &
+          Azure.Core.Foundations.RetryAfterHeader & {
+            @bodyRoot
+            _: AppServiceEnvironmentResource;
+          }),
     Error = DefaultErrorResponse
   >;
 
@@ -87,10 +90,13 @@ interface AppServiceEnvironmentResources {
   update is ArmCustomPatchSync<
     AppServiceEnvironmentResource,
     PatchModel = AppServiceEnvironmentPatchResource,
-    Response = ArmResponse<AppServiceEnvironmentResource> | ArmResourceCreatedSyncResponse<AppServiceEnvironmentResource> | (AcceptedResponse & {
-      @bodyRoot
-      _: AppServiceEnvironmentResource;
-    }),
+    Response =
+      | ArmResponse<AppServiceEnvironmentResource>
+      | ArmResourceCreatedSyncResponse<AppServiceEnvironmentResource>
+      | (AcceptedResponse & {
+          @bodyRoot
+          _: AppServiceEnvironmentResource;
+        }),
     Error = DefaultErrorResponse
   >;
 
@@ -154,10 +160,12 @@ interface AppServiceEnvironmentResources {
   changeVnet is Azure.ResourceManager.ArmResourceActionAsyncBase<
     AppServiceEnvironmentResource,
     VirtualNetworkProfile,
-    ArmResponse<WebAppCollection> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WebAppCollection>> & {
-      @bodyRoot
-      _: WebAppCollection;
-    }),
+
+      | ArmResponse<WebAppCollection>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WebAppCollection>> & {
+          @bodyRoot
+          _: WebAppCollection;
+        }),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<WebAppCollection>,
     Error = DefaultErrorResponse
   >;
@@ -295,10 +303,12 @@ interface AppServiceEnvironmentResources {
   resume is ArmResourceActionAsyncBase<
     AppServiceEnvironmentResource,
     void,
-    ArmResponse<WebAppCollection> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WebAppCollection>> & {
-      @bodyRoot
-      _: WebAppCollection;
-    }),
+
+      | ArmResponse<WebAppCollection>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WebAppCollection>> & {
+          @bodyRoot
+          _: WebAppCollection;
+        }),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AppServiceEnvironmentResource>,
     Error = DefaultErrorResponse
   >;
@@ -347,10 +357,12 @@ interface AppServiceEnvironmentResources {
   suspend is ArmResourceActionAsyncBase<
     AppServiceEnvironmentResource,
     void,
-    ArmResponse<WebAppCollection> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WebAppCollection>> & {
-      @bodyRoot
-      _: WebAppCollection;
-    }),
+
+      | ArmResponse<WebAppCollection>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WebAppCollection>> & {
+          @bodyRoot
+          _: WebAppCollection;
+        }),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AppServiceEnvironmentResource>,
     Error = DefaultErrorResponse
   >;

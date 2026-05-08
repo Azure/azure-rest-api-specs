@@ -79,7 +79,10 @@ interface VnetRoutes {
   @summary("Create or update a Virtual Network route in an App Service plan.")
   createOrUpdateVnetRoute is ArmResourceCreateOrReplaceSync<
     VnetRoute,
-    Response = ArmResourceUpdatedResponse<VnetRoute> | ArmBadRequestResponse | ArmNotFoundResponse,
+    Response =
+      | ArmResourceUpdatedResponse<VnetRoute>
+      | ArmBadRequestResponse
+      | ArmNotFoundResponse,
     Error = DefaultErrorResponse
   >;
 
@@ -91,7 +94,10 @@ interface VnetRoutes {
   updateVnetRoute is ArmCustomPatchSync<
     VnetRoute,
     PatchModel = VnetRoute,
-    Response = ArmResourceUpdatedResponse<VnetRoute> | ArmBadRequestResponse | ArmNotFoundResponse,
+    Response =
+      | ArmResourceUpdatedResponse<VnetRoute>
+      | ArmBadRequestResponse
+      | ArmNotFoundResponse,
     Error = DefaultErrorResponse
   >;
 

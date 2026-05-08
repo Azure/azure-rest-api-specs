@@ -39,11 +39,13 @@ interface PartnerRegistrations {
   @summary("Create a partner registration.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     PartnerRegistration,
-    Response = ArmResourceUpdatedResponse<PartnerRegistration> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PartnerRegistration> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: PartnerRegistration;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<PartnerRegistration>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PartnerRegistration> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: PartnerRegistration;
+        }),
     LroHeaders = ArmLroLocationHeader<FinalResult = PartnerRegistration> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -57,13 +59,15 @@ interface PartnerRegistrations {
   update is ArmCustomPatchAsync<
     PartnerRegistration,
     PatchModel = PartnerRegistrationUpdateParameters,
-    Response = {
-      @body body: void;
-    } | ArmResourceCreatedResponse<
-      PartnerRegistration,
-      LroHeaders = ArmLroLocationHeader<FinalResult = PartnerRegistration> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | {
+          @body body: void;
+        }
+      | ArmResourceCreatedResponse<
+          PartnerRegistration,
+          LroHeaders = ArmLroLocationHeader<FinalResult = PartnerRegistration> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**
@@ -73,7 +77,10 @@ interface PartnerRegistrations {
   @summary("Delete a partner registration.")
   delete is ArmResourceDeleteWithoutOkAsync<
     PartnerRegistration,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

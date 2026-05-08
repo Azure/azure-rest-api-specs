@@ -44,8 +44,10 @@ interface ConfidentialLedgers {
   update is ArmCustomPatchAsync<
     ConfidentialLedger,
     PatchModel = ConfidentialLedger,
-    Response = ArmResponse<ConfidentialLedger> | (CreatedResponse &
-      ArmLroLocationHeader<FinalResult = ConfidentialLedger>)
+    Response =
+      | ArmResponse<ConfidentialLedger>
+      | (CreatedResponse &
+          ArmLroLocationHeader<FinalResult = ConfidentialLedger>)
   >;
 
   /**
@@ -54,7 +56,10 @@ interface ConfidentialLedgers {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ConfidentialLedger,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

@@ -47,17 +47,19 @@ interface BatchDeployments {
   @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     BatchDeployment,
-    Response = ArmResourceUpdatedResponse<BatchDeployment> | (ArmResourceCreatedResponse<
-      BatchDeployment,
-      LroHeaders = ArmAsyncOperationHeader
-    > &
-      Azure.Core.Foundations.RetryAfterHeader & {
-        /**
-         * Timeout for the client to use when polling the asynchronous operation.
-         */
-        @header("x-ms-async-operation-timeout")
-        timeout: duration;
-      })
+    Response =
+      | ArmResourceUpdatedResponse<BatchDeployment>
+      | (ArmResourceCreatedResponse<
+          BatchDeployment,
+          LroHeaders = ArmAsyncOperationHeader
+        > &
+          Azure.Core.Foundations.RetryAfterHeader & {
+            /**
+             * Timeout for the client to use when polling the asynchronous operation.
+             */
+            @header("x-ms-async-operation-timeout")
+            timeout: duration;
+          })
   >;
 
   /**
@@ -68,14 +70,16 @@ interface BatchDeployments {
   update is ArmCustomPatchAsync<
     BatchDeployment,
     PatchModel = PartialBatchDeploymentPartialMinimalTrackedResourceWithProperties,
-    Response = BatchDeployment | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BatchDeployment>> &
-      Azure.Core.Foundations.RetryAfterHeader & {
-        /**
-         * Timeout for the client to use when polling the asynchronous operation.
-         */
-        @header("x-ms-async-operation-timeout")
-        timeout: duration;
-      })
+    Response =
+      | BatchDeployment
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BatchDeployment>> &
+          Azure.Core.Foundations.RetryAfterHeader & {
+            /**
+             * Timeout for the client to use when polling the asynchronous operation.
+             */
+            @header("x-ms-async-operation-timeout")
+            timeout: duration;
+          })
   >;
 
   /**
@@ -85,13 +89,16 @@ interface BatchDeployments {
   @summary("Delete Batch Inference deployment (asynchronous).")
   delete is ArmResourceDeleteWithoutOkAsync<
     BatchDeployment,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**

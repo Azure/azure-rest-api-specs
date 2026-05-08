@@ -80,11 +80,14 @@ interface BackupInstanceResources {
       @header
       `x-ms-authorization-auxiliary`?: string;
     },
-    Response = ArmResourceUpdatedResponse<BackupInstanceResource> | ArmResourceCreatedResponse<
-      BackupInstanceResource,
-      ArmLroLocationHeader<FinalResult = BackupInstanceResource> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
+    Response =
+      | ArmResourceUpdatedResponse<BackupInstanceResource>
+      | ArmResourceCreatedResponse<
+          BackupInstanceResource,
+          ArmLroLocationHeader<FinalResult = BackupInstanceResource> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
     OverrideErrorType = CloudError
   >;
 
@@ -100,7 +103,10 @@ interface BackupInstanceResources {
       @header
       `x-ms-authorization-auxiliary`?: string;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+      | ArmDeletedNoContentResponse,
     OverrideErrorType = CloudError
   >;
 
@@ -112,7 +118,9 @@ interface BackupInstanceResources {
     BackupInstanceResource,
     TriggerBackupRequest,
     OperationJobExtendedInfo,
-    Response = OperationJobExtendedInfo | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = OperationJobExtendedInfo>>,
+    Response =
+      | OperationJobExtendedInfo
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = OperationJobExtendedInfo>>,
     OverrideErrorType = CloudError
   >;
 
@@ -123,7 +131,9 @@ interface BackupInstanceResources {
     BackupInstanceResource,
     ValidateForModifyBackupRequest,
     OperationJobExtendedInfo,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ErrorResponse
+    Response =
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+      | ErrorResponse
   >;
 
   /**
@@ -135,7 +145,9 @@ interface BackupInstanceResources {
     BackupInstanceResource,
     AzureBackupRehydrationRequest,
     NoContentResponse,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | NoContentResponse,
+    Response =
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+      | NoContentResponse,
     OverrideErrorType = CloudError
   >;
 
@@ -147,7 +159,9 @@ interface BackupInstanceResources {
     BackupInstanceResource,
     AzureBackupRestoreRequest,
     OperationJobExtendedInfo,
-    Response = OperationJobExtendedInfo | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = OperationJobExtendedInfo>>,
+    Response =
+      | OperationJobExtendedInfo
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = OperationJobExtendedInfo>>,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
@@ -164,7 +178,9 @@ interface BackupInstanceResources {
     BackupInstanceResource,
     void,
     OkResponse,
-    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
+    Response =
+      | OkResponse
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
     OverrideErrorType = CloudError
   >;
 
@@ -177,7 +193,9 @@ interface BackupInstanceResources {
     BackupInstanceResource,
     void,
     OkResponse,
-    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
+    Response =
+      | OkResponse
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
     OverrideErrorType = CloudError
   >;
 
@@ -189,7 +207,9 @@ interface BackupInstanceResources {
     BackupInstanceResource,
     ResumeProtectionRequest,
     OkResponse,
-    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
+    Response =
+      | OkResponse
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
     OverrideErrorType = CloudError,
     OptionalRequestBody = true
   >;
@@ -201,7 +221,9 @@ interface BackupInstanceResources {
     BackupInstanceResource,
     StopProtectionRequest,
     OkResponse,
-    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
+    Response =
+      | OkResponse
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
@@ -219,7 +241,9 @@ interface BackupInstanceResources {
     BackupInstanceResource,
     SuspendBackupRequest,
     OkResponse,
-    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
+    Response =
+      | OkResponse
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
@@ -239,7 +263,9 @@ interface BackupInstanceResources {
     BackupInstanceResource,
     SyncBackupInstanceRequest,
     OkResponse,
-    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
+    Response =
+      | OkResponse
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
     OverrideErrorType = CloudError
   >;
 
@@ -251,7 +277,9 @@ interface BackupInstanceResources {
     BackupInstanceResource,
     ValidateRestoreRequestObject,
     OperationJobExtendedInfo,
-    Response = OperationJobExtendedInfo | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = OperationJobExtendedInfo>>,
+    Response =
+      | OperationJobExtendedInfo
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = OperationJobExtendedInfo>>,
     OverrideErrorType = CloudError
   >;
 

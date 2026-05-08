@@ -49,11 +49,13 @@ interface Subscriptions {
   update is ArmCustomPatchAsync<
     Subscription,
     PatchModel = SubscriptionUpdateParameters,
-    Response = ArmResponse<Subscription> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Subscription> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: Subscription;
-    })
+    Response =
+      | ArmResponse<Subscription>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Subscription> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: Subscription;
+        })
   >;
 
   /**
@@ -63,7 +65,10 @@ interface Subscriptions {
   @summary("Delete an event subscription of a namespace topic.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Subscription,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

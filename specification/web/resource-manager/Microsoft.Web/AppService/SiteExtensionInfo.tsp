@@ -78,11 +78,14 @@ interface SiteExtensionInfos {
     LroHeaders = ArmLroLocationHeader<FinalResult = SiteExtensionInfo> &
       Azure.Core.Foundations.RetryAfterHeader,
     Request = void,
-    Response = ArmResponse<SiteExtensionInfo> | ArmResourceCreatedResponse<
-      SiteExtensionInfo,
-      LroHeaders = ArmLroLocationHeader<FinalResult = SiteExtensionInfo> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmTooManyRequestsResponse,
+    Response =
+      | ArmResponse<SiteExtensionInfo>
+      | ArmResourceCreatedResponse<
+          SiteExtensionInfo,
+          LroHeaders = ArmLroLocationHeader<FinalResult = SiteExtensionInfo> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmTooManyRequestsResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -162,11 +165,14 @@ interface SiteExtensionInfoOperationGroup {
     LroHeaders = ArmLroLocationHeader<FinalResult = SiteExtensionInfo> &
       Azure.Core.Foundations.RetryAfterHeader,
     Request = void,
-    Response = ArmResponse<SiteExtensionInfo> | ArmResourceCreatedResponse<
-      SiteExtensionInfo,
-      LroHeaders = ArmLroLocationHeader<FinalResult = SiteExtensionInfo> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmTooManyRequestsResponse,
+    Response =
+      | ArmResponse<SiteExtensionInfo>
+      | ArmResourceCreatedResponse<
+          SiteExtensionInfo,
+          LroHeaders = ArmLroLocationHeader<FinalResult = SiteExtensionInfo> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmTooManyRequestsResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
   /**

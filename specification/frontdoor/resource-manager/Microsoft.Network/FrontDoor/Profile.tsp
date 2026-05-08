@@ -52,14 +52,17 @@ interface Profiles {
   @tag("NetworkExperimentProfiles")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Profile,
-    Response = ArmResourceUpdatedResponse<Profile> | ArmResourceCreatedResponse<
-      Profile,
-      ArmLroLocationHeader<FinalResult = Profile> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | (ArmAcceptedLroResponse & {
-      @bodyRoot
-      _: Profile;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<Profile>
+      | ArmResourceCreatedResponse<
+          Profile,
+          ArmLroLocationHeader<FinalResult = Profile> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | (ArmAcceptedLroResponse & {
+          @bodyRoot
+          _: Profile;
+        }),
     Error = ErrorResponse
   >;
 
@@ -73,11 +76,13 @@ interface Profiles {
   update is ArmCustomPatchAsync<
     Profile,
     PatchModel = ProfileUpdateModel,
-    Response = ArmResponse<Profile> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Profile> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: Profile;
-    }),
+    Response =
+      | ArmResponse<Profile>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Profile> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: Profile;
+        }),
     Error = ErrorResponse
   >;
 
@@ -89,7 +94,10 @@ interface Profiles {
   @tag("NetworkExperimentProfiles")
   delete is ArmResourceDeleteWithoutOkAsync<
     Profile,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = ErrorResponse
   >;
 

@@ -97,23 +97,25 @@ interface GlobalSchemaContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<GlobalSchemaContract> &
-      ArmCombinedLroHeaders<FinalResult = GlobalSchemaContract> & {
-        /**
-         * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-         */
-        @header("ETag")
-        etag: string;
-      }) | (ArmResourceCreatedResponse<
-      GlobalSchemaContract,
-      LroHeaders = ArmCombinedLroHeaders<FinalResult = GlobalSchemaContract>
-    > & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    })
+    Response =
+      | (ArmResponse<GlobalSchemaContract> &
+          ArmCombinedLroHeaders<FinalResult = GlobalSchemaContract> & {
+            /**
+             * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+             */
+            @header("ETag")
+            etag: string;
+          })
+      | (ArmResourceCreatedResponse<
+          GlobalSchemaContract,
+          LroHeaders = ArmCombinedLroHeaders<FinalResult = GlobalSchemaContract>
+        > & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          etag: string;
+        })
   >;
 
   /**
@@ -241,23 +243,25 @@ interface WorkspaceGlobalSchema {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<GlobalSchemaContract> &
-      ArmCombinedLroHeaders<FinalResult = GlobalSchemaContract> & {
-        /**
-         * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-         */
-        @header("ETag")
-        etag: string;
-      }) | (ArmResourceCreatedResponse<
-      GlobalSchemaContract,
-      LroHeaders = ArmCombinedLroHeaders<FinalResult = GlobalSchemaContract>
-    > & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    })
+    Response =
+      | (ArmResponse<GlobalSchemaContract> &
+          ArmCombinedLroHeaders<FinalResult = GlobalSchemaContract> & {
+            /**
+             * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+             */
+            @header("ETag")
+            etag: string;
+          })
+      | (ArmResourceCreatedResponse<
+          GlobalSchemaContract,
+          LroHeaders = ArmCombinedLroHeaders<FinalResult = GlobalSchemaContract>
+        > & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          etag: string;
+        })
   >;
 
   /**

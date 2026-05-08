@@ -72,16 +72,15 @@ interface CodeVersions {
   @summary("Create or update version.")
   createOrUpdate is CodeVersionOps.CreateOrUpdateAsync<
     CodeVersion,
-    Response = ArmResourceUpdatedResponse<CodeVersion> | (ArmResourceCreatedResponse<
-      CodeVersion,
-      ArmAsyncOperationHeader
-    > & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<CodeVersion>
+      | (ArmResourceCreatedResponse<CodeVersion, ArmAsyncOperationHeader> & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
   >;
 
   /**
@@ -91,13 +90,16 @@ interface CodeVersions {
   @summary("Delete version.")
   delete is CodeVersionOps.DeleteWithoutOkAsync<
     CodeVersion,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**

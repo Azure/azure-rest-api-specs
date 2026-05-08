@@ -58,10 +58,12 @@ interface RedisResources {
   create is RedisResourcesOps.CreateOrUpdateAsync<
     RedisResource,
     Request = RedisCreateParameters,
-    Response = RedisResource | ArmResourceCreatedResponse<
-      RedisResource,
-      LroHeaders = ArmLroLocationHeader<FinalResult = RedisResource>
-    >,
+    Response =
+      | RedisResource
+      | ArmResourceCreatedResponse<
+          RedisResource,
+          LroHeaders = ArmLroLocationHeader<FinalResult = RedisResource>
+        >,
     OverrideErrorType = ErrorResponse
   >;
 
@@ -73,10 +75,12 @@ interface RedisResources {
   update is RedisResourcesOps.CustomPatchAsync<
     RedisResource,
     PatchModel = RedisUpdateParameters,
-    Response = RedisResource | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = RedisResource>> & {
-      @bodyRoot
-      _: RedisResource;
-    })
+    Response =
+      | RedisResource
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = RedisResource>> & {
+          @bodyRoot
+          _: RedisResource;
+        })
   >;
 
   /**
@@ -85,7 +89,10 @@ interface RedisResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Legacy approved usage of non-standard operation response codes. Consider revising in a future api version."
   delete is RedisResourcesOps.DeleteWithoutOkAsync<
     RedisResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -180,8 +187,10 @@ interface RedisResources {
   flushCache is ArmResourceActionAsyncBase<
     RedisResource,
     void,
-    Response = (ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult> &
-      ArmCombinedLroHeaders<FinalResult = Azure.ResourceManager.CommonTypes.OperationStatusResult>) | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Azure.ResourceManager.CommonTypes.OperationStatusResult>>,
+    Response =
+      | (ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult> &
+          ArmCombinedLroHeaders<FinalResult = Azure.ResourceManager.CommonTypes.OperationStatusResult>)
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Azure.ResourceManager.CommonTypes.OperationStatusResult>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<RedisResource>,
     Error = ErrorResponse
   >;

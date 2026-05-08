@@ -82,11 +82,14 @@ interface InvoiceSections {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     InvoiceSection,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
-    Response = ArmResourceUpdatedResponse<InvoiceSection> | ArmResourceCreatedResponse<
-      InvoiceSection,
-      ArmLroLocationHeader<FinalResult = InvoiceSection> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<InvoiceSection>
+      | ArmResourceCreatedResponse<
+          InvoiceSection,
+          ArmLroLocationHeader<FinalResult = InvoiceSection> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**

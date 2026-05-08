@@ -55,11 +55,13 @@ interface DatadogMonitorResources {
   update is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     DatadogMonitorResource,
     Request = DatadogMonitorResourceUpdateParameters,
-    Response = ArmResponse<DatadogMonitorResource> | ArmResourceCreatedResponse<
-      DatadogMonitorResource,
-      LroHeaders = ArmLroLocationHeader<FinalResult = DatadogMonitorResource> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >,
+    Response =
+      | ArmResponse<DatadogMonitorResource>
+      | ArmResourceCreatedResponse<
+          DatadogMonitorResource,
+          LroHeaders = ArmLroLocationHeader<FinalResult = DatadogMonitorResource> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >,
     OptionalRequestBody = true
   >;
 
@@ -70,7 +72,10 @@ interface DatadogMonitorResources {
   @summary("Delete a monitor resource.")
   delete is ArmResourceDeleteWithoutOkAsync<
     DatadogMonitorResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

@@ -42,10 +42,12 @@ interface DevCenterEncryptionSets {
     DevCenterEncryptionSet,
     PatchModel = EncryptionSetUpdate,
     LroHeaders = ArmLroLocationHeader,
-    Response = DevCenterEncryptionSet | ArmAcceptedLroResponse<
-      "Resource update request accepted.",
-      ArmLroLocationHeader<FinalResult = DevCenterEncryptionSet>
-    >
+    Response =
+      | DevCenterEncryptionSet
+      | ArmAcceptedLroResponse<
+          "Resource update request accepted.",
+          ArmLroLocationHeader<FinalResult = DevCenterEncryptionSet>
+        >
   >;
 
   @doc("Deletes a devcenter encryption set.")

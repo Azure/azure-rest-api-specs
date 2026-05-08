@@ -69,7 +69,10 @@ alias ReplicationProtectedItemsOps = Azure.ResourceManager.Legacy.LegacyOperatio
   }
 >;
 
-model ReplicationProtectedItemAcceptedLroResponse<FinalResult extends TypeSpec.Reflection.Model | unknown | void = ReplicationProtectedItem>
+model ReplicationProtectedItemAcceptedLroResponse<FinalResult extends
+  | TypeSpec.Reflection.Model
+  | unknown
+  | void = ReplicationProtectedItem>
   is ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = FinalResult> &
     Azure.Core.Foundations.RetryAfterHeader>;
 
@@ -89,8 +92,10 @@ interface ReplicationProtectedItems {
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     ReplicationProtectedItem,
     Request = EnableProtectionInput,
-    Response = ArmResourceUpdatedResponse<ReplicationProtectedItem> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ReplicationProtectedItem> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResourceUpdatedResponse<ReplicationProtectedItem>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ReplicationProtectedItem> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = never
   >;
 
@@ -133,7 +138,9 @@ interface ReplicationProtectedItems {
   addDisks is ArmResourceActionAsyncBase<
     ReplicationProtectedItem,
     AddDisksInput,
-    ArmResponse<ReplicationProtectedItem> | ReplicationProtectedItemAcceptedLroResponse,
+
+      | ArmResponse<ReplicationProtectedItem>
+      | ReplicationProtectedItemAcceptedLroResponse,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<ReplicationProtectedItem>,
     Error = never
   >;
@@ -146,7 +153,9 @@ interface ReplicationProtectedItems {
   applyRecoveryPoint is ArmResourceActionAsyncBase<
     ReplicationProtectedItem,
     ApplyRecoveryPointInput,
-    ArmResponse<ReplicationProtectedItem> | ReplicationProtectedItemAcceptedLroResponse,
+
+      | ArmResponse<ReplicationProtectedItem>
+      | ReplicationProtectedItemAcceptedLroResponse,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<ReplicationProtectedItem>,
     Error = never
   >;
@@ -159,7 +168,9 @@ interface ReplicationProtectedItems {
   failoverCancel is ArmResourceActionAsyncBase<
     ReplicationProtectedItem,
     void,
-    ArmResponse<ReplicationProtectedItem> | ReplicationProtectedItemAcceptedLroResponse,
+
+      | ArmResponse<ReplicationProtectedItem>
+      | ReplicationProtectedItemAcceptedLroResponse,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<ReplicationProtectedItem>,
     Error = never
   >;
@@ -172,7 +183,9 @@ interface ReplicationProtectedItems {
   failoverCommit is ArmResourceActionAsyncBase<
     ReplicationProtectedItem,
     void,
-    ArmResponse<ReplicationProtectedItem> | ReplicationProtectedItemAcceptedLroResponse,
+
+      | ArmResponse<ReplicationProtectedItem>
+      | ReplicationProtectedItemAcceptedLroResponse,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<ReplicationProtectedItem>,
     Error = never
   >;
@@ -185,7 +198,9 @@ interface ReplicationProtectedItems {
   plannedFailover is ArmResourceActionAsyncBase<
     ReplicationProtectedItem,
     PlannedFailoverInput,
-    ArmResponse<ReplicationProtectedItem> | ReplicationProtectedItemAcceptedLroResponse,
+
+      | ArmResponse<ReplicationProtectedItem>
+      | ReplicationProtectedItemAcceptedLroResponse,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<ReplicationProtectedItem>,
     Error = never
   >;
@@ -212,7 +227,9 @@ interface ReplicationProtectedItems {
   removeDisks is ArmResourceActionAsyncBase<
     ReplicationProtectedItem,
     RemoveDisksInput,
-    ArmResponse<ReplicationProtectedItem> | ReplicationProtectedItemAcceptedLroResponse,
+
+      | ArmResponse<ReplicationProtectedItem>
+      | ReplicationProtectedItemAcceptedLroResponse,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<ReplicationProtectedItem>,
     Error = never
   >;
@@ -225,7 +242,9 @@ interface ReplicationProtectedItems {
   repairReplication is ArmResourceActionAsyncBase<
     ReplicationProtectedItem,
     void,
-    ArmResponse<ReplicationProtectedItem> | ReplicationProtectedItemAcceptedLroResponse,
+
+      | ArmResponse<ReplicationProtectedItem>
+      | ReplicationProtectedItemAcceptedLroResponse,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<ReplicationProtectedItem>,
     Error = never
   >;
@@ -239,7 +258,9 @@ interface ReplicationProtectedItems {
   reprotect is ArmResourceActionAsyncBase<
     ReplicationProtectedItem,
     ReverseReplicationInput,
-    ArmResponse<ReplicationProtectedItem> | ReplicationProtectedItemAcceptedLroResponse,
+
+      | ArmResponse<ReplicationProtectedItem>
+      | ReplicationProtectedItemAcceptedLroResponse,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<ReplicationProtectedItem>,
     Error = never
   >;
@@ -252,7 +273,9 @@ interface ReplicationProtectedItems {
   resolveHealthErrors is ArmResourceActionAsyncBase<
     ReplicationProtectedItem,
     ResolveHealthInput,
-    ArmResponse<ReplicationProtectedItem> | ReplicationProtectedItemAcceptedLroResponse,
+
+      | ArmResponse<ReplicationProtectedItem>
+      | ReplicationProtectedItemAcceptedLroResponse,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<ReplicationProtectedItem>,
     Error = never
   >;
@@ -266,8 +289,10 @@ interface ReplicationProtectedItems {
   switchProvider is ArmResourceActionAsyncBase<
     ReplicationProtectedItem,
     SwitchProviderInput,
-    ArmResponse<ReplicationProtectedItem> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = ReplicationProtectedItem> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+
+      | ArmResponse<ReplicationProtectedItem>
+      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = ReplicationProtectedItem> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<ReplicationProtectedItem>,
     Error = never
   >;
@@ -280,7 +305,9 @@ interface ReplicationProtectedItems {
   testFailover is ArmResourceActionAsyncBase<
     ReplicationProtectedItem,
     TestFailoverInput,
-    ArmResponse<ReplicationProtectedItem> | ReplicationProtectedItemAcceptedLroResponse,
+
+      | ArmResponse<ReplicationProtectedItem>
+      | ReplicationProtectedItemAcceptedLroResponse,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<ReplicationProtectedItem>,
     Error = never
   >;
@@ -293,7 +320,9 @@ interface ReplicationProtectedItems {
   testFailoverCleanup is ArmResourceActionAsyncBase<
     ReplicationProtectedItem,
     TestFailoverCleanupInput,
-    ArmResponse<ReplicationProtectedItem> | ReplicationProtectedItemAcceptedLroResponse,
+
+      | ArmResponse<ReplicationProtectedItem>
+      | ReplicationProtectedItemAcceptedLroResponse,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<ReplicationProtectedItem>,
     Error = never
   >;
@@ -306,7 +335,9 @@ interface ReplicationProtectedItems {
   unplannedFailover is ArmResourceActionAsyncBase<
     ReplicationProtectedItem,
     UnplannedFailoverInput,
-    ArmResponse<ReplicationProtectedItem> | ReplicationProtectedItemAcceptedLroResponse,
+
+      | ArmResponse<ReplicationProtectedItem>
+      | ReplicationProtectedItemAcceptedLroResponse,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<ReplicationProtectedItem>,
     Error = never
   >;
@@ -319,7 +350,9 @@ interface ReplicationProtectedItems {
   updateAppliance is ArmResourceActionAsyncBase<
     ReplicationProtectedItem,
     UpdateApplianceForReplicationProtectedItemInput,
-    ArmResponse<ReplicationProtectedItem> | ReplicationProtectedItemAcceptedLroResponse,
+
+      | ArmResponse<ReplicationProtectedItem>
+      | ReplicationProtectedItemAcceptedLroResponse,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<ReplicationProtectedItem>,
     Error = never
   >;
@@ -332,7 +365,9 @@ interface ReplicationProtectedItems {
   updateMobilityService is ArmResourceActionAsyncBase<
     ReplicationProtectedItem,
     UpdateMobilityServiceRequest,
-    ArmResponse<ReplicationProtectedItem> | ReplicationProtectedItemAcceptedLroResponse,
+
+      | ArmResponse<ReplicationProtectedItem>
+      | ReplicationProtectedItemAcceptedLroResponse,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<ReplicationProtectedItem>,
     Error = never
   >;

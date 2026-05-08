@@ -47,17 +47,19 @@ interface BatchEndpoints {
   @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     BatchEndpoint,
-    Response = ArmResourceUpdatedResponse<BatchEndpoint> | (ArmResourceCreatedResponse<
-      BatchEndpoint,
-      LroHeaders = ArmAsyncOperationHeader
-    > &
-      Azure.Core.Foundations.RetryAfterHeader & {
-        /**
-         * Timeout for the client to use when polling the asynchronous operation.
-         */
-        @header("x-ms-async-operation-timeout")
-        timeout: duration;
-      })
+    Response =
+      | ArmResourceUpdatedResponse<BatchEndpoint>
+      | (ArmResourceCreatedResponse<
+          BatchEndpoint,
+          LroHeaders = ArmAsyncOperationHeader
+        > &
+          Azure.Core.Foundations.RetryAfterHeader & {
+            /**
+             * Timeout for the client to use when polling the asynchronous operation.
+             */
+            @header("x-ms-async-operation-timeout")
+            timeout: duration;
+          })
   >;
 
   /**
@@ -68,14 +70,16 @@ interface BatchEndpoints {
   update is ArmCustomPatchAsync<
     BatchEndpoint,
     PatchModel = PartialMinimalTrackedResourceWithIdentity,
-    Response = BatchEndpoint | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BatchEndpoint>> &
-      Azure.Core.Foundations.RetryAfterHeader & {
-        /**
-         * Timeout for the client to use when polling the asynchronous operation.
-         */
-        @header("x-ms-async-operation-timeout")
-        timeout: duration;
-      })
+    Response =
+      | BatchEndpoint
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BatchEndpoint>> &
+          Azure.Core.Foundations.RetryAfterHeader & {
+            /**
+             * Timeout for the client to use when polling the asynchronous operation.
+             */
+            @header("x-ms-async-operation-timeout")
+            timeout: duration;
+          })
   >;
 
   /**
@@ -85,13 +89,16 @@ interface BatchEndpoints {
   @summary("Delete Batch Inference Endpoint (asynchronous).")
   delete is ArmResourceDeleteWithoutOkAsync<
     BatchEndpoint,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**

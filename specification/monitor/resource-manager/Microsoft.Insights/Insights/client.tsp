@@ -293,7 +293,9 @@ op PrivateLinkScopeOperationStatusGetCustomized(
   asyncOperationId: string,
 
   ...ResourceGroupParameter,
-): Azure.ResourceManager.ArmResponse<OperationStatus> | Azure.ResourceManager.ErrorResponse;
+):
+  | Azure.ResourceManager.ArmResponse<OperationStatus>
+  | Azure.ResourceManager.ErrorResponse;
 
 @@override(PrivateLinkScopeOperationStatusOperationGroup.get,
   PrivateLinkScopeOperationStatusGetCustomized,

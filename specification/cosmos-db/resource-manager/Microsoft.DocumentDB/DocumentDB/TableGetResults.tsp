@@ -46,8 +46,10 @@ interface TableGetResultsOperationGroup {
   createUpdateTable is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     TableGetResults,
     Request = TableCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<TableGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = TableGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<TableGetResults>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = TableGetResults> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -55,7 +57,9 @@ interface TableGetResultsOperationGroup {
    */
   deleteTable is ArmResourceDeleteWithoutOkAsync<
     TableGetResults,
-    Response = NoContentResponse | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+    Response =
+      | NoContentResponse
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
   >;
 
   /**

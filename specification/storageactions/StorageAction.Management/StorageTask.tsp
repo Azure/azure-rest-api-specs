@@ -46,11 +46,14 @@ interface StorageTasks {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     StorageTask,
-    Response = ArmResourceUpdatedResponse<StorageTask> | ArmResourceCreatedResponse<
-      StorageTask,
-      ArmLroLocationHeader<FinalResult = StorageTask> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<StorageTask>
+      | ArmResourceCreatedResponse<
+          StorageTask,
+          ArmLroLocationHeader<FinalResult = StorageTask> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -60,9 +63,11 @@ interface StorageTasks {
   update is ArmCustomPatchAsync<
     StorageTask,
     PatchModel = StorageTaskUpdateParameters,
-    Response = ArmResourceUpdatedResponse<StorageTask> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageTask> &
-      ArmLroLocationHeader<FinalResult = StorageTask> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<StorageTask>
+      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageTask> &
+          ArmLroLocationHeader<FinalResult = StorageTask> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -71,9 +76,11 @@ interface StorageTasks {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     StorageTask,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+          ArmLroLocationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**

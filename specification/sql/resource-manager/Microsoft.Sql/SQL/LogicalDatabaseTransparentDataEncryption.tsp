@@ -43,10 +43,13 @@ interface LogicalDatabaseTransparentDataEncryptions {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     LogicalDatabaseTransparentDataEncryption,
-    Response = ArmResourceUpdatedResponse<LogicalDatabaseTransparentDataEncryption> | ArmResourceCreatedResponse<
-      LogicalDatabaseTransparentDataEncryption,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = LogicalDatabaseTransparentDataEncryption>
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<LogicalDatabaseTransparentDataEncryption>
+      | ArmResourceCreatedResponse<
+          LogicalDatabaseTransparentDataEncryption,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = LogicalDatabaseTransparentDataEncryption>
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**

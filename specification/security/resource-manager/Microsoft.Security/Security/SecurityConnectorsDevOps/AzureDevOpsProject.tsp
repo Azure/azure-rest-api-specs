@@ -91,11 +91,13 @@ interface AzureDevOpsProjects {
   update is AzureDevOpsProjectOps.CustomPatchAsync<
     AzureDevOpsProject,
     PatchModel = AzureDevOpsProject,
-    Response = ArmResponse<AzureDevOpsProject> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AzureDevOpsProject> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: AzureDevOpsProject;
-    })
+    Response =
+      | ArmResponse<AzureDevOpsProject>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AzureDevOpsProject> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: AzureDevOpsProject;
+        })
   >;
 
   /**

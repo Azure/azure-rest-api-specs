@@ -46,8 +46,10 @@ interface SqlContainerGetResultsOperationGroup {
   createUpdateSqlContainer is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     SqlContainerGetResults,
     Request = SqlContainerCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<SqlContainerGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = SqlContainerGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<SqlContainerGetResults>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = SqlContainerGetResults> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -55,7 +57,9 @@ interface SqlContainerGetResultsOperationGroup {
    */
   deleteSqlContainer is ArmResourceDeleteWithoutOkAsync<
     SqlContainerGetResults,
-    Response = NoContentResponse | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+    Response =
+      | NoContentResponse
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
   >;
 
   /**
@@ -73,7 +77,9 @@ interface SqlContainerGetResultsOperationGroup {
   listSqlContainerPartitionMerge is ArmResourceActionAsyncBase<
     SqlContainerGetResults,
     MergeParameters,
-    Response = ArmResponse<PhysicalPartitionStorageInfoCollection> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionStorageInfoCollection>>,
+    Response =
+      | ArmResponse<PhysicalPartitionStorageInfoCollection>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionStorageInfoCollection>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<SqlContainerGetResults>,
     Error = CloudError
   >;

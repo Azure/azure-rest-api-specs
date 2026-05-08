@@ -60,8 +60,11 @@ interface SignalRResources {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     SignalRResource,
-    Response = ArmResourceUpdatedResponse<SignalRResource> | ArmResourceCreatedResponse<SignalRResource> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SignalRResource> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<SignalRResource>
+      | ArmResourceCreatedResponse<SignalRResource>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SignalRResource> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -76,7 +79,10 @@ interface SignalRResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     SignalRResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -111,10 +117,12 @@ interface SignalRResources {
   regenerateKey is ArmResourceActionAsyncBase<
     SignalRResource,
     RegenerateKeyParameters,
-    ArmResponse<SignalRKeys> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SignalRKeys> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot body: SignalRKeys;
-    }),
+
+      | ArmResponse<SignalRKeys>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SignalRKeys> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot body: SignalRKeys;
+        }),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<SignalRResource>
   >;
 

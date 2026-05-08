@@ -58,15 +58,18 @@ interface OuContainers {
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     OuContainer,
     Request = ContainerAccount,
-    Response = ArmResourceUpdatedResponse<OuContainer> | ArmResourceCreatedResponse<
-      OuContainer,
-      ArmLroLocationHeader<FinalResult = OuContainer> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = OuContainer> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: OuContainer;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<OuContainer>
+      | ArmResourceCreatedResponse<
+          OuContainer,
+          ArmLroLocationHeader<FinalResult = OuContainer> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = OuContainer> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: OuContainer;
+        }),
     Error = CloudError
   >;
 
@@ -80,11 +83,13 @@ interface OuContainers {
   update is ArmCustomPatchAsync<
     OuContainer,
     PatchModel = ContainerAccount,
-    Response = ArmResponse<OuContainer> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OuContainer> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: OuContainer;
-    }),
+    Response =
+      | ArmResponse<OuContainer>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OuContainer> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: OuContainer;
+        }),
     Error = CloudError
   >;
 
@@ -95,7 +100,10 @@ interface OuContainers {
   @summary("Delete OuContainer")
   delete is ArmResourceDeleteWithoutOkAsync<
     OuContainer,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 

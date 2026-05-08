@@ -43,8 +43,10 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
     ManagedNetworkSettingsPropertiesBasicResource,
     LroHeaders = ArmLroLocationHeader<FinalResult = ManagedNetworkSettingsPropertiesBasicResource> &
       Azure.Core.Foundations.RetryAfterHeader,
-    Response = ArmResourceUpdatedResponse<ManagedNetworkSettingsPropertiesBasicResource> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedNetworkSettingsPropertiesBasicResource> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<ManagedNetworkSettingsPropertiesBasicResource>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedNetworkSettingsPropertiesBasicResource> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

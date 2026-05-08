@@ -76,7 +76,10 @@ interface PrivateEndpoints {
   @autoRoute
   delete is ArmResourceDeleteWithoutOkAsync<
     Common.PrivateEndpoint,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = Error
   >;
 
@@ -107,10 +110,13 @@ interface PrivateEndpoints {
     Common.PrivateEndpoint,
     void,
     void,
-    Response = {
-      @body body: void;
-    } | ArmAcceptedLroResponse<LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmLroLocationHeader<FinalResult = void>> | NoContentResponse,
+    Response =
+      | {
+          @body body: void;
+        }
+      | ArmAcceptedLroResponse<LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+          ArmLroLocationHeader<FinalResult = void>>
+      | NoContentResponse,
     OverrideErrorType = CloudError
   >;
 
@@ -139,11 +145,13 @@ interface PrivateEndpoints {
     Common.PrivateEndpoint,
     PrivateDnsZoneGroup,
     void,
-    Response = ArmResponse<PrivateDnsZoneGroup> | ArmResourceCreatedResponse<
-      PrivateDnsZoneGroup,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = PrivateDnsZoneGroup> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >,
+    Response =
+      | ArmResponse<PrivateDnsZoneGroup>
+      | ArmResourceCreatedResponse<
+          PrivateDnsZoneGroup,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = PrivateDnsZoneGroup> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >,
     OverrideErrorType = CloudError
   >;
 

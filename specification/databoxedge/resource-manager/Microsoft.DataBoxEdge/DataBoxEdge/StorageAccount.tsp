@@ -40,8 +40,10 @@ interface StorageAccounts {
   @summary("Creates a new StorageAccount or updates an existing StorageAccount on the device.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     StorageAccount,
-    Response = ArmResourceUpdatedResponse<StorageAccount> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StorageAccount> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResourceUpdatedResponse<StorageAccount>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StorageAccount> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = CloudError
   >;
 

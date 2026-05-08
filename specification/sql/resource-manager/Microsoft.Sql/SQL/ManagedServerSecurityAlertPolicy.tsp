@@ -40,8 +40,10 @@ interface ManagedServerSecurityAlertPolicies {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ManagedServerSecurityAlertPolicy,
-    Response = ArmResourceUpdatedResponse<ManagedServerSecurityAlertPolicy> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedServerSecurityAlertPolicy> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<ManagedServerSecurityAlertPolicy>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedServerSecurityAlertPolicy> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

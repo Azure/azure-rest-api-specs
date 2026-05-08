@@ -55,14 +55,17 @@ interface FhirServices {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     FhirService,
-    Response = ArmResourceUpdatedResponse<FhirService> | ArmResourceCreatedResponse<
-      FhirService,
-      ArmLroLocationHeader<FinalResult = FhirService> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | (ArmAcceptedLroResponse & {
-      @bodyRoot
-      _: FhirService;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<FhirService>
+      | ArmResourceCreatedResponse<
+          FhirService,
+          ArmLroLocationHeader<FinalResult = FhirService> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | (ArmAcceptedLroResponse & {
+          @bodyRoot
+          _: FhirService;
+        }),
     Error = ErrorDetails
   >;
 
@@ -105,14 +108,17 @@ interface FhirServiceOperationGroup {
     /** The parameters for updating a FHIR Service. */
     @body
     fhirservicePatchResource: FhirServicePatchResource,
-  ): ArmResponse<FhirService> | (ArmAcceptedLroResponse<
-    "Resource update request accepted.",
-    LroHeaders = ArmLroLocationHeader<FinalResult = FhirService> &
-      Azure.Core.Foundations.RetryAfterHeader
-  > & {
-    @bodyRoot
-    _: FhirService;
-  }) | ErrorDetails;
+  ):
+    | ArmResponse<FhirService>
+    | (ArmAcceptedLroResponse<
+        "Resource update request accepted.",
+        LroHeaders = ArmLroLocationHeader<FinalResult = FhirService> &
+          Azure.Core.Foundations.RetryAfterHeader
+      > & {
+        @bodyRoot
+        _: FhirService;
+      })
+    | ErrorDetails;
 
   /**
    * Deletes a FHIR Service.

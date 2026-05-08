@@ -1436,10 +1436,13 @@ op privateLinkServicesCheckPrivateLinkServiceVisibilityByResourceGroup(
   @body
   @clientName("parameters")
   body: CheckPrivateLinkServiceVisibilityRequest,
-): ArmResponse<AvailablePrivateEndpointTypesResult> | ArmAcceptedLroResponse<
-  "Accepted and the operation will complete asynchronously.",
-  ArmLroLocationHeader<FinalResult = PrivateLinkServiceVisibility>
-> | CloudError;
+):
+  | ArmResponse<AvailablePrivateEndpointTypesResult>
+  | ArmAcceptedLroResponse<
+      "Accepted and the operation will complete asynchronously.",
+      ArmLroLocationHeader<FinalResult = PrivateLinkServiceVisibility>
+    >
+  | CloudError;
 
 @@override(PrivateLinkServicesOperationGroup.checkPrivateLinkServiceVisibilityByResourceGroup,
   privateLinkServicesCheckPrivateLinkServiceVisibilityByResourceGroup,
@@ -1529,7 +1532,9 @@ op replaceprivateDnsZoneGroupsList(
 
   @body
   body: void,
-): Azure.ResourceManager.ArmResponse<Microsoft.Network.PrivateDnsZoneGroupListResult> | Common.CloudError;
+):
+  | Azure.ResourceManager.ArmResponse<Microsoft.Network.PrivateDnsZoneGroupListResult>
+  | Common.CloudError;
 
 @@override(Microsoft.Network.PrivateEndpoints.privateDnsZoneGroupsList,
   replaceprivateDnsZoneGroupsList,

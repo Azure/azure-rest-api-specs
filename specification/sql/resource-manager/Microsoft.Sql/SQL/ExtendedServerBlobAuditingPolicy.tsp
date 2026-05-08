@@ -56,8 +56,10 @@ interface ExtendedServerBlobAuditingPolicies {
   @tag("BlobAuditing")
   createOrUpdate is ExtendedServerBlobAuditingPolicyOps.CreateOrUpdateAsync<
     ExtendedServerBlobAuditingPolicy,
-    Response = ArmResourceUpdatedResponse<ExtendedServerBlobAuditingPolicy> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ExtendedServerBlobAuditingPolicy> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<ExtendedServerBlobAuditingPolicy>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ExtendedServerBlobAuditingPolicy> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

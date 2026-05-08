@@ -46,7 +46,10 @@ interface CaCertificates {
   @summary("Delete a CA certificate.")
   delete is ArmResourceDeleteWithoutOkAsync<
     CaCertificate,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

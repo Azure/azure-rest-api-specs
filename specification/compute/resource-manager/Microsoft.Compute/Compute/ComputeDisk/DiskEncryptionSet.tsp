@@ -44,10 +44,12 @@ interface DiskEncryptionSets {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     DiskEncryptionSet,
-    Response = ArmResourceUpdatedResponse<DiskEncryptionSet> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = DiskEncryptionSet> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot _: DiskEncryptionSet;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<DiskEncryptionSet>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = DiskEncryptionSet> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot _: DiskEncryptionSet;
+        })
   >;
 
   /**
@@ -58,10 +60,12 @@ interface DiskEncryptionSets {
   update is ComputeCustomPatchAsync<
     DiskEncryptionSet,
     DiskEncryptionSetUpdate,
-    Response = ArmResponse<DiskEncryptionSet> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = DiskEncryptionSet> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot _: DiskEncryptionSet;
-    })
+    Response =
+      | ArmResponse<DiskEncryptionSet>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = DiskEncryptionSet> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot _: DiskEncryptionSet;
+        })
   >;
 
   /**

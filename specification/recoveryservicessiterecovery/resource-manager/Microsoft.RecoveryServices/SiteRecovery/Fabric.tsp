@@ -53,7 +53,10 @@ alias FabricOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
-model FabricAcceptedLroResponse<FinalResult extends TypeSpec.Reflection.Model | unknown | void = Fabric>
+model FabricAcceptedLroResponse<FinalResult extends
+  | TypeSpec.Reflection.Model
+  | unknown
+  | void = Fabric>
   is ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = FinalResult> &
     Azure.Core.Foundations.RetryAfterHeader>;
 
@@ -84,8 +87,10 @@ interface Fabrics {
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     Fabric,
     Request = FabricCreationInput,
-    Response = ArmResourceUpdatedResponse<Fabric> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Fabric> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResourceUpdatedResponse<Fabric>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Fabric> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = never
   >;
 

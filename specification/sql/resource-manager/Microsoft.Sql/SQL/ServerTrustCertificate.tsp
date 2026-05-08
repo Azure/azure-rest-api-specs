@@ -38,11 +38,14 @@ interface ServerTrustCertificates {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ServerTrustCertificate,
-    Response = ArmResourceUpdatedResponse<ServerTrustCertificate> | ArmResourceCreatedResponse<
-      ServerTrustCertificate,
-      ArmLroLocationHeader<FinalResult = ServerTrustCertificate> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<ServerTrustCertificate>
+      | ArmResourceCreatedResponse<
+          ServerTrustCertificate,
+          ArmLroLocationHeader<FinalResult = ServerTrustCertificate> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -51,7 +54,10 @@ interface ServerTrustCertificates {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ServerTrustCertificate,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

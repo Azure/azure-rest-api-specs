@@ -76,12 +76,14 @@ interface ConditionalCredits {
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ConditionalCredit,
-    Response = (ArmResponse<ConditionalCredit> &
-      ArmAsyncOperationHeader<FinalResult = ConditionalCredit>) | (ArmResourceCreatedResponse<
-      ConditionalCredit,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = ConditionalCredit>
-    > &
-      Azure.Core.Foundations.RetryAfterHeader)
+    Response =
+      | (ArmResponse<ConditionalCredit> &
+          ArmAsyncOperationHeader<FinalResult = ConditionalCredit>)
+      | (ArmResourceCreatedResponse<
+          ConditionalCredit,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = ConditionalCredit>
+        > &
+          Azure.Core.Foundations.RetryAfterHeader)
   >;
 
   /**
@@ -91,9 +93,11 @@ interface ConditionalCredits {
   update is ArmCustomPatchAsync<
     ConditionalCredit,
     PatchModel = ConditionalCreditPatchRequest,
-    Response = (ArmResponse<ConditionalCredit> &
-      ArmAsyncOperationHeader<FinalResult = ConditionalCredit>) | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ConditionalCredit>> &
-      Azure.Core.Foundations.RetryAfterHeader)
+    Response =
+      | (ArmResponse<ConditionalCredit> &
+          ArmAsyncOperationHeader<FinalResult = ConditionalCredit>)
+      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ConditionalCredit>> &
+          Azure.Core.Foundations.RetryAfterHeader)
   >;
 
   /**
@@ -103,9 +107,10 @@ interface ConditionalCredits {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     ConditionalCredit,
-    Response = (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void>> &
-      Azure.Core.Foundations.RetryAfterHeader) | (NoContentResponse &
-      ArmAsyncOperationHeader<FinalResult = void>)
+    Response =
+      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void>> &
+          Azure.Core.Foundations.RetryAfterHeader)
+      | (NoContentResponse & ArmAsyncOperationHeader<FinalResult = void>)
   >;
 
   /**
@@ -132,8 +137,10 @@ interface ConditionalCredits {
     ConditionalCredit,
     Request = void,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ConditionalCredit>,
-    Response = ArmResponse<ConditionalCredit> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ConditionalCredit>> &
-      Azure.Core.Foundations.RetryAfterHeader)
+    Response =
+      | ArmResponse<ConditionalCredit>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ConditionalCredit>> &
+          Azure.Core.Foundations.RetryAfterHeader)
   >;
 }
 

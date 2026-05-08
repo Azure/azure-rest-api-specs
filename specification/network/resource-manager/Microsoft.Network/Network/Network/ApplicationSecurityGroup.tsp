@@ -51,7 +51,10 @@ interface ApplicationSecurityGroups {
   @tag("ApplicationSecurityGroups")
   delete is ArmResourceDeleteWithoutOkAsync<
     ApplicationSecurityGroup,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 

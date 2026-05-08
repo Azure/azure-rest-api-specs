@@ -59,7 +59,10 @@ interface CommunicationServices {
   @tag("CommunicationServices")
   delete is ArmResourceDeleteWithoutOkAsync<
     CommunicationServiceResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

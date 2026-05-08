@@ -81,7 +81,10 @@ interface AttestationProviders {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteSync<
     AttestationProvider,
-    Response = ArmDeletedResponse | AcceptedResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | AcceptedResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 

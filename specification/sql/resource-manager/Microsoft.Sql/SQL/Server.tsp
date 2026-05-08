@@ -59,11 +59,14 @@ interface Servers {
   @tag("Servers")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Server,
-    Response = ArmResourceUpdatedResponse<Server> | ArmResourceCreatedResponse<
-      Server,
-      ArmLroLocationHeader<FinalResult = Server> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<Server>
+      | ArmResourceCreatedResponse<
+          Server,
+          ArmLroLocationHeader<FinalResult = Server> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -80,7 +83,10 @@ interface Servers {
   @tag("Servers")
   delete is ArmResourceDeleteWithoutOkAsync<
     Server,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

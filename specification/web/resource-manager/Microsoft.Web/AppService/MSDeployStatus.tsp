@@ -81,11 +81,13 @@ interface MSDeployStatuses {
   @summary("Invoke the MSDeploy web app extension.")
   createMSDeployOperation is MSDeployStatusOps.CreateOrUpdateAsync<
     MSDeployStatus,
-    Response = ArmResourceCreatedResponse<
-      MSDeployStatus,
-      ArmLroLocationHeader<FinalResult = MSDeployStatus> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmConflictResponse,
+    Response =
+      | ArmResourceCreatedResponse<
+          MSDeployStatus,
+          ArmLroLocationHeader<FinalResult = MSDeployStatus> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmConflictResponse,
     Request = MSDeploy,
     OverrideErrorType = DefaultErrorResponse
   >;
@@ -157,11 +159,13 @@ interface MSDeployStatusOperationGroup {
   @summary("Invoke the MSDeploy web app extension.")
   createInstanceMSDeployOperation is MSDeployStatusOperationGroupOps.CreateOrUpdateAsync<
     MSDeployStatus,
-    Response = ArmResourceCreatedResponse<
-      MSDeployStatus,
-      ArmLroLocationHeader<FinalResult = MSDeployStatus> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmConflictResponse,
+    Response =
+      | ArmResourceCreatedResponse<
+          MSDeployStatus,
+          ArmLroLocationHeader<FinalResult = MSDeployStatus> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmConflictResponse,
     Request = MSDeploy,
     OverrideErrorType = DefaultErrorResponse
   >;
@@ -232,11 +236,13 @@ interface MSDeployStatusSlotOperationGroup {
   @summary("Invoke the MSDeploy web app extension.")
   createMSDeployOperationSlot is MSDeployStatusSlotOperationGroupOps.CreateOrUpdateAsync<
     MSDeployStatus,
-    Response = ArmResourceCreatedResponse<
-      MSDeployStatus,
-      ArmLroLocationHeader<FinalResult = MSDeployStatus> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmConflictResponse,
+    Response =
+      | ArmResourceCreatedResponse<
+          MSDeployStatus,
+          ArmLroLocationHeader<FinalResult = MSDeployStatus> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmConflictResponse,
     Request = MSDeploy,
     OverrideErrorType = DefaultErrorResponse
   >;
@@ -314,11 +320,13 @@ interface InstanceMSDeployStatusOperationGroup {
   @summary("Invoke the MSDeploy web app extension.")
   createInstanceMSDeployOperationSlot is InstanceMSDeployStatusOperationGroupOps.CreateOrUpdateAsync<
     MSDeployStatus,
-    Response = ArmResourceCreatedResponse<
-      MSDeployStatus,
-      ArmLroLocationHeader<FinalResult = MSDeployStatus> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmConflictResponse,
+    Response =
+      | ArmResourceCreatedResponse<
+          MSDeployStatus,
+          ArmLroLocationHeader<FinalResult = MSDeployStatus> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmConflictResponse,
     Request = MSDeploy,
     OverrideErrorType = DefaultErrorResponse
   >;

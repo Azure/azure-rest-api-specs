@@ -49,7 +49,9 @@ op getReplace(
   @minItems(2)
   @maxItems(2)
   botRight?: float64[],
-): Azure.ResourceManager.ArmResponse<Microsoft.Network.HeatMapModel> | Microsoft.Network.CloudError;
+):
+  | Azure.ResourceManager.ArmResponse<Microsoft.Network.HeatMapModel>
+  | Microsoft.Network.CloudError;
 
 @@alternateType(HeatMapOpsResourceParameters.heatMapType, "default", "java");
 @@override(HeatMapModels.get, getReplace, "go");

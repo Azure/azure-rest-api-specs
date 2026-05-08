@@ -63,11 +63,13 @@ interface ConfigurationStores {
   update is ArmCustomPatchAsync<
     ConfigurationStore,
     PatchModel = ConfigurationStoreUpdateParameters,
-    Response = ArmResponse<ConfigurationStore> | ArmResourceCreatedResponse<
-      ConfigurationStore,
-      LroHeaders = ArmLroLocationHeader<FinalResult = ConfigurationStore> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | ArmResponse<ConfigurationStore>
+      | ArmResourceCreatedResponse<
+          ConfigurationStore,
+          LroHeaders = ArmLroLocationHeader<FinalResult = ConfigurationStore> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**
@@ -76,7 +78,10 @@ interface ConfigurationStores {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     ConfigurationStore,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ConfigurationStoresDeleteLroHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ConfigurationStoresDeleteLroHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**

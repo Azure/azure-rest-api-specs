@@ -44,10 +44,12 @@ interface AppServiceCertificateOrders {
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AppServiceCertificateOrder,
-    Response = ArmResponse<AppServiceCertificateOrder> | ArmResourceCreatedResponse<
-      AppServiceCertificateOrder,
-      LroHeaders = ArmLroLocationHeader<FinalResult = AppServiceCertificateOrder>
-    >,
+    Response =
+      | ArmResponse<AppServiceCertificateOrder>
+      | ArmResourceCreatedResponse<
+          AppServiceCertificateOrder,
+          LroHeaders = ArmLroLocationHeader<FinalResult = AppServiceCertificateOrder>
+        >,
     Error = DefaultErrorResponse
   >;
 

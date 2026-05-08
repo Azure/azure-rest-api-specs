@@ -64,11 +64,14 @@ interface ManagedCertificates {
   @summary("Create or Update a Managed Certificate.")
   createOrUpdate is ManagedCertificateOps.CreateOrUpdateAsync<
     ManagedCertificate,
-    Response = ArmResourceUpdatedResponse<ManagedCertificate> | ArmResourceCreatedResponse<
-      ManagedCertificate,
-      ArmAsyncOperationHeader<FinalResult = ManagedCertificate> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ManagedCertificateBadRequestError,
+    Response =
+      | ArmResourceUpdatedResponse<ManagedCertificate>
+      | ArmResourceCreatedResponse<
+          ManagedCertificate,
+          ArmAsyncOperationHeader<FinalResult = ManagedCertificate> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ManagedCertificateBadRequestError,
     OptionalRequestBody = true
   >;
 

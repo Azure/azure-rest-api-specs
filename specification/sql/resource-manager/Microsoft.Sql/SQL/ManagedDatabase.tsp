@@ -40,11 +40,14 @@ interface ManagedDatabases {
   @tag("ManagedDatabases")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ManagedDatabase,
-    Response = ArmResourceUpdatedResponse<ManagedDatabase> | ArmResourceCreatedResponse<
-      ManagedDatabase,
-      ArmLroLocationHeader<FinalResult = ManagedDatabase> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<ManagedDatabase>
+      | ArmResourceCreatedResponse<
+          ManagedDatabase,
+          ArmLroLocationHeader<FinalResult = ManagedDatabase> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -64,7 +67,10 @@ interface ManagedDatabases {
   @tag("ManagedDatabases")
   delete is ArmResourceDeleteWithoutOkAsync<
     ManagedDatabase,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

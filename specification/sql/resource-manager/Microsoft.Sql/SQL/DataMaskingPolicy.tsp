@@ -134,7 +134,9 @@ interface DataMaskingPolicies {
   dataMaskingRulesCreateOrUpdate is DataMaskingPoliciesOps.ActionSync<
     DataMaskingPolicy,
     DataMaskingRule,
-    Response = ArmResponse<DataMaskingRule> | ArmResourceCreatedSyncResponse<DataMaskingRule>
+    Response =
+      | ArmResponse<DataMaskingRule>
+      | ArmResourceCreatedSyncResponse<DataMaskingRule>
   >;
 }
 

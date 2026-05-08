@@ -66,16 +66,18 @@ interface CodeContainers {
   @summary("Create or update Code container.")
   createOrUpdate is CodeContainerOps.CreateOrUpdateAsync<
     CodeContainer,
-    Response = ArmResourceUpdatedResponse<CodeContainer> | (ArmResourceCreatedResponse<
-      CodeContainer,
-      LroHeaders = ArmAsyncOperationHeader
-    > & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<CodeContainer>
+      | (ArmResourceCreatedResponse<
+          CodeContainer,
+          LroHeaders = ArmAsyncOperationHeader
+        > & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
   >;
 
   /**
@@ -85,13 +87,16 @@ interface CodeContainers {
   @summary("Delete Code container.")
   delete is CodeContainerOps.DeleteWithoutOkAsync<
     CodeContainer,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**

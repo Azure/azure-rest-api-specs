@@ -53,14 +53,17 @@ interface WebApplicationFirewallPolicies {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     WebApplicationFirewallPolicy,
-    Response = ArmResourceUpdatedResponse<WebApplicationFirewallPolicy> | ArmResourceCreatedResponse<
-      WebApplicationFirewallPolicy,
-      ArmLroLocationHeader<FinalResult = WebApplicationFirewallPolicy> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | (ArmAcceptedLroResponse & {
-      @bodyRoot
-      _: WebApplicationFirewallPolicy;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<WebApplicationFirewallPolicy>
+      | ArmResourceCreatedResponse<
+          WebApplicationFirewallPolicy,
+          ArmLroLocationHeader<FinalResult = WebApplicationFirewallPolicy> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | (ArmAcceptedLroResponse & {
+          @bodyRoot
+          _: WebApplicationFirewallPolicy;
+        }),
     Error = ErrorResponse
   >;
 
@@ -83,7 +86,10 @@ interface WebApplicationFirewallPolicies {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     WebApplicationFirewallPolicy,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = ErrorResponse
   >;
 

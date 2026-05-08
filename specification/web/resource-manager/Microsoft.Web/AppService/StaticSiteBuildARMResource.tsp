@@ -52,7 +52,10 @@ interface StaticSiteBuildARMResources {
   @summary("Deletes a static site build.")
   deleteStaticSiteBuild is ArmResourceDeleteWithoutOkAsync<
     StaticSiteBuildARMResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = DefaultErrorResponse
   >;
 

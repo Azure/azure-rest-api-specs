@@ -135,7 +135,10 @@ interface NetworkInterfaceOperationGroup {
   @tag("NetworkInterfaces")
   delete is NetworkInterfaceOperationGroupOps.DeleteWithoutOkAsync<
     NetworkInterface,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     OverrideErrorType = CloudError
   >;
 

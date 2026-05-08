@@ -101,8 +101,11 @@ interface DatabaseMigrationSqlVms {
       @query("force")
       force?: boolean;
     },
-    Response = ArmResponse<DatabaseMigrationSqlVm> | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader<FinalResult = DatabaseMigrationSqlVm> &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmResponse<DatabaseMigrationSqlVm>
+      | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader<FinalResult = DatabaseMigrationSqlVm> &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**

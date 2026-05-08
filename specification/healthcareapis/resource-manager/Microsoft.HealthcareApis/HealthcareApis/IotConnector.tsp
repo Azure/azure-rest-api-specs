@@ -49,14 +49,17 @@ interface IotConnectors {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     IotConnector,
-    Response = ArmResourceUpdatedResponse<IotConnector> | ArmResourceCreatedResponse<
-      IotConnector,
-      ArmLroLocationHeader<FinalResult = IotConnector> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | (ArmAcceptedLroResponse & {
-      @bodyRoot
-      _: IotConnector;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<IotConnector>
+      | ArmResourceCreatedResponse<
+          IotConnector,
+          ArmLroLocationHeader<FinalResult = IotConnector> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | (ArmAcceptedLroResponse & {
+          @bodyRoot
+          _: IotConnector;
+        }),
     Error = ErrorDetails
   >;
 
@@ -107,14 +110,17 @@ interface IotConnectorOperationGroup {
     /** The parameters for updating an IoT Connector. */
     @body
     iotConnectorPatchResource: IotConnectorPatchResource,
-  ): ArmResponse<IotConnector> | (ArmAcceptedLroResponse<
-    "Resource update request accepted.",
-    LroHeaders = ArmLroLocationHeader<FinalResult = IotConnector> &
-      Azure.Core.Foundations.RetryAfterHeader
-  > & {
-    @bodyRoot
-    _: IotConnector;
-  }) | ErrorDetails;
+  ):
+    | ArmResponse<IotConnector>
+    | (ArmAcceptedLroResponse<
+        "Resource update request accepted.",
+        LroHeaders = ArmLroLocationHeader<FinalResult = IotConnector> &
+          Azure.Core.Foundations.RetryAfterHeader
+      > & {
+        @bodyRoot
+        _: IotConnector;
+      })
+    | ErrorDetails;
 
   /**
    * Deletes an IoT Connector.

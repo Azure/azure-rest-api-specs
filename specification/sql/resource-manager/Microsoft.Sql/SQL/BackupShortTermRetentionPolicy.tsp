@@ -40,8 +40,10 @@ interface BackupShortTermRetentionPolicies {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     BackupShortTermRetentionPolicy,
-    Response = ArmResourceUpdatedResponse<BackupShortTermRetentionPolicy> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BackupShortTermRetentionPolicy> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<BackupShortTermRetentionPolicy>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BackupShortTermRetentionPolicy> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

@@ -128,10 +128,12 @@ interface SwapResources {
   @tag("VipSwap")
   create is CloudServiceOps.CreateOrUpdateAsync<
     SwapResource,
-    Response = {
-      @body body: void;
-    } | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | {
+          @body body: void;
+        }
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     ErrorType = CloudError
   >;
 

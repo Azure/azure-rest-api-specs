@@ -89,8 +89,11 @@ interface LongRunningBackup {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ServerBackupV2sOps.CreateOrUpdateAsync<
     ServerBackupV2,
-    Response = ArmResourceUpdatedResponse<ServerBackupV2> | ArmResourceCreatedResponse<ServerBackupV2> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ServerBackupV2> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResourceUpdatedResponse<ServerBackupV2>
+      | ArmResourceCreatedResponse<ServerBackupV2>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ServerBackupV2> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     OptionalRequestBody = true
   >;
 

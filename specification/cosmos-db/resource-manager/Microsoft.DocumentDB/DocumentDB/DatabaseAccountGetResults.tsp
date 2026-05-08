@@ -71,7 +71,9 @@ interface DatabaseAccounts {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     DatabaseAccountGetResults,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | NoContentResponse
+    Response =
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+      | NoContentResponse
   >;
 
   /**
@@ -97,8 +99,10 @@ interface DatabaseAccounts {
   failoverPriorityChange is ArmResourceActionAsyncBase<
     DatabaseAccountGetResults,
     Request = FailoverPolicies,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader> | NoContentResponse,
+    Response =
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | NoContentResponse,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<DatabaseAccountGetResults>
   >;
 

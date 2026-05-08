@@ -47,7 +47,10 @@ interface Clients {
   @summary("Delete a client.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Client,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

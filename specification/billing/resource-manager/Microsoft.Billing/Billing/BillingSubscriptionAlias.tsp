@@ -73,8 +73,11 @@ interface BillingSubscriptionAliases {
   @tag("BillingSubscription")
   createOrUpdate is BillingSubscriptionAliasOps.CreateOrUpdateAsync<
     BillingSubscriptionAlias,
-    Response = ArmResourceUpdatedResponse<BillingSubscriptionAlias> | ArmResourceCreatedResponse<BillingSubscriptionAlias> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BillingSubscriptionAlias> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<BillingSubscriptionAlias>
+      | ArmResourceCreatedResponse<BillingSubscriptionAlias>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BillingSubscriptionAlias> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

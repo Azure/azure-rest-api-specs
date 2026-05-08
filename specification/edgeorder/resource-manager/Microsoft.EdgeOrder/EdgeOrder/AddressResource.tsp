@@ -37,8 +37,10 @@ interface AddressResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   create is ArmResourceCreateOrReplaceAsync<
     AddressResource,
-    Response = ArmResourceUpdatedResponse<AddressResource> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = AddressResource> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<AddressResource>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = AddressResource> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

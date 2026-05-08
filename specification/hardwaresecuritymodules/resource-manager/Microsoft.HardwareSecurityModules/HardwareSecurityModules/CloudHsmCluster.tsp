@@ -190,12 +190,13 @@ interface CloudHsmClusters {
   cloudHsmClusterBackupStatusGet is CloudHsmClustersOps.ActionSync<
     CloudHsmCluster,
     void,
-    Response = (BackupResult &
-      Azure.Core.RequestIdResponseHeader) | ArmAcceptedResponse<ExtraHeaders = {
-      @header("Location")
-      @doc("The Location header contains the URL where the status of the long running operation can be checked.")
-      location?: string;
-    } & Azure.Core.RequestIdResponseHeader>,
+    Response =
+      | (BackupResult & Azure.Core.RequestIdResponseHeader)
+      | ArmAcceptedResponse<ExtraHeaders = {
+          @header("Location")
+          @doc("The Location header contains the URL where the status of the long running operation can be checked.")
+          location?: string;
+        } & Azure.Core.RequestIdResponseHeader>,
     Parameters = {
       /**
        * Identifier for the backup operation
@@ -214,12 +215,13 @@ interface CloudHsmClusters {
   cloudHsmClusterRestoreStatusGet is CloudHsmClustersOps.ActionSync<
     CloudHsmCluster,
     void,
-    Response = (RestoreResult &
-      Azure.Core.RequestIdResponseHeader) | ArmAcceptedResponse<ExtraHeaders = {
-      @header("Location")
-      @doc("The Location header contains the URL where the status of the long running operation can be checked.")
-      location?: string;
-    } & Azure.Core.RequestIdResponseHeader>,
+    Response =
+      | (RestoreResult & Azure.Core.RequestIdResponseHeader)
+      | ArmAcceptedResponse<ExtraHeaders = {
+          @header("Location")
+          @doc("The Location header contains the URL where the status of the long running operation can be checked.")
+          location?: string;
+        } & Azure.Core.RequestIdResponseHeader>,
     Parameters = {
       /**
        * Identifier for the restore operation

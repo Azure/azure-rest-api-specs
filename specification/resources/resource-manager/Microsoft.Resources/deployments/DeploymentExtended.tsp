@@ -151,15 +151,17 @@ interface Deployments {
     DeploymentExtended,
     Deployment,
     DeploymentValidateResult,
-    Error = CloudError | {
-      ...Response<400>;
+    Error =
+      | CloudError
+      | {
+          ...Response<400>;
 
-      /**
-       * The template deployment validation detected failures.
-       */
-      @bodyRoot
-      body: DeploymentValidateResult;
-    }
+          /**
+           * The template deployment validation detected failures.
+           */
+          @bodyRoot
+          body: DeploymentValidateResult;
+        }
   >;
 
   /**
@@ -304,15 +306,17 @@ interface DeploymentsExtendedTenant {
     DeploymentExtended,
     ScopedDeployment,
     DeploymentValidateResult,
-    Error = CloudError | {
-      ...Response<400>;
+    Error =
+      | CloudError
+      | {
+          ...Response<400>;
 
-      /**
-       * The template deployment validation detected failures.
-       */
-      @bodyRoot
-      body: DeploymentValidateResult;
-    }
+          /**
+           * The template deployment validation detected failures.
+           */
+          @bodyRoot
+          body: DeploymentValidateResult;
+        }
   >;
 
   /**
@@ -524,15 +528,17 @@ interface DeploymentExtendedManagementGroup {
     DeploymentExtended,
     ScopedDeployment,
     DeploymentValidateResult,
-    Error = CloudError | {
-      ...Response<400>;
+    Error =
+      | CloudError
+      | {
+          ...Response<400>;
 
-      /**
-       * The template deployment validation detected failures.
-       */
-      @bodyRoot
-      body: DeploymentValidateResult;
-    }
+          /**
+           * The template deployment validation detected failures.
+           */
+          @bodyRoot
+          body: DeploymentValidateResult;
+        }
   >;
 
   /**
@@ -714,15 +720,17 @@ interface DeploymentExtendedSubscriptionGroup {
     DeploymentExtended,
     Deployment,
     DeploymentValidateResult,
-    Error = CloudError | {
-      ...Response<400>;
+    Error =
+      | CloudError
+      | {
+          ...Response<400>;
 
-      /**
-       * The template deployment validation detected failures.
-       */
-      @bodyRoot
-      body: DeploymentValidateResult;
-    }
+          /**
+           * The template deployment validation detected failures.
+           */
+          @bodyRoot
+          body: DeploymentValidateResult;
+        }
   >;
 
   /**
@@ -890,15 +898,17 @@ interface DeploymentExtendedOperationGroup {
     DeploymentExtended,
     Deployment,
     DeploymentValidateResult,
-    OverrideErrorType = CloudError | {
-      ...Response<400>;
+    OverrideErrorType =
+      | CloudError
+      | {
+          ...Response<400>;
 
-      /**
-       * The template deployment validation detected failures.
-       */
-      @bodyRoot
-      body: DeploymentValidateResult;
-    }
+          /**
+           * The template deployment validation detected failures.
+           */
+          @bodyRoot
+          body: DeploymentValidateResult;
+        }
   >;
 
   /**

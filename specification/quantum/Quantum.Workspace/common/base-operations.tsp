@@ -17,7 +17,9 @@ alias DefaultServiceTraits = NoRepeatableRequests &
 alias AzureCoreOperations = Azure.Core.ResourceOperations<DefaultServiceTraits>;
 
 namespace Quantum.Workspace.Services {
-  alias ResourceOkOrNoContentResponse<Resource extends TypeSpec.Reflection.Model> = Azure.Core.Foundations.ResourceOkResponse<Resource> | TypeSpec.Http.NoContentResponse;
+  alias ResourceOkOrNoContentResponse<Resource extends TypeSpec.Reflection.Model> =
+    | Azure.Core.Foundations.ResourceOkResponse<Resource>
+    | TypeSpec.Http.NoContentResponse;
 
   /** Generic POST operation. */
   @post

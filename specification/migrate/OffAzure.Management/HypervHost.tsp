@@ -48,7 +48,10 @@ interface HypervHosts {
   @tag("HypervHostController")
   delete is ArmResourceDeleteWithoutOkAsync<
     HypervHost,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

@@ -47,11 +47,13 @@ interface PrivateEndpointConnections {
   @summary("Update private endpoint connection status")
   create is ArmResourceCreateOrReplaceAsync<
     PrivateEndpointConnection,
-    Response = ArmResourceUpdatedResponse<PrivateEndpointConnection> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: PrivateEndpointConnection;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<PrivateEndpointConnection>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: PrivateEndpointConnection;
+        }),
     Error = ErrorResponse
   >;
 
@@ -64,7 +66,10 @@ interface PrivateEndpointConnections {
   @summary("Remove private endpoint connection")
   delete is ArmResourceDeleteWithoutOkAsync<
     PrivateEndpointConnection,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = ErrorResponse
   >;
 

@@ -38,11 +38,14 @@ interface DistributedAvailabilityGroups {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     DistributedAvailabilityGroup,
-    Response = ArmResourceUpdatedResponse<DistributedAvailabilityGroup> | ArmResourceCreatedResponse<
-      DistributedAvailabilityGroup,
-      ArmLroLocationHeader<FinalResult = DistributedAvailabilityGroup> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<DistributedAvailabilityGroup>
+      | ArmResourceCreatedResponse<
+          DistributedAvailabilityGroup,
+          ArmLroLocationHeader<FinalResult = DistributedAvailabilityGroup> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -60,7 +63,10 @@ interface DistributedAvailabilityGroups {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     DistributedAvailabilityGroup,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

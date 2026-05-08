@@ -56,9 +56,12 @@ interface RuleSets {
   create is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     RuleSet,
     OptionalRequestBody = true,
-    Response = ArmResponse<RuleSet> | (ArmCreatedResponse<RuleSet> &
-      ArmAsyncOperationHeader<FinalResult = RuleSet> &
-      ArmLroLocationHeader<FinalResult = RuleSet>) | ErrorResponse
+    Response =
+      | ArmResponse<RuleSet>
+      | (ArmCreatedResponse<RuleSet> &
+          ArmAsyncOperationHeader<FinalResult = RuleSet> &
+          ArmLroLocationHeader<FinalResult = RuleSet>)
+      | ErrorResponse
   >;
 
   /**
@@ -68,9 +71,12 @@ interface RuleSets {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     RuleSet,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+          ArmLroLocationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**

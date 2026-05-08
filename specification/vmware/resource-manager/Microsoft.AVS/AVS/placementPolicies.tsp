@@ -28,15 +28,17 @@ interface PlacementPolicies {
   update is ArmCustomPatchAsync<
     PlacementPolicy,
     PlacementPolicyUpdate,
-    Response = ArmResponse<PlacementPolicy> | ArmAcceptedLroResponseWithResponseBody<
-      PlacementPolicy,
-      LroHeaders = ArmLroLocationHeader<
-        Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>,
-        PlacementPolicy,
-        string
-      > &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | ArmResponse<PlacementPolicy>
+      | ArmAcceptedLroResponseWithResponseBody<
+          PlacementPolicy,
+          LroHeaders = ArmLroLocationHeader<
+            Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>,
+            PlacementPolicy,
+            string
+          > &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   #suppress "deprecated"

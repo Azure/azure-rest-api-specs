@@ -91,7 +91,10 @@ interface CommitmentPlanAccountAssociations {
   @tag("CommitmentPlans")
   deleteAssociation is CommitmentPlanAccountAssociationsOps.DeleteWithoutOkAsync<
     CommitmentPlanAccountAssociation,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

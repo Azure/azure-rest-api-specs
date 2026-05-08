@@ -84,7 +84,10 @@ interface ApplicationGateways {
   @tag("ApplicationGateways")
   delete is ArmResourceDeleteWithoutOkAsync<
     ApplicationGateway,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 

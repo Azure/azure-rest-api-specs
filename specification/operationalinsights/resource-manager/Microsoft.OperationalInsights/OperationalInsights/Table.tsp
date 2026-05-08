@@ -68,8 +68,10 @@ interface Tables {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is TableOps.CreateOrUpdateAsync<
     Table,
-    Response = ArmResourceUpdatedResponse<Table> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Table> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<Table>
+      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Table> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -92,8 +94,11 @@ interface Tables {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is TableOps.DeleteWithoutOkAsync<
     Table,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**

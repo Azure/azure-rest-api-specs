@@ -67,7 +67,10 @@ interface BackendAddressPools {
   @tag("LoadBalancers")
   delete is ArmResourceDeleteWithoutOkAsync<
     BackendAddressPool,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -91,11 +94,13 @@ interface BackendAddressPools {
     BackendAddressPool,
     QueryInboundNatRulePortMappingRequest,
     void,
-    Response = ArmResponse<BackendAddressInboundNatRulePortMappings> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BackendAddressInboundNatRulePortMappings> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @body
-      _: BackendAddressInboundNatRulePortMappings;
-    }),
+    Response =
+      | ArmResponse<BackendAddressInboundNatRulePortMappings>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BackendAddressInboundNatRulePortMappings> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @body
+          _: BackendAddressInboundNatRulePortMappings;
+        }),
     OverrideErrorType = CloudError
   >;
 }

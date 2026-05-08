@@ -101,8 +101,11 @@ interface DatabaseMigrationSqlMis {
       @query("force")
       force?: boolean;
     },
-    Response = ArmResponse<DatabaseMigrationSqlMi> | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader<FinalResult = DatabaseMigrationSqlMi> &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmResponse<DatabaseMigrationSqlMi>
+      | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader<FinalResult = DatabaseMigrationSqlMi> &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**

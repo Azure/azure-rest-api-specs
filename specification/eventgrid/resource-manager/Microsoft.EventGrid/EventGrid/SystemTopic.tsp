@@ -55,11 +55,13 @@ interface SystemTopics {
   update is ArmCustomPatchAsync<
     SystemTopic,
     PatchModel = SystemTopicUpdateParameters,
-    Response = ArmResponse<SystemTopic> | ArmResourceCreatedResponse<
-      SystemTopic,
-      LroHeaders = ArmLroLocationHeader<FinalResult = SystemTopic> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | ArmResponse<SystemTopic>
+      | ArmResourceCreatedResponse<
+          SystemTopic,
+          LroHeaders = ArmLroLocationHeader<FinalResult = SystemTopic> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**
@@ -70,7 +72,10 @@ interface SystemTopics {
   @summary("Delete a system topic.")
   delete is ArmResourceDeleteWithoutOkAsync<
     SystemTopic,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

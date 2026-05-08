@@ -41,8 +41,10 @@ interface OutboundRuleBasicResources {
     OutboundRuleBasicResource,
     LroHeaders = ArmLroLocationHeader<FinalResult = OutboundRuleBasicResource> &
       Azure.Core.Foundations.RetryAfterHeader,
-    Response = ArmResourceUpdatedResponse<OutboundRuleBasicResource> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OutboundRuleBasicResource> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<OutboundRuleBasicResource>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OutboundRuleBasicResource> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

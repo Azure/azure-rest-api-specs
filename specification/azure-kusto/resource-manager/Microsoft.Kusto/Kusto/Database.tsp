@@ -67,15 +67,18 @@ interface Databases {
       @query("callerRole")
       callerRole?: CallerRole = CallerRole.Admin;
     },
-    Response = ArmResourceUpdatedResponse<Database> | ArmResourceCreatedResponse<
-      Database,
-      LroHeaders = ArmLroLocationHeader<FinalResult = Database>
-    > | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Database> &
-      ArmAsyncOperationHeader<FinalResult = Database> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: Database;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<Database>
+      | ArmResourceCreatedResponse<
+          Database,
+          LroHeaders = ArmLroLocationHeader<FinalResult = Database>
+        >
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Database> &
+          ArmAsyncOperationHeader<FinalResult = Database> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: Database;
+        })
   >;
 
   /**
@@ -94,17 +97,20 @@ interface Databases {
       @query("callerRole")
       callerRole?: CallerRole = CallerRole.Admin;
     },
-    Response = ArmResponse<Database> | ArmResourceCreatedResponse<
-      Database,
-      LroHeaders = ArmLroLocationHeader<FinalResult = Database> &
-        ArmAsyncOperationHeader<FinalResult = Database &
-          Azure.Core.Foundations.RetryAfterHeader>
-    > | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Database> &
-      ArmAsyncOperationHeader<FinalResult = Database &
-        Azure.Core.Foundations.RetryAfterHeader>> & {
-      @bodyRoot
-      _: Database;
-    })
+    Response =
+      | ArmResponse<Database>
+      | ArmResourceCreatedResponse<
+          Database,
+          LroHeaders = ArmLroLocationHeader<FinalResult = Database> &
+            ArmAsyncOperationHeader<FinalResult = Database &
+              Azure.Core.Foundations.RetryAfterHeader>
+        >
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Database> &
+          ArmAsyncOperationHeader<FinalResult = Database &
+            Azure.Core.Foundations.RetryAfterHeader>> & {
+          @bodyRoot
+          _: Database;
+        })
   >;
 
   /**
@@ -114,9 +120,12 @@ interface Databases {
   @tag("Databases")
   delete is ArmResourceDeleteWithoutOkAsync<
     Database,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
-      ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+          ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -213,12 +222,14 @@ interface Databases {
   dataConnectionValidation is ArmResourceActionAsyncBase<
     Database,
     DataConnectionValidation,
-    ArmAcceptedLroResponse<
-      "Data connection validation request accepted.",
-      LroHeaders = ArmLroLocationHeader<FinalResult = DataConnectionValidationListResult> &
-        ArmAsyncOperationHeader<FinalResult = DataConnectionValidationListResult> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmResponse<DataConnectionValidationListResult>,
+
+      | ArmAcceptedLroResponse<
+          "Data connection validation request accepted.",
+          LroHeaders = ArmLroLocationHeader<FinalResult = DataConnectionValidationListResult> &
+            ArmAsyncOperationHeader<FinalResult = DataConnectionValidationListResult> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmResponse<DataConnectionValidationListResult>,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<Database>
   >;
 

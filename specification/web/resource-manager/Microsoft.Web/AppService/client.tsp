@@ -497,10 +497,12 @@ op webAppsApproveOrRejectPrivateEndpointConnectionSlotCustomized(
 
   @body
   privateEndpointWrapper: RemotePrivateEndpointConnectionARMResource,
-): ArmResourceUpdatedResponse<RemotePrivateEndpointConnectionARMResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = RemotePrivateEndpointConnectionARMResource>> & {
-  @bodyRoot
-  _: RemotePrivateEndpointConnectionARMResource;
-});
+):
+  | ArmResourceUpdatedResponse<RemotePrivateEndpointConnectionARMResource>
+  | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = RemotePrivateEndpointConnectionARMResource>> & {
+      @bodyRoot
+      _: RemotePrivateEndpointConnectionARMResource;
+    });
 
 @@override(PrivateEndpointConnectionSlotOperationGroup.approveOrRejectPrivateEndpointConnectionSlot,
   webAppsApproveOrRejectPrivateEndpointConnectionSlotCustomized
@@ -558,15 +560,18 @@ op webAppsDeletePrivateEndpointConnectionSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @path
   slot: string,
-): ArmResponse<unknown> | (ArmDeleteAcceptedLroResponse & {
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @body
-  _: unknown;
-}) | (ArmDeletedNoContentResponse & {
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @body
-  _: unknown;
-});
+):
+  | ArmResponse<unknown>
+  | (ArmDeleteAcceptedLroResponse & {
+      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @body
+      _: unknown;
+    })
+  | (ArmDeletedNoContentResponse & {
+      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @body
+      _: unknown;
+    });
 
 @@override(PrivateEndpointConnectionSlotOperationGroup.deletePrivateEndpointConnectionSlot,
   webAppsDeletePrivateEndpointConnectionSlotCustomized
@@ -594,11 +599,14 @@ op webAppsInstallSiteExtensionSlotCustomized(
 
   @body
   resource: void,
-): ArmResponse<SiteExtensionInfo> | ArmResourceCreatedResponse<
-  SiteExtensionInfo,
-  LroHeaders = ArmLroLocationHeader<FinalResult = SiteExtensionInfo> &
-    Azure.Core.Foundations.RetryAfterHeader
-> | ArmTooManyRequestsResponse;
+):
+  | ArmResponse<SiteExtensionInfo>
+  | ArmResourceCreatedResponse<
+      SiteExtensionInfo,
+      LroHeaders = ArmLroLocationHeader<FinalResult = SiteExtensionInfo> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >
+  | ArmTooManyRequestsResponse;
 
 @@override(SiteExtensionInfoOperationGroup.installSiteExtensionSlot,
   webAppsInstallSiteExtensionSlotCustomized
@@ -797,7 +805,10 @@ op webAppsCreateOrUpdateHostSecretSlotCustomized(
 
   @body
   key: KeyInfo,
-): ArmResponse<KeyInfo> | ArmResourceCreatedSyncResponse<KeyInfo> | DefaultErrorResponse;
+):
+  | ArmResponse<KeyInfo>
+  | ArmResourceCreatedSyncResponse<KeyInfo>
+  | DefaultErrorResponse;
 
 @@override(WebApps.createOrUpdateHostSecretSlot,
   webAppsCreateOrUpdateHostSecretSlotCustomized
@@ -1652,14 +1663,16 @@ op webAppsGetInstanceProcessDumpCustomized(
 
   @body
   body: void,
-): {
-  @header("Content-Type")
-  contentType: "*/*";
+):
+  | {
+      @header("Content-Type")
+      contentType: "*/*";
 
-  @doc("Receipt body in COSE format")
-  @bodyRoot
-  body: bytes;
-} | ArmNotFoundResponse;
+      @doc("Receipt body in COSE format")
+      @bodyRoot
+      body: bytes;
+    }
+  | ArmNotFoundResponse;
 
 @@override(ProcessInfos.getInstanceProcessDump,
   webAppsGetInstanceProcessDumpCustomized
@@ -1691,14 +1704,16 @@ op webAppsGetInstanceProcessDumpSlotCustomized(
 
   @body
   body: void,
-): {
-  @header("Content-Type")
-  contentType: "*/*";
+):
+  | {
+      @header("Content-Type")
+      contentType: "*/*";
 
-  @doc("Receipt body in COSE format")
-  @bodyRoot
-  body: bytes;
-} | ArmNotFoundResponse;
+      @doc("Receipt body in COSE format")
+      @bodyRoot
+      body: bytes;
+    }
+  | ArmNotFoundResponse;
 
 @@override(InstanceProcessSlotOperationGroup.getInstanceProcessDumpSlot,
   webAppsGetInstanceProcessDumpSlotCustomized
@@ -1817,11 +1832,13 @@ op webAppsGetNetworkTraceOperationSlotCustomized(
 
   @body
   body: void,
-): ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
-  @identifiers(#[])
-  @bodyRoot
-  _: NetworkTrace[];
-});
+):
+  | ArmResponse<NetworkTrace[]>
+  | (AcceptedResponse & {
+      @identifiers(#[])
+      @bodyRoot
+      _: NetworkTrace[];
+    });
 
 @@override(WebApps.getNetworkTraceOperationSlot,
   webAppsGetNetworkTraceOperationSlotCustomized
@@ -1849,11 +1866,13 @@ op webAppsGetNetworkTraceOperationSlotV2Customized(
 
   @body
   body: void,
-): ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
-  @identifiers(#[])
-  @bodyRoot
-  _: NetworkTrace[];
-});
+):
+  | ArmResponse<NetworkTrace[]>
+  | (AcceptedResponse & {
+      @identifiers(#[])
+      @bodyRoot
+      _: NetworkTrace[];
+    });
 
 @@override(WebApps.getNetworkTraceOperationSlotV2,
   webAppsGetNetworkTraceOperationSlotV2Customized
@@ -1983,14 +2002,16 @@ op webAppsGetProcessDumpSlotCustomized(
 
   @body
   body: void,
-): {
-  @header("Content-Type")
-  contentType: "*/*";
+):
+  | {
+      @header("Content-Type")
+      contentType: "*/*";
 
-  @doc("Receipt body in COSE format")
-  @bodyRoot
-  body: bytes;
-} | ArmNotFoundResponse;
+      @doc("Receipt body in COSE format")
+      @bodyRoot
+      body: bytes;
+    }
+  | ArmNotFoundResponse;
 
 @@override(ProcessSlotOperationGroup.getProcessDumpSlot,
   webAppsGetProcessDumpSlotCustomized
@@ -2643,9 +2664,11 @@ op webAppsRunTriggeredWebJobSlotCustomized(
 
   @body
   body: void,
-): {
-  @body body: void;
-} | ArmNotFoundResponse;
+):
+  | {
+      @body body: void;
+    }
+  | ArmNotFoundResponse;
 
 @@override(TriggeredWebJobs.runTriggeredWebJobSlot,
   webAppsRunTriggeredWebJobSlotCustomized
@@ -2673,9 +2696,11 @@ op webAppsStartContinuousWebJobSlotCustomized(
 
   @body
   body: void,
-): {
-  @body body: void;
-} | ArmNotFoundResponse;
+):
+  | {
+      @body body: void;
+    }
+  | ArmNotFoundResponse;
 
 @@override(ContinuousWebJobOperationGroup.startContinuousWebJobSlot,
   webAppsStartContinuousWebJobSlotCustomized
@@ -2703,9 +2728,11 @@ op webAppsStopContinuousWebJobSlotCustomized(
 
   @body
   body: void,
-): {
-  @body body: void;
-} | ArmNotFoundResponse;
+):
+  | {
+      @body body: void;
+    }
+  | ArmNotFoundResponse;
 
 @@override(ContinuousWebJobOperationGroup.stopContinuousWebJobSlot,
   webAppsStopContinuousWebJobSlotCustomized

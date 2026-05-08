@@ -201,11 +201,13 @@ interface AttestationOperationGroup {
    */
   createOrUpdateAtResource is AttestationAtResourceOps.CreateOrUpdateAsync<
     Attestation,
-    Response = ArmResponse<Attestation> | ArmResourceCreatedResponse<
-      Attestation,
-      ArmLroLocationHeader<FinalResult = Attestation> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | ArmResponse<Attestation>
+      | ArmResourceCreatedResponse<
+          Attestation,
+          ArmLroLocationHeader<FinalResult = Attestation> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**
@@ -213,9 +215,11 @@ interface AttestationOperationGroup {
    */
   deleteAtResource is AttestationAtResourceOps.DeleteSync<
     Attestation,
-    Response = {
-      @statusCode statusCode: 200;
-    } | ArmDeletedNoContentResponse
+    Response =
+      | {
+          @statusCode statusCode: 200;
+        }
+      | ArmDeletedNoContentResponse
   >;
 
   /**

@@ -65,7 +65,10 @@ interface NspLinks {
   @tag("NetworkSecurityPerimeterLinks")
   delete is ArmResourceDeleteWithoutOkAsync<
     NspLink,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 

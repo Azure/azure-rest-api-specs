@@ -97,8 +97,10 @@ interface GroupQuotaLimitLists {
     GroupQuotaLimitList,
     PatchModel = GroupQuotaLimitList,
     OptionalRequestBody = true,
-    Response = ArmResponse<GroupQuotaLimitList> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = GroupQuotaLimitList> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResponse<GroupQuotaLimitList>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = GroupQuotaLimitList> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 }
 

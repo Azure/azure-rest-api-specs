@@ -55,10 +55,12 @@ interface ManagedClusters {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Day 0 Property"
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     ManagedCluster,
-    Response = ArmResourceUpdatedResponse<ManagedCluster> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ManagedCluster>> & {
-      @bodyRoot
-      _: ManagedCluster;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<ManagedCluster>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ManagedCluster>> & {
+          @bodyRoot
+          _: ManagedCluster;
+        })
   >;
 
   /**
@@ -69,10 +71,12 @@ interface ManagedClusters {
   update is ArmCustomPatchAsync<
     ManagedCluster,
     PatchModel = ManagedClusterUpdateParameters,
-    Response = ArmResourceUpdatedResponse<ManagedCluster> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ManagedCluster>> & {
-      @bodyRoot
-      _: ManagedCluster;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<ManagedCluster>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ManagedCluster>> & {
+          @bodyRoot
+          _: ManagedCluster;
+        })
   >;
 
   /**

@@ -88,24 +88,26 @@ interface AgentApplications {
   @tag("AgentApplication")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AgentApplication,
-    Response = ArmResponse<AgentApplication> | ArmResourceCreatedResponse<
-      AgentApplication,
-      LroHeaders = ArmLroLocationHeader<FinalResult = AgentApplication> & {
-        /**
-         * URI to poll for asynchronous operation status.
-         */
-        @header("Azure-AsyncOperation")
-        azureAsyncOperation: string;
+    Response =
+      | ArmResponse<AgentApplication>
+      | ArmResourceCreatedResponse<
+          AgentApplication,
+          LroHeaders = ArmLroLocationHeader<FinalResult = AgentApplication> & {
+            /**
+             * URI to poll for asynchronous operation status.
+             */
+            @header("Azure-AsyncOperation")
+            azureAsyncOperation: string;
 
-        /**
-         * Timeout for the client to use when polling the asynchronous operation.
-         */
-        #suppress "@azure-tools/typespec-azure-core/no-format" "'asyncOperationTimeout' has no string format constraint, matching existing service wire format"
-        @header("x-ms-async-operation-timeout")
-        @format("duration")
-        asyncOperationTimeout: string;
-      }
-    >
+            /**
+             * Timeout for the client to use when polling the asynchronous operation.
+             */
+            #suppress "@azure-tools/typespec-azure-core/no-format" "'asyncOperationTimeout' has no string format constraint, matching existing service wire format"
+            @header("x-ms-async-operation-timeout")
+            @format("duration")
+            asyncOperationTimeout: string;
+          }
+        >
   >;
 
   /**

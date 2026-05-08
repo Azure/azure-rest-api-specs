@@ -49,10 +49,13 @@ interface CdnWebApplicationFirewallPolicies {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     CdnWebApplicationFirewallPolicy,
-    Response = ArmResourceUpdatedResponse<CdnWebApplicationFirewallPolicy> | ArmResourceCreatedResponse<CdnWebApplicationFirewallPolicy> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CdnWebApplicationFirewallPolicy>> & {
-      @bodyRoot
-      _: CdnWebApplicationFirewallPolicy;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<CdnWebApplicationFirewallPolicy>
+      | ArmResourceCreatedResponse<CdnWebApplicationFirewallPolicy>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CdnWebApplicationFirewallPolicy>> & {
+          @bodyRoot
+          _: CdnWebApplicationFirewallPolicy;
+        })
   >;
 
   /**
@@ -63,10 +66,12 @@ interface CdnWebApplicationFirewallPolicies {
   update is ArmCustomPatchAsync<
     CdnWebApplicationFirewallPolicy,
     PatchModel = CdnWebApplicationFirewallPolicyPatchParameters,
-    Response = ArmResponse<CdnWebApplicationFirewallPolicy> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CdnWebApplicationFirewallPolicy>> & {
-      @bodyRoot
-      _: CdnWebApplicationFirewallPolicy;
-    })
+    Response =
+      | ArmResponse<CdnWebApplicationFirewallPolicy>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CdnWebApplicationFirewallPolicy>> & {
+          @bodyRoot
+          _: CdnWebApplicationFirewallPolicy;
+        })
   >;
 
   /**

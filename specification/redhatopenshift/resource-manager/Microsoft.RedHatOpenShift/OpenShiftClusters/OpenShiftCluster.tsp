@@ -51,11 +51,13 @@ interface OpenShiftClusters {
   update is ArmCustomPatchAsync<
     OpenShiftCluster,
     PatchModel = OpenShiftClusterUpdate,
-    Response = ArmResponse<OpenShiftCluster> | ArmResourceCreatedResponse<
-      OpenShiftCluster,
-      LroHeaders = ArmLroLocationHeader<FinalResult = OpenShiftCluster> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >,
+    Response =
+      | ArmResponse<OpenShiftCluster>
+      | ArmResourceCreatedResponse<
+          OpenShiftCluster,
+          LroHeaders = ArmLroLocationHeader<FinalResult = OpenShiftCluster> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >,
     Error = CloudError
   >;
 

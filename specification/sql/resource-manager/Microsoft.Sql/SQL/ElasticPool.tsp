@@ -61,10 +61,13 @@ interface ElasticPools {
   @tag("ElasticPools")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ElasticPool,
-    Response = ArmResourceUpdatedResponse<ElasticPool> | ArmResourceCreatedResponse<
-      ElasticPool,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = ElasticPool>
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<ElasticPool>
+      | ArmResourceCreatedResponse<
+          ElasticPool,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = ElasticPool>
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -81,7 +84,10 @@ interface ElasticPools {
   @tag("ElasticPools")
   delete is ArmResourceDeleteWithoutOkAsync<
     ElasticPool,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

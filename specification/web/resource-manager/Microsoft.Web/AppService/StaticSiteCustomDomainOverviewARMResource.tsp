@@ -54,10 +54,12 @@ interface StaticSiteCustomDomainOverviewARMResources {
   createOrUpdateStaticSiteCustomDomain is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     StaticSiteCustomDomainOverviewARMResource,
     StaticSiteCustomDomainRequestPropertiesARMResource,
-    Response = ArmResourceUpdatedResponse<StaticSiteCustomDomainOverviewARMResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StaticSiteCustomDomainOverviewARMResource>> & {
-      @bodyRoot
-      _: StaticSiteCustomDomainOverviewARMResource;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<StaticSiteCustomDomainOverviewARMResource>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StaticSiteCustomDomainOverviewARMResource>> & {
+          @bodyRoot
+          _: StaticSiteCustomDomainOverviewARMResource;
+        }),
     Error = DefaultErrorResponse
   >;
 

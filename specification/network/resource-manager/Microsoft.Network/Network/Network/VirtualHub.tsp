@@ -131,7 +131,10 @@ interface VirtualHubs {
   @autoRoute
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualHub,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -203,11 +206,13 @@ interface VirtualHubs {
     VirtualHub,
     HubVirtualNetworkConnection,
     void,
-    Response = ArmResponse<HubVirtualNetworkConnection> | ArmResourceCreatedResponse<
-      HubVirtualNetworkConnection,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = HubVirtualNetworkConnection> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >,
+    Response =
+      | ArmResponse<HubVirtualNetworkConnection>
+      | ArmResourceCreatedResponse<
+          HubVirtualNetworkConnection,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = HubVirtualNetworkConnection> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >,
     OverrideErrorType = CloudError
   >;
 
@@ -220,10 +225,13 @@ interface VirtualHubs {
     VirtualHub,
     void,
     void,
-    Response = {
-      @body body: void;
-    } | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader> | NoContentResponse,
+    Response =
+      | {
+          @body body: void;
+        }
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | NoContentResponse,
     OverrideErrorType = CloudError
   >;
 
@@ -276,11 +284,13 @@ interface VirtualHubs {
     VirtualHub,
     VirtualHubRouteTableV2,
     void,
-    Response = ArmResponse<VirtualHubRouteTableV2> | ArmResourceCreatedResponse<
-      VirtualHubRouteTableV2,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = VirtualHubRouteTableV2> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >,
+    Response =
+      | ArmResponse<VirtualHubRouteTableV2>
+      | ArmResourceCreatedResponse<
+          VirtualHubRouteTableV2,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = VirtualHubRouteTableV2> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >,
     OverrideErrorType = Error
   >;
 
@@ -292,10 +302,13 @@ interface VirtualHubs {
     VirtualHub,
     void,
     void,
-    Response = {
-      @body body: void;
-    } | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader> | NoContentResponse,
+    Response =
+      | {
+          @body body: void;
+        }
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | NoContentResponse,
     OverrideErrorType = Error
   >;
 

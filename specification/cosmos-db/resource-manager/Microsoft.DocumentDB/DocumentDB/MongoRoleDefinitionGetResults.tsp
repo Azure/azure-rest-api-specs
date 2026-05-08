@@ -42,8 +42,10 @@ interface MongoRoleDefinitionGetResultsOperationGroup {
   createUpdateMongoRoleDefinition is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     MongoRoleDefinitionGetResults,
     Request = MongoRoleDefinitionCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<MongoRoleDefinitionGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = MongoRoleDefinitionGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResourceUpdatedResponse<MongoRoleDefinitionGetResults>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = MongoRoleDefinitionGetResults> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = CloudError
   >;
 
@@ -53,7 +55,10 @@ interface MongoRoleDefinitionGetResultsOperationGroup {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deleteMongoRoleDefinition is ArmResourceDeleteWithoutOkAsync<
     MongoRoleDefinitionGetResults,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 

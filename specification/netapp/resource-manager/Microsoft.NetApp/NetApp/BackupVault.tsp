@@ -72,11 +72,13 @@ interface BackupVaults {
   update is ArmCustomPatchAsync<
     BackupVault,
     PatchModel = BackupVaultPatch,
-    Response = ArmResponse<BackupVault> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BackupVault> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: BackupVault;
-    })
+    Response =
+      | ArmResponse<BackupVault>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BackupVault> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: BackupVault;
+        })
   >;
 
   /**

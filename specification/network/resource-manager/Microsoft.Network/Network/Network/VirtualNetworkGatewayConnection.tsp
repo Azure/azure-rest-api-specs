@@ -78,7 +78,10 @@ interface VirtualNetworkGatewayConnections {
   @tag("VirtualNetworkGatewayConnections")
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualNetworkGatewayConnection,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -114,11 +117,13 @@ interface VirtualNetworkGatewayConnections {
   setSharedKey is ArmResourceActionAsyncBase<
     VirtualNetworkGatewayConnection,
     ConnectionSharedKey,
-    ArmResponse<ConnectionSharedKey> | ArmResourceCreatedResponse<
-      ConnectionSharedKey,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = ConnectionSharedKey> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >,
+
+      | ArmResponse<ConnectionSharedKey>
+      | ArmResourceCreatedResponse<
+          ConnectionSharedKey,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = ConnectionSharedKey> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualNetworkGatewayConnection>,
     Error = CloudError
   >;

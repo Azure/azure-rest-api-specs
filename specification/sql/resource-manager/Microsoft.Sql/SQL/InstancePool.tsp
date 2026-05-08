@@ -44,11 +44,14 @@ interface InstancePools {
   @tag("InstancePools")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     InstancePool,
-    Response = ArmResourceUpdatedResponse<InstancePool> | ArmResourceCreatedResponse<
-      InstancePool,
-      ArmLroLocationHeader<FinalResult = InstancePool> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<InstancePool>
+      | ArmResourceCreatedResponse<
+          InstancePool,
+          ArmLroLocationHeader<FinalResult = InstancePool> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -65,7 +68,10 @@ interface InstancePools {
   @tag("InstancePools")
   delete is ArmResourceDeleteWithoutOkAsync<
     InstancePool,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

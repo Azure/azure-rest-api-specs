@@ -56,10 +56,12 @@ interface Snapshots {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     Snapshot,
-    Response = ArmResourceUpdatedResponse<Snapshot> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Snapshot> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot _: Snapshot;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<Snapshot>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Snapshot> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot _: Snapshot;
+        })
   >;
 
   /**
@@ -70,10 +72,12 @@ interface Snapshots {
   update is ComputeCustomPatchAsync<
     Snapshot,
     SnapshotUpdate,
-    Response = ArmResourceUpdatedResponse<Snapshot> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Snapshot> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot _: Snapshot;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<Snapshot>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Snapshot> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot _: Snapshot;
+        })
   >;
 
   /**

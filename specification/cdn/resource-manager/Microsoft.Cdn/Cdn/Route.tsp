@@ -39,11 +39,14 @@ interface Routes {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     Route,
-    Response = ArmResourceUpdatedResponse<Route> | ArmResourceCreatedResponse<Route> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Route>> &
-      ArmLroLocationHeader<FinalResult = Route> & {
-        @bodyRoot
-        _: Route;
-      })
+    Response =
+      | ArmResourceUpdatedResponse<Route>
+      | ArmResourceCreatedResponse<Route>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Route>> &
+          ArmLroLocationHeader<FinalResult = Route> & {
+            @bodyRoot
+            _: Route;
+          })
   >;
 
   /**
@@ -54,12 +57,14 @@ interface Routes {
   update is ArmCustomPatchAsync<
     Route,
     PatchModel = RouteUpdateParameters,
-    Response = ArmResponse<Route> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Route> &
-      ArmLroLocationHeader<FinalResult = Route> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: Route;
-    })
+    Response =
+      | ArmResponse<Route>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Route> &
+          ArmLroLocationHeader<FinalResult = Route> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: Route;
+        })
   >;
 
   /**
@@ -69,9 +74,12 @@ interface Routes {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     Route,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+          ArmLroLocationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**

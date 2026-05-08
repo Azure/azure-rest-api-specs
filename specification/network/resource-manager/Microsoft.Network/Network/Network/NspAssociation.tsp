@@ -61,11 +61,14 @@ interface NspAssociations {
   @tag("NetworkSecurityPerimeterAssociations")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     NspAssociation,
-    Response = ArmResourceUpdatedResponse<NspAssociation> | ArmResourceCreatedResponse<NspAssociation> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader> &
-      Azure.Core.Foundations.RetryAfterHeader & {
-        @bodyRoot
-        _: NspAssociation;
-      }),
+    Response =
+      | ArmResourceUpdatedResponse<NspAssociation>
+      | ArmResourceCreatedResponse<NspAssociation>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader> &
+          Azure.Core.Foundations.RetryAfterHeader & {
+            @bodyRoot
+            _: NspAssociation;
+          }),
     Error = CloudError
   >;
 
@@ -77,8 +80,11 @@ interface NspAssociations {
   @tag("NetworkSecurityPerimeterAssociations")
   delete is ArmResourceDeleteWithoutOkAsync<
     NspAssociation,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 

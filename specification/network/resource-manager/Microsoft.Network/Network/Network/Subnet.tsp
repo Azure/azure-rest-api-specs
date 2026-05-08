@@ -47,7 +47,10 @@ interface Subnets {
   @tag("Subnets")
   delete is ArmResourceDeleteWithoutOkAsync<
     Subnet,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 

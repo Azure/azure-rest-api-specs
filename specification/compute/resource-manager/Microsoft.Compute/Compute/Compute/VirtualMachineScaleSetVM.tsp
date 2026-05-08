@@ -135,10 +135,12 @@ interface VirtualMachineScaleSetVMS {
       @header("If-None-Match")
       IfNoneMatch?: string;
     },
-    Response = ArmResourceUpdatedResponse<VirtualMachineScaleSetVM> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = VirtualMachineScaleSetVM> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot _: VirtualMachineScaleSetVM;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<VirtualMachineScaleSetVM>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = VirtualMachineScaleSetVM> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot _: VirtualMachineScaleSetVM;
+        })
   >;
 
   /**

@@ -74,7 +74,9 @@ interface SharedPrivateLinkResources {
       @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
-    Response = ArmResourceUpdatedResponse<SharedPrivateLinkResource> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = SharedPrivateLinkResource>>,
+    Response =
+      | ArmResourceUpdatedResponse<SharedPrivateLinkResource>
+      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = SharedPrivateLinkResource>>,
     Error = CloudError
   >;
 
@@ -104,8 +106,11 @@ interface SharedPrivateLinkResources {
       @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader> | NoContentResponse | NotFoundResponse,
+    Response =
+      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = void> &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | NoContentResponse
+      | NotFoundResponse,
     Error = CloudError
   >;
 

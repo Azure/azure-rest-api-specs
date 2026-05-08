@@ -129,7 +129,10 @@ interface Certificates {
   @removed(Versions.v2025_06_01)
   delete is ArmResourceDeleteWithoutOkAsync<
     Certificate,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 

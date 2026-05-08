@@ -47,16 +47,18 @@ interface OnlineDeployments {
   @summary("Create or update Inference Endpoint Deployment (asynchronous).")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     OnlineDeployment,
-    Response = ArmResourceUpdatedResponse<OnlineDeployment> | (ArmResourceCreatedResponse<
-      OnlineDeployment,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = OnlineDeployment>
-    > & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<OnlineDeployment>
+      | (ArmResourceCreatedResponse<
+          OnlineDeployment,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = OnlineDeployment>
+        > & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
   >;
 
   /**
@@ -67,14 +69,16 @@ interface OnlineDeployments {
   update is ArmCustomPatchAsync<
     OnlineDeployment,
     PatchModel = PartialMinimalTrackedResourceWithSku,
-    Response = OnlineDeployment | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OnlineDeployment>> &
-      Azure.Core.Foundations.RetryAfterHeader & {
-        /**
-         * Timeout for the client to use when polling the asynchronous operation.
-         */
-        @header("x-ms-async-operation-timeout")
-        timeout: duration;
-      })
+    Response =
+      | OnlineDeployment
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OnlineDeployment>> &
+          Azure.Core.Foundations.RetryAfterHeader & {
+            /**
+             * Timeout for the client to use when polling the asynchronous operation.
+             */
+            @header("x-ms-async-operation-timeout")
+            timeout: duration;
+          })
   >;
 
   /**
@@ -84,13 +88,16 @@ interface OnlineDeployments {
   @summary("Delete Inference Endpoint Deployment (asynchronous).")
   delete is ArmResourceDeleteWithoutOkAsync<
     OnlineDeployment,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**

@@ -112,7 +112,9 @@ op replaceGetByName(
   ...Azure.ResourceManager.Legacy.Provider,
   serviceName: string,
   location: Azure.Core.azureLocation,
-): Azure.ResourceManager.ArmResponse<Microsoft.ApiManagement.DeletedServiceContract> | Azure.ResourceManager.CommonTypes.ErrorResponse;
+):
+  | Azure.ResourceManager.ArmResponse<Microsoft.ApiManagement.DeletedServiceContract>
+  | Azure.ResourceManager.CommonTypes.ErrorResponse;
 
 @@override(DeletedServiceContracts.getByName,
   replaceGetByName,
@@ -130,10 +132,13 @@ op replacePurge(
   ...Azure.ResourceManager.Legacy.Provider,
   serviceName: string,
   location: Azure.Core.azureLocation,
-): ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-  @bodyRoot
-  _: DeletedServiceContract;
-}) | ArmDeletedNoContentResponse;
+):
+  | ArmDeletedResponse
+  | (ArmDeleteAcceptedLroResponse & {
+      @bodyRoot
+      _: DeletedServiceContract;
+    })
+  | ArmDeletedNoContentResponse;
 
 @@override(DeletedServiceContracts.purge, replacePurge, "go,java,python");
 

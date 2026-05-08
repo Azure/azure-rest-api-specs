@@ -65,15 +65,17 @@ interface ContainerGroupProfiles {
   @summary("Create or Update a ContainerGroupProfile")
   createOrUpdate is ContainerGroupProfileOps.CreateOrUpdateSync<
     ContainerGroupProfile,
-    Response = (ArmResourceUpdatedResponse<ContainerGroupProfile> & {
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-      @header("x-ms-correlation-request-id")
-      `x-ms-correlation-request-id`: string;
-    }) | (ArmResourceCreatedSyncResponse<ContainerGroupProfile> & {
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-      @header("x-ms-correlation-request-id")
-      `x-ms-correlation-request-id`: string;
-    })
+    Response =
+      | (ArmResourceUpdatedResponse<ContainerGroupProfile> & {
+          #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+          @header("x-ms-correlation-request-id")
+          `x-ms-correlation-request-id`: string;
+        })
+      | (ArmResourceCreatedSyncResponse<ContainerGroupProfile> & {
+          #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+          @header("x-ms-correlation-request-id")
+          `x-ms-correlation-request-id`: string;
+        })
   >;
 
   /**

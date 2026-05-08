@@ -37,11 +37,14 @@ interface SyncAgents {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     SyncAgent,
-    Response = ArmResourceUpdatedResponse<SyncAgent> | ArmResourceCreatedResponse<
-      SyncAgent,
-      ArmLroLocationHeader<FinalResult = SyncAgent> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<SyncAgent>
+      | ArmResourceCreatedResponse<
+          SyncAgent,
+          ArmLroLocationHeader<FinalResult = SyncAgent> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -50,7 +53,10 @@ interface SyncAgents {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     SyncAgent,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

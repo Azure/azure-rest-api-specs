@@ -72,16 +72,18 @@ interface EnvironmentVersions {
   @summary("Create or update version.")
   createOrUpdate is EnvironmentVersionOps.CreateOrUpdateAsync<
     EnvironmentVersion,
-    Response = ArmResourceUpdatedResponse<EnvironmentVersion> | (ArmResourceCreatedResponse<
-      EnvironmentVersion,
-      ArmAsyncOperationHeader
-    > & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<EnvironmentVersion>
+      | (ArmResourceCreatedResponse<
+          EnvironmentVersion,
+          ArmAsyncOperationHeader
+        > & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
   >;
 
   /**
@@ -91,13 +93,16 @@ interface EnvironmentVersions {
   @summary("Delete version.")
   delete is EnvironmentVersionOps.DeleteWithoutOkAsync<
     EnvironmentVersion,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**

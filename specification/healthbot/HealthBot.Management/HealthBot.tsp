@@ -47,10 +47,12 @@ interface HealthBots {
   create is ArmResourceCreateOrReplaceAsync<
     HealthBot,
     Error = Error,
-    Response = ArmResourceUpdatedResponse<HealthBot> | ArmResourceCreatedResponse<
-      HealthBot,
-      ArmAsyncOperationHeader & Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | ArmResourceUpdatedResponse<HealthBot>
+      | ArmResourceCreatedResponse<
+          HealthBot,
+          ArmAsyncOperationHeader & Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**
@@ -61,11 +63,13 @@ interface HealthBots {
     HealthBot,
     PatchModel = HealthBotUpdateParameters,
     Error = Error,
-    Response = ArmResponse<HealthBot> | ArmResourceCreatedResponse<
-      HealthBot,
-      ArmLroLocationHeader<FinalResult = HealthBot> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | ArmResponse<HealthBot>
+      | ArmResourceCreatedResponse<
+          HealthBot,
+          ArmLroLocationHeader<FinalResult = HealthBot> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**
@@ -74,7 +78,10 @@ interface HealthBots {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     HealthBot,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>
+      | ArmDeletedNoContentResponse,
     Error = Error
   >;
 

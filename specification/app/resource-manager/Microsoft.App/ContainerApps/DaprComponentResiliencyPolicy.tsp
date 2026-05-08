@@ -70,9 +70,11 @@ interface DaprComponentResiliencyPolicies {
   @summary("Creates or updates a Dapr component resiliency policy.")
   createOrUpdate is DaprComponentResiliencyPolicyOps.CreateOrUpdateAsync<
     DaprComponentResiliencyPolicy,
-    Response = ArmResourceUpdatedResponse<DaprComponentResiliencyPolicy> | (CreatedResponse & {
-      @bodyRoot body: DaprComponentResiliencyPolicy;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<DaprComponentResiliencyPolicy>
+      | (CreatedResponse & {
+          @bodyRoot body: DaprComponentResiliencyPolicy;
+        })
   >;
 
   /**

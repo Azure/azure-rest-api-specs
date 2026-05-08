@@ -169,11 +169,14 @@ interface Workspaces {
   @autoRoute
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Workspace,
-    Response = ArmResourceUpdatedResponse<Workspace> | ArmResourceCreatedResponse<
-      Workspace,
-      ArmLroLocationHeader<FinalResult = Workspace> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<Workspace>
+      | ArmResourceCreatedResponse<
+          Workspace,
+          ArmLroLocationHeader<FinalResult = Workspace> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -199,7 +202,10 @@ interface Workspaces {
       @query("force")
       force?: boolean;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

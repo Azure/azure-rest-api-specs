@@ -58,8 +58,10 @@ interface JobResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   create is ArmResourceCreateOrReplaceAsync<
     JobResource,
-    Response = ArmResourceUpdatedResponse<JobResource> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = JobResource> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResourceUpdatedResponse<JobResource>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = JobResource> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = ApiError
   >;
 
@@ -88,7 +90,10 @@ interface JobResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     JobResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = ApiError
   >;
 

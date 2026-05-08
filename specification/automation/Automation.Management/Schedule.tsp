@@ -43,7 +43,10 @@ interface Schedules {
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     Schedule,
     Request = ScheduleCreateOrUpdateParameters,
-    Response = ArmResourceUpdatedResponse<Schedule> | ArmResourceCreatedSyncResponse<Schedule> | ConflictResponse
+    Response =
+      | ArmResourceUpdatedResponse<Schedule>
+      | ArmResourceCreatedSyncResponse<Schedule>
+      | ConflictResponse
   >;
 
   /**

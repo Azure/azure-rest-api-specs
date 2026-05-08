@@ -106,21 +106,23 @@ interface SchemaContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<SchemaContract> &
-      ArmCombinedLroHeaders<FinalResult = SchemaContract> & {
-        /**
-         * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-         */
-        @header("ETag")
-        etag: string;
-      }) | (ArmCreatedResponse<SchemaContract> &
-      ArmCombinedLroHeaders<FinalResult = SchemaContract> & {
-        /**
-         * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-         */
-        @header("ETag")
-        etag: string;
-      })
+    Response =
+      | (ArmResponse<SchemaContract> &
+          ArmCombinedLroHeaders<FinalResult = SchemaContract> & {
+            /**
+             * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+             */
+            @header("ETag")
+            etag: string;
+          })
+      | (ArmCreatedResponse<SchemaContract> &
+          ArmCombinedLroHeaders<FinalResult = SchemaContract> & {
+            /**
+             * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+             */
+            @header("ETag")
+            etag: string;
+          })
   >;
 
   /**
@@ -263,21 +265,23 @@ interface WorkspaceApiSchema {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<SchemaContract> &
-      ArmCombinedLroHeaders<FinalResult = SchemaContract> & {
-        /**
-         * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-         */
-        @header("ETag")
-        etag: string;
-      }) | (ArmResourceCreatedResponse<SchemaContract> &
-      ArmCombinedLroHeaders<FinalResult = SchemaContract> & {
-        /**
-         * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-         */
-        @header("ETag")
-        etag: string;
-      })
+    Response =
+      | (ArmResponse<SchemaContract> &
+          ArmCombinedLroHeaders<FinalResult = SchemaContract> & {
+            /**
+             * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+             */
+            @header("ETag")
+            etag: string;
+          })
+      | (ArmResourceCreatedResponse<SchemaContract> &
+          ArmCombinedLroHeaders<FinalResult = SchemaContract> & {
+            /**
+             * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+             */
+            @header("ETag")
+            etag: string;
+          })
   >;
 
   /**

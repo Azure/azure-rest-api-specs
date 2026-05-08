@@ -86,11 +86,14 @@ interface DataMigrationServices {
   @tag("PUT")
   createOrUpdate is DataMigrationServiceOps.CreateOrUpdateAsync<
     DataMigrationService,
-    Response = ArmResourceUpdatedResponse<DataMigrationService> | ArmResourceCreatedResponse<
-      DataMigrationService,
-      ArmLroLocationHeader<FinalResult = DataMigrationService> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<DataMigrationService>
+      | ArmResourceCreatedResponse<
+          DataMigrationService,
+          ArmLroLocationHeader<FinalResult = DataMigrationService> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -123,7 +126,10 @@ interface DataMigrationServices {
       @query("deleteRunningTasks")
       deleteRunningTasks?: boolean;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

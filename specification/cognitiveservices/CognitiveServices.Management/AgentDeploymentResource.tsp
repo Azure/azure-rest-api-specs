@@ -123,24 +123,26 @@ interface AgentDeploymentResources {
   @tag("AgentDeployment")
   createOrUpdate is AgentDeploymentResourcesOps.CreateOrUpdateAsync<
     AgentDeployment,
-    Response = ArmResponse<AgentDeployment> | ArmResourceCreatedResponse<
-      AgentDeployment,
-      LroHeaders = ArmLroLocationHeader<FinalResult = AgentDeployment> & {
-        /**
-         * URI to poll for asynchronous operation status.
-         */
-        @header("Azure-AsyncOperation")
-        azureAsyncOperation: string;
+    Response =
+      | ArmResponse<AgentDeployment>
+      | ArmResourceCreatedResponse<
+          AgentDeployment,
+          LroHeaders = ArmLroLocationHeader<FinalResult = AgentDeployment> & {
+            /**
+             * URI to poll for asynchronous operation status.
+             */
+            @header("Azure-AsyncOperation")
+            azureAsyncOperation: string;
 
-        /**
-         * Timeout for the client to use when polling the asynchronous operation.
-         */
-        #suppress "@azure-tools/typespec-azure-core/no-format" "'asyncOperationTimeout' has no string format constraint, matching existing service wire format"
-        @header("x-ms-async-operation-timeout")
-        @format("duration")
-        asyncOperationTimeout: string;
-      }
-    >
+            /**
+             * Timeout for the client to use when polling the asynchronous operation.
+             */
+            #suppress "@azure-tools/typespec-azure-core/no-format" "'asyncOperationTimeout' has no string format constraint, matching existing service wire format"
+            @header("x-ms-async-operation-timeout")
+            @format("duration")
+            asyncOperationTimeout: string;
+          }
+        >
   >;
 
   /**

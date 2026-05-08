@@ -53,11 +53,13 @@ interface Registries {
   update is ArmCustomPatchAsync<
     Registry,
     PatchModel = RegistryUpdateParameters,
-    Response = ArmResponse<Registry> | ArmResourceCreatedResponse<
-      Registry,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = Registry> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | ArmResponse<Registry>
+      | ArmResourceCreatedResponse<
+          Registry,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = Registry> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**
@@ -66,7 +68,10 @@ interface Registries {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Registry,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

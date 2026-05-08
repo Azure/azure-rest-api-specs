@@ -63,7 +63,10 @@ interface ConnectedEnvironments {
   @summary("Delete an connectedEnvironment.")
   delete is ArmResourceDeleteWithoutOkAsync<
     ConnectedEnvironment,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = DefaultErrorResponse
   >;
 

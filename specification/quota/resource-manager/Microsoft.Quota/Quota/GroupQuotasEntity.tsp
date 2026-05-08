@@ -109,11 +109,13 @@ interface GroupQuotasEntities {
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is GroupQuotasEntitiesOps.CreateOrUpdateAsync<
     GroupQuotasEntity,
-    Response = ArmResourceUpdatedResponse<GroupQuotasEntity> | ArmResourceCreatedResponse<
-      GroupQuotasEntity,
-      ArmCombinedLroHeaders<FinalResult = GroupQuotasEntity> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >,
+    Response =
+      | ArmResourceUpdatedResponse<GroupQuotasEntity>
+      | ArmResourceCreatedResponse<
+          GroupQuotasEntity,
+          ArmCombinedLroHeaders<FinalResult = GroupQuotasEntity> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >,
     OptionalRequestBody = true
   >;
 
@@ -125,8 +127,10 @@ interface GroupQuotasEntities {
   update is GroupQuotasEntitiesOps.CustomPatchAsync<
     GroupQuotasEntity,
     PatchModel = GroupQuotasEntityPatch,
-    Response = ArmResponse<GroupQuotasEntity> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = GroupQuotasEntity> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResponse<GroupQuotasEntity>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = GroupQuotasEntity> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     OptionalRequestBody = true
   >;
 
@@ -136,8 +140,10 @@ interface GroupQuotasEntities {
   delete is Extension.DeleteWithoutOkAsync<
     Extension.ManagementGroup<"managementGroupId">,
     GroupQuotasEntity,
-    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**

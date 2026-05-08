@@ -81,8 +81,11 @@ interface ContainerGroups {
   @summary("Delete the specified container group.")
   delete is ArmResourceDeleteAsyncBase<
     ContainerGroup,
-    ArmResponse<ContainerGroup> | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader<FinalResult = ContainerGroup> &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
+
+      | ArmResponse<ContainerGroup>
+      | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader<FinalResult = ContainerGroup> &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 

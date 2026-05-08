@@ -72,7 +72,9 @@ interface DataCollectionRuleAssociationProxyOnlyResources {
   create is DataCollectionRuleAssociationProxyOnlyResourcesOps.CreateOrUpdateSync<
     DataCollectionRuleAssociationProxyOnlyResource,
     OptionalRequestBody = true,
-    Response = DataCollectionRuleAssociationProxyOnlyResource | ArmResourceCreatedSyncResponse<DataCollectionRuleAssociationProxyOnlyResource>,
+    Response =
+      | DataCollectionRuleAssociationProxyOnlyResource
+      | ArmResourceCreatedSyncResponse<DataCollectionRuleAssociationProxyOnlyResource>,
     OverrideErrorType = ErrorResponseCommonV2
   >;
 

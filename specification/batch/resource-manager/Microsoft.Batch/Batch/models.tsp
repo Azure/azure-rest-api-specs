@@ -1248,7 +1248,9 @@ model BatchAccountProperties {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "legacy design, needed for compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Legacy desgin"
   @summary("The network interface type for accessing Azure Batch service and Batch account operations.")
-  publicNetworkAccess?: PublicNetworkAccessType | null = PublicNetworkAccessType.Enabled;
+  publicNetworkAccess?:
+    | PublicNetworkAccessType
+    | null = PublicNetworkAccessType.Enabled;
 
   /**
    * The network profile only takes effect when publicNetworkAccess is enabled.

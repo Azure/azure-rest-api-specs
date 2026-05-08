@@ -125,7 +125,10 @@ interface VpnGateways {
   @autoRoute
   delete is ArmResourceDeleteWithoutOkAsync<
     VpnGateway,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -227,11 +230,13 @@ interface VpnGateways {
     VpnGateway,
     VpnConnection,
     void,
-    Response = ArmResponse<VpnConnection> | ArmResourceCreatedResponse<
-      VpnConnection,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = VpnConnection> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >,
+    Response =
+      | ArmResponse<VpnConnection>
+      | ArmResourceCreatedResponse<
+          VpnConnection,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = VpnConnection> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >,
     OverrideErrorType = CloudError
   >;
 
@@ -244,10 +249,13 @@ interface VpnGateways {
     VpnGateway,
     void,
     void,
-    Response = {
-      @body body: void;
-    } | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader> | NoContentResponse,
+    Response =
+      | {
+          @body body: void;
+        }
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | NoContentResponse,
     OverrideErrorType = CloudError
   >;
 

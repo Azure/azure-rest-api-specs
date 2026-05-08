@@ -54,11 +54,14 @@ interface VirtualNetworkLinks {
       @header
       ifNoneMatch?: string;
     },
-    Response = ArmResourceUpdatedResponse<VirtualNetworkLink> | ArmResourceCreatedResponse<
-      VirtualNetworkLink,
-      ArmLroLocationHeader<FinalResult = VirtualNetworkLink> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse,
+    Response =
+      | ArmResourceUpdatedResponse<VirtualNetworkLink>
+      | ArmResourceCreatedResponse<
+          VirtualNetworkLink,
+          ArmLroLocationHeader<FinalResult = VirtualNetworkLink> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse,
     Error = CloudError
   >;
 
@@ -92,7 +95,10 @@ interface VirtualNetworkLinks {
       @header
       ifMatch?: string;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 

@@ -62,16 +62,18 @@ interface InferencePools {
   @useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     InferencePool,
-    Response = ArmResourceUpdatedResponse<InferencePool> | (ArmResourceCreatedResponse<
-      InferencePool,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = InferencePool>
-    > & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<InferencePool>
+      | (ArmResourceCreatedResponse<
+          InferencePool,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = InferencePool>
+        > & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
   >;
 
   /**
@@ -82,14 +84,16 @@ interface InferencePools {
   update is ArmCustomPatchAsync<
     InferencePool,
     PatchModel = PartialMinimalTrackedResourceWithSkuAndIdentity,
-    Response = InferencePool | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = InferencePool>> &
-      Azure.Core.Foundations.RetryAfterHeader & {
-        /**
-         * Timeout for the client to use when polling the asynchronous operation.
-         */
-        @header("x-ms-async-operation-timeout")
-        timeout: duration;
-      })
+    Response =
+      | InferencePool
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = InferencePool>> &
+          Azure.Core.Foundations.RetryAfterHeader & {
+            /**
+             * Timeout for the client to use when polling the asynchronous operation.
+             */
+            @header("x-ms-async-operation-timeout")
+            timeout: duration;
+          })
   >;
 
   /**
@@ -99,13 +103,16 @@ interface InferencePools {
   @summary("Delete InferencePool (asynchronous).")
   delete is ArmResourceDeleteWithoutOkAsync<
     InferencePool,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**

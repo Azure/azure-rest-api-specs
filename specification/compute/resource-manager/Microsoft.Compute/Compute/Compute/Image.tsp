@@ -61,11 +61,13 @@ interface Images {
   update is ComputeCustomPatchAsync<
     Image,
     ImageUpdate,
-    Response = ArmResponse<Image> | ArmResourceCreatedResponse<
-      Image,
-      LroHeaders = ArmLroLocationHeader<FinalResult = Image> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | ArmResponse<Image>
+      | ArmResourceCreatedResponse<
+          Image,
+          LroHeaders = ArmLroLocationHeader<FinalResult = Image> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**

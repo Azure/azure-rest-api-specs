@@ -53,10 +53,12 @@ interface Clusters {
   update is ArmCustomPatchAsync<
     Cluster,
     PatchModel = ClusterForUpdate,
-    Response = ArmResponse<Cluster> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Cluster>> & {
-      @bodyRoot
-      _: Cluster;
-    })
+    Response =
+      | ArmResponse<Cluster>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Cluster>> & {
+          @bodyRoot
+          _: Cluster;
+        })
   >;
 
   /**
@@ -65,7 +67,10 @@ interface Clusters {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     Cluster,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+      | ArmDeletedNoContentResponse
   >;
 
   /**

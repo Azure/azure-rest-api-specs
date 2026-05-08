@@ -46,7 +46,10 @@ interface ClientGroups {
   @summary("Delete a client group.")
   delete is ArmResourceDeleteWithoutOkAsync<
     ClientGroup,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

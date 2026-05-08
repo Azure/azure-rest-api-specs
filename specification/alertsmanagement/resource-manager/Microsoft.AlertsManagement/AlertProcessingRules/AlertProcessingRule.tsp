@@ -40,9 +40,11 @@ interface AlertProcessingRules {
    */
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     AlertProcessingRule,
-    Response = (ArmResourceUpdatedResponse<AlertProcessingRule> &
-      Azure.Core.RequestIdResponseHeader) | (ArmResourceCreatedSyncResponse<AlertProcessingRule> &
-      Azure.Core.RequestIdResponseHeader),
+    Response =
+      | (ArmResourceUpdatedResponse<AlertProcessingRule> &
+          Azure.Core.RequestIdResponseHeader)
+      | (ArmResourceCreatedSyncResponse<AlertProcessingRule> &
+          Azure.Core.RequestIdResponseHeader),
     Error = ErrorResponse
   >;
 
@@ -63,9 +65,9 @@ interface AlertProcessingRules {
    */
   delete is ArmResourceDeleteSync<
     AlertProcessingRule,
-    Response = (ArmDeletedResponse &
-      Azure.Core.RequestIdResponseHeader) | (ArmDeletedNoContentResponse &
-      Azure.Core.RequestIdResponseHeader),
+    Response =
+      | (ArmDeletedResponse & Azure.Core.RequestIdResponseHeader)
+      | (ArmDeletedNoContentResponse & Azure.Core.RequestIdResponseHeader),
     Error = ErrorResponse
   >;
 

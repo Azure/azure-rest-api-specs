@@ -63,7 +63,10 @@ interface PartnerTopics {
   @summary("Delete a partner topic.")
   delete is ArmResourceDeleteWithoutOkAsync<
     PartnerTopic,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

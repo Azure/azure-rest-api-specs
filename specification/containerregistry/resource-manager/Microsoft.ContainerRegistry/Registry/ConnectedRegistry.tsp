@@ -44,11 +44,13 @@ interface ConnectedRegistries {
   update is ArmCustomPatchAsync<
     ConnectedRegistry,
     PatchModel = ConnectedRegistryUpdateParameters,
-    Response = ArmResponse<ConnectedRegistry> | ArmResourceCreatedResponse<
-      ConnectedRegistry,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = ConnectedRegistry> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | ArmResponse<ConnectedRegistry>
+      | ArmResourceCreatedResponse<
+          ConnectedRegistry,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = ConnectedRegistry> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**
@@ -57,7 +59,10 @@ interface ConnectedRegistries {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ConnectedRegistry,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

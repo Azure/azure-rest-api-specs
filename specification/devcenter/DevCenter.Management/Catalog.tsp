@@ -67,10 +67,12 @@ interface Catalogs {
     Catalog,
     PatchModel = CatalogUpdate,
     LroHeaders = ArmLroLocationHeader,
-    Response = Catalog | ArmAcceptedLroResponse<
-      "Resource update request accepted.",
-      ArmLroLocationHeader<FinalResult = Catalog>
-    >
+    Response =
+      | Catalog
+      | ArmAcceptedLroResponse<
+          "Resource update request accepted.",
+          ArmLroLocationHeader<FinalResult = Catalog>
+        >
   >;
 
   @doc("Deletes a project catalog resource.")
@@ -158,10 +160,12 @@ interface CatalogOperationGroup {
     Catalog,
     PatchModel = CatalogUpdate,
     LroHeaders = ArmLroLocationHeader,
-    Response = Catalog | ArmAcceptedLroResponse<
-      "Resource update request accepted.",
-      ArmLroLocationHeader<FinalResult = Catalog>
-    >
+    Response =
+      | Catalog
+      | ArmAcceptedLroResponse<
+          "Resource update request accepted.",
+          ArmLroLocationHeader<FinalResult = Catalog>
+        >
   >;
 
   @doc("Deletes a catalog resource.")

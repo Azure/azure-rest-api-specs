@@ -39,22 +39,30 @@ using Azure.ResourceManager;
 
 @@access(Certificate, Access.public, "java");
 @@usage(Certificate,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "java"
 );
 @@access(CustomerCertificate, Access.public, "java");
 @@usage(CustomerCertificate,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "java"
 );
 @@access(ManagedCertificate, Access.public, "java");
 @@usage(ManagedCertificate,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "java"
 );
 @@access(AzureFirstPartyManagedCertificate, Access.public, "java");
 @@usage(AzureFirstPartyManagedCertificate,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "java"
 );
 
@@ -655,7 +663,9 @@ using Azure.ResourceManager;
 );
 @@access(DeepCreatedCustomDomainProperties, Access.public, "csharp");
 @@usage(DeepCreatedCustomDomainProperties,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 @@clientName(CdnWebApplicationFirewallPolicyProperties.rateLimitRules,
@@ -985,34 +995,46 @@ using Azure.ResourceManager;
 @@access(RuleSet, Access.public, "csharp");
 @@access(Sku, Access.public, "csharp");
 @@usage(Sku,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 @@access(ManagedRuleSetDefinition, Access.public, "csharp");
 @@usage(ManagedRuleSetDefinition,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 @@access(ManagedRuleSetDefinitionProperties, Access.public, "csharp");
 @@usage(ManagedRuleSetDefinitionProperties,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 @@access(ManagedRuleGroupDefinition, Access.public, "csharp");
 @@usage(ManagedRuleGroupDefinition,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 @@access(ManagedRuleDefinition, Access.public, "csharp");
 @@access(DeepCreatedCustomDomainProperties, Access.public, "csharp");
 @@usage(ManagedRuleDefinition,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 @@usage(CustomDomain, Azure.ClientGenerator.Core.Usage.input, "csharp");
 @@usage(IpAddressGroup, Azure.ClientGenerator.Core.Usage.input, "csharp");
 @@usage(CustomDomainPropertiesParameters,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 @@alternateType(WebApplicationFirewallPolicy.etag, Azure.Core.eTag, "csharp");

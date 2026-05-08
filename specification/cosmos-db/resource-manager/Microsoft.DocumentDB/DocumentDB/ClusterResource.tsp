@@ -64,11 +64,13 @@ interface ClusterResources {
   update is ArmCustomPatchAsync<
     ClusterResource,
     PatchModel = ClusterResource,
-    Response = ArmResponse<ClusterResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ClusterResource> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: ClusterResource;
-    }),
+    Response =
+      | ArmResponse<ClusterResource>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ClusterResource> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: ClusterResource;
+        }),
     Error = CloudError
   >;
 
@@ -121,8 +123,10 @@ interface ClusterResources {
     ClusterResource,
     CommandAsyncPostBody,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<CommandPublicResource>,
-    Response = ArmResponse<CommandPublicResource> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = CommandPublicResource> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResponse<CommandPublicResource>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = CommandPublicResource> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = Azure.ResourceManager.CommonTypes.ErrorResponse
   >;
 

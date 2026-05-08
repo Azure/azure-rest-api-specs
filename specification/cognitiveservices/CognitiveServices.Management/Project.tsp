@@ -61,11 +61,14 @@ interface Projects {
   @tag("CognitiveServicesProjects")
   create is ArmResourceCreateOrReplaceAsync<
     Project,
-    Response = ArmResourceUpdatedResponse<Project> | ArmResourceCreatedResponse<Project> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Project> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: Project;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<Project>
+      | ArmResourceCreatedResponse<Project>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Project> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: Project;
+        })
   >;
 
   /**
@@ -77,10 +80,12 @@ interface Projects {
   update is ArmCustomPatchAsync<
     Project,
     PatchModel = Project,
-    Response = ArmResponse<Project> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Project>> & {
-      @bodyRoot
-      _: Project;
-    })
+    Response =
+      | ArmResponse<Project>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Project>> & {
+          @bodyRoot
+          _: Project;
+        })
   >;
 
   /**
@@ -90,7 +95,10 @@ interface Projects {
   @tag("CognitiveServicesProjects")
   delete is ArmResourceDeleteWithoutOkAsync<
     Project,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

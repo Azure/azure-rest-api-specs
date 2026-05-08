@@ -104,17 +104,19 @@ interface DataVersionBases {
   @summary("Create or update version.")
   createOrUpdate is DataVersionWithNamePatternBaseOps.CreateOrUpdateAsync<
     DataVersionBase,
-    Response = ArmResourceUpdatedResponse<DataVersionBase> | (ArmResourceCreatedResponse<
-      DataVersionBase,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = DataVersionBase> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<DataVersionBase>
+      | (ArmResourceCreatedResponse<
+          DataVersionBase,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = DataVersionBase> &
+            Azure.Core.Foundations.RetryAfterHeader
+        > & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
   >;
 
   /**
@@ -124,13 +126,16 @@ interface DataVersionBases {
   @summary("Delete version.")
   delete is DataVersionBaseOps.DeleteWithoutOkAsync<
     DataVersionBase,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**

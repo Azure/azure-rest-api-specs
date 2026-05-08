@@ -38,10 +38,12 @@ interface ProjectPolicies {
     ProjectPolicy,
     PatchModel = ProjectPolicyUpdate,
     LroHeaders = ArmLroLocationHeader,
-    Response = ProjectPolicy | ArmAcceptedLroResponse<
-      "Resource update request accepted.",
-      ArmLroLocationHeader<FinalResult = ProjectPolicy>
-    >
+    Response =
+      | ProjectPolicy
+      | ArmAcceptedLroResponse<
+          "Resource update request accepted.",
+          ArmLroLocationHeader<FinalResult = ProjectPolicy>
+        >
   >;
 
   @doc("Deletes an project policy.")

@@ -56,7 +56,9 @@ interface ProtectionPolicies {
       @header
       `x-ms-authorization-auxiliary`?: string;
     },
-    Response = ArmResourceUpdatedResponse<ProtectionPolicyResource> | AcceptedResponse
+    Response =
+      | ArmResourceUpdatedResponse<ProtectionPolicyResource>
+      | AcceptedResponse
   >;
 
   /**
@@ -66,8 +68,11 @@ interface ProtectionPolicies {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteAsyncBase<
     ProtectionPolicyResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 }
 

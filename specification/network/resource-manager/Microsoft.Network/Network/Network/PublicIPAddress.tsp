@@ -166,7 +166,10 @@ interface PublicIPAddressOperationGroup {
   @tag("PublicIPAddresses")
   delete is PublicIPAddressOperationGroupOps.DeleteWithoutOkAsync<
     PublicIPAddress,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     OverrideErrorType = CloudError
   >;
 
@@ -207,8 +210,10 @@ interface PublicIPAddressOperationGroup {
     PublicIPAddress,
     ReserveCloudServicePublicIpAddressRequest,
     Result = void,
-    Response = ArmResponse<PublicIPAddress> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PublicIPAddress> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResponse<PublicIPAddress>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PublicIPAddress> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
 
@@ -220,8 +225,10 @@ interface PublicIPAddressOperationGroup {
     PublicIPAddress,
     DisassociateCloudServicePublicIpRequest,
     Result = void,
-    Response = ArmResponse<PublicIPAddress> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PublicIPAddress> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResponse<PublicIPAddress>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PublicIPAddress> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
 }

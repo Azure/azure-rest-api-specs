@@ -67,8 +67,9 @@ interface Remediations {
    */
   createOrUpdateAtManagementGroup is RemediationManagementGroupOps.CreateOrUpdateSync<
     Remediation,
-    Response = ArmResponse<Remediation> | (CreatedResponse &
-      Body<Remediation>),
+    Response =
+      | ArmResponse<Remediation>
+      | (CreatedResponse & Body<Remediation>),
     ErrorType = ErrorResponse
   >;
 

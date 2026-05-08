@@ -40,8 +40,10 @@ interface Configurations {
   @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Configuration,
-    Response = ArmResourceUpdatedResponse<Configuration> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Configuration> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<Configuration>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Configuration> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -96,8 +98,10 @@ interface Configurations {
     Server,
     ConfigurationListForBatchUpdate,
     BaseParameters = Azure.ResourceManager.Foundations.ResourceGroupBaseParameters,
-    Response = ArmResponse<ConfigurationListResult> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = ConfigurationListResult> &
-      ArmLroLocationHeader>
+    Response =
+      | ArmResponse<ConfigurationListResult>
+      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = ConfigurationListResult> &
+          ArmLroLocationHeader>
   >;
 }
 

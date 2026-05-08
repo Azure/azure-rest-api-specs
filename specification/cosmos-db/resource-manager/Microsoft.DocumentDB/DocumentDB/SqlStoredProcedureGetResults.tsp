@@ -47,8 +47,10 @@ interface SqlStoredProcedureGetResultsOperationGroup {
   createUpdateSqlStoredProcedure is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     SqlStoredProcedureGetResults,
     Request = SqlStoredProcedureCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<SqlStoredProcedureGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = SqlStoredProcedureGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<SqlStoredProcedureGetResults>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = SqlStoredProcedureGetResults> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -56,7 +58,9 @@ interface SqlStoredProcedureGetResultsOperationGroup {
    */
   deleteSqlStoredProcedure is ArmResourceDeleteWithoutOkAsync<
     SqlStoredProcedureGetResults,
-    Response = NoContentResponse | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+    Response =
+      | NoContentResponse
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
   >;
 
   /**

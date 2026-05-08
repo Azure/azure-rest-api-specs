@@ -100,16 +100,18 @@ interface InferenceEndpoints {
   @summary("Create or update InferenceEndpoint (asynchronous).")
   createOrUpdate is InferenceEndpointOps.CreateOrUpdateAsync<
     InferenceEndpoint,
-    Response = ArmResourceUpdatedResponse<InferenceEndpoint> | (ArmResourceCreatedResponse<
-      InferenceEndpoint,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = InferenceEndpoint>
-    > & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<InferenceEndpoint>
+      | (ArmResourceCreatedResponse<
+          InferenceEndpoint,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = InferenceEndpoint>
+        > & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
   >;
 
   /**
@@ -121,14 +123,16 @@ interface InferenceEndpoints {
   update is InferenceEndpointOps.CustomPatchAsync<
     InferenceEndpoint,
     PatchModel = void,
-    Response = ArmResourceUpdatedResponse<InferenceEndpoint> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = InferenceEndpoint>> &
-      Azure.Core.Foundations.RetryAfterHeader & {
-        /**
-         * Timeout for the client to use when polling the asynchronous operation.
-         */
-        @header("x-ms-async-operation-timeout")
-        timeout: duration;
-      })
+    Response =
+      | ArmResourceUpdatedResponse<InferenceEndpoint>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = InferenceEndpoint>> &
+          Azure.Core.Foundations.RetryAfterHeader & {
+            /**
+             * Timeout for the client to use when polling the asynchronous operation.
+             */
+            @header("x-ms-async-operation-timeout")
+            timeout: duration;
+          })
   >;
 
   /**
@@ -138,13 +142,16 @@ interface InferenceEndpoints {
   @summary("Delete InferenceEndpoint (asynchronous).")
   delete is InferenceEndpointOps.DeleteWithoutOkAsync<
     InferenceEndpoint,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**

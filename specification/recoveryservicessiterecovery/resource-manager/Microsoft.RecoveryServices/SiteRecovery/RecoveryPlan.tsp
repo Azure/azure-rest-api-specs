@@ -50,8 +50,10 @@ interface RecoveryPlans {
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     RecoveryPlan,
     Request = CreateRecoveryPlanInput,
-    Response = ArmResourceUpdatedResponse<RecoveryPlan> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = RecoveryPlan> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResourceUpdatedResponse<RecoveryPlan>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = RecoveryPlan> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = never
   >;
 

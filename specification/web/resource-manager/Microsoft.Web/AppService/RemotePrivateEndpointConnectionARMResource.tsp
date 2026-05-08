@@ -78,10 +78,12 @@ interface RemotePrivateEndpointConnectionARMResources {
   @summary("Approves or rejects a private endpoint connection")
   approveOrRejectPrivateEndpointConnection is RemotePrivateEndpointConnectionARMResourceOps.CreateOrUpdateAsync<
     RemotePrivateEndpointConnectionARMResource,
-    Response = ArmResourceUpdatedResponse<RemotePrivateEndpointConnectionARMResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = RemotePrivateEndpointConnectionARMResource>> & {
-      @bodyRoot
-      _: RemotePrivateEndpointConnectionARMResource;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<RemotePrivateEndpointConnectionARMResource>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = RemotePrivateEndpointConnectionARMResource>> & {
+          @bodyRoot
+          _: RemotePrivateEndpointConnectionARMResource;
+        }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -92,15 +94,18 @@ interface RemotePrivateEndpointConnectionARMResources {
   @summary("Deletes a private endpoint connection")
   deletePrivateEndpointConnection is RemotePrivateEndpointConnectionARMResourceOps.DeleteWithoutOkAsync<
     RemotePrivateEndpointConnectionARMResource,
-    Response = ArmResponse<unknown> | (ArmDeleteAcceptedLroResponse & {
-      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @body
-      _: unknown;
-    }) | (ArmDeletedNoContentResponse & {
-      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @body
-      _: unknown;
-    }),
+    Response =
+      | ArmResponse<unknown>
+      | (ArmDeleteAcceptedLroResponse & {
+          #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+          @body
+          _: unknown;
+        })
+      | (ArmDeletedNoContentResponse & {
+          #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+          @body
+          _: unknown;
+        }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -157,10 +162,12 @@ interface StaticSites {
   @summary("Approves or rejects a private endpoint connection")
   approveOrRejectPrivateEndpointConnection is StaticSiteOps.CreateOrUpdateAsync<
     RemotePrivateEndpointConnectionARMResource,
-    Response = ArmResourceUpdatedResponse<RemotePrivateEndpointConnectionARMResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = RemotePrivateEndpointConnectionARMResource>> & {
-      @bodyRoot
-      _: RemotePrivateEndpointConnectionARMResource;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<RemotePrivateEndpointConnectionARMResource>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = RemotePrivateEndpointConnectionARMResource>> & {
+          @bodyRoot
+          _: RemotePrivateEndpointConnectionARMResource;
+        }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -171,15 +178,18 @@ interface StaticSites {
   @summary("Deletes a private endpoint connection")
   deletePrivateEndpointConnection is StaticSiteOps.DeleteWithoutOkAsync<
     RemotePrivateEndpointConnectionARMResource,
-    Response = ArmResponse<unknown> | (ArmDeleteAcceptedLroResponse & {
-      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @body
-      _: unknown;
-    }) | (ArmDeletedNoContentResponse & {
-      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @body
-      _: unknown;
-    }),
+    Response =
+      | ArmResponse<unknown>
+      | (ArmDeleteAcceptedLroResponse & {
+          #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+          @body
+          _: unknown;
+        })
+      | (ArmDeletedNoContentResponse & {
+          #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+          @body
+          _: unknown;
+        }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -238,10 +248,12 @@ interface RemotePrivateEndpointConnectionARMResourceOperationGroup {
   @summary("Approves or rejects a private endpoint connection")
   approveOrRejectPrivateEndpointConnection is PrivateEndpointConnectionOperationGroupOps.CreateOrUpdateAsync<
     RemotePrivateEndpointConnectionARMResource,
-    Response = ArmResourceUpdatedResponse<RemotePrivateEndpointConnectionARMResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = RemotePrivateEndpointConnectionARMResource>> & {
-      @bodyRoot
-      _: RemotePrivateEndpointConnectionARMResource;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<RemotePrivateEndpointConnectionARMResource>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = RemotePrivateEndpointConnectionARMResource>> & {
+          @bodyRoot
+          _: RemotePrivateEndpointConnectionARMResource;
+        }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -252,15 +264,18 @@ interface RemotePrivateEndpointConnectionARMResourceOperationGroup {
   @summary("Deletes a private endpoint connection")
   deletePrivateEndpointConnection is PrivateEndpointConnectionOperationGroupOps.DeleteWithoutOkAsync<
     RemotePrivateEndpointConnectionARMResource,
-    Response = ArmResponse<unknown> | (ArmDeleteAcceptedLroResponse & {
-      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @body
-      _: unknown;
-    }) | (ArmDeletedNoContentResponse & {
-      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @body
-      _: unknown;
-    }),
+    Response =
+      | ArmResponse<unknown>
+      | (ArmDeleteAcceptedLroResponse & {
+          #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+          @body
+          _: unknown;
+        })
+      | (ArmDeletedNoContentResponse & {
+          #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+          @body
+          _: unknown;
+        }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -324,10 +339,12 @@ interface PrivateEndpointConnectionSlotOperationGroup {
   @summary("Approves or rejects a private endpoint connection")
   approveOrRejectPrivateEndpointConnectionSlot is PrivateEndpointConnectionSlotOperationGroupOps.CreateOrUpdateAsync<
     RemotePrivateEndpointConnectionARMResource,
-    Response = ArmResourceUpdatedResponse<RemotePrivateEndpointConnectionARMResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = RemotePrivateEndpointConnectionARMResource>> & {
-      @bodyRoot
-      _: RemotePrivateEndpointConnectionARMResource;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<RemotePrivateEndpointConnectionARMResource>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = RemotePrivateEndpointConnectionARMResource>> & {
+          @bodyRoot
+          _: RemotePrivateEndpointConnectionARMResource;
+        }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -339,15 +356,18 @@ interface PrivateEndpointConnectionSlotOperationGroup {
   @summary("Deletes a private endpoint connection")
   deletePrivateEndpointConnectionSlot is PrivateEndpointConnectionSlotOperationGroupOps.DeleteWithoutOkAsync<
     RemotePrivateEndpointConnectionARMResource,
-    Response = ArmResponse<unknown> | (ArmDeleteAcceptedLroResponse & {
-      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @body
-      _: unknown;
-    }) | (ArmDeletedNoContentResponse & {
-      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @body
-      _: unknown;
-    }),
+    Response =
+      | ArmResponse<unknown>
+      | (ArmDeleteAcceptedLroResponse & {
+          #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+          @body
+          _: unknown;
+        })
+      | (ArmDeletedNoContentResponse & {
+          #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+          @body
+          _: unknown;
+        }),
     OverrideErrorType = DefaultErrorResponse
   >;
 

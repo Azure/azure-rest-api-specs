@@ -44,14 +44,17 @@ interface Workspaces {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Workspace,
-    Response = ArmResourceUpdatedResponse<Workspace> | ArmResourceCreatedResponse<
-      Workspace,
-      ArmLroLocationHeader<FinalResult = Workspace> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | (ArmAcceptedLroResponse & {
-      @bodyRoot
-      _: Workspace;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<Workspace>
+      | ArmResourceCreatedResponse<
+          Workspace,
+          ArmLroLocationHeader<FinalResult = Workspace> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | (ArmAcceptedLroResponse & {
+          @bodyRoot
+          _: Workspace;
+        }),
     Error = ErrorDetails
   >;
 
@@ -64,14 +67,16 @@ interface Workspaces {
   update is ArmCustomPatchAsync<
     Workspace,
     PatchModel = WorkspacePatchResource,
-    Response = ArmResponse<Workspace> | (ArmAcceptedLroResponse<
-      "Resource update request accepted.",
-      LroHeaders = ArmLroLocationHeader<FinalResult = Workspace> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > & {
-      @bodyRoot
-      _: Workspace;
-    }),
+    Response =
+      | ArmResponse<Workspace>
+      | (ArmAcceptedLroResponse<
+          "Resource update request accepted.",
+          LroHeaders = ArmLroLocationHeader<FinalResult = Workspace> &
+            Azure.Core.Foundations.RetryAfterHeader
+        > & {
+          @bodyRoot
+          _: Workspace;
+        }),
     Error = ErrorDetails
   >;
 
@@ -81,7 +86,10 @@ interface Workspaces {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Workspace,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = Error
   >;
 

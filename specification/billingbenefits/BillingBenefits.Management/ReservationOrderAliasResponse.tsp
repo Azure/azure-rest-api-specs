@@ -57,11 +57,13 @@ interface ReservationOrderAliasResponses {
       Azure.ResourceManager.Foundations.DefaultBaseParameters<ReservationOrderAliasResponse>
     >,
     ReservationOrderAliasRequest,
-    ReservationOrderAliasResponse | ArmResourceCreatedResponse<
-      ReservationOrderAliasResponse,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = ReservationOrderAliasResponse> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >,
+
+      | ReservationOrderAliasResponse
+      | ArmResourceCreatedResponse<
+          ReservationOrderAliasResponse,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = ReservationOrderAliasResponse> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >,
     ErrorResponse
   >;
 }

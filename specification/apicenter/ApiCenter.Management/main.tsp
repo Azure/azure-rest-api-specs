@@ -161,9 +161,9 @@ op ArmResourceListByParent<
 op ArmResourceRead<
   TResource extends Foundations.Resource,
   TBaseParameters = BaseParameters<TResource>
->(
-  ...ResourceInstanceParameters<TResource, TBaseParameters>,
-): ArmResponseWithEtag<TResource> | ErrorResponse;
+>(...ResourceInstanceParameters<TResource, TBaseParameters>):
+  | ArmResponseWithEtag<TResource>
+  | ErrorResponse;
 
 /**
  * Synchronous PUT operation for ARM resources
@@ -185,7 +185,10 @@ op ArmResourceCreateOrReplaceSync<
   @doc("Resource create parameters.")
   @bodyRoot
   resource: TResource,
-): ArmResourceUpdatedResponseWithEtag<TResource> | ArmResourceCreatedSyncResponseWithEtag<TResource> | ErrorResponse;
+):
+  | ArmResourceUpdatedResponseWithEtag<TResource>
+  | ArmResourceCreatedSyncResponseWithEtag<TResource>
+  | ErrorResponse;
 
 @doc("Resource '{name}' create operation succeeded", TResource)
 model ArmResourceCreatedSyncResponseWithEtag<TResource extends Foundations.Resource>

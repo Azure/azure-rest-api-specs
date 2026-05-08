@@ -113,19 +113,21 @@ interface GatewayContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<GatewayContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    }) | (ArmResourceCreatedSyncResponse<GatewayContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    })
+    Response =
+      | (ArmResponse<GatewayContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          etag: string;
+        })
+      | (ArmResourceCreatedSyncResponse<GatewayContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          etag: string;
+        })
   >;
 
   /**
@@ -316,7 +318,9 @@ interface GatewayContracts {
   gatewayApiCreateOrUpdate is GatewayApiOps.ActionSync<
     GatewayContract,
     AssociationContract,
-    Response = ArmResponse<ApiContract> | ArmResourceCreatedSyncResponse<ApiContract>,
+    Response =
+      | ArmResponse<ApiContract>
+      | ArmResourceCreatedSyncResponse<ApiContract>,
     OptionalRequestBody = true
   >;
 

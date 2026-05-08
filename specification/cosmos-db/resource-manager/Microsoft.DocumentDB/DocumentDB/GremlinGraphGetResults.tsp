@@ -46,8 +46,10 @@ interface GremlinGraphGetResultsOperationGroup {
   createUpdateGremlinGraph is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     GremlinGraphGetResults,
     Request = GremlinGraphCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<GremlinGraphGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = GremlinGraphGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<GremlinGraphGetResults>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = GremlinGraphGetResults> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -55,7 +57,9 @@ interface GremlinGraphGetResultsOperationGroup {
    */
   deleteGremlinGraph is ArmResourceDeleteWithoutOkAsync<
     GremlinGraphGetResults,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | NoContentResponse
+    Response =
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+      | NoContentResponse
   >;
 
   /**

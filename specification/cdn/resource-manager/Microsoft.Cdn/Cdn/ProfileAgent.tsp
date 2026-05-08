@@ -60,8 +60,11 @@ interface ProfileAgents {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ProfileAgent,
-    Response = ArmResourceUpdatedResponse<ProfileAgent> | ArmResourceCreatedResponse<ProfileAgent> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ProfileAgent>> &
-      ProfileAgentAcceptedBody)
+    Response =
+      | ArmResourceUpdatedResponse<ProfileAgent>
+      | ArmResourceCreatedResponse<ProfileAgent>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ProfileAgent>> &
+          ProfileAgentAcceptedBody)
   >;
 
   /**
@@ -72,8 +75,10 @@ interface ProfileAgents {
   update is ArmCustomPatchAsync<
     ProfileAgent,
     PatchModel = ProfileAgentUpdateParameters,
-    Response = ArmResponse<ProfileAgent> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> &
-      ProfileAgentAcceptedBody)
+    Response =
+      | ArmResponse<ProfileAgent>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> &
+          ProfileAgentAcceptedBody)
   >;
 
   /**
@@ -82,7 +87,10 @@ interface ProfileAgents {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ProfileAgent,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**

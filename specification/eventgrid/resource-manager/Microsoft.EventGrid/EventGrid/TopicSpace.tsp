@@ -45,7 +45,10 @@ interface TopicSpaces {
   @summary("Delete a topic space.")
   delete is ArmResourceDeleteWithoutOkAsync<
     TopicSpace,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

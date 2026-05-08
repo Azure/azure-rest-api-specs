@@ -63,10 +63,12 @@ interface LinkedServer {
   create is LinkedServerOps.CreateOrUpdateAsync<
     RedisLinkedServerWithProperties,
     Request = RedisLinkedServerCreateParameters,
-    Response = RedisLinkedServerWithProperties | ArmResourceCreatedResponse<
-      RedisLinkedServerWithProperties,
-      LroHeaders = ArmLroLocationHeader<FinalResult = RedisLinkedServerWithProperties>
-    >
+    Response =
+      | RedisLinkedServerWithProperties
+      | ArmResourceCreatedResponse<
+          RedisLinkedServerWithProperties,
+          LroHeaders = ArmLroLocationHeader<FinalResult = RedisLinkedServerWithProperties>
+        >
   >;
 
   /**

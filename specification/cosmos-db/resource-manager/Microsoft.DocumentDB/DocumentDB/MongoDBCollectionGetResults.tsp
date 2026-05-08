@@ -48,8 +48,10 @@ interface MongoDBCollectionGetResultsOperationGroup {
   createUpdateMongoDBCollection is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     MongoDBCollectionGetResults,
     Request = MongoDBCollectionCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<MongoDBCollectionGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = MongoDBCollectionGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<MongoDBCollectionGetResults>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = MongoDBCollectionGetResults> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -58,7 +60,9 @@ interface MongoDBCollectionGetResultsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deleteMongoDBCollection is ArmResourceDeleteWithoutOkAsync<
     MongoDBCollectionGetResults,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | NoContentResponse
+    Response =
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+      | NoContentResponse
   >;
 
   /**
@@ -79,8 +83,10 @@ interface MongoDBCollectionGetResultsOperationGroup {
     MongoDBCollectionGetResults,
     MergeParameters,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<MongoDBCollectionGetResults>,
-    Response = ArmResponse<PhysicalPartitionStorageInfoCollection> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionStorageInfoCollection> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResponse<PhysicalPartitionStorageInfoCollection>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionStorageInfoCollection> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = CloudError
   >;
 

@@ -47,8 +47,10 @@ interface ServiceResources {
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     ServiceResource,
     Request = ServiceResourceCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<ServiceResource> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ServiceResource> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResourceUpdatedResponse<ServiceResource>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ServiceResource> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = CloudError
   >;
 
@@ -62,7 +64,10 @@ interface ServiceResources {
   @tag("MaterializedViewsBuilder")
   delete is ArmResourceDeleteWithoutOkAsync<
     ServiceResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 

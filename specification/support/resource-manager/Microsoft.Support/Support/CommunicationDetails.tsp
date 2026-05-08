@@ -83,8 +83,10 @@ interface Communications {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is CommunicationOps.CreateOrUpdateAsync<
     CommunicationDetails,
-    Response = ArmResourceUpdatedResponse<CommunicationDetails> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CommunicationDetails> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<CommunicationDetails>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CommunicationDetails> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -145,8 +147,10 @@ interface CommunicationsNoSubscription {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is CommunicationsNoSubscriptionOps.CreateOrUpdateAsync<
     CommunicationDetails,
-    Response = ArmResourceUpdatedResponse<CommunicationDetails> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CommunicationDetails> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<CommunicationDetails>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CommunicationDetails> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

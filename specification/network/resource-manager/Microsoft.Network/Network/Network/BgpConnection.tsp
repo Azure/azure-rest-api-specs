@@ -85,7 +85,10 @@ interface BgpConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     BgpConnection,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -106,8 +109,10 @@ interface BgpConnections {
     BgpConnection,
     void,
     void,
-    Response = Record<PeerRoute[]> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PeerRouteList> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | Record<PeerRoute[]>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PeerRouteList> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
 
@@ -119,8 +124,10 @@ interface BgpConnections {
     BgpConnection,
     void,
     void,
-    Response = Record<PeerRoute[]> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PeerRouteList> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | Record<PeerRoute[]>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PeerRouteList> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
 }

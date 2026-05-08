@@ -67,8 +67,10 @@ interface ManagedBackupShortTermRetentionPolicies {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ManagedBackupShortTermRetentionPolicyOps.CreateOrUpdateAsync<
     ManagedBackupShortTermRetentionPolicy,
-    Response = ArmResourceUpdatedResponse<ManagedBackupShortTermRetentionPolicy> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedBackupShortTermRetentionPolicy> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<ManagedBackupShortTermRetentionPolicy>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedBackupShortTermRetentionPolicy> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -127,8 +129,10 @@ interface ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicyOps.CreateOrUpdateAsync<
     ManagedBackupShortTermRetentionPolicy,
-    Response = ArmResourceUpdatedResponse<ManagedBackupShortTermRetentionPolicy> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedBackupShortTermRetentionPolicy> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<ManagedBackupShortTermRetentionPolicy>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedBackupShortTermRetentionPolicy> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

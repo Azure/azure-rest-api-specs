@@ -58,8 +58,11 @@ interface Databases {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     Database,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -138,8 +141,10 @@ interface Databases {
   flush is ArmResourceActionAsyncBase<
     Database,
     FlushParameters,
-    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | OkResponse
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>,
     OptionalRequestBody = true,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Database>
   >;

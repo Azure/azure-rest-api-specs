@@ -89,20 +89,23 @@ interface Clusters {
       @header("If-Match")
       IfMatch?: string;
     },
-    Response = ArmResponse<Cluster> | ArmResourceCreatedResponse<
-      Cluster,
-      LroHeaders = ArmLroLocationHeader<FinalResult = Cluster> &
-        ArmAsyncOperationHeader<FinalResult = Cluster> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | (ArmAcceptedLroResponse<
-      "Update accepted.",
-      LroHeaders = ArmLroLocationHeader<FinalResult = Cluster> &
-        ArmAsyncOperationHeader<FinalResult = Cluster> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > & {
-      @bodyRoot
-      _: Cluster;
-    })
+    Response =
+      | ArmResponse<Cluster>
+      | ArmResourceCreatedResponse<
+          Cluster,
+          LroHeaders = ArmLroLocationHeader<FinalResult = Cluster> &
+            ArmAsyncOperationHeader<FinalResult = Cluster> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | (ArmAcceptedLroResponse<
+          "Update accepted.",
+          LroHeaders = ArmLroLocationHeader<FinalResult = Cluster> &
+            ArmAsyncOperationHeader<FinalResult = Cluster> &
+            Azure.Core.Foundations.RetryAfterHeader
+        > & {
+          @bodyRoot
+          _: Cluster;
+        })
   >;
 
   /**
@@ -112,9 +115,12 @@ interface Clusters {
   @tag("Clusters")
   delete is ArmResourceDeleteWithoutOkAsync<
     Cluster,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
-      ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+          ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -142,12 +148,14 @@ interface Clusters {
   stop is ArmResourceActionAsyncBase<
     Cluster,
     void,
-    ArmAcceptedLroResponse<
-      "Resource operation accepted.",
-      LroHeaders = ArmLroLocationHeader &
-        ArmAsyncOperationHeader &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | OkResponse,
+
+      | ArmAcceptedLroResponse<
+          "Resource operation accepted.",
+          LroHeaders = ArmLroLocationHeader &
+            ArmAsyncOperationHeader &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | OkResponse,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>
   >;
 
@@ -158,12 +166,14 @@ interface Clusters {
   start is ArmResourceActionAsyncBase<
     Cluster,
     void,
-    ArmAcceptedLroResponse<
-      "Resource operation accepted.",
-      LroHeaders = ArmLroLocationHeader &
-        ArmAsyncOperationHeader &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | OkResponse,
+
+      | ArmAcceptedLroResponse<
+          "Resource operation accepted.",
+          LroHeaders = ArmLroLocationHeader &
+            ArmAsyncOperationHeader &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | OkResponse,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>
   >;
 
@@ -174,12 +184,14 @@ interface Clusters {
   migrate is ArmResourceActionAsyncBase<
     Cluster,
     ClusterMigrateRequest,
-    ArmAcceptedLroResponse<
-      "Resource operation accepted.",
-      LroHeaders = ArmLroLocationHeader &
-        ArmAsyncOperationHeader &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | OkResponse,
+
+      | ArmAcceptedLroResponse<
+          "Resource operation accepted.",
+          LroHeaders = ArmLroLocationHeader &
+            ArmAsyncOperationHeader &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | OkResponse,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>
   >;
 
@@ -214,12 +226,14 @@ interface Clusters {
   detachFollowerDatabases is ArmResourceActionAsyncBase<
     Cluster,
     FollowerDatabaseDefinition,
-    ArmAcceptedLroResponse<
-      "Resource operation accepted.",
-      LroHeaders = ArmLroLocationHeader &
-        ArmAsyncOperationHeader &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | OkResponse,
+
+      | ArmAcceptedLroResponse<
+          "Resource operation accepted.",
+          LroHeaders = ArmLroLocationHeader &
+            ArmAsyncOperationHeader &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | OkResponse,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>
   >;
 
@@ -230,12 +244,14 @@ interface Clusters {
   diagnoseVirtualNetwork is ArmResourceActionAsyncBase<
     Cluster,
     void,
-    ArmAcceptedLroResponse<
-      "Diagnose virtual network request accepted.",
-      LroHeaders = ArmLroLocationHeader<FinalResult = DiagnoseVirtualNetworkResult> &
-        ArmAsyncOperationHeader<FinalResult = DiagnoseVirtualNetworkResult> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmResponse<DiagnoseVirtualNetworkResult>,
+
+      | ArmAcceptedLroResponse<
+          "Diagnose virtual network request accepted.",
+          LroHeaders = ArmLroLocationHeader<FinalResult = DiagnoseVirtualNetworkResult> &
+            ArmAsyncOperationHeader<FinalResult = DiagnoseVirtualNetworkResult> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmResponse<DiagnoseVirtualNetworkResult>,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>
   >;
 
@@ -272,12 +288,14 @@ interface Clusters {
   addCalloutPolicies is ArmResourceActionAsyncBase<
     Cluster,
     CalloutPoliciesList,
-    ArmAcceptedLroResponse<
-      "Resource operation accepted.",
-      LroHeaders = ArmLroLocationHeader &
-        ArmAsyncOperationHeader &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | OkResponse,
+
+      | ArmAcceptedLroResponse<
+          "Resource operation accepted.",
+          LroHeaders = ArmLroLocationHeader &
+            ArmAsyncOperationHeader &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | OkResponse,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>
   >;
 
@@ -288,12 +306,14 @@ interface Clusters {
   removeCalloutPolicy is ArmResourceActionAsyncBase<
     Cluster,
     CalloutPolicyToRemove,
-    ArmAcceptedLroResponse<
-      "Resource operation accepted.",
-      LroHeaders = ArmLroLocationHeader &
-        ArmAsyncOperationHeader &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | OkResponse,
+
+      | ArmAcceptedLroResponse<
+          "Resource operation accepted.",
+          LroHeaders = ArmLroLocationHeader &
+            ArmAsyncOperationHeader &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | OkResponse,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>
   >;
 
@@ -326,12 +346,14 @@ interface Clusters {
   addLanguageExtensions is ArmResourceActionAsyncBase<
     Cluster,
     LanguageExtensionsList,
-    ArmAcceptedLroResponse<
-      "Resource operation accepted.",
-      LroHeaders = ArmLroLocationHeader &
-        ArmAsyncOperationHeader &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | OkResponse,
+
+      | ArmAcceptedLroResponse<
+          "Resource operation accepted.",
+          LroHeaders = ArmLroLocationHeader &
+            ArmAsyncOperationHeader &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | OkResponse,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>
   >;
 
@@ -342,12 +364,14 @@ interface Clusters {
   removeLanguageExtensions is ArmResourceActionAsyncBase<
     Cluster,
     LanguageExtensionsList,
-    ArmAcceptedLroResponse<
-      "Resource operation accepted.",
-      LroHeaders = ArmLroLocationHeader &
-        ArmAsyncOperationHeader &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | OkResponse,
+
+      | ArmAcceptedLroResponse<
+          "Resource operation accepted.",
+          LroHeaders = ArmLroLocationHeader &
+            ArmAsyncOperationHeader &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | OkResponse,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>
   >;
 

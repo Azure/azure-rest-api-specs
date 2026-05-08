@@ -56,11 +56,14 @@ interface BillingProfiles {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     BillingProfile,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
-    Response = ArmResourceUpdatedResponse<BillingProfile> | ArmResourceCreatedResponse<
-      BillingProfile,
-      ArmLroLocationHeader<FinalResult = BillingProfile> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<BillingProfile>
+      | ArmResourceCreatedResponse<
+          BillingProfile,
+          ArmLroLocationHeader<FinalResult = BillingProfile> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**

@@ -42,10 +42,9 @@ op OpenAIOperationWithPreview<
   Params extends Reflection.Model,
   Response,
   ErrorResponse = ApiErrorResponse
->(
-  ...WithConditionalFoundryPreviewHeader<AreaPreviewLabel>,
-  ...Params,
-): Response | ErrorResponse;
+>(...WithConditionalFoundryPreviewHeader<AreaPreviewLabel>, ...Params):
+  | Response
+  | ErrorResponse;
 
 alias AssetBase = {
   @doc("Asset ID, a unique identifier for the asset")

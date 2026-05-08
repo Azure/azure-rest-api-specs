@@ -61,8 +61,10 @@ interface NetworkSecurityPerimeterConfigurations {
   createOrUpdate is Legacy.CreateOrReplaceAsync<
     NetworkSecurityPerimeterConfiguration,
     void,
-    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | OkResponse
+      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = ErrorResponse
   >;
 }

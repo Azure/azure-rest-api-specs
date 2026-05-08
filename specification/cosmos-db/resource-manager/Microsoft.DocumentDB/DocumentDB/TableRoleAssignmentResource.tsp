@@ -38,8 +38,10 @@ interface TableRoleAssignmentResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createUpdateTableRoleAssignment is ArmResourceCreateOrReplaceAsync<
     TableRoleAssignmentResource,
-    Response = ArmResourceUpdatedResponse<TableRoleAssignmentResource> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = TableRoleAssignmentResource> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<TableRoleAssignmentResource>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = TableRoleAssignmentResource> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -48,7 +50,10 @@ interface TableRoleAssignmentResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deleteTableRoleAssignment is ArmResourceDeleteWithoutOkAsync<
     TableRoleAssignmentResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+      | ArmDeletedNoContentResponse
   >;
 
   /**

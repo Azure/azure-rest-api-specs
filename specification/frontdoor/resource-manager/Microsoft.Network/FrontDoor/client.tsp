@@ -82,14 +82,17 @@ interface ProfilesOverrides {
     ...ResourceGroupParameter,
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     parameters: Microsoft.Network.Profile,
-  ): ArmResourceUpdatedResponse<Profile> | ArmResourceCreatedResponse<
-    Profile,
-    ArmLroLocationHeader<FinalResult = Profile> &
-      Azure.Core.Foundations.RetryAfterHeader
-  > | (ArmAcceptedLroResponse & {
-    @bodyRoot
-    _: Profile;
-  });
+  ):
+    | ArmResourceUpdatedResponse<Profile>
+    | ArmResourceCreatedResponse<
+        Profile,
+        ArmLroLocationHeader<FinalResult = Profile> &
+          Azure.Core.Foundations.RetryAfterHeader
+      >
+    | (ArmAcceptedLroResponse & {
+        @bodyRoot
+        _: Profile;
+      });
 }
 @@override(Profiles.createOrUpdate,
   ProfilesOverrides.replaceCreateOrUpdate,

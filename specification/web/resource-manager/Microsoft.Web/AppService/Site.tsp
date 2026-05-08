@@ -119,10 +119,12 @@ interface Sites {
   @summary("Creates a new web, mobile, or API app in an existing resource group, or updates an existing app.")
   createOrUpdate is SiteOps.CreateOrUpdateAsync<
     Site,
-    Response = ArmResourceUpdatedResponse<Site> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Site>> & {
-      @bodyRoot
-      _: Site;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<Site>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Site>> & {
+          @bodyRoot
+          _: Site;
+        }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -135,10 +137,12 @@ interface Sites {
   update is SiteOps.CustomPatchSync<
     Site,
     PatchModel = SitePatchResource,
-    Response = ArmResponse<Site> | (AcceptedResponse & {
-      @bodyRoot
-      _: Site;
-    }),
+    Response =
+      | ArmResponse<Site>
+      | (AcceptedResponse & {
+          @bodyRoot
+          _: Site;
+        }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -162,9 +166,12 @@ interface Sites {
       @query("deleteEmptyServerFarm")
       deleteEmptyServerFarm?: boolean;
     },
-    Response = {
-      @body body: void;
-    } | NoContentResponse | ArmNotFoundResponse,
+    Response =
+      | {
+          @body body: void;
+        }
+      | NoContentResponse
+      | ArmNotFoundResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -445,14 +452,16 @@ interface Sites {
   getWebSiteContainerLogs is SiteOps.ActionSync<
     Site,
     void,
-    {
-      @header("Content-Type")
-      contentType: "application/octet-stream";
 
-      @doc("Receipt body in COSE format")
-      @bodyRoot
-      body: bytes;
-    } | NoContentResponse,
+      | {
+          @header("Content-Type")
+          contentType: "application/octet-stream";
+
+          @doc("Receipt body in COSE format")
+          @bodyRoot
+          body: bytes;
+        }
+      | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -465,14 +474,16 @@ interface Sites {
   getContainerLogsZip is SiteOps.ActionSync<
     Site,
     void,
-    {
-      @header("Content-Type")
-      contentType: "application/zip";
 
-      @doc("Receipt body in COSE format")
-      @bodyRoot
-      body: bytes;
-    } | NoContentResponse,
+      | {
+          @header("Content-Type")
+          contentType: "application/zip";
+
+          @doc("Receipt body in COSE format")
+          @bodyRoot
+          body: bytes;
+        }
+      | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -741,11 +752,13 @@ interface Sites {
   getNetworkTraceOperation is ActionParameterSiteWebAppOps.ActionSync<
     Site,
     void,
-    Response = ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
-      @identifiers(#[])
-      @bodyRoot
-      _: NetworkTrace[];
-    }),
+    Response =
+      | ArmResponse<NetworkTrace[]>
+      | (AcceptedResponse & {
+          @identifiers(#[])
+          @bodyRoot
+          _: NetworkTrace[];
+        }),
     Parameters = {
       /**
        * GUID of the operation.
@@ -796,11 +809,13 @@ interface Sites {
   startWebSiteNetworkTraceOperation is SiteOps.ActionSync<
     Site,
     void,
-    ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> & {
-      @bodyRoot
-      @identifiers(#[])
-      _?: NetworkTrace[];
-    }),
+
+      | ArmResponse<NetworkTrace[]>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> & {
+          @bodyRoot
+          @identifiers(#[])
+          _?: NetworkTrace[];
+        }),
     Parameters = {
       /**
        * The duration to keep capturing in seconds.
@@ -832,9 +847,11 @@ interface Sites {
   stopWebSiteNetworkTrace is SiteOps.ActionSync<
     Site,
     void,
-    {
-      @body body: void;
-    } | NoContentResponse,
+
+      | {
+          @body body: void;
+        }
+      | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -868,11 +885,13 @@ interface Sites {
   getNetworkTraceOperationV2 is ActionParameterSiteWebAppOps.ActionSync<
     Site,
     void,
-    Response = ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
-      @identifiers(#[])
-      @bodyRoot
-      _: NetworkTrace[];
-    }),
+    Response =
+      | ArmResponse<NetworkTrace[]>
+      | (AcceptedResponse & {
+          @identifiers(#[])
+          @bodyRoot
+          _: NetworkTrace[];
+        }),
     Parameters = {
       /**
        * GUID of the operation.
@@ -912,9 +931,11 @@ interface Sites {
   generateNewSitePublishingPassword is SiteOps.ActionSync<
     Site,
     void,
-    {
-      @body body: void;
-    } | NoContentResponse,
+
+      | {
+          @body body: void;
+        }
+      | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -1166,11 +1187,13 @@ interface Sites {
   startNetworkTrace is SiteOps.ActionSync<
     Site,
     void,
-    ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse & {
-      @bodyRoot
-      @identifiers(#[])
-      _?: NetworkTrace[];
-    }),
+
+      | ArmResponse<NetworkTrace[]>
+      | (ArmAcceptedLroResponse & {
+          @bodyRoot
+          @identifiers(#[])
+          _?: NetworkTrace[];
+        }),
     Parameters = {
       /**
        * The duration to keep capturing in seconds.
@@ -1215,9 +1238,11 @@ interface Sites {
   stopNetworkTrace is SiteOps.ActionSync<
     Site,
     void,
-    {
-      @body body: void;
-    } | NoContentResponse,
+
+      | {
+          @body body: void;
+        }
+      | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -1509,10 +1534,12 @@ interface WebApps {
   @summary("Creates a new web, mobile, or API app in an existing resource group, or updates an existing app.")
   createOrUpdateSlot is WebAppOps.CreateOrUpdateAsync<
     Site,
-    Response = ArmResourceUpdatedResponse<Site> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Site>> & {
-      @bodyRoot
-      _: Site;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<Site>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Site>> & {
+          @bodyRoot
+          _: Site;
+        }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -1526,10 +1553,12 @@ interface WebApps {
   updateSlot is WebAppOps.CustomPatchSync<
     Site,
     PatchModel = SitePatchResource,
-    Response = ArmResponse<Site> | (AcceptedResponse & {
-      @bodyRoot
-      _: Site;
-    }),
+    Response =
+      | ArmResponse<Site>
+      | (AcceptedResponse & {
+          @bodyRoot
+          _: Site;
+        }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -1552,9 +1581,12 @@ interface WebApps {
       @query("deleteEmptyServerFarm")
       deleteEmptyServerFarm?: boolean;
     },
-    Response = {
-      @body body: void;
-    } | NoContentResponse | ArmNotFoundResponse,
+    Response =
+      | {
+          @body body: void;
+        }
+      | NoContentResponse
+      | ArmNotFoundResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -1852,14 +1884,16 @@ interface WebApps {
   getWebSiteContainerLogsSlot is WebAppOps.ActionSync<
     Site,
     void,
-    {
-      @header("Content-Type")
-      contentType: "application/octet-stream";
 
-      @doc("Receipt body in COSE format")
-      @bodyRoot
-      body: bytes;
-    } | NoContentResponse,
+      | {
+          @header("Content-Type")
+          contentType: "application/octet-stream";
+
+          @doc("Receipt body in COSE format")
+          @bodyRoot
+          body: bytes;
+        }
+      | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -1873,14 +1907,16 @@ interface WebApps {
   getContainerLogsZipSlot is WebAppOps.ActionSync<
     Site,
     void,
-    {
-      @header("Content-Type")
-      contentType: "application/zip";
 
-      @doc("Receipt body in COSE format")
-      @bodyRoot
-      body: bytes;
-    } | NoContentResponse,
+      | {
+          @header("Content-Type")
+          contentType: "application/zip";
+
+          @doc("Receipt body in COSE format")
+          @bodyRoot
+          body: bytes;
+        }
+      | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -1967,7 +2003,10 @@ interface WebApps {
       @path
       keyName: string;
     },
-    Response = ArmResponse<KeyInfo> | ArmResourceCreatedSyncResponse<KeyInfo> | DefaultErrorResponse,
+    Response =
+      | ArmResponse<KeyInfo>
+      | ArmResourceCreatedSyncResponse<KeyInfo>
+      | DefaultErrorResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -2074,11 +2113,13 @@ interface WebApps {
   getNetworkTraceOperationSlot is ActionParameterSlotWebAppOps.ActionSync<
     Site,
     Request = void,
-    Response = ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
-      @identifiers(#[])
-      @bodyRoot
-      _: NetworkTrace[];
-    }),
+    Response =
+      | ArmResponse<NetworkTrace[]>
+      | (AcceptedResponse & {
+          @identifiers(#[])
+          @bodyRoot
+          _: NetworkTrace[];
+        }),
     Parameters = {
       /**
        * GUID of the operation.
@@ -2129,11 +2170,13 @@ interface WebApps {
   startWebSiteNetworkTraceOperationSlot is WebAppOps.ActionSync<
     Site,
     void,
-    ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> & {
-      @bodyRoot
-      @identifiers(#[])
-      _?: NetworkTrace[];
-    }),
+
+      | ArmResponse<NetworkTrace[]>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> & {
+          @bodyRoot
+          @identifiers(#[])
+          _?: NetworkTrace[];
+        }),
     Parameters = {
       /**
        * The duration to keep capturing in seconds.
@@ -2165,9 +2208,11 @@ interface WebApps {
   stopWebSiteNetworkTraceSlot is WebAppOps.ActionSync<
     Site,
     void,
-    {
-      @body body: void;
-    } | NoContentResponse,
+
+      | {
+          @body body: void;
+        }
+      | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -2200,11 +2245,13 @@ interface WebApps {
   getNetworkTraceOperationSlotV2 is ActionParameterSlotWebAppOps.ActionSync<
     Site,
     Request = void,
-    Response = ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
-      @identifiers(#[])
-      @bodyRoot
-      _: NetworkTrace[];
-    }),
+    Response =
+      | ArmResponse<NetworkTrace[]>
+      | (AcceptedResponse & {
+          @identifiers(#[])
+          @bodyRoot
+          _: NetworkTrace[];
+        }),
     Parameters = {
       /**
        * GUID of the operation.
@@ -2242,9 +2289,11 @@ interface WebApps {
   generateNewSitePublishingPasswordSlot is WebAppOps.ActionSync<
     Site,
     void,
-    {
-      @body body: void;
-    } | NoContentResponse,
+
+      | {
+          @body body: void;
+        }
+      | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -2500,11 +2549,13 @@ interface WebApps {
   startNetworkTraceSlot is WebAppOps.ActionSync<
     Site,
     void,
-    ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse & {
-      @bodyRoot
-      @identifiers(#[])
-      _?: NetworkTrace[];
-    }),
+
+      | ArmResponse<NetworkTrace[]>
+      | (ArmAcceptedLroResponse & {
+          @bodyRoot
+          @identifiers(#[])
+          _?: NetworkTrace[];
+        }),
     Parameters = {
       /**
        * The duration to keep capturing in seconds.
@@ -2550,9 +2601,11 @@ interface WebApps {
   stopNetworkTraceSlot is WebAppOps.ActionSync<
     Site,
     void,
-    {
-      @body body: void;
-    } | NoContentResponse,
+
+      | {
+          @body body: void;
+        }
+      | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 

@@ -53,11 +53,14 @@ interface InboundEndpoints {
       @header
       ifNoneMatch?: string;
     },
-    Response = ArmResourceUpdatedResponse<InboundEndpoint> | ArmResourceCreatedResponse<
-      InboundEndpoint,
-      ArmLroLocationHeader<FinalResult = InboundEndpoint> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse,
+    Response =
+      | ArmResourceUpdatedResponse<InboundEndpoint>
+      | ArmResourceCreatedResponse<
+          InboundEndpoint,
+          ArmLroLocationHeader<FinalResult = InboundEndpoint> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse,
     Error = CloudError
   >;
 
@@ -91,7 +94,10 @@ interface InboundEndpoints {
       @header
       ifMatch?: string;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 

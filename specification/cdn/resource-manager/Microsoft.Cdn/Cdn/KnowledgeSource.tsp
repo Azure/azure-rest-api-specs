@@ -60,8 +60,11 @@ interface KnowledgeSources {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     KnowledgeSource,
-    Response = ArmResourceUpdatedResponse<KnowledgeSource> | ArmResourceCreatedResponse<KnowledgeSource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = KnowledgeSource>> &
-      KnowledgeSourceAcceptedBody)
+    Response =
+      | ArmResourceUpdatedResponse<KnowledgeSource>
+      | ArmResourceCreatedResponse<KnowledgeSource>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = KnowledgeSource>> &
+          KnowledgeSourceAcceptedBody)
   >;
 
   /**
@@ -72,8 +75,10 @@ interface KnowledgeSources {
   update is ArmCustomPatchAsync<
     KnowledgeSource,
     PatchModel = KnowledgeSourceUpdateParameters,
-    Response = ArmResponse<KnowledgeSource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> &
-      KnowledgeSourceAcceptedBody)
+    Response =
+      | ArmResponse<KnowledgeSource>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> &
+          KnowledgeSourceAcceptedBody)
   >;
 
   /**
@@ -82,7 +87,10 @@ interface KnowledgeSources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     KnowledgeSource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**

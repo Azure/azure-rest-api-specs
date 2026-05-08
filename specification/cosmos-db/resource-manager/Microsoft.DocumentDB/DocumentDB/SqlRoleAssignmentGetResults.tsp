@@ -42,8 +42,10 @@ interface SqlRoleAssignmentGetResultsOperationGroup {
   createUpdateSqlRoleAssignment is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     SqlRoleAssignmentGetResults,
     Request = SqlRoleAssignmentCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<SqlRoleAssignmentGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SqlRoleAssignmentGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResourceUpdatedResponse<SqlRoleAssignmentGetResults>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SqlRoleAssignmentGetResults> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = CloudError
   >;
 
@@ -53,7 +55,10 @@ interface SqlRoleAssignmentGetResultsOperationGroup {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deleteSqlRoleAssignment is ArmResourceDeleteWithoutOkAsync<
     SqlRoleAssignmentGetResults,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 

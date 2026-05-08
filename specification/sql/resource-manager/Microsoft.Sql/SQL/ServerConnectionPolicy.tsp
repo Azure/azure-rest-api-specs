@@ -54,8 +54,10 @@ interface ServerConnectionPolicies {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ServerConnectionPolicy,
-    Response = ArmResourceUpdatedResponse<ServerConnectionPolicy> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ServerConnectionPolicy> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<ServerConnectionPolicy>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ServerConnectionPolicy> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

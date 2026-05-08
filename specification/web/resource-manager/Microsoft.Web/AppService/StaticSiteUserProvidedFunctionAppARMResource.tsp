@@ -91,10 +91,12 @@ interface StaticSiteUserProvidedFunctionAppARMResources {
       @query("isForced")
       isForced?: boolean;
     },
-    Response = ArmResourceUpdatedResponse<StaticSiteUserProvidedFunctionAppARMResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StaticSiteUserProvidedFunctionAppARMResource>> & {
-      @bodyRoot
-      _: StaticSiteUserProvidedFunctionAppARMResource;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<StaticSiteUserProvidedFunctionAppARMResource>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StaticSiteUserProvidedFunctionAppARMResource>> & {
+          @bodyRoot
+          _: StaticSiteUserProvidedFunctionAppARMResource;
+        }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -170,10 +172,12 @@ interface StaticSiteUserProvidedFunctionAppARMResourceOperationGroup {
       @query("isForced")
       isForced?: boolean;
     },
-    Response = ArmResourceUpdatedResponse<StaticSiteUserProvidedFunctionAppARMResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StaticSiteUserProvidedFunctionAppARMResource>> & {
-      @bodyRoot
-      _: StaticSiteUserProvidedFunctionAppARMResource;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<StaticSiteUserProvidedFunctionAppARMResource>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StaticSiteUserProvidedFunctionAppARMResource>> & {
+          @bodyRoot
+          _: StaticSiteUserProvidedFunctionAppARMResource;
+        }),
     OverrideErrorType = DefaultErrorResponse
   >;
 

@@ -80,10 +80,12 @@ interface StaticSiteARMResources {
   @summary("Creates a new static site in an existing resource group, or updates an existing static site.")
   createOrUpdateStaticSite is ArmResourceCreateOrReplaceAsync<
     StaticSiteARMResource,
-    Response = ArmResourceUpdatedResponse<StaticSiteARMResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StaticSiteARMResource>> & {
-      @bodyRoot
-      _: StaticSiteARMResource;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<StaticSiteARMResource>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StaticSiteARMResource>> & {
+          @bodyRoot
+          _: StaticSiteARMResource;
+        }),
     Error = DefaultErrorResponse
   >;
 
@@ -97,10 +99,12 @@ interface StaticSiteARMResources {
   updateStaticSite is ArmCustomPatchSync<
     StaticSiteARMResource,
     PatchModel = StaticSitePatchResource,
-    Response = ArmResponse<StaticSiteARMResource> | (AcceptedResponse & {
-      @bodyRoot
-      _: StaticSiteARMResource;
-    }),
+    Response =
+      | ArmResponse<StaticSiteARMResource>
+      | (AcceptedResponse & {
+          @bodyRoot
+          _: StaticSiteARMResource;
+        }),
     Error = DefaultErrorResponse
   >;
 

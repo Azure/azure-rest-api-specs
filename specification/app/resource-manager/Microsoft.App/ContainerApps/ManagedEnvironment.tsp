@@ -83,7 +83,10 @@ interface ManagedEnvironments {
   @summary("Delete a Managed Environment.")
   delete is ArmResourceDeleteWithoutOkAsync<
     ManagedEnvironment,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

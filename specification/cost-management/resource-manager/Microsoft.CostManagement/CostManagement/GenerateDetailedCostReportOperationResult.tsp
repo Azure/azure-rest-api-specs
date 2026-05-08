@@ -34,7 +34,9 @@ interface GenerateDetailedCostReportOperationResults {
   get is Extension.Read<
     Extension.ScopeParameter,
     GenerateDetailedCostReportOperationResult,
-    Response = ArmResponse<GenerateDetailedCostReportOperationResult> | ArmAcceptedResponse,
+    Response =
+      | ArmResponse<GenerateDetailedCostReportOperationResult>
+      | ArmAcceptedResponse,
     Error = ErrorResponse
   >;
 }

@@ -56,10 +56,13 @@ interface SBNamespaces {
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639408.aspx")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     SBNamespace,
-    Response = ArmResourceUpdatedResponse<SBNamespace> | ArmResourceCreatedResponse<
-      SBNamespace,
-      LroHeaders = ArmLroLocationHeader<FinalResult = SBNamespace>
-    > | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SBNamespace>>,
+    Response =
+      | ArmResourceUpdatedResponse<SBNamespace>
+      | ArmResourceCreatedResponse<
+          SBNamespace,
+          LroHeaders = ArmLroLocationHeader<FinalResult = SBNamespace>
+        >
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SBNamespace>>,
     Error = ErrorResponse
   >;
 
@@ -73,8 +76,10 @@ interface SBNamespaces {
   update is ArmCustomPatchSync<
     SBNamespace,
     PatchModel = SBNamespaceUpdateParameters,
-    Response = ArmResponse<SBNamespace> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = SBNamespace> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResponse<SBNamespace>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = SBNamespace> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = ErrorResponse
   >;
 
@@ -87,7 +92,10 @@ interface SBNamespaces {
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639389.aspx")
   delete is ArmResourceDeleteWithoutOkAsync<
     SBNamespace,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>
+      | ArmDeletedNoContentResponse,
     Error = ErrorResponse
   >;
 

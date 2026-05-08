@@ -62,7 +62,10 @@ alias ReplicationProtectionContainersOps = Azure.ResourceManager.Legacy.LegacyOp
   }
 >;
 
-model ProtectionContainerAcceptedLroResponse<FinalResult extends TypeSpec.Reflection.Model | unknown | void = ProtectionContainer>
+model ProtectionContainerAcceptedLroResponse<FinalResult extends
+  | TypeSpec.Reflection.Model
+  | unknown
+  | void = ProtectionContainer>
   is ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = FinalResult> &
     Azure.Core.Foundations.RetryAfterHeader>;
 
@@ -84,8 +87,10 @@ interface ProtectionContainers {
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     ProtectionContainer,
     Request = CreateProtectionContainerInput,
-    Response = ArmResourceUpdatedResponse<ProtectionContainer> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ProtectionContainer> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResourceUpdatedResponse<ProtectionContainer>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ProtectionContainer> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = never
   >;
 
@@ -148,9 +153,11 @@ interface ProtectionContainers {
   switchProtection is ArmResourceActionAsyncBase<
     ProtectionContainer,
     SwitchProtectionInput,
-    ArmResponse<ProtectionContainer> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ProtectionContainer> &
-      ArmAsyncOperationHeader<FinalResult = ProtectionContainer> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+
+      | ArmResponse<ProtectionContainer>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ProtectionContainer> &
+          ArmAsyncOperationHeader<FinalResult = ProtectionContainer> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<ProtectionContainer>,
     Error = never
   >;

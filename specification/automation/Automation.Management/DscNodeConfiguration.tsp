@@ -45,11 +45,13 @@ interface DscNodeConfigurations {
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     DscNodeConfiguration,
     Request = DscNodeConfigurationCreateOrUpdateParameters,
-    Response = OkResponse | ArmResourceCreatedResponse<
-      DscNodeConfiguration,
-      ArmLroLocationHeader<FinalResult = DscNodeConfiguration> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | OkResponse
+      | ArmResourceCreatedResponse<
+          DscNodeConfiguration,
+          ArmLroLocationHeader<FinalResult = DscNodeConfiguration> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**

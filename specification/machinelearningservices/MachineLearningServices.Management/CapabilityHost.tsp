@@ -40,17 +40,19 @@ interface CapabilityHosts {
   @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     CapabilityHost,
-    Response = ArmResourceUpdatedResponse<CapabilityHost> | (ArmResourceCreatedResponse<
-      CapabilityHost,
-      LroHeaders = ArmAsyncOperationHeader
-    > &
-      Azure.Core.Foundations.RetryAfterHeader & {
-        /**
-         * Timeout for the client to use when polling the asynchronous operation.
-         */
-        @header("x-ms-async-operation-timeout")
-        timeout: duration;
-      })
+    Response =
+      | ArmResourceUpdatedResponse<CapabilityHost>
+      | (ArmResourceCreatedResponse<
+          CapabilityHost,
+          LroHeaders = ArmAsyncOperationHeader
+        > &
+          Azure.Core.Foundations.RetryAfterHeader & {
+            /**
+             * Timeout for the client to use when polling the asynchronous operation.
+             */
+            @header("x-ms-async-operation-timeout")
+            timeout: duration;
+          })
   >;
 
   /**
@@ -59,13 +61,15 @@ interface CapabilityHosts {
   @summary("Delete capabilityHost.")
   delete is ArmResourceDeleteWithoutOkAsync<
     CapabilityHost,
-    Response = (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 }
 

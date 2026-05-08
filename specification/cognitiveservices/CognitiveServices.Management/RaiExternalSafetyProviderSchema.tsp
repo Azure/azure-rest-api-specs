@@ -57,7 +57,9 @@ interface RaiExternalSafetyProviderSchemas {
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     RaiExternalSafetyProviderSchema,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = ArmResourceUpdatedResponse<RaiExternalSafetyProviderSchema> | ArmResourceCreatedSyncResponse<RaiExternalSafetyProviderSchema>
+    Response =
+      | ArmResourceUpdatedResponse<RaiExternalSafetyProviderSchema>
+      | ArmResourceCreatedSyncResponse<RaiExternalSafetyProviderSchema>
   >;
 
   /**

@@ -68,7 +68,10 @@ interface SapMonitors {
   @summary("Deletes a SAP monitor.")
   delete is ArmResourceDeleteWithoutOkAsync<
     SapMonitor,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = ErrorResponse
   >;
 

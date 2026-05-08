@@ -89,7 +89,10 @@ interface FirewallPolicies {
   @tag("FirewallPolicies")
   delete is ArmResourceDeleteWithoutOkAsync<
     FirewallPolicy,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 

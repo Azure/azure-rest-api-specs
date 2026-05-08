@@ -43,15 +43,18 @@ interface FrontDoors {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     FrontDoor,
-    Response = ArmResourceUpdatedResponse<FrontDoor> | ArmResourceCreatedResponse<
-      FrontDoor,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = FrontDoor> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = FrontDoor>> &
-      Azure.Core.Foundations.RetryAfterHeader & {
-        @bodyRoot
-        _: FrontDoor;
-      }),
+    Response =
+      | ArmResourceUpdatedResponse<FrontDoor>
+      | ArmResourceCreatedResponse<
+          FrontDoor,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = FrontDoor> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = FrontDoor>> &
+          Azure.Core.Foundations.RetryAfterHeader & {
+            @bodyRoot
+            _: FrontDoor;
+          }),
     Error = ErrorResponse
   >;
 

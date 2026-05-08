@@ -87,7 +87,10 @@ interface NetworkManagers {
       @query("force")
       force?: boolean;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -192,11 +195,13 @@ interface NetworkManagers {
   post is ArmResourceActionAsyncBase<
     NetworkManager,
     Request = NetworkManagerCommit,
-    Response = ArmResponse<NetworkManagerCommit> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkManagerCommit> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: NetworkManagerCommit;
-    }),
+    Response =
+      | ArmResponse<NetworkManagerCommit>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkManagerCommit> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: NetworkManagerCommit;
+        }),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkManager>,
     Error = CloudError
   >;

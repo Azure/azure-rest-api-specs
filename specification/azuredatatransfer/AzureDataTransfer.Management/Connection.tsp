@@ -47,10 +47,12 @@ interface Connections {
   update is ArmCustomPatchAsync<
     Connection,
     PatchModel = ConnectionsPatch,
-    Response = ArmResponse<Connection> | (ArmAcceptedLroResponse & {
-      @bodyRoot
-      _: Connection;
-    })
+    Response =
+      | ArmResponse<Connection>
+      | (ArmAcceptedLroResponse & {
+          @bodyRoot
+          _: Connection;
+        })
   >;
 
   /**

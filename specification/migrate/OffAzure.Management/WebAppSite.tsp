@@ -51,7 +51,10 @@ interface WebAppSites {
   @tag("WebAppSitesController")
   delete is ArmResourceDeleteWithoutOkAsync<
     WebAppSite,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

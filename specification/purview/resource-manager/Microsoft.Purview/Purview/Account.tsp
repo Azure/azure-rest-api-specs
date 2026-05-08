@@ -73,11 +73,13 @@ interface Accounts {
   update is ArmCustomPatchAsync<
     Account,
     PatchModel = AccountUpdateParameters,
-    Response = ArmResponse<Account> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Account> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: Account;
-    }),
+    Response =
+      | ArmResponse<Account>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Account> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: Account;
+        }),
     Error = ErrorResponseModel
   >;
 
@@ -88,7 +90,10 @@ interface Accounts {
   @summary("Deletes the account resource.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Account,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = ErrorResponseModel
   >;
 

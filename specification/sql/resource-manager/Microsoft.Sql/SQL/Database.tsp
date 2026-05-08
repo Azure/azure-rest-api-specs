@@ -94,10 +94,13 @@ interface Databases {
   @tag("Databases")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Database,
-    Response = ArmResourceUpdatedResponse<Database> | ArmResourceCreatedResponse<
-      Database,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = Database>
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<Database>
+      | ArmResourceCreatedResponse<
+          Database,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = Database>
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -114,7 +117,10 @@ interface Databases {
   @tag("Databases")
   delete is ArmResourceDeleteWithoutOkAsync<
     Database,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -361,10 +367,13 @@ interface Databases {
     Database,
     Request = CreateDatabaseRestorePointDefinition,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Database>,
-    Response = ArmResponse<RestorePoint> | ArmResourceCreatedResponse<
-      RestorePoint,
-      LroHeaders = ArmLroLocationHeader<FinalResult = RestorePoint>
-    > | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = RestorePoint>>
+    Response =
+      | ArmResponse<RestorePoint>
+      | ArmResourceCreatedResponse<
+          RestorePoint,
+          LroHeaders = ArmLroLocationHeader<FinalResult = RestorePoint>
+        >
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = RestorePoint>>
   >;
 
   /**

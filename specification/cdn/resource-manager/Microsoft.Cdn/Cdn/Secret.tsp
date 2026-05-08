@@ -39,11 +39,14 @@ interface Secrets {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     Secret,
-    Response = ArmResourceUpdatedResponse<Secret> | ArmResourceCreatedResponse<Secret> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Secret> &
-      ArmLroLocationHeader<FinalResult = Secret>> & {
-      @bodyRoot
-      _: Secret;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<Secret>
+      | ArmResourceCreatedResponse<Secret>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Secret> &
+          ArmLroLocationHeader<FinalResult = Secret>> & {
+          @bodyRoot
+          _: Secret;
+        })
   >;
 
   /**
@@ -53,9 +56,12 @@ interface Secrets {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     Secret,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+          ArmLroLocationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**

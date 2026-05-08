@@ -68,11 +68,13 @@ interface ManagedGrafanas {
   update is ArmCustomPatchAsync<
     ManagedGrafana,
     PatchModel = ManagedGrafanaUpdateParameters,
-    Response = ArmResponse<ManagedGrafana> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = ManagedGrafana> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: ManagedGrafana;
-    })
+    Response =
+      | ArmResponse<ManagedGrafana>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = ManagedGrafana> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: ManagedGrafana;
+        })
   >;
 
   /**
@@ -84,8 +86,11 @@ interface ManagedGrafanas {
   @operationId("Grafana_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     ManagedGrafana,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**

@@ -71,11 +71,13 @@ interface CurrentQuotaLimitBases {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     CurrentQuotaLimitBase,
     QuotaPutBaseParam,
-    Response = ArmResourceUpdatedResponse<CurrentQuotaLimitBase> | ArmCreatedResponse<
-      QuotaRequestSubmitResponse201,
-      ExtraHeaders = ArmLroLocationHeader<FinalResult = CurrentQuotaLimitBase> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >,
+    Response =
+      | ArmResourceUpdatedResponse<CurrentQuotaLimitBase>
+      | ArmCreatedResponse<
+          QuotaRequestSubmitResponse201,
+          ExtraHeaders = ArmLroLocationHeader<FinalResult = CurrentQuotaLimitBase> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >,
     Error = ExceptionResponse
   >;
 
@@ -94,11 +96,13 @@ interface CurrentQuotaLimitBases {
     CurrentQuotaLimitBase,
     PatchModel = CurrentQuotaLimitBase,
     BaseParameters = QuotaPatchBaseParam,
-    Response = ArmResponse<CurrentQuotaLimitBase> | ArmCreatedResponse<
-      QuotaRequestSubmitResponse201,
-      ExtraHeaders = ArmLroLocationHeader<FinalResult = CurrentQuotaLimitBase> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >,
+    Response =
+      | ArmResponse<CurrentQuotaLimitBase>
+      | ArmCreatedResponse<
+          QuotaRequestSubmitResponse201,
+          ExtraHeaders = ArmLroLocationHeader<FinalResult = CurrentQuotaLimitBase> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >,
     Error = ExceptionResponse
   >;
 

@@ -46,8 +46,10 @@ interface CurrentQuotaLimitBases {
   createOrUpdate is Extension.CreateOrReplaceAsync<
     Extension.ScopeParameter,
     CurrentQuotaLimitBase,
-    Response = CurrentQuotaLimitBase | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CurrentQuotaLimitBase> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | CurrentQuotaLimitBase
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CurrentQuotaLimitBase> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = ExceptionResponse
   >;
 
@@ -62,7 +64,9 @@ interface CurrentQuotaLimitBases {
     Extension.ScopeParameter,
     CurrentQuotaLimitBase,
     PatchModel = CurrentQuotaLimitBase,
-    Response = CurrentQuotaLimitBase | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader>,
+    Response =
+      | CurrentQuotaLimitBase
+      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader>,
     Error = ExceptionResponse
   >;
 

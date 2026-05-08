@@ -77,13 +77,15 @@ interface Topics {
   update is ArmCustomPatchAsync<
     Topic,
     PatchModel = TopicUpdateParameters,
-    Response = {
-      @body body: void;
-    } | ArmResourceCreatedResponse<
-      Topic,
-      LroHeaders = ArmLroLocationHeader<FinalResult = Topic> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | {
+          @body body: void;
+        }
+      | ArmResourceCreatedResponse<
+          Topic,
+          LroHeaders = ArmLroLocationHeader<FinalResult = Topic> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**

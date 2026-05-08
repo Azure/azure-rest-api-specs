@@ -49,10 +49,12 @@ interface Flows {
   update is ArmCustomPatchAsync<
     Flow,
     PatchModel = FlowsPatch,
-    Response = ArmResponse<Flow> | (ArmAcceptedLroResponse & {
-      @bodyRoot
-      _: Flow;
-    })
+    Response =
+      | ArmResponse<Flow>
+      | (ArmAcceptedLroResponse & {
+          @bodyRoot
+          _: Flow;
+        })
   >;
 
   /**

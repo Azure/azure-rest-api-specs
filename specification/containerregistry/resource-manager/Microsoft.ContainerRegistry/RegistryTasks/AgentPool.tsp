@@ -44,11 +44,13 @@ interface AgentPools {
   update is ArmCustomPatchAsync<
     AgentPool,
     PatchModel = AgentPoolUpdateParameters,
-    Response = AgentPool | ArmResourceCreatedResponse<
-      AgentPool,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = AgentPool> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | AgentPool
+      | ArmResourceCreatedResponse<
+          AgentPool,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = AgentPool> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**

@@ -49,11 +49,13 @@ interface CredentialSets {
   update is ArmCustomPatchAsync<
     CredentialSet,
     PatchModel = CredentialSetUpdateParameters,
-    Response = ArmResponse<CredentialSet> | ArmResourceCreatedResponse<
-      CredentialSet,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = CredentialSet> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | ArmResponse<CredentialSet>
+      | ArmResourceCreatedResponse<
+          CredentialSet,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = CredentialSet> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**

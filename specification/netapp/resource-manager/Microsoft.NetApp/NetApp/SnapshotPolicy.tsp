@@ -237,11 +237,13 @@ interface SnapshotPolicies {
   update is ArmCustomPatchAsync<
     SnapshotPolicy,
     PatchModel = SnapshotPolicyPatch,
-    Response = ArmResponse<SnapshotPolicy> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SnapshotPolicy> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: SnapshotPolicy;
-    })
+    Response =
+      | ArmResponse<SnapshotPolicy>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SnapshotPolicy> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: SnapshotPolicy;
+        })
   >;
 
   /**
@@ -250,7 +252,10 @@ interface SnapshotPolicies {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     SnapshotPolicy,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

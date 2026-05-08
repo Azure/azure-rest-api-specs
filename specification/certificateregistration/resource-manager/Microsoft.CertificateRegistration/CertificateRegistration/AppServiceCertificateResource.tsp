@@ -46,10 +46,12 @@ interface AppServiceCertificateResources {
    */
   createOrUpdateCertificate is ArmResourceCreateOrReplaceAsync<
     AppServiceCertificateResource,
-    Response = ArmResponse<AppServiceCertificateResource> | ArmResourceCreatedResponse<
-      AppServiceCertificateResource,
-      LroHeaders = ArmLroLocationHeader<FinalResult = AppServiceCertificateResource>
-    >,
+    Response =
+      | ArmResponse<AppServiceCertificateResource>
+      | ArmResourceCreatedResponse<
+          AppServiceCertificateResource,
+          LroHeaders = ArmLroLocationHeader<FinalResult = AppServiceCertificateResource>
+        >,
     Error = DefaultErrorResponse
   >;
 

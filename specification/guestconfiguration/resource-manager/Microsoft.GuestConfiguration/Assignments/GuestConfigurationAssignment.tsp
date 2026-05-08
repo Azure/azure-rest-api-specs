@@ -137,7 +137,9 @@ interface GuestConfigurationAssignments {
   SubscriptionList is Extension.ListByTarget<
     Extension.Subscription,
     GuestConfigurationAssignment,
-    Response = ArmResponse<GuestConfigurationAssignmentList> | NoContentResponse,
+    Response =
+      | ArmResponse<GuestConfigurationAssignmentList>
+      | NoContentResponse,
     Error = ErrorResponse,
     OverrideResourceName = "GuestConfigurationVmAssignment"
   >;
@@ -415,7 +417,9 @@ interface GuestConfigurationAssignmentsVMSS {
     VirtualMachineScaleSets,
     GuestConfigurationAssignment,
     Parameters = {},
-    Response = ArmResponse<GuestConfigurationAssignment> | ArmDeletedNoContentResponse,
+    Response =
+      | ArmResponse<GuestConfigurationAssignment>
+      | ArmDeletedNoContentResponse,
     Error = ErrorResponse,
     OverrideResourceName = "GuestConfigurationVmssAssignment"
   >;

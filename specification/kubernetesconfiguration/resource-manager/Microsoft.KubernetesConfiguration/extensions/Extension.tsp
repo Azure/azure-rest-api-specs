@@ -153,11 +153,13 @@ interface Extensions {
     Extension,
     PatchModel = PatchExtension,
     Parameters = {},
-    Response = ArmResponse<Extension> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Extension> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: Extension;
-    })
+    Response =
+      | ArmResponse<Extension>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Extension> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: Extension;
+        })
   >;
 
   /**
@@ -176,8 +178,11 @@ interface Extensions {
       @query("forceDelete")
       forceDelete?: boolean;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**

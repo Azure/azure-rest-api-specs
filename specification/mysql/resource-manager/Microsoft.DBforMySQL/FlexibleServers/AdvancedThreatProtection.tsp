@@ -43,11 +43,14 @@ interface AdvancedThreatProtectionSettings {
   @operationId("AdvancedThreatProtectionSettings_UpdatePut")
   updatePut is ArmResourceCreateOrReplaceAsync<
     AdvancedThreatProtection,
-    Response = ArmResourceUpdatedResponse<AdvancedThreatProtection> | ArmResourceCreatedResponse<
-      AdvancedThreatProtection,
-      ArmLroLocationHeader<FinalResult = AdvancedThreatProtection> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<AdvancedThreatProtection>
+      | ArmResourceCreatedResponse<
+          AdvancedThreatProtection,
+          ArmLroLocationHeader<FinalResult = AdvancedThreatProtection> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**

@@ -70,8 +70,10 @@ interface AutoImportJobs {
   @tag("autoImportJobs")
   delete is ArmResourceDeleteWithoutOkAsync<
     AutoImportJob,
-    Response = ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<FinalResult = void> &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse,
     Error = ErrorResponse
   >;
 

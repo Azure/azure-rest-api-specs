@@ -101,7 +101,9 @@ interface Workbooks {
       @query("sourceId")
       sourceId?: string;
     },
-    Response = ArmResponse<Workbook> | ArmResourceCreatedSyncResponse<Workbook>,
+    Response =
+      | ArmResponse<Workbook>
+      | ArmResourceCreatedSyncResponse<Workbook>,
     OptionalRequestBody = true
   >;
 

@@ -99,11 +99,13 @@ interface GroupQuotasEnforcementStatuses {
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is GroupQuotasEnforcementStatusesOps.CreateOrUpdateAsync<
     GroupQuotasEnforcementStatus,
-    Response = ArmResourceUpdatedResponse<GroupQuotasEnforcementStatus> | ArmResourceCreatedResponse<
-      GroupQuotasEnforcementStatus,
-      ArmCombinedLroHeaders<FinalResult = GroupQuotasEnforcementStatus> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >,
+    Response =
+      | ArmResourceUpdatedResponse<GroupQuotasEnforcementStatus>
+      | ArmResourceCreatedResponse<
+          GroupQuotasEnforcementStatus,
+          ArmCombinedLroHeaders<FinalResult = GroupQuotasEnforcementStatus> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >,
     OptionalRequestBody = true
   >;
 
@@ -118,8 +120,10 @@ interface GroupQuotasEnforcementStatuses {
   update is GroupQuotasEnforcementStatusesOps.CustomPatchAsync<
     GroupQuotasEnforcementStatus,
     PatchModel = GroupQuotasEnforcementStatus,
-    Response = ArmResponse<GroupQuotasEnforcementStatus> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = GroupQuotasEnforcementStatus> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResponse<GroupQuotasEnforcementStatus>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = GroupQuotasEnforcementStatus> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     OptionalRequestBody = true
   >;
 }

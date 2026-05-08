@@ -92,17 +92,19 @@ interface DataContainers {
   @summary("Create or update container.")
   createOrUpdate is DataContainerwithNamePatternOps.CreateOrUpdateAsync<
     DataContainer,
-    Response = ArmResourceUpdatedResponse<DataContainer> | (ArmResourceCreatedResponse<
-      DataContainer,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = DataContainer> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<DataContainer>
+      | (ArmResourceCreatedResponse<
+          DataContainer,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = DataContainer> &
+            Azure.Core.Foundations.RetryAfterHeader
+        > & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
   >;
 
   /**
@@ -112,13 +114,16 @@ interface DataContainers {
   @summary("Delete container.")
   delete is DataContainerOps.DeleteWithoutOkAsync<
     DataContainer,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**

@@ -68,12 +68,10 @@ interface NetworkGroups {
       @header("If-Match")
       IfMatch?: string;
     },
-    Response = (ArmResponse<NetworkGroup> &
-      NetworkGroupCreateOrUpdateEtagHeader) | (ArmCreatedResponse<
-      NetworkGroup,
-      {}
-    > &
-      NetworkGroupCreateOrUpdateEtagHeader),
+    Response =
+      | (ArmResponse<NetworkGroup> & NetworkGroupCreateOrUpdateEtagHeader)
+      | (ArmCreatedResponse<NetworkGroup, {}> &
+          NetworkGroupCreateOrUpdateEtagHeader),
     Error = CloudError
   >;
 
@@ -90,7 +88,10 @@ interface NetworkGroups {
       @query("force")
       force?: boolean;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 

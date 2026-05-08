@@ -48,11 +48,13 @@ interface EmailServices {
   update is ArmCustomPatchAsync<
     EmailServiceResource,
     PatchModel = EmailServiceResourceUpdate,
-    Response = EmailServiceResource | ArmResourceCreatedResponse<
-      EmailServiceResource,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = EmailServiceResource> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | EmailServiceResource
+      | ArmResourceCreatedResponse<
+          EmailServiceResource,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = EmailServiceResource> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**
@@ -63,7 +65,10 @@ interface EmailServices {
   @tag("EmailServices")
   delete is ArmResourceDeleteWithoutOkAsync<
     EmailServiceResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

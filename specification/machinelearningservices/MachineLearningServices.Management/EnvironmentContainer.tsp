@@ -70,17 +70,19 @@ interface EnvironmentContainers {
   @summary("Create or update container.")
   createOrUpdate is EnvironmentContainerOps.CreateOrUpdateAsync<
     EnvironmentContainer,
-    Response = ArmResourceUpdatedResponse<EnvironmentContainer> | (ArmResourceCreatedResponse<
-      EnvironmentContainer,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = EnvironmentContainer> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<EnvironmentContainer>
+      | (ArmResourceCreatedResponse<
+          EnvironmentContainer,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = EnvironmentContainer> &
+            Azure.Core.Foundations.RetryAfterHeader
+        > & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
   >;
 
   /**
@@ -90,13 +92,16 @@ interface EnvironmentContainers {
   @summary("Delete container.")
   delete is EnvironmentContainerOps.DeleteWithoutOkAsync<
     EnvironmentContainer,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**

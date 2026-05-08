@@ -42,12 +42,15 @@ interface AFDEndpoints {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     AFDEndpoint,
-    Response = ArmResourceUpdatedResponse<AFDEndpoint> | ArmResourceCreatedResponse<AFDEndpoint> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AFDEndpoint> &
-      ArmLroLocationHeader<FinalResult = AFDEndpoint> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: AFDEndpoint;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<AFDEndpoint>
+      | ArmResourceCreatedResponse<AFDEndpoint>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AFDEndpoint> &
+          ArmLroLocationHeader<FinalResult = AFDEndpoint> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: AFDEndpoint;
+        })
   >;
 
   /**
@@ -58,11 +61,13 @@ interface AFDEndpoints {
   update is ArmCustomPatchAsync<
     AFDEndpoint,
     PatchModel = AFDEndpointUpdateParameters,
-    Response = ArmResponse<AFDEndpoint> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AFDEndpoint> &
-      ArmLroLocationHeader<FinalResult = AFDEndpoint>> & {
-      @bodyRoot
-      _: AFDEndpoint;
-    })
+    Response =
+      | ArmResponse<AFDEndpoint>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AFDEndpoint> &
+          ArmLroLocationHeader<FinalResult = AFDEndpoint>> & {
+          @bodyRoot
+          _: AFDEndpoint;
+        })
   >;
 
   /**
@@ -72,8 +77,11 @@ interface AFDEndpoints {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     AFDEndpoint,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**

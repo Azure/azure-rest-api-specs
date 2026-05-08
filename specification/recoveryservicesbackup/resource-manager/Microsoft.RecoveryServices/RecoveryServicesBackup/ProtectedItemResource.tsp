@@ -66,8 +66,10 @@ interface ProtectedItems {
       @header
       `x-ms-authorization-auxiliary`?: string;
     },
-    Response = ArmResourceUpdatedResponse<ProtectedItemResource> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ProtectedItemResource> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<ProtectedItemResource>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ProtectedItemResource> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -78,7 +80,10 @@ interface ProtectedItems {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteSync<
     ProtectedItemResource,
-    Response = ArmDeletedResponse | AcceptedResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | AcceptedResponse
+      | ArmDeletedNoContentResponse
   >;
 }
 
@@ -205,7 +210,10 @@ interface ProtectedItemOperationResults {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is ProtectedItemOperationResultOps.Read<
     ProtectedItemResource,
-    Response = ArmResponse<ProtectedItemResource> | AcceptedResponse | ArmNoContentResponse
+    Response =
+      | ArmResponse<ProtectedItemResource>
+      | AcceptedResponse
+      | ArmNoContentResponse
   >;
 }
 

@@ -35,8 +35,10 @@ interface PrivateEndpointConnections {
   createOrUpdate is PrivateEndpointOperations.CreateOrReplaceAsync<
     KubernetesConfigurationPrivateLinkScope,
     PrivateEndpointConnection,
-    Response = ArmResourceUpdatedResponse<PrivateEndpointConnection> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResourceUpdatedResponse<PrivateEndpointConnection>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
       Azure.Core.Foundations.RetryAfterHeader
   >;

@@ -70,19 +70,21 @@ interface IdentityProviderContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<IdentityProviderContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag?: string;
-    }) | (ArmResourceCreatedSyncResponse<IdentityProviderContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag?: string;
-    })
+    Response =
+      | (ArmResponse<IdentityProviderContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          etag?: string;
+        })
+      | (ArmResourceCreatedSyncResponse<IdentityProviderContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          etag?: string;
+        })
   >;
 
   /**

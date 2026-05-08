@@ -46,7 +46,10 @@ interface PermissionBindings {
   @summary("Delete a permission binding.")
   delete is ArmResourceDeleteWithoutOkAsync<
     PermissionBinding,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

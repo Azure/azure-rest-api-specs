@@ -47,8 +47,10 @@ interface SqlUserDefinedFunctionGetResultsOperationGroup {
   createUpdateSqlUserDefinedFunction is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     SqlUserDefinedFunctionGetResults,
     Request = SqlUserDefinedFunctionCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<SqlUserDefinedFunctionGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = SqlUserDefinedFunctionGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<SqlUserDefinedFunctionGetResults>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = SqlUserDefinedFunctionGetResults> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -56,7 +58,9 @@ interface SqlUserDefinedFunctionGetResultsOperationGroup {
    */
   deleteSqlUserDefinedFunction is ArmResourceDeleteWithoutOkAsync<
     SqlUserDefinedFunctionGetResults,
-    Response = NoContentResponse | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+    Response =
+      | NoContentResponse
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
   >;
 
   /**

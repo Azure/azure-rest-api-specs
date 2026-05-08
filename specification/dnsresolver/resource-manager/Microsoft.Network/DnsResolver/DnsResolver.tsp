@@ -51,11 +51,14 @@ interface DnsResolvers {
       @header
       ifNoneMatch?: string;
     },
-    Response = ArmResourceUpdatedResponse<DnsResolver> | ArmResourceCreatedResponse<
-      DnsResolver,
-      ArmLroLocationHeader<FinalResult = DnsResolver> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse,
+    Response =
+      | ArmResourceUpdatedResponse<DnsResolver>
+      | ArmResourceCreatedResponse<
+          DnsResolver,
+          ArmLroLocationHeader<FinalResult = DnsResolver> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse,
     Error = CloudError
   >;
 
@@ -89,7 +92,10 @@ interface DnsResolvers {
       @header
       ifMatch?: string;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 

@@ -101,23 +101,25 @@ interface ApiContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<ApiContract> &
-      ArmCombinedLroHeaders<FinalResult = ApiContract> & {
-        /**
-         * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-         */
-        @header("ETag")
-        etag: string;
-      }) | (ArmResourceCreatedResponse<
-      ApiContract,
-      LroHeaders = ArmCombinedLroHeaders<FinalResult = ApiContract>
-    > & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    })
+    Response =
+      | (ArmResponse<ApiContract> &
+          ArmCombinedLroHeaders<FinalResult = ApiContract> & {
+            /**
+             * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+             */
+            @header("ETag")
+            etag: string;
+          })
+      | (ArmResourceCreatedResponse<
+          ApiContract,
+          LroHeaders = ArmCombinedLroHeaders<FinalResult = ApiContract>
+        > & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          etag: string;
+        })
   >;
 
   /**
@@ -163,7 +165,9 @@ interface ApiContracts {
       @header("If-Match")
       `If-Match`: string;
     },
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void>> | ArmNoContentResponse
+    Response =
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void>>
+      | ArmNoContentResponse
   >;
 
   /**
@@ -398,23 +402,25 @@ interface WorkspaceApi {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<ApiContract> &
-      ArmCombinedLroHeaders<FinalResult = ApiContract> & {
-        /**
-         * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-         */
-        @header("ETag")
-        etag: string;
-      }) | (ArmResourceCreatedResponse<
-      ApiContract,
-      LroHeaders = ArmCombinedLroHeaders<FinalResult = ApiContract>
-    > & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    })
+    Response =
+      | (ArmResponse<ApiContract> &
+          ArmCombinedLroHeaders<FinalResult = ApiContract> & {
+            /**
+             * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+             */
+            @header("ETag")
+            etag: string;
+          })
+      | (ArmResourceCreatedResponse<
+          ApiContract,
+          LroHeaders = ArmCombinedLroHeaders<FinalResult = ApiContract>
+        > & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          etag: string;
+        })
   >;
 
   /**

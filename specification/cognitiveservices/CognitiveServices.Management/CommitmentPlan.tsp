@@ -98,7 +98,10 @@ interface CommitmentPlans {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Delete response codes for 'createOrUpdate' match existing service endpoint behavior"
   delete is CommitmentPlanOps.DeleteWithoutOkAsync<
     CommitmentPlan,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -179,7 +182,10 @@ interface CommitmentPlanOperationGroup {
   @tag("CognitiveServicesCommitmentPlans")
   deletePlan is CommitmentPlanOperationGroupOps.DeleteWithoutOkAsync<
     CommitmentPlan,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

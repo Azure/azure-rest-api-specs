@@ -40,7 +40,9 @@ namespace ComputeCombine;
 // AvailabilitySetSkuTypes needs public access and input+output usage for premium layer
 @@access(AvailabilitySetSkuTypes, Access.public, "java");
 @@usage(AvailabilitySetSkuTypes,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "java"
 );
 

@@ -37,7 +37,10 @@ interface ServiceEndpointPolicyDefinitions {
   @tag("ServiceEndpointPolicyDefinitions")
   delete is ArmResourceDeleteWithoutOkAsync<
     ServiceEndpointPolicyDefinition,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 

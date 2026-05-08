@@ -76,11 +76,14 @@ interface PrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deletePrivateEndpointConnection is PrivateEndpointConnectionsOps.DeleteWithoutOkAsync<
     PrivateEndpointConnection,
-    Response = ArmResponse<PrivateEndpointConnection> | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: PrivateEndpointConnection;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmResponse<PrivateEndpointConnection>
+      | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: PrivateEndpointConnection;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**

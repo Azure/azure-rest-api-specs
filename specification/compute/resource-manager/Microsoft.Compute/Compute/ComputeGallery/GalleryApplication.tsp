@@ -40,14 +40,17 @@ interface GalleryApplications {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     GalleryApplication,
-    Response = ArmResourceUpdatedResponse<GalleryApplication> | ArmResourceCreatedResponse<
-      GalleryApplication,
-      ArmLroLocationHeader<FinalResult = GalleryApplication> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | (ArmAcceptedLroResponse & {
-      @bodyRoot
-      _: GalleryApplication;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<GalleryApplication>
+      | ArmResourceCreatedResponse<
+          GalleryApplication,
+          ArmLroLocationHeader<FinalResult = GalleryApplication> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | (ArmAcceptedLroResponse & {
+          @bodyRoot
+          _: GalleryApplication;
+        })
   >;
 
   /**
@@ -68,7 +71,10 @@ interface GalleryApplications {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ComputeResourceDeleteAsync<
     GalleryApplication,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

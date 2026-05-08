@@ -136,11 +136,14 @@ op privateLinksCreateCustomization(
   privateLinkName: `private-link-parameters`,
 
   resource: PrivateLinksAPI.PrivateLinkResource,
-): ArmResourceUpdatedResponse<PrivateLinksAPI.PrivateLinkResource> | ArmResourceCreatedResponse<
-  PrivateLinksAPI.PrivateLinkResource,
-  ArmAsyncOperationHeader<FinalResult = PrivateLinksAPI.PrivateLinkResource> &
-    Azure.Core.Foundations.RetryAfterHeader
-> | ErrorResponse;
+):
+  | ArmResourceUpdatedResponse<PrivateLinksAPI.PrivateLinkResource>
+  | ArmResourceCreatedResponse<
+      PrivateLinksAPI.PrivateLinkResource,
+      ArmAsyncOperationHeader<FinalResult = PrivateLinksAPI.PrivateLinkResource> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >
+  | ErrorResponse;
 
 @@clientName(privateLinksCreateCustomization::parameters.resource,
   "privateLink"
@@ -185,8 +188,11 @@ op privateLinksDeleteCustomization(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query
   privateLinkName: `private-link-parameters`,
-): ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-  Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse | ErrorResponse;
+):
+  | ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader>
+  | ArmDeletedNoContentResponse
+  | ErrorResponse;
 
 @@Azure.ClientGenerator.Core.override(PrivateLinkResources.delete,
   privateLinksDeleteCustomization,
@@ -223,7 +229,9 @@ op privateEndpointConnectionsListCustomization(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query
   privateLinkName: `private-link-parameters`,
-): ArmResponse<ResourceListResult<PrivateLinksAPI.PrivateEndpointConnection>> | ErrorResponse;
+):
+  | ArmResponse<ResourceListResult<PrivateLinksAPI.PrivateEndpointConnection>>
+  | ErrorResponse;
 
 @@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.list,
   privateEndpointConnectionsListCustomization,
@@ -266,11 +274,14 @@ op privateEndpointConnectionsCreateOrUpdateCustomization(
   privateEndpointConnectionName: string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resource: Azure.ResourceManager.PrivateEndpointConnection,
-): ArmResourceUpdatedResponse<PrivateLinksAPI.PrivateLinkResource> | ArmResourceCreatedResponse<
-  PrivateLinksAPI.PrivateLinkResource,
-  ArmAsyncOperationHeader<FinalResult = PrivateLinksAPI.PrivateLinkResource> &
-    Azure.Core.Foundations.RetryAfterHeader
-> | ErrorResponse;
+):
+  | ArmResourceUpdatedResponse<PrivateLinksAPI.PrivateLinkResource>
+  | ArmResourceCreatedResponse<
+      PrivateLinksAPI.PrivateLinkResource,
+      ArmAsyncOperationHeader<FinalResult = PrivateLinksAPI.PrivateLinkResource> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >
+  | ErrorResponse;
 
 @@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.createOrUpdate,
   privateEndpointConnectionsCreateOrUpdateCustomization,
@@ -295,8 +306,11 @@ op privateEndpointConnectionsDeleteCustomization(
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateEndpointConnectionName: string,
-): ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-  Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse | ErrorResponse;
+):
+  | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader>
+  | ArmDeletedNoContentResponse
+  | ErrorResponse;
 
 @@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.delete,
   privateEndpointConnectionsDeleteCustomization,

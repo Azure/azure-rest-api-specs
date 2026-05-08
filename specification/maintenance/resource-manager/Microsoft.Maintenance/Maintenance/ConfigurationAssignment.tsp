@@ -104,7 +104,9 @@ interface ConfigurationAssignments {
    */
   deleteParent is ConfigurationAssignmentOps.DeleteSync<
     ConfigurationAssignment,
-    Response = ArmResponse<ConfigurationAssignment> | ArmDeletedNoContentResponse,
+    Response =
+      | ArmResponse<ConfigurationAssignment>
+      | ArmDeletedNoContentResponse,
     ErrorType = MaintenanceError
   >;
 
@@ -183,7 +185,9 @@ interface ConfigurationAssignmentOperationGroup {
    */
   delete is ConfigurationAssignmentOperationGroupOps.DeleteSync<
     ConfigurationAssignment,
-    Response = ArmResponse<ConfigurationAssignment> | ArmDeletedNoContentResponse,
+    Response =
+      | ArmResponse<ConfigurationAssignment>
+      | ArmDeletedNoContentResponse,
     ErrorType = MaintenanceError
   >;
 }
@@ -244,7 +248,9 @@ interface ConfigurationAssignmentsForSubscriptions {
    */
   delete is ConfigurationAssignmentsForSubscriptionOps.DeleteSync<
     ConfigurationAssignment,
-    Response = ArmResponse<ConfigurationAssignment> | ArmDeletedNoContentResponse,
+    Response =
+      | ArmResponse<ConfigurationAssignment>
+      | ArmDeletedNoContentResponse,
     ErrorType = MaintenanceError
   >;
 
@@ -314,7 +320,9 @@ interface ConfigurationAssignmentsForResourceGroup {
    */
   delete is ConfigurationAssignmentsForResourceGroupOps.DeleteSync<
     ConfigurationAssignment,
-    Response = ArmResponse<ConfigurationAssignment> | ArmDeletedNoContentResponse,
+    Response =
+      | ArmResponse<ConfigurationAssignment>
+      | ArmDeletedNoContentResponse,
     ErrorType = MaintenanceError
   >;
 }

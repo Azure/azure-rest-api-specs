@@ -134,7 +134,9 @@ interface BMSPrepareDataMoveOperationResult {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is BackupResourceConfigOperationResultOps.Read<
     BackupResourceConfigResource,
-    Response = ArmResponse<VaultStorageConfigOperationResultResponse> | AcceptedResponse
+    Response =
+      | ArmResponse<VaultStorageConfigOperationResultResponse>
+      | AcceptedResponse
   >;
 }
 

@@ -114,11 +114,13 @@ model VolumeProperties {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  snapshotId?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/snapshots";
-    }
-  ]> | null;
+  snapshotId?:
+    | Azure.Core.armResourceIdentifier<[
+        {
+          type: "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/snapshots";
+        }
+      ]>
+    | null;
 
   /**
    * If enabled (true) the snapshot the volume was created from will be automatically deleted after the volume create operation has finished.  Defaults to false
@@ -130,11 +132,13 @@ model VolumeProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  backupId?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.NetApp/netAppAccounts/backupVaults/backups";
-    }
-  ]> | null;
+  backupId?:
+    | Azure.Core.armResourceIdentifier<[
+        {
+          type: "Microsoft.NetApp/netAppAccounts/backupVaults/backups";
+        }
+      ]>
+    | null;
 
   /**
    * Unique Baremetal Tenant Identifier.
@@ -2309,11 +2313,14 @@ interface Volumes {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Volume,
-    Response = ArmResourceUpdatedResponse<Volume> | ArmResourceCreatedResponse<
-      Volume,
-      ArmAsyncOperationHeader<FinalResult = Volume> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<Volume>
+      | ArmResourceCreatedResponse<
+          Volume,
+          ArmAsyncOperationHeader<FinalResult = Volume> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**

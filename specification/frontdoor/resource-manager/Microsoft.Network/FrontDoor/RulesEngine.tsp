@@ -47,15 +47,18 @@ interface RulesEngines {
   @tag("FrontDoors")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     RulesEngine,
-    Response = ArmResourceUpdatedResponse<RulesEngine> | ArmResourceCreatedResponse<
-      RulesEngine,
-      LroHeaders = ArmAsyncOperationHeader &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: RulesEngine;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<RulesEngine>
+      | ArmResourceCreatedResponse<
+          RulesEngine,
+          LroHeaders = ArmAsyncOperationHeader &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: RulesEngine;
+        }),
     Error = ErrorResponse
   >;
 

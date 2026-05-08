@@ -38,7 +38,10 @@ interface VirtualNetworkTaps {
   @tag("VirtualNetworkTap")
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualNetworkTap,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 

@@ -46,8 +46,10 @@ interface SqlResources {
   createUpdateSqlDatabase is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     SqlDatabaseGetResults,
     Request = SqlDatabaseCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<SqlDatabaseGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = SqlDatabaseGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<SqlDatabaseGetResults>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = SqlDatabaseGetResults> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -55,7 +57,9 @@ interface SqlResources {
    */
   deleteSqlDatabase is ArmResourceDeleteWithoutOkAsync<
     SqlDatabaseGetResults,
-    Response = NoContentResponse | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+    Response =
+      | NoContentResponse
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
   >;
 
   /**
@@ -74,8 +78,10 @@ interface SqlResources {
     SqlDatabaseGetResults,
     MergeParameters,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<SqlDatabaseGetResults>,
-    Response = ArmResponse<PhysicalPartitionStorageInfoCollection> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionStorageInfoCollection> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResponse<PhysicalPartitionStorageInfoCollection>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionStorageInfoCollection> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = CloudError
   >;
 }

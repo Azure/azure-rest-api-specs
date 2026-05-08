@@ -38,11 +38,14 @@ interface JobPrivateEndpoints {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     JobPrivateEndpoint,
-    Response = ArmResourceUpdatedResponse<JobPrivateEndpoint> | ArmResourceCreatedResponse<
-      JobPrivateEndpoint,
-      ArmLroLocationHeader<FinalResult = JobPrivateEndpoint> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<JobPrivateEndpoint>
+      | ArmResourceCreatedResponse<
+          JobPrivateEndpoint,
+          ArmLroLocationHeader<FinalResult = JobPrivateEndpoint> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -51,7 +54,10 @@ interface JobPrivateEndpoints {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     JobPrivateEndpoint,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

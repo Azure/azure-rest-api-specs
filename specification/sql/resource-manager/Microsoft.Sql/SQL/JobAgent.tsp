@@ -51,11 +51,14 @@ interface JobAgents {
   @tag("JobAgents")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     JobAgent,
-    Response = ArmResourceUpdatedResponse<JobAgent> | ArmResourceCreatedResponse<
-      JobAgent,
-      ArmLroLocationHeader<FinalResult = JobAgent> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<JobAgent>
+      | ArmResourceCreatedResponse<
+          JobAgent,
+          ArmLroLocationHeader<FinalResult = JobAgent> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -72,7 +75,10 @@ interface JobAgents {
   @tag("JobAgents")
   delete is ArmResourceDeleteWithoutOkAsync<
     JobAgent,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

@@ -52,10 +52,12 @@ interface Pipelines {
   update is ArmCustomPatchAsync<
     Pipeline,
     PatchModel = PipelinesPatch,
-    Response = ArmResponse<Pipeline> | (ArmAcceptedLroResponse & {
-      @bodyRoot
-      _: Pipeline;
-    })
+    Response =
+      | ArmResponse<Pipeline>
+      | (ArmAcceptedLroResponse & {
+          @bodyRoot
+          _: Pipeline;
+        })
   >;
 
   /**

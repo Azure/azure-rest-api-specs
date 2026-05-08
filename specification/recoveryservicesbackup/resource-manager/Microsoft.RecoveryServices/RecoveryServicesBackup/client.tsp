@@ -1233,7 +1233,9 @@ op privateEndpointConnectionResourcesPut(
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   parameters: Microsoft.RecoveryServices.PrivateEndpointConnectionResource,
-): Microsoft.RecoveryServices.PrivateEndpointConnectionResource | ArmAcceptedLroResponse;
+):
+  | Microsoft.RecoveryServices.PrivateEndpointConnectionResource
+  | ArmAcceptedLroResponse;
 
 @@override(PrivateEndpointConnectionResources.put,
   privateEndpointConnectionResourcesPut,

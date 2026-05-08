@@ -72,16 +72,15 @@ interface ModelVersions {
   @summary("Create or update version.")
   createOrUpdate is ModelVersionOps.CreateOrUpdateAsync<
     ModelVersion,
-    Response = ArmResourceUpdatedResponse<ModelVersion> | (ArmResourceCreatedResponse<
-      ModelVersion,
-      ArmAsyncOperationHeader
-    > & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<ModelVersion>
+      | (ArmResourceCreatedResponse<ModelVersion, ArmAsyncOperationHeader> & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
   >;
 
   /**
@@ -91,13 +90,16 @@ interface ModelVersions {
   @summary("Delete version.")
   delete is ModelVersionOps.DeleteWithoutOkAsync<
     ModelVersion,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**

@@ -46,8 +46,10 @@ interface GremlinDatabaseGetResultsOperationGroup {
   createUpdateGremlinDatabase is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     GremlinDatabaseGetResults,
     Request = GremlinDatabaseCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<GremlinDatabaseGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = GremlinDatabaseGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<GremlinDatabaseGetResults>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = GremlinDatabaseGetResults> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -55,7 +57,9 @@ interface GremlinDatabaseGetResultsOperationGroup {
    */
   deleteGremlinDatabase is ArmResourceDeleteWithoutOkAsync<
     GremlinDatabaseGetResults,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | NoContentResponse
+    Response =
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+      | NoContentResponse
   >;
 
   /**

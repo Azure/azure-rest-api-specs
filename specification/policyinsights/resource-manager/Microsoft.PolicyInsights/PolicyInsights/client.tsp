@@ -1419,7 +1419,9 @@ op remediationsListDeploymentsAtSubscription(
 
   queryOptions?: RemediationsListDeploymentsAtSubscriptionQueryOptions,
   body: void,
-): ArmResponse<RemediationDeploymentsListResult> | PolicyInsightsApi.ErrorResponse;
+):
+  | ArmResponse<RemediationDeploymentsListResult>
+  | PolicyInsightsApi.ErrorResponse;
 @@override(RemediationSubscriptionOperations.listDeploymentsAtSubscription,
   remediationsListDeploymentsAtSubscription,
   "!java,!python"
@@ -1458,7 +1460,9 @@ op remediationsListDeploymentsAtResourceGroup(
 
   queryOptions?: RemediationsListDeploymentsAtResourceGroupQueryOptions,
   body: void,
-): ArmResponse<RemediationDeploymentsListResult> | PolicyInsightsApi.ErrorResponse;
+):
+  | ArmResponse<RemediationDeploymentsListResult>
+  | PolicyInsightsApi.ErrorResponse;
 @@override(RemediationResourceGroupOperations.listDeploymentsAtResourceGroup,
   remediationsListDeploymentsAtResourceGroup,
   "!java,!python"
@@ -1493,7 +1497,9 @@ op remediationsListDeploymentsAtResource(
 
   queryOptions?: RemediationsListDeploymentsAtResourceQueryOptions,
   body: void,
-): ArmResponse<RemediationDeploymentsListResult> | PolicyInsightsApi.ErrorResponse;
+):
+  | ArmResponse<RemediationDeploymentsListResult>
+  | PolicyInsightsApi.ErrorResponse;
 @@override(RemediationResourceOperations.listDeploymentsAtResource,
   remediationsListDeploymentsAtResource,
   "!java,!python"

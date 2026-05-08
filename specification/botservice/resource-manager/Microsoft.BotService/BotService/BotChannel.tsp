@@ -143,7 +143,9 @@ interface BotChannels {
   update is BotChannelOps.CustomPatchSync<
     BotChannel,
     PatchModel = BotChannel,
-    Response = ArmResponse<BotChannel> | ArmResourceCreatedSyncResponse<BotChannel>
+    Response =
+      | ArmResponse<BotChannel>
+      | ArmResourceCreatedSyncResponse<BotChannel>
   >;
 
   /**

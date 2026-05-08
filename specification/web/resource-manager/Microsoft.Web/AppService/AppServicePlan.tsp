@@ -126,10 +126,12 @@ interface AppServicePlans {
   @summary("Creates or updates an App Service Plan.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AppServicePlan,
-    Response = ArmResourceUpdatedResponse<AppServicePlan> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = AppServicePlan>> & {
-      @bodyRoot
-      _: AppServicePlan;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<AppServicePlan>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = AppServicePlan>> & {
+          @bodyRoot
+          _: AppServicePlan;
+        }),
     Error = DefaultErrorResponse
   >;
 
@@ -143,10 +145,12 @@ interface AppServicePlans {
   update is ArmCustomPatchSync<
     AppServicePlan,
     PatchModel = AppServicePlanPatchResource,
-    Response = ArmResponse<AppServicePlan> | (AcceptedResponse & {
-      @bodyRoot
-      _: AppServicePlan;
-    }),
+    Response =
+      | ArmResponse<AppServicePlan>
+      | (AcceptedResponse & {
+          @bodyRoot
+          _: AppServicePlan;
+        }),
     Error = DefaultErrorResponse
   >;
 

@@ -47,10 +47,12 @@ interface NodeTypes {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Day 0 Property"
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     NodeType,
-    Response = ArmResourceUpdatedResponse<NodeType> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = NodeType>> & {
-      @bodyRoot
-      _: NodeType;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<NodeType>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = NodeType>> & {
+          @bodyRoot
+          _: NodeType;
+        })
   >;
 
   /**

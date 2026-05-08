@@ -90,8 +90,11 @@ interface ExpressRoutePortAuthorizations {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ExpressRoutePortAuthorizationOps.DeleteWithoutOkAsync<
     ExpressRoutePortAuthorization,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse,
     OverrideErrorType = CloudError
   >;
 

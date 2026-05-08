@@ -42,8 +42,10 @@ interface ServerAdvancedThreatProtections {
   @tag("ServerAdvancedThreatProtectionSettings")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ServerAdvancedThreatProtection,
-    Response = ArmResourceUpdatedResponse<ServerAdvancedThreatProtection> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ServerAdvancedThreatProtection> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<ServerAdvancedThreatProtection>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ServerAdvancedThreatProtection> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

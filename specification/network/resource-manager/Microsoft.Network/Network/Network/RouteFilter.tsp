@@ -113,8 +113,11 @@ interface RouteFilters {
   @autoRoute
   delete is ArmResourceDeleteWithoutOkAsync<
     RouteFilter,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -148,10 +151,13 @@ interface RouteFilters {
     void,
     LroHeaders = ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader,
-    Response = {
-      @body body: void;
-    } | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader> | NoContentResponse,
+    Response =
+      | {
+          @body body: void;
+        }
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | NoContentResponse,
     OverrideErrorType = CloudError
   >;
 
@@ -180,11 +186,13 @@ interface RouteFilters {
     RouteFilter,
     RouteFilterRule,
     void,
-    Response = ArmResponse<RouteFilterRule> | ArmResourceCreatedResponse<
-      RouteFilterRule,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = RouteFilterRule> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >,
+    Response =
+      | ArmResponse<RouteFilterRule>
+      | ArmResourceCreatedResponse<
+          RouteFilterRule,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = RouteFilterRule> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >,
     OverrideErrorType = CloudError
   >;
 

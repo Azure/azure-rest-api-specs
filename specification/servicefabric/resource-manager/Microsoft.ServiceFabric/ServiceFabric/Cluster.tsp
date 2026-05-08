@@ -48,10 +48,12 @@ interface Clusters {
   @tag("Cluster")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Cluster,
-    Response = ArmResourceUpdatedResponse<Cluster> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Cluster>> & {
-      @bodyRoot
-      _: Cluster;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<Cluster>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Cluster>> & {
+          @bodyRoot
+          _: Cluster;
+        }),
     Error = ErrorModel
   >;
 
@@ -65,10 +67,12 @@ interface Clusters {
   update is ArmCustomPatchAsync<
     Cluster,
     PatchModel = ClusterUpdateParameters,
-    Response = ArmResponse<Cluster> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Cluster>> & {
-      @bodyRoot
-      _: Cluster;
-    }),
+    Response =
+      | ArmResponse<Cluster>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Cluster>> & {
+          @bodyRoot
+          _: Cluster;
+        }),
     Error = ErrorModel
   >;
 

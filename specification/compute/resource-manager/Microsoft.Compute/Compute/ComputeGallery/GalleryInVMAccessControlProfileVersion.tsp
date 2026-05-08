@@ -68,8 +68,10 @@ interface GalleryInVMAccessControlProfileVersions {
   @operationId("GalleryInVMAccessControlProfileVersions_Delete")
   delete is ComputeResourceDeleteAsync<
     GalleryInVMAccessControlProfileVersion,
-    Response = ArmDeleteAcceptedLroResponse<ArmLroLocationHeader &
-      ArmAsyncOperationHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader &
+          ArmAsyncOperationHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**

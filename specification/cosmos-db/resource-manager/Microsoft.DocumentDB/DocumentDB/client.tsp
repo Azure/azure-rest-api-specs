@@ -123,8 +123,10 @@ op mongoDBResourcesCreateUpdateMongoRoleDefinitionCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @body
   createUpdateMongoRoleDefinitionParameters: MongoRoleDefinitionCreateUpdateParameters,
-): Azure.ResourceManager.ArmResourceUpdatedResponse<MongoRoleDefinitionGetResults> | Azure.ResourceManager.ArmAcceptedLroResponse<LroHeaders = Azure.ResourceManager.ArmLroLocationHeader<FinalResult = MongoRoleDefinitionGetResults> &
-  Azure.Core.Foundations.RetryAfterHeader>;
+):
+  | Azure.ResourceManager.ArmResourceUpdatedResponse<MongoRoleDefinitionGetResults>
+  | Azure.ResourceManager.ArmAcceptedLroResponse<LroHeaders = Azure.ResourceManager.ArmLroLocationHeader<FinalResult = MongoRoleDefinitionGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>;
 
 @@override(MongoRoleDefinitionGetResultsOperationGroup.createUpdateMongoRoleDefinition,
   mongoDBResourcesCreateUpdateMongoRoleDefinitionCustomized,
@@ -155,8 +157,10 @@ op mongoUserDefinitionCreateUpdateMongoUserDefinitionCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @body
   createUpdateMongoUserDefinitionParameters: MongoUserDefinitionCreateUpdateParameters,
-): Azure.ResourceManager.ArmResourceUpdatedResponse<MongoUserDefinitionGetResults> | Azure.ResourceManager.ArmAcceptedLroResponse<LroHeaders = Azure.ResourceManager.ArmLroLocationHeader<FinalResult = MongoUserDefinitionGetResults> &
-  Azure.Core.Foundations.RetryAfterHeader>;
+):
+  | Azure.ResourceManager.ArmResourceUpdatedResponse<MongoUserDefinitionGetResults>
+  | Azure.ResourceManager.ArmAcceptedLroResponse<LroHeaders = Azure.ResourceManager.ArmLroLocationHeader<FinalResult = MongoUserDefinitionGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>;
 
 @@override(MongoUserDefinitionGetResultsOperationGroup.createUpdateMongoUserDefinition,
   mongoUserDefinitionCreateUpdateMongoUserDefinitionCustomized,
@@ -184,7 +188,10 @@ op mongoDBResourcesDeleteMongoRoleDefinitionCustomized(
   @minLength(3)
   @maxLength(50)
   accountName: string,
-): Azure.ResourceManager.ArmDeletedResponse | Azure.ResourceManager.ArmDeleteAcceptedLroResponse | Azure.ResourceManager.ArmDeletedNoContentResponse;
+):
+  | Azure.ResourceManager.ArmDeletedResponse
+  | Azure.ResourceManager.ArmDeleteAcceptedLroResponse
+  | Azure.ResourceManager.ArmDeletedNoContentResponse;
 
 @@override(MongoRoleDefinitionGetResultsOperationGroup.deleteMongoRoleDefinition,
   mongoDBResourcesDeleteMongoRoleDefinitionCustomized,
@@ -212,7 +219,10 @@ op mongoDBResourcesDeleteMongoUserDefinitionCustomized(
   @minLength(3)
   @maxLength(50)
   accountName: string,
-): Azure.ResourceManager.ArmDeletedResponse | Azure.ResourceManager.ArmDeleteAcceptedLroResponse | Azure.ResourceManager.ArmDeletedNoContentResponse;
+):
+  | Azure.ResourceManager.ArmDeletedResponse
+  | Azure.ResourceManager.ArmDeleteAcceptedLroResponse
+  | Azure.ResourceManager.ArmDeletedNoContentResponse;
 
 @@override(MongoUserDefinitionGetResultsOperationGroup.deleteMongoUserDefinition,
   mongoDBResourcesDeleteMongoUserDefinitionCustomized,
@@ -300,8 +310,10 @@ op sqlResourcesCreateUpdateSqlRoleAssignmentCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @body
   createUpdateSqlRoleAssignmentParameters: SqlRoleAssignmentCreateUpdateParameters,
-): Azure.ResourceManager.ArmResourceUpdatedResponse<SqlRoleAssignmentGetResults> | Azure.ResourceManager.ArmAcceptedLroResponse<LroHeaders = Azure.ResourceManager.ArmLroLocationHeader<FinalResult = SqlRoleAssignmentGetResults> &
-  Azure.Core.Foundations.RetryAfterHeader>;
+):
+  | Azure.ResourceManager.ArmResourceUpdatedResponse<SqlRoleAssignmentGetResults>
+  | Azure.ResourceManager.ArmAcceptedLroResponse<LroHeaders = Azure.ResourceManager.ArmLroLocationHeader<FinalResult = SqlRoleAssignmentGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>;
 
 @@override(SqlRoleAssignmentGetResultsOperationGroup.createUpdateSqlRoleAssignment,
   sqlResourcesCreateUpdateSqlRoleAssignmentCustomized,
@@ -333,8 +345,10 @@ op sqlResourcesCreateUpdateSqlRoleDefinitionCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @body
   createUpdateSqlRoleDefinitionParameters: SqlRoleDefinitionCreateUpdateParameters,
-): Azure.ResourceManager.ArmResourceUpdatedResponse<SqlRoleDefinitionGetResults> | Azure.ResourceManager.ArmAcceptedLroResponse<LroHeaders = Azure.ResourceManager.ArmLroLocationHeader<FinalResult = SqlRoleDefinitionGetResults> &
-  Azure.Core.Foundations.RetryAfterHeader>;
+):
+  | Azure.ResourceManager.ArmResourceUpdatedResponse<SqlRoleDefinitionGetResults>
+  | Azure.ResourceManager.ArmAcceptedLroResponse<LroHeaders = Azure.ResourceManager.ArmLroLocationHeader<FinalResult = SqlRoleDefinitionGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>;
 
 @@override(SqlRoleDefinitionGetResultsOperationGroup.createUpdateSqlRoleDefinition,
   sqlResourcesCreateUpdateSqlRoleDefinitionCustomized,
@@ -362,7 +376,10 @@ op sqlResourcesDeleteSqlRoleAssignmentCustomized(
   @minLength(3)
   @maxLength(50)
   accountName: string,
-): Azure.ResourceManager.ArmDeletedResponse | Azure.ResourceManager.ArmDeleteAcceptedLroResponse | Azure.ResourceManager.ArmDeletedNoContentResponse;
+):
+  | Azure.ResourceManager.ArmDeletedResponse
+  | Azure.ResourceManager.ArmDeleteAcceptedLroResponse
+  | Azure.ResourceManager.ArmDeletedNoContentResponse;
 
 @@override(SqlRoleAssignmentGetResultsOperationGroup.deleteSqlRoleAssignment,
   sqlResourcesDeleteSqlRoleAssignmentCustomized,
@@ -390,7 +407,10 @@ op sqlResourcesDeleteSqlRoleDefinitionCustomized(
   @minLength(3)
   @maxLength(50)
   accountName: string,
-): Azure.ResourceManager.ArmDeletedResponse | Azure.ResourceManager.ArmDeleteAcceptedLroResponse | Azure.ResourceManager.ArmDeletedNoContentResponse;
+):
+  | Azure.ResourceManager.ArmDeletedResponse
+  | Azure.ResourceManager.ArmDeleteAcceptedLroResponse
+  | Azure.ResourceManager.ArmDeletedNoContentResponse;
 
 @@override(SqlRoleDefinitionGetResultsOperationGroup.deleteSqlRoleDefinition,
   sqlResourcesDeleteSqlRoleDefinitionCustomized,

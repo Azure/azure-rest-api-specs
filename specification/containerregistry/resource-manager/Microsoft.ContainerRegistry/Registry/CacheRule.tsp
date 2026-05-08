@@ -49,11 +49,13 @@ interface CacheRules {
   update is ArmCustomPatchAsync<
     CacheRule,
     PatchModel = CacheRuleUpdateParameters,
-    Response = ArmResponse<CacheRule> | ArmResourceCreatedResponse<
-      CacheRule,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = CacheRule> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | ArmResponse<CacheRule>
+      | ArmResourceCreatedResponse<
+          CacheRule,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = CacheRule> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**

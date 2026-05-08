@@ -68,10 +68,12 @@ interface DevBoxDefinitions {
     DevBoxDefinition,
     PatchModel = DevBoxDefinitionUpdate,
     LroHeaders = ArmLroLocationHeader,
-    Response = DevBoxDefinition | ArmAcceptedLroResponse<
-      "Resource update request accepted.",
-      ArmLroLocationHeader<FinalResult = DevBoxDefinition>
-    >
+    Response =
+      | DevBoxDefinition
+      | ArmAcceptedLroResponse<
+          "Resource update request accepted.",
+          ArmLroLocationHeader<FinalResult = DevBoxDefinition>
+        >
   >;
 
   @doc("Deletes a Dev Box definition.")

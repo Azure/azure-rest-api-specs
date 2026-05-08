@@ -38,9 +38,11 @@ interface SummaryLogsOperationGroup {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is SummaryLogsOps.CreateOrUpdateAsync<
     SummaryLogs,
-    Response = (ArmResourceUpdatedResponse<SummaryLogs> &
-      ArmCombinedLroHeaders<FinalResult = SummaryLogs> &
-      Azure.Core.Foundations.RetryAfterHeader) | ArmResourceCreatedResponse<SummaryLogs>
+    Response =
+      | (ArmResourceUpdatedResponse<SummaryLogs> &
+          ArmCombinedLroHeaders<FinalResult = SummaryLogs> &
+          Azure.Core.Foundations.RetryAfterHeader)
+      | ArmResourceCreatedResponse<SummaryLogs>
   >;
 
   /**

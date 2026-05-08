@@ -66,16 +66,15 @@ interface ModelContainers {
   @summary("Create or update model container.")
   createOrUpdate is ModelContainerOps.CreateOrUpdateAsync<
     ModelContainer,
-    Response = ArmResourceUpdatedResponse<ModelContainer> | (ArmResourceCreatedResponse<
-      ModelContainer,
-      ArmAsyncOperationHeader
-    > & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<ModelContainer>
+      | (ArmResourceCreatedResponse<ModelContainer, ArmAsyncOperationHeader> & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
   >;
 
   /**
@@ -85,13 +84,16 @@ interface ModelContainers {
   @summary("Delete container.")
   delete is ModelContainerOps.DeleteWithoutOkAsync<
     ModelContainer,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**

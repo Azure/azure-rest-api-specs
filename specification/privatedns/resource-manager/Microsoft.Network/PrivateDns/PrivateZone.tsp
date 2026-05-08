@@ -72,11 +72,14 @@ interface PrivateZones {
       @header("If-None-Match")
       IfNoneMatch?: string;
     },
-    Response = ArmResourceUpdatedResponse<PrivateZone> | ArmResourceCreatedResponse<
-      PrivateZone,
-      ArmLroLocationHeader<FinalResult = PrivateZone> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse,
+    Response =
+      | ArmResourceUpdatedResponse<PrivateZone>
+      | ArmResourceCreatedResponse<
+          PrivateZone,
+          ArmLroLocationHeader<FinalResult = PrivateZone> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse,
     Error = CloudError
   >;
 
@@ -112,7 +115,10 @@ interface PrivateZones {
       @header("If-Match")
       IfMatch?: string;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 

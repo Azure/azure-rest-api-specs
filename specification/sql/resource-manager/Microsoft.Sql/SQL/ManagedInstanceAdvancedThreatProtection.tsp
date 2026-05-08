@@ -42,8 +42,10 @@ interface ManagedInstanceAdvancedThreatProtections {
   @tag("ManagedInstanceAdvancedThreatProtectionSettings")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ManagedInstanceAdvancedThreatProtection,
-    Response = ArmResourceUpdatedResponse<ManagedInstanceAdvancedThreatProtection> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedInstanceAdvancedThreatProtection> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<ManagedInstanceAdvancedThreatProtection>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedInstanceAdvancedThreatProtection> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

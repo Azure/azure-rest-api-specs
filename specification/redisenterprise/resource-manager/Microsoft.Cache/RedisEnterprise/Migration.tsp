@@ -39,9 +39,11 @@ interface Migrations {
   @Azure.Core.useFinalStateVia("original-uri")
   start is ArmResourceCreateOrReplaceAsync<
     Migration,
-    Response = (ArmResponse<Migration> &
-      ArmCombinedLroHeaders<FinalResult = Migration>) | (ArmCreatedResponse<Migration> &
-      ArmCombinedLroHeaders<FinalResult = Migration>)
+    Response =
+      | (ArmResponse<Migration> &
+          ArmCombinedLroHeaders<FinalResult = Migration>)
+      | (ArmCreatedResponse<Migration> &
+          ArmCombinedLroHeaders<FinalResult = Migration>)
   >;
 
   /**

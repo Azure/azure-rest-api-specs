@@ -43,8 +43,11 @@ interface Clusters {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Existing PUT operation response codes match the original OpenAPI specification. Changing would be a breaking change for existing clients."
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Cluster,
-    Response = ArmResourceUpdatedResponse<Cluster> | ArmResourceCreatedResponse<Cluster> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Cluster> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResourceUpdatedResponse<Cluster>
+      | ArmResourceCreatedResponse<Cluster>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Cluster> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = ErrorResponse
   >;
 
@@ -55,8 +58,11 @@ interface Clusters {
   update is ArmCustomPatchAsync<
     Cluster,
     PatchModel = Cluster,
-    Response = ArmResponse<Cluster> | ArmResourceCreatedResponse<Cluster> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Cluster> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResponse<Cluster>
+      | ArmResourceCreatedResponse<Cluster>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Cluster> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = ErrorResponse
   >;
 
@@ -66,7 +72,10 @@ interface Clusters {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing DELETE operation response codes match the original OpenAPI specification. Changing would be a breaking change for existing clients."
   delete is ArmResourceDeleteWithoutOkAsync<
     Cluster,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = ErrorResponse
   >;
 
@@ -105,7 +114,10 @@ interface Clusters {
   patch is ArmResourceActionSync<
     Cluster,
     ClusterQuotaConfigurationProperties,
-    ArmResponse<ClusterQuotaConfigurationProperties> | ArmResourceCreatedSyncResponse<ClusterQuotaConfigurationProperties> | AcceptedResponse,
+
+      | ArmResponse<ClusterQuotaConfigurationProperties>
+      | ArmResourceCreatedSyncResponse<ClusterQuotaConfigurationProperties>
+      | AcceptedResponse,
     Error = ErrorResponse
   >;
 

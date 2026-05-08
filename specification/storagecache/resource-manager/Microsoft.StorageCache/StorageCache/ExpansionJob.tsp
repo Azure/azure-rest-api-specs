@@ -44,11 +44,13 @@ interface ExpansionJobs {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ExpansionJob,
-    Response = ArmResourceUpdatedResponse<ExpansionJob> | ArmResourceCreatedResponse<
-      ExpansionJob,
-      ArmCombinedLroHeaders<FinalResult = ExpansionJob> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >,
+    Response =
+      | ArmResourceUpdatedResponse<ExpansionJob>
+      | ArmResourceCreatedResponse<
+          ExpansionJob,
+          ArmCombinedLroHeaders<FinalResult = ExpansionJob> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >,
     Error = ErrorResponse
   >;
 
@@ -76,8 +78,10 @@ interface ExpansionJobs {
   @tag("expansionJobs")
   delete is ArmResourceDeleteWithoutOkAsync<
     ExpansionJob,
-    Response = ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<FinalResult = void> &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse,
     Error = ErrorResponse
   >;
 

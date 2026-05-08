@@ -60,8 +60,10 @@ interface Workspaces {
   @summary("Creates or updates a workspace with the specified parameters.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Workspace,
-    Response = ArmResourceUpdatedResponse<Workspace> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Workspace>> &
-      Azure.Core.Foundations.RetryAfterHeader)
+    Response =
+      | ArmResourceUpdatedResponse<Workspace>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Workspace>> &
+          Azure.Core.Foundations.RetryAfterHeader)
   >;
 
   /**
@@ -82,7 +84,10 @@ interface Workspaces {
   delete is ArmResourceDeleteWithoutOkAsync<
     Workspace,
     Parameters = WorkspacesDeleteParameters,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

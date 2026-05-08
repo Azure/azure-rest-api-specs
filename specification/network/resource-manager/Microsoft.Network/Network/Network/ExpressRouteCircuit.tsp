@@ -80,7 +80,10 @@ interface ExpressRouteCircuits {
   @tag("ExpressRouteCircuits")
   delete is ArmResourceDeleteWithoutOkAsync<
     ExpressRouteCircuit,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 

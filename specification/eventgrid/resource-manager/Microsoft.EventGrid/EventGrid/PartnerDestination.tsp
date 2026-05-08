@@ -47,11 +47,14 @@ interface PartnerDestinations {
   update is ArmCustomPatchAsync<
     PartnerDestination,
     PatchModel = PartnerDestinationUpdateParameters,
-    Response = ArmResponse<PartnerDestination> | ArmResourceCreatedResponse<PartnerDestination> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PartnerDestination> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: PartnerDestination;
-    })
+    Response =
+      | ArmResponse<PartnerDestination>
+      | ArmResourceCreatedResponse<PartnerDestination>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PartnerDestination> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: PartnerDestination;
+        })
   >;
 
   /**
@@ -61,7 +64,10 @@ interface PartnerDestinations {
   @summary("Delete a partner destination.")
   delete is ArmResourceDeleteWithoutOkAsync<
     PartnerDestination,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

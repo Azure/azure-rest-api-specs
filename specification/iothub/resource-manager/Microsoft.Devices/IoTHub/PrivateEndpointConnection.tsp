@@ -81,11 +81,14 @@ interface PrivateEndpointConnections {
   @tag("DELETE")
   delete is PrivateEndpointConnectionOps.DeleteWithoutOkAsync<
     PrivateEndpointConnection,
-    Response = ArmResponse<PrivateEndpointConnection> | (ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<FinalResult = PrivateEndpointConnection> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: PrivateEndpointConnection;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmResponse<PrivateEndpointConnection>
+      | (ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<FinalResult = PrivateEndpointConnection> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: PrivateEndpointConnection;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**

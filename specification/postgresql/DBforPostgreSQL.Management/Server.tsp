@@ -77,8 +77,10 @@ interface Servers {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     Server,
-    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -136,10 +138,11 @@ interface Servers {
   start is ArmResourceActionAsyncBase<
     Server,
     BackupsLongTermRetentionRequest,
-    (BackupsLongTermRetentionResponse &
-      RequestIdResponseHeader) | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = BackupsLongTermRetentionResponse> &
-      Azure.Core.Foundations.RetryAfterHeader> &
-      RequestIdResponseHeader),
+
+      | (BackupsLongTermRetentionResponse & RequestIdResponseHeader)
+      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = BackupsLongTermRetentionResponse> &
+          Azure.Core.Foundations.RetryAfterHeader> &
+          RequestIdResponseHeader),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Server>,
     Error = CustomErrorResponse
   >;
@@ -210,10 +213,11 @@ interface Servers {
   migrateNetworkMode is ArmResourceActionAsyncBase<
     Server,
     void,
-    (MigrateNetworkStatus &
-      RequestIdResponseHeader) | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = MigrateNetworkStatus> &
-      Azure.Core.Foundations.RetryAfterHeader> &
-      RequestIdResponseHeader),
+
+      | (MigrateNetworkStatus & RequestIdResponseHeader)
+      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = MigrateNetworkStatus> &
+          Azure.Core.Foundations.RetryAfterHeader> &
+          RequestIdResponseHeader),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Server>
   >;
 }

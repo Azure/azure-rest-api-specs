@@ -67,7 +67,10 @@ interface Workspaces {
   delete is ArmResourceDeleteWithoutOkAsync<
     Workspace,
     Parameters = WorkspaceDeleteParameters,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = ErrorResponse
   >;
 

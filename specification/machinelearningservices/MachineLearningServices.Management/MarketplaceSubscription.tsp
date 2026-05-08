@@ -43,16 +43,18 @@ interface MarketplaceSubscriptions {
   @summary("Create or update Marketplace Subscription (asynchronous).")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     MarketplaceSubscription,
-    Response = ArmResourceUpdatedResponse<MarketplaceSubscription> | (ArmResourceCreatedResponse<
-      MarketplaceSubscription,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = MarketplaceSubscription>
-    > & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<MarketplaceSubscription>
+      | (ArmResourceCreatedResponse<
+          MarketplaceSubscription,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = MarketplaceSubscription>
+        > & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
   >;
 
   /**
@@ -61,13 +63,15 @@ interface MarketplaceSubscriptions {
   @summary("Delete Marketplace Subscription (asynchronous).")
   delete is ArmResourceDeleteWithoutOkAsync<
     MarketplaceSubscription,
-    Response = (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**
