@@ -199,7 +199,8 @@ interface Agents {
       @path
       agent_name: string;
 
-      ...CreateAgentVersionRequest;
+      @body
+      request: CreateAgentVersionRequest;
     },
     AgentVersionObject
   >;

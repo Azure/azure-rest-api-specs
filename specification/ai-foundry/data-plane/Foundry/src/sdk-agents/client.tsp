@@ -43,6 +43,7 @@ using Azure.AI.Projects;
 @@clientName(CreateAgentRequest, "CreateAgentInput");
 @@clientName(UpdateAgentRequest, "UpdateAgentInput");
 @@clientName(CreateAgentVersionRequest, "CreateAgentVersionInput");
+@@clientName(CreateAgentVersionRequest, "CreateAgentVersionInput");
 @@clientName(CreateAgentFromManifestRequest, "CreateAgentFromManifestInput");
 @@clientName(UpdateAgentFromManifestRequest, "UpdateAgentFromManifestInput");
 @@clientName(CreateAgentVersionFromManifestRequest,
