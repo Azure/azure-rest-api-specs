@@ -15690,7 +15690,7 @@ model OperationListResult {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.Servers)
-@removed(Versions.v2025_01_01)
+@added(Versions.v2025_02_01_preview)
 model ServerImportExportOperationResult extends CommonTypes.ProxyResource {
   /**
    * Resource properties.
@@ -15702,7 +15702,7 @@ model ServerImportExportOperationResult extends CommonTypes.ProxyResource {
  * Contains the operation result properties for import/export operation.
  */
 @Azure.ResourceManager.Legacy.feature(Features.Servers)
-@removed(Versions.v2025_01_01)
+@added(Versions.v2025_02_01_preview)
 model ServerImportExportOperationResultProperties {
   /**
    * Request Id.
