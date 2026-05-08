@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "fabricmirroring-rg",
+    "serverName": "fabricmirroring-server",
+    "fabricMirroringSettingsName": "Default",
+    "api-version": "2025-12-01-preview",
+    "resource": {
+      "properties": {
+        "state": "Enabled",
+        "identityResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/fabricmirroring-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/fabricmirroring-identity"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/fabricmirroring-rg/providers/Microsoft.DBforMySQL/flexibleServers/fabricmirroring-server/fabricMirroringSettings/Default",
+        "name": "Default",
+        "type": "Microsoft.DBforMySQL/flexibleServers/fabricMirroringSettings",
+        "properties": {
+          "state": "Enabled",
+          "identityResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/fabricmirroring-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/fabricmirroring-identity",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/fabricmirroring-rg/providers/Microsoft.DBforMySQL/flexibleServers/fabricmirroring-server/fabricMirroringSettings/Default",
+        "name": "Default",
+        "type": "Microsoft.DBforMySQL/flexibleServers/fabricMirroringSettings",
+        "properties": {
+          "state": "Enabled",
+          "identityResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/fabricmirroring-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/fabricmirroring-identity",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DBforMySQL/locations/eastus/azureAsyncOperation/00000000-0000-0000-0000-000000000000?api-version=2025-12-01-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DBforMySQL/locations/eastus/operationStatus/00000000-0000-0000-0000-000000000000?api-version=2025-12-01-preview"
+      }
+    }
+  },
+  "operationId": "FabricMirroringSettings_CreateOrUpdate",
+  "title": "Create Or Update a server's Fabric Mirroring settings."
+}
