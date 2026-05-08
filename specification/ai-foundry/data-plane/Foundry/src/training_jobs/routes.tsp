@@ -29,6 +29,22 @@ alias JobsFilterQueryParams = {
   ...CommonPageQueryParameters;
 };
 
+@doc("Optional related training job data to include in a get response.")
+union TrainingJobInclude {
+  string,
+
+  @doc("Inline the latest execution attempt. The same data is available from /training_jobs/{job_name}/attempts/latest.")
+  latest_attempt: "latest_attempt",
+}
+
+alias TrainingJobGetQueryParams = {
+  ...TrainingJobsPreviewHeader;
+
+  @doc("Additional related data to include in the response. Use latest_attempt to inline the latest execution attempt.")
+  @query
+  include?: TrainingJobInclude;
+};
+
 @doc("Training job attempt identifier. Use 'latest' for the latest attempt.")
 union JobAttemptIdentifier {
   string,
@@ -55,9 +71,7 @@ interface TrainingJobs {
   @get
   get is Azure.Core.Foundations.ResourceOperation<
     Job,
-    {
-      ...TrainingJobsPreviewHeader;
-    },
+    TrainingJobGetQueryParams,
     Azure.Core.Foundations.ResourceOkResponse<Job>
   >;
 

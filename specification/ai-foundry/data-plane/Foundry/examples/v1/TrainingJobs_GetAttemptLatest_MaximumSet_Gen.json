@@ -1,0 +1,34 @@
+{
+    "title": "TrainingJobs_GetAttemptLatest_MaximumSet",
+    "operationId": "TrainingJobs_GetAttempt",
+    "parameters": {
+        "api-version": "v1",
+        "job_name": "my_training_job_01",
+        "attempt_id": "latest",
+        "x-ms-client-request-id": "cf35b680-dc80-4815-ab83-9364acc3bce6",
+        "Foundry-Features": "TrainingJobs=V1Preview"
+    },
+    "responses": {
+        "200": {
+            "body": {
+                "id": "2",
+                "run_id": "my_training_job_01",
+                "job_name": "my_training_job_01",
+                "data_container_id": "dcid.my_training_job_01.2",
+                "sequence_number": 2,
+                "status": "running",
+                "status_reason": "Preparing compute",
+                "started_at": 1577882096,
+                "last_started_at": 1577882096,
+                "current_compute_time": "PT5M",
+                "compute_details": {
+                    "instance_type": "Standard_NC6s_v3",
+                    "instance_count": 2,
+                    "gpu_count": 2,
+                    "region": "westus2"
+                },
+                "is_latest": true
+            }
+        }
+    }
+}

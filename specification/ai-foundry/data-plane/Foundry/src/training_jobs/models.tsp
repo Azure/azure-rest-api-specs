@@ -1037,6 +1037,10 @@ model Job {
 
   ...CommandJob;
 
+  @doc("The latest execution attempt for the job. This field is omitted unless requested with include=latest_attempt. The same attempt resource is available from /training_jobs/{job_name}/attempts/latest.")
+  @visibility(Lifecycle.Read)
+  latest_attempt?: JobAttempt;
+
   @doc("Metadata pertaining to creation and last modification of the resource.")
   @visibility(Lifecycle.Read)
   system_data?: SystemData;

@@ -16885,6 +16885,16 @@
                 "TrainingJobs=V1Preview"
               ]
             }
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "required": false,
+            "description": "Additional related data to include in the response. Use latest_attempt to inline the latest execution attempt.",
+            "schema": {
+              "$ref": "#/components/schemas/TrainingJobInclude"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -25508,6 +25518,15 @@
           "status": {
             "type": "string",
             "description": "Status of the job.",
+            "readOnly": true
+          },
+          "latest_attempt": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/JobAttempt"
+              }
+            ],
+            "description": "The latest execution attempt for the job. This field is omitted unless requested with include=latest_attempt. The same attempt resource is available from /training_jobs/{job_name}/attempts/latest.",
             "readOnly": true
           },
           "system_data": {
@@ -52077,6 +52096,20 @@
           }
         },
         "description": "Python runtime dependencies for an inline function."
+      },
+      "TrainingJobInclude": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "latest_attempt"
+            ]
+          }
+        ],
+        "description": "Optional related training job data to include in a get response."
       },
       "TrainingJobService": {
         "type": "object",
