@@ -54,7 +54,7 @@ model SettingsList {
 /**
  * Represents a data export setting
  */
-// #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataExportSettings extends Setting {
   /**
    * Data export setting data
