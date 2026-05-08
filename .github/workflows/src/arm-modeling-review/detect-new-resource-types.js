@@ -40,9 +40,25 @@ function getResourceType(apiPath) {
 }
 
 /**
+ * Check if a path is a list operation (ends without a resource ID parameter).
+ * @param {string} apiPath - The API path to check
+ * @returns {boolean} True if this is a list operation path
+ */
+function isListOperationPath(apiPath) {
+  // List operations end with a resource type name, not a parameter like {diskName}
+  // e.g. /providers/Microsoft.Compute/disks is a list, /providers/Microsoft.Compute/disks/{diskName} is not
+  const lastSegment = apiPath.split("/").pop() || "";
+  return !lastSegment.startsWith("{");
+}
+
+/**
  * Get all ARM resource types from a swagger document by parsing paths.
  *
  * Scans paths for ARM resource patterns like /providers/Microsoft.X/resourceTypes.
+ * Resource type detection rules (matching breaking change logic):
+ * - PUT/PATCH: Always counted as resource types (primary resource definition)
+ * - GET: Only counted if NOT a list operation path (single-resource GET)
+ * - POST: Never counted (actions on existing resources)
  *
  * @param {{paths?: Record<string, Record<string, unknown>>}} swaggerDoc - Parsed swagger JSON document
  * @returns {Map<string, {resourceType: string, provider: string, modelName: string|null, operations: Array<{method: string, apiPath: string}>}>}
@@ -72,6 +88,17 @@ function getResourceTypesFromSwagger(swaggerDoc) {
       .map(([method]) => ({ method: method.toUpperCase(), apiPath }));
 
     if (ops.length === 0) continue;
+
+    // Determine if this path qualifies as a resource type definition:
+    // - PUT/PATCH: Primary methods that define ARM resources (create/update)
+    // - GET: Only if it's a single-resource path (not a list operation)
+    // - POST-only paths are EXCLUDED because they represent actions on existing resources,
+    //   not new resource types (e.g., /disks/{diskName}/beginGetAccess is an action on disks)
+    const hasPutOrPatch = ops.some((op) => op.method === "PUT" || op.method === "PATCH");
+    const hasGetOnSingleResource =
+      ops.some((op) => op.method === "GET") && !isListOperationPath(apiPath);
+
+    if (!hasPutOrPatch && !hasGetOnSingleResource) continue;
 
     if (!resourceTypes.has(resourceType)) {
       resourceTypes.set(resourceType, {
