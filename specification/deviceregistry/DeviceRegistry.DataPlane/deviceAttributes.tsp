@@ -143,66 +143,99 @@ union UpdateJobState {
   Canceled: "Canceled",
 }
 
-/** The result of installing an update on a device. */
+/**
+ * The terminal result of an update attempt as reported by the device update agent.
+ */
 model InstallResult {
-  /** Whether the overall installation succeeded. */
-  succeeded?: boolean;
+  /** Authoritative terminal outcome of the update attempt. */
+  outcome: InstallResultOutcome;
 
-  /** Error details for the overall installation, if it did not succeed. */
-  errorDetails?: DeviceUpdateError;
+  /** Best-effort hint identifying which subsystem produced the failure. Value is `NOT_APPLICABLE` for successful install. */
+  failureOrigin: InstallResultFailureOrigin;
 
-  /** Per-step results for the installation. */
-  stepResults?: StepResult[];
+  /** Result code representing an install result. 0 or negative failures designate failures, positive values indicate success. */
+  resultCode: int64;
+
+  /** Comma-separated list of agent ExtendedResultCode (ERC) values for diagnostic correlation. Each value is the unsigned hexadecimal representation of an `int32`. */
+  @maxLength(1024)
+  extendedResultCodes: string;
+
+  /** Human-readable result details. */
+  @maxLength(1024)
+  resultDetails?: string;
+
+  /** Per-step results of the steps defined by the manifest's `instructions.steps`. */
+  @maxItems(10)
+  stepResults?: UpdateStepResult[];
 }
 
-/** The result of an individual installation step. */
-model StepResult {
-  /** The identifier of the update applied in this step. */
+/** The terminal result of an individual installation step. */
+model UpdateStepResult {
+  /** The identifier of the leaf update worked on by this step. ADU resolves this from the manifest's `instructions.steps` (inline step → parent updateId; reference step → child updateId). */
   updateId: DeviceUpdateId;
 
-  /** Whether this step succeeded. */
-  succeeded?: boolean;
+  /** Authoritative terminal outcome of this step. */
+  outcome: InstallResultOutcome;
 
-  /** Error details for this step, if it did not succeed. */
-  errorDetails?: DeviceUpdateError;
+  /** Best-effort hint identifying which subsystem produced the failure for this step. Value is `NOT_APPLICABLE` for successful install. */
+  failureOrigin: InstallResultFailureOrigin;
+
+  /** Step-level install result code. Same semantics as `InstallResult.resultCode`. */
+  resultCode: int64;
+
+  /** Step-level extended result codes. Same format as `InstallResult.extendedResultCodes`. */
+  @maxLength(1024)
+  extendedResultCodes: string;
+
+  /** Human-readable result details for this step. */
+  @maxLength(1024)
+  resultDetails?: string;
 }
 
-/**
- * Details about an error that occurred during update installation.
- *
- * Follows the standard Azure / OData error shape (`Azure.Core.Foundations.Error`):
- * - `code` carries the error category (constrained to a known set, but extensible).
- * - `message` is the human-readable description of the failure.
- * - `innererror.code` carries the agent-reported numeric error code as a string.
- */
-model DeviceUpdateError {
-  ...OmitProperties<Azure.Core.Foundations.Error, "code">;
-
-  /** The category of the error, used to determine accountability and remediation. */
-  code: ErrorCategory;
-}
-
-/** The category of an update installation error. */
-union ErrorCategory {
+/** Authoritative terminal outcome of an update attempt or step, as reported by the device update agent. */
+union InstallResultOutcome {
   string,
 
-  /** Transient networking or service-side condition; the agent may retry the operation. */
-  RETRYABLE: "RETRYABLE",
+  /** The step or workflow completed successfully. */
+  SUCCEEDED: "SUCCEEDED",
 
-  /** The update metadata is invalid or incompatible; the service must fix the update. */
-  SERVICE: "SERVICE",
+  /** The step or workflow failed. */
+  FAILED: "FAILED",
 
-  /** Device-local state prevents the update; may self-resolve or require operator action. */
-  DEVICE_CONDITION: "DEVICE_CONDITION",
+  /** The step or workflow was canceled before reaching a terminal state. */
+  CANCELED: "CANCELED",
 
-  /** Device resource or hardware problem requiring operator intervention. */
-  DEVICE_FAULT: "DEVICE_FAULT",
+  /** The step was skipped because it was not required. */
+  SKIPPED: "SKIPPED",
+}
 
-  /** Agent implementation error; should not occur in production. */
-  AGENT_FAULT: "AGENT_FAULT",
+/** Best-effort hint identifying which subsystem produced an install failure. */
+union InstallResultFailureOrigin {
+  string,
 
-  /** Cryptographic or integrity validation failure requiring investigation. */
-  SECURITY: "SECURITY",
+  /** Failure communicating with the ADU cloud service. */
+  ADU_CLOUD_SERVICE: "ADU_CLOUD_SERVICE",
+
+  /** Failure related to ADU managed resources. (e.g. CDN download failure) */
+  ADU_MANAGED_RESOURCE: "ADU_MANAGED_RESOURCE",
+
+  /** Failure in the ADU agent core components (workflow, state machine, manifest parsing, common utilities). */
+  AGENT_CORE: "AGENT_CORE",
+
+  /** Failure in a customer-supplied content handler or extension code (content handler, communication provider, log provider, component enumerator). The ADU agent core functioned correctly. */
+  AGENT_EXTENSION: "AGENT_EXTENSION",
+
+  /** Failure in an agent dependency (e.g. local identity service). */
+  AGENT_DEPENDENCY: "AGENT_DEPENDENCY",
+
+  /** Device-side problem — storage, battery, hardware fault, transient device condition (busy, maintenance mode), permissions. */
+  DEVICE: "DEVICE",
+
+  /** Failure origin does not fit into any of the predefined categories. This is also used as the default failure origin. */
+  OTHER: "OTHER",
+
+  /** This failure origin must be used for non-failed result outcomes. */
+  NOT_APPLICABLE: "NOT_APPLICABLE",
 }
 
 // ──────────────────────────────────────────────
