@@ -21221,7 +21221,15 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The resource ID of the IP configuration (e.g. /subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.Network/networkInterfaces/{nic}/ipConfigurations/{ipconfig})."
+          "format": "arm-id",
+          "description": "The resource ID of the IP configuration (e.g. /subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.Network/networkInterfaces/{nic}/ipConfigurations/{ipconfig}).",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/networkInterfaces/ipConfigurations"
+              }
+            ]
+          }
         }
       },
       "description": "A reference to an IP configuration resource by its resource ID."
