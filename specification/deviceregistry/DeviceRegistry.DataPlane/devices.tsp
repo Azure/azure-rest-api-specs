@@ -17,7 +17,7 @@ namespace Microsoft.DeviceRegistry;
 
 // ──────────────────────────────────────────────
 // Device resource
-// Shared types (DeviceOriginType, DeviceAcceptedStatus, DeviceEnabledStatus) are defined
+// Shared types (DeviceEnabledStatus) are defined
 // in specification/deviceregistry/common/deviceTypes.tsp.
 // ──────────────────────────────────────────────
 
@@ -123,16 +123,6 @@ model ProvisionDeviceResult {
   messagingEndpointName: string;
 }
 
-/** Request body for executing a direct method action on a device. */
-model ExecuteActionRequest {
-  // TODO: Add direct method invocation fields (method name, payload, timeout, etc.)
-}
-
-/** Result of executing a direct method action on a device. */
-model ExecuteActionResult {
-  ...DataPlaneResourceBase;
-}
-
 // ──────────────────────────────────────────────
 // Devices interface
 // ──────────────────────────────────────────────
@@ -160,13 +150,5 @@ interface Devices {
     Device,
     ProvisionDeviceRequest,
     ProvisionDeviceResult
-  >;
-
-  /** Invoke a direct method action on a device. */
-  @pollingOperation(Operations.get)
-  executeAction is ResourceOperations.LongRunningResourceAction<
-    Device,
-    ExecuteActionRequest,
-    ExecuteActionResult
   >;
 }

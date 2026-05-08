@@ -1,22 +1,5 @@
 namespace Microsoft.DeviceRegistry;
 
-/** The type of origin for a device. */
-union DeviceOriginType {
-  string,
-
-  /** Device originated from Azure IoT Operations. */
-  AIO: "AIO",
-
-  /** Device originated from Device Provisioning Service. */
-  DPS: "DPS",
-
-  /** Device originated from ARM. */
-  ARM: "ARM",
-
-  /** Device originated from IoTHub. */
-  IoTHub: "IoTHub",
-}
-
 /** Whether a device is enabled or disabled. */
 union DeviceEnabledStatus {
   string,
@@ -28,24 +11,11 @@ union DeviceEnabledStatus {
   Disabled: "Disabled",
 }
 
-/** Contains metadata about how a device was discovered or provisioned. */
-model DeviceOrigin {
-  /** The type of origin. */
-  type: DeviceOriginType;
-
-  /** The source identifier for the origin. */
-  sourceId?: string;
-}
-
 /** Common device properties shared across data-plane and control-plane. */
 model DevicePropertiesBase {
   /** Globally unique, immutable, non-reusable ID. */
   @visibility(Lifecycle.Read)
   uuid?: string;
-
-  /** Contains metadata about how this device was discovered or provisioned. */
-  @visibility(Lifecycle.Read)
-  origin?: DeviceOrigin;
 
   /** Indicates if the device is enabled or not. */
   enabled?: DeviceEnabledStatus;

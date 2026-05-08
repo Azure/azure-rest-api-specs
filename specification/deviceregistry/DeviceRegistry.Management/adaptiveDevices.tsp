@@ -18,10 +18,11 @@ namespace Microsoft.DeviceRegistry;
 @added(Versions.v2026_11_01_preview)
 @parentResource(Namespace)
 @doc("New device definition.")
-model NewDevice is TrackedResource<NewDeviceProperties> {
+model NamespaceAdaptiveDevice
+  is TrackedResource<NamespaceAdaptiveDeviceProperties> {
   @doc("The name of the new device.")
-  @key("newDeviceName")
-  @segment("newDevices")
+  @key("adaptiveDeviceName")
+  @segment("adaptiveDevices")
   @pattern("^[0-9a-zA-Z][a-zA-Z0-9-]*$")
   @path
   @minLength(3)
@@ -32,16 +33,11 @@ model NewDevice is TrackedResource<NewDeviceProperties> {
   @doc("Resource Tag.")
   @visibility(Lifecycle.Read)
   etag?: string;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  @doc("The extended location.")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  extendedLocation?: ExtendedLocation;
 }
 
 @added(Versions.v2026_11_01_preview)
 @doc("Defines the new device properties.")
-model NewDeviceProperties {
+model NamespaceAdaptiveDeviceProperties {
   ...DevicePropertiesBase;
 
   @doc("Provisioning state of the resource.")
@@ -49,17 +45,18 @@ model NewDeviceProperties {
   provisioningState?: ProvisioningState;
 }
 
-@@added(DeviceOriginType, Versions.v2026_11_01_preview);
 @@added(DeviceEnabledStatus, Versions.v2026_11_01_preview);
-@@added(DeviceOrigin, Versions.v2026_11_01_preview);
 @@added(DevicePropertiesBase, Versions.v2026_11_01_preview);
 
 @added(Versions.v2026_11_01_preview)
 @armResourceOperations
-interface NewDevices {
-  get is ArmResourceRead<NewDevice>;
-  createOrReplace is ArmResourceCreateOrReplaceAsync<NewDevice>;
-  update is ArmResourcePatchAsync<NewDevice, NewDeviceProperties>;
-  delete is ArmResourceDeleteWithoutOkAsync<NewDevice>;
-  listByResourceGroup is ArmResourceListByParent<NewDevice>;
+interface NamespaceAdaptiveDevices {
+  get is ArmResourceRead<NamespaceAdaptiveDevice>;
+  createOrReplace is ArmResourceCreateOrReplaceSync<NamespaceAdaptiveDevice>;
+  update is ArmResourcePatchSync<
+    NamespaceAdaptiveDevice,
+    NamespaceAdaptiveDeviceProperties
+  >;
+  delete is ArmResourceDeleteWithoutOkAsync<NamespaceAdaptiveDevice>;
+  listByResourceGroup is ArmResourceListByParent<NamespaceAdaptiveDevice>;
 }

@@ -94,7 +94,7 @@
       "name": "JobRuns"
     },
     {
-      "name": "NewDevices"
+      "name": "NamespaceAdaptiveDevices"
     }
   ],
   "paths": {
@@ -1348,6 +1348,327 @@
         "x-ms-examples": {
           "Delete_Namespace": {
             "$ref": "./examples/Delete_Namespace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/adaptiveDevices": {
+      "get": {
+        "operationId": "NamespaceAdaptiveDevices_ListByResourceGroup",
+        "tags": [
+          "NamespaceAdaptiveDevices"
+        ],
+        "description": "List NamespaceAdaptiveDevice resources by Namespace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the namespace.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NamespaceAdaptiveDeviceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List_NamespaceAdaptiveDevices_ByNamespace": {
+            "$ref": "./examples/List_NamespaceAdaptiveDevices_ByNamespace.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/adaptiveDevices/{adaptiveDeviceName}": {
+      "get": {
+        "operationId": "NamespaceAdaptiveDevices_Get",
+        "tags": [
+          "NamespaceAdaptiveDevices"
+        ],
+        "description": "Get a NamespaceAdaptiveDevice",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the namespace.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "adaptiveDeviceName",
+            "in": "path",
+            "description": "The name of the new device.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[0-9a-zA-Z][a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NamespaceAdaptiveDevice"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get_NamespaceAdaptiveDevice": {
+            "$ref": "./examples/Get_NamespaceAdaptiveDevice.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "NamespaceAdaptiveDevices_CreateOrReplace",
+        "tags": [
+          "NamespaceAdaptiveDevices"
+        ],
+        "description": "Create a NamespaceAdaptiveDevice",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the namespace.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "adaptiveDeviceName",
+            "in": "path",
+            "description": "The name of the new device.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[0-9a-zA-Z][a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NamespaceAdaptiveDevice"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'NamespaceAdaptiveDevice' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NamespaceAdaptiveDevice"
+            }
+          },
+          "201": {
+            "description": "Resource 'NamespaceAdaptiveDevice' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NamespaceAdaptiveDevice"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrReplace_NamespaceAdaptiveDevice": {
+            "$ref": "./examples/CreateOrReplace_NamespaceAdaptiveDevice.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "NamespaceAdaptiveDevices_Update",
+        "tags": [
+          "NamespaceAdaptiveDevices"
+        ],
+        "description": "Update a NamespaceAdaptiveDevice",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the namespace.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "adaptiveDeviceName",
+            "in": "path",
+            "description": "The name of the new device.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[0-9a-zA-Z][a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NamespaceAdaptiveDeviceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NamespaceAdaptiveDevice"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update_NamespaceAdaptiveDevice": {
+            "$ref": "./examples/Update_NamespaceAdaptiveDevice.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "NamespaceAdaptiveDevices_Delete",
+        "tags": [
+          "NamespaceAdaptiveDevices"
+        ],
+        "description": "Delete a NamespaceAdaptiveDevice",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the namespace.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "adaptiveDeviceName",
+            "in": "path",
+            "description": "The name of the new device.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[0-9a-zA-Z][a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete_NamespaceAdaptiveDevice": {
+            "$ref": "./examples/Delete_NamespaceAdaptiveDevice.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -4999,360 +5320,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/newDevices": {
-      "get": {
-        "operationId": "NewDevices_ListByResourceGroup",
-        "tags": [
-          "NewDevices"
-        ],
-        "description": "List NewDevice resources by Namespace",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "description": "The name of the namespace.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 64,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/NewDeviceListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List_NewDevices_ByNamespace": {
-            "$ref": "./examples/List_NewDevices_ByNamespace.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/newDevices/{newDeviceName}": {
-      "get": {
-        "operationId": "NewDevices_Get",
-        "tags": [
-          "NewDevices"
-        ],
-        "description": "Get a NewDevice",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "description": "The name of the namespace.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 64,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          },
-          {
-            "name": "newDeviceName",
-            "in": "path",
-            "description": "The name of the new device.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[0-9a-zA-Z][a-zA-Z0-9-]*$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/NewDevice"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get_NewDevice": {
-            "$ref": "./examples/Get_NewDevice.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "NewDevices_CreateOrReplace",
-        "tags": [
-          "NewDevices"
-        ],
-        "description": "Create a NewDevice",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "description": "The name of the namespace.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 64,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          },
-          {
-            "name": "newDeviceName",
-            "in": "path",
-            "description": "The name of the new device.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[0-9a-zA-Z][a-zA-Z0-9-]*$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/NewDevice"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'NewDevice' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/NewDevice"
-            }
-          },
-          "201": {
-            "description": "Resource 'NewDevice' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/NewDevice"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CreateOrReplace_NewDevice": {
-            "$ref": "./examples/CreateOrReplace_NewDevice.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "operationId": "NewDevices_Update",
-        "tags": [
-          "NewDevices"
-        ],
-        "description": "Update a NewDevice",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "description": "The name of the namespace.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 64,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          },
-          {
-            "name": "newDeviceName",
-            "in": "path",
-            "description": "The name of the new device.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[0-9a-zA-Z][a-zA-Z0-9-]*$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/NewDeviceUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/NewDevice"
-            }
-          },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update_NewDevice": {
-            "$ref": "./examples/Update_NewDevice.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "NewDevices_Delete",
-        "tags": [
-          "NewDevices"
-        ],
-        "description": "Delete a NewDevice",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "description": "The name of the namespace.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 64,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          },
-          {
-            "name": "newDeviceName",
-            "in": "path",
-            "description": "The name of the new device.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[0-9a-zA-Z][a-zA-Z0-9-]*$"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete_NewDevice": {
-            "$ref": "./examples/Delete_NewDevice.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/schemaRegistries": {
       "get": {
         "operationId": "SchemaRegistries_ListByResourceGroup",
@@ -7456,59 +7423,6 @@
         }
       }
     },
-    "DeviceOrigin": {
-      "type": "object",
-      "description": "Contains metadata about how a device was discovered or provisioned.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/DeviceOriginType",
-          "description": "The type of origin."
-        },
-        "sourceId": {
-          "type": "string",
-          "description": "The source identifier for the origin."
-        }
-      },
-      "required": [
-        "type"
-      ]
-    },
-    "DeviceOriginType": {
-      "type": "string",
-      "description": "The type of origin for a device.",
-      "enum": [
-        "AIO",
-        "DPS",
-        "ARM",
-        "IoTHub"
-      ],
-      "x-ms-enum": {
-        "name": "DeviceOriginType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "AIO",
-            "value": "AIO",
-            "description": "Device originated from Azure IoT Operations."
-          },
-          {
-            "name": "DPS",
-            "value": "DPS",
-            "description": "Device originated from Device Provisioning Service."
-          },
-          {
-            "name": "ARM",
-            "value": "ARM",
-            "description": "Device originated from ARM."
-          },
-          {
-            "name": "IoTHub",
-            "value": "IoTHub",
-            "description": "Device originated from IoTHub."
-          }
-        ]
-      }
-    },
     "DevicePropertiesBase": {
       "type": "object",
       "description": "Common device properties shared across data-plane and control-plane.",
@@ -7516,11 +7430,6 @@
         "uuid": {
           "type": "string",
           "description": "Globally unique, immutable, non-reusable ID.",
-          "readOnly": true
-        },
-        "origin": {
-          "$ref": "#/definitions/DeviceOrigin",
-          "description": "Contains metadata about how this device was discovered or provisioned.",
           "readOnly": true
         },
         "enabled": {
@@ -9559,6 +9468,106 @@
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "NamespaceAdaptiveDevice": {
+      "type": "object",
+      "description": "New device definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NamespaceAdaptiveDeviceProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Resource Tag.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "NamespaceAdaptiveDeviceListResult": {
+      "type": "object",
+      "description": "The response of a NamespaceAdaptiveDevice list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NamespaceAdaptiveDevice items on this page",
+          "items": {
+            "$ref": "#/definitions/NamespaceAdaptiveDevice"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NamespaceAdaptiveDeviceProperties": {
+      "type": "object",
+      "description": "Defines the new device properties.",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "description": "Globally unique, immutable, non-reusable ID.",
+          "readOnly": true
+        },
+        "enabled": {
+          "$ref": "#/definitions/DeviceEnabledStatus",
+          "description": "Indicates if the device is enabled or not."
+        },
+        "externalDeviceId": {
+          "type": "string",
+          "description": "The Device ID provided by the customer. Also used by IoT Hub to hold the IoT Hub device ID.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "manufacturer": {
+          "type": "string",
+          "description": "Device manufacturer."
+        },
+        "model": {
+          "type": "string",
+          "description": "Device model."
+        },
+        "operatingSystem": {
+          "type": "string",
+          "description": "Device operating system."
+        },
+        "operatingSystemVersion": {
+          "type": "string",
+          "description": "Device operating system version."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "NamespaceAdaptiveDeviceUpdate": {
+      "type": "object",
+      "description": "New device definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NamespaceAdaptiveDeviceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
         }
       ]
     },
@@ -11694,145 +11703,6 @@
         "identity": {
           "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentityUpdate",
           "description": "The managed service identities assigned to this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
-      ]
-    },
-    "NewDevice": {
-      "type": "object",
-      "description": "New device definition.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/NewDeviceProperties",
-          "description": "The resource-specific properties for this resource."
-        },
-        "etag": {
-          "type": "string",
-          "description": "Resource Tag.",
-          "readOnly": true
-        },
-        "extendedLocation": {
-          "$ref": "#/definitions/ExtendedLocation",
-          "description": "The extended location.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "NewDeviceListResult": {
-      "type": "object",
-      "description": "The response of a NewDevice list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The NewDevice items on this page",
-          "items": {
-            "$ref": "#/definitions/NewDevice"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "NewDeviceProperties": {
-      "type": "object",
-      "description": "Defines the new device properties.",
-      "properties": {
-        "uuid": {
-          "type": "string",
-          "description": "Globally unique, immutable, non-reusable ID.",
-          "readOnly": true
-        },
-        "origin": {
-          "$ref": "#/definitions/DeviceOrigin",
-          "description": "Contains metadata about how this device was discovered or provisioned.",
-          "readOnly": true
-        },
-        "enabled": {
-          "$ref": "#/definitions/DeviceEnabledStatus",
-          "description": "Indicates if the device is enabled or not."
-        },
-        "externalDeviceId": {
-          "type": "string",
-          "description": "The Device ID provided by the customer. Also used by IoT Hub to hold the IoT Hub device ID.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "manufacturer": {
-          "type": "string",
-          "description": "Device manufacturer."
-        },
-        "model": {
-          "type": "string",
-          "description": "Device model."
-        },
-        "operatingSystem": {
-          "type": "string",
-          "description": "Device operating system."
-        },
-        "operatingSystemVersion": {
-          "type": "string",
-          "description": "Device operating system version."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state of the resource.",
-          "readOnly": true
-        }
-      }
-    },
-    "NewDevicePropertiesUpdate": {
-      "type": "object",
-      "description": "Defines the new device properties.",
-      "properties": {
-        "enabled": {
-          "$ref": "#/definitions/DeviceEnabledStatus",
-          "description": "Indicates if the device is enabled or not."
-        },
-        "manufacturer": {
-          "type": "string",
-          "description": "Device manufacturer."
-        },
-        "model": {
-          "type": "string",
-          "description": "Device model."
-        },
-        "operatingSystem": {
-          "type": "string",
-          "description": "Device operating system."
-        },
-        "operatingSystemVersion": {
-          "type": "string",
-          "description": "Device operating system version."
-        }
-      }
-    },
-    "NewDeviceUpdate": {
-      "type": "object",
-      "description": "New device definition.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/NewDevicePropertiesUpdate",
-          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [

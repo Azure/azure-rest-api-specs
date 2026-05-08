@@ -1,26 +1,22 @@
 {
-  "title": "Get_NewDevice",
-  "operationId": "NewDevices_Get",
+  "title": "Get_NamespaceAdaptiveDevice",
+  "operationId": "NamespaceAdaptiveDevices_Get",
   "description": "Get a new device.",
   "parameters": {
-    "api-version": "2026-11-02-preview",
+    "api-version": "2026-11-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "namespaceName": "my-namespace-1",
-    "newDeviceName": "adr-smart-device3-f191f536-f652-4eb4-b9a0-1a9d43300cab"
+    "adaptiveDeviceName": "adr-smart-device3-f191f536-f652-4eb4-b9a0-1a9d43300cab"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/my-namespace-1/newDevices/adr-smart-device3-f191f536-f652-4eb4-b9a0-1a9d43300cab",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/my-namespace-1/adaptiveDevices/adr-smart-device3-f191f536-f652-4eb4-b9a0-1a9d43300cab",
         "name": "adr-smart-device3-f191f536-f652-4eb4-b9a0-1a9d43300cab",
-        "type": "Microsoft.DeviceRegistry/namespaces/newDevices",
+        "type": "Microsoft.DeviceRegistry/namespaces/adaptiveDevices",
         "location": "North Europe",
         "etag": "c80325f9-0000-0800-0000-66fcb0290000",
-        "extendedLocation": {
-          "type": "CustomLocation",
-          "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.extendedlocation/customlocations/location1"
-        },
         "tags": {
           "sensorType": "temperature,humidity",
           "owner": "IT"
@@ -35,10 +31,6 @@
         },
         "properties": {
           "uuid": "1824a74f-21e1-4458-ae07-604d3a241d2e",
-          "origin": {
-            "type": "AIO",
-            "sourceId": "providers/Microsoft.IoTOperations/instances/instance1"
-          },
           "enabled": "Enabled",
           "externalDeviceId": "adr-smart-device3-f191f536-f652-4eb4-b9a0-1a9d43300cab",
           "manufacturer": "Contoso",

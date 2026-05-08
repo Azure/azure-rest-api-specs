@@ -15,7 +15,6 @@ using Azure.ClientGenerator.Core;
   Access.internal
 );
 @@access(Microsoft.DeviceRegistry.Devices.getDeviceByUuid, Access.internal);
-@@access(Microsoft.DeviceRegistry.Devices.executeAction, Access.internal);
 
 @@access(Microsoft.DeviceRegistry.Groups.getGroupsForDevice, Access.internal);
 

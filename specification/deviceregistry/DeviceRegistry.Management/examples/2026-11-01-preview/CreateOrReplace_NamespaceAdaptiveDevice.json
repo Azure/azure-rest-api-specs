@@ -1,19 +1,15 @@
 {
-  "title": "CreateOrReplace_NewDevice",
-  "operationId": "NewDevices_CreateOrReplace",
+  "title": "CreateOrReplace_NamespaceAdaptiveDevice",
+  "operationId": "NamespaceAdaptiveDevices_CreateOrReplace",
   "description": "Create or replace a new device.",
   "parameters": {
     "api-version": "2026-11-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "namespaceName": "my-namespace-1",
-    "newDeviceName": "adr-smart-device3-f191f536-f652-4eb4-b9a0-1a9d43300cab",
+    "adaptiveDeviceName": "adr-smart-device3-f191f536-f652-4eb4-b9a0-1a9d43300cab",
     "resource": {
       "location": "North Europe",
-      "extendedLocation": {
-        "type": "CustomLocation",
-        "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.extendedlocation/customlocations/location1"
-      },
       "properties": {
         "externalDeviceId": "adr-smart-device3-f191f536-f652-4eb4-b9a0-1a9d43300cab",
         "enabled": "Enabled",
@@ -27,15 +23,13 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/my-namespace-1/newDevices/adr-smart-device3-f191f536-f652-4eb4-b9a0-1a9d43300cab",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/my-namespace-1/adaptiveDevices/adr-smart-device3-f191f536-f652-4eb4-b9a0-1a9d43300cab",
         "name": "adr-smart-device3-f191f536-f652-4eb4-b9a0-1a9d43300cab",
-        "type": "Microsoft.DeviceRegistry/namespaces/newDevices",
+        "etag": "c80325f9-0000-0800-0000-66fcb0290000",
+        "type": "Microsoft.DeviceRegistry/namespaces/adaptiveDevices",
         "location": "North Europe",
         "properties": {
           "uuid": "1824a74f-21e1-4458-ae07-604d3a241d2e",
-          "origin": {
-            "type": "ARM"
-          },
           "enabled": "Enabled",
           "externalDeviceId": "adr-smart-device3-f191f536-f652-4eb4-b9a0-1a9d43300cab",
           "manufacturer": "Contoso",
@@ -56,9 +50,10 @@
     },
     "201": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/my-namespace-1/newDevices/adr-smart-device3-f191f536-f652-4eb4-b9a0-1a9d43300cab",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/my-namespace-1/adaptiveDevices/adr-smart-device3-f191f536-f652-4eb4-b9a0-1a9d43300cab",
         "name": "adr-smart-device3-f191f536-f652-4eb4-b9a0-1a9d43300cab",
-        "type": "Microsoft.DeviceRegistry/namespaces/newDevices",
+        "etag": "c80325f9-0000-0800-0000-66fcb0290000",
+        "type": "Microsoft.DeviceRegistry/namespaces/adaptiveDevices",
         "location": "North Europe",
         "properties": {
           "provisioningState": "Accepted"

@@ -21,7 +21,7 @@ import "./ns_discoveredAssetEndpointProfiles.tsp";
 import "./groups.tsp";
 import "./jobs.tsp";
 import "./jobRuns.tsp";
-import "./newDevices.tsp";
+import "./adaptiveDevices.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
