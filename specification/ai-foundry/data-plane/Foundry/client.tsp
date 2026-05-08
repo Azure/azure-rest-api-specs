@@ -179,8 +179,15 @@ using Azure.AI.Projects;
 // Models sub-client
 // --------------------------------------------------------------------------------
 
-@@clientName(Models.createTrainingJob, "create_training_job", "python");
-@@clientName(Models.createTrainingJob, "createTrainingJob", "javascript");
+@@clientName(Models.createTrainingJob, "training_job", "python");
+@@clientName(Models.createTrainingJob, "trainingJob", "javascript");
+@@scope(Models.createSftTrainingJob, "!(python,javascript)");
+@@scope(Models.createPreferenceTrainingJob, "!(python,javascript)");
+@@scope(Models.createKtoTrainingJob, "!(python,javascript)");
+@@scope(Models.createRewardModelTrainingJob, "!(python,javascript)");
+@@scope(Models.createGrpoTrainingJob, "!(python,javascript)");
+@@scope(Models.createPolicyGradientTrainingJob, "!(python,javascript)");
+@@scope(Models.createPpoTrainingJob, "!(python,javascript)");
 
 // --------------------------------------------------------------------------------
 // Datasets sub-client
