@@ -385,26 +385,28 @@ model CertificatePolicy {
   attributes?: CertificateAttributes;
 
   /**
-   * The platform managed property. This feature is currently intended for internal use only.
+   * Configuration that enables the platform to manage the certificate on behalf of the user. This feature is currently intended for internal use only.
    */
   @added(Versions.v2026_03_01_preview)
   platformManaged?: PlatformManaged;
 }
 
 /**
- * Properties of the platform managed property of a certificate. This feature is currently intended for internal use only.
+ * Properties of the platform managed certificate. This feature is currently intended for internal use only.
  */
 @added(Versions.v2026_03_01_preview)
 model PlatformManaged {
   /**
-   * The certificate usage.
+   * The intended usage of the certificate.
    */
   certificateUsage: string;
 
   /**
-   * The platform managed metadata.
+   * JSON-formatted platform managed metadata. The schema is intentionally undefined as this feature is currently intended for internal use only.
    */
-  metadata?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-unknown"
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
+  metadata?: Record<unknown>;
 }
 
 /**
