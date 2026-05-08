@@ -26,7 +26,7 @@ These are the global settings for the HorizonDb API.
 
 ```yaml
 title: HorizonDbManagementClient
-description: The Microsoft HorizonDB Management API provides Azure Resource Manager operations for managing HorizonDB clusters, pools, replicas, and firewall rules.
+description: The Microsoft HorizonDb Management API provides Azure Resource Manager operations for managing HorizonDb clusters, pools, replicas, and firewall rules.
 openapi-type: arm
 tag: package-horizondb-2026-01-20-preview
 ```
