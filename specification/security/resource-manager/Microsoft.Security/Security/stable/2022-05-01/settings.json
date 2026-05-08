@@ -382,10 +382,6 @@
       "type": "object",
       "description": "The kind of the security setting",
       "properties": {
-        "properties": {
-          "type": "object",
-          "description": "The resource-specific properties for this resource."
-        },
         "kind": {
           "$ref": "#/definitions/SettingKind",
           "description": "the kind of the settings string"
@@ -399,7 +395,8 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      ]
+      ],
+      "x-ms-azure-resource": true
     },
     "SettingKind": {
       "type": "string",
