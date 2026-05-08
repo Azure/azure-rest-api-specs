@@ -21,7 +21,7 @@ using Azure.Core;
 /**
  * Device Update for IoT Hub is an Azure service that enables customers to publish updates for their IoT devices to the cloud, and then deploy that update to their devices (approve updates to groups of devices managed and provisioned in IoT Hub). It leverages the proven security and reliability of the Windows Update platform, optimized for IoT devices. It works globally and knows when and how to update devices, enabling customers to focus on their business goals and let Device Update for IoT Hub handle the updates.
  */
-@useAuth(azure_auth)
+@useAuth(AzureAuth)
 @service(#{ title: "DeviceUpdateClient" })
 @versioned(Versions)
 @server(
@@ -40,18 +40,23 @@ using Azure.Core;
 namespace DeviceUpdateClient;
 
 /**
- * Azure Active Directory OAuth2 Flow
+ * Azure Active Directory OAuth2 Flow.
+ *
+ * Defined as an `alias` (not a `model`) so the `@azure-tools/typespec-autorest`
+ * emitter does not emit it under `definitions/` (which would trigger LintDiff
+ * `XmsEnumValidation` (R2018) on the synthetic inner `type: ["oauth2"]` enum
+ * the OAuth2Auth template produces). The flow itself is still emitted under
+ * `securityDefinitions/`, just under the template-derived key `OAuth2Auth`
+ * instead of `azure_auth`. This is a cosmetic, swagger-only change with no
+ * impact on the OAuth2 wire flow, scopes, or authorization URL.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Name kept as-is to match the original swagger securityDefinitions key 'azure_auth'."
-@doc("Azure Active Directory OAuth2 Flow")
-model azure_auth
-  is OAuth2Auth<[
-    {
-      type: OAuth2FlowType.implicit;
-      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize";
-      scopes: ["https://api.adu.microsoft.com/.default"];
-    }
-  ]>;
+alias AzureAuth = OAuth2Auth<[
+  {
+    type: OAuth2FlowType.implicit;
+    authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize";
+    scopes: ["https://api.adu.microsoft.com/.default"];
+  }
+]>;
 
 /**
  * The available API versions.

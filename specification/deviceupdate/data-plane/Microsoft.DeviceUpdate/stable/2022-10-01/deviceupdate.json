@@ -39,15 +39,14 @@
   ],
   "security": [
     {
-      "azure_auth": [
+      "OAuth2Auth": [
         "https://api.adu.microsoft.com/.default"
       ]
     }
   ],
   "securityDefinitions": {
-    "azure_auth": {
+    "OAuth2Auth": {
       "type": "oauth2",
-      "description": "Azure Active Directory OAuth2 Flow",
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
@@ -4344,34 +4343,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "azure_auth": {
-      "type": "object",
-      "description": "Azure Active Directory OAuth2 Flow",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "OAuth2 authentication",
-          "enum": [
-            "oauth2"
-          ]
-        },
-        "flows": {
-          "type": "array",
-          "description": "Supported OAuth2 flows",
-          "items": {}
-        },
-        "defaultScopes": {
-          "type": "array",
-          "description": "Oauth2 scopes of every flow. Overridden by scope definitions in specific flows",
-          "items": {}
-        }
-      },
-      "required": [
-        "type",
-        "flows",
-        "defaultScopes"
       ]
     }
   },
