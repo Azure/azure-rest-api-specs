@@ -141,25 +141,7 @@ interface RestorableDatabaseAccountGetResults {
     void,
     ArmResponse<RestorableMongodbCollectionsListResult>,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Parameters = {
-      /**
-       * The resource ID of the MongoDB database.
-       */
-      @query("restorableMongodbDatabaseRid")
-      restorableMongodbDatabaseRid?: string;
-
-      /**
-       * Restorable MongoDB collections event feed start time.
-       */
-      @query("startTime")
-      startTime?: string;
-
-      /**
-       * Restorable MongoDB collections event feed end time.
-       */
-      @query("endTime")
-      endTime?: string;
-    },
+    Parameters = RestorableMongodbCollectionsListParameters,
     Error = CloudError
   >;
 
@@ -306,6 +288,26 @@ interface RestorableDatabaseAccountGetResults {
     Error = CloudError
   >;
 }
+
+alias RestorableMongodbCollectionsListParameters = {
+  /**
+   * The resource ID of the MongoDB database.
+   */
+  @query("restorableMongodbDatabaseRid")
+  restorableMongodbDatabaseRid?: string;
+
+  /**
+   * Restorable MongoDB collections event feed start time.
+   */
+  @query("startTime")
+  startTime?: string;
+
+  /**
+   * Restorable MongoDB collections event feed end time.
+   */
+  @query("endTime")
+  endTime?: string;
+};
 
 alias RestorableMongodbResourcesListParameters = {
   /**

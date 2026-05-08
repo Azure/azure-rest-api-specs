@@ -71,8 +71,7 @@ alias ThroughputSettingsGetResultsOperationGroupOps = Azure.ResourceManager.Lega
     @segment("throughputSettings")
     @key
     default: "default";
-  }
-,
+  },
   Azure.ResourceManager.CommonTypes.ErrorResponse,
   "CosmosDBSqlDatabaseThroughputSetting"
 >;
@@ -181,8 +180,7 @@ alias SqlResourcesThroughputSettingsGetResultsOperationGroupOps = Azure.Resource
     @segment("throughputSettings")
     @key
     default: "default";
-  }
-,
+  },
   Azure.ResourceManager.CommonTypes.ErrorResponse,
   "CosmosDBSqlContainerThroughputSetting"
 >;
@@ -282,8 +280,7 @@ alias MongoDBResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("throughputSettings")
     @key
     default: "default";
-  }
-,
+  },
   Azure.ResourceManager.CommonTypes.ErrorResponse,
   "MongoDBDatabaseThroughputSetting"
 >;
@@ -396,8 +393,7 @@ alias MongoDBResourcesThroughputSettingsGetResultsOperationGroupOps = Azure.Reso
     @segment("throughputSettings")
     @key
     default: "default";
-  }
-,
+  },
   Azure.ResourceManager.CommonTypes.ErrorResponse,
   "MongoDBCollectionThroughputSetting"
 >;
@@ -504,8 +500,7 @@ alias TableResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("throughputSettings")
     @key
     default: "default";
-  }
-,
+  },
   Azure.ResourceManager.CommonTypes.ErrorResponse,
   "CosmosTableThroughputSetting"
 >;
@@ -582,8 +577,7 @@ alias CassandraResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("throughputSettings")
     @key
     default: "default";
-  }
-,
+  },
   Azure.ResourceManager.CommonTypes.ErrorResponse,
   "CassandraKeyspaceThroughputSetting"
 >;
@@ -666,8 +660,7 @@ alias CassandraResourcesThroughputSettingsGetResultsOperationGroupOps = Azure.Re
     @segment("throughputSettings")
     @key
     default: "default";
-  }
-,
+  },
   Azure.ResourceManager.CommonTypes.ErrorResponse,
   "CassandraTableThroughputSetting"
 >;
@@ -751,8 +744,7 @@ alias ViewCassandraResourcesThroughputSettingsGetResultsOperationGroupOps = Azur
     @segment("throughputSettings")
     @key
     default: "default";
-  }
-,
+  },
   Azure.ResourceManager.CommonTypes.ErrorResponse,
   "CassandraViewThroughputSetting"
 >;
@@ -829,8 +821,7 @@ alias GremlinResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("throughputSettings")
     @key
     default: "default";
-  }
-,
+  },
   Azure.ResourceManager.CommonTypes.ErrorResponse,
   "GremlinDatabaseThroughputSetting"
 >;
@@ -913,8 +904,7 @@ alias GremlinResourcesThroughputSettingsGetResultsOperationGroupOps = Azure.Reso
     @segment("throughputSettings")
     @key
     default: "default";
-  }
-,
+  },
   Azure.ResourceManager.CommonTypes.ErrorResponse,
   "GremlinGraphThroughputSetting"
 >;

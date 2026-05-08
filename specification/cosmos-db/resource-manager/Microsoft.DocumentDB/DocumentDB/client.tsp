@@ -1366,6 +1366,10 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "GetRestorableCosmosDBAccounts",
   "csharp"
 );
+@@clientName(RestorableMongodbCollectionsListParameters.restorableMongodbDatabaseRid,
+  "restorableMongoDBDatabaseRid",
+  "csharp"
+);
 
 @@responseAsBool(DatabaseAccountsOperationGroup.checkNameExists, "csharp");
 
