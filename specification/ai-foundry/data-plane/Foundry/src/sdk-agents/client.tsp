@@ -43,7 +43,6 @@ using Azure.AI.Projects;
 @@clientName(CreateAgentRequest, "CreateAgentInput");
 @@clientName(UpdateAgentRequest, "UpdateAgentInput");
 @@clientName(CreateAgentVersionRequest, "CreateAgentVersionInput");
-@@clientName(CreateAgentVersionRequest, "CreateAgentVersionInput");
 @@clientName(CreateAgentFromManifestRequest, "CreateAgentFromManifestInput");
 @@clientName(UpdateAgentFromManifestRequest, "UpdateAgentFromManifestInput");
 @@clientName(CreateAgentVersionFromManifestRequest,
@@ -204,6 +203,10 @@ using Azure.AI.Projects;
 
 @@usage(AzureCreateResponseDetails, Usage.output);
 @@access(AzureCreateResponseDetails, Access.public);
+
+@@usage(CreateAgentVersionRequest, Usage.input);
+@@access(CreateAgentVersionRequest, Access.public);
+
 
 // Ensure SessionLogEvent and SessionLogEventType are emitted
 @@usage(SessionLogEvent, Usage.output);
