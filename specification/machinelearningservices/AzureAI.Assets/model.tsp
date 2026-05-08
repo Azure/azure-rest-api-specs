@@ -40,6 +40,9 @@ model AssetVersion {
 
 @doc("DeploymentTemplate resource definition")
 model DeploymentTemplate is AssetVersion {
+  @doc("The display name of the deployment template.")
+  displayName?: string;
+
   @doc("The type of deployment template.")
   deploymentTemplateType: string;
 
