@@ -25,6 +25,7 @@ enum Versions {
   @useDependency(LiftrBase.Data.Versions.v1_preview)
   v1_preview: "2023-08-01-preview",
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-version-progression" "Existing API"
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v1_preview, LiftrBase.Data.Versions.v1_preview")
   @useDependency(LiftrBase.Versions.v1_preview)
   @useDependency(LiftrBase.Data.Versions.v1_preview)
@@ -35,6 +36,7 @@ enum Versions {
   @useDependency(LiftrBase.Data.Versions.v2024_08_27_preview)
   v2024_08_27_preview: "2024-08-27-preview",
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-version-progression" "Existing API"
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v2024_08_27, LiftrBase.Data.Versions.v2024_08_27")
   @useDependency(LiftrBase.Versions.v2024_08_27)
   @useDependency(LiftrBase.Data.Versions.v2024_08_27)

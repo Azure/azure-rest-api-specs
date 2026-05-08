@@ -171,14 +171,29 @@ model ManagedClusterAgentPoolProfileProperties {
   /**
    * The version of node image
    */
+  @renamedFrom(Versions.v2026_02_02_preview, "nodeImageVersion")
+  @removed(Versions.v2026_02_02_preview)
   @visibility(Lifecycle.Read)
+  readOnlyNodeImageVersion?: string;
+
+  /**
+   * The version of node image
+   */
+  @added(Versions.v2026_02_02_preview)
   nodeImageVersion?: string;
 
   /**
    * Defines the upgrade strategy for the agent pool. The default is Rolling.
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_02_02_preview)
   upgradeStrategy?: UpgradeStrategy;
+
+  /**
+   * Whether to enable the full-cache ephemeral OS disk feature. When this feature is enabled, the entire operating system will be locally cached on the ephemeral OS disk, preventing E17 events caused by network failures.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+  @added(Versions.v2026_02_02_preview)
+  enableOSDiskFullCaching?: boolean;
 
   /**
    * Settings for upgrading the agentpool
@@ -188,7 +203,7 @@ model ManagedClusterAgentPoolProfileProperties {
   /**
    * Settings for Blue-Green upgrade on the agentpool. Applies when upgrade strategy is set to BlueGreen.
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_02_02_preview)
   upgradeSettingsBlueGreen?: AgentPoolBlueGreenUpgradeSettings;
 
   /**
@@ -259,7 +274,7 @@ model ManagedClusterAgentPoolProfileProperties {
   /**
    * Taints added on the nodes during creation that will not be reconciled by AKS. These taints will not be reconciled by AKS and can be removed with a kubectl call. This field can be modified after node pool is created, but nodes will not be recreated with new taints until another operation that requires recreation (e.g. node image upgrade) happens. These taints allow for required configuration to run before the node is ready to accept workloads, for example 'key1=value1:NoSchedule' that then can be removed with `kubectl taint nodes node1 key1=value1:NoSchedule-`
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_02_02_preview)
   nodeInitializationTaints?: string[];
 
   /**
@@ -358,7 +373,7 @@ model ManagedClusterAgentPoolProfileProperties {
   /**
    * Configuration for using artifact streaming on AKS.
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_02_02_preview)
   artifactStreamingProfile?: AgentPoolArtifactStreamingProfile;
 
   /**
@@ -384,10 +399,10 @@ model ManagedClusterAgentPoolProfileProperties {
   localDNSProfile?: LocalDNSProfile;
 
   /**
-   * Settings to determine the node customization used to provision nodes in a pool.
+   * Settings to determine the prepared image specification used to provision nodes in a pool.
    */
-  @added(Versions.v2025_10_02_preview)
-  nodeCustomizationProfile?: NodeCustomizationProfile;
+  @added(Versions.v2026_02_02_preview)
+  preparedImageSpecificationProfile?: PreparedImageSpecificationProfile;
 }
 
 /**
@@ -407,7 +422,7 @@ model AgentPoolUpgradeSettings {
   /**
    * The maximum number or percentage of extra nodes that are allowed to be blocked in the agent pool during an upgrade when undrainable node behavior is Cordon. This can either be set to an integer (e.g. '5') or a percentage (e.g. '50%'). If a percentage is specified, it is the percentage of the total agent pool size at the time of the upgrade. For percentages, fractional nodes are rounded up. If not specified, the default is maxSurge. This must always be greater than or equal to maxSurge. For more information, including best practices, see: https://learn.microsoft.com/en-us/azure/aks/upgrade-cluster
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_02_02_preview)
   maxBlockedNodes?: string;
 
   /**
@@ -433,7 +448,7 @@ model AgentPoolUpgradeSettings {
 /**
  * Settings for blue-green upgrade on an agentpool
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_02_02_preview)
 model AgentPoolBlueGreenUpgradeSettings {
   /**
    * The number or percentage of nodes to drain in batch during blue-green upgrade. Must be a non-zero number. This can either be set to an integer (e.g. '5') or a percentage (e.g. '50%'). If a percentage is specified, it is the percentage of the total number of blue nodes of the initial upgrade operation. For percentages, fractional nodes are rounded up. If not specified, the default is 10%. For more information, including best practices, see: https://learn.microsoft.com/en-us/azure/aks/upgrade-cluster
@@ -526,7 +541,7 @@ model KubeletConfig {
   /**
    * Specifies the default seccomp profile applied to all workloads. If not specified, 'Unconfined' will be used by default.
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_02_02_preview)
   seccompDefault?: SeccompDefault;
 }
 
@@ -826,8 +841,30 @@ model GPUProfile {
   /**
    * Specify the type of GPU driver to install when creating Windows agent pools. If not provided, AKS selects the driver based on system compatibility. This cannot be changed once the AgentPool has been created. This cannot be set on Linux AgentPools. For Linux AgentPools, the driver is selected based on system compatibility.
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_02_02_preview)
   driverType?: DriverType;
+
+  /**
+   * NVIDIA-specific GPU settings.
+   */
+  @added(Versions.v2026_02_02_preview)
+  nvidia?: NvidiaGPUProfile;
+}
+
+/**
+ * NVIDIA-specific GPU settings
+ */
+@added(Versions.v2026_02_02_preview)
+model NvidiaGPUProfile {
+  /**
+   * The Managed GPU experience installs additional components, such as the Data Center GPU Manager (DCGM) metrics for monitoring, on top of the GPU driver for you. For more details of what is installed, check out aka.ms/aks/managed-gpu.
+   */
+  managementMode?: ManagementMode;
+
+  /**
+   * Sets the MIG (Multi-Instance GPU) strategy that will be used for managed MIG support. For more information about the different strategies, visit aka.ms/aks/managed-gpu. When not specified, the default is None.
+   */
+  migStrategy?: MigStrategy;
 }
 
 /**
@@ -844,7 +881,7 @@ model AgentPoolGatewayProfile {
 }
 
 /** Artifact streaming profile for the agent pool. */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_02_02_preview)
 model AgentPoolArtifactStreamingProfile {
   /**
    * Artifact streaming speeds up the cold-start of containers on a node through on-demand image loading. To use this feature, container images must also enable artifact streaming on ACR. If not specified, the default is false.
@@ -874,9 +911,13 @@ model ScaleProfile {
 
   /**
    * Specifications on how to auto-scale the VirtualMachines agent pool within a predefined size range.
+   * Each profile targets a specific VM SKU and is evaluated independently.
+   * Scaling decisions across profiles are governed by the cluster autoscaler expander,
+   * configurable via `ManagedCluster.properties.autoScalerProfile.expander`.
    */
-  @added(Versions.v2025_10_02_preview)
-  autoscale?: AutoScaleProfile;
+  @added(Versions.v2026_02_02_preview)
+  @identifiers(#[])
+  autoscale?: AutoScaleProfile[];
 }
 
 /**
@@ -897,7 +938,7 @@ model ManualScaleProfile {
 /**
  * Specifications on auto-scaling.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_02_02_preview)
 model AutoScaleProfile {
   /**
    * VM size that AKS will use when creating and scaling e.g. 'Standard_E4s_v3', 'Standard_E16s_v3' or 'Standard_D16s_v5'.
@@ -1019,16 +1060,16 @@ model LocalDNSOverride {
 }
 
 /**
- * Settings to determine the node customization used to provision nodes in a pool.
+ * Settings to determine the prepared image specification used to provision nodes in a pool.
  */
-@added(Versions.v2025_10_02_preview)
-model NodeCustomizationProfile {
+@added(Versions.v2026_02_02_preview)
+model PreparedImageSpecificationProfile {
   /**
-   * The resource ID of the node customization resource to use. This can be a version. Omitting the version will use the latest version of the node customization.
+   * The resource ID of the prepared image specification resource to use. This can include a version. Omitting the version will use the latest version of the prepared image specification.
    */
-  nodeCustomizationId?: Azure.Core.armResourceIdentifier<[
+  preparedImageSpecificationId?: Azure.Core.armResourceIdentifier<[
     {
-      type: "Microsoft.ContainerService/nodeCustomizations";
+      type: "Microsoft.ContainerService/preparedImageSpecifications";
     }
   ]>;
 }
