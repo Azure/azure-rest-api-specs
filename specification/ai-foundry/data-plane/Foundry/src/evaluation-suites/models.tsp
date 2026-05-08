@@ -189,6 +189,26 @@ model EvaluationSuiteRunResponse {
   results: EvaluationSuiteRunResult[];
 }
 
+@doc("Status of an evaluation suite run result.")
+union EvaluationSuiteRunStatus {
+  string,
+
+  @doc("Run is waiting to start.")
+  queued: "queued",
+
+  @doc("Run is actively processing.")
+  in_progress: "in_progress",
+
+  @doc("Run completed successfully.")
+  completed: "completed",
+
+  @doc("Run failed.")
+  failed: "failed",
+
+  @doc("Run was canceled by the caller.")
+  canceled: "canceled",
+}
+
 @doc("Result of a single evaluation run within a suite execution.")
 model EvaluationSuiteRunResult {
   @doc("The evaluation ID created.")
@@ -198,10 +218,10 @@ model EvaluationSuiteRunResult {
   run_id: string;
 
   @doc("Status of the run.")
-  status: JobStatus;
+  status: EvaluationSuiteRunStatus;
 
-  @doc("Timestamp when the run was created.")
-  created_at: FoundryTimestamp;
+  @doc("Unix timestamp when the run was created.")
+  created_at: int64;
 }
 
 // ---------------------------------------------------------------------------
@@ -227,9 +247,6 @@ union EvaluationSuiteJobSourceType {
 
   @doc("Dataset source — reference to a dataset.")
   dataset: "dataset",
-
-  @doc("File source — Azure OpenAI file.")
-  file: "file",
 }
 
 @doc("The base source model for evaluation suite generation jobs. Polymorphic over `type`.")
@@ -259,15 +276,6 @@ model TracesEvaluationSuiteJobSource extends EvaluationSuiteJobSource {
 @doc("Dataset source for evaluation suite generation jobs — reference to a dataset.")
 model DatasetEvaluationSuiteJobSource extends EvaluationSuiteJobSource {
   ...DatasetJobSource;
-}
-
-@doc("File source for evaluation suite generation jobs — Azure OpenAI file input.")
-model FileEvaluationSuiteJobSource extends EvaluationSuiteJobSource {
-  @doc("The source type, which is file.")
-  type: "file";
-
-  @doc("Input Azure OpenAI file ID used for generation.")
-  id: string;
 }
 
 @doc("Caller-supplied inputs for an evaluation suite generation job.")
@@ -308,9 +316,29 @@ model EvaluationSuiteDataGenerationOptions {
   max_samples?: int32;
 }
 
+@doc("Status of an evaluation suite generation job.")
+union EvaluationSuiteGenerationJobStatus {
+  string,
+
+  @doc("Job is waiting to start.")
+  queued: "queued",
+
+  @doc("Job is actively processing.")
+  in_progress: "in_progress",
+
+  @doc("Job completed successfully.")
+  succeeded: "succeeded",
+
+  @doc("Job failed.")
+  failed: "failed",
+
+  @doc("Job was canceled by the caller.")
+  canceled: "canceled",
+}
+
 @doc("Evaluation suite generation job resource — a long-running job that generates testing criteria and optionally a dataset from source materials. On success, the result is the persisted EvaluationSuiteVersion.")
 model EvaluationSuiteGenerationJob
-  is JobLike<EvaluationSuiteVersion, EvaluationSuiteGenerationJobInputs> {
+  is JobLike<EvaluationSuiteVersion, EvaluationSuiteGenerationJobInputs, EvaluationSuiteGenerationJobStatus> {
   @doc("The timestamp when the job was created, represented in Unix time.")
   @visibility(Lifecycle.Read)
   created_at: FoundryTimestamp;
