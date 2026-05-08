@@ -5175,10 +5175,6 @@
         "keyType"
       ]
     },
-    "CertificateAuthorityConfigurationUpdate": {
-      "type": "object",
-      "description": "The configuration to set up an ICA."
-    },
     "CertificateConfiguration": {
       "type": "object",
       "description": "The certificate configuration.",
@@ -5199,12 +5195,8 @@
     },
     "CertificateConfigurationUpdate": {
       "type": "object",
-      "description": "The certificate configuration.",
+      "description": "Certificate configuration for update operations. Only includes updatable fields.",
       "properties": {
-        "certificateAuthorityConfiguration": {
-          "$ref": "#/definitions/CertificateAuthorityConfigurationUpdate",
-          "description": "The configuration to set up an ICA."
-        },
         "leafCertificateConfiguration": {
           "$ref": "#/definitions/LeafCertificateConfigurationUpdate",
           "description": "The leaf certificate configuration."
@@ -6265,7 +6257,7 @@
     },
     "LeafCertificateConfigurationUpdate": {
       "type": "object",
-      "description": "The leaf certificate configuration.",
+      "description": "Leaf certificate configuration for update operations.",
       "properties": {
         "validityPeriodInDays": {
           "type": "integer",
@@ -8641,30 +8633,32 @@
         }
       }
     },
-    "PolicyPropertiesUpdate": {
+    "PolicyUpdate": {
       "type": "object",
-      "description": "Details of the Credential Policy.",
+      "description": "Update model for Policy.",
       "properties": {
-        "certificate": {
-          "$ref": "#/definitions/CertificateConfigurationUpdate",
-          "description": "The certificate configuration."
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/PolicyUpdateProperties",
+          "description": "The resource-specific properties for this resource."
         }
       }
     },
-    "PolicyUpdate": {
+    "PolicyUpdateProperties": {
       "type": "object",
-      "description": "A Credential Policy",
+      "description": "Updatable properties for Policy.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/PolicyPropertiesUpdate",
-          "description": "The resource-specific properties for this resource."
+        "certificate": {
+          "$ref": "#/definitions/CertificateConfigurationUpdate",
+          "description": "The certificate configuration for update."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
-      ]
+      }
     },
     "ProvisioningState": {
       "type": "string",

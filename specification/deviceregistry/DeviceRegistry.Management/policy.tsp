@@ -90,12 +90,52 @@ model LeafCertificateConfiguration {
   validityPeriodInDays: int32;
 }
 
+// ============================================================
+// Explicit update models for PATCH operations
+// ============================================================
+
+@added(Versions.v2025_08_01_preview)
+@doc("Update model for Policy.")
+model PolicyUpdate {
+  ...Azure.ResourceManager.Foundations.TagsUpdateModel<Policy>;
+
+  @doc("The resource-specific properties for this resource.")
+  properties?: PolicyUpdateProperties;
+}
+
+@added(Versions.v2025_08_01_preview)
+@doc("Updatable properties for Policy.")
+model PolicyUpdateProperties {
+  @doc("The certificate configuration for update.")
+  certificate?: CertificateConfigurationUpdate;
+}
+
+@added(Versions.v2025_08_01_preview)
+@doc("Certificate configuration for update operations. Only includes updatable fields.")
+model CertificateConfigurationUpdate {
+  // NOTE: certificateAuthorityConfiguration is intentionally excluded.
+  // keyType is immutable after creation.
+
+  @doc("The leaf certificate configuration.")
+  leafCertificateConfiguration?: LeafCertificateConfigurationUpdate;
+}
+
+@added(Versions.v2025_08_01_preview)
+@doc("Leaf certificate configuration for update operations.")
+model LeafCertificateConfigurationUpdate {
+  @doc("The validity period in days.")
+  @minValue(7)
+  @maxValue(30)
+  validityPeriodInDays?: int32;
+}
+
 @added(Versions.v2025_08_01_preview)
 @armResourceOperations
 interface Policies {
   get is ArmResourceRead<Policy>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Policy>;
   delete is ArmResourceDeleteWithoutOkAsync<Policy>;
-  update is ArmResourcePatchAsync<Policy, PolicyProperties>;
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchAsync<Policy, PolicyUpdate>;
   listByCredential is ArmResourceListByParent<Policy>;
 }
