@@ -166,7 +166,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 );
 @@clientName(ShareProtocolSettings, "ProtocolSettings", "go");
 @@clientName(ShareSmbSettingsEncryptionInTransit,
-  "SMBEncryptionInTransit",
+  "SMBSettingsEncryptionInTransit",
   "go"
 );
 @@clientName(ShareUsageResponseHeader.shareUsageBytes,

@@ -2335,8 +2335,6 @@ alias ShareProvisioningResponseHeaders = {
 alias ProvisionedBandwidthMibpsHeader = {
   /** The share provisioned bandwidth in mebibytes per second. */
   @header("x-ms-share-provisioned-bandwidth-mibps")
-  @clientName("ProvisionedBandwidthMiBps", "go")
-  @alternateType(int32, "go")
   provisionedBandwidthMibps?: int64;
 };
 

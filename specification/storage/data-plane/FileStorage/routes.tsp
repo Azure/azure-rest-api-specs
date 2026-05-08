@@ -247,7 +247,11 @@ interface Share {
       @header("x-ms-share-next-allowed-quota-downgrade-time")
       nextAllowedQuotaDowngradeTime?: utcDateTime;
 
-      ...ProvisionedBandwidthMibpsHeader;
+      @header("x-ms-share-provisioned-bandwidth-mibps")
+      @clientName("ProvisionedBandwidthMiBps", "go")
+      @alternateType(int32, "go")
+      provisionedBandwidthMibps?: int64;
+
       ...LeaseResponseHeaders;
 
       /** The access tier of the share. */
