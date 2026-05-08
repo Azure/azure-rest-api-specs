@@ -365,7 +365,7 @@ model IotDpsPropertiesDescription {
   @visibility(Lifecycle.Read)
   @added(Versions.v2026_06_01_preview)
   @maxItems(1)
-  @identifiers(#["resourceId"])
+  @identifiers(#["namespaceUuid"])
   deviceRegistryNamespaces?: DeviceRegistryNamespaceDescription[];
 
   /**
