@@ -1041,6 +1041,50 @@ model Job {
   @visibility(Lifecycle.Read)
   latest_attempt?: JobAttempt;
 
+  @doc("Input dataset lineage recorded for the job. This field is omitted unless requested with include=input_datasets.")
+  @visibility(Lifecycle.Read)
+  input_datasets?: Record<unknown>[];
+
+  @doc("Output dataset lineage recorded for the job. This field is omitted unless requested with include=output_datasets.")
+  @visibility(Lifecycle.Read)
+  output_datasets?: Record<unknown>[];
+
+  @doc("Backend execution definition used to run the job. This field is omitted unless requested with include=execution_definition.")
+  @visibility(Lifecycle.Read)
+  execution_definition?: Record<unknown>;
+
+  @doc("Backend-resolved job specification. This field is omitted unless requested with include=resolved_specification.")
+  @visibility(Lifecycle.Read)
+  resolved_specification?: Record<unknown>;
+
+  @doc("Parameters recorded for the job. This field is omitted unless requested with include=parameters.")
+  @visibility(Lifecycle.Read)
+  parameters?: Record<unknown>;
+
+  @doc("Settings recorded for the job. This field is omitted unless requested with include=settings.")
+  @visibility(Lifecycle.Read)
+  settings?: Record<string>;
+
+  @doc("Service endpoints for the current job run. This field is omitted unless requested with include=services.")
+  @visibility(Lifecycle.Read)
+  services?: Record<TrainingJobService>;
+
+  @doc("Log file URI metadata for the job. This field is omitted unless requested with include=log_files.")
+  @visibility(Lifecycle.Read)
+  log_files?: Record<string>;
+
+  @doc("Job cost summary. This field is omitted unless requested with include=job_cost.")
+  @visibility(Lifecycle.Read)
+  job_cost?: Record<unknown>;
+
+  @doc("Compute request recorded for the job. This field is omitted unless requested with include=compute_request.")
+  @visibility(Lifecycle.Read)
+  compute_request?: Record<unknown>;
+
+  @doc("Compute record for the job. This field is omitted unless requested with include=compute.")
+  @visibility(Lifecycle.Read)
+  compute?: Record<unknown>;
+
   @doc("Metadata pertaining to creation and last modification of the resource.")
   @visibility(Lifecycle.Read)
   system_data?: SystemData;

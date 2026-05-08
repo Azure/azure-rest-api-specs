@@ -14824,7 +14824,7 @@
             "name": "include",
             "in": "query",
             "required": false,
-            "description": "Additional related data to include in the response. Use latest_attempt to inline the latest execution attempt.",
+            "description": "Additional related data to include in the response. Values are comma-separated expansion names such as latest_attempt, input_datasets, output_datasets, execution_definition, services, log_files, and job_cost.",
             "schema": {
               "$ref": "#/components/schemas/TrainingJobInclude"
             },
@@ -25407,6 +25407,84 @@
               }
             ],
             "description": "The latest execution attempt for the job. This field is omitted unless requested with include=latest_attempt. The same attempt resource is available from /training_jobs/{job_name}/attempts/latest.",
+            "readOnly": true
+          },
+          "input_datasets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": {}
+            },
+            "description": "Input dataset lineage recorded for the job. This field is omitted unless requested with include=input_datasets.",
+            "readOnly": true
+          },
+          "output_datasets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": {}
+            },
+            "description": "Output dataset lineage recorded for the job. This field is omitted unless requested with include=output_datasets.",
+            "readOnly": true
+          },
+          "execution_definition": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Backend execution definition used to run the job. This field is omitted unless requested with include=execution_definition.",
+            "readOnly": true
+          },
+          "resolved_specification": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Backend-resolved job specification. This field is omitted unless requested with include=resolved_specification.",
+            "readOnly": true
+          },
+          "parameters": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Parameters recorded for the job. This field is omitted unless requested with include=parameters.",
+            "readOnly": true
+          },
+          "settings": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Settings recorded for the job. This field is omitted unless requested with include=settings.",
+            "readOnly": true
+          },
+          "services": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/TrainingJobService"
+            },
+            "description": "Service endpoints for the current job run. This field is omitted unless requested with include=services.",
+            "readOnly": true
+          },
+          "log_files": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Log file URI metadata for the job. This field is omitted unless requested with include=log_files.",
+            "readOnly": true
+          },
+          "job_cost": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Job cost summary. This field is omitted unless requested with include=job_cost.",
+            "readOnly": true
+          },
+          "compute_request": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Compute request recorded for the job. This field is omitted unless requested with include=compute_request.",
+            "readOnly": true
+          },
+          "compute": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Compute record for the job. This field is omitted unless requested with include=compute.",
             "readOnly": true
           },
           "system_data": {
@@ -51985,7 +52063,18 @@
           {
             "type": "string",
             "enum": [
-              "latest_attempt"
+              "latest_attempt",
+              "input_datasets",
+              "output_datasets",
+              "execution_definition",
+              "resolved_specification",
+              "parameters",
+              "settings",
+              "services",
+              "log_files",
+              "job_cost",
+              "compute_request",
+              "compute"
             ]
           }
         ],

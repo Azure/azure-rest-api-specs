@@ -35,12 +35,45 @@ union TrainingJobInclude {
 
   @doc("Inline the latest execution attempt. The same data is available from /training_jobs/{job_name}/attempts/latest.")
   latest_attempt: "latest_attempt",
+
+  @doc("Inline input dataset lineage recorded for the training job.")
+  input_datasets: "input_datasets",
+
+  @doc("Inline output dataset lineage recorded for the training job.")
+  output_datasets: "output_datasets",
+
+  @doc("Inline the backend execution definition used to run the training job.")
+  execution_definition: "execution_definition",
+
+  @doc("Inline the backend-resolved job specification.")
+  resolved_specification: "resolved_specification",
+
+  @doc("Inline parameters recorded for the training job.")
+  parameters: "parameters",
+
+  @doc("Inline settings recorded for the training job.")
+  settings: "settings",
+
+  @doc("Inline service endpoints for the current training job run.")
+  services: "services",
+
+  @doc("Inline log file URI metadata for the training job.")
+  log_files: "log_files",
+
+  @doc("Inline the job cost summary.")
+  job_cost: "job_cost",
+
+  @doc("Inline the compute request recorded for the training job.")
+  compute_request: "compute_request",
+
+  @doc("Inline the compute record for the training job.")
+  compute: "compute",
 }
 
 alias TrainingJobGetQueryParams = {
   ...TrainingJobsPreviewHeader;
 
-  @doc("Additional related data to include in the response. Use latest_attempt to inline the latest execution attempt.")
+  @doc("Additional related data to include in the response. Values are comma-separated expansion names such as latest_attempt, input_datasets, output_datasets, execution_definition, services, log_files, and job_cost.")
   @query
   include?: TrainingJobInclude;
 };
@@ -77,7 +110,7 @@ interface TrainingJobs {
       @path
       job_name: string;
 
-      @doc("Additional related data to include in the response. Use latest_attempt to inline the latest execution attempt.")
+      @doc("Additional related data to include in the response. Values are comma-separated expansion names such as latest_attempt, input_datasets, output_datasets, execution_definition, services, log_files, and job_cost.")
       @query
       include?: TrainingJobInclude;
     },
