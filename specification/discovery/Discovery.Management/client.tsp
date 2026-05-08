@@ -15,7 +15,8 @@ using TypeSpec.Versioning;
 
 // Rename DiscoveryStorage to ManagedStorage for Go SDK to avoid collision with Storage type
 // after the Go emitter removes the "Discovery" prefix
-@@clientName(Microsoft.Discovery.DiscoveryStorage,
+@@clientName(
+  Microsoft.Discovery.DiscoveryStorage,
   "DiscoveryManagedStorage",
   "go"
 );
@@ -44,7 +45,8 @@ model ToolUpdateProperties {
   ...WithDefinitionContent;
 }
 
-@@alternateType(Microsoft.Discovery.Tools.update::parameters.properties,
+@@alternateType(
+  Microsoft.Discovery.Tools.update::parameters.properties,
   ToolUpdate,
   "javascript"
 );
@@ -83,7 +85,8 @@ model BookshelfUpdate {
   @doc("The resource-specific properties for this resource.")
   properties?: BookshelfUpdateProperties;
 }
-@@alternateType(Microsoft.Discovery.Bookshelves.update::parameters.properties,
+@@alternateType(
+  Microsoft.Discovery.Bookshelves.update::parameters.properties,
   BookshelfUpdate,
   "javascript"
 );
@@ -105,7 +108,8 @@ model StorageAssetUpdateProperties {
   description?: string;
 }
 
-@@alternateType(Microsoft.Discovery.StorageAssets.update::parameters.properties,
+@@alternateType(
+  Microsoft.Discovery.StorageAssets.update::parameters.properties,
   StorageAssetUpdate,
   "javascript"
 );
@@ -115,7 +119,8 @@ model StorageContainerUpdate {
   @doc("Resource tags.")
   tags?: Record<string>;
 }
-@@alternateType(Microsoft.Discovery.StorageContainers.update::parameters.properties,
+@@alternateType(
+  Microsoft.Discovery.StorageContainers.update::parameters.properties,
   StorageContainerUpdate,
   "javascript"
 );
@@ -141,7 +146,8 @@ model NodePoolUpdateProperties {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   minNodeCount?: int32 = 0;
 }
-@@alternateType(Microsoft.Discovery.NodePools.update::parameters.properties,
+@@alternateType(
+  Microsoft.Discovery.NodePools.update::parameters.properties,
   NodePoolUpdate,
   "javascript"
 );
@@ -171,7 +177,8 @@ model SupercomputerUpdate {
   properties?: SupercomputerUpdateProperties;
 }
 
-@@alternateType(Microsoft.Discovery.Supercomputers.update::parameters.properties,
+@@alternateType(
+  Microsoft.Discovery.Supercomputers.update::parameters.properties,
   SupercomputerUpdate,
   "javascript"
 );
@@ -182,7 +189,8 @@ model ChatModelDeploymentUpdate {
   @doc("Resource tags.")
   tags?: Record<string>;
 }
-@@alternateType(Microsoft.Discovery.ChatModelDeployments.update::parameters.properties,
+@@alternateType(
+  Microsoft.Discovery.ChatModelDeployments.update::parameters.properties,
   ChatModelDeploymentUpdate,
   "javascript"
 );
@@ -227,7 +235,8 @@ model ProjectUpdateProperties {
   settings?: ProjectSettings;
 }
 
-@@alternateType(Microsoft.Discovery.Projects.update::parameters.properties,
+@@alternateType(
+  Microsoft.Discovery.Projects.update::parameters.properties,
   ProjectUpdate,
   "javascript"
 );
@@ -271,7 +280,8 @@ model WorkspaceUpdate {
   properties?: WorkspaceUpdateProperties;
 }
 
-@@alternateType(Microsoft.Discovery.Workspaces.update::parameters.properties,
+@@alternateType(
+  Microsoft.Discovery.Workspaces.update::parameters.properties,
   WorkspaceUpdate,
   "javascript"
 );

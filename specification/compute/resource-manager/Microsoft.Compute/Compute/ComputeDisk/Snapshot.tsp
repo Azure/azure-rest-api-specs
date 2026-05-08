@@ -119,16 +119,20 @@ interface Snapshots {
   >;
 }
 
-@@doc(Snapshot.name,
+@@doc(
+  Snapshot.name,
   "The name of the snapshot that is being created. The name can't be changed after the snapshot is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The max name length is 80 characters."
 );
 @@doc(Snapshot.properties, "Snapshot resource properties.");
-@@doc(Snapshots.createOrUpdate::parameters.resource,
+@@doc(
+  Snapshots.createOrUpdate::parameters.resource,
   "Snapshot object supplied in the body of the Put disk operation."
 );
-@@doc(Snapshots.update::parameters.properties,
+@@doc(
+  Snapshots.update::parameters.properties,
   "Snapshot object supplied in the body of the Patch snapshot operation."
 );
-@@doc(Snapshots.grantAccess::parameters.body,
+@@doc(
+  Snapshots.grantAccess::parameters.body,
   "Access data object supplied in the body of the get snapshot access operation."
 );

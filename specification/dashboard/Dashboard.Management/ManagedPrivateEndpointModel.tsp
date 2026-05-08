@@ -91,13 +91,16 @@ interface ManagedPrivateEndpointModels {
   >;
 }
 
-@@doc(ManagedPrivateEndpointModel.name,
+@@doc(
+  ManagedPrivateEndpointModel.name,
   "The managed private endpoint name of Azure Managed Grafana."
 );
 @@doc(ManagedPrivateEndpointModel.properties, "Resource properties.");
-@@doc(ManagedPrivateEndpointModels.create::parameters.resource,
+@@doc(
+  ManagedPrivateEndpointModels.create::parameters.resource,
   "The managed private endpoint to be created or updated."
 );
-@@doc(ManagedPrivateEndpointModels.update::parameters.properties,
+@@doc(
+  ManagedPrivateEndpointModels.update::parameters.properties,
   "Properties that can be updated to an existing managed private endpoint."
 );

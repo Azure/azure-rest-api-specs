@@ -139,16 +139,20 @@ interface StorageTaskAssignments {
 
 @@maxLength(StorageTaskAssignment.name, 24);
 @@minLength(StorageTaskAssignment.name, 3);
-@@doc(StorageTaskAssignment.name,
+@@doc(
+  StorageTaskAssignment.name,
   "The name of the storage task assignment within the specified resource group. Storage task assignment names must be between 3 and 24 characters in length and use numbers and lower-case letters only."
 );
-@@doc(StorageTaskAssignment.properties,
+@@doc(
+  StorageTaskAssignment.properties,
   "Properties of the storage task assignment."
 );
-@@doc(StorageTaskAssignments.create::parameters.resource,
+@@doc(
+  StorageTaskAssignments.create::parameters.resource,
   "The parameters to create a Storage Task Assignment."
 );
-@@doc(StorageTaskAssignments.update::parameters.properties,
+@@doc(
+  StorageTaskAssignments.update::parameters.properties,
   "The parameters to update a Storage Task Assignment."
 );
 @@visibility(StorageTaskAssignment.name, Lifecycle.Read);

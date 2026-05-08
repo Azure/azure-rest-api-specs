@@ -178,12 +178,15 @@ interface RegisteredServers {
 
 @@doc(RegisteredServer.name, "GUID identifying the on-premises server.");
 @@doc(RegisteredServer.properties, "RegisteredServer properties.");
-@@doc(RegisteredServers.create::parameters.resource,
+@@doc(
+  RegisteredServers.create::parameters.resource,
   "Body of Registered Server object."
 );
-@@doc(RegisteredServers.update::parameters.properties,
+@@doc(
+  RegisteredServers.update::parameters.properties,
   "Body of Registered Server object."
 );
-@@doc(RegisteredServers.triggerRollover::parameters.body,
+@@doc(
+  RegisteredServers.triggerRollover::parameters.body,
   "Body of Trigger Rollover request."
 );

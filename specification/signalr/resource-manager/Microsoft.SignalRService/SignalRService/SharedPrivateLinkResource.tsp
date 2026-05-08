@@ -152,15 +152,19 @@ interface SignalRSharedPrivateLinkResources {
 
 @@maxLength(SharedPrivateLinkResource.name, 63);
 @@minLength(SharedPrivateLinkResource.name, 3);
-@@doc(SharedPrivateLinkResource.name,
+@@doc(
+  SharedPrivateLinkResource.name,
   "The name of the shared private link resource."
 );
-@@doc(SharedPrivateLinkResource.properties,
+@@doc(
+  SharedPrivateLinkResource.properties,
   "Describes the properties of an existing Shared Private Link Resource"
 );
-@@doc(SharedPrivateLinkResources.createOrUpdate::parameters.resource,
+@@doc(
+  SharedPrivateLinkResources.createOrUpdate::parameters.resource,
   "The shared private link resource"
 );
-@@doc(SignalRSharedPrivateLinkResources.createOrUpdate::parameters.resource,
+@@doc(
+  SignalRSharedPrivateLinkResources.createOrUpdate::parameters.resource,
   "The shared private link resource"
 );

@@ -75,7 +75,8 @@ interface StorageMovers {
 }
 
 @@doc(StorageMover.name, "The name of the Storage Mover resource.");
-@@doc(StorageMover.properties,
+@@doc(
+  StorageMover.properties,
   "The resource specific properties for the Storage Mover resource."
 );
 @@doc(StorageMovers.createOrUpdate::parameters.resource, "");

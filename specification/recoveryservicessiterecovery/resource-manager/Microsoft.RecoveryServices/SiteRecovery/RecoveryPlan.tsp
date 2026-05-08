@@ -178,19 +178,24 @@ interface RecoveryPlans {
 
 @@doc(RecoveryPlan.name, "Name of the recovery plan.");
 @@doc(RecoveryPlan.properties, "The custom details.");
-@@doc(RecoveryPlans.create::parameters.resource,
+@@doc(
+  RecoveryPlans.create::parameters.resource,
   "Recovery Plan creation input."
 );
-@@doc(RecoveryPlans.update::parameters.properties,
+@@doc(
+  RecoveryPlans.update::parameters.properties,
   "Update recovery plan input."
 );
 @@doc(RecoveryPlans.plannedFailover::parameters.body, "Failover input.");
-@@doc(RecoveryPlans.testFailover::parameters.body,
+@@doc(
+  RecoveryPlans.testFailover::parameters.body,
   "Recovery plan test failover input."
 );
-@@doc(RecoveryPlans.testFailoverCleanup::parameters.body,
+@@doc(
+  RecoveryPlans.testFailoverCleanup::parameters.body,
   "Recovery plan test failover cleanup input."
 );
-@@doc(RecoveryPlans.unplannedFailover::parameters.body,
+@@doc(
+  RecoveryPlans.unplannedFailover::parameters.body,
   "Recovery plan unplanned failover input."
 );

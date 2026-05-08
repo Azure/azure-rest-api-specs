@@ -81,9 +81,11 @@ interface MachineExtensions {
 
 @@doc(MachineExtension.name, "The name of the machine extension.");
 @@doc(MachineExtension.properties, "Describes Machine Extension Properties.");
-@@doc(MachineExtensions.createOrUpdate::parameters.resource,
+@@doc(
+  MachineExtensions.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Machine Extension operation."
 );
-@@doc(MachineExtensions.update::parameters.properties,
+@@doc(
+  MachineExtensions.update::parameters.properties,
   "Parameters supplied to the Create Machine Extension operation."
 );

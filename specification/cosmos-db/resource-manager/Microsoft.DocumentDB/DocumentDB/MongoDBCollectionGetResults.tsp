@@ -96,19 +96,24 @@ interface MongoDBCollectionGetResultsOperationGroup {
 }
 
 @@doc(MongoDBCollectionGetResults.name, "Cosmos DB collection name.");
-@@doc(MongoDBCollectionGetResults.properties,
+@@doc(
+  MongoDBCollectionGetResults.properties,
   "The properties of an Azure Cosmos DB MongoDB collection"
 );
-@@doc(MongoDBCollectionGetResultsOperationGroup.createUpdateMongoDBCollection::parameters.resource,
+@@doc(
+  MongoDBCollectionGetResultsOperationGroup.createUpdateMongoDBCollection::parameters.resource,
   "The parameters to provide for the current MongoDB Collection."
 );
-@@doc(MongoDBCollectionGetResultsOperationGroup.listMongoDBCollectionPartitionMerge::parameters.body,
+@@doc(
+  MongoDBCollectionGetResultsOperationGroup.listMongoDBCollectionPartitionMerge::parameters.body,
   "The parameters for the merge operation."
 );
-@@doc(MongoDBCollectionGetResultsOperationGroup.retrieveContinuousBackupInformation::parameters.body,
+@@doc(
+  MongoDBCollectionGetResultsOperationGroup.retrieveContinuousBackupInformation::parameters.body,
   "The name of the continuous backup restore location."
 );
-@@visibility(MongoDBCollectionGetResults.location,
+@@visibility(
+  MongoDBCollectionGetResults.location,
   Lifecycle.Read,
   Lifecycle.Create,
   Lifecycle.Update

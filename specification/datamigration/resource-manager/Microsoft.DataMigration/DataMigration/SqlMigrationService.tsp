@@ -137,15 +137,19 @@ interface SqlMigrationServices {
 
 @@doc(SqlMigrationService.name, "Name of the SQL Migration Service.");
 @@doc(SqlMigrationService.properties, "The SQL Migration Service properties.");
-@@doc(SqlMigrationServices.createOrUpdate::parameters.resource,
+@@doc(
+  SqlMigrationServices.createOrUpdate::parameters.resource,
   "Details of SqlMigrationService resource."
 );
-@@doc(SqlMigrationServices.update::parameters.properties,
+@@doc(
+  SqlMigrationServices.update::parameters.properties,
   "Details of SqlMigrationService resource."
 );
-@@doc(SqlMigrationServices.regenerateAuthKeys::parameters.body,
+@@doc(
+  SqlMigrationServices.regenerateAuthKeys::parameters.body,
   "Details of SqlMigrationService resource."
 );
-@@doc(SqlMigrationServices.deleteNode::parameters.body,
+@@doc(
+  SqlMigrationServices.deleteNode::parameters.body,
   "Details of SqlMigrationService resource."
 );

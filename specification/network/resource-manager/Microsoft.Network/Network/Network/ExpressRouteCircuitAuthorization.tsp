@@ -76,9 +76,11 @@ interface ExpressRouteCircuitAuthorizations {
 }
 
 @@doc(ExpressRouteCircuitAuthorization.name, "The name of the authorization.");
-@@doc(ExpressRouteCircuitAuthorization.properties,
+@@doc(
+  ExpressRouteCircuitAuthorization.properties,
   "Properties of the express route circuit authorization."
 );
-@@doc(ExpressRouteCircuitAuthorizations.createOrUpdate::parameters.resource,
+@@doc(
+  ExpressRouteCircuitAuthorizations.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update express route circuit authorization operation."
 );

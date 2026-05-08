@@ -128,7 +128,8 @@ interface FirewallResources {
 }
 
 @@doc(FirewallResource.name, "Firewall resource name");
-@@doc(FirewallResource.properties,
+@@doc(
+  FirewallResource.properties,
   "The resource-specific properties for this resource."
 );
 @@doc(FirewallResources.saveLogProfile::parameters.body, "");

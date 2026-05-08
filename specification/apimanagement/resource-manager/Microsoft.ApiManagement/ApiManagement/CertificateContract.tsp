@@ -365,13 +365,16 @@ interface WorkspaceCertificate {
 
 @@maxLength(CertificateContract.name, 80);
 @@minLength(CertificateContract.name, 1);
-@@doc(CertificateContract.name,
+@@doc(
+  CertificateContract.name,
   "Identifier of the certificate entity. Must be unique in the current API Management service instance."
 );
 @@doc(CertificateContract.properties, "Certificate properties details.");
-@@doc(CertificateContracts.createOrUpdate::parameters.resource,
+@@doc(
+  CertificateContracts.createOrUpdate::parameters.resource,
   "Create or Update parameters."
 );
-@@doc(WorkspaceCertificate.createOrUpdate::parameters.resource,
+@@doc(
+  WorkspaceCertificate.createOrUpdate::parameters.resource,
   "Create or Update parameters."
 );

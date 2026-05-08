@@ -74,10 +74,12 @@ interface EncryptionProtectors {
   >;
 }
 
-@@doc(EncryptionProtector.name,
+@@doc(
+  EncryptionProtector.name,
   "The name of the encryption protector to be retrieved."
 );
 @@doc(EncryptionProtector.properties, "Resource properties.");
-@@doc(EncryptionProtectors.createOrUpdate::parameters.resource,
+@@doc(
+  EncryptionProtectors.createOrUpdate::parameters.resource,
   "The requested encryption protector resource state."
 );

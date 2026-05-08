@@ -212,12 +212,15 @@ interface DataContainerOperationGroup {
 }
 
 @@doc(DataContainer.name, "Container name.");
-@@doc(DataContainer.properties,
+@@doc(
+  DataContainer.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(DataContainers.createOrUpdate::parameters.resource,
+@@doc(
+  DataContainers.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );
-@@doc(DataContainerOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  DataContainerOperationGroup.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );

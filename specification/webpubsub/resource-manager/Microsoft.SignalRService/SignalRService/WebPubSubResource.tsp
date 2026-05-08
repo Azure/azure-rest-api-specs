@@ -152,15 +152,19 @@ interface WebPubSubResources {
 @@maxLength(WebPubSubResource.name, 63);
 @@minLength(WebPubSubResource.name, 3);
 @@doc(WebPubSubResource.name, "The name of the resource.");
-@@doc(WebPubSubResource.properties,
+@@doc(
+  WebPubSubResource.properties,
   "A class that describes the properties of the resource"
 );
-@@doc(WebPubSubResources.createOrUpdate::parameters.resource,
+@@doc(
+  WebPubSubResources.createOrUpdate::parameters.resource,
   "Parameters for the create or update operation"
 );
-@@doc(WebPubSubResources.update::parameters.properties,
+@@doc(
+  WebPubSubResources.update::parameters.properties,
   "Parameters for the update operation"
 );
-@@doc(WebPubSubResources.regenerateKey::parameters.body,
+@@doc(
+  WebPubSubResources.regenerateKey::parameters.body,
   "Parameter that describes the Regenerate Key Operation."
 );

@@ -61,9 +61,11 @@ interface TableRoleAssignmentResources {
 }
 
 @@doc(TableRoleAssignmentResource.name, "The GUID for the Role Assignment.");
-@@doc(TableRoleAssignmentResource.properties,
+@@doc(
+  TableRoleAssignmentResource.properties,
   "Properties to create and update an Azure Cosmos DB Table Role Assignment."
 );
-@@doc(TableRoleAssignmentResources.createUpdateTableRoleAssignment::parameters.resource,
+@@doc(
+  TableRoleAssignmentResources.createUpdateTableRoleAssignment::parameters.resource,
   "The properties required to create or update a Role Assignment."
 );

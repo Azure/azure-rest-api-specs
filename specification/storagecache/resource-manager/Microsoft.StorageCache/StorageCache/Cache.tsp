@@ -247,28 +247,36 @@ interface Caches {
   >;
 }
 
-@@doc(Cache.name,
+@@doc(
+  Cache.name,
   "Name of cache. Length of name must not be greater than 80 and chars must be from the [-0-9a-zA-Z_] char class."
 );
 @@doc(Cache.properties, "Properties of the cache.");
-@@doc(Caches.createOrUpdate::parameters.resource,
+@@doc(
+  Caches.createOrUpdate::parameters.resource,
   "Object containing the user-selectable properties of the new cache. If read-only properties are included, they must match the existing values of those properties."
 );
-@@doc(Caches.update::parameters.properties,
+@@doc(
+  Caches.update::parameters.properties,
   "Object containing the user-selectable properties of the cache. If read-only properties are included, they must match the existing values of those properties."
 );
-@@doc(Caches.startPrimingJob::parameters.body,
+@@doc(
+  Caches.startPrimingJob::parameters.body,
   "Object containing the definition of a priming job."
 );
-@@doc(Caches.stopPrimingJob::parameters.body,
+@@doc(
+  Caches.stopPrimingJob::parameters.body,
   "Object containing the priming job ID."
 );
-@@doc(Caches.pausePrimingJob::parameters.body,
+@@doc(
+  Caches.pausePrimingJob::parameters.body,
   "Object containing the priming job ID."
 );
-@@doc(Caches.resumePrimingJob::parameters.body,
+@@doc(
+  Caches.resumePrimingJob::parameters.body,
   "Object containing the priming job ID."
 );
-@@doc(Caches.spaceAllocation::parameters.body,
+@@doc(
+  Caches.spaceAllocation::parameters.body,
   "List containing storage target cache space percentage allocations."
 );

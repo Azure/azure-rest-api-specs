@@ -121,16 +121,20 @@ interface ArcSettings {
   >;
 }
 
-@@doc(ArcSetting.name,
+@@doc(
+  ArcSetting.name,
   "The name of the proxy resource holding details of HCI ArcSetting information."
 );
 @@doc(ArcSetting.properties, "ArcSetting properties.");
-@@doc(ArcSettings.create::parameters.resource,
+@@doc(
+  ArcSettings.create::parameters.resource,
   "Parameters supplied to the Create ArcSetting resource for this HCI cluster."
 );
-@@doc(ArcSettings.update::parameters.properties,
+@@doc(
+  ArcSettings.update::parameters.properties,
   "ArcSettings parameters that needs to be updated"
 );
-@@doc(ArcSettings.reconcile::parameters.body,
+@@doc(
+  ArcSettings.reconcile::parameters.body,
   "Request for reconciling Arc Settings."
 );

@@ -88,6 +88,7 @@ interface Orders {
 
 @@doc(Order.name, "");
 @@doc(Order.properties, "The order properties.");
-@@doc(Orders.createOrUpdate::parameters.resource,
+@@doc(
+  Orders.createOrUpdate::parameters.resource,
   "The order to be created or updated."
 );

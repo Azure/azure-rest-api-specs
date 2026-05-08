@@ -87,16 +87,20 @@ interface MongoDBDatabaseGetResultsOperationGroup {
 }
 
 @@doc(MongoDBDatabaseGetResults.name, "Cosmos DB database name.");
-@@doc(MongoDBDatabaseGetResults.properties,
+@@doc(
+  MongoDBDatabaseGetResults.properties,
   "The properties of an Azure Cosmos DB MongoDB database"
 );
-@@doc(MongoDBDatabaseGetResultsOperationGroup.createUpdateMongoDBDatabase::parameters.resource,
+@@doc(
+  MongoDBDatabaseGetResultsOperationGroup.createUpdateMongoDBDatabase::parameters.resource,
   "The parameters to provide for the current MongoDB database."
 );
-@@doc(MongoDBDatabaseGetResultsOperationGroup.mongoDBDatabasePartitionMerge::parameters.body,
+@@doc(
+  MongoDBDatabaseGetResultsOperationGroup.mongoDBDatabasePartitionMerge::parameters.body,
   "The parameters for the merge operation."
 );
-@@visibility(MongoDBDatabaseGetResults.location,
+@@visibility(
+  MongoDBDatabaseGetResults.location,
   Lifecycle.Read,
   Lifecycle.Create,
   Lifecycle.Update

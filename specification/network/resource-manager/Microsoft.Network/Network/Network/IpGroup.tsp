@@ -93,9 +93,11 @@ interface IpGroups {
 
 @@doc(IpGroup.name, "The name of the ipGroups.");
 @@doc(IpGroup.properties, "Properties of the IpGroups.");
-@@doc(IpGroups.createOrUpdate::parameters.resource,
+@@doc(
+  IpGroups.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update IpGroups operation."
 );
-@@doc(IpGroups.updateGroups::parameters.properties,
+@@doc(
+  IpGroups.updateGroups::parameters.properties,
   "Parameters supplied to the update ipGroups operation."
 );

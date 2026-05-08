@@ -71,6 +71,7 @@ interface Replicas {
 
 @@doc(Replica.name, "The name of the replica.");
 @@doc(Replica.properties, "All replica properties.");
-@@doc(Replicas.create::parameters.resource,
+@@doc(
+  Replicas.create::parameters.resource,
   "The parameters for creating a replica."
 );

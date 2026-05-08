@@ -91,10 +91,12 @@ interface RuleSets {
   >;
 }
 
-@@doc(RuleSet.name,
+@@doc(
+  RuleSet.name,
   "Name of the rule set under the profile which is unique globally."
 );
-@@doc(RuleSet.properties,
+@@doc(
+  RuleSet.properties,
   "The JSON object that contains the properties of the Rule Set to create."
 );
 

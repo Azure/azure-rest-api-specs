@@ -67,9 +67,11 @@ interface MongoMIRoleAssignmentResources {
 }
 
 @@doc(MongoMIRoleAssignmentResource.name, "The GUID for the Role Assignment.");
-@@doc(MongoMIRoleAssignmentResource.properties,
+@@doc(
+  MongoMIRoleAssignmentResource.properties,
   "Properties to create and update an Azure Cosmos DB MongoMI Role Assignment."
 );
-@@doc(MongoMIRoleAssignmentResources.createUpdateMongoMIRoleAssignment::parameters.resource,
+@@doc(
+  MongoMIRoleAssignmentResources.createUpdateMongoMIRoleAssignment::parameters.resource,
   "The properties required to create or update a Role Assignment."
 );

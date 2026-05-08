@@ -88,9 +88,11 @@ interface LinkedServer {
 }
 
 @@doc(RedisLinkedServerWithProperties.name, "The name of the linked server.");
-@@doc(RedisLinkedServerWithProperties.properties,
+@@doc(
+  RedisLinkedServerWithProperties.properties,
   "Properties of the linked server."
 );
-@@doc(LinkedServer.create::parameters.resource,
+@@doc(
+  LinkedServer.create::parameters.resource,
   "Parameters supplied to the Create Linked server operation."
 );

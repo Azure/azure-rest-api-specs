@@ -155,6 +155,7 @@ interface Maccs {
 @@doc(Macc.properties, "MACC properties");
 @@doc(Maccs.create::parameters.resource, "Request body for creating MACC.");
 @@doc(Maccs.update::parameters.properties, "Request body for updating MACC.");
-@@doc(Maccs.chargeShortfall::parameters.body,
+@@doc(
+  Maccs.chargeShortfall::parameters.body,
   "Request body for charging shortfall."
 );

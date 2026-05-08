@@ -75,6 +75,7 @@ interface ContainerAppsBuilds {
 @@maxLength(ContainerAppsBuildResource.name, 64);
 @@minLength(ContainerAppsBuildResource.name, 2);
 @@doc(ContainerAppsBuildResource.name, "The name of a build.");
-@@doc(ContainerAppsBuildResource.properties,
+@@doc(
+  ContainerAppsBuildResource.properties,
   "The resource-specific properties for this resource."
 );

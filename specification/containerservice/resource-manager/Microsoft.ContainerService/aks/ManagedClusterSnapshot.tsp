@@ -31,13 +31,16 @@ model ManagedClusterSnapshot
 @@maxLength(ManagedClusterSnapshot.name, 63);
 @@minLength(ManagedClusterSnapshot.name, 1);
 @@doc(ManagedClusterSnapshot.name, "The name of the managed cluster resource.");
-@@doc(ManagedClusterSnapshot.properties,
+@@doc(
+  ManagedClusterSnapshot.properties,
   "Properties of a managed cluster snapshot."
 );
-@@doc(ManagedClusterSnapshots.createOrUpdate::parameters.resource,
+@@doc(
+  ManagedClusterSnapshots.createOrUpdate::parameters.resource,
   "The managed cluster snapshot to create or update."
 );
-@@doc(ManagedClusterSnapshots.updateTags::parameters.properties,
+@@doc(
+  ManagedClusterSnapshots.updateTags::parameters.properties,
   "Parameters supplied to the Update managed cluster snapshot Tags operation."
 );
 

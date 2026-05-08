@@ -107,15 +107,19 @@ interface Domains {
 @@minLength(DomainResource.name, 1);
 @@doc(DomainResource.name, "The name of the Domains resource.");
 @@doc(DomainResource.properties, "The properties of a Domains resource.");
-@@doc(Domains.createOrUpdate::parameters.resource,
+@@doc(
+  Domains.createOrUpdate::parameters.resource,
   "Parameters for the create or update operation"
 );
-@@doc(Domains.update::parameters.properties,
+@@doc(
+  Domains.update::parameters.properties,
   "Parameters for the update operation"
 );
-@@doc(Domains.initiateVerification::parameters.body,
+@@doc(
+  Domains.initiateVerification::parameters.body,
   "Type of verification to be initiated."
 );
-@@doc(Domains.cancelVerification::parameters.body,
+@@doc(
+  Domains.cancelVerification::parameters.body,
   "Type of verification to be canceled."
 );

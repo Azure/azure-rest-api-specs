@@ -91,9 +91,11 @@ interface DdosProtectionPlans {
 
 @@doc(DdosProtectionPlan.name, "The name of the DDoS protection plan.");
 @@doc(DdosProtectionPlan.properties, "Properties of the DDoS protection plan.");
-@@doc(DdosProtectionPlans.createOrUpdate::parameters.resource,
+@@doc(
+  DdosProtectionPlans.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update operation."
 );
-@@doc(DdosProtectionPlans.updateTags::parameters.properties,
+@@doc(
+  DdosProtectionPlans.updateTags::parameters.properties,
   "Parameters supplied to the update DDoS protection plan resource tags."
 );

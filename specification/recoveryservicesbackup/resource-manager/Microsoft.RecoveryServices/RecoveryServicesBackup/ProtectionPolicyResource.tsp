@@ -164,12 +164,15 @@ interface ProtectionPolicyOperationStatuses {
   get is ProtectionPolicyOperationStatusOps.Read<OperationStatus>;
 }
 
-@@doc(ProtectionPolicyResource.name,
+@@doc(
+  ProtectionPolicyResource.name,
   "Backup policy information to be fetched."
 );
-@@doc(ProtectionPolicyResource.properties,
+@@doc(
+  ProtectionPolicyResource.properties,
   "ProtectionPolicyResource properties"
 );
-@@doc(ProtectionPolicies.createOrUpdate::parameters.resource,
+@@doc(
+  ProtectionPolicies.createOrUpdate::parameters.resource,
   "resource backup policy"
 );

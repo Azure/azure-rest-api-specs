@@ -146,9 +146,11 @@ interface VolumeQuotaRules {
 
 @@doc(VolumeQuotaRule.name, "The name of volume quota rule");
 @@doc(VolumeQuotaRule.properties, "Volume Quota Rule Properties");
-@@doc(VolumeQuotaRules.create::parameters.resource,
+@@doc(
+  VolumeQuotaRules.create::parameters.resource,
   "Quota rule object supplied in the body of the operation."
 );
-@@doc(VolumeQuotaRules.update::parameters.properties,
+@@doc(
+  VolumeQuotaRules.update::parameters.properties,
   "Quota rule object supplied in the body of the operation."
 );

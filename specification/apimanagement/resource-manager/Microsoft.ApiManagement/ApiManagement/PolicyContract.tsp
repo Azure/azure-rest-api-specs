@@ -1141,30 +1141,39 @@ interface WorkspaceProductPolicy {
 
 @@doc(PolicyContract.name, "The identifier of the Policy.");
 @@doc(PolicyContract.properties, "Properties of the Policy.");
-@@doc(PolicyContracts.createOrUpdate::parameters.resource,
+@@doc(
+  PolicyContracts.createOrUpdate::parameters.resource,
   "The policy contents to apply."
 );
-@@doc(GraphQLApiResolverPolicy.createOrUpdate::parameters.resource,
+@@doc(
+  GraphQLApiResolverPolicy.createOrUpdate::parameters.resource,
   "The policy contents to apply."
 );
-@@doc(ApiPolicy.createOrUpdate::parameters.resource,
+@@doc(
+  ApiPolicy.createOrUpdate::parameters.resource,
   "The policy contents to apply."
 );
-@@doc(Policy.createOrUpdate::parameters.resource,
+@@doc(
+  Policy.createOrUpdate::parameters.resource,
   "The policy contents to apply."
 );
-@@doc(ProductPolicy.createOrUpdate::parameters.resource,
+@@doc(
+  ProductPolicy.createOrUpdate::parameters.resource,
   "The policy contents to apply."
 );
-@@doc(WorkspacePolicy.createOrUpdate::parameters.resource,
+@@doc(
+  WorkspacePolicy.createOrUpdate::parameters.resource,
   "The policy contents to apply."
 );
-@@doc(WorkspaceApiOperationPolicy.createOrUpdate::parameters.resource,
+@@doc(
+  WorkspaceApiOperationPolicy.createOrUpdate::parameters.resource,
   "The policy contents to apply."
 );
-@@doc(WorkspaceApiPolicy.createOrUpdate::parameters.resource,
+@@doc(
+  WorkspaceApiPolicy.createOrUpdate::parameters.resource,
   "The policy contents to apply."
 );
-@@doc(WorkspaceProductPolicy.createOrUpdate::parameters.resource,
+@@doc(
+  WorkspaceProductPolicy.createOrUpdate::parameters.resource,
   "The policy contents to apply."
 );

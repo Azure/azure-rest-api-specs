@@ -96,13 +96,16 @@ interface NetworkConnections {
 
 @@maxLength(NetworkConnection.name, 63);
 @@minLength(NetworkConnection.name, 3);
-@@doc(NetworkConnection.name,
+@@doc(
+  NetworkConnection.name,
   "Name of the Network Connection that can be applied to a Pool."
 );
 @@doc(NetworkConnection.properties, "Properties of a Network Connection");
-@@doc(NetworkConnections.createOrUpdate::parameters.resource,
+@@doc(
+  NetworkConnections.createOrUpdate::parameters.resource,
   "Represents network connection"
 );
-@@doc(NetworkConnections.update::parameters.properties,
+@@doc(
+  NetworkConnections.update::parameters.properties,
   "Represents network connection"
 );

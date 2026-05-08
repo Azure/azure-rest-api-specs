@@ -60,12 +60,15 @@ interface CassandraRoleAssignmentResources {
   >;
 }
 
-@@doc(CassandraRoleAssignmentResource.name,
+@@doc(
+  CassandraRoleAssignmentResource.name,
   "The GUID for the Role Assignment."
 );
-@@doc(CassandraRoleAssignmentResource.properties,
+@@doc(
+  CassandraRoleAssignmentResource.properties,
   "Properties to create and update an Azure Cosmos DB Cassandra Role Assignment."
 );
-@@doc(CassandraRoleAssignmentResources.createUpdateCassandraRoleAssignment::parameters.resource,
+@@doc(
+  CassandraRoleAssignmentResources.createUpdateCassandraRoleAssignment::parameters.resource,
   "The properties required to create or update a Role Assignment."
 );

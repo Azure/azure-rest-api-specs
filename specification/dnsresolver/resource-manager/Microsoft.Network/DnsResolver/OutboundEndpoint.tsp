@@ -111,13 +111,16 @@ interface OutboundEndpoints {
   >;
 }
 
-@@doc(OutboundEndpoint.name,
+@@doc(
+  OutboundEndpoint.name,
   "The name of the outbound endpoint for the DNS resolver."
 );
 @@doc(OutboundEndpoint.properties, "Properties of the outbound endpoint.");
-@@doc(OutboundEndpoints.createOrUpdate::parameters.resource,
+@@doc(
+  OutboundEndpoints.createOrUpdate::parameters.resource,
   "Parameters supplied to the CreateOrUpdate operation."
 );
-@@doc(OutboundEndpoints.update::parameters.properties,
+@@doc(
+  OutboundEndpoints.update::parameters.properties,
   "Parameters supplied to the Update operation."
 );

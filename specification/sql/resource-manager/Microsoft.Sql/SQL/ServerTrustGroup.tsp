@@ -83,6 +83,7 @@ interface ServerTrustGroups {
 
 @@doc(ServerTrustGroup.name, "The name of the server trust group.");
 @@doc(ServerTrustGroup.properties, "Resource properties.");
-@@doc(ServerTrustGroups.createOrUpdate::parameters.resource,
+@@doc(
+  ServerTrustGroups.createOrUpdate::parameters.resource,
   "The server trust group parameters."
 );

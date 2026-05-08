@@ -76,6 +76,7 @@ interface Containers {
 
 @@doc(Container.name, "The container Name");
 @@doc(Container.properties, "The container properties.");
-@@doc(Containers.createOrUpdate::parameters.resource,
+@@doc(
+  Containers.createOrUpdate::parameters.resource,
   "The container properties."
 );

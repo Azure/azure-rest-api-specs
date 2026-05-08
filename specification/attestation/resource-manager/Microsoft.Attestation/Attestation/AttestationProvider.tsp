@@ -118,9 +118,11 @@ interface AttestationProviders {
 
 @@doc(AttestationProvider.name, "Name of the attestation provider.");
 @@doc(AttestationProvider.properties, "Describes Attestation service status.");
-@@doc(AttestationProviders.create::parameters.resource,
+@@doc(
+  AttestationProviders.create::parameters.resource,
   "Client supplied parameters."
 );
-@@doc(AttestationProviders.update::parameters.properties,
+@@doc(
+  AttestationProviders.update::parameters.properties,
   "Client supplied parameters."
 );

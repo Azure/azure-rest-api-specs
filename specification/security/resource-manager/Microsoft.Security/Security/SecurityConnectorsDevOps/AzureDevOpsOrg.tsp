@@ -106,9 +106,11 @@ interface AzureDevOpsOrgs {
 
 @@doc(AzureDevOpsOrg.name, "The Azure DevOps organization name.");
 @@doc(AzureDevOpsOrg.properties, "Azure DevOps Organization properties.");
-@@doc(AzureDevOpsOrgs.createOrUpdate::parameters.resource,
+@@doc(
+  AzureDevOpsOrgs.createOrUpdate::parameters.resource,
   "The Azure DevOps organization resource payload."
 );
-@@doc(AzureDevOpsOrgs.update::parameters.properties,
+@@doc(
+  AzureDevOpsOrgs.update::parameters.properties,
   "The Azure DevOps organization resource payload."
 );

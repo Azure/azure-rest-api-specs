@@ -603,7 +603,8 @@ interface WorkspaceGroup {
 
 @@maxLength(GroupContract.name, 256);
 @@minLength(GroupContract.name, 1);
-@@doc(GroupContract.name,
+@@doc(
+  GroupContract.name,
   "Group identifier. Must be unique in the current API Management service instance."
 );
 @@doc(GroupContract.properties, "Group entity contract properties.");

@@ -165,12 +165,15 @@ interface WorkspacePrivateEndpointConnections {
   >;
 }
 
-@@doc(PrivateEndpointConnectionDescription.name,
+@@doc(
+  PrivateEndpointConnectionDescription.name,
   "The name of the private endpoint connection associated with the Azure resource"
 );
-@@doc(PrivateEndpointConnectionDescriptions.createOrUpdate::parameters.resource,
+@@doc(
+  PrivateEndpointConnectionDescriptions.createOrUpdate::parameters.resource,
   "The private endpoint connection properties."
 );
-@@doc(WorkspacePrivateEndpointConnections.createOrUpdate::parameters.resource,
+@@doc(
+  WorkspacePrivateEndpointConnections.createOrUpdate::parameters.resource,
   "The private endpoint connection properties."
 );

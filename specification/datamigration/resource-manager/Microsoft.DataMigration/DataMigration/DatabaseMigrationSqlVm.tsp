@@ -133,10 +133,12 @@ interface DatabaseMigrationSqlVms {
 }
 
 @@doc(DatabaseMigrationSqlVm.name, "The name of the target database.");
-@@doc(DatabaseMigrationSqlVm.properties,
+@@doc(
+  DatabaseMigrationSqlVm.properties,
   "Database Migration Resource properties for SQL Virtual Machine."
 );
-@@doc(DatabaseMigrationSqlVms.createOrUpdate::parameters.resource,
+@@doc(
+  DatabaseMigrationSqlVms.createOrUpdate::parameters.resource,
   "Details of SqlMigrationService resource."
 );
 @@doc(DatabaseMigrationSqlVms.cancel::parameters.body, "");

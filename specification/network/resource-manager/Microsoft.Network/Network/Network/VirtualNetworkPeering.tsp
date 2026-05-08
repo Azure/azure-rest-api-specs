@@ -54,9 +54,11 @@ interface VirtualNetworkPeerings {
 }
 
 @@doc(VirtualNetworkPeering.name, "The name of the virtual network peering.");
-@@doc(VirtualNetworkPeering.properties,
+@@doc(
+  VirtualNetworkPeering.properties,
   "Properties of the virtual network peering."
 );
-@@doc(VirtualNetworkPeerings.createOrUpdate::parameters.resource,
+@@doc(
+  VirtualNetworkPeerings.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update virtual network peering operation."
 );

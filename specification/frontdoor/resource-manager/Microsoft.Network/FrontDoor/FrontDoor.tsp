@@ -113,12 +113,15 @@ interface FrontDoors {
 @@minLength(FrontDoor.name, 5);
 @@doc(FrontDoor.name, "Name of the Front Door which is globally unique.");
 @@doc(FrontDoor.properties, "Properties of the Front Door Load Balancer");
-@@doc(FrontDoors.createOrUpdate::parameters.resource,
+@@doc(
+  FrontDoors.createOrUpdate::parameters.resource,
   "Front Door properties needed to create a new Front Door."
 );
-@@doc(FrontDoors.validateCustomDomain::parameters.body,
+@@doc(
+  FrontDoors.validateCustomDomain::parameters.body,
   "Custom domain to be validated."
 );
-@@doc(FrontDoors.purgeContent::parameters.body,
+@@doc(
+  FrontDoors.purgeContent::parameters.body,
   "The path to the content to be purged. Path can be a full URL, e.g. '/pictures/city.png' which removes a single file, or a directory with a wildcard, e.g. '/pictures/*' which removes all folders and files in the directory."
 );

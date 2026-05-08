@@ -113,9 +113,11 @@ interface FailoverGroups {
 
 @@doc(FailoverGroup.name, "The name of the failover group.");
 @@doc(FailoverGroup.properties, "Resource properties.");
-@@doc(FailoverGroups.createOrUpdate::parameters.resource,
+@@doc(
+  FailoverGroups.createOrUpdate::parameters.resource,
   "The failover group parameters."
 );
-@@doc(FailoverGroups.update::parameters.properties,
+@@doc(
+  FailoverGroups.update::parameters.properties,
   "The failover group parameters."
 );

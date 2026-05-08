@@ -75,6 +75,7 @@ interface TopicSpaces {
 @@minLength(TopicSpace.name, 3);
 @@doc(TopicSpace.name, "Name of the Topic space.");
 @@doc(TopicSpace.properties, "The properties of topic space.");
-@@doc(TopicSpaces.createOrUpdate::parameters.resource,
+@@doc(
+  TopicSpaces.createOrUpdate::parameters.resource,
   "Topic space information."
 );

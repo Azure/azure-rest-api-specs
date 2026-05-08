@@ -210,24 +210,29 @@ interface NodeTypeSkus {
 @@doc(NodeType.name, "The name of the node type.");
 @@doc(NodeType.properties, "The node type properties");
 @@doc(NodeTypes.createOrUpdate::parameters.resource, "The node type resource.");
-@@doc(NodeTypes.update::parameters.properties,
+@@doc(
+  NodeTypes.update::parameters.properties,
   "The parameters to update the node type configuration."
 );
-@@doc(NodeTypes.deallocate::parameters.body,
+@@doc(
+  NodeTypes.deallocate::parameters.body,
   "parameters for deallocate action."
 );
 @@doc(NodeTypes.deleteNode::parameters.body, "parameters for delete action.");
-@@doc(NodeTypes.getFaultSimulation::parameters.body,
+@@doc(
+  NodeTypes.getFaultSimulation::parameters.body,
   "parameter with fault simulation id."
 );
 @@doc(NodeTypes.redeploy::parameters.body, "parameters for redeploy action.");
 @@doc(NodeTypes.reimage::parameters.body, "parameters for reimage action.");
 @@doc(NodeTypes.restart::parameters.body, "parameters for restart action.");
 @@doc(NodeTypes.start::parameters.body, "parameters for start action.");
-@@doc(NodeTypes.startFaultSimulation::parameters.body,
+@@doc(
+  NodeTypes.startFaultSimulation::parameters.body,
   "parameters describing the fault simulation."
 );
-@@doc(NodeTypes.stopFaultSimulation::parameters.body,
+@@doc(
+  NodeTypes.stopFaultSimulation::parameters.body,
   "parameter with fault simulation id."
 );
 

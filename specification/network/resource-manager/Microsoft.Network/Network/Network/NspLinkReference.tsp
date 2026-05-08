@@ -90,6 +90,7 @@ interface NspLinkReferences {
 
 @@maxLength(NspLinkReference.name, 80);
 @@doc(NspLinkReference.name, "The name of the NSP linkReference.");
-@@doc(NspLinkReference.properties,
+@@doc(
+  NspLinkReference.properties,
   "Properties of the network security perimeter linkReference resource."
 );

@@ -97,9 +97,11 @@ interface VpnSites {
 
 @@doc(VpnSite.name, "The name of the VpnSite being retrieved.");
 @@doc(VpnSite.properties, "Properties of the VPN site.");
-@@doc(VpnSites.createOrUpdate::parameters.resource,
+@@doc(
+  VpnSites.createOrUpdate::parameters.resource,
   "Parameters supplied to create or update VpnSite."
 );
-@@doc(VpnSites.updateTags::parameters.properties,
+@@doc(
+  VpnSites.updateTags::parameters.properties,
   "Parameters supplied to update VpnSite tags."
 );

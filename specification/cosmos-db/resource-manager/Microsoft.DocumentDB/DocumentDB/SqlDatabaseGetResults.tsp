@@ -81,16 +81,20 @@ interface SqlResources {
 }
 
 @@doc(SqlDatabaseGetResults.name, "Cosmos DB database name.");
-@@doc(SqlDatabaseGetResults.properties,
+@@doc(
+  SqlDatabaseGetResults.properties,
   "The properties of an Azure Cosmos DB SQL database"
 );
-@@doc(SqlResources.createUpdateSqlDatabase::parameters.resource,
+@@doc(
+  SqlResources.createUpdateSqlDatabase::parameters.resource,
   "The parameters to provide for the current SQL database."
 );
-@@doc(SqlResources.sqlDatabasePartitionMerge::parameters.body,
+@@doc(
+  SqlResources.sqlDatabasePartitionMerge::parameters.body,
   "The parameters for the merge operation."
 );
-@@visibility(SqlDatabaseGetResults.location,
+@@visibility(
+  SqlDatabaseGetResults.location,
   Lifecycle.Read,
   Lifecycle.Create,
   Lifecycle.Update

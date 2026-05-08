@@ -119,9 +119,11 @@ interface Tables {
 @@minLength(Table.name, 4);
 @@doc(Table.name, "The name of the table.");
 @@doc(Table.properties, "Table's properties.");
-@@doc(Tables.createOrUpdate::parameters.resource,
+@@doc(
+  Tables.createOrUpdate::parameters.resource,
   "The parameters required to update table properties."
 );
-@@doc(Tables.update::parameters.properties,
+@@doc(
+  Tables.update::parameters.properties,
   "The parameters required to update table properties."
 );

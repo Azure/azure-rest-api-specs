@@ -61,9 +61,11 @@ interface GremlinRoleDefinitionResources {
 }
 
 @@doc(GremlinRoleDefinitionResource.name, "The GUID for the Role Definition.");
-@@doc(GremlinRoleDefinitionResource.properties,
+@@doc(
+  GremlinRoleDefinitionResource.properties,
   "Properties to create and update an Azure Cosmos DB Gremlin Role Definition."
 );
-@@doc(GremlinRoleDefinitionResources.createUpdateGremlinRoleDefinition::parameters.resource,
+@@doc(
+  GremlinRoleDefinitionResources.createUpdateGremlinRoleDefinition::parameters.resource,
   "The properties required to create or update a Role Definition."
 );

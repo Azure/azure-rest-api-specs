@@ -228,15 +228,19 @@ interface PublicIPAddressOperationGroup {
 
 @@doc(PublicIPAddress.name, "The name of the public IP Address.");
 @@doc(PublicIPAddress.properties, "Public IP address properties.");
-@@doc(PublicIPAddressOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  PublicIPAddressOperationGroup.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update public IP address operation."
 );
-@@doc(PublicIPAddressOperationGroup.updateTags::parameters.properties,
+@@doc(
+  PublicIPAddressOperationGroup.updateTags::parameters.properties,
   "Parameters supplied to update public IP address tags."
 );
-@@doc(PublicIPAddressOperationGroup.reserveCloudServicePublicIpAddress::parameters.body,
+@@doc(
+  PublicIPAddressOperationGroup.reserveCloudServicePublicIpAddress::parameters.body,
   "Parameter that define which Public IP Address should be associated in place of given Public IP Address."
 );
-@@doc(PublicIPAddressOperationGroup.disassociateCloudServiceReservedPublicIp::parameters.body,
+@@doc(
+  PublicIPAddressOperationGroup.disassociateCloudServiceReservedPublicIp::parameters.body,
   "Parameter that define which Public IP Address should be associated in place of given Public IP Address."
 );

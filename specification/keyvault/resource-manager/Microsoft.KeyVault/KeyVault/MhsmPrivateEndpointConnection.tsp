@@ -100,10 +100,12 @@ interface MhsmPrivateEndpointConnections {
   >;
 }
 
-@@doc(MhsmPrivateEndpointConnection.name,
+@@doc(
+  MhsmPrivateEndpointConnection.name,
   "Name of the private endpoint connection associated with the managed hsm pool."
 );
 @@doc(MhsmPrivateEndpointConnection.properties, "Resource properties.");
-@@doc(MhsmPrivateEndpointConnections.put::parameters.resource,
+@@doc(
+  MhsmPrivateEndpointConnections.put::parameters.resource,
   "The intended state of private endpoint connection."
 );

@@ -105,6 +105,7 @@ interface InstanceFailoverGroups {
 
 @@doc(InstanceFailoverGroup.name, "The name of the failover group.");
 @@doc(InstanceFailoverGroup.properties, "Resource properties.");
-@@doc(InstanceFailoverGroups.createOrUpdate::parameters.resource,
+@@doc(
+  InstanceFailoverGroups.createOrUpdate::parameters.resource,
   "The failover group parameters."
 );

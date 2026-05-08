@@ -69,13 +69,16 @@ interface GraphResources {
 }
 
 @@doc(GraphResourceGetResults.name, "Cosmos DB graph resource name.");
-@@doc(GraphResourceGetResults.properties,
+@@doc(
+  GraphResourceGetResults.properties,
   "The properties of an Azure Cosmos DB Graph resource."
 );
-@@doc(GraphResources.createUpdateGraph::parameters.resource,
+@@doc(
+  GraphResources.createUpdateGraph::parameters.resource,
   "The parameters to provide for the current graph."
 );
-@@visibility(GraphResourceGetResults.location,
+@@visibility(
+  GraphResourceGetResults.location,
   Lifecycle.Read,
   Lifecycle.Create,
   Lifecycle.Update

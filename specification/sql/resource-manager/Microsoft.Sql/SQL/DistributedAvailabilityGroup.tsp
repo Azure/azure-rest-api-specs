@@ -90,19 +90,24 @@ interface DistributedAvailabilityGroups {
   >;
 }
 
-@@doc(DistributedAvailabilityGroup.name,
+@@doc(
+  DistributedAvailabilityGroup.name,
   "The distributed availability group name."
 );
 @@doc(DistributedAvailabilityGroup.properties, "Resource properties.");
-@@doc(DistributedAvailabilityGroups.createOrUpdate::parameters.resource,
+@@doc(
+  DistributedAvailabilityGroups.createOrUpdate::parameters.resource,
   "The distributed availability group info."
 );
-@@doc(DistributedAvailabilityGroups.update::parameters.properties,
+@@doc(
+  DistributedAvailabilityGroups.update::parameters.properties,
   "The distributed availability group info."
 );
-@@doc(DistributedAvailabilityGroups.failover::parameters.body,
+@@doc(
+  DistributedAvailabilityGroups.failover::parameters.body,
   "The distributed availability group failover request parameters."
 );
-@@doc(DistributedAvailabilityGroups.setRole::parameters.body,
+@@doc(
+  DistributedAvailabilityGroups.setRole::parameters.body,
   "The distributed availability group set role request parameters."
 );

@@ -65,6 +65,7 @@ interface LedgerDigestUploadsOperationGroup {
 
 @@doc(LedgerDigestUploads.name, "");
 @@doc(LedgerDigestUploads.properties, "Resource properties.");
-@@doc(LedgerDigestUploadsOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  LedgerDigestUploadsOperationGroup.createOrUpdate::parameters.resource,
   ""
 );

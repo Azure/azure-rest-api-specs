@@ -73,12 +73,15 @@ interface AttachedDatabaseConfigurations {
   >;
 }
 
-@@doc(AttachedDatabaseConfiguration.name,
+@@doc(
+  AttachedDatabaseConfiguration.name,
   "The name of the attached database configuration."
 );
-@@doc(AttachedDatabaseConfiguration.properties,
+@@doc(
+  AttachedDatabaseConfiguration.properties,
   "The properties of the attached database configuration."
 );
-@@doc(AttachedDatabaseConfigurations.createOrUpdate::parameters.resource,
+@@doc(
+  AttachedDatabaseConfigurations.createOrUpdate::parameters.resource,
   "The database parameters supplied to the CreateOrUpdate operation."
 );

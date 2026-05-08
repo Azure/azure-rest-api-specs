@@ -74,7 +74,8 @@ interface IotConnectors {
 @@minLength(IotConnector.name, 3);
 @@doc(IotConnector.name, "The name of IoT Connector resource.");
 @@doc(IotConnector.properties, "IoT Connector configuration.");
-@@doc(IotConnectors.createOrUpdate::parameters.resource,
+@@doc(
+  IotConnectors.createOrUpdate::parameters.resource,
   "The parameters for creating or updating an IoT Connectors resource."
 );
 

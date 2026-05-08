@@ -177,18 +177,23 @@ interface BackupResourceConfigOperationStatuses {
 }
 
 @@doc(BackupResourceConfigResource.name, "");
-@@doc(BackupResourceConfigResource.properties,
+@@doc(
+  BackupResourceConfigResource.properties,
   "BackupResourceConfigResource properties"
 );
-@@doc(BackupResourceStorageConfigsNonCRR.update::parameters.resource,
+@@doc(
+  BackupResourceStorageConfigsNonCRR.update::parameters.resource,
   "Vault storage config request"
 );
-@@doc(BackupResourceStorageConfigsNonCRR.patch::parameters.properties,
+@@doc(
+  BackupResourceStorageConfigsNonCRR.patch::parameters.properties,
   "Vault storage config request"
 );
-@@doc(BackupResourceStorageConfigsNonCRR.bmsPrepareDataMove::parameters.body,
+@@doc(
+  BackupResourceStorageConfigsNonCRR.bmsPrepareDataMove::parameters.body,
   "Prepare data move request"
 );
-@@doc(BackupResourceStorageConfigsNonCRR.bmsTriggerDataMove::parameters.body,
+@@doc(
+  BackupResourceStorageConfigsNonCRR.bmsTriggerDataMove::parameters.body,
   "Trigger data move request"
 );

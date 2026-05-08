@@ -97,12 +97,15 @@ interface VirtualMachineScaleSetExtensions {
   >;
 }
 
-@@doc(VirtualMachineScaleSetExtension.properties,
+@@doc(
+  VirtualMachineScaleSetExtension.properties,
   "Describes the properties of a Virtual Machine Scale Set Extension."
 );
-@@doc(VirtualMachineScaleSetExtensions.createOrUpdate::parameters.resource,
+@@doc(
+  VirtualMachineScaleSetExtensions.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create VM scale set Extension operation."
 );
-@@doc(VirtualMachineScaleSetExtensions.update::parameters.properties,
+@@doc(
+  VirtualMachineScaleSetExtensions.update::parameters.properties,
   "Parameters supplied to the Update VM scale set Extension operation."
 );

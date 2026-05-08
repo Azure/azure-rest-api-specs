@@ -541,6 +541,7 @@ interface WorkspaceNotification {
 }
 
 @@doc(NotificationContract.name, "Notification Name Identifier.");
-@@doc(NotificationContract.properties,
+@@doc(
+  NotificationContract.properties,
   "Notification entity contract properties."
 );

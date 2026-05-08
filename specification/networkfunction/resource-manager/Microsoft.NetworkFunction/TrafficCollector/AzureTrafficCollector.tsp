@@ -95,12 +95,15 @@ interface AzureTrafficCollectors {
 }
 
 @@doc(AzureTrafficCollector.name, "Azure Traffic Collector name");
-@@doc(AzureTrafficCollector.properties,
+@@doc(
+  AzureTrafficCollector.properties,
   "Properties of the Azure Traffic Collector."
 );
-@@doc(AzureTrafficCollectors.createOrUpdate::parameters.resource,
+@@doc(
+  AzureTrafficCollectors.createOrUpdate::parameters.resource,
   "The parameters to provide for the created Azure Traffic Collector."
 );
-@@doc(AzureTrafficCollectors.updateTags::parameters.properties,
+@@doc(
+  AzureTrafficCollectors.updateTags::parameters.properties,
   "Parameters supplied to update Azure Traffic Collector tags."
 );

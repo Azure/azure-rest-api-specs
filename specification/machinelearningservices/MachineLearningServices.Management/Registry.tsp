@@ -119,23 +119,28 @@ interface Registries {
   >;
 }
 
-@@doc(Registry.name,
+@@doc(
+  Registry.name,
   "Name of Azure Machine Learning registry. This is case-insensitive"
 );
 @@doc(Registry.properties, "[Required] Additional attributes of the entity.");
-@@doc(Registries.createOrUpdate::parameters.resource,
+@@doc(
+  Registries.createOrUpdate::parameters.resource,
   "Details required to create the registry."
 );
-@@doc(Registries.update::parameters.properties,
+@@doc(
+  Registries.update::parameters.properties,
   "Details required to create the registry."
 );
 // @@doc(Registries.getBlobReferenceSAS::parameters.body,
 //   "Asset id and blob uri."
 // );
-@@doc(Registries.removeRegions::parameters.body,
+@@doc(
+  Registries.removeRegions::parameters.body,
   "Details required to create the registry."
 );
-@@doc(Registry.identity,
+@@doc(
+  Registry.identity,
   "Managed service identity (system assigned and/or user assigned identities)"
 );
 @@doc(Registry.sku, "Sku details required for ARM contract for Autoscaling.");

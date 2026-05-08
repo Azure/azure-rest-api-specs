@@ -106,7 +106,8 @@ interface Connections {
 
 @@maxLength(Connection.name, 64);
 @@minLength(Connection.name, 3);
-@@doc(Connection.name,
+@@doc(
+  Connection.name,
   "The name for the connection to perform the operation on."
 );
 @@doc(Connection.properties, "Properties of connection");

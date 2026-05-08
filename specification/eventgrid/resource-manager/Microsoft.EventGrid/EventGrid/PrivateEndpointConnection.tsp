@@ -150,12 +150,15 @@ interface PrivateEndpointConnections {
   >;
 }
 
-@@doc(PrivateEndpointConnection.name,
+@@doc(
+  PrivateEndpointConnection.name,
   "The name of the private endpoint connection connection."
 );
-@@doc(PrivateEndpointConnection.properties,
+@@doc(
+  PrivateEndpointConnection.properties,
   "Properties of the PrivateEndpointConnection."
 );
-@@doc(PrivateEndpointConnections.update::parameters.body,
+@@doc(
+  PrivateEndpointConnections.update::parameters.body,
   "The private endpoint connection object to update."
 );

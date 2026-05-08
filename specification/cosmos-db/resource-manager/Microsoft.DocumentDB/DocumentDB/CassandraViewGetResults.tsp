@@ -70,14 +70,17 @@ interface CassandraViewGetResultsOperationGroup {
 }
 
 @@doc(CassandraViewGetResults.name, "Cosmos DB view name.");
-@@doc(CassandraViewGetResults.properties,
+@@doc(
+  CassandraViewGetResults.properties,
   "The properties of an Azure Cosmos DB Cassandra view"
 );
-@@doc(CassandraViewGetResultsOperationGroup.createUpdateCassandraView::parameters.resource,
+@@doc(
+  CassandraViewGetResultsOperationGroup.createUpdateCassandraView::parameters.resource,
   "The parameters to provide for the current Cassandra View."
 );
 
-@@visibility(CassandraViewGetResults.location,
+@@visibility(
+  CassandraViewGetResults.location,
   Lifecycle.Read,
   Lifecycle.Create,
   Lifecycle.Update

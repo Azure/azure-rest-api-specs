@@ -172,6 +172,7 @@ interface StorageTargets {
 
 @@doc(StorageTarget.name, "Name of Storage Target.");
 @@doc(StorageTarget.properties, "StorageTarget properties");
-@@doc(StorageTargets.createOrUpdate::parameters.resource,
+@@doc(
+  StorageTargets.createOrUpdate::parameters.resource,
   "Object containing the definition of a Storage Target."
 );

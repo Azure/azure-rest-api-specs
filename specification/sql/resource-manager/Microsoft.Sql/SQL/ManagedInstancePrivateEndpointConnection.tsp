@@ -57,12 +57,15 @@ interface ManagedInstancePrivateEndpointConnections {
   listByManagedInstance is ArmResourceListByParent<ManagedInstancePrivateEndpointConnection>;
 }
 
-@@doc(ManagedInstancePrivateEndpointConnection.name,
+@@doc(
+  ManagedInstancePrivateEndpointConnection.name,
   "The name of the private endpoint connection."
 );
-@@doc(ManagedInstancePrivateEndpointConnection.properties,
+@@doc(
+  ManagedInstancePrivateEndpointConnection.properties,
   "Resource properties."
 );
-@@doc(ManagedInstancePrivateEndpointConnections.createOrUpdate::parameters.resource,
+@@doc(
+  ManagedInstancePrivateEndpointConnections.createOrUpdate::parameters.resource,
   ""
 );

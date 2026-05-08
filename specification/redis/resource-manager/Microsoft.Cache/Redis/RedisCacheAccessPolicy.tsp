@@ -60,10 +60,12 @@ interface RedisCacheAccessPolicies {
 
 @@maxLength(RedisCacheAccessPolicy.name, 63);
 @@minLength(RedisCacheAccessPolicy.name, 3);
-@@doc(RedisCacheAccessPolicy.name,
+@@doc(
+  RedisCacheAccessPolicy.name,
   "The name of the access policy that is being added to the Redis cache."
 );
 @@doc(RedisCacheAccessPolicy.properties, "Properties of an access policy.");
-@@doc(RedisCacheAccessPolicies.createUpdate::parameters.resource,
+@@doc(
+  RedisCacheAccessPolicies.createUpdate::parameters.resource,
   "Parameters supplied to the Create Update Access Policy operation."
 );

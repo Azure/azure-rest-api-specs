@@ -128,9 +128,11 @@ interface DomainServices {
 
 @@doc(DomainService.name, "The name of the domain service.");
 @@doc(DomainService.properties, "Domain service properties");
-@@doc(DomainServices.createOrUpdate::parameters.resource,
+@@doc(
+  DomainServices.createOrUpdate::parameters.resource,
   "Properties supplied to the Create or Update a Domain Service operation."
 );
-@@doc(DomainServices.update::parameters.properties,
+@@doc(
+  DomainServices.update::parameters.properties,
   "Properties supplied to the Update a Domain Service operation."
 );

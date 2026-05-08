@@ -59,6 +59,7 @@ interface Operations
       Error = CloudError
     > {}
 
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "Lists the available Azure Data Factory API operations."
 );

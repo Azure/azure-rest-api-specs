@@ -62,6 +62,7 @@ interface WorkloadGroups {
 
 @@doc(WorkloadGroup.name, "The name of the workload group.");
 @@doc(WorkloadGroup.properties, "Resource properties.");
-@@doc(WorkloadGroups.createOrUpdate::parameters.resource,
+@@doc(
+  WorkloadGroups.createOrUpdate::parameters.resource,
   "The requested workload group state."
 );

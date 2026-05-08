@@ -110,6 +110,7 @@ interface BaseAdminRules {
 }
 
 @@doc(BaseAdminRule.name, "The name of the rule.");
-@@doc(BaseAdminRules.createOrUpdate::parameters.resource,
+@@doc(
+  BaseAdminRules.createOrUpdate::parameters.resource,
   "The admin rule to create or update"
 );

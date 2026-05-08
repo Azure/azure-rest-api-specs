@@ -66,10 +66,12 @@ interface ServerAzureADOnlyAuthentications {
   >;
 }
 
-@@doc(ServerAzureADOnlyAuthentication.name,
+@@doc(
+  ServerAzureADOnlyAuthentication.name,
   "The name of server azure active directory only authentication."
 );
 @@doc(ServerAzureADOnlyAuthentication.properties, "Resource properties.");
-@@doc(ServerAzureADOnlyAuthentications.createOrUpdate::parameters.resource,
+@@doc(
+  ServerAzureADOnlyAuthentications.createOrUpdate::parameters.resource,
   "The required parameters for creating or updating an Active Directory only authentication property."
 );

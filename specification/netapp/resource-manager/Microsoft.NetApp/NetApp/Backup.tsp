@@ -271,12 +271,15 @@ interface Backups {
 
 @@doc(Backup.name, "The name of the backup");
 @@doc(Backup.properties, "Backup Properties");
-@@doc(Backups.create::parameters.resource,
+@@doc(
+  Backups.create::parameters.resource,
   "Backup object supplied in the body of the operation."
 );
-@@doc(Backups.update::parameters.properties,
+@@doc(
+  Backups.update::parameters.properties,
   "Backup object supplied in the body of the operation."
 );
-@@doc(Backups.restoreFiles::parameters.body,
+@@doc(
+  Backups.restoreFiles::parameters.body,
   "Restore payload supplied in the body of the operation."
 );

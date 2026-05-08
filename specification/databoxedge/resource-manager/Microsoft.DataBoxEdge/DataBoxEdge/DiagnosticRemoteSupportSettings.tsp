@@ -53,9 +53,11 @@ interface DiagnosticRemoteSupportSettingsOperationGroup {
 }
 
 @@doc(DiagnosticRemoteSupportSettings.name, "");
-@@doc(DiagnosticRemoteSupportSettings.properties,
+@@doc(
+  DiagnosticRemoteSupportSettings.properties,
   "Properties of the remote support  settings."
 );
-@@doc(DiagnosticRemoteSupportSettingsOperationGroup.updateDiagnosticRemoteSupportSettings::parameters.resource,
+@@doc(
+  DiagnosticRemoteSupportSettingsOperationGroup.updateDiagnosticRemoteSupportSettings::parameters.resource,
   "The diagnostic remote support settings."
 );

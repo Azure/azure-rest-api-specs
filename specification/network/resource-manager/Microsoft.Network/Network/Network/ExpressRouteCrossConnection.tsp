@@ -276,18 +276,23 @@ interface ExpressRouteCrossConnections {
   >;
 }
 
-@@doc(ExpressRouteCrossConnection.name,
+@@doc(
+  ExpressRouteCrossConnection.name,
   "The name of the ExpressRouteCrossConnection (service key of the circuit)."
 );
-@@doc(ExpressRouteCrossConnection.properties,
+@@doc(
+  ExpressRouteCrossConnection.properties,
   "Properties of the express route cross connection."
 );
-@@doc(ExpressRouteCrossConnections.createOrUpdate::parameters.resource,
+@@doc(
+  ExpressRouteCrossConnections.createOrUpdate::parameters.resource,
   "Parameters supplied to the update express route crossConnection operation."
 );
-@@doc(ExpressRouteCrossConnections.updateTags::parameters.properties,
+@@doc(
+  ExpressRouteCrossConnections.updateTags::parameters.properties,
   "Parameters supplied to update express route cross connection tags."
 );
-@@doc(ExpressRouteCrossConnections.expressRouteCrossConnectionPeeringsCreateOrUpdate::parameters.body,
+@@doc(
+  ExpressRouteCrossConnections.expressRouteCrossConnectionPeeringsCreateOrUpdate::parameters.body,
   "Parameters supplied to the create or update ExpressRouteCrossConnection peering operation."
 );

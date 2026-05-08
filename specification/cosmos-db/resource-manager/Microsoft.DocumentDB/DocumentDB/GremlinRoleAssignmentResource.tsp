@@ -61,9 +61,11 @@ interface GremlinRoleAssignmentResources {
 }
 
 @@doc(GremlinRoleAssignmentResource.name, "The GUID for the Role Assignment.");
-@@doc(GremlinRoleAssignmentResource.properties,
+@@doc(
+  GremlinRoleAssignmentResource.properties,
   "Properties to create and update an Azure Cosmos DB Gremlin Role Assignment."
 );
-@@doc(GremlinRoleAssignmentResources.createUpdateGremlinRoleAssignment::parameters.resource,
+@@doc(
+  GremlinRoleAssignmentResources.createUpdateGremlinRoleAssignment::parameters.resource,
   "The properties required to create or update a Role Assignment."
 );

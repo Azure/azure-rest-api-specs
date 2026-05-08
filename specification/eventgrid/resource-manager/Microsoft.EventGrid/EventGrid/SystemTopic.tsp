@@ -120,9 +120,11 @@ interface SystemTopics {
 
 @@doc(SystemTopic.name, "Name of the system topic.");
 @@doc(SystemTopic.properties, "Properties of the system topic.");
-@@doc(SystemTopics.createOrUpdate::parameters.resource,
+@@doc(
+  SystemTopics.createOrUpdate::parameters.resource,
   "System Topic information."
 );
-@@doc(SystemTopics.update::parameters.properties,
+@@doc(
+  SystemTopics.update::parameters.properties,
   "SystemTopic update information."
 );

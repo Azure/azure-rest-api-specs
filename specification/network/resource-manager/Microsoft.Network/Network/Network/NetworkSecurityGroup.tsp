@@ -72,12 +72,15 @@ interface NetworkSecurityGroups {
 }
 
 @@doc(NetworkSecurityGroup.name, "The name of the network security group.");
-@@doc(NetworkSecurityGroup.properties,
+@@doc(
+  NetworkSecurityGroup.properties,
   "Properties of the network security group."
 );
-@@doc(NetworkSecurityGroups.createOrUpdate::parameters.resource,
+@@doc(
+  NetworkSecurityGroups.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update network security group operation."
 );
-@@doc(NetworkSecurityGroups.updateTags::parameters.properties,
+@@doc(
+  NetworkSecurityGroups.updateTags::parameters.properties,
   "Parameters supplied to update network security group tags."
 );

@@ -189,18 +189,23 @@ interface InferenceEndpoints {
 }
 
 @@doc(InferenceEndpoint.name, "InferenceEndpoint name.");
-@@doc(InferenceEndpoint.properties,
+@@doc(
+  InferenceEndpoint.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(InferenceEndpoints.createOrUpdate::parameters.resource,
+@@doc(
+  InferenceEndpoints.createOrUpdate::parameters.resource,
   "InferenceEndpoint entity to apply during operation."
 );
-@@doc(InferenceEndpoints.update::parameters.properties,
+@@doc(
+  InferenceEndpoints.update::parameters.properties,
   "Online Endpoint entity to apply during operation."
 );
-@@doc(InferenceEndpoint.identity,
+@@doc(
+  InferenceEndpoint.identity,
   "Managed service identity (system assigned and/or user assigned identities)"
 );
-@@doc(InferenceEndpoint.sku,
+@@doc(
+  InferenceEndpoint.sku,
   "Sku details required for ARM contract for Autoscaling."
 );

@@ -39,9 +39,11 @@ interface GenerateDetailedCostReportOperationResults {
   >;
 }
 
-@@doc(GenerateDetailedCostReportOperationResult.name,
+@@doc(
+  GenerateDetailedCostReportOperationResult.name,
   "The target operation Id."
 );
-@@doc(GenerateDetailedCostReportOperationResult.properties,
+@@doc(
+  GenerateDetailedCostReportOperationResult.properties,
   "The properties of the resource generated."
 );

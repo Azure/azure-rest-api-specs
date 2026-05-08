@@ -129,21 +129,27 @@ interface ServerlessEndpoints {
 }
 
 @@doc(ServerlessEndpoint.name, "Serverless Endpoint name.");
-@@doc(ServerlessEndpoint.properties,
+@@doc(
+  ServerlessEndpoint.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(ServerlessEndpoints.createOrUpdate::parameters.resource,
+@@doc(
+  ServerlessEndpoints.createOrUpdate::parameters.resource,
   "Serverless Endpoint entity to apply during operation."
 );
-@@doc(ServerlessEndpoints.update::parameters.properties,
+@@doc(
+  ServerlessEndpoints.update::parameters.properties,
   "Serverless Endpoint entity to apply during operation."
 );
-@@doc(ServerlessEndpoints.regenerateKeys::parameters.body,
+@@doc(
+  ServerlessEndpoints.regenerateKeys::parameters.body,
   "RegenerateKeys request ."
 );
-@@doc(ServerlessEndpoint.identity,
+@@doc(
+  ServerlessEndpoint.identity,
   "Managed service identity (system assigned and/or user assigned identities)"
 );
-@@doc(ServerlessEndpoint.sku,
+@@doc(
+  ServerlessEndpoint.sku,
   "Sku details required for ARM contract for Autoscaling."
 );

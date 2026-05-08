@@ -104,14 +104,17 @@ interface Deployments {
   resume is ArmResourceActionSync<Deployment, void, ArmResponse<Deployment>>;
 }
 
-@@doc(Deployment.name,
+@@doc(
+  Deployment.name,
   "The name of the deployment associated with the Cognitive Services Account"
 );
 @@encodedName(Deployment.etag, "application/json", "etag");
-@@doc(Deployment.properties,
+@@doc(
+  Deployment.properties,
   "Properties of Cognitive Services account deployment."
 );
-@@doc(Deployments.createOrUpdate::parameters.resource,
+@@doc(
+  Deployments.createOrUpdate::parameters.resource,
   "The deployment properties."
 );
 @@doc(Deployments.update::parameters.properties, "The deployment properties.");

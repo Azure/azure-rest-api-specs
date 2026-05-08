@@ -99,12 +99,15 @@ interface KubeEnvironments {
 }
 
 @@doc(KubeEnvironment.name, "Name of the Kubernetes Environment.");
-@@doc(KubeEnvironment.properties,
+@@doc(
+  KubeEnvironment.properties,
   "KubeEnvironment resource specific properties"
 );
-@@doc(KubeEnvironments.createOrUpdate::parameters.resource,
+@@doc(
+  KubeEnvironments.createOrUpdate::parameters.resource,
   "Configuration details of the Kubernetes Environment."
 );
-@@doc(KubeEnvironments.update::parameters.properties,
+@@doc(
+  KubeEnvironments.update::parameters.properties,
   "Configuration details of the Kubernetes Environment."
 );

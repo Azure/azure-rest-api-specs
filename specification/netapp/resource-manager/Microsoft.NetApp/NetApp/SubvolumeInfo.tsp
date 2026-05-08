@@ -240,9 +240,11 @@ interface SubvolumeInfos {
 @@minLength(SubvolumeInfo.name, 1);
 @@doc(SubvolumeInfo.name, "The name of the subvolume.");
 @@doc(SubvolumeInfo.properties, "Subvolume Properties");
-@@doc(SubvolumeInfos.create::parameters.resource,
+@@doc(
+  SubvolumeInfos.create::parameters.resource,
   "Subvolume object supplied in the body of the operation."
 );
-@@doc(SubvolumeInfos.update::parameters.properties,
+@@doc(
+  SubvolumeInfos.update::parameters.properties,
   "Subvolume object supplied in the body of the operation."
 );

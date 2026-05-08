@@ -232,9 +232,11 @@ interface ExpressRouteCircuitPeerings {
 }
 
 @@doc(ExpressRouteCircuitPeering.name, "The name of the peering.");
-@@doc(ExpressRouteCircuitPeering.properties,
+@@doc(
+  ExpressRouteCircuitPeering.properties,
   "Properties of the express route circuit peering."
 );
-@@doc(ExpressRouteCircuitPeerings.createOrUpdate::parameters.resource,
+@@doc(
+  ExpressRouteCircuitPeerings.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update express route circuit peering operation."
 );

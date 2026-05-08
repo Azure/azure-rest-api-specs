@@ -90,19 +90,24 @@ interface SqlContainerGetResultsOperationGroup {
 }
 
 @@doc(SqlContainerGetResults.name, "Cosmos DB container name.");
-@@doc(SqlContainerGetResults.properties,
+@@doc(
+  SqlContainerGetResults.properties,
   "The properties of an Azure Cosmos DB container"
 );
-@@doc(SqlContainerGetResultsOperationGroup.createUpdateSqlContainer::parameters.resource,
+@@doc(
+  SqlContainerGetResultsOperationGroup.createUpdateSqlContainer::parameters.resource,
   "The parameters to provide for the current SQL container."
 );
-@@doc(SqlContainerGetResultsOperationGroup.listSqlContainerPartitionMerge::parameters.body,
+@@doc(
+  SqlContainerGetResultsOperationGroup.listSqlContainerPartitionMerge::parameters.body,
   "The parameters for the merge operation."
 );
-@@doc(SqlContainerGetResultsOperationGroup.retrieveContinuousBackupInformation::parameters.body,
+@@doc(
+  SqlContainerGetResultsOperationGroup.retrieveContinuousBackupInformation::parameters.body,
   "The name of the continuous backup restore location."
 );
-@@visibility(SqlContainerGetResults.location,
+@@visibility(
+  SqlContainerGetResults.location,
   Lifecycle.Read,
   Lifecycle.Create,
   Lifecycle.Update

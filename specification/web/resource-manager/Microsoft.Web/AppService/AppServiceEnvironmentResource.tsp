@@ -493,16 +493,20 @@ interface AppServiceEnvironmentRecommendations {
   >;
 }
 
-@@doc(AppServiceEnvironmentResource.name,
+@@doc(
+  AppServiceEnvironmentResource.name,
   "Name of the App Service Environment."
 );
 @@doc(AppServiceEnvironmentResource.properties, "Core resource properties");
-@@doc(AppServiceEnvironmentResources.createOrUpdate::parameters.resource,
+@@doc(
+  AppServiceEnvironmentResources.createOrUpdate::parameters.resource,
   "Configuration details of the App Service Environment."
 );
-@@doc(AppServiceEnvironmentResources.update::parameters.properties,
+@@doc(
+  AppServiceEnvironmentResources.update::parameters.properties,
   "Configuration details of the App Service Environment."
 );
-@@doc(AppServiceEnvironmentResources.changeVnet::parameters.body,
+@@doc(
+  AppServiceEnvironmentResources.changeVnet::parameters.body,
   "Details for the new virtual network."
 );

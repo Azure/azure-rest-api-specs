@@ -95,10 +95,12 @@ interface AFDOriginGroups {
   >;
 }
 
-@@doc(AFDOriginGroup.name,
+@@doc(
+  AFDOriginGroup.name,
   "Name of the origin group which is unique within the endpoint."
 );
-@@doc(AFDOriginGroup.properties,
+@@doc(
+  AFDOriginGroup.properties,
   "The JSON object that contains the properties of the origin group."
 );
 @@doc(AFDOriginGroups.create::parameters.resource, "Origin group properties");

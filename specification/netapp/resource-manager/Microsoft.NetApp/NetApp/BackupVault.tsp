@@ -95,9 +95,11 @@ interface BackupVaults {
 
 @@doc(BackupVault.name, "The name of the Backup Vault");
 @@doc(BackupVault.properties, "Backup Vault Properties");
-@@doc(BackupVaults.createOrUpdate::parameters.resource,
+@@doc(
+  BackupVaults.createOrUpdate::parameters.resource,
   "BackupVault object supplied in the body of the operation."
 );
-@@doc(BackupVaults.update::parameters.properties,
+@@doc(
+  BackupVaults.update::parameters.properties,
   "Backup Vault object supplied in the body of the operation."
 );

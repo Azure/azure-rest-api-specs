@@ -335,7 +335,8 @@ interface GatewayContracts {
 
 @@maxLength(GatewayContract.name, 80);
 @@minLength(GatewayContract.name, 1);
-@@doc(GatewayContract.name,
+@@doc(
+  GatewayContract.name,
   "Gateway entity identifier. Must be unique in the current API Management service instance. Must not have value 'managed'"
 );
 @@doc(GatewayContract.properties, "Gateway details.");
@@ -343,7 +344,8 @@ interface GatewayContracts {
 @@doc(GatewayContracts.update::parameters.properties, "");
 @@doc(GatewayContracts.regenerateKey::parameters.body, "");
 @@doc(GatewayContracts.generateToken::parameters.body, "");
-@@doc(GatewayContracts.listDebugCredentials::parameters.body,
+@@doc(
+  GatewayContracts.listDebugCredentials::parameters.body,
   "List debug credentials properties."
 );
 @@doc(GatewayContracts.listTrace::parameters.body, "List trace properties.");

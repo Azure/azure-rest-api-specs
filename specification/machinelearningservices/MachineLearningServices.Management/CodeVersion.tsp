@@ -257,21 +257,27 @@ interface CodeVersionOperationGroup {
 }
 
 @@doc(CodeVersion.name, "Version identifier.");
-@@doc(CodeVersion.properties,
+@@doc(
+  CodeVersion.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(CodeVersions.createOrUpdate::parameters.resource,
+@@doc(
+  CodeVersions.createOrUpdate::parameters.resource,
   "Version entity to create or update."
 );
-@@doc(CodeVersions.createOrGetStartPendingUpload::parameters.body,
+@@doc(
+  CodeVersions.createOrGetStartPendingUpload::parameters.body,
   "Pending upload request object"
 );
-@@doc(CodeVersionOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  CodeVersionOperationGroup.createOrUpdate::parameters.resource,
   "Version entity to create or update."
 );
-@@doc(CodeVersionOperationGroup.publish::parameters.body,
+@@doc(
+  CodeVersionOperationGroup.publish::parameters.body,
   "Destination registry info"
 );
-@@doc(CodeVersionOperationGroup.createOrGetStartPendingUpload::parameters.body,
+@@doc(
+  CodeVersionOperationGroup.createOrGetStartPendingUpload::parameters.body,
   "Pending upload request object"
 );

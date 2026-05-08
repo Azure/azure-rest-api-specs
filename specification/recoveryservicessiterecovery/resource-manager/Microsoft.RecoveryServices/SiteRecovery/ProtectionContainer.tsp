@@ -159,12 +159,15 @@ interface ProtectionContainers {
 @@doc(ProtectionContainer.name, "Protection container name.");
 @@doc(ProtectionContainer.properties, "The custom data.");
 @@doc(ProtectionContainers.create::parameters.resource, "Creation input.");
-@@doc(ProtectionContainers.discoverProtectableItem::parameters.body,
+@@doc(
+  ProtectionContainers.discoverProtectableItem::parameters.body,
   "The request object to add a protectable item."
 );
-@@doc(ProtectionContainers.switchClusterProtection::parameters.body,
+@@doc(
+  ProtectionContainers.switchClusterProtection::parameters.body,
   "Switch protection input."
 );
-@@doc(ProtectionContainers.switchProtection::parameters.body,
+@@doc(
+  ProtectionContainers.switchProtection::parameters.body,
   "Switch protection input."
 );

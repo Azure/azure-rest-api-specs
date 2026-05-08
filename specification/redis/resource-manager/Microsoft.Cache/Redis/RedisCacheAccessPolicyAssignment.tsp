@@ -60,12 +60,15 @@ interface RedisCacheAccessPolicyAssignments {
 
 @@maxLength(RedisCacheAccessPolicyAssignment.name, 63);
 @@minLength(RedisCacheAccessPolicyAssignment.name, 3);
-@@doc(RedisCacheAccessPolicyAssignment.name,
+@@doc(
+  RedisCacheAccessPolicyAssignment.name,
   "The name of the access policy assignment."
 );
-@@doc(RedisCacheAccessPolicyAssignment.properties,
+@@doc(
+  RedisCacheAccessPolicyAssignment.properties,
   "Properties of an access policy assignment"
 );
-@@doc(RedisCacheAccessPolicyAssignments.createUpdate::parameters.resource,
+@@doc(
+  RedisCacheAccessPolicyAssignments.createUpdate::parameters.resource,
   "Parameters supplied to the Create Update Access Policy Assignment operation."
 );

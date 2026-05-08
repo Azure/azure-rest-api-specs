@@ -127,9 +127,11 @@ interface GroupQuotasEnforcementStatuses {
 @@minLength(GroupQuotasEnforcementStatus.name, 1);
 @@doc(GroupQuotasEnforcementStatus.name, "The name of the Azure region.");
 @@doc(GroupQuotasEnforcementStatus.properties, "");
-@@doc(GroupQuotasEnforcementStatuses.createOrUpdate::parameters.resource,
+@@doc(
+  GroupQuotasEnforcementStatuses.createOrUpdate::parameters.resource,
   "The GroupQuota body details for creation or update of a GroupQuota entity."
 );
-@@doc(GroupQuotasEnforcementStatuses.update::parameters.properties,
+@@doc(
+  GroupQuotasEnforcementStatuses.update::parameters.properties,
   "The GroupQuota body details for creation or update of a GroupQuota entity."
 );

@@ -144,7 +144,8 @@ interface ManagedGrafanas {
 }
 
 @@doc(ManagedGrafana.name, "The workspace name of Azure Managed Grafana.");
-@@doc(ManagedGrafana.properties,
+@@doc(
+  ManagedGrafana.properties,
   "Properties specific to the grafana resource."
 );
 @@doc(ManagedGrafanas.create::parameters.resource, "");

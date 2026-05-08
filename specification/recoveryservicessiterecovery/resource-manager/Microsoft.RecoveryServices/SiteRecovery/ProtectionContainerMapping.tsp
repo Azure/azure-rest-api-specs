@@ -102,10 +102,12 @@ interface ProtectionContainerMappings {
 
 @@doc(ProtectionContainerMapping.name, "Protection Container mapping name.");
 @@doc(ProtectionContainerMapping.properties, "The custom data.");
-@@doc(ProtectionContainerMappings.create::parameters.resource,
+@@doc(
+  ProtectionContainerMappings.create::parameters.resource,
   "Mapping creation input."
 );
-@@doc(ProtectionContainerMappings.update::parameters.properties,
+@@doc(
+  ProtectionContainerMappings.update::parameters.properties,
   "Mapping update input."
 );
 @@doc(ProtectionContainerMappings.delete::parameters.body, "Removal input.");

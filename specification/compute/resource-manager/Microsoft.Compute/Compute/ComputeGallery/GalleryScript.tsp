@@ -90,15 +90,19 @@ interface GalleryScripts {
   >;
 }
 
-@@doc(GalleryScript.name,
+@@doc(
+  GalleryScript.name,
   "The name of the gallery Script Definition to be retrieved."
 );
-@@doc(GalleryScript.properties,
+@@doc(
+  GalleryScript.properties,
   "Describes the properties of a gallery Script Definition."
 );
-@@doc(GalleryScripts.createOrUpdate::parameters.resource,
+@@doc(
+  GalleryScripts.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update gallery Script operation."
 );
-@@doc(GalleryScripts.update::parameters.properties,
+@@doc(
+  GalleryScripts.update::parameters.properties,
   "Parameters supplied to the update gallery Script operation."
 );

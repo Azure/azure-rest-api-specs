@@ -224,12 +224,15 @@ interface DataMigrationServices {
 
 @@doc(DataMigrationService.name, "Name of the service");
 @@doc(DataMigrationService.properties, "Custom service properties");
-@@doc(DataMigrationServices.createOrUpdate::parameters.resource,
+@@doc(
+  DataMigrationServices.createOrUpdate::parameters.resource,
   "Information about the service"
 );
-@@doc(DataMigrationServices.update::parameters.properties,
+@@doc(
+  DataMigrationServices.update::parameters.properties,
   "Information about the service"
 );
-@@doc(DataMigrationServices.checkChildrenNameAvailability::parameters.body,
+@@doc(
+  DataMigrationServices.checkChildrenNameAvailability::parameters.body,
   "Requested name to validate"
 );

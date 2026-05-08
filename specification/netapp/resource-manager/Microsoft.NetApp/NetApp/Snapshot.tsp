@@ -146,12 +146,15 @@ interface Snapshots {
 
 @@doc(Snapshot.name, "The name of the snapshot");
 @@doc(Snapshot.properties, "Snapshot Properties");
-@@doc(Snapshots.create::parameters.resource,
+@@doc(
+  Snapshots.create::parameters.resource,
   "Snapshot object supplied in the body of the operation."
 );
-@@doc(Snapshots.update::parameters.properties,
+@@doc(
+  Snapshots.update::parameters.properties,
   "Snapshot object supplied in the body of the operation."
 );
-@@doc(Snapshots.restoreFiles::parameters.body,
+@@doc(
+  Snapshots.restoreFiles::parameters.body,
   "Restore payload supplied in the body of the operation."
 );

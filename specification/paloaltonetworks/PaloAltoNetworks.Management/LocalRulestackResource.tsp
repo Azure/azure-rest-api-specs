@@ -255,6 +255,7 @@ interface LocalRulestackResources {
 }
 
 @@doc(LocalRulestackResource.name, "LocalRulestack resource name");
-@@doc(LocalRulestackResource.properties,
+@@doc(
+  LocalRulestackResource.properties,
   "The resource-specific properties for this resource."
 );

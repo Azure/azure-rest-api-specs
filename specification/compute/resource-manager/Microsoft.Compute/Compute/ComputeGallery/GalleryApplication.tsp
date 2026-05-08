@@ -80,15 +80,19 @@ interface GalleryApplications {
   >;
 }
 
-@@doc(GalleryApplication.name,
+@@doc(
+  GalleryApplication.name,
   "The name of the gallery Application Definition to be retrieved."
 );
-@@doc(GalleryApplication.properties,
+@@doc(
+  GalleryApplication.properties,
   "Describes the properties of a gallery Application Definition."
 );
-@@doc(GalleryApplications.createOrUpdate::parameters.resource,
+@@doc(
+  GalleryApplications.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update gallery Application operation."
 );
-@@doc(GalleryApplications.update::parameters.properties,
+@@doc(
+  GalleryApplications.update::parameters.properties,
   "Parameters supplied to the update gallery Application operation."
 );

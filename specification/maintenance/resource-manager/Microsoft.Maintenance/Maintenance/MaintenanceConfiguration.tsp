@@ -163,12 +163,15 @@ interface MaintenanceConfigurationOperationGroup {
 }
 
 @@doc(MaintenanceConfiguration.name, "Maintenance Configuration Name");
-@@doc(MaintenanceConfiguration.properties,
+@@doc(
+  MaintenanceConfiguration.properties,
   "Gets or sets properties of the resource"
 );
-@@doc(MaintenanceConfigurationOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  MaintenanceConfigurationOperationGroup.createOrUpdate::parameters.resource,
   "The configuration"
 );
-@@doc(MaintenanceConfigurationOperationGroup.update::parameters.properties,
+@@doc(
+  MaintenanceConfigurationOperationGroup.update::parameters.properties,
   "The configuration"
 );

@@ -222,20 +222,25 @@ interface Servers {
 @@minLength(Server.name, 3);
 @@doc(Server.name, "The name of the server.");
 @@doc(Server.properties, "Properties of a server.");
-@@doc(Servers.createOrUpdate::parameters.resource,
+@@doc(
+  Servers.createOrUpdate::parameters.resource,
   "Parameters required to create a new server or to update an existing server."
 );
-@@doc(Servers.update::parameters.properties,
+@@doc(
+  Servers.update::parameters.properties,
   "Parameters required to update a server."
 );
-@@doc(Servers.checkPrerequisites::parameters.body,
+@@doc(
+  Servers.checkPrerequisites::parameters.body,
   "Request body for operation"
 );
 @@doc(Servers.start::parameters.body, "Request body for operation");
-@@doc(Servers.checkNameAvailability::parameters.body,
+@@doc(
+  Servers.checkNameAvailability::parameters.body,
   "Parameters required to check if a migration name is valid and available."
 );
 @@doc(Servers.restart::parameters.body, "Parameters to restart a server.");
-@@doc(Servers.migrateNetworkMode::parameters.body,
+@@doc(
+  Servers.migrateNetworkMode::parameters.body,
   "Parameters to migrate the network configuration of a server."
 );

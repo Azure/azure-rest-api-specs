@@ -154,12 +154,15 @@ interface ProtectionContainerOperationResults {
   >;
 }
 
-@@doc(ProtectionContainerResource.name,
+@@doc(
+  ProtectionContainerResource.name,
   "Name of the container whose details need to be fetched."
 );
-@@doc(ProtectionContainerResource.properties,
+@@doc(
+  ProtectionContainerResource.properties,
   "ProtectionContainerResource properties"
 );
-@@doc(ProtectionContainers.register::parameters.resource,
+@@doc(
+  ProtectionContainers.register::parameters.resource,
   "Request body for operation"
 );

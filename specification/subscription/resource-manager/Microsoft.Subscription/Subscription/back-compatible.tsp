@@ -9,16 +9,20 @@ using Microsoft.Subscription;
 @@clientLocation(SubscriptionAliasResponses.delete, "Alias");
 @@clientLocation(SubscriptionAliasResponses.list, "Alias");
 
-@@clientLocation(GetTenantPolicyResponses.getPolicyForTenant,
+@@clientLocation(
+  GetTenantPolicyResponses.getPolicyForTenant,
   "SubscriptionPolicy"
 );
-@@clientLocation(GetTenantPolicyResponses.addUpdatePolicyForTenant,
+@@clientLocation(
+  GetTenantPolicyResponses.addUpdatePolicyForTenant,
   "SubscriptionPolicy"
 );
-@@clientName(GetTenantPolicyResponses.addUpdatePolicyForTenant::parameters.resource,
+@@clientName(
+  GetTenantPolicyResponses.addUpdatePolicyForTenant::parameters.resource,
   "body"
 );
-@@clientLocation(GetTenantPolicyResponses.listPolicyForTenant,
+@@clientLocation(
+  GetTenantPolicyResponses.listPolicyForTenant,
   "SubscriptionPolicy"
 );
 
@@ -26,7 +30,8 @@ using Microsoft.Subscription;
 
 @@clientLocation(TargetDirectoryResults.getTargetDirectory, "Subscriptions");
 @@clientLocation(TargetDirectoryResults.putTargetDirectory, "Subscriptions");
-@@clientName(TargetDirectoryResults.putTargetDirectory::parameters.resource,
+@@clientName(
+  TargetDirectoryResults.putTargetDirectory::parameters.resource,
   "body"
 );
 @@clientLocation(TargetDirectoryResults.deleteTargetDirectory, "Subscriptions");
@@ -36,17 +41,21 @@ using Microsoft.Subscription;
 @@clientLocation(SubscriptionOperationGroup.rename, "Subscription");
 @@clientLocation(SubscriptionOperationGroup.enable, "Subscription");
 @@clientLocation(SubscriptionOperationGroup.acceptOwnership, "Subscription");
-@@clientLocation(SubscriptionOperationGroup.acceptOwnershipStatus,
+@@clientLocation(
+  SubscriptionOperationGroup.acceptOwnershipStatus,
   "Subscription"
 );
 
-@@clientLocation(SubscriptionOperationOperationGroup.get,
+@@clientLocation(
+  SubscriptionOperationOperationGroup.get,
   "SubscriptionOperation"
 );
 
-@@clientLocation(SubscriptionsOperationGroup.acceptTargetDirectory,
+@@clientLocation(
+  SubscriptionsOperationGroup.acceptTargetDirectory,
   "Subscriptions"
 );
-@@clientLocation(SubscriptionsOperationGroup.targetDirectoryStatus,
+@@clientLocation(
+  SubscriptionsOperationGroup.targetDirectoryStatus,
   "Subscriptions"
 );

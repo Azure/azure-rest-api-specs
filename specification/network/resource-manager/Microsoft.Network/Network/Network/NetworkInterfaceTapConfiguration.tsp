@@ -54,12 +54,15 @@ interface NetworkInterfaceTapConfigurations {
   >;
 }
 
-@@doc(NetworkInterfaceTapConfiguration.name,
+@@doc(
+  NetworkInterfaceTapConfiguration.name,
   "The name of the resource that is unique within a resource group. This name can be used to access the resource."
 );
-@@doc(NetworkInterfaceTapConfiguration.properties,
+@@doc(
+  NetworkInterfaceTapConfiguration.properties,
   "Properties of the Virtual Network Tap configuration."
 );
-@@doc(NetworkInterfaceTapConfigurations.createOrUpdate::parameters.resource,
+@@doc(
+  NetworkInterfaceTapConfigurations.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update tap configuration operation."
 );

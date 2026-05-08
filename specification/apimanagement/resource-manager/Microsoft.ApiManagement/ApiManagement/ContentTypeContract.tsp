@@ -97,6 +97,7 @@ interface ContentTypeContracts {
 @@minLength(ContentTypeContract.name, 1);
 @@doc(ContentTypeContract.name, "Content type identifier.");
 @@doc(ContentTypeContract.properties, "Properties of the content type.");
-@@doc(ContentTypeContracts.createOrUpdate::parameters.resource,
+@@doc(
+  ContentTypeContracts.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );

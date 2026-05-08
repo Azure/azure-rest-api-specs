@@ -206,13 +206,16 @@ interface BackupPolicies {
   >;
 }
 
-@@doc(BackupPolicy.name,
+@@doc(
+  BackupPolicy.name,
   "Backup policy Name which uniquely identify backup policy."
 );
 @@doc(BackupPolicy.properties, "Backup policy Properties");
-@@doc(BackupPolicies.create::parameters.resource,
+@@doc(
+  BackupPolicies.create::parameters.resource,
   "Backup policy object supplied in the body of the operation."
 );
-@@doc(BackupPolicies.update::parameters.properties,
+@@doc(
+  BackupPolicies.update::parameters.properties,
   "Backup policy object supplied in the body of the operation."
 );

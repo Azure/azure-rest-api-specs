@@ -63,6 +63,7 @@ interface PrivateEndpointConnections {
 }
 
 @@doc(PrivateEndpointConnection.properties, "Resource properties.");
-@@doc(PrivateEndpointConnections.create::parameters.resource,
+@@doc(
+  PrivateEndpointConnections.create::parameters.resource,
   "The private endpoint connection properties."
 );

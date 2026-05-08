@@ -809,39 +809,51 @@ interface PartnerTopicEventSubscriptions {
 
 @@doc(EventSubscription.name, "Name of the event subscription to be found.");
 @@doc(EventSubscription.properties, "Properties of the event subscription.");
-@@doc(EventSubscriptions.createOrUpdate::parameters.resource,
+@@doc(
+  EventSubscriptions.createOrUpdate::parameters.resource,
   "Event subscription properties containing the destination and filter information."
 );
-@@doc(EventSubscriptions.update::parameters.properties,
+@@doc(
+  EventSubscriptions.update::parameters.properties,
   "Updated event subscription information."
 );
-@@doc(TopicEventSubscriptions.createOrUpdate::parameters.resource,
+@@doc(
+  TopicEventSubscriptions.createOrUpdate::parameters.resource,
   "Event subscription properties containing the destination and filter information."
 );
-@@doc(TopicEventSubscriptions.update::parameters.properties,
+@@doc(
+  TopicEventSubscriptions.update::parameters.properties,
   "Updated event subscription information."
 );
-@@doc(DomainEventSubscriptions.createOrUpdate::parameters.resource,
+@@doc(
+  DomainEventSubscriptions.createOrUpdate::parameters.resource,
   "Event subscription properties containing the destination and filter information."
 );
-@@doc(DomainEventSubscriptions.update::parameters.properties,
+@@doc(
+  DomainEventSubscriptions.update::parameters.properties,
   "Updated event subscription information."
 );
-@@doc(EventSubscriptionOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  EventSubscriptionOperationGroup.createOrUpdate::parameters.resource,
   "Event subscription properties containing the destination and filter information."
 );
-@@doc(EventSubscriptionOperationGroup.update::parameters.properties,
+@@doc(
+  EventSubscriptionOperationGroup.update::parameters.properties,
   "Updated event subscription information."
 );
-@@doc(SystemTopicEventSubscriptions.createOrUpdate::parameters.resource,
+@@doc(
+  SystemTopicEventSubscriptions.createOrUpdate::parameters.resource,
   "Event subscription properties containing the destination and filter information."
 );
-@@doc(SystemTopicEventSubscriptions.update::parameters.properties,
+@@doc(
+  SystemTopicEventSubscriptions.update::parameters.properties,
   "Updated event subscription information."
 );
-@@doc(PartnerTopicEventSubscriptions.createOrUpdate::parameters.resource,
+@@doc(
+  PartnerTopicEventSubscriptions.createOrUpdate::parameters.resource,
   "Event subscription properties containing the destination and filter information."
 );
-@@doc(PartnerTopicEventSubscriptions.update::parameters.properties,
+@@doc(
+  PartnerTopicEventSubscriptions.update::parameters.properties,
   "Updated event subscription information."
 );

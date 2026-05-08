@@ -255,6 +255,7 @@ interface GlobalRulestackResources {
 }
 
 @@doc(GlobalRulestackResource.name, "GlobalRulestack resource name");
-@@doc(GlobalRulestackResource.properties,
+@@doc(
+  GlobalRulestackResource.properties,
   "The resource-specific properties for this resource."
 );

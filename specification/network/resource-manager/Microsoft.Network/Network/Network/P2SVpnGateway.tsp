@@ -178,18 +178,23 @@ interface P2SVpnGateways {
 
 @@doc(P2SVpnGateway.name, "The name of the gateway.");
 @@doc(P2SVpnGateway.properties, "Properties of the P2SVpnGateway.");
-@@doc(P2SVpnGateways.createOrUpdate::parameters.resource,
+@@doc(
+  P2SVpnGateways.createOrUpdate::parameters.resource,
   "Parameters supplied to create or Update a virtual wan p2s vpn gateway."
 );
-@@doc(P2SVpnGateways.updateTags::parameters.properties,
+@@doc(
+  P2SVpnGateways.updateTags::parameters.properties,
   "Parameters supplied to update a virtual wan p2s vpn gateway tags."
 );
-@@doc(P2SVpnGateways.generateVpnProfile::parameters.body,
+@@doc(
+  P2SVpnGateways.generateVpnProfile::parameters.body,
   "Parameters supplied to the generate P2SVpnGateway VPN client package operation."
 );
-@@doc(P2SVpnGateways.getP2sVpnConnectionHealthDetailed::parameters.body,
+@@doc(
+  P2SVpnGateways.getP2sVpnConnectionHealthDetailed::parameters.body,
   "Request parameters supplied to get p2s vpn connections detailed health."
 );
-@@doc(P2SVpnGateways.disconnectP2sVpnConnections::parameters.body,
+@@doc(
+  P2SVpnGateways.disconnectP2sVpnConnections::parameters.body,
   "The parameters are supplied to disconnect p2s vpn connections."
 );

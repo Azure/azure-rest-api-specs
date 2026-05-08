@@ -195,6 +195,7 @@ interface WebAppSites {
 }
 
 @@doc(WebAppSite.name, "Web app site name.");
-@@doc(WebAppSite.properties,
+@@doc(
+  WebAppSite.properties,
   "The resource-specific properties for this resource."
 );

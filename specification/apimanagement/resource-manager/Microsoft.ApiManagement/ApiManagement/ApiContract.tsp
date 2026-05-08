@@ -542,19 +542,24 @@ interface WorkspaceApi {
 
 @@maxLength(ApiContract.name, 256);
 @@minLength(ApiContract.name, 1);
-@@doc(ApiContract.name,
+@@doc(
+  ApiContract.name,
   "API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number."
 );
 @@doc(ApiContract.properties, "API entity contract properties.");
-@@doc(ApiContracts.createOrUpdate::parameters.resource,
+@@doc(
+  ApiContracts.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );
-@@doc(ApiContracts.update::parameters.properties,
+@@doc(
+  ApiContracts.update::parameters.properties,
   "API Update Contract parameters."
 );
-@@doc(WorkspaceApi.createOrUpdate::parameters.resource,
+@@doc(
+  WorkspaceApi.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );
-@@doc(WorkspaceApi.update::parameters.properties,
+@@doc(
+  WorkspaceApi.update::parameters.properties,
   "API Update Contract parameters."
 );

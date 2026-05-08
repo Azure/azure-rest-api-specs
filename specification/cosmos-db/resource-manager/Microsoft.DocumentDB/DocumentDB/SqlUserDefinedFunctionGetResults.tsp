@@ -68,16 +68,20 @@ interface SqlUserDefinedFunctionGetResultsOperationGroup {
   >;
 }
 
-@@doc(SqlUserDefinedFunctionGetResults.name,
+@@doc(
+  SqlUserDefinedFunctionGetResults.name,
   "Cosmos DB userDefinedFunction name."
 );
-@@doc(SqlUserDefinedFunctionGetResults.properties,
+@@doc(
+  SqlUserDefinedFunctionGetResults.properties,
   "The properties of an Azure Cosmos DB userDefinedFunction"
 );
-@@doc(SqlUserDefinedFunctionGetResultsOperationGroup.createUpdateSqlUserDefinedFunction::parameters.resource,
+@@doc(
+  SqlUserDefinedFunctionGetResultsOperationGroup.createUpdateSqlUserDefinedFunction::parameters.resource,
   "The parameters to provide for the current SQL userDefinedFunction."
 );
-@@visibility(SqlUserDefinedFunctionGetResults.location,
+@@visibility(
+  SqlUserDefinedFunctionGetResults.location,
   Lifecycle.Read,
   Lifecycle.Create,
   Lifecycle.Update

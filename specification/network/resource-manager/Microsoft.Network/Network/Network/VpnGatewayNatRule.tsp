@@ -80,10 +80,12 @@ interface VpnGatewayNatRules {
   >;
 }
 
-@@doc(VpnGatewayNatRule.name,
+@@doc(
+  VpnGatewayNatRule.name,
   "The name of the resource that is unique within a resource group. This name can be used to access the resource."
 );
 @@doc(VpnGatewayNatRule.properties, "Properties of the VpnGateway NAT rule.");
-@@doc(VpnGatewayNatRules.createOrUpdate::parameters.resource,
+@@doc(
+  VpnGatewayNatRules.createOrUpdate::parameters.resource,
   "Parameters supplied to create or Update a Nat Rule."
 );

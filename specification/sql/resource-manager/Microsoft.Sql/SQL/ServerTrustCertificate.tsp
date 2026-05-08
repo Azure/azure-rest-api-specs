@@ -65,6 +65,7 @@ interface ServerTrustCertificates {
 
 @@doc(ServerTrustCertificate.name, "Name of of the certificate to get.");
 @@doc(ServerTrustCertificate.properties, "Resource properties.");
-@@doc(ServerTrustCertificates.createOrUpdate::parameters.resource,
+@@doc(
+  ServerTrustCertificates.createOrUpdate::parameters.resource,
   "The server trust certificate info."
 );

@@ -320,9 +320,11 @@ interface AppServicePlans {
 
 @@doc(AppServicePlan.name, "Name of the App Service plan.");
 @@doc(AppServicePlan.properties, "AppServicePlan resource specific properties");
-@@doc(AppServicePlans.createOrUpdate::parameters.resource,
+@@doc(
+  AppServicePlans.createOrUpdate::parameters.resource,
   "Details of the App Service plan."
 );
-@@doc(AppServicePlans.update::parameters.properties,
+@@doc(
+  AppServicePlans.update::parameters.properties,
   "Details of the App Service plan."
 );

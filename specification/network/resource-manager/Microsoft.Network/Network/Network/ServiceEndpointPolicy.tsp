@@ -75,12 +75,15 @@ interface ServiceEndpointPolicies {
 }
 
 @@doc(ServiceEndpointPolicy.name, "The name of the service endpoint policy.");
-@@doc(ServiceEndpointPolicy.properties,
+@@doc(
+  ServiceEndpointPolicy.properties,
   "Properties of the service end point policy."
 );
-@@doc(ServiceEndpointPolicies.createOrUpdate::parameters.resource,
+@@doc(
+  ServiceEndpointPolicies.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update service endpoint policy operation."
 );
-@@doc(ServiceEndpointPolicies.updateTags::parameters.properties,
+@@doc(
+  ServiceEndpointPolicies.updateTags::parameters.properties,
   "Parameters supplied to update service endpoint policy tags."
 );

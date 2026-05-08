@@ -81,15 +81,19 @@ interface GalleryImages {
   >;
 }
 
-@@doc(GalleryImage.name,
+@@doc(
+  GalleryImage.name,
   "The name of the gallery image definition to be retrieved."
 );
-@@doc(GalleryImage.properties,
+@@doc(
+  GalleryImage.properties,
   "Describes the properties of a gallery image definition."
 );
-@@doc(GalleryImages.createOrUpdate::parameters.resource,
+@@doc(
+  GalleryImages.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update gallery image operation."
 );
-@@doc(GalleryImages.update::parameters.properties,
+@@doc(
+  GalleryImages.update::parameters.properties,
   "Parameters supplied to the update gallery image operation."
 );

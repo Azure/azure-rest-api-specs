@@ -148,13 +148,16 @@ interface AuthorizationContracts {
 @@maxLength(AuthorizationContract.name, 256);
 @@minLength(AuthorizationContract.name, 1);
 @@doc(AuthorizationContract.name, "Identifier of the authorization.");
-@@doc(AuthorizationContract.properties,
+@@doc(
+  AuthorizationContract.properties,
   "Properties of the Authorization Contract."
 );
-@@doc(AuthorizationContracts.createOrUpdate::parameters.resource,
+@@doc(
+  AuthorizationContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );
-@@doc(AuthorizationContracts.confirmConsentCode::parameters.body,
+@@doc(
+  AuthorizationContracts.confirmConsentCode::parameters.body,
   "Create parameters."
 );
 @@doc(AuthorizationContracts.post::parameters.body, "Create parameters.");

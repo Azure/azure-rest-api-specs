@@ -76,12 +76,15 @@ interface VirtualRouterPeerings {
   list is ArmResourceListByParent<VirtualRouterPeering, Error = Error>;
 }
 
-@@doc(VirtualRouterPeering.name,
+@@doc(
+  VirtualRouterPeering.name,
   "The name of the resource that is unique within a resource group. This name can be used to access the resource."
 );
-@@doc(VirtualRouterPeering.properties,
+@@doc(
+  VirtualRouterPeering.properties,
   "The properties of the Virtual Router Peering."
 );
-@@doc(VirtualRouterPeerings.createOrUpdate::parameters.resource,
+@@doc(
+  VirtualRouterPeerings.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update Virtual Router Peering operation."
 );

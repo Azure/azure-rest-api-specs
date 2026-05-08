@@ -68,9 +68,11 @@ interface StorageAccountCredentials {
 }
 
 @@doc(StorageAccountCredential.name, "The storage account credential name.");
-@@doc(StorageAccountCredential.properties,
+@@doc(
+  StorageAccountCredential.properties,
   "The storage account credential properties."
 );
-@@doc(StorageAccountCredentials.createOrUpdate::parameters.resource,
+@@doc(
+  StorageAccountCredentials.createOrUpdate::parameters.resource,
   "The storage account credential."
 );

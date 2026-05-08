@@ -150,18 +150,23 @@ interface InferencePools {
 }
 
 @@doc(InferencePool.name, "Name of InferencePool");
-@@doc(InferencePool.properties,
+@@doc(
+  InferencePool.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(InferencePools.createOrUpdate::parameters.resource,
+@@doc(
+  InferencePools.createOrUpdate::parameters.resource,
   "InferencePool entity to apply during operation."
 );
-@@doc(InferencePools.update::parameters.properties,
+@@doc(
+  InferencePools.update::parameters.properties,
   "Inference Pool entity to apply during operation."
 );
-@@doc(InferencePool.identity,
+@@doc(
+  InferencePool.identity,
   "Managed service identity (system assigned and/or user assigned identities)"
 );
-@@doc(InferencePool.sku,
+@@doc(
+  InferencePool.sku,
   "Sku details required for ARM contract for Autoscaling."
 );

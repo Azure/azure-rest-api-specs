@@ -158,9 +158,11 @@ interface ElasticPools {
 
 @@doc(ElasticPool.name, "The name of the elastic pool.");
 @@doc(ElasticPool.properties, "Resource properties.");
-@@doc(ElasticPools.createOrUpdate::parameters.resource,
+@@doc(
+  ElasticPools.createOrUpdate::parameters.resource,
   "The elastic pool parameters."
 );
-@@doc(ElasticPools.update::parameters.properties,
+@@doc(
+  ElasticPools.update::parameters.properties,
   "The elastic pool update parameters."
 );

@@ -131,11 +131,13 @@ interface Experiments {
   >;
 }
 
-@@doc(Experiment.name,
+@@doc(
+  Experiment.name,
   "The Experiment identifier associated with the Experiment"
 );
 @@doc(Experiment.properties, "The properties of an Experiment");
-@@doc(Experiments.createOrUpdate::parameters.resource,
+@@doc(
+  Experiments.createOrUpdate::parameters.resource,
   "The Experiment resource"
 );
 @@doc(Experiments.update::parameters.properties, "The Experiment Update Model");

@@ -62,6 +62,7 @@ interface VirtualNetworkRules {
 
 @@doc(VirtualNetworkRule.name, "The name of the virtual network rule.");
 @@doc(VirtualNetworkRule.properties, "Resource properties.");
-@@doc(VirtualNetworkRules.createOrUpdate::parameters.resource,
+@@doc(
+  VirtualNetworkRules.createOrUpdate::parameters.resource,
   "The requested virtual Network Rule Resource state."
 );

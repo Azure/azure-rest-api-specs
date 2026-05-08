@@ -103,6 +103,7 @@ interface LocalRulesResources {
 }
 
 @@doc(LocalRulesResource.name, "Local Rule priority");
-@@doc(LocalRulesResource.properties,
+@@doc(
+  LocalRulesResource.properties,
   "The resource-specific properties for this resource."
 );

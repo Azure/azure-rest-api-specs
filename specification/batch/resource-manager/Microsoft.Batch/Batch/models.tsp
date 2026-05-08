@@ -3918,18 +3918,22 @@ model OperationListResult is Azure.Core.Page<Operation>;
 
 model BatchAccountListResult is Azure.Core.Page<BatchAccount>;
 @@identifiers(BatchAccountListResult.value, #["/properties/accountEndpoint"]);
-@@summary(OperationListResult.value,
+@@summary(
+  OperationListResult.value,
   "The list of operations supported by the resource provider."
 );
-@@summary(OperationListResult.nextLink,
+@@summary(
+  OperationListResult.nextLink,
   "The URL to get the next set of operation list results if there are any."
 );
-@@summary(OperationListResult,
+@@summary(
+  OperationListResult,
   "Result of the request to list REST API operations. It contains a list of operations and a URL nextLink to get the next set of results."
 );
 @@identifiers(OperationListResult.value, #["name"]);
 @@visibility(OutboundEnvironmentEndpointCollection.value, Lifecycle.Read);
 @@identifiers(SupportedSkusResult.value, #["name"]);
-@@Azure.ClientGenerator.Core.clientName(CifsMountConfiguration,
+@@Azure.ClientGenerator.Core.clientName(
+  CifsMountConfiguration,
   "CIFSMountConfiguration"
 );

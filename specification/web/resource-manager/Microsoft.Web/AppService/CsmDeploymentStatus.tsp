@@ -147,6 +147,7 @@ interface CsmDeploymentStatusOperationGroup {
 }
 
 @@doc(CsmDeploymentStatus.name, "GUID of the deployment operation.");
-@@doc(CsmDeploymentStatus.properties,
+@@doc(
+  CsmDeploymentStatus.properties,
   "CsmDeploymentStatus resource specific properties"
 );

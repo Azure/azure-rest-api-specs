@@ -76,10 +76,12 @@ interface ManagedInstanceKeys {
   >;
 }
 
-@@doc(ManagedInstanceKey.name,
+@@doc(
+  ManagedInstanceKey.name,
   "The name of the managed instance key to be retrieved."
 );
 @@doc(ManagedInstanceKey.properties, "Resource properties.");
-@@doc(ManagedInstanceKeys.createOrUpdate::parameters.resource,
+@@doc(
+  ManagedInstanceKeys.createOrUpdate::parameters.resource,
   "The requested managed instance key resource state."
 );

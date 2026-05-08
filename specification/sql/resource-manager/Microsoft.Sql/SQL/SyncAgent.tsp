@@ -82,6 +82,7 @@ interface SyncAgents {
 
 @@doc(SyncAgent.name, "The name of the sync agent.");
 @@doc(SyncAgent.properties, "Resource properties.");
-@@doc(SyncAgents.createOrUpdate::parameters.resource,
+@@doc(
+  SyncAgents.createOrUpdate::parameters.resource,
   "The requested sync agent resource state."
 );

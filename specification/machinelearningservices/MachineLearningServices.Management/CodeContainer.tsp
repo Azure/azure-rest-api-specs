@@ -173,12 +173,15 @@ interface CodeContainerOperationGroup {
 }
 
 @@doc(CodeContainer.name, "Container name.");
-@@doc(CodeContainer.properties,
+@@doc(
+  CodeContainer.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(CodeContainers.createOrUpdate::parameters.resource,
+@@doc(
+  CodeContainers.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );
-@@doc(CodeContainerOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  CodeContainerOperationGroup.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );

@@ -112,18 +112,23 @@ interface ConfidentialLedgerRestoreOps {
 }
 
 @@doc(ConfidentialLedger.name, "Name of the Confidential Ledger");
-@@doc(ConfidentialLedger.properties,
+@@doc(
+  ConfidentialLedger.properties,
   "Properties of Confidential Ledger Resource."
 );
-@@doc(ConfidentialLedgers.create::parameters.resource,
+@@doc(
+  ConfidentialLedgers.create::parameters.resource,
   "Confidential Ledger Create Request Body"
 );
-@@doc(ConfidentialLedgers.update::parameters.properties,
+@@doc(
+  ConfidentialLedgers.update::parameters.properties,
   "Confidential Ledger request body for Updating Ledger"
 );
-@@doc(ConfidentialLedgers.filesExport::parameters.body,
+@@doc(
+  ConfidentialLedgers.filesExport::parameters.body,
   "Confidential Ledger Files Export Request Body"
 );
-@@doc(ConfidentialLedgerRestoreOps.restore::parameters.body,
+@@doc(
+  ConfidentialLedgerRestoreOps.restore::parameters.body,
   "Confidential Ledger Restore Request Body"
 );

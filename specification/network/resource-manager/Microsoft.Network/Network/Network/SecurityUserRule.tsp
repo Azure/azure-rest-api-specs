@@ -99,9 +99,11 @@ interface SecurityUserRules {
 }
 
 @@doc(SecurityUserRule.name, "The name of the rule.");
-@@doc(SecurityUserRule.properties,
+@@doc(
+  SecurityUserRule.properties,
   "Indicates the properties of the security user rule"
 );
-@@doc(SecurityUserRules.createOrUpdate::parameters.resource,
+@@doc(
+  SecurityUserRules.createOrUpdate::parameters.resource,
   "The security user rule to create or update"
 );

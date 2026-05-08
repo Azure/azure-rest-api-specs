@@ -94,10 +94,12 @@ interface PrivateEndpointConnections {
   >;
 }
 
-@@doc(PrivateEndpointConnection.name,
+@@doc(
+  PrivateEndpointConnection.name,
   "Name of the private endpoint connection associated with the key vault."
 );
 @@doc(PrivateEndpointConnection.properties, "Resource properties.");
-@@doc(PrivateEndpointConnections.put::parameters.resource,
+@@doc(
+  PrivateEndpointConnections.put::parameters.resource,
   "The intended state of private endpoint connection."
 );

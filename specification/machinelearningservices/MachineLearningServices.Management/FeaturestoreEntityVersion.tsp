@@ -139,12 +139,15 @@ interface FeaturestoreEntityVersions {
   >;
 }
 
-@@doc(FeaturestoreEntityVersion.name,
+@@doc(
+  FeaturestoreEntityVersion.name,
   "Version identifier. This is case-sensitive."
 );
-@@doc(FeaturestoreEntityVersion.properties,
+@@doc(
+  FeaturestoreEntityVersion.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(FeaturestoreEntityVersions.createOrUpdate::parameters.resource,
+@@doc(
+  FeaturestoreEntityVersions.createOrUpdate::parameters.resource,
   "Version entity to create or update."
 );

@@ -275,9 +275,11 @@ interface SnapshotPolicies {
 
 @@doc(SnapshotPolicy.name, "The name of the snapshot policy");
 @@doc(SnapshotPolicy.properties, "Snapshot policy Properties");
-@@doc(SnapshotPolicies.create::parameters.resource,
+@@doc(
+  SnapshotPolicies.create::parameters.resource,
   "Snapshot policy object supplied in the body of the operation."
 );
-@@doc(SnapshotPolicies.update::parameters.properties,
+@@doc(
+  SnapshotPolicies.update::parameters.properties,
   "Snapshot policy object supplied in the body of the operation."
 );

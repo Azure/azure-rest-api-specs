@@ -157,13 +157,16 @@ interface StorageTasks {
 
 @@maxLength(StorageTask.name, 18);
 @@minLength(StorageTask.name, 3);
-@@doc(StorageTask.name,
+@@doc(
+  StorageTask.name,
   "The name of the storage task within the specified resource group. Storage task names must be between 3 and 18 characters in length and use numbers and lower-case letters only."
 );
 @@doc(StorageTask.properties, "Properties of the storage task.");
-@@doc(StorageTasks.create::parameters.resource,
+@@doc(
+  StorageTasks.create::parameters.resource,
   "The parameters to create a Storage Task."
 );
-@@doc(StorageTasks.update::parameters.properties,
+@@doc(
+  StorageTasks.update::parameters.properties,
   "The parameters to provide to update the storage task resource."
 );

@@ -109,9 +109,11 @@ interface KnowledgeSources {
 @@minLength(KnowledgeSource.name, 1);
 @@doc(KnowledgeSource.name, "The name of the knowledge source.");
 @@doc(KnowledgeSource.properties, "Properties of the knowledge source.");
-@@doc(KnowledgeSources.createOrUpdate::parameters.resource,
+@@doc(
+  KnowledgeSources.createOrUpdate::parameters.resource,
   "Knowledge source to be created or updated."
 );
-@@doc(KnowledgeSources.update::parameters.properties,
+@@doc(
+  KnowledgeSources.update::parameters.properties,
   "Knowledge source parameters to be updated."
 );

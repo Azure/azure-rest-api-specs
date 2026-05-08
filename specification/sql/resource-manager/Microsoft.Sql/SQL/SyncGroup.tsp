@@ -150,9 +150,11 @@ interface SyncGroups {
 
 @@doc(SyncGroup.name, "The name of the sync group.");
 @@doc(SyncGroup.properties, "Resource properties.");
-@@doc(SyncGroups.createOrUpdate::parameters.resource,
+@@doc(
+  SyncGroups.createOrUpdate::parameters.resource,
   "The requested sync group resource state."
 );
-@@doc(SyncGroups.update::parameters.properties,
+@@doc(
+  SyncGroups.update::parameters.properties,
   "The requested sync group resource state."
 );

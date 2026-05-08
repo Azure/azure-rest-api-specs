@@ -75,6 +75,7 @@ interface ImportPipelines {
 @@minLength(ImportPipeline.name, 5);
 @@doc(ImportPipeline.name, "The name of the import pipeline.");
 @@doc(ImportPipeline.properties, "The properties of the import pipeline.");
-@@doc(ImportPipelines.create::parameters.resource,
+@@doc(
+  ImportPipelines.create::parameters.resource,
   "The parameters for creating an import pipeline."
 );

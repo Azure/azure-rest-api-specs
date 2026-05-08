@@ -134,12 +134,15 @@ alias BillingSubscriptionAliasesListByBillingAccountParameters = {
   search?: string;
 };
 
-@@doc(BillingSubscriptionAlias.name,
+@@doc(
+  BillingSubscriptionAlias.name,
   "The ID that uniquely identifies a subscription alias."
 );
-@@doc(BillingSubscriptionAlias.properties,
+@@doc(
+  BillingSubscriptionAlias.properties,
   "The properties of a(n) BillingSubscriptionAlias"
 );
-@@doc(BillingSubscriptionAliases.createOrUpdate::parameters.resource,
+@@doc(
+  BillingSubscriptionAliases.createOrUpdate::parameters.resource,
   "A billing subscription alias."
 );

@@ -103,6 +103,7 @@ interface PreRulesResources {
 }
 
 @@doc(PreRulesResource.name, "Pre Rule priority");
-@@doc(PreRulesResource.properties,
+@@doc(
+  PreRulesResource.properties,
   "The resource-specific properties for this resource."
 );

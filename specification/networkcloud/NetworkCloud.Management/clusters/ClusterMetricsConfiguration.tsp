@@ -108,15 +108,19 @@ interface ClusterMetricsConfigurations {
   >;
 }
 
-@@doc(ClusterMetricsConfiguration.name,
+@@doc(
+  ClusterMetricsConfiguration.name,
   "The name of the metrics configuration for the cluster."
 );
-@@doc(ClusterMetricsConfiguration.properties,
+@@doc(
+  ClusterMetricsConfiguration.properties,
   "The list of the resource properties."
 );
-@@doc(ClusterMetricsConfigurations.createOrUpdate::parameters.resource,
+@@doc(
+  ClusterMetricsConfigurations.createOrUpdate::parameters.resource,
   "The request body."
 );
-@@doc(ClusterMetricsConfigurations.update::parameters.properties,
+@@doc(
+  ClusterMetricsConfigurations.update::parameters.properties,
   "The request body."
 );

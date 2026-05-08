@@ -96,9 +96,11 @@ interface NetworkProfiles {
 
 @@doc(NetworkProfile.name, "The name of the public IP prefix.");
 @@doc(NetworkProfile.properties, "Network profile properties.");
-@@doc(NetworkProfiles.createOrUpdate::parameters.resource,
+@@doc(
+  NetworkProfiles.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update network profile operation."
 );
-@@doc(NetworkProfiles.updateTags::parameters.properties,
+@@doc(
+  NetworkProfiles.updateTags::parameters.properties,
   "Parameters supplied to update network profile tags."
 );

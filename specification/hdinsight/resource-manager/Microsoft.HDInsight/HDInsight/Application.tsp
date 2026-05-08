@@ -96,6 +96,7 @@ interface Applications {
 
 @@doc(Application.name, "The constant value for the application name.");
 @@doc(Application.properties, "The properties of the application.");
-@@doc(Applications.create::parameters.resource,
+@@doc(
+  Applications.create::parameters.resource,
   "The application create request."
 );

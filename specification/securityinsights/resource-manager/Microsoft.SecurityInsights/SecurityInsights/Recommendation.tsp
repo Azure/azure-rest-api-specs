@@ -82,6 +82,7 @@ interface Recommendations {
 @@format(Recommendation.name, "uuid");
 @@doc(Recommendation.name, "Recommendation Id.");
 @@doc(Recommendation.properties, "Recommendation properties object.");
-@@doc(Recommendations.recommendation::parameters.properties,
+@@doc(
+  Recommendations.recommendation::parameters.properties,
   "Recommendation Fields to Update."
 );

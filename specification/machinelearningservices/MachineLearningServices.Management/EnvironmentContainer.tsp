@@ -190,12 +190,15 @@ interface EnvironmentContainerOperationGroup {
 }
 
 @@doc(EnvironmentContainer.name, "Container name. This is case-sensitive.");
-@@doc(EnvironmentContainer.properties,
+@@doc(
+  EnvironmentContainer.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(EnvironmentContainers.createOrUpdate::parameters.resource,
+@@doc(
+  EnvironmentContainers.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );
-@@doc(EnvironmentContainerOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  EnvironmentContainerOperationGroup.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );

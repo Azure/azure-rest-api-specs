@@ -63,6 +63,7 @@ interface StorageAccounts {
 
 @@doc(StorageAccount.name, "The storage account name.");
 @@doc(StorageAccount.properties, "The Storage Account properties.");
-@@doc(StorageAccounts.createOrUpdate::parameters.resource,
+@@doc(
+  StorageAccounts.createOrUpdate::parameters.resource,
   "The StorageAccount properties."
 );

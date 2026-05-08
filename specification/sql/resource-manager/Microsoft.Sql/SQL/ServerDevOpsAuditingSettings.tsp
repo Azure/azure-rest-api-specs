@@ -58,6 +58,7 @@ interface ServerDevOpsAuditSettings {
 
 @@doc(ServerDevOpsAuditingSettings.name, "");
 @@doc(ServerDevOpsAuditingSettings.properties, "Resource properties.");
-@@doc(ServerDevOpsAuditSettings.createOrUpdate::parameters.resource,
+@@doc(
+  ServerDevOpsAuditSettings.createOrUpdate::parameters.resource,
   "Properties of DevOps audit settings"
 );

@@ -168,12 +168,15 @@ interface ManagementGroups {
 }
 
 @@doc(ManagementGroup.name, "Management Group ID.");
-@@doc(ManagementGroup.properties,
+@@doc(
+  ManagementGroup.properties,
   "The generic properties of a management group."
 );
-@@doc(ManagementGroups.createOrUpdate::parameters.resource,
+@@doc(
+  ManagementGroups.createOrUpdate::parameters.resource,
   "Management group creation parameters."
 );
-@@doc(ManagementGroups.update::parameters.properties,
+@@doc(
+  ManagementGroups.update::parameters.properties,
   "Management group patch parameters."
 );

@@ -69,13 +69,16 @@ interface SqlTriggerGetResultsOperationGroup {
 }
 
 @@doc(SqlTriggerGetResults.name, "Cosmos DB trigger name.");
-@@doc(SqlTriggerGetResults.properties,
+@@doc(
+  SqlTriggerGetResults.properties,
   "The properties of an Azure Cosmos DB trigger"
 );
-@@doc(SqlTriggerGetResultsOperationGroup.createUpdateSqlTrigger::parameters.resource,
+@@doc(
+  SqlTriggerGetResultsOperationGroup.createUpdateSqlTrigger::parameters.resource,
   "The parameters to provide for the current SQL trigger."
 );
-@@visibility(SqlTriggerGetResults.location,
+@@visibility(
+  SqlTriggerGetResults.location,
   Lifecycle.Read,
   Lifecycle.Create,
   Lifecycle.Update

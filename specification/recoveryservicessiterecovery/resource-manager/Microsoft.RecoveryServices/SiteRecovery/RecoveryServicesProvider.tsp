@@ -107,6 +107,7 @@ interface RecoveryServicesProviders {
 
 @@doc(RecoveryServicesProvider.name, "Recovery services provider name.");
 @@doc(RecoveryServicesProvider.properties, "Provider properties.");
-@@doc(RecoveryServicesProviders.create::parameters.resource,
+@@doc(
+  RecoveryServicesProviders.create::parameters.resource,
   "Add provider input."
 );

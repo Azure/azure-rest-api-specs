@@ -84,10 +84,12 @@ interface RulesEngines {
 
 @@maxLength(RulesEngine.name, 90);
 @@minLength(RulesEngine.name, 1);
-@@doc(RulesEngine.name,
+@@doc(
+  RulesEngine.name,
   "Name of the Rules Engine which is unique within the Front Door."
 );
 @@doc(RulesEngine.properties, "Properties of the Rules Engine Configuration.");
-@@doc(RulesEngines.createOrUpdate::parameters.resource,
+@@doc(
+  RulesEngines.createOrUpdate::parameters.resource,
   "Rules Engine Configuration properties needed to create a new Rules Engine Configuration."
 );

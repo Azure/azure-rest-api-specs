@@ -92,9 +92,11 @@ interface Scripts {
 
 @@doc(Script.name, "The name of the Kusto database script.");
 @@doc(Script.properties, "The database script.");
-@@doc(Scripts.createOrUpdate::parameters.resource,
+@@doc(
+  Scripts.createOrUpdate::parameters.resource,
   "The Kusto Script parameters contains the KQL to run."
 );
-@@doc(Scripts.update::parameters.properties,
+@@doc(
+  Scripts.update::parameters.properties,
   "The Kusto Script parameters contains to the KQL to run."
 );

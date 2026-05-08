@@ -307,13 +307,16 @@ interface WorkspaceGlobalSchema {
 
 @@maxLength(GlobalSchemaContract.name, 80);
 @@minLength(GlobalSchemaContract.name, 1);
-@@doc(GlobalSchemaContract.name,
+@@doc(
+  GlobalSchemaContract.name,
   "Schema id identifier. Must be unique in the current API Management service instance."
 );
 @@doc(GlobalSchemaContract.properties, "Properties of the Global Schema.");
-@@doc(GlobalSchemaContracts.createOrUpdate::parameters.resource,
+@@doc(
+  GlobalSchemaContracts.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );
-@@doc(WorkspaceGlobalSchema.createOrUpdate::parameters.resource,
+@@doc(
+  WorkspaceGlobalSchema.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );

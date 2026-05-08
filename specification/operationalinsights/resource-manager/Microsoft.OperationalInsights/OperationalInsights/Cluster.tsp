@@ -79,9 +79,11 @@ interface Clusters {
 
 @@doc(Cluster.name, "Name of the Log Analytics Cluster.");
 @@doc(Cluster.properties, "Log Analytics cluster properties.");
-@@doc(Clusters.createOrUpdate::parameters.resource,
+@@doc(
+  Clusters.createOrUpdate::parameters.resource,
   "The parameters required to create or update a Log Analytics cluster."
 );
-@@doc(Clusters.update::parameters.properties,
+@@doc(
+  Clusters.update::parameters.properties,
   "The parameters required to patch a Log Analytics cluster."
 );

@@ -79,7 +79,8 @@ interface Origins {
 }
 
 @@doc(Origin.name, "Name of the origin which is unique within the endpoint.");
-@@doc(Origin.properties,
+@@doc(
+  Origin.properties,
   "The JSON object that contains the properties of the origin."
 );
 @@doc(Origins.create::parameters.resource, "Origin properties");

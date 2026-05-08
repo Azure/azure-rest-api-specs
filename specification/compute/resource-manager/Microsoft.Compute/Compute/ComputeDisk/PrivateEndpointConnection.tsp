@@ -74,10 +74,12 @@ interface PrivateEndpointConnections {
   >;
 }
 
-@@doc(PrivateEndpointConnection.name,
+@@doc(
+  PrivateEndpointConnection.name,
   "The name of the private endpoint connection."
 );
 @@doc(PrivateEndpointConnection.properties, "Resource properties.");
-@@doc(PrivateEndpointConnections.updateAPrivateEndpointConnection::parameters.resource,
+@@doc(
+  PrivateEndpointConnections.updateAPrivateEndpointConnection::parameters.resource,
   "private endpoint connection object supplied in the body of the Put private endpoint connection operation."
 );

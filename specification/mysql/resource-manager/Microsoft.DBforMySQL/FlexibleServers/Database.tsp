@@ -65,6 +65,7 @@ interface Databases {
 
 @@doc(Database.name, "The name of the database.");
 @@doc(Database.properties, "The properties of a database.");
-@@doc(Databases.createOrUpdate::parameters.resource,
+@@doc(
+  Databases.createOrUpdate::parameters.resource,
   "The required parameters for creating or updating a database."
 );

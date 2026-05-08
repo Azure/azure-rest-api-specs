@@ -153,24 +153,31 @@ interface ReservationOrderResponses {
 }
 
 @@doc(ReservationOrderResponse.name, "Order Id of the reservation");
-@@doc(ReservationOrderResponse.properties,
+@@doc(
+  ReservationOrderResponse.properties,
   "Properties of a reservation order."
 );
-@@doc(ReservationOrderResponses.purchase::parameters.resource,
+@@doc(
+  ReservationOrderResponses.purchase::parameters.resource,
   "Information needed for calculate or purchase reservation"
 );
-@@doc(ReservationOrderResponses.split::parameters.body,
+@@doc(
+  ReservationOrderResponses.split::parameters.body,
   "Information needed to Split a reservation item"
 );
-@@doc(ReservationOrderResponses.merge::parameters.body,
+@@doc(
+  ReservationOrderResponses.merge::parameters.body,
   "Information needed for commercial request for a reservation"
 );
-@@doc(ReservationOrderResponses.changeDirectory::parameters.body,
+@@doc(
+  ReservationOrderResponses.changeDirectory::parameters.body,
   "Information needed to change directory of reservation order"
 );
-@@doc(ReservationOrderResponses.post::parameters.body,
+@@doc(
+  ReservationOrderResponses.post::parameters.body,
   "Information needed for calculating refund of a reservation."
 );
-@@doc(ReservationOrderResponses.returnPost::parameters.body,
+@@doc(
+  ReservationOrderResponses.returnPost::parameters.body,
   "Information needed for returning reservation."
 );

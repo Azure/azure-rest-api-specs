@@ -92,7 +92,8 @@ interface KeyGroups {
 @@maxLength(KeyGroup.name, 260);
 @@minLength(KeyGroup.name, 1);
 @@doc(KeyGroup.name, "Name of the KeyGroup under the profile.");
-@@doc(KeyGroup.properties,
+@@doc(
+  KeyGroup.properties,
   "The JSON object that contains the properties of the key group to create."
 );
 @@doc(KeyGroups.createUpdate::parameters.resource, "The KeyGroup properties.");

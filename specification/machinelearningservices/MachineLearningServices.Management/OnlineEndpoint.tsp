@@ -178,21 +178,27 @@ interface OnlineEndpoints {
 }
 
 @@doc(OnlineEndpoint.name, "Online Endpoint name.");
-@@doc(OnlineEndpoint.properties,
+@@doc(
+  OnlineEndpoint.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(OnlineEndpoints.createOrUpdate::parameters.resource,
+@@doc(
+  OnlineEndpoints.createOrUpdate::parameters.resource,
   "Online Endpoint entity to apply during operation."
 );
-@@doc(OnlineEndpoints.update::parameters.properties,
+@@doc(
+  OnlineEndpoints.update::parameters.properties,
   "Online Endpoint entity to apply during operation."
 );
-@@doc(OnlineEndpoints.regenerateKeys::parameters.body,
+@@doc(
+  OnlineEndpoints.regenerateKeys::parameters.body,
   "RegenerateKeys request ."
 );
-@@doc(OnlineEndpoint.identity,
+@@doc(
+  OnlineEndpoint.identity,
   "Managed service identity (system assigned and/or user assigned identities)"
 );
-@@doc(OnlineEndpoint.sku,
+@@doc(
+  OnlineEndpoint.sku,
   "Sku details required for ARM contract for Autoscaling."
 );

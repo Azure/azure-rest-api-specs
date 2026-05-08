@@ -74,12 +74,15 @@ interface StorageClassificationMappings {
   >;
 }
 
-@@doc(StorageClassificationMapping.name,
+@@doc(
+  StorageClassificationMapping.name,
   "Storage classification mapping name."
 );
-@@doc(StorageClassificationMapping.properties,
+@@doc(
+  StorageClassificationMapping.properties,
   "Properties of the storage mapping object."
 );
-@@doc(StorageClassificationMappings.create::parameters.resource,
+@@doc(
+  StorageClassificationMappings.create::parameters.resource,
   "Pairing input."
 );

@@ -116,12 +116,15 @@ interface AuthorizationAccessPolicyContracts {
 
 @@maxLength(AuthorizationAccessPolicyContract.name, 256);
 @@minLength(AuthorizationAccessPolicyContract.name, 1);
-@@doc(AuthorizationAccessPolicyContract.name,
+@@doc(
+  AuthorizationAccessPolicyContract.name,
   "Identifier of the authorization access policy."
 );
-@@doc(AuthorizationAccessPolicyContract.properties,
+@@doc(
+  AuthorizationAccessPolicyContract.properties,
   "Properties of the Authorization Contract."
 );
-@@doc(AuthorizationAccessPolicyContracts.createOrUpdate::parameters.resource,
+@@doc(
+  AuthorizationAccessPolicyContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );

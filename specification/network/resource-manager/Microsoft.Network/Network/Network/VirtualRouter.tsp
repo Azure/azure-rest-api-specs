@@ -88,6 +88,7 @@ interface VirtualRouters {
 
 @@doc(VirtualRouter.name, "The name of the Virtual Router.");
 @@doc(VirtualRouter.properties, "Properties of the Virtual Router.");
-@@doc(VirtualRouters.createOrUpdate::parameters.resource,
+@@doc(
+  VirtualRouters.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update Virtual Router."
 );

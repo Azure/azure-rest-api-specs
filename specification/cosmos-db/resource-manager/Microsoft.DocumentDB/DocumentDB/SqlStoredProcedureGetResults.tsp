@@ -70,13 +70,16 @@ interface SqlStoredProcedureGetResultsOperationGroup {
 }
 
 @@doc(SqlStoredProcedureGetResults.name, "Cosmos DB storedProcedure name.");
-@@doc(SqlStoredProcedureGetResults.properties,
+@@doc(
+  SqlStoredProcedureGetResults.properties,
   "The properties of an Azure Cosmos DB storedProcedure"
 );
-@@doc(SqlStoredProcedureGetResultsOperationGroup.createUpdateSqlStoredProcedure::parameters.resource,
+@@doc(
+  SqlStoredProcedureGetResultsOperationGroup.createUpdateSqlStoredProcedure::parameters.resource,
   "The parameters to provide for the current SQL storedProcedure."
 );
-@@visibility(SqlStoredProcedureGetResults.location,
+@@visibility(
+  SqlStoredProcedureGetResults.location,
   Lifecycle.Read,
   Lifecycle.Create,
   Lifecycle.Update

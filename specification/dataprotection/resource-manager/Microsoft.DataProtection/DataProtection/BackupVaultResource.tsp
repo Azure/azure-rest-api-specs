@@ -284,12 +284,15 @@ interface DeletedBackupVaults {
 
 @@doc(BackupVaultResource.name, "The name of the backup vault.");
 @@doc(BackupVaultResource.properties, "BackupVaultResource properties");
-@@doc(BackupVaultResources.createOrUpdate::parameters.resource,
+@@doc(
+  BackupVaultResources.createOrUpdate::parameters.resource,
   "Request body for operation"
 );
-@@doc(BackupVaultResources.update::parameters.properties,
+@@doc(
+  BackupVaultResources.update::parameters.properties,
   "Request body for operation"
 );
-@@doc(BackupVaultResources.validateForBackup::parameters.body,
+@@doc(
+  BackupVaultResources.validateForBackup::parameters.body,
   "Request body for operation"
 );

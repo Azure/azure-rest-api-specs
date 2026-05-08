@@ -331,18 +331,23 @@ interface LongTermRetentionBackupOperationGroup {
 @@doc(LongTermRetentionBackup.name, "The backup name.");
 @@doc(LongTermRetentionBackup.properties, "Resource properties.");
 @@doc(LongTermRetentionBackups.changeAccessTier::parameters.body, "");
-@@doc(LongTermRetentionBackups.copy::parameters.body,
+@@doc(
+  LongTermRetentionBackups.copy::parameters.body,
   "The parameters needed for long term retention copy request"
 );
-@@doc(LongTermRetentionBackups.update::parameters.body,
+@@doc(
+  LongTermRetentionBackups.update::parameters.body,
   "The requested backup resource state"
 );
-@@doc(LongTermRetentionBackupOperationGroup.changeAccessTierByResourceGroup::parameters.body,
+@@doc(
+  LongTermRetentionBackupOperationGroup.changeAccessTierByResourceGroup::parameters.body,
   ""
 );
-@@doc(LongTermRetentionBackupOperationGroup.copyByResourceGroup::parameters.body,
+@@doc(
+  LongTermRetentionBackupOperationGroup.copyByResourceGroup::parameters.body,
   "The parameters needed for long term retention copy request"
 );
-@@doc(LongTermRetentionBackupOperationGroup.updateByResourceGroup::parameters.body,
+@@doc(
+  LongTermRetentionBackupOperationGroup.updateByResourceGroup::parameters.body,
   "The requested backup resource state"
 );

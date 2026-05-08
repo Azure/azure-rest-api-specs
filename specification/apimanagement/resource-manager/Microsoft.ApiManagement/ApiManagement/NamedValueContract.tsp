@@ -434,11 +434,13 @@ interface WorkspaceNamedValue {
 @@maxLength(NamedValueContract.name, 256);
 @@doc(NamedValueContract.name, "Identifier of the NamedValue.");
 @@doc(NamedValueContract.properties, "NamedValue entity contract properties.");
-@@doc(NamedValueContracts.createOrUpdate::parameters.resource,
+@@doc(
+  NamedValueContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );
 @@doc(NamedValueContracts.update::parameters.properties, "Update parameters.");
-@@doc(WorkspaceNamedValue.createOrUpdate::parameters.resource,
+@@doc(
+  WorkspaceNamedValue.createOrUpdate::parameters.resource,
   "Create parameters."
 );
 @@doc(WorkspaceNamedValue.update::parameters.properties, "Update parameters.");

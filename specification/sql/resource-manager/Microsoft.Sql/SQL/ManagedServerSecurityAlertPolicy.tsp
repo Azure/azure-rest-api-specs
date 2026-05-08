@@ -50,10 +50,12 @@ interface ManagedServerSecurityAlertPolicies {
   listByInstance is ArmResourceListByParent<ManagedServerSecurityAlertPolicy>;
 }
 
-@@doc(ManagedServerSecurityAlertPolicy.name,
+@@doc(
+  ManagedServerSecurityAlertPolicy.name,
   "The name of the security alert policy."
 );
 @@doc(ManagedServerSecurityAlertPolicy.properties, "Resource properties.");
-@@doc(ManagedServerSecurityAlertPolicies.createOrUpdate::parameters.resource,
+@@doc(
+  ManagedServerSecurityAlertPolicies.createOrUpdate::parameters.resource,
   "The managed server security alert policy."
 );

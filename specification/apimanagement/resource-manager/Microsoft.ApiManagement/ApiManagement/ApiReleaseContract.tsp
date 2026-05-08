@@ -365,19 +365,24 @@ interface WorkspaceApiRelease {
 
 @@maxLength(ApiReleaseContract.name, 80);
 @@minLength(ApiReleaseContract.name, 1);
-@@doc(ApiReleaseContract.name,
+@@doc(
+  ApiReleaseContract.name,
   "Release identifier within an API. Must be unique in the current API Management service instance."
 );
 @@doc(ApiReleaseContract.properties, "ApiRelease entity contract properties.");
-@@doc(ApiReleaseContracts.createOrUpdate::parameters.resource,
+@@doc(
+  ApiReleaseContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );
-@@doc(ApiReleaseContracts.update::parameters.properties,
+@@doc(
+  ApiReleaseContracts.update::parameters.properties,
   "API Release Update parameters."
 );
-@@doc(WorkspaceApiRelease.createOrUpdate::parameters.resource,
+@@doc(
+  WorkspaceApiRelease.createOrUpdate::parameters.resource,
   "Create parameters."
 );
-@@doc(WorkspaceApiRelease.update::parameters.properties,
+@@doc(
+  WorkspaceApiRelease.update::parameters.properties,
   "API Release Update parameters."
 );

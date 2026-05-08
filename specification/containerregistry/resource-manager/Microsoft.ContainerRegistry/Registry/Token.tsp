@@ -72,9 +72,11 @@ interface Tokens {
 @@minLength(Token.name, 5);
 @@doc(Token.name, "The name of the token.");
 @@doc(Token.properties, "The properties of the token.");
-@@doc(Tokens.create::parameters.resource,
+@@doc(
+  Tokens.create::parameters.resource,
   "The parameters for creating a token."
 );
-@@doc(Tokens.update::parameters.properties,
+@@doc(
+  Tokens.update::parameters.properties,
   "The parameters for updating a token."
 );

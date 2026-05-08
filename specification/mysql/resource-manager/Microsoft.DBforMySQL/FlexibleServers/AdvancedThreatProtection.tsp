@@ -72,13 +72,16 @@ interface AdvancedThreatProtectionSettings {
   >;
 }
 
-@@doc(AdvancedThreatProtection.name,
+@@doc(
+  AdvancedThreatProtection.name,
   "The name of the Advanced Threat Protection state."
 );
 @@doc(AdvancedThreatProtection.properties, "Resource properties.");
-@@doc(AdvancedThreatProtectionSettings.updatePut::parameters.resource,
+@@doc(
+  AdvancedThreatProtectionSettings.updatePut::parameters.resource,
   "The server's Advanced Threat Protection body to update."
 );
-@@doc(AdvancedThreatProtectionSettings.update::parameters.properties,
+@@doc(
+  AdvancedThreatProtectionSettings.update::parameters.properties,
   "The server's Advanced Threat Protection body to update."
 );

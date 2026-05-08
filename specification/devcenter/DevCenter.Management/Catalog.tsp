@@ -210,12 +210,15 @@ interface CatalogOperationGroup {
 @@doc(Catalog.name, "The name of the Catalog.");
 @@doc(Catalog.properties, "Catalog properties.");
 @@doc(Catalogs.createOrUpdate::parameters.resource, "Represents a catalog.");
-@@doc(Catalogs.patch::parameters.properties,
+@@doc(
+  Catalogs.patch::parameters.properties,
   "Updatable project catalog properties."
 );
-@@doc(CatalogOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  CatalogOperationGroup.createOrUpdate::parameters.resource,
   "Represents a catalog."
 );
-@@doc(CatalogOperationGroup.update::parameters.properties,
+@@doc(
+  CatalogOperationGroup.update::parameters.properties,
   "Updatable catalog properties."
 );

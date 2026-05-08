@@ -130,9 +130,11 @@ interface Discounts {
 
 @@doc(Discount.name, "Name of the discount");
 @@doc(Discount.properties, "Discount properties");
-@@doc(Discounts.create::parameters.resource,
+@@doc(
+  Discounts.create::parameters.resource,
   "Request body for creating a discount."
 );
-@@doc(Discounts.update::parameters.properties,
+@@doc(
+  Discounts.update::parameters.properties,
   "Request body for updating discounts"
 );

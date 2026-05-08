@@ -193,6 +193,7 @@ interface SiteExtensionInfoOperationGroup {
 }
 
 @@doc(SiteExtensionInfo.name, "Site extension name.");
-@@doc(SiteExtensionInfo.properties,
+@@doc(
+  SiteExtensionInfo.properties,
   "SiteExtensionInfo resource specific properties"
 );

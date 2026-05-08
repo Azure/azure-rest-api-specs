@@ -90,15 +90,19 @@ interface GalleryApplicationVersions {
   >;
 }
 
-@@doc(GalleryApplicationVersion.name,
+@@doc(
+  GalleryApplicationVersion.name,
   "The name of the gallery Application Version to be retrieved."
 );
-@@doc(GalleryApplicationVersion.properties,
+@@doc(
+  GalleryApplicationVersion.properties,
   "Describes the properties of a gallery image version."
 );
-@@doc(GalleryApplicationVersions.createOrUpdate::parameters.resource,
+@@doc(
+  GalleryApplicationVersions.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update gallery Application Version operation."
 );
-@@doc(GalleryApplicationVersions.update::parameters.properties,
+@@doc(
+  GalleryApplicationVersions.update::parameters.properties,
   "Parameters supplied to the update gallery Application Version operation."
 );

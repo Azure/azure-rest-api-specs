@@ -174,6 +174,7 @@ interface CommunicationsNoSubscription {
 @@doc(CommunicationDetails.name, "Communication name.");
 @@doc(CommunicationDetails.properties, "Properties of the resource.");
 @@doc(Communications.create::parameters.resource, "Communication object.");
-@@doc(CommunicationsNoSubscription.create::parameters.resource,
+@@doc(
+  CommunicationsNoSubscription.create::parameters.resource,
   "Communication object."
 );

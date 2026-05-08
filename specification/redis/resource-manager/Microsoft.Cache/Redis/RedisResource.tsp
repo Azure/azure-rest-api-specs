@@ -201,21 +201,27 @@ interface RedisResources {
 
 @@doc(RedisResource.name, "The name of the Redis cache.");
 @@doc(RedisResource.properties, "Redis cache properties.");
-@@doc(RedisResources.create::parameters.resource,
+@@doc(
+  RedisResources.create::parameters.resource,
   "Parameters supplied to the Create Redis operation."
 );
-@@doc(RedisResources.update::parameters.properties,
+@@doc(
+  RedisResources.update::parameters.properties,
   "Parameters supplied to the Update Redis operation."
 );
-@@doc(RedisResources.regenerateKey::parameters.body,
+@@doc(
+  RedisResources.regenerateKey::parameters.body,
   "Specifies which key to regenerate."
 );
-@@doc(RedisResources.forceReboot::parameters.body,
+@@doc(
+  RedisResources.forceReboot::parameters.body,
   "Specifies which Redis node(s) to reboot."
 );
-@@doc(RedisResources.importData::parameters.body,
+@@doc(
+  RedisResources.importData::parameters.body,
   "Parameters for Redis import operation."
 );
-@@doc(RedisResources.exportData::parameters.body,
+@@doc(
+  RedisResources.exportData::parameters.body,
   "Parameters for Redis export operation."
 );

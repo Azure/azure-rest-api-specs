@@ -298,15 +298,19 @@ interface ManagedInstances {
 
 @@doc(ManagedInstance.name, "The name of the managed instance.");
 @@doc(ManagedInstance.properties, "Resource properties.");
-@@doc(ManagedInstances.createOrUpdate::parameters.resource,
+@@doc(
+  ManagedInstances.createOrUpdate::parameters.resource,
   "The requested managed instance resource state."
 );
-@@doc(ManagedInstances.update::parameters.properties,
+@@doc(
+  ManagedInstances.update::parameters.properties,
   "The requested managed instance resource state."
 );
-@@doc(ManagedInstances.validateAzureKeyVaultEncryptionKey::parameters.body,
+@@doc(
+  ManagedInstances.validateAzureKeyVaultEncryptionKey::parameters.body,
   "The validate azure key vault encryption key parameters."
 );
-@@doc(ManagedInstances.create::parameters.body,
+@@doc(
+  ManagedInstances.create::parameters.body,
   "The requested TDE certificate to be created or updated."
 );

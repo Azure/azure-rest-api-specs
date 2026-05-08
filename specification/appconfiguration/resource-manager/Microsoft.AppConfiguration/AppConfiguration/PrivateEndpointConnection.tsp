@@ -57,9 +57,11 @@ interface PrivateEndpointConnections {
 }
 
 @@doc(PrivateEndpointConnection.name, "Private endpoint connection name");
-@@doc(PrivateEndpointConnection.properties,
+@@doc(
+  PrivateEndpointConnection.properties,
   "The properties of a private endpoint."
 );
-@@doc(PrivateEndpointConnections.createOrUpdate::parameters.resource,
+@@doc(
+  PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "The private endpoint connection properties."
 );

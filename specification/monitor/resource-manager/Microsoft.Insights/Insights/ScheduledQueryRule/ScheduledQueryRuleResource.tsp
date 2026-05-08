@@ -113,12 +113,15 @@ interface ScheduledQueryRuleResources {
 }
 
 @@doc(ScheduledQueryRuleResource.name, "The name of the rule.");
-@@doc(ScheduledQueryRuleResource.properties,
+@@doc(
+  ScheduledQueryRuleResource.properties,
   "The rule properties of the resource."
 );
-@@doc(ScheduledQueryRuleResources.createOrUpdate::parameters.resource,
+@@doc(
+  ScheduledQueryRuleResources.createOrUpdate::parameters.resource,
   "The parameters of the rule to create or update."
 );
-@@doc(ScheduledQueryRuleResources.update::parameters.properties,
+@@doc(
+  ScheduledQueryRuleResources.update::parameters.properties,
   "The parameters of the rule to update."
 );

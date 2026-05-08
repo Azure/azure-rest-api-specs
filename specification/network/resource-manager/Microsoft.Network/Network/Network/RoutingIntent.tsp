@@ -79,10 +79,12 @@ interface RoutingIntents {
   >;
 }
 
-@@doc(RoutingIntent.name,
+@@doc(
+  RoutingIntent.name,
   "The name of the resource that is unique within a resource group. This name can be used to access the resource."
 );
 @@doc(RoutingIntent.properties, "Properties of the RoutingIntent resource.");
-@@doc(RoutingIntents.createOrUpdate::parameters.resource,
+@@doc(
+  RoutingIntents.createOrUpdate::parameters.resource,
   "Parameters supplied to create or update RoutingIntent."
 );

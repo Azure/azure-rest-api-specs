@@ -72,9 +72,11 @@ interface ScopeMaps {
 @@minLength(ScopeMap.name, 5);
 @@doc(ScopeMap.name, "The name of the scope map.");
 @@doc(ScopeMap.properties, "The properties of the scope map.");
-@@doc(ScopeMaps.create::parameters.resource,
+@@doc(
+  ScopeMaps.create::parameters.resource,
   "The parameters for creating a scope map."
 );
-@@doc(ScopeMaps.update::parameters.properties,
+@@doc(
+  ScopeMaps.update::parameters.properties,
   "The parameters for updating a scope map."
 );

@@ -159,27 +159,35 @@ interface Databases {
 
 @@doc(Database.name, "The name of the Redis Enterprise database.");
 @@doc(Database.properties, "Other properties of the database.");
-@@doc(Databases.create::parameters.resource,
+@@doc(
+  Databases.create::parameters.resource,
   "Parameters supplied to the create or update database operation."
 );
-@@doc(Databases.update::parameters.properties,
+@@doc(
+  Databases.update::parameters.properties,
   "Parameters supplied to the create or update database operation."
 );
-@@doc(Databases.regenerateKey::parameters.body,
+@@doc(
+  Databases.regenerateKey::parameters.body,
   "Specifies which key to regenerate."
 );
-@@doc(Databases.`import`::parameters.body,
+@@doc(
+  Databases.`import`::parameters.body,
   "Storage information for importing into the cluster"
 );
-@@doc(Databases.export::parameters.body,
+@@doc(
+  Databases.export::parameters.body,
   "Storage information for exporting into the cluster"
 );
-@@doc(Databases.forceUnlink::parameters.body,
+@@doc(
+  Databases.forceUnlink::parameters.body,
   "Information identifying the database to be unlinked."
 );
-@@doc(Databases.forceLinkToReplicationGroup::parameters.body,
+@@doc(
+  Databases.forceLinkToReplicationGroup::parameters.body,
   "Information identifying the database to be unlinked."
 );
-@@doc(Databases.flush::parameters.body,
+@@doc(
+  Databases.flush::parameters.body,
   "Information identifying the databases to be flushed"
 );

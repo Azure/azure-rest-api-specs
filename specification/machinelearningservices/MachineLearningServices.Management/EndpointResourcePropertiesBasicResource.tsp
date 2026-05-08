@@ -134,13 +134,16 @@ interface EndpointResourcePropertiesBasicResources {
   >;
 }
 
-@@doc(EndpointResourcePropertiesBasicResource.name,
+@@doc(
+  EndpointResourcePropertiesBasicResource.name,
   "Name of the endpoint resource."
 );
 @@doc(EndpointResourcePropertiesBasicResource.properties, "");
-@@doc(EndpointResourcePropertiesBasicResources.createOrUpdate::parameters.resource,
+@@doc(
+  EndpointResourcePropertiesBasicResources.createOrUpdate::parameters.resource,
   "Endpoint resource object"
 );
-@@doc(EndpointResourcePropertiesBasicResources.regenerateKeys::parameters.body,
+@@doc(
+  EndpointResourcePropertiesBasicResources.regenerateKeys::parameters.body,
   ""
 );

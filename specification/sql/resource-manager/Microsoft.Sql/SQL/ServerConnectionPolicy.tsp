@@ -66,6 +66,7 @@ interface ServerConnectionPolicies {
 
 @@doc(ServerConnectionPolicy.name, "The name of the connection policy.");
 @@doc(ServerConnectionPolicy.properties, "Resource properties.");
-@@doc(ServerConnectionPolicies.createOrUpdate::parameters.resource,
+@@doc(
+  ServerConnectionPolicies.createOrUpdate::parameters.resource,
   "The required parameters for updating a server connection policy."
 );

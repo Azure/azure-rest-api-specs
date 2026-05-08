@@ -209,13 +209,16 @@ interface EndpointDeployment {
   >;
 }
 
-@@doc(EndpointDeploymentResourcePropertiesBasicResource.name,
+@@doc(
+  EndpointDeploymentResourcePropertiesBasicResource.name,
   "Name of the deployment resource"
 );
 @@doc(EndpointDeploymentResourcePropertiesBasicResource.properties, "");
-@@doc(EndpointDeploymentResourcePropertiesBasicResources.createOrUpdateDeployment::parameters.resource,
+@@doc(
+  EndpointDeploymentResourcePropertiesBasicResources.createOrUpdateDeployment::parameters.resource,
   "deployment object"
 );
-@@doc(EndpointDeployment.createOrUpdate::parameters.resource,
+@@doc(
+  EndpointDeployment.createOrUpdate::parameters.resource,
   "deployment object"
 );

@@ -103,6 +103,7 @@ interface LongRunningBackup {
 
 @@doc(ServerBackupV2.name, "The name of the backup.");
 @@doc(ServerBackupV2.properties, "The properties of a server backup.");
-@@doc(LongRunningBackup.create::parameters.resource,
+@@doc(
+  LongRunningBackup.create::parameters.resource,
   "The required parameters for creating and exporting backup of the given server."
 );

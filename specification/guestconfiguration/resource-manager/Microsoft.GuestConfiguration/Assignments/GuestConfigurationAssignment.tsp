@@ -617,21 +617,27 @@ interface GuestConfigurationConnectedVMwarevSphereAssignments {
   >;
 }
 
-@@doc(GuestConfigurationAssignment.name,
+@@doc(
+  GuestConfigurationAssignment.name,
   "The guest configuration assignment name."
 );
-@@doc(GuestConfigurationAssignment.properties,
+@@doc(
+  GuestConfigurationAssignment.properties,
   "Properties of the Guest configuration assignment."
 );
-@@doc(GuestConfigurationAssignments.createOrUpdate::parameters.resource,
+@@doc(
+  GuestConfigurationAssignments.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update guest configuration assignment."
 );
-@@doc(GuestConfigurationHCRPAssignments.createOrUpdate::parameters.resource,
+@@doc(
+  GuestConfigurationHCRPAssignments.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update guest configuration assignment."
 );
-@@doc(GuestConfigurationAssignmentsVMSS.createOrUpdate::parameters.resource,
+@@doc(
+  GuestConfigurationAssignmentsVMSS.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update guest configuration assignment."
 );
-@@doc(GuestConfigurationConnectedVMwarevSphereAssignments.createOrUpdate::parameters.resource,
+@@doc(
+  GuestConfigurationConnectedVMwarevSphereAssignments.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update guest configuration assignment."
 );

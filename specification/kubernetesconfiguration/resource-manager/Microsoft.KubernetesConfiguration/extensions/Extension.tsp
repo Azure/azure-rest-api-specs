@@ -202,9 +202,11 @@ interface Extensions {
 
 @@doc(Extension.name, "Name of the Extension.");
 @@doc(Extension.properties, "Properties of an Extension resource");
-@@doc(Extensions.create::parameters.resource,
+@@doc(
+  Extensions.create::parameters.resource,
   "Properties necessary to Create an Extension."
 );
-@@doc(Extensions.update::parameters.properties,
+@@doc(
+  Extensions.update::parameters.properties,
   "Properties to Patch in an existing Extension."
 );

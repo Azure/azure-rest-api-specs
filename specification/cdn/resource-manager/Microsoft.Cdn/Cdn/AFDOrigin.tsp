@@ -82,7 +82,8 @@ interface AFDOrigins {
 }
 
 @@doc(AFDOrigin.name, "Name of the origin which is unique within the profile.");
-@@doc(AFDOrigin.properties,
+@@doc(
+  AFDOrigin.properties,
   "The JSON object that contains the properties of the origin."
 );
 @@doc(AFDOrigins.create::parameters.resource, "Origin properties");

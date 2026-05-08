@@ -13,7 +13,8 @@ model ApiErrorResponse {
 }
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-@@copyProperties(OpenAI.Error,
+@@copyProperties(
+  OpenAI.Error,
   {
     details?: OpenAI.Error[],
     additionalInfo?: Record<unknown>,

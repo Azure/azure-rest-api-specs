@@ -284,17 +284,21 @@ interface CloudEndpoints {
 
 @@doc(CloudEndpoint.name, "Name of Cloud Endpoint object.");
 @@doc(CloudEndpoint.properties, "Cloud Endpoint properties.");
-@@doc(CloudEndpoints.create::parameters.resource,
+@@doc(
+  CloudEndpoints.create::parameters.resource,
   "Body of Cloud Endpoint resource."
 );
 @@doc(CloudEndpoints.preBackup::parameters.body, "Body of Backup request.");
 @@doc(CloudEndpoints.postBackup::parameters.body, "Body of Backup request.");
-@@doc(CloudEndpoints.preRestore::parameters.body,
+@@doc(
+  CloudEndpoints.preRestore::parameters.body,
   "Body of Cloud Endpoint object."
 );
-@@doc(CloudEndpoints.postRestore::parameters.body,
+@@doc(
+  CloudEndpoints.postRestore::parameters.body,
   "Body of Cloud Endpoint object."
 );
-@@doc(CloudEndpoints.triggerChangeDetection::parameters.body,
+@@doc(
+  CloudEndpoints.triggerChangeDetection::parameters.body,
   "Trigger Change Detection Action parameters."
 );

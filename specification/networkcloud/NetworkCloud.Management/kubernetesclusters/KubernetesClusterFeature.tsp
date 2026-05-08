@@ -94,12 +94,15 @@ interface KubernetesClusterFeatures {
 }
 
 @@doc(KubernetesClusterFeature.name, "The name of the feature.");
-@@doc(KubernetesClusterFeature.properties,
+@@doc(
+  KubernetesClusterFeature.properties,
   "The list of the resource properties."
 );
-@@doc(KubernetesClusterFeatures.createOrUpdate::parameters.resource,
+@@doc(
+  KubernetesClusterFeatures.createOrUpdate::parameters.resource,
   "The request body."
 );
-@@doc(KubernetesClusterFeatures.update::parameters.properties,
+@@doc(
+  KubernetesClusterFeatures.update::parameters.properties,
   "The request body."
 );

@@ -318,27 +318,35 @@ interface BackupInstances {
 
 @@doc(BackupInstanceResource.name, "The name of the backup instance.");
 @@doc(BackupInstanceResource.properties, "BackupInstanceResource properties");
-@@doc(BackupInstanceResources.createOrUpdate::parameters.resource,
+@@doc(
+  BackupInstanceResources.createOrUpdate::parameters.resource,
   "Request body for operation"
 );
-@@doc(BackupInstanceResources.adhocBackup::parameters.body,
+@@doc(
+  BackupInstanceResources.adhocBackup::parameters.body,
   "Request body for operation"
 );
-@@doc(BackupInstanceResources.validateForModifyBackup::parameters.body,
+@@doc(
+  BackupInstanceResources.validateForModifyBackup::parameters.body,
   "Request body for operation"
 );
-@@doc(BackupInstanceResources.triggerRehydrate::parameters.body,
+@@doc(
+  BackupInstanceResources.triggerRehydrate::parameters.body,
   "Request body for operation"
 );
-@@doc(BackupInstanceResources.triggerRestore::parameters.body,
+@@doc(
+  BackupInstanceResources.triggerRestore::parameters.body,
   "Request body for operation"
 );
-@@doc(BackupInstanceResources.syncBackupInstance::parameters.body,
+@@doc(
+  BackupInstanceResources.syncBackupInstance::parameters.body,
   "Request body for operation"
 );
-@@doc(BackupInstanceResources.validateForRestore::parameters.body,
+@@doc(
+  BackupInstanceResources.validateForRestore::parameters.body,
   "Request body for operation"
 );
-@@doc(BackupInstanceResources.find::parameters.body,
+@@doc(
+  BackupInstanceResources.find::parameters.body,
   "Request body for operation"
 );

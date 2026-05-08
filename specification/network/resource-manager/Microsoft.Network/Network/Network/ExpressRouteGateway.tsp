@@ -221,15 +221,19 @@ interface ExpressRouteGateways {
 }
 
 @@doc(ExpressRouteGateway.name, "The name of the ExpressRoute gateway.");
-@@doc(ExpressRouteGateway.properties,
+@@doc(
+  ExpressRouteGateway.properties,
   "Properties of the express route gateway."
 );
-@@doc(ExpressRouteGateways.createOrUpdate::parameters.resource,
+@@doc(
+  ExpressRouteGateways.createOrUpdate::parameters.resource,
   "Parameters required in an ExpressRoute gateway PUT operation."
 );
-@@doc(ExpressRouteGateways.updateTags::parameters.properties,
+@@doc(
+  ExpressRouteGateways.updateTags::parameters.properties,
   "Parameters supplied to update a virtual wan express route gateway tags."
 );
-@@doc(ExpressRouteGateways.expressRouteConnectionsCreateOrUpdate::parameters.body,
+@@doc(
+  ExpressRouteGateways.expressRouteConnectionsCreateOrUpdate::parameters.body,
   "Parameters required in an ExpressRouteConnection PUT operation."
 );

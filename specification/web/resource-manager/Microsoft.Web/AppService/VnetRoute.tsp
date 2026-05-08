@@ -119,9 +119,11 @@ interface VnetRoutes {
 
 @@doc(VnetRoute.name, "Name of the Virtual Network route.");
 @@doc(VnetRoute.properties, "VnetRoute resource specific properties");
-@@doc(VnetRoutes.createOrUpdateVnetRoute::parameters.resource,
+@@doc(
+  VnetRoutes.createOrUpdateVnetRoute::parameters.resource,
   "Definition of the Virtual Network route."
 );
-@@doc(VnetRoutes.updateVnetRoute::parameters.properties,
+@@doc(
+  VnetRoutes.updateVnetRoute::parameters.properties,
   "Definition of the Virtual Network route."
 );

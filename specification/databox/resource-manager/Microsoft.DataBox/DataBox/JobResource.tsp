@@ -180,21 +180,26 @@ op mitigate is ArmResourceActionSync<
 
 @@maxLength(JobResource.name, 24);
 @@minLength(JobResource.name, 3);
-@@doc(JobResource.name,
+@@doc(
+  JobResource.name,
   "The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only"
 );
 @@doc(JobResource.properties, "Properties of a job.");
-@@doc(JobResources.create::parameters.resource,
+@@doc(
+  JobResources.create::parameters.resource,
   "Job details from request body."
 );
-@@doc(JobResources.update::parameters.properties,
+@@doc(
+  JobResources.update::parameters.properties,
   "Job update parameters from request body."
 );
-@@doc(JobResources.bookShipmentPickUp::parameters.body,
+@@doc(
+  JobResources.bookShipmentPickUp::parameters.body,
   "Details of shipment pick up request."
 );
 @@doc(JobResources.cancel::parameters.body, "Reason for cancellation.");
-@@doc(JobResources.markDevicesShipped::parameters.body,
+@@doc(
+  JobResources.markDevicesShipped::parameters.body,
   "Mark Devices Shipped Request"
 );
 @@doc(mitigate::parameters.body, "Mitigation Request");

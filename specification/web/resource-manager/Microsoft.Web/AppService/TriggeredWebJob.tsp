@@ -181,6 +181,7 @@ interface TriggeredWebJobOperationGroup {
 }
 
 @@doc(TriggeredWebJob.name, "Name of Web Job.");
-@@doc(TriggeredWebJob.properties,
+@@doc(
+  TriggeredWebJob.properties,
   "TriggeredWebJob resource specific properties"
 );

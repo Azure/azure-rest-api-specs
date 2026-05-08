@@ -118,9 +118,11 @@ interface PublicIPPrefixes {
 
 @@doc(PublicIPPrefix.name, "The name of the public IP prefix.");
 @@doc(PublicIPPrefix.properties, "Public IP prefix properties.");
-@@doc(PublicIPPrefixes.createOrUpdate::parameters.resource,
+@@doc(
+  PublicIPPrefixes.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update public IP prefix operation."
 );
-@@doc(PublicIPPrefixes.updateTags::parameters.properties,
+@@doc(
+  PublicIPPrefixes.updateTags::parameters.properties,
   "Parameters supplied to update public IP prefix tags."
 );

@@ -61,10 +61,12 @@ interface AvailabilityGroupListeners {
   listByGroup is ArmResourceListByParent<AvailabilityGroupListener>;
 }
 
-@@doc(AvailabilityGroupListener.name,
+@@doc(
+  AvailabilityGroupListener.name,
   "Name of the availability group listener."
 );
 @@doc(AvailabilityGroupListener.properties, "Resource properties.");
-@@doc(AvailabilityGroupListeners.createOrUpdate::parameters.resource,
+@@doc(
+  AvailabilityGroupListeners.createOrUpdate::parameters.resource,
   "The availability group listener."
 );

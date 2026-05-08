@@ -68,13 +68,16 @@ interface GremlinDatabaseGetResultsOperationGroup {
 }
 
 @@doc(GremlinDatabaseGetResults.name, "Cosmos DB database name.");
-@@doc(GremlinDatabaseGetResults.properties,
+@@doc(
+  GremlinDatabaseGetResults.properties,
   "The properties of an Azure Cosmos DB SQL database"
 );
-@@doc(GremlinDatabaseGetResultsOperationGroup.createUpdateGremlinDatabase::parameters.resource,
+@@doc(
+  GremlinDatabaseGetResultsOperationGroup.createUpdateGremlinDatabase::parameters.resource,
   "The parameters to provide for the current Gremlin database."
 );
-@@visibility(GremlinDatabaseGetResults.location,
+@@visibility(
+  GremlinDatabaseGetResults.location,
   Lifecycle.Read,
   Lifecycle.Create,
   Lifecycle.Update

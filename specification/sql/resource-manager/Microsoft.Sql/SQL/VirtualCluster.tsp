@@ -84,9 +84,11 @@ interface VirtualClusters {
 
 @@doc(VirtualCluster.name, "The name of the virtual cluster.");
 @@doc(VirtualCluster.properties, "Resource properties.");
-@@doc(VirtualClusters.createOrUpdate::parameters.resource,
+@@doc(
+  VirtualClusters.createOrUpdate::parameters.resource,
   "The requested virtual cluster resource state."
 );
-@@doc(VirtualClusters.update::parameters.properties,
+@@doc(
+  VirtualClusters.update::parameters.properties,
   "The requested virtual cluster resource state."
 );

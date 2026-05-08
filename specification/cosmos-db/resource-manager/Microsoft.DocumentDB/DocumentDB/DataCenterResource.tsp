@@ -78,15 +78,19 @@ interface DataCenterResources {
 
 @@maxLength(DataCenterResource.name, 100);
 @@minLength(DataCenterResource.name, 1);
-@@doc(DataCenterResource.name,
+@@doc(
+  DataCenterResource.name,
   "Data center name in a managed Cassandra cluster."
 );
-@@doc(DataCenterResource.properties,
+@@doc(
+  DataCenterResource.properties,
   "Properties of a managed Cassandra data center."
 );
-@@doc(DataCenterResources.createUpdate::parameters.resource,
+@@doc(
+  DataCenterResources.createUpdate::parameters.resource,
   "Parameters specifying the managed Cassandra data center."
 );
-@@doc(DataCenterResources.update::parameters.properties,
+@@doc(
+  DataCenterResources.update::parameters.properties,
   "Parameters to provide for specifying the managed Cassandra data center."
 );

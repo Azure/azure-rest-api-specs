@@ -156,9 +156,11 @@ interface Namespaces {
 @@doc(Namespace.name, "Name of the namespace.");
 @@doc(Namespace.properties, "Properties of the Namespace resource.");
 @@doc(Namespaces.createOrUpdate::parameters.resource, "Namespace information.");
-@@doc(Namespaces.update::parameters.properties,
+@@doc(
+  Namespaces.update::parameters.properties,
   "Namespace update information."
 );
-@@doc(Namespaces.regenerateKey::parameters.body,
+@@doc(
+  Namespaces.regenerateKey::parameters.body,
   "Request body to regenerate key."
 );

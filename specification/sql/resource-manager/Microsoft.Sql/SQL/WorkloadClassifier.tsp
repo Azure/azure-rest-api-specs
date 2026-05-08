@@ -62,6 +62,7 @@ interface WorkloadClassifiers {
 
 @@doc(WorkloadClassifier.name, "The name of the workload classifier.");
 @@doc(WorkloadClassifier.properties, "Resource properties.");
-@@doc(WorkloadClassifiers.createOrUpdate::parameters.resource,
+@@doc(
+  WorkloadClassifiers.createOrUpdate::parameters.resource,
   "The properties of the workload classifier."
 );

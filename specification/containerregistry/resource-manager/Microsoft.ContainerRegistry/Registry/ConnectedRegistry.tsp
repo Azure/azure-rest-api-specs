@@ -103,12 +103,15 @@ interface ConnectedRegistries {
 @@maxLength(ConnectedRegistry.name, 50);
 @@minLength(ConnectedRegistry.name, 5);
 @@doc(ConnectedRegistry.name, "The name of the connected registry.");
-@@doc(ConnectedRegistry.properties,
+@@doc(
+  ConnectedRegistry.properties,
   "The properties of the connected registry."
 );
-@@doc(ConnectedRegistries.create::parameters.resource,
+@@doc(
+  ConnectedRegistries.create::parameters.resource,
   "The parameters for creating a connectedRegistry."
 );
-@@doc(ConnectedRegistries.update::parameters.properties,
+@@doc(
+  ConnectedRegistries.update::parameters.properties,
   "The parameters for updating a connectedRegistry."
 );

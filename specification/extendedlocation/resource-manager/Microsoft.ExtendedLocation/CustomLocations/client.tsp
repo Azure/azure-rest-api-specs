@@ -5,7 +5,8 @@ using Azure.ClientGenerator.Core;
 using Microsoft.ExtendedLocation;
 using Azure.ResourceManager;
 
-@@clientName(Microsoft.ExtendedLocation,
+@@clientName(
+  Microsoft.ExtendedLocation,
   "CustomLocationsManagementClient",
   "javascript"
 );

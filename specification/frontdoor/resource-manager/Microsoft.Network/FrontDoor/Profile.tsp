@@ -131,11 +131,13 @@ interface Profiles {
   >;
 }
 
-@@doc(Profile.name,
+@@doc(
+  Profile.name,
   "The Profile identifier associated with the Tenant and Partner"
 );
 @@doc(Profile.properties, "The properties of a Profile");
-@@doc(Profiles.createOrUpdate::parameters.resource,
+@@doc(
+  Profiles.createOrUpdate::parameters.resource,
   "An Network Experiment Profile"
 );
 @@doc(Profiles.update::parameters.properties, "The Profile Update Model");

@@ -926,64 +926,84 @@ interface GremlinResourcesThroughputSettingsGetResultsOperationGroup {
 }
 
 @@doc(ThroughputSettingsGetResults.name, "");
-@@doc(ThroughputSettingsGetResults.properties,
+@@doc(
+  ThroughputSettingsGetResults.properties,
   "The properties of an Azure Cosmos DB resource throughput"
 );
-@@doc(ThroughputSettingsGetResultsOperationGroup.updateSqlDatabaseThroughput::parameters.resource,
+@@doc(
+  ThroughputSettingsGetResultsOperationGroup.updateSqlDatabaseThroughput::parameters.resource,
   "The parameters to provide for the RUs per second of the current SQL database."
 );
-@@doc(ThroughputSettingsGetResultsOperationGroup.sqlDatabaseRetrieveThroughputDistribution::parameters.body,
+@@doc(
+  ThroughputSettingsGetResultsOperationGroup.sqlDatabaseRetrieveThroughputDistribution::parameters.body,
   "The parameters to provide for retrieving throughput distribution for the current SQL database."
 );
-@@doc(ThroughputSettingsGetResultsOperationGroup.sqlDatabaseRedistributeThroughput::parameters.body,
+@@doc(
+  ThroughputSettingsGetResultsOperationGroup.sqlDatabaseRedistributeThroughput::parameters.body,
   "The parameters to provide for redistributing throughput for the current SQL database."
 );
-@@doc(SqlResourcesThroughputSettingsGetResultsOperationGroup.updateSqlContainerThroughput::parameters.resource,
+@@doc(
+  SqlResourcesThroughputSettingsGetResultsOperationGroup.updateSqlContainerThroughput::parameters.resource,
   "The parameters to provide for the RUs per second of the current SQL container."
 );
-@@doc(SqlResourcesThroughputSettingsGetResultsOperationGroup.sqlContainerRetrieveThroughputDistribution::parameters.body,
+@@doc(
+  SqlResourcesThroughputSettingsGetResultsOperationGroup.sqlContainerRetrieveThroughputDistribution::parameters.body,
   "The parameters to provide for retrieving throughput distribution for the current SQL container."
 );
-@@doc(SqlResourcesThroughputSettingsGetResultsOperationGroup.sqlContainerRedistributeThroughput::parameters.body,
+@@doc(
+  SqlResourcesThroughputSettingsGetResultsOperationGroup.sqlContainerRedistributeThroughput::parameters.body,
   "The parameters to provide for redistributing throughput for the current SQL container."
 );
-@@doc(MongoDBResources.updateMongoDBDatabaseThroughput::parameters.resource,
+@@doc(
+  MongoDBResources.updateMongoDBDatabaseThroughput::parameters.resource,
   "The RUs per second of the parameters to provide for the current MongoDB database."
 );
-@@doc(MongoDBResources.mongoDBDatabaseRetrieveThroughputDistribution::parameters.body,
+@@doc(
+  MongoDBResources.mongoDBDatabaseRetrieveThroughputDistribution::parameters.body,
   "The parameters to provide for retrieving throughput distribution for the current MongoDB database."
 );
-@@doc(MongoDBResources.mongoDBDatabaseRedistributeThroughput::parameters.body,
+@@doc(
+  MongoDBResources.mongoDBDatabaseRedistributeThroughput::parameters.body,
   "The parameters to provide for redistributing throughput for the current MongoDB database."
 );
-@@doc(MongoDBResourcesThroughputSettingsGetResultsOperationGroup.updateMongoDBCollectionThroughput::parameters.resource,
+@@doc(
+  MongoDBResourcesThroughputSettingsGetResultsOperationGroup.updateMongoDBCollectionThroughput::parameters.resource,
   "The RUs per second of the parameters to provide for the current MongoDB collection."
 );
-@@doc(MongoDBResourcesThroughputSettingsGetResultsOperationGroup.mongoDBContainerRetrieveThroughputDistribution::parameters.body,
+@@doc(
+  MongoDBResourcesThroughputSettingsGetResultsOperationGroup.mongoDBContainerRetrieveThroughputDistribution::parameters.body,
   "The parameters to provide for retrieving throughput distribution for the current MongoDB container."
 );
-@@doc(MongoDBResourcesThroughputSettingsGetResultsOperationGroup.mongoDBContainerRedistributeThroughput::parameters.body,
+@@doc(
+  MongoDBResourcesThroughputSettingsGetResultsOperationGroup.mongoDBContainerRedistributeThroughput::parameters.body,
   "The parameters to provide for redistributing throughput for the current MongoDB container."
 );
-@@doc(TableResources.updateTableThroughput::parameters.resource,
+@@doc(
+  TableResources.updateTableThroughput::parameters.resource,
   "The parameters to provide for the RUs per second of the current Table."
 );
-@@doc(CassandraResources.updateCassandraKeyspaceThroughput::parameters.resource,
+@@doc(
+  CassandraResources.updateCassandraKeyspaceThroughput::parameters.resource,
   "The RUs per second of the parameters to provide for the current Cassandra Keyspace."
 );
-@@doc(CassandraResourcesThroughputSettingsGetResultsOperationGroup.updateCassandraTableThroughput::parameters.resource,
+@@doc(
+  CassandraResourcesThroughputSettingsGetResultsOperationGroup.updateCassandraTableThroughput::parameters.resource,
   "The RUs per second of the parameters to provide for the current Cassandra table."
 );
-@@doc(ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup.updateCassandraViewThroughput::parameters.resource,
+@@doc(
+  ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup.updateCassandraViewThroughput::parameters.resource,
   "The RUs per second of the parameters to provide for the current Cassandra view."
 );
-@@doc(GremlinResources.updateGremlinDatabaseThroughput::parameters.resource,
+@@doc(
+  GremlinResources.updateGremlinDatabaseThroughput::parameters.resource,
   "The RUs per second of the parameters to provide for the current Gremlin database."
 );
-@@doc(GremlinResourcesThroughputSettingsGetResultsOperationGroup.updateGremlinGraphThroughput::parameters.resource,
+@@doc(
+  GremlinResourcesThroughputSettingsGetResultsOperationGroup.updateGremlinGraphThroughput::parameters.resource,
   "The RUs per second of the parameters to provide for the current Gremlin graph."
 );
-@@visibility(ThroughputSettingsGetResults.location,
+@@visibility(
+  ThroughputSettingsGetResults.location,
   Lifecycle.Read,
   Lifecycle.Create,
   Lifecycle.Update

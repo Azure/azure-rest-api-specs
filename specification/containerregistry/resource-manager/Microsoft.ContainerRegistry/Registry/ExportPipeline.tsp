@@ -75,6 +75,7 @@ interface ExportPipelines {
 @@minLength(ExportPipeline.name, 5);
 @@doc(ExportPipeline.name, "The name of the export pipeline.");
 @@doc(ExportPipeline.properties, "The properties of the export pipeline.");
-@@doc(ExportPipelines.create::parameters.resource,
+@@doc(
+  ExportPipelines.create::parameters.resource,
   "The parameters for creating an export pipeline."
 );

@@ -73,9 +73,11 @@ interface Replications {
 @@minLength(Replication.name, 5);
 @@doc(Replication.name, "The name of the replication.");
 @@doc(Replication.properties, "The properties of the replication.");
-@@doc(Replications.create::parameters.resource,
+@@doc(
+  Replications.create::parameters.resource,
   "The parameters for creating a replication."
 );
-@@doc(Replications.update::parameters.properties,
+@@doc(
+  Replications.update::parameters.properties,
   "The parameters for updating a replication."
 );

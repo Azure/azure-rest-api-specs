@@ -151,6 +151,7 @@ interface SwapResources {
 
 @@doc(SwapResource.name, "");
 @@doc(SwapResource.properties, "Swap resource properties");
-@@doc(SwapResources.create::parameters.resource,
+@@doc(
+  SwapResources.create::parameters.resource,
   "SwapResource object where slot type should be the target slot after vip swap for the specified cloud service."
 );

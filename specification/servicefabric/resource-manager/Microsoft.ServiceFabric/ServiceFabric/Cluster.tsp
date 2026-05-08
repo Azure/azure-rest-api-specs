@@ -110,10 +110,12 @@ interface Clusters {
 @@doc(Cluster.name, "The name of the cluster resource.");
 @@doc(Cluster.properties, "The cluster resource properties");
 @@doc(Clusters.createOrUpdate::parameters.resource, "The cluster resource.");
-@@doc(Clusters.update::parameters.properties,
+@@doc(
+  Clusters.update::parameters.properties,
   "The parameters which contains the property value and property name which used to update the cluster configuration."
 );
-@@doc(Clusters.listUpgradableVersions::parameters.body,
+@@doc(
+  Clusters.listUpgradableVersions::parameters.body,
   "The upgrade path description with target version."
 );
 

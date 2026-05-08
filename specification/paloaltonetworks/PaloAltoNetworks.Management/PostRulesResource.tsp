@@ -103,6 +103,7 @@ interface PostRulesResources {
 }
 
 @@doc(PostRulesResource.name, "Post Rule priority");
-@@doc(PostRulesResource.properties,
+@@doc(
+  PostRulesResource.properties,
   "The resource-specific properties for this resource."
 );

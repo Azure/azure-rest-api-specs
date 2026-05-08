@@ -405,26 +405,33 @@ interface Profiles {
   >;
 }
 
-@@doc(Profile.name,
+@@doc(
+  Profile.name,
   "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group."
 );
-@@doc(Profile.properties,
+@@doc(
+  Profile.properties,
   "The JSON object that contains the properties required to create a profile."
 );
-@@doc(Profiles.create::parameters.resource,
+@@doc(
+  Profiles.create::parameters.resource,
   "Profile properties needed to create a new profile."
 );
-@@doc(Profiles.update::parameters.properties,
+@@doc(
+  Profiles.update::parameters.properties,
   "Profile properties needed to update an existing profile."
 );
-@@doc(Profiles.checkEndpointNameAvailability::parameters.body,
+@@doc(
+  Profiles.checkEndpointNameAvailability::parameters.body,
   "Input to check."
 );
-@@doc(Profiles.checkHostNameAvailability::parameters.body,
+@@doc(
+  Profiles.checkHostNameAvailability::parameters.body,
   "Custom domain to be validated."
 );
 @@doc(Profiles.validateSecret::parameters.body, "The Secret source.");
 @@doc(Profiles.upgrade::parameters.body, "Profile upgrade input parameter.");
-@@doc(Profiles.cdnMigrateToAfd::parameters.body,
+@@doc(
+  Profiles.cdnMigrateToAfd::parameters.body,
   "Properties needed to migrate the profile."
 );

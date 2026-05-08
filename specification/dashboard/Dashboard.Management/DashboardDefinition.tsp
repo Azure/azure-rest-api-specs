@@ -82,6 +82,7 @@ interface DashboardDefinitions {
 }
 
 @@doc(DashboardDefinition.name, "The name of the Dashboard Definition.");
-@@doc(DashboardDefinition.properties,
+@@doc(
+  DashboardDefinition.properties,
   "Properties specific to the dashboard definition resource."
 );

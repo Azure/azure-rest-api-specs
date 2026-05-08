@@ -148,15 +148,19 @@ interface ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies {
 
 @@doc(ManagedBackupShortTermRetentionPolicy.name, "The policy name.");
 @@doc(ManagedBackupShortTermRetentionPolicy.properties, "Resource properties.");
-@@doc(ManagedBackupShortTermRetentionPolicies.createOrUpdate::parameters.resource,
+@@doc(
+  ManagedBackupShortTermRetentionPolicies.createOrUpdate::parameters.resource,
   "The short term retention policy info."
 );
-@@doc(ManagedBackupShortTermRetentionPolicies.update::parameters.properties,
+@@doc(
+  ManagedBackupShortTermRetentionPolicies.update::parameters.properties,
   "The short term retention policy info."
 );
-@@doc(ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies.createOrUpdate::parameters.resource,
+@@doc(
+  ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies.createOrUpdate::parameters.resource,
   "The short term retention policy info."
 );
-@@doc(ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies.update::parameters.properties,
+@@doc(
+  ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies.update::parameters.properties,
   "The short term retention policy info."
 );

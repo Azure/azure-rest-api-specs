@@ -82,12 +82,15 @@ interface LocalNetworkGateways {
 
 @@minLength(LocalNetworkGateway.name, 1);
 @@doc(LocalNetworkGateway.name, "The name of the local network gateway.");
-@@doc(LocalNetworkGateway.properties,
+@@doc(
+  LocalNetworkGateway.properties,
   "Properties of the local network gateway."
 );
-@@doc(LocalNetworkGateways.createOrUpdate::parameters.resource,
+@@doc(
+  LocalNetworkGateways.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update local network gateway operation."
 );
-@@doc(LocalNetworkGateways.updateTags::parameters.properties,
+@@doc(
+  LocalNetworkGateways.updateTags::parameters.properties,
   "Parameters supplied to update local network gateway tags."
 );

@@ -292,13 +292,16 @@ interface DeletedAccounts {
 @@minLength(Account.name, 2);
 @@doc(Account.name, "The name of Cognitive Services account.");
 @@doc(Account.properties, "Properties of Cognitive Services account.");
-@@doc(Accounts.create::parameters.resource,
+@@doc(
+  Accounts.create::parameters.resource,
   "The parameters to provide for the created account."
 );
-@@doc(Accounts.update::parameters.properties,
+@@doc(
+  Accounts.update::parameters.properties,
   "The parameters to provide for the created account."
 );
 @@doc(Accounts.regenerateKey::parameters.body, "regenerate key parameters.");
-@@doc(Accounts.createOrUpdate::parameters.resource,
+@@doc(
+  Accounts.createOrUpdate::parameters.resource,
   "Properties describing the rai external safety provider."
 );

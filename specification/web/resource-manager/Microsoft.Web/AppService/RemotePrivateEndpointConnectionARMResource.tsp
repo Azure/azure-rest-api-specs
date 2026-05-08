@@ -363,21 +363,27 @@ interface PrivateEndpointConnectionSlotOperationGroup {
   >;
 }
 
-@@doc(RemotePrivateEndpointConnectionARMResource.name,
+@@doc(
+  RemotePrivateEndpointConnectionARMResource.name,
   "Name of the private endpoint connection."
 );
-@@doc(RemotePrivateEndpointConnectionARMResource.properties,
+@@doc(
+  RemotePrivateEndpointConnectionARMResource.properties,
   "RemotePrivateEndpointConnectionARMResource resource specific properties"
 );
-@@doc(RemotePrivateEndpointConnectionARMResources.approveOrRejectPrivateEndpointConnection::parameters.resource,
+@@doc(
+  RemotePrivateEndpointConnectionARMResources.approveOrRejectPrivateEndpointConnection::parameters.resource,
   ""
 );
-@@doc(StaticSites.approveOrRejectPrivateEndpointConnection::parameters.resource,
+@@doc(
+  StaticSites.approveOrRejectPrivateEndpointConnection::parameters.resource,
   "Request body."
 );
-@@doc(RemotePrivateEndpointConnectionARMResourceOperationGroup.approveOrRejectPrivateEndpointConnection::parameters.resource,
+@@doc(
+  RemotePrivateEndpointConnectionARMResourceOperationGroup.approveOrRejectPrivateEndpointConnection::parameters.resource,
   ""
 );
-@@doc(PrivateEndpointConnectionSlotOperationGroup.approveOrRejectPrivateEndpointConnectionSlot::parameters.resource,
+@@doc(
+  PrivateEndpointConnectionSlotOperationGroup.approveOrRejectPrivateEndpointConnectionSlot::parameters.resource,
   ""
 );

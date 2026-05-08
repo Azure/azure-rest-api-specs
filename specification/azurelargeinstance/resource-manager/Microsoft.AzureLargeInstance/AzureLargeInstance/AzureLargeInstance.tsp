@@ -117,7 +117,8 @@ op ArmResourceActionNoBody<
   ...TRequest,
 ): ArmAcceptedLroResponse | TResponse | ErrorResponse;
 #suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
-@@encodedName(AzureLargeInstances.update::parameters.properties,
+@@encodedName(
+  AzureLargeInstances.update::parameters.properties,
   "application/json",
   "tagsParameter"
 );

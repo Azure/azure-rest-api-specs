@@ -82,12 +82,15 @@ interface SecurityPolicies {
 }
 
 @@doc(SecurityPolicy.name, "Name of the security policy under the profile.");
-@@doc(SecurityPolicy.properties,
+@@doc(
+  SecurityPolicy.properties,
   "The json object that contains properties required to create a security policy"
 );
-@@doc(SecurityPolicies.create::parameters.resource,
+@@doc(
+  SecurityPolicies.create::parameters.resource,
   "The security policy properties."
 );
-@@doc(SecurityPolicies.patch::parameters.properties,
+@@doc(
+  SecurityPolicies.patch::parameters.properties,
   "Security policy update properties"
 );

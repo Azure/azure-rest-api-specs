@@ -55,6 +55,7 @@ interface ServerSecurityAlertPolicies {
 
 @@doc(ServerSecurityAlertPolicy.name, "The name of the security alert policy.");
 @@doc(ServerSecurityAlertPolicy.properties, "Resource properties.");
-@@doc(ServerSecurityAlertPolicies.createOrUpdate::parameters.resource,
+@@doc(
+  ServerSecurityAlertPolicies.createOrUpdate::parameters.resource,
   "The server security alert policy."
 );

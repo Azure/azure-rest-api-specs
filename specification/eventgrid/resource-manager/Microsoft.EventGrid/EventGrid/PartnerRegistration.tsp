@@ -122,12 +122,15 @@ interface PartnerRegistrations {
 }
 
 @@doc(PartnerRegistration.name, "Name of the partner registration.");
-@@doc(PartnerRegistration.properties,
+@@doc(
+  PartnerRegistration.properties,
   "Properties of the partner registration."
 );
-@@doc(PartnerRegistrations.createOrUpdate::parameters.resource,
+@@doc(
+  PartnerRegistrations.createOrUpdate::parameters.resource,
   "PartnerRegistration information."
 );
-@@doc(PartnerRegistrations.update::parameters.properties,
+@@doc(
+  PartnerRegistrations.update::parameters.properties,
   "Partner registration update information."
 );

@@ -133,15 +133,19 @@ interface PolicyRestrictionContracts {
 
 @@maxLength(PolicyRestrictionContract.name, 80);
 @@minLength(PolicyRestrictionContract.name, 1);
-@@doc(PolicyRestrictionContract.name,
+@@doc(
+  PolicyRestrictionContract.name,
   "Policy restrictions after an entity level"
 );
-@@doc(PolicyRestrictionContract.properties,
+@@doc(
+  PolicyRestrictionContract.properties,
   "Properties of the Policy Restriction."
 );
-@@doc(PolicyRestrictionContracts.createOrUpdate::parameters.resource,
+@@doc(
+  PolicyRestrictionContracts.createOrUpdate::parameters.resource,
   "The policy restriction to apply."
 );
-@@doc(PolicyRestrictionContracts.update::parameters.properties,
+@@doc(
+  PolicyRestrictionContracts.update::parameters.properties,
   "The policy restriction to apply."
 );

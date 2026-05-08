@@ -44,11 +44,13 @@ interface PlacementPolicies {
   delete is ArmResourceDeleteAsync<PlacementPolicy>;
 }
 
-@@clientName(PlacementPolicies.createOrUpdate::parameters.resource,
+@@clientName(
+  PlacementPolicies.createOrUpdate::parameters.resource,
   "placementPolicy"
 );
 
-@@clientName(PlacementPolicies.update::parameters.properties,
+@@clientName(
+  PlacementPolicies.update::parameters.properties,
   "placementPolicyUpdate"
 );
 

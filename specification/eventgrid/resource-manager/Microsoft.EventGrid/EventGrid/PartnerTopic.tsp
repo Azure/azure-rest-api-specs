@@ -133,9 +133,11 @@ interface PartnerTopics {
 
 @@doc(PartnerTopic.name, "Name of the partner topic.");
 @@doc(PartnerTopic.properties, "Properties of the Partner Topic.");
-@@doc(PartnerTopics.createOrUpdate::parameters.resource,
+@@doc(
+  PartnerTopics.createOrUpdate::parameters.resource,
   "Partner Topic information."
 );
-@@doc(PartnerTopics.update::parameters.properties,
+@@doc(
+  PartnerTopics.update::parameters.properties,
   "PartnerTopic update information."
 );

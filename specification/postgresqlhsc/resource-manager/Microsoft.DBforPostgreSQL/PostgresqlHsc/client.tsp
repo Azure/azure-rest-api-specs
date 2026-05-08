@@ -6,79 +6,94 @@ using Microsoft.DBforPostgreSQL;
 
 @@clientName(ClusterProperties.pointInTimeUTC, "PointInTimeUtc", "java");
 
-@@alternateType(NameAvailabilityRequest.type,
+@@alternateType(
+  NameAvailabilityRequest.type,
   "Microsoft.DBforPostgreSQL/serverGroupsv2",
   "java"
 );
 
 // rename-mapping: model renames
-@@clientName(CheckNameAvailabilityResourceType.MICROSOFT_DB_FOR_POSTGRESQL_SERVER_GROUPSV2,
+@@clientName(
+  CheckNameAvailabilityResourceType.MICROSOFT_DB_FOR_POSTGRESQL_SERVER_GROUPSV2,
   "ServerGroupsV2",
   "csharp"
 );
-@@clientName(NameAvailability,
+@@clientName(
+  NameAvailability,
   "CosmosDBForPostgreSqlClusterNameAvailabilityResult",
   "csharp"
 );
 @@clientName(NameAvailability.nameAvailable, "IsNameAvailable", "csharp");
-@@clientName(NameAvailabilityRequest,
+@@clientName(
+  NameAvailabilityRequest,
   "CosmosDBForPostgreSqlClusterNameAvailabilityContent",
   "csharp"
 );
 
 // rename-mapping: property renames (Cluster)
-@@clientName(ClusterProperties.enableShardsOnCoordinator,
+@@clientName(
+  ClusterProperties.enableShardsOnCoordinator,
   "IsShardsOnCoordinatorEnabled",
   "csharp"
 );
 @@clientName(ClusterProperties.enableHa, "IsHAEnabled", "csharp");
-@@clientName(ClusterProperties.coordinatorEnablePublicIpAccess,
+@@clientName(
+  ClusterProperties.coordinatorEnablePublicIpAccess,
   "IsCoordinatorPublicIPAccessEnabled",
   "csharp"
 );
-@@clientName(ClusterProperties.nodeEnablePublicIpAccess,
+@@clientName(
+  ClusterProperties.nodeEnablePublicIpAccess,
   "IsNodePublicIPAccessEnabled",
   "csharp"
 );
 
 // rename-mapping: property renames (ClusterForUpdate)
-@@clientName(ClusterPropertiesForUpdate.enableShardsOnCoordinator,
+@@clientName(
+  ClusterPropertiesForUpdate.enableShardsOnCoordinator,
   "IsShardsOnCoordinatorEnabled",
   "csharp"
 );
 @@clientName(ClusterPropertiesForUpdate.enableHa, "IsHAEnabled", "csharp");
-@@clientName(ClusterPropertiesForUpdate.coordinatorEnablePublicIpAccess,
+@@clientName(
+  ClusterPropertiesForUpdate.coordinatorEnablePublicIpAccess,
   "IsCoordinatorPublicIPAccessEnabled",
   "csharp"
 );
-@@clientName(ClusterPropertiesForUpdate.nodeEnablePublicIpAccess,
+@@clientName(
+  ClusterPropertiesForUpdate.nodeEnablePublicIpAccess,
   "IsNodePublicIPAccessEnabled",
   "csharp"
 );
 
 // rename-mapping: property renames (ClusterServer / ServerProperties)
 @@clientName(ServerProperties.enableHa, "IsHAEnabled", "csharp");
-@@clientName(ServerProperties.enablePublicIpAccess,
+@@clientName(
+  ServerProperties.enablePublicIpAccess,
   "IsPublicIPAccessEnabled",
   "csharp"
 );
 
 // rename-mapping: property renames (Configuration / ServerConfiguration)
-@@clientName(ConfigurationProperties.requiresRestart,
+@@clientName(
+  ConfigurationProperties.requiresRestart,
   "IsRestartRequired",
   "csharp"
 );
-@@clientName(ServerConfigurationProperties.requiresRestart,
+@@clientName(
+  ServerConfigurationProperties.requiresRestart,
   "IsRestartRequired",
   "csharp"
 );
 
 // rename-mapping: type changes
-@@alternateType(FirewallRuleProperties.startIpAddress,
+@@alternateType(
+  FirewallRuleProperties.startIpAddress,
   Azure.Core.ipV4Address,
   "csharp"
 );
-@@alternateType(FirewallRuleProperties.endIpAddress,
+@@alternateType(
+  FirewallRuleProperties.endIpAddress,
   Azure.Core.ipV4Address,
   "csharp"
 );
@@ -94,13 +109,15 @@ using Microsoft.DBforPostgreSQL;
 
 // Fix: PrivateEndpointConnectionData property rename (baseline name was ConnectionState)
 // Note: PrivateEndpointConnection uses CommonTypes properties, SimplePrivateEndpointConnection uses local properties
-@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
   "ConnectionState",
   "csharp"
 );
 
 // Fix: SimplePrivateEndpointConnection.PrivateEndpointId type (baseline had ResourceIdentifier)
-@@alternateType(PrivateEndpointProperty.id,
+@@alternateType(
+  PrivateEndpointProperty.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
@@ -109,11 +126,13 @@ using Microsoft.DBforPostgreSQL;
 @@clientName(Configurations.listByServer, "GetConfigurations", "csharp");
 
 // format-by-name-rules
-@@alternateType(ClusterProperties.sourceResourceId,
+@@alternateType(
+  ClusterProperties.sourceResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ClusterProperties.sourceLocation,
+@@alternateType(
+  ClusterProperties.sourceLocation,
   Azure.Core.azureLocation,
   "csharp"
 );
@@ -123,55 +142,66 @@ using Microsoft.DBforPostgreSQL;
 @@clientName(Cluster, "CosmosDBForPostgreSqlCluster", "csharp");
 @@clientName(ClusterServer, "CosmosDBForPostgreSqlClusterServer", "csharp");
 @@clientName(Configuration, "CosmosDBForPostgreSqlConfiguration", "csharp");
-@@clientName(ConfigurationDataType,
+@@clientName(
+  ConfigurationDataType,
   "CosmosDBForPostgreSqlConfigurationDataType",
   "csharp"
 );
 @@clientName(FirewallRule, "CosmosDBForPostgreSqlFirewallRule", "csharp");
-@@clientName(MaintenanceWindow,
+@@clientName(
+  MaintenanceWindow,
   "CosmosDBForPostgreSqlMaintenanceWindow",
   "csharp"
 );
 @@clientName(Role, "CosmosDBForPostgreSqlRole", "csharp");
 @@clientName(ServerRole, "CosmosDBForPostgreSqlServerRole", "csharp");
-@@clientName(ServerRoleGroupConfiguration,
+@@clientName(
+  ServerRoleGroupConfiguration,
   "CosmosDBForPostgreSqlServerRoleGroupConfiguration",
   "csharp"
 );
-@@clientName(SimplePrivateEndpointConnection,
+@@clientName(
+  SimplePrivateEndpointConnection,
   "CosmosDBForPostgreSqlSimplePrivateEndpointConnection",
   "csharp"
 );
-@@clientName(ServerConfiguration,
+@@clientName(
+  ServerConfiguration,
   "CosmosDBForPostgreSqlServerConfiguration",
   "csharp"
 );
 @@clientName(ServerNameItem, "CosmosDBForPostgreSqlServerNameItem", "csharp");
-@@clientName(ProvisioningState,
+@@clientName(
+  ProvisioningState,
   "CosmosDBForPostgreSqlProvisioningState",
   "csharp"
 );
-@@clientName(ClusterConfigurationListResult,
+@@clientName(
+  ClusterConfigurationListResult,
   "CosmosDBForPostgreSqlClusterConfigurationListResult",
   "csharp"
 );
-@@clientName(PrivateEndpointConnection,
+@@clientName(
+  PrivateEndpointConnection,
   "CosmosDBForPostgreSqlPrivateEndpointConnection",
   "csharp"
 );
-@@clientName(PrivateLinkResource,
+@@clientName(
+  PrivateLinkResource,
   "CosmosDBForPostgreSqlPrivateLinkResource",
   "csharp"
 );
 
 // override-operation-name
-@@clientName(ClustersOperationGroup.checkNameAvailability,
+@@clientName(
+  ClustersOperationGroup.checkNameAvailability,
   "CheckCosmosDBForPostgreSqlClusterNameAvailability",
   "csharp"
 );
 
 // AZC0030: forbidden suffix fix
-@@clientName(PromoteRequest,
+@@clientName(
+  PromoteRequest,
   "CosmosDBForPostgreSqlPromoteRequestContent",
   "csharp"
 );
@@ -184,11 +214,13 @@ union CheckNameAvailabilityResourceTypeReplacement {
   CheckNameAvailabilityResourceType,
   string,
 }
-@@alternateType(CheckNameAvailabilityResourceType,
+@@alternateType(
+  CheckNameAvailabilityResourceType,
   CheckNameAvailabilityResourceTypeReplacement,
   "csharp"
 );
-@@clientName(CheckNameAvailabilityResourceTypeReplacement,
+@@clientName(
+  CheckNameAvailabilityResourceTypeReplacement,
   "CosmosDBForPostgreSqlNameAvailabilityResourceType",
   "csharp"
 );
@@ -198,21 +230,25 @@ union CheckNameAvailabilityResourceTypeReplacement {
 // but C# mgmt needs them in separate interfaces to produce distinct Resource classes.
 @@clientLocation(NodeConfigurations.getNode, NodeConfigurations, "csharp");
 @@clientLocation(NodeConfigurations.updateOnNode, NodeConfigurations, "csharp");
-@@clientLocation(CoordinatorConfigurations.getCoordinator,
+@@clientLocation(
+  CoordinatorConfigurations.getCoordinator,
   CoordinatorConfigurations,
   "csharp"
 );
-@@clientLocation(CoordinatorConfigurations.updateOnCoordinator,
+@@clientLocation(
+  CoordinatorConfigurations.updateOnCoordinator,
   CoordinatorConfigurations,
   "csharp"
 );
 
 // Rename interfaces to add RP prefix — resource/collection names are derived from these
-@@clientName(NodeConfigurations,
+@@clientName(
+  NodeConfigurations,
   "CosmosDBForPostgreSqlNodeConfigurations",
   "csharp"
 );
-@@clientName(CoordinatorConfigurations,
+@@clientName(
+  CoordinatorConfigurations,
   "CosmosDBForPostgreSqlCoordinatorConfigurations",
   "csharp"
 );

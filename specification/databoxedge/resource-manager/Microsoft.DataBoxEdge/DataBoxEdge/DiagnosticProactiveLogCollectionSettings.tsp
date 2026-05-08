@@ -53,9 +53,11 @@ interface DiagnosticSettings {
 }
 
 @@doc(DiagnosticProactiveLogCollectionSettings.name, "");
-@@doc(DiagnosticProactiveLogCollectionSettings.properties,
+@@doc(
+  DiagnosticProactiveLogCollectionSettings.properties,
   "Properties of the diagnostic proactive log collection settings."
 );
-@@doc(DiagnosticSettings.updateDiagnosticProactiveLogCollectionSettings::parameters.resource,
+@@doc(
+  DiagnosticSettings.updateDiagnosticProactiveLogCollectionSettings::parameters.resource,
   "The proactive log collection settings."
 );

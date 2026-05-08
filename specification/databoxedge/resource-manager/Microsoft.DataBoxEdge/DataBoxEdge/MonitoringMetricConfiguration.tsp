@@ -137,9 +137,11 @@ interface MonitoringMetricConfigurationsNonListOps
     > {}
 
 @@doc(MonitoringMetricConfiguration.name, "");
-@@doc(MonitoringMetricConfiguration.properties,
+@@doc(
+  MonitoringMetricConfiguration.properties,
   "The metric setting properties."
 );
-@@doc(MonitoringMetricConfigurations.createOrUpdate::parameters.resource,
+@@doc(
+  MonitoringMetricConfigurations.createOrUpdate::parameters.resource,
   "The metric configuration."
 );

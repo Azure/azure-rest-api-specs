@@ -211,6 +211,7 @@ interface ContinuousWebJobOperationGroup {
 }
 
 @@doc(ContinuousWebJob.name, "Name of Web Job.");
-@@doc(ContinuousWebJob.properties,
+@@doc(
+  ContinuousWebJob.properties,
   "ContinuousWebJob resource specific properties"
 );

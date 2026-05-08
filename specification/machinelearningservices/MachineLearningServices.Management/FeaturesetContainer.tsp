@@ -125,9 +125,11 @@ interface FeaturesetContainers {
 }
 
 @@doc(FeaturesetContainer.name, "Container name. This is case-sensitive.");
-@@doc(FeaturesetContainer.properties,
+@@doc(
+  FeaturesetContainer.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(FeaturesetContainers.createOrUpdate::parameters.resource,
+@@doc(
+  FeaturesetContainers.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );

@@ -69,7 +69,8 @@ interface ServerBlobAuditingPolicies {
 
 @@doc(ServerBlobAuditingPolicy.name, "");
 @@doc(ServerBlobAuditingPolicy.properties, "Resource properties.");
-@@doc(ServerBlobAuditingPolicies.createOrUpdate::parameters.resource,
+@@doc(
+  ServerBlobAuditingPolicies.createOrUpdate::parameters.resource,
   "Properties of blob auditing policy"
 );
 

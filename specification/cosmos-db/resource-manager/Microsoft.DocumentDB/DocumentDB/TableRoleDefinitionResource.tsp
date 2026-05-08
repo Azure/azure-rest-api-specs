@@ -62,9 +62,11 @@ interface TableRoleDefinitionResources {
 }
 
 @@doc(TableRoleDefinitionResource.name, "The GUID for the Role Definition.");
-@@doc(TableRoleDefinitionResource.properties,
+@@doc(
+  TableRoleDefinitionResource.properties,
   "Properties to create and update an Azure Cosmos DB Table Role Definition."
 );
-@@doc(TableRoleDefinitionResources.createUpdateTableRoleDefinition::parameters.resource,
+@@doc(
+  TableRoleDefinitionResources.createUpdateTableRoleDefinition::parameters.resource,
   "The properties required to create or update a Role Definition."
 );

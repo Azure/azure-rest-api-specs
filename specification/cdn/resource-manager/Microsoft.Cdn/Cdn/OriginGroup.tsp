@@ -79,10 +79,12 @@ interface OriginGroups {
   listByEndpoint is ArmResourceListByParent<OriginGroup>;
 }
 
-@@doc(OriginGroup.name,
+@@doc(
+  OriginGroup.name,
   "Name of the origin group which is unique within the endpoint."
 );
-@@doc(OriginGroup.properties,
+@@doc(
+  OriginGroup.properties,
   "The JSON object that contains the properties of the origin group."
 );
 @@doc(OriginGroups.create::parameters.resource, "Origin group properties");

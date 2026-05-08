@@ -66,12 +66,15 @@ interface ManagedInstanceAzureADOnlyAuthentications {
   >;
 }
 
-@@doc(ManagedInstanceAzureADOnlyAuthentication.name,
+@@doc(
+  ManagedInstanceAzureADOnlyAuthentication.name,
   "The name of server azure active directory only authentication."
 );
-@@doc(ManagedInstanceAzureADOnlyAuthentication.properties,
+@@doc(
+  ManagedInstanceAzureADOnlyAuthentication.properties,
   "Resource properties."
 );
-@@doc(ManagedInstanceAzureADOnlyAuthentications.createOrUpdate::parameters.resource,
+@@doc(
+  ManagedInstanceAzureADOnlyAuthentications.createOrUpdate::parameters.resource,
   "The required parameters for creating or updating an Active Directory only authentication property."
 );

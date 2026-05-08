@@ -137,21 +137,27 @@ interface ConfigurationStores {
 @@maxLength(ConfigurationStore.name, 50);
 @@minLength(ConfigurationStore.name, 5);
 @@doc(ConfigurationStore.name, "The name of the configuration store.");
-@@doc(ConfigurationStore.properties,
+@@doc(
+  ConfigurationStore.properties,
   "The properties of a configuration store."
 );
-@@doc(ConfigurationStores.create::parameters.resource,
+@@doc(
+  ConfigurationStores.create::parameters.resource,
   "The parameters for creating a configuration store."
 );
-@@doc(ConfigurationStores.update::parameters.properties,
+@@doc(
+  ConfigurationStores.update::parameters.properties,
   "The parameters for updating a configuration store."
 );
-@@doc(ConfigurationStores.regenerateKey::parameters.body,
+@@doc(
+  ConfigurationStores.regenerateKey::parameters.body,
   "The parameters for regenerating an access key."
 );
-@@doc(ConfigurationStoresDeleteLroHeader.location,
+@@doc(
+  ConfigurationStoresDeleteLroHeader.location,
   "URL to query for the operation result"
 );
-@@doc(ConfigurationStoresDeleteLroHeader.azureAsyncOperation,
+@@doc(
+  ConfigurationStoresDeleteLroHeader.azureAsyncOperation,
   "URL to query for status of the operation."
 );

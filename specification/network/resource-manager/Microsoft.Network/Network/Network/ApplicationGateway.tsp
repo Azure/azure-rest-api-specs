@@ -185,12 +185,15 @@ interface ApplicationGateways {
 
 @@doc(ApplicationGateway.name, "The name of the application gateway.");
 @@doc(ApplicationGateway.properties, "Properties of the application gateway.");
-@@doc(ApplicationGateways.createOrUpdate::parameters.resource,
+@@doc(
+  ApplicationGateways.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update application gateway operation."
 );
-@@doc(ApplicationGateways.updateTags::parameters.properties,
+@@doc(
+  ApplicationGateways.updateTags::parameters.properties,
   "Parameters supplied to update application gateway tags."
 );
-@@doc(ApplicationGateways.backendHealthOnDemand::parameters.body,
+@@doc(
+  ApplicationGateways.backendHealthOnDemand::parameters.body,
   "Request body for on-demand test probe operation."
 );

@@ -112,9 +112,11 @@ interface OuContainers {
 
 @@doc(OuContainer.name, "The name of the OuContainer.");
 @@doc(OuContainer.properties, "OuContainer properties");
-@@doc(OuContainers.create::parameters.resource,
+@@doc(
+  OuContainers.create::parameters.resource,
   "Container Account Description."
 );
-@@doc(OuContainers.update::parameters.properties,
+@@doc(
+  OuContainers.update::parameters.properties,
   "Container Account Description."
 );

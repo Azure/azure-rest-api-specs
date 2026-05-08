@@ -55,6 +55,7 @@ interface CertificateObjectGlobalRulestackResources {
 }
 
 @@doc(CertificateObjectGlobalRulestackResource.name, "certificate name");
-@@doc(CertificateObjectGlobalRulestackResource.properties,
+@@doc(
+  CertificateObjectGlobalRulestackResource.properties,
   "The resource-specific properties for this resource."
 );

@@ -306,18 +306,23 @@ interface ModelVersionOperationGroup {
 }
 
 @@doc(ModelVersion.name, "Version identifier. This is case-sensitive.");
-@@doc(ModelVersion.properties,
+@@doc(
+  ModelVersion.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(ModelVersions.createOrUpdate::parameters.resource,
+@@doc(
+  ModelVersions.createOrUpdate::parameters.resource,
   "Version entity to create or update."
 );
-@@doc(ModelVersions.createOrGetStartPendingUpload::parameters.body,
+@@doc(
+  ModelVersions.createOrGetStartPendingUpload::parameters.body,
   "Pending upload request object"
 );
-@@doc(ModelVersionOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  ModelVersionOperationGroup.createOrUpdate::parameters.resource,
   "Version entity to create or update."
 );
-@@doc(ModelVersionOperationGroup.publish::parameters.body,
+@@doc(
+  ModelVersionOperationGroup.publish::parameters.body,
   "Destination registry info"
 );

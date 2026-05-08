@@ -85,9 +85,11 @@ interface RelayNamespaces {
 }
 
 @@doc(RelayNamespace.properties, "Description of Relay namespace");
-@@doc(RelayNamespaces.createOrUpdate::parameters.resource,
+@@doc(
+  RelayNamespaces.createOrUpdate::parameters.resource,
   "Parameters supplied to create a namespace resource."
 );
-@@doc(RelayNamespaces.update::parameters.properties,
+@@doc(
+  RelayNamespaces.update::parameters.properties,
   "Parameters for updating a namespace resource."
 );

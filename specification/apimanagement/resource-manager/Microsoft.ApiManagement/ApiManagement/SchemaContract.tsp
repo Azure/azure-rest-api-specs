@@ -333,13 +333,16 @@ interface WorkspaceApiSchema {
 
 @@maxLength(SchemaContract.name, 80);
 @@minLength(SchemaContract.name, 1);
-@@doc(SchemaContract.name,
+@@doc(
+  SchemaContract.name,
   "Schema id identifier. Must be unique in the current API Management service instance."
 );
 @@doc(SchemaContract.properties, "Properties of the API Schema.");
-@@doc(SchemaContracts.createOrUpdate::parameters.resource,
+@@doc(
+  SchemaContracts.createOrUpdate::parameters.resource,
   "The schema contents to apply."
 );
-@@doc(WorkspaceApiSchema.createOrUpdate::parameters.resource,
+@@doc(
+  WorkspaceApiSchema.createOrUpdate::parameters.resource,
   "The schema contents to apply."
 );

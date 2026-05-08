@@ -85,12 +85,15 @@ interface Extensions {
 
 @@doc(Extension.name, "The name of the machine extension.");
 @@doc(Extension.properties, "Describes Machine Extension Properties.");
-@@doc(Extensions.create::parameters.resource,
+@@doc(
+  Extensions.create::parameters.resource,
   "Details of the Machine Extension to be created."
 );
-@@doc(Extensions.update::parameters.properties,
+@@doc(
+  Extensions.update::parameters.properties,
   "Details of the Machine Extension to be created."
 );
-@@doc(Extensions.upgrade::parameters.body,
+@@doc(
+  Extensions.upgrade::parameters.body,
   "Parameters supplied to the Upgrade Extensions operation."
 );

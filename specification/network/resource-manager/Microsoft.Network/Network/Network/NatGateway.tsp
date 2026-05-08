@@ -77,9 +77,11 @@ interface NatGateways {
 
 @@doc(NatGateway.name, "The name of the nat gateway.");
 @@doc(NatGateway.properties, "Nat Gateway properties.");
-@@doc(NatGateways.createOrUpdate::parameters.resource,
+@@doc(
+  NatGateways.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update nat gateway operation."
 );
-@@doc(NatGateways.updateTags::parameters.properties,
+@@doc(
+  NatGateways.updateTags::parameters.properties,
   "Parameters supplied to update nat gateway tags."
 );

@@ -100,6 +100,7 @@ interface RoutingRules {
 
 @@doc(RoutingRule.name, "The name of the rule.");
 @@doc(RoutingRule.properties, "Indicates the properties of the routing rule");
-@@doc(RoutingRules.createOrUpdate::parameters.resource,
+@@doc(
+  RoutingRules.createOrUpdate::parameters.resource,
   "The routing rule to create or update"
 );

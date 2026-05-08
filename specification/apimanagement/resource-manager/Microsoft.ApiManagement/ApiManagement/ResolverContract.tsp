@@ -154,13 +154,16 @@ interface ResolverContracts {
 
 @@maxLength(ResolverContract.name, 80);
 @@minLength(ResolverContract.name, 1);
-@@doc(ResolverContract.name,
+@@doc(
+  ResolverContract.name,
   "Resolver identifier within a GraphQL API. Must be unique in the current API Management service instance."
 );
 @@doc(ResolverContract.properties, "Properties of the Resolver Contract.");
-@@doc(ResolverContracts.createOrUpdate::parameters.resource,
+@@doc(
+  ResolverContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );
-@@doc(ResolverContracts.update::parameters.properties,
+@@doc(
+  ResolverContracts.update::parameters.properties,
   "GraphQL API Resolver Update parameters."
 );

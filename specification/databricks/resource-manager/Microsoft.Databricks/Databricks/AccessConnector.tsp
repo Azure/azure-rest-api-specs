@@ -86,15 +86,19 @@ interface AccessConnectors {
 
 @@maxLength(AccessConnector.name, 64);
 @@minLength(AccessConnector.name, 3);
-@@doc(AccessConnector.name,
+@@doc(
+  AccessConnector.name,
   "The name of the Azure Databricks Access Connector."
 );
-@@doc(AccessConnector.properties,
+@@doc(
+  AccessConnector.properties,
   "Azure Databricks Access Connector properties"
 );
-@@doc(AccessConnectors.createOrUpdate::parameters.resource,
+@@doc(
+  AccessConnectors.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update an Azure Databricks Access Connector."
 );
-@@doc(AccessConnectors.update::parameters.properties,
+@@doc(
+  AccessConnectors.update::parameters.properties,
   "The update to the Azure Databricks Access Connector."
 );

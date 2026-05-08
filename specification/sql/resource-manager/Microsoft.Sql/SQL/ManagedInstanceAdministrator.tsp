@@ -63,6 +63,7 @@ interface ManagedInstanceAdministrators {
 
 @@doc(ManagedInstanceAdministrator.name, "");
 @@doc(ManagedInstanceAdministrator.properties, "Resource properties.");
-@@doc(ManagedInstanceAdministrators.createOrUpdate::parameters.resource,
+@@doc(
+  ManagedInstanceAdministrators.createOrUpdate::parameters.resource,
   "The requested administrator parameters."
 );

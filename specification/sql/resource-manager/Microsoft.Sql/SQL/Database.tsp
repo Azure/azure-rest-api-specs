@@ -489,22 +489,28 @@ interface Databases {
 
 @@doc(Database.name, "The name of the database.");
 @@doc(Database.properties, "Resource properties.");
-@@doc(Databases.createOrUpdate::parameters.resource,
+@@doc(
+  Databases.createOrUpdate::parameters.resource,
   "The requested database resource state."
 );
-@@doc(Databases.update::parameters.properties,
+@@doc(
+  Databases.update::parameters.properties,
   "The requested database resource state."
 );
-@@doc(Databases.export::parameters.body,
+@@doc(
+  Databases.export::parameters.body,
   "The database export request parameters."
 );
-@@doc(Databases.importDatabase::parameters.body,
+@@doc(
+  Databases.importDatabase::parameters.body,
   "The database import request parameters."
 );
-@@doc(Databases.rename::parameters.body,
+@@doc(
+  Databases.rename::parameters.body,
   "The resource move definition for renaming this database."
 );
-@@doc(Databases.create::parameters.body,
+@@doc(
+  Databases.create::parameters.body,
   "The definition for creating the restore point of this database."
 );
 @@doc(Databases.sensitivityLabelsUpdate::parameters.body, "");

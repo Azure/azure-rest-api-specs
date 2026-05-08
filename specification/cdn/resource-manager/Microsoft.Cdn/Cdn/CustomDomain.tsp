@@ -102,12 +102,15 @@ interface CustomDomains {
 }
 
 @@doc(CustomDomain.name, "Name of the custom domain within an endpoint.");
-@@doc(CustomDomain.properties,
+@@doc(
+  CustomDomain.properties,
   "The JSON object that contains the properties of the custom domain to create."
 );
-@@doc(CustomDomains.create::parameters.resource,
+@@doc(
+  CustomDomains.create::parameters.resource,
   "Properties required to create a new custom domain."
 );
-@@doc(CustomDomains.enableCustomHttps::parameters.body,
+@@doc(
+  CustomDomains.enableCustomHttps::parameters.body,
   "The configuration specifying how to enable HTTPS for the custom domain - using CDN managed certificate or user's own certificate. If not specified, enabling ssl uses CDN managed certificate by default."
 );

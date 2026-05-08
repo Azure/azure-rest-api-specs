@@ -61,6 +61,7 @@ interface TagRules {
 }
 
 @@doc(TagRule.name, "Name of the TagRule");
-@@doc(TagRule.properties,
+@@doc(
+  TagRule.properties,
   "The resource-specific properties for this resource."
 );

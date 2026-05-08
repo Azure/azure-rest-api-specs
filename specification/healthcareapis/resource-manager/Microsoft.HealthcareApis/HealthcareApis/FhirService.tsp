@@ -148,6 +148,7 @@ interface FhirServiceOperationGroup {
 @@minLength(FhirService.name, 3);
 @@doc(FhirService.name, "The name of FHIR Service resource.");
 @@doc(FhirService.properties, "Fhir Service configuration.");
-@@doc(FhirServices.createOrUpdate::parameters.resource,
+@@doc(
+  FhirServices.createOrUpdate::parameters.resource,
   "The parameters for creating or updating a Fhir Service resource."
 );

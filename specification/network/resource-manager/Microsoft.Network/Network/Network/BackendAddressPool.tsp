@@ -101,12 +101,15 @@ interface BackendAddressPools {
 }
 
 @@doc(BackendAddressPool.name, "The name of the backend address pool.");
-@@doc(BackendAddressPool.properties,
+@@doc(
+  BackendAddressPool.properties,
   "Properties of load balancer backend address pool."
 );
-@@doc(BackendAddressPools.createOrUpdate::parameters.resource,
+@@doc(
+  BackendAddressPools.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update load balancer backend address pool operation."
 );
-@@doc(BackendAddressPools.listInboundNatRulePortMappings::parameters.body,
+@@doc(
+  BackendAddressPools.listInboundNatRulePortMappings::parameters.body,
   "Query inbound NAT rule port mapping request."
 );

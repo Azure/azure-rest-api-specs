@@ -179,12 +179,15 @@ interface ComponentContainerOperationGroup {
 }
 
 @@doc(ComponentContainer.name, "Container name.");
-@@doc(ComponentContainer.properties,
+@@doc(
+  ComponentContainer.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(ComponentContainers.createOrUpdate::parameters.resource,
+@@doc(
+  ComponentContainers.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );
-@@doc(ComponentContainerOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  ComponentContainerOperationGroup.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );

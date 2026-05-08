@@ -67,9 +67,11 @@ interface NetworkSecurityPerimeterConfigurations {
   >;
 }
 
-@@doc(NetworkSecurityPerimeterConfiguration.name,
+@@doc(
+  NetworkSecurityPerimeterConfiguration.name,
   "The ResourceAssociation Name"
 );
-@@doc(NetworkSecurityPerimeterConfiguration.properties,
+@@doc(
+  NetworkSecurityPerimeterConfiguration.properties,
   "Properties of the Network Security Perimeter Configuration"
 );

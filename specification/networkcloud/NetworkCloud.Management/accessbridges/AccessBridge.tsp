@@ -105,7 +105,8 @@ interface AccessBridges {
 
 @@doc(AccessBridge.name, "The name of the access bridge.");
 @@doc(AccessBridge.properties, "The list of the resource properties.");
-@@doc(AccessBridges.createOrUpdate::parameters.resource,
+@@doc(
+  AccessBridges.createOrUpdate::parameters.resource,
   "The access bridge configuration."
 );
 @@doc(AccessBridges.update::parameters.properties, "The request body.");

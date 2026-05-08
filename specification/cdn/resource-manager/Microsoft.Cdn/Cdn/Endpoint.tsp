@@ -144,20 +144,25 @@ interface Endpoints {
   >;
 }
 
-@@doc(Endpoint.name,
+@@doc(
+  Endpoint.name,
   "Name of the endpoint under the profile which is unique globally."
 );
-@@doc(Endpoint.properties,
+@@doc(
+  Endpoint.properties,
   "The JSON object that contains the properties required to create an endpoint."
 );
 @@doc(Endpoints.create::parameters.resource, "Endpoint properties");
 @@doc(Endpoints.update::parameters.properties, "Endpoint update properties");
-@@doc(Endpoints.purgeContent::parameters.body,
+@@doc(
+  Endpoints.purgeContent::parameters.body,
   "The path to the content to be purged. Path can be a full URL, e.g. '/pictures/city.png' which removes a single file, or a directory with a wildcard, e.g. '/pictures/*' which removes all folders and files in the directory."
 );
-@@doc(Endpoints.loadContent::parameters.body,
+@@doc(
+  Endpoints.loadContent::parameters.body,
   "The path to the content to be loaded. Path should be a full URL, e.g. ‘/pictures/city.png' which loads a single file "
 );
-@@doc(Endpoints.validateCustomDomain::parameters.body,
+@@doc(
+  Endpoints.validateCustomDomain::parameters.body,
   "Custom domain to be validated."
 );

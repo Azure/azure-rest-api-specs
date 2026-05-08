@@ -103,12 +103,15 @@ interface Configurations {
 
 @@doc(Configuration.name, "The name of the server configuration.");
 @@doc(Configuration.properties, "The properties of a configuration.");
-@@doc(Configurations.createOrUpdate::parameters.resource,
+@@doc(
+  Configurations.createOrUpdate::parameters.resource,
   "The required parameters for updating a server configuration."
 );
-@@doc(Configurations.update::parameters.properties,
+@@doc(
+  Configurations.update::parameters.properties,
   "The required parameters for updating a server configuration."
 );
-@@doc(Configurations.batchUpdate::parameters.body,
+@@doc(
+  Configurations.batchUpdate::parameters.body,
   "The parameters for updating a list of server configuration."
 );

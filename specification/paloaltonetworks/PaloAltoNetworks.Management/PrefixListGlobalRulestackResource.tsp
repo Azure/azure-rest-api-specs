@@ -55,6 +55,7 @@ interface PrefixListGlobalRulestackResources {
 }
 
 @@doc(PrefixListGlobalRulestackResource.name, "Local Rule priority");
-@@doc(PrefixListGlobalRulestackResource.properties,
+@@doc(
+  PrefixListGlobalRulestackResource.properties,
   "The resource-specific properties for this resource."
 );

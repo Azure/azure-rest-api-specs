@@ -89,13 +89,16 @@ interface ImportJobs {
 
 @@maxLength(ImportJob.name, 80);
 @@minLength(ImportJob.name, 2);
-@@doc(ImportJob.name,
+@@doc(
+  ImportJob.name,
   "Name for the import job. Allows alphanumerics, underscores, and hyphens. Start and end with alphanumeric."
 );
 @@doc(ImportJob.properties, "Properties of the import job.");
-@@doc(ImportJobs.createOrUpdate::parameters.resource,
+@@doc(
+  ImportJobs.createOrUpdate::parameters.resource,
   "Object containing the user-selectable properties of the import job. If read-only properties are included, they must match the existing values of those properties."
 );
-@@doc(ImportJobs.update::parameters.properties,
+@@doc(
+  ImportJobs.update::parameters.properties,
   "Object containing the user-selectable properties of the import job. If read-only properties are included, they must match the existing values of those properties."
 );

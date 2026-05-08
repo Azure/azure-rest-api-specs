@@ -117,17 +117,21 @@ interface AFDEndpoints {
   >;
 }
 
-@@doc(AFDEndpoint.name,
+@@doc(
+  AFDEndpoint.name,
   "Name of the endpoint under the profile which is unique globally."
 );
-@@doc(AFDEndpoint.properties,
+@@doc(
+  AFDEndpoint.properties,
   "The JSON object that contains the properties required to create an endpoint."
 );
 @@doc(AFDEndpoints.create::parameters.resource, "Endpoint properties");
 @@doc(AFDEndpoints.update::parameters.properties, "Endpoint update properties");
-@@doc(AFDEndpoints.purgeContent::parameters.body,
+@@doc(
+  AFDEndpoints.purgeContent::parameters.body,
   "The list of paths to the content and the list of linked domains to be purged. Path can be a full URL, e.g. '/pictures/city.png' which removes a single file, or a directory with a wildcard, e.g. '/pictures/*' which removes all folders and files in the directory."
 );
-@@doc(AFDEndpoints.validateCustomDomain::parameters.body,
+@@doc(
+  AFDEndpoints.validateCustomDomain::parameters.body,
   "Custom domain to be validated."
 );

@@ -428,48 +428,63 @@ interface NetworkWatchers {
 
 @@doc(NetworkWatcher.name, "The name of the network watcher.");
 @@doc(NetworkWatcher.properties, "Properties of the network watcher.");
-@@doc(NetworkWatchers.createOrUpdate::parameters.resource,
+@@doc(
+  NetworkWatchers.createOrUpdate::parameters.resource,
   "Parameters that define the network watcher resource."
 );
-@@doc(NetworkWatchers.updateTags::parameters.properties,
+@@doc(
+  NetworkWatchers.updateTags::parameters.properties,
   "Parameters supplied to update network watcher tags."
 );
-@@doc(NetworkWatchers.getTopology::parameters.body,
+@@doc(
+  NetworkWatchers.getTopology::parameters.body,
   "Parameters that define the representation of topology."
 );
-@@doc(NetworkWatchers.verifyIPFlow::parameters.body,
+@@doc(
+  NetworkWatchers.verifyIPFlow::parameters.body,
   "Parameters that define the IP flow to be verified."
 );
-@@doc(NetworkWatchers.getNextHop::parameters.body,
+@@doc(
+  NetworkWatchers.getNextHop::parameters.body,
   "Parameters that define the source and destination endpoint."
 );
-@@doc(NetworkWatchers.getVMSecurityRules::parameters.body,
+@@doc(
+  NetworkWatchers.getVMSecurityRules::parameters.body,
   "Parameters that define the VM to check security groups for."
 );
-@@doc(NetworkWatchers.getTroubleshooting::parameters.body,
+@@doc(
+  NetworkWatchers.getTroubleshooting::parameters.body,
   "Parameters that define the resource to troubleshoot."
 );
-@@doc(NetworkWatchers.getTroubleshootingResult::parameters.body,
+@@doc(
+  NetworkWatchers.getTroubleshootingResult::parameters.body,
   "Parameters that define the resource to query the troubleshooting result."
 );
-@@doc(NetworkWatchers.setFlowLogConfiguration::parameters.body,
+@@doc(
+  NetworkWatchers.setFlowLogConfiguration::parameters.body,
   "Parameters that define the configuration of flow log."
 );
-@@doc(NetworkWatchers.getFlowLogStatus::parameters.body,
+@@doc(
+  NetworkWatchers.getFlowLogStatus::parameters.body,
   "Parameters that define a resource to query flow log and traffic analytics (optional) status."
 );
-@@doc(NetworkWatchers.checkConnectivity::parameters.body,
+@@doc(
+  NetworkWatchers.checkConnectivity::parameters.body,
   "Parameters that determine how the connectivity check will be performed."
 );
-@@doc(NetworkWatchers.getAzureReachabilityReport::parameters.body,
+@@doc(
+  NetworkWatchers.getAzureReachabilityReport::parameters.body,
   "Parameters that determine Azure reachability report configuration."
 );
-@@doc(NetworkWatchers.listAvailableProviders::parameters.body,
+@@doc(
+  NetworkWatchers.listAvailableProviders::parameters.body,
   "Parameters that scope the list of available providers."
 );
-@@doc(NetworkWatchers.getNetworkConfigurationDiagnostic::parameters.body,
+@@doc(
+  NetworkWatchers.getNetworkConfigurationDiagnostic::parameters.body,
   "Parameters to get network configuration diagnostic."
 );
-@@doc(NetworkWatchers.create::parameters.body,
+@@doc(
+  NetworkWatchers.create::parameters.body,
   "Parameters that define the create packet capture operation."
 );

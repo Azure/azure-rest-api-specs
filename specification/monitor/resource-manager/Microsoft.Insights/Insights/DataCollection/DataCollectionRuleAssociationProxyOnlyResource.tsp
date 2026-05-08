@@ -99,11 +99,13 @@ interface DataCollectionRuleAssociationProxyOnlyResources {
   >;
 }
 
-@@doc(DataCollectionRuleAssociationProxyOnlyResource.name,
+@@doc(
+  DataCollectionRuleAssociationProxyOnlyResource.name,
   "The name of the association. The name is case insensitive."
 );
 @@doc(DataCollectionRuleAssociationProxyOnlyResource.properties, "");
-@@doc(DataCollectionRuleAssociationProxyOnlyResources.create::parameters.resource,
+@@doc(
+  DataCollectionRuleAssociationProxyOnlyResources.create::parameters.resource,
   "The payload"
 );
 @@key(Extension.ScopeParameter.scope, "resourceUri");

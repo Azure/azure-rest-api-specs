@@ -68,9 +68,11 @@ interface SqlRoleDefinitionGetResultsOperationGroup {
 }
 
 @@doc(SqlRoleDefinitionGetResults.name, "The GUID for the Role Definition.");
-@@doc(SqlRoleDefinitionGetResults.properties,
+@@doc(
+  SqlRoleDefinitionGetResults.properties,
   "Properties related to the Role Definition."
 );
-@@doc(SqlRoleDefinitionGetResultsOperationGroup.createUpdateSqlRoleDefinition::parameters.resource,
+@@doc(
+  SqlRoleDefinitionGetResultsOperationGroup.createUpdateSqlRoleDefinition::parameters.resource,
   "The properties required to create or update a Role Definition."
 );

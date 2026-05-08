@@ -143,9 +143,11 @@ interface DevBoxDefinitionOperationGroup {
 @@minLength(DevBoxDefinition.name, 3);
 @@doc(DevBoxDefinition.name, "The name of the Dev Box definition.");
 @@doc(DevBoxDefinition.properties, "Dev Box definition properties");
-@@doc(DevBoxDefinitions.createOrUpdate::parameters.resource,
+@@doc(
+  DevBoxDefinitions.createOrUpdate::parameters.resource,
   "Represents a Dev Box definition."
 );
-@@doc(DevBoxDefinitions.update::parameters.properties,
+@@doc(
+  DevBoxDefinitions.update::parameters.properties,
   "Represents a Dev Box definition."
 );

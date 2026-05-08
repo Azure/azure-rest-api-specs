@@ -143,16 +143,20 @@ interface AmlFilesystems {
 
 @@maxLength(AmlFilesystem.name, 80);
 @@minLength(AmlFilesystem.name, 2);
-@@doc(AmlFilesystem.name,
+@@doc(
+  AmlFilesystem.name,
   "Name for the AML file system. Allows alphanumerics, underscores, and hyphens. Start and end with alphanumeric."
 );
 @@doc(AmlFilesystem.properties, "Properties of the AML file system.");
-@@doc(AmlFilesystems.createOrUpdate::parameters.resource,
+@@doc(
+  AmlFilesystems.createOrUpdate::parameters.resource,
   "Object containing the user-selectable properties of the AML file system. If read-only properties are included, they must match the existing values of those properties."
 );
-@@doc(AmlFilesystems.update::parameters.properties,
+@@doc(
+  AmlFilesystems.update::parameters.properties,
   "Object containing the user-selectable properties of the AML file system. If read-only properties are included, they must match the existing values of those properties."
 );
-@@doc(AmlFilesystems.archive::parameters.body,
+@@doc(
+  AmlFilesystems.archive::parameters.body,
   "Information about the archive operation"
 );

@@ -151,15 +151,19 @@ interface SignalRResources {
 @@maxLength(SignalRResource.name, 63);
 @@minLength(SignalRResource.name, 3);
 @@doc(SignalRResource.name, "The name of the resource.");
-@@doc(SignalRResource.properties,
+@@doc(
+  SignalRResource.properties,
   "A class that describes the properties of the resource"
 );
-@@doc(SignalRResources.createOrUpdate::parameters.resource,
+@@doc(
+  SignalRResources.createOrUpdate::parameters.resource,
   "Parameters for the create or update operation"
 );
-@@doc(SignalRResources.update::parameters.properties,
+@@doc(
+  SignalRResources.update::parameters.properties,
   "Parameters for the update operation"
 );
-@@doc(SignalRResources.regenerateKey::parameters.body,
+@@doc(
+  SignalRResources.regenerateKey::parameters.body,
   "Parameter that describes the Regenerate Key Operation."
 );

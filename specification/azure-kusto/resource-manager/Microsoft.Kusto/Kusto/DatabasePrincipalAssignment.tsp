@@ -61,10 +61,12 @@ interface DatabasePrincipalAssignments {
   >;
 }
 
-@@doc(DatabasePrincipalAssignment.name,
+@@doc(
+  DatabasePrincipalAssignment.name,
   "The name of the Kusto principalAssignment."
 );
 @@doc(DatabasePrincipalAssignment.properties, "The database principal.");
-@@doc(DatabasePrincipalAssignments.createOrUpdate::parameters.resource,
+@@doc(
+  DatabasePrincipalAssignments.createOrUpdate::parameters.resource,
   "The Kusto principalAssignments parameters supplied for the operation."
 );

@@ -88,9 +88,11 @@ interface MarketplaceSubscriptions {
 }
 
 @@doc(MarketplaceSubscription.name, "Container name.");
-@@doc(MarketplaceSubscription.properties,
+@@doc(
+  MarketplaceSubscription.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(MarketplaceSubscriptions.createOrUpdate::parameters.resource,
+@@doc(
+  MarketplaceSubscriptions.createOrUpdate::parameters.resource,
   "Marketplace Subscription entity to apply during operation."
 );

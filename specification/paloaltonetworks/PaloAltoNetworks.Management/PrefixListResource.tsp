@@ -55,6 +55,7 @@ interface PrefixListResources {
 }
 
 @@doc(PrefixListResource.name, "Local Rule priority");
-@@doc(PrefixListResource.properties,
+@@doc(
+  PrefixListResource.properties,
   "The resource-specific properties for this resource."
 );

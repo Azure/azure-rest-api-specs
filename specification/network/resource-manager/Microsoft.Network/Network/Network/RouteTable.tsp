@@ -73,9 +73,11 @@ interface RouteTables {
 
 @@doc(RouteTable.name, "The name of the route table.");
 @@doc(RouteTable.properties, "Properties of the route table.");
-@@doc(RouteTables.createOrUpdate::parameters.resource,
+@@doc(
+  RouteTables.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update route table operation."
 );
-@@doc(RouteTables.updateTags::parameters.properties,
+@@doc(
+  RouteTables.updateTags::parameters.properties,
   "Parameters supplied to update route table tags."
 );

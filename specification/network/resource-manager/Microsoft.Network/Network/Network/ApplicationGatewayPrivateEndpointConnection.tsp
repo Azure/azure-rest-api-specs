@@ -81,12 +81,15 @@ interface ApplicationGatewayPrivateEndpointConnections {
   >;
 }
 
-@@doc(ApplicationGatewayPrivateEndpointConnection.name,
+@@doc(
+  ApplicationGatewayPrivateEndpointConnection.name,
   "Name of the private endpoint connection on an application gateway."
 );
-@@doc(ApplicationGatewayPrivateEndpointConnection.properties,
+@@doc(
+  ApplicationGatewayPrivateEndpointConnection.properties,
   "Properties of the application gateway private endpoint connection."
 );
-@@doc(ApplicationGatewayPrivateEndpointConnections.update::parameters.resource,
+@@doc(
+  ApplicationGatewayPrivateEndpointConnections.update::parameters.resource,
   "Parameters supplied to update application gateway private endpoint connection operation."
 );

@@ -159,21 +159,27 @@ interface OnlineDeployments {
 }
 
 @@doc(OnlineDeployment.name, "Inference Endpoint Deployment name.");
-@@doc(OnlineDeployment.properties,
+@@doc(
+  OnlineDeployment.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(OnlineDeployments.createOrUpdate::parameters.resource,
+@@doc(
+  OnlineDeployments.createOrUpdate::parameters.resource,
   "Inference Endpoint entity to apply during operation."
 );
-@@doc(OnlineDeployments.update::parameters.properties,
+@@doc(
+  OnlineDeployments.update::parameters.properties,
   "Online Endpoint entity to apply during operation."
 );
-@@doc(OnlineDeployments.getLogs::parameters.body,
+@@doc(
+  OnlineDeployments.getLogs::parameters.body,
   "The request containing parameters for retrieving logs."
 );
-@@doc(OnlineDeployment.identity,
+@@doc(
+  OnlineDeployment.identity,
   "Managed service identity (system assigned and/or user assigned identities)"
 );
-@@doc(OnlineDeployment.sku,
+@@doc(
+  OnlineDeployment.sku,
   "Sku details required for ARM contract for Autoscaling."
 );

@@ -123,9 +123,11 @@ interface InstancePools {
 
 @@doc(InstancePool.name, "The name of the instance pool to be retrieved.");
 @@doc(InstancePool.properties, "Resource properties.");
-@@doc(InstancePools.createOrUpdate::parameters.resource,
+@@doc(
+  InstancePools.createOrUpdate::parameters.resource,
   "The requested instance pool resource state."
 );
-@@doc(InstancePools.update::parameters.properties,
+@@doc(
+  InstancePools.update::parameters.properties,
   "The requested instance pool resource state."
 );

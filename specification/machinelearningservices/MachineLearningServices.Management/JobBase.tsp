@@ -110,7 +110,8 @@ interface JobBases {
   >;
 }
 
-@@doc(JobBase.name,
+@@doc(
+  JobBase.name,
   "The name and identifier for the Job. This is case-sensitive."
 );
 @@doc(JobBase.properties, "[Required] Additional attributes of the entity.");

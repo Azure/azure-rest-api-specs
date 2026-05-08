@@ -42,10 +42,12 @@ model MeshMembership
 @@maxLength(MeshMembership.name, 63);
 @@minLength(MeshMembership.name, 1);
 @@doc(MeshMembership.name, "The name of the mesh membership.");
-@@doc(MeshMembership.properties,
+@@doc(
+  MeshMembership.properties,
   "Mesh membership properties of a managed cluster."
 );
-@@doc(MeshMemberships.createOrUpdate::parameters.resource,
+@@doc(
+  MeshMemberships.createOrUpdate::parameters.resource,
   "The mesh membership to create or update."
 );
 

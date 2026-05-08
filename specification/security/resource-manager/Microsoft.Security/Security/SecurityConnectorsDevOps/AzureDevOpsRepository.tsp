@@ -116,9 +116,11 @@ interface AzureDevOpsRepositories {
 
 @@doc(AzureDevOpsRepository.name, "The repository name.");
 @@doc(AzureDevOpsRepository.properties, "Azure DevOps Repository properties.");
-@@doc(AzureDevOpsRepositories.createOrUpdate::parameters.resource,
+@@doc(
+  AzureDevOpsRepositories.createOrUpdate::parameters.resource,
   "The Azure DevOps repository resource payload."
 );
-@@doc(AzureDevOpsRepositories.update::parameters.properties,
+@@doc(
+  AzureDevOpsRepositories.update::parameters.properties,
   "The Azure DevOps repository resource payload."
 );

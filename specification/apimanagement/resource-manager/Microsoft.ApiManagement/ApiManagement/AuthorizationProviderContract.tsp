@@ -131,12 +131,15 @@ interface AuthorizationProviderContracts {
 
 @@maxLength(AuthorizationProviderContract.name, 256);
 @@minLength(AuthorizationProviderContract.name, 1);
-@@doc(AuthorizationProviderContract.name,
+@@doc(
+  AuthorizationProviderContract.name,
   "Identifier of the authorization provider."
 );
-@@doc(AuthorizationProviderContract.properties,
+@@doc(
+  AuthorizationProviderContract.properties,
   "Properties of the Authorization Provider Contract."
 );
-@@doc(AuthorizationProviderContracts.createOrUpdate::parameters.resource,
+@@doc(
+  AuthorizationProviderContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );

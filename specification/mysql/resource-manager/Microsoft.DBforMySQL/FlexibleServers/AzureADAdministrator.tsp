@@ -73,6 +73,7 @@ interface AzureADAdministrators {
 
 @@doc(AzureADAdministrator.name, "The name of the Azure AD Administrator.");
 @@doc(AzureADAdministrator.properties, "The properties of an administrator.");
-@@doc(AzureADAdministrators.createOrUpdate::parameters.resource,
+@@doc(
+  AzureADAdministrators.createOrUpdate::parameters.resource,
   "The required parameters for creating or updating an aad administrator."
 );

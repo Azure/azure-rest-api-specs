@@ -82,7 +82,8 @@ interface Routes {
 }
 
 @@doc(Route.name, "Name of the routing rule.");
-@@doc(Route.properties,
+@@doc(
+  Route.properties,
   "The JSON object that contains the properties of the Routes to create."
 );
 @@doc(Routes.create::parameters.resource, "Route properties");

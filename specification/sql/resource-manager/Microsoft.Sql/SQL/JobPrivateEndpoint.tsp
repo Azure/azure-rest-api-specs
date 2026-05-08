@@ -62,6 +62,7 @@ interface JobPrivateEndpoints {
 
 @@doc(JobPrivateEndpoint.name, "The name of the private endpoint to get.");
 @@doc(JobPrivateEndpoint.properties, "Resource properties.");
-@@doc(JobPrivateEndpoints.createOrUpdate::parameters.resource,
+@@doc(
+  JobPrivateEndpoints.createOrUpdate::parameters.resource,
   "The requested private endpoint state."
 );

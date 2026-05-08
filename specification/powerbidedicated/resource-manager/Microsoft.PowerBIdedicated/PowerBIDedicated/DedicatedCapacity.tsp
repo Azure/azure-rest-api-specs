@@ -133,15 +133,19 @@ interface Capacities {
 
 @@maxLength(DedicatedCapacity.name, 63);
 @@minLength(DedicatedCapacity.name, 3);
-@@doc(DedicatedCapacity.name,
+@@doc(
+  DedicatedCapacity.name,
   "The name of the dedicated capacity. It must be a minimum of 3 characters, and a maximum of 63."
 );
-@@doc(DedicatedCapacity.properties,
+@@doc(
+  DedicatedCapacity.properties,
   "Properties of the provision operation request."
 );
-@@doc(Capacities.create::parameters.resource,
+@@doc(
+  Capacities.create::parameters.resource,
   "Contains the information used to provision the Dedicated capacity."
 );
-@@doc(Capacities.update::parameters.properties,
+@@doc(
+  Capacities.update::parameters.properties,
   "Request object that contains the updated information for the capacity."
 );

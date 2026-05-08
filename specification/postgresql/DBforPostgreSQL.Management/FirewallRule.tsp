@@ -65,6 +65,7 @@ interface FirewallRules {
 @@minLength(FirewallRule.name, 1);
 @@doc(FirewallRule.name, "Name of the firewall rule.");
 @@doc(FirewallRule.properties, "Properties of a firewall rule.");
-@@doc(FirewallRules.createOrUpdate::parameters.resource,
+@@doc(
+  FirewallRules.createOrUpdate::parameters.resource,
   "Parameters required for creating or updating a firewall rule."
 );

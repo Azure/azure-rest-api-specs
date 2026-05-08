@@ -66,10 +66,12 @@ interface ServerAzureADAdministrators {
   >;
 }
 
-@@doc(ServerAzureADAdministrator.name,
+@@doc(
+  ServerAzureADAdministrator.name,
   "The name of server active directory administrator."
 );
 @@doc(ServerAzureADAdministrator.properties, "Resource properties.");
-@@doc(ServerAzureADAdministrators.createOrUpdate::parameters.resource,
+@@doc(
+  ServerAzureADAdministrators.createOrUpdate::parameters.resource,
   "The requested Azure Active Directory administrator Resource state."
 );

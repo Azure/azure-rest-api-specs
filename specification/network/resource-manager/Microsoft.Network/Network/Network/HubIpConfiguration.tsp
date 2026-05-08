@@ -79,12 +79,15 @@ interface HubIpConfigurations {
 }
 
 @@doc(HubIpConfiguration.name, "The name of the ipconfig.");
-@@doc(HubIpConfiguration.name,
+@@doc(
+  HubIpConfiguration.name,
   "The name of the resource that is unique within a resource group. This name can be used to access the resource."
 );
-@@doc(HubIpConfiguration.properties,
+@@doc(
+  HubIpConfiguration.properties,
   "The properties of the Virtual Hub IPConfigurations."
 );
-@@doc(HubIpConfigurations.createOrUpdate::parameters.resource,
+@@doc(
+  HubIpConfigurations.createOrUpdate::parameters.resource,
   "Hub Ip Configuration parameters."
 );

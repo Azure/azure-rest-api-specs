@@ -138,13 +138,16 @@ interface DataMaskingPolicies {
   >;
 }
 
-@@doc(DataMaskingPolicy.name,
+@@doc(
+  DataMaskingPolicy.name,
   "The name of the database for which the data masking policy applies."
 );
 @@doc(DataMaskingPolicy.properties, "Resource properties.");
-@@doc(DataMaskingPolicies.createOrUpdate::parameters.resource,
+@@doc(
+  DataMaskingPolicies.createOrUpdate::parameters.resource,
   "Parameters for creating or updating a data masking policy."
 );
-@@doc(DataMaskingPolicies.dataMaskingRulesCreateOrUpdate::parameters.body,
+@@doc(
+  DataMaskingPolicies.dataMaskingRulesCreateOrUpdate::parameters.body,
   "The required parameters for creating or updating a data masking rule."
 );

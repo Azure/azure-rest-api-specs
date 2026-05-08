@@ -99,10 +99,12 @@ interface AFDDomains {
   >;
 }
 
-@@doc(AFDDomain.name,
+@@doc(
+  AFDDomain.name,
   "Name of the domain under the profile which is unique globally."
 );
-@@doc(AFDDomain.properties,
+@@doc(
+  AFDDomain.properties,
   "The JSON object that contains the properties of the domain to create."
 );
 @@doc(AFDDomains.create::parameters.resource, "Domain properties");

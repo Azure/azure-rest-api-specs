@@ -254,10 +254,12 @@ interface Jobs {
 
 @@doc(Job.name, "Job Name");
 @@doc(Job.properties, "Container Apps Job resource specific properties.");
-@@doc(Jobs.createOrUpdate::parameters.resource,
+@@doc(
+  Jobs.createOrUpdate::parameters.resource,
   "Properties used to create a container apps job"
 );
-@@doc(Jobs.update::parameters.properties,
+@@doc(
+  Jobs.update::parameters.properties,
   "Properties used to create a container apps job"
 );
 @@doc(Jobs.start::parameters.body, "Properties used to start a job execution.");

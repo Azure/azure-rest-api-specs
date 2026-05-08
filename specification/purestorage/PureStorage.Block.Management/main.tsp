@@ -649,7 +649,8 @@ model AvsStorageContainerVolume is ProxyResource<VolumeProperties> {
     NamePattern = "^[a-fA-F0-9\\-]{1,64}$"
   >;
 }
-@@doc(AvsStorageContainerVolume.name,
+@@doc(
+  AvsStorageContainerVolume.name,
   "ID of the volume in the storage container"
 );
 

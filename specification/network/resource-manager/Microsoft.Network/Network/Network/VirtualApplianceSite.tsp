@@ -80,12 +80,15 @@ interface VirtualApplianceSites {
   >;
 }
 
-@@doc(VirtualApplianceSite.name,
+@@doc(
+  VirtualApplianceSite.name,
   "The name of the resource that is unique within a resource group. This name can be used to access the resource."
 );
-@@doc(VirtualApplianceSite.properties,
+@@doc(
+  VirtualApplianceSite.properties,
   "The properties of the Virtual Appliance Sites."
 );
-@@doc(VirtualApplianceSites.createOrUpdate::parameters.resource,
+@@doc(
+  VirtualApplianceSites.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update Network Virtual Appliance Site operation."
 );

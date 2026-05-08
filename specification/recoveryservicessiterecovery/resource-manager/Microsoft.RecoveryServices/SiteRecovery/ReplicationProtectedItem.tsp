@@ -370,49 +370,64 @@ interface TargetComputeSizes {
 
 @@doc(ReplicationProtectedItem.name, "Replication protected item name.");
 @@doc(ReplicationProtectedItem.properties, "The custom data.");
-@@doc(ReplicationProtectedItems.create::parameters.resource,
+@@doc(
+  ReplicationProtectedItems.create::parameters.resource,
   "Enable Protection Input."
 );
-@@doc(ReplicationProtectedItems.update::parameters.properties,
+@@doc(
+  ReplicationProtectedItems.update::parameters.properties,
   "Update protection input."
 );
 @@doc(ReplicationProtectedItems.addDisks::parameters.body, "Add disks input.");
-@@doc(ReplicationProtectedItems.applyRecoveryPoint::parameters.body,
+@@doc(
+  ReplicationProtectedItems.applyRecoveryPoint::parameters.body,
   "The ApplyRecoveryPointInput."
 );
-@@doc(ReplicationProtectedItems.plannedFailover::parameters.body,
+@@doc(
+  ReplicationProtectedItems.plannedFailover::parameters.body,
   "Planned failover input."
 );
-@@doc(ReplicationProtectedItems.delete::parameters.body,
+@@doc(
+  ReplicationProtectedItems.delete::parameters.body,
   "Disable protection input."
 );
-@@doc(ReplicationProtectedItems.removeDisks::parameters.body,
+@@doc(
+  ReplicationProtectedItems.removeDisks::parameters.body,
   "Remove disks input."
 );
-@@doc(ReplicationProtectedItems.reprotect::parameters.body,
+@@doc(
+  ReplicationProtectedItems.reprotect::parameters.body,
   "Reverse replication input."
 );
-@@doc(ReplicationProtectedItems.resolveHealthErrors::parameters.body,
+@@doc(
+  ReplicationProtectedItems.resolveHealthErrors::parameters.body,
   "Health issue input object."
 );
-@@doc(ReplicationProtectedItems.switchProvider::parameters.body,
+@@doc(
+  ReplicationProtectedItems.switchProvider::parameters.body,
   "Switch provider input."
 );
-@@doc(ReplicationProtectedItems.testFailover::parameters.body,
+@@doc(
+  ReplicationProtectedItems.testFailover::parameters.body,
   "Test failover input."
 );
-@@doc(ReplicationProtectedItems.testFailoverCleanup::parameters.body,
+@@doc(
+  ReplicationProtectedItems.testFailoverCleanup::parameters.body,
   "Test failover cleanup input."
 );
-@@doc(ReplicationProtectedItems.unplannedFailover::parameters.body,
+@@doc(
+  ReplicationProtectedItems.unplannedFailover::parameters.body,
   "Failover input."
 );
-@@doc(ReplicationProtectedItems.updateAppliance::parameters.body,
+@@doc(
+  ReplicationProtectedItems.updateAppliance::parameters.body,
   "Appliance update protection input."
 );
-@@doc(ReplicationProtectedItems.updateMobilityService::parameters.body,
+@@doc(
+  ReplicationProtectedItems.updateMobilityService::parameters.body,
   "Request to update the mobility service on the protected item."
 );
-@@doc(ReplicationProtectedItems.reinstallMobilityService::parameters.body,
+@@doc(
+  ReplicationProtectedItems.reinstallMobilityService::parameters.body,
   "Request to update the mobility service on the protected item."
 );

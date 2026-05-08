@@ -173,13 +173,16 @@ interface OrderItemResources {
 @@minLength(OrderItemResource.name, 3);
 @@doc(OrderItemResource.name, "The name of the order item.");
 @@doc(OrderItemResource.properties, "Order item properties.");
-@@doc(OrderItemResources.create::parameters.resource,
+@@doc(
+  OrderItemResources.create::parameters.resource,
   "Order item details from request body."
 );
-@@doc(OrderItemResources.update::parameters.properties,
+@@doc(
+  OrderItemResources.update::parameters.properties,
   "Order item update parameters from request body."
 );
 @@doc(OrderItemResources.cancel::parameters.body, "Reason for cancellation.");
-@@doc(OrderItemResources.returnOrderItem::parameters.body,
+@@doc(
+  OrderItemResources.returnOrderItem::parameters.body,
   "Return order item details."
 );

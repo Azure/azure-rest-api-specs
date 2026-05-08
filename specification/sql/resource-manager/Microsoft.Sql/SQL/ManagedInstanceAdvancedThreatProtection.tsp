@@ -53,12 +53,15 @@ interface ManagedInstanceAdvancedThreatProtections {
   listByInstance is ArmResourceListByParent<ManagedInstanceAdvancedThreatProtection>;
 }
 
-@@doc(ManagedInstanceAdvancedThreatProtection.name,
+@@doc(
+  ManagedInstanceAdvancedThreatProtection.name,
   "The name of the Advanced Threat Protection state."
 );
-@@doc(ManagedInstanceAdvancedThreatProtection.properties,
+@@doc(
+  ManagedInstanceAdvancedThreatProtection.properties,
   "Resource properties."
 );
-@@doc(ManagedInstanceAdvancedThreatProtections.createOrUpdate::parameters.resource,
+@@doc(
+  ManagedInstanceAdvancedThreatProtections.createOrUpdate::parameters.resource,
   "The managed instance Advanced Threat Protection state."
 );

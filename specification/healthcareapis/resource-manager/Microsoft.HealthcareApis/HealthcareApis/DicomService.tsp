@@ -142,6 +142,7 @@ interface DicomServiceOperationGroup {
 @@minLength(DicomService.name, 3);
 @@doc(DicomService.name, "The name of DICOM Service resource.");
 @@doc(DicomService.properties, "Dicom Service configuration.");
-@@doc(DicomServices.createOrUpdate::parameters.resource,
+@@doc(
+  DicomServices.createOrUpdate::parameters.resource,
   "The parameters for creating or updating a Dicom Service resource."
 );

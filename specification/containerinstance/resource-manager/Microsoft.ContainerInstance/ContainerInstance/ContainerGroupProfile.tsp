@@ -161,12 +161,15 @@ interface CGProfile {
 @@maxLength(ContainerGroupProfile.name, 63);
 @@minLength(ContainerGroupProfile.name, 1);
 @@doc(ContainerGroupProfile.name, "ContainerGroupProfile name.");
-@@doc(ContainerGroupProfile.properties,
+@@doc(
+  ContainerGroupProfile.properties,
   "The container group profile properties"
 );
-@@doc(ContainerGroupProfiles.createOrUpdate::parameters.resource,
+@@doc(
+  ContainerGroupProfiles.createOrUpdate::parameters.resource,
   "The ContainerGroupProfile object."
 );
-@@doc(ContainerGroupProfiles.update::parameters.properties,
+@@doc(
+  ContainerGroupProfiles.update::parameters.properties,
   "The container group profile properties that need to be updated."
 );

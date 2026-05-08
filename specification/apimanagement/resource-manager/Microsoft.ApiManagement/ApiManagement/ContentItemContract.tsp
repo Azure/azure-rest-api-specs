@@ -111,6 +111,7 @@ interface ContentItemContracts {
 @@minLength(ContentItemContract.name, 1);
 @@doc(ContentItemContract.name, "Content item identifier.");
 @@doc(ContentItemContract.properties, "Properties of the content item.");
-@@doc(ContentItemContracts.createOrUpdate::parameters.resource,
+@@doc(
+  ContentItemContracts.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );

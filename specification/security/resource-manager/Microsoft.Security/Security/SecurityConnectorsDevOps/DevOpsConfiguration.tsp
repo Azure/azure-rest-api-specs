@@ -196,9 +196,11 @@ interface DevOpsConfigurations {
 
 @@doc(DevOpsConfiguration.name, "");
 @@doc(DevOpsConfiguration.properties, "DevOps Configuration properties.");
-@@doc(DevOpsConfigurations.createOrUpdate::parameters.resource,
+@@doc(
+  DevOpsConfigurations.createOrUpdate::parameters.resource,
   "The DevOps configuration resource payload."
 );
-@@doc(DevOpsConfigurations.update::parameters.properties,
+@@doc(
+  DevOpsConfigurations.update::parameters.properties,
   "The DevOps configuration resource payload."
 );

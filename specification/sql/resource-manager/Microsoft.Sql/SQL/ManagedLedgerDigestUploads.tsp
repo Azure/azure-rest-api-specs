@@ -65,6 +65,7 @@ interface ManagedLedgerDigestUploadsOperationGroup {
 
 @@doc(ManagedLedgerDigestUploads.name, "");
 @@doc(ManagedLedgerDigestUploads.properties, "Resource properties.");
-@@doc(ManagedLedgerDigestUploadsOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  ManagedLedgerDigestUploadsOperationGroup.createOrUpdate::parameters.resource,
   "The Ledger Digest Storage Endpoint."
 );

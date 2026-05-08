@@ -75,6 +75,7 @@ interface ServerKeys {
 
 @@doc(ServerKey.name, "The name of the server key to be retrieved.");
 @@doc(ServerKey.properties, "Resource properties.");
-@@doc(ServerKeys.createOrUpdate::parameters.resource,
+@@doc(
+  ServerKeys.createOrUpdate::parameters.resource,
   "The requested server key resource state."
 );

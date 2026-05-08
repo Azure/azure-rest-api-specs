@@ -88,9 +88,11 @@ interface CollectorPolicies {
 
 @@doc(CollectorPolicy.name, "Collector Policy Name");
 @@doc(CollectorPolicy.properties, "Properties of the Collector Policy.");
-@@doc(CollectorPolicies.createOrUpdate::parameters.resource,
+@@doc(
+  CollectorPolicies.createOrUpdate::parameters.resource,
   "The parameters to provide for the created Collector Policy."
 );
-@@Azure.ClientGenerator.Core.clientName(CollectorPolicies.updateTags::parameters.properties,
+@@Azure.ClientGenerator.Core.clientName(
+  CollectorPolicies.updateTags::parameters.properties,
   "parameters"
 );

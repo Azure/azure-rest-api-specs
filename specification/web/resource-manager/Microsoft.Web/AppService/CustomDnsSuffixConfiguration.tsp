@@ -71,9 +71,11 @@ interface CustomDnsSuffixConfigurations {
 }
 
 @@doc(CustomDnsSuffixConfiguration.name, "");
-@@doc(CustomDnsSuffixConfiguration.properties,
+@@doc(
+  CustomDnsSuffixConfiguration.properties,
   "CustomDnsSuffixConfiguration resource specific properties"
 );
-@@doc(CustomDnsSuffixConfigurations.updateAseCustomDnsSuffixConfiguration::parameters.resource,
+@@doc(
+  CustomDnsSuffixConfigurations.updateAseCustomDnsSuffixConfiguration::parameters.resource,
   ""
 );

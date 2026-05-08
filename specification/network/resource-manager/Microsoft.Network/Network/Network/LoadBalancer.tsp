@@ -120,12 +120,15 @@ interface LoadBalancers {
 
 @@doc(LoadBalancer.name, "The name of the load balancer.");
 @@doc(LoadBalancer.properties, "Properties of load balancer.");
-@@doc(LoadBalancers.createOrUpdate::parameters.resource,
+@@doc(
+  LoadBalancers.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update load balancer operation."
 );
-@@doc(LoadBalancers.updateTags::parameters.properties,
+@@doc(
+  LoadBalancers.updateTags::parameters.properties,
   "Parameters supplied to update load balancer tags."
 );
-@@doc(LoadBalancers.migrateToIpBased::parameters.body,
+@@doc(
+  LoadBalancers.migrateToIpBased::parameters.body,
   "Parameters supplied to the migrateToIpBased Api."
 );

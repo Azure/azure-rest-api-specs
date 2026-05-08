@@ -118,7 +118,8 @@ op privateLinksGetCustomization(
   privateLinkName: `private-link-parameters`,
 ): ArmResponse<PrivateLinksAPI.PrivateLinkResource> | ErrorResponse;
 
-@@Azure.ClientGenerator.Core.override(PrivateLinkResources.get,
+@@Azure.ClientGenerator.Core.override(
+  PrivateLinkResources.get,
   privateLinksGetCustomization,
   "!python,!java"
 );
@@ -142,10 +143,12 @@ op privateLinksCreateCustomization(
     Azure.Core.Foundations.RetryAfterHeader
 > | ErrorResponse;
 
-@@clientName(privateLinksCreateCustomization::parameters.resource,
+@@clientName(
+  privateLinksCreateCustomization::parameters.resource,
   "privateLink"
 );
-@@Azure.ClientGenerator.Core.override(PrivateLinkResources.create,
+@@Azure.ClientGenerator.Core.override(
+  PrivateLinkResources.create,
   privateLinksCreateCustomization,
   "!python,!java"
 );
@@ -165,10 +168,12 @@ op privateLinksUpdateCustomization(
   properties: PrivateLinksAPI.PrivateLinkUpdate,
 ): ArmResponse<PrivateLinksAPI.PrivateLinkResource> | ErrorResponse;
 
-@@clientName(privateLinksUpdateCustomization::parameters.properties,
+@@clientName(
+  privateLinksUpdateCustomization::parameters.properties,
   "privateLink"
 );
-@@Azure.ClientGenerator.Core.override(PrivateLinkResources.update,
+@@Azure.ClientGenerator.Core.override(
+  PrivateLinkResources.update,
   privateLinksUpdateCustomization,
   "!python,!java"
 );
@@ -188,7 +193,8 @@ op privateLinksDeleteCustomization(
 ): ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
   Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse | ErrorResponse;
 
-@@Azure.ClientGenerator.Core.override(PrivateLinkResources.delete,
+@@Azure.ClientGenerator.Core.override(
+  PrivateLinkResources.delete,
   privateLinksDeleteCustomization,
   "!python,!java"
 );
@@ -207,7 +213,8 @@ op privateLinksHeadCustomization(
   privateLinkName: `private-link-parameters`,
 ): OkResponse | ErrorResponse;
 
-@@Azure.ClientGenerator.Core.override(PrivateLinkResources.head,
+@@Azure.ClientGenerator.Core.override(
+  PrivateLinkResources.head,
   privateLinksHeadCustomization,
   "!python,!java"
 );
@@ -225,7 +232,8 @@ op privateEndpointConnectionsListCustomization(
   privateLinkName: `private-link-parameters`,
 ): ArmResponse<ResourceListResult<PrivateLinksAPI.PrivateEndpointConnection>> | ErrorResponse;
 
-@@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.list,
+@@Azure.ClientGenerator.Core.override(
+  PrivateEndpointConnections.list,
   privateEndpointConnectionsListCustomization,
   "!python,!java"
 );
@@ -245,7 +253,8 @@ op privateEndpointConnectionsGetCustomization(
   privateEndpointConnectionName: string,
 ): ArmResponse<Azure.ResourceManager.PrivateEndpointConnection> | ErrorResponse;
 
-@@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.get,
+@@Azure.ClientGenerator.Core.override(
+  PrivateEndpointConnections.get,
   privateEndpointConnectionsGetCustomization,
   "!python,!java"
 );
@@ -272,11 +281,13 @@ op privateEndpointConnectionsCreateOrUpdateCustomization(
     Azure.Core.Foundations.RetryAfterHeader
 > | ErrorResponse;
 
-@@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.createOrUpdate,
+@@Azure.ClientGenerator.Core.override(
+  PrivateEndpointConnections.createOrUpdate,
   privateEndpointConnectionsCreateOrUpdateCustomization,
   "!python,!java"
 );
-@@clientName(privateEndpointConnectionsCreateOrUpdateCustomization::parameters.resource,
+@@clientName(
+  privateEndpointConnectionsCreateOrUpdateCustomization::parameters.resource,
   "privateEndpointConnection"
 );
 
@@ -298,7 +309,8 @@ op privateEndpointConnectionsDeleteCustomization(
 ): ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
   Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse | ErrorResponse;
 
-@@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.delete,
+@@Azure.ClientGenerator.Core.override(
+  PrivateEndpointConnections.delete,
   privateEndpointConnectionsDeleteCustomization,
   "!python,!java"
 );
@@ -316,7 +328,8 @@ op privateLinkResourcesListCustomization(
   privateLinkName: `private-link-parameters`,
 ): ArmResponse<ResourceListResult<PrivateLinkGroupResource>> | ErrorResponse;
 
-@@Azure.ClientGenerator.Core.override(PrivateLinkGroupResources.list,
+@@Azure.ClientGenerator.Core.override(
+  PrivateLinkGroupResources.list,
   privateLinkResourcesListCustomization,
   "!python,!java"
 );
@@ -337,23 +350,27 @@ op privateLinkResourcesGetCustomization(
   groupId: string,
 ): ArmResponse<PrivateLinkGroupResource> | ErrorResponse;
 
-@@Azure.ClientGenerator.Core.override(PrivateLinkGroupResources.get,
+@@Azure.ClientGenerator.Core.override(
+  PrivateLinkGroupResources.get,
   privateLinkResourcesGetCustomization,
   "!python,!java"
 );
-@@clientName(SecurityStandardsAPI.SecurityStandard,
+@@clientName(
+  SecurityStandardsAPI.SecurityStandard,
   "ArmSecurityStandard",
   "go"
 );
 @@clientName(SecurityOperatorsAPI.SecurityOperator, "OperatorResource", "go");
-@@clientLocation(SecurityStandards.createOrUpdate,
+@@clientLocation(
+  SecurityStandards.createOrUpdate,
   "ArmSecurityStandards",
   "go"
 );
 @@clientLocation(SecurityStandards.get, "ArmSecurityStandards", "go");
 @@clientLocation(SecurityStandards.delete, "ArmSecurityStandards", "go");
 @@clientLocation(SecurityStandards.list, "ArmSecurityStandards", "go");
-@@clientName(SecurityStandardsAPI.SecurityStandardProperties,
+@@clientName(
+  SecurityStandardsAPI.SecurityStandardProperties,
   "ArmSecurityStandardProperties",
   "go"
 );
@@ -361,56 +378,67 @@ op privateLinkResourcesGetCustomization(
 
 @@clientName(SecuritySolutionsAPI.Status, "StatusEnum", "go");
 
-@@clientName(Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo,
   "ArmErrorAdditionalInfo",
   "java"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
   "ArmPrivateEndpointConnection",
   "java,javascript,go"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.ActionType,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ActionType,
   "ArmActionType",
   "java,go"
 );
 @@clientName(StandardsAPI.StandardList, "ArmSecurityStandardList", "go");
 
-@@clientName(IoTSecurityAPI.RecommendationType.IoT_ACRAuthentication,
+@@clientName(
+  IoTSecurityAPI.RecommendationType.IoT_ACRAuthentication,
   "IoTAcrauthentication",
   "javascript,go"
 );
-@@clientName(IoTSecurityAPI.RecommendationType.IoT_IPFilter_DenyAll,
+@@clientName(
+  IoTSecurityAPI.RecommendationType.IoT_IPFilter_DenyAll,
   "IoTIpfilterDenyAll",
   "javascript,go"
 );
-@@clientName(IoTSecurityAPI.RecommendationType.IoT_IPFilter_PermissiveRule,
+@@clientName(
+  IoTSecurityAPI.RecommendationType.IoT_IPFilter_PermissiveRule,
   "IoTIpfilterPermissiveRule",
   "javascript,go"
 );
 @@clientName(SubAssessmentsAPI.CVE, "Cve", "javascript,java");
 
-@@clientName(SecurityConnectorsAPI.DefenderCspmAwsOfferingCiemCiemDiscovery,
+@@clientName(
+  SecurityConnectorsAPI.DefenderCspmAwsOfferingCiemCiemDiscovery,
   "DefenderCspmAwsOfferingCiemDiscovery",
   "go,javascript,python,java"
 );
 
-@@clientName(SecurityConnectorsAPI.DefenderCspmAwsOfferingCiemCiemOidc,
+@@clientName(
+  SecurityConnectorsAPI.DefenderCspmAwsOfferingCiemCiemOidc,
   "DefenderCspmAwsOfferingCiemOidc",
   "go,javascript,python,java"
 );
 
 @@clientName(Common.ResourceDetails, "CommonResourceDetails", "python,go");
 @@clientName(HealthReportsAPI.status, "StatusAutoGenerated", "python");
-@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
   "ArmPrivateEndpointConnection",
   "python"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.ActionType,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ActionType,
   "ArmActionType",
   "python,javascript"
 );
 @@clientName(AadConnectivityState, "AadConnectivityStateEnum", "python");
-@@clientName(ExternalSecuritySolutionKind,
+@@clientName(
+  ExternalSecuritySolutionKind,
   "ExternalSecuritySolutionKindEnum",
   "python"
 );
@@ -419,27 +447,33 @@ op privateLinkResourcesGetCustomization(
 @@clientName(OperationResultStatus, "OperationResult", "python");
 @@clientName(OperationResult, "OperationResultAutoGenerated", "python");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(AdvancedThreatProtectionSettingNameAlias.settingName,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  AdvancedThreatProtectionSettingNameAlias.settingName,
   "current",
   "python"
 );
-@@Azure.ClientGenerator.Core.alternateType(AdvancedThreatProtectionSettingNameAlias.settingName,
+@@Azure.ClientGenerator.Core.alternateType(
+  AdvancedThreatProtectionSettingNameAlias.settingName,
   "current"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(JitNetworkAccessPolicyInitiateTypeAlias.jitNetworkAccessPolicyInitiateType,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  JitNetworkAccessPolicyInitiateTypeAlias.jitNetworkAccessPolicyInitiateType,
   "initiate",
   "python"
 );
-@@Azure.ClientGenerator.Core.alternateType(JitNetworkAccessPolicyInitiateTypeAlias.jitNetworkAccessPolicyInitiateType,
+@@Azure.ClientGenerator.Core.alternateType(
+  JitNetworkAccessPolicyInitiateTypeAlias.jitNetworkAccessPolicyInitiateType,
   "initiate"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(ServerVulnerabilityAssessmentNameAlias.serverVulnerabilityAssessment,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  ServerVulnerabilityAssessmentNameAlias.serverVulnerabilityAssessment,
   "default",
   "python"
 );
-@@Azure.ClientGenerator.Core.alternateType(ServerVulnerabilityAssessmentNameAlias.serverVulnerabilityAssessment,
+@@Azure.ClientGenerator.Core.alternateType(
+  ServerVulnerabilityAssessmentNameAlias.serverVulnerabilityAssessment,
   "default"
 );
 
@@ -491,7 +525,8 @@ op sqlVulnerabilityAssessmentScanResultsList(
   resourceId: string,
 ): ArmResponse<ScanResults> | Common.CloudError;
 
-@@override(SqlVulnerabilityAssessmentScanResults.list,
+@@override(
+  SqlVulnerabilityAssessmentScanResults.list,
   sqlVulnerabilityAssessmentScanResultsList
 );
 
@@ -522,7 +557,8 @@ op sqlVulnerabilityAssessmentScanResultsGet(
   resourceId: string,
 ): ArmResponse<ScanResult> | Common.CloudError;
 
-@@override(SqlVulnerabilityAssessmentScanResults.get,
+@@override(
+  SqlVulnerabilityAssessmentScanResults.get,
   sqlVulnerabilityAssessmentScanResultsGet
 );
 
@@ -542,65 +578,79 @@ op alertsListResourceGroupLevelByRegionCustomized(
   ...Azure.ResourceManager.Legacy.Provider,
 ): ArmResponse<AlertList> | ErrorResponse;
 
-@@override(AlertOperationGroup.listResourceGroupLevelByRegion,
+@@override(
+  AlertOperationGroup.listResourceGroupLevelByRegion,
   alertsListResourceGroupLevelByRegionCustomized,
   "python,go,java"
 );
 
-@@alternateType(Azure.ResourceManager.CommonTypes.Identity.type,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Identity.type,
   "SystemAssigned",
   "go"
 );
 
-@@clientName(HealthReportsAPI.resourceDetails,
+@@clientName(
+  HealthReportsAPI.resourceDetails,
   "HealthReportResourceDetails",
   "java"
 );
-@@clientLocation(ApiCollections.getByAzureApiManagementService,
+@@clientLocation(
+  ApiCollections.getByAzureApiManagementService,
   "ApiCollections",
   "java"
 );
-@@clientLocation(ApiCollections.onboardAzureApiManagementApi,
+@@clientLocation(
+  ApiCollections.onboardAzureApiManagementApi,
   "ApiCollections",
   "java"
 );
-@@clientLocation(ApiCollections.offboardAzureApiManagementApi,
+@@clientLocation(
+  ApiCollections.offboardAzureApiManagementApi,
   "ApiCollections",
   "java"
 );
-@@clientLocation(ApiCollections.listByAzureApiManagementService,
+@@clientLocation(
+  ApiCollections.listByAzureApiManagementService,
   "ApiCollections",
   "java"
 );
 @@clientLocation(ApiCollections.listBySubscription, "ApiCollections", "java");
-@@clientLocation(ApiCollectionsOperationGroup.listByResourceGroup,
+@@clientLocation(
+  ApiCollectionsOperationGroup.listByResourceGroup,
   "ApiCollections",
   "java"
 );
 
 @@clientName(SecurityManagementClient, "SecurityCenter", "java");
 @@clientName(SubAssessmentsAPI.CVSS, "Cvss", "java");
-@@clientName(SecurityAssessmentPropertiesBaseRiskPathsItemEdgeItem,
+@@clientName(
+  SecurityAssessmentPropertiesBaseRiskPathsItemEdgeItem,
   "SecurityAssessmentPropertiesBaseRiskPathsItemEdge",
   "java"
 );
-@@clientName(SecurityAssessmentPropertiesBaseRiskPathsItemNodesItem,
+@@clientName(
+  SecurityAssessmentPropertiesBaseRiskPathsItemNodesItem,
   "SecurityAssessmentPropertiesBaseRiskPathsPropertiesItemsItem",
   "java"
 );
-@@clientLocation(ApplicationsAPI.SecurityConnectorApplication.get,
+@@clientLocation(
+  ApplicationsAPI.SecurityConnectorApplication.get,
   "SecurityConnectorApplications",
   "java"
 );
-@@clientLocation(ApplicationsAPI.SecurityConnectorApplication.createOrUpdate,
+@@clientLocation(
+  ApplicationsAPI.SecurityConnectorApplication.createOrUpdate,
   "SecurityConnectorApplications",
   "java"
 );
-@@clientLocation(ApplicationsAPI.SecurityConnectorApplication.delete,
+@@clientLocation(
+  ApplicationsAPI.SecurityConnectorApplication.delete,
   "SecurityConnectorApplications",
   "java"
 );
-@@clientLocation(ApplicationsAPI.SecurityConnectorApplication.list,
+@@clientLocation(
+  ApplicationsAPI.SecurityConnectorApplication.list,
   "SecurityConnectorApplications",
   "java"
 );

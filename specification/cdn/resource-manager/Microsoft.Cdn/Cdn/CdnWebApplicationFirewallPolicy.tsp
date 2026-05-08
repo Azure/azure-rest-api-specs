@@ -85,15 +85,19 @@ interface CdnWebApplicationFirewallPolicies {
 }
 
 @@maxLength(CdnWebApplicationFirewallPolicy.name, 128);
-@@doc(CdnWebApplicationFirewallPolicy.name,
+@@doc(
+  CdnWebApplicationFirewallPolicy.name,
   "The name of the CdnWebApplicationFirewallPolicy."
 );
-@@doc(CdnWebApplicationFirewallPolicy.properties,
+@@doc(
+  CdnWebApplicationFirewallPolicy.properties,
   "Properties of the web application firewall policy."
 );
-@@doc(CdnWebApplicationFirewallPolicies.createOrUpdate::parameters.resource,
+@@doc(
+  CdnWebApplicationFirewallPolicies.createOrUpdate::parameters.resource,
   "Policy to be created."
 );
-@@doc(CdnWebApplicationFirewallPolicies.update::parameters.properties,
+@@doc(
+  CdnWebApplicationFirewallPolicies.update::parameters.properties,
   "CdnWebApplicationFirewallPolicy parameters to be patched."
 );

@@ -103,16 +103,20 @@ namespace ComputeGallery {
     >;
   }
 
-  @@doc(GalleryScriptVersion.name,
+  @@doc(
+    GalleryScriptVersion.name,
     "The name of the gallery Script Version to be retrieved."
   );
-  @@doc(GalleryScriptVersion.properties,
+  @@doc(
+    GalleryScriptVersion.properties,
     "Describes the properties of a gallery Script Version."
   );
-  @@doc(GalleryScriptVersions.createOrUpdate::parameters.resource,
+  @@doc(
+    GalleryScriptVersions.createOrUpdate::parameters.resource,
     "Parameters supplied to the create or update gallery Script Version operation."
   );
-  @@doc(GalleryScriptVersions.update::parameters.properties,
+  @@doc(
+    GalleryScriptVersions.update::parameters.properties,
     "Parameters supplied to the update gallery Script Version operation."
   );
 }

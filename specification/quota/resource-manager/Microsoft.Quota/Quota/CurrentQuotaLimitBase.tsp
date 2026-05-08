@@ -77,7 +77,8 @@ interface CurrentQuotaLimitBases {
   >;
 }
 
-@@doc(CurrentQuotaLimitBase.name,
+@@doc(
+  CurrentQuotaLimitBase.name,
   """
     Resource name for a given resource provider. For example:
     - SKU name for Microsoft.Compute
@@ -85,12 +86,15 @@ interface CurrentQuotaLimitBases {
      For Microsoft.Network PublicIPAddresses.
     """
 );
-@@doc(CurrentQuotaLimitBase.properties,
+@@doc(
+  CurrentQuotaLimitBase.properties,
   "Quota properties for the specified resource, based on the API called, Quotas or Usages."
 );
-@@doc(CurrentQuotaLimitBases.createOrUpdate::parameters.resource,
+@@doc(
+  CurrentQuotaLimitBases.createOrUpdate::parameters.resource,
   "Quota request payload."
 );
-@@doc(CurrentQuotaLimitBases.update::parameters.properties,
+@@doc(
+  CurrentQuotaLimitBases.update::parameters.properties,
   "Quota requests payload."
 );

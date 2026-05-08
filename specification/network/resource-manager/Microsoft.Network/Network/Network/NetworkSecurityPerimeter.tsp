@@ -134,15 +134,19 @@ interface NetworkSecurityPerimeters {
 }
 
 @@maxLength(NetworkSecurityPerimeter.name, 80);
-@@doc(NetworkSecurityPerimeter.name,
+@@doc(
+  NetworkSecurityPerimeter.name,
   "The name of the network security perimeter."
 );
-@@doc(NetworkSecurityPerimeter.properties,
+@@doc(
+  NetworkSecurityPerimeter.properties,
   "The network security perimeter properties"
 );
-@@doc(NetworkSecurityPerimeters.createOrUpdate::parameters.resource,
+@@doc(
+  NetworkSecurityPerimeters.createOrUpdate::parameters.resource,
   "Parameter supplied to create or update the network security perimeter."
 );
-@@doc(NetworkSecurityPerimeters.patch::parameters.properties,
+@@doc(
+  NetworkSecurityPerimeters.patch::parameters.properties,
   "Parameter supplied to the network security perimeter."
 );

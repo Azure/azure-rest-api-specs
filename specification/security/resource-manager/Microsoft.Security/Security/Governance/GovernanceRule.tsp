@@ -134,13 +134,16 @@ interface GovernanceRules {
   >;
 }
 
-@@doc(GovernanceRule.name,
+@@doc(
+  GovernanceRule.name,
   "The governance rule key - unique key for the standard governance rule (GUID)"
 );
 @@doc(GovernanceRule.properties, "Properties of a governance rule");
-@@doc(GovernanceRules.createOrUpdate::parameters.resource,
+@@doc(
+  GovernanceRules.createOrUpdate::parameters.resource,
   "Governance rule over a given scope"
 );
-@@doc(GovernanceRules.execute::parameters.body,
+@@doc(
+  GovernanceRules.execute::parameters.body,
   "Execute governance rule over a given scope"
 );

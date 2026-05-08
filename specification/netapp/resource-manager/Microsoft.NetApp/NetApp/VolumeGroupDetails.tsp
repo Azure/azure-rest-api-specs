@@ -228,6 +228,7 @@ interface VolumeGroups {
 @@minLength(VolumeGroupDetails.name, 1);
 @@doc(VolumeGroupDetails.name, "The name of the volumeGroup");
 @@doc(VolumeGroupDetails.properties, "Volume group properties");
-@@doc(VolumeGroups.create::parameters.resource,
+@@doc(
+  VolumeGroups.create::parameters.resource,
   "Volume Group object supplied in the body of the operation."
 );

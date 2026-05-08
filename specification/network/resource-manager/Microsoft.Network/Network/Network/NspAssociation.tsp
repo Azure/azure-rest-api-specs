@@ -122,9 +122,11 @@ interface NspAssociations {
 @@maxLength(NspAssociation.name, 80);
 @@doc(NspAssociation.name, "The name of the NSP association.");
 @@doc(NspAssociation.properties, "Properties of the NSP resource association.");
-@@doc(NspAssociations.createOrUpdate::parameters.resource,
+@@doc(
+  NspAssociations.createOrUpdate::parameters.resource,
   "Parameters that hold the NspAssociation resource to be created/updated."
 );
-@@doc(NspAssociations.reconcile::parameters.body,
+@@doc(
+  NspAssociations.reconcile::parameters.body,
   "Parameters for NSP association reconcile"
 );

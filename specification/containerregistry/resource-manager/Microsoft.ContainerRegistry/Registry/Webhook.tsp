@@ -99,9 +99,11 @@ interface Webhooks {
 @@minLength(Webhook.name, 5);
 @@doc(Webhook.name, "The name of the webhook.");
 @@doc(Webhook.properties, "The properties of the webhook.");
-@@doc(Webhooks.create::parameters.resource,
+@@doc(
+  Webhooks.create::parameters.resource,
   "The parameters for creating a webhook."
 );
-@@doc(Webhooks.update::parameters.properties,
+@@doc(
+  Webhooks.update::parameters.properties,
   "The parameters for updating a webhook."
 );

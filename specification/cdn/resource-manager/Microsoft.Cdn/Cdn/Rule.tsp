@@ -81,10 +81,12 @@ interface Rules {
   listByRuleSet is ArmResourceListByParent<Rule>;
 }
 
-@@doc(Rule.name,
+@@doc(
+  Rule.name,
   "Name of the delivery rule which is unique within the endpoint."
 );
-@@doc(Rule.properties,
+@@doc(
+  Rule.properties,
   "The JSON object that contains the properties of the Rules to create."
 );
 @@doc(Rules.create::parameters.resource, "The delivery rule properties.");

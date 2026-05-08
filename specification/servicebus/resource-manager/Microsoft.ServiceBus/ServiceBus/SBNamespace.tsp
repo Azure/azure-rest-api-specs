@@ -154,15 +154,19 @@ interface SBNamespaces {
 @@minLength(SBNamespace.name, 6);
 @@doc(SBNamespace.name, "The namespace name");
 @@doc(SBNamespace.properties, "Properties of the namespace.");
-@@doc(SBNamespaces.createOrUpdate::parameters.resource,
+@@doc(
+  SBNamespaces.createOrUpdate::parameters.resource,
   "Parameters supplied to create a namespace resource."
 );
-@@doc(SBNamespaces.update::parameters.properties,
+@@doc(
+  SBNamespaces.update::parameters.properties,
   "Parameters supplied to update a namespace resource."
 );
-@@doc(SBNamespaces.failover::parameters.body,
+@@doc(
+  SBNamespaces.failover::parameters.body,
   "Parameters for updating a namespace resource."
 );
-@@doc(SBNamespaces.checkNameAvailability::parameters.body,
+@@doc(
+  SBNamespaces.checkNameAvailability::parameters.body,
   "Parameters to check availability of the given namespace name"
 );

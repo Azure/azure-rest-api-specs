@@ -68,9 +68,11 @@ interface SqlRoleAssignmentGetResultsOperationGroup {
 }
 
 @@doc(SqlRoleAssignmentGetResults.name, "The GUID for the Role Assignment.");
-@@doc(SqlRoleAssignmentGetResults.properties,
+@@doc(
+  SqlRoleAssignmentGetResults.properties,
   "Properties related to the Role Assignment."
 );
-@@doc(SqlRoleAssignmentGetResultsOperationGroup.createUpdateSqlRoleAssignment::parameters.resource,
+@@doc(
+  SqlRoleAssignmentGetResultsOperationGroup.createUpdateSqlRoleAssignment::parameters.resource,
   "The properties required to create or update a Role Assignment."
 );

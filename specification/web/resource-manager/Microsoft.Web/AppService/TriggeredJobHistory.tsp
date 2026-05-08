@@ -145,6 +145,7 @@ interface TriggeredJobHistoryOperationGroup {
 }
 
 @@doc(TriggeredJobHistory.name, "History ID.");
-@@doc(TriggeredJobHistory.properties,
+@@doc(
+  TriggeredJobHistory.properties,
   "TriggeredJobHistory resource specific properties"
 );

@@ -58,12 +58,15 @@ interface ManagedInstanceLongTermRetentionPolicies {
   listByDatabase is ArmResourceListByParent<ManagedInstanceLongTermRetentionPolicy>;
 }
 
-@@doc(ManagedInstanceLongTermRetentionPolicy.name,
+@@doc(
+  ManagedInstanceLongTermRetentionPolicy.name,
   "The policy name. Should always be Default."
 );
-@@doc(ManagedInstanceLongTermRetentionPolicy.properties,
+@@doc(
+  ManagedInstanceLongTermRetentionPolicy.properties,
   "Resource properties."
 );
-@@doc(ManagedInstanceLongTermRetentionPolicies.createOrUpdate::parameters.resource,
+@@doc(
+  ManagedInstanceLongTermRetentionPolicies.createOrUpdate::parameters.resource,
   "The long term retention policy info."
 );

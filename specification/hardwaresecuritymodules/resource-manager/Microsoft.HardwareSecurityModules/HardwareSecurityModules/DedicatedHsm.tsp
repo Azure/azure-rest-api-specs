@@ -117,9 +117,11 @@ interface DedicatedHsms {
 
 @@doc(DedicatedHsm.name, "Name of the dedicated Hsm");
 @@doc(DedicatedHsm.properties, "Properties of the dedicated HSM");
-@@doc(DedicatedHsms.createOrUpdate::parameters.resource,
+@@doc(
+  DedicatedHsms.createOrUpdate::parameters.resource,
   "Parameters to create or update the dedicated hsm"
 );
-@@doc(DedicatedHsms.update::parameters.properties,
+@@doc(
+  DedicatedHsms.update::parameters.properties,
   "Parameters to patch the dedicated HSM"
 );

@@ -100,12 +100,15 @@ interface PrivateEndpointOperationStatuses {
   >;
 }
 
-@@doc(PrivateEndpointConnectionResource.name,
+@@doc(
+  PrivateEndpointConnectionResource.name,
   "The name of the private endpoint connection."
 );
-@@doc(PrivateEndpointConnectionResource.properties,
+@@doc(
+  PrivateEndpointConnectionResource.properties,
   "PrivateEndpointConnectionResource properties"
 );
-@@doc(PrivateEndpointConnectionResources.put::parameters.resource,
+@@doc(
+  PrivateEndpointConnectionResources.put::parameters.resource,
   "Request body for operation"
 );

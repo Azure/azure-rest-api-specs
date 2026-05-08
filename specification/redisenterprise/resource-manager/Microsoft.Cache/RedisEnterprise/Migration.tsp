@@ -75,9 +75,11 @@ interface Migrations {
 
 @@doc(Migration.name, "");
 @@doc(Migration.properties, "Properties of the migration operation.");
-@@doc(Migrations.start::parameters.resource,
+@@doc(
+  Migrations.start::parameters.resource,
   "Parameters supplied to start a migration operation."
 );
-@@doc(Migrations.validate::parameters.body,
+@@doc(
+  Migrations.validate::parameters.body,
   "Parameters supplied to validate a migration operation."
 );

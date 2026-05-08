@@ -139,9 +139,11 @@ interface ConditionalCredits {
 
 @@doc(ConditionalCredit.name, "Name of the conditional credit");
 @@doc(ConditionalCredit.properties, "Conditional credit properties");
-@@doc(ConditionalCredits.createOrUpdate::parameters.resource,
+@@doc(
+  ConditionalCredits.createOrUpdate::parameters.resource,
   "Request body for creating a conditional credit"
 );
-@@doc(ConditionalCredits.update::parameters.properties,
+@@doc(
+  ConditionalCredits.update::parameters.properties,
   "Request body for updating a conditional credit"
 );

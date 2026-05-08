@@ -78,7 +78,8 @@ interface Endpoints {
 }
 
 @@doc(Endpoint.name, "The name of the Endpoint resource.");
-@@doc(Endpoint.properties,
+@@doc(
+  Endpoint.properties,
   "The resource specific properties for the Storage Mover resource."
 );
 @@doc(Endpoints.createOrUpdate::parameters.resource, "");

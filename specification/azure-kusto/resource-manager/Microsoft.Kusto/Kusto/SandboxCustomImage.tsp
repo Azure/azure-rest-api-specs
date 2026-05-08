@@ -82,9 +82,11 @@ interface SandboxCustomImages {
 
 @@doc(SandboxCustomImage.name, "The name of the sandbox custom image.");
 @@doc(SandboxCustomImage.properties, "A sandbox custom image.");
-@@doc(SandboxCustomImages.createOrUpdate::parameters.resource,
+@@doc(
+  SandboxCustomImages.createOrUpdate::parameters.resource,
   "The sandbox custom image parameters."
 );
-@@doc(SandboxCustomImages.update::parameters.properties,
+@@doc(
+  SandboxCustomImages.update::parameters.properties,
   "The sandbox custom image parameters."
 );

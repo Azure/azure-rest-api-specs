@@ -240,15 +240,18 @@ interface DatadogMonitorResources {
 @@maxLength(DatadogMonitorResource.name, 32);
 @@minLength(DatadogMonitorResource.name, 2);
 @@doc(DatadogMonitorResource.name, "Monitor resource name");
-@@doc(DatadogMonitorResource.properties,
+@@doc(
+  DatadogMonitorResource.properties,
   "Properties specific to the monitor resource."
 );
 @@doc(DatadogMonitorResources.create::parameters.resource, "");
 @@doc(DatadogMonitorResources.update::parameters.resource, "");
 @@doc(DatadogMonitorResources.setDefaultKey::parameters.body, "");
-@@doc(DatadogMonitorResources.linkSaaS::parameters.body,
+@@doc(
+  DatadogMonitorResources.linkSaaS::parameters.body,
   "Link SaaS body parameter"
 );
-@@doc(DatadogMonitorResources.resubscribe::parameters.body,
+@@doc(
+  DatadogMonitorResources.resubscribe::parameters.body,
   "Resubscribe Properties"
 );

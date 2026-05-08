@@ -69,6 +69,7 @@ interface UpdateRuns {
 
 @@doc(UpdateRun.name, "The name of the Update Run");
 @@doc(UpdateRun.properties, "Describes Update Run Properties.");
-@@doc(UpdateRuns.put::parameters.resource,
+@@doc(
+  UpdateRuns.put::parameters.resource,
   "Properties of the updateRuns object"
 );

@@ -68,7 +68,8 @@ interface Snapshots {
 
 @@maxLength(Snapshot.name, 80);
 @@minLength(Snapshot.name, 1);
-@@doc(Snapshot.name,
+@@doc(
+  Snapshot.name,
   "The name of the volume snapshot within the given volume group."
 );
 @@doc(Snapshot.properties, "Properties of Volume Snapshot.");

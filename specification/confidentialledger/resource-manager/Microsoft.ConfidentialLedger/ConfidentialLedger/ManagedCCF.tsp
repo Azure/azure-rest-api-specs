@@ -112,10 +112,12 @@ interface ManagedCCFs {
 
 @@doc(ManagedCCF.name, "Name of the Managed CCF");
 @@doc(ManagedCCF.properties, "Properties of Managed CCF Resource.");
-@@doc(ManagedCCFs.create::parameters.resource,
+@@doc(
+  ManagedCCFs.create::parameters.resource,
   "Managed CCF Create Request Body"
 );
-@@doc(ManagedCCFs.update::parameters.properties,
+@@doc(
+  ManagedCCFs.update::parameters.properties,
   "Request body for Updating Managed CCF App"
 );
 @@doc(ManagedCCFs.backup::parameters.body, "Managed CCF Backup Request Body");

@@ -67,10 +67,12 @@ interface ManagedInstanceEncryptionProtectors {
   >;
 }
 
-@@doc(ManagedInstanceEncryptionProtector.name,
+@@doc(
+  ManagedInstanceEncryptionProtector.name,
   "The name of the encryption protector to be retrieved."
 );
 @@doc(ManagedInstanceEncryptionProtector.properties, "Resource properties.");
-@@doc(ManagedInstanceEncryptionProtectors.createOrUpdate::parameters.resource,
+@@doc(
+  ManagedInstanceEncryptionProtectors.createOrUpdate::parameters.resource,
   "The requested encryption protector resource state."
 );

@@ -62,6 +62,7 @@ interface ImportExportExtensionsOperationResults {
 
 @@doc(ImportExportExtensionsOperationResult.name, "");
 @@doc(ImportExportExtensionsOperationResult.properties, "Resource properties.");
-@@doc(ImportExportExtensionsOperationResults.createOrUpdate::parameters.resource,
+@@doc(
+  ImportExportExtensionsOperationResults.createOrUpdate::parameters.resource,
   "The database import request parameters."
 );

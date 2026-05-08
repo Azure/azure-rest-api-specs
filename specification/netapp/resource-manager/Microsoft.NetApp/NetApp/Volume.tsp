@@ -2290,7 +2290,8 @@ union ActualRansomwareProtectionState {
   Paused: "Paused",
 }
 
-@@visibility(Azure.ResourceManager.AvailabilityZonesProperty.zones,
+@@visibility(
+  Azure.ResourceManager.AvailabilityZonesProperty.zones,
   Lifecycle.Read,
   Lifecycle.Create
 );
@@ -2689,37 +2690,48 @@ interface Volumes {
 @@minLength(Volume.name, 1);
 @@doc(Volume.name, "The name of the volume");
 @@doc(Volume.properties, "Volume properties");
-@@doc(Volumes.createOrUpdate::parameters.resource,
+@@doc(
+  Volumes.createOrUpdate::parameters.resource,
   "Volume object supplied in the body of the operation."
 );
-@@doc(Volumes.update::parameters.properties,
+@@doc(
+  Volumes.update::parameters.properties,
   "Volume object supplied in the body of the operation."
 );
-@@doc(Volumes.revert::parameters.body,
+@@doc(
+  Volumes.revert::parameters.body,
   "Object for snapshot to revert supplied in the body of the operation."
 );
-@@doc(Volumes.breakFileLocks::parameters.body,
+@@doc(
+  Volumes.breakFileLocks::parameters.body,
   "Optional body to provide the ability to clear file locks with selected options"
 );
-@@doc(Volumes.listGetGroupIdListForLdapUser::parameters.body,
+@@doc(
+  Volumes.listGetGroupIdListForLdapUser::parameters.body,
   "Returns group Id list for a specific LDAP user"
 );
-@@doc(Volumes.breakReplication::parameters.body,
+@@doc(
+  Volumes.breakReplication::parameters.body,
   "Optional body to force break the replication."
 );
-@@doc(Volumes.reestablishReplication::parameters.body,
+@@doc(
+  Volumes.reestablishReplication::parameters.body,
   "body for the id of the source volume."
 );
-@@doc(Volumes.authorizeReplication::parameters.body,
+@@doc(
+  Volumes.authorizeReplication::parameters.body,
   "Authorize request object supplied in the body of the operation."
 );
-@@doc(Volumes.peerExternalCluster::parameters.body,
+@@doc(
+  Volumes.peerExternalCluster::parameters.body,
   "Cluster peer request object supplied in the body of the operation."
 );
-@@doc(Volumes.poolChange::parameters.body,
+@@doc(
+  Volumes.poolChange::parameters.body,
   "Move volume to the pool supplied in the body of the operation."
 );
 @@doc(Volumes.relocate::parameters.body, "Relocate volume request");
-@@doc(Volumes.migrateBackups::parameters.body,
+@@doc(
+  Volumes.migrateBackups::parameters.body,
   "Migrate backups under volume payload supplied in the body of the operation."
 );

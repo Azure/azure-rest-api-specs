@@ -99,9 +99,11 @@ interface IpAllocations {
 
 @@doc(IpAllocation.name, "The name of the IpAllocation.");
 @@doc(IpAllocation.properties, "Properties of the IpAllocation.");
-@@doc(IpAllocations.createOrUpdate::parameters.resource,
+@@doc(
+  IpAllocations.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update virtual network operation."
 );
-@@doc(IpAllocations.updateTags::parameters.properties,
+@@doc(
+  IpAllocations.updateTags::parameters.properties,
   "Parameters supplied to update IpAllocation tags."
 );

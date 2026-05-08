@@ -96,13 +96,16 @@ interface ExpansionJobs {
 
 @@maxLength(ExpansionJob.name, 80);
 @@minLength(ExpansionJob.name, 2);
-@@doc(ExpansionJob.name,
+@@doc(
+  ExpansionJob.name,
   "Name for the expansion job. Allows alphanumerics, underscores, and hyphens. Start and end with alphanumeric."
 );
 @@doc(ExpansionJob.properties, "Properties of the expansion job.");
-@@doc(ExpansionJobs.createOrUpdate::parameters.resource,
+@@doc(
+  ExpansionJobs.createOrUpdate::parameters.resource,
   "Object containing the user-selectable properties of the expansion job. If read-only properties are included, they must match the existing values of those properties."
 );
-@@doc(ExpansionJobs.update::parameters.properties,
+@@doc(
+  ExpansionJobs.update::parameters.properties,
   "Object containing the user-selectable properties of the expansion job. If read-only properties are included, they must match the existing values of those properties."
 );

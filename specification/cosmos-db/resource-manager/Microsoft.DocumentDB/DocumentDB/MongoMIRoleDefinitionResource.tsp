@@ -67,9 +67,11 @@ interface MongoMIRoleDefinitionResources {
 }
 
 @@doc(MongoMIRoleDefinitionResource.name, "The GUID for the Role Definition.");
-@@doc(MongoMIRoleDefinitionResource.properties,
+@@doc(
+  MongoMIRoleDefinitionResource.properties,
   "Properties to create and update an Azure Cosmos DB MongoMI Role Definition."
 );
-@@doc(MongoMIRoleDefinitionResources.createUpdateMongoMIRoleDefinition::parameters.resource,
+@@doc(
+  MongoMIRoleDefinitionResources.createUpdateMongoMIRoleDefinition::parameters.resource,
   "The properties required to create or update a Role Definition."
 );

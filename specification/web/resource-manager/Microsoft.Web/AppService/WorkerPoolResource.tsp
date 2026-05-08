@@ -365,15 +365,19 @@ interface AppServiceEnvironments {
 
 @@doc(WorkerPoolResource.name, "");
 @@doc(WorkerPoolResource.properties, "Core resource properties");
-@@doc(WorkerPoolResources.createOrUpdateMultiRolePool::parameters.resource,
+@@doc(
+  WorkerPoolResources.createOrUpdateMultiRolePool::parameters.resource,
   "Properties of the multi-role pool."
 );
-@@doc(WorkerPoolResources.updateMultiRolePool::parameters.properties,
+@@doc(
+  WorkerPoolResources.updateMultiRolePool::parameters.properties,
   "Properties of the multi-role pool."
 );
-@@doc(AppServiceEnvironments.createOrUpdateWorkerPool::parameters.resource,
+@@doc(
+  AppServiceEnvironments.createOrUpdateWorkerPool::parameters.resource,
   "Properties of the worker pool."
 );
-@@doc(AppServiceEnvironments.updateWorkerPool::parameters.properties,
+@@doc(
+  AppServiceEnvironments.updateWorkerPool::parameters.properties,
   "Properties of the worker pool."
 );

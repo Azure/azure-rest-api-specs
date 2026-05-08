@@ -67,12 +67,15 @@ interface MongoRoleDefinitionGetResultsOperationGroup {
   >;
 }
 
-@@doc(MongoRoleDefinitionGetResults.name,
+@@doc(
+  MongoRoleDefinitionGetResults.name,
   "The ID for the Role Definition {dbName.roleName}."
 );
-@@doc(MongoRoleDefinitionGetResults.properties,
+@@doc(
+  MongoRoleDefinitionGetResults.properties,
   "Properties related to the Mongo Role Definition."
 );
-@@doc(MongoRoleDefinitionGetResultsOperationGroup.createUpdateMongoRoleDefinition::parameters.resource,
+@@doc(
+  MongoRoleDefinitionGetResultsOperationGroup.createUpdateMongoRoleDefinition::parameters.resource,
   "The properties required to create or update a Role Definition."
 );

@@ -125,18 +125,23 @@ interface BatchEndpoints {
 }
 
 @@doc(BatchEndpoint.name, "Name for the Batch Endpoint.");
-@@doc(BatchEndpoint.properties,
+@@doc(
+  BatchEndpoint.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(BatchEndpoints.createOrUpdate::parameters.resource,
+@@doc(
+  BatchEndpoints.createOrUpdate::parameters.resource,
   "Batch inference endpoint definition object."
 );
-@@doc(BatchEndpoints.update::parameters.properties,
+@@doc(
+  BatchEndpoints.update::parameters.properties,
   "Mutable batch inference endpoint definition object."
 );
-@@doc(BatchEndpoint.identity,
+@@doc(
+  BatchEndpoint.identity,
   "Managed service identity (system assigned and/or user assigned identities)"
 );
-@@doc(BatchEndpoint.sku,
+@@doc(
+  BatchEndpoint.sku,
   "Sku details required for ARM contract for Autoscaling."
 );

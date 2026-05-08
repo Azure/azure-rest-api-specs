@@ -173,9 +173,11 @@ interface StorageSyncServices {
 
 @@doc(StorageSyncService.name, "Name of Storage Sync Service resource.");
 @@doc(StorageSyncService.properties, "Storage Sync Service properties.");
-@@doc(StorageSyncServices.create::parameters.resource,
+@@doc(
+  StorageSyncServices.create::parameters.resource,
   "Storage Sync Service resource name."
 );
-@@doc(StorageSyncServices.update::parameters.properties,
+@@doc(
+  StorageSyncServices.update::parameters.properties,
   "Storage Sync Service resource."
 );

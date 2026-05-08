@@ -114,12 +114,15 @@ interface Subnets {
 
 @@doc(Subnet.name, "The name of the subnet.");
 @@doc(Subnet.properties, "Properties of the subnet.");
-@@doc(Subnets.createOrUpdate::parameters.resource,
+@@doc(
+  Subnets.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update subnet operation."
 );
-@@doc(Subnets.prepareNetworkPolicies::parameters.body,
+@@doc(
+  Subnets.prepareNetworkPolicies::parameters.body,
   "Parameters supplied to prepare subnet by applying network intent policies."
 );
-@@doc(Subnets.unprepareNetworkPolicies::parameters.body,
+@@doc(
+  Subnets.unprepareNetworkPolicies::parameters.body,
   "Parameters supplied to unprepare subnet to remove network intent policies."
 );

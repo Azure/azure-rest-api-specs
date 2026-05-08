@@ -104,9 +104,11 @@ interface WebAgents {
 @@minLength(WebAgent.name, 1);
 @@doc(WebAgent.name, "The name of the web agent.");
 @@doc(WebAgent.properties, "Properties of the web agent.");
-@@doc(WebAgents.createOrUpdate::parameters.resource,
+@@doc(
+  WebAgents.createOrUpdate::parameters.resource,
   "Web agent to be created or updated."
 );
-@@doc(WebAgents.update::parameters.properties,
+@@doc(
+  WebAgents.update::parameters.properties,
   "Web agent parameters to be updated."
 );

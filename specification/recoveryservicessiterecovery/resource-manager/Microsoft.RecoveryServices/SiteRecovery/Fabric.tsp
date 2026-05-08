@@ -188,7 +188,8 @@ interface Fabrics {
 @@doc(Fabric.name, "Fabric name.");
 @@doc(Fabric.properties, "Fabric related data.");
 @@doc(Fabrics.create::parameters.resource, "Fabric creation input.");
-@@doc(Fabrics.reassociateGateway::parameters.body,
+@@doc(
+  Fabrics.reassociateGateway::parameters.body,
   "The input to the failover process server operation."
 );
 @@doc(Fabrics.renewCertificate::parameters.body, "Renew certificate input.");

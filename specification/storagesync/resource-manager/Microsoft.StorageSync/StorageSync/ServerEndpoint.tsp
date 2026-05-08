@@ -183,12 +183,15 @@ interface ServerEndpoints {
 
 @@doc(ServerEndpoint.name, "Name of Server Endpoint object.");
 @@doc(ServerEndpoint.properties, "Server Endpoint properties.");
-@@doc(ServerEndpoints.create::parameters.resource,
+@@doc(
+  ServerEndpoints.create::parameters.resource,
   "Body of Server Endpoint object."
 );
-@@doc(ServerEndpoints.update::parameters.properties,
+@@doc(
+  ServerEndpoints.update::parameters.properties,
   "Any of the properties applicable in PUT request."
 );
-@@doc(ServerEndpoints.recallAction::parameters.body,
+@@doc(
+  ServerEndpoints.recallAction::parameters.body,
   "Body of Recall Action object."
 );

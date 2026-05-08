@@ -89,6 +89,7 @@ interface UpdateSummariesOperationGroup {
 
 @@doc(UpdateSummaries.name, "");
 @@doc(UpdateSummaries.properties, "Update summaries properties");
-@@doc(UpdateSummariesOperationGroup.put::parameters.resource,
+@@doc(
+  UpdateSummariesOperationGroup.put::parameters.resource,
   "Properties of the UpdateSummaries resource"
 );

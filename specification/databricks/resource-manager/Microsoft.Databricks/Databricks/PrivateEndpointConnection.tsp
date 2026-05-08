@@ -80,12 +80,15 @@ interface PrivateEndpointConnections {
   >;
 }
 
-@@doc(PrivateEndpointConnection.name,
+@@doc(
+  PrivateEndpointConnection.name,
   "The name of the private endpoint connection"
 );
-@@doc(PrivateEndpointConnection.properties,
+@@doc(
+  PrivateEndpointConnection.properties,
   "The private endpoint connection properties."
 );
-@@doc(PrivateEndpointConnections.create::parameters.resource,
+@@doc(
+  PrivateEndpointConnections.create::parameters.resource,
   "The private endpoint connection with updated properties"
 );

@@ -155,9 +155,11 @@ interface ManagedHsms {
 
 @@doc(ManagedHsm.name, "The name of the managed HSM Pool.");
 @@doc(ManagedHsm.properties, "Properties of the managed HSM");
-@@doc(ManagedHsms.createOrUpdate::parameters.resource,
+@@doc(
+  ManagedHsms.createOrUpdate::parameters.resource,
   "Parameters to create or update the managed HSM Pool"
 );
-@@doc(ManagedHsms.update::parameters.properties,
+@@doc(
+  ManagedHsms.update::parameters.properties,
   "Parameters to patch the managed HSM Pool"
 );

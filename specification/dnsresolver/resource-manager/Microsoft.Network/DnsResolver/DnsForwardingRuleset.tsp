@@ -126,12 +126,15 @@ interface DnsForwardingRulesets {
 }
 
 @@doc(DnsForwardingRuleset.name, "The name of the DNS forwarding ruleset.");
-@@doc(DnsForwardingRuleset.properties,
+@@doc(
+  DnsForwardingRuleset.properties,
   "Properties of the DNS forwarding ruleset."
 );
-@@doc(DnsForwardingRulesets.createOrUpdate::parameters.resource,
+@@doc(
+  DnsForwardingRulesets.createOrUpdate::parameters.resource,
   "Parameters supplied to the CreateOrUpdate operation."
 );
-@@doc(DnsForwardingRulesets.update::parameters.properties,
+@@doc(
+  DnsForwardingRulesets.update::parameters.properties,
   "Parameters supplied to the Update operation."
 );

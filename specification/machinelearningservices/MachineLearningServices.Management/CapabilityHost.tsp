@@ -70,9 +70,11 @@ interface CapabilityHosts {
 }
 
 @@doc(CapabilityHost.name, "CapabilityHost name.");
-@@doc(CapabilityHost.properties,
+@@doc(
+  CapabilityHost.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(CapabilityHosts.createOrUpdate::parameters.resource,
+@@doc(
+  CapabilityHosts.createOrUpdate::parameters.resource,
   "CapabilityHost definition."
 );

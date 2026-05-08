@@ -662,15 +662,18 @@ interface WorkspaceProduct {
 
 @@maxLength(ProductContract.name, 256);
 @@minLength(ProductContract.name, 1);
-@@doc(ProductContract.name,
+@@doc(
+  ProductContract.name,
   "Product identifier. Must be unique in the current API Management service instance."
 );
 @@doc(ProductContract.properties, "Product entity contract properties.");
-@@doc(ProductContracts.createOrUpdate::parameters.resource,
+@@doc(
+  ProductContracts.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );
 @@doc(ProductContracts.update::parameters.properties, "Update parameters.");
-@@doc(WorkspaceProduct.createOrUpdate::parameters.resource,
+@@doc(
+  WorkspaceProduct.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );
 @@doc(WorkspaceProduct.update::parameters.properties, "Update parameters.");

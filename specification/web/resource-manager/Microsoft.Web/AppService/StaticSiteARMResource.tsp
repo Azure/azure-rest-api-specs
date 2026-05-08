@@ -379,25 +379,32 @@ interface StaticSiteARMResources {
 
 @@doc(StaticSiteARMResource.name, "Name of the static site.");
 @@doc(StaticSiteARMResource.properties, "Core resource properties");
-@@doc(StaticSiteARMResources.createOrUpdateStaticSite::parameters.resource,
+@@doc(
+  StaticSiteARMResources.createOrUpdateStaticSite::parameters.resource,
   "A JSON representation of the staticsite properties. See example."
 );
-@@doc(StaticSiteARMResources.updateStaticSite::parameters.properties,
+@@doc(
+  StaticSiteARMResources.updateStaticSite::parameters.properties,
   "A JSON representation of the staticsite properties. See example."
 );
-@@doc(StaticSiteARMResources.updateStaticSiteUser::parameters.body,
+@@doc(
+  StaticSiteARMResources.updateStaticSiteUser::parameters.body,
   "A JSON representation of the StaticSiteUser properties. See example."
 );
-@@doc(StaticSiteARMResources.createOrUpdateStaticSiteAppSettings::parameters.body,
+@@doc(
+  StaticSiteARMResources.createOrUpdateStaticSiteAppSettings::parameters.body,
   "The dictionary containing the static site app settings to update."
 );
-@@doc(StaticSiteARMResources.createOrUpdateStaticSiteFunctionAppSettings::parameters.body,
+@@doc(
+  StaticSiteARMResources.createOrUpdateStaticSiteFunctionAppSettings::parameters.body,
   "The dictionary containing the static site function app settings to update."
 );
-@@doc(StaticSiteARMResources.createUserRolesInvitationLink::parameters.body,
+@@doc(
+  StaticSiteARMResources.createUserRolesInvitationLink::parameters.body,
   ""
 );
 @@doc(StaticSiteARMResources.resetStaticSiteApiKey::parameters.body, "");
-@@doc(StaticSiteARMResources.createZipDeploymentForStaticSite::parameters.body,
+@@doc(
+  StaticSiteARMResources.createZipDeploymentForStaticSite::parameters.body,
   "A JSON representation of the StaticSiteZipDeployment properties. See example."
 );

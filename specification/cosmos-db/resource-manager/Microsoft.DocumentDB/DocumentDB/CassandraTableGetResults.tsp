@@ -68,13 +68,16 @@ interface CassandraTableGetResultsOperationGroup {
 }
 
 @@doc(CassandraTableGetResults.name, "Cosmos DB table name.");
-@@doc(CassandraTableGetResults.properties,
+@@doc(
+  CassandraTableGetResults.properties,
   "The properties of an Azure Cosmos DB Cassandra table"
 );
-@@doc(CassandraTableGetResultsOperationGroup.createUpdateCassandraTable::parameters.resource,
+@@doc(
+  CassandraTableGetResultsOperationGroup.createUpdateCassandraTable::parameters.resource,
   "The parameters to provide for the current Cassandra Table."
 );
-@@visibility(CassandraTableGetResults.location,
+@@visibility(
+  CassandraTableGetResults.location,
   Lifecycle.Read,
   Lifecycle.Create,
   Lifecycle.Update

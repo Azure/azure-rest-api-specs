@@ -72,9 +72,11 @@ interface Schedules {
 
 @@doc(Schedule.name, "The schedule name.");
 @@doc(Schedule.properties, "Gets or sets the properties of the schedule.");
-@@doc(Schedules.createOrUpdate::parameters.resource,
+@@doc(
+  Schedules.createOrUpdate::parameters.resource,
   "The parameters supplied to the create or update schedule operation."
 );
-@@doc(Schedules.update::parameters.properties,
+@@doc(
+  Schedules.update::parameters.properties,
   "The parameters supplied to the update schedule operation."
 );

@@ -60,12 +60,15 @@ interface CassandraRoleDefinitionResources {
   >;
 }
 
-@@doc(CassandraRoleDefinitionResource.name,
+@@doc(
+  CassandraRoleDefinitionResource.name,
   "The GUID for the Role Definition."
 );
-@@doc(CassandraRoleDefinitionResource.properties,
+@@doc(
+  CassandraRoleDefinitionResource.properties,
   "Properties to create and update an Azure Cosmos DB Cassandra Role Definition."
 );
-@@doc(CassandraRoleDefinitionResources.createUpdateCassandraRoleDefinition::parameters.resource,
+@@doc(
+  CassandraRoleDefinitionResources.createUpdateCassandraRoleDefinition::parameters.resource,
   "The properties required to create or update a Role Definition."
 );

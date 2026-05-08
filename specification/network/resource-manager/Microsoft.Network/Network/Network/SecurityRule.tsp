@@ -115,6 +115,7 @@ interface DefaultSecurityRules {
 
 @@doc(SecurityRule.name, "The name of the security rule.");
 @@doc(SecurityRule.properties, "Properties of the security rule.");
-@@doc(SecurityRules.createOrUpdate::parameters.resource,
+@@doc(
+  SecurityRules.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update network security rule operation."
 );

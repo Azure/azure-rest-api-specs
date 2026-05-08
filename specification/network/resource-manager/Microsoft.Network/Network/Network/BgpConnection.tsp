@@ -127,6 +127,7 @@ interface BgpConnections {
 
 @@doc(BgpConnection.name, "The name of the connection.");
 @@doc(BgpConnection.properties, "The properties of the Bgp connections.");
-@@doc(BgpConnections.createOrUpdate::parameters.resource,
+@@doc(
+  BgpConnections.createOrUpdate::parameters.resource,
   "Parameters of Bgp connection."
 );

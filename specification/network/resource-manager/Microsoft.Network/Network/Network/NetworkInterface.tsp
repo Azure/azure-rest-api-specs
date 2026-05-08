@@ -197,9 +197,11 @@ interface NetworkInterfaceOperationGroup {
 
 @@doc(NetworkInterface.name, "The name of the network interface.");
 @@doc(NetworkInterface.properties, "Properties of the network interface.");
-@@doc(NetworkInterfaceOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  NetworkInterfaceOperationGroup.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update network interface operation."
 );
-@@doc(NetworkInterfaceOperationGroup.updateTags::parameters.properties,
+@@doc(
+  NetworkInterfaceOperationGroup.updateTags::parameters.properties,
   "Parameters supplied to update network interface tags."
 );

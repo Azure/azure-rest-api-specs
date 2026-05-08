@@ -61,10 +61,12 @@ interface ClusterPrincipalAssignments {
   >;
 }
 
-@@doc(ClusterPrincipalAssignment.name,
+@@doc(
+  ClusterPrincipalAssignment.name,
   "The name of the Kusto principalAssignment."
 );
 @@doc(ClusterPrincipalAssignment.properties, "The cluster principal.");
-@@doc(ClusterPrincipalAssignments.createOrUpdate::parameters.resource,
+@@doc(
+  ClusterPrincipalAssignments.createOrUpdate::parameters.resource,
   "The Kusto cluster principalAssignment's parameters supplied for the operation."
 );

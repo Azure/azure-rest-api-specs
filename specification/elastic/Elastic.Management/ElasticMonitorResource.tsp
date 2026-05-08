@@ -447,21 +447,27 @@ interface ElasticMonitorResources {
 
 @@doc(ElasticMonitorResource.name, "Monitor resource name");
 @@doc(ElasticMonitorResource.properties, "Properties of the monitor resource.");
-@@doc(ElasticMonitorResources.create::parameters.resource,
+@@doc(
+  ElasticMonitorResources.create::parameters.resource,
   "Elastic monitor resource model"
 );
-@@doc(ElasticMonitorResources.update::parameters.properties,
+@@doc(
+  ElasticMonitorResources.update::parameters.properties,
   "Elastic resource model update parameters."
 );
-@@doc(ElasticMonitorResources.createOrUpdate::parameters.body,
+@@doc(
+  ElasticMonitorResources.createOrUpdate::parameters.body,
   "Elastic External User Creation Parameters"
 );
-@@doc(ElasticMonitorResources.vMCollectionUpdate::parameters.body,
+@@doc(
+  ElasticMonitorResources.vMCollectionUpdate::parameters.body,
   "VM resource Id"
 );
-@@doc(ElasticMonitorResources.upgrade::parameters.body,
+@@doc(
+  ElasticMonitorResources.upgrade::parameters.body,
   "Elastic Monitor Upgrade Parameters"
 );
-@@doc(ElasticMonitorResources.resubscribe::parameters.body,
+@@doc(
+  ElasticMonitorResources.resubscribe::parameters.body,
   "Resubscribe Properties"
 );

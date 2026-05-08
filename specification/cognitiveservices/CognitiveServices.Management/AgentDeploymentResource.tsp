@@ -180,20 +180,25 @@ interface AgentDeploymentResources {
   >;
 }
 
-@@doc(AgentDeployment.name,
+@@doc(
+  AgentDeployment.name,
   "The name of the deployment associated with the Cognitive Services Account"
 );
-@@doc(AgentDeployment.properties,
+@@doc(
+  AgentDeployment.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(AgentDeploymentResources.createOrUpdate::parameters.resource,
+@@doc(
+  AgentDeploymentResources.createOrUpdate::parameters.resource,
   "Agent Deployment definition object."
 );
 @@summary(AgentDeploymentResources.get, "Gets an Agent Deployment by name.");
-@@summary(AgentDeploymentResources.list,
+@@summary(
+  AgentDeploymentResources.list,
   "Lists Agent Deployments in the application."
 );
-@@summary(AgentDeploymentResources.createOrUpdate,
+@@summary(
+  AgentDeploymentResources.createOrUpdate,
   "Creates or updates an Agent Deployment (asynchronous)."
 );
 @@summary(AgentDeploymentResources.delete, "Delete Agent Deployment.");

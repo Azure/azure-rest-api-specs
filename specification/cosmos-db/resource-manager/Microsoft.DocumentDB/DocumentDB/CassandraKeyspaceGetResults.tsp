@@ -68,13 +68,16 @@ interface CassandraKeyspaceGetResultsOperationGroup {
 }
 
 @@doc(CassandraKeyspaceGetResults.name, "Cosmos DB keyspace name.");
-@@doc(CassandraKeyspaceGetResults.properties,
+@@doc(
+  CassandraKeyspaceGetResults.properties,
   "The properties of an Azure Cosmos DB Cassandra keyspace"
 );
-@@doc(CassandraKeyspaceGetResultsOperationGroup.createUpdateCassandraKeyspace::parameters.resource,
+@@doc(
+  CassandraKeyspaceGetResultsOperationGroup.createUpdateCassandraKeyspace::parameters.resource,
   "The parameters to provide for the current Cassandra keyspace."
 );
-@@visibility(CassandraKeyspaceGetResults.location,
+@@visibility(
+  CassandraKeyspaceGetResults.location,
   Lifecycle.Read,
   Lifecycle.Create,
   Lifecycle.Update

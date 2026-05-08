@@ -120,6 +120,7 @@ interface AutomationRules {
 
 @@doc(AutomationRule.name, "Automation rule ID");
 @@doc(AutomationRule.properties, "Automation rule properties");
-@@doc(AutomationRules.createOrUpdate::parameters.resource,
+@@doc(
+  AutomationRules.createOrUpdate::parameters.resource,
   "The automation rule"
 );

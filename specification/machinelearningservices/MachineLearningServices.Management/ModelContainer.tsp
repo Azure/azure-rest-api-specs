@@ -191,12 +191,15 @@ interface ModelContainerOperationGroup {
 }
 
 @@doc(ModelContainer.name, "Container name. This is case-sensitive.");
-@@doc(ModelContainer.properties,
+@@doc(
+  ModelContainer.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(ModelContainers.createOrUpdate::parameters.resource,
+@@doc(
+  ModelContainers.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );
-@@doc(ModelContainerOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  ModelContainerOperationGroup.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );

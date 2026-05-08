@@ -80,6 +80,7 @@ interface ServiceResources {
 @@minLength(ServiceResource.name, 3);
 @@doc(ServiceResource.name, "Cosmos DB service name.");
 @@doc(ServiceResource.properties, "Services response resource.");
-@@doc(ServiceResources.create::parameters.resource,
+@@doc(
+  ServiceResources.create::parameters.resource,
   "The Service resource parameters."
 );

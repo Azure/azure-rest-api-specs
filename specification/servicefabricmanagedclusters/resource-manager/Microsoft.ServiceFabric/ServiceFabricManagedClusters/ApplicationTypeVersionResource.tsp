@@ -79,13 +79,16 @@ interface ApplicationTypeVersions {
 }
 
 @@doc(ApplicationTypeVersionResource.name, "The application type version.");
-@@doc(ApplicationTypeVersionResource.properties,
+@@doc(
+  ApplicationTypeVersionResource.properties,
   "The properties of the application type version resource."
 );
-@@doc(ApplicationTypeVersions.createOrUpdate::parameters.resource,
+@@doc(
+  ApplicationTypeVersions.createOrUpdate::parameters.resource,
   "The application type version resource."
 );
-@@doc(ApplicationTypeVersions.update::parameters.properties,
+@@doc(
+  ApplicationTypeVersions.update::parameters.properties,
   "The application type version resource updated tags."
 );
 

@@ -126,9 +126,11 @@ interface DnsResolvers {
 
 @@doc(DnsResolver.name, "The name of the DNS resolver.");
 @@doc(DnsResolver.properties, "Properties of the DNS resolver.");
-@@doc(DnsResolvers.createOrUpdate::parameters.resource,
+@@doc(
+  DnsResolvers.createOrUpdate::parameters.resource,
   "Parameters supplied to the CreateOrUpdate operation."
 );
-@@doc(DnsResolvers.update::parameters.properties,
+@@doc(
+  DnsResolvers.update::parameters.properties,
   "Parameters supplied to the Update operation."
 );

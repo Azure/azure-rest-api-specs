@@ -67,12 +67,15 @@ interface MongoUserDefinitionGetResultsOperationGroup {
   >;
 }
 
-@@doc(MongoUserDefinitionGetResults.name,
+@@doc(
+  MongoUserDefinitionGetResults.name,
   "The ID for the User Definition {dbName.userName}."
 );
-@@doc(MongoUserDefinitionGetResults.properties,
+@@doc(
+  MongoUserDefinitionGetResults.properties,
   "Properties related to the User Definition."
 );
-@@doc(MongoUserDefinitionGetResultsOperationGroup.createUpdateMongoUserDefinition::parameters.resource,
+@@doc(
+  MongoUserDefinitionGetResultsOperationGroup.createUpdateMongoUserDefinition::parameters.resource,
   "The properties required to create or update a User Definition."
 );

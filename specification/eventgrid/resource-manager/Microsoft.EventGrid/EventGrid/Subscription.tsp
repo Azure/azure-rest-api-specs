@@ -113,9 +113,11 @@ interface Subscriptions {
 @@minLength(Subscription.name, 3);
 @@doc(Subscription.name, "Name of the event subscription to be found.");
 @@doc(Subscription.properties, "Properties of the event subscription.");
-@@doc(Subscriptions.createOrUpdate::parameters.resource,
+@@doc(
+  Subscriptions.createOrUpdate::parameters.resource,
   "Event subscription properties containing the delivery mode, filter information, and others."
 );
-@@doc(Subscriptions.update::parameters.properties,
+@@doc(
+  Subscriptions.update::parameters.properties,
   "Updated event subscription information."
 );

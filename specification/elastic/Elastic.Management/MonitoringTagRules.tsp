@@ -91,6 +91,7 @@ interface TagRules {
 
 @@doc(MonitoringTagRules.name, "Tag Rule Set resource name");
 @@doc(MonitoringTagRules.properties, "Properties of the monitoring tag rules.");
-@@doc(TagRules.createOrUpdate::parameters.resource,
+@@doc(
+  TagRules.createOrUpdate::parameters.resource,
   "request body of MonitoringTagRules"
 );

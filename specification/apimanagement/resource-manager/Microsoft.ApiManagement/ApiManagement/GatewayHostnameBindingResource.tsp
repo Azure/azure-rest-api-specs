@@ -99,13 +99,16 @@ interface GatewayHostnameBindingResources {
 
 @@maxLength(GatewayHostnameBindingResource.name, 45);
 @@minLength(GatewayHostnameBindingResource.name, 1);
-@@doc(GatewayHostnameBindingResource.name,
+@@doc(
+  GatewayHostnameBindingResource.name,
   "Gateway hostname binding identifier. Must be unique in the scope of parent Gateway entity."
 );
 @@encodedName(GatewayHostnameBindingResource.eTag, "application/json", "etag");
-@@doc(GatewayHostnameBindingResource.properties,
+@@doc(
+  GatewayHostnameBindingResource.properties,
   "Properties of the API Management gateway hostname binding."
 );
-@@doc(GatewayHostnameBindingResources.createOrUpdate::parameters.resource,
+@@doc(
+  GatewayHostnameBindingResources.createOrUpdate::parameters.resource,
   "Parameters supplied to the CreateOrUpdate API Management gateway hostname binding operation."
 );

@@ -104,16 +104,20 @@ interface CommitmentPlanAccountAssociations {
   >;
 }
 
-@@doc(CommitmentPlanAccountAssociation.name,
+@@doc(
+  CommitmentPlanAccountAssociation.name,
   "The name of the commitment plan association with the Cognitive Services Account"
 );
-@@encodedName(CommitmentPlanAccountAssociation.etag,
+@@encodedName(
+  CommitmentPlanAccountAssociation.etag,
   "application/json",
   "etag"
 );
-@@doc(CommitmentPlanAccountAssociation.properties,
+@@doc(
+  CommitmentPlanAccountAssociation.properties,
   "Properties of Cognitive Services account commitment plan association."
 );
-@@doc(CommitmentPlanAccountAssociations.createOrUpdateAssociation::parameters.resource,
+@@doc(
+  CommitmentPlanAccountAssociations.createOrUpdateAssociation::parameters.resource,
   "The commitmentPlan properties."
 );

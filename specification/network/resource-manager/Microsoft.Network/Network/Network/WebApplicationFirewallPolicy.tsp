@@ -86,9 +86,11 @@ interface WebApplicationFirewallPolicies {
 
 @@maxLength(WebApplicationFirewallPolicy.name, 128);
 @@doc(WebApplicationFirewallPolicy.name, "The name of the policy.");
-@@doc(WebApplicationFirewallPolicy.properties,
+@@doc(
+  WebApplicationFirewallPolicy.properties,
   "Properties of the web application firewall policy."
 );
-@@doc(WebApplicationFirewallPolicies.createOrUpdate::parameters.resource,
+@@doc(
+  WebApplicationFirewallPolicies.createOrUpdate::parameters.resource,
   "Policy to be created."
 );

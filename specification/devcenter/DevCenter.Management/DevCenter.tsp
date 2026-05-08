@@ -92,9 +92,11 @@ interface DevCenters {
 @@minLength(DevCenter.name, 3);
 @@doc(DevCenter.name, "The name of the devcenter.");
 @@doc(DevCenter.properties, "DevCenter properties");
-@@doc(DevCenters.createOrUpdate::parameters.resource,
+@@doc(
+  DevCenters.createOrUpdate::parameters.resource,
   "Represents a devcenter."
 );
-@@doc(DevCenters.update::parameters.properties,
+@@doc(
+  DevCenters.update::parameters.properties,
   "Updatable devcenter properties."
 );

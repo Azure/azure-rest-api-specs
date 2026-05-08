@@ -114,12 +114,15 @@ interface NamespaceTopics {
 @@minLength(NamespaceTopic.name, 3);
 @@doc(NamespaceTopic.name, "Name of the namespace topic.");
 @@doc(NamespaceTopic.properties, "Properties of the namespace topic.");
-@@doc(NamespaceTopics.createOrUpdate::parameters.resource,
+@@doc(
+  NamespaceTopics.createOrUpdate::parameters.resource,
   "Namespace topic information."
 );
-@@doc(NamespaceTopics.update::parameters.properties,
+@@doc(
+  NamespaceTopics.update::parameters.properties,
   "Namespace topic update information."
 );
-@@doc(NamespaceTopics.regenerateKey::parameters.body,
+@@doc(
+  NamespaceTopics.regenerateKey::parameters.body,
   "Request body to regenerate key."
 );

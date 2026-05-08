@@ -83,6 +83,7 @@ interface DscpConfigurations {
 
 @@doc(DscpConfiguration.name, "The name of the resource.");
 @@doc(DscpConfiguration.properties, "Properties of the network interface.");
-@@doc(DscpConfigurations.createOrUpdate::parameters.resource,
+@@doc(
+  DscpConfigurations.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update DscpConfiguration operation."
 );

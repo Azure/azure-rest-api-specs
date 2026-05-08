@@ -88,9 +88,11 @@ interface ManagedPrivateEndpoints {
 
 @@doc(ManagedPrivateEndpoint.name, "The name of the managed private endpoint.");
 @@doc(ManagedPrivateEndpoint.properties, "A managed private endpoint.");
-@@doc(ManagedPrivateEndpoints.createOrUpdate::parameters.resource,
+@@doc(
+  ManagedPrivateEndpoints.createOrUpdate::parameters.resource,
   "The managed private endpoint parameters."
 );
-@@doc(ManagedPrivateEndpoints.update::parameters.properties,
+@@doc(
+  ManagedPrivateEndpoints.update::parameters.properties,
   "The managed private endpoint parameters."
 );

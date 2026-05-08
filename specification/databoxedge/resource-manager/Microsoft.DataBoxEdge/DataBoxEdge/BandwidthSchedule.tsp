@@ -64,9 +64,11 @@ interface BandwidthSchedules {
 }
 
 @@doc(BandwidthSchedule.name, "The bandwidth schedule name.");
-@@doc(BandwidthSchedule.properties,
+@@doc(
+  BandwidthSchedule.properties,
   "The properties of the bandwidth schedule."
 );
-@@doc(BandwidthSchedules.createOrUpdate::parameters.resource,
+@@doc(
+  BandwidthSchedules.createOrUpdate::parameters.resource,
   "The bandwidth schedule to be added or updated."
 );

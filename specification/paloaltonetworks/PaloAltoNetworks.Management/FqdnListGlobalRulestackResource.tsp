@@ -55,6 +55,7 @@ interface FqdnListGlobalRulestackResources {
 }
 
 @@doc(FqdnListGlobalRulestackResource.name, "fqdn list name");
-@@doc(FqdnListGlobalRulestackResource.properties,
+@@doc(
+  FqdnListGlobalRulestackResource.properties,
   "The resource-specific properties for this resource."
 );

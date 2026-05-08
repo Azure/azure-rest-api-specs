@@ -133,9 +133,11 @@ interface Domains {
 
 @@doc(Domain.name, "Name of the domain.");
 @@doc(Domain.properties, "Domain resource specific properties");
-@@doc(Domains.createOrUpdate::parameters.resource,
+@@doc(
+  Domains.createOrUpdate::parameters.resource,
   "Domain registration information."
 );
-@@doc(Domains.update::parameters.properties,
+@@doc(
+  Domains.update::parameters.properties,
   "Domain registration information."
 );

@@ -100,12 +100,15 @@ interface SecurityAdminConfigurations {
   >;
 }
 
-@@doc(SecurityAdminConfiguration.name,
+@@doc(
+  SecurityAdminConfiguration.name,
   "The name of the network manager Security Configuration."
 );
-@@doc(SecurityAdminConfiguration.properties,
+@@doc(
+  SecurityAdminConfiguration.properties,
   "Indicates the properties for the network manager security admin configuration."
 );
-@@doc(SecurityAdminConfigurations.createOrUpdate::parameters.resource,
+@@doc(
+  SecurityAdminConfigurations.createOrUpdate::parameters.resource,
   "The security admin configuration to create or update"
 );

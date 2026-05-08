@@ -44,21 +44,24 @@ model BatchBlobClientOptions {
   snapshot?: SnapshotParameter.snapshot;
 }
 
-@@clientInitialization(BlobBatchClient.BatchServiceClient,
+@@clientInitialization(
+  BlobBatchClient.BatchServiceClient,
   {
     initializedBy: InitializedBy.parent,
   },
   "csharp"
 );
 
-@@clientInitialization(BlobBatchClient.BatchContainerClient,
+@@clientInitialization(
+  BlobBatchClient.BatchContainerClient,
   {
     initializedBy: InitializedBy.parent,
   },
   "csharp"
 );
 
-@@clientInitialization(BlobBatchClient.BatchBlobClient,
+@@clientInitialization(
+  BlobBatchClient.BatchBlobClient,
   {
     parameters: BatchBlobClientOptions,
     initializedBy: InitializedBy.parent,
@@ -177,7 +180,8 @@ op setTierCsharp is StorageOperationNoBody<
 >;
 
 @@clientName(BlobBatchClient.BatchServiceClient, "ServiceRestClient", "csharp");
-@@clientName(BlobBatchClient.BatchContainerClient,
+@@clientName(
+  BlobBatchClient.BatchContainerClient,
   "ContainerRestClient",
   "csharp"
 );

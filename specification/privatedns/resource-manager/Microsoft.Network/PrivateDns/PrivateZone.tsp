@@ -173,13 +173,16 @@ interface PrivateZones {
   >;
 }
 
-@@doc(PrivateZone.name,
+@@doc(
+  PrivateZone.name,
   "The name of the Private DNS zone (without a terminating dot)."
 );
 @@doc(PrivateZone.properties, "Properties of the Private DNS zone.");
-@@doc(PrivateZones.createOrUpdate::parameters.resource,
+@@doc(
+  PrivateZones.createOrUpdate::parameters.resource,
   "Parameters supplied to the CreateOrUpdate operation."
 );
-@@doc(PrivateZones.update::parameters.properties,
+@@doc(
+  PrivateZones.update::parameters.properties,
   "Parameters supplied to the Update operation."
 );

@@ -59,13 +59,16 @@ interface BackupShortTermRetentionPolicies {
   listByDatabase is ArmResourceListByParent<BackupShortTermRetentionPolicy>;
 }
 
-@@doc(BackupShortTermRetentionPolicy.name,
+@@doc(
+  BackupShortTermRetentionPolicy.name,
   "The policy name. Should always be default."
 );
 @@doc(BackupShortTermRetentionPolicy.properties, "Resource properties.");
-@@doc(BackupShortTermRetentionPolicies.createOrUpdate::parameters.resource,
+@@doc(
+  BackupShortTermRetentionPolicies.createOrUpdate::parameters.resource,
   "The short term retention policy info."
 );
-@@doc(BackupShortTermRetentionPolicies.update::parameters.properties,
+@@doc(
+  BackupShortTermRetentionPolicies.update::parameters.properties,
   "The short term retention policy info."
 );

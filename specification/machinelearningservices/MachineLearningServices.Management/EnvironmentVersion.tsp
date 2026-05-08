@@ -235,15 +235,19 @@ interface EnvironmentVersionOperationGroup {
 }
 
 @@doc(EnvironmentVersion.name, "Version identifier. This is case-sensitive.");
-@@doc(EnvironmentVersion.properties,
+@@doc(
+  EnvironmentVersion.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(EnvironmentVersions.createOrUpdate::parameters.resource,
+@@doc(
+  EnvironmentVersions.createOrUpdate::parameters.resource,
   "Version entity to create or update."
 );
-@@doc(EnvironmentVersionOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  EnvironmentVersionOperationGroup.createOrUpdate::parameters.resource,
   "Definition of EnvironmentVersion."
 );
-@@doc(EnvironmentVersionOperationGroup.publish::parameters.body,
+@@doc(
+  EnvironmentVersionOperationGroup.publish::parameters.body,
   "Destination registry info"
 );

@@ -91,12 +91,15 @@ interface DaprComponentResiliencyPolicies {
   >;
 }
 
-@@doc(DaprComponentResiliencyPolicy.name,
+@@doc(
+  DaprComponentResiliencyPolicy.name,
   "Name of the Dapr Component Resiliency Policy."
 );
-@@doc(DaprComponentResiliencyPolicy.properties,
+@@doc(
+  DaprComponentResiliencyPolicy.properties,
   "Dapr Component Resiliency Policy resource specific properties"
 );
-@@doc(DaprComponentResiliencyPolicies.createOrUpdate::parameters.resource,
+@@doc(
+  DaprComponentResiliencyPolicies.createOrUpdate::parameters.resource,
   "Configuration details of the Dapr Component Resiliency Policy."
 );

@@ -66,7 +66,8 @@ interface Secrets {
 }
 
 @@doc(Secret.name, "Name of the Secret under the profile.");
-@@doc(Secret.properties,
+@@doc(
+  Secret.properties,
   "The JSON object that contains the properties of the Secret to create."
 );
 @@doc(Secrets.create::parameters.resource, "The Secret properties.");

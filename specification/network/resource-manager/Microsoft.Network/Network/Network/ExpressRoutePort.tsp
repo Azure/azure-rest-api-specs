@@ -182,12 +182,15 @@ interface ExpressRoutePorts {
 
 @@doc(ExpressRoutePort.name, "The name of ExpressRoutePort.");
 @@doc(ExpressRoutePort.properties, "ExpressRoutePort properties.");
-@@doc(ExpressRoutePorts.createOrUpdate::parameters.resource,
+@@doc(
+  ExpressRoutePorts.createOrUpdate::parameters.resource,
   "Parameters supplied to the create ExpressRoutePort operation."
 );
-@@doc(ExpressRoutePorts.updateTags::parameters.properties,
+@@doc(
+  ExpressRoutePorts.updateTags::parameters.properties,
   "Parameters supplied to update ExpressRoutePort resource tags."
 );
-@@doc(ExpressRoutePorts.generateLOA::parameters.body,
+@@doc(
+  ExpressRoutePorts.generateLOA::parameters.body,
   "Request parameters supplied to generate a letter of authorization."
 );

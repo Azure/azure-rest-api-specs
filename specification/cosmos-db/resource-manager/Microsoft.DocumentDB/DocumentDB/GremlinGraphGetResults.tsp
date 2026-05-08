@@ -78,16 +78,20 @@ interface GremlinGraphGetResultsOperationGroup {
 }
 
 @@doc(GremlinGraphGetResults.name, "Cosmos DB graph name.");
-@@doc(GremlinGraphGetResults.properties,
+@@doc(
+  GremlinGraphGetResults.properties,
   "The properties of an Azure Cosmos DB Gremlin graph"
 );
-@@doc(GremlinGraphGetResultsOperationGroup.createUpdateGremlinGraph::parameters.resource,
+@@doc(
+  GremlinGraphGetResultsOperationGroup.createUpdateGremlinGraph::parameters.resource,
   "The parameters to provide for the current Gremlin graph."
 );
-@@doc(GremlinGraphGetResultsOperationGroup.retrieveContinuousBackupInformation::parameters.body,
+@@doc(
+  GremlinGraphGetResultsOperationGroup.retrieveContinuousBackupInformation::parameters.body,
   "The name of the continuous backup restore location."
 );
-@@visibility(GremlinGraphGetResults.location,
+@@visibility(
+  GremlinGraphGetResults.location,
   Lifecycle.Read,
   Lifecycle.Create,
   Lifecycle.Update

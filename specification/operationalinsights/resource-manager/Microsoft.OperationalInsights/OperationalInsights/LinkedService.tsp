@@ -74,6 +74,7 @@ interface LinkedServices {
 
 @@doc(LinkedService.name, "Name of the linked service.");
 @@doc(LinkedService.properties, "The properties of the linked service.");
-@@doc(LinkedServices.createOrUpdate::parameters.resource,
+@@doc(
+  LinkedServices.createOrUpdate::parameters.resource,
   "The parameters required to create or update a linked service."
 );

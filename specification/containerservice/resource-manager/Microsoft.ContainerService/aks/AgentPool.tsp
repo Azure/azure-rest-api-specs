@@ -185,9 +185,11 @@ interface AgentPoolsOps
 @@minLength(AgentPool.name, 1);
 @@doc(AgentPool.name, "The name of the agent pool.");
 @@doc(AgentPool.properties, "Properties of an agent pool.");
-@@doc(AgentPools.createOrUpdate::parameters.resource,
+@@doc(
+  AgentPools.createOrUpdate::parameters.resource,
   "The agent pool to create or update."
 );
-@@doc(AgentPools.deleteMachines::parameters.body,
+@@doc(
+  AgentPools.deleteMachines::parameters.body,
   "A list of machines from the agent pool to be deleted."
 );

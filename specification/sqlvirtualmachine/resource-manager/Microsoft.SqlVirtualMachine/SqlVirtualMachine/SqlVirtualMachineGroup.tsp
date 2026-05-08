@@ -80,9 +80,11 @@ interface SqlVirtualMachineGroups {
 
 @@doc(SqlVirtualMachineGroup.name, "Name of the SQL virtual machine group.");
 @@doc(SqlVirtualMachineGroup.properties, "Resource properties.");
-@@doc(SqlVirtualMachineGroups.createOrUpdate::parameters.resource,
+@@doc(
+  SqlVirtualMachineGroups.createOrUpdate::parameters.resource,
   "The SQL virtual machine group."
 );
-@@doc(SqlVirtualMachineGroups.update::parameters.properties,
+@@doc(
+  SqlVirtualMachineGroups.update::parameters.properties,
   "The SQL virtual machine group."
 );

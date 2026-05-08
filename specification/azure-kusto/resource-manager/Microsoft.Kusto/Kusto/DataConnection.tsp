@@ -115,9 +115,11 @@ interface DataConnections {
 }
 
 @@doc(DataConnection.name, "The name of the data connection.");
-@@doc(DataConnections.createOrUpdate::parameters.resource,
+@@doc(
+  DataConnections.createOrUpdate::parameters.resource,
   "The data connection parameters supplied to the CreateOrUpdate operation."
 );
-@@doc(DataConnections.update::parameters.properties,
+@@doc(
+  DataConnections.update::parameters.properties,
   "The data connection parameters supplied to the Update operation."
 );

@@ -293,16 +293,20 @@ interface DataVersions {
 }
 
 @@doc(DataVersionBase.name, "Version identifier.");
-@@doc(DataVersionBase.properties,
+@@doc(
+  DataVersionBase.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(DataVersionBases.createOrUpdate::parameters.resource,
+@@doc(
+  DataVersionBases.createOrUpdate::parameters.resource,
   "Version entity to create or update."
 );
-@@doc(DataVersionBases.createOrGetStartPendingUpload::parameters.body,
+@@doc(
+  DataVersionBases.createOrGetStartPendingUpload::parameters.body,
   "Pending upload request object"
 );
-@@doc(DataVersions.createOrUpdate::parameters.resource,
+@@doc(
+  DataVersions.createOrUpdate::parameters.resource,
   "Version entity to create or update."
 );
 @@doc(DataVersions.publish::parameters.body, "Destination registry info");

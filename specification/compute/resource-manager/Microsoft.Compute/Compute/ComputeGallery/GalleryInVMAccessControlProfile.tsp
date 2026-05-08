@@ -83,15 +83,19 @@ interface GalleryInVMAccessControlProfiles {
   >;
 }
 
-@@doc(GalleryInVMAccessControlProfile.name,
+@@doc(
+  GalleryInVMAccessControlProfile.name,
   "The name of the gallery inVMAccessControlProfile to be retrieved."
 );
-@@doc(GalleryInVMAccessControlProfile.properties,
+@@doc(
+  GalleryInVMAccessControlProfile.properties,
   "Describes the properties of a gallery inVMAccessControlProfile."
 );
-@@doc(GalleryInVMAccessControlProfiles.createOrUpdate::parameters.resource,
+@@doc(
+  GalleryInVMAccessControlProfiles.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update gallery inVMAccessControlProfile operation."
 );
-@@doc(GalleryInVMAccessControlProfiles.update::parameters.properties,
+@@doc(
+  GalleryInVMAccessControlProfiles.update::parameters.properties,
   "Parameters supplied to the update gallery inVMAccessControlProfile operation."
 );

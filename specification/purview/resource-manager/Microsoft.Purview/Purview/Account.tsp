@@ -200,10 +200,12 @@ interface Accounts {
 @@doc(Account.properties, "The account properties");
 @@doc(Accounts.createOrUpdate::parameters.resource, "The account.");
 @@doc(Accounts.update::parameters.properties, "The account update parameters.");
-@@doc(Accounts.addRootCollectionAdmin::parameters.body,
+@@doc(
+  Accounts.addRootCollectionAdmin::parameters.body,
   "The collection admin update payload."
 );
 @@doc(Accounts.accountGet::parameters.body, "Request body with feature names.");
-@@doc(Accounts.updateStatus::parameters.body,
+@@doc(
+  Accounts.updateStatus::parameters.body,
   "The ingestion private endpoint connection status update request."
 );

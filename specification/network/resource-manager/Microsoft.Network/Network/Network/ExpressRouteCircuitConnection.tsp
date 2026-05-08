@@ -77,12 +77,15 @@ interface ExpressRouteCircuitConnections {
   >;
 }
 
-@@doc(ExpressRouteCircuitConnection.name,
+@@doc(
+  ExpressRouteCircuitConnection.name,
   "The name of the express route circuit connection."
 );
-@@doc(ExpressRouteCircuitConnection.properties,
+@@doc(
+  ExpressRouteCircuitConnection.properties,
   "Properties of the express route circuit connection."
 );
-@@doc(ExpressRouteCircuitConnections.createOrUpdate::parameters.resource,
+@@doc(
+  ExpressRouteCircuitConnections.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update express route circuit connection operation."
 );

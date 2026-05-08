@@ -80,12 +80,15 @@ interface VirtualEndpoints {
 @@maxLength(VirtualEndpoint.name, 63);
 @@minLength(VirtualEndpoint.name, 3);
 @@doc(VirtualEndpoint.name, "Base name of the virtual endpoints.");
-@@doc(VirtualEndpoints.create::parameters.resource,
+@@doc(
+  VirtualEndpoints.create::parameters.resource,
   "Parameters required to create or update a pair of virtual endpoints."
 );
-@@doc(VirtualEndpoints.update::parameters.properties,
+@@doc(
+  VirtualEndpoints.update::parameters.properties,
   "Parameters required to update a pair of virtual endpoints."
 );
-@@doc(VirtualEndpoint.properties,
+@@doc(
+  VirtualEndpoint.properties,
   "Properties of the pair of virtual endpoints."
 );

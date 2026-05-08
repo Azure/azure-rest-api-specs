@@ -245,12 +245,15 @@ interface AttestationOperationGroup {
 
 @@doc(Attestation.name, "The name of the attestation.");
 @@doc(Attestation.properties, "Properties for the attestation.");
-@@doc(Attestations.createOrUpdateAtSubscription::parameters.resource,
+@@doc(
+  Attestations.createOrUpdateAtSubscription::parameters.resource,
   "The attestation parameters."
 );
-@@doc(AttestationResourceGroupOperations.createOrUpdateAtResourceGroup::parameters.resource,
+@@doc(
+  AttestationResourceGroupOperations.createOrUpdateAtResourceGroup::parameters.resource,
   "The attestation parameters."
 );
-@@doc(AttestationOperationGroup.createOrUpdateAtResource::parameters.resource,
+@@doc(
+  AttestationOperationGroup.createOrUpdateAtResource::parameters.resource,
   "The attestation parameters."
 );

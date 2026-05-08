@@ -125,15 +125,19 @@ interface Clusters {
 @@maxLength(Cluster.name, 50);
 @@minLength(Cluster.name, 6);
 @@doc(Cluster.name, "The name of the Event Hubs Cluster.");
-@@doc(Cluster.properties,
+@@doc(
+  Cluster.properties,
   "Event Hubs Cluster properties supplied in responses in List or Get operations."
 );
-@@doc(Clusters.createOrUpdate::parameters.resource,
+@@doc(
+  Clusters.createOrUpdate::parameters.resource,
   "Parameters for creating a eventhub cluster resource."
 );
-@@doc(Clusters.update::parameters.properties,
+@@doc(
+  Clusters.update::parameters.properties,
   "The properties of the Event Hubs Cluster which should be updated."
 );
-@@doc(Clusters.patch::parameters.body,
+@@doc(
+  Clusters.patch::parameters.body,
   "Parameters for creating an Event Hubs Cluster resource."
 );

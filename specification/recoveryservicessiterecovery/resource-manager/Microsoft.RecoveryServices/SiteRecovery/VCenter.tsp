@@ -85,9 +85,11 @@ interface VCenters {
 
 @@doc(VCenter.name, "vcenter name.");
 @@doc(VCenter.properties, "VCenter related data.");
-@@doc(VCenters.create::parameters.resource,
+@@doc(
+  VCenters.create::parameters.resource,
   "The input to the add vCenter operation."
 );
-@@doc(VCenters.update::parameters.properties,
+@@doc(
+  VCenters.update::parameters.properties,
   "The input to the update vCenter operation."
 );

@@ -210,15 +210,19 @@ interface WorkbookOperationGroup {
   >;
 }
 
-@@doc(Workbook.name,
+@@doc(
+  Workbook.name,
   "The name of the workbook resource. The value must be an UUID."
 );
-@@doc(Workbook.properties,
+@@doc(
+  Workbook.properties,
   "Metadata describing a workbook for an Azure resource."
 );
-@@doc(Workbooks.createOrUpdate::parameters.resource,
+@@doc(
+  Workbooks.createOrUpdate::parameters.resource,
   "Properties that need to be specified to create a new workbook."
 );
-@@doc(Workbooks.update::parameters.properties,
+@@doc(
+  Workbooks.update::parameters.properties,
   "Properties that need to be specified to create a new workbook."
 );

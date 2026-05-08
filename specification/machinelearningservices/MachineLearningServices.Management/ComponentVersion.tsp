@@ -229,15 +229,19 @@ interface ComponentVersionOperationGroup {
 }
 
 @@doc(ComponentVersion.name, "Version identifier.");
-@@doc(ComponentVersion.properties,
+@@doc(
+  ComponentVersion.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(ComponentVersions.createOrUpdate::parameters.resource,
+@@doc(
+  ComponentVersions.createOrUpdate::parameters.resource,
   "Version entity to create or update."
 );
-@@doc(ComponentVersionOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  ComponentVersionOperationGroup.createOrUpdate::parameters.resource,
   "Version entity to create or update."
 );
-@@doc(ComponentVersionOperationGroup.publish::parameters.body,
+@@doc(
+  ComponentVersionOperationGroup.publish::parameters.body,
   "Destination registry info"
 );

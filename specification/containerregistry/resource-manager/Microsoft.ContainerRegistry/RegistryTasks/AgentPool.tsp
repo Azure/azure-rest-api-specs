@@ -80,9 +80,11 @@ interface AgentPools {
 @@minLength(AgentPool.name, 3);
 @@doc(AgentPool.name, "The name of the agent pool.");
 @@doc(AgentPool.properties, "The properties associated with the agent pool");
-@@doc(AgentPools.create::parameters.resource,
+@@doc(
+  AgentPools.create::parameters.resource,
   "The parameters of an agent pool that needs to scheduled."
 );
-@@doc(AgentPools.update::parameters.properties,
+@@doc(
+  AgentPools.update::parameters.properties,
   "The parameters for updating an agent pool."
 );

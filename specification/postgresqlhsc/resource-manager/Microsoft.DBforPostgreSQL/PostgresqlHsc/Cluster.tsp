@@ -131,12 +131,15 @@ interface Clusters {
 @@minLength(Cluster.name, 3);
 @@doc(Cluster.name, "The name of the cluster.");
 @@doc(Cluster.properties, "Properties of the cluster.");
-@@doc(Clusters.create::parameters.resource,
+@@doc(
+  Clusters.create::parameters.resource,
   "The required parameters for creating or updating a cluster."
 );
-@@doc(Clusters.update::parameters.properties,
+@@doc(
+  Clusters.update::parameters.properties,
   "The parameters for updating a cluster."
 );
-@@doc(Clusters.promoteReadReplica::parameters.body,
+@@doc(
+  Clusters.promoteReadReplica::parameters.body,
   "The parameter for enabling geo-redundant backup while promoting read replica."
 );

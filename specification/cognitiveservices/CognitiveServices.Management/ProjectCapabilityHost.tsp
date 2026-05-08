@@ -85,12 +85,15 @@ interface ProjectCapabilityHosts {
   >;
 }
 
-@@doc(ProjectCapabilityHost.name,
+@@doc(
+  ProjectCapabilityHost.name,
   "The name of the capability host associated with the Cognitive Services Resource"
 );
-@@doc(ProjectCapabilityHost.properties,
+@@doc(
+  ProjectCapabilityHost.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(ProjectCapabilityHosts.createOrUpdate::parameters.resource,
+@@doc(
+  ProjectCapabilityHosts.createOrUpdate::parameters.resource,
   "CapabilityHost definition."
 );

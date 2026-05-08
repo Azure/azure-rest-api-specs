@@ -127,15 +127,19 @@ interface SqlVirtualMachines {
 @@minLength(SqlVirtualMachine.name, 1);
 @@doc(SqlVirtualMachine.name, "Name of the SQL virtual machine.");
 @@doc(SqlVirtualMachine.properties, "Resource properties.");
-@@doc(SqlVirtualMachines.createOrUpdate::parameters.resource,
+@@doc(
+  SqlVirtualMachines.createOrUpdate::parameters.resource,
   "The SQL virtual machine."
 );
-@@doc(SqlVirtualMachines.update::parameters.properties,
+@@doc(
+  SqlVirtualMachines.update::parameters.properties,
   "The SQL virtual machine."
 );
-@@doc(SqlVirtualMachines.fetchDCAssessment::parameters.body,
+@@doc(
+  SqlVirtualMachines.fetchDCAssessment::parameters.body,
   "Disk Config Assessment property"
 );
-@@doc(SqlVirtualMachines.troubleshoot::parameters.body,
+@@doc(
+  SqlVirtualMachines.troubleshoot::parameters.body,
   "The SQL virtual machine troubleshooting entity."
 );

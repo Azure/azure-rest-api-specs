@@ -98,9 +98,11 @@ interface SyncMembers {
 
 @@doc(SyncMember.name, "The name of the sync member.");
 @@doc(SyncMember.properties, "Resource properties.");
-@@doc(SyncMembers.createOrUpdate::parameters.resource,
+@@doc(
+  SyncMembers.createOrUpdate::parameters.resource,
   "The requested sync member resource state."
 );
-@@doc(SyncMembers.update::parameters.properties,
+@@doc(
+  SyncMembers.update::parameters.properties,
   "The requested sync member resource state."
 );

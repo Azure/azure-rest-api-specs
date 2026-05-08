@@ -46,6 +46,7 @@ interface Routes {
 
 @@doc(Route.name, "The name of the route.");
 @@doc(Route.properties, "Properties of the route.");
-@@doc(Routes.createOrUpdate::parameters.resource,
+@@doc(
+  Routes.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update route operation."
 );

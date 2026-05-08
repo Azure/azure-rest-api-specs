@@ -120,6 +120,7 @@ interface NetworkGroups {
 
 @@doc(NetworkGroup.name, "The name of the network group.");
 @@doc(NetworkGroup.properties, "The Network Group properties");
-@@doc(NetworkGroups.createOrUpdate::parameters.resource,
+@@doc(
+  NetworkGroups.createOrUpdate::parameters.resource,
   "Parameters supplied to the specify which network group need to create"
 );

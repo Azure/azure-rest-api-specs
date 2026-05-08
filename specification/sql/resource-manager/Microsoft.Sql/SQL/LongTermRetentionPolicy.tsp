@@ -50,10 +50,12 @@ interface LongTermRetentionPolicies {
   listByDatabase is ArmResourceListByParent<LongTermRetentionPolicy>;
 }
 
-@@doc(LongTermRetentionPolicy.name,
+@@doc(
+  LongTermRetentionPolicy.name,
   "The policy name. Should always be Default."
 );
 @@doc(LongTermRetentionPolicy.properties, "Resource properties.");
-@@doc(LongTermRetentionPolicies.createOrUpdate::parameters.resource,
+@@doc(
+  LongTermRetentionPolicies.createOrUpdate::parameters.resource,
   "The long term retention policy info."
 );

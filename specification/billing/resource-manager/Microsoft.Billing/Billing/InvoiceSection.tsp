@@ -486,16 +486,20 @@ alias InvoiceSectionsListByBillingProfileParameters = {
   search?: string;
 };
 
-@@doc(InvoiceSection.name,
+@@doc(
+  InvoiceSection.name,
   "The ID that uniquely identifies an invoice section."
 );
 @@doc(InvoiceSection.properties, "An invoice section.");
-@@doc(InvoiceSections.createOrUpdate::parameters.resource,
+@@doc(
+  InvoiceSections.createOrUpdate::parameters.resource,
   "An invoice section."
 );
-@@doc(InvoiceSections.checkAccessByInvoiceSection::parameters.body,
+@@doc(
+  InvoiceSections.checkAccessByInvoiceSection::parameters.body,
   "The request object against which access of the caller will be checked."
 );
-@@doc(InvoiceSections.createByInvoiceSection::parameters.body,
+@@doc(
+  InvoiceSections.createByInvoiceSection::parameters.body,
   "The properties of the billing role assignment."
 );

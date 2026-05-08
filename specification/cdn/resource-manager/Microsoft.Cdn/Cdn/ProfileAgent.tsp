@@ -92,12 +92,15 @@ interface ProfileAgents {
 }
 
 @@doc(ProfileAgent.name, "Name of the web agent association.");
-@@doc(ProfileAgent.properties,
+@@doc(
+  ProfileAgent.properties,
   "The properties of a profile agent association."
 );
-@@doc(ProfileAgents.createOrUpdate::parameters.resource,
+@@doc(
+  ProfileAgents.createOrUpdate::parameters.resource,
   "Profile agent association properties."
 );
-@@doc(ProfileAgents.update::parameters.properties,
+@@doc(
+  ProfileAgents.update::parameters.properties,
   "Profile agent association update properties."
 );

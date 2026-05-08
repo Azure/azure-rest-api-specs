@@ -140,18 +140,23 @@ interface EHNamespaces {
 @@maxLength(EHNamespace.name, 50);
 @@minLength(EHNamespace.name, 6);
 @@doc(EHNamespace.name, "The Namespace name");
-@@doc(EHNamespace.properties,
+@@doc(
+  EHNamespace.properties,
   "Namespace properties supplied for create namespace operation."
 );
-@@doc(EHNamespaces.createOrUpdate::parameters.resource,
+@@doc(
+  EHNamespaces.createOrUpdate::parameters.resource,
   "Parameters for creating a namespace resource."
 );
-@@doc(EHNamespaces.update::parameters.properties,
+@@doc(
+  EHNamespaces.update::parameters.properties,
   "Parameters for updating a namespace resource."
 );
-@@doc(EHNamespaces.failover::parameters.body,
+@@doc(
+  EHNamespaces.failover::parameters.body,
   "Parameters for updating a namespace resource."
 );
-@@doc(EHNamespaces.checkNameAvailability::parameters.body,
+@@doc(
+  EHNamespaces.checkNameAvailability::parameters.body,
   "Parameters to check availability of the given Alias name"
 );

@@ -76,6 +76,7 @@ interface ClientGroups {
 @@minLength(ClientGroup.name, 3);
 @@doc(ClientGroup.name, "Name of the client group.");
 @@doc(ClientGroup.properties, "The properties of client group.");
-@@doc(ClientGroups.createOrUpdate::parameters.resource,
+@@doc(
+  ClientGroups.createOrUpdate::parameters.resource,
   "Client group information."
 );

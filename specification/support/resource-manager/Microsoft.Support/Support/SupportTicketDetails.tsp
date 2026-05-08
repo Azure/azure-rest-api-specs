@@ -210,22 +210,28 @@ interface SupportTicketsNoSubscription {
 
 @@doc(SupportTicketDetails.name, "Support ticket name.");
 @@doc(SupportTicketDetails.properties, "Properties of the resource.");
-@@doc(SupportTickets.create::parameters.resource,
+@@doc(
+  SupportTickets.create::parameters.resource,
   "Support ticket request payload."
 );
-@@doc(SupportTickets.update::parameters.properties,
+@@doc(
+  SupportTickets.update::parameters.properties,
   "UpdateSupportTicket object."
 );
 @@doc(SupportTickets.checkNameAvailability::parameters.body, "Input to check.");
-@@doc(SupportTickets.lookUpResourceId::parameters.body,
+@@doc(
+  SupportTickets.lookUpResourceId::parameters.body,
   "Look up resource id request body"
 );
-@@doc(SupportTicketsNoSubscription.create::parameters.resource,
+@@doc(
+  SupportTicketsNoSubscription.create::parameters.resource,
   "Support ticket request payload."
 );
-@@doc(SupportTicketsNoSubscription.update::parameters.properties,
+@@doc(
+  SupportTicketsNoSubscription.update::parameters.properties,
   "UpdateSupportTicket object."
 );
-@@doc(SupportTicketsNoSubscription.checkNameAvailability::parameters.body,
+@@doc(
+  SupportTicketsNoSubscription.checkNameAvailability::parameters.body,
   "Input to check."
 );

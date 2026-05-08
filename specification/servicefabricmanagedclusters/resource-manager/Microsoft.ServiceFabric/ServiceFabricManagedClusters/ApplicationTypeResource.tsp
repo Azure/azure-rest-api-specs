@@ -74,16 +74,20 @@ interface ApplicationTypes {
   >;
 }
 
-@@doc(ApplicationTypeResource.name,
+@@doc(
+  ApplicationTypeResource.name,
   "The name of the application type name resource."
 );
-@@doc(ApplicationTypeResource.properties,
+@@doc(
+  ApplicationTypeResource.properties,
   "The application type name properties"
 );
-@@doc(ApplicationTypes.createOrUpdate::parameters.resource,
+@@doc(
+  ApplicationTypes.createOrUpdate::parameters.resource,
   "The application type name resource."
 );
-@@doc(ApplicationTypes.update::parameters.properties,
+@@doc(
+  ApplicationTypes.update::parameters.properties,
   "The application type resource updated tags."
 );
 

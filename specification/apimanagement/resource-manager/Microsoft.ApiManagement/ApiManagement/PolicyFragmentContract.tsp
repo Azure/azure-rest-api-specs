@@ -385,9 +385,11 @@ interface WorkspacePolicyFragment {
 @@minLength(PolicyFragmentContract.name, 1);
 @@doc(PolicyFragmentContract.name, "A resource identifier.");
 @@doc(PolicyFragmentContract.properties, "Properties of the Policy Fragment.");
-@@doc(PolicyFragmentContracts.createOrUpdate::parameters.resource,
+@@doc(
+  PolicyFragmentContracts.createOrUpdate::parameters.resource,
   "The policy fragment contents to apply."
 );
-@@doc(WorkspacePolicyFragment.createOrUpdate::parameters.resource,
+@@doc(
+  WorkspacePolicyFragment.createOrUpdate::parameters.resource,
   "The policy fragment contents to apply."
 );

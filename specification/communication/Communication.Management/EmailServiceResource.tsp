@@ -102,9 +102,11 @@ interface EmailServices {
 @@minLength(EmailServiceResource.name, 1);
 @@doc(EmailServiceResource.name, "The name of the EmailService resource.");
 @@doc(EmailServiceResource.properties, "The properties of the service.");
-@@doc(EmailServices.createOrUpdate::parameters.resource,
+@@doc(
+  EmailServices.createOrUpdate::parameters.resource,
   "Parameters for the create or update operation"
 );
-@@doc(EmailServices.update::parameters.properties,
+@@doc(
+  EmailServices.update::parameters.properties,
   "Parameters for the update operation"
 );

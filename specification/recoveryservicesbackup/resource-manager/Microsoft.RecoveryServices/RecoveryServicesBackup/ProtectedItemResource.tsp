@@ -209,14 +209,17 @@ interface ProtectedItemOperationResults {
   >;
 }
 
-@@doc(ProtectedItemResource.name,
+@@doc(
+  ProtectedItemResource.name,
   "Backed up item name whose details are to be fetched."
 );
 @@doc(ProtectedItemResource.properties, "ProtectedItemResource properties");
-@@doc(ProtectedItems.createOrUpdate::parameters.resource,
+@@doc(
+  ProtectedItems.createOrUpdate::parameters.resource,
   "resource backed up item"
 );
 @@doc(Backups.trigger::parameters.body, "resource backup request");
-@@doc(RecoveryPointsRecommendedForMove.list::parameters.body,
+@@doc(
+  RecoveryPointsRecommendedForMove.list::parameters.body,
   "List Recovery points Recommended for Move Request"
 );

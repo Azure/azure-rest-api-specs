@@ -108,9 +108,11 @@ interface Workspaces {
 @@minLength(Workspace.name, 3);
 @@doc(Workspace.name, "The name of workspace resource.");
 @@doc(Workspace.properties, "Workspaces resource specific properties.");
-@@doc(Workspaces.createOrUpdate::parameters.resource,
+@@doc(
+  Workspaces.createOrUpdate::parameters.resource,
   "The parameters for creating or updating a healthcare workspace."
 );
-@@doc(Workspaces.update::parameters.properties,
+@@doc(
+  Workspaces.update::parameters.properties,
   "The parameters for updating a specified workspace."
 );
