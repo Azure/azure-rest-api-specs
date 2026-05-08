@@ -359,6 +359,7 @@ model Instructions {
 /**
  * Update install instruction step.
  */
+@extension("minProperties", 2)
 model Step {
   /**
    * Step type.
