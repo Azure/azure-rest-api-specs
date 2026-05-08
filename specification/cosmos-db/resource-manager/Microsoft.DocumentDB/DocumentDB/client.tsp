@@ -570,6 +570,14 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "GetMetricsPercentileTargets",
   "csharp"
 );
+@@clientName(DatabaseAccounts.collectionListMetricDefinitions,
+  "GetMetricDefinitionsCollections",
+  "csharp"
+);
+@@clientName(DatabaseAccounts.databaseListMetricDefinitions,
+  "GetMetricDefinitionsDatabases",
+  "csharp"
+);
 @@clientName(DatabaseRestoreResource, "DatabaseRestoreResourceInfo", "csharp");
 @@clientName(DataType, "CosmosDBDataType", "csharp");
 @@clientName(ExcludedPath, "CosmosDBExcludedPath", "csharp");
@@ -1333,10 +1341,6 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "MongoDBUserDefinitionCreateOrUpdateContent",
   "csharp"
 );
-// DatabaseAccountCreateUpdateParameters rename is handled by the @@alternateType
-// wrapper model near the bottom of this file.
-// CassandraTableCreateUpdateParameters rename is handled by the @@alternateType
-// wrapper model near the bottom of this file.
 @@clientName(CassandraViewResource, "CassandraViewResourceInfo", "csharp");
 @@clientName(CassandraRoleDefinitionResourceProperties.id,
   "RoleDefinitionId",
@@ -1523,6 +1527,14 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "csharp"
 );
 @@alternateType(LocationGetResult.name, Azure.Core.azureLocation, "csharp");
+@@alternateType(RestorableSqlResourcesListParameters.restoreLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(RestorableMongodbResourcesListParameters.restoreLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
 @@alternateType(DatabaseAccountUpdateProperties.keyVaultKeyUri, url, "csharp");
 @@alternateType(DataCenterResourceProperties.managedDiskCustomerKeyUri,
   url,
@@ -1544,6 +1556,10 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 @@alternateType(PartitionUsage.partitionId, Azure.Core.uuid, "csharp");
 @@alternateType(PartitionMetric.partitionId, Azure.Core.uuid, "csharp");
 @@alternateType(DatabaseAccountGetProperties.instanceId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(RestorableDatabaseAccountGetResult.name,
   Azure.Core.uuid,
   "csharp"
 );
@@ -1647,6 +1663,10 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 );
 @@usage(FleetspaceResource, Azure.ClientGenerator.Core.Usage.input, "csharp");
 @@usage(LocationGetResult, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(DatabaseAccountCreateUpdateParameters,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
 @@usage(RestorableSqlDatabasePropertiesResourceDatabase,
   Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"

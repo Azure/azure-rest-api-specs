@@ -112,19 +112,7 @@ interface RestorableDatabaseAccountGetResults {
     void,
     ArmResponse<RestorableSqlResourcesListResult>,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Parameters = {
-      /**
-       * The location where the restorable resources are located.
-       */
-      @query("restoreLocation")
-      restoreLocation?: string;
-
-      /**
-       * The timestamp when the restorable resources existed.
-       */
-      @query("restoreTimestampInUtc")
-      restoreTimestampInUtc?: string;
-    },
+    Parameters = RestorableSqlResourcesListParameters,
     Error = CloudError
   >;
 
@@ -186,19 +174,7 @@ interface RestorableDatabaseAccountGetResults {
     void,
     ArmResponse<RestorableMongodbResourcesListResult>,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Parameters = {
-      /**
-       * The location where the restorable resources are located.
-       */
-      @query("restoreLocation")
-      restoreLocation?: string;
-
-      /**
-       * The timestamp when the restorable resources existed.
-       */
-      @query("restoreTimestampInUtc")
-      restoreTimestampInUtc?: string;
-    },
+    Parameters = RestorableMongodbResourcesListParameters,
     Error = CloudError
   >;
 
@@ -330,6 +306,34 @@ interface RestorableDatabaseAccountGetResults {
     Error = CloudError
   >;
 }
+
+alias RestorableMongodbResourcesListParameters = {
+  /**
+   * The location where the restorable resources are located.
+   */
+  @query("restoreLocation")
+  restoreLocation?: string;
+
+  /**
+   * The timestamp when the restorable resources existed.
+   */
+  @query("restoreTimestampInUtc")
+  restoreTimestampInUtc?: string;
+};
+
+alias RestorableSqlResourcesListParameters = {
+  /**
+   * The location where the restorable resources are located.
+   */
+  @query("restoreLocation")
+  restoreLocation?: string;
+
+  /**
+   * The timestamp when the restorable resources existed.
+   */
+  @query("restoreTimestampInUtc")
+  restoreTimestampInUtc?: string;
+};
 
 @@doc(RestorableDatabaseAccountGetResult.name,
   "The instanceId GUID of a restorable database account."
