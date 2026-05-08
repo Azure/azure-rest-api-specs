@@ -118,6 +118,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
   "go"
 );
 @@alternateType(ShareQuotaOptionalHeader.quota, int64, "go");
+@@clientName(ClientRequestIdParameter.clientRequestId, "RequestID", "go");
 @@clientName(CopyStatus, "CopyStatusType", "go");
 @@clientName(CorsRule, "CORSRule", "go");
 @@clientName(ContentCrc64ResponseHeader.contentCrc64, "XMSContentCRC64", "go");
