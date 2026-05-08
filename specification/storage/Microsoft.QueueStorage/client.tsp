@@ -99,7 +99,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@clientName(UserDelegationKey.signedOid, "SignedOID", "go");
 @@clientName(UserDelegationKey.signedTid, "SignedTID", "go");
 @@clientName(UserDelegationKey.signedDelegatedUserTid,
-  "SignedDelegatedUserTID",
+  "SignedDelegatedUserTenantID",
   "go"
 );
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
