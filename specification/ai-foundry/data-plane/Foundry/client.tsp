@@ -142,6 +142,8 @@ using Azure.AI.Projects;
 // Rename models ending with 'Object' to end with 'Details' for Python
 @@clientName(MemoryStoreObject, "MemoryStoreDetails", "python");
 
+@@clientName(PendingUploadResponse, "PendingUploadResult", "python");
+
 // Remove 'Object' suffix for JS client
 @@clientName(MemoryStoreObject, "MemoryStore", "javascript");
 
@@ -271,6 +273,8 @@ using Azure.AI.Projects;
 @@clientName(Skills.updateSkill, "update");
 @@clientName(Skills.deleteSkill, "delete");
 
+@@clientName(DeleteSkillResponse, "DeleteSkillResult", "python");
+
 // --------------------------------------------------------------------------------
 // Connections sub‐client
 // --------------------------------------------------------------------------------
@@ -300,6 +304,8 @@ using Azure.AI.Projects;
 @@scope(Agents.createAgentFromCode, "!(python)");
 
 @@clientName(DownloadAgentCodeResponse, "DownloadAgentCodeResult", "python");
+@@clientName(SessionDirectoryListResponse, "SessionDirectoryListResult", "python");
+@@clientName(SessionFileWriteResponse, "SessionFileWriteResult", "python");
 
 // --------------------------------------------------------------------------------
 // To support custom client-side handling of "opt-in" to preview features.
