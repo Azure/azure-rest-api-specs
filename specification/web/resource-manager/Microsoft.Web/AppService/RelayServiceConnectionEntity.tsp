@@ -55,7 +55,8 @@ interface RelayServiceConnectionEntityOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface RelayServiceConnectionEntities {
   /**
    * Description for Gets a hybrid connection configuration by its name.
@@ -129,7 +130,8 @@ interface RelayServiceConnectionEntityOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface RelayServiceConnectionEntityOperationGroup {
   /**
    * Description for Gets a hybrid connection configuration by its name.

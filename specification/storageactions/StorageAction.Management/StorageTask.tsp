@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.StorageActions;
 /**
@@ -134,6 +136,22 @@ interface StorageTasks {
       @query("$maxpagesize")
       $maxpagesize?: int32;
     }
+  >;
+
+  /**
+   * Stops all active running assignments for the storage task
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Matches stopAssignment pattern in Microsoft.Storage"
+  @added(Versions.v2026_03_01)
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  @action("stopAllAssignments")
+  stopAllAssignments is ArmResourceActionAsync<
+    StorageTask,
+    void,
+    void,
+    LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 
