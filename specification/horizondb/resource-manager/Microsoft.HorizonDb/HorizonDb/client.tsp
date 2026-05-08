@@ -3,7 +3,6 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
-@@clientName(Azure.ResourceManager.PrivateEndpointConnectionResource, "HorizonDBPrivateEndpointConnection");
 @@clientName(Azure.ResourceManager.PrivateEndpointConnectionUpdate, "HorizonDBPrivateEndpointConnectionPatch");
 @@clientName(Microsoft.HorizonDb, "HorizonDBMgmtClient");
 @@clientName(Microsoft.HorizonDb.CreateModeCluster, "HorizonDBCreateModeCluster");
