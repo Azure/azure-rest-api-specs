@@ -2344,6 +2344,94 @@
         "azureMonitorWorkspaceResourceId"
       ]
     },
+    "AzureResourceHealthSignal": {
+      "type": "object",
+      "description": "Azure resource health signal configuration",
+      "properties": {
+        "enabled": {
+          "type": "string",
+          "description": "Whether to automatically add a signal for the Azure resource's availability status from Azure Resource Health. Defaults to Enabled.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceHealthAvailabilityStatusSignalBehavior",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Automatically add resource health availability status signal"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Do not automatically add resource health availability status signal"
+              }
+            ]
+          }
+        },
+        "signalName": {
+          "$ref": "#/definitions/string256",
+          "description": "The unique name of the Azure resource health signal. System assigned.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/AzureResourceHealthSignalStatus",
+          "description": "Current status of the Azure resource health signal.",
+          "readOnly": true
+        }
+      }
+    },
+    "AzureResourceHealthSignalStatus": {
+      "type": "object",
+      "description": "Status of an Azure Resource Health signal, including availability information reported by Azure Resource Health.",
+      "properties": {
+        "healthState": {
+          "$ref": "#/definitions/HealthState",
+          "description": "Health state of this signal",
+          "readOnly": true
+        },
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "Reported value of the signal",
+          "readOnly": true
+        },
+        "reportedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the value was reported",
+          "readOnly": true
+        },
+        "error": {
+          "type": "string",
+          "description": "Error message if the signal status cannot be retrieved",
+          "readOnly": true
+        },
+        "additionalContext": {
+          "$ref": "#/definitions/string4096",
+          "description": "Additional context as provided by the submitter"
+        },
+        "availabilityStatus": {
+          "type": "string",
+          "description": "Availability status of the Azure resource as reported by Azure Resource Health.",
+          "readOnly": true
+        },
+        "category": {
+          "$ref": "#/definitions/string256",
+          "description": "When a context field is set to Platform, this field will reflect if the event was planned or unplanned.",
+          "readOnly": true
+        },
+        "detailedStatus": {
+          "$ref": "#/definitions/string4096",
+          "description": "Detailed status of the Azure resource as reported by Azure Resource Health.",
+          "readOnly": true
+        }
+      }
+    },
     "AzureResourceSignal": {
       "type": "object",
       "description": "An Azure Resource Metric signal instance assigned to an entity.",
@@ -2481,6 +2569,10 @@
           "x-ms-identifiers": [
             "name"
           ]
+        },
+        "resourceHealth": {
+          "$ref": "#/definitions/AzureResourceHealthSignal",
+          "description": "Optional configuration for automatically adding a signal based on the resource's availability state in Azure Resource Health."
         }
       },
       "required": [
@@ -2718,6 +2810,10 @@
           "$ref": "#/definitions/DiscoveryRuleSpecification",
           "description": "Specification of the discovery rule defining how entities are discovered."
         },
+        "addResourceHealthSignal": {
+          "$ref": "#/definitions/ResourceHealthAvailabilityStatusSignalBehavior",
+          "description": "Whether to automatically add a signal for the Azure resource's availability status from Azure Resource Health to the discovered entities."
+        },
         "error": {
           "$ref": "#/definitions/DiscoveryError",
           "description": "Error details if the last discovery operation failed.",
@@ -2734,6 +2830,7 @@
         "discoverRelationships",
         "addRecommendedSignals",
         "specification",
+        "addResourceHealthSignal",
         "entityName"
       ]
     },
@@ -3984,6 +4081,30 @@
       ],
       "x-ms-discriminator-value": "ResourceGraphQuery"
     },
+    "ResourceHealthAvailabilityStatusSignalBehavior": {
+      "type": "string",
+      "description": "Resource health availability status signal behavior",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceHealthAvailabilityStatusSignalBehavior",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Automatically add resource health availability status signal"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Do not automatically add resource health availability status signal"
+          }
+        ]
+      }
+    },
     "ResourceMetricSignalDefinitionProperties": {
       "type": "object",
       "description": "Azure Resource Metric Signal Definition properties",
@@ -4423,6 +4544,10 @@
           "type": "string",
           "description": "Error message if the signal status cannot be retrieved",
           "readOnly": true
+        },
+        "additionalContext": {
+          "$ref": "#/definitions/string4096",
+          "description": "Additional context as provided by the submitter"
         }
       }
     },
