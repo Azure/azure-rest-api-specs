@@ -30,7 +30,7 @@ arm-api-reviewer/
 └── README.md              # This file
 ```
 
-## Test Categories (28 test cases across 11 eval files)
+## Test Categories (31 test cases across 12 eval files)
 
 | ID     | Category                | Count | Description                                                   |
 | ------ | ----------------------- | ----- | ------------------------------------------------------------- |
@@ -45,15 +45,16 @@ arm-api-reviewer/
 | 09xxxx | True negatives          | 3     | Clean spec, clean example, clean proxy resource               |
 | 10xxxx | Classification          | 1     | NEW vs EXISTING issue tagging                                 |
 | 11xxxx | Report format           | 1     | Line numbers, rule IDs, structured output                     |
+| 12xxxx | TypeSpec required       | 3     | TSP-REQUIRED-V1: new versions need TypeSpec; maintenance OK   |
 
 ## Fixtures
 
-All 32 fixture files live in `fixtures/`. See
+All 33 fixture files live in `fixtures/`. See
 [`fixtures/README.md`](fixtures/README.md) for the complete catalog with
 descriptions, seeded violations, and guidance on reusing fixtures in other
 eval suites.
 
-- **14 ARM OpenAPI specs** in `arm-openapi/` -- 2 clean + 12 with seeded violations
+- **15 ARM OpenAPI specs** in `arm-openapi/` -- 2 clean + 12 with seeded violations + 1 TypeSpec-generated
 - **3 example JSON files** in `examples/` -- 1 clean + 2 with issues
 - **2 readme.md files** in `readme/` -- suppression scenarios
 - **3 TypeSpec files** in `typespec/` -- segment/naming, secret/type, anti-pattern violations
@@ -71,7 +72,7 @@ VS Code with GitHub Copilot active.
 ```powershell
 cd .github/skills/evals/arm-api-reviewer
 
-# Run the full suite (28 stimuli, sequential -- safest)
+# Run the full suite (31 stimuli, sequential -- safest)
 .\run-evals.ps1
 
 # Point to an existing evaluate clone instead of re-cloning
@@ -121,7 +122,7 @@ cd .github/skills/evals/arm-api-reviewer
 # (evaluate is a monorepo; the vally binary lives under packages/cli)
 export VALLY_CLI="/path/to/evaluate/packages/cli/dist/index.js"
 
-# Run the full suite (all 28 stimuli, 5 concurrent workers)
+# Run the full suite (all 31 stimuli, 5 concurrent workers)
 node $VALLY_CLI eval --suite all --verbose
 
 # Run a single category
