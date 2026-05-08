@@ -32,6 +32,7 @@ using Azure.Core;
      * The Device Update for IoT Hub account endpoint (hostname only, no protocol).
      */
     @extension("x-ms-parameter-grouping", #{ name: "account-options" })
+    @extension("x-ms-parameter-location", "client")
     endpoint: url,
   }
 )
