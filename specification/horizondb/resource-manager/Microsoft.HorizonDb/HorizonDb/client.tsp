@@ -4,7 +4,8 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 
 @@clientName(Azure.ResourceManager.PrivateEndpointConnectionResource,
-  "HorizonDBPrivateEndpointConnection"
+  "HorizonDBPrivateEndpointConnection",
+  "csharp,java,python,typescript"
 );
 @@clientName(Azure.ResourceManager.PrivateEndpointConnectionUpdate,
   "HorizonDBPrivateEndpointConnectionPatch"
