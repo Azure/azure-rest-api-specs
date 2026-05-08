@@ -18,7 +18,7 @@ enum Versions {
   /**
    * The 2025-03-21 API version.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-version-progression" "Existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/version-progression" "Existing API"
   v2025_03_21: "2025-03-21",
 }
 
