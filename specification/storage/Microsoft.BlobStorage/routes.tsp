@@ -98,7 +98,7 @@ op StorageOperationRequestBody<
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 interface Service {
-  /** Sets properties for a storage account's Blob service endpoint, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules */
+  /** Sets properties for a storage account's Blob service endpoint, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
@@ -138,7 +138,7 @@ interface Service {
     }
   >;
 
-  /** The List Containers Segment operation returns a list of the containers under the specified account */
+  /** Returns a list of the containers in the specified account. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
@@ -151,7 +151,7 @@ interface Service {
       ...MaxResultsParameter;
       ...TimeoutParameter;
 
-      /** Include this parameter to specify that the container's metadata be returned as part of the response body. */
+      /** Specify to include additional, optional information. */
       @query include?: Array<ListContainersIncludeType>;
     },
     ListContainersResponse
@@ -163,20 +163,20 @@ interface Service {
   @route("?restype=service&comp=userdelegationkey")
   getUserDelegationKey is StorageOperation<
     {
-      /** Key information provided in the request */
+      /** Key information provided in the request. */
       @body
       keyInfo: KeyInfo;
 
       ...TimeoutParameter;
     },
     {
-      /** The user delegation key */
+      /** The user delegation key. */
       @body
       userDelegationKey: UserDelegationKey;
     }
   >;
 
-  /** Returns the sku name and account kind. */
+  /** Returns information about the storage account. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @get
@@ -188,19 +188,19 @@ interface Service {
       ...SkuNameResponseHeader;
       ...AccountKindResponseHeader;
 
-      /** Version 2019-07-07 and newer. Indicates if the account has a hierarchical namespace enabled. */
+      /** Indicates if the account has hierarchical namespace enabled. */
       @header("x-ms-is-hns-enabled")
       isHierarchicalNamespaceEnabled?: boolean;
     }
   >;
 
-  /** The Batch operation allows multiple API calls to be embedded into a single HTTP request. */
+  /** Allows multiple API calls to be embedded into a single HTTP request. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @post
   @route("?comp=batch")
   submitBatch(
-    /** Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
+    /** The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
     @header("Content-Type")
     @alternateType(string, "javascript,csharp,go")
     @clientName("multipartContentType", "go")
@@ -211,7 +211,7 @@ interface Service {
     ...ClientRequestIdHeader,
     ...ContentLengthParameter,
 
-    /** The batch request content */
+    /** The batch request content. */
     ...MultipartBodyParameter,
   ): (MultipartBodyParameter & {
     @statusCode statusCode: 202;
@@ -227,7 +227,7 @@ interface Service {
     ...ClientRequestIdHeader;
   }) | Error;
 
-  /** The Filter Blobs operation enables callers to list blobs across all containers whose tags match a given search expression. */
+  /** Lists blobs across all containers whose tags match a given search expression. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
@@ -242,7 +242,7 @@ interface Service {
       ...FilterBlobsIncludeParameter;
     },
     {
-      /** The filter blobs enumeration results */
+      /** The filter blobs enumeration results. */
       @body
       enumerationResults: FilterBlobResponse;
     }
@@ -251,7 +251,7 @@ interface Service {
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 interface Container {
-  /** Creates a new container under the specified account. If the container with the same name already exists, the operation fails. */
+  /** Creates a new container in the specified account. If the container with the same name already exists, the operation fails. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
@@ -262,7 +262,7 @@ interface Container {
       ...MetadataHeaders;
       ...BlobPublicAccessParameter;
 
-      /** Optional.  Version 2019-07-07 and later.  Specifies the default encryption scope to set on the container and use for all future writes. */
+      /** Specifies the default encryption scope to set on the container and use for all future requests. */
       @header("x-ms-default-encryption-scope")
       defaultEncryptionScope?: string;
 
@@ -275,7 +275,7 @@ interface Container {
     }
   >;
 
-  /** returns all user-defined metadata and system properties for the specified container. The data returned does not include the container's list of blobs */
+  /** Returns all user-defined metadata and system properties for the specified container. The data returned does not include the container's list of blobs. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @get
@@ -308,13 +308,13 @@ interface Container {
 
       ...DenyEncryptionScopeOverrideResponseHeader;
 
-      /** Indicates whether version level worm is enabled on a container */
+      /** Indicates whether version level WORM (Write Once, Read Many) is enabled on a container. */
       @header("x-ms-immutable-storage-with-versioning-enabled")
       isImmutableStorageWithVersioningEnabled?: boolean;
     }
   >;
 
-  /** operation marks the specified container for deletion. The container and any blobs contained within it are later deleted during garbage collection */
+  /** Deletes the specified container. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @delete
@@ -331,7 +331,7 @@ interface Container {
     }
   >;
 
-  /** operation sets one or more user-defined name-value pairs for the specified container. */
+  /** Sets user-defined metadata for the specified container. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -350,7 +350,7 @@ interface Container {
     }
   >;
 
-  /** gets the permissions for the specified container. The permissions indicate whether container data may be accessed publicly. */
+  /** Gets the permissions for the specified container. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @get
   @route("?restype=container&comp=acl")
@@ -369,7 +369,7 @@ interface Container {
     }
   >;
 
-  /** sets the permissions for the specified container. The permissions indicate whether blobs in a container may be accessed publicly. */
+  /** Sets the permissions for the specified container. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -377,7 +377,7 @@ interface Container {
   @route("?restype=container&comp=acl")
   setAccessPolicy is StorageOperationNoBody<
     {
-      /** The media type of the requestbody */
+      /** The content type of the request. */
       @header("Content-Type")
       contentType?: "application/xml";
 
@@ -398,7 +398,7 @@ interface Container {
     }
   >;
 
-  /** Restores a previously-deleted container. */
+  /** Restores the specified previously-deleted container. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -406,11 +406,11 @@ interface Container {
   @route("?restype=container&comp=undelete")
   restore is StorageOperationNoBody<
     {
-      /** Optional.  Version 2019-12-12 and later.  Specifies the name of the deleted container to restore. */
+      /** Specifies the name of the deleted container to restore. */
       @header("x-ms-deleted-container-name")
       deletedContainerName?: string;
 
-      /** Optional.  Version 2019-12-12 and later.  Specifies the version of the deleted container to restore. */
+      /** Specifies the version of the deleted container to restore. */
       @header("x-ms-deleted-container-version")
       deletedContainerVersion?: string;
 
@@ -421,7 +421,7 @@ interface Container {
     }
   >;
 
-  /** Renames an existing container. */
+  /** Renames the specified existing container. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -429,7 +429,7 @@ interface Container {
   @route("?restype=container&comp=rename")
   rename is StorageOperationNoBody<
     {
-      /** Required.  Specifies the name of the container to rename. */
+      /** Specifies the name of the container to rename. */
       @header("x-ms-source-container-name")
       sourceContainerName: string;
 
@@ -442,13 +442,13 @@ interface Container {
     {}
   >;
 
-  /** The Batch operation allows multiple API calls to be embedded into a single HTTP request. */
+  /** Allows multiple API calls to be embedded into a single HTTP request. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @post
   @route("?restype=container&comp=batch")
   submitBatch(
-    /** Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
+    /** The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
     @header("Content-Type")
     @alternateType(string, "javascript,go")
     @clientName("multipartContentType", "go")
@@ -459,12 +459,12 @@ interface Container {
     ...ClientRequestIdHeader,
     ...ContentLengthParameter,
 
-    /** The batch request content */
+    /** The batch request content. */
     ...MultipartBodyParameter,
   ): ({
     @statusCode statusCode: 202;
 
-    /** Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
+    /** The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
     @header("Content-Type")
     @alternateType(string, "go")
     contentType: "multipart/mixed";
@@ -473,7 +473,7 @@ interface Container {
     ...ApiVersionHeader;
   } & MultipartBodyParameter) | Error;
 
-  /** The Filter Blobs operation enables callers to list blobs in a container whose tags match a given search expression.  Filter blobs searches within the given container. */
+  /** Lists blobs in the specified container whose tags match a given search expression. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
@@ -488,13 +488,13 @@ interface Container {
       ...FilterBlobsIncludeParameter;
     },
     {
-      /** The container filter blob enumeration results */
+      /** The container filter blob enumeration results. */
       @body
       enumerationResults: FilterBlobResponse;
     }
   >;
 
-  /** The Acquire Lease operation requests a new lease on a container. The lease lock duration can be 15 to 60 seconds, or can be infinite. */
+  /** Requests a new lease on the specified container. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -518,7 +518,7 @@ interface Container {
     }
   >;
 
-  /** The Release Lease operation frees the lease if it's no longer needed, so that another client can immediately acquire a lease against the container. */
+  /** Frees the lease if it's no longer needed, so that another client can immediately acquire a lease against the container. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -539,7 +539,7 @@ interface Container {
     }
   >;
 
-  /** The Renew Lease operation renews an existing lease. */
+  /** Renews an existing lease. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -561,7 +561,7 @@ interface Container {
     }
   >;
 
-  /** The Break Lease operation ends a lease and ensures that another client can't acquire a new lease until the current lease period has expired. */
+  /** Ends a lease and ensures that another client can't acquire a new lease until the current lease period has expired. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
@@ -583,7 +583,7 @@ interface Container {
     }
   >;
 
-  /** The Change Lease operation is used to change the ID of an existing lease. */
+  /** Change the ID of an existing lease. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -606,7 +606,7 @@ interface Container {
     }
   >;
 
-  /** The List Blobs operation returns a list of the blobs under the specified container. */
+  /** Returns a list of the blobs in the specified container. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
@@ -623,13 +623,13 @@ interface Container {
       ...ListBlobsStartFrom;
     },
     {
-      /** The list of blobs in the container */
+      /** The list of blobs in the container. */
       @body
       enumerationResults: ListBlobsResponse;
     }
   >;
 
-  /** The List Blobs operation returns a list of the blobs under the specified container. A delimiter can be used to traverse a virtual hierarchy of blobs as though it were a file system. */
+  /** Returns a list of the blobs in the specified container. A delimiter can be used to traverse a virtual hierarchy of blobs as though it were a file system. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
@@ -638,7 +638,7 @@ interface Container {
   @route("?restype=container&comp=list")
   listBlobHierarchySegment is StorageOperationResponseBody<
     {
-      /** When the request includes this parameter, the operation returns a BlobPrefix element in the response body that acts as a placeholder for all blobs whose names begin with the same substring up to the appearance of the delimiter character. The delimiter may be a single character or a string. */
+      /** If specified, the operation returns a BlobPrefix element that acts as a placeholder for all blobs whose names begin with the same substring up to the appearance of the delimiter character. The delimiter may be a single character or a string. */
       @query delimiter: string;
 
       ...PrefixParameter;
@@ -649,13 +649,13 @@ interface Container {
       ...ListBlobsStartFrom;
     },
     {
-      /** The list of blobs in the container */
+      /** The list of blobs in the container. */
       @body
       enumerationResults: ListBlobsHierarchySegmentResponse;
     }
   >;
 
-  /** Returns the sku name and account kind */
+  /** Returns information about the storage account. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @get
@@ -675,7 +675,7 @@ interface Container {
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 interface Blob {
-  /** The Download operation reads or downloads a blob from the system, including its metadata and properties. You can also call Download to read a snapshot. */
+  /** Downloads the specified blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -689,12 +689,12 @@ interface Blob {
     ...RangeParameter,
     ...LeaseIdOptionalParameter,
 
-    /** When set to true and specified together with the Range, the service returns the MD5 hash for the range, as long as the range is less than or equal to 4 MB in size. */
+    /** When set to true and specified together with the `Range` header, the service returns the MD5 hash for the range, as long as the range is less than or equal to 4 MiB in size. */
     @clientName("rangeGetContentMD5", "javascript")
     @header("x-ms-range-get-content-md5")
     rangeGetContentMd5?: boolean,
 
-    /** Optional.  When this header is set to true and specified together with the Range header, the service returns the CRC64 hash for the range, as long as the range is less than or equal to 4 MB in size. */
+    /** When set to true and the request includes a Range header, the service returns the CRC64 hash for the range, as long as the range is less than or equal to 4 MiB in size. */
     @header("x-ms-range-get-content-crc64")
     rangeGetContentCrc64?: boolean,
 
@@ -712,7 +712,7 @@ interface Blob {
     ...IfNoneMatchParameter,
     ...IfMatchParameter,
   ): (BodyParameter & {
-    /** The media type of the body of the response. */
+    /** The content type of the body of the response. */
     @header("Content-Type")
     contentType: "application/octet-stream";
 
@@ -764,7 +764,7 @@ interface Blob {
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard pattern"
     @statusCode statusCode: 206;
 
-    /** The media type of the body of the response. */
+    /** The content type of the body of the response. */
     @header("Content-Type")
     contentType: "application/octet-stream";
 
@@ -815,7 +815,7 @@ interface Blob {
     ...ApiVersionHeader;
   }) | Error;
 
-  /** The Get Properties operation returns all user-defined metadata, standard HTTP properties, and system properties for the blob. It does not return the content of the blob. */
+  /** Returns all user-defined metadata, standard HTTP properties, and system properties for the specified blob. It does not return the content of the blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @head
@@ -857,7 +857,7 @@ interface Blob {
       @header("x-ms-incremental-copy")
       isIncrementalCopy?: boolean;
 
-      /** Included if the blob is incremental copy blob or incremental copy snapshot, if x-ms-copy-status is success. Snapshot time of the last successful incremental copy snapshot for this blob. */
+      /** Included if the blob is incremental copy blob or incremental copy snapshot, if x-ms-copy-status is success. */
       @header("x-ms-copy-destination-snapshot")
       destinationSnapshot?: string;
 
@@ -878,20 +878,20 @@ interface Blob {
       ...EncryptionKeySha256ResponseHeader;
       ...EncryptionScopeResponseHeader;
 
-      /** The tier of page blob on a premium storage account or tier of block blob on blob storage LRS accounts. For a list of allowed premium page blob tiers, see https://learn.microsoft.com/azure/virtual-machines/disks-types#premium-ssd. For blob storage LRS accounts, valid values are Hot/Cool/Archive. */
+      /** The access tier of the blob. */
       @header("x-ms-access-tier")
       accessTier?: string;
 
-      /** For page blobs on a premium storage account only. If the access tier is not explicitly set on the blob, the tier is inferred based on its content length and this header will be returned with true value. */
+      /** Included if the access tier is inferred. */
       @header("x-ms-access-tier-inferred")
       accessTierInferred?: boolean;
 
-      /** For blob storage LRS accounts, valid values are rehydrate-pending-to-hot/rehydrate-pending-to-cool. If the blob is being rehydrated and is not complete then this header is returned indicating that rehydrate is pending and also tells the destination tier. */
+      /** Included if the blob rehydrate operation is pending. Indicates the destination tier. */
       @header("x-ms-archive-status")
       @alternateType(string, "go")
       archiveStatus?: ArchiveStatus;
 
-      /** The time the tier was changed on the object. This is only returned if the tier on the block blob was ever set. */
+      /** The time the tier was changed on the blob. This is only returned if the tier on the blob was ever set. */
       #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
       @encode("rfc7231")
       @header("x-ms-access-tier-change-time")
@@ -915,7 +915,7 @@ interface Blob {
     }
   >;
 
-  /** If the storage account's soft delete feature is disabled then, when a blob is deleted, it is permanently removed from the storage account. If the storage account's soft delete feature is enabled, then, when a blob is deleted, it is marked for deletion and becomes inaccessible immediately. However, the blob service retains the blob or snapshot for the number of days specified by the DeleteRetentionPolicy section of [Storage service properties] (Set-Blob-Service-Properties.md). After the specified number of days has passed, the blob's data is permanently removed from the storage account. Note that you continue to be charged for the soft-deleted blob's storage until it is permanently removed. Use the List Blobs API and specify the \"include=deleted\" query parameter to discover which blobs and snapshots have been soft deleted. You can then use the Undelete Blob API to restore a soft-deleted blob. All other operations on a soft-deleted blob or snapshot causes the service to return an HTTP status code of 404 (ResourceNotFound). */
+  /** Deletes the specified blob. If blob soft delete is enabled, the blob is marked for deletion and can be recovered until the retention period expires. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @delete
@@ -926,7 +926,7 @@ interface Blob {
       ...TimeoutParameter;
       ...LeaseIdOptionalParameter;
 
-      /** Required if the blob has associated snapshots. Specify one of the following two options: include: Delete the base blob and all of its snapshots. only: Delete only the blob's snapshots and not the blob itself */
+      /** Required if the blob has associated snapshots. Specifies the delete behavior. */
       @header("x-ms-delete-snapshots")
       deleteSnapshots?: DeleteSnapshotsOptionType;
 
@@ -936,7 +936,7 @@ interface Blob {
       ...IfMatchParameter;
       ...IfTagsParameter;
 
-      /** Optional.  Only possible value is 'permanent', which specifies to permanently delete a blob if blob soft delete is enabled. */
+      /** The delete type. */
       @query
       @clientName("blobDeleteType")
       deletetype?: BlobDeleteType;
@@ -949,7 +949,7 @@ interface Blob {
     }
   >;
 
-  /** Undelete a blob that was previously soft deleted */
+  /** Undelete the specified previously soft deleted blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
@@ -962,7 +962,7 @@ interface Blob {
     {}
   >;
 
-  /** Set the expiration time of a blob */
+  /** Set the expiration time of the specified blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
@@ -980,7 +980,7 @@ interface Blob {
     }
   >;
 
-  /** The Set HTTP Headers operation sets system properties on the blob. */
+  /** Sets system properties on the specified blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -1010,7 +1010,7 @@ interface Blob {
     }
   >;
 
-  /** Set the immutability policy of a blob */
+  /** Set the immutability policy on the specified blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -1020,12 +1020,7 @@ interface Blob {
     {
       ...TimeoutParameter;
       ...IfUnmodifiedSinceParameter;
-
-      // Note: this property is intentionally named `expiry` (rather than `immutabilityPolicyExpiry`
-      // like the optional sibling alias) so that it surfaces simply as `expiry` in emitted
-      // languages without requiring a `@clientName` override.
       ...ImmutabilityPolicyExpiryRequiredParameter;
-
       ...ImmutabilityPolicyModeParameter;
       ...SnapshotParameter;
       ...VersionIdParameter;
@@ -1036,7 +1031,7 @@ interface Blob {
     }
   >;
 
-  /** The Delete Immutability Policy operation deletes the immutability policy on the blob. */
+  /** Deletes the immutability policy on the specified blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @delete
@@ -1050,7 +1045,7 @@ interface Blob {
     {}
   >;
 
-  /** The Set Legal Hold operation sets a legal hold on the blob. */
+  /** Sets a legal hold on the specified blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -1068,7 +1063,7 @@ interface Blob {
     }
   >;
 
-  /** The Set Metadata operation sets user-defined metadata for the specified blob as one or more name-value pairs. */
+  /** Sets user-defined metadata for the specified blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -1099,7 +1094,7 @@ interface Blob {
     }
   >;
 
-  /** The Acquire Lease operation requests a new lease on a blob. The lease lock duration can be 15 to 60 seconds, or can be infinite. */
+  /** Requests a new lease on the specified blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -1126,7 +1121,7 @@ interface Blob {
     }
   >;
 
-  /** The Release Lease operation frees the lease if it's no longer needed, so that another client can immediately acquire a lease against the blob. */
+  /** Frees the lease if it's no longer needed, so that another client can immediately acquire a lease against the blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -1150,7 +1145,7 @@ interface Blob {
     }
   >;
 
-  /** The Renew Lease operation renews an existing lease. */
+  /** Renews an existing lease. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -1175,7 +1170,7 @@ interface Blob {
     }
   >;
 
-  /** The Change Lease operation is used to change the ID of an existing lease. */
+  /** Change the ID of an existing lease. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -1201,7 +1196,7 @@ interface Blob {
     }
   >;
 
-  /** The Break Lease operation ends a lease and ensures that another client can't acquire a new lease until the current lease period has expired. */
+  /** Ends a lease and ensures that another client can't acquire a new lease until the current lease period has expired. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
@@ -1226,7 +1221,7 @@ interface Blob {
     }
   >;
 
-  /** The Create Snapshot operation creates a read-only snapshot of a blob */
+  /** Creates a read-only snapshot of the specified blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
@@ -1250,7 +1245,7 @@ interface Blob {
     {
       @statusCode statusCode: 201;
 
-      /** Uniquely identifies the snapshot and indicates the snapshot version. It may be used in subsequent requests to access the snapshot. */
+      /** Uniquely identifies the snapshot and indicates the snapshot version. */
       @header("x-ms-snapshot")
       snapshot?: string;
 
@@ -1261,7 +1256,7 @@ interface Blob {
     }
   >;
 
-  /** The Start Copy From URL operation copies a blob or an internet resource to a new blob. */
+  /** Starts an asynchronous copy from a source URL to a destination blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
@@ -1286,7 +1281,7 @@ interface Blob {
       ...LeaseIdOptionalParameter;
       ...BlobTagsHeaderParameter;
 
-      /** Overrides the sealed state of the destination blob.  Service version 2019-12-12 and newer. */
+      /** Overrides the sealed state of the destination blob. */
       @header("x-ms-seal-blob")
       sealBlob?: boolean;
 
@@ -1304,7 +1299,7 @@ interface Blob {
     }
   >;
 
-  /** The Copy From URL operation copies a blob or an internet resource to a new blob. It will not return a response until the copy is complete. */
+  /** Synchronously copies a blob from a source URL to the destination blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
@@ -1335,7 +1330,7 @@ interface Blob {
       ...CopySourceTagsParameter;
       ...FileRequestIntentParameter;
 
-      /** This header indicates that this is a synchronous Copy Blob From URL instead of a Asynchronous Copy Blob. */
+      /** Indicates this is a synchronous copy. */
       @header("x-ms-requires-sync")
       requiresSync: "true";
     },
@@ -1346,7 +1341,7 @@ interface Blob {
       ...VersionIdResponseHeader;
       ...CopyIdResponseHeader;
 
-      /** State of the copy operation identified by x-ms-copy-id. */
+      /** State of the copy operation. */
       @header("x-ms-copy-status")
       copyStatus?: "success";
 
@@ -1356,7 +1351,7 @@ interface Blob {
     }
   >;
 
-  /** The Abort Copy From URL operation aborts a pending Copy From URL operation, and leaves a destination blob with zero length and full metadata. */
+  /** Aborts a pending asynchronous copy operation and leaves a destination blob with zero length and full metadata. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @put
   @sharedRoute
@@ -1365,7 +1360,7 @@ interface Blob {
     {
       ...TimeoutParameter;
 
-      /** The copy identifier provided in the x-ms-copy-id header of the original Copy Blob operation. */
+      /** The ID of the copy to be aborted. */
       @clientName("copyId")
       @query
       copyid: string;
@@ -1381,7 +1376,7 @@ interface Blob {
     }
   >;
 
-  /** The Set Tier operation sets the tier on a block blob. The operation is allowed on a page blob or block blob, but not on an append blob. A block blob's tier determines Hot/Cool/Archive storage type. This operation does not update the blob's ETag. */
+  /** Sets the tier of the specified blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -1408,7 +1403,7 @@ interface Blob {
     }
   >;
 
-  /** Returns the sku name and account kind */
+  /** Returns information about the storage account. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @get
@@ -1425,7 +1420,7 @@ interface Blob {
     }
   >;
 
-  /** The Get Blob Tags operation enables users to get tags on a blob. */
+  /** Gets the tags of the specified blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @get
   @sharedRoute
@@ -1449,7 +1444,7 @@ interface Blob {
     }
   >;
 
-  /** The Set Tags operation enables users to set tags on a blob. */
+  /** Sets the tags of the specified blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @put
   @route("?comp=tags")
@@ -1479,7 +1474,7 @@ interface Blob {
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 interface PageBlob {
-  /** The Create operation creates a new page blob. */
+  /** Creates a new page blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
@@ -1489,7 +1484,7 @@ interface PageBlob {
       ...MetadataHeaders;
       ...TimeoutParameter;
 
-      /** Optional. Indicates the tier to be set on the page blob. */
+      /** Indicates the tier to be set on the page blob. */
       @header("x-ms-access-tier")
       tier?: PremiumPageBlobAccessTier;
 
@@ -1516,7 +1511,7 @@ interface PageBlob {
       ...ImmutabilityPolicyModeParameter;
       ...LegalHoldOptionalParameter;
 
-      /** the initial size of the page blob */
+      /** the initial size of the page blob. */
       @header("Content-Length")
       contentLength: 0;
 
@@ -1536,7 +1531,7 @@ interface PageBlob {
     }
   >;
 
-  /** The Upload Pages operation writes a range of pages to a page blob */
+  /** Writes a range of pages to the specified page blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -1586,7 +1581,7 @@ interface PageBlob {
     "application/octet-stream"
   >;
 
-  /** The Clear Pages operation clears a range of pages from a page blob */
+  /** Clears a range of pages from the specified page blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -1595,7 +1590,7 @@ interface PageBlob {
   @route("?comp=page")
   clearPages is StorageOperationNoBody<
     {
-      /** value must be 0 when x-ms-page-write is clear */
+      /** Value must be 0 when x-ms-page-write is clear. */
       @header("Content-Length")
       contentLength: 0;
 
@@ -1626,7 +1621,7 @@ interface PageBlob {
     }
   >;
 
-  /** The Upload Pages operation writes a range of pages to a page blob where the contents are read from a URL. */
+  /** Writes a range of pages to the specified page blob where the contents are read from a URL. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
@@ -1679,7 +1674,7 @@ interface PageBlob {
     }
   >;
 
-  /** The Get Page Ranges operation returns the list of valid page ranges for a page blob or snapshot of a page blob. */
+  /** Returns the list of valid page ranges for the specified page blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
@@ -1706,7 +1701,7 @@ interface PageBlob {
     }
   >;
 
-  /** The Get Page Ranges Diff operation returns the list of valid page ranges for a page blob or snapshot of a page blob. */
+  /** Returns the list of page ranges in the diff between the specified page blob and the specified previous snapshot. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
@@ -1717,11 +1712,11 @@ interface PageBlob {
       ...SnapshotParameter;
       ...TimeoutParameter;
 
-      /** Optional in version 2015-07-08 and newer. The prevsnapshot parameter is a DateTime value that specifies that the response will contain only pages that were changed between target blob and previous snapshot. Changed pages include both updated and cleared pages. The target blob may be a snapshot, as long as the snapshot specified by prevsnapshot is the older of the two. Note that incremental snapshots are currently supported only for blobs created on or after January 1, 2016. */
+      /** Specifies the previous snapshot to be compared in the diff. */
       @query
       prevsnapshot?: string;
 
-      /** Optional. This header is only supported in service versions 2019-04-19 and after and specifies the URL of a previous snapshot of the target blob. The response will only contain pages that were changed between the target blob and its previous snapshot. */
+      /** Specifies the previous snapshot URL to be compared in the diff. */
       @header("x-ms-previous-snapshot-url")
       prevSnapshotUrl?: string;
 
@@ -1742,7 +1737,7 @@ interface PageBlob {
     }
   >;
 
-  /** The Resize operation increases the size of the page blob to the specified size. */
+  /** Changes the size of the specified page blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -1771,7 +1766,7 @@ interface PageBlob {
     }
   >;
 
-  /** The Update Sequence Number operation sets the blob's sequence number. The operation will fail if the specified sequence number is less than the current sequence number of the blob. */
+  /** Updates the sequence number of the specified page blob. The operation will fail if the specified sequence number is less than the current sequence number of the blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -1797,7 +1792,7 @@ interface PageBlob {
     }
   >;
 
-  /** The Copy Incremental operation copies a snapshot of the source page blob to a destination page blob. The snapshot is copied such that only the differential changes between the previously copied snapshot are transferred to the destination. The copied snapshots are complete copies of the original snapshot and can be read or copied from as usual. This API is supported since REST version 2016-05-31. */
+  /** Copies a snapshot of the source page blob to a destination page blob. The snapshot is copied such that only the differential changes between the previously copied snapshot are transferred to the destination. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
@@ -1825,7 +1820,7 @@ interface PageBlob {
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 interface AppendBlob {
-  /** The Create operation creates a new append blob. */
+  /** Creates a new append blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
@@ -1855,7 +1850,7 @@ interface AppendBlob {
       ...ImmutabilityPolicyModeParameter;
       ...LegalHoldOptionalParameter;
 
-      /** the initial size of the append blob */
+      /** The initial size of the append blob. */
       @header("Content-Length")
       contentLength: 0;
 
@@ -1875,7 +1870,7 @@ interface AppendBlob {
     }
   >;
 
-  /** The Append Block operation commits a new block of data to the end of an append blob. */
+  /** Uploads a new block of data to the end of an append blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -1923,7 +1918,7 @@ interface AppendBlob {
     "application/octet-stream"
   >;
 
-  /** The Append Block From URL operation creates a new block to be committed as part of an append blob where the contents are read from a URL. */
+  /** Uploads a new block of data from the specified URL to the end of an append blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -1975,7 +1970,7 @@ interface AppendBlob {
     }
   >;
 
-  /** The Seal operation seals the Append Blob to make it read-only. Seal is supported only on version 2019-12-12 version or later. */
+  /** Seals the append blob to make it read-only. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -2002,7 +1997,7 @@ interface AppendBlob {
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 interface BlockBlob {
-  /** The Upload Block Blob operation updates the content of an existing block blob. Updating an existing block blob overwrites any existing metadata on the blob. Partial updates are not supported with Put Blob; the content of the existing blob is overwritten with the content of the new blob. To perform a partial update of the content of a block blob, use the Put Block List operation. */
+  /** Uploads the content to the specified block blob. If the blob already exists, the data and any existing metadata will be overwritten. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -2060,7 +2055,7 @@ interface BlockBlob {
     "application/octet-stream"
   >;
 
-  /** The Put Blob from URL operation creates a new Block Blob where the contents of the blob are read from a given URL.  This API is supported beginning with the 2020-04-08 version. Partial updates are not supported with Put Blob from URL; the content of an existing blob is overwritten with the content of the new blob.  To perform partial updates to a block blob’s contents using a source URL, use the Put Block from URL API in conjunction with Put Block List. */
+  /** Uploads the content from the specified URL to the block blob. If the blob already exists, the data and any existing metadata will be overwritten. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -2126,7 +2121,7 @@ interface BlockBlob {
     }
   >;
 
-  /** The Stage Block operation creates a new block to be committed as part of a blob */
+  /** Creates a new block of data to be committed as part of a blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -2162,7 +2157,7 @@ interface BlockBlob {
     "application/octet-stream"
   >;
 
-  /** The Stage Block From URL operation creates a new block to be committed as part of a blob where the contents are read from a URL. */
+  /** Creates a new block of data from the specified URL to be committed as part of a blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -2203,7 +2198,7 @@ interface BlockBlob {
     }
   >;
 
-  /** The Commit Block List operation writes a blob by specifying the list of block IDs that make up the blob. In order to be written as part of a blob, a block must have been successfully written to the server in a prior Put Block operation. You can call Put Block List to update a blob by uploading only those blocks that have changed, then committing the new and existing blocks together. You can do this by specifying whether to commit a block from the committed block list or from the uncommitted block list, or to commit the most recently uploaded version of the block, whichever list it may belong to. */
+  /** Writes to the block blob by specifying the list of block IDs that make up the blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -2234,7 +2229,7 @@ interface BlockBlob {
       ...IfMatchParameter;
       ...IfTagsParameter;
 
-      /** Blob Blocks. */
+      /** Blob blocks. */
       @body blocks: BlockLookupList;
 
       ...BlobTagsHeaderParameter;
@@ -2255,7 +2250,7 @@ interface BlockBlob {
     }
   >;
 
-  /** The Get Block List operation retrieves the list of blocks that have been uploaded as part of a block blob. */
+  /** Retrieves the list of blocks that have been uploaded as part of the block blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @get
   @route("?comp=blocklist")
@@ -2273,7 +2268,7 @@ interface BlockBlob {
       ...IfTagsParameter;
     },
     {
-      /** Block list */
+      /** The list of blocks. */
       @body
       blockList: BlockList;
 
@@ -2283,14 +2278,14 @@ interface BlockBlob {
     }
   >;
 
-  /** The Query operation enables users to select/project on blob data by providing simple query expressions. */
+  /** Queries the data of the specified blob with the provided query expressions. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
   @post
   @route("?comp=query")
   query is StorageOperation<
     {
-      /** The query request */
+      /** The query request. */
       @body
       queryRequest: QueryRequest;
 
