@@ -894,7 +894,7 @@
             "description": "The container group resource with just the tags to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Resource"
+              "$ref": "#/definitions/ContainerGroupUpdate"
             }
           }
         ],
@@ -3026,6 +3026,45 @@
         "id"
       ]
     },
+    "ContainerGroupUpdate": {
+      "type": "object",
+      "description": "The Resource model definition.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource id.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The resource name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource location."
+        },
+        "tags": {
+          "type": "object",
+          "description": "The resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "zones": {
+          "type": "array",
+          "description": "The zones for the container group.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "ContainerHttpGet": {
       "type": "object",
       "description": "The container Http Get settings, for liveness or readiness probe",
@@ -4657,45 +4696,6 @@
       "required": [
         "port"
       ]
-    },
-    "Resource": {
-      "type": "object",
-      "description": "The Resource model definition.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The resource id.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The resource name.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The resource type.",
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "description": "The resource location."
-        },
-        "tags": {
-          "type": "object",
-          "description": "The resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "zones": {
-          "type": "array",
-          "description": "The zones for the container group.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
     },
     "ResourceIdentityType": {
       "type": "string",
