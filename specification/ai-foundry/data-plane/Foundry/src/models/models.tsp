@@ -91,7 +91,7 @@ model FoundryModelWarning {
 model ModelVersion {
   @doc("System related metadata")
   @visibility(Lifecycle.Read)
-  system_data?: SystemDataV3;
+  systemData?: SystemDataV3;
 
   @doc("URI of the model artifact in blob storage")
   blobUri: url;
