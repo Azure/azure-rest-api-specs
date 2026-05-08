@@ -113,7 +113,7 @@ input-file:
   - preview/2025-02-01-preview/managedDatabaseVulnerabilityAssessmentScans.json
   - preview/2025-02-01-preview/managedInstanceAdministrators.json
   - preview/2025-02-01-preview/managedInstanceAdvancedThreatProtectionSettings.json
-  - preview/2025-02-01-preview/managedInstanceAzureADOnlyAuthentications.json
+  - preview/2025-02-01-preview/managedInstanceAzureAdOnlyAuthentications.json
   - preview/2025-02-01-preview/managedInstanceDtcs.json
   - preview/2025-02-01-preview/managedInstanceEncryptionProtectors.json
   - preview/2025-02-01-preview/managedInstanceKeys.json
@@ -143,8 +143,8 @@ input-file:
   - preview/2025-02-01-preview/serverAdvancedThreatProtectionSettings.json
   - preview/2025-02-01-preview/serverAdvisors.json
   - preview/2025-02-01-preview/serverAutomaticTuning.json
-  - preview/2025-02-01-preview/serverAzureADAdministrators.json
-  - preview/2025-02-01-preview/serverAzureADOnlyAuthentications.json
+  - preview/2025-02-01-preview/serverAzureAdAdministrators.json
+  - preview/2025-02-01-preview/serverAzureAdOnlyAuthentications.json
   - preview/2025-02-01-preview/serverConfigurationOptions.json
   - preview/2025-02-01-preview/serverConnectionPolicies.json
   - preview/2025-02-01-preview/serverDevOpsAudit.json
@@ -262,7 +262,7 @@ input-file:
   - stable/2025-01-01/managedDatabaseVulnerabilityAssessmentScans.json
   - stable/2025-01-01/managedInstanceAdministrators.json
   - stable/2025-01-01/managedInstanceAdvancedThreatProtectionSettings.json
-  - stable/2025-01-01/managedInstanceAzureADOnlyAuthentications.json
+  - stable/2025-01-01/managedInstanceAzureAdOnlyAuthentications.json
   - stable/2025-01-01/managedInstanceDtcs.json
   - stable/2025-01-01/managedInstanceEncryptionProtectors.json
   - stable/2025-01-01/managedInstanceKeys.json
@@ -292,8 +292,8 @@ input-file:
   - stable/2025-01-01/serverAdvancedThreatProtectionSettings.json
   - stable/2025-01-01/serverAdvisors.json
   - stable/2025-01-01/serverAutomaticTuning.json
-  - stable/2025-01-01/serverAzureADAdministrators.json
-  - stable/2025-01-01/serverAzureADOnlyAuthentications.json
+  - stable/2025-01-01/serverAzureAdAdministrators.json
+  - stable/2025-01-01/serverAzureAdOnlyAuthentications.json
   - stable/2025-01-01/serverConfigurationOptions.json
   - stable/2025-01-01/serverConnectionPolicies.json
   - stable/2025-01-01/serverDevOpsAudit.json
