@@ -26,7 +26,7 @@ alias JobsFilterQueryParams = {
   @query
   properties?: string;
 
-  ...CommonPageQueryParameters;
+  ...JobOrderedPageQueryParameters;
 };
 
 @doc("Optional related training job data to include in a get response.")

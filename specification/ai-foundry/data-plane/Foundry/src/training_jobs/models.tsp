@@ -1699,9 +1699,20 @@ model JobOutputReference {
   description?: string;
 }
 
-alias JobPagedListQueryParameters = CommonPageQueryParameters;
+alias JobForwardPageQueryParameters = {
+  ...PageLimitQueryParameter;
+  ...PageAfterQueryParameter;
+};
 
-alias JobContinuationListQueryParameters = CommonPageQueryParameters;
+alias JobOrderedPageQueryParameters = JobForwardPageQueryParameters & {
+  ...PageOrderQueryParameter;
+};
+
+alias JobContinuationListQueryParameters = {
+  ...PageAfterQueryParameter;
+};
+
+alias JobPagedListQueryParameters = JobForwardPageQueryParameters;
 
 alias JobArtifactListQueryParameters = JobPagedListQueryParameters & {
   @doc("Artifact path prefix to list.")
@@ -1716,7 +1727,7 @@ alias JobArtifactContentInfoByPrefixQueryParameters = {
   @query
   path_prefix?: string;
 
-  ...CommonPageQueryParameters;
+  ...PageAfterQueryParameter;
 };
 
 alias JobServicesQueryParameters = {
