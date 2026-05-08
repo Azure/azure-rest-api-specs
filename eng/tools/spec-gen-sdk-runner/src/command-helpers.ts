@@ -18,6 +18,7 @@ import {
   VsoLogs,
 } from "./types.js";
 import {
+  execAsync,
   findReadmeFiles,
   getAllTypeSpecPaths,
   getArgumentValue,
@@ -499,4 +500,16 @@ export function resolvePackagePath(outputDir: string, sdkRepoPath: string): stri
   // Replace {output-dir} placeholder with the SDK repo path
   const resolved = outputDir.replace("{output-dir}", sdkRepoPath);
   return path.resolve(resolved);
+}
+
+/**
+ * Installs language-specific toolchains required before SDK generation.
+ * Currently only Rust needs this — runs `rustup install` in the SDK repo root
+ * to pick up the version from rust-toolchain.toml.
+ */
+export async function installLanguageToolchain(commandInput: SpecGenSdkCmdInput): Promise<void> {
+  if (commandInput.sdkLanguage === "azure-sdk-for-rust") {
+    logMessage(`Installing Rust toolchain from SDK repo`, LogLevel.Info);
+    await execAsync("rustup install", { cwd: commandInput.localSdkRepoPath });
+  }
 }

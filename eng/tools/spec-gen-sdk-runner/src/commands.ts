@@ -15,6 +15,7 @@ import {
   getExecutionReport,
   getServiceFolderPath,
   getSpecPaths,
+  installLanguageToolchain,
   logIssuesToPipeline,
   parseArguments,
   prepareAzsdkBuildCommand,
@@ -40,10 +41,11 @@ import {
 /**
  * Run the azsdk-cli generation flow for a single TypeSpec spec:
  * 1. Check emitter enabled via typespec-metadata
- * 2. Run azsdk pkg generate
- * 3. On success, run azsdk pkg build (skip for Python)
- * 4. On build success, run azsdk pkg pack
- * 5. Build ExecutionReport via adapter
+ * 2. Install tsp-client dependencies
+ * 3. Run azsdk pkg generate
+ * 4. On success, run azsdk pkg build (skip for Python)
+ * 5. On build success, run azsdk pkg pack
+ * 6. Build ExecutionReport via adapter
  */
 async function runAzsdkGeneration(
   commandInput: SpecGenSdkCmdInput,
@@ -185,6 +187,8 @@ export async function generateSdkForSingleSpec(): Promise<CommandResult> {
     return { statusCode: 1, executionResult: "" };
   }
 
+  await installLanguageToolchain(commandInput);
+
   if (tool === "azsdk-cli" && commandInput.tspConfigPath) {
     // azsdk-cli path for TypeSpec specs
     logMessage(`Generating SDK (azsdk-cli) from ${specConfigPathText}`, LogLevel.Group);
@@ -274,6 +278,8 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
     sdkGenerationExecuted = false;
     overallExecutionResult = "succeeded";
   }
+
+  await installLanguageToolchain(commandInput);
 
   for (const changedSpec of changedSpecs) {
     if (!changedSpec.typespecProject && !changedSpec.readmeMd) {
@@ -463,6 +469,8 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<Comma
   let stagedArtifactsFolder = "";
   let serviceFolderPath = "";
   const failedSpecs: string[] = [];
+
+  await installLanguageToolchain(commandInput);
 
   // Generate SDKs for each spec
   for (const specConfigs of specConfigsArray) {
