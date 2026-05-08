@@ -112,7 +112,7 @@ namespace Azure.AI.Projects;
 @@clientName(EvalRunResultSummary, "EvaluationRunResultSummary");
 
 @@clientName(SkillObject, "SkillDetails");
-@@clientName(SkillObject.has_blob, "blob_present");
+@@clientName(SkillObject.has_blob, "blobPresent");
 
 @@clientName(Index, "AIProjectIndex", "java");
 
