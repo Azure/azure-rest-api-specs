@@ -2,10 +2,12 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "../Common/VirtualNetwork.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -138,6 +140,7 @@ interface VirtualNetworks {
    * Move IP configurations from one virtual network to another.
    */
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "azure-async-operation used for LRO polling"
+  @added(Versions.v2025_07_01)
   @tag("VirtualNetworks")
   @action("moveIpConfigurations")
   @Azure.Core.useFinalStateVia("azure-async-operation")

@@ -19685,6 +19685,7 @@ model VirtualNetworkDdosProtectionStatusResult
  * Request body for the MoveIpConfigurations operation.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2025_07_01)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model MoveIpConfigurationsRequest {
   /**
@@ -19698,6 +19699,7 @@ model MoveIpConfigurationsRequest {
  * An item representing a source and target IP configuration for a move operation.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2025_07_01)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model MoveIpConfigurationItem {
   /**
@@ -19715,6 +19717,7 @@ model MoveIpConfigurationItem {
  * Reference to an IP configuration resource by ARM resource ID.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2025_07_01)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model MoveIpConfigurationResourceReference {
   /**
