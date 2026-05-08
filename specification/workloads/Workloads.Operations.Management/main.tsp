@@ -28,7 +28,7 @@ enum Versions {
   /**
    * The 2023-10-01-preview API version.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-version-progression" "Existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/version-progression" "Existing API"
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2023_10_01_preview: "2023-10-01-preview",
 
