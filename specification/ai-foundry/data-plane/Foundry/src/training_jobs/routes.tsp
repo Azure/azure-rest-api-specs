@@ -47,7 +47,7 @@ interface TrainingJobs {
   list is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.training_jobs_v1_preview,
     JobsFilterQueryParams,
-    AgentsPagedResult<Job>
+    TrainingJobPagedResult<Job>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
@@ -170,7 +170,7 @@ interface TrainingJobAttempts {
 
       ...JobContinuationListQueryParameters;
     },
-    AgentsPagedResult<JobAttempt>
+    TrainingJobPagedResult<JobAttempt>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job attempts are projected from job execution history."
@@ -184,9 +184,9 @@ interface TrainingJobAttempts {
       @path
       job_name: string;
 
-      @doc("The attempt identifier.")
+      @doc("The attempt identifier, or 'latest' for the latest attempt.")
       @path
-      attempt_id: string;
+      attempt_id: JobAttemptIdentifier;
     },
     JobAttempt
   >;
@@ -211,7 +211,7 @@ interface TrainingJobAttemptArtifacts {
 
       ...JobArtifactListQueryParameters;
     },
-    AgentsPagedResult<JobArtifact>
+    TrainingJobPagedResult<JobArtifact>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Attempt artifacts are projected from the attempt data container."
@@ -275,7 +275,7 @@ interface TrainingJobAttemptArtifacts {
 
       ...JobArtifactContentInfoByPrefixQueryParameters;
     },
-    AgentsPagedResult<JobArtifactContentInfo>
+    TrainingJobPagedResult<JobArtifactContentInfo>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Attempt artifacts are projected from the attempt data container."
@@ -321,7 +321,7 @@ interface TrainingJobAttemptMetrics {
 
       ...JobMetricListQueryParameters;
     },
-    AgentsPagedResult<JobMetric>
+    TrainingJobPagedResult<JobMetric>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Attempt metrics are projected from the attempt data container."
@@ -339,7 +339,7 @@ interface TrainingJobAttemptMetrics {
       @path
       attempt_id: JobAttemptIdentifier;
     },
-    AgentsPagedResult<JobMetricLastValue>
+    TrainingJobPagedResult<JobMetricLastValue>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Attempt metrics are projected from the attempt data container."
@@ -363,7 +363,7 @@ interface TrainingJobAttemptMetrics {
 
       ...JobMetricQueryParameters;
     },
-    AgentsPagedResult<JobMetricPoint>
+    TrainingJobPagedResult<JobMetricPoint>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Attempt metrics are projected from the attempt data container."
@@ -387,7 +387,7 @@ interface TrainingJobAttemptMetrics {
 
       ...JobMetricQueryParameters;
     },
-    AgentsPagedResult<JobMetricAggregate>
+    TrainingJobPagedResult<JobMetricAggregate>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Attempt metrics are projected from the attempt data container."
@@ -452,7 +452,7 @@ interface TrainingJobOutputs {
       @path
       job_name: string;
     },
-    AgentsPagedResult<JobOutputReference>
+    TrainingJobPagedResult<JobOutputReference>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job outputs are projected from job outputs and asset relationships."
@@ -487,11 +487,11 @@ interface TrainingJobAttemptOutputs {
       @path
       job_name: string;
 
-      @doc("The attempt identifier.")
+      @doc("The attempt identifier, or 'latest' for the latest attempt.")
       @path
-      attempt_id: string;
+      attempt_id: JobAttemptIdentifier;
     },
-    AgentsPagedResult<JobOutputReference>
+    TrainingJobPagedResult<JobOutputReference>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Attempt outputs are projected from attempt output state and asset relationships."
@@ -505,9 +505,9 @@ interface TrainingJobAttemptOutputs {
       @path
       job_name: string;
 
-      @doc("The attempt identifier.")
+      @doc("The attempt identifier, or 'latest' for the latest attempt.")
       @path
-      attempt_id: string;
+      attempt_id: JobAttemptIdentifier;
 
       @doc("The output name.")
       @path

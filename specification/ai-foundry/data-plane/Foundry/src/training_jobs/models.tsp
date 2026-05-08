@@ -1264,6 +1264,15 @@ model TrainingJobServiceCollection {
   services: Record<TrainingJobService>;
 }
 
+@doc("The response data for a requested list of training job items.")
+model TrainingJobPagedResult<T> {
+  ...AgentsPagedResult<T>;
+
+  @doc("Opaque cursor to pass as the next request's after value when has_more is true.")
+  @visibility(Lifecycle.Read)
+  next_after?: string;
+}
+
 @doc("Compute placement details for a job attempt.")
 model JobAttemptComputeDetails {
   @doc("Virtual machine size used for this attempt.")
@@ -1297,9 +1306,21 @@ model JobAttempt {
   @visibility(Lifecycle.Read)
   id: string;
 
+  @doc("The RunHistory run identifier backing this attempt.")
+  @visibility(Lifecycle.Read)
+  run_id?: string;
+
   @doc("The job name this attempt belongs to.")
   @visibility(Lifecycle.Read)
   job_name: string;
+
+  @doc("The data container identifier backing this attempt's artifacts and metrics.")
+  @visibility(Lifecycle.Read)
+  data_container_id?: string;
+
+  @doc("Backend attempt sequence number.")
+  @visibility(Lifecycle.Read)
+  sequence_number?: int64;
 
   @doc("The attempt status.")
   @visibility(Lifecycle.Read)
@@ -1325,6 +1346,11 @@ model JobAttempt {
   @visibility(Lifecycle.Read)
   @encode(DurationKnownEncoding.ISO8601)
   compute_duration?: duration;
+
+  @doc("Current active compute duration for a running attempt.")
+  @visibility(Lifecycle.Read)
+  @encode(DurationKnownEncoding.ISO8601)
+  current_compute_time?: duration;
 
   @doc("Queueing details associated with the attempt.")
   @visibility(Lifecycle.Read)
@@ -1358,11 +1384,42 @@ union JobArtifactType {
   directory: "directory",
 }
 
+@doc("Storage path details for an artifact.")
+model JobArtifactDataPath {
+  @doc("Datastore containing the artifact content.")
+  @visibility(Lifecycle.Read)
+  datastore_name?: string;
+
+  @doc("Path relative to the datastore root.")
+  @visibility(Lifecycle.Read)
+  relative_path?: string;
+
+  @doc("SQL path information, when the artifact is backed by SQL storage.")
+  @visibility(Lifecycle.Read)
+  sql_data_path?: Record<unknown>;
+}
+
 @doc("Metadata for an artifact produced by or attached to a job.")
 model JobArtifact {
+  @doc("Backend artifact identifier.")
+  @visibility(Lifecycle.Read)
+  artifact_id?: string;
+
+  @doc("Artifact origin.")
+  @visibility(Lifecycle.Read)
+  origin?: string;
+
+  @doc("Artifact container name.")
+  @visibility(Lifecycle.Read)
+  container?: string;
+
   @doc("Artifact path relative to the job artifact root.")
   @visibility(Lifecycle.Read)
   path: string;
+
+  @doc("Artifact entity tag.")
+  @visibility(Lifecycle.Read)
+  etag?: string;
 
   @doc("Artifact type.")
   @visibility(Lifecycle.Read)
@@ -1379,10 +1436,26 @@ model JobArtifact {
   @doc("Time the artifact was last updated.")
   @visibility(Lifecycle.Read)
   updated_at?: FoundryTimestamp;
+
+  @doc("Storage path details for the artifact.")
+  @visibility(Lifecycle.Read)
+  data_path?: JobArtifactDataPath;
+
+  @doc("Artifact tags.")
+  @visibility(Lifecycle.Read)
+  tags?: Record<string>;
 }
 
 @doc("Content access information for a job artifact.")
 model JobArtifactContentInfo {
+  @doc("Artifact origin.")
+  @visibility(Lifecycle.Read)
+  origin?: string;
+
+  @doc("Artifact container name.")
+  @visibility(Lifecycle.Read)
+  container?: string;
+
   @doc("Artifact path relative to the job artifact root.")
   @visibility(Lifecycle.Read)
   path: string;
@@ -1395,9 +1468,17 @@ model JobArtifactContentInfo {
   @visibility(Lifecycle.Read)
   content_type?: string;
 
+  @doc("Content length in bytes, when known.")
+  @visibility(Lifecycle.Read)
+  content_length?: int64;
+
   @doc("Time the content URI expires.")
   @visibility(Lifecycle.Read)
   expires_at?: FoundryTimestamp;
+
+  @doc("Artifact tags.")
+  @visibility(Lifecycle.Read)
+  tags?: Record<string>;
 }
 
 @doc("The kind of metric emitted by a job.")
@@ -1414,19 +1495,73 @@ union JobMetricType {
   image: "image",
 }
 
+@doc("One property in a metric schema.")
+model JobMetricSchemaProperty {
+  @doc("Metric schema property identifier.")
+  @visibility(Lifecycle.Read)
+  property_id?: string;
+
+  @doc("Metric schema property name.")
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  @doc("Metric schema property type.")
+  @visibility(Lifecycle.Read)
+  type?: string;
+}
+
+@doc("Full metric schema metadata.")
+model JobMetricSchema {
+  @doc("Number of properties in the schema.")
+  @visibility(Lifecycle.Read)
+  num_properties?: int32;
+
+  @doc("Metric schema properties.")
+  @visibility(Lifecycle.Read)
+  properties?: JobMetricSchemaProperty[];
+}
+
 @doc("Metadata for a metric emitted by a job or run.")
 model JobMetric {
   @doc("Metric name.")
   @visibility(Lifecycle.Read)
   name: string;
 
+  @doc("Run identifier that emitted the metric.")
+  @visibility(Lifecycle.Read)
+  run_id?: string;
+
+  @doc("Data container identifier that stores the metric.")
+  @visibility(Lifecycle.Read)
+  data_container_id?: string;
+
   @doc("Metric type.")
   @visibility(Lifecycle.Read)
   metric_type?: JobMetricType;
 
+  @doc("Metric description.")
+  @visibility(Lifecycle.Read)
+  description?: string;
+
+  @doc("Metric label.")
+  @visibility(Lifecycle.Read)
+  label?: string;
+
+  @doc("Number of metric cells.")
+  @visibility(Lifecycle.Read)
+  num_cells?: int32;
+
+  @doc("Metric data location.")
+  @visibility(Lifecycle.Read)
+  data_location?: string;
+
   @doc("Column metadata for structured metric values.")
   @visibility(Lifecycle.Read)
   columns?: Record<string>;
+
+  @doc("Full metric schema metadata.")
+  @visibility(Lifecycle.Read)
+  schema?: JobMetricSchema;
 }
 
 @doc("A metric data point.")
@@ -1434,6 +1569,42 @@ model JobMetricPoint {
   @doc("Metric identifier.")
   @visibility(Lifecycle.Read)
   metric_id?: string;
+
+  @doc("Metric name.")
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  @doc("Run identifier that emitted the metric.")
+  @visibility(Lifecycle.Read)
+  run_id?: string;
+
+  @doc("Data container identifier that stores the metric.")
+  @visibility(Lifecycle.Read)
+  data_container_id?: string;
+
+  @doc("Metric type.")
+  @visibility(Lifecycle.Read)
+  metric_type?: JobMetricType;
+
+  @doc("Metric description.")
+  @visibility(Lifecycle.Read)
+  description?: string;
+
+  @doc("Metric label.")
+  @visibility(Lifecycle.Read)
+  label?: string;
+
+  @doc("Number of metric cells.")
+  @visibility(Lifecycle.Read)
+  num_cells?: int32;
+
+  @doc("Metric data location.")
+  @visibility(Lifecycle.Read)
+  data_location?: string;
+
+  @doc("Full metric schema metadata.")
+  @visibility(Lifecycle.Read)
+  schema?: JobMetricSchema;
 
   @doc("Metric step.")
   @visibility(Lifecycle.Read)
