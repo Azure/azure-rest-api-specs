@@ -29,6 +29,10 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   @doc("Version 2025-09-01-preview")
   v2025_09_01_preview: "2025-09-01-preview",
+
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  @doc("Version 2026-06-01")
+  v2026_06_01: "2026-06-01",
 }
 
 @doc("File share resource")
@@ -178,7 +182,7 @@ model FileShareProperties {
   @doc("Protocol settings specific NFS.")
   nfsProtocolProperties?: NfsProtocolProperties;
 
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   @doc("The set of properties for control public access.")
   publicAccessProperties?: PublicAccessProperties;
 
@@ -218,6 +222,51 @@ model NfsProtocolProperties {
   // value is NoRootSquash.
   @doc("Root squash defines how root users on clients are mapped to the NFS share.")
   rootSquash?: ShareRootSquash;
+
+  @added(Versions.v2026_06_01)
+  @doc("Encryption in transit defines whether data is encrypted for NFS shares.")
+  encryptionInTransitRequired?: EncryptionInTransitRequired;
+}
+
+@added(Versions.v2026_06_01)
+@doc("State of NFS encryption in transit.")
+union EncryptionInTransitRequired {
+  string,
+
+  @doc("Encryption in Transit is enabled.")
+  Enabled: "Enabled",
+
+  @doc("Encryption in Transit is disabled.")
+  Disabled: "Disabled",
+}
+
+@doc("File share patch properties - contains only patchable properties")
+model FileSharePatchProperties {
+  @visibility(Lifecycle.Update)
+  @doc("The provisioned storage size of the share in GiB (1 GiB is 1024^3 bytes or 1073741824 bytes). A component of the file share's bill is the provisioned storage, regardless of the amount of used storage.")
+  provisionedStorageGiB?: int32;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "customized style suitable for storage admins"
+  @visibility(Lifecycle.Update)
+  @doc("The provisioned IO / sec of the share.")
+  provisionedIOPerSec?: int32;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "customized style suitable for storage admins"
+  @visibility(Lifecycle.Update)
+  @doc("The provisioned throughput / sec of the share.")
+  provisionedThroughputMiBPerSec?: int32;
+
+  @visibility(Lifecycle.Update)
+  @doc("Protocol settings specific NFS.")
+  nfsProtocolProperties?: NfsProtocolProperties;
+
+  @visibility(Lifecycle.Update)
+  @doc("The set of properties for control public access.")
+  publicAccessProperties?: PublicAccessProperties;
+
+  @visibility(Lifecycle.Update)
+  @doc("Gets or sets allow or disallow public network access to azure managed file share")
+  publicNetworkAccess?: PublicNetworkAccess;
 }
 
 @lroStatus
@@ -269,7 +318,7 @@ interface FileShares {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     FileShare,
-    ResourceUpdateModel<FileShare, FileShareProperties>,
+    ResourceUpdateModel<FileShare, FileSharePatchProperties>,
     BaseParameters<FileShare>
   >;
 
@@ -314,7 +363,7 @@ interface FileShareSnapshots {
   @doc("Update a FileShareSnapshot.")
   updateFileShareSnapshot is ArmCustomPatchAsync<
     FileShareSnapshot,
-    ResourceUpdateModel<FileShareSnapshot, FileShareSnapshotProperties>,
+    ResourceUpdateModel<FileShareSnapshot, FileShareSnapshotPatchProperties>,
     BaseParameters<FileShareSnapshot>,
     Response = ArmResponse<FileShareSnapshot> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
       ArmLroLocationHeader<FinalResult = FileShareSnapshot> &
@@ -380,10 +429,19 @@ model FileShareSnapshotProperties {
   // - Users in Company A might use aliases.
   // - Users in company B might use email addresses.
   // - Automated systems like MAB might use resource identifier of Azure Backup Vault.
-  @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("The initiator of the FileShareSnapshot. This is a user-defined value.")
   initiatorId?: string;
 
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  @doc("The metadata")
+  metadata?: Record<string>;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing use case"
+@doc("FileShareSnapshot patch properties - contains only patchable properties")
+model FileShareSnapshotPatchProperties {
+  @visibility(Lifecycle.Update)
   @doc("The metadata")
   metadata?: Record<string>;
 }

@@ -95,3 +95,56 @@ If your PR check **"ARM Lease Validation"** is failing, review the error message
 - **Invalid duration**: Use a valid ISO 8601 duration that does not exceed 180 days (e.g., `P180D`, `P90D`, `P5M`)
 - **Missing or empty fields**: All fields (`resource-provider`, `startdate`, `duration`, `reviewer`) are required
 - **Disallowed files**: Only `lease.yaml` and `README.md` files are permitted in `.github/arm-leases/`
+
+## Automation Scripts
+
+Scripts are located in `.github/workflows/cmd/`. Run from the repository root.
+
+### Single Resource Provider
+
+**Syntax:**
+
+```bash
+# Without service groups
+node .github/workflows/cmd/arm-lease-generate-lease-files.js --orgName <orgName> --rpNamespace <rpNamespace> --reviewer "@youralias" --startdate <YYYY-MM-DD> --duration <P#D>
+
+# With service groups
+node .github/workflows/cmd/arm-lease-generate-lease-files.js --orgName <orgName> --rpNamespace <rpNamespace> --reviewer "@youralias" --startdate <YYYY-MM-DD> --duration <P#D> --serviceName "<serviceName1>,<serviceName2>"
+```
+
+**Examples:**
+
+```bash
+# Without service groups
+node .github/workflows/cmd/arm-lease-generate-lease-files.js --orgName storage --rpNamespace Microsoft.Storage --reviewer "@johndoe" --startdate 2026-05-01 --duration P90D
+
+# With service groups
+node .github/workflows/cmd/arm-lease-generate-lease-files.js --orgName compute --rpNamespace Microsoft.Compute --reviewer "@janesmith" --startdate 2026-05-01 --duration P180D --serviceName "DiskRP,ComputeRP,GalleryRP"
+```
+
+### Bulk Generation
+
+**Syntax:**
+
+```bash
+# Generate resource provider list (without service groups)
+node .github/workflows/cmd/arm-lease-fetch-resource-providers.js --output <filename>
+
+# Generate resource provider list (with service groups)
+node .github/workflows/cmd/arm-lease-fetch-resource-providers.js --with-service-groups --output <filename>
+
+# Generate lease files from list
+node .github/workflows/cmd/arm-lease-generate-lease-files.js --input <filename> --reviewer "@youralias" --startdate <YYYY-MM-DD> --duration <P#D>
+```
+
+**Examples:**
+
+```bash
+# RPs without service groups (e.g., Microsoft.Storage)
+node .github/workflows/cmd/arm-lease-fetch-resource-providers.js --output rps-simple.txt
+node .github/workflows/cmd/arm-lease-generate-lease-files.js --input rps-simple.txt --reviewer "@johndoe" --startdate 2026-04-16 --duration P180D
+
+# RPs with service groups (e.g., Microsoft.Compute with DiskRP, ComputeRP)
+node .github/workflows/cmd/arm-lease-fetch-resource-providers.js --with-service-groups --output rps-groups.txt
+node .github/workflows/cmd/arm-lease-generate-lease-files.js --input rps-groups.txt --reviewer "@johndoe" --startdate 2026-04-16 --duration P180D
+```

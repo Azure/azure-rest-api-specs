@@ -14,3 +14,7 @@ namespace Microsoft.Monitor;
 @@access(SloView.sliSignalPreview, Access.internal);
 
 @@clientName(Microsoft.Monitor, "MonitorSlisMgmtClient", "python");
+
+// Prevent Java SDK from renaming delete to deleteByResourceGroup.
+// The Sli resource is scoped by service group, not resource group.
+@@clientName(Slis.delete, "delete", "java");

@@ -8,8 +8,8 @@ using Azure.Core;
 using Microsoft.NetworkCloud;
 
 // --- go ---
-@@clientName(HugepagesSize.`1G`, "OneG", "go");
-@@clientName(HugepagesSize.`2M`, "TwoM", "go");
+@@clientName(HugepagesSize.`1G`, "OneG", "go,javascript");
+@@clientName(HugepagesSize.`2M`, "TwoM", "go,javascript");
 @@alternateType(Azure.ResourceManager.Foundations.ExtendedLocation.type,
   string,
   "go"
