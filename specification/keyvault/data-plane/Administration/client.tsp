@@ -122,12 +122,14 @@ interface KeyVaultEkmRestClient {
 @@access(KeyVault.RoleAssignments.listForScope, Access.internal, "csharp");
 
 @@access(KeyVault.getEkmConnection, Access.internal, "csharp");
-@@protocolAPI(KeyVault.getEkmConnection, false, "csharp");
-@@access(KeyVault.getEkmCertificate, Access.public, "csharp");
-@@access(KeyVault.checkEkmConnection, Access.public, "csharp");
-@@access(KeyVault.createEkmConnection, Access.public, "csharp");
-@@access(KeyVault.updateEkmConnection, Access.public, "csharp");
-@@access(KeyVault.deleteEkmConnection, Access.public, "csharp");
+@@access(KeyVault.getEkmCertificate, Access.internal, "csharp");
+@@access(KeyVault.checkEkmConnection, Access.internal, "csharp");
+@@access(KeyVault.createEkmConnection, Access.internal, "csharp");
+@@access(KeyVault.updateEkmConnection, Access.internal, "csharp");
+@@access(KeyVault.deleteEkmConnection, Access.internal, "csharp");
+
+@@access(KeyVault.EkmProxyClientCertificateInfo, Access.public, "csharp");
+@@access(KeyVault.EkmProxyInfo, Access.public, "csharp");
 
 @@clientName(KeyVault.Setting.type, "SettingType", "csharp");
 @@clientName(KeyVault.Setting.value, "Content", "csharp");
