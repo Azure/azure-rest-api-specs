@@ -3,6 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 using Azure.ClientGenerator.Core.Legacy;
+using Azure.Core;
 namespace Microsoft.Subscription;
 
 @@clientName(Microsoft.Subscription, "SubscriptionClient", "python");
@@ -69,6 +70,43 @@ namespace Microsoft.Subscription;
 @@clientName(TargetDirectoryRequest, "TargetDirectoryContent", "csharp");
 @@clientName(TargetDirectoryRequestProperties,
   "TargetDirectoryProperties",
+  "csharp"
+);
+@@clientName(SubscriptionOperationGroup.acceptOwnership,
+  "AcceptSubscriptionOwnership",
+  "csharp"
+);
+@@clientName(SubscriptionOperationGroup.acceptOwnershipStatus,
+  "GetAcceptOwnershipStatus",
+  "csharp"
+);
+@@clientName(SubscriptionOperationGroup.cancel, "CancelSubscription", "csharp");
+@@clientName(SubscriptionOperationGroup.rename, "RenameSubscription", "csharp");
+@@clientName(SubscriptionOperationGroup.enable, "EnableSubscription", "csharp");
+@@alternateType(TargetDirectoryRequestProperties.destinationOwnerId,
+  uuid,
+  "csharp"
+);
+@@alternateType(TargetDirectoryRequestProperties.destinationOwnerId,
+  uuid,
+  "csharp"
+);
+@@alternateType(TargetDirectoryRequestProperties.destinationTenantId,
+  uuid,
+  "csharp"
+);
+@@alternateType(TargetDirectoryResultProperties.destinationTenantId,
+  uuid,
+  "csharp"
+);
+@@alternateType(TargetDirectoryResultProperties.destinationOwnerId,
+  uuid,
+  "csharp"
+);
+@@alternateType(TargetDirectoryResultProperties.sourceOwnerId, uuid, "csharp");
+@@alternateType(TargetDirectoryResultProperties.sourceTenantId, uuid, "csharp");
+@@clientName(SubscriptionName.subscriptionName,
+  "SubscriptionNameValue",
   "csharp"
 );
 
