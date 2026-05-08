@@ -33,6 +33,9 @@ alias JobsFilterQueryParams = {
 union TrainingJobInclude {
   string,
 
+  @doc("Inline run-centric metadata recorded for the backing run, including execution-view inputs and outputs.")
+  run_metadata: "run_metadata",
+
   @doc("Inline the latest execution attempt. The same data is available from /training_jobs/{job_name}/attempts/latest.")
   latest_attempt: "latest_attempt",
 
@@ -54,9 +57,6 @@ union TrainingJobInclude {
   @doc("Inline settings recorded for the training job.")
   settings: "settings",
 
-  @doc("Inline service endpoints for the current training job run.")
-  services: "services",
-
   @doc("Inline log file URI metadata for the training job.")
   log_files: "log_files",
 
@@ -73,7 +73,7 @@ union TrainingJobInclude {
 alias TrainingJobGetQueryParams = {
   ...TrainingJobsPreviewHeader;
 
-  @doc("Additional related data to include in the response. Values are comma-separated expansion names such as latest_attempt, input_datasets, output_datasets, execution_definition, services, log_files, and job_cost.")
+  @doc("Additional related data to include in the response. Values are comma-separated expansion names such as run_metadata, latest_attempt, input_datasets, output_datasets, execution_definition, /nodes/{node_id}/services, log_files, and job_cost.")
   @query
   include?: TrainingJobInclude;
 };
@@ -110,7 +110,7 @@ interface TrainingJobs {
       @path
       job_name: string;
 
-      @doc("Additional related data to include in the response. Values are comma-separated expansion names such as latest_attempt, input_datasets, output_datasets, execution_definition, services, log_files, and job_cost.")
+      @doc("Additional related data to include in the response. Values are comma-separated expansion names such as run_metadata, latest_attempt, input_datasets, output_datasets, execution_definition, /nodes/{node_id}/services, log_files, and job_cost.")
       @query
       include?: TrainingJobInclude;
     },
@@ -118,9 +118,9 @@ interface TrainingJobs {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job services are projected from run history service instances."
-  @doc("List service endpoints for the current view of a training job.")
+  @doc("List service endpoints for a selected node of a training job.")
   @get
-  @route("/training_jobs/{job_name}/services")
+  @route("/training_jobs/{job_name}/nodes/{node_id}/services")
   showServices is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.training_jobs_v1_preview,
     {
@@ -128,7 +128,9 @@ interface TrainingJobs {
       @path
       job_name: string;
 
-      ...JobServicesQueryParameters;
+      @doc("The node identifier.")
+      @path
+      node_id: int32;
     },
     TrainingJobServiceCollection
   >;
@@ -500,9 +502,87 @@ interface TrainingJobAttemptMetrics {
 }
 
 @tag("TrainingJobs")
+interface TrainingJobInputs {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job inputs are projected from the backing run's execution-view input documents."
+  @doc("List execution-view inputs recorded for a training job.")
+  @get
+  @route("/training_jobs/{job_name}/inputs")
+  listInputs is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.training_jobs_v1_preview,
+    {
+      @doc("The training job name.")
+      @path
+      job_name: string;
+    },
+    TrainingJobPagedResult<JobExecutionAssetReference>
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job inputs are projected from the backing run's execution-view input documents."
+  @doc("Get one execution-view input recorded for a training job.")
+  @get
+  @route("/training_jobs/{job_name}/inputs/{input_name}")
+  getInput is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.training_jobs_v1_preview,
+    {
+      @doc("The training job name.")
+      @path
+      job_name: string;
+
+      @doc("The input name.")
+      @path
+      input_name: string;
+    },
+    JobExecutionAssetReference
+  >;
+}
+
+@tag("TrainingJobs")
+interface TrainingJobAttemptInputs {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Attempt inputs are projected from execution-view input documents."
+  @doc("List execution-view inputs recorded for a specific training job attempt.")
+  @get
+  @route("/training_jobs/{job_name}/attempts/{attempt_id}/inputs")
+  listAttemptInputs is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.training_jobs_v1_preview,
+    {
+      @doc("The training job name.")
+      @path
+      job_name: string;
+
+      @doc("The attempt identifier, or 'latest' for the latest attempt.")
+      @path
+      attempt_id: JobAttemptIdentifier;
+    },
+    TrainingJobPagedResult<JobExecutionAssetReference>
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Attempt inputs are projected from execution-view input documents."
+  @doc("Get one execution-view input recorded for a specific training job attempt.")
+  @get
+  @route("/training_jobs/{job_name}/attempts/{attempt_id}/inputs/{input_name}")
+  getAttemptInput is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.training_jobs_v1_preview,
+    {
+      @doc("The training job name.")
+      @path
+      job_name: string;
+
+      @doc("The attempt identifier, or 'latest' for the latest attempt.")
+      @path
+      attempt_id: JobAttemptIdentifier;
+
+      @doc("The input name.")
+      @path
+      input_name: string;
+    },
+    JobExecutionAssetReference
+  >;
+}
+
+@tag("TrainingJobs")
 interface TrainingJobOutputs {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job outputs are projected from job outputs and asset relationships."
-  @doc("List outputs produced by a training job.")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job outputs are projected from the backing run's execution-view output documents."
+  @doc("List execution-view outputs recorded for a training job.")
   @get
   @route("/training_jobs/{job_name}/outputs")
   listOutputs is FoundryDataPlaneRequiredPreviewOperation<
@@ -512,11 +592,11 @@ interface TrainingJobOutputs {
       @path
       job_name: string;
     },
-    TrainingJobPagedResult<JobOutputReference>
+    TrainingJobPagedResult<JobExecutionAssetReference>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job outputs are projected from job outputs and asset relationships."
-  @doc("Get one output produced by a training job.")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job outputs are projected from the backing run's execution-view output documents."
+  @doc("Get one execution-view output recorded for a training job.")
   @get
   @route("/training_jobs/{job_name}/outputs/{output_name}")
   getOutput is FoundryDataPlaneRequiredPreviewOperation<
@@ -530,14 +610,14 @@ interface TrainingJobOutputs {
       @path
       output_name: string;
     },
-    JobOutputReference
+    JobExecutionAssetReference
   >;
 }
 
 @tag("TrainingJobs")
 interface TrainingJobAttemptOutputs {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Attempt outputs are projected from attempt output state and asset relationships."
-  @doc("List outputs produced by a specific training job attempt.")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Attempt outputs are projected from execution-view output documents."
+  @doc("List execution-view outputs recorded for a specific training job attempt.")
   @get
   @route("/training_jobs/{job_name}/attempts/{attempt_id}/outputs")
   listAttemptOutputs is FoundryDataPlaneRequiredPreviewOperation<
@@ -551,11 +631,11 @@ interface TrainingJobAttemptOutputs {
       @path
       attempt_id: JobAttemptIdentifier;
     },
-    TrainingJobPagedResult<JobOutputReference>
+    TrainingJobPagedResult<JobExecutionAssetReference>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Attempt outputs are projected from attempt output state and asset relationships."
-  @doc("Get one output produced by a specific training job attempt.")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Attempt outputs are projected from execution-view output documents."
+  @doc("Get one execution-view output recorded for a specific training job attempt.")
   @get
   @route("/training_jobs/{job_name}/attempts/{attempt_id}/outputs/{output_name}")
   getAttemptOutput is FoundryDataPlaneRequiredPreviewOperation<
@@ -573,6 +653,6 @@ interface TrainingJobAttemptOutputs {
       @path
       output_name: string;
     },
-    JobOutputReference
+    JobExecutionAssetReference
   >;
 }

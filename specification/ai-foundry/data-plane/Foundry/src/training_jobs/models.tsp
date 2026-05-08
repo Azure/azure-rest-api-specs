@@ -1037,6 +1037,26 @@ model Job {
 
   ...CommandJob;
 
+  @doc("Run-centric metadata projected onto the training job. This field is omitted unless requested with include=run_metadata. The payload mirrors the backing run metadata and includes execution-view inputs and outputs keyed by name.")
+  @visibility(Lifecycle.Read)
+  run_metadata?: Record<unknown>;
+
+  @doc("Run creation time projected onto the training job.")
+  @visibility(Lifecycle.Read)
+  created_at?: FoundryTimestamp;
+
+  @doc("Run start time projected onto the training job.")
+  @visibility(Lifecycle.Read)
+  started_at?: FoundryTimestamp;
+
+  @doc("Run end time projected onto the training job.")
+  @visibility(Lifecycle.Read)
+  ended_at?: FoundryTimestamp;
+
+  @doc("Run last-modified time projected onto the training job.")
+  @visibility(Lifecycle.Read)
+  updated_at?: FoundryTimestamp;
+
   @doc("The latest execution attempt for the job. This field is omitted unless requested with include=latest_attempt. The same attempt resource is available from /training_jobs/{job_name}/attempts/latest.")
   @visibility(Lifecycle.Read)
   latest_attempt?: JobAttempt;
@@ -1065,7 +1085,7 @@ model Job {
   @visibility(Lifecycle.Read)
   settings?: Record<string>;
 
-  @doc("Service endpoints for the current job run. This field is omitted unless requested with include=services.")
+  @doc("Service endpoints for the selected node. This field is omitted unless requested with include=/nodes/{node_id}/services.")
   @visibility(Lifecycle.Read)
   services?: Record<TrainingJobService>;
 
@@ -1706,6 +1726,21 @@ model JobMetricSample {
   @doc("Sampled metric points.")
   @visibility(Lifecycle.Read)
   points: JobMetricPoint[];
+}
+
+@doc("Named execution-view asset recorded for a job or attempt.")
+model JobExecutionAssetReference {
+  @doc("Input or output name.")
+  @visibility(Lifecycle.Read)
+  name: string;
+
+  @doc("Execution-view asset type as recorded by the backing run.")
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  @doc("Execution-view asset identifier.")
+  @visibility(Lifecycle.Read)
+  asset_id?: string;
 }
 
 @doc("Named output produced by a job.")
