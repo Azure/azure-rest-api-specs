@@ -1114,12 +1114,13 @@ model DiscoveryRuleProperties {
   @doc("Whether to add all recommended signals to the discovered entities.")
   addRecommendedSignals: DiscoveryRuleRecommendedSignalsBehavior;
 
-  @doc("Specification of the discovery rule defining how entities are discovered.")
-  specification: DiscoveryRuleSpecification;
-
   @added(Versions.v2026_01_01_preview)
   @doc("Specification of the discovery rule defining how entities are discovered.")
   specification: DiscoveryRuleSpecification;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Whether to automatically add a signal for the Azure resource's availability status from Azure Resource Health to the discovered entities.")
+  addResourceHealthSignal: ResourceHealthAvailabilityStatusSignalBehavior;
 
   @removed(Versions.v2026_01_01_preview)
   @visibility(Lifecycle.Read)
@@ -1203,7 +1204,7 @@ union DiscoveryRuleRecommendedSignalsBehavior {
   Disabled: "Disabled",
 }
 
-@doc("Resource health availability status signal behaviour")
+@doc("Resource health availability status signal behavior")
 union ResourceHealthAvailabilityStatusSignalBehavior {
   string,
 
