@@ -235,6 +235,12 @@ Flag every violation clearly with the file path, the **exact line number** (e.g.
 
 - Synchronous PATCH **MUST** return `200`; async PATCH **MUST** return `202` (plus `200` in swagger for SDK discovery). PATCH **MUST** return `404` if resource does not exist (RPC-Patch-V1-07).
 
+> **Async PATCH uniquely requires BOTH `202` AND `200` in the swagger definition.**
+> The `200` is not the initial response -- it represents the final synchronous
+> response schema that SDKs use to deserialize the completed result. Without `200`
+> defined, SDKs cannot discover the response type. This is different from async
+> DELETE, which does NOT require `200`.
+
 ### 4.3 Tracked Resource PATCH Must Support Tags (RPC-Patch-V1-03)
 
 - For tracked resources, the PATCH operation **MUST** support updating `tags` at minimum.
@@ -283,6 +289,13 @@ Flag every violation clearly with the file path, the **exact line number** (e.g.
   - `202` — accepted for async processing
   - `204` — resource does not exist / already deleted (no body)
   - `default` — error response
+
+> **⚠️ Common false positive -- do NOT conflate sync and async DELETE response codes.**
+> Async DELETE requires `202` + `204` + `default` only. It does **NOT** require `200`.
+> The `200` code belongs exclusively to synchronous DELETE. Section 6.3 mentions `200`
+> for the Location polling URL's terminal response, which is a different context -- do
+> not flag an async DELETE operation for missing `200`.
+
 - Do **not** return `404` for a resource that doesn't exist — return `204` instead.
 - DELETE response body **MUST** be empty (RPC-Delete-V1-04).
   (Also enforced by: `DeleteResponseCodes` linter rule)
@@ -322,6 +335,7 @@ Flag every violation clearly with the file path, the **exact line number** (e.g.
 - Async DELETE **MUST** return `202` (Accepted) with both a `Location` header and an `Azure-AsyncOperation` header.
 - If the resource has a `provisioningState` property, it **MUST** transition to a non-terminal state (e.g., `"Deleting"`).
 - The `Location` URL **MUST** return `202` (with no body) while the operation is in progress. When the operation completes, it **MUST** return `200` (OK) or `204` (NoContent) and the resource **MUST** no longer exist.
+- **Note:** The `200` / `204` here refers to the **polling URL's terminal response**, not the initial DELETE response codes. The initial async DELETE response is `202` + `204` (see section 5.1).
 
 ### 6.4 Async POST Action Model (RPC-Async-V1-11)
 
