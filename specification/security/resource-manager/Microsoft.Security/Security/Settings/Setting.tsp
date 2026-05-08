@@ -32,6 +32,10 @@ model Setting
   >;
 }
 
+@@doc(Setting.kind, "the kind of the settings string");
+@@pattern(Setting.kind, "");
+@@visibility(Setting.kind, Lifecycle.Update);
+
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface Settings {
