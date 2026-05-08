@@ -117,6 +117,26 @@ alias StandardResourceGroupParams = {
   ...Azure.ResourceManager.Legacy.Provider;
 };
 
+// Shared OData query parameter aliases for list operations. Hand-rolled (rather
+// than using `Azure.ResourceManager.ArmFilterParameter` / `SkipTokenParameter`)
+// to preserve the existing wire format: `$skipToken` keeps the capital `T` used
+// throughout the rest of the RSV swagger, and both parameters remain optional.
+alias ListFilterParameter = {
+  /**
+   * OData filter options.
+   */
+  @query("$filter")
+  $filter?: string;
+};
+
+alias ListSkipTokenParameter = {
+  /**
+   * skipToken Filter.
+   */
+  @query("$skipToken")
+  $skipToken?: string;
+};
+
 /**
  * Path segment parameters under /vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}.
  */
@@ -201,17 +221,8 @@ interface BackupProtectedItemsFromCrossTenantVault {
   list is BackupProtectedItemsFromCrossTenantVaultOps.List<
     ProtectedItemResource,
     Parameters = {
-      /**
-       * OData filter options.
-       */
-      @query("$filter")
-      $filter?: string;
-
-      /**
-       * skipToken Filter.
-       */
-      @query("$skipToken")
-      $skipToken?: string;
+      ...ListFilterParameter;
+      ...ListSkipTokenParameter;
     },
     Response = ArmResponse<CrossTenantProtectedItemResourceList>
   >;
@@ -270,11 +281,7 @@ interface CrossTenantVaultRecoveryPoints {
   list is CrossTenantVaultRecoveryPointsOps.List<
     RecoveryPointResource,
     Parameters = {
-      /**
-       * OData filter options.
-       */
-      @query("$filter")
-      $filter?: string;
+      ...ListFilterParameter;
     },
     Response = ArmResponse<CrossTenantRecoveryPointResourceList>
   >;
@@ -394,17 +401,8 @@ interface BackupJobsFromCrossTenantVault {
   list is BackupJobsFromCrossTenantVaultOps.List<
     JobResource,
     Parameters = {
-      /**
-       * OData filter options.
-       */
-      @query("$filter")
-      $filter?: string;
-
-      /**
-       * skipToken Filter.
-       */
-      @query("$skipToken")
-      $skipToken?: string;
+      ...ListFilterParameter;
+      ...ListSkipTokenParameter;
     },
     Response = ArmResponse<CrossTenantJobResourceList>
   >;
