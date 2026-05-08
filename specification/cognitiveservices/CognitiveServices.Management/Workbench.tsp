@@ -20,7 +20,8 @@ namespace Microsoft.CognitiveServices;
  */
 @added(Versions.v2026_03_15_preview)
 @parentResource(Project)
-model Workbench is Azure.ResourceManager.ProxyResource<WorkbenchProperties, false> {
+model Workbench
+  is Azure.ResourceManager.ProxyResource<WorkbenchProperties, false> {
   ...ResourceNameParameter<
     Resource = Workbench,
     KeyName = "workbenchName",
@@ -121,13 +122,11 @@ interface Workbenches {
 
 @@maxLength(Workbench.name, 63);
 @@minLength(Workbench.name, 1);
-@@doc(Workbench.name,
-  "The name of the workbench associated with the project."
+@@doc(Workbench.name, "The name of the workbench associated with the project.");
+@@doc(Workbench.properties, "Properties of the workbench resource.");
+@@doc(Workbenches.createOrUpdate::parameters.resource,
+  "The workbench properties."
 );
-@@doc(Workbench.properties,
-  "Properties of the workbench resource."
-);
-@@doc(Workbenches.createOrUpdate::parameters.resource, "The workbench properties.");
 @@doc(Workbenches.update::parameters.properties,
   "The workbench properties to update."
 );
