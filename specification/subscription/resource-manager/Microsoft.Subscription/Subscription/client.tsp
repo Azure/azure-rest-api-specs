@@ -2,40 +2,22 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using Azure.ClientGenerator.Core.Legacy;
 namespace Microsoft.Subscription;
 
 @@clientName(Microsoft.Subscription, "SubscriptionClient", "python");
-
-// The interface 'SubscriptionOperationGroup' is mapped to a client named 'Subscription'
-// (the 'OperationGroup' suffix is stripped). That collides with the package's last
-// namespace segment ('Azure.ResourceManager.Subscription') and causes the C# generator
-// to escape the namespace as '_Subscription'. Rename the client for the C# scope to
-// avoid the collision; the operations remain in the same namespace.
-@@clientName(SubscriptionOperationGroup, "SubscriptionAction", "csharp");
-@@clientName(SubscriptionOperationOperationGroup, "SubscriptionOperation", "csharp");
-@@clientName(SubscriptionsOperationGroup, "Subscriptions", "csharp");
-
-// back-compatible.tsp moves SubscriptionOperationGroup.* into a client literally
-// named "Subscription", which collides with the namespace last segment. Override
-// these placements for the C# scope so the resulting client is not named
-// "Subscription".
-@@clientLocation(SubscriptionOperationGroup.cancel, "SubscriptionAction", "csharp");
-@@clientLocation(SubscriptionOperationGroup.rename, "SubscriptionAction", "csharp");
-@@clientLocation(SubscriptionOperationGroup.enable, "SubscriptionAction", "csharp");
-@@clientLocation(SubscriptionOperationGroup.acceptOwnership,
-  "SubscriptionAction",
-  "csharp"
-);
-@@clientLocation(SubscriptionOperationGroup.acceptOwnershipStatus,
-  "SubscriptionAction",
-  "csharp"
-);
 @@clientName(SubscriptionOperationGroup.acceptOwnership::parameters.body,
   "requestbody_body",
   "python"
 );
 
-// C# customizations to preserve GA SDK class names from the previous AutoRest mapping.
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@flattenProperty(PutAliasRequest.properties, "csharp");
+
+@@scope(SubscriptionOperationOperationGroup.get, "!csharp"); // Get operation status is not needed in SDK which has this functionality in in core lib.
+@@scope(GetTenantPolicyResponses.listPolicyForTenant, "!csharp"); // Singleton, no need to have list operation in sdk.
+@@scope(TargetDirectoryResults.listTargetDirectory, "!csharp"); // Singleton, no need to have list operation in sdk.
+
 @@clientName(SubscriptionAliasResponse, "SubscriptionAlias", "csharp");
 @@clientName(SubscriptionAliasResponseProperties,
   "SubscriptionAliasProperties",
@@ -59,8 +41,6 @@ namespace Microsoft.Subscription;
 );
 @@clientName(ServiceTenantResponse, "ServiceTenant", "csharp");
 @@clientName(Workload, "SubscriptionWorkload", "csharp");
-
-// Property name + type mappings to preserve GA SDK property surfaces.
 @@clientName(SubscriptionAliasResponseProperties.acceptOwnershipUrl,
   "acceptOwnershipUri",
   "csharp"
@@ -77,12 +57,9 @@ namespace Microsoft.Subscription;
   utcDateTime,
   "csharp"
 );
-
-// Avoid AZC0030: model names ending in 'Request' / Resolve to GA names where possible.
 @@clientName(AcceptOwnershipRequest, "AcceptOwnershipContent", "csharp");
-@@clientName(PutAliasRequest, "SubscriptionAliasCreateOrUpdateContent", "csharp");
-@@clientName(PutAliasRequestProperties,
-  "SubscriptionAliasCreateOrUpdateProperties",
+@@clientName(PutAliasRequest,
+  "SubscriptionAliasCreateOrUpdateContent",
   "csharp"
 );
 @@clientName(PutTenantPolicyRequestProperties,
@@ -95,37 +72,26 @@ namespace Microsoft.Subscription;
   "csharp"
 );
 
-// Disambiguate list operations whose generated rest method name collides with the corresponding GET.
-// (Move them to a separate client group so they end up in their own rest-operations file.)
-@@clientLocation(GetTenantPolicyResponses.listPolicyForTenant,
-  "TenantPolicies",
-  "csharp"
-);
-@@clientLocation(TargetDirectoryResults.listTargetDirectory,
-  "TargetDirectoryList",
-  "csharp"
-);
-
-@@Azure.ClientGenerator.Core.clientLocation(SubscriptionOperationGroup.cancel::parameters.subscriptionId,
+@@clientLocation(SubscriptionOperationGroup.cancel::parameters.subscriptionId,
   SubscriptionOperationGroup.cancel
 );
-@@Azure.ClientGenerator.Core.clientLocation(SubscriptionOperationGroup.rename::parameters.subscriptionId,
+@@clientLocation(SubscriptionOperationGroup.rename::parameters.subscriptionId,
   SubscriptionOperationGroup.rename
 );
-@@Azure.ClientGenerator.Core.clientLocation(SubscriptionOperationGroup.enable::parameters.subscriptionId,
+@@clientLocation(SubscriptionOperationGroup.enable::parameters.subscriptionId,
   SubscriptionOperationGroup.enable
 );
-@@Azure.ClientGenerator.Core.clientLocation(SubscriptionOperationGroup.acceptOwnership::parameters.subscriptionId,
+@@clientLocation(SubscriptionOperationGroup.acceptOwnership::parameters.subscriptionId,
   SubscriptionOperationGroup.acceptOwnership
 );
-@@Azure.ClientGenerator.Core.clientLocation(SubscriptionOperationGroup.acceptOwnershipStatus::parameters.subscriptionId,
+@@clientLocation(SubscriptionOperationGroup.acceptOwnershipStatus::parameters.subscriptionId,
   SubscriptionOperationGroup.acceptOwnershipStatus
 );
 
-@@Azure.ClientGenerator.Core.clientLocation(SubscriptionsOperationGroup.acceptTargetDirectory::parameters.subscriptionId,
+@@clientLocation(SubscriptionsOperationGroup.acceptTargetDirectory::parameters.subscriptionId,
   SubscriptionsOperationGroup.acceptTargetDirectory
 );
-@@Azure.ClientGenerator.Core.clientLocation(SubscriptionsOperationGroup.targetDirectoryStatus::parameters.subscriptionId,
+@@clientLocation(SubscriptionsOperationGroup.targetDirectoryStatus::parameters.subscriptionId,
   SubscriptionsOperationGroup.targetDirectoryStatus
 );
 
@@ -150,15 +116,15 @@ namespace Microsoft.Subscription;
   "java"
 );
 
-@@Azure.ClientGenerator.Core.clientLocation(GetTargetDirectoryBaseParameters.subscriptionId,
+@@clientLocation(GetTargetDirectoryBaseParameters.subscriptionId,
   TargetDirectoryResults.getTargetDirectory
 );
-@@Azure.ClientGenerator.Core.clientLocation(PutTargetDirectoryBaseParameters.subscriptionId,
+@@clientLocation(PutTargetDirectoryBaseParameters.subscriptionId,
   TargetDirectoryResults.putTargetDirectory
 );
-@@Azure.ClientGenerator.Core.clientLocation(DeleteTargetDirectoryBaseParameters.subscriptionId,
+@@clientLocation(DeleteTargetDirectoryBaseParameters.subscriptionId,
   TargetDirectoryResults.deleteTargetDirectory
 );
-@@Azure.ClientGenerator.Core.clientLocation(ListTargetDirectoryBaseParameters.subscriptionId,
+@@clientLocation(ListTargetDirectoryBaseParameters.subscriptionId,
   TargetDirectoryResults.listTargetDirectory
 );
