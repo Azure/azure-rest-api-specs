@@ -12224,19 +12224,20 @@
         "description": "Moves secondary IP configurations between network interfaces within a virtual network.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "virtualNetworkName",
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$",
             "description": "The name of the virtual network."
           },
           {
@@ -12250,9 +12251,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Move IP configurations operation completed successfully."
-          },
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
             "headers": {
@@ -12271,19 +12269,8 @@
               }
             }
           },
-          "400": {
-            "description": "Bad Request. Validation failed for one or more move IP configuration items. The CloudError.error.details[] array contains entries with code, message, and target (target is the destination IP configuration resource ID).",
-            "schema": {
-              "$ref": "./common.json#/definitions/Common.CloudError"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "Internal Server Error. One or more move IP configuration items failed during asynchronous execution after initial validation succeeded. The CloudError.error.details[] array contains entries with code=IpConfigurationMoveFailure, message, and target (destination IP configuration resource ID).",
-            "schema": {
-              "$ref": "./common.json#/definitions/Common.CloudError"
-            },
-            "x-ms-error-response": true
+          "204": {
+            "description": "Move IP configurations operation completed successfully with no content."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -21199,6 +21186,7 @@
       "properties": {
         "moveIpConfigurationItems": {
           "type": "array",
+          "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/MoveIpConfigurationItem"
           },
