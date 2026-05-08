@@ -3,10 +3,6 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
-@@clientName(Azure.ResourceManager.PrivateEndpointConnectionResource,
-  "HorizonDBPrivateEndpointConnection",
-  "csharp,java,python,typescript"
-);
 @@clientName(Azure.ResourceManager.PrivateEndpointConnectionUpdate,
   "HorizonDBPrivateEndpointConnectionPatch"
 );
