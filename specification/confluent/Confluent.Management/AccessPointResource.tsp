@@ -19,7 +19,7 @@ namespace Microsoft.Confluent;
 @added(Microsoft.Confluent.Versions.v2026_05_01_preview)
 @parentResource(NetworkGatewayResource)
 model AccessPointResource
-  is Azure.ResourceManager.ProxyResource<AccessPointProperties, false> {
+  is Azure.ResourceManager.ProxyResource<AccessPointProperties> {
   ...ResourceNameParameter<
     Resource = AccessPointResource,
     KeyName = "accessPointId",

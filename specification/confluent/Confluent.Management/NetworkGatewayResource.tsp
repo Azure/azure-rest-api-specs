@@ -18,7 +18,7 @@ namespace Microsoft.Confluent;
  */
 @added(Microsoft.Confluent.Versions.v2026_05_01_preview)
 @parentResource(SCEnvironmentRecord)
-model NetworkGatewayResource is ProxyResource<NetworkGatewayProperties, false> {
+model NetworkGatewayResource is ProxyResource<NetworkGatewayProperties> {
   ...ResourceNameParameter<
     Resource = NetworkGatewayResource,
     KeyName = "networkGatewayId",
