@@ -2110,6 +2110,7 @@ model SiteProperties {
   /**
    * <code>true</code> if site scoped certificates are enabled; otherwise, <code>false</code>.
    */
+  @added(Versions.v2026_03_15)
   siteScopedCertificatesEnabled?: boolean = false;
 
   /**
@@ -9603,6 +9604,7 @@ model SitePatchResourceProperties {
   /**
    * <code>true</code> if site scoped certificates are enabled; otherwise, <code>false</code>.
    */
+  @added(Versions.v2026_03_15)
   siteScopedCertificatesEnabled?: boolean = false;
 
   /**
