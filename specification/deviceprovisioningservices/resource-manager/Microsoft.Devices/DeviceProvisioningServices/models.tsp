@@ -360,7 +360,7 @@ model IotDpsPropertiesDescription {
   deviceRegistryNamespace?: DeviceRegistryNamespaceDescription;
 
   /**
-   * The Device Registry namespaces linked to the provisioning service.
+   * The Azure Device Registry (ADR) namespaces linked to the provisioning service. Linking is established via the Azure Device Registry control plane; this property is read-only on this resource.
    */
   @visibility(Lifecycle.Read)
   @added(Versions.v2026_06_01_preview)
@@ -409,7 +409,7 @@ model IotDpsPropertiesDescription {
   portalOperationsHostName?: string;
 
   /**
-   * Disables all authentication methods other than Azure RBAC
+   * Disables all authentication methods other than Azure RBAC.
    */
   @added(Versions.v2026_06_01_preview)
   disableLocalAuth?: boolean = false;
@@ -564,7 +564,7 @@ model DeviceRegistryNamespaceDescription {
   region?: Azure.Core.azureLocation;
 
   /**
-   * The ADR linking state of this namespace.
+   * The Azure Device Registry (ADR) link state of this namespace.
    */
   @added(Versions.v2026_06_01_preview)
   adrLinkState: AdrLinkingState;
@@ -937,7 +937,7 @@ model CertificateBodyDescription {
 }
 
 /**
- * The state of ADR linking for a provisioning service.
+ * The state of Azure Device Registry (ADR) linking for a provisioning service.
  */
 @added(Versions.v2026_06_01_preview)
 union AdrLinkingState {

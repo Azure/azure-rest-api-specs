@@ -403,9 +403,6 @@
         "x-ms-examples": {
           "DPSPatch": {
             "$ref": "./examples/DPSPatch.json"
-          },
-          "DPSPatch_DisableLocalAuth": {
-            "$ref": "./examples/DPSPatch_DisableLocalAuth.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1705,7 +1702,7 @@
     },
     "AdrLinkingState": {
       "type": "string",
-      "description": "The state of ADR linking for a provisioning service.",
+      "description": "The state of Azure Device Registry (ADR) linking for a provisioning service.",
       "enum": [
         "Linking",
         "Linked",
@@ -1930,7 +1927,7 @@
         },
         "adrLinkState": {
           "$ref": "#/definitions/AdrLinkingState",
-          "description": "The ADR linking state of this namespace."
+          "description": "The Azure Device Registry (ADR) link state of this namespace."
         }
       },
       "required": [
@@ -2067,14 +2064,14 @@
         },
         "deviceRegistryNamespaces": {
           "type": "array",
-          "description": "The Device Registry namespaces linked to the provisioning service.",
+          "description": "The Azure Device Registry (ADR) namespaces linked to the provisioning service. Linking is established via the Azure Device Registry control plane; this property is read-only on this resource.",
           "maxItems": 1,
           "items": {
             "$ref": "#/definitions/DeviceRegistryNamespaceDescription"
           },
           "readOnly": true,
           "x-ms-identifiers": [
-            "resourceId"
+            "namespaceUuid"
           ]
         },
         "allocationPolicy": {
@@ -2113,7 +2110,7 @@
         },
         "disableLocalAuth": {
           "type": "boolean",
-          "description": "Disables all authentication methods other than Azure RBAC",
+          "description": "Disables all authentication methods other than Azure RBAC.",
           "default": false
         }
       }
