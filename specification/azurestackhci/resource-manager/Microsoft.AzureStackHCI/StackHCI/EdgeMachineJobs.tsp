@@ -14,6 +14,7 @@ namespace Microsoft.AzureStackHCI;
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 @parentResource(EdgeMachine)
 model EdgeMachineJob
   is Azure.ResourceManager.ProxyResource<EdgeMachineJobProperties> {
@@ -28,6 +29,7 @@ model EdgeMachineJob
 @@doc(EdgeMachineJob.name, "Name of EdgeMachineJob");
 
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 @armResourceOperations
 interface EdgeMachineJobs {
   /**
