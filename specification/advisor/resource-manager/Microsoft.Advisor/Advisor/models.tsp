@@ -570,7 +570,7 @@ model RecommendationProperties {
    * The state of the Recommendation
    */
   @added(Versions.v2026_02_01_preview)
-  state?: NewState;
+  recommendationStatus?: NewState;
 
   /**
    * The type of recommendation completion, which is either MarkedByUser or SystemVerified
