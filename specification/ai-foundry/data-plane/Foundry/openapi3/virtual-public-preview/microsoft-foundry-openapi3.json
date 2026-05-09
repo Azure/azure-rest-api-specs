@@ -15729,7 +15729,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/TargetConfig"
+            "$ref": "#/components/schemas/RedTeamTargetConfig"
           }
         ],
         "description": "Azure OpenAI model configuration. The API version would be selected by the service for querying the model."
@@ -43423,7 +43423,7 @@
           "target": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/TargetConfig"
+                "$ref": "#/components/schemas/RedTeamTargetConfig"
               }
             ],
             "description": "Target configuration for the red-team run."
@@ -43550,6 +43550,25 @@
           }
         ],
         "description": "Represents the parameters for red team seed prompts item generation."
+      },
+      "RedTeamTargetConfig": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Type of the model configuration."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "AzureOpenAIModel": "#/components/schemas/AzureOpenAIModelConfiguration"
+          }
+        },
+        "description": "Abstract class for target configuration."
       },
       "RedTeamTaxonomyItemGenerationParams": {
         "type": "object",
@@ -44610,25 +44629,6 @@
           }
         ],
         "description": "Represents a data source for target-based completion evaluation configuration."
-      },
-      "TargetConfig": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "Type of the model configuration."
-          }
-        },
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "AzureOpenAIModel": "#/components/schemas/AzureOpenAIModelConfiguration"
-          }
-        },
-        "description": "Abstract class for target configuration."
       },
       "TargetUpdate": {
         "type": "object",

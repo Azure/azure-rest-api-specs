@@ -9008,7 +9008,7 @@ components:
           type: string
           description: 'Deployment name for AOAI model. Example: gpt-4o if in AIServices or connection based `connection_name/deployment_name` (e.g. `my-aoai-connection/gpt-4o`).'
       allOf:
-        - $ref: '#/components/schemas/TargetConfig'
+        - $ref: '#/components/schemas/RedTeamTargetConfig'
       description: Azure OpenAI model configuration. The API version would be selected by the service for querying the model.
     BaseCredentials:
       type: object
@@ -28972,7 +28972,7 @@ components:
           readOnly: true
         target:
           allOf:
-            - $ref: '#/components/schemas/TargetConfig'
+            - $ref: '#/components/schemas/RedTeamTargetConfig'
           description: Target configuration for the red-team run.
       description: Red team details.
     RedTeamEvalRunDataSource:
@@ -29053,6 +29053,19 @@ components:
       allOf:
         - $ref: '#/components/schemas/ItemGenerationParams'
       description: Represents the parameters for red team seed prompts item generation.
+    RedTeamTargetConfig:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          description: Type of the model configuration.
+      discriminator:
+        propertyName: type
+        mapping:
+          AzureOpenAIModel: '#/components/schemas/AzureOpenAIModelConfiguration'
+      description: Abstract class for target configuration.
     RedTeamTaxonomyItemGenerationParams:
       type: object
       required:
@@ -29773,19 +29786,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvalRunDataSource'
       description: Represents a data source for target-based completion evaluation configuration.
-    TargetConfig:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          description: Type of the model configuration.
-      discriminator:
-        propertyName: type
-        mapping:
-          AzureOpenAIModel: '#/components/schemas/AzureOpenAIModelConfiguration'
-      description: Abstract class for target configuration.
     TargetUpdate:
       type: object
       required:
