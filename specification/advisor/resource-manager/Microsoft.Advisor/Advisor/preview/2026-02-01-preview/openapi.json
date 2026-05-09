@@ -1091,7 +1091,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/RecommendationsPatchPayload"
             }
@@ -2946,7 +2946,12 @@
           "$ref": "#/definitions/RecommendationStatePropertiesPayload",
           "description": "The properties for patch recommendation API."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/Resource"
+        }
+      ]
     },
     "ResiliencyReviewProperties": {
       "type": "object",

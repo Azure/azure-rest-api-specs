@@ -730,7 +730,8 @@ model RecommendationProperties {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2026_02_01_preview)
-model RecommendationsPatchPayload {
+model RecommendationsPatchPayload 
+	extends Azure.ResourceManager.Foundations.Resource {
   /**
    * The properties for patch recommendation API.
    */
