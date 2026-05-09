@@ -31,9 +31,9 @@ using Microsoft.OperationalInsights;
 );
 
 // Create compatible ProvisioningStateEnum for backward compatibility
-#suppress "@azure-tools/typespec-azure-core/no-enum" "Backward compatibility for Java SDK by merging provisioning state values"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Mirror enum for backward compatibility"
-enum CompatibleProvisioningStateEnum {
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Mirror union for backward compatibility"
+union CompatibleProvisioningStateEnum {
+  string,
   Updating: "Updating",
   InProgress: "InProgress",
   Succeeded: "Succeeded",
