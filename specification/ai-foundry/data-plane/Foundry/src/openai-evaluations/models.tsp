@@ -86,7 +86,8 @@ model AzureAIDataSourceConfig extends DataSourceConfig {
     | "responses"
     | "traces_preview"
     | "synthetic_data_gen_preview"
-    | "benchmark_preview";
+    | "benchmark_preview"
+    | "conversation_simulation_preview";
 }
 
 /** Data source configuration for benchmark evaluations. */
