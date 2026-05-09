@@ -1,0 +1,58 @@
+name: arm-api-reviewer-eval-classification
+description: |
+  NEW vs EXISTING classification test (10xxxx).
+  Validates that the reviewer correctly tags issues as [NEW] (introduced
+  in this version) or [EXISTING] (present in the previous version).
+
+config:
+  runs: 1
+  timeout: 300
+  model: claude-opus-4.6-1m
+  judge_model: claude-sonnet-4.6
+
+scoring:
+  threshold: 0.7
+
+stimuli:
+  # 100001 — NEW vs EXISTING classification
+  - name: classify-new-vs-existing-issues
+    environment:
+      files:
+        - src: "../fixtures/version-pairs/new-vs-existing/stable-2024-01-01.json"
+          dest: "specification/classsvc/resource-manager/Microsoft.ClassService/stable/2024-01-01/classsvc.json"
+        - src: "../fixtures/version-pairs/new-vs-existing/stable-2025-01-01.json"
+          dest: "specification/classsvc/resource-manager/Microsoft.ClassService/stable/2025-01-01/classsvc.json"
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification. The new
+      version is stable/2025-01-01 and the previous version is stable/2024-01-01.
+
+      For each issue found, classify it as [NEW] (introduced in this version)
+      or [EXISTING] (also present in the previous version). Always verify
+      against the previous version before classifying.
+
+      Report all findings with rule IDs, line numbers, [NEW]/[EXISTING] tags,
+      and fix suggestions.
+
+      Previous version: specification/classsvc/resource-manager/Microsoft.ClassService/stable/2024-01-01/classsvc.json
+      New version: specification/classsvc/resource-manager/Microsoft.ClassService/stable/2025-01-01/classsvc.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        config:
+          pattern: "\\[NEW\\]"
+      - type: output-matches
+        config:
+          pattern: "\\[EXISTING\\]"
+      - type: output-contains
+        config:
+          substring: "bar"
+      - type: output-contains
+        config:
+          substring: "baz"
+      - type: prompt
+    rubric:
+      - The bar property has no description in BOTH versions — this should be tagged [EXISTING]
+      - The baz property is newly added in 2025-01-01 and has no description — this should be tagged [NEW]
+      - At least one issue correctly classified as [EXISTING] and at least one as [NEW]
