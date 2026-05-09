@@ -163,9 +163,9 @@ union AgentProtocol {
   @removed(Versions.v1)
   invocations: "invocations",
 
-  @doc("WebSocket-based protocol for hosted voice agents.")
+  @doc("WebSocket-based protocol for hosted voice and real-time streaming agents.")
   @removed(Versions.v1)
-  websocket: "websocket",
+  invocations_ws: "invocations_ws",
 }
 
 union AgentKind {
