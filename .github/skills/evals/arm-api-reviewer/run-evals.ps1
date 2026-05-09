@@ -18,7 +18,7 @@
       4. Print a pass/fail summary and open the results
 
 .PARAMETER Suite
-    Which suite to run. Default: "all" (28 stimuli across 11 eval files).
+    Which suite to run. Default: "all" (31 stimuli across 12 eval files).
     Pass a specific eval file name (without path) to run one category, e.g. "eval-operations".
 
 .PARAMETER Model
