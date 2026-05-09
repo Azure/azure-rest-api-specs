@@ -36,8 +36,11 @@ namespace Microsoft.Monitor;
 @@clientName(SpatialAggregationType, "SliSpatialAggregationType", "csharp");
 @@clientName(TemporalAggregation, "SliTemporalAggregation", "csharp");
 @@clientName(TemporalAggregationType, "SliTemporalAggregationType", "csharp");
+@@clientName(Sli, "MonitorSli", "csharp");
+@@clientName(SliResource, "MonitorSliProperties", "csharp");
 @@clientName(SliResource.streamingRuleLastUpdatedTimestamp,
   "StreamingRuleLastUpdatedOn",
   "csharp"
 );
+@@clientName(SliResource.enableAlert, "IsAlertEnabled", "csharp");
 @@clientName(Slis, "SliOperations", "csharp");
