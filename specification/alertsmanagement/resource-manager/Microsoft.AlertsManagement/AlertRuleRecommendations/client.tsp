@@ -31,3 +31,17 @@ using Microsoft.AlertsManagement;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
+
+// C# customizations: rename overly-generic operation names to add resource context so
+// the public extension method names follow the ARM convention `Get<Resource>(...)`.
+@@clientName(AlertRuleRecommendationsOperationGroup.listByResource,
+  "getAlertRuleRecommendations",
+  "csharp"
+);
+@@clientName(AlertRuleRecommendationsOperationGroup.listByTargetType,
+  "getAlertRuleRecommendationsByTargetType",
+  "csharp"
+);
+
+// C# customizations: rename overly-generic model name to add resource context.
+@@clientName(RuleArmTemplate, "AlertRuleRecommendationArmTemplate", "csharp");
