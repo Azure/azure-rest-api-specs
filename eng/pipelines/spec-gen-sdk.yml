@@ -37,6 +37,10 @@ parameters:
     type: number
     default: 0
     displayName: 'Release plan work item id'
+  - name: TriggerSource
+    type: string
+    default: 'unspecified'
+    displayName: 'Trigger source'
 
 trigger: none
 
@@ -53,3 +57,4 @@ extends:
     CreatePullRequest: ${{ parameters.CreatePullRequest }}
     ForceCreateEvenWithFailures: ${{ parameters.ForceCreateEvenWithFailures }}
     ReleasePlanWorkItemId: ${{ parameters.ReleasePlanWorkItemId }}
+    TriggerSource: ${{ parameters.TriggerSource }}
