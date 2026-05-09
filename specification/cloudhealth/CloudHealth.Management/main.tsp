@@ -160,6 +160,7 @@ model SignalDefinitionProperties {
   @doc("Evaluation rules for the signal definition")
   evaluationRules: EvaluationRule;
 
+  @removed(Versions.v2026_01_01_preview)
   @visibility(Lifecycle.Read)
   @doc("Date when the signal definition was (soft-)deleted")
   deletionDate?: utcDateTime;
@@ -515,6 +516,7 @@ model EntityProperties {
   @doc("Discovered by which discovery rule. If set, the entity cannot be deleted manually.")
   discoveredBy?: discoveryRuleName;
 
+  @removed(Versions.v2026_01_01_preview)
   @visibility(Lifecycle.Read)
   @doc("Date when the entity was (soft-)deleted")
   deletionDate?: utcDateTime;
@@ -637,14 +639,16 @@ model SignalGroups {
   @doc("Azure Monitor Workspace Signal Group")
   azureMonitorWorkspace?: AzureMonitorWorkspaceSignals;
 
+  @typeChangedFrom(Versions.v2026_01_01_preview, DependenciesSignalGroup)
   @doc("Settings for dependency signals to control how the health state of child entities influences the health state of the parent entity.")
-  dependencies?: DependenciesSignalGroup;
+  dependencies?: DependenciesSignalGroupV2;
 
   @doc("List of signals which have been externally submitted for this entity.")
   @visibility(Lifecycle.Read)
   external?: ExternalSignalGroup;
 }
 
+@removed(Versions.v2026_01_01_preview)
 @doc("Properties for dependent entities, i.e. child entities")
 model DependenciesSignalGroup {
   @doc("Aggregation type for child dependencies.")
@@ -657,6 +661,27 @@ model DependenciesSignalGroup {
   unhealthyThreshold?: string;
 }
 
+@added(Versions.v2026_01_01_preview)
+@doc("Properties for dependent entities, i.e. child entities")
+model DependenciesSignalGroupV2 {
+  @doc("Aggregation type for child dependencies.")
+  aggregationType: DependenciesAggregationType = DependenciesAggregationType.WorstOf;
+
+  @doc("Degraded threshold for aggregation. For MinHealthy: parent is degraded when healthy count/percentage falls to or below this value. For MaxNotHealthy: parent is degraded when not-healthy count/percentage reaches or exceeds this value. Optional — if not set, there is no degraded state (transitions directly from Healthy to Unhealthy).")
+  @minValue(0)
+  degradedThreshold?: float64;
+
+  @doc("Unhealthy threshold for aggregation. For MinHealthy: parent is unhealthy when healthy count/percentage falls to or below this value. For MaxNotHealthy: parent is unhealthy when not-healthy count/percentage reaches or exceeds this value. Required when aggregationType is MinHealthy or MaxNotHealthy.")
+  @minValue(0)
+  unhealthyThreshold?: float64;
+
+  @doc("Unit type for the aggregation thresholds. Required when aggregationType is MinHealthy or MaxNotHealthy.")
+  unit?: DependenciesAggregationUnit;
+
+  @doc("If true, children with Unknown health state are excluded from aggregation calculations. Defaults to true.")
+  ignoreUnknown?: boolean = true;
+}
+
 @doc("Aggregation type for child dependencies.")
 union DependenciesAggregationType {
   string,
@@ -664,8 +689,29 @@ union DependenciesAggregationType {
   @doc("Default behavior: Worst child health state is propagated.")
   WorstOf: "WorstOf",
 
+  @removed(Versions.v2026_01_01_preview)
   @doc("Based on configurable thresholds.")
   Thresholds: "Thresholds",
+
+  @added(Versions.v2026_01_01_preview)
+  @doc("Healthy if the count/percentage of healthy children meets the threshold.")
+  MinHealthy: "MinHealthy",
+
+  @added(Versions.v2026_01_01_preview)
+  @doc("Healthy if the count/percentage of not-healthy children stays below the threshold.")
+  MaxNotHealthy: "MaxNotHealthy",
+}
+
+@added(Versions.v2026_01_01_preview)
+@doc("Unit type for dependency aggregation thresholds.")
+union DependenciesAggregationUnit {
+  string,
+
+  @doc("Threshold is an absolute count of entities.")
+  Absolute: "Absolute",
+
+  @doc("Threshold is a percentage of entities (0-100).")
+  Percentage: "Percentage",
 }
 
 @removed(Versions.v2026_01_01_preview)
@@ -737,7 +783,7 @@ model AzureResourceSignal extends SignalInstanceProperties {
 
   ...OptionalProperties<OmitProperties<
     ResourceMetricSignalDefinitionProperties,
-    "provisioningState" | "deletionDate" | "tags" | "signalKind"
+    "provisioningState" | "tags" | "signalKind"
   >>;
 }
 
@@ -749,7 +795,7 @@ model LogAnalyticsSignal extends SignalInstanceProperties {
 
   ...OptionalProperties<OmitProperties<
     LogAnalyticsQuerySignalDefinitionProperties,
-    "provisioningState" | "deletionDate" | "tags" | "signalKind"
+    "provisioningState" | "tags" | "signalKind"
   >>;
 }
 
@@ -761,7 +807,7 @@ model PrometheusMetricsSignal extends SignalInstanceProperties {
 
   ...OptionalProperties<OmitProperties<
     PrometheusMetricsSignalDefinitionProperties,
-    "provisioningState" | "deletionDate" | "tags" | "signalKind"
+    "provisioningState" | "tags" | "signalKind"
   >>;
 }
 
@@ -943,6 +989,7 @@ model RelationshipProperties {
   @doc("Discovered by which discovery rule. If set, the relationship cannot be deleted manually.")
   discoveredBy?: discoveryRuleName;
 
+  @removed(Versions.v2026_01_01_preview)
   @visibility(Lifecycle.Read)
   @doc("Date when the relationship was (soft-)deleted")
   deletionDate?: utcDateTime;
@@ -992,6 +1039,7 @@ model DiscoveryRuleProperties {
   @doc("Specification of the discovery rule defining how entities are discovered.")
   specification: DiscoveryRuleSpecification;
 
+  @removed(Versions.v2026_01_01_preview)
   @visibility(Lifecycle.Read)
   @doc("Date when the discovery rule was (soft-)deleted.")
   deletionDate?: utcDateTime;
@@ -1195,7 +1243,7 @@ model HealthReportRequest {
   @doc("Number of minutes until the health report expires. Defaults to 60 (1 hour) if not specified.")
   @minValue(1)
   @maxValue(10080) // = 1 week
-  expiresIn?: int32 = 60;
+  expiresInMinutes?: int32 = 60;
 
   @doc("Optional additional context or description for the health report")
   additionalContext?: string4096;

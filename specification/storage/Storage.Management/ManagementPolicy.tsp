@@ -15,6 +15,7 @@ namespace Microsoft.Storage;
  * The Get Storage Account ManagementPolicies operation response.
  */
 @parentResource(StorageAccount)
+@singleton
 model ManagementPolicy
   is Azure.ResourceManager.ProxyResource<ManagementPolicyProperties> {
   ...ResourceNameParameter<
@@ -26,27 +27,52 @@ model ManagementPolicy
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Legacy operations to preserve path parameter for singleton resource"
+interface ManagementPolicyOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        @doc("The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.")
+        @path
+        @segment("storageAccounts")
+        @minLength(3)
+        @maxLength(24)
+        @pattern("^[a-z0-9]+$")
+        accountName: string,
+      },
+      {
+        @doc("The name of the Storage Account Management Policy. It should always be 'default'")
+        @path
+        @segment("managementPolicies")
+        managementPolicyName: ManagementPolicyName,
+      },
+      ErrorType = ErrorResponse
+    > {}
+
 @armResourceOperations
 interface ManagementPolicies {
   /**
    * Gets the managementpolicy associated with the specified storage account.
    */
-  get is ArmResourceRead<ManagementPolicy, Error = ErrorResponse>;
+  get is ManagementPolicyOps.Read<ManagementPolicy>;
 
   /**
    * Sets the managementpolicy to the specified storage account.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is ManagementPolicyOps.CreateOrUpdateSync<
     ManagementPolicy,
-    Response = ArmResourceUpdatedResponse<ManagementPolicy>,
-    Error = ErrorResponse
+    Response = ArmResourceUpdatedResponse<ManagementPolicy>
   >;
 
   /**
    * Deletes the managementpolicy associated with the specified storage account.
    */
-  delete is ArmResourceDeleteSync<ManagementPolicy, Error = ErrorResponse>;
+  delete is ManagementPolicyOps.DeleteSync<ManagementPolicy>;
 }
 
 @@doc(ManagementPolicy.name,

@@ -1,0 +1,71 @@
+{
+  "title": "AgentSpacesConnectors_CreateOrUpdate",
+  "operationId": "AgentSpacesConnectors_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
+    "resourceGroupName": "examplerg",
+    "agentSpaceName": "testAgentSpace",
+    "connectorName": "new-shared-cosmosdb-connector",
+    "api-version": "2026-01-01",
+    "resource": {
+      "properties": {
+        "dataConnectorType": "Kusto",
+        "endpoint": "https://newsharedkusto.kusto.windows.net",
+        "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/sharedCosmosIdentity",
+        "extendedProperties": {
+          "environment": "production",
+          "owner": "alice",
+          "additionalEndpoints": [
+            "https://foo.kusto.windows.net/databasename",
+            "https://bar.kusto.windows.net/databasename"
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agentSpaces/testAgentSpace/connectors/new-shared-cosmosdb-connector",
+        "name": "new-shared-cosmosdb-connector",
+        "type": "Microsoft.App/agentSpaces/connectors",
+        "properties": {
+          "dataConnectorType": "CosmosDB",
+          "endpoint": "https://newsharedcosmos.documents.azure.com:443/",
+          "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/sharedCosmosIdentity",
+          "extendedProperties": {
+            "environment": "production",
+            "owner": "alice",
+            "additionalEndpoints": [
+              "https://foo.kusto.windows.net/databasename",
+              "https://bar.kusto.windows.net/databasename"
+            ]
+          }
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/providers/Microsoft.App/locations/eastus/operationStatuses/12345678-1234-1234-1234-123456789012"
+      },
+      "body": {
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agentSpaces/testAgentSpace/connectors/new-shared-cosmosdb-connector",
+        "name": "new-shared-cosmosdb-connector",
+        "type": "Microsoft.App/agentSpaces/connectors",
+        "properties": {
+          "dataConnectorType": "CosmosDB",
+          "endpoint": "https://newsharedcosmos.documents.azure.com:443/",
+          "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/sharedCosmosIdentity",
+          "extendedProperties": {
+            "environment": "production",
+            "owner": "alice",
+            "additionalEndpoints": [
+              "https://foo.kusto.windows.net/databasename",
+              "https://bar.kusto.windows.net/databasename"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

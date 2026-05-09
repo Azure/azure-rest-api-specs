@@ -224,3 +224,14 @@ using Microsoft.AppComplianceAutomation;
   "TriggerEvaluationProviderAction",
   "csharp"
 );
+
+// CSharp SDK: Preserve API compatibility — these output-only models were previously round-trip
+@@usage(Category, Usage.input, "csharp");
+@@usage(Control, Usage.input, "csharp");
+@@usage(Responsibility, Usage.input, "csharp");
+@@usage(Recommendation, Usage.input, "csharp");
+@@usage(RecommendationSolution, Usage.input, "csharp");
+@@usage(OverviewStatus, Usage.input, "csharp");
+@@usage(ResponsibilityResource, Usage.input, "csharp");
+@@usage(ControlFamily, Usage.input, "csharp");
+@@usage(ComplianceResult, Usage.input, "csharp");

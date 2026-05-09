@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2024-10-23",
+    "automationAccountName": "MyAutomationAccount",
+    "moduleName": "MyModule",
+    "resourceGroupName": "rg",
+    "subscriptionId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+    "typeName": "MyCustomType"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "Name",
+            "type": "System.String"
+          },
+          {
+            "name": "Id",
+            "type": "System.Integer"
+          },
+          {
+            "name": "Details",
+            "type": "MyModule.AnotherCustomType"
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ObjectDataTypes_ListFieldsByModuleAndType",
+  "title": "Get a list of fields of a given type"
+}

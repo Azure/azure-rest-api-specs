@@ -1,0 +1,158 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./Database.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
+
+namespace Microsoft.Sql;
+/**
+ * An Azure SQL Database sync group.
+ */
+@parentResource(Database)
+model SyncGroup is Azure.ResourceManager.ProxyResource<SyncGroupProperties> {
+  ...ResourceNameParameter<
+    Resource = SyncGroup,
+    KeyName = "syncGroupName",
+    SegmentName = "syncGroups",
+    NamePattern = ""
+  >;
+
+  /**
+   * The name and capacity of the SKU.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  sku?: Sku;
+
+  /**
+   * Sync group authentication information.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2025_02_01_preview)
+  identity?: DataSyncParticipantIdentity;
+}
+
+@armResourceOperations
+interface SyncGroups {
+  /**
+   * Gets a sync group.
+   */
+  get is ArmResourceRead<SyncGroup>;
+
+  /**
+   * Creates or updates a sync group.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    SyncGroup,
+    Response = ArmResourceUpdatedResponse<SyncGroup> | ArmResourceCreatedResponse<
+      SyncGroup,
+      ArmLroLocationHeader<FinalResult = SyncGroup> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > | ArmAcceptedLroResponse
+  >;
+
+  /**
+   * Updates a sync group.
+   */
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchAsync<SyncGroup, PatchModel = SyncGroup>;
+
+  /**
+   * Deletes a sync group.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  delete is ArmResourceDeleteWithoutOkAsync<
+    SyncGroup,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
+
+  /**
+   * Lists sync groups under a hub database.
+   */
+  listByDatabase is ArmResourceListByParent<SyncGroup>;
+
+  /**
+   * Cancels a sync group synchronization.
+   */
+  cancelSync is ArmResourceActionSync<SyncGroup, void, OkResponse>;
+
+  /**
+   * Gets a collection of hub database schemas.
+   */
+  @list
+  @get
+  @action("hubSchemas")
+  listHubSchemas is ArmResourceActionSync<
+    SyncGroup,
+    void,
+    ArmResponse<SyncFullSchemaPropertiesListResult>
+  >;
+
+  /**
+   * Gets a collection of sync group logs.
+   */
+  @list
+  @get
+  @action("logs")
+  listLogs is ArmResourceActionSync<
+    SyncGroup,
+    void,
+    ArmResponse<SyncGroupLogListResult>,
+    Parameters = {
+      /**
+       * Get logs generated after this time.
+       */
+      @query("startTime")
+      startTime: string;
+
+      /**
+       * Get logs generated before this time.
+       */
+      @query("endTime")
+      endTime: string;
+
+      /**
+       * The types of logs to retrieve.
+       */
+      @query("type")
+      type: SyncGroupsType;
+
+      /**
+       * The continuation token for this operation.
+       */
+      @query("continuationToken")
+      continuationToken?: string;
+    }
+  >;
+
+  /**
+   * Refreshes a hub database schema.
+   */
+  refreshHubSchema is ArmResourceActionAsyncBase<
+    SyncGroup,
+    void,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<SyncGroup>,
+    Response = OkResponse | ArmAcceptedLroResponse
+  >;
+
+  /**
+   * Triggers a sync group synchronization.
+   */
+  triggerSync is ArmResourceActionSync<SyncGroup, void, OkResponse>;
+}
+
+@@doc(SyncGroup.name, "The name of the sync group.");
+@@doc(SyncGroup.properties, "Resource properties.");
+@@doc(SyncGroups.createOrUpdate::parameters.resource,
+  "The requested sync group resource state."
+);
+@@doc(SyncGroups.update::parameters.properties,
+  "The requested sync group resource state."
+);

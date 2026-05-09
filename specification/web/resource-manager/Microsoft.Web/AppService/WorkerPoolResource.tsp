@@ -102,7 +102,8 @@ alias WorkerPoolInstanceMetricActionParamsOps = Azure.ResourceManager.Legacy.Rou
 >;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations(#{ allowStaticRoutes: true })
+@tag("AppServiceEnvironments")
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface WorkerPoolResources {
   /**
    * Description for Get properties of a multi-role pool.

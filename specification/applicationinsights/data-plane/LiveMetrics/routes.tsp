@@ -24,7 +24,7 @@ op isSubscribed is LiveMetricsOperation<
   IsSubscribedOperationRequestParameters,
   {
     ...IsSubscribedOperationResponseHeaders;
-    ...CollectionConfigurationInfo;
+    @body body?: CollectionConfigurationInfo;
   }
 >;
 
@@ -36,6 +36,6 @@ op publish is LiveMetricsOperation<
   PublishOperationRequestParameters,
   {
     ...PublishOperationResponseHeaders;
-    ...CollectionConfigurationInfo;
+    @body body?: CollectionConfigurationInfo;
   }
 >;
