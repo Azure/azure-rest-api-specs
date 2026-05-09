@@ -299,12 +299,24 @@ using TypeSpec.Versioning;
 @@clientName(ExecuteHibernateRequest, "ExecuteHibernateContent", "!javascript");
 @@clientName(CancelOperationsRequest, "CancelOperationsContent", "!javascript");
 @@clientName(ExecuteCreateRequest, "ExecuteCreateContent", "!javascript");
-@@clientName(ExecuteCreateFlexRequest, "ExecuteCreateFlexContent", "!javascript");
-@@clientName(ExecuteDeallocateRequest, "ExecuteDeallocateContent", "!javascript");
+@@clientName(ExecuteCreateFlexRequest,
+  "ExecuteCreateFlexContent",
+  "!javascript"
+);
+@@clientName(ExecuteDeallocateRequest,
+  "ExecuteDeallocateContent",
+  "!javascript"
+);
 @@clientName(ExecuteDeleteRequest, "ExecuteDeleteContent", "!javascript");
 @@clientName(ExecuteStartRequest, "ExecuteStartContent", "!javascript");
-@@clientName(GetOperationErrorsRequest, "GetOperationErrorsContent", "!javascript");
-@@clientName(GetOperationStatusRequest, "GetOperationStatusContent", "!javascript");
+@@clientName(GetOperationErrorsRequest,
+  "GetOperationErrorsContent",
+  "!javascript"
+);
+@@clientName(GetOperationStatusRequest,
+  "GetOperationStatusContent",
+  "!javascript"
+);
 @@clientName(SubmitStartRequest, "SubmitStartContent", "!javascript");
 @@clientName(SubmitHibernateRequest, "SubmitHibernateContent", "!javascript");
 @@clientName(ScheduledActionsExtensionProperties,
