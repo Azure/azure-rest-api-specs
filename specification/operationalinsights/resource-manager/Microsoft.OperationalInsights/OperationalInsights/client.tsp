@@ -31,8 +31,7 @@ using Microsoft.OperationalInsights;
 );
 
 /**
- * Compatible provisioning state enum for backward compatibility, merging values from
- * OperationalInsightsTableProvisioningState and ProvisioningStateEnum.
+ * Table's current provisioning state. If set to 'updating', indicates a resource lock due to ongoing operation, forbidding any update to the table until the ongoing operation is concluded.
  */
 union CompatibleProvisioningStateEnum {
   string,
