@@ -310,6 +310,16 @@ using Azure.AI.Projects;
 @@clientName(SessionFileWriteResponse, "SessionFileWriteResult", "python");
 
 // --------------------------------------------------------------------------------
+// Evaluation Taxonomies sub-client
+// --------------------------------------------------------------------------------
+
+// Note that we can't rename it in src\openai-evaluations\models.tsp, since in 
+// src\evaluations\models.tsp we already define EvaluationTarget (not for v1).
+// If/when src\evaluations will be removed, consider doing the rename in 
+// src\openai-evaluations\models.tsp instead.
+@@clientName(Target, "EvaluationTarget");
+
+// --------------------------------------------------------------------------------
 // To support custom client-side handling of "opt-in" to preview features.
 // --------------------------------------------------------------------------------
 
