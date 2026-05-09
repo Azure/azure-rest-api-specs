@@ -12106,7 +12106,7 @@
             "name": "include",
             "in": "query",
             "required": false,
-            "description": "Additional related data to include in the response. Values are comma-separated expansion names such as latest_attempt, input_datasets, output_datasets, execution_definition, services, log_files, and job_cost.",
+            "description": "Additional related data to include in the response. Values are comma-separated expansion names such as run_metadata, latest_attempt, input_datasets, output_datasets, execution_definition, /nodes/{node_id}/services, log_files, and job_cost.",
             "schema": {
               "$ref": "#/components/schemas/TrainingJobInclude"
             },
@@ -12900,6 +12900,192 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/JobArtifact"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "TrainingJobs"
+        ]
+      }
+    },
+    "/training_jobs/{job_name}/attempts/{attempt_id}/inputs": {
+      "get": {
+        "operationId": "TrainingJobAttemptInputs_listAttemptInputs",
+        "description": "List execution-view inputs recorded for a specific training job attempt.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "TrainingJobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "job_name",
+            "in": "path",
+            "required": true,
+            "description": "The training job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attempt_id",
+            "in": "path",
+            "required": true,
+            "description": "The attempt identifier, or 'latest' for the latest attempt.",
+            "schema": {
+              "$ref": "#/components/schemas/JobAttemptIdentifier"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "has_more"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/JobExecutionAssetReference"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "first_id": {
+                      "type": "string",
+                      "description": "The first ID represented in this list."
+                    },
+                    "last_id": {
+                      "type": "string",
+                      "description": "The last ID represented in this list."
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    },
+                    "next_after": {
+                      "type": "string",
+                      "description": "Opaque cursor to pass as the next request's after value when has_more is true.",
+                      "readOnly": true
+                    }
+                  },
+                  "description": "The response data for a requested list of training job items."
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "TrainingJobs"
+        ]
+      }
+    },
+    "/training_jobs/{job_name}/attempts/{attempt_id}/inputs/{input_name}": {
+      "get": {
+        "operationId": "TrainingJobAttemptInputs_getAttemptInput",
+        "description": "Get one execution-view input recorded for a specific training job attempt.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "TrainingJobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "job_name",
+            "in": "path",
+            "required": true,
+            "description": "The training job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attempt_id",
+            "in": "path",
+            "required": true,
+            "description": "The attempt identifier, or 'latest' for the latest attempt.",
+            "schema": {
+              "$ref": "#/components/schemas/JobAttemptIdentifier"
+            }
+          },
+          {
+            "name": "input_name",
+            "in": "path",
+            "required": true,
+            "description": "The input name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobExecutionAssetReference"
                 }
               }
             }
@@ -13755,7 +13941,7 @@
     "/training_jobs/{job_name}/attempts/{attempt_id}/outputs": {
       "get": {
         "operationId": "TrainingJobAttemptOutputs_listAttemptOutputs",
-        "description": "List outputs produced by a specific training job attempt.",
+        "description": "List execution-view outputs recorded for a specific training job attempt.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -13813,7 +13999,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/JobOutputReference"
+                        "$ref": "#/components/schemas/JobExecutionAssetReference"
                       },
                       "description": "The requested list of items."
                     },
@@ -13859,7 +14045,7 @@
     "/training_jobs/{job_name}/attempts/{attempt_id}/outputs/{output_name}": {
       "get": {
         "operationId": "TrainingJobAttemptOutputs_getAttemptOutput",
-        "description": "Get one output produced by a specific training job attempt.",
+        "description": "Get one execution-view output recorded for a specific training job attempt.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -13917,7 +14103,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/JobOutputReference"
+                  "$ref": "#/components/schemas/JobExecutionAssetReference"
                 }
               }
             }
@@ -13938,10 +14124,10 @@
         ]
       }
     },
-    "/training_jobs/{job_name}/outputs": {
+    "/training_jobs/{job_name}/inputs": {
       "get": {
-        "operationId": "TrainingJobOutputs_listOutputs",
-        "description": "List outputs produced by a training job.",
+        "operationId": "TrainingJobInputs_listInputs",
+        "description": "List execution-view inputs recorded for a training job.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -13990,7 +14176,249 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/JobOutputReference"
+                        "$ref": "#/components/schemas/JobExecutionAssetReference"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "first_id": {
+                      "type": "string",
+                      "description": "The first ID represented in this list."
+                    },
+                    "last_id": {
+                      "type": "string",
+                      "description": "The last ID represented in this list."
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    },
+                    "next_after": {
+                      "type": "string",
+                      "description": "Opaque cursor to pass as the next request's after value when has_more is true.",
+                      "readOnly": true
+                    }
+                  },
+                  "description": "The response data for a requested list of training job items."
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "TrainingJobs"
+        ]
+      }
+    },
+    "/training_jobs/{job_name}/inputs/{input_name}": {
+      "get": {
+        "operationId": "TrainingJobInputs_getInput",
+        "description": "Get one execution-view input recorded for a training job.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "TrainingJobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "job_name",
+            "in": "path",
+            "required": true,
+            "description": "The training job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "input_name",
+            "in": "path",
+            "required": true,
+            "description": "The input name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobExecutionAssetReference"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "TrainingJobs"
+        ]
+      }
+    },
+    "/training_jobs/{job_name}/nodes/{node_id}/services": {
+      "get": {
+        "operationId": "TrainingJobs_showServices",
+        "description": "List service endpoints for a selected node of a training job.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "TrainingJobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "job_name",
+            "in": "path",
+            "required": true,
+            "description": "The training job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "node_id",
+            "in": "path",
+            "required": true,
+            "description": "The node identifier.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TrainingJobServiceCollection"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "TrainingJobs"
+        ]
+      }
+    },
+    "/training_jobs/{job_name}/outputs": {
+      "get": {
+        "operationId": "TrainingJobOutputs_listOutputs",
+        "description": "List execution-view outputs recorded for a training job.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "TrainingJobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "job_name",
+            "in": "path",
+            "required": true,
+            "description": "The training job name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "has_more"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/JobExecutionAssetReference"
                       },
                       "description": "The requested list of items."
                     },
@@ -14036,7 +14464,7 @@
     "/training_jobs/{job_name}/outputs/{output_name}": {
       "get": {
         "operationId": "TrainingJobOutputs_getOutput",
-        "description": "Get one output produced by a training job.",
+        "description": "Get one execution-view output recorded for a training job.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -14085,82 +14513,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/JobOutputReference"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "TrainingJobs"
-        ]
-      }
-    },
-    "/training_jobs/{job_name}/services": {
-      "get": {
-        "operationId": "TrainingJobs_showServices",
-        "description": "List service endpoints for the current view of a training job.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "TrainingJobs=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "job_name",
-            "in": "path",
-            "required": true,
-            "description": "The training job name.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "node_id",
-            "in": "query",
-            "required": false,
-            "description": "Node identifier whose service endpoints should be returned. If omitted, leader-node services are returned.",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "explode": false
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TrainingJobServiceCollection"
+                  "$ref": "#/components/schemas/JobExecutionAssetReference"
                 }
               }
             }
@@ -20976,6 +21329,48 @@
             "description": "Status of the job.",
             "readOnly": true
           },
+          "run_metadata": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Run-centric metadata projected onto the training job. This field is omitted unless requested with include=run_metadata. The payload mirrors the backing run metadata and includes execution-view inputs and outputs keyed by name.",
+            "readOnly": true
+          },
+          "created_at": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "Run creation time projected onto the training job.",
+            "readOnly": true
+          },
+          "started_at": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "Run start time projected onto the training job.",
+            "readOnly": true
+          },
+          "ended_at": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "Run end time projected onto the training job.",
+            "readOnly": true
+          },
+          "updated_at": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "Run last-modified time projected onto the training job.",
+            "readOnly": true
+          },
           "latest_attempt": {
             "allOf": [
               {
@@ -21034,7 +21429,7 @@
             "additionalProperties": {
               "$ref": "#/components/schemas/TrainingJobService"
             },
-            "description": "Service endpoints for the current job run. This field is omitted unless requested with include=services.",
+            "description": "Service endpoints for the selected node. This field is omitted unless requested with include=/nodes/{node_id}/services.",
             "readOnly": true
           },
           "log_files": {
@@ -21628,6 +22023,30 @@
         },
         "description": "Request body for creating a training job."
       },
+      "JobExecutionAssetReference": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Input or output name.",
+            "readOnly": true
+          },
+          "type": {
+            "type": "string",
+            "description": "Execution-view asset type as recorded by the backing run.",
+            "readOnly": true
+          },
+          "asset_id": {
+            "type": "string",
+            "description": "Execution-view asset identifier.",
+            "readOnly": true
+          }
+        },
+        "description": "Named execution-view asset recorded for a job or attempt."
+      },
       "JobMetric": {
         "type": "object",
         "required": [
@@ -22029,63 +22448,6 @@
           }
         ],
         "description": "Status of an asynchronous training job operation."
-      },
-      "JobOutputReference": {
-        "type": "object",
-        "required": [
-          "name"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Output name.",
-            "readOnly": true
-          },
-          "type": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AssetTypes"
-              }
-            ],
-            "description": "Output asset type.",
-            "readOnly": true
-          },
-          "mode": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/InputOutputModes"
-              }
-            ],
-            "description": "Output delivery mode.",
-            "readOnly": true
-          },
-          "uri": {
-            "type": "string",
-            "description": "Output storage URI.",
-            "readOnly": true
-          },
-          "asset_name": {
-            "type": "string",
-            "description": "Registered asset name, if the output produced an asset.",
-            "readOnly": true
-          },
-          "asset_version": {
-            "type": "string",
-            "description": "Registered asset version, if the output produced an asset.",
-            "readOnly": true
-          },
-          "base_model_id": {
-            "type": "string",
-            "description": "Base model ID for model outputs.",
-            "readOnly": true
-          },
-          "description": {
-            "type": "string",
-            "description": "Output description.",
-            "readOnly": true
-          }
-        },
-        "description": "Named output produced by a job."
       },
       "JobResourceConfiguration": {
         "type": "object",
@@ -47074,6 +47436,7 @@
           {
             "type": "string",
             "enum": [
+              "run_metadata",
               "latest_attempt",
               "input_datasets",
               "output_datasets",
@@ -47081,7 +47444,6 @@
               "resolved_specification",
               "parameters",
               "settings",
-              "services",
               "log_files",
               "job_cost",
               "compute_request",
