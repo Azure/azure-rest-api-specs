@@ -3,6 +3,7 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 using Microsoft.ExtendedLocation;
+using Azure.Core;
 using Azure.ResourceManager;
 
 @@clientName(Microsoft.ExtendedLocation,
@@ -32,16 +33,16 @@ using Azure.ResourceManager;
 
 // Map custom Identity model to ARM common type ManagedServiceIdentity
 @@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
-  Azure.Core.armResourceIdentifier,
+  armResourceIdentifier,
   "csharp"
 );
 
 @@alternateType(customLocation.identity,
-  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
 @@alternateType(patchableCustomLocations.identity,
-  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
 
@@ -56,15 +57,15 @@ using Azure.ResourceManager;
 
 // Fix property types to match previous GA API surface
 @@alternateType(customLocationProperties.clusterExtensionIds,
-  Azure.Core.armResourceIdentifier[],
+  armResourceIdentifier[],
   "csharp"
 );
 @@alternateType(customLocationProperties.hostResourceId,
-  Azure.Core.armResourceIdentifier,
+  armResourceIdentifier,
   "csharp"
 );
 @@alternateType(EnabledResourceTypeProperties.clusterExtensionId,
-  Azure.Core.armResourceIdentifier,
+  armResourceIdentifier,
   "csharp"
 );
 
@@ -74,10 +75,10 @@ using Azure.ResourceManager;
   "csharp"
 );
 
-// Make EnabledResourceType and EnabledResourceTypeMetadata input+output to preserve public ctors and setters
-@@usage(EnabledResourceType, Usage.input | Usage.output, "csharp");
+// Make EnabledResourceType and EnabledResourceTypeMetadata input to preserve public ctors and setters
+@@usage(EnabledResourceType, Usage.input, "csharp");
 @@usage(EnabledResourceTypePropertiesTypesMetadataItem,
-  Usage.input | Usage.output,
+  Usage.input,
   "csharp"
 );
 // disable update for custom locations as https://github.com/Azure/autorest.typescript/issues/3919
