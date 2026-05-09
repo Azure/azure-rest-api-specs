@@ -54,7 +54,3 @@ enum CompatibleProvisioningStateEnum {
 
 // Fix etag casing for backward compatibility
 @@clientName(Microsoft.OperationalInsights.SearchMetadata.eTag, "etag", "java");
-@@clientName(Microsoft.OperationalInsights.AzureEntityResource.etag,
-  "etag",
-  "java"
-);
