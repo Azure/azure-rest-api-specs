@@ -1,6 +1,6 @@
 import "../agents/routes.tsp";
 import "../agents-containers/routes.tsp";
-import "../agents-websocket/routes.tsp";
+import "../agents-invocations_ws/routes.tsp";
 import "../common/models.tsp";
 import "../common/service.tsp";
 import "../memory-stores/routes.tsp";
