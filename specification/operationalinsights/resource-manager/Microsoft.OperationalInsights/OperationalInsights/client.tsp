@@ -23,3 +23,38 @@ using Microsoft.OperationalInsights;
   global.AccessRulePropertiesSubscriptionsItem[],
   "java"
 );
+
+// Rename existing ProvisioningStateEnum to ProvisioningState for Java to deduplicate
+@@clientName(Microsoft.OperationalInsights.ProvisioningStateEnum,
+  "ProvisioningState",
+  "java"
+);
+
+// Create compatible ProvisioningStateEnum for backward compatibility
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Backward compatibility for Java SDK by merging provisioning state values"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Mirror enum for backward compatibility"
+enum CompatibleProvisioningStateEnum {
+  Updating: "Updating",
+  InProgress: "InProgress",
+  Succeeded: "Succeeded",
+  Deleting: "Deleting",
+  Failed: "Failed",
+  Canceled: "Canceled",
+}
+@@clientName(CompatibleProvisioningStateEnum, "ProvisioningStateEnum", "java");
+
+@@alternateType(Microsoft.OperationalInsights.TableProperties.provisioningState,
+  CompatibleProvisioningStateEnum,
+  "java"
+);
+@@alternateType(Microsoft.OperationalInsights.SummaryLogsProperties.provisioningState,
+  CompatibleProvisioningStateEnum,
+  "java"
+);
+
+// Fix etag casing for backward compatibility
+@@clientName(Microsoft.OperationalInsights.SearchMetadata.eTag, "etag", "java");
+@@clientName(Microsoft.OperationalInsights.AzureEntityResource.etag,
+  "etag",
+  "java"
+);
