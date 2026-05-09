@@ -45,3 +45,11 @@ using Microsoft.AlertsManagement;
 
 // C# customizations: rename overly-generic model name to add resource context.
 @@clientName(RuleArmTemplate, "AlertRuleRecommendationArmTemplate", "csharp");
+
+// C# customizations: drop the "Resource" suffix on this body model. The mgmt InheritanceCheck
+// test fails for any public type ending with "Resource" that does not derive from ArmResource;
+// AlertRuleRecommendationResource is a list-response model, not an ARM resource.
+@@clientName(AlertRuleRecommendationResource,
+  "AlertRuleRecommendation",
+  "csharp"
+);
