@@ -17,12 +17,12 @@ using Microsoft.DevCenter;
 
 @@clientName(Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentity,
   "CustomerManagedKeyEncryptionKeyIdentity",
-  "java"
+  "java,go"
 );
 
 @@clientName(Microsoft.DevCenter.KeyEncryptionKeyIdentity,
   "DevCenterKeyEncryptionKeyIdentity",
-  "csharp,go"
+  "csharp"
 );
 
 @@clientName(Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentityType,
