@@ -249,5 +249,5 @@ interface RecommendationsPatch {
      */
     @bodyRoot
     statePropertiesPayload: RecommendationsPatchPayload,
-  ): ArmResponse<RecommendationsPatchPayload> | ArmDefaultErrorResponse;
+  ): RecommendationsPatchPayload | ArmDefaultErrorResponse;
 }
