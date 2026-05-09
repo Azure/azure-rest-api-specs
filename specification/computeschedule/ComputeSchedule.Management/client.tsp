@@ -295,30 +295,18 @@ using TypeSpec.Versioning;
 );
 @@clientName(Microsoft.ComputeSchedule.ActionType, "ScheduledActionType");
 
-@@clientName(SubmitDeallocateRequest, "SubmitDeallocateContent", "!javascript");
-@@clientName(ExecuteHibernateRequest, "ExecuteHibernateContent", "!javascript");
-@@clientName(CancelOperationsRequest, "CancelOperationsContent", "!javascript");
-@@clientName(ExecuteCreateRequest, "ExecuteCreateContent", "!javascript");
-@@clientName(ExecuteCreateFlexRequest,
-  "ExecuteCreateFlexContent",
-  "!javascript"
-);
-@@clientName(ExecuteDeallocateRequest,
-  "ExecuteDeallocateContent",
-  "!javascript"
-);
-@@clientName(ExecuteDeleteRequest, "ExecuteDeleteContent", "!javascript");
-@@clientName(ExecuteStartRequest, "ExecuteStartContent", "!javascript");
-@@clientName(GetOperationErrorsRequest,
-  "GetOperationErrorsContent",
-  "!javascript"
-);
-@@clientName(GetOperationStatusRequest,
-  "GetOperationStatusContent",
-  "!javascript"
-);
-@@clientName(SubmitStartRequest, "SubmitStartContent", "!javascript");
-@@clientName(SubmitHibernateRequest, "SubmitHibernateContent", "!javascript");
+@@clientName(SubmitDeallocateRequest, "SubmitDeallocateContent", "csharp");
+@@clientName(ExecuteHibernateRequest, "ExecuteHibernateContent", "csharp");
+@@clientName(CancelOperationsRequest, "CancelOperationsContent", "csharp");
+@@clientName(ExecuteCreateRequest, "ExecuteCreateContent", "csharp");
+@@clientName(ExecuteCreateFlexRequest, "ExecuteCreateFlexContent", "csharp");
+@@clientName(ExecuteDeallocateRequest, "ExecuteDeallocateContent", "csharp");
+@@clientName(ExecuteDeleteRequest, "ExecuteDeleteContent", "csharp");
+@@clientName(ExecuteStartRequest, "ExecuteStartContent", "csharp");
+@@clientName(GetOperationErrorsRequest, "GetOperationErrorsContent", "csharp");
+@@clientName(GetOperationStatusRequest, "GetOperationStatusContent", "csharp");
+@@clientName(SubmitStartRequest, "SubmitStartContent", "csharp");
+@@clientName(SubmitHibernateRequest, "SubmitHibernateContent", "csharp");
 @@clientName(ScheduledActionsExtensionProperties,
   "ScheduledActionsExtensionProperties"
 );
