@@ -30,15 +30,41 @@ using Microsoft.OperationalInsights;
   "java"
 );
 
-// Create compatible ProvisioningStateEnum for backward compatibility
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Mirror union for backward compatibility"
+/**
+ * Compatible provisioning state enum for backward compatibility, merging values from
+ * OperationalInsightsTableProvisioningState and ProvisioningStateEnum.
+ */
 union CompatibleProvisioningStateEnum {
   string,
+
+  /**
+   * Table schema is still being built and updated, table is currently locked for any changes till the procedure is done.
+   */
   Updating: "Updating",
+
+  /**
+   * Table schema is stable and without changes, table data is being updated.
+   */
   InProgress: "InProgress",
+
+  /**
+   * Table state is stable and without changes, table is unlocked and open for new updates.
+   */
   Succeeded: "Succeeded",
+
+  /**
+   * Table state is deleting.
+   */
   Deleting: "Deleting",
+
+  /**
+   * Table state is failed.
+   */
   Failed: "Failed",
+
+  /**
+   * Table state is canceled.
+   */
   Canceled: "Canceled",
 }
 @@clientName(CompatibleProvisioningStateEnum, "ProvisioningStateEnum", "java");
