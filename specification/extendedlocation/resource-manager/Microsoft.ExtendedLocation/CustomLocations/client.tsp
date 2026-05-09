@@ -75,6 +75,12 @@ using Azure.ResourceManager;
   "csharp"
 );
 
+// Rename it so that its meaning is immediately apparent.
+@@clientName(matchExpressionsProperties,
+  "ResourceSyncRuleMatchExpression",
+  "csharp"
+);
+
 // Make EnabledResourceType and EnabledResourceTypeMetadata input to preserve public ctors and setters
 @@usage(EnabledResourceType, Usage.input, "csharp");
 @@usage(EnabledResourceTypePropertiesTypesMetadataItem, Usage.input, "csharp");
