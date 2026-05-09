@@ -2,8 +2,7 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
-
-namespace Microsoft.Monitor;
+using Microsoft.Monitor;
 
 // Hide SloView (sliSignalPreview) operations from public SDK generation.
 // The SloView interface and its exclusively-used models (SignalPreviewSliProperties,
