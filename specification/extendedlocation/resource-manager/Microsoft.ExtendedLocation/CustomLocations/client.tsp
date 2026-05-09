@@ -77,10 +77,7 @@ using Azure.ResourceManager;
 
 // Make EnabledResourceType and EnabledResourceTypeMetadata input to preserve public ctors and setters
 @@usage(EnabledResourceType, Usage.input, "csharp");
-@@usage(EnabledResourceTypePropertiesTypesMetadataItem,
-  Usage.input,
-  "csharp"
-);
+@@usage(EnabledResourceTypePropertiesTypesMetadataItem, Usage.input, "csharp");
 // disable update for custom locations as https://github.com/Azure/autorest.typescript/issues/3919
 // @@override(CustomLocations.update, customLocationsUpdate, "javascript");
 // #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
