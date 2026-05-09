@@ -4,6 +4,7 @@ import "../models/AccessControlList.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
@@ -20,7 +21,7 @@ model AccessControlList
   @visibility(Lifecycle.Read)
   name: string;
 
-  /** The Access ControlList properties */
+  @doc("The Access ControlList properties.")
   properties: AccessControlListProperties;
 }
 
@@ -40,16 +41,36 @@ interface AccessControlLists {
   delete is ArmResourceDeleteWithoutOkAsync<AccessControlList>;
 
   @doc("Implements AccessControlLists list by resource group GET method.")
-  listByResourceGroup is ArmResourceListByParent<AccessControlList>;
+  listByResourceGroup is ArmResourceListByParent<
+    AccessControlList,
+    Response = AccessControlListsListResult
+  >;
 
   @doc("Implements AccessControlLists list by subscription GET method.")
-  listBySubscription is ArmListBySubscription<AccessControlList>;
+  listBySubscription is ArmListBySubscription<
+    AccessControlList,
+    Response = AccessControlListsListResult
+  >;
 
   @doc("Implements the operation to the underlying resources.")
-  updateAdministrativeState is ArmResourceActionAsync<
+  @action("updateAdministrativeState")
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "updateAdministrativeState")
+  @sharedRoute
+  updateAdministrativeStateDeprecated is ArmResourceActionAsync<
     AccessControlList,
     UpdateAdministrativeState,
     CommonPostActionResponseForStateUpdate
+  >;
+
+  @doc("Implements the operation to the underlying resources.")
+  @action("updateAdministrativeState")
+  @added(Versions.v2025_07_15)
+  @sharedRoute
+  updateAdministrativeState is ArmResourceActionAsync<
+    AccessControlList,
+    UpdateAdministrativeState,
+    UpdateAdministrativeStateResponse
   >;
 
   @doc("Implements the operation to the underlying resources.")
@@ -71,6 +92,12 @@ interface AccessControlLists {
 @@doc(AccessControlLists.update::parameters.properties,
   "Access Control List properties to update."
 );
+@@doc(AccessControlLists.updateAdministrativeStateDeprecated::parameters.body,
+  "Request payload."
+);
 @@doc(AccessControlLists.updateAdministrativeState::parameters.body,
+  "Request payload."
+);
+@@doc(AccessControlLists.validateConfiguration::parameters.body,
   "Request payload."
 );

@@ -54,7 +54,8 @@ interface SiteAuthSettingsV2Ops
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface SiteAuthSettingsV2s {
   /**
    * Description for Gets site's Authentication / Authorization settings for apps via the V2 format
@@ -120,7 +121,8 @@ interface SiteAuthSettingsV2OperationGroupOps
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface SiteAuthSettingsV2OperationGroup {
   /**
    * Gets site's Authentication / Authorization settings for apps via the V2 format

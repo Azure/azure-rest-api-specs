@@ -208,25 +208,25 @@ union EnvironmentServerType {
   string,
 
   /** Api Management Server */
-  "Azure API Management",
+  `Azure API Management`: "Azure API Management",
 
   /** Compute server */
-  "Azure compute service",
+  `Azure compute service`: "Azure compute service",
 
   /** Apigee server */
-  "Apigee API Management",
+  `Apigee API Management`: "Apigee API Management",
 
   /** AWS Api Gateway server */
-  "AWS API Gateway",
+  `AWS API Gateway`: "AWS API Gateway",
 
   /** Kong API Gateway server */
-  "Kong API Gateway",
+  `Kong API Gateway`: "Kong API Gateway",
 
   /** Kubernetes server */
-  "Kubernetes",
+  Kubernetes: "Kubernetes",
 
   /** Mulesoft Api Management server */
-  "MuleSoft API Management",
+  `MuleSoft API Management`: "MuleSoft API Management",
 }
 
 @doc("The properties of the service.")

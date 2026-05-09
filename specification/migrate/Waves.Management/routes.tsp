@@ -4,6 +4,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "./ApiVersions.tsp";
 import "./WebModels/Waves/GenerateWavePlan.tsp";
 import "./WebModels/Waves/MigrationWaves.tsp";
+import "./WebModels/RefreshEntities/RefreshEntities.tsp";
 import "./WebModels/MigrationEntity/MigrationEntity.tsp";
 import "./WebModels/MigrationEntityGroup/MigrationEntityGroups.tsp";
 import "./WebModels/Tasks/Tasks.tsp";
@@ -26,6 +27,15 @@ interface MigrateProjects {
     MigrateProject,
     GenerateWavePlanRequest,
     GenerateWavePlanResponse
+  >;
+
+  @added(ApiVersions.v2026_02_01_preview)
+  @doc("Refresh execution status for migration entities and groups within a migrate project. This operation triggers status updates from partner migration services.")
+  @summary("Refresh Migration Entities")
+  refreshEntities is ArmResourceActionAsync<
+    MigrateProject,
+    RefreshEntitiesRequest,
+    RefreshEntitiesResponse
   >;
 }
 

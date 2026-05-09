@@ -83,6 +83,16 @@ using Microsoft.Authorization;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(PolicyExemption.properties);
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(PolicyEnrollmentUpdate.properties);
+
+@@clientName(PolicyEnrollments.createOrUpdate::parameters.resource,
+  "parameters"
+);
+@@clientName(PolicyEnrollments.update::parameters.properties, "parameters");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(PolicyEnrollment.properties);
+
 @@clientName(Variables.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Variables.createOrUpdateAtManagementGroup::parameters.resource,
   "parameters"

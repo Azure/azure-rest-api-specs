@@ -12,12 +12,10 @@ options:
     examples-dir: "{project-root}/examples"
     arm-types-dir: "{project-root}/../../common-types/resource-management"
     emit-lro-options: "all"
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    flavor: azure
-    clear-output-folder: true
-    model-namespace: true
+  "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.Communication"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    enable-wire-path-attribute: true
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-communication"
     namespace: "azure.mgmt.communication"
@@ -31,6 +29,7 @@ options:
     flavor: azure
     uuid-as-string: false
   "@azure-tools/typespec-ts":
+    compatibility-lro: true
     emitter-output-dir: "{output-dir}/{service-dir}/arm-communication"
     flavor: azure
     experimental-extensible-enums: true

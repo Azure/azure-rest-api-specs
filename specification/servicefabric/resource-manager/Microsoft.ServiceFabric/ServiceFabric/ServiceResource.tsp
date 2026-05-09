@@ -14,64 +14,101 @@ namespace Microsoft.ServiceFabric;
 /**
  * The service resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "servicefabric is brownfield service with legacy patterns for resources"
 @parentResource(ApplicationResource)
 model ServiceResource
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ServiceResourceProperties> {
+  is Azure.ResourceManager.ProxyResource<ServiceResourceProperties> {
   ...ResourceNameParameter<
     Resource = ServiceResource,
     KeyName = "serviceName",
     SegmentName = "services",
     NamePattern = ""
   >;
-  ...EntityTagProperty;
+
+  /**
+   * It will be deprecated in New API, resource location depends on the parent resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  location?: string;
+
+  /**
+   * Azure resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  tags?: Record<string>;
+
+  /**
+   * Azure resource etag.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ServiceResources {
   /**
    * Get a Service Fabric service resource created or in the process of being created in the Service Fabric application resource.
    */
-  get is ArmResourceRead<ServiceResource>;
+  @summary("Gets a Service Fabric service resource.")
+  @tag("Service")
+  get is ArmResourceRead<ServiceResource, Error = ErrorModel>;
 
   /**
    * Create or update a Service Fabric service resource with the specified name.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "servicefabric is brownfield service with existing non-standard 202 response body"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "servicefabric is brownfield service with existing non-standard response codes"
+  @summary("Creates or updates a Service Fabric service resource.")
+  @tag("Service")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ServiceResource,
     Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ServiceResource>> & {
       @bodyRoot
       _: ServiceResource;
-    }
+    },
+    Error = ErrorModel
   >;
 
   /**
    * Update a Service Fabric service resource with the specified name.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "servicefabric is brownfield service with existing non-standard 202 response body"
+  @summary("Updates a Service Fabric service resource.")
+  @tag("Service")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     ServiceResource,
     PatchModel = ServiceResourceUpdate,
-    Response = ArmAcceptedLroResponse & {
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ServiceResource> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: ServiceResource;
-    }
+    },
+    Error = ErrorModel
   >;
 
   /**
    * Delete a Service Fabric service resource with the specified name.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<ServiceResource>;
+  @summary("Deletes a Service Fabric service resource.")
+  @tag("Service")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ServiceResource,
+    Error = ErrorModel
+  >;
 
   /**
    * Gets all service resources created or in the process of being created in the Service Fabric application resource.
    */
+  @summary("Gets the list of service resources created in the specified Service Fabric application resource.")
+  @tag("Service")
   list is ArmResourceListByParent<
     ServiceResource,
-    Response = ArmResponse<ServiceResourceList>
+    Response = ArmResponse<ServiceResourceList>,
+    Error = ErrorModel
   >;
 }
 
@@ -181,7 +218,7 @@ model ServiceCorrelationDescription {
   scheme: ServiceCorrelationScheme;
 
   /**
-   * The name of the service that the correlation relationship is established with.
+   * The full name of the service with 'fabric:' URI scheme.
    */
   serviceName: string;
 }
@@ -231,16 +268,14 @@ model ServicePlacementPolicyDescription {
  * The service resource for patch operations.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "servicefabric is brownfield service with legacy patterns for resources"
-model ServiceResourceUpdate
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ServiceResourceUpdateProperties> {
-  ...ResourceNameParameter<
-    Resource = ServiceResource,
-    KeyName = "serviceName",
-    SegmentName = "services",
-    NamePattern = ""
-  >;
-  ...EntityTagProperty;
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model ServiceResourceUpdate extends PatchProxyResource {
+  /**
+   * The RP-specific properties for this resource.
+   */
+  properties?: ServiceResourceUpdateProperties;
 }
 
 /**

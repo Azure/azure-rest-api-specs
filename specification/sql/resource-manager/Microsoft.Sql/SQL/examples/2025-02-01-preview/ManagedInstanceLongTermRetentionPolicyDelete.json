@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "api-version": "2025-02-01-preview",
+    "databaseName": "testDatabase",
+    "managedInstanceName": "testInstance",
+    "policyName": "default",
+    "resourceGroupName": "testResourceGroup",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "type": "Microsoft.Sql/resourceGroups/managedInstances/databases/backupLongTermRetentionPolicies",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testResourceGroup/providers/Microsoft.Sql/managedInstances/testInstance/databases/testDatabase/backupLongTermRetentionPolicies/default",
+        "properties": {
+          "monthlyRetention": "PT0S",
+          "weekOfYear": 0,
+          "weeklyRetention": "PT0S",
+          "yearlyRetention": "PT0S"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Sql/locations/westus/managedInstanceLongTermRetentionPolicyOperationResults/00000000-1111-2222-3333-444444444444?api-version=2023-05-01-preview"
+      }
+    }
+  },
+  "operationId": "ManagedInstanceLongTermRetentionPolicies_Delete",
+  "title": "Deletes the LTR policy for the managed database."
+}

@@ -1533,10 +1533,13 @@ enum SiteExtensionType {
  * Job status.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+// According to https://github.com/Azure/azure-sdk-for-net/issues/43295, added 2 values: Aborted, Running.
 enum TriggeredWebJobStatus {
   Success,
   Failed,
   Error,
+  Aborted,
+  Running,
 }
 
 /**
@@ -2474,6 +2477,12 @@ model OutboundVnetRouting {
    * Enables Backup and Restore operations over virtual network. Previously called VnetBackupRestoreEnabled
    */
   backupRestoreTraffic?: boolean;
+
+  /**
+   * Enables Managed Identity operations over virtual network.
+   */
+  @added(Versions.v2026_03_01_preview)
+  managedIdentityTraffic?: boolean;
 }
 
 /**

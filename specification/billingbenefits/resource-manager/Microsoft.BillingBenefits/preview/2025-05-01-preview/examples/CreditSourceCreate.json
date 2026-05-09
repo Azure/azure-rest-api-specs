@@ -1,83 +1,85 @@
 {
   "parameters": {
-    "subscriptionId": "97ee05f2-07d5-494d-908c-081a197f4277",
-    "resourceGroupName": "resource_group_name_01",
-    "creditName": "credit_20231212",
-    "sourceName": "source_20231212",
     "api-version": "2025-05-01-preview",
     "body": {
-      "properties": {
-        "sourceResourceId": "/subscriptions/{subId}",
-        "impactedBillingPeriod": "202304",
-        "credit": {
-          "grain": "FullTerm",
-          "amount": 20000,
-          "currencyCode": "USD"
-        }
-      },
       "location": "global",
+      "properties": {
+        "credit": {
+          "amount": 20000,
+          "currencyCode": "USD",
+          "grain": "FullTerm"
+        },
+        "impactedBillingPeriod": "202304",
+        "sourceResourceId": "/subscriptions/{subId}"
+      },
       "tags": {
         "key1": "value1",
         "key2": "value2"
       }
-    }
+    },
+    "creditName": "credit_20231212",
+    "resourceGroupName": "resource_group_name_01",
+    "sourceName": "source_20231212",
+    "subscriptionId": "97ee05f2-07d5-494d-908c-081a197f4277"
   },
   "responses": {
-    "201": {
+    "200": {
       "body": {
-        "id": "/subscriptions/97ee05f2-07d5-494d-908c-081a197f4277/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/credits/credit_20231212/sources/source_20231212",
         "name": "source_20231212",
         "type": "Microsoft.BillingBenefits/credits/sources",
+        "id": "/subscriptions/97ee05f2-07d5-494d-908c-081a197f4277/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/credits/credit_20231212/sources/source_20231212",
+        "location": "global",
         "properties": {
-          "sourceResourceId": "/subscriptions/{subId}",
-          "impactedBillingPeriod": "202304",
           "credit": {
-            "grain": "FullTerm",
             "amount": 20000,
-            "currencyCode": "USD"
+            "currencyCode": "USD",
+            "grain": "FullTerm"
           },
+          "impactedBillingPeriod": "202304",
+          "sourceResourceId": "/subscriptions/{subId}",
           "status": "Pending"
         },
-        "location": "global",
+        "systemData": {
+          "createdAt": "2023-12-12T01:01:01.1075056Z",
+          "createdByType": "User",
+          "lastModifiedAt": "2023-12-12T01:01:01.1075056Z",
+          "lastModifiedByType": "User"
+        },
         "tags": {
           "key1": "value1",
           "key2": "value2"
-        },
-        "systemData": {
-          "createdByType": "User",
-          "createdAt": "2023-12-12T01:01:01.1075056Z",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2023-12-12T01:01:01.1075056Z"
         }
       }
     },
-    "200": {
+    "201": {
       "body": {
-        "id": "/subscriptions/97ee05f2-07d5-494d-908c-081a197f4277/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/credits/credit_20231212/sources/source_20231212",
         "name": "source_20231212",
         "type": "Microsoft.BillingBenefits/credits/sources",
+        "id": "/subscriptions/97ee05f2-07d5-494d-908c-081a197f4277/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/credits/credit_20231212/sources/source_20231212",
+        "location": "global",
         "properties": {
-          "sourceResourceId": "/subscriptions/{subId}",
-          "impactedBillingPeriod": "202304",
           "credit": {
-            "grain": "FullTerm",
             "amount": 20000,
-            "currencyCode": "USD"
+            "currencyCode": "USD",
+            "grain": "FullTerm"
           },
+          "impactedBillingPeriod": "202304",
+          "sourceResourceId": "/subscriptions/{subId}",
           "status": "Pending"
         },
-        "location": "global",
+        "systemData": {
+          "createdAt": "2023-12-12T01:01:01.1075056Z",
+          "createdByType": "User",
+          "lastModifiedAt": "2023-12-12T01:01:01.1075056Z",
+          "lastModifiedByType": "User"
+        },
         "tags": {
           "key1": "value1",
           "key2": "value2"
-        },
-        "systemData": {
-          "createdByType": "User",
-          "createdAt": "2023-12-12T01:01:01.1075056Z",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2023-12-12T01:01:01.1075056Z"
         }
       }
     }
-  }
+  },
+  "operationId": "Sources_Create",
+  "title": "CreditSourceCreate"
 }

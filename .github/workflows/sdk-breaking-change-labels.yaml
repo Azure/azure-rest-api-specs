@@ -26,7 +26,7 @@ jobs:
       # Only run the login and get token steps when the repository is azure-rest-api-specs-pr
       - if: github.event.repository.name == 'azure-rest-api-specs-pr'
         name: Azure Login with Workload Identity Federation
-        uses: azure/login@v2
+        uses: azure/login@v3
         with:
           client-id: "205398f1-715f-40a7-8d52-856097f28281"
           tenant-id: "72f988bf-86f1-41af-91ab-2d7cd011db47"
