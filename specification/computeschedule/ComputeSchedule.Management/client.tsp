@@ -295,18 +295,30 @@ using TypeSpec.Versioning;
 );
 @@clientName(Microsoft.ComputeSchedule.ActionType, "ScheduledActionType");
 
-@@clientName(SubmitDeallocateRequest, "SubmitDeallocateContent");
-@@clientName(ExecuteHibernateRequest, "ExecuteHibernateContent");
-@@clientName(CancelOperationsRequest, "CancelOperationsContent");
-@@clientName(ExecuteCreateRequest, "ExecuteCreateContent");
-@@clientName(ExecuteCreateFlexRequest, "ExecuteCreateFlexContent");
-@@clientName(ExecuteDeallocateRequest, "ExecuteDeallocateContent");
-@@clientName(ExecuteDeleteRequest, "ExecuteDeleteContent");
-@@clientName(ExecuteStartRequest, "ExecuteStartContent");
-@@clientName(GetOperationErrorsRequest, "GetOperationErrorsContent");
-@@clientName(GetOperationStatusRequest, "GetOperationStatusContent");
-@@clientName(SubmitStartRequest, "SubmitStartContent");
-@@clientName(SubmitHibernateRequest, "SubmitHibernateContent");
+@@clientName(SubmitDeallocateRequest, "SubmitDeallocateContent", "!javascript");
+@@clientName(ExecuteHibernateRequest, "ExecuteHibernateContent", "!javascript");
+@@clientName(CancelOperationsRequest, "CancelOperationsContent", "!javascript");
+@@clientName(ExecuteCreateRequest, "ExecuteCreateContent", "!javascript");
+@@clientName(ExecuteCreateFlexRequest,
+  "ExecuteCreateFlexContent",
+  "!javascript"
+);
+@@clientName(ExecuteDeallocateRequest,
+  "ExecuteDeallocateContent",
+  "!javascript"
+);
+@@clientName(ExecuteDeleteRequest, "ExecuteDeleteContent", "!javascript");
+@@clientName(ExecuteStartRequest, "ExecuteStartContent", "!javascript");
+@@clientName(GetOperationErrorsRequest,
+  "GetOperationErrorsContent",
+  "!javascript"
+);
+@@clientName(GetOperationStatusRequest,
+  "GetOperationStatusContent",
+  "!javascript"
+);
+@@clientName(SubmitStartRequest, "SubmitStartContent", "!javascript");
+@@clientName(SubmitHibernateRequest, "SubmitHibernateContent", "!javascript");
 @@clientName(ScheduledActionsExtensionProperties,
   "ScheduledActionsExtensionProperties"
 );
