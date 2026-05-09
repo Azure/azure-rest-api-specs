@@ -11,3 +11,11 @@ using Azure.ClientGenerator.Core;
   "AlertProcessingRulesManagementClient",
   "javascript"
 );
+
+// C# customizations: avoid name collisions with namespace and System.Object.Equals.
+@@clientName(Microsoft.AlertsManagement.AlertProcessingRules,
+  "AlertProcessingRulesOperationGroup",
+  "csharp"
+);
+@@clientName(Microsoft.AlertsManagement.Operator.Equals, "EqualTo", "csharp");
+@@clientName(Microsoft.AlertsManagement.Operator.NotEquals, "NotEqualTo", "csharp");
