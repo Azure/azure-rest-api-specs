@@ -29,7 +29,7 @@ alias CreateSkillFromPackageRequest = {
 
   @doc("The zip package used to create the skill.")
   @body
-  body: bytes;
+  content: bytes;
 };
 
 alias UpdateSkillRequest = {
@@ -106,5 +106,5 @@ model DownloadSkillResponse {
 
   @doc("The zip skill package content.")
   @body
-  body: bytes;
+  content: bytes;
 }

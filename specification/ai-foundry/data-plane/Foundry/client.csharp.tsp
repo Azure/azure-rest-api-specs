@@ -141,9 +141,6 @@ namespace Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 @@access(EvaluatorDefinitionType, Access.public);
 
-// Hide classes not currently used
-@@clientName(EvaluationTarget, "InternalEvaluationTarget", "csharp");
-@@access(EvaluationTarget, Access.internal);
 // Rename Target from openai-evaluations to EvaluationTarget.
 @@clientName(Target, "EvaluationTarget", "csharp");
 
