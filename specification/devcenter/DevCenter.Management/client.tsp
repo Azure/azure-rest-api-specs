@@ -331,7 +331,7 @@ using Microsoft.DevCenter;
 @@clientName(KeepAwakeEnableStatus, "DevCenterKeepAwakeEnableStatus", "csharp");
 @@clientName(Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentityType,
   "DevCenterKeyEncryptionKeyIdentityType",
-  "csharp"
+  "csharp,go"
 );
 @@clientName(MicrosoftHostedNetworkEnableStatus,
   "DevCenterMicrosoftHostedNetworkEnableStatus",
