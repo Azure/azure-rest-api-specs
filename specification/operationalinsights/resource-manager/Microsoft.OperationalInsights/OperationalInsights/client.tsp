@@ -28,7 +28,10 @@ using Microsoft.OperationalInsights;
   "SummaryLogsProvisioningState",
   "java"
 );
-@@clientName(OperationalInsightsTableProvisioningState, "ProvisioningStateEnum", "java");
+@@clientName(OperationalInsightsTableProvisioningState,
+  "ProvisioningStateEnum",
+  "java"
+);
 
 // Fix etag casing for backward compatibility
 @@clientName(Microsoft.OperationalInsights.SearchMetadata.eTag, "etag", "java");
