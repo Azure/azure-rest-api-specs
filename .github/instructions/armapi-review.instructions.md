@@ -35,6 +35,16 @@ Flag every violation clearly with the file path, the **exact line number** (e.g.
 
 ---
 
+## 0. TypeSpec Required for New API Versions (TSP-REQUIRED-V1)
+
+The TypeSpec-required rule applies to all new ARM API versions. The full rule definition, detection signals, allowed cases, and false-positive guidance are in [`openapi-review.instructions.md` §2A](./openapi-review.instructions.md). Summary for ARM PRs:
+
+- New API version directories under `specification/**/resource-manager/**/{stable|preview}/<version>/` that contain only handwritten swagger (no sibling TypeSpec source, no `x-typespec-generated` marker, no `.tsp` files added in the PR) are **Blocking** with rule ID `TSP-REQUIRED-V1`.
+- Updates to handwritten swagger inside **pre-existing** API version directories remain permitted and **MUST NOT** be flagged.
+- A deterministic CI check is in development (PR [#42823](https://github.com/Azure/azure-rest-api-specs/pull/42823)). Until that check ships, surface this rule at review time.
+
+---
+
 ## 1. ARM Resource Path Structure
 
 **Reference: [RPC — Resource API Reference](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/master/v1.0/resource-api-reference.md)**
@@ -965,6 +975,10 @@ The following changes are **forbidden**:
 ## ARM Review Checklist Summary
 
 When reviewing ARM resource-manager swagger files, verify:
+
+### Authoring Format
+
+- ✅ New API versions are authored in TypeSpec (TSP-REQUIRED-V1) — handwritten swagger in new version directories is **Blocking**; updates to handwritten swagger in pre-existing API versions remain permitted
 
 ### Resource Structure & Paths
 
