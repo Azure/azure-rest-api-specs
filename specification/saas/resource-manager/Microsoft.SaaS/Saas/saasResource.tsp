@@ -10,9 +10,9 @@ model SaasResourceProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: SaasProvisioningState;
 
-  /** The SaaS subscription id. Server-assigned. */
+  /** The SaaS asset id. Server-assigned unique identifier for the marketplace subscription. */
   @visibility(Lifecycle.Read)
-  subscriptionId?: string;
+  assetId?: string;
 
   /** Optional description. Used as subscription display name by Teams, Admin Center and other consumers. */
   description?: string;
