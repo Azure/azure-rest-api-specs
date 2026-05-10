@@ -60,20 +60,14 @@ interface SaasTenantLevelPreflight {
   ): ArmResponse<PreflightResult> | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Custom operation status route"
-interface SaasOperationResults {
-  /** Gets the status of a long-running SaaS operation. Returns the resource on completion. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "operationResults uses Retry-After, not Location"
-  @get
-  @route("/providers/Microsoft.SaaS/operationResults/{operationId}")
-  getOperationStatus(
-    ...ApiVersionParameter,
+@armResourceOperations
+interface SaasOperationStatuses {
+  /** Gets the status of a long-running SaaS operation at the tenant scope. */
+  getTenantOperationStatus is Azure.ResourceManager.GetResourceOperationStatus;
 
-    /** The operation ID. */
-    @path operationId: string,
-  ): ArmResponse<SaasResource> | {
-    @statusCode statusCode: 202;
-    @header("Retry-After") retryAfter?: int32;
-    @header("Location") location?: string;
-  } | ErrorResponse;
+  /** Gets the status of a long-running SaaS operation at the subscription scope. */
+  getSubscriptionOperationStatus is Azure.ResourceManager.GetResourceOperationStatus<
+    ArmOperationStatus,
+    SubscriptionActionScope
+  >;
 }
