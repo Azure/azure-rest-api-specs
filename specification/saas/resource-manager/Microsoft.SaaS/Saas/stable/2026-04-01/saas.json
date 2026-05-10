@@ -47,9 +47,6 @@
     },
     {
       "name": "SaasTenantLevel"
-    },
-    {
-      "name": "SaasOperationStatuses"
     }
   ],
   "paths": {
@@ -101,9 +98,6 @@
     "/providers/Microsoft.SaaS/operationStatuses/{operationId}": {
       "get": {
         "operationId": "SaasOperationStatuses_GetTenantOperationStatus",
-        "tags": [
-          "SaasOperationStatuses"
-        ],
         "description": "Gets the status of a long-running SaaS operation at the tenant scope.",
         "parameters": [
           {
@@ -121,50 +115,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "type": "object",
-              "description": "Standard Azure Resource Manager operation status response, used as the response\nbody for `GetResourceOperationStatus`.",
-              "properties": {
-                "status": {
-                  "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
-                  "description": "The operation status"
-                },
-                "id": {
-                  "type": "string",
-                  "description": "The unique identifier for the operationStatus resource"
-                },
-                "name": {
-                  "type": "string",
-                  "description": "The name of the operationStatus resource",
-                  "readOnly": true
-                },
-                "startTime": {
-                  "type": "string",
-                  "format": "date-time",
-                  "description": "Operation start time",
-                  "readOnly": true
-                },
-                "endTime": {
-                  "type": "string",
-                  "format": "date-time",
-                  "description": "Operation complete time",
-                  "readOnly": true
-                },
-                "percentComplete": {
-                  "type": "number",
-                  "format": "double",
-                  "description": "The progress made toward completing the operation",
-                  "readOnly": true
-                },
-                "error": {
-                  "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
-                  "description": "Errors that occurred if the operation ended with Canceled or Failed status",
-                  "readOnly": true
-                }
-              },
-              "required": [
-                "status",
-                "id"
-              ]
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationStatusResult"
             }
           },
           "default": {
@@ -569,9 +520,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.SaaS/operationStatuses/{operationId}": {
       "get": {
         "operationId": "SaasOperationStatuses_GetSubscriptionOperationStatus",
-        "tags": [
-          "SaasOperationStatuses"
-        ],
         "description": "Gets the status of a long-running SaaS operation at the subscription scope.",
         "parameters": [
           {
@@ -592,50 +540,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "type": "object",
-              "description": "Standard Azure Resource Manager operation status response, used as the response\nbody for `GetResourceOperationStatus`.",
-              "properties": {
-                "status": {
-                  "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
-                  "description": "The operation status"
-                },
-                "id": {
-                  "type": "string",
-                  "description": "The unique identifier for the operationStatus resource"
-                },
-                "name": {
-                  "type": "string",
-                  "description": "The name of the operationStatus resource",
-                  "readOnly": true
-                },
-                "startTime": {
-                  "type": "string",
-                  "format": "date-time",
-                  "description": "Operation start time",
-                  "readOnly": true
-                },
-                "endTime": {
-                  "type": "string",
-                  "format": "date-time",
-                  "description": "Operation complete time",
-                  "readOnly": true
-                },
-                "percentComplete": {
-                  "type": "number",
-                  "format": "double",
-                  "description": "The progress made toward completing the operation",
-                  "readOnly": true
-                },
-                "error": {
-                  "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
-                  "description": "Errors that occurred if the operation ended with Canceled or Failed status",
-                  "readOnly": true
-                }
-              },
-              "required": [
-                "status",
-                "id"
-              ]
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationStatusResult"
             }
           },
           "default": {
@@ -1271,37 +1176,6 @@
           "description": "The token expiry time."
         }
       }
-    },
-    "Azure.ResourceManager.ResourceProvisioningState": {
-      "type": "string",
-      "description": "The provisioning state of a resource type.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled"
-      ],
-      "x-ms-enum": {
-        "name": "ResourceProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          }
-        ]
-      },
-      "readOnly": true
     },
     "DeleteOptions": {
       "type": "object",
