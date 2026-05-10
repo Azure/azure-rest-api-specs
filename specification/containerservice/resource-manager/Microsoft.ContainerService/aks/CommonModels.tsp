@@ -943,6 +943,24 @@ union OutboundType {
 }
 
 /**
+ * The SKU of the managed Azure Bastion. The default is 'Standard'. See https://aka.ms/aks/BastionSKUs for more information about the differences between Azure Bastion SKUs.
+ */
+@added(Versions.v2026_04_02_preview)
+union BastionSku {
+  string,
+
+  /**
+   * Use the standard SKU of Azure Bastion.
+   */
+  Standard: "Standard",
+
+  /**
+   * Use the premium SKU of Azure Bastion.
+   */
+  Premium: "Premium",
+}
+
+/**
  * The load balancer sku for the managed cluster. The default is 'standard'. See [Azure Load Balancer SKUs](https://docs.microsoft.com/azure/load-balancer/skus) for more information about the differences between load balancer SKUs.
  */
 union LoadBalancerSku {
@@ -2449,6 +2467,13 @@ model ContainerServiceNetworkProfile {
   loadBalancerProfile?: ManagedClusterLoadBalancerProfile;
 
   /**
+   * Profile of the Bastion Host associated with the managed cluster.
+   * See https://aka.ms/aks/BastionConnect for more details.
+   */
+  @added(Versions.v2026_04_02_preview)
+  bastionProfile?: BastionProfile;
+
+  /**
    * Profile of the cluster NAT gateway.
    */
   natGatewayProfile?: ManagedClusterNATGatewayProfile;
@@ -2541,6 +2566,62 @@ model AdvancedNetworkingSecurity {
    */
   @added(Versions.v2026_01_01)
   transitEncryption?: AdvancedNetworkingSecurityTransitEncryption;
+}
+
+/**
+ * Profile to enable managed Azure Bastion or reference to an existing Bastion for the managed cluster.
+ * See https://aka.ms/aks/BastionConnect for more details.
+ */
+@added(Versions.v2026_04_02_preview)
+model BastionProfile {
+  /**
+   * Indicates whether managed bastion is enabled.
+   */
+  enabled?: boolean;
+
+  /**
+   * The resource ID of the managed bastion associated with the managed cluster.
+   */
+  @visibility(Lifecycle.Read)
+  bastionId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/bastionHosts";
+    }
+  ]>;
+
+  /**
+   * The SKU of the managed bastion.
+   *
+   * Only Standard and Premium SKUs are supported.
+   * SKU downgrading is not allowed. To downgrade SKU, please disable then re-enable the managed bastion with new SKU.
+   *
+   * See https://aka.ms/aks/BastionSKUs for more details.
+   */
+  sku?: BastionSku;
+
+  /**
+   * The scale units of the managed bastion. Default value is 2.
+   */
+  @maxValue(50)
+  @minValue(2)
+  scaleUnits?: int32;
+
+  /**
+   * The resource ID of the public IP address associated with the managed bastion.
+   *
+   * When provided during creation, the managed bastion will reference this existing public IP address instead of creating a new one.
+   * The referenced public IP address must be in the same subscription and region as the managed cluster.
+   *
+   * When not provided during creation, AKS will automatically create a new public IP address.
+   *
+   * This field cannot be updated. To change IP address after creation, please disable and re-enable the managed bastion with the new public IP address.
+   */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  publicIpAddressId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/publicIPAddresses";
+    }
+  ]>;
 }
 
 /**
