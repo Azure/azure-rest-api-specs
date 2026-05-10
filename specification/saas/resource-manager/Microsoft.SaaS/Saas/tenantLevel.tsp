@@ -11,13 +11,19 @@ using Azure.ResourceManager;
 namespace Microsoft.SaaS;
 
 @tenantResource
-model SaasTenantResource is TrackedResource<SaasResourceProperties> {
+model SaasTenantResource is ProxyResource<SaasResourceProperties> {
   ...ResourceNameParameter<
     Resource = SaasTenantResource,
     KeyName = "resourceId",
     SegmentName = "saasresources",
     NamePattern = "^[a-zA-Z0-9-]{3,50}$"
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Location is required for backward compatibility with existing production responses"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location: Azure.Core.azureLocation;
 }
 
 @armResourceOperations
