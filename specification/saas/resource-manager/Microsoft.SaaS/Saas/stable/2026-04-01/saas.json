@@ -1149,10 +1149,6 @@
         }
       }
     },
-    "Azure.Core.azureLocation": {
-      "type": "string",
-      "description": "Represents an Azure geography region where supported resource providers live."
-    },
     "DeleteOptions": {
       "type": "object",
       "description": "Delete options for a SaaS resource.",
@@ -1636,19 +1632,8 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
         }
       },
-      "required": [
-        "location"
-      ],
       "allOf": [
         {
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
