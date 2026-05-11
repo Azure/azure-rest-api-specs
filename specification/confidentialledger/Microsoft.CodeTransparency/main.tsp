@@ -61,20 +61,46 @@ op getPublicKeys is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-@added(Versions.`2025-01-31-preview`)
-@doc("Post an entry to be registered on the CodeTransparency instance, mandatory in IETF SCITT draft")
-@post
-@route("/entries")
-op createEntry is Foundations.Operation<
-  SignedStatement & AcceptCoseOrCborHeader,
-  CreateEntryCreated | CreateEntryPending,
+#suppress "@azure-tools/typespec-azure-core/use-standard-names"
+@added(Versions.`2026-03-26`)
+@doc("List all service keys in COSE_Key_Set format, per Section 2.1 of draft-ietf-scitt-scrapi-09")
+@route("/.well-known/scitt-keys")
+@get
+op listScittKeys is Foundations.Operation<
+  AcceptCborHeader,
+  ScittKeysResponse,
+  ServiceTraits,
+  AnyCborError
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@added(Versions.`2026-03-26`)
+@doc("Get a single service key by kid, per Section 2.2 of draft-ietf-scitt-scrapi-09")
+@route("/.well-known/scitt-keys/{kid}")
+@get
+op getScittKey is Foundations.Operation<
+  KidParameter & AcceptCborHeader,
+  ScittKeyResponse,
   ServiceTraits,
   AnyCborError
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @added(Versions.`2025-01-31-preview`)
-@doc("Get status of the long running registration operation, mandatory in IETF SCITT draft")
+@doc("Post an entry to be registered on the CodeTransparency instance, mandatory in IETF SCITT draft")
+@post
+@route("/entries")
+op createEntry is Foundations.Operation<
+  SignedStatement & AcceptCoseOrCborHeader & WaitForCommitParameter,
+  CreateEntryCreated | CreateEntryPending | CreateEntrySeeOther,
+  ServiceTraits,
+  AnyCborError | Response503CborWithReceipt
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+#deprecated "The /operations/{operationId} endpoint is deprecated in SCRAPI v09 (api-version=2026-03-26). Clients should poll /entries/{entryId} directly. Behavior is unchanged for backward compatibility."
+@added(Versions.`2025-01-31-preview`)
+@doc("Get status of the long running registration operation. Deprecated in SCRAPI v09 but retained unchanged for backward compatibility; clients should poll /entries/{entryId} directly.")
 @route("/operations/{operationId}")
 op getOperation is Foundations.Operation<
   OperationIdParameter & AcceptCborHeader,
@@ -89,7 +115,7 @@ op getOperation is Foundations.Operation<
 @route("/entries/{entryId}")
 op getEntry is Foundations.Operation<
   EntryIdParameter & AcceptCoseHeader,
-  ReceiptEntry,
+  ReceiptEntry | ReceiptEntryPending,
   ServiceTraits,
   AnyCborError
 >;
@@ -99,7 +125,7 @@ op getEntry is Foundations.Operation<
 @doc("Get the transparent statement consisting of the signed statement and the receipt embedded in the header")
 @route("/entries/{entryId}/statement")
 op getEntryStatement is Foundations.Operation<
-  EntryIdParameter & AcceptCoseHeader,
+  EntryIdParameter & AcceptScittStatementHeader,
   TransparentStatement,
   ServiceTraits,
   AnyCborError
@@ -120,12 +146,17 @@ model CreateEntryCreated {
   @header("Location")
   location?: string;
 
+  @doc("Transaction ID for the committed entry, returned when waitForCommit=true")
+  @header("x-ms-ccf-transaction-id")
+  transactionId?: string;
+
   @doc("Receipt body in COSE format")
   @bodyRoot
   body: bytes;
 }
 
 @added(Versions.`2025-01-31-preview`)
+@removed(Versions.`2026-03-26`)
 @doc("Response of entry submission containing the operation id, mandatory in IETF SCITT draft")
 model CreateEntryPending {
   @doc("Status code")
@@ -153,6 +184,22 @@ model CreateEntryPending {
   @doc("Operation status response")
   @bodyRoot
   body: bytes;
+}
+
+@added(Versions.`2025-01-31-preview`)
+@doc("Response for async entry submission in SCRAPI v09, returns 303 See Other with empty body")
+model CreateEntrySeeOther {
+  @doc("Status code")
+  @statusCode
+  statusCode: 303;
+
+  @doc("Location of the entry to poll")
+  @header("Location")
+  location: string;
+
+  @doc("Transaction ID for the entry")
+  @header("x-ms-ccf-transaction-id")
+  transactionId: string;
 }
 
 @doc("Provides status details for long running operation, mandatory in IETF SCITT draft")
@@ -200,6 +247,22 @@ model OperationStatusPending {
   retryAfter?: int32;
 }
 
+@added(Versions.`2025-01-31-preview`)
+@doc("Pending response for entry query in SCRAPI v09, returns 302 Found")
+model ReceiptEntryPending {
+  @doc("Status code")
+  @statusCode
+  statusCode: 302;
+
+  @doc("Location of the entry to poll")
+  @header("Location")
+  location: string;
+
+  @doc("Retry-After seconds value to help with polling")
+  @header("Retry-After")
+  retryAfter?: int32;
+}
+
 @doc("Signed statement")
 model SignedStatement {
   @doc("The MIME content type a Cose body is application/cose, containing a CoseSign1 signature, see IETF SCITT draft")
@@ -220,9 +283,9 @@ model SignedStatement {
 
 @doc("Transparent statement")
 model TransparentStatement {
-  @doc("The MIME content type a Cose body is application/cose, containing a CoseSign1 signature, see IETF SCITT draft")
+  @doc("The MIME content type is application/scitt-statement+cose in SCRAPI v09")
   @header("Content-Type")
-  contentType: "application/cose";
+  contentType: "application/scitt-statement+cose";
 
   @doc("CoseSign1 signature envelope with the receipt embedded in the unprotected header")
   @bodyRoot
@@ -268,6 +331,22 @@ model EntryIdParameter {
   entryId: string;
 }
 
+@doc("The kid parameter for SCITT keys endpoint.")
+@added(Versions.`2026-03-26`)
+model KidParameter {
+  @doc("Key ID (kid) of the SCITT key to retrieve.")
+  @path
+  kid: string;
+}
+
+@doc("WaitForCommit query parameter for synchronous registration")
+@added(Versions.`2025-01-31-preview`)
+model WaitForCommitParameter {
+  @doc("If true, waits for the entry to be committed before returning. Returns 201 with receipt or 503 on rollback.")
+  @query
+  waitForCommit?: boolean;
+}
+
 @doc("Accept application/cose header")
 model AcceptCoseOrCborHeader {
   @doc("Accept header")
@@ -282,11 +361,43 @@ model AcceptCoseHeader {
   accept: "application/cose";
 }
 
+@doc("Accept application/scitt-statement+cose header")
+@added(Versions.`2025-01-31-preview`)
+model AcceptScittStatementHeader {
+  @doc("Accept header")
+  @header
+  accept: "application/scitt-statement+cose";
+}
+
 @doc("Accept application/cbor header")
 model AcceptCborHeader {
   @doc("Accept header")
   @header
   accept: "application/cbor";
+}
+
+@added(Versions.`2026-03-26`)
+@doc("Response containing COSE_Key_Set (array of COSE_Key maps) in CBOR format")
+model ScittKeysResponse {
+  @doc("Content type is application/cbor")
+  @header
+  contentType: "application/cbor";
+
+  @doc("COSE_Key_Set as CBOR array of COSE_Key maps")
+  @bodyRoot
+  body: bytes;
+}
+
+@added(Versions.`2026-03-26`)
+@doc("Response containing a single COSE_Key (map, not array) in CBOR format")
+model ScittKeyResponse {
+  @doc("Content type is application/cbor")
+  @header
+  contentType: "application/cbor";
+
+  @doc("Single COSE_Key as CBOR map")
+  @bodyRoot
+  body: bytes;
 }
 
 @added(Versions.`2025-01-31-preview`)
@@ -470,6 +581,26 @@ model Response503Cbor {
   contentType: "application/concise-problem-details+cbor";
 
   @doc("CBOR content of the error object")
+  @body
+  error: ConciseProblemDetailsCbor;
+}
+
+@added(Versions.`2025-01-31-preview`)
+@doc("Service unavailable with CBOR error response for waitForCommit rollback")
+model Response503CborWithReceipt {
+  @doc("Status code")
+  @statusCode
+  statusCode: 503;
+
+  @doc("The MIME content type for error, see RFC9290")
+  @header
+  contentType: "application/concise-problem-details+cbor";
+
+  @doc("Transaction ID for the rolled back entry")
+  @header("x-ms-ccf-transaction-id")
+  transactionId?: string;
+
+  @doc("CBOR error content for rollback")
   @body
   error: ConciseProblemDetailsCbor;
 }
