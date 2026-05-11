@@ -154,6 +154,7 @@ interface BatchClient {
   "csharp"
 );
 @@alternateType(Azure.Batch.DiskCustomerManagedKey.keyUrl, url, "csharp");
+@@clientName(Azure.Batch.DiskCustomerManagedKey.keyUrl, "keyUri", "csharp");
 
 @@clientName(BatchClient.listJobsFromSchedule,
   "listJobsFromSchedule",
@@ -253,6 +254,10 @@ interface BatchClient {
 );
 @@clientName(Azure.Batch.BatchJobReleaseTaskExecutionInfo.taskRootDirectoryUrl,
   "taskRootDirectoryUri",
+  "csharp"
+);
+@@clientName(Azure.Batch.CommonListParameters.maxresults,
+  "maxResults",
   "csharp"
 );
 @@clientName(Azure.Batch.BatchPool.url, "uri", "csharp");
