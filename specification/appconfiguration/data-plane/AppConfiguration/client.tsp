@@ -41,9 +41,7 @@ namespace SdkCustomizations;
 
 // TypeScript specific customizations
 @@clientName(Snapshot.expires, "expiresOn", "javascript");
-@@alternateType(Snapshot.expires, Date, "javascript");
 @@clientName(Snapshot.created, "createdOn", "javascript");
-@@alternateType(Snapshot.created, Date, "javascript");
 @@clientName(Snapshot.retentionPeriod, "retentionPeriodInSeconds", "javascript");
 @@clientName(Snapshot.size, "sizeInBytes", "javascript");
 @@clientName(KeyValueFilter.key, "keyFilter", "javascript");
