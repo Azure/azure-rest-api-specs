@@ -333,7 +333,7 @@ model RegistryProperties {
    * Enable per-region endpoints for accessing registry.
    */
   @added(Versions.vLatestPreview)
-  regionalEndpoints?: RegionalEndpoints = RegionalEndpoints.Disabled;
+  regionalEndpoints?: RegionalEndpoints;
 
   /**
    * List of host names that will serve registry when RegionalEndpoints is enabled.

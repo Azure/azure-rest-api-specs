@@ -8329,29 +8329,8 @@
           "readOnly": true
         },
         "regionalEndpoints": {
-          "type": "string",
-          "description": "Enable per-region endpoints for accessing registry.",
-          "default": "Disabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "RegionalEndpoints",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "Regional endpoints are enabled."
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "Regional endpoints are disabled."
-              }
-            ]
-          }
+          "$ref": "#/definitions/RegionalEndpoints",
+          "description": "Enable per-region endpoints for accessing registry."
         },
         "regionalEndpointHostNames": {
           "type": "array",
