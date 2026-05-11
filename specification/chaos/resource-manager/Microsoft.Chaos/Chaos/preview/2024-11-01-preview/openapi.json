@@ -3155,7 +3155,7 @@
     },
     "KeyValuePair": {
       "type": "object",
-      "description": "A map used to describe parameters for actions or configurations.",
+      "description": "A key-value pair used to describe parameters for actions or configurations.",
       "properties": {
         "key": {
           "type": "string",
@@ -3455,7 +3455,8 @@
         "Canceled",
         "Creating",
         "Updating",
-        "Deleting"
+        "Deleting",
+        "Running"
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
@@ -3490,6 +3491,11 @@
             "name": "Deleting",
             "value": "Deleting",
             "description": "Deletion in progress."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "Action is running."
           }
         ]
       },
