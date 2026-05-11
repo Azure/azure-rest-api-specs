@@ -37,7 +37,7 @@ union EvaluationSuiteGenerationCategory {
 }
 
 @doc("The data generation type.")
-union DataGenerationType {
+union EvaluationDataGenerationType {
   string,
 
   @doc("Simple question and answer generation.")
@@ -60,7 +60,7 @@ union DataGenerationType {
 @doc("""
   Reference to a dataset by name and version.
   """)
-model DatasetReference {
+model EvaluationDatasetReference {
   @doc("Dataset name.")
   name: string;
 
@@ -103,7 +103,7 @@ model EvaluationSuiteVersion {
     live production traces or is provided at run time.
     The referenced dataset must exist in the project's dataset registry.
     """)
-  dataset?: DatasetReference;
+  dataset?: EvaluationDatasetReference;
 
   @doc("""
     Testing criteria — the evaluator configurations for this suite.
@@ -288,7 +288,7 @@ model EvaluationSuiteGenerationJobInputs {
 @doc("Options for dataset generation within an evaluation suite generation job.")
 model EvaluationSuiteDataGenerationOptions {
   @doc("The data generation type. Defaults to 'simple_qna' if not specified.")
-  type?: DataGenerationType;
+  type?: EvaluationDataGenerationType;
 
   @doc("Maximum number of samples to generate. Valid range: 15-1000.")
   @minValue(15)
