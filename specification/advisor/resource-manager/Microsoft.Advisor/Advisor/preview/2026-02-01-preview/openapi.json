@@ -167,6 +167,51 @@
             "$ref": "./examples/GetRecommendationDetailSubscriptionResourceUri.json"
           }
         }
+      },
+      "patch": {
+        "operationId": "Recommendations_Patch",
+        "tags": [
+          "ResourceRecommendationBases"
+        ],
+        "description": "Update the state of a Recommendation",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "recommendationId",
+            "in": "path",
+            "description": "The recommendation ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "trackedProperties",
+            "in": "body",
+            "description": "The properties to update on the recommendation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RecommendationsPatchPayload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResourceRecommendationBase"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
+            }
+          }
+        }
       }
     },
     "/{resourceUri}/providers/Microsoft.Advisor/recommendations/{recommendationId}/suppressions/{name}": {
@@ -1057,56 +1102,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/recommendations/{recommendationId}": {
-      "patch": {
-        "operationId": "RecommendationsPatch_PatchStateProperties",
-        "summary": "Update the recommendation state properties.",
-        "description": "Update the state properties of a Recommendation.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "recommendationId",
-            "in": "path",
-            "description": "The recommendation ID.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "statePropertiesPayload",
-            "in": "body",
-            "description": "The properties to update the recommendation state.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RecommendationsPatchPayload"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/RecommendationsPatchPayload"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ArmErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PatchRecommendationStateProperties": {
-            "$ref": "./examples/PatchRecommendationStateProperties.json"
-          }
         }
       }
     },

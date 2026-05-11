@@ -169,7 +169,7 @@
         }
       },
       "patch": {
-        "operationId": "Recommendations_Patch",
+        "operationId": "ResourceRecommendationBases_Patch",
         "tags": [
           "ResourceRecommendationBases"
         ],
@@ -189,9 +189,9 @@
             "type": "string"
           },
           {
-            "name": "trackedProperties",
+            "name": "properties",
             "in": "body",
-            "description": "The properties to update on the recommendation.",
+            "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/TrackedRecommendationPropertiesPayload"
@@ -210,11 +210,6 @@
             "schema": {
               "$ref": "#/definitions/ArmErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "UpdateTrackedRecommendation": {
-            "$ref": "./examples/UpdateTrackedRecommendation.json"
           }
         }
       }

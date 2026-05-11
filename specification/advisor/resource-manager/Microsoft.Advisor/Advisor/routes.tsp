@@ -223,31 +223,3 @@ interface WorkloadsOperationGroup {
     Parameters = {}
   >;
 }
-
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2026_02_01_preview)
-interface RecommendationsPatch {
-  /**
-   * Update the state properties of a Recommendation.
-   */
-  @summary("Update the recommendation state properties.")
-  @route("subscriptions/{subscriptionId}/providers/Microsoft.Advisor/recommendations/{recommendationId}")
-  @patch(#{ implicitOptionality: false })
-  patchStateProperties(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-
-    /**
-     * The recommendation ID.
-     */
-    @path
-    recommendationId: string,
-
-    /**
-     * The properties to update the recommendation state.
-     */
-    @bodyRoot
-    statePropertiesPayload: RecommendationsPatchPayload,
-  ): RecommendationsPatchPayload | ArmDefaultErrorResponse;
-}
