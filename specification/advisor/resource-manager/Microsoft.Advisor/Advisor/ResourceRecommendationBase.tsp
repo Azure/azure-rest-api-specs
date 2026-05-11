@@ -41,7 +41,6 @@ interface ResourceRecommendationBases {
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2025_05_01_preview)
   @removed(Versions.v2026_02_01_preview)
-  @sharedRoute
   @patch(#{ implicitOptionality: false })
   patch is ArmCustomPatchSync<
     ResourceRecommendationBase,
@@ -53,7 +52,6 @@ interface ResourceRecommendationBases {
   /** Update the state of a Recommendation */
   @added(Versions.v2026_02_01_preview)
   @patch(#{ implicitOptionality: false })
-  @sharedRoute
   update is Extension.CustomPatchSync<
     Extension.Subscription,
     ResourceRecommendationBase,
