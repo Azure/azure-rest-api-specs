@@ -180,6 +180,21 @@ model AutoscalingProfile {
 }
 
 @added(Versions.v2026_05_02_preview)
+@doc("Autoscaling configuration for a model deployment patch request.")
+model AutoscalingProfilePatch {
+  @doc("Whether autoscaling is enabled for this deployment.")
+  enabled?: boolean;
+
+  @doc("The minimum number of replicas when autoscaling is enabled.")
+  @minValue(1)
+  minReplicas?: int32;
+
+  @doc("The maximum number of replicas when autoscaling is enabled. If not specified, the service derives a default from the subscription GPU quota.")
+  @minValue(1)
+  maxReplicas?: int32;
+}
+
+@added(Versions.v2026_05_02_preview)
 @doc("The model deployment resource patch model.")
 model ModelDeploymentPatch {
   @doc("Mutable properties of the model deployment.")
@@ -197,7 +212,7 @@ model ModelDeploymentPatchProperties {
   replicas?: int32;
 
   @doc("The autoscaling configuration for the deployment.")
-  autoscaling?: AutoscalingProfile;
+  autoscaling?: AutoscalingProfilePatch;
 
   @doc("User overrides layered on top of profile resolution.")
   overrides?: ModelDeploymentOverrides;
@@ -235,4 +250,3 @@ interface ModelDeployments {
 @@maxLength(ModelDeployment.name, 63);
 @@minLength(ModelDeployment.name, 1);
 @@doc(ModelDeployment.name, "The name of the model deployment resource.");
-

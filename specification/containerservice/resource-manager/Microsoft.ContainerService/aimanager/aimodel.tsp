@@ -146,4 +146,3 @@ interface AIModels {
 @@doc(AIModel.name,
   "The name of the AI model resource. Matches the upstream model id (e.g. \"microsoft/Phi-4-mini-instruct\"). The `/` character must be URL-encoded as `%2F` on the wire."
 );
-

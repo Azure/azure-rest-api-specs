@@ -2116,7 +2116,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -2182,6 +2182,28 @@
           "format": "int32",
           "description": "The minimum number of replicas when autoscaling is enabled.",
           "default": 1,
+          "minimum": 1
+        },
+        "maxReplicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of replicas when autoscaling is enabled. If not specified, the service derives a default from the subscription GPU quota.",
+          "minimum": 1
+        }
+      }
+    },
+    "AutoscalingProfilePatch": {
+      "type": "object",
+      "description": "Autoscaling configuration for a model deployment patch request.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether autoscaling is enabled for this deployment."
+        },
+        "minReplicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum number of replicas when autoscaling is enabled.",
           "minimum": 1
         },
         "maxReplicas": {
@@ -2383,6 +2405,22 @@
         "type"
       ]
     },
+    "CredentialValuePatch": {
+      "type": "object",
+      "description": "A credential value for a model source patch request.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/CredentialSourceType",
+          "description": "The credential source type."
+        },
+        "value": {
+          "type": "string",
+          "format": "password",
+          "description": "The access token, password, or other secret value.",
+          "x-ms-secret": true
+        }
+      }
+    },
     "DeletePolicy": {
       "type": "string",
       "description": "Delete options of the AI Manager.",
@@ -2537,7 +2575,7 @@
           "minimum": 1
         },
         "autoscaling": {
-          "$ref": "#/definitions/AutoscalingProfile",
+          "$ref": "#/definitions/AutoscalingProfilePatch",
           "description": "The autoscaling configuration for the deployment."
         },
         "overrides": {
@@ -2826,7 +2864,7 @@
           "description": "An optional, free-form description of the source."
         },
         "credential": {
-          "$ref": "#/definitions/CredentialValue",
+          "$ref": "#/definitions/CredentialValuePatch",
           "description": "Credential the platform uses to authenticate to the source."
         }
       }

@@ -81,6 +81,17 @@ model InlineCredential extends CredentialValue {
 }
 
 @added(Versions.v2026_05_02_preview)
+@doc("A credential value for a model source patch request.")
+model CredentialValuePatch {
+  @doc("The credential source type.")
+  type?: CredentialSourceType;
+
+  @secret
+  @doc("The access token, password, or other secret value.")
+  value?: string;
+}
+
+@added(Versions.v2026_05_02_preview)
 @doc("The model source resource patch model.")
 model ModelSourcePatch {
   @doc("Mutable properties of the model source.")
@@ -94,7 +105,7 @@ model ModelSourcePatchProperties {
   description?: string;
 
   @doc("Credential the platform uses to authenticate to the source.")
-  credential?: CredentialValue;
+  credential?: CredentialValuePatch;
 }
 
 @added(Versions.v2026_05_02_preview)
@@ -129,4 +140,3 @@ interface ModelSources {
 @@maxLength(ModelSource.name, 63);
 @@minLength(ModelSource.name, 1);
 @@doc(ModelSource.name, "The name of the model source resource.");
-

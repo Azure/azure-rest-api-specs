@@ -120,4 +120,3 @@ model NamespaceAccessInfo {
   AIManagerNamespace.name,
   "The name of the AI Manager namespace resource."
 );
-
