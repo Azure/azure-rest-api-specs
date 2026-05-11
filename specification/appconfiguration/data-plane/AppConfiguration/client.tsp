@@ -36,9 +36,14 @@ namespace SdkCustomizations;
 @@access(getSnapshot, Access.internal, "csharp");
 @@access(updateSnapshot, Access.internal, "csharp");
 
+@@alternateType(KeyValuesRequestParams.select, string[], "csharp");
+@@alternateType(RevisionsRequestParams.select, string[], "csharp");
+
 // TypeScript specific customizations
 @@clientName(Snapshot.expires, "expiresOn", "javascript");
+@@alternateType(Snapshot.expires, Date, "javascript");
 @@clientName(Snapshot.created, "createdOn", "javascript");
+@@alternateType(Snapshot.created, Date, "javascript");
 @@clientName(Snapshot.retentionPeriod, "retentionPeriodInSeconds", "javascript");
 @@clientName(Snapshot.size, "sizeInBytes", "javascript");
 @@clientName(KeyValueFilter.key, "keyFilter", "javascript");
@@ -46,5 +51,6 @@ namespace SdkCustomizations;
 @@clientName(KeyValueFilter.tags, "tagsFilter", "javascript");
 @@clientName(KeyValueFilter, "ConfigurationSettingsFilter", "javascript");
 @@clientName(Snapshot, "ConfigurationSnapshot", "javascript");
+
 
 @@clientName(Azure.Core.Foundations.Error, "CommonError", "python");
