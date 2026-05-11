@@ -2053,16 +2053,23 @@ model RestorableGremlinResourceData
 // (Tags + Location, no Identity), so we wrap each with a custom model that
 // extends Azure.ResourceManager.CommonTypes.TrackedResource and substitute
 // via @@alternateType. OmitProperties drops id/name/type (provided by the
-// CommonTypes resource base), location/tags (provided by TrackedResource),
-// and identity (not exposed on these content models in the legacy SDK).
+// CommonTypes resource base), location/tags (provided by TrackedResource).
 // The wrapper model name is the desired C# class name; this also obviates
 // the previous @@clientName(*, "...", "csharp") renames for the same models.
 //
-// NOTE: The MPG generator emits the flattened Resource/Options accessors on
-// each wrapper as get-only, even when the inner Properties model fields are
-// annotated with `@@visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)`.
-// Setters on the legacy SDK shape are therefore restored via SDK-side custom
-// partial classes (see `src/Custom/Models/*CreateOrUpdateContent.cs`).
+// NOTE: `identity` is intentionally NOT omitted on CosmosDBAccountCreateOrUpdateContent —
+// the legacy SDK exposed Identity on the create-or-update content with full round-trip
+// support; previous wrapper iterations omitted it and required a custom property that
+// silently dropped values at serialization time (see PR #57018 review #4).
+//
+// On flattening the inner DatabaseAccountCreateUpdateProperties holder (PR #57018 review #5):
+// `@@Legacy.flattenProperty(CosmosDBAccountCreateOrUpdateContent.properties, "csharp")`
+// is rejected by TCGC ("Model doesn't have member properties" — spread members are not
+// addressable via decorator references). Spreading DatabaseAccountCreateUpdateProperties
+// directly into the wrapper would flatten the C# shape, but the wire format requires the
+// `properties` holder to remain nested, so that approach is incompatible. The setters on
+// the flattened C# surface are therefore re-emitted via SDK-side custom partial classes
+// (see `src/Custom/Models/CosmosDBAccountCreateOrUpdateContent.cs`) as a generator limitation.
 
 /**
  * Parameters to create and update Cosmos DB database accounts.
