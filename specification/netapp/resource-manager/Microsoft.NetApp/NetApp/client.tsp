@@ -605,7 +605,7 @@ union NetAppRelationshipStatusDef {
 
 // Body parameter rename to restore previous property name
 @@clientName(ListReplicationsRequest.exclude,
-  "Exclude",
+  "ExcludeReplicationsFilter",
   "csharp"
 );
 
