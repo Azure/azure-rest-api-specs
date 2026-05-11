@@ -20,6 +20,8 @@ in order to enable preview features on these GA routes.
 | Agents | Create Version | POST | `/agents/{agent_name}/versions` | Optional: `ContainerAgents=V1Preview`, `CodeAgents=V1Preview`, `HostedAgents=V1Preview`, `WorkflowAgents=V1Preview` |
 | Evaluation Rules | CreateOrUpdate | PUT | `/evaluationrules/{id}` | Optional: `Evaluations=V1Preview` |
 
+Note that only v1 operations are included in the above table. If an operation (or interface) is decorated with `@removed(Versions.v1)` the are not included here.
+
 ## v1 Preview routes with required "Foundry-Features" HTTP header to enable preview features
 
 You must include this HTTP request header, with the value specified below,
@@ -87,3 +89,13 @@ in order to successfully complete operations using these routes.
 | Toolboxes | Update | PATCH | `/toolboxes/{name}` | Required: `Toolboxes=V1Preview` |
 | Toolboxes | Delete | DELETE | `/toolboxes/{name}` | Required: `Toolboxes=V1Preview` |
 | Toolboxes | Delete Version | DELETE | `/toolboxes/{name}/versions/{version}` | Required: `Toolboxes=V1Preview` |
+| Agents | Stream Session Logs | GET | `/agents/{agent_name}/versions/{agent_version}/sessions/{session_id}:logstream` | Required: `HostedAgents=V1Preview` |
+| Agents | Download Version Code | GET | `/agents/{agent_name}/versions/{agent_version}/code:download` | Required: `CodeAgents=V1Preview` |
+| Agents | Download Code | GET | `/agents/{agent_name}/code:download` | Required: `CodeAgents=V1Preview` |
+| Data Generation Jobs | Get | GET | `/data_generation_jobs/{jobId}` | Required: `DataGenerationJobs=V1Preview` |
+| Data Generation Jobs | List | GET | `/data_generation_jobs` | Required: `DataGenerationJobs=V1Preview` |
+| Data Generation Jobs | Create | POST | `/data_generation_jobs` | Required: `DataGenerationJobs=V1Preview` |
+| Data Generation Jobs | Cancel | POST | `/data_generation_jobs/{jobId}:cancel` | Required: `DataGenerationJobs=V1Preview` |
+| Data Generation Jobs | Delete | DELETE | `/data_generation_jobs/{jobId}` | Required: `DataGenerationJobs=V1Preview` |
+
+Note that only v1 operations are included in the above table. If an operation (or interface) is decorated with `@removed(Versions.v1)` the are not included here.

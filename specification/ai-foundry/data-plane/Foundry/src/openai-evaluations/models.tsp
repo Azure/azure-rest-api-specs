@@ -35,6 +35,17 @@ model DeleteEvalRunResponse {
   deleted?: boolean;
 }
 
+@doc("The level at which evaluation is performed.")
+union EvaluationLevel {
+  @doc("Evaluation is performed at the turn level.")
+  turn: "turn",
+
+  @doc("Evaluation is performed at the conversation level.")
+  conversation: "conversation",
+
+  string,
+}
+
 /** Grader Azure AI Evaluator definition for foundry evaluators. */
 model GraderAzureAIEvaluator {
   /** The object type, which is always `azure_ai_evaluator`. */

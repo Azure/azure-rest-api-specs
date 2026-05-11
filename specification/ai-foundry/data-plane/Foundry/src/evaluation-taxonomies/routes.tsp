@@ -61,7 +61,7 @@ interface EvaluationTaxonomies {
 
       @doc("The evaluation taxonomy.")
       @body
-      body: EvaluationTaxonomy;
+      taxonomy: EvaluationTaxonomy;
     },
     Azure.Core.Foundations.ResourceCreatedOrOkResponse<EvaluationTaxonomy>
   >;
@@ -79,7 +79,7 @@ interface EvaluationTaxonomies {
 
       @doc("The evaluation taxonomy.")
       @body
-      body: EvaluationTaxonomy;
+      taxonomy: EvaluationTaxonomy;
     },
     OkResponse & EvaluationTaxonomy
   >;
