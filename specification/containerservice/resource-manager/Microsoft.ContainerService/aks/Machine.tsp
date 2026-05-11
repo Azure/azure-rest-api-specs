@@ -31,8 +31,8 @@ model Machine is Azure.ResourceManager.ProxyResource<MachineProperties> {
    * The Availability zone in which machine is located.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Property intentionally at envelope level for this resource. This is a published API pattern that cannot be changed without breaking existing clients."
-  @renamedFrom(Versions.v2026_02_02_preview, "zones")
-  @removed(Versions.v2026_02_02_preview)
+  @renamedFrom(Versions.v2026_03_02_preview, "zones")
+  @removed(Versions.v2026_03_02_preview)
   @visibility(Lifecycle.Read)
   readOnlyZones?: string[];
 
@@ -40,7 +40,7 @@ model Machine is Azure.ResourceManager.ProxyResource<MachineProperties> {
    * The Availability zone in which machine is located.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Property intentionally at envelope level for this resource. This is a published API pattern that cannot be changed without breaking existing clients."
-  @added(Versions.v2026_02_02_preview)
+  @added(Versions.v2026_03_02_preview)
   zones?: string[];
 }
 
@@ -61,7 +61,7 @@ interface Machines {
   /**
    * Creates or updates a machine in the specified agent pool.
    */
-  @added(Versions.v2026_02_02_preview)
+  @added(Versions.v2026_03_02_preview)
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Machine,
     Parameters = {
@@ -92,7 +92,7 @@ interface Machines {
 /**
  * The drift action of the machine. Indicates whether a machine has deviated from its expected state due to changes in managed cluster properties, requiring corrective action.
  */
-@added(Versions.v2026_02_02_preview)
+@added(Versions.v2026_03_02_preview)
 union DriftAction {
   string,
 
@@ -127,7 +127,7 @@ union VmState {
 /**
  * The security settings of the machine.
  */
-@added(Versions.v2026_02_02_preview)
+@added(Versions.v2026_03_02_preview)
 model MachineSecurityProfile {
   /**
    * vTPM is a Trusted Launch feature for configuring a dedicated secure vault for keys and measurements held locally on the node. For more details, see aka.ms/aks/trustedlaunch. If not specified, the default is false.
@@ -154,7 +154,7 @@ model MachineSecurityProfile {
 /**
  * The hardware and GPU settings of the machine.
  */
-@added(Versions.v2026_02_02_preview)
+@added(Versions.v2026_03_02_preview)
 model MachineHardwareProfile {
   /**
    * The size of the VM. VM size availability varies by region. If a node contains insufficient compute resources (memory, cpu, etc) pods might fail to run correctly. For more details on restricted VM sizes, see: https://docs.microsoft.com/azure/aks/quotas-skus-regions
@@ -180,7 +180,7 @@ model MachineHardwareProfile {
 /**
  * The operating system and disk used by the machine.
  */
-@added(Versions.v2026_02_02_preview)
+@added(Versions.v2026_03_02_preview)
 model MachineOSProfile {
   /**
    * The operating system type. The default is Linux.
@@ -227,7 +227,7 @@ model MachineOSProfile {
  * The Linux machine's specific profile.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
-@added(Versions.v2026_02_02_preview)
+@added(Versions.v2026_03_02_preview)
 model MachineOSProfileLinuxProfile {
   /**
    * The OS configuration of Linux machine.
@@ -243,7 +243,7 @@ model MachineOSProfileLinuxProfile {
 /**
  * The Kubernetes configurations used by the machine.
  */
-@added(Versions.v2026_02_02_preview)
+@added(Versions.v2026_03_02_preview)
 model MachineKubernetesProfile {
   /**
    * The node labels on the machine.
@@ -307,7 +307,7 @@ model MachineKubernetesProfile {
 /**
  * The properties having to do with machine billing.
  */
-@added(Versions.v2026_02_02_preview)
+@added(Versions.v2026_03_02_preview)
 model MachineBillingProfile {
   /**
    * The max price (in US Dollars) you are willing to pay for spot instances. Possible values are any decimal value greater than zero or -1 which indicates default price to be up-to on-demand. For more details on spot pricing, see [spot VMs pricing](https://docs.microsoft.com/azure/virtual-machines/spot-vms#pricing)
@@ -318,7 +318,7 @@ model MachineBillingProfile {
 /**
  * Contains read-only information about the machine.
  */
-@added(Versions.v2026_02_02_preview)
+@added(Versions.v2026_03_02_preview)
 model MachineStatus {
   /**
    * The error details information of the machine. Preserves the detailed info of failure. If there was no error, this field is omitted.
@@ -359,15 +359,15 @@ model MachineProperties {
   /**
    * network properties of the machine
    */
-  @renamedFrom(Versions.v2026_02_02_preview, "network")
-  @removed(Versions.v2026_02_02_preview)
+  @renamedFrom(Versions.v2026_03_02_preview, "network")
+  @removed(Versions.v2026_03_02_preview)
   @visibility(Lifecycle.Read)
   readOnlyNetwork?: MachineNetworkProperties;
 
   /**
    * network properties of the machine
    */
-  @added(Versions.v2026_02_02_preview)
+  @added(Versions.v2026_03_02_preview)
   network?: MachineNetworkProperties;
 
   /**
@@ -386,55 +386,55 @@ model MachineProperties {
   /**
    * The hardware and GPU settings of the machine.
    */
-  @added(Versions.v2026_02_02_preview)
+  @added(Versions.v2026_03_02_preview)
   hardware?: MachineHardwareProfile;
 
   /**
    * The operating system and disk used by the machine.
    */
-  @added(Versions.v2026_02_02_preview)
+  @added(Versions.v2026_03_02_preview)
   operatingSystem?: MachineOSProfile;
 
   /**
    * The Kubernetes configurations used by the machine.
    */
-  @added(Versions.v2026_02_02_preview)
+  @added(Versions.v2026_03_02_preview)
   kubernetes?: MachineKubernetesProfile;
 
   /**
    * Machine only allows 'System' and 'User' mode.
    */
-  @added(Versions.v2026_02_02_preview)
+  @added(Versions.v2026_03_02_preview)
   mode?: AgentPoolMode;
 
   /**
    * The security settings of the machine.
    */
-  @added(Versions.v2026_02_02_preview)
+  @added(Versions.v2026_03_02_preview)
   security?: MachineSecurityProfile;
 
   /**
    * The priority for the machine. If not specified, the default is 'Regular'.
    */
-  @added(Versions.v2026_02_02_preview)
+  @added(Versions.v2026_03_02_preview)
   priority?: ScaleSetPriority = ScaleSetPriority.Regular;
 
   /**
    * The eviction policy for machine. This cannot be specified unless the priority is 'Spot'. If not specified, the default is 'Delete'.
    */
-  @added(Versions.v2026_02_02_preview)
+  @added(Versions.v2026_03_02_preview)
   evictionPolicy?: ScaleSetEvictionPolicy = ScaleSetEvictionPolicy.Delete;
 
   /**
    * The properties having to do with machine billing.
    */
-  @added(Versions.v2026_02_02_preview)
+  @added(Versions.v2026_03_02_preview)
   billing?: MachineBillingProfile;
 
   /**
    * The version of node image.
    */
-  @added(Versions.v2026_02_02_preview)
+  @added(Versions.v2026_03_02_preview)
   @visibility(Lifecycle.Read)
   nodeImageVersion?: string;
 
@@ -442,7 +442,7 @@ model MachineProperties {
    * The current deployment or provisioning state.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "AKS uses custom provisioning states beyond standard ARM states. Using string type for forward compatibility."
-  @added(Versions.v2026_02_02_preview)
+  @added(Versions.v2026_03_02_preview)
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -450,20 +450,20 @@ model MachineProperties {
    * The tags to be persisted on the machine.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<> is used for dynamic key-value structures where keys cannot be pre-defined (e.g., tags, addon names, version numbers)."
-  @added(Versions.v2026_02_02_preview)
+  @added(Versions.v2026_03_02_preview)
   tags?: Record<string>;
 
   /**
    * Unique read-only string used to implement optimistic concurrency. The eTag value will change when the resource is updated. Specify an if-match or if-none-match header with the eTag value for a subsequent request to enable optimistic concurrency per the normal eTag convention.
    */
-  @added(Versions.v2026_02_02_preview)
+  @added(Versions.v2026_03_02_preview)
   @visibility(Lifecycle.Read)
   eTag?: string;
 
   /**
    * Contains read-only information about the machine.
    */
-  @added(Versions.v2026_02_02_preview)
+  @added(Versions.v2026_03_02_preview)
   @visibility(Lifecycle.Read)
   status?: MachineStatus;
 
@@ -471,7 +471,7 @@ model MachineProperties {
    * Configures the per-node local DNS, with VnetDNS and KubeDNS overrides. LocalDNS helps improve performance and reliability of DNS resolution in an AKS cluster. For more details see aka.ms/aks/localdns.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
-  @added(Versions.v2026_02_02_preview)
+  @added(Versions.v2026_03_02_preview)
   localDNSProfile?: LocalDNSProfile;
 }
 
@@ -490,7 +490,7 @@ model MachineNetworkProperties {
    * The ID of the subnet which node and optionally pods will join on startup. If this is not specified, a VNET and subnet will be generated and used. If no podSubnetID is specified, this applies to nodes and pods, otherwise it applies to just nodes. This is of the form: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
-  @added(Versions.v2026_02_02_preview)
+  @added(Versions.v2026_03_02_preview)
   vnetSubnetID?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Network/virtualNetworks/subnets";
@@ -501,7 +501,7 @@ model MachineNetworkProperties {
    * The ID of the subnet which pods will join when launched. If omitted, pod IPs are statically assigned on the node subnet (see vnetSubnetID for more details). This is of the form: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
-  @added(Versions.v2026_02_02_preview)
+  @added(Versions.v2026_03_02_preview)
   podSubnetID?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Network/virtualNetworks/subnets";
@@ -512,14 +512,14 @@ model MachineNetworkProperties {
    * Whether the machine is allocated its own public IP. Some scenarios may require the machine to receive their own dedicated public IP addresses. A common scenario is for gaming workloads, where a console needs to make a direct connection to a cloud virtual machine to minimize hops. The default is false.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
-  @added(Versions.v2026_02_02_preview)
+  @added(Versions.v2026_03_02_preview)
   enableNodePublicIP?: boolean;
 
   /**
    * The public IP prefix ID which VM node should use IPs from. This is of the form: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/publicIPPrefixes/{publicIPPrefixName}
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
-  @added(Versions.v2026_02_02_preview)
+  @added(Versions.v2026_03_02_preview)
   nodePublicIPPrefixID?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Network/publicIPPrefixes";
@@ -530,7 +530,7 @@ model MachineNetworkProperties {
    * IPTags of instance-level public IPs.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
-  @added(Versions.v2026_02_02_preview)
+  @added(Versions.v2026_03_02_preview)
   @identifiers(#[])
   nodePublicIPTags?: IPTag[];
 }
