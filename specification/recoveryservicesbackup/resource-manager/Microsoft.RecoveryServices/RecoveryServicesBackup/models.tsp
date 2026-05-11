@@ -269,7 +269,7 @@ union SoftDeleteFeatureState {
  * Threat status of the container
  */
 @added(Versions.v2026_01_31_preview)
-@removed(Versions.v2026_05_01)
+@removed(Versions.v2026_02_01)
 union SourceSideScanStatus {
   string,
 
@@ -287,7 +287,7 @@ union SourceSideScanStatus {
  * Threat summary for the container
  */
 @added(Versions.v2026_01_31_preview)
-@removed(Versions.v2026_05_01)
+@removed(Versions.v2026_02_01)
 union SourceSideScanSummary {
   string,
 
@@ -308,7 +308,7 @@ union SourceSideScanSummary {
  * Source side threat information
  */
 @added(Versions.v2026_01_31_preview)
-@removed(Versions.v2026_05_01)
+@removed(Versions.v2026_02_01)
 model SourceSideScanInfo {
   /**
    * Threat status of the container
@@ -325,7 +325,7 @@ model SourceSideScanInfo {
  * Threat status of the recovery point
  */
 @added(Versions.v2026_01_31_preview)
-@removed(Versions.v2026_05_01)
+@removed(Versions.v2026_02_01)
 union ThreatStatus {
   string,
 
@@ -349,7 +349,7 @@ union ThreatStatus {
  * Threat Status Types
  */
 @added(Versions.v2026_01_31_preview)
-@removed(Versions.v2026_05_01)
+@removed(Versions.v2026_02_01)
 union ThreatState {
   string,
 
@@ -370,7 +370,7 @@ union ThreatState {
  * Threat Severity Types
  */
 @added(Versions.v2026_01_31_preview)
-@removed(Versions.v2026_05_01)
+@removed(Versions.v2026_02_01)
 union ThreatSeverity {
   string,
 
@@ -391,7 +391,7 @@ union ThreatSeverity {
  * Recovery Point Threat information
  */
 @added(Versions.v2026_01_31_preview)
-@removed(Versions.v2026_05_01)
+@removed(Versions.v2026_02_01)
 model ThreatInfo {
   /**
    * Threat Subject
@@ -739,7 +739,7 @@ union PolicyType {
  * Type of the protection policy
  */
 @added(Versions.v2026_01_31_preview)
-@removed(Versions.v2026_05_01)
+@removed(Versions.v2026_02_01)
 union VMWorkloadPolicyType {
   string,
 
@@ -849,7 +849,7 @@ union ProtectedItemState {
  * Protection type in case protected as part of a parent.
  */
 @added(Versions.v2026_01_31_preview)
-@removed(Versions.v2026_05_01)
+@removed(Versions.v2026_02_01)
 union ProtectionLevel {
   string,
 
@@ -864,7 +864,7 @@ union ProtectionLevel {
  * The state of instance protection.
  */
 @added(Versions.v2026_01_31_preview)
-@removed(Versions.v2026_05_01)
+@removed(Versions.v2026_02_01)
 union InstanceProtectionReadiness {
   string,
 
@@ -1008,12 +1008,12 @@ union RestorePointQueryType {
 
   /** Snapshot restore point type */
   @added(Versions.v2026_01_31_preview)
-  @removed(Versions.v2026_05_01)
+  @removed(Versions.v2026_02_01)
   Snapshot: "Snapshot",
 
   /** Full, differential, and snapshot restore point types */
   @added(Versions.v2026_01_31_preview)
-  @removed(Versions.v2026_05_01)
+  @removed(Versions.v2026_02_01)
   FullDifferentialAndSnapshot: "FullDifferentialAndSnapshot",
 }
 
@@ -1300,7 +1300,7 @@ union ContainerType {
 
   /** HANA scale-out container type */
   @added(Versions.v2026_01_31_preview)
-  @removed(Versions.v2026_05_01)
+  @removed(Versions.v2026_02_01)
   HanaScaleoutContainer: "HanaScaleoutContainer",
 }
 
@@ -2386,7 +2386,7 @@ model ProtectedItem {
    * Source side threat information
    */
   @added(Versions.v2026_01_31_preview)
-  @removed(Versions.v2026_05_01)
+  @removed(Versions.v2026_02_01)
   sourceSideScanInfo?: SourceSideScanInfo;
 }
 
@@ -2418,14 +2418,14 @@ model RecoveryPoint {
    * Threat status of the recovery point
    */
   @added(Versions.v2026_01_31_preview)
-  @removed(Versions.v2026_05_01)
+  @removed(Versions.v2026_02_01)
   threatStatus?: ThreatStatus;
 
   /**
    * Recovery point threat information.
    */
   @added(Versions.v2026_01_31_preview)
-  @removed(Versions.v2026_05_01)
+  @removed(Versions.v2026_02_01)
   @identifiers(#[])
   threatInfo?: ThreatInfo[];
 }
@@ -3225,7 +3225,7 @@ model UnlockDeleteResponse {
  * Patch Request content to update recovery point for given RecoveryPointId
  */
 @added(Versions.v2026_01_31_preview)
-@removed(Versions.v2026_05_01)
+@removed(Versions.v2026_02_01)
 model UpdateRecoveryPointRequest {
   /**
    * Resource properties.
@@ -3237,7 +3237,7 @@ model UpdateRecoveryPointRequest {
  * Recovery Point Contract for Update Recovery Point API.
  */
 @added(Versions.v2026_01_31_preview)
-@removed(Versions.v2026_05_01)
+@removed(Versions.v2026_02_01)
 model PatchRecoveryPointInput {
   /**
    * Properties of Recovery Point
@@ -3249,7 +3249,7 @@ model PatchRecoveryPointInput {
  * Recovery Point Properties Contract for Update Recovery Point API.
  */
 @added(Versions.v2026_01_31_preview)
-@removed(Versions.v2026_05_01)
+@removed(Versions.v2026_02_01)
 model PatchRecoveryPointPropertiesInput {
   /**
    * Expiry time of Recovery Point in UTC.
@@ -3611,7 +3611,7 @@ model AzureVmWorkloadProtectionPolicy extends ProtectionPolicy {
    * Type of the protection policy
    */
   @added(Versions.v2026_01_31_preview)
-  @removed(Versions.v2026_05_01)
+  @removed(Versions.v2026_02_01)
   vmWorkloadPolicyType?: VMWorkloadPolicyType;
 
   /**
@@ -4656,14 +4656,14 @@ model AzureVmWorkloadSQLDatabaseProtectedItem extends ProtectedItem {
    * Name of the parent protected item (e.g., SQL Instance name) when this database is protected as part of a parent.
    */
   @added(Versions.v2026_01_31_preview)
-  @removed(Versions.v2026_05_01)
+  @removed(Versions.v2026_02_01)
   parentProtectedItem?: string;
 
   /**
    * Protection type in case protected as part of a parent.
    */
   @added(Versions.v2026_01_31_preview)
-  @removed(Versions.v2026_05_01)
+  @removed(Versions.v2026_02_01)
   protectionLevel?: ProtectionLevel;
 }
 
@@ -4672,7 +4672,7 @@ model AzureVmWorkloadSQLDatabaseProtectedItem extends ProtectedItem {
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 @added(Versions.v2026_01_31_preview)
-@removed(Versions.v2026_05_01)
+@removed(Versions.v2026_02_01)
 model AzureVmWorkloadSQLInstanceProtectedItem extends ProtectedItem {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -5196,7 +5196,7 @@ model AzureWorkloadSQLRecoveryPointExtendedInfo {
    * List of databases included in recovery point.
    */
   @added(Versions.v2026_01_31_preview)
-  @removed(Versions.v2026_05_01)
+  @removed(Versions.v2026_02_01)
   @identifiers(#[])
   includedDatabases?: DatabaseInRP[];
 }
@@ -5364,7 +5364,7 @@ model BmsrpQueryObject {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving existing API naming convention from prior swagger versions"
   @added(Versions.v2026_01_31_preview)
-  @removed(Versions.v2026_05_01)
+  @removed(Versions.v2026_02_01)
   baseSnapshotRPId?: string;
 
   /**
@@ -5372,7 +5372,7 @@ model BmsrpQueryObject {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving existing API naming convention from prior swagger versions"
   @added(Versions.v2026_01_31_preview)
-  @removed(Versions.v2026_05_01)
+  @removed(Versions.v2026_02_01)
   baseRPDatasourceId?: string;
 
   /**
@@ -5380,7 +5380,7 @@ model BmsrpQueryObject {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving existing API naming convention from prior swagger versions"
   @added(Versions.v2026_01_31_preview)
-  @removed(Versions.v2026_05_01)
+  @removed(Versions.v2026_02_01)
   getLatestRPOnly?: boolean;
 }
 
@@ -5797,7 +5797,7 @@ model DailySchedule {
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original API naming convention"
 @added(Versions.v2026_01_31_preview)
-@removed(Versions.v2026_05_01)
+@removed(Versions.v2026_02_01)
 model DatabaseInRP {
   /**
    * Datasource Id for the database.
@@ -7740,7 +7740,7 @@ model AzureVmWorkloadSAPHanaHSRProtectableItem extends WorkloadProtectableItem {
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 @added(Versions.v2026_01_31_preview)
-@removed(Versions.v2026_05_01)
+@removed(Versions.v2026_02_01)
 model AzureVmWorkloadSAPHanaScaleoutProtectableItem
   extends WorkloadProtectableItem {
   /**

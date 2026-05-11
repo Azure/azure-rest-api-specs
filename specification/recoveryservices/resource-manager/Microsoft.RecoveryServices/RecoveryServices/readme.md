@@ -51,6 +51,15 @@ input-file:
   - stable/2026-05-01/openapi.json
 ```
 
+### Tag: package-2026-02-01
+
+These settings apply only when `--tag=package-2026-02-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-02-01'
+input-file:
+  - stable/2026-02-01/openapi.json
+```
+
 ### Tag: package-2026-01-01
 
 These settings apply only when `--tag=package-2026-01-01` is specified on the command line.
