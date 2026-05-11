@@ -10,20 +10,37 @@ import "./SchemaVersion.tsp";
 import "./SchemaReference.tsp";
 import "./Solution.tsp";
 import "./SolutionVersion.tsp";
+import "./SolutionMetadata.tsp";
+import "./SolutionMetadataVersion.tsp";
 import "./Target.tsp";
-import "./SolutionTemplateVersion.tsp";
+import "./TargetTemplate.tsp";
 import "./SolutionTemplate.tsp";
+import "./SolutionTemplateVersion.tsp";
 import "./Instance.tsp";
 import "./InstanceHistory.tsp";
 import "./ConfigTemplate.tsp";
+import "./ConfigurationTemplate.tsp";
 import "./ConfigTemplateVersion.tsp";
+import "./ConfigurationTemplateVersion.tsp";
 import "./Workflow.tsp";
 import "./WorkflowVersion.tsp";
+import "./WorkflowTemplate.tsp";
+import "./WorkflowV2.tsp";
+import "./WorkflowVersionV2.tsp";
+import "./ExecutionV2.tsp";
+import "./WorkflowTemplateVersion.tsp";
 import "./Execution.tsp";
 import "./Job.tsp";
 import "./Diagnostics.tsp";
 import "./Context.tsp";
 import "./SiteReference.tsp";
+import "./EventGridFilters.tsp";
+import "./SolutionSchema.tsp";
+import "./ConfigTemplateSchema.tsp";
+import "./ConfigTemplateMetadata.tsp";
+import "./HierarchyConfigurationMetadata.tsp";
+import "./HierarchyConfigurationMetadataVersion.tsp";
+import "./InternalState.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -45,4 +62,10 @@ enum Versions {
 
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2025_08_01: "2025-08-01",
+
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2025_08_15_preview: "2025-08-15-preview",
+
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2026_03_01: "2026-03-01",
 }
