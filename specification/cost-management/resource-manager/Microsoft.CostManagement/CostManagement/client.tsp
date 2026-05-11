@@ -239,6 +239,7 @@ op GetGenerateDetailedCostReportOperationStatusCustomized(
   "csharp"
 );
 @@clientName(Status, "ReportOperationStatus", "csharp");
+@@clientName(Reason, "CostAllocationRuleCheckNameAvailabilityReason", "csharp");
 
 @@clientName(CostAllocationRuleDefinition, "CostAllocationRule", "csharp");
 @@clientName(GenerateCostDetailsReportRequestDefinition,
