@@ -3,4 +3,100 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
-@@clientName(Microsoft.HorizonDb, "HorizonDBMgmtClient", "python");
+@@clientName(Azure.ResourceManager.PrivateEndpointConnectionUpdate,
+  "HorizonDBPrivateEndpointConnectionPatch"
+);
+@@clientName(Microsoft.HorizonDb, "HorizonDBMgmtClient");
+@@clientName(Microsoft.HorizonDb.CreateModeCluster,
+  "HorizonDBCreateModeCluster"
+);
+@@clientName(Microsoft.HorizonDb.CreateModePool, "HorizonDBCreateModePool");
+@@clientName(Microsoft.HorizonDb.HorizonDbCluster, "HorizonDBCluster");
+@@clientName(Microsoft.HorizonDb.HorizonDbClusterForPatchUpdate,
+  "HorizonDBClusterForPatchUpdate"
+);
+@@clientName(Microsoft.HorizonDb.HorizonDbClusterParameterGroupConnectionProperties,
+  "HorizonDBClusterParameterGroupConnectionProperties"
+);
+@@clientName(Microsoft.HorizonDb.HorizonDbClusterProperties,
+  "HorizonDBClusterProperties"
+);
+@@clientName(Microsoft.HorizonDb.HorizonDbClusterPropertiesForPatchUpdate,
+  "HorizonDBClusterPropertiesForPatchUpdate"
+);
+@@clientName(Microsoft.HorizonDb.HorizonDbClusters, "HorizonDBClusters");
+@@clientName(Microsoft.HorizonDb.HorizonDbFirewallRule,
+  "HorizonDBFirewallRule"
+);
+@@clientName(Microsoft.HorizonDb.HorizonDbFirewallRuleProperties,
+  "HorizonDBFirewallRuleProperties"
+);
+@@clientName(Microsoft.HorizonDb.HorizonDbFirewallRules,
+  "HorizonDBFirewallRules"
+);
+@@clientName(Microsoft.HorizonDb.HorizonDbParameterGroup,
+  "HorizonDBParameterGroup"
+);
+@@clientName(Microsoft.HorizonDb.HorizonDbParameterGroupConnectionProperties,
+  "HorizonDBParameterGroupConnectionProperties"
+);
+@@clientName(Microsoft.HorizonDb.HorizonDbParameterGroupForPatchUpdate,
+  "HorizonDBParameterGroupForPatchUpdate"
+);
+@@clientName(Microsoft.HorizonDb.HorizonDbParameterGroupProperties,
+  "HorizonDBParameterGroupProperties"
+);
+@@clientName(Microsoft.HorizonDb.HorizonDbParameterGroupPropertiesForPatchUpdate,
+  "HorizonDBParameterGroupPropertiesForPatchUpdate"
+);
+@@clientName(Microsoft.HorizonDb.HorizonDbParameterGroups,
+  "HorizonDBParameterGroups"
+);
+@@clientName(Microsoft.HorizonDb.HorizonDbPool, "HorizonDBPool");
+@@clientName(Microsoft.HorizonDb.HorizonDbPoolProperties,
+  "HorizonDBPoolProperties"
+);
+@@clientName(Microsoft.HorizonDb.HorizonDbPools, "HorizonDBPools");
+@@clientName(Microsoft.HorizonDb.HorizonDbPrivateEndpointConnections,
+  "HorizonDBPrivateEndpointConnections"
+);
+@@clientName(Microsoft.HorizonDb.HorizonDbPrivateEndpointConnections.update,
+  "updatePrivateEndpointConnection"
+);
+@@clientName(Microsoft.HorizonDb.HorizonDbPrivateEndpointConnections.delete,
+  "deletePrivateEndpointConnection"
+);
+@@clientName(Microsoft.HorizonDb.HorizonDbPrivateLinkResource,
+  "HorizonDBPrivateLinkResource"
+);
+@@clientName(Microsoft.HorizonDb.HorizonDbPrivateLinkResources,
+  "HorizonDBPrivateLinkResources"
+);
+@@clientName(Microsoft.HorizonDb.HorizonDbReplica, "HorizonDBReplica");
+@@clientName(Microsoft.HorizonDb.HorizonDbReplicaForPatchUpdate,
+  "HorizonDBReplicaForPatchUpdate"
+);
+@@clientName(Microsoft.HorizonDb.HorizonDbReplicaProperties,
+  "HorizonDBReplicaProperties"
+);
+@@clientName(Microsoft.HorizonDb.HorizonDbReplicaPropertiesForPatchUpdate,
+  "HorizonDBReplicaPropertiesForPatchUpdate"
+);
+@@clientName(Microsoft.HorizonDb.HorizonDbReplicas, "HorizonDBReplicas");
+@@clientName(Microsoft.HorizonDb.ParameterProperties,
+  "HorizonDBParameterProperties"
+);
+@@clientName(Microsoft.HorizonDb.ParameterProperties,
+  "HorizonDBParameterProperties"
+);
+@@clientName(Microsoft.HorizonDb.ProvisioningState,
+  "HorizonDBProvisioningState"
+);
+@@clientName(Microsoft.HorizonDb.PublicNetworkAccessState,
+  "HorizonDBPublicNetworkAccessState"
+);
+@@clientName(Microsoft.HorizonDb.ReplicaRole, "HorizonDBReplicaRole");
+@@clientName(Microsoft.HorizonDb.State, "HorizonDBClusterState");
+@@clientName(Microsoft.HorizonDb.ZonePlacementPolicy,
+  "HorizonDBZonePlacementPolicy"
+);
