@@ -57,9 +57,8 @@ interface ResourceRecommendationBases {
   update is Extension.CustomPatchSync<
     Extension.Subscription,
     ResourceRecommendationBase,
-    RecommendationStatePropertiesPayload
-    >;
-
+    RecommendationPatchPayload
+  >;
 
   /**
    * Obtains cached recommendations for a subscription. The recommendations are generated or computed by invoking generateRecommendations.

@@ -1087,7 +1087,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RecommendationStatePropertiesPayload"
+              "$ref": "#/definitions/RecommendationPatchPayload"
             }
           }
         ],
@@ -2711,6 +2711,16 @@
             "value": "Other"
           }
         ]
+      }
+    },
+    "RecommendationPatchPayload": {
+      "type": "object",
+      "description": "The recommendation patch payload.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RecommendationStatePropertiesPayload",
+          "description": "The properties for recommendation patch payload."
+        }
       }
     },
     "RecommendationProperties": {

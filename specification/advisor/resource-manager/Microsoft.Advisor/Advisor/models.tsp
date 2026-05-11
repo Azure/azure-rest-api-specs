@@ -726,6 +726,17 @@ model RecommendationProperties {
 }
 
 /**
+ * The recommendation patch payload.
+ */
+@added(Versions.v2026_02_01_preview)
+model RecommendationPatchPayload {
+  /**
+   * The properties for recommendation patch payload.
+   */
+  properties?: RecommendationStatePropertiesPayload;
+}
+
+/**
  * Properties for recommendation state patch payload.
  */
 @added(Versions.v2026_02_01_preview)
