@@ -121,3 +121,17 @@ using Microsoft.AlertsManagement;
   Azure.Core.armResourceIdentifier[],
   "csharp"
 );
+
+// C# customizations: also flatten `PreviewAlertRuleRequest.properties` so the
+// inner `timespan` (required) and `scheduledQueryRuleProperties` fields surface
+// directly on `PreviewAlertRuleRequest`. Without this, callers must construct
+// a separate `PreviewAlertRuleRequestProperties` envelope and pass it to the
+// outer ctor, which yields a verbose two-step builder pattern (`new Request(loc,
+// new RequestProperties(timespan) { ScheduledQueryRuleProperties = rule })`).
+// Flattening collapses this to the idiomatic single-statement form
+// (`new Request(loc, timespan) { ScheduledQueryRuleProperties = rule }`) and
+// matches how `LogAlertRuleResource.properties` is handled above.
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required so flattened scalars are settable"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PreviewAlertRuleRequest.properties,
+  "csharp"
+);
