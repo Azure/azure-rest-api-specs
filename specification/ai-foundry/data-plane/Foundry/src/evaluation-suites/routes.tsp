@@ -20,6 +20,7 @@ alias EvaluationSuiteFilterQueryParams = {
 // CRUD operations (versioned asset pattern)
 // ---------------------------------------------------------------------------
 
+@removed(Versions.v1)
 interface EvaluationSuites
   extends VersionedOperations<
       EvaluationSuiteVersion,
