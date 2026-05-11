@@ -20,6 +20,7 @@ namespace Azure.AI.Projects {
     work_iq_preview: "work_iq_preview",
     fabric_iq_preview: "fabric_iq_preview",
     toolbox_search_preview: "toolbox_search_preview",
+    browser_tool_preview: "browser_tool_preview",
   }
 
   // General availability tools:
@@ -896,6 +897,18 @@ namespace Azure.AI.Projects {
      * The type of the tool. Always `toolbox_search_preview`.
      */
     type: "toolbox_search_preview";
+
+    ...ToolNameAndDescriptionExtension;
+  }
+
+  /**
+   * Browser Tool Preview.
+   */
+  model BrowserToolPreviewTool extends OpenAI.Tool {
+    /**
+     * The type of the tool. Always `browser_tool_preview`.
+     */
+    type: "browser_tool_preview";
 
     ...ToolNameAndDescriptionExtension;
   }
