@@ -179,7 +179,6 @@ model AutoscalingProfile {
   maxReplicas?: int32;
 }
 
-
 @added(Versions.v2026_05_02_preview)
 @armResourceOperations
 interface ModelDeployments {

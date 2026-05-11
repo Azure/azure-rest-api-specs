@@ -15,7 +15,7 @@ namespace Microsoft.ContainerService;
 @added(Versions.v2026_05_02_preview)
 @doc("An AI model exposed by Microsoft.ContainerService. Platform-maintained and auto-provisioned by the resource provider; can be referenced by `ModelDeployment` resources.")
 @resource("aiModels")
-model AIModel is TrackedResource<AIModelProperties> {
+model AIModel is ProxyResource<AIModelProperties> {
   ...ResourceNameParameter<
     Resource = AIModel,
     KeyName = "aiModelName",
