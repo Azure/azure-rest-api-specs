@@ -14,16 +14,25 @@ namespace Microsoft.Sql;
 /**
  * A restorable dropped database resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
 model RestorableDroppedDatabase
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<RestorableDroppedDatabaseProperties> {
+  is Azure.ResourceManager.ProxyResource<RestorableDroppedDatabaseProperties> {
   ...ResourceNameParameter<
     Resource = RestorableDroppedDatabase,
     KeyName = "restorableDroppedDatabaseId",
     SegmentName = "restorableDroppedDatabases",
     NamePattern = ""
   >;
+
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: string;
 
   /**
    * The name and tier of the SKU.
