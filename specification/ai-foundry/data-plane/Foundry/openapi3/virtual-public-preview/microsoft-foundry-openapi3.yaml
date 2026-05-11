@@ -5722,10 +5722,24 @@ paths:
           description: Accepted response for asynchronous model version creation, with polling location.
           headers:
             Location:
-              required: true
+              required: false
               description: URL to poll for operation status.
               schema:
                 type: string
+                format: uri
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  location:
+                    type: string
+                    format: uri
+                    description: URL to the location of the completed or in-progress operation.
+                  operationResult:
+                    type: string
+                    format: uri
+                    description: URL to the operation result.
         default:
           description: An unexpected error response.
           headers:

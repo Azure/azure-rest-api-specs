@@ -193,5 +193,14 @@ model CreateModelVersionAsyncResponse {
 
   @doc("URL to poll for operation status.")
   @header("Location")
-  location: string;
+  location?: url;
+
+  @bodyRoot
+  body: {
+    @doc("URL to the location of the completed or in-progress operation.")
+    location?: url;
+
+    @doc("URL to the operation result.")
+    operationResult?: url;
+  };
 }
