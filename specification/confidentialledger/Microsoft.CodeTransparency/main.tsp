@@ -1,11 +1,13 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
 using Azure.Core;
 using Azure.Core.Foundations;
 using Azure.Core.Traits;
@@ -87,20 +89,38 @@ op getScittKey is Foundations.Operation<
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @added(Versions.`2025-01-31-preview`)
+@removed(Versions.`2026-03-26`)
+@sharedRoute
 @doc("Post an entry to be registered on the CodeTransparency instance, mandatory in IETF SCITT draft")
 @post
 @route("/entries")
 op createEntry is Foundations.Operation<
+  SignedStatement & AcceptCoseOrCborHeader,
+  CreateEntryCreated | CreateEntryPending,
+  ServiceTraits,
+  AnyCborError
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserving canonical CreateEntry operationId across versions"
+@added(Versions.`2026-03-26`)
+@operationId("CreateEntry")
+@sharedRoute
+@doc("Post an entry to be registered on the CodeTransparency instance, mandatory in IETF SCITT draft")
+@post
+@route("/entries")
+op createEntryV09 is Foundations.Operation<
   SignedStatement & AcceptCoseOrCborHeader & WaitForCommitParameter,
-  CreateEntryCreated | CreateEntryPending | CreateEntrySeeOther,
+  CreateEntryCreated | CreateEntrySeeOther,
   ServiceTraits,
   AnyCborError | Response503CborWithReceipt
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-#deprecated "The /operations/{operationId} endpoint is deprecated in SCRAPI v09 (api-version=2026-03-26). Clients should poll /entries/{entryId} directly. Behavior is unchanged for backward compatibility."
 @added(Versions.`2025-01-31-preview`)
-@doc("Get status of the long running registration operation. Deprecated in SCRAPI v09 but retained unchanged for backward compatibility; clients should poll /entries/{entryId} directly.")
+@removed(Versions.`2026-03-26`)
+@sharedRoute
+@doc("Get status of the long running registration operation, mandatory in IETF SCITT draft")
 @route("/operations/{operationId}")
 op getOperation is Foundations.Operation<
   OperationIdParameter & AcceptCborHeader,
@@ -110,10 +130,41 @@ op getOperation is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserving canonical GetOperation operationId across versions"
+#deprecated "The /operations/{operationId} endpoint is deprecated in SCRAPI v09 (api-version=2026-03-26). Clients should poll /entries/{entryId} directly. Behavior is unchanged for backward compatibility."
+@added(Versions.`2026-03-26`)
+@operationId("GetOperation")
+@sharedRoute
+@doc("Get status of the long running registration operation. Deprecated in SCRAPI v09 but retained unchanged for backward compatibility; clients should poll /entries/{entryId} directly.")
+@route("/operations/{operationId}")
+op getOperationV09 is Foundations.Operation<
+  OperationIdParameter & AcceptCborHeader,
+  OperationStatusComplete | OperationStatusPending,
+  ServiceTraits,
+  AnyCborError
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @added(Versions.`2025-01-31-preview`)
+@removed(Versions.`2026-03-26`)
+@sharedRoute
 @doc("Get receipt")
 @route("/entries/{entryId}")
 op getEntry is Foundations.Operation<
+  EntryIdParameter & AcceptCoseHeader,
+  ReceiptEntry,
+  ServiceTraits,
+  AnyCborError
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserving canonical GetEntry operationId across versions"
+@added(Versions.`2026-03-26`)
+@operationId("GetEntry")
+@sharedRoute
+@doc("Get receipt")
+@route("/entries/{entryId}")
+op getEntryV09 is Foundations.Operation<
   EntryIdParameter & AcceptCoseHeader,
   ReceiptEntry | ReceiptEntryPending,
   ServiceTraits,
@@ -122,9 +173,25 @@ op getEntry is Foundations.Operation<
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @added(Versions.`2025-01-31-preview`)
+@removed(Versions.`2026-03-26`)
+@sharedRoute
 @doc("Get the transparent statement consisting of the signed statement and the receipt embedded in the header")
 @route("/entries/{entryId}/statement")
 op getEntryStatement is Foundations.Operation<
+  EntryIdParameter & AcceptCoseHeader,
+  TransparentStatement,
+  ServiceTraits,
+  AnyCborError
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserving canonical GetEntryStatement operationId across versions"
+@added(Versions.`2026-03-26`)
+@operationId("GetEntryStatement")
+@sharedRoute
+@doc("Get the transparent statement consisting of the signed statement and the receipt embedded in the header")
+@route("/entries/{entryId}/statement")
+op getEntryStatementV09 is Foundations.Operation<
   EntryIdParameter & AcceptScittStatementHeader,
   TransparentStatement,
   ServiceTraits,
@@ -147,6 +214,7 @@ model CreateEntryCreated {
   location?: string;
 
   @doc("Transaction ID for the committed entry, returned when waitForCommit=true")
+  @added(Versions.`2026-03-26`)
   @header("x-ms-ccf-transaction-id")
   transactionId?: string;
 
@@ -186,7 +254,7 @@ model CreateEntryPending {
   body: bytes;
 }
 
-@added(Versions.`2025-01-31-preview`)
+@added(Versions.`2026-03-26`)
 @doc("Response for async entry submission in SCRAPI v09, returns 303 See Other with empty body")
 model CreateEntrySeeOther {
   @doc("Status code")
@@ -247,7 +315,7 @@ model OperationStatusPending {
   retryAfter?: int32;
 }
 
-@added(Versions.`2025-01-31-preview`)
+@added(Versions.`2026-03-26`)
 @doc("Pending response for entry query in SCRAPI v09, returns 302 Found")
 model ReceiptEntryPending {
   @doc("Status code")
@@ -285,6 +353,7 @@ model SignedStatement {
 model TransparentStatement {
   @doc("The MIME content type is application/scitt-statement+cose in SCRAPI v09")
   @header("Content-Type")
+  @typeChangedFrom(Versions.`2026-03-26`, "application/cose")
   contentType: "application/scitt-statement+cose";
 
   @doc("CoseSign1 signature envelope with the receipt embedded in the unprotected header")
@@ -340,7 +409,7 @@ model KidParameter {
 }
 
 @doc("WaitForCommit query parameter for synchronous registration")
-@added(Versions.`2025-01-31-preview`)
+@added(Versions.`2026-03-26`)
 model WaitForCommitParameter {
   @doc("If true, waits for the entry to be committed before returning. Returns 201 with receipt or 503 on rollback.")
   @query
@@ -362,7 +431,7 @@ model AcceptCoseHeader {
 }
 
 @doc("Accept application/scitt-statement+cose header")
-@added(Versions.`2025-01-31-preview`)
+@added(Versions.`2026-03-26`)
 model AcceptScittStatementHeader {
   @doc("Accept header")
   @header
@@ -585,7 +654,7 @@ model Response503Cbor {
   error: ConciseProblemDetailsCbor;
 }
 
-@added(Versions.`2025-01-31-preview`)
+@added(Versions.`2026-03-26`)
 @doc("Service unavailable with CBOR error response for waitForCommit rollback")
 model Response503CborWithReceipt {
   @doc("Status code")

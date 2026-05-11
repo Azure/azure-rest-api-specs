@@ -222,7 +222,6 @@
         "description": "Post an entry to be registered on the CodeTransparency instance, mandatory in IETF SCITT draft",
         "produces": [
           "application/cose",
-          "application/cbor",
           "application/concise-problem-details+cbor"
         ],
         "consumes": [
@@ -256,23 +255,6 @@
               "x-ms-ccf-transaction-id": {
                 "type": "string",
                 "description": "Transaction ID for the committed entry, returned when waitForCommit=true"
-              }
-            }
-          },
-          "202": {
-            "description": "Response of entry submission containing the operation id, mandatory in IETF SCITT draft",
-            "schema": {
-              "type": "file"
-            },
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "Location of the operation"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "Retry-After seconds value to help with polling"
               }
             }
           },

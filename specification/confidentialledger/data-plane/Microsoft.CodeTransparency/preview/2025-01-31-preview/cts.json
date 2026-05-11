@@ -104,9 +104,6 @@
             "$ref": "#/parameters/AcceptCoseOrCborHeader"
           },
           {
-            "$ref": "#/parameters/WaitForCommitParameter"
-          },
-          {
             "$ref": "#/parameters/SignedStatement.body"
           }
         ],
@@ -120,10 +117,6 @@
               "Location": {
                 "type": "string",
                 "description": "Location of the receipt"
-              },
-              "x-ms-ccf-transaction-id": {
-                "type": "string",
-                "description": "Transaction ID for the committed entry, returned when waitForCommit=true"
               }
             }
           },
@@ -141,19 +134,6 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "Retry-After seconds value to help with polling"
-              }
-            }
-          },
-          "303": {
-            "description": "Response for async entry submission in SCRAPI v09, returns 303 See Other with empty body",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "Location of the entry to poll"
-              },
-              "x-ms-ccf-transaction-id": {
-                "type": "string",
-                "description": "Transaction ID for the entry"
               }
             }
           },
@@ -198,10 +178,6 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "Retry the same request after a suggested number of seconds"
-              },
-              "x-ms-ccf-transaction-id": {
-                "type": "string",
-                "description": "Transaction ID for the rolled back entry"
               }
             }
           }
@@ -242,20 +218,6 @@
               "Location": {
                 "type": "string",
                 "description": "Location of the receipt"
-              }
-            }
-          },
-          "302": {
-            "description": "Pending response for entry query in SCRAPI v09, returns 302 Found",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "Location of the entry to poll"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "Retry-After seconds value to help with polling"
               }
             }
           },
@@ -316,7 +278,7 @@
         "operationId": "GetEntryStatement",
         "description": "Get the transparent statement consisting of the signed statement and the receipt embedded in the header",
         "produces": [
-          "application/scitt-statement+cose",
+          "application/cose",
           "application/concise-problem-details+cbor"
         ],
         "parameters": [
@@ -327,7 +289,7 @@
             "$ref": "#/parameters/EntryIdParameter"
           },
           {
-            "$ref": "#/parameters/AcceptScittStatementHeader"
+            "$ref": "#/parameters/AcceptCoseHeader"
           }
         ],
         "responses": {
@@ -464,7 +426,7 @@
     "/operations/{operationId}": {
       "get": {
         "operationId": "GetOperation",
-        "description": "Get status of the long running registration operation. Deprecated in SCRAPI v09 but retained unchanged for backward compatibility; clients should poll /entries/{entryId} directly.",
+        "description": "Get status of the long running registration operation, mandatory in IETF SCITT draft",
         "produces": [
           "application/cbor",
           "application/concise-problem-details+cbor"
@@ -552,7 +514,6 @@
             }
           }
         },
-        "deprecated": true,
         "x-ms-examples": {
           "GetOperation": {
             "$ref": "./examples/GetOperation.json"
@@ -589,10 +550,6 @@
       "required": [
         "body"
       ]
-    },
-    "CreateEntrySeeOther": {
-      "type": "object",
-      "description": "Response for async entry submission in SCRAPI v09, returns 303 See Other with empty body"
     },
     "JsonWebKey": {
       "type": "object",
@@ -722,10 +679,6 @@
         "body"
       ]
     },
-    "ReceiptEntryPending": {
-      "type": "object",
-      "description": "Pending response for entry query in SCRAPI v09, returns 302 Found"
-    },
     "Response400Cbor": {
       "type": "object",
       "description": "Validation error response",
@@ -790,20 +743,6 @@
           "type": "string",
           "format": "byte",
           "description": "CBOR content of the error object"
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
-    "Response503CborWithReceipt": {
-      "type": "object",
-      "description": "Service unavailable with CBOR error response for waitForCommit rollback",
-      "properties": {
-        "error": {
-          "type": "string",
-          "format": "byte",
-          "description": "CBOR error content for rollback"
         }
       },
       "required": [
@@ -882,20 +821,6 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "AcceptScittStatementHeader": {
-      "name": "accept",
-      "in": "header",
-      "description": "Accept header",
-      "required": true,
-      "type": "string",
-      "enum": [
-        "application/scitt-statement+cose"
-      ],
-      "x-ms-enum": {
-        "modelAsString": false
-      },
-      "x-ms-parameter-location": "method"
-    },
     "Azure.Core.Foundations.ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
@@ -933,14 +858,6 @@
         "type": "string",
         "format": "binary"
       },
-      "x-ms-parameter-location": "method"
-    },
-    "WaitForCommitParameter": {
-      "name": "waitForCommit",
-      "in": "query",
-      "description": "If true, waits for the entry to be committed before returning. Returns 201 with receipt or 503 on rollback.",
-      "required": false,
-      "type": "boolean",
       "x-ms-parameter-location": "method"
     }
   }
