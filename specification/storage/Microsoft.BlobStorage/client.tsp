@@ -698,6 +698,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@scope(Storage.Blob.Blob.startCopyFromUrl, "!rust");
 @@scope(Storage.Blob.BlockBlob.query, "!rust");
 @@scope(Storage.Blob.PageBlob.copyIncremental, "!rust");
+@@scope(Storage.Blob.PageBlob.getPageRanges, "!rust");
 @@scope(Storage.Blob.PageBlob.getPageRangesDiff, "!rust");
 
 @@alternateType(Storage.Blob.UserDelegationKey.signedStart, string, "python");
