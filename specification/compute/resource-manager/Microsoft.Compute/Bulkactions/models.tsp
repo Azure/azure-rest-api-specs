@@ -96,9 +96,131 @@ model Resources {
 }
 
 /**
- * The virtual machine specification for bulk create.
+ * The flex properties for flexible VM creation.
  */
-model BulkactionVMSpec {
+// ----------- ExecuteCreateFlex ---------
+@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@doc("The supported operating system types for flex VM creation")
+union OsType {
+  @doc("Windows operating system")
+  Windows: "Windows",
+
+  @doc("Linux operating system")
+  Linux: "Linux",
+
+  string,
+}
+
+@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@doc("The priority type for VM allocation")
+union PriorityType {
+  @doc("Regular priority VMs")
+  Regular: "Regular",
+
+  @doc("Spot priority VMs")
+  Spot: "Spot",
+
+  string,
+}
+
+@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@doc("The allocation strategy for VM size selection")
+union AllocationStrategy {
+  @doc("Platform prioritizes VM sizes with the lowest hourly cost")
+  LowestPrice: "LowestPrice",
+
+  @doc("Customer specifies a rank for each VM size, platform uses VM sizes in rank order")
+  Prioritized: "Prioritized",
+
+  @doc("Platform prioritizes VM sizes with the highest available capacity first")
+  CapacityOptimized: "CapacityOptimized",
+
+  string,
+}
+
+@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@doc("The distribution strategy for zone allocation")
+union DistributionStrategy {
+  @doc("Platform attempts to place as many VMs as possible in a single zone, falls back to multiple zones if needed")
+  BestEffortSingleZone: "BestEffortSingleZone",
+
+  @doc("Platform uses customer-provided zone rankings to allocate VMs")
+  Prioritized: "Prioritized",
+
+  @doc("Platform attempts to evenly distribute VMs across all available zones with best effort")
+  BestEffortBalanced: "BestEffortBalanced",
+
+  @doc("Platform must evenly distribute VMs across zones, request is rejected if exact balance cannot be achieved")
+  StrictBalanced: "StrictBalanced",
+
+  string,
+}
+
+@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@doc("A VM size profile with a name and rank for flex VM creation")
+model VmSizeProfile {
+  @doc("The name of the VM size, eg Standard_D2ads_v5")
+  @minLength(1)
+  name: string;
+
+  @doc("The rank of this VM size in the priority order")
+  rank: int32;
+}
+
+@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@doc("The priority profile for flex VM creation")
+model PriorityProfile {
+  @doc("The priority type for VM allocation")
+  type?: PriorityType;
+
+  @doc("The allocation strategy for VM size selection")
+  allocationStrategy?: AllocationStrategy;
+}
+
+@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@doc("A zone preference with a zone identifier and rank")
+model ZonePreference {
+  @doc("The zone identifier")
+  zone: string;
+
+  @doc("The rank of this zone in the priority order")
+  rank: int32;
+}
+
+@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@doc("The zone allocation policy for distributing VMs across availability zones")
+model ZoneAllocationPolicy {
+  @doc("The distribution strategy for zone allocation")
+  distributionStrategy?: DistributionStrategy;
+
+  @identifiers(#[])
+  @doc("The zone preferences for allocation priority")
+  zonePreferences?: Array<ZonePreference>;
+}
+
+@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@doc("The flex properties for flexible VM creation")
+model FlexProperties {
+  @identifiers(#[])
+  @doc("The list of VM size profiles to use for flex creation")
+  @minItems(1)
+  @maxItems(5)
+  vmSizeProfiles: Array<VmSizeProfile>;
+
+  @doc("The operating system type for the VMs")
+  osType: OsType;
+
+  @doc("The priority profile for VM allocation")
+  priorityProfile: PriorityProfile;
+
+  @doc("The zone allocation policy for distributing VMs across availability zones")
+  zoneAllocationPolicy?: ZoneAllocationPolicy;
+}
+
+/**
+ * Per-VM configuration overrides that can be applied within a bulk virtual machine operation.
+ */
+model BulkVMConfiguration {
   /**
    * The marketplace image plan used for the virtual machine.
    */
@@ -129,143 +251,16 @@ model BulkactionVMSpec {
   tags?: Record<string>;
 
   @doc("Describes the properties of a Virtual Machine.")
-  vmProperties?: BulkactionVMProfile;
-}
-
-/**
- * The flex properties for flexible VM creation.
- */
-// ----------- ExecuteCreateFlex ---------
-@added(Microsoft.Compute.Versions.`2026-04-01-preview`)
-@doc("The supported operating system types for flex VM creation")
-union OsType {
-  @doc("Windows operating system")
-  Windows: "Windows",
-
-  @doc("Linux operating system")
-  Linux: "Linux",
-
-  string,
-}
-
-@added(Microsoft.Compute.Versions.`2026-04-01-preview`)
-@doc("The priority type for VM allocation")
-union PriorityType {
-  @doc("Regular priority VMs")
-  Regular: "Regular",
-
-  @doc("Spot priority VMs")
-  Spot: "Spot",
-
-  string,
-}
-
-@added(Microsoft.Compute.Versions.`2026-04-01-preview`)
-@doc("The allocation strategy for VM size selection")
-union AllocationStrategy {
-  @doc("Platform prioritizes VM sizes with the lowest hourly cost")
-  LowestPrice: "LowestPrice",
-
-  @doc("Customer specifies a rank for each VM size, platform uses VM sizes in rank order")
-  Prioritized: "Prioritized",
-
-  @doc("Platform prioritizes VM sizes with the highest available capacity first")
-  CapacityOptimized: "CapacityOptimized",
-
-  string,
-}
-
-@added(Microsoft.Compute.Versions.`2026-04-01-preview`)
-@doc("The distribution strategy for zone allocation")
-union DistributionStrategy {
-  @doc("Platform attempts to place as many VMs as possible in a single zone, falls back to multiple zones if needed")
-  BestEffortSingleZone: "BestEffortSingleZone",
-
-  @doc("Platform uses customer-provided zone rankings to allocate VMs")
-  Prioritized: "Prioritized",
-
-  @doc("Platform attempts to evenly distribute VMs across all available zones with best effort")
-  BestEffortBalanced: "BestEffortBalanced",
-
-  @doc("Platform must evenly distribute VMs across zones, request is rejected if exact balance cannot be achieved")
-  StrictBalanced: "StrictBalanced",
-
-  string,
-}
-
-@added(Microsoft.Compute.Versions.`2026-04-01-preview`)
-@doc("A VM size profile with a name and rank for flex VM creation")
-model VmSizeProfile {
-  @doc("The name of the VM size, eg Standard_D2ads_v5")
-  @minLength(1)
-  name: string;
-
-  @doc("The rank of this VM size in the priority order")
-  rank: int32;
-}
-
-@added(Microsoft.Compute.Versions.`2026-04-01-preview`)
-@doc("The priority profile for flex VM creation")
-model PriorityProfile {
-  @doc("The priority type for VM allocation")
-  type?: PriorityType;
-
-  @doc("The allocation strategy for VM size selection")
-  allocationStrategy?: AllocationStrategy;
-}
-
-@added(Microsoft.Compute.Versions.`2026-04-01-preview`)
-@doc("A zone preference with a zone identifier and rank")
-model ZonePreference {
-  @doc("The zone identifier")
-  zone: string;
-
-  @doc("The rank of this zone in the priority order")
-  rank: int32;
-}
-
-@added(Microsoft.Compute.Versions.`2026-04-01-preview`)
-@doc("The zone allocation policy for distributing VMs across availability zones")
-model ZoneAllocationPolicy {
-  @doc("The distribution strategy for zone allocation")
-  distributionStrategy?: DistributionStrategy;
-
-  @identifiers(#[])
-  @doc("The zone preferences for allocation priority")
-  zonePreferences?: Array<ZonePreference>;
-}
-
-@added(Microsoft.Compute.Versions.`2026-04-01-preview`)
-@doc("The flex properties for flexible VM creation")
-model FlexProperties {
-  @identifiers(#[])
-  @doc("The list of VM size profiles to use for flex creation")
-  @minItems(1)
-  @maxItems(5)
-  vmSizeProfiles: Array<VmSizeProfile>;
-
-  @doc("The operating system type for the VMs")
-  osType: OsType;
-
-  @doc("The priority profile for VM allocation")
-  priorityProfile: PriorityProfile;
-
-  @doc("The zone allocation policy for distributing VMs across availability zones")
-  zoneAllocationPolicy?: ZoneAllocationPolicy;
-}
-
-/**
- * Per-VM configuration overrides that can be applied within a bulk virtual machine operation.
- */
-model BulkVMConfiguration {
-  @doc("Bulk Actions Virtual Machine Profile to configure Virtual Machines - mirrors Microsoft.Compute VirtualMachine structure")
-  vmProperties?: BulkactionVMSpec;
-
-  @doc("Virtual Machine Extensions Array to be applied to the Virtual Machines.")
-  extensions?: BulkactionVMExtension[];
+  properties?: BulkactionVMProperties;
 
   @doc("Specifies the Microsoft.Compute API version to use when creating underlying Virtual Machines.")
   computeApiVersion?: string;
+
+  @doc("Identifier for the created virtual machine. If not provided, a name will be generated based on the resource prefix.")
+  name?: string;
+
+  @doc("Resource group name for the virtual machine.")
+  resourceGroupName?: string;
 }
 
 @doc("Resource creation data model")
@@ -273,14 +268,14 @@ model ResourceProvisionPayload {
   @doc("Bulk Actions Virtual Machine Profile object that contains VM properties that are common across all VMs in this batch")
   baseProfile?: BulkVMConfiguration;
 
-  @doc("Bulk Actions Virtual Machine Profile array, that contains VM properties that should to be overridden for each VM in the batch")
+  @doc("Bulk Actions Virtual Machine Profile array, that contains VM properties that should be overridden for each VM in the batch")
   @identifiers(#[])
   resourceOverrides?: BulkVMConfiguration[];
 
   @doc("Number of VMs to be created")
   resourceCount: int32;
 
-  @doc("if resourceOverrides doesn't contain \"name\", service will create name based of prefix and ResourceCount e.g. resourceprefix-0,resourceprefix-1..")
+  @doc("If resourceOverrides doesn't contain \"name\", the service will create a name based on the prefix and ResourceCount, e.g., resourceprefix-0, resourceprefix-1..")
   resourcePrefix?: string;
 }
 
@@ -650,6 +645,21 @@ model GetOperationStatusResponse {
   @identifiers(#["resourceId"])
   @doc("An array of resource operations based on their operation ids")
   results: Array<ResourceOperation>;
+}
+
+@doc("Static read response for the singleton bulk VM operations proxy endpoint")
+model BulkVmOperationsReadResponse {
+  @doc("Fully qualified resource ID for the singleton bulk VM operations proxy resource")
+  @visibility(Lifecycle.Read)
+  id: string;
+
+  @doc("Echoes the singleton proxy resource name")
+  @visibility(Lifecycle.Read)
+  name: "bulkVmOperations";
+
+  @doc("Resource type of the singleton bulk VM operations proxy resource")
+  @visibility(Lifecycle.Read)
+  type: "Microsoft.Compute/locations/virtualMachines/bulkVmOperations";
 }
 
 // ----------- CancelOperations ---------

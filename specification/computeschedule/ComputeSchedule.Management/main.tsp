@@ -30,6 +30,7 @@ enum Versions {
 
   //------- Autoaction versions
   /** 2025-04-15-preview version */
+  #suppress "@azure-tools/typespec-azure-resource-manager/version-progression" "Existing API"
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   `2025-04-15-preview`,
 
@@ -40,4 +41,8 @@ enum Versions {
   /** 2026-03-01-preview version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   `2026-03-01-preview`,
+
+  /** 2026-04-15-preview version */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  `2026-04-15-preview`,
 }
