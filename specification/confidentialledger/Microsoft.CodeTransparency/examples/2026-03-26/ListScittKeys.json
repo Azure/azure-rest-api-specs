@@ -1,30 +1,16 @@
 {
-  "title": "CreateEntry",
-  "operationId": "CreateEntry",
+  "title": "ListScittKeys",
+  "operationId": "ListScittKeys",
   "parameters": {
     "api-version": "2026-03-26",
-    "body": "{binary}",
-    "Content-Type": "application/cose",
-    "accept": "application/cose; application/cbor"
+    "accept": "application/cbor"
   },
   "responses": {
-    "201": {
-      "headers": {
-        "Content-Type": "application/cose"
-      },
-      "body": "{binary}"
-    },
-    "202": {
+    "200": {
       "headers": {
         "Content-Type": "application/cbor"
       },
       "body": "{binary}"
-    },
-    "303": {
-      "headers": {
-        "Location": "https://example.com/entries/2.131",
-        "x-ms-ccf-transaction-id": "2.131"
-      }
     },
     "400": {
       "headers": {
