@@ -68,8 +68,8 @@ using Microsoft.DocumentDB;
   "MongoClusterFirewallRuleProperties",
   "csharp"
 );
-@@clientName(FirewallRuleProperties.startIpAddress, "startIPAddress");
-@@clientName(FirewallRuleProperties.endIpAddress, "endIPAddress");
+@@clientName(FirewallRuleProperties.startIpAddress, "startIPAddress", "csharp");
+@@clientName(FirewallRuleProperties.endIpAddress, "endIPAddress", "csharp");
 @@clientName(PrivateEndpointConnectionResource,
   "MongoClusterPrivateEndpointConnectionResource",
   "csharp"
@@ -136,4 +136,13 @@ namespace Azure.ResourceManager.Models {
 @@alternateType(PrivateEndpointConnectionProperties.privateEndpoint,
   Azure.ResourceManager.Models.SubResource,
   "csharp"
+);
+
+@@clientName(FirewallRuleProperties.startIpAddress,
+  "$DO_NOT_NORMALIZE$startIpAddress",
+  "javascript"
+);
+@@clientName(FirewallRuleProperties.endIpAddress,
+  "$DO_NOT_NORMALIZE$endIpAddress",
+  "javascript"
 );

@@ -1388,35 +1388,44 @@ using Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(VpnServerConfiguration.properties);
 
-@@clientLocation(P2SVpnGateways.get, "P2sVpnGateways", "!java");
-@@clientLocation(P2SVpnGateways.createOrUpdate, "P2sVpnGateways", "!java");
+@@clientLocation(P2SVpnGateways.get, "P2sVpnGateways", "!java,!python");
+@@clientLocation(P2SVpnGateways.createOrUpdate,
+  "P2sVpnGateways",
+  "!java,!python"
+);
 @@clientName(P2SVpnGateways.createOrUpdate::parameters.resource,
   "p2SVpnGatewayParameters"
 );
-@@clientLocation(P2SVpnGateways.updateTags, "P2sVpnGateways", "!java");
+@@clientLocation(P2SVpnGateways.updateTags, "P2sVpnGateways", "!java,!python");
 @@clientName(P2SVpnGateways.updateTags::parameters.properties,
   "p2SVpnGatewayParameters"
 );
 @@clientLocation(P2SVpnGateways.reset, "P2sVpnGateways", "javascript, go");
-@@clientLocation(P2SVpnGateways.delete, "P2sVpnGateways", "!java");
-@@clientLocation(P2SVpnGateways.listByResourceGroup, "P2sVpnGateways", "!java");
-@@clientLocation(P2SVpnGateways.list, "P2sVpnGateways", "!java");
-@@clientLocation(P2SVpnGateways.generateVpnProfile, "P2sVpnGateways", "!java");
+@@clientLocation(P2SVpnGateways.delete, "P2sVpnGateways", "!java,!python");
+@@clientLocation(P2SVpnGateways.listByResourceGroup,
+  "P2sVpnGateways",
+  "!java,!python"
+);
+@@clientLocation(P2SVpnGateways.list, "P2sVpnGateways", "!java,!python");
+@@clientLocation(P2SVpnGateways.generateVpnProfile,
+  "P2sVpnGateways",
+  "!java,!python"
+);
 @@clientName(P2SVpnGateways.generateVpnProfile::parameters.body, "parameters");
 @@clientLocation(P2SVpnGateways.getP2sVpnConnectionHealth,
   "P2sVpnGateways",
-  "!java"
+  "!java,!python"
 );
 @@clientLocation(P2SVpnGateways.getP2sVpnConnectionHealthDetailed,
   "P2sVpnGateways",
-  "!java"
+  "!java,!python"
 );
 @@clientName(P2SVpnGateways.getP2sVpnConnectionHealthDetailed::parameters.body,
   "request"
 );
 @@clientLocation(P2SVpnGateways.disconnectP2sVpnConnections,
   "P2sVpnGateways",
-  "!java"
+  "!java,!python"
 );
 @@clientName(P2SVpnGateways.disconnectP2sVpnConnections::parameters.body,
   "request"
