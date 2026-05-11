@@ -73,10 +73,12 @@ model AdditionalAuthenticationProperties {
  */
 model GarAuthenticationProperties extends AdditionalAuthenticationProperties {
   type: "GoogleArtifactRegistry";
+
   // The following 3 properties are necessary to build the audience for the GAR token.
   // They are specific to the customer.  The final value will be of the form:
   // '//iam.googleapis.com/projects/{ProjectNumber}/locations/global/workloadIdentityPools/{WorkloadIdentityPool}/providers/{WorkloadIdentityProvider}'
   projectNumber: string;
+
   workloadIdentityPool: string;
   workloadIdentityProvider: string;
 }
