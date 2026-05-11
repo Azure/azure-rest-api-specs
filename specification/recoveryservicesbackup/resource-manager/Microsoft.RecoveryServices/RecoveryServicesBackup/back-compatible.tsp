@@ -67,15 +67,15 @@ using Microsoft.RecoveryServices;
 
 @@clientLocation(BackupResourceStorageConfigsNonCRR.bmsPrepareDataMove,
   Microsoft.RecoveryServices,
-  "!csharp"
+  "!csharp,!go"
 );
 @@clientLocation(BackupResourceStorageConfigsNonCRR.bmsTriggerDataMove,
   Microsoft.RecoveryServices,
-  "!csharp"
+  "!csharp,!go"
 );
 @@clientLocation(BackupResourceConfigOperationStatuses.getOperationStatus,
   Microsoft.RecoveryServices,
-  "!csharp"
+  "!csharp,!go"
 );
 
 @@clientLocation(PrivateEndpointConnectionResources.get,
@@ -107,7 +107,7 @@ using Microsoft.RecoveryServices;
 
 @@clientLocation(RecoveryPoints.moveRecoveryPoint,
   Microsoft.RecoveryServices,
-  "!csharp"
+  "!csharp,!go"
 );
 
 @@clientLocation(ProtectionContainersOperationGroup.refresh,
