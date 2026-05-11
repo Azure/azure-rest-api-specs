@@ -620,8 +620,12 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "GetRestorableGremlinGraphs",
   "csharp"
 );
+@@clientName(RestorableDatabaseAccountGetResults.list,
+  "GetRestorableSqlDatabases",
+  "csharp"
+);
 @@clientName(RestorableDatabaseAccountGetResults.restorableGremlinResourcesList,
-  "GetAllRestorableGremlinResourceData",
+  "GetRestorableGremlinResources",
   "csharp"
 );
 @@clientName(RestorableDatabaseAccountGetResults.restorableMongodbCollectionsList,
@@ -645,7 +649,7 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "csharp"
 );
 @@clientName(RestorableDatabaseAccountGetResults.restorableTableResourcesList,
-  "GetAllRestorableTableResourceData",
+  "GetRestorableTableResources",
   "csharp"
 );
 @@clientName(RestorableDatabaseAccountGetResults.restorableTablesList,
@@ -740,6 +744,10 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 );
 @@clientName(DatabaseAccountCreateUpdateProperties.enableFreeTier,
   "IsFreeTierEnabled",
+  "csharp"
+);
+@@clientName(DatabaseAccountCreateUpdateProperties.ipRules,
+  "IPRules",
   "csharp"
 );
 @@clientName(DatabaseAccountKind, "CosmosDBAccountKind", "csharp");
@@ -1465,6 +1473,10 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   Azure.Core.armResourceIdentifier[],
   "csharp"
 );
+@@alternateType(DatabaseAccountCreateUpdateProperties.networkAclBypassResourceIds,
+  Azure.Core.armResourceIdentifier[],
+  "csharp"
+);
 @@alternateType(ClusterResourceProperties.privateLinkResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
@@ -1539,7 +1551,19 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   Azure.Core.azureLocation,
   "csharp"
 );
+@@alternateType(RestorableGremlinResourcesListParameters.restoreLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(RestorableTableResourcesListParameters.restoreLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
 @@alternateType(DatabaseAccountUpdateProperties.keyVaultKeyUri, url, "csharp");
+@@alternateType(DatabaseAccountCreateUpdateProperties.keyVaultKeyUri,
+  url,
+  "csharp"
+);
 @@alternateType(DataCenterResourceProperties.managedDiskCustomerKeyUri,
   url,
   "csharp"
@@ -2049,7 +2073,7 @@ model CosmosDBAccountCreateOrUpdateContent
   extends Azure.ResourceManager.CommonTypes.TrackedResource {
   ...OmitProperties<
     DatabaseAccountCreateUpdateParameters,
-    "id" | "name" | "type" | "tags" | "location" | "identity"
+    "id" | "name" | "type" | "tags" | "location"
   >;
 }
 @@alternateType(DatabaseAccountCreateUpdateParameters,
