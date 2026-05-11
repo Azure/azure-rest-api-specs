@@ -859,7 +859,6 @@ model PrometheusMetricsSignal extends SignalInstanceProperties {
 @added(Versions.v2026_05_01_preview)
 @doc("Status of an Azure Resource Health signal, including availability information reported by Azure Resource Health.")
 model AzureResourceHealthSignalStatus is SignalStatus {
-
   @visibility(Lifecycle.Read)
   @doc("Availability status of the Azure resource as reported by Azure Resource Health.")
   availabilityStatus?: string;
