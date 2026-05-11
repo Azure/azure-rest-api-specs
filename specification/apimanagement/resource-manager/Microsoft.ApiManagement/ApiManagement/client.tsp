@@ -114,7 +114,10 @@ op replaceGetByName(
   location: Azure.Core.azureLocation,
 ): Azure.ResourceManager.ArmResponse<Microsoft.ApiManagement.DeletedServiceContract> | Azure.ResourceManager.CommonTypes.ErrorResponse;
 
-@@override(DeletedServiceContracts.getByName, replaceGetByName, "go,java");
+@@override(DeletedServiceContracts.getByName,
+  replaceGetByName,
+  "go,java,python"
+);
 
 /**
  * override for DeletedServiceContracts.purge
@@ -132,7 +135,16 @@ op replacePurge(
   _: DeletedServiceContract;
 }) | ArmDeletedNoContentResponse;
 
-@@override(DeletedServiceContracts.purge, replacePurge, "go,java");
+@@override(DeletedServiceContracts.purge, replacePurge, "go,java,python");
+
+// Mitigate model rename: ConnectivityCheckRequestProtocolConfigurationHTTPConfiguration -> ...HttpConfiguration
+@@clientName(ConnectivityCheckRequestProtocolConfigurationHttpConfiguration,
+  "ConnectivityCheckRequestProtocolConfigurationHTTPConfiguration",
+  "python"
+);
+
+// Mitigate property rename: eTag -> e_tag (should stay as etag)
+@@clientName(GatewayHostnameBindingResource.eTag, "etag", "python");
 
 @@clientName(TagTagResourceContractProperties,
   "TagResourceContractProperties",

@@ -8,3 +8,8 @@ using Microsoft.Compute;
 @@clientName(ComputeDiagnosticBases.post::parameters.body,
   "spotPlacementScoresInput"
 );
+@@clientLocation(SkuMixPlacementScores.get, "SkuMixPlacementScores");
+@@clientLocation(SkuMixPlacementScores.post, "SkuMixPlacementScores");
+@@clientName(SkuMixPlacementScores.post::parameters.body,
+  "skuMixPlacementRequest"
+);

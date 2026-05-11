@@ -25,6 +25,8 @@ using Microsoft.EventGrid.SystemEvents;
   "java"
 );
 
+@@clientName(AcsIncomingCallEventData.onBehalfOf, "onBehalfOfCaller", "java");
+
 @@clientName(AcsMessageMediaContent.id, "mediaId", "java");
 
 @@clientName(AcsMessageContext.id, "messageId", "java");
@@ -48,6 +50,16 @@ using Microsoft.EventGrid.SystemEvents;
 
 @@clientName(AcsRecordingFileStatusUpdatedEventData.recordingDurationMs,
   "recordingDuration",
+  "java"
+);
+
+@@clientName(AcsChatRetentionPolicy, "AcsChatThreadRetentionPolicy", "java");
+@@clientName(AcsChatRetentionPolicyKind,
+  "AcsChatThreadRetentionPolicyKind",
+  "java"
+);
+@@clientName(AcsChatThreadDeletedReasonType,
+  "AcsChatThreadDeletedReason",
   "java"
 );
 

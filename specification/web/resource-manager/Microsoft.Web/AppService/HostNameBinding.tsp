@@ -55,7 +55,8 @@ interface HostNameBindingOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface HostNameBindings {
   /**
    * Description for Get the named hostname binding for an app (or deployment slot, if specified).
@@ -126,7 +127,8 @@ interface HostNameBindingOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface HostNameBindingOperationGroup {
   /**
    * Description for Get the named hostname binding for an app (or deployment slot, if specified).

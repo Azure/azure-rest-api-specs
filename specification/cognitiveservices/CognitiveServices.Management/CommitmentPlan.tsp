@@ -14,7 +14,7 @@ namespace Microsoft.CognitiveServices;
 /**
  * Cognitive Services account commitment plan.
  */
-@parentResource(Account)
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy usage decorator required for 'CommitmentPlan' to maintain SDK backward compatibility"
 model CommitmentPlan
   is Azure.ResourceManager.ProxyResource<CommitmentPlanProperties> {
   ...ResourceNameParameter<
@@ -23,15 +23,13 @@ model CommitmentPlan
     SegmentName = "commitmentPlans",
     NamePattern = ""
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
-  /** Resource tags. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
-
-  /** The geo-location where the resource lives */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  /**
+   * The geo-location where the resource lives
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   location?: string;
 
   /**
@@ -78,7 +76,8 @@ interface CommitmentPlanOps
         @segment("commitmentPlans")
         @key
         commitmentPlanName: string,
-      }
+      },
+      ResourceName = "CommitmentPlan"
     > {}
 
 @armResourceOperations
@@ -126,7 +125,8 @@ interface CommitmentPlanOperationGroupOps
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
         commitmentPlanName: string,
-      }
+      },
+      ResourceName = "CognitiveServicesCommitmentPlan"
     > {}
 
 @armResourceOperations

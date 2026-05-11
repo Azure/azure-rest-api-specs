@@ -8,7 +8,6 @@ import "./Cluster.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.ServiceFabric;
 /**
@@ -24,68 +23,97 @@ model ApplicationResource
     NamePattern = ""
   >;
 
-  /** Resource tags. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /**
+   * It will be deprecated in New API, resource location depends on the parent resource.
+   */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
-
-  /** The geo-location where the resource lives */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   location?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
-  ...ManagedServiceIdentityProperty;
+  /**
+   * Azure resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  tags?: Record<string>;
+
+  /**
+   * Azure resource etag.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
+   * The managed service identities assigned to this resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  identity?: ManagedIdentity;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ApplicationResources {
   /**
    * Get a Service Fabric application resource created or in the process of being created in the Service Fabric cluster resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Applications_Get")
-  get is ArmResourceRead<ApplicationResource>;
+  @summary("Gets a Service Fabric application resource.")
+  @tag("Application")
+  get is ArmResourceRead<ApplicationResource, Error = ErrorModel>;
 
   /**
    * Create or update a Service Fabric application resource with the specified name.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "servicefabric is brownfield service with existing non-standard 202 response body"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "servicefabric is brownfield service with existing non-standard response codes"
+  @summary("Creates or updates a Service Fabric application resource.")
+  @tag("Application")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ApplicationResource,
     Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ApplicationResource>> & {
       @bodyRoot
       _: ApplicationResource;
-    }
+    },
+    Error = ErrorModel
   >;
 
   /**
    * Update a Service Fabric application resource with the specified name.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "servicefabric is brownfield service with existing non-standard 202 response body"
+  @summary("Updates a Service Fabric application resource.")
+  @tag("Application")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     ApplicationResource,
     PatchModel = ApplicationResourceUpdate,
-    Response = ArmAcceptedLroResponse & {
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ApplicationResource> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: ApplicationResource;
-    }
+    },
+    Error = ErrorModel
   >;
 
   /**
    * Delete a Service Fabric application resource with the specified name.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<ApplicationResource>;
+  @summary("Deletes a Service Fabric application resource.")
+  @tag("Application")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ApplicationResource,
+    Error = ErrorModel
+  >;
 
   /**
    * Gets all application resources created or in the process of being created in the Service Fabric cluster resource.
    */
+  @summary("Gets the list of application resources created in the specified Service Fabric cluster resource.")
+  @tag("Application")
   list is ArmResourceListByParent<
     ApplicationResource,
-    Response = ArmResponse<ApplicationResourceList>
+    Response = ArmResponse<ApplicationResourceList>,
+    Error = ErrorModel
   >;
 }
 
@@ -363,13 +391,11 @@ model ApplicationUserAssignedIdentity {
 /**
  * The application resource for patch operations.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "servicefabric is brownfield service with legacy patterns for resources"
 #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "servicefabric is a brownfield service with existing APIs that do not support all properties in patch"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model ApplicationResourceUpdate
-  extends ProxyResource<ApplicationResourceUpdateProperties> {
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model ApplicationResourceUpdate extends PatchProxyResource {
   /**
    * The application resource properties for patch operations.
    */

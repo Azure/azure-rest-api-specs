@@ -118,6 +118,7 @@ enum Versions {
   v2026_03_01_preview: "2026-03-01-preview",
 }
 
+@tag("Provider")
 interface Operations
   extends Azure.ResourceManager.Legacy.Operations<
       ArmResponse<CsmOperationCollection>,
