@@ -563,6 +563,8 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(AnalyzeTextJobState, "AnalyzeTextOperationState", "python");
 @@clientName(AnalyzeTextJobState.tasks, "Actions", "python");
 
+@@clientName(fhirVersion.`4.0.1`, "ENUM_4_0_1", "python");
+
 @@clientName(CustomEntitiesLROTask, "CustomEntitiesOperationAction", "csharp");
 @@clientName(EntitiesLROTask, "EntitiesOperationAction", "csharp");
 @@clientName(EntityLinkingLROTask, "EntityLinkingOperationAction", "csharp");

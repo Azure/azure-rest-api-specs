@@ -15,7 +15,6 @@ import "./models.tsp";
 import "./back-compatible.tsp";
 import "./DomainService.tsp";
 import "./OuContainer.tsp";
-import "./routes.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager.Foundations;

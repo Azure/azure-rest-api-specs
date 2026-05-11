@@ -306,6 +306,13 @@ namespace KnowledgeBaseRetrievalClient {
   }
 );
 
+@@clientName(KnowledgeBaseModelWebSummarizationActivityRecord.inputTokens,
+  "inputTokensCount"
+);
+@@clientName(KnowledgeBaseModelWebSummarizationActivityRecord.outputTokens,
+  "outputTokensCount"
+);
+
 @@access(VectorSearchAlgorithmKind, Access.public);
 @@usage(VectorSearchAlgorithmKind, Usage.input);
 @@access(VectorSearchVectorizerKind, Access.public);
@@ -381,6 +388,7 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@alternateType(AzureMachineLearningSkill.region, azureLocation, "csharp");
 @@clientName(AzureMachineLearningSkill.region, "Location", "csharp");
+@@clientName(AMLVectorizer.amlParameters, "AMLParameters", "csharp");
 @@clientName(ChatCompletionSchemaProperties.strict, "IsStrict", "csharp");
 @@alternateType(ChatCompletionSkill.uri, url, "csharp");
 @@alternateType(CustomEntityLookupSkill.entitiesDefinitionUri, url, "csharp");
@@ -2782,6 +2790,7 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(SearchResourceEncryptionKey.keyVaultKeyName, "keyName");
 @@clientName(SearchResourceEncryptionKey.keyVaultKeyVersion, "keyVersion");
 @@clientName(SearchResourceEncryptionKey.keyVaultUri, "vaultUri");
+@@clientName(SearchResourceEncryptionKey.keyVaultUri, "vaultUrl", "java");
 @@clientName(SearchIndexer.disabled, "isDisabled");
 @@clientName(ListIndexersResult.value, "indexers");
 @@clientName(IndexerExecutionResult.itemsProcessed, "itemCount");
@@ -2883,6 +2892,7 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(WebApiVectorizer.customWebApiParameters, "parameters", "csharp");
 @@clientName(WebApiVectorizerParameters.uri, "url", "python");
 @@clientName(WebApiVectorizerParameters.uri, "url", "java");
+@@clientName(AIServicesVisionParameters.resourceUri, "resourceUrl", "java");
 @@clientName(AzureOpenAIModelName.Gpt5Mini, "GPT_5_MINI", "python");
 @@clientName(AzureOpenAIModelName.Gpt5Nano, "GPT_5_NANO", "python");
 @@clientName(AzureOpenAIModelName.Gpt54Mini, "GPT_5_4_MINI", "python");
@@ -2916,11 +2926,18 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(AMLParameters.uri, "scoringUri");
 @@clientName(AMLParameters.uri, "scoringUrl", "java");
 @@clientName(AMLParameters.key, "authenticationKey");
-@@clientName(AMLVectorizer.amlParameters, "AMLParameters");
+@@clientName(AMLVectorizer.amlParameters, "parameters", "java");
 @@clientName(AzureMachineLearningSkill.uri, "scoringUri");
 @@clientName(AzureMachineLearningSkill.uri, "scoringUrl", "java");
 @@clientName(AzureMachineLearningSkill.key, "authenticationKey");
 @@clientName(ChatCompletionSkill.uri, "url", "java");
+@@clientName(WebApiSkill.uri, "url", "java");
+@@clientName(AIServices, "AiServices", "java");
+@@clientName(AIServices.uri, "url", "java");
+@@clientName(CustomEntityLookupSkill.entitiesDefinitionUri,
+  "entitiesDefinitionUrl",
+  "java"
+);
 @@clientName(SkillNames.skillNames, "skillNameList", "csharp");
 @@clientName(AMLParameters, "AzureMachineLearningParameters");
 @@clientName(AMLVectorizer, "AzureMachineLearningVectorizer");
@@ -3260,6 +3277,7 @@ namespace KnowledgeBaseRetrievalClient {
 @@alternateType(Search.SuggestRequest.searchFields, string, "javascript");
 
 // Knowledge Base types
+@@clientName(AzureOpenAiParameters.resourceUri, "resourceUrl", "java");
 @@clientNamespace(Search.AIServices, "Azure.Search.Documents.KnowledgeBases");
 @@clientNamespace(Search.AIServices,
   "com.azure.search.documents.knowledgebases",
@@ -3421,6 +3439,10 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientNamespace(Search.KnowledgeSourceIngestionParameters,
   "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientName(Search.KnowledgeSourceIngestionParameters.aiServices,
+  "aiServices",
   "java"
 );
 @@clientNamespace(Search.KnowledgeSourceStatistics,
@@ -3720,6 +3742,13 @@ namespace KnowledgeBaseRetrievalClient {
   "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeBaseErrorAdditionalInfo,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(Search.KnowledgeBaseModelWebSummarizationActivityRecord,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(Search.KnowledgeBaseModelWebSummarizationActivityRecord,
   "com.azure.search.documents.knowledgebases",
   "java"
 );

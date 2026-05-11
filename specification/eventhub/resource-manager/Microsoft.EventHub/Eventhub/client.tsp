@@ -403,20 +403,20 @@ namespace Microsoft.EventHub {
     /**
      * Properties of sku resource
      */
-    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This property is an existing envelope property from the original OpenAPI specification and cannot be changed without breaking compatibility."
     sku?: Sku;
 
     /**
      * Properties of BYOK Identity description
      */
-    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This property is an existing envelope property from the original OpenAPI specification and cannot be changed without breaking compatibility."
     identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
   }
 
   /**
    * Information of Access Rule in Network Profile
    */
-  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintaining inheritance structure from the original OpenAPI specification to preserve backward compatibility."
   model EventHubsNspAccessRule
     extends Azure.ResourceManager.CommonTypes.Resource {
     ...OmitProperties<NspAccessRule, "id" | "name" | "type">;
@@ -425,7 +425,7 @@ namespace Microsoft.EventHub {
   /**
    * Information of the private link resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintaining inheritance structure from the original OpenAPI specification to preserve backward compatibility."
   model EventHubsPrivateLinkResourceData
     extends Azure.ResourceManager.CommonTypes.Resource {
     ...OmitProperties<PrivateLinkResource, "id" | "name" | "type">;
@@ -434,7 +434,7 @@ namespace Microsoft.EventHub {
   /**
    * Enumerates the possible values for the status of the Event Hub.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-enum" "This is a fixed enum from the original OpenAPI specification. Changing to an extensible union would be a breaking change for existing clients."
   enum EventHubEntityStatus {
     /**
      * Unknown
@@ -487,7 +487,7 @@ namespace Microsoft.EventHub {
    */
   union EventHubsKeySource {
     string,
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
     `Microsoft.KeyVault`: "Microsoft.KeyVault",
   }
 }
