@@ -387,6 +387,11 @@ union NetAppRelationshipStatusDef {
 @@clientName(BackupPatch, "NetAppBackupVaultBackupPatch", "csharp");
 @@clientName(UsageName, "NetAppUsageName", "csharp");
 @@clientName(UsageResult, "NetAppUsageResult", "csharp");
+@@clientName(PolicyStatus, "ElasticSnapshotPolicyStatus", "csharp");
+@@clientName(SecretPassword, "NetAppSecretPassword", "csharp");
+@@clientName(SecretPasswordIdentity, "NetAppSecretPasswordIdentity", "csharp");
+@@clientName(SnapshotUsage, "ElasticBackupSnapshotUsage", "csharp");
+@@clientName(VolumeSize, "ElasticBackupVolumeSize", "csharp");
 @@clientName(VolumeRelocationProperties,
   "NetAppVolumeRelocationProperties",
   "csharp"
@@ -471,6 +476,11 @@ union NetAppRelationshipStatusDef {
 );
 @@clientName(VolumeProperties.ldapEnabled, "IsLdapEnabled", "csharp");
 @@clientName(VolumeProperties.coolAccess, "IsCoolAccessEnabled", "csharp");
+@@clientName(VolumePatchProperties.coolAccess, "IsCoolAccessEnabled", "csharp");
+@@clientName(VolumePatchProperties.snapshotDirectoryVisible,
+  "IsSnapshotDirectoryVisible",
+  "csharp"
+);
 @@clientName(VolumeProperties.encrypted, "IsEncrypted", "csharp");
 @@clientName(ActiveDirectory.aesEncryption, "IsAesEncryptionEnabled", "csharp");
 @@clientName(ActiveDirectory.ldapSigning, "IsLdapSigningEnabled", "csharp");
@@ -622,11 +632,6 @@ union NetAppRelationshipStatusDef {
 @@alternateType(BackupsMigrationRequest.backupVaultId, string, "csharp");
 
 // Restore previous operation names that include the NetApp resource subject (csharp).
-// NOTE: We cannot also use `@@alternateType(Azure.ResourceManager.LocationParameter.location,
-// azureLocation, "csharp")` to convert the `string location` parameter to AzureLocation:
-// doing so causes the mgmt emitter to drop these subscription-scoped action operations
-// from the generated MockableNetAppSubscriptionResource entirely. The parameter therefore
-// stays `string`; AzureLocation backward-compat overloads are added in custom code.
 @@clientName(NetAppAccounts.listByNetAppAccount, "GetVolumeGroups", "csharp");
 @@clientName(NetAppResourceOperationGroup.checkNameAvailability,
   "CheckNetAppNameAvailability",
@@ -650,6 +655,14 @@ union NetAppRelationshipStatusDef {
 );
 @@clientName(NetAppResourceOperationGroup.updateNetworkSiblingSet,
   "UpdateNetworkSiblingSetNetAppResource",
+  "csharp"
+);
+@@clientName(NetAppResourceUsagesOperationGroup.list,
+  "GetNetAppResourceUsages",
+  "csharp"
+);
+@@clientName(NetAppResourceUsagesOperationGroup.get,
+  "GetNetAppResourceUsage",
   "csharp"
 );
 
@@ -793,6 +806,13 @@ union NetAppRelationshipStatusDef {
 @@alternateType(SnapshotPolicy.etag, Azure.Core.eTag, "csharp");
 @@alternateType(Volume.etag, Azure.Core.eTag, "csharp");
 @@alternateType(Cache.etag, Azure.Core.eTag, "csharp");
+@@alternateType(ActiveDirectoryConfig.etag, Azure.Core.eTag, "csharp");
+@@alternateType(ElasticAccount.eTag, Azure.Core.eTag, "csharp");
+@@alternateType(ElasticBackupPolicy.eTag, Azure.Core.eTag, "csharp");
+@@alternateType(ElasticBackupVault.eTag, Azure.Core.eTag, "csharp");
+@@alternateType(ElasticCapacityPool.eTag, Azure.Core.eTag, "csharp");
+@@alternateType(ElasticSnapshotPolicy.eTag, Azure.Core.eTag, "csharp");
+@@alternateType(ElasticVolume.eTag, Azure.Core.eTag, "csharp");
 
 // Capacity pool throughput: generate the original int?-typed property name and keep
 // the GA float?-typed CustomThroughputMibps as a compatibility alias in SDK custom code.
