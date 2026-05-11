@@ -2057,10 +2057,16 @@ model RestorableGremlinResourceData
 // The wrapper model name is the desired C# class name; this also obviates
 // the previous @@clientName(*, "...", "csharp") renames for the same models.
 //
-// NOTE: `identity` is intentionally NOT omitted on CosmosDBAccountCreateOrUpdateContent —
-// the legacy SDK exposed Identity on the create-or-update content with full round-trip
-// support; previous wrapper iterations omitted it and required a custom property that
-// silently dropped values at serialization time (see PR #57018 review #4).
+// IDENTITY OMISSION RULE:
+//   16 of the 17 wrappers below additionally omit `identity` because the legacy
+//   SDK never surfaced an Identity property on those flattened content types and
+//   reinstating it would be a new public API addition. The single exception is
+//   `CosmosDBAccountCreateOrUpdateContent` (defined immediately below): the
+//   legacy SDK DID expose Identity on the database-account create-or-update
+//   content with full round-trip support, so `identity` is intentionally NOT in
+//   that wrapper's OmitProperties<> list. Prior wrapper iterations omitted it
+//   and required a custom property that silently dropped values at serialization
+//   time (see PR #57018 review #4) — that workaround is no longer needed.
 //
 // On flattening the inner DatabaseAccountCreateUpdateProperties holder (PR #57018 review #5):
 // `@@Legacy.flattenProperty(CosmosDBAccountCreateOrUpdateContent.properties, "csharp")`
