@@ -11857,6 +11857,18 @@
         "tfoDiskName": {
           "type": "string",
           "description": "The test failover name for the managed disk."
+        },
+        "recoveryNetworkAccessPolicy": {
+          "$ref": "#/definitions/DiskNetworkAccessPolicy",
+          "description": "The network access policy for the recovery managed disk."
+        },
+        "recoveryDiskAccessId": {
+          "type": "string",
+          "description": "The recovery disk access Arm Id."
+        },
+        "recoveryPublicNetworkAccess": {
+          "$ref": "#/definitions/DiskPublicNetworkAccess",
+          "description": "The public network access setting for the recovery managed disk."
         }
       }
     },
@@ -13090,6 +13102,18 @@
         "diskEncryptionInfo": {
           "$ref": "#/definitions/DiskEncryptionInfo",
           "description": "The recovery disk encryption information (for one / single pass flows)."
+        },
+        "recoveryNetworkAccessPolicy": {
+          "$ref": "#/definitions/DiskNetworkAccessPolicy",
+          "description": "The network access policy for the recovery managed disk."
+        },
+        "recoveryDiskAccessId": {
+          "type": "string",
+          "description": "The recovery disk access Arm Id."
+        },
+        "recoveryPublicNetworkAccess": {
+          "$ref": "#/definitions/DiskPublicNetworkAccess",
+          "description": "The public network access setting for the recovery managed disk."
         }
       },
       "required": [
@@ -15100,6 +15124,60 @@
           "type": "string",
           "description": "The KeyVault resource ARM id for secret."
         }
+      }
+    },
+    "DiskNetworkAccessPolicy": {
+      "type": "string",
+      "description": "The network access policy for managed disks.",
+      "enum": [
+        "AllowAll",
+        "AllowPrivate",
+        "DenyAll"
+      ],
+      "x-ms-enum": {
+        "name": "DiskNetworkAccessPolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AllowAll",
+            "value": "AllowAll",
+            "description": "Allow all network access."
+          },
+          {
+            "name": "AllowPrivate",
+            "value": "AllowPrivate",
+            "description": "Allow private access through disk access resource."
+          },
+          {
+            "name": "DenyAll",
+            "value": "DenyAll",
+            "description": "Deny all network access."
+          }
+        ]
+      }
+    },
+    "DiskPublicNetworkAccess": {
+      "type": "string",
+      "description": "The public network access setting for managed disks.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "DiskPublicNetworkAccess",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Public network access is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Public network access is disabled."
+          }
+        ]
       }
     },
     "DiskReplicationProgressHealth": {
@@ -19604,6 +19682,10 @@
           "type": "string",
           "description": "The DiskEncryptionSet ARM Id."
         },
+        "confidentialDiskEncryptionSetId": {
+          "type": "string",
+          "description": "The ConfidentialDiskEncryptionSet ARM Id."
+        },
         "sectorSizeInBytes": {
           "type": "integer",
           "format": "int32",
@@ -19646,6 +19728,10 @@
         "diskEncryptionSetId": {
           "type": "string",
           "description": "The DiskEncryptionSet ARM Id."
+        },
+        "confidentialDiskEncryptionSetId": {
+          "type": "string",
+          "description": "The ConfidentialDiskEncryptionSet ARM Id."
         },
         "sectorSizeInBytes": {
           "type": "integer",
@@ -20755,11 +20841,8 @@
           "readOnly": true
         },
         "agentReinstallState": {
-          "type": "array",
+          "$ref": "#/definitions/MobilityAgentReinstallType",
           "description": "The agent auto reinstall state.",
-          "items": {
-            "$ref": "#/definitions/MobilityAgentReinstallType"
-          },
           "readOnly": true
         },
         "lastAgentReinstallType": {
@@ -21028,6 +21111,11 @@
         "diskEncryptionSetId": {
           "type": "string",
           "description": "The DiskEncryptionSet ARM Id.",
+          "readOnly": true
+        },
+        "confidentialDiskEncryptionSetId": {
+          "type": "string",
+          "description": "The ConfidentialDiskEncryptionSet ARM Id.",
           "readOnly": true
         },
         "seedManagedDiskId": {
@@ -29083,6 +29171,10 @@
           "type": "string",
           "description": "The DiskEncryptionSet ARM Id."
         },
+        "confidentialDiskEncryptionSetId": {
+          "type": "string",
+          "description": "The ConfidentialDiskEncryptionSet ARM Id."
+        },
         "sectorSizeInBytes": {
           "type": "integer",
           "format": "int32",
@@ -29764,6 +29856,11 @@
         "diskEncryptionSetId": {
           "type": "string",
           "description": "The DiskEncryptionSet ARM Id.",
+          "readOnly": true
+        },
+        "confidentialDiskEncryptionSetId": {
+          "type": "string",
+          "description": "The ConfidentialDiskEncryptionSet ARM Id.",
           "readOnly": true
         },
         "seedManagedDiskId": {
