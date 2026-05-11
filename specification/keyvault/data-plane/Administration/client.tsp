@@ -128,6 +128,9 @@ interface KeyVaultEkmRestClient {
 @@access(KeyVault.updateEkmConnection, Access.internal, "csharp");
 @@access(KeyVault.deleteEkmConnection, Access.internal, "csharp");
 
+@@access(KeyVault.EkmProxyClientCertificateInfo, Access.public, "csharp");
+@@access(KeyVault.EkmProxyInfo, Access.public, "csharp");
+
 @@clientName(KeyVault.Setting.type, "SettingType", "csharp");
 @@clientName(KeyVault.Setting.value, "Content", "csharp");
 @@access(KeyVault, Access.internal, "csharp");
