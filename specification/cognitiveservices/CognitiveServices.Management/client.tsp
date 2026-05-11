@@ -1,6 +1,9 @@
 import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
+import "@typespec/rest";
 
+using TypeSpec.Http;
+using TypeSpec.Rest;
 using Azure.Core;
 using Azure.ClientGenerator.Core;
 using Azure.ClientGenerator.Core.Legacy;
@@ -81,6 +84,26 @@ op calculateModelCapacityCustom(
 ): CalculateModelCapacityResult;
 
 @@override(calculateModelCapacity, calculateModelCapacityCustom, "javascript");
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op regenerateKeyCustom(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  @path
+  @segment("accounts")
+  @key
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
+  @minLength(2)
+  @maxLength(64)
+  accountName: string,
+
+  keyName: KeyName,
+): ApiKeys;
+@@override(Accounts.regenerateKey, regenerateKeyCustom, "javascript");
 
 @@clientName(PATAuthTypeConnectionProperties,
   "PatAuthTypeConnectionProperties",
@@ -706,6 +729,9 @@ op calculateModelCapacityCustom(
 @@clientName(RaiBlocklistConfig.blocking, "IsBlocking", "csharp");
 @@clientName(RaiPolicyContentFilter.blocking, "IsBlocking", "csharp");
 @@clientName(RaiPolicyContentFilter.enabled, "IsEnabled", "csharp");
+@@clientName(QuotaScopeType, "CognitiveServicesQuotaScopeType", "csharp");
+
+@@scope(ComputeOperations.get, "!csharp"); // Core lib supports query operation status, so scope out this operation for .NET.
 
 @@usage(NetworkSecurityPerimeterConfiguration,
   Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
