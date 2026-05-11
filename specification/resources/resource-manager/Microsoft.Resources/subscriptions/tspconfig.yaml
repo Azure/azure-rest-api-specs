@@ -1,0 +1,49 @@
+parameters:
+  service-dir:
+    default: "sdk/subscriptions"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    output-file: "{version-status}/{version}/subscriptions.json"
+    examples-dir: "{project-root}/examples"
+    emit-lro-options: "all"
+  "@azure-tools/typespec-python":
+    service-dir: "sdk/resources"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-resource-subscriptions"
+    namespace: "azure.mgmt.resource.subscriptions"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-subscriptions"
+    namespace: "com.azure.resourcemanager.subscriptions"
+    service-name: "Subscriptions"
+    enable-sync-stack: true
+    flavor: azure
+    use-object-for-unknown: true
+    float32-as-double: false
+  "@azure-tools/typespec-ts":
+    service-dir: "sdk/resources-subscriptions"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-resources-subscriptions"
+    compatibility-lro: true
+    flavor: "azure"
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-resources-subscriptions"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/resources"
+    emitter-output-dir: "{output-dir}/{service-dir}/armsubscriptions"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armsubscriptions"
+    fix-const-stuttering: false
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

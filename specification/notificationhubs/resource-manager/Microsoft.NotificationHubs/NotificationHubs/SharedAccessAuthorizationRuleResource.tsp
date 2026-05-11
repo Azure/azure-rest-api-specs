@@ -71,7 +71,8 @@ interface SharedAccessAuthorizationRuleResourceOps
         @minLength(1)
         @maxLength(256)
         authorizationRuleName: string,
-      }
+      },
+      ResourceName = "NotificationHubAuthorizationRule"
     > {}
 
 @armResourceOperations
@@ -146,7 +147,8 @@ interface NamespaceOps
         @minLength(1)
         @maxLength(256)
         authorizationRuleName: string,
-      }
+      },
+      ResourceName = "NotificationHubNamespaceAuthorizationRule"
     > {}
 
 @armResourceOperations

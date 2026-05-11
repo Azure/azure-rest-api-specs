@@ -1,0 +1,57 @@
+{
+  "operationId": "HorizonDbClusters_ListByResourceGroup",
+  "title": "List HorizonDb clusters in a resource group",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "api-version": "2026-01-20-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster",
+            "name": "examplecluster",
+            "type": "Microsoft.HorizonDb/clusters",
+            "location": "westus2",
+            "tags": {
+              "env": "dev"
+            },
+            "properties": {
+              "administratorLogin": "exampleadministratorlogin",
+              "version": "17",
+              "vCores": 4,
+              "replicaCount": 2,
+              "zonePlacementPolicy": "Strict",
+              "state": "Ready",
+              "fullyQualifiedDomainName": "examplecluster.westus2.horizondb.azure.com",
+              "readonlyEndpoint": "examplecluster-ro.westus2.horizondb.azure.com",
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster2",
+            "name": "examplecluster2",
+            "type": "Microsoft.HorizonDb/clusters",
+            "location": "westus2",
+            "tags": {
+              "environment": "development"
+            },
+            "properties": {
+              "administratorLogin": "admin",
+              "version": "17",
+              "vCores": 2,
+              "replicaCount": 1,
+              "zonePlacementPolicy": "Strict",
+              "state": "Ready",
+              "fullyQualifiedDomainName": "examplecluster2.westus2.horizondb.azure.com",
+              "readonlyEndpoint": "examplecluster2-ro.westus2.horizondb.azure.com",
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

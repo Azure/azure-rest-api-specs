@@ -145,7 +145,8 @@ interface FunctionEnvelopeSlotOperationWithoutKeysGroupOps
       }
     > {}
 
-@armResourceOperations(#{ allowStaticRoutes: true })
+@tag("WebApps")
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface FunctionEnvelopes {
   /**
    * Description for Get function information by its ID for web site, or a deployment slot.
@@ -284,7 +285,8 @@ interface FunctionEnvelopeOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface FunctionEnvelopeOperationGroup {
   /**
    * Description for Get function information by its ID for web site, or a deployment slot.

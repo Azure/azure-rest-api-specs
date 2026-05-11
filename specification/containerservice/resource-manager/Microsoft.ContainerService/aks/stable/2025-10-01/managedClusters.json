@@ -7564,7 +7564,8 @@
             "description": "Pod identity is being updated."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "ManagedClusterPoolUpgradeProfile": {
       "type": "object",
@@ -8332,21 +8333,6 @@
           "$ref": "#/definitions/NamespaceProperties",
           "description": "Properties of a namespace."
         },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "location": {
-          "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
         "eTag": {
           "type": "string",
           "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
@@ -8355,7 +8341,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -8627,7 +8613,8 @@
             "description": "The namespace provisioning was canceled."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "NetworkDataplane": {
       "type": "string",
@@ -9275,7 +9262,8 @@
             "description": "Private endpoint connection provisioning succeeded."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "PrivateLinkResource": {
       "type": "object",
@@ -10083,7 +10071,8 @@
             "description": "Trusted access role binding is being updated."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "TrustedAccessRoleListResult": {
       "type": "object",

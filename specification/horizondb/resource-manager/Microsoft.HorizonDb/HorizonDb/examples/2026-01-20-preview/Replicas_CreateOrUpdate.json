@@ -1,0 +1,46 @@
+{
+  "operationId": "HorizonDbReplicas_CreateOrUpdate",
+  "title": "Create or update a HorizonDb replica",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "clusterName": "examplecluster",
+    "poolName": "examplepool",
+    "replicaName": "examplereplica",
+    "api-version": "2026-01-20-preview",
+    "resource": {
+      "properties": {
+        "role": "Read",
+        "availabilityZone": "1"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster/pools/examplepool/replicas/examplereplica",
+        "name": "examplereplica",
+        "type": "Microsoft.HorizonDb/clusters/pools/replicas",
+        "properties": {
+          "role": "Read",
+          "status": "Healthy",
+          "fullyQualifiedDomainName": "examplereplica.westus2.horizondb.azure.com",
+          "availabilityZone": "1",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster/pools/examplepool/replicas/examplereplica",
+        "name": "examplereplica",
+        "type": "Microsoft.HorizonDb/clusters/pools/replicas",
+        "properties": {
+          "role": "Read",
+          "availabilityZone": "1",
+          "provisioningState": "Provisioning"
+        }
+      }
+    }
+  }
+}

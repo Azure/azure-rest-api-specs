@@ -55,7 +55,8 @@ interface CsmDeploymentStatusOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface CsmDeploymentStatuses {
   /**
    * Gets the deployment status for an app (or deployment slot, if specified).
@@ -114,7 +115,8 @@ interface CsmDeploymentStatusOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface CsmDeploymentStatusOperationGroup {
   /**
    * Gets the deployment status for an app (or deployment slot, if specified).

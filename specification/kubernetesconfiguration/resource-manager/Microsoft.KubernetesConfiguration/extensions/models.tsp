@@ -1,10 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
+using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -17,32 +20,32 @@ union ProvisioningState {
   string,
 
   /**
-   * Succeeded
+   * Resource has been created.
    */
   Succeeded: "Succeeded",
 
   /**
-   * Failed
+   * Resource creation failed.
    */
   Failed: "Failed",
 
   /**
-   * Canceled
+   * Resource creation was canceled.
    */
   Canceled: "Canceled",
 
   /**
-   * Creating
+   * Resource is being created.
    */
   Creating: "Creating",
 
   /**
-   * Updating
+   * Resource is being updated.
    */
   Updating: "Updating",
 
   /**
-   * Deleting
+   * Resource is being deleted.
    */
   Deleting: "Deleting",
 }
@@ -54,17 +57,17 @@ union LevelType {
   string,
 
   /**
-   * Error
+   * Indicates an error status from the extension.
    */
   Error: "Error",
 
   /**
-   * Warning
+   * Indicates a warning status from the extension.
    */
   Warning: "Warning",
 
   /**
-   * Information
+   * Indicates an informational status from the extension.
    */
   Information: "Information",
 }
@@ -76,22 +79,22 @@ union CreatedByType {
   string,
 
   /**
-   * User
+   * Created through an interactive sign-in by a person.
    */
   User: "User",
 
   /**
-   * Application
+   * Created by an app registration or service principal acting as a client.
    */
   Application: "Application",
 
   /**
-   * ManagedIdentity
+   * Created via an Azure managed identity (system- or user-assigned).
    */
   ManagedIdentity: "ManagedIdentity",
 
   /**
-   * Key
+   * Created using a key-based credential flow supported by some services.
    */
   Key: "Key",
 }
@@ -99,17 +102,24 @@ union CreatedByType {
 /**
  * The identity type.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-enum AKSIdentityType {
+union AKSIdentityType {
   /**
-   * SystemAssigned
+   * SystemAssigned identity
    */
-  SystemAssigned,
+  SystemAssigned: "SystemAssigned",
 
   /**
-   * UserAssigned
+   * UserAssigned identity
    */
-  UserAssigned,
+  UserAssigned: "UserAssigned",
+
+  /**
+   * Workload identity
+   */
+  @added(Versions.v2025_03_01)
+  Workload: "Workload",
+
+  string,
 }
 
 /**
@@ -208,6 +218,32 @@ model ExtensionProperties {
    */
   @visibility(Lifecycle.Read)
   isSystemExtension?: boolean = false;
+
+  /**
+   * The upgrade mode for auto upgrade.
+   * The default is "compatible".
+   */
+  @added(Versions.v2025_03_01)
+  autoUpgradeMode?: AutoUpgradeMode = AutoUpgradeMode.compatible;
+
+  /**
+   *  Management details of the extension
+   */
+  @added(Versions.v2025_03_01)
+  managementDetails?: ManagementDetails;
+
+  /**
+   *  Additional details provided by the publisher of the extension.
+   */
+  @added(Versions.v2025_03_01)
+  additionalDetails?: AdditionalDetails;
+
+  /**
+   * State of the extension on the cluster.
+   */
+  @added(Versions.v2025_03_01)
+  @visibility(Lifecycle.Read)
+  extensionState?: string;
 }
 
 /**
@@ -297,6 +333,24 @@ model ExtensionPropertiesAksAssignedIdentity {
    * The identity type.
    */
   type?: AKSIdentityType;
+
+  /**
+   * The object ID of resource identity.
+   */
+  @added(Versions.v2025_03_01)
+  objectId?: string;
+
+  /**
+   * The client ID of resource identity.
+   */
+  @added(Versions.v2025_03_01)
+  clientId?: string;
+
+  /**
+   * The ID of the resource identity.
+   */
+  @added(Versions.v2025_03_01)
+  resourceId?: armResourceIdentifier;
 }
 
 /**
@@ -317,6 +371,13 @@ model PatchExtensionProperties {
    * Flag to note if this extension participates in auto upgrade of minor version, or not.
    */
   autoUpgradeMinorVersion?: boolean = true;
+
+  /**
+   * The upgrade mode for auto upgrade.
+   * The default is "compatible".
+   */
+  @added(Versions.v2025_03_01)
+  autoUpgradeMode?: AutoUpgradeMode = AutoUpgradeMode.compatible;
 
   /**
    * ReleaseTrain this extension participates in for auto-upgrade (e.g. Stable, Preview, etc.) - only if autoUpgradeMinorVersion is 'true'.
@@ -382,4 +443,81 @@ model OperationStatusResult {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   error?: Azure.ResourceManager.CommonTypes.ErrorDetail | null;
+}
+
+/**
+ * The upgrade mode for auto upgrade.
+ * The default is "compatible".
+ */
+@added(Versions.v2025_03_01)
+union AutoUpgradeMode {
+  /**
+   * The extension will not be automatically upgraded.
+   */
+  none: "none",
+
+  /**
+   * The extension will be automatically upgraded to the latest patch version within the minor version.
+   */
+  patch: "patch",
+
+  /**
+   * The extension will be automatically upgraded to compatible versions as determined by the user.
+   */
+  compatible: "compatible",
+
+  string,
+}
+
+/**
+ *  Metadata about the managing entity of the extension and the permitted operations.
+ */
+@added(Versions.v2025_03_01)
+model ManagementDetails {
+  /**
+   *  The category of the managing entity
+   */
+  category?: string;
+
+  /**
+   *  The list of access details of the managing entity
+   */
+  @identifiers(#[])
+  accessDetails?: AccessDetail[];
+}
+
+/**
+ *  Metadata about the access details of the managing entity of the extension
+ */
+@added(Versions.v2025_03_01)
+model AccessDetail {
+  /**
+   * The entity to which the access details apply
+   */
+  entity?: string;
+
+  /**
+   * The list of allowed actions for the entity
+   */
+  allowedActions?: string[];
+
+  /**
+   * The description of the entity
+   */
+  description?: string;
+}
+
+/**
+ *  Additional details provided by the publisher of the extension.
+ */
+@added(Versions.v2025_03_01)
+model AdditionalDetails {
+  /** Documentation for the extension. */
+  docs?: string;
+
+  /** Release Notes of the extension. */
+  releaseNotes?: string;
+
+  /** Troubleshooting guide for the extension. */
+  troubleshootingGuide?: string;
 }

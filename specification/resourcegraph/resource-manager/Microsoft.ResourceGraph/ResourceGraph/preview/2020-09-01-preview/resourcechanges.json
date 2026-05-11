@@ -2,17 +2,22 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Resource Graph",
+    "version": "2020-09-01-preview",
     "description": "Azure Resource Graph API Reference",
-    "version": "2020-09-01-preview"
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
-  "consumes": [
+  "host": "management.azure.com",
+  "produces": [
     "application/json"
   ],
-  "produces": [
+  "consumes": [
     "application/json"
   ],
   "security": [
@@ -25,30 +30,80 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
     }
   },
+  "tags": [
+    {
+      "name": "Changes"
+    }
+  ],
   "paths": {
+    "/providers/Microsoft.ResourceGraph/resourceChangeDetails": {
+      "post": {
+        "operationId": "ResourceChangeDetails",
+        "tags": [
+          "Changes"
+        ],
+        "description": "Get resource change details.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceChangeDetailsRequestParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ResourceChangeData"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceGraphCommon.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Basic query": {
+            "$ref": "./examples/ResourceChangeDetails.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.ResourceGraph/resourceChanges": {
       "post": {
-        "description": "List changes to a resource for a given time interval.",
         "operationId": "ResourceChanges",
         "tags": [
           "Changes"
         ],
+        "description": "List changes to a resource for a given time interval.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
-            "description": "the parameters for this request for changes.",
             "in": "body",
+            "description": "The request body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ResourceChangesRequestParameters"
@@ -57,15 +112,15 @@
         ],
         "responses": {
           "200": {
-            "description": "A list of changes associated with a resource over a specific time interval.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ResourceChangeList"
             }
           },
           "default": {
-            "description": "A response indicating an error.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ResourceGraphCommon.ErrorResponse"
             }
           }
         },
@@ -81,174 +136,124 @@
           }
         }
       }
-    },
-    "/providers/Microsoft.ResourceGraph/resourceChangeDetails": {
-      "post": {
-        "description": "Get resource change details.",
-        "operationId": "ResourceChangeDetails",
-        "tags": [
-          "Changes"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "parameters",
-            "description": "The parameters for this request for resource change details.",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ResourceChangeDetailsRequestParameters"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource change details.",
-            "schema": {
-              "$ref": "#/definitions/ResourceChangeDataList"
-            }
-          },
-          "default": {
-            "description": "A response indicating an error.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Basic query": {
-            "$ref": "./examples/ResourceChangeDetails.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
-    "ResourceChangesRequestParameters": {
-      "description": "The parameters for a specific changes request.",
-      "type": "object",
-      "properties": {
-        "resourceIds": {
-          "description": "Specifies the list of resources for a changes request.",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "description": "Specifies the resource for a changes request."
+    "ChangeCategory": {
+      "type": "string",
+      "description": "The change category.",
+      "enum": [
+        "User",
+        "System"
+      ],
+      "x-ms-enum": {
+        "name": "ChangeCategory",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "User",
+            "value": "User",
+            "description": "User"
+          },
+          {
+            "name": "System",
+            "value": "System",
+            "description": "System"
           }
-        },
-        "subscriptionId": {
-          "description": "The subscription id of resources to query the changes from. ",
-          "type": "string"
-        },
-        "interval": {
-          "description": "Specifies the date and time interval for a changes request.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/DateTimeInterval"
-            }
-          ]
-        },
-        "$skipToken": {
-          "description": "Acts as the continuation token for paged responses.",
-          "type": "string"
-        },
-        "$top": {
-          "description": "The maximum number of changes the client can accept in a paged response.",
-          "type": "integer",
-          "format": "int32",
-          "minimum": 1,
-          "maximum": 1000
-        },
-        "table": {
-          "description": "The table name to query resources from.",
-          "type": "string"
-        },
-        "fetchPropertyChanges": {
-          "description": "The flag if set to true will fetch property changes",
-          "type": "boolean"
-        },
-        "fetchSnapshots": {
-          "description": "The flag if set to true will fetch change snapshots",
-          "type": "boolean"
-        }
-      },
-      "required": [
-        "interval"
-      ]
-    },
-    "ResourceChangeList": {
-      "description": "A list of changes associated with a resource over a specific time interval.",
-      "type": "object",
-      "properties": {
-        "changes": {
-          "description": "The pageable value returned by the operation, i.e. a list of changes to the resource.\n\n- The list is ordered from the most recent changes to the least recent changes.\n- This list will be empty if there were no changes during the requested interval.\n- The `Before` snapshot timestamp value of the oldest change can be outside of the specified time interval.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceChangeData"
-          }
-        },
-        "$skipToken": {
-          "description": "Skip token that encodes the skip information while executing the current request"
-        }
+        ]
       }
     },
-    "ResourceChangeDataList": {
-      "description": "A list of change details associated with a resource over a specific time interval.",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/ResourceChangeData"
+    "ChangeType": {
+      "type": "string",
+      "description": "The change type for snapshot. PropertyChanges will be provided in case of Update change type",
+      "enum": [
+        "Create",
+        "Update",
+        "Delete"
+      ],
+      "x-ms-enum": {
+        "name": "ChangeType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Create",
+            "value": "Create",
+            "description": "Create"
+          },
+          {
+            "name": "Update",
+            "value": "Update",
+            "description": "Update"
+          },
+          {
+            "name": "Delete",
+            "value": "Delete",
+            "description": "Delete"
+          }
+        ]
+      }
+    },
+    "PropertyChangeType": {
+      "type": "string",
+      "description": "The property change Type",
+      "enum": [
+        "Insert",
+        "Update",
+        "Remove"
+      ],
+      "x-ms-enum": {
+        "name": "PropertyChangeType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Insert",
+            "value": "Insert",
+            "description": "Insert"
+          },
+          {
+            "name": "Update",
+            "value": "Update",
+            "description": "Update"
+          },
+          {
+            "name": "Remove",
+            "value": "Remove",
+            "description": "Remove"
+          }
+        ]
       }
     },
     "ResourceChangeData": {
-      "description": "Data on a specific change, represented by a pair of before and after resource snapshots.",
       "type": "object",
+      "description": "Data on a specific change, represented by a pair of before and after resource snapshots.",
       "properties": {
         "resourceId": {
-          "description": "The resource for a change.",
-          "type": "string"
+          "type": "string",
+          "description": "The resource for a change."
         },
         "changeId": {
-          "description": "The change ID. Valid and unique within the specified resource only.",
-          "type": "string"
+          "type": "string",
+          "description": "The change ID. Valid and unique within the specified resource only."
         },
         "beforeSnapshot": {
-          "description": "The snapshot before the change.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/ResourceSnapshotData"
-            }
-          ]
+          "$ref": "#/definitions/ResourceChangeDataBeforeSnapshot",
+          "description": "The snapshot before the change."
         },
         "afterSnapshot": {
-          "description": "The snapshot after the change.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/ResourceSnapshotData"
-            }
-          ]
+          "$ref": "#/definitions/ResourceChangeDataAfterSnapshot",
+          "description": "The snapshot after the change."
         },
         "changeType": {
-          "description": "The change type for snapshot. PropertyChanges will be provided in case of Update change type",
-          "type": "string",
-          "enum": [
-            "Create",
-            "Update",
-            "Delete"
-          ],
-          "x-ms-enum": {
-            "name": "ChangeType",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/ChangeType",
+          "description": "The change type for snapshot. PropertyChanges will be provided in case of Update change type"
         },
         "propertyChanges": {
-          "description": "An array of resource property change",
           "type": "array",
+          "description": "An array of resource property change",
           "items": {
             "$ref": "#/definitions/ResourcePropertyChange"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -257,94 +262,40 @@
         "afterSnapshot"
       ]
     },
-    "ResourcePropertyChange": {
-      "description": "The resource property change",
+    "ResourceChangeDataAfterSnapshot": {
       "type": "object",
-      "properties": {
-        "propertyName": {
-          "description": "The property name",
-          "type": "string"
-        },
-        "beforeValue": {
-          "description": "The property value in before snapshot",
-          "type": "string"
-        },
-        "afterValue": {
-          "description": "The property value in after snapshot",
-          "type": "string"
-        },
-        "changeCategory": {
-          "description": "The change category.",
-          "type": "string",
-          "enum": [
-            "User",
-            "System"
-          ],
-          "x-ms-enum": {
-            "name": "ChangeCategory",
-            "modelAsString": false
-          }
-        },
-        "propertyChangeType": {
-          "description": "The property change Type",
-          "type": "string",
-          "enum": [
-            "Insert",
-            "Update",
-            "Remove"
-          ],
-          "x-ms-enum": {
-            "name": "PropertyChangeType",
-            "modelAsString": false
-          }
+      "description": "The snapshot after the change.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceSnapshotData"
         }
-      },
-      "required": [
-        "propertyName",
-        "changeCategory",
-        "propertyChangeType"
       ]
     },
-    "ResourceSnapshotData": {
-      "description": "Data on a specific resource snapshot.",
+    "ResourceChangeDataBeforeSnapshot": {
       "type": "object",
-      "properties": {
-        "snapshotId": {
-          "description": "The ID of the snapshot.",
-          "type": "string"
-        },
-        "timestamp": {
-          "description": "The time when the snapshot was created.\nThe snapshot timestamp provides an approximation as to when a modification to a resource was detected.  There can be a difference between the actual modification time and the detection time.  This is due to differences in how operations that modify a resource are processed, versus how operation that record resource snapshots are processed.",
-          "type": "string",
-          "format": "date-time"
-        },
-        "content": {
-          "description": "The resource snapshot content (in resourceChangeDetails response only).",
-          "type": "object"
+      "description": "The snapshot before the change.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceSnapshotData"
         }
-      },
-      "required": [
-        "timestamp"
       ]
     },
     "ResourceChangeDetailsRequestParameters": {
-      "description": "The parameters for a specific change details request.",
       "type": "object",
+      "description": "The parameters for a specific change details request.",
       "properties": {
         "resourceIds": {
-          "description": "Specifies the list of resources for a change details request.",
           "type": "array",
+          "description": "Specifies the list of resources for a change details request.",
           "items": {
-            "type": "string",
-            "description": "Specifies the resource for a change details request."
+            "type": "string"
           }
         },
         "changeIds": {
-          "description": "Specifies the list of change IDs for a change details request.",
           "type": "array",
+          "description": "Specifies the list of change IDs for a change details request.",
           "items": {
-            "type": "string",
-            "description": "Specifies the change ID."
+            "type": "string"
           }
         }
       },
@@ -353,19 +304,92 @@
         "changeIds"
       ]
     },
-    "DateTimeInterval": {
-      "description": "An interval in time specifying the date and time for the inclusive start and exclusive end, i.e. `[start, end)`.",
+    "ResourceChangeList": {
       "type": "object",
+      "description": "A list of changes associated with a resource over a specific time interval.",
+      "properties": {
+        "changes": {
+          "type": "array",
+          "description": "The pageable value returned by the operation, i.e. a list of changes to the resource.\n\n- The list is ordered from the most recent changes to the least recent changes.\n- This list will be empty if there were no changes during the requested interval.\n- The `Before` snapshot timestamp value of the oldest change can be outside of the specified time interval.",
+          "items": {
+            "$ref": "#/definitions/ResourceChangeData"
+          },
+          "x-ms-identifiers": []
+        },
+        "$skipToken": {
+          "description": "Skip token that encodes the skip information while executing the current request"
+        }
+      }
+    },
+    "ResourceChangesRequestParameters": {
+      "type": "object",
+      "description": "The parameters for a specific changes request.",
+      "properties": {
+        "resourceIds": {
+          "type": "array",
+          "description": "Specifies the list of resources for a changes request.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "The subscription id of resources to query the changes from."
+        },
+        "interval": {
+          "$ref": "#/definitions/ResourceChangesRequestParametersInterval",
+          "description": "Specifies the date and time interval for a changes request."
+        },
+        "$skipToken": {
+          "type": "string",
+          "description": "Acts as the continuation token for paged responses."
+        },
+        "$top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of changes the client can accept in a paged response.",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "table": {
+          "type": "string",
+          "description": "The table name to query resources from."
+        },
+        "fetchPropertyChanges": {
+          "type": "boolean",
+          "description": "The flag if set to true will fetch property changes"
+        },
+        "fetchSnapshots": {
+          "type": "boolean",
+          "description": "The flag if set to true will fetch change snapshots"
+        }
+      },
+      "required": [
+        "interval"
+      ]
+    },
+    "ResourceChangesRequestParametersInterval": {
+      "type": "object",
+      "description": "Specifies the date and time interval for a changes request.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceGraphCommon.DateTimeInterval"
+        }
+      ]
+    },
+    "ResourceGraphCommon.DateTimeInterval": {
+      "type": "object",
+      "description": "An interval in time specifying the date and time for the inclusive start and exclusive end, i.e. `[start, end)`.",
       "properties": {
         "start": {
-          "description": "A datetime indicating the inclusive/closed start of the time interval, i.e. `[`**`start`**`, end)`. Specifying a `start` that occurs chronologically after `end` will result in an error.",
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "A datetime indicating the inclusive/closed start of the time interval, i.e. `[`**`start`**`, end)`. Specifying a `start` that occurs chronologically after `end` will result in an error."
         },
         "end": {
-          "description": "A datetime indicating the exclusive/open end of the time interval, i.e. `[start, `**`end`**`)`. Specifying an `end` that occurs chronologically before `start` will result in an error.",
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "A datetime indicating the exclusive/open end of the time interval, i.e. `[start, `**`end`**`)`. Specifying an `end` that occurs chronologically before `start` will result in an error."
         }
       },
       "required": [
@@ -373,23 +397,9 @@
         "end"
       ]
     },
-    "ErrorResponse": {
-      "title": "Error response.",
+    "ResourceGraphCommon.Error": {
       "type": "object",
-      "description": "An error response from the API.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/Error",
-          "description": "Error information."
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
-    "Error": {
       "title": "Error info.",
-      "type": "object",
       "description": "Error details.",
       "properties": {
         "code": {
@@ -404,8 +414,9 @@
           "type": "array",
           "description": "Error details",
           "items": {
-            "$ref": "#/definitions/ErrorDetails"
-          }
+            "$ref": "#/definitions/ResourceGraphCommon.ErrorDetails"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -413,9 +424,10 @@
         "message"
       ]
     },
-    "ErrorDetails": {
-      "title": "Error details.",
+    "ResourceGraphCommon.ErrorDetails": {
       "type": "object",
+      "title": "Error details.",
+      "description": "Error details.",
       "properties": {
         "code": {
           "type": "string",
@@ -426,22 +438,78 @@
           "description": "A human readable error message."
         }
       },
-      "additionalProperties": {
-        "type": "object"
-      },
       "required": [
         "code",
         "message"
+      ],
+      "additionalProperties": {}
+    },
+    "ResourceGraphCommon.ErrorResponse": {
+      "type": "object",
+      "title": "Error response.",
+      "description": "An error response from the API.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ResourceGraphCommon.Error",
+          "description": "Error information."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "ResourcePropertyChange": {
+      "type": "object",
+      "description": "The resource property change",
+      "properties": {
+        "propertyName": {
+          "type": "string",
+          "description": "The property name"
+        },
+        "beforeValue": {
+          "type": "string",
+          "description": "The property value in before snapshot"
+        },
+        "afterValue": {
+          "type": "string",
+          "description": "The property value in after snapshot"
+        },
+        "changeCategory": {
+          "$ref": "#/definitions/ChangeCategory",
+          "description": "The change category."
+        },
+        "propertyChangeType": {
+          "$ref": "#/definitions/PropertyChangeType",
+          "description": "The property change Type"
+        }
+      },
+      "required": [
+        "propertyName",
+        "changeCategory",
+        "propertyChangeType"
+      ]
+    },
+    "ResourceSnapshotData": {
+      "type": "object",
+      "description": "Data on a specific resource snapshot.",
+      "properties": {
+        "snapshotId": {
+          "type": "string",
+          "description": "The ID of the snapshot."
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the snapshot was created.\nThe snapshot timestamp provides an approximation as to when a modification to a resource was detected.  There can be a difference between the actual modification time and the detection time.  This is due to differences in how operations that modify a resource are processed, versus how operation that record resource snapshots are processed."
+        },
+        "content": {
+          "description": "The resource snapshot content (in resourceChangeDetails response only)."
+        }
+      },
+      "required": [
+        "timestamp"
       ]
     }
   },
-  "parameters": {
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Api Version."
-    }
-  }
+  "parameters": {}
 }
