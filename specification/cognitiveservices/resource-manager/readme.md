@@ -84,6 +84,11 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/computes/{computeName}"].patch.parameters[5].schema.properties.properties
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/computes/{computeName}"].patch.parameters[5].schema.properties.properties.properties.computeType
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/computes/{computeName}"].patch.parameters[5].schema      
+  - code: PatchBodyParametersSchema
+    reason: Workbench uses PatchModel = Workbench (full resource as PATCH body), consistent with the existing Compute resource pattern. Required properties (targetClusterId, imageLink) are within the optional properties bag.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/workbenches/{workbenchName}"].patch.parameters[6].schema.properties.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/workbenches/{workbenchName}"].patch.parameters[6].schema
   - code: GuidUsage
     reason: Approved to be suppressed in AML swagger.
     where:
