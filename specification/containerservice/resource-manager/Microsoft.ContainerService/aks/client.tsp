@@ -604,6 +604,7 @@ using Microsoft.ContainerService;
   "csharp"
 );
 @@clientName(ManagedClusterProperties.enableRBAC, "IsRbacEnabled", "csharp");
+@@clientName(ManagedClusterProperties.enableFIPS, "IsFipsEnabled", "csharp");
 @@clientName(ManagedClusterProperties.disableLocalAccounts,
   "IsLocalAccountsDisabled",
   "csharp"
@@ -1218,6 +1219,7 @@ namespace Azure.ResourceManager.Models {
 @@clientName(ManagedClusterAADProfile.tenantID, "tenantId", "java");
 // ManagedClusterProperties
 @@clientName(ManagedClusterProperties.enableRBAC, "enableRbac", "java");
+@@clientName(ManagedClusterProperties.enableFIPS, "enableFips", "java");
 @@clientName(ManagedClusterProperties.diskEncryptionSetID,
   "diskEncryptionSetId",
   "java"
@@ -1341,3 +1343,5 @@ enum ResourceIdentityType {
   },
   "csharp"
 );
+
+@@apiVersion(ResourceSku.apiVersions, false);
