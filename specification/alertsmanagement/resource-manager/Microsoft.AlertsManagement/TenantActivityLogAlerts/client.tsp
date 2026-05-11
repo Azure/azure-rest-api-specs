@@ -43,4 +43,4 @@ using Microsoft.AlertsManagement;
 );
 
 // Rename `equals` to avoid collision with `object.Equals` on the generated C# property.
-@@clientName(AlertRuleLeafCondition.equals, "equalTo", "csharp");
+@@clientName(AlertRuleLeafCondition.equals, "EqualTo", "csharp");
