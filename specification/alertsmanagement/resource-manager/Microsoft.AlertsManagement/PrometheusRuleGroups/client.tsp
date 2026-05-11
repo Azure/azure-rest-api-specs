@@ -62,3 +62,17 @@ using Microsoft.AlertsManagement;
   "PrometheusRuleGroupPatch",
   "csharp"
 );
+
+// C# customizations: boolean property `autoResolved` must use a verb prefix
+// (Is/Can/Has/Does/Should/Allow/Enable/Disable/Use/Support) per .NET naming guidelines.
+@@clientName(PrometheusRuleResolveConfiguration.autoResolved,
+  "isAutoResolved",
+  "csharp"
+);
+
+// C# customizations: actionGroupId carries an ARM resource id, so surface it as
+// `ResourceIdentifier` rather than `string` to match the .NET SDK convention.
+@@alternateType(PrometheusRuleGroupAction.actionGroupId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
