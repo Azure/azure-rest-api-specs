@@ -1,0 +1,10 @@
+- tool: TypeSpecValidation
+  reason: >
+    TypeSpec Config Incomplete - Missing required emitter options in tspconfig.yaml.
+    Responsibility: Spec owner would update missing configurations.
+    More info: https://aka.ms/azsdk/spec-gen-sdk-config.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-java.*
+  paths:
+    - Microsoft.VerifiedId.Management/tspconfig.yaml

@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "name": "testStaticSite0",
+    "api-version": "2025-05-01",
+    "authprovider": "aad",
+    "resourceGroupName": "rg",
+    "staticSiteUserEnvelope": {
+      "properties": {
+        "roles": "contributor"
+      }
+    },
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "userid": "1234"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "displayName": "username",
+          "provider": "aad",
+          "roles": "contributor,anonymous,authenticated",
+          "userId": "1234"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "StaticSites_UpdateStaticSiteUser",
+  "title": "Create or update a user for a static site"
+}

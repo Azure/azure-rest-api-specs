@@ -110,3 +110,17 @@ union OS {
   @doc("Windows operating system.")
   Windows: "Windows",
 }
+
+@doc("The browser type to configure for remote script execution.")
+union BrowserType {
+  string,
+
+  @doc("Chromium browser type.")
+  Chromium: "Chromium",
+
+  @doc("Firefox browser type.")
+  Firefox: "Firefox",
+
+  @doc("WebKit browser type.")
+  Webkit: "Webkit",
+}

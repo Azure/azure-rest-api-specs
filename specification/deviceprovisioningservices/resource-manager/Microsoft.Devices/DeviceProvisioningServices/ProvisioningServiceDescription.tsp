@@ -65,7 +65,7 @@ interface ProvisioningServiceDescriptionOperationOps
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+        ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
 
         /**
          * Name of the provisioning service to retrieve.

@@ -1,11 +1,13 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ApplicationGroup.tsp";
 
 using TypeSpec.Rest;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 
@@ -34,16 +36,7 @@ interface Desktops {
    * Update a desktop.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
-    Desktop,
-    DesktopPatch,
-    Request = {
-      /**
-       * The resource properties to be updated
-       */
-      @bodyRoot desktop?: DesktopPatch;
-    }
-  >;
+  update is ArmCustomPatchSyncWithOptionalBody<Desktop, DesktopPatch>;
 
   /**
    * List desktops.
@@ -79,3 +72,4 @@ interface Desktops {
   "The name of the desktop within the specified desktop group"
 );
 @@doc(Desktop.properties, "Detailed properties for Desktop");
+@@clientName(Desktops.update::parameters.body, "desktop");

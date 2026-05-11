@@ -651,7 +651,13 @@ function processARMReviewWorkflowLabels(
     ciRpaasRPNotInPrivateRepoLabelShouldBePresent,
   );
 
-  const blocked = blockedOnRpaas || blockedOnVersioningPolicy;
+  // Block if ARMModelingReviewRequired is present (new RP namespace or new resource type detected)
+  const armModelingReviewLabel = new Label("ARMModelingReviewRequired", labelContext.present);
+  // Block if the label is already present or if it's being added by another check (e.g. detect-new-resource-provider)
+  const blockedOnArmModeling =
+    armModelingReviewLabel.present || labelContext.toAdd.has("ARMModelingReviewRequired");
+
+  const blocked = blockedOnRpaas || blockedOnVersioningPolicy || blockedOnArmModeling;
 
   // If given PR is in scope of ARM review and it is blocked for any reason,
   // the "NotReadyForARMReview" label should be present, to the exclusion
@@ -707,7 +713,8 @@ function processARMReviewWorkflowLabels(
   console.log(
     `RETURN definition processARMReviewWorkflowLabels. ` +
       `presentLabels: ${[...labelContext.present].join(",")}, ` +
-      `blockedOnRpaas: ${blockedOnRpaas}. ` +
+      `blockedOnRpaas: ${blockedOnRpaas}, ` +
+      `blockedOnArmModeling: ${blockedOnArmModeling}. ` +
       `exactlyOneArmReviewWorkflowLabelShouldBePresent: ${exactlyOneArmReviewWorkflowLabelShouldBePresent}. `,
   );
 }
@@ -742,7 +749,7 @@ function getBlockedOnRpaas(
 ) {
   return (
     (ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent && !rpaasExceptionLabelShouldBePresent) ||
-    ciRpaasRPNotInPrivateRepoLabelShouldBePresent
+    (ciRpaasRPNotInPrivateRepoLabelShouldBePresent && !rpaasExceptionLabelShouldBePresent)
   );
 }
 
@@ -870,7 +877,7 @@ const rulesPri0NotReadyForArmReview = [
   {
     precedence: 0,
     allPrerequisiteLabels: ["NotReadyForARMReview", "CI-RpaaSRPNotInPrivateRepo"],
-    anyRequiredLabels: ["ARMSignedOff"],
+    anyRequiredLabels: ["RPaaSException"],
     troubleshootingGuide: notReadyForArmReviewReason("CI-RpaaSRPNotInPrivateRepo"),
   },
   {
@@ -884,6 +891,25 @@ const rulesPri0NotReadyForArmReview = [
     allPrerequisiteLabels: ["NotReadyForARMReview", brChRev],
     anyRequiredLabels: [brChRevApproval],
     troubleshootingGuide: notReadyForArmReviewReason(brChRev),
+  },
+  {
+    precedence: 0,
+    anyPrerequisiteLabels: ["ARMModelingReviewRequired"],
+    anyRequiredLabels: [],
+    troubleshootingGuide: wrapInArmReviewMessage(
+      "This PR has <code>ARMModelingReviewRequired</code> label. " +
+        "This means it is introducing a new Resource Provider namespace or a new resource type. " +
+        "New RPs and new resource types require a discussion with the ARM Modeling Review team before merging.<br/><br/>" +
+        "<b>If you haven't discussed yet:</b><br/>" +
+        "Please schedule a meeting at " +
+        `${href("ARM API Modeling Office Hours", "https://outlook.office365.com/book/ARMOfficeHours1@microsoft.onmicrosoft.com/?ismsaljsauthenabled=true")}.<br/><br/>` +
+        "<b>If <code>ARMModelingSignedOff</code> label was removed by automation:</b><br/>" +
+        "This happens when the lease file is not found. Please check with the PM you discussed your design with " +
+        "to confirm if the lease file PR has been merged. " +
+        "In the public repo, lease files reflect immediately after merge. " +
+        "In the private repo (<code>azure-rest-api-specs-pr</code>), lease files typically sync within a few hours, but it can take up to 1-2 business days depending on sync pipeline timing and queue load. " +
+        "Please wait for the sync to complete.",
+    ),
   },
 ];
 
@@ -907,7 +933,7 @@ const rulesPri0ArmRpaas = [
   {
     precedence: 0,
     anyPrerequisiteLabels: ["CI-RpaaSRPNotInPrivateRepo"],
-    anyRequiredLabels: ["ARMSignedOff"],
+    anyRequiredLabels: ["RPaaSException"],
     troubleshootingGuide:
       "This PR has <code>CI-RpaaSRPNotInPrivateRepo</code> label. " +
       "This means it is introducing a new RP (Resource Provider) namespace to the <code>main</code> branch " +
@@ -989,23 +1015,6 @@ const rulesPri1Suppressions = [
     troubleshootingGuide:
       `The suppressions added to the AutoRest config files (README.mds) require review. ${diagramTsg(1, true)}, ` +
       `or to step 3, depending on the kind of suppression you did.`,
-  },
-];
-
-/** @type {RequiredLabelRule[]} */
-const rulesPri1ArcReview = [
-  {
-    precedence: 1,
-    anyPrerequisiteLabels: ["ArcReview"],
-    anyRequiredLabels: ["ArcSignedOff"],
-    troubleshootingGuide:
-      "This PR is labelled with <code>ArcReview</code>. " +
-      "For this PR to be merged, it must pass an ARC review and be labelled <code>ArcSignedOff</code>.<br/>" +
-      "Email the ARC board to request review per " +
-      `${href(
-        "this Contact section",
-        "https://msazure.visualstudio.com/One/_wiki/wikis/One.wiki/377428/Consistency-in-ARM-Modeling?anchor=contact",
-      )}.`,
   },
 ];
 
@@ -1155,7 +1164,6 @@ export const requiredLabelsRules = rulesPri0dataPlane
   .concat(rulesPri0ArmRev)
   .concat(rulesPri1ArmRev)
   .concat(rulesPri1Suppressions)
-  .concat(rulesPri1ArcReview)
   .concat(rulesPri2Sdk)
   .concat(rulesPri2LegacySdk)
   .concat(rulesPri3Blockers);

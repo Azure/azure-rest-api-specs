@@ -28,7 +28,8 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
-          # Required to detect changed files in PR
+          # We compare HEAD (PR merge commit) against HEAD^ (base) via git diff,
+          # so we only need enough history to include the merge commit and its parent.
           fetch-depth: 2
           # Check only needs to view contents of changed files as a string, so can use
           # "git show" on specific files instead of cloning whole repo
@@ -38,19 +39,25 @@ jobs:
       - name: Install dependencies for github-script actions
         uses: ./.github/actions/install-deps-github-script
 
-      # Output is "true" if PR contains only incremental changes to an existing TypeSpec RP
-      - id: incremental-typespec
+      - id: arm-auto-signoff-code
         name: ARM Auto SignOff - Analyze Code
         uses: actions/github-script@v8
         with:
-          result-encoding: string
+          result-encoding: json
           script: |
-            const { default: incrementalTypeSpec } =
-              await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-incremental-typespec.js');
-            return await incrementalTypeSpec({ github, context, core });
+            const { default: armAutoSignoffCode } =
+              await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-auto-signoff-code.js');
+            return await armAutoSignoffCode({ github, context, core });
 
-      - name: Upload artifact with results
+      # Upload artifacts with individual results
+      - name: Upload artifact - ARM Auto Signoff Code Result (incremental)
         uses: ./.github/actions/add-empty-artifact
         with:
           name: "incremental-typespec"
-          value: ${{ steps.incremental-typespec.outputs.result }}
+          value: ${{ fromJSON(steps.arm-auto-signoff-code.outputs.result).incremental }}
+
+      - name: Upload artifact - ARM Auto Signoff Code Result (trivial)
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: "trivial-changes"
+          value: ${{ fromJSON(steps.arm-auto-signoff-code.outputs.result).trivial }}

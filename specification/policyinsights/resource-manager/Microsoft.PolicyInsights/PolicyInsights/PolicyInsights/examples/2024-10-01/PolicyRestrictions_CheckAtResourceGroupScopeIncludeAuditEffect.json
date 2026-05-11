@@ -1,0 +1,152 @@
+{
+  "parameters": {
+    "api-version": "2024-10-01",
+    "parameters": {
+      "includeAuditEffect": true,
+      "pendingFields": [
+        {
+          "field": "name",
+          "values": [
+            "myVMName"
+          ]
+        },
+        {
+          "field": "location",
+          "values": [
+            "eastus",
+            "westus",
+            "westus2",
+            "westeurope"
+          ]
+        },
+        {
+          "field": "tags"
+        }
+      ],
+      "resourceDetails": {
+        "apiVersion": "2019-12-01",
+        "resourceContent": {
+          "type": "Microsoft.Compute/virtualMachines",
+          "properties": {
+            "priority": "Spot"
+          }
+        }
+      }
+    },
+    "resourceGroupName": "vmRg",
+    "subscriptionId": "35ee058e-5fa0-414c-8145-3ebb8d09b6e2"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "contentEvaluationResult": {
+          "policyEvaluations": [
+            {
+              "effectDetails": {
+                "policyEffect": "Audit"
+              },
+              "evaluationDetails": {
+                "evaluatedExpressions": [
+                  {
+                    "path": "type",
+                    "expression": "type",
+                    "expressionKind": "field",
+                    "expressionValue": "microsoft.compute/virtualmachines",
+                    "operator": "equals",
+                    "result": "True",
+                    "targetValue": "microsoft.compute/virtualmachines"
+                  }
+                ],
+                "reason": "Resource creation of the selected type is not allowed"
+              },
+              "evaluationResult": "NonCompliant",
+              "policyInfo": {
+                "policyAssignmentId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policyAssignments/2FF66C37",
+                "policyDefinitionId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policyDefinitions/435CAE41",
+                "policyDefinitionReferenceId": "defref222",
+                "policySetDefinitionId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policySetDefinitions/2162358E"
+              }
+            }
+          ]
+        },
+        "fieldRestrictions": [
+          {
+            "field": "tags.newtag",
+            "restrictions": [
+              {
+                "defaultValue": "defaultVal",
+                "policy": {
+                  "policyAssignmentId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policyAssignments/57DAC8A0",
+                  "policyDefinitionId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policyDefinitions/1D0906C3",
+                  "policyDefinitionReferenceId": "DefRef",
+                  "policySetDefinitionId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policySetDefinitions/05D92080"
+                },
+                "policyEffect": "Deny",
+                "reason": "tags.newtag is required",
+                "result": "Required"
+              }
+            ]
+          },
+          {
+            "field": "tags.environment",
+            "restrictions": [
+              {
+                "policy": {
+                  "policyAssignmentId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policyAssignments/7EB1508A",
+                  "policyDefinitionId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policyDefinitions/30BD79F6",
+                  "policyDefinitionReferenceId": "DefRef",
+                  "policySetDefinitionId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policySetDefinitions/735551F1"
+                },
+                "policyEffect": "Audit",
+                "reason": "tags.environment is required",
+                "result": "Required",
+                "values": [
+                  "Prod",
+                  "Int",
+                  "Test"
+                ]
+              }
+            ]
+          },
+          {
+            "field": "location",
+            "restrictions": [
+              {
+                "policy": {
+                  "policyAssignmentId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policyAssignments/1563EBD3",
+                  "policyDefinitionId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policyDefinitions/0711CCC1",
+                  "policyDefinitionReferenceId": "DefRef",
+                  "policySetDefinitionId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policySetDefinitions/1E17783A"
+                },
+                "policyEffect": "Deny",
+                "reason": "The selected location is not allowed",
+                "result": "Deny",
+                "values": [
+                  "west europe"
+                ]
+              },
+              {
+                "policy": {
+                  "policyAssignmentId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policyAssignments/5382A69D",
+                  "policyDefinitionId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policyDefinitions/25C9F66B",
+                  "policyDefinitionReferenceId": "DefRef",
+                  "policySetDefinitionId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policySetDefinitions/392D107B"
+                },
+                "policyEffect": "Audit",
+                "reason": "The selected location is not allowed",
+                "result": "Audit",
+                "values": [
+                  "eastus",
+                  "westus"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "PolicyRestrictions_CheckAtResourceGroupScope",
+  "title": "Check policy restrictions at resource group scope including audit effect"
+}

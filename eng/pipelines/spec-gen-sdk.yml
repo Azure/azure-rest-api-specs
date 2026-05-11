@@ -16,7 +16,7 @@ parameters:
     displayName: 'Path to API specification file (TypeSpec/OpenAPI)'
   - name: ApiVersion
     type: string
-    default: ''
+    default: 'none'
     displayName: 'API version'
   - name: SdkReleaseType
     type: string
@@ -24,15 +24,23 @@ parameters:
       - 'beta'
       - 'stable'
     default: 'beta'
-    displayName: 'SDK release type'
+    displayName: 'SDK release type (ignored when API version is "none")'
   - name: CreatePullRequest
     type: boolean
     default: false
     displayName: 'Create SDK pull request'
+  - name: ForceCreateEvenWithFailures
+    type: boolean
+    default: false
+    displayName: 'Force create SDK pull request even with failures ("Create SDK Pull Request" must be checked)'
   - name: ReleasePlanWorkItemId
     type: number
     default: 0
     displayName: 'Release plan work item id'
+  - name: TriggerSource
+    type: string
+    default: 'unspecified'
+    displayName: 'Trigger source'
 
 trigger: none
 
@@ -47,4 +55,6 @@ extends:
     ApiVersion: ${{ parameters.ApiVersion }}
     SdkReleaseType: ${{ parameters.SdkReleaseType }}
     CreatePullRequest: ${{ parameters.CreatePullRequest }}
+    ForceCreateEvenWithFailures: ${{ parameters.ForceCreateEvenWithFailures }}
     ReleasePlanWorkItemId: ${{ parameters.ReleasePlanWorkItemId }}
+    TriggerSource: ${{ parameters.TriggerSource }}

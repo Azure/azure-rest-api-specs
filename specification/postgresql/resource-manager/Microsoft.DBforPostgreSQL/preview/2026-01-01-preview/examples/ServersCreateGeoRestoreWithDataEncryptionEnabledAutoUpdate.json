@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "parameters": {
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/examplegeoredundantidentity": {},
+          "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/exampleprimaryidentity": {}
+        }
+      },
+      "location": "eastus",
+      "properties": {
+        "createMode": "GeoRestore",
+        "dataEncryption": {
+          "type": "AzureKeyVault",
+          "geoBackupKeyURI": "https://examplegeoredundantkeyvault.vault.azure.net/keys/examplekey",
+          "geoBackupUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/examplegeoredundantidentity",
+          "primaryKeyURI": "https://exampleprimarykeyvault.vault.azure.net/keys/examplekey",
+          "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/exampleprimaryidentity"
+        },
+        "pointInTimeUTC": "2025-06-01T18:35:22.123456Z",
+        "sourceServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/examplesourceserver"
+      }
+    },
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/eastus/azureAsyncOperation/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa?api-version=2025-06-01-preview",
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/eastus/operationResults/bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb?api-version=2025-06-01-preview"
+      }
+    }
+  },
+  "operationId": "Servers_CreateOrUpdate",
+  "title": "Create a new server using a restore of a geographically redundant backup of an existing server, with data encryption based on customer managed key with automatic key version update."
+}

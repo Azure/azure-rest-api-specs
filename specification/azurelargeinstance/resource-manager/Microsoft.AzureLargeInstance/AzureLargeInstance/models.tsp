@@ -17,13 +17,13 @@ union AzureLargeInstanceHardwareTypeNamesEnum {
   string,
 
   @doc("Hardware type of UCS from vendor Cisco")
-  "Cisco_UCS",
+  Cisco_UCS: "Cisco_UCS",
 
   @doc("Hardware type of HPE from vendor Hewlett Packard Enterprise")
-  "HPE",
+  HPE: "HPE",
 
   @doc("Hardware type of SDFLEX")
-  "SDFLEX",
+  SDFLEX: "SDFLEX",
 }
 
 @doc("Enum of available model types (each of which have their own storage / memory sizes) for an Azure Large Instance type. See https://learn.microsoft.com/azure/sap/large-instances/hana-available-skus")
@@ -451,8 +451,8 @@ model NetworkProfile {
 
 @doc("Specifies the IP address of the network interface.")
 model IpAddress {
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "Ensure backward compatibility during conversion from the Swagger spec."
   @doc("Specifies the IP address of the network interface.")
-  @clientName("ipAddressValue", "csharp")
   ipAddress?: string;
 }
 
@@ -461,15 +461,15 @@ model IpAddress {
   and halt any existing processes that may be running on the server
   """)
 model ForceState {
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "Ensure backward compatibility during conversion from the Swagger spec."
   @doc("Whether to force restart by shutting all processes.")
-  @clientName("forceStateValue", "csharp")
   forceState?: AzureLargeInstanceForcePowerState;
 }
 
 @doc("Tags field of the AzureLargeInstance instance.")
 model Tags {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tags is an acceptable use."
-  @clientName("tagsValue", "csharp")
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "Ensure backward compatibility during conversion from the Swagger spec."
   @doc("Tags field of the AzureLargeInstance instance.")
   tags?: Record<string>;
 }
@@ -520,7 +520,6 @@ model StorageBillingProperties {
 @doc("The type used for updating tags in AzureLargeStorageInstance resources.")
 model AzureLargeStorageInstanceTagsUpdate {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tags is an acceptable use."
-  @clientName("tagsValue", "csharp")
   @doc("Resource tags.")
   tags?: Record<string>;
 

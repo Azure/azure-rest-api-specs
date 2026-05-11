@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "name": "test-ase",
+    "api-version": "2025-05-01",
+    "aseNetworkingConfiguration": {
+      "properties": {
+        "ftpEnabled": true,
+        "remoteDebugEnabled": true
+      }
+    },
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "networking",
+        "type": "Microsoft.Web/hostingEnvironments/configurations/networking",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-rg/providers/Microsoft.Web/hostingEnvironments/test-ase/configurations/networking",
+        "properties": {
+          "allowNewPrivateEndpointConnections": false,
+          "externalInboundIpAddresses": [
+            "52.153.248.36"
+          ],
+          "ftpEnabled": true,
+          "inboundIpAddressOverride": null,
+          "internalInboundIpAddresses": [],
+          "linuxOutboundIpAddresses": [
+            "20.88.241.56",
+            "20.88.241.9"
+          ],
+          "remoteDebugEnabled": true,
+          "windowsOutboundIpAddresses": [
+            "20.88.241.56",
+            "20.88.241.9"
+          ]
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "AppServiceEnvironments_UpdateAseNetworkingConfiguration",
+  "title": "Update networking configuration of an App Service Environment."
+}

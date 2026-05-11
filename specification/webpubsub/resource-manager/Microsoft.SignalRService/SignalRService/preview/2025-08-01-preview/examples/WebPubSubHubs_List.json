@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "api-version": "2025-08-01-preview",
+    "resourceGroupName": "myResourceGroup",
+    "resourceName": "myWebPubSubService",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "exampleHub",
+            "type": "Microsoft.SignalRService/WebPubSub/hubs",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/WebPubSub/myWebPubSubService/hubs/exampleHub",
+            "properties": {
+              "anonymousConnectPolicy": "allow",
+              "eventHandlers": [
+                {
+                  "auth": {
+                    "type": "ManagedIdentity",
+                    "managedIdentity": {
+                      "resource": "abc"
+                    }
+                  },
+                  "systemEvents": [
+                    "connect",
+                    "connected"
+                  ],
+                  "urlTemplate": "http://host.com",
+                  "userEventPattern": "*",
+                  "groupPresenceEvents": {
+                    "eventNames": [
+                      "joined",
+                      "left"
+                    ],
+                    "groupFilters": [
+                      "group1",
+                      "group2*"
+                    ]
+                  }
+                }
+              ],
+              "eventListeners": [
+                {
+                  "endpoint": {
+                    "type": "EventHub",
+                    "eventHubName": "eventHubName1",
+                    "fullyQualifiedNamespace": "example.servicebus.windows.net"
+                  },
+                  "filter": {
+                    "type": "EventName",
+                    "systemEvents": [
+                      "connected",
+                      "disconnected"
+                    ],
+                    "userEventPattern": "*"
+                  }
+                }
+              ],
+              "webSocketKeepAliveIntervalInSeconds": 50
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "WebPubSubHubs_List",
+  "title": "WebPubSubHubs_List"
+}

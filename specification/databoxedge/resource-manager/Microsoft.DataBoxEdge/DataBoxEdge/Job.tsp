@@ -66,7 +66,7 @@ alias JobOps = Azure.ResourceManager.Legacy.LegacyOperations<
     ...ApiVersionParameter;
     ...SubscriptionIdParameter;
     ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
+    ...Azure.ResourceManager.ProviderNamespace<Job>;
 
     /** The device name. */
     @path
@@ -80,7 +80,8 @@ alias JobOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("jobs")
     @key
     name: string;
-  }
+  },
+  ResourceName = "DataBoxEdgeJob"
 >;
 
 @armResourceOperations
@@ -96,7 +97,7 @@ alias OperationsStatusOps = Azure.ResourceManager.Legacy.LegacyOperations<
     ...ApiVersionParameter;
     ...SubscriptionIdParameter;
     ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
+    ...Azure.ResourceManager.ProviderNamespace<Job>;
 
     /** The device name. */
     @path
@@ -110,7 +111,8 @@ alias OperationsStatusOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("operationsStatus")
     @key
     name: string;
-  }
+  },
+  ResourceName = "DataBoxEdgeOperationsStatus"
 >;
 
 @armResourceOperations

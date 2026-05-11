@@ -81,6 +81,20 @@ interface LoadTestAdministration {
     never
   >;
 
+  @summary("Generate load test plan recommendations.")
+  @doc("""
+    Generate AI Recommendations to author a load test plan using the uploaded browser recording file.
+    """)
+  @pollingOperation(Operations.getStatus)
+  @finalOperation(LoadTestAdministration.getTest)
+  @added(APIVersions.v2025_11_01_preview)
+  @action("generateTestPlanRecommendations")
+  generateTestPlanRecommendations is StandardResourceOperations.LongRunningResourceAction<
+    Test,
+    {},
+    never
+  >;
+
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Our operation is not following the standard put behavior https://github.com/Azure/typespec-azure/issues/3743"
   #suppress "@azure-tools/typespec-azure-core/byos" "It is limiting for users to have storage first before creating a load test also it will be breaking change for us."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
@@ -285,6 +299,27 @@ interface LoadTestRun {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @summary("Update the latest insights for the test run.")
+  @doc("Update the latest insights for the test run.")
+  @added(APIVersions.v2025_11_01_preview)
+  @route("/test-runs/{testRunId}/insights/latest")
+  @patch(#{ implicitOptionality: true })
+  updateLatestInsights is Azure.Core.Foundations.Operation<
+    {
+      @header
+      @doc("Content type.")
+      contentType: "application/merge-patch+json";
+
+      ...TestRunIdParam;
+
+      @doc("Test run insights model.")
+      @bodyRoot
+      body: TestRunInsights;
+    },
+    ResourceUpdatedResponse<TestRunInsights>
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("Generate insights for the test run.")
   @doc("Generate insights for the test run.")
   @pollingOperation(LoadTestRun.getLatestInsights)
@@ -457,6 +492,7 @@ interface Operations {
 // including the @added decorator and causes tsp compile client.tsp to fail. To handle this, @added is added at each operation level instead.
 // Do the same whenever routes are added in a new API Version
 @tag("TestProfile")
+@removed(APIVersions.v2026_04_01)
 interface TestProfileAdministration {
   @summary("Create a new test profile or update an existing test profile.")
   @doc("Create a new test profile or update an existing test profile by providing the test profile Id.")
@@ -485,6 +521,7 @@ interface TestProfileAdministration {
 }
 
 @tag("TestProfileRun")
+@removed(APIVersions.v2026_04_01)
 interface TestProfileRunAdministration {
   @summary("Get test profile run details.")
   @doc("Get test profile run details by test profile run Id.")
@@ -526,13 +563,22 @@ interface TestProfileRunAdministration {
 @tag("Trigger")
 @added(APIVersions.v2024_07_01_preview)
 interface TriggerAdministration {
+  @summary("Get trigger details by trigger Id.")
+  @doc("Get trigger details by trigger Id.")
   getTrigger is StandardResourceOperations.ResourceRead<Trigger>;
 
+  @summary("Create a new trigger or update an existing trigger.")
+  @doc("Create a new trigger or update an existing trigger by providing the trigger Id.")
   createOrUpdateTrigger is StandardResourceOperations.ResourceCreateOrUpdate<Trigger>;
 
+  @summary("Delete a trigger by its trigger Id.")
+  @doc("Delete a trigger by its trigger Id.")
   deleteTrigger is StandardResourceOperations.ResourceDelete<Trigger>;
 
-  listTrigger is StandardResourceOperations.ResourceList<
+  @summary("Get all triggers for the given filters.")
+  @doc("Get all triggers for the given filters.")
+  @renamedFrom(APIVersions.v2026_04_01, "listTrigger")
+  listTriggers is StandardResourceOperations.ResourceList<
     Trigger,
     ListQueryParametersTrait<ListTriggerQueryParams>
   >;
@@ -540,17 +586,26 @@ interface TriggerAdministration {
 
 @tag("NotificationRule")
 interface NotificationRuleAdministration {
+  @summary("Get notification rule details by notification rule Id.")
+  @doc("Get notification rule details by notification rule Id.")
   @added(APIVersions.v2024_12_01_preview)
   getNotificationRule is StandardResourceOperations.ResourceRead<NotificationRule>;
 
+  @summary("Create a new notification rule or update an existing notification rule.")
+  @doc("Create a new notification rule or update an existing notification rule by providing the notification rule Id.")
   @added(APIVersions.v2024_12_01_preview)
   createOrUpdateNotificationRule is StandardResourceOperations.ResourceCreateOrUpdate<NotificationRule>;
 
+  @summary("Delete a notification rule by its notification rule Id.")
+  @doc("Delete a notification rule by its notification rule Id.")
   @added(APIVersions.v2024_12_01_preview)
   deleteNotificationRule is StandardResourceOperations.ResourceDelete<NotificationRule>;
 
+  @summary("Get all notification rules for the given filters.")
+  @doc("Get all notification rules for the given filters.")
   @added(APIVersions.v2024_12_01_preview)
-  listNotificationRule is StandardResourceOperations.ResourceList<
+  @renamedFrom(APIVersions.v2026_04_01, "listNotificationRule")
+  listNotificationRules is StandardResourceOperations.ResourceList<
     NotificationRule,
     ListQueryParametersTrait<ListNotificationRuleQueryParams>
   >;

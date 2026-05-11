@@ -5,6 +5,16 @@ on:
     branches:
       - main
       - RPSaaSMaster
+      - RPSaaSCanary
+
+  pull_request:
+    branches:
+      - main
+      - RPSaaSMaster
+      - RPSaaSCanary
+    paths:
+      - "eng/common/spelling/**"
+      - "cspell.json"
 
   schedule:
     # Run every day at 12:06 UTC
@@ -24,6 +34,12 @@ jobs:
         uses: actions/checkout@v6
         with:
           fetch-depth: 1
+
+      # workaround streetsidesoftware/cspell#8778
+      - name: Setup Node 22
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
 
       - name: Run spelling check
         run: |

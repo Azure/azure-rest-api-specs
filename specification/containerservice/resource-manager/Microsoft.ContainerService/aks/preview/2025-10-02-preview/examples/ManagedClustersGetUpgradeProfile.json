@@ -1,49 +1,51 @@
 {
   "parameters": {
     "api-version": "2025-10-02-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rg1",
-    "resourceName": "clustername1"
+    "resourceName": "clustername1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/upgradeprofiles/default",
         "name": "default",
+        "type": "Microsoft.ContainerService/managedClusters/upgradeprofiles",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/upgradeprofiles/default",
         "properties": {
           "agentPoolProfiles": [
             {
-              "kubernetesVersion": "1.7.7",
               "name": "agent",
+              "kubernetesVersion": "1.7.7",
               "osType": "Linux",
               "upgrades": [
                 {
                   "kubernetesVersion": "1.7.9"
                 },
                 {
-                  "kubernetesVersion": "1.7.11",
-                  "isPreview": true
+                  "isPreview": true,
+                  "kubernetesVersion": "1.7.11"
                 }
               ]
             }
           ],
           "controlPlaneProfile": {
-            "kubernetesVersion": "1.7.7",
             "name": "master",
+            "kubernetesVersion": "1.7.7",
             "osType": "Linux",
             "upgrades": [
               {
-                "kubernetesVersion": "1.7.9",
-                "isPreview": true
+                "isPreview": true,
+                "kubernetesVersion": "1.7.9"
               },
               {
                 "kubernetesVersion": "1.7.11"
               }
             ]
           }
-        },
-        "type": "Microsoft.ContainerService/managedClusters/upgradeprofiles"
+        }
       }
     }
-  }
+  },
+  "operationId": "ManagedClusters_GetUpgradeProfile",
+  "title": "Get Upgrade Profile for Managed Cluster"
 }

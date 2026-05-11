@@ -2,6 +2,7 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using Azure.Core;
 using Microsoft.DataReplication;
 
 // csharp, java don't expose LRO polling status API
@@ -105,7 +106,7 @@ using Microsoft.DataReplication;
   "csharp"
 );
 @@clientName(VMwareToAzStackHCIRecoveryPointModelCustomProperties,
-  "VMwareToAzStackHCIRecoveryPointCustomProperties",
+  "VMwareToAzStackHciRecoveryPointCustomProperties",
   "csharp"
 );
 @@clientName(RecoveryPointType, "DataReplicationRecoveryPointType", "csharp");
@@ -119,7 +120,7 @@ using Microsoft.DataReplication;
   "csharp"
 );
 @@clientName(VMwareToAzStackHCIReplicationExtensionModelCustomProperties,
-  "VMwareToAzStackHCIReplicationExtensionCustomProperties",
+  "VMwareToAzStackHciReplicationExtensionCustomProperties",
   "csharp"
 );
 @@clientName(ReplicationVaultType, "DataReplicationVaultType", "csharp");
@@ -190,18 +191,6 @@ using Microsoft.DataReplication;
 );
 @@clientName(JobObjectType, "DataReplicationJobObjectType", "csharp");
 @@clientName(JobState, "DataReplicationJobState", "csharp");
-@@clientName(PrivateEndpointConnectionProxy,
-  "DataReplicationPrivateEndpointConnectionProxy",
-  "csharp"
-);
-@@clientName(PrivateEndpointConnectionProxyProperties,
-  "DataReplicationPrivateEndpointConnectionProxyProperties",
-  "csharp"
-);
-@@clientName(PrivateEndpointConnectionProxy,
-  "DataReplicationPrivateEndpointConnectionProxy",
-  "csharp"
-);
 @@clientName(PrivateEndpointConnection,
   "DataReplicationPrivateEndpointConnection",
   "csharp"
@@ -210,6 +199,7 @@ using Microsoft.DataReplication;
   "DataReplicationPrivateEndpointConnectionProperties",
   "csharp"
 );
+@@alternateType(PrivateEndpoint.id, armResourceIdentifier, "csharp");
 @@clientName(PrivateEndpointConnectionStatus,
   "DataReplicationPrivateEndpointConnectionStatus",
   "csharp"
@@ -230,6 +220,10 @@ using Microsoft.DataReplication;
   "DataReplicationPrivateLinkServiceProxy",
   "csharp"
 );
+@@alternateType(RemotePrivateEndpointConnection.id,
+  armResourceIdentifier,
+  "csharp"
+);
 @@clientName(PrivateLinkServiceConnectionState,
   "DataReplicationPrivateLinkServiceConnectionState",
   "csharp"
@@ -238,6 +232,7 @@ using Microsoft.DataReplication;
   "RemotePrivateEndpointConnectionDetails",
   "csharp"
 );
+@@clientName(ConnectionDetails.privateIpAddress, "PrivateIPAddress", "csharp");
 @@clientName(DiskControllerInputs,
   "DataReplicationDiskControllerInputs",
   "csharp"
@@ -247,7 +242,15 @@ using Microsoft.DataReplication;
   "csharp"
 );
 @@clientName(VMwareToAzStackHCIProtectedItemModelCustomProperties,
-  "VMwareToAzStackHCIProtectedItemCustomProperties",
+  "VMwareToAzStackHciProtectedItemCustomProperties",
+  "csharp"
+);
+@@clientName(VMwareToAzStackHCIProtectedItemModelCustomProperties.osType,
+  "OSType",
+  "csharp"
+);
+@@clientName(VMwareToAzStackHCIProtectedItemModelCustomProperties.osName,
+  "OSName",
   "csharp"
 );
 @@clientName(VMwareToAzStackHCIProtectedItemModelCustomProperties.lastRecoveryPointReceived,
@@ -255,10 +258,15 @@ using Microsoft.DataReplication;
   "csharp"
 );
 @@clientName(VMwareToAzStackHCIProtectedItemModelCustomPropertiesUpdate,
-  "VMwareToAzStackHCIProtectedItemCustomPropertiesUpdate",
+  "VMwareToAzStackHciProtectedItemCustomPropertiesUpdate",
+  "csharp"
+);
+@@clientName(VMwareToAzStackHCIProtectedItemModelCustomPropertiesUpdate.osType,
+  "OSType",
   "csharp"
 );
 @@clientName(DeploymentPreflightModel, "DeploymentPreflight", "csharp");
+@@clientName(DeploymentPreflight, "DeploymentPreflightOperations", "csharp");
 @@clientName(HyperVToAzStackHCIPolicyModelCustomProperties,
   "HyperVToAzStackHciPolicyCustomProperties",
   "csharp"
@@ -267,8 +275,20 @@ using Microsoft.DataReplication;
   "HyperVToAzStackHciProtectedItemCustomProperties",
   "csharp"
 );
+@@clientName(HyperVToAzStackHCIProtectedItemModelCustomProperties.osType,
+  "OSType",
+  "csharp"
+);
+@@clientName(HyperVToAzStackHCIProtectedItemModelCustomProperties.osName,
+  "OSName",
+  "csharp"
+);
 @@clientName(HyperVToAzStackHCIProtectedItemModelCustomPropertiesUpdate,
   "HyperVToAzStackHciProtectedItemCustomPropertiesUpdate",
+  "csharp"
+);
+@@clientName(HyperVToAzStackHCIProtectedItemModelCustomPropertiesUpdate.osType,
+  "OSType",
   "csharp"
 );
 @@clientName(HyperVToAzStackHCIRecoveryPointModelCustomProperties,
@@ -292,8 +312,16 @@ using Microsoft.DataReplication;
   "HyperVToAzStackHciPlannedFailoverCustomProperties",
   "csharp"
 );
+@@clientName(HyperVToAzStackHCIPlannedFailoverModelCustomProperties.shutdownSourceVM,
+  "ShutdownSourceVm",
+  "csharp"
+);
 @@clientName(VMwareToAzStackHCIPlannedFailoverModelCustomProperties,
   "VMwareToAzStackHciPlannedFailoverCustomProperties",
+  "csharp"
+);
+@@clientName(VMwareToAzStackHCIPlannedFailoverModelCustomProperties.shutdownSourceVM,
+  "ShutdownSourceVm",
   "csharp"
 );
 @@alternateType(CheckNameAvailabilityModel.type,
@@ -312,7 +340,6 @@ using Microsoft.DataReplication;
   Azure.Core.armResourceType,
   "csharp"
 );
-@@alternateType(PrivateEndpointConnectionProxy.etag, Azure.Core.eTag, "csharp");
 @@alternateType(DeploymentPreflightResource.location,
   Azure.Core.azureLocation,
   "csharp"
@@ -373,10 +400,6 @@ using Microsoft.DataReplication;
   "java"
 );
 @@clientName(ReplicationExtensionModel, "ReplicationExtension", "java");
-@@clientName(PrivateEndpointConnectionProxies,
-  "PrivateEndpointConnProxies",
-  "java"
-);
 @@clientName(JobModelCustomProperties, "JobCustomProperties", "java");
 
 @@clientName(Microsoft.DataReplication,
@@ -384,3 +407,85 @@ using Microsoft.DataReplication;
   "python"
 );
 @@clientName(Microsoft.DataReplication, "DataReplicationMgmtClient", "java");
+@@alternateType(VaultModelUpdate.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@clientName(HyperVToAzStackHCINicInput,
+  "HyperVToAzStackHciNicInput",
+  "csharp"
+);
+@@clientName(HyperVToAzStackHCINicInput.isStaticIpMigrationEnabled,
+  "IsStaticIPMigrationEnabled",
+  "csharp"
+);
+@@clientName(HyperVToAzStackHCIProtectedNicProperties,
+  "HyperVToAzStackHciProtectedNicProperties",
+  "csharp"
+);
+@@clientName(HyperVToAzStackHCIDiskInput,
+  "HyperVToAzStackHciDiskInput",
+  "csharp"
+);
+@@clientName(HyperVToAzStackHCIDiskInput.isOsDisk, "IsOSDisk", "csharp");
+@@clientName(VMwareToAzStackHCIDiskInput,
+  "VMwareToAzStackHciDiskInput",
+  "csharp"
+);
+@@clientName(VMwareToAzStackHCIDiskInput.isOsDisk, "IsOSDisk", "csharp");
+@@clientName(VMwareToAzStackHCINicInput,
+  "VMwareToAzStackHciNicInput",
+  "csharp"
+);
+@@clientName(VMwareToAzStackHCINicInput.isStaticIpMigrationEnabled,
+  "IsStaticIPMigrationEnabled",
+  "csharp"
+);
+@@clientName(VMNicSelection, "VmNicSelection", "csharp");
+@@clientName(CheckNameAvailability.post,
+  "CheckDataReplicationNameAvailability",
+  "csharp"
+);
+@@clientName(DeploymentPreflight.post,
+  "PerformDeploymentPreflightValidation",
+  "csharp"
+);
+@@clientName(AzStackHCIClusterProperties,
+  "AzStackHciClusterProperties",
+  "csharp"
+);
+@@clientName(VMwareToAzStackHCIProtectedNicProperties,
+  "VMwareToAzStackHciProtectedNicProperties",
+  "csharp"
+);
+@@clientName(VMwareToAzStackHCIProtectedDiskProperties,
+  "VMwareToAzStackHciProtectedDiskProperties",
+  "csharp"
+);
+@@clientName(VMwareToAzStackHCIProtectedDiskProperties.isOsDisk,
+  "IsOSDisk",
+  "csharp"
+);
+@@clientName(HyperVToAzStackHCIProtectedDiskProperties,
+  "HyperVToAzStackHciProtectedDiskProperties",
+  "csharp"
+);
+@@clientName(HyperVToAzStackHCIProtectedDiskProperties.isOsDisk,
+  "IsOSDisk",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding decorator for backwards compatibility with existing spec"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(FabricModelUpdate,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding decorator for backwards compatibility with existing spec"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ProtectedItemModelUpdate,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding decorator for backwards compatibility with existing spec"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(VaultModelUpdate,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);

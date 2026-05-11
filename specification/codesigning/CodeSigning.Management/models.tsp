@@ -114,7 +114,7 @@ union SkuName {
   Premium: "Premium",
 }
 
-@doc("The reason that a trusted signing account name could not be used. The Reason element is only returned if nameAvailable is false.")
+@doc("The reason that an artifact signing account name could not be used. The Reason element is only returned if nameAvailable is false.")
 union NameUnavailabilityReason {
   string,
 
@@ -125,44 +125,44 @@ union NameUnavailabilityReason {
   AlreadyExists: "AlreadyExists",
 }
 
-@doc("Properties of the trusted signing account.")
+@doc("Properties of the artifact signing account.")
 model CodeSigningAccountProperties {
-  @doc("The URI of the trusted signing account which is used during signing files.")
+  @doc("The URI of the artifact signing account which is used during signing files.")
   @visibility(Lifecycle.Read)
   accountUri?: string;
 
-  @doc("SKU of the trusted signing account.")
+  @doc("SKU of the artifact signing account.")
   sku?: AccountSku;
 
-  @doc("Status of the current operation on trusted signing account.")
+  @doc("Status of the current operation on artifact signing account.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
-@doc("SKU of the trusted signing account.")
+@doc("SKU of the artifact signing account.")
 model AccountSku {
   @doc("Name of the SKU.")
   name: SkuName;
 }
 
-@doc("Parameters for creating or updating a trusted signing account.")
+@doc("Parameters for creating or updating an artifact signing account.")
 model CodeSigningAccountPatch {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("Resource tags.")
   tags?: Record<string>;
 
-  @doc("Properties of the trusted signing account.")
+  @doc("Properties of the artifact signing account.")
   properties?: CodeSigningAccountPatchProperties;
 }
 
-@doc("Properties of the trusted signing account.")
+@doc("Properties of the artifact signing account.")
 model CodeSigningAccountPatchProperties {
-  @doc("SKU of the trusted signing account.")
+  @doc("SKU of the artifact signing account.")
   @typeChangedFrom(Versions.v2024_09_30_preview, AccountSku)
   sku?: AccountSkuPatch;
 }
 
-@doc("SKU of the trusted signing account.")
+@doc("SKU of the artifact signing account.")
 @added(Versions.v2024_09_30_preview)
 model AccountSkuPatch {
   @doc("Name of the SKU.")
@@ -320,12 +320,12 @@ model RevokeCertificate {
   remarks?: string;
 }
 
-@doc("The parameters used to check the availability of the trusted signing account name.")
+@doc("The parameters used to check the availability of the artifact signing account name.")
 model CheckNameAvailability {
   @doc("The type of the resource, \"Microsoft.CodeSigning/codeSigningAccounts\".")
   type: string;
 
-  @doc("Trusted signing account name.")
+  @doc("Artifact signing account name.")
   name: string;
 }
 
@@ -335,7 +335,7 @@ model CheckNameAvailabilityResult {
   @visibility(Lifecycle.Read)
   nameAvailable?: boolean;
 
-  @doc("The reason that a trusted signing account name could not be used. The Reason element is only returned if nameAvailable is false.")
+  @doc("The reason that an artifact signing account name could not be used. The Reason element is only returned if nameAvailable is false.")
   @visibility(Lifecycle.Read)
   reason?: NameUnavailabilityReason;
 

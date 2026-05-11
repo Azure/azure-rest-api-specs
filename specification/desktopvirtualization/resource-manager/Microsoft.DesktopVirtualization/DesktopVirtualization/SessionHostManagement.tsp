@@ -1,6 +1,7 @@
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
@@ -8,6 +9,7 @@ import "./HostPool.tsp";
 import "./CustomOperations.tsp";
 
 using TypeSpec.Rest;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using Versioning;
@@ -15,7 +17,9 @@ using Versioning;
 namespace Microsoft.DesktopVirtualization;
 /**
  * Schema for SessionHostManagement properties.
+ * @Introduced in 2023-11-01-preview
  */
+@added(Versions.vLatestPreview)
 @parentResource(HostPool)
 @singleton("default")
 model SessionHostManagement
@@ -29,7 +33,10 @@ model SessionHostManagement
     NamePattern = "^[A-Za-z0-9@.\\-_ ]*$"
   >;
 }
-
+/**
+ * @Introduced in 2023-11-01-preview
+ */
+@added(Versions.vLatestPreview)
 @armResourceOperations
 interface InitiateSessionHostUpdate {
   /**
@@ -39,16 +46,16 @@ interface InitiateSessionHostUpdate {
   @action("initiateSessionHostUpdate")
   post is ArmResourceActionSync<
     SessionHostManagement,
-    Request = {
-      /**
-       * The resource properties to be updated
-       */
-      @bodyRoot updateSessionHostsRequestBody?: UpdateSessionHostsRequestBody;
-    },
-    Response = void
+    Request = UpdateSessionHostsRequestBody,
+    Response = void,
+    OptionalRequestBody = true
   >;
 }
 
+/**
+ * @Introduced in 2023-11-01-preview
+ */
+@added(Versions.vLatestPreview)
 @armResourceOperations
 interface ControlSessionHostUpdate {
   /**
@@ -61,7 +68,10 @@ interface ControlSessionHostUpdate {
   >;
 }
 
-@added(Versions.v2025_04_01_preview)
+/**
+ * @Introduced in 2023-11-01-preview
+ */
+@added(Versions.vLatestPreview)
 @armResourceOperations
 @tag("SessionHostManagement")
 interface ControlSessionHostProvisioning {
@@ -75,7 +85,11 @@ interface ControlSessionHostProvisioning {
   >;
 }
 
+/**
+ * @Introduced in 2023-11-01-preview
+ */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Service doesn't allow delete"
+@added(Versions.vLatestPreview)
 @armResourceOperations
 interface SessionHostManagements {
   /**
@@ -92,15 +106,10 @@ interface SessionHostManagements {
    * Update a SessionHostManagement.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  update is ArmCustomPatchSyncWithOptionalBody<
     SessionHostManagement,
-    Response = SessionHostManagement,
-    Request = {
-      /**
-       * The properties to be updated.
-       */
-      @bodyRoot sessionHostManagement?: SessionHostManagementPatch;
-    }
+    SessionHostManagementPatch,
+    Response = SessionHostManagement
   >;
 
   /**
@@ -117,4 +126,10 @@ interface SessionHostManagements {
 @@doc(SessionHostManagement.name, "The name of the sessionHostManagement");
 @@doc(SessionHostManagement.properties,
   "Detailed properties for SessionHostManagement"
+);
+@@clientName(SessionHostManagements.update::parameters.body,
+  "sessionHostManagement"
+);
+@@doc(SessionHostManagements.update::parameters.body,
+  "The properties to be updated."
 );

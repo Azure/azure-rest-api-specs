@@ -6,17 +6,19 @@ using Microsoft.ContainerRegistry;
 // Flatten properties for backward compatibility
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(AgentPool.properties,
-  "autorest"
+  "autorest,csharp,python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Run.properties, "autorest");
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Run.properties,
+  "autorest,csharp,python"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Task.properties,
-  "autorest"
+  "autorest,csharp,python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(TaskRun.properties,
-  "autorest"
+  "autorest,csharp,python"
 );
 
 @@clientName(AgentPools.create::parameters.resource, "agentPool");
@@ -33,3 +35,4 @@ using Microsoft.ContainerRegistry;
 @@clientName(Registries.scheduleRun::parameters.body, "runRequest");
 
 @@clientName(Architecture.`386`, "ThreeHundredEightySix", "go");
+@@clientName(Architecture.`386`, "THREE_HUNDRED_EIGHTY_SIX", "python");

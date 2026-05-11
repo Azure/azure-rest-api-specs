@@ -51,6 +51,12 @@ model DataflowProperties {
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
+  @visibility(Lifecycle.Read)
+  @doc("The status for the dataflow.")
+  @added(Versions.`2026-03-01`)
+  status?: DataflowStatus;
+
+  #suppress "deprecated" "ResourceHealth is deprecated, use 'status.healthState' instead."
   ...ResourceHealth;
 }
 
@@ -310,4 +316,12 @@ model DataflowSourceOperationSettings {
 
   @doc("List of source locations. Can be Broker or Kafka topics. Supports wildcards # and +.")
   dataSources: NonEmptyString[];
+}
+
+/** DataflowStatus status. */
+@added(Versions.`2026-03-01`)
+model DataflowStatus {
+  /** The health state of the Dataflow. */
+  @visibility(Lifecycle.Read)
+  healthState?: ResourceHealthStatus;
 }

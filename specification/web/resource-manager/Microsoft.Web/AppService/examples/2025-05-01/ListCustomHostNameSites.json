@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "name": "mywebapp.azurewebsites.net",
+            "type": "Microsoft.Web/customhostnameSites",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Web/customhostnameSites/mywebapp.azurewebsites.net",
+            "properties": {
+              "customHostname": "mywebapp.azurewebsites.net",
+              "region": "West US",
+              "siteResourceIds": [
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/westus-rg/providers/Microsoft.Web/sites/mywebapp"
+                }
+              ]
+            }
+          },
+          {
+            "name": "www.example.com",
+            "type": "Microsoft.Web/customhostnameSites",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Web/customhostnameSites/www.example.com",
+            "properties": {
+              "customHostname": "www.example.com",
+              "region": "West US 2",
+              "siteResourceIds": [
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/westus2-rg/providers/Microsoft.Web/sites/westus2app1"
+                },
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/westus2-rg/providers/Microsoft.Web/sites/westus2app2"
+                },
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/westus2-rg/providers/Microsoft.Web/sites/westus2app3"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ListCustomHostNameSites",
+  "title": "Get custom hostnames under subscription"
+}

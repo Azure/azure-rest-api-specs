@@ -134,6 +134,32 @@ interface DatadogMonitorResources {
   >;
 
   /**
+   * Returns the latest SaaS linked to the Datadog organization of the underlying monitor.
+   */
+  @added(Microsoft.Datadog.Versions.v2025_12_26_preview)
+  @summary("link the latest Saas to the monitor")
+  latestLinkedSaaS is ArmResourceActionSync<
+    DatadogMonitorResource,
+    void,
+    ArmResponse<LatestLinkedSaaSResponse>
+  >;
+
+  /**
+   * Links a new SaaS to the Datadog organization of the underlying monitor.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "LRO uses azure-async-operation header"
+  @added(Microsoft.Datadog.Versions.v2025_12_26_preview)
+  @summary("Links a new SaaS to the Datadog organization of the underlying monitor.")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  linkSaaS is ArmResourceActionAsync<
+    DatadogMonitorResource,
+    SaaSData,
+    ArmResponse<DatadogMonitorResource>,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = DatadogMonitorResource> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  /**
    * Set the default api key.
    */
   @summary("Set the default api key.")
@@ -220,6 +246,9 @@ interface DatadogMonitorResources {
 @@doc(DatadogMonitorResources.create::parameters.resource, "");
 @@doc(DatadogMonitorResources.update::parameters.resource, "");
 @@doc(DatadogMonitorResources.setDefaultKey::parameters.body, "");
+@@doc(DatadogMonitorResources.linkSaaS::parameters.body,
+  "Link SaaS body parameter"
+);
 @@doc(DatadogMonitorResources.resubscribe::parameters.body,
   "Resubscribe Properties"
 );

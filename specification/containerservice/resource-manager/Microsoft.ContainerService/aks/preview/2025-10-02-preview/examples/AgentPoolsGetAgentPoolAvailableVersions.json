@@ -1,15 +1,16 @@
 {
   "parameters": {
     "api-version": "2025-10-02-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rg1",
-    "resourceName": "clustername1"
+    "resourceName": "clustername1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/availableagentpoolversions",
         "name": "default",
+        "type": "Microsoft.ContainerService/managedClusters/availableAgentpoolVersions",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/availableagentpoolversions",
         "properties": {
           "agentPoolVersions": [
             {
@@ -20,13 +21,14 @@
             },
             {
               "default": true,
-              "kubernetesVersion": "1.13.5",
-              "isPreview": true
+              "isPreview": true,
+              "kubernetesVersion": "1.13.5"
             }
           ]
-        },
-        "type": "Microsoft.ContainerService/managedClusters/availableAgentpoolVersions"
+        }
       }
     }
-  }
+  },
+  "operationId": "AgentPools_GetAvailableAgentPoolVersions",
+  "title": "Get available versions for agent pool"
 }

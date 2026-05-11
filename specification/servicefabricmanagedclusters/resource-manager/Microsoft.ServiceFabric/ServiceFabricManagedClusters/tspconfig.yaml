@@ -8,19 +8,13 @@ options:
     use-read-only-status-schema: true
     omit-unreachable-types: true
     emitter-output-dir: "{project-root}"
-    azure-resource-provider-folder: "resource-manager"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     output-file: "{version-status}/{version}/servicefabricmanagedclusters.json"
     examples-dir: "{project-root}/examples"
     emit-lro-options: "all"
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    clear-output-folder: true
-    model-namespace: false
+  "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.ServiceFabricManagedClusters"
-    flavor: azure
-    suppress-abstract-base-class:
-      - "ManagedServiceProperties"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-servicefabricmanagedclusters"
     namespace: "azure.mgmt.servicefabricmanagedclusters"

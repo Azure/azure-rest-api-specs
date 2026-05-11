@@ -42,6 +42,7 @@ using Microsoft.DocumentDB;
 @@clientName(PreviewFeature, "MongoClusterPreviewFeature", "csharp");
 @@clientName(PromoteMode, "MongoClusterPromoteMode", "csharp");
 @@clientName(PromoteOption, "MongoClusterPromoteOption", "csharp");
+@@clientName(PromoteReplicaRequest, "PromoteReplicaContent", "csharp");
 @@clientName(ProvisioningState, "MongoClusterProvisioningState", "csharp");
 @@clientName(Replica, "MongoClusterReplica", "csharp");
 @@clientName(ReplicationProperties,
@@ -67,6 +68,8 @@ using Microsoft.DocumentDB;
   "MongoClusterFirewallRuleProperties",
   "csharp"
 );
+@@clientName(FirewallRuleProperties.startIpAddress, "startIPAddress", "csharp");
+@@clientName(FirewallRuleProperties.endIpAddress, "endIPAddress", "csharp");
 @@clientName(PrivateEndpointConnectionResource,
   "MongoClusterPrivateEndpointConnectionResource",
   "csharp"
@@ -75,6 +78,12 @@ using Microsoft.DocumentDB;
   "MongoClusterPrivateEndpointConnectionProperties",
   "csharp"
 );
+@@clientName(Microsoft.DocumentDB.PrivateLinkResource,
+  "MongoClusterPrivateLinkResourceData",
+  "csharp"
+);
+@@clientName(PrivateLinks.listByMongoCluster, "GetPrivateLinks", "csharp");
+@@clientName(Replicas.listByParent, "GetReplicasByParent", "csharp");
 @@clientName(ListConnectionStringsResult,
   "MongoClusterConnectionStringsResult",
   "csharp"
@@ -88,6 +97,7 @@ using Microsoft.DocumentDB;
 );
 @@clientName(DataApiMode, "MongoClusterDataApiMode", "csharp");
 @@clientName(DatabaseRole, "MongoClusterDatabaseRole", "csharp");
+@@clientName(NetworkBypassMode, "MongoClusterNetworkBypassMode", "csharp");
 @@clientName(EntraIdentityProvider,
   "MongoClusterEntraIdentityProvider",
   "csharp"
@@ -96,6 +106,10 @@ using Microsoft.DocumentDB;
   "MongoClusterEntraIdentityProviderProperties",
   "csharp"
 );
+// Note: the flattened `principalType` property is renamed to `PrincipalType` in csharp
+// via [CodeGenMember("PrincipalKindFlattened")] in custom code (since the flatten produces
+// a `PrincipalKind`-like name from the inner property), and an [Obsolete] non-nullable
+// `PrincipalType` shim is added to preserve the previous API surface.
 @@clientName(EntraPrincipalType, "MongoClusterEntraPrincipalType", "csharp");
 @@clientName(IdentityProvider, "MongoClusterIdentityProvider", "csharp");
 @@clientName(Microsoft.DocumentDB.KeyEncryptionKeyIdentity,
@@ -109,3 +123,26 @@ using Microsoft.DocumentDB;
 @@clientName(StorageProperties, "MongoClusterStorageProperties", "csharp");
 @@clientName(StorageType, "MongoClusterStorageType", "csharp");
 @@clientName(UserRole, "MongoClusterUserRole", "csharp");
+
+// we add this model in this namespace in order to replace some models with this model via alternateType decorator
+namespace Azure.ResourceManager.Models {
+  /** represents a reference to an existing resource by its id */
+  model SubResource {
+    /** the id */
+    id?: Azure.Core.armResourceIdentifier;
+  }
+}
+
+@@alternateType(PrivateEndpointConnectionProperties.privateEndpoint,
+  Azure.ResourceManager.Models.SubResource,
+  "csharp"
+);
+
+@@clientName(FirewallRuleProperties.startIpAddress,
+  "$DO_NOT_NORMALIZE$startIpAddress",
+  "javascript"
+);
+@@clientName(FirewallRuleProperties.endIpAddress,
+  "$DO_NOT_NORMALIZE$endIpAddress",
+  "javascript"
+);

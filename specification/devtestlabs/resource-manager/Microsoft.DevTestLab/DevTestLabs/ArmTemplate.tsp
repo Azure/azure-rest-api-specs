@@ -12,51 +12,31 @@ namespace Microsoft.DevTestLab;
 /**
  * An Azure Resource Manager template.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@Azure.ResourceManager.Legacy.customAzureResource
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model ArmTemplate extends Resource {
-  @visibility(Lifecycle.Read)
-  @path
-  @key
-  @segment("armtemplates")
-  name: string;
+@parentResource(ArtifactSource)
+model ArmTemplate
+  is Azure.ResourceManager.ProxyResource<ArmTemplateProperties, false> {
+  ...ResourceNameParameter<
+    Resource = ArmTemplate,
+    KeyName = "armTemplateName",
+    SegmentName = "armtemplates",
+    NamePattern = ""
+  >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
-  properties: ArmTemplateProperties;
+  /**
+   * The geo-location where the resource lives
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  location?: string;
 }
-
-@armResourceOperations
-interface ArmTemplatesOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-
-        /** The name of the lab. */
-        @path @segment("labs") labName: string,
-
-        /** The name of the artifact source. */
-        @path @segment("artifactsources") artifactSourceName: string,
-      },
-      KeysOf<ResourceNameParameter<
-        Resource = ArmTemplate,
-        KeyName = "name",
-        SegmentName = "armtemplates",
-        NamePattern = ""
-      >>
-    > {}
 
 @armResourceOperations
 interface ArmTemplates {
   /**
    * Get azure resource manager template.
    */
-  get is ArmTemplatesOps.Read<
+  get is ArmResourceRead<
     ArmTemplate,
     Parameters = {
       /**
@@ -70,7 +50,8 @@ interface ArmTemplates {
   /**
    * List azure resource manager templates in a given artifact source.
    */
-  list is ArmTemplatesOps.List<
+  @list
+  list is ArmResourceListByParent<
     ArmTemplate,
     Parameters = {
       /**

@@ -29,7 +29,6 @@ model AzureLargeStorageInstance
 @@added(AzureLargeStorageInstance.identity, Versions.v2024_08_01_preview);
 
 @armResourceOperations
-@clientName("AzureLargeStorageInstance")
 interface AzureLargeStorageInstances {
   @doc("""
     Gets an Azure Large Storage instance for the specified subscription, resource

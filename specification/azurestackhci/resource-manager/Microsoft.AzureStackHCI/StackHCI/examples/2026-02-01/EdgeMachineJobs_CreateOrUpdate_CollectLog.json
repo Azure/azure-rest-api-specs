@@ -1,0 +1,74 @@
+{
+  "title": "EdgeMachineJobs_CreateOrUpdate_CollectLog",
+  "operationId": "EdgeMachineJobs_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-02-01",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "ArcInstance-rg",
+    "edgeMachineName": "machine1",
+    "jobsName": "triggerLogCollection",
+    "resource": {
+      "properties": {
+        "jobType": "EdgeMachineJobProperties",
+        "deploymentMode": "Validate"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "jobType": "CollectLog",
+          "fromDate": "2024-01-29T10:43:27.9471574Z",
+          "toDate": "2024-01-29T10:43:27.9471574Z",
+          "deploymentMode": "Validate",
+          "provisioningState": "Succeeded",
+          "jobId": "egmijofqvbbkscxzfghmybzwdhfwny",
+          "startTimeUtc": "2024-12-03T11:31:42.387Z",
+          "endTimeUtc": "2024-12-03T11:31:42.387Z",
+          "status": "NotSpecified"
+        },
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine-1/jobs/collectLog",
+        "name": "collectLog",
+        "type": "Microsoft.AzureStackHCI/edgeMachines/jobs",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2024-11-14T10:46:55.167Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-11-14T10:46:55.167Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "jobType": "CollectLog",
+          "fromDate": "2024-01-29T10:43:27.9471574Z",
+          "toDate": "2024-01-29T10:43:27.9471574Z",
+          "deploymentMode": "Validate",
+          "provisioningState": "Succeeded",
+          "jobId": "egmijofqvbbkscxzfghmybzwdhfwny",
+          "startTimeUtc": "2024-12-03T11:31:42.387Z",
+          "endTimeUtc": "2024-12-03T11:31:42.387Z",
+          "status": "NotSpecified"
+        },
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine-1/jobs/collectLog",
+        "name": "collectLog",
+        "type": "Microsoft.AzureStackHCI/edgeMachines/jobs",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2024-11-14T10:46:55.167Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-11-14T10:46:55.167Z"
+        }
+      }
+    }
+  }
+}

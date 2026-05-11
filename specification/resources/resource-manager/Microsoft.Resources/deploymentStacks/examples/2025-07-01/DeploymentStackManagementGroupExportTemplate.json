@@ -1,0 +1,37 @@
+{
+  "operationId": "DeploymentStacks_ExportTemplateAtManagementGroup",
+  "title": "Export the Deployment template for a management group Deployment stack",
+  "parameters": {
+    "api-version": "2025-07-01",
+    "managementGroupId": "myMg",
+    "deploymentStackName": "simpleDeploymentStack"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "templateLink": {
+          "id": "/providers/Microsoft.Management/managementGroups/myMg/providers/Microsoft.Resources/templateSpecs/templateSpec/versions/1.0"
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.4.1008.15138",
+              "templateHash": "1201162276450656794"
+            }
+          },
+          "functions": [],
+          "resources": [],
+          "outputs": {
+            "myOut": {
+              "type": "int",
+              "value": 1
+            }
+          }
+        }
+      }
+    }
+  }
+}

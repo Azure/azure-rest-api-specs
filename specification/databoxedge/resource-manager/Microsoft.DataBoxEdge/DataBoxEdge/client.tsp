@@ -6,6 +6,27 @@ using Http;
 
 @@clientName(Sku, "SkuInfo", "go");
 @@clientName(DataBoxEdgeSku, "AvailableDataBoxEdgeSku", "csharp");
+@@clientName(Alert, "DataBoxEdgeAlert", "csharp");
+@@clientName(Order, "DataBoxEdgeOrder", "csharp");
+@@clientName(Addon, "DataBoxEdgeRoleAddon", "csharp");
+@@clientName(Role, "DataBoxEdgeRole", "csharp");
+@@clientName(Share, "DataBoxEdgeShare", "csharp");
+@@clientName(StorageAccountCredential,
+  "DataBoxEdgeStorageAccountCredential",
+  "csharp"
+);
+@@clientName(StorageAccount, "DataBoxEdgeStorageAccount", "csharp");
+@@clientName(Container, "DataBoxEdgeStorageContainer", "csharp");
+@@clientName(Trigger, "DataBoxEdgeTrigger", "csharp");
+@@clientName(User, "DataBoxEdgeUser", "csharp");
+@@clientName(DiagnosticProactiveLogCollectionSettings,
+  "DiagnosticProactiveLogCollectionSetting",
+  "csharp"
+);
+@@clientName(DiagnosticRemoteSupportSettings,
+  "DiagnosticRemoteSupportSetting",
+  "csharp"
+);
 
 @@clientName(SSLStatus, "SslStatus", "java");
 @@clientName(NetworkAdapterDHCPStatus, "NetworkAdapterDhcpStatus", "java");
@@ -25,10 +46,7 @@ using Http;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op UsersDeleteCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -49,10 +67,7 @@ op UsersDeleteCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op UsersListByDataBoxEdgeDeviceCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<User>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -76,10 +91,7 @@ op UsersListByDataBoxEdgeDeviceCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op UsersGetCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<User>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -100,10 +112,7 @@ op UsersGetCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op UsersCreateOrUpdateCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -127,10 +136,7 @@ op UsersCreateOrUpdateCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op StorageAccountsDeleteCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<StorageAccount>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -154,10 +160,7 @@ op StorageAccountsDeleteCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op StorageAccountsListByDataBoxEdgeDeviceCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<StorageAccount>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -177,10 +180,7 @@ op StorageAccountsListByDataBoxEdgeDeviceCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op StorageAccountsGetCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -201,10 +201,7 @@ op StorageAccountsGetCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op StorageAccountsCreateOrUpdateCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -231,10 +228,7 @@ op StorageAccountsCreateOrUpdateCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op MonitoringMetricConfigurationsDeleteCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<MonitoringMetricConfiguration>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -258,10 +252,7 @@ op MonitoringMetricConfigurationsDeleteCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op MonitoringMetricConfigurationsListCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<MonitoringMetricConfiguration>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -285,10 +276,7 @@ op MonitoringMetricConfigurationsListCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op MonitoringMetricConfigurationsGetCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -312,10 +300,7 @@ op MonitoringMetricConfigurationsGetCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op MonitoringMetricConfigurationsCreateOrUpdateCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -342,10 +327,7 @@ op MonitoringMetricConfigurationsCreateOrUpdateCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op OperationsStatusGetCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<Job>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -362,14 +344,14 @@ op OperationsStatusGetCustomized(
 
 @@override(OperationsStatus.get, OperationsStatusGetCustomized, "python,go");
 
+// Core lib supports query operation status, so scope out this operation for .NET.
+@@scope(OperationsStatus.get, "!csharp");
+
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op JobsGetCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<Job>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -390,10 +372,7 @@ op JobsGetCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op RolesDeleteCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<Role>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -414,10 +393,7 @@ op RolesDeleteCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op RolesListByDataBoxEdgeDeviceCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<Role>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -437,10 +413,7 @@ op RolesListByDataBoxEdgeDeviceCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op RolesGetCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<Role>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -461,10 +434,7 @@ op RolesGetCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op RolesCreateOrUpdateCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<Role>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -488,10 +458,7 @@ op RolesCreateOrUpdateCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op SharesDeleteCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<Share>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -512,10 +479,7 @@ op SharesDeleteCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op SharesListByDataBoxEdgeDeviceCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<Share>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -535,10 +499,7 @@ op SharesListByDataBoxEdgeDeviceCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op SharesRefreshCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<Share>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -562,10 +523,7 @@ op SharesRefreshCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op SharesGetCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<Share>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -586,10 +544,7 @@ op SharesGetCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op SharesCreateOrUpdateCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<Share>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -613,10 +568,7 @@ op SharesCreateOrUpdateCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op ContainersDeleteCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<Container>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -641,10 +593,7 @@ op ContainersDeleteCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op ContainersRefreshCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<Container>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -672,10 +621,7 @@ op ContainersRefreshCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op ContainersListByStorageAccountCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<Container>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -699,10 +645,7 @@ op ContainersListByStorageAccountCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op ContainersGetCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -727,10 +670,7 @@ op ContainersGetCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op ContainersCreateOrUpdateCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -761,10 +701,7 @@ op ContainersCreateOrUpdateCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op OrdersDeleteCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -785,10 +722,7 @@ op OrdersDeleteCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op OrderslistDCAccessCodeCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -815,10 +749,7 @@ op OrderslistDCAccessCodeCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op OrdersListByDataBoxEdgeDeviceCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -838,10 +769,7 @@ op OrdersListByDataBoxEdgeDeviceCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op OrdersGetCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<Order>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -862,10 +790,7 @@ op OrdersGetCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op OrdersCreateOrUpdateCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<Order>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -889,10 +814,7 @@ op OrdersCreateOrUpdateCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op TriggersDeleteCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<Trigger>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -913,10 +835,7 @@ op TriggersDeleteCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op TriggersListByDataBoxEdgeDeviceCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<Trigger>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -940,10 +859,7 @@ op TriggersListByDataBoxEdgeDeviceCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op TriggersGetCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<Trigger>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -964,10 +880,7 @@ op TriggersGetCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op TriggersCreateOrUpdateCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<Trigger>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -994,10 +907,7 @@ op TriggersCreateOrUpdateCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op AddonsDeleteCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<Addon>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -1022,10 +932,7 @@ op AddonsDeleteCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op AddonsListByRoleCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<Addon>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -1046,10 +953,7 @@ op AddonsListByRoleCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op AddonsGetCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -1074,10 +978,7 @@ op AddonsGetCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op AddonsCreateOrUpdateCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<Addon>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -1105,10 +1006,7 @@ op AddonsCreateOrUpdateCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op AlertsListByDataBoxEdgeDeviceCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<Alert>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -1128,10 +1026,7 @@ op AlertsListByDataBoxEdgeDeviceCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op AlertsGetCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<Alert>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -1152,10 +1047,7 @@ op AlertsGetCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op BandwidthSchedulesDeleteCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<BandwidthSchedule>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -1179,10 +1071,7 @@ op BandwidthSchedulesDeleteCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op BandwidthSchedulesListByDataBoxEdgeDeviceCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<BandwidthSchedule>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -1202,10 +1091,7 @@ op BandwidthSchedulesListByDataBoxEdgeDeviceCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op BandwidthSchedulesGetCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<BandwidthSchedule>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -1229,10 +1115,7 @@ op BandwidthSchedulesGetCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op BandwidthSchedulesCreateOrUpdateCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<BandwidthSchedule>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -1259,10 +1142,7 @@ op BandwidthSchedulesCreateOrUpdateCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op StorageAccountCredentialsDeleteCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<StorageAccountCredential>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -1286,10 +1166,7 @@ op StorageAccountCredentialsDeleteCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op StorageAccountCredentialsListByDataBoxEdgeDeviceCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<StorageAccountCredential>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -1309,10 +1186,7 @@ op StorageAccountCredentialsListByDataBoxEdgeDeviceCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op StorageAccountCredentialsGetCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<StorageAccount>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -1336,10 +1210,7 @@ op StorageAccountCredentialsGetCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op StorageAccountCredentialsCreateOrUpdateCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -1366,10 +1237,7 @@ op StorageAccountCredentialsCreateOrUpdateCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op DataBoxEdgeDevicesListByDataBoxEdgeDeviceCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -1392,10 +1260,7 @@ op DataBoxEdgeDevicesListByDataBoxEdgeDeviceCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op DataBoxEdgeDevicesDeleteCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -1415,10 +1280,7 @@ op DataBoxEdgeDevicesDeleteCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op DataBoxEdgeDevicesCreateOrUpdateSecuritySettingsCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -1441,10 +1303,7 @@ op DataBoxEdgeDevicesCreateOrUpdateSecuritySettingsCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op DataBoxEdgeDevicesUploadCertificateCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -1467,10 +1326,7 @@ op DataBoxEdgeDevicesUploadCertificateCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op DataBoxEdgeDevicesInstallUpdatesCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -1493,10 +1349,7 @@ op DataBoxEdgeDevicesInstallUpdatesCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op DataBoxEdgeDevicesGetNetworkSettingsCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -1521,9 +1374,7 @@ op DataBoxEdgeDevicesGetNetworkSettingsCustomized(
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op DataBoxEdgeDevicesGenerateCertificateCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<DataBoxEdgeDevice>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -1546,10 +1397,7 @@ op DataBoxEdgeDevicesGenerateCertificateCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op DataBoxEdgeDevicesScanForUpdatesCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<DataBoxEdgeDevice>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -1572,10 +1420,7 @@ op DataBoxEdgeDevicesScanForUpdatesCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op DataBoxEdgeDevicesGetCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<DataBoxEdgeDevice>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -1595,10 +1440,7 @@ op DataBoxEdgeDevicesGetCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op DataBoxEdgeDevicesUpdateCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<DataBoxEdgeDevice>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -1621,10 +1463,7 @@ op DataBoxEdgeDevicesUpdateCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op DataBoxEdgeDevicesGetUpdateSummaryCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<UpdateSummary>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -1648,10 +1487,7 @@ op DataBoxEdgeDevicesGetUpdateSummaryCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op DataBoxEdgeDevicesUpdateExtendedInformationCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<DataBoxEdgeDevice>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -1674,10 +1510,7 @@ op DataBoxEdgeDevicesUpdateExtendedInformationCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op DataBoxEdgeDevicesDownloadUpdatesCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<DataBoxEdgeDevice>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -1700,10 +1533,7 @@ op DataBoxEdgeDevicesDownloadUpdatesCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op DataBoxEdgeDevicesGetExtendedInformationCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<DataBoxEdgeDevice>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -1721,3 +1551,516 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
   DataBoxEdgeDevicesGetExtendedInformationCustomized,
   "python,go"
 );
+
+@@clientName(DataBoxEdgeSkuList, "AvailableDataBoxEdgeSkuList", "csharp");
+@@clientName(AddonState, "DataBoxEdgeRoleAddonProvisioningState", "csharp");
+@@clientName(AlertProperties.appearedAtDateTime, "AppearedOn", "csharp");
+@@clientName(BandwidthScheduleProperties.start, "StartOn", "csharp");
+@@clientName(BandwidthScheduleProperties.stop, "StopOn", "csharp");
+@@alternateType(BandwidthScheduleProperties.start, duration, "csharp");
+@@alternateType(BandwidthScheduleProperties.stop, duration, "csharp");
+@@clientName(DataBoxEdgeDeviceProperties.systemData,
+  "DataBoxEdgeSystemData",
+  "csharp"
+);
+@@clientName(DCAccessCode, "DataBoxEdgeDataCenterAccessCode", "csharp");
+@@clientName(SSLStatus, "DataBoxEdgeStorageAccountSslStatus", "csharp");
+@@clientName(AccessLevel, "EdgeRemoteApplicationAccessLevel", "csharp");
+@@clientName(AccountType, "DataBoxEdgeStorageAccountType", "csharp");
+@@clientName(Address, "DataBoxEdgeShippingAddress", "csharp");
+@@clientName(ClusterMemoryCapacity.clusterFailoverMemoryMb,
+  "ClusterFailoverMemoryInMB",
+  "csharp"
+);
+@@clientName(ClusterMemoryCapacity.clusterFreeMemoryMb,
+  "ClusterFreeMemoryInMB",
+  "csharp"
+);
+@@clientName(ClusterMemoryCapacity.clusterUsedMemoryMb,
+  "ClusterUsedMemoryInMB",
+  "csharp"
+);
+@@clientName(ClusterMemoryCapacity.clusterFragmentationMemoryMb,
+  "ClusterFragmentationMemoryInMB",
+  "csharp"
+);
+@@clientName(ClusterMemoryCapacity.clusterInfraVmMemoryMb,
+  "ClusterInfraVmMemoryInMB",
+  "csharp"
+);
+@@clientName(ClusterMemoryCapacity.clusterTotalMemoryMb,
+  "ClusterTotalMemoryInMB",
+  "csharp"
+);
+@@clientName(ClusterMemoryCapacity.clusterNonFailoverVmMb,
+  "ClusterNonFailoverVmInMB",
+  "csharp"
+);
+@@clientName(ClusterMemoryCapacity.clusterMemoryUsedByVmsMb,
+  "ClusterMemoryUsedByVmsInMB",
+  "csharp"
+);
+@@clientName(ClusterStorageViewData.clusterFreeStorageMb,
+  "ClusterFreeStorageInMB",
+  "csharp"
+);
+@@clientName(ClusterStorageViewData.clusterTotalStorageMb,
+  "ClusterTotalStorageInMB",
+  "csharp"
+);
+@@clientName(GenerateCertResponse, "GenerateCertResult", "csharp");
+@@clientName(GenerateCertResponse.expiryTimeInUTC, "ExpireOn", "csharp");
+@@clientName(HostCapacity.effectiveAvailableMemoryMbOnHost,
+  "EffectiveAvailableMemoryInMBOnHost",
+  "csharp"
+);
+@@clientName(NodeInfo, "EdgeKubernetesNodeInfo", "csharp");
+@@clientName(NumaNodeData.effectiveAvailableMemoryInMb,
+  "EffectiveAvailableMemoryInMB",
+  "csharp"
+);
+@@clientName(NumaNodeData.totalMemoryInMb, "TotalMemoryInMB", "csharp");
+@@clientName(NumaNodeData, "NumaNodeInfo", "csharp");
+@@clientName(PlatformType, "DataBoxEdgeOSPlatformType", "csharp");
+@@clientName(RemoteSupportSettings.expirationTimeStampInUTC,
+  "ExpireOn",
+  "csharp"
+);
+@@clientName(Secret, "DataBoxEdgeDeviceSecret", "csharp");
+@@clientName(UpdateDetails.updateSize, "UpdateSizeInBytes", "csharp");
+@@alternateType(UserAccessRight.userId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@clientName(VmMemory.startupMemoryMB, "StartupMemoryInMB", "csharp");
+@@clientName(VmMemory.currentMemoryUsageMB, "CurrentMemoryUsageInMB", "csharp");
+@@clientName(UpdateSummary, "DataBoxEdgeDeviceUpdateSummary", "csharp");
+@@clientName(NetworkSettings, "DataBoxEdgeDeviceNetworkSettings", "csharp");
+@@clientName(DeviceCapacityInfo, "DataBoxEdgeDeviceCapacityInfo", "csharp");
+@@alternateType(IoTDeviceInfo.ioTHostHubId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@clientName(AzureContainerDataFormat,
+  "DataBoxEdgeStorageContainerDataFormat",
+  "csharp"
+);
+@@clientName(AzureContainerInfo, "DataBoxEdgeStorageContainerInfo", "csharp");
+@@clientName(ContainerStatus, "DataBoxEdgeStorageContainerStatus", "csharp");
+@@clientName(ComputeResource, "EdgeComputeResourceInfo", "csharp");
+@@clientName(MonitoringStatus, "DataBoxEdgeShareMonitoringStatus", "csharp");
+@@alternateType(MetricConfiguration.resourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@clientName(ArcAddon, "EdgeArcAddon", "csharp");
+@@clientName(IoTAddon, "EdgeIotAddon", "csharp");
+@@clientName(IoTDeviceInfo, "EdgeIotDeviceInfo", "csharp");
+@@clientName(IoTRole, "EdgeIotRole", "csharp");
+@@clientName(Ipv4Config, "DataBoxEdgeIPv4Config", "csharp");
+@@clientName(Ipv6Config, "DataBoxEdgeIPv6Config", "csharp");
+@@clientName(ClientPermissionType, "EdgeClientPermissionType", "csharp");
+@@clientName(ClusterMemoryCapacity, "EdgeClusterMemoryCapacity", "csharp");
+@@clientName(ClusterCapacityViewData, "EdgeClusterCapacityViewInfo", "csharp");
+@@clientName(ClusterStorageViewData, "EdgeClusterStorageViewInfo", "csharp");
+@@clientName(ClusterGpuCapacity, "EdgeClusterGpuCapacity", "csharp");
+@@clientName(ClusterWitnessType, "EdgeClusterWitnessType", "csharp");
+@@alternateType(EdgeProfileSubscription.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@clientName(FileSourceInfo, "EdgeFileSourceInfo", "csharp");
+@@clientName(FileEventTrigger, "EdgeFileEventTrigger", "csharp");
+@@clientName(KeyVaultSyncStatus, "EdgeKeyVaultSyncStatus", "csharp");
+@@clientName(KubernetesClusterInfo, "EdgeKubernetesClusterInfo", "csharp");
+@@clientName(KubernetesIPConfiguration,
+  "EdgeKubernetesIPConfiguration",
+  "csharp"
+);
+@@clientName(KubernetesNodeType, "EdgeKubernetesNodeType", "csharp");
+@@clientName(KubernetesRole, "EdgeKubernetesRole", "csharp");
+@@clientName(KubernetesRoleCompute, "EdgeKubernetesRoleCompute", "csharp");
+@@clientName(KubernetesRoleNetwork, "EdgeKubernetesRoleNetwork", "csharp");
+@@clientName(KubernetesRoleResources, "EdgeKubernetesRoleResources", "csharp");
+@@clientName(KubernetesRoleStorage, "EdgeKubernetesRoleStorage", "csharp");
+@@clientName(KubernetesRoleStorageClassInfo,
+  "EdgeKubernetesRoleStorageClassInfo",
+  "csharp"
+);
+@@clientName(KubernetesState, "EdgeKubernetesState", "csharp");
+@@clientName(NetworkAdapterPosition,
+  "DataBoxEdgeNetworkAdapterPosition",
+  "csharp"
+);
+@@clientName(NetworkAdapterStatus, "DataBoxEdgeNetworkAdapterStatus", "csharp");
+@@clientName(RemoteSupportSettings, "EdgeRemoteSupportSettings", "csharp");
+@@clientName(RemoteApplicationType, "EdgeRemoteApplicationType", "csharp");
+@@alternateType(DataBoxEdgeDevice.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(ResourceIdentity.tenantId, Azure.Core.uuid, "csharp");
+@@alternateType(SubscriptionProperties.tenantId, Azure.Core.uuid, "csharp");
+@@alternateType(UploadCertificateResponse.aadTenantId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(ArcAddonProperties.resourceLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(EdgeProfileSubscription.registrationId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(NetworkAdapter.nodeId, Azure.Core.uuid, "csharp");
+@@alternateType(NodeProperties.nodeInstanceId, Azure.Core.uuid, "csharp");
+@@alternateType(UploadCertificateResponse.servicePrincipalObjectId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(UploadCertificateResponse.servicePrincipalClientId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@clientName(Job, "DataBoxEdgeJob", "csharp");
+@@clientName(JobStatus, "DataBoxEdgeJobStatus", "csharp");
+@@clientName(JobErrorDetails, "DataBoxEdgeJobErrorDetails", "csharp");
+@@clientName(JobErrorItem, "DataBoxEdgeJobErrorItem", "csharp");
+@@clientName(JobType, "DataBoxEdgeJobType", "csharp");
+@@clientName(AlertSeverity, "DataBoxEdgeAlertSeverity", "csharp");
+@@clientName(OrderStatus, "DataBoxEdgeOrderStatus", "csharp");
+@@clientName(OrderState, "DataBoxEdgeOrderState", "csharp");
+@@clientName(StorageAccountStatus, "DataBoxEdgeStorageAccountStatus", "csharp");
+@@clientName(DayOfWeek, "DataBoxEdgeDayOfWeek", "csharp");
+@@clientName(Node, "DataBoxEdgeNode", "csharp");
+@@clientName(NodeList, "DataBoxEdgeNodeList", "csharp");
+@@clientName(NodeStatus, "DataBoxEdgeNodeStatus", "csharp");
+@@clientName(EncryptionAlgorithm, "DataBoxEdgeEncryptionAlgorithm", "csharp");
+@@clientName(AuthenticationType, "DataBoxEdgeAuthenticationType", "csharp");
+@@clientName(ContactDetails, "DataBoxEdgeContactDetails", "csharp");
+@@clientName(DataPolicy, "DataBoxEdgeDataPolicy", "csharp");
+@@clientName(DataResidencyType, "DataBoxEdgeDataResidencyType", "csharp");
+@@clientName(DataBoxEdgeDeviceProperties.dataResidency, "Residency", "csharp");
+@@clientName(DeviceType, "DataBoxEdgeDeviceType", "csharp");
+@@clientName(DownloadPhase, "DataBoxEdgeDownloadPhase", "csharp");
+@@clientName(EtcdInfo, "DataBoxEdgeEtcdInfo", "csharp");
+@@clientName(LoadBalancerConfig, "DataBoxEdgeLoadBalancerConfig", "csharp");
+@@clientName(MetricConfiguration, "DataBoxEdgeMetricConfiguration", "csharp");
+@@clientName(MetricCounter, "DataBoxEdgeMetricCounter", "csharp");
+@@clientName(MetricCounterSet, "DataBoxEdgeMetricCounterSet", "csharp");
+@@clientName(MetricDimension, "DataBoxEdgeMetricDimension", "csharp");
+@@clientName(MountPointMap, "DataBoxEdgeMountPointMap", "csharp");
+@@clientName(MountType, "DataBoxEdgeMountType", "csharp");
+@@clientName(NetworkAdapter, "DataBoxEdgeNetworkAdapter", "csharp");
+@@clientName(NetworkGroup, "DataBoxEdgeNetworkGroup", "csharp");
+@@clientName(RefreshDetails, "DataBoxEdgeRefreshDetails", "csharp");
+@@clientName(ResourceMoveDetails, "DataBoxEdgeResourceMoveDetails", "csharp");
+@@clientName(ResourceMoveStatus, "DataBoxEdgeResourceMoveStatus", "csharp");
+@@clientName(RoleStatus, "DataBoxEdgeRoleStatus", "csharp");
+@@clientName(RoleTypes, "DataBoxEdgeRoleType", "csharp");
+@@clientName(RoleSinkInfo, "DataBoxEdgeRoleSinkInfo", "csharp");
+@@clientName(SecuritySettings, "DataBoxEdgeSecuritySettings", "csharp");
+@@clientName(ShipmentType, "DataBoxEdgeShipmentType", "csharp");
+@@clientName(SkuAvailability, "DataBoxEdgeSkuAvailability", "csharp");
+@@clientName(SkuCapability, "DataBoxEdgeSkuCapability", "csharp");
+@@clientName(SkuCost, "DataBoxEdgeSkuCost", "csharp");
+@@clientName(SkuLocationInfo, "DataBoxEdgeSkuLocationInfo", "csharp");
+@@clientName(SkuSignupOption, "DataBoxEdgeSkuSignupOption", "csharp");
+@@clientName(SkuVersion, "DataBoxEdgeSkuVersion", "csharp");
+@@clientName(SubscriptionState, "DataBoxEdgeSubscriptionState", "csharp");
+@@clientName(SymmetricKey, "DataBoxEdgeSymmetricKey", "csharp");
+@@clientName(TrackingInfo, "DataBoxEdgeTrackingInfo", "csharp");
+@@clientName(UpdateDetails, "DataBoxEdgeUpdateDetails", "csharp");
+@@clientName(UpdateOperation, "DataBoxEdgeUpdateOperation", "csharp");
+@@clientName(UpdateStatus, "DataBoxEdgeUpdateStatus", "csharp");
+@@clientName(UpdateType, "DataBoxEdgeUpdateType", "csharp");
+@@clientName(UserType, "DataBoxEdgeUserType", "csharp");
+@@clientName(VmMemory, "DataBoxEdgeVmMemory", "csharp");
+@@clientName(AlertErrorDetails, "DataBoxEdgeAlertErrorDetails", "csharp");
+
+@@clientName(IoTEdgeAgentInfo, "IotEdgeAgentInfo", "csharp");
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+@@alternateType(JobProperties.refreshedEntityId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(StorageAccountCredentialProperties.storageAccountId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(AzureContainerInfo.storageAccountCredentialId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(StorageAccountProperties.storageAccountCredentialId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(DataBoxEdgeDeviceExtendedInfoProperties.clientSecretStoreId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(DataBoxEdgeDeviceExtendedInfoPatch.clientSecretStoreId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(EdgeProfileSubscriptionPatch.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(MountPointMap.roleId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(MountPointMap.shareId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(ShareAccessRight.shareId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(FileSourceInfo.shareId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(RoleSinkInfo.roleId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(RefreshDetails.inProgressRefreshJobId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(UpdateSummaryProperties.lastCompletedDownloadJobId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(UpdateSummaryProperties.lastCompletedInstallJobId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(UpdateSummaryProperties.inProgressDownloadJobId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(UpdateSummaryProperties.inProgressInstallJobId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+@@alternateType(DataBoxEdgeDevice.etag, Azure.Core.eTag, "csharp");
+
+@@clientName(MECRole, "MecRole", "csharp");
+@@clientName(UploadCertificateRequest, "UploadCertificateContent", "csharp");
+@@clientName(DeviceCapacityRequestInfo,
+  "DeviceCapacityRequestContent",
+  "csharp"
+);
+@@clientName(TriggerSupportPackageRequest,
+  "TriggerSupportPackageContent",
+  "csharp"
+);
+@@clientName(NetworkAdapterDHCPStatus,
+  "DataBoxEdgeNetworkAdapterDhcpStatus",
+  "csharp"
+);
+@@clientName(NetworkAdapterRDMAStatus,
+  "DataBoxEdgeNetworkAdapterRdmaStatus",
+  "csharp"
+);
+
+@@clientName(ShareAccessProtocol.SMB, "Smb", "csharp");
+@@clientName(ShareAccessProtocol.NFS, "Nfs", "csharp");
+@@clientName(RoleTypes.IOT, "IoT", "csharp");
+@@clientName(RoleTypes.ASA, "Asa", "csharp");
+@@clientName(RoleTypes.MEC, "Mec", "csharp");
+@@clientName(NetworkGroup.NonRDMA, "NonRdma", "csharp");
+@@clientName(NetworkGroup.RDMA, "Rdma", "csharp");
+@@clientName(RemoteApplicationType.WAC, "Wac", "csharp");
+@@clientName(HostPlatformType.LinuxVM, "LinuxVm", "csharp");
+@@clientName(UserType.ARM, "Arm", "csharp");
+
+@@clientName(NetworkAdapter.ipv4Configuration, "IPv4Configuration", "csharp");
+@@clientName(NetworkAdapter.ipv6Configuration, "IPv6Configuration", "csharp");
+@@clientName(NetworkAdapter.ipv6LinkLocalAddress,
+  "IPv6LinkLocalAddress",
+  "csharp"
+);
+@@clientName(Ipv4Config.ipAddress, "IPAddress", "csharp");
+@@clientName(Ipv6Config.ipAddress, "IPAddress", "csharp");
+@@clientName(KubernetesIPConfiguration.ipAddress, "IPAddress", "csharp");
+@@clientName(NodeInfo.ipConfiguration, "IPConfiguration", "csharp");
+@@clientName(NodeInfo.type, "NodeType", "csharp");
+
+@@clientName(EtcdInfo.type, "EtcdInfoType", "csharp");
+@@clientName(CniConfig.type, "CniConfigType", "csharp");
+@@clientName(KubernetesRoleStorageClassInfo.type,
+  "KubernetesRoleStorageClassInfoType",
+  "csharp"
+);
+@@clientName(LoadBalancerConfig.type, "LoadBalancerConfigType", "csharp");
+@@clientName(ClusterMemoryCapacity.clusterHypervReserveMemoryMb,
+  "ClusterHyperVReserveMemoryMb",
+  "csharp"
+);
+@@clientName(RefreshDetails.lastCompletedRefreshJobTimeInUTC,
+  "LastCompletedRefreshJobTimeInUtc",
+  "csharp"
+);
+@@clientName(ResourceMoveDetails.operationInProgressLockTimeoutInUTC,
+  "OperationInProgressLockTimeoutInUtc",
+  "csharp"
+);
+@@clientName(DataBoxEdgeDeviceExtendedInfoProperties.clientSecretStoreUrl,
+  "ClientSecretStoreUri",
+  "csharp"
+);
+@@clientName(DataBoxEdgeDeviceExtendedInfoPatch.clientSecretStoreUrl,
+  "ClientSecretStoreUri",
+  "csharp"
+);
+@@clientName(TrackingInfo.trackingUrl, "TrackingUri", "csharp");
+@@clientName(ImageRepositoryCredential.imageRepositoryUrl,
+  "ImageRepositoryUri",
+  "csharp"
+);
+@@clientName(SkuName.TEA_1Node, "Tea1Node", "csharp");
+@@clientName(SkuName.TEA_1Node_UPS, "Tea1NodeUps", "csharp");
+@@clientName(SkuName.TEA_1Node_Heater, "Tea1NodeHeater", "csharp");
+@@clientName(SkuName.TEA_1Node_UPS_Heater, "Tea1NodeUpsHeater", "csharp");
+@@clientName(SkuName.TEA_4Node_Heater, "Tea4NodeHeater", "csharp");
+@@clientName(SkuName.TEA_4Node_UPS_Heater, "Tea4NodeUpsHeater", "csharp");
+@@clientName(SkuName.TMA, "Tma", "csharp");
+@@clientName(SkuName.TDC, "Tdc", "csharp");
+@@clientName(SkuName.TCA_Small, "TcaSmall", "csharp");
+@@clientName(SkuName.GPU, "Gpu", "csharp");
+@@clientName(SkuName.TCA_Large, "TcaLarge", "csharp");
+@@clientName(SkuName.EdgePR_Base_UPS, "EdgePRBaseUps", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/invalid-name" "Underscores required in C# client name to match existing SDK enum member for backward compatibility."
+@@clientName(SkuName.EP2_64_1VPU_W, "EP2_64_1VpuW", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/invalid-name" "Underscores required in C# client name to match existing SDK enum member for backward compatibility."
+@@clientName(SkuName.EP2_128_1T4_Mx1_W, "EP2_128_1T4Mx1W", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/invalid-name" "Underscores required in C# client name to match existing SDK enum member for backward compatibility."
+@@clientName(SkuName.EP2_256_2T4_W, "EP2_256_2T4W", "csharp");
+@@clientName(SkuName.RCA_Small, "RcaSmall", "csharp");
+@@clientName(SkuName.RCA_Large, "RcaLarge", "csharp");
+@@clientName(SkuName.RDC, "Rdc", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/invalid-name" "Underscores required in C# client name to match existing SDK enum member for backward compatibility."
+@@clientName(SkuName.EP2_64_Mx1_W, "EP2_64_Mx1W", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/invalid-name" "Underscores required in C# client name to match existing SDK enum member for backward compatibility."
+@@clientName(SkuName.EP2_128_GPU1_Mx1_W, "EP2_128Gpu1Mx1W", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/invalid-name" "Underscores required in C# client name to match existing SDK enum member for backward compatibility."
+@@clientName(SkuName.EP2_256_GPU2_Mx1, "EP2_256Gpu2Mx1", "csharp");
+@@clientName(SkuName.EdgeMR_TCP, "EdgeMRTcp", "csharp");
+
+@@clientName(EncryptionAlgorithm.AES256, "Aes256", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/invalid-name" "Underscores required in C# client name to match existing SDK enum member for backward compatibility."
+@@clientName(EncryptionAlgorithm.RSAES_PKCS1_v_1_5, "RsaesPkcs1V1_5", "csharp");
+
+@@usage(Alert, Usage.input | Usage.output, "csharp");
+@@usage(DiagnosticRemoteSupportSettings, Usage.input | Usage.output, "csharp");
+@@usage(DataBoxEdgeDeviceExtendedInfo, Usage.input | Usage.output, "csharp");
+@@usage(Node, Usage.input | Usage.output, "csharp");
+@@usage(VmMemory, Usage.input | Usage.output, "csharp");
+@@usage(ClusterCapacityViewData, Usage.input | Usage.output, "csharp");
+@@usage(ClusterGpuCapacity, Usage.input | Usage.output, "csharp");
+@@usage(ClusterMemoryCapacity, Usage.input | Usage.output, "csharp");
+@@usage(ClusterStorageViewData, Usage.input | Usage.output, "csharp");
+@@usage(HostCapacity, Usage.input | Usage.output, "csharp");
+@@usage(NumaNodeData, Usage.input | Usage.output, "csharp");
+@@usage(TriggerSupportPackageRequest, Usage.input | Usage.output, "csharp");
+@@usage(UploadCertificateRequest, Usage.input | Usage.output, "csharp");
+@@usage(SecuritySettings, Usage.input | Usage.output, "csharp");
+@@usage(DeviceCapacityInfo, Usage.input | Usage.output, "csharp");
+@@usage(NetworkSettings, Usage.input | Usage.output, "csharp");
+@@usage(UpdateSummary, Usage.input | Usage.output, "csharp");
+
+@@access(RoleSinkInfo, Access.public, "csharp");
+@@access(FileSourceInfo, Access.public, "csharp");
+
+@@alternateType(DataBoxEdgeDeviceExtendedInfoProperties.clientSecretStoreUrl,
+  url,
+  "csharp"
+);
+@@alternateType(DataBoxEdgeDeviceExtendedInfoPatch.clientSecretStoreUrl,
+  url,
+  "csharp"
+);
+@@alternateType(TrackingInfo.trackingUrl, url, "csharp");
+@@alternateType(ImageRepositoryCredential.imageRepositoryUrl, url, "csharp");
+@@alternateType(Ipv4Config.ipAddress, Azure.Core.ipV4Address, "csharp");
+@@alternateType(SkuLocationInfo.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(DataBoxEdgeSku.locations, Azure.Core.azureLocation[], "csharp");
+@@alternateType(GenerateCertResponse.expiryTimeInUTC, utcDateTime, "csharp");
+@@alternateType(DataBoxEdgeDevicePatch.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@clientName(DataBoxEdgeDevicePropertiesPatch.edgeProfile, "Profile", "csharp");
+@@clientName(IoTDeviceInfo.authentication, "Profile", "csharp");
+@@clientName(IoTDeviceInfo.ioTHostHub, "IotHostHub", "csharp");
+@@clientName(IoTDeviceInfo.ioTHostHubId, "IotHostHubId", "csharp");
+@@clientName(IoTRoleProperties.ioTDeviceDetails, "IotDeviceDetails", "csharp");
+@@clientName(IoTRoleProperties.ioTEdgeDeviceDetails,
+  "IotEdgeDeviceDetails",
+  "csharp"
+);
+@@clientName(IoTRoleProperties.ioTEdgeAgentInfo, "IotEdgeAgentInfo", "csharp");
+@@clientName(IoTAddonProperties.ioTDeviceDetails, "IotDeviceDetails", "csharp");
+@@clientName(IoTAddonProperties.ioTEdgeDeviceDetails,
+  "IotEdgeDeviceDetails",
+  "csharp"
+);
+@@clientName(DataBoxEdgeDevices.listByDataBoxEdgeDevice,
+  "GetEdgeNodes",
+  "csharp"
+);
+@@clientName(Orders.listDCAccessCode, "GetDataCenterAccessCode", "csharp");
+@@clientName(AvailableSkusOperationGroup.list, "GetAvailableSkus", "csharp");
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(DataBoxEdgeDeviceExtendedInfo,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Node,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(SecuritySettings,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TriggerSupportPackageRequest,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DeviceCapacityInfo.properties,
+  "csharp"
+);
+
+@@alternateType(CloudEdgeManagementRoleProperties.roleStatus,
+  RoleStatus | null,
+  "csharp"
+);
+@@alternateType(IoTRoleProperties.roleStatus, RoleStatus | null, "csharp");
+@@alternateType(IoTRoleProperties.hostPlatform, PlatformType | null, "csharp");
+@@alternateType(KubernetesRoleProperties.roleStatus,
+  RoleStatus | null,
+  "csharp"
+);
+@@alternateType(KubernetesRoleProperties.hostPlatform,
+  PlatformType | null,
+  "csharp"
+);
+@@alternateType(MECRoleProperties.roleStatus, RoleStatus | null, "csharp");

@@ -308,3 +308,9 @@ interface RadiologyInsightsClient {
   "FraxScore",
   "csharp"
 );
+
+// generate the models, even if they are not directly referenced by API, to avoid breaking changes to Java
+@@usage(Fhir.R4.Condition, Usage.output, "java");
+@@access(Fhir.R4.Condition, Access.public, "java");
+@@usage(Fhir.R4.ResearchStudy, Usage.output, "java");
+@@access(Fhir.R4.ResearchStudy, Access.public, "java");

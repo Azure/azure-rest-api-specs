@@ -108,7 +108,10 @@ interface RecordSets {
     @doc("Parameters supplied to the CreateOrUpdate operation.")
     @bodyRoot
     resource: RecordSet,
-  ): ArmResponse<RecordSet> | ArmCreatedResponse<RecordSet> | CloudError;
+  ): ArmResponse<RecordSet> | ArmCreatedResponse<
+    RecordSet,
+    ExtraHeaders = {}
+  > | CloudError;
   /**
    * Updates a record set within a DNS zone.
    */

@@ -1,23 +1,23 @@
 import {
-  OpenAPI2Document,
-  OpenAPI2PathItem,
   HttpMethod,
+  OpenAPI2Document,
   OpenAPI2Operation,
-  OpenAPI2Schema,
   OpenAPI2Parameter,
-  Ref,
-  Refable,
+  OpenAPI2PathItem,
   OpenAPI2Response,
+  OpenAPI2Schema,
   OpenAPI2SchemaProperty,
   OpenAPI2SchemaRefProperty,
+  Ref,
+  Refable,
 } from "@azure-tools/typespec-autorest";
+import { configuration } from "./configuration.js";
 import {
   getOriginalParameter,
   isApiVersionParameter,
   isResourceGroupNameParameter,
   isSubscriptionIdParameter,
 } from "./parameter.js";
-import { configuration } from "./configuration.js";
 
 let originalDocument: OpenAPI2Document | undefined = undefined;
 
@@ -58,12 +58,12 @@ export function processDocument(document: OpenAPI2Document): OpenAPI2Document {
       const normalizedRoute = route
         .replace(/\/resourcegroups\//i, "/resourceGroups/")
         .replace(/\/subscriptions\//i, "/subscriptions/")
-        .split('/')
-        .map(segment => {
+        .split("/")
+        .map((segment) => {
           if (segment.length === 0) return segment;
           return segment.charAt(0).toLowerCase() + segment.slice(1);
         })
-        .join('/');
+        .join("/");
       delete newDocument.paths[route];
       newDocument.paths[normalizedRoute] = processedPath;
     } else {
@@ -115,6 +115,7 @@ function processPath(path: OpenAPI2PathItem): OpenAPI2PathItem {
 
 function processOperation(operation: OpenAPI2Operation): OpenAPI2Operation {
   const newOperation = deepCopy(operation);
+  newOperation.parameters ??= [];
   let index = newOperation.parameters.findIndex((p) => isApiVersionParameter(p));
   if (index > -1) {
     newOperation.parameters.splice(index, 1);
@@ -166,10 +167,6 @@ function processOperation(operation: OpenAPI2Operation): OpenAPI2Operation {
       newOperation.consumes.length === 0)
   ) {
     delete newOperation.consumes;
-  }
-
-  if (newOperation.tags) {
-    delete newOperation.tags;
   }
 
   if (newOperation.deprecated === false) {

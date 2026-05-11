@@ -4,10 +4,11 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./ConnectedRegistry.models.tsp";
 
-using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Rest;
+using Versioning;
 
 namespace Microsoft.ContainerRegistry;
 /**
@@ -86,6 +87,16 @@ interface ConnectedRegistries {
     },
     LroHeaders = ArmLroLocationHeader<FinalResult = void> &
       Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  /**
+   * Resync the connected registry instance.
+   */
+  @added(Versions.vLatestPreview)
+  resync is ArmResourceActionSync<
+    ConnectedRegistry,
+    void,
+    Response = ArmResponse<ConnectedRegistry>
   >;
 }
 

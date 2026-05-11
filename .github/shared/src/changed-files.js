@@ -1,9 +1,15 @@
 import debug from "debug";
 import { simpleGit } from "simple-git";
+import { KeyedCache } from "./cache.js";
 import { includesSegment } from "./path.js";
 
 // Enable simple-git debug logging to improve console output
 debug.enable("simple-git");
+
+// Cache results of the `example` filter, using the un-resolved path for maximum perf
+// The `example` filter is a hot path in spec-model for large specs like "network".
+/** @type {KeyedCache<string, boolean>} */
+const exampleCache = new KeyedCache();
 
 /**
  * Get a list of changed files in a git repository
@@ -11,13 +17,21 @@ debug.enable("simple-git");
  * @param {Object} [options]
  * @param {string} [options.baseCommitish] Default: "HEAD^".
  * @param {string} [options.cwd] Current working directory.  Default: process.cwd().
+ * @param {string[]} [options.gitOptions] Additional git options to pass to git diff command. Example: ["--no-renames"]. Default: []
  * @param {string} [options.headCommitish] Default: "HEAD".
  * @param {import('./logger.js').ILogger} [options.logger]
  * @param {string[]} [options.paths] Limits the diff to the named paths.  If not set, includes all paths in repo.  Default: []
  * @returns {Promise<string[]>} List of changed files, using posix paths, relative to repo root. Example: ["specification/foo/Microsoft.Foo/main.tsp"].
  */
 export async function getChangedFiles(options = {}) {
-  const { baseCommitish = "HEAD^", cwd, headCommitish = "HEAD", logger, paths = [] } = options;
+  const {
+    baseCommitish = "HEAD^",
+    cwd,
+    gitOptions = [],
+    headCommitish = "HEAD",
+    logger,
+    paths = [],
+  } = options;
 
   if (paths.length > 0) {
     // Use "--" to separate paths from revisions
@@ -29,7 +43,13 @@ export async function getChangedFiles(options = {}) {
   // { name: "/foo/baz.js", status: Status.Renamed, previousName: "/foo/bar.js"}.
   // Then add filter functions to filter based on status.  This is more flexible and lets consumers
   // filter based on status with a single call to `git diff`.
-  const result = await simpleGit(cwd).diff(["--name-only", baseCommitish, headCommitish, ...paths]);
+  const result = await simpleGit(cwd).diff([
+    "--name-only",
+    ...gitOptions,
+    baseCommitish,
+    headCommitish,
+    ...paths,
+  ]);
 
   const files = result
     .trim()
@@ -53,13 +73,21 @@ export async function getChangedFiles(options = {}) {
  * @param {Object} [options]
  * @param {string} [options.baseCommitish] Default: "HEAD^".
  * @param {string} [options.cwd] Current working directory.  Default: process.cwd().
+ * @param {string[]} [options.gitOptions] Additional git options to pass to git diff command. Example: ["--no-renames"]. Default: []
  * @param {string} [options.headCommitish] Default: "HEAD".
  * @param {import('./logger.js').ILogger} [options.logger]
  * @param {string[]} [options.paths] Limits the diff to the named paths.  If not set, includes all paths in repo.  Default: []
  * @returns {Promise<{additions: string[], modifications: string[], deletions: string[], renames: {from: string, to: string}[], total: number}>}
  */
 export async function getChangedFilesStatuses(options = {}) {
-  const { baseCommitish = "HEAD^", cwd, headCommitish = "HEAD", logger, paths = [] } = options;
+  const {
+    baseCommitish = "HEAD^",
+    cwd,
+    gitOptions = [],
+    headCommitish = "HEAD",
+    logger,
+    paths = [],
+  } = options;
 
   if (paths.length > 0) {
     // Use "--" to separate paths from revisions
@@ -68,6 +96,7 @@ export async function getChangedFilesStatuses(options = {}) {
 
   const result = await simpleGit(cwd).diff([
     "--name-status",
+    ...gitOptions,
     baseCommitish,
     headCommitish,
     ...paths,
@@ -229,8 +258,16 @@ export function stable(file) {
  * @returns {boolean}
  */
 export function example(file) {
-  // Folder name "examples" should match case for consistency across specs
-  return typeof file === "string" && json(file) && includesSegment(file, "examples");
+  return (
+    typeof file === "string" &&
+    // Intentionally use un-resolved path as key for perf, since we are OK
+    // caching the same result for different representations of the same path.
+    exampleCache.getOrCreate(
+      file,
+      // Folder name "examples" should match case for consistency across specs
+      () => json(file) && includesSegment(file, "examples"),
+    )
+  );
 }
 
 /**

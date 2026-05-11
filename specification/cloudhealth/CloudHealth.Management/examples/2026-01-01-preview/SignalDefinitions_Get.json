@@ -1,0 +1,54 @@
+{
+  "title": "SignalDefinitions_Get",
+  "operationId": "SignalDefinitions_Get",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "4980D7D5-4E07-47AD-AD34-E76C6BC9F061",
+    "resourceGroupName": "rgopenapi",
+    "healthModelName": "myHealthModel",
+    "signalDefinitionName": "sig1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "metricNamespace": "microsoft.compute/virtualMachines",
+          "metricName": "cpuusage",
+          "aggregationType": "None",
+          "dimension": "nodename",
+          "dimensionFilter": "node1",
+          "provisioningState": "Succeeded",
+          "displayName": "cpu upsage",
+          "signalKind": "AzureResourceMetric",
+          "refreshInterval": "PT1M",
+          "tags": {
+            "key4788": "foo"
+          },
+          "timeGrain": "PT1M",
+          "dataUnit": "Count",
+          "evaluationRules": {
+            "degradedRule": {
+              "operator": "LowerThan",
+              "threshold": 10
+            },
+            "unhealthyRule": {
+              "operator": "LowerThan",
+              "threshold": 1
+            }
+          }
+        },
+        "id": "/subscriptions/4980D7D5-4E07-47AD-AD34-E76C6BC9F061/resourceGroups/rgopenapi/providers/Microsoft.CloudHealth/healthmodels/myHealthModel/signalDefinitions/sig1",
+        "name": "sig1",
+        "type": "Microsoft.CloudHealth/healthmodels/signalDefinitions",
+        "systemData": {
+          "createdBy": "cbhzxxlvkmufetjjjwtk",
+          "createdByType": "User",
+          "createdAt": "2023-09-18T14:04:09.327Z",
+          "lastModifiedBy": "arz",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-09-18T14:04:09.328Z"
+        }
+      }
+    }
+  }
+}

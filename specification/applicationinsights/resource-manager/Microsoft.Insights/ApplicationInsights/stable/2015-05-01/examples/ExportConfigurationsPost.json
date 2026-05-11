@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "ExportProperties": {
+      "DestinationAccountId": "/subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.ClassicStorage/storageAccounts/mystorageblob",
+      "DestinationAddress": "https://mystorageblob.blob.core.windows.net/testexport?sv=2015-04-05&sr=c&sig=token",
+      "DestinationStorageLocationId": "eastus",
+      "DestinationStorageSubscriptionId": "subid",
+      "DestinationType": "Blob",
+      "IsEnabled": "true",
+      "NotificationQueueEnabled": "false",
+      "NotificationQueueUri": "",
+      "RecordTypes": "Requests, Event, Exceptions, Metrics, PageViews, PageViewPerformance, Rdd, PerformanceCounters, Availability"
+    },
+    "api-version": "2015-05-01",
+    "resourceGroupName": "my-resource-group",
+    "resourceName": "my-component",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": [
+        {
+          "ApplicationName": "my-component",
+          "ContainerName": "mystorageblob",
+          "DestinationAccountId": "/subscriptions/subid/resourceGroups/my-resource-group/providers/Microsoft.Storage/storageAccounts/mystorageblob",
+          "DestinationStorageLocationId": "eastasia",
+          "DestinationStorageSubscriptionId": "subidc",
+          "DestinationType": "Blob",
+          "ExportId": "uGOoki0jQsyEs3IdQ83Q4QsNr4=",
+          "ExportStatus": "Preparing",
+          "InstrumentationKey": "8330b4a4-0b8e-40cf-a643-bbaf60d375c9",
+          "IsUserEnabled": "False",
+          "LastGapTime": "9999-12-31T23:59:59.999Z",
+          "LastSuccessTime": "9999-12-31T23:59:59.999Z",
+          "LastUserUpdate": "2017-06-05T06:34:26.957Z",
+          "NotificationQueueEnabled": "False",
+          "PermanentErrorReason": "None",
+          "RecordTypes": "Requests, Event, Exceptions, Metrics, PageViews, PageViewPerformance, Rdd, PerformanceCounters, Availability",
+          "ResourceGroup": "2",
+          "StorageName": "mystorageblob",
+          "SubscriptionId": "subid"
+        }
+      ]
+    }
+  },
+  "operationId": "ExportConfigurations_Create",
+  "title": "ExportConfigurationPost"
+}

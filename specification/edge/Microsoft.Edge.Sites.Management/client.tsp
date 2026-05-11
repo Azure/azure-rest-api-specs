@@ -10,6 +10,7 @@ using Microsoft.Edge;
 
 // CSharp
 @@clientName(Site, "EdgeSite", "csharp");
+@@clientName(Sites, "ResourceGroupEdgeSite", "csharp");
 @@clientName(SiteProperties, "EdgeSiteProperties", "csharp");
 @@clientName(Azure.ResourceManager.ResourceProvisioningState,
   "EdgeSiteProvisioningState",
@@ -18,3 +19,7 @@ using Microsoft.Edge;
 @@clientName(SiteUpdate, "EdgeSitePatch", "csharp");
 @@clientName(SiteUpdateProperties, "EdgeSitePatchProperties", "csharp");
 @@clientName(SiteAddressProperties, "EdgeSiteAddressProperties", "csharp");
+
+// This is a workaround for now, resource detection based on ResourceNameParameter is not yet supported in the generator
+@@clientName(SitesByServiceGroup, "ServiceGroupEdgeSite", "csharp");
+@@clientName(SitesBySubscription, "SubscriptionEdgeSite", "csharp");

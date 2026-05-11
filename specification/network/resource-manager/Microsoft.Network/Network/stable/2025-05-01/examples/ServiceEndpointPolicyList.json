@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "testServiceEndpointPolicy",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/serviceEndpointPolicies/testServiceEndpointPolicy",
+            "location": "westus",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "resourceGuid": "6A7C139D-8B8D-499B-B7CB-4F3F02A8A44F",
+              "serviceEndpointPolicyDefinitions": [
+                {
+                  "name": "StorageServiceEndpointPolicyDefinition",
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/serviceEndpointPolicies/testServiceEndpointPolicy/serviceEndpointPolicyDefinitions/StorageServiceEndpointPolicyDefinition",
+                  "properties": {
+                    "description": "Storage Service EndpointPolicy Definition",
+                    "service": "Microsoft.Storage",
+                    "serviceResources": [
+                      "/subscriptions/00000000-0000-0000-0000-000000000000",
+                      "/subscriptions/00000000-0000-0000-0000-000000000000resourceGroups/storageRg",
+                      "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/storageRg/providers/Microsoft.Storage/storageAccounts/stAccount"
+                    ]
+                  }
+                }
+              ],
+              "subnets": []
+            }
+          },
+          {
+            "name": "testServiceEndpointPolicy1",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/serviceEndpointPolicies/testServiceEndpointPolicy1",
+            "location": "westus",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "resourceGuid": "6A7C139D-8B8D-499B-B7CB-4F3F02A8A44F",
+              "serviceEndpointPolicyDefinitions": [
+                {
+                  "name": "StorageServiceEndpointPolicyDefinition1",
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/serviceEndpointPolicies/testServiceEndpointPolicy1/serviceEndpointPolicyDefinitions/StorageServiceEndpointPolicyDefinition1",
+                  "properties": {
+                    "description": "Storage Service EndpointPolicy Definition",
+                    "service": "Microsoft.Storage",
+                    "serviceResources": [
+                      "/subscriptions/00000000-0000-0000-0000-000000000000",
+                      "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/storageRg",
+                      "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/storageRg/providers/Microsoft.Storage/storageAccounts/stAccount"
+                    ]
+                  }
+                }
+              ],
+              "subnets": []
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ServiceEndpointPolicies_ListByResourceGroup",
+  "title": "List resource group service endpoint policies"
+}
