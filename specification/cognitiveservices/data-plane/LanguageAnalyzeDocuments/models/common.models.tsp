@@ -717,7 +717,7 @@ model RequestStatistics {
   /** Number of invalid documents. This includes empty, over-size limit or non-supported languages documents. */
   erroneousDocumentsCount: int32;
 
-  /** Number of transactions for the request. */
+  /** Number of billing or usage transactions for the request. */
   transactionsCount: int64;
 }
 

@@ -346,7 +346,7 @@ union PiiCategories {
   /** Azure Storage Account Key */
   AzureStorageAccountKey: "AzureStorageAccountKey",
 
-  /** Azure Storage Account Generic */
+  /** Azure Storage account-related secrets or credentials that do not match a more specific Azure Storage category. */
   AzureStorageAccountGeneric: "AzureStorageAccountGeneric",
 
   /** BE National Number */

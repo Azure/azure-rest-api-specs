@@ -56,11 +56,11 @@ namespace Language.AnalyzeTextClientCustomizations;
   "csharp"
 );
 @@clientName(PiiCategories.AzureDocumentDBAuthKey,
-  "AzureDocumentDbauthKey",
+  "AzureDocumentDBAuthKey",
   "csharp"
 );
 @@clientName(PiiCategories.AzureIAASDatabaseConnectionAndSQLString,
-  "AzureIaasDatabaseConnectionAndSqlString",
+  "AzureIaasDBConnectionAndSqlString",
   "csharp"
 );
 @@clientName(PiiCategories.AzureSAS, "AzureSas", "csharp");
@@ -599,7 +599,7 @@ namespace Language.AnalyzeTextClientCustomizations;
   "SummarySize",
   "csharp"
 );
-@@clientName(redactionCharacter.equals, "EqualSign", "csharp");
+@@clientName(redactionCharacter.equals, "EqualsSign", "csharp");
 @@clientName(EntityMaskPolicy, "EntityMaskRedactionPolicy", "csharp");
 
 @@clientName(DocumentWarning.targetRef, "TargetReference", "csharp");
@@ -607,3 +607,13 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(PiiDomain.phi, "Health", "csharp");
 
 @@clientName(PiiCategories.URL, "Url", "csharp");
+
+@@clientName(RequestStatistics, "DocumentRequestStatistics", "csharp");
+
+@@clientName(ScriptKind, "DocumentScriptKind", "csharp");
+
+@@clientName(ScriptCode, "DocumentScriptCode", "csharp");
+
+@@clientName(NoMaskPolicy, "NoMaskRedactionPolicy", "csharp");
+
+@@clientName(BaseRedactionPolicy, "RedactionPolicy", "csharp");
