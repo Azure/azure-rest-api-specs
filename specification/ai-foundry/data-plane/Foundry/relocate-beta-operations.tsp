@@ -24,6 +24,16 @@ interface MemoryStores {}
 @@clientLocation(Azure.AI.Projects.MemoryStores.getUpdateResult, MemoryStores);
 @@clientLocation(Azure.AI.Projects.MemoryStores.deleteScope, MemoryStores);
 
+interface Models {}
+@@clientLocation(Azure.AI.Projects.Models.listVersions, Models);
+@@clientLocation(Azure.AI.Projects.Models.listLatest, Models);
+@@clientLocation(Azure.AI.Projects.Models.getVersion, Models);
+@@clientLocation(Azure.AI.Projects.Models.deleteVersion, Models);
+@@clientLocation(Azure.AI.Projects.Models.createOrUpdateVersion, Models);
+@@clientLocation(Azure.AI.Projects.Models.createAsync, Models);
+@@clientLocation(Azure.AI.Projects.Models.startPendingUpload, Models);
+@@clientLocation(Azure.AI.Projects.Models.getCredentials, Models);
+
 interface Evaluators {}
 @@clientLocation(Azure.AI.Projects.Evaluators.listVersions, Evaluators);
 @@clientLocation(Azure.AI.Projects.Evaluators.listLatestVersions, Evaluators);
