@@ -295,18 +295,18 @@ using TypeSpec.Versioning;
 );
 @@clientName(Microsoft.ComputeSchedule.ActionType, "ScheduledActionType");
 
-@@clientName(SubmitDeallocateRequest, "SubmitDeallocateContent");
-@@clientName(ExecuteHibernateRequest, "ExecuteHibernateContent");
-@@clientName(CancelOperationsRequest, "CancelOperationsContent");
-@@clientName(ExecuteCreateRequest, "ExecuteCreateContent");
-@@clientName(ExecuteCreateFlexRequest, "ExecuteCreateFlexContent");
-@@clientName(ExecuteDeallocateRequest, "ExecuteDeallocateContent");
-@@clientName(ExecuteDeleteRequest, "ExecuteDeleteContent");
-@@clientName(ExecuteStartRequest, "ExecuteStartContent");
-@@clientName(GetOperationErrorsRequest, "GetOperationErrorsContent");
-@@clientName(GetOperationStatusRequest, "GetOperationStatusContent");
-@@clientName(SubmitStartRequest, "SubmitStartContent");
-@@clientName(SubmitHibernateRequest, "SubmitHibernateContent");
+@@clientName(SubmitDeallocateRequest, "SubmitDeallocateContent", "csharp");
+@@clientName(ExecuteHibernateRequest, "ExecuteHibernateContent", "csharp");
+@@clientName(CancelOperationsRequest, "CancelOperationsContent", "csharp");
+@@clientName(ExecuteCreateRequest, "ExecuteCreateContent", "csharp");
+@@clientName(ExecuteCreateFlexRequest, "ExecuteCreateFlexContent", "csharp");
+@@clientName(ExecuteDeallocateRequest, "ExecuteDeallocateContent", "csharp");
+@@clientName(ExecuteDeleteRequest, "ExecuteDeleteContent", "csharp");
+@@clientName(ExecuteStartRequest, "ExecuteStartContent", "csharp");
+@@clientName(GetOperationErrorsRequest, "GetOperationErrorsContent", "csharp");
+@@clientName(GetOperationStatusRequest, "GetOperationStatusContent", "csharp");
+@@clientName(SubmitStartRequest, "SubmitStartContent", "csharp");
+@@clientName(SubmitHibernateRequest, "SubmitHibernateContent", "csharp");
 @@clientName(ScheduledActionsExtensionProperties,
   "ScheduledActionsExtensionProperties"
 );

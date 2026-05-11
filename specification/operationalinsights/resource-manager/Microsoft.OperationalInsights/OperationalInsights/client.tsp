@@ -23,3 +23,15 @@ using Microsoft.OperationalInsights;
   global.AccessRulePropertiesSubscriptionsItem[],
   "java"
 );
+
+@@clientName(Microsoft.OperationalInsights.ProvisioningStateEnum,
+  "SummaryLogsProvisioningState",
+  "java"
+);
+@@clientName(OperationalInsightsTableProvisioningState,
+  "ProvisioningStateEnum",
+  "java"
+);
+
+// Fix etag casing for backward compatibility
+@@clientName(Microsoft.OperationalInsights.SearchMetadata.eTag, "etag", "java");
