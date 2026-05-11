@@ -16,6 +16,7 @@ tags:
   - name: EvaluatorGenerationJobs
   - name: Indexes
   - name: Insights
+  - name: Models
   - name: Memory Stores
   - name: Conversations
   - name: Evals
@@ -363,6 +364,58 @@ paths:
       x-ms-foundry-meta:
         required_previews:
           - AgentEndpoints=V1Preview
+  /agents/{agent_name}/code:download:
+    get:
+      operationId: Agents_downloadAgentCode
+      description: |-
+        Download the code zip for the latest version of a code-based hosted agent.
+        Returns the previously-uploaded zip (`application/zip`).
+        The SHA-256 digest of the returned bytes matches the `content_hash` on the latest version's `code_configuration`.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - CodeAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent whose latest-version code zip should be downloaded.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: |-
+            Response body for downloading a hosted agent's code zip.
+            Body is the raw zip bytes; `Content-Type` declares `application/zip` so clients
+            can route to a zip-aware handler. Streaming is preserved (`bytes` body) regardless
+            of the content-type label.
+          content:
+            application/zip:
+              schema:
+                type: string
+                format: binary
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agents
+      x-ms-foundry-meta:
+        required_previews:
+          - CodeAgents=V1Preview
   /agents/{agent_name}/endpoint/protocols/invocations:
     post:
       operationId: AgentInvocations_createAgentInvocation
@@ -1520,6 +1573,64 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agents
+  /agents/{agent_name}/versions/{agent_version}/code:download:
+    get:
+      operationId: Agents_downloadAgentVersionCode
+      description: |-
+        Download the code zip for a specific version of a code-based hosted agent.
+        Returns the previously-uploaded zip (`application/zip`).
+        The SHA-256 digest of the returned bytes matches the `content_hash` on the agent version's `code_configuration`.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - CodeAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent.
+          schema:
+            type: string
+        - name: agent_version
+          in: path
+          required: true
+          description: The version of the agent whose code zip should be downloaded.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: |-
+            Response body for downloading a hosted agent's code zip.
+            Body is the raw zip bytes; `Content-Type` declares `application/zip` so clients
+            can route to a zip-aware handler. Streaming is preserved (`bytes` body) regardless
+            of the content-type label.
+          content:
+            application/zip:
+              schema:
+                type: string
+                format: binary
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agents
+      x-ms-foundry-meta:
+        required_previews:
+          - CodeAgents=V1Preview
   /agents/{agent_name}/versions/{agent_version}/containers/default:
     get:
       operationId: AgentContainers_getAgentContainer
@@ -5404,6 +5515,328 @@ paths:
       x-ms-foundry-meta:
         conditional_previews:
           - MemoryStores=V1Preview
+  /models:
+    get:
+      operationId: Models_listLatest
+      description: List the latest version of each ModelVersion
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PagedModelVersion'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      tags:
+        - Models
+  /models/{name}/versions:
+    get:
+      operationId: Models_listVersions
+      description: List all versions of the given ModelVersion
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: name
+          in: path
+          required: true
+          description: The name of the resource
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PagedModelVersion'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      tags:
+        - Models
+  /models/{name}/versions/{version}:
+    get:
+      operationId: Models_getVersion
+      description: Get the specific version of the ModelVersion. The service returns 404 Not Found error if the ModelVersion does not exist.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: name
+          in: path
+          required: true
+          description: The name of the resource
+          schema:
+            type: string
+        - name: version
+          in: path
+          required: true
+          description: The specific version id of the ModelVersion to retrieve.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelVersion'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      tags:
+        - Models
+    delete:
+      operationId: Models_deleteVersion
+      description: Delete the specific version of the ModelVersion. The service returns 204 No Content if the ModelVersion was deleted successfully or if the ModelVersion does not exist.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: name
+          in: path
+          required: true
+          description: The name of the resource
+          schema:
+            type: string
+        - name: version
+          in: path
+          required: true
+          description: The version of the ModelVersion to delete.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      tags:
+        - Models
+    patch:
+      operationId: Models_updateVersion
+      description: Update an existing ModelVersion with the given version id
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: name
+          in: path
+          required: true
+          description: The name of the resource
+          schema:
+            type: string
+        - name: version
+          in: path
+          required: true
+          description: The specific version id of the UpdateModelVersionRequest to create or update.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelVersion'
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelVersion'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      tags:
+        - Models
+      requestBody:
+        required: true
+        content:
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/UpdateModelVersionRequest'
+        description: The UpdateModelVersionRequest to create or update.
+  /models/{name}/versions/{version}/createAsync:
+    post:
+      operationId: Models_createAsync
+      description: Creates a model version asynchronously with blob content validation. Returns 202 Accepted with a Location header for polling.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: name
+          in: path
+          required: true
+          description: Name of the model.
+          schema:
+            type: string
+        - name: version
+          in: path
+          required: true
+          description: Version of the model.
+          schema:
+            type: string
+      responses:
+        '202':
+          description: Accepted response for asynchronous model version creation, with polling location.
+          headers:
+            Location:
+              required: true
+              description: URL to poll for operation status.
+              schema:
+                type: string
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      tags:
+        - Models
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelVersion'
+        description: Model version to create.
+  /models/{name}/versions/{version}/credentials:
+    post:
+      operationId: Models_getCredentials
+      description: Get credentials for a model version asset.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: name
+          in: path
+          required: true
+          description: Name of the model.
+          schema:
+            type: string
+        - name: version
+          in: path
+          required: true
+          description: Version of the model.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetCredentialResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      tags:
+        - Models
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelCredentialRequest'
+  /models/{name}/versions/{version}/startPendingUpload:
+    post:
+      operationId: Models_startPendingUpload
+      description: Start or retrieve a pending upload for a model version.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: name
+          in: path
+          required: true
+          description: Name of the model.
+          schema:
+            type: string
+        - name: version
+          in: path
+          required: true
+          description: Version of the model.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PendingUploadResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      tags:
+        - Models
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PendingUploadRequest'
   /openai/v1/conversations:
     post:
       operationId: createConversation
@@ -9338,6 +9771,36 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorGenerationJobSource'
       description: Agent source for evaluator generation jobs — references an agent to fetch instructions and metadata from.
+    AgentFilterTraceSource:
+      type: object
+      required:
+        - type
+        - agent_reference
+      properties:
+        type:
+          type: string
+          enum:
+            - agent_filter
+          description: The type of trace source, always `agent_filter`.
+        agent_reference:
+          allOf:
+            - $ref: '#/components/schemas/EvalAgentReference'
+          description: The agent reference to filter traces by.
+        start_time:
+          type: integer
+          format: int64
+          description: Start time for the trace query window, expressed as a Unix timestamp (seconds).
+        end_time:
+          type: integer
+          format: int64
+          description: End time for the trace query window, expressed as a Unix timestamp (seconds).
+        max_traces:
+          type: integer
+          format: int32
+          description: Maximum number of traces to sample. Must be greater than 0.
+      allOf:
+        - $ref: '#/components/schemas/TraceSource'
+      description: A trace source that selects traces by agent reference with time-based filtering.
     AgentId:
       type: object
       required:
@@ -9527,6 +9990,39 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - AgentEndpoints=V1Preview
+    AgentSmartFilterTraceSource:
+      type: object
+      required:
+        - type
+        - agent_reference
+      properties:
+        type:
+          type: string
+          enum:
+            - agent_smart_filter
+          description: The type of trace source, always `agent_smart_filter`.
+        agent_reference:
+          allOf:
+            - $ref: '#/components/schemas/EvalAgentReference'
+          description: The agent reference to filter traces by.
+        start_time:
+          type: integer
+          format: int64
+          description: Start time for the trace query window, expressed as a Unix timestamp (seconds).
+        end_time:
+          type: integer
+          format: int64
+          description: End time for the trace query window, expressed as a Unix timestamp (seconds).
+        max_traces:
+          type: integer
+          format: int32
+          description: Maximum number of traces to sample. Must be greater than 0.
+        model:
+          type: string
+          description: If you provide the model, it will be used for filtering.
+      allOf:
+        - $ref: '#/components/schemas/TraceSource'
+      description: An extended agent filter trace source that also includes model information.
     AgentTaxonomyInput:
       type: object
       required:
@@ -9708,6 +10204,21 @@ components:
       allOf:
         - $ref: '#/components/schemas/BaseCredentials'
       description: API Key Credential definition
+    ArtifactProfile:
+      type: object
+      required:
+        - category
+      properties:
+        category:
+          allOf:
+            - $ref: '#/components/schemas/FoundryModelArtifactProfileCategory'
+          description: The category of the artifact profile
+        signals:
+          type: array
+          items:
+            $ref: '#/components/schemas/FoundryModelArtifactProfileSignal'
+          description: Signals detected in the model artifact
+      description: Artifact profile of the model
     AssetCredentialResponse:
       type: object
       required:
@@ -9955,6 +10466,7 @@ components:
           benchmark_preview: '#/components/schemas/AzureAIBenchmarkDataSourceConfig'
       allOf:
         - $ref: '#/components/schemas/DataSourceConfig'
+      description: Base data source configuration for Azure AI evaluation scenarios.
     AzureAIModelTarget:
       type: object
       required:
@@ -9988,7 +10500,7 @@ components:
           description: The unique identifier of the Azure AI model.
         sampling_params:
           allOf:
-            - $ref: '#/components/schemas/ModelSamplingParamsUpdate'
+            - $ref: '#/components/schemas/ModelSamplingParams'
           description: The parameters used to control the sampling behavior of the model during text generation.
       allOf:
         - $ref: '#/components/schemas/TargetUpdate'
@@ -10145,6 +10657,23 @@ components:
             The indices attached to this agent. There can be a maximum of 1 index
             resource attached to the agent.
       description: A set of index resources used by the `azure_ai_search` tool.
+    AzureAITraceDataSourcePreviewEvalRunDataSource:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - azure_ai_trace_data_source_preview
+          description: The type of data source, always `azure_ai_trace_data_source_preview`.
+        trace_source:
+          allOf:
+            - $ref: '#/components/schemas/TraceSource'
+          description: The trace source that defines how traces are selected for evaluation.
+      allOf:
+        - $ref: '#/components/schemas/EvalRunDataSource'
+      description: A wrapper data source that contains a polymorphic trace source to specify how traces are selected for evaluation.
     AzureFunctionBinding:
       type: object
       required:
@@ -10297,7 +10826,7 @@ components:
           type: string
           description: 'Deployment name for AOAI model. Example: gpt-4o if in AIServices or connection based `connection_name/deployment_name` (e.g. `my-aoai-connection/gpt-4o`).'
       allOf:
-        - $ref: '#/components/schemas/TargetConfig'
+        - $ref: '#/components/schemas/RedTeamTargetConfig'
       description: Azure OpenAI model configuration. The API version would be selected by the service for querying the model.
     BaseCredentials:
       type: object
@@ -10841,6 +11370,7 @@ components:
       required:
         - runtime
         - entry_point
+        - dependency_resolution
       properties:
         runtime:
           type: string
@@ -10850,6 +11380,15 @@ components:
           items:
             type: string
           description: The entry point command and arguments for the code execution.
+        dependency_resolution:
+          allOf:
+            - $ref: '#/components/schemas/CodeDependencyResolution'
+          description: |-
+            How package dependencies are resolved at deployment time. Defaults to `bundled`,
+            where the caller bundles all dependencies into the uploaded zip and the service
+            performs no remote build. `remote_build` instructs the service to build
+            dependencies remotely from the manifest included in the uploaded zip.
+          default: bundled
         content_hash:
           type: string
           description: The SHA-256 hex digest of the uploaded code zip. Set by the service from the `x-ms-code-zip-sha256` request header; read-only in responses and never accepted in request payloads.
@@ -10858,6 +11397,14 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - CodeAgents=V1Preview
+    CodeDependencyResolution:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - bundled
+            - remote_build
+      description: How package dependencies are resolved at deployment time for a code-based hosted agent.
     CompletionMessageToolCallChunk:
       type: object
       required:
@@ -11068,6 +11615,90 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluationRuleAction'
       description: Evaluation rule action for continuous evaluation.
+    ConversationGenPreviewItemGenerationParams:
+      type: object
+      required:
+        - type
+        - source
+        - model
+      properties:
+        type:
+          type: string
+          enum:
+            - conversation_gen_preview
+          description: The type of item generation parameters, always `conversation_gen_preview`.
+        source:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.EvalJsonlFileContentSource'
+            - $ref: '#/components/schemas/OpenAI.EvalJsonlFileIdSource'
+          description: The source of test scenarios, supporting file_id or file_content.
+        model:
+          type: string
+          description: The model deployment used for simulation, in the format '{connectionName}/modelDeploymentName'.
+        max_turns:
+          type: integer
+          format: int32
+          description: Maximum number of turns per simulated conversation. Defaults to 20.
+          default: 20
+        num_conversations:
+          type: integer
+          format: int32
+          description: Number of simulated conversations to generate per test scenario. Defaults to 5.
+          default: 5
+        data_mapping:
+          type: object
+          additionalProperties:
+            type: string
+          description: Mapping from source fields to response_id field, which is required for retrieving chat history.
+        sampling_params:
+          allOf:
+            - $ref: '#/components/schemas/ModelSamplingParams'
+          description: Sampling parameters for the conversation generation.
+      allOf:
+        - $ref: '#/components/schemas/ItemGenerationParams'
+      description: Represents the parameters for conversation simulation item generation.
+    ConversationIdTraceSource:
+      type: object
+      required:
+        - type
+        - conversation_ids
+      properties:
+        type:
+          type: string
+          enum:
+            - conversation_id_source
+          description: The type of trace source, always `conversation_id_source`.
+        conversation_ids:
+          type: array
+          items:
+            type: string
+          description: Collection of conversation identifiers to filter traces by.
+      allOf:
+        - $ref: '#/components/schemas/TraceSource'
+      description: A trace source that selects traces by conversation IDs.
+    ConversationSimulationPreviewEvalRunDataSource:
+      type: object
+      required:
+        - type
+        - item_generation_params
+        - target
+      properties:
+        type:
+          type: string
+          enum:
+            - azure_ai_conversation_simulation_preview
+          description: The type of data source, always `azure_ai_conversation_simulation_preview`.
+        item_generation_params:
+          allOf:
+            - $ref: '#/components/schemas/ConversationGenPreviewItemGenerationParams'
+          description: The parameters for conversation generation.
+        target:
+          allOf:
+            - $ref: '#/components/schemas/AzureAIAgentTarget'
+          description: The target agent to simulate conversations against.
+      allOf:
+        - $ref: '#/components/schemas/EvalRunDataSource'
+      description: Represents a data source for evaluation runs that generate multi-turn conversations via LLM simulation against a target agent.
     CosmosDBIndex:
       type: object
       required:
@@ -11099,7 +11730,7 @@ components:
       properties:
         metadata:
           allOf:
-            - $ref: '#/components/schemas/CreateAgentVersionFromCodeRequest'
+            - $ref: '#/components/schemas/CreateAgentVersionFromCodeMetadata'
           description: JSON metadata including description and hosted definition.
         code:
           type: string
@@ -11234,7 +11865,7 @@ components:
       properties:
         metadata:
           allOf:
-            - $ref: '#/components/schemas/CreateAgentVersionFromCodeRequest'
+            - $ref: '#/components/schemas/CreateAgentVersionFromCodeMetadata'
           description: JSON metadata including description and hosted definition.
         code:
           type: string
@@ -11243,7 +11874,7 @@ components:
       required:
         - metadata
         - code
-    CreateAgentVersionFromCodeRequest:
+    CreateAgentVersionFromCodeMetadata:
       type: object
       required:
         - definition
@@ -11417,6 +12048,11 @@ components:
           description: |-
             Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.
                 Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
+        evaluation_level:
+          allOf:
+            - $ref: '#/components/schemas/EvaluationLevel'
+          description: The level at which evaluation is performed. Defaults to 'turn' if not specified.
+          default: turn
       title: CreateEvalRunRequest
     CreateOrUpdateManagedAgentIdentityBlueprintRequest:
       type: object
@@ -11615,7 +12251,6 @@ components:
           simple_qna: '#/components/schemas/SimpleQnADataGenerationJobOptions'
           traces: '#/components/schemas/TracesDataGenerationJobOptions'
           tool_use: '#/components/schemas/ToolUseFineTuningDataGenerationJobOptions'
-          task: '#/components/schemas/TaskDataGenerationJobOptions'
       description: Options for managing data generation jobs.
     DataGenerationJobOutput:
       type: object
@@ -11708,7 +12343,6 @@ components:
             - simple_qna
             - traces
             - tool_use
-            - task
       description: The supported data generation job types.
     DataGenerationModelOptions:
       type: object
@@ -11721,6 +12355,10 @@ components:
       description: LLM model options for data generation jobs.
     DataGenerationTokenUsage:
       type: object
+      required:
+        - prompt_tokens
+        - completion_tokens
+        - total_tokens
       properties:
         prompt_tokens:
           type: integer
@@ -12264,6 +12902,46 @@ components:
               "test": "synthetics",
             }
           }
+    EvalAgentIdReference:
+      type: object
+      required:
+        - type
+        - agent_id
+      properties:
+        type:
+          type: string
+          enum:
+            - agent_id
+          description: The type of agent reference, always `agent_id`.
+        agent_id:
+          type: string
+          description: The unique identifier of the agent.
+      allOf:
+        - $ref: '#/components/schemas/EvalAgentReference'
+      description: Identifies a 3P (Assistants) agent by its opaque agent ID.
+    EvalAgentReference:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/EvalAgentReferenceType'
+          description: The discriminator that identifies which kind of agent reference this is.
+      discriminator:
+        propertyName: type
+        mapping:
+          agent_id: '#/components/schemas/EvalAgentIdReference'
+          agent_reference: '#/components/schemas/EvalFoundryAgentReference'
+      description: Base class for polymorphic agent references used in evaluation trace filtering. The user supplies exactly one variant to identify the agent whose traces should be filtered.
+    EvalAgentReferenceType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - agent_id
+            - agent_reference
+      description: Specifies the type of agent reference used for filtering traces.
     EvalCsvFileIdSource:
       type: object
       required:
@@ -12297,6 +12975,26 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvalRunDataSource'
       description: Represents a CSV data source for evaluation runs.
+    EvalFoundryAgentReference:
+      type: object
+      required:
+        - type
+        - name
+      properties:
+        type:
+          type: string
+          enum:
+            - agent_reference
+          description: The type of agent reference, always `agent_reference`.
+        name:
+          type: string
+          description: The name of the agent.
+        version:
+          type: string
+          description: The version identifier of the agent. If not specified, will look for any version.
+      allOf:
+        - $ref: '#/components/schemas/EvalAgentReference'
+      description: Identifies a Foundry agent by its name and optional version.
     EvalResult:
       type: object
       required:
@@ -12409,6 +13107,11 @@ components:
           description: |-
             Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.
                 Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
+        evaluation_level:
+          allOf:
+            - $ref: '#/components/schemas/EvaluationLevel'
+          description: The level at which evaluation is performed. Defaults to 'turn' if not specified.
+          default: turn
       description: A schema representing an evaluation run.
       title: EvalRun
       x-oaiMeta:
@@ -12612,6 +13315,8 @@ components:
           azure_ai_target_completions: '#/components/schemas/TargetCompletionEvalRunDataSource'
           csv: '#/components/schemas/EvalCsvRunDataSource'
           azure_ai_red_team: '#/components/schemas/RedTeamEvalRunDataSource'
+          azure_ai_conversation_simulation_preview: '#/components/schemas/ConversationSimulationPreviewEvalRunDataSource'
+          azure_ai_trace_data_source_preview: '#/components/schemas/AzureAITraceDataSourcePreviewEvalRunDataSource'
           azure_ai_benchmark_preview: '#/components/schemas/AzureAIBenchmarkPreviewEvalRunDataSource'
       description: Base class for run data sources with discriminator support.
     EvalRunOutputItem:
@@ -12751,6 +13456,10 @@ components:
           additionalProperties: {}
           nullable: true
           description: Optional sample or intermediate data produced by the grader.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/EvalRunOutputItemResultStatus'
+          description: 'The evaluation status for this result item. Values: "completed", "errored", "skipped". Null if not provided by evaluator. When status is skipped, passed/score can be ignored.'
         metric:
           type: string
           description: The name of the metric (e.g., "fluency", "f1_score").
@@ -12772,6 +13481,15 @@ components:
       additionalProperties: {}
       description: A single grader result for an evaluation run output item.
       title: EvalRunOutputItemResult
+    EvalRunOutputItemResultStatus:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - completed
+            - errored
+            - skipped
+      description: The evaluation status for an evaluation run output item result.
     EvalRunOutputItemSampleInput:
       type: object
       required:
@@ -12980,6 +13698,14 @@ components:
       allOf:
         - $ref: '#/components/schemas/InsightResult'
       description: Insights from the evaluation comparison.
+    EvaluationLevel:
+      anyOf:
+        - type: string
+          enum:
+            - turn
+            - conversation
+        - type: string
+      description: The level at which evaluation is performed.
     EvaluationResultSample:
       type: object
       required:
@@ -13767,24 +14493,13 @@ components:
       type: object
       required:
         - type
-        - fabric_iq_preview
+        - project_connection_id
       properties:
         type:
           type: string
           enum:
             - fabric_iq_preview
           description: The object type, which is always 'fabric_iq_preview'.
-        fabric_iq_preview:
-          allOf:
-            - $ref: '#/components/schemas/FabricIQPreviewToolParameters'
-          description: The FabricIQ tool parameters.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.Tool'
-    FabricIQPreviewToolParameters:
-      type: object
-      required:
-        - project_connection_id
-      properties:
         project_connection_id:
           type: string
           description: The ID of the FabricIQ project connection.
@@ -13805,56 +14520,15 @@ components:
               nullable: true
           description: (Optional) Whether the agent requires approval before executing actions. Default is always.
           default: always
-    FabricIQToolCall:
-      type: object
-      required:
-        - type
-        - call_id
-        - arguments
-        - status
-      properties:
-        type:
+        name:
           type: string
-          enum:
-            - fabric_iq_preview_call
-        call_id:
+          description: Optional user-defined name for this tool or configuration.
+        description:
           type: string
-          description: The unique ID of the tool call generated by the model.
-        arguments:
-          type: string
-          description: A JSON string of the arguments to pass to the tool.
-        status:
-          allOf:
-            - $ref: '#/components/schemas/ToolCallStatus'
-          description: The status of the tool call.
+          description: Optional user-defined description for this tool or configuration.
       allOf:
-        - $ref: '#/components/schemas/OpenAI.OutputItem'
-      description: A Fabric IQ tool call.
-    FabricIQToolCallOutput:
-      type: object
-      required:
-        - type
-        - call_id
-        - status
-      properties:
-        type:
-          type: string
-          enum:
-            - fabric_iq_preview_call_output
-        call_id:
-          type: string
-          description: The unique ID of the tool call generated by the model.
-        output:
-          allOf:
-            - $ref: '#/components/schemas/ToolCallOutputContent'
-          description: The output from the Fabric IQ tool call.
-        status:
-          allOf:
-            - $ref: '#/components/schemas/ToolCallStatus'
-          description: The status of the tool call.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.OutputItem'
-      description: The output of a Fabric IQ tool call.
+        - $ref: '#/components/schemas/OpenAI.Tool'
+      description: A FabricIQ server-side tool.
     FileDataGenerationJobOutput:
       type: object
       required:
@@ -13968,6 +14642,62 @@ components:
       allOf:
         - $ref: '#/components/schemas/DatasetVersionUpdate'
       description: FileDatasetVersion Definition
+    FoundryModelArtifactProfileCategory:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - DataOnly
+            - RuntimeDependent
+            - Unknown
+      description: The artifact profile category.
+    FoundryModelArtifactProfileSignal:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - PickleDeserialization
+            - CustomPythonCode
+            - DynamicOps
+            - NativeBinary
+            - UnknownFormat
+      description: Signals detected in the model artifact.
+    FoundryModelSourceType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - LocalUpload
+            - TrainingJob
+      description: The source type of the model.
+    FoundryModelWarning:
+      type: object
+      properties:
+        code:
+          allOf:
+            - $ref: '#/components/schemas/FoundryModelWarningCode'
+          description: The warning code.
+        message:
+          type: string
+          description: The warning message.
+      description: A warning associated with a model.
+    FoundryModelWarningCode:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - RuntimeDependentArtifact
+            - UnclassifiedArtifact
+      description: Warning code for model artifacts.
+    FoundryModelWeightType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - FullWeight
+            - LoRA
+            - DraftModel
+      description: The weight type of the model.
     FoundryTimestamp:
       type: integer
       format: unixtime
@@ -14469,6 +15199,7 @@ components:
           red_team_seed_prompts: '#/components/schemas/RedTeamSeedPromptsItemGenerationParams'
           red_team_taxonomy: '#/components/schemas/RedTeamTaxonomyItemGenerationParams'
           response_retrieval: '#/components/schemas/ResponseRetrievalItemGenerationParams'
+          conversation_gen_preview: '#/components/schemas/ConversationGenPreviewItemGenerationParams'
       description: Represents the set of parameters used to control item generation operations.
     ItemGenerationParamsType:
       anyOf:
@@ -14480,6 +15211,7 @@ components:
             - red_team_seed_prompts
             - red_team_taxonomy
             - synthetic_data_gen_preview
+            - conversation_gen_preview
       description: The types of parameters for red team item generation.
     JobStatus:
       anyOf:
@@ -14492,6 +15224,27 @@ components:
             - failed
             - cancelled
       description: Extensible status values shared by Foundry jobs.
+    LoraConfig:
+      type: object
+      properties:
+        rank:
+          type: integer
+          format: int32
+          description: 'LoRA rank (r). Positive integer. Common values: 8, 16, 32, 64.'
+        alpha:
+          type: integer
+          format: int32
+          description: LoRA scaling factor (α). Positive integer; typically 2× the rank.
+        targetModules:
+          type: array
+          items:
+            type: string
+          description: Model layers modified by the adapter (e.g., q_proj, v_proj). Auto-detected from adapter_config.json if omitted.
+        dropout:
+          type: number
+          format: float
+          description: Dropout rate used during training. Informational — not used at serving time.
+      description: Adapter-specific metadata for LoRA models. Drives serving engine configuration at deployment time.
     ManagedAgentIdentityBlueprint:
       type: object
       required:
@@ -15086,6 +15839,16 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: The input definition information for a Microsoft Fabric tool as used to configure an agent.
+    ModelCredentialRequest:
+      type: object
+      required:
+        - blobUri
+      properties:
+        blobUri:
+          type: string
+          format: uri
+          description: Blob URI of the model asset to fetch credentials for.
+      description: Request to fetch credentials for a model asset.
     ModelDeployment:
       type: object
       required:
@@ -15133,49 +15896,101 @@ components:
       description: Model Deployment Definition
     ModelSamplingParams:
       type: object
-      required:
-        - temperature
-        - top_p
-        - seed
-        - max_completion_tokens
       properties:
         temperature:
           type: number
           format: float
-          description: The temperature parameter for sampling.
+          description: The temperature parameter for sampling. Defaults to 1.0.
+          default: 1
         top_p:
           type: number
           format: float
-          description: The top-p parameter for nucleus sampling.
+          description: The top-p parameter for nucleus sampling. Defaults to 1.0.
+          default: 1
         seed:
           type: integer
           format: int32
-          description: The random seed for reproducibility.
+          description: The random seed for reproducibility. Defaults to 42.
+          default: 42
         max_completion_tokens:
           type: integer
           format: int32
           description: The maximum number of tokens allowed in the completion.
       description: Represents a set of parameters used to control the sampling behavior of a language model during text generation.
-    ModelSamplingParamsUpdate:
+    ModelSourceData:
       type: object
       properties:
-        temperature:
-          type: number
-          format: float
-          description: The temperature parameter for sampling.
-        top_p:
-          type: number
-          format: float
-          description: The top-p parameter for nucleus sampling.
-        seed:
-          type: integer
-          format: int32
-          description: The random seed for reproducibility.
-        max_completion_tokens:
-          type: integer
-          format: int32
-          description: The maximum number of tokens allowed in the completion.
-      description: Represents a set of parameters used to control the sampling behavior of a language model during text generation.
+        sourceType:
+          allOf:
+            - $ref: '#/components/schemas/FoundryModelSourceType'
+          description: The source type of the model
+        jobId:
+          type: string
+          description: The job ID that produced this model
+      description: Source information for the model
+    ModelVersion:
+      type: object
+      required:
+        - blobUri
+        - name
+        - version
+      properties:
+        systemData:
+          allOf:
+            - $ref: '#/components/schemas/SystemDataV3'
+          description: System related metadata
+          readOnly: true
+        blobUri:
+          type: string
+          format: uri
+          description: URI of the model artifact in blob storage
+        weightType:
+          allOf:
+            - $ref: '#/components/schemas/FoundryModelWeightType'
+          description: The weight type of the model
+        baseModel:
+          type: string
+          description: Base model asset ID
+        source:
+          allOf:
+            - $ref: '#/components/schemas/ModelSourceData'
+          description: The source of the model
+        loraConfig:
+          allOf:
+            - $ref: '#/components/schemas/LoraConfig'
+          description: Adapter-specific configuration. Required when weight_type is lora; ignored otherwise. May be auto-populated from adapter_config.json when present in the uploaded files — user-provided values take precedence over auto-detected values.
+        artifactProfile:
+          allOf:
+            - $ref: '#/components/schemas/ArtifactProfile'
+          description: The artifact profile of the model
+          readOnly: true
+        warnings:
+          type: array
+          items:
+            $ref: '#/components/schemas/FoundryModelWarning'
+          description: Service-computed advisory warnings derived from the artifact profile.
+          readOnly: true
+        id:
+          type: string
+          description: Asset ID, a unique identifier for the asset
+          readOnly: true
+        name:
+          type: string
+          description: The name of the resource
+          readOnly: true
+        version:
+          type: string
+          description: The version of the resource
+          readOnly: true
+        description:
+          type: string
+          description: The asset description text.
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+          description: Tag dictionary. Tags can be added, removed, and updated.
+      description: Model Version Definition
     MonthlyRecurrenceSchedule:
       type: object
       required:
@@ -18644,6 +19459,14 @@ components:
           $ref: '#/components/schemas/OpenAI.integer'
         failed:
           $ref: '#/components/schemas/OpenAI.integer'
+        errored:
+          allOf:
+            - $ref: '#/components/schemas/integer'
+          description: Number of tests that errored for this criteria.
+        skipped:
+          allOf:
+            - $ref: '#/components/schemas/integer'
+          description: Number of tests that were skipped for this criteria.
     OpenAI.EvalRunResultCounts:
       type: object
       required:
@@ -18660,6 +19483,10 @@ components:
           $ref: '#/components/schemas/OpenAI.integer'
         passed:
           $ref: '#/components/schemas/OpenAI.integer'
+        skipped:
+          allOf:
+            - $ref: '#/components/schemas/integer'
+          description: Number of output items that were skipped during the evaluation.
     OpenAI.EvalStoredCompletionsSource:
       type: object
       required:
@@ -24294,8 +25121,6 @@ components:
             - fabric_dataagent_preview_call_output
             - azure_function_call
             - azure_function_call_output
-            - fabric_iq_preview_call
-            - fabric_iq_preview_call_output
     OpenAI.ItemResourceWebSearchToolCall:
       type: object
       required:
@@ -24386,8 +25211,6 @@ components:
             - fabric_dataagent_preview_call_output
             - azure_function_call
             - azure_function_call_output
-            - fabric_iq_preview_call
-            - fabric_iq_preview_call_output
     OpenAI.ItemWebSearchToolCall:
       type: object
       required:
@@ -25188,8 +26011,6 @@ components:
           browser_automation_preview_call_output: '#/components/schemas/BrowserAutomationToolCallOutput'
           fabric_dataagent_preview_call: '#/components/schemas/FabricDataAgentToolCall'
           fabric_dataagent_preview_call_output: '#/components/schemas/FabricDataAgentToolCallOutput'
-          fabric_iq_preview_call: '#/components/schemas/FabricIQToolCall'
-          fabric_iq_preview_call_output: '#/components/schemas/FabricIQToolCallOutput'
           azure_function_call: '#/components/schemas/AzureFunctionToolCall'
           azure_function_call_output: '#/components/schemas/AzureFunctionToolCallOutput'
           a2a_preview_call: '#/components/schemas/A2AToolCall'
@@ -25910,8 +26731,6 @@ components:
             - fabric_dataagent_preview_call_output
             - azure_function_call
             - azure_function_call_output
-            - fabric_iq_preview_call
-            - fabric_iq_preview_call_output
     OpenAI.OutputItemWebSearchToolCall:
       type: object
       required:
@@ -30202,6 +31021,21 @@ components:
           format: uri
           description: The link to the next page of items
       description: Paged collection of ManagedAgentIdentityBlueprint items
+    PagedModelVersion:
+      type: object
+      required:
+        - value
+      properties:
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelVersion'
+          description: The ModelVersion items on this page
+        nextLink:
+          type: string
+          format: uri
+          description: The link to the next page of items
+      description: Paged collection of ModelVersion items
     PagedRedTeam:
       type: object
       required:
@@ -30275,8 +31109,8 @@ components:
         pendingUploadType:
           type: string
           enum:
-            - BlobReference
-          description: BlobReference is the only supported type.
+            - TemporaryBlobReference
+          description: TemporaryBlobReference is the only supported type.
       description: Represents a request for a pending upload.
     PendingUploadResponse:
       type: object
@@ -30298,8 +31132,8 @@ components:
         pendingUploadType:
           type: string
           enum:
-            - BlobReference
-          description: BlobReference is the only supported type
+            - TemporaryBlobReference
+          description: TemporaryBlobReference is the only supported type
       description: Represents the response for a pending upload request
     PromptAgentDefinition:
       type: object
@@ -30568,7 +31402,7 @@ components:
           readOnly: true
         target:
           allOf:
-            - $ref: '#/components/schemas/TargetConfig'
+            - $ref: '#/components/schemas/RedTeamTargetConfig'
           description: Target configuration for the red-team run.
       description: Red team details.
     RedTeamEvalRunDataSource:
@@ -30593,6 +31427,7 @@ components:
           description: The target configuration for the evaluation.
       allOf:
         - $ref: '#/components/schemas/EvalRunDataSource'
+      description: Represents a data source for red team evaluation runs.
     RedTeamItemGenerationParams:
       type: object
       required:
@@ -30617,6 +31452,7 @@ components:
           default: 20
       allOf:
         - $ref: '#/components/schemas/ItemGenerationParams'
+      description: Represents the parameters for red team item generation.
     RedTeamSeedPromptsItemGenerationParams:
       type: object
       required:
@@ -30647,6 +31483,19 @@ components:
       allOf:
         - $ref: '#/components/schemas/ItemGenerationParams'
       description: Represents the parameters for red team seed prompts item generation.
+    RedTeamTargetConfig:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          description: Type of the model configuration.
+      discriminator:
+        propertyName: type
+        mapping:
+          AzureOpenAIModel: '#/components/schemas/AzureOpenAIModelConfiguration'
+      description: Abstract class for target configuration.
     RedTeamTaxonomyItemGenerationParams:
       type: object
       required:
@@ -31307,6 +32156,25 @@ components:
           description: The optional seed data content source files for data generation.
       allOf:
         - $ref: '#/components/schemas/ItemGenerationParams'
+      description: Represents the parameters for synthetic data generation item generation.
+    SystemDataV3:
+      type: object
+      properties:
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
+          description: Timestamp of resource creation
+        createdBy:
+          type: string
+          description: Identity that created the resource
+        createdByType:
+          type: string
+          description: Type of identity that created the resource
+        lastModifiedAt:
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
+          description: Timestamp of last resource modification
+      description: System metadata for a resource
     SystemMessage:
       type: object
       required:
@@ -31366,19 +32234,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvalRunDataSource'
       description: Represents a data source for target-based completion evaluation configuration.
-    TargetConfig:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          description: Type of the model configuration.
-      discriminator:
-        propertyName: type
-        mapping:
-          AzureOpenAIModel: '#/components/schemas/AzureOpenAIModelConfiguration'
-      description: Abstract class for target configuration.
     TargetUpdate:
       type: object
       required:
@@ -31393,19 +32248,6 @@ components:
           azure_ai_model: '#/components/schemas/AzureAIModelTargetUpdate'
           azure_ai_agent: '#/components/schemas/AzureAIAgentTargetUpdate'
       description: Base class for targets with discriminator support.
-    TaskDataGenerationJobOptions:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - task
-          description: The data generation job type, which is Task for this model.
-      allOf:
-        - $ref: '#/components/schemas/DataGenerationJobOptions'
-      description: The options for a data generation job with Task type.
     TaxonomyCategory:
       type: object
       required:
@@ -31599,6 +32441,7 @@ components:
           additionalProperties:
             type: string
           description: The model to use for the evaluation. Must support structured outputs.
+      description: An Azure AI Evaluator grader used as testing criterion in evaluations.
       title: AzureAIEvaluatorGrader
     ToolCallOutputContent:
       anyOf:
@@ -31747,6 +32590,52 @@ components:
             - $ref: '#/components/schemas/ToolboxPolicies'
           description: Policy configuration for the toolbox version.
       description: A specific version of a toolbox.
+    TraceIdTraceSource:
+      type: object
+      required:
+        - type
+        - trace_ids
+      properties:
+        type:
+          type: string
+          enum:
+            - trace_id_source
+          description: The type of trace source, always `trace_id_source`.
+        trace_ids:
+          type: array
+          items:
+            type: string
+          description: Collection of trace identifiers to evaluate.
+      allOf:
+        - $ref: '#/components/schemas/TraceSource'
+      description: A trace source that selects traces by explicit trace IDs.
+    TraceSource:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/TraceSourceType'
+          description: The discriminator that identifies which kind of trace source this is.
+      discriminator:
+        propertyName: type
+        mapping:
+          trace_id_source: '#/components/schemas/TraceIdTraceSource'
+          conversation_id_source: '#/components/schemas/ConversationIdTraceSource'
+          agent_filter: '#/components/schemas/AgentFilterTraceSource'
+          agent_smart_filter: '#/components/schemas/AgentSmartFilterTraceSource'
+      description: Base class for polymorphic trace sources nested within an AzureAITraceDataSourcePreviewEvalRunDataSource.
+    TraceSourceType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - trace_id_source
+            - conversation_id_source
+            - agent_filter
+            - agent_smart_filter
+      description: Specifies the type of trace source used to select traces for evaluation.
     TracesDataGenerationJobOptions:
       type: object
       required:
@@ -31851,6 +32740,11 @@ components:
           items:
             type: string
           description: Collection of Agent trace identifiers that should be evaluated.
+        conversation_ids:
+          type: array
+          items:
+            type: string
+          description: Collection of conversation identifiers to filter traces by conversation.
         agent_id:
           type: string
           description: The agent ID used to filter traces for evaluation.
@@ -32001,6 +32895,18 @@ components:
           description: |-
             Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.
                 Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
+    UpdateModelVersionRequest:
+      type: object
+      properties:
+        description:
+          type: string
+          description: The asset description text.
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+          description: Tag dictionary. Tags can be added, removed, and updated.
+      description: Request body for updating a model version. Only description and tags can be modified.
     UpdateToolboxRequest:
       type: object
       required:
@@ -32174,35 +33080,25 @@ components:
       type: object
       required:
         - type
-        - work_iq_preview
+        - project_connection_id
       properties:
         type:
           type: string
           enum:
             - work_iq_preview
           description: The object type, which is always 'work_iq_preview'.
+        project_connection_id:
+          type: string
+          description: The ID of the WorkIQ project connection.
         name:
           type: string
           description: Optional user-defined name for this tool or configuration.
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
-        work_iq_preview:
-          allOf:
-            - $ref: '#/components/schemas/WorkIQPreviewToolParameters'
-          description: The WorkIQ tool parameters.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A WorkIQ server-side tool.
-    WorkIQPreviewToolParameters:
-      type: object
-      required:
-        - project_connection_id
-      properties:
-        project_connection_id:
-          type: string
-          description: The ID of the WorkIQ project connection.
-      description: The WorkIQ tool parameters.
     WorkflowActionOutputItem:
       type: object
       required:

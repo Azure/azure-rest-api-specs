@@ -416,9 +416,28 @@ model CodeConfiguration {
   @doc("The entry point command and arguments for the code execution.")
   entry_point: string[];
 
+  @doc("""
+    How package dependencies are resolved at deployment time. Defaults to `bundled`,
+    where the caller bundles all dependencies into the uploaded zip and the service
+    performs no remote build. `remote_build` instructs the service to build
+    dependencies remotely from the manifest included in the uploaded zip.
+    """)
+  dependency_resolution: CodeDependencyResolution = CodeDependencyResolution.bundled;
+
   @visibility(Lifecycle.Read)
   @doc("The SHA-256 hex digest of the uploaded code zip. Set by the service from the `x-ms-code-zip-sha256` request header; read-only in responses and never accepted in request payloads.")
   content_hash?: string;
+}
+
+@doc("How package dependencies are resolved at deployment time for a code-based hosted agent.")
+union CodeDependencyResolution {
+  string,
+
+  @doc("The caller has bundled all dependencies into the uploaded zip; the service performs no remote build.")
+  bundled: "bundled",
+
+  @doc("The service builds dependencies remotely from the manifest included in the uploaded zip.")
+  remote_build: "remote_build",
 }
 
 @doc("The hosted agent definition.")
@@ -852,7 +871,7 @@ model AgentCard {
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
 )
-model CreateAgentVersionFromCodeRequest {
+model CreateAgentVersionFromCodeMetadata {
   @doc("A human-readable description of the agent.")
   @maxLength(512)
   description?: string;
@@ -870,7 +889,7 @@ model CreateAgentVersionFromCodeRequest {
 )
 model CreateAgentVersionFromCodeContent {
   /** JSON metadata including description and hosted definition. */
-  metadata: HttpPart<CreateAgentVersionFromCodeRequest>;
+  metadata: HttpPart<CreateAgentVersionFromCodeMetadata>;
 
   /** The code zip file (max 250 MB). */
   code: HttpPart<bytes>;
@@ -883,6 +902,26 @@ model CreateAgentVersionFromCodeContent {
 )
 model CreateAgentFromCodeContent {
   ...CreateAgentVersionFromCodeContent;
+}
+
+/**
+ * Response body for downloading a hosted agent's code zip.
+ * Body is the raw zip bytes; `Content-Type` declares `application/zip` so clients
+ * can route to a zip-aware handler. Streaming is preserved (`bytes` body) regardless
+ * of the content-type label.
+ */
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
+)
+model DownloadAgentCodeResponse {
+  @doc("The media type of the returned package content.")
+  @header("Content-Type")
+  content_type: "application/zip";
+
+  @doc("The zip code package content.")
+  @body
+  content: bytes;
 }
 
 // ══════════════════════════════════════════════════════════

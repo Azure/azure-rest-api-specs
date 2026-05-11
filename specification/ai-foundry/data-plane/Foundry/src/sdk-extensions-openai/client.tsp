@@ -346,6 +346,21 @@ namespace Azure.AI.Projects {
   @@usage(CreatedBy, Usage.output);
   @@clientName(CreatedBy, "AgentItemSource");
   @@clientName(OpenAI.DetailEnum, "ImageDetailLevel");
+  @@clientName(OpenAI.ComputerScreenshotImage.image_url, "ImageUri");
+  @@clientName(OpenAI.AutoCodeInterpreterToolParam.type, "Kind");
+  @@clientName(AzureAISearchTool.azure_ai_search, "AzureAISearch");
+  @@clientName(AzureFunctionBinding.type, "Kind");
+  @@clientName(BingGroundingSearchConfiguration.set_lang, "Language");
+  @@clientName(OpenAI.CustomToolParam.defer_loading, "ShouldDeferLoading");
+  @@clientName(OpenAI.FunctionToolParam.defer_loading, "ShouldDeferLoading");
+  @@clientName(OpenAI.FunctionToolParam.strict, "IsStrict");
+  @@clientName(OpenAI.FunctionCallOutputStatusEnum, "FunctionCallOutputStatus");
+  @@clientName(OpenAI.MCPToolFilter.read_only, "IsReadOnly");
+  @@clientName(MemorySearchPreviewTool.update_delay, "UpdateDelayInSeconds");
+  @@clientName(OpenApiFunctionDefinition.spec, "Specification");
+  @@clientName(OpenApiTool.openapi, "OpenApi");
+  @@clientName(StructuredOutputDefinition.strict, "IsStrict");
+  @@clientName(OpenAI.WebSearchApproximateLocation.type, "Kind");
   // --------------------------------------------------------------------------------
   // Usage / Public accessibility overrides
   // --------------------------------------------------------------------------------
@@ -378,7 +393,6 @@ namespace Azure.AI.Projects {
   // --------------------------------------------------------------------------------
   // Renames for tools.
   // --------------------------------------------------------------------------------
-  @@clientName(OpenAI.ContainerMemoryLimit, "ResponsesContainerMemoryLimit");
   @@clientName(OpenAI.FunctionCallOutputStatusEnum,
     "ResponsesFunctionCallOutputStatusEnum"
   );
