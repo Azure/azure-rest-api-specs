@@ -31,7 +31,6 @@ interface MosaicSearchesTileSetList {
   get is Azure.Core.Foundations.Operation<
     {
       ...SubDatasetQueryParameters;
-      ...CollectionQueryParameter;
 
       /**
        * Search Id (pgSTAC Search Hash)
@@ -62,7 +61,6 @@ interface MosaicSearchesTileSetMetadata {
   get is Azure.Core.Foundations.Operation<
     {
       ...SubDatasetQueryParameters;
-      ...CollectionQueryParameter;
 
       /**
        * Search Id (pgSTAC Search Hash)
@@ -659,7 +657,6 @@ interface MosaicSearchesAssetsForBbox {
 
       ...MosaicSearchQueryParameters;
       ...SubDatasetQueryParameters;
-      ...CollectionQueryParameter;
       ...BoundingBoxPathParameters;
 
       /**
@@ -1234,7 +1231,6 @@ interface MosaicSearchesAssetsForTiles {
 
       ...MosaicSearchQueryParameters;
       ...SubDatasetQueryParameters;
-      ...CollectionQueryParameter;
       ...ZxyPathParameters;
 
       /** Identifier selecting one of the TileMatrixSetId supported (default: 'WebMercatorQuad') */
@@ -1263,7 +1259,6 @@ interface MosaicSearchesPoint {
     {
       ...MosaicSearchQueryParameters;
       ...SubDatasetQueryParameters;
-      ...CollectionQueryParameter;
 
       /**
        * Search Id (pgSTAC Search Hash)
@@ -1317,7 +1312,6 @@ interface MosaicSearchesPointWithAssets {
     {
       ...MosaicSearchQueryParameters;
       ...SubDatasetQueryParameters;
-      ...CollectionQueryParameter;
 
       /**
        * Search Id (pgSTAC Search Hash)
