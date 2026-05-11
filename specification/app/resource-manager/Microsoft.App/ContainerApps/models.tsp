@@ -12,12 +12,6 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.App;
 
 /**
- * Logic App call response object.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model Object is Record<unknown>;
-
-/**
  * Custom domain verification Id of a subscription
  */
 scalar CustomDomainVerificationId extends string;
