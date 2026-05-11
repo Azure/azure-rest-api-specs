@@ -57,7 +57,7 @@ interface ResourceRecommendationBases {
   update is Extension.CustomPatchSync<
     Extension.Subscription,
     ResourceRecommendationBase,
-    RecommendationsPatchPayload
+    RecommendationStatePropertiesPayload
     >;
 
 

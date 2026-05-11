@@ -726,18 +726,6 @@ model RecommendationProperties {
 }
 
 /**
- * Response for patch Recommendation API.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2026_02_01_preview)
-model RecommendationsPatchPayload {
-  /**
-   * The properties for patch recommendation API.
-   */
-  properties?: RecommendationStatePropertiesPayload;
-}
-
-/**
  * Properties for recommendation state patch payload.
  */
 @added(Versions.v2026_02_01_preview)
@@ -745,7 +733,7 @@ model RecommendationStatePropertiesPayload {
   /**
    * The state of the recommendation.
    */
-  state?: NewState;
+  recommendationStatus?: NewState;
 
   /**
    * The reason the state of the Recommendation was changed.

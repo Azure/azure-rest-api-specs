@@ -1087,7 +1087,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RecommendationsPatchPayload"
+              "$ref": "#/definitions/RecommendationStatePropertiesPayload"
             }
           }
         ],
@@ -2895,7 +2895,7 @@
       "type": "object",
       "description": "Properties for recommendation state patch payload.",
       "properties": {
-        "state": {
+        "recommendationStatus": {
           "$ref": "#/definitions/NewState",
           "description": "The state of the recommendation."
         },
@@ -2938,16 +2938,6 @@
             "description": "Pending"
           }
         ]
-      }
-    },
-    "RecommendationsPatchPayload": {
-      "type": "object",
-      "description": "Response for patch Recommendation API.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/RecommendationStatePropertiesPayload",
-          "description": "The properties for patch recommendation API."
-        }
       }
     },
     "ResiliencyReviewProperties": {
