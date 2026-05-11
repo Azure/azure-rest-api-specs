@@ -5288,11 +5288,6 @@
         }
       }
     },
-    "Azure.Core.uuid": {
-      "type": "string",
-      "format": "uuid",
-      "description": "Universally Unique Identifier"
-    },
     "AzureManagedDiskPerformanceTier": {
       "type": "string",
       "description": "Storage tier of a server.",
@@ -7419,11 +7414,6 @@
       "type": "object",
       "description": "Major version upgrade precheck resource with validation results.",
       "properties": {
-        "subscriptionId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The ID of the target subscription. The value must be an UUID.",
-          "minLength": 1
-        },
         "createTime": {
           "type": "string",
           "format": "date-time",
@@ -8862,12 +8852,9 @@
           "format": "int32",
           "description": "The error code."
         },
-        "errorParameters": {
-          "type": "array",
-          "description": "The error parameters.",
-          "items": {
-            "type": "string"
-          }
+        "errorMessage": {
+          "type": "string",
+          "description": "The error message."
         }
       }
     },
