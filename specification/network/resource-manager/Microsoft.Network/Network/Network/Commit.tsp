@@ -19,17 +19,29 @@ namespace Microsoft.Network;
 /**
  * The commit resource
  */
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Using ChildResource base type with includeInapplicableMetadataInPayload for consistency with all existing Network Manager child resources (e.g., ScopeConnection, AdminRuleCollection, ConnectivityConfiguration)"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "ChildResource is the established pattern for all Network Manager child resources to maintain consistent swagger output across the service"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheriting from ChildResource is required to match the existing Network Manager resource model hierarchy"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Using Legacy.feature(Features.networkManager) for consistency with all Network Manager resources in this TypeSpec project"
 @parentResource(NetworkManager)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Legacy.feature(Features.networkManager)
 @added(Versions.v2025_07_01)
-model Commit is ProxyResource<CommitProperties> {
+model Commit extends ChildResource {
+  properties?: CommitProperties;
+
   @visibility(Lifecycle.Read)
   @path
   @key("commitName")
   @segment("commits")
   @pattern("^(?![.-])[a-zA-Z0-9_.-]{1,128}$")
   name: string;
+
+  /**
+   * The system metadata related to this resource.
+   */
+  @visibility(Lifecycle.Read)
+  systemData?: Azure.ResourceManager.Foundations.SystemData;
 }
 
 /**
