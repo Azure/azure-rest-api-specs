@@ -1712,6 +1712,104 @@ model ServerEndpointSyncActivityStatus {
   @visibility(Lifecycle.Read)
   @minValue(0)
   sessionMinutesRemaining?: int32;
+
+  /**
+   * Remaining file count (if totals are final)
+   */
+  @added(Versions.v2025_12_01)
+  @visibility(Lifecycle.Read)
+  @minValue(0)
+  remainingFileCount?: int64;
+
+  /**
+   * Remaining directory count (if totals are final)
+   */
+  @added(Versions.v2025_12_01)
+  @visibility(Lifecycle.Read)
+  @minValue(0)
+  remainingDirectoryCount?: int64;
+
+  /**
+   * Remaining delete count (if totals are final)
+   */
+  @added(Versions.v2025_12_01)
+  @visibility(Lifecycle.Read)
+  @minValue(0)
+  remainingDeleteCount?: int64;
+
+  /**
+   * Remaining logical size in bytes (if totals are final)
+   */
+  @added(Versions.v2025_12_01)
+  @visibility(Lifecycle.Read)
+  @minValue(0)
+  remainingLogicalSizeBytes?: int64;
+
+  /**
+   * Whether the remaining counts are final
+   */
+  @added(Versions.v2025_12_01)
+  @visibility(Lifecycle.Read)
+  isRemainingFinal?: boolean;
+
+  /**
+   * Recent throughput in items per second
+   */
+  @added(Versions.v2025_12_01)
+  @visibility(Lifecycle.Read)
+  recentItemsPerSecond?: float64;
+
+  /**
+   * Recent throughput in megabytes per second
+   */
+  @added(Versions.v2025_12_01)
+  @visibility(Lifecycle.Read)
+  recentMegabytesPerSecond?: float64;
+
+  /**
+   * Path of large file currently in progress
+   */
+  @added(Versions.v2025_12_01)
+  @visibility(Lifecycle.Read)
+  inProgressLargeFilePath?: string;
+
+  /**
+   * Size in bytes of large file currently in progress
+   */
+  @added(Versions.v2025_12_01)
+  @visibility(Lifecycle.Read)
+  @minValue(0)
+  inProgressLargeFileSizeBytes?: int64;
+
+  /**
+   * Percent complete (0-100) of large file currently in progress
+   */
+  @added(Versions.v2025_12_01)
+  @visibility(Lifecycle.Read)
+  @minValue(0)
+  @maxValue(100)
+  inProgressLargeFilePercentComplete?: int32;
+
+  /**
+   * Warning type (if any)
+   */
+  @added(Versions.v2025_12_01)
+  @visibility(Lifecycle.Read)
+  warning?: ServerEndpointSyncSessionWarningType;
+}
+
+/**
+ * Warning types for sync sessions.
+ */
+@added(Versions.v2025_12_01)
+union ServerEndpointSyncSessionWarningType {
+  string,
+
+  /** No warning */
+  NoWarning: "NoWarning",
+
+  /** Sync is blocked by a large file */
+  BlockedByLargeFile: "BlockedByLargeFile",
 }
 
 /**
