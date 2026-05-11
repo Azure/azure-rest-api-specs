@@ -81,34 +81,6 @@ model InlineCredential extends CredentialValue {
 }
 
 @added(Versions.v2026_05_02_preview)
-@doc("A credential value for a model source patch request.")
-model CredentialValuePatch {
-  @doc("The credential source type.")
-  type?: CredentialSourceType;
-
-  @secret
-  @doc("The access token, password, or other secret value.")
-  value?: string;
-}
-
-@added(Versions.v2026_05_02_preview)
-@doc("The model source resource patch model.")
-model ModelSourcePatch {
-  @doc("Mutable properties of the model source.")
-  properties?: ModelSourcePatchProperties;
-}
-
-@added(Versions.v2026_05_02_preview)
-@doc("Mutable properties of a model source.")
-model ModelSourcePatchProperties {
-  @doc("An optional, free-form description of the source.")
-  description?: string;
-
-  @doc("Credential the platform uses to authenticate to the source.")
-  credential?: CredentialValuePatch;
-}
-
-@added(Versions.v2026_05_02_preview)
 @armResourceOperations
 interface ModelSources {
   get is ArmResourceRead<ModelSource>;
@@ -118,13 +90,6 @@ interface ModelSources {
     Azure.ResourceManager.Foundations.BaseParameters<ModelSource> &
       IfMatchParameters<ModelSource> &
       IfNoneMatchParameters<ModelSource>
-  >;
-
-  update is ArmCustomPatchSync<
-    ModelSource,
-    ModelSourcePatch,
-    Azure.ResourceManager.Foundations.BaseParameters<ModelSource> &
-      IfMatchParameters<ModelSource>
   >;
 
   delete is ArmResourceDeleteSync<

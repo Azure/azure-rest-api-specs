@@ -738,80 +738,6 @@
           }
         }
       },
-      "patch": {
-        "operationId": "ModelSources_Update",
-        "tags": [
-          "ModelSources"
-        ],
-        "description": "Update a ModelSource",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "description": "The request should only proceed if an entity matches this string.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
-          },
-          {
-            "name": "aiManagerName",
-            "in": "path",
-            "description": "The name of the AI Manager resource.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
-          },
-          {
-            "name": "modelSourceName",
-            "in": "path",
-            "description": "The name of the model source resource.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ModelSourcePatch"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ModelSource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ModelSources_Update_MaximumSet": {
-            "$ref": "./examples/ModelSources_Update.json"
-          }
-        }
-      },
       "delete": {
         "operationId": "ModelSources_Delete",
         "tags": [
@@ -1533,90 +1459,6 @@
         },
         "x-ms-long-running-operation": true
       },
-      "patch": {
-        "operationId": "ModelDeployments_Update",
-        "tags": [
-          "ModelDeployments"
-        ],
-        "description": "Update a ModelDeployment",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "description": "The request should only proceed if an entity matches this string.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
-          },
-          {
-            "name": "aiManagerName",
-            "in": "path",
-            "description": "The name of the AI Manager resource.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "description": "The name of the AI Manager namespace resource.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
-          },
-          {
-            "name": "modelDeploymentName",
-            "in": "path",
-            "description": "The name of the model deployment resource.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ModelDeploymentPatch"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ModelDeployment"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ModelDeployments_Update_MaximumSet": {
-            "$ref": "./examples/ModelDeployments_Update.json"
-          }
-        }
-      },
       "delete": {
         "operationId": "ModelDeployments_Delete",
         "tags": [
@@ -2116,7 +1958,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -2182,28 +2024,6 @@
           "format": "int32",
           "description": "The minimum number of replicas when autoscaling is enabled.",
           "default": 1,
-          "minimum": 1
-        },
-        "maxReplicas": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum number of replicas when autoscaling is enabled. If not specified, the service derives a default from the subscription GPU quota.",
-          "minimum": 1
-        }
-      }
-    },
-    "AutoscalingProfilePatch": {
-      "type": "object",
-      "description": "Autoscaling configuration for a model deployment patch request.",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "Whether autoscaling is enabled for this deployment."
-        },
-        "minReplicas": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The minimum number of replicas when autoscaling is enabled.",
           "minimum": 1
         },
         "maxReplicas": {
@@ -2405,22 +2225,6 @@
         "type"
       ]
     },
-    "CredentialValuePatch": {
-      "type": "object",
-      "description": "A credential value for a model source patch request.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/CredentialSourceType",
-          "description": "The credential source type."
-        },
-        "value": {
-          "type": "string",
-          "format": "password",
-          "description": "The access token, password, or other secret value.",
-          "x-ms-secret": true
-        }
-      }
-    },
     "DeletePolicy": {
       "type": "string",
       "description": "Delete options of the AI Manager.",
@@ -2550,70 +2354,6 @@
         }
       }
     },
-    "ModelDeploymentPatch": {
-      "type": "object",
-      "description": "The model deployment resource patch model.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ModelDeploymentPatchProperties",
-          "description": "Mutable properties of the model deployment."
-        }
-      }
-    },
-    "ModelDeploymentPatchProperties": {
-      "type": "object",
-      "description": "Mutable properties of a model deployment.",
-      "properties": {
-        "performanceMode": {
-          "$ref": "#/definitions/ModelDeploymentPerformanceMode",
-          "description": "Runtime performance mode."
-        },
-        "replicas": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Desired replica count. Ignored when `autoscaling.enabled` is true.",
-          "minimum": 1
-        },
-        "autoscaling": {
-          "$ref": "#/definitions/AutoscalingProfilePatch",
-          "description": "The autoscaling configuration for the deployment."
-        },
-        "overrides": {
-          "$ref": "#/definitions/ModelDeploymentOverrides",
-          "description": "User overrides layered on top of profile resolution."
-        }
-      }
-    },
-    "ModelDeploymentPerformanceMode": {
-      "type": "string",
-      "description": "The runtime performance mode of a model deployment.",
-      "enum": [
-        "Balanced",
-        "Latency",
-        "Throughput"
-      ],
-      "x-ms-enum": {
-        "name": "ModelDeploymentPerformanceMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Balanced",
-            "value": "Balanced",
-            "description": "A balanced trade-off between latency and throughput (default)."
-          },
-          {
-            "name": "Latency",
-            "value": "Latency",
-            "description": "Optimize for low request latency."
-          },
-          {
-            "name": "Throughput",
-            "value": "Throughput",
-            "description": "Optimize for high aggregate throughput."
-          }
-        ]
-      }
-    },
     "ModelDeploymentProperties": {
       "type": "object",
       "description": "Model deployment properties.",
@@ -2691,7 +2431,7 @@
         },
         "overrides": {
           "$ref": "#/definitions/ModelDeploymentOverrides",
-          "description": "User overrides layered on top of profile resolution. Replace semantics on PATCH: the entire object is replaced."
+          "description": "User overrides layered on top of profile resolution."
         },
         "status": {
           "$ref": "#/definitions/ModelDeploymentStatus",
@@ -2844,30 +2584,6 @@
       "required": [
         "value"
       ]
-    },
-    "ModelSourcePatch": {
-      "type": "object",
-      "description": "The model source resource patch model.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ModelSourcePatchProperties",
-          "description": "Mutable properties of the model source."
-        }
-      }
-    },
-    "ModelSourcePatchProperties": {
-      "type": "object",
-      "description": "Mutable properties of a model source.",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "An optional, free-form description of the source."
-        },
-        "credential": {
-          "$ref": "#/definitions/CredentialValuePatch",
-          "description": "Credential the platform uses to authenticate to the source."
-        }
-      }
     },
     "ModelSourceProperties": {
       "type": "object",

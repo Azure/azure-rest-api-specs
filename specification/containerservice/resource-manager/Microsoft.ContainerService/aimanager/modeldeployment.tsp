@@ -81,7 +81,7 @@ model ModelDeploymentProperties {
   @doc("The autoscaling configuration for the deployment.")
   autoscaling?: AutoscalingProfile;
 
-  @doc("User overrides layered on top of profile resolution. Replace semantics on PATCH: the entire object is replaced.")
+  @doc("User overrides layered on top of profile resolution.")
   overrides?: ModelDeploymentOverrides;
 
   @visibility(Lifecycle.Read)
@@ -179,44 +179,6 @@ model AutoscalingProfile {
   maxReplicas?: int32;
 }
 
-@added(Versions.v2026_05_02_preview)
-@doc("Autoscaling configuration for a model deployment patch request.")
-model AutoscalingProfilePatch {
-  @doc("Whether autoscaling is enabled for this deployment.")
-  enabled?: boolean;
-
-  @doc("The minimum number of replicas when autoscaling is enabled.")
-  @minValue(1)
-  minReplicas?: int32;
-
-  @doc("The maximum number of replicas when autoscaling is enabled. If not specified, the service derives a default from the subscription GPU quota.")
-  @minValue(1)
-  maxReplicas?: int32;
-}
-
-@added(Versions.v2026_05_02_preview)
-@doc("The model deployment resource patch model.")
-model ModelDeploymentPatch {
-  @doc("Mutable properties of the model deployment.")
-  properties?: ModelDeploymentPatchProperties;
-}
-
-@added(Versions.v2026_05_02_preview)
-@doc("Mutable properties of a model deployment.")
-model ModelDeploymentPatchProperties {
-  @doc("Runtime performance mode.")
-  performanceMode?: ModelDeploymentPerformanceMode;
-
-  @doc("Desired replica count. Ignored when `autoscaling.enabled` is true.")
-  @minValue(1)
-  replicas?: int32;
-
-  @doc("The autoscaling configuration for the deployment.")
-  autoscaling?: AutoscalingProfilePatch;
-
-  @doc("User overrides layered on top of profile resolution.")
-  overrides?: ModelDeploymentOverrides;
-}
 
 @added(Versions.v2026_05_02_preview)
 @armResourceOperations
@@ -228,13 +190,6 @@ interface ModelDeployments {
     Azure.ResourceManager.Foundations.BaseParameters<ModelDeployment> &
       IfMatchParameters<ModelDeployment> &
       IfNoneMatchParameters<ModelDeployment>
-  >;
-
-  update is ArmCustomPatchSync<
-    ModelDeployment,
-    ModelDeploymentPatch,
-    Azure.ResourceManager.Foundations.BaseParameters<ModelDeployment> &
-      IfMatchParameters<ModelDeployment>
   >;
 
   delete is ArmResourceDeleteWithoutOkAsync<
