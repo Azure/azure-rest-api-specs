@@ -30,3 +30,4 @@ using Microsoft.Cdn;
 );
 
 @@clientName(Microsoft.Cdn, "EdgeActionsMgmtClient", "python");
+@@clientName(Microsoft.Cdn, "EdgeActionsManagementClient", "javascript");

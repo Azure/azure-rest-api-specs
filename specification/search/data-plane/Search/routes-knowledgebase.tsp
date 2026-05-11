@@ -8,12 +8,11 @@ using Azure.Core;
 
 namespace Search;
 
-@route("/knowledgebases('{knowledgeBaseName}')")
 interface KnowledgeRetrieval {
   /** KnowledgeBase retrieves relevant data from backing stores. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-  @route("/retrieve")
   @post
+  @route("/knowledgebases('{knowledgeBaseName}')/retrieve")
   retrieve is Foundations.Operation<
     {
       ...acceptHeaderMinimal;
@@ -22,9 +21,7 @@ interface KnowledgeRetrieval {
       @path
       knowledgeBaseName: string;
 
-      /** Token identifying the user for which the query is being executed. This token is used to enforce security restrictions on documents. */
-      @header("x-ms-query-source-authorization")
-      querySourceAuthorization?: string;
+      ...querySourceAuthorizationHeader;
 
       /** The retrieval request to process. */
       @body

@@ -35,18 +35,25 @@ namespace Microsoft.Resources.DeploymentStacks;
 // Client names and locations for ResourceGroup operations
 @@clientName(DeploymentStacksAtResourceGroup.get, "getAtResourceGroup");
 
-@@clientLocation(DeploymentStacksAtResourceGroup.get, "DeploymentStacks");
+@@clientLocation(DeploymentStacksAtResourceGroup.get,
+  "DeploymentStacks",
+  "!csharp"
+);
 
 @@clientName(DeploymentStacksAtResourceGroup.list, "listAtResourceGroup");
 
-@@clientLocation(DeploymentStacksAtResourceGroup.list, "DeploymentStacks");
+@@clientLocation(DeploymentStacksAtResourceGroup.list,
+  "DeploymentStacks",
+  "!csharp"
+);
 
 @@clientName(DeploymentStacksAtResourceGroup.validateStack,
   "validateStackAtResourceGroup"
 );
 
 @@clientLocation(DeploymentStacksAtResourceGroup.validateStack,
-  "DeploymentStacks"
+  "DeploymentStacks",
+  "!csharp"
 );
 
 @@clientName(DeploymentStacksAtResourceGroup.createOrUpdate,
@@ -54,36 +61,48 @@ namespace Microsoft.Resources.DeploymentStacks;
 );
 
 @@clientLocation(DeploymentStacksAtResourceGroup.createOrUpdate,
-  "DeploymentStacks"
+  "DeploymentStacks",
+  "!csharp"
 );
 
 @@clientName(DeploymentStacksAtResourceGroup.delete, "deleteAtResourceGroup");
 
-@@clientLocation(DeploymentStacksAtResourceGroup.delete, "DeploymentStacks");
+@@clientLocation(DeploymentStacksAtResourceGroup.delete,
+  "DeploymentStacks",
+  "!csharp"
+);
 
 @@clientName(DeploymentStacksAtResourceGroup.exportTemplate,
   "exportTemplateAtResourceGroup"
 );
 
 @@clientLocation(DeploymentStacksAtResourceGroup.exportTemplate,
-  "DeploymentStacks"
+  "DeploymentStacks",
+  "!csharp"
 );
 
 // Client names and locations for Subscription operations
 @@clientName(DeploymentStacksAtSubscription.get, "getAtSubscription");
 
-@@clientLocation(DeploymentStacksAtSubscription.get, "DeploymentStacks");
+@@clientLocation(DeploymentStacksAtSubscription.get,
+  "DeploymentStacks",
+  "!csharp"
+);
 
 @@clientName(DeploymentStacksAtSubscription.list, "listAtSubscription");
 
-@@clientLocation(DeploymentStacksAtSubscription.list, "DeploymentStacks");
+@@clientLocation(DeploymentStacksAtSubscription.list,
+  "DeploymentStacks",
+  "!csharp"
+);
 
 @@clientName(DeploymentStacksAtSubscription.validateStack,
   "validateStackAtSubscription"
 );
 
 @@clientLocation(DeploymentStacksAtSubscription.validateStack,
-  "DeploymentStacks"
+  "DeploymentStacks",
+  "!csharp"
 );
 
 @@clientName(DeploymentStacksAtSubscription.createOrUpdate,
@@ -91,36 +110,48 @@ namespace Microsoft.Resources.DeploymentStacks;
 );
 
 @@clientLocation(DeploymentStacksAtSubscription.createOrUpdate,
-  "DeploymentStacks"
+  "DeploymentStacks",
+  "!csharp"
 );
 
 @@clientName(DeploymentStacksAtSubscription.delete, "deleteAtSubscription");
 
-@@clientLocation(DeploymentStacksAtSubscription.delete, "DeploymentStacks");
+@@clientLocation(DeploymentStacksAtSubscription.delete,
+  "DeploymentStacks",
+  "!csharp"
+);
 
 @@clientName(DeploymentStacksAtSubscription.exportTemplate,
   "exportTemplateAtSubscription"
 );
 
 @@clientLocation(DeploymentStacksAtSubscription.exportTemplate,
-  "DeploymentStacks"
+  "DeploymentStacks",
+  "!csharp"
 );
 
 // Client names and locations for ManagementGroup operations
 @@clientName(DeploymentStacksAtManagementGroup.get, "getAtManagementGroup");
 
-@@clientLocation(DeploymentStacksAtManagementGroup.get, "DeploymentStacks");
+@@clientLocation(DeploymentStacksAtManagementGroup.get,
+  "DeploymentStacks",
+  "!csharp"
+);
 
 @@clientName(DeploymentStacksAtManagementGroup.list, "listAtManagementGroup");
 
-@@clientLocation(DeploymentStacksAtManagementGroup.list, "DeploymentStacks");
+@@clientLocation(DeploymentStacksAtManagementGroup.list,
+  "DeploymentStacks",
+  "!csharp"
+);
 
 @@clientName(DeploymentStacksAtManagementGroup.validateStack,
   "validateStackAtManagementGroup"
 );
 
 @@clientLocation(DeploymentStacksAtManagementGroup.validateStack,
-  "DeploymentStacks"
+  "DeploymentStacks",
+  "!csharp"
 );
 
 @@clientName(DeploymentStacksAtManagementGroup.createOrUpdate,
@@ -128,19 +159,24 @@ namespace Microsoft.Resources.DeploymentStacks;
 );
 
 @@clientLocation(DeploymentStacksAtManagementGroup.createOrUpdate,
-  "DeploymentStacks"
+  "DeploymentStacks",
+  "!csharp"
 );
 
 @@clientName(DeploymentStacksAtManagementGroup.delete,
   "deleteAtManagementGroup"
 );
 
-@@clientLocation(DeploymentStacksAtManagementGroup.delete, "DeploymentStacks");
+@@clientLocation(DeploymentStacksAtManagementGroup.delete,
+  "DeploymentStacks",
+  "!csharp"
+);
 
 @@clientName(DeploymentStacksAtManagementGroup.exportTemplate,
   "exportTemplateAtManagementGroup"
 );
 
 @@clientLocation(DeploymentStacksAtManagementGroup.exportTemplate,
-  "DeploymentStacks"
+  "DeploymentStacks",
+  "!csharp"
 );

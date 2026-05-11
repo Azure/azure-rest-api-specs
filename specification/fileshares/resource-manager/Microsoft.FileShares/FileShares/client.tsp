@@ -6,6 +6,7 @@ using Azure.ResourceManager.Foundations;
 using Microsoft.FileShares;
 
 @@clientName(Microsoft.FileShares, "FileSharesManagementClient", "java");
+@@clientName(Microsoft.FileShares, "FileSharesMgmtClient", "python");
 
 @@scope(Operations.list, "!csharp");
 @@clientName(Microsoft.FileShares.FileShares, "FileSharesInterface", "csharp");
@@ -71,6 +72,10 @@ using Microsoft.FileShares;
   "ProvisionedStorageInGiB",
   "csharp"
 );
+@@clientName(FileSharePatchProperties.provisionedStorageGiB,
+  "ProvisionedStorageInGiB",
+  "csharp"
+);
 @@clientName(PublicNetworkAccess, "FileSharePublicNetworkAccess", "csharp");
 @@clientName(MediaTier, "FileShareMediaTier", "csharp");
 @@clientName(MediaTier.SSD, "Ssd", "csharp");
@@ -90,6 +95,15 @@ using Microsoft.FileShares;
   "csharp"
 );
 @@clientName(Azure.ResourceManager.PrivateEndpointConnection,
+  "FileSharePrivateEndpointConnection",
+  "csharp"
+);
+@@clientName(PrivateLinkResource, "FileSharePrivateLinkResource", "csharp");
+@@clientName(PrivateLinkResourceProperties,
+  "FileSharePrivateLinkResourceProperties",
+  "csharp"
+);
+@@clientName(PrivateEndpointConnection,
   "FileSharePrivateEndpointConnection",
   "csharp"
 );

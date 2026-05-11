@@ -43,6 +43,7 @@ union QueryCaptionType {
 }
 
 /** This parameter is only valid if the query type is `semantic`. When QueryRewrites is set to `generative`, the query terms are sent to a generate model which will produce 10 (default) rewrites to help increase the recall of the request. The requested count can be configured by appending the pipe character `|` followed by the `count-<number of rewrites>` option, such as `generative|count-3`. Defaults to `None`. */
+@removed(Versions.v2026_04_01)
 union QueryRewritesType {
   string,
 
@@ -77,6 +78,7 @@ union QueryDebugMode {
 }
 
 /** The language of the query. */
+@removed(Versions.v2026_04_01)
 union QueryLanguage {
   string,
 
@@ -298,6 +300,7 @@ union QueryLanguage {
 }
 
 /** Improve search recall by spell-correcting individual search query terms. */
+@removed(Versions.v2026_04_01)
 union QuerySpellerType {
   string,
 
@@ -401,6 +404,7 @@ union SemanticSearchResultsType {
 }
 
 /** Type of query rewrite that was used for this request. */
+@removed(Versions.v2026_04_01)
 union SemanticQueryRewritesResultType {
   string,
 
@@ -423,9 +427,8 @@ union QueryType {
 }
 
 /** Specifies whether any or all of the search terms must be matched in order to count the document as a match. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
 union SearchMode {
-  string,
-
   /** Any of the search terms must be matched in order to count the document as a match. */
   Any: "any",
 
@@ -434,9 +437,8 @@ union SearchMode {
 }
 
 /** A value that specifies whether we want to calculate scoring statistics (such as document frequency) globally for more consistent scoring, or locally, for lower latency. The default is 'local'. Use 'global' to aggregate scoring statistics globally before scoring. Using global scoring statistics can increase latency of search queries. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
 union ScoringStatistics {
-  string,
-
   /** The scoring statistics will be calculated locally for lower latency. */
   Local: "local",
 
@@ -445,9 +447,8 @@ union ScoringStatistics {
 }
 
 /** The operation to perform on a document in an indexing batch. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
 union IndexActionType {
-  string,
-
   /** Inserts the document into the index if it is new and updates it if it exists. All fields are replaced in the update case. */
   Upload: "upload",
 
@@ -462,9 +463,8 @@ union IndexActionType {
 }
 
 /** Specifies the mode for Autocomplete. The default is 'oneTerm'. Use 'twoTerms' to get shingles and 'oneTermWithContext' to use the current context in producing autocomplete terms. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
 union AutocompleteMode {
-  string,
-
   /** Only one term is suggested. If the query has two terms, only the last term is completed. For example, if the input is 'washington medic', the suggested terms could include 'medicaid', 'medicare', and 'medicine'. */
   OneTerm: "oneTerm",
 
@@ -578,6 +578,7 @@ model SearchOptions {
   semanticQuery?: string;
 
   /** When QueryRewrites is set to `generative`, the query terms are sent to a generate model which will produce 10 (default) rewrites to help increase the recall of the request. The requested count can be configured by appending the pipe character `|` followed by the `count-<number of rewrites>` option, such as `generative|count-3`. Defaults to `None`. This parameter is only valid if the query type is `semantic`. */
+  @removed(Versions.v2026_04_01)
   @query
   queryRewrites?: QueryRewritesType;
 
@@ -586,14 +587,17 @@ model SearchOptions {
   debug?: QueryDebugMode;
 
   /** The language of the query. */
+  @removed(Versions.v2026_04_01)
   @query
   queryLanguage?: QueryLanguage;
 
   /** Improve search recall by spell-correcting individual search query terms. */
+  @removed(Versions.v2026_04_01)
   @query
   speller?: QuerySpellerType;
 
   /** The list of field names used for semantic ranking. */
+  @removed(Versions.v2026_04_01)
   @query
   semanticFields?: string[];
 }
@@ -662,6 +666,7 @@ model SearchDocumentsResult {
 
   /** Debug information that applies to the search results as a whole. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   @encodedName("application/json", "@search.debug")
   debugInfo?: DebugInfo | null;
@@ -693,6 +698,7 @@ model SearchDocumentsResult {
   semanticPartialResponseType?: SemanticSearchResultsType;
 
   /** Type of query rewrite that was used to retrieve documents. */
+  @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   @encodedName("application/json", "@search.semanticQueryRewritesResultType")
   semanticQueryRewritesResultType?: SemanticQueryRewritesResultType;
@@ -706,26 +712,32 @@ model FacetResult is Record<unknown> {
   count?: int64;
 
   /** The resulting total avg for the facet when a avg metric is requested. */
+  @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   avg?: float64;
 
   /** The resulting total min for the facet when a min metric is requested. */
+  @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   min?: float64;
 
   /** The resulting total max for the facet when a max metric is requested. */
+  @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   max?: float64;
 
   /** The resulting total sum for the facet when a sum metric is requested. */
+  @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   sum?: float64;
 
   /** The resulting total cardinality for the facet when a cardinality metric is requested. */
+  @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   cardinality?: int64;
 
   /** The nested facet query results for the search operation, organized as a collection of buckets for each faceted field; null if the query did not contain any nested facets. */
+  @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   @encodedName("application/json", "@search.facets")
   facets?: Record<FacetResult[]>;
@@ -755,11 +767,13 @@ model QueryAnswerResult is Record<unknown> {
 /** Contains debugging information that can be used to further explore your search results. */
 model DebugInfo {
   /** Contains debugging information specific to query rewrites. */
+  @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   queryRewrites?: QueryRewritesDebugInfo;
 }
 
 /** Contains debugging information specific to query rewrites. */
+@removed(Versions.v2026_04_01)
 model QueryRewritesDebugInfo {
   /** List of query rewrites generated for the text query. */
   @visibility(Lifecycle.Read)
@@ -771,6 +785,7 @@ model QueryRewritesDebugInfo {
 }
 
 /** Contains debugging information specific to query rewrites. */
+@removed(Versions.v2026_04_01)
 model QueryRewritesValuesDebugInfo {
   /** The input text to the generative query rewriting model. There may be cases where the user query and the input to the generative model are not identical. */
   @visibility(Lifecycle.Read)
@@ -844,9 +859,11 @@ model SearchRequest {
   searchMode?: SearchMode;
 
   /** A value that specifies the language of the search query. */
+  @removed(Versions.v2026_04_01)
   queryLanguage?: QueryLanguage;
 
   /** A value that specifies the type of the speller to use to spell-correct individual search query terms. */
+  @removed(Versions.v2026_04_01)
   speller?: QuerySpellerType;
 
   /** The comma-separated list of fields to retrieve. If unspecified, all fields marked as retrievable in the schema are included. */
@@ -881,11 +898,13 @@ model SearchRequest {
   captions?: QueryCaptionType;
 
   /** A value that specifies whether query rewrites should be generated to augment the search query. */
+  @removed(Versions.v2026_04_01)
   queryRewrites?: QueryRewritesType;
 
   /** The comma-separated list of field names used for semantic ranking. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-autorest/unknown-format" "Pre-existing API contract"
+  @removed(Versions.v2026_04_01)
   @encode(ArrayEncoding.commaDelimited)
   semanticFields?: string[];
 
@@ -896,6 +915,7 @@ model SearchRequest {
   vectorFilterMode?: VectorFilterMode;
 
   /** The query parameters to configure hybrid search behaviors. */
+  @removed(Versions.v2026_04_01)
   hybridSearch?: HybridSearch;
 }
 
@@ -918,12 +938,15 @@ model VectorQuery {
   weight?: float32;
 
   /** The threshold used for vector queries. Note this can only be set if all 'fields' use the same similarity metric. */
+  @removed(Versions.v2026_04_01)
   threshold?: VectorThreshold;
 
   /** The OData filter expression to apply to this specific vector query. If no filter expression is defined at the vector level, the expression defined in the top level filter parameter is used instead. */
+  @removed(Versions.v2026_04_01)
   filterOverride?: string;
 
   /** Controls how many vectors can be matched from each document in a vector search query. Setting it to 1 ensures at most one vector per document is matched, guaranteeing results come from distinct documents. Setting it to 0 (unlimited) allows multiple relevant vectors from the same document to be matched. Default is 0. */
+  @removed(Versions.v2026_04_01)
   perDocumentVectorLimit?: int32;
 
   /** Type of query. */
@@ -937,7 +960,8 @@ model VectorThreshold {
   kind: VectorThresholdKind;
 }
 
-/** TThe query parameters to configure hybrid search behaviors. */
+/** The query parameters to configure hybrid search behaviors. */
+@removed(Versions.v2026_04_01)
 model HybridSearch {
   /** Determines the maximum number of documents to be retrieved by the text query portion of a hybrid search request. Those documents will be combined with the documents matching the vector queries to produce a single final list of results. Choosing a larger maxTextRecallSize value will allow retrieving and paging through more documents (using the top and skip parameters), at the cost of higher resource utilization and higher latency. The value needs to be between 1 and 10,000. Default is 1000. */
   maxTextRecallSize?: int32;
@@ -1004,6 +1028,7 @@ model QueryCaptionResult {
 /** Contains debugging information that can be used to further explore your search results. */
 model DocumentDebugInfo {
   /** Contains debugging information specific to semantic ranking requests. */
+  @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   semantic?: SemanticDebugInfo;
 
@@ -1012,11 +1037,13 @@ model DocumentDebugInfo {
   vectors?: VectorsDebugInfo;
 
   /** Contains debugging information specific to vectors matched within a collection of complex types. */
+  @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   innerHits?: Record<QueryResultDocumentInnerHit[]>;
 }
 
 /** Contains debugging information specific to semantic ranking requests. */
+@removed(Versions.v2026_04_01)
 model SemanticDebugInfo {
   /** The title field that was sent to the semantic enrichment process, as well as how it was used */
   @visibility(Lifecycle.Read)
@@ -1311,6 +1338,7 @@ model VectorizableTextQuery extends VectorQuery {
   text: string;
 
   /** Can be configured to let a generative model rewrite the query before sending it to be vectorized. */
+  @removed(Versions.v2026_04_01)
   queryRewrites?: QueryRewritesType;
 
   /** The kind of vector query being performed. */

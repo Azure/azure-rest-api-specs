@@ -38,7 +38,7 @@ interface CertificateProfiles {
   @doc("Delete a certificate profile.")
   delete is ArmResourceDeleteWithoutOkAsync<CertificateProfile>;
 
-  @doc("List certificate profiles under a trusted signing account.")
+  @doc("List certificate profiles under an artifact signing account.")
   listByCodeSigningAccount is ArmResourceListByParent<CertificateProfile>;
 
   @doc("Revoke a certificate under a certificate profile.")

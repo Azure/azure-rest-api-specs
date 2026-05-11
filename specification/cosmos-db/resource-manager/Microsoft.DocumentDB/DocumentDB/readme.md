@@ -34,26 +34,7 @@ These settings apply only when `--tag=package-preview-2025-11-01-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2025-11-01-preview'
 input-file:
-  - preview/2025-11-01-preview/cassandrarbac.json
-  - preview/2025-11-01-preview/chaosFault.json
-  - preview/2025-11-01-preview/copyJobs.json
-  - preview/2025-11-01-preview/cosmos-db.json
-  - preview/2025-11-01-preview/dataTransferService.json
-  - preview/2025-11-01-preview/fleet.json
-  - preview/2025-11-01-preview/garnetCache.json
-  - preview/2025-11-01-preview/gremlinrbac.json
-  - preview/2025-11-01-preview/managedCassandra.json
-  - preview/2025-11-01-preview/mongoMIrbac.json
-  - preview/2025-11-01-preview/mongorbac.json
-  - preview/2025-11-01-preview/networkSecurityPerimeter.json
-  - preview/2025-11-01-preview/notebook.json
-  - preview/2025-11-01-preview/privateEndpointConnection.json
-  - preview/2025-11-01-preview/privateLinkResources.json
-  - preview/2025-11-01-preview/rbac.json
-  - preview/2025-11-01-preview/restorable.json
-  - preview/2025-11-01-preview/services.json
-  - preview/2025-11-01-preview/tablerbac.json
-  - preview/2025-11-01-preview/throughputpool.json
+  - preview/2025-11-01-preview/openapi.json
 ```
 
 ### Tag: package-2025-10-15

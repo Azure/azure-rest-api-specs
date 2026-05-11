@@ -83,3 +83,4 @@ interface QuestionAnsweringAuthoringClientOperations {
 @@clientName(ExportQueryParameters.format, "fileFormat", "python");
 @@clientName(ImportQueryParameters.format, "fileFormat", "python");
 @@clientName(AssestKind, "AssetKind");
+@@clientName(Error, "QuestionAnsweringError");

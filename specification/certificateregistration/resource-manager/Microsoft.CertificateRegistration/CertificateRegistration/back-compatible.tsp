@@ -40,42 +40,48 @@ using Microsoft.CertificateRegistration;
 @@flattenProperty(AppServiceCertificateOrder.properties);
 
 @@clientLocation(AppServiceCertificateResources.getCertificate,
-  AppServiceCertificateOrders
+  AppServiceCertificateOrders,
+  "!csharp"
 );
 @@clientLocation(AppServiceCertificateResources.createOrUpdateCertificate,
-  AppServiceCertificateOrders
+  AppServiceCertificateOrders,
+  "!csharp"
 );
 @@clientName(AppServiceCertificateResources.createOrUpdateCertificate::parameters.resource,
   "keyVaultCertificate"
 );
 @@clientLocation(AppServiceCertificateResources.updateCertificate,
-  AppServiceCertificateOrders
+  AppServiceCertificateOrders,
+  "!csharp"
 );
 @@clientName(AppServiceCertificateResources.updateCertificate::parameters.properties,
   "keyVaultCertificate"
 );
 @@clientLocation(AppServiceCertificateResources.deleteCertificate,
-  AppServiceCertificateOrders
+  AppServiceCertificateOrders,
+  "!csharp"
 );
 @@clientLocation(AppServiceCertificateResources.listCertificates,
-  AppServiceCertificateOrders
+  AppServiceCertificateOrders,
+  "!csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AppServiceCertificateResource.properties);
-
 @@clientLocation(CertificateOrdersDiagnostics.getAppServiceCertificateOrderDetectorResponse,
-  CertificateOrdersDiagnostics
+  CertificateOrdersDiagnostics,
+  "!csharp"
 );
 @@clientLocation(CertificateOrdersDiagnostics.listAppServiceCertificateOrderDetectorResponse,
-  CertificateOrdersDiagnostics
+  CertificateOrdersDiagnostics,
+  "!csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DetectorResponse.properties);
-
 @@clientLocation(AppServiceCertificateOrdersOperationGroup.validatePurchaseInformation,
-  AppServiceCertificateOrders
+  AppServiceCertificateOrders,
+  "!csharp"
 );
-@@clientLocation(Operations.list, "CertificateRegistrationProvider");
+@@clientLocation(Operations.list, "CertificateRegistrationProvider", "!csharp");
 @@clientName(Operations.list, "ListOperations");
 @@clientName(AppServiceCertificateOrdersOperationGroup.validatePurchaseInformation::parameters.body,
   "appServiceCertificateOrder"

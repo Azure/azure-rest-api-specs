@@ -1,18 +1,23 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2024-08-01",
     "title": "DataBoundary",
-    "description": "Provides APIs for data boundary operations."
+    "version": "2024-08-01",
+    "description": "Provides APIs for data boundary operations.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
-  "consumes": [
+  "host": "management.azure.com",
+  "produces": [
     "application/json"
   ],
-  "produces": [
+  "consumes": [
     "application/json"
   ],
   "security": [
@@ -25,22 +30,213 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
     }
   },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "DataBoundaries"
+    }
+  ],
   "paths": {
+    "/{scope}/providers/Microsoft.Resources/dataBoundaries/{default}": {
+      "get": {
+        "operationId": "DataBoundaries_GetScope",
+        "tags": [
+          "DataBoundaries"
+        ],
+        "description": "Get data boundary at specified scope",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "default",
+            "in": "path",
+            "description": "Default string modeled as parameter for auto generation to work correctly.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "DefaultName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "default"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataBoundaryDefinition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get data boundary at scope": {
+            "$ref": "./examples/GetScopedDataBoundary.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Resources/dataBoundaries/{default}": {
+      "get": {
+        "operationId": "DataBoundaries_GetTenant",
+        "tags": [
+          "DataBoundaries"
+        ],
+        "description": "Get data boundary of tenant.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "default",
+            "in": "path",
+            "description": "Default string modeled as parameter for auto generation to work correctly.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "DefaultName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "default"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataBoundaryDefinition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get data boundary for tenant": {
+            "$ref": "./examples/GetTenantDataBoundary.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DataBoundaries_Put",
+        "tags": [
+          "DataBoundaries"
+        ],
+        "description": "Opt-in tenant to data boundary.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "default",
+            "in": "path",
+            "description": "Default string modeled as parameter for auto generation to work correctly.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "DefaultName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "default"
+                }
+              ]
+            }
+          },
+          {
+            "name": "dataBoundaryDefinition",
+            "in": "body",
+            "description": "The data boundary to opt the tenant to.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataBoundaryDefinition"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DataBoundaryDefinition' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DataBoundaryDefinition"
+            }
+          },
+          "201": {
+            "description": "Resource 'DataBoundaryDefinition' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DataBoundaryDefinition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Opt-in to data boundary": {
+            "$ref": "./examples/PutDataBoundary.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Resources/operations": {
       "get": {
+        "operationId": "Operations_List",
         "tags": [
           "Operations"
         ],
-        "operationId": "Operations_List",
-        "description": "Lists all of the available Microsoft.Resources REST API operations.",
+        "description": "List the operations for the provider",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -48,13 +244,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -69,220 +265,127 @@
           "nextLinkName": "nextLink"
         }
       }
-    },
-    "/providers/Microsoft.Resources/dataBoundaries/{default}": {
-      "put": {
-        "tags": [
-          "DataBoundaries"
-        ],
-        "operationId": "DataBoundaries_Put",
-        "description": "Opt-in tenant to data boundary.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "dataBoundaryDefinition",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DataBoundaryDefinition"
-            },
-            "description": "The data boundary to opt the tenant to."
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Default string modeled as parameter for auto generation to work correctly.",
-            "enum": [
-              "default"
-            ],
-            "x-ms-enum": {
-              "name": "defaultName",
-              "modelAsString": true
-            }
-          }
-        ],
-        "x-ms-examples": {
-          "Opt-in to data boundary": {
-            "$ref": "./examples/PutDataBoundary.json"
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Created -- Data boundary created.",
-            "schema": {
-              "$ref": "#/definitions/DataBoundaryDefinition"
-            }
-          },
-          "200": {
-            "description": "OK - Returns the data boundary definition.",
-            "schema": {
-              "$ref": "#/definitions/DataBoundaryDefinition"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "DataBoundaries"
-        ],
-        "operationId": "DataBoundaries_GetTenant",
-        "description": "Get data boundary of tenant.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Default string modeled as parameter for auto generation to work correctly.",
-            "enum": [
-              "default"
-            ],
-            "x-ms-enum": {
-              "name": "defaultName",
-              "modelAsString": true
-            }
-          }
-        ],
-        "x-ms-examples": {
-          "Get data boundary for tenant": {
-            "$ref": "./examples/GetTenantDataBoundary.json"
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK - Returns the data boundary definition.",
-            "schema": {
-              "$ref": "#/definitions/DataBoundaryDefinition"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/{scope}/providers/Microsoft.Resources/dataBoundaries/{default}": {
-      "get": {
-        "tags": [
-          "DataBoundaries"
-        ],
-        "operationId": "DataBoundaries_GetScope",
-        "description": "Get data boundary at specified scope",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ScopeParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Default string modeled as parameter for auto generation to work correctly.",
-            "enum": [
-              "default"
-            ],
-            "x-ms-enum": {
-              "name": "defaultName",
-              "modelAsString": true
-            }
-          }
-        ],
-        "x-ms-examples": {
-          "Get data boundary at scope": {
-            "$ref": "./examples/GetScopedDataBoundary.json"
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK - Returns the data boundary definition.",
-            "schema": {
-              "$ref": "#/definitions/DataBoundaryDefinition"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
+    "DataBoundary": {
+      "type": "string",
+      "description": "The data boundary definition.",
+      "enum": [
+        "NotDefined",
+        "Global",
+        "EU"
+      ],
+      "x-ms-enum": {
+        "name": "DataBoundary",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotDefined",
+            "value": "NotDefined",
+            "description": "NotDefined"
+          },
+          {
+            "name": "Global",
+            "value": "Global",
+            "description": "Global"
+          },
+          {
+            "name": "EU",
+            "value": "EU",
+            "description": "EU"
+          }
+        ]
+      }
+    },
     "DataBoundaryDefinition": {
-      "description": "A data boundary definition.",
       "type": "object",
+      "description": "A data boundary definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DataBoundaryProperties",
+          "description": "Data boundary properties"
+        }
+      },
       "allOf": [
         {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/DataBoundaryProperties"
-        }
-      }
+      ]
     },
     "DataBoundaryProperties": {
       "type": "object",
       "description": "Data boundary properties",
       "properties": {
         "dataBoundary": {
-          "type": "string",
+          "$ref": "#/definitions/DataBoundary",
           "description": "The data boundary definition.",
-          "enum": [
-            "NotDefined",
-            "Global",
-            "EU"
-          ],
-          "x-ms-enum": {
-            "name": "DataBoundary",
-            "modelAsString": true
-          },
           "x-ms-mutability": [
-            "create",
-            "read"
+            "read",
+            "create"
           ]
         },
         "provisioningState": {
-          "type": "string",
-          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState",
           "description": "Denotes the state of provisioning.",
-          "enum": [
-            "Accepted",
-            "Running",
-            "Creating",
-            "Canceled",
-            "Failed",
-            "Succeeded",
-            "Updating"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
+          "readOnly": true
         }
       }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Denotes the state of provisioning.",
+      "enum": [
+        "Accepted",
+        "Running",
+        "Creating",
+        "Canceled",
+        "Failed",
+        "Succeeded",
+        "Updating"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Accepted"
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "Running"
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Creating"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Canceled"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Updating"
+          }
+        ]
+      }
     }
-  }
+  },
+  "parameters": {}
 }

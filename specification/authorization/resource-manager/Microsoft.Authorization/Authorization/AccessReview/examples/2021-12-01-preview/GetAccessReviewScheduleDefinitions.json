@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "api-version": "2021-12-01-preview",
+    "scope": "subscriptions/fa73e90b-5bf1-45fd-a182-35ce5fc0674d"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "fa73e90b-5bf1-45fd-a182-35ce5fc0674d",
+            "type": "Microsoft.Authorization/accessReviewScheduleDefinitions",
+            "id": "/subscriptions/fa73e90b-5bf1-45fd-a182-35ce5fc0674d/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/fa73e90b-5bf1-45fd-a182-35ce5fc0674d",
+            "properties": {
+              "createdBy": {
+                "principalId": "a6c7aecb-cbfd-4763-87ef-e91b4bd509d9",
+                "principalName": "Shubham Gupta",
+                "principalType": "user",
+                "userPrincipalName": "shugup@microsoft.com"
+              },
+              "descriptionForAdmins": "asdfasdf",
+              "descriptionForReviewers": "asdfasdf",
+              "displayName": "Hello world",
+              "reviewers": [
+                {
+                  "principalId": "fa73e90b-5bf1-45fd-a182-35ce5fc0674d ",
+                  "principalType": "user"
+                }
+              ],
+              "reviewersType": "Assigned",
+              "scope": {
+                "resourceId": "/subscriptions/fa73e90b-5bf1-45fd-a182-35ce5fc0674d",
+                "roleDefinitionId": "/subscriptions/fa73e90b-5bf1-45fd-a182-35ce5fc0674d/providers/Microsoft.Authorization/roleDefinitions/b225c7ff-4338-4cdc-a790-6b34d987f7cd"
+              },
+              "settings": {
+                "autoApplyDecisionsEnabled": true,
+                "defaultDecision": "Approve",
+                "defaultDecisionEnabled": true,
+                "instanceDurationInDays": 30,
+                "justificationRequiredOnApproval": true,
+                "mailNotificationsEnabled": true,
+                "recommendationsEnabled": true,
+                "recurrence": {
+                  "range": {
+                    "type": "endDate",
+                    "endDate": "2018-08-03T21:17:30.513Z",
+                    "numberOfOccurrences": 1,
+                    "startDate": "2018-08-03T21:02:30.667Z"
+                  }
+                },
+                "reminderNotificationsEnabled": true
+              },
+              "status": "InProgress"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ScopeAccessReviewScheduleDefinitions_List",
+  "title": "GetAccessReviews"
+}

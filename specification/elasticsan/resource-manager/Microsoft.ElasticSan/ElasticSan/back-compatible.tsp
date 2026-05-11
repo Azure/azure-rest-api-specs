@@ -5,12 +5,14 @@ using Microsoft.ElasticSan;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ElasticSanUpdate.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ElasticSanUpdate.properties,
+  "!javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties,
+  "!javascript"
 );
 
 @@clientName(EncryptionProperties.identity, "EncryptionIdentity");
@@ -23,25 +25,31 @@ using Microsoft.ElasticSan;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VolumeGroupUpdate.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VolumeGroupUpdate.properties,
+  "!javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VolumeUpdate.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VolumeUpdate.properties,
+  "!javascript"
+);
 
 @@clientName(ElasticSans.create::parameters.resource, "parameters");
 @@clientName(ElasticSans.update::parameters.properties, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ElasticSan.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ElasticSan.properties,
+  "!javascript"
+);
 
 @@clientName(PrivateEndpointConnections.create::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties,
+  "!javascript"
 );
 
 @@clientName(VolumeGroups.create::parameters.resource, "parameters");
@@ -50,18 +58,24 @@ using Microsoft.ElasticSan;
 @@clientName(VolumeGroups.preRestore::parameters.body, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VolumeGroup.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VolumeGroup.properties,
+  "!javascript"
+);
 
 @@clientName(Snapshots.create::parameters.resource, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Snapshot.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Snapshot.properties,
+  "!javascript"
+);
 
 @@clientName(Volumes.create::parameters.resource, "parameters");
 @@clientName(Volumes.update::parameters.properties, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Volume.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Volume.properties,
+  "!javascript"
+);
 
 @@clientName(AutoScaleProperties.scaleUpProperties, "ScaleUpProperties");
 @@clientName(EncryptionProperties.keyVaultProperties, "KeyVaultProperties");

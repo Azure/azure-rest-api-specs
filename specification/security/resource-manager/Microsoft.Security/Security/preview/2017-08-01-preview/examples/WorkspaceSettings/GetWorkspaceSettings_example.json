@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "api-version": "2017-08-01-preview",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "default",
+            "type": "Microsoft.Security/workspaceSettings",
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/workspaceSettings/default",
+            "properties": {
+              "scope": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+              "workspaceId": "/subscriptions/c4930e90-cd72-4aa5-93e9-2d081d129569/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace1"
+            }
+          },
+          {
+            "name": "myRg",
+            "type": "Microsoft.Security/workspaceSettings",
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.Security/workspaceSettings/myRg",
+            "properties": {
+              "scope": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg",
+              "workspaceId": "/subscriptions/c4930e90-cd72-4aa5-93e9-2d081d129569/resourceGroups/myOtherRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace2"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "WorkspaceSettings_List",
+  "title": "Get workspace settings on subscription"
+}

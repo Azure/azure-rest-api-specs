@@ -16,64 +16,76 @@ namespace Microsoft.Resources.DeploymentStacks;
 
 // Interface for all stack operations with the scoping parameterized.
 // For some reason, the ArmResourceActionAsync type requires the base params extends this reflection model type.
-interface DeploymentStackCommonOps<TBaseParams extends TypeSpec.Reflection.Model> {
+interface DeploymentStackCommonOps<
+  Scope extends Azure.ResourceManager.Foundations.SimpleResource,
+  ResourceName extends valueof string = ""
+> {
   /** Gets the Deployment stack with the given name. */
-  get is ArmResourceRead<DeploymentStack, BaseParameters = TBaseParams>;
+  get is Extension.Read<
+    Scope,
+    DeploymentStack,
+    OverrideResourceName = ResourceName
+  >;
 
   /** Lists Deployment stacks at the specified scope. */
-  list is ArmResourceListByParent<
+  list is Extension.ListByTarget<
+    Scope,
     DeploymentStack,
-    BaseParameters = TBaseParams
+    OverrideResourceName = ResourceName
   >;
 
   /** Runs preflight validation on the Deployment stack template at the specified scope to verify its acceptance to Azure Resource Manager. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Back compat. There's a 400 response for validation failures."
   @added(Versions.v2024_03_01)
   @action("validate")
-  validateStack is ArmResourceActionAsync<
+  validateStack is Extension.ActionAsync<
+    Scope,
     DeploymentStack,
     DeploymentStack,
-    Response = DeploymentStackValidateResult,
-    BaseParameters = TBaseParams,
+    DeploymentStackValidateResult,
+    OverrideResourceName = ResourceName,
     Error = ErrorResponse | ValidationBadRequestResponse<DeploymentStackValidateResult>
   >;
 
   /** Creates or updates a Deployment stack at the specified scope. */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is Extension.CreateOrReplaceAsync<
+    Scope,
     DeploymentStack,
-    BaseParameters = TBaseParams
+    OverrideResourceName = ResourceName
   >;
 
   /** Deletes a Deployment stack by name at the specified scope. When operation completes, status code 200 returned without content. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Back compat. Synchronous deletes are possible."
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is Extension.DeleteWithoutOkAsync<
+    Scope,
     DeploymentStack,
-    BaseParameters = TBaseParams,
+    OverrideResourceName = ResourceName,
     Parameters = ActionOnUnmanageDeleteParameters,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /** Exports the template used to create the Deployment stack at the specified scope. */
   @action("exportTemplate")
-  exportTemplate is ArmResourceActionSync<
+  exportTemplate is Extension.ActionSync<
+    Scope,
     DeploymentStack,
     void,
     ArmResponse<DeploymentStackTemplateDefinition>,
-    BaseParameters = TBaseParams
+    OverrideResourceName = ResourceName
   >;
 }
 
 @armResourceOperations
 @tag("DeploymentStacksAtResourceGroup")
 interface DeploymentStacksAtResourceGroup
-  extends DeploymentStackCommonOps<ResourceGroupBaseParameters> {}
+  extends DeploymentStackCommonOps<Extension.ResourceGroup> {}
 
 @armResourceOperations
 @tag("DeploymentStacksAtSubscription")
 interface DeploymentStacksAtSubscription
-  extends DeploymentStackCommonOps<SubscriptionBaseParameters> {}
+  extends DeploymentStackCommonOps<Extension.Subscription> {}
 
 @armResourceOperations
 @tag("DeploymentStacksAtManagementGroup")
 interface DeploymentStacksAtManagementGroup
-  extends DeploymentStackCommonOps<ManagementGroupIdBaseParameters> {}
+  extends DeploymentStackCommonOps<Extension.ManagementGroup<"managementGroupId">> {}

@@ -11,50 +11,32 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.DevTestLab;
 /**
- * Profile of a lab user.
+ * A user profile.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@Azure.ResourceManager.Legacy.customAzureResource
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model User extends Resource {
-  @visibility(Lifecycle.Read)
-  @path
-  @key
-  @segment("users")
-  name: string;
+@parentResource(Lab)
+model User is Azure.ResourceManager.ProxyResource<UserProperties, false> {
+  ...ResourceNameParameter<
+    Resource = User,
+    KeyName = "userName",
+    SegmentName = "users",
+    NamePattern = ""
+  >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
-  properties: UserProperties;
+  /**
+   * The geo-location where the resource lives
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  location?: string;
 }
-
-@armResourceOperations
-interface UserOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-
-        /** The name of the lab. */
-        @path @segment("labs") labName: string,
-      },
-      KeysOf<ResourceNameParameter<
-        Resource = User,
-        KeyName = "name",
-        SegmentName = "users",
-        NamePattern = ""
-      >>
-    > {}
 
 @armResourceOperations
 interface Users {
   /**
    * Get user profile.
    */
-  get is UserOps.Read<
+  get is ArmResourceRead<
     User,
     Parameters = {
       /**
@@ -68,7 +50,7 @@ interface Users {
   /**
    * Create or replace an existing user profile. This operation can take a while to complete.
    */
-  createOrUpdate is UserOps.CreateOrUpdateAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     User,
     LroHeaders = ArmLroLocationHeader<FinalResult = User> &
       Azure.Core.Foundations.RetryAfterHeader
@@ -79,13 +61,13 @@ interface Users {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Already contains tags"
   @patch(#{ implicitOptionality: false })
-  update is UserOps.CustomPatchSync<User, PatchModel = UserFragment>;
+  update is ArmCustomPatchSync<User, PatchModel = UserFragment>;
 
   /**
    * Delete user profile. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is UserOps.DeleteWithoutOkAsync<
+  delete is ArmResourceDeleteWithoutOkAsync<
     User,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
@@ -93,7 +75,7 @@ interface Users {
   /**
    * List user profiles in a given lab.
    */
-  list is UserOps.List<
+  list is ArmResourceListByParent<
     User,
     Parameters = {
       /**

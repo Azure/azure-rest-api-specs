@@ -203,7 +203,7 @@ interface Servers {
   >;
 
   /**
-   * Migrates the network configuration of a PostgreSQL flexible server from customer owned VNET to Microsoft owned VNET with support for private endpoints, or from Microsoft owned VNET with no support for private endpoints to Microsoft owned VNET with support for private endpoints.
+   * Migrates an Azure Database for PostgreSQL server from VNet integration to a Private Link network model.
    */
   @added(Versions.v2026_01_01)
   @action("migrateNetwork")

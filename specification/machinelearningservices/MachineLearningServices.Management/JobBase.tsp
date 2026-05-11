@@ -42,7 +42,7 @@ interface JobBases {
   /**
    * Deletes a Job (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API returns additional response codes for LRO delete"
   @summary("Deletes a Job (asynchronous).")
   delete is ArmResourceDeleteWithoutOkAsync<
     JobBase,

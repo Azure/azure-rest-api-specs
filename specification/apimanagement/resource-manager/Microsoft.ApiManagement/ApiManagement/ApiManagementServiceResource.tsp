@@ -128,6 +128,21 @@ alias QuotaPeriodKeyOps = Azure.ResourceManager.Legacy.RoutedOperations<
   }
 >;
 
+alias ApiManagementServiceListPagingParameters = {
+  /**
+   * Number of records to return.
+   */
+  @query("$top")
+  @minValue(1)
+  $top?: int32;
+
+  /**
+   * Skip token for retrieving the next page of results.
+   */
+  @query("$skipToken")
+  $skipToken?: string;
+};
+
 @armResourceOperations(#{ allowStaticRoutes: true })
 interface ApiManagementServiceResources {
   /**
@@ -172,6 +187,7 @@ interface ApiManagementServiceResources {
    */
   listByResourceGroup is ArmResourceListByParent<
     ApiManagementServiceResource,
+    Parameters = ApiManagementServiceListPagingParameters,
     Response = ArmResponse<ApiManagementServiceListResult>
   >;
 
@@ -180,6 +196,7 @@ interface ApiManagementServiceResources {
    */
   list is ArmListBySubscription<
     ApiManagementServiceResource,
+    Parameters = ApiManagementServiceListPagingParameters,
     Response = ArmResponse<ApiManagementServiceListResult>
   >;
 
@@ -458,7 +475,7 @@ interface ApiManagementServiceResources {
    * Updates all the quota counter values specified with the existing quota counter key to a value in the specified service instance. This should be used for reset of the quota counter values.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @patch(#{ implicitOptionality: true })
+  @patch(#{ implicitOptionality: false })
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}")
   quotaByCounterKeysUpdate is QuotaCounterKeyOps.ActionSync<
     ApiManagementServiceResource,
@@ -487,7 +504,7 @@ interface ApiManagementServiceResources {
    * Updates an existing quota counter value in the specified service instance.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @patch(#{ implicitOptionality: true })
+  @patch(#{ implicitOptionality: false })
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}/periods/{quotaPeriodKey}")
   quotaByPeriodKeysUpdate is QuotaPeriodKeyOps.ActionSync<
     ApiManagementServiceResource,

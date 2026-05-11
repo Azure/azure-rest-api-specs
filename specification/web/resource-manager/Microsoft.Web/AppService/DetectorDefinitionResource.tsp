@@ -61,7 +61,8 @@ interface DetectorDefinitionResourceOps
       }
     > {}
 
-@armResourceOperations
+@tag("Diagnostics")
+@armResourceOperations(#{ omitTags: true })
 interface DetectorDefinitionResources {
   /**
    * Description for Get Detector
@@ -150,7 +151,8 @@ interface DetectorDefinitionResourceOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("Diagnostics")
+@armResourceOperations(#{ omitTags: true })
 interface DetectorDefinitionResourceOperationGroup {
   /**
    * Description for Get Detector

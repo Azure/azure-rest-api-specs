@@ -7,7 +7,6 @@ options:
   "@azure-tools/typespec-autorest":
     omit-unreachable-types: true
     emitter-output-dir: "{project-root}"
-    azure-resource-provider-folder: "resource-manager"
     output-file: "{version-status}/{version}/openapi.json"
     examples-dir: "{project-root}/examples"
 
@@ -17,6 +16,10 @@ options:
     package-name: "Azure.ResourceManager.MySql"
     namespace: "{package-name}.FlexibleServers"
     emitter-output-dir: "{output-dir}/{service-dir}/{package-name}"
+    api-version: "2024-12-30"
+  "@azure-typespec/http-client-csharp-provisioning":
+    namespace: "Azure.Provisioning.MySql"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     api-version: "2024-12-30"
   "@azure-tools/typespec-python":
     service-dir: "sdk/mysqlflexibleservers"

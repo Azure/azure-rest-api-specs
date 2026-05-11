@@ -1,11 +1,13 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ScalingPlan.tsp";
 
 using TypeSpec.Rest;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 
@@ -43,15 +45,9 @@ interface ScalingPlanPersonalSchedules {
    * Update a ScalingPlanPersonalSchedule.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  update is ArmCustomPatchSyncWithOptionalBody<
     ScalingPlanPersonalSchedule,
-    ScalingPlanPersonalSchedulePatch,
-    Request = {
-      /**
-       * The resource properties to be updated
-       */
-      @bodyRoot scalingPlanSchedule?: ScalingPlanPersonalSchedulePatch;
-    }
+    ScalingPlanPersonalSchedulePatch
   >;
 
   /**
@@ -95,4 +91,7 @@ interface ScalingPlanPersonalSchedules {
 );
 @@doc(ScalingPlanPersonalSchedules.create::parameters.resource,
   "Object containing ScalingPlanPersonalSchedule definitions."
+);
+@@clientName(ScalingPlanPersonalSchedules.update::parameters.body,
+  "scalingPlanSchedule"
 );

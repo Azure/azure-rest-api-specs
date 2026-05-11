@@ -29,6 +29,7 @@ enum Versions {
   @useDependency(LiftrBase.Storage.Versions.v1_preview)
   v2_preview: "2024-11-01-preview",
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/version-progression" "Existing API"
   @doc("Version 1 stable")
   @useDependency(LiftrBase.Versions.v1_stable)
   @useDependency(LiftrBase.Storage.Versions.v1_preview)
@@ -263,7 +264,6 @@ interface StoragePools {
   @doc("Create a storage pool")
   create is ArmResourceCreateOrUpdateAsync<StoragePool>;
   @doc("Update a storage pool")
-  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     StoragePool,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -946,13 +946,13 @@ model VolumeGroupProperties {
 
   @doc("Azure resource ID of the source volume group for cloning")
   @visibility(Lifecycle.Create)
-  sourceVolumeGroupResourceId?: string;
+  sourceVolumeGroupResourceId?: Azure.Core.armResourceIdentifier;
 
   @doc("Performance parameters for the volume group")
-  performanceParameters: PerformanceParameters;
+  performanceParameters?: PerformanceParameters;
 
   @doc("Protection parameters for the volume group")
-  protectionParameters: ProtectionParameters;
+  protectionParameters?: ProtectionParameters;
 
   @doc("Provisioning state of the resource")
   @visibility(Lifecycle.Read)
@@ -973,10 +973,10 @@ model PerformanceParameters {
 @doc("Protection parameters for volume group")
 model ProtectionParameters {
   @doc("Retention period for snapshots in ISO 8601 duration format")
-  retention?: string;
+  retention?: duration;
 
   @doc("Snapshot frequency in ISO 8601 duration format")
-  frequency?: string;
+  frequency?: duration;
 }
 
 @added(Versions.v2026_01_01_preview)
@@ -1040,9 +1040,9 @@ interface VolumeGroups {
 
   @doc("Get connection parameters for ISCSI connection to the volume group")
   @armResourceAction(VolumeGroup)
-  @action("getConnectionParameters")
+  @action("listConnectionParameters")
   @post
-  getConnectionParameters(
+  listConnectionParameters(
     ...ResourceInstanceParameters<VolumeGroup>,
   ): ArmResponse<ConnectionParametersResponse> | ErrorResponse;
 
@@ -1087,11 +1087,15 @@ model AzureVolumeProperties {
 
   @doc("Volume creation date, as an RFC 3339 timestamp")
   @visibility(Lifecycle.Read)
-  createdAt?: string;
+  createdAt?: utcDateTime;
 
   @doc("Azure resource ID of the source volume for cloning")
   @visibility(Lifecycle.Create)
-  sourceVolumeResourceId?: string;
+  sourceVolumeResourceId?: Azure.Core.armResourceIdentifier;
+
+  @doc("Azure Resource ID of the source volume group to clone from.")
+  @visibility(Lifecycle.Create)
+  sourceVolumeGroupResourceId?: Azure.Core.armResourceIdentifier;
 
   @doc("Provisioning state of the resource")
   @visibility(Lifecycle.Read)
