@@ -76,6 +76,28 @@ model GetDeviceByExternalIdRequest {
   expandInfo?: boolean;
 }
 
+/** Request body for querying devices in a namespace. */
+model QueryDevicesRequest {
+  /** The query expression to evaluate against devices in the namespace. */
+  query: string;
+
+  /** Maximum number of results to return in this page. */
+  top?: int32;
+
+  /** Opaque continuation token returned by a previous query response. */
+  continuationToken?: string;
+}
+
+/** Response body for a device query: a page of projected results. */
+model QueryDevicesResponse {
+  /** The page of query results. Each element is a projected JSON document whose shape is determined by the query. */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Query projections can return arbitrary shapes."
+  value: Record<unknown>[];
+
+  /** Continuation token for retrieving the next page of results. Present only when more results exist. */
+  continuationToken?: string;
+}
+
 /** Device twin desired properties. */
 model TwinProperties {
   /** The desired properties to set on the device twin. */
@@ -142,6 +164,13 @@ interface Devices {
     Device,
     GetDeviceByExternalIdRequest,
     DeviceResponse
+  >;
+
+  /** Query devices in a namespace using a query expression. */
+  query is ResourceOperations.ResourceCollectionAction<
+    Device,
+    QueryDevicesRequest,
+    QueryDevicesResponse
   >;
 
   /** Provision devices in a namespace. */

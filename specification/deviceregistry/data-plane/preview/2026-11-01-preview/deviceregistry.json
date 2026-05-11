@@ -1651,6 +1651,60 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/namespaces/{namespaceUuid}/devices:query": {
+      "post": {
+        "operationId": "Devices_Query",
+        "tags": [
+          "Devices"
+        ],
+        "description": "Query devices in a namespace using a query expression.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QueryDevicesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QueryDevicesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Query devices in a namespace": {
+            "$ref": "./examples/Devices_Query.json"
+          }
+        }
+      }
+    },
     "/namespaces/{namespaceUuid}/groups:getGroupByUuid": {
       "post": {
         "operationId": "Groups_GetGroupByUuid",
@@ -3939,6 +3993,49 @@
           "description": "The error target."
         }
       }
+    },
+    "QueryDevicesRequest": {
+      "type": "object",
+      "description": "Request body for querying devices in a namespace.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The query expression to evaluate against devices in the namespace."
+        },
+        "top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of results to return in this page."
+        },
+        "continuationToken": {
+          "type": "string",
+          "description": "Opaque continuation token returned by a previous query response."
+        }
+      },
+      "required": [
+        "query"
+      ]
+    },
+    "QueryDevicesResponse": {
+      "type": "object",
+      "description": "Response body for a device query: a page of projected results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The page of query results. Each element is a projected JSON document whose shape is determined by the query.",
+          "items": {
+            "type": "object",
+            "additionalProperties": {}
+          }
+        },
+        "continuationToken": {
+          "type": "string",
+          "description": "Continuation token for retrieving the next page of results. Present only when more results exist."
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "Record<unknown>": {
       "type": "object",
