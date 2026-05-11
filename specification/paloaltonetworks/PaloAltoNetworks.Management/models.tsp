@@ -2233,7 +2233,6 @@ model LocalRulestackResourceUpdateProperties {
   securityServices?: SecurityServices;
 }
 
-
 @added(Versions.v2026_05_11_preview)
 @doc("Network protocol filter for packet capture.")
 union CustomCaptureConfigurationsProtocol {

@@ -19,7 +19,10 @@ namespace PaloAltoNetworks.Cloudngfw;
 @parentResource(FirewallResource)
 @added(Versions.v2026_05_11_preview)
 model CustomCaptureConfigurationsFirewallResource
-  is Azure.ResourceManager.ProxyResource<CustomCaptureConfigurationsProperties, false> {
+  is Azure.ResourceManager.ProxyResource<
+    CustomCaptureConfigurationsProperties,
+    false
+  > {
   ...ResourceNameParameter<
     Resource = CustomCaptureConfigurationsFirewallResource,
     KeyName = "customCaptureConfigurationName",
@@ -28,9 +31,9 @@ model CustomCaptureConfigurationsFirewallResource
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Custom Capture Configurations is intentionally a sync proxy singleton exposing only GET and PUT; delete is not supported in this API."
 @added(Versions.v2026_05_11_preview)
 @armResourceOperations
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Custom Capture Configurations is intentionally a sync proxy singleton exposing only GET and PUT; delete is not supported in this API."
 interface CustomCaptureConfigurationsFirewallResources {
   @doc("Get the current Custom Capture Configuration for a firewall. Always returns 200 OK + body. Caller reads properties.pcapStatus to know whether to keep polling. Body field properties.nextCheckInSeconds advises when to poll next (omitted on terminal states).")
   get is ArmResourceRead<CustomCaptureConfigurationsFirewallResource>;
