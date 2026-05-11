@@ -240,6 +240,13 @@ union OperationFilterStatus {
 model UpdateList is Azure.Core.Page<Update>;
 
 /**
+ * Key-value pairs representing update compatibility information.
+ */
+@extension("minProperties", 1)
+@extension("maxProperties", 5)
+model Compatibility is Record<string>;
+
+/**
  * Update metadata.
  */
 model Update {
@@ -283,7 +290,7 @@ model Update {
    */
   @minItems(1)
   @maxItems(10)
-  compatibility: Record<string>[];
+  compatibility: Compatibility[];
 
   /**
    * Update install instructions.
@@ -528,6 +535,7 @@ model ImportManifestMetadata {
    * key is the hash algorithm, and the value is the hash of the file calculated
    * using that algorithm.
    */
+  @extension("minProperties", 1)
   hashes: Record<string>;
 }
 
@@ -603,6 +611,7 @@ model UpdateFileBase {
   /**
    * Mapping of hashing algorithm to base64 encoded hash values.
    */
+  @extension("minProperties", 1)
   hashes: Record<string>;
 
   /**

@@ -2361,6 +2361,15 @@
         "devicesFailedCount"
       ]
     },
+    "Compatibility": {
+      "type": "object",
+      "description": "Key-value pairs representing update compatibility information.",
+      "minProperties": 1,
+      "maxProperties": 5,
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
     "ContractModel": {
       "type": "object",
       "description": "The Device Update agent contract model.",
@@ -3440,6 +3449,7 @@
         "hashes": {
           "type": "object",
           "description": "A JSON object containing the hash(es) of the file. At least SHA256 hash is\nrequired. This object can be thought of as a set of key-value pairs where the\nkey is the hash algorithm, and the value is the hash of the file calculated\nusing that algorithm.",
+          "minProperties": 1,
           "additionalProperties": {
             "type": "string"
           }
@@ -4003,10 +4013,7 @@
           "minItems": 1,
           "maxItems": 10,
           "items": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
+            "$ref": "#/definitions/Compatibility"
           }
         },
         "instructions": {
@@ -4133,6 +4140,7 @@
         "hashes": {
           "type": "object",
           "description": "Mapping of hashing algorithm to base64 encoded hash values.",
+          "minProperties": 1,
           "additionalProperties": {
             "type": "string"
           }
