@@ -521,5 +521,5 @@ interface Agents {
       @path session_id: string;
     },
     SseResponseOf<SessionLogEvent>
-  >;  
+  >;
 }

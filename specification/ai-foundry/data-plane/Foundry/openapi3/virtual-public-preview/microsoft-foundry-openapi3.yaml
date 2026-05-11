@@ -9694,9 +9694,6 @@ components:
           type: integer
           format: int32
           description: Maximum number of traces to sample. Must be greater than 0.
-        model:
-          type: string
-          description: If you provide the model, it will be used for filtering.
       allOf:
         - $ref: '#/components/schemas/TraceSource'
       description: An extended agent filter trace source that also includes model information.
@@ -10023,6 +10020,11 @@ components:
         version:
           type: string
           description: The version of the Azure AI agent.
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.Tool'
+          description: An array of tools the target agent may call while generating a response.
         tool_descriptions:
           type: array
           items:
@@ -10045,6 +10047,11 @@ components:
         version:
           type: string
           description: The version of the Azure AI agent.
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.Tool'
+          description: An array of tools the target agent may call while generating a response.
         tool_descriptions:
           type: array
           items:
@@ -10121,6 +10128,7 @@ components:
             - traces_preview
             - synthetic_data_gen_preview
             - benchmark_preview
+            - conversation_simulation_preview
           description: Data schema scenario.
       discriminator:
         propertyName: scenario
@@ -11354,6 +11362,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/ConversationGenPreviewItemGenerationParams'
           description: The parameters for conversation generation.
+        input_messages:
+          allOf:
+            - $ref: '#/components/schemas/InputMessages'
+          description: |-
+            Input messages configuration. For prompt agents, this must be a typed InputMessages object
+            (template or item_reference). For hosted agents with invocations protocol, freeform JSON
+            object is also accepted.
         target:
           allOf:
             - $ref: '#/components/schemas/AzureAIAgentTarget'
@@ -14599,6 +14614,13 @@ components:
       allOf:
         - $ref: '#/components/schemas/InputData'
       description: Dataset as source for evaluation.
+    InputMessages:
+      anyOf:
+        - $ref: '#/components/schemas/OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesTemplate'
+        - $ref: '#/components/schemas/OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesItemReference'
+        - type: object
+          additionalProperties: {}
+      description: Input messages accepted by conversation simulation eval runs.
     Insight:
       type: object
       required:

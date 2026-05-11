@@ -14516,10 +14516,6 @@
             "type": "integer",
             "format": "int32",
             "description": "Maximum number of traces to sample. Must be greater than 0."
-          },
-          "model": {
-            "type": "string",
-            "description": "If you provide the model, it will be used for filtering."
           }
         },
         "allOf": [
@@ -15004,6 +15000,13 @@
             "type": "string",
             "description": "The version of the Azure AI agent."
           },
+          "tools": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAI.Tool"
+            },
+            "description": "An array of tools the target agent may call while generating a response."
+          },
           "tool_descriptions": {
             "type": "array",
             "items": {
@@ -15036,6 +15039,13 @@
           "version": {
             "type": "string",
             "description": "The version of the Azure AI agent."
+          },
+          "tools": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAI.Tool"
+            },
+            "description": "An array of tools the target agent may call while generating a response."
           },
           "tool_descriptions": {
             "type": "array",
@@ -15148,7 +15158,8 @@
               "responses",
               "traces_preview",
               "synthetic_data_gen_preview",
-              "benchmark_preview"
+              "benchmark_preview",
+              "conversation_simulation_preview"
             ],
             "description": "Data schema scenario."
           }
@@ -17000,6 +17011,14 @@
               }
             ],
             "description": "The parameters for conversation generation."
+          },
+          "input_messages": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InputMessages"
+              }
+            ],
+            "description": "Input messages configuration. For prompt agents, this must be a typed InputMessages object\n(template or item_reference). For hosted agents with invocations protocol, freeform JSON\nobject is also accepted."
           },
           "target": {
             "allOf": [
@@ -21474,6 +21493,21 @@
           }
         ],
         "description": "Dataset as source for evaluation."
+      },
+      "InputMessages": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesTemplate"
+          },
+          {
+            "$ref": "#/components/schemas/OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesItemReference"
+          },
+          {
+            "type": "object",
+            "additionalProperties": {}
+          }
+        ],
+        "description": "Input messages accepted by conversation simulation eval runs."
       },
       "Insight": {
         "type": "object",

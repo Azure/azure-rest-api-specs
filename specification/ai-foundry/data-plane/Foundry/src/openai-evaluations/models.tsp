@@ -542,7 +542,7 @@ model ConversationSimulationPreviewEvalRunDataSource extends EvalRunDataSource {
   /**
    * Input messages configuration. For prompt agents, this must be a typed InputMessages object
    * (template or item_reference). For hosted agents with invocations protocol, freeform JSON
-    * object is also accepted.
+   * object is also accepted.
    */
   input_messages?: InputMessages;
 
@@ -669,9 +669,6 @@ model AgentSmartFilterTraceSource extends TraceSource {
 
   /** Maximum number of traces to sample. Must be greater than 0. */
   max_traces?: int32;
-
-  /** If you provide the model, it will be used for filtering. */
-  `model`?: string;
 }
 
 // ── Trace Data Source ─────────────────────────────────────────────────────────
