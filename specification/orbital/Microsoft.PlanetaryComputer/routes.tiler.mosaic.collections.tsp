@@ -937,8 +937,9 @@ interface MosaicCollectionsBbox {
       /**
        * Image output size limit if width and height limits are not set.
        */
+      @maxValue(2048)
       @query("max_size")
-      maxSize?: int32 = 1024;
+      maxSize?: int32 = 2048;
 
       ...DimensionsQueryParameters;
       ...MosaicCropQueryParameters;
@@ -1011,8 +1012,9 @@ interface MosaicCollectionsBboxWithDimensions {
       /**
        * Image output size limit if width and height limits are not set.
        */
+      @maxValue(2048)
       @query("max_size")
-      maxSize?: int32 = 1024;
+      maxSize?: int32 = 2048;
 
       ...MosaicCropQueryParameters;
       ...MiscTileQueryParameters;
@@ -1060,8 +1062,9 @@ interface MosaicCollectionsFeatureGeoJson {
       /**
        * Image output size limit if width and height limits are not set.
        */
+      @maxValue(2048)
       @query("max_size")
-      maxSize?: int32 = 1024;
+      maxSize?: int32 = 2048;
 
       ...DimensionsQueryParameters;
       ...MosaicCropQueryParameters;
@@ -1127,8 +1130,9 @@ interface MosaicCollectionsFeatureGeoJsonFormat {
       /**
        * Image output size limit if width and height limits are not set.
        */
+      @maxValue(2048)
       @query("max_size")
-      maxSize?: int32 = 1024;
+      maxSize?: int32 = 2048;
 
       ...DimensionsQueryParameters;
       ...MosaicCropQueryParameters;
@@ -1200,8 +1204,9 @@ interface MosaicCollectionsFeatureGeoJsonWidthByHeight {
       /**
        * Image output size limit if width and height limits are not set.
        */
+      @maxValue(2048)
       @query("max_size")
-      maxSize?: int32 = 1024;
+      maxSize?: int32 = 2048;
 
       ...MosaicCropQueryParameters;
       ...MiscTileQueryParameters;
