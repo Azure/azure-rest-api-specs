@@ -5521,6 +5521,14 @@ paths:
       description: List the latest version of each ModelVersion
       parameters:
         - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Models=V1Preview
       responses:
         '200':
           description: The request has succeeded.
@@ -5554,6 +5562,14 @@ paths:
           description: The name of the resource
           schema:
             type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Models=V1Preview
       responses:
         '200':
           description: The request has succeeded.
@@ -5587,6 +5603,14 @@ paths:
           description: The name of the resource
           schema:
             type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Models=V1Preview
         - name: version
           in: path
           required: true
@@ -5625,6 +5649,14 @@ paths:
           description: The name of the resource
           schema:
             type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Models=V1Preview
         - name: version
           in: path
           required: true
@@ -5665,6 +5697,14 @@ paths:
           description: The specific version id of the UpdateModelVersionRequest to create or update.
           schema:
             type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Models=V1Preview
       responses:
         '200':
           description: The request has succeeded.
@@ -5705,6 +5745,14 @@ paths:
       description: Creates a model version asynchronously with blob content validation. Returns 202 Accepted with a Location header for polling.
       parameters:
         - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Models=V1Preview
         - name: name
           in: path
           required: true
@@ -5753,6 +5801,14 @@ paths:
       description: Get credentials for a model version asset.
       parameters:
         - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Models=V1Preview
         - name: name
           in: path
           required: true
@@ -5798,6 +5854,14 @@ paths:
       description: Start or retrieve a pending upload for a model version.
       parameters:
         - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Models=V1Preview
         - name: name
           in: path
           required: true
