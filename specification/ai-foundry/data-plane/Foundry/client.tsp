@@ -169,11 +169,20 @@ using Azure.AI.Projects;
 @@clientName(Evaluators.listLatestVersions, "list", "python, javascript");
 
 // Evaluator generation jobs — renamed for JavaScript SDK discoverability
-@@clientName(EvaluatorGenerationJobs.create, "createGenerationJob", "javascript");
+@@clientName(EvaluatorGenerationJobs.create,
+  "createGenerationJob",
+  "javascript"
+);
 @@clientName(EvaluatorGenerationJobs.get, "getGenerationJob", "javascript");
 @@clientName(EvaluatorGenerationJobs.list, "listGenerationJobs", "javascript");
-@@clientName(EvaluatorGenerationJobs.cancel, "cancelGenerationJob", "javascript");
-@@clientName(EvaluatorGenerationJobs.delete, "deleteGenerationJob", "javascript");
+@@clientName(EvaluatorGenerationJobs.cancel,
+  "cancelGenerationJob",
+  "javascript"
+);
+@@clientName(EvaluatorGenerationJobs.delete,
+  "deleteGenerationJob",
+  "javascript"
+);
 
 // Evaluator generation jobs — renamed for Python SDK discoverability
 @@clientName(EvaluatorGenerationJobs.create, "create_generation_job", "python");
