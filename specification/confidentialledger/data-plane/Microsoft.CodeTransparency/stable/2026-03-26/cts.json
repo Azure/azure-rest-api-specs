@@ -34,6 +34,135 @@
   ],
   "tags": [],
   "paths": {
+    "/.well-known/scitt-keys": {
+      "get": {
+        "operationId": "ListScittKeys",
+        "description": "List all service keys in COSE_Key_Set format, per Section 2.1 of draft-ietf-scitt-scrapi-09",
+        "produces": [
+          "application/cbor",
+          "application/concise-problem-details+cbor"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AcceptCborHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response containing COSE_Key_Set (array of COSE_Key maps) in CBOR format",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "400": {
+            "description": "Validation error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "404": {
+            "description": "Not found error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "429": {
+            "description": "Not found error response",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry-After seconds value to help with polling"
+              }
+            }
+          },
+          "500": {
+            "description": "Server error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "503": {
+            "description": "Service unavailable error response",
+            "schema": {
+              "type": "file"
+            }
+          }
+        }
+      }
+    },
+    "/.well-known/scitt-keys/{kid}": {
+      "get": {
+        "operationId": "GetScittKey",
+        "description": "Get a single service key by kid, per Section 2.2 of draft-ietf-scitt-scrapi-09",
+        "produces": [
+          "application/cbor",
+          "application/concise-problem-details+cbor"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/KidParameter"
+          },
+          {
+            "$ref": "#/parameters/AcceptCborHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response containing a single COSE_Key (map, not array) in CBOR format",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "400": {
+            "description": "Validation error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "404": {
+            "description": "Not found error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "429": {
+            "description": "Not found error response",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry-After seconds value to help with polling"
+              }
+            }
+          },
+          "500": {
+            "description": "Server error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "503": {
+            "description": "Service unavailable error response",
+            "schema": {
+              "type": "file"
+            }
+          }
+        }
+      }
+    },
     "/.well-known/transparency-configuration": {
       "get": {
         "operationId": "GetTransparencyConfigCbor",
@@ -97,6 +226,9 @@
             "$ref": "#/parameters/AcceptCoseOrCborHeader"
           },
           {
+            "$ref": "#/parameters/WaitForCommitParameter"
+          },
+          {
             "$ref": "#/parameters/SignedStatement.body"
           }
         ],
@@ -110,6 +242,10 @@
               "Location": {
                 "type": "string",
                 "description": "Location of the receipt"
+              },
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "Transaction ID for the committed entry, returned when waitForCommit=true"
               }
             }
           },
@@ -127,6 +263,19 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "Retry-After seconds value to help with polling"
+              }
+            }
+          },
+          "303": {
+            "description": "Response for async entry submission in SCRAPI v09, returns 303 See Other with empty body",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location of the entry to poll"
+              },
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "Transaction ID for the entry"
               }
             }
           },
@@ -165,6 +314,12 @@
             "description": "Service unavailable error response",
             "schema": {
               "type": "file"
+            },
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "Transaction ID for the rolled back entry"
+              }
             }
           }
         },
@@ -204,6 +359,20 @@
               "Location": {
                 "type": "string",
                 "description": "Location of the receipt"
+              }
+            }
+          },
+          "302": {
+            "description": "Pending response for entry query in SCRAPI v09, returns 302 Found",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location of the entry to poll"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry-After seconds value to help with polling"
               }
             }
           },
@@ -257,7 +426,7 @@
         "operationId": "GetEntryStatement",
         "description": "Get the transparent statement consisting of the signed statement and the receipt embedded in the header",
         "produces": [
-          "application/cose",
+          "application/scitt-statement+cose",
           "application/concise-problem-details+cbor"
         ],
         "parameters": [
@@ -268,7 +437,7 @@
             "$ref": "#/parameters/EntryIdParameter"
           },
           {
-            "$ref": "#/parameters/AcceptCoseHeader"
+            "$ref": "#/parameters/AcceptScittStatementHeader"
           }
         ],
         "responses": {
@@ -391,7 +560,7 @@
     "/operations/{operationId}": {
       "get": {
         "operationId": "GetOperation",
-        "description": "Get status of the long running registration operation, mandatory in IETF SCITT draft",
+        "description": "Get status of the long running registration operation. Deprecated in SCRAPI v09 but retained unchanged for backward compatibility; clients should poll /entries/{entryId} directly.",
         "produces": [
           "application/cbor",
           "application/concise-problem-details+cbor"
@@ -472,6 +641,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "GetOperation": {
             "$ref": "./examples/GetOperation.json"
@@ -495,19 +665,9 @@
         "body"
       ]
     },
-    "CreateEntryPending": {
+    "CreateEntrySeeOther": {
       "type": "object",
-      "description": "Response of entry submission containing the operation id, mandatory in IETF SCITT draft",
-      "properties": {
-        "body": {
-          "type": "string",
-          "format": "byte",
-          "description": "Operation status response"
-        }
-      },
-      "required": [
-        "body"
-      ]
+      "description": "Response for async entry submission in SCRAPI v09, returns 303 See Other with empty body"
     },
     "JsonWebKey": {
       "type": "object",
@@ -637,6 +797,10 @@
         "body"
       ]
     },
+    "ReceiptEntryPending": {
+      "type": "object",
+      "description": "Pending response for entry query in SCRAPI v09, returns 302 Found"
+    },
     "Response400Cbor": {
       "type": "object",
       "description": "Validation error response",
@@ -705,6 +869,48 @@
       },
       "required": [
         "error"
+      ]
+    },
+    "Response503CborWithReceipt": {
+      "type": "object",
+      "description": "Service unavailable with CBOR error response for waitForCommit rollback",
+      "properties": {
+        "error": {
+          "type": "string",
+          "format": "byte",
+          "description": "CBOR error content for rollback"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "ScittKeyResponse": {
+      "type": "object",
+      "description": "Response containing a single COSE_Key (map, not array) in CBOR format",
+      "properties": {
+        "body": {
+          "type": "string",
+          "format": "byte",
+          "description": "Single COSE_Key as CBOR map"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "ScittKeysResponse": {
+      "type": "object",
+      "description": "Response containing COSE_Key_Set (array of COSE_Key maps) in CBOR format",
+      "properties": {
+        "body": {
+          "type": "string",
+          "format": "byte",
+          "description": "COSE_Key_Set as CBOR array of COSE_Key maps"
+        }
+      },
+      "required": [
+        "body"
       ]
     },
     "TransparencyConfigurationCbor": {
@@ -779,6 +985,20 @@
       },
       "x-ms-parameter-location": "method"
     },
+    "AcceptScittStatementHeader": {
+      "name": "accept",
+      "in": "header",
+      "description": "Accept header",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "application/scitt-statement+cose"
+      ],
+      "x-ms-enum": {
+        "modelAsString": false
+      },
+      "x-ms-parameter-location": "method"
+    },
     "Azure.Core.Foundations.ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
@@ -796,6 +1016,14 @@
       "required": true,
       "type": "string",
       "maxLength": 100,
+      "x-ms-parameter-location": "method"
+    },
+    "KidParameter": {
+      "name": "kid",
+      "in": "path",
+      "description": "Key ID (kid) of the SCITT key to retrieve.",
+      "required": true,
+      "type": "string",
       "x-ms-parameter-location": "method"
     },
     "OperationIdParameter": {
@@ -816,6 +1044,14 @@
         "type": "string",
         "format": "binary"
       },
+      "x-ms-parameter-location": "method"
+    },
+    "WaitForCommitParameter": {
+      "name": "waitForCommit",
+      "in": "query",
+      "description": "If true, waits for the entry to be committed before returning. Returns 201 with receipt or 503 on rollback.",
+      "required": false,
+      "type": "boolean",
       "x-ms-parameter-location": "method"
     }
   }
