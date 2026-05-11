@@ -103,7 +103,7 @@ model OperationStatus extends ErrorResponse {
 }
 
 /**
- * A map used to describe parameters for actions or configurations.
+ * A key-value pair used to describe parameters for actions or configurations.
  */
 model KeyValuePair {
   /**
