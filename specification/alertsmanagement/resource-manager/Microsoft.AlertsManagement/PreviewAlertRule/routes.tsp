@@ -14,6 +14,15 @@ namespace Microsoft.AlertsManagement;
 /**
  * Operations for Preview Alert Rule.
  */
+// NOTE: The original Swagger had a single free-floating `previewAlertRule` op
+// at the namespace level. The C# MPG generator needs every operation to belong
+// to a stable operation group so it can emit a proper client / extension class;
+// `@@clientLocation` in `client.tsp` also requires an interface target. We wrap
+// the op in `interface PreviewAlertRules { ... }` purely to give it that group.
+// The route, HTTP method, request/response bodies, and runtime behavior are
+// unchanged. The only resulting wire change is `operationId`:
+// `PreviewAlertRule` -> `PreviewAlertRules_PreviewAlertRule`, which follows the
+// standard `Group_Operation` convention used across Azure RP specs.
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface PreviewAlertRules {
   /**

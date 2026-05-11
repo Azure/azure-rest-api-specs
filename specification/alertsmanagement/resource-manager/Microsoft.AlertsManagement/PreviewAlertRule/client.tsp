@@ -25,8 +25,19 @@ using Microsoft.AlertsManagement;
 @@clientName(AlertSeverity.`4`, "Four", "go,javascript");
 @@clientName(Microsoft.AlertsManagement, "Client", "go");
 
-// C# customizations: ensure ops stay on the synthetic operation group so the
-// generator can emit a proper client.
+// =============================================================================
+// C# (.NET) MPG customizations for Azure.ResourceManager.PreviewAlertRule
+// -----------------------------------------------------------------------------
+// The C# management-plane generator (http-client-csharp-mgmt) has a few
+// constraints that require renaming/grouping that doesn't apply to other
+// language emitters. All such customizations below are scoped to the "csharp"
+// target so they do not affect Python/JavaScript/Go/Java/AutoRest output.
+// =============================================================================
+
+// `@@clientLocation` binds the wrapped op to its interface as its operation
+// group for the C# emitter. Without this, the generator cannot determine which
+// client class to emit the op on. The interface itself is declared in
+// routes.tsp (see the rationale comment there).
 @@clientLocation(PreviewAlertRules.previewAlertRule,
   PreviewAlertRules,
   "csharp"
