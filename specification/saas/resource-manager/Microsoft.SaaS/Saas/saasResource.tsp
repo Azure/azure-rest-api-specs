@@ -78,10 +78,8 @@ model SaasResourceProperties {
 
   // NOTE: cspProperties removed from GA API — 0 non-null usage in 18-month production data.
 
-  /** Additional info dictionary forwarded to Assets API during purchase. Write-only — not stored, not returned in GET. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "AdditionalInfo is an open-ended key-value bag forwarded to Assets API"
-  @visibility(Lifecycle.Create, Lifecycle.Update)
-  additionalInfo?: Record<string>;
+  // NOTE: additionalInfo removed from GA API — 98% usage from synth tests only on RP endpoints.
+  // Non-RP (fulfillment) API retains additionalInfo.
 
   /** The purchaser email. Server-derived from authenticated identity. */
   @visibility(Lifecycle.Read)
