@@ -136,11 +136,11 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/aiModels": {
       "get": {
-        "operationId": "AIModels_ListBySubscription",
+        "operationId": "AIModels_List",
         "tags": [
           "AIModels"
         ],
-        "description": "List AIModel resources by subscription ID",
+        "description": "List AIModel resources by subscription",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -164,12 +164,113 @@
           }
         },
         "x-ms-examples": {
-          "AIModels_ListBySubscription_MaximumSet": {
-            "$ref": "./examples/AIModels_ListBySubscription.json"
+          "AIModels_List_MaximumSet": {
+            "$ref": "./examples/AIModels_List.json"
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/aiModels/{aiModelName}": {
+      "get": {
+        "operationId": "AIModels_Get",
+        "tags": [
+          "AIModels"
+        ],
+        "description": "Get a AIModel",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "aiModelName",
+            "in": "path",
+            "description": "The name of the AI model resource. Derived from the upstream model id by replacing the publisher separator `/` with `--` (e.g. upstream `microsoft/Phi-4-mini-instruct` becomes `microsoft--Phi-4-mini-instruct`). Because Hugging Face repo ids forbid `--`, this mapping is unambiguously reversible. Allowed characters: letters, digits, `.`, `-`, `_`.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AIModel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AIModels_Get_MaximumSet": {
+            "$ref": "./examples/AIModels_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/aiModels/{aiModelName}/calculateCost": {
+      "post": {
+        "operationId": "AIModels_CalculateCost",
+        "tags": [
+          "AIModels"
+        ],
+        "description": "Calculates projected hourly compute cost for deploying this model on the GPU SKUs available to the caller subscription. No Kubernetes or Azure resources are provisioned.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "aiModelName",
+            "in": "path",
+            "description": "The name of the AI model resource. Derived from the upstream model id by replacing the publisher separator `/` with `--` (e.g. upstream `microsoft/Phi-4-mini-instruct` becomes `microsoft--Phi-4-mini-instruct`). Because Hugging Face repo ids forbid `--`, this mapping is unambiguously reversible. Allowed characters: letters, digits, `.`, `-`, `_`.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CalculateCostRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CalculateCostResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AIModels_CalculateCost_MaximumSet": {
+            "$ref": "./examples/AIModels_CalculateCost.json"
+          }
         }
       }
     },
@@ -1549,155 +1650,6 @@
         },
         "x-ms-long-running-operation": true
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiModels": {
-      "get": {
-        "operationId": "AIModels_ListByResourceGroup",
-        "tags": [
-          "AIModels"
-        ],
-        "description": "List AIModel resources by resource group",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AIModelListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "AIModels_ListByResourceGroup_MaximumSet": {
-            "$ref": "./examples/AIModels_ListByResourceGroup.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiModels/{aiModelName}": {
-      "get": {
-        "operationId": "AIModels_Get",
-        "tags": [
-          "AIModels"
-        ],
-        "description": "Get a AIModel",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "aiModelName",
-            "in": "path",
-            "description": "The name of the AI model resource. Matches the upstream model id (e.g. \"microsoft/Phi-4-mini-instruct\"). The `/` character must be URL-encoded as `%2F` on the wire.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 128,
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*(/[A-Za-z0-9][A-Za-z0-9._-]*)?$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AIModel"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "AIModels_Get_MaximumSet": {
-            "$ref": "./examples/AIModels_Get.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiModels/{aiModelName}/calculateCost": {
-      "post": {
-        "operationId": "AIModels_CalculateCost",
-        "tags": [
-          "AIModels"
-        ],
-        "description": "Calculates projected hourly compute cost for deploying this model on the GPU SKUs available to the caller. No Kubernetes or Azure resources are provisioned.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "aiModelName",
-            "in": "path",
-            "description": "The name of the AI model resource. Matches the upstream model id (e.g. \"microsoft/Phi-4-mini-instruct\"). The `/` character must be URL-encoded as `%2F` on the wire.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 128,
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*(/[A-Za-z0-9][A-Za-z0-9._-]*)?$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CalculateCostRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/CalculateCostResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "AIModels_CalculateCost_MaximumSet": {
-            "$ref": "./examples/AIModels_CalculateCost.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -1949,7 +1901,7 @@
     },
     "AIModel": {
       "type": "object",
-      "description": "An AI model exposed by Microsoft.ContainerService. Platform-maintained and auto-provisioned by the resource provider; can be referenced by `ModelDeployment` resources.",
+      "description": "An AI model exposed by Microsoft.ContainerService. Read-only, globally-shared catalog entry that is platform-maintained and auto-provisioned by the resource provider; identical across regions and subscriptions. Can be referenced by `ModelDeployment` resources.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/AIModelProperties",
@@ -2121,6 +2073,10 @@
       "type": "object",
       "description": "Request body for the AI model `calculateCost` action.",
       "properties": {
+        "location": {
+          "type": "string",
+          "description": "Azure region to evaluate, e.g. \"eastus\". Determines GPU SKU availability, subscription quota, and pricing used in the calculation."
+        },
         "replicas": {
           "type": "integer",
           "format": "int32",
@@ -2128,7 +2084,10 @@
           "default": 1,
           "minimum": 1
         }
-      }
+      },
+      "required": [
+        "location"
+      ]
     },
     "CalculateCostResponse": {
       "type": "object",
