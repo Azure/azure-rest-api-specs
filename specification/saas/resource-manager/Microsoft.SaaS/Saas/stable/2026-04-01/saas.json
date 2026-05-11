@@ -50,7 +50,7 @@
     }
   ],
   "paths": {
-    "/providers/Microsoft.SaaS/deployments/{saasSubscriptionName}/preflight": {
+    "/providers/Microsoft.SaaS/deployments/{resourceName}/preflight": {
       "post": {
         "operationId": "SaasTenantLevelPreflight_Preflight",
         "description": "Pre-validates SaaS subscription operations.",
@@ -59,9 +59,9 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "saasSubscriptionName",
+            "name": "resourceName",
             "in": "path",
-            "description": "The SaaS subscription name.",
+            "description": "The resource name.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,50}$"
@@ -635,7 +635,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/deployments/{saasSubscriptionName}/preflight": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/deployments/{resourceName}/preflight": {
       "post": {
         "operationId": "SaasSubscriptionLevelPreflight_Preflight",
         "description": "Pre-validates SaaS subscription operations.",
@@ -650,9 +650,9 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "saasSubscriptionName",
+            "name": "resourceName",
             "in": "path",
-            "description": "The SaaS subscription name.",
+            "description": "The resource name.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,50}$"
@@ -1297,13 +1297,38 @@
       "description": "Preflight validation result.",
       "properties": {
         "status": {
-          "type": "string",
+          "$ref": "#/definitions/PreflightStatus",
           "description": "The status of the preflight validation."
         }
       },
       "required": [
         "status"
       ]
+    },
+    "PreflightStatus": {
+      "type": "string",
+      "description": "The status of a preflight validation.",
+      "enum": [
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "PreflightStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Preflight validation succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Preflight validation failed."
+          }
+        ]
+      },
+      "readOnly": true
     },
     "SaasNameAvailabilityRequest": {
       "type": "object",

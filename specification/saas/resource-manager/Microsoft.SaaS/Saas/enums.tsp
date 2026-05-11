@@ -64,3 +64,14 @@ union PatchIntent {
   /** Schedule a change */
   "ScheduleChange",
 }
+
+/** The status of a preflight validation. */
+union PreflightStatus {
+  string,
+
+  /** Preflight validation succeeded. */
+  "Succeeded",
+
+  /** Preflight validation failed. */
+  "Failed",
+}

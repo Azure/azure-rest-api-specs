@@ -70,5 +70,5 @@ model SaasNameAvailabilityResponse {
 /** Preflight validation result. */
 model PreflightResult {
   /** The status of the preflight validation. */
-  status: string;
+  status: PreflightStatus;
 }

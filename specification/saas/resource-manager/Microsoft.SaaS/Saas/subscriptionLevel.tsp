@@ -40,16 +40,16 @@ interface SaasSubscriptionLevelPreflight {
   /** Pre-validates SaaS subscription operations. */
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Preflight accepts dynamic payload"
   @post
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/deployments/{saasSubscriptionName}/preflight")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/deployments/{resourceName}/preflight")
   preflight(
     ...ApiVersionParameter,
     ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
     ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 
-    /** The SaaS subscription name. */
+    /** The resource name. */
     @pattern("^[a-zA-Z0-9-]{3,50}$")
     @path
-    saasSubscriptionName: string,
+    resourceName: string,
 
     /** The preflight request body. */
     @body body: unknown,
