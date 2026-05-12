@@ -67,6 +67,7 @@ interface IisWebServersController {
 }
 
 @@doc(IisWebServers.name, "Web server name.");
-@@doc(IisWebServers.properties,
+@@doc(
+  IisWebServers.properties,
   "The resource-specific properties for this resource."
 );

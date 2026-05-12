@@ -5,31 +5,37 @@ using Azure.ClientGenerator.Core;
 using Microsoft.DatabaseWatcher;
 
 @@clientName(Microsoft.DatabaseWatcher, "DatabaseWatcherMgmtClient", "python");
-@@clientName(Microsoft.DatabaseWatcher,
+@@clientName(
+  Microsoft.DatabaseWatcher,
   "DatabaseWatcherManagementClient",
   "java"
 );
 
 // csharp
 @@clientName(AlertRuleResource, "DatabaseWatcherAlertRule", "csharp");
-@@clientName(AlertRuleResourceProperties,
+@@clientName(
+  AlertRuleResourceProperties,
   "DatabaseWatcherAlertRuleProperties",
   "csharp"
 );
 @@clientName(HealthValidation, "DatabaseWatcherHealthValidation", "csharp");
-@@clientName(HealthValidationProperties,
+@@clientName(
+  HealthValidationProperties,
   "DatabaseWatcherHealthValidationProperties",
   "csharp"
 );
-@@clientName(SharedPrivateLinkResource,
+@@clientName(
+  SharedPrivateLinkResource,
   "DatabaseWatcherSharedPrivateLinkResource",
   "csharp"
 );
-@@clientName(SharedPrivateLinkResourceProperties,
+@@clientName(
+  SharedPrivateLinkResourceProperties,
   "DatabaseWatcherSharedPrivateLinkResourceProperties",
   "csharp"
 );
-@@clientName(SharedPrivateLinkResourceStatus,
+@@clientName(
+  SharedPrivateLinkResourceStatus,
   "DatabaseWatcherSharedPrivateLinkResourceStatus",
   "csharp"
 );
@@ -37,35 +43,41 @@ using Microsoft.DatabaseWatcher;
 @@clientName(TargetProperties, "DatabaseWatcherTargetProperties", "csharp");
 @@clientName(Watcher, "DatabaseWatcher", "csharp");
 @@clientName(WatcherProperties, "DatabaseWatcherProperties", "csharp");
-@@clientName(validationStatus,
+@@clientName(
+  validationStatus,
   "DatabaseWatcherHealthValidationStatus",
   "csharp"
 );
 @@clientName(ValidationIssue, "DatabaseWatcherHealthValidationIssue", "csharp");
 @@clientName(Datastore, "DatabaseWatcherDatastore", "csharp");
-@@clientName(SqlDbElasticPoolTargetProperties,
+@@clientName(
+  SqlDbElasticPoolTargetProperties,
   "SqlDBElasticPoolTargetProperties",
   "csharp"
 );
-@@clientName(SqlDbSingleDatabaseTargetProperties,
+@@clientName(
+  SqlDbSingleDatabaseTargetProperties,
   "SqlDBSingleDatabaseTargetProperties",
   "csharp"
 );
 @@clientName(SqlMiTargetProperties, "SqlMITargetProperties", "csharp");
 @@clientName(VaultSecret, "TargetAuthenticationVaultSecret", "csharp");
 @@clientName(WatcherStatus, "DatabaseWatcherStatus", "csharp");
-@@clientName(Azure.ResourceManager.ResourceProvisioningState,
+@@clientName(
+  Azure.ResourceManager.ResourceProvisioningState,
   "DatabaseWatcherResourceProvisioningState",
   "csharp"
 );
-@@clientName(alertRuleCreationProperties,
+@@clientName(
+  alertRuleCreationProperties,
   "alertRuleCreationProperty",
   "csharp"
 );
 @@alternateType(Datastore.kustoClusterUri, url, "csharp");
 @@alternateType(Datastore.kustoDataIngestionUri, url, "csharp");
 @@alternateType(Datastore.kustoManagementUrl, url, "csharp");
-@@alternateType(ValidationIssue.relatedResourceType,
+@@alternateType(
+  ValidationIssue.relatedResourceType,
   Azure.Core.armResourceType,
   "csharp"
 );

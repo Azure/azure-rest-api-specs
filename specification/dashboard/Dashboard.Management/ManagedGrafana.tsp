@@ -68,11 +68,13 @@ interface ManagedGrafanas {
   update is ArmCustomPatchAsync<
     ManagedGrafana,
     PatchModel = ManagedGrafanaUpdateParameters,
-    Response = ArmResponse<ManagedGrafana> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = ManagedGrafana> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: ManagedGrafana;
-    })
+    Response =
+      | ArmResponse<ManagedGrafana>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = ManagedGrafana> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: ManagedGrafana;
+        })
   >;
 
   /**
@@ -84,8 +86,11 @@ interface ManagedGrafanas {
   @operationId("Grafana_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     ManagedGrafana,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -144,7 +149,8 @@ interface ManagedGrafanas {
 }
 
 @@doc(ManagedGrafana.name, "The workspace name of Azure Managed Grafana.");
-@@doc(ManagedGrafana.properties,
+@@doc(
+  ManagedGrafana.properties,
   "Properties specific to the grafana resource."
 );
 @@doc(ManagedGrafanas.create::parameters.resource, "");

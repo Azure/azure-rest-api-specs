@@ -141,6 +141,7 @@ interface JobStepOperationGroup {
 
 @@doc(JobStep.name, "The name of the job step.");
 @@doc(JobStep.properties, "Resource properties.");
-@@doc(JobSteps.createOrUpdate::parameters.resource,
+@@doc(
+  JobSteps.createOrUpdate::parameters.resource,
   "The requested state of the job step."
 );

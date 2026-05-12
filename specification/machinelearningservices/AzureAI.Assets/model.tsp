@@ -147,5 +147,6 @@ alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Ht
   T;
 
 #suppress "@azure-tools/typespec-providerhub/no-inline-model" "Need to create reponses correctly"
-alias ResourceCreatedOrOkResponse<T extends TypeSpec.Reflection.Model> = ResourceCreatedResponse<T> | (TypeSpec.Http.Response<200> &
-  T);
+alias ResourceCreatedOrOkResponse<T extends TypeSpec.Reflection.Model> =
+  | ResourceCreatedResponse<T>
+  | (TypeSpec.Http.Response<200> & T);

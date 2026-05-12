@@ -6,26 +6,30 @@ using Microsoft.ManagedIdentity;
 // Flatten properties for backward compatibility
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SystemAssignedIdentity.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  SystemAssignedIdentity.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Identity.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Identity.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(IdentityUpdate.properties);
 
-@@clientName(Identities.update,
+@@clientName(
+  Identities.update,
   "Identities.update::parameters.properties",
   "parameters"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(FederatedIdentityCredential.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  FederatedIdentityCredential.properties
 );
 
 @@clientLocation(Identities.get, "UserAssignedIdentities");
@@ -36,10 +40,12 @@ using Microsoft.ManagedIdentity;
 @@clientLocation(Identities.delete, "UserAssignedIdentities");
 @@clientLocation(Identities.listByResourceGroup, "UserAssignedIdentities");
 @@clientLocation(Identities.listBySubscription, "UserAssignedIdentities");
-@@clientName(FederatedIdentityCredentials.createOrUpdate::parameters.resource,
+@@clientName(
+  FederatedIdentityCredentials.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(FederatedIdentityCredential.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  FederatedIdentityCredential.properties
 );

@@ -45,6 +45,7 @@ interface DiagnosticResources {
 @@minLength(DiagnosticResource.name, 1);
 @@doc(DiagnosticResource.name, "Unique resource name for insight resources");
 @@doc(DiagnosticResource.properties, "Diagnostic Resource properties.");
-@@doc(DiagnosticResources.create::parameters.resource,
+@@doc(
+  DiagnosticResources.create::parameters.resource,
   "The required request body for this insightResource invocation."
 );

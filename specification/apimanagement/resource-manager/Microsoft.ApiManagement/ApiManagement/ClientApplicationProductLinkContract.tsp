@@ -77,12 +77,15 @@ interface ClientApplicationProductLinkContracts {
 
 @@maxLength(ClientApplicationProductLinkContract.name, 256);
 @@minLength(ClientApplicationProductLinkContract.name, 1);
-@@doc(ClientApplicationProductLinkContract.name,
+@@doc(
+  ClientApplicationProductLinkContract.name,
   "Client Application Product Link identifier. Must be unique in the current API Management service instance."
 );
-@@doc(ClientApplicationProductLinkContract.properties,
+@@doc(
+  ClientApplicationProductLinkContract.properties,
   "Client application - product link entity contract properties."
 );
-@@doc(ClientApplicationProductLinkContracts.create::parameters.resource,
+@@doc(
+  ClientApplicationProductLinkContracts.create::parameters.resource,
   "Create parameters."
 );

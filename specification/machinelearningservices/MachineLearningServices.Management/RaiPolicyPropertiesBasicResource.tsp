@@ -211,7 +211,8 @@ interface RaiPolicy {
 }
 
 @@doc(RaiPolicyPropertiesBasicResource.name, "Name of the Rai Policy.");
-@@doc(RaiPolicyPropertiesBasicResource.properties,
+@@doc(
+  RaiPolicyPropertiesBasicResource.properties,
   "Azure OpenAI Content Filters properties."
 );
 @@doc(RaiPolicyPropertiesBasicResources.create::parameters.resource, "");

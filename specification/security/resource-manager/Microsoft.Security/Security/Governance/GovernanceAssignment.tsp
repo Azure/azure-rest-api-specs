@@ -112,12 +112,15 @@ interface GovernanceAssignments {
   >;
 }
 
-@@doc(GovernanceAssignment.name,
+@@doc(
+  GovernanceAssignment.name,
   "The governance assignment key - the assessment key of the required governance assignment"
 );
-@@doc(GovernanceAssignment.properties,
+@@doc(
+  GovernanceAssignment.properties,
   "The properties of a governance assignment"
 );
-@@doc(GovernanceAssignments.createOrUpdate::parameters.resource,
+@@doc(
+  GovernanceAssignments.createOrUpdate::parameters.resource,
   "Governance assignment over a subscription scope"
 );

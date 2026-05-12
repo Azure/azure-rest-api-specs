@@ -71,6 +71,7 @@ interface GroupIdInformations {
 }
 
 @@doc(GroupIdInformation.name, "The name of the private link resource");
-@@doc(GroupIdInformation.properties,
+@@doc(
+  GroupIdInformation.properties,
   "The properties for a group information object"
 );

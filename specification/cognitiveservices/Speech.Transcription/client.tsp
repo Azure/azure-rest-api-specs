@@ -6,13 +6,15 @@ using Azure.ClientGenerator.Core;
 
 namespace Azure.Ai.Speech.Transcription;
 
-@@clientNamespace(Azure.Ai.Speech.Transcription,
+@@clientNamespace(
+  Azure.Ai.Speech.Transcription,
   "Azure.AI.Speech.Transcription",
   "csharp"
 );
 
 // TypeScript uses PascalCase for service names to match namespace conventions
-@@clientNamespace(Azure.Ai.Speech.Transcription,
+@@clientNamespace(
+  Azure.Ai.Speech.Transcription,
   "Azure.AI.Speech.Transcription",
   "javascript"
 );
@@ -29,7 +31,8 @@ namespace Azure.Ai.Speech.Transcription;
 @@clientName(PhraseListProperties, "PhraseListOptions", "java");
 @@clientName(PhraseListProperties, "PhraseListOptions", "javascript");
 @@clientName(TranscriptionResult.durationMilliseconds, "duration", "java");
-@@clientName(TranscriptionResult.durationMilliseconds,
+@@clientName(
+  TranscriptionResult.durationMilliseconds,
   "durationInMs",
   "javascript"
 );
@@ -44,7 +47,8 @@ namespace Azure.Ai.Speech.Transcription;
 @@clientName(TranscriptionContent.definition, "options", "java");
 @@clientName(TranscriptionContent.definition, "options", "csharp");
 @@clientName(TranscriptionContent.definition, "options", "javascript");
-@@clientName(Azure.Core.Foundations.ApiVersionParameter.apiVersion,
+@@clientName(
+  Azure.Core.Foundations.ApiVersionParameter.apiVersion,
   "serviceVersion",
   "javascript"
 );
