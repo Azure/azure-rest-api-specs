@@ -17,6 +17,9 @@ namespace Azure.AI.Projects {
     fabric_dataagent_preview: "fabric_dataagent_preview",
     sharepoint_grounding_preview: "sharepoint_grounding_preview",
     memory_search_preview: "memory_search_preview",
+    work_iq_preview: "work_iq_preview",
+    fabric_iq_preview: "fabric_iq_preview",
+    toolbox_search_preview: "toolbox_search_preview",
   }
 
   // General availability tools:
@@ -54,11 +57,48 @@ namespace Azure.AI.Projects {
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
   @@copyProperties(OpenAI.WebSearchTool,
     {
+      ...ToolNameAndDescriptionExtension,
+
       /**
        * The project connections attached to this tool. There can be a maximum of 1 connection
        * resource attached to the tool.
        */
       custom_search_configuration?: WebSearchConfiguration,
+    }
+  );
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(OpenAI.CodeInterpreterTool,
+    {
+      ...ToolNameAndDescriptionExtension,
+    }
+  );
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(OpenAI.ImageGenTool,
+    {
+      ...ToolNameAndDescriptionExtension,
+    }
+  );
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(OpenAI.LocalShellToolParam,
+    {
+      ...ToolNameAndDescriptionExtension,
+    }
+  );
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(OpenAI.FunctionShellToolParam,
+    {
+      ...ToolNameAndDescriptionExtension,
+    }
+  );
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(OpenAI.FileSearchTool,
+    {
+      ...ToolNameAndDescriptionExtension,
     }
   );
 
@@ -78,6 +118,21 @@ namespace Azure.AI.Projects {
   }
 
   /**
+   * Optional name and description fields for tool definitions and nested tool configurations.
+   */
+  alias ToolNameAndDescriptionExtension = {
+    /**
+     * Optional user-defined name for this tool or configuration.
+     */
+    name?: string;
+
+    /**
+     * Optional user-defined description for this tool or configuration.
+     */
+    description?: string;
+  };
+
+  /**
    * The input definition information for a bing grounding search tool as used to configure an agent.
    */
   model BingGroundingTool extends OpenAI.Tool {
@@ -85,6 +140,8 @@ namespace Azure.AI.Projects {
      * The object type, which is always 'bing_grounding'.
      */
     type: "bing_grounding";
+
+    ...ToolNameAndDescriptionExtension;
 
     /**
      * The bing grounding search tool parameters.
@@ -113,6 +170,8 @@ namespace Azure.AI.Projects {
      */
     type: "fabric_dataagent_preview";
 
+    ...ToolNameAndDescriptionExtension;
+
     /**
      * The fabric data agent tool parameters.
      */
@@ -140,6 +199,8 @@ namespace Azure.AI.Projects {
      */
     type: "sharepoint_grounding_preview";
 
+    ...ToolNameAndDescriptionExtension;
+
     /**
      * The sharepoint grounding tool parameters.
      */
@@ -154,6 +215,8 @@ namespace Azure.AI.Projects {
      * The object type, which is always 'azure_ai_search'.
      */
     type: "azure_ai_search";
+
+    ...ToolNameAndDescriptionExtension;
 
     /**
      * The azure ai search index resource.
@@ -259,6 +322,8 @@ namespace Azure.AI.Projects {
      */
     type: "bing_custom_search_preview";
 
+    ...ToolNameAndDescriptionExtension;
+
     /**
      * The bing custom search tool parameters.
      */
@@ -273,6 +338,8 @@ namespace Azure.AI.Projects {
      * The object type, which is always 'browser_automation_preview'.
      */
     type: "browser_automation_preview";
+
+    ...ToolNameAndDescriptionExtension;
 
     /**
      * The Browser Automation Tool parameters.
@@ -662,6 +729,8 @@ namespace Azure.AI.Projects {
      */
     type: "capture_structured_outputs";
 
+    ...ToolNameAndDescriptionExtension;
+
     /**
      * The structured outputs to capture from the model.
      */
@@ -676,6 +745,8 @@ namespace Azure.AI.Projects {
      * The type of the tool. Always `"a2a_preview`.
      */
     type: "a2a_preview";
+
+    ...ToolNameAndDescriptionExtension;
 
     /**
      * Base URL of the agent.
@@ -696,6 +767,69 @@ namespace Azure.AI.Projects {
   }
 
   /**
+   * The WorkIQ tool parameters.
+   */
+  model WorkIQPreviewToolParameters {
+    /**
+     * The ID of the WorkIQ project connection.
+     */
+    project_connection_id: string;
+  }
+
+  /**
+   * A WorkIQ server-side tool.
+   */
+  model WorkIQPreviewTool extends OpenAI.Tool {
+    /**
+     * The object type, which is always 'work_iq_preview'.
+     */
+    type: "work_iq_preview";
+
+    ...ToolNameAndDescriptionExtension;
+
+    /**
+     * The WorkIQ tool parameters.
+     */
+    work_iq_preview: WorkIQPreviewToolParameters;
+  }
+
+  model FabricIQPreviewToolParameters {
+    /**
+     * The ID of the FabricIQ project connection.
+     */
+    project_connection_id: string;
+
+    /**
+     * (Optional) The label of the FabricIQ MCP server to connect to.
+     */
+    server_label?: string;
+
+    /**
+     * (Optional) The URL of the FabricIQ MCP server. If not provided, the URL from the project connection will be used.
+     */
+    server_url?: url;
+
+    /**
+     * (Optional) Whether the agent requires approval before executing actions. Default is always.
+     */
+    #suppress "@azure-tools/typespec-autorest/union-unsupported" "require_approval uses OpenAI union type."
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Matching OpenAI MCP tool pattern."
+    require_approval?: OpenAI.MCPToolRequireApproval | string | null = "always";
+  }
+
+  model FabricIQPreviewTool extends OpenAI.Tool {
+    /**
+     * The object type, which is always 'fabric_iq_preview'.
+     */
+    type: "fabric_iq_preview";
+
+    /**
+     * The FabricIQ tool parameters.
+     */
+    fabric_iq_preview: FabricIQPreviewToolParameters;
+  }
+
+  /**
    * A tool for integrating memories into the agent.
    */
   model MemorySearchPreviewTool extends OpenAI.Tool {
@@ -703,6 +837,8 @@ namespace Azure.AI.Projects {
      * The type of the tool. Always `memory_search_preview`.
      */
     type: "memory_search_preview";
+
+    ...ToolNameAndDescriptionExtension;
 
     /**
      * The name of the memory store to use.
@@ -737,6 +873,8 @@ namespace Azure.AI.Projects {
      */
     type: "memory_search";
 
+    ...ToolNameAndDescriptionExtension;
+
     /**
      * The name of the memory store to use.
      */
@@ -758,6 +896,20 @@ namespace Azure.AI.Projects {
      * Time to wait before updating memories after inactivity (seconds). Default 300.
      */
     update_delay?: int32 = 300;
+  }
+
+  /**
+   * A tool for searching over the agent's toolbox.
+   * When present, deferred tools are hidden from `tools/list` and only
+   * discoverable via `search_tools` queries at runtime.
+   */
+  model ToolboxSearchPreviewTool extends OpenAI.Tool {
+    /**
+     * The type of the tool. Always `toolbox_search_preview`.
+     */
+    type: "toolbox_search_preview";
+
+    ...ToolNameAndDescriptionExtension;
   }
 
   alias MemorySearchToolCallItemBase = {
@@ -1036,6 +1188,38 @@ namespace Azure.AI.Projects {
     call_id: string;
 
     @doc("The output from the Fabric data agent tool call.")
+    output?: ToolCallOutputContent;
+
+    @doc("The status of the tool call.")
+    status: ToolCallStatus;
+  }
+
+  // ==============================================================================
+  // Fabric IQ Tool Call Models
+  // ==============================================================================
+
+  @doc("A Fabric IQ tool call.")
+  model FabricIQToolCall extends OpenAI.OutputItem {
+    type: "fabric_iq_preview_call";
+
+    @doc("The unique ID of the tool call generated by the model.")
+    call_id: string;
+
+    @doc("A JSON string of the arguments to pass to the tool.")
+    arguments: string;
+
+    @doc("The status of the tool call.")
+    status: ToolCallStatus;
+  }
+
+  @doc("The output of a Fabric IQ tool call.")
+  model FabricIQToolCallOutput extends OpenAI.OutputItem {
+    type: "fabric_iq_preview_call_output";
+
+    @doc("The unique ID of the tool call generated by the model.")
+    call_id: string;
+
+    @doc("The output from the Fabric IQ tool call.")
     output?: ToolCallOutputContent;
 
     @doc("The status of the tool call.")

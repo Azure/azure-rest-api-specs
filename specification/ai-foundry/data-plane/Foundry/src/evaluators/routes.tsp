@@ -3,6 +3,10 @@ import "../servicepatterns.tsp";
 import "./models.tsp";
 
 namespace Azure.AI.Projects;
+using Http;
+using OpenAPI;
+using Rest;
+using TypeSpec.Versioning;
 
 alias EvaluatorsPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
 
@@ -120,5 +124,136 @@ interface Evaluators {
       evaluatorVersion: EvaluatorVersion;
     },
     Azure.Core.Foundations.ResourceOkResponse<EvaluatorVersion>
+  >;
+
+  @removed(Versions.v1)
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Start a new or get an existing pending upload of an evaluator for a specific version.")
+  @post
+  @route("/evaluators/{name}/versions/{version}/startPendingUpload")
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview] }
+  )
+  startPendingUpload is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    {
+      @path
+      name: string;
+
+      @doc("The specific version id of the EvaluatorVersion to operate on.")
+      @Rest.segment("versions")
+      @Http.path
+      version: string;
+
+      @doc("The pending upload request parameters")
+      @Http.bodyRoot
+      pendingUploadRequest: PendingUploadRequest;
+    },
+    PendingUploadResponse
+  >;
+
+  @removed(Versions.v1)
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Get the SAS credential to access the storage account associated with an Evaluator version.")
+  @post
+  @route("/evaluators/{name}/versions/{version}/credentials")
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview] }
+  )
+  getCredentials is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    {
+      @path
+      name: string;
+
+      @doc("The credential request parameters")
+      @Http.bodyRoot
+      credentialRequest: EvaluatorCredentialRequest;
+
+      @doc("The specific version id of the EvaluatorVersion to operate on.")
+      @Rest.segment("versions")
+      @Http.path
+      version: string;
+    },
+    AssetCredentialResponse
+  >;
+}
+
+// ============================================================================
+// Evaluator Generation Jobs (LRO — follows DataGenerationJobs pattern)
+// ============================================================================
+
+const EvaluatorGenerationJobsRequiredPreviews = #{
+  conditional_previews: #[
+    FoundryFeaturesOptInKeys.evaluations_v1_preview
+  ],
+};
+
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
+#suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client via Operation-Location"
+@tag("EvaluatorGenerationJobs")
+interface EvaluatorGenerationJobs {
+  /**
+   * Creates an evaluator generation job. The service generates rubric-based evaluator
+   * definitions from the provided source materials asynchronously.
+   */
+  @summary("Creates an evaluator generation job.")
+  @route("evaluator_generation_jobs")
+  @extension("x-ms-foundry-meta", EvaluatorGenerationJobsRequiredPreviews)
+  create is postJobPreview<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    EvaluatorGenerationJob
+  >;
+
+  /**
+   * Gets the details of an evaluator generation job by its ID.
+   */
+  @summary("Get info about an evaluator generation job.")
+  @route("evaluator_generation_jobs/{jobId}")
+  @extension("x-ms-foundry-meta", EvaluatorGenerationJobsRequiredPreviews)
+  get is queryJobStatusPreview<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    EvaluatorGenerationJob
+  >;
+
+  /**
+   * Returns a list of evaluator generation jobs.
+   */
+  @summary("Returns a list of evaluator generation jobs.")
+  @route("evaluator_generation_jobs")
+  @extension("x-ms-foundry-meta", EvaluatorGenerationJobsRequiredPreviews)
+  list is listJobsPreview<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    EvaluatorGenerationJob,
+    {
+      @doc("Filter evaluator generation jobs by category.")
+      @query
+      category?: EvaluatorCategory;
+    }
+  >;
+
+  /**
+   * Cancels an evaluator generation job by its ID.
+   */
+  @summary("Cancels an evaluator generation job.")
+  @route("evaluator_generation_jobs/{jobId}:cancel")
+  @extension("x-ms-foundry-meta", EvaluatorGenerationJobsRequiredPreviews)
+  cancel is cancelJobPreview<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    EvaluatorGenerationJob
+  >;
+
+  /**
+   * Deletes an evaluator generation job by its ID. Deletes the job record only;
+   * the generated evaluator (if any) is preserved.
+   */
+  @route("evaluator_generation_jobs/{jobId}")
+  @extension("x-ms-foundry-meta", EvaluatorGenerationJobsRequiredPreviews)
+  delete is deleteJobPreview<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview
   >;
 }
