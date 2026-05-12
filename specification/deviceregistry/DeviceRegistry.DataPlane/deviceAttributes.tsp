@@ -1,14 +1,12 @@
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@typespec/openapi";
-import "@typespec/json-schema";
 import "@azure-tools/typespec-azure-core";
 import "./devices.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
-using TypeSpec.JsonSchema;
 using Azure.Core;
 
 namespace Microsoft.DeviceRegistry;
@@ -65,12 +63,6 @@ model DeviceAttribute {
 }
 
 @@key(DeviceAttribute.name, "attributeName");
-
-// Emit JSON Schema documents for the DeviceAttribute discriminated hierarchy and its referenced types.
-// These schemas are published so clients can validate property bags without parsing the full Swagger.
-@@jsonSchema(DeviceAttribute);
-@@jsonSchema(UpdateDeviceAttribute);
-@@jsonSchema(UpdateDeviceAttributeProperties);
 
 /** A device attribute reported by Azure Device Update. */
 model UpdateDeviceAttribute extends DeviceAttribute {
