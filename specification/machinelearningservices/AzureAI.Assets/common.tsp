@@ -89,7 +89,4 @@ model AcceleratorMap {
 
   @doc("Number of accelerators allocated per model instance.")
   numberOfAcceleratorsPerModelInstance: int32;
-
-  @doc("Whether this is the default accelerator configuration.")
-  default?: boolean = false;
 }
