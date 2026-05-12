@@ -1,0 +1,77 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "provisioningServiceName": "myFirstProvisioningService",
+    "api-version": "2026-10-01",
+    "iotDpsDescription": {
+      "location": "East US",
+      "sku": {
+        "name": "S1",
+        "capacity": 1
+      },
+      "tags": {
+        "key1": "value1",
+        "key2": "value2"
+      },
+      "properties": {
+        "publicNetworkAccess": "Enabled",
+        "disableLocalAuth": true
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Devices/provisioningServices/myFirstProvisioningService",
+        "name": "myFirstProvisioningService",
+        "type": "Microsoft.Devices/provisioningServices",
+        "location": "East US",
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        },
+        "sku": {
+          "name": "S1",
+          "capacity": 1
+        },
+        "properties": {
+          "state": "Active",
+          "publicNetworkAccess": "Enabled",
+          "provisioningState": "Succeeded",
+          "serviceOperationsHostName": "myFirstProvisioningService.azure-devices-provisioning.net",
+          "deviceProvisioningHostName": "global.azure-devices-provisioning.net",
+          "idScope": "0ne00000000",
+          "allocationPolicy": "Hashed",
+          "disableLocalAuth": true
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Devices/provisioningServices/myFirstProvisioningService",
+        "name": "myFirstProvisioningService",
+        "type": "Microsoft.Devices/provisioningServices",
+        "location": "East US",
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        },
+        "sku": {
+          "name": "S1",
+          "capacity": 1
+        },
+        "properties": {
+          "state": "Active",
+          "publicNetworkAccess": "Enabled",
+          "provisioningState": "Succeeded",
+          "serviceOperationsHostName": "myFirstProvisioningService.azure-devices-provisioning.net",
+          "deviceProvisioningHostName": "global.azure-devices-provisioning.net",
+          "idScope": "0ne00000000",
+          "allocationPolicy": "Hashed",
+          "disableLocalAuth": true
+        }
+      }
+    }
+  }
+}
