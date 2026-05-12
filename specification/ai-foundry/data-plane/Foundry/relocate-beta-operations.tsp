@@ -55,7 +55,7 @@ interface EvaluationSuites {}
 @@clientLocation(Azure.AI.Projects.EvaluationSuites.get, EvaluationSuites);
 @@clientLocation(Azure.AI.Projects.EvaluationSuites.list, EvaluationSuites);
 @@clientLocation(Azure.AI.Projects.EvaluationSuites.delete, EvaluationSuites);
-@@clientLocation(Azure.AI.Projects.EvaluationSuites.snapshotVersion, EvaluationSuites);
+@@clientLocation(Azure.AI.Projects.EvaluationSuites.publishVersion, EvaluationSuites);
 @@clientLocation(Azure.AI.Projects.EvaluationSuites.createVersion, EvaluationSuites);
 @@clientLocation(Azure.AI.Projects.EvaluationSuites.getVersion, EvaluationSuites);
 @@clientLocation(Azure.AI.Projects.EvaluationSuites.listVersions, EvaluationSuites);
