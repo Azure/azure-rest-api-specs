@@ -70,7 +70,9 @@ interface AIManagerNamespaces {
   delete is ArmResourceDeleteWithoutOkAsync<
     AIManagerNamespace,
     Azure.ResourceManager.Foundations.BaseParameters<AIManagerNamespace> &
-      IfMatchParameters<AIManagerNamespace>
+      IfMatchParameters<AIManagerNamespace>,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "AIManager is a valid name"
@@ -94,6 +96,16 @@ interface AIManagerNamespaces {
     void,
     ArmResponse<NamespaceAccessInfo>
   >;
+
+  @added(Versions.v2026_05_02_preview)
+  @doc("Rotates the API keys for the namespace-scoped LLM gateway. The current `secondaryKey` is promoted to become the new `primaryKey`, and a fresh `secondaryKey` is generated. This enables zero-downtime rotation: clients that have already switched to the previous secondary key continue to work, while the old primary key is invalidated. Returns the updated access information.")
+  @post
+  @action("rotateKeys")
+  rotateKeys is ArmResourceActionAsync<
+    AIManagerNamespace,
+    void,
+    ArmResponse<NamespaceAccessInfo>
+  >;
 }
 
 @added(Versions.v2026_05_02_preview)
@@ -108,7 +120,7 @@ model NamespaceAccessInfo {
 
   @secret
   @doc("Secondary API key, for zero-downtime rotation. Same usage as `primaryKey`.")
-  secondaryKey: string;
+  secondaryKey?: string;
 
   @doc("UTC time the keys were last rotated. Clients can use this to detect rotation and refresh cached credentials.")
   lastRotatedAt?: utcDateTime;

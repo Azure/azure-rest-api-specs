@@ -76,6 +76,7 @@ model InlineCredential extends CredentialValue {
   type: CredentialSourceType.Inline;
 
   @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   @doc("The access token, password, or other secret value.")
   value: string;
 }

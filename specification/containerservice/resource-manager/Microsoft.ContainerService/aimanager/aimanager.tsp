@@ -94,7 +94,9 @@ interface AIManagers {
   delete is ArmResourceDeleteWithoutOkAsync<
     AIManager,
     Azure.ResourceManager.Foundations.BaseParameters<AIManager> &
-      IfMatchParameters<AIManager>
+      IfMatchParameters<AIManager>,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   listByResourceGroup is ArmResourceListByParent<AIManager>;

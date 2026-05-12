@@ -67,8 +67,8 @@ model ModelDeploymentProperties {
   @doc("Full ARM resource id of a `ModelSource` to use when pulling artifacts for this deployment. Immutable after creation.")
   modelSourceResourceId?: ModelSourceResourceId;
 
-  @doc("Runtime performance mode. Selects a default engine/quantization combination; use `overrides` to pin values.")
-  performanceMode?: ModelDeploymentPerformanceMode = ModelDeploymentPerformanceMode.Balanced;
+  @doc("Runtime performance mode.")
+  performanceMode?: ModelDeploymentPerformanceMode;
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("Azure VM SKU used to host the deployment, e.g. \"Standard_NC96ads_A100_v4\". Immutable after creation.")
@@ -76,7 +76,7 @@ model ModelDeploymentProperties {
 
   @doc("Desired replica count. Ignored when `autoscaling.enabled` is true.")
   @minValue(1)
-  replicas?: int32 = 1;
+  replicas?: int32;
 
   @doc("The autoscaling configuration for the deployment.")
   autoscaling?: AutoscalingProfile;
@@ -172,7 +172,7 @@ model AutoscalingProfile {
 
   @doc("The minimum number of replicas when autoscaling is enabled.")
   @minValue(1)
-  minReplicas?: int32 = 1;
+  minReplicas?: int32;
 
   @doc("The maximum number of replicas when autoscaling is enabled. If not specified, the service derives a default from the subscription GPU quota.")
   @minValue(1)
@@ -194,7 +194,9 @@ interface ModelDeployments {
   delete is ArmResourceDeleteWithoutOkAsync<
     ModelDeployment,
     Azure.ResourceManager.Foundations.BaseParameters<ModelDeployment> &
-      IfMatchParameters<ModelDeployment>
+      IfMatchParameters<ModelDeployment>,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "AIManager is a valid name"

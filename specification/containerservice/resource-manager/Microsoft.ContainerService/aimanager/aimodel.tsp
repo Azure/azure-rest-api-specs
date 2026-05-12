@@ -14,7 +14,7 @@ namespace Microsoft.ContainerService;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AIModel is a valid name"
 @added(Versions.v2026_05_02_preview)
 @doc("An AI model exposed by Microsoft.ContainerService. Read-only, globally-shared catalog entry that is platform-maintained and auto-provisioned by the resource provider; identical across regions and subscriptions. Can be referenced by `ModelDeployment` resources.")
-@subscriptionResource
+@parentResource(SubscriptionLocationResource)
 @resource("aiModels")
 model AIModel is ProxyResource<AIModelProperties> {
   ...ResourceNameParameter<
@@ -30,6 +30,10 @@ model AIModel is ProxyResource<AIModelProperties> {
 @added(Versions.v2026_05_02_preview)
 @doc("AI model properties.")
 model AIModelProperties {
+  @visibility(Lifecycle.Read)
+  @doc("The Hugging Face model identifier in `<org>/<repo>` form, e.g. `microsoft/Phi-4-mini-instruct`. Uniquely identifies the upstream model that backs this catalog entry.")
+  modelId?: string;
+
   @doc("An optional, free-form description of the model.")
   description?: string;
 
@@ -57,9 +61,6 @@ model ResolvedModelSpec {
 @added(Versions.v2026_05_02_preview)
 @doc("Request body for the AI model `calculateCost` action.")
 model CalculateCostRequest {
-  @doc("Azure region to evaluate, e.g. \"eastus\". Determines GPU SKU availability, subscription quota, and pricing used in the calculation.")
-  location: string;
-
   @doc("Number of replicas to price.")
   @minValue(1)
   replicas?: int32 = 1;

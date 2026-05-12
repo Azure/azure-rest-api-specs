@@ -134,19 +134,22 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/aiModels": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/locations/{location}/aiModels": {
       "get": {
         "operationId": "AIModels_List",
         "tags": [
           "AIModels"
         ],
-        "description": "List AIModel resources by subscription",
+        "description": "List AIModel resources by SubscriptionLocationResource",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           }
         ],
         "responses": {
@@ -173,7 +176,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/aiModels/{aiModelName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/locations/{location}/aiModels/{aiModelName}": {
       "get": {
         "operationId": "AIModels_Get",
         "tags": [
@@ -186,6 +189,9 @@
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "aiModelName",
@@ -219,7 +225,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/aiModels/{aiModelName}/calculateCost": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/locations/{location}/aiModels/{aiModelName}/calculateCost": {
       "post": {
         "operationId": "AIModels_CalculateCost",
         "tags": [
@@ -232,6 +238,9 @@
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "aiModelName",
@@ -560,6 +569,11 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -1167,6 +1181,11 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -1619,6 +1638,11 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -1643,6 +1667,83 @@
         "x-ms-examples": {
           "ModelDeployments_Delete_MaximumSet": {
             "$ref": "./examples/ModelDeployments_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers/{aiManagerName}/namespaces/{namespaceName}/rotateKeys": {
+      "post": {
+        "operationId": "AIManagerNamespaces_RotateKeys",
+        "tags": [
+          "AIManagerNamespaces"
+        ],
+        "description": "Rotates the API keys for the namespace-scoped LLM gateway. The current `secondaryKey` is promoted to become the new `primaryKey`, and a fresh `secondaryKey` is generated. This enables zero-downtime rotation: clients that have already switched to the previous secondary key continue to work, while the old primary key is invalidated. Returns the updated access information.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiManagerName",
+            "in": "path",
+            "description": "The name of the AI Manager resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the AI Manager namespace resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NamespaceAccessInfo"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AIManagerNamespaces_RotateKeys": {
+            "$ref": "./examples/AIManagerNamespaces_RotateKeys.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1939,6 +2040,11 @@
       "type": "object",
       "description": "AI model properties.",
       "properties": {
+        "modelId": {
+          "type": "string",
+          "description": "The Hugging Face model identifier in `<org>/<repo>` form, e.g. `microsoft/Phi-4-mini-instruct`. Uniquely identifies the upstream model that backs this catalog entry.",
+          "readOnly": true
+        },
         "description": {
           "type": "string",
           "description": "An optional, free-form description of the model."
@@ -1975,7 +2081,6 @@
           "type": "integer",
           "format": "int32",
           "description": "The minimum number of replicas when autoscaling is enabled.",
-          "default": 1,
           "minimum": 1
         },
         "maxReplicas": {
@@ -1985,6 +2090,19 @@
           "minimum": 1
         }
       }
+    },
+    "Azure.ResourceManager.ArmResponse<NamespaceAccessInfo>": {
+      "type": "object",
+      "description": "Azure operation completed successfully.",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/NamespaceAccessInfo",
+          "description": "The body type of the operation request or response."
+        }
+      },
+      "required": [
+        "body"
+      ]
     },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
@@ -2073,10 +2191,6 @@
       "type": "object",
       "description": "Request body for the AI model `calculateCost` action.",
       "properties": {
-        "location": {
-          "type": "string",
-          "description": "Azure region to evaluate, e.g. \"eastus\". Determines GPU SKU availability, subscription quota, and pricing used in the calculation."
-        },
         "replicas": {
           "type": "integer",
           "format": "int32",
@@ -2084,10 +2198,7 @@
           "default": 1,
           "minimum": 1
         }
-      },
-      "required": [
-        "location"
-      ]
+      }
     },
     "CalculateCostResponse": {
       "type": "object",
@@ -2246,6 +2357,10 @@
           "type": "string",
           "format": "password",
           "description": "The access token, password, or other secret value.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
           "x-ms-secret": true
         }
       },
@@ -2313,6 +2428,36 @@
         }
       }
     },
+    "ModelDeploymentPerformanceMode": {
+      "type": "string",
+      "description": "The runtime performance mode of a model deployment.",
+      "enum": [
+        "Balanced",
+        "Latency",
+        "Throughput"
+      ],
+      "x-ms-enum": {
+        "name": "ModelDeploymentPerformanceMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Balanced",
+            "value": "Balanced",
+            "description": "A balanced trade-off between latency and throughput (default)."
+          },
+          {
+            "name": "Latency",
+            "value": "Latency",
+            "description": "Optimize for low request latency."
+          },
+          {
+            "name": "Throughput",
+            "value": "Throughput",
+            "description": "Optimize for high aggregate throughput."
+          }
+        ]
+      }
+    },
     "ModelDeploymentProperties": {
       "type": "object",
       "description": "Model deployment properties.",
@@ -2339,35 +2484,8 @@
           ]
         },
         "performanceMode": {
-          "type": "string",
-          "description": "Runtime performance mode. Selects a default engine/quantization combination; use `overrides` to pin values.",
-          "default": "Balanced",
-          "enum": [
-            "Balanced",
-            "Latency",
-            "Throughput"
-          ],
-          "x-ms-enum": {
-            "name": "ModelDeploymentPerformanceMode",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Balanced",
-                "value": "Balanced",
-                "description": "A balanced trade-off between latency and throughput (default)."
-              },
-              {
-                "name": "Latency",
-                "value": "Latency",
-                "description": "Optimize for low request latency."
-              },
-              {
-                "name": "Throughput",
-                "value": "Throughput",
-                "description": "Optimize for high aggregate throughput."
-              }
-            ]
-          }
+          "$ref": "#/definitions/ModelDeploymentPerformanceMode",
+          "description": "Runtime performance mode."
         },
         "vmSize": {
           "type": "string",
@@ -2381,7 +2499,6 @@
           "type": "integer",
           "format": "int32",
           "description": "Desired replica count. Ignored when `autoscaling.enabled` is true.",
-          "default": 1,
           "minimum": 1
         },
         "autoscaling": {
@@ -2633,8 +2750,7 @@
       },
       "required": [
         "endpoint",
-        "primaryKey",
-        "secondaryKey"
+        "primaryKey"
       ]
     },
     "ResolvedModelSpec": {
