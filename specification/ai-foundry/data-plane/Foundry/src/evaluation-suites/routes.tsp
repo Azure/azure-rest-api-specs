@@ -54,25 +54,25 @@ interface EvaluationSuites {
 
   @delete
   @route("{name}")
-  @summary("Delete an evaluation suite and all its snapped versions.")
-  @doc("Permanently deletes the evaluation suite identified by name, including all snapped versions.")
+  @summary("Delete an evaluation suite and all its published versions.")
+  @doc("Permanently deletes the evaluation suite identified by name, including all published versions.")
   delete is FoundryDataPlaneOperation<EvaluationSuitePath, void>;
 
   // ── Versioning operations (VersionedCrud) ─────────────────────────
 
   @post
-  @route("{name}:snapshot_version")
-  @summary("Snap the current $latest state as a new immutable version.")
-  @doc("Creates a new immutable version by snapshotting the current $latest state. The version number is server-assigned and monotonically increasing.")
-  snapshotVersion is FoundryDataPlaneOperation<
+  @route("{name}:publish_version")
+  @summary("Publish the current $latest state as a new immutable version.")
+  @doc("Creates a new immutable version by publishing the current $latest state. The version number is server-assigned and monotonically increasing.")
+  publishVersion is FoundryDataPlaneOperation<
     EvaluationSuitePath,
     VersionedEvaluationSuite
   >;
 
   @post
   @route("{name}/versions")
-  @summary("Create a version directly — updates $latest and snaps a new immutable version.")
-  @doc("Updates the $latest state with the provided body and immediately snaps it as a new immutable version in one atomic operation.")
+  @summary("Create a version directly — updates $latest and publishes a new immutable version.")
+  @doc("Updates the $latest state with the provided body and immediately publishes it as a new immutable version in one atomic operation.")
   createVersion is FoundryDataPlaneOperation<
     {
       ...EvaluationSuitePath;
@@ -83,8 +83,8 @@ interface EvaluationSuites {
 
   @get
   @route("{name}/versions/{version}")
-  @summary("Get a specific snapped version of an evaluation suite.")
-  @doc("Returns the immutable snapped version identified by version number.")
+  @summary("Get a specific published version of an evaluation suite.")
+  @doc("Returns the immutable published version identified by version number.")
   getVersion is FoundryDataPlaneOperation<
     {
       ...EvaluationSuitePath;
@@ -96,8 +96,8 @@ interface EvaluationSuites {
 
   @get
   @route("{name}/versions")
-  @summary("List all snapped versions of an evaluation suite.")
-  @doc("Returns a paginated list of all immutable snapped versions for the specified evaluation suite.")
+  @summary("List all published versions of an evaluation suite.")
+  @doc("Returns a paginated list of all immutable published versions for the specified evaluation suite.")
   listVersions is FoundryDataPlaneOperation<
     {
       ...EvaluationSuitePath;
