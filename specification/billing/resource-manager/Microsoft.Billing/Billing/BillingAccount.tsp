@@ -94,7 +94,10 @@ interface BillingAccounts {
     BillingAccount,
     utcDateTime,
     BillingAccount,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Parameters = {
+      @header contentType: "application/json";
+    }
   >;
 
   /**
