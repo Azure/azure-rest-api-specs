@@ -533,7 +533,7 @@ union NetAppVolumeQuotaRuleProvisioningStateDef {
 @@clientName(QuotaReport, "NetAppVolumeQuotaReport", "csharp");
 @@clientName(QuotaReportFilterRequest, "QuotaReportFilterContent", "csharp");
 @@clientName(NetAppVolumeQuotaRuleProvisioningStateDef,
-  "NetAppVolumeQuotaRuleProvisioningState",
+  "NetAppProvisioningState",
   "csharp"
 );
 
