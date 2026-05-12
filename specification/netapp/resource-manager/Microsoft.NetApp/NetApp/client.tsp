@@ -95,40 +95,6 @@ using Microsoft.NetApp;
 // C# customizations (csharp scope)
 // =============================================================================
 
-/** C# provisioning state values used to compose the extensible replacement union. */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "Backward compat: compose the replacement union from the existing enum values plus string."
-enum NetAppProvisioningStateDef {
-  /** The request has been accepted. */
-  Accepted: "Accepted",
-
-  /** The resource is being created. */
-  Creating: "Creating",
-
-  /** The resource is being patched. */
-  Patching: "Patching",
-
-  /** The resource is being updated. */
-  Updating: "Updating",
-
-  /** The resource is being deleted. */
-  Deleting: "Deleting",
-
-  /** The resource is being moved. */
-  Moving: "Moving",
-
-  /** The operation failed. */
-  Failed: "Failed",
-
-  /** The operation succeeded. */
-  Succeeded: "Succeeded",
-}
-
-/** C# extensible replacement for NetApp provisioning state values. */
-union NetAppVolumeQuotaRuleProvisioningStateDef {
-  NetAppProvisioningStateDef,
-  string,
-}
-
 // --- @@clientName: model and property renames for C# ---
 @@clientName(CachePropertiesExportPolicy,
   "NetAppCachePropertiesExportPolicy",
@@ -537,10 +503,6 @@ union NetAppVolumeQuotaRuleProvisioningStateDef {
 @@clientName(AccountProperties.nfsV4IDDomain, "NfsV4IdDomain", "csharp");
 @@clientName(QuotaReport, "NetAppVolumeQuotaReport", "csharp");
 @@clientName(QuotaReportFilterRequest, "QuotaReportFilterContent", "csharp");
-@@clientName(NetAppVolumeQuotaRuleProvisioningStateDef,
-  "NetAppProvisioningState",
-  "csharp"
-);
 
 // C# enum-member casing fixes (formerly exposed with these spellings)
 @@clientName(ApplicationType.`SAP-HANA`, "SapHana", "csharp");
@@ -726,11 +688,6 @@ union NetAppVolumeQuotaRuleProvisioningStateDef {
 // TEMPORARY: reproduce DeserializeAzureLocation bug
 @@alternateType(VolumeGroup.id, armResourceIdentifier, "csharp");
 @@alternateType(VolumeGroup.location, azureLocation, "csharp");
-// Replace the spec provisioning-state union with the C# extensible union type.
-@@alternateType(NetAppProvisioningState,
-  NetAppVolumeQuotaRuleProvisioningStateDef,
-  "csharp"
-);
 @@clientName(VolumeQuotaRulesProperties.provisioningState,
   "VolumeQuotaRuleProvisioningState",
   "csharp"
@@ -845,4 +802,3 @@ union NetAppVolumeQuotaRuleProvisioningStateDef {
 @@usage(VolumeBackupRelationshipStatus, Usage.input, "csharp");
 @@usage(VolumeReplicationRelationshipStatus, Usage.input, "csharp");
 @@usage(VolumeRestoreRelationshipStatus, Usage.input, "csharp");
-@@usage(NetAppVolumeQuotaRuleProvisioningStateDef, Usage.input, "csharp");
