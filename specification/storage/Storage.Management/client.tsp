@@ -1,10 +1,12 @@
 import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
+import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.ClientGenerator.Core;
 using Azure.ClientGenerator.Core.Legacy;
 using Azure.Core;
 using Microsoft.Storage;
+using Azure.ResourceManager;
 
 @@clientName(ProvisioningState, "StorageAccountProvisioningState", "csharp");
 @@access(ProvisioningState, Access.public, "csharp");
@@ -179,7 +181,7 @@ using Microsoft.Storage;
 @@clientName(QueueServiceProperties, "QueueService", "csharp");
 @@clientName(TableServiceProperties, "TableService", "csharp");
 @@clientName(ManagementPolicy, "StorageAccountManagementPolicy", "csharp");
-@@clientName(PrivateEndpointConnection,
+@@clientName(Microsoft.Storage.PrivateEndpointConnection,
   "StoragePrivateEndpointConnection",
   "csharp"
 );
@@ -398,7 +400,7 @@ namespace Azure.ResourceManager.Models {
   Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-@@usage(PrivateEndpointConnection,
+@@usage(Microsoft.Storage.PrivateEndpointConnection,
   Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
@@ -634,12 +636,15 @@ namespace Azure.ResourceManager.Models {
 @@clientName(BlobInventoryPolicyProperties.policy, "PolicySchema", "csharp");
 
 // PrivateEndpointConnection property renames
-@@clientName(PrivateEndpointConnectionProperties,
+@@clientName(Microsoft.Storage.PrivateEndpointConnectionProperties,
   "StoragePrivateEndpointConnectionProperties",
   "csharp"
 );
-@@access(PrivateEndpointConnectionProperties, Access.public, "csharp");
-@@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+@@access(Microsoft.Storage.PrivateEndpointConnectionProperties,
+  Access.public,
+  "csharp"
+);
+@@clientName(Microsoft.Storage.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
   "ConnectionState",
   "csharp"
 );
@@ -1087,4 +1092,64 @@ enum ProvisioningStateEnum {
 @@usage(UpdateHistoryProperty,
   Azure.ClientGenerator.Core.Usage.input,
   "csharp"
+);
+
+// For JavaScript: custom update model for Connectors.update to fix JS SDK generation failures
+@doc("The updatable properties of the Storage Connector.")
+model ConnectorUpdateProperties {
+  @doc("State - Active or Inactive.")
+  state?: StorageConnectorState;
+
+  @doc("Arbitrary description of this Storage Connector. Max 250 characters.")
+  @maxLength(250)
+  description?: string;
+
+  @doc("Test connection to backing data source before creating the storage connector.")
+  testConnection?: boolean;
+}
+
+@doc("The type used for update operations of the Storage Connector.")
+model ConnectorUpdate {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @doc("Resource tags.")
+  tags?: Record<string>;
+
+  @doc("The resource-specific properties for this resource.")
+  properties?: ConnectorUpdateProperties;
+}
+
+@@alternateType(Microsoft.Storage.Connectors.update::parameters.properties,
+  ConnectorUpdate,
+  "javascript"
+);
+
+// For JavaScript: custom update model for DataShares.update to fix JS SDK generation failures
+@doc("The updatable properties of the Storage DataShare.")
+model DataShareUpdateProperties {
+  @doc("Arbitrary description of this Data Share. Max 250 characters.")
+  @maxLength(250)
+  description?: string;
+
+  @doc("List of access policies that specify the permission allowed to a managed identity.")
+  @identifiers(#[])
+  accessPolicies?: StorageDataShareAccessPolicy[];
+
+  @doc("List of assets that specify the properties of the shared resources.")
+  @identifiers(#[])
+  assets?: StorageDataShareAsset[];
+}
+
+@doc("The type used for update operations of the Storage DataShare.")
+model DataShareUpdate {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @doc("Resource tags.")
+  tags?: Record<string>;
+
+  @doc("The resource-specific properties for this resource.")
+  properties?: DataShareUpdateProperties;
+}
+
+@@alternateType(Microsoft.Storage.DataShares.update::parameters.properties,
+  DataShareUpdate,
+  "javascript"
 );
