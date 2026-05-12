@@ -43846,11 +43846,21 @@
             "description": "Azure Storage Account connection name to use for generating temporary SAS token"
           },
           "pendingUploadType": {
-            "type": "string",
-            "enum": [
-              "TemporaryBlobReference"
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "BlobReference"
+                ]
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "TemporaryBlobReference"
+                ]
+              }
             ],
-            "description": "TemporaryBlobReference is the only supported type."
+            "description": "The type of pending upload. Use TemporaryBlobReference; BlobReference is deprecated."
           }
         },
         "description": "Represents a request for a pending upload."
@@ -43880,11 +43890,21 @@
             "description": "Version of asset to be created if user did not specify version when initially creating upload"
           },
           "pendingUploadType": {
-            "type": "string",
-            "enum": [
-              "TemporaryBlobReference"
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "BlobReference"
+                ]
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "TemporaryBlobReference"
+                ]
+              }
             ],
-            "description": "TemporaryBlobReference is the only supported type"
+            "description": "The type of pending upload. Use TemporaryBlobReference; BlobReference is deprecated."
           }
         },
         "description": "Represents the response for a pending upload request"
