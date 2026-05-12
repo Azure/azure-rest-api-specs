@@ -1,0 +1,298 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "UpdateDeviceAttributeProperties.json",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL of the JSON Schema document describing the concrete shape of this property bag. Optional\nadvertisement so clients can validate the bag without out-of-band documentation. The service\ndoes not validate or dereference this field — any string is accepted. Suggested value:\n`https://raw.githubusercontent.com/Azure/azure-rest-api-specs/<commit-sha>/specification/deviceregistry/schemas/UpdateDeviceAttributeProperties.json`"
+    },
+    "deviceClassId": {
+      "type": "string",
+      "description": "The device class identifier, calculated by ADU from `agentInfo.compatibilityProperties` and `agentInfo.agentProfile`."
+    },
+    "installedUpdateId": {
+      "$ref": "#/$defs/DeviceUpdateId",
+      "description": "The identifier of the update currently installed on the device."
+    },
+    "agentInfoEtag": {
+      "type": "string",
+      "description": "The entity tag for the reported `agentInfo`."
+    },
+    "agentInfo": {
+      "$ref": "#/$defs/AgentInfo",
+      "description": "Information reported by the device update agent."
+    },
+    "latestUpdateJobInfo": {
+      "$ref": "#/$defs/UpdateJobInfo",
+      "description": "Information about the most recent update job targeting this device."
+    }
+  },
+  "unevaluatedProperties": {},
+  "description": "Properties of the update device attribute, reported by the Azure Device Update agent.",
+  "$defs": {
+    "DeviceUpdateId": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The provider of the update."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the update."
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the update."
+        }
+      },
+      "required": [
+        "provider",
+        "name",
+        "version"
+      ],
+      "description": "A unique identifier for an update referenced by the device update agent."
+    },
+    "AgentInfo": {
+      "type": "object",
+      "properties": {
+        "compatibilityProperties": {
+          "$ref": "#/$defs/RecordString",
+          "description": "Properties used to determine compatibility with available updates."
+        },
+        "agentProfile": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647,
+          "description": "The agent profile identifier."
+        },
+        "agentSdkVersion": {
+          "type": "string",
+          "description": "The version of the agent SDK in use on the device."
+        }
+      },
+      "description": "Information reported by the device update agent."
+    },
+    "UpdateJobInfo": {
+      "type": "object",
+      "properties": {
+        "workflowId": {
+          "type": "string",
+          "description": "The identifier of the update job workflow."
+        },
+        "state": {
+          "$ref": "#/$defs/UpdateJobState",
+          "description": "The current state of the update job."
+        },
+        "updateId": {
+          "$ref": "#/$defs/DeviceUpdateId",
+          "description": "The identifier of the update being applied by the job."
+        },
+        "installResult": {
+          "$ref": "#/$defs/InstallResult",
+          "description": "The result of installing the update on the device, if available."
+        }
+      },
+      "required": [
+        "workflowId",
+        "state",
+        "updateId"
+      ],
+      "description": "Information about an update job targeting a device."
+    },
+    "RecordString": {
+      "type": "object",
+      "properties": {},
+      "unevaluatedProperties": {
+        "type": "string"
+      }
+    },
+    "UpdateJobState": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "string",
+          "const": "Succeeded",
+          "description": "The update job completed successfully."
+        },
+        {
+          "type": "string",
+          "const": "Failed",
+          "description": "The update job failed."
+        },
+        {
+          "type": "string",
+          "const": "InProgress",
+          "description": "The update job is in progress."
+        },
+        {
+          "type": "string",
+          "const": "Canceled",
+          "description": "The update job was canceled."
+        }
+      ],
+      "description": "The state of an update job on a device."
+    },
+    "InstallResult": {
+      "type": "object",
+      "properties": {
+        "outcome": {
+          "$ref": "#/$defs/InstallResultOutcome",
+          "description": "Authoritative terminal outcome of the update attempt."
+        },
+        "failureOrigin": {
+          "$ref": "#/$defs/InstallResultFailureOrigin",
+          "description": "Best-effort hint identifying which subsystem produced the failure. Value is `NOT_APPLICABLE` for successful install."
+        },
+        "resultCode": {
+          "type": "string",
+          "description": "Result code representing an install result. 0 or negative failures designate failures, positive values indicate success."
+        },
+        "extendedResultCodes": {
+          "type": "string",
+          "maxLength": 1024,
+          "description": "Comma-separated list of agent ExtendedResultCode (ERC) values for diagnostic correlation. Each value is the unsigned hexadecimal representation of an `int32`."
+        },
+        "resultDetails": {
+          "type": "string",
+          "maxLength": 1024,
+          "description": "Human-readable result details."
+        },
+        "stepResults": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UpdateStepResult"
+          },
+          "maxItems": 10,
+          "description": "Per-step results of the steps defined by the manifest's `instructions.steps`."
+        }
+      },
+      "required": [
+        "outcome",
+        "failureOrigin",
+        "resultCode",
+        "extendedResultCodes"
+      ],
+      "description": "The terminal result of an update attempt as reported by the device update agent."
+    },
+    "InstallResultOutcome": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "string",
+          "const": "SUCCEEDED",
+          "description": "The step or workflow completed successfully."
+        },
+        {
+          "type": "string",
+          "const": "FAILED",
+          "description": "The step or workflow failed."
+        },
+        {
+          "type": "string",
+          "const": "CANCELED",
+          "description": "The step or workflow was canceled before reaching a terminal state."
+        },
+        {
+          "type": "string",
+          "const": "SKIPPED",
+          "description": "The step was skipped because it was not required."
+        }
+      ],
+      "description": "Authoritative terminal outcome of an update attempt or step, as reported by the device update agent."
+    },
+    "InstallResultFailureOrigin": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "string",
+          "const": "ADU_CLOUD_SERVICE",
+          "description": "Failure communicating with the ADU cloud service."
+        },
+        {
+          "type": "string",
+          "const": "ADU_MANAGED_RESOURCE",
+          "description": "Failure related to ADU managed resources. (e.g. CDN download failure)"
+        },
+        {
+          "type": "string",
+          "const": "AGENT_CORE",
+          "description": "Failure in the ADU agent core components (workflow, state machine, manifest parsing, common utilities)."
+        },
+        {
+          "type": "string",
+          "const": "AGENT_EXTENSION",
+          "description": "Failure in a customer-supplied content handler or extension code (content handler, communication provider, log provider, component enumerator). The ADU agent core functioned correctly."
+        },
+        {
+          "type": "string",
+          "const": "AGENT_DEPENDENCY",
+          "description": "Failure in an agent dependency (e.g. local identity service)."
+        },
+        {
+          "type": "string",
+          "const": "DEVICE",
+          "description": "Device-side problem — storage, battery, hardware fault, transient device condition (busy, maintenance mode), permissions."
+        },
+        {
+          "type": "string",
+          "const": "OTHER",
+          "description": "Failure origin does not fit into any of the predefined categories. This is also used as the default failure origin."
+        },
+        {
+          "type": "string",
+          "const": "NOT_APPLICABLE",
+          "description": "This failure origin must be used for non-failed result outcomes."
+        }
+      ],
+      "description": "Best-effort hint identifying which subsystem produced an install failure."
+    },
+    "UpdateStepResult": {
+      "type": "object",
+      "properties": {
+        "updateId": {
+          "$ref": "#/$defs/DeviceUpdateId",
+          "description": "The identifier of the leaf update worked on by this step. ADU resolves this from the manifest's `instructions.steps` (inline step → parent updateId; reference step → child updateId)."
+        },
+        "outcome": {
+          "$ref": "#/$defs/InstallResultOutcome",
+          "description": "Authoritative terminal outcome of this step."
+        },
+        "failureOrigin": {
+          "$ref": "#/$defs/InstallResultFailureOrigin",
+          "description": "Best-effort hint identifying which subsystem produced the failure for this step. Value is `NOT_APPLICABLE` for successful install."
+        },
+        "resultCode": {
+          "type": "string",
+          "description": "Step-level install result code. Same semantics as `InstallResult.resultCode`."
+        },
+        "extendedResultCodes": {
+          "type": "string",
+          "maxLength": 1024,
+          "description": "Step-level extended result codes. Same format as `InstallResult.extendedResultCodes`."
+        },
+        "resultDetails": {
+          "type": "string",
+          "maxLength": 1024,
+          "description": "Human-readable result details for this step."
+        }
+      },
+      "required": [
+        "updateId",
+        "outcome",
+        "failureOrigin",
+        "resultCode",
+        "extendedResultCodes"
+      ],
+      "description": "The terminal result of an individual installation step."
+    }
+  }
+}

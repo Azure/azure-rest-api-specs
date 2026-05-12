@@ -29,6 +29,9 @@ union DeviceAttributeReportedBy {
 
   /** Reported by Azure Device Update. */
   ADU: "Microsoft.DeviceUpdate",
+
+  /** Reported by a customer. */
+  User: "User",
 }
 
 /** A device attribute resource that holds properties managed by cloud services and not sent to the device. */
@@ -62,11 +65,46 @@ model UpdateDeviceAttribute extends DeviceAttribute {
   reportedBy: DeviceAttributeReportedBy.ADU;
 
   /** Properties reported by Azure Device Update. */
-  properties: UpdateDeviceAttributeProperties;
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "`UpdateDeviceAttributeProperties` is an open model (spreads `Record<unknown>`) so it can tolerate future ADU-added fields; `Record<string>` would be semantically wrong because the bag contains nested objects, ints, and arrays."
+  properties?: UpdateDeviceAttributeProperties;
 }
 
+/**
+ * A device attribute reported by a customer or other non-Microsoft caller. The `properties` bag
+ * is opaque — the service stores customer-defined fields verbatim and returns them on read.
+ * The service does not interpret, validate, or constrain the bag's contents.
+ */
+model UserDeviceAttribute extends DeviceAttribute {
+  /** Discriminator value for a customer-reported attribute. */
+  reportedBy: DeviceAttributeReportedBy.User;
+
+  /** Customer-defined opaque property bag. */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "`UserDeviceAttributeProperties` is `Record<unknown>` so customers can supply arbitrary fields including nested objects, ints, and arrays; `Record<string>` would be semantically wrong."
+  properties?: UserDeviceAttributeProperties;
+}
+
+/**
+ * Customer-defined opaque property bag for a `User`-reported device attribute. Any field shape
+ * is accepted; the service stores and returns the bag verbatim without inspection. Customers
+ * who want to advertise a schema for their bag may include their own field (e.g. `$schema`).
+ */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Customer-defined opaque bag; arbitrary value types must be accepted."
+model UserDeviceAttributeProperties is Record<unknown>;
+
 /** Properties of the update device attribute, reported by the Azure Device Update agent. */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Open model: spreads `Record<unknown>` so future ADU-added fields are tolerated without an SDK rebuild."
 model UpdateDeviceAttributeProperties {
+  // Spread Record<unknown> so future ADU-added fields are tolerated without an SDK rebuild.
+  ...Record<unknown>;
+
+  /**
+   * URL of the JSON Schema document describing the concrete shape of this property bag. Optional
+   * advertisement so clients can validate the bag without out-of-band documentation. The service
+   * does not validate or dereference this field — any string is accepted. Suggested value:
+   * `https://raw.githubusercontent.com/Azure/azure-rest-api-specs/<commit-sha>/specification/deviceregistry/schemas/UpdateDeviceAttributeProperties.json`
+   */
+  schema?: url;
+
   /** The device class identifier, calculated by ADU from `agentInfo.compatibilityProperties` and `agentInfo.agentProfile`. */
   deviceClassId?: string;
 

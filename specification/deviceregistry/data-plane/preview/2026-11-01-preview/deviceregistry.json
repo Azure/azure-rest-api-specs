@@ -2387,7 +2387,8 @@
       "type": "string",
       "description": "The cloud service that reports a device attribute.",
       "enum": [
-        "Microsoft.DeviceUpdate"
+        "Microsoft.DeviceUpdate",
+        "User"
       ],
       "x-ms-enum": {
         "name": "DeviceAttributeReportedBy",
@@ -2397,6 +2398,11 @@
             "name": "ADU",
             "value": "Microsoft.DeviceUpdate",
             "description": "Reported by Azure Device Update."
+          },
+          {
+            "name": "User",
+            "value": "User",
+            "description": "Reported by a customer."
           }
         ]
       }
@@ -4231,9 +4237,6 @@
           "description": "Properties reported by Azure Device Update."
         }
       },
-      "required": [
-        "properties"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/DeviceAttribute"
@@ -4261,6 +4264,11 @@
       "type": "object",
       "description": "Properties of the update device attribute, reported by the Azure Device Update agent.",
       "properties": {
+        "schema": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL of the JSON Schema document describing the concrete shape of this property bag. Optional\nadvertisement so clients can validate the bag without out-of-band documentation. The service\ndoes not validate or dereference this field — any string is accepted. Suggested value:\n`https://raw.githubusercontent.com/Azure/azure-rest-api-specs/<commit-sha>/specification/deviceregistry/schemas/UpdateDeviceAttributeProperties.json`"
+        },
         "deviceClassId": {
           "type": "string",
           "description": "The device class identifier, calculated by ADU from `agentInfo.compatibilityProperties` and `agentInfo.agentProfile`."
@@ -4281,12 +4289,18 @@
           "$ref": "#/definitions/UpdateJobInfo",
           "description": "Information about the most recent update job targeting this device."
         }
-      }
+      },
+      "additionalProperties": {}
     },
     "UpdateDeviceAttributePropertiesCreateOrUpdate": {
       "type": "object",
       "description": "Properties of the update device attribute, reported by the Azure Device Update agent.",
       "properties": {
+        "schema": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL of the JSON Schema document describing the concrete shape of this property bag. Optional\nadvertisement so clients can validate the bag without out-of-band documentation. The service\ndoes not validate or dereference this field — any string is accepted. Suggested value:\n`https://raw.githubusercontent.com/Azure/azure-rest-api-specs/<commit-sha>/specification/deviceregistry/schemas/UpdateDeviceAttributeProperties.json`"
+        },
         "deviceClassId": {
           "type": "string",
           "description": "The device class identifier, calculated by ADU from `agentInfo.compatibilityProperties` and `agentInfo.agentProfile`."
@@ -4307,7 +4321,8 @@
           "$ref": "#/definitions/UpdateJobInfoCreateOrUpdate",
           "description": "Information about the most recent update job targeting this device."
         }
-      }
+      },
+      "additionalProperties": {}
     },
     "UpdateId": {
       "type": "object",
@@ -4459,6 +4474,43 @@
         "resultCode",
         "extendedResultCodes"
       ]
+    },
+    "UserDeviceAttribute": {
+      "type": "object",
+      "description": "A device attribute reported by a customer or other non-Microsoft caller. The `properties` bag\nis opaque — the service stores customer-defined fields verbatim and returns them on read.\nThe service does not interpret, validate, or constrain the bag's contents.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UserDeviceAttributeProperties",
+          "description": "Customer-defined opaque property bag."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeviceAttribute"
+        }
+      ],
+      "x-ms-discriminator-value": "User"
+    },
+    "UserDeviceAttributeCreateOrUpdate": {
+      "type": "object",
+      "description": "A device attribute reported by a customer or other non-Microsoft caller. The `properties` bag\nis opaque — the service stores customer-defined fields verbatim and returns them on read.\nThe service does not interpret, validate, or constrain the bag's contents.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UserDeviceAttributeProperties",
+          "description": "Customer-defined opaque property bag."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeviceAttributeCreateOrUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "User"
+    },
+    "UserDeviceAttributeProperties": {
+      "type": "object",
+      "description": "Customer-defined opaque property bag for a `User`-reported device attribute. Any field shape\nis accepted; the service stores and returns the bag verbatim without inspection. Customers\nwho want to advertise a schema for their bag may include their own field (e.g. `$schema`).",
+      "additionalProperties": {}
     }
   },
   "parameters": {
