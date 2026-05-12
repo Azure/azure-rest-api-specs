@@ -60,16 +60,6 @@ model ScoreRecord {
   ...Record<unknown>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Open-ended model for extensible MI token properties."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "MI is a well-known abbreviation for Managed Identity."
-@doc("A managed identity token response.")
-model MITokenInfo {
-  @doc("The managed identity token.")
-  token?: string;
-
-  ...Record<unknown>;
-}
-
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Open-ended model for extensible connectivity result properties."
 @doc("Result of a storage configuration connectivity test.")
 model StorageConfigConnectivityResult {
@@ -236,19 +226,6 @@ model GroupedActions {
 }
 
 // ============================================================================
-// Alert Models
-// ============================================================================
-
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Open-ended model for extensible alert properties."
-@doc("An alert resource.")
-model Alert {
-  @doc("The unique identifier of the alert.")
-  id?: string;
-
-  ...Record<unknown>;
-}
-
-// ============================================================================
 // Analytics Schedule Models
 // ============================================================================
 
@@ -368,88 +345,6 @@ model Control {
   id?: string;
 
   ...Record<unknown>;
-}
-
-// ============================================================================
-// Monitoring Models
-// ============================================================================
-
-@doc("Status of a computing job.")
-union DHComputingJobStatus {
-  @doc("Unknown status.")
-  Unknown: "Unknown",
-
-  @doc("The job has been created.")
-  Created: "Created",
-
-  @doc("The job failed.")
-  Failed: "Failed",
-
-  @doc("The job completed successfully.")
-  Succeeded: "Succeeded",
-
-  @doc("The job is in progress.")
-  InProgress: "InProgress",
-
-  @doc("The job is being cancelled.")
-  Cancelling: "Cancelling",
-
-  @doc("The job was cancelled.")
-  Cancelled: "Cancelled",
-
-  @doc("The job is queued.")
-  Queued: "Queued",
-
-  @doc("The job has been accepted.")
-  Accepted: "Accepted",
-
-  @doc("The job was rejected.")
-  Rejected: "Rejected",
-
-  @doc("The job was skipped.")
-  Skipped: "Skipped",
-
-  @doc("The job is being deleted.")
-  Deleting: "Deleting",
-
-  string,
-}
-
-@doc("Request to query monitoring data for a control.")
-model QueryMonitoringRequest {
-  @doc("The control ID to query monitoring data for.")
-  controlId: string;
-
-  @doc("The start time of the monitoring window.")
-  startTime: utcDateTime;
-
-  @doc("The end time of the monitoring window.")
-  endTime: utcDateTime;
-}
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
-@doc("A computing job wrapper with job details.")
-model DHComputingJobWrapper {
-  @doc("The data quality job ID.")
-  dqJobId?: string;
-
-  @doc("The control ID associated with this job.")
-  controlId?: string;
-
-  @doc("The schedule run ID.")
-  scheduleRunId?: string;
-
-  @doc("The time the job was created.")
-  createTime?: utcDateTime;
-
-  @doc("The time the job started.")
-  startTime?: utcDateTime;
-
-  @doc("The time the job ended.")
-  endTime?: utcDateTime;
-
-  @doc("The current status of the job.")
-  status?: DHComputingJobStatus;
 }
 
 // ============================================================================
@@ -636,49 +531,4 @@ model StatusPalette {
   ...Record<unknown>;
 }
 
-// ============================================================================
-// Synapse Query Models
-// ============================================================================
 
-@doc("Request to execute an ad-hoc Synapse Serverless SQL query.")
-model ExecuteSynapseQueryRequestPayload {
-  @doc("The SQL query to execute.")
-  query: string;
-
-  @doc("Whether the query is Base64 encoded.")
-  isBase64Encoded?: boolean;
-
-  @doc("Maximum number of rows to return.")
-  maxRows?: int32 = 100;
-
-  @doc("Connection timeout in seconds.")
-  connectTimeoutSeconds?: int32 = 30;
-
-  @doc("Command execution timeout in seconds.")
-  commandTimeoutSeconds?: int32 = 120;
-}
-
-@doc("Response from a Synapse query execution.")
-model SynapseQueryResultResponse {
-  @doc("The column names in the result set.")
-  columns: string[];
-
-  @doc("The result rows, each as a dictionary of column name to value.")
-  rows: Record<unknown>[];
-
-  @doc("Total number of rows returned.")
-  rowCount: int32;
-
-  @doc("Whether the result set was truncated.")
-  truncated: boolean;
-}
-
-// ============================================================================
-// Tips Models
-// ============================================================================
-
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Open-ended model for extensible tip entity properties."
-@doc("A tip entity.")
-model TipEntity {
-  ...Record<unknown>;
-}

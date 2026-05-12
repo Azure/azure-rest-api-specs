@@ -672,217 +672,6 @@
         }
       }
     },
-    "/controls/alerts": {
-      "get": {
-        "operationId": "Alerts_List",
-        "description": "List all alerts.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/AlertListResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Alerts_List": {
-            "$ref": "./examples/Alerts_List_Gen.json"
-          }
-        }
-      },
-      "post": {
-        "operationId": "Alerts_Create",
-        "description": "Create a new alert.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Alert"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/Alert"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Alerts_Create": {
-            "$ref": "./examples/Alerts_Create_Gen.json"
-          }
-        }
-      }
-    },
-    "/controls/alerts/{id}": {
-      "get": {
-        "operationId": "Alerts_Get",
-        "description": "Get an alert by its unique identifier.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "The unique identifier of the alert.",
-            "required": true,
-            "type": "string",
-            "maxLength": 256
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Alert"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Alerts_Get": {
-            "$ref": "./examples/Alerts_Get_Gen.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "Alerts_Update",
-        "description": "Update an alert by its unique identifier.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "The unique identifier of the alert.",
-            "required": true,
-            "type": "string",
-            "maxLength": 256
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Alert"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Alert"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Alerts_Update": {
-            "$ref": "./examples/Alerts_Update_Gen.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "Alerts_Delete",
-        "description": "Delete an alert by its unique identifier.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "The unique identifier of the alert.",
-            "required": true,
-            "type": "string",
-            "maxLength": 256
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Alerts_Delete": {
-            "$ref": "./examples/Alerts_Delete_Gen.json"
-          }
-        }
-      }
-    },
     "/controls/assessments": {
       "get": {
         "operationId": "Assessments_List",
@@ -915,48 +704,6 @@
         "x-ms-examples": {
           "Assessments_List": {
             "$ref": "./examples/Assessments_List_Gen.json"
-          }
-        }
-      },
-      "post": {
-        "operationId": "Assessments_Create",
-        "description": "Create a new assessment.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Assessment"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/Assessment"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Assessments_Create": {
-            "$ref": "./examples/Assessments_Create_Gen.json"
           }
         }
       }
@@ -1053,45 +800,6 @@
             "$ref": "./examples/Assessments_Update_Gen.json"
           }
         }
-      },
-      "delete": {
-        "operationId": "Assessments_Delete",
-        "description": "Delete an assessment by its unique identifier.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "The unique identifier of the assessment.",
-            "required": true,
-            "type": "string",
-            "maxLength": 256
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Assessments_Delete": {
-            "$ref": "./examples/Assessments_Delete_Gen.json"
-          }
-        }
       }
     },
     "/controls/assessments/{id}/reset": {
@@ -1134,50 +842,6 @@
         "x-ms-examples": {
           "Assessments_Reset": {
             "$ref": "./examples/Assessments_Reset_Gen.json"
-          }
-        }
-      }
-    },
-    "/controls/monitoring/query": {
-      "post": {
-        "operationId": "Monitoring_Query",
-        "description": "Query monitoring data for controls.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/QueryMonitoringRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/MonitoringQueryResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Monitoring_Query": {
-            "$ref": "./examples/Monitoring_Query_Gen.json"
           }
         }
       }
@@ -1333,116 +997,6 @@
         "x-ms-examples": {
           "Schedules_Trigger": {
             "$ref": "./examples/Schedules_Trigger_Gen.json"
-          }
-        }
-      }
-    },
-    "/controls/scores": {
-      "get": {
-        "operationId": "ControlScores_List",
-        "description": "List all governance scores (alias for /scores).",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ScoreListResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ControlScores_List": {
-            "$ref": "./examples/ControlScores_List_Gen.json"
-          }
-        }
-      }
-    },
-    "/controls/scores/query": {
-      "post": {
-        "operationId": "ControlScores_Query",
-        "description": "Query scores via /controls/scores/query (alias for /scores/query).",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "type",
-            "in": "query",
-            "description": "Aggregation type: 'ControlNode' for individual controls, 'ControlGroup' for control groups.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "ControlNode",
-              "ControlGroup"
-            ],
-            "x-ms-enum": {
-              "name": "ScoreQueryType",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "ControlNode",
-                  "value": "ControlNode",
-                  "description": "Aggregate by individual control."
-                },
-                {
-                  "name": "ControlGroup",
-                  "value": "ControlGroup",
-                  "description": "Aggregate by control group."
-                }
-              ]
-            }
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/QueryScoresRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ScoreRecord"
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ControlScores_Query": {
-            "$ref": "./examples/ControlScores_Query_Gen.json"
           }
         }
       }
@@ -1658,42 +1212,6 @@
         }
       }
     },
-    "/scores": {
-      "get": {
-        "operationId": "Scores_List",
-        "description": "List all governance scores.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ScoreListResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Scores_List": {
-            "$ref": "./examples/Scores_List_Gen.json"
-          }
-        }
-      }
-    },
     "/scores/query": {
       "post": {
         "operationId": "Scores_Query",
@@ -1764,50 +1282,6 @@
         "x-ms-examples": {
           "Scores_Query": {
             "$ref": "./examples/Scores_Query_Gen.json"
-          }
-        }
-      }
-    },
-    "/settings/executeSynapseQuery": {
-      "post": {
-        "operationId": "SynapseQuery_Execute",
-        "description": "Execute an ad-hoc Synapse Serverless SQL query.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ExecuteSynapseQueryRequestPayload"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/SynapseQueryResultResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SynapseQuery_Execute": {
-            "$ref": "./examples/SynapseQuery_Execute_Gen.json"
           }
         }
       }
@@ -2033,112 +1507,6 @@
           }
         }
       }
-    },
-    "/settings/storageConfig/mitoken": {
-      "get": {
-        "operationId": "Settings_GetMIToken",
-        "description": "Get a managed identity token for storage access.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/MITokenInfo"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Settings_GetMIToken": {
-            "$ref": "./examples/Settings_GetMIToken_Gen.json"
-          }
-        }
-      }
-    },
-    "/tips/{containerName}": {
-      "get": {
-        "operationId": "Tips_GetEntities",
-        "description": "Get tip entities from a container.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "containerName",
-            "in": "path",
-            "description": "The name of the tips container.",
-            "required": true,
-            "type": "string",
-            "maxLength": 256
-          },
-          {
-            "name": "entityId",
-            "in": "query",
-            "description": "Filter by entity ID.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "entityName",
-            "in": "query",
-            "description": "Filter by entity name.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "top",
-            "in": "query",
-            "description": "Maximum number of results to return. Default is 50.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 50
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/TipEntity"
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Tips_GetEntities": {
-            "$ref": "./examples/Tips_GetEntities_Gen.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -2294,43 +1662,6 @@
           "description": "The collection of items.",
           "items": {
             "$ref": "#/definitions/Action"
-          }
-        },
-        "count": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The total count of items."
-        },
-        "continuationToken": {
-          "type": "string",
-          "description": "Continuation token for the next page of results."
-        }
-      },
-      "required": [
-        "value",
-        "count"
-      ]
-    },
-    "Alert": {
-      "type": "object",
-      "description": "An alert resource.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The unique identifier of the alert."
-        }
-      },
-      "additionalProperties": {}
-    },
-    "AlertListResponse": {
-      "type": "object",
-      "description": "Paged collection of alert results.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The collection of items.",
-          "items": {
-            "$ref": "#/definitions/Alert"
           }
         },
         "count": {
@@ -2603,127 +1934,6 @@
         "startTime"
       ]
     },
-    "DHComputingJobStatus": {
-      "type": "string",
-      "description": "Status of a computing job.",
-      "enum": [
-        "Unknown",
-        "Created",
-        "Failed",
-        "Succeeded",
-        "InProgress",
-        "Cancelling",
-        "Cancelled",
-        "Queued",
-        "Accepted",
-        "Rejected",
-        "Skipped",
-        "Deleting"
-      ],
-      "x-ms-enum": {
-        "name": "DHComputingJobStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Unknown",
-            "value": "Unknown",
-            "description": "Unknown status."
-          },
-          {
-            "name": "Created",
-            "value": "Created",
-            "description": "The job has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "The job failed."
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "The job completed successfully."
-          },
-          {
-            "name": "InProgress",
-            "value": "InProgress",
-            "description": "The job is in progress."
-          },
-          {
-            "name": "Cancelling",
-            "value": "Cancelling",
-            "description": "The job is being cancelled."
-          },
-          {
-            "name": "Cancelled",
-            "value": "Cancelled",
-            "description": "The job was cancelled."
-          },
-          {
-            "name": "Queued",
-            "value": "Queued",
-            "description": "The job is queued."
-          },
-          {
-            "name": "Accepted",
-            "value": "Accepted",
-            "description": "The job has been accepted."
-          },
-          {
-            "name": "Rejected",
-            "value": "Rejected",
-            "description": "The job was rejected."
-          },
-          {
-            "name": "Skipped",
-            "value": "Skipped",
-            "description": "The job was skipped."
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "The job is being deleted."
-          }
-        ]
-      }
-    },
-    "DHComputingJobWrapper": {
-      "type": "object",
-      "description": "A computing job wrapper with job details.",
-      "properties": {
-        "dqJobId": {
-          "type": "string",
-          "description": "The data quality job ID."
-        },
-        "controlId": {
-          "type": "string",
-          "description": "The control ID associated with this job."
-        },
-        "scheduleRunId": {
-          "type": "string",
-          "description": "The schedule run ID."
-        },
-        "createTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time the job was created."
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time the job started."
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time the job ended."
-        },
-        "status": {
-          "$ref": "#/definitions/DHComputingJobStatus",
-          "description": "The current status of the job."
-        }
-      }
-    },
     "DHScheduleState": {
       "type": "string",
       "description": "State of a schedule.",
@@ -2771,41 +1981,6 @@
           }
         ]
       }
-    },
-    "ExecuteSynapseQueryRequestPayload": {
-      "type": "object",
-      "description": "Request to execute an ad-hoc Synapse Serverless SQL query.",
-      "properties": {
-        "query": {
-          "type": "string",
-          "description": "The SQL query to execute."
-        },
-        "isBase64Encoded": {
-          "type": "boolean",
-          "description": "Whether the query is Base64 encoded."
-        },
-        "maxRows": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Maximum number of rows to return.",
-          "default": 100
-        },
-        "connectTimeoutSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Connection timeout in seconds.",
-          "default": 30
-        },
-        "commandTimeoutSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Command execution timeout in seconds.",
-          "default": 120
-        }
-      },
-      "required": [
-        "query"
-      ]
     },
     "FacetRequestObject": {
       "type": "object",
@@ -2872,17 +2047,6 @@
         }
       }
     },
-    "MITokenInfo": {
-      "type": "object",
-      "description": "A managed identity token response.",
-      "properties": {
-        "token": {
-          "type": "string",
-          "description": "The managed identity token."
-        }
-      },
-      "additionalProperties": {}
-    },
     "ManagedPrivateEndpointExistsResponse": {
       "type": "object",
       "description": "Response indicating whether a managed private endpoint exists.",
@@ -2921,32 +2085,6 @@
       "required": [
         "targetResourceId",
         "dataSourceType"
-      ]
-    },
-    "MonitoringQueryResponse": {
-      "type": "object",
-      "description": "Paged collection of monitoring job results.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The collection of items.",
-          "items": {
-            "$ref": "#/definitions/DHComputingJobWrapper"
-          }
-        },
-        "count": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The total count of items."
-        },
-        "continuationToken": {
-          "type": "string",
-          "description": "Continuation token for the next page of results."
-        }
-      },
-      "required": [
-        "value",
-        "count"
       ]
     },
     "NetworkProperties": {
@@ -2992,31 +2130,6 @@
           "description": "The order direction: 'asc' or 'desc'."
         }
       }
-    },
-    "QueryMonitoringRequest": {
-      "type": "object",
-      "description": "Request to query monitoring data for a control.",
-      "properties": {
-        "controlId": {
-          "type": "string",
-          "description": "The control ID to query monitoring data for."
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The start time of the monitoring window."
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The end time of the monitoring window."
-        }
-      },
-      "required": [
-        "controlId",
-        "startTime",
-        "endTime"
-      ]
     },
     "QueryScoresRequest": {
       "type": "object",
@@ -3083,32 +2196,6 @@
       "description": "A schedule resource.",
       "additionalProperties": {}
     },
-    "ScoreListResponse": {
-      "type": "object",
-      "description": "Paged collection of score results.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The collection of items.",
-          "items": {
-            "$ref": "#/definitions/ScoreRecord"
-          }
-        },
-        "count": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The total count of items."
-        },
-        "continuationToken": {
-          "type": "string",
-          "description": "Continuation token for the next page of results."
-        }
-      },
-      "required": [
-        "value",
-        "count"
-      ]
-    },
     "ScoreRecord": {
       "type": "object",
       "description": "A score record.",
@@ -3167,42 +2254,6 @@
       },
       "additionalProperties": {}
     },
-    "SynapseQueryResultResponse": {
-      "type": "object",
-      "description": "Response from a Synapse query execution.",
-      "properties": {
-        "columns": {
-          "type": "array",
-          "description": "The column names in the result set.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "rows": {
-          "type": "array",
-          "description": "The result rows, each as a dictionary of column name to value.",
-          "items": {
-            "type": "object",
-            "additionalProperties": {}
-          }
-        },
-        "rowCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Total number of rows returned."
-        },
-        "truncated": {
-          "type": "boolean",
-          "description": "Whether the result set was truncated."
-        }
-      },
-      "required": [
-        "columns",
-        "rows",
-        "rowCount",
-        "truncated"
-      ]
-    },
     "SystemData": {
       "type": "object",
       "description": "System metadata for a resource.",
@@ -3217,11 +2268,6 @@
           "description": "The timestamp when the resource was created."
         }
       }
-    },
-    "TipEntity": {
-      "type": "object",
-      "description": "A tip entity.",
-      "additionalProperties": {}
     },
     "TriggerScheduleRequest": {
       "type": "object",

@@ -87,64 +87,6 @@ interface Actions {
 }
 
 // ============================================================================
-// Alerts
-// ============================================================================
-
-@doc("Operations for managing governance alerts.")
-interface Alerts {
-  @doc("List all alerts.")
-  @route("/controls/alerts")
-  @get
-  list(...ApiVersionParameter): AlertListResponse | ErrorResponse;
-
-  @doc("Create a new alert.")
-  @route("/controls/alerts")
-  @post
-  create(
-    ...ApiVersionParameter,
-    @body body: Alert,
-  ): Created201Response<Alert> | ErrorResponse;
-
-  @doc("Get an alert by its unique identifier.")
-  @route("/controls/alerts/{id}")
-  @get
-  get(
-    ...ApiVersionParameter,
-
-    @doc("The unique identifier of the alert.")
-    @path
-    @maxLength(256)
-    id: string,
-  ): AlertResponse | ErrorResponse;
-
-  @doc("Update an alert by its unique identifier.")
-  @route("/controls/alerts/{id}")
-  @put
-  update(
-    ...ApiVersionParameter,
-
-    @doc("The unique identifier of the alert.")
-    @path
-    @maxLength(256)
-    id: string,
-
-    @body body: Alert,
-  ): AlertResponse | ErrorResponse;
-
-  @doc("Delete an alert by its unique identifier.")
-  @route("/controls/alerts/{id}")
-  @delete
-  delete(
-    ...ApiVersionParameter,
-
-    @doc("The unique identifier of the alert.")
-    @path
-    @maxLength(256)
-    id: string,
-  ): void | ErrorResponse;
-}
-
-// ============================================================================
 // Analytics Schedule
 // ============================================================================
 
@@ -180,14 +122,6 @@ interface Assessments {
   @get
   list(...ApiVersionParameter): AssessmentListResponse | ErrorResponse;
 
-  @doc("Create a new assessment.")
-  @route("/controls/assessments")
-  @post
-  create(
-    ...ApiVersionParameter,
-    @body body: Assessment,
-  ): Created201Response<Assessment> | ErrorResponse;
-
   @doc("Get an assessment by its unique identifier.")
   @route("/controls/assessments/{id}")
   @get
@@ -213,18 +147,6 @@ interface Assessments {
 
     @body body: Assessment,
   ): AssessmentResponse | ErrorResponse;
-
-  @doc("Delete an assessment by its unique identifier.")
-  @route("/controls/assessments/{id}")
-  @delete
-  delete(
-    ...ApiVersionParameter,
-
-    @doc("The unique identifier of the assessment.")
-    @path
-    @maxLength(256)
-    id: string,
-  ): void | ErrorResponse;
 
   @doc("Reset an assessment by its unique identifier.")
   @route("/controls/assessments/{id}/reset")
@@ -324,21 +246,6 @@ interface Controls {
 }
 
 // ============================================================================
-// Monitoring
-// ============================================================================
-
-@doc("Operations for querying control monitoring data.")
-interface Monitoring {
-  @doc("Query monitoring data for controls.")
-  @route("/controls/monitoring/query")
-  @post
-  query(
-    ...ApiVersionParameter,
-    @body body: QueryMonitoringRequest,
-  ): MonitoringQueryResponse | ErrorResponse;
-}
-
-// ============================================================================
 // Schedules
 // ============================================================================
 
@@ -383,34 +290,8 @@ union ScoreQueryType {
 
 @doc("Operations for querying governance scores.")
 interface Scores {
-  @doc("List all governance scores.")
-  @route("/scores")
-  @get
-  list(...ApiVersionParameter): ScoreListResponse | ErrorResponse;
-
   @doc("Query scores aggregated by control or control group. Use 'type=ControlNode' with controlIds in body for individual controls, or 'type=ControlGroup' with controlGroupIds in body for control groups.")
   @route("/scores/query")
-  @post
-  query(
-    ...ApiVersionParameter,
-
-    @doc("Aggregation type: 'ControlNode' for individual controls, 'ControlGroup' for control groups.")
-    @query
-    type: ScoreQueryType,
-
-    @body body: QueryScoresRequest,
-  ): ScoreQueryResponse | ErrorResponse;
-}
-
-@doc("Alias operations for querying governance scores via /controls/scores path.")
-interface ControlScores {
-  @doc("List all governance scores (alias for /scores).")
-  @route("/controls/scores")
-  @get
-  list(...ApiVersionParameter): ScoreListResponse | ErrorResponse;
-
-  @doc("Query scores via /controls/scores/query (alias for /scores/query).")
-  @route("/controls/scores/query")
   @post
   query(
     ...ApiVersionParameter,
@@ -443,12 +324,6 @@ interface Settings {
     ...ApiVersionParameter,
     @body body: StorageConfig,
   ): Created201Response<StorageConfig> | ErrorResponse;
-
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "MI is a well-known abbreviation for Managed Identity."
-  @doc("Get a managed identity token for storage access.")
-  @route("/settings/storageConfig/mitoken")
-  @get
-  getMIToken(...ApiVersionParameter): MITokenResponse | ErrorResponse;
 
   @doc("Test storage configuration connectivity.")
   @route("/settings/storageConfig/connectivity")
@@ -537,52 +412,6 @@ interface StatusPalettes {
 }
 
 // ============================================================================
-// Synapse Query
-// ============================================================================
-
-@doc("Operations for executing ad-hoc Synapse SQL queries.")
-interface SynapseQuery {
-  @doc("Execute an ad-hoc Synapse Serverless SQL query.")
-  @route("/settings/executeSynapseQuery")
-  @post
-  execute(
-    ...ApiVersionParameter,
-    @body body: ExecuteSynapseQueryRequestPayload,
-  ): SynapseQueryResultResponse | ErrorResponse;
-}
-
-// ============================================================================
-// Tips
-// ============================================================================
-
-@doc("Operations for retrieving tip entities.")
-interface Tips {
-  @doc("Get tip entities from a container.")
-  @route("/tips/{containerName}")
-  @get
-  getEntities(
-    ...ApiVersionParameter,
-
-    @doc("The name of the tips container.")
-    @path
-    @maxLength(256)
-    containerName: string,
-
-    @doc("Filter by entity ID.")
-    @query
-    entityId?: string,
-
-    @doc("Filter by entity name.")
-    @query
-    entityName?: string,
-
-    @doc("Maximum number of results to return. Default is 50.")
-    @query
-    top?: int32 = 50,
-  ): TipEntitiesResponse | ErrorResponse;
-}
-
-// ============================================================================
 // Response Type Models (named to avoid anonymous types in swagger)
 // ============================================================================
 
@@ -594,14 +423,6 @@ model ActionQueryResponse {
 
 alias GroupedActionsResponse = GroupedActions[];
 alias ActionResponse = Action;
-
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Open-ended paged results for alerts."
-@doc("Paged collection of alert results.")
-model AlertListResponse {
-  ...PagedResults<Alert>;
-}
-
-alias AlertResponse = Alert;
 alias AnalyticsScheduleResponse = DHAnalyticsScheduleRequest;
 alias AnalyticsJobLogsResponse = DEHAnalyticsJobLogs[];
 
@@ -621,23 +442,11 @@ model ControlListResponse {
 
 alias ControlResponse = Control;
 
-@doc("Paged collection of monitoring job results.")
-model MonitoringQueryResponse {
-  ...PagedResults<DHComputingJobWrapper>;
-}
-
 alias ScheduleResponse = Schedule;
 alias ScheduleTriggerResponse = TriggerScheduleResponse;
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Open-ended paged results for scores."
-@doc("Paged collection of score results.")
-model ScoreListResponse {
-  ...PagedResults<ScoreRecord>;
-}
-
 alias ScoreQueryResponse = ScoreRecord[];
 alias StorageConfigResponse = StorageConfig;
-alias MITokenResponse = MITokenInfo;
 alias StorageConfigConnectivityResponse = StorageConfigConnectivityResult;
 
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Open-ended paged results for status palettes."
@@ -647,4 +456,3 @@ model StatusPaletteListResponse {
 }
 
 alias StatusPaletteResponse = StatusPalette;
-alias TipEntitiesResponse = TipEntity[];
