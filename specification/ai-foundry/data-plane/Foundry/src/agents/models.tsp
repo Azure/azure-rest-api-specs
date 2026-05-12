@@ -536,7 +536,7 @@ model ContainerAppAgentDefinition extends AgentDefinition {
   @example("")
   @example("---current")
   @example("--0000001")
-  ingress_subdomain_suffix: string;
+  ingress_subdomain_suffix: string = "";
 }
 
 @doc("A record mapping for a single protocol and its version.")

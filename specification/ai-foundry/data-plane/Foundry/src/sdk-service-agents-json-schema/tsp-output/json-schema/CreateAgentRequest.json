@@ -1,0 +1,4571 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "CreateAgentRequest.json",
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string",
+            "maxLength": 63,
+            "description": "The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.\n- Must start and end with alphanumeric characters,\n- Can contain hyphens in the middle\n- Must not exceed 63 characters."
+        },
+        "metadata": {
+            "$ref": "#/$defs/RecordString",
+            "description": "Set of 16 key-value pairs that can be attached to an object. This can be\nuseful for storing additional information about the object in a structured\nformat, and querying for objects via API or the dashboard.\n\nKeys are strings with a maximum length of 64 characters. Values are strings\nwith a maximum length of 512 characters."
+        },
+        "description": {
+            "type": "string",
+            "maxLength": 512,
+            "description": "A human-readable description of the agent."
+        },
+        "definition": {
+            "$ref": "#/$defs/AgentDefinition",
+            "description": "The agent definition. This can be a workflow, hosted agent, or a simple agent definition."
+        },
+        "blueprint_reference": {
+            "$ref": "#/$defs/AgentBlueprintReference",
+            "description": "The blueprint reference for the agent."
+        },
+        "agent_endpoint": {
+            "$ref": "#/$defs/AgentEndpoint",
+            "description": "An optional endpoint configuration. If not specified, a default endpoint configuration will be set for the agent"
+        },
+        "agent_card": {
+            "$ref": "#/$defs/AgentCard",
+            "description": "Optional agent card for the agent"
+        }
+    },
+    "required": [
+        "name",
+        "definition"
+    ],
+    "$defs": {
+        "RecordString": {
+            "type": "object",
+            "properties": {},
+            "unevaluatedProperties": {
+                "type": "string"
+            }
+        },
+        "AgentDefinition": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "$ref": "#/$defs/AgentKind"
+                },
+                "rai_config": {
+                    "$ref": "#/$defs/RaiConfig",
+                    "description": "Configuration for Responsible AI (RAI) content filtering and safety features."
+                }
+            },
+            "required": [
+                "kind"
+            ],
+            "oneOf": [
+                {
+                    "$ref": "#/$defs/HostedAgentDefinition"
+                },
+                {
+                    "$ref": "#/$defs/PromptAgentDefinition"
+                },
+                {
+                    "$ref": "#/$defs/WorkflowAgentDefinition"
+                },
+                {
+                    "$ref": "#/$defs/ContainerAppAgentDefinition"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "kind": {
+                            "type": "string",
+                            "not": {
+                                "enum": [
+                                    "hosted",
+                                    "prompt",
+                                    "workflow",
+                                    "container_app"
+                                ]
+                            }
+                        },
+                        "rai_config": {
+                            "$ref": "#/$defs/RaiConfig",
+                            "description": "Configuration for Responsible AI (RAI) content filtering and safety features."
+                        }
+                    },
+                    "required": [
+                        "kind"
+                    ]
+                }
+            ]
+        },
+        "AgentBlueprintReference": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "$ref": "#/$defs/AgentBlueprintReferenceType"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "oneOf": [
+                {
+                    "$ref": "#/$defs/ManagedAgentIdentityBlueprintReference"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "not": {
+                                "enum": [
+                                    "ManagedAgentIdentityBlueprint"
+                                ]
+                            }
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                }
+            ]
+        },
+        "AgentEndpoint": {
+            "type": "object",
+            "properties": {
+                "version_selector": {
+                    "$ref": "#/$defs/VersionSelector",
+                    "description": "The version selector of the agent endpoint determines how traffic is routed to different versions of the agent."
+                },
+                "protocols": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/AgentEndpointProtocol"
+                    },
+                    "description": "The protocols that the agent supports"
+                },
+                "authorization_schemes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/AgentEndpointAuthorizationScheme"
+                    },
+                    "description": "The authorization schemes supported by the agent endpoint"
+                }
+            }
+        },
+        "AgentCard": {
+            "type": "object",
+            "properties": {
+                "version": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 32,
+                    "description": "The version of the agent card."
+                },
+                "description": {
+                    "type": "string",
+                    "maxLength": 2048,
+                    "description": "The description of the agent card."
+                },
+                "skills": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/AgentCardSkill"
+                    },
+                    "maxItems": 16,
+                    "description": "The set of skills that an agent can perform."
+                }
+            },
+            "required": [
+                "version",
+                "skills"
+            ]
+        },
+        "HostedAgentDefinition": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "const": "hosted"
+                },
+                "rai_config": {
+                    "$ref": "#/$defs/RaiConfig",
+                    "description": "Configuration for Responsible AI (RAI) content filtering and safety features."
+                },
+                "tools": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/Tool"
+                    },
+                    "description": "An array of tools the hosted agent's model may call while generating a response. You\ncan specify which tool to use by setting the `tool_choice` parameter."
+                },
+                "container_protocol_versions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/ProtocolVersionRecord"
+                    },
+                    "examples": [
+                        [
+                            {
+                                "protocol": "responses",
+                                "version": "v0.1.1"
+                            },
+                            {
+                                "protocol": "invocations",
+                                "version": "v0.0.1"
+                            },
+                            {
+                                "protocol": "a2a",
+                                "version": "v0.3.0"
+                            }
+                        ]
+                    ],
+                    "description": "The protocols that the agent supports for ingress communication of the containers."
+                },
+                "cpu": {
+                    "type": "string",
+                    "examples": [
+                        "0.25"
+                    ],
+                    "description": "The CPU configuration for the hosted agent."
+                },
+                "memory": {
+                    "type": "string",
+                    "examples": [
+                        "0.5Gi"
+                    ],
+                    "description": "The memory configuration for the hosted agent."
+                },
+                "environment_variables": {
+                    "$ref": "#/$defs/RecordString",
+                    "examples": [
+                        {
+                            "name": "LOG_LEVEL",
+                            "value": "debug"
+                        }
+                    ],
+                    "description": "Environment variables to set in the hosted agent container."
+                },
+                "image": {
+                    "type": "string",
+                    "examples": [
+                        "my-registry.azurecr.io/my-hosted-agent:latest"
+                    ],
+                    "description": "The image ID for the agent, applicable to image-based hosted agents."
+                },
+                "container_configuration": {
+                    "$ref": "#/$defs/ContainerConfiguration",
+                    "description": "Container-based deployment configuration. Provide this for image-based deployments. Mutually exclusive with code_configuration — the service validates that exactly one is set."
+                },
+                "protocol_versions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/ProtocolVersionRecord"
+                    },
+                    "examples": [
+                        [
+                            {
+                                "protocol": "responses",
+                                "version": "v0.1.1"
+                            },
+                            {
+                                "protocol": "a2a",
+                                "version": "v0.3.0"
+                            }
+                        ]
+                    ],
+                    "description": "The protocols that the agent supports for ingress communication."
+                },
+                "code_configuration": {
+                    "$ref": "#/$defs/CodeConfiguration",
+                    "description": "Code-based deployment configuration. Provide this for code-based deployments. Mutually exclusive with container_configuration — the service validates that exactly one is set."
+                },
+                "telemetry_config": {
+                    "$ref": "#/$defs/TelemetryConfig",
+                    "description": "Optional customer-supplied telemetry configuration for exporting container logs, traces, and metrics."
+                }
+            },
+            "required": [
+                "kind",
+                "cpu",
+                "memory"
+            ],
+            "description": "The hosted agent definition."
+        },
+        "PromptAgentDefinition": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "const": "prompt"
+                },
+                "rai_config": {
+                    "$ref": "#/$defs/RaiConfig",
+                    "description": "Configuration for Responsible AI (RAI) content filtering and safety features."
+                },
+                "model": {
+                    "type": "string",
+                    "description": "The model deployment to use for this agent."
+                },
+                "instructions": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "A system (or developer) message inserted into the model's context."
+                },
+                "temperature": {
+                    "anyOf": [
+                        {
+                            "type": "number"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": 1,
+                    "minimum": 0,
+                    "maximum": 2,
+                    "description": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nWe generally recommend altering this or `top_p` but not both."
+                },
+                "top_p": {
+                    "anyOf": [
+                        {
+                            "type": "number"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": 1,
+                    "minimum": 0,
+                    "maximum": 1,
+                    "description": "An alternative to sampling with temperature, called nucleus sampling,\nwhere the model considers the results of the tokens with top_p probability\nmass. So 0.1 means only the tokens comprising the top 10% probability mass\nare considered.\n\nWe generally recommend altering this or `temperature` but not both."
+                },
+                "reasoning": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Reasoning"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "tools": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/Tool"
+                    },
+                    "description": "An array of tools the model may call while generating a response. You\ncan specify which tool to use by setting the `tool_choice` parameter."
+                },
+                "tool_choice": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "$ref": "#/$defs/ToolChoiceParam"
+                        }
+                    ],
+                    "description": "How the model should select which tool (or tools) to use when generating a response.\nSee the `tools` parameter to see how to specify which tools the model can call."
+                },
+                "text": {
+                    "$ref": "#/$defs/PromptAgentDefinitionTextOptions",
+                    "description": "Configuration options for a text response from the model. Can be plain text or structured JSON data."
+                },
+                "structured_inputs": {
+                    "$ref": "#/$defs/RecordStructuredInputDefinition",
+                    "description": "Set of structured inputs that can participate in prompt template substitution or tool argument bindings."
+                }
+            },
+            "required": [
+                "kind",
+                "model"
+            ],
+            "description": "The prompt agent definition"
+        },
+        "WorkflowAgentDefinition": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "const": "workflow"
+                },
+                "rai_config": {
+                    "$ref": "#/$defs/RaiConfig",
+                    "description": "Configuration for Responsible AI (RAI) content filtering and safety features."
+                },
+                "workflow": {
+                    "type": "string",
+                    "description": "The CSDL YAML definition of the workflow."
+                }
+            },
+            "required": [
+                "kind"
+            ],
+            "description": "The workflow agent definition."
+        },
+        "ContainerAppAgentDefinition": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "const": "container_app"
+                },
+                "rai_config": {
+                    "$ref": "#/$defs/RaiConfig",
+                    "description": "Configuration for Responsible AI (RAI) content filtering and safety features."
+                },
+                "container_protocol_versions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/ProtocolVersionRecord"
+                    },
+                    "examples": [
+                        [
+                            {
+                                "protocol": "responses",
+                                "version": "v0.1.1"
+                            },
+                            {
+                                "protocol": "a2a",
+                                "version": "v0.3.0"
+                            }
+                        ]
+                    ],
+                    "description": "The protocols that the agent supports for ingress communication of the containers."
+                },
+                "container_app_resource_id": {
+                    "type": "string",
+                    "description": "The resource ID of the Azure Container App that hosts this agent. Not mutable across versions."
+                },
+                "ingress_subdomain_suffix": {
+                    "type": "string",
+                    "default": "",
+                    "examples": [
+                        "--0000001",
+                        "---current",
+                        ""
+                    ],
+                    "description": "The suffix to apply to the app subdomain when sending ingress to the agent. This can be a label (e.g., '---current'), a specific revision (e.g., '--0000001'), or empty to use the default endpoint for the container app."
+                }
+            },
+            "required": [
+                "kind",
+                "container_protocol_versions",
+                "container_app_resource_id",
+                "ingress_subdomain_suffix"
+            ],
+            "description": "The container app agent definition."
+        },
+        "RaiConfig": {
+            "type": "object",
+            "properties": {
+                "rai_policy_name": {
+                    "type": "string",
+                    "description": "The name of the RAI policy to apply."
+                }
+            },
+            "required": [
+                "rai_policy_name"
+            ],
+            "description": "Configuration for Responsible AI (RAI) content filtering and safety features."
+        },
+        "AgentKind": {
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "string",
+                    "const": "prompt"
+                },
+                {
+                    "type": "string",
+                    "const": "hosted"
+                },
+                {
+                    "type": "string",
+                    "const": "workflow"
+                },
+                {
+                    "type": "string",
+                    "const": "container_app"
+                }
+            ]
+        },
+        "ManagedAgentIdentityBlueprintReference": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "ManagedAgentIdentityBlueprint"
+                },
+                "blueprint_id": {
+                    "type": "string",
+                    "description": "The ID of the managed blueprint"
+                }
+            },
+            "required": [
+                "type",
+                "blueprint_id"
+            ]
+        },
+        "AgentBlueprintReferenceType": {
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "string",
+                    "const": "ManagedAgentIdentityBlueprint"
+                }
+            ]
+        },
+        "VersionSelector": {
+            "type": "object",
+            "properties": {
+                "version_selection_rules": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/VersionSelectionRule"
+                    }
+                }
+            },
+            "required": [
+                "version_selection_rules"
+            ]
+        },
+        "AgentEndpointProtocol": {
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "string",
+                    "const": "activity"
+                },
+                {
+                    "type": "string",
+                    "const": "responses"
+                },
+                {
+                    "type": "string",
+                    "const": "a2a"
+                },
+                {
+                    "type": "string",
+                    "const": "invocations"
+                }
+            ]
+        },
+        "AgentEndpointAuthorizationScheme": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "$ref": "#/$defs/AgentEndpointAuthorizationSchemeType"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "oneOf": [
+                {
+                    "$ref": "#/$defs/EntraAuthorizationScheme"
+                },
+                {
+                    "$ref": "#/$defs/BotServiceAuthorizationScheme"
+                },
+                {
+                    "$ref": "#/$defs/BotServiceRbacAuthorizationScheme"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "not": {
+                                "enum": [
+                                    "Entra",
+                                    "BotService",
+                                    "BotServiceRbac"
+                                ]
+                            }
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                }
+            ]
+        },
+        "AgentCardSkill": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 64,
+                    "description": "a unique identifier for the skill"
+                },
+                "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128,
+                    "description": "The name of the skill"
+                },
+                "description": {
+                    "type": "string",
+                    "maxLength": 2048,
+                    "description": "A description of the skill"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/AgentCardSkillTag"
+                    },
+                    "maxItems": 5,
+                    "description": "set of tagwords describing classes of capabilities for the skill"
+                },
+                "examples": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/AgentCardSkillExample"
+                    },
+                    "maxItems": 5,
+                    "description": "A list of example scenarios that the skill can perform."
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ]
+        },
+        "Tool": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "$ref": "#/$defs/ToolType"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "oneOf": [
+                {
+                    "$ref": "#/$defs/BingGroundingTool"
+                },
+                {
+                    "$ref": "#/$defs/MicrosoftFabricPreviewTool"
+                },
+                {
+                    "$ref": "#/$defs/SharepointPreviewTool"
+                },
+                {
+                    "$ref": "#/$defs/AzureAISearchTool"
+                },
+                {
+                    "$ref": "#/$defs/OpenApiTool"
+                },
+                {
+                    "$ref": "#/$defs/BingCustomSearchPreviewTool"
+                },
+                {
+                    "$ref": "#/$defs/BrowserAutomationPreviewTool"
+                },
+                {
+                    "$ref": "#/$defs/AzureFunctionTool"
+                },
+                {
+                    "$ref": "#/$defs/CaptureStructuredOutputsTool"
+                },
+                {
+                    "$ref": "#/$defs/A2APreviewTool"
+                },
+                {
+                    "$ref": "#/$defs/WorkIQPreviewTool"
+                },
+                {
+                    "$ref": "#/$defs/MemorySearchPreviewTool"
+                },
+                {
+                    "$ref": "#/$defs/MemorySearchTool"
+                },
+                {
+                    "$ref": "#/$defs/CodeInterpreterTool"
+                },
+                {
+                    "$ref": "#/$defs/FunctionTool"
+                },
+                {
+                    "$ref": "#/$defs/FileSearchTool"
+                },
+                {
+                    "$ref": "#/$defs/ComputerUsePreviewTool"
+                },
+                {
+                    "$ref": "#/$defs/WebSearchTool"
+                },
+                {
+                    "$ref": "#/$defs/MCPTool"
+                },
+                {
+                    "$ref": "#/$defs/ImageGenTool"
+                },
+                {
+                    "$ref": "#/$defs/LocalShellToolParam"
+                },
+                {
+                    "$ref": "#/$defs/FunctionShellToolParam"
+                },
+                {
+                    "$ref": "#/$defs/CustomToolParam"
+                },
+                {
+                    "$ref": "#/$defs/WebSearchPreviewTool"
+                },
+                {
+                    "$ref": "#/$defs/ApplyPatchToolParam"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "not": {
+                                "enum": [
+                                    "bing_grounding",
+                                    "fabric_dataagent_preview",
+                                    "sharepoint_grounding_preview",
+                                    "azure_ai_search",
+                                    "openapi",
+                                    "bing_custom_search_preview",
+                                    "browser_automation_preview",
+                                    "azure_function",
+                                    "capture_structured_outputs",
+                                    "a2a_preview",
+                                    "work_iq_preview",
+                                    "memory_search_preview",
+                                    "memory_search",
+                                    "code_interpreter",
+                                    "function",
+                                    "file_search",
+                                    "computer_use_preview",
+                                    "web_search",
+                                    "mcp",
+                                    "image_generation",
+                                    "local_shell",
+                                    "shell",
+                                    "custom",
+                                    "web_search_preview",
+                                    "apply_patch"
+                                ]
+                            }
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                }
+            ],
+            "description": "A tool that can be used to generate a response."
+        },
+        "ProtocolVersionRecord": {
+            "type": "object",
+            "properties": {
+                "protocol": {
+                    "$ref": "#/$defs/AgentProtocol",
+                    "description": "The protocol type."
+                },
+                "version": {
+                    "type": "string",
+                    "description": "The version string for the protocol, e.g. 'v0.1.1'."
+                }
+            },
+            "required": [
+                "protocol",
+                "version"
+            ],
+            "description": "A record mapping for a single protocol and its version."
+        },
+        "ContainerConfiguration": {
+            "type": "object",
+            "properties": {
+                "image": {
+                    "type": "string",
+                    "examples": [
+                        "my-registry.azurecr.io/my-hosted-agent:latest"
+                    ],
+                    "description": "The container image for the hosted agent."
+                }
+            },
+            "required": [
+                "image"
+            ],
+            "description": "Container-based deployment configuration for a hosted agent."
+        },
+        "CodeConfiguration": {
+            "type": "object",
+            "properties": {
+                "runtime": {
+                    "type": "string",
+                    "description": "The runtime identifier for code execution (e.g., 'python_3_11', 'python_3_12', 'python_3_13')."
+                },
+                "entry_point": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The entry point command and arguments for the code execution."
+                }
+            },
+            "required": [
+                "runtime",
+                "entry_point"
+            ],
+            "description": "Code-based deployment configuration for a hosted agent."
+        },
+        "TelemetryConfig": {
+            "type": "object",
+            "properties": {
+                "endpoints": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/TelemetryEndpoint"
+                    },
+                    "minItems": 1,
+                    "maxItems": 3,
+                    "description": "Customer-supplied telemetry export endpoint configurations."
+                }
+            },
+            "required": [
+                "endpoints"
+            ],
+            "description": "Customer-supplied telemetry configuration for exporting container logs, traces, and metrics."
+        },
+        "Reasoning": {
+            "type": "object",
+            "properties": {
+                "effort": {
+                    "$ref": "#/$defs/ReasoningEffort"
+                },
+                "summary": {
+                    "anyOf": [
+                        {
+                            "type": "string",
+                            "const": "auto"
+                        },
+                        {
+                            "type": "string",
+                            "const": "concise"
+                        },
+                        {
+                            "type": "string",
+                            "const": "detailed"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "generate_summary": {
+                    "anyOf": [
+                        {
+                            "type": "string",
+                            "const": "auto"
+                        },
+                        {
+                            "type": "string",
+                            "const": "concise"
+                        },
+                        {
+                            "type": "string",
+                            "const": "detailed"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                }
+            },
+            "description": "**gpt-5 and o-series models only**\nConfiguration options for\n[reasoning models](https://platform.openai.com/docs/guides/reasoning).",
+            "title": "Reasoning"
+        },
+        "ToolChoiceParam": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "$ref": "#/$defs/ToolChoiceParamType"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "oneOf": [
+                {
+                    "$ref": "#/$defs/ToolChoiceAllowed"
+                },
+                {
+                    "$ref": "#/$defs/ToolChoiceFunction"
+                },
+                {
+                    "$ref": "#/$defs/ToolChoiceMCP"
+                },
+                {
+                    "$ref": "#/$defs/ToolChoiceCustom"
+                },
+                {
+                    "$ref": "#/$defs/SpecificApplyPatchParam"
+                },
+                {
+                    "$ref": "#/$defs/SpecificFunctionShellParam"
+                },
+                {
+                    "$ref": "#/$defs/ToolChoiceFileSearch"
+                },
+                {
+                    "$ref": "#/$defs/ToolChoiceWebSearchPreview"
+                },
+                {
+                    "$ref": "#/$defs/ToolChoiceComputerUsePreview"
+                },
+                {
+                    "$ref": "#/$defs/ToolChoiceWebSearchPreview20250311"
+                },
+                {
+                    "$ref": "#/$defs/ToolChoiceImageGeneration"
+                },
+                {
+                    "$ref": "#/$defs/ToolChoiceCodeInterpreter"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "not": {
+                                "enum": [
+                                    "allowed_tools",
+                                    "function",
+                                    "mcp",
+                                    "custom",
+                                    "apply_patch",
+                                    "shell",
+                                    "file_search",
+                                    "web_search_preview",
+                                    "computer_use_preview",
+                                    "web_search_preview_2025_03_11",
+                                    "image_generation",
+                                    "code_interpreter"
+                                ]
+                            }
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                }
+            ],
+            "description": "How the model should select which tool (or tools) to use when generating\na response. See the `tools` parameter to see how to specify which tools\nthe model can call."
+        },
+        "PromptAgentDefinitionTextOptions": {
+            "type": "object",
+            "properties": {
+                "format": {
+                    "$ref": "#/$defs/TextResponseFormatConfiguration"
+                }
+            },
+            "description": "Configuration options for a text response from the model. Can be plain text or structured JSON data."
+        },
+        "RecordStructuredInputDefinition": {
+            "type": "object",
+            "properties": {},
+            "unevaluatedProperties": {
+                "$ref": "#/$defs/StructuredInputDefinition"
+            }
+        },
+        "VersionSelectionRule": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "$ref": "#/$defs/VersionSelectorType"
+                },
+                "agent_version": {
+                    "type": "string",
+                    "description": "The agent version to route traffic to"
+                }
+            },
+            "required": [
+                "type",
+                "agent_version"
+            ],
+            "oneOf": [
+                {
+                    "$ref": "#/$defs/FixedRatioVersionSelectionRule"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "not": {
+                                "enum": [
+                                    "FixedRatio"
+                                ]
+                            }
+                        },
+                        "agent_version": {
+                            "type": "string",
+                            "description": "The agent version to route traffic to"
+                        }
+                    },
+                    "required": [
+                        "type",
+                        "agent_version"
+                    ]
+                }
+            ]
+        },
+        "EntraAuthorizationScheme": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "Entra"
+                },
+                "isolation_key_source": {
+                    "$ref": "#/$defs/IsolationKeySource"
+                }
+            },
+            "required": [
+                "type",
+                "isolation_key_source"
+            ]
+        },
+        "BotServiceAuthorizationScheme": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "BotService"
+                }
+            },
+            "required": [
+                "type"
+            ]
+        },
+        "BotServiceRbacAuthorizationScheme": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "BotServiceRbac"
+                }
+            },
+            "required": [
+                "type"
+            ]
+        },
+        "AgentEndpointAuthorizationSchemeType": {
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "string",
+                    "const": "Entra"
+                },
+                {
+                    "type": "string",
+                    "const": "BotService"
+                },
+                {
+                    "type": "string",
+                    "const": "BotServiceRbac"
+                }
+            ]
+        },
+        "AgentCardSkillTag": {
+            "type": "string",
+            "maxLength": 32
+        },
+        "AgentCardSkillExample": {
+            "type": "string",
+            "maxLength": 1024,
+            "description": "A skill example string with a maximum length of 1024 characters."
+        },
+        "BingGroundingTool": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "bing_grounding",
+                    "description": "The object type, which is always 'bing_grounding'."
+                },
+                "bing_grounding": {
+                    "$ref": "#/$defs/BingGroundingSearchToolParameters",
+                    "description": "The bing grounding search tool parameters."
+                }
+            },
+            "required": [
+                "type",
+                "bing_grounding"
+            ],
+            "description": "The input definition information for a bing grounding search tool as used to configure an agent."
+        },
+        "MicrosoftFabricPreviewTool": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "fabric_dataagent_preview",
+                    "description": "The object type, which is always 'fabric_dataagent_preview'."
+                },
+                "fabric_dataagent_preview": {
+                    "$ref": "#/$defs/FabricDataAgentToolParameters",
+                    "description": "The fabric data agent tool parameters."
+                }
+            },
+            "required": [
+                "type",
+                "fabric_dataagent_preview"
+            ],
+            "description": "The input definition information for a Microsoft Fabric tool as used to configure an agent."
+        },
+        "SharepointPreviewTool": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "sharepoint_grounding_preview",
+                    "description": "The object type, which is always 'sharepoint_grounding_preview'."
+                },
+                "sharepoint_grounding_preview": {
+                    "$ref": "#/$defs/SharepointGroundingToolParameters",
+                    "description": "The sharepoint grounding tool parameters."
+                }
+            },
+            "required": [
+                "type",
+                "sharepoint_grounding_preview"
+            ],
+            "description": "The input definition information for a sharepoint tool as used to configure an agent."
+        },
+        "AzureAISearchTool": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "azure_ai_search",
+                    "description": "The object type, which is always 'azure_ai_search'."
+                },
+                "azure_ai_search": {
+                    "$ref": "#/$defs/AzureAISearchToolResource",
+                    "description": "The azure ai search index resource."
+                }
+            },
+            "required": [
+                "type",
+                "azure_ai_search"
+            ],
+            "description": "The input definition information for an Azure AI search tool as used to configure an agent."
+        },
+        "OpenApiTool": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "openapi",
+                    "description": "The object type, which is always 'openapi'."
+                },
+                "openapi": {
+                    "$ref": "#/$defs/OpenApiFunctionDefinition",
+                    "description": "The openapi function definition."
+                }
+            },
+            "required": [
+                "type",
+                "openapi"
+            ],
+            "description": "The input definition information for an OpenAPI tool as used to configure an agent."
+        },
+        "BingCustomSearchPreviewTool": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "bing_custom_search_preview",
+                    "description": "The object type, which is always 'bing_custom_search_preview'."
+                },
+                "bing_custom_search_preview": {
+                    "$ref": "#/$defs/BingCustomSearchToolParameters",
+                    "description": "The bing custom search tool parameters."
+                }
+            },
+            "required": [
+                "type",
+                "bing_custom_search_preview"
+            ],
+            "description": "The input definition information for a Bing custom search tool as used to configure an agent."
+        },
+        "BrowserAutomationPreviewTool": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "browser_automation_preview",
+                    "description": "The object type, which is always 'browser_automation_preview'."
+                },
+                "browser_automation_preview": {
+                    "$ref": "#/$defs/BrowserAutomationToolParameters",
+                    "description": "The Browser Automation Tool parameters."
+                }
+            },
+            "required": [
+                "type",
+                "browser_automation_preview"
+            ],
+            "description": "The input definition information for a Browser Automation Tool, as used to configure an Agent."
+        },
+        "AzureFunctionTool": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "azure_function",
+                    "description": "The object type, which is always 'browser_automation'."
+                },
+                "azure_function": {
+                    "$ref": "#/$defs/AzureFunctionDefinition",
+                    "description": "The Azure Function Tool definition."
+                }
+            },
+            "required": [
+                "type",
+                "azure_function"
+            ],
+            "description": "The input definition information for an Azure Function Tool, as used to configure an Agent."
+        },
+        "CaptureStructuredOutputsTool": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "capture_structured_outputs",
+                    "description": "The type of the tool. Always `capture_structured_outputs`."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Optional user-defined name for this tool or configuration."
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Optional user-defined description for this tool or configuration."
+                },
+                "outputs": {
+                    "$ref": "#/$defs/StructuredOutputDefinition",
+                    "description": "The structured outputs to capture from the model."
+                }
+            },
+            "required": [
+                "type",
+                "outputs"
+            ],
+            "description": "A tool for capturing structured outputs"
+        },
+        "A2APreviewTool": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "a2a_preview",
+                    "description": "The type of the tool. Always `\"a2a_preview`."
+                },
+                "base_url": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "Base URL of the agent."
+                },
+                "agent_card_path": {
+                    "type": "string",
+                    "description": "The path to the agent card relative to the `base_url`.\nIf not provided, defaults to  `/.well-known/agent-card.json`"
+                },
+                "project_connection_id": {
+                    "type": "string",
+                    "description": "The connection ID in the project for the A2A server.\nThe connection stores authentication and other connection details needed to connect to the A2A server."
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "description": "An agent implementing the A2A protocol."
+        },
+        "WorkIQPreviewTool": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "work_iq_preview",
+                    "description": "The object type, which is always 'work_iq_preview'."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Optional user-defined name for this tool or configuration."
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Optional user-defined description for this tool or configuration."
+                },
+                "work_iq_preview": {
+                    "$ref": "#/$defs/WorkIQPreviewToolParameters",
+                    "description": "The WorkIQ tool parameters."
+                }
+            },
+            "required": [
+                "type",
+                "work_iq_preview"
+            ],
+            "description": "A WorkIQ server-side tool."
+        },
+        "MemorySearchPreviewTool": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "memory_search_preview",
+                    "description": "The type of the tool. Always `memory_search_preview`."
+                },
+                "memory_store_name": {
+                    "type": "string",
+                    "description": "The name of the memory store to use."
+                },
+                "scope": {
+                    "type": "string",
+                    "description": "The namespace used to group and isolate memories, such as a user ID.\nLimits which memories can be retrieved or updated.\nUse special variable `{{$userId}}` to scope memories to the current signed-in user."
+                },
+                "search_options": {
+                    "$ref": "#/$defs/MemorySearchOptions",
+                    "description": "Options for searching the memory store."
+                },
+                "update_delay": {
+                    "type": "integer",
+                    "minimum": -2147483648,
+                    "maximum": 2147483647,
+                    "default": 300,
+                    "description": "Time to wait before updating memories after inactivity (seconds). Default 300."
+                }
+            },
+            "required": [
+                "type",
+                "memory_store_name",
+                "scope"
+            ],
+            "description": "A tool for integrating memories into the agent."
+        },
+        "MemorySearchTool": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "memory_search",
+                    "description": "The type of the tool. Always `memory_search_preview`."
+                },
+                "memory_store_name": {
+                    "type": "string",
+                    "description": "The name of the memory store to use."
+                },
+                "scope": {
+                    "type": "string",
+                    "description": "The namespace used to group and isolate memories, such as a user ID.\nLimits which memories can be retrieved or updated.\nUse special variable `{{$userId}}` to scope memories to the current signed-in user."
+                },
+                "search_options": {
+                    "$ref": "#/$defs/MemorySearchOptions",
+                    "description": "Options for searching the memory store."
+                },
+                "update_delay": {
+                    "type": "integer",
+                    "minimum": -2147483648,
+                    "maximum": 2147483647,
+                    "default": 300,
+                    "description": "Time to wait before updating memories after inactivity (seconds). Default 300."
+                }
+            },
+            "required": [
+                "type",
+                "memory_store_name",
+                "scope"
+            ],
+            "description": "A tool for integrating memories into the agent."
+        },
+        "CodeInterpreterTool": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "code_interpreter",
+                    "description": "The type of the code interpreter tool. Always `code_interpreter`."
+                },
+                "container": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "$ref": "#/$defs/AutoCodeInterpreterToolParam"
+                        }
+                    ],
+                    "description": "The code interpreter container. Can be a container ID or an object that\nspecifies uploaded file IDs to make available to your code, along with an\noptional `memory_limit` setting.\nIf not provided, the service assumes auto."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Optional user-defined name for this tool or configuration."
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Optional user-defined description for this tool or configuration."
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "description": "A tool that runs Python code to help generate a response to a prompt.",
+            "title": "Code interpreter"
+        },
+        "FunctionTool": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "function",
+                    "default": "function",
+                    "description": "The type of the function tool. Always `function`."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the function to call."
+                },
+                "description": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "parameters": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/RecordUnknown"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "strict": {
+                    "anyOf": [
+                        {
+                            "type": "boolean"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                }
+            },
+            "required": [
+                "type",
+                "name",
+                "parameters",
+                "strict"
+            ],
+            "description": "Defines a function in your own code the model can choose to call. Learn more about [function calling](https://platform.openai.com/docs/guides/function-calling).",
+            "title": "Function"
+        },
+        "FileSearchTool": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "file_search",
+                    "default": "file_search",
+                    "description": "The type of the file search tool. Always `file_search`."
+                },
+                "vector_store_ids": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The IDs of the vector stores to search."
+                },
+                "max_num_results": {
+                    "type": "integer",
+                    "description": "The maximum number of results to return. This number should be between 1 and 50 inclusive."
+                },
+                "ranking_options": {
+                    "$ref": "#/$defs/RankingOptions",
+                    "description": "Ranking options for search."
+                },
+                "filters": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Filters"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Optional user-defined name for this tool or configuration."
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Optional user-defined description for this tool or configuration."
+                }
+            },
+            "required": [
+                "type",
+                "vector_store_ids"
+            ],
+            "description": "A tool that searches for relevant content from uploaded files. Learn more about the [file search tool](https://platform.openai.com/docs/guides/tools-file-search).",
+            "title": "File search"
+        },
+        "ComputerUsePreviewTool": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "computer_use_preview",
+                    "default": "computer_use_preview",
+                    "description": "The type of the computer use tool. Always `computer_use_preview`."
+                },
+                "environment": {
+                    "$ref": "#/$defs/ComputerEnvironment",
+                    "description": "The type of computer environment to control."
+                },
+                "display_width": {
+                    "type": "integer",
+                    "description": "The width of the computer display."
+                },
+                "display_height": {
+                    "type": "integer",
+                    "description": "The height of the computer display."
+                }
+            },
+            "required": [
+                "type",
+                "environment",
+                "display_width",
+                "display_height"
+            ],
+            "description": "A tool that controls a virtual computer. Learn more about the [computer tool](https://platform.openai.com/docs/guides/tools-computer-use).",
+            "title": "Computer use preview"
+        },
+        "WebSearchTool": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "web_search",
+                    "default": "web_search",
+                    "description": "The type of the web search tool. One of `web_search` or `web_search_2025_08_26`."
+                },
+                "filters": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/WebSearchToolFilters"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "user_location": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/WebSearchApproximateLocation"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "search_context_size": {
+                    "anyOf": [
+                        {
+                            "type": "string",
+                            "const": "low"
+                        },
+                        {
+                            "type": "string",
+                            "const": "medium"
+                        },
+                        {
+                            "type": "string",
+                            "const": "high"
+                        }
+                    ],
+                    "default": "medium",
+                    "description": "High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Optional user-defined name for this tool or configuration."
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Optional user-defined description for this tool or configuration."
+                },
+                "custom_search_configuration": {
+                    "$ref": "#/$defs/WebSearchConfiguration",
+                    "description": "The project connections attached to this tool. There can be a maximum of 1 connection\nresource attached to the tool."
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "description": "Search the Internet for sources related to the prompt. Learn more about the\n[web search tool](/docs/guides/tools-web-search).",
+            "title": "Web search"
+        },
+        "MCPTool": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "mcp",
+                    "description": "The type of the MCP tool. Always `mcp`."
+                },
+                "server_label": {
+                    "type": "string",
+                    "description": "A label for this MCP server, used to identify it in tool calls."
+                },
+                "server_url": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "The URL for the MCP server. One of `server_url` or `connector_id` must be\n  provided."
+                },
+                "connector_id": {
+                    "anyOf": [
+                        {
+                            "type": "string",
+                            "const": "connector_dropbox"
+                        },
+                        {
+                            "type": "string",
+                            "const": "connector_gmail"
+                        },
+                        {
+                            "type": "string",
+                            "const": "connector_googlecalendar"
+                        },
+                        {
+                            "type": "string",
+                            "const": "connector_googledrive"
+                        },
+                        {
+                            "type": "string",
+                            "const": "connector_microsoftteams"
+                        },
+                        {
+                            "type": "string",
+                            "const": "connector_outlookcalendar"
+                        },
+                        {
+                            "type": "string",
+                            "const": "connector_outlookemail"
+                        },
+                        {
+                            "type": "string",
+                            "const": "connector_sharepoint"
+                        }
+                    ],
+                    "description": "Identifier for service connectors, like those available in ChatGPT. One of\n  `server_url` or `connector_id` must be provided. Learn more about service\n  connectors [here](/docs/guides/tools-remote-mcp#connectors).\n  Currently supported `connector_id` values are:\n  - Dropbox: `connector_dropbox`\n  - Gmail: `connector_gmail`\n  - Google Calendar: `connector_googlecalendar`\n  - Google Drive: `connector_googledrive`\n  - Microsoft Teams: `connector_microsoftteams`\n  - Outlook Calendar: `connector_outlookcalendar`\n  - Outlook Email: `connector_outlookemail`\n  - SharePoint: `connector_sharepoint`"
+                },
+                "authorization": {
+                    "type": "string",
+                    "description": "An OAuth access token that can be used with a remote MCP server, either\n  with a custom MCP server URL or a service connector. Your application\n  must handle the OAuth authorization flow and provide the token here."
+                },
+                "server_description": {
+                    "type": "string",
+                    "description": "Optional description of the MCP server, used to provide more context."
+                },
+                "headers": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/RecordString"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "allowed_tools": {
+                    "anyOf": [
+                        {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                            "$ref": "#/$defs/MCPToolFilter"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "require_approval": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/MCPToolRequireApproval"
+                        },
+                        {
+                            "type": "string",
+                            "const": "always"
+                        },
+                        {
+                            "type": "string",
+                            "const": "never"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": "always"
+                },
+                "project_connection_id": {
+                    "type": "string",
+                    "description": "The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server."
+                }
+            },
+            "required": [
+                "type",
+                "server_label"
+            ],
+            "description": "Give the model access to additional tools via remote Model Context Protocol\n(MCP) servers. [Learn more about MCP](/docs/guides/tools-remote-mcp).",
+            "title": "MCP tool"
+        },
+        "ImageGenTool": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "image_generation",
+                    "default": "image_generation",
+                    "description": "The type of the image generation tool. Always `image_generation`."
+                },
+                "model": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "string",
+                            "const": "gpt-image-1"
+                        },
+                        {
+                            "type": "string",
+                            "const": "gpt-image-1-mini"
+                        },
+                        {
+                            "type": "string",
+                            "const": "gpt-image-1.5"
+                        }
+                    ],
+                    "default": "gpt-image-1"
+                },
+                "quality": {
+                    "anyOf": [
+                        {
+                            "type": "string",
+                            "const": "low"
+                        },
+                        {
+                            "type": "string",
+                            "const": "medium"
+                        },
+                        {
+                            "type": "string",
+                            "const": "high"
+                        },
+                        {
+                            "type": "string",
+                            "const": "auto"
+                        }
+                    ],
+                    "default": "auto",
+                    "description": "The quality of the generated image. One of `low`, `medium`, `high`,\n  or `auto`. Default: `auto`."
+                },
+                "size": {
+                    "anyOf": [
+                        {
+                            "type": "string",
+                            "const": "1024x1024"
+                        },
+                        {
+                            "type": "string",
+                            "const": "1024x1536"
+                        },
+                        {
+                            "type": "string",
+                            "const": "1536x1024"
+                        },
+                        {
+                            "type": "string",
+                            "const": "auto"
+                        }
+                    ],
+                    "default": "auto",
+                    "description": "The size of the generated image. One of `1024x1024`, `1024x1536`,\n  `1536x1024`, or `auto`. Default: `auto`."
+                },
+                "output_format": {
+                    "anyOf": [
+                        {
+                            "type": "string",
+                            "const": "png"
+                        },
+                        {
+                            "type": "string",
+                            "const": "webp"
+                        },
+                        {
+                            "type": "string",
+                            "const": "jpeg"
+                        }
+                    ],
+                    "default": "png",
+                    "description": "The output format of the generated image. One of `png`, `webp`, or\n  `jpeg`. Default: `png`."
+                },
+                "output_compression": {
+                    "type": "integer",
+                    "default": 100,
+                    "minimum": 0,
+                    "maximum": 100,
+                    "description": "Compression level for the output image. Default: 100."
+                },
+                "moderation": {
+                    "anyOf": [
+                        {
+                            "type": "string",
+                            "const": "auto"
+                        },
+                        {
+                            "type": "string",
+                            "const": "low"
+                        }
+                    ],
+                    "default": "auto",
+                    "description": "Moderation level for the generated image. Default: `auto`."
+                },
+                "background": {
+                    "anyOf": [
+                        {
+                            "type": "string",
+                            "const": "transparent"
+                        },
+                        {
+                            "type": "string",
+                            "const": "opaque"
+                        },
+                        {
+                            "type": "string",
+                            "const": "auto"
+                        }
+                    ],
+                    "default": "auto",
+                    "description": "Background type for the generated image. One of `transparent`,\n  `opaque`, or `auto`. Default: `auto`."
+                },
+                "input_fidelity": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/InputFidelity"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "input_image_mask": {
+                    "$ref": "#/$defs/ImageGenToolInputImageMask",
+                    "description": "Optional mask for inpainting. Contains `image_url`\n  (string, optional) and `file_id` (string, optional)."
+                },
+                "partial_images": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 3,
+                    "description": "Number of partial images to generate in streaming mode, from 0 (default value) to 3."
+                },
+                "action": {
+                    "$ref": "#/$defs/ImageGenActionEnum",
+                    "description": "Whether to generate a new image or edit an existing image. Default: `auto`."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Optional user-defined name for this tool or configuration."
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Optional user-defined description for this tool or configuration."
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "description": "A tool that generates images using the GPT image models.",
+            "title": "Image generation tool"
+        },
+        "LocalShellToolParam": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "local_shell",
+                    "default": "local_shell",
+                    "description": "The type of the local shell tool. Always `local_shell`."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Optional user-defined name for this tool or configuration."
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Optional user-defined description for this tool or configuration."
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "description": "A tool that allows the model to execute shell commands in a local environment.",
+            "title": "Local shell tool"
+        },
+        "FunctionShellToolParam": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "shell",
+                    "default": "shell",
+                    "description": "The type of the shell tool. Always `shell`."
+                },
+                "environment": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/FunctionShellToolParamEnvironment"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Optional user-defined name for this tool or configuration."
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Optional user-defined description for this tool or configuration."
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "description": "A tool that allows the model to execute shell commands.",
+            "title": "Shell tool"
+        },
+        "CustomToolParam": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "custom",
+                    "default": "custom",
+                    "description": "The type of the custom tool. Always `custom`."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the custom tool, used to identify it in tool calls."
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Optional description of the custom tool, used to provide more context."
+                },
+                "format": {
+                    "$ref": "#/$defs/CustomToolParamFormat",
+                    "description": "The input format for the custom tool. Default is unconstrained text."
+                }
+            },
+            "required": [
+                "type",
+                "name"
+            ],
+            "description": "A custom tool that processes input using a specified format. Learn more about   [custom tools](/docs/guides/function-calling#custom-tools)",
+            "title": "Custom tool"
+        },
+        "WebSearchPreviewTool": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "web_search_preview",
+                    "default": "web_search_preview",
+                    "description": "The type of the web search tool. One of `web_search_preview` or `web_search_preview_2025_03_11`."
+                },
+                "user_location": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ApproximateLocation"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "search_context_size": {
+                    "$ref": "#/$defs/SearchContextSize",
+                    "description": "High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default."
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "description": "This tool searches the web for relevant results to use in a response. Learn more about the [web search tool](https://platform.openai.com/docs/guides/tools-web-search).",
+            "title": "Web search preview"
+        },
+        "ApplyPatchToolParam": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "apply_patch",
+                    "default": "apply_patch",
+                    "description": "The type of the tool. Always `apply_patch`."
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "description": "Allows the assistant to create, delete, or update files using unified diffs.",
+            "title": "Apply patch tool"
+        },
+        "ToolType": {
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "string",
+                    "const": "function"
+                },
+                {
+                    "type": "string",
+                    "const": "file_search"
+                },
+                {
+                    "type": "string",
+                    "const": "computer_use_preview"
+                },
+                {
+                    "type": "string",
+                    "const": "web_search"
+                },
+                {
+                    "type": "string",
+                    "const": "mcp"
+                },
+                {
+                    "type": "string",
+                    "const": "code_interpreter"
+                },
+                {
+                    "type": "string",
+                    "const": "image_generation"
+                },
+                {
+                    "type": "string",
+                    "const": "local_shell"
+                },
+                {
+                    "type": "string",
+                    "const": "shell"
+                },
+                {
+                    "type": "string",
+                    "const": "custom"
+                },
+                {
+                    "type": "string",
+                    "const": "web_search_preview"
+                },
+                {
+                    "type": "string",
+                    "const": "apply_patch"
+                },
+                {
+                    "type": "string",
+                    "const": "a2a_preview"
+                },
+                {
+                    "type": "string",
+                    "const": "bing_custom_search_preview"
+                },
+                {
+                    "type": "string",
+                    "const": "browser_automation_preview"
+                },
+                {
+                    "type": "string",
+                    "const": "fabric_dataagent_preview"
+                },
+                {
+                    "type": "string",
+                    "const": "sharepoint_grounding_preview"
+                },
+                {
+                    "type": "string",
+                    "const": "memory_search_preview"
+                },
+                {
+                    "type": "string",
+                    "const": "work_iq_preview"
+                },
+                {
+                    "type": "string",
+                    "const": "azure_ai_search"
+                },
+                {
+                    "type": "string",
+                    "const": "azure_function"
+                },
+                {
+                    "type": "string",
+                    "const": "bing_grounding"
+                },
+                {
+                    "type": "string",
+                    "const": "capture_structured_outputs"
+                },
+                {
+                    "type": "string",
+                    "const": "openapi"
+                },
+                {
+                    "type": "string",
+                    "const": "memory_search"
+                }
+            ]
+        },
+        "AgentProtocol": {
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "string",
+                    "const": "activity_protocol"
+                },
+                {
+                    "type": "string",
+                    "const": "responses"
+                },
+                {
+                    "type": "string",
+                    "const": "invocations"
+                }
+            ]
+        },
+        "TelemetryEndpoint": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "$ref": "#/$defs/TelemetryEndpointKind",
+                    "description": "The telemetry export endpoint kind."
+                },
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/TelemetryDataKind"
+                    },
+                    "examples": [
+                        [
+                            "ContainerStdoutStderr",
+                            "ContainerOtel",
+                            "Metrics"
+                        ]
+                    ],
+                    "description": "Data types to export to this endpoint. Use an empty array to export no data."
+                },
+                "auth": {
+                    "$ref": "#/$defs/TelemetryEndpointAuth",
+                    "description": "Optional authentication configuration."
+                }
+            },
+            "required": [
+                "kind",
+                "data"
+            ],
+            "oneOf": [
+                {
+                    "$ref": "#/$defs/OtlpTelemetryEndpoint"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "kind": {
+                            "type": "string",
+                            "not": {
+                                "enum": [
+                                    "OTLP"
+                                ]
+                            }
+                        },
+                        "data": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/$defs/TelemetryDataKind"
+                            },
+                            "examples": [
+                                [
+                                    "ContainerStdoutStderr",
+                                    "ContainerOtel",
+                                    "Metrics"
+                                ]
+                            ],
+                            "description": "Data types to export to this endpoint. Use an empty array to export no data."
+                        },
+                        "auth": {
+                            "$ref": "#/$defs/TelemetryEndpointAuth",
+                            "description": "Optional authentication configuration."
+                        }
+                    },
+                    "required": [
+                        "kind",
+                        "data"
+                    ]
+                }
+            ],
+            "description": "A telemetry export endpoint configuration."
+        },
+        "ReasoningEffort": {
+            "anyOf": [
+                {
+                    "anyOf": [
+                        {
+                            "type": "string",
+                            "const": "none"
+                        },
+                        {
+                            "type": "string",
+                            "const": "minimal"
+                        },
+                        {
+                            "type": "string",
+                            "const": "low"
+                        },
+                        {
+                            "type": "string",
+                            "const": "medium"
+                        },
+                        {
+                            "type": "string",
+                            "const": "high"
+                        },
+                        {
+                            "type": "string",
+                            "const": "xhigh"
+                        }
+                    ]
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "description": "Constrains effort on reasoning for\n[reasoning models](https://platform.openai.com/docs/guides/reasoning).\nCurrently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing\nreasoning effort can result in faster responses and fewer tokens used\non reasoning in a response.\n- `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.\n- All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.\n- The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.\n- `xhigh` is supported for all models after `gpt-5.1-codex-max`."
+        },
+        "ToolChoiceAllowed": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "allowed_tools",
+                    "description": "Allowed tool configuration type. Always `allowed_tools`."
+                },
+                "mode": {
+                    "anyOf": [
+                        {
+                            "type": "string",
+                            "const": "auto"
+                        },
+                        {
+                            "type": "string",
+                            "const": "required"
+                        }
+                    ],
+                    "description": "Constrains the tools available to the model to a pre-defined set.\n  `auto` allows the model to pick from among the allowed tools and generate a\n  message.\n  `required` requires the model to call one or more of the allowed tools."
+                },
+                "tools": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/RecordUnknown"
+                    },
+                    "description": "A list of tool definitions that the model should be allowed to call.\n  For the Responses API, the list of tool definitions might look like:\n  ```json\n  [\n    { \"type\": \"function\", \"name\": \"get_weather\" },\n    { \"type\": \"mcp\", \"server_label\": \"deepwiki\" },\n    { \"type\": \"image_generation\" }\n  ]\n  ```"
+                }
+            },
+            "required": [
+                "type",
+                "mode",
+                "tools"
+            ],
+            "description": "Constrains the tools available to the model to a pre-defined set.",
+            "title": "Allowed tools"
+        },
+        "ToolChoiceFunction": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "function",
+                    "description": "For function calling, the type is always `function`."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the function to call."
+                }
+            },
+            "required": [
+                "type",
+                "name"
+            ],
+            "description": "Use this option to force the model to call a specific function.",
+            "title": "Function tool"
+        },
+        "ToolChoiceMCP": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "mcp",
+                    "description": "For MCP tools, the type is always `mcp`."
+                },
+                "server_label": {
+                    "type": "string",
+                    "description": "The label of the MCP server to use."
+                },
+                "name": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                }
+            },
+            "required": [
+                "type",
+                "server_label"
+            ],
+            "description": "Use this option to force the model to call a specific tool on a remote MCP server.",
+            "title": "MCP tool"
+        },
+        "ToolChoiceCustom": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "custom",
+                    "description": "For custom tool calling, the type is always `custom`."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the custom tool to call."
+                }
+            },
+            "required": [
+                "type",
+                "name"
+            ],
+            "description": "Use this option to force the model to call a specific custom tool.",
+            "title": "Custom tool"
+        },
+        "SpecificApplyPatchParam": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "apply_patch",
+                    "default": "apply_patch",
+                    "description": "The tool to call. Always `apply_patch`."
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "description": "Forces the model to call the apply_patch tool when executing a tool call.",
+            "title": "Specific apply patch tool choice"
+        },
+        "SpecificFunctionShellParam": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "shell",
+                    "default": "shell",
+                    "description": "The tool to call. Always `shell`."
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "description": "Forces the model to call the shell tool when a tool call is required.",
+            "title": "Specific shell tool choice"
+        },
+        "ToolChoiceFileSearch": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "file_search"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "description": "Indicates that the model should use a built-in tool to generate a response.\n[Learn more about built-in tools](https://platform.openai.com/docs/guides/tools)."
+        },
+        "ToolChoiceWebSearchPreview": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "web_search_preview"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "description": "Indicates that the model should use a built-in tool to generate a response.\n[Learn more about built-in tools](https://platform.openai.com/docs/guides/tools)."
+        },
+        "ToolChoiceComputerUsePreview": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "computer_use_preview"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "description": "Indicates that the model should use a built-in tool to generate a response.\n[Learn more about built-in tools](https://platform.openai.com/docs/guides/tools)."
+        },
+        "ToolChoiceWebSearchPreview20250311": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "web_search_preview_2025_03_11"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "description": "Indicates that the model should use a built-in tool to generate a response.\n[Learn more about built-in tools](https://platform.openai.com/docs/guides/tools)."
+        },
+        "ToolChoiceImageGeneration": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "image_generation"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "description": "Indicates that the model should use a built-in tool to generate a response.\n[Learn more about built-in tools](https://platform.openai.com/docs/guides/tools)."
+        },
+        "ToolChoiceCodeInterpreter": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "code_interpreter"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "description": "Indicates that the model should use a built-in tool to generate a response.\n[Learn more about built-in tools](https://platform.openai.com/docs/guides/tools)."
+        },
+        "ToolChoiceParamType": {
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "string",
+                    "const": "allowed_tools"
+                },
+                {
+                    "type": "string",
+                    "const": "function"
+                },
+                {
+                    "type": "string",
+                    "const": "mcp"
+                },
+                {
+                    "type": "string",
+                    "const": "custom"
+                },
+                {
+                    "type": "string",
+                    "const": "apply_patch"
+                },
+                {
+                    "type": "string",
+                    "const": "shell"
+                },
+                {
+                    "type": "string",
+                    "const": "file_search"
+                },
+                {
+                    "type": "string",
+                    "const": "web_search_preview"
+                },
+                {
+                    "type": "string",
+                    "const": "computer_use_preview"
+                },
+                {
+                    "type": "string",
+                    "const": "web_search_preview_2025_03_11"
+                },
+                {
+                    "type": "string",
+                    "const": "image_generation"
+                },
+                {
+                    "type": "string",
+                    "const": "code_interpreter"
+                }
+            ]
+        },
+        "TextResponseFormatConfiguration": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "$ref": "#/$defs/TextResponseFormatConfigurationType"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "oneOf": [
+                {
+                    "$ref": "#/$defs/TextResponseFormatJsonSchema"
+                },
+                {
+                    "$ref": "#/$defs/TextResponseFormatConfigurationResponseFormatText"
+                },
+                {
+                    "$ref": "#/$defs/TextResponseFormatConfigurationResponseFormatJsonObject"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "not": {
+                                "enum": [
+                                    "json_schema",
+                                    "text",
+                                    "json_object"
+                                ]
+                            }
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                }
+            ],
+            "description": "An object specifying the format that the model must output.\nConfiguring `{ \"type\": \"json_schema\" }` enables Structured Outputs,\nwhich ensures the model will match your supplied JSON schema. Learn more in the\n[Structured Outputs guide](/docs/guides/structured-outputs).\nThe default format is `{ \"type\": \"text\" }` with no additional options.\n*Not recommended for gpt-4o and newer models:**\nSetting to `{ \"type\": \"json_object\" }` enables the older JSON mode, which\nensures the message the model generates is valid JSON. Using `json_schema`\nis preferred for models that support it."
+        },
+        "StructuredInputDefinition": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "description": "A human-readable description of the input."
+                },
+                "default_value": {
+                    "description": "The default value for the input if no run-time value is provided."
+                },
+                "schema": {
+                    "$ref": "#/$defs/RecordUnknown",
+                    "description": "The JSON schema for the structured input (optional)."
+                },
+                "required": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Whether the input property is required when the agent is invoked."
+                }
+            },
+            "description": "An structured input that can participate in prompt template substitutions and tool argument binding."
+        },
+        "FixedRatioVersionSelectionRule": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "FixedRatio"
+                },
+                "agent_version": {
+                    "type": "string",
+                    "description": "The agent version to route traffic to"
+                },
+                "traffic_percentage": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 100,
+                    "description": "The percentage of traffic to route to the version. Must be between 0 and 100."
+                }
+            },
+            "required": [
+                "type",
+                "agent_version",
+                "traffic_percentage"
+            ]
+        },
+        "VersionSelectorType": {
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "string",
+                    "const": "FixedRatio"
+                }
+            ]
+        },
+        "IsolationKeySource": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "$ref": "#/$defs/IsolationKeySourceKind"
+                }
+            },
+            "required": [
+                "kind"
+            ],
+            "oneOf": [
+                {
+                    "$ref": "#/$defs/EntraIsolationKeySource"
+                },
+                {
+                    "$ref": "#/$defs/HeaderIsolationKeySource"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "kind": {
+                            "type": "string",
+                            "not": {
+                                "enum": [
+                                    "Entra",
+                                    "Header"
+                                ]
+                            }
+                        }
+                    },
+                    "required": [
+                        "kind"
+                    ]
+                }
+            ]
+        },
+        "BingGroundingSearchToolParameters": {
+            "type": "object",
+            "properties": {
+                "search_configurations": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/BingGroundingSearchConfiguration"
+                    },
+                    "maxItems": 1,
+                    "description": "The search configurations attached to this tool. There can be a maximum of 1\nsearch configuration resource attached to the tool."
+                }
+            },
+            "required": [
+                "search_configurations"
+            ],
+            "description": "The bing grounding search tool parameters."
+        },
+        "FabricDataAgentToolParameters": {
+            "type": "object",
+            "properties": {
+                "project_connections": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/ToolProjectConnection"
+                    },
+                    "maxItems": 1,
+                    "description": "The project connections attached to this tool. There can be a maximum of 1 connection\nresource attached to the tool."
+                }
+            },
+            "description": "The fabric data agent tool parameters."
+        },
+        "SharepointGroundingToolParameters": {
+            "type": "object",
+            "properties": {
+                "project_connections": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/ToolProjectConnection"
+                    },
+                    "maxItems": 1,
+                    "description": "The project connections attached to this tool. There can be a maximum of 1 connection\nresource attached to the tool."
+                }
+            },
+            "description": "The sharepoint grounding tool parameters."
+        },
+        "AzureAISearchToolResource": {
+            "type": "object",
+            "properties": {
+                "indexes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/AISearchIndexResource"
+                    },
+                    "maxItems": 1,
+                    "description": "The indices attached to this agent. There can be a maximum of 1 index\nresource attached to the agent."
+                }
+            },
+            "required": [
+                "indexes"
+            ],
+            "description": "A set of index resources used by the `azure_ai_search` tool."
+        },
+        "OpenApiFunctionDefinition": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "The name of the function to be called."
+                },
+                "description": {
+                    "type": "string",
+                    "description": "A description of what the function does, used by the model to choose when and how to call the function."
+                },
+                "spec": {
+                    "$ref": "#/$defs/RecordUnknown",
+                    "description": "The openapi function shape, described as a JSON Schema object."
+                },
+                "auth": {
+                    "$ref": "#/$defs/OpenApiAuthDetails",
+                    "description": "Open API authentication details"
+                },
+                "default_params": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of OpenAPI spec parameters that will use user-provided defaults"
+                },
+                "functions": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "description": "The name of the function to be called."
+                            },
+                            "description": {
+                                "type": "string",
+                                "description": "A description of what the function does, used by the model to choose when and how to call the function."
+                            },
+                            "parameters": {
+                                "$ref": "#/$defs/RecordUnknown",
+                                "description": "The parameters the functions accepts, described as a JSON Schema object."
+                            }
+                        },
+                        "required": [
+                            "name",
+                            "parameters"
+                        ]
+                    },
+                    "description": "List of function definitions used by OpenApi tool"
+                }
+            },
+            "required": [
+                "name",
+                "spec",
+                "auth"
+            ],
+            "description": "The input definition information for an openapi function."
+        },
+        "BingCustomSearchToolParameters": {
+            "type": "object",
+            "properties": {
+                "search_configurations": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/BingCustomSearchConfiguration"
+                    },
+                    "maxItems": 1,
+                    "description": "The project connections attached to this tool. There can be a maximum of 1 connection\nresource attached to the tool."
+                }
+            },
+            "required": [
+                "search_configurations"
+            ],
+            "description": "The bing custom search tool parameters."
+        },
+        "BrowserAutomationToolParameters": {
+            "type": "object",
+            "properties": {
+                "connection": {
+                    "$ref": "#/$defs/BrowserAutomationToolConnectionParameters",
+                    "description": "The project connection parameters associated with the Browser Automation Tool."
+                }
+            },
+            "required": [
+                "connection"
+            ],
+            "description": "Definition of input parameters for the Browser Automation Tool."
+        },
+        "AzureFunctionDefinition": {
+            "type": "object",
+            "properties": {
+                "function": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "description": "The name of the function to be called."
+                        },
+                        "description": {
+                            "type": "string",
+                            "description": "A description of what the function does, used by the model to choose when and how to call the function."
+                        },
+                        "parameters": {
+                            "$ref": "#/$defs/RecordUnknown",
+                            "description": "The parameters the functions accepts, described as a JSON Schema object."
+                        }
+                    },
+                    "required": [
+                        "name",
+                        "parameters"
+                    ],
+                    "description": "The definition of azure function and its parameters."
+                },
+                "input_binding": {
+                    "$ref": "#/$defs/AzureFunctionBinding",
+                    "description": "Input storage queue. The queue storage trigger runs a function as messages are added to it."
+                },
+                "output_binding": {
+                    "$ref": "#/$defs/AzureFunctionBinding",
+                    "description": "Output storage queue. The function writes output to this queue when the input items are processed."
+                }
+            },
+            "required": [
+                "function",
+                "input_binding",
+                "output_binding"
+            ],
+            "description": "The definition of Azure function."
+        },
+        "StructuredOutputDefinition": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "The name of the structured output."
+                },
+                "description": {
+                    "type": "string",
+                    "description": "A description of the output to emit. Used by the model to determine when to emit the output."
+                },
+                "schema": {
+                    "$ref": "#/$defs/RecordUnknown",
+                    "description": "The JSON schema for the structured output."
+                },
+                "strict": {
+                    "anyOf": [
+                        {
+                            "type": "boolean"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Whether to enforce strict validation. Default `true`."
+                }
+            },
+            "required": [
+                "name",
+                "description",
+                "schema",
+                "strict"
+            ],
+            "description": "A structured output that can be produced by the agent."
+        },
+        "WorkIQPreviewToolParameters": {
+            "type": "object",
+            "properties": {
+                "project_connection_id": {
+                    "type": "string",
+                    "description": "The ID of the WorkIQ project connection."
+                }
+            },
+            "required": [
+                "project_connection_id"
+            ],
+            "description": "The WorkIQ tool parameters."
+        },
+        "MemorySearchOptions": {
+            "type": "object",
+            "properties": {
+                "max_memories": {
+                    "type": "integer",
+                    "minimum": -2147483648,
+                    "maximum": 2147483647,
+                    "description": "Maximum number of memory items to return."
+                }
+            },
+            "description": "Memory search options."
+        },
+        "AutoCodeInterpreterToolParam": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "auto",
+                    "default": "auto",
+                    "description": "Always `auto`."
+                },
+                "file_ids": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "maxItems": 50,
+                    "description": "An optional list of uploaded files to make available to your code."
+                },
+                "memory_limit": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ContainerMemoryLimit"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "network_policy": {
+                    "$ref": "#/$defs/ContainerNetworkPolicyParam"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "description": "Configuration for a code interpreter container. Optionally specify the IDs of the files to run the code on.",
+            "title": "Automatic Code Interpreter Tool Parameters"
+        },
+        "RecordUnknown": {
+            "type": "object",
+            "properties": {},
+            "unevaluatedProperties": {}
+        },
+        "RankingOptions": {
+            "type": "object",
+            "properties": {
+                "ranker": {
+                    "$ref": "#/$defs/RankerVersionType",
+                    "description": "The ranker to use for the file search."
+                },
+                "score_threshold": {
+                    "type": "number",
+                    "description": "The score threshold for the file search, a number between 0 and 1. Numbers closer to 1 will attempt to return only the most relevant results, but may return fewer results."
+                },
+                "hybrid_search": {
+                    "$ref": "#/$defs/HybridSearchOptions",
+                    "description": "Weights that control how reciprocal rank fusion balances semantic embedding matches versus sparse keyword matches when hybrid search is enabled."
+                }
+            }
+        },
+        "Filters": {
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/ComparisonFilter"
+                },
+                {
+                    "$ref": "#/$defs/CompoundFilter"
+                }
+            ]
+        },
+        "ComputerEnvironment": {
+            "type": "string",
+            "enum": [
+                "windows",
+                "mac",
+                "linux",
+                "ubuntu",
+                "browser"
+            ]
+        },
+        "WebSearchToolFilters": {
+            "type": "object",
+            "properties": {
+                "allowed_domains": {
+                    "anyOf": [
+                        {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                }
+            }
+        },
+        "WebSearchApproximateLocation": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "approximate",
+                    "default": "approximate",
+                    "description": "The type of location approximation. Always `approximate`."
+                },
+                "country": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "region": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "city": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "timezone": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "description": "The approximate location of the user.",
+            "title": "Web search approximate location"
+        },
+        "WebSearchConfiguration": {
+            "type": "object",
+            "properties": {
+                "project_connection_id": {
+                    "type": "string",
+                    "description": "Project connection id for grounding with bing custom search"
+                },
+                "instance_name": {
+                    "type": "string",
+                    "description": "Name of the custom configuration instance given to config."
+                }
+            },
+            "required": [
+                "project_connection_id",
+                "instance_name"
+            ],
+            "description": "A web search configuration for bing custom search"
+        },
+        "MCPToolFilter": {
+            "type": "object",
+            "properties": {
+                "tool_names": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of allowed tool names.",
+                    "title": "MCP allowed tools"
+                },
+                "read_only": {
+                    "type": "boolean",
+                    "description": "Indicates whether or not a tool modifies data or is read-only. If an\n  MCP server is [annotated with `readOnlyHint`](https://modelcontextprotocol.io/specification/2025-06-18/schema#toolannotations-readonlyhint),\n  it will match this filter."
+                }
+            },
+            "description": "A filter object to specify which tools are allowed.",
+            "title": "MCP tool filter"
+        },
+        "MCPToolRequireApproval": {
+            "type": "object",
+            "properties": {
+                "always": {
+                    "$ref": "#/$defs/MCPToolFilter"
+                },
+                "never": {
+                    "$ref": "#/$defs/MCPToolFilter"
+                }
+            }
+        },
+        "InputFidelity": {
+            "type": "string",
+            "enum": [
+                "high",
+                "low"
+            ],
+            "description": "Control how much effort the model will exert to match the style and features, especially facial features, of input images. This parameter is only supported for `gpt-image-1` and `gpt-image-1.5` and later models, unsupported for `gpt-image-1-mini`. Supports `high` and `low`. Defaults to `low`."
+        },
+        "ImageGenToolInputImageMask": {
+            "type": "object",
+            "properties": {
+                "image_url": {
+                    "type": "string",
+                    "format": "uri"
+                },
+                "file_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "ImageGenActionEnum": {
+            "type": "string",
+            "enum": [
+                "generate",
+                "edit",
+                "auto"
+            ]
+        },
+        "FunctionShellToolParamEnvironment": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "$ref": "#/$defs/FunctionShellToolParamEnvironmentType"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "oneOf": [
+                {
+                    "$ref": "#/$defs/FunctionShellToolParamEnvironmentLocalEnvironmentParam"
+                },
+                {
+                    "$ref": "#/$defs/FunctionShellToolParamEnvironmentContainerReferenceParam"
+                },
+                {
+                    "$ref": "#/$defs/ContainerAutoParam"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "not": {
+                                "enum": [
+                                    "local",
+                                    "container_reference",
+                                    "container_auto"
+                                ]
+                            }
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                }
+            ]
+        },
+        "CustomToolParamFormat": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "$ref": "#/$defs/CustomToolParamFormatType"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "oneOf": [
+                {
+                    "$ref": "#/$defs/CustomTextFormatParam"
+                },
+                {
+                    "$ref": "#/$defs/CustomGrammarFormatParam"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "not": {
+                                "enum": [
+                                    "text",
+                                    "grammar"
+                                ]
+                            }
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                }
+            ],
+            "description": "The input format for the custom tool. Default is unconstrained text."
+        },
+        "ApproximateLocation": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "approximate",
+                    "default": "approximate",
+                    "description": "The type of location approximation. Always `approximate`."
+                },
+                "country": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "region": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "city": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "timezone": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                }
+            },
+            "required": [
+                "type"
+            ]
+        },
+        "SearchContextSize": {
+            "type": "string",
+            "enum": [
+                "low",
+                "medium",
+                "high"
+            ]
+        },
+        "OtlpTelemetryEndpoint": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "const": "OTLP",
+                    "description": "The endpoint kind, always 'OTLP' for OpenTelemetry Protocol endpoints."
+                },
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/TelemetryDataKind"
+                    },
+                    "examples": [
+                        [
+                            "ContainerStdoutStderr",
+                            "ContainerOtel",
+                            "Metrics"
+                        ]
+                    ],
+                    "description": "Data types to export to this endpoint. Use an empty array to export no data."
+                },
+                "auth": {
+                    "$ref": "#/$defs/TelemetryEndpointAuth",
+                    "description": "Optional authentication configuration."
+                },
+                "endpoint": {
+                    "type": "string",
+                    "examples": [
+                        "https://my-collector.example.com/otlp"
+                    ],
+                    "description": "The OTLP collector endpoint URL."
+                },
+                "protocol": {
+                    "$ref": "#/$defs/TelemetryTransportProtocol",
+                    "examples": [
+                        "Http"
+                    ],
+                    "description": "The transport protocol for the OTLP endpoint."
+                }
+            },
+            "required": [
+                "kind",
+                "data",
+                "endpoint",
+                "protocol"
+            ],
+            "description": "An OTLP (OpenTelemetry Protocol) telemetry export endpoint."
+        },
+        "TelemetryDataKind": {
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "string",
+                    "const": "ContainerStdoutStderr",
+                    "description": "Container stdout and stderr logs."
+                },
+                {
+                    "type": "string",
+                    "const": "ContainerOtel",
+                    "description": "Container OpenTelemetry signals."
+                },
+                {
+                    "type": "string",
+                    "const": "Metrics",
+                    "description": "Container metrics."
+                }
+            ],
+            "description": "The type of telemetry data to export."
+        },
+        "TelemetryEndpointAuth": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "$ref": "#/$defs/TelemetryEndpointAuthType",
+                    "description": "The authentication type."
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "oneOf": [
+                {
+                    "$ref": "#/$defs/HeaderTelemetryEndpointAuth"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "not": {
+                                "enum": [
+                                    "header"
+                                ]
+                            }
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                }
+            ],
+            "description": "Authentication configuration for a telemetry endpoint."
+        },
+        "TelemetryEndpointKind": {
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "string",
+                    "const": "OTLP",
+                    "description": "OpenTelemetry Protocol (OTLP) endpoint."
+                }
+            ],
+            "description": "The kind of telemetry export endpoint."
+        },
+        "TextResponseFormatJsonSchema": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "json_schema",
+                    "description": "The type of response format being defined. Always `json_schema`."
+                },
+                "description": {
+                    "type": "string",
+                    "description": "A description of what the response format is for, used by the model to\n  determine how to respond in the format."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the response format. Must be a-z, A-Z, 0-9, or contain\n  underscores and dashes, with a maximum length of 64."
+                },
+                "schema": {
+                    "$ref": "#/$defs/ResponseFormatJsonSchemaSchema"
+                },
+                "strict": {
+                    "anyOf": [
+                        {
+                            "type": "boolean"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                }
+            },
+            "required": [
+                "type",
+                "name",
+                "schema"
+            ],
+            "description": "JSON Schema response format. Used to generate structured JSON responses.\nLearn more about [Structured Outputs](/docs/guides/structured-outputs).",
+            "title": "JSON schema"
+        },
+        "TextResponseFormatConfigurationResponseFormatText": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "text",
+                    "description": "The type of response format being defined. Always `text`."
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "description": "Default response format. Used to generate text responses.",
+            "title": "Text"
+        },
+        "TextResponseFormatConfigurationResponseFormatJsonObject": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "json_object",
+                    "description": "The type of response format being defined. Always `json_object`."
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "description": "JSON object response format. An older method of generating JSON responses.\nUsing `json_schema` is recommended for models that support it. Note that the\nmodel will not generate JSON without a system or user message instructing it\nto do so.",
+            "title": "JSON object"
+        },
+        "TextResponseFormatConfigurationType": {
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "string",
+                    "const": "text"
+                },
+                {
+                    "type": "string",
+                    "const": "json_schema"
+                },
+                {
+                    "type": "string",
+                    "const": "json_object"
+                }
+            ]
+        },
+        "EntraIsolationKeySource": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "const": "Entra"
+                }
+            },
+            "required": [
+                "kind"
+            ]
+        },
+        "HeaderIsolationKeySource": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "const": "Header"
+                },
+                "user_isolation_key": {
+                    "type": "string",
+                    "description": "The user isolation key header value"
+                },
+                "chat_isolation_key": {
+                    "type": "string",
+                    "description": "The chat isolation key header value"
+                }
+            },
+            "required": [
+                "kind",
+                "user_isolation_key",
+                "chat_isolation_key"
+            ]
+        },
+        "IsolationKeySourceKind": {
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "string",
+                    "const": "Entra"
+                },
+                {
+                    "type": "string",
+                    "const": "Header"
+                }
+            ]
+        },
+        "BingGroundingSearchConfiguration": {
+            "type": "object",
+            "properties": {
+                "project_connection_id": {
+                    "type": "string",
+                    "description": "Project connection id for grounding with bing search"
+                },
+                "market": {
+                    "type": "string",
+                    "description": "The market where the results come from."
+                },
+                "set_lang": {
+                    "type": "string",
+                    "description": "The language to use for user interface strings when calling Bing API."
+                },
+                "count": {
+                    "type": "integer",
+                    "description": "The number of search results to return in the bing api response"
+                },
+                "freshness": {
+                    "type": "string",
+                    "description": "Filter search results by a specific time range. See [accepted values here](https://learn.microsoft.com/bing/search-apis/bing-web-search/reference/query-parameters)."
+                }
+            },
+            "required": [
+                "project_connection_id"
+            ],
+            "description": "Search configuration for Bing Grounding"
+        },
+        "ToolProjectConnection": {
+            "type": "object",
+            "properties": {
+                "project_connection_id": {
+                    "type": "string",
+                    "description": "A project connection in a ToolProjectConnectionList attached to this tool."
+                }
+            },
+            "required": [
+                "project_connection_id"
+            ],
+            "description": "A project connection resource."
+        },
+        "AISearchIndexResource": {
+            "type": "object",
+            "properties": {
+                "project_connection_id": {
+                    "type": "string",
+                    "description": "An index connection ID in an IndexResource attached to this agent."
+                },
+                "index_name": {
+                    "type": "string",
+                    "description": "The name of an index in an IndexResource attached to this agent."
+                },
+                "query_type": {
+                    "$ref": "#/$defs/AzureAISearchQueryType",
+                    "description": "Type of query in an AIIndexResource attached to this agent."
+                },
+                "top_k": {
+                    "type": "integer",
+                    "minimum": -2147483648,
+                    "maximum": 2147483647,
+                    "description": "Number of documents to retrieve from search and present to the model."
+                },
+                "filter": {
+                    "type": "string",
+                    "description": "filter string for search resource. [Learn more here](https://learn.microsoft.com/azure/search/search-filters)."
+                },
+                "index_asset_id": {
+                    "type": "string",
+                    "description": "Index asset id for search resource."
+                }
+            },
+            "description": "A AI Search Index resource."
+        },
+        "OpenApiAuthDetails": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "$ref": "#/$defs/OpenApiAuthType",
+                    "description": "The type of authentication, must be anonymous/project_connection/managed_identity"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "oneOf": [
+                {
+                    "$ref": "#/$defs/OpenApiAnonymousAuthDetails"
+                },
+                {
+                    "$ref": "#/$defs/OpenApiProjectConnectionAuthDetails"
+                },
+                {
+                    "$ref": "#/$defs/OpenApiManagedAuthDetails"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "not": {
+                                "enum": [
+                                    "anonymous",
+                                    "project_connection",
+                                    "managed_identity"
+                                ]
+                            }
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                }
+            ],
+            "description": "authentication details for OpenApiFunctionDefinition"
+        },
+        "BingCustomSearchConfiguration": {
+            "type": "object",
+            "properties": {
+                "project_connection_id": {
+                    "type": "string",
+                    "description": "Project connection id for grounding with bing search"
+                },
+                "instance_name": {
+                    "type": "string",
+                    "description": "Name of the custom configuration instance given to config."
+                },
+                "market": {
+                    "type": "string",
+                    "description": "The market where the results come from."
+                },
+                "set_lang": {
+                    "type": "string",
+                    "description": "The language to use for user interface strings when calling Bing API."
+                },
+                "count": {
+                    "type": "integer",
+                    "description": "The number of search results to return in the bing api response"
+                },
+                "freshness": {
+                    "type": "string",
+                    "description": "Filter search results by a specific time range. See [accepted values here](https://learn.microsoft.com/bing/search-apis/bing-web-search/reference/query-parameters)."
+                }
+            },
+            "required": [
+                "project_connection_id",
+                "instance_name"
+            ],
+            "description": "A bing custom search configuration."
+        },
+        "BrowserAutomationToolConnectionParameters": {
+            "type": "object",
+            "properties": {
+                "project_connection_id": {
+                    "type": "string",
+                    "description": "The ID of the project connection to your Azure Playwright resource."
+                }
+            },
+            "required": [
+                "project_connection_id"
+            ],
+            "description": "Definition of input parameters for the connection used by the Browser Automation Tool."
+        },
+        "AzureFunctionBinding": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "storage_queue",
+                    "description": "The type of binding, which is always 'storage_queue'."
+                },
+                "storage_queue": {
+                    "$ref": "#/$defs/AzureFunctionStorageQueue",
+                    "description": "Storage queue."
+                }
+            },
+            "required": [
+                "type",
+                "storage_queue"
+            ],
+            "description": "The structure for keeping storage queue name and URI."
+        },
+        "ContainerMemoryLimit": {
+            "type": "string",
+            "enum": [
+                "1g",
+                "4g",
+                "16g",
+                "64g"
+            ]
+        },
+        "ContainerNetworkPolicyParam": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "$ref": "#/$defs/ContainerNetworkPolicyParamType"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "oneOf": [
+                {
+                    "$ref": "#/$defs/ContainerNetworkPolicyDisabledParam"
+                },
+                {
+                    "$ref": "#/$defs/ContainerNetworkPolicyAllowlistParam"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "not": {
+                                "enum": [
+                                    "disabled",
+                                    "allowlist"
+                                ]
+                            }
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                }
+            ],
+            "description": "Network access policy for the container."
+        },
+        "RankerVersionType": {
+            "type": "string",
+            "enum": [
+                "auto",
+                "default-2024-11-15"
+            ]
+        },
+        "HybridSearchOptions": {
+            "type": "object",
+            "properties": {
+                "embedding_weight": {
+                    "type": "number",
+                    "description": "The weight of the embedding in the reciprocal ranking fusion."
+                },
+                "text_weight": {
+                    "type": "number",
+                    "description": "The weight of the text in the reciprocal ranking fusion."
+                }
+            },
+            "required": [
+                "embedding_weight",
+                "text_weight"
+            ]
+        },
+        "ComparisonFilter": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "anyOf": [
+                        {
+                            "type": "string",
+                            "const": "eq"
+                        },
+                        {
+                            "type": "string",
+                            "const": "ne"
+                        },
+                        {
+                            "type": "string",
+                            "const": "gt"
+                        },
+                        {
+                            "type": "string",
+                            "const": "gte"
+                        },
+                        {
+                            "type": "string",
+                            "const": "lt"
+                        },
+                        {
+                            "type": "string",
+                            "const": "lte"
+                        }
+                    ],
+                    "default": "eq",
+                    "description": "Specifies the comparison operator: `eq`, `ne`, `gt`, `gte`, `lt`, `lte`, `in`, `nin`.\n  - `eq`: equals\n  - `ne`: not equal\n  - `gt`: greater than\n  - `gte`: greater than or equal\n  - `lt`: less than\n  - `lte`: less than or equal\n  - `in`: in\n  - `nin`: not in"
+                },
+                "key": {
+                    "type": "string",
+                    "description": "The key to compare against the value."
+                },
+                "value": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "number"
+                        },
+                        {
+                            "type": "boolean"
+                        },
+                        {
+                            "type": "array",
+                            "items": {
+                                "anyOf": [
+                                    {
+                                        "type": "string"
+                                    },
+                                    {
+                                        "type": "number"
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "description": "The value to compare against the attribute key; supports string, number, or boolean types."
+                }
+            },
+            "required": [
+                "type",
+                "key",
+                "value"
+            ],
+            "description": "A filter used to compare a specified attribute key to a given value using a defined comparison operation.",
+            "title": "Comparison Filter"
+        },
+        "CompoundFilter": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "anyOf": [
+                        {
+                            "type": "string",
+                            "const": "and"
+                        },
+                        {
+                            "type": "string",
+                            "const": "or"
+                        }
+                    ],
+                    "description": "Type of operation: `and` or `or`."
+                },
+                "filters": {
+                    "type": "array",
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/ComparisonFilter"
+                            },
+                            {}
+                        ]
+                    },
+                    "description": "Array of filters to combine. Items can be `ComparisonFilter` or `CompoundFilter`."
+                }
+            },
+            "required": [
+                "type",
+                "filters"
+            ],
+            "description": "Combine multiple filters using `and` or `or`.",
+            "title": "Compound Filter"
+        },
+        "FunctionShellToolParamEnvironmentLocalEnvironmentParam": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "local",
+                    "default": "local",
+                    "description": "Use a local computer environment."
+                },
+                "skills": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/LocalSkillParam"
+                    },
+                    "maxItems": 200,
+                    "description": "An optional list of skills."
+                }
+            },
+            "required": [
+                "type"
+            ]
+        },
+        "FunctionShellToolParamEnvironmentContainerReferenceParam": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "container_reference",
+                    "default": "container_reference",
+                    "description": "References a container created with the /v1/containers endpoint"
+                },
+                "container_id": {
+                    "type": "string",
+                    "description": "The ID of the referenced container."
+                }
+            },
+            "required": [
+                "type",
+                "container_id"
+            ]
+        },
+        "ContainerAutoParam": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "container_auto",
+                    "default": "container_auto",
+                    "description": "Automatically creates a container for this request"
+                },
+                "file_ids": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "maxItems": 50,
+                    "description": "An optional list of uploaded files to make available to your code."
+                },
+                "memory_limit": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ContainerMemoryLimit"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "skills": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/ContainerSkill"
+                    },
+                    "maxItems": 200,
+                    "description": "An optional list of skills referenced by id or inline data."
+                },
+                "network_policy": {
+                    "$ref": "#/$defs/ContainerNetworkPolicyParam"
+                }
+            },
+            "required": [
+                "type"
+            ]
+        },
+        "FunctionShellToolParamEnvironmentType": {
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "string",
+                    "const": "container_auto"
+                },
+                {
+                    "type": "string",
+                    "const": "local"
+                },
+                {
+                    "type": "string",
+                    "const": "container_reference"
+                }
+            ]
+        },
+        "CustomTextFormatParam": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "text",
+                    "default": "text",
+                    "description": "Unconstrained text format. Always `text`."
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "description": "Unconstrained free-form text.",
+            "title": "Text format"
+        },
+        "CustomGrammarFormatParam": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "grammar",
+                    "default": "grammar",
+                    "description": "Grammar format. Always `grammar`."
+                },
+                "syntax": {
+                    "$ref": "#/$defs/GrammarSyntax1",
+                    "description": "The syntax of the grammar definition. One of `lark` or `regex`."
+                },
+                "definition": {
+                    "type": "string",
+                    "description": "The grammar definition."
+                }
+            },
+            "required": [
+                "type",
+                "syntax",
+                "definition"
+            ],
+            "description": "A grammar defined by the user.",
+            "title": "Grammar format"
+        },
+        "CustomToolParamFormatType": {
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "string",
+                    "const": "text"
+                },
+                {
+                    "type": "string",
+                    "const": "grammar"
+                }
+            ]
+        },
+        "TelemetryTransportProtocol": {
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "string",
+                    "const": "Http",
+                    "description": "HTTP transport protocol."
+                },
+                {
+                    "type": "string",
+                    "const": "Grpc",
+                    "description": "gRPC transport protocol."
+                }
+            ],
+            "description": "The transport protocol for telemetry export."
+        },
+        "HeaderTelemetryEndpointAuth": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "header",
+                    "description": "The authentication type, always 'header' for header-based secret authentication."
+                },
+                "header_name": {
+                    "type": "string",
+                    "examples": [
+                        "X-Otlp-Api-Key"
+                    ],
+                    "description": "The name of the HTTP header to inject the secret value into."
+                },
+                "secret_id": {
+                    "type": "string",
+                    "examples": [
+                        "my-secret-store"
+                    ],
+                    "description": "The identifier of the secret store or connection."
+                },
+                "secret_key": {
+                    "type": "string",
+                    "examples": [
+                        "OTLP_KEY"
+                    ],
+                    "description": "The key within the secret to retrieve the authentication value."
+                }
+            },
+            "required": [
+                "type",
+                "header_name",
+                "secret_id",
+                "secret_key"
+            ],
+            "description": "Header-based secret authentication for a telemetry endpoint. The resolved secret value is injected as an HTTP header."
+        },
+        "TelemetryEndpointAuthType": {
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "string",
+                    "const": "header",
+                    "description": "Header-based secret authentication."
+                }
+            ],
+            "description": "The type of authentication for a telemetry endpoint."
+        },
+        "ResponseFormatJsonSchemaSchema": {
+            "type": "object",
+            "properties": {},
+            "unevaluatedProperties": {},
+            "description": "The schema for the response format, described as a JSON Schema object.\nLearn how to build JSON schemas [here](https://json-schema.org/).",
+            "title": "JSON schema"
+        },
+        "AzureAISearchQueryType": {
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "string",
+                    "const": "simple",
+                    "description": "Query type `simple`"
+                },
+                {
+                    "type": "string",
+                    "const": "semantic",
+                    "description": "Query type `semantic`"
+                },
+                {
+                    "type": "string",
+                    "const": "vector",
+                    "description": "Query type `vector`"
+                },
+                {
+                    "type": "string",
+                    "const": "vector_simple_hybrid",
+                    "description": "Query type `vector_simple_hybrid`"
+                },
+                {
+                    "type": "string",
+                    "const": "vector_semantic_hybrid",
+                    "description": "Query type `vector_semantic_hybrid`"
+                }
+            ],
+            "description": "Available query types for Azure AI Search tool."
+        },
+        "OpenApiAnonymousAuthDetails": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "anonymous",
+                    "description": "The object type, which is always 'anonymous'."
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "description": "Security details for OpenApi anonymous authentication"
+        },
+        "OpenApiProjectConnectionAuthDetails": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "project_connection",
+                    "description": "The object type, which is always 'project_connection'."
+                },
+                "security_scheme": {
+                    "$ref": "#/$defs/OpenApiProjectConnectionSecurityScheme",
+                    "description": "Project connection auth security details"
+                }
+            },
+            "required": [
+                "type",
+                "security_scheme"
+            ],
+            "description": "Security details for OpenApi project connection authentication"
+        },
+        "OpenApiManagedAuthDetails": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "managed_identity",
+                    "description": "The object type, which is always 'managed_identity'."
+                },
+                "security_scheme": {
+                    "$ref": "#/$defs/OpenApiManagedSecurityScheme",
+                    "description": "Connection auth security details"
+                }
+            },
+            "required": [
+                "type",
+                "security_scheme"
+            ],
+            "description": "Security details for OpenApi managed_identity authentication"
+        },
+        "OpenApiAuthType": {
+            "anyOf": [
+                {
+                    "type": "string",
+                    "const": "anonymous"
+                },
+                {
+                    "type": "string",
+                    "const": "project_connection"
+                },
+                {
+                    "type": "string",
+                    "const": "managed_identity"
+                },
+                {
+                    "type": "string"
+                }
+            ],
+            "description": "Authentication type for OpenApi endpoint. Allowed types are:\n- Anonymous (no authentication required)\n- Project Connection (requires project_connection_id to endpoint, as setup in AI Foundry)\n- Managed_Identity (requires audience for identity based auth)"
+        },
+        "AzureFunctionStorageQueue": {
+            "type": "object",
+            "properties": {
+                "queue_service_endpoint": {
+                    "type": "string",
+                    "description": "URI to the Azure Storage Queue service allowing you to manipulate a queue."
+                },
+                "queue_name": {
+                    "type": "string",
+                    "description": "The name of an Azure function storage queue."
+                }
+            },
+            "required": [
+                "queue_service_endpoint",
+                "queue_name"
+            ],
+            "description": "The structure for keeping storage queue name and URI."
+        },
+        "ContainerNetworkPolicyDisabledParam": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "disabled",
+                    "default": "disabled",
+                    "description": "Disable outbound network access. Always `disabled`."
+                }
+            },
+            "required": [
+                "type"
+            ]
+        },
+        "ContainerNetworkPolicyAllowlistParam": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "allowlist",
+                    "default": "allowlist",
+                    "description": "Allow outbound network access only to specified domains. Always `allowlist`."
+                },
+                "allowed_domains": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "minItems": 1,
+                    "description": "A list of allowed domains when type is `allowlist`."
+                },
+                "domain_secrets": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/ContainerNetworkPolicyDomainSecretParam"
+                    },
+                    "minItems": 1,
+                    "description": "Optional domain-scoped secrets for allowlisted domains."
+                }
+            },
+            "required": [
+                "type",
+                "allowed_domains"
+            ]
+        },
+        "ContainerNetworkPolicyParamType": {
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "string",
+                    "const": "disabled"
+                },
+                {
+                    "type": "string",
+                    "const": "allowlist"
+                }
+            ]
+        },
+        "LocalSkillParam": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "The name of the skill."
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The description of the skill."
+                },
+                "path": {
+                    "type": "string",
+                    "description": "The path to the directory containing the skill."
+                }
+            },
+            "required": [
+                "name",
+                "description",
+                "path"
+            ]
+        },
+        "ContainerSkill": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "$ref": "#/$defs/ContainerSkillType"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "oneOf": [
+                {
+                    "$ref": "#/$defs/SkillReferenceParam"
+                },
+                {
+                    "$ref": "#/$defs/InlineSkillParam"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "not": {
+                                "enum": [
+                                    "skill_reference",
+                                    "inline"
+                                ]
+                            }
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                }
+            ]
+        },
+        "GrammarSyntax1": {
+            "type": "string",
+            "enum": [
+                "lark",
+                "regex"
+            ]
+        },
+        "OpenApiProjectConnectionSecurityScheme": {
+            "type": "object",
+            "properties": {
+                "project_connection_id": {
+                    "type": "string",
+                    "description": "Project connection id for Project Connection auth type"
+                }
+            },
+            "required": [
+                "project_connection_id"
+            ],
+            "description": "Security scheme for OpenApi managed_identity authentication"
+        },
+        "OpenApiManagedSecurityScheme": {
+            "type": "object",
+            "properties": {
+                "audience": {
+                    "type": "string",
+                    "description": "Authentication scope for managed_identity auth type"
+                }
+            },
+            "required": [
+                "audience"
+            ],
+            "description": "Security scheme for OpenApi managed_identity authentication"
+        },
+        "ContainerNetworkPolicyDomainSecretParam": {
+            "type": "object",
+            "properties": {
+                "domain": {
+                    "type": "string",
+                    "minLength": 1,
+                    "description": "The domain associated with the secret."
+                },
+                "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "description": "The name of the secret to inject for the domain."
+                },
+                "value": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 10485760,
+                    "description": "The secret value to inject for the domain."
+                }
+            },
+            "required": [
+                "domain",
+                "name",
+                "value"
+            ]
+        },
+        "SkillReferenceParam": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "skill_reference",
+                    "default": "skill_reference",
+                    "description": "References a skill created with the /v1/skills endpoint."
+                },
+                "skill_id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 64,
+                    "description": "The ID of the referenced skill."
+                },
+                "version": {
+                    "type": "string",
+                    "description": "Optional skill version. Use a positive integer or 'latest'. Omit for default."
+                }
+            },
+            "required": [
+                "type",
+                "skill_id"
+            ]
+        },
+        "InlineSkillParam": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "inline",
+                    "default": "inline",
+                    "description": "Defines an inline skill for this request."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the skill."
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The description of the skill."
+                },
+                "source": {
+                    "$ref": "#/$defs/InlineSkillSourceParam",
+                    "description": "Inline skill payload"
+                }
+            },
+            "required": [
+                "type",
+                "name",
+                "description",
+                "source"
+            ]
+        },
+        "ContainerSkillType": {
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "string",
+                    "const": "skill_reference"
+                },
+                {
+                    "type": "string",
+                    "const": "inline"
+                }
+            ]
+        },
+        "InlineSkillSourceParam": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "base64",
+                    "default": "base64",
+                    "description": "The type of the inline skill source. Must be `base64`."
+                },
+                "media_type": {
+                    "type": "string",
+                    "const": "application/zip",
+                    "default": "application/zip",
+                    "description": "The media type of the inline skill payload. Must be `application/zip`."
+                },
+                "data": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 70254592,
+                    "description": "Base64-encoded skill zip bundle."
+                }
+            },
+            "required": [
+                "type",
+                "media_type",
+                "data"
+            ],
+            "description": "Inline skill payload"
+        }
+    }
+}
