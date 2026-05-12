@@ -511,12 +511,10 @@ interface Sites {
   createOneDeployOperation is SiteOps.ActionAsync<
     Site,
     OneDeployRequest,
-    {
-      @body body: void;
-    },
+    ArmResponse<OneDeployResponse>,
     OverrideErrorType = DefaultErrorResponse,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmLroLocationHeader<FinalResult = void>
+      ArmLroLocationHeader<FinalResult = OneDeployResponse>
   >;
 
   /**
@@ -1923,12 +1921,10 @@ interface WebApps {
   createOneDeployOperationSlot is WebAppOps.ActionAsync<
     Site,
     OneDeployRequest,
-    {
-      @body body: void;
-    },
+    ArmResponse<OneDeployResponse>,
     OverrideErrorType = DefaultErrorResponse,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmLroLocationHeader<FinalResult = void>
+      ArmLroLocationHeader<FinalResult = OneDeployResponse>
   >;
 
   /**
