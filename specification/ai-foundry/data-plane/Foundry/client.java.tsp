@@ -155,6 +155,8 @@ namespace Azure.AI.Projects;
 // and `MemoryStoreUpdateResponse`.
 @@clientName(OpenAI.Error, "ApiError");
 
+@@clientName(RedTeamTargetConfig, "TargetConfig");
+
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
 // --------------------------------------------------------------------------------
