@@ -61,7 +61,6 @@ directive:
 
   - suppress: LroLocationHeader
     from: virtualNetworks.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridContainerService/virtualNetworks/{virtualNetworkName}"].patch
     reason: "Existing violation in main; surfaced by v2 folder migration (no API shape change)."
 ```
 
