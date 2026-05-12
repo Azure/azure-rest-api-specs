@@ -95,33 +95,38 @@ using Microsoft.NetApp;
 // C# customizations (csharp scope)
 // =============================================================================
 
-/** C# extensible replacement for NetApp provisioning state values. */
-union NetAppVolumeQuotaRuleProvisioningStateDef {
-  string,
-
-  /** Resource has been Accepted. */
+/** C# provisioning state values used to compose the extensible replacement union. */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Backward compat: compose the replacement union from the existing enum values plus string."
+enum NetAppProvisioningStateDef {
+  /** The request has been accepted. */
   Accepted: "Accepted",
 
-  /** Resource is being Created. */
+  /** The resource is being created. */
   Creating: "Creating",
 
-  /** Resource is being Patched. */
+  /** The resource is being patched. */
   Patching: "Patching",
 
-  /** Resource is updating. */
+  /** The resource is being updated. */
   Updating: "Updating",
 
-  /** Resource is being Deleted. */
+  /** The resource is being deleted. */
   Deleting: "Deleting",
 
-  /** Resource is being Moved. */
+  /** The resource is being moved. */
   Moving: "Moving",
 
-  /** Resource has Failed. */
+  /** The operation failed. */
   Failed: "Failed",
 
-  /** Resource has Succeeded. */
+  /** The operation succeeded. */
   Succeeded: "Succeeded",
+}
+
+/** C# extensible replacement for NetApp provisioning state values. */
+union NetAppVolumeQuotaRuleProvisioningStateDef {
+  NetAppProvisioningStateDef,
+  string,
 }
 
 // --- @@clientName: model and property renames for C# ---
