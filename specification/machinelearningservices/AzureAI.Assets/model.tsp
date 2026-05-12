@@ -40,6 +40,7 @@ model AssetVersion {
 
 @doc("DeploymentTemplate resource definition")
 model DeploymentTemplate is AssetVersion {
+  @added(Versions.`2026-05-01-preview`)
   @doc("The display name of the deployment template.")
   displayName?: string;
 
@@ -70,6 +71,7 @@ model DeploymentTemplate is AssetVersion {
   @doc("List of allowed instance types for the deployment.")
   allowedInstanceType: string[];
 
+  @added(Versions.`2026-05-01-preview`)
   @doc("Accelerator configurations for the deployment template.")
   acceleratorMaps?: AcceleratorMap[];
 
