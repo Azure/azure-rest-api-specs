@@ -1,0 +1,235 @@
+﻿import "@typespec/rest";
+import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "../Common/main.tsp";
+
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using Common;
+
+namespace StandardsAPI;
+
+/**
+ * The cloud that the standard is supported on.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+enum StandardSupportedClouds {
+  /**
+   * AWS
+   */
+  AWS,
+
+  /**
+   * GCP
+   */
+  GCP,
+}
+
+/**
+ * Page of a Standard list
+ */
+model StandardList {
+  /**
+   * Collection of standards in this page
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: Standard[];
+
+  /**
+   * The URI to fetch the next page
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * Describes properties of a standard.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model StandardProperties {
+  /**
+   * display name of the standard, equivalent to the standardId
+   */
+  displayName?: string;
+
+  /**
+   * standard type (Custom or BuiltIn only currently)
+   */
+  @visibility(Lifecycle.Read)
+  standardType?: string;
+
+  /**
+   * description of the standard
+   */
+  description?: string;
+
+  /**
+   * category of the standard provided
+   */
+  category?: string;
+
+  /**
+   * List of component objects containing component unique keys (such as assessment keys) to apply to standard scope.  Currently only supports assessment keys.
+   */
+  @identifiers(#[])
+  components?: StandardComponentProperties[];
+
+  /**
+   * List of all standard supported clouds.
+   */
+  supportedClouds?: StandardSupportedClouds[];
+}
+
+/**
+ * Describes properties of an component as related to the standard
+ */
+model StandardComponentProperties {
+  /**
+   * Component Key matching componentMetadata
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  key?: string;
+}
+
+/**
+ * Describes an Azure tracked resource.
+ */
+model TrackedResource {
+  ...Azure.ResourceManager.Foundations.Resource;
+  ...AzureTrackedResourceLocation;
+  ...AzureTrackedResourceKind;
+  ...ETag;
+  ...Tags;
+}
+
+/**
+ * Describes an Azure resource with location
+ */
+model AzureTrackedResourceLocation {
+  /**
+   * Location where the resource is stored
+   */
+  location?: string;
+}
+
+/**
+ * Describes an Azure resource with kind
+ */
+model AzureTrackedResourceKind {
+  /**
+   * Kind of the resource
+   */
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  kind?: string;
+}
+
+/**
+ * Entity tag is used for comparing two or more entities from the same requested resource.
+ */
+// #suppress applies to the next declaration
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model ETag {
+  /**
+   * Entity tag is used for comparing two or more entities from the same requested resource.
+   */
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  etag?: string;
+}
+
+/**
+ * Page of a standard assignment list
+ */
+model AssignmentList {
+  /**
+   * Collection of standardAssignments in this page
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: Assignment[];
+
+  /**
+   * The URI to fetch the next page
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * Describes the properties of a standardAssignment
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model AssignmentProperties {
+  /**
+   * display name of the standardAssignment
+   */
+  displayName?: string;
+
+  /**
+   * description of the standardAssignment
+   */
+  description?: string;
+
+  /**
+   * Standard item with key as applied to this standard assignment over the given scope
+   */
+  assignedStandard?: AssignedStandardItem;
+
+  /**
+   * Component item with key as applied to this standard assignment over the given scope
+   */
+  assignedComponent?: AssignedComponentItem;
+
+  /**
+   * Scope to which the standardAssignment applies - can be a subscription path or a resource group under that subscription
+   */
+  scope?: string;
+
+  /**
+   * expected effect of this assignment (Disable/Exempt/etc)
+   */
+  effect?: string;
+
+  /**
+   * Expiration date of this assignment as a full ISO date
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  expiresOn?: utcDateTime;
+
+  /**
+   * Additional data about the assignment
+   */
+  additionalData?: AssignmentPropertiesAdditionalData;
+
+  /**
+   * The assignment metadata. Metadata is an open ended object and is typically a collection of key value pairs.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  metadata?: unknown;
+}
+
+/**
+ * describe the properties of a security assessment object reference (by key)
+ */
+model AssignedComponentItem {
+  /**
+   * unique key to a security assessment object
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  key?: string;
+}
+
+/**
+ * Additional data about the assignment
+ */
+model AssignmentPropertiesAdditionalData {
+  /**
+   * Exemption category of this assignment
+   */
+  exemptionCategory?: string;
+}
