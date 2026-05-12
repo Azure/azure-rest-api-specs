@@ -8,6 +8,7 @@ import "./BackupVaultResource.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.DataProtection;
@@ -170,12 +171,27 @@ interface BackupInstanceResources {
   /**
    * This operation will resume protection for a stopped backup instance
    */
-  resumeProtection is BackupInstanceResourceOps.ActionAsync<
+  @removed(Versions.v2026_04_01_preview)
+  @renamedFrom(Versions.v2026_04_01_preview, "resumeProtection")
+  resumeProtectionLegacy is BackupInstanceResourceOps.ActionAsync<
     BackupInstanceResource,
     void,
     OkResponse,
     Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
     OverrideErrorType = CloudError
+  >;
+
+  /**
+   * This operation will resume protection for a stopped backup instance
+   */
+  @added(Versions.v2026_04_01_preview)
+  resumeProtection is BackupInstanceResourceOps.ActionAsync<
+    BackupInstanceResource,
+    ResumeProtectionRequest,
+    OkResponse,
+    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
+    OverrideErrorType = CloudError,
+    OptionalRequestBody = true
   >;
 
   /**

@@ -220,3 +220,7 @@ using Microsoft.DataFactory;
   "python"
 );
 @@clientName(Type, "LinkedServiceReferenceType", "go");
+@@clientName(Factories.dataFlowDebugSessionQueryByFactory,
+  "listQueryByFactory",
+  "javascript"
+);
