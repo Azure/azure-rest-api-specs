@@ -71,7 +71,8 @@ model FabricMirroringSettingsProperties {
  * Fabric Mirroring settings proxy resource.
  */
 @parentResource(Server)
-model FabricMirroringSettings is ProxyResource<FabricMirroringSettingsProperties> {
+model FabricMirroringSettings
+  is ProxyResource<FabricMirroringSettingsProperties> {
   ...ResourceNameParameter<
     Resource = FabricMirroringSettings,
     KeyName = "fabricMirroringSettingsName",
@@ -85,12 +86,10 @@ model FabricMirroringSettings is ProxyResource<FabricMirroringSettingsProperties
 @added(Versions.v2025_12_01_preview)
 interface FabricMirroringSettingsOperations {
   @doc("Get Fabric Mirroring settings.")
-  @operationId("FabricMirroringSettings_Get")
   get is ArmResourceRead<FabricMirroringSettings>;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Async PUT returns 202 Accepted for long-running operations"
   @doc("Create or update Fabric Mirroring settings.")
-  @operationId("FabricMirroringSettings_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     FabricMirroringSettings,
     Response = ArmResourceUpdatedResponse<FabricMirroringSettings> | ArmResourceCreatedResponse<
@@ -101,6 +100,5 @@ interface FabricMirroringSettingsOperations {
   >;
 
   @doc("List Fabric Mirroring settings by server.")
-  @operationId("FabricMirroringSettings_ListByServer")
   listByServer is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<FabricMirroringSettings>;
 }
