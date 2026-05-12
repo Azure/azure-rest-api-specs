@@ -933,7 +933,9 @@ interface File {
       ...FileSmtPropertyResponseHeaders;
       ...LeaseResponseHeaders;
       ...StructuredBodyResponseHeaders;
-      ...NfsResponseHeaders;
+      ...NfsModeHeader;
+      ...NfsOwnerHeader;
+      ...NfsGroupHeader;
       ...LinkCountResponseHeader;
       @body content?: bytes;
     },
