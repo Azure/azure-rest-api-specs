@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2025-01-01",
+    "databaseName": "myDatabase",
+    "managedInstanceName": "myManagedInstanceName",
+    "parameters": {
+      "operations": [
+        {
+          "properties": {
+            "schema": "dbo",
+            "column": "column1",
+            "op": "enable",
+            "table": "table1"
+          }
+        },
+        {
+          "properties": {
+            "schema": "dbo",
+            "column": "column2",
+            "op": "disable",
+            "table": "table2"
+          }
+        },
+        {
+          "properties": {
+            "schema": "dbo",
+            "column": "Column3",
+            "op": "disable",
+            "table": "Table1"
+          }
+        }
+      ]
+    },
+    "resourceGroupName": "myRG",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {}
+  },
+  "operationId": "ManagedDatabaseRecommendedSensitivityLabels_Update",
+  "title": "Update recommended sensitivity labels of a given database using an operations batch."
+}

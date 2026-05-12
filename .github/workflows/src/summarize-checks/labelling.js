@@ -651,7 +651,13 @@ function processARMReviewWorkflowLabels(
     ciRpaasRPNotInPrivateRepoLabelShouldBePresent,
   );
 
-  const blocked = blockedOnRpaas || blockedOnVersioningPolicy;
+  // Block if ARMModelingReviewRequired is present (new RP namespace or new resource type detected)
+  const armModelingReviewLabel = new Label("ARMModelingReviewRequired", labelContext.present);
+  // Block if the label is already present or if it's being added by another check (e.g. detect-new-resource-provider)
+  const blockedOnArmModeling =
+    armModelingReviewLabel.present || labelContext.toAdd.has("ARMModelingReviewRequired");
+
+  const blocked = blockedOnRpaas || blockedOnVersioningPolicy || blockedOnArmModeling;
 
   // If given PR is in scope of ARM review and it is blocked for any reason,
   // the "NotReadyForARMReview" label should be present, to the exclusion
@@ -707,7 +713,8 @@ function processARMReviewWorkflowLabels(
   console.log(
     `RETURN definition processARMReviewWorkflowLabels. ` +
       `presentLabels: ${[...labelContext.present].join(",")}, ` +
-      `blockedOnRpaas: ${blockedOnRpaas}. ` +
+      `blockedOnRpaas: ${blockedOnRpaas}, ` +
+      `blockedOnArmModeling: ${blockedOnArmModeling}. ` +
       `exactlyOneArmReviewWorkflowLabelShouldBePresent: ${exactlyOneArmReviewWorkflowLabelShouldBePresent}. `,
   );
 }
@@ -884,6 +891,25 @@ const rulesPri0NotReadyForArmReview = [
     allPrerequisiteLabels: ["NotReadyForARMReview", brChRev],
     anyRequiredLabels: [brChRevApproval],
     troubleshootingGuide: notReadyForArmReviewReason(brChRev),
+  },
+  {
+    precedence: 0,
+    anyPrerequisiteLabels: ["ARMModelingReviewRequired"],
+    anyRequiredLabels: [],
+    troubleshootingGuide: wrapInArmReviewMessage(
+      "This PR has <code>ARMModelingReviewRequired</code> label. " +
+        "This means it is introducing a new Resource Provider namespace or a new resource type. " +
+        "New RPs and new resource types require a discussion with the ARM Modeling Review team before merging.<br/><br/>" +
+        "<b>If you haven't discussed yet:</b><br/>" +
+        "Please schedule a meeting at " +
+        `${href("ARM API Modeling Office Hours", "https://outlook.office365.com/book/ARMOfficeHours1@microsoft.onmicrosoft.com/?ismsaljsauthenabled=true")}.<br/><br/>` +
+        "<b>If <code>ARMModelingSignedOff</code> label was removed by automation:</b><br/>" +
+        "This happens when the lease file is not found. Please check with the PM you discussed your design with " +
+        "to confirm if the lease file PR has been merged. " +
+        "In the public repo, lease files reflect immediately after merge. " +
+        "In the private repo (<code>azure-rest-api-specs-pr</code>), lease files typically sync within a few hours, but it can take up to 1-2 business days depending on sync pipeline timing and queue load. " +
+        "Please wait for the sync to complete.",
+    ),
   },
 ];
 

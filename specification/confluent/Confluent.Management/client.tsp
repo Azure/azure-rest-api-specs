@@ -3,9 +3,13 @@ import "./main.tsp";
 
 using Azure.Core;
 using Azure.ClientGenerator.Core;
+using Azure.ClientGenerator.Core.Legacy;
 using Microsoft.Confluent;
 
-@@clientName(Microsoft.Confluent, "ConfluentManagementClient", "javascript");
+@@clientName(Microsoft.Confluent,
+  "ConfluentManagementClient",
+  "javascript,python"
+);
 // Added Java Configuration to pass specs CI check.
 // Need to revisit before SDK release.
 @@clientName(APIKeyResourceEntity, "ApiKeyResourceEntity", "java,csharp");
@@ -39,8 +43,9 @@ using Microsoft.Confluent;
 @@clientName(OfferDetail, "ConfluentOfferDetail", "csharp");
 @@clientName(SaaSOfferStatus, "ConfluentSaaSOfferStatus", "csharp");
 @@clientName(APIKeyRecord, "ConfluentApiKeyRecord", "csharp");
-
 @@clientName(OrganizationResource, "ConfluentOrganization", "csharp");
+@@clientName(OrganizationResources, "ConfluentOrganization", "csharp");
+@@clientName(ConnectorResource, "ConfluentConnector", "csharp");
 @@alternateType(OrganizationResourceProperties.organizationId, uuid, "csharp");
 @@clientName(ConfluentAgreementResource, "ConfluentAgreement", "csharp");
 @@clientName(ConfluentAgreementProperties.accepted, "IsAccepted", "csharp");
@@ -173,3 +178,56 @@ using Microsoft.Confluent;
 );
 @@alternateType(OrganizationResourceProperties.ssoUrl, url, "csharp");
 @@clientName(SCClusterRecords.createAPIKey, "createAPIKey", "javascript");
+
+// Rename generic enum type names to be more descriptive for C#
+@@clientName(Package, "ConfluentPackage", "csharp");
+@@clientName(AuthType, "ConfluentAuthType", "csharp");
+@@clientName(DataFormatType, "ConfluentDataFormatType", "csharp");
+
+// Rename ALL_UPPERCASE enum values to PascalCase for C#
+// Package
+@@clientName(Package.ESSENTIALS, "Essentials", "csharp");
+@@clientName(Package.ADVANCED, "Advanced", "csharp");
+
+// AuthType
+@@clientName(AuthType.SERVICE_ACCOUNT, "ServiceAccount", "csharp");
+@@clientName(AuthType.KAFKA_API_KEY, "KafkaApiKey", "csharp");
+
+// ConnectorType
+@@clientName(ConnectorType.SINK, "Sink", "csharp");
+@@clientName(ConnectorType.SOURCE, "Source", "csharp");
+
+// ConnectorClass
+@@clientName(ConnectorClass.AZUREBLOBSOURCE, "AzureBlobSource", "csharp");
+@@clientName(ConnectorClass.AZUREBLOBSINK, "AzureBlobSink", "csharp");
+@@clientName(ConnectorClass.AZURECOSMOSV2SINK, "AzureCosmosV2Sink", "csharp");
+@@clientName(ConnectorClass.AZURECOSMOSV2SOURCE,
+  "AzureCosmosV2Source",
+  "csharp"
+);
+
+// ConnectorStatus
+@@clientName(ConnectorStatus.PROVISIONING, "Provisioning", "csharp");
+@@clientName(ConnectorStatus.RUNNING, "Running", "csharp");
+@@clientName(ConnectorStatus.PAUSED, "Paused", "csharp");
+@@clientName(ConnectorStatus.FAILED, "Failed", "csharp");
+
+// DataFormatType
+@@clientName(DataFormatType.AVRO, "Avro", "csharp");
+@@clientName(DataFormatType.JSON, "Json", "csharp");
+@@clientName(DataFormatType.STRING, "String", "csharp");
+@@clientName(DataFormatType.BYTES, "Bytes", "csharp");
+@@clientName(DataFormatType.PROTOBUF, "Protobuf", "csharp");
+
+// Restore the old operation name for the access-control list environments operation
+@@clientName(OrganizationResources.listEnvironments,
+  "GetAccessEnvironments",
+  "csharp"
+);
+
+// Restore ConfluentAgreement base type to ResourceData for backward compatibility
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore ResourceData base type for backward compatibility"
+@@hierarchyBuilding(ConfluentAgreementResource,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);

@@ -26,6 +26,7 @@ options:
     service-dir: sdk/maps
     emitter-output-dir: "{output-dir}/{service-dir}/arm-maps"
     flavor: "azure"
+    compatibility-lro: true
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-maps"
@@ -39,6 +40,9 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.Maps"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

@@ -17,6 +17,8 @@ namespace Microsoft.MachineLearningServices;
  * Azure OpenAI Content Filters resource.
  */
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
 @parentResource(WorkspaceConnectionPropertiesV2BasicResource)
 model RaiPolicyPropertiesBasicResource
   is Azure.ResourceManager.ProxyResource<RaiPolicyProperties, false> {
@@ -32,6 +34,8 @@ model RaiPolicyPropertiesBasicResource
  * RaiPolicyPropertiesBasicResourceOps is preview-only.
  */
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
 @armResourceOperations
 interface RaiPolicyPropertiesBasicResourceOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -69,6 +73,8 @@ interface RaiPolicyPropertiesBasicResourceOps
  * RaiPolicyPropertiesBasicResources is preview-only.
  */
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
 @armResourceOperations
 interface RaiPolicyPropertiesBasicResources {
   /**
@@ -84,12 +90,7 @@ interface RaiPolicyPropertiesBasicResources {
   create is RaiPolicyPropertiesBasicResourceOps.CreateOrUpdateAsync<
     RaiPolicyPropertiesBasicResource,
     Parameters = {
-      /**
-       * Api version used by proxy call
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
-      @query("proxy-api-version")
-      `proxy-api-version`?: string;
+      ...ProxyApiVersion;
     },
     LroHeaders = ArmLroLocationHeader<FinalResult = RaiPolicyPropertiesBasicResource> &
       Azure.Core.Foundations.RetryAfterHeader
@@ -102,12 +103,7 @@ interface RaiPolicyPropertiesBasicResources {
   delete is RaiPolicyPropertiesBasicResourceOps.DeleteWithoutOkAsync<
     RaiPolicyPropertiesBasicResource,
     Parameters = {
-      /**
-       * Api version used by proxy call
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
-      @query("proxy-api-version")
-      `proxy-api-version`?: string;
+      ...ProxyApiVersion;
     }
   >;
 
@@ -118,12 +114,7 @@ interface RaiPolicyPropertiesBasicResources {
   list is RaiPolicyPropertiesBasicResourceOps.List<
     RaiPolicyPropertiesBasicResource,
     Parameters = {
-      /**
-       * Api version used by proxy call
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
-      @query("proxy-api-version")
-      `proxy-api-version`?: string;
+      ...ProxyApiVersion;
     },
     Response = ArmResponse<RaiPolicyPropertiesBasicResourceArmPaginatedResult>
   >;
@@ -133,6 +124,8 @@ interface RaiPolicyPropertiesBasicResources {
  * RaiPolicyOps is preview-only.
  */
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
 @armResourceOperations
 interface RaiPolicyOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -170,6 +163,8 @@ interface RaiPolicyOps
  * RaiPolicy is preview-only.
  */
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
 @armResourceOperations
 interface RaiPolicy {
   /**
@@ -185,12 +180,7 @@ interface RaiPolicy {
   create is RaiPolicyOps.CreateOrUpdateAsync<
     RaiPolicyPropertiesBasicResource,
     Parameters = {
-      /**
-       * Api version used by proxy call
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
-      @query("proxy-api-version")
-      `proxy-api-version`?: string;
+      ...ProxyApiVersion;
     },
     LroHeaders = ArmLroLocationHeader<FinalResult = RaiPolicyPropertiesBasicResource> &
       Azure.Core.Foundations.RetryAfterHeader
@@ -203,12 +193,7 @@ interface RaiPolicy {
   delete is RaiPolicyOps.DeleteWithoutOkAsync<
     RaiPolicyPropertiesBasicResource,
     Parameters = {
-      /**
-       * Api version used by proxy call
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
-      @query("proxy-api-version")
-      `proxy-api-version`?: string;
+      ...ProxyApiVersion;
     }
   >;
 
@@ -219,12 +204,7 @@ interface RaiPolicy {
   list is RaiPolicyOps.List<
     RaiPolicyPropertiesBasicResource,
     Parameters = {
-      /**
-       * Api version used by proxy call
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
-      @query("proxy-api-version")
-      `proxy-api-version`?: string;
+      ...ProxyApiVersion;
     },
     Response = ArmResponse<RaiPolicyPropertiesBasicResourceArmPaginatedResult>
   >;
