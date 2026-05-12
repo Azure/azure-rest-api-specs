@@ -4132,67 +4132,6 @@
         }
       }
     },
-    "/evaluation_suites/{name}/run": {
-      "post": {
-        "operationId": "EvaluationSuites_run",
-        "description": "Run an evaluation using the suite's testing criteria and dataset.",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the resource.",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/EvaluationSuiteRunResponse"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": false,
-                "description": "String error code indicating what went wrong.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/EvaluationSuiteRunRequest"
-              }
-            }
-          }
-        }
-      }
-    },
     "/evaluation_suites/{name}/versions": {
       "get": {
         "operationId": "EvaluationSuites_listVersions",
@@ -4248,18 +4187,6 @@
         "description": "Create a new EvaluationSuiteVersion with auto incremented version id",
         "parameters": [
           {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the resource.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "Foundry-Features",
             "in": "header",
             "required": false,
@@ -4270,6 +4197,25 @@
                 "Evaluations=V1Preview"
               ]
             }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the evaluation suite.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -4285,23 +4231,30 @@
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": false,
-                "description": "String error code indicating what went wrong.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
           }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvaluationSuiteVersionCreate"
+              }
+            }
+          },
+          "description": "The evaluation suite version to create."
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
         }
       }
     },
@@ -4492,6 +4445,83 @@
             }
           },
           "description": "The EvaluationSuiteVersion to create or update."
+        }
+      }
+    },
+    "/evaluation_suites/{name}:run": {
+      "post": {
+        "operationId": "EvaluationSuites_run",
+        "description": "Run an evaluation using the suite's testing criteria and dataset.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the evaluation suite.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluationSuiteRunResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvaluationSuiteRunRequest"
+              }
+            }
+          },
+          "description": "The run request parameters."
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
         }
       }
     },
@@ -19289,6 +19319,100 @@
             "type": "string",
             "description": "The version of the resource.",
             "readOnly": true
+          }
+        },
+        "description": "An evaluation suite bundles testing criteria — an optional dataset, one or more\nevaluator configs with thresholds and init params — into a reusable, named artifact that\ncan gate agent changes across batch, scheduled, continuous, and CI/CD evals."
+      },
+      "EvaluationSuiteVersionCreate": {
+        "type": "object",
+        "required": [
+          "testing_criteria"
+        ],
+        "properties": {
+          "display_name": {
+            "type": "string",
+            "description": "Human-readable display name.\nDoes not need to be unique. Shown in Foundry portal list views and eval reports."
+          },
+          "subtype": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationSuiteSubtype"
+              }
+            ],
+            "description": "Subtype of the evaluation suite."
+          },
+          "dataset": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationDatasetReference"
+              }
+            ],
+            "description": "Dataset reference for evaluation.\nOptional — omit for evaluator-only suites where data comes from\nlive production traces or is provided at run time.\nThe referenced dataset must exist in the project's dataset registry."
+          },
+          "testing_criteria": {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/OpenAI.EvalGraderLabelModel"
+                },
+                {
+                  "$ref": "#/components/schemas/OpenAI.EvalGraderStringCheck"
+                },
+                {
+                  "$ref": "#/components/schemas/OpenAI.EvalGraderTextSimilarity"
+                },
+                {
+                  "$ref": "#/components/schemas/OpenAI.EvalGraderPython"
+                },
+                {
+                  "$ref": "#/components/schemas/OpenAI.EvalGraderScoreModel"
+                },
+                {
+                  "$ref": "#/components/schemas/TestingCriterionAzureAIEvaluator"
+                }
+              ]
+            },
+            "minItems": 1,
+            "description": "Testing criteria — the evaluator configurations for this suite.\nSupports all grader types: azure_ai_evaluator, string_check, label_model,\nscore_model, text_similarity, python, etc.\nAt least one entry is required."
+          },
+          "target": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Target"
+              }
+            ],
+            "description": "Target for this evaluation suite. Uses the existing Target discriminated type\nfrom eval runs. Supports azure_ai_agent, azure_ai_model, azure_ai_assistant.\nOptional — allows suites to exist without a target."
+          },
+          "input_messages": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.CreateEvalResponsesRunDataSourceInputMessagesTemplate"
+              },
+              {
+                "$ref": "#/components/schemas/OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesItemReference"
+              }
+            ],
+            "description": "How to send dataset rows to the target (agent or model).\nSupports template type (prompt with column placeholders) and\nitem_reference type (column containing pre-built messages)."
+          },
+          "evaluation_level": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationLevel"
+              }
+            ],
+            "description": "Default evaluation level for this suite. Can be overridden at run time."
+          },
+          "description": {
+            "type": "string",
+            "description": "The asset description text."
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Tag dictionary. Tags can be added, removed, and updated."
           }
         },
         "description": "An evaluation suite bundles testing criteria — an optional dataset, one or more\nevaluator configs with thresholds and init params — into a reusable, named artifact that\ncan gate agent changes across batch, scheduled, continuous, and CI/CD evals."

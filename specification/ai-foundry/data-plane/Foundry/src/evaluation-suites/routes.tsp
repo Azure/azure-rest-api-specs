@@ -37,27 +37,41 @@ interface EvaluationSuites
   // POST /evaluation_suites/{name}/versions
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Create a new {name} with auto incremented version id", EvaluationSuiteVersion)
-  @Rest.segment("versions")
   @post
+  @route("/evaluation_suites/{name}/versions")
   @extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
-  createEvaluationSuiteVersion is Azure.Core.Foundations.ResourceOperation<
-    EvaluationSuiteVersion,
+  createEvaluationSuiteVersion is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
     {
-      ...WithConditionalFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
+      @doc("The name of the evaluation suite.")
+      @path
+      name: string;
+
+      @doc("The evaluation suite version to create.")
+      @bodyRoot
+      evaluationSuiteVersion: EvaluationSuiteVersion;
     },
-    Azure.Core.Foundations.ResourceCreatedResponse<EvaluationSuiteVersion>
+    Response<201> & EvaluationSuiteVersion
   >;
 
   // POST /evaluation_suites/{name}:run
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Run an evaluation using the suite's testing criteria and dataset.")
-  @action("run")
   @post
+  @route("/evaluation_suites/{name}:run")
   @extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
-  run is Azure.Core.Foundations.ResourceOperation<
-    EvaluationSuiteVersion,
-    EvaluationSuiteRunRequest,
-    Azure.Core.Foundations.ResourceCreatedResponse<EvaluationSuiteRunResponse>
+  run is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    {
+      @doc("The name of the evaluation suite.")
+      @path
+      name: string;
+
+      @doc("The run request parameters.")
+      @body
+      body: EvaluationSuiteRunRequest;
+    },
+    Response<201> & EvaluationSuiteRunResponse
   >;
 }
 
