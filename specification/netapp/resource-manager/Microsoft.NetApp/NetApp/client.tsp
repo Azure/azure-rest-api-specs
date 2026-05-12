@@ -137,31 +137,8 @@ enum NetAppProvisioningStateDef {
 
 /** Compatibility alias for NetApp volume quota rule provisioning state values. */
 union NetAppVolumeQuotaRuleProvisioningStateDef {
+  NetAppProvisioningStateDef,
   string,
-
-  /** The request has been accepted. */
-  Accepted: "Accepted",
-
-  /** The resource is being created. */
-  Creating: "Creating",
-
-  /** The resource is being patched. */
-  Patching: "Patching",
-
-  /** The resource is being deleted. */
-  Deleting: "Deleting",
-
-  /** The resource is being moved. */
-  Moving: "Moving",
-
-  /** The operation failed. */
-  Failed: "Failed",
-
-  /** The operation succeeded. */
-  Succeeded: "Succeeded",
-
-  /** The resource is being updated. */
-  Updating: "Updating",
 }
 
 // --- C# backward-compat union (unified relationship status) ---

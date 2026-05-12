@@ -13,15 +13,6 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.NetApp;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Parameter model only wraps the documented location path parameter and should continue emitting the shared ARM LocationParameter."
-model NetAppLocationParameter {
-  @path
-  @minLength(1)
-  @segment("locations")
-  @doc("The location name.")
-  location: Azure.Core.azureLocation;
-}
-
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface NetAppResourceOperationGroup {
   /**
@@ -33,7 +24,7 @@ interface NetAppResourceOperationGroup {
     Request = ResourceNameAvailabilityRequest,
     Response = CheckAvailabilityResponse,
     Scope = SubscriptionActionScope,
-    Parameters = NetAppLocationParameter
+    Parameters = LocationResourceParameter
   >;
   /**
    * Check if a file path is available.
@@ -44,7 +35,7 @@ interface NetAppResourceOperationGroup {
     Request = FilePathAvailabilityRequest,
     Response = CheckAvailabilityResponse,
     Scope = SubscriptionActionScope,
-    Parameters = NetAppLocationParameter
+    Parameters = LocationResourceParameter
   >;
   /**
    * Check if a quota is available.
@@ -55,7 +46,7 @@ interface NetAppResourceOperationGroup {
     Request = QuotaAvailabilityRequest,
     Response = CheckAvailabilityResponse,
     Scope = SubscriptionActionScope,
-    Parameters = NetAppLocationParameter
+    Parameters = LocationResourceParameter
   >;
   /**
    * Provides storage to network proximity and logical zone mapping information.
@@ -67,7 +58,7 @@ interface NetAppResourceOperationGroup {
   queryRegionInfo is ArmProviderActionSync<
     Response = RegionInfo,
     Scope = SubscriptionActionScope,
-    Parameters = NetAppLocationParameter
+    Parameters = LocationResourceParameter
   >;
   /**
    * Get details of the specified network sibling set.
@@ -78,7 +69,7 @@ interface NetAppResourceOperationGroup {
     Request = QueryNetworkSiblingSetRequest,
     Response = NetworkSiblingSet,
     Scope = SubscriptionActionScope,
-    Parameters = NetAppLocationParameter
+    Parameters = LocationResourceParameter
   >;
   /**
    * Update the network features of the specified network sibling set.
@@ -89,7 +80,7 @@ interface NetAppResourceOperationGroup {
     Request = UpdateNetworkSiblingSetRequest,
     Response = NetworkSiblingSet,
     Scope = SubscriptionActionScope,
-    Parameters = NetAppLocationParameter
+    Parameters = LocationResourceParameter
   >;
 }
 
@@ -106,7 +97,7 @@ interface NetAppResourceUsagesOperationGroup {
   list is ArmProviderActionSync<
     Response = UsagesListResult,
     Scope = SubscriptionActionScope,
-    Parameters = NetAppLocationParameter
+    Parameters = LocationResourceParameter
   >;
   /**
    * Get current subscription usage of the specific type
@@ -117,7 +108,7 @@ interface NetAppResourceUsagesOperationGroup {
   get(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
-    ...NetAppLocationParameter,
+    ...LocationResourceParameter,
 
     /**
      * The type of usage
