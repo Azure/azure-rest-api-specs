@@ -105,13 +105,20 @@ if ($env:GITHUB_STEP_SUMMARY) {
       $summary += ""
     }
 
-    $summary += "| Failed spec | Repro command |"
-    $summary += "| --- | --- |"
+    $summary += "| Failed spec |"
+    $summary += "| --- |"
     foreach ($folder in $typespecFoldersWithFailures) {
-      $summary += "| ``$folder`` | ``npx tsv $folder`` |"
+      $summary += "| ``$folder`` |"
     }
     $summary += ""
-    $summary += "> Run ``npm ci`` first, then the repro command above. [Docs](https://aka.ms/azsdk/specs/typespec-validation)"
+    $summary += "Run locally to reproduce ([docs](https://aka.ms/azsdk/specs/typespec-validation)):"
+    $summary += ""
+    $summary += '```bash'
+    $summary += "npm ci"
+    foreach ($folder in $typespecFoldersWithFailures) {
+      $summary += "npx tsv $folder"
+    }
+    $summary += '```'
   }
   else {
     $totalChecked = $passedCount + $suppressedCount
