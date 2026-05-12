@@ -1,6 +1,6 @@
 {
-  "title": "HealthModels_GetRecommendedSignals",
-  "operationId": "HealthModels_GetRecommendedSignals",
+  "title": "HealthModels_GetSignalRecommendations",
+  "operationId": "HealthModels_GetSignalRecommendations",
   "parameters": {
     "api-version": "2026-05-01-preview",
     "subscriptionId": "4980D7D5-4E07-47AD-AD34-E76C6BC9F061",
@@ -13,7 +13,7 @@
   "responses": {
     "200": {
       "body": {
-        "signals": [
+        "recommendedSignals": [
           {
             "id": "aa2a796a-d4b3-4fbc-952c-23798e0d8e3c",
             "metricNamespace": "microsoft.compute/virtualmachines",
@@ -30,8 +30,7 @@
                 "operator": "GreaterThan",
                 "threshold": 90.0
               }
-            },
-            "classification": "RecommendedSignal"
+            }
           },
           {
             "id": "c6b62f3d-426d-4239-90d7-081d8fb6852b",
@@ -45,9 +44,10 @@
                 "operator": "LessThan",
                 "threshold": 1000000000
               }
-            },
-            "classification": "RecommendedSignal"
-          },
+            }
+          }
+        ],
+        "recommendedConfigurations": [
           {
             "id": "52bdf074-69b3-41d2-a9de-f4359562ed7d",
             "metricNamespace": "microsoft.compute/virtualmachines",
@@ -60,8 +60,7 @@
                 "operator": "Dynamic",
                 "sensitivity": "Medium"
               }
-            },
-            "classification": "SuggestedThresholds"
+            }
           }
         ]
       }

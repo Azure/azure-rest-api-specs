@@ -1533,9 +1533,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudHealth/healthmodels/{healthModelName}/getRecommendedSignals": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudHealth/healthmodels/{healthModelName}/getSignalRecommendations": {
       "post": {
-        "operationId": "HealthModels_GetRecommendedSignals",
+        "operationId": "HealthModels_GetSignalRecommendations",
         "tags": [
           "HealthModels"
         ],
@@ -1564,7 +1564,7 @@
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/GetRecommendedSignalsRequest"
+              "$ref": "#/definitions/GetSignalRecommendationsRequest"
             }
           }
         ],
@@ -1572,7 +1572,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/GetRecommendedSignalsResponse"
+              "$ref": "#/definitions/GetSignalRecommendationsResponse"
             }
           },
           "default": {
@@ -1583,8 +1583,8 @@
           }
         },
         "x-ms-examples": {
-          "HealthModels_GetRecommendedSignals": {
-            "$ref": "./examples/HealthModels_GetRecommendedSignals.json"
+          "HealthModels_GetSignalRecommendations": {
+            "$ref": "./examples/HealthModels_GetSignalRecommendations.json"
           }
         }
       }
@@ -3253,9 +3253,9 @@
         "annotations"
       ]
     },
-    "GetRecommendedSignalsRequest": {
+    "GetSignalRecommendationsRequest": {
       "type": "object",
-      "description": "Request body for getting recommended signals for a given Azure resource type",
+      "description": "Request body for getting recommended signals for a given Azure resource type.",
       "properties": {
         "resourceType": {
           "type": "string",
@@ -3268,24 +3268,31 @@
         "resourceType"
       ]
     },
-    "GetRecommendedSignalsResponse": {
+    "GetSignalRecommendationsResponse": {
       "type": "object",
-      "description": "Response containing recommended signal configurations for a given Azure resource type",
+      "description": "Response containing recommended signal configurations for a given Azure resource type.",
       "properties": {
-        "signals": {
+        "recommendedSignals": {
           "type": "array",
-          "description": "List of recommended signal configurations for the specified resource type.",
+          "description": "List of recommended signal configurations for the specified resource type. These signals are generally recommended to be used on the specified resource type.",
           "items": {
-            "$ref": "#/definitions/RecommendedSignal"
+            "$ref": "#/definitions/SignalConfiguration"
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
+        },
+        "recommendedConfigurations": {
+          "type": "array",
+          "description": "List of recommended configurations (thresholds etc.) for the specified resource type.",
+          "items": {
+            "$ref": "#/definitions/SignalConfiguration"
           },
           "x-ms-identifiers": [
             "id"
           ]
         }
-      },
-      "required": [
-        "signals"
-      ]
+      }
     },
     "HealthModel": {
       "type": "object",
@@ -3891,91 +3898,6 @@
       ],
       "x-ms-discriminator-value": "PrometheusMetricsQuery"
     },
-    "RecommendedSignal": {
-      "type": "object",
-      "description": "A recommended signal configuration for an Azure resource type",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier of the recommended signal."
-        },
-        "metricNamespace": {
-          "type": "string",
-          "description": "Metric namespace (e.g. 'microsoft.compute/virtualmachines').",
-          "minLength": 1,
-          "maxLength": 256
-        },
-        "metricName": {
-          "type": "string",
-          "description": "Name of the metric (e.g. 'Percentage CPU').",
-          "minLength": 1,
-          "maxLength": 256
-        },
-        "aggregationType": {
-          "$ref": "#/definitions/MetricAggregationType",
-          "description": "Type of aggregation to apply to the metric."
-        },
-        "unit": {
-          "type": "string",
-          "description": "Unit of the metric (e.g. Percent, Bytes, Count).",
-          "minLength": 1,
-          "maxLength": 100
-        },
-        "timeGrain": {
-          "type": "string",
-          "description": "Time range of the metric. ISO 8601 duration format (e.g. 'PT5M').",
-          "minLength": 1,
-          "maxLength": 100
-        },
-        "dimensionFilter": {
-          "type": "string",
-          "description": "Optional dimension filter to apply to the metric.",
-          "minLength": 1,
-          "maxLength": 256
-        },
-        "evaluationRules": {
-          "$ref": "#/definitions/EvaluationRule",
-          "description": "Evaluation rules with recommended thresholds."
-        },
-        "classification": {
-          "$ref": "#/definitions/RecommendedSignalClassification",
-          "description": "Classification of the signal indicating whether it is broadly recommended or provides suggested thresholds for optional metrics."
-        }
-      },
-      "required": [
-        "id",
-        "metricNamespace",
-        "metricName",
-        "aggregationType",
-        "timeGrain",
-        "evaluationRules",
-        "classification"
-      ]
-    },
-    "RecommendedSignalClassification": {
-      "type": "string",
-      "description": "Classification of a recommended signal",
-      "enum": [
-        "RecommendedSignal",
-        "SuggestedThresholds"
-      ],
-      "x-ms-enum": {
-        "name": "RecommendedSignalClassification",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "RecommendedSignal",
-            "value": "RecommendedSignal",
-            "description": "Signal is broadly recommended to be enabled by default for health models monitoring this resource type."
-          },
-          {
-            "name": "SuggestedThresholds",
-            "value": "SuggestedThresholds",
-            "description": "Signal is not broadly applicable, but if a user picks this metric, the provided thresholds are suggested as a starting point."
-          }
-        ]
-      }
-    },
     "Relationship": {
       "type": "object",
       "description": "A relationship (aka edge) between two entities in a health model",
@@ -4151,6 +4073,58 @@
         }
       ],
       "x-ms-discriminator-value": "AzureResourceMetric"
+    },
+    "SignalConfiguration": {
+      "type": "object",
+      "description": "A signal configuration for an Azure resource type",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the recommended signal."
+        },
+        "metricNamespace": {
+          "type": "string",
+          "description": "Metric namespace (e.g. 'microsoft.compute/virtualmachines').",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "metricName": {
+          "type": "string",
+          "description": "Name of the metric (e.g. 'Percentage CPU').",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "aggregationType": {
+          "$ref": "#/definitions/MetricAggregationType",
+          "description": "Type of aggregation to apply to the metric."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Unit of the metric (e.g. Percent, Bytes, Count).",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "timeGrain": {
+          "type": "string",
+          "description": "Time range of the metric. ISO 8601 duration format (e.g. 'PT5M').",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "dimensionFilter": {
+          "type": "string",
+          "description": "Optional dimension filter to apply to the metric.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "evaluationRules": {
+          "$ref": "#/definitions/EvaluationRule",
+          "description": "Evaluation rules with recommended thresholds."
+        }
+      },
+      "required": [
+        "id",
+        "timeGrain"
+      ]
     },
     "SignalDefinition": {
       "type": "object",
