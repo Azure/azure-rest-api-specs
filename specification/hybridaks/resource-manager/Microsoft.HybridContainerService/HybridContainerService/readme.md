@@ -34,6 +34,36 @@ directive:
   - suppress: AvoidAdditionalProperties
     where: $.definitions.KubernetesVersionProperties.properties.patchVersions
     reason: "patchVersions is a map of patch version info, following AKS behavior."
+
+  - suppress: PathForTrackedResourceTypes
+    from: preview/2023-11-15-preview/provisionedClusterInstances.json
+    where: $.paths["/{connectedClusterResourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/agentPools/{agentPoolName}"]
+    reason: "Existing violation in main; surfaced by v2 folder migration (no API shape change)."
+
+  - suppress: TrackedExtensionResourcesAreNotAllowed
+    from: preview/2023-11-15-preview/provisionedClusterInstances.json
+    where: $.paths["/{connectedClusterResourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/agentPools/{agentPoolName}"]
+    reason: "Existing violation in main; surfaced by v2 folder migration (no API shape change)."
+
+  - suppress: PatchResponseCodes
+    from: preview/2023-11-15-preview/provisionedClusterInstances.json
+    where: $.paths["/{connectedClusterResourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/agentPools/{agentPoolName}"].patch
+    reason: "Existing violation in main; surfaced by v2 folder migration (no API shape change)."
+
+  - suppress: XmsPageableForListCalls
+    from: preview/2023-11-15-preview/provisionedClusterInstances.json
+    where: $.paths["/{connectedClusterResourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/agentPools"].get
+    reason: "Existing violation in main; surfaced by v2 folder migration (no API shape change)."
+
+  - suppress: AvoidAdditionalProperties
+    from: stable/2024-01-01/provisionedClusterInstances.json
+    where: $.definitions.AgentPoolProvisioningStatusStatusInner.properties.additionalProperties
+    reason: "Existing violation in main; surfaced by v2 folder migration (no API shape change)."
+
+  - suppress: LroLocationHeader
+    from: stable/2024-01-01/virtualNetworks.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridContainerService/virtualNetworks/{virtualNetworkName}"].delete
+    reason: "Existing violation in main; surfaced by v2 folder migration (no API shape change)."
 ```
 
 ### Basic Information
