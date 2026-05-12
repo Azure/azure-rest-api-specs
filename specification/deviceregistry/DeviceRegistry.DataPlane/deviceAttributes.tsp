@@ -29,6 +29,9 @@ union DeviceAttributeReportedBy {
 
   /** Reported by Azure Device Update. */
   ADU: "Microsoft.DeviceUpdate",
+
+  /** Reported by a customer. */
+  User: "User",
 }
 
 /** A device attribute resource that holds properties managed by cloud services and not sent to the device. */
@@ -52,14 +55,6 @@ model DeviceAttribute {
 
   /** The cloud service that reports this device attribute. */
   reportedBy: DeviceAttributeReportedBy;
-
-  /**
-   * Opaque property bag for the reporter named by `reportedBy`. Subtypes (e.g. `UpdateDeviceAttribute`)
-   * narrow this to a typed model. Optionality is kept consistent between the base and every subtype to
-   * avoid emitter bugs around mismatched required/optional in covariant property overrides.
-   */
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "`properties` is a polymorphic opaque bag containing nested objects, ints, and arrays — `Record<string>` would be semantically wrong."
-  properties?: Record<unknown>;
 }
 
 @@key(DeviceAttribute.name, "attributeName");
@@ -69,19 +64,37 @@ model UpdateDeviceAttribute extends DeviceAttribute {
   /** Discriminator value for an Azure Device Update reported attribute. */
   reportedBy: DeviceAttributeReportedBy.ADU;
 
-  /**
-   * Properties reported by Azure Device Update. Narrows the opaque `properties` bag on the base
-   * `DeviceAttribute` to a typed model. Kept optional to match the base's optionality.
-   */
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Inherited from the base `DeviceAttribute.properties` which is intentionally `Record<unknown>` for polymorphic shape."
+  /** Properties reported by Azure Device Update. */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "`UpdateDeviceAttributeProperties` is an open model (spreads `Record<unknown>`) so it can tolerate future ADU-added fields; `Record<string>` would be semantically wrong because the bag contains nested objects, ints, and arrays."
   properties?: UpdateDeviceAttributeProperties;
 }
 
+/**
+ * A device attribute reported by a customer or other non-Microsoft caller. The `properties` bag
+ * is opaque — the service stores customer-defined fields verbatim and returns them on read.
+ * The service does not interpret, validate, or constrain the bag's contents.
+ */
+model UserDeviceAttribute extends DeviceAttribute {
+  /** Discriminator value for a customer-reported attribute. */
+  reportedBy: DeviceAttributeReportedBy.User;
+
+  /** Customer-defined opaque property bag. */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "`UserDeviceAttributeProperties` is `Record<unknown>` so customers can supply arbitrary fields including nested objects, ints, and arrays; `Record<string>` would be semantically wrong."
+  properties?: UserDeviceAttributeProperties;
+}
+
+/**
+ * Customer-defined opaque property bag for a `User`-reported device attribute. Any field shape
+ * is accepted; the service stores and returns the bag verbatim without inspection. Customers
+ * who want to advertise a schema for their bag may include their own field (e.g. `$schema`).
+ */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Customer-defined opaque bag; arbitrary value types must be accepted."
+model UserDeviceAttributeProperties is Record<unknown>;
+
 /** Properties of the update device attribute, reported by the Azure Device Update agent. */
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Open model: spreads `Record<unknown>` so it satisfies the base `DeviceAttribute.properties` type and tolerates future ADU-added fields without an SDK rebuild."
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Open model: spreads `Record<unknown>` so future ADU-added fields are tolerated without an SDK rebuild."
 model UpdateDeviceAttributeProperties {
-  // Spread Record<unknown> so this model is assignable to the base DeviceAttribute.properties
-  // (also Record<unknown>) and so future ADU-added fields are tolerated without an SDK rebuild.
+  // Spread Record<unknown> so future ADU-added fields are tolerated without an SDK rebuild.
   ...Record<unknown>;
 
   /**

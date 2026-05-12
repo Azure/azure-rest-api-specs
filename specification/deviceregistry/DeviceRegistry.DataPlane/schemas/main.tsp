@@ -22,6 +22,4 @@ import "../main.tsp";
 using TypeSpec.JsonSchema;
 using Microsoft.DeviceRegistry;
 
-@@jsonSchema(DeviceAttribute);
-@@jsonSchema(UpdateDeviceAttribute);
 @@jsonSchema(UpdateDeviceAttributeProperties);

@@ -2326,11 +2326,6 @@
         "reportedBy": {
           "$ref": "#/definitions/DeviceAttributeReportedBy",
           "description": "The cloud service that reports this device attribute."
-        },
-        "properties": {
-          "type": "object",
-          "description": "Opaque property bag for the reporter named by `reportedBy`. Subtypes (e.g. `UpdateDeviceAttribute`)\nnarrow this to a typed model. Optionality is kept consistent between the base and every subtype to\navoid emitter bugs around mismatched required/optional in covariant property overrides.",
-          "additionalProperties": {}
         }
       },
       "discriminator": "reportedBy",
@@ -2363,11 +2358,6 @@
         "reportedBy": {
           "$ref": "#/definitions/DeviceAttributeReportedBy",
           "description": "The cloud service that reports this device attribute."
-        },
-        "properties": {
-          "type": "object",
-          "description": "Opaque property bag for the reporter named by `reportedBy`. Subtypes (e.g. `UpdateDeviceAttribute`)\nnarrow this to a typed model. Optionality is kept consistent between the base and every subtype to\navoid emitter bugs around mismatched required/optional in covariant property overrides.",
-          "additionalProperties": {}
         }
       },
       "discriminator": "reportedBy",
@@ -2397,7 +2387,8 @@
       "type": "string",
       "description": "The cloud service that reports a device attribute.",
       "enum": [
-        "Microsoft.DeviceUpdate"
+        "Microsoft.DeviceUpdate",
+        "User"
       ],
       "x-ms-enum": {
         "name": "DeviceAttributeReportedBy",
@@ -2407,6 +2398,11 @@
             "name": "ADU",
             "value": "Microsoft.DeviceUpdate",
             "description": "Reported by Azure Device Update."
+          },
+          {
+            "name": "User",
+            "value": "User",
+            "description": "Reported by a customer."
           }
         ]
       }
@@ -4238,7 +4234,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/UpdateDeviceAttributeProperties",
-          "description": "Properties reported by Azure Device Update. Narrows the opaque `properties` bag on the base\n`DeviceAttribute` to a typed model. Kept optional to match the base's optionality."
+          "description": "Properties reported by Azure Device Update."
         }
       },
       "allOf": [
@@ -4254,7 +4250,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/UpdateDeviceAttributePropertiesCreateOrUpdate",
-          "description": "Properties reported by Azure Device Update. Narrows the opaque `properties` bag on the base\n`DeviceAttribute` to a typed model. Kept optional to match the base's optionality."
+          "description": "Properties reported by Azure Device Update."
         }
       },
       "allOf": [
@@ -4478,6 +4474,43 @@
         "resultCode",
         "extendedResultCodes"
       ]
+    },
+    "UserDeviceAttribute": {
+      "type": "object",
+      "description": "A device attribute reported by a customer or other non-Microsoft caller. The `properties` bag\nis opaque — the service stores customer-defined fields verbatim and returns them on read.\nThe service does not interpret, validate, or constrain the bag's contents.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UserDeviceAttributeProperties",
+          "description": "Customer-defined opaque property bag."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeviceAttribute"
+        }
+      ],
+      "x-ms-discriminator-value": "User"
+    },
+    "UserDeviceAttributeCreateOrUpdate": {
+      "type": "object",
+      "description": "A device attribute reported by a customer or other non-Microsoft caller. The `properties` bag\nis opaque — the service stores customer-defined fields verbatim and returns them on read.\nThe service does not interpret, validate, or constrain the bag's contents.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UserDeviceAttributeProperties",
+          "description": "Customer-defined opaque property bag."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeviceAttributeCreateOrUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "User"
+    },
+    "UserDeviceAttributeProperties": {
+      "type": "object",
+      "description": "Customer-defined opaque property bag for a `User`-reported device attribute. Any field shape\nis accepted; the service stores and returns the bag verbatim without inspection. Customers\nwho want to advertise a schema for their bag may include their own field (e.g. `$schema`).",
+      "additionalProperties": {}
     }
   },
   "parameters": {
