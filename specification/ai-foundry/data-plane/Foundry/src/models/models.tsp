@@ -200,7 +200,7 @@ model CreateModelVersionAsyncResponse {
     @doc("URL to the location of the completed or in-progress operation.")
     location?: url;
 
-    @doc("URL to the operation result.")
-    operationResult?: url;
+    @doc("URL to the operation result, or null if the operation is still in progress.")
+    operationResult?: url | null;
   };
 }
