@@ -320,7 +320,7 @@ interface Scores {
   @doc("List health scores for all data products in a business domain.")
   @route("/scores/businessDomains/{domainId}/dataProducts/bulk")
   @get
-  listAllDataProductHealthScores(
+  listAllDataProducts(
     ...ApiVersionParameter,
 
     @doc("The unique identifier of the business domain.")
@@ -328,16 +328,15 @@ interface Scores {
     @maxLength(256)
     domainId: string,
 
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Query parameter name 'Kind' is fixed by the API contract."
     @doc("Kind of health score to retrieve.")
-    @query("Kind")
+    @query("kind")
     kind: HealthScoreKind,
   ): DataProductHealthScoreListResponse | ErrorResponse;
 
   @doc("Get the health score for a specific data product within a business domain.")
   @route("/scores/businessDomains/{domainId}/dataProducts/{dataProductId}")
   @get
-  listDataProductHealthScores(
+  getDataProduct(
     ...ApiVersionParameter,
 
     @doc("The unique identifier of the business domain.")
@@ -350,16 +349,15 @@ interface Scores {
     @maxLength(256)
     dataProductId: string,
 
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Query parameter name 'Kind' is fixed by the API contract."
     @doc("Kind of health score to retrieve.")
-    @query("Kind")
+    @query("kind")
     kind: HealthScoreKind,
   ): DataProductHealthScoreResponse | ErrorResponse;
 
   @doc("List health scores for all data assets within a data product in a business domain.")
   @route("/scores/businessDomains/{domainId}/dataProducts/{dataProductId}/dataAssets/bulk")
   @get
-  listAllDataAssetHealthScores(
+  listAllDataAssets(
     ...ApiVersionParameter,
 
     @doc("The unique identifier of the business domain.")
@@ -372,9 +370,8 @@ interface Scores {
     @maxLength(256)
     dataProductId: string,
 
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "Query parameter name 'Kind' is fixed by the API contract."
     @doc("Kind of health score to retrieve.")
-    @query("Kind")
+    @query("kind")
     kind: HealthScoreKind,
   ): DataAssetHealthScoreListResponse | ErrorResponse;
 }

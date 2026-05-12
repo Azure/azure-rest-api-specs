@@ -1214,7 +1214,7 @@
     },
     "/scores/businessDomains/{domainId}/dataProducts/{dataProductId}": {
       "get": {
-        "operationId": "Scores_ListDataProductHealthScores",
+        "operationId": "Scores_GetDataProduct",
         "description": "Get the health score for a specific data product within a business domain.",
         "parameters": [
           {
@@ -1237,7 +1237,7 @@
             "maxLength": 256
           },
           {
-            "name": "Kind",
+            "name": "kind",
             "in": "query",
             "description": "Kind of health score to retrieve.",
             "required": true,
@@ -1267,8 +1267,7 @@
                   "description": "Data curation health score."
                 }
               ]
-            },
-            "x-ms-client-name": "kind"
+            }
           }
         ],
         "responses": {
@@ -1292,15 +1291,15 @@
           }
         },
         "x-ms-examples": {
-          "Scores_ListDataProductHealthScores": {
-            "$ref": "./examples/Scores_ListDataProductHealthScores_Gen.json"
+          "Scores_GetDataProduct": {
+            "$ref": "./examples/Scores_GetDataProduct_Gen.json"
           }
         }
       }
     },
     "/scores/businessDomains/{domainId}/dataProducts/{dataProductId}/dataAssets/bulk": {
       "get": {
-        "operationId": "Scores_ListAllDataAssetHealthScores",
+        "operationId": "Scores_ListAllDataAssets",
         "description": "List health scores for all data assets within a data product in a business domain.",
         "parameters": [
           {
@@ -1323,7 +1322,7 @@
             "maxLength": 256
           },
           {
-            "name": "Kind",
+            "name": "kind",
             "in": "query",
             "description": "Kind of health score to retrieve.",
             "required": true,
@@ -1353,8 +1352,7 @@
                   "description": "Data curation health score."
                 }
               ]
-            },
-            "x-ms-client-name": "kind"
+            }
           }
         ],
         "responses": {
@@ -1378,15 +1376,15 @@
           }
         },
         "x-ms-examples": {
-          "Scores_ListAllDataAssetHealthScores": {
-            "$ref": "./examples/Scores_ListAllDataAssetHealthScores_Gen.json"
+          "Scores_ListAllDataAssets": {
+            "$ref": "./examples/Scores_ListAllDataAssets_Gen.json"
           }
         }
       }
     },
     "/scores/businessDomains/{domainId}/dataProducts/bulk": {
       "get": {
-        "operationId": "Scores_ListAllDataProductHealthScores",
+        "operationId": "Scores_ListAllDataProducts",
         "description": "List health scores for all data products in a business domain.",
         "parameters": [
           {
@@ -1401,7 +1399,7 @@
             "maxLength": 256
           },
           {
-            "name": "Kind",
+            "name": "kind",
             "in": "query",
             "description": "Kind of health score to retrieve.",
             "required": true,
@@ -1431,8 +1429,7 @@
                   "description": "Data curation health score."
                 }
               ]
-            },
-            "x-ms-client-name": "kind"
+            }
           }
         ],
         "responses": {
@@ -1456,8 +1453,8 @@
           }
         },
         "x-ms-examples": {
-          "Scores_ListAllDataProductHealthScores": {
-            "$ref": "./examples/Scores_ListAllDataProductHealthScores_Gen.json"
+          "Scores_ListAllDataProducts": {
+            "$ref": "./examples/Scores_ListAllDataProducts_Gen.json"
           }
         }
       }
