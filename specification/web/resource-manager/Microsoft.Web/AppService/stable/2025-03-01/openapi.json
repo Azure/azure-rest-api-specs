@@ -11863,7 +11863,9 @@
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
-            "schema": {}
+            "schema": {
+              "$ref": "#/definitions/OneDeployResponseCollection"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -11896,12 +11898,37 @@
             "description": "Name of the app.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OneDeployRequest"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
-            "schema": {}
+            "schema": {
+              "$ref": "#/definitions/OneDeployResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -11909,7 +11936,12 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/OneDeployResponse"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functions": {
@@ -24110,6 +24142,130 @@
             }
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/extensions/onedeploy": {
+      "get": {
+        "operationId": "WebApps_GetOneDeployStatusSlot",
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Invoke onedeploy status API /api/deployments and gets the deployment status for the site",
+        "description": "Description for Invoke onedeploy status API /api/deployments and gets the deployment status for the site",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. By default, this API returns the production slot.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OneDeployResponseCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "WebApps_CreateOneDeployOperationSlot",
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Invoke the OneDeploy publish web app extension.",
+        "description": "Description for Invoke the OneDeploy publish web app extension.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. By default, this API returns the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OneDeployRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OneDeployResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/OneDeployResponse"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/functions": {
@@ -47622,6 +47778,275 @@
       "x-ms-enum": {
         "name": "NotificationLevel",
         "modelAsString": false
+      }
+    },
+    "OneDeployProperties": {
+      "type": "object",
+      "description": "Properties for a OneDeploy operation.",
+      "properties": {
+        "packageUri": {
+          "type": "string",
+          "description": "The URI of the package to deploy."
+        },
+        "type": {
+          "$ref": "#/definitions/OneDeployType",
+          "description": "The type of artifact being deployed."
+        },
+        "restart": {
+          "type": "boolean",
+          "description": "Whether to restart the app after deployment."
+        },
+        "clean": {
+          "type": "boolean",
+          "description": "Whether to perform a clean deployment (delete target files before deploying)."
+        },
+        "ignoreStack": {
+          "type": "boolean",
+          "description": "Whether to ignore the stack setting during deployment."
+        },
+        "targetPath": {
+          "type": "string",
+          "description": "The relative target path for the deployment (used for lib or static types)."
+        },
+        "trackDeploymentProgress": {
+          "type": "boolean",
+          "description": "Whether to track the deployment progress."
+        }
+      }
+    },
+    "OneDeployProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state for OneDeploy operation.",
+      "enum": [
+        "InProgress",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "OneDeployProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The deployment is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The deployment succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The deployment failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The deployment was canceled."
+          }
+        ]
+      }
+    },
+    "OneDeployRequest": {
+      "type": "object",
+      "description": "Request body for a OneDeploy operation.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OneDeployProperties",
+          "description": "OneDeploy operation properties."
+        }
+      }
+    },
+    "OneDeployResponse": {
+      "type": "object",
+      "description": "OneDeploy operation response.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id."
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type."
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "properties": {
+          "$ref": "#/definitions/OneDeployResponseProperties",
+          "description": "OneDeploy response properties."
+        }
+      }
+    },
+    "OneDeployResponseCollection": {
+      "type": "object",
+      "description": "Collection of OneDeploy operation responses.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Collection of resources.",
+          "items": {
+            "$ref": "#/definitions/OneDeployResponse"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OneDeployResponseProperties": {
+      "type": "object",
+      "description": "OneDeploy response properties.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Deployment operation id."
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Deployment status code."
+        },
+        "status_text": {
+          "type": "string",
+          "description": "Details about deployment status."
+        },
+        "author_email": {
+          "type": "string",
+          "description": "Author email."
+        },
+        "author": {
+          "type": "string",
+          "description": "Who authored the deployment."
+        },
+        "deployer": {
+          "type": "string",
+          "description": "Who performed the deployment."
+        },
+        "message": {
+          "type": "string",
+          "description": "Details about the deployment."
+        },
+        "progress": {
+          "type": "string",
+          "description": "Deployment progress information."
+        },
+        "received_time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time the deployment was received."
+        },
+        "start_time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the deployment."
+        },
+        "end_time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time of the deployment."
+        },
+        "last_success_end_time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time of last successful deployment."
+        },
+        "complete": {
+          "type": "boolean",
+          "description": "Whether the deployment is complete."
+        },
+        "active": {
+          "type": "boolean",
+          "description": "Whether this is the active deployment."
+        },
+        "is_temp": {
+          "type": "boolean",
+          "description": "Whether this is a temporary deployment."
+        },
+        "is_readonly": {
+          "type": "boolean",
+          "description": "Whether the deployment is read-only."
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Deployment URL."
+        },
+        "log_url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Log URL."
+        },
+        "site_name": {
+          "type": "string",
+          "description": "Name of the site."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/OneDeployProvisioningState",
+          "description": "Provisioning state of the deployment."
+        }
+      }
+    },
+    "OneDeployType": {
+      "type": "string",
+      "description": "The artifact type for OneDeploy.",
+      "enum": [
+        "war",
+        "jar",
+        "ear",
+        "lib",
+        "startup",
+        "static",
+        "zip"
+      ],
+      "x-ms-enum": {
+        "name": "OneDeployType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "war",
+            "value": "war",
+            "description": "WAR file deployment."
+          },
+          {
+            "name": "jar",
+            "value": "jar",
+            "description": "JAR file deployment."
+          },
+          {
+            "name": "ear",
+            "value": "ear",
+            "description": "EAR file deployment."
+          },
+          {
+            "name": "lib",
+            "value": "lib",
+            "description": "Library file deployment."
+          },
+          {
+            "name": "startup",
+            "value": "startup",
+            "description": "Startup script deployment."
+          },
+          {
+            "name": "static",
+            "value": "static",
+            "description": "Static file deployment."
+          },
+          {
+            "name": "zip",
+            "value": "zip",
+            "description": "ZIP file deployment."
+          }
+        ]
       }
     },
     "OpenAuthenticationAccessPolicies": {
