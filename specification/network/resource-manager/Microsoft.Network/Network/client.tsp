@@ -1,5 +1,5 @@
-﻿import "./Network/main.tsp";
-import "./Vmss/main.tsp";
+﻿import "./Microsoft.Network/main.tsp";
+import "./Microsoft.Compute/main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 import "@typespec/versioning";
 
