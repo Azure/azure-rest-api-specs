@@ -5,147 +5,147 @@ using Azure.ClientGenerator.Core;
 
 @@clientName(Microsoft.HorizonDb, "HorizonDBMgmtClient", "python");
 @@clientName(Azure.ResourceManager.PrivateEndpointConnectionResource,
-    "HorizonDBPrivateEndpointConnection",
-    "csharp"
+  "HorizonDBPrivateEndpointConnection",
+  "csharp"
 );
 @@clientName(Azure.ResourceManager.PrivateEndpointConnectionUpdate,
-    "HorizonDBPrivateEndpointConnectionPatch",
-    "csharp"
+  "HorizonDBPrivateEndpointConnectionPatch",
+  "csharp"
 );
 @@clientName(Microsoft.HorizonDb, "HorizonDBMgmtClient", "csharp");
 @@clientName(Microsoft.HorizonDb.CreateModeCluster,
-    "HorizonDBCreateModeCluster",
-    "csharp"
+  "HorizonDBCreateModeCluster",
+  "csharp"
 );
 @@clientName(Microsoft.HorizonDb.CreateModePool,
-    "HorizonDBCreateModePool",
-    "csharp"
+  "HorizonDBCreateModePool",
+  "csharp"
 );
 @@clientName(Microsoft.HorizonDb.HorizonDbCluster,
-    "HorizonDBCluster",
-    "csharp"
+  "HorizonDBCluster",
+  "csharp"
 );
 @@clientName(Microsoft.HorizonDb.HorizonDbClusterForPatchUpdate,
-    "HorizonDBClusterForPatchUpdate",
-    "csharp"
+  "HorizonDBClusterForPatchUpdate",
+  "csharp"
 );
 @@clientName(Microsoft.HorizonDb.HorizonDbClusterParameterGroupConnectionProperties,
-    "HorizonDBClusterParameterGroupConnectionProperties",
-    "csharp"
+  "HorizonDBClusterParameterGroupConnectionProperties",
+  "csharp"
 );
 @@clientName(Microsoft.HorizonDb.HorizonDbClusterProperties,
-    "HorizonDBClusterProperties",
-    "csharp"
+  "HorizonDBClusterProperties",
+  "csharp"
 );
 @@clientName(Microsoft.HorizonDb.HorizonDbClusterPropertiesForPatchUpdate,
-    "HorizonDBClusterPropertiesForPatchUpdate",
-    "csharp"
+  "HorizonDBClusterPropertiesForPatchUpdate",
+  "csharp"
 );
 @@clientName(Microsoft.HorizonDb.HorizonDbClusters,
-    "HorizonDBClusters",
-    "csharp"
+  "HorizonDBClusters",
+  "csharp"
 );
 @@clientName(Microsoft.HorizonDb.HorizonDbFirewallRule,
-    "HorizonDBFirewallRule",
-    "csharp"
+  "HorizonDBFirewallRule",
+  "csharp"
 );
 @@clientName(Microsoft.HorizonDb.HorizonDbFirewallRuleProperties,
-    "HorizonDBFirewallRuleProperties",
-    "csharp"
+  "HorizonDBFirewallRuleProperties",
+  "csharp"
 );
 @@clientName(Microsoft.HorizonDb.HorizonDbFirewallRules,
-    "HorizonDBFirewallRules",
-    "csharp"
+  "HorizonDBFirewallRules",
+  "csharp"
 );
 @@clientName(Microsoft.HorizonDb.HorizonDbParameterGroup,
-    "HorizonDBParameterGroup",
-    "csharp"
+  "HorizonDBParameterGroup",
+  "csharp"
 );
 @@clientName(Microsoft.HorizonDb.HorizonDbParameterGroupConnectionProperties,
-    "HorizonDBParameterGroupConnectionProperties",
-    "csharp"
+  "HorizonDBParameterGroupConnectionProperties",
+  "csharp"
 );
 @@clientName(Microsoft.HorizonDb.HorizonDbParameterGroupForPatchUpdate,
-    "HorizonDBParameterGroupForPatchUpdate",
-    "csharp"
+  "HorizonDBParameterGroupForPatchUpdate",
+  "csharp"
 );
 @@clientName(Microsoft.HorizonDb.HorizonDbParameterGroupProperties,
-    "HorizonDBParameterGroupProperties",
-    "csharp"
+  "HorizonDBParameterGroupProperties",
+  "csharp"
 );
 @@clientName(Microsoft.HorizonDb.HorizonDbParameterGroupPropertiesForPatchUpdate,
-    "HorizonDBParameterGroupPropertiesForPatchUpdate",
-    "csharp"
+  "HorizonDBParameterGroupPropertiesForPatchUpdate",
+  "csharp"
 );
 @@clientName(Microsoft.HorizonDb.HorizonDbParameterGroups,
-    "HorizonDBParameterGroups",
-    "csharp"
+  "HorizonDBParameterGroups",
+  "csharp"
 );
 @@clientName(Microsoft.HorizonDb.HorizonDbPool, "HorizonDBPool", "csharp");
 @@clientName(Microsoft.HorizonDb.HorizonDbPoolProperties,
-    "HorizonDBPoolProperties",
-    "csharp"
+  "HorizonDBPoolProperties",
+  "csharp"
 );
 @@clientName(Microsoft.HorizonDb.HorizonDbPools, "HorizonDBPools", "csharp");
 @@clientName(Microsoft.HorizonDb.HorizonDbPrivateEndpointConnections,
-    "HorizonDBPrivateEndpointConnections",
-    "csharp"
+  "HorizonDBPrivateEndpointConnections",
+  "csharp"
 );
 @@clientName(Microsoft.HorizonDb.HorizonDbPrivateEndpointConnections.update,
-    "updatePrivateEndpointConnection",
-    "csharp"
+  "updatePrivateEndpointConnection",
+  "csharp"
 );
 @@clientName(Microsoft.HorizonDb.HorizonDbPrivateEndpointConnections.delete,
-    "deletePrivateEndpointConnection",
-    "csharp"
+  "deletePrivateEndpointConnection",
+  "csharp"
 );
 @@clientName(Microsoft.HorizonDb.HorizonDbPrivateLinkResource,
-    "HorizonDBPrivateLinkResource",
-    "csharp"
+  "HorizonDBPrivateLinkResource",
+  "csharp"
 );
 @@clientName(Microsoft.HorizonDb.HorizonDbPrivateLinkResources,
-    "HorizonDBPrivateLinkResources",
-    "csharp"
+  "HorizonDBPrivateLinkResources",
+  "csharp"
 );
 @@clientName(Microsoft.HorizonDb.HorizonDbReplica,
-    "HorizonDBReplica",
-    "csharp"
+  "HorizonDBReplica",
+  "csharp"
 );
 @@clientName(Microsoft.HorizonDb.HorizonDbReplicaForPatchUpdate,
-    "HorizonDBReplicaForPatchUpdate",
-    "csharp"
+  "HorizonDBReplicaForPatchUpdate",
+  "csharp"
 );
 @@clientName(Microsoft.HorizonDb.HorizonDbReplicaProperties,
-    "HorizonDBReplicaProperties",
-    "csharp"
+  "HorizonDBReplicaProperties",
+  "csharp"
 );
 @@clientName(Microsoft.HorizonDb.HorizonDbReplicaPropertiesForPatchUpdate,
-    "HorizonDBReplicaPropertiesForPatchUpdate",
-    "csharp"
+  "HorizonDBReplicaPropertiesForPatchUpdate",
+  "csharp"
 );
 @@clientName(Microsoft.HorizonDb.HorizonDbReplicas,
-    "HorizonDBReplicas",
-    "csharp"
+  "HorizonDBReplicas",
+  "csharp"
 );
 @@clientName(Microsoft.HorizonDb.ParameterProperties,
-    "HorizonDBParameterProperties",
-    "csharp"
+  "HorizonDBParameterProperties",
+  "csharp"
 );
 @@clientName(Microsoft.HorizonDb.ParameterProperties,
-    "HorizonDBParameterProperties",
-    "csharp"
+  "HorizonDBParameterProperties",
+  "csharp"
 );
 @@clientName(Microsoft.HorizonDb.ProvisioningState,
-    "HorizonDBProvisioningState",
-    "csharp"
+  "HorizonDBProvisioningState",
+  "csharp"
 );
 @@clientName(Microsoft.HorizonDb.PublicNetworkAccessState,
-    "HorizonDBPublicNetworkAccessState",
-    "csharp"
+  "HorizonDBPublicNetworkAccessState",
+  "csharp"
 );
 @@clientName(Microsoft.HorizonDb.ReplicaRole, "HorizonDBReplicaRole", "csharp");
 @@clientName(Microsoft.HorizonDb.State, "HorizonDBClusterState", "csharp");
 @@clientName(Microsoft.HorizonDb.ZonePlacementPolicy,
-    "HorizonDBZonePlacementPolicy",
-    "csharp"
+  "HorizonDBZonePlacementPolicy",
+  "csharp"
 );
