@@ -4673,7 +4673,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PendingUploadResponse'
+                $ref: '#/components/schemas/ModelPendingUploadResponse'
         default:
           description: An unexpected error response.
           headers:
@@ -4693,7 +4693,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PendingUploadRequest'
+              $ref: '#/components/schemas/ModelPendingUploadRequest'
   /openai/v1/conversations:
     post:
       operationId: createConversation
@@ -14043,6 +14043,46 @@ components:
       allOf:
         - $ref: '#/components/schemas/Deployment'
       description: Model Deployment Definition
+    ModelPendingUploadRequest:
+      type: object
+      required:
+        - pendingUploadType
+      properties:
+        pendingUploadId:
+          type: string
+          description: If PendingUploadId is not provided, a random GUID will be used.
+        connectionName:
+          type: string
+          description: Azure Storage Account connection name to use for generating temporary SAS token
+        pendingUploadType:
+          type: string
+          enum:
+            - TemporaryBlobReference
+          description: The type of pending upload. Only TemporaryBlobReference is supported for models.
+      description: Represents a request for a pending upload of a model version. Only TemporaryBlobReference is accepted.
+    ModelPendingUploadResponse:
+      type: object
+      required:
+        - blobReference
+        - pendingUploadId
+        - pendingUploadType
+      properties:
+        blobReference:
+          allOf:
+            - $ref: '#/components/schemas/BlobReference'
+          description: Container-level read, write, list SAS.
+        pendingUploadId:
+          type: string
+          description: ID for this upload request.
+        version:
+          type: string
+          description: Version of asset to be created if user did not specify version when initially creating upload
+        pendingUploadType:
+          type: string
+          enum:
+            - TemporaryBlobReference
+          description: The type of pending upload. Only TemporaryBlobReference is supported for models.
+      description: Represents the response for a model pending upload request.
     ModelSamplingParams:
       type: object
       properties:
@@ -29206,13 +29246,8 @@ components:
           type: string
           description: Azure Storage Account connection name to use for generating temporary SAS token
         pendingUploadType:
-          anyOf:
-            - type: string
-              enum:
-                - BlobReference
-            - type: string
-              enum:
-                - TemporaryBlobReference
+          allOf:
+            - $ref: '#/components/schemas/PendingUploadType'
           description: The type of pending upload. Use TemporaryBlobReference; BlobReference is deprecated.
       description: Represents a request for a pending upload.
     PendingUploadResponse:
@@ -29233,15 +29268,19 @@ components:
           type: string
           description: Version of asset to be created if user did not specify version when initially creating upload
         pendingUploadType:
-          anyOf:
-            - type: string
-              enum:
-                - BlobReference
-            - type: string
-              enum:
-                - TemporaryBlobReference
+          allOf:
+            - $ref: '#/components/schemas/PendingUploadType'
           description: The type of pending upload. Use TemporaryBlobReference; BlobReference is deprecated.
       description: Represents the response for a pending upload request
+    PendingUploadType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - None
+            - BlobReference
+            - TemporaryBlobReference
+      description: The type of pending upload.
     PromptAgentDefinition:
       type: object
       required:

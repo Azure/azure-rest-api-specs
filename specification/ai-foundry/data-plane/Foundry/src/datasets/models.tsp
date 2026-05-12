@@ -81,9 +81,8 @@ model PendingUploadRequest {
   @doc("Azure Storage Account connection name to use for generating temporary SAS token")
   connectionName?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Intentional inline union to accept both deprecated BlobReference and current TemporaryBlobReference"
   @doc("The type of pending upload. Use TemporaryBlobReference; BlobReference is deprecated.")
-  pendingUploadType: PendingUploadType.BlobReference | PendingUploadType.TemporaryBlobReference;
+  pendingUploadType: PendingUploadType;
 }
 
 @doc("Represents the response for a pending upload request")
@@ -97,9 +96,8 @@ model PendingUploadResponse {
   @doc("Version of asset to be created if user did not specify version when initially creating upload")
   version?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Intentional inline union to accept both deprecated BlobReference and current TemporaryBlobReference"
   @doc("The type of pending upload. Use TemporaryBlobReference; BlobReference is deprecated.")
-  pendingUploadType: PendingUploadType.BlobReference | PendingUploadType.TemporaryBlobReference;
+  pendingUploadType: PendingUploadType;
 }
 
 @doc("Blob reference details.")

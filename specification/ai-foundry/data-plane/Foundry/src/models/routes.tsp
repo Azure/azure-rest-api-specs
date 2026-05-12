@@ -69,9 +69,9 @@ interface Models
       version: string;
 
       @bodyRoot
-      body: PendingUploadRequest;
+      body: ModelPendingUploadRequest;
     },
-    PendingUploadResponse
+    ModelPendingUploadResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom credential action"
