@@ -35,4 +35,7 @@ namespace Microsoft.MachineLearningServices.ModelDataplane;
 enum Versions {
   /** The 1.0.0 API version. */
   v1_0_0: "1.0.0",
+
+  /** The 1.1.0 API version. */
+  v1_1_0: "1.1.0",
 }

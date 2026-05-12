@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Machine Learning Model Registry Service",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -2375,6 +2375,13 @@
         "assetId": {
           "type": "string",
           "description": "The asset identifier."
+        },
+        "allowedDeploymentTemplates": {
+          "type": "array",
+          "description": "List of allowed deployment templates for the model.",
+          "items": {
+            "$ref": "#/definitions/ModelDeploymentTemplateDetails"
+          }
         }
       },
       "required": [
@@ -2464,6 +2471,16 @@
       "required": [
         "modelFormat"
       ]
+    },
+    "ModelDeploymentTemplateDetails": {
+      "type": "object",
+      "description": "Details of a deployment template reference.",
+      "properties": {
+        "assetId": {
+          "type": "string",
+          "description": "The asset ID of the deployment template."
+        }
+      }
     },
     "ModelErrorResponse": {
       "type": "object",

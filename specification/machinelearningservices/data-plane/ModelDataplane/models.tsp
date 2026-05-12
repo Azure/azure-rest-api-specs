@@ -1,10 +1,12 @@
 import "@typespec/http";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 
 namespace Microsoft.MachineLearningServices.ModelDataplane;
@@ -727,10 +729,12 @@ model Model {
   /** The asset identifier. */
   assetId?: string;
 
+  @added(Versions.v1_1_0)
   /** List of allowed deployment templates for the model. */
   allowedDeploymentTemplates?: ModelDeploymentTemplateDetails[];
 }
 
+@added(Versions.v1_1_0)
 /** Details of a deployment template reference. */
 model ModelDeploymentTemplateDetails {
   /** The asset ID of the deployment template. */
