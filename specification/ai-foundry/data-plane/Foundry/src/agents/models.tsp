@@ -422,12 +422,6 @@ model ExternalAgentDefinition extends AgentDefinition {
   kind: AgentKind.external;
 
   @doc("""
-    The URL of the externally-hosted agent. Recorded as identity/discoverability metadata.
-    """)
-  @example("https://example-agent.contoso.com/agent")
-  agent_url?: url;
-
-  @doc("""
     The OpenTelemetry agent identifier used to attribute customer-emitted spans to this Foundry agent.
     Spans must include the attribute `gen_ai.agent.id = <otel_agent_id>` to appear under this registration.
     Defaults to the top-level agent name when omitted. Provide an explicit value only for migration scenarios
@@ -1025,9 +1019,7 @@ model AgentCard {
 /** The status of an agent session. */
 @extension(
   "x-ms-foundry-meta",
-  #{
-    required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
-  }
+  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
 )
 @removed(Versions.v1)
 union AgentSessionStatus {
@@ -1063,9 +1055,7 @@ union AgentSessionStatus {
 /** The type of version indicator used to determine the agent version backing a session. */
 @extension(
   "x-ms-foundry-meta",
-  #{
-    required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
-  }
+  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
 )
 @removed(Versions.v1)
 union VersionIndicatorType {
@@ -1079,9 +1069,7 @@ union VersionIndicatorType {
 @doc("Version indicator determining which agent version backs the session.")
 @extension(
   "x-ms-foundry-meta",
-  #{
-    required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
-  }
+  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
 )
 @removed(Versions.v1)
 @discriminator("type")
@@ -1093,9 +1081,7 @@ model VersionIndicator {
 /** Version indicator that references a specific agent version by name. */
 @extension(
   "x-ms-foundry-meta",
-  #{
-    required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
-  }
+  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
 )
 @removed(Versions.v1)
 model VersionRefIndicator extends VersionIndicator {
@@ -1112,9 +1098,7 @@ model VersionRefIndicator extends VersionIndicator {
 @doc("An agent session providing a long-lived compute sandbox for hosted agent invocations.")
 @extension(
   "x-ms-foundry-meta",
-  #{
-    required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
-  }
+  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
 )
 @removed(Versions.v1)
 model AgentSessionResource {
@@ -1149,9 +1133,7 @@ model AgentSessionResource {
 @doc("Request to create a new agent session.")
 @extension(
   "x-ms-foundry-meta",
-  #{
-    required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
-  }
+  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
 )
 @removed(Versions.v1)
 model CreateAgentSessionRequest {
@@ -1168,9 +1150,7 @@ model CreateAgentSessionRequest {
 @doc("Paged result for session list operations.")
 @extension(
   "x-ms-foundry-meta",
-  #{
-    required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
-  }
+  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
 )
 @removed(Versions.v1)
 model SessionListResult {

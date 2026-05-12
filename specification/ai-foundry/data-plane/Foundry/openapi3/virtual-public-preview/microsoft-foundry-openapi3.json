@@ -17974,12 +17974,6 @@
               "external"
             ]
           },
-          "agent_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "The URL of the externally-hosted agent. Recorded as identity/discoverability metadata.",
-            "example": "https://example-agent.contoso.com/agent"
-          },
           "otel_agent_id": {
             "type": "string",
             "description": "The OpenTelemetry agent identifier used to attribute customer-emitted spans to this Foundry agent.\nSpans must include the attribute `gen_ai.agent.id = <otel_agent_id>` to appear under this registration.\nDefaults to the top-level agent name when omitted. Provide an explicit value only for migration scenarios\nwhere the running external agent already emits a stable id that differs from the Foundry agent name.\nThe resolved value is always echoed on read.",
