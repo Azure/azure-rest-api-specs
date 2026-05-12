@@ -35,7 +35,7 @@ using Microsoft.Chaos;
   "ExecutionDetails",
   "csharp"
 );
-@@clientName(Microsoft.Chaos.Experiments.listAll, "getExperiments", "csharp");
+@@clientName(Microsoft.Chaos.Experiments.listAll, "getExperiments", "!csharp");
 @@clientName(Microsoft.Chaos.PrivateAccesses.listAll,
   "getPrivateAccesses",
   "csharp"
