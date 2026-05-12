@@ -1573,7 +1573,14 @@ alias PrefixParameter = {
 };
 
 /** Client request ID header. */
-alias ClientRequestIdHeader = {
+alias ClientRequestIdParameter = {
+  /** An opaque, globally-unique, client-generated string identifier for the request. */
+  @header("x-ms-client-request-id")
+  clientRequestId?: string;
+};
+
+/** Client request ID header. */
+alias ClientRequestIdResponseHeader = {
   /** An opaque, globally-unique, client-generated string identifier for the request. */
   @header("x-ms-client-request-id")
   clientRequestId?: string;

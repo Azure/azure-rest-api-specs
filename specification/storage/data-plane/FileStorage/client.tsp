@@ -118,6 +118,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
   "go"
 );
 @@alternateType(ShareQuotaOptionalHeader.quota, int64, "go");
+@@clientName(ClientRequestIdParameter.clientRequestId, "RequestID", "go");
 @@clientName(CopyStatus, "CopyStatusType", "go");
 @@clientName(CorsRule, "CORSRule", "go");
 @@clientName(ContentCrc64ResponseHeader.contentCrc64, "XMSContentCRC64", "go");
@@ -147,6 +148,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@clientName(NfsResponseHeaders.nfsFileType, "NFSFileType", "go");
 @@clientName(NfsTimestampResponseHeaders.fileId, "ID", "go");
 @@clientName(NfsTimestampResponseHeaders.fileParentId, "ParentID", "go");
+@@clientName(OptionalBody.optionalBody, "Optionalbody", "go");
 @@clientName(RequestServerEncryptedResponseHeader.requestServerEncrypted,
   "IsServerEncrypted",
   "go"
