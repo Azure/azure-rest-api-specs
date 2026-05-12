@@ -182,7 +182,7 @@ model EvaluationSuite {
 model VersionedEvaluationSuite {
   ...EvaluationSuite;
 
-  @doc("Version metadata for this snapshot.")
+  @doc("Version metadata for this published version.")
   version: EvaluationSuiteVersionProperties;
 }
 
