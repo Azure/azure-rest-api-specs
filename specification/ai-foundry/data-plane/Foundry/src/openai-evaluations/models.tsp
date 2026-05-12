@@ -500,9 +500,6 @@ union InputMessages {
 
   /** A typed input-messages item reference for prompt agents. */
   itemReference: OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesItemReference,
-
-  /** Freeform JSON object accepted for hosted agents with the invocations protocol. */
-  freeform: Record<unknown>,
 }
 
 /** Represents the parameters for conversation simulation item generation. */
