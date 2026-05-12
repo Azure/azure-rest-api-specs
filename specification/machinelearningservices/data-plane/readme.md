@@ -26,7 +26,7 @@ These are the global settings for the AzureMachineLearning API.
 title: Azure Machine Learning Service
 description: These APIs allow end users to manage Azure Machine Learning Services.
 openapi-type: data-plane
-tag: package-2024-05-01-preview
+tag: package-2026-05-01-preview
 use-internal-constructors: true
 add-credentials: true
 ```
@@ -55,6 +55,15 @@ These settings apply only when `--tag=package-dataset-dataplane-1.5.0` is specif
 ```yaml $(tag) == 'package-dataset-dataplane-1.5.0'
 input-file:
   - DatasetDataplane/stable/1.5.0/dataset-dataplane.json
+```
+
+### Tag: package-model-dataplane-1.1.0
+
+These settings apply only when `--tag=package-model-dataplane-1.1.0` is specified on the command line.
+
+```yaml $(tag) == 'package-model-dataplane-1.1.0'
+input-file:
+  - ModelDataplane/stable/1.1.0/model-dataplane.json
 ```
 
 ### Tag: package-model-dataplane-1.0.0
@@ -91,6 +100,15 @@ These settings apply only when `--tag=package-workspace-dataplane-2023-06-01-pre
 ```yaml $(tag) == 'package-workspace-dataplane-2023-06-01-preview'
 input-file:
   - WorkspaceDataplane/preview/2023-06-01-preview/workspace-dataplane.json
+```
+
+### Tag: package-2026-05-01-preview
+
+These settings apply only when `--tag=package-2026-05-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-05-01-preview'
+input-file:
+  - Microsoft.MachineLearningServices/preview/2026-05-01-preview/azure-ai-assets.json
 ```
 
 ### Tag: package-2024-05-01-preview
