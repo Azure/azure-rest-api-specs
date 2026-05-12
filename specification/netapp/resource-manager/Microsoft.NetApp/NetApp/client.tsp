@@ -95,50 +95,33 @@ using Microsoft.NetApp;
 // C# customizations (csharp scope)
 // =============================================================================
 
-// --- C# backward-compat enum (closed enum to preserve System.Enum base) ---
+/** C# extensible replacement for NetApp provisioning state values. */
+union NetAppVolumeQuotaRuleProvisioningStateDef {
+  string,
 
-// --- Preserve SDK-facing NetAppProvisioningState naming for backward compat ---
-// Old SDK (1.15.0) had NetAppProvisioningState as a closed System.Enum. The spec models it
-// as an extensible union; using a union here would emit a `readonly partial struct`, breaking
-// ApiCompat. Use a closed `enum` so the C# emitter generates `public enum NetAppProvisioningState`.
-/** Compatibility alias for NetApp provisioning state values. */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "Backward compat: must be closed enum to preserve System.Enum base type from v1.15.0."
-enum NetAppProvisioningStateDef {
-  /** The request has been accepted. */
+  /** Resource has been Accepted. */
   Accepted: "Accepted",
 
-  /** The resource is being created. */
+  /** Resource is being Created. */
   Creating: "Creating",
 
-  /** The resource is being patched. */
+  /** Resource is being Patched. */
   Patching: "Patching",
 
-  /** The resource is being updated. */
+  /** Resource is updating. */
   Updating: "Updating",
 
-  /** The resource is being deleted. */
+  /** Resource is being Deleted. */
   Deleting: "Deleting",
 
-  /** The resource is being moved. */
+  /** Resource is being Moved. */
   Moving: "Moving",
 
-  /** The operation failed. */
+  /** Resource has Failed. */
   Failed: "Failed",
 
-  /** The operation succeeded. */
+  /** Resource has Succeeded. */
   Succeeded: "Succeeded",
-
-  /** The operation was canceled. */
-  Canceled: "Canceled",
-
-  /** The resource is provisioning. */
-  Provisioning: "Provisioning",
-}
-
-/** Compatibility alias for NetApp volume quota rule provisioning state values. */
-union NetAppVolumeQuotaRuleProvisioningStateDef {
-  NetAppProvisioningState,
-  string,
 }
 
 // --- @@clientName: model and property renames for C# ---
@@ -549,7 +532,6 @@ union NetAppVolumeQuotaRuleProvisioningStateDef {
 @@clientName(AccountProperties.nfsV4IDDomain, "NfsV4IdDomain", "csharp");
 @@clientName(QuotaReport, "NetAppVolumeQuotaReport", "csharp");
 @@clientName(QuotaReportFilterRequest, "QuotaReportFilterContent", "csharp");
-@@clientName(NetAppProvisioningStateDef, "NetAppProvisioningState", "csharp");
 @@clientName(NetAppVolumeQuotaRuleProvisioningStateDef,
   "NetAppVolumeQuotaRuleProvisioningState",
   "csharp"
@@ -739,19 +721,8 @@ union NetAppVolumeQuotaRuleProvisioningStateDef {
 // TEMPORARY: reproduce DeserializeAzureLocation bug
 @@alternateType(VolumeGroup.id, armResourceIdentifier, "csharp");
 @@alternateType(VolumeGroup.location, azureLocation, "csharp");
-// NetAppProvisioningState shipped as a closed enum in v1.15.0. Keep that
-// type-level compatibility mapping, then override quota-rule properties back
-// to their shipped extensible quota-rule state type below.
-@@alternateType(NetAppProvisioningState, NetAppProvisioningStateDef, "csharp");
-@@alternateType(BucketProperties.provisioningState,
-  NetAppVolumeQuotaRuleProvisioningStateDef,
-  "csharp"
-);
-@@alternateType(BucketPatchProperties.provisioningState,
-  NetAppVolumeQuotaRuleProvisioningStateDef,
-  "csharp"
-);
-@@alternateType(VolumeQuotaRulesProperties.provisioningState,
+// Replace the spec provisioning-state union with the C# extensible union type.
+@@alternateType(NetAppProvisioningState,
   NetAppVolumeQuotaRuleProvisioningStateDef,
   "csharp"
 );
