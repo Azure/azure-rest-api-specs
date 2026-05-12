@@ -18708,6 +18708,14 @@
         ],
         "description": "Dataset source for evaluator generation jobs — reference to a dataset."
       },
+      "DatasetPendingUploadType": {
+        "type": "string",
+        "enum": [
+          "BlobReference",
+          "TemporaryBlobReference"
+        ],
+        "description": "The accepted pending upload types for dataset operations. BlobReference is deprecated; use TemporaryBlobReference."
+      },
       "DatasetReference": {
         "type": "object",
         "required": [
@@ -43906,7 +43914,7 @@
           "pendingUploadType": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/PendingUploadType"
+                "$ref": "#/components/schemas/DatasetPendingUploadType"
               }
             ],
             "description": "The type of pending upload. Use TemporaryBlobReference; BlobReference is deprecated."
@@ -43941,29 +43949,13 @@
           "pendingUploadType": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/PendingUploadType"
+                "$ref": "#/components/schemas/DatasetPendingUploadType"
               }
             ],
             "description": "The type of pending upload. Use TemporaryBlobReference; BlobReference is deprecated."
           }
         },
         "description": "Represents the response for a pending upload request"
-      },
-      "PendingUploadType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "None",
-              "BlobReference",
-              "TemporaryBlobReference"
-            ]
-          }
-        ],
-        "description": "The type of pending upload."
       },
       "PromptAgentDefinition": {
         "type": "object",
