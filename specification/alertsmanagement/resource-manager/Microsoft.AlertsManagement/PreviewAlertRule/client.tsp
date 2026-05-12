@@ -42,7 +42,9 @@ using Microsoft.AlertsManagement;
 // the operationId remains `PreviewAlertRule` (rather than becoming
 // `PreviewAlertRules_PreviewAlertRule`). `@@clientLocation` is scoped to
 // "csharp" so other TCGC-based emitters (Python/Java/JS/Go) also see no change.
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 namespace Microsoft.AlertsManagement {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   interface PreviewAlertRules {}
 }
 
