@@ -1255,13 +1255,10 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "CosmosDBAccountRegenerateKeyContent",
   "csharp"
 );
-// Renaming for the 13 *CreateUpdateParameters / ThroughputSettingsUpdateParameters
-// models is performed via the @@alternateType wrapper models near the bottom
-// of this file (see "TrackedResource wrappers for *CreateOrUpdateContent"
-// section). The wrapper models carry the desired C# class name AND change
-// the inheritance to TrackedResource, matching the previously shipped SDK
-// surface. Keep the ClientEncryptionKey rename here because that model is
-// not flattened from ARMResourceProperties so it does not need the wrapper.
+// Most *CreateUpdateParameters renames are performed via the TrackedResource
+// wrapper models below, which both rename and switch the inheritance to
+// TrackedResource. ClientEncryptionKey is renamed here because it isn't
+// flattened from ARMResourceProperties and doesn't need a wrapper.
 @@clientName(ClientEncryptionKeyCreateUpdateParameters,
   "CosmosDBSqlClientEncryptionKeyCreateOrUpdateContent",
   "csharp"
@@ -1378,6 +1375,85 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "restorableMongoDBDatabaseRid",
   "csharp"
 );
+@@clientName(GraphResourceCreateUpdateParameters,
+  "CosmosDBGraphCreateOrUpdateContent",
+  "csharp"
+);
+@@clientName(NotebookWorkspaceCreateUpdateParameters,
+  "NotebookWorkspaceCreateOrUpdateContent",
+  "csharp"
+);
+@@clientName(RetrieveThroughputParameters,
+  "RetrieveThroughputContent",
+  "csharp"
+);
+@@clientName(RedistributeThroughputParameters,
+  "RedistributeThroughputContent",
+  "csharp"
+);
+@@clientName(MergeParameters, "MergeContent", "csharp");
+@@clientName(CreateJobRequest, "CosmosDBJobCreateContent", "csharp");
+@@clientName(GraphResourceGetPropertiesOptions,
+  "CosmosDBGraphConfig",
+  "csharp"
+);
+@@clientName(CassandraViewGetPropertiesOptions,
+  "CassandraViewConfig",
+  "csharp"
+);
+@@clientName(ARMProxyResource, "ArmProxyResource", "csharp");
+@@clientName(ARMResourceProperties, "ArmResourceProperties", "csharp");
+@@clientName(MaterializedViewDefinition,
+  "CosmosDBMaterializedViewDefinition",
+  "csharp"
+);
+@@clientName(MaterializedViewDetails,
+  "CosmosDBMaterializedViewDetails",
+  "csharp"
+);
+@@clientName(CommandAsyncPostBody, "CassandraAsyncCommandContent", "csharp");
+@@clientName(EnableFullTextQuery, "CosmosDBFullTextQueryState", "csharp");
+@@clientName(CopyJobProperties, "CosmosDBCopyJobProperties", "csharp");
+@@clientName(BaseCopyJobProperties, "CosmosDBCopyJobBaseProperties", "csharp");
+@@clientName(BaseCopyJobTask, "CosmosDBCopyJobBaseTask", "csharp");
+@@clientName(PhysicalPartitionId, "CosmosDBPhysicalPartitionId", "csharp");
+@@clientName(physicalPartitionStorageInfo,
+  "CosmosDBPhysicalPartitionStorageInfo",
+  "csharp"
+);
+@@clientName(PhysicalPartitionStorageInfoCollection,
+  "CosmosDBPhysicalPartitionStorageInfoList",
+  "csharp"
+);
+@@clientName(PhysicalPartitionThroughputInfoResource,
+  "CosmosDBPhysicalPartitionThroughputInfo",
+  "csharp"
+);
+@@clientName(PhysicalPartitionThroughputInfoResult,
+  "CosmosDBPhysicalPartitionThroughputResult",
+  "csharp"
+);
+@@clientName(CommandAsyncPostBody.readWrite, "isReadWrite", "csharp");
+@@clientName(GarnetClusterResourceProperties.availabilityZone,
+  "isAvailabilityZoneEnabled",
+  "csharp"
+);
+@@clientName(CapacityModeChangeTransitionState.capacityModeTransitionBeginTimestamp,
+  "capacityModeTransitionBeganOn",
+  "csharp"
+);
+@@clientName(CapacityModeChangeTransitionState.capacityModeTransitionEndTimestamp,
+  "capacityModeTransitionEndedOn",
+  "csharp"
+);
+@@clientName(CapacityModeChangeTransitionState.capacityModeLastSuccessfulTransitionEndTimestamp,
+  "capacityModeLastSuccessfulTransitionEndedOn",
+  "csharp"
+);
+@@clientName(BackupResource.backupStartTimestamp, "backupStartedOn", "csharp");
+@@clientName(BackupResource.backupStopTimestamp, "backupStoppedOn", "csharp");
+@@clientName(BackupResource.backupExpiryTimestamp, "backupExpiresOn", "csharp");
+@@clientName(GraphResource.id, "graphName", "csharp");
 
 @@responseAsBool(DatabaseAccountsOperationGroup.checkNameExists, "csharp");
 
@@ -1601,6 +1677,14 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 );
 @@alternateType(ContinuousBackupInformation.latestRestorableTimestamp,
   utcDateTime,
+  "csharp"
+);
+@@alternateType(ARMResourceProperties.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(ThroughputPoolAccountProperties.accountLocation,
+  Azure.Core.azureLocation,
   "csharp"
 );
 
@@ -2053,29 +2137,20 @@ model RestorableGremlinResourceData
 // (Tags + Location, no Identity), so we wrap each with a custom model that
 // extends Azure.ResourceManager.CommonTypes.TrackedResource and substitute
 // via @@alternateType. OmitProperties drops id/name/type (provided by the
-// CommonTypes resource base), location/tags (provided by TrackedResource).
+// CommonTypes resource base) and location/tags (provided by TrackedResource).
 // The wrapper model name is the desired C# class name; this also obviates
 // the previous @@clientName(*, "...", "csharp") renames for the same models.
 //
-// IDENTITY OMISSION RULE:
-//   16 of the 17 wrappers below additionally omit `identity` because the legacy
-//   SDK never surfaced an Identity property on those flattened content types and
-//   reinstating it would be a new public API addition. The single exception is
-//   `CosmosDBAccountCreateOrUpdateContent` (defined immediately below): the
-//   legacy SDK DID expose Identity on the database-account create-or-update
-//   content with full round-trip support, so `identity` is intentionally NOT in
-//   that wrapper's OmitProperties<> list. Prior wrapper iterations omitted it
-//   and required a custom property that silently dropped values at serialization
-//   time (see PR #57018 review #4) — that workaround is no longer needed.
+// Identity is also omitted for every wrapper except
+// CosmosDBAccountCreateOrUpdateContent — only the legacy database-account
+// create-or-update content surfaced Identity with full round-trip support.
 //
-// On flattening the inner DatabaseAccountCreateUpdateProperties holder (PR #57018 review #5):
-// `@@Legacy.flattenProperty(CosmosDBAccountCreateOrUpdateContent.properties, "csharp")`
-// is rejected by TCGC ("Model doesn't have member properties" — spread members are not
-// addressable via decorator references). Spreading DatabaseAccountCreateUpdateProperties
-// directly into the wrapper would flatten the C# shape, but the wire format requires the
-// `properties` holder to remain nested, so that approach is incompatible. The setters on
-// the flattened C# surface are therefore re-emitted via SDK-side custom partial classes
-// (see `src/Custom/Models/CosmosDBAccountCreateOrUpdateContent.cs`) as a generator limitation.
+// CosmosDBAccountCreateOrUpdateContent caveat: the inner `properties` holder
+// cannot be flattened via @@Legacy.flattenProperty (TCGC rejects spread
+// members as decorator targets) and cannot be spread directly (wire format
+// requires `properties` to remain nested). The flattened C# setters are
+// therefore re-emitted via SDK partial classes (see
+// `src/Custom/Models/CosmosDBAccountCreateOrUpdateContent.cs`).
 
 /**
  * Parameters to create and update Cosmos DB database accounts.
@@ -2349,111 +2424,5 @@ union CosmosDBAccountOfferType {
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-client-generator-core/invalid-mark-as-pageable-target" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(DatabaseAccounts.listConnectionStrings,
-  "csharp"
-);
-
-// ---------------------------------------------------------------------------
-// C# review feedback (Azure SDK for .NET mgmt PR review).
-// All targets are types/properties newly introduced in v1.5.0-beta.1.
-// ---------------------------------------------------------------------------
-
-// SUFFIX renames: Parameters -> Content, Request -> Content, Options -> Config.
-@@clientName(GraphResourceCreateUpdateParameters,
-  "CosmosDBGraphCreateOrUpdateContent",
-  "csharp"
-);
-@@clientName(NotebookWorkspaceCreateUpdateParameters,
-  "NotebookWorkspaceCreateOrUpdateContent",
-  "csharp"
-);
-@@clientName(RetrieveThroughputParameters,
-  "RetrieveThroughputContent",
-  "csharp"
-);
-@@clientName(RedistributeThroughputParameters,
-  "RedistributeThroughputContent",
-  "csharp"
-);
-@@clientName(MergeParameters, "MergeContent", "csharp");
-@@clientName(CreateJobRequest, "CosmosDBJobCreateContent", "csharp");
-@@clientName(GraphResourceGetPropertiesOptions,
-  "CosmosDBGraphConfig",
-  "csharp"
-);
-@@clientName(CassandraViewGetPropertiesOptions,
-  "CassandraViewConfig",
-  "csharp"
-);
-
-// ACRONYM002: "ARM" should be PascalCase ("Arm").
-@@clientName(ARMProxyResource, "ArmProxyResource", "csharp");
-@@clientName(ARMResourceProperties, "ArmResourceProperties", "csharp");
-
-// Contextual naming: add CosmosDB prefix so types are unambiguous in IntelliSense.
-@@clientName(MaterializedViewDefinition,
-  "CosmosDBMaterializedViewDefinition",
-  "csharp"
-);
-@@clientName(MaterializedViewDetails,
-  "CosmosDBMaterializedViewDetails",
-  "csharp"
-);
-@@clientName(CommandAsyncPostBody, "CassandraAsyncCommandContent", "csharp");
-@@clientName(EnableFullTextQuery, "CosmosDBFullTextQueryState", "csharp");
-@@clientName(CopyJobProperties, "CosmosDBCopyJobProperties", "csharp");
-@@clientName(BaseCopyJobProperties, "CosmosDBCopyJobBaseProperties", "csharp");
-@@clientName(BaseCopyJobTask, "CosmosDBCopyJobBaseTask", "csharp");
-@@clientName(PhysicalPartitionId, "CosmosDBPhysicalPartitionId", "csharp");
-@@clientName(physicalPartitionStorageInfo,
-  "CosmosDBPhysicalPartitionStorageInfo",
-  "csharp"
-);
-@@clientName(PhysicalPartitionStorageInfoCollection,
-  "CosmosDBPhysicalPartitionStorageInfoList",
-  "csharp"
-);
-@@clientName(PhysicalPartitionThroughputInfoResource,
-  "CosmosDBPhysicalPartitionThroughputInfo",
-  "csharp"
-);
-@@clientName(PhysicalPartitionThroughputInfoResult,
-  "CosmosDBPhysicalPartitionThroughputResult",
-  "csharp"
-);
-
-// Property naming: boolean properties need an Is/Does/Can/Has prefix.
-@@clientName(CommandAsyncPostBody.readWrite, "isReadWrite", "csharp");
-@@clientName(GarnetClusterResourceProperties.availabilityZone,
-  "isAvailabilityZoneEnabled",
-  "csharp"
-);
-
-// Property naming: DateTimeOffset properties should end with "On" or "At".
-@@clientName(CapacityModeChangeTransitionState.capacityModeTransitionBeginTimestamp,
-  "capacityModeTransitionBeganOn",
-  "csharp"
-);
-@@clientName(CapacityModeChangeTransitionState.capacityModeTransitionEndTimestamp,
-  "capacityModeTransitionEndedOn",
-  "csharp"
-);
-@@clientName(CapacityModeChangeTransitionState.capacityModeLastSuccessfulTransitionEndTimestamp,
-  "capacityModeLastSuccessfulTransitionEndedOn",
-  "csharp"
-);
-@@clientName(BackupResource.backupStartTimestamp, "backupStartedOn", "csharp");
-@@clientName(BackupResource.backupStopTimestamp, "backupStoppedOn", "csharp");
-@@clientName(BackupResource.backupExpiryTimestamp, "backupExpiresOn", "csharp");
-
-// Property naming: inner resource.id is the graph name, not an ARM resource id.
-@@clientName(GraphResource.id, "graphName", "csharp");
-
-// Type formatting: location strings should map to AzureLocation.
-@@alternateType(ARMResourceProperties.location,
-  Azure.Core.azureLocation,
-  "csharp"
-);
-@@alternateType(ThroughputPoolAccountProperties.accountLocation,
-  Azure.Core.azureLocation,
   "csharp"
 );
