@@ -27,6 +27,8 @@ using Microsoft.RecoveryServices;
   "parameters"
 );
 
+@@clientName(RecoveryPoints.update::parameters.properties, "parameters");
+
 @@clientName(BackupResourceEncryptionConfigs.update::parameters.resource,
   "parameters"
 );
@@ -65,15 +67,15 @@ using Microsoft.RecoveryServices;
 
 @@clientLocation(BackupResourceStorageConfigsNonCRR.bmsPrepareDataMove,
   Microsoft.RecoveryServices,
-  "!csharp"
+  "!csharp,!go"
 );
 @@clientLocation(BackupResourceStorageConfigsNonCRR.bmsTriggerDataMove,
   Microsoft.RecoveryServices,
-  "!csharp"
+  "!csharp,!go"
 );
 @@clientLocation(BackupResourceConfigOperationStatuses.getOperationStatus,
   Microsoft.RecoveryServices,
-  "!csharp"
+  "!csharp,!go"
 );
 
 @@clientLocation(PrivateEndpointConnectionResources.get,
@@ -105,7 +107,7 @@ using Microsoft.RecoveryServices;
 
 @@clientLocation(RecoveryPoints.moveRecoveryPoint,
   Microsoft.RecoveryServices,
-  "!csharp"
+  "!csharp,!go"
 );
 
 @@clientLocation(ProtectionContainersOperationGroup.refresh,
@@ -145,6 +147,11 @@ using Microsoft.RecoveryServices;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@hierarchyBuilding(AzureVmWorkloadSQLDatabaseProtectedItem,
+  AzureVmWorkloadProtectedItem
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@hierarchyBuilding(AzureVmWorkloadSQLInstanceProtectedItem,
   AzureVmWorkloadProtectedItem
 );
 
@@ -260,6 +267,11 @@ using Microsoft.RecoveryServices;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@hierarchyBuilding(AzureVmWorkloadSAPHanaHSRProtectableItem,
+  AzureVmWorkloadProtectableItem
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@hierarchyBuilding(AzureVmWorkloadSAPHanaScaleoutProtectableItem,
   AzureVmWorkloadProtectableItem
 );
 
