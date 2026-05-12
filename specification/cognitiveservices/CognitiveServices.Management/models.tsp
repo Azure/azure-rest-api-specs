@@ -6014,6 +6014,85 @@ model ComputeListResult {
 }
 
 /**
+ * Properties for a Workbench resource.
+ */
+@added(Versions.v2026_03_15_preview)
+model WorkbenchProperties {
+  /**
+   * ARM resource ID of the parent cluster that hosts this workbench.
+   */
+  targetClusterId: string;
+
+  /**
+   * Container image URI (e.g., MCR or ACR image path) for the workbench.
+   */
+  imageLink: string;
+
+  /**
+   * ISO 8601 duration before the idle workbench is automatically shut down (e.g., 'PT30M').
+   */
+  idleTimeBeforeShutdown?: string;
+
+  /**
+   * The dataset ID to mount for the workbench.
+   */
+  datasetId?: string;
+
+  /**
+   * SSH configuration for remote access to the workbench.
+   */
+  sshSettings?: SshSettings;
+
+  /**
+   * Network connectivity endpoints assigned to the workbench.
+   */
+  @visibility(Lifecycle.Read)
+  connectivityEndpoints?: ConnectivityEndpoints;
+
+  /**
+   * The web endpoint URL for accessing the workbench.
+   */
+  @visibility(Lifecycle.Read)
+  webEndpoint?: string;
+
+  /**
+   * Provisioning state of the workbench resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ComputeProvisioningState;
+
+  /**
+   * Error details for the workbench resource.
+   */
+  @visibility(Lifecycle.Read)
+  errors?: Azure.ResourceManager.CommonTypes.ErrorDetail[];
+
+  /**
+   * Creation time of the workbench resource.
+   */
+  @visibility(Lifecycle.Read)
+  creationTime?: utcDateTime;
+}
+
+/**
+ * The list of workbenches operation response.
+ */
+@added(Versions.v2026_03_15_preview)
+model WorkbenchListResult {
+  /**
+   * The link used to get the next page of workbench list.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * Gets the list of workbenches.
+   */
+  @pageItems
+  value?: Workbench[];
+}
+
+/**
  * Deployment detail within a managed compute usage entry.
  */
 @added(Versions.v2026_03_15_preview)
