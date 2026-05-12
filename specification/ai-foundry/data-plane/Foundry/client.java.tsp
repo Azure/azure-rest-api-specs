@@ -104,7 +104,7 @@ namespace Azure.AI.Projects;
 @@clientName(Models.listLatest, "listLatestModelVersions");
 @@clientName(Models.deleteVersion, "deleteModelVersion");
 @@clientName(Models.createOrUpdateVersion, "updateModelVersion");
-@@clientName(Models.createAsync, "createModelVersionAsync");
+@@clientName(Models.createAsync, "createModelVersion");
 @@clientName(Models.startPendingUpload, "startModelPendingUpload");
 @@clientName(Models.getCredentials, "getModelCredentials");
 
@@ -247,4 +247,5 @@ model TimeZoneType {}
 
 @@clientDoc(Skills.downloadSkill,
   "Downloads a skill package as a ZIP archive containing {@code SKILL.md}. Returns the original uploaded archive for skills created via {@code createSkillFromPackage}; materializes a ZIP from stored instructions for skills created via {@code createSkill}.",
-  DocumentationMode.replace);
+  DocumentationMode.replace
+);
