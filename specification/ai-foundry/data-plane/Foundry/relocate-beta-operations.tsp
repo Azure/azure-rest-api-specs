@@ -122,7 +122,6 @@ interface Agents {}
 @@clientLocation(Azure.AI.Projects.Agents.updateAgentFromCode, Agents);
 @@clientLocation(Azure.AI.Projects.Agents.createAgentVersionFromCode, Agents);
 @@clientLocation(Azure.AI.Projects.Agents.downloadAgentCode, Agents);
-@@clientLocation(Azure.AI.Projects.Agents.downloadAgentVersionCode, Agents);
 
 
 interface Datasets {}

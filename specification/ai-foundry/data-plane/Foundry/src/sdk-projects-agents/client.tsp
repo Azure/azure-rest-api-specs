@@ -221,7 +221,6 @@ namespace Azure.AI.Projects {
   // Hide Agent administration opertaions, containing the foundry features
   // --------------------------------------------------------------------------------
   @@access(Agents.createAgentVersionFromCode, Access.internal);
-  @@access(Agents.downloadAgentVersionCode, Access.internal);
   @@access(Agents.downloadAgentCode, Access.internal);
 
   // --------------------------------------------------------------------------------
