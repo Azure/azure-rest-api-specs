@@ -96,6 +96,7 @@ interface BillingAccounts {
     BillingAccount,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Parameters = {
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header contentType: "application/json";
     }
   >;
