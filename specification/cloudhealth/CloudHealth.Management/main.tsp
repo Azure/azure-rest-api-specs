@@ -1484,7 +1484,7 @@ model SignalConfiguration {
   @doc("Time range of the metric. ISO 8601 duration format (e.g. 'PT5M').")
   @minLength(1)
   @maxLength(100)
-  timeGrain: string;
+  timeGrain?: string;
 
   @doc("Optional dimension filter to apply to the metric.")
   @minLength(1)
