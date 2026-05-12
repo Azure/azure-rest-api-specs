@@ -42,7 +42,10 @@ namespace SdkCustomizations;
 // TypeScript specific customizations
 @@clientName(Snapshot.expires, "expiresOn", "javascript");
 @@clientName(Snapshot.created, "createdOn", "javascript");
-@@clientName(Snapshot.retentionPeriod, "retentionPeriodInSeconds", "javascript");
+@@clientName(Snapshot.retentionPeriod,
+  "retentionPeriodInSeconds",
+  "javascript"
+);
 @@clientName(Snapshot.size, "sizeInBytes", "javascript");
 @@clientName(KeyValueFilter.key, "keyFilter", "javascript");
 @@clientName(KeyValueFilter.label, "labelFilter", "javascript");
