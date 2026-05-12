@@ -153,6 +153,12 @@ model ExtensionTypeVersionForReleaseTrainProperties {
    * A list of supported cluster types for this version of the Extension Type
    */
   supportedClusterTypes?: string[];
+
+  /**
+   * Indicates if this version of the Extension Type is FIPS compliant.
+   */
+  @added(Versions.v2026_05_01)
+  isFipsCompliant?: boolean;
 }
 
 /**
