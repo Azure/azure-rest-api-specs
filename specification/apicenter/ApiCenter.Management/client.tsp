@@ -111,3 +111,10 @@ namespace Microsoft.ApiCenter;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
+
+// Java back-compat: keep `customProperties` as java.lang.Object (was Object in the
+// Swagger-generated SDK). Combined with `use-object-for-unknown: true` in
+// tspconfig.yaml, `unknown` maps to java.lang.Object instead of BinaryData.
+@@alternateType(ApiProperties.customProperties, unknown, "java");
+@@alternateType(DeploymentProperties.customProperties, unknown, "java");
+@@alternateType(EnvironmentProperties.customProperties, unknown, "java");
