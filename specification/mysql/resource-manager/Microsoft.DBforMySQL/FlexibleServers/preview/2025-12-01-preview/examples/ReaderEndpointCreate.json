@@ -1,7 +1,7 @@
 {
   "parameters": {
     "api-version": "2025-12-01-preview",
-    "parameters": {
+    "resource": {
       "properties": {
         "autoAddNewReplicas": "Enabled",
         "dnsTtl": 20,
@@ -30,9 +30,9 @@
         "type": "Microsoft.DBforMySQL/flexibleServers/readerEndpoints",
         "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/mysqltestserver/readerEndpoints/readerEndpoint1",
         "properties": {
-          "autoAddNewReplicas": true,
+          "autoAddNewReplicas": "Enabled",
           "dnsTtl": 20,
-          "failoverOnPrimary": false,
+          "failoverOnPrimary": "Disabled",
           "fullyQualifiedDomainName": "readerEndpoint1.reader.mysql.database.azure.com",
           "permissibleReplicationLag": 60,
           "provisioningState": "Provisioning",
@@ -96,8 +96,14 @@
         }
       },
       "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforMySQL/locations/southeastasia/azureAsyncOperation/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2025-06-01-preview",
-        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforMySQL/locations/southeastasia/operationResults/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2025-06-01-preview"
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforMySQL/locations/southeastasia/azureAsyncOperation/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2025-12-01-preview",
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforMySQL/locations/southeastasia/operationResults/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2025-12-01-preview"
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforMySQL/locations/southeastasia/azureAsyncOperation/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2025-12-01-preview",
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforMySQL/locations/southeastasia/operationResults/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2025-12-01-preview"
       }
     }
   },
