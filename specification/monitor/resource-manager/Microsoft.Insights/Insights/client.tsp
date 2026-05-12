@@ -103,19 +103,13 @@ namespace Microsoft.InsightsCombinedClient;
 );
 
 // Response.resourceregion - rename to resourceRegion for Java camelCase
-@@clientName(MetricsApi.Response.resourceregion,
-  "resourceRegion",
-  "java"
-);
+@@clientName(MetricsApi.Response.resourceregion, "resourceRegion", "java");
 
 // Response.interval - use Duration type
 @@alternateType(MetricsApi.Response.interval, duration, "java");
 
 // Request.interval - use Duration type
-@@alternateType(MetricsApi.IntervalQueryParameter.interval,
-  duration,
-  "java"
-);
+@@alternateType(MetricsApi.IntervalQueryParameter.interval, duration, "java");
 
 /**
  * Part of MultiTenantDiagnosticSettings. Specifies the settings for a particular metric.
@@ -172,10 +166,7 @@ model LogSettings {
   retentionPolicy?: Microsoft.Common.RetentionPolicy;
 }
 
-@@alternateType(ServiceDiagnosticsSettingsApi.LogSettings,
-  LogSettings,
-  "java"
-);
+@@alternateType(ServiceDiagnosticsSettingsApi.LogSettings, LogSettings, "java");
 
 @@clientLocation(NetworkSecurityPerimeterApi.ScheduledQueryRule.getNSP,
   "NspScheduledQueryRule",
@@ -193,10 +184,7 @@ model LogSettings {
 @@alternateType(AutoscaleNotification.operation, "Scale", "java");
 
 @@clientName(MetricsApi.MetricValue.timeStamp, "timestamp", "java");
-@@clientName(AutoScaleApi.PredictiveValue.timeStamp,
-  "timestamp",
-  "java"
-);
+@@clientName(AutoScaleApi.PredictiveValue.timeStamp, "timestamp", "java");
 @@clientName(MetricAlertApi.MetricAlertAction.webHookProperties,
   "webhookProperties",
   "java"
