@@ -530,5 +530,3 @@ model StatusPalette {
 
   ...Record<unknown>;
 }
-
-
