@@ -33,7 +33,10 @@ using Azure.ResourceManager;
 @@clientName(DataShare, "StorageDataShare", "csharp");
 @@clientName(DnsEndpointType, "StorageDnsEndpointType", "csharp");
 @@clientName(EnabledProtocols, "FileShareEnabledProtocol", "csharp");
-@@clientName(Encryption, "StorageAccountEncryption", "csharp");
+@@clientName(Microsoft.Storage.Encryption,
+  "StorageAccountEncryption",
+  "csharp"
+);
 @@clientName(Endpoints, "StorageAccountEndpoints", "csharp");
 @@clientName(GeoReplicationStats, "GeoReplicationStatistics", "csharp");
 @@clientName(InventoryRuleType, "BlobInventoryRuleType", "csharp");
@@ -242,7 +245,10 @@ using Azure.ResourceManager;
 @@clientName(EncryptionService, "StorageEncryptionService", "csharp");
 @@clientName(Bypass, "StorageNetworkBypass", "csharp");
 @@clientName(DefaultAction, "StorageNetworkDefaultAction", "csharp");
-@@clientName(PrivateLinkResource, "StoragePrivateLinkResourceData", "csharp");
+@@clientName(Microsoft.Storage.PrivateLinkResource,
+  "StoragePrivateLinkResourceData",
+  "csharp"
+);
 @@clientName(RoutingChoice, "StorageRoutingChoice", "csharp");
 @@clientName(AccessPolicy, "StorageServiceAccessPolicy", "csharp");
 @@clientName(TableSignedIdentifier, "StorageTableSignedIdentifier", "csharp");
