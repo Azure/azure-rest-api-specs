@@ -4,9 +4,9 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 import "./ResourceChanges/main.tsp";
-import "./ResourceGraph/main.tsp";
+import "./ResourceGraphApi/main.tsp";
 import "./ResourceHistory/main.tsp";
-import "./GraphQuery/main.tsp";
+import "./GraphQueryApi/main.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
