@@ -77,22 +77,28 @@ using Microsoft.SignalRService;
   "WebPubSub",
   "!csharp"
 );
-@@clientName(WebPubSubResources.listByResourceGroup, "ListByResourceGroup");
+@@clientName(WebPubSubResources.listByResourceGroup,
+  "ListByResourceGroup",
+  "!csharp"
+);
 @@clientLocation(WebPubSubResources.listBySubscription, "WebPubSub", "!csharp");
-@@clientName(WebPubSubResources.listBySubscription, "ListBySubscription");
+@@clientName(WebPubSubResources.listBySubscription,
+  "ListBySubscription",
+  "!csharp"
+);
 @@clientLocation(WebPubSubResources.listKeys, "WebPubSub", "!csharp");
-@@clientName(WebPubSubResources.listKeys, "ListKeys");
+@@clientName(WebPubSubResources.listKeys, "ListKeys", "!csharp");
 @@clientLocation(WebPubSubResources.regenerateKey, "WebPubSub", "!csharp");
 @@clientName(WebPubSubResources.regenerateKey, "RegenerateKey");
 @@clientLocation(WebPubSubResources.restart, "WebPubSub", "!csharp");
 @@clientName(WebPubSubResources.restart, "Restart");
 @@clientLocation(WebPubSubResources.listSkus, "WebPubSub", "!csharp");
-@@clientName(WebPubSubResources.listSkus, "ListSkus");
+@@clientName(WebPubSubResources.listSkus, "ListSkus", "!csharp");
 @@clientLocation(WebPubSubResources.list,
   "WebPubSubPrivateLinkResources",
   "!csharp"
 );
-@@clientName(WebPubSubResources.list, "List");
+@@clientName(WebPubSubResources.list, "List", "!csharp");
 
 // Replicas interface operations with WebPubSubReplicas_ prefix
 @@clientLocation(Replicas.get, "WebPubSubReplicas", "!csharp");
@@ -104,9 +110,9 @@ using Microsoft.SignalRService;
 @@clientLocation(Replicas.delete, "WebPubSubReplicas", "!csharp");
 @@clientName(Replicas.delete, "Delete");
 @@clientLocation(Replicas.list, "WebPubSubReplicas", "!csharp");
-@@clientName(Replicas.list, "List");
+@@clientName(Replicas.list, "List", "!csharp");
 @@clientLocation(Replicas.listReplicaSkus, "WebPubSub", "!csharp");
-@@clientName(Replicas.listReplicaSkus, "ListReplicaSkus");
+@@clientName(Replicas.listReplicaSkus, "ListReplicaSkus", "!csharp");
 @@clientLocation(Replicas.restart, "WebPubSubReplicas", "!csharp");
 @@clientName(Replicas.restart, "Restart");
 
@@ -130,7 +136,7 @@ using Microsoft.SignalRService;
   "WebPubSubCustomCertificates",
   "!csharp"
 );
-@@clientName(CustomCertificates.list, "List");
+@@clientName(CustomCertificates.list, "List", "!csharp");
 
 // CustomDomains interface operations with WebPubSubCustomDomains_ prefix
 @@clientLocation(CustomDomains.get, "WebPubSubCustomDomains", "!csharp");
@@ -143,7 +149,7 @@ using Microsoft.SignalRService;
 @@clientLocation(CustomDomains.delete, "WebPubSubCustomDomains", "!csharp");
 @@clientName(CustomDomains.delete, "Delete");
 @@clientLocation(CustomDomains.list, "WebPubSubCustomDomains", "!csharp");
-@@clientName(CustomDomains.list, "List");
+@@clientName(CustomDomains.list, "List", "!csharp");
 
 // PrivateEndpointConnections interface operations with WebPubSubPrivateEndpointConnections_ prefix
 @@clientLocation(PrivateEndpointConnections.get,
@@ -165,7 +171,7 @@ using Microsoft.SignalRService;
   "WebPubSubPrivateEndpointConnections",
   "!csharp"
 );
-@@clientName(PrivateEndpointConnections.list, "List");
+@@clientName(PrivateEndpointConnections.list, "List", "!csharp");
 
 // SharedPrivateLinkResources interface operations with WebPubSubReplicaSharedPrivateLinkResources_ prefix
 @@clientLocation(SharedPrivateLinkResources.get,
@@ -182,7 +188,7 @@ using Microsoft.SignalRService;
   "WebPubSubReplicaSharedPrivateLinkResources",
   "!csharp"
 );
-@@clientName(SharedPrivateLinkResources.list, "List");
+@@clientName(SharedPrivateLinkResources.list, "List", "!csharp");
 
 // WebPubSubSharedPrivateLinkResources interface operations with WebPubSubSharedPrivateLinkResources_ prefix
 @@clientName(WebPubSubSharedPrivateLinkResources.delete, "Delete");
@@ -196,9 +202,10 @@ using Microsoft.SignalRService;
   "!csharp"
 );
 @@clientName(WebPubSubOperationGroup.checkNameAvailability,
-  "CheckNameAvailability"
+  "CheckNameAvailability",
+  "!csharp"
 );
 
 // UsagesOperationGroup interface operations with Usages_ prefix
 @@clientLocation(UsagesOperationGroup.list, "Usages", "!csharp");
-@@clientName(UsagesOperationGroup.list, "List");
+@@clientName(UsagesOperationGroup.list, "List", "!csharp");
