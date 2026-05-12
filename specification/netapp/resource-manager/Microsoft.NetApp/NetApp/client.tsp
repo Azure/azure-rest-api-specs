@@ -141,27 +141,6 @@ union NetAppVolumeQuotaRuleProvisioningStateDef {
   string,
 }
 
-// --- C# backward-compat union (unified relationship status) ---
-
-// --- Fix status model RelationshipStatus type to use unified NetAppRelationshipStatus ---
-// Old SDK had RelationshipStatus as NetAppRelationshipStatus? on all three status models.
-/** Compatibility alias for NetApp relationship status values. */
-union NetAppRelationshipStatusDef {
-  string,
-
-  /** The relationship is idle. */
-  Idle: "Idle",
-
-  /** The relationship is transferring data. */
-  Transferring: "Transferring",
-
-  /** The relationship failed. */
-  Failed: "Failed",
-
-  /** The relationship state is unknown. */
-  Unknown: "Unknown",
-}
-
 // --- @@clientName: model and property renames for C# ---
 @@clientName(CachePropertiesExportPolicy,
   "NetAppCachePropertiesExportPolicy",
@@ -598,15 +577,18 @@ union NetAppRelationshipStatusDef {
 
 // VolumeRevert.snapshotId: armResourceIdentifier → string (old API had string)
 @@clientName(VolumeRevert.snapshotId, "SnapshotId", "csharp");
-@@clientName(NetAppRelationshipStatusDef, "NetAppRelationshipStatus", "csharp");
 @@clientName(VolumePropertiesExportPolicy,
   "NetAppVolumeExportPolicy",
   "csharp"
 );
 
 // --- @@alternateType: property type overrides for C# ---
-// BackupsMigrationRequest.backupVaultId: armResourceIdentifier → string (old API had string)
-@@alternateType(BackupsMigrationRequest.backupVaultId, string, "csharp");
+// BackupsMigrationRequest.backupVaultId: accept ResourceIdentifier and rename;
+// the old string BackupVaultId API is preserved by SDK customization.
+@@clientName(BackupsMigrationRequest.backupVaultId,
+  "BackupVaultResourceId",
+  "csharp"
+);
 
 // Restore previous operation names that include the NetApp resource subject (csharp).
 @@clientName(NetAppAccounts.listByNetAppAccount, "GetVolumeGroups", "csharp");
@@ -757,6 +739,9 @@ union NetAppRelationshipStatusDef {
 // TEMPORARY: reproduce DeserializeAzureLocation bug
 @@alternateType(VolumeGroup.id, armResourceIdentifier, "csharp");
 @@alternateType(VolumeGroup.location, azureLocation, "csharp");
+// NetAppProvisioningState shipped as a closed enum in v1.15.0. Keep that
+// type-level compatibility mapping, then override quota-rule properties back
+// to their shipped extensible quota-rule state type below.
 @@alternateType(NetAppProvisioningState, NetAppProvisioningStateDef, "csharp");
 @@alternateType(BucketProperties.provisioningState,
   NetAppVolumeQuotaRuleProvisioningStateDef,
