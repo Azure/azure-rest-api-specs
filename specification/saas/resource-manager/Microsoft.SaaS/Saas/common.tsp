@@ -47,7 +47,7 @@ model MoveResource {
 }
 
 /** Check name availability request. */
-model SaasNameAvailabilityRequest {
+model CheckNameAvailabilityRequest {
   /** Name to check availability for. */
   name?: string;
 
@@ -56,7 +56,7 @@ model SaasNameAvailabilityRequest {
 }
 
 /** Check name availability response. */
-model SaasNameAvailabilityResponse {
+model CheckNameAvailabilityResponse {
   /** Whether the name is available. */
   nameAvailable?: boolean;
 

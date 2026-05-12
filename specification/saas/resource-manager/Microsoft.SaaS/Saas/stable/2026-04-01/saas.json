@@ -492,7 +492,7 @@
             "description": "The CheckAvailability request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SaasNameAvailabilityRequest"
+              "$ref": "#/definitions/CheckNameAvailabilityRequest"
             }
           }
         ],
@@ -500,7 +500,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/SaasNameAvailabilityResponse"
+              "$ref": "#/definitions/CheckNameAvailabilityResponse"
             }
           },
           "default": {
@@ -1177,6 +1177,38 @@
         }
       }
     },
+    "CheckNameAvailabilityRequest": {
+      "type": "object",
+      "description": "Check name availability request.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name to check availability for."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type."
+        }
+      }
+    },
+    "CheckNameAvailabilityResponse": {
+      "type": "object",
+      "description": "Check name availability response.",
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "Whether the name is available."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Reason the name is not available."
+        },
+        "message": {
+          "type": "string",
+          "description": "Detailed message."
+        }
+      }
+    },
     "DeleteOptions": {
       "type": "object",
       "description": "Delete options for a SaaS resource.",
@@ -1329,38 +1361,6 @@
         ]
       },
       "readOnly": true
-    },
-    "SaasNameAvailabilityRequest": {
-      "type": "object",
-      "description": "Check name availability request.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name to check availability for."
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type."
-        }
-      }
-    },
-    "SaasNameAvailabilityResponse": {
-      "type": "object",
-      "description": "Check name availability response.",
-      "properties": {
-        "nameAvailable": {
-          "type": "boolean",
-          "description": "Whether the name is available."
-        },
-        "reason": {
-          "type": "string",
-          "description": "Reason the name is not available."
-        },
-        "message": {
-          "type": "string",
-          "description": "Detailed message."
-        }
-      }
     },
     "SaasProvisioningState": {
       "type": "string",

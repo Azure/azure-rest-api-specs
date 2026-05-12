@@ -60,8 +60,8 @@ interface SaasSubscriptionLevelPreflight {
 interface SaasSubscriptionLevelGlobal {
   listByAzureSubscription is ArmListBySubscription<SaasResource>;
   checkNameAvailability is checkGlobalNameAvailability<
-    SaasNameAvailabilityRequest,
-    SaasNameAvailabilityResponse
+    CheckNameAvailabilityRequest,
+    CheckNameAvailabilityResponse
   >;
 }
 
