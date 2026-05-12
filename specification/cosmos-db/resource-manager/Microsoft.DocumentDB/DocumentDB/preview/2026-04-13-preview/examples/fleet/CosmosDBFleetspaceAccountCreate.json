@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "api-version": "2025-11-01-preview",
+    "body": {
+      "properties": {
+        "globalDatabaseAccountProperties": {
+          "armLocation": "West US",
+          "resourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DocumentDB/resourceGroup/rg1/databaseAccounts/db1"
+        }
+      }
+    },
+    "fleetName": "fleet1",
+    "fleetspaceAccountName": "db1",
+    "fleetspaceName": "fleetspace1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "db1",
+        "type": "Microsoft.DocumentDB/fleets/fleetspaces/fleetspaceAccounts",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/rg1/providers/Microsoft.DocumentDB/fleets/fleet1/fleetspaces/fleetspace1/fleetspaceAccounts/db1",
+        "properties": {
+          "globalDatabaseAccountProperties": {
+            "armLocation": "West US",
+            "resourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DocumentDB/resourceGroup/rg1/databaseAccounts/db1"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "db1",
+        "type": "Microsoft.DocumentDB/fleets/fleetspaces/fleetspaceAccounts",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/rg1/providers/Microsoft.DocumentDB/fleets/fleet1/fleetspaces/fleetspace1/fleetspaceAccounts/db1",
+        "properties": {
+          "globalDatabaseAccountProperties": {
+            "armLocation": "West US",
+            "resourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DocumentDB/resourceGroup/rg1/databaseAccounts/db1"
+          },
+          "provisioningState": "Succeeded"
+        }
+      },
+      "headers": {
+        "azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2024-12-01-preview",
+        "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2024-12-01-preview"
+      }
+    }
+  },
+  "operationId": "FleetspaceAccount_Create",
+  "title": "CosmosDB FleetspaceAccount Create"
+}

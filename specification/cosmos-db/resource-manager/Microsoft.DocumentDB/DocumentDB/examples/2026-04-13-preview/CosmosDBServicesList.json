@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "accountName": "ddb1",
+    "api-version": "2025-11-01-preview",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "sqlDedicatedGateway",
+            "type": "Microsoft.DocumentDB/databaseAccounts/services",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/services/sqlDedicatedGateway",
+            "properties": {
+              "creationTime": "2021-01-25T12:56:05.4622517Z",
+              "instanceCount": 1,
+              "instanceSize": "Cosmos.D4s",
+              "locations": [
+                {
+                  "name": "sqlDedicatedGateway-westus2",
+                  "location": "West US 2",
+                  "sqlDedicatedGatewayEndpoint": "https://sqlDedicatedGateway-westus.sqlx.cosmos.windows-int.net/",
+                  "status": "Running"
+                }
+              ],
+              "serviceType": "SqlDedicatedGateway",
+              "sqlDedicatedGatewayEndpoint": "https://sqlDedicatedGateway.sqlx.cosmos.windows-int.net/",
+              "status": "Running"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Service_List",
+  "title": "CosmosDBServicesList"
+}

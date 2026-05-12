@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "accountName": "ddb1",
+    "api-version": "2025-11-01-preview",
+    "keyspaceName": "keyspacename",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "viewName": "viewname"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "viewname",
+        "type": "Microsoft.DocumentDB/databaseAccounts/cassandraKeyspaces/views",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/cassandraKeyspaces/keyspacename/views/viewname",
+        "properties": {
+          "resource": {
+            "id": "viewname",
+            "viewDefinition": "SELECT columna, columnb, columnc FROM keyspacename.srctablename WHERE columna IS NOT NULL AND columnc IS NOT NULL PRIMARY KEY (columnc, columna)"
+          }
+        },
+        "tags": {}
+      }
+    }
+  },
+  "operationId": "CassandraResources_GetCassandraView",
+  "title": "CosmosDBCassandraViewGet"
+}

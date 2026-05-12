@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2025-11-01-preview",
+    "body": {
+      "properties": {
+        "accountLocation": "West US",
+        "accountResourceIdentifier": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DocumentDB/resourceGroup/rg1/databaseAccounts/db1/"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "throughputPoolAccountName": "db1",
+    "throughputPoolName": "tp1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/rg1/providers/Microsoft.DocumentDB/throughputPools/tp1/throughputPoolAccounts/db1",
+        "properties": {
+          "accountInstanceId": "{instance-id1}",
+          "accountLocation": "west us",
+          "accountResourceIdentifier": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/db1",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/rg1/providers/Microsoft.DocumentDB/throughputPools/tp1/throughputPoolAccounts/db1",
+        "properties": {
+          "accountInstanceId": "{instance-id1}",
+          "accountLocation": "west us",
+          "accountResourceIdentifier": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/db1",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "ThroughputPoolAccount_Create",
+  "title": "CosmosDB ThroughputPool Account Create"
+}
