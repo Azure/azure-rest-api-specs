@@ -3123,6 +3123,71 @@ model SummaryLogsRetryBinProperties {
 }
 
 /**
+ * Type of managed service identity.
+ */
+@added(Versions.v2026_03_01)
+union SummaryLogsIdentityType {
+  string,
+
+  /**
+   * The default identity type. summary logs do not have a managed identity.
+   */
+  None: "None",
+
+  /**
+   * summary logs is associated with a user assigned managed identity. User assigned identities are created as separate Azure resources and can be shared across multiple summary logs.
+   */
+  UserAssigned: "UserAssigned",
+}
+
+/**
+ * Identity for the summary logs resource.
+ */
+@added(Versions.v2026_03_01)
+model SummaryLogsIdentity {
+  /**
+   * The principal ID of resource identity.
+   */
+  @visibility(Lifecycle.Read)
+  principalId?: string;
+
+  /**
+   * The tenant ID of resource.
+   */
+  @visibility(Lifecycle.Read)
+  tenantId?: string;
+
+  /**
+   * Type of managed service identity.
+   */
+  type: SummaryLogsIdentityType;
+
+  /**
+   * The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  userAssignedIdentities?: Record<SummaryLogsUserIdentityProperties>;
+}
+
+/**
+ * User assigned identity properties.
+ */
+@added(Versions.v2026_03_01)
+model SummaryLogsUserIdentityProperties {
+  /**
+   * The principal id of user assigned identity.
+   */
+  @visibility(Lifecycle.Read)
+  principalId?: string;
+
+  /**
+   * The client id of user assigned identity.
+   */
+  @visibility(Lifecycle.Read)
+  clientId?: string;
+}
+
+/**
  * DataSource filter. Right now, only filter by kind is supported.
  */
 model DataSourceFilter {

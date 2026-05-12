@@ -7700,6 +7700,10 @@
           "$ref": "#/definitions/SummaryLogsProperties",
           "description": "Summary rule properties.",
           "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/SummaryLogsIdentity",
+          "description": "The managed identity of the summary logs resource. Only user-assigned identity is supported."
         }
       },
       "allOf": [
@@ -7707,6 +7711,60 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
+    },
+    "SummaryLogsIdentity": {
+      "type": "object",
+      "description": "Identity for the summary logs resource.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID of resource identity.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID of resource.",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/SummaryLogsIdentityType",
+          "description": "Type of managed service identity."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "additionalProperties": {
+            "$ref": "#/definitions/SummaryLogsUserIdentityProperties"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "SummaryLogsIdentityType": {
+      "type": "string",
+      "description": "Type of managed service identity.",
+      "enum": [
+        "None",
+        "UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "SummaryLogsIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "The default identity type. summary logs do not have a managed identity."
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "summary logs is associated with a user assigned managed identity. User assigned identities are created as separate Azure resources and can be shared across multiple summary logs."
+          }
+        ]
+      }
     },
     "SummaryLogsListResult": {
       "type": "object",
@@ -7789,6 +7847,22 @@
       "required": [
         "retryBinStartTime"
       ]
+    },
+    "SummaryLogsUserIdentityProperties": {
+      "type": "object",
+      "description": "User assigned identity properties.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal id of user assigned identity.",
+          "readOnly": true
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The client id of user assigned identity.",
+          "readOnly": true
+        }
+      }
     },
     "Table": {
       "type": "object",
