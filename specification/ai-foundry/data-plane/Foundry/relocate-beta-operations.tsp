@@ -49,6 +49,25 @@ interface Evaluators {}
 @@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.cancel, Evaluators);
 @@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.delete, Evaluators);
 
+interface EvaluationSuites {}
+// Evaluation suite CRUD + versioning operations
+@@clientLocation(Azure.AI.Projects.EvaluationSuites.createOrUpdate, EvaluationSuites);
+@@clientLocation(Azure.AI.Projects.EvaluationSuites.get, EvaluationSuites);
+@@clientLocation(Azure.AI.Projects.EvaluationSuites.list, EvaluationSuites);
+@@clientLocation(Azure.AI.Projects.EvaluationSuites.delete, EvaluationSuites);
+@@clientLocation(Azure.AI.Projects.EvaluationSuites.publishVersion, EvaluationSuites);
+@@clientLocation(Azure.AI.Projects.EvaluationSuites.createVersion, EvaluationSuites);
+@@clientLocation(Azure.AI.Projects.EvaluationSuites.getVersion, EvaluationSuites);
+@@clientLocation(Azure.AI.Projects.EvaluationSuites.listVersions, EvaluationSuites);
+@@clientLocation(Azure.AI.Projects.EvaluationSuites.run, EvaluationSuites);
+
+// Evaluation suite generation jobs → nested under EvaluationSuites sub-client
+@@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.create, EvaluationSuites);
+@@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.get, EvaluationSuites);
+@@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.list, EvaluationSuites);
+@@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.cancel, EvaluationSuites);
+@@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.delete, EvaluationSuites);
+
 interface Schedules {}
 @@clientLocation(Azure.AI.Projects.Schedules.delete, Schedules);
 @@clientLocation(Azure.AI.Projects.Schedules.get, Schedules);
