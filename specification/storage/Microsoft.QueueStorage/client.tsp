@@ -41,6 +41,11 @@ interface QueueClient extends Queue {}
   "rust"
 );
 
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(QueueServiceClient, "omitEndpointMethod", true, "rust");
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(QueueClient, "omitEndpointMethod", true, "rust");
+
 @@clientNamespace(Storage.Queues, "Azure.Storage.Queues", "rust,go");
 @@clientNamespace(Service, "Azure.Storage.Queues", "rust,go");
 @@clientNamespace(Queue, "Azure.Storage.Queues", "rust,go");
@@ -94,7 +99,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@clientName(UserDelegationKey.signedOid, "SignedOID", "go");
 @@clientName(UserDelegationKey.signedTid, "SignedTID", "go");
 @@clientName(UserDelegationKey.signedDelegatedUserTid,
-  "SignedDelegatedUserTID",
+  "SignedDelegatedUserTenantID",
   "go"
 );
 #suppress "@azure-tools/typespec-client-generator-core/client-option"

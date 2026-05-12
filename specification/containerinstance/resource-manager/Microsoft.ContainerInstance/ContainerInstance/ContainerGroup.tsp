@@ -20,15 +20,10 @@ namespace Microsoft.ContainerInstance;
 @Azure.ResourceManager.Legacy.customAzureResource
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model ContainerGroup extends Foundations.ProxyResource {
-  ...ResourceNameParameter<
-    Resource = ContainerGroup,
-    KeyName = "containerGroupName",
-    SegmentName = "containerGroups",
-    NamePattern = ""
-  >;
+  ...ResourceNameParameter<Resource = ContainerGroup, NamePattern = "">;
 
   /**
-   * The resource location.
+   * The resource location of the container group.
    */
   location?: string;
 
@@ -70,7 +65,7 @@ interface ContainerGroups {
   @summary("Update container groups.")
   update is ArmCustomPatchSync<
     ContainerGroup,
-    PatchModel = Resource,
+    PatchModel = ContainerGroupUpdate,
     Error = CloudError
   >;
 

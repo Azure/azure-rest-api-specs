@@ -220,24 +220,8 @@ using Microsoft.Workloads;
 @@clientName(SAPCentralServerInstance, "SapCentralServerInstance", "csharp");
 @@clientName(SAPDatabaseInstance, "SapDatabaseInstance", "csharp");
 @@clientName(SAPVirtualInstance, "SapVirtualInstance", "csharp");
-@@clientName(UpdateSAPVirtualInstanceRequest,
-  "UpdateSapVirtualInstanceRequest",
-  "csharp"
-);
 @@clientName(UpdateSAPVirtualInstanceProperties,
   "UpdateSapVirtualInstanceProperties",
-  "csharp"
-);
-@@clientName(UpdateSAPCentralInstanceRequest,
-  "UpdateSapCentralInstanceRequest",
-  "csharp"
-);
-@@clientName(UpdateSAPDatabaseInstanceRequest,
-  "UpdateSapDatabaseInstanceRequest",
-  "csharp"
-);
-@@clientName(UpdateSAPApplicationInstanceRequest,
-  "UpdateSapApplicationInstanceRequest",
   "csharp"
 );
 @@alternateType(DeployerVmPackages.url, url, "csharp");
