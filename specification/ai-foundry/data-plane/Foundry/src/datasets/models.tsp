@@ -65,7 +65,7 @@ union PendingUploadType {
   TemporaryBlobReference: "TemporaryBlobReference",
 }
 
-@doc("The accepted pending upload types for dataset operations. BlobReference is deprecated; use TemporaryBlobReference.")
+@doc("The accepted pending upload types for dataset operations.")
 union DatasetPendingUploadType {
   @doc("Deprecated: the service never read this value and silently ignored it. Use TemporaryBlobReference instead.")
   BlobReference: "BlobReference",
@@ -90,7 +90,7 @@ model PendingUploadRequest {
   @doc("Azure Storage Account connection name to use for generating temporary SAS token")
   connectionName?: string;
 
-  @doc("The type of pending upload. Use TemporaryBlobReference; BlobReference is deprecated.")
+  @doc("The type of pending upload.")
   pendingUploadType: DatasetPendingUploadType;
 }
 
@@ -105,7 +105,7 @@ model PendingUploadResponse {
   @doc("Version of asset to be created if user did not specify version when initially creating upload")
   version?: string;
 
-  @doc("The type of pending upload. Use TemporaryBlobReference; BlobReference is deprecated.")
+  @doc("The type of pending upload.")
   pendingUploadType: DatasetPendingUploadType;
 }
 
