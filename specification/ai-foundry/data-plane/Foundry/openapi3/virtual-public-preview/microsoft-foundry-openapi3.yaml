@@ -5638,6 +5638,9 @@ paths:
                 $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
       tags:
         - Models
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
     delete:
       operationId: Models_deleteVersion
       description: Delete the specific version of the ModelVersion. The service returns 204 No Content if the ModelVersion was deleted successfully or if the ModelVersion does not exist.
@@ -5680,6 +5683,9 @@ paths:
                 $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
       tags:
         - Models
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
     patch:
       operationId: Models_updateVersion
       description: Update an existing ModelVersion with the given version id
@@ -5739,6 +5745,9 @@ paths:
             schema:
               $ref: '#/components/schemas/UpdateModelVersionRequest'
         description: The UpdateModelVersionRequest to create or update.
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
   /models/{name}/versions/{version}/createAsync:
     post:
       operationId: Models_createAsync
@@ -5795,6 +5804,9 @@ paths:
             schema:
               $ref: '#/components/schemas/ModelVersion'
         description: Model version to create.
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
   /models/{name}/versions/{version}/credentials:
     post:
       operationId: Models_getCredentials
@@ -5848,6 +5860,9 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/ModelCredentialRequest'
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
   /models/{name}/versions/{version}/startPendingUpload:
     post:
       operationId: Models_startPendingUpload
@@ -5901,6 +5916,9 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/PendingUploadRequest'
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
   /openai/v1/conversations:
     post:
       operationId: createConversation
