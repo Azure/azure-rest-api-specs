@@ -137,7 +137,7 @@ enum NetAppProvisioningStateDef {
 
 /** Compatibility alias for NetApp volume quota rule provisioning state values. */
 union NetAppVolumeQuotaRuleProvisioningStateDef {
-  NetAppProvisioningStateDef,
+  NetAppProvisioningState,
   string,
 }
 
