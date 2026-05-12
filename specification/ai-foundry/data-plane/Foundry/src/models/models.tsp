@@ -193,7 +193,7 @@ model CreateModelVersionAsyncResponse {
 
   @doc("URL to poll for operation status.")
   @header("Location")
-  location: url;
+  location?: url;
 
   @bodyRoot
   body: {
