@@ -12220,6 +12220,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DataGenerationJobScenario'
           description: The scenario of the data generation job. Either for fine-tuning or evaluation.
+        output_dataset:
+          allOf:
+            - $ref: '#/components/schemas/DataGenerationOutputDatasetOptions'
+          description: Optional metadata for the output dataset. Applies only when `scenario` is `evaluation`; ignored for fine-tuning scenarios, which produce Azure OpenAI files with server-generated names.
       description: Caller-supplied inputs for a data generation job.
     DataGenerationJobOptions:
       type: object
@@ -12353,6 +12357,21 @@ components:
           type: string
           description: Base model name used to generate data.
       description: LLM model options for data generation jobs.
+    DataGenerationOutputDatasetOptions:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name to assign to the output dataset.
+        description:
+          type: string
+          description: Description to assign to the output dataset.
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+          description: Tags to assign to the output dataset.
+      description: Caller-supplied metadata for the dataset produced by an evaluation data generation job.
     DataGenerationTokenUsage:
       type: object
       required:
@@ -12409,19 +12428,22 @@ components:
           readOnly: true
         name:
           type: string
-          description: The name of the output dataset and can be optionally set during job creation time.
+          description: The name of the output dataset.
+          readOnly: true
         version:
           type: string
           description: The version of the output dataset.
           readOnly: true
         description:
           type: string
-          description: Description of the output dataset and can be optionally set during job creation time.
+          description: Description of the output dataset.
+          readOnly: true
         tags:
           type: object
           additionalProperties:
             type: string
-          description: Tag dictionary of the output dataset and can be optionally set during job creation time.
+          description: Tag dictionary of the output dataset.
+          readOnly: true
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobOutput'
       description: Dataset output for a data generation job.
@@ -32668,10 +32690,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/FoundryTimestamp'
           description: End of the time window (Unix timestamp in seconds). Defaults to current time.
-        max_traces:
-          type: integer
-          format: int32
-          description: Maximum number of traces to retrieve.
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobSource'
       description: Traces source for data generation jobs — conversation traces from Application Insights.
@@ -32706,10 +32724,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/FoundryTimestamp'
           description: End of the time window (Unix timestamp in seconds). Defaults to current time.
-        max_traces:
-          type: integer
-          format: int32
-          description: Maximum number of traces to retrieve.
       allOf:
         - $ref: '#/components/schemas/EvaluatorGenerationJobSource'
       description: Traces source for evaluator generation jobs — conversation traces from Application Insights.

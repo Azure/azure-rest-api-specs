@@ -36,6 +36,21 @@ model DataGenerationJobInputs {
 
   @doc("The scenario of the data generation job. Either for fine-tuning or evaluation.")
   scenario: DataGenerationJobScenario;
+
+  @doc("Optional metadata for the output dataset. Applies only when `scenario` is `evaluation`; ignored for fine-tuning scenarios, which produce Azure OpenAI files with server-generated names.")
+  output_dataset?: DataGenerationOutputDatasetOptions;
+}
+
+@doc("Caller-supplied metadata for the dataset produced by an evaluation data generation job.")
+model DataGenerationOutputDatasetOptions {
+  @doc("Name to assign to the output dataset.")
+  name?: string;
+
+  @doc("Description to assign to the output dataset.")
+  description?: string;
+
+  @doc("Tags to assign to the output dataset.")
+  tags?: Record<string>;
 }
 
 @doc("Result produced by a successful data generation job.")
@@ -92,17 +107,20 @@ model DatasetDataGenerationJobOutput extends DataGenerationJobOutput {
   @visibility(Lifecycle.Read)
   id?: string;
 
-  @doc("The name of the output dataset and can be optionally set during job creation time.")
+  @doc("The name of the output dataset.")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   @doc("The version of the output dataset.")
   @visibility(Lifecycle.Read)
   version?: string;
 
-  @doc("Description of the output dataset and can be optionally set during job creation time.")
+  @doc("Description of the output dataset.")
+  @visibility(Lifecycle.Read)
   description?: string;
 
-  @doc("Tag dictionary of the output dataset and can be optionally set during job creation time.")
+  @doc("Tag dictionary of the output dataset.")
+  @visibility(Lifecycle.Read)
   tags?: Record<string>;
 }
 
