@@ -42,7 +42,6 @@ directive:
 
   - suppress: TrackedExtensionResourcesAreNotAllowed
     from: provisionedClusterInstances.json
-    where: $.paths["/{connectedClusterResourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/agentPools/{agentPoolName}"]
     reason: "Existing violation in main; surfaced by v2 folder migration (no API shape change)."
 
   - suppress: PatchResponseCodes
@@ -57,12 +56,12 @@ directive:
 
   - suppress: AvoidAdditionalProperties
     from: provisionedClusterInstances.json
-    where: $.definitions.AgentPoolProvisioningStatusStatusInner.properties.additionalProperties
+    where: $.definitions.AgentPoolProfile.properties.nodeLabels
     reason: "Existing violation in main; surfaced by v2 folder migration (no API shape change)."
 
   - suppress: LroLocationHeader
     from: virtualNetworks.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridContainerService/virtualNetworks/{virtualNetworkName}"].delete
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridContainerService/virtualNetworks/{virtualNetworkName}"].patch
     reason: "Existing violation in main; surfaced by v2 folder migration (no API shape change)."
 ```
 
