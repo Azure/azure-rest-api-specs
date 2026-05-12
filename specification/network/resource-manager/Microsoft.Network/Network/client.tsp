@@ -1885,28 +1885,6 @@ op replaceprivateDnsZoneGroupsList(
 @@clientName(FirewallPolicyIdpsSignatureSeverity.`2`, "TWO", "python");
 @@clientName(FirewallPolicyIdpsSignatureSeverity.`3`, "THREE", "python");
 
-@@clientLocation(P2SVpnGateways.get, "P2SVpnGateways", "python");
-@@clientLocation(P2SVpnGateways.createOrUpdate, "P2SVpnGateways", "python");
-@@clientLocation(P2SVpnGateways.updateTags, "P2SVpnGateways", "python");
-@@clientLocation(P2SVpnGateways.delete, "P2SVpnGateways", "python");
-@@clientLocation(P2SVpnGateways.listByResourceGroup,
-  "P2SVpnGateways",
-  "python"
-);
-@@clientLocation(P2SVpnGateways.list, "P2SVpnGateways", "python");
-@@clientLocation(P2SVpnGateways.generateVpnProfile, "P2SVpnGateways", "python");
-@@clientLocation(P2SVpnGateways.getP2sVpnConnectionHealth,
-  "P2SVpnGateways",
-  "python"
-);
-@@clientLocation(P2SVpnGateways.getP2sVpnConnectionHealthDetailed,
-  "P2SVpnGateways",
-  "python"
-);
-@@clientLocation(P2SVpnGateways.disconnectP2sVpnConnections,
-  "P2SVpnGateways",
-  "python"
-);
 @@clientLocation(VirtualHubs.virtualHubRouteTableV2sGet,
   "VirtualHubRouteTableV2S",
   "python"
