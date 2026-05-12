@@ -58,8 +58,8 @@ union PendingUploadType {
   @doc("No pending upload.")
   none: "None",
 
-  @doc("Blob Reference is the only supported type.")
-  BlobReference: "BlobReference",
+  @doc("Temporary blob reference.")
+  TemporaryBlobReference: "TemporaryBlobReference",
 }
 
 @doc("The type of credential used to access the storage account.")
@@ -78,8 +78,8 @@ model PendingUploadRequest {
   @doc("Azure Storage Account connection name to use for generating temporary SAS token")
   connectionName?: string;
 
-  @doc("BlobReference is the only supported type.")
-  pendingUploadType: PendingUploadType.BlobReference;
+  @doc("TemporaryBlobReference is the only supported type.")
+  pendingUploadType: PendingUploadType.TemporaryBlobReference;
 }
 
 @doc("Represents the response for a pending upload request")
@@ -93,8 +93,8 @@ model PendingUploadResponse {
   @doc("Version of asset to be created if user did not specify version when initially creating upload")
   version?: string;
 
-  @doc("BlobReference is the only supported type")
-  pendingUploadType: PendingUploadType.BlobReference;
+  @doc("TemporaryBlobReference is the only supported type")
+  pendingUploadType: PendingUploadType.TemporaryBlobReference;
 }
 
 @doc("Blob reference details.")
