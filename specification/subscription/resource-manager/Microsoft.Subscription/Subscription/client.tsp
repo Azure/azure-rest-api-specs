@@ -2,6 +2,8 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using Azure.ClientGenerator.Core.Legacy;
+using Azure.Core;
 namespace Microsoft.Subscription;
 
 @@clientName(Microsoft.Subscription, "SubscriptionClient", "python");
@@ -10,26 +12,124 @@ namespace Microsoft.Subscription;
   "python"
 );
 
-@@Azure.ClientGenerator.Core.clientLocation(SubscriptionOperationGroup.cancel::parameters.subscriptionId,
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@flattenProperty(PutAliasRequest.properties, "csharp");
+
+@@scope(SubscriptionOperationOperationGroup.get, "!csharp"); // Get operation status is not needed in SDK which has this functionality in in core lib.
+@@scope(GetTenantPolicyResponses.listPolicyForTenant, "!csharp"); // Singleton, no need to have list operation in sdk.
+@@scope(TargetDirectoryResults.listTargetDirectory, "!csharp"); // Singleton, no need to have list operation in sdk.
+
+@@clientName(SubscriptionAliasResponse, "SubscriptionAlias", "csharp");
+@@clientName(SubscriptionAliasResponseProperties,
+  "SubscriptionAliasProperties",
+  "csharp"
+);
+@@clientName(BillingAccountPoliciesResponse, "BillingAccountPolicy", "csharp");
+@@clientName(BillingAccountPoliciesResponseProperties,
+  "BillingAccountPolicyProperties",
+  "csharp"
+);
+@@clientName(GetTenantPolicyResponse, "TenantPolicy", "csharp");
+@@clientName(TenantPolicy, "TenantPolicyProperties", "csharp");
+@@clientName(GetTenantPolicyListResponse, "TenantPoliciesResult", "csharp");
+@@clientName(AcceptOwnershipStatusResponse, "AcceptOwnershipStatus", "csharp");
+@@clientName(AcceptOwnership, "AcceptOwnershipState", "csharp");
+@@clientName(Provisioning, "AcceptOwnershipProvisioningState", "csharp");
+@@clientName(ProvisioningState, "SubscriptionProvisioningState", "csharp");
+@@clientName(PutAliasRequestAdditionalProperties,
+  "SubscriptionAliasAdditionalProperties",
+  "csharp"
+);
+@@clientName(ServiceTenantResponse, "ServiceTenant", "csharp");
+@@clientName(Workload, "SubscriptionWorkload", "csharp");
+@@clientName(SubscriptionAliasResponseProperties.acceptOwnershipUrl,
+  "acceptOwnershipUri",
+  "csharp"
+);
+@@alternateType(SubscriptionAliasResponseProperties.acceptOwnershipUrl,
+  url,
+  "csharp"
+);
+@@clientName(SubscriptionAliasResponseProperties.createdTime,
+  "createdOn",
+  "csharp"
+);
+@@alternateType(SubscriptionAliasResponseProperties.createdTime,
+  utcDateTime,
+  "csharp"
+);
+@@clientName(AcceptOwnershipRequest, "AcceptOwnershipContent", "csharp");
+@@clientName(PutAliasRequest,
+  "SubscriptionAliasCreateOrUpdateContent",
+  "csharp"
+);
+@@clientName(PutTenantPolicyRequestProperties,
+  "TenantPolicyCreateOrUpdateContent",
+  "csharp"
+);
+@@clientName(TargetDirectoryRequest, "TargetDirectoryContent", "csharp");
+@@clientName(TargetDirectoryRequestProperties,
+  "TargetDirectoryProperties",
+  "csharp"
+);
+@@clientName(SubscriptionOperationGroup.acceptOwnership,
+  "AcceptSubscriptionOwnership",
+  "csharp"
+);
+@@clientName(SubscriptionOperationGroup.acceptOwnershipStatus,
+  "GetAcceptOwnershipStatus",
+  "csharp"
+);
+@@clientName(SubscriptionOperationGroup.cancel, "CancelSubscription", "csharp");
+@@clientName(SubscriptionOperationGroup.rename, "RenameSubscription", "csharp");
+@@clientName(SubscriptionOperationGroup.enable, "EnableSubscription", "csharp");
+@@alternateType(TargetDirectoryRequestProperties.destinationOwnerId,
+  uuid,
+  "csharp"
+);
+@@alternateType(TargetDirectoryRequestProperties.destinationOwnerId,
+  uuid,
+  "csharp"
+);
+@@alternateType(TargetDirectoryRequestProperties.destinationTenantId,
+  uuid,
+  "csharp"
+);
+@@alternateType(TargetDirectoryResultProperties.destinationTenantId,
+  uuid,
+  "csharp"
+);
+@@alternateType(TargetDirectoryResultProperties.destinationOwnerId,
+  uuid,
+  "csharp"
+);
+@@alternateType(TargetDirectoryResultProperties.sourceOwnerId, uuid, "csharp");
+@@alternateType(TargetDirectoryResultProperties.sourceTenantId, uuid, "csharp");
+@@clientName(SubscriptionName.subscriptionName,
+  "SubscriptionNameValue",
+  "csharp"
+);
+
+@@clientLocation(SubscriptionOperationGroup.cancel::parameters.subscriptionId,
   SubscriptionOperationGroup.cancel
 );
-@@Azure.ClientGenerator.Core.clientLocation(SubscriptionOperationGroup.rename::parameters.subscriptionId,
+@@clientLocation(SubscriptionOperationGroup.rename::parameters.subscriptionId,
   SubscriptionOperationGroup.rename
 );
-@@Azure.ClientGenerator.Core.clientLocation(SubscriptionOperationGroup.enable::parameters.subscriptionId,
+@@clientLocation(SubscriptionOperationGroup.enable::parameters.subscriptionId,
   SubscriptionOperationGroup.enable
 );
-@@Azure.ClientGenerator.Core.clientLocation(SubscriptionOperationGroup.acceptOwnership::parameters.subscriptionId,
+@@clientLocation(SubscriptionOperationGroup.acceptOwnership::parameters.subscriptionId,
   SubscriptionOperationGroup.acceptOwnership
 );
-@@Azure.ClientGenerator.Core.clientLocation(SubscriptionOperationGroup.acceptOwnershipStatus::parameters.subscriptionId,
+@@clientLocation(SubscriptionOperationGroup.acceptOwnershipStatus::parameters.subscriptionId,
   SubscriptionOperationGroup.acceptOwnershipStatus
 );
 
-@@Azure.ClientGenerator.Core.clientLocation(SubscriptionsOperationGroup.acceptTargetDirectory::parameters.subscriptionId,
+@@clientLocation(SubscriptionsOperationGroup.acceptTargetDirectory::parameters.subscriptionId,
   SubscriptionsOperationGroup.acceptTargetDirectory
 );
-@@Azure.ClientGenerator.Core.clientLocation(SubscriptionsOperationGroup.targetDirectoryStatus::parameters.subscriptionId,
+@@clientLocation(SubscriptionsOperationGroup.targetDirectoryStatus::parameters.subscriptionId,
   SubscriptionsOperationGroup.targetDirectoryStatus
 );
 
@@ -54,15 +154,15 @@ namespace Microsoft.Subscription;
   "java"
 );
 
-@@Azure.ClientGenerator.Core.clientLocation(GetTargetDirectoryBaseParameters.subscriptionId,
+@@clientLocation(GetTargetDirectoryBaseParameters.subscriptionId,
   TargetDirectoryResults.getTargetDirectory
 );
-@@Azure.ClientGenerator.Core.clientLocation(PutTargetDirectoryBaseParameters.subscriptionId,
+@@clientLocation(PutTargetDirectoryBaseParameters.subscriptionId,
   TargetDirectoryResults.putTargetDirectory
 );
-@@Azure.ClientGenerator.Core.clientLocation(DeleteTargetDirectoryBaseParameters.subscriptionId,
+@@clientLocation(DeleteTargetDirectoryBaseParameters.subscriptionId,
   TargetDirectoryResults.deleteTargetDirectory
 );
-@@Azure.ClientGenerator.Core.clientLocation(ListTargetDirectoryBaseParameters.subscriptionId,
+@@clientLocation(ListTargetDirectoryBaseParameters.subscriptionId,
   TargetDirectoryResults.listTargetDirectory
 );

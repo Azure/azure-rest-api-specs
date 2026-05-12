@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Microsoft.DataReplication;
 
@@ -619,6 +621,60 @@ union ReplicationVaultType {
 }
 
 /**
+ * Private endpoint state for the vault.
+ */
+union VaultPrivateEndpointState {
+  string,
+
+  /**
+   * No private endpoint configured.
+   */
+  None: "None",
+
+  /**
+   * Private endpoint is being enabled.
+   */
+  InProgress: "InProgress",
+
+  /**
+   * Private endpoint has been successfully enabled.
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * Private endpoint is being deleted.
+   */
+  Deleting: "Deleting",
+
+  /**
+   * Private endpoint has failed to be enabled.
+   */
+  Failed: "Failed",
+
+  /**
+   * Private endpoint is pending.
+   */
+  Pending: "Pending",
+}
+
+/**
+ * Property to enable or disable resource provider inbound network traffic from public clients.
+ */
+union PublicNetworkAccess {
+  string,
+
+  /**
+   * Public network access is enabled.
+   */
+  Enabled: "Enabled",
+
+  /**
+   * Public network access is disabled.
+   */
+  Disabled: "Disabled",
+}
+
+/**
  * Gets or sets the identityType which can be either SystemAssigned or None.
  */
 union VaultIdentityType {
@@ -704,6 +760,82 @@ union VMwareToAzureMigrateResyncState {
    * Started resynchronization state.
    */
   StartedResynchronization: "StartedResynchronization",
+}
+
+/**
+ * Gets or sets the security options.
+ */
+@added(Versions.v2026_05_01)
+union SecurityOption {
+  string,
+
+  /**
+   * No security feature is enabled.
+   */
+  None: "None",
+
+  /**
+   * Secure boot is enabled.
+   */
+  SecureBootEnabled: "SecureBootEnabled",
+
+  /**
+   * Enable vTPM.
+   */
+  EnablevTPM: "EnablevTPM",
+
+  /**
+   * Trusted launch is enabled, including secure boot and vTPM.
+   */
+  TrustedLaunch: "TrustedLaunch",
+}
+
+/**
+ * Gets or sets the Host Type.
+ */
+@added(Versions.v2026_05_01)
+union HostType {
+  string,
+
+  /**
+   * Unknown host type.
+   */
+  None: "None",
+
+  /**
+   * VMWare.
+   */
+  VMWare: "VMWare",
+
+  /**
+   * HyperV.
+   */
+  HyperV: "HyperV",
+
+  /**
+   * Azure Local.
+   */
+  AzLocal: "AzLocal",
+
+  /**
+   * Azure Local Rack Scale.
+   */
+  ALRS: "ALRS",
+
+  /**
+   * Azure Local Medium.
+   */
+  ALM: "ALM",
+
+  /**
+   * Azure Local Disconnected Operations.
+   */
+  ALDO: "ALDO",
+
+  /**
+   * Azure Local ADLess.
+   */
+  ALADLess: "ALADLess",
 }
 
 /**
@@ -2182,6 +2314,26 @@ model VaultModelProperties {
    * Gets or sets the type of vault.
    */
   vaultType?: ReplicationVaultType;
+
+  /**
+   * Private endpoint state for the vault.
+   */
+  @added(Versions.v2026_05_01)
+  @visibility(Lifecycle.Read)
+  privateEndpointState?: VaultPrivateEndpointState;
+
+  /**
+   * Property to enable or disable resource provider inbound network traffic from public clients.
+   */
+  @added(Versions.v2026_05_01)
+  publicNetworkAccess?: PublicNetworkAccess;
+
+  /**
+   * List of private endpoint connection.
+   */
+  @added(Versions.v2026_05_01)
+  @visibility(Lifecycle.Read)
+  privateEndpointConnections?: PrivateEndpointConnection[];
 }
 
 /**
@@ -3003,6 +3155,24 @@ model HyperVToAzStackHCIProtectedItemModelCustomProperties
    * Gets or sets the instance type.
    */
   instanceType: "HyperVToAzStackHCI";
+
+  /**
+   * Gets or sets the security options for this VM.
+   */
+  @added(Versions.v2026_05_01)
+  securityOption?: SecurityOption;
+
+  /**
+   * Gets or sets a value indicating whether conversion to Gen 2 is required.
+   */
+  @added(Versions.v2026_05_01)
+  convertToGen2?: boolean;
+
+  /**
+   * Gets or sets a value indicating whether VM is to be migrated as Arc VM.
+   */
+  @added(Versions.v2026_05_01)
+  migrateAsArcVM?: boolean;
 }
 
 /**
@@ -3108,6 +3278,24 @@ model HyperVToAzStackHCIProtectedItemModelCustomPropertiesUpdate
    * Gets or sets the type of the OS.
    */
   osType?: string;
+
+  /**
+   * Gets or sets the security options for this VM.
+   */
+  @added(Versions.v2026_05_01)
+  securityOption?: SecurityOption;
+
+  /**
+   * Gets or sets a value indicating whether conversion to Gen 2 is required.
+   */
+  @added(Versions.v2026_05_01)
+  convertToGen2?: boolean;
+
+  /**
+   * Gets or sets a value indicating whether VM is to be migrated as Arc VM.
+   */
+  @added(Versions.v2026_05_01)
+  migrateAsArcVM?: boolean;
 }
 
 /**
@@ -3989,6 +4177,24 @@ model VMwareToAzStackHCIProtectedItemModelCustomProperties
    * Gets or sets the instance type.
    */
   instanceType: "VMwareToAzStackHCI";
+
+  /**
+   * Gets or sets the security options for this VM.
+   */
+  @added(Versions.v2026_05_01)
+  securityOption?: SecurityOption;
+
+  /**
+   * Gets or sets a value indicating whether conversion to Gen 2 is required.
+   */
+  @added(Versions.v2026_05_01)
+  convertToGen2?: boolean;
+
+  /**
+   * Gets or sets a value indicating whether VM is to be migrated as Arc VM.
+   */
+  @added(Versions.v2026_05_01)
+  migrateAsArcVM?: boolean;
 }
 
 /**
@@ -4085,6 +4291,24 @@ model VMwareToAzStackHCIProtectedItemModelCustomPropertiesUpdate
    * Gets or sets the type of the OS.
    */
   osType?: string;
+
+  /**
+   * Gets or sets the security options for this VM.
+   */
+  @added(Versions.v2026_05_01)
+  securityOption?: SecurityOption;
+
+  /**
+   * Gets or sets a value indicating whether conversion to Gen 2 is required.
+   */
+  @added(Versions.v2026_05_01)
+  convertToGen2?: boolean;
+
+  /**
+   * Gets or sets a value indicating whether VM is to be migrated as Arc VM.
+   */
+  @added(Versions.v2026_05_01)
+  migrateAsArcVM?: boolean;
 }
 
 /**

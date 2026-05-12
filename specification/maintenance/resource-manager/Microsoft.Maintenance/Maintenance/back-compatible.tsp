@@ -82,7 +82,8 @@ using Microsoft.Maintenance;
   MaintenanceConfigurations
 );
 @@clientName(MaintenanceConfigurationOperationGroup.maintenanceConfigurationsList,
-  "List"
+  "List",
+  "!csharp"
 );
 @@clientLocation(ApplyUpdateOperationGroup.get, ApplyUpdates);
 @@clientLocation(ApplyUpdateOperationGroup.createOrUpdateOrCancel,
