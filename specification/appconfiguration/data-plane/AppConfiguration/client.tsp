@@ -50,5 +50,4 @@ namespace SdkCustomizations;
 @@clientName(KeyValueFilter, "ConfigurationSettingsFilter", "javascript");
 @@clientName(Snapshot, "ConfigurationSnapshot", "javascript");
 
-
 @@clientName(Azure.Core.Foundations.Error, "CommonError", "python");
