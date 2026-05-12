@@ -8600,10 +8600,6 @@
           "type": "string",
           "description": "Container image tag."
         },
-        "imageType": {
-          "$ref": "#/definitions/ImageType",
-          "description": "The type of the image. Set to CloudBuild to let the system manages the image, where user will not be able to update image through image field. Set to ContainerImage for user provided image."
-        },
         "name": {
           "type": "string",
           "description": "Custom container name."
@@ -9833,11 +9829,6 @@
           "type": "string",
           "description": "Ephemeral Storage, e.g. \"1Gi\"",
           "readOnly": true
-        },
-        "gpu": {
-          "type": "number",
-          "format": "double",
-          "description": "Required GPU in cores for GPU based app, e.g. 1.0"
         }
       }
     },
@@ -11120,24 +11111,6 @@
         }
       }
     },
-    "EnvironmentVariable": {
-      "type": "object",
-      "description": "Model representing an environment variable.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Environment variable name."
-        },
-        "value": {
-          "type": "string",
-          "description": "Environment variable value."
-        }
-      },
-      "required": [
-        "name",
-        "value"
-      ]
-    },
     "ErrorEntity": {
       "type": "object",
       "description": "Body of the error response returned from the API.",
@@ -11323,10 +11296,6 @@
           "type": "string",
           "description": "Context path"
         },
-        "dockerfilePath": {
-          "type": "string",
-          "description": "Dockerfile path"
-        },
         "githubPersonalAccessToken": {
           "type": "string",
           "format": "password",
@@ -11356,16 +11325,6 @@
         "runtimeVersion": {
           "type": "string",
           "description": "Runtime version"
-        },
-        "buildEnvironmentVariables": {
-          "type": "array",
-          "description": "List of environment variables to be passed to the build.",
-          "items": {
-            "$ref": "#/definitions/EnvironmentVariable"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
         }
       }
     },
@@ -11805,30 +11764,6 @@
       "required": [
         "identity"
       ]
-    },
-    "ImageType": {
-      "type": "string",
-      "description": "The type of the image. Set to CloudBuild to let the system manages the image, where user will not be able to update image through image field. Set to ContainerImage for user provided image.",
-      "enum": [
-        "CloudBuild",
-        "ContainerImage"
-      ],
-      "x-ms-enum": {
-        "name": "ImageType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "CloudBuild",
-            "value": "CloudBuild",
-            "description": "CloudBuild"
-          },
-          {
-            "name": "ContainerImage",
-            "value": "ContainerImage",
-            "description": "ContainerImage"
-          }
-        ]
-      }
     },
     "Ingress": {
       "type": "object",
@@ -14210,11 +14145,6 @@
           "type": "string",
           "description": "Container exec endpoint",
           "readOnly": true
-        },
-        "debugEndpoint": {
-          "type": "string",
-          "description": "Container debug endpoint",
-          "readOnly": true
         }
       }
     },
@@ -14787,17 +14717,6 @@
         "name": {
           "type": "string",
           "description": "Name of the service bind"
-        },
-        "clientType": {
-          "type": "string",
-          "description": "Type of the client to be used to connect to the service"
-        },
-        "customizedKeys": {
-          "type": "object",
-          "description": "Customized keys for customizing injected values to the app",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       }
     },

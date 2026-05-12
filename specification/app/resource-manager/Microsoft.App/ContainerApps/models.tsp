@@ -6562,6 +6562,8 @@ model GithubActionConfiguration {
   /**
    * Dockerfile path
    */
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   dockerfilePath?: string;
 
   /**
@@ -6599,6 +6601,8 @@ model GithubActionConfiguration {
   /**
    * List of environment variables to be passed to the build.
    */
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   @identifiers(#["name"])
   buildEnvironmentVariables?: EnvironmentVariable[];
 }
@@ -7411,6 +7415,8 @@ model BaseContainer {
   /**
    * The type of the image. Set to CloudBuild to let the system manages the image, where user will not be able to update image through image field. Set to ContainerImage for user provided image.
    */
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   imageType?: ImageType;
 
   /**
@@ -7469,6 +7475,8 @@ model ContainerResources {
   /**
    * Required GPU in cores for GPU based app, e.g. 1.0
    */
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   gpu?: float64;
 }
 
@@ -7680,11 +7688,15 @@ model ServiceBind {
   /**
    * Type of the client to be used to connect to the service
    */
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   clientType?: string;
 
   /**
    * Customized keys for customizing injected values to the app
    */
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   customizedKeys?: Record<string>;
 }
@@ -8443,6 +8455,8 @@ model ReplicaContainer {
    * Container debug endpoint
    */
   @visibility(Lifecycle.Read)
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   debugEndpoint?: string;
 }
 
