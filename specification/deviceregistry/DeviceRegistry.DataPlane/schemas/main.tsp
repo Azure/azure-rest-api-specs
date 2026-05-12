@@ -11,8 +11,14 @@
 //   JSON Schema files on demand without affecting SDK generation.
 //
 // To regenerate schemas (run from this repo's root):
+//   npm install --no-save @typespec/json-schema@1.11.0
 //   npx tsp compile specification/deviceregistry/DeviceRegistry.DataPlane/schemas
 //   npx prettier --write "specification/deviceregistry/schemas/*.json"
+//
+// `@typespec/json-schema` is intentionally NOT in the repo's package.json (that file
+// is owned by the Azure SDK team and PR validation rejects edits to it). Install it
+// transiently with `--no-save` so it doesn't dirty package.json. The version should
+// match the `@typespec/compiler` version pinned in the repo's package.json.
 //
 // The prettier pass is required because the json-schema emitter writes 4-space
 // indentation, but this repo's prettier config (and the CI prettier check) expects
