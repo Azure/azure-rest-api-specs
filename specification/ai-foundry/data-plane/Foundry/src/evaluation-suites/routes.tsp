@@ -20,6 +20,12 @@ alias EvaluationSuiteFilterQueryParams = {
 // CRUD operations (versioned asset pattern)
 // ---------------------------------------------------------------------------
 
+const EvaluationSuitesCrudRequiredPreviews = #{
+  conditional_previews: #[
+    FoundryFeaturesOptInKeys.evaluations_v1_preview
+  ],
+};
+
 @removed(Versions.v1)
 interface EvaluationSuites
   extends VersionedOperations<
@@ -34,9 +40,12 @@ interface EvaluationSuites
   @doc("Create a new {name} with auto incremented version id", EvaluationSuiteVersion)
   @Rest.segment("versions")
   @post
+  @extension("x-ms-foundry-meta", EvaluationSuitesCrudRequiredPreviews)
   createEvaluationSuiteVersion is Azure.Core.Foundations.ResourceOperation<
     EvaluationSuiteVersion,
-    ListEvaluationSuiteVersionsParameters,
+    {
+      ...WithConditionalFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
+    },
     Azure.Core.Foundations.ResourceCreatedResponse<EvaluationSuiteVersion>
   >;
 
