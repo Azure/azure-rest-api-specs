@@ -93,6 +93,14 @@ interface Skills {}
 @@clientLocation(Azure.AI.Projects.Skills.updateSkill, Skills);
 @@clientLocation(Azure.AI.Projects.Skills.deleteSkill, Skills);
 
+interface Jobs {}
+@@clientLocation(Azure.AI.Projects.Jobs.list, Jobs);
+@@clientLocation(Azure.AI.Projects.Jobs.get, Jobs);
+@@clientLocation(Azure.AI.Projects.Jobs.showServices, Jobs);
+@@clientLocation(Azure.AI.Projects.Jobs.createOrUpdate, Jobs);
+@@clientLocation(Azure.AI.Projects.Jobs.beginDelete, Jobs);
+@@clientLocation(Azure.AI.Projects.Jobs.beginCancel, Jobs);
+
 interface Agents {}
 // Move AgentSessionFiles
 @@clientLocation(Azure.AI.Projects.AgentSessionFiles.uploadSessionFile, Agents);
@@ -113,7 +121,6 @@ interface Agents {}
 @@clientLocation(Azure.AI.Projects.Agents.createAgentVersionFromCode, Agents);
 @@clientLocation(Azure.AI.Projects.Agents.downloadAgentCode, Agents);
 @@clientLocation(Azure.AI.Projects.Agents.downloadAgentVersionCode, Agents);
-
 
 interface Datasets {}
 

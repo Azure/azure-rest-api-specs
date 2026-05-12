@@ -24,6 +24,7 @@ import "./src/toolboxes/routes.tsp";
 import "./src/skills/routes.tsp";
 import "./src/agents-session-files/routes.tsp";
 import "./src/data_generation_jobs/routes.tsp";
+import "./src/jobs/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
 import "./relocate-beta-operations.tsp";
@@ -171,11 +172,20 @@ using Azure.AI.Projects;
 @@clientName(Evaluators.listLatestVersions, "list", "python, javascript");
 
 // Evaluator generation jobs — renamed for JavaScript SDK discoverability
-@@clientName(EvaluatorGenerationJobs.create, "createGenerationJob", "javascript");
+@@clientName(EvaluatorGenerationJobs.create,
+  "createGenerationJob",
+  "javascript"
+);
 @@clientName(EvaluatorGenerationJobs.get, "getGenerationJob", "javascript");
 @@clientName(EvaluatorGenerationJobs.list, "listGenerationJobs", "javascript");
-@@clientName(EvaluatorGenerationJobs.cancel, "cancelGenerationJob", "javascript");
-@@clientName(EvaluatorGenerationJobs.delete, "deleteGenerationJob", "javascript");
+@@clientName(EvaluatorGenerationJobs.cancel,
+  "cancelGenerationJob",
+  "javascript"
+);
+@@clientName(EvaluatorGenerationJobs.delete,
+  "deleteGenerationJob",
+  "javascript"
+);
 
 // Evaluator generation jobs — renamed for Python SDK discoverability
 @@clientName(EvaluatorGenerationJobs.create, "create_generation_job", "python");
@@ -275,7 +285,7 @@ using Azure.AI.Projects;
 
 @@clientName(SkillObject, "SkillDetails", "python");
 @@clientName(DeleteSkillResponse, "DeleteSkillResult", "python");
-@@clientName(DownloadSkillResponse, "DownloadSkillResult", "python"); 
+@@clientName(DownloadSkillResponse, "DownloadSkillResult", "python");
 
 // --------------------------------------------------------------------------------
 // Connections sub‐client
@@ -294,6 +304,18 @@ using Azure.AI.Projects;
 @@clientName(Sku, "ModelDeploymentSku");
 
 // --------------------------------------------------------------------------------
+// Jobs sub‐client
+// --------------------------------------------------------------------------------
+@@clientName(Azure.AI.Projects.Jobs.get, "get", "python");
+@@clientName(Azure.AI.Projects.Jobs.list, "list", "python");
+@@clientName(Azure.AI.Projects.Jobs.createOrUpdate,
+  "create_or_update",
+  "python"
+);
+@@clientName(Azure.AI.Projects.Jobs.beginDelete, "begin_delete", "python");
+@@clientName(Azure.AI.Projects.Jobs.beginCancel, "begin_cancel", "python");
+
+// --------------------------------------------------------------------------------
 // Beta Agents sub-client
 // --------------------------------------------------------------------------------
 
@@ -306,16 +328,19 @@ using Azure.AI.Projects;
 @@scope(Agents.createAgentFromCode, "!(python)");
 
 @@clientName(DownloadAgentCodeResponse, "DownloadAgentCodeResult", "python");
-@@clientName(SessionDirectoryListResponse, "SessionDirectoryListResult", "python");
+@@clientName(SessionDirectoryListResponse,
+  "SessionDirectoryListResult",
+  "python"
+);
 @@clientName(SessionFileWriteResponse, "SessionFileWriteResult", "python");
 
 // --------------------------------------------------------------------------------
 // Evaluation Taxonomies sub-client
 // --------------------------------------------------------------------------------
 
-// Note that we can't rename it in src\openai-evaluations\models.tsp, since in 
+// Note that we can't rename it in src\openai-evaluations\models.tsp, since in
 // src\evaluations\models.tsp we already define EvaluationTarget (not for v1).
-// If/when src\evaluations will be removed, consider doing the rename in 
+// If/when src\evaluations will be removed, consider doing the rename in
 // src\openai-evaluations\models.tsp instead.
 @@clientName(Target, "EvaluationTarget");
 

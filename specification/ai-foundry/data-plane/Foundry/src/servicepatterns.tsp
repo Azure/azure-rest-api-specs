@@ -40,7 +40,6 @@ union AgentDefinitionOptInKeys {
   workflow_agents_v1_preview: "WorkflowAgents=V1Preview",
   container_agents_v1_preview: "ContainerAgents=V1Preview",
   agent_endpoint_v1_preview: "AgentEndpoints=V1Preview",
-
   code_agents_v1_preview: "CodeAgents=V1Preview",
 }
 
@@ -53,6 +52,7 @@ union FoundryFeaturesOptInKeys {
   memory_stores_v1_preview: "MemoryStores=V1Preview",
   toolboxes_v1_preview: "Toolboxes=V1Preview",
   data_generation_jobs_v1_preview: "DataGenerationJobs=V1Preview",
+  jobs_v1_preview: "Jobs=V1Preview",
 }
 
 alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys> = {
