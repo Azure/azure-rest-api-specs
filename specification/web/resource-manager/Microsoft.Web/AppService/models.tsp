@@ -15986,3 +15986,187 @@ model StorageMount {
    */
   credentialsKeyVaultReference?: KeyVaultReferenceWithStatus;
 }
+
+/**
+ * The artifact type for OneDeploy.
+ */
+union OneDeployType {
+  string,
+
+  /** WAR file deployment. */
+  war: "war",
+
+  /** JAR file deployment. */
+  jar: "jar",
+
+  /** EAR file deployment. */
+  ear: "ear",
+
+  /** Library file deployment. */
+  lib: "lib",
+
+  /** Startup script deployment. */
+  startup: "startup",
+
+  /** Static file deployment. */
+  static: "static",
+
+  /** ZIP file deployment. */
+  zip: "zip",
+}
+
+/**
+ * Properties for a OneDeploy operation.
+ */
+model OneDeployProperties {
+  /** The URI of the package to deploy. */
+  packageUri?: string;
+
+  /** The type of artifact being deployed. */
+  type?: OneDeployType;
+
+  /** Whether to restart the app after deployment. */
+  restart?: boolean;
+
+  /** Whether to perform a clean deployment (delete target files before deploying). */
+  clean?: boolean;
+
+  /** Whether to ignore the stack setting during deployment. */
+  ignoreStack?: boolean;
+
+  /** The relative target path for the deployment (used for lib or static types). */
+  targetPath?: string;
+
+  /** Whether to track the deployment progress. */
+  trackDeploymentProgress?: boolean;
+}
+
+/**
+ * Request body for a OneDeploy operation.
+ */
+model OneDeployRequest {
+  /** OneDeploy operation properties. */
+  properties?: OneDeployProperties;
+}
+
+/**
+ * Provisioning state for OneDeploy operation.
+ */
+union OneDeployProvisioningState {
+  string,
+
+  /** The deployment is in progress. */
+  InProgress: "InProgress",
+
+  /** The deployment succeeded. */
+  Succeeded: "Succeeded",
+
+  /** The deployment failed. */
+  Failed: "Failed",
+
+  /** The deployment was canceled. */
+  Canceled: "Canceled",
+}
+
+/**
+ * OneDeploy response properties.
+ */
+model OneDeployResponseProperties {
+  /** Deployment operation id. */
+  id?: string;
+
+  /** Deployment status code. */
+  status?: int32;
+
+  /** Details about deployment status. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "matches service response"
+  status_text?: string;
+
+  /** Author email. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "matches service response"
+  author_email?: string;
+
+  /** Who authored the deployment. */
+  author?: string;
+
+  /** Who performed the deployment. */
+  deployer?: string;
+
+  /** Details about the deployment. */
+  message?: string;
+
+  /** Deployment progress information. */
+  progress?: string;
+
+  /** Time the deployment was received. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "matches service response"
+  received_time?: utcDateTime;
+
+  /** Start time of the deployment. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "matches service response"
+  start_time?: utcDateTime;
+
+  /** End time of the deployment. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "matches service response"
+  end_time?: utcDateTime;
+
+  /** Time of last successful deployment. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "matches service response"
+  last_success_end_time?: utcDateTime;
+
+  /** Whether the deployment is complete. */
+  complete?: boolean;
+
+  /** Whether this is the active deployment. */
+  active?: boolean;
+
+  /** Whether this is a temporary deployment. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "matches service response"
+  is_temp?: boolean;
+
+  /** Whether the deployment is read-only. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "matches service response"
+  is_readonly?: boolean;
+
+  /** Deployment URL. */
+  url?: url;
+
+  /** Log URL. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "matches service response"
+  log_url?: url;
+
+  /** Name of the site. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "matches service response"
+  site_name?: string;
+
+  /** Provisioning state of the deployment. */
+  provisioningState?: OneDeployProvisioningState;
+}
+
+/**
+ * Collection of OneDeploy operation responses.
+ */
+model OneDeployResponseCollection {
+  /** Collection of resources. */
+  value: OneDeployResponse[];
+}
+
+/**
+ * OneDeploy operation response.
+ */
+model OneDeployResponse {
+  /** Resource Id. */
+  id?: string;
+
+  /** Resource Name. */
+  name?: string;
+
+  /** Resource type. */
+  type?: string;
+
+  /** Resource location. */
+  location?: string;
+
+  /** OneDeploy response properties. */
+  properties?: OneDeployResponseProperties;
+}
