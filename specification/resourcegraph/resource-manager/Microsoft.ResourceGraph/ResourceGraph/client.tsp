@@ -16,6 +16,13 @@ using Azure.ResourceManager;
 using Azure.ClientGenerator.Core;
 using Azure.ClientGenerator.Core.Legacy;
 
+@client({
+  name: "ResourceGraphClient",
+  service: [ResourceChanges, ResourceGraphApi, ResourceHistory, GraphQueryApi],
+  autoMergeServices: true,
+})
+namespace Microsoft.ResourceGraph;
+
 // --- C# naming customizations to match GA SDK surface ---
 // Rename models to match existing GA API
 @@clientName(ResourceGraphApi.QueryRequest, "ResourceQueryContent", "csharp");
