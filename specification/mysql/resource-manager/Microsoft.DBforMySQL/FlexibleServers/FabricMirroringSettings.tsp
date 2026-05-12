@@ -9,7 +9,6 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.DBforMySQL;
 
@@ -71,10 +70,10 @@ model FabricMirroringSettingsProperties {
  * Fabric Mirroring settings proxy resource.
  */
 @parentResource(Server)
-model FabricMirroringSettings
+model FabricMirroringSetting
   is ProxyResource<FabricMirroringSettingsProperties> {
   ...ResourceNameParameter<
-    Resource = FabricMirroringSettings,
+    Resource = FabricMirroringSetting,
     KeyName = "fabricMirroringSettingsName",
     SegmentName = "fabricMirroringSettings",
     NamePattern = "^[a-zA-Z0-9-]{3,24}$"
@@ -84,21 +83,21 @@ model FabricMirroringSettings
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 @added(Versions.v2025_12_01_preview)
-interface FabricMirroringSettingsOperations {
+interface FabricMirroringSettings {
   @doc("Get Fabric Mirroring settings.")
-  get is ArmResourceRead<FabricMirroringSettings>;
+  get is ArmResourceRead<FabricMirroringSetting>;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Async PUT returns 202 Accepted for long-running operations"
   @doc("Create or update Fabric Mirroring settings.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
-    FabricMirroringSettings,
-    Response = ArmResourceUpdatedResponse<FabricMirroringSettings> | ArmResourceCreatedResponse<
-      FabricMirroringSettings,
-      ArmAsyncOperationHeader<FinalResult = FabricMirroringSettings> &
+    FabricMirroringSetting,
+    Response = ArmResourceUpdatedResponse<FabricMirroringSetting> | ArmResourceCreatedResponse<
+      FabricMirroringSetting,
+      ArmAsyncOperationHeader<FinalResult = FabricMirroringSetting> &
         Azure.Core.Foundations.RetryAfterHeader
     > | ArmAcceptedLroResponse
   >;
 
   @doc("List Fabric Mirroring settings by server.")
-  listByServer is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<FabricMirroringSettings>;
+  listByServer is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<FabricMirroringSetting>;
 }

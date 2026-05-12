@@ -94,7 +94,7 @@
       "name": "Replicas"
     },
     {
-      "name": "FabricMirroringSettingsOperations"
+      "name": "FabricMirroringSettings"
     },
     {
       "name": "ReaderEndpoints"
@@ -2800,9 +2800,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/fabricMirroringSettings": {
       "get": {
-        "operationId": "FabricMirroringSettingsOperations_ListByServer",
+        "operationId": "FabricMirroringSettings_ListByServer",
         "tags": [
-          "FabricMirroringSettingsOperations"
+          "FabricMirroringSettings"
         ],
         "description": "List Fabric Mirroring settings by server.",
         "parameters": [
@@ -2830,7 +2830,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/FabricMirroringSettingsListResult"
+              "$ref": "#/definitions/FabricMirroringSettingListResult"
             }
           },
           "default": {
@@ -2839,14 +2839,19 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "List a server's Fabric Mirroring settings.": {
+            "$ref": "./examples/FabricMirroringSettingsList.json"
+          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/fabricMirroringSettings/{fabricMirroringSettingsName}": {
       "get": {
-        "operationId": "FabricMirroringSettingsOperations_Get",
+        "operationId": "FabricMirroringSettings_Get",
         "tags": [
-          "FabricMirroringSettingsOperations"
+          "FabricMirroringSettings"
         ],
         "description": "Get Fabric Mirroring settings.",
         "parameters": [
@@ -2872,7 +2877,7 @@
           {
             "name": "fabricMirroringSettingsName",
             "in": "path",
-            "description": "The name of the FabricMirroringSettings",
+            "description": "The name of the FabricMirroringSetting",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -2882,7 +2887,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/FabricMirroringSettings"
+              "$ref": "#/definitions/FabricMirroringSetting"
             }
           },
           "default": {
@@ -2891,12 +2896,17 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get a server's Fabric Mirroring settings.": {
+            "$ref": "./examples/FabricMirroringSettingsGet.json"
+          }
         }
       },
       "put": {
-        "operationId": "FabricMirroringSettingsOperations_CreateOrUpdate",
+        "operationId": "FabricMirroringSettings_CreateOrUpdate",
         "tags": [
-          "FabricMirroringSettingsOperations"
+          "FabricMirroringSettings"
         ],
         "description": "Create or update Fabric Mirroring settings.",
         "parameters": [
@@ -2922,7 +2932,7 @@
           {
             "name": "fabricMirroringSettingsName",
             "in": "path",
-            "description": "The name of the FabricMirroringSettings",
+            "description": "The name of the FabricMirroringSetting",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -2933,21 +2943,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FabricMirroringSettings"
+              "$ref": "#/definitions/FabricMirroringSetting"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'FabricMirroringSettings' update operation succeeded",
+            "description": "Resource 'FabricMirroringSetting' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/FabricMirroringSettings"
+              "$ref": "#/definitions/FabricMirroringSetting"
             }
           },
           "201": {
-            "description": "Resource 'FabricMirroringSettings' create operation succeeded",
+            "description": "Resource 'FabricMirroringSetting' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/FabricMirroringSettings"
+              "$ref": "#/definitions/FabricMirroringSetting"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -2982,9 +2992,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create Or Update a server's Fabric Mirroring settings.": {
+            "$ref": "./examples/FabricMirroringSettingsPut.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/FabricMirroringSettings"
+          "final-state-schema": "#/definitions/FabricMirroringSetting"
         },
         "x-ms-long-running-operation": true
       }
@@ -5713,7 +5728,7 @@
         ]
       }
     },
-    "FabricMirroringSettings": {
+    "FabricMirroringSetting": {
       "type": "object",
       "description": "Fabric Mirroring settings proxy resource.",
       "properties": {
@@ -5728,15 +5743,15 @@
         }
       ]
     },
-    "FabricMirroringSettingsListResult": {
+    "FabricMirroringSettingListResult": {
       "type": "object",
-      "description": "The response of a FabricMirroringSettings list operation.",
+      "description": "The response of a FabricMirroringSetting list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The FabricMirroringSettings items on this page",
+          "description": "The FabricMirroringSetting items on this page",
           "items": {
-            "$ref": "#/definitions/FabricMirroringSettings"
+            "$ref": "#/definitions/FabricMirroringSetting"
           }
         },
         "nextLink": {
