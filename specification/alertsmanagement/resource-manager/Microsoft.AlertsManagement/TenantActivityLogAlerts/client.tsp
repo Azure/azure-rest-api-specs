@@ -49,7 +49,10 @@ using Microsoft.AlertsManagement;
 // TenantActivityLogAlertCollection while the ArmResource class is auto-suffixed back to
 // TenantActivityLogAlertResource. Aligns with sibling Azure.ResourceManager.AlertsManagement
 // naming (AlertProcessingRuleData / AlertProcessingRuleCollection / AlertProcessingRuleResource).
-@@clientName(TenantActivityLogAlertResource, "TenantActivityLogAlert", "csharp");
+@@clientName(TenantActivityLogAlertResource,
+  "TenantActivityLogAlert",
+  "csharp"
+);
 
 // Add service/resource context to the otherwise generic public model names.
 // Aligns with sibling Azure.ResourceManager.Monitor models
