@@ -89,7 +89,7 @@ model CreateAgentRequest {
     }
   )
   @doc("An optional endpoint configuration. If not specified, a default endpoint configuration will be set for the agent")
-  agent_endpoint?: AgentEndpoint;
+  agent_endpoint?: AgentEndpointConfig;
 
   @extension(
     "x-ms-foundry-meta",
@@ -111,7 +111,7 @@ model UpdateAgentRequest {
 )
 model PatchAgentRequest {
   @doc("The endpoint configuration for the agent")
-  agent_endpoint?: AgentEndpoint;
+  agent_endpoint?: AgentEndpointConfig;
 
   @doc("Optional agent card for the agent")
   agent_card?: AgentCard;
@@ -148,7 +148,7 @@ model AgentObject {
     }
   )
   @doc("The endpoint configuration for the agent")
-  agent_endpoint?: AgentEndpoint;
+  agent_endpoint?: AgentEndpointConfig;
 
   @extension(
     "x-ms-foundry-meta",
@@ -214,9 +214,8 @@ model AgentVersionObject {
 
   definition: AgentDefinition;
 
-  @removed(Versions.v1)
   @doc("The provisioning status of the agent version. Defaults to 'active' for non-hosted agents. For hosted agents, reflects infrastructure readiness.")
-  status: AgentVersionStatus = AgentVersionStatus.active;
+  status?: AgentVersionStatus;
 
   @removed(Versions.v1)
   @doc("Error details if the agent version provisioning failed.")
@@ -263,7 +262,6 @@ model AgentVersionObject {
   agent_guid?: string;
 }
 
-@removed(Versions.v1)
 @doc("The provisioning status of an agent version.")
 union AgentVersionStatus {
   @doc("The agent version is being provisioned.")
@@ -417,6 +415,29 @@ model CodeConfiguration {
 
   @doc("The entry point command and arguments for the code execution.")
   entry_point: string[];
+
+  @doc("""
+    How package dependencies are resolved at deployment time. Defaults to `bundled`,
+    where the caller bundles all dependencies into the uploaded zip and the service
+    performs no remote build. `remote_build` instructs the service to build
+    dependencies remotely from the manifest included in the uploaded zip.
+    """)
+  dependency_resolution: CodeDependencyResolution = CodeDependencyResolution.bundled;
+
+  @visibility(Lifecycle.Read)
+  @doc("The SHA-256 hex digest of the uploaded code zip. Set by the service from the `x-ms-code-zip-sha256` request header; read-only in responses and never accepted in request payloads.")
+  content_hash?: string;
+}
+
+@doc("How package dependencies are resolved at deployment time for a code-based hosted agent.")
+union CodeDependencyResolution {
+  string,
+
+  @doc("The caller has bundled all dependencies into the uploaded zip; the service performs no remote build.")
+  bundled: "bundled",
+
+  @doc("The service builds dependencies remotely from the manifest included in the uploaded zip.")
+  remote_build: "remote_build",
 }
 
 @doc("The hosted agent definition.")
@@ -485,6 +506,9 @@ model HostedAgentDefinition extends AgentDefinition {
     #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
   )
   code_configuration?: CodeConfiguration;
+
+  @doc("Optional customer-supplied telemetry configuration for exporting container logs, traces, and metrics.")
+  telemetry_config?: TelemetryConfig;
 }
 
 @doc("The container app agent definition.")
@@ -654,7 +678,6 @@ model AgentEndpointAuthorizationScheme {
 )
 model EntraAuthorizationScheme extends AgentEndpointAuthorizationScheme {
   type: AgentEndpointAuthorizationSchemeType.Entra;
-  isolation_key_source: IsolationKeySource;
 }
 
 @extension(
@@ -697,12 +720,6 @@ model EntraIsolationKeySource extends IsolationKeySource {
 )
 model HeaderIsolationKeySource extends IsolationKeySource {
   kind: IsolationKeySourceKind.Header;
-
-  @doc("The user isolation key header value")
-  user_isolation_key: string;
-
-  @doc("The chat isolation key header value")
-  chat_isolation_key: string;
 }
 
 @extension(
@@ -730,7 +747,7 @@ union IsolationKeySourceKind {
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
 )
-model AgentEndpoint {
+model AgentEndpointConfig {
   @doc("The version selector of the agent endpoint determines how traffic is routed to different versions of the agent.")
   version_selector?: VersionSelector;
 
@@ -854,7 +871,7 @@ model AgentCard {
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
 )
-model CreateAgentVersionFromCodeRequest {
+model CreateAgentVersionFromCodeMetadata {
   @doc("A human-readable description of the agent.")
   @maxLength(512)
   description?: string;
@@ -872,7 +889,7 @@ model CreateAgentVersionFromCodeRequest {
 )
 model CreateAgentVersionFromCodeContent {
   /** JSON metadata including description and hosted definition. */
-  metadata: HttpPart<CreateAgentVersionFromCodeRequest>;
+  metadata: HttpPart<CreateAgentVersionFromCodeMetadata>;
 
   /** The code zip file (max 250 MB). */
   code: HttpPart<bytes>;
@@ -885,6 +902,26 @@ model CreateAgentVersionFromCodeContent {
 )
 model CreateAgentFromCodeContent {
   ...CreateAgentVersionFromCodeContent;
+}
+
+/**
+ * Response body for downloading a hosted agent's code zip.
+ * Body is the raw zip bytes; `Content-Type` declares `application/zip` so clients
+ * can route to a zip-aware handler. Streaming is preserved (`bytes` body) regardless
+ * of the content-type label.
+ */
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
+)
+model DownloadAgentCodeResponse {
+  @doc("The media type of the returned package content.")
+  @header("Content-Type")
+  content_type: "application/zip";
+
+  @doc("The zip code package content.")
+  @body
+  content: bytes;
 }
 
 // ══════════════════════════════════════════════════════════
@@ -1063,4 +1100,147 @@ model SessionLogEvent {
   @doc("The event payload as plain text. Currently JSON-formatted but the schema is not contractual and may change.")
   @example("{\"timestamp\":\"2026-03-10T09:33:17.121467567+00:00\",\"stream\":\"stdout\",\"message\":\"Starting server on port 18080\"}")
   data: string;
+}
+// ── Telemetry Unions ────────────────────────────────────
+
+@doc("The kind of telemetry export endpoint.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
+)
+union TelemetryEndpointKind {
+  string,
+
+  @doc("OpenTelemetry Protocol (OTLP) endpoint.")
+  OTLP: "OTLP",
+}
+
+@doc("The type of telemetry data to export.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
+)
+union TelemetryDataKind {
+  string,
+
+  @doc("Container stdout and stderr logs.")
+  ContainerStdoutStderr: "ContainerStdoutStderr",
+
+  @doc("Container OpenTelemetry signals.")
+  ContainerOtel: "ContainerOtel",
+
+  @doc("Container metrics.")
+  Metrics: "Metrics",
+}
+
+@doc("The transport protocol for telemetry export.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
+)
+union TelemetryTransportProtocol {
+  string,
+
+  @doc("HTTP transport protocol.")
+  Http: "Http",
+
+  @doc("gRPC transport protocol.")
+  Grpc: "Grpc",
+}
+
+// ── Telemetry Auth (discriminated by "type") ────────────
+
+@doc("The type of authentication for a telemetry endpoint.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
+)
+union TelemetryEndpointAuthType {
+  string,
+
+  @doc("Header-based secret authentication.")
+  header: "header",
+}
+
+@doc("Authentication configuration for a telemetry endpoint.")
+@discriminator("type")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
+)
+model TelemetryEndpointAuth {
+  @doc("The authentication type.")
+  type: TelemetryEndpointAuthType;
+}
+
+@doc("Header-based secret authentication for a telemetry endpoint. The resolved secret value is injected as an HTTP header.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
+)
+model HeaderTelemetryEndpointAuth extends TelemetryEndpointAuth {
+  @doc("The authentication type, always 'header' for header-based secret authentication.")
+  type: TelemetryEndpointAuthType.header;
+
+  @doc("The name of the HTTP header to inject the secret value into.")
+  @example("X-Otlp-Api-Key")
+  header_name: string;
+
+  @doc("The identifier of the secret store or connection.")
+  @example("my-secret-store")
+  secret_id: string;
+
+  @doc("The key within the secret to retrieve the authentication value.")
+  @example("OTLP_KEY")
+  secret_key: string;
+}
+
+// ── Telemetry Config & Endpoint (discriminated by "kind") ─
+
+@doc("Customer-supplied telemetry configuration for exporting container logs, traces, and metrics.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
+)
+model TelemetryConfig {
+  @doc("Customer-supplied telemetry export endpoint configurations.")
+  @minItems(1)
+  @maxItems(3)
+  endpoints: TelemetryEndpoint[];
+}
+
+@doc("A telemetry export endpoint configuration.")
+@discriminator("kind")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
+)
+model TelemetryEndpoint {
+  @doc("The telemetry export endpoint kind.")
+  kind: TelemetryEndpointKind;
+
+  @doc("Data types to export to this endpoint. Use an empty array to export no data.")
+  @example(#["ContainerStdoutStderr", "ContainerOtel", "Metrics"])
+  data: TelemetryDataKind[];
+
+  @doc("Optional authentication configuration.")
+  auth?: TelemetryEndpointAuth;
+}
+
+@doc("An OTLP (OpenTelemetry Protocol) telemetry export endpoint.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
+)
+model OtlpTelemetryEndpoint extends TelemetryEndpoint {
+  @doc("The endpoint kind, always 'OTLP' for OpenTelemetry Protocol endpoints.")
+  kind: TelemetryEndpointKind.OTLP;
+
+  @doc("The OTLP collector endpoint URL.")
+  @example("https://my-collector.example.com/otlp")
+  endpoint: string;
+
+  @doc("The transport protocol for the OTLP endpoint.")
+  @example("Http")
+  protocol: TelemetryTransportProtocol;
 }

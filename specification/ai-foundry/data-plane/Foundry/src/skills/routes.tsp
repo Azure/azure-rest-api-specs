@@ -1,4 +1,5 @@
 import "../common/models.tsp";
+import "../servicepatterns.tsp";
 import "./models.tsp";
 
 using TypeSpec.Http;
@@ -37,7 +38,7 @@ interface Skills {
    * Retrieves a skill.
    */
   @get
-  @route("/skills/{skill_name}")
+  @route("/skills/{name}")
   @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   getSkill is FoundryDataPlaneOperation<
     GetSkillRequest & SkillsPreviewHeader,
@@ -48,7 +49,7 @@ interface Skills {
    * Downloads a skill package.
    */
   @get
-  @route("/skills/{skill_name}:download")
+  @route("/skills/{name}:download")
   @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   downloadSkill is FoundryDataPlaneOperation<
     DownloadSkillRequest & SkillsPreviewHeader,
@@ -70,7 +71,7 @@ interface Skills {
    * Updates an existing skill.
    */
   @post
-  @route("/skills/{skill_name}")
+  @route("/skills/{name}")
   @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   updateSkill is FoundryDataPlaneOperation<
     UpdateSkillRequest & SkillsPreviewHeader,
@@ -82,7 +83,7 @@ interface Skills {
    */
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @delete
-  @route("/skills/{skill_name}")
+  @route("/skills/{name}")
   @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   deleteSkill is FoundryDataPlaneOperation<
     DeleteSkillRequest & SkillsPreviewHeader,

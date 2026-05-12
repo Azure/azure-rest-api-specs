@@ -26,7 +26,7 @@ interface AgentSessionFiles {
    */
   #suppress "@azure-tools/typespec-azure-core/byos" "The file is targeting the per-session files mounted to a foundry agent"
   @put
-  @route("/agents/{agent_name}/endpoint/sessions/{session_id}/files/content")
+  @route("/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files/content")
   @extension(
     "x-ms-foundry-meta",
     #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
@@ -38,7 +38,7 @@ interface AgentSessionFiles {
       @path agent_name: string;
 
       /** The session ID. */
-      @path session_id: string;
+      @path agent_session_id: string;
 
       /** The destination file path within the sandbox, relative to the session home directory. */
       @query path: string;
@@ -55,7 +55,7 @@ interface AgentSessionFiles {
    * Download a file from the session sandbox as a binary stream.
    */
   @get
-  @route("/agents/{agent_name}/endpoint/sessions/{session_id}/files/content")
+  @route("/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files/content")
   @extension(
     "x-ms-foundry-meta",
     #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
@@ -67,7 +67,7 @@ interface AgentSessionFiles {
       @path agent_name: string;
 
       /** The session ID. */
-      @path session_id: string;
+      @path agent_session_id: string;
 
       /** The file path to download from the sandbox, relative to the session home directory. */
       @query path: string;
@@ -80,7 +80,7 @@ interface AgentSessionFiles {
    * Returns only the immediate children of the specified directory (non-recursive).
    */
   @get
-  @route("/agents/{agent_name}/endpoint/sessions/{session_id}/files")
+  @route("/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files")
   @extension(
     "x-ms-foundry-meta",
     #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
@@ -92,7 +92,7 @@ interface AgentSessionFiles {
       @path agent_name: string;
 
       /** The session ID. */
-      @path session_id: string;
+      @path agent_session_id: string;
 
       /** The directory path to list, relative to the session home directory. */
       @query path: string;
@@ -105,7 +105,7 @@ interface AgentSessionFiles {
    * If `recursive` is false (default) and the target is a non-empty directory, the API returns 409 Conflict.
    */
   @delete
-  @route("/agents/{agent_name}/endpoint/sessions/{session_id}/files")
+  @route("/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files")
   @extension(
     "x-ms-foundry-meta",
     #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
@@ -117,7 +117,7 @@ interface AgentSessionFiles {
       @path agent_name: string;
 
       /** The session ID. */
-      @path session_id: string;
+      @path agent_session_id: string;
 
       /** The file or directory path to delete, relative to the session home directory. */
       @query path: string;

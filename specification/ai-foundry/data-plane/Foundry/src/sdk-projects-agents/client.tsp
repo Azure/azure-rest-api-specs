@@ -36,6 +36,8 @@ namespace Azure.AI.Projects {
   @@clientName(AgentObject, "ProjectsAgentRecord");
   @@clientName(AgentKind, "ProjectsAgentKind");
   @@clientName(AgentProtocol, "ProjectsAgentProtocol");
+  @@clientName(AgentSessionResource, "ProjectAgentSession");
+  @@access(AgentSessionResource, Access.public);
 
   @@clientName(BingGroundingSearchToolParameters,
     "BingGroundingSearchToolOptions"
@@ -182,6 +184,14 @@ namespace Azure.AI.Projects {
     "ToolOptions",
     "csharp"
   );
+  @@clientName(AgentEndpointConfig, "AgentEndpointConfiguration");
+  @@clientName(TelemetryEndpointAuth, "TelemetryEndpointAuthentication");
+  @@clientName(TelemetryEndpoint.auth, "Authentication");
+  @@clientName(TelemetryEndpoint.data, "ExportedDataTypes");
+  @@clientName(TelemetryEndpointAuthType,
+    "TelemetryEndpointAuthenticationKind"
+  );
+  @@clientName(TelemetryDataKind, "ExportedDataTypes");
   // --------------------------------------------------------------------------------
   // Usage / Public accessibility overrides
   // --------------------------------------------------------------------------------
@@ -201,10 +211,48 @@ namespace Azure.AI.Projects {
   @@access(AgentVersionObject, Access.public);
   @@clientName(AgentVersionObject, "ProjectsAgentVersion");
 
+  @@usage(PatchAgentRequest, Usage.input | Usage.output);
+  @@access(PatchAgentRequest, Access.public);
+  @@clientName(PatchAgentRequest, "PatchAgentOptions");
+  @@access(Agents.patchAgentObject, Access.internal);
+  @@access(Agents.getSessionLogStream, Access.internal);
+
+  // --------------------------------------------------------------------------------
+  // Hide Agent administration opertaions, containing the foundry features
+  // --------------------------------------------------------------------------------
+  @@access(Agents.createAgentVersionFromCode, Access.internal);
+  @@access(Agents.downloadAgentVersionCode, Access.internal);
+  @@access(Agents.downloadAgentCode, Access.internal);
+
+  // --------------------------------------------------------------------------------
+  // Hide session opertaions, containing the foundry features
+  // --------------------------------------------------------------------------------
+
+  // Hide the protocol methods and methods using feature headers
+  @@access(Agents.createSession, Access.internal);
+  @@access(Agents.getSession, Access.internal);
+  @@access(Agents.getSession, Access.internal);
+  @@access(Agents.deleteSession, Access.internal);
+
   // --------------------------------------------------------------------------------
   // Toolboxes sub‐client
   // --------------------------------------------------------------------------------
 
   @@clientName(ToolboxObject, "ToolboxRecord");
   @@clientName(ToolboxVersionObject, "ToolboxVersion");
+
+  // --------------------------------------------------------------------------------
+  // AgentSessionFiles sub‐client
+  // --------------------------------------------------------------------------------
+
+  // Hide the protocol methods and methods using feature headers
+  @@access(AgentSessionFiles.uploadSessionFile, Access.internal);
+  @@access(AgentSessionFiles.downloadSessionFile, Access.internal);
+  @@access(AgentSessionFiles.listSessionFiles, Access.internal);
+  @@access(AgentSessionFiles.deleteSessionFile, Access.internal);
+
+  // --------------------------------------------------------------------------------
+  // Skills sub‐client
+  // --------------------------------------------------------------------------------
+  @@clientName(SkillObject, "AgentsSkill");
 }

@@ -41,7 +41,6 @@ union AgentDefinitionOptInKeys {
   container_agents_v1_preview: "ContainerAgents=V1Preview",
   agent_endpoint_v1_preview: "AgentEndpoints=V1Preview",
 
-  @removed(Versions.v1)
   code_agents_v1_preview: "CodeAgents=V1Preview",
 }
 
@@ -53,6 +52,7 @@ union FoundryFeaturesOptInKeys {
   memory_stores_v1_preview: "MemoryStores=V1Preview",
   toolboxes_v1_preview: "Toolboxes=V1Preview",
   skills_v1_preview: "Skills=V1Preview",
+  data_generation_jobs_v1_preview: "DataGenerationJobs=V1Preview",
 }
 
 alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys> = {
@@ -291,8 +291,8 @@ union JobStatus {
   /** Job failed. */
   failed: "failed",
 
-  /** Job was canceled by the caller. */
-  canceled: "canceled",
+  /** Job was cancelled by the caller. */
+  cancelled: "cancelled",
 }
 
 /**
@@ -346,13 +346,22 @@ alias JobStatusResponse<TJob extends TypeSpec.Reflection.Model> = TJob & {
   retryAfter?: int32;
 };
 
+/** Optional Operation-Id header for idempotent job creation retries. */
+alias WithOperationId = {
+  /** Client-generated unique ID for idempotent retries. When absent, the server creates the job unconditionally. */
+  @header("Operation-Id")
+  operationId?: string;
+};
+
 // ---- Operation templates ----
 
-/** Create a new job. Returns 201 + Operation-Location + Location headers. */
+/** Create a new job. Returns 201 Created. Accepts an optional Operation-Id header for idempotent retries. */
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client via Operation-Location"
 @post
 op postJob<TJob extends TypeSpec.Reflection.Model> is FoundryDataPlaneOperation<
   {
+    ...WithOperationId;
+
     /** The job to create. */
     @body body: TJob;
   },
@@ -404,7 +413,7 @@ op deleteJob<TJob extends TypeSpec.Reflection.Model> is FoundryDataPlaneOperatio
 
 // ---- Preview operation templates ----
 
-/** Create a new job (preview). Includes optional Foundry-Features header. */
+/** Create a new job (preview). Includes optional Foundry-Features header and Operation-Id for idempotent retries. */
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client via Operation-Location"
 @post op postJobPreview<
   AreaPreviewLabel extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys,
@@ -412,8 +421,10 @@ op deleteJob<TJob extends TypeSpec.Reflection.Model> is FoundryDataPlaneOperatio
 > is FoundryDataPlanePreviewOperation<
   AreaPreviewLabel,
   {
+    ...WithOperationId;
+
     /** The job to create. */
-    @body body: TJob;
+    @body job: TJob;
   },
   JobCreatedResponse<TJob>
 >;

@@ -2,6 +2,7 @@ import "./src/common/service.tsp";
 import "./src/connections/routes.tsp";
 import "./src/datasets/routes.tsp";
 import "./src/indexes/routes.tsp";
+import "./src/models/routes.tsp";
 import "./src/deployments/routes.tsp";
 import "./src/red-teams/routes.tsp";
 import "./src/evaluation-rules/routes.tsp";
@@ -10,6 +11,7 @@ import "./src/evaluators/routes.tsp";
 import "./src/insights/routes.tsp";
 import "./src/schedules/routes.tsp";
 import "./src/memory-stores/routes.tsp";
+import "./src/data_generation_jobs/routes.tsp";
 
 using Azure.ClientGenerator.Core;
 namespace Azure.AI.Projects;
@@ -37,6 +39,13 @@ namespace Azure.AI.Projects;
 @@clientName(Datasets.deleteVersion, "delete");
 @@clientName(Datasets.createOrUpdateVersion, "createOrUpdate");
 @@clientName(Datasets.startPendingUploadVersion, "pendingUpload");
+
+// Data generation jobs — renamed SDK discoverability
+@@clientName(DataGenerationJobs.get, "getGenerationJob", "csharp");
+@@clientName(DataGenerationJobs.list, "listGenerationJobs", "csharp");
+@@clientName(DataGenerationJobs.create, "createGenerationJob", "csharp");
+@@clientName(DataGenerationJobs.cancel, "cancelGenerationJob", "csharp");
+@@clientName(DataGenerationJobs.delete, "deleteGenerationJob", "csharp");
 
 // Shorter method names for SDK Index operations
 @@clientName(Indexes.listLatest, "list");
@@ -100,6 +109,16 @@ namespace Azure.AI.Projects;
 @@clientName(Indexes.listLatest, "listIndexes", "csharp");
 @@clientName(Indexes.listVersions, "listIndexVersions", "csharp");
 
+// Models
+@@clientName(Models.getVersion, "getModelVersion", "csharp");
+@@clientName(Models.listVersions, "listModelVersions", "csharp");
+@@clientName(Models.listLatest, "listModelVersions", "csharp");
+@@clientName(Models.deleteVersion, "deleteModelVersion", "csharp");
+@@clientName(Models.createOrUpdateVersion, "updateModelVersion", "csharp");
+@@clientName(Models.createAsync, "createModelVersionAsync", "csharp");
+@@clientName(Models.startPendingUpload, "startModelPendingUpload", "csharp");
+@@clientName(Models.getCredentials, "getModelCredentials", "csharp");
+
 // Make these two internal, since all SDKs hand-write a single public method with boolean "includeCredentials"
 // input parameter that calls either on these two.
 @@access(Connections.get, Access.internal);
@@ -133,7 +152,7 @@ namespace Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 @@access(EvaluatorDefinitionType, Access.public);
 
-// Hide classes not currently used
+// Rename Target from openai-evaluations to EvaluationTarget.
 @@clientName(Target, "EvaluationTarget", "csharp");
 
 @@clientName(EvalResult.passed, "IsPassed", "csharp");
@@ -173,3 +192,23 @@ namespace Azure.AI.Projects;
 @@alternateType(CronTrigger.startTime, utcDateTime, "csharp");
 @@alternateType(CronTrigger.endTime, utcDateTime, "csharp");
 @@alternateType(ScheduleRun.triggerTime, utcDateTime, "csharp");
+
+// --------------------------------------------------------------------------------
+// DataGenerationJobs sub‐client
+// --------------------------------------------------------------------------------
+// Hide the protocol methods and methods using feature headers
+@@access(DataGenerationJobs.get, Access.internal);
+@@access(DataGenerationJobs.create, Access.internal);
+@@access(DataGenerationJobs.cancel, Access.internal);
+@@access(DataGenerationJobs.delete, Access.internal);
+
+@@clientName(DataGenerationJobType, "DataGenerationJobKind");
+
+// --------------------------------------------------------------------------------
+// EvaluatorGenerationJobs sub‐client
+// --------------------------------------------------------------------------------
+// Hide the protocol methods and methods using feature headers
+@@access(EvaluatorGenerationJobs.get, Access.internal);
+@@access(EvaluatorGenerationJobs.create, Access.internal);
+@@access(EvaluatorGenerationJobs.cancel, Access.internal);
+@@access(EvaluatorGenerationJobs.delete, Access.internal);

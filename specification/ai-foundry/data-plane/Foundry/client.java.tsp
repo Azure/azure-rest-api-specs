@@ -3,6 +3,7 @@ import "./src/common/service.tsp";
 import "./src/connections/routes.tsp";
 import "./src/datasets/routes.tsp";
 import "./src/indexes/routes.tsp";
+import "./src/models/routes.tsp";
 import "./src/deployments/routes.tsp";
 import "./src/red-teams/routes.tsp";
 import "./src/evaluation-rules/routes.tsp";
@@ -13,6 +14,7 @@ import "./src/evaluators/routes.tsp";
 import "./src/insights/routes.tsp";
 import "./src/schedules/routes.tsp";
 import "./src/skills/routes.tsp";
+import "./src/data_generation_jobs/routes.tsp";
 
 using Azure.ClientGenerator.Core;
 namespace Azure.AI.Projects;
@@ -38,6 +40,13 @@ namespace Azure.AI.Projects;
 @@clientName(Datasets.deleteVersion, "deleteDatasetVersion");
 @@clientName(Datasets.listVersions, "listDatasetVersions");
 @@clientName(Datasets.createOrUpdateVersion, "createOrUpdateDatasetVersion");
+
+// Data generation jobs — renamed SDK discoverability
+@@clientName(DataGenerationJobs.get, "getGenerationJob", "java");
+@@clientName(DataGenerationJobs.list, "listGenerationJobs", "java");
+@@clientName(DataGenerationJobs.create, "createGenerationJob", "java");
+@@clientName(DataGenerationJobs.cancel, "cancelGenerationJob", "java");
+@@clientName(DataGenerationJobs.delete, "deleteGenerationJob", "java");
 
 // Deployments
 @@clientName(Deployments.list, "listDeployments");
@@ -88,6 +97,16 @@ namespace Azure.AI.Projects;
 @@clientName(Schedules.delete, "deleteSchedule");
 @@clientName(Schedules.getRun, "getScheduleRun");
 @@clientName(Schedules.listRuns, "listScheduleRuns");
+
+// Models
+@@clientName(Models.getVersion, "getModelVersion");
+@@clientName(Models.listVersions, "listModelVersions");
+@@clientName(Models.listLatest, "listLatestModelVersions");
+@@clientName(Models.deleteVersion, "deleteModelVersion");
+@@clientName(Models.createOrUpdateVersion, "updateModelVersion");
+@@clientName(Models.createAsync, "createModelVersionAsync");
+@@clientName(Models.startPendingUpload, "startModelPendingUpload");
+@@clientName(Models.getCredentials, "getModelCredentials");
 
 // --------------------------------------------------------------------------------
 // Renames - models
