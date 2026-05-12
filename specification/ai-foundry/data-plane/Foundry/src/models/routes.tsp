@@ -19,6 +19,10 @@ interface Models
       ListModelVersionsParameters,
       ListModelVersionsParameters
     > {
+  // The method name `createOrUpdateVersion` is required by the `VersionedOperations` interface
+  // template this interface extends. However, for Models the PATCH endpoint only performs updates —
+  // new model versions are created via the `createAsync` endpoint (which handles blob content
+  // validation). The `@operationId` override to "Models_updateVersion" reflects the true semantics.
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
   @doc("Update an existing ModelVersion with the given version id", ModelVersion)
   @operationId("Models_updateVersion")
