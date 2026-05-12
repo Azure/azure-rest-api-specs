@@ -25,7 +25,7 @@ model Rule is Azure.ResourceManager.ProxyResource<Ruleproperties> {
   /**
    * The geo-location where the resource lives
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
   @visibility(Lifecycle.Read)
   location?: string;
 }
@@ -40,7 +40,7 @@ interface Rules {
   /**
    * Creates a new rule and updates an existing rule
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     Rule,
     Response = ArmResourceUpdatedResponse<Rule>,
