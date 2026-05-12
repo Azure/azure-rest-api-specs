@@ -1212,6 +1212,256 @@
         }
       }
     },
+    "/scores/businessDomains/{domainId}/dataProducts/{dataProductId}": {
+      "get": {
+        "operationId": "Scores_ListDataProductHealthScores",
+        "description": "Get the health score for a specific data product within a business domain.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "The unique identifier of the business domain.",
+            "required": true,
+            "type": "string",
+            "maxLength": 256
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "The unique identifier of the data product.",
+            "required": true,
+            "type": "string",
+            "maxLength": 256
+          },
+          {
+            "name": "Kind",
+            "in": "query",
+            "description": "Kind of health score to retrieve.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "DataGovernance",
+              "DataQuality",
+              "DataCuration"
+            ],
+            "x-ms-enum": {
+              "name": "HealthScoreKind",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "DataGovernance",
+                  "value": "DataGovernance",
+                  "description": "Data governance health score."
+                },
+                {
+                  "name": "DataQuality",
+                  "value": "DataQuality",
+                  "description": "Data quality health score."
+                },
+                {
+                  "name": "DataCuration",
+                  "value": "DataCuration",
+                  "description": "Data curation health score."
+                }
+              ]
+            },
+            "x-ms-client-name": "kind"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ScoreRecord"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Scores_ListDataProductHealthScores": {
+            "$ref": "./examples/Scores_ListDataProductHealthScores_Gen.json"
+          }
+        }
+      }
+    },
+    "/scores/businessDomains/{domainId}/dataProducts/{dataProductId}/dataAssets/bulk": {
+      "get": {
+        "operationId": "Scores_ListAllDataAssetHealthScores",
+        "description": "List health scores for all data assets within a data product in a business domain.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "The unique identifier of the business domain.",
+            "required": true,
+            "type": "string",
+            "maxLength": 256
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "The unique identifier of the data product.",
+            "required": true,
+            "type": "string",
+            "maxLength": 256
+          },
+          {
+            "name": "Kind",
+            "in": "query",
+            "description": "Kind of health score to retrieve.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "DataGovernance",
+              "DataQuality",
+              "DataCuration"
+            ],
+            "x-ms-enum": {
+              "name": "HealthScoreKind",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "DataGovernance",
+                  "value": "DataGovernance",
+                  "description": "Data governance health score."
+                },
+                {
+                  "name": "DataQuality",
+                  "value": "DataQuality",
+                  "description": "Data quality health score."
+                },
+                {
+                  "name": "DataCuration",
+                  "value": "DataCuration",
+                  "description": "Data curation health score."
+                }
+              ]
+            },
+            "x-ms-client-name": "kind"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DataAssetHealthScoreListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Scores_ListAllDataAssetHealthScores": {
+            "$ref": "./examples/Scores_ListAllDataAssetHealthScores_Gen.json"
+          }
+        }
+      }
+    },
+    "/scores/businessDomains/{domainId}/dataProducts/bulk": {
+      "get": {
+        "operationId": "Scores_ListAllDataProductHealthScores",
+        "description": "List health scores for all data products in a business domain.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "The unique identifier of the business domain.",
+            "required": true,
+            "type": "string",
+            "maxLength": 256
+          },
+          {
+            "name": "Kind",
+            "in": "query",
+            "description": "Kind of health score to retrieve.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "DataGovernance",
+              "DataQuality",
+              "DataCuration"
+            ],
+            "x-ms-enum": {
+              "name": "HealthScoreKind",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "DataGovernance",
+                  "value": "DataGovernance",
+                  "description": "Data governance health score."
+                },
+                {
+                  "name": "DataQuality",
+                  "value": "DataQuality",
+                  "description": "Data quality health score."
+                },
+                {
+                  "name": "DataCuration",
+                  "value": "DataCuration",
+                  "description": "Data curation health score."
+                }
+              ]
+            },
+            "x-ms-client-name": "kind"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DataProductHealthScoreListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Scores_ListAllDataProductHealthScores": {
+            "$ref": "./examples/Scores_ListAllDataProductHealthScores_Gen.json"
+          }
+        }
+      }
+    },
     "/scores/query": {
       "post": {
         "operationId": "Scores_Query",
@@ -1957,6 +2207,58 @@
           }
         ]
       }
+    },
+    "DataAssetHealthScoreListResponse": {
+      "type": "object",
+      "description": "Paged collection of data asset health scores.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The collection of items.",
+          "items": {
+            "$ref": "#/definitions/ScoreRecord"
+          }
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total count of items."
+        },
+        "continuationToken": {
+          "type": "string",
+          "description": "Continuation token for the next page of results."
+        }
+      },
+      "required": [
+        "value",
+        "count"
+      ]
+    },
+    "DataProductHealthScoreListResponse": {
+      "type": "object",
+      "description": "Paged collection of data product health scores.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The collection of items.",
+          "items": {
+            "$ref": "#/definitions/ScoreRecord"
+          }
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total count of items."
+        },
+        "continuationToken": {
+          "type": "string",
+          "description": "Continuation token for the next page of results."
+        }
+      },
+      "required": [
+        "value",
+        "count"
+      ]
     },
     "DataSourceType": {
       "type": "string",
