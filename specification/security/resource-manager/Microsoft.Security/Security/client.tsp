@@ -359,8 +359,6 @@ op privateLinkResourcesGetCustomization(
 );
 @@usage(IoTSecurityAPI.CustomAlertRule, Usage.input | Usage.output, "go");
 
-@@clientName(SecuritySolutionsAPI.Status, "StatusEnum", "go");
-
 @@clientName(Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo,
   "ArmErrorAdditionalInfo",
   "java"
@@ -604,5 +602,5 @@ op alertsListResourceGroupLevelByRegionCustomized(
   "SecurityConnectorApplications",
   "java"
 );
-@@clientName(HealthReportsAPI.status, "HealthReportStatus", "java");
+@@clientName(HealthReportsAPI.status, "HealthReportStatus", "java,go");
 @@clientName(SecuritySolutionsAPI.Status, "Status", "java");

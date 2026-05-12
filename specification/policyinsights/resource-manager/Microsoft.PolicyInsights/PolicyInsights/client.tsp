@@ -1,8 +1,8 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
-import "./PolicyInsights/main.tsp";
-import "./PolicyTrackedResources/main.tsp";
+import "./PolicyInsightsApi/main.tsp";
+import "./PolicyTrackedResourcesApi/main.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
