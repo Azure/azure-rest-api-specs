@@ -12,14 +12,18 @@
 //
 // To regenerate schemas (run from this repo's root):
 //   npx tsp compile specification/deviceregistry/DeviceRegistry.DataPlane/schemas
-//   npx prettier --write "specification/deviceregistry/data-plane/schemas/*.json"
+//   npx prettier --write "specification/deviceregistry/schemas/*.json"
 //
 // The prettier pass is required because the json-schema emitter writes 4-space
 // indentation, but this repo's prettier config (and the CI prettier check) expects
 // 2-space indentation. Skipping prettier will fail the `Spec PR Tools - Prettier`
 // CI check.
 //
-// Output: ../../data-plane/schemas/*.json (one file per @@jsonSchema model).
+// Output: ../../../schemas/*.json (one file per @@jsonSchema model).
+//
+// Note: output lives at specification/deviceregistry/schemas/ — deliberately NOT
+// under data-plane/ so the OAV swagger validator does not try to interpret these
+// JSON Schema files as swagger documents.
 // ─────────────────────────────────────────────────────────────────────────────
 
 import "@typespec/json-schema";

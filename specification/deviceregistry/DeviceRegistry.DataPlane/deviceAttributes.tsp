@@ -101,7 +101,7 @@ model UpdateDeviceAttributeProperties {
    * URL of the JSON Schema document describing the concrete shape of this property bag. Optional
    * advertisement so clients can validate the bag without out-of-band documentation. The service
    * does not validate or dereference this field — any string is accepted. Suggested value:
-   * `https://raw.githubusercontent.com/Azure/azure-rest-api-specs/<commit-sha>/specification/deviceregistry/data-plane/schemas/UpdateDeviceAttributeProperties.json`
+   * `https://raw.githubusercontent.com/Azure/azure-rest-api-specs/<commit-sha>/specification/deviceregistry/schemas/UpdateDeviceAttributeProperties.json`
    */
   schema?: url;
 
