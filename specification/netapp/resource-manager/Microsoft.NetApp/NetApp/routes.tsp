@@ -13,6 +13,7 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.NetApp;
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Parameter model only wraps the documented location path parameter and should continue emitting the shared ARM LocationParameter."
 model NetAppLocationParameter {
   @path
   @minLength(1)
