@@ -42,7 +42,7 @@
   "paths": {
     "/{resourceId}/providers/microsoft.AlertsManagement/previewAlertRule": {
       "post": {
-        "operationId": "PreviewAlertRules_PreviewAlertRule",
+        "operationId": "PreviewAlertRule",
         "description": "Retrieves the results of a simulated historical execution of an alert rule",
         "parameters": [
           {
@@ -75,6 +75,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Run preview of a dynamic threshold log search alert rule": {
+            "$ref": "./examples/previewDynamicThresholdLogSearchAlertRule.json"
           }
         }
       }

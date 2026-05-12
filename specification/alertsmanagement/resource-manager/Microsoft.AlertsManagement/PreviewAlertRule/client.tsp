@@ -34,14 +34,19 @@ using Microsoft.AlertsManagement;
 // target so they do not affect Python/JavaScript/Go/Java/AutoRest output.
 // =============================================================================
 
-// `@@clientLocation` binds the wrapped op to its interface as its operation
-// group for the C# emitter. Without this, the generator cannot determine which
-// client class to emit the op on. The interface itself is declared in
-// routes.tsp (see the rationale comment there).
-@@clientLocation(PreviewAlertRules.previewAlertRule,
-  PreviewAlertRules,
-  "csharp"
-);
+// C# customizations: virtually group the free-standing `previewAlertRule` op
+// under an interface `PreviewAlertRules` for the C# MPG emitter only, so the
+// generator can emit a proper client / extension class for it. The interface
+// is declared here in client.tsp (not in routes.tsp) so the OpenAPI/Swagger
+// output is not affected — the swagger emitter does not load client.tsp, so
+// the operationId remains `PreviewAlertRule` (rather than becoming
+// `PreviewAlertRules_PreviewAlertRule`). `@@clientLocation` is scoped to
+// "csharp" so other TCGC-based emitters (Python/Java/JS/Go) also see no change.
+namespace Microsoft.AlertsManagement {
+  interface PreviewAlertRules {}
+}
+
+@@clientLocation(previewAlertRule, PreviewAlertRules, "csharp");
 
 // C# customizations: rename AlertSeverity enum members to use Word names since numeric
 // names produce illegal identifiers in C# field names.
