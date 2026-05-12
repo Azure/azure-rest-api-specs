@@ -2326,6 +2326,11 @@
         "reportedBy": {
           "$ref": "#/definitions/DeviceAttributeReportedBy",
           "description": "The cloud service that reports this device attribute."
+        },
+        "properties": {
+          "type": "object",
+          "description": "Opaque property bag for the reporter named by `reportedBy`. Subtypes (e.g. `UpdateDeviceAttribute`)\nnarrow this to a typed model. Optionality is kept consistent between the base and every subtype to\navoid emitter bugs around mismatched required/optional in covariant property overrides.",
+          "additionalProperties": {}
         }
       },
       "discriminator": "reportedBy",
@@ -2358,6 +2363,11 @@
         "reportedBy": {
           "$ref": "#/definitions/DeviceAttributeReportedBy",
           "description": "The cloud service that reports this device attribute."
+        },
+        "properties": {
+          "type": "object",
+          "description": "Opaque property bag for the reporter named by `reportedBy`. Subtypes (e.g. `UpdateDeviceAttribute`)\nnarrow this to a typed model. Optionality is kept consistent between the base and every subtype to\navoid emitter bugs around mismatched required/optional in covariant property overrides.",
+          "additionalProperties": {}
         }
       },
       "discriminator": "reportedBy",
@@ -4228,12 +4238,9 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/UpdateDeviceAttributeProperties",
-          "description": "Properties reported by Azure Device Update."
+          "description": "Properties reported by Azure Device Update. Narrows the opaque `properties` bag on the base\n`DeviceAttribute` to a typed model. Kept optional to match the base's optionality."
         }
       },
-      "required": [
-        "properties"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/DeviceAttribute"
@@ -4247,7 +4254,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/UpdateDeviceAttributePropertiesCreateOrUpdate",
-          "description": "Properties reported by Azure Device Update."
+          "description": "Properties reported by Azure Device Update. Narrows the opaque `properties` bag on the base\n`DeviceAttribute` to a typed model. Kept optional to match the base's optionality."
         }
       },
       "allOf": [
@@ -4261,6 +4268,11 @@
       "type": "object",
       "description": "Properties of the update device attribute, reported by the Azure Device Update agent.",
       "properties": {
+        "schema": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL of the JSON Schema document describing the concrete shape of this property bag. Optional\nadvertisement so clients can validate the bag without out-of-band documentation. The service\ndoes not validate or dereference this field — any string is accepted. Suggested value:\n`https://raw.githubusercontent.com/Azure/azure-rest-api-specs/<commit-sha>/specification/deviceregistry/data-plane/schemas/UpdateDeviceAttributeProperties.json`"
+        },
         "deviceClassId": {
           "type": "string",
           "description": "The device class identifier, calculated by ADU from `agentInfo.compatibilityProperties` and `agentInfo.agentProfile`."
@@ -4281,12 +4293,18 @@
           "$ref": "#/definitions/UpdateJobInfo",
           "description": "Information about the most recent update job targeting this device."
         }
-      }
+      },
+      "additionalProperties": {}
     },
     "UpdateDeviceAttributePropertiesCreateOrUpdate": {
       "type": "object",
       "description": "Properties of the update device attribute, reported by the Azure Device Update agent.",
       "properties": {
+        "schema": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL of the JSON Schema document describing the concrete shape of this property bag. Optional\nadvertisement so clients can validate the bag without out-of-band documentation. The service\ndoes not validate or dereference this field — any string is accepted. Suggested value:\n`https://raw.githubusercontent.com/Azure/azure-rest-api-specs/<commit-sha>/specification/deviceregistry/data-plane/schemas/UpdateDeviceAttributeProperties.json`"
+        },
         "deviceClassId": {
           "type": "string",
           "description": "The device class identifier, calculated by ADU from `agentInfo.compatibilityProperties` and `agentInfo.agentProfile`."
@@ -4307,7 +4325,8 @@
           "$ref": "#/definitions/UpdateJobInfoCreateOrUpdate",
           "description": "Information about the most recent update job targeting this device."
         }
-      }
+      },
+      "additionalProperties": {}
     },
     "UpdateId": {
       "type": "object",

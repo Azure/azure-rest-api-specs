@@ -1,0 +1,25 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "UpdateDeviceAttribute.json",
+    "type": "object",
+    "properties": {
+        "reportedBy": {
+            "type": "string",
+            "const": "Microsoft.DeviceUpdate",
+            "description": "Discriminator value for an Azure Device Update reported attribute."
+        },
+        "properties": {
+            "$ref": "UpdateDeviceAttributeProperties.json",
+            "description": "Properties reported by Azure Device Update. Narrows the opaque `properties` bag on the base\n`DeviceAttribute` to a typed model. Kept optional to match the base's optionality."
+        }
+    },
+    "required": [
+        "reportedBy"
+    ],
+    "allOf": [
+        {
+            "$ref": "DeviceAttribute.json"
+        }
+    ],
+    "description": "A device attribute reported by Azure Device Update."
+}

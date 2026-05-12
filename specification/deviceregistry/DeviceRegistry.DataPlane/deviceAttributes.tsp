@@ -1,12 +1,14 @@
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@typespec/openapi";
+import "@typespec/json-schema";
 import "@azure-tools/typespec-azure-core";
 import "./devices.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
+using TypeSpec.JsonSchema;
 using Azure.Core;
 
 namespace Microsoft.DeviceRegistry;
@@ -52,21 +54,52 @@ model DeviceAttribute {
 
   /** The cloud service that reports this device attribute. */
   reportedBy: DeviceAttributeReportedBy;
+
+  /**
+   * Opaque property bag for the reporter named by `reportedBy`. Subtypes (e.g. `UpdateDeviceAttribute`)
+   * narrow this to a typed model. Optionality is kept consistent between the base and every subtype to
+   * avoid emitter bugs around mismatched required/optional in covariant property overrides.
+   */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "`properties` is a polymorphic opaque bag containing nested objects, ints, and arrays — `Record<string>` would be semantically wrong."
+  properties?: Record<unknown>;
 }
 
 @@key(DeviceAttribute.name, "attributeName");
+
+// Emit JSON Schema documents for the DeviceAttribute discriminated hierarchy and its referenced types.
+// These schemas are published so clients can validate property bags without parsing the full Swagger.
+@@jsonSchema(DeviceAttribute);
+@@jsonSchema(UpdateDeviceAttribute);
+@@jsonSchema(UpdateDeviceAttributeProperties);
 
 /** A device attribute reported by Azure Device Update. */
 model UpdateDeviceAttribute extends DeviceAttribute {
   /** Discriminator value for an Azure Device Update reported attribute. */
   reportedBy: DeviceAttributeReportedBy.ADU;
 
-  /** Properties reported by Azure Device Update. */
-  properties: UpdateDeviceAttributeProperties;
+  /**
+   * Properties reported by Azure Device Update. Narrows the opaque `properties` bag on the base
+   * `DeviceAttribute` to a typed model. Kept optional to match the base's optionality.
+   */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Inherited from the base `DeviceAttribute.properties` which is intentionally `Record<unknown>` for polymorphic shape."
+  properties?: UpdateDeviceAttributeProperties;
 }
 
 /** Properties of the update device attribute, reported by the Azure Device Update agent. */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Open model: spreads `Record<unknown>` so it satisfies the base `DeviceAttribute.properties` type and tolerates future ADU-added fields without an SDK rebuild."
 model UpdateDeviceAttributeProperties {
+  // Spread Record<unknown> so this model is assignable to the base DeviceAttribute.properties
+  // (also Record<unknown>) and so future ADU-added fields are tolerated without an SDK rebuild.
+  ...Record<unknown>;
+
+  /**
+   * URL of the JSON Schema document describing the concrete shape of this property bag. Optional
+   * advertisement so clients can validate the bag without out-of-band documentation. The service
+   * does not validate or dereference this field — any string is accepted. Suggested value:
+   * `https://raw.githubusercontent.com/Azure/azure-rest-api-specs/<commit-sha>/specification/deviceregistry/data-plane/schemas/UpdateDeviceAttributeProperties.json`
+   */
+  schema?: url;
+
   /** The device class identifier, calculated by ADU from `agentInfo.compatibilityProperties` and `agentInfo.agentProfile`. */
   deviceClassId?: string;
 
