@@ -47,6 +47,58 @@
     }
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.KubernetesConfiguration/extensionTypes/{extensionTypeName}": {
+      "get": {
+        "operationId": "SubscriptionExtensionTypes_GetByName",
+        "tags": [
+          "ExtensionTypes",
+          "ClusterExtensionTypes"
+        ],
+        "description": "Get an extension type by name at the subscription level.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "extensionTypeName",
+            "in": "path",
+            "description": "Name of the Extension Type.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-_.]*$"
+          },
+          {
+            "name": "releaseTrain",
+            "in": "query",
+            "description": "Filter results by release train (default value is stable)",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionType"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Extension Type by Name": {
+            "$ref": "./examples/GetExtensionTypeByName.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.KubernetesConfiguration/locations/{location}/extensionTypes": {
       "get": {
         "operationId": "ExtensionTypes_LocationList",
@@ -724,6 +776,18 @@
         "supportedScopes": {
           "$ref": "#/definitions/ExtensionTypePropertiesSupportedScopes",
           "description": "Supported Kubernetes Scopes for this Extension Type."
+        },
+        "supportedRegions": {
+          "type": "array",
+          "description": "Supported regions for this Extension Type.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "additionalDetails": {
+          "type": "object",
+          "description": "Additional details for the extension type.",
+          "additionalProperties": {}
         }
       }
     },

@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -52,6 +54,18 @@ model ExtensionTypeProperties {
    * Supported Kubernetes Scopes for this Extension Type.
    */
   supportedScopes?: ExtensionTypePropertiesSupportedScopes;
+
+  /**
+   * Supported regions for this Extension Type.
+   */
+  @added(Versions.v2026_05_01)
+  supportedRegions?: string[];
+
+  /**
+   * Additional details for the extension type.
+   */
+  @added(Versions.v2026_05_01)
+  additionalDetails?: Record<unknown>;
 }
 
 /**

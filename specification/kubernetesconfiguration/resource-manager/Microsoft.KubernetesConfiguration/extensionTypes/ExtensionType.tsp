@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.KubernetesConfiguration;
 /**
@@ -185,3 +187,43 @@ interface ExtensionTypeOperationGroup {
 
 @@doc(ExtensionType.name, "Name of the Extension Type.");
 @@doc(ExtensionType.properties, "");
+
+/**
+ * Subscription-level extension type operations
+ */
+@added(Versions.v2026_05_01)
+interface SubscriptionExtensionTypes {
+  /**
+   * Get an extension type by name at the subscription level.
+   */
+  @tag("ExtensionTypes")
+  @tag("ClusterExtensionTypes")
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.KubernetesConfiguration/extensionTypes/{extensionTypeName}")
+  @get
+  getByName(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+
+    /**
+     * Name of the Extension Type.
+     */
+    @path
+    @pattern("^[a-zA-Z][a-zA-Z0-9-_.]*$")
+    extensionTypeName: string,
+
+    /**
+     * Filter results by release train (default value is stable)
+     */
+    @query("releaseTrain")
+    releaseTrain?: string,
+  ): ArmResponse<ExtensionType> | ErrorResponse;
+}
+
+@@extension(SubscriptionExtensionTypes.getByName,
+  "x-ms-examples",
+  #{
+    `Get Extension Type by Name`: #{
+      $ref: "./examples/GetExtensionTypeByName.json",
+    },
+  }
+);
