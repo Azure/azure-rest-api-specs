@@ -79,6 +79,7 @@ model SoftDeletedDatabaseAccountResource {
 /**
  * The properties of a soft-deleted database account.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Soft-deleted resources are read-only views of previously-deleted resources; they have no provisioning lifecycle and provisioningState is not applicable."
 @added(Versions.v2026_04_01_preview)
 model SoftDeletedDatabaseAccountProperties {
   /**
@@ -106,56 +107,22 @@ model SoftDeletedDatabaseAccountProperties {
  * A Azure Cosmos DB soft-deleted database account.
  */
 @added(Versions.v2026_04_01_preview)
-model SoftDeletedDatabaseAccountGetResult {
-  /**
-   * The properties of a soft-deleted database account.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-client-flatten is required for swagger compatibility"
-  @extension("x-ms-client-flatten", true)
-  properties?: SoftDeletedDatabaseAccountProperties;
-
-  /**
-   * The unique resource identifier of the ARM resource.
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * The name of the ARM resource.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * The type of Azure resource.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * The location of the resource group to which the resource belongs.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-mutability is required for ARM location property"
-  @extension("x-ms-mutability", #["read", "create"])
-  location?: string;
+model SoftDeletedDatabaseAccountGetResult
+  is Azure.ResourceManager.ProxyResource<SoftDeletedDatabaseAccountProperties> {
+  ...ResourceNameParameter<
+    Resource = SoftDeletedDatabaseAccountGetResult,
+    KeyName = "accountName",
+    SegmentName = "softDeletedDatabaseAccounts",
+    NamePattern = "^[a-z0-9]+(-[a-z0-9]+)*"
+  >;
 }
 
 /**
  * The List operation response, that contains the soft-deleted database accounts and their properties.
  */
 @added(Versions.v2026_04_01_preview)
-model SoftDeletedDatabaseAccountsListResult {
-  /**
-   * List of soft-deleted database accounts and their properties.
-   */
-  @visibility(Lifecycle.Read)
-  value?: SoftDeletedDatabaseAccountGetResult[];
-
-  /**
-   * The URL to get the next set of results.
-   */
-  nextLink?: string;
-}
+model SoftDeletedDatabaseAccountsListResult
+  is Azure.Core.Page<SoftDeletedDatabaseAccountGetResult>;
 
 /**
  * Cosmos DB SQL database resource object
@@ -178,6 +145,7 @@ model SoftDeletedSqlDatabaseResource {
 /**
  * The properties of a soft-deleted SQL database.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Soft-deleted resources are read-only views of previously-deleted resources; they have no provisioning lifecycle and provisioningState is not applicable."
 @added(Versions.v2026_04_01_preview)
 model SoftDeletedSqlDatabaseProperties {
   /**
@@ -195,56 +163,22 @@ model SoftDeletedSqlDatabaseProperties {
  * An Azure Cosmos DB soft-deleted SQL database.
  */
 @added(Versions.v2026_04_01_preview)
-model SoftDeletedSqlDatabaseGetResult {
-  /**
-   * The properties of a soft-deleted SQL database.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-client-flatten is required for swagger compatibility"
-  @extension("x-ms-client-flatten", true)
-  properties?: SoftDeletedSqlDatabaseProperties;
-
-  /**
-   * The unique resource identifier of the ARM resource.
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * The name of the ARM resource.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * The type of Azure resource.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * The location of the resource group to which the resource belongs.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-mutability is required for ARM location property"
-  @extension("x-ms-mutability", #["read", "create"])
-  location?: string;
+model SoftDeletedSqlDatabaseGetResult
+  is Azure.ResourceManager.ProxyResource<SoftDeletedSqlDatabaseProperties> {
+  ...ResourceNameParameter<
+    Resource = SoftDeletedSqlDatabaseGetResult,
+    KeyName = "databaseName",
+    SegmentName = "softDeletedSqlDatabases",
+    NamePattern = "^[^/\\\\#?]+$"
+  >;
 }
 
 /**
  * The List operation response, that contains the soft-deleted SQL databases and their properties.
  */
 @added(Versions.v2026_04_01_preview)
-model SoftDeletedSqlDatabasesListResult {
-  /**
-   * List of soft-deleted SQL databases and their properties.
-   */
-  @visibility(Lifecycle.Read)
-  value?: SoftDeletedSqlDatabaseGetResult[];
-
-  /**
-   * The URL to get the next set of results.
-   */
-  nextLink?: string;
-}
+model SoftDeletedSqlDatabasesListResult
+  is Azure.Core.Page<SoftDeletedSqlDatabaseGetResult>;
 
 /**
  * Cosmos DB SQL container resource object
@@ -277,6 +211,7 @@ model SoftDeletedSqlContainerResource {
 /**
  * The properties of a soft-deleted SQL container.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Soft-deleted resources are read-only views of previously-deleted resources; they have no provisioning lifecycle and provisioningState is not applicable."
 @added(Versions.v2026_04_01_preview)
 model SoftDeletedSqlContainerProperties {
   /**
@@ -294,56 +229,22 @@ model SoftDeletedSqlContainerProperties {
  * An Azure Cosmos DB soft-deleted SQL container.
  */
 @added(Versions.v2026_04_01_preview)
-model SoftDeletedSqlContainerGetResult {
-  /**
-   * The properties of a soft-deleted SQL container.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-client-flatten is required for swagger compatibility"
-  @extension("x-ms-client-flatten", true)
-  properties?: SoftDeletedSqlContainerProperties;
-
-  /**
-   * The unique resource identifier of the ARM resource.
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * The name of the ARM resource.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * The type of Azure resource.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * The location of the resource group to which the resource belongs.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-mutability is required for ARM location property"
-  @extension("x-ms-mutability", #["read", "create"])
-  location?: string;
+model SoftDeletedSqlContainerGetResult
+  is Azure.ResourceManager.ProxyResource<SoftDeletedSqlContainerProperties> {
+  ...ResourceNameParameter<
+    Resource = SoftDeletedSqlContainerGetResult,
+    KeyName = "containerName",
+    SegmentName = "softDeletedSqlContainers",
+    NamePattern = "^[^/\\\\#?]+$"
+  >;
 }
 
 /**
  * The List operation response, that contains the soft-deleted SQL containers and their properties.
  */
 @added(Versions.v2026_04_01_preview)
-model SoftDeletedSqlContainersListResult {
-  /**
-   * List of soft-deleted SQL containers and their properties.
-   */
-  @visibility(Lifecycle.Read)
-  value?: SoftDeletedSqlContainerGetResult[];
-
-  /**
-   * The URL to get the next set of results.
-   */
-  nextLink?: string;
-}
+model SoftDeletedSqlContainersListResult
+  is Azure.Core.Page<SoftDeletedSqlContainerGetResult>;
 
 // ──────────────────────────────────────────────
 //  Soft-Deleted Database Account Operations

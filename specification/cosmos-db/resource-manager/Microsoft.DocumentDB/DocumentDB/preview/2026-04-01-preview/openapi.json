@@ -31518,33 +31518,14 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SoftDeletedDatabaseAccountProperties",
-          "description": "The properties of a soft-deleted database account.",
-          "x-ms-client-flatten": true
-        },
-        "id": {
-          "type": "string",
-          "description": "The unique resource identifier of the ARM resource.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the ARM resource.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of Azure resource.",
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "description": "The location of the resource group to which the resource belongs.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "SoftDeletedDatabaseAccountProperties": {
       "type": "object",
@@ -31604,17 +31585,20 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "List of soft-deleted database accounts and their properties.",
+          "description": "The SoftDeletedDatabaseAccountGetResult items on this page",
           "items": {
             "$ref": "#/definitions/SoftDeletedDatabaseAccountGetResult"
-          },
-          "readOnly": true
+          }
         },
         "nextLink": {
           "type": "string",
-          "description": "The URL to get the next set of results."
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "SoftDeletedSqlContainerGetResult": {
       "type": "object",
@@ -31622,33 +31606,14 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SoftDeletedSqlContainerProperties",
-          "description": "The properties of a soft-deleted SQL container.",
-          "x-ms-client-flatten": true
-        },
-        "id": {
-          "type": "string",
-          "description": "The unique resource identifier of the ARM resource.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the ARM resource.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of Azure resource.",
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "description": "The location of the resource group to which the resource belongs.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "SoftDeletedSqlContainerProperties": {
       "type": "object",
@@ -31697,17 +31662,20 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "List of soft-deleted SQL containers and their properties.",
+          "description": "The SoftDeletedSqlContainerGetResult items on this page",
           "items": {
             "$ref": "#/definitions/SoftDeletedSqlContainerGetResult"
-          },
-          "readOnly": true
+          }
         },
         "nextLink": {
           "type": "string",
-          "description": "The URL to get the next set of results."
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "SoftDeletedSqlDatabaseGetResult": {
       "type": "object",
@@ -31715,33 +31683,14 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SoftDeletedSqlDatabaseProperties",
-          "description": "The properties of a soft-deleted SQL database.",
-          "x-ms-client-flatten": true
-        },
-        "id": {
-          "type": "string",
-          "description": "The unique resource identifier of the ARM resource.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the ARM resource.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of Azure resource.",
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "description": "The location of the resource group to which the resource belongs.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "SoftDeletedSqlDatabaseProperties": {
       "type": "object",
@@ -31781,17 +31730,20 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "List of soft-deleted SQL databases and their properties.",
+          "description": "The SoftDeletedSqlDatabaseGetResult items on this page",
           "items": {
             "$ref": "#/definitions/SoftDeletedSqlDatabaseGetResult"
-          },
-          "readOnly": true
+          }
         },
         "nextLink": {
           "type": "string",
-          "description": "The URL to get the next set of results."
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "SoftDeletionMetadata": {
       "type": "object",
