@@ -42,6 +42,7 @@ union AgentDefinitionOptInKeys {
   agent_endpoint_v1_preview: "AgentEndpoints=V1Preview",
 
   code_agents_v1_preview: "CodeAgents=V1Preview",
+  external_agents_v1_preview: "ExternalAgents=V1Preview",
 }
 
 union FoundryFeaturesOptInKeys {
