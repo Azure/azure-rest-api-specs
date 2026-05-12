@@ -11,7 +11,7 @@ namespace ClientCustomizations;
 @@clientLocation(checkNameAvailability, "API", "go");
 @@clientLocation(startTenantBackfill, "API", "go");
 @@clientLocation(tenantBackfillStatus, "API", "go");
-@@usage(CreateManagementGroupChildInfo, Usage.input, "javascript");
+@@usage(CreateManagementGroupChildInfo, Usage.input, "javascript,go");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for SDK compatibility"
 @@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(SubscriptionUnderManagementGroupsParameters.`Cache-Control`,

@@ -117,7 +117,6 @@ using Azure.Core;
   "CloudHsmClusterPrivateEndpointServiceConnectionStatus",
   "csharp"
 );
-@@clientName(CloudHsmClusterPatchParameters, "DedicatedHsmPatch", "csharp");
 @@alternateType(PrivateEndpointConnection.etag, eTag, "csharp");
 @@usage(Azure.ResourceManager.PrivateLinkResource, Usage.input, "csharp");
 @@clientName(Azure.ResourceManager.PrivateLinkResource,
