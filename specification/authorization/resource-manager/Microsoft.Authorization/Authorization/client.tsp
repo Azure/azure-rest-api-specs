@@ -1,14 +1,14 @@
 import "@azure-tools/typespec-client-generator-core";
 import "@typespec/versioning";
-import "./AccessReview/main.tsp";
-import "./AttributeNamespaces/main.tsp";
-import "./Authorization/main.tsp";
-import "./ClassicAdmin/main.tsp";
-import "./DenyAssignment/main.tsp";
-import "./ProviderOperations/main.tsp";
-import "./RoleAssignment/main.tsp";
-import "./RoleDefinitions/main.tsp";
-import "./RoleManagementAlerts/main.tsp";
+import "./Microsoft.AttributeNamespaces/main.tsp";
+import "./Microsoft.AccessReview/main.tsp";
+import "./Microsoft.Authorization/main.tsp";
+import "./Microsoft.ClassicAdmin/main.tsp";
+import "./Microsoft.DenyAssignment/main.tsp";
+import "./Microsoft.ProviderOperations/main.tsp";
+import "./Microsoft.RoleAssignment/main.tsp";
+import "./Microsoft.RoleDefinitions/main.tsp";
+import "./Microsoft.RoleManagementAlerts/main.tsp";
 
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
