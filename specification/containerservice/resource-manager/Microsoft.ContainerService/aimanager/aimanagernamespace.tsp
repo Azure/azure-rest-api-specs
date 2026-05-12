@@ -104,7 +104,7 @@ interface AIManagerNamespaces {
   rotateKeys is ArmResourceActionAsync<
     AIManagerNamespace,
     void,
-    ArmResponse<NamespaceAccessInfo>
+    NamespaceAccessInfo
   >;
 }
 
