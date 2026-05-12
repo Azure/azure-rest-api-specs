@@ -3473,6 +3473,9 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/EvaluationSuiteRunRequest'
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
   /evaluation_suites/{name}/versions:
     get:
       operationId: EvaluationSuites_listVersions
@@ -3542,6 +3545,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
   /evaluation_suites/{name}/versions/{version}:
     get:
       operationId: EvaluationSuites_getVersion
