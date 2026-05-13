@@ -64,30 +64,3 @@ interface SaasSubscriptionLevelGlobal {
     CheckNameAvailabilityResponse
   >;
 }
-
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Move operations are not resource-scoped"
-interface SaasSubscriptionLevelMove {
-  /** Validates a request to move SaaS resources between resource groups. */
-  @post
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/validateMoveResources")
-  validateMoveResources(
-    ...ApiVersionParameter,
-    ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-    ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-
-    /** The move resource parameters. */
-    @body moveResourceParameter: MoveResource,
-  ): ArmNoContentResponse<"Operation completed successfully."> | ErrorResponse;
-
-  /** Moves SaaS resources between resource groups. */
-  @post
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/moveResources")
-  moveResources(
-    ...ApiVersionParameter,
-    ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-    ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-
-    /** The move resource parameters. */
-    @body moveResourceParameter: MoveResource,
-  ): ArmNoContentResponse<"Operation completed successfully."> | ErrorResponse;
-}
