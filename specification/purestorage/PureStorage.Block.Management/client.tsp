@@ -16,47 +16,56 @@ using PureStorage.Block;
 @@clientName(AzureVmwareService.sddcResourceId, "clusterResourceId");
 @@clientName(ServiceInitializationHandle.sddcResourceId, "clusterResourceId");
 @@clientName(AvsStatus.sddcResourceId, "clusterResourceId");
-@@clientName(StoragePoolEnableAvsConnectionPost.sddcResourceId,
+@@clientName(
+  StoragePoolEnableAvsConnectionPost.sddcResourceId,
   "clusterResourceId"
 );
 
 // CSharp
-@@alternateType(ServiceInitializationHandle.sddcResourceId,
+@@alternateType(
+  ServiceInitializationHandle.sddcResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(StoragePoolEnableAvsConnectionPost.sddcResourceId,
+@@alternateType(
+  StoragePoolEnableAvsConnectionPost.sddcResourceId,
   armResourceIdentifier,
   "csharp"
 );
 @@clientName(StoragePool, "PureStoragePool", "csharp");
 @@clientName(StoragePoolProperties, "PureStoragePoolProperties", "csharp");
-@@alternateType(StoragePoolProperties.reservationResourceId,
+@@alternateType(
+  StoragePoolProperties.reservationResourceId,
   armResourceIdentifier,
   "csharp"
 );
 @@clientName(LiftrBase.Storage.Reservation, "PureStorageReservation", "csharp");
-@@clientName(LiftrBase.Storage.ReservationProperties,
+@@clientName(
+  LiftrBase.Storage.ReservationProperties,
   "PureStorageReservationProperties",
   "csharp"
 );
 @@clientName(AvsStorageContainer, "PureStorageAvsStorageContainer", "csharp");
-@@clientName(AvsStorageContainerProperties,
+@@clientName(
+  AvsStorageContainerProperties,
   "PureStorageAvsStorageContainerProperties",
   "csharp"
 );
-@@clientName(AvsStorageContainerVolume,
+@@clientName(
+  AvsStorageContainerVolume,
   "PureStorageAvsStorageContainerVolume",
   "csharp"
 );
 @@clientName(VolumeProperties, "PureStorageVolumeProperties", "csharp");
-@@alternateType(VolumeProperties.storagePoolResourceId,
+@@alternateType(
+  VolumeProperties.storagePoolResourceId,
   armResourceIdentifier,
   "csharp"
 );
 @@clientName(AvsVm, "PureStorageAvsVm", "csharp");
 @@clientName(AvsVmProperties, "PureStorageAvsVmProperties", "csharp");
-@@alternateType(AvsVmProperties.storagePoolResourceId,
+@@alternateType(
+  AvsVmProperties.storagePoolResourceId,
   armResourceIdentifier,
   "csharp"
 );
@@ -67,16 +76,19 @@ using PureStorage.Block;
 @@clientName(Alert, "PureStorageHealthAlert", "csharp");
 @@clientName(AlertLevel, "PureStorageHealthAlertLevel", "csharp");
 @@clientName(AvsConnection, "PureStorageAvsConnection", "csharp");
-@@clientName(AvsConnection.serviceInitializationCompleted,
+@@clientName(
+  AvsConnection.serviceInitializationCompleted,
   "IsServiceInitializationCompleted",
   "csharp"
 );
 @@clientName(AvsDiskDetails, "PureStorageAvsDiskDetails", "csharp");
-@@alternateType(AvsDiskDetails.avsVmResourceId,
+@@alternateType(
+  AvsDiskDetails.avsVmResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(AvsDiskDetails.avsStorageContainerResourceId,
+@@alternateType(
+  AvsDiskDetails.avsStorageContainerResourceId,
   armResourceIdentifier,
   "csharp"
 );
@@ -86,7 +98,8 @@ using PureStorage.Block;
 @@clientName(AvsVmDetails, "PureStorageAvsVmDetails", "csharp");
 @@clientName(AzureVmwareService, "PureStorageAvs", "csharp");
 @@clientName(AzureVmwareService.avsEnabled, "IsAvsEnabled", "csharp");
-@@alternateType(AzureVmwareService.sddcResourceId,
+@@alternateType(
+  AzureVmwareService.sddcResourceId,
   armResourceIdentifier,
   "csharp"
 );
@@ -97,20 +110,24 @@ using PureStorage.Block;
 @@clientName(LiftrBase.CompanyDetails, "PureStorageCompanyDetails", "csharp");
 @@clientName(IopsUsage, "PureStorageIopsUsage", "csharp");
 @@clientName(LimitDetails, "PureStorageResourceLimitDetails", "csharp");
-@@clientName(LiftrBase.MarketplaceDetails,
+@@clientName(
+  LiftrBase.MarketplaceDetails,
   "PureStorageMarketplaceDetails",
   "csharp"
 );
-@@clientName(LiftrBase.MarketplaceSubscriptionStatus,
+@@clientName(
+  LiftrBase.MarketplaceSubscriptionStatus,
   "PureStorageMarketplaceSubscriptionStatus",
   "csharp"
 );
 @@clientName(LiftrBase.OfferDetails, "PureStorageOfferDetails", "csharp");
-@@clientName(LiftrBase.ProvisioningState,
+@@clientName(
+  LiftrBase.ProvisioningState,
   "PureStorageProvisioningState",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.ResourceProvisioningState,
+@@clientName(
+  Azure.ResourceManager.ResourceProvisioningState,
   "PureStorageResourceProvisioningState",
   "csharp"
 ); // TODO: this will be removed after the tsp get fixed
@@ -120,11 +137,13 @@ using PureStorage.Block;
 @@clientName(SoftDeletion.eradicationTimestamp, "EradicatedOn", "csharp");
 @@alternateType(SoftDeletion.eradicationTimestamp, utcDateTime, "csharp");
 @@clientName(Space, "PureStorageSpaceUsage", "csharp");
-@@clientName(StoragePoolEnableAvsConnectionPost,
+@@clientName(
+  StoragePoolEnableAvsConnectionPost,
   "StoragePoolEnableAvsConnectionContent",
   "csharp"
 );
-@@clientName(StoragePoolFinalizeAvsConnectionPost,
+@@clientName(
+  StoragePoolFinalizeAvsConnectionPost,
   "StoragePoolFinalizeAvsConnectionContent",
   "csharp"
 );
@@ -133,7 +152,8 @@ using PureStorage.Block;
 @@clientName(VnetInjection, "PureStoragePoolVnetInjection", "csharp");
 @@alternateType(VnetInjection.subnetId, armResourceIdentifier, "csharp");
 @@alternateType(VnetInjection.vnetId, armResourceIdentifier, "csharp");
-@@clientName(VolumeContainerType,
+@@clientName(
+  VolumeContainerType,
   "PureStorageAvsVmVolumeContainerType",
   "csharp"
 );

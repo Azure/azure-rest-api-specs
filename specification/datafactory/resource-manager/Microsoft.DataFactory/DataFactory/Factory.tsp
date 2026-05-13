@@ -357,43 +357,56 @@ interface Factories {
 @@minLength(Factory.name, 3);
 @@doc(Factory.name, "The factory name.");
 @@doc(Factory.properties, "Properties of the factory.");
-@@doc(Factories.createOrUpdate::parameters.resource,
+@@doc(
+  Factories.createOrUpdate::parameters.resource,
   "Factory resource definition."
 );
-@@doc(Factories.update::parameters.properties,
+@@doc(
+  Factories.update::parameters.properties,
   "The parameters for updating a factory."
 );
-@@doc(Factories.getGitHubAccessToken::parameters.body,
+@@doc(
+  Factories.getGitHubAccessToken::parameters.body,
   "Get GitHub access token request definition."
 );
-@@doc(Factories.getDataPlaneAccess::parameters.body,
+@@doc(
+  Factories.getDataPlaneAccess::parameters.body,
   "Data Plane user access policy definition."
 );
-@@doc(Factories.getFeatureValueByFactory::parameters.body,
+@@doc(
+  Factories.getFeatureValueByFactory::parameters.body,
   "The exposure control request."
 );
-@@doc(Factories.queryFeatureValuesByFactory::parameters.body,
+@@doc(
+  Factories.queryFeatureValuesByFactory::parameters.body,
   "The exposure control request for list of features."
 );
-@@doc(Factories.queryByFactory::parameters.body,
+@@doc(
+  Factories.queryByFactory::parameters.body,
   "Parameters to filter the pipeline run."
 );
-@@doc(Factories.queryByPipelineRun::parameters.body,
+@@doc(
+  Factories.queryByPipelineRun::parameters.body,
   "Parameters to filter the activity runs."
 );
-@@doc(Factories.triggersQueryByFactory::parameters.body,
+@@doc(
+  Factories.triggersQueryByFactory::parameters.body,
   "Parameters to filter the triggers."
 );
-@@doc(Factories.triggerRunsQueryByFactory::parameters.body,
+@@doc(
+  Factories.triggerRunsQueryByFactory::parameters.body,
   "Parameters to filter the pipeline run."
 );
 @@doc(Factories.create::parameters.body, "Data flow debug session definition");
-@@doc(Factories.addDataFlow::parameters.body,
+@@doc(
+  Factories.addDataFlow::parameters.body,
   "Data flow debug session definition with debug content."
 );
-@@doc(Factories.dataFlowDebugSessionDelete::parameters.body,
+@@doc(
+  Factories.dataFlowDebugSessionDelete::parameters.body,
   "Data flow debug session definition for deletion"
 );
-@@doc(Factories.executeCommand::parameters.body,
+@@doc(
+  Factories.executeCommand::parameters.body,
   "Data flow debug command definition."
 );

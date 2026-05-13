@@ -5,12 +5,14 @@ using Microsoft.DevTestLab;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(LabVirtualMachineCreationParameter.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  LabVirtualMachineCreationParameter.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScheduleCreationParameter.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ScheduleCreationParameter.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
@@ -19,24 +21,30 @@ using Microsoft.DevTestLab;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApplicableSchedule.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ApplicableSchedule.properties
 );
 
 @@clientName(Labs.createOrUpdate::parameters.resource, "lab");
 @@clientName(Labs.update::parameters.properties, "lab");
-@@clientName(Labs.createEnvironment::parameters.body,
+@@clientName(
+  Labs.createEnvironment::parameters.body,
   "labVirtualMachineCreationParameter"
 );
-@@clientName(Labs.exportResourceUsage::parameters.body,
+@@clientName(
+  Labs.exportResourceUsage::parameters.body,
   "exportResourceUsageParameters"
 );
-@@clientName(Labs.generateUploadUri::parameters.body,
+@@clientName(
+  Labs.generateUploadUri::parameters.body,
   "generateUploadUriParameter"
 );
-@@clientName(Labs.importVirtualMachine::parameters.body,
+@@clientName(
+  Labs.importVirtualMachine::parameters.body,
   "importLabVirtualMachineRequest"
 );
-@@clientName(PolicySets.evaluatePolicies::parameters.body,
+@@clientName(
+  PolicySets.evaluatePolicies::parameters.body,
   "evaluatePoliciesRequest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
@@ -45,16 +53,19 @@ using Microsoft.DevTestLab;
 
 @@clientName(GlobalSchedules.createOrUpdate::parameters.resource, "schedule");
 @@clientName(GlobalSchedules.update::parameters.properties, "schedule");
-@@clientName(GlobalSchedules.retarget::parameters.body,
+@@clientName(
+  GlobalSchedules.retarget::parameters.body,
   "retargetScheduleProperties"
 );
 @@clientName(Schedules.createOrUpdate::parameters.resource, "schedule");
 @@clientName(Schedules.update::parameters.properties, "schedule");
-@@clientName(ServiceFabricSchedules.createOrUpdate::parameters.resource,
+@@clientName(
+  ServiceFabricSchedules.createOrUpdate::parameters.resource,
   "schedule"
 );
 @@clientName(ServiceFabricSchedules.update::parameters.properties, "schedule");
-@@clientName(VirtualMachineSchedules.createOrUpdate::parameters.resource,
+@@clientName(
+  VirtualMachineSchedules.createOrUpdate::parameters.resource,
   "schedule"
 );
 @@clientName(VirtualMachineSchedules.update::parameters.properties, "schedule");
@@ -62,7 +73,8 @@ using Microsoft.DevTestLab;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Schedule.properties);
 
-@@clientName(ArtifactSources.createOrUpdate::parameters.resource,
+@@clientName(
+  ArtifactSources.createOrUpdate::parameters.resource,
   "artifactSource"
 );
 @@clientName(ArtifactSources.update::parameters.properties, "artifactSource");
@@ -74,7 +86,8 @@ using Microsoft.DevTestLab;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ArmTemplate.properties);
 
-@@clientName(Artifacts.generateArmTemplate::parameters.body,
+@@clientName(
+  Artifacts.generateArmTemplate::parameters.body,
   "generateArmTemplateRequest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
@@ -98,16 +111,19 @@ using Microsoft.DevTestLab;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Formula.properties);
 
-@@clientName(NotificationChannels.createOrUpdate::parameters.resource,
+@@clientName(
+  NotificationChannels.createOrUpdate::parameters.resource,
   "notificationChannel"
 );
-@@clientName(NotificationChannels.update::parameters.properties,
+@@clientName(
+  NotificationChannels.update::parameters.properties,
   "notificationChannel"
 );
 @@clientName(NotificationChannels.notify::parameters.body, "notifyParameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(NotificationChannel.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  NotificationChannel.properties
 );
 
 @@clientName(Policies.createOrUpdate::parameters.resource, "policy");
@@ -116,7 +132,8 @@ using Microsoft.DevTestLab;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Policy.properties);
 
-@@clientName(ServiceRunners.createOrUpdate::parameters.resource,
+@@clientName(
+  ServiceRunners.createOrUpdate::parameters.resource,
   "serviceRunner"
 );
 
@@ -134,7 +151,8 @@ using Microsoft.DevTestLab;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Disk.properties);
 
-@@clientName(Environments.createOrUpdate::parameters.resource,
+@@clientName(
+  Environments.createOrUpdate::parameters.resource,
   "dtlEnvironment"
 );
 @@clientName(Environments.update::parameters.properties, "dtlEnvironment");
@@ -148,7 +166,8 @@ using Microsoft.DevTestLab;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Secret.properties);
 
-@@clientName(ServiceFabrics.createOrUpdate::parameters.resource,
+@@clientName(
+  ServiceFabrics.createOrUpdate::parameters.resource,
   "serviceFabric"
 );
 @@clientName(ServiceFabrics.update::parameters.properties, "serviceFabric");
@@ -156,30 +175,38 @@ using Microsoft.DevTestLab;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ServiceFabric.properties);
 
-@@clientName(VirtualMachines.createOrUpdate::parameters.resource,
+@@clientName(
+  VirtualMachines.createOrUpdate::parameters.resource,
   "labVirtualMachine"
 );
-@@clientName(VirtualMachines.update::parameters.properties,
+@@clientName(
+  VirtualMachines.update::parameters.properties,
   "labVirtualMachine"
 );
-@@clientName(VirtualMachines.addDataDisk::parameters.body,
+@@clientName(
+  VirtualMachines.addDataDisk::parameters.body,
   "dataDiskProperties"
 );
-@@clientName(VirtualMachines.applyArtifacts::parameters.body,
+@@clientName(
+  VirtualMachines.applyArtifacts::parameters.body,
   "applyArtifactsRequest"
 );
-@@clientName(VirtualMachines.detachDataDisk::parameters.body,
+@@clientName(
+  VirtualMachines.detachDataDisk::parameters.body,
   "detachDataDiskProperties"
 );
-@@clientName(VirtualMachines.resize::parameters.body,
+@@clientName(
+  VirtualMachines.resize::parameters.body,
   "resizeLabVirtualMachineProperties"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(LabVirtualMachine.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  LabVirtualMachine.properties
 );
 
-@@clientName(VirtualNetworks.createOrUpdate::parameters.resource,
+@@clientName(
+  VirtualNetworks.createOrUpdate::parameters.resource,
   "virtualNetwork"
 );
 @@clientName(VirtualNetworks.update::parameters.properties, "virtualNetwork");
@@ -188,384 +215,460 @@ using Microsoft.DevTestLab;
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualNetwork.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(VirtualNetworks.get,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  VirtualNetworks.get,
   "virtualnetworkName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(VirtualNetworks.createOrUpdate,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  VirtualNetworks.createOrUpdate,
   "virtualnetworkName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(VirtualNetworks.update,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  VirtualNetworks.update,
   "virtualnetworkName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(VirtualNetworks.delete,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  VirtualNetworks.delete,
   "virtualnetworkName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(Users.get,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  Users.get,
   "userName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(Users.createOrUpdate,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  Users.createOrUpdate,
   "userName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(Users.update,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  Users.update,
   "userName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(Users.delete,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  Users.delete,
   "userName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(ServiceRunners.get,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  ServiceRunners.get,
   "serviceRunnerName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(ServiceRunners.createOrUpdate,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  ServiceRunners.createOrUpdate,
   "serviceRunnerName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(ServiceRunners.delete,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  ServiceRunners.delete,
   "serviceRunnerName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(ServiceFabrics.get,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  ServiceFabrics.get,
   "serviceFabricName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(ServiceFabrics.createOrUpdate,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  ServiceFabrics.createOrUpdate,
   "serviceFabricName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(ServiceFabrics.update,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  ServiceFabrics.update,
   "serviceFabricName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(ServiceFabrics.delete,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  ServiceFabrics.delete,
   "serviceFabricName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(ServiceFabrics.listApplicableSchedules,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  ServiceFabrics.listApplicableSchedules,
   "serviceFabricName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(ServiceFabrics.start,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  ServiceFabrics.start,
   "serviceFabricName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(ServiceFabrics.stop,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  ServiceFabrics.stop,
   "serviceFabricName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(Secrets.get,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  Secrets.get,
   "secretName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(Secrets.createOrUpdate,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  Secrets.createOrUpdate,
   "secretName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(Secrets.update,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  Secrets.update,
   "secretName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(Secrets.delete,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  Secrets.delete,
   "secretName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(NotificationChannels.get,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  NotificationChannels.get,
   "notificationChannelName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(NotificationChannels.createOrUpdate,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  NotificationChannels.createOrUpdate,
   "notificationChannelName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(NotificationChannels.update,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  NotificationChannels.update,
   "notificationChannelName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(NotificationChannels.delete,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  NotificationChannels.delete,
   "notificationChannelName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(NotificationChannels.notify,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  NotificationChannels.notify,
   "notificationChannelName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(VirtualMachines.get,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  VirtualMachines.get,
   "virtualMachineName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(VirtualMachines.createOrUpdate,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  VirtualMachines.createOrUpdate,
   "virtualMachineName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(VirtualMachines.update,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  VirtualMachines.update,
   "virtualMachineName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(VirtualMachines.delete,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  VirtualMachines.delete,
   "virtualMachineName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(VirtualMachines.addDataDisk,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  VirtualMachines.addDataDisk,
   "virtualMachineName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(VirtualMachines.applyArtifacts,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  VirtualMachines.applyArtifacts,
   "virtualMachineName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(VirtualMachines.claim,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  VirtualMachines.claim,
   "virtualMachineName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(VirtualMachines.detachDataDisk,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  VirtualMachines.detachDataDisk,
   "virtualMachineName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(VirtualMachines.getRdpFileContents,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  VirtualMachines.getRdpFileContents,
   "virtualMachineName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(VirtualMachines.listApplicableSchedules,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  VirtualMachines.listApplicableSchedules,
   "virtualMachineName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(VirtualMachines.redeploy,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  VirtualMachines.redeploy,
   "virtualMachineName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(VirtualMachines.resize,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  VirtualMachines.resize,
   "virtualMachineName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(VirtualMachines.restart,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  VirtualMachines.restart,
   "virtualMachineName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(VirtualMachines.start,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  VirtualMachines.start,
   "virtualMachineName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(VirtualMachines.stop,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  VirtualMachines.stop,
   "virtualMachineName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(VirtualMachines.transferDisks,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  VirtualMachines.transferDisks,
   "virtualMachineName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(VirtualMachines.unClaim,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  VirtualMachines.unClaim,
   "virtualMachineName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(Costs.get,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  Costs.get,
   "costName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(Costs.createOrUpdate,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  Costs.createOrUpdate,
   "costName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(Formulas.get,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  Formulas.get,
   "formulaName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(Formulas.createOrUpdate,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  Formulas.createOrUpdate,
   "formulaName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(Formulas.update,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  Formulas.update,
   "formulaName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(Formulas.delete,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  Formulas.delete,
   "formulaName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(Environments.get,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  Environments.get,
   "environmentName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(Environments.createOrUpdate,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  Environments.createOrUpdate,
   "environmentName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(Environments.update,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  Environments.update,
   "environmentName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(Environments.delete,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  Environments.delete,
   "environmentName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(Disks.get,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  Disks.get,
   "diskName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(Disks.createOrUpdate,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  Disks.createOrUpdate,
   "diskName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(Disks.update,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  Disks.update,
   "diskName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(Disks.delete,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  Disks.delete,
   "diskName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(Disks.attach,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  Disks.attach,
   "diskName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(Disks.detach,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  Disks.detach,
   "diskName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(ArtifactSources.get,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  ArtifactSources.get,
   "artifactSourceName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(ArtifactSources.createOrUpdate,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  ArtifactSources.createOrUpdate,
   "artifactSourceName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(ArtifactSources.update,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  ArtifactSources.update,
   "artifactSourceName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(ArtifactSources.delete,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  ArtifactSources.delete,
   "artifactSourceName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(Artifacts.get,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  Artifacts.get,
   "artifactName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(Artifacts.generateArmTemplate,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  Artifacts.generateArmTemplate,
   "artifactName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(ArmTemplates.get,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  ArmTemplates.get,
   "armTemplateName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ResourceManager.Legacy.renamePathParameter(Labs.get, "labName", "name");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(Labs.createOrUpdate,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  Labs.createOrUpdate,
   "labName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(Labs.update,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  Labs.update,
   "labName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(Labs.delete,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  Labs.delete,
   "labName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(Labs.claimAnyVm,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  Labs.claimAnyVm,
   "labName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(Labs.createEnvironment,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  Labs.createEnvironment,
   "labName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(Labs.exportResourceUsage,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  Labs.exportResourceUsage,
   "labName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(Labs.generateUploadUri,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  Labs.generateUploadUri,
   "labName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(Labs.importVirtualMachine,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  Labs.importVirtualMachine,
   "labName",
   "name"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ResourceManager.Legacy.renamePathParameter(Labs.listVhds,
+@@Azure.ResourceManager.Legacy.renamePathParameter(
+  Labs.listVhds,
   "labName",
   "name"
 );

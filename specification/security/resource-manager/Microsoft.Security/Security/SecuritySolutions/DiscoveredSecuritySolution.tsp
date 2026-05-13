@@ -55,7 +55,8 @@ interface DiscoveredSecuritySolutions {
   >;
 }
 
-@@doc(DiscoveredSecuritySolution.name,
+@@doc(
+  DiscoveredSecuritySolution.name,
   "Name of a discovered security solution."
 );
 @@doc(DiscoveredSecuritySolution.properties, "");

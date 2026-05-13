@@ -40,11 +40,14 @@ interface ManagedDatabases {
   @tag("ManagedDatabases")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ManagedDatabase,
-    Response = ArmResourceUpdatedResponse<ManagedDatabase> | ArmResourceCreatedResponse<
-      ManagedDatabase,
-      ArmLroLocationHeader<FinalResult = ManagedDatabase> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<ManagedDatabase>
+      | ArmResourceCreatedResponse<
+          ManagedDatabase,
+          ArmLroLocationHeader<FinalResult = ManagedDatabase> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -64,7 +67,10 @@ interface ManagedDatabases {
   @tag("ManagedDatabases")
   delete is ArmResourceDeleteWithoutOkAsync<
     ManagedDatabase,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -314,27 +320,35 @@ interface ManagedDatabases {
 
 @@doc(ManagedDatabase.name, "The name of the database.");
 @@doc(ManagedDatabase.properties, "Resource properties.");
-@@doc(ManagedDatabases.createOrUpdate::parameters.resource,
+@@doc(
+  ManagedDatabases.createOrUpdate::parameters.resource,
   "The requested database resource state."
 );
-@@doc(ManagedDatabases.update::parameters.properties,
+@@doc(
+  ManagedDatabases.update::parameters.properties,
   "The requested database resource state."
 );
-@@doc(ManagedDatabases.cancelMove::parameters.body,
+@@doc(
+  ManagedDatabases.cancelMove::parameters.body,
   "Parameters of the cancel managed database move operation."
 );
-@@doc(ManagedDatabases.completeMove::parameters.body,
+@@doc(
+  ManagedDatabases.completeMove::parameters.body,
   "Parameters of the complete managed database move operation."
 );
-@@doc(ManagedDatabases.completeRestore::parameters.body,
+@@doc(
+  ManagedDatabases.completeRestore::parameters.body,
   "The definition for completing the restore of this managed database."
 );
-@@doc(ManagedDatabases.startMove::parameters.body,
+@@doc(
+  ManagedDatabases.startMove::parameters.body,
   "Parameters of the start managed database move operation."
 );
-@@doc(ManagedDatabases.managedDatabaseSensitivityLabelsUpdate::parameters.body,
+@@doc(
+  ManagedDatabases.managedDatabaseSensitivityLabelsUpdate::parameters.body,
   ""
 );
-@@doc(ManagedDatabases.managedDatabaseRecommendedSensitivityLabelsUpdate::parameters.body,
+@@doc(
+  ManagedDatabases.managedDatabaseRecommendedSensitivityLabelsUpdate::parameters.body,
   ""
 );

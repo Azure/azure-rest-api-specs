@@ -466,18 +466,23 @@ interface AutomationAccounts {
 }
 
 @@doc(AutomationAccount.name, "The name of the automation account.");
-@@doc(AutomationAccount.properties,
+@@doc(
+  AutomationAccount.properties,
   "Gets or sets the automation account properties."
 );
-@@doc(AutomationAccounts.createOrUpdate::parameters.resource,
+@@doc(
+  AutomationAccounts.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update automation account."
 );
-@@doc(AutomationAccounts.update::parameters.properties,
+@@doc(
+  AutomationAccounts.update::parameters.properties,
   "Parameters supplied to the update automation account."
 );
-@@doc(AutomationAccounts.regenerateKey::parameters.body,
+@@doc(
+  AutomationAccounts.regenerateKey::parameters.body,
   "The name of the agent registration key to be regenerated"
 );
-@@doc(AutomationAccounts.convertGraphRunbookContent::parameters.body,
+@@doc(
+  AutomationAccounts.convertGraphRunbookContent::parameters.body,
   "Input data describing the graphical runbook."
 );

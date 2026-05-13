@@ -133,12 +133,15 @@ interface AssessmentsMetadata {
   >;
 }
 
-@@doc(SecurityAssessmentMetadataResponse.name,
+@@doc(
+  SecurityAssessmentMetadataResponse.name,
   "The Assessment Key - Unique key for the assessment type"
 );
-@@doc(SecurityAssessmentMetadataResponse.properties,
+@@doc(
+  SecurityAssessmentMetadataResponse.properties,
   "Describes properties of an assessment metadata response."
 );
-@@doc(AssessmentsMetadata.createInSubscription::parameters.resource,
+@@doc(
+  AssessmentsMetadata.createInSubscription::parameters.resource,
   "AssessmentMetadata object"
 );

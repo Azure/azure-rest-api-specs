@@ -42,7 +42,8 @@ namespace Azure.AI.Projects {
   @@copyVariants(OpenAI.IncludeEnum, Azure.AI.Projects._AgentIncludable);
 
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-  @@copyProperties(OpenAI.MCPTool,
+  @@copyProperties(
+    OpenAI.MCPTool,
     {
       /**
        * The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
@@ -52,7 +53,8 @@ namespace Azure.AI.Projects {
   );
 
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-  @@copyProperties(OpenAI.WebSearchTool,
+  @@copyProperties(
+    OpenAI.WebSearchTool,
     {
       /**
        * The project connections attached to this tool. There can be a maximum of 1 connection

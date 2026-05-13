@@ -7,37 +7,44 @@ using Microsoft.Resources;
 
 @@clientName(Microsoft.Resources, "DeploymentsMgmtClient", "python");
 
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
   armResourceIdentifier,
   "csharp"
 );
 @@clientName(Deployments, "ArmDeployments", "csharp"); // Avoid "Deployments" name conflict with namespace in C#
 @@clientName(ResourceReference, "ArmResourceReference", "csharp");
-@@clientName(DeploymentExtensionDefinition,
+@@clientName(
+  DeploymentExtensionDefinition,
   "ArmDeploymentExtensionDefinition",
   "csharp"
 );
 @@clientName(DeploymentParameter, "ArmDeploymentParameterValue", "csharp");
 @@clientName(Deployment, "ArmDeploymentContent", "csharp");
-@@alternateType(Deployment.identity,
+@@alternateType(
+  Deployment.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
 @@alternateType(Deployment.location, azureLocation, "csharp");
 @@clientName(DeploymentExtended, "ArmDeployment", "csharp");
-@@clientName(DeploymentPropertiesExtended,
+@@clientName(
+  DeploymentPropertiesExtended,
   "ArmDeploymentPropertiesExtended",
   "csharp"
 );
-@@clientName(DeploymentPropertiesExtended.onErrorDeployment,
+@@clientName(
+  DeploymentPropertiesExtended.onErrorDeployment,
   "ErrorDeployment",
   "csharp"
 );
-@@clientName(DeploymentPropertiesExtended.outputResources,
+@@clientName(
+  DeploymentPropertiesExtended.outputResources,
   "OutputResourceDetails",
   "csharp"
 );
-@@clientName(DeploymentPropertiesExtended.validatedResources,
+@@clientName(
+  DeploymentPropertiesExtended.validatedResources,
   "ValidatedResourceDetails",
   "csharp"
 );
@@ -48,36 +55,42 @@ using Microsoft.Resources;
 @@clientName(DeploymentListResult, "ArmDeploymentListResult", "csharp");
 @@clientName(DeploymentExtendedFilter, "ArmDeploymentExtendedFilter", "csharp");
 @@clientName(DeploymentOperation, "ArmDeploymentOperation", "csharp");
-@@clientName(DeploymentOperationProperties,
+@@clientName(
+  DeploymentOperationProperties,
   "ArmDeploymentOperationProperties",
   "csharp"
 );
 @@alternateType(DeploymentOperationProperties.duration, duration, "csharp");
 @@clientName(ProvisioningOperation, "ProvisioningOperationKind", "csharp");
-@@clientName(DeploymentOperationsListResult,
+@@clientName(
+  DeploymentOperationsListResult,
   "ArmDeploymentOperationsListResult",
   "csharp"
 );
 @@clientName(DeploymentValidateResult, "ArmDeploymentValidateResult", "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Ensure backward compatibility for the .NET SDK"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(DeploymentValidateResult,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  DeploymentValidateResult,
   Azure.ResourceManager.Foundations.ProxyResource,
   "csharp"
 );
 @@clientName(DeploymentWhatIf, "ArmDeploymentWhatIfContent", "csharp");
 @@alternateType(DeploymentWhatIf.location, azureLocation, "csharp");
 @@clientName(DeploymentWhatIfSettings, "ArmDeploymentWhatIfSettings", "csharp");
-@@clientName(DeploymentWhatIfProperties,
+@@clientName(
+  DeploymentWhatIfProperties,
   "ArmDeploymentWhatIfProperties",
   "csharp"
 );
 @@clientName(DeploymentProperties, "ArmDeploymentProperties", "csharp");
 @@clientName(DeploymentProperties.parameters, "DeploymentParameters", "csharp");
-@@clientName(DeploymentProperties.onErrorDeployment,
+@@clientName(
+  DeploymentProperties.onErrorDeployment,
   "ErrorDeployment",
   "csharp"
 );
-@@clientName(ExpressionEvaluationOptions.scope,
+@@clientName(
+  ExpressionEvaluationOptions.scope,
   "ExpressionEvaluationScope",
   "csharp"
 );
@@ -93,7 +106,8 @@ using Microsoft.Resources;
 @@clientName(OnErrorDeploymentType, "ErrorDeploymentType", "csharp");
 @@clientName(OnErrorDeploymentExtended, "ErrorDeploymentExtended", "csharp");
 @@clientName(OnErrorDeploymentExtended.type, "DeploymentType", "csharp");
-@@clientName(ExpressionEvaluationOptionsScopeType,
+@@clientName(
+  ExpressionEvaluationOptionsScopeType,
   "ExpressionEvaluationScope",
   "csharp"
 );
@@ -105,24 +119,29 @@ using Microsoft.Resources;
 @@clientName(PropertyChangeType, "WhatIfPropertyChangeType", "csharp");
 @@alternateType(ResourceReference.id, armResourceIdentifier, "csharp");
 @@clientName(DeploymentExternalInput, "ArmDeploymentExternalInput", "csharp");
-@@clientName(DeploymentExternalInputDefinition,
+@@clientName(
+  DeploymentExternalInputDefinition,
   "ArmDeploymentExternalInputDefinition",
   "csharp"
 );
-@@clientName(DeploymentExtensionConfigItem,
+@@clientName(
+  DeploymentExtensionConfigItem,
   "ArmDeploymentExtensionConfigItem",
   "csharp"
 );
-@@clientName(DeploymentExtensionConfigItem.type,
+@@clientName(
+  DeploymentExtensionConfigItem.type,
   "ExtensionConfigPropertyType",
   "csharp"
 );
 @@clientName(Deployments.cancelAtScope, "Cancel", "csharp");
-@@clientName(Deployments.deploymentOperationsGetAtScope,
+@@clientName(
+  Deployments.deploymentOperationsGetAtScope,
   "GetDeploymentOperation",
   "csharp"
 );
-@@clientName(Deployments.deploymentOperationsListAtScope,
+@@clientName(
+  Deployments.deploymentOperationsListAtScope,
   "GetDeploymentOperations",
   "csharp"
 );
@@ -130,11 +149,13 @@ using Microsoft.Resources;
 @@clientName(Deployments.validateAtScope, "Validate", "csharp");
 @@clientName(Deployments.checkExistenceAtScope, "CheckExistence", "csharp");
 @@alternateType(KeyVaultReference.id, armResourceIdentifier, "csharp");
-@@clientName(Azure.ResourceManager.Foundations.ErrorAdditionalInfo.type,
+@@clientName(
+  Azure.ResourceManager.Foundations.ErrorAdditionalInfo.type,
   "ErrorAdditionalInfoType",
   "csharp"
 );
-@@clientName(DeploymentsOperationGroup.calculateTemplateHash,
+@@clientName(
+  DeploymentsOperationGroup.calculateTemplateHash,
   "CalculateDeploymentTemplateHash",
   "csharp"
 );
@@ -163,7 +184,8 @@ using Microsoft.Resources;
 @@scope(DeploymentsExtendedTenant.validateAtTenantScope, "!csharp");
 @@scope(DeploymentsExtendedTenant.whatIfAtTenantScope, "!csharp");
 @@scope(DeploymentsExtendedTenant.exportTemplateAtTenantScope, "!csharp");
-@@scope(DeploymentsExtendedTenant.deploymentOperationsGetAtTenantScope,
+@@scope(
+  DeploymentsExtendedTenant.deploymentOperationsGetAtTenantScope,
   "!csharp"
 );
 @@scope(DeploymentsExtendedTenant.list, "!csharp");
@@ -171,62 +193,80 @@ using Microsoft.Resources;
 
 // Management group scope — covered by DeploymentExtendeds with Extension.ScopeParameter
 @@scope(DeploymentExtendedManagementGroup.getAtManagementGroupScope, "!csharp");
-@@scope(DeploymentExtendedManagementGroup.checkExistenceAtManagementGroupScope,
+@@scope(
+  DeploymentExtendedManagementGroup.checkExistenceAtManagementGroupScope,
   "!csharp"
 );
-@@scope(DeploymentExtendedManagementGroup.createOrUpdateAtManagementGroupScope,
+@@scope(
+  DeploymentExtendedManagementGroup.createOrUpdateAtManagementGroupScope,
   "!csharp"
 );
-@@scope(DeploymentExtendedManagementGroup.deleteAtManagementGroupScope,
+@@scope(
+  DeploymentExtendedManagementGroup.deleteAtManagementGroupScope,
   "!csharp"
 );
-@@scope(DeploymentExtendedManagementGroup.listAtManagementGroupScope,
+@@scope(
+  DeploymentExtendedManagementGroup.listAtManagementGroupScope,
   "!csharp"
 );
-@@scope(DeploymentExtendedManagementGroup.cancelAtManagementGroupScope,
+@@scope(
+  DeploymentExtendedManagementGroup.cancelAtManagementGroupScope,
   "!csharp"
 );
-@@scope(DeploymentExtendedManagementGroup.validateAtManagementGroupScope,
+@@scope(
+  DeploymentExtendedManagementGroup.validateAtManagementGroupScope,
   "!csharp"
 );
-@@scope(DeploymentExtendedManagementGroup.whatIfAtManagementGroupScope,
+@@scope(
+  DeploymentExtendedManagementGroup.whatIfAtManagementGroupScope,
   "!csharp"
 );
-@@scope(DeploymentExtendedManagementGroup.exportTemplateAtManagementGroupScope,
+@@scope(
+  DeploymentExtendedManagementGroup.exportTemplateAtManagementGroupScope,
   "!csharp"
 );
-@@scope(DeploymentExtendedManagementGroup.deploymentOperationsGetAtManagementGroupScope,
+@@scope(
+  DeploymentExtendedManagementGroup.deploymentOperationsGetAtManagementGroupScope,
   "!csharp"
 );
-@@scope(DeploymentExtendedManagementGroup.deploymentOperationsListAtManagementGroupScope,
+@@scope(
+  DeploymentExtendedManagementGroup.deploymentOperationsListAtManagementGroupScope,
   "!csharp"
 );
 
 // Subscription scope — covered by DeploymentExtendeds with Extension.ScopeParameter
 @@scope(DeploymentExtendedSubscriptionGroup.getAtSubscriptionScope, "!csharp");
-@@scope(DeploymentExtendedSubscriptionGroup.checkExistenceAtSubscriptionScope,
+@@scope(
+  DeploymentExtendedSubscriptionGroup.checkExistenceAtSubscriptionScope,
   "!csharp"
 );
-@@scope(DeploymentExtendedSubscriptionGroup.createOrUpdateAtSubscriptionScope,
+@@scope(
+  DeploymentExtendedSubscriptionGroup.createOrUpdateAtSubscriptionScope,
   "!csharp"
 );
-@@scope(DeploymentExtendedSubscriptionGroup.deleteAtSubscriptionScope,
+@@scope(
+  DeploymentExtendedSubscriptionGroup.deleteAtSubscriptionScope,
   "!csharp"
 );
 @@scope(DeploymentExtendedSubscriptionGroup.listAtSubscriptionScope, "!csharp");
-@@scope(DeploymentExtendedSubscriptionGroup.cancelAtSubscriptionScope,
+@@scope(
+  DeploymentExtendedSubscriptionGroup.cancelAtSubscriptionScope,
   "!csharp"
 );
-@@scope(DeploymentExtendedSubscriptionGroup.validateAtSubscriptionScope,
+@@scope(
+  DeploymentExtendedSubscriptionGroup.validateAtSubscriptionScope,
   "!csharp"
 );
-@@scope(DeploymentExtendedSubscriptionGroup.exportTemplateAtSubscriptionScope,
+@@scope(
+  DeploymentExtendedSubscriptionGroup.exportTemplateAtSubscriptionScope,
   "!csharp"
 );
-@@scope(DeploymentExtendedSubscriptionGroup.deploymentOperationsGetAtSubscriptionScope,
+@@scope(
+  DeploymentExtendedSubscriptionGroup.deploymentOperationsGetAtSubscriptionScope,
   "!csharp"
 );
-@@scope(DeploymentExtendedSubscriptionGroup.deploymentOperationsListAtSubscriptionScope,
+@@scope(
+  DeploymentExtendedSubscriptionGroup.deploymentOperationsListAtSubscriptionScope,
   "!csharp"
 );
 
