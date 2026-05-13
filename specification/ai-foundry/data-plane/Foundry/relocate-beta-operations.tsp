@@ -142,3 +142,22 @@ interface Datasets {}
 @@clientLocation(Azure.AI.Projects.DataGenerationJobs.delete, Datasets);
 
 
+
+// Evaluation suite generation jobs → nested under evaluations sub-client
+@@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.get, Evaluators);
+@@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.list, Evaluators);
+@@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.create, Evaluators);
+@@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.cancel, Evaluators);
+@@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.delete, Evaluators);
+
+// Agent optimization jobs → own sub-client
+interface AgentOptimizationJobs {}
+@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.create, AgentOptimizationJobs);
+@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.get, AgentOptimizationJobs);
+@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.list, AgentOptimizationJobs);
+@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.cancel, AgentOptimizationJobs);
+@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.delete, AgentOptimizationJobs);
+@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.listCandidates, AgentOptimizationJobs);
+@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.getCandidate, AgentOptimizationJobs);
+@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.getCandidateConfig, AgentOptimizationJobs);
+@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.getCandidateResults, AgentOptimizationJobs);
