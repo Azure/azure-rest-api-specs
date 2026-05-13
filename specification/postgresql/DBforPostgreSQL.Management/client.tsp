@@ -551,8 +551,7 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 
-// Make BackupStoreDetails public (was internal in new generator)
-@@access(BackupStoreDetails, Access.public, "csharp");
+// Restore BackupStoreDetails input usage.
 @@usage(BackupStoreDetails, Usage.input, "csharp");
 
 // Preserve backward-compatible enum member names
@@ -570,24 +569,14 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 
-// Make ForPatch sub-models public (used in public ModelFactory methods)
-@@access(SkuForPatch, Access.public, "csharp");
+// Restore ForPatch sub-model input usage.
 @@usage(SkuForPatch, Usage.input, "csharp");
-@@access(BackupForPatch, Access.public, "csharp");
 @@usage(BackupForPatch, Usage.input, "csharp");
-@@access(HighAvailabilityForPatch, Access.public, "csharp");
 @@usage(HighAvailabilityForPatch, Usage.input, "csharp");
-@@access(MaintenanceWindowForPatch, Access.public, "csharp");
 @@usage(MaintenanceWindowForPatch, Usage.input, "csharp");
-@@access(AuthConfigForPatch, Access.public, "csharp");
 @@usage(AuthConfigForPatch, Usage.input, "csharp");
-@@access(MigrationSecretParametersForPatch, Access.public, "csharp");
 @@usage(MigrationSecretParametersForPatch, Usage.input, "csharp");
-@@access(AdminCredentialsForPatch, Access.public, "csharp");
 @@usage(AdminCredentialsForPatch, Usage.input, "csharp");
-
-// Make UserIdentity public (it's used in public ModelFactory method)
-@@access(UserIdentity, Access.public, "csharp");
 
 // Preserve backward-compatible version enum member names
 @@clientName(PostgresMajorVersion.`16`, "Sixteen", "csharp");
@@ -621,7 +610,7 @@ using Azure.ClientGenerator.Core;
 // Restore old property name TypePropertiesType on LogFile
 @@clientName(CapturedLogProperties.type, "TypePropertiesType", "csharp");
 
-// Make ForPatch types public via @@usage (@@access alone doesn't work for these types)
+// Restore ForPatch type input usage.
 @@usage(AuthConfigForPatch, Usage.input, "csharp");
 @@usage(BackupForPatch, Usage.input, "csharp");
 @@usage(HighAvailabilityForPatch, Usage.input, "csharp");
