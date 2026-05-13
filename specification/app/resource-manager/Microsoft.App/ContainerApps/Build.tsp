@@ -63,9 +63,11 @@ interface Builds {
 @@maxLength(BuildResource.name, 64);
 @@minLength(BuildResource.name, 2);
 @@doc(BuildResource.name, "The name of a build.");
-@@doc(BuildResource.properties,
+@@doc(
+  BuildResource.properties,
   "The resource-specific properties for this resource."
 );
-@@doc(Builds.createOrUpdate::parameters.resource,
+@@doc(
+  Builds.createOrUpdate::parameters.resource,
   "Resource create or update parameters."
 );

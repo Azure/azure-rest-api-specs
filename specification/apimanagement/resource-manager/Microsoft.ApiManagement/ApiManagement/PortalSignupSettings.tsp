@@ -40,7 +40,7 @@ interface SignUpSettings {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -55,7 +55,7 @@ interface SignUpSettings {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -99,7 +99,8 @@ interface SignUpSettings {
 
 @@doc(PortalSignupSettings.name, "");
 @@doc(PortalSignupSettings.properties, "Sign-up settings contract properties.");
-@@doc(SignUpSettings.createOrUpdate::parameters.resource,
+@@doc(
+  SignUpSettings.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );
 @@doc(SignUpSettings.update::parameters.properties, "Update Sign-Up settings.");

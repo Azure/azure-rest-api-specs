@@ -15,12 +15,14 @@ using Azure.ClientGenerator.Core;
 using Microsoft.EventGrid.SystemEvents;
 
 @@clientName(AcsIncomingCallEventData.to, "toCommunicationIdentifier", "java");
-@@clientName(AcsIncomingCallEventData.from,
+@@clientName(
+  AcsIncomingCallEventData.from,
   "fromCommunicationIdentifier",
   "java"
 );
 
-@@clientName(AcsIncomingCallEventData.onBehalfOfCallee,
+@@clientName(
+  AcsIncomingCallEventData.onBehalfOfCallee,
   "onBehalfOfCommunicationIdentifier",
   "java"
 );
@@ -33,86 +35,102 @@ using Microsoft.EventGrid.SystemEvents;
 
 @@clientName(AcsRouterWorkerSelector.ttlSeconds, "timeToLive", "java");
 
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageInteractiveContent.type,
+@@clientName(
+  Microsoft.EventGrid.SystemEvents.AcsMessageInteractiveContent.type,
   "replyKind",
   "java"
 );
 
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageInteractiveButtonReplyContent.id,
+@@clientName(
+  Microsoft.EventGrid.SystemEvents.AcsMessageInteractiveButtonReplyContent.id,
   "buttonId",
   "java"
 );
 
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageInteractiveListReplyContent.id,
+@@clientName(
+  Microsoft.EventGrid.SystemEvents.AcsMessageInteractiveListReplyContent.id,
   "listItemId",
   "java"
 );
 
-@@clientName(AcsRecordingFileStatusUpdatedEventData.recordingDurationMs,
+@@clientName(
+  AcsRecordingFileStatusUpdatedEventData.recordingDurationMs,
   "recordingDuration",
   "java"
 );
 
 @@clientName(AcsChatRetentionPolicy, "AcsChatThreadRetentionPolicy", "java");
-@@clientName(AcsChatRetentionPolicyKind,
+@@clientName(
+  AcsChatRetentionPolicyKind,
   "AcsChatThreadRetentionPolicyKind",
   "java"
 );
-@@clientName(AcsChatThreadDeletedReasonType,
+@@clientName(
+  AcsChatThreadDeletedReasonType,
   "AcsChatThreadDeletedReason",
   "java"
 );
 
-@@clientName(EventGridMQTTClientCreatedOrUpdatedEventData,
+@@clientName(
+  EventGridMQTTClientCreatedOrUpdatedEventData,
   "EventGridMqttClientCreatedOrUpdatedEventData",
   "java"
 );
 
-@@clientName(EventGridMQTTClientDeletedEventData,
+@@clientName(
+  EventGridMQTTClientDeletedEventData,
   "EventGridMqttClientDeletedEventData",
   "java"
 );
 
-@@clientName(EventGridMQTTClientSessionConnectedEventData,
+@@clientName(
+  EventGridMQTTClientSessionConnectedEventData,
   "EventGridMqttClientSessionConnectedEventData",
   "java"
 );
 
-@@clientName(EventGridMQTTClientSessionDisconnectedEventData,
+@@clientName(
+  EventGridMQTTClientSessionDisconnectedEventData,
   "EventGridMqttClientSessionDisconnectedEventData",
   "java"
 );
 
-@@clientName(EventGridMQTTClientEventData,
+@@clientName(
+  EventGridMQTTClientEventData,
   "EventGridMqttClientEventData",
   "java"
 );
 
 @@clientName(EventGridMQTTClientState, "EventGridMqttClientState", "java");
 
-@@clientName(EventGridMQTTClientDisconnectionReason,
+@@clientName(
+  EventGridMQTTClientDisconnectionReason,
   "EventGridMqttClientDisconnectionReason",
   "java"
 );
 
-@@clientName(RedisImportRDBCompletedEventData,
+@@clientName(
+  RedisImportRDBCompletedEventData,
   "RedisImportRdbCompletedEventData",
   "java"
 );
 
-@@clientName(RedisExportRDBCompletedEventData,
+@@clientName(
+  RedisExportRDBCompletedEventData,
   "RedisExportRdbCompletedEventData",
   "java"
 );
 
 @@clientName(AcsRouterWorkerSelector.value, "labelValue", "java");
 
-@@clientName(AcsRecordingFileStatusUpdatedEventData.recordingDurationMs,
+@@clientName(
+  AcsRecordingFileStatusUpdatedEventData.recordingDurationMs,
   "recordingDuration",
   "java"
 );
 
-@@clientName(StorageTaskAssignmentQueuedEventData.queuedDateTime,
+@@clientName(
+  StorageTaskAssignmentQueuedEventData.queuedDateTime,
   "queuedOn",
   "java"
 );
@@ -157,7 +175,8 @@ using Microsoft.EventGrid.SystemEvents;
 
 @@clientName(KeyVaultCertificateNearExpiryEventData.EXP, "Exp", "java");
 
-@@clientName(AcsMessageDeliveryStatusUpdatedEventData.channelType,
+@@clientName(
+  AcsMessageDeliveryStatusUpdatedEventData.channelType,
   "channelKind",
   "java"
 );
@@ -166,47 +185,56 @@ using Microsoft.EventGrid.SystemEvents;
 
 @@clientName(AcsMessageReceivedEventData.media, "mediaContent", "java");
 
-@@clientName(AcsMessageReceivedEventData.interactive,
+@@clientName(
+  AcsMessageReceivedEventData.interactive,
   "interactiveContent",
   "java"
 );
 
-@@clientName(ResourceNotificationsResourceDeletedEventData.operationalInfo,
+@@clientName(
+  ResourceNotificationsResourceDeletedEventData.operationalInfo,
   "operationalDetails",
   "java"
 );
 
-@@clientName(ResourceNotificationsResourceDeletedEventData.resourceInfo,
+@@clientName(
+  ResourceNotificationsResourceDeletedEventData.resourceInfo,
   "resourceDetails",
   "java"
 );
 
-@@clientName(ResourceNotificationsResourceUpdatedEventData.operationalInfo,
+@@clientName(
+  ResourceNotificationsResourceUpdatedEventData.operationalInfo,
   "operationalDetails",
   "java"
 );
 
-@@clientName(ResourceNotificationsResourceUpdatedEventData.resourceInfo,
+@@clientName(
+  ResourceNotificationsResourceUpdatedEventData.resourceInfo,
   "resourceDetails",
   "java"
 );
 
-@@clientName(CommunicationIdentifierModelKind,
+@@clientName(
+  CommunicationIdentifierModelKind,
   "CommunicationIdentifierKind",
   "java"
 );
 
-@@clientName(MicrosoftTeamsAppIdentifierModel,
+@@clientName(
+  MicrosoftTeamsAppIdentifierModel,
   "MicrosoftTeamsAppIdentifier",
   "java"
 );
 
-@@clientName(AcsMessageEventData.receivedTimeStamp,
+@@clientName(
+  AcsMessageEventData.receivedTimeStamp,
   "receivedTimestamp",
   "java"
 );
 
-@@clientName(AcsCallEndedEventData.callDurationInSeconds,
+@@clientName(
+  AcsCallEndedEventData.callDurationInSeconds,
   "callDuration",
   "java"
 );

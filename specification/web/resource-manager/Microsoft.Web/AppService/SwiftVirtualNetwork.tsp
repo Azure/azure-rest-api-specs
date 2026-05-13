@@ -182,18 +182,23 @@ interface SwiftVirtualNetworkOperationGroup {
 }
 
 @@doc(SwiftVirtualNetwork.name, "");
-@@doc(SwiftVirtualNetwork.properties,
+@@doc(
+  SwiftVirtualNetwork.properties,
   "SwiftVirtualNetwork resource specific properties"
 );
-@@doc(SwiftVirtualNetworks.createOrUpdateSwiftVirtualNetworkConnectionWithCheck::parameters.resource,
+@@doc(
+  SwiftVirtualNetworks.createOrUpdateSwiftVirtualNetworkConnectionWithCheck::parameters.resource,
   "Properties of the Virtual Network connection. See example."
 );
-@@doc(SwiftVirtualNetworks.updateSwiftVirtualNetworkConnectionWithCheck::parameters.properties,
+@@doc(
+  SwiftVirtualNetworks.updateSwiftVirtualNetworkConnectionWithCheck::parameters.properties,
   "Properties of the Virtual Network connection. See example."
 );
-@@doc(SwiftVirtualNetworkOperationGroup.createOrUpdateSwiftVirtualNetworkConnectionWithCheckSlot::parameters.resource,
+@@doc(
+  SwiftVirtualNetworkOperationGroup.createOrUpdateSwiftVirtualNetworkConnectionWithCheckSlot::parameters.resource,
   "Properties of the Virtual Network connection. See example."
 );
-@@doc(SwiftVirtualNetworkOperationGroup.updateSwiftVirtualNetworkConnectionWithCheckSlot::parameters.properties,
+@@doc(
+  SwiftVirtualNetworkOperationGroup.updateSwiftVirtualNetworkConnectionWithCheckSlot::parameters.properties,
   "Properties of the Virtual Network connection. See example."
 );

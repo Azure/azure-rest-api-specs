@@ -56,6 +56,7 @@ interface SqlDiscoverySiteDataSources {
 }
 
 @@doc(SqlDiscoverySiteDataSource.name, "SQL Discovery site data source name.");
-@@doc(SqlDiscoverySiteDataSource.properties,
+@@doc(
+  SqlDiscoverySiteDataSource.properties,
   "The resource-specific properties for this resource."
 );

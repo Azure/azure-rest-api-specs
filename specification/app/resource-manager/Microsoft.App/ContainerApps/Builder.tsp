@@ -70,6 +70,7 @@ interface Builders {
 @@maxLength(BuilderResource.name, 32);
 @@minLength(BuilderResource.name, 2);
 @@doc(BuilderResource.name, "The name of the builder.");
-@@doc(BuilderResource.properties,
+@@doc(
+  BuilderResource.properties,
   "The resource-specific properties for this resource."
 );

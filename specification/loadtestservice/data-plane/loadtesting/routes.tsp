@@ -19,7 +19,8 @@ using Azure.ClientGenerator.Core;
 namespace Microsoft.LoadTestService;
 
 #suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
-@@encodedName(Azure.Core.Foundations.ResourceBody.resource,
+@@encodedName(
+  Azure.Core.Foundations.ResourceBody.resource,
   "application/json",
   "body"
 );

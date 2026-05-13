@@ -43,6 +43,7 @@ enum Versions {
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "Exposes all available operations for discovery purposes."
 );

@@ -72,7 +72,8 @@ interface ComplianceResults {
   >;
 }
 
-@@doc(ComplianceResult.name,
+@@doc(
+  ComplianceResult.name,
   "name of the desired assessment compliance result"
 );
 @@doc(ComplianceResult.properties, "Compliance result data");
