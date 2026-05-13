@@ -1,0 +1,1346 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AgentsRuntimeService",
+    "description": "Manages conversation threads, messages, runs, and run steps for the Agentic RAG Agents Runtime Service. All timestamps are Unix epoch integers.",
+    "version": "2026-06-01-preview"
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": "Default scope"
+      }
+    }
+  },
+  "paths": {
+    "/threads": {
+      "post": {
+        "operationId": "Threads_Create",
+        "summary": "Create Thread",
+        "description": "Creates a new conversation thread.",
+        "tags": [
+          "Threads"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CreateThreadRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created. The request was fulfilled and a new thread was created.",
+            "schema": {
+              "$ref": "#/definitions/Thread"
+            }
+          },
+          "400": {
+            "description": "Bad Request. Validation error."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Thread": {
+            "$ref": "./examples/Threads_Create.json"
+          }
+        }
+      },
+      "get": {
+        "operationId": "Threads_List",
+        "summary": "List Threads",
+        "description": "Lists all conversation threads with cursor-based pagination. Returns only threads owned by the authenticated user.",
+        "tags": [
+          "Threads"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": null,
+          "itemName": "data"
+        },
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 20,
+            "description": "Maximum number of threads to return."
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "type": "string",
+            "default": "desc",
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "x-ms-enum": {
+              "name": "SortOrder",
+              "modelAsString": true
+            },
+            "description": "Sort order by created_at."
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "type": "string",
+            "description": "Cursor \u00e2\u20ac\u201d return threads after this ID."
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "type": "string",
+            "description": "Cursor \u00e2\u20ac\u201d return threads before this ID."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ThreadList"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Threads": {
+            "$ref": "./examples/Threads_List.json"
+          }
+        }
+      }
+    },
+    "/threads/{threadId}": {
+      "get": {
+        "operationId": "Threads_Get",
+        "summary": "Get Thread",
+        "tags": [
+          "Threads"
+        ],
+        "parameters": [
+          {
+            "name": "threadId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Unique thread identifier (format: thread_{uuid})."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/Thread"
+            }
+          },
+          "404": {
+            "description": "Not Found."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Thread": {
+            "$ref": "./examples/Threads_Get.json"
+          }
+        }
+      },
+      "post": {
+        "operationId": "Threads_Modify",
+        "summary": "Modify Thread",
+        "tags": [
+          "Threads"
+        ],
+        "parameters": [
+          {
+            "name": "threadId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Unique thread identifier."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ModifyThreadRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/Thread"
+            }
+          },
+          "404": {
+            "description": "Not Found."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Modify Thread": {
+            "$ref": "./examples/Threads_Modify.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Threads_Delete",
+        "summary": "Delete Thread",
+        "tags": [
+          "Threads"
+        ],
+        "parameters": [
+          {
+            "name": "threadId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Unique thread identifier."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/DeleteResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Thread": {
+            "$ref": "./examples/Threads_Delete.json"
+          }
+        }
+      }
+    },
+    "/threads/{threadId}/messages": {
+      "post": {
+        "operationId": "Messages_Create",
+        "summary": "Create Message",
+        "tags": [
+          "Messages"
+        ],
+        "parameters": [
+          {
+            "name": "threadId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateMessageRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created.",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
+          "400": {
+            "description": "Bad Request."
+          },
+          "404": {
+            "description": "Not Found. Thread does not exist."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Message": {
+            "$ref": "./examples/Messages_Create.json"
+          }
+        }
+      },
+      "get": {
+        "operationId": "Messages_List",
+        "summary": "List Messages",
+        "tags": [
+          "Messages"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": null,
+          "itemName": "data"
+        },
+        "parameters": [
+          {
+            "name": "threadId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 20
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "type": "string",
+            "default": "asc",
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "x-ms-enum": {
+              "name": "SortOrder",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/MessageList"
+            }
+          },
+          "404": {
+            "description": "Not Found."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Messages": {
+            "$ref": "./examples/Messages_List.json"
+          }
+        }
+      }
+    },
+    "/threads/{threadId}/messages/{messageId}": {
+      "get": {
+        "operationId": "Messages_Get",
+        "summary": "Get Message",
+        "tags": [
+          "Messages"
+        ],
+        "parameters": [
+          {
+            "name": "threadId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "messageId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Unique message identifier (format: msg_{uuid})."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
+          "404": {
+            "description": "Not Found."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Message": {
+            "$ref": "./examples/Messages_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Messages_Delete",
+        "summary": "Delete Message",
+        "tags": [
+          "Messages"
+        ],
+        "parameters": [
+          {
+            "name": "threadId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "messageId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/DeleteResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Message": {
+            "$ref": "./examples/Messages_Delete.json"
+          }
+        }
+      }
+    },
+    "/threads/{threadId}/runs": {
+      "post": {
+        "operationId": "Runs_Create",
+        "summary": "Create Run",
+        "description": "Creates and executes a run against a thread. Supports synchronous and streaming (SSE) modes.",
+        "tags": [
+          "Runs"
+        ],
+        "parameters": [
+          {
+            "name": "threadId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "stream",
+            "in": "query",
+            "type": "boolean",
+            "default": false,
+            "description": "When true, returns SSE stream."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateRunRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created.",
+            "schema": {
+              "$ref": "#/definitions/Run"
+            }
+          },
+          "400": {
+            "description": "Bad Request."
+          },
+          "404": {
+            "description": "Not Found."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Run": {
+            "$ref": "./examples/Runs_Create.json"
+          }
+        }
+      }
+    },
+    "/threads/{threadId}/runs/{runId}": {
+      "get": {
+        "operationId": "Runs_Get",
+        "summary": "Get Run",
+        "tags": [
+          "Runs"
+        ],
+        "parameters": [
+          {
+            "name": "threadId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Unique run identifier (format: run_{uuid})."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/Run"
+            }
+          },
+          "404": {
+            "description": "Not Found."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Run": {
+            "$ref": "./examples/Runs_Get.json"
+          }
+        }
+      }
+    },
+    "/threads/{threadId}/runs/{runId}/cancel": {
+      "post": {
+        "operationId": "Runs_Cancel",
+        "summary": "Cancel Run",
+        "tags": [
+          "Runs"
+        ],
+        "parameters": [
+          {
+            "name": "threadId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/Run"
+            }
+          },
+          "400": {
+            "description": "Bad Request. Run not in cancellable state."
+          },
+          "404": {
+            "description": "Not Found."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Cancel Run": {
+            "$ref": "./examples/Runs_Cancel.json"
+          }
+        }
+      }
+    },
+    "/threads/{threadId}/runs/{runId}/steps": {
+      "get": {
+        "operationId": "RunSteps_List",
+        "summary": "List Run Steps",
+        "tags": [
+          "RunSteps"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": null,
+          "itemName": "data"
+        },
+        "parameters": [
+          {
+            "name": "threadId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 20
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "type": "string",
+            "default": "desc",
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "x-ms-enum": {
+              "name": "SortOrder",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/RunStepList"
+            }
+          },
+          "404": {
+            "description": "Not Found."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Run Steps": {
+            "$ref": "./examples/RunSteps_List.json"
+          }
+        }
+      }
+    },
+    "/threads/{threadId}/runs/{runId}/steps/{stepId}": {
+      "get": {
+        "operationId": "RunSteps_Get",
+        "summary": "Get Run Step",
+        "tags": [
+          "RunSteps"
+        ],
+        "parameters": [
+          {
+            "name": "threadId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "stepId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Unique step identifier (format: step_{uuid})."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/RunStep"
+            }
+          },
+          "404": {
+            "description": "Not Found."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Run Step": {
+            "$ref": "./examples/RunSteps_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "message": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "CreateThreadRequest": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ModifyThreadRequest": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Thread": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "object": {
+          "type": "string",
+          "enum": [
+            "thread"
+          ],
+          "x-ms-enum": {
+            "name": "ThreadObjectType",
+            "modelAsString": true
+          }
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Unix epoch timestamp."
+        },
+        "title": {
+          "type": "string"
+        },
+        "owner_id": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ThreadList": {
+      "type": "object",
+      "properties": {
+        "object": {
+          "type": "string",
+          "enum": [
+            "list"
+          ],
+          "x-ms-enum": {
+            "name": "ListObjectType",
+            "modelAsString": true
+          }
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Thread"
+          }
+        },
+        "first_id": {
+          "type": "string"
+        },
+        "last_id": {
+          "type": "string"
+        },
+        "has_more": {
+          "type": "boolean"
+        }
+      }
+    },
+    "DeleteResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "object": {
+          "type": "string"
+        },
+        "deleted": {
+          "type": "boolean"
+        }
+      }
+    },
+    "CreateMessageRequest": {
+      "type": "object",
+      "required": [
+        "role",
+        "content"
+      ],
+      "properties": {
+        "role": {
+          "type": "string",
+          "enum": [
+            "user",
+            "assistant",
+            "system"
+          ],
+          "x-ms-enum": {
+            "name": "MessageRole",
+            "modelAsString": true
+          }
+        },
+        "content": {
+          "type": "string",
+          "description": "Content of the message. Can be a string or content blocks array."
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "ContentBlock": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "text",
+            "image_url"
+          ],
+          "x-ms-enum": {
+            "name": "ContentBlockType",
+            "modelAsString": true
+          }
+        },
+        "text": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "string"
+            },
+            "annotations": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "image_url": {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string"
+            },
+            "detail": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "Message": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "object": {
+          "type": "string",
+          "enum": [
+            "thread.message"
+          ],
+          "x-ms-enum": {
+            "name": "MessageObjectType",
+            "modelAsString": true
+          }
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "thread_id": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "user",
+            "assistant",
+            "system"
+          ],
+          "x-ms-enum": {
+            "name": "MessageRole",
+            "modelAsString": true
+          }
+        },
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContentBlock"
+          }
+        },
+        "agent_id": {
+          "type": "string"
+        },
+        "run_id": {
+          "type": "string"
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MessageList": {
+      "type": "object",
+      "properties": {
+        "object": {
+          "type": "string",
+          "enum": [
+            "list"
+          ],
+          "x-ms-enum": {
+            "name": "ListObjectType",
+            "modelAsString": true
+          }
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Message"
+          }
+        },
+        "first_id": {
+          "type": "string"
+        },
+        "last_id": {
+          "type": "string"
+        },
+        "has_more": {
+          "type": "boolean"
+        }
+      }
+    },
+    "CreateRunRequest": {
+      "type": "object",
+      "required": [
+        "agent_id"
+      ],
+      "properties": {
+        "agent_id": {
+          "type": "string",
+          "description": "ID of the knowledge base (format: asst_{uuid})."
+        },
+        "instructions": {
+          "type": "string"
+        },
+        "additional_messages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "role",
+              "content"
+            ],
+            "properties": {
+              "role": {
+                "type": "string"
+              },
+              "content": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Run": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "object": {
+          "type": "string",
+          "enum": [
+            "thread.run"
+          ],
+          "x-ms-enum": {
+            "name": "RunObjectType",
+            "modelAsString": true
+          }
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "thread_id": {
+          "type": "string"
+        },
+        "agent_id": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "queued",
+            "in_progress",
+            "completed",
+            "failed",
+            "cancelled"
+          ],
+          "x-ms-enum": {
+            "name": "RunStatus",
+            "modelAsString": true
+          }
+        },
+        "instructions": {
+          "type": "string"
+        },
+        "last_error": {
+          "type": "object"
+        },
+        "usage": {
+          "$ref": "#/definitions/Usage"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "started_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "completed_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "failed_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "cancelled_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "Usage": {
+      "type": "object",
+      "properties": {
+        "prompt_tokens": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "completion_tokens": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "total_tokens": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "RunStep": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "object": {
+          "type": "string",
+          "enum": [
+            "thread.run.step"
+          ],
+          "x-ms-enum": {
+            "name": "RunStepObjectType",
+            "modelAsString": true
+          }
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "run_id": {
+          "type": "string"
+        },
+        "thread_id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "message_creation",
+            "tool_calls",
+            "mcp_call"
+          ],
+          "x-ms-enum": {
+            "name": "RunStepType",
+            "modelAsString": true
+          }
+        },
+        "step_details": {
+          "type": "object",
+          "description": "Details vary by step type."
+        },
+        "completed_at": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "RunStepList": {
+      "type": "object",
+      "properties": {
+        "object": {
+          "type": "string",
+          "enum": [
+            "list"
+          ],
+          "x-ms-enum": {
+            "name": "ListObjectType",
+            "modelAsString": true
+          }
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RunStep"
+          }
+        },
+        "first_id": {
+          "type": "string"
+        },
+        "last_id": {
+          "type": "string"
+        },
+        "has_more": {
+          "type": "boolean"
+        }
+      }
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "The endpoint URL for the Local Agentic RAG service.",
+        "required": true,
+        "type": "string",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for this operation."
+    }
+  }
+}

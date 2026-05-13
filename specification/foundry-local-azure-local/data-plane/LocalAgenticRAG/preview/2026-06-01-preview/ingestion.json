@@ -1,0 +1,478 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "IngestionService",
+    "description": "Manage ingestion jobs in Agentic RAG. Ingests documents from NFS or SharePoint data sources into a collection.",
+    "version": "2026-06-01-preview"
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": "Default scope"
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "2026-06-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "ApiVersion",
+        "modelAsString": true
+      },
+      "description": "The API version to use."
+    }
+  },
+  "paths": {
+    "/edgeai/ingestion/jobs/{jobId}": {
+      "post": {
+        "operationId": "IngestionJobs_Create",
+        "summary": "Create Ingestion Job",
+        "description": "Starts an ingestion job that parses, chunks, embeds, and stores documents into a collection.",
+        "tags": [
+          "IngestionJobs"
+        ],
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "User-chosen name for the ingestion job."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateIngestionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Job accepted.",
+            "schema": {
+              "$ref": "#/definitions/IngestionCreateResponse"
+            },
+            "headers": {
+              "operation-location": {
+                "type": "string",
+                "description": "URI to monitor the run."
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Collection not found or invalid NFS path."
+          },
+          "422": {
+            "description": "Unprocessable Entity. Missing required fields."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Ingestion Job": {
+            "$ref": "./examples/IngestionJobs_Create.json"
+          }
+        }
+      }
+    },
+    "/edgeai/ingestion/jobs": {
+      "get": {
+        "operationId": "IngestionJobs_List",
+        "summary": "List Ingestion Jobs",
+        "tags": [
+          "IngestionJobs"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/IngestionJobList"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Ingestion Jobs": {
+            "$ref": "./examples/IngestionJobs_List.json"
+          }
+        }
+      }
+    },
+    "/edgeai/ingestion/jobs/{jobId}/runs/{runId}": {
+      "get": {
+        "operationId": "IngestionRuns_Get",
+        "summary": "Get Ingestion Run",
+        "tags": [
+          "IngestionRuns"
+        ],
+        "parameters": [
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/IngestionRunDetail"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Ingestion Run": {
+            "$ref": "./examples/IngestionRuns_Get.json"
+          }
+        }
+      }
+    },
+    "/edgeai/ingestion/jobs/{jobId}/runs": {
+      "delete": {
+        "operationId": "IngestionRuns_Delete",
+        "summary": "Delete Runs for Job",
+        "tags": [
+          "IngestionRuns"
+        ],
+        "parameters": [
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Runs deleted."
+          },
+          "409": {
+            "description": "Conflict. Cannot delete while jobs are PENDING or RUNNING."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Ingestion Run": {
+            "$ref": "./examples/IngestionRuns_Delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "message": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "DatasourceConnection": {
+      "type": "object",
+      "properties": {
+        "nfsServerPath": {
+          "type": "string",
+          "description": "NFS server path (server_ip:/path). Required when kind is nfsv3."
+        },
+        "nfsUid": {
+          "type": "integer",
+          "format": "int32",
+          "default": 0
+        },
+        "nfsGid": {
+          "type": "integer",
+          "format": "int32",
+          "default": 0
+        },
+        "sharePointUrl": {
+          "type": "string",
+          "description": "SharePoint site URL. Required when kind is sharepoint."
+        },
+        "sharePointFolderPath": {
+          "type": "string"
+        },
+        "sharePointUsername": {
+          "type": "string",
+          "description": "Format: DOMAIN\\username"
+        },
+        "sharePointPassword": {
+          "type": "string",
+          "description": "RSA-encrypted base64-encoded password.",
+          "format": "password"
+        }
+      }
+    },
+    "ChunkingConfig": {
+      "type": "object",
+      "required": [
+        "chunkSize",
+        "chunkOverlap"
+      ],
+      "properties": {
+        "chunkSize": {
+          "type": "string",
+          "description": "Chunk size in characters. Must be a string."
+        },
+        "chunkOverlap": {
+          "type": "string",
+          "description": "Overlap between chunks. Must be a string."
+        }
+      }
+    },
+    "Datasource": {
+      "type": "object",
+      "required": [
+        "kind",
+        "chunking"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "nfsv3",
+            "sharepoint"
+          ],
+          "x-ms-enum": {
+            "name": "DatasourceKind",
+            "modelAsString": true
+          }
+        },
+        "connection": {
+          "$ref": "#/definitions/DatasourceConnection"
+        },
+        "chunking": {
+          "$ref": "#/definitions/ChunkingConfig"
+        }
+      }
+    },
+    "CreateIngestionRequest": {
+      "type": "object",
+      "required": [
+        "datasource"
+      ],
+      "properties": {
+        "datasource": {
+          "$ref": "#/definitions/Datasource"
+        },
+        "collectionName": {
+          "type": "string",
+          "default": "edgeragapp",
+          "description": "Target collection name. Must exist."
+        },
+        "dataRefreshIntervalInHours": {
+          "type": "integer",
+          "format": "int32",
+          "default": -1,
+          "description": "-1 = one-time, 1/4/24 = recurring."
+        },
+        "parsingMode": {
+          "type": "string",
+          "default": "basic",
+          "enum": [
+            "basic",
+            "advanced"
+          ],
+          "x-ms-enum": {
+            "name": "ParsingMode",
+            "modelAsString": true
+          }
+        },
+        "excludeLgrFailureUpdate": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "IngestionCreateResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "message": {
+          "type": "object"
+        }
+      }
+    },
+    "IngestionJobRun": {
+      "type": "object",
+      "properties": {
+        "jobId": {
+          "type": "string"
+        },
+        "runId": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "PENDING",
+            "RUNNING",
+            "COMPLETED",
+            "FAILED"
+          ],
+          "x-ms-enum": {
+            "name": "IngestionJobStatus",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "collectionName": {
+          "type": "string"
+        }
+      }
+    },
+    "IngestionJobList": {
+      "type": "object",
+      "properties": {
+        "jobRuns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IngestionJobRun"
+          }
+        }
+      }
+    },
+    "IngestionRunDetail": {
+      "type": "object",
+      "properties": {
+        "jobId": {
+          "type": "string"
+        },
+        "runId": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "PENDING",
+            "RUNNING",
+            "COMPLETED",
+            "FAILED"
+          ],
+          "x-ms-enum": {
+            "name": "IngestionJobStatus",
+            "modelAsString": true
+          }
+        },
+        "totalItems": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "processedItems": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "failedItems": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "errorInfo": {
+          "type": "object"
+        }
+      }
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "The endpoint URL for the Local Agentic RAG service.",
+        "required": true,
+        "type": "string",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  }
+}

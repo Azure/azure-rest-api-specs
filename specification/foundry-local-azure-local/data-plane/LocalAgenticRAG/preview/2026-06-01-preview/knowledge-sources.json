@@ -1,0 +1,615 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "KnowledgeSourcesService",
+    "description": "Manage knowledge sources in Agentic RAG. A knowledge source is a registration of an MCP server connection, optionally bound to a specific indexed source reference.",
+    "version": "2026-06-01-preview"
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": "Default scope"
+      }
+    }
+  },
+  "paths": {
+    "/edgeai/knowledgesources": {
+      "post": {
+        "operationId": "KnowledgeSources_Create",
+        "summary": "Create Knowledge Source",
+        "description": "Creates a new knowledge source. The MCP server is validated before the record is persisted.",
+        "tags": [
+          "KnowledgeSources"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateKnowledgeSourceRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created. MCP validation succeeded.",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeSource"
+            }
+          },
+          "400": {
+            "description": "Bad Request. MCP validation failed."
+          },
+          "409": {
+            "description": "Conflict. Name already exists."
+          },
+          "422": {
+            "description": "Unprocessable Entity. Missing/invalid fields or parameters/kind mismatch."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Knowledge Source": {
+            "$ref": "./examples/KnowledgeSources_Create.json"
+          }
+        }
+      },
+      "get": {
+        "operationId": "KnowledgeSources_List",
+        "summary": "List Knowledge Sources",
+        "tags": [
+          "KnowledgeSources"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": null,
+          "itemName": "items"
+        },
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "type": "string",
+            "description": "Filter by exact name."
+          },
+          {
+            "name": "kind",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "remote_mcp",
+              "indexed_sources_mcp"
+            ],
+            "x-ms-enum": {
+              "name": "KnowledgeSourceKind",
+              "modelAsString": true
+            },
+            "description": "Filter by kind."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 10
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "type": "integer",
+            "minimum": 0,
+            "default": 0
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeSourceList"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Knowledge Sources": {
+            "$ref": "./examples/KnowledgeSources_List.json"
+          }
+        }
+      }
+    },
+    "/edgeai/knowledgesources/{ksId}": {
+      "get": {
+        "operationId": "KnowledgeSources_Get",
+        "summary": "Get Knowledge Source",
+        "tags": [
+          "KnowledgeSources"
+        ],
+        "parameters": [
+          {
+            "name": "ksId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "description": "Knowledge source identifier."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeSource"
+            }
+          },
+          "404": {
+            "description": "Not Found."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Knowledge Source": {
+            "$ref": "./examples/KnowledgeSources_Get.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "KnowledgeSources_Update",
+        "summary": "Update Knowledge Source",
+        "description": "Partially updates a knowledge source. If connection parameters or auth_type change, MCP validation is re-run.",
+        "tags": [
+          "KnowledgeSources"
+        ],
+        "parameters": [
+          {
+            "name": "ksId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateKnowledgeSourceRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeSource"
+            }
+          },
+          "400": {
+            "description": "Bad Request. MCP revalidation failed or parameters/kind mismatch."
+          },
+          "404": {
+            "description": "Not Found."
+          },
+          "409": {
+            "description": "Conflict. Name conflict."
+          },
+          "422": {
+            "description": "Unprocessable Entity."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Knowledge Source": {
+            "$ref": "./examples/KnowledgeSources_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "KnowledgeSources_Delete",
+        "summary": "Delete Knowledge Source",
+        "tags": [
+          "KnowledgeSources"
+        ],
+        "parameters": [
+          {
+            "name": "ksId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content. Deleted."
+          },
+          "404": {
+            "description": "Not Found."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Knowledge Source": {
+            "$ref": "./examples/KnowledgeSources_Delete.json"
+          }
+        }
+      }
+    },
+    "/edgeai/knowledgesources/batch-delete": {
+      "post": {
+        "operationId": "KnowledgeSources_BatchDelete",
+        "summary": "Batch Delete Knowledge Sources",
+        "tags": [
+          "KnowledgeSources"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "ks_ids"
+              ],
+              "properties": {
+                "ks_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "minItems": 1
+                }
+              }
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "deleted_count": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. No ks_ids provided."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Batch Delete Knowledge Sources": {
+            "$ref": "./examples/KnowledgeSources_BatchDelete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "message": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "RemoteMcpParameters": {
+      "type": "object",
+      "required": [
+        "server_url"
+      ],
+      "properties": {
+        "server_url": {
+          "type": "string",
+          "description": "URL of the MCP server endpoint."
+        },
+        "server_label": {
+          "type": "string"
+        }
+      }
+    },
+    "IndexedSourcesParameters": {
+      "type": "object",
+      "required": [
+        "server_url",
+        "indexed_source_ref"
+      ],
+      "properties": {
+        "server_url": {
+          "type": "string"
+        },
+        "indexed_source_ref": {
+          "type": "string",
+          "description": "The name of the indexed source to connect to."
+        },
+        "server_label": {
+          "type": "string",
+          "default": "indexed-sources-mcp-server"
+        }
+      }
+    },
+    "CreateKnowledgeSourceRequest": {
+      "type": "object",
+      "required": [
+        "name",
+        "kind"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "remote_mcp",
+            "indexed_sources_mcp"
+          ],
+          "x-ms-enum": {
+            "name": "KnowledgeSourceKind",
+            "modelAsString": true
+          }
+        },
+        "auth_type": {
+          "type": "string",
+          "default": "microsoft_entra_id",
+          "enum": [
+            "microsoft_entra_id",
+            "unauthenticated"
+          ],
+          "x-ms-enum": {
+            "name": "AuthType",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "type": "string"
+        },
+        "created_by": {
+          "type": "string"
+        },
+        "remote_mcp_parameters": {
+          "$ref": "#/definitions/RemoteMcpParameters"
+        },
+        "indexed_sources_parameters": {
+          "$ref": "#/definitions/IndexedSourcesParameters"
+        }
+      }
+    },
+    "UpdateKnowledgeSourceRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "description": {
+          "type": "string"
+        },
+        "auth_type": {
+          "type": "string",
+          "enum": [
+            "microsoft_entra_id",
+            "unauthenticated"
+          ],
+          "x-ms-enum": {
+            "name": "AuthType",
+            "modelAsString": true
+          }
+        },
+        "remote_mcp_parameters": {
+          "$ref": "#/definitions/RemoteMcpParameters"
+        },
+        "indexed_sources_parameters": {
+          "$ref": "#/definitions/IndexedSourcesParameters"
+        }
+      }
+    },
+    "KnowledgeSource": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "remote_mcp",
+            "indexed_sources_mcp"
+          ],
+          "x-ms-enum": {
+            "name": "KnowledgeSourceKind",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "type": "string"
+        },
+        "auth_type": {
+          "type": "string",
+          "enum": [
+            "microsoft_entra_id",
+            "unauthenticated"
+          ],
+          "x-ms-enum": {
+            "name": "AuthType",
+            "modelAsString": true
+          }
+        },
+        "remote_mcp_parameters": {
+          "$ref": "#/definitions/RemoteMcpParameters"
+        },
+        "indexed_sources_parameters": {
+          "$ref": "#/definitions/IndexedSourcesParameters"
+        },
+        "validation_status": {
+          "type": "string",
+          "enum": [
+            "unknown",
+            "active",
+            "failed"
+          ],
+          "x-ms-enum": {
+            "name": "ValidationStatus",
+            "modelAsString": true
+          }
+        },
+        "validation_error": {
+          "type": "string"
+        },
+        "validated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "created_by": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "KnowledgeSourceList": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KnowledgeSource"
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "The endpoint URL for the Local Agentic RAG service.",
+        "required": true,
+        "type": "string",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for this operation."
+    }
+  }
+}
