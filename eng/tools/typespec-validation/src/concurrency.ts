@@ -39,6 +39,7 @@ export async function runWithConcurrency<T, R>(
           runNext();
         })
         .catch((error) => {
+          // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
           reject(error);
         });
     }

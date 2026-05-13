@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import pc from "picocolors";
 
 export class TaskRunner {

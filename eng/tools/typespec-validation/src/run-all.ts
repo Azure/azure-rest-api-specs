@@ -165,7 +165,7 @@ async function validateProject(folder: string): Promise<ProjectResult> {
       return {
         name,
         status: "fail",
-        output: output + `\nRule ${rule.name} threw: ${error}`,
+        output: output + `\nRule ${rule.name} threw: ${String(error)}`,
       };
     }
 
