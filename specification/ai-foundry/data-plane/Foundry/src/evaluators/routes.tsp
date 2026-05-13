@@ -196,6 +196,7 @@ const EvaluatorGenerationJobsRequiredPreviews = #{
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client via Operation-Location"
 @tag("EvaluatorGenerationJobs")
+@removed(Versions.v1)
 interface EvaluatorGenerationJobs {
   /**
    * Creates an evaluator generation job. The service generates rubric-based evaluator
