@@ -163,6 +163,14 @@ For each file type, read the corresponding instruction file(s) listed in "Author
 
 **How to fetch previous versions:** Use GitHub MCP `get_file_contents` with `ref: "main"` (or the PR's base branch) to fetch files from the previous API version folder. To discover which prior version folders exist, use `get_file_contents` to list the directory (e.g., `specification/<service>/resource-manager/<ResourceProviderNamespace>/stable/`) on the base branch.
 
+**TypeSpec-required check (TSP-REQUIRED-V1).** While locating the previous version folder, also determine whether the PR is introducing a **new API version directory** (a directory under `specification/**/{resource-manager,data-plane}/**/{stable|preview}/<version>/` that does **not** exist on the base branch). If a new API version directory contains handwritten OpenAPI (`.json`) and **none** of the following compliance signals is present, record a **Blocking** finding for rule `TSP-REQUIRED-V1`:
+
+- A sibling TypeSpec project (a directory containing `main.tsp` and `tspconfig.yaml`) is present in the same service folder.
+- The new swagger file contains the `x-typespec-generated` extension at the top level.
+- The PR also adds or updates `.tsp` source files under the same service folder.
+
+Do **not** flag updates to files inside pre-existing API version directories, even when those files are handwritten OpenAPI. Do **not** flag PRs that only modify example files, `readme.md`, `tspconfig.yaml`, or `.tsp` files. The full rule definition is in [`openapi-review.instructions.md` §2A](../instructions/openapi-review.instructions.md). A deterministic CI check is in development (PR [#42823](https://github.com/Azure/azure-rest-api-specs/pull/42823)); until it ships, this agent rule is the primary enforcement point.
+
 ### Step 4: Systematic Review
 
 For each changed specification file, load the applicable instruction file(s) and work through **every item** in their review checklists. Do not skip sections.

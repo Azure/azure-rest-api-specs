@@ -65,9 +65,11 @@ interface GetSensitivitySettingsResponses {
 }
 
 @@doc(GetSensitivitySettingsResponse.name, "");
-@@doc(GetSensitivitySettingsResponse.properties,
+@@doc(
+  GetSensitivitySettingsResponse.properties,
   "The sensitivity settings properties"
 );
-@@doc(GetSensitivitySettingsResponses.createOrUpdate::parameters.resource,
+@@doc(
+  GetSensitivitySettingsResponses.createOrUpdate::parameters.resource,
   "The data sensitivity settings to update"
 );

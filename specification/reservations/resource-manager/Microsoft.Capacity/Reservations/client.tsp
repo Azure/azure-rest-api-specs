@@ -23,28 +23,36 @@ namespace ReservationsClient;
 @@clientLocation(getAppliedReservationList, "AzureReservationAPIClient", "go");
 @@clientLocation(getCatalog, "AzureReservationAPIClient", "go");
 
-@@clientLocation(Reservations.getAppliedReservationList::parameters.subscriptionId,
+@@clientLocation(
+  Reservations.getAppliedReservationList::parameters.subscriptionId,
   Reservations.getAppliedReservationList
 );
-@@clientLocation(Reservations.getCatalog::parameters.subscriptionId,
+@@clientLocation(
+  Reservations.getCatalog::parameters.subscriptionId,
   Reservations.getCatalog
 );
 
-@@clientLocation(Quota.QuotaPutBaseParam.subscriptionId,
+@@clientLocation(
+  Quota.QuotaPutBaseParam.subscriptionId,
   Quota.CurrentQuotaLimitBases.createOrUpdate
 );
-@@clientLocation(Quota.QuotaPatchBaseParam.subscriptionId,
+@@clientLocation(
+  Quota.QuotaPatchBaseParam.subscriptionId,
   Quota.CurrentQuotaLimitBases.update
 );
-@@clientLocation(Quota.QuotaGetBaseParam.subscriptionId,
+@@clientLocation(
+  Quota.QuotaGetBaseParam.subscriptionId,
   Quota.CurrentQuotaLimitBases.get
 );
-@@clientLocation(Quota.QuotaListBaseParam.subscriptionId,
+@@clientLocation(
+  Quota.QuotaListBaseParam.subscriptionId,
   Quota.CurrentQuotaLimitBases.list
 );
-@@clientLocation(Quota.QuotaRequestGetBaseParam.subscriptionId,
+@@clientLocation(
+  Quota.QuotaRequestGetBaseParam.subscriptionId,
   Quota.QuotaRequestStatus.get
 );
-@@clientLocation(Quota.QuotaRequestListBaseParam.subscriptionId,
+@@clientLocation(
+  Quota.QuotaRequestListBaseParam.subscriptionId,
   Quota.QuotaRequestStatus.list
 );

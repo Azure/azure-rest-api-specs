@@ -137,13 +137,16 @@ interface SecurityConnectorApplication {
   >;
 }
 
-@@doc(Application.name,
+@@doc(
+  Application.name,
   "The security Application key - unique key for the standard application"
 );
 @@doc(Application.properties, "Properties of a security application");
-@@doc(Applications.createOrUpdate::parameters.resource,
+@@doc(
+  Applications.createOrUpdate::parameters.resource,
   "Application over a subscription scope"
 );
-@@doc(SecurityConnectorApplication.createOrUpdate::parameters.resource,
+@@doc(
+  SecurityConnectorApplication.createOrUpdate::parameters.resource,
   "Application over a subscription scope"
 );

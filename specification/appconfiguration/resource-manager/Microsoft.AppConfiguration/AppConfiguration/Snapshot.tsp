@@ -47,6 +47,7 @@ interface Snapshots {
 
 @@doc(Snapshot.name, "The name of the snapshot.");
 @@doc(Snapshot.properties, "All snapshot properties.");
-@@doc(Snapshots.create::parameters.resource,
+@@doc(
+  Snapshots.create::parameters.resource,
   "The parameters for creating a snapshot."
 );

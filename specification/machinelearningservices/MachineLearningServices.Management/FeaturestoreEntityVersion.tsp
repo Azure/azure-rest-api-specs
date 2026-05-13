@@ -99,17 +99,19 @@ interface FeaturestoreEntityVersions {
   @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     FeaturestoreEntityVersion,
-    Response = ArmResourceUpdatedResponse<FeaturestoreEntityVersion> | (ArmResourceCreatedResponse<
-      FeaturestoreEntityVersion,
-      ArmAsyncOperationHeader
-    > &
-      Azure.Core.Foundations.RetryAfterHeader & {
-        /**
-         * Timeout for the client to use when polling the asynchronous operation.
-         */
-        @header("x-ms-async-operation-timeout")
-        timeout: duration;
-      })
+    Response =
+      | ArmResourceUpdatedResponse<FeaturestoreEntityVersion>
+      | (ArmResourceCreatedResponse<
+          FeaturestoreEntityVersion,
+          ArmAsyncOperationHeader
+        > &
+          Azure.Core.Foundations.RetryAfterHeader & {
+            /**
+             * Timeout for the client to use when polling the asynchronous operation.
+             */
+            @header("x-ms-async-operation-timeout")
+            timeout: duration;
+          })
   >;
 
   /**
@@ -119,13 +121,16 @@ interface FeaturestoreEntityVersions {
   @summary("Delete version.")
   delete is ArmResourceDeleteWithoutOkAsync<
     FeaturestoreEntityVersion,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -139,12 +144,15 @@ interface FeaturestoreEntityVersions {
   >;
 }
 
-@@doc(FeaturestoreEntityVersion.name,
+@@doc(
+  FeaturestoreEntityVersion.name,
   "Version identifier. This is case-sensitive."
 );
-@@doc(FeaturestoreEntityVersion.properties,
+@@doc(
+  FeaturestoreEntityVersion.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(FeaturestoreEntityVersions.createOrUpdate::parameters.resource,
+@@doc(
+  FeaturestoreEntityVersions.createOrUpdate::parameters.resource,
   "Version entity to create or update."
 );

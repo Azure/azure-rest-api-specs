@@ -210,15 +210,19 @@ interface ProvisioningServiceDescriptions {
   >;
 }
 
-@@doc(ProvisioningServiceDescription.name,
+@@doc(
+  ProvisioningServiceDescription.name,
   "Name of the provisioning service to retrieve."
 );
-@@doc(ProvisioningServiceDescription.properties,
+@@doc(
+  ProvisioningServiceDescription.properties,
   "Service specific properties for a provisioning service"
 );
-@@doc(ProvisioningServiceDescriptions.createOrUpdate::parameters.resource,
+@@doc(
+  ProvisioningServiceDescriptions.createOrUpdate::parameters.resource,
   "Description of the provisioning service to create or update."
 );
-@@doc(ProvisioningServiceDescriptions.update::parameters.properties,
+@@doc(
+  ProvisioningServiceDescriptions.update::parameters.properties,
   "Updated tag information to set into the provisioning service instance."
 );

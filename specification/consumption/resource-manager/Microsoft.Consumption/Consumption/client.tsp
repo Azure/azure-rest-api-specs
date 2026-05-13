@@ -4,7 +4,8 @@ import "@azure-tools/typespec-client-generator-core";
 using Microsoft.Consumption;
 using Azure.ClientGenerator.Core;
 
-@@clientName(Microsoft.Consumption,
+@@clientName(
+  Microsoft.Consumption,
   "ConsumptionManagementClient",
   "python,javascript"
 );
@@ -24,12 +25,14 @@ using Azure.ClientGenerator.Core;
 
 // Fix USD property name changes (costInUSD -> costInUsd, paygCostInUSD -> paygCostInUsd)
 @@clientName(ModernUsageDetailProperties.costInUSD, "costInUsd", "java");
-@@clientName(ModernUsageDetailProperties.paygCostInUSD,
+@@clientName(
+  ModernUsageDetailProperties.paygCostInUSD,
   "paygCostInUsd",
   "java"
 );
 
-@@clientName(LegacyChargeSummaryProperties.azureMarketplaceCharges,
+@@clientName(
+  LegacyChargeSummaryProperties.azureMarketplaceCharges,
   "marketplaceCharges",
   "go"
 );
