@@ -66,7 +66,6 @@ interface ConnectionPolicies {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     ConnectionPolicy,
-    Response = ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
