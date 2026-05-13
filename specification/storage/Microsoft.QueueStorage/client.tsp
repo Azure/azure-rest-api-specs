@@ -52,7 +52,6 @@ interface QueueClient extends Queue {}
 
 @@clientName(MetadataHeaders.metadata, "metadata", "rust");
 @@access(SentMessage, Access.internal, "rust");
-@@usage(SentMessage, Usage.output, "rust");
 
 @@clientName(SentMessage, "SentMessageInternal", "rust");
 
