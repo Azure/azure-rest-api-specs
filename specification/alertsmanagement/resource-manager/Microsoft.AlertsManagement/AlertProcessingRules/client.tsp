@@ -19,7 +19,6 @@ using Microsoft.AlertsManagement;
   "csharp"
 );
 @@clientName(Operator.Equals, "EqualTo", "csharp");
-@@clientName(Operator.NotEquals, "NotEqualTo", "csharp");
 
 // C# customizations: rename overly generic public types to add resource context for
 // readability and to preserve the original Azure.ResourceManager.AlertsManagement names.
@@ -50,6 +49,10 @@ using Microsoft.AlertsManagement;
 // generator emits ResourceIdentifier compatible with TrackedResourceData.
 @@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(AddActionGroups.actionGroupIds,
+  Azure.Core.armResourceIdentifier[],
   "csharp"
 );
 
