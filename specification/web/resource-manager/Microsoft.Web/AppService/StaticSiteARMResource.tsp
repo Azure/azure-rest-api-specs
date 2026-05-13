@@ -80,10 +80,12 @@ interface StaticSiteARMResources {
   @summary("Creates a new static site in an existing resource group, or updates an existing static site.")
   createOrUpdateStaticSite is ArmResourceCreateOrReplaceAsync<
     StaticSiteARMResource,
-    Response = ArmResourceUpdatedResponse<StaticSiteARMResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StaticSiteARMResource>> & {
-      @bodyRoot
-      _: StaticSiteARMResource;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<StaticSiteARMResource>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StaticSiteARMResource>> & {
+          @bodyRoot
+          _: StaticSiteARMResource;
+        }),
     Error = DefaultErrorResponse
   >;
 
@@ -97,10 +99,12 @@ interface StaticSiteARMResources {
   updateStaticSite is ArmCustomPatchSync<
     StaticSiteARMResource,
     PatchModel = StaticSitePatchResource,
-    Response = ArmResponse<StaticSiteARMResource> | (AcceptedResponse & {
-      @bodyRoot
-      _: StaticSiteARMResource;
-    }),
+    Response =
+      | ArmResponse<StaticSiteARMResource>
+      | (AcceptedResponse & {
+          @bodyRoot
+          _: StaticSiteARMResource;
+        }),
     Error = DefaultErrorResponse
   >;
 
@@ -379,25 +383,32 @@ interface StaticSiteARMResources {
 
 @@doc(StaticSiteARMResource.name, "Name of the static site.");
 @@doc(StaticSiteARMResource.properties, "Core resource properties");
-@@doc(StaticSiteARMResources.createOrUpdateStaticSite::parameters.resource,
+@@doc(
+  StaticSiteARMResources.createOrUpdateStaticSite::parameters.resource,
   "A JSON representation of the staticsite properties. See example."
 );
-@@doc(StaticSiteARMResources.updateStaticSite::parameters.properties,
+@@doc(
+  StaticSiteARMResources.updateStaticSite::parameters.properties,
   "A JSON representation of the staticsite properties. See example."
 );
-@@doc(StaticSiteARMResources.updateStaticSiteUser::parameters.body,
+@@doc(
+  StaticSiteARMResources.updateStaticSiteUser::parameters.body,
   "A JSON representation of the StaticSiteUser properties. See example."
 );
-@@doc(StaticSiteARMResources.createOrUpdateStaticSiteAppSettings::parameters.body,
+@@doc(
+  StaticSiteARMResources.createOrUpdateStaticSiteAppSettings::parameters.body,
   "The dictionary containing the static site app settings to update."
 );
-@@doc(StaticSiteARMResources.createOrUpdateStaticSiteFunctionAppSettings::parameters.body,
+@@doc(
+  StaticSiteARMResources.createOrUpdateStaticSiteFunctionAppSettings::parameters.body,
   "The dictionary containing the static site function app settings to update."
 );
-@@doc(StaticSiteARMResources.createUserRolesInvitationLink::parameters.body,
+@@doc(
+  StaticSiteARMResources.createUserRolesInvitationLink::parameters.body,
   ""
 );
 @@doc(StaticSiteARMResources.resetStaticSiteApiKey::parameters.body, "");
-@@doc(StaticSiteARMResources.createZipDeploymentForStaticSite::parameters.body,
+@@doc(
+  StaticSiteARMResources.createZipDeploymentForStaticSite::parameters.body,
   "A JSON representation of the StaticSiteZipDeployment properties. See example."
 );

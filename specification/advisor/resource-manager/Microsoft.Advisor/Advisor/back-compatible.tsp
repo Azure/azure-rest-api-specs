@@ -9,46 +9,55 @@ using Microsoft.Advisor;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PredictionRequest.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PredictionRequest.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PredictionResponse.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PredictionResponse.properties
 );
 
 @@clientLocation(ResourceRecommendationBases.get, "Recommendations", "!csharp");
-@@clientLocation(ResourceRecommendationBases.patch,
+@@clientLocation(
+  ResourceRecommendationBases.patch,
   "Recommendations",
   "!csharp"
 );
-@@clientName(ResourceRecommendationBases.patch::parameters.properties,
+@@clientName(
+  ResourceRecommendationBases.patch::parameters.properties,
   "trackedProperties",
   "!csharp"
 );
-@@clientLocation(ResourceRecommendationBases.list,
+@@clientLocation(
+  ResourceRecommendationBases.list,
   "Recommendations",
   "!csharp"
 );
-@@clientLocation(ResourceRecommendationBases.listByTenant,
+@@clientLocation(
+  ResourceRecommendationBases.listByTenant,
   "Recommendations",
   "!csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ResourceRecommendationBase.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ResourceRecommendationBase.properties
 );
 
 @@clientLocation(SuppressionContracts.get, "Suppressions", "!csharp");
 @@clientLocation(SuppressionContracts.create, "Suppressions", "!csharp");
-@@clientName(SuppressionContracts.create::parameters.resource,
+@@clientName(
+  SuppressionContracts.create::parameters.resource,
   "suppressionContract",
   "!csharp"
 );
 @@clientLocation(SuppressionContracts.delete, "Suppressions", "!csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SuppressionContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  SuppressionContract.properties
 );
 
 @@clientLocation(MetadataEntities.get, "RecommendationMetadata", "!csharp");
@@ -61,12 +70,14 @@ using Microsoft.Advisor;
 @@clientLocation(AdvisorScoreEntities.list, "AdvisorScores", "!csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AdvisorScoreEntity.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  AdvisorScoreEntity.properties
 );
 
 @@clientLocation(AssessmentResults.get, "Assessments", "!csharp");
 @@clientLocation(AssessmentResults.put, "Assessments", "!csharp");
-@@clientName(AssessmentResults.put::parameters.resource,
+@@clientName(
+  AssessmentResults.put::parameters.resource,
   "assessmentContract",
   "!csharp"
 );
@@ -74,40 +85,48 @@ using Microsoft.Advisor;
 @@clientLocation(AssessmentResults.list, "Assessments", "!csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AssessmentResult.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  AssessmentResult.properties
 );
 
 @@clientLocation(ResiliencyReviews.get, "resiliencyReviews", "!csharp");
 @@clientLocation(ResiliencyReviews.list, "resiliencyReviews", "!csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ResiliencyReview.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ResiliencyReview.properties
 );
 
 @@clientLocation(TriageRecommendations.get, "triageRecommendations", "!csharp");
-@@clientLocation(TriageRecommendations.list,
+@@clientLocation(
+  TriageRecommendations.list,
   "triageRecommendations",
   "!csharp"
 );
-@@clientLocation(TriageRecommendations.approveTriageRecommendation,
+@@clientLocation(
+  TriageRecommendations.approveTriageRecommendation,
   "triageRecommendations",
   "!csharp"
 );
-@@clientLocation(TriageRecommendations.rejectTriageRecommendation,
+@@clientLocation(
+  TriageRecommendations.rejectTriageRecommendation,
   "triageRecommendations",
   "!csharp"
 );
-@@clientName(TriageRecommendations.rejectTriageRecommendation::parameters.body,
+@@clientName(
+  TriageRecommendations.rejectTriageRecommendation::parameters.body,
   "recommendationRejectBody",
   "!csharp"
 );
-@@clientLocation(TriageRecommendations.resetTriageRecommendation,
+@@clientLocation(
+  TriageRecommendations.resetTriageRecommendation,
   "triageRecommendations",
   "!csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TriageRecommendation.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  TriageRecommendation.properties
 );
 
 @@clientLocation(TriageResources.get, "triageResources", "!csharp");
@@ -116,35 +135,42 @@ using Microsoft.Advisor;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(TriageResource.properties);
 
-@@clientLocation(RecommendationsOperationGroup.generate,
+@@clientLocation(
+  RecommendationsOperationGroup.generate,
   "Recommendations",
   "!csharp"
 );
-@@clientLocation(RecommendationsOperationGroup.getGenerateStatus,
+@@clientLocation(
+  RecommendationsOperationGroup.getGenerateStatus,
   "Recommendations",
   "!csharp"
 );
 
 @@clientLocation(SuppressionsOperationGroup.list, "Suppressions", "!csharp");
 
-@@clientLocation(AssessmentTypesOperationGroup.list,
+@@clientLocation(
+  AssessmentTypesOperationGroup.list,
   "AssessmentTypes",
   "!csharp"
 );
 
-@@clientLocation(ConfigurationsOperationGroup.listBySubscription,
+@@clientLocation(
+  ConfigurationsOperationGroup.listBySubscription,
   "Configurations",
   "!csharp"
 );
-@@clientLocation(ConfigurationsOperationGroup.createInSubscription,
+@@clientLocation(
+  ConfigurationsOperationGroup.createInSubscription,
   "Configurations",
   "!csharp"
 );
-@@clientLocation(ConfigurationsOperationGroup.listByResourceGroup,
+@@clientLocation(
+  ConfigurationsOperationGroup.listByResourceGroup,
   "Configurations",
   "!csharp"
 );
-@@clientLocation(ConfigurationsOperationGroup.createInResourceGroup,
+@@clientLocation(
+  ConfigurationsOperationGroup.createInResourceGroup,
   "Configurations",
   "!csharp"
 );
@@ -152,11 +178,13 @@ using Microsoft.Advisor;
 @@clientLocation(WorkloadsOperationGroup.list, "Workloads", "!csharp");
 
 @@clientName(AdvisorScoreEntity, "advisorScoreEntity", "!csharp,!go");
-@@clientName(ResiliencyReviewCollection,
+@@clientName(
+  ResiliencyReviewCollection,
   "resiliencyReviewCollection",
   "!csharp"
 );
-@@clientName(TriageRecommendationCollection,
+@@clientName(
+  TriageRecommendationCollection,
   "triageRecommendationCollection",
   "!csharp"
 );

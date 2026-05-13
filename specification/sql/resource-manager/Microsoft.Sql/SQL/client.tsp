@@ -5,11 +5,13 @@ using Azure.ClientGenerator.Core;
 using Microsoft.Sql;
 
 // TODO: remove this when breaking change is allowed
-@@alternateType(SecurityAlertsPolicyProperties.state,
+@@alternateType(
+  SecurityAlertsPolicyProperties.state,
   SecurityAlertPolicyState,
   "java"
 );
-@@alternateType(ServerProperties.publicNetworkAccess,
+@@alternateType(
+  ServerProperties.publicNetworkAccess,
   ServerNetworkAccessFlag,
   "java"
 );
@@ -18,39 +20,46 @@ using Microsoft.Sql;
 
 @@clientName(SyncAgentLinkedDatabaseProperties.userName, "username", "java");
 @@clientName(SyncMemberProperties.userName, "username", "java");
-@@clientName(SyncGroupProperties.hubDatabaseUserName,
+@@clientName(
+  SyncGroupProperties.hubDatabaseUserName,
   "hubDatabaseUsername",
   "java"
 );
 
 @@usage(ServerDnsAlias, Azure.ClientGenerator.Core.Usage.input, "java");
 
-@@alternateType(CheckNameAvailabilityResourceType,
+@@alternateType(
+  CheckNameAvailabilityResourceType,
   "Microsoft.Sql/servers",
   "java"
 );
 
 @@alternateType(ServerProperties.minimalTlsVersion, string, "java");
 
-@@clientName(DNSRefreshOperationStatus,
+@@clientName(
+  DNSRefreshOperationStatus,
   "DnsRefreshConfigurationPropertiesStatus",
   "java"
 );
 @@clientName(ReplicationModeType, "ReplicationMode", "java");
-@@clientName(UpsertManagedServerOperationStepWithEstimatesAndDurationStatus,
+@@clientName(
+  UpsertManagedServerOperationStepWithEstimatesAndDurationStatus,
   "Status",
   "java"
 );
 
-@@clientName(SqlVulnerabilityAssessmentScanRecord,
+@@clientName(
+  SqlVulnerabilityAssessmentScanRecord,
   "VulnerabilityAssessmentScanRecordForSql",
   "go"
 );
-@@clientName(SqlVulnerabilityAssessmentScanRecordProperties,
+@@clientName(
+  SqlVulnerabilityAssessmentScanRecordProperties,
   "VulnerabilityAssessmentScanRecordForSqlProperties",
   "go"
 );
-@@clientName(SqlVulnerabilityAssessmentScanError,
+@@clientName(
+  SqlVulnerabilityAssessmentScanError,
   "VulnerabilityAssessmentScanForSqlError",
   "go"
 );
@@ -82,74 +91,90 @@ using Microsoft.Sql;
 
 @@alternateType(BlobAuditingPolicyName, "default", "go,javascript");
 @@alternateType(CurrentSensitivityLabelSource, "current", "go,javascript");
-@@alternateType(RecommendedSensitivityLabelSource,
+@@alternateType(
+  RecommendedSensitivityLabelSource,
   "recommended",
   "go,javascript"
 );
-@@alternateType(VulnerabilityAssessmentSystemDatabaseName,
+@@alternateType(
+  VulnerabilityAssessmentSystemDatabaseName,
   "master",
   "go,javascript"
 );
-@@alternateType(CheckNameAvailabilityResourceType,
+@@alternateType(
+  CheckNameAvailabilityResourceType,
   "Microsoft.Sql/servers",
   "go"
 );
-@@clientName(SqlVulnerabilityAssessmentScanRecordListResult,
+@@clientName(
+  SqlVulnerabilityAssessmentScanRecordListResult,
   "VulnerabilityAssessmentScanRecordForSQLListResult ",
   "go"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
-@@Legacy.clientDefaultValue(SensitivityLabelSourceAlias.sensitivityLabelSource,
+@@Legacy.clientDefaultValue(
+  SensitivityLabelSourceAlias.sensitivityLabelSource,
   "current",
   "python"
 );
-@@alternateType(SensitivityLabelSourceAlias.sensitivityLabelSource,
+@@alternateType(
+  SensitivityLabelSourceAlias.sensitivityLabelSource,
   "current",
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
-@@Legacy.clientDefaultValue(RecommendedSensitivityLabelSourceAlias.sensitivityLabelSource,
+@@Legacy.clientDefaultValue(
+  RecommendedSensitivityLabelSourceAlias.sensitivityLabelSource,
   "recommended",
   "python"
 );
-@@alternateType(RecommendedSensitivityLabelSourceAlias.sensitivityLabelSource,
+@@alternateType(
+  RecommendedSensitivityLabelSourceAlias.sensitivityLabelSource,
   "recommended",
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
-@@Legacy.clientDefaultValue(ServerBlobAuditingPolicyNameAlias.blobAuditingPolicyName,
+@@Legacy.clientDefaultValue(
+  ServerBlobAuditingPolicyNameAlias.blobAuditingPolicyName,
   "default",
   "python"
 );
-@@alternateType(ServerBlobAuditingPolicyNameAlias.blobAuditingPolicyName,
-  "default",
-  "python"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
-@@Legacy.clientDefaultValue(DatabaseBlobAuditingPolicyNameAlias.blobAuditingPolicyName,
-  "default",
-  "python"
-);
-@@alternateType(DatabaseBlobAuditingPolicyNameAlias.blobAuditingPolicyName,
+@@alternateType(
+  ServerBlobAuditingPolicyNameAlias.blobAuditingPolicyName,
   "default",
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
-@@Legacy.clientDefaultValue(ExtendedDatabaseBlobAuditingPolicyNameAlias.blobAuditingPolicyName,
+@@Legacy.clientDefaultValue(
+  DatabaseBlobAuditingPolicyNameAlias.blobAuditingPolicyName,
   "default",
   "python"
 );
-@@alternateType(ExtendedDatabaseBlobAuditingPolicyNameAlias.blobAuditingPolicyName,
+@@alternateType(
+  DatabaseBlobAuditingPolicyNameAlias.blobAuditingPolicyName,
   "default",
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
-@@Legacy.clientDefaultValue(ExtendedServerBlobAuditingPolicyNameAlias.blobAuditingPolicyName,
+@@Legacy.clientDefaultValue(
+  ExtendedDatabaseBlobAuditingPolicyNameAlias.blobAuditingPolicyName,
   "default",
   "python"
 );
-@@alternateType(ExtendedServerBlobAuditingPolicyNameAlias.blobAuditingPolicyName,
+@@alternateType(
+  ExtendedDatabaseBlobAuditingPolicyNameAlias.blobAuditingPolicyName,
+  "default",
+  "python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
+@@Legacy.clientDefaultValue(
+  ExtendedServerBlobAuditingPolicyNameAlias.blobAuditingPolicyName,
+  "default",
+  "python"
+);
+@@alternateType(
+  ExtendedServerBlobAuditingPolicyNameAlias.blobAuditingPolicyName,
   "default",
   "python"
 );

@@ -2,96 +2,126 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 //Models
-@@usage(Microsoft.EventGrid.SystemEvents.ContainerRegistryImagePushedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ContainerRegistryImagePushedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ContainerRegistryImagePushedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ContainerRegistryImagePushedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ContainerRegistryImageDeletedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ContainerRegistryImageDeletedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ContainerRegistryImageDeletedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ContainerRegistryImageDeletedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ContainerRegistryChartPushedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ContainerRegistryChartPushedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ContainerRegistryChartPushedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ContainerRegistryChartPushedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ContainerRegistryChartDeletedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ContainerRegistryChartDeletedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ContainerRegistryChartDeletedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ContainerRegistryChartDeletedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ContainerRegistryEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ContainerRegistryEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ContainerRegistryEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ContainerRegistryEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ContainerRegistryArtifactEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ContainerRegistryArtifactEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ContainerRegistryArtifactEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ContainerRegistryArtifactEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ContainerRegistryEventTarget,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ContainerRegistryEventTarget,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ContainerRegistryEventTarget,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ContainerRegistryEventTarget,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ContainerRegistryArtifactEventTarget,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ContainerRegistryArtifactEventTarget,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ContainerRegistryArtifactEventTarget,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ContainerRegistryArtifactEventTarget,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ContainerRegistryEventRequest,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ContainerRegistryEventRequest,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ContainerRegistryEventRequest,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ContainerRegistryEventRequest,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ContainerRegistryEventActor,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ContainerRegistryEventActor,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ContainerRegistryEventActor,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ContainerRegistryEventActor,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ContainerRegistryEventSource,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ContainerRegistryEventSource,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ContainerRegistryEventSource,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ContainerRegistryEventSource,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ContainerRegistryEventConnectedRegistry,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ContainerRegistryEventConnectedRegistry,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ContainerRegistryEventConnectedRegistry,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ContainerRegistryEventConnectedRegistry,
   Access.public
 );
 //Enums
 
 //useSystemTextJsonConverter decorators
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ContainerRegistryImagePushedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.ContainerRegistryImagePushedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ContainerRegistryImageDeletedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.ContainerRegistryImageDeletedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ContainerRegistryChartPushedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.ContainerRegistryChartPushedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ContainerRegistryChartDeletedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.ContainerRegistryChartDeletedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ContainerRegistryEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.ContainerRegistryEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ContainerRegistryArtifactEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.ContainerRegistryArtifactEventData,
   "csharp"
 );

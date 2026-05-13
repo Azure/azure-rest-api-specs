@@ -114,11 +114,13 @@ model VolumeProperties {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  snapshotId?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/snapshots";
-    }
-  ]> | null;
+  snapshotId?:
+    | Azure.Core.armResourceIdentifier<[
+        {
+          type: "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/snapshots";
+        }
+      ]>
+    | null;
 
   /**
    * If enabled (true) the snapshot the volume was created from will be automatically deleted after the volume create operation has finished.  Defaults to false
@@ -130,11 +132,13 @@ model VolumeProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  backupId?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.NetApp/netAppAccounts/backupVaults/backups";
-    }
-  ]> | null;
+  backupId?:
+    | Azure.Core.armResourceIdentifier<[
+        {
+          type: "Microsoft.NetApp/netAppAccounts/backupVaults/backups";
+        }
+      ]>
+    | null;
 
   /**
    * Unique Baremetal Tenant Identifier.
@@ -2289,7 +2293,8 @@ union ActualRansomwareProtectionState {
   Paused: "Paused",
 }
 
-@@visibility(Azure.ResourceManager.AvailabilityZonesProperty.zones,
+@@visibility(
+  Azure.ResourceManager.AvailabilityZonesProperty.zones,
   Lifecycle.Read,
   Lifecycle.Create
 );
@@ -2308,11 +2313,14 @@ interface Volumes {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Volume,
-    Response = ArmResourceUpdatedResponse<Volume> | ArmResourceCreatedResponse<
-      Volume,
-      ArmAsyncOperationHeader<FinalResult = Volume> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<Volume>
+      | ArmResourceCreatedResponse<
+          Volume,
+          ArmAsyncOperationHeader<FinalResult = Volume> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -2688,37 +2696,48 @@ interface Volumes {
 @@minLength(Volume.name, 1);
 @@doc(Volume.name, "The name of the volume");
 @@doc(Volume.properties, "Volume properties");
-@@doc(Volumes.createOrUpdate::parameters.resource,
+@@doc(
+  Volumes.createOrUpdate::parameters.resource,
   "Volume object supplied in the body of the operation."
 );
-@@doc(Volumes.update::parameters.properties,
+@@doc(
+  Volumes.update::parameters.properties,
   "Volume object supplied in the body of the operation."
 );
-@@doc(Volumes.revert::parameters.body,
+@@doc(
+  Volumes.revert::parameters.body,
   "Object for snapshot to revert supplied in the body of the operation."
 );
-@@doc(Volumes.breakFileLocks::parameters.body,
+@@doc(
+  Volumes.breakFileLocks::parameters.body,
   "Optional body to provide the ability to clear file locks with selected options"
 );
-@@doc(Volumes.listGetGroupIdListForLdapUser::parameters.body,
+@@doc(
+  Volumes.listGetGroupIdListForLdapUser::parameters.body,
   "Returns group Id list for a specific LDAP user"
 );
-@@doc(Volumes.breakReplication::parameters.body,
+@@doc(
+  Volumes.breakReplication::parameters.body,
   "Optional body to force break the replication."
 );
-@@doc(Volumes.reestablishReplication::parameters.body,
+@@doc(
+  Volumes.reestablishReplication::parameters.body,
   "body for the id of the source volume."
 );
-@@doc(Volumes.authorizeReplication::parameters.body,
+@@doc(
+  Volumes.authorizeReplication::parameters.body,
   "Authorize request object supplied in the body of the operation."
 );
-@@doc(Volumes.peerExternalCluster::parameters.body,
+@@doc(
+  Volumes.peerExternalCluster::parameters.body,
   "Cluster peer request object supplied in the body of the operation."
 );
-@@doc(Volumes.poolChange::parameters.body,
+@@doc(
+  Volumes.poolChange::parameters.body,
   "Move volume to the pool supplied in the body of the operation."
 );
 @@doc(Volumes.relocate::parameters.body, "Relocate volume request");
-@@doc(Volumes.migrateBackups::parameters.body,
+@@doc(
+  Volumes.migrateBackups::parameters.body,
   "Migrate backups under volume payload supplied in the body of the operation."
 );

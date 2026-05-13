@@ -50,6 +50,7 @@ interface JobCredentials {
 
 @@doc(JobCredential.name, "The name of the credential.");
 @@doc(JobCredential.properties, "Resource properties.");
-@@doc(JobCredentials.createOrUpdate::parameters.resource,
+@@doc(
+  JobCredentials.createOrUpdate::parameters.resource,
   "The requested job credential state."
 );

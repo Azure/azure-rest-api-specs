@@ -46,8 +46,10 @@ interface CassandraTableGetResultsOperationGroup {
   createUpdateCassandraTable is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     CassandraTableGetResults,
     Request = CassandraTableCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<CassandraTableGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = CassandraTableGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<CassandraTableGetResults>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = CassandraTableGetResults> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -55,7 +57,9 @@ interface CassandraTableGetResultsOperationGroup {
    */
   deleteCassandraTable is ArmResourceDeleteWithoutOkAsync<
     CassandraTableGetResults,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | NoContentResponse
+    Response =
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+      | NoContentResponse
   >;
 
   /**
@@ -68,13 +72,16 @@ interface CassandraTableGetResultsOperationGroup {
 }
 
 @@doc(CassandraTableGetResults.name, "Cosmos DB table name.");
-@@doc(CassandraTableGetResults.properties,
+@@doc(
+  CassandraTableGetResults.properties,
   "The properties of an Azure Cosmos DB Cassandra table"
 );
-@@doc(CassandraTableGetResultsOperationGroup.createUpdateCassandraTable::parameters.resource,
+@@doc(
+  CassandraTableGetResultsOperationGroup.createUpdateCassandraTable::parameters.resource,
   "The parameters to provide for the current Cassandra Table."
 );
-@@visibility(CassandraTableGetResults.location,
+@@visibility(
+  CassandraTableGetResults.location,
   Lifecycle.Read,
   Lifecycle.Create,
   Lifecycle.Update

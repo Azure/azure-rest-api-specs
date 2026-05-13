@@ -47,9 +47,11 @@ using Microsoft.DevHub;
 @@clientName(AdooAuthResponse, "ADOOAuthResponse");
 @@clientName(PrLinkResponse, "prLinkResponse");
 
-@@visibility(Azure.ResourceManager.Foundations.OperationListResult.nextLink,
+@@visibility(
+  Azure.ResourceManager.Foundations.OperationListResult.nextLink,
   Lifecycle.Read
 );
-@@visibility(Azure.ResourceManager.Foundations.OperationListResult.value,
+@@visibility(
+  Azure.ResourceManager.Foundations.OperationListResult.value,
   Lifecycle.Read
 );
