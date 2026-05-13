@@ -205,10 +205,12 @@ interface DeviceUpdateOperationGroup {
       @bodyRoot
       updateToImport: ImportUpdateInput;
     },
-    Update | {
-      @statusCode _: 202;
-      ...Foundations.LongRunningStatusLocation;
-    }
+
+      | Update
+      | {
+          @statusCode _: 202;
+          ...Foundations.LongRunningStatusLocation;
+        }
   >;
 
   /**

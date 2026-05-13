@@ -6,7 +6,8 @@ using DeviceUpdateClient;
 
 @@clientName(LogCollection.operationId, "logCollectionId");
 
-@@clientName(LogCollectionOperationDetailedStatus.operationId,
+@@clientName(
+  LogCollectionOperationDetailedStatus.operationId,
   "logCollectionId"
 );
 
@@ -19,120 +20,157 @@ using DeviceUpdateClient;
 @@clientLocation(DeviceUpdateOperationGroup.listVersions, "DeviceUpdate");
 @@clientLocation(DeviceUpdateOperationGroup.listFiles, "DeviceUpdate");
 @@clientLocation(DeviceUpdateOperationGroup.getFile, "DeviceUpdate");
-@@clientLocation(DeviceUpdateOperationGroup.listOperationStatuses,
+@@clientLocation(
+  DeviceUpdateOperationGroup.listOperationStatuses,
   "DeviceUpdate"
 );
 @@clientLocation(DeviceUpdateOperationGroup.getOperationStatus, "DeviceUpdate");
 
-@@clientLocation(DeviceManagementOperationGroup.listDeviceClasses,
+@@clientLocation(
+  DeviceManagementOperationGroup.listDeviceClasses,
   "DeviceManagement"
 );
-@@clientLocation(DeviceManagementOperationGroup.getDeviceClass,
+@@clientLocation(
+  DeviceManagementOperationGroup.getDeviceClass,
   "DeviceManagement"
 );
-@@clientLocation(DeviceManagementOperationGroup.updateDeviceClass,
+@@clientLocation(
+  DeviceManagementOperationGroup.updateDeviceClass,
   "DeviceManagement"
 );
-@@clientLocation(DeviceManagementOperationGroup.deleteDeviceClass,
+@@clientLocation(
+  DeviceManagementOperationGroup.deleteDeviceClass,
   "DeviceManagement"
 );
-@@clientLocation(DeviceManagementOperationGroup.listInstallableUpdatesForDeviceClass,
+@@clientLocation(
+  DeviceManagementOperationGroup.listInstallableUpdatesForDeviceClass,
   "DeviceManagement"
 );
-@@clientLocation(DeviceManagementOperationGroup.listDevices,
+@@clientLocation(
+  DeviceManagementOperationGroup.listDevices,
   "DeviceManagement"
 );
-@@clientLocation(DeviceManagementOperationGroup.importDevices,
+@@clientLocation(
+  DeviceManagementOperationGroup.importDevices,
   "DeviceManagement"
 );
 @@clientLocation(DeviceManagementOperationGroup.getDevice, "DeviceManagement");
-@@clientLocation(DeviceManagementOperationGroup.getDeviceModule,
+@@clientLocation(
+  DeviceManagementOperationGroup.getDeviceModule,
   "DeviceManagement"
 );
-@@clientLocation(DeviceManagementOperationGroup.getUpdateCompliance,
+@@clientLocation(
+  DeviceManagementOperationGroup.getUpdateCompliance,
   "DeviceManagement"
 );
 @@clientLocation(DeviceManagementOperationGroup.listGroups, "DeviceManagement");
 @@clientLocation(DeviceManagementOperationGroup.getGroup, "DeviceManagement");
-@@clientLocation(DeviceManagementOperationGroup.deleteGroup,
+@@clientLocation(
+  DeviceManagementOperationGroup.deleteGroup,
   "DeviceManagement"
 );
-@@clientLocation(DeviceManagementOperationGroup.getUpdateComplianceForGroup,
+@@clientLocation(
+  DeviceManagementOperationGroup.getUpdateComplianceForGroup,
   "DeviceManagement"
 );
-@@clientLocation(DeviceManagementOperationGroup.listBestUpdatesForGroup,
+@@clientLocation(
+  DeviceManagementOperationGroup.listBestUpdatesForGroup,
   "DeviceManagement"
 );
-@@clientLocation(DeviceManagementOperationGroup.listDeploymentsForGroup,
+@@clientLocation(
+  DeviceManagementOperationGroup.listDeploymentsForGroup,
   "DeviceManagement"
 );
-@@clientLocation(DeviceManagementOperationGroup.getDeployment,
+@@clientLocation(
+  DeviceManagementOperationGroup.getDeployment,
   "DeviceManagement"
 );
-@@clientLocation(DeviceManagementOperationGroup.createOrUpdateDeployment,
+@@clientLocation(
+  DeviceManagementOperationGroup.createOrUpdateDeployment,
   "DeviceManagement"
 );
-@@clientLocation(DeploymentManagementOperationGroup.deleteDeployment,
+@@clientLocation(
+  DeploymentManagementOperationGroup.deleteDeployment,
   "DeviceManagement"
 );
-@@clientLocation(DeviceManagementOperationGroup.getDeploymentStatus,
+@@clientLocation(
+  DeviceManagementOperationGroup.getDeploymentStatus,
   "DeviceManagement"
 );
-@@clientLocation(DeviceManagementOperationGroup.listDeviceClassSubgroupsForGroup,
+@@clientLocation(
+  DeviceManagementOperationGroup.listDeviceClassSubgroupsForGroup,
   "DeviceManagement"
 );
-@@clientLocation(DeviceManagementOperationGroup.getDeviceClassSubgroup,
+@@clientLocation(
+  DeviceManagementOperationGroup.getDeviceClassSubgroup,
   "DeviceManagement"
 );
-@@clientLocation(DeviceManagementOperationGroup.deleteDeviceClassSubgroup,
+@@clientLocation(
+  DeviceManagementOperationGroup.deleteDeviceClassSubgroup,
   "DeviceManagement"
 );
-@@clientLocation(DeviceManagementOperationGroup.getDeviceClassSubgroupUpdateCompliance,
+@@clientLocation(
+  DeviceManagementOperationGroup.getDeviceClassSubgroupUpdateCompliance,
   "DeviceManagement"
 );
-@@clientLocation(DeviceManagementOperationGroup.getBestUpdatesForDeviceClassSubgroup,
+@@clientLocation(
+  DeviceManagementOperationGroup.getBestUpdatesForDeviceClassSubgroup,
   "DeviceManagement"
 );
-@@clientLocation(DeviceManagementOperationGroup.listDeploymentsForDeviceClassSubgroup,
+@@clientLocation(
+  DeviceManagementOperationGroup.listDeploymentsForDeviceClassSubgroup,
   "DeviceManagement"
 );
-@@clientLocation(DeviceManagementOperationGroup.getDeploymentForDeviceClassSubgroup,
+@@clientLocation(
+  DeviceManagementOperationGroup.getDeploymentForDeviceClassSubgroup,
   "DeviceManagement"
 );
-@@clientLocation(DeploymentManagementOperationGroup.deleteDeploymentForDeviceClassSubgroup,
+@@clientLocation(
+  DeploymentManagementOperationGroup.deleteDeploymentForDeviceClassSubgroup,
   "DeviceManagement"
 );
-@@clientLocation(DeviceManagementOperationGroup.stopDeployment,
+@@clientLocation(
+  DeviceManagementOperationGroup.stopDeployment,
   "DeviceManagement"
 );
-@@clientLocation(DeviceManagementOperationGroup.retryDeployment,
+@@clientLocation(
+  DeviceManagementOperationGroup.retryDeployment,
   "DeviceManagement"
 );
-@@clientLocation(DeviceManagementOperationGroup.getDeviceClassSubgroupDeploymentStatus,
+@@clientLocation(
+  DeviceManagementOperationGroup.getDeviceClassSubgroupDeploymentStatus,
   "DeviceManagement"
 );
-@@clientLocation(DeviceManagementOperationGroup.listDeviceStatesForDeviceClassSubgroupDeployment,
+@@clientLocation(
+  DeviceManagementOperationGroup.listDeviceStatesForDeviceClassSubgroupDeployment,
   "DeviceManagement"
 );
-@@clientLocation(DeviceManagementOperationGroup.getOperationStatus,
+@@clientLocation(
+  DeviceManagementOperationGroup.getOperationStatus,
   "DeviceManagement"
 );
-@@clientLocation(DeviceManagementOperationGroup.listOperationStatuses,
+@@clientLocation(
+  DeviceManagementOperationGroup.listOperationStatuses,
   "DeviceManagement"
 );
-@@clientLocation(DeviceManagementOperationGroup.startLogCollection,
+@@clientLocation(
+  DeviceManagementOperationGroup.startLogCollection,
   "DeviceManagement"
 );
-@@clientLocation(DeviceManagementOperationGroup.getLogCollection,
+@@clientLocation(
+  DeviceManagementOperationGroup.getLogCollection,
   "DeviceManagement"
 );
-@@clientLocation(DeviceManagementOperationGroup.listLogCollections,
+@@clientLocation(
+  DeviceManagementOperationGroup.listLogCollections,
   "DeviceManagement"
 );
-@@clientLocation(DeviceManagementOperationGroup.getLogCollectionDetailedStatus,
+@@clientLocation(
+  DeviceManagementOperationGroup.getLogCollectionDetailedStatus,
   "DeviceManagement"
 );
-@@clientLocation(DeviceManagementOperationGroup.listHealthOfDevices,
+@@clientLocation(
+  DeviceManagementOperationGroup.listHealthOfDevices,
   "DeviceManagement"
 );
 
@@ -145,7 +183,8 @@ model DeviceUpdateClientOptions {
   instanceId: string;
 }
 
-@@clientInitialization(DeviceUpdateClient,
+@@clientInitialization(
+  DeviceUpdateClient,
   {
     parameters: DeviceUpdateClientOptions,
   }
