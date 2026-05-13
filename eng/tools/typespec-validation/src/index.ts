@@ -1,6 +1,7 @@
 import { stat } from "node:fs/promises";
 import { ParseArgsConfig, parseArgs } from "node:util";
 import { Suppression } from "suppressions";
+import { runAll, type ShardConfig } from "./run-all.js";
 import { CompileRule } from "./rules/compile.js";
 import { EmitAutorestRule } from "./rules/emit-autorest.js";
 import { FlavorAzureRule } from "./rules/flavor-azure.js";
@@ -25,8 +26,31 @@ export async function main() {
       type: "string",
       short: "c",
     },
+    all: {
+      type: "boolean",
+      default: false,
+    },
+    shard: {
+      type: "string",
+    },
+    "git-clean": {
+      type: "boolean",
+      default: false,
+    },
   };
   const parsedArgs = parseArgs({ args, options, allowPositionals: true } as ParseArgsConfig);
+
+  if (parsedArgs.values.all) {
+    context = { ...context, checkingAllSpecs: true };
+    const specDir = parsedArgs.positionals[0] ?? "specification";
+    const shard = parsedArgs.values.shard !== undefined ? parseShard(parsedArgs.values.shard as string) : undefined;
+    await runAll(specDir, {
+      shard,
+      gitClean: Boolean(parsedArgs.values["git-clean"]),
+    });
+    return;
+  }
+
   const folder = parsedArgs.positionals[0];
 
   if (parsedArgs.positionals[1]) {
@@ -86,4 +110,20 @@ export async function main() {
   if (!success) {
     process.exitCode = 1;
   }
+}
+
+/** Parse `--shard=<index>/<count>` (1-based, like Jest/Vitest/Playwright) */
+function parseShard(value: string): ShardConfig {
+  const match = value.match(/^(\d+)\/(\d+)$/);
+  if (!match) {
+    console.error(`Invalid --shard format: "${value}". Expected <index>/<count> (e.g. 1/3)`);
+    process.exit(1);
+  }
+  const index = Number(match[1]);
+  const count = Number(match[2]);
+  if (index < 1 || index > count) {
+    console.error(`Invalid --shard: index ${index} must be between 1 and ${count}`);
+    process.exit(1);
+  }
+  return { index, count };
 }
