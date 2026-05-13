@@ -23,3 +23,4 @@ import "./src/red-teams/routes.tsp";
 import "./src/schedules/routes.tsp";
 import "./src/skills/routes.tsp";
 import "./src/toolsets/routes.tsp";
+import "./src/jobs/routes.tsp";

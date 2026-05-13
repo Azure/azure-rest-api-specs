@@ -75,3 +75,12 @@ interface Toolsets {}
 @@clientLocation(Azure.AI.Projects.Toolsets.getToolset, Toolsets);
 @@clientLocation(Azure.AI.Projects.Toolsets.listToolsets, Toolsets);
 @@clientLocation(Azure.AI.Projects.Toolsets.deleteToolset, Toolsets);
+
+namespace Training {
+  interface Jobs {}
+}
+@@clientLocation(Azure.AI.Projects.Jobs.list, Training.Jobs);
+@@clientLocation(Azure.AI.Projects.Jobs.get, Training.Jobs);
+@@clientLocation(Azure.AI.Projects.Jobs.createOrUpdate, Training.Jobs);
+@@clientLocation(Azure.AI.Projects.Jobs.beginDelete, Training.Jobs);
+@@clientLocation(Azure.AI.Projects.Jobs.beginCancel, Training.Jobs);
