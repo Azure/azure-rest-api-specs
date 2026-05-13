@@ -94,7 +94,6 @@ using Microsoft.BillingBenefits;
 @@clientName(Price, "BillingBenefitsPrice", "csharp");
 @@clientName(PaymentDetail, "SavingsPlanOrderPaymentDetail", "csharp");
 @@clientName(PaymentStatus, "BillingBenefitsPaymentStatus", "csharp");
-@@clientName(SavingsPlanUpdateRequest, "SavingsPlanUpdateContent", "csharp");
 @@clientName(SavingsPlanUpdateValidateRequest,
   "SavingsPlanUpdateValidateContent",
   "csharp"
@@ -107,7 +106,6 @@ using Microsoft.BillingBenefits;
   "ReservationOrderAliasContent",
   "csharp"
 );
-@@clientName(DiscountPatchRequest, "DiscountPatchContent", "csharp");
 @@clientName(SavingsPlanUpdateRequestProperties,
   "BillingBenefitsSavingsPlanPatchProperties",
   "csharp"
