@@ -165,7 +165,7 @@ union State {
  * The state of the Recommendation applicable from v2026-02-01-preview.
  */
 @added(Versions.v2026_02_01_preview)
-union NewState {
+union RecommendationStatus {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   New: "New",
@@ -570,7 +570,7 @@ model RecommendationProperties {
    * The state of the Recommendation
    */
   @added(Versions.v2026_02_01_preview)
-  recommendationStatus?: NewState;
+  recommendationStatus?: RecommendationStatus;
 
   /**
    * The type of recommendation completion, which is either MarkedByUser or SystemVerified
@@ -750,7 +750,7 @@ model RecommendationStatePropertiesPayload {
   /**
    * The state of the recommendation.
    */
-  recommendationStatus?: NewState;
+  recommendationStatus?: RecommendationStatus;
 
   /**
    * The reason the state of the Recommendation was changed.
