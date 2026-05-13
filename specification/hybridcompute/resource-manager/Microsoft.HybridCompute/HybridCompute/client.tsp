@@ -2,6 +2,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
+using Azure.ClientGenerator.Core.Legacy;
 using Microsoft.HybridCompute;
 
 @@clientName(Microsoft.HybridCompute,
@@ -36,11 +37,15 @@ union CustomPublicNetworkAccessType {
 }
 @@alternateType(PublicNetworkAccessType,
   CustomPublicNetworkAccessType,
-  "javascript,python,go"
+  "javascript,python,go,csharp"
 );
 @@clientName(CustomPublicNetworkAccessType,
   "PublicNetworkAccessType",
   "javascript,python,go"
+);
+@@clientName(CustomPublicNetworkAccessType,
+  "HybridComputePublicNetworkAccessType",
+  "csharp"
 );
 
 @@clientName(VMGuestPatchClassification_Windows,
@@ -142,3 +147,81 @@ union CustomPublicNetworkAccessType {
 @@clientName(Machines.networkProfileGet, "GetNetworkProfile", "csharp");
 @@clientName(PrivateEndpointConnection, "HybridComputePrivateEndpointConnection", "csharp");
 @@clientName(PrivateLinkResource, "HybridComputePrivateLinkResource", "csharp");
+
+// ArcKindEnum backward-compat value casing (old SDK used PascalCase for acronyms)
+@@clientName(ArcKindEnum.AVS, "Avs", "csharp");
+@@clientName(ArcKindEnum.HCI, "Hci", "csharp");
+@@clientName(ArcKindEnum.SCVMM, "ScVmm", "csharp");
+@@clientName(ArcKindEnum.EPS, "Eps", "csharp");
+@@clientName(ArcKindEnum.GCP, "Gcp", "csharp");
+@@clientName(ArcKindEnum.AWS, "Aws", "csharp");
+
+// Type rename: MachineInstallPatchesParameters -> MachineInstallPatchesContent
+@@clientName(MachineInstallPatchesParameters, "MachineInstallPatchesContent", "csharp");
+
+// MachineProperties OS property renames (old AutoRest SDK used all-caps prefix)
+@@clientName(MachineProperties.adFqdn, "ADFqdn", "csharp");
+@@clientName(MachineProperties.mssqlDiscovered, "MSSqlDiscovered", "csharp");
+@@clientName(MachineProperties.osEdition, "OSEdition", "csharp");
+@@clientName(MachineProperties.osName, "OSName", "csharp");
+@@clientName(MachineProperties.osSku, "OSSku", "csharp");
+@@clientName(MachineProperties.osType, "OSType", "csharp");
+@@clientName(MachineProperties.osVersion, "OSVersion", "csharp");
+
+// AgentUpgrade property renames
+@@clientName(AgentUpgrade.enableAutomaticUpgrade, "IsAutomaticUpgradeEnabled", "csharp");
+@@clientName(AgentUpgrade.lastAttemptTimestamp, "LastAttemptedOn", "csharp");
+
+// PatchSettings.enableHotpatching -> IsHotpatchingEnabled (shared by Windows and Linux)
+@@clientName(PatchSettings.enableHotpatching, "IsHotpatchingEnabled", "csharp");
+
+// ConfigurationExtension.type -> ConfigurationExtensionType
+@@clientName(ConfigurationExtension.type, "ConfigurationExtensionType", "csharp");
+
+// ConnectionDetail.privateIpAddress -> PrivateIPAddress
+@@clientName(ConnectionDetail.privateIpAddress, "PrivateIPAddress", "csharp");
+
+// IpAddress.ipAddressVersion -> IPAddressVersion
+@@clientName(IpAddress.ipAddressVersion, "IPAddressVersion", "csharp");
+
+// NetworkInterface.ipAddresses -> IPAddresses
+@@clientName(NetworkInterface.ipAddresses, "IPAddresses", "csharp");
+
+// LicenseStatus enum member renames
+@@clientName(LicenseStatus.OOBGrace, "OobGrace", "csharp");
+@@clientName(LicenseStatus.OOTGrace, "OotGrace", "csharp");
+
+// EsuServerType.Datacenter -> DataCenter
+@@clientName(EsuServerType.Datacenter, "DataCenter", "csharp");
+
+// LicenseProfileProductType enum member rename
+@@clientName(LicenseProfileProductType.WindowsIoTEnterprise, "WindowsIotEnterprise", "csharp");
+
+// PatchServiceUsed enum member renames
+@@clientName(PatchServiceUsed.APT, "Apt", "csharp");
+@@clientName(PatchServiceUsed.WU_WSUS, "WUWsus", "csharp");
+@@clientName(PatchServiceUsed.YUM, "Yum", "csharp");
+
+// PrivateEndpointConnectionProperties.privateLinkServiceConnectionState -> ConnectionState
+@@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState, "ConnectionState", "csharp");
+
+// MachineAssessPatchesResult property renames
+@@clientName(MachineAssessPatchesResult.rebootPending, "IsRebootPending", "csharp");
+@@clientName(MachineAssessPatchesResult.osType, "OSType", "csharp");
+@@clientName(MachineInstallPatchesResult.osType, "OSType", "csharp");
+
+// MachineExtension type property renames (old AutoRest SDK used model-qualified names)
+@@clientName(MachineExtensionProperties.type, "MachineExtensionPropertiesType", "csharp");
+@@clientName(MachineExtensionInstanceView.type, "MachineExtensionInstanceViewType", "csharp");
+@@clientName(MachineExtensionUpdateProperties.type, "MachineExtensionUpdatePropertiesType", "csharp");
+
+// LicenseProfileMachineInstanceView.softwareAssuranceCustomer -> IsSoftwareAssuranceCustomer
+@@clientName(LicenseProfileMachineInstanceViewSoftwareAssurance.softwareAssuranceCustomer, "IsSoftwareAssuranceCustomer", "csharp");
+
+// uuid alternate types: old AutoRest SDK generated Guid? for uuid-formatted fields
+@@alternateType(LicenseProperties.tenantId, Azure.Core.uuid, "csharp");
+@@alternateType(MachineProperties.vmId, Azure.Core.uuid, "csharp");
+@@alternateType(MachineProperties.vmUuid, Azure.Core.uuid, "csharp");
+
+// armResourceIdentifier alternate type: old AutoRest SDK generated ResourceIdentifier for gatewayId
+@@alternateType(GatewayProperties.gatewayId, Azure.Core.armResourceIdentifier, "csharp");
