@@ -124,7 +124,7 @@ async function validateProject(folder: string): Promise<ProjectResult> {
   try {
     const { stdout, stderr } = await execFileAsync(
       process.execPath,
-      ["--no-warnings", resolve(import.meta.dirname, "../cmd/tsv.js"), folder, context],
+      ["--no-warnings", resolve(import.meta.dirname, "../../cmd/tsv.js"), folder, context],
       { maxBuffer: 64 * 1024 * 1024 },
     );
     const output = (stdout + stderr).trim();
