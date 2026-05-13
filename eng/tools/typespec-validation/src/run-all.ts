@@ -49,7 +49,8 @@ export async function runAll(specDir: string, options: RunAllOptions = {}): Prom
     projectDirs.map((dir) => pc.bold(relative(absoluteSpecDir, dir))).join("\n"),
   );
 
-  const concurrency = options.gitClean ? 1 : CONCURRENCY;
+  const concurrency = CONCURRENCY;
+  console.log(`Running with concurrency: ${pc.yellow(String(concurrency))}`);
 
   const results = await runWithConcurrency(projectDirs, concurrency, async (projectDir) => {
     const result = await validateProject(projectDir);
@@ -57,9 +58,12 @@ export async function runAll(specDir: string, options: RunAllOptions = {}): Prom
     runner.reportTaskWithDetails(result.status, name, result.output);
 
     if (options.gitClean) {
+      // Scope git clean to the top-level spec folder (e.g. specification/<service>/)
+      // so parallel projects don't interfere with each other
+      const topSpecFolder = projectDir.replace(/(^.*specification\/[^/]*)(.*)/, "$1");
       const git = simpleGit();
-      await git.checkout(["--", "."]);
-      await git.clean("f", ["-d"]);
+      await git.checkout(["--", topSpecFolder]);
+      await git.clean("f", ["-d", topSpecFolder]);
     }
 
     return { ...result, name };
