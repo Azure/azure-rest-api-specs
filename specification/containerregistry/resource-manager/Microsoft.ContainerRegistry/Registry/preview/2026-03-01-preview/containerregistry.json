@@ -8495,6 +8495,7 @@
         "writableCacheRepos": {
           "type": "string",
           "description": "Whether to allow cache operations that write to repositories in this registry.",
+          "default": "Disabled",
           "enum": [
             "Enabled",
             "Disabled"
@@ -8632,28 +8633,8 @@
           }
         },
         "writableCacheRepos": {
-          "type": "string",
-          "description": "Whether to allow cache operations that write to repositories in this registry.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "WritableCacheRepos",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "Cache write operations are enabled."
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "Cache write operations are disabled."
-              }
-            ]
-          }
+          "$ref": "#/definitions/WritableCacheRepos",
+          "description": "Whether to allow cache operations that write to repositories in this registry."
         },
         "roleAssignmentMode": {
           "$ref": "#/definitions/RoleAssignmentMode",
@@ -10076,6 +10057,30 @@
           "description": "The properties that the webhook will be updated with.",
           "x-ms-client-flatten": true
         }
+      }
+    },
+    "WritableCacheRepos": {
+      "type": "string",
+      "description": "Whether to allow cache operations that write to repositories in this registry.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "WritableCacheRepos",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Cache write operations are enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Cache write operations are disabled."
+          }
+        ]
       }
     }
   },
