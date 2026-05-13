@@ -6334,7 +6334,7 @@
       },
       "delete": {
         "operationId": "Models_deleteVersion",
-        "description": "Delete the specific version of the ModelVersion. The service returns 204 No Content if the ModelVersion was deleted successfully or if the ModelVersion does not exist.",
+        "description": "Delete the specific version of the ModelVersion. The service returns 200 OK if the ModelVersion was deleted successfully or if the ModelVersion does not exist.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -6371,8 +6371,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
+          "200": {
+            "description": "The request has succeeded."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -6547,10 +6547,31 @@
             "description": "Accepted response for asynchronous model version creation, with polling location.",
             "headers": {
               "Location": {
-                "required": true,
+                "required": false,
                 "description": "URL to poll for operation status.",
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "uri"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "location": {
+                      "type": "string",
+                      "format": "uri",
+                      "description": "URL to poll for operation status."
+                    },
+                    "operationResult": {
+                      "type": "string",
+                      "format": "uri",
+                      "nullable": true,
+                      "description": "URL to the operation result, or null if the operation is still in progress."
+                    }
+                  }
                 }
               }
             }
@@ -6731,7 +6752,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PendingUploadResponse"
+                  "$ref": "#/components/schemas/ModelPendingUploadResponse"
                 }
               }
             }
@@ -6764,7 +6785,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PendingUploadRequest"
+                "$ref": "#/components/schemas/ModelPendingUploadRequest"
               }
             }
           }
@@ -19961,6 +19982,64 @@
           }
         ],
         "description": "Model Deployment Definition"
+      },
+      "ModelPendingUploadRequest": {
+        "type": "object",
+        "required": [
+          "pendingUploadType"
+        ],
+        "properties": {
+          "pendingUploadId": {
+            "type": "string",
+            "description": "If PendingUploadId is not provided, a random GUID will be used."
+          },
+          "connectionName": {
+            "type": "string",
+            "description": "Azure Storage Account connection name to use for generating temporary SAS token"
+          },
+          "pendingUploadType": {
+            "type": "string",
+            "enum": [
+              "TemporaryBlobReference"
+            ],
+            "description": "The type of pending upload. Only TemporaryBlobReference is supported for models."
+          }
+        },
+        "description": "Represents a request for a pending upload of a model version."
+      },
+      "ModelPendingUploadResponse": {
+        "type": "object",
+        "required": [
+          "blobReference",
+          "pendingUploadId",
+          "pendingUploadType"
+        ],
+        "properties": {
+          "blobReference": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BlobReference"
+              }
+            ],
+            "description": "Container-level read, write, list SAS."
+          },
+          "pendingUploadId": {
+            "type": "string",
+            "description": "ID for this upload request."
+          },
+          "version": {
+            "type": "string",
+            "description": "Version of asset to be created if user did not specify version when initially creating upload"
+          },
+          "pendingUploadType": {
+            "type": "string",
+            "enum": [
+              "TemporaryBlobReference"
+            ],
+            "description": "The type of pending upload. Only TemporaryBlobReference is supported for models."
+          }
+        },
+        "description": "Represents the response for a model pending upload request."
       },
       "ModelSamplingParams": {
         "type": "object",
@@ -40312,9 +40391,9 @@
           "pendingUploadType": {
             "type": "string",
             "enum": [
-              "TemporaryBlobReference"
+              "BlobReference"
             ],
-            "description": "TemporaryBlobReference is the only supported type."
+            "description": "The type of pending upload."
           }
         },
         "description": "Represents a request for a pending upload."
@@ -40346,9 +40425,9 @@
           "pendingUploadType": {
             "type": "string",
             "enum": [
-              "TemporaryBlobReference"
+              "BlobReference"
             ],
-            "description": "TemporaryBlobReference is the only supported type"
+            "description": "The type of pending upload."
           }
         },
         "description": "Represents the response for a pending upload request"

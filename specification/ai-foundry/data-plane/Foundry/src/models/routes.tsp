@@ -47,9 +47,9 @@ interface Models
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Delete returns 200 with no body by service design"
   @doc(
-    "Delete the specific version of the {name}. The service returns 204 No Content if the {name} was deleted successfully or if the {name} does not exist.",
-    ModelVersion
+    "Delete the specific version of the ModelVersion. The service returns 200 OK if the ModelVersion was deleted successfully or if the ModelVersion does not exist."
   )
   @delete
   @extension("x-ms-foundry-meta", ModelsRequiredPreviews)
@@ -58,14 +58,18 @@ interface Models
     {
       ...ModelsPreviewHeader;
 
-      @doc("The version of the {name} to delete.", ModelVersion)
+      @doc("The version of the ModelVersion to delete.")
       @Rest.segment("versions")
       @path
       version: string;
     },
-    NoContentResponse
+    OkResponse
   >;
 
+  // The method name `createOrUpdateVersion` is required by the `VersionedOperations` interface
+  // template this interface extends. However, for Models the PATCH endpoint only performs updates —
+  // new model versions are created via the `createAsync` endpoint (which handles blob content
+  // validation). The `@operationId` override to "Models_updateVersion" reflects the true semantics.
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
   @doc("Update an existing ModelVersion with the given version id", ModelVersion)
   @operationId("Models_updateVersion")
@@ -119,9 +123,9 @@ interface Models
       version: string;
 
       @bodyRoot
-      body: PendingUploadRequest;
+      body: ModelPendingUploadRequest;
     },
-    PendingUploadResponse
+    ModelPendingUploadResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom credential action"
