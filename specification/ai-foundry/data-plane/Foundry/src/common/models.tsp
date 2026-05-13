@@ -153,17 +153,17 @@ model TracesJobSource {
   @doc("The source type for this source, which is Traces.")
   type: "traces";
 
-  @doc("The unique agent ID used to filter traces. Optional — when omitted, traces are filtered by `agent_name` (and `agent_version` if specified).")
+  @doc("The unique agent ID used to filter traces. Provide either `agent_id` or `agent_name` — at least one is required.")
   agent_id?: string;
 
-  @doc("The agent name to fetch traces for.")
-  agent_name: string;
+  @doc("The agent name to fetch traces for. Provide either `agent_id` or `agent_name` — at least one is required.")
+  agent_name?: string;
 
   @doc("The agent version. If not specified, traces for ALL versions of the agent are included within the time window.")
   agent_version?: string;
 
   @doc("Start of the time window (Unix timestamp in seconds) for fetching traces.")
-  start_time?: FoundryTimestamp;
+  start_time: FoundryTimestamp;
 
   @doc("End of the time window (Unix timestamp in seconds). Defaults to current time.")
   end_time?: FoundryTimestamp;
