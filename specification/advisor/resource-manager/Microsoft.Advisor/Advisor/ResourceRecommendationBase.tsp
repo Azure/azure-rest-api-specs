@@ -1,11 +1,9 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "./models.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
 
 namespace Microsoft.Advisor;
@@ -54,11 +52,8 @@ interface ResourceRecommendationBases {
   /**
    * Update the state of a Recommendation
    */
-  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Explicit operationId needed because Extension.CustomPatchSync does not derive the operation group from the resource segment name"
   @added(Versions.v2026_02_01_preview)
   @patch(#{ implicitOptionality: false })
-  @operationId("Recommendations_Update")
   update is Extension.CustomPatchSync<
     Extension.Subscription,
     ResourceRecommendationBase,
