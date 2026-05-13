@@ -144,7 +144,8 @@
           "conditional_previews": [
             "HostedAgents=V1Preview",
             "ContainerAgents=V1Preview",
-            "WorkflowAgents=V1Preview"
+            "WorkflowAgents=V1Preview",
+            "ExternalAgents=V1Preview"
           ]
         }
       },
@@ -1943,7 +1944,8 @@
           "conditional_previews": [
             "HostedAgents=V1Preview",
             "ContainerAgents=V1Preview",
-            "WorkflowAgents=V1Preview"
+            "WorkflowAgents=V1Preview",
+            "ExternalAgents=V1Preview"
           ]
         }
       },
@@ -12251,6 +12253,7 @@
           "mapping": {
             "prompt": "#/components/schemas/PromptAgentDefinition",
             "workflow": "#/components/schemas/WorkflowAgentDefinition",
+            "external": "#/components/schemas/ExternalAgentDefinition",
             "hosted": "#/components/schemas/HostedAgentDefinition",
             "container_app": "#/components/schemas/ContainerAppAgentDefinition"
           }
@@ -12259,7 +12262,8 @@
           "conditional_previews": [
             "HostedAgents=V1Preview",
             "ContainerAgents=V1Preview",
-            "WorkflowAgents=V1Preview"
+            "WorkflowAgents=V1Preview",
+            "ExternalAgents=V1Preview"
           ]
         }
       },
@@ -12268,6 +12272,7 @@
         "enum": [
           "HostedAgents=V1Preview",
           "WorkflowAgents=V1Preview",
+          "ExternalAgents=V1Preview",
           "ContainerAgents=V1Preview"
         ],
         "description": "Opt-in keys for defining preview Hosted or Workflow Agents."
@@ -12621,6 +12626,7 @@
               "prompt",
               "hosted",
               "workflow",
+              "external",
               "container_app"
             ]
           }
@@ -15694,7 +15700,8 @@
               "conditional_previews": [
                 "HostedAgents=V1Preview",
                 "ContainerAgents=V1Preview",
-                "WorkflowAgents=V1Preview"
+                "WorkflowAgents=V1Preview",
+                "ExternalAgents=V1Preview"
               ]
             }
           },
@@ -15742,7 +15749,8 @@
           "conditional_previews": [
             "HostedAgents=V1Preview",
             "ContainerAgents=V1Preview",
-            "WorkflowAgents=V1Preview"
+            "WorkflowAgents=V1Preview",
+            "ExternalAgents=V1Preview"
           ]
         }
       },
@@ -15833,7 +15841,8 @@
               "conditional_previews": [
                 "HostedAgents=V1Preview",
                 "ContainerAgents=V1Preview",
-                "WorkflowAgents=V1Preview"
+                "WorkflowAgents=V1Preview",
+                "ExternalAgents=V1Preview"
               ]
             }
           },
@@ -15855,7 +15864,8 @@
           "conditional_previews": [
             "HostedAgents=V1Preview",
             "ContainerAgents=V1Preview",
-            "WorkflowAgents=V1Preview"
+            "WorkflowAgents=V1Preview",
+            "ExternalAgents=V1Preview"
           ]
         }
       },
@@ -18376,6 +18386,36 @@
           }
         },
         "description": "Evaluator Definition"
+      },
+      "ExternalAgentDefinition": {
+        "type": "object",
+        "required": [
+          "kind"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "external"
+            ]
+          },
+          "otel_agent_id": {
+            "type": "string",
+            "description": "The OpenTelemetry agent identifier used to attribute customer-emitted spans to this Foundry agent.\nSpans must include the attribute `gen_ai.agent.id = <otel_agent_id>` to appear under this registration.\nDefaults to the top-level agent name when omitted. Provide an explicit value only for migration scenarios\nwhere the running external agent already emits a stable id that differs from the Foundry agent name.\nThe resolved value is always echoed on read.",
+            "example": "gcp-travel-planner-agent"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentDefinition"
+          }
+        ],
+        "description": "The external agent definition. Represents a third-party agent hosted outside Foundry (for example, on GCP or AWS).\nRegistration is metadata-only: Foundry records the agent definition to light up observability experiences (traces, evaluations)\nover customer-emitted OpenTelemetry data.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "ExternalAgents=V1Preview"
+          ]
+        }
       },
       "FabricDataAgentToolCall": {
         "type": "object",
@@ -42669,7 +42709,8 @@
               "conditional_previews": [
                 "HostedAgents=V1Preview",
                 "ContainerAgents=V1Preview",
-                "WorkflowAgents=V1Preview"
+                "WorkflowAgents=V1Preview",
+                "ExternalAgents=V1Preview"
               ]
             }
           },
