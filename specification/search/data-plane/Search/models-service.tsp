@@ -5065,6 +5065,34 @@ model RemoteSharePointKnowledgeSourceParameters {
 @added(Versions.v2026_05_01_preview)
 model WorkIQKnowledgeSource extends KnowledgeSource {
   kind: KnowledgeSourceKind.WorkIQ;
+
+  /** The parameters for the WorkIQ knowledge source. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
+  workIQParameters?: WorkIQKnowledgeSourceParameters;
+}
+
+/** Parameters for WorkIQ knowledge source. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
+@added(Versions.v2026_05_01_preview)
+model WorkIQKnowledgeSourceParameters {
+  /** The Entra app authentication configuration for accessing the WorkIQ data source using a customer-owned app registration. */
+  entraAppAuthentication?: EntraAppAuthentication;
+}
+
+/** Configuration for authenticating to a data source using a customer-owned Entra app registration with federated identity credentials. */
+@added(Versions.v2026_05_01_preview)
+model EntraAppAuthentication {
+  /** The application (client) ID of the customer-owned Entra app registration. */
+  applicationId: string;
+
+  /** The federated credential ID configured on the customer's app registration for the search service managed identity. */
+  federatedCredentialId: string;
+
+  /** The tenant ID of the customer's Entra app registration. Defaults to the tenant of the search service if not specified. */
+  tenantId?: string;
+
+  /** The scopes to request when acquiring a token using the customer's app registration. The service validates that each scope is in the set of allowed scopes for the knowledge source kind. */
+  scopes: string[];
 }
 
 /** Configuration for a knowledge source backed by an MCP (Model Context Protocol) server. */

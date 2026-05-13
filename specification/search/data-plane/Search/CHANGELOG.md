@@ -51,7 +51,7 @@ It is maintained for internal engineering reference and API Stewardship Board re
 [NEW in this preview]
 
 - **`IndexedSql`**: `IndexedSqlKnowledgeSource`, `IndexedSqlKnowledgeSourceParameters` (connection string, query, column mappings), `ContentColumnMapping`, `EmbeddingColumnMapping`.
-- **`WorkIQ`**: `WorkIQKnowledgeSource`, `WorkIQKnowledgeSourceParams`.
+- **`WorkIQ`**: `WorkIQKnowledgeSource` (`workIQParameters`), `WorkIQKnowledgeSourceParameters` (`entraAppAuthentication`), `EntraAppAuthentication` (`applicationId`, `federatedCredentialId`, `tenantId`, `scopes`), `WorkIQKnowledgeSourceParams`.
 - **`File`**: `FileKnowledgeSource`, `FileKnowledgeSourceParameters`, `KnowledgeSourceFile`, `ListKnowledgeSourceFilesResult`.
 - **`McpServer`**: `McpServerKnowledgeSource`, `McpServerKnowledgeSourceParameters`; auth via `McpServerAuthentication` (Foundry/StoredHeaders variants); tools via `McpServerTool`; output via `McpServerOutputParsing` (`auto`, `json`, `split`, `none`).
 - **`FabricDataAgent`**: `FabricDataAgentKnowledgeSource`, `FabricDataAgentKnowledgeSourceParameters`; activity/reference types.

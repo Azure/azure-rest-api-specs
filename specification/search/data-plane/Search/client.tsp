@@ -1709,6 +1709,20 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.indexes",
   "java"
 );
+@@clientNamespace(Search.WorkIQKnowledgeSourceParameters,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.WorkIQKnowledgeSourceParameters,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(Search.EntraAppAuthentication,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.EntraAppAuthentication,
+  "com.azure.search.documents.indexes",
+  "java"
+);
 @@clientNamespace(Search.McpServerKnowledgeSource,
   "Azure.Search.Documents.Indexes"
 );

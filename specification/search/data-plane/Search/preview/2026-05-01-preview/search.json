@@ -3250,6 +3250,9 @@
           },
           "SearchServiceListKnowledgeSourcesWeb": {
             "$ref": "./examples/SearchServiceListKnowledgeSourcesWeb.json"
+          },
+          "SearchServiceListKnowledgeSourcesWorkIQ": {
+            "$ref": "./examples/SearchServiceListKnowledgeSourcesWorkIQ.json"
           }
         }
       },
@@ -3319,6 +3322,9 @@
           },
           "SearchServiceCreateKnowledgeSourceWeb": {
             "$ref": "./examples/SearchServiceCreateKnowledgeSourceWeb.json"
+          },
+          "SearchServiceCreateKnowledgeSourceWorkIQ": {
+            "$ref": "./examples/SearchServiceCreateKnowledgeSourceWorkIQ.json"
           }
         }
       }
@@ -3392,6 +3398,9 @@
           },
           "SearchServiceGetKnowledgeSourceWeb": {
             "$ref": "./examples/SearchServiceGetKnowledgeSourceWeb.json"
+          },
+          "SearchServiceGetKnowledgeSourceWorkIQ": {
+            "$ref": "./examples/SearchServiceGetKnowledgeSourceWorkIQ.json"
           }
         }
       },
@@ -3505,6 +3514,9 @@
           },
           "SearchServiceCreateOrUpdateKnowledgeSourceWeb": {
             "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceWeb.json"
+          },
+          "SearchServiceCreateOrUpdateKnowledgeSourceWorkIQ": {
+            "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceWorkIQ.json"
           }
         }
       },
@@ -7699,6 +7711,36 @@
         }
       ],
       "x-ms-discriminator-value": "#Microsoft.Skills.Text.V3.EntityRecognitionSkill"
+    },
+    "EntraAppAuthentication": {
+      "type": "object",
+      "description": "Configuration for authenticating to a data source using a customer-owned Entra app registration with federated identity credentials.",
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "The application (client) ID of the customer-owned Entra app registration."
+        },
+        "federatedCredentialId": {
+          "type": "string",
+          "description": "The federated credential ID configured on the customer's app registration for the search service managed identity."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID of the customer's Entra app registration. Defaults to the tenant of the search service if not specified."
+        },
+        "scopes": {
+          "type": "array",
+          "description": "The scopes to request when acquiring a token using the customer's app registration. The service validates that each scope is in the set of allowed scopes for the knowledge source kind.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "applicationId",
+        "federatedCredentialId",
+        "scopes"
+      ]
     },
     "ErrorAdditionalInfo": {
       "type": "object",
@@ -22732,12 +22774,28 @@
     "WorkIQKnowledgeSource": {
       "type": "object",
       "description": "Configuration for WorkIQ knowledge source.",
+      "properties": {
+        "workIQParameters": {
+          "$ref": "#/definitions/WorkIQKnowledgeSourceParameters",
+          "description": "The parameters for the WorkIQ knowledge source."
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/KnowledgeSource"
         }
       ],
       "x-ms-discriminator-value": "workIQ"
+    },
+    "WorkIQKnowledgeSourceParameters": {
+      "type": "object",
+      "description": "Parameters for WorkIQ knowledge source.",
+      "properties": {
+        "entraAppAuthentication": {
+          "$ref": "#/definitions/EntraAppAuthentication",
+          "description": "The Entra app authentication configuration for accessing the WorkIQ data source using a customer-owned app registration."
+        }
+      }
     },
     "WorkIQKnowledgeSourceParams": {
       "type": "object",
