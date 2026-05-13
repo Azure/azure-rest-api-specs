@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 using Common;
 
 namespace ComputeDisk;
@@ -117,6 +119,28 @@ interface Snapshots {
     OkResponse,
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
+
+  /**
+   * Updates the immutability policy of a snapshot.
+   */
+  @added(Versions.v2026_03_02)
+  @action("updateImmutabilityPolicy")
+  updateImmutabilityPolicy is ComputeResourceActionAsync<
+    Snapshot,
+    ImmutabilityPolicyData,
+    Snapshot
+  >;
+
+  /**
+   * Updates the immutability policy lock of a snapshot.
+   */
+  @added(Versions.v2026_03_02)
+  @action("updateImmutabilityPolicyLock")
+  updateImmutabilityPolicyLock is ComputeResourceActionAsync<
+    Snapshot,
+    ImmutabilityPolicyData,
+    Snapshot
+  >;
 }
 
 @@doc(Snapshot.name,
@@ -131,4 +155,10 @@ interface Snapshots {
 );
 @@doc(Snapshots.grantAccess::parameters.body,
   "Access data object supplied in the body of the get snapshot access operation."
+);
+@@doc(Snapshots.updateImmutabilityPolicy::parameters.body,
+  "Immutability policy data supplied in the body of the update immutability policy operation."
+);
+@@doc(Snapshots.updateImmutabilityPolicyLock::parameters.body,
+  "Immutability policy data supplied in the body of the update immutability policy lock operation."
 );
