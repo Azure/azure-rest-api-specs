@@ -1,19 +1,19 @@
 import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./DataCollection/main.tsp";
-import "./PrivateLinkScopes/main.tsp";
-import "./AutoScale/main.tsp";
-import "./ActivityLogs/main.tsp";
-import "./Metrics/main.tsp";
-import "./ServiceDiagnosticsSettings/main.tsp";
-import "./AlertRulesIncidents/main.tsp";
-import "./LogProfiles/main.tsp";
-import "./ActivityLogAlerts/main.tsp";
-import "./MetricAlert/main.tsp";
-import "./ScheduledQueryRule/main.tsp";
-import "./MetricBaselines/main.tsp";
-import "./ActionGroups/main.tsp";
-import "./NetworkSecurityPerimeter/main.tsp";
+import "./DataCollectionApi/main.tsp";
+import "./PrivateLinkScopesApi/main.tsp";
+import "./AutoScaleApi/main.tsp";
+import "./ActivityLogsApi/main.tsp";
+import "./MetricsApi/main.tsp";
+import "./ServiceDiagnosticsSettingsApi/main.tsp";
+import "./AlertRulesIncidentsApi/main.tsp";
+import "./LogProfilesApi/main.tsp";
+import "./ActivityLogAlertsApi/main.tsp";
+import "./MetricAlertApi/main.tsp";
+import "./ScheduledQueryRuleApi/main.tsp";
+import "./MetricBaselinesApi/main.tsp";
+import "./ActionGroupsApi/main.tsp";
+import "./NetworkSecurityPerimeterApi/main.tsp";
 import "./Common/main.tsp";
 
 using Azure.ClientGenerator.Core;
@@ -22,30 +22,30 @@ using TypeSpec.Versioning;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Microsoft.Insights;
-using Microsoft.ScheduledQueryRule;
-using Microsoft.AutoScale;
+using ScheduledQueryRuleApi;
+using AutoScaleApi;
 using Microsoft.Common;
-using Microsoft.PrivateLinkScopes;
-using Microsoft.Metrics;
-using Microsoft.ServiceDiagnosticsSettings;
+using PrivateLinkScopesApi;
+using MetricsApi;
+using ServiceDiagnosticsSettingsApi;
 
 @client({
   name: "CombineClient",
   service: [
-    Microsoft.DataCollection,
-    Microsoft.PrivateLinkScopes,
-    Microsoft.AutoScale,
-    Microsoft.ActivityLogs,
-    Microsoft.Metrics,
-    Microsoft.ServiceDiagnosticsSettings,
-    Microsoft.AlertRulesIncidents,
-    Microsoft.LogProfiles,
-    Microsoft.ActivityLogAlerts,
-    Microsoft.MetricAlert,
-    Microsoft.ScheduledQueryRule,
-    Microsoft.MetricBaselines,
-    Microsoft.ActionGroups,
-    Microsoft.NetworkSecurityPerimeter
+    DataCollectionApi,
+    PrivateLinkScopesApi,
+    AutoScaleApi,
+    ActivityLogsApi,
+    MetricsApi,
+    ServiceDiagnosticsSettingsApi,
+    AlertRulesIncidentsApi,
+    LogProfilesApi,
+    ActivityLogAlertsApi,
+    MetricAlertApi,
+    ScheduledQueryRuleApi,
+    MetricBaselinesApi,
+    ActionGroupsApi,
+    NetworkSecurityPerimeterApi
   ],
   autoMergeService: true,
 })
@@ -64,34 +64,34 @@ namespace Microsoft.InsightsCombinedClient;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "list should be pageable"
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
-  Microsoft.PrivateLinkScopes.PrivateEndpointConnections.listByPrivateLinkScope,
+  PrivateLinkScopesApi.PrivateEndpointConnections.listByPrivateLinkScope,
   "java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "list should be pageable"
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
-  Microsoft.MetricAlert.MetricAlertResources.list,
+  MetricAlertApi.MetricAlertResources.list,
   "java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "list should be pageable"
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
-  Microsoft.MetricAlert.MetricAlertResources.listByName,
+  MetricAlertApi.MetricAlertResources.listByName,
   "java"
 );
 
 // ActivityLogAlerts - rename back to match fluent SDK expected names
 @@clientName(
-  Microsoft.ActivityLogAlerts.AlertRuleAllOfCondition,
+  ActivityLogAlertsApi.AlertRuleAllOfCondition,
   "ActivityLogAlertAllOfCondition",
   "java"
 );
 @@clientName(
-  Microsoft.ActivityLogAlerts.AlertRuleAnyOfOrLeafCondition,
+  ActivityLogAlertsApi.AlertRuleAnyOfOrLeafCondition,
   "ActivityLogAlertLeafCondition",
   "java"
 );
 
 // MetricUnit - rename to Unit
-@@clientName(Microsoft.Metrics.MetricUnit, "Unit", "java");
+@@clientName(MetricsApi.MetricUnit, "Unit", "java");
 
 // PrivateEndpointConnection - PrivateLinkScopes is canonical; rename Azure common type duplicate
 @@clientName(
@@ -113,21 +113,13 @@ namespace Microsoft.InsightsCombinedClient;
 );
 
 // Response.resourceregion - rename to resourceRegion for Java camelCase
-@@clientName(
-  Microsoft.Metrics.Response.resourceregion,
-  "resourceRegion",
-  "java"
-);
+@@clientName(MetricsApi.Response.resourceregion, "resourceRegion", "java");
 
 // Response.interval - use Duration type
-@@alternateType(Microsoft.Metrics.Response.interval, duration, "java");
+@@alternateType(MetricsApi.Response.interval, duration, "java");
 
 // Request.interval - use Duration type
-@@alternateType(
-  Microsoft.Metrics.IntervalQueryParameter.interval,
-  duration,
-  "java"
-);
+@@alternateType(MetricsApi.IntervalQueryParameter.interval, duration, "java");
 
 /**
  * Part of MultiTenantDiagnosticSettings. Specifies the settings for a particular metric.
@@ -155,7 +147,7 @@ model MetricSettings {
 }
 
 @@alternateType(
-  Microsoft.ServiceDiagnosticsSettings.MetricSettings,
+  ServiceDiagnosticsSettingsApi.MetricSettings,
   MetricSettings,
   "java"
 );
@@ -185,38 +177,30 @@ model LogSettings {
   retentionPolicy?: Microsoft.Common.RetentionPolicy;
 }
 
-@@alternateType(
-  Microsoft.ServiceDiagnosticsSettings.LogSettings,
-  LogSettings,
-  "java"
-);
+@@alternateType(ServiceDiagnosticsSettingsApi.LogSettings, LogSettings, "java");
 
 @@clientLocation(
-  Microsoft.NetworkSecurityPerimeter.ScheduledQueryRule.getNSP,
+  NetworkSecurityPerimeterApi.ScheduledQueryRule.getNSP,
   "NspScheduledQueryRule",
   "java"
 );
 @@clientLocation(
-  Microsoft.NetworkSecurityPerimeter.ScheduledQueryRule.listNSP,
+  NetworkSecurityPerimeterApi.ScheduledQueryRule.listNSP,
   "NspScheduledQueryRule",
   "java"
 );
 @@clientLocation(
-  Microsoft.NetworkSecurityPerimeter.ScheduledQueryRule.reconcileNSP,
+  NetworkSecurityPerimeterApi.ScheduledQueryRule.reconcileNSP,
   "NspScheduledQueryRule",
   "java"
 );
 
 @@alternateType(AutoscaleNotification.operation, "Scale", "java");
 
-@@clientName(Microsoft.Metrics.MetricValue.timeStamp, "timestamp", "java");
+@@clientName(MetricsApi.MetricValue.timeStamp, "timestamp", "java");
+@@clientName(AutoScaleApi.PredictiveValue.timeStamp, "timestamp", "java");
 @@clientName(
-  Microsoft.AutoScale.PredictiveValue.timeStamp,
-  "timestamp",
-  "java"
-);
-@@clientName(
-  Microsoft.MetricAlert.MetricAlertAction.webHookProperties,
+  MetricAlertApi.MetricAlertAction.webHookProperties,
   "webhookProperties",
   "java"
 );
@@ -253,42 +237,42 @@ model AccessRulePropertiesSubscriptionsItem {
 );
 
 @@clientName(
-  Microsoft.DataCollection.KnownLogFileTextSettingsRecordStartTimestampFormat.`ISO 8601`,
+  DataCollectionApi.KnownLogFileTextSettingsRecordStartTimestampFormat.`ISO 8601`,
   "ISO8601",
   "python"
 );
 @@clientName(
-  Microsoft.DataCollection.KnownLogFileTextSettingsRecordStartTimestampFormat.`YYYY-MM-DD HH:MM:SS`,
+  DataCollectionApi.KnownLogFileTextSettingsRecordStartTimestampFormat.`YYYY-MM-DD HH:MM:SS`,
   "YYYY_MM_DD_HH_MM_SS",
   "python"
 );
 @@clientName(
-  Microsoft.DataCollection.KnownLogFileTextSettingsRecordStartTimestampFormat.`M/D/YYYY HH:MM:SS AM/PM`,
+  DataCollectionApi.KnownLogFileTextSettingsRecordStartTimestampFormat.`M/D/YYYY HH:MM:SS AM/PM`,
   "M_D_YYYY_HH_MM_SS_AM_PM",
   "python"
 );
 @@clientName(
-  Microsoft.DataCollection.KnownLogFileTextSettingsRecordStartTimestampFormat.`Mon DD, YYYY HH:MM:SS`,
+  DataCollectionApi.KnownLogFileTextSettingsRecordStartTimestampFormat.`Mon DD, YYYY HH:MM:SS`,
   "MON_DD_YYYY_HH_MM_SS",
   "python"
 );
 @@clientName(
-  Microsoft.DataCollection.KnownLogFileTextSettingsRecordStartTimestampFormat.`yyMMdd HH:mm:ss`,
+  DataCollectionApi.KnownLogFileTextSettingsRecordStartTimestampFormat.`yyMMdd HH:mm:ss`,
   "YY_M_MDD_HH_MM_SS",
   "python"
 );
 @@clientName(
-  Microsoft.DataCollection.KnownLogFileTextSettingsRecordStartTimestampFormat.`ddMMyy HH:mm:ss`,
+  DataCollectionApi.KnownLogFileTextSettingsRecordStartTimestampFormat.`ddMMyy HH:mm:ss`,
   "DD_M_MYY_HH_MM_SS",
   "python"
 );
 @@clientName(
-  Microsoft.DataCollection.KnownLogFileTextSettingsRecordStartTimestampFormat.`MMM d hh:mm:ss`,
+  DataCollectionApi.KnownLogFileTextSettingsRecordStartTimestampFormat.`MMM d hh:mm:ss`,
   "MMM_D_HH_MM_SS",
   "python"
 );
 @@clientName(
-  Microsoft.DataCollection.KnownLogFileTextSettingsRecordStartTimestampFormat.`dd/MMM/yyyy:HH:mm:ss zzz`,
+  DataCollectionApi.KnownLogFileTextSettingsRecordStartTimestampFormat.`dd/MMM/yyyy:HH:mm:ss zzz`,
   "DD_MMM_YYYY_HH_MM_SS_ZZZ",
   "python"
 );

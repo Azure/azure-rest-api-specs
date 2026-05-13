@@ -37,7 +37,7 @@ interface ResolverContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -51,7 +51,7 @@ interface ResolverContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -74,14 +74,14 @@ interface ResolverContracts {
            * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
            */
           @header("ETag")
-          etag: string;
+          eTag: string;
         })
       | (ArmResourceCreatedSyncResponse<ResolverContract> & {
           /**
            * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
            */
           @header("ETag")
-          etag: string;
+          eTag: string;
         })
   >;
 
@@ -105,7 +105,7 @@ interface ResolverContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 

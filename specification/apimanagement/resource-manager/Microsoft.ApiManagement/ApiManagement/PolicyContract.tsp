@@ -91,7 +91,7 @@ interface PolicyContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -105,7 +105,7 @@ interface PolicyContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -128,14 +128,14 @@ interface PolicyContracts {
            * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
            */
           @header("ETag")
-          etag: string;
+          eTag: string;
         })
       | (ArmResourceCreatedSyncResponse<PolicyContract> & {
           /**
            * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
            */
           @header("ETag")
-          etag: string;
+          eTag: string;
         })
   >;
 
@@ -221,7 +221,7 @@ interface GraphQLApiResolverPolicy {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -235,7 +235,7 @@ interface GraphQLApiResolverPolicy {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -258,14 +258,14 @@ interface GraphQLApiResolverPolicy {
            * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
            */
           @header("ETag")
-          etag: string;
+          eTag: string;
         })
       | (ArmResourceCreatedSyncResponse<PolicyContract> & {
           /**
            * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
            */
           @header("ETag")
-          etag: string;
+          eTag: string;
         })
   >;
 
@@ -341,7 +341,7 @@ interface ApiPolicy {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -355,7 +355,7 @@ interface ApiPolicy {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -378,14 +378,14 @@ interface ApiPolicy {
            * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
            */
           @header("ETag")
-          etag: string;
+          eTag: string;
         })
       | (ArmResourceCreatedSyncResponse<PolicyContract> & {
           /**
            * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
            */
           @header("ETag")
-          etag: string;
+          eTag: string;
         })
   >;
 
@@ -452,7 +452,7 @@ interface Policy {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -466,7 +466,7 @@ interface Policy {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -489,14 +489,14 @@ interface Policy {
            * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
            */
           @header("ETag")
-          etag: string;
+          eTag: string;
         })
       | (ArmResourceCreatedSyncResponse<PolicyContract> & {
           /**
            * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
            */
           @header("ETag")
-          etag: string;
+          eTag: string;
         })
   >;
 
@@ -571,7 +571,7 @@ interface ProductPolicy {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -585,7 +585,7 @@ interface ProductPolicy {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -608,14 +608,14 @@ interface ProductPolicy {
            * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
            */
           @header("ETag")
-          etag: string;
+          eTag: string;
         })
       | (ArmResourceCreatedSyncResponse<PolicyContract> & {
           /**
            * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
            */
           @header("ETag")
-          etag: string;
+          eTag: string;
         })
   >;
 
@@ -691,7 +691,7 @@ interface WorkspacePolicy {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -705,7 +705,7 @@ interface WorkspacePolicy {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -728,14 +728,14 @@ interface WorkspacePolicy {
            * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
            */
           @header("ETag")
-          etag: string;
+          eTag: string;
         })
       | (ArmResourceCreatedSyncResponse<PolicyContract> & {
           /**
            * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
            */
           @header("ETag")
-          etag: string;
+          eTag: string;
         })
   >;
 
@@ -828,7 +828,7 @@ interface WorkspaceApiOperationPolicy {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -842,7 +842,7 @@ interface WorkspaceApiOperationPolicy {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -865,14 +865,14 @@ interface WorkspaceApiOperationPolicy {
            * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
            */
           @header("ETag")
-          etag: string;
+          eTag: string;
         })
       | (ArmCreatedResponse<PolicyContract> & {
           /**
            * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
            */
           @header("ETag")
-          etag: string;
+          eTag: string;
         })
   >;
 
@@ -957,7 +957,7 @@ interface WorkspaceApiPolicy {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -971,7 +971,7 @@ interface WorkspaceApiPolicy {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -994,14 +994,14 @@ interface WorkspaceApiPolicy {
            * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
            */
           @header("ETag")
-          etag: string;
+          eTag: string;
         })
       | (ArmCreatedResponse<PolicyContract> & {
           /**
            * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
            */
           @header("ETag")
-          etag: string;
+          eTag: string;
         })
   >;
 
@@ -1085,7 +1085,7 @@ interface WorkspaceProductPolicy {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -1099,7 +1099,7 @@ interface WorkspaceProductPolicy {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -1122,14 +1122,14 @@ interface WorkspaceProductPolicy {
            * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
            */
           @header("ETag")
-          etag: string;
+          eTag: string;
         })
       | (ArmCreatedResponse<PolicyContract> & {
           /**
            * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
            */
           @header("ETag")
-          etag: string;
+          eTag: string;
         })
   >;
 

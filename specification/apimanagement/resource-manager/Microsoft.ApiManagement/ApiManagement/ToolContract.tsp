@@ -37,7 +37,7 @@ interface ToolContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -51,7 +51,7 @@ interface ToolContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -66,14 +66,14 @@ interface ToolContracts {
            * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
            */
           @header("ETag")
-          etag: string;
+          eTag: string;
         })
       | (ArmCreatedResponse<ToolContract> & {
           /**
            * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
            */
           @header("ETag")
-          etag: string;
+          eTag: string;
         })
   >;
 
@@ -89,7 +89,7 @@ interface ToolContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 

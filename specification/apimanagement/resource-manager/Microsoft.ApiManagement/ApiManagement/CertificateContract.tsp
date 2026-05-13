@@ -67,7 +67,7 @@ interface CertificateContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -81,7 +81,7 @@ interface CertificateContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -110,14 +110,14 @@ interface CertificateContracts {
            * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
            */
           @header("ETag")
-          etag: string;
+          eTag: string;
         })
       | (ArmResourceCreatedSyncResponse<CertificateContract> & {
           /**
            * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
            */
           @header("ETag")
-          etag: string;
+          eTag: string;
         })
   >;
 
@@ -187,7 +187,7 @@ interface CertificateContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 }
@@ -242,7 +242,7 @@ interface WorkspaceCertificate {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -256,7 +256,7 @@ interface WorkspaceCertificate {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -285,14 +285,14 @@ interface WorkspaceCertificate {
            * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
            */
           @header("ETag")
-          etag: string;
+          eTag: string;
         })
       | (ArmResourceCreatedSyncResponse<CertificateContract> & {
           /**
            * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
            */
           @header("ETag")
-          etag: string;
+          eTag: string;
         })
   >;
 
@@ -362,7 +362,7 @@ interface WorkspaceCertificate {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 }

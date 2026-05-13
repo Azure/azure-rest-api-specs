@@ -67,7 +67,6 @@ using Microsoft.ServiceNetworking;
   "csharp"
 );
 @@clientName(Association, "TrafficControllerAssociation", "csharp");
-@@clientName(AssociationUpdate, "TrafficControllerAssociationUpdate", "csharp");
 @@clientName(AssociationType, "TrafficControllerAssociationType", "csharp");
 @@clientName(Frontend, "TrafficControllerFrontend", "csharp");
 @@clientName(

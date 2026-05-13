@@ -12,7 +12,7 @@ using Microsoft.Monitor;
 @@clientName(
   Azure.ResourceManager.CommonTypes.Origin,
   "ArmOrigin",
-  "python,go"
+  "python,go,javascript"
 );
 
 // JavaScript SDK visibility workaround:

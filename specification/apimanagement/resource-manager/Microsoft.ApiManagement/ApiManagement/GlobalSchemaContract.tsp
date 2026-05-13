@@ -66,7 +66,7 @@ interface GlobalSchemaContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -80,7 +80,7 @@ interface GlobalSchemaContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -104,7 +104,7 @@ interface GlobalSchemaContracts {
              * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
              */
             @header("ETag")
-            etag: string;
+            eTag: string;
           })
       | (ArmResourceCreatedResponse<
           GlobalSchemaContract,
@@ -114,7 +114,7 @@ interface GlobalSchemaContracts {
            * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
            */
           @header("ETag")
-          etag: string;
+          eTag: string;
         })
   >;
 
@@ -212,7 +212,7 @@ interface WorkspaceGlobalSchema {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -226,7 +226,7 @@ interface WorkspaceGlobalSchema {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -250,7 +250,7 @@ interface WorkspaceGlobalSchema {
              * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
              */
             @header("ETag")
-            etag: string;
+            eTag: string;
           })
       | (ArmResourceCreatedResponse<
           GlobalSchemaContract,
@@ -260,7 +260,7 @@ interface WorkspaceGlobalSchema {
            * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
            */
           @header("ETag")
-          etag: string;
+          eTag: string;
         })
   >;
 

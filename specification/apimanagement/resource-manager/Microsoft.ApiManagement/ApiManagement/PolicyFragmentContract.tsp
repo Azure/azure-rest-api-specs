@@ -74,7 +74,7 @@ interface PolicyFragmentContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -88,7 +88,7 @@ interface PolicyFragmentContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -112,7 +112,7 @@ interface PolicyFragmentContracts {
              * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
              */
             @header("ETag")
-            etag: string;
+            eTag: string;
           })
       | (ArmResourceCreatedResponse<
           PolicyFragmentContract,
@@ -122,7 +122,7 @@ interface PolicyFragmentContracts {
            * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
            */
           @header("ETag")
-          etag: string;
+          eTag: string;
         })
   >;
 
@@ -258,7 +258,7 @@ interface WorkspacePolicyFragment {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -272,7 +272,7 @@ interface WorkspacePolicyFragment {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -296,7 +296,7 @@ interface WorkspacePolicyFragment {
              * Current entity state version
              */
             @header("ETag")
-            etag: string;
+            eTag: string;
           })
       | (ArmResourceCreatedResponse<
           PolicyFragmentContract,
@@ -306,7 +306,7 @@ interface WorkspacePolicyFragment {
            * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
            */
           @header("ETag")
-          etag: string;
+          eTag: string;
         })
   >;
 

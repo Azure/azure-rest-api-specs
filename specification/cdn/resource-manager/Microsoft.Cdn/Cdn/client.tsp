@@ -383,11 +383,6 @@ using Azure.ResourceManager;
 @@clientName(GroupByVariable, "RateLimitGroupByVariable", "csharp");
 @@clientName(InvocationPoint, "EdgeActionInvocationPoint", "csharp");
 @@clientName(
-  KnowledgeSourceUpdateParameters,
-  "WebAgentKnowledgeSourcePatch",
-  "csharp"
-);
-@@clientName(
   KnowledgeSourceProvisioningState,
   "CdnWebAgentKnowledgeSourceProvisioningState",
   "csharp"
@@ -673,11 +668,6 @@ using Azure.ResourceManager;
   "csharp"
 );
 @@clientName(
-  AFDDomainUpdateParameters,
-  "FrontDoorCustomDomainUpdateParameters",
-  "csharp"
-);
-@@clientName(
   AFDDomainUpdatePropertiesParameters,
   "FrontDoorCustomDomainUpdatePropertiesParameters",
   "csharp"
@@ -697,22 +687,12 @@ using Azure.ResourceManager;
 @@clientName(AFDOriginGroups.listResourceUsage, "GetResourceUsages", "csharp");
 @@clientName(AFDEndpointProperties, "FrontDoorEndpointProperties", "csharp");
 @@clientName(
-  AFDEndpointUpdateParameters,
-  "FrontDoorEndpointUpdateParameters",
-  "csharp"
-);
-@@clientName(
   AFDEndpointPropertiesUpdateParameters,
   "FrontDoorEndpointPropertiesUpdateParameters",
   "csharp"
 );
 @@clientName(AFDOrigin, "FrontDoorOrigin", "csharp");
 @@clientName(AFDOriginProperties, "FrontDoorOriginProperties", "csharp");
-@@clientName(
-  AFDOriginUpdateParameters,
-  "FrontDoorOriginUpdateParameters",
-  "csharp"
-);
 @@clientName(
   AFDOriginUpdatePropertiesParameters,
   "FrontDoorOriginUpdatePropertiesParameters",
@@ -722,11 +702,6 @@ using Azure.ResourceManager;
 @@clientName(
   AFDOriginGroupProperties,
   "FrontDoorOriginGroupProperties",
-  "csharp"
-);
-@@clientName(
-  AFDOriginGroupUpdateParameters,
-  "FrontDoorOriginGroupUpdateParameters",
   "csharp"
 );
 @@clientName(
