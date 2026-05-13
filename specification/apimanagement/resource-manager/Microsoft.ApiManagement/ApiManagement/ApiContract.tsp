@@ -69,7 +69,7 @@ interface ApiContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -83,7 +83,7 @@ interface ApiContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -107,7 +107,7 @@ interface ApiContracts {
          * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
          */
         @header("ETag")
-        etag: string;
+        eTag: string;
       }) | (ArmResourceCreatedResponse<
       ApiContract,
       LroHeaders = ArmCombinedLroHeaders<FinalResult = ApiContract>
@@ -116,7 +116,7 @@ interface ApiContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     })
   >;
 
@@ -140,7 +140,7 @@ interface ApiContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -366,7 +366,7 @@ interface WorkspaceApi {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -380,7 +380,7 @@ interface WorkspaceApi {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -404,7 +404,7 @@ interface WorkspaceApi {
          * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
          */
         @header("ETag")
-        etag: string;
+        eTag: string;
       }) | (ArmResourceCreatedResponse<
       ApiContract,
       LroHeaders = ArmCombinedLroHeaders<FinalResult = ApiContract>
@@ -413,7 +413,7 @@ interface WorkspaceApi {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     })
   >;
 
@@ -437,7 +437,7 @@ interface WorkspaceApi {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
