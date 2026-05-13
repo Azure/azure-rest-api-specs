@@ -350,6 +350,10 @@ interface Clients {
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
+@@alternateType(AzureADPartnerClientAuthenticationProperties.azureActiveDirectoryApplicationIdOrUri,
+  url,
+  "csharp"
+);
 @@alternateType(CustomDomainConfiguration.certificateUrl, url, "csharp");
 @@alternateType(Domain.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
