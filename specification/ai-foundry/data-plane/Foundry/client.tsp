@@ -20,6 +20,7 @@ import "./src/insights/routes.tsp";
 import "./src/memory-stores/routes.tsp";
 import "./src/models/routes.tsp";
 import "./src/red-teams/routes.tsp";
+import "./src/routines/routes.tsp";
 import "./src/schedules/routes.tsp";
 import "./src/toolboxes/routes.tsp";
 import "./src/skills/routes.tsp";
@@ -150,6 +151,20 @@ using Azure.AI.Projects;
 @@clientName(MemoryStoreObject, "MemoryStore", "javascript");
 
 // --------------------------------------------------------------------------------
+// Routines sub-client
+// --------------------------------------------------------------------------------
+
+@@clientName(Routines.createOrUpdateRoutine, "create_or_update", "python");
+@@clientName(Routines.createOrUpdateRoutine, "createOrUpdate", "javascript");
+@@clientName(Routines.getRoutine, "get");
+@@clientName(Routines.listRoutines, "list");
+@@clientName(Routines.deleteRoutine, "delete");
+@@clientName(Routines.listRoutineRuns, "list_runs", "python");
+@@clientName(Routines.listRoutineRuns, "listRuns", "javascript");
+@@clientName(Routines.dispatchRoutineAsync, "dispatch_async", "python");
+@@clientName(Routines.dispatchRoutineAsync, "dispatchAsync", "javascript");
+
+// --------------------------------------------------------------------------------
 // Responses sub‐client
 // --------------------------------------------------------------------------------
 
@@ -173,11 +188,20 @@ using Azure.AI.Projects;
 @@clientName(Evaluators.listLatestVersions, "list", "python, javascript");
 
 // Evaluator generation jobs — renamed for JavaScript SDK discoverability
-@@clientName(EvaluatorGenerationJobs.create, "createGenerationJob", "javascript");
+@@clientName(EvaluatorGenerationJobs.create,
+  "createGenerationJob",
+  "javascript"
+);
 @@clientName(EvaluatorGenerationJobs.get, "getGenerationJob", "javascript");
 @@clientName(EvaluatorGenerationJobs.list, "listGenerationJobs", "javascript");
-@@clientName(EvaluatorGenerationJobs.cancel, "cancelGenerationJob", "javascript");
-@@clientName(EvaluatorGenerationJobs.delete, "deleteGenerationJob", "javascript");
+@@clientName(EvaluatorGenerationJobs.cancel,
+  "cancelGenerationJob",
+  "javascript"
+);
+@@clientName(EvaluatorGenerationJobs.delete,
+  "deleteGenerationJob",
+  "javascript"
+);
 
 // Evaluator generation jobs — renamed for Python SDK discoverability
 @@clientName(EvaluatorGenerationJobs.create, "create_generation_job", "python");
@@ -187,17 +211,47 @@ using Azure.AI.Projects;
 @@clientName(EvaluatorGenerationJobs.delete, "delete_generation_job", "python");
 
 // Evaluation Suite Generation Jobs — unique names to avoid collision with evaluator gen methods
-@@clientName(EvaluationSuiteGenerationJobs.create, "createGenerationSuiteJob", "javascript");
-@@clientName(EvaluationSuiteGenerationJobs.get, "getGenerationSuiteJob", "javascript");
-@@clientName(EvaluationSuiteGenerationJobs.list, "listGenerationSuiteJobs", "javascript");
-@@clientName(EvaluationSuiteGenerationJobs.cancel, "cancelGenerationSuiteJob", "javascript");
-@@clientName(EvaluationSuiteGenerationJobs.delete, "deleteGenerationSuiteJob", "javascript");
+@@clientName(EvaluationSuiteGenerationJobs.create,
+  "createGenerationSuiteJob",
+  "javascript"
+);
+@@clientName(EvaluationSuiteGenerationJobs.get,
+  "getGenerationSuiteJob",
+  "javascript"
+);
+@@clientName(EvaluationSuiteGenerationJobs.list,
+  "listGenerationSuiteJobs",
+  "javascript"
+);
+@@clientName(EvaluationSuiteGenerationJobs.cancel,
+  "cancelGenerationSuiteJob",
+  "javascript"
+);
+@@clientName(EvaluationSuiteGenerationJobs.delete,
+  "deleteGenerationSuiteJob",
+  "javascript"
+);
 
-@@clientName(EvaluationSuiteGenerationJobs.create, "create_generation_suite_job", "python");
-@@clientName(EvaluationSuiteGenerationJobs.get, "get_generation_suite_job", "python");
-@@clientName(EvaluationSuiteGenerationJobs.list, "list_generation_suite_jobs", "python");
-@@clientName(EvaluationSuiteGenerationJobs.cancel, "cancel_generation_suite_job", "python");
-@@clientName(EvaluationSuiteGenerationJobs.delete, "delete_generation_suite_job", "python");
+@@clientName(EvaluationSuiteGenerationJobs.create,
+  "create_generation_suite_job",
+  "python"
+);
+@@clientName(EvaluationSuiteGenerationJobs.get,
+  "get_generation_suite_job",
+  "python"
+);
+@@clientName(EvaluationSuiteGenerationJobs.list,
+  "list_generation_suite_jobs",
+  "python"
+);
+@@clientName(EvaluationSuiteGenerationJobs.cancel,
+  "cancel_generation_suite_job",
+  "python"
+);
+@@clientName(EvaluationSuiteGenerationJobs.delete,
+  "delete_generation_suite_job",
+  "python"
+);
 
 // EvaluatorVersion datetime fields are typed as string in the spec but carry ISO-8601 timestamps
 @@alternateType(EvaluatorVersion.created_at, utcDateTime, "python");
@@ -303,7 +357,7 @@ using Azure.AI.Projects;
 
 @@clientName(SkillObject, "SkillDetails", "python");
 @@clientName(DeleteSkillResponse, "DeleteSkillResult", "python");
-@@clientName(DownloadSkillResponse, "DownloadSkillResult", "python"); 
+@@clientName(DownloadSkillResponse, "DownloadSkillResult", "python");
 
 // --------------------------------------------------------------------------------
 // Connections sub‐client
@@ -334,16 +388,19 @@ using Azure.AI.Projects;
 @@scope(Agents.createAgentFromCode, "!(python)");
 
 @@clientName(DownloadAgentCodeResponse, "DownloadAgentCodeResult", "python");
-@@clientName(SessionDirectoryListResponse, "SessionDirectoryListResult", "python");
+@@clientName(SessionDirectoryListResponse,
+  "SessionDirectoryListResult",
+  "python"
+);
 @@clientName(SessionFileWriteResponse, "SessionFileWriteResult", "python");
 
 // --------------------------------------------------------------------------------
 // Evaluation Taxonomies sub-client
 // --------------------------------------------------------------------------------
 
-// Note that we can't rename it in src\openai-evaluations\models.tsp, since in 
+// Note that we can't rename it in src\openai-evaluations\models.tsp, since in
 // src\evaluations\models.tsp we already define EvaluationTarget (not for v1).
-// If/when src\evaluations will be removed, consider doing the rename in 
+// If/when src\evaluations will be removed, consider doing the rename in
 // src\openai-evaluations\models.tsp instead.
 @@clientName(Target, "EvaluationTarget");
 
