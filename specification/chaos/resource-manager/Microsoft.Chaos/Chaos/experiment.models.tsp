@@ -121,6 +121,7 @@ model ExperimentProperties {
    * Optional customer-managed Storage account where Experiment schema will be stored.
    */
   @removed(Microsoft.Chaos.Versions.v2025_01_01)
+  @added(Microsoft.Chaos.Versions.v2026_05_01_preview)
   customerDataStorage?: CustomerDataStorageProperties;
 }
 
