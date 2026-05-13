@@ -1,22 +1,16 @@
+import { execFile } from "child_process";
 import { cpus } from "os";
 import { dirname, relative, resolve } from "path";
+import { promisify } from "util";
 import { globby } from "globby";
 import pc from "picocolors";
 import { simpleGit } from "simple-git";
 import { getSuppressions as getSuppressionsRaw, Suppression } from "suppressions";
 import { runWithConcurrency } from "./concurrency.js";
-import { RuleResult } from "./rule-result.js";
-import { Rule } from "./rule.js";
-import { CompileRule } from "./rules/compile.js";
-import { EmitAutorestRule } from "./rules/emit-autorest.js";
-import { FlavorAzureRule } from "./rules/flavor-azure.js";
-import { FolderStructureRule } from "./rules/folder-structure.js";
-import { FormatRule } from "./rules/format.js";
-import { LinterRulesetRule } from "./rules/linter-ruleset.js";
-import { NpmPrefixRule } from "./rules/npm-prefix.js";
-import { SdkTspConfigValidationRule } from "./rules/sdk-tspconfig-validation.js";
 import { TaskRunner } from "./runner.js";
-import { getSuppressions, normalizePath } from "./utils.js";
+import { normalizePath } from "./utils.js";
+
+const execFileAsync = promisify(execFile);
 
 const CONCURRENCY = cpus().length;
 
@@ -134,50 +128,26 @@ async function validateProject(folder: string): Promise<ProjectResult> {
     };
   }
 
-  // Check TypeSpecValidation suppression
-  const suppressions: Suppression[] = await getSuppressions(folder);
-  const toolSuppressions = suppressions.filter((s) => !s.rules?.length && !s.subRules?.length);
-  if (toolSuppressions.length > 0) {
-    return {
-      name,
-      status: "skip",
-      output: `Suppressed: ${toolSuppressions[0].reason}`,
-    };
+  // Run tsv as a child process to fully isolate stdout/stderr per project
+  const context = JSON.stringify({ checkingAllSpecs: true });
+  try {
+    const { stdout, stderr } = await execFileAsync(
+      process.execPath,
+      [
+        "--no-warnings",
+        resolve(import.meta.dirname, "../cmd/tsv.js"),
+        folder,
+        context,
+      ],
+      { maxBuffer: 64 * 1024 * 1024 },
+    );
+    const output = (stdout + stderr).trim();
+    return { name, status: "pass", output };
+  } catch (error: unknown) {
+    const execError = error as { stdout?: string; stderr?: string; code?: number };
+    const output = ((execError.stdout ?? "") + (execError.stderr ?? "")).trim();
+    return { name, status: "fail", output };
   }
-
-  const rules: Rule[] = [
-    new FolderStructureRule(),
-    new NpmPrefixRule(),
-    new EmitAutorestRule(),
-    new FlavorAzureRule(),
-    new LinterRulesetRule(),
-    new CompileRule(),
-    new FormatRule(),
-    new SdkTspConfigValidationRule(),
-  ];
-
-  let output = "";
-  for (const rule of rules) {
-    let result: RuleResult;
-    try {
-      result = await rule.execute(folder);
-    } catch (error) {
-      return {
-        name,
-        status: "fail",
-        output: output + `\nRule ${rule.name} threw: ${String(error)}`,
-      };
-    }
-
-    if (result.stdOutput) output += result.stdOutput + "\n";
-
-    if (!result.success) {
-      if (result.errorOutput) output += result.errorOutput + "\n";
-      return { name, status: "fail", output: output + `Rule ${rule.name} failed` };
-    }
-  }
-
-  return { name, status: "pass", output };
 }
 
 async function findTspProjects(specDir: string): Promise<string[]> {
