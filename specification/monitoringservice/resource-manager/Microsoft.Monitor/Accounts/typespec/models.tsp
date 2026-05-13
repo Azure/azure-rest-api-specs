@@ -40,7 +40,6 @@ namespace Microsoft.Monitor {
     /**
      * Properties related to the metrics container in the Azure Monitor Workspace
      */
-    @visibility(Lifecycle.Read)
     metrics?: AzureMonitorWorkspaceMetrics;
 
     /**
@@ -146,5 +145,32 @@ namespace Microsoft.Monitor {
 }
 
 @@TypeSpec.Versioning.added(Microsoft.Monitor.AzureMonitorWorkspaceResource.identity,
+  Microsoft.Monitor.Versions.v2025_10_03_stable
+);
+
+namespace Microsoft.Monitor {
+  /**
+   * The type used for updating an Azure Monitor Workspace
+   */
+  model AzureMonitorWorkspaceResourceUpdate {
+    /**
+     * Resource tags.
+     */
+    #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "tags is a standard ARM update pattern"
+    tags?: Record<string>;
+
+    /**
+     * The managed service identities assigned to this resource.
+     */
+    identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
+
+    /**
+     * Resource properties
+     */
+    properties?: AzureMonitorWorkspace;
+  }
+}
+
+@@TypeSpec.Versioning.added(Microsoft.Monitor.AzureMonitorWorkspaceResourceUpdate.identity,
   Microsoft.Monitor.Versions.v2025_10_03_stable
 );
