@@ -40,16 +40,19 @@ input-file:
 suppressions:
   - code: AvoidAdditionalProperties
     reason: >
-      The CompileFile resource models use Record<unknown> types for flexible content payloads
-      (file contents, compile results). These are existing API contracts from preview that
-      cannot be changed without breaking compatibility.
+      The CompileFile API is intentionally schemaless by design. It accepts arbitrary
+      user JSON content for compilation (`contents`, `stringSource`, `files` — typically
+      extension/blade definitions or configuration payloads) and returns a compiled result
+      whose shape depends entirely on the input. No fixed schema can describe these payloads
+      because the service exists precisely to accept user-defined content; this is a genuine
+      schemaless data requirement, not a backward-compatibility constraint.
     from:
       - extensions.json
   - code: PostResponseCodes
     reason: >
-      The CompileFile operation is a synchronous POST action that returns 200 with a result body.
-      This is an existing API contract from preview that follows a synchronous request-response pattern,
-      not a long-running operation.
+      CompileFile is a genuinely synchronous action — compilation completes inline and
+      returns the result in the response body. It is not, and was never intended to be,
+      a long-running operation, so a 200 response with a result body is the correct shape.
     from:
       - extensions.json
 ```
