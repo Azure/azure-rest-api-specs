@@ -2441,6 +2441,284 @@ paths:
                 $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
       tags:
         - Deployments
+  /evaluation_suites:
+    get:
+      operationId: EvaluationSuites_listLatest
+      description: List the latest version of each EvaluationSuiteVersion
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: agent_name
+          in: query
+          required: false
+          description: Filter by associated Foundry agent name (from target).
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PagedEvaluationSuiteVersion'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+  /evaluation_suites/{name}/versions:
+    get:
+      operationId: EvaluationSuites_listVersions
+      description: List all versions of the given EvaluationSuiteVersion
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: name
+          in: path
+          required: true
+          description: The name of the resource.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PagedEvaluationSuiteVersion'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+    post:
+      operationId: EvaluationSuites_createEvaluationSuiteVersion
+      description: Create a new EvaluationSuiteVersion with auto incremented version id
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The name of the evaluation suite.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluationSuiteVersion'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvaluationSuiteVersionCreate'
+        description: The evaluation suite version to create.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
+  /evaluation_suites/{name}/versions/{version}:
+    get:
+      operationId: EvaluationSuites_getVersion
+      description: Get the specific version of the EvaluationSuiteVersion. The service returns 404 Not Found error if the EvaluationSuiteVersion does not exist.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: name
+          in: path
+          required: true
+          description: The name of the resource.
+          schema:
+            type: string
+        - name: version
+          in: path
+          required: true
+          description: The specific version id of the EvaluationSuiteVersion to retrieve.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluationSuiteVersion'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+    delete:
+      operationId: EvaluationSuites_deleteVersion
+      description: Delete the specific version of the EvaluationSuiteVersion. The service returns 204 No Content if the EvaluationSuiteVersion was deleted successfully or if the EvaluationSuiteVersion does not exist.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: name
+          in: path
+          required: true
+          description: The name of the resource.
+          schema:
+            type: string
+        - name: version
+          in: path
+          required: true
+          description: The version of the EvaluationSuiteVersion to delete.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+    patch:
+      operationId: EvaluationSuites_createOrUpdateVersion
+      description: Create a new or update an existing EvaluationSuiteVersion with the given version id
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: name
+          in: path
+          required: true
+          description: The name of the resource.
+          schema:
+            type: string
+        - name: version
+          in: path
+          required: true
+          description: The specific version id of the EvaluationSuiteVersion to create or update.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluationSuiteVersion'
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluationSuiteVersion'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/EvaluationSuiteVersionUpdate'
+        description: The EvaluationSuiteVersion to create or update.
+  /evaluation_suites/{name}:run:
+    post:
+      operationId: EvaluationSuites_run
+      description: Run an evaluation using the suite's testing criteria and dataset.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The name of the evaluation suite.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluationSuiteRunResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvaluationSuiteRunRequest'
+        description: The run request parameters.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
   /evaluationrules:
     get:
       operationId: EvaluationRules_list
@@ -8307,6 +8585,7 @@ components:
             - activity
             - responses
             - a2a
+            - mcp
             - invocations
     AgentEvaluatorGenerationJobSource:
       type: object
@@ -8456,6 +8735,7 @@ components:
           enum:
             - activity_protocol
             - responses
+            - mcp
             - invocations
     AgentReference:
       type: object
@@ -12007,6 +12287,24 @@ components:
       allOf:
         - $ref: '#/components/schemas/InsightResult'
       description: Insights from the evaluation comparison.
+    EvaluationDatasetReference:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Dataset name.
+        version:
+          type: string
+          description: Dataset version. If not provided, resolves to the latest version.
+        schema_file_name:
+          type: string
+          description: |-
+            Name of the schema file within the dataset's blob folder (e.g., "a3f2b1c4_schema.json").
+            Optional — if not provided, schema is inferred at runtime from the data.
+            Only applicable for uri_folder datasets.
+      description: Reference to a dataset by name and version.
     EvaluationLevel:
       anyOf:
         - type: string
@@ -12180,6 +12478,279 @@ components:
       allOf:
         - $ref: '#/components/schemas/ScheduleTask'
       description: Evaluation task for the schedule.
+    EvaluationSuiteRunRequest:
+      type: object
+      properties:
+        evaluation_name:
+          type: string
+          description: "Name for the evaluation. Default: '{suiteName}-runs'."
+        evaluation_suite_version:
+          type: string
+          description: 'Evaluation suite version to run. Default: latest.'
+        evaluation_level:
+          allOf:
+            - $ref: '#/components/schemas/EvaluationLevel'
+          description: Overrides the suite's default evaluation level. If omitted, uses the level from the suite.
+      description: Request body for running an evaluation from a suite.
+    EvaluationSuiteRunResponse:
+      type: object
+      required:
+        - evaluation_suite_name
+        - evaluation_suite_version
+        - results
+      properties:
+        evaluation_suite_name:
+          type: string
+          description: The evaluation suite name used.
+        evaluation_suite_version:
+          type: string
+          description: The evaluation suite version resolved.
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluationSuiteRunResult'
+          description: The run results. Currently a single-element array; will support multiple runs in the future.
+      description: Response from running an evaluation suite.
+    EvaluationSuiteRunResult:
+      type: object
+      required:
+        - eval_id
+        - run_id
+        - status
+        - created_at
+      properties:
+        eval_id:
+          type: string
+          description: The evaluation ID created.
+        run_id:
+          type: string
+          description: The eval run ID created.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/JobStatus'
+          description: Status of the run.
+        created_at:
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
+          description: Timestamp when the run was created.
+      description: Result of a single evaluation run within a suite execution.
+    EvaluationSuiteSubtype:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - default
+            - benchmark
+      description: The subtype of an evaluation suite.
+    EvaluationSuiteVersion:
+      type: object
+      required:
+        - testing_criteria
+        - name
+        - version
+      properties:
+        display_name:
+          type: string
+          description: |-
+            Human-readable display name.
+            Does not need to be unique. Shown in Foundry portal list views and eval reports.
+        subtype:
+          allOf:
+            - $ref: '#/components/schemas/EvaluationSuiteSubtype'
+          description: Subtype of the evaluation suite.
+        dataset:
+          allOf:
+            - $ref: '#/components/schemas/EvaluationDatasetReference'
+          description: |-
+            Dataset reference for evaluation.
+            Optional — omit for evaluator-only suites where data comes from
+            live production traces or is provided at run time.
+            The referenced dataset must exist in the project's dataset registry.
+        testing_criteria:
+          type: array
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/OpenAI.EvalGraderLabelModel'
+              - $ref: '#/components/schemas/OpenAI.EvalGraderStringCheck'
+              - $ref: '#/components/schemas/OpenAI.EvalGraderTextSimilarity'
+              - $ref: '#/components/schemas/OpenAI.EvalGraderPython'
+              - $ref: '#/components/schemas/OpenAI.EvalGraderScoreModel'
+              - $ref: '#/components/schemas/TestingCriterionAzureAIEvaluator'
+          minItems: 1
+          description: |-
+            Testing criteria — the evaluator configurations for this suite.
+            Supports all grader types: azure_ai_evaluator, string_check, label_model,
+            score_model, text_similarity, python, etc.
+            At least one entry is required.
+        target:
+          allOf:
+            - $ref: '#/components/schemas/Target'
+          description: |-
+            Target for this evaluation suite. Uses the existing Target discriminated type
+            from eval runs. Supports azure_ai_agent, azure_ai_model, azure_ai_assistant.
+            Optional — allows suites to exist without a target.
+        input_messages:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.CreateEvalResponsesRunDataSourceInputMessagesTemplate'
+            - $ref: '#/components/schemas/OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesItemReference'
+          description: |-
+            How to send dataset rows to the target (agent or model).
+            Supports template type (prompt with column placeholders) and
+            item_reference type (column containing pre-built messages).
+        evaluation_level:
+          allOf:
+            - $ref: '#/components/schemas/EvaluationLevel'
+          description: Default evaluation level for this suite. Can be overridden at run time.
+        name:
+          type: string
+          description: The name of the resource.
+          readOnly: true
+        version:
+          type: string
+          description: The version of the resource.
+          readOnly: true
+      description: |-
+        An evaluation suite bundles testing criteria — an optional dataset, one or more
+        evaluator configs with thresholds and init params — into a reusable, named artifact that
+        can gate agent changes across batch, scheduled, continuous, and CI/CD evals.
+    EvaluationSuiteVersionCreate:
+      type: object
+      required:
+        - testing_criteria
+      properties:
+        display_name:
+          type: string
+          description: |-
+            Human-readable display name.
+            Does not need to be unique. Shown in Foundry portal list views and eval reports.
+        subtype:
+          allOf:
+            - $ref: '#/components/schemas/EvaluationSuiteSubtype'
+          description: Subtype of the evaluation suite.
+        dataset:
+          allOf:
+            - $ref: '#/components/schemas/EvaluationDatasetReference'
+          description: |-
+            Dataset reference for evaluation.
+            Optional — omit for evaluator-only suites where data comes from
+            live production traces or is provided at run time.
+            The referenced dataset must exist in the project's dataset registry.
+        testing_criteria:
+          type: array
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/OpenAI.EvalGraderLabelModel'
+              - $ref: '#/components/schemas/OpenAI.EvalGraderStringCheck'
+              - $ref: '#/components/schemas/OpenAI.EvalGraderTextSimilarity'
+              - $ref: '#/components/schemas/OpenAI.EvalGraderPython'
+              - $ref: '#/components/schemas/OpenAI.EvalGraderScoreModel'
+              - $ref: '#/components/schemas/TestingCriterionAzureAIEvaluator'
+          minItems: 1
+          description: |-
+            Testing criteria — the evaluator configurations for this suite.
+            Supports all grader types: azure_ai_evaluator, string_check, label_model,
+            score_model, text_similarity, python, etc.
+            At least one entry is required.
+        target:
+          allOf:
+            - $ref: '#/components/schemas/Target'
+          description: |-
+            Target for this evaluation suite. Uses the existing Target discriminated type
+            from eval runs. Supports azure_ai_agent, azure_ai_model, azure_ai_assistant.
+            Optional — allows suites to exist without a target.
+        input_messages:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.CreateEvalResponsesRunDataSourceInputMessagesTemplate'
+            - $ref: '#/components/schemas/OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesItemReference'
+          description: |-
+            How to send dataset rows to the target (agent or model).
+            Supports template type (prompt with column placeholders) and
+            item_reference type (column containing pre-built messages).
+        evaluation_level:
+          allOf:
+            - $ref: '#/components/schemas/EvaluationLevel'
+          description: Default evaluation level for this suite. Can be overridden at run time.
+        description:
+          type: string
+          description: The asset description text.
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+          description: Tag dictionary. Tags can be added, removed, and updated.
+      description: |-
+        An evaluation suite bundles testing criteria — an optional dataset, one or more
+        evaluator configs with thresholds and init params — into a reusable, named artifact that
+        can gate agent changes across batch, scheduled, continuous, and CI/CD evals.
+    EvaluationSuiteVersionUpdate:
+      type: object
+      required:
+        - testing_criteria
+      properties:
+        display_name:
+          type: string
+          description: |-
+            Human-readable display name.
+            Does not need to be unique. Shown in Foundry portal list views and eval reports.
+        subtype:
+          allOf:
+            - $ref: '#/components/schemas/EvaluationSuiteSubtype'
+          description: Subtype of the evaluation suite.
+        dataset:
+          allOf:
+            - $ref: '#/components/schemas/EvaluationDatasetReference'
+          description: |-
+            Dataset reference for evaluation.
+            Optional — omit for evaluator-only suites where data comes from
+            live production traces or is provided at run time.
+            The referenced dataset must exist in the project's dataset registry.
+        testing_criteria:
+          type: array
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/OpenAI.EvalGraderLabelModel'
+              - $ref: '#/components/schemas/OpenAI.EvalGraderStringCheck'
+              - $ref: '#/components/schemas/OpenAI.EvalGraderTextSimilarity'
+              - $ref: '#/components/schemas/OpenAI.EvalGraderPython'
+              - $ref: '#/components/schemas/OpenAI.EvalGraderScoreModel'
+              - $ref: '#/components/schemas/TestingCriterionAzureAIEvaluator'
+          minItems: 1
+          description: |-
+            Testing criteria — the evaluator configurations for this suite.
+            Supports all grader types: azure_ai_evaluator, string_check, label_model,
+            score_model, text_similarity, python, etc.
+            At least one entry is required.
+        target:
+          allOf:
+            - $ref: '#/components/schemas/Target'
+          description: |-
+            Target for this evaluation suite. Uses the existing Target discriminated type
+            from eval runs. Supports azure_ai_agent, azure_ai_model, azure_ai_assistant.
+            Optional — allows suites to exist without a target.
+        input_messages:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.CreateEvalResponsesRunDataSourceInputMessagesTemplate'
+            - $ref: '#/components/schemas/OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesItemReference'
+          description: |-
+            How to send dataset rows to the target (agent or model).
+            Supports template type (prompt with column placeholders) and
+            item_reference type (column containing pre-built messages).
+        evaluation_level:
+          allOf:
+            - $ref: '#/components/schemas/EvaluationLevel'
+          description: Default evaluation level for this suite. Can be overridden at run time.
+        description:
+          type: string
+          description: The asset description text.
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+          description: Tag dictionary. Tags can be added, removed, and updated.
+      description: |-
+        An evaluation suite bundles testing criteria — an optional dataset, one or more
+        evaluator configs with thresholds and init params — into a reusable, named artifact that
+        can gate agent changes across batch, scheduled, continuous, and CI/CD evals.
     EvaluationTaxonomy:
       type: object
       required:
@@ -29045,6 +29616,21 @@ components:
           format: uri
           description: The link to the next page of items
       description: Paged collection of EvaluationRule items
+    PagedEvaluationSuiteVersion:
+      type: object
+      required:
+        - value
+      properties:
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluationSuiteVersion'
+          description: The EvaluationSuiteVersion items on this page
+        nextLink:
+          type: string
+          format: uri
+          description: The link to the next page of items
+      description: Paged collection of EvaluationSuiteVersion items
     PagedEvaluationTaxonomy:
       type: object
       required:

@@ -284,6 +284,7 @@ union AgentProtocol {
   string,
   activity_protocol: "activity_protocol",
   responses: "responses",
+  mcp: "mcp",
   invocations: "invocations",
 }
 
@@ -292,6 +293,7 @@ union AgentEndpointProtocol {
   activity: "activity",
   responses: "responses",
   a2a: "a2a",
+  mcp: "mcp",
   invocations: "invocations",
 }
 

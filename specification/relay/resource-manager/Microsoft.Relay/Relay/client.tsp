@@ -119,10 +119,7 @@ model RelayUpdateParametersReplacement
   "csharp"
 );
 @@clientName(RelayUpdateParameters, "RelayUpdateParametersTemp", "csharp");
-@@clientName(RelayUpdateParametersReplacement,
-  "RelayUpdateParameters",
-  "csharp"
-);
+@@clientName(RelayUpdateParametersReplacement, "RelayNamespacePatch", "csharp");
 
 // Back-compat: operation was named CheckRelayNamespaceNameAvailability in the old SDK
 @@clientName(NamespacesOperationGroup.checkNameAvailability,
