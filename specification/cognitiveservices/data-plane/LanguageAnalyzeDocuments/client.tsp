@@ -6,9 +6,13 @@ using Azure.ClientGenerator.Core;
 
 namespace Language.AnalyzeTextClientCustomizations;
 
-@@clientName(Tasks, "DocumentActions", "csharp");
-@@clientName(State, "DocumentActionState", "csharp");
+@@clientName(AnalyzeDocuments, "DocumentsServiceClient", "csharp");
+@@clientName(Tasks, "DocumentTasksState", "csharp");
+@@clientName(Tasks.items, "Results", "csharp");
+@@clientName(State, "DocumentActionStatus", "csharp");
+@@clientName(State.cancelled, "Canceled", "csharp");
 @@clientName(Error, "AnalyzeDocumentsError", "csharp");
+@@clientName(Error.innererror, "InnerError", "csharp");
 
 @@clientName(Entity, "NamedEntity", "csharp");
 
@@ -55,11 +59,11 @@ namespace Language.AnalyzeTextClientCustomizations;
   "csharp"
 );
 @@clientName(PiiCategories.AzureDocumentDBAuthKey,
-  "AzureDocumentDbauthKey",
+  "AzureDocumentDBAuthKey",
   "csharp"
 );
 @@clientName(PiiCategories.AzureIAASDatabaseConnectionAndSQLString,
-  "AzureIaasDatabaseConnectionAndSqlString",
+  "AzureIaasDBConnectionAndSqlString",
   "csharp"
 );
 @@clientName(PiiCategories.AzureSAS, "AzureSas", "csharp");
@@ -485,7 +489,7 @@ namespace Language.AnalyzeTextClientCustomizations;
 );
 
 @@clientName(MultiLanguageAnalysisInput,
-  "MultiLanguageDocumentInput",
+  "MultiLanguageDocumentCollection",
   "csharp"
 );
 
@@ -495,6 +499,11 @@ namespace Language.AnalyzeTextClientCustomizations;
   "AnalyzeDocumentsOperationAction",
   "csharp"
 );
+@@clientName(PiiLROTask,
+  "PiiEntityRecognitionAction",
+  "csharp"
+);
+
 @@clientName(AnalyzeDocumentsLROTask.taskName, "Name", "csharp");
 
 @@clientName(AnalyzeDocumentsLROTaskKind,
@@ -511,7 +520,11 @@ namespace Language.AnalyzeTextClientCustomizations;
   "csharp"
 );
 @@clientName(AbstractiveSummarizationTaskParameters,
-  "AbstractiveSummarizationActionContent",
+  "AbstractiveSummarizationOptions",
+  "csharp"
+);
+@@clientName(AbstractiveSummarizationTaskParameters.loggingOptOut,
+  "ShouldLog",
   "csharp"
 );
 
@@ -524,7 +537,11 @@ namespace Language.AnalyzeTextClientCustomizations;
   "csharp"
 );
 @@clientName(ExtractiveSummarizationTaskParameters,
-  "ExtractiveSummarizationActionContent",
+  "ExtractiveSummarizationOptions",
+  "csharp"
+);
+@@clientName(ExtractiveSummarizationTaskParameters.sortBy,
+  "OrderBy",
   "csharp"
 );
 
@@ -533,7 +550,7 @@ namespace Language.AnalyzeTextClientCustomizations;
   "csharp"
 );
 @@clientName(AnalyzeDocumentJobsInput.analysisInput,
-  "DocumentsInput",
+  "DocumentInput",
   "csharp"
 );
 @@clientName(AnalyzeDocumentJobsInput.tasks, "Actions", "csharp");
@@ -552,6 +569,10 @@ namespace Language.AnalyzeTextClientCustomizations;
 );
 @@clientName(AnalyzeDocumentsLROResultsKind.PiiEntityRecognitionLROResults,
   "PiiEntityRecognitionOperationResults",
+  "csharp"
+);
+@@clientName(AnalyzeDocumentsLROResult,
+  "AnalyzeDocumentsOperationResult",
   "csharp"
 );
 
@@ -574,11 +595,40 @@ namespace Language.AnalyzeTextClientCustomizations;
 );
 
 @@clientName(analyzeDocumentsJobStatus,
-  "GetAnalyzeDocumentsJobStatus",
+  "GetAnalyzeDocumentsJobState",
   "csharp"
 );
 @@clientName(analyzeDocumentsCancelJob,
   "AnalyzeDocumentsCancelOperation",
   "csharp"
 );
-@@clientName(redactionCharacter.equals, "EqualSign", "csharp");
+@@clientName(SummaryLengthBucket,
+  "SummarySize",
+  "csharp"
+);
+@@clientName(redactionCharacter.equals, "EqualsSign", "csharp");
+@@clientName(EntityMaskPolicy, "EntityMaskRedactionPolicy", "csharp");
+
+@@clientName(DocumentWarning.targetRef, "TargetReference", "csharp");
+
+@@clientName(PiiDomain.phi, "Health", "csharp");
+
+@@clientName(PiiCategories.URL, "Url", "csharp");
+
+@@clientName(RequestStatistics, "DocumentRequestStatistics", "csharp");
+
+@@clientName(ScriptKind, "DocumentScriptKind", "csharp");
+
+@@clientName(ScriptCode, "DocumentScriptCode", "csharp");
+
+@@clientName(NoMaskPolicy, "NoMaskRedactionPolicy", "csharp");
+
+@@clientName(BaseRedactionPolicy, "RedactionPolicy", "csharp");
+
+@@clientName(TaskState.lastUpdateDateTime, "LastUpdatedAt", "csharp");
+
+@@clientName(DocumentAnalysisDocumentResult.target, "Targets", "csharp");
+
+@@clientName(ExtractiveSummarizationSortingCriteria, "ExtractiveSummarizationOrder", "csharp");
+
+@@clientName(AbstractiveSummary, "DocumentAbstractiveSummary", "csharp");
