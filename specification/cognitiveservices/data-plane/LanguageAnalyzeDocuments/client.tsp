@@ -6,7 +6,7 @@ using Azure.ClientGenerator.Core;
 
 namespace Language.AnalyzeTextClientCustomizations;
 
-@@clientName(AnalyzeDocuments, "DocumentAnalysisClient", "csharp");
+@@clientName(AnalyzeDocuments, "DocumentsServiceClient", "csharp");
 @@clientName(Tasks, "DocumentTasksState", "csharp");
 @@clientName(Tasks.items, "Results", "csharp");
 @@clientName(State, "DocumentActionStatus", "csharp");
