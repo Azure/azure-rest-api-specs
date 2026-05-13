@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 using Azure.Core;
 
@@ -1094,6 +1095,27 @@ model Deployment {
    * Boolean flag indicating whether the deployment is a rollback deployment.
    */
   isCloudInitiatedRollback?: boolean;
+
+  /**
+   * The protocol the device should use when downloading the update payload.
+   * Defaults to "https".
+   */
+  @added(Versions.v2026_06_01)
+  downloadSecurity?: DownloadSecurity = DownloadSecurity.https;
+}
+
+/**
+ * The protocol the device should use when downloading the update payload.
+ */
+@added(Versions.v2026_06_01)
+union DownloadSecurity {
+  string,
+
+  /** Download update payload over HTTPS. */
+  https: "https",
+
+  /** Download update payload over HTTP. */
+  http: "http",
 }
 
 /**
