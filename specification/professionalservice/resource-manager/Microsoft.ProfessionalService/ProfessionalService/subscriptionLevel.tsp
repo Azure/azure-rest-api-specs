@@ -14,7 +14,9 @@ namespace Microsoft.ProfessionalService;
 interface ProfessionalServiceSubscriptionLevel {
   get is ArmResourceRead<ProfessionalServiceResource>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ProfessionalServiceResource>;
-  // NOTE: No update (Patch) — Patch is not supported for Professional Services in GA.
+  // Tags-only PATCH per ARM TrackedResource convention.
+  // Business properties are not patchable for Professional Services in GA.
+  updateTags is ArmTagsPatchAsync<ProfessionalServiceResource>;
   delete is ArmResourceDeleteWithoutOkAsync<ProfessionalServiceResource>;
   listByResourceGroup is ArmResourceListByParent<ProfessionalServiceResource>;
   // NOTE: No listAccessToken (GenerateToken) — not supported for Professional Services.
