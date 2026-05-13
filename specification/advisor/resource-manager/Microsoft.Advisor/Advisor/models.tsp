@@ -612,6 +612,12 @@ model RecommendationProperties {
   oldlastUpdated?: utcDateTime;
 
   /**
+   * The created time of the recommendation.
+   */
+  @added(Versions.v2026_02_01_preview)
+  createdTime?: utcDateTime;
+
+  /**
    * The recommendation metadata.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
