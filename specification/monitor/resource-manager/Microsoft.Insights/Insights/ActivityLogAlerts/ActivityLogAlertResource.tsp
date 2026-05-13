@@ -22,12 +22,12 @@ model ActivityLogAlertResource
     NamePattern = "^[-\\w\\._\\(\\)]+$"
   >;
 
-  /** Resource tags. */
+  /** The tags of the resource. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
-  /** The geo-location where the resource lives */
+  /** The location of the resource. Azure Activity Log Alert rules are supported on Global, West Europe and North Europe regions. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location?: string;
