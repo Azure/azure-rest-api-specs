@@ -33985,14 +33985,6 @@ components:
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
-        tool_configs:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
-            Resolution order: exact tool name match takes priority over `*`.
-            Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: |-
