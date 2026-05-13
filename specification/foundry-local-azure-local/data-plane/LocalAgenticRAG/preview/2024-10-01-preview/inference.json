@@ -1,0 +1,477 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "InferenceService",
+    "description": "Query collections using Retrieval-Augmented Generation (RAG) or query the LLM directly.",
+    "version": "2024-10-01-preview"
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": "Default scope"
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "2024-10-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "ApiVersion",
+        "modelAsString": true
+      },
+      "description": "The API version to use."
+    }
+  },
+  "paths": {
+    "/edgeai/chat/completions": {
+      "post": {
+        "operationId": "ChatCompletions_Rag",
+        "summary": "Chat Completions (RAG)",
+        "description": "Queries a collection using RAG. Searches vector data, retrieves relevant chunks, and generates a grounded LLM response.",
+        "tags": [
+          "ChatCompletions"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "x-user-role",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "dev",
+              "user"
+            ],
+            "x-ms-enum": {
+              "name": "UserRole",
+              "modelAsString": true
+            },
+            "description": "dev = uses request body parameters directly. user = loads developer-configured settings."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RagChatRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ChatCompletionResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request. No ingested data, invalid API version, or unsupported x-user-role."
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "403": {
+            "description": "Forbidden. RBAC denied."
+          },
+          "404": {
+            "description": "Not Found. Collection not found."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RAG Chat Completion": {
+            "$ref": "./examples/ChatCompletions_Rag.json"
+          }
+        }
+      }
+    },
+    "/edgeai/slm/chat/completions": {
+      "post": {
+        "operationId": "ChatCompletions_ModelOnly",
+        "summary": "Chat Completions (Model-Only)",
+        "description": "Queries the LLM directly without retrieval. No collection needed, no RBAC, no api-version required.",
+        "tags": [
+          "ChatCompletions"
+        ],
+        "parameters": [
+          {
+            "name": "x-user-role",
+            "in": "header",
+            "type": "string",
+            "enum": [
+              "dev",
+              "user"
+            ],
+            "x-ms-enum": {
+              "name": "UserRole",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ModelOnlyChatRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ChatCompletionResponse"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Model Only Chat Completion": {
+            "$ref": "./examples/ChatCompletions_ModelOnly.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "message": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "ChatMessage": {
+      "type": "object",
+      "required": [
+        "role",
+        "content"
+      ],
+      "properties": {
+        "role": {
+          "type": "string",
+          "enum": [
+            "system",
+            "user",
+            "assistant"
+          ],
+          "x-ms-enum": {
+            "name": "ChatRole",
+            "modelAsString": true
+          }
+        },
+        "content": {
+          "type": "string"
+        }
+      }
+    },
+    "MilvusDataSourceParameters": {
+      "type": "object",
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "description": "Milvus endpoint. Use empty string.",
+          "default": ""
+        },
+        "index_name": {
+          "type": "string",
+          "default": "edgeragapp",
+          "description": "Collection to query."
+        },
+        "text_strictness": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 5,
+          "default": 2
+        },
+        "image_strictness": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 5,
+          "default": 1
+        },
+        "top_n_documents": {
+          "type": "integer",
+          "format": "int32",
+          "default": 5
+        },
+        "query_type": {
+          "type": "string",
+          "default": "hybrid_search",
+          "enum": [
+            "hybrid_search",
+            "vector_search",
+            "full_text_search",
+            "hybrid_multimodal_search"
+          ],
+          "x-ms-enum": {
+            "name": "QueryType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "DataSource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "milvus"
+          ],
+          "x-ms-enum": {
+            "name": "DataSourceType",
+            "modelAsString": true
+          }
+        },
+        "parameters": {
+          "$ref": "#/definitions/MilvusDataSourceParameters"
+        }
+      }
+    },
+    "RagChatRequest": {
+      "type": "object",
+      "required": [
+        "messages"
+      ],
+      "properties": {
+        "messages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChatMessage"
+          }
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "minimum": 0,
+          "maximum": 1,
+          "default": 0.7
+        },
+        "top_p": {
+          "type": "number",
+          "format": "float",
+          "default": 0.1
+        },
+        "isMarkdown": {
+          "type": "boolean",
+          "default": false
+        },
+        "data_sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataSource"
+          }
+        }
+      }
+    },
+    "ModelOnlyChatRequest": {
+      "type": "object",
+      "required": [
+        "messages"
+      ],
+      "properties": {
+        "messages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChatMessage"
+          }
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "minimum": 0,
+          "maximum": 1,
+          "default": 0.7
+        },
+        "top_p": {
+          "type": "number",
+          "format": "float",
+          "default": 0.1
+        }
+      }
+    },
+    "Citation": {
+      "type": "object",
+      "properties": {
+        "filepath": {
+          "type": "string"
+        },
+        "chunk_id": {
+          "type": "string"
+        },
+        "score": {
+          "type": "number",
+          "format": "float"
+        },
+        "content": {
+          "type": "string"
+        },
+        "page_numbers": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      }
+    },
+    "AssistantMessage": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "assistant"
+          ],
+          "x-ms-enum": {
+            "name": "AssistantRole",
+            "modelAsString": true
+          }
+        },
+        "context": {
+          "type": "object",
+          "properties": {
+            "citations": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Citation"
+              }
+            }
+          }
+        },
+        "search_type": {
+          "type": "string"
+        },
+        "top_n_documents": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "text_strictness": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "search_results": {
+          "type": "object",
+          "properties": {
+            "dense": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "sparse": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "image": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Choice": {
+      "type": "object",
+      "properties": {
+        "content_filter_results": {
+          "type": "object"
+        },
+        "message": {
+          "$ref": "#/definitions/AssistantMessage"
+        }
+      }
+    },
+    "ChatCompletionResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "created": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "choices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Choice"
+          }
+        }
+      }
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "The endpoint URL for the Local Agentic RAG service.",
+        "required": true,
+        "type": "string",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  }
+}
