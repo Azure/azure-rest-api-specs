@@ -53,20 +53,12 @@ interface VirtualMachineScaleSetLifeCycleHookEvents {
   /**
    * Gets a virtual machine scale set lifecycle hook event.
    */
-  @example(
-    "./examples/2025-11-01/virtualMachineScaleSetExamples/VirtualMachineScaleSetLifeCycleHookEvent_Get.json",
-    "Get a virtual machine scale set lifecycle hook event."
-  )
   get is ComputeResourceRead<VMScaleSetLifecycleHookEvent>;
 
   /**
    * The operation to update a virtual machine scale set lifecycle hook event.
    */
   @patch(#{ implicitOptionality: false })
-  @example(
-    "./examples/2025-11-01/virtualMachineScaleSetExamples/VirtualMachineScaleSetLifeCycleHookEvent_Update.json",
-    "The operation to update the virtual machine scale set lifecycle hook event."
-  )
   update is ComputeCustomPatchSync<
     VMScaleSetLifecycleHookEvent,
     VMScaleSetLifecycleHookEventUpdate,
@@ -76,10 +68,6 @@ interface VirtualMachineScaleSetLifeCycleHookEvents {
   /**
    * Gets a list of virtual machine scale set lifecycle hook events created for a virtual machine scale set resource.
    */
-  @example(
-    "./examples/2025-11-01/virtualMachineScaleSetExamples/VirtualMachineScaleSetLifeCycleHookEvent_List.json",
-    "Gets a list of all lifecycle hook events in a virtual machine scale set."
-  )
   list is ComputeResourceListByParent<
     VMScaleSetLifecycleHookEvent,
     Response = VMScaleSetLifecycleHookEventListResult
