@@ -77,71 +77,67 @@ interface IotConnectors {
 @@doc(IotConnectors.createOrUpdate::parameters.resource,
   "The parameters for creating or updating an IoT Connectors resource."
 );
+@@doc(IotConnectorOperationGroup.update::parameters.properties,
+  "The parameters for updating an IoT Connector."
+);
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+alias IotConnectorsOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of workspace resource. */
+    @path
+    @minLength(3)
+    @maxLength(24)
+    @segment("workspaces")
+    @key
+    workspaceName: string;
+  },
+  {
+    /** The name of IoT Connector resource. */
+    @path
+    @minLength(3)
+    @maxLength(24)
+    @segment("iotconnectors")
+    @key
+    iotConnectorName: string;
+  }
+>;
+
+@armResourceOperations(#{ omitTags: true })
 interface IotConnectorOperationGroup {
   /**
    * Patch an IoT Connector.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/iotconnectors/{iotConnectorName}")
   @patch(#{ implicitOptionality: false })
   @tag("IotConnectors")
-  update(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-
-    /** The name of IoT Connector resource. */
-    @path
-    @minLength(3)
-    @maxLength(24)
-    iotConnectorName: string,
-
-    /** The name of workspace resource. */
-    @path
-    @minLength(3)
-    @maxLength(24)
-    workspaceName: string,
-
-    /** The parameters for updating an IoT Connector. */
-    @body
-    iotConnectorPatchResource: IotConnectorPatchResource,
-  ): ArmResponse<IotConnector> | (ArmAcceptedLroResponse<
-    "Resource update request accepted.",
-    LroHeaders = ArmLroLocationHeader<FinalResult = IotConnector> &
-      Azure.Core.Foundations.RetryAfterHeader
-  > & {
-    @bodyRoot
-    _: IotConnector;
-  }) | ErrorDetails;
+  update is IotConnectorsOps.CustomPatchAsync<
+    IotConnector,
+    IotConnectorPatchResource,
+    Response = ArmResponse<IotConnector> | (ArmAcceptedLroResponse<
+      "Resource update request accepted.",
+      LroHeaders = ArmLroLocationHeader<FinalResult = IotConnector> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > & {
+      @bodyRoot
+      _: IotConnector;
+    }),
+    OverrideErrorType = ErrorDetails
+  >;
 
   /**
    * Deletes an IoT Connector.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareApis/workspaces/{workspaceName}/iotconnectors/{iotConnectorName}")
   @delete
   @tag("IotConnectors")
-  delete(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-
-    /** The name of IoT Connector resource. */
-    @path
-    @minLength(3)
-    @maxLength(24)
-    iotConnectorName: string,
-
-    /** The name of workspace resource. */
-    @path
-    @minLength(3)
-    @maxLength(24)
-    workspaceName: string,
-  ):
-    | ArmDeletedResponse
-    | ArmDeleteAcceptedLroResponse
-    | ArmDeletedNoContentResponse
-    | Error;
+  delete is IotConnectorsOps.DeleteWithoutOkAsync<
+    IotConnector,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    OverrideErrorType = Error
+  >;
 }
