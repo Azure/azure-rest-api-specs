@@ -13,9 +13,10 @@ using Azure.Core;
 
 @service(#{ title: "Azure Speech Transcription API" })
 @useAuth(
-
-    | ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">
-    | AadOauth2Auth<["https://cognitiveservices.azure.com/.default"]>
+  ApiKeyAuth<
+    ApiKeyLocation.header,
+    "Ocp-Apim-Subscription-Key"
+  > | AadOauth2Auth<["https://cognitiveservices.azure.com/.default"]>
 )
 @server(
   "{endpoint}/speechtotext",
