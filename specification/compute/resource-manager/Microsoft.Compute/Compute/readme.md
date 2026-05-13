@@ -35,10 +35,10 @@ title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
 tag: package-2026-04-01
-suppress: MULTIPLE_API_VERSION
-reason: Compute SDK bundles multiple services (Compute, Disk, Gallery, SKUs) with independent versioning cycles. Each service maintains its own API version for backward compatibility.
 
 directive:
+  - suppress: MULTIPLE_API_VERSION
+    reason: The legacy services are on deprecation path
   - where:
       - $.definitions.VirtualMachine.properties
     suppress:
