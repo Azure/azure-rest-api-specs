@@ -206,6 +206,7 @@ union ItemGenerationParamsType {
   syntheticDataGeneration: "synthetic_data_gen_preview",
 
   /** Parameters for conversation simulation item generation. */
+  @removed(Versions.v1)
   conversationGenPreview: "conversation_gen_preview",
 }
 
@@ -314,6 +315,7 @@ model AzureAIAgentTarget extends Target {
   version?: string;
 
   /** An array of tools the target agent may call while generating a response. */
+  @removed(Versions.v1)
   tools?: OpenAI.Tool[];
 
   /** The parameters used to control the sampling behavior of the agent during text generation. */
@@ -360,6 +362,7 @@ model TracesPreviewEvalRunDataSource extends EvalRunDataSource {
   trace_ids?: string[];
 
   /** Collection of conversation identifiers to filter traces by conversation. */
+  @removed(Versions.v1)
   conversation_ids?: string[];
 
   /** The agent ID used to filter traces for evaluation. */
@@ -494,6 +497,7 @@ model RedTeamEvalRunDataSource extends EvalRunDataSource {
 }
 
 /** Input messages accepted by conversation simulation eval runs. */
+@removed(Versions.v1)
 union InputMessages {
   /** A typed input-messages template for prompt agents. */
   template: OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesTemplate,
@@ -503,6 +507,7 @@ union InputMessages {
 }
 
 /** Represents the parameters for conversation simulation item generation. */
+@removed(Versions.v1)
 model ConversationGenPreviewItemGenerationParams extends ItemGenerationParams {
   /** The type of item generation parameters, always `conversation_gen_preview`. */
   type: ItemGenerationParamsType.conversationGenPreview;
@@ -529,6 +534,7 @@ model ConversationGenPreviewItemGenerationParams extends ItemGenerationParams {
 }
 
 /** Represents a data source for evaluation runs that generate multi-turn conversations via LLM simulation against a target agent. */
+@removed(Versions.v1)
 model ConversationSimulationPreviewEvalRunDataSource extends EvalRunDataSource {
   /** The type of data source, always `azure_ai_conversation_simulation_preview`. */
   type: "azure_ai_conversation_simulation_preview";
@@ -550,6 +556,7 @@ model ConversationSimulationPreviewEvalRunDataSource extends EvalRunDataSource {
 // ── Agent Reference types (for trace source filtering) ────────────────────────
 
 /** Specifies the type of agent reference used for filtering traces. */
+@removed(Versions.v1)
 union EvalAgentReferenceType {
   string,
 
@@ -561,6 +568,7 @@ union EvalAgentReferenceType {
 }
 
 /** Base class for polymorphic agent references used in evaluation trace filtering. The user supplies exactly one variant to identify the agent whose traces should be filtered. */
+@removed(Versions.v1)
 @discriminator("type")
 model EvalAgentReference {
   /** The discriminator that identifies which kind of agent reference this is. */
@@ -568,6 +576,7 @@ model EvalAgentReference {
 }
 
 /** Identifies a 3P (Assistants) agent by its opaque agent ID. */
+@removed(Versions.v1)
 model EvalAgentIdReference extends EvalAgentReference {
   /** The type of agent reference, always `agent_id`. */
   type: EvalAgentReferenceType.agentId;
@@ -577,6 +586,7 @@ model EvalAgentIdReference extends EvalAgentReference {
 }
 
 /** Identifies a Foundry agent by its name and optional version. */
+@removed(Versions.v1)
 model EvalFoundryAgentReference extends EvalAgentReference {
   /** The type of agent reference, always `agent_reference`. */
   type: EvalAgentReferenceType.agentReference;
@@ -591,6 +601,7 @@ model EvalFoundryAgentReference extends EvalAgentReference {
 // ── Trace Source types ────────────────────────────────────────────────────────
 
 /** Specifies the type of trace source used to select traces for evaluation. */
+@removed(Versions.v1)
 union TraceSourceType {
   string,
 
@@ -608,6 +619,7 @@ union TraceSourceType {
 }
 
 /** Base class for polymorphic trace sources nested within an AzureAITraceDataSourcePreviewEvalRunDataSource. */
+@removed(Versions.v1)
 @discriminator("type")
 model TraceSource {
   /** The discriminator that identifies which kind of trace source this is. */
@@ -615,6 +627,7 @@ model TraceSource {
 }
 
 /** A trace source that selects traces by explicit trace IDs. */
+@removed(Versions.v1)
 model TraceIdTraceSource extends TraceSource {
   /** The type of trace source, always `trace_id_source`. */
   type: TraceSourceType.traceIdSource;
@@ -624,15 +637,18 @@ model TraceIdTraceSource extends TraceSource {
 }
 
 /** A trace source that selects traces by conversation IDs. */
+@removed(Versions.v1)
 model ConversationIdTraceSource extends TraceSource {
   /** The type of trace source, always `conversation_id_source`. */
   type: TraceSourceType.conversationIdSource;
 
   /** Collection of conversation identifiers to filter traces by. */
+  @removed(Versions.v1)
   conversation_ids: string[];
 }
 
 /** A trace source that selects traces by agent reference with time-based filtering. */
+@removed(Versions.v1)
 model AgentFilterTraceSource extends TraceSource {
   /** The type of trace source, always `agent_filter`. */
   type: TraceSourceType.agentFilter;
@@ -651,6 +667,7 @@ model AgentFilterTraceSource extends TraceSource {
 }
 
 /** An extended agent filter trace source that also includes model information. */
+@removed(Versions.v1)
 model AgentSmartFilterTraceSource extends TraceSource {
   /** The type of trace source, always `agent_smart_filter`. */
   type: TraceSourceType.agentSmartFilter;
@@ -671,6 +688,7 @@ model AgentSmartFilterTraceSource extends TraceSource {
 // ── Trace Data Source ─────────────────────────────────────────────────────────
 
 /** A wrapper data source that contains a polymorphic trace source to specify how traces are selected for evaluation. */
+@removed(Versions.v1)
 model AzureAITraceDataSourcePreviewEvalRunDataSource extends EvalRunDataSource {
   /** The type of data source, always `azure_ai_trace_data_source_preview`. */
   type: "azure_ai_trace_data_source_preview";
@@ -751,6 +769,7 @@ model EvalRun is OpenAI.EvalRun {
   properties?: Record<string>;
 
   /** The level at which evaluation is performed. Defaults to 'turn' if not specified. */
+  @removed(Versions.v1)
   evaluation_level?: EvaluationLevel = EvaluationLevel.turn;
 }
 
@@ -773,6 +792,7 @@ model CreateEvalRunRequest is OpenAI.CreateEvalRunRequest {
   properties?: Record<string>;
 
   /** The level at which evaluation is performed. Defaults to 'turn' if not specified. */
+  @removed(Versions.v1)
   evaluation_level?: EvaluationLevel = EvaluationLevel.turn;
 }
 
