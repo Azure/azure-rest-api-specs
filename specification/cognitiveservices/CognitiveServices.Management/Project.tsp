@@ -30,10 +30,10 @@ model Project is Azure.ResourceManager.ProxyResource<ProjectProperties> {
   location?: string;
 
   /**
-   * Resource Etag.
+   * Resource tags.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'etag' on the resource envelope for backward compatibility"
-  @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   etag?: string;
 
   /**
