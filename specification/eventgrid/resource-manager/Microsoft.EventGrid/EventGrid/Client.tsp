@@ -391,7 +391,6 @@ interface Clients {
 );
 @@usage(PartnerDetails, Usage.input, "csharp");
 @@usage(EventType, Usage.input, "csharp");
-// @@usage(TopicTypeProperties, Usage.input, "csharp");
 @@usage(VerifiedPartner, Usage.input, "csharp");
 @@usage(TopicTypeInfo, Usage.input, "csharp");
 @@usage(ExtensionTopic, Usage.input, "csharp");
@@ -515,16 +514,3 @@ interface Clients {
   "GetRegionalEventSubscriptionsDataForTopicType",
   "csharp"
 );
-// Rename EventSubscriptionsOperationGroup resource-group-level list methods to match old SDK method names
-// @@clientName(EventSubscriptionsOperationGroup.listGlobalByResourceGroupForTopicType,
-//   "GetGlobalEventSubscriptionsDataForTopicType",
-//   "csharp"
-// );
-// @@clientName(EventSubscriptionsOperationGroup.listRegionalByResourceGroup,
-//   "GetRegionalEventSubscriptionsData",
-//   "csharp"
-// );
-// @@clientName(EventSubscriptionsOperationGroup.listRegionalByResourceGroupForTopicType,
-//   "GetRegionalEventSubscriptionsDataForTopicType",
-//   "csharp"
-// );
