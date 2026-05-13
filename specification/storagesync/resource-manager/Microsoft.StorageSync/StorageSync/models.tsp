@@ -2681,11 +2681,11 @@ model CustomOkResponse {
   @statusCode
   _: 200;
 
-  @header
+  @header("x-ms-correlation-request-id")
   @doc("correlation request id.")
   xMsCorrelationRequestId?: string;
 
-  @header
+  @header("x-ms-request-id")
   @doc("request id.")
   xMsRequestId?: string;
 }

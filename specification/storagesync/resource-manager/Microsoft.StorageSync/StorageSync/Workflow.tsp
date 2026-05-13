@@ -31,11 +31,11 @@ interface Workflows {
   get is ArmResourceRead<
     Workflow,
     Response = ArmResponse<Workflow> & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     },
@@ -48,11 +48,11 @@ interface Workflows {
   listByStorageSyncService is ArmResourceListByParent<
     Workflow,
     Response = ArmResponse<WorkflowArray> & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     },
@@ -66,11 +66,11 @@ interface Workflows {
     Workflow,
     void,
     OkResponse & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     },

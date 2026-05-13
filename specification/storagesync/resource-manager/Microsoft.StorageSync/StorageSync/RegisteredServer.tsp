@@ -34,11 +34,11 @@ interface RegisteredServers {
   get is ArmResourceRead<
     RegisteredServer,
     Response = RegisteredServer & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     },
@@ -55,20 +55,20 @@ interface RegisteredServers {
     RegisteredServer,
     RegisteredServerCreateParameters,
     Response = (ArmResourceUpdatedResponse<RegisteredServer> & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     }) | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = RegisteredServer> &
       Azure.Core.Foundations.RetryAfterHeader> & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     }),
@@ -84,20 +84,20 @@ interface RegisteredServers {
     RegisteredServer,
     PatchModel = RegisteredServerUpdateParameters,
     Response = (ArmResourceUpdatedResponse<RegisteredServer> & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     }) | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = RegisteredServer> &
       Azure.Core.Foundations.RetryAfterHeader> & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     })
@@ -110,19 +110,19 @@ interface RegisteredServers {
   delete is ArmResourceDeleteWithoutOkAsync<
     RegisteredServer,
     Response = (ArmDeletedResponse & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     }) | (ArmDeleteAcceptedLroResponse & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     }) | ArmDeletedNoContentResponse,
@@ -135,11 +135,11 @@ interface RegisteredServers {
   listByStorageSyncService is ArmResourceListByParent<
     RegisteredServer,
     Response = ArmResponse<RegisteredServerArray> & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     },
@@ -155,20 +155,20 @@ interface RegisteredServers {
     RegisteredServer,
     TriggerRolloverRequest,
     Response = (OkResponse & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     }) | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader> & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     }),

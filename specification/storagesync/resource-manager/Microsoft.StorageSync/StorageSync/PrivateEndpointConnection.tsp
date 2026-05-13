@@ -38,11 +38,11 @@ interface PrivateEndpointConnections {
     StorageSyncService,
     Response = ArmResourceUpdatedResponse<PrivateEndpointConnection> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PrivateEndpointConnection> &
       Azure.Core.Foundations.RetryAfterHeader> & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("Request id")
       xMsRequestId?: string;
     }),
@@ -58,11 +58,11 @@ interface PrivateEndpointConnections {
     StorageSyncService,
     Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
       Azure.Core.Foundations.RetryAfterHeader> & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("Request id")
       xMsRequestId?: string;
     }) | ArmDeletedNoContentResponse,
@@ -77,11 +77,11 @@ interface PrivateEndpointConnections {
     StorageSyncService,
     PrivateEndpointConnection,
     Response = ArmResponse<PrivateEndpointConnectionListResult> & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     },

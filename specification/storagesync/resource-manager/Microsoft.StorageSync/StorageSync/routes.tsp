@@ -56,11 +56,11 @@ op locationOperationStatusGet(
   @path
   operationId: string,
 ): (ArmResponse<LocationOperationStatus> & {
-  @header
+  @header("x-ms-correlation-request-id")
   @doc("correlation request id.")
   xMsCorrelationRequestId?: string;
 
-  @header
+  @header("x-ms-request-id")
   @doc("request id.")
   xMsRequestId?: string;
 }) | StorageSyncError;
@@ -95,11 +95,11 @@ interface OperationStatusOperationGroup {
     @path
     operationId: string,
   ): (ArmResponse<OperationStatus> & {
-    @header
+    @header("x-ms-correlation-request-id")
     @doc("correlation request id.")
     xMsCorrelationRequestId?: string;
 
-    @header
+    @header("x-ms-request-id")
     @doc("request id.")
     xMsRequestId?: string;
   }) | StorageSyncError;

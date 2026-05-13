@@ -33,11 +33,11 @@ interface CloudEndpoints {
   get is ArmResourceRead<
     CloudEndpoint,
     Response = CloudEndpoint & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     },
@@ -54,20 +54,20 @@ interface CloudEndpoints {
     CloudEndpoint,
     CloudEndpointCreateParameters,
     Response = (ArmResourceUpdatedResponse<CloudEndpoint> & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     }) | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = CloudEndpoint> &
       Azure.Core.Foundations.RetryAfterHeader> & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("Request id")
       xMsRequestId?: string;
     }),
@@ -82,20 +82,20 @@ interface CloudEndpoints {
   delete is ArmResourceDeleteWithoutOkAsync<
     CloudEndpoint,
     Response = (ArmDeletedResponse & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     }) | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
       Azure.Core.Foundations.RetryAfterHeader> & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("Request id")
       xMsRequestId?: string;
     }) | ArmDeletedNoContentResponse,
@@ -108,11 +108,11 @@ interface CloudEndpoints {
   listBySyncGroup is ArmResourceListByParent<
     CloudEndpoint,
     Response = ArmResponse<CloudEndpointArray> & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     },
@@ -128,24 +128,24 @@ interface CloudEndpoints {
     BackupRequest,
     Response = (OkResponse & {
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name matches HTTP header canonical casing"
-      @header
+      @header("Location")
       @doc("Operation Status Location URI")
       Location?: string;
 
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     }) | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader> & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     }),
@@ -161,24 +161,24 @@ interface CloudEndpoints {
     BackupRequest,
     (PostBackupResponse & {
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name matches HTTP header canonical casing"
-      @header
+      @header("Location")
       @doc("Operation Status Location URI")
       Location?: string;
 
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     }) | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PostBackupResponse> &
       Azure.Core.Foundations.RetryAfterHeader> & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     }),
@@ -194,11 +194,11 @@ interface CloudEndpoints {
     PreRestoreRequest,
     OkResponse | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader> & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     }),
@@ -214,11 +214,11 @@ interface CloudEndpoints {
     CloudEndpoint,
     void,
     OkResponse & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     },
@@ -234,11 +234,11 @@ interface CloudEndpoints {
     PostRestoreRequest,
     OkResponse | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader> & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     }),
@@ -253,11 +253,11 @@ interface CloudEndpoints {
     TriggerChangeDetectionParameters,
     OkResponse | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader> & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     }),
@@ -272,11 +272,11 @@ interface CloudEndpoints {
     CloudEndpoint,
     void,
     ArmResponse<CloudEndpointAfsShareMetadataCertificatePublicKeys> & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     },

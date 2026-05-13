@@ -59,11 +59,11 @@ interface Operations {
     ...ApiVersionParameter,
     ...Azure.ResourceManager.Legacy.Provider,
   ): (ArmResponse<OperationEntityListResult> & {
-    @header
+    @header("x-ms-correlation-request-id")
     @doc("correlation request id.")
     xMsCorrelationRequestId?: string;
 
-    @header
+    @header("x-ms-request-id")
     @doc("request id.")
     xMsRequestId?: string;
   }) | StorageSyncError;

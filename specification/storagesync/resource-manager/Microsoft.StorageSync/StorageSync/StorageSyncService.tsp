@@ -32,11 +32,11 @@ interface StorageSyncServices {
   get is ArmResourceRead<
     StorageSyncService,
     Response = ArmResponse<StorageSyncService> & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     },
@@ -54,11 +54,11 @@ interface StorageSyncServices {
     StorageSyncServiceCreateParameters,
     Response = ArmResourceUpdatedResponse<StorageSyncService> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = StorageSyncService> &
       Azure.Core.Foundations.RetryAfterHeader> & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("Request id")
       xMsRequestId?: string;
     }),
@@ -74,20 +74,20 @@ interface StorageSyncServices {
     StorageSyncService,
     PatchModel = StorageSyncServiceUpdateParameters,
     Response = (ArmResourceUpdatedResponse<StorageSyncService> & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     }) | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = StorageSyncService> &
       Azure.Core.Foundations.RetryAfterHeader> & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("Request id")
       xMsRequestId?: string;
     }),
@@ -103,20 +103,20 @@ interface StorageSyncServices {
   delete is ArmResourceDeleteWithoutOkAsync<
     StorageSyncService,
     Response = (ArmDeletedResponse & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     }) | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
       Azure.Core.Foundations.RetryAfterHeader> & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("Request id")
       xMsRequestId?: string;
     }) | ArmDeletedNoContentResponse,
@@ -129,11 +129,11 @@ interface StorageSyncServices {
   listByResourceGroup is ArmResourceListByParent<
     StorageSyncService,
     Response = ArmResponse<StorageSyncServiceArray> & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     },
@@ -146,11 +146,11 @@ interface StorageSyncServices {
   listBySubscription is ArmListBySubscription<
     StorageSyncService,
     Response = StorageSyncServiceArray & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     },

@@ -33,11 +33,11 @@ interface ServerEndpoints {
   get is ArmResourceRead<
     ServerEndpoint,
     Response = ServerEndpoint & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     },
@@ -54,20 +54,20 @@ interface ServerEndpoints {
     ServerEndpoint,
     ServerEndpointCreateParameters,
     Response = (ArmResourceUpdatedResponse<ServerEndpoint> & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     }) | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ServerEndpoint> &
       Azure.Core.Foundations.RetryAfterHeader> & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     }),
@@ -83,20 +83,20 @@ interface ServerEndpoints {
     ServerEndpoint,
     PatchModel = ServerEndpointUpdateParameters,
     Response = (ArmResponse<ServerEndpoint> & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     }) | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ServerEndpoint> &
       Azure.Core.Foundations.RetryAfterHeader> & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     }),
@@ -111,19 +111,19 @@ interface ServerEndpoints {
   delete is ArmResourceDeleteWithoutOkAsync<
     ServerEndpoint,
     Response = (ArmDeletedResponse & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     }) | (ArmDeleteAcceptedLroResponse & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     }),
@@ -137,15 +137,15 @@ interface ServerEndpoints {
     ServerEndpoint,
     Response = ArmResponse<ServerEndpointArray> & {
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name matches HTTP header canonical casing"
-      @header
+      @header("Location")
       @doc("Operation Status Location URI")
       Location?: string;
 
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     },
@@ -161,20 +161,20 @@ interface ServerEndpoints {
     ServerEndpoint,
     RecallActionParameters,
     (OkResponse & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     }) | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader> & {
-      @header
+      @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       xMsCorrelationRequestId?: string;
 
-      @header
+      @header("x-ms-request-id")
       @doc("request id.")
       xMsRequestId?: string;
     }),
