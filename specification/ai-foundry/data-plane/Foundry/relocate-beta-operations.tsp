@@ -24,6 +24,16 @@ interface MemoryStores {}
 @@clientLocation(Azure.AI.Projects.MemoryStores.getUpdateResult, MemoryStores);
 @@clientLocation(Azure.AI.Projects.MemoryStores.deleteScope, MemoryStores);
 
+interface Models {}
+@@clientLocation(Azure.AI.Projects.Models.listVersions, Models);
+@@clientLocation(Azure.AI.Projects.Models.listLatest, Models);
+@@clientLocation(Azure.AI.Projects.Models.getVersion, Models);
+@@clientLocation(Azure.AI.Projects.Models.deleteVersion, Models);
+@@clientLocation(Azure.AI.Projects.Models.createOrUpdateVersion, Models);
+@@clientLocation(Azure.AI.Projects.Models.createAsync, Models);
+@@clientLocation(Azure.AI.Projects.Models.startPendingUpload, Models);
+@@clientLocation(Azure.AI.Projects.Models.getCredentials, Models);
+
 interface Evaluators {}
 @@clientLocation(Azure.AI.Projects.Evaluators.listVersions, Evaluators);
 @@clientLocation(Azure.AI.Projects.Evaluators.listLatestVersions, Evaluators);
@@ -108,6 +118,12 @@ interface Agents {}
 @@clientLocation(Azure.AI.Projects.Agents.deleteSession, Agents);
 @@clientLocation(Azure.AI.Projects.Agents.listSessions, Agents);
 @@clientLocation(Azure.AI.Projects.Agents.getSessionLogStream, Agents);
+@@clientLocation(Azure.AI.Projects.Agents.createAgentFromCode, Agents);
+@@clientLocation(Azure.AI.Projects.Agents.updateAgentFromCode, Agents);
+@@clientLocation(Azure.AI.Projects.Agents.createAgentVersionFromCode, Agents);
+@@clientLocation(Azure.AI.Projects.Agents.downloadAgentCode, Agents);
+@@clientLocation(Azure.AI.Projects.Agents.downloadAgentVersionCode, Agents);
+
 
 interface Datasets {}
 
@@ -117,3 +133,10 @@ interface Datasets {}
 @@clientLocation(Azure.AI.Projects.DataGenerationJobs.create, Datasets);
 @@clientLocation(Azure.AI.Projects.DataGenerationJobs.cancel, Datasets);
 @@clientLocation(Azure.AI.Projects.DataGenerationJobs.delete, Datasets);
+
+// Evaluation suite generation jobs → nested under evaluations sub-client
+@@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.get, Evaluators);
+@@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.list, Evaluators);
+@@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.create, Evaluators);
+@@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.cancel, Evaluators);
+@@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.delete, Evaluators);

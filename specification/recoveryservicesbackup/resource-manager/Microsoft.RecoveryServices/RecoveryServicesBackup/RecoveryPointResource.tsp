@@ -76,7 +76,8 @@ interface RecoveryPoints {
    * UpdateRecoveryPoint to update recovery point for given RecoveryPointID.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Recovery point updates use UpdateRecoveryPointRequest model which does not include tags property"
-  @added(Versions.v2026_01_01_preview)
+  @added(Versions.v2026_01_31_preview)
+  @removed(Versions.v2026_02_01)
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     RecoveryPointResource,

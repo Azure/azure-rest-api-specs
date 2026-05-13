@@ -18,12 +18,14 @@ import "./src/evaluation-taxonomies/routes.tsp";
 import "./src/evaluators/routes.tsp";
 import "./src/insights/routes.tsp";
 import "./src/memory-stores/routes.tsp";
+import "./src/models/routes.tsp";
 import "./src/red-teams/routes.tsp";
 import "./src/schedules/routes.tsp";
 import "./src/toolboxes/routes.tsp";
 import "./src/skills/routes.tsp";
 import "./src/agents-session-files/routes.tsp";
 import "./src/data_generation_jobs/routes.tsp";
+import "./src/evaluation-suites/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
 import "./relocate-beta-operations.tsp";
@@ -142,6 +144,8 @@ using Azure.AI.Projects;
 // Rename models ending with 'Object' to end with 'Details' for Python
 @@clientName(MemoryStoreObject, "MemoryStoreDetails", "python");
 
+@@clientName(PendingUploadResponse, "PendingUploadResult", "python");
+
 // Remove 'Object' suffix for JS client
 @@clientName(MemoryStoreObject, "MemoryStore", "javascript");
 
@@ -182,6 +186,19 @@ using Azure.AI.Projects;
 @@clientName(EvaluatorGenerationJobs.cancel, "cancel_generation_job", "python");
 @@clientName(EvaluatorGenerationJobs.delete, "delete_generation_job", "python");
 
+// Evaluation Suite Generation Jobs — unique names to avoid collision with evaluator gen methods
+@@clientName(EvaluationSuiteGenerationJobs.create, "createGenerationSuiteJob", "javascript");
+@@clientName(EvaluationSuiteGenerationJobs.get, "getGenerationSuiteJob", "javascript");
+@@clientName(EvaluationSuiteGenerationJobs.list, "listGenerationSuiteJobs", "javascript");
+@@clientName(EvaluationSuiteGenerationJobs.cancel, "cancelGenerationSuiteJob", "javascript");
+@@clientName(EvaluationSuiteGenerationJobs.delete, "deleteGenerationSuiteJob", "javascript");
+
+@@clientName(EvaluationSuiteGenerationJobs.create, "create_generation_suite_job", "python");
+@@clientName(EvaluationSuiteGenerationJobs.get, "get_generation_suite_job", "python");
+@@clientName(EvaluationSuiteGenerationJobs.list, "list_generation_suite_jobs", "python");
+@@clientName(EvaluationSuiteGenerationJobs.cancel, "cancel_generation_suite_job", "python");
+@@clientName(EvaluationSuiteGenerationJobs.delete, "delete_generation_suite_job", "python");
+
 // EvaluatorVersion datetime fields are typed as string in the spec but carry ISO-8601 timestamps
 @@alternateType(EvaluatorVersion.created_at, utcDateTime, "python");
 @@alternateType(EvaluatorVersion.modified_at, utcDateTime, "python");
@@ -191,6 +208,19 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 @@clientName(Azure.AI.Projects.Insight.id, "insight_id");
 @@clientName(InsightsGetParams.id, "insight_id");
+
+// --------------------------------------------------------------------------------
+// Models sub‐client
+// --------------------------------------------------------------------------------
+
+// Shorter method names for SDK models operations
+@@clientName(Models.listLatest, "list");
+@@clientName(Models.listVersions, "listVersions");
+@@clientName(Models.getVersion, "get");
+@@clientName(Models.deleteVersion, "delete");
+@@clientName(Models.createOrUpdateVersion, "update");
+@@clientName(Models.startPendingUpload, "pendingUpload");
+@@clientName(Models.getCredentials, "getCredentials");
 
 // --------------------------------------------------------------------------------
 // Datasets sub‐client
@@ -271,6 +301,10 @@ using Azure.AI.Projects;
 @@clientName(Skills.updateSkill, "update");
 @@clientName(Skills.deleteSkill, "delete");
 
+@@clientName(SkillObject, "SkillDetails", "python");
+@@clientName(DeleteSkillResponse, "DeleteSkillResult", "python");
+@@clientName(DownloadSkillResponse, "DownloadSkillResult", "python"); 
+
 // --------------------------------------------------------------------------------
 // Connections sub‐client
 // --------------------------------------------------------------------------------
@@ -295,6 +329,23 @@ using Azure.AI.Projects;
 @@access(AgentSessionFiles.uploadSessionFile, Access.internal, "python");
 @@usage(SessionFileWriteResponse, Usage.output);
 @@access(SessionFileWriteResponse, Access.public);
+
+// Exclude these operations entirely from emitted Python SDK
+@@scope(Agents.createAgentFromCode, "!(python)");
+
+@@clientName(DownloadAgentCodeResponse, "DownloadAgentCodeResult", "python");
+@@clientName(SessionDirectoryListResponse, "SessionDirectoryListResult", "python");
+@@clientName(SessionFileWriteResponse, "SessionFileWriteResult", "python");
+
+// --------------------------------------------------------------------------------
+// Evaluation Taxonomies sub-client
+// --------------------------------------------------------------------------------
+
+// Note that we can't rename it in src\openai-evaluations\models.tsp, since in 
+// src\evaluations\models.tsp we already define EvaluationTarget (not for v1).
+// If/when src\evaluations will be removed, consider doing the rename in 
+// src\openai-evaluations\models.tsp instead.
+@@clientName(Target, "EvaluationTarget");
 
 // --------------------------------------------------------------------------------
 // To support custom client-side handling of "opt-in" to preview features.

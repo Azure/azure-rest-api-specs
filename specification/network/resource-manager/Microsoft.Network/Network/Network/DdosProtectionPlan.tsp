@@ -3,11 +3,13 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -21,12 +23,6 @@ namespace Microsoft.Network;
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model DdosProtectionPlan extends TrackedResourceWithOptionalLocation {
   properties?: DdosProtectionPlanPropertiesFormat;
-
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
 
   @visibility(Lifecycle.Read)
   @path

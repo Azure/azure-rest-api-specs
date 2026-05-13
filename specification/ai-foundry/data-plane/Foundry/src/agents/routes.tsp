@@ -65,7 +65,7 @@ interface Agents {
       @header("x-ms-code-zip-sha256")
       codeZipSha256: string;
 
-      @multipartBody body: CreateAgentFromCodeContent;
+      @multipartBody content: CreateAgentFromCodeContent;
     },
     AgentObject
   >;
@@ -121,7 +121,7 @@ interface Agents {
       @header("x-ms-code-zip-sha256")
       codeZipSha256: string;
 
-      @multipartBody body: CreateAgentVersionFromCodeContent;
+      @multipartBody content: CreateAgentVersionFromCodeContent;
     },
     AgentObject
   >;
@@ -330,7 +330,7 @@ interface Agents {
       @header("x-ms-code-zip-sha256")
       codeZipSha256: string;
 
-      @multipartBody body: CreateAgentVersionFromCodeContent;
+      @multipartBody content: CreateAgentVersionFromCodeContent;
     },
     AgentVersionObject
   >;

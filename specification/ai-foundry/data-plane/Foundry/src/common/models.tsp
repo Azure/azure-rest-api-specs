@@ -167,9 +167,6 @@ model TracesJobSource {
 
   @doc("End of the time window (Unix timestamp in seconds). Defaults to current time.")
   end_time?: FoundryTimestamp;
-
-  @doc("Maximum number of traces to retrieve.")
-  max_traces?: int32;
 }
 
 @doc("Dataset source — reference to a dataset. Reusable shape spread into per-context discriminated subtypes.")

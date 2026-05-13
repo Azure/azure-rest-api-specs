@@ -129,7 +129,7 @@ union RiskCategory {
 }
 
 @doc("Azure OpenAI model configuration. The API version would be selected by the service for querying the model.")
-model AzureOpenAIModelConfiguration extends TargetConfig {
+model AzureOpenAIModelConfiguration extends RedTeamTargetConfig {
   type: "AzureOpenAIModel";
 
   @doc("Deployment name for AOAI model. Example: gpt-4o if in AIServices or connection based `connection_name/deployment_name` (e.g. `my-aoai-connection/gpt-4o`).")
@@ -138,7 +138,7 @@ model AzureOpenAIModelConfiguration extends TargetConfig {
 
 @doc("Abstract class for target configuration.")
 @discriminator("type")
-model TargetConfig {
+model RedTeamTargetConfig {
   @doc("Type of the model configuration.")
   type: string;
 }
@@ -181,5 +181,5 @@ model RedTeam {
   status?: string;
 
   @doc("Target configuration for the red-team run.")
-  target: TargetConfig;
+  target: RedTeamTargetConfig;
 }

@@ -91,5 +91,5 @@ interface SavingsPlanModels {
   {
     parameters: ExpandParameter,
   },
-  "!go,!javascript"
+  "!go,!javascript,!csharp"
 );

@@ -36,6 +36,21 @@ model DataGenerationJobInputs {
 
   @doc("The scenario of the data generation job. Either for fine-tuning or evaluation.")
   scenario: DataGenerationJobScenario;
+
+  @doc("Optional caller-supplied metadata for the job's output. See individual fields for whether they apply to file outputs (fine-tuning scenarios), dataset outputs (evaluation scenario), or both.")
+  output_options?: DataGenerationJobOutputOptions;
+}
+
+@doc("Output options for data generation job.")
+model DataGenerationJobOutputOptions {
+  @doc("Name to assign to the output. Used as the filename for Azure OpenAI file outputs (fine-tuning scenarios) and as the dataset name for dataset outputs (evaluation scenario).")
+  name?: string;
+
+  @doc("Description to assign to the output. Applies only to dataset outputs (evaluation scenario); ignored for Azure OpenAI file outputs.")
+  description?: string;
+
+  @doc("Tags to assign to the output. Applies only to dataset outputs (evaluation scenario); ignored for Azure OpenAI file outputs.")
+  tags?: Record<string>;
 }
 
 @doc("Result produced by a successful data generation job.")
@@ -92,17 +107,20 @@ model DatasetDataGenerationJobOutput extends DataGenerationJobOutput {
   @visibility(Lifecycle.Read)
   id?: string;
 
-  @doc("The name of the output dataset and can be optionally set during job creation time.")
+  @doc("The name of the output dataset.")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   @doc("The version of the output dataset.")
   @visibility(Lifecycle.Read)
   version?: string;
 
-  @doc("Description of the output dataset and can be optionally set during job creation time.")
+  @doc("Description of the output dataset.")
+  @visibility(Lifecycle.Read)
   description?: string;
 
-  @doc("Tag dictionary of the output dataset and can be optionally set during job creation time.")
+  @doc("Tag dictionary of the output dataset.")
+  @visibility(Lifecycle.Read)
   tags?: Record<string>;
 }
 
@@ -121,15 +139,15 @@ union DataGenerationJobOutputType {
 model DataGenerationTokenUsage {
   @doc("The number of prompt tokens used.")
   @visibility(Lifecycle.Read)
-  prompt_tokens?: int64;
+  prompt_tokens: int64;
 
   @doc("The number of completion tokens generated.")
   @visibility(Lifecycle.Read)
-  completion_tokens?: int64;
+  completion_tokens: int64;
 
   @doc("Total number of tokens used.")
   @visibility(Lifecycle.Read)
-  total_tokens?: int64;
+  total_tokens: int64;
 }
 
 @doc("The supported scenarios for a data generation job.")
