@@ -4,14 +4,9 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./common.tsp";
 import "@typespec/openapi";
-import "@typespec/versioning";
 
-using TypeSpec.OpenAPI;
-using TypeSpec.Http;
-using TypeSpec.Rest;
-using TypeSpec.Versioning;
-using Azure.Core;
-using Azure.Core.Traits;
+using Rest;
+using Versioning;
 
 namespace Microsoft.MachineLearningServices;
 
