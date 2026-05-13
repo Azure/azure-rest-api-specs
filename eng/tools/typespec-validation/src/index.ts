@@ -1,7 +1,6 @@
 import { stat } from "node:fs/promises";
 import { ParseArgsConfig, parseArgs } from "node:util";
 import { Suppression } from "suppressions";
-import { runAll, type ShardConfig } from "./run-all.js";
 import { CompileRule } from "./rules/compile.js";
 import { EmitAutorestRule } from "./rules/emit-autorest.js";
 import { FlavorAzureRule } from "./rules/flavor-azure.js";
@@ -10,6 +9,7 @@ import { FormatRule } from "./rules/format.js";
 import { LinterRulesetRule } from "./rules/linter-ruleset.js";
 import { NpmPrefixRule } from "./rules/npm-prefix.js";
 import { SdkTspConfigValidationRule } from "./rules/sdk-tspconfig-validation.js";
+import { runAll, type ShardConfig } from "./run-all.js";
 import { fileExists, getSuppressions, normalizePath } from "./utils.js";
 
 // Context argument may add new properties or override checkingAllSpecs
@@ -33,20 +33,18 @@ export async function main() {
     shard: {
       type: "string",
     },
-    "git-clean": {
-      type: "boolean",
-      default: false,
-    },
   };
   const parsedArgs = parseArgs({ args, options, allowPositionals: true } as ParseArgsConfig);
 
   if (parsedArgs.values.all) {
     context = { ...context, checkingAllSpecs: true };
     const specDir = parsedArgs.positionals[0] ?? "specification";
-    const shard = parsedArgs.values.shard !== undefined ? parseShard(parsedArgs.values.shard as string) : undefined;
+    const shard =
+      parsedArgs.values.shard !== undefined
+        ? parseShard(parsedArgs.values.shard as string)
+        : undefined;
     await runAll(specDir, {
       shard,
-      gitClean: Boolean(parsedArgs.values["git-clean"]),
     });
     return;
   }

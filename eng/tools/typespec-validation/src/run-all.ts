@@ -1,11 +1,10 @@
 import { execFile } from "child_process";
+import { globby } from "globby";
 import { cpus } from "os";
 import { dirname, relative, resolve } from "path";
-import { promisify } from "util";
-import { globby } from "globby";
 import pc from "picocolors";
-import { simpleGit } from "simple-git";
 import { getSuppressions as getSuppressionsRaw, Suppression } from "suppressions";
+import { promisify } from "util";
 import { runWithConcurrency } from "./concurrency.js";
 import { TaskRunner } from "./runner.js";
 import { normalizePath } from "./utils.js";
@@ -23,7 +22,6 @@ export interface ShardConfig {
 
 export interface RunAllOptions {
   shard?: ShardConfig;
-  gitClean?: boolean;
 }
 
 export async function runAll(specDir: string, options: RunAllOptions = {}): Promise<void> {
@@ -56,15 +54,6 @@ export async function runAll(specDir: string, options: RunAllOptions = {}): Prom
     const result = await validateProject(projectDir);
     const name = relative(absoluteSpecDir, projectDir);
     runner.reportTaskWithDetails(result.status, name, result.output);
-
-    if (options.gitClean) {
-      // Scope git clean to the top-level spec folder (e.g. specification/<service>/)
-      // so parallel projects don't interfere with each other
-      const topSpecFolder = projectDir.replace(/(^.*specification\/[^/]*)(.*)/, "$1");
-      const git = simpleGit();
-      await git.checkout(["--", topSpecFolder]);
-      await git.clean("f", ["-d", topSpecFolder]);
-    }
 
     return { ...result, name };
   });
@@ -116,11 +105,9 @@ async function validateProject(folder: string): Promise<ProjectResult> {
   const name = folder;
 
   // Check TypeSpecValidationAll suppression (used to skip specs in the "all" run)
-  const allSuppressions: Suppression[] = await getSuppressionsRaw(
-    "TypeSpecValidationAll",
-    folder,
-    { checkingAllSpecs: true },
-  );
+  const allSuppressions: Suppression[] = await getSuppressionsRaw("TypeSpecValidationAll", folder, {
+    checkingAllSpecs: true,
+  });
   const allToolSuppressions = allSuppressions.filter(
     (s) => !s.rules?.length && !s.subRules?.length,
   );
@@ -137,12 +124,7 @@ async function validateProject(folder: string): Promise<ProjectResult> {
   try {
     const { stdout, stderr } = await execFileAsync(
       process.execPath,
-      [
-        "--no-warnings",
-        resolve(import.meta.dirname, "../cmd/tsv.js"),
-        folder,
-        context,
-      ],
+      ["--no-warnings", resolve(import.meta.dirname, "../cmd/tsv.js"), folder, context],
       { maxBuffer: 64 * 1024 * 1024 },
     );
     const output = (stdout + stderr).trim();
