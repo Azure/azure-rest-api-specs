@@ -1,15 +1,15 @@
 import "./AnalyticsItems/main.tsp";
 import "./ComponentAPIs/main.tsp";
-import "./ComponentLinkedStorageAccounts/main.tsp";
+import "./ComponentLinkedStorageAccountApi/main.tsp";
 import "./Components/main.tsp";
-import "./DeletedWorkbooks/main.tsp";
+import "./DeletedWorkbookApi/main.tsp";
 import "./Favorites/main.tsp";
-import "./Livetoken/main.tsp";
+import "./LiveTokenApi/main.tsp";
 import "./WebTestLocation/main.tsp";
-import "./WebTests/main.tsp";
-import "./WorkbookOperations/main.tsp";
-import "./Workbooks/main.tsp";
-import "./WorkbookTemplates/main.tsp";
+import "./WebTestsApi/main.tsp";
+import "./WorkBookOperations/main.tsp";
+import "./WorkbooksApi/main.tsp";
+import "./WorkbookTemplatesApi/main.tsp";
 
 using AnalyticsItems;
 using ComponentAPIs;
