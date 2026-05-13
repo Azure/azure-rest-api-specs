@@ -295,6 +295,10 @@ union AgentEndpointProtocol {
   a2a: "a2a",
   mcp: "mcp",
   invocations: "invocations",
+
+  @doc("WebSocket-based protocol for hosted voice and real-time streaming agents.")
+  @removed(Versions.v1)
+  invocations_ws: "invocations_ws",
 }
 
 union AgentKind {

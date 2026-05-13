@@ -297,6 +297,126 @@
         ]
       }
     },
+    "/agents/endpoint/protocols/invocations_ws": {
+      "get": {
+        "operationId": "AgentWebsocket_connectEndpointWebsocket",
+        "description": "Establishes a WebSocket connection to a hosted agent. The target project and\nagent are passed as query parameters. The service resolves (or creates) a\nsession, resolves the agent version, then relays text and binary frames\nbidirectionally between the client and the agent (1 MB maximum frame size).\n\nThe client must send an HTTP GET with `Upgrade: websocket` headers.",
+        "parameters": [
+          {
+            "name": "project_name",
+            "in": "query",
+            "required": true,
+            "description": "The name of the project.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "agent_name",
+            "in": "query",
+            "required": true,
+            "description": "The name of the hosted agent.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "agent_session_id",
+            "in": "query",
+            "required": false,
+            "description": "Optional session/conversation ID. Pass the same value on a subsequent connection to reattach to an existing session. If not provided, the service auto-generates one.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "authorization",
+            "in": "query",
+            "required": false,
+            "description": "AAD bearer token for browser clients only. The W3C WebSocket API cannot set custom headers, so browser callers may pass the AAD token via this query parameter. Non-browser clients should use the `Authorization` header instead.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "foundry-features",
+            "in": "query",
+            "required": false,
+            "description": "Preview feature flag, accepted as an alternative to the `Foundry-Features` header for browser clients that cannot set custom headers. Either this query parameter or the header must be supplied with the value `HostedAgents=V1Preview`.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "HostedAgents=V1Preview"
+              ]
+            },
+            "explode": false
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "HostedAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-agent-session-id": {
+                "required": true,
+                "description": "Session ID for this WebSocket connection. Returns the provided session ID or an auto-generated one if not provided in the request.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Invocations WebSocket"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      }
+    },
     "/agents/{agent_name}": {
       "get": {
         "operationId": "Agents_getAgent",
@@ -15492,7 +15612,8 @@
               "responses",
               "a2a",
               "mcp",
-              "invocations"
+              "invocations",
+              "invocations_ws"
             ]
           }
         ]
