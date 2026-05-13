@@ -16,7 +16,8 @@ using Microsoft.NetworkFunction;
   "AzureTrafficCollectorsBySubscription"
 );
 @@clientName(AzureTrafficCollectors.azureTrafficCollectorsBySubscriptionList,
-  "List"
+  "List",
+  "!csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(AzureTrafficCollector.properties);

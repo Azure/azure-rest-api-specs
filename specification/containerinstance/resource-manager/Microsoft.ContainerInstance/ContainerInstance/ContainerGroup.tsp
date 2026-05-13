@@ -23,7 +23,7 @@ model ContainerGroup extends Foundations.ProxyResource {
   ...ResourceNameParameter<Resource = ContainerGroup, NamePattern = "">;
 
   /**
-   * The resource location.
+   * The resource location of the container group.
    */
   location?: string;
 
