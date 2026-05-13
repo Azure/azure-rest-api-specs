@@ -26,7 +26,16 @@ These are the global settings for the professionalservice.
 
 ```yaml
 openapi-type: arm
-tag: package-2023-07-01-preview
+tag: package-2026-05-01
+```
+
+### Tag: package-2026-05-01
+
+These settings apply only when `--tag=package-2026-05-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-05-01'
+input-file:
+  - stable/2026-05-01/professionalservice.json
 ```
 
 ### Tag: package-2023-07-01-preview
