@@ -224,6 +224,7 @@ interface ScheduledActions {
   @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ScheduledAction>;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<

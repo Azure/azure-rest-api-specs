@@ -12,6 +12,8 @@ using Azure.Core;
 using Microsoft.Network;
 using Microsoft.Compute;
 using Common;
+
+#suppress "@azure-tools/typespec-client-generator-core/inconsistent-multiple-service-dependency" "temporarily suppressing"
 @client({
   name: "CombineClient",
   service: [Microsoft.Network, Microsoft.Compute],
