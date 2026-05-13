@@ -25,7 +25,6 @@ model ManagedNetworkSettingsPropertiesBasicResource
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "'ManagedNetworkSettingsPropertiesBasicResource' does not support standalone delete – removed via parent or side-effect"
 @armResourceOperations(#{ omitTags: true })
 interface ManagedNetworkSettingsPropertiesBasicResources {
   /**
@@ -80,6 +79,7 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
    */
   @tag("ManagedNetwork")
   @action("batchOutboundRules")
+  @list
   post is ArmResourceActionAsync<
     ManagedNetworkSettingsPropertiesBasicResource,
     Request = ManagedNetworkSettingsBasicResource,

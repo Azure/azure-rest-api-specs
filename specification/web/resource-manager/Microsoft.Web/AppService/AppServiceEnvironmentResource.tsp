@@ -41,11 +41,12 @@ alias DiagnosticsOps = Azure.ResourceManager.Legacy.RoutedOperations<
     name: string;
   },
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/hostingEnvironments",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments",
   }
 >;
 
-@armResourceOperations(#{ allowStaticRoutes: true })
+@tag("AppServiceEnvironments")
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface AppServiceEnvironmentResources {
   /**
    * Description for Get the properties of an App Service Environment.
@@ -179,7 +180,7 @@ interface AppServiceEnvironmentResources {
    */
   @summary("Get a diagnostics item for an App Service Environment.")
   @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/hostingEnvironments/{name}/diagnostics/{diagnosticsName}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/diagnostics/{diagnosticsName}")
   getDiagnosticsItem is DiagnosticsOps.ActionSync<
     AppServiceEnvironmentResource,
     void,
@@ -374,7 +375,11 @@ interface AppServiceEnvironmentResources {
     },
     Error = DefaultErrorResponse
   >;
+}
 
+@tag("Recommendations")
+@armResourceOperations(#{ omitTags: true })
+interface AppServiceEnvironmentRecommendations {
   /**
    * Description for Get past recommendations for an app, optionally specified by the time range.
    */

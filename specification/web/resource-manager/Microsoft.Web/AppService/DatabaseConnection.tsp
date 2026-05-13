@@ -63,7 +63,8 @@ interface DatabaseConnectionOps
       }
     > {}
 
-@armResourceOperations
+@tag("StaticSites")
+@armResourceOperations(#{ omitTags: true })
 interface DatabaseConnections {
   /**
    * Returns overview of a database connection for a static site build by name
@@ -152,7 +153,8 @@ interface DatabaseConnectionOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("StaticSites")
+@armResourceOperations(#{ omitTags: true })
 interface DatabaseConnectionOperationGroup {
   /**
    * Returns overview of a database connection for a static site by name

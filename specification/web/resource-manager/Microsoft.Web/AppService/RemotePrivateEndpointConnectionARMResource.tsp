@@ -58,7 +58,8 @@ interface RemotePrivateEndpointConnectionARMResourceOps
     > {}
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
+@tag("AppServiceEnvironments")
+@armResourceOperations(#{ omitTags: true })
 interface RemotePrivateEndpointConnectionARMResources {
   /**
    * Description for Gets a private endpoint connection
@@ -91,7 +92,8 @@ interface RemotePrivateEndpointConnectionARMResources {
   @summary("Deletes a private endpoint connection")
   deletePrivateEndpointConnection is RemotePrivateEndpointConnectionARMResourceOps.DeleteWithoutOkAsync<
     RemotePrivateEndpointConnectionARMResource,
-    Response = ArmResponse<unknown> | (ArmDeleteAcceptedLroResponse & {
+    Response = ArmResponse<unknown> | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @body
       _: unknown;
@@ -170,7 +172,8 @@ interface StaticSites {
   @summary("Deletes a private endpoint connection")
   deletePrivateEndpointConnection is StaticSiteOps.DeleteWithoutOkAsync<
     RemotePrivateEndpointConnectionARMResource,
-    Response = ArmResponse<unknown> | (ArmDeleteAcceptedLroResponse & {
+    Response = ArmResponse<unknown> | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @body
       _: unknown;
@@ -217,7 +220,8 @@ interface PrivateEndpointConnectionOperationGroupOps
     > {}
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface RemotePrivateEndpointConnectionARMResourceOperationGroup {
   /**
    * Description for Gets a private endpoint connection
@@ -250,7 +254,8 @@ interface RemotePrivateEndpointConnectionARMResourceOperationGroup {
   @summary("Deletes a private endpoint connection")
   deletePrivateEndpointConnection is PrivateEndpointConnectionOperationGroupOps.DeleteWithoutOkAsync<
     RemotePrivateEndpointConnectionARMResource,
-    Response = ArmResponse<unknown> | (ArmDeleteAcceptedLroResponse & {
+    Response = ArmResponse<unknown> | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @body
       _: unknown;
@@ -302,7 +307,8 @@ interface PrivateEndpointConnectionSlotOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface PrivateEndpointConnectionSlotOperationGroup {
   /**
    * Description for Gets a private endpoint connection
@@ -336,7 +342,8 @@ interface PrivateEndpointConnectionSlotOperationGroup {
   @summary("Deletes a private endpoint connection")
   deletePrivateEndpointConnectionSlot is PrivateEndpointConnectionSlotOperationGroupOps.DeleteWithoutOkAsync<
     RemotePrivateEndpointConnectionARMResource,
-    Response = ArmResponse<unknown> | (ArmDeleteAcceptedLroResponse & {
+    Response = ArmResponse<unknown> | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @body
       _: unknown;
