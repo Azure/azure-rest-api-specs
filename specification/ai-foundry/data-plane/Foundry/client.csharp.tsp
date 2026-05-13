@@ -212,3 +212,9 @@ namespace Azure.AI.Projects;
 @@access(EvaluatorGenerationJobs.create, Access.internal);
 @@access(EvaluatorGenerationJobs.cancel, Access.internal);
 @@access(EvaluatorGenerationJobs.delete, Access.internal);
+
+// --------------------------------------------------------------------------------
+// Models sub‐client
+// --------------------------------------------------------------------------------
+// @@clientName(Models, "AIProjectModels");
+// Hide the protocol methods and methods using feature headers
