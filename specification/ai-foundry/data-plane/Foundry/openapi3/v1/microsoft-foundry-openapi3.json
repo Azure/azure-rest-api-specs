@@ -6137,6 +6137,18 @@
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Models=V1Preview"
+              ]
+            }
           }
         ],
         "responses": {
@@ -6190,6 +6202,18 @@
             "description": "The name of the resource",
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Models=V1Preview"
+              ]
             }
           }
         ],
@@ -6247,6 +6271,18 @@
             }
           },
           {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Models=V1Preview"
+              ]
+            }
+          },
+          {
             "name": "version",
             "in": "path",
             "required": true,
@@ -6289,7 +6325,12 @@
         },
         "tags": [
           "Models"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Models=V1Preview"
+          ]
+        }
       },
       "delete": {
         "operationId": "Models_deleteVersion",
@@ -6305,6 +6346,18 @@
             "description": "The name of the resource",
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Models=V1Preview"
+              ]
             }
           },
           {
@@ -6343,7 +6396,12 @@
         },
         "tags": [
           "Models"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Models=V1Preview"
+          ]
+        }
       },
       "patch": {
         "operationId": "Models_updateVersion",
@@ -6368,6 +6426,18 @@
             "description": "The specific version id of the UpdateModelVersionRequest to create or update.",
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Models=V1Preview"
+              ]
             }
           }
         ],
@@ -6425,6 +6495,11 @@
             }
           },
           "description": "The UpdateModelVersionRequest to create or update."
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Models=V1Preview"
+          ]
         }
       }
     },
@@ -6435,6 +6510,18 @@
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Models=V1Preview"
+              ]
+            }
           },
           {
             "name": "name",
@@ -6501,6 +6588,11 @@
             }
           },
           "description": "Model version to create."
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Models=V1Preview"
+          ]
         }
       }
     },
@@ -6511,6 +6603,18 @@
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Models=V1Preview"
+              ]
+            }
           },
           {
             "name": "name",
@@ -6574,6 +6678,11 @@
               }
             }
           }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Models=V1Preview"
+          ]
         }
       }
     },
@@ -6584,6 +6693,18 @@
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Models=V1Preview"
+              ]
+            }
           },
           {
             "name": "name",
@@ -6647,6 +6768,11 @@
               }
             }
           }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Models=V1Preview"
+          ]
         }
       }
     },

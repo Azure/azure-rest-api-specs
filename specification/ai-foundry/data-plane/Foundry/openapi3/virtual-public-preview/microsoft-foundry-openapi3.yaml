@@ -6097,6 +6097,14 @@ paths:
       description: List the latest version of each ModelVersion
       parameters:
         - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Models=V1Preview
       responses:
         '200':
           description: The request has succeeded.
@@ -6130,6 +6138,14 @@ paths:
           description: The name of the resource
           schema:
             type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Models=V1Preview
       responses:
         '200':
           description: The request has succeeded.
@@ -6163,6 +6179,14 @@ paths:
           description: The name of the resource
           schema:
             type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Models=V1Preview
         - name: version
           in: path
           required: true
@@ -6190,6 +6214,9 @@ paths:
                 $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
       tags:
         - Models
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
     delete:
       operationId: Models_deleteVersion
       description: Delete the specific version of the ModelVersion. The service returns 204 No Content if the ModelVersion was deleted successfully or if the ModelVersion does not exist.
@@ -6201,6 +6228,14 @@ paths:
           description: The name of the resource
           schema:
             type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Models=V1Preview
         - name: version
           in: path
           required: true
@@ -6224,6 +6259,9 @@ paths:
                 $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
       tags:
         - Models
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
     patch:
       operationId: Models_updateVersion
       description: Update an existing ModelVersion with the given version id
@@ -6241,6 +6279,14 @@ paths:
           description: The specific version id of the UpdateModelVersionRequest to create or update.
           schema:
             type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Models=V1Preview
       responses:
         '200':
           description: The request has succeeded.
@@ -6275,12 +6321,23 @@ paths:
             schema:
               $ref: '#/components/schemas/UpdateModelVersionRequest'
         description: The UpdateModelVersionRequest to create or update.
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
   /models/{name}/versions/{version}/createAsync:
     post:
       operationId: Models_createAsync
       description: Creates a model version asynchronously with blob content validation. Returns 202 Accepted with a Location header for polling.
       parameters:
         - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Models=V1Preview
         - name: name
           in: path
           required: true
@@ -6323,12 +6380,23 @@ paths:
             schema:
               $ref: '#/components/schemas/ModelVersion'
         description: Model version to create.
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
   /models/{name}/versions/{version}/credentials:
     post:
       operationId: Models_getCredentials
       description: Get credentials for a model version asset.
       parameters:
         - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Models=V1Preview
         - name: name
           in: path
           required: true
@@ -6368,12 +6436,23 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/ModelCredentialRequest'
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
   /models/{name}/versions/{version}/startPendingUpload:
     post:
       operationId: Models_startPendingUpload
       description: Start or retrieve a pending upload for a model version.
       parameters:
         - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Models=V1Preview
         - name: name
           in: path
           required: true
@@ -6413,6 +6492,9 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/PendingUploadRequest'
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
   /openai/v1/conversations:
     post:
       operationId: createConversation
