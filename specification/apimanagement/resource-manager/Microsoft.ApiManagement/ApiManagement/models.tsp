@@ -1910,7 +1910,7 @@ model ApiManagementGatewayUpdateParameters extends ApimResource {
    * ETag of the resource.
    */
   @visibility(Lifecycle.Read)
-  eTag?: string;
+  etag?: string;
 }
 
 /**
@@ -6485,7 +6485,7 @@ model ApiManagementServiceUpdateParameters extends ApimResource {
    * ETag of the resource.
    */
   @visibility(Lifecycle.Read)
-  eTag?: string;
+  etag?: string;
 
   /**
    * A list of availability zones denoting where the resource needs to come from.
