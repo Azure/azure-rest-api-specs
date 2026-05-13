@@ -181,7 +181,7 @@ model UpdateModelVersionRequest {
   tags?: Record<string>;
 }
 
-@doc("Represents a request for a pending upload of a model version. Only TemporaryBlobReference is accepted.")
+@doc("Represents a request for a pending upload of a model version.")
 model ModelPendingUploadRequest {
   @doc("If PendingUploadId is not provided, a random GUID will be used.")
   pendingUploadId?: string;
