@@ -31,13 +31,13 @@ interface Workflows {
   get is ArmResourceRead<
     Workflow,
     Response = ArmResponse<Workflow> & {
-      @header("x-ms-correlation-request-id")
+      @header
       @doc("correlation request id.")
-      correlationRequestId?: string;
+      xMsCorrelationRequestId?: string;
 
-      @header("x-ms-request-id")
+      @header
       @doc("request id.")
-      requestId?: string;
+      xMsRequestId?: string;
     },
     Error = StorageSyncError
   >;
@@ -48,13 +48,13 @@ interface Workflows {
   listByStorageSyncService is ArmResourceListByParent<
     Workflow,
     Response = ArmResponse<WorkflowArray> & {
-      @header("x-ms-correlation-request-id")
+      @header
       @doc("correlation request id.")
-      correlationRequestId?: string;
+      xMsCorrelationRequestId?: string;
 
-      @header("x-ms-request-id")
+      @header
       @doc("request id.")
-      requestId?: string;
+      xMsRequestId?: string;
     },
     Error = StorageSyncError
   >;
@@ -66,13 +66,13 @@ interface Workflows {
     Workflow,
     void,
     OkResponse & {
-      @header("x-ms-correlation-request-id")
+      @header
       @doc("correlation request id.")
-      correlationRequestId?: string;
+      xMsCorrelationRequestId?: string;
 
-      @header("x-ms-request-id")
+      @header
       @doc("request id.")
-      requestId?: string;
+      xMsRequestId?: string;
     },
     Error = StorageSyncError
   >;

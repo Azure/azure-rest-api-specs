@@ -56,13 +56,13 @@ op locationOperationStatusGet(
   @path
   operationId: string,
 ): (ArmResponse<LocationOperationStatus> & {
-  @header("x-ms-correlation-request-id")
+  @header
   @doc("correlation request id.")
-  correlationRequestId?: string;
+  xMsCorrelationRequestId?: string;
 
-  @header("x-ms-request-id")
+  @header
   @doc("request id.")
-  requestId?: string;
+  xMsRequestId?: string;
 }) | StorageSyncError;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -95,12 +95,12 @@ interface OperationStatusOperationGroup {
     @path
     operationId: string,
   ): (ArmResponse<OperationStatus> & {
-    @header("x-ms-correlation-request-id")
+    @header
     @doc("correlation request id.")
-    correlationRequestId?: string;
+    xMsCorrelationRequestId?: string;
 
-    @header("x-ms-request-id")
+    @header
     @doc("request id.")
-    requestId?: string;
+    xMsRequestId?: string;
   }) | StorageSyncError;
 }

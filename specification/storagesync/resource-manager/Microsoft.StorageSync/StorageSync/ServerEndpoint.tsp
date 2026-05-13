@@ -33,13 +33,13 @@ interface ServerEndpoints {
   get is ArmResourceRead<
     ServerEndpoint,
     Response = ServerEndpoint & {
-      @header("x-ms-correlation-request-id")
+      @header
       @doc("correlation request id.")
-      correlationRequestId?: string;
+      xMsCorrelationRequestId?: string;
 
-      @header("x-ms-request-id")
+      @header
       @doc("request id.")
-      requestId?: string;
+      xMsRequestId?: string;
     },
     Error = StorageSyncError
   >;
@@ -54,22 +54,22 @@ interface ServerEndpoints {
     ServerEndpoint,
     ServerEndpointCreateParameters,
     Response = (ArmResourceUpdatedResponse<ServerEndpoint> & {
-      @header("x-ms-correlation-request-id")
+      @header
       @doc("correlation request id.")
-      correlationRequestId?: string;
+      xMsCorrelationRequestId?: string;
 
-      @header("x-ms-request-id")
+      @header
       @doc("request id.")
-      requestId?: string;
+      xMsRequestId?: string;
     }) | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ServerEndpoint> &
       Azure.Core.Foundations.RetryAfterHeader> & {
-      @header("x-ms-correlation-request-id")
+      @header
       @doc("correlation request id.")
-      correlationRequestId?: string;
+      xMsCorrelationRequestId?: string;
 
-      @header("x-ms-request-id")
+      @header
       @doc("request id.")
-      requestId?: string;
+      xMsRequestId?: string;
     }),
     Error = StorageSyncError
   >;
@@ -83,22 +83,22 @@ interface ServerEndpoints {
     ServerEndpoint,
     PatchModel = ServerEndpointUpdateParameters,
     Response = (ArmResponse<ServerEndpoint> & {
-      @header("x-ms-correlation-request-id")
+      @header
       @doc("correlation request id.")
-      correlationRequestId?: string;
+      xMsCorrelationRequestId?: string;
 
-      @header("x-ms-request-id")
+      @header
       @doc("request id.")
-      requestId?: string;
+      xMsRequestId?: string;
     }) | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ServerEndpoint> &
       Azure.Core.Foundations.RetryAfterHeader> & {
-      @header("x-ms-correlation-request-id")
+      @header
       @doc("correlation request id.")
-      correlationRequestId?: string;
+      xMsCorrelationRequestId?: string;
 
-      @header("x-ms-request-id")
+      @header
       @doc("request id.")
-      requestId?: string;
+      xMsRequestId?: string;
     }),
     Error = StorageSyncError,
     OptionalRequestBody = true
@@ -111,21 +111,21 @@ interface ServerEndpoints {
   delete is ArmResourceDeleteWithoutOkAsync<
     ServerEndpoint,
     Response = (ArmDeletedResponse & {
-      @header("x-ms-correlation-request-id")
+      @header
       @doc("correlation request id.")
-      correlationRequestId?: string;
+      xMsCorrelationRequestId?: string;
 
-      @header("x-ms-request-id")
+      @header
       @doc("request id.")
-      requestId?: string;
+      xMsRequestId?: string;
     }) | (ArmDeleteAcceptedLroResponse & {
-      @header("x-ms-correlation-request-id")
+      @header
       @doc("correlation request id.")
-      correlationRequestId?: string;
+      xMsCorrelationRequestId?: string;
 
-      @header("x-ms-request-id")
+      @header
       @doc("request id.")
-      requestId?: string;
+      xMsRequestId?: string;
     }),
     Error = StorageSyncError
   >;
@@ -136,17 +136,18 @@ interface ServerEndpoints {
   listBySyncGroup is ArmResourceListByParent<
     ServerEndpoint,
     Response = ArmResponse<ServerEndpointArray> & {
-      @header("Location")
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name matches HTTP header canonical casing"
+      @header
       @doc("Operation Status Location URI")
-      location?: string;
+      Location?: string;
 
-      @header("x-ms-correlation-request-id")
+      @header
       @doc("correlation request id.")
-      correlationRequestId?: string;
+      xMsCorrelationRequestId?: string;
 
-      @header("x-ms-request-id")
+      @header
       @doc("request id.")
-      requestId?: string;
+      xMsRequestId?: string;
     },
     Error = StorageSyncError
   >;
@@ -160,22 +161,22 @@ interface ServerEndpoints {
     ServerEndpoint,
     RecallActionParameters,
     (OkResponse & {
-      @header("x-ms-correlation-request-id")
+      @header
       @doc("correlation request id.")
-      correlationRequestId?: string;
+      xMsCorrelationRequestId?: string;
 
-      @header("x-ms-request-id")
+      @header
       @doc("request id.")
-      requestId?: string;
+      xMsRequestId?: string;
     }) | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader> & {
-      @header("x-ms-correlation-request-id")
+      @header
       @doc("correlation request id.")
-      correlationRequestId?: string;
+      xMsCorrelationRequestId?: string;
 
-      @header("x-ms-request-id")
+      @header
       @doc("request id.")
-      requestId?: string;
+      xMsRequestId?: string;
     }),
     Error = StorageSyncError
   >;

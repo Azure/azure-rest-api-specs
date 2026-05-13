@@ -32,13 +32,13 @@ interface SyncGroups {
   get is ArmResourceRead<
     SyncGroup,
     Response = SyncGroup & {
-      @header("x-ms-correlation-request-id")
+      @header
       @doc("correlation request id.")
-      correlationRequestId?: string;
+      xMsCorrelationRequestId?: string;
 
-      @header("x-ms-request-id")
+      @header
       @doc("request id.")
-      requestId?: string;
+      xMsRequestId?: string;
     },
     Error = StorageSyncError
   >;
@@ -52,13 +52,13 @@ interface SyncGroups {
     SyncGroup,
     SyncGroupCreateParameters,
     Response = ArmResourceUpdatedResponse<SyncGroup> & {
-      @header("x-ms-correlation-request-id")
+      @header
       @doc("correlation request id.")
-      correlationRequestId?: string;
+      xMsCorrelationRequestId?: string;
 
-      @header("x-ms-request-id")
+      @header
       @doc("request id.")
-      requestId?: string;
+      xMsRequestId?: string;
     },
     Error = StorageSyncError
   >;
@@ -69,13 +69,13 @@ interface SyncGroups {
   delete is ArmResourceDeleteSync<
     SyncGroup,
     Response = (ArmDeletedResponse & {
-      @header("x-ms-correlation-request-id")
+      @header
       @doc("correlation request id")
-      correlationRequestId?: string;
+      xMsCorrelationRequestId?: string;
 
-      @header("x-ms-request-id")
+      @header
       @doc("Request id")
-      requestId?: string;
+      xMsRequestId?: string;
     }) | NoContentResponse,
     Error = StorageSyncError
   >;
@@ -86,13 +86,13 @@ interface SyncGroups {
   listByStorageSyncService is ArmResourceListByParent<
     SyncGroup,
     Response = ArmResponse<SyncGroupArray> & {
-      @header("x-ms-correlation-request-id")
+      @header
       @doc("correlation request id.")
-      correlationRequestId?: string;
+      xMsCorrelationRequestId?: string;
 
-      @header("x-ms-request-id")
+      @header
       @doc("request id.")
-      requestId?: string;
+      xMsRequestId?: string;
     },
     Error = StorageSyncError
   >;
