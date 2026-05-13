@@ -114,7 +114,25 @@ model DiscoveryEngine {
   @doc("The Discovery Engine configuration.")
   configuration?: Record<unknown>;
 
-  ...DataPlaneResource;
+  // DiscoveryEngine is response-only, so we inline these properties without
+  // @visibility(Lifecycle.Read) to avoid them being marked "readOnly" in OpenAPI.
+  @doc("The timestamp when the resource was created.")
+  createdAt?: utcDateTime;
+
+  @doc("The ID of the user who created this resource.")
+  createdBy?: string;
+
+  @doc("The type of user who created this resource.")
+  createdByType?: ByType;
+
+  @doc("The timestamp when the resource was last updated")
+  lastModifiedAt?: utcDateTime;
+
+  @doc("The ID of the user who updated this resource.")
+  lastModifiedBy?: string;
+
+  @doc("The type of user who updated this resource.")
+  lastModifiedByType?: ByType;
 }
 
 @doc("Working memory entry.")
@@ -126,10 +144,12 @@ model WorkingMemoryEntry {
   @doc("The type of the working memory entry.")
   type: WorkingMemoryEntryType;
 
-  ...WithCreatedAt;
+  // WorkingMemoryEntry is also response-only, so we inline this property
+  @doc("The timestamp when the resource was created.")
+  createdAt?: utcDateTime;
 }
 
-/** Get discovery engine working memory parameters. */
+/** Get discovery engine working memory parameters (preview). */
 alias GetDiscoveryEngineMemoryParameters = {
   @doc("Skip results.")
   @added(Versions.`2026-02-01-preview`)
@@ -173,7 +193,14 @@ interface Investigations {
   createOrReplace is StandardResourceOperations.ResourceCreateOrReplace<Investigation>;
 
   @doc("Updates an Investigation.")
+  @sharedRoute
+  @removed(Versions.`2026-06-01`)
   createOrUpdate is StandardResourceOperations.ResourceCreateOrUpdate<Investigation>;
+
+  @doc("Updates an Investigation.")
+  @sharedRoute
+  @added(Versions.`2026-06-01`)
+  update is StandardResourceOperations.ResourceUpdate<Investigation>;
 
   @doc("Delete a Investigation.")
   @sharedRoute
@@ -221,7 +248,7 @@ interface Investigations {
       @pattern(resourceNamePattern)
       projectName: string;
     } & WithQueryCreatedSince &
-      ListPaginationParameters,
+      Azure.Core.StandardListQueryParameters,
     Azure.Core.Foundations.CustomPage<Investigation>
   >;
 
@@ -321,11 +348,15 @@ interface Investigations {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserving operationId for backward compatibility with existing preview SDKs"
   @doc("List discovery engine working memory entries for an investigation.")
   @route("/projects/{projectName}/investigations/{investigationName}/discoveryEngine/workingMemory")
   @get
+  @sharedRoute
   @added(Versions.`2026-02-01-preview`)
-  getDiscoveryEngineMemory is Azure.Core.Foundations.Operation<
+  @removed(Versions.`2026-06-01`)
+  @operationId("Investigations_GetDiscoveryEngineMemory")
+  getDiscoveryEngineMemoryLegacy is Azure.Core.Foundations.Operation<
     {
       @doc("The project name.")
       @path
@@ -339,6 +370,29 @@ interface Investigations {
       @pattern(resourceNamePattern)
       investigationName: string;
     } & GetDiscoveryEngineMemoryParameters,
+    Azure.Core.Foundations.CustomPage<WorkingMemoryEntry>
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("List discovery engine working memory entries for an investigation.")
+  @route("/projects/{projectName}/investigations/{investigationName}/discoveryEngine/workingMemory")
+  @get
+  @sharedRoute
+  @added(Versions.`2026-06-01`)
+  getDiscoveryEngineMemory is Azure.Core.Foundations.Operation<
+    {
+      @doc("The project name.")
+      @path
+      @maxLength(24)
+      @pattern(resourceNamePattern)
+      projectName: string;
+
+      @doc("The investigation name.")
+      @path
+      @maxLength(24)
+      @pattern(resourceNamePattern)
+      investigationName: string;
+    } & Azure.Core.StandardListQueryParameters,
     Azure.Core.Foundations.CustomPage<WorkingMemoryEntry>
   >;
 

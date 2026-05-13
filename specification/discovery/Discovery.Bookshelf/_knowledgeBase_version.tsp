@@ -43,6 +43,22 @@ model KnowledgeBaseDeleteResponse {
   error?: Azure.Core.Foundations.Error;
 }
 
+@doc("Status indicating the KnowledgeBase operation.")
+@removed(Versions.`2026-06-01`)
+model KnowledgeBaseOperationStatus {
+  @doc("The unique ID of the operation.")
+  id: string;
+
+  @doc("The status of the operation")
+  status: Azure.Core.Foundations.OperationState;
+
+  @doc("Error object that describes the error when status is 'Failed'.")
+  error?: Azure.Core.Foundations.Error;
+
+  @doc("The KnowledgeBaseVersion result of the operation.")
+  result?: KnowledgeBaseVersion;
+}
+
 /**
  * Operation signature to retrieve a resource operation status.
  * @template Resource The type of the resource.

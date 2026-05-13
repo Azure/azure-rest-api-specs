@@ -43,6 +43,7 @@
   "securityDefinitions": {
     "OAuth2Auth": {
       "type": "oauth2",
+      "description": "OAuth2 implicit flow for authenticating with the Discovery Workspace API. Uses Azure Active Directory for authorization.",
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
       "scopes": {
@@ -83,28 +84,13 @@
             "format": "date-time"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "The number of results to skip.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "The maximum number of results to return.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "name": "maxPageSize",
-            "in": "query",
-            "description": "The maximum number of results per page.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
           }
         ],
         "responses": {
@@ -243,19 +229,13 @@
             "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ConversationCreateOrUpdate"
+              "$ref": "#/definitions/ConversationUpdate"
             }
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Conversation"
-            }
-          },
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/Conversation"
             }
@@ -345,28 +325,13 @@
             "format": "date-time"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "The number of results to skip.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "The maximum number of results to return.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "name": "maxPageSize",
-            "in": "query",
-            "description": "The maximum number of results per page.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
           }
         ],
         "responses": {
@@ -517,7 +482,7 @@
         }
       },
       "patch": {
-        "operationId": "Investigations_CreateOrUpdate",
+        "operationId": "Investigations_Update",
         "description": "Updates an Investigation.",
         "consumes": [
           "application/merge-patch+json"
@@ -550,19 +515,13 @@
             "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/InvestigationCreateOrUpdate"
+              "$ref": "#/definitions/InvestigationUpdate"
             }
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Investigation"
-            }
-          },
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/Investigation"
             }
@@ -581,8 +540,8 @@
           }
         },
         "x-ms-examples": {
-          "Investigations_CreateOrUpdate_MaximumSet": {
-            "$ref": "./examples/Investigations_CreateOrUpdate_MaximumSet_Gen.json"
+          "Investigations_Update_MaximumSet": {
+            "$ref": "./examples/Investigations_Update_MaximumSet_Gen.json"
           }
         }
       },
@@ -808,28 +767,13 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "Skip results.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "Query the top results.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "name": "maxPageSize",
-            "in": "query",
-            "description": "Bound the number of results that come back in one response.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
           }
         ],
         "responses": {
@@ -1277,19 +1221,13 @@
             "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TaskCreateOrUpdate"
+              "$ref": "#/definitions/TaskUpdate"
             }
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Task"
-            }
-          },
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/Task"
             }
@@ -1449,14 +1387,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "taskName",
-            "in": "path",
-            "description": "The task name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{1,75}$"
-          },
-          {
             "name": "projectName",
             "in": "path",
             "description": "The project name.",
@@ -1471,6 +1401,14 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "taskName",
+            "in": "path",
+            "description": "The task name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{1,75}$"
           },
           {
             "name": "body",
@@ -1725,28 +1663,13 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "Skip results (pagination control).",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "Query the top results (pagination control).",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "name": "maxPageSize",
-            "in": "query",
-            "description": "Bound the number of results that come back in one response (pagination control).",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
           }
         ],
         "responses": {
@@ -1863,7 +1786,7 @@
     },
     "/tools/projects/{projectName}/operations/{operationId}:cancel": {
       "post": {
-        "operationId": "Tools_CancelRun",
+        "operationId": "Tools_CancelRunLro",
         "description": "Cancel an ongoing tool run.",
         "parameters": [
           {
@@ -1889,7 +1812,17 @@
         ],
         "responses": {
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed."
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/CancelRunOperationStatus"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1905,10 +1838,11 @@
           }
         },
         "x-ms-examples": {
-          "Tools_CancelRun_MaximumSet": {
-            "$ref": "./examples/Tools_CancelRun_MaximumSet_Gen.json"
+          "Tools_CancelRunLro_MaximumSet": {
+            "$ref": "./examples/Tools_CancelRunLro_MaximumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -2015,6 +1949,32 @@
         ]
       }
     },
+    "CancelRunOperationStatus": {
+      "type": "object",
+      "description": "Response model for the cancel run operation status.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique ID of the operation."
+        },
+        "status": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "The status of the operation"
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error object that describes the error when status is \"Failed\"."
+        },
+        "result": {
+          "$ref": "#/definitions/RunResult",
+          "description": "The result of the operation."
+        }
+      },
+      "required": [
+        "id",
+        "status"
+      ]
+    },
     "ComputeUsage": {
       "type": "object",
       "description": "Overview of compute usage for a project.",
@@ -2044,34 +2004,28 @@
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the resource was created",
-          "readOnly": true
+          "description": "The timestamp when the resource was created."
         },
         "createdBy": {
           "type": "string",
-          "description": "The ID of the user who created this resource.",
-          "readOnly": true
+          "description": "The ID of the user who created this resource."
         },
         "createdByType": {
           "$ref": "#/definitions/Microsoft.Discovery.Common.ByType",
-          "description": "The type of user who created this resource.",
-          "readOnly": true
+          "description": "The type of user who created this resource."
         },
         "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the resource was last updated",
-          "readOnly": true
+          "description": "The timestamp when the resource was last updated"
         },
         "lastModifiedBy": {
           "type": "string",
-          "description": "The ID of the user who updated this resource.",
-          "readOnly": true
+          "description": "The ID of the user who updated this resource."
         },
         "lastModifiedByType": {
           "$ref": "#/definitions/Microsoft.Discovery.Common.ByType",
-          "description": "The type of user who updated this resource.",
-          "readOnly": true
+          "description": "The type of user who updated this resource."
         },
         "displayName": {
           "type": "string",
@@ -2103,32 +2057,42 @@
         "name"
       ]
     },
-    "ConversationCreateOrUpdate": {
+    "ConversationUpdate": {
       "type": "object",
       "description": "A conversation.",
       "properties": {
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the resource was created."
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "The ID of the user who created this resource."
+        },
+        "createdByType": {
+          "$ref": "#/definitions/Microsoft.Discovery.Common.ByType",
+          "description": "The type of user who created this resource."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the resource was last updated"
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The ID of the user who updated this resource."
+        },
+        "lastModifiedByType": {
+          "$ref": "#/definitions/Microsoft.Discovery.Common.ByType",
+          "description": "The type of user who updated this resource."
+        },
         "displayName": {
           "type": "string",
           "description": "The title",
           "x-ms-mutability": [
             "read",
             "update",
-            "create"
-          ]
-        },
-        "investigationName": {
-          "type": "string",
-          "description": "The Name of the associated Investigation",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "projectName": {
-          "type": "string",
-          "description": "The name of the associated Project",
-          "x-ms-mutability": [
-            "read",
             "create"
           ]
         }
@@ -2188,34 +2152,28 @@
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the resource was created",
-          "readOnly": true
+          "description": "The timestamp when the resource was created."
         },
         "createdBy": {
           "type": "string",
-          "description": "The ID of the user who created this resource.",
-          "readOnly": true
+          "description": "The ID of the user who created this resource."
         },
         "createdByType": {
           "$ref": "#/definitions/Microsoft.Discovery.Common.ByType",
-          "description": "The type of user who created this resource.",
-          "readOnly": true
+          "description": "The type of user who created this resource."
         },
         "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the resource was last updated",
-          "readOnly": true
+          "description": "The timestamp when the resource was last updated"
         },
         "lastModifiedBy": {
           "type": "string",
-          "description": "The ID of the user who updated this resource.",
-          "readOnly": true
+          "description": "The ID of the user who updated this resource."
         },
         "lastModifiedByType": {
           "$ref": "#/definitions/Microsoft.Discovery.Common.ByType",
-          "description": "The type of user who updated this resource.",
-          "readOnly": true
+          "description": "The type of user who updated this resource."
         }
       },
       "required": [
@@ -2481,7 +2439,37 @@
         "projectName"
       ]
     },
-    "InvestigationCreateOrUpdate": {
+    "InvestigationStatus": {
+      "type": "string",
+      "description": "Status",
+      "enum": [
+        "Created",
+        "Validated",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "InvestigationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Created",
+            "value": "Created",
+            "description": "Investigation Created"
+          },
+          {
+            "name": "Validated",
+            "value": "Validated",
+            "description": "Investigation Validated"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Investigation Failed"
+          }
+        ]
+      }
+    },
+    "InvestigationUpdate": {
       "type": "object",
       "description": "A investigation list item.",
       "properties": {
@@ -2515,36 +2503,6 @@
             "create"
           ]
         }
-      }
-    },
-    "InvestigationStatus": {
-      "type": "string",
-      "description": "Status",
-      "enum": [
-        "Created",
-        "Validated",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "InvestigationStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Created",
-            "value": "Created",
-            "description": "Investigation Created"
-          },
-          {
-            "name": "Validated",
-            "value": "Validated",
-            "description": "Investigation Validated"
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Investigation Failed"
-          }
-        ]
       }
     },
     "Microsoft.Discovery.Common.ByType": {
@@ -3300,7 +3258,7 @@
         "type"
       ]
     },
-    "TaskAssigneeCreateOrUpdate": {
+    "TaskAssigneeUpdate": {
       "type": "object",
       "description": "Task assignee information.",
       "properties": {
@@ -3341,158 +3299,6 @@
         "createdByType",
         "text"
       ]
-    },
-    "TaskCreateOrUpdate": {
-      "type": "object",
-      "description": "Task resource.",
-      "properties": {
-        "title": {
-          "type": "string",
-          "description": "The title of the task.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "priority": {
-          "$ref": "#/definitions/TaskPriority",
-          "description": "The priority of the task.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "description": {
-          "type": "string",
-          "description": "The description of the task.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "validationRequirements": {
-          "type": "array",
-          "description": "Array of validation requirements for the task.",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "parentId": {
-          "type": "string",
-          "description": "ID of the parent task if this is a subtask.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "dependsOn": {
-          "type": "array",
-          "description": "IDs of tasks that must complete before this task can be executed.",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "relatedTo": {
-          "type": "array",
-          "description": "IDs of tasks that are related to this task.",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "assignedTo": {
-          "$ref": "#/definitions/TaskAssigneeCreateOrUpdate",
-          "description": "Application or user assigned to this task.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "comments": {
-          "type": "array",
-          "description": "Comments or notes about the task.",
-          "items": {
-            "$ref": "#/definitions/TaskComment"
-          },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "status": {
-          "$ref": "#/definitions/TaskStatus",
-          "description": "The current status of the task.",
-          "x-ms-mutability": [
-            "read",
-            "update"
-          ]
-        },
-        "createdByType": {
-          "$ref": "#/definitions/Microsoft.Discovery.Common.ByType",
-          "description": "Type of entity that created the resource (User, Application, System, or custom type).",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "investigationId": {
-          "type": "string",
-          "description": "The investigation identifier associated with the task.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "taskResult": {
-          "$ref": "#/definitions/TaskResult",
-          "description": "Task execution result with text and storage assets.",
-          "x-ms-mutability": [
-            "read",
-            "update"
-          ]
-        },
-        "storageAssetIds": {
-          "type": "array",
-          "description": "List of storage assets related to the task.",
-          "items": {
-            "type": "string",
-            "format": "arm-id",
-            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-            "x-ms-arm-id-details": {
-              "allowedResources": [
-                {
-                  "type": "Microsoft.Discovery/StorageContainers/StorageAssets"
-                }
-              ]
-            }
-          },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        }
-      }
     },
     "TaskPriority": {
       "type": "string",
@@ -3628,6 +3434,142 @@
         ]
       }
     },
+    "TaskUpdate": {
+      "type": "object",
+      "description": "Task resource.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The title of the task.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "priority": {
+          "$ref": "#/definitions/TaskPriority",
+          "description": "The priority of the task.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the task.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "validationRequirements": {
+          "type": "array",
+          "description": "Array of validation requirements for the task.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "parentId": {
+          "type": "string",
+          "description": "ID of the parent task if this is a subtask.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "dependsOn": {
+          "type": "array",
+          "description": "IDs of tasks that must complete before this task can be executed.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "relatedTo": {
+          "type": "array",
+          "description": "IDs of tasks that are related to this task.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "assignedTo": {
+          "$ref": "#/definitions/TaskAssigneeUpdate",
+          "description": "Application or user assigned to this task.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "comments": {
+          "type": "array",
+          "description": "Comments or notes about the task.",
+          "items": {
+            "$ref": "#/definitions/TaskComment"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "status": {
+          "$ref": "#/definitions/TaskStatus",
+          "description": "The current status of the task.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "taskResult": {
+          "$ref": "#/definitions/TaskResult",
+          "description": "Task execution result with text and storage assets.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "storageAssetIds": {
+          "type": "array",
+          "description": "List of storage assets related to the task.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.Discovery/StorageContainers/StorageAssets"
+                }
+              ]
+            }
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
     "WorkingMemoryEntry": {
       "type": "object",
       "description": "Working memory entry.",
@@ -3643,8 +3585,7 @@
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the resource was created",
-          "readOnly": true
+          "description": "The timestamp when the resource was created."
         }
       },
       "required": [
@@ -3681,6 +3622,34 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
+    },
+    "Azure.Core.MaxPageSizeQueryParameter": {
+      "name": "maxpagesize",
+      "in": "query",
+      "description": "The maximum number of result items per page.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.SkipQueryParameter": {
+      "name": "skip",
+      "in": "query",
+      "description": "The number of result items to skip.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 0,
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.TopQueryParameter": {
+      "name": "top",
+      "in": "query",
+      "description": "The number of result items to return.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
     }
   }
 }

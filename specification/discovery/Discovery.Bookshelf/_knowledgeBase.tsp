@@ -129,7 +129,6 @@ alias BaseKnowledgeBase = WithId & {
 
   @doc("The status")
   @visibility(Lifecycle.Read)
-  @removed(Versions.`2026-06-01`)
   status?: IndexingStatus;
 
   @doc("The API version used to create this knowledge base.")
@@ -200,23 +199,18 @@ union CitationType {
 @added(Versions.`2026-06-01`)
 model Citation {
   @doc("The type of citation.")
-  @visibility(Lifecycle.Read)
   type: CitationType;
 
   @doc("Zero-based index of the citation in the result.")
-  @visibility(Lifecycle.Read)
   index?: int32;
 
   @doc("The source file name.")
-  @visibility(Lifecycle.Read)
   fileName: string;
 
   @doc("Character offset where the cited passage begins.")
-  @visibility(Lifecycle.Read)
   startOffset?: int32;
 
   @doc("Character offset where the cited passage ends.")
-  @visibility(Lifecycle.Read)
   endOffset?: int32;
 }
 
@@ -224,11 +218,9 @@ model Citation {
 @added(Versions.`2026-06-01`)
 model SearchResultItem {
   @doc("The generated response text for this result.")
-  @visibility(Lifecycle.Read)
   text: string;
 
   @doc("Source citations for this result.")
-  @visibility(Lifecycle.Read)
   citations?: Citation[];
 }
 
@@ -236,35 +228,45 @@ model SearchResultItem {
 @added(Versions.`2026-06-01`)
 model SearchResponse {
   @doc("The search results.")
-  @visibility(Lifecycle.Read)
   searchResults: SearchResultItem[];
 }
 
-@doc("Status indicating the KnowledgeBase operation.")
-model KnowledgeBaseOperationStatus {
+@doc("Response indicating the KnowledgeBase operation.")
+@discriminator("operationType")
+model KnowledgeBaseOperationResponse {
   @doc("The unique ID of the operation.")
   id: string;
 
-  @doc("The status of the operation")
+  @doc("The status of the operation.")
   status: Azure.Core.Foundations.OperationState;
 
   @doc("Error object that describes the error when status is 'Failed'.")
   error?: Azure.Core.Foundations.Error;
 
-  @doc("The KnowledgeBaseVersion result of the operation.")
-  @removed(Versions.`2026-06-01`)
-  result?: KnowledgeBaseVersion;
-
   @doc("The type of operation.")
   @added(Versions.`2026-06-01`)
   operationType: KnowledgeBaseOperationType;
+}
+
+@doc("Response for indexing operations.")
+@added(Versions.`2026-06-01`)
+model KnowledgeBaseIndexingOperationResponse
+  extends KnowledgeBaseOperationResponse {
+  @doc("The type of operation.")
+  operationType: "Indexing";
 
   @doc("Result details for indexing operations.")
-  @added(Versions.`2026-06-01`)
   indexingResult?: IndexingOperationResult;
+}
+
+@doc("Response for search operations.")
+@added(Versions.`2026-06-01`)
+model KnowledgeBaseSearchOperationResponse
+  extends KnowledgeBaseOperationResponse {
+  @doc("The type of operation.")
+  operationType: "Search";
 
   @doc("Result details for search operations.")
-  @added(Versions.`2026-06-01`)
   searchResult?: SearchResponse;
 }
 
@@ -299,7 +301,7 @@ interface KnowledgeBases {
     @path
     @maxLength(38)
     operationId: string,
-  ): KnowledgeBaseOperationStatus | Azure.Core.Foundations.ErrorResponse;
+  ): KnowledgeBaseOperationResponse | Azure.Core.Foundations.ErrorResponse;
 
   @doc("Start indexing.")
   @pollingOperation(KnowledgeBases.getOperationStatus)

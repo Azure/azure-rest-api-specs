@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/versioning";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "./common.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 using TypeSpec.Rest;
+using TypeSpec.OpenAPI;
 using Azure.Core;
 using Azure.ClientGenerator.Core;
 
@@ -298,7 +300,6 @@ model InlineFile {
   @maxLength(100000) // ~100kB - relaxed for AKS backend
   encodedFile: string;
 }
-
 @doc("Explicitly set tool run requirements - overrides the tool definition.")
 model InfraOverrides {
   @doc("Override CPU requirements (e.g. 1, or 500m for 500 milli-CPUs)")
@@ -463,7 +464,11 @@ model NodepoolUsage {
   allocatableGPUs: string;
 }
 
-/** Get operations parameters. */
+/** Response model for the cancel run operation status. */
+@added(Versions.`2026-06-01`)
+model CancelRunOperationStatus is Foundations.OperationStatus<RunResult>;
+
+/** Get operations parameters (preview). */
 alias GetOperationsParameters = {
   /** Skip results (pagination control). */
   @query
@@ -510,16 +515,46 @@ interface Tools {
   @doc("Cancel an ongoing tool run.")
   @route("/tools/projects/{projectName}/operations/{operationId}:cancel")
   @post
+  @sharedRoute
+  @removed(Versions.`2026-06-01`)
   cancelRun is Foundations.Operation<
     WithProjectNamePath & WithOperationId,
     AcceptedResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Cancel an ongoing tool run.")
+  @route("/tools/projects/{projectName}/operations/{operationId}:cancel")
+  @post
+  @sharedRoute
+  @added(Versions.`2026-06-01`)
+  @pollingOperation(Tools.getRunStatus)
+  cancelRunLro is Foundations.LongRunningOperation<
+    WithProjectNamePath & WithOperationId,
+    AcceptedResponse & CancelRunOperationStatus
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserving operationId for backward compatibility with existing preview SDKs"
+  @removed(Versions.`2026-06-01`)
   @doc("List tool runs.")
   @route("/tools/projects/{projectName}/operations")
-  getOperations is Foundations.Operation<
+  @get
+  @sharedRoute
+  @operationId("Tools_GetOperations")
+  getOperationsLegacy is Foundations.Operation<
     WithProjectNamePath & GetOperationsParameters,
+    Foundations.CustomPage<Operation>
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @added(Versions.`2026-06-01`)
+  @doc("List tool runs.")
+  @route("/tools/projects/{projectName}/operations")
+  @get
+  @sharedRoute
+  getOperations is Foundations.Operation<
+    WithProjectNamePath & Azure.Core.StandardListQueryParameters,
     Foundations.CustomPage<Operation>
   >;
 
