@@ -1,0 +1,244 @@
+{
+  "title": "TrainingJobs_Create_MaximumSet",
+  "operationId": "TrainingJobs_Create",
+  "parameters": {
+    "api-version": "v1",
+    "Operation-Id": "create-my-training-job-01",
+    "Foundry-Features": "TrainingJobs=V1Preview",
+    "job": {
+      "name": "my_training_job_01",
+      "job_type": "command",
+      "display_name": "My Training Job",
+      "description": "A sample declarative training job",
+      "tags": {
+        "framework": "trl",
+        "algorithm": "grpo"
+      },
+      "code_id": "azureai://accounts/my-account/projects/my-project/data/my-training-code/versions/1",
+      "compute_id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.CognitiveServices/accounts/my-account/computes/my-cluster",
+      "training": {
+        "algorithm": "grpo",
+        "framework": "trl",
+        "model": "azureai://registries/azureml/models/qwen-base/versions/1",
+        "dataset": {
+          "train": "azureai://accounts/my-account/projects/my-project/data/train-dataset/versions/1",
+          "eval": "azureai://accounts/my-account/projects/my-project/data/eval-dataset/versions/1",
+          "columns": {
+            "prompt": "prompt",
+            "chosen": "chosen",
+            "rejected": "rejected",
+            "reference": "reference",
+            "messages": "messages",
+            "response": "response",
+            "label": "label",
+            "score": "score"
+          },
+          "data_format": {
+            "chat_template": "chatml"
+          }
+        },
+        "hyperparameters": {
+          "learning_rate": 0.0001,
+          "num_train_epochs": 3,
+          "per_device_train_batch_size": 2
+        },
+        "reward": {
+          "kind": "inline_function",
+          "inline_function": {
+            "def": "def score(samples, **kwargs):\n    return [1.0 for _ in samples]",
+            "runtime": {
+              "pip": [
+                "numpy>=1.26"
+              ]
+            }
+          }
+        },
+        "lora": {
+          "rank": 16,
+          "alpha": 32,
+          "dropout": 0.05,
+          "target_modules": "auto",
+          "quantize": true
+        },
+        "rollout": {
+          "engine": "vllm",
+          "tensor_parallel_size": 2,
+          "gpu_memory_utilization": 0.9
+        },
+        "eval": {
+          "benchmark": "gsm8k",
+          "every_n_steps": 100
+        }
+      },
+      "inputs": {
+        "extra_context": {
+          "job_input_type": "uri_folder",
+          "uri": "azureai://datastores/mystore/paths/data/context",
+          "mode": "read_only_mount"
+        },
+        "learning_rate": {
+          "job_input_type": "literal",
+          "value": "0.001"
+        }
+      },
+      "outputs": {
+        "model": {
+          "job_output_type": "safetensors_model",
+          "mode": "read_write_mount",
+          "asset_name": "my-trained-model",
+          "asset_version": "1",
+          "uri": "azureai://datastores/workspaceblobstore/paths/outputs/model",
+          "base_model_id": "azureai://registries/azureml/models/qwen-base/versions/1",
+          "description": "Trained model output"
+        }
+      },
+      "environment_variables": {
+        "AZUREML_DATASET_FILE": "/mnt/data/train.csv"
+      },
+      "resources": {
+        "instance_count": 2,
+        "instance_type": "Standard_NC6s_v3",
+        "shm_size": "2g",
+        "docker_args": "--privileged"
+      },
+      "gpu_count": 4,
+      "limits": {
+        "job_limits_type": "command",
+        "timeout": "PT2H30M"
+      },
+      "queue_settings": {
+        "job_tier": "Standard"
+      },
+      "user_assigned_identity_id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/my-identity",
+      "properties": {
+        "experimentName": "my-experiment"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "my_training_job_01",
+        "name": "my_training_job_01",
+        "type": "Microsoft.MachineLearningServices/workspaces/training_jobs",
+        "system_data": {
+          "created_at": 1577882096,
+          "created_by": "user@example.com",
+          "created_by_type": "User",
+          "last_modified_at": 1577882096,
+          "last_modified_by": "user@example.com",
+          "last_modified_by_type": "User"
+        },
+        "job_type": "command",
+        "display_name": "My Training Job",
+        "description": "A sample declarative training job",
+        "tags": {
+          "framework": "trl",
+          "algorithm": "grpo"
+        },
+        "code_id": "azureai://accounts/my-account/projects/my-project/data/my-training-code/versions/1",
+        "compute_id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.CognitiveServices/accounts/my-account/computes/my-cluster",
+        "training": {
+          "algorithm": "grpo",
+          "framework": "trl",
+          "resolved_framework": "trl",
+          "framework_version": "0.21.0",
+          "model": "azureai://registries/azureml/models/qwen-base/versions/1",
+          "dataset": {
+            "train": "azureai://accounts/my-account/projects/my-project/data/train-dataset/versions/1",
+            "eval": "azureai://accounts/my-account/projects/my-project/data/eval-dataset/versions/1",
+            "columns": {
+              "prompt": "prompt",
+              "chosen": "chosen",
+              "rejected": "rejected",
+              "reference": "reference",
+              "messages": "messages",
+              "response": "response",
+              "label": "label",
+              "score": "score"
+            },
+            "data_format": {
+              "chat_template": "chatml"
+            }
+          },
+          "hyperparameters": {
+            "learning_rate": 0.0001,
+            "num_train_epochs": 3,
+            "per_device_train_batch_size": 2
+          },
+          "reward": {
+            "kind": "inline_function",
+            "inline_function": {
+              "def": "def score(samples, **kwargs):\n    return [1.0 for _ in samples]",
+              "runtime": {
+                "pip": [
+                  "numpy>=1.26"
+                ]
+              }
+            }
+          },
+          "lora": {
+            "rank": 16,
+            "alpha": 32,
+            "dropout": 0.05,
+            "target_modules": "auto",
+            "quantize": true
+          },
+          "rollout": {
+            "engine": "vllm",
+            "tensor_parallel_size": 2,
+            "gpu_memory_utilization": 0.9
+          },
+          "eval": {
+            "benchmark": "gsm8k",
+            "every_n_steps": 100
+          }
+        },
+        "inputs": {
+          "extra_context": {
+            "job_input_type": "uri_folder",
+            "uri": "azureai://datastores/mystore/paths/data/context",
+            "mode": "read_only_mount"
+          },
+          "learning_rate": {
+            "job_input_type": "literal",
+            "value": "0.001"
+          }
+        },
+        "outputs": {
+          "model": {
+            "job_output_type": "safetensors_model",
+            "mode": "read_write_mount",
+            "asset_name": "my-trained-model",
+            "asset_version": "1",
+            "uri": "azureai://datastores/workspaceblobstore/paths/outputs/model",
+            "base_model_id": "azureai://registries/azureml/models/qwen-base/versions/1",
+            "description": "Trained model output"
+          }
+        },
+        "environment_variables": {
+          "AZUREML_DATASET_FILE": "/mnt/data/train.csv"
+        },
+        "resources": {
+          "instance_count": 2,
+          "instance_type": "Standard_NC6s_v3",
+          "shm_size": "2g",
+          "docker_args": "--privileged"
+        },
+        "gpu_count": 4,
+        "limits": {
+          "job_limits_type": "command",
+          "timeout": "PT2H30M"
+        },
+        "queue_settings": {
+          "job_tier": "Standard"
+        },
+        "user_assigned_identity_id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/my-identity",
+        "status": "NotStarted",
+        "properties": {
+          "experimentName": "my-experiment"
+        }
+      }
+    }
+  }
+}

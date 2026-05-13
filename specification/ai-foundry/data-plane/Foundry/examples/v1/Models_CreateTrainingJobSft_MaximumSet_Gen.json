@@ -1,0 +1,67 @@
+{
+  "title": "Models_CreateTrainingJobSft_MaximumSet",
+  "operationId": "Models_createTrainingJob",
+  "parameters": {
+    "api-version": "v1",
+    "Operation-Id": "create-my-sft-training-job-01",
+    "Foundry-Features": "TrainingJobs=V1Preview",
+    "job": {
+      "type": "sft",
+      "name": "qwen-medical-sft",
+      "version": "1",
+      "description": "SFT model trained for medical instruction following",
+      "tags": {
+        "algorithm": "sft"
+      },
+      "model": "azureai://registries/azureml/models/qwen-base/versions/1",
+      "dataset": {
+        "train": "azureai://accounts/my-account/projects/my-project/data/train-dataset/versions/1",
+        "eval": "azureai://accounts/my-account/projects/my-project/data/eval-dataset/versions/1",
+        "columns": {
+          "messages": "messages"
+        },
+        "data_format": {
+          "chatTemplate": "chatml"
+        }
+      },
+      "runtime": {
+        "framework": "trl",
+        "hyperparameters": {
+          "learning_rate": 0.0001,
+          "num_train_epochs": 3,
+          "per_device_train_batch_size": 2
+        },
+        "lora": {
+          "rank": 16,
+          "alpha": 32,
+          "dropout": 0.05,
+          "targetModules": "auto",
+          "quantize": true
+        },
+        "eval": {
+          "benchmark": "mmlu",
+          "everyNSteps": 100
+        }
+      },
+      "compute": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.CognitiveServices/accounts/my-account/computes/my-cluster",
+        "resources": {
+          "instanceCount": 2,
+          "instanceType": "Standard_NC6s_v3"
+        },
+        "gpu_count": 4
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "https://my-account.services.ai.azure.com/api/projects/my-project/models/operations/create-my-sft-training-job-01/result?api-version=v1"
+      },
+      "body": {
+        "operation_id": "create-my-sft-training-job-01",
+        "status": "queued"
+      }
+    }
+  }
+}

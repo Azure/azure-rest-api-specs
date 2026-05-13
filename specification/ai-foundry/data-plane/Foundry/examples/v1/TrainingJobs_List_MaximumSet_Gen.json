@@ -1,0 +1,94 @@
+{
+  "title": "TrainingJobs_List_MaximumSet",
+  "operationId": "TrainingJobs_List",
+  "parameters": {
+    "api-version": "v1",
+    "job_type": "command",
+    "tag": "framework=pytorch",
+    "list_view_type": "active_only",
+    "properties": "experimentName=my-experiment",
+    "x-ms-client-request-id": "cf35b680-dc80-4815-ab83-9364acc3bce6",
+    "Foundry-Features": "TrainingJobs=V1Preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "data": [
+          {
+            "id": "my_training_job_01",
+            "name": "my_training_job_01",
+            "type": "Microsoft.MachineLearningServices/workspaces/training_jobs",
+            "system_data": {
+              "created_at": 1577882096,
+              "created_by": "user@example.com",
+              "created_by_type": "User",
+              "last_modified_at": 1577882096,
+              "last_modified_by": "user@example.com",
+              "last_modified_by_type": "User"
+            },
+            "job_type": "command",
+            "command": "python train.py --data ${{inputs.training_data}} --output ${{outputs.model}}",
+            "environment_image_reference": "mcr.microsoft.com/azureml/openmpi4.1.0-cuda11.8-cudnn8-ubuntu22.04:latest",
+            "display_name": "My Training Job",
+            "description": "A sample command job for training",
+            "tags": {
+              "framework": "pytorch"
+            },
+            "code_id": "azureai:my-training-code:1",
+            "compute_id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.MachineLearningServices/workspaces/my-ws/computes/my-cluster",
+            "inputs": {
+              "training_data": {
+                "job_input_type": "uri_folder",
+                "uri": "azureai://datastores/mystore/paths/data/train",
+                "mode": "read_only_mount"
+              },
+              "learning_rate": {
+                "job_input_type": "literal",
+                "value": "0.001"
+              }
+            },
+            "outputs": {
+              "model": {
+                "job_output_type": "uri_folder",
+                "mode": "read_write_mount",
+                "asset_name": "my-trained-model",
+                "asset_version": "1",
+                "uri": "azureai://datastores/workspaceblobstore/paths/outputs/model",
+                "base_model_id": "azureai:qwen-base-model:1",
+                "description": "Trained model output"
+              }
+            },
+            "environment_variables": {
+              "AZUREML_DATASET_FILE": "/mnt/data/train.csv"
+            },
+            "distribution": {
+              "distribution_type": "pytorch",
+              "process_count_per_instance": 4
+            },
+            "resources": {
+              "instance_count": 2,
+              "instance_type": "Standard_NC6s_v3",
+              "shm_size": "2g",
+              "docker_args": "--privileged"
+            },
+            "limits": {
+              "job_limits_type": "command",
+              "timeout": "PT2H30M"
+            },
+            "queue_settings": {
+              "job_tier": "Standard"
+            },
+            "user_assigned_identity_id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/my-identity",
+            "status": "running",
+            "properties": {
+              "experimentName": "my-experiment"
+            }
+          }
+        ],
+        "first_id": "my_training_job_01",
+        "last_id": "my_training_job_01",
+        "has_more": true
+      }
+    }
+  }
+}

@@ -1,5 +1,5 @@
-// This file moves all beta operations (preview routes) from the Azure.AI.Projects namespace to
-// a new namespace Azure.AI.Projects.Beta, thus creating a sub-client ".beta" in the emitted SDKs.
+// This file moves operations assigned to the beta SDK surface from the Azure.AI.Projects namespace
+// to a new namespace Azure.AI.Projects.Beta, thus creating a sub-client ".beta" in the emitted SDKs.
 // It is imported by the client.tsp file, which is used for emitting the Python and JS clients.
 // See https://azure.github.io/typespec-azure/docs/howtos/generate-client-libraries/03client/#move-all-operations-to-root-client
 
@@ -75,3 +75,207 @@ interface Toolsets {}
 @@clientLocation(Azure.AI.Projects.Toolsets.getToolset, Toolsets);
 @@clientLocation(Azure.AI.Projects.Toolsets.listToolsets, Toolsets);
 @@clientLocation(Azure.AI.Projects.Toolsets.deleteToolset, Toolsets);
+
+interface Models {}
+@@clientLocation(Azure.AI.Projects.Models.createTrainingJob, Models);
+@@clientLocation(Azure.AI.Projects.Models.createSftTrainingJob, Models);
+@@clientLocation(Azure.AI.Projects.Models.createPreferenceTrainingJob, Models);
+@@clientLocation(Azure.AI.Projects.Models.createKtoTrainingJob, Models);
+@@clientLocation(Azure.AI.Projects.Models.createRewardModelTrainingJob,
+  Models
+);
+@@clientLocation(Azure.AI.Projects.Models.createGrpoTrainingJob, Models);
+@@clientLocation(Azure.AI.Projects.Models.createPolicyGradientTrainingJob,
+  Models
+);
+@@clientLocation(Azure.AI.Projects.Models.createPpoTrainingJob, Models);
+@@clientLocation(Azure.AI.Projects.Models.getTrainingOperationResult, Models);
+
+namespace Mlflow {
+  interface Experiments {}
+  interface Runs {}
+  interface Metrics {}
+  interface Artifacts {}
+  interface RegisteredModels {}
+  interface ModelVersions {}
+}
+
+@@clientLocation(Azure.AI.Projects.Mlflow.Experiments.create,
+  Mlflow.Experiments
+);
+@@clientLocation(Azure.AI.Projects.Mlflow.Experiments.get, Mlflow.Experiments);
+@@clientLocation(Azure.AI.Projects.Mlflow.Experiments.getByName,
+  Mlflow.Experiments
+);
+@@clientLocation(Azure.AI.Projects.Mlflow.Experiments.list, Mlflow.Experiments);
+@@clientLocation(Azure.AI.Projects.Mlflow.Experiments.search,
+  Mlflow.Experiments
+);
+@@clientLocation(Azure.AI.Projects.Mlflow.Experiments.update,
+  Mlflow.Experiments
+);
+@@clientLocation(Azure.AI.Projects.Mlflow.Experiments.delete,
+  Mlflow.Experiments
+);
+@@clientLocation(Azure.AI.Projects.Mlflow.Experiments.restore,
+  Mlflow.Experiments
+);
+@@clientLocation(Azure.AI.Projects.Mlflow.Experiments.setTag,
+  Mlflow.Experiments
+);
+
+@@clientLocation(Azure.AI.Projects.Mlflow.Runs.create, Mlflow.Runs);
+@@clientLocation(Azure.AI.Projects.Mlflow.Runs.get, Mlflow.Runs);
+@@clientLocation(Azure.AI.Projects.Mlflow.Runs.search, Mlflow.Runs);
+@@clientLocation(Azure.AI.Projects.Mlflow.Runs.update, Mlflow.Runs);
+@@clientLocation(Azure.AI.Projects.Mlflow.Runs.delete, Mlflow.Runs);
+@@clientLocation(Azure.AI.Projects.Mlflow.Runs.restore, Mlflow.Runs);
+@@clientLocation(Azure.AI.Projects.Mlflow.Runs.logBatch, Mlflow.Runs);
+@@clientLocation(Azure.AI.Projects.Mlflow.Runs.logMetric, Mlflow.Runs);
+@@clientLocation(Azure.AI.Projects.Mlflow.Runs.logParameter, Mlflow.Runs);
+@@clientLocation(Azure.AI.Projects.Mlflow.Runs.setTag, Mlflow.Runs);
+@@clientLocation(Azure.AI.Projects.Mlflow.Runs.deleteTag, Mlflow.Runs);
+@@clientLocation(Azure.AI.Projects.Mlflow.Runs.logModel, Mlflow.Runs);
+@@clientLocation(Azure.AI.Projects.Mlflow.Runs.logInputs, Mlflow.Runs);
+
+@@clientLocation(Azure.AI.Projects.Mlflow.Metrics.getHistory, Mlflow.Metrics);
+
+@@clientLocation(Azure.AI.Projects.Mlflow.Artifacts.list, Mlflow.Artifacts);
+
+@@clientLocation(Azure.AI.Projects.Mlflow.RegisteredModels.create,
+  Mlflow.RegisteredModels
+);
+@@clientLocation(Azure.AI.Projects.Mlflow.RegisteredModels.update,
+  Mlflow.RegisteredModels
+);
+@@clientLocation(Azure.AI.Projects.Mlflow.RegisteredModels.delete,
+  Mlflow.RegisteredModels
+);
+@@clientLocation(Azure.AI.Projects.Mlflow.RegisteredModels.get,
+  Mlflow.RegisteredModels
+);
+@@clientLocation(Azure.AI.Projects.Mlflow.RegisteredModels.list,
+  Mlflow.RegisteredModels
+);
+@@clientLocation(Azure.AI.Projects.Mlflow.RegisteredModels.search,
+  Mlflow.RegisteredModels
+);
+@@clientLocation(Azure.AI.Projects.Mlflow.RegisteredModels.setTag,
+  Mlflow.RegisteredModels
+);
+@@clientLocation(Azure.AI.Projects.Mlflow.RegisteredModels.deleteTag,
+  Mlflow.RegisteredModels
+);
+@@clientLocation(Azure.AI.Projects.Mlflow.RegisteredModels.getLatestVersions,
+  Mlflow.RegisteredModels
+);
+@@clientLocation(Azure.AI.Projects.Mlflow.RegisteredModels.getLatestVersionsNameInBody,
+  Mlflow.RegisteredModels
+);
+@@clientLocation(Azure.AI.Projects.Mlflow.RegisteredModels.rename,
+  Mlflow.RegisteredModels
+);
+
+@@clientLocation(Azure.AI.Projects.Mlflow.ModelVersions.create,
+  Mlflow.ModelVersions
+);
+@@clientLocation(Azure.AI.Projects.Mlflow.ModelVersions.update,
+  Mlflow.ModelVersions
+);
+@@clientLocation(Azure.AI.Projects.Mlflow.ModelVersions.transitionStage,
+  Mlflow.ModelVersions
+);
+@@clientLocation(Azure.AI.Projects.Mlflow.ModelVersions.delete,
+  Mlflow.ModelVersions
+);
+@@clientLocation(Azure.AI.Projects.Mlflow.ModelVersions.get,
+  Mlflow.ModelVersions
+);
+@@clientLocation(Azure.AI.Projects.Mlflow.ModelVersions.search,
+  Mlflow.ModelVersions
+);
+@@clientLocation(Azure.AI.Projects.Mlflow.ModelVersions.searchWithFilter,
+  Mlflow.ModelVersions
+);
+@@clientLocation(Azure.AI.Projects.Mlflow.ModelVersions.getDownloadUri,
+  Mlflow.ModelVersions
+);
+@@clientLocation(Azure.AI.Projects.Mlflow.ModelVersions.setTag,
+  Mlflow.ModelVersions
+);
+@@clientLocation(Azure.AI.Projects.Mlflow.ModelVersions.deleteTag,
+  Mlflow.ModelVersions
+);
+@@clientLocation(Azure.AI.Projects.Mlflow.ModelVersions.getStorageLocationUri,
+  Mlflow.ModelVersions
+);
+
+interface TrainingJobs {}
+
+@@clientLocation(Azure.AI.Projects.TrainingJobs.create, TrainingJobs);
+@@clientLocation(Azure.AI.Projects.TrainingJobs.list, TrainingJobs);
+@@clientLocation(Azure.AI.Projects.TrainingJobs.get, TrainingJobs);
+@@clientLocation(Azure.AI.Projects.TrainingJobs.beginDelete, TrainingJobs);
+@@clientLocation(Azure.AI.Projects.TrainingJobs.beginCancel, TrainingJobs);
+@@clientLocation(Azure.AI.Projects.TrainingJobs.showServices, TrainingJobs);
+
+@@clientLocation(Azure.AI.Projects.TrainingJobOperations.getOperationResult,
+  TrainingJobs
+);
+@@clientLocation(Azure.AI.Projects.TrainingJobOperations.getOperationStatus,
+  TrainingJobs
+);
+
+@@clientLocation(Azure.AI.Projects.TrainingJobAttempts.listAttempts,
+  TrainingJobs
+);
+@@clientLocation(Azure.AI.Projects.TrainingJobAttempts.getAttempt,
+  TrainingJobs
+);
+
+@@clientLocation(Azure.AI.Projects.TrainingJobAttemptArtifacts.listAttemptArtifacts,
+  TrainingJobs
+);
+@@clientLocation(Azure.AI.Projects.TrainingJobAttemptArtifacts.getAttemptArtifactMetadata,
+  TrainingJobs
+);
+@@clientLocation(Azure.AI.Projects.TrainingJobAttemptArtifacts.getAttemptArtifactContentInfo,
+  TrainingJobs
+);
+@@clientLocation(Azure.AI.Projects.TrainingJobAttemptArtifacts.getAttemptArtifactContentInfoByPrefix,
+  TrainingJobs
+);
+@@clientLocation(Azure.AI.Projects.TrainingJobAttemptArtifacts.downloadAttemptArtifact,
+  TrainingJobs
+);
+
+@@clientLocation(Azure.AI.Projects.TrainingJobAttemptMetrics.listAttemptMetrics,
+  TrainingJobs
+);
+@@clientLocation(Azure.AI.Projects.TrainingJobAttemptMetrics.getAttemptMetricLastValues,
+  TrainingJobs
+);
+@@clientLocation(Azure.AI.Projects.TrainingJobAttemptMetrics.getAttemptMetric,
+  TrainingJobs
+);
+@@clientLocation(Azure.AI.Projects.TrainingJobAttemptMetrics.getAttemptMetricAggregates,
+  TrainingJobs
+);
+@@clientLocation(Azure.AI.Projects.TrainingJobAttemptMetrics.getAttemptMetricSamples,
+  TrainingJobs
+);
+@@clientLocation(Azure.AI.Projects.TrainingJobAttemptMetrics.getAttemptMetricSample,
+  TrainingJobs
+);
+
+@@clientLocation(Azure.AI.Projects.TrainingJobOutputs.listOutputs,
+  TrainingJobs
+);
+@@clientLocation(Azure.AI.Projects.TrainingJobOutputs.getOutput, TrainingJobs);
+
+@@clientLocation(Azure.AI.Projects.TrainingJobAttemptOutputs.listAttemptOutputs,
+  TrainingJobs
+);
+@@clientLocation(Azure.AI.Projects.TrainingJobAttemptOutputs.getAttemptOutput,
+  TrainingJobs
+);

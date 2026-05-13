@@ -1,0 +1,60 @@
+{
+  "title": "TrainingJobs_CreateRayCommandJob_MaximumSet",
+  "operationId": "TrainingJobs_Create",
+  "parameters": {
+    "api-version": "v1",
+    "Operation-Id": "create-ray-command-job-01",
+    "Foundry-Features": "TrainingJobs=V1Preview",
+    "job": {
+      "name": "ray-command-job-01",
+      "job_type": "command",
+      "display_name": "interactive-ray-4node",
+      "description": "Interactive Ray command job (4 nodes)",
+      "tags": {
+        "scenario": "interactive-ray"
+      },
+      "compute_id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.CognitiveServices/accounts/my-account/computes/my-cluster",
+      "command": "python -c \"import time; print('Ray cluster ready'); time.sleep(86400)\"",
+      "environment_image_reference": "mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu20.04",
+      "distribution": {
+        "distribution_type": "ray",
+        "port": 6379,
+        "include_dashboard": true,
+        "dashboard_port": 8265,
+        "enable_remote_access_client_server": true,
+        "client_server_port": 10001
+      },
+      "resources": {
+        "instance_count": 4
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "ray-command-job-01",
+        "type": "Microsoft.MachineLearningServices/workspaces/training_jobs",
+        "job_type": "command",
+        "display_name": "interactive-ray-4node",
+        "description": "Interactive Ray command job (4 nodes)",
+        "tags": {
+          "scenario": "interactive-ray"
+        },
+        "compute_id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.CognitiveServices/accounts/my-account/computes/my-cluster",
+        "command": "python -c \"import time; print('Ray cluster ready'); time.sleep(86400)\"",
+        "environment_image_reference": "mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu20.04",
+        "distribution": {
+          "distribution_type": "ray",
+          "port": 6379,
+          "include_dashboard": true,
+          "dashboard_port": 8265,
+          "enable_remote_access_client_server": true,
+          "client_server_port": 10001
+        },
+        "resources": {
+          "instance_count": 4
+        }
+      }
+    }
+  }
+}

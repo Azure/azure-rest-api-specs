@@ -68,6 +68,7 @@ union FoundryFeaturesOptInKeys {
   memory_stores_v1_preview: "MemoryStores=V1Preview",
   toolset_v1_preview: "Toolsets=V1Preview",
   agent_endpoint_v1_preview: "AgentEndpoints=V1Preview",
+  training_jobs_v1_preview: "TrainingJobs=V1Preview",
 }
 
 alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys> = {

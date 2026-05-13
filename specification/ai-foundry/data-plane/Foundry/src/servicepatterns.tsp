@@ -2,6 +2,10 @@ using Azure.ClientGenerator.Core;
 
 namespace Azure.AI.Projects;
 
+@doc("Unix timestamp in seconds used by Foundry data-plane resources.")
+@encode(DateTimeKnownEncoding.unixTimestamp, int64)
+scalar FoundryTimestamp extends utcDateTime;
+
 @doc("Defines the request parameters for the createOrUpdateVersion operations.")
 model InputParameters<
   TEntityType extends Reflection.Model,

@@ -13,14 +13,19 @@ import "./src/datasets/routes.tsp";
 import "./src/deployments/routes.tsp";
 import "./src/indexes/routes.tsp";
 
+// Beta SDK operations without preview feature headers
+import "./src/mlflow/routes.tsp";
+
 // Beta operations (preview routes, requiring opt-in request header)
 import "./src/evaluation-taxonomies/routes.tsp";
 import "./src/evaluators/routes.tsp";
 import "./src/insights/routes.tsp";
 import "./src/memory-stores/routes.tsp";
+import "./src/models/routes.tsp";
 import "./src/red-teams/routes.tsp";
 import "./src/schedules/routes.tsp";
 import "./src/toolsets/routes.tsp";
+import "./src/training_jobs/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
 import "./relocate-beta-operations.tsp";
@@ -41,7 +46,7 @@ using Azure.AI.Projects;
 @@clientNamespace(OpenAI, "azure.ai.projects", "python");
 
 // --------------------------------------------------------------------------------
-// Agents sub‐client
+// Agents sub-client
 // --------------------------------------------------------------------------------
 
 // Use short form method names
@@ -139,7 +144,7 @@ using Azure.AI.Projects;
 @@clientName(MemoryStoreObject, "MemoryStore", "javascript");
 
 // --------------------------------------------------------------------------------
-// Responses sub‐client
+// Responses sub-client
 // --------------------------------------------------------------------------------
 
 // Allow assigning a `dict[str, Any]` object directly to the "schema" property of TextResponseFormatJsonSchema
@@ -155,7 +160,7 @@ using Azure.AI.Projects;
 );
 
 // --------------------------------------------------------------------------------
-// Evaluators sub‐client
+// Evaluators sub-client
 // --------------------------------------------------------------------------------
 @@clientName(Evaluators.listLatestVersions, "list");
 @@clientName(Evaluators.startPendingUpload, "pendingUpload");
@@ -165,13 +170,27 @@ using Azure.AI.Projects;
 @@alternateType(EvaluatorVersion.modified_at, utcDateTime, "python");
 
 // --------------------------------------------------------------------------------
-// Insights sub‐client
+// Insights sub-client
 // --------------------------------------------------------------------------------
 @@clientName(Azure.AI.Projects.Insight.id, "insight_id");
 @@clientName(InsightsGetParams.id, "insight_id");
 
 // --------------------------------------------------------------------------------
-// Datasets sub‐client
+// Models sub-client
+// --------------------------------------------------------------------------------
+
+@@clientName(Models.createTrainingJob, "training_job", "python");
+@@clientName(Models.createTrainingJob, "trainingJob", "javascript");
+@@scope(Models.createSftTrainingJob, "!(python,javascript)");
+@@scope(Models.createPreferenceTrainingJob, "!(python,javascript)");
+@@scope(Models.createKtoTrainingJob, "!(python,javascript)");
+@@scope(Models.createRewardModelTrainingJob, "!(python,javascript)");
+@@scope(Models.createGrpoTrainingJob, "!(python,javascript)");
+@@scope(Models.createPolicyGradientTrainingJob, "!(python,javascript)");
+@@scope(Models.createPpoTrainingJob, "!(python,javascript)");
+
+// --------------------------------------------------------------------------------
+// Datasets sub-client
 // --------------------------------------------------------------------------------
 
 // Shorter method names for SDK datasets operations
@@ -186,7 +205,7 @@ using Azure.AI.Projects;
 @@clientName(SasCredential, "BlobReferenceSasCredential"); // Not to be confused with class "SASCredentials"
 
 // --------------------------------------------------------------------------------
-// Indexes sub‐client
+// Indexes sub-client
 // --------------------------------------------------------------------------------
 
 // Shorter method names for SDK Index operations
@@ -196,7 +215,7 @@ using Azure.AI.Projects;
 @@clientName(Indexes.createOrUpdateVersion, "createOrUpdate");
 
 // --------------------------------------------------------------------------------
-// Schedules sub‐client
+// Schedules sub-client
 // --------------------------------------------------------------------------------
 
 @@clientName(SchedulesCreateOrUpdateParams.resource, "schedule");
@@ -211,7 +230,7 @@ using Azure.AI.Projects;
 @@alternateType(ScheduleRun.triggerTime, utcDateTime, "python");
 
 // --------------------------------------------------------------------------------
-// Toolsets sub‐client
+// Toolsets sub-client
 // --------------------------------------------------------------------------------
 
 @@clientName(Toolsets.createToolset, "create");
@@ -221,7 +240,7 @@ using Azure.AI.Projects;
 @@clientName(Toolsets.deleteToolset, "delete");
 
 // --------------------------------------------------------------------------------
-// Connections sub‐client
+// Connections sub-client
 // --------------------------------------------------------------------------------
 
 // Make these two internal, since all SDKs hand-write a single public method with boolean "includeCredentials"
@@ -230,11 +249,35 @@ using Azure.AI.Projects;
 @@access(Connections.getWithCredentials, Access.internal);
 
 // --------------------------------------------------------------------------------
-// Deployment sub‐client
+// Deployment sub-client
 // --------------------------------------------------------------------------------
 
 // Less generic names
 @@clientName(Sku, "ModelDeploymentSku");
+
+@@clientName(Azure.AI.Projects.TrainingJobs.get, "get", "python");
+@@clientName(Azure.AI.Projects.TrainingJobs.list, "list", "python");
+@@clientName(Azure.AI.Projects.TrainingJobs.create, "create", "python");
+@@clientName(Azure.AI.Projects.TrainingJobs.create, "create", "javascript");
+@@alternateType(JobCreate, InteractiveRayJob);
+@@usage(InteractiveRayJob, Usage.input);
+@@access(InteractiveRayJob, Access.public);
+@@usage(InteractiveRayJobProperties, Usage.input);
+@@access(InteractiveRayJobProperties, Access.public);
+@@usage(InteractiveRayJobTrainingConfiguration, Usage.input);
+@@access(InteractiveRayJobTrainingConfiguration, Access.public);
+@@usage(InteractiveRayJobFramework, Usage.input);
+@@access(InteractiveRayJobFramework, Access.public);
+@@clientName(Azure.AI.Projects.Beta.TrainingJobs, "training_jobs", "python");
+@@clientName(Azure.AI.Projects.Beta.TrainingJobs, "trainingJobs", "javascript");
+@@clientName(Azure.AI.Projects.TrainingJobs.beginDelete,
+  "begin_delete",
+  "python"
+);
+@@clientName(Azure.AI.Projects.TrainingJobs.beginCancel,
+  "begin_cancel",
+  "python"
+);
 
 // --------------------------------------------------------------------------------
 // To support custom client-side handling of "opt-in" to preview features.
