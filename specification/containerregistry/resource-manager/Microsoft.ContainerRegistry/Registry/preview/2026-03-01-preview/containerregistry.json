@@ -8492,10 +8492,29 @@
             ]
           }
         },
-        "writableCacheReposEnabled": {
-          "type": "boolean",
+        "writableCacheRepos": {
+          "type": "string",
           "description": "Whether to allow cache operations that write to repositories in this registry.",
-          "default": false
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "WritableCacheRepos",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Cache write operations are enabled."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Cache write operations are disabled."
+              }
+            ]
+          }
         },
         "roleAssignmentMode": {
           "type": "string",
@@ -8612,9 +8631,29 @@
             ]
           }
         },
-        "writableCacheReposEnabled": {
-          "type": "boolean",
-          "description": "Whether to allow cache operations that write to repositories in this registry."
+        "writableCacheRepos": {
+          "type": "string",
+          "description": "Whether to allow cache operations that write to repositories in this registry.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "WritableCacheRepos",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Cache write operations are enabled."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Cache write operations are disabled."
+              }
+            ]
+          }
         },
         "roleAssignmentMode": {
           "$ref": "#/definitions/RoleAssignmentMode",

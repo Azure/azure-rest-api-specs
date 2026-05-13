@@ -159,6 +159,20 @@ union MetadataSearch {
 }
 
 /**
+ * Whether to allow cache operations that write to repositories in this registry.
+ */
+@added(Versions.vLatestPreview)
+union WritableCacheRepos {
+  string,
+
+  /** Cache write operations are enabled. */
+  Enabled: "Enabled",
+
+  /** Cache write operations are disabled. */
+  Disabled: "Disabled",
+}
+
+/**
  * Determines registry role assignment mode.
  */
 union RoleAssignmentMode {
@@ -395,7 +409,7 @@ model RegistryProperties {
    * Whether to allow cache operations that write to repositories in this registry.
    */
   @added(Versions.vLatestPreview)
-  writableCacheReposEnabled?: boolean = false;
+  writableCacheRepos?: WritableCacheRepos = WritableCacheRepos.Disabled;
 
   /**
    * Determines registry role assignment mode.
@@ -780,7 +794,7 @@ model RegistryPropertiesUpdateParameters {
    * Whether to allow cache operations that write to repositories in this registry.
    */
   @added(Versions.vLatestPreview)
-  writableCacheReposEnabled?: boolean;
+  writableCacheRepos?: WritableCacheRepos;
 
   /**
    * Determines registry role assignment mode.

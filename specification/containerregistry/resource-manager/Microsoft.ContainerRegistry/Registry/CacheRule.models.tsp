@@ -48,6 +48,7 @@ model CacheRuleProperties {
 /**
  * The type of authentication configuration used by a cache rule to access an upstream registry.
  */
+@added(Versions.vLatestPreview)
 union AdditionalAuthenticationType {
   string,
 
@@ -61,6 +62,7 @@ union AdditionalAuthenticationType {
  * Authentication configuration used by a cache rule to access an upstream registry.
  */
 @discriminator("type")
+@added(Versions.vLatestPreview)
 model AdditionalAuthenticationProperties {
   /**
    * Authentication type discriminator.
@@ -71,6 +73,7 @@ model AdditionalAuthenticationProperties {
 /**
  * Google Artifact Registry (GAR) authentication configuration.
  */
+@added(Versions.vLatestPreview)
 model GarAuthenticationProperties extends AdditionalAuthenticationProperties {
   type: "GoogleArtifactRegistry";
 
