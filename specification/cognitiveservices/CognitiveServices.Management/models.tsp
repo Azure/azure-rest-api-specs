@@ -200,6 +200,7 @@ union QuotaUsageStatus {
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
 union QuotaScopeType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Regional quota scope"
@@ -1647,6 +1648,7 @@ model AccountProperties {
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
   foundryAutoUpgrade?: FoundryAutoUpgrade;
 
   /**
@@ -1672,6 +1674,7 @@ model AccountProperties {
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
 union FoundryAutoUpgradeMode {
   string,
 
@@ -1694,6 +1697,7 @@ union FoundryAutoUpgradeMode {
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
 model FoundryAutoUpgrade {
   /**
    * Gets or sets the auto-upgrade mode.
@@ -2327,6 +2331,7 @@ model Usage {
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
   scopeType?: QuotaScopeType | null;
 
   /**
@@ -2337,6 +2342,7 @@ model Usage {
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
   scopeId?: string | null;
 }
 
@@ -2860,6 +2866,7 @@ model ModelSkuCapacityProperties {
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
   scopeId?: string | null;
 
   /**
@@ -2870,6 +2877,7 @@ model ModelSkuCapacityProperties {
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
   scopeType?: QuotaScopeType | null;
 }
 
@@ -3259,6 +3267,7 @@ model SkuResource {
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
 model PatchResourceSku {
   /**
    * The resource model definition representing SKU
@@ -5732,6 +5741,7 @@ model RaiBlocklistItemsBulkDeleteRequest is Array<string>;
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
 model ManagedComputeDeploymentProperties {
   /**
    * AzureML Registry model asset URI. Required on creation; immutable after creation.
@@ -5795,6 +5805,7 @@ model ManagedComputeDeploymentProperties {
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
 model ManagedComputeDeploymentProvisioningDetails {
   /**
    * A human-readable status message from the last provisioning operation.
@@ -5813,6 +5824,7 @@ model ManagedComputeDeploymentProvisioningDetails {
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
 model ManagedComputeDeploymentRoutes {
   /**
    * Relative path to the chat completions scoring endpoint.
@@ -5835,6 +5847,7 @@ model ManagedComputeDeploymentRoutes {
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
 model ManagedComputeDeploymentListResult {
   /**
    * The link used to get the next page of managed compute deployments.
