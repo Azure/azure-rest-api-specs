@@ -85,7 +85,8 @@ model ProfessionalServiceResourceProperties {
 }
 
 /** Professional Service ARM tracked resource for GA API version 2026-05-01. Inherits standard ARM envelope (id, name, type, location, tags, systemData). */
-model ProfessionalServiceResource is TrackedResource<ProfessionalServiceResourceProperties> {
+model ProfessionalServiceResource
+  is TrackedResource<ProfessionalServiceResourceProperties> {
   ...ResourceNameParameter<
     Resource = ProfessionalServiceResource,
     KeyName = "resourceName",
