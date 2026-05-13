@@ -26,14 +26,7 @@ model Schedule is Azure.ResourceManager.ProxyResource<ScheduleProperties> {
 @armResourceOperations
 interface Schedules {
   @doc("Gets a schedule resource.")
-  get is ArmResourceRead<
-    Schedule,
-    Parameters = {
-      @doc("The maximum number of resources to return from the operation. Example: '$top=10'.")
-      @query("$top")
-      $top?: int32;
-    }
-  >;
+  get is ArmResourceRead<Schedule>;
 
   @doc("Creates or updates a Schedule.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
