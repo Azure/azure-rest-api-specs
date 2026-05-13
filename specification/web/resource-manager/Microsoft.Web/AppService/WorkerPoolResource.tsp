@@ -73,7 +73,7 @@ alias WorkerPoolActionParamsOps = Azure.ResourceManager.Legacy.RoutedOperations<
     name: string;
   },
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/hostingEnvironments",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments",
   }
 >;
 
@@ -97,12 +97,13 @@ alias WorkerPoolInstanceMetricActionParamsOps = Azure.ResourceManager.Legacy.Rou
     workerPoolName: string;
   },
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/hostingEnvironments/{name}/workerPools",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/workerPools",
   }
 >;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations(#{ allowStaticRoutes: true })
+@tag("AppServiceEnvironments")
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface WorkerPoolResources {
   /**
    * Description for Get properties of a multi-role pool.
@@ -162,7 +163,7 @@ interface WorkerPoolResources {
   @summary("Get metric definitions for a specific instance of a multi-role pool of an App Service Environment.")
   @get
   @list
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/hostingEnvironments/{name}/multiRolePools/default/instances/{instance}/metricdefinitions")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools/default/instances/{instance}/metricdefinitions")
   listMultiRolePoolInstanceMetricDefinitions is WorkerPoolActionParamsOps.ActionSync<
     WorkerPoolResource,
     void,
@@ -304,7 +305,7 @@ interface AppServiceEnvironments {
   @get
   @action("metricdefinitions")
   @list
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/hostingEnvironments/{name}/workerPools/{workerPoolName}/instances/{instance}/metricdefinitions")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/workerPools/{workerPoolName}/instances/{instance}/metricdefinitions")
   listWorkerPoolInstanceMetricDefinitions is WorkerPoolInstanceMetricActionParamsOps.ActionSync<
     WorkerPoolResource,
     void,

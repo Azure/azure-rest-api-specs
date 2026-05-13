@@ -23,6 +23,7 @@ using TypeSpec.Versioning;
 @@clientName(Microsoft.Discovery, "DiscoveryMgmtClient", "python");
 
 @doc("Tool tracked resource")
+@added(Microsoft.Discovery.Versions.v2026_02_01_preview)
 model ToolUpdate {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("Resource tags.")
@@ -33,6 +34,7 @@ model ToolUpdate {
 }
 
 @doc("Discovery Tool list item properties")
+@added(Microsoft.Discovery.Versions.v2026_02_01_preview)
 model ToolUpdateProperties {
   ...DiscoveryResourceProperties;
 
@@ -62,6 +64,7 @@ model BookshelfKeyVaultUpdateProperties {
 }
 
 @doc("The updatable properties of the Bookshelf.")
+@added(Microsoft.Discovery.Versions.v2026_02_01_preview)
 model BookshelfUpdateProperties {
   @doc("The key to use for encrypting data at rest when customer managed keys are enabled. Required if Customer Managed Keys is enabled.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
@@ -75,6 +78,7 @@ model BookshelfUpdateProperties {
 }
 
 @doc("The type used for update operations of the Bookshelf.")
+@added(Microsoft.Discovery.Versions.v2026_02_01_preview)
 model BookshelfUpdate {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("Resource tags.")
@@ -89,6 +93,7 @@ model BookshelfUpdate {
 );
 
 @doc("Storage Asset tracked resource")
+@added(Microsoft.Discovery.Versions.v2026_02_01_preview)
 model StorageAssetUpdate {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("Resource tags.")
@@ -99,6 +104,7 @@ model StorageAssetUpdate {
 }
 
 @doc("Storage Asset properties")
+@added(Microsoft.Discovery.Versions.v2026_02_01_preview)
 model StorageAssetUpdateProperties {
   @doc("The description")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
@@ -110,6 +116,7 @@ model StorageAssetUpdateProperties {
   "javascript"
 );
 @doc("Storage Container tracked resource")
+@added(Microsoft.Discovery.Versions.v2026_02_01_preview)
 model StorageContainerUpdate {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("Resource tags.")
@@ -121,6 +128,7 @@ model StorageContainerUpdate {
 );
 
 @doc("NodePool tracked resource")
+@added(Microsoft.Discovery.Versions.v2026_02_01_preview)
 model NodePoolUpdate {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("Resource tags.")
@@ -130,6 +138,7 @@ model NodePoolUpdate {
   properties?: NodePoolUpdateProperties;
 }
 @doc("NodePool properties")
+@added(Microsoft.Discovery.Versions.v2026_02_01_preview)
 model NodePoolUpdateProperties {
   @doc("The maximum number of nodes.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
@@ -147,6 +156,7 @@ model NodePoolUpdateProperties {
 );
 
 @doc("Dictionary of identity properties for the Supercomputer.")
+@added(Microsoft.Discovery.Versions.v2026_02_01_preview)
 model SupercomputerIdentitiesUpdate {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "User-determined keys"
   @doc("User assigned identity IDs to be used by workloads as federated credentials running on supercomputer. The key value must be the resource ID of the identity resource.")
@@ -155,6 +165,7 @@ model SupercomputerIdentitiesUpdate {
 }
 
 @doc("Updatable properties for Supercomputer (all fields optional for PATCH)")
+@added(Microsoft.Discovery.Versions.v2026_02_01_preview)
 model SupercomputerUpdateProperties {
   @doc("Dictionary of identity properties.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
@@ -162,6 +173,7 @@ model SupercomputerUpdateProperties {
 }
 
 @doc("Update model for Supercomputer PATCH operations")
+@added(Microsoft.Discovery.Versions.v2026_02_01_preview)
 model SupercomputerUpdate {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("Resource tags.")
@@ -177,6 +189,7 @@ model SupercomputerUpdate {
 );
 
 @doc("Represents a deployment that ties a specific model family to a user defined deployment name used when invoking the chat model.")
+@added(Microsoft.Discovery.Versions.v2026_02_01_preview)
 model ChatModelDeploymentUpdate {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("Resource tags.")
@@ -188,6 +201,7 @@ model ChatModelDeploymentUpdate {
 );
 
 @doc("Project tracked resource")
+@added(Microsoft.Discovery.Versions.v2026_02_01_preview)
 model ProjectUpdate {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("Resource tags.")
@@ -198,6 +212,7 @@ model ProjectUpdate {
 }
 
 @doc("Project properties")
+@added(Microsoft.Discovery.Versions.v2026_02_01_preview)
 model ProjectUpdateProperties {
   @doc("Allowed AgentIds (Control plane resource references).")
   @removed(Microsoft.Discovery.Versions.v2026_02_01_preview)
@@ -245,6 +260,7 @@ model KeyVaultUpdateProperties {
 }
 
 @doc("Updatable properties for Workspace (all fields optional for PATCH)")
+@added(Microsoft.Discovery.Versions.v2026_02_01_preview)
 model WorkspaceUpdateProperties {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("List of linked SuperComputers.")
@@ -262,6 +278,7 @@ model WorkspaceUpdateProperties {
 }
 
 @doc("Update model for Workspace PATCH operations")
+@added(Microsoft.Discovery.Versions.v2026_02_01_preview)
 model WorkspaceUpdate {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("Resource tags.")

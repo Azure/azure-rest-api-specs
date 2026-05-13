@@ -98,7 +98,8 @@ interface WorkflowRegenerateAccessKeyOps
       }
     > {}
 
-@armResourceOperations(#{ allowStaticRoutes: true })
+@tag("WebApps")
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface Sites {
   /**
    * Description for Gets the details of a web, mobile, or API app.
@@ -175,94 +176,6 @@ interface Sites {
     Extension.Subscription,
     Site,
     Response = ArmResponse<WebAppCollection>,
-    Error = DefaultErrorResponse
-  >;
-
-  /**
-   * Description for Get past recommendations for an app, optionally specified by the time range.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @summary("Get past recommendations for an app, optionally specified by the time range.")
-  @Azure.ResourceManager.Legacy.renamePathParameter("name", "siteName")
-  @get
-  @list
-  @action("recommendationHistory")
-  listHistoryForWebApp is SiteOps.ActionSync<
-    Site,
-    void,
-    ArmResponse<RecommendationCollection>,
-    Parameters = {
-      /**
-       * Specify <code>false</code> to return all recommendations. The default is <code>true</code>, which returns only expired recommendations.
-       */
-      @query("expiredOnly")
-      expiredOnly?: boolean;
-
-      /**
-       * Filter is specified by using OData syntax. Example: $filter=channel eq 'Api' or channel eq 'Notification' and startTime eq 2014-01-01T00:00:00Z and endTime eq 2014-12-31T23:59:59Z and timeGrain eq duration'[PT1H|PT1M|P1D]
-       */
-      @query("$filter")
-      $filter?: string;
-    },
-    OverrideErrorType = DefaultErrorResponse
-  >;
-
-  /**
-   * Description for Get all recommendations for an app.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @summary("Get all recommendations for an app.")
-  @Azure.ResourceManager.Legacy.renamePathParameter("name", "siteName")
-  @get
-  @list
-  @action("recommendations")
-  listRecommendedRulesForWebApp is SiteOps.ActionSync<
-    Site,
-    void,
-    ArmResponse<RecommendationCollection>,
-    Parameters = {
-      /**
-       * Specify <code>true</code> to return only the most critical recommendations. The default is <code>false</code>, which returns all recommendations.
-       */
-      @query("featured")
-      featured?: boolean;
-
-      /**
-       * Return only channels specified in the filter. Filter is specified by using OData syntax. Example: $filter=channel eq 'Api' or channel eq 'Notification'
-       */
-      @query("$filter")
-      $filter?: string;
-    },
-    OverrideErrorType = DefaultErrorResponse
-  >;
-
-  /**
-   * Description for Disable all recommendations for an app.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @summary("Disable all recommendations for an app.")
-  @post
-  @action("recommendations/disable")
-  @Azure.ResourceManager.Legacy.renamePathParameter("name", "siteName")
-  disableAllForWebApp is ArmResourceActionSync<
-    Site,
-    Request = void,
-    Response = NoContentResponse,
-    Error = DefaultErrorResponse
-  >;
-
-  /**
-   * Description for Reset all recommendation opt-out settings for an app.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @post
-  @summary("Reset all recommendation opt-out settings for an app.")
-  @action("recommendations/reset")
-  @Azure.ResourceManager.Legacy.renamePathParameter("name", "siteName")
-  resetAllFiltersForWebApp is ArmResourceActionSync<
-    Site,
-    Request = void,
-    Response = NoContentResponse,
     Error = DefaultErrorResponse
   >;
 
@@ -655,7 +568,7 @@ interface Sites {
    * Description for Add or update a host level secret.
    */
   @summary("Add or update a host level secret.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/host/default/{keyType}/{keyName}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/host/default/{keyType}/{keyName}")
   @put
   createOrUpdateHostSecret is ActionParameterSiteWebAppOps.ActionSync<
     Site,
@@ -681,7 +594,7 @@ interface Sites {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Delete a host level secret.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/host/default/{keyType}/{keyName}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/host/default/{keyType}/{keyName}")
   @delete
   deleteHostSecret is ActionParameterSiteWebAppOps.ActionSync<
     Site,
@@ -824,7 +737,7 @@ interface Sites {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets a named operation for a network trace capturing (or deployment slot, if specified).")
   @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/networkTrace/operationresults/{operationId}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkTrace/operationresults/{operationId}")
   getNetworkTraceOperation is ActionParameterSiteWebAppOps.ActionSync<
     Site,
     void,
@@ -883,7 +796,7 @@ interface Sites {
   startWebSiteNetworkTraceOperation is SiteOps.ActionSync<
     Site,
     void,
-    ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> & {
+    ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkTrace[]>> & {
       @bodyRoot
       @identifiers(#[])
       _?: NetworkTrace[];
@@ -930,7 +843,7 @@ interface Sites {
    */
   @summary("Gets a named operation for a network trace capturing (or deployment slot, if specified).")
   @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/networkTrace/{operationId}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkTrace/{operationId}")
   getNetworkTraces is ActionParameterSiteWebAppOps.ActionSync<
     Site,
     void,
@@ -951,7 +864,7 @@ interface Sites {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets a named operation for a network trace capturing (or deployment slot, if specified).")
   @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/networkTraces/current/operationresults/{operationId}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkTraces/current/operationresults/{operationId}")
   getNetworkTraceOperationV2 is ActionParameterSiteWebAppOps.ActionSync<
     Site,
     void,
@@ -975,7 +888,7 @@ interface Sites {
    */
   @summary("Gets a named operation for a network trace capturing (or deployment slot, if specified).")
   @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/networkTraces/{operationId}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkTraces/{operationId}")
   getNetworkTracesV2 is ActionParameterSiteWebAppOps.ActionSync<
     Site,
     void,
@@ -1253,7 +1166,8 @@ interface Sites {
   startNetworkTrace is SiteOps.ActionSync<
     Site,
     void,
-    ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse & {
+    ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkTrace[]> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       @identifiers(#[])
       _?: NetworkTrace[];
@@ -1380,7 +1294,103 @@ interface Sites {
     ArmResponse<WorkflowEnvelope>,
     OverrideErrorType = DefaultErrorResponse
   >;
+}
 
+@tag("Recommendations")
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
+interface SiteRecommendations {
+  /**
+   * Description for Get past recommendations for an app, optionally specified by the time range.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Get past recommendations for an app, optionally specified by the time range.")
+  @Azure.ResourceManager.Legacy.renamePathParameter("name", "siteName")
+  @get
+  @list
+  @action("recommendationHistory")
+  listHistoryForWebApp is SiteOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<RecommendationCollection>,
+    Parameters = {
+      /**
+       * Specify <code>false</code> to return all recommendations. The default is <code>true</code>, which returns only expired recommendations.
+       */
+      @query("expiredOnly")
+      expiredOnly?: boolean;
+
+      /**
+       * Filter is specified by using OData syntax. Example: $filter=channel eq 'Api' or channel eq 'Notification' and startTime eq 2014-01-01T00:00:00Z and endTime eq 2014-12-31T23:59:59Z and timeGrain eq duration'[PT1H|PT1M|P1D]
+       */
+      @query("$filter")
+      $filter?: string;
+    },
+    OverrideErrorType = DefaultErrorResponse
+  >;
+
+  /**
+   * Description for Get all recommendations for an app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Get all recommendations for an app.")
+  @Azure.ResourceManager.Legacy.renamePathParameter("name", "siteName")
+  @get
+  @list
+  @action("recommendations")
+  listRecommendedRulesForWebApp is SiteOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<RecommendationCollection>,
+    Parameters = {
+      /**
+       * Specify <code>true</code> to return only the most critical recommendations. The default is <code>false</code>, which returns all recommendations.
+       */
+      @query("featured")
+      featured?: boolean;
+
+      /**
+       * Return only channels specified in the filter. Filter is specified by using OData syntax. Example: $filter=channel eq 'Api' or channel eq 'Notification'
+       */
+      @query("$filter")
+      $filter?: string;
+    },
+    OverrideErrorType = DefaultErrorResponse
+  >;
+
+  /**
+   * Description for Disable all recommendations for an app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Disable all recommendations for an app.")
+  @post
+  @action("recommendations/disable")
+  @Azure.ResourceManager.Legacy.renamePathParameter("name", "siteName")
+  disableAllForWebApp is ArmResourceActionSync<
+    Site,
+    Request = void,
+    Response = NoContentResponse,
+    Error = DefaultErrorResponse
+  >;
+
+  /**
+   * Description for Reset all recommendation opt-out settings for an app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @post
+  @summary("Reset all recommendation opt-out settings for an app.")
+  @action("recommendations/reset")
+  @Azure.ResourceManager.Legacy.renamePathParameter("name", "siteName")
+  resetAllFiltersForWebApp is ArmResourceActionSync<
+    Site,
+    Request = void,
+    Response = NoContentResponse,
+    Error = DefaultErrorResponse
+  >;
+}
+
+@tag("Workflows")
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
+interface SiteWorkflows {
   /**
    * Regenerates the callback URL access key for request triggers.
    */
@@ -1450,7 +1460,7 @@ alias ActionParameterSlotWebAppOps = Azure.ResourceManager.Legacy.RoutedOperatio
     slot: string;
   },
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/slots",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots",
   }
 >;
 
@@ -1468,7 +1478,7 @@ alias ActionParameterSiteWebAppOps = Azure.ResourceManager.Legacy.RoutedOperatio
   },
   {},
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites",
   }
 >;
 
@@ -1941,7 +1951,7 @@ interface WebApps {
    */
   @summary("Add or update a host level secret.")
   @put
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/slots/{slot}/host/default/{keyType}/{keyName}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/host/default/{keyType}/{keyName}")
   createOrUpdateHostSecretSlot is ActionParameterSlotWebAppOps.ActionSync<
     Site,
     KeyInfo,
@@ -1968,7 +1978,7 @@ interface WebApps {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Delete a host level secret.")
   @delete
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/slots/{slot}/host/default/{keyType}/{keyName}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/host/default/{keyType}/{keyName}")
   deleteHostSecretSlot is ActionParameterSlotWebAppOps.ActionSync<
     Site,
     void,
@@ -2061,7 +2071,7 @@ interface WebApps {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets a named operation for a network trace capturing (or deployment slot, if specified).")
   @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/slots/{slot}/networkTrace/operationresults/{operationId}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/networkTrace/operationresults/{operationId}")
   getNetworkTraceOperationSlot is ActionParameterSlotWebAppOps.ActionSync<
     Site,
     Request = void,
@@ -2120,7 +2130,7 @@ interface WebApps {
   startWebSiteNetworkTraceOperationSlot is WebAppOps.ActionSync<
     Site,
     void,
-    ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> & {
+    ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkTrace[]>> & {
       @bodyRoot
       @identifiers(#[])
       _?: NetworkTrace[];
@@ -2167,7 +2177,7 @@ interface WebApps {
    */
   @summary("Gets a named operation for a network trace capturing (or deployment slot, if specified).")
   @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/slots/{slot}/networkTrace/{operationId}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/networkTrace/{operationId}")
   getNetworkTracesSlot is ActionParameterSlotWebAppOps.ActionSync<
     Site,
     Request = void,
@@ -2187,7 +2197,7 @@ interface WebApps {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets a named operation for a network trace capturing (or deployment slot, if specified).")
   @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/slots/{slot}/networkTraces/current/operationresults/{operationId}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/networkTraces/current/operationresults/{operationId}")
   getNetworkTraceOperationSlotV2 is ActionParameterSlotWebAppOps.ActionSync<
     Site,
     Request = void,
@@ -2211,7 +2221,7 @@ interface WebApps {
    */
   @summary("Gets a named operation for a network trace capturing (or deployment slot, if specified).")
   @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/slots/{slot}/networkTraces/{operationId}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/networkTraces/{operationId}")
   getNetworkTracesSlotV2 is ActionParameterSlotWebAppOps.ActionSync<
     Site,
     Request = void,
@@ -2491,7 +2501,8 @@ interface WebApps {
   startNetworkTraceSlot is WebAppOps.ActionSync<
     Site,
     void,
-    ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse & {
+    ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkTrace[]> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       @identifiers(#[])
       _?: NetworkTrace[];
@@ -2687,8 +2698,10 @@ interface WebApps {
 @@doc(Sites.deployWorkflowArtifacts::parameters.body,
   "Application settings and files of the workflow."
 );
-@@doc(Sites.regenerateAccessKey::parameters.body, "The access key type.");
-@@doc(Sites.validate::parameters.body, "The workflow.");
+@@doc(SiteWorkflows.regenerateAccessKey::parameters.body,
+  "The access key type."
+);
+@@doc(SiteWorkflows.validate::parameters.body, "The workflow.");
 @@doc(WebApps.createOrUpdateSlot::parameters.resource,
   "A JSON representation of the app properties. See example."
 );

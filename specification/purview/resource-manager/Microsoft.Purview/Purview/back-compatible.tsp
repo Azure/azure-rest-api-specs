@@ -4,7 +4,9 @@ using Azure.ClientGenerator.Core;
 using Microsoft.Purview;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(AccountUpdateParameters.properties, "!javascript");
+@@Legacy.flattenProperty(AccountUpdateParameters.properties,
+  "!javascript,!csharp"
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Operation.properties);
