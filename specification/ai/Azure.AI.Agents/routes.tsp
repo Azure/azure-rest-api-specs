@@ -45,9 +45,11 @@ op createAgent is AgentOperation<
 @route("/assistants")
 @list
 @added(Versions.v2025_05_01)
-op listAgents(...ApiVersionParameter, ...AgentsListOptions): {
-  ...AgentsPagedResult<Agent>;
-} | AgentV1Error;
+op listAgents(...ApiVersionParameter, ...AgentsListOptions):
+  | {
+      ...AgentsPagedResult<Agent>;
+    }
+  | AgentV1Error;
 
 /**
  * Retrieves an existing agent.

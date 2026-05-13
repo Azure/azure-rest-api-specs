@@ -65,10 +65,12 @@ interface AnnotationsOperationGroup {
     /** Properties that need to be specified to create an annotation of a Application Insights component. */
     @bodyRoot
     body: Annotation,
-  ): {
-    #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    @bodyRoot _: Annotation[];
-  } | AnnotationError;
+  ):
+    | {
+        #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+        @bodyRoot _: Annotation[];
+      }
+    | AnnotationError;
 
   /**
    * Delete an Annotation of an Application Insights component.
@@ -458,11 +460,13 @@ interface ProactiveDetectionConfigurationsOperationGroup {
      */
     @path
     resourceName: string,
-  ): {
-    @bodyRoot
-    @identifiers(#["Name"])
-    _: ApplicationInsightsComponentProactiveDetectionConfiguration[];
-  } | never;
+  ):
+    | {
+        @bodyRoot
+        @identifiers(#["Name"])
+        _: ApplicationInsightsComponentProactiveDetectionConfiguration[];
+      }
+    | never;
   /**
    * Get the ProactiveDetection configuration for this configuration id.
    */
@@ -485,7 +489,9 @@ interface ProactiveDetectionConfigurationsOperationGroup {
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     ConfigurationId: string,
-  ): ArmResponse<ApplicationInsightsComponentProactiveDetectionConfiguration> | never;
+  ):
+    | ArmResponse<ApplicationInsightsComponentProactiveDetectionConfiguration>
+    | never;
 
   /**
    * Update the ProactiveDetection configuration for this configuration id.
@@ -516,7 +522,9 @@ interface ProactiveDetectionConfigurationsOperationGroup {
     #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @bodyRoot
     ProactiveDetectionProperties: ApplicationInsightsComponentProactiveDetectionConfiguration,
-  ): ArmResponse<ApplicationInsightsComponentProactiveDetectionConfiguration> | never;
+  ):
+    | ArmResponse<ApplicationInsightsComponentProactiveDetectionConfiguration>
+    | never;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

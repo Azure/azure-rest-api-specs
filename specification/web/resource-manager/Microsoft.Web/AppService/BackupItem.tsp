@@ -208,13 +208,16 @@ interface BackupItemOperationGroup {
 
 @@doc(BackupItem.name, "ID of the backup.");
 @@doc(BackupItem.properties, "BackupItem resource specific properties");
-@@doc(BackupItems.listBackupStatusSecrets::parameters.body,
+@@doc(
+  BackupItems.listBackupStatusSecrets::parameters.body,
   "Information on backup request."
 );
 @@doc(BackupItems.restore::parameters.body, "Information on restore request .");
-@@doc(BackupItemOperationGroup.listBackupStatusSecretsSlot::parameters.body,
+@@doc(
+  BackupItemOperationGroup.listBackupStatusSecretsSlot::parameters.body,
   "Information on backup request."
 );
-@@doc(BackupItemOperationGroup.restoreSlot::parameters.body,
+@@doc(
+  BackupItemOperationGroup.restoreSlot::parameters.body,
   "Information on restore request ."
 );

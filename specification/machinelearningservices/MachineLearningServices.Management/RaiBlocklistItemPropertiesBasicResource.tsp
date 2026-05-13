@@ -82,10 +82,12 @@ interface RaiBlocklistItemPropertiesBasicResources {
   >;
 }
 
-@@doc(RaiBlocklistItemPropertiesBasicResource.name,
+@@doc(
+  RaiBlocklistItemPropertiesBasicResource.name,
   "Name of the RaiBlocklist Item"
 );
-@@doc(RaiBlocklistItemPropertiesBasicResource.properties,
+@@doc(
+  RaiBlocklistItemPropertiesBasicResource.properties,
   "RAI Custom Blocklist Item properties."
 );
 @@doc(RaiBlocklistItemPropertiesBasicResources.create::parameters.resource, "");
