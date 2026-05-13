@@ -38,7 +38,7 @@ model GraphQueryResource
   etag?: string;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface GraphQueryResources {
   /**
    * Get a single graph query by its resourceName.
