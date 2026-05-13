@@ -1,0 +1,50 @@
+{
+  "operationId": "ServerFarmSilos_ListServerFarmSilos",
+  "title": "Get all silos for an App Service plan",
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "testrg123",
+    "name": "testsf6141",
+    "api-version": "2026-06-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/serverfarms/testsf6141/silos/silo-eastus",
+            "name": "silo-eastus",
+            "type": "Microsoft.Web/serverfarms/silos",
+            "location": "East US",
+            "properties": {
+              "siloLocation": "East US",
+              "primaryServerFarmName": "testsf6141",
+              "primaryLocation": "West US",
+              "instanceNumberOverride": 3,
+              "zoneRedundantOverride": true,
+              "provisioningState": "Succeeded",
+              "createdTime": "2026-01-15T10:00:00Z",
+              "lastModifiedTime": "2026-01-15T12:00:00Z"
+            }
+          },
+          {
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/serverfarms/testsf6141/silos/silo-westus",
+            "name": "silo-westus",
+            "type": "Microsoft.Web/serverfarms/silos",
+            "location": "West US",
+            "properties": {
+              "siloLocation": "West US",
+              "primaryServerFarmName": "testsf6141",
+              "primaryLocation": "West US",
+              "instanceNumberOverride": 2,
+              "zoneRedundantOverride": false,
+              "provisioningState": "Succeeded",
+              "createdTime": "2026-01-10T08:00:00Z",
+              "lastModifiedTime": "2026-01-10T09:00:00Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

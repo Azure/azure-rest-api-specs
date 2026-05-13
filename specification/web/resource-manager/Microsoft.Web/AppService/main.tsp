@@ -83,6 +83,10 @@ import "./RequestHistory.tsp";
 import "./WorkflowTrigger.tsp";
 import "./WorkflowTriggerHistory.tsp";
 import "./WorkflowVersion.tsp";
+import "./ServerFarmSilo.tsp";
+import "./SiteSilo.tsp";
+import "./ManagedTrafficConfig.tsp";
+import "./LastKnownGood.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;
@@ -116,6 +120,11 @@ enum Versions {
    * The 2026-03-01-preview API version.
    */
   v2026_03_01_preview: "2026-03-01-preview",
+
+  /**
+   * The 2026-06-01-preview API version.
+   */
+  v2026_06_01_preview: "2026-06-01-preview",
 }
 
 @tag("Provider")

@@ -1,0 +1,97 @@
+{
+  "operationId": "SiteSilos_CreateOrUpdate",
+  "title": "Create or update a web app silo",
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "testrg123",
+    "name": "sitef6141",
+    "siloName": "silo-eastus",
+    "api-version": "2026-06-01-preview",
+    "resource": {
+      "location": "East US",
+      "properties": {
+        "siloLocation": "East US",
+        "primarySiteName": "sitef6141",
+        "primaryLocation": "West US",
+        "endpointStatus": "Enabled",
+        "trafficMode": "Active",
+        "networkingOverride": {
+          "vnetIntegrationOverride": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"
+        },
+        "appSettingsOverrides": [
+          {
+            "name": "WEBSITE_OVERRIDE_SETTING",
+            "value": "overrideValue"
+          }
+        ],
+        "followLkg": true
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/sites/sitef6141/silos/silo-eastus",
+        "name": "silo-eastus",
+        "type": "Microsoft.Web/sites/silos",
+        "location": "East US",
+        "properties": {
+          "siloLocation": "East US",
+          "primarySiteName": "sitef6141",
+          "primaryLocation": "West US",
+          "endpointStatus": "Enabled",
+          "trafficMode": "Active",
+          "networkingOverride": {
+            "vnetIntegrationOverride": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"
+          },
+          "appSettingsOverrides": [
+            {
+              "name": "WEBSITE_OVERRIDE_SETTING",
+              "value": "overrideValue"
+            }
+          ],
+          "followLkg": true,
+          "provisioningState": "Succeeded",
+          "revisionId": "rev-001",
+          "defaultHostName": "sitef6141-silo-eastus.azurewebsites.net",
+          "globalHostName": "sitef6141.trafficmanager.net",
+          "monitorStatus": "Online",
+          "createdTime": "2026-01-15T10:00:00Z",
+          "lastModifiedTime": "2026-01-15T12:00:00Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/sites/sitef6141/silos/silo-eastus",
+        "name": "silo-eastus",
+        "type": "Microsoft.Web/sites/silos",
+        "location": "East US",
+        "properties": {
+          "siloLocation": "East US",
+          "primarySiteName": "sitef6141",
+          "primaryLocation": "West US",
+          "endpointStatus": "Enabled",
+          "trafficMode": "Active",
+          "networkingOverride": {
+            "vnetIntegrationOverride": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"
+          },
+          "appSettingsOverrides": [
+            {
+              "name": "WEBSITE_OVERRIDE_SETTING",
+              "value": "overrideValue"
+            }
+          ],
+          "followLkg": true,
+          "provisioningState": "InProgress",
+          "revisionId": "rev-001",
+          "defaultHostName": "sitef6141-silo-eastus.azurewebsites.net",
+          "globalHostName": "sitef6141.trafficmanager.net",
+          "monitorStatus": "CheckingEndpoint",
+          "createdTime": "2026-01-15T10:00:00Z",
+          "lastModifiedTime": "2026-01-15T10:00:00Z"
+        }
+      }
+    }
+  }
+}
