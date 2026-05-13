@@ -67,6 +67,7 @@ interface SqlAvailabilityGroups {
 }
 
 @@doc(SqlAvailabilityGroup.name, "SQL availability group name.");
-@@doc(SqlAvailabilityGroup.properties,
+@@doc(
+  SqlAvailabilityGroup.properties,
   "The resource-specific properties for this resource."
 );

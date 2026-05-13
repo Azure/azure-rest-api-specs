@@ -11,17 +11,20 @@ namespace ClientCustomizations;
 
 using MonitorQueryMetrics;
 
-@@clientNamespace(MonitorQueryMetrics,
+@@clientNamespace(
+  MonitorQueryMetrics,
   "com.azure.monitor.query.metrics.implementation",
   "java"
 );
 
-@@clientNamespace(MonitorQueryMetrics.MetricValue,
+@@clientNamespace(
+  MonitorQueryMetrics.MetricValue,
   "com.azure.monitor.query.metrics",
   "java"
 );
 
-@@clientNamespace(MonitorQueryMetrics.MetricUnit,
+@@clientNamespace(
+  MonitorQueryMetrics.MetricUnit,
   "com.azure.monitor.query.metrics",
   "java"
 );
@@ -37,7 +40,8 @@ using MonitorQueryMetrics;
 @@clientName(MetricResultsResponseValuesItem.endtime, "EndTime", "go");
 @@clientName(MetricResultsResponseValuesItem.value, "Values", "go");
 @@clientName(MetricResultsResponseValuesItem.resourceid, "ResourceID", "go");
-@@clientName(MetricResultsResponseValuesItem.resourceregion,
+@@clientName(
+  MetricResultsResponseValuesItem.resourceregion,
   "ResourceRegion",
   "go"
 );
@@ -48,15 +52,18 @@ using MonitorQueryMetrics;
 @@access(batch, Access.internal, "python");
 
 @@clientName(MonitorQueryMetrics, "MetricsClient", "javascript");
-@@clientName(MetricResultsResponseValuesItem.resourceid,
+@@clientName(
+  MetricResultsResponseValuesItem.resourceid,
   "resourceId",
   "javascript"
 );
-@@clientName(MetricResultsResponseValuesItem.resourceregion,
+@@clientName(
+  MetricResultsResponseValuesItem.resourceregion,
   "resourceRegion",
   "javascript"
 );
-@@clientName(MetricResultsResponseValuesItem.starttime,
+@@clientName(
+  MetricResultsResponseValuesItem.starttime,
   "startTime",
   "javascript"
 );
@@ -79,11 +86,13 @@ using MonitorQueryMetrics;
 @@clientName(Metric.timeseries, "TimeSeries", "csharp");
 @@clientName(Metric.name, "LocalizedName", "csharp");
 @@clientName(TimeSeriesElement.data, "Values", "csharp");
-@@clientName(MetricResultsResponseValuesItem.resourceid,
+@@clientName(
+  MetricResultsResponseValuesItem.resourceid,
   "ResourceId",
   "csharp"
 );
-@@clientName(MetricResultsResponseValuesItem.resourceregion,
+@@clientName(
+  MetricResultsResponseValuesItem.resourceregion,
   "ResourceRegion",
   "csharp"
 );

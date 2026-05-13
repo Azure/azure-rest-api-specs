@@ -6,61 +6,73 @@ using Microsoft.BillingBenefits;
 
 // go
 @@clientLocation(BenefitOperationGroup.validate, "RP", "go");
-@@clientName(Microsoft.BillingBenefits.ManagedServiceIdentity,
+@@clientName(
+  Microsoft.BillingBenefits.ManagedServiceIdentity,
   "ServiceManagedIdentity",
   "go"
 );
-@@clientName(Microsoft.BillingBenefits.ManagedServiceIdentityType,
+@@clientName(
+  Microsoft.BillingBenefits.ManagedServiceIdentityType,
   "ServiceManagedIdentityType",
   "go"
 );
 
 // java
 @@clientLocation(BenefitOperationGroup.validate, "ResourceProviders", "java");
-@@clientName(Microsoft.BillingBenefits.ManagedServiceIdentity,
+@@clientName(
+  Microsoft.BillingBenefits.ManagedServiceIdentity,
   "ServiceManagedIdentity",
   "java"
 );
-@@clientName(Microsoft.BillingBenefits.ManagedServiceIdentityType,
+@@clientName(
+  Microsoft.BillingBenefits.ManagedServiceIdentityType,
   "ServiceManagedIdentityType",
   "java"
 );
 
 // python
-@@clientName(Microsoft.BillingBenefits.ManagedServiceIdentity,
+@@clientName(
+  Microsoft.BillingBenefits.ManagedServiceIdentity,
   "ServiceManagedIdentity",
   "python"
 );
-@@clientName(Microsoft.BillingBenefits.ManagedServiceIdentityType,
+@@clientName(
+  Microsoft.BillingBenefits.ManagedServiceIdentityType,
   "ServiceManagedIdentityType",
   "python"
 );
 
 // csharp
-@@clientName(Microsoft.BillingBenefits.ManagedServiceIdentity,
+@@clientName(
+  Microsoft.BillingBenefits.ManagedServiceIdentity,
   "BillingBenefitsManagedServiceIdentity",
   "csharp"
 );
-@@clientName(Microsoft.BillingBenefits.ManagedServiceIdentityType,
+@@clientName(
+  Microsoft.BillingBenefits.ManagedServiceIdentityType,
   "BillingBenefitsManagedServiceIdentityType",
   "csharp"
 );
-@@clientName(ReservationOrderAliasResponse,
+@@clientName(
+  ReservationOrderAliasResponse,
   "BillingBenefitsReservationOrderAlias",
   "csharp"
 );
-@@clientName(AppliedScopeProperties,
+@@clientName(
+  AppliedScopeProperties,
   "BillingBenefitsAppliedScopeProperties",
   "csharp"
 );
 @@clientName(AppliedScopeType, "BillingBenefitsAppliedScopeType", "csharp");
 @@clientName(BillingPlan, "BillingBenefitsBillingPlan", "csharp");
 @@clientName(ProvisioningState, "BillingBenefitsProvisioningState", "csharp");
-@@clientName(InstanceFlexibility,
+@@clientName(
+  InstanceFlexibility,
   "BillingBenefitsInstanceFlexibility",
   "csharp"
 );
-@@clientName(ReservedResourceType,
+@@clientName(
+  ReservedResourceType,
   "BillingBenefitsReservedResourceType",
   "csharp"
 );
@@ -70,55 +82,67 @@ using Microsoft.BillingBenefits;
 @@clientName(CommitmentGrain, "BillingBenefitsCommitmentGrain", "csharp");
 @@clientName(ExtendedStatusInfo, "BillingBenefitsExtendedStatusInfo", "csharp");
 @@clientName(Utilization, "BillingBenefitsSavingsPlanUtilization", "csharp");
-@@clientName(UtilizationAggregates,
+@@clientName(
+  UtilizationAggregates,
   "BillingBenefitsSavingsPlanUtilizationAggregate",
   "csharp"
 );
 @@clientName(PurchaseRequest, "BillingBenefitsPurchaseContent", "csharp");
-@@clientName(SavingsPlanValidResponseProperty,
+@@clientName(
+  SavingsPlanValidResponseProperty,
   "SavingsPlanValidateResult",
   "csharp"
 );
-@@clientName(SavingsPlanOrderAliasModel,
+@@clientName(
+  SavingsPlanOrderAliasModel,
   "BillingBenefitsSavingsPlanOrderAlias",
   "csharp"
 );
-@@clientName(SavingsPlanOrderModel,
+@@clientName(
+  SavingsPlanOrderModel,
   "BillingBenefitsSavingsPlanOrder",
   "csharp"
 );
-@@clientName(RoleAssignmentEntity,
+@@clientName(
+  RoleAssignmentEntity,
   "BillingBenefitsRoleAssignmentEntity",
   "csharp"
 );
 @@clientName(Price, "BillingBenefitsPrice", "csharp");
 @@clientName(PaymentDetail, "SavingsPlanOrderPaymentDetail", "csharp");
 @@clientName(PaymentStatus, "BillingBenefitsPaymentStatus", "csharp");
-@@clientName(SavingsPlanUpdateValidateRequest,
+@@clientName(
+  SavingsPlanUpdateValidateRequest,
   "SavingsPlanUpdateValidateContent",
   "csharp"
 );
-@@clientName(SavingsPlanPurchaseValidateRequest,
+@@clientName(
+  SavingsPlanPurchaseValidateRequest,
   "SavingsPlanPurchaseValidateContent",
   "csharp"
 );
-@@clientName(ReservationOrderAliasRequest,
+@@clientName(
+  ReservationOrderAliasRequest,
   "ReservationOrderAliasContent",
   "csharp"
 );
-@@clientName(SavingsPlanUpdateRequestProperties,
+@@clientName(
+  SavingsPlanUpdateRequestProperties,
   "BillingBenefitsSavingsPlanPatchProperties",
   "csharp"
 );
-@@clientName(ReservationOrderAliasResponseProperties.renew,
+@@clientName(
+  ReservationOrderAliasResponseProperties.renew,
   "IsRenewed",
   "csharp"
 );
-@@clientName(ReservationOrderAliasRequestProperties.renew,
+@@clientName(
+  ReservationOrderAliasRequestProperties.renew,
   "IsRenewed",
   "csharp"
 );
-@@clientName(SavingsPlanModelProperties.effectiveDateTime,
+@@clientName(
+  SavingsPlanModelProperties.effectiveDateTime,
   "EffectOn",
   "csharp"
 );
@@ -127,7 +151,8 @@ using Microsoft.BillingBenefits;
 @@clientName(PurchaseRequestProperties.effectiveDateTime, "EffectOn", "csharp");
 @@clientName(PurchaseRequestProperties.renew, "IsRenewed", "csharp");
 @@clientName(SavingsPlanValidResponseProperty.valid, "IsValid", "csharp");
-@@clientName(SavingsPlanOrderModelProperties.expiryDateTime,
+@@clientName(
+  SavingsPlanOrderModelProperties.expiryDateTime,
   "ExpireOn",
   "csharp"
 );
@@ -135,84 +160,104 @@ using Microsoft.BillingBenefits;
 @@clientName(SavingsPlanUpdateRequestProperties.renew, "IsRenewed", "csharp");
 @@clientName(SavingsPlanOrderAliasProperties.renew, "IsRenewed", "csharp");
 @@clientName(BenefitValidateResponseProperty.valid, "IsValid", "csharp");
-@@clientName(SellerResourceListRequestProperties.contributors,
+@@clientName(
+  SellerResourceListRequestProperties.contributors,
   "IncludeContributors",
   "csharp"
 );
-@@clientName(SellerResourceListRequestProperties.milestones,
+@@clientName(
+  SellerResourceListRequestProperties.milestones,
   "IncludeMilestones",
   "csharp"
 );
-@@clientName(MaccModelProperties.allowContributors,
+@@clientName(
+  MaccModelProperties.allowContributors,
   "IsAllowContributors",
   "csharp"
 );
-@@clientName(MaccPatchRequestProperties.allowContributors,
+@@clientName(
+  MaccPatchRequestProperties.allowContributors,
   "IsAllowContributors",
   "csharp"
 );
 @@clientName(DiscountProperties, "BillingBenefitsDiscountProperties", "csharp");
-@@clientName(ConditionalCreditProperties,
+@@clientName(
+  ConditionalCreditProperties,
   "BillingBenefitsConditionalCreditProperties",
   "csharp"
 );
-@@alternateType(ReservationOrderAliasResponseProperties.billingScopeId,
+@@alternateType(
+  ReservationOrderAliasResponseProperties.billingScopeId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ReservationOrderAliasResponseProperties.reservationOrderId,
+@@alternateType(
+  ReservationOrderAliasResponseProperties.reservationOrderId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ReservationOrderAliasRequestProperties.billingScopeId,
+@@alternateType(
+  ReservationOrderAliasRequestProperties.billingScopeId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(AppliedScopeProperties.managementGroupId,
+@@alternateType(
+  AppliedScopeProperties.managementGroupId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(AppliedScopeProperties.subscriptionId,
+@@alternateType(
+  AppliedScopeProperties.subscriptionId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(AppliedScopeProperties.resourceGroupId,
+@@alternateType(
+  AppliedScopeProperties.resourceGroupId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(SavingsPlanModelProperties.billingAccountId,
+@@alternateType(
+  SavingsPlanModelProperties.billingAccountId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(SavingsPlanModelProperties.billingProfileId,
+@@alternateType(
+  SavingsPlanModelProperties.billingProfileId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(SavingsPlanModelProperties.billingScopeId,
+@@alternateType(
+  SavingsPlanModelProperties.billingScopeId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(PurchaseRequestProperties.billingScopeId,
+@@alternateType(
+  PurchaseRequestProperties.billingScopeId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(SavingsPlanOrderModelProperties.billingAccountId,
+@@alternateType(
+  SavingsPlanOrderModelProperties.billingAccountId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(SavingsPlanOrderModelProperties.billingProfileId,
+@@alternateType(
+  SavingsPlanOrderModelProperties.billingProfileId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(RoleAssignmentEntity.id,
+@@alternateType(
+  RoleAssignmentEntity.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(RoleAssignmentEntityProperties.roleDefinitionId,
+@@alternateType(
+  RoleAssignmentEntityProperties.roleDefinitionId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(RoleAssignmentEntityProperties.scope,
+@@alternateType(
+  RoleAssignmentEntityProperties.scope,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
@@ -220,27 +265,33 @@ using Microsoft.BillingBenefits;
 @@clientName(ReservedResourceType.CosmosDb, "CosmosDB", "csharp");
 @@clientName(ReservedResourceType.MariaDb, "MariaDB", "csharp");
 @@clientName(ReservedResourceType.AVS, "Avs", "csharp");
-@@clientName(ReservationOrderAliasRequest,
+@@clientName(
+  ReservationOrderAliasRequest,
   "BillingBenefitsReservationOrderAliasCreateOrUpdateContent",
   "csharp"
 );
-@@clientName(SavingsPlanOperationGroup.listAll,
+@@clientName(
+  SavingsPlanOperationGroup.listAll,
   "GetBillingBenefitsSavingsPlans",
   "csharp"
 );
-@@alternateType(ReservationOrderAliasResponse.location,
+@@alternateType(
+  ReservationOrderAliasResponse.location,
   Azure.Core.azureLocation,
   "csharp"
 );
-@@alternateType(SavingsPlanOrderAliasProperties.billingScopeId,
+@@alternateType(
+  SavingsPlanOrderAliasProperties.billingScopeId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(SavingsPlanOrderAliasProperties.savingsPlanOrderId,
+@@alternateType(
+  SavingsPlanOrderAliasProperties.savingsPlanOrderId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(SavingsPlanOrderModelProperties.billingScopeId,
+@@alternateType(
+  SavingsPlanOrderModelProperties.billingScopeId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
@@ -248,7 +299,8 @@ using Microsoft.BillingBenefits;
 @@usage(SavingsPlanModelProperties, Usage.input | Usage.output, "csharp");
 @@usage(SavingsPlanModel, Usage.input | Usage.output, "csharp");
 @@usage(ReservationOrderAliasRequest, Usage.input | Usage.output, "csharp");
-@@usage(ReservationOrderAliasRequestProperties,
+@@usage(
+  ReservationOrderAliasRequestProperties,
   Usage.input | Usage.output,
   "csharp"
 );
@@ -258,7 +310,8 @@ using Microsoft.BillingBenefits;
 @@usage(SavingsPlanOrderModel, Usage.input | Usage.output, "csharp");
 
 @@alternateType(AppliedScopeProperties.tenantId, Azure.Core.uuid, "csharp");
-@@alternateType(ReservationOrderAliasRequest.location,
+@@alternateType(
+  ReservationOrderAliasRequest.location,
   Azure.Core.azureLocation,
   "csharp"
 );
@@ -272,11 +325,13 @@ using Microsoft.BillingBenefits;
 @@clientName(Term.P3Y, "P3_Y", "python");
 @@clientName(Term.P5Y, "P5_Y", "python");
 
-@@clientName(DiscountsOperationGroup.scopeList,
+@@clientName(
+  DiscountsOperationGroup.scopeList,
   "listDiscountByScope",
   "csharp"
 );
-@@clientName(ConditionalCreditsOperationGroup.scopeList,
+@@clientName(
+  ConditionalCreditsOperationGroup.scopeList,
   "listConditionalCreditByScope",
   "csharp"
 );

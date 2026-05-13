@@ -48,9 +48,11 @@ interface CertificateProfiles {
   >;
 }
 
-@@doc(CertificateProfiles.create::parameters.resource,
+@@doc(
+  CertificateProfiles.create::parameters.resource,
   "Parameters to create the certificate profile"
 );
-@@doc(CertificateProfiles.revokeCertificate::parameters.body,
+@@doc(
+  CertificateProfiles.revokeCertificate::parameters.body,
   "Parameters to revoke the certificate profile"
 );

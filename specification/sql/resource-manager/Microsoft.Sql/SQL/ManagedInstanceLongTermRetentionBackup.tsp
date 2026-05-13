@@ -173,6 +173,7 @@ interface LongTermRetentionManagedInstanceBackups {
 }
 
 @@doc(ManagedInstanceLongTermRetentionBackup.name, "The backup name.");
-@@doc(ManagedInstanceLongTermRetentionBackup.properties,
+@@doc(
+  ManagedInstanceLongTermRetentionBackup.properties,
   "Resource properties."
 );

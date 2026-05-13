@@ -49,10 +49,12 @@ interface Schedules {
       $top?: int32;
     },
     LroHeaders = ArmLroLocationHeader,
-    Response = Schedule | ArmAcceptedLroResponse<
-      "Resource update request accepted.",
-      ArmLroLocationHeader<FinalResult = Schedule>
-    >
+    Response =
+      | Schedule
+      | ArmAcceptedLroResponse<
+          "Resource update request accepted.",
+          ArmLroLocationHeader<FinalResult = Schedule>
+        >
   >;
 
   @doc("Deletes a Schedule.")
@@ -82,7 +84,8 @@ interface Schedules {
 @@minLength(Schedule.name, 1);
 @@doc(Schedule.name, "The name of the schedule that uniquely identifies it.");
 @@doc(Schedule.properties, "Properties of a Schedule resource");
-@@doc(Schedules.createOrUpdate::parameters.resource,
+@@doc(
+  Schedules.createOrUpdate::parameters.resource,
   "Represents a scheduled task"
 );
 @@doc(Schedules.update::parameters.properties, "Represents a scheduled task.");

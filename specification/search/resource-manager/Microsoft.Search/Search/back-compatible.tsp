@@ -4,7 +4,8 @@ using Azure.ClientGenerator.Core;
 using Microsoft.Search;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SearchServiceUpdate.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  SearchServiceUpdate.properties
 );
 
 @@clientName(CheckNameAvailabilityOutput.nameAvailable, "IsNameAvailable");
@@ -29,30 +30,37 @@ using Microsoft.Search;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(SearchService.properties);
 
-@@clientName(PrivateEndpointConnections.update::parameters.resource,
+@@clientName(
+  PrivateEndpointConnections.update::parameters.resource,
   "privateEndpointConnection"
 );
 
-@@clientName(SharedPrivateLinkResources.createOrUpdate::parameters.resource,
+@@clientName(
+  SharedPrivateLinkResources.createOrUpdate::parameters.resource,
   "sharedPrivateLinkResource"
 );
 
 @@clientLocation(ServicesOperationGroup.checkNameAvailability, "Services");
 
 @@clientLocation(UsagesOperationGroup.listBySubscription, "Usages");
-@@clientName(ServicesOperationGroup.checkNameAvailability::parameters.body,
+@@clientName(
+  ServicesOperationGroup.checkNameAvailability::parameters.body,
   "checkNameAvailabilityInput"
 );
 
-@@minLength(Azure.ResourceManager.CommonTypes.NspConfigurationNameParameter.networkSecurityPerimeterConfigurationName,
+@@minLength(
+  Azure.ResourceManager.CommonTypes.NspConfigurationNameParameter.networkSecurityPerimeterConfigurationName,
   38
 );
-@@maxLength(Azure.ResourceManager.CommonTypes.NspConfigurationNameParameter.networkSecurityPerimeterConfigurationName,
+@@maxLength(
+  Azure.ResourceManager.CommonTypes.NspConfigurationNameParameter.networkSecurityPerimeterConfigurationName,
   100
 );
-@@pattern(Azure.ResourceManager.CommonTypes.NspConfigurationNameParameter.networkSecurityPerimeterConfigurationName,
+@@pattern(
+  Azure.ResourceManager.CommonTypes.NspConfigurationNameParameter.networkSecurityPerimeterConfigurationName,
   "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}\\.[a-z][a-z0-9]*$"
 );
-@@doc(Azure.ResourceManager.CommonTypes.NspConfigurationNameParameter.networkSecurityPerimeterConfigurationName,
+@@doc(
+  Azure.ResourceManager.CommonTypes.NspConfigurationNameParameter.networkSecurityPerimeterConfigurationName,
   "The network security perimeter configuration name."
 );

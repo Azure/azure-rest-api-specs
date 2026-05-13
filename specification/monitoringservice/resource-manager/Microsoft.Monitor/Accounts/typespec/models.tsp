@@ -144,7 +144,8 @@ namespace Microsoft.Monitor {
   }
 }
 
-@@TypeSpec.Versioning.added(Microsoft.Monitor.AzureMonitorWorkspaceResource.identity,
+@@TypeSpec.Versioning.added(
+  Microsoft.Monitor.AzureMonitorWorkspaceResource.identity,
   Microsoft.Monitor.Versions.v2025_10_03_stable
 );
 
@@ -171,6 +172,7 @@ namespace Microsoft.Monitor {
   }
 }
 
-@@TypeSpec.Versioning.added(Microsoft.Monitor.AzureMonitorWorkspaceResourceUpdate.identity,
+@@TypeSpec.Versioning.added(
+  Microsoft.Monitor.AzureMonitorWorkspaceResourceUpdate.identity,
   Microsoft.Monitor.Versions.v2025_10_03_stable
 );
