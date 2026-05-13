@@ -29,7 +29,7 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   `2024-03-01-preview`,
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-version-progression" "Existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/version-progression" "Existing API"
   @doc("API Version 2024-03-01.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   `2024-03-01`,

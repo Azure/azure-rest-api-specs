@@ -27,7 +27,7 @@ enum Versions {
   @useDependency(LiftrBase.Versions.v2_preview)
   v2024_10_01_preview: "2024-10-01-preview",
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-version-progression" "Existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/version-progression" "Existing API"
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @useDependency(LiftrBase.Versions.v2_preview)
   v2024_10_01: "2024-10-01",

@@ -11533,7 +11533,8 @@ model ExpressRouteCrossConnectionPeeringList
 @Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 model ExpressRouteCrossConnectionsRoutesTableSummaryListResult
   is Azure.Core.Page<ExpressRouteCrossConnectionRoutesTableSummary>;
-@@visibility(ExpressRouteCrossConnectionsRoutesTableSummaryListResult.nextLink,
+@@visibility(
+  ExpressRouteCrossConnectionsRoutesTableSummaryListResult.nextLink,
   Lifecycle.Read
 );
 
@@ -25585,47 +25586,60 @@ model ExpressRoutePortsLocationListResult
 
 model BastionHostListResult is Azure.Core.Page<BastionHost>;
 
-@@Azure.ClientGenerator.Core.clientName(ListVirtualHubRouteTableV2SResult,
+@@Azure.ClientGenerator.Core.clientName(
+  ListVirtualHubRouteTableV2SResult,
   "ListVirtualHubRouteTableV2sResult"
 );
-@@Azure.ClientGenerator.Core.clientName(HttpConfigurationMethod,
+@@Azure.ClientGenerator.Core.clientName(
+  HttpConfigurationMethod,
   "HTTPConfigurationMethod"
 );
 @@Azure.ClientGenerator.Core.clientName(HttpHeader, "HTTPHeader");
-@@Azure.ClientGenerator.Core.clientName(ConnectivityGroupItem,
+@@Azure.ClientGenerator.Core.clientName(
+  ConnectivityGroupItem,
   "connectivityGroupItem"
 );
-@@Azure.ClientGenerator.Core.clientName(FirewallPolicySnat,
+@@Azure.ClientGenerator.Core.clientName(
+  FirewallPolicySnat,
   "FirewallPolicySNAT"
 );
 @@Azure.ClientGenerator.Core.clientName(HttpConfiguration, "HTTPConfiguration");
 @@Azure.ClientGenerator.Core.clientName(HttpMethod, "HTTPMethod");
-@@Azure.ClientGenerator.Core.clientName(FirewallPolicyIdpsQuerySortOrder,
+@@Azure.ClientGenerator.Core.clientName(
+  FirewallPolicyIdpsQuerySortOrder,
   "FirewallPolicyIDPSQuerySortOrder"
 );
-@@Azure.ClientGenerator.Core.clientName(FirewallPolicyIdpsSignatureMode,
+@@Azure.ClientGenerator.Core.clientName(
+  FirewallPolicyIdpsSignatureMode,
   "FirewallPolicyIDPSSignatureMode"
 );
-@@Azure.ClientGenerator.Core.clientName(FirewallPolicyIdpsSignatureDirection,
+@@Azure.ClientGenerator.Core.clientName(
+  FirewallPolicyIdpsSignatureDirection,
   "FirewallPolicyIDPSSignatureDirection"
 );
-@@Azure.ClientGenerator.Core.clientName(ScrubbingRuleEntryMatchOperator,
+@@Azure.ClientGenerator.Core.clientName(
+  ScrubbingRuleEntryMatchOperator,
   "scrubbingRuleEntryMatchOperator"
 );
-@@Azure.ClientGenerator.Core.clientName(ScrubbingRuleEntryState,
+@@Azure.ClientGenerator.Core.clientName(
+  ScrubbingRuleEntryState,
   "scrubbingRuleEntryState"
 );
-@@Azure.ClientGenerator.Core.clientName(FirewallPolicyIdpsSignatureSeverity,
+@@Azure.ClientGenerator.Core.clientName(
+  FirewallPolicyIdpsSignatureSeverity,
   "FirewallPolicyIDPSSignatureSeverity"
 );
-@@Azure.ClientGenerator.Core.clientName(VirtualApplianceNetworkInterfaceConfiguration.type,
+@@Azure.ClientGenerator.Core.clientName(
+  VirtualApplianceNetworkInterfaceConfiguration.type,
   "NicType"
 );
-@@Azure.ClientGenerator.Core.clientName(AzureFirewallIPGroups,
+@@Azure.ClientGenerator.Core.clientName(
+  AzureFirewallIPGroups,
   "AzureFirewallIpGroups"
 );
 @@doc(PacketCaptureListResult, "List of packet capture sessions.");
-@@doc(PacketCaptureListResult.value,
+@@doc(
+  PacketCaptureListResult.value,
   "Information about packet capture sessions."
 );
 @@visibility(VirtualNetworkListUsageResult.value, Lifecycle.Read);
@@ -25985,7 +25999,8 @@ model VirtualNetworkApplianceIpConfigurationProperties {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAddressVersion?: IPVersion;
 }
-@@identifiers(GetServiceGatewayAddressLocationsResult.value,
+@@identifiers(
+  GetServiceGatewayAddressLocationsResult.value,
   #["addressLocation"]
 );
 @@identifiers(GetServiceGatewayServicesResult.value, #["name"]);

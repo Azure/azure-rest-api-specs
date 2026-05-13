@@ -15,21 +15,24 @@ using Microsoft.Resources;
 @@clientLocation(ResourceGroups.moveResources, "Resources");
 @@clientName(ResourceGroups.moveResources::parameters.body, "parameters");
 @@clientLocation(ResourceGroups.validateMoveResources, "Resources");
-@@clientName(ResourceGroups.validateMoveResources::parameters.body,
+@@clientName(
+  ResourceGroups.validateMoveResources::parameters.body,
   "parameters"
 );
 @@clientName(ResourceGroups.exportTemplate::parameters.body, "parameters");
 
 @@clientName(Resources.createOrUpdateById::parameters.resource, "parameters");
 @@clientName(Resources.updateById::parameters.properties, "parameters");
-@@clientName(SpecificResources.createOrUpdate::parameters.resource,
+@@clientName(
+  SpecificResources.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(SpecificResources.update::parameters.properties, "parameters");
 
 @@clientLocation(TagsResources.getAtScope, "Tags");
 @@clientLocation(TagsResources.createOrUpdateAtScope, "Tags");
-@@clientName(TagsResources.createOrUpdateAtScope::parameters.resource,
+@@clientName(
+  TagsResources.createOrUpdateAtScope::parameters.resource,
   "parameters"
 );
 @@clientLocation(TagsResources.updateAtScope, "Tags");
@@ -38,7 +41,8 @@ using Microsoft.Resources;
 
 @@clientLocation(ProvidersOperationGroup.listAtTenantScope, "Providers");
 @@clientLocation(ProvidersOperationGroup.unregister, "Providers");
-@@clientLocation(ProvidersOperationGroup.registerAtManagementGroupScope,
+@@clientLocation(
+  ProvidersOperationGroup.registerAtManagementGroupScope,
   "Providers"
 );
 @@clientLocation(ProvidersOperationGroup.providerPermissions, "Providers");
@@ -47,7 +51,8 @@ using Microsoft.Resources;
 @@clientLocation(ProvidersOperationGroup.get, "Providers");
 @@clientLocation(ProvidersOperationGroup.getAtTenantScope, "Providers");
 
-@@clientLocation(ProviderResourceTypesOperationGroup.list,
+@@clientLocation(
+  ProviderResourceTypesOperationGroup.list,
   "ProviderResourceTypes"
 );
 

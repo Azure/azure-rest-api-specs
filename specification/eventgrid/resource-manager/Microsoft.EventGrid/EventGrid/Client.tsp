@@ -47,7 +47,10 @@ interface Clients {
   @summary("Delete a client.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Client,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -83,26 +86,31 @@ interface Clients {
 @@clientName(TlsVersion.`1.1`, "One1", "go,javascript");
 @@clientName(TlsVersion.`1.2`, "One2", "go,javascript");
 
-@@clientName(WebHookEventSubscriptionDestinationProperties,
+@@clientName(
+  WebHookEventSubscriptionDestinationProperties,
   "WebhookEventSubscriptionDestinationProperties",
   "java"
 );
-@@clientName(WebHookEventSubscriptionDestination,
+@@clientName(
+  WebHookEventSubscriptionDestination,
   "WebhookEventSubscriptionDestination",
   "java"
 );
-@@clientName(Microsoft.EventGrid,
+@@clientName(
+  Microsoft.EventGrid,
   "EventGridManagementClient",
   "python, javascript"
 );
 @@clientName(TlsVersion.`1.0`, "ONE0", "python");
 @@clientName(TlsVersion.`1.1`, "ONE1", "python");
 @@clientName(TlsVersion.`1.2`, "ONE2", "python");
-@@clientName(Azure.ResourceManager.ResourceProvisioningState,
+@@clientName(
+  Azure.ResourceManager.ResourceProvisioningState,
   "ArmResourceProvisioningState",
   "python"
 );
-@@clientName(Azure.ResourceManager.ResourceProvisioningState,
+@@clientName(
+  Azure.ResourceManager.ResourceProvisioningState,
   "ArmResourceProvisioningState",
   "java"
 );

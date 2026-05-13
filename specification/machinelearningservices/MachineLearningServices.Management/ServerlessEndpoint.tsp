@@ -50,16 +50,18 @@ interface ServerlessEndpoints {
   @summary("Create or update Serverless Endpoint (asynchronous).")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ServerlessEndpoint,
-    Response = ArmResourceUpdatedResponse<ServerlessEndpoint> | (ArmResourceCreatedResponse<
-      ServerlessEndpoint,
-      LroHeaders = ArmAsyncOperationHeader<ServerlessEndpoint>
-    > & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<ServerlessEndpoint>
+      | (ArmResourceCreatedResponse<
+          ServerlessEndpoint,
+          LroHeaders = ArmAsyncOperationHeader<ServerlessEndpoint>
+        > & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
   >;
 
   /**
@@ -70,14 +72,16 @@ interface ServerlessEndpoints {
   update is ArmCustomPatchAsync<
     ServerlessEndpoint,
     PatchModel = PartialMinimalTrackedResourceWithSkuAndIdentity,
-    Response = ArmResourceUpdatedResponse<ServerlessEndpoint> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ServerlessEndpoint>> &
-      Azure.Core.Foundations.RetryAfterHeader & {
-        /**
-         * Timeout for the client to use when polling the asynchronous operation.
-         */
-        @header("x-ms-async-operation-timeout")
-        timeout: duration;
-      })
+    Response =
+      | ArmResourceUpdatedResponse<ServerlessEndpoint>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ServerlessEndpoint>> &
+          Azure.Core.Foundations.RetryAfterHeader & {
+            /**
+             * Timeout for the client to use when polling the asynchronous operation.
+             */
+            @header("x-ms-async-operation-timeout")
+            timeout: duration;
+          })
   >;
 
   /**
@@ -86,13 +90,15 @@ interface ServerlessEndpoints {
   @summary("Delete Serverless Endpoint (asynchronous).")
   delete is ArmResourceDeleteWithoutOkAsync<
     ServerlessEndpoint,
-    Response = (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -129,21 +135,27 @@ interface ServerlessEndpoints {
 }
 
 @@doc(ServerlessEndpoint.name, "Serverless Endpoint name.");
-@@doc(ServerlessEndpoint.properties,
+@@doc(
+  ServerlessEndpoint.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(ServerlessEndpoints.createOrUpdate::parameters.resource,
+@@doc(
+  ServerlessEndpoints.createOrUpdate::parameters.resource,
   "Serverless Endpoint entity to apply during operation."
 );
-@@doc(ServerlessEndpoints.update::parameters.properties,
+@@doc(
+  ServerlessEndpoints.update::parameters.properties,
   "Serverless Endpoint entity to apply during operation."
 );
-@@doc(ServerlessEndpoints.regenerateKeys::parameters.body,
+@@doc(
+  ServerlessEndpoints.regenerateKeys::parameters.body,
   "RegenerateKeys request ."
 );
-@@doc(ServerlessEndpoint.identity,
+@@doc(
+  ServerlessEndpoint.identity,
   "Managed service identity (system assigned and/or user assigned identities)"
 );
-@@doc(ServerlessEndpoint.sku,
+@@doc(
+  ServerlessEndpoint.sku,
   "Sku details required for ARM contract for Autoscaling."
 );
