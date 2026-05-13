@@ -1390,43 +1390,6 @@
       "format": "uuid",
       "description": "Universally Unique Identifier"
     },
-    "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
-      "type": "object",
-      "description": "Managed service identity (system assigned and/or user assigned identities)",
-      "properties": {
-        "type": {
-          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentityType",
-          "description": "The type of managed identity assigned to this resource."
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "The identities assigned to this resource by the user.",
-          "additionalProperties": {
-            "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/UserAssignedIdentity",
-            "x-nullable": true
-          }
-        }
-      }
-    },
-    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
-      "type": "object",
-      "title": "Tracked Resource",
-      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
-        }
-      ]
-    },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource type.",
@@ -1469,8 +1432,7 @@
         },
         "metrics": {
           "$ref": "#/definitions/AzureMonitorWorkspaceMetrics",
-          "description": "Properties related to the metrics container in the Azure Monitor Workspace",
-          "readOnly": true
+          "description": "Properties related to the metrics container in the Azure Monitor Workspace"
         },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
@@ -1587,22 +1549,24 @@
     },
     "AzureMonitorWorkspaceResourceUpdate": {
       "type": "object",
-      "description": "An Azure Monitor Workspace definition",
+      "description": "The type used for updating an Azure Monitor Workspace",
       "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
         "properties": {
           "$ref": "#/definitions/AzureMonitorWorkspace",
           "description": "Resource properties"
-        },
-        "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
-          "description": "The managed service identities assigned to this resource."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
-      ]
+      }
     },
     "Background": {
       "type": "object",
@@ -1821,7 +1785,7 @@
     },
     "IssuePropertiesUpdate": {
       "type": "object",
-      "description": "The issue properties",
+      "description": "The issue properties for update",
       "properties": {
         "title": {
           "type": "string",
@@ -1888,18 +1852,13 @@
     },
     "IssueResourceUpdate": {
       "type": "object",
-      "description": "The Issue resource",
+      "description": "The Issue resource update",
       "properties": {
         "properties": {
           "$ref": "#/definitions/IssuePropertiesUpdate",
           "description": "The resource-specific properties for this resource."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
+      }
     },
     "ListParameter": {
       "type": "object",
