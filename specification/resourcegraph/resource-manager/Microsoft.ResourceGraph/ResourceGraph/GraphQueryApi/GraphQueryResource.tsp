@@ -11,8 +11,9 @@ namespace GraphQueryApi;
 /**
  * Graph Query entity definition.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GraphQueryResource
-  is Azure.ResourceManager.TrackedResource<GraphQueryProperties> {
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<GraphQueryProperties> {
   ...ResourceNameParameter<
     Resource = GraphQueryResource,
     KeyName = "resourceName",

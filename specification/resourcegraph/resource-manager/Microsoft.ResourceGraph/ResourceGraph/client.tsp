@@ -16,6 +16,24 @@ using Azure.ResourceManager;
 using Azure.ClientGenerator.Core;
 using Azure.ClientGenerator.Core.Legacy;
 
+@versioned(Versions)
+@client({
+  name: "ResourceGraphClient",
+  service: [ResourceChanges, ResourceGraphApi, ResourceHistory, GraphQueryApi],
+  autoMergeService: true,
+})
+namespace Microsoft.ResourceGraph;
+
+enum Versions {
+  v2024_04_01: "2024-04-01",
+}
+
+// Move namespace-level operations off the merged root client so each generated
+// client carries a consistent apiVersions set.
+@@clientLocation(ResourceChanges.resourceChanges, "ResourceChangesOperations");
+@@clientLocation(ResourceChanges.resourceChangeDetails, "ResourceChangesOperations");
+@@clientLocation(ResourceGraphApi.resources, "ResourceGraphOperations");
+@@clientLocation(ResourceHistory.resourcesHistory, "ResourceHistoryOperations");
 // --- C# naming customizations to match GA SDK surface ---
 // Rename models to match existing GA API
 @@clientName(ResourceGraphApi.QueryRequest, "ResourceQueryContent", "csharp");
