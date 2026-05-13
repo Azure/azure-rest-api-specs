@@ -6756,7 +6756,7 @@
       },
       "delete": {
         "operationId": "Models_deleteVersion",
-        "description": "Delete the specific version of the ModelVersion. The service returns 204 No Content if the ModelVersion was deleted successfully or if the ModelVersion does not exist.",
+        "description": "Delete the specific version of the ModelVersion. The service returns 200 OK if the ModelVersion was deleted successfully or if the ModelVersion does not exist.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -6781,8 +6781,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
+          "200": {
+            "description": "The request has succeeded."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -16359,14 +16359,6 @@
           }
         ],
         "description": "Dataset source for evaluator generation jobs — reference to a dataset."
-      },
-      "DatasetPendingUploadType": {
-        "type": "string",
-        "enum": [
-          "BlobReference",
-          "TemporaryBlobReference"
-        ],
-        "description": "The accepted pending upload types for dataset operations."
       },
       "DatasetReference": {
         "type": "object",
@@ -41149,10 +41141,9 @@
             "description": "Azure Storage Account connection name to use for generating temporary SAS token"
           },
           "pendingUploadType": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DatasetPendingUploadType"
-              }
+            "type": "string",
+            "enum": [
+              "BlobReference"
             ],
             "description": "The type of pending upload."
           }
@@ -41184,10 +41175,9 @@
             "description": "Version of asset to be created if user did not specify version when initially creating upload"
           },
           "pendingUploadType": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DatasetPendingUploadType"
-              }
+            "type": "string",
+            "enum": [
+              "BlobReference"
             ],
             "description": "The type of pending upload."
           }

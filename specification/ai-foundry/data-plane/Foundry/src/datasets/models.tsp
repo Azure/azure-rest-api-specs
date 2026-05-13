@@ -65,15 +65,6 @@ union PendingUploadType {
   TemporaryBlobReference: "TemporaryBlobReference",
 }
 
-@doc("The accepted pending upload types for dataset operations.")
-union DatasetPendingUploadType {
-  @doc("Deprecated: the service never read this value and silently ignored it. Use TemporaryBlobReference instead.")
-  BlobReference: "BlobReference",
-
-  @doc("Temporary blob reference.")
-  TemporaryBlobReference: "TemporaryBlobReference",
-}
-
 @doc("The type of credential used to access the storage account.")
 union PendingUploadCredentialType {
   string,
@@ -91,7 +82,7 @@ model PendingUploadRequest {
   connectionName?: string;
 
   @doc("The type of pending upload.")
-  pendingUploadType: DatasetPendingUploadType;
+  pendingUploadType: PendingUploadType.BlobReference;
 }
 
 @doc("Represents the response for a pending upload request")
@@ -106,7 +97,7 @@ model PendingUploadResponse {
   version?: string;
 
   @doc("The type of pending upload.")
-  pendingUploadType: DatasetPendingUploadType;
+  pendingUploadType: PendingUploadType.BlobReference;
 }
 
 @doc("Blob reference details.")

@@ -19,6 +19,23 @@ interface Models
       ListModelVersionsParameters,
       ListModelVersionsParameters
     > {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Delete returns 200 with no body by service design"
+  @doc(
+    "Delete the specific version of the ModelVersion. The service returns 200 OK if the ModelVersion was deleted successfully or if the ModelVersion does not exist."
+  )
+  @delete
+  deleteVersion is Azure.Core.Foundations.ResourceOperation<
+    ModelVersion,
+    {
+      @doc("The version of the ModelVersion to delete.")
+      @Rest.segment("versions")
+      @path
+      version: string;
+    },
+    OkResponse
+  >;
+
   // The method name `createOrUpdateVersion` is required by the `VersionedOperations` interface
   // template this interface extends. However, for Models the PATCH endpoint only performs updates —
   // new model versions are created via the `createAsync` endpoint (which handles blob content
