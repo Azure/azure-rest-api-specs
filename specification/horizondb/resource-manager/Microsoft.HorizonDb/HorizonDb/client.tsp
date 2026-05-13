@@ -91,14 +91,7 @@ using Azure.ClientGenerator.Core;
   "HorizonDBPrivateEndpointConnections",
   "csharp"
 );
-@@clientName(Microsoft.HorizonDb.HorizonDbPrivateEndpointConnections.update,
-  "updatePrivateEndpointConnection",
-  "csharp"
-);
-@@clientName(Microsoft.HorizonDb.HorizonDbPrivateEndpointConnections.delete,
-  "deletePrivateEndpointConnection",
-  "csharp"
-);
+
 @@clientName(Microsoft.HorizonDb.HorizonDbPrivateLinkResource,
   "HorizonDBPrivateLinkResource",
   "csharp"
