@@ -15,15 +15,6 @@ model DeleteOptions {
   deletionSource?: DeletionSource = DeletionSource.CustomerCancellation;
 }
 
-/** Resource Move Options. */
-model MoveResource {
-  /** The target resource group uri for the move. */
-  targetResourceGroup?: string;
-
-  /** The resource uris to move. */
-  resources?: string[];
-}
-
 /** Check name availability request. */
 model CheckNameAvailabilityRequest {
   /** Name to check availability for. */

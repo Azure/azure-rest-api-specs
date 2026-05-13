@@ -201,48 +201,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/moveResources": {
-      "post": {
-        "operationId": "ProfessionalServiceSubscriptionLevelMove_MoveResources",
-        "description": "Moves Professional Service resources between resource groups.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "moveResourceParameter",
-            "in": "body",
-            "description": "The move resource parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MoveResource"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Operation completed successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Move Professional Service resources between resource groups": {
-            "$ref": "./examples/ProfessionalServiceMoveResources.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProfessionalService/deployments/{resourceName}/preflight": {
       "post": {
         "operationId": "ProfessionalServiceSubscriptionLevelPreflight_Preflight",
@@ -663,48 +621,6 @@
         },
         "x-ms-long-running-operation": true
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/validateMoveResources": {
-      "post": {
-        "operationId": "ProfessionalServiceSubscriptionLevelMove_ValidateMoveResources",
-        "description": "Validates a request to move Professional Service resources between resource groups.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "moveResourceParameter",
-            "in": "body",
-            "description": "The move resource parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MoveResource"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Operation completed successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Validate move of Professional Service resources between resource groups": {
-            "$ref": "./examples/ProfessionalServiceValidateMoveResources.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -806,23 +722,6 @@
             "description": "Azure subscription deletion"
           }
         ]
-      }
-    },
-    "MoveResource": {
-      "type": "object",
-      "description": "Resource Move Options.",
-      "properties": {
-        "targetResourceGroup": {
-          "type": "string",
-          "description": "The target resource group uri for the move."
-        },
-        "resources": {
-          "type": "array",
-          "description": "The resource uris to move.",
-          "items": {
-            "type": "string"
-          }
-        }
       }
     },
     "PreflightResult": {

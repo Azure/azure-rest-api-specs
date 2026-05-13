@@ -57,33 +57,6 @@ interface ProfessionalServiceSubscriptionLevelGlobal {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Move operations are not resource-scoped"
-interface ProfessionalServiceSubscriptionLevelMove {
-  /** Validates a request to move Professional Service resources between resource groups. */
-  @post
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/validateMoveResources")
-  validateMoveResources(
-    ...ApiVersionParameter,
-    ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-    ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-
-    /** The move resource parameters. */
-    @body moveResourceParameter: MoveResource,
-  ): ArmNoContentResponse<"Operation completed successfully."> | ErrorResponse;
-
-  /** Moves Professional Service resources between resource groups. */
-  @post
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/moveResources")
-  moveResources(
-    ...ApiVersionParameter,
-    ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-    ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-
-    /** The move resource parameters. */
-    @body moveResourceParameter: MoveResource,
-  ): ArmNoContentResponse<"Operation completed successfully."> | ErrorResponse;
-}
-
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Custom operation status routes"
 interface ProfessionalServiceOperationStatuses {
   /** Gets the status of a long-running Professional Service operation at the subscription scope. */
