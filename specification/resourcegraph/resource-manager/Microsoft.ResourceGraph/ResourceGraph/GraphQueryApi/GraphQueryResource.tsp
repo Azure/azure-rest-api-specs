@@ -4,6 +4,7 @@ import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
+using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 
@@ -13,13 +14,19 @@ namespace GraphQueryApi;
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GraphQueryResource
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<GraphQueryProperties> {
+  is Azure.ResourceManager.ProxyResource<GraphQueryProperties> {
   ...ResourceNameParameter<
     Resource = GraphQueryResource,
     KeyName = "resourceName",
     SegmentName = "queries",
     NamePattern = "^[^<>&:\\?]*$"
   >;
+
+  /** The geo-location where the resource lives. */
+  location?: azureLocation;
+
+  /** Resource tags. */
+  tags?: Record<string>;
 
   /**
    * This will be used to handle Optimistic Concurrency. If not present, it will always overwrite the existing resource without checking conflict.
@@ -28,7 +35,7 @@ model GraphQueryResource
   etag?: string;
 }
 
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface GraphQueryResources {
   /**
    * Get a single graph query by its resourceName.
@@ -83,12 +90,15 @@ interface GraphQueryResources {
 }
 
 @@doc(GraphQueryResource.name, "The name of the Graph Query resource.");
-@@doc(GraphQueryResource.properties,
+@@doc(
+  GraphQueryResource.properties,
   "Metadata describing a graph query for an Azure resource."
 );
-@@doc(GraphQueryResources.createOrUpdate::parameters.resource,
+@@doc(
+  GraphQueryResources.createOrUpdate::parameters.resource,
   "Properties that need to be specified to create a new graph query."
 );
-@@doc(GraphQueryResources.update::parameters.properties,
+@@doc(
+  GraphQueryResources.update::parameters.properties,
   "Properties that need to be specified to create a new graph query."
 );
