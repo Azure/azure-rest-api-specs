@@ -12,10 +12,12 @@ tags:
   - name: Deployments
   - name: Evaluation Taxonomies
   - name: Evaluation Rules
+  - name: EvaluationSuiteGenerationJobs
   - name: Evaluators
   - name: EvaluatorGenerationJobs
   - name: Indexes
   - name: Insights
+  - name: Models
   - name: Memory Stores
   - name: Conversations
   - name: Evals
@@ -3105,6 +3107,581 @@ paths:
                 $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
       tags:
         - Deployments
+  /evaluation_suite_generation_jobs:
+    post:
+      operationId: EvaluationSuiteGenerationJobs_create
+      summary: Creates an evaluation suite generation job.
+      description: Create a new job (preview). Includes optional Foundry-Features header and Operation-Id for idempotent retries.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: Operation-Id
+          in: header
+          required: false
+          description: Client-generated unique ID for idempotent retries. When absent, the server creates the job unconditionally.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          headers:
+            Operation-Location:
+              required: true
+              description: URL to poll for the job status.
+              schema:
+                type: string
+            Location:
+              required: true
+              description: URL of the created job resource.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluationSuiteGenerationJob'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - EvaluationSuiteGenerationJobs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvaluationSuiteGenerationJobCreate'
+        description: The job to create.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    get:
+      operationId: EvaluationSuiteGenerationJobs_list
+      summary: Returns a list of evaluation suite generation jobs.
+      description: List jobs with cursor-based pagination (preview). Includes optional Foundry-Features header.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EvaluationSuiteGenerationJob'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - EvaluationSuiteGenerationJobs
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+  /evaluation_suite_generation_jobs/{jobId}:
+    get:
+      operationId: EvaluationSuiteGenerationJobs_get
+      summary: Get info about an evaluation suite generation job.
+      description: Get a job by ID (preview). Includes optional Foundry-Features header.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: jobId
+          in: path
+          required: true
+          description: The ID of the job.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            Retry-After:
+              required: false
+              description: Recommended number of seconds to wait before polling again.
+              schema:
+                type: integer
+                format: int32
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluationSuiteGenerationJob'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - EvaluationSuiteGenerationJobs
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+    delete:
+      operationId: EvaluationSuiteGenerationJobs_delete
+      summary: Deletes an evaluation suite generation job.
+      description: Delete a job (preview). Returns 204 No Content.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: jobId
+          in: path
+          required: true
+          description: The ID of the job to delete.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - EvaluationSuiteGenerationJobs
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+  /evaluation_suite_generation_jobs/{jobId}:cancel:
+    post:
+      operationId: EvaluationSuiteGenerationJobs_cancel
+      summary: Cancels an evaluation suite generation job.
+      description: Cancel a running job (preview). Returns 200 with the updated job.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: jobId
+          in: path
+          required: true
+          description: The ID of the job to cancel.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluationSuiteGenerationJob'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - EvaluationSuiteGenerationJobs
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
+  /evaluation_suites:
+    get:
+      operationId: EvaluationSuites_listLatest
+      description: List the latest version of each EvaluationSuiteVersion
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: agent_name
+          in: query
+          required: false
+          description: Filter by associated Foundry agent name (from target).
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PagedEvaluationSuiteVersion'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+  /evaluation_suites/{name}/versions:
+    get:
+      operationId: EvaluationSuites_listVersions
+      description: List all versions of the given EvaluationSuiteVersion
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: name
+          in: path
+          required: true
+          description: The name of the resource.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PagedEvaluationSuiteVersion'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+    post:
+      operationId: EvaluationSuites_createEvaluationSuiteVersion
+      description: Create a new EvaluationSuiteVersion with auto incremented version id
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The name of the evaluation suite.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluationSuiteVersion'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvaluationSuiteVersionCreate'
+        description: The evaluation suite version to create.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
+  /evaluation_suites/{name}/versions/{version}:
+    get:
+      operationId: EvaluationSuites_getVersion
+      description: Get the specific version of the EvaluationSuiteVersion. The service returns 404 Not Found error if the EvaluationSuiteVersion does not exist.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: name
+          in: path
+          required: true
+          description: The name of the resource.
+          schema:
+            type: string
+        - name: version
+          in: path
+          required: true
+          description: The specific version id of the EvaluationSuiteVersion to retrieve.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluationSuiteVersion'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+    delete:
+      operationId: EvaluationSuites_deleteVersion
+      description: Delete the specific version of the EvaluationSuiteVersion. The service returns 204 No Content if the EvaluationSuiteVersion was deleted successfully or if the EvaluationSuiteVersion does not exist.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: name
+          in: path
+          required: true
+          description: The name of the resource.
+          schema:
+            type: string
+        - name: version
+          in: path
+          required: true
+          description: The version of the EvaluationSuiteVersion to delete.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+    patch:
+      operationId: EvaluationSuites_createOrUpdateVersion
+      description: Create a new or update an existing EvaluationSuiteVersion with the given version id
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: name
+          in: path
+          required: true
+          description: The name of the resource.
+          schema:
+            type: string
+        - name: version
+          in: path
+          required: true
+          description: The specific version id of the EvaluationSuiteVersion to create or update.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluationSuiteVersion'
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluationSuiteVersion'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/EvaluationSuiteVersionUpdate'
+        description: The EvaluationSuiteVersion to create or update.
+  /evaluation_suites/{name}:run:
+    post:
+      operationId: EvaluationSuites_run
+      description: Run an evaluation using the suite's testing criteria and dataset.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The name of the evaluation suite.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluationSuiteRunResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvaluationSuiteRunRequest'
+        description: The run request parameters.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
   /evaluationrules:
     get:
       operationId: EvaluationRules_list
@@ -5514,6 +6091,425 @@ paths:
       x-ms-foundry-meta:
         conditional_previews:
           - MemoryStores=V1Preview
+  /models:
+    get:
+      operationId: Models_listLatest
+      description: List the latest version of each ModelVersion
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Models=V1Preview
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PagedModelVersion'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      tags:
+        - Models
+  /models/{name}/versions:
+    get:
+      operationId: Models_listVersions
+      description: List all versions of the given ModelVersion
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: name
+          in: path
+          required: true
+          description: The name of the resource
+          schema:
+            type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Models=V1Preview
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PagedModelVersion'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      tags:
+        - Models
+  /models/{name}/versions/{version}:
+    get:
+      operationId: Models_getVersion
+      description: Get the specific version of the ModelVersion. The service returns 404 Not Found error if the ModelVersion does not exist.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: name
+          in: path
+          required: true
+          description: The name of the resource
+          schema:
+            type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Models=V1Preview
+        - name: version
+          in: path
+          required: true
+          description: The specific version id of the ModelVersion to retrieve.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelVersion'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      tags:
+        - Models
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
+    delete:
+      operationId: Models_deleteVersion
+      description: Delete the specific version of the ModelVersion. The service returns 200 OK if the ModelVersion was deleted successfully or if the ModelVersion does not exist.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: name
+          in: path
+          required: true
+          description: The name of the resource
+          schema:
+            type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Models=V1Preview
+        - name: version
+          in: path
+          required: true
+          description: The version of the ModelVersion to delete.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      tags:
+        - Models
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
+    patch:
+      operationId: Models_updateVersion
+      description: Update an existing ModelVersion with the given version id
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: name
+          in: path
+          required: true
+          description: The name of the resource
+          schema:
+            type: string
+        - name: version
+          in: path
+          required: true
+          description: The specific version id of the UpdateModelVersionRequest to create or update.
+          schema:
+            type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Models=V1Preview
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelVersion'
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelVersion'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      tags:
+        - Models
+      requestBody:
+        required: true
+        content:
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/UpdateModelVersionRequest'
+        description: The UpdateModelVersionRequest to create or update.
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
+  /models/{name}/versions/{version}/createAsync:
+    post:
+      operationId: Models_createAsync
+      description: Creates a model version asynchronously with blob content validation. Returns 202 Accepted with a Location header for polling.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Models=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: Name of the model.
+          schema:
+            type: string
+        - name: version
+          in: path
+          required: true
+          description: Version of the model.
+          schema:
+            type: string
+      responses:
+        '202':
+          description: Accepted response for asynchronous model version creation, with polling location.
+          headers:
+            Location:
+              required: false
+              description: URL to poll for operation status.
+              schema:
+                type: string
+                format: uri
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  location:
+                    type: string
+                    format: uri
+                    description: URL to poll for operation status.
+                  operationResult:
+                    type: string
+                    format: uri
+                    nullable: true
+                    description: URL to the operation result, or null if the operation is still in progress.
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      tags:
+        - Models
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelVersion'
+        description: Model version to create.
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
+  /models/{name}/versions/{version}/credentials:
+    post:
+      operationId: Models_getCredentials
+      description: Get credentials for a model version asset.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Models=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: Name of the model.
+          schema:
+            type: string
+        - name: version
+          in: path
+          required: true
+          description: Version of the model.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetCredentialResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      tags:
+        - Models
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelCredentialRequest'
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
+  /models/{name}/versions/{version}/startPendingUpload:
+    post:
+      operationId: Models_startPendingUpload
+      description: Start or retrieve a pending upload for a model version.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Models=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: Name of the model.
+          schema:
+            type: string
+        - name: version
+          in: path
+          required: true
+          description: Version of the model.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelPendingUploadResponse'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      tags:
+        - Models
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelPendingUploadRequest'
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
   /openai/v1/conversations:
     post:
       operationId: createConversation
@@ -9304,6 +10300,7 @@ components:
             - activity
             - responses
             - a2a
+            - mcp
             - invocations
     AgentEvaluation:
       type: object
@@ -9425,6 +10422,29 @@ components:
           format: float
           description: Maximum request rate per hour (0 to 1000).
       description: Definition for sampling strategy.
+    AgentEvaluationSuiteJobSource:
+      type: object
+      required:
+        - type
+        - agent_name
+      properties:
+        description:
+          type: string
+          description: Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').
+        type:
+          type: string
+          enum:
+            - agent
+          description: The source type for this source, which is Agent.
+        agent_name:
+          type: string
+          description: The agent name to fetch instructions from.
+        agent_version:
+          type: string
+          description: The agent version. If not specified, the latest version is used.
+      allOf:
+        - $ref: '#/components/schemas/EvaluationSuiteJobSource'
+      description: Agent source for evaluation suite generation jobs — references an agent to fetch instructions and metadata from.
     AgentEvaluatorGenerationJobSource:
       type: object
       required:
@@ -9592,6 +10612,7 @@ components:
           enum:
             - activity_protocol
             - responses
+            - mcp
             - invocations
     AgentReference:
       type: object
@@ -9881,6 +10902,21 @@ components:
       allOf:
         - $ref: '#/components/schemas/BaseCredentials'
       description: API Key Credential definition
+    ArtifactProfile:
+      type: object
+      required:
+        - category
+      properties:
+        category:
+          allOf:
+            - $ref: '#/components/schemas/FoundryModelArtifactProfileCategory'
+          description: The category of the artifact profile
+        signals:
+          type: array
+          items:
+            $ref: '#/components/schemas/FoundryModelArtifactProfileSignal'
+          description: Signals detected in the model artifact
+      description: Artifact profile of the model
     AssetCredentialResponse:
       type: object
       required:
@@ -11882,6 +12918,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DataGenerationJobScenario'
           description: The scenario of the data generation job. Either for fine-tuning or evaluation.
+        output_options:
+          allOf:
+            - $ref: '#/components/schemas/DataGenerationJobOutputOptions'
+          description: Optional caller-supplied metadata for the job's output. See individual fields for whether they apply to file outputs (fine-tuning scenarios), dataset outputs (evaluation scenario), or both.
       description: Caller-supplied inputs for a data generation job.
     DataGenerationJobOptions:
       type: object
@@ -11929,6 +12969,21 @@ components:
           file: '#/components/schemas/FileDataGenerationJobOutput'
           dataset: '#/components/schemas/DatasetDataGenerationJobOutput'
       description: Output information for a data generation job.
+    DataGenerationJobOutputOptions:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name to assign to the output. Used as the filename for Azure OpenAI file outputs (fine-tuning scenarios) and as the dataset name for dataset outputs (evaluation scenario).
+        description:
+          type: string
+          description: Description to assign to the output. Applies only to dataset outputs (evaluation scenario); ignored for Azure OpenAI file outputs.
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+          description: Tags to assign to the output. Applies only to dataset outputs (evaluation scenario); ignored for Azure OpenAI file outputs.
+      description: Output options for data generation job.
     DataGenerationJobOutputType:
       anyOf:
         - type: string
@@ -12071,19 +13126,22 @@ components:
           readOnly: true
         name:
           type: string
-          description: The name of the output dataset and can be optionally set during job creation time.
+          description: The name of the output dataset.
+          readOnly: true
         version:
           type: string
           description: The version of the output dataset.
           readOnly: true
         description:
           type: string
-          description: Description of the output dataset and can be optionally set during job creation time.
+          description: Description of the output dataset.
+          readOnly: true
         tags:
           type: object
           additionalProperties:
             type: string
-          description: Tag dictionary of the output dataset and can be optionally set during job creation time.
+          description: Tag dictionary of the output dataset.
+          readOnly: true
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobOutput'
       description: Dataset output for a data generation job.
@@ -12110,6 +13168,29 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobSource'
       description: Dataset source for data generation jobs — reference to a dataset.
+    DatasetEvaluationSuiteJobSource:
+      type: object
+      required:
+        - type
+        - name
+      properties:
+        description:
+          type: string
+          description: Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').
+        type:
+          type: string
+          enum:
+            - dataset
+          description: The source type for this source, which is Dataset.
+        name:
+          type: string
+          description: The name of the dataset.
+        version:
+          type: string
+          description: The version of the dataset. If not specified, the latest version is used.
+      allOf:
+        - $ref: '#/components/schemas/EvaluationSuiteJobSource'
+      description: Dataset source for evaluation suite generation jobs — reference to a dataset.
     DatasetEvaluatorGenerationJobSource:
       type: object
       required:
@@ -12405,6 +13486,30 @@ components:
       allOf:
         - $ref: '#/components/schemas/Message'
       description: A message authored by a developer to guide the model during evaluation.
+    Dimension:
+      type: object
+      required:
+        - dimension_id
+        - description
+        - weight
+      properties:
+        dimension_id:
+          type: string
+          description: Stable identifier for this dimension (snake_case, e.g., `correct_resolution`). Required. Provided by the user when manually creating a rubric evaluator or during human-in-the-loop review of a generated set; the generation pipeline produces an initial value the user can edit. Editable when saving new versions.
+        description:
+          type: string
+          description: What this dimension measures (e.g., 'Correctly identifies the user's reservation intent and pursues the appropriate workflow').
+        weight:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 10
+          description: Relative weight of this dimension (1-10). The generation pipeline assigns exactly one dimension weight 8-10; all others use 1-6. User edits are not constrained by this heuristic.
+        always_applicable:
+          type: boolean
+          description: When true, the LLM judge always scores this dimension regardless of relevance (skips applicability assessment). The service-generated general quality/policy dimension has this set to true and is non-editable. Users may set this on their own custom dimensions.
+          default: false
+      description: A single dimension — one independent, measurable quality dimension within a rubric evaluator's scoring blueprint.
     EntraAuthorizationScheme:
       type: object
       required:
@@ -13336,6 +14441,34 @@ components:
       allOf:
         - $ref: '#/components/schemas/InsightResult'
       description: Insights from the evaluation comparison.
+    EvaluationDataGenerationType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - simple_qna
+            - traces
+            - tool_use
+            - task
+      description: The data generation type.
+    EvaluationDatasetReference:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Dataset name.
+        version:
+          type: string
+          description: Dataset version. If not provided, resolves to the latest version.
+        schema_file_name:
+          type: string
+          description: |-
+            Name of the schema file within the dataset's blob folder (e.g., "a3f2b1c4_schema.json").
+            Optional — if not provided, schema is inferred at runtime from the data.
+            Only applicable for uri_folder datasets.
+      description: Reference to a dataset by name and version.
     EvaluationLevel:
       anyOf:
         - type: string
@@ -13511,6 +14644,437 @@ components:
       allOf:
         - $ref: '#/components/schemas/ScheduleTask'
       description: Evaluation task for the schedule.
+    EvaluationSuiteDataGenerationOptions:
+      type: object
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/EvaluationDataGenerationType'
+          description: The data generation type. Defaults to 'simple_qna' if not specified.
+        max_samples:
+          type: integer
+          format: int32
+          minimum: 15
+          maximum: 1000
+          description: 'Maximum number of samples to generate. Valid range: 15-1000.'
+      description: Options for dataset generation within an evaluation suite generation job.
+    EvaluationSuiteGenerationCategory:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - quality
+            - safety
+      description: The category of evaluator generation.
+    EvaluationSuiteGenerationJob:
+      type: object
+      required:
+        - id
+        - status
+        - created_at
+      properties:
+        id:
+          type: string
+          description: Server-assigned unique identifier.
+          readOnly: true
+        inputs:
+          allOf:
+            - $ref: '#/components/schemas/EvaluationSuiteGenerationJobInputs'
+          description: Caller-supplied inputs.
+        result:
+          allOf:
+            - $ref: '#/components/schemas/EvaluationSuiteVersion'
+          description: Result produced on success.
+          readOnly: true
+        status:
+          allOf:
+            - $ref: '#/components/schemas/JobStatus'
+          description: Current lifecycle status.
+          readOnly: true
+        error:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.Error'
+          description: Error details — populated only on failure.
+          readOnly: true
+        created_at:
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
+          description: The timestamp when the job was created, represented in Unix time.
+          readOnly: true
+        finished_at:
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
+          description: The timestamp when the job finished, represented in Unix time.
+          readOnly: true
+        usage:
+          allOf:
+            - $ref: '#/components/schemas/EvaluationSuiteGenerationTokenUsage'
+          description: Token consumption summary. Populated on terminal states.
+          readOnly: true
+      description: Evaluation suite generation job resource — a long-running job that generates testing criteria and optionally a dataset from source materials. On success, the result is the persisted EvaluationSuiteVersion.
+    EvaluationSuiteGenerationJobCreate:
+      type: object
+      properties:
+        inputs:
+          allOf:
+            - $ref: '#/components/schemas/EvaluationSuiteGenerationJobInputs'
+          description: Caller-supplied inputs.
+      description: Evaluation suite generation job resource — a long-running job that generates testing criteria and optionally a dataset from source materials. On success, the result is the persisted EvaluationSuiteVersion.
+    EvaluationSuiteGenerationJobInputs:
+      type: object
+      required:
+        - evaluation_suite_name
+        - sources
+        - generation_model
+      properties:
+        evaluation_suite_name:
+          type: string
+          description: The evaluation suite name to create.
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluationSuiteJobSource'
+          description: Source materials for generation — agent context, prompts, traces, or datasets.
+        generation_model:
+          type: string
+          description: The LLM model to use for rubric and data generation (e.g., 'gpt-4o').
+        category:
+          allOf:
+            - $ref: '#/components/schemas/EvaluationSuiteGenerationCategory'
+          description: 'Category determines the generation focus. Default: quality.'
+          default: quality
+        initialization_parameters:
+          type: object
+          additionalProperties: {}
+          description: |-
+            Optional initialization parameters applied to all generated evaluators.
+            For example, deployment_name for LLM judge model, default threshold.
+        data_generation_options:
+          allOf:
+            - $ref: '#/components/schemas/EvaluationSuiteDataGenerationOptions'
+          description: |-
+            Data generation options. Controls how the evaluation dataset is generated.
+            If omitted, defaults are used (simple_qna, 100 max_samples).
+      description: Caller-supplied inputs for an evaluation suite generation job.
+    EvaluationSuiteGenerationTokenUsage:
+      type: object
+      properties:
+        input_tokens:
+          type: integer
+          format: int64
+          description: Number of input tokens consumed.
+        output_tokens:
+          type: integer
+          format: int64
+          description: Number of output tokens consumed.
+        total_tokens:
+          type: integer
+          format: int64
+          description: Total tokens consumed.
+      description: Token usage summary for an evaluation suite generation job.
+    EvaluationSuiteJobSource:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/EvaluationSuiteJobSourceType'
+          description: The type of source.
+        description:
+          type: string
+          description: Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').
+      discriminator:
+        propertyName: type
+        mapping:
+          prompt: '#/components/schemas/PromptEvaluationSuiteJobSource'
+          agent: '#/components/schemas/AgentEvaluationSuiteJobSource'
+          traces: '#/components/schemas/TracesEvaluationSuiteJobSource'
+          dataset: '#/components/schemas/DatasetEvaluationSuiteJobSource'
+      description: The base source model for evaluation suite generation jobs. Polymorphic over `type`.
+    EvaluationSuiteJobSourceType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - prompt
+            - agent
+            - traces
+            - dataset
+      description: The supported source types for evaluation suite generation jobs.
+    EvaluationSuiteRunRequest:
+      type: object
+      properties:
+        evaluation_name:
+          type: string
+          description: "Name for the evaluation. Default: '{suiteName}-runs'."
+        evaluation_suite_version:
+          type: string
+          description: 'Evaluation suite version to run. Default: latest.'
+        evaluation_level:
+          allOf:
+            - $ref: '#/components/schemas/EvaluationLevel'
+          description: Overrides the suite's default evaluation level. If omitted, uses the level from the suite.
+      description: Request body for running an evaluation from a suite.
+    EvaluationSuiteRunResponse:
+      type: object
+      required:
+        - evaluation_suite_name
+        - evaluation_suite_version
+        - results
+      properties:
+        evaluation_suite_name:
+          type: string
+          description: The evaluation suite name used.
+        evaluation_suite_version:
+          type: string
+          description: The evaluation suite version resolved.
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluationSuiteRunResult'
+          description: The run results. Currently a single-element array; will support multiple runs in the future.
+      description: Response from running an evaluation suite.
+    EvaluationSuiteRunResult:
+      type: object
+      required:
+        - eval_id
+        - run_id
+        - status
+        - created_at
+      properties:
+        eval_id:
+          type: string
+          description: The evaluation ID created.
+        run_id:
+          type: string
+          description: The eval run ID created.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/JobStatus'
+          description: Status of the run.
+        created_at:
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
+          description: Timestamp when the run was created.
+      description: Result of a single evaluation run within a suite execution.
+    EvaluationSuiteSubtype:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - default
+            - benchmark
+      description: The subtype of an evaluation suite.
+    EvaluationSuiteVersion:
+      type: object
+      required:
+        - testing_criteria
+        - name
+        - version
+      properties:
+        display_name:
+          type: string
+          description: |-
+            Human-readable display name.
+            Does not need to be unique. Shown in Foundry portal list views and eval reports.
+        subtype:
+          allOf:
+            - $ref: '#/components/schemas/EvaluationSuiteSubtype'
+          description: Subtype of the evaluation suite.
+        dataset:
+          allOf:
+            - $ref: '#/components/schemas/EvaluationDatasetReference'
+          description: |-
+            Dataset reference for evaluation.
+            Optional — omit for evaluator-only suites where data comes from
+            live production traces or is provided at run time.
+            The referenced dataset must exist in the project's dataset registry.
+        testing_criteria:
+          type: array
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/OpenAI.EvalGraderLabelModel'
+              - $ref: '#/components/schemas/OpenAI.EvalGraderStringCheck'
+              - $ref: '#/components/schemas/OpenAI.EvalGraderTextSimilarity'
+              - $ref: '#/components/schemas/OpenAI.EvalGraderPython'
+              - $ref: '#/components/schemas/OpenAI.EvalGraderScoreModel'
+              - $ref: '#/components/schemas/TestingCriterionAzureAIEvaluator'
+          minItems: 1
+          description: |-
+            Testing criteria — the evaluator configurations for this suite.
+            Supports all grader types: azure_ai_evaluator, string_check, label_model,
+            score_model, text_similarity, python, etc.
+            At least one entry is required.
+        target:
+          allOf:
+            - $ref: '#/components/schemas/Target'
+          description: |-
+            Target for this evaluation suite. Uses the existing Target discriminated type
+            from eval runs. Supports azure_ai_agent, azure_ai_model, azure_ai_assistant.
+            Optional — allows suites to exist without a target.
+        input_messages:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.CreateEvalResponsesRunDataSourceInputMessagesTemplate'
+            - $ref: '#/components/schemas/OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesItemReference'
+          description: |-
+            How to send dataset rows to the target (agent or model).
+            Supports template type (prompt with column placeholders) and
+            item_reference type (column containing pre-built messages).
+        evaluation_level:
+          allOf:
+            - $ref: '#/components/schemas/EvaluationLevel'
+          description: Default evaluation level for this suite. Can be overridden at run time.
+        name:
+          type: string
+          description: The name of the resource.
+          readOnly: true
+        version:
+          type: string
+          description: The version of the resource.
+          readOnly: true
+      description: |-
+        An evaluation suite bundles testing criteria — an optional dataset, one or more
+        evaluator configs with thresholds and init params — into a reusable, named artifact that
+        can gate agent changes across batch, scheduled, continuous, and CI/CD evals.
+    EvaluationSuiteVersionCreate:
+      type: object
+      required:
+        - testing_criteria
+      properties:
+        display_name:
+          type: string
+          description: |-
+            Human-readable display name.
+            Does not need to be unique. Shown in Foundry portal list views and eval reports.
+        subtype:
+          allOf:
+            - $ref: '#/components/schemas/EvaluationSuiteSubtype'
+          description: Subtype of the evaluation suite.
+        dataset:
+          allOf:
+            - $ref: '#/components/schemas/EvaluationDatasetReference'
+          description: |-
+            Dataset reference for evaluation.
+            Optional — omit for evaluator-only suites where data comes from
+            live production traces or is provided at run time.
+            The referenced dataset must exist in the project's dataset registry.
+        testing_criteria:
+          type: array
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/OpenAI.EvalGraderLabelModel'
+              - $ref: '#/components/schemas/OpenAI.EvalGraderStringCheck'
+              - $ref: '#/components/schemas/OpenAI.EvalGraderTextSimilarity'
+              - $ref: '#/components/schemas/OpenAI.EvalGraderPython'
+              - $ref: '#/components/schemas/OpenAI.EvalGraderScoreModel'
+              - $ref: '#/components/schemas/TestingCriterionAzureAIEvaluator'
+          minItems: 1
+          description: |-
+            Testing criteria — the evaluator configurations for this suite.
+            Supports all grader types: azure_ai_evaluator, string_check, label_model,
+            score_model, text_similarity, python, etc.
+            At least one entry is required.
+        target:
+          allOf:
+            - $ref: '#/components/schemas/Target'
+          description: |-
+            Target for this evaluation suite. Uses the existing Target discriminated type
+            from eval runs. Supports azure_ai_agent, azure_ai_model, azure_ai_assistant.
+            Optional — allows suites to exist without a target.
+        input_messages:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.CreateEvalResponsesRunDataSourceInputMessagesTemplate'
+            - $ref: '#/components/schemas/OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesItemReference'
+          description: |-
+            How to send dataset rows to the target (agent or model).
+            Supports template type (prompt with column placeholders) and
+            item_reference type (column containing pre-built messages).
+        evaluation_level:
+          allOf:
+            - $ref: '#/components/schemas/EvaluationLevel'
+          description: Default evaluation level for this suite. Can be overridden at run time.
+        description:
+          type: string
+          description: The asset description text.
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+          description: Tag dictionary. Tags can be added, removed, and updated.
+      description: |-
+        An evaluation suite bundles testing criteria — an optional dataset, one or more
+        evaluator configs with thresholds and init params — into a reusable, named artifact that
+        can gate agent changes across batch, scheduled, continuous, and CI/CD evals.
+    EvaluationSuiteVersionUpdate:
+      type: object
+      required:
+        - testing_criteria
+      properties:
+        display_name:
+          type: string
+          description: |-
+            Human-readable display name.
+            Does not need to be unique. Shown in Foundry portal list views and eval reports.
+        subtype:
+          allOf:
+            - $ref: '#/components/schemas/EvaluationSuiteSubtype'
+          description: Subtype of the evaluation suite.
+        dataset:
+          allOf:
+            - $ref: '#/components/schemas/EvaluationDatasetReference'
+          description: |-
+            Dataset reference for evaluation.
+            Optional — omit for evaluator-only suites where data comes from
+            live production traces or is provided at run time.
+            The referenced dataset must exist in the project's dataset registry.
+        testing_criteria:
+          type: array
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/OpenAI.EvalGraderLabelModel'
+              - $ref: '#/components/schemas/OpenAI.EvalGraderStringCheck'
+              - $ref: '#/components/schemas/OpenAI.EvalGraderTextSimilarity'
+              - $ref: '#/components/schemas/OpenAI.EvalGraderPython'
+              - $ref: '#/components/schemas/OpenAI.EvalGraderScoreModel'
+              - $ref: '#/components/schemas/TestingCriterionAzureAIEvaluator'
+          minItems: 1
+          description: |-
+            Testing criteria — the evaluator configurations for this suite.
+            Supports all grader types: azure_ai_evaluator, string_check, label_model,
+            score_model, text_similarity, python, etc.
+            At least one entry is required.
+        target:
+          allOf:
+            - $ref: '#/components/schemas/Target'
+          description: |-
+            Target for this evaluation suite. Uses the existing Target discriminated type
+            from eval runs. Supports azure_ai_agent, azure_ai_model, azure_ai_assistant.
+            Optional — allows suites to exist without a target.
+        input_messages:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.CreateEvalResponsesRunDataSourceInputMessagesTemplate'
+            - $ref: '#/components/schemas/OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesItemReference'
+          description: |-
+            How to send dataset rows to the target (agent or model).
+            Supports template type (prompt with column placeholders) and
+            item_reference type (column containing pre-built messages).
+        evaluation_level:
+          allOf:
+            - $ref: '#/components/schemas/EvaluationLevel'
+          description: Default evaluation level for this suite. Can be overridden at run time.
+        description:
+          type: string
+          description: The asset description text.
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+          description: Tag dictionary. Tags can be added, removed, and updated.
+      description: |-
+        An evaluation suite bundles testing criteria — an optional dataset, one or more
+        evaluator configs with thresholds and init params — into a reusable, named artifact that
+        can gate agent changes across batch, scheduled, continuous, and CI/CD evals.
     EvaluationTarget:
       type: object
       required:
@@ -13723,7 +15287,7 @@ components:
         mapping:
           code: '#/components/schemas/CodeBasedEvaluatorDefinition'
           prompt: '#/components/schemas/PromptBasedEvaluatorDefinition'
-          rubrics: '#/components/schemas/RubricBasedEvaluatorDefinition'
+          rubric: '#/components/schemas/RubricBasedEvaluatorDefinition'
       description: Base evaluator configuration with discriminator
     EvaluatorDefinitionType:
       anyOf:
@@ -13735,7 +15299,7 @@ components:
             - prompt_and_code
             - service
             - openai_graders
-            - rubrics
+            - rubric
       description: The type of evaluator definition
     EvaluatorGenerationArtifacts:
       type: object
@@ -13756,14 +15320,10 @@ components:
     EvaluatorGenerationInputs:
       type: object
       required:
-        - name
         - sources
         - model
         - evaluator_name
       properties:
-        name:
-          type: string
-          description: Display name for this generation job.
         sources:
           type: array
           items:
@@ -13772,14 +15332,23 @@ components:
         category:
           allOf:
             - $ref: '#/components/schemas/EvaluatorCategory'
-          description: "Category determines the rubric generation focus: 'quality' (default) produces quality-focused rubric criteria, 'safety' produces policy-derived safety rubric criteria. Both use the same rubric structure. Singular because quality and safety generation are mutually exclusive pipelines — the output EvaluatorVersion.categories is an array (e.g., ['agents', 'quality'])."
+          description: "Category determines the rubric generation focus: 'quality' (default) produces quality-focused dimensions, 'safety' produces policy-derived safety dimensions. Both use the same Dimension structure. Singular because quality and safety generation are mutually exclusive pipelines — the output EvaluatorVersion.categories is an array (e.g., ['agents', 'quality'])."
           default: quality
         model:
           type: string
           description: The LLM model to use for rubric generation (e.g., 'gpt-4o'). Required — users must provide their own model rather than relying on service-owned capacity.
         evaluator_name:
           type: string
-          description: The evaluator name to create or update. If an evaluator with this name already exists, the service retrieves the latest version's criteria as context for improvement.
+          minLength: 1
+          maxLength: 256
+          pattern: ^[A-Za-z0-9_.~-]+$
+          description: The evaluator name (immutable identifier). 1-256 characters; allowed characters are ASCII letters, digits, underscore (`_`), period (`.`), tilde (`~`), and hyphen (`-`). The prefix `builtin.` is reserved for system-managed evaluators and is rejected by the service. If an evaluator with this name already exists in the project (and is rubric-subtype), the service creates a new version under the same name and uses the prior version's `dimensions` as context for incremental improvement (foundation of the post-//build adaptive loop). Old versions remain queryable via `get_version(name, version)`. If the existing evaluator is not a rubric-subtype evaluator (built-in, prompt-based, code-based), the request is rejected with `400 Bad Request`.
+        evaluator_display_name:
+          type: string
+          description: Optional human-friendly display name for the resulting evaluator. Surfaced as `EvaluatorVersion.display_name` on the persisted evaluator. When omitted, the service uses `evaluator_name` as the display name. The `evaluator_` prefix disambiguates this from the immutable `evaluator_name` identifier.
+        evaluator_description:
+          type: string
+          description: Optional human-friendly description for the resulting evaluator. Surfaced as `EvaluatorVersion.description` on the persisted evaluator. Typically collected from the UI alongside `evaluator_display_name`. The `evaluator_` prefix disambiguates this from any other description fields on related models.
       description: Caller-supplied inputs for an evaluator generation job.
     EvaluatorGenerationJob:
       type: object
@@ -14275,6 +15844,62 @@ components:
       allOf:
         - $ref: '#/components/schemas/DatasetVersionUpdate'
       description: FileDatasetVersion Definition
+    FoundryModelArtifactProfileCategory:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - DataOnly
+            - RuntimeDependent
+            - Unknown
+      description: The artifact profile category.
+    FoundryModelArtifactProfileSignal:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - PickleDeserialization
+            - CustomPythonCode
+            - DynamicOps
+            - NativeBinary
+            - UnknownFormat
+      description: Signals detected in the model artifact.
+    FoundryModelSourceType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - LocalUpload
+            - TrainingJob
+      description: The source type of the model.
+    FoundryModelWarning:
+      type: object
+      properties:
+        code:
+          allOf:
+            - $ref: '#/components/schemas/FoundryModelWarningCode'
+          description: The warning code.
+        message:
+          type: string
+          description: The warning message.
+      description: A warning associated with a model.
+    FoundryModelWarningCode:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - RuntimeDependentArtifact
+            - UnclassifiedArtifact
+      description: Warning code for model artifacts.
+    FoundryModelWeightType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - FullWeight
+            - LoRA
+            - DraftModel
+      description: The weight type of the model.
     FoundryTimestamp:
       type: integer
       format: unixtime
@@ -14801,6 +16426,27 @@ components:
             - failed
             - cancelled
       description: Extensible status values shared by Foundry jobs.
+    LoraConfig:
+      type: object
+      properties:
+        rank:
+          type: integer
+          format: int32
+          description: 'LoRA rank (r). Positive integer. Common values: 8, 16, 32, 64.'
+        alpha:
+          type: integer
+          format: int32
+          description: LoRA scaling factor (α). Positive integer; typically 2× the rank.
+        targetModules:
+          type: array
+          items:
+            type: string
+          description: Model layers modified by the adapter (e.g., q_proj, v_proj). Auto-detected from adapter_config.json if omitted.
+        dropout:
+          type: number
+          format: float
+          description: Dropout rate used during training. Informational — not used at serving time.
+      description: Adapter-specific metadata for LoRA models. Drives serving engine configuration at deployment time.
     ManagedAgentIdentityBlueprint:
       type: object
       required:
@@ -15395,6 +17041,16 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: The input definition information for a Microsoft Fabric tool as used to configure an agent.
+    ModelCredentialRequest:
+      type: object
+      required:
+        - blobUri
+      properties:
+        blobUri:
+          type: string
+          format: uri
+          description: Blob URI of the model asset to fetch credentials for.
+      description: Request to fetch credentials for a model asset.
     ModelDeployment:
       type: object
       required:
@@ -15440,6 +17096,46 @@ components:
       allOf:
         - $ref: '#/components/schemas/Deployment'
       description: Model Deployment Definition
+    ModelPendingUploadRequest:
+      type: object
+      required:
+        - pendingUploadType
+      properties:
+        pendingUploadId:
+          type: string
+          description: If PendingUploadId is not provided, a random GUID will be used.
+        connectionName:
+          type: string
+          description: Azure Storage Account connection name to use for generating temporary SAS token
+        pendingUploadType:
+          type: string
+          enum:
+            - TemporaryBlobReference
+          description: The type of pending upload. Only TemporaryBlobReference is supported for models.
+      description: Represents a request for a pending upload of a model version.
+    ModelPendingUploadResponse:
+      type: object
+      required:
+        - blobReference
+        - pendingUploadId
+        - pendingUploadType
+      properties:
+        blobReference:
+          allOf:
+            - $ref: '#/components/schemas/BlobReference'
+          description: Container-level read, write, list SAS.
+        pendingUploadId:
+          type: string
+          description: ID for this upload request.
+        version:
+          type: string
+          description: Version of asset to be created if user did not specify version when initially creating upload
+        pendingUploadType:
+          type: string
+          enum:
+            - TemporaryBlobReference
+          description: The type of pending upload. Only TemporaryBlobReference is supported for models.
+      description: Represents the response for a model pending upload request.
     ModelSamplingParams:
       type: object
       properties:
@@ -15463,6 +17159,80 @@ components:
           format: int32
           description: The maximum number of tokens allowed in the completion.
       description: Represents a set of parameters used to control the sampling behavior of a language model during text generation.
+    ModelSourceData:
+      type: object
+      properties:
+        sourceType:
+          allOf:
+            - $ref: '#/components/schemas/FoundryModelSourceType'
+          description: The source type of the model
+        jobId:
+          type: string
+          description: The job ID that produced this model
+      description: Source information for the model
+    ModelVersion:
+      type: object
+      required:
+        - blobUri
+        - name
+        - version
+      properties:
+        systemData:
+          allOf:
+            - $ref: '#/components/schemas/SystemDataV3'
+          description: System related metadata
+          readOnly: true
+        blobUri:
+          type: string
+          format: uri
+          description: URI of the model artifact in blob storage
+        weightType:
+          allOf:
+            - $ref: '#/components/schemas/FoundryModelWeightType'
+          description: The weight type of the model
+        baseModel:
+          type: string
+          description: Base model asset ID
+        source:
+          allOf:
+            - $ref: '#/components/schemas/ModelSourceData'
+          description: The source of the model
+        loraConfig:
+          allOf:
+            - $ref: '#/components/schemas/LoraConfig'
+          description: Adapter-specific configuration. Required when weight_type is lora; ignored otherwise. May be auto-populated from adapter_config.json when present in the uploaded files — user-provided values take precedence over auto-detected values.
+        artifactProfile:
+          allOf:
+            - $ref: '#/components/schemas/ArtifactProfile'
+          description: The artifact profile of the model
+          readOnly: true
+        warnings:
+          type: array
+          items:
+            $ref: '#/components/schemas/FoundryModelWarning'
+          description: Service-computed advisory warnings derived from the artifact profile.
+          readOnly: true
+        id:
+          type: string
+          description: Asset ID, a unique identifier for the asset
+          readOnly: true
+        name:
+          type: string
+          description: The name of the resource
+          readOnly: true
+        version:
+          type: string
+          description: The version of the resource
+          readOnly: true
+        description:
+          type: string
+          description: The asset description text.
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+          description: Tag dictionary. Tags can be added, removed, and updated.
+      description: Model Version Definition
     MonthlyRecurrenceSchedule:
       type: object
       required:
@@ -30418,6 +32188,21 @@ components:
           format: uri
           description: The link to the next page of items
       description: Paged collection of EvaluationRule items
+    PagedEvaluationSuiteVersion:
+      type: object
+      required:
+        - value
+      properties:
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluationSuiteVersion'
+          description: The EvaluationSuiteVersion items on this page
+        nextLink:
+          type: string
+          format: uri
+          description: The link to the next page of items
+      description: Paged collection of EvaluationSuiteVersion items
     PagedEvaluationTaxonomy:
       type: object
       required:
@@ -30493,6 +32278,21 @@ components:
           format: uri
           description: The link to the next page of items
       description: Paged collection of ManagedAgentIdentityBlueprint items
+    PagedModelVersion:
+      type: object
+      required:
+        - value
+      properties:
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelVersion'
+          description: The ModelVersion items on this page
+        nextLink:
+          type: string
+          format: uri
+          description: The link to the next page of items
+      description: Paged collection of ModelVersion items
     PagedRedTeam:
       type: object
       required:
@@ -30567,7 +32367,7 @@ components:
           type: string
           enum:
             - BlobReference
-          description: BlobReference is the only supported type.
+          description: The type of pending upload.
       description: Represents a request for a pending upload.
     PendingUploadResponse:
       type: object
@@ -30590,7 +32390,7 @@ components:
           type: string
           enum:
             - BlobReference
-          description: BlobReference is the only supported type
+          description: The type of pending upload.
       description: Represents the response for a pending upload request
     PromptAgentDefinition:
       type: object
@@ -30706,6 +32506,26 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobSource'
       description: Prompt source for data generation jobs — inline text provided by the user.
+    PromptEvaluationSuiteJobSource:
+      type: object
+      required:
+        - type
+        - prompt
+      properties:
+        description:
+          type: string
+          description: Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').
+        type:
+          type: string
+          enum:
+            - prompt
+          description: The source type for this source, which is Prompt.
+        prompt:
+          type: string
+          description: Inline prompt text (e.g., agent description, policy text, supplementary context).
+      allOf:
+        - $ref: '#/components/schemas/EvaluationSuiteJobSource'
+      description: Prompt source for evaluation suite generation jobs — inline text provided by the user.
     PromptEvaluatorGenerationJobSource:
       type: object
       required:
@@ -31033,44 +32853,27 @@ components:
       type: object
       required:
         - type
-        - rubric_criteria
+        - dimensions
       properties:
         type:
           type: string
           enum:
-            - rubrics
-        rubric_criteria:
+            - rubric
+        dimensions:
           type: array
           items:
-            $ref: '#/components/schemas/RubricCriterion'
-          description: "Rubric criteria — the scoring blueprint used by the LLM judge. Quality evaluators include a non-editable residual criterion with rubric_id 'general_quality' (always_applicable: true); safety evaluators include 'general_policy_compliance'. Both use the same rubric structure."
+            $ref: '#/components/schemas/Dimension'
+          description: "The set of dimensions — the scoring blueprint used by the LLM judge. Quality evaluators include a non-editable residual dimension with dimension_id 'general_quality' (always_applicable: true); safety evaluators include 'general_policy_compliance'. Both use the same Dimension structure."
+        pass_threshold:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+          description: Pass/fail threshold for the aggregate rubric score, on the same normalized 0.0-1.0 scale as the emitted `score`. When the runtime weighted average meets or exceeds this value, the result is `pass`. Defaults to 0.5 (equivalent to a raw 1-5 weighted average of 3.0). The 'any dimension scored 1 → fail' rule still applies regardless of this threshold.
+          default: 0.5
       allOf:
         - $ref: '#/components/schemas/EvaluatorDefinition'
-      description: Rubric-based evaluator definition — stores rubric criteria produced by the generate API. Used for both quality and safety evaluators.
-    RubricCriterion:
-      type: object
-      required:
-        - rubric_id
-        - description
-        - weight
-      properties:
-        rubric_id:
-          type: string
-          description: Stable identifier for this rubric criterion (snake_case, e.g., `correct_resolution`). Required. Provided by the user when manually creating a rubric evaluator or during human-in-the-loop review of a generated catalog; the generation pipeline produces an initial value the user can edit. Editable when saving new versions.
-        description:
-          type: string
-          description: What this criterion measures (e.g., 'Correctly identifies the user's reservation intent and pursues the appropriate workflow').
-        weight:
-          type: integer
-          format: int32
-          minimum: 1
-          maximum: 10
-          description: Relative weight of this criterion (1-10). The generation pipeline assigns exactly one criterion weight 8-10; all others use 1-6. User edits are not constrained by this heuristic.
-        always_applicable:
-          type: boolean
-          description: When true, the LLM judge always scores this criterion regardless of relevance (skips applicability assessment). The service-generated general quality/policy criterion has this set to true and is non-editable. Users may set this on their own custom criteria.
-          default: false
-      description: A single rubric criterion — one measurable quality dimension in an evaluator's scoring blueprint.
+      description: Rubric-based evaluator definition — stores dimensions produced by the generate API. Used for both quality and safety evaluators.
     SASCredentials:
       type: object
       required:
@@ -31631,6 +33434,24 @@ components:
       allOf:
         - $ref: '#/components/schemas/ItemGenerationParams'
       description: Represents the parameters for synthetic data generation item generation.
+    SystemDataV3:
+      type: object
+      properties:
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
+          description: Timestamp of resource creation
+        createdBy:
+          type: string
+          description: Identity that created the resource
+        createdByType:
+          type: string
+          description: Type of identity that created the resource
+        lastModifiedAt:
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
+          description: Timestamp of last resource modification
+      description: System metadata for a resource
     SystemMessage:
       type: object
       required:
@@ -32109,7 +33930,7 @@ components:
       type: object
       required:
         - type
-        - agent_name
+        - start_time
       properties:
         description:
           type: string
@@ -32121,10 +33942,10 @@ components:
           description: The source type for this source, which is Traces.
         agent_id:
           type: string
-          description: The unique agent ID used to filter traces. Optional — when omitted, traces are filtered by `agent_name` (and `agent_version` if specified).
+          description: The unique agent ID used to filter traces. Provide either `agent_id` or `agent_name` — at least one is required.
         agent_name:
           type: string
-          description: The agent name to fetch traces for.
+          description: The agent name to fetch traces for. Provide either `agent_id` or `agent_name` — at least one is required.
         agent_version:
           type: string
           description: The agent version. If not specified, traces for ALL versions of the agent are included within the time window.
@@ -32136,18 +33957,48 @@ components:
           allOf:
             - $ref: '#/components/schemas/FoundryTimestamp'
           description: End of the time window (Unix timestamp in seconds). Defaults to current time.
-        max_traces:
-          type: integer
-          format: int32
-          description: Maximum number of traces to retrieve.
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobSource'
       description: Traces source for data generation jobs — conversation traces from Application Insights.
+    TracesEvaluationSuiteJobSource:
+      type: object
+      required:
+        - type
+        - start_time
+      properties:
+        description:
+          type: string
+          description: Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').
+        type:
+          type: string
+          enum:
+            - traces
+          description: The source type for this source, which is Traces.
+        agent_id:
+          type: string
+          description: The unique agent ID used to filter traces. Provide either `agent_id` or `agent_name` — at least one is required.
+        agent_name:
+          type: string
+          description: The agent name to fetch traces for. Provide either `agent_id` or `agent_name` — at least one is required.
+        agent_version:
+          type: string
+          description: The agent version. If not specified, traces for ALL versions of the agent are included within the time window.
+        start_time:
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
+          description: Start of the time window (Unix timestamp in seconds) for fetching traces.
+        end_time:
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
+          description: End of the time window (Unix timestamp in seconds). Defaults to current time.
+      allOf:
+        - $ref: '#/components/schemas/EvaluationSuiteJobSource'
+      description: Traces source for evaluation suite generation jobs — conversation traces from Application Insights.
     TracesEvaluatorGenerationJobSource:
       type: object
       required:
         - type
-        - agent_name
+        - start_time
       properties:
         description:
           type: string
@@ -32159,10 +34010,10 @@ components:
           description: The source type for this source, which is Traces.
         agent_id:
           type: string
-          description: The unique agent ID used to filter traces. Optional — when omitted, traces are filtered by `agent_name` (and `agent_version` if specified).
+          description: The unique agent ID used to filter traces. Provide either `agent_id` or `agent_name` — at least one is required.
         agent_name:
           type: string
-          description: The agent name to fetch traces for.
+          description: The agent name to fetch traces for. Provide either `agent_id` or `agent_name` — at least one is required.
         agent_version:
           type: string
           description: The agent version. If not specified, traces for ALL versions of the agent are included within the time window.
@@ -32174,10 +34025,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/FoundryTimestamp'
           description: End of the time window (Unix timestamp in seconds). Defaults to current time.
-        max_traces:
-          type: integer
-          format: int32
-          description: Maximum number of traces to retrieve.
       allOf:
         - $ref: '#/components/schemas/EvaluatorGenerationJobSource'
       description: Traces source for evaluator generation jobs — conversation traces from Application Insights.
@@ -32351,6 +34198,18 @@ components:
           description: |-
             Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.
                 Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
+    UpdateModelVersionRequest:
+      type: object
+      properties:
+        description:
+          type: string
+          description: The asset description text.
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+          description: Tag dictionary. Tags can be added, removed, and updated.
+      description: Request body for updating a model version. Only description and tags can be modified.
     UpdateToolboxRequest:
       type: object
       required:
