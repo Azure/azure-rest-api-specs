@@ -654,7 +654,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/KnowledgeBaseOperationStatus"
+              "$ref": "#/definitions/KnowledgeBaseOperationResponse"
             }
           },
           "default": {
@@ -787,31 +787,26 @@
       "properties": {
         "type": {
           "$ref": "#/definitions/CitationType",
-          "description": "The type of citation.",
-          "readOnly": true
+          "description": "The type of citation."
         },
         "index": {
           "type": "integer",
           "format": "int32",
-          "description": "Zero-based index of the citation in the result.",
-          "readOnly": true
+          "description": "Zero-based index of the citation in the result."
         },
         "fileName": {
           "type": "string",
-          "description": "The source file name.",
-          "readOnly": true
+          "description": "The source file name."
         },
         "startOffset": {
           "type": "integer",
           "format": "int32",
-          "description": "Character offset where the cited passage begins.",
-          "readOnly": true
+          "description": "Character offset where the cited passage begins."
         },
         "endOffset": {
           "type": "integer",
           "format": "int32",
-          "description": "Character offset where the cited passage ends.",
-          "readOnly": true
+          "description": "Character offset where the cited passage ends."
         }
       },
       "required": [
@@ -1023,6 +1018,11 @@
           "description": "Error details if provisioning failed.",
           "readOnly": true
         },
+        "status": {
+          "$ref": "#/definitions/IndexingStatus",
+          "description": "The status",
+          "readOnly": true
+        },
         "createdByApiVersion": {
           "type": "string",
           "description": "The API version used to create this knowledge base.",
@@ -1151,9 +1151,25 @@
         }
       }
     },
-    "KnowledgeBaseOperationStatus": {
+    "KnowledgeBaseIndexingOperationResponse": {
       "type": "object",
-      "description": "Status indicating the KnowledgeBase operation.",
+      "description": "Response for indexing operations.",
+      "properties": {
+        "indexingResult": {
+          "$ref": "#/definitions/IndexingOperationResult",
+          "description": "Result details for indexing operations."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeBaseOperationResponse"
+        }
+      ],
+      "x-ms-discriminator-value": "Indexing"
+    },
+    "KnowledgeBaseOperationResponse": {
+      "type": "object",
+      "description": "Response indicating the KnowledgeBase operation.",
       "properties": {
         "id": {
           "type": "string",
@@ -1161,7 +1177,7 @@
         },
         "status": {
           "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-          "description": "The status of the operation"
+          "description": "The status of the operation."
         },
         "error": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",
@@ -1170,16 +1186,9 @@
         "operationType": {
           "$ref": "#/definitions/KnowledgeBaseOperationType",
           "description": "The type of operation."
-        },
-        "indexingResult": {
-          "$ref": "#/definitions/IndexingOperationResult",
-          "description": "Result details for indexing operations."
-        },
-        "searchResult": {
-          "$ref": "#/definitions/SearchResponse",
-          "description": "Result details for search operations."
         }
       },
+      "discriminator": "operationType",
       "required": [
         "id",
         "status",
@@ -1221,6 +1230,22 @@
           }
         ]
       }
+    },
+    "KnowledgeBaseSearchOperationResponse": {
+      "type": "object",
+      "description": "Response for search operations.",
+      "properties": {
+        "searchResult": {
+          "$ref": "#/definitions/SearchResponse",
+          "description": "Result details for search operations."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeBaseOperationResponse"
+        }
+      ],
+      "x-ms-discriminator-value": "Search"
     },
     "LastIndexingRun": {
       "type": "object",
@@ -1385,8 +1410,7 @@
           "description": "The search results.",
           "items": {
             "$ref": "#/definitions/SearchResultItem"
-          },
-          "readOnly": true
+          }
         }
       },
       "required": [
@@ -1399,16 +1423,14 @@
       "properties": {
         "text": {
           "type": "string",
-          "description": "The generated response text for this result.",
-          "readOnly": true
+          "description": "The generated response text for this result."
         },
         "citations": {
           "type": "array",
           "description": "Source citations for this result.",
           "items": {
             "$ref": "#/definitions/Citation"
-          },
-          "readOnly": true
+          }
         }
       },
       "required": [

@@ -13,7 +13,6 @@ using Microsoft.Discovery.Common;
 
 @versioned(Microsoft.Discovery.Workspace.Versions)
 namespace Microsoft.Discovery.Workspace;
-
 @removed(Versions.`2026-02-01-preview`)
 @doc("Enumeration for log type.")
 union LogType {
@@ -28,7 +27,6 @@ union LogType {
 
   string,
 }
-
 @removed(Versions.`2026-02-01-preview`)
 @doc("Enumeration for tool type.")
 union ToolType {
@@ -49,7 +47,6 @@ union ToolType {
 
   string,
 }
-
 @removed(Versions.`2026-02-01-preview`)
 @doc("Log level for a message log.")
 union LogLevel {
@@ -58,7 +55,6 @@ union LogLevel {
 
   string,
 }
-
 @removed(Versions.`2026-02-01-preview`)
 @doc("Status of a log entry activity.")
 union LogStatus {
@@ -79,7 +75,6 @@ union LogStatus {
 
   string,
 }
-
 @removed(Versions.`2026-02-01-preview`)
 @doc("Indicates if a log entry represents an action.")
 union IsAction {
@@ -91,7 +86,6 @@ union IsAction {
 
   string,
 }
-
 @removed(Versions.`2026-02-01-preview`)
 @doc("A copilot log related to a message.")
 @resource("logs")
@@ -166,7 +160,6 @@ model MessageLog {
   @visibility(Lifecycle.Read)
   completedAt: int64;
 }
-
 @removed(Versions.`2026-02-01-preview`)
 @doc("Operations for message logs in a conversation.")
 interface MessageLogs {

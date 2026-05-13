@@ -27,7 +27,26 @@ model Conversation {
   @pattern(conversationNamePattern)
   name: string;
 
-  ...DataPlaneResource;
+  // Conversation is response-only, so we inline these properties without
+  // @visibility(Lifecycle.Read) to avoid them being marked "readOnly" in OpenAPI.
+  @doc("The timestamp when the resource was created.")
+  createdAt?: utcDateTime;
+
+  @doc("The ID of the user who created this resource.")
+  createdBy?: string;
+
+  @doc("The type of user who created this resource.")
+  createdByType?: ByType;
+
+  @doc("The timestamp when the resource was last updated")
+  lastModifiedAt?: utcDateTime;
+
+  @doc("The ID of the user who updated this resource.")
+  lastModifiedBy?: string;
+
+  @doc("The type of user who updated this resource.")
+  lastModifiedByType?: ByType;
+
   ...WithOptionalTitle;
   ...WithInvestigationNameOptional;
   ...WithProjectNameOptional;
@@ -57,7 +76,16 @@ interface Conversations {
   >;
 
   @doc("Updates a Conversation.")
+  @sharedRoute
+  @removed(Versions.`2026-06-01`)
   update is StandardResourceOperations.ResourceCreateOrUpdate<Conversation>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Versioned operation needs explicit operationId"
+  @doc("Updates a Conversation.")
+  @sharedRoute
+  @added(Versions.`2026-06-01`)
+  @operationId("Conversations_Update")
+  stableUpdate is StandardResourceOperations.ResourceUpdate<Conversation>;
 
   @doc("Deletes a Conversation.")
   delete is ResourceDelete<Conversation>;
@@ -87,7 +115,7 @@ interface Conversations {
     WithQueryInvestigationName &
       WithQueryProjectName &
       WithQueryCreatedSince &
-      ListPaginationParameters,
+      Azure.Core.StandardListQueryParameters,
     Azure.Core.Foundations.CustomPage<Conversation>
   >;
 }
