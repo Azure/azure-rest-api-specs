@@ -48,8 +48,10 @@ interface MongoDBCollectionGetResultsOperationGroup {
   createUpdateMongoDBCollection is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     MongoDBCollectionGetResults,
     Request = MongoDBCollectionCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<MongoDBCollectionGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = MongoDBCollectionGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<MongoDBCollectionGetResults>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = MongoDBCollectionGetResults> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -58,7 +60,9 @@ interface MongoDBCollectionGetResultsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deleteMongoDBCollection is ArmResourceDeleteWithoutOkAsync<
     MongoDBCollectionGetResults,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | NoContentResponse
+    Response =
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+      | NoContentResponse
   >;
 
   /**
@@ -79,8 +83,10 @@ interface MongoDBCollectionGetResultsOperationGroup {
     MongoDBCollectionGetResults,
     MergeParameters,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<MongoDBCollectionGetResults>,
-    Response = ArmResponse<PhysicalPartitionStorageInfoCollection> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionStorageInfoCollection> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResponse<PhysicalPartitionStorageInfoCollection>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionStorageInfoCollection> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = CloudError
   >;
 
@@ -96,19 +102,24 @@ interface MongoDBCollectionGetResultsOperationGroup {
 }
 
 @@doc(MongoDBCollectionGetResults.name, "Cosmos DB collection name.");
-@@doc(MongoDBCollectionGetResults.properties,
+@@doc(
+  MongoDBCollectionGetResults.properties,
   "The properties of an Azure Cosmos DB MongoDB collection"
 );
-@@doc(MongoDBCollectionGetResultsOperationGroup.createUpdateMongoDBCollection::parameters.resource,
+@@doc(
+  MongoDBCollectionGetResultsOperationGroup.createUpdateMongoDBCollection::parameters.resource,
   "The parameters to provide for the current MongoDB Collection."
 );
-@@doc(MongoDBCollectionGetResultsOperationGroup.listMongoDBCollectionPartitionMerge::parameters.body,
+@@doc(
+  MongoDBCollectionGetResultsOperationGroup.listMongoDBCollectionPartitionMerge::parameters.body,
   "The parameters for the merge operation."
 );
-@@doc(MongoDBCollectionGetResultsOperationGroup.retrieveContinuousBackupInformation::parameters.body,
+@@doc(
+  MongoDBCollectionGetResultsOperationGroup.retrieveContinuousBackupInformation::parameters.body,
   "The name of the continuous backup restore location."
 );
-@@visibility(MongoDBCollectionGetResults.location,
+@@visibility(
+  MongoDBCollectionGetResults.location,
   Lifecycle.Read,
   Lifecycle.Create,
   Lifecycle.Update

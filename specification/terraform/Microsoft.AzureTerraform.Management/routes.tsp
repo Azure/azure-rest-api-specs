@@ -20,17 +20,15 @@ interface Terraform {
   @useFinalStateVia("azure-async-operation")
   @returnTypeChangedFrom(
     Versions.v2025_09_01_preview,
-    ArmAcceptedLroResponse<
-      "Resource operation accepted.",
-      LroHeaders
-    > | ErrorResponse
+
+      | ArmAcceptedLroResponse<"Resource operation accepted.", LroHeaders>
+      | ErrorResponse
   )
   exportTerraform is ArmProviderActionAsync<
     BaseExportModel,
-    ArmAcceptedLroResponse<
-      "Resource operation accepted.",
-      LroHeaders
-    > | ArmResponse<TerraformOperationStatus>,
+
+      | ArmAcceptedLroResponse<"Resource operation accepted.", LroHeaders>
+      | ArmResponse<TerraformOperationStatus>,
     Scope = SubscriptionActionScope,
     LroHeaders = LroHeaders
   >;

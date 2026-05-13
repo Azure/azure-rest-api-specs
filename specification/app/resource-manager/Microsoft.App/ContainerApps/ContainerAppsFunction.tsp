@@ -117,6 +117,7 @@ interface ContainerAppsFunctions {
 }
 
 @@doc(ContainerAppsFunction.name, "Name of the Function.");
-@@doc(ContainerAppsFunction.properties,
+@@doc(
+  ContainerAppsFunction.properties,
   "Function resource specific properties"
 );

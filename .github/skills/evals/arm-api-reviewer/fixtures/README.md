@@ -46,7 +46,7 @@ rule category without interference from other issues.
 
 ## Fixture Catalog
 
-### `arm-openapi/` -- ARM OpenAPI Specifications (14 files)
+### `arm-openapi/` -- ARM OpenAPI Specifications (15 files)
 
 | File                              | Violations                    | Description                                                                                                                                                                                  |
 | --------------------------------- | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -64,6 +64,7 @@ rule category without interference from other issues.
 | `patch-violations.json`           | PATCH body issues             | Required properties in PATCH body; default values; create-only mutability on PATCH fields.                                                                                                   |
 | `put-response-mismatch.json`      | PUT response mismatch         | 200 and 201 responses use different schemas; request body differs from 201 response.                                                                                                         |
 | `secret-property.json`            | Secret property issues        | connectionString, adminPassword, and primaryKey without x-ms-secret annotation.                                                                                                              |
+| `typespec-generated-spec.json`    | None (true negative)          | Compliant ARM spec carrying the `x-typespec-generated` extension at the top level. Used by the TSP-REQUIRED-V1 eval to verify TypeSpec-generated swagger is not flagged.                     |
 
 ### `examples/` -- Example JSON Files (3 files)
 
@@ -85,13 +86,13 @@ rule category without interference from other issues.
 Each subdirectory contains a `stable-2024-01-01.json` (previous) and
 `stable-2025-01-01.json` (new) for breaking-change detection testing.
 
-| Pair                       | Violations                  | Description                                                                                           |
-| -------------------------- | --------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `removed-property/`        | Removed properties          | `category` and `priority` properties removed between versions.                                        |
-| `type-change/`             | Property type change        | `maxRetries` changed from string to integer between versions.                                         |
-| `enum-narrowing/`          | Enum value removal          | `status` enum narrowed from 5 values to 3 (Suspended, Archived dropped).                              |
-| `new-vs-existing/`         | Mixed classification        | `bar` has no description in both versions (EXISTING); `baz` is newly added without description (NEW). |
-| `added-required-property/` | Optional becomes required   | `sku` property changes from optional to required in WidgetProperties between versions.                |
+| Pair                       | Violations                | Description                                                                                           |
+| -------------------------- | ------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `removed-property/`        | Removed properties        | `category` and `priority` properties removed between versions.                                        |
+| `type-change/`             | Property type change      | `maxRetries` changed from string to integer between versions.                                         |
+| `enum-narrowing/`          | Enum value removal        | `status` enum narrowed from 5 values to 3 (Suspended, Archived dropped).                              |
+| `new-vs-existing/`         | Mixed classification      | `bar` has no description in both versions (EXISTING); `baz` is newly added without description (NEW). |
+| `added-required-property/` | Optional becomes required | `sku` property changes from optional to required in WidgetProperties between versions.                |
 
 ### `typespec/` -- TypeSpec Specification Files (3 files)
 
