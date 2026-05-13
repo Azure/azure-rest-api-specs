@@ -5,13 +5,15 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Microsoft.ContainerRegistry;
 
-@@clientName(Microsoft.ContainerRegistry,
+@@clientName(
+  Microsoft.ContainerRegistry,
   "ContainerRegistryManagementClient",
   "javascript,python"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.CommonTypes.PrivateLinkResource.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Azure.ResourceManager.CommonTypes.PrivateLinkResource.properties,
   "java,python"
 );
 
@@ -19,7 +21,8 @@ using Microsoft.ContainerRegistry;
 @@clientName(IPRule.value, "ipAddressOrRange", "java");
 @@clientName(Source.instanceID, "instanceId", "java");
 
-@@alternateType(RegistryNameCheckRequest.type,
+@@alternateType(
+  RegistryNameCheckRequest.type,
   "Microsoft.ContainerRegistry/registries",
   "java,go"
 );
@@ -47,54 +50,65 @@ namespace Microsoft.ContainerRegistry {
 @@access(ContainerRegistryResourceType, Access.internal, "csharp");
 
 @@alternateType(ArchivePackageSourceProperties.url, url, "csharp");
-@@alternateType(CacheRule.identity,
+@@alternateType(
+  CacheRule.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
-@@alternateType(CacheRuleProperties.credentialSetResourceId,
+@@alternateType(
+  CacheRuleProperties.credentialSetResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(CacheRuleUpdateParameters.identity,
+@@alternateType(
+  CacheRuleUpdateParameters.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
-@@alternateType(CacheRuleUpdateProperties.credentialSetResourceId,
+@@alternateType(
+  CacheRuleUpdateProperties.credentialSetResourceId,
   armResourceIdentifier,
   "csharp"
 );
 @@alternateType(CallbackConfig.serviceUri, url, "csharp");
-@@alternateType(ConnectedRegistryProperties.clientTokenIds,
+@@alternateType(
+  ConnectedRegistryProperties.clientTokenIds,
   armResourceIdentifier[],
   "csharp"
 );
-@@alternateType(ConnectedRegistryUpdateProperties.clientTokenIds,
+@@alternateType(
+  ConnectedRegistryUpdateProperties.clientTokenIds,
   armResourceIdentifier[],
   "csharp"
 );
-@@alternateType(CredentialSet.identity,
+@@alternateType(
+  CredentialSet.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
-@@alternateType(CredentialSetUpdateParameters.identity,
+@@alternateType(
+  CredentialSetUpdateParameters.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
 @@alternateType(EventContent.id, uuid, "csharp");
 @@alternateType(EventInfo.id, uuid, "csharp");
 @@alternateType(EventRequestMessage.requestUri, url, "csharp");
-@@alternateType(ExportPipeline.identity,
+@@alternateType(
+  ExportPipeline.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
 @@alternateType(ExportPipeline.location, azureLocation, "csharp");
 @@alternateType(ExportPipelineTargetProperties.keyVaultUri, url, "csharp");
 @@alternateType(ExportPipelineTargetProperties.uri, url, "csharp");
-@@alternateType(GenerateCredentialsParameters.tokenId,
+@@alternateType(
+  GenerateCredentialsParameters.tokenId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ImportPipeline.identity,
+@@alternateType(
+  ImportPipeline.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
@@ -104,20 +118,24 @@ namespace Microsoft.ContainerRegistry {
 @@alternateType(ImportSource.registryUri, url, "csharp");
 @@alternateType(ImportSource.resourceId, armResourceIdentifier, "csharp");
 @@alternateType(ParentProperties.id, armResourceIdentifier, "csharp");
-@@alternateType(PipelineRunRequest.pipelineResourceId,
+@@alternateType(
+  PipelineRunRequest.pipelineResourceId,
   armResourceIdentifier,
   "csharp"
 );
 @@alternateType(PrivateEndpoint.id, armResourceIdentifier, "csharp");
-@@alternateType(Registry.identity,
+@@alternateType(
+  Registry.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
-@@alternateType(RegistryNameCheckRequest.type,
+@@alternateType(
+  RegistryNameCheckRequest.type,
   Microsoft.ContainerRegistry.ContainerRegistryResourceTypeExtensible,
   "csharp"
 );
-@@alternateType(RegistryUpdateParameters.identity,
+@@alternateType(
+  RegistryUpdateParameters.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
@@ -126,7 +144,8 @@ namespace Microsoft.ContainerRegistry {
 @@alternateType(SyncProperties.tokenId, armResourceIdentifier, "csharp");
 @@alternateType(Target.url, url, "csharp");
 @@alternateType(TokenProperties.scopeMapId, armResourceIdentifier, "csharp");
-@@alternateType(TokenUpdateProperties.scopeMapId,
+@@alternateType(
+  TokenUpdateProperties.scopeMapId,
   armResourceIdentifier,
   "csharp"
 );
@@ -136,12 +155,14 @@ namespace Microsoft.ContainerRegistry {
 
 @@clientName(Action, "ContainerRegistryIPRuleAction", "csharp");
 @@clientName(ActivationStatus, "ConnectedRegistryActivationStatus", "csharp");
-@@clientName(ActionsRequired,
+@@clientName(
+  ActionsRequired,
   "ActionsRequiredForPrivateLinkServiceConsumer",
   "csharp"
 );
 @@clientName(Archive, "ContainerRegistryArchive", "csharp");
-@@clientName(ArchivePackageSourceProperties,
+@@clientName(
+  ArchivePackageSourceProperties,
   "ContainerRegistryArchivePackageSourceProperties",
   "csharp"
 );
@@ -150,43 +171,51 @@ namespace Microsoft.ContainerRegistry {
 @@clientName(ArchiveVersion, "ContainerRegistryArchiveVersion", "csharp");
 @@clientName(AuditLogStatus, "ConnectedRegistryAuditLogStatus", "csharp");
 @@clientName(AuthCredential, "ContainerRegistryAuthCredential", "csharp");
-@@clientName(AzureADAuthenticationAsArmPolicyStatus,
+@@clientName(
+  AzureADAuthenticationAsArmPolicyStatus,
   "AadAuthenticationAsArmPolicyStatus",
   "csharp"
 );
 @@clientName(CacheRule, "ContainerRegistryCacheRule", "csharp");
-@@clientName(CallbackConfig,
+@@clientName(
+  CallbackConfig,
   "ContainerRegistryWebhookCallbackConfig",
   "csharp"
 );
 @@clientName(CertificateType, "ContainerRegistryCertificateType", "csharp");
 @@clientName(ConnectedRegistryMode, "ConnectedRegistryMode", "csharp");
-@@clientName(ConnectedRegistryProperties.clientTokenIds,
+@@clientName(
+  ConnectedRegistryProperties.clientTokenIds,
   "ClientTokenIds",
   "csharp"
 );
 @@clientName(ConnectedRegistryProperties.mode, "Mode", "csharp");
-@@clientName(ConnectedRegistryUpdateProperties.clientTokenIds,
+@@clientName(
+  ConnectedRegistryUpdateProperties.clientTokenIds,
   "ClientTokenIds",
   "csharp"
 );
 @@clientName(ConnectionState, "ConnectedRegistryConnectionState", "csharp");
-@@clientName(ConnectionStatus,
+@@clientName(
+  ConnectionStatus,
   "ContainerRegistryPrivateLinkServiceConnectionStatus",
   "csharp"
 );
-@@clientName(ContainerRegistryResourceType,
+@@clientName(
+  ContainerRegistryResourceType,
   "ContainerRegistryResourceTypeValue",
   "csharp"
 );
 @@clientName(CredentialHealth, "ContainerRegistryCredentialHealth", "csharp");
-@@clientName(CredentialHealthStatus,
+@@clientName(
+  CredentialHealthStatus,
   "ContainerRegistryCredentialHealthStatus",
   "csharp"
 );
 @@clientName(CredentialName, "ContainerRegistryCredentialName", "csharp");
 @@clientName(CredentialSet, "ContainerRegistryCredentialSet", "csharp");
-@@clientName(DefaultAction,
+@@clientName(
+  DefaultAction,
   "ContainerRegistryNetworkRuleDefaultAction",
   "csharp"
 );
@@ -196,68 +225,82 @@ namespace Microsoft.ContainerRegistry {
 @@clientName(Event, "ContainerRegistryWebhookEvent", "csharp");
 @@clientName(EventContent, "ContainerRegistryWebhookEventContent", "csharp");
 @@clientName(EventInfo, "ContainerRegistryWebhookEventInfo", "csharp");
-@@clientName(EventRequestMessage,
+@@clientName(
+  EventRequestMessage,
   "ContainerRegistryWebhookEventRequestMessage",
   "csharp"
 );
-@@clientName(EventResponseMessage,
+@@clientName(
+  EventResponseMessage,
   "ContainerRegistryWebhookEventResponseMessage",
   "csharp"
 );
 @@clientName(ExportPipeline, "ContainerRegistryExportPipeline", "csharp");
-@@clientName(ExportPipelineTargetProperties,
+@@clientName(
+  ExportPipelineTargetProperties,
   "ContainerRegistryExportPipelineTargetProperties",
   "csharp"
 );
-@@clientName(ExportPipelineTargetProperties.keyVaultUri,
+@@clientName(
+  ExportPipelineTargetProperties.keyVaultUri,
   "KeyVaultUri",
   "csharp"
 );
-@@clientName(ExportPipelineTargetProperties.type,
+@@clientName(
+  ExportPipelineTargetProperties.type,
   "ExportPipelineTargetPropertiesType",
   "csharp"
 );
 @@clientName(ExportPipelineTargetProperties.uri, "Uri", "csharp");
-@@clientName(ExportPolicyStatus,
+@@clientName(
+  ExportPolicyStatus,
   "ContainerRegistryExportPolicyStatus",
   "csharp"
 );
-@@clientName(GenerateCredentialsParameters,
+@@clientName(
+  GenerateCredentialsParameters,
   "ContainerRegistryGenerateCredentialsContent",
   "csharp"
 );
 @@clientName(GenerateCredentialsParameters.expiry, "ExpireOn", "csharp");
-@@clientName(GenerateCredentialsResult,
+@@clientName(
+  GenerateCredentialsResult,
   "ContainerRegistryGenerateCredentialsResult",
   "csharp"
 );
 @@clientName(IPRule, "ContainerRegistryIPRule", "csharp");
-@@clientName(ImportImageParameters,
+@@clientName(
+  ImportImageParameters,
   "ContainerRegistryImportImageContent",
   "csharp"
 );
 @@clientName(ImportMode, "ContainerRegistryImportMode", "csharp");
 @@clientName(ImportPipeline, "ContainerRegistryImportPipeline", "csharp");
-@@clientName(ImportPipelineSourceProperties,
+@@clientName(
+  ImportPipelineSourceProperties,
   "ContainerRegistryImportPipelineSourceProperties",
   "csharp"
 );
-@@clientName(ImportPipelineSourceProperties.keyVaultUri,
+@@clientName(
+  ImportPipelineSourceProperties.keyVaultUri,
   "KeyVaultUri",
   "csharp"
 );
 @@clientName(ImportPipelineSourceProperties.type, "SourceType", "csharp");
 @@clientName(ImportPipelineSourceProperties.uri, "Uri", "csharp");
 @@clientName(ImportSource, "ContainerRegistryImportSource", "csharp");
-@@clientName(ImportSourceCredentials,
+@@clientName(
+  ImportSourceCredentials,
   "ContainerRegistryImportSourceCredentials",
   "csharp"
 );
-@@clientName(KeyVaultProperties,
+@@clientName(
+  KeyVaultProperties,
   "ContainerRegistryKeyVaultProperties",
   "csharp"
 );
-@@clientName(KeyVaultProperties.keyRotationEnabled,
+@@clientName(
+  KeyVaultProperties.keyRotationEnabled,
   "IsKeyRotationEnabled",
   "csharp"
 );
@@ -265,11 +308,13 @@ namespace Microsoft.ContainerRegistry {
 @@clientName(LoggingProperties, "ConnectedRegistryLogging", "csharp");
 @@clientName(LoginServerProperties, "ConnectedRegistryLoginServer", "csharp");
 @@clientName(MetadataSearch, "ContainerRegistryMetadataSearch", "csharp");
-@@clientName(Microsoft.ContainerRegistry.ContainerRegistryResourceTypeExtensible,
+@@clientName(
+  Microsoft.ContainerRegistry.ContainerRegistryResourceTypeExtensible,
   "ContainerRegistryResourceType",
   "csharp"
 );
-@@clientName(NetworkRuleBypassOptions,
+@@clientName(
+  NetworkRuleBypassOptions,
   "ContainerRegistryNetworkRuleBypassOption",
   "csharp"
 );
@@ -280,147 +325,178 @@ namespace Microsoft.ContainerRegistry {
 @@clientName(PasswordName, "ContainerRegistryPasswordName", "csharp");
 @@clientName(PipelineOptions, "PipelineOption", "csharp");
 @@clientName(PipelineRun, "ContainerRegistryPipelineRun", "csharp");
-@@clientName(PipelineRunRequest,
+@@clientName(
+  PipelineRunRequest,
   "ContainerRegistryPipelineRunContent",
   "csharp"
 );
-@@clientName(PipelineRunRequest.pipelineResourceId,
+@@clientName(
+  PipelineRunRequest.pipelineResourceId,
   "PipelineResourceId",
   "csharp"
 );
-@@clientName(PipelineRunResponse,
+@@clientName(
+  PipelineRunResponse,
   "ContainerRegistryPipelineRunResult",
   "csharp"
 );
-@@clientName(PipelineRunResponse.importedArtifacts,
+@@clientName(
+  PipelineRunResponse.importedArtifacts,
   "ImportedArtifacts",
   "csharp"
 );
-@@clientName(PipelineRunSourceProperties,
+@@clientName(
+  PipelineRunSourceProperties,
   "ContainerRegistryPipelineRunSourceProperties",
   "csharp"
 );
 @@clientName(PipelineRunSourceProperties.type, "SourceType", "csharp");
-@@clientName(PipelineRunSourceType,
+@@clientName(
+  PipelineRunSourceType,
   "ContainerRegistryPipelineRunSourceType",
   "csharp"
 );
-@@clientName(PipelineRunTargetProperties,
+@@clientName(
+  PipelineRunTargetProperties,
   "ContainerRegistryPipelineRunTargetProperties",
   "csharp"
 );
 @@clientName(PipelineRunTargetProperties.type, "TargetType", "csharp");
-@@clientName(PipelineRunTargetType,
+@@clientName(
+  PipelineRunTargetType,
   "ContainerRegistryPipelineRunTargetType",
   "csharp"
 );
-@@clientName(PipelineSourceTriggerDescriptor.timestamp,
+@@clientName(
+  PipelineSourceTriggerDescriptor.timestamp,
   "SourceTriggerTimestamp",
   "csharp"
 );
 @@clientName(PipelineSourceTriggerProperties.status, "Status", "csharp");
 @@clientName(PipelineTriggerDescriptor.sourceTrigger, "Source", "csharp");
-@@clientName(PipelineSourceType,
+@@clientName(
+  PipelineSourceType,
   "ContainerRegistryPipelineSourceType",
   "csharp"
 );
 @@clientName(Policies, "ContainerRegistryPolicies", "csharp");
 @@clientName(PolicyStatus, "ContainerRegistryPolicyStatus", "csharp");
-@@clientName(PrivateEndpointConnection,
+@@clientName(
+  PrivateEndpointConnection,
   "ContainerRegistryPrivateEndpointConnection",
   "csharp"
 );
-@@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+@@clientName(
+  PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
   "ConnectionState",
   "csharp"
 );
-@@clientName(MyPrivateLinkResource,
+@@clientName(
+  MyPrivateLinkResource,
   "ContainerRegistryPrivateLinkResource",
   "csharp"
 );
 @@clientName(ProvisioningState, "ContainerRegistryProvisioningState", "csharp");
-@@clientName(PublicNetworkAccess,
+@@clientName(
+  PublicNetworkAccess,
   "ContainerRegistryPublicNetworkAccess",
   "csharp"
 );
-@@clientName(RegenerateCredentialParameters,
+@@clientName(
+  RegenerateCredentialParameters,
   "ContainerRegistryCredentialRegenerateContent",
   "csharp"
 );
 @@clientName(RegionalEndpoints, "RegionalEndpoint", "csharp");
-@@clientName(Registries.checkNameAvailability,
+@@clientName(
+  Registries.checkNameAvailability,
   "CheckContainerRegistryNameAvailability",
   "csharp"
 );
 @@clientName(Registry, "ContainerRegistry", "csharp");
-@@clientName(RegistryListCredentialsResult,
+@@clientName(
+  RegistryListCredentialsResult,
   "ContainerRegistryListCredentialsResult",
   "csharp"
 );
-@@clientName(RegistryNameCheckRequest,
+@@clientName(
+  RegistryNameCheckRequest,
   "ContainerRegistryNameAvailabilityContent",
   "csharp"
 );
 @@clientName(RegistryNameCheckRequest.type, "ResourceType", "csharp");
-@@clientName(RegistryNameStatus,
+@@clientName(
+  RegistryNameStatus,
   "ContainerRegistryNameAvailableResult",
   "csharp"
 );
 @@clientName(RegistryNameStatus.nameAvailable, "IsNameAvailable", "csharp");
 @@clientName(RegistryPassword, "ContainerRegistryPassword", "csharp");
-@@clientName(RegistryProperties.adminUserEnabled,
+@@clientName(
+  RegistryProperties.adminUserEnabled,
   "IsAdminUserEnabled",
   "csharp"
 );
-@@clientName(RegistryProperties.anonymousPullEnabled,
+@@clientName(
+  RegistryProperties.anonymousPullEnabled,
   "IsAnonymousPullEnabled",
   "csharp"
 );
-@@clientName(RegistryProperties.dataEndpointEnabled,
+@@clientName(
+  RegistryProperties.dataEndpointEnabled,
   "IsDataEndpointEnabled",
   "csharp"
 );
-@@clientName(RegistryProperties.networkRuleBypassAllowedForTasks,
+@@clientName(
+  RegistryProperties.networkRuleBypassAllowedForTasks,
   "IsNetworkRuleBypassAllowedForTasks",
   "csharp"
 );
-@@clientName(RegistryPropertiesUpdateParameters.adminUserEnabled,
+@@clientName(
+  RegistryPropertiesUpdateParameters.adminUserEnabled,
   "IsAdminUserEnabled",
   "csharp"
 );
-@@clientName(RegistryPropertiesUpdateParameters.anonymousPullEnabled,
+@@clientName(
+  RegistryPropertiesUpdateParameters.anonymousPullEnabled,
   "IsAnonymousPullEnabled",
   "csharp"
 );
-@@clientName(RegistryPropertiesUpdateParameters.dataEndpointEnabled,
+@@clientName(
+  RegistryPropertiesUpdateParameters.dataEndpointEnabled,
   "IsDataEndpointEnabled",
   "csharp"
 );
-@@clientName(RegistryPropertiesUpdateParameters.networkRuleBypassAllowedForTasks,
+@@clientName(
+  RegistryPropertiesUpdateParameters.networkRuleBypassAllowedForTasks,
   "IsNetworkRuleBypassAllowedForTasks",
   "csharp"
 );
 @@clientName(RegistrySyncResult, "ContainerRegistrySyncResult", "csharp");
 @@clientName(RegistryUpdateParameters, "ContainerRegistryPatch", "csharp");
 @@clientName(RegistryUsage, "ContainerRegistryUsage", "csharp");
-@@clientName(RegistryUsageListResult,
+@@clientName(
+  RegistryUsageListResult,
   "ContainerRegistryUsageListResult",
   "csharp"
 );
 @@clientName(RegistryUsageUnit, "ContainerRegistryUsageUnit", "csharp");
 @@clientName(Replication, "ContainerRegistryReplication", "csharp");
-@@clientName(ReplicationProperties.regionEndpointEnabled,
+@@clientName(
+  ReplicationProperties.regionEndpointEnabled,
   "IsRegionEndpointEnabled",
   "csharp"
 );
-@@clientName(ReplicationUpdateParametersProperties.regionEndpointEnabled,
+@@clientName(
+  ReplicationUpdateParametersProperties.regionEndpointEnabled,
   "IsRegionEndpointEnabled",
   "csharp"
 );
 @@clientName(Request, "ContainerRegistryWebhookEventRequestContent", "csharp");
 @@clientName(Request.useragent, "UserAgent", "csharp");
 @@clientName(RetentionPolicy, "ContainerRegistryRetentionPolicy", "csharp");
-@@clientName(RoleAssignmentMode,
+@@clientName(
+  RoleAssignmentMode,
   "ContainerRegistryRoleAssignmentMode",
   "csharp"
 );
@@ -435,16 +511,19 @@ namespace Microsoft.ContainerRegistry {
 @@clientName(SyncProperties, "ConnectedRegistrySyncProperties", "csharp");
 @@clientName(SyncState, "ContainerRegistrySyncState", "csharp");
 @@clientName(SyncTrigger, "ContainerRegistrySyncTrigger", "csharp");
-@@clientName(SyncUpdateProperties,
+@@clientName(
+  SyncUpdateProperties,
   "ConnectedRegistrySyncUpdateProperties",
   "csharp"
 );
 @@clientName(Target, "ContainerRegistryWebhookEventTarget", "csharp");
-@@clientName(TlsCertificateProperties,
+@@clientName(
+  TlsCertificateProperties,
   "ContainerRegistryTlsCertificateProperties",
   "csharp"
 );
-@@clientName(TlsCertificateProperties.location,
+@@clientName(
+  TlsCertificateProperties.location,
   "CertificateLocation",
   "csharp"
 );
@@ -454,11 +533,13 @@ namespace Microsoft.ContainerRegistry {
 @@clientName(Token, "ContainerRegistryToken", "csharp");
 @@clientName(TokenCertificate, "ContainerRegistryTokenCertificate", "csharp");
 @@clientName(TokenCertificate.expiry, "ExpireOn", "csharp");
-@@clientName(TokenCertificateName,
+@@clientName(
+  TokenCertificateName,
   "ContainerRegistryTokenCertificateName",
   "csharp"
 );
-@@clientName(TokenCredentialsProperties,
+@@clientName(
+  TokenCredentialsProperties,
   "ContainerRegistryTokenCredentials",
   "csharp"
 );
@@ -472,7 +553,8 @@ namespace Microsoft.ContainerRegistry {
 @@clientName(TrustPolicyType, "ContainerRegistryTrustPolicyType", "csharp");
 @@clientName(Webhook, "ContainerRegistryWebhook", "csharp");
 @@clientName(WebhookAction, "ContainerRegistryWebhookAction", "csharp");
-@@clientName(WebhookCreateParameters,
+@@clientName(
+  WebhookCreateParameters,
   "ContainerRegistryWebhookCreateOrUpdateContent",
   "csharp"
 );
@@ -488,66 +570,81 @@ namespace Microsoft.ContainerRegistry {
 // flattenProperty restores the flat property layout produced by the previous autorest-based SDK,
 // where resource properties were exposed directly on the resource class rather than through a nested object.
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Archive.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Archive.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ArchiveVersion.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ArchiveVersion.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CacheRule.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  CacheRule.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ConnectedRegistry.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ConnectedRegistry.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CredentialSet.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  CredentialSet.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ExportPipeline.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ExportPipeline.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ImportPipeline.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ImportPipeline.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PipelineRun.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PipelineRun.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateEndpointConnection.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.CommonTypes.PrivateLinkResource.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Azure.ResourceManager.CommonTypes.PrivateLinkResource.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Registry.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Registry.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Replication.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Replication.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScopeMap.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ScopeMap.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Token.properties, "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Webhook.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Webhook.properties,
   "csharp"
 );
 // markAsPageable restores the pageable return type for listUsages, matching the previous SDK behavior
 // where the result was surfaced as a pageable collection rather than a single response.
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Registries.listUsages,
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  Registries.listUsages,
   "csharp"
 );

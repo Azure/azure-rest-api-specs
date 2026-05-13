@@ -47,63 +47,79 @@ using Microsoft.Kusto;
 @@clientName(Clusters.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Clusters.update::parameters.properties, "parameters");
 @@clientName(Clusters.migrate::parameters.body, "clusterMigrateRequest");
-@@clientName(Clusters.detachFollowerDatabases::parameters.body,
+@@clientName(
+  Clusters.detachFollowerDatabases::parameters.body,
   "followerDatabaseToRemove"
 );
 @@clientName(Clusters.addCalloutPolicies::parameters.body, "calloutPolicies");
 @@clientName(Clusters.removeCalloutPolicy::parameters.body, "calloutPolicy");
-@@clientName(Clusters.addLanguageExtensions::parameters.body,
+@@clientName(
+  Clusters.addLanguageExtensions::parameters.body,
   "languageExtensionsToAdd"
 );
-@@clientName(Clusters.removeLanguageExtensions::parameters.body,
+@@clientName(
+  Clusters.removeLanguageExtensions::parameters.body,
   "languageExtensionsToRemove"
 );
 @@clientLocation(Clusters.checkNameAvailability, ClusterPrincipalAssignments);
-@@clientName(Clusters.checkNameAvailability::parameters.body,
+@@clientName(
+  Clusters.checkNameAvailability::parameters.body,
   "principalAssignmentName"
 );
 @@clientLocation(Clusters.databasesCheckNameAvailability, Databases);
 @@clientName(Clusters.databasesCheckNameAvailability, "CheckNameAvailability");
-@@clientName(Clusters.databasesCheckNameAvailability::parameters.body,
+@@clientName(
+  Clusters.databasesCheckNameAvailability::parameters.body,
   "resourceName"
 );
-@@clientLocation(Clusters.attachedDatabaseConfigurationsCheckNameAvailability,
+@@clientLocation(
+  Clusters.attachedDatabaseConfigurationsCheckNameAvailability,
   AttachedDatabaseConfigurations
 );
-@@clientName(Clusters.attachedDatabaseConfigurationsCheckNameAvailability,
+@@clientName(
+  Clusters.attachedDatabaseConfigurationsCheckNameAvailability,
   "CheckNameAvailability"
 );
-@@clientName(Clusters.attachedDatabaseConfigurationsCheckNameAvailability::parameters.body,
+@@clientName(
+  Clusters.attachedDatabaseConfigurationsCheckNameAvailability::parameters.body,
   "resourceName"
 );
-@@clientLocation(Clusters.managedPrivateEndpointsCheckNameAvailability,
+@@clientLocation(
+  Clusters.managedPrivateEndpointsCheckNameAvailability,
   ManagedPrivateEndpoints
 );
-@@clientName(Clusters.managedPrivateEndpointsCheckNameAvailability,
+@@clientName(
+  Clusters.managedPrivateEndpointsCheckNameAvailability,
   "CheckNameAvailability"
 );
-@@clientName(Clusters.managedPrivateEndpointsCheckNameAvailability::parameters.body,
+@@clientName(
+  Clusters.managedPrivateEndpointsCheckNameAvailability::parameters.body,
   "resourceName"
 );
-@@clientLocation(Clusters.sandboxCustomImagesCheckNameAvailability,
+@@clientLocation(
+  Clusters.sandboxCustomImagesCheckNameAvailability,
   SandboxCustomImages
 );
-@@clientName(Clusters.sandboxCustomImagesCheckNameAvailability,
+@@clientName(
+  Clusters.sandboxCustomImagesCheckNameAvailability,
   "CheckNameAvailability"
 );
-@@clientName(Clusters.sandboxCustomImagesCheckNameAvailability::parameters.body,
+@@clientName(
+  Clusters.sandboxCustomImagesCheckNameAvailability::parameters.body,
   "resourceName"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Cluster.properties);
 
-@@clientName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
+@@clientName(
+  PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(PrivateEndpointConnection.properties);
 
-@@clientName(ClusterPrincipalAssignments.createOrUpdate::parameters.resource,
+@@clientName(
+  ClusterPrincipalAssignments.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -111,37 +127,45 @@ using Microsoft.Kusto;
 
 @@clientName(Databases.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Databases.update::parameters.properties, "parameters");
-@@clientName(Databases.addPrincipals::parameters.body,
+@@clientName(
+  Databases.addPrincipals::parameters.body,
   "databasePrincipalsToAdd"
 );
-@@clientName(Databases.removePrincipals::parameters.body,
+@@clientName(
+  Databases.removePrincipals::parameters.body,
   "databasePrincipalsToRemove"
 );
 @@clientLocation(Databases.inviteFollower, "Database");
 @@clientName(Databases.inviteFollower::parameters.body, "parameters");
 @@clientLocation(Databases.checkNameAvailability, DatabasePrincipalAssignments);
-@@clientName(Databases.checkNameAvailability::parameters.body,
+@@clientName(
+  Databases.checkNameAvailability::parameters.body,
   "principalAssignmentName"
 );
 @@clientLocation(Databases.scriptsCheckNameAvailability, Scripts);
 @@clientName(Databases.scriptsCheckNameAvailability, "CheckNameAvailability");
-@@clientName(Databases.scriptsCheckNameAvailability::parameters.body,
+@@clientName(
+  Databases.scriptsCheckNameAvailability::parameters.body,
   "scriptName"
 );
 @@clientLocation(Databases.dataConnectionValidation, DataConnections);
 @@clientName(Databases.dataConnectionValidation, "dataConnectionValidation");
 @@clientName(Databases.dataConnectionValidation::parameters.body, "parameters");
-@@clientLocation(Databases.dataConnectionsCheckNameAvailability,
+@@clientLocation(
+  Databases.dataConnectionsCheckNameAvailability,
   DataConnections
 );
-@@clientName(Databases.dataConnectionsCheckNameAvailability,
+@@clientName(
+  Databases.dataConnectionsCheckNameAvailability,
   "CheckNameAvailability"
 );
-@@clientName(Databases.dataConnectionsCheckNameAvailability::parameters.body,
+@@clientName(
+  Databases.dataConnectionsCheckNameAvailability::parameters.body,
   "dataConnectionName"
 );
 
-@@clientName(DatabasePrincipalAssignments.createOrUpdate::parameters.resource,
+@@clientName(
+  DatabasePrincipalAssignments.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -152,17 +176,20 @@ using Microsoft.Kusto;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Script.properties);
 
-@@clientName(SandboxCustomImages.createOrUpdate::parameters.resource,
+@@clientName(
+  SandboxCustomImages.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(SandboxCustomImages.update::parameters.properties, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SandboxCustomImage.properties);
 
-@@clientName(ManagedPrivateEndpoints.createOrUpdate::parameters.resource,
+@@clientName(
+  ManagedPrivateEndpoints.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(ManagedPrivateEndpoints.update::parameters.properties,
+@@clientName(
+  ManagedPrivateEndpoints.update::parameters.properties,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -171,7 +198,8 @@ using Microsoft.Kusto;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(PrivateLinkResource.properties);
 
-@@clientName(AttachedDatabaseConfigurations.createOrUpdate::parameters.resource,
+@@clientName(
+  AttachedDatabaseConfigurations.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -186,21 +214,25 @@ using Microsoft.Kusto;
 @@clientLocation(SkusOperationGroup.list, "Skus");
 
 @@clientLocation(OperationsResultsOperationGroup.get, "OperationsResults");
-@@clientLocation(OperationsResultsOperationGroup.getLocation,
+@@clientLocation(
+  OperationsResultsOperationGroup.getLocation,
   "OperationsResultsLocation"
 );
 @@clientName(OperationsResultsOperationGroup.getLocation, "Get");
 
-@@clientName(ClustersOperationGroup.checkNameAvailability::parameters.body,
+@@clientName(
+  ClustersOperationGroup.checkNameAvailability::parameters.body,
   "clusterName"
 );
-@@summary(CalloutPoliciesList.nextLink,
+@@summary(
+  CalloutPoliciesList.nextLink,
   "The URL to get the next set of callout policies list results if there are any."
 );
 @@clientName(KeyVaultProperties.keyName, "KeyName");
 @@clientName(KeyVaultProperties.keyVersion, "KeyVersion");
 @@clientName(KeyVaultProperties.keyVaultUri, "KeyVaultUri");
 @@clientName(KeyVaultProperties.userIdentity, "UserIdentity");
-@@clientName(KeyVaultProperties.federatedIdentityClientId,
+@@clientName(
+  KeyVaultProperties.federatedIdentityClientId,
   "FederatedIdentityClientId"
 );

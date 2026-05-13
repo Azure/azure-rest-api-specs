@@ -104,10 +104,13 @@ interface DevOpsConfigurations {
   @tag("DevOps")
   createOrUpdate is DevOpsConfigurationOps.CreateOrUpdateAsync<
     DevOpsConfiguration,
-    Response = ArmResourceUpdatedResponse<DevOpsConfiguration> | ArmResourceCreatedResponse<DevOpsConfiguration> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader> & {
-      @bodyRoot
-      _: DevOpsConfiguration;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<DevOpsConfiguration>
+      | ArmResourceCreatedResponse<DevOpsConfiguration>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader> & {
+          @bodyRoot
+          _: DevOpsConfiguration;
+        })
   >;
 
   /**
@@ -121,11 +124,13 @@ interface DevOpsConfigurations {
   update is DevOpsConfigurationOps.CustomPatchAsync<
     DevOpsConfiguration,
     PatchModel = DevOpsConfiguration,
-    Response = ArmResponse<DevOpsConfiguration> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = DevOpsConfiguration> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: DevOpsConfiguration;
-    })
+    Response =
+      | ArmResponse<DevOpsConfiguration>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = DevOpsConfiguration> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: DevOpsConfiguration;
+        })
   >;
 
   /**
@@ -136,7 +141,10 @@ interface DevOpsConfigurations {
   @tag("DevOps")
   delete is DevOpsConfigurationOps.DeleteWithoutOkAsync<
     DevOpsConfiguration,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -196,9 +204,11 @@ interface DevOpsConfigurations {
 
 @@doc(DevOpsConfiguration.name, "");
 @@doc(DevOpsConfiguration.properties, "DevOps Configuration properties.");
-@@doc(DevOpsConfigurations.createOrUpdate::parameters.resource,
+@@doc(
+  DevOpsConfigurations.createOrUpdate::parameters.resource,
   "The DevOps configuration resource payload."
 );
-@@doc(DevOpsConfigurations.update::parameters.properties,
+@@doc(
+  DevOpsConfigurations.update::parameters.properties,
   "The DevOps configuration resource payload."
 );

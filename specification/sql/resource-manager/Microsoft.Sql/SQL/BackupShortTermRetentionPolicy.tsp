@@ -40,8 +40,10 @@ interface BackupShortTermRetentionPolicies {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     BackupShortTermRetentionPolicy,
-    Response = ArmResourceUpdatedResponse<BackupShortTermRetentionPolicy> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BackupShortTermRetentionPolicy> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<BackupShortTermRetentionPolicy>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BackupShortTermRetentionPolicy> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -59,13 +61,16 @@ interface BackupShortTermRetentionPolicies {
   listByDatabase is ArmResourceListByParent<BackupShortTermRetentionPolicy>;
 }
 
-@@doc(BackupShortTermRetentionPolicy.name,
+@@doc(
+  BackupShortTermRetentionPolicy.name,
   "The policy name. Should always be default."
 );
 @@doc(BackupShortTermRetentionPolicy.properties, "Resource properties.");
-@@doc(BackupShortTermRetentionPolicies.createOrUpdate::parameters.resource,
+@@doc(
+  BackupShortTermRetentionPolicies.createOrUpdate::parameters.resource,
   "The short term retention policy info."
 );
-@@doc(BackupShortTermRetentionPolicies.update::parameters.properties,
+@@doc(
+  BackupShortTermRetentionPolicies.update::parameters.properties,
   "The short term retention policy info."
 );
