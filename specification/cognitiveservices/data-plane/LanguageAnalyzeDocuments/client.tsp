@@ -8,8 +8,11 @@ namespace Language.AnalyzeTextClientCustomizations;
 
 @@clientName(AnalyzeDocuments, "DocumentAnalysisClient", "csharp");
 @@clientName(Tasks, "DocumentTasksState", "csharp");
-@@clientName(State, "DocumentActionState", "csharp");
+@@clientName(Tasks.items, "Results", "csharp");
+@@clientName(State, "DocumentActionStatus", "csharp");
+@@clientName(State.cancelled, "Canceled", "csharp");
 @@clientName(Error, "AnalyzeDocumentsError", "csharp");
+@@clientName(Error.innererror, "InnerError", "csharp");
 
 @@clientName(Entity, "NamedEntity", "csharp");
 
@@ -486,7 +489,7 @@ namespace Language.AnalyzeTextClientCustomizations;
 );
 
 @@clientName(MultiLanguageAnalysisInput,
-  "MultiLanguageDocumentInput",
+  "MultiLanguageDocumentCollection",
   "csharp"
 );
 
@@ -517,7 +520,7 @@ namespace Language.AnalyzeTextClientCustomizations;
   "csharp"
 );
 @@clientName(AbstractiveSummarizationTaskParameters,
-  "AbstractiveSummarizationActionContent",
+  "AbstractiveSummarizationOptions",
   "csharp"
 );
 @@clientName(AbstractiveSummarizationTaskParameters.loggingOptOut,
@@ -534,7 +537,11 @@ namespace Language.AnalyzeTextClientCustomizations;
   "csharp"
 );
 @@clientName(ExtractiveSummarizationTaskParameters,
-  "ExtractiveSummarizationActionContent",
+  "ExtractiveSummarizationOptions",
+  "csharp"
+);
+@@clientName(ExtractiveSummarizationTaskParameters.sortBy,
+  "OrderBy",
   "csharp"
 );
 
@@ -543,7 +550,7 @@ namespace Language.AnalyzeTextClientCustomizations;
   "csharp"
 );
 @@clientName(AnalyzeDocumentJobsInput.analysisInput,
-  "DocumentsInput",
+  "DocumentInput",
   "csharp"
 );
 @@clientName(AnalyzeDocumentJobsInput.tasks, "Actions", "csharp");
@@ -588,7 +595,7 @@ namespace Language.AnalyzeTextClientCustomizations;
 );
 
 @@clientName(analyzeDocumentsJobStatus,
-  "GetAnalyzeDocumentsJobStatus",
+  "GetAnalyzeDocumentsJobState",
   "csharp"
 );
 @@clientName(analyzeDocumentsCancelJob,
@@ -617,3 +624,11 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(NoMaskPolicy, "NoMaskRedactionPolicy", "csharp");
 
 @@clientName(BaseRedactionPolicy, "RedactionPolicy", "csharp");
+
+@@clientName(TaskState.lastUpdateDateTime, "LastUpdatedAt", "csharp");
+
+@@clientName(DocumentAnalysisDocumentResult.target, "Targets", "csharp");
+
+@@clientName(ExtractiveSummarizationSortingCriteria, "ExtractiveSummarizationOrder", "csharp");
+
+@@clientName(AbstractiveSummary, "DocumentAbstractiveSummary", "csharp");

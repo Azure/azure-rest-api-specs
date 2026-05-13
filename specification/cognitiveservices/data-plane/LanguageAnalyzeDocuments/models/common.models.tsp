@@ -347,6 +347,7 @@ model Tasks {
   total: int32;
 
   /** Enumerable of Analyze documents job results. */
+  @pageItems
   items?: Array<AnalyzeDocumentsLROResult>;
 }
 
@@ -676,6 +677,7 @@ model JobState {
   errors?: Array<Error>;
 
   /** next link */
+  @nextLink
   nextLink?: string;
 }
 
