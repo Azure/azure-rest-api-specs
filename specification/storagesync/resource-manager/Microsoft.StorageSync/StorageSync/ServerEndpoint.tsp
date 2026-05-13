@@ -136,10 +136,9 @@ interface ServerEndpoints {
   listBySyncGroup is ArmResourceListByParent<
     ServerEndpoint,
     Response = ArmResponse<ServerEndpointArray> & {
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name matches HTTP header canonical casing"
       @header("Location")
       @doc("Operation Status Location URI")
-      Location?: string;
+      location?: string;
 
       @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
