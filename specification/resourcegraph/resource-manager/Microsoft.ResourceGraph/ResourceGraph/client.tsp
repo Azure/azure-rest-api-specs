@@ -31,8 +31,7 @@ enum Versions {
 // Move namespace-level operations off the merged root client so each generated
 // client carries a consistent apiVersions set.
 @@clientLocation(ResourceChanges.resourceChanges, "ResourceChangesOperations");
-@@clientLocation(
-  ResourceChanges.resourceChangeDetails,
+@@clientLocation(ResourceChanges.resourceChangeDetails,
   "ResourceChangesOperations"
 );
 @@clientLocation(ResourceGraphApi.resources, "ResourceGraphOperations");
@@ -40,8 +39,7 @@ enum Versions {
 // --- C# naming customizations to match GA SDK surface ---
 // Rename models to match existing GA API
 @@clientName(ResourceGraphApi.QueryRequest, "ResourceQueryContent", "csharp");
-@@clientName(
-  ResourceGraphApi.QueryRequestOptions,
+@@clientName(ResourceGraphApi.QueryRequestOptions,
   "ResourceQueryRequestOptions",
   "csharp"
 );
@@ -54,8 +52,7 @@ enum Versions {
 
 // Rename GraphQueryResource to ResourceGraphQuery (the old name)
 @@clientName(GraphQueryApi.GraphQueryResource, "ResourceGraphQuery", "csharp");
-@@clientName(
-  GraphQueryApi.GraphQueryProperties.timeModified,
+@@clientName(GraphQueryApi.GraphQueryProperties.timeModified,
   "ModifiedOn",
   "csharp"
 );
@@ -64,8 +61,7 @@ enum Versions {
 @@clientName(ResourceGraphApi.resources, "GetResources", "csharp");
 
 // Rename patch model
-@@clientName(
-  GraphQueryApi.GraphQueryUpdateParameters,
+@@clientName(GraphQueryApi.GraphQueryUpdateParameters,
   "ResourceGraphQueryPatch",
   "csharp"
 );
@@ -76,8 +72,7 @@ enum Versions {
 // --- Type customizations for backward compatibility ---
 // Restore TrackedResourceData inheritance for GraphQueryResource (matches GA SDK base type)
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
-  GraphQueryApi.GraphQueryResource,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(GraphQueryApi.GraphQueryResource,
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );

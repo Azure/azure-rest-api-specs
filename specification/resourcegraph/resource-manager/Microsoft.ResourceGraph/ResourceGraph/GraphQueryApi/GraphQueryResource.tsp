@@ -23,9 +23,12 @@ model GraphQueryResource
   >;
 
   /** The geo-location where the resource lives. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "location is needed for backward compatibility with TrackedResource via hierarchyBuilding"
   location?: azureLocation;
 
   /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "tags is needed for backward compatibility with TrackedResource via hierarchyBuilding"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "tags is standard ARM tracked resource property"
   tags?: Record<string>;
 
   /**
@@ -90,15 +93,12 @@ interface GraphQueryResources {
 }
 
 @@doc(GraphQueryResource.name, "The name of the Graph Query resource.");
-@@doc(
-  GraphQueryResource.properties,
+@@doc(GraphQueryResource.properties,
   "Metadata describing a graph query for an Azure resource."
 );
-@@doc(
-  GraphQueryResources.createOrUpdate::parameters.resource,
+@@doc(GraphQueryResources.createOrUpdate::parameters.resource,
   "Properties that need to be specified to create a new graph query."
 );
-@@doc(
-  GraphQueryResources.update::parameters.properties,
+@@doc(GraphQueryResources.update::parameters.properties,
   "Properties that need to be specified to create a new graph query."
 );
