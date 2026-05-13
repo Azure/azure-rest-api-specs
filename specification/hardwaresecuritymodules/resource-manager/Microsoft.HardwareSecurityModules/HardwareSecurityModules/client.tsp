@@ -5,25 +5,30 @@ using Azure.ClientGenerator.Core;
 using Microsoft.HardwareSecurityModules;
 using Azure.Core;
 
-@@clientName(Microsoft.HardwareSecurityModules,
+@@clientName(
+  Microsoft.HardwareSecurityModules,
   "HardwareSecurityModulesMgmtClient",
   "python"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.PrivateLinkResourceProperties,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.PrivateLinkResourceProperties,
   "CloudHsmClusterPrivateLinkResourceProperties",
   "csharp"
 );
-@@usage(Azure.ResourceManager.CommonTypes.PrivateLinkResourceProperties,
+@@usage(
+  Azure.ResourceManager.CommonTypes.PrivateLinkResourceProperties,
   Usage.input,
   "csharp"
 );
 
-@@clientName(CloudHsmClusters.cloudHsmClusterBackupStatusGet,
+@@clientName(
+  CloudHsmClusters.cloudHsmClusterBackupStatusGet,
   "GetCloudHsmClusterBackupStatus",
   "csharp"
 );
 
-@@clientName(CloudHsmClusters.cloudHsmClusterRestoreStatusGet,
+@@clientName(
+  CloudHsmClusters.cloudHsmClusterRestoreStatusGet,
   "GetCloudHsmClusterRestoreStatus",
   "csharp"
 );
@@ -31,7 +36,8 @@ using Azure.Core;
 @@clientName(ActivationState, "SecurityDomainActivationState", "csharp");
 @@clientName(BackupRequestProperties, "CloudHsmClusterBackupContent", "csharp");
 @@clientName(BackupResult, "CloudHsmClusterBackupResult", "csharp");
-@@clientName(BackupResultProperties,
+@@clientName(
+  BackupResultProperties,
   "CloudHsmClusterBackupResultProperties",
   "csharp"
 );
@@ -40,109 +46,131 @@ using Azure.Core;
 @@clientName(JsonWebKeyType, "DedicatedHsmJsonWebKeyType", "csharp");
 @@clientName(NetworkInterface, "DedicatedHsmNetworkInterface", "csharp");
 @@clientName(NetworkProfile, "DedicatedHsmNetworkProfile", "csharp");
-@@clientName(OutboundEnvironmentEndpoint,
+@@clientName(
+  OutboundEnvironmentEndpoint,
   "DedicatedHsmEgressEndpoint",
   "csharp"
 );
-@@clientName(OutboundEnvironmentEndpointCollection,
+@@clientName(
+  OutboundEnvironmentEndpointCollection,
   "DedicatedHsmEgressEndpointListResult",
   "csharp"
 );
 
-@@clientName(PrivateEndpointConnection,
+@@clientName(
+  PrivateEndpointConnection,
   "CloudHsmClusterPrivateEndpointConnection",
   "csharp"
 );
 
-@@clientName(PrivateEndpointConnectionProperties,
+@@clientName(
+  PrivateEndpointConnectionProperties,
   "CloudHsmClusterPrivateEndpointConnectionProperties",
   "csharp"
 );
 
-@@clientName(PrivateEndpointConnectionProvisioningState,
+@@clientName(
+  PrivateEndpointConnectionProvisioningState,
   "CloudHsmClusterPrivateEndpointConnectionProvisioningState",
   "csharp"
 );
 
-@@clientName(PrivateEndpointServiceConnectionStatus,
+@@clientName(
+  PrivateEndpointServiceConnectionStatus,
   "CloudHsmClusterPrivateEndpointServiceConnectionStatus",
   "csharp"
 );
 
 @@clientName(ProvisioningState, "CloudHsmClusterProvisioningState", "csharp");
-@@clientName(PublicNetworkAccess,
+@@clientName(
+  PublicNetworkAccess,
   "CloudHsmClusterPublicNetworkAccess",
   "csharp"
 );
 @@clientName(Sku, "DedicatedHsmSku", "csharp");
 @@clientName(SkuName, "DedicatedHsmSkuName", "csharp");
-@@clientName(RestoreRequestProperties,
+@@clientName(
+  RestoreRequestProperties,
   "CloudHsmClusterRestoreContent",
   "csharp"
 );
 @@clientName(RestoreResult, "CloudHsmClusterRestoreResult", "csharp");
-@@clientName(SkuName.`SafeNet Luna Network HSM A790`,
+@@clientName(
+  SkuName.`SafeNet Luna Network HSM A790`,
   "SafeNetLunaNetworkHsmA790",
   "csharp"
 );
-@@clientName(SkuName.payShield10K_LMK1_CPS60,
+@@clientName(
+  SkuName.payShield10K_LMK1_CPS60,
   "PayShield10KLmk1Cps60",
   "csharp"
 );
-@@clientName(SkuName.payShield10K_LMK1_CPS250,
+@@clientName(
+  SkuName.payShield10K_LMK1_CPS250,
   "PayShield10KLmk1Cps250",
   "csharp"
 );
-@@clientName(SkuName.payShield10K_LMK1_CPS2500,
+@@clientName(
+  SkuName.payShield10K_LMK1_CPS2500,
   "PayShield10KLmk1Cps2500",
   "csharp"
 );
-@@clientName(SkuName.payShield10K_LMK2_CPS60,
+@@clientName(
+  SkuName.payShield10K_LMK2_CPS60,
   "PayShield10KLmk2Cps60",
   "csharp"
 );
-@@clientName(SkuName.payShield10K_LMK2_CPS250,
+@@clientName(
+  SkuName.payShield10K_LMK2_CPS250,
   "PayShield10KLmk2Cps250",
   "csharp"
 );
-@@clientName(SkuName.payShield10K_LMK2_CPS2500,
+@@clientName(
+  SkuName.payShield10K_LMK2_CPS2500,
   "PayShield10KLmk2Cps2500",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.PrivateLinkServiceConnectionState,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.PrivateLinkServiceConnectionState,
   "CloudHsmClusterPrivateLinkServiceConnectionState",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointServiceConnectionStatus,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.PrivateEndpointServiceConnectionStatus,
   "CloudHsmClusterPrivateEndpointServiceConnectionStatus",
   "csharp"
 );
 @@alternateType(PrivateEndpointConnection.etag, eTag, "csharp");
 @@usage(Azure.ResourceManager.PrivateLinkResource, Usage.input, "csharp");
-@@clientName(Azure.ResourceManager.PrivateLinkResource,
+@@clientName(
+  Azure.ResourceManager.PrivateLinkResource,
   "CloudHsmClusterPrivateLinkData",
   "csharp"
 );
-@@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+@@clientName(
+  PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
   "connectionState ",
   "csharp"
 );
 @@clientName(NetworkInterface.privateIpAddress, "PrivateIPAddress", "csharp");
 @@clientName(EndpointDetail.ipAddress, "IPAddress", "csharp");
 
-@@clientName(CloudHsmClusters.validateBackupProperties::parameters.body,
+@@clientName(
+  CloudHsmClusters.validateBackupProperties::parameters.body,
   "content",
   "csharp"
 );
 @@clientName(CloudHsmClusters.backup::parameters.body, "content", "csharp");
-@@clientName(CloudHsmClusters.validateRestoreProperties::parameters.body,
+@@clientName(
+  CloudHsmClusters.validateRestoreProperties::parameters.body,
   "content",
   "csharp"
 );
 
 @@clientName(DedicatedHsms.update::parameters.properties, "patch", "csharp");
 
-@@clientName(CloudHsmClusters.listByCloudHsmCluster,
+@@clientName(
+  CloudHsmClusters.listByCloudHsmCluster,
   "GetCloudHsmClusterPrivateLinkResources",
   "csharp"
 );

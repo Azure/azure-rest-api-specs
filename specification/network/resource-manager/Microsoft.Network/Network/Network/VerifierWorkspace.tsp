@@ -160,12 +160,15 @@ alias VerifierWorkspacesListParameters = {
 };
 
 @@doc(VerifierWorkspace.name, "The name of the resource");
-@@doc(VerifierWorkspace.properties,
+@@doc(
+  VerifierWorkspace.properties,
   "Properties of Verifier Workspace resource."
 );
-@@doc(VerifierWorkspaces.create::parameters.resource,
+@@doc(
+  VerifierWorkspaces.create::parameters.resource,
   "Verifier Workspace object to create/update."
 );
-@@doc(VerifierWorkspaces.update::parameters.properties,
+@@doc(
+  VerifierWorkspaces.update::parameters.properties,
   "Verifier Workspace object to create/update."
 );

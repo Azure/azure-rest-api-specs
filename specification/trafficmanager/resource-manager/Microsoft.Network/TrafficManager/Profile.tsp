@@ -95,9 +95,11 @@ interface Profiles {
 }
 
 @@doc(Profile.properties, "The properties of the Traffic Manager profile.");
-@@doc(Profiles.createOrUpdate::parameters.resource,
+@@doc(
+  Profiles.createOrUpdate::parameters.resource,
   "The Traffic Manager profile parameters supplied to the CreateOrUpdate operation."
 );
-@@doc(Profiles.update::parameters.properties,
+@@doc(
+  Profiles.update::parameters.properties,
   "The Traffic Manager profile parameters supplied to the Update operation."
 );

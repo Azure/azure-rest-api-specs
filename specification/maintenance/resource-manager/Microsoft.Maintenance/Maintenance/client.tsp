@@ -3,25 +3,30 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Microsoft.Maintenance;
 
-@@clientName(Microsoft.Maintenance,
+@@clientName(
+  Microsoft.Maintenance,
   "MaintenanceManagementClient",
   "javascript"
 );
 
 // csharp configurations
-@@clientName(ApplyUpdateOperationGroup,
+@@clientName(
+  ApplyUpdateOperationGroup,
   "MaintenanceApplyUpdateParent",
   "csharp"
 );
-@@clientName(ConfigurationAssignment,
+@@clientName(
+  ConfigurationAssignment,
   "MaintenanceConfigurationAssignment",
   "csharp"
 );
-@@clientName(ConfigurationAssignmentFilterProperties,
+@@clientName(
+  ConfigurationAssignmentFilterProperties,
   "MaintenanceConfigurationAssignmentFilter",
   "csharp"
 );
-@@clientName(ConfigurationAssignmentFilterProperties.osTypes,
+@@clientName(
+  ConfigurationAssignmentFilterProperties.osTypes,
   "OSTypes",
   "csharp"
 );
@@ -31,113 +36,139 @@ using Microsoft.Maintenance;
 @@clientName(MaintenanceWindow.startDateTime, "StartOn", "csharp");
 @@clientName(ListApplyUpdate, "MaintenanceApplyUpdateListResult", "csharp");
 @@clientName(ListUpdatesResult, "MaintenanceUpdateListResult", "csharp");
-@@clientName(ListMaintenanceConfigurationsResult,
+@@clientName(
+  ListMaintenanceConfigurationsResult,
   "MaintenanceConfigurationListResult",
   "csharp"
 );
-@@clientName(ListConfigurationAssignmentsResult,
+@@clientName(
+  ListConfigurationAssignmentsResult,
   "MaintenanceConfigurationAssignmentListResult",
   "csharp"
 );
 @@clientName(Visibility, "MaintenanceConfigurationVisibility", "csharp");
 @@clientName(ApplyUpdateProperties.lastUpdateTime, "LastUpdatedOn", "csharp");
-@@clientName(InputPatchConfiguration,
+@@clientName(
+  InputPatchConfiguration,
   "MaintenancePatchConfiguration",
   "csharp"
 );
-@@clientName(InputPatchConfiguration.linuxParameters,
+@@clientName(
+  InputPatchConfiguration.linuxParameters,
   "LinuxPatchSettings",
   "csharp"
 );
-@@clientName(InputPatchConfiguration.windowsParameters,
+@@clientName(
+  InputPatchConfiguration.windowsParameters,
   "WindowsPatchSettings",
   "csharp"
 );
-@@clientName(InputWindowsParameters,
+@@clientName(
+  InputWindowsParameters,
   "MaintenanceWindowsPatchSettings",
   "csharp"
 );
-@@clientName(InputWindowsParameters.excludeKbsRequiringReboot,
+@@clientName(
+  InputWindowsParameters.excludeKbsRequiringReboot,
   "IsExcludeKbsRebootRequired",
   "csharp"
 );
 @@clientName(InputLinuxParameters, "MaintenanceLinuxPatchSettings", "csharp");
-@@clientName(ScheduledEventApproveResponse,
+@@clientName(
+  ScheduledEventApproveResponse,
   "MaintenanceScheduledEventApproveResult",
   "csharp"
 );
 @@clientName(RebootOptions, "MaintenanceRebootOption", "csharp");
-@@clientName(InputWindowsParameters.kbNumbersToExclude,
+@@clientName(
+  InputWindowsParameters.kbNumbersToExclude,
   "KBNumbersToExclude",
   "csharp"
 );
-@@clientName(InputWindowsParameters.kbNumbersToInclude,
+@@clientName(
+  InputWindowsParameters.kbNumbersToInclude,
   "KBNumbersToInclude",
   "csharp"
 );
 @@clientName(ApplyUpdates.getParent, "GetApplyUpdatesByParent", "csharp");
-@@clientName(ApplyUpdatesOperationGroup.createOrUpdateParent,
+@@clientName(
+  ApplyUpdatesOperationGroup.createOrUpdateParent,
   "CreateOrUpdateApplyUpdateByParent",
   "csharp"
 );
-@@clientName(ConfigurationAssignments.createOrUpdateParent,
+@@clientName(
+  ConfigurationAssignments.createOrUpdateParent,
   "CreateOrUpdateConfigurationAssignmentByParent",
   "csharp"
 );
-@@clientName(ConfigurationAssignments.deleteParent,
+@@clientName(
+  ConfigurationAssignments.deleteParent,
   "DeleteConfigurationAssignmentByParent",
   "csharp"
 );
-@@clientName(ConfigurationAssignments.getParent,
+@@clientName(
+  ConfigurationAssignments.getParent,
   "GetConfigurationAssignmentByParent",
   "csharp"
 );
-@@clientName(ConfigurationAssignments.listParent,
+@@clientName(
+  ConfigurationAssignments.listParent,
   "GetConfigurationAssignmentsByParent",
   "csharp"
 );
-@@clientName(ConfigurationAssignmentsForResourceGroup.createOrUpdate,
+@@clientName(
+  ConfigurationAssignmentsForResourceGroup.createOrUpdate,
   "CreateOrUpdateConfigurationAssignmentByResourceGroup",
   "csharp"
 );
-@@clientName(ConfigurationAssignmentsForResourceGroup.delete,
+@@clientName(
+  ConfigurationAssignmentsForResourceGroup.delete,
   "DeleteConfigurationAssignmentByResourceGroup",
   "csharp"
 );
-@@clientName(ConfigurationAssignmentsForResourceGroup.get,
+@@clientName(
+  ConfigurationAssignmentsForResourceGroup.get,
   "GetConfigurationAssignmentByResourceGroup",
   "csharp"
 );
-@@clientName(ConfigurationAssignmentsForResourceGroup.update,
+@@clientName(
+  ConfigurationAssignmentsForResourceGroup.update,
   "UpdateConfigurationAssignmentByResourceGroup",
   "csharp"
 );
-@@clientName(ConfigurationAssignmentsForSubscriptions.createOrUpdate,
+@@clientName(
+  ConfigurationAssignmentsForSubscriptions.createOrUpdate,
   "CreateOrUpdateConfigurationAssignmentBySubscription",
   "csharp"
 );
-@@clientName(ConfigurationAssignmentsForSubscriptions.delete,
+@@clientName(
+  ConfigurationAssignmentsForSubscriptions.delete,
   "DeleteConfigurationAssignmentBySubscription",
   "csharp"
 );
-@@clientName(ConfigurationAssignmentsForSubscriptions.get,
+@@clientName(
+  ConfigurationAssignmentsForSubscriptions.get,
   "GetConfigurationAssignmentBySubscription",
   "csharp"
 );
-@@clientName(ConfigurationAssignmentsForSubscriptions.update,
+@@clientName(
+  ConfigurationAssignmentsForSubscriptions.update,
   "UpdateConfigurationAssignmentBySubscription",
   "csharp"
 );
-@@clientName(ConfigurationAssignmentsForSubscriptions.list,
+@@clientName(
+  ConfigurationAssignmentsForSubscriptions.list,
   "GetConfigurationAssignmentsBySubscription",
   "csharp"
 );
 @@clientName(UpdatesOperationGroup.listParent, "GetUpdatesByParent", "csharp");
-@@clientName(MaintenanceConfigurationOperationGroup.delete,
+@@clientName(
+  MaintenanceConfigurationOperationGroup.delete,
   "DeleteEx",
   "csharp"
 );
-@@clientName(MaintenanceConfigurationOperationGroup,
+@@clientName(
+  MaintenanceConfigurationOperationGroup,
   "MaintenanceConfiguration",
   "csharp"
 );
@@ -147,36 +178,44 @@ using Microsoft.Maintenance;
 @@clientName(Microsoft.Maintenance.Update, "MaintenanceUpdate", "csharp");
 @@clientName(UpdateStatus, "MaintenanceUpdateStatus", "csharp");
 @@clientName(MaintenanceScope.SQLDB, "SqlDB", "csharp");
-@@clientName(MaintenanceScope.SQLManagedInstance,
+@@clientName(
+  MaintenanceScope.SQLManagedInstance,
   "SqlManagedInstance",
   "csharp"
 );
 @@alternateType(MaintenanceWindow.duration, duration, "csharp");
-@@alternateType(ConfigurationAssignment.location,
+@@alternateType(
+  ConfigurationAssignment.location,
   Azure.Core.azureLocation,
   "csharp"
 );
-@@alternateType(ConfigurationAssignmentFilterProperties.resourceTypes,
+@@alternateType(
+  ConfigurationAssignmentFilterProperties.resourceTypes,
   Azure.Core.armResourceType[],
   "csharp"
 );
-@@alternateType(ConfigurationAssignmentFilterProperties.locations,
+@@alternateType(
+  ConfigurationAssignmentFilterProperties.locations,
   Azure.Core.azureLocation[],
   "csharp"
 );
-@@alternateType(ApplyUpdateProperties.resourceId,
+@@alternateType(
+  ApplyUpdateProperties.resourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ConfigurationAssignmentProperties.resourceId,
+@@alternateType(
+  ConfigurationAssignmentProperties.resourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(UpdateProperties.resourceId,
+@@alternateType(
+  UpdateProperties.resourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ConfigurationAssignmentProperties.maintenanceConfigurationId,
+@@alternateType(
+  ConfigurationAssignmentProperties.maintenanceConfigurationId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
@@ -184,7 +223,8 @@ using Microsoft.Maintenance;
 @@alternateType(MaintenanceWindow.startDateTime, utcDateTime, "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(MaintenanceConfiguration,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  MaintenanceConfiguration,
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );

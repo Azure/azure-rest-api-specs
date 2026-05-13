@@ -19,7 +19,8 @@ using Microsoft.Monitor;
 @@clientName(Category, "SliCategory", "csharp");
 @@clientName(Condition, "SliCondition", "csharp");
 @@clientName(ConditionOperator, "SliConditionOperator", "csharp");
-@@clientName(EvaluationCalculationType,
+@@clientName(
+  EvaluationCalculationType,
   "SliEvaluationCalculationType",
   "csharp"
 );
@@ -37,7 +38,8 @@ using Microsoft.Monitor;
 @@clientName(TemporalAggregationType, "SliTemporalAggregationType", "csharp");
 @@clientName(Sli, "MonitorSli", "csharp");
 @@clientName(SliResource, "MonitorSliProperties", "csharp");
-@@clientName(SliResource.streamingRuleLastUpdatedTimestamp,
+@@clientName(
+  SliResource.streamingRuleLastUpdatedTimestamp,
   "StreamingRuleLastUpdatedOn",
   "csharp"
 );

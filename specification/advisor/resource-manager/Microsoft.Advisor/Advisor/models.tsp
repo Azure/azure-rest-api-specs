@@ -1293,27 +1293,33 @@ model ConfigurationListResult is Azure.Core.Page<ConfigData>;
 
 model OperationEntityListResult is Azure.Core.Page<OperationEntity>;
 
-@@doc(AdvisorScoreEntityProperties.lastRefreshedScore,
+@@doc(
+  AdvisorScoreEntityProperties.lastRefreshedScore,
   "The details of latest available score."
 );
-@@doc(AdvisorScoreEntityProperties.timeSeries,
+@@doc(
+  AdvisorScoreEntityProperties.timeSeries,
   "The historic Advisor score data."
 );
 @@identifiers(OperationEntityListResult.value, #["name"]);
 @@doc(RecommendationPropertiesResourceWorkload.id, "The Id of the Workload");
-@@doc(RecommendationPropertiesResourceWorkload.name,
+@@doc(
+  RecommendationPropertiesResourceWorkload.name,
   "The Name of the Workload"
 );
 
 @@doc(RecommendationPropertiesReview.id, "The ARM Resource Id of the Review");
 @@doc(RecommendationPropertiesReview.name, "The Name of the Review");
-@@doc(WorkloadListResult.value,
+@@doc(
+  WorkloadListResult.value,
   "List of WorkloadListResult items on this page."
 );
-@@doc(WorkloadListResult.nextLink,
+@@doc(
+  WorkloadListResult.nextLink,
   "Url to get the next Page of WorkloadListResult items."
 );
 @@doc(TriageRecommendationCollection.value, "List of triage recommendations.");
-@@doc(TriageRecommendationCollection.nextLink,
+@@doc(
+  TriageRecommendationCollection.nextLink,
   "The URL to get the next set of triage recommendations, if there are any."
 );

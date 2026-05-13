@@ -55,6 +55,7 @@ interface MetricsObjectFirewallResources {
 }
 
 @@doc(MetricsObjectFirewallResource.name, "");
-@@doc(MetricsObjectFirewallResource.properties,
+@@doc(
+  MetricsObjectFirewallResource.properties,
   "The resource-specific properties for this resource."
 );

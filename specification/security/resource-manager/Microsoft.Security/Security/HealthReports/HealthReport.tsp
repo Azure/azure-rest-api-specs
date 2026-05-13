@@ -69,7 +69,8 @@ interface HealthReports {
 }
 
 @@minLength(Azure.ResourceManager.Extension.ScopeParameter.scope, 1);
-@@doc(HealthReport.name,
+@@doc(
+  HealthReport.name,
   "The health report Key - Unique key for the health report type"
 );
 @@doc(HealthReport.properties, "Properties of a health report");
