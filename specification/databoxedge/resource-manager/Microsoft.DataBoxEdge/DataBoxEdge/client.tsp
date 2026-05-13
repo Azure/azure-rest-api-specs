@@ -2064,3 +2064,32 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
   "csharp"
 );
 @@alternateType(MECRoleProperties.roleStatus, RoleStatus | null, "csharp");
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+op DataBoxEdgeDevicesCheckResourceCreationFeasibilityCustomized(
+  ...Azure.ResourceManager.ProviderNamespace<DataBoxEdgeDevice>,
+  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  deviceName: string,
+
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @body
+  deviceCapacityRequestInfo: DeviceCapacityRequestInfo,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @query("capacityName")
+  capacityName?: string,
+): OkResponse | Azure.ResourceManager.ArmAcceptedLroResponse<LroHeaders = Azure.ResourceManager.ArmAsyncOperationHeader &
+  Azure.Core.Foundations.RetryAfterHeader> | CloudError;
+
+@@override(DataBoxEdgeDevices.checkResourceCreationFeasibility,
+  DataBoxEdgeDevicesCheckResourceCreationFeasibilityCustomized
+);
