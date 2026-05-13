@@ -65,7 +65,6 @@ using Microsoft.DBforMySQL;
   "MySqlFlexibleServerHighAvailabilityState",
   "csharp"
 );
-@@clientName(ServerForUpdate, "MySqlFlexibleServerForUpdate", "csharp");
 @@alternateType(ServerForUpdate.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
