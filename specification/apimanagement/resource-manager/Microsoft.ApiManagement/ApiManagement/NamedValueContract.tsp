@@ -104,7 +104,7 @@ interface NamedValueContracts {
          * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
          */
         @header("ETag")
-        etag: string;
+        eTag: string;
       }) | (ArmResourceCreatedResponse<
       NamedValueContract,
       LroHeaders = ArmCombinedLroHeaders<FinalResult = NamedValueContract>
@@ -113,7 +113,7 @@ interface NamedValueContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     })
   >;
 
@@ -137,7 +137,7 @@ interface NamedValueContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }) | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = NamedValueContract>>
   >;
 
@@ -204,7 +204,7 @@ interface NamedValueContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -220,7 +220,7 @@ interface NamedValueContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }) | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = NamedValueContract>>
   >;
 }
@@ -274,7 +274,7 @@ interface WorkspaceNamedValue {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -288,7 +288,7 @@ interface WorkspaceNamedValue {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -312,14 +312,14 @@ interface WorkspaceNamedValue {
          * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
          */
         @header("ETag")
-        etag: string;
+        eTag: string;
       }) | (ArmResourceCreatedResponse<NamedValueContract> &
       ArmCombinedLroHeaders<FinalResult = NamedValueContract> & {
         /**
          * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
          */
         @header("ETag")
-        etag: string;
+        eTag: string;
       })
   >;
 
@@ -343,7 +343,7 @@ interface WorkspaceNamedValue {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }) | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = NamedValueContract>>
   >;
 
@@ -410,7 +410,7 @@ interface WorkspaceNamedValue {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -426,7 +426,7 @@ interface WorkspaceNamedValue {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }) | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = NamedValueContract>>
   >;
 }
