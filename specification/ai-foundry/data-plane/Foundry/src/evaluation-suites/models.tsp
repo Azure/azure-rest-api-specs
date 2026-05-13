@@ -3,10 +3,8 @@ import "@typespec/openapi";
 import "../common/models.tsp";
 import "../servicepatterns.tsp";
 import "../openai-evaluations/models.tsp";
-import "../evaluations/models.tsp";
 
 using TypeSpec.Rest;
-using OpenAPI;
 
 namespace Azure.AI.Projects;
 
