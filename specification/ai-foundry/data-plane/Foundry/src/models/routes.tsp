@@ -20,10 +20,10 @@ const ModelsRequiredPreviews = #{
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We are using service specific operation templates"
 @tag("Models")
+@removed(Versions.v1)
 interface Models
   extends VersionedOperations<
       ModelVersion,
-      // InputParameters<ModelVersion, "model">,
       InputParameters<UpdateModelVersionRequest>,
       ListModelVersionsParameters & ModelsPreviewHeader,
       ListModelVersionsParameters & ModelsPreviewHeader

@@ -216,5 +216,4 @@ namespace Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 // Models sub‐client
 // --------------------------------------------------------------------------------
-// @@clientName(Models, "AIProjectModels");
-// Hide the protocol methods and methods using feature headers
+@@clientName(Models, "AIProjectModels");
