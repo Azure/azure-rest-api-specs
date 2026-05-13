@@ -72,6 +72,10 @@ using Microsoft.FileShares;
   "ProvisionedStorageInGiB",
   "csharp"
 );
+@@clientName(FileSharePatchProperties.provisionedStorageGiB,
+  "ProvisionedStorageInGiB",
+  "csharp"
+);
 @@clientName(PublicNetworkAccess, "FileSharePublicNetworkAccess", "csharp");
 @@clientName(MediaTier, "FileShareMediaTier", "csharp");
 @@clientName(MediaTier.SSD, "Ssd", "csharp");

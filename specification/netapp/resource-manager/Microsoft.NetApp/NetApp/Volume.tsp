@@ -829,7 +829,6 @@ union VolumeLanguage {
 /**
  * Set of export policy rules
  */
-@clientName("NetAppVolumeExportPolicyRule", "csharp")
 model VolumePropertiesExportPolicy {
   /**
    * Export policy rule
