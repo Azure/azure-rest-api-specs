@@ -27,12 +27,12 @@ using Microsoft.DevCenter;
 
 @@clientName(Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentityType,
   "IdentityType",
-  "java"
+  "java,go"
 );
 
 @@alternateType(Microsoft.DevCenter.OperationStatus.properties,
   unknown,
-  "java"
+  "java,go"
 );
 
 // Keep project-level operations in their original interfaces for C#
