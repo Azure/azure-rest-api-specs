@@ -21,13 +21,13 @@ using Azure.Core;
  *
  * To implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.
  *
- * #### Notes
- *
- * * This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).
- * * The `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Microsoft Entra ID configurations.
- * * The Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.
- * * Usage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.
- * * For more information on Microsoft identity platform, see [Microsoft identity platform overview](https://learn.microsoft.com/entra/identity-platform/v2-overview).
+ * > [!NOTE]
+ * >
+ * > * This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).
+ * > * The `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Microsoft Entra ID configurations.
+ * > * The Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.
+ * > * Usage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.
+ * > * For more information on Microsoft identity platform, see [Microsoft identity platform overview](https://learn.microsoft.com/entra/identity-platform/v2-overview).
  */
 model AadToken
   is OAuth2Auth<[
