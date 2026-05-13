@@ -612,7 +612,7 @@ interface Caches {
     Cache,
     PoolChangeRequest,
     Cache,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = Cache> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -625,7 +625,7 @@ interface Caches {
     Resource = Cache,
     Request = void,
     Response = Cache,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = Cache> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 }
