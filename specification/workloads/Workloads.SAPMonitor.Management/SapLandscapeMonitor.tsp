@@ -61,9 +61,11 @@ interface SapLandscapeMonitor {
   listByMonitor is ArmResourceListByParent<SapLandscapeMonitorResource>;
 }
 
-@@doc(SapLandscapeMonitor.create::parameters.resource,
+@@doc(
+  SapLandscapeMonitor.create::parameters.resource,
   "Request body representing a configuration for Sap Landscape Monitor Dashboard"
 );
-@@doc(SapLandscapeMonitor.update::parameters.properties,
+@@doc(
+  SapLandscapeMonitor.update::parameters.properties,
   "Request body representing a configuration for Sap Landscape Monitor Dashboard"
 );

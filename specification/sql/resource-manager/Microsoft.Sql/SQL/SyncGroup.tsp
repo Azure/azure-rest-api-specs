@@ -51,11 +51,14 @@ interface SyncGroups {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     SyncGroup,
-    Response = ArmResourceUpdatedResponse<SyncGroup> | ArmResourceCreatedResponse<
-      SyncGroup,
-      ArmLroLocationHeader<FinalResult = SyncGroup> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<SyncGroup>
+      | ArmResourceCreatedResponse<
+          SyncGroup,
+          ArmLroLocationHeader<FinalResult = SyncGroup> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -70,7 +73,10 @@ interface SyncGroups {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     SyncGroup,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -150,9 +156,11 @@ interface SyncGroups {
 
 @@doc(SyncGroup.name, "The name of the sync group.");
 @@doc(SyncGroup.properties, "Resource properties.");
-@@doc(SyncGroups.createOrUpdate::parameters.resource,
+@@doc(
+  SyncGroups.createOrUpdate::parameters.resource,
   "The requested sync group resource state."
 );
-@@doc(SyncGroups.update::parameters.properties,
+@@doc(
+  SyncGroups.update::parameters.properties,
   "The requested sync group resource state."
 );

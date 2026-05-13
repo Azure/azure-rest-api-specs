@@ -60,12 +60,15 @@ interface InformationProtectionPolicies {
   >;
 }
 
-@@doc(InformationProtectionPolicy.name,
+@@doc(
+  InformationProtectionPolicy.name,
   "Name of the information protection policy."
 );
-@@doc(InformationProtectionPolicy.properties,
+@@doc(
+  InformationProtectionPolicy.properties,
   "Information protection policy data"
 );
-@@doc(InformationProtectionPolicies.createOrUpdate::parameters.resource,
+@@doc(
+  InformationProtectionPolicies.createOrUpdate::parameters.resource,
   "Information protection policy."
 );

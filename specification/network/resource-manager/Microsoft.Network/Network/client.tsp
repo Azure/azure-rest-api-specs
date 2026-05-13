@@ -19,46 +19,56 @@ using Common;
 })
 namespace CombineClient;
 
-@@clientLocation(Microsoft.Compute.NetworkInterfaceIPConfigurations.getVirtualMachineScaleSetIpConfiguration,
+@@clientLocation(
+  Microsoft.Compute.NetworkInterfaceIPConfigurations.getVirtualMachineScaleSetIpConfiguration,
   Microsoft.Network.NetworkInterfaces
 );
 
-@@clientLocation(Microsoft.Compute.NetworkInterfaceIPConfigurations.listVirtualMachineScaleSetIpConfigurations,
+@@clientLocation(
+  Microsoft.Compute.NetworkInterfaceIPConfigurations.listVirtualMachineScaleSetIpConfigurations,
   Microsoft.Network.NetworkInterfaces
 );
 
-@@clientLocation(Microsoft.Compute.NetworkInterfacesOperationGroup.listVirtualMachineScaleSetNetworkInterfaces,
+@@clientLocation(
+  Microsoft.Compute.NetworkInterfacesOperationGroup.listVirtualMachineScaleSetNetworkInterfaces,
   Microsoft.Network.NetworkInterfaces
 );
 
-@@clientLocation(Microsoft.Compute.PublicIPAddressesOperationGroup.listVirtualMachineScaleSetPublicIPAddresses,
+@@clientLocation(
+  Microsoft.Compute.PublicIPAddressesOperationGroup.listVirtualMachineScaleSetPublicIPAddresses,
   Microsoft.Network.PublicIPAddresses
 );
 
 @@clientName(CombineClient, "NetworkManagementClient", "javascript,python");
-@@clientName(Azure.ResourceManager.CommonTypes.ErrorResponse,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ErrorResponse,
   "ArmErrorResponse",
   "javascript,python"
 );
 
 // Java naming mitigations
-@@clientName(Microsoft.Network.ApplicationGatewayBackendHttpSettingsPropertiesFormat.hostName,
+@@clientName(
+  Microsoft.Network.ApplicationGatewayBackendHttpSettingsPropertiesFormat.hostName,
   "hostname",
   "java"
 );
-@@clientName(Microsoft.Network.ApplicationGatewayBackendSettingsPropertiesFormat.hostName,
+@@clientName(
+  Microsoft.Network.ApplicationGatewayBackendSettingsPropertiesFormat.hostName,
   "hostname",
   "java"
 );
-@@clientName(Microsoft.Network.ApplicationGatewayHttpListenerPropertiesFormat.hostName,
+@@clientName(
+  Microsoft.Network.ApplicationGatewayHttpListenerPropertiesFormat.hostName,
   "hostname",
   "java"
 );
-@@clientName(Microsoft.Network.BastionActiveSession.userName,
+@@clientName(
+  Microsoft.Network.BastionActiveSession.userName,
   "username",
   "java"
 );
-@@clientName(Microsoft.Network.AzureReachabilityReportLatencyInfo.timeStamp,
+@@clientName(
+  Microsoft.Network.AzureReachabilityReportLatencyInfo.timeStamp,
   "timestamp",
   "java"
 );
@@ -68,11 +78,13 @@ namespace CombineClient;
 @@clientName(Common.ProvisioningState, "CommonProvisioningState", "java");
 
 // Fix definition error on required property. Only "matchVariable" property is required.
-@@alternateType(ApplicationGatewayFirewallExclusion,
+@@alternateType(
+  ApplicationGatewayFirewallExclusion,
   ApplicationGatewayFirewallExclusionRequireMatchVariable,
   "java"
 );
-@@clientName(ApplicationGatewayFirewallExclusion,
+@@clientName(
+  ApplicationGatewayFirewallExclusion,
   "ApplicationGatewayFirewallExclusionRequireAll",
   "java"
 );
@@ -111,659 +123,823 @@ union ProvisioningStateUnion {
 
 @@clientName(ProvisioningStateUnion, "ProvisioningState", "java");
 
-@@alternateType(Microsoft.Network.AdminPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.AdminPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.AdminRuleCollectionPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.AdminRuleCollectionPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ApplicationGatewayAuthenticationCertificatePropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayAuthenticationCertificatePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Common.ApplicationGatewayBackendAddressPoolPropertiesFormat.provisioningState,
+@@alternateType(
+  Common.ApplicationGatewayBackendAddressPoolPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ApplicationGatewayBackendHttpSettingsPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayBackendHttpSettingsPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ApplicationGatewayBackendSettingsPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayBackendSettingsPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ApplicationGatewayEntraJWTValidationConfigPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayEntraJWTValidationConfigPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ApplicationGatewayFirewallRuleSetPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayFirewallRuleSetPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ApplicationGatewayFrontendIPConfigurationPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayFrontendIPConfigurationPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ApplicationGatewayFrontendPortPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayFrontendPortPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ApplicationGatewayHttpListenerPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayHttpListenerPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Common.ApplicationGatewayIPConfigurationPropertiesFormat.provisioningState,
+@@alternateType(
+  Common.ApplicationGatewayIPConfigurationPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ApplicationGatewayListenerPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayListenerPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ApplicationGatewayLoadDistributionPolicyPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayLoadDistributionPolicyPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ApplicationGatewayPathRulePropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayPathRulePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ApplicationGatewayPrivateEndpointConnectionProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayPrivateEndpointConnectionProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ApplicationGatewayPrivateLinkConfigurationProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayPrivateLinkConfigurationProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ApplicationGatewayPrivateLinkIpConfigurationProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayPrivateLinkIpConfigurationProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ApplicationGatewayProbePropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayProbePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ApplicationGatewayPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ApplicationGatewayRequestRoutingRulePropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayRequestRoutingRulePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ApplicationGatewayRewriteRuleSetPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayRewriteRuleSetPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ApplicationGatewayRoutingRulePropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayRoutingRulePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ApplicationGatewaySslCertificatePropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.ApplicationGatewaySslCertificatePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ApplicationGatewaySslProfilePropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.ApplicationGatewaySslProfilePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ApplicationGatewayTrustedClientCertificatePropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayTrustedClientCertificatePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ApplicationGatewayTrustedRootCertificatePropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayTrustedRootCertificatePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ApplicationGatewayUrlPathMapPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayUrlPathMapPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Common.ApplicationSecurityGroupPropertiesFormat.provisioningState,
+@@alternateType(
+  Common.ApplicationSecurityGroupPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.AuthorizationPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.AuthorizationPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.AzureFirewallApplicationRuleCollectionPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.AzureFirewallApplicationRuleCollectionPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.AzureFirewallFqdnTagPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.AzureFirewallFqdnTagPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.AzureFirewallIPConfigurationPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.AzureFirewallIPConfigurationPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.AzureFirewallNatRuleCollectionProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.AzureFirewallNatRuleCollectionProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.AzureFirewallNetworkRuleCollectionPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.AzureFirewallNetworkRuleCollectionPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.AzureFirewallPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.AzureFirewallPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Common.BackendAddressPoolPropertiesFormat.provisioningState,
+@@alternateType(
+  Common.BackendAddressPoolPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.BastionHostIPConfigurationPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.BastionHostIPConfigurationPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.BastionHostPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.BastionHostPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.BgpConnectionProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.BgpConnectionProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ConnectionMonitorResultProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.ConnectionMonitorResultProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ConnectivityConfigurationProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.ConnectivityConfigurationProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ContainerNetworkInterfaceConfigurationPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.ContainerNetworkInterfaceConfigurationPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ContainerNetworkInterfaceIpConfigurationPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.ContainerNetworkInterfaceIpConfigurationPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ContainerNetworkInterfacePropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.ContainerNetworkInterfacePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.CustomIpPrefixPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.CustomIpPrefixPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.DdosCustomPolicyPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.DdosCustomPolicyPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.DdosDetectionRulePropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.DdosDetectionRulePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.DdosProtectionPlanPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.DdosProtectionPlanPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.DefaultAdminPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.DefaultAdminPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.DelegationProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.DelegationProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.DscpConfigurationPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.DscpConfigurationPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ExpressRouteCircuitConnectionPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.ExpressRouteCircuitConnectionPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ExpressRouteCircuitPeeringPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.ExpressRouteCircuitPeeringPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ExpressRouteCircuitPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.ExpressRouteCircuitPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ExpressRouteConnectionProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.ExpressRouteConnectionProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ExpressRouteCrossConnectionPeeringProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.ExpressRouteCrossConnectionPeeringProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ExpressRouteCrossConnectionProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.ExpressRouteCrossConnectionProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ExpressRouteGatewayProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.ExpressRouteGatewayProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ExpressRouteLinkPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.ExpressRouteLinkPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ExpressRoutePortAuthorizationPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.ExpressRoutePortAuthorizationPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ExpressRoutePortPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.ExpressRoutePortPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ExpressRoutePortsLocationPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.ExpressRoutePortsLocationPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ExpressRouteServiceProviderPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.ExpressRouteServiceProviderPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.FirewallPolicyPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.FirewallPolicyPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.FirewallPolicyRuleCollectionGroupProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.FirewallPolicyRuleCollectionGroupProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Common.FlowLogPropertiesFormat.provisioningState,
+@@alternateType(
+  Common.FlowLogPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Common.FrontendIPConfigurationPropertiesFormat.provisioningState,
+@@alternateType(
+  Common.FrontendIPConfigurationPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.HubIPConfigurationPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.HubIPConfigurationPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.HubRouteTableProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.HubRouteTableProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.HubVirtualNetworkConnectionProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.HubVirtualNetworkConnectionProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Common.InboundNatPoolPropertiesFormat.provisioningState,
+@@alternateType(
+  Common.InboundNatPoolPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Common.InboundNatRulePropertiesFormat.provisioningState,
+@@alternateType(
+  Common.InboundNatRulePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.InboundSecurityRuleProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.InboundSecurityRuleProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.IpamPoolProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.IpamPoolProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Common.IPConfigurationProfilePropertiesFormat.provisioningState,
+@@alternateType(
+  Common.IPConfigurationProfilePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Common.IPConfigurationPropertiesFormat.provisioningState,
+@@alternateType(
+  Common.IPConfigurationPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.IpGroupPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.IpGroupPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Common.LoadBalancerPropertiesFormat.provisioningState,
+@@alternateType(
+  Common.LoadBalancerPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Common.LoadBalancingRulePropertiesFormat.provisioningState,
+@@alternateType(
+  Common.LoadBalancingRulePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.LocalNetworkGatewayPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.LocalNetworkGatewayPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Common.NatGatewayPropertiesFormat.provisioningState,
+@@alternateType(
+  Common.NatGatewayPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.NetworkGroupProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.NetworkGroupProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Common.NetworkInterfaceIPConfigurationPropertiesFormat.provisioningState,
+@@alternateType(
+  Common.NetworkInterfaceIPConfigurationPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Common.NetworkInterfacePropertiesFormat.provisioningState,
+@@alternateType(
+  Common.NetworkInterfacePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Common.NetworkInterfaceTapConfigurationPropertiesFormat.provisioningState,
+@@alternateType(
+  Common.NetworkInterfaceTapConfigurationPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.NetworkManagerProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.NetworkManagerProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.NetworkManagerRoutingConfigurationPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.NetworkManagerRoutingConfigurationPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.NetworkProfilePropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.NetworkProfilePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Common.NetworkSecurityGroupPropertiesFormat.provisioningState,
+@@alternateType(
+  Common.NetworkSecurityGroupPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.NetworkVirtualApplianceConnectionProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.NetworkVirtualApplianceConnectionProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.NetworkVirtualAppliancePropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.NetworkVirtualAppliancePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Common.NetworkWatcherPropertiesFormat.provisioningState,
+@@alternateType(
+  Common.NetworkWatcherPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Common.OutboundRulePropertiesFormat.provisioningState,
+@@alternateType(
+  Common.OutboundRulePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.P2SConnectionConfigurationProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.P2SConnectionConfigurationProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.P2SVpnGatewayProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.P2SVpnGatewayProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.PacketCaptureResultProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.PacketCaptureResultProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.PeerExpressRouteCircuitConnectionPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.PeerExpressRouteCircuitConnectionPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.PrivateDnsZoneGroupPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.PrivateDnsZoneGroupPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Common.PrivateEndpointConnectionProperties.provisioningState,
+@@alternateType(
+  Common.PrivateEndpointConnectionProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Common.PrivateEndpointProperties.provisioningState,
+@@alternateType(
+  Common.PrivateEndpointProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Common.PrivateLinkServiceConnectionProperties.provisioningState,
+@@alternateType(
+  Common.PrivateLinkServiceConnectionProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Common.PrivateLinkServiceIpConfigurationProperties.provisioningState,
+@@alternateType(
+  Common.PrivateLinkServiceIpConfigurationProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Common.PrivateLinkServiceProperties.provisioningState,
+@@alternateType(
+  Common.PrivateLinkServiceProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Common.ProbePropertiesFormat.provisioningState,
+@@alternateType(
+  Common.ProbePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Common.PublicIPAddressPropertiesFormat.provisioningState,
+@@alternateType(
+  Common.PublicIPAddressPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.PublicIPPrefixPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.PublicIPPrefixPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ReachabilityAnalysisIntentProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.ReachabilityAnalysisIntentProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ReachabilityAnalysisRunProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.ReachabilityAnalysisRunProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.RecordSet.provisioningState,
+@@alternateType(
+  Microsoft.Network.RecordSet.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Common.ResourceNavigationLinkFormat.provisioningState,
+@@alternateType(
+  Common.ResourceNavigationLinkFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.RouteFilterPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.RouteFilterPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.RouteFilterRulePropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.RouteFilterRulePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.RouteMapProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.RouteMapProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Common.RoutePropertiesFormat.provisioningState,
+@@alternateType(
+  Common.RoutePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Common.RouteTablePropertiesFormat.provisioningState,
+@@alternateType(
+  Common.RouteTablePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.RoutingIntentProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.RoutingIntentProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.RoutingRuleCollectionPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.RoutingRuleCollectionPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.RoutingRulePropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.RoutingRulePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.SecurityAdminConfigurationPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.SecurityAdminConfigurationPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.SecurityPartnerProviderPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.SecurityPartnerProviderPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Common.SecurityRulePropertiesFormat.provisioningState,
+@@alternateType(
+  Common.SecurityRulePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.SecurityUserConfigurationPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.SecurityUserConfigurationPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.SecurityUserRuleCollectionPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.SecurityUserRuleCollectionPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.SecurityUserRulePropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.SecurityUserRulePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Common.ServiceAssociationLinkPropertiesFormat.provisioningState,
+@@alternateType(
+  Common.ServiceAssociationLinkPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Common.ServiceDelegationPropertiesFormat.provisioningState,
+@@alternateType(
+  Common.ServiceDelegationPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Common.ServiceEndpointPolicyDefinitionPropertiesFormat.provisioningState,
+@@alternateType(
+  Common.ServiceEndpointPolicyDefinitionPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Common.ServiceEndpointPolicyPropertiesFormat.provisioningState,
+@@alternateType(
+  Common.ServiceEndpointPolicyPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Common.ServiceEndpointPropertiesFormat.provisioningState,
+@@alternateType(
+  Common.ServiceEndpointPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.ServiceGatewayPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.ServiceGatewayPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.SharedKeyProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.SharedKeyProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.StaticCidrProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.StaticCidrProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.StaticMemberProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.StaticMemberProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Common.SubnetPropertiesFormat.provisioningState,
+@@alternateType(
+  Common.SubnetPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.VerifierWorkspaceProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.VerifierWorkspaceProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.VirtualApplianceSiteProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.VirtualApplianceSiteProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.VirtualHubProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.VirtualHubProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.VirtualHubRouteTableV2Properties.provisioningState,
+@@alternateType(
+  Microsoft.Network.VirtualHubRouteTableV2Properties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.VirtualNetworkApplianceIpConfigurationProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.VirtualNetworkApplianceIpConfigurationProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.VirtualNetworkAppliancePropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.VirtualNetworkAppliancePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.VirtualNetworkGatewayConnectionListEntityPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.VirtualNetworkGatewayConnectionListEntityPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.VirtualNetworkGatewayConnectionPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.VirtualNetworkGatewayConnectionPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.VirtualNetworkGatewayIPConfigurationPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.VirtualNetworkGatewayIPConfigurationPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.VirtualNetworkGatewayNatRuleProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.VirtualNetworkGatewayNatRuleProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.VirtualNetworkGatewayPolicyGroupProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.VirtualNetworkGatewayPolicyGroupProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.VirtualNetworkGatewayPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.VirtualNetworkGatewayPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Common.VirtualNetworkPeeringPropertiesFormat.provisioningState,
+@@alternateType(
+  Common.VirtualNetworkPeeringPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Common.VirtualNetworkPropertiesFormat.provisioningState,
+@@alternateType(
+  Common.VirtualNetworkPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Common.VirtualNetworkTapPropertiesFormat.provisioningState,
+@@alternateType(
+  Common.VirtualNetworkTapPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.VirtualRouterPeeringProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.VirtualRouterPeeringProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.VirtualRouterPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.VirtualRouterPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.VirtualWanProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.VirtualWanProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.VngClientConnectionConfigurationProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.VngClientConnectionConfigurationProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.VpnClientRevokedCertificatePropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.VpnClientRevokedCertificatePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.VpnClientRootCertificatePropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.VpnClientRootCertificatePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.VpnConnectionProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.VpnConnectionProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.VpnGatewayNatRuleProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.VpnGatewayNatRuleProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.VpnGatewayProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.VpnGatewayProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.VpnServerConfigurationPolicyGroupProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.VpnServerConfigurationPolicyGroupProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.VpnSiteLinkConnectionProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.VpnSiteLinkConnectionProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.VpnSiteLinkProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.VpnSiteLinkProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.VpnSiteProperties.provisioningState,
+@@alternateType(
+  Microsoft.Network.VpnSiteProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Network.WebApplicationFirewallPolicyPropertiesFormat.provisioningState,
+@@alternateType(
+  Microsoft.Network.WebApplicationFirewallPolicyPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
@@ -776,31 +952,38 @@ union ProvisioningStateUnion {
 @@clientName(Common.FrontendIPConfiguration, "FrontendIpConfiguration", "java");
 @@clientName(Common.IPConfiguration, "IpConfiguration", "java");
 @@clientName(Common.IPConfigurationProfile, "IpConfigurationProfile", "java");
-@@clientName(Common.NetworkInterfaceIPConfiguration,
+@@clientName(
+  Common.NetworkInterfaceIPConfiguration,
   "NetworkInterfaceIpConfiguration",
   "java"
 );
-@@clientName(Microsoft.Network.IPAddressAvailabilityResult,
+@@clientName(
+  Microsoft.Network.IPAddressAvailabilityResult,
   "IpAddressAvailabilityResult",
   "java"
 );
-@@clientName(Microsoft.Network.VerificationIPFlowResult,
+@@clientName(
+  Microsoft.Network.VerificationIPFlowResult,
   "VerificationIpFlowResult",
   "java"
 );
-@@clientName(Microsoft.Network.VerificationIPFlowParameters,
+@@clientName(
+  Microsoft.Network.VerificationIPFlowParameters,
   "VerificationIpFlowParameters",
   "java"
 );
-@@clientName(Microsoft.Network.VirtualNetworkGatewayIPConfiguration,
+@@clientName(
+  Microsoft.Network.VirtualNetworkGatewayIPConfiguration,
   "VirtualNetworkGatewayIpConfiguration",
   "java"
 );
-@@clientName(Common.ApplicationGatewayIPConfiguration,
+@@clientName(
+  Common.ApplicationGatewayIPConfiguration,
   "ApplicationGatewayIpConfiguration",
   "java"
 );
-@@clientName(Microsoft.Network.ApplicationGatewayFrontendIPConfiguration,
+@@clientName(
+  Microsoft.Network.ApplicationGatewayFrontendIPConfiguration,
   "ApplicationGatewayFrontendIpConfiguration",
   "java"
 );
@@ -809,7 +992,8 @@ union ProvisioningStateUnion {
 @@clientName(Common.PublicIPAddressSku, "PublicIpAddressSku", "java");
 @@clientName(Common.PublicIPAddressSkuName, "PublicIpAddressSkuName", "java");
 @@clientName(Microsoft.Network.PublicIPPrefixSku, "PublicIpPrefixSku", "java");
-@@clientName(Common.PublicIPAddressDnsSettings,
+@@clientName(
+  Common.PublicIPAddressDnsSettings,
   "PublicIpAddressDnsSettings",
   "java"
 );
@@ -817,455 +1001,559 @@ union ProvisioningStateUnion {
 // Interface/client IP → Ip renames
 @@clientName(Microsoft.Network.PublicIPAddresses, "PublicIpAddresses", "java");
 @@clientName(Microsoft.Network.PublicIPPrefixes, "PublicIpPrefixes", "java");
-@@clientName(Microsoft.Network.PublicIPAddressOperationGroup,
+@@clientName(
+  Microsoft.Network.PublicIPAddressOperationGroup,
   "PublicIpAddressOperationGroup",
   "java"
 );
 
 // Property-level IP → Ip renames on PropertiesFormat models (Common)
-@@clientName(Common.IPConfigurationPropertiesFormat.privateIPAddress,
+@@clientName(
+  Common.IPConfigurationPropertiesFormat.privateIPAddress,
   "privateIpAddress",
   "java"
 );
-@@clientName(Common.IPConfigurationPropertiesFormat.publicIPAddress,
+@@clientName(
+  Common.IPConfigurationPropertiesFormat.publicIPAddress,
   "publicIpAddress",
   "java"
 );
-@@clientName(Common.NetworkInterfaceIPConfigurationPropertiesFormat.privateIPAddress,
+@@clientName(
+  Common.NetworkInterfaceIPConfigurationPropertiesFormat.privateIPAddress,
   "privateIpAddress",
   "java"
 );
-@@clientName(Common.NetworkInterfaceIPConfigurationPropertiesFormat.publicIPAddress,
+@@clientName(
+  Common.NetworkInterfaceIPConfigurationPropertiesFormat.publicIPAddress,
   "publicIpAddress",
   "java"
 );
-@@clientName(Common.FrontendIPConfigurationPropertiesFormat.privateIPAddress,
+@@clientName(
+  Common.FrontendIPConfigurationPropertiesFormat.privateIPAddress,
   "privateIpAddress",
   "java"
 );
-@@clientName(Common.FrontendIPConfigurationPropertiesFormat.publicIPAddress,
+@@clientName(
+  Common.FrontendIPConfigurationPropertiesFormat.publicIPAddress,
   "publicIpAddress",
   "java"
 );
-@@clientName(Common.ApplicationGatewayBackendAddressPoolPropertiesFormat.backendIPConfigurations,
+@@clientName(
+  Common.ApplicationGatewayBackendAddressPoolPropertiesFormat.backendIPConfigurations,
   "backendIpConfigurations",
   "java"
 );
-@@clientName(Common.BackendAddressPoolPropertiesFormat.backendIPConfigurations,
+@@clientName(
+  Common.BackendAddressPoolPropertiesFormat.backendIPConfigurations,
   "backendIpConfigurations",
   "java"
 );
-@@clientName(Common.InboundNatRulePropertiesFormat.frontendIPConfiguration,
+@@clientName(
+  Common.InboundNatRulePropertiesFormat.frontendIPConfiguration,
   "frontendIpConfiguration",
   "java"
 );
-@@clientName(Common.InboundNatPoolPropertiesFormat.frontendIPConfiguration,
+@@clientName(
+  Common.InboundNatPoolPropertiesFormat.frontendIPConfiguration,
   "frontendIpConfiguration",
   "java"
 );
-@@clientName(Common.LoadBalancingRulePropertiesFormat.frontendIPConfiguration,
+@@clientName(
+  Common.LoadBalancingRulePropertiesFormat.frontendIPConfiguration,
   "frontendIpConfiguration",
   "java"
 );
-@@clientName(Common.OutboundRulePropertiesFormat.frontendIPConfigurations,
+@@clientName(
+  Common.OutboundRulePropertiesFormat.frontendIPConfigurations,
   "frontendIpConfigurations",
   "java"
 );
-@@clientName(Common.LoadBalancerPropertiesFormat.frontendIPConfigurations,
+@@clientName(
+  Common.LoadBalancerPropertiesFormat.frontendIPConfigurations,
   "frontendIpConfigurations",
   "java"
 );
-@@clientName(Common.PrivateEndpointIPConfigurationProperties.privateIPAddress,
+@@clientName(
+  Common.PrivateEndpointIPConfigurationProperties.privateIPAddress,
   "privateIpAddress",
   "java"
 );
-@@clientName(Common.PrivateLinkServiceIpConfigurationProperties.privateIPAddress,
+@@clientName(
+  Common.PrivateLinkServiceIpConfigurationProperties.privateIPAddress,
   "privateIpAddress",
   "java"
 );
-@@clientName(Common.PrivateLinkServiceProperties.destinationIPAddress,
+@@clientName(
+  Common.PrivateLinkServiceProperties.destinationIPAddress,
   "destinationIpAddress",
   "java"
 );
-@@clientName(Common.ApplicationGatewayIPConfigurationPropertiesFormat.subnet,
+@@clientName(
+  Common.ApplicationGatewayIPConfigurationPropertiesFormat.subnet,
   "subnet",
   "java"
 );
 
 // Property-level IP → Ip renames on models (Network)
-@@clientName(Microsoft.Network.ApplicationGatewayPropertiesFormat.gatewayIPConfigurations,
+@@clientName(
+  Microsoft.Network.ApplicationGatewayPropertiesFormat.gatewayIPConfigurations,
   "gatewayIpConfigurations",
   "java"
 );
-@@clientName(Microsoft.Network.ApplicationGatewayPropertiesFormat.frontendIPConfigurations,
+@@clientName(
+  Microsoft.Network.ApplicationGatewayPropertiesFormat.frontendIPConfigurations,
   "frontendIpConfigurations",
   "java"
 );
-@@clientName(Microsoft.Network.ApplicationGatewayFrontendIPConfigurationPropertiesFormat.privateIPAddress,
+@@clientName(
+  Microsoft.Network.ApplicationGatewayFrontendIPConfigurationPropertiesFormat.privateIPAddress,
   "privateIpAddress",
   "java"
 );
-@@clientName(Microsoft.Network.ApplicationGatewayFrontendIPConfigurationPropertiesFormat.publicIPAddress,
+@@clientName(
+  Microsoft.Network.ApplicationGatewayFrontendIPConfigurationPropertiesFormat.publicIPAddress,
   "publicIpAddress",
   "java"
 );
-@@clientName(Microsoft.Network.ApplicationGatewayHttpListenerPropertiesFormat.frontendIPConfiguration,
+@@clientName(
+  Microsoft.Network.ApplicationGatewayHttpListenerPropertiesFormat.frontendIPConfiguration,
   "frontendIpConfiguration",
   "java"
 );
-@@clientName(Microsoft.Network.ApplicationGatewayListenerPropertiesFormat.frontendIPConfiguration,
+@@clientName(
+  Microsoft.Network.ApplicationGatewayListenerPropertiesFormat.frontendIPConfiguration,
   "frontendIpConfiguration",
   "java"
 );
-@@clientName(Microsoft.Network.AzureFirewallIPConfigurationPropertiesFormat.privateIPAddress,
+@@clientName(
+  Microsoft.Network.AzureFirewallIPConfigurationPropertiesFormat.privateIPAddress,
   "privateIpAddress",
   "java"
 );
-@@clientName(Microsoft.Network.AzureFirewallIPConfigurationPropertiesFormat.publicIPAddress,
+@@clientName(
+  Microsoft.Network.AzureFirewallIPConfigurationPropertiesFormat.publicIPAddress,
   "publicIpAddress",
   "java"
 );
-@@clientName(Microsoft.Network.BastionHostIPConfigurationPropertiesFormat.publicIPAddress,
+@@clientName(
+  Microsoft.Network.BastionHostIPConfigurationPropertiesFormat.publicIPAddress,
   "publicIpAddress",
   "java"
 );
-@@clientName(Microsoft.Network.HubIPAddresses.privateIPAddress,
+@@clientName(
+  Microsoft.Network.HubIPAddresses.privateIPAddress,
   "privateIpAddress",
   "java"
 );
-@@clientName(Microsoft.Network.HubIPConfigurationPropertiesFormat.privateIPAddress,
+@@clientName(
+  Microsoft.Network.HubIPConfigurationPropertiesFormat.privateIPAddress,
   "privateIpAddress",
   "java"
 );
-@@clientName(Microsoft.Network.HubIPConfigurationPropertiesFormat.publicIPAddress,
+@@clientName(
+  Microsoft.Network.HubIPConfigurationPropertiesFormat.publicIPAddress,
   "publicIpAddress",
   "java"
 );
-@@clientName(Microsoft.Network.VirtualNetworkGatewayIPConfigurationPropertiesFormat.privateIPAddress,
+@@clientName(
+  Microsoft.Network.VirtualNetworkGatewayIPConfigurationPropertiesFormat.privateIPAddress,
   "privateIpAddress",
   "java"
 );
-@@clientName(Microsoft.Network.VirtualNetworkGatewayIPConfigurationPropertiesFormat.publicIPAddress,
+@@clientName(
+  Microsoft.Network.VirtualNetworkGatewayIPConfigurationPropertiesFormat.publicIPAddress,
   "publicIpAddress",
   "java"
 );
-@@clientName(Microsoft.Network.PacketCaptureFilter.localIPAddress,
+@@clientName(
+  Microsoft.Network.PacketCaptureFilter.localIPAddress,
   "localIpAddress",
   "java"
 );
-@@clientName(Microsoft.Network.PacketCaptureFilter.remoteIPAddress,
+@@clientName(
+  Microsoft.Network.PacketCaptureFilter.remoteIPAddress,
   "remoteIpAddress",
   "java"
 );
-@@clientName(Microsoft.Network.VerificationIPFlowParameters.localIPAddress,
+@@clientName(
+  Microsoft.Network.VerificationIPFlowParameters.localIPAddress,
   "localIpAddress",
   "java"
 );
-@@clientName(Microsoft.Network.VerificationIPFlowParameters.remoteIPAddress,
+@@clientName(
+  Microsoft.Network.VerificationIPFlowParameters.remoteIPAddress,
   "remoteIpAddress",
   "java"
 );
-@@clientName(Microsoft.Network.NextHopParameters.destinationIPAddress,
+@@clientName(
+  Microsoft.Network.NextHopParameters.destinationIPAddress,
   "destinationIpAddress",
   "java"
 );
-@@clientName(Microsoft.Network.NextHopParameters.sourceIPAddress,
+@@clientName(
+  Microsoft.Network.NextHopParameters.sourceIPAddress,
   "sourceIpAddress",
   "java"
 );
-@@clientName(Microsoft.Network.LoadBalancerVipSwapRequest.frontendIPConfigurations,
+@@clientName(
+  Microsoft.Network.LoadBalancerVipSwapRequest.frontendIPConfigurations,
   "frontendIpConfigurations",
   "java"
 );
-@@clientName(Microsoft.Network.LoadBalancerVipSwapRequestFrontendIPConfigurationProperties.publicIPAddress,
+@@clientName(
+  Microsoft.Network.LoadBalancerVipSwapRequestFrontendIPConfigurationProperties.publicIPAddress,
   "publicIpAddress",
   "java"
 );
-@@clientName(Common.PublicIPAddressPropertiesFormat.servicePublicIPAddress,
+@@clientName(
+  Common.PublicIPAddressPropertiesFormat.servicePublicIPAddress,
   "servicePublicIpAddress",
   "java"
 );
-@@clientName(Common.PublicIPAddressPropertiesFormat.linkedPublicIPAddress,
+@@clientName(
+  Common.PublicIPAddressPropertiesFormat.linkedPublicIPAddress,
   "linkedPublicIpAddress",
   "java"
 );
 
 // pickHostName → pickHostname renames
-@@clientName(Microsoft.Network.ApplicationGatewayProbePropertiesFormat.pickHostNameFromBackendHttpSettings,
+@@clientName(
+  Microsoft.Network.ApplicationGatewayProbePropertiesFormat.pickHostNameFromBackendHttpSettings,
   "pickHostnameFromBackendHttpSettings",
   "java"
 );
-@@clientName(Microsoft.Network.ApplicationGatewayProbePropertiesFormat.pickHostNameFromBackendSettings,
+@@clientName(
+  Microsoft.Network.ApplicationGatewayProbePropertiesFormat.pickHostNameFromBackendSettings,
   "pickHostnameFromBackendSettings",
   "java"
 );
-@@clientName(Microsoft.Network.ApplicationGatewayBackendHttpSettingsPropertiesFormat.pickHostNameFromBackendAddress,
+@@clientName(
+  Microsoft.Network.ApplicationGatewayBackendHttpSettingsPropertiesFormat.pickHostNameFromBackendAddress,
   "pickHostnameFromBackendAddress",
   "java"
 );
-@@clientName(Microsoft.Network.ApplicationGatewayBackendSettingsPropertiesFormat.pickHostNameFromBackendAddress,
+@@clientName(
+  Microsoft.Network.ApplicationGatewayBackendSettingsPropertiesFormat.pickHostNameFromBackendAddress,
   "pickHostnameFromBackendAddress",
   "java"
 );
-@@clientName(Microsoft.Network.ApplicationGatewayOnDemandProbe.pickHostNameFromBackendHttpSettings,
+@@clientName(
+  Microsoft.Network.ApplicationGatewayOnDemandProbe.pickHostNameFromBackendHttpSettings,
   "pickHostnameFromBackendHttpSettings",
   "java"
 );
 
 // ASN → Asn renames
-@@clientName(Microsoft.Network.ExpressRouteCircuitPeeringPropertiesFormat.azureASN,
+@@clientName(
+  Microsoft.Network.ExpressRouteCircuitPeeringPropertiesFormat.azureASN,
   "azureAsn",
   "java"
 );
-@@clientName(Microsoft.Network.ExpressRouteCircuitPeeringPropertiesFormat.peerASN,
+@@clientName(
+  Microsoft.Network.ExpressRouteCircuitPeeringPropertiesFormat.peerASN,
   "peerAsn",
   "java"
 );
-@@clientName(Microsoft.Network.ExpressRouteCircuitPeeringConfig.customerASN,
+@@clientName(
+  Microsoft.Network.ExpressRouteCircuitPeeringConfig.customerASN,
   "customerAsn",
   "java"
 );
-@@clientName(Microsoft.Network.ExpressRouteCrossConnectionPeeringProperties.azureASN,
+@@clientName(
+  Microsoft.Network.ExpressRouteCrossConnectionPeeringProperties.azureASN,
   "azureAsn",
   "java"
 );
-@@clientName(Microsoft.Network.ExpressRouteCrossConnectionPeeringProperties.peerASN,
+@@clientName(
+  Microsoft.Network.ExpressRouteCrossConnectionPeeringProperties.peerASN,
   "peerAsn",
   "java"
 );
 
 // sTag → stag rename
-@@clientName(Microsoft.Network.ExpressRouteCrossConnectionProperties.sTag,
+@@clientName(
+  Microsoft.Network.ExpressRouteCrossConnectionProperties.sTag,
   "stag",
   "java"
 );
 
 // Make read-only ExpressRoute models input for backward compat
-@@usage(Microsoft.Network.ExpressRouteCrossConnectionPeeringProperties,
+@@usage(
+  Microsoft.Network.ExpressRouteCrossConnectionPeeringProperties,
   Azure.ClientGenerator.Core.Usage.input,
   "java"
 );
 
 // Make read-only models input for backward compat with hand-written wrapper code
-@@usage(Microsoft.Network.PacketCaptureResult,
+@@usage(
+  Microsoft.Network.PacketCaptureResult,
   Azure.ClientGenerator.Core.Usage.input,
   "java"
 );
-@@usage(Microsoft.Network.ConnectionMonitorResult,
+@@usage(
+  Microsoft.Network.ConnectionMonitorResult,
   Azure.ClientGenerator.Core.Usage.input,
   "java"
 );
 
 // More property-level IP → Ip renames
-@@clientName(Common.NetworkInterfacePropertiesFormat.enableIPForwarding,
+@@clientName(
+  Common.NetworkInterfacePropertiesFormat.enableIPForwarding,
   "enableIpForwarding",
   "java"
 );
-@@clientName(Common.InboundNatRulePropertiesFormat.enableFloatingIP,
+@@clientName(
+  Common.InboundNatRulePropertiesFormat.enableFloatingIP,
   "enableFloatingIp",
   "java"
 );
-@@clientName(Common.InboundNatRulePropertiesFormat.backendIPConfiguration,
+@@clientName(
+  Common.InboundNatRulePropertiesFormat.backendIPConfiguration,
   "backendIpConfiguration",
   "java"
 );
-@@clientName(Common.LoadBalancingRulePropertiesFormat.enableFloatingIP,
+@@clientName(
+  Common.LoadBalancingRulePropertiesFormat.enableFloatingIP,
   "enableFloatingIp",
   "java"
 );
-@@clientName(Common.InboundNatPoolPropertiesFormat.enableFloatingIP,
+@@clientName(
+  Common.InboundNatPoolPropertiesFormat.enableFloatingIP,
   "enableFloatingIp",
   "java"
 );
-@@clientName(Common.IPConfigurationPropertiesFormat.privateIPAllocationMethod,
+@@clientName(
+  Common.IPConfigurationPropertiesFormat.privateIPAllocationMethod,
   "privateIpAllocationMethod",
   "java"
 );
-@@clientName(Common.PublicIPAddressPropertiesFormat.publicIPAllocationMethod,
+@@clientName(
+  Common.PublicIPAddressPropertiesFormat.publicIPAllocationMethod,
   "publicIpAllocationMethod",
   "java"
 );
-@@clientName(Common.PublicIPAddressPropertiesFormat.publicIPAddressVersion,
+@@clientName(
+  Common.PublicIPAddressPropertiesFormat.publicIPAddressVersion,
   "publicIpAddressVersion",
   "java"
 );
-@@clientName(Common.NetworkInterfaceIPConfigurationPropertiesFormat.privateIPAllocationMethod,
+@@clientName(
+  Common.NetworkInterfaceIPConfigurationPropertiesFormat.privateIPAllocationMethod,
   "privateIpAllocationMethod",
   "java"
 );
-@@clientName(Common.NetworkInterfaceIPConfigurationPropertiesFormat.privateIPAddressVersion,
+@@clientName(
+  Common.NetworkInterfaceIPConfigurationPropertiesFormat.privateIPAddressVersion,
   "privateIpAddressVersion",
   "java"
 );
-@@clientName(Common.FrontendIPConfigurationPropertiesFormat.privateIPAllocationMethod,
+@@clientName(
+  Common.FrontendIPConfigurationPropertiesFormat.privateIPAllocationMethod,
   "privateIpAllocationMethod",
   "java"
 );
-@@clientName(Common.FrontendIPConfigurationPropertiesFormat.privateIPAddressVersion,
+@@clientName(
+  Common.FrontendIPConfigurationPropertiesFormat.privateIPAddressVersion,
   "privateIpAddressVersion",
   "java"
 );
-@@clientName(Common.PrivateLinkServiceIpConfigurationProperties.privateIPAllocationMethod,
+@@clientName(
+  Common.PrivateLinkServiceIpConfigurationProperties.privateIPAllocationMethod,
   "privateIpAllocationMethod",
   "java"
 );
-@@clientName(Common.PrivateLinkServiceIpConfigurationProperties.privateIPAddressVersion,
+@@clientName(
+  Common.PrivateLinkServiceIpConfigurationProperties.privateIPAddressVersion,
   "privateIpAddressVersion",
   "java"
 );
-@@clientName(Microsoft.Network.ApplicationGatewayFrontendIPConfigurationPropertiesFormat.privateIPAllocationMethod,
+@@clientName(
+  Microsoft.Network.ApplicationGatewayFrontendIPConfigurationPropertiesFormat.privateIPAllocationMethod,
   "privateIpAllocationMethod",
   "java"
 );
-@@clientName(Microsoft.Network.ApplicationGatewayPrivateLinkIpConfigurationProperties.privateIPAllocationMethod,
+@@clientName(
+  Microsoft.Network.ApplicationGatewayPrivateLinkIpConfigurationProperties.privateIPAllocationMethod,
   "privateIpAllocationMethod",
   "java"
 );
-@@clientName(Microsoft.Network.BastionHostIPConfigurationPropertiesFormat.privateIPAllocationMethod,
+@@clientName(
+  Microsoft.Network.BastionHostIPConfigurationPropertiesFormat.privateIPAllocationMethod,
   "privateIpAllocationMethod",
   "java"
 );
-@@clientName(Microsoft.Network.HubIPConfigurationPropertiesFormat.privateIPAllocationMethod,
+@@clientName(
+  Microsoft.Network.HubIPConfigurationPropertiesFormat.privateIPAllocationMethod,
   "privateIpAllocationMethod",
   "java"
 );
-@@clientName(Microsoft.Network.VirtualNetworkGatewayIPConfigurationPropertiesFormat.privateIPAllocationMethod,
+@@clientName(
+  Microsoft.Network.VirtualNetworkGatewayIPConfigurationPropertiesFormat.privateIPAllocationMethod,
   "privateIpAllocationMethod",
   "java"
 );
-@@clientName(Microsoft.Network.RouteTargetAddressPropertiesFormat.privateIPAllocationMethod,
+@@clientName(
+  Microsoft.Network.RouteTargetAddressPropertiesFormat.privateIPAllocationMethod,
   "privateIpAllocationMethod",
   "java"
 );
-@@clientName(Microsoft.Network.VirtualNetworkApplianceIpConfigurationProperties.privateIPAllocationMethod,
+@@clientName(
+  Microsoft.Network.VirtualNetworkApplianceIpConfigurationProperties.privateIPAllocationMethod,
   "privateIpAllocationMethod",
   "java"
 );
-@@clientName(Microsoft.Network.VirtualNetworkApplianceIpConfigurationProperties.privateIPAddressVersion,
+@@clientName(
+  Microsoft.Network.VirtualNetworkApplianceIpConfigurationProperties.privateIPAddressVersion,
   "privateIpAddressVersion",
   "java"
 );
-@@clientName(Microsoft.Network.PublicIPPrefixPropertiesFormat.publicIPAddressVersion,
+@@clientName(
+  Microsoft.Network.PublicIPPrefixPropertiesFormat.publicIPAddressVersion,
   "publicIpAddressVersion",
   "java"
 );
-@@clientName(Microsoft.Network.IPAddressAvailabilityResult.availableIPAddresses,
+@@clientName(
+  Microsoft.Network.IPAddressAvailabilityResult.availableIPAddresses,
   "availableIpAddresses",
   "java"
 );
-@@clientName(Microsoft.Network.DdosProtectionPlanPropertiesFormat.publicIPAddresses,
+@@clientName(
+  Microsoft.Network.DdosProtectionPlanPropertiesFormat.publicIPAddresses,
   "publicIpAddresses",
   "java"
 );
-@@clientName(Microsoft.Network.PublicIPPrefixPropertiesFormat.publicIPAddresses,
+@@clientName(
+  Microsoft.Network.PublicIPPrefixPropertiesFormat.publicIPAddresses,
   "publicIpAddresses",
   "java"
 );
 
 // activeActive → active rename
-@@clientName(Microsoft.Network.VirtualNetworkGatewayPropertiesFormat.activeActive,
+@@clientName(
+  Microsoft.Network.VirtualNetworkGatewayPropertiesFormat.activeActive,
   "active",
   "java,javascript,go"
 );
 
 // Operation renames IP → Ip
-@@clientName(Microsoft.Network.NetworkWatchers.verifyIPFlow,
+@@clientName(
+  Microsoft.Network.NetworkWatchers.verifyIPFlow,
   "verifyIpFlow",
   "java"
 );
-@@clientName(Microsoft.Network.VirtualNetworks.checkIPAddressAvailability,
+@@clientName(
+  Microsoft.Network.VirtualNetworks.checkIPAddressAvailability,
   "checkIpAddressAvailability",
   "java"
 );
 
 // HTTP → Http casing overrides for Java checkstyle compliance
 @@clientName(Microsoft.Network.HttpConfiguration, "HttpConfiguration", "java");
-@@clientName(Microsoft.Network.HttpConfigurationMethod,
+@@clientName(
+  Microsoft.Network.HttpConfigurationMethod,
   "HttpConfigurationMethod",
   "java"
 );
 @@clientName(Microsoft.Network.HttpHeader, "HttpHeader", "java");
 @@clientName(Microsoft.Network.HttpMethod, "HttpMethod", "java");
-@@clientName(Microsoft.Network.ConnectionMonitorHttpConfiguration.preferHTTPS,
+@@clientName(
+  Microsoft.Network.ConnectionMonitorHttpConfiguration.preferHTTPS,
   "preferHttps",
   "java"
 );
-@@clientName(Microsoft.Network.ProtocolConfiguration.HTTPConfiguration,
+@@clientName(
+  Microsoft.Network.ProtocolConfiguration.HTTPConfiguration,
   "httpConfiguration",
   "java"
 );
-@@clientName(Microsoft.Network.BastionHostIPConfiguration,
+@@clientName(
+  Microsoft.Network.BastionHostIPConfiguration,
   "BastionHostIpConfiguration",
   "java"
 );
 
 // Operation renames for Java (from readme.java.md)
-@@clientLocation(Microsoft.Network.BgpConnections.get,
+@@clientLocation(
+  Microsoft.Network.BgpConnections.get,
   "VirtualHubBgpConnections",
   "java"
 );
-@@clientLocation(Microsoft.Network.BgpConnections.createOrUpdate,
+@@clientLocation(
+  Microsoft.Network.BgpConnections.createOrUpdate,
   "VirtualHubBgpConnections",
   "java"
 );
-@@clientLocation(Microsoft.Network.BgpConnections.delete,
+@@clientLocation(
+  Microsoft.Network.BgpConnections.delete,
   "VirtualHubBgpConnections",
   "java"
 );
-@@clientLocation(Microsoft.Network.InboundSecurityRuleOperationGroup.get,
+@@clientLocation(
+  Microsoft.Network.InboundSecurityRuleOperationGroup.get,
   "InboundSecurityRuleOperation",
   "java"
 );
-@@clientLocation(Microsoft.Network.InboundSecurityRuleOperationGroup.createOrUpdate,
+@@clientLocation(
+  Microsoft.Network.InboundSecurityRuleOperationGroup.createOrUpdate,
   "InboundSecurityRuleOperation",
   "java"
 );
 
 // Move operations back to top-level NetworkManagementClient for Java
 @@clientLocation(BastionHosts.putBastionShareableLink, CombineClient, "java");
-@@clientLocation(BastionHosts.deleteBastionShareableLink,
+@@clientLocation(
+  BastionHosts.deleteBastionShareableLink,
   CombineClient,
   "java"
 );
-@@clientLocation(BastionHosts.deleteBastionShareableLinkByToken,
+@@clientLocation(
+  BastionHosts.deleteBastionShareableLinkByToken,
   CombineClient,
   "java"
 );
 @@clientLocation(BastionHosts.getBastionShareableLink, CombineClient, "java");
 @@clientLocation(BastionHosts.getActiveSessions, CombineClient, "java");
 @@clientLocation(BastionHosts.disconnectActiveSessions, CombineClient, "java");
-@@clientLocation(CheckDnsNameAvailability.checkDnsNameAvailability,
+@@clientLocation(
+  CheckDnsNameAvailability.checkDnsNameAvailability,
   CombineClient,
   "java"
 );
-@@clientLocation(ExpressRouteProviderPorts.expressRouteProviderPort,
+@@clientLocation(
+  ExpressRouteProviderPorts.expressRouteProviderPort,
   CombineClient,
   "java"
 );
-@@clientLocation(NetworkManagers.listActiveConnectivityConfigurations,
+@@clientLocation(
+  NetworkManagers.listActiveConnectivityConfigurations,
   CombineClient,
   "java"
 );
-@@clientLocation(NetworkManagers.listActiveSecurityAdminRules,
+@@clientLocation(
+  NetworkManagers.listActiveSecurityAdminRules,
   CombineClient,
   "java"
 );
-@@clientLocation(EffectiveConfigurations.listNetworkManagerEffectiveConnectivityConfigurations,
+@@clientLocation(
+  EffectiveConfigurations.listNetworkManagerEffectiveConnectivityConfigurations,
   CombineClient,
   "java"
 );
-@@clientLocation(EffectiveConfigurations.listNetworkManagerEffectiveSecurityAdminRules,
+@@clientLocation(
+  EffectiveConfigurations.listNetworkManagerEffectiveSecurityAdminRules,
   CombineClient,
   "java"
 );
 @@clientLocation(VirtualWans.supportedSecurityProviders, CombineClient, "java");
-@@clientLocation(VirtualWans.generatevirtualwanvpnserverconfigurationvpnprofile,
+@@clientLocation(
+  VirtualWans.generatevirtualwanvpnserverconfigurationvpnprofile,
   CombineClient,
   "java"
 );
 
 // Move VMSS listVirtualMachineScaleSetNetworkInterfaces to NetworkInterfaces client for Java
-@@clientLocation(Microsoft.Compute.NetworkInterfacesOperationGroup.listVirtualMachineScaleSetNetworkInterfaces,
+@@clientLocation(
+  Microsoft.Compute.NetworkInterfacesOperationGroup.listVirtualMachineScaleSetNetworkInterfaces,
   Microsoft.Network.NetworkInterfaces,
   "java"
 );
@@ -1285,71 +1573,86 @@ union ProvisioningStateUnion {
 @@clientName(FirewallPolicyIdpsSignatureSeverity.`2`, "Two", "go");
 @@clientName(FirewallPolicyIdpsSignatureSeverity.`3`, "Three", "go");
 
-@@clientLocation(BastionHosts.deleteBastionShareableLink,
+@@clientLocation(
+  BastionHosts.deleteBastionShareableLink,
   "ManagementClient",
   "go"
 );
-@@clientLocation(BastionHosts.deleteBastionShareableLinkByToken,
+@@clientLocation(
+  BastionHosts.deleteBastionShareableLinkByToken,
   "ManagementClient",
   "go"
 );
-@@clientLocation(BastionHosts.disconnectActiveSessions,
+@@clientLocation(
+  BastionHosts.disconnectActiveSessions,
   "ManagementClient",
   "go"
 );
 
-@@clientLocation(ExpressRouteProviderPorts.expressRouteProviderPort,
+@@clientLocation(
+  ExpressRouteProviderPorts.expressRouteProviderPort,
   "ManagementClient",
   "go"
 );
-@@clientLocation(VirtualWans.generatevirtualwanvpnserverconfigurationvpnprofile,
+@@clientLocation(
+  VirtualWans.generatevirtualwanvpnserverconfigurationvpnprofile,
   "ManagementClient",
   "go"
 );
 @@clientLocation(BastionHosts.getActiveSessions, "ManagementClient", "go");
-@@clientLocation(BastionHosts.getBastionShareableLink,
+@@clientLocation(
+  BastionHosts.getBastionShareableLink,
   "ManagementClient",
   "go"
 );
-@@clientLocation(NetworkManagers.listActiveConnectivityConfigurations,
-  "ManagementClient",
-  "go"
-);
-
-@@clientLocation(NetworkManagers.listActiveSecurityAdminRules,
-  "ManagementClient",
-  "go"
-);
-
-@@clientLocation(EffectiveConfigurations.listNetworkManagerEffectiveConnectivityConfigurations,
-  "ManagementClient",
-  "go"
-);
-@@clientLocation(EffectiveConfigurations.listNetworkManagerEffectiveSecurityAdminRules,
-  "ManagementClient",
-  "go"
-);
-@@clientLocation(BastionHosts.putBastionShareableLink,
+@@clientLocation(
+  NetworkManagers.listActiveConnectivityConfigurations,
   "ManagementClient",
   "go"
 );
 
-@@clientLocation(BastionHosts.putBastionShareableLink,
+@@clientLocation(
+  NetworkManagers.listActiveSecurityAdminRules,
   "ManagementClient",
   "go"
 );
-@@clientLocation(CheckDnsNameAvailability.checkDnsNameAvailability,
+
+@@clientLocation(
+  EffectiveConfigurations.listNetworkManagerEffectiveConnectivityConfigurations,
   "ManagementClient",
   "go"
 );
-@@clientLocation(VirtualWans.supportedSecurityProviders,
+@@clientLocation(
+  EffectiveConfigurations.listNetworkManagerEffectiveSecurityAdminRules,
+  "ManagementClient",
+  "go"
+);
+@@clientLocation(
+  BastionHosts.putBastionShareableLink,
+  "ManagementClient",
+  "go"
+);
+
+@@clientLocation(
+  BastionHosts.putBastionShareableLink,
+  "ManagementClient",
+  "go"
+);
+@@clientLocation(
+  CheckDnsNameAvailability.checkDnsNameAvailability,
+  "ManagementClient",
+  "go"
+);
+@@clientLocation(
+  VirtualWans.supportedSecurityProviders,
   "ManagementClient",
   "go"
 );
 @@clientName(AzureFirewallSkuName.AZFW_VNet, "AzfwVnet", "javascript");
 @@clientName(VM, "Vm", "javascript");
 @@clientName(AzureFirewallSkuName.AZFW_VNet, "AZFWVnet", "go");
-@@clientName(FirewallPolicyPropertiesFormat.explicitProxy,
+@@clientName(
+  FirewallPolicyPropertiesFormat.explicitProxy,
   "ExplicitProxySettings",
   "go"
 );
@@ -1380,7 +1683,8 @@ op availablePrivateEndpointTypesOperationGroupListByResourceGroup(
   body: void,
 ): ArmResponse<AvailablePrivateEndpointTypesResult> | CloudError;
 
-@@override(AvailablePrivateEndpointTypesOperationGroup.listByResourceGroup,
+@@override(
+  AvailablePrivateEndpointTypesOperationGroup.listByResourceGroup,
   availablePrivateEndpointTypesOperationGroupListByResourceGroup,
   "go,python,java"
 );
@@ -1404,7 +1708,8 @@ op availablePrivateEndpointTypesOperationGroupList(
   body: void,
 ): ArmResponse<AvailablePrivateEndpointTypesResult> | CloudError;
 
-@@override(AvailablePrivateEndpointTypesOperationGroup.list,
+@@override(
+  AvailablePrivateEndpointTypesOperationGroup.list,
   availablePrivateEndpointTypesOperationGroupList,
   "go,java"
 );
@@ -1436,12 +1741,16 @@ op privateLinkServicesCheckPrivateLinkServiceVisibilityByResourceGroup(
   @body
   @clientName("parameters")
   body: CheckPrivateLinkServiceVisibilityRequest,
-): ArmResponse<AvailablePrivateEndpointTypesResult> | ArmAcceptedLroResponse<
-  "Accepted and the operation will complete asynchronously.",
-  ArmLroLocationHeader<FinalResult = PrivateLinkServiceVisibility>
-> | CloudError;
+):
+  | ArmResponse<AvailablePrivateEndpointTypesResult>
+  | ArmAcceptedLroResponse<
+      "Accepted and the operation will complete asynchronously.",
+      ArmLroLocationHeader<FinalResult = PrivateLinkServiceVisibility>
+    >
+  | CloudError;
 
-@@override(PrivateLinkServicesOperationGroup.checkPrivateLinkServiceVisibilityByResourceGroup,
+@@override(
+  PrivateLinkServicesOperationGroup.checkPrivateLinkServiceVisibilityByResourceGroup,
   privateLinkServicesCheckPrivateLinkServiceVisibilityByResourceGroup,
   "go,python,java"
 );
@@ -1471,7 +1780,8 @@ op privateLinkServicesOperationGrouplistAutoApprovedPrivateLinkServicesByResourc
   body: void,
 ): ArmResponse<AutoApprovedPrivateLinkServicesResult> | CloudError;
 
-@@override(PrivateLinkServicesOperationGroup.listAutoApprovedPrivateLinkServicesByResourceGroup,
+@@override(
+  PrivateLinkServicesOperationGroup.listAutoApprovedPrivateLinkServicesByResourceGroup,
   privateLinkServicesOperationGrouplistAutoApprovedPrivateLinkServicesByResourceGroup,
   "go,python,java"
 );
@@ -1501,7 +1811,8 @@ op replaceAvailableResourceGroupDelegationsOperationGroupList(
   body: void,
 ): Microsoft.Network.AvailableDelegationsResult | Common.CloudError;
 
-@@override(AvailableResourceGroupDelegationsOperationGroup.list,
+@@override(
+  AvailableResourceGroupDelegationsOperationGroup.list,
   replaceAvailableResourceGroupDelegationsOperationGroupList,
   "go,python,java"
 );
@@ -1529,230 +1840,284 @@ op replaceprivateDnsZoneGroupsList(
 
   @body
   body: void,
-): Azure.ResourceManager.ArmResponse<Microsoft.Network.PrivateDnsZoneGroupListResult> | Common.CloudError;
+):
+  | Azure.ResourceManager.ArmResponse<Microsoft.Network.PrivateDnsZoneGroupListResult>
+  | Common.CloudError;
 
-@@override(Microsoft.Network.PrivateEndpoints.privateDnsZoneGroupsList,
+@@override(
+  Microsoft.Network.PrivateEndpoints.privateDnsZoneGroupsList,
   replaceprivateDnsZoneGroupsList,
   "go,python,java"
 );
 
 // Java: restore Ip casing for model names (TypeSpec uses uppercase IP)
 @@clientName(Microsoft.Network.HubIPAddresses, "HubIpAddresses", "java");
-@@clientName(Microsoft.Network.HubPublicIPAddresses,
+@@clientName(
+  Microsoft.Network.HubPublicIPAddresses,
   "HubPublicIpAddresses",
   "java"
 );
-@@clientName(Microsoft.Network.IPConfigurationBgpPeeringAddress,
+@@clientName(
+  Microsoft.Network.IPConfigurationBgpPeeringAddress,
   "IpConfigurationBgpPeeringAddress",
   "java"
 );
 @@clientName(Microsoft.Network.IPRule, "IpRule", "java");
 @@clientName(Microsoft.Network.IPTraffic, "IpTraffic", "java");
-@@clientName(Microsoft.Network.AzureFirewallPublicIPAddress,
+@@clientName(
+  Microsoft.Network.AzureFirewallPublicIPAddress,
   "AzureFirewallPublicIpAddress",
   "java"
 );
-@@clientName(Microsoft.Network.AzureFirewallIPConfiguration,
+@@clientName(
+  Microsoft.Network.AzureFirewallIPConfiguration,
   "AzureFirewallIpConfiguration",
   "java"
 );
-@@clientName(Common.PrivateEndpointIPConfiguration,
+@@clientName(
+  Common.PrivateEndpointIPConfiguration,
   "PrivateEndpointIpConfiguration",
   "java"
 );
-@@clientName(Common.PrivateEndpointIPVersionType,
+@@clientName(
+  Common.PrivateEndpointIPVersionType,
   "PrivateEndpointIpVersionType",
   "java"
 );
-@@clientName(Microsoft.Network.LoadBalancerVipSwapRequestFrontendIPConfiguration,
+@@clientName(
+  Microsoft.Network.LoadBalancerVipSwapRequestFrontendIPConfiguration,
   "LoadBalancerVipSwapRequestFrontendIpConfiguration",
   "java"
 );
-@@clientName(Common.NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties,
+@@clientName(
+  Common.NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties,
   "NetworkInterfaceIpConfigurationPrivateLinkConnectionProperties",
   "java"
 );
-@@clientName(Microsoft.Network.VirtualApplianceIPConfiguration,
+@@clientName(
+  Microsoft.Network.VirtualApplianceIPConfiguration,
   "VirtualApplianceIpConfiguration",
   "java"
 );
-@@clientName(Microsoft.Network.VirtualApplianceIPConfigurationProperties,
+@@clientName(
+  Microsoft.Network.VirtualApplianceIPConfigurationProperties,
   "VirtualApplianceIpConfigurationProperties",
   "java"
 );
-@@clientName(Microsoft.Network.PreferredIPVersion,
+@@clientName(
+  Microsoft.Network.PreferredIPVersion,
   "PreferredIpVersion",
   "java"
 );
-@@clientName(Common.PublicIPAddressMigrationPhase,
+@@clientName(
+  Common.PublicIPAddressMigrationPhase,
   "PublicIpAddressMigrationPhase",
   "java"
 );
 @@clientName(Common.PublicIPAddressSkuTier, "PublicIpAddressSkuTier", "java");
-@@clientName(Microsoft.Network.PublicIPPrefixSkuName,
+@@clientName(
+  Microsoft.Network.PublicIPPrefixSkuName,
   "PublicIpPrefixSkuName",
   "java"
 );
-@@clientName(Microsoft.Network.PublicIPPrefixSkuTier,
+@@clientName(
+  Microsoft.Network.PublicIPPrefixSkuTier,
   "PublicIpPrefixSkuTier",
   "java"
 );
 
 // Java: restore casing for BGP, JWT, IDPS, SNAT, SQL, LOA model names
 @@clientName(Microsoft.Network.BGPCommunity, "BgpCommunity", "java");
-@@clientName(Microsoft.Network.ApplicationGatewayEntraJWTValidationConfig,
+@@clientName(
+  Microsoft.Network.ApplicationGatewayEntraJWTValidationConfig,
   "ApplicationGatewayEntraJwtValidationConfig",
   "java"
 );
-@@clientName(FirewallPolicyIdpsQuerySortOrder,
+@@clientName(
+  FirewallPolicyIdpsQuerySortOrder,
   "FirewallPolicyIdpsQuerySortOrder",
   "java"
 );
-@@clientName(FirewallPolicyIdpsSignatureDirection,
+@@clientName(
+  FirewallPolicyIdpsSignatureDirection,
   "FirewallPolicyIdpsSignatureDirection",
   "java"
 );
-@@clientName(FirewallPolicyIdpsSignatureMode,
+@@clientName(
+  FirewallPolicyIdpsSignatureMode,
   "FirewallPolicyIdpsSignatureMode",
   "java"
 );
-@@clientName(FirewallPolicyIdpsSignatureSeverity,
+@@clientName(
+  FirewallPolicyIdpsSignatureSeverity,
   "FirewallPolicyIdpsSignatureSeverity",
   "java"
 );
 @@clientName(Microsoft.Network.IdpsQueryObject, "IdpsQueryObject", "java");
-@@clientName(Microsoft.Network.FirewallPolicySnat,
+@@clientName(
+  Microsoft.Network.FirewallPolicySnat,
   "FirewallPolicySnat",
   "java"
 );
 @@clientName(Microsoft.Network.FirewallPolicySQL, "FirewallPolicySql", "java");
-@@clientName(Microsoft.Network.GenerateExpressRoutePortsLOARequest,
+@@clientName(
+  Microsoft.Network.GenerateExpressRoutePortsLOARequest,
   "GenerateExpressRoutePortsLoaRequest",
   "java"
 );
 
 // Java: restore property name casing
-@@clientName(Microsoft.Network.StaticCidrProperties.numberOfIPAddressesToAllocate,
+@@clientName(
+  Microsoft.Network.StaticCidrProperties.numberOfIPAddressesToAllocate,
   "numberOfIpAddressesToAllocate",
   "java"
 );
-@@clientName(Microsoft.Network.StaticCidrProperties.totalNumberOfIPAddresses,
+@@clientName(
+  Microsoft.Network.StaticCidrProperties.totalNumberOfIPAddresses,
   "totalNumberOfIpAddresses",
   "java"
 );
-@@clientName(Microsoft.Network.VpnClientConnectionHealthDetail.vpnUserName,
+@@clientName(
+  Microsoft.Network.VpnClientConnectionHealthDetail.vpnUserName,
   "vpnUsername",
   "java"
 );
-@@clientName(Microsoft.Network.ApplicationRule.terminateTLS,
+@@clientName(
+  Microsoft.Network.ApplicationRule.terminateTLS,
   "terminateTls",
   "java"
 );
-@@clientName(Microsoft.Network.ApplicationGatewayBackendHttpSettingsPropertiesFormat.validateSNI,
+@@clientName(
+  Microsoft.Network.ApplicationGatewayBackendHttpSettingsPropertiesFormat.validateSNI,
   "validateSni",
   "java"
 );
-@@clientName(Microsoft.Network.ApplicationGatewayPrivateLinkIpConfigurationProperties.privateIPAddress,
+@@clientName(
+  Microsoft.Network.ApplicationGatewayPrivateLinkIpConfigurationProperties.privateIPAddress,
   "privateIpAddress",
   "java"
 );
-@@clientName(Microsoft.Network.ConnectionMonitorTestConfiguration.preferredIPVersion,
+@@clientName(
+  Microsoft.Network.ConnectionMonitorTestConfiguration.preferredIPVersion,
   "preferredIpVersion",
   "java"
 );
-@@clientName(Microsoft.Network.ConnectivityParameters.preferredIPVersion,
+@@clientName(
+  Microsoft.Network.ConnectivityParameters.preferredIPVersion,
   "preferredIpVersion",
   "java"
 );
-@@clientName(Common.LoadBalancerBackendAddressPropertiesFormat.loadBalancerFrontendIPConfiguration,
+@@clientName(
+  Common.LoadBalancerBackendAddressPropertiesFormat.loadBalancerFrontendIPConfiguration,
   "loadBalancerFrontendIpConfiguration",
   "java"
 );
-@@clientName(Common.LoadBalancerBackendAddressPropertiesFormat.networkInterfaceIPConfiguration,
+@@clientName(
+  Common.LoadBalancerBackendAddressPropertiesFormat.networkInterfaceIPConfiguration,
   "networkInterfaceIpConfiguration",
   "java"
 );
-@@clientName(Microsoft.Network.LoadBalancerHealthPerRulePerBackendAddress.networkInterfaceIPConfigurationId,
+@@clientName(
+  Microsoft.Network.LoadBalancerHealthPerRulePerBackendAddress.networkInterfaceIPConfigurationId,
   "networkInterfaceIpConfigurationId",
   "java"
 );
-@@clientName(Microsoft.Network.VirtualNetworkApplianceIpConfigurationProperties.privateIPAddress,
+@@clientName(
+  Microsoft.Network.VirtualNetworkApplianceIpConfigurationProperties.privateIPAddress,
   "privateIpAddress",
   "java"
 );
 // Fluent model renames (IP→Ip, JWT→Jwt, LOA→Loa)
-@@clientName(Common.ApplicationGatewayIPConfigurationPropertiesFormat,
+@@clientName(
+  Common.ApplicationGatewayIPConfigurationPropertiesFormat,
   "ApplicationGatewayIpConfigurationPropertiesFormat",
   "java"
 );
-@@clientName(Microsoft.Network.ApplicationGatewayFrontendIPConfigurationPropertiesFormat,
+@@clientName(
+  Microsoft.Network.ApplicationGatewayFrontendIPConfigurationPropertiesFormat,
   "ApplicationGatewayFrontendIpConfigurationPropertiesFormat",
   "java"
 );
-@@clientName(Microsoft.Network.AzureFirewallIPConfigurationPropertiesFormat,
+@@clientName(
+  Microsoft.Network.AzureFirewallIPConfigurationPropertiesFormat,
   "AzureFirewallIpConfigurationPropertiesFormat",
   "java"
 );
-@@clientName(Microsoft.Network.BastionHostIPConfigurationPropertiesFormat,
+@@clientName(
+  Microsoft.Network.BastionHostIPConfigurationPropertiesFormat,
   "BastionHostIpConfigurationPropertiesFormat",
   "java"
 );
-@@clientName(Common.FrontendIPConfigurationPropertiesFormat,
+@@clientName(
+  Common.FrontendIPConfigurationPropertiesFormat,
   "FrontendIpConfigurationPropertiesFormat",
   "java"
 );
-@@clientName(Microsoft.Network.HubIPConfigurationPropertiesFormat,
+@@clientName(
+  Microsoft.Network.HubIPConfigurationPropertiesFormat,
   "HubIpConfigurationPropertiesFormat",
   "java"
 );
-@@clientName(Common.IPConfigurationProfilePropertiesFormat,
+@@clientName(
+  Common.IPConfigurationProfilePropertiesFormat,
   "IpConfigurationProfilePropertiesFormat",
   "java"
 );
-@@clientName(Common.IPConfigurationPropertiesFormat,
+@@clientName(
+  Common.IPConfigurationPropertiesFormat,
   "IpConfigurationPropertiesFormat",
   "java"
 );
 @@clientName(Microsoft.Network.IPPrefixesList, "IpPrefixesList", "java");
-@@clientName(Microsoft.Network.LoadBalancerVipSwapRequestFrontendIPConfigurationProperties,
+@@clientName(
+  Microsoft.Network.LoadBalancerVipSwapRequestFrontendIPConfigurationProperties,
   "LoadBalancerVipSwapRequestFrontendIpConfigurationProperties",
   "java"
 );
-@@clientName(Common.NetworkInterfaceIPConfigurationPropertiesFormat,
+@@clientName(
+  Common.NetworkInterfaceIPConfigurationPropertiesFormat,
   "NetworkInterfaceIpConfigurationPropertiesFormat",
   "java"
 );
-@@clientName(Common.PrivateEndpointIPConfigurationProperties,
+@@clientName(
+  Common.PrivateEndpointIPConfigurationProperties,
   "PrivateEndpointIpConfigurationProperties",
   "java"
 );
-@@clientName(Common.PublicIPAddressPropertiesFormat,
+@@clientName(
+  Common.PublicIPAddressPropertiesFormat,
   "PublicIpAddressPropertiesFormat",
   "java"
 );
-@@clientName(Microsoft.Network.PublicIPPrefixPropertiesFormat,
+@@clientName(
+  Microsoft.Network.PublicIPPrefixPropertiesFormat,
   "PublicIpPrefixPropertiesFormat",
   "java"
 );
-@@clientName(Microsoft.Network.VirtualNetworkGatewayIPConfigurationPropertiesFormat,
+@@clientName(
+  Microsoft.Network.VirtualNetworkGatewayIPConfigurationPropertiesFormat,
   "VirtualNetworkGatewayIpConfigurationPropertiesFormat",
   "java"
 );
-@@clientName(Microsoft.Network.ApplicationGatewayEntraJWTValidationConfigPropertiesFormat,
+@@clientName(
+  Microsoft.Network.ApplicationGatewayEntraJWTValidationConfigPropertiesFormat,
   "ApplicationGatewayEntraJwtValidationConfigPropertiesFormat",
   "java"
 );
-@@clientName(Microsoft.Network.GenerateExpressRoutePortsLOAResult,
+@@clientName(
+  Microsoft.Network.GenerateExpressRoutePortsLOAResult,
   "GenerateExpressRoutePortsLoaResult",
   "java"
 );
 @@clientName(Microsoft.Network.VirtualWAN, "VirtualWan", "java");
 // Interface/operation group renames
-@@clientName(Microsoft.Network.FrontendIPConfigurations,
+@@clientName(
+  Microsoft.Network.FrontendIPConfigurations,
   "FrontendIpConfigurations",
   "java"
 );
-@@clientName(Microsoft.Network.NetworkInterfaceIPConfigurations,
+@@clientName(
+  Microsoft.Network.NetworkInterfaceIPConfigurations,
   "NetworkInterfaceIpConfigurations",
   "java"
 );
@@ -1760,115 +2125,143 @@ op replaceprivateDnsZoneGroupsList(
 @@clientName(NetworkGroupCreateOrUpdateEtagHeader.eTag, "etag", "java");
 
 // python
-@@clientName(ApplicationGatewaySslCipherSuite.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,
+@@clientName(
+  ApplicationGatewaySslCipherSuite.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,
   "TLS_ECDHE_RSA_WITH_AES256_CBC_SHA384",
   "python"
 );
-@@clientName(ApplicationGatewaySslCipherSuite.TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA,
+@@clientName(
+  ApplicationGatewaySslCipherSuite.TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA,
   "TLS_DHE_DSS_WITH3_DES_EDE_CBC_SHA",
   "python"
 );
-@@clientName(ApplicationGatewaySslCipherSuite.TLS_DHE_DSS_WITH_AES_128_CBC_SHA,
+@@clientName(
+  ApplicationGatewaySslCipherSuite.TLS_DHE_DSS_WITH_AES_128_CBC_SHA,
   "TLS_DHE_DSS_WITH_AES128_CBC_SHA",
   "python"
 );
-@@clientName(ApplicationGatewaySslCipherSuite.TLS_DHE_DSS_WITH_AES_128_CBC_SHA256,
+@@clientName(
+  ApplicationGatewaySslCipherSuite.TLS_DHE_DSS_WITH_AES_128_CBC_SHA256,
   "TLS_DHE_DSS_WITH_AES128_CBC_SHA256",
   "python"
 );
-@@clientName(ApplicationGatewaySslCipherSuite.TLS_DHE_DSS_WITH_AES_256_CBC_SHA,
+@@clientName(
+  ApplicationGatewaySslCipherSuite.TLS_DHE_DSS_WITH_AES_256_CBC_SHA,
   "TLS_DHE_DSS_WITH_AES256_CBC_SHA",
   "python"
 );
-@@clientName(ApplicationGatewaySslCipherSuite.TLS_DHE_DSS_WITH_AES_256_CBC_SHA256,
+@@clientName(
+  ApplicationGatewaySslCipherSuite.TLS_DHE_DSS_WITH_AES_256_CBC_SHA256,
   "TLS_DHE_DSS_WITH_AES256_CBC_SHA256",
   "python"
 );
-@@clientName(ApplicationGatewaySslCipherSuite.TLS_DHE_RSA_WITH_AES_128_CBC_SHA,
+@@clientName(
+  ApplicationGatewaySslCipherSuite.TLS_DHE_RSA_WITH_AES_128_CBC_SHA,
   "TLS_DHE_RSA_WITH_AES128_CBC_SHA",
   "python"
 );
-@@clientName(ApplicationGatewaySslCipherSuite.TLS_DHE_RSA_WITH_AES_128_GCM_SHA256,
+@@clientName(
+  ApplicationGatewaySslCipherSuite.TLS_DHE_RSA_WITH_AES_128_GCM_SHA256,
   "TLS_DHE_RSA_WITH_AES128_GCM_SHA256",
   "python"
 );
-@@clientName(ApplicationGatewaySslCipherSuite.TLS_DHE_RSA_WITH_AES_256_CBC_SHA,
+@@clientName(
+  ApplicationGatewaySslCipherSuite.TLS_DHE_RSA_WITH_AES_256_CBC_SHA,
   "TLS_DHE_RSA_WITH_AES256_CBC_SHA",
   "python"
 );
-@@clientName(ApplicationGatewaySslCipherSuite.TLS_DHE_RSA_WITH_AES_256_GCM_SHA384,
+@@clientName(
+  ApplicationGatewaySslCipherSuite.TLS_DHE_RSA_WITH_AES_256_GCM_SHA384,
   "TLS_DHE_RSA_WITH_AES256_GCM_SHA384",
   "python"
 );
-@@clientName(ApplicationGatewaySslCipherSuite.TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,
+@@clientName(
+  ApplicationGatewaySslCipherSuite.TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,
   "TLS_ECDHE_ECDSA_WITH_AES128_CBC_SHA",
   "python"
 );
-@@clientName(ApplicationGatewaySslCipherSuite.TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,
+@@clientName(
+  ApplicationGatewaySslCipherSuite.TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,
   "TLS_ECDHE_ECDSA_WITH_AES128_CBC_SHA256",
   "python"
 );
-@@clientName(ApplicationGatewaySslCipherSuite.TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,
+@@clientName(
+  ApplicationGatewaySslCipherSuite.TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,
   "TLS_ECDHE_ECDSA_WITH_AES128_GCM_SHA256",
   "python"
 );
-@@clientName(ApplicationGatewaySslCipherSuite.TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,
+@@clientName(
+  ApplicationGatewaySslCipherSuite.TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,
   "TLS_ECDHE_ECDSA_WITH_AES256_CBC_SHA",
   "python"
 );
-@@clientName(ApplicationGatewaySslCipherSuite.TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384,
+@@clientName(
+  ApplicationGatewaySslCipherSuite.TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384,
   "TLS_ECDHE_ECDSA_WITH_AES256_CBC_SHA384",
   "python"
 );
-@@clientName(ApplicationGatewaySslCipherSuite.TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,
+@@clientName(
+  ApplicationGatewaySslCipherSuite.TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,
   "TLS_ECDHE_ECDSA_WITH_AES256_GCM_SHA384",
   "python"
 );
-@@clientName(ApplicationGatewaySslCipherSuite.TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,
+@@clientName(
+  ApplicationGatewaySslCipherSuite.TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,
   "TLS_ECDHE_RSA_WITH_AES128_CBC_SHA",
   "python"
 );
-@@clientName(ApplicationGatewaySslCipherSuite.TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,
+@@clientName(
+  ApplicationGatewaySslCipherSuite.TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,
   "TLS_ECDHE_RSA_WITH_AES128_CBC_SHA256",
   "python"
 );
-@@clientName(ApplicationGatewaySslCipherSuite.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
+@@clientName(
+  ApplicationGatewaySslCipherSuite.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
   "TLS_ECDHE_RSA_WITH_AES128_GCM_SHA256",
   "python"
 );
-@@clientName(ApplicationGatewaySslCipherSuite.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,
+@@clientName(
+  ApplicationGatewaySslCipherSuite.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,
   "TLS_ECDHE_RSA_WITH_AES256_CBC_SHA",
   "python"
 );
-@@clientName(ApplicationGatewaySslCipherSuite.TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,
+@@clientName(
+  ApplicationGatewaySslCipherSuite.TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,
   "TLS_ECDHE_RSA_WITH_AES256_GCM_SHA384",
   "python"
 );
-@@clientName(ApplicationGatewaySslCipherSuite.TLS_RSA_WITH_3DES_EDE_CBC_SHA,
+@@clientName(
+  ApplicationGatewaySslCipherSuite.TLS_RSA_WITH_3DES_EDE_CBC_SHA,
   "TLS_RSA_WITH3_DES_EDE_CBC_SHA",
   "python"
 );
-@@clientName(ApplicationGatewaySslCipherSuite.TLS_RSA_WITH_AES_128_CBC_SHA,
+@@clientName(
+  ApplicationGatewaySslCipherSuite.TLS_RSA_WITH_AES_128_CBC_SHA,
   "TLS_RSA_WITH_AES128_CBC_SHA",
   "python"
 );
-@@clientName(ApplicationGatewaySslCipherSuite.TLS_RSA_WITH_AES_128_CBC_SHA256,
+@@clientName(
+  ApplicationGatewaySslCipherSuite.TLS_RSA_WITH_AES_128_CBC_SHA256,
   "TLS_RSA_WITH_AES128_CBC_SHA256",
   "python"
 );
-@@clientName(ApplicationGatewaySslCipherSuite.TLS_RSA_WITH_AES_128_GCM_SHA256,
+@@clientName(
+  ApplicationGatewaySslCipherSuite.TLS_RSA_WITH_AES_128_GCM_SHA256,
   "TLS_RSA_WITH_AES128_GCM_SHA256",
   "python"
 );
-@@clientName(ApplicationGatewaySslCipherSuite.TLS_RSA_WITH_AES_256_CBC_SHA,
+@@clientName(
+  ApplicationGatewaySslCipherSuite.TLS_RSA_WITH_AES_256_CBC_SHA,
   "TLS_RSA_WITH_AES256_CBC_SHA",
   "python"
 );
-@@clientName(ApplicationGatewaySslCipherSuite.TLS_RSA_WITH_AES_256_CBC_SHA256,
+@@clientName(
+  ApplicationGatewaySslCipherSuite.TLS_RSA_WITH_AES_256_CBC_SHA256,
   "TLS_RSA_WITH_AES256_CBC_SHA256",
   "python"
 );
-@@clientName(ApplicationGatewaySslCipherSuite.TLS_RSA_WITH_AES_256_GCM_SHA384,
+@@clientName(
+  ApplicationGatewaySslCipherSuite.TLS_RSA_WITH_AES_256_GCM_SHA384,
   "TLS_RSA_WITH_AES256_GCM_SHA384",
   "python"
 );
@@ -1885,241 +2278,294 @@ op replaceprivateDnsZoneGroupsList(
 @@clientName(FirewallPolicyIdpsSignatureSeverity.`2`, "TWO", "python");
 @@clientName(FirewallPolicyIdpsSignatureSeverity.`3`, "THREE", "python");
 
-@@clientLocation(VirtualHubs.virtualHubRouteTableV2sGet,
+@@clientLocation(
+  VirtualHubs.virtualHubRouteTableV2sGet,
   "VirtualHubRouteTableV2S",
   "python"
 );
-@@clientLocation(VirtualHubs.virtualHubRouteTableV2sCreateOrUpdate,
+@@clientLocation(
+  VirtualHubs.virtualHubRouteTableV2sCreateOrUpdate,
   "VirtualHubRouteTableV2S",
   "python"
 );
-@@clientLocation(VirtualHubs.virtualHubRouteTableV2sDelete,
+@@clientLocation(
+  VirtualHubs.virtualHubRouteTableV2sDelete,
   "VirtualHubRouteTableV2S",
   "python"
 );
-@@clientLocation(VirtualHubs.virtualHubRouteTableV2sList,
+@@clientLocation(
+  VirtualHubs.virtualHubRouteTableV2sList,
   "VirtualHubRouteTableV2S",
   "python"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(IpamPoolsListParameters.skip,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  IpamPoolsListParameters.skip,
   0,
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(IpamPoolsListParameters.top,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  IpamPoolsListParameters.top,
   50,
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(ReachabilityAnalysisIntentsListParameters.skip,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  ReachabilityAnalysisIntentsListParameters.skip,
   0,
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(ReachabilityAnalysisIntentsListParameters.top,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  ReachabilityAnalysisIntentsListParameters.top,
   50,
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(ReachabilityAnalysisRunsListParameters.skip,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  ReachabilityAnalysisRunsListParameters.skip,
   0,
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(ReachabilityAnalysisRunsListParameters.top,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  ReachabilityAnalysisRunsListParameters.top,
   50,
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(StaticCidrsListParameters.skip,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  StaticCidrsListParameters.skip,
   0,
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(StaticCidrsListParameters.top,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  StaticCidrsListParameters.top,
   50,
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(VerifierWorkspacesListParameters.skip,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  VerifierWorkspacesListParameters.skip,
   0,
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(VerifierWorkspacesListParameters.top,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  VerifierWorkspacesListParameters.top,
   50,
   "python"
 );
-@@alternateType(Microsoft.Network.EffectiveNetworkSecurityGroup.tagMap,
+@@alternateType(
+  Microsoft.Network.EffectiveNetworkSecurityGroup.tagMap,
   string,
   "javascript"
 );
-@@clientLocation(BastionHosts.putBastionShareableLink,
+@@clientLocation(
+  BastionHosts.putBastionShareableLink,
   CombineClient,
   "python,javascript"
 );
-@@clientLocation(BastionHosts.deleteBastionShareableLink,
+@@clientLocation(
+  BastionHosts.deleteBastionShareableLink,
   CombineClient,
   "python,javascript"
 );
-@@clientLocation(BastionHosts.deleteBastionShareableLinkByToken,
+@@clientLocation(
+  BastionHosts.deleteBastionShareableLinkByToken,
   CombineClient,
   "python,javascript"
 );
-@@clientLocation(BastionHosts.getBastionShareableLink,
+@@clientLocation(
+  BastionHosts.getBastionShareableLink,
   CombineClient,
   "python,javascript"
 );
-@@clientLocation(BastionHosts.getActiveSessions,
+@@clientLocation(
+  BastionHosts.getActiveSessions,
   CombineClient,
   "python,javascript"
 );
-@@clientLocation(BastionHosts.disconnectActiveSessions,
+@@clientLocation(
+  BastionHosts.disconnectActiveSessions,
   CombineClient,
   "python,javascript"
 );
-@@clientLocation(CheckDnsNameAvailability.checkDnsNameAvailability,
+@@clientLocation(
+  CheckDnsNameAvailability.checkDnsNameAvailability,
   CombineClient,
   "python,javascript"
 );
-@@clientLocation(ExpressRouteProviderPorts.expressRouteProviderPort,
+@@clientLocation(
+  ExpressRouteProviderPorts.expressRouteProviderPort,
   CombineClient,
   "python,javascript"
 );
-@@clientLocation(NetworkManagers.listActiveConnectivityConfigurations,
+@@clientLocation(
+  NetworkManagers.listActiveConnectivityConfigurations,
   CombineClient,
   "python,javascript"
 );
-@@clientLocation(NetworkManagers.listActiveSecurityAdminRules,
+@@clientLocation(
+  NetworkManagers.listActiveSecurityAdminRules,
   CombineClient,
   "python,javascript"
 );
-@@clientLocation(EffectiveConfigurations.listNetworkManagerEffectiveConnectivityConfigurations,
+@@clientLocation(
+  EffectiveConfigurations.listNetworkManagerEffectiveConnectivityConfigurations,
   CombineClient,
   "python,javascript"
 );
-@@clientLocation(EffectiveConfigurations.listNetworkManagerEffectiveSecurityAdminRules,
+@@clientLocation(
+  EffectiveConfigurations.listNetworkManagerEffectiveSecurityAdminRules,
   CombineClient,
   "python,javascript"
 );
-@@clientLocation(VirtualWans.supportedSecurityProviders,
+@@clientLocation(
+  VirtualWans.supportedSecurityProviders,
   CombineClient,
   "python,javascript"
 );
-@@clientLocation(VirtualWans.generatevirtualwanvpnserverconfigurationvpnprofile,
+@@clientLocation(
+  VirtualWans.generatevirtualwanvpnserverconfigurationvpnprofile,
   CombineClient,
   "python,javascript"
 );
-@@clientName(ConnectionSharedKeyResults.getAllSharedKeys,
+@@clientName(
+  ConnectionSharedKeyResults.getAllSharedKeys,
   "listAllSharedKeys",
   "javascript"
 );
-@@clientName(ServiceGateways.getAddressLocations,
+@@clientName(
+  ServiceGateways.getAddressLocations,
   "listAddressLocations",
   "javascript"
 );
 @@clientName(ServiceGateways.getServices, "listServices", "javascript");
-@@clientName(ApplicationGatewayWafDynamicManifestResults.applicationGatewayWafDynamicManifestsGet,
+@@clientName(
+  ApplicationGatewayWafDynamicManifestResults.applicationGatewayWafDynamicManifestsGet,
   "list",
   "javascript"
 );
-@@clientName(Azure.ResourceManager.ResourceProvisioningState,
+@@clientName(
+  Azure.ResourceManager.ResourceProvisioningState,
   "ArmResourceProvisioningState",
   "python,javascript"
 );
 
 // Move Microsoft.Compute.PublicIPAddresses operations to Microsoft.Network.PublicIPAddresses for Java
-@@clientLocation(Microsoft.Compute.PublicIPAddresses.getVirtualMachineScaleSetPublicIPAddress,
+@@clientLocation(
+  Microsoft.Compute.PublicIPAddresses.getVirtualMachineScaleSetPublicIPAddress,
   Microsoft.Network.PublicIPAddresses,
   "java"
 );
-@@clientLocation(Microsoft.Compute.PublicIPAddresses.listVirtualMachineScaleSetVMPublicIPAddresses,
+@@clientLocation(
+  Microsoft.Compute.PublicIPAddresses.listVirtualMachineScaleSetVMPublicIPAddresses,
   Microsoft.Network.PublicIPAddresses,
   "java"
 );
 
 // Method renames to maintain backward compatibility for Java
 @@clientName(ExpressRoutePorts.generateLOA, "generateLoa", "java");
-@@clientName(P2SVpnGateways.getP2sVpnConnectionHealth,
+@@clientName(
+  P2SVpnGateways.getP2sVpnConnectionHealth,
   "getP2SVpnConnectionHealth",
   "java"
 );
-@@clientName(P2SVpnGateways.getP2sVpnConnectionHealthDetailed,
+@@clientName(
+  P2SVpnGateways.getP2sVpnConnectionHealthDetailed,
   "getP2SVpnConnectionHealthDetailed",
   "java"
 );
-@@clientName(P2SVpnGateways.disconnectP2sVpnConnections,
+@@clientName(
+  P2SVpnGateways.disconnectP2sVpnConnections,
   "disconnectP2SVpnConnections",
   "java"
 );
 
 // PublicIPAddress → PublicIpAddress method renames for Java
-@@clientName(Microsoft.Network.PublicIPAddresses.getCloudServicePublicIPAddress,
+@@clientName(
+  Microsoft.Network.PublicIPAddresses.getCloudServicePublicIPAddress,
   "getCloudServicePublicIpAddress",
   "java"
 );
-@@clientName(Microsoft.Network.PublicIPAddresses.listCloudServiceRoleInstancePublicIPAddresses,
+@@clientName(
+  Microsoft.Network.PublicIPAddresses.listCloudServiceRoleInstancePublicIPAddresses,
   "listCloudServiceRoleInstancePublicIpAddresses",
   "java"
 );
-@@clientName(Microsoft.Network.PublicIPAddressesOperationGroup.listCloudServicePublicIPAddresses,
+@@clientName(
+  Microsoft.Network.PublicIPAddressesOperationGroup.listCloudServicePublicIPAddresses,
   "listCloudServicePublicIpAddresses",
   "java"
 );
-@@clientName(Microsoft.Compute.PublicIPAddresses.getVirtualMachineScaleSetPublicIPAddress,
+@@clientName(
+  Microsoft.Compute.PublicIPAddresses.getVirtualMachineScaleSetPublicIPAddress,
   "getVirtualMachineScaleSetPublicIpAddress",
   "java"
 );
-@@clientName(Microsoft.Compute.PublicIPAddresses.listVirtualMachineScaleSetVMPublicIPAddresses,
+@@clientName(
+  Microsoft.Compute.PublicIPAddresses.listVirtualMachineScaleSetVMPublicIPAddresses,
   "listVirtualMachineScaleSetVMPublicIpAddresses",
   "java"
 );
-@@clientName(Microsoft.Compute.PublicIPAddressesOperationGroup.listVirtualMachineScaleSetPublicIPAddresses,
+@@clientName(
+  Microsoft.Compute.PublicIPAddressesOperationGroup.listVirtualMachineScaleSetPublicIPAddresses,
   "listVirtualMachineScaleSetPublicIpAddresses",
   "java"
 );
 
 // Sub-client name fixes (override back-compatible.tsp for Java)
-@@clientLocation(FrontendIPConfigurations.get,
+@@clientLocation(
+  FrontendIPConfigurations.get,
   "LoadBalancerFrontendIpConfigurations",
   "java"
 );
-@@clientLocation(FrontendIPConfigurations.list,
+@@clientLocation(
+  FrontendIPConfigurations.list,
   "LoadBalancerFrontendIpConfigurations",
   "java"
 );
-@@clientLocation(VirtualHubs.virtualHubRouteTableV2sGet,
+@@clientLocation(
+  VirtualHubs.virtualHubRouteTableV2sGet,
   "VirtualHubRouteTableV2S",
   "java"
 );
-@@clientLocation(VirtualHubs.virtualHubRouteTableV2sCreateOrUpdate,
+@@clientLocation(
+  VirtualHubs.virtualHubRouteTableV2sCreateOrUpdate,
   "VirtualHubRouteTableV2S",
   "java"
 );
-@@clientLocation(VirtualHubs.virtualHubRouteTableV2sDelete,
+@@clientLocation(
+  VirtualHubs.virtualHubRouteTableV2sDelete,
   "VirtualHubRouteTableV2S",
   "java"
 );
-@@clientLocation(VirtualHubs.virtualHubRouteTableV2sList,
+@@clientLocation(
+  VirtualHubs.virtualHubRouteTableV2sList,
   "VirtualHubRouteTableV2S",
   "java"
 );
 @@clientName(CommonTypes.ProxyResource, "ProxyResourceAutoGenerated", "java");
 @@clientName(CommonTypes.Resource, "ResourceAutoGenerated", "java");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ChildResource,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  ChildResource,
   Microsoft.Network.ProxyResource,
   "java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(CommonResource,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  CommonResource,
   CommonTypes.ProxyResource,
   "java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(SecurityPerimeterResource,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  SecurityPerimeterResource,
   CommonTypes.ProxyResource,
   "java"
 );
