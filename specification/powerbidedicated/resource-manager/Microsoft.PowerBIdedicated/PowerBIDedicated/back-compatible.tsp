@@ -5,32 +5,38 @@ using Microsoft.PowerBIDedicated;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DedicatedCapacityUpdateParameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  DedicatedCapacityUpdateParameters.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AutoScaleVCoreUpdateParameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  AutoScaleVCoreUpdateParameters.properties
 );
 
 @@clientName(Capacities.create::parameters.resource, "capacityParameters");
-@@clientName(Capacities.update::parameters.properties,
+@@clientName(
+  Capacities.update::parameters.properties,
   "capacityUpdateParameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DedicatedCapacity.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  DedicatedCapacity.properties
 );
 
 @@clientName(AutoScaleVCores.create::parameters.resource, "vCoreParameters");
-@@clientName(AutoScaleVCores.update::parameters.properties,
+@@clientName(
+  AutoScaleVCores.update::parameters.properties,
   "vCoreUpdateParameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(AutoScaleVCore.properties);
 
-@@clientName(CapacitiesOperationGroup.checkNameAvailability::parameters.body,
+@@clientName(
+  CapacitiesOperationGroup.checkNameAvailability::parameters.body,
   "capacityParameters"
 );
 

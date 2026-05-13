@@ -49,10 +49,12 @@ interface StartStopManagedInstanceSchedules {
   listByInstance is ArmResourceListByParent<StartStopManagedInstanceSchedule>;
 }
 
-@@doc(StartStopManagedInstanceSchedule.name,
+@@doc(
+  StartStopManagedInstanceSchedule.name,
   "Name of the managed instance Start/Stop schedule."
 );
 @@doc(StartStopManagedInstanceSchedule.properties, "Resource properties.");
-@@doc(StartStopManagedInstanceSchedules.createOrUpdate::parameters.resource,
+@@doc(
+  StartStopManagedInstanceSchedules.createOrUpdate::parameters.resource,
   "The requested managed instance Start/Stop schedule."
 );

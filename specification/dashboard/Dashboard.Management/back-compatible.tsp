@@ -4,63 +4,78 @@ using Azure.ClientGenerator.Core;
 using Microsoft.Dashboard;
 using Azure.Core;
 
-@@clientName(ManagedGrafanas.create::parameters.resource,
+@@clientName(
+  ManagedGrafanas.create::parameters.resource,
   "requestBodyParameters"
 );
-@@clientName(ManagedGrafanas.update::parameters.properties,
+@@clientName(
+  ManagedGrafanas.update::parameters.properties,
   "requestBodyParameters"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateEndpointConnection.properties,
   "!javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateLinkResource.properties,
   "!javascript"
 );
 
-@@clientName(ManagedPrivateEndpointModels.create::parameters.resource,
+@@clientName(
+  ManagedPrivateEndpointModels.create::parameters.resource,
   "requestBodyParameters"
 );
-@@clientName(ManagedPrivateEndpointModels.update::parameters.properties,
+@@clientName(
+  ManagedPrivateEndpointModels.update::parameters.properties,
   "requestBodyParameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ManagedPrivateEndpointModel.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ManagedPrivateEndpointModel.properties,
   "!javascript"
 );
 
-@@clientName(IntegrationFabrics.create::parameters.resource,
+@@clientName(
+  IntegrationFabrics.create::parameters.resource,
   "requestBodyParameters"
 );
-@@clientName(IntegrationFabrics.update::parameters.properties,
+@@clientName(
+  IntegrationFabrics.update::parameters.properties,
   "requestBodyParameters"
 );
 
-@@clientName(ManagedDashboards.create::parameters.resource,
+@@clientName(
+  ManagedDashboards.create::parameters.resource,
   "requestBodyParameters"
 );
-@@clientName(ManagedDashboards.update::parameters.properties,
+@@clientName(
+  ManagedDashboards.update::parameters.properties,
   "requestBodyParameters"
 );
 @@clientName(PrivateEndpointConnections.approve::parameters.resource, "body");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ManagedDashboard.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ManagedDashboard.properties,
   "!javascript"
 );
-@@alternateType(ManagedPrivateEndpointModelProperties.privateLinkResourceId,
+@@alternateType(
+  ManagedPrivateEndpointModelProperties.privateLinkResourceId,
   armResourceIdentifier
 );
-@@alternateType(ManagedPrivateEndpointModelProperties.privateLinkServiceUrl,
+@@alternateType(
+  ManagedPrivateEndpointModelProperties.privateLinkServiceUrl,
   url
 );
-@@alternateType(AzureMonitorWorkspaceIntegration.azureMonitorWorkspaceResourceId,
+@@alternateType(
+  AzureMonitorWorkspaceIntegration.azureMonitorWorkspaceResourceId,
   armResourceIdentifier
 );
 
@@ -73,23 +88,28 @@ using Azure.Core;
 @@clientLocation(ManagedGrafanas.checkEnterpriseDetails, "Grafana", "!csharp");
 @@clientLocation(ManagedGrafanas.fetchAvailablePlugins, "Grafana", "!csharp");
 @@clientLocation(ManagedGrafanas.refresh, "ManagedPrivateEndpoints", "!csharp");
-@@clientLocation(ManagedPrivateEndpointModels.get,
+@@clientLocation(
+  ManagedPrivateEndpointModels.get,
   "ManagedPrivateEndpoints",
   "!csharp"
 );
-@@clientLocation(ManagedPrivateEndpointModels.create,
+@@clientLocation(
+  ManagedPrivateEndpointModels.create,
   "ManagedPrivateEndpoints",
   "!csharp"
 );
-@@clientLocation(ManagedPrivateEndpointModels.update,
+@@clientLocation(
+  ManagedPrivateEndpointModels.update,
   "ManagedPrivateEndpoints",
   "!csharp"
 );
-@@clientLocation(ManagedPrivateEndpointModels.delete,
+@@clientLocation(
+  ManagedPrivateEndpointModels.delete,
   "ManagedPrivateEndpoints",
   "!csharp"
 );
-@@clientLocation(ManagedPrivateEndpointModels.list,
+@@clientLocation(
+  ManagedPrivateEndpointModels.list,
   "ManagedPrivateEndpoints",
   "!csharp"
 );

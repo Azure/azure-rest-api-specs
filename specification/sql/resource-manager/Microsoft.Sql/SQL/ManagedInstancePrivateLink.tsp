@@ -40,9 +40,11 @@ interface ManagedInstancePrivateLinks {
   listByManagedInstance is ArmResourceListByParent<ManagedInstancePrivateLink>;
 }
 
-@@doc(ManagedInstancePrivateLink.name,
+@@doc(
+  ManagedInstancePrivateLink.name,
   "The name of the private link resource."
 );
-@@doc(ManagedInstancePrivateLink.properties,
+@@doc(
+  ManagedInstancePrivateLink.properties,
   "The private link resource group id."
 );

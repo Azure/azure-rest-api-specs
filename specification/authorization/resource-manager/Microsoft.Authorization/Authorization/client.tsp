@@ -39,33 +39,39 @@ using Microsoft.RoleManagementAlerts;
 })
 namespace Microsoft.AuthorizationCombinedClient;
 
-@@clientName(Microsoft.AuthorizationCombinedClient,
+@@clientName(
+  Microsoft.AuthorizationCombinedClient,
   "AuthorizationManagementClient",
   "javascript,python"
 );
-@@alternateType(Microsoft.DenyAssignment.DenyAssignmentPrincipalType,
+@@alternateType(
+  Microsoft.DenyAssignment.DenyAssignmentPrincipalType,
   string,
   "go,python"
 );
 @@clientName(EligibleChildResourcesOperationGroup.get, "list", "javascript");
-@@clientName(Microsoft.Authorization.UsersOrServicePrincipalSetUserType,
+@@clientName(
+  Microsoft.Authorization.UsersOrServicePrincipalSetUserType,
   "UserType",
   "python"
 );
 @@clientName(Microsoft.Authorization.UserType, "CommonUserType", "python");
 
-@@usage(Microsoft.RoleAssignment.RoleAssignment,
+@@usage(
+  Microsoft.RoleAssignment.RoleAssignment,
   Azure.ClientGenerator.Core.Usage.input,
   "java"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(Microsoft.ProviderOperations.ProviderOperationsMetadataGetParameters.$expand,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  Microsoft.ProviderOperations.ProviderOperationsMetadataGetParameters.$expand,
   "resourceTypes",
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(Microsoft.ProviderOperations.ProviderOperationsMetadataListParameters.$expand,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  Microsoft.ProviderOperations.ProviderOperationsMetadataListParameters.$expand,
   "resourceTypes",
   "python"
 );
