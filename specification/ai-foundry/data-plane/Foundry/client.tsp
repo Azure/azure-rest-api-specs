@@ -25,6 +25,7 @@ import "./src/toolboxes/routes.tsp";
 import "./src/skills/routes.tsp";
 import "./src/agents-session-files/routes.tsp";
 import "./src/data_generation_jobs/routes.tsp";
+import "./src/evaluation-suites/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
 import "./relocate-beta-operations.tsp";
@@ -184,6 +185,19 @@ using Azure.AI.Projects;
 @@clientName(EvaluatorGenerationJobs.list, "list_generation_jobs", "python");
 @@clientName(EvaluatorGenerationJobs.cancel, "cancel_generation_job", "python");
 @@clientName(EvaluatorGenerationJobs.delete, "delete_generation_job", "python");
+
+// Evaluation Suite Generation Jobs — unique names to avoid collision with evaluator gen methods
+@@clientName(EvaluationSuiteGenerationJobs.create, "createGenerationSuiteJob", "javascript");
+@@clientName(EvaluationSuiteGenerationJobs.get, "getGenerationSuiteJob", "javascript");
+@@clientName(EvaluationSuiteGenerationJobs.list, "listGenerationSuiteJobs", "javascript");
+@@clientName(EvaluationSuiteGenerationJobs.cancel, "cancelGenerationSuiteJob", "javascript");
+@@clientName(EvaluationSuiteGenerationJobs.delete, "deleteGenerationSuiteJob", "javascript");
+
+@@clientName(EvaluationSuiteGenerationJobs.create, "create_generation_suite_job", "python");
+@@clientName(EvaluationSuiteGenerationJobs.get, "get_generation_suite_job", "python");
+@@clientName(EvaluationSuiteGenerationJobs.list, "list_generation_suite_jobs", "python");
+@@clientName(EvaluationSuiteGenerationJobs.cancel, "cancel_generation_suite_job", "python");
+@@clientName(EvaluationSuiteGenerationJobs.delete, "delete_generation_suite_job", "python");
 
 // EvaluatorVersion datetime fields are typed as string in the spec but carry ISO-8601 timestamps
 @@alternateType(EvaluatorVersion.created_at, utcDateTime, "python");
