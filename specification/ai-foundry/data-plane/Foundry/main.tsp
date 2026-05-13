@@ -9,6 +9,7 @@ import "./src/datasets/routes.tsp";
 import "./src/deployments/routes.tsp";
 import "./src/evaluation-taxonomies/routes.tsp";
 import "./src/evaluation-rules/routes.tsp";
+import "./src/evaluation-suites/routes.tsp";
 import "./src/evaluations/routes.tsp";
 import "./src/evaluators/routes.tsp";
 import "./src/indexes/routes.tsp";

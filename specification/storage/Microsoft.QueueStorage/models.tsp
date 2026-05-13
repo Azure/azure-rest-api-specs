@@ -282,28 +282,11 @@ model Error {
   @header("x-ms-error-code")
   errorCode?: string;
 
-  /** The error code for the copy source. */
-  @header("x-ms-copy-source-error-code")
-  xMsCopySourceErrorCode?: string;
-
-  /** The status code for the copy source. */
-  @header("x-ms-copy-source-status-code")
-  xMsCopySourceStatusCode?: int32;
-
   /** The error code. */
-  @Xml.name("Code") code?: string;
+  @Xml.name("Code") code?: StorageErrorCode;
 
   /** The error message. */
   @Xml.name("Message") message?: string;
-
-  /** Copy source status code. */
-  @Xml.name("CopySourceStatusCode") copySourceStatusCode?: int32;
-
-  /** Copy source error code. */
-  @Xml.name("CopySourceErrorCode") copySourceErrorCode?: string;
-
-  /** Copy source error message. */
-  @Xml.name("CopySourceErrorMessage") copySourceErrorMessage?: string;
 }
 
 /** Statistics for the storage queue service. */
@@ -641,7 +624,6 @@ alias TimeNextVisibleResponseHeaderPrivate = {
 /** The metadata headers. */
 alias MetadataHeaders = {
   /** The metadata headers. */
-  @alternateType(Record<string>, "rust")
   @header("x-ms-meta")
   metadata?: string;
 };
@@ -674,12 +656,10 @@ alias QueueMessageBodyParameter = {
 model KeyInfo {
   /** The date-time the key is active in ISO 8601 UTC time. */
   @Xml.name("Start")
-  @encode("rfc3339")
   start?: utcDateTime;
 
   /** The date-time the key expires in ISO 8601 UTC time. */
   @Xml.name("Expiry")
-  @encode("rfc3339")
   expiry: utcDateTime;
 
   /** The delegated user tenant ID in Entra ID. */
@@ -699,12 +679,10 @@ model UserDelegationKey {
 
   /** The date-time the key is active. */
   @Xml.name("SignedStart")
-  @encode("rfc7231")
   signedStart: utcDateTime;
 
   /** The date-time the key expires. */
   @Xml.name("SignedExpiry")
-  @encode("rfc7231")
   signedExpiry: utcDateTime;
 
   /** The service that created the key. */

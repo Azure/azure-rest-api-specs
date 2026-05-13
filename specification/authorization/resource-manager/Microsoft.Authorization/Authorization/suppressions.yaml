@@ -79,3 +79,38 @@
 - tool: TypeSpecRequirement
   path: ./stable/2022-04-01/*.json
   reason: Brownfield service not ready to migrate
+- tool: TypeSpecValidation
+  reason: >
+    Not ready to split as independent services.
+  rules: [FolderStructure]
+  paths:
+    - AccessReview
+    - AttributeNamespaces
+    - Authorization
+    - ClassicAdmin
+    - DenyAssignment
+    - ProviderOperations
+    - RoleAssignment
+    - RoleDefinitions
+    - RoleManagementAlerts
+
+- tool: TypeSpecValidation
+  reason: >
+    Not ready to split as independent services.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.*
+    - options.@azure-tools/typespec-java.*
+    - options.@azure-tools/typespec-python.*
+    - options.@azure-tools/typespec-ts.*
+    - parameters.service-dir.default
+  paths: 
+    - AccessReview/tspconfig.yaml
+    - AttributeNamespaces/tspconfig.yaml
+    - Authorization/tspconfig.yaml
+    - ClassicAdmin/tspconfig.yaml
+    - DenyAssignment/tspconfig.yaml
+    - ProviderOperations/tspconfig.yaml
+    - RoleAssignment/tspconfig.yaml
+    - RoleDefinitions/tspconfig.yaml
+    - RoleManagementAlerts/tspconfig.yaml

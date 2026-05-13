@@ -13,6 +13,7 @@ namespace Microsoft.AzureStackHCI;
  * ClusterJob Type supported.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 union HciJobType {
   string,
 
@@ -1934,6 +1935,7 @@ model ClusterProperties {
    */
   @visibility(Lifecycle.Read)
   @added(Versions.v2026_04_01_preview)
+  @removed(Versions.v2026_04_30)
   ring?: string;
 
   /**
@@ -2067,6 +2069,7 @@ model ClusterProperties {
    * Represents the Confidential Virtual Machine (CVM) support intent and current status for the cluster resource.
    */
   @added(Versions.v2026_04_01_preview)
+  @removed(Versions.v2026_04_30)
   @visibility(Lifecycle.Read)
   confidentialVmProperties?: ConfidentialVmProperties;
 
@@ -2074,6 +2077,7 @@ model ClusterProperties {
    * Software Defined Networking Properties of the cluster
    */
   @added(Versions.v2026_04_01_preview)
+  @removed(Versions.v2026_04_30)
   @visibility(Lifecycle.Read)
   sdnProperties?: ClusterSdnProperties;
 
@@ -2752,6 +2756,7 @@ model SoftwareAssuranceChangeRequestProperties {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model ChangeRingRequest {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: ChangeRingRequestProperties;
@@ -2759,6 +2764,7 @@ model ChangeRingRequest {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model ChangeRingRequestProperties {
   /**
    * The target ring for the cluster.
@@ -5692,6 +5698,7 @@ model HciNetworkProfile {
    */
   @visibility(Lifecycle.Read)
   @added(Versions.v2026_04_01_preview)
+  @removed(Versions.v2026_04_30)
   sdnProperties?: SdnProperties;
 }
 
@@ -6105,8 +6112,8 @@ model HciStorageProfile {
   /**
    * List of storage disks on the device.
    */
-  @visibility(Lifecycle.Read)
   @added(Versions.v2026_04_01_preview)
+  @visibility(Lifecycle.Read)
   @identifiers(#["id"])
   disks?: EdgeDeviceDisks[];
 }
@@ -6133,6 +6140,21 @@ model EdgeDeviceDisks {
    */
   @visibility(Lifecycle.Read)
   type?: string;
+
+  /** Model number of the hardware. */
+  @added(Versions.v2026_04_30)
+  @visibility(Lifecycle.Read)
+  `model`?: string;
+
+  /** The manufacturer of the disk. */
+  @added(Versions.v2026_04_30)
+  @visibility(Lifecycle.Read)
+  manufacturer?: string;
+
+  /** Indicates whether the manufacturer is supported. */
+  @added(Versions.v2026_04_30)
+  @visibility(Lifecycle.Read)
+  isSupported?: boolean;
 }
 
 /**
@@ -6173,6 +6195,7 @@ model ReportedProperties {
    * CVM support details for edge device.
    */
   @added(Versions.v2026_04_01_preview)
+  @removed(Versions.v2026_04_30)
   @visibility(Lifecycle.Read)
   confidentialVmProfile?: ConfidentialVmProfile;
 }
@@ -6185,6 +6208,7 @@ model ReportedProperties {
  * Represents the Confidential Virtual Machine (CVM) support intent and current status for the cluster resource.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model ConfidentialVmProperties {
   /**
    * Captures the customer's intent to enable or disable CVM support on the cluster, either during initial deployment (Day-0) or at a later stage (Day-N).
@@ -6209,6 +6233,7 @@ model ConfidentialVmProperties {
  * Captures the customer's intent to enable or disable Confidential Virtual Machine (CVM) support on the cluster, either during initial deployment (Day-0) or at a later stage (Day-N).
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 union ConfidentialVmIntent {
   string,
 
@@ -6227,6 +6252,7 @@ union ConfidentialVmIntent {
  * Captures the current status of Confidential Virtual Machine (CVM) support on the cluster.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 union ConfidentialVmStatus {
   string,
 
@@ -6250,6 +6276,7 @@ union ConfidentialVmStatus {
  * Represents the Confidential Virtual Machine (CVM) configuration status for an edge device. It includes the current IGVM support state and detailed component-level status information.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model ConfidentialVmProfile {
   /**
    * Indicates whether Independent Guest Virtual Machine (IGVM) support is available on the device. This will be 'Enabled' if the device supports CVMs, 'Disabled' if not, and 'Unknown' if the status cannot be determined.
@@ -6268,6 +6295,7 @@ model ConfidentialVmProfile {
  * Provides component-level status information related to IGVM enablement on the device.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model IgvmStatusDetail {
   /**
    * A machine-readable status code indicating the result or condition of a specific IGVM-related check or operation.
@@ -6286,6 +6314,7 @@ model IgvmStatusDetail {
  * Represents the IGVM support status for the device.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 union IgvmStatus {
   string,
 
@@ -6314,6 +6343,7 @@ union IgvmStatus {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model ClusterSdnProperties extends SdnProperties {
   /**
    * Indicates whether Software Defined Networking (SDN) integration should be enabled or disabled for this deployment.
@@ -6326,6 +6356,7 @@ model ClusterSdnProperties extends SdnProperties {
  * Indicates whether Software Defined Networking (SDN) integration should be enabled or disabled for this deployment.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 union SdnIntegrationIntent {
   string,
 
@@ -6344,6 +6375,7 @@ union SdnIntegrationIntent {
  * Represents the Software Defined Networking (SDN) configuration state.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model SdnProperties {
   /**
    * Indicates the current Software Defined Networking (SDN) status of the resource, which may be an individual device or a cluster.
@@ -6368,6 +6400,7 @@ model SdnProperties {
  * Indicates the current Software Defined Networking (SDN) status of the resource, which may be an individual device or a cluster.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 union SdnStatus {
   string,
 
@@ -6391,6 +6424,7 @@ union SdnStatus {
  * Properties for configuring SDN integration intent for the cluster.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model HciConfigureSdnIntegrationJobProperties extends ClusterJobProperties {
   /** ClusterJob Type to support polymorphic resource. */
   jobType: HciJobType.ConfigureSdnIntegration;
@@ -6412,6 +6446,7 @@ model HciConfigureSdnIntegrationJobProperties extends ClusterJobProperties {
  * Defines the customer's intent for updating confidential VM properties
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model HciConfigureCvmJobProperties extends ClusterJobProperties {
   /** ClusterJob Type to support polymorphic resource. */
   jobType: HciJobType.ConfigureCVM;
@@ -6430,6 +6465,7 @@ model HciConfigureCvmJobProperties extends ClusterJobProperties {
  * Request for Add/Remove Devices to the pool.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model ListOfDevicesRequest {
   /**
    * List of resource ids of the devices to be modified
@@ -6441,6 +6477,7 @@ model ListOfDevicesRequest {
  * Request for claiming devices of the pool.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model ClaimDeviceRequest {
   /**
    * List of resource ids of the devices to be modified
@@ -6457,6 +6494,7 @@ model ClaimDeviceRequest {
  * Request for releasing devices of the pool.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model ReleaseDeviceRequest {
   /**
    * List of resource ids of the devices to be modified
@@ -6468,6 +6506,7 @@ model ReleaseDeviceRequest {
  * Properties for device pool.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model DevicePoolProperties {
   /**
    * The provisioning state of a resource.
@@ -6515,6 +6554,7 @@ model DevicePoolProperties {
  * Properties for patching Device Pool.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model DevicePoolPatch {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
@@ -6524,6 +6564,7 @@ model DevicePoolPatch {
  * Device details.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model DeviceDetail {
   /**
    * Resource Id of the device.
@@ -6545,6 +6586,7 @@ model DeviceDetail {
  * Edge Machine Kind.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 union EdgeMachineKind {
   string,
 
@@ -6563,6 +6605,7 @@ union EdgeMachineKind {
  * Properties for edge machine.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model EdgeMachineProperties {
   /**
    * Edge Machine type.
@@ -6677,6 +6720,7 @@ model EdgeMachineProperties {
  * Model for patching edge machine.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model EdgeMachinePatch {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
@@ -6686,6 +6730,7 @@ model EdgeMachinePatch {
  * Details for device provisioning.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model ProvisioningDetails {
   /**
    * Operating system profile.
@@ -6704,6 +6749,7 @@ model ProvisioningDetails {
  * Details for ownership voucher.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model OwnershipVoucherDetails {
   /**
    * Ownership voucher in base64 encoded format
@@ -6727,6 +6773,7 @@ model OwnershipVoucherDetails {
  * Type of owner key in the voucher
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 union OwnerKeyType {
   string,
 
@@ -6740,6 +6787,7 @@ union OwnerKeyType {
  * operation detail.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model OperationDetail {
   /**
    * operation name.
@@ -6788,6 +6836,7 @@ model OperationDetail {
  * Overall connectivity status for the machine resource.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 union EdgeMachineConnectivityStatus {
   string,
 
@@ -6811,6 +6860,7 @@ union EdgeMachineConnectivityStatus {
  * Site Details consists of common configurations.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model SiteDetails {
   /**
    * Site resource Id to be set during Edge Machine resource creation.
@@ -6831,6 +6881,7 @@ model SiteDetails {
  * OS State
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 union EdgeMachineState {
   string,
 
@@ -6884,6 +6935,7 @@ union EdgeMachineState {
  * Reported properties for edge machine.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model EdgeMachineReportedProperties {
   /**
    * Last time data reported.
@@ -6932,6 +6984,7 @@ model EdgeMachineReportedProperties {
  * NetworkProfile of edge machine.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model EdgeMachineNetworkProfile {
   /**
    * List of Network Interface Card (NIC) Details of edge machine.
@@ -6952,6 +7005,7 @@ model EdgeMachineNetworkProfile {
  * Network Interface Card (NIC) Details of edge machine.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model EdgeMachineNicDetail {
   /**
    * Adapter Name of NIC
@@ -7054,6 +7108,7 @@ model EdgeMachineNicDetail {
  * OS configurations for HCI device.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model OsProfile {
   /**
    * The boot type of the device. e.g. UEFI, Legacy etc
@@ -7108,6 +7163,7 @@ model OsProfile {
  * Hardware profile for the machine
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model HardwareProfile {
   /**
    * Number of cpu cores in the machine
@@ -7156,6 +7212,7 @@ model HardwareProfile {
  * StorageProfile of edge machine.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model StorageProfile {
   /**
    * Number of storage disks in the device with $CanPool as true.
@@ -7167,6 +7224,7 @@ model StorageProfile {
  * details of validation failure
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model ErrorDetailModel {
   /**
    * Exception details while installing extension.
@@ -7183,6 +7241,7 @@ model ErrorDetailModel {
  * EdgeMachine Job properties
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 @discriminator("jobType")
 model EdgeMachineJobProperties {
   /**
@@ -7237,6 +7296,7 @@ model EdgeMachineJobProperties {
  * Job Type supported.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 union EdgeMachineJobType {
   string,
 
@@ -7265,6 +7325,7 @@ union EdgeMachineJobType {
  * Properties for adding a server in the cluster.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model EdgeMachineRemoteSupportJobProperties extends EdgeMachineJobProperties {
   /**
    * Job Type to support polymorphic resource.
@@ -7297,6 +7358,7 @@ model EdgeMachineRemoteSupportJobProperties extends EdgeMachineJobProperties {
  * Represents the properties of an Azure Linux restricted operating environment Provision Os job.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model ProvisionOsJobProperties extends EdgeMachineJobProperties {
   /**
    * Job Type to support polymorphic resource.
@@ -7318,6 +7380,7 @@ model ProvisionOsJobProperties extends EdgeMachineJobProperties {
  * Download Request properties
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model DownloadRequest {
   /**
    * Target operating system to support polymorphic resource.
@@ -7335,6 +7398,7 @@ model DownloadRequest {
  * Represents the properties of Download Os job.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model DownloadOsJobProperties extends EdgeMachineJobProperties {
   /**
    * Job Type to support polymorphic resource.
@@ -7356,6 +7420,7 @@ model DownloadOsJobProperties extends EdgeMachineJobProperties {
  * Reported Properties for Provision Os job
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model ProvisionOsReportedProperties {
   ...JobReportedProperties;
 }
@@ -7364,6 +7429,7 @@ model ProvisionOsReportedProperties {
  * Represents a provisioning request.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model ProvisioningRequest {
   /**
    * Target operating system to support polymorphic resource.
@@ -7402,6 +7468,7 @@ model ProvisioningRequest {
  * Represents the provisioning operating system type.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 union ProvisioningOsType {
   string,
 
@@ -7420,6 +7487,7 @@ union ProvisioningOsType {
  * Represents the reported properties of a remote support job.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model EdgeMachineRemoteSupportJobReportedProperties {
   ...EdgeMachineJobReportedProperties;
 
@@ -7441,6 +7509,7 @@ model EdgeMachineRemoteSupportJobReportedProperties {
  * Represents the settings of a remote support node.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model EdgeMachineRemoteSupportNodeSettings {
   /**
    * The state of the remote support node.
@@ -7477,6 +7546,7 @@ model EdgeMachineRemoteSupportNodeSettings {
  * Properties for pausing a server in the cluster.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model EdgeMachineCollectLogJobProperties extends EdgeMachineJobProperties {
   /**
    * ClusterJob Type to support polymorphic resource.
@@ -7510,6 +7580,7 @@ model EdgeMachineCollectLogJobProperties extends EdgeMachineJobProperties {
  * Represents the reported properties of a log collection job.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model EdgeMachineCollectLogJobReportedProperties {
   ...JobReportedProperties;
 
@@ -7525,6 +7596,7 @@ model EdgeMachineCollectLogJobReportedProperties {
  * Reported Properties for job triggered from cloud.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model EdgeMachineJobReportedProperties {
   /**
    * The percentage of the job that is complete.
@@ -7549,6 +7621,7 @@ model EdgeMachineJobReportedProperties {
  * Operating system profile.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model OsProvisionProfile {
   /**
    * Name of the operating system.
@@ -7596,6 +7669,7 @@ model OsProvisionProfile {
  * Operating system profile.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model DownloadOsProfile {
   /**
    * Name of the operating system.
@@ -7638,6 +7712,7 @@ model DownloadOsProfile {
  * OS Provision Operation type
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 union OSOperationType {
   string,
 
@@ -7661,6 +7736,7 @@ union OSOperationType {
  * Type of secret used for authentication.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 union SecretType {
   string,
 
@@ -7679,6 +7755,7 @@ union SecretType {
  * User configuration.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model UserDetails {
   /**
    * Name of the user.
@@ -7705,6 +7782,7 @@ model UserDetails {
  * Onboarding resource type.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 union OnboardingResourceType {
   string,
 
@@ -7718,6 +7796,7 @@ union OnboardingResourceType {
  * Onboarding configuration.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model OnboardingConfiguration {
   /**
    * Type of the onboarding resource to support polymorphic resource.
@@ -7751,6 +7830,7 @@ model OnboardingConfiguration {
  * Device configuration.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model TargetDeviceConfiguration {
   /**
    * Network configuration.
@@ -7782,6 +7862,7 @@ model TargetDeviceConfiguration {
  * Network configuration.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model NetworkConfiguration {
   /**
    * List of network adapters.
@@ -7794,6 +7875,7 @@ model NetworkConfiguration {
  * Storage configuration.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model StorageConfiguration {
   /**
    * Partition size.
@@ -7805,6 +7887,7 @@ model StorageConfiguration {
  * Network adapter configuration.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model NetworkAdapter {
   /**
    * Type of IP assignment.
@@ -7856,6 +7939,7 @@ model NetworkAdapter {
  * IP assignment types
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 union IpAssignmentType {
   string,
 
@@ -7874,6 +7958,7 @@ union IpAssignmentType {
  * IP address range configuration.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model IpAddressRange {
   /**
    * Start IP address.
@@ -7890,6 +7975,7 @@ model IpAddressRange {
  * Web proxy configuration.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model WebProxyConfiguration {
   /**
    * Connection URI of the web proxy.
@@ -7912,6 +7998,7 @@ model WebProxyConfiguration {
  * Time configuration.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model TimeConfiguration {
   /**
    * Primary NTP server.
@@ -7938,6 +8025,7 @@ model TimeConfiguration {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model KubernetesVersionProperties {
   /**
    * Represents kubernetes version.
@@ -7951,6 +8039,7 @@ model KubernetesVersionProperties {
 
 /** Cluster Job properties */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 @discriminator("jobType")
 model ClusterJobProperties {
   /** Job Type to support polymorphic resource. */
@@ -7989,6 +8078,7 @@ model ClusterJobProperties {
  * List of Cluster Job resources for the HCI cluster.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model ClusterJobListResult is Azure.Core.Page<ClusterJob>;
 
 ////////////////////////////////////////////////////////////////
@@ -8000,6 +8090,7 @@ model ClusterJobListResult is Azure.Core.Page<ClusterJob>;
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model OsImageProperties {
   /**
    * Represents validated solution recipe version of a os image.
@@ -8031,6 +8122,7 @@ model OsImageProperties {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model PlatformUpdateProperties {
   /**
    * Represents applicable platform updates.
@@ -8043,6 +8135,7 @@ model PlatformUpdateProperties {
  * Represents details of a specific platform update.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model PlatformUpdateDetails {
   /**
    * Represents validated solution recipe version of a platform update.
@@ -8065,6 +8158,7 @@ model PlatformUpdateDetails {
  * Represents details of a specific platform update payload.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model PlatformPayload {
   /**
    * Represents url of a platform update payload.
@@ -8095,6 +8189,7 @@ model PlatformPayload {
  * Validate Ownership Voucher Request
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model ValidateOwnershipVouchersRequest {
   /**
    * Ownership Voucher Details.
@@ -8108,6 +8203,7 @@ model ValidateOwnershipVouchersRequest {
  * Validate Ownership Voucher Response
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model ValidateOwnershipVouchersResponse {
   /**
    * Ownership Voucher Validation Details.
@@ -8120,6 +8216,7 @@ model ValidateOwnershipVouchersResponse {
  * Ownership Voucher Validation Details
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model OwnershipVoucherValidationDetails {
   /**
    * The ownership voucher validation status.
@@ -8166,6 +8263,7 @@ model OwnershipVoucherValidationDetails {
  * Ownership Voucher validation Status.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 union OwnershipVoucherValidationStatus {
   string,
 
@@ -8189,6 +8287,7 @@ union OwnershipVoucherValidationStatus {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model UpdateContentProperties {
   /**
    * Represents the payloads of a update content resource.
@@ -8201,6 +8300,7 @@ model UpdateContentProperties {
  * Represents details of a specific update content payload.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model ContentPayload {
   /**
    * Represents url of a update payload.

@@ -46,13 +46,10 @@
       "name": "DisasterRecoveryConfigs"
     },
     {
-      "name": "SBNamespaces"
+      "name": "Namespaces"
     },
     {
-      "name": "NetworkRuleSets"
-    },
-    {
-      "name": "SBAuthorizationRules"
+      "name": "Namespaces AuthorizationRule"
     },
     {
       "name": "Queues"
@@ -73,16 +70,10 @@
       "name": "MigrationConfigs"
     },
     {
-      "name": "SBQueues"
-    },
-    {
-      "name": "SBTopics"
-    },
-    {
       "name": "Rules"
     },
     {
-      "name": "SBSubscriptions"
+      "name": "Subscriptions"
     }
   ],
   "paths": {
@@ -168,7 +159,7 @@
       "get": {
         "operationId": "Namespaces_List",
         "tags": [
-          "SBNamespaces"
+          "Namespaces"
         ],
         "description": "Gets all the available namespaces within the subscription, irrespective of the resource groups.",
         "externalDocs": {
@@ -210,7 +201,7 @@
       "get": {
         "operationId": "Namespaces_ListByResourceGroup",
         "tags": [
-          "SBNamespaces"
+          "Namespaces"
         ],
         "description": "Gets the available namespaces within a resource group.",
         "externalDocs": {
@@ -255,7 +246,7 @@
       "get": {
         "operationId": "Namespaces_Get",
         "tags": [
-          "SBNamespaces"
+          "Namespaces"
         ],
         "description": "Gets a description for the specified namespace.",
         "externalDocs": {
@@ -304,7 +295,7 @@
       "put": {
         "operationId": "Namespaces_CreateOrUpdate",
         "tags": [
-          "SBNamespaces"
+          "Namespaces"
         ],
         "description": "Creates or updates a service namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.",
         "externalDocs": {
@@ -388,7 +379,7 @@
       "patch": {
         "operationId": "Namespaces_Update",
         "tags": [
-          "SBNamespaces"
+          "Namespaces"
         ],
         "description": "Updates a service namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.",
         "parameters": [
@@ -467,7 +458,7 @@
       "delete": {
         "operationId": "Namespaces_Delete",
         "tags": [
-          "SBNamespaces"
+          "Namespaces"
         ],
         "description": "Deletes an existing namespace. This operation also removes all associated resources under the namespace.",
         "externalDocs": {
@@ -531,7 +522,7 @@
       "get": {
         "operationId": "Namespaces_ListAuthorizationRules",
         "tags": [
-          "SBAuthorizationRules"
+          "Namespaces AuthorizationRule"
         ],
         "description": "Gets the authorization rules for a namespace.",
         "externalDocs": {
@@ -585,7 +576,7 @@
       "get": {
         "operationId": "Namespaces_GetAuthorizationRule",
         "tags": [
-          "SBAuthorizationRules"
+          "Namespaces AuthorizationRule"
         ],
         "description": "Gets an authorization rule for a namespace by rule name.",
         "externalDocs": {
@@ -643,7 +634,7 @@
       "put": {
         "operationId": "Namespaces_CreateOrUpdateAuthorizationRule",
         "tags": [
-          "SBAuthorizationRules"
+          "Namespaces AuthorizationRule"
         ],
         "description": "Creates or updates an authorization rule for a namespace.",
         "externalDocs": {
@@ -710,7 +701,7 @@
       "delete": {
         "operationId": "Namespaces_DeleteAuthorizationRule",
         "tags": [
-          "SBAuthorizationRules"
+          "Namespaces AuthorizationRule"
         ],
         "description": "Deletes a namespace authorization rule.",
         "externalDocs": {
@@ -770,7 +761,7 @@
       "post": {
         "operationId": "Namespaces_ListKeys",
         "tags": [
-          "SBAuthorizationRules"
+          "Namespaces AuthorizationRule"
         ],
         "description": "Gets the primary and secondary connection strings for the namespace.",
         "externalDocs": {
@@ -830,7 +821,7 @@
       "post": {
         "operationId": "Namespaces_RegenerateKeys",
         "tags": [
-          "SBAuthorizationRules"
+          "Namespaces AuthorizationRule"
         ],
         "description": "Regenerates the primary or secondary connection strings for the namespace.",
         "externalDocs": {
@@ -1450,7 +1441,7 @@
       "post": {
         "operationId": "DisasterRecoveryConfigs_CheckNameAvailability",
         "tags": [
-          "SBNamespaces"
+          "Namespaces"
         ],
         "description": "Check the give namespace name availability.",
         "parameters": [
@@ -1507,7 +1498,7 @@
       "post": {
         "operationId": "Namespaces_Failover",
         "tags": [
-          "SBNamespaces"
+          "Namespaces"
         ],
         "description": "GeoDR Failover",
         "parameters": [
@@ -1994,7 +1985,7 @@
       "get": {
         "operationId": "Namespaces_ListNetworkRuleSets",
         "tags": [
-          "NetworkRuleSets"
+          "Namespaces"
         ],
         "description": "Gets list of NetworkRuleSet for a Namespace.",
         "parameters": [
@@ -2045,7 +2036,7 @@
       "get": {
         "operationId": "Namespaces_GetNetworkRuleSet",
         "tags": [
-          "NetworkRuleSets"
+          "Namespaces"
         ],
         "description": "Gets NetworkRuleSet for a Namespace.",
         "parameters": [
@@ -2091,7 +2082,7 @@
       "put": {
         "operationId": "Namespaces_CreateOrUpdateNetworkRuleSet",
         "tags": [
-          "NetworkRuleSets"
+          "Namespaces"
         ],
         "description": "Create or update NetworkRuleSet for a Namespace.",
         "parameters": [
@@ -2569,7 +2560,7 @@
       "get": {
         "operationId": "PrivateLinkResources_Get",
         "tags": [
-          "SBNamespaces"
+          "Namespaces"
         ],
         "description": "Gets lists of resources that supports Privatelinks.",
         "externalDocs": {
@@ -2620,7 +2611,7 @@
       "get": {
         "operationId": "Queues_ListByNamespace",
         "tags": [
-          "SBQueues"
+          "Queues"
         ],
         "description": "Gets the queues within a namespace.",
         "externalDocs": {
@@ -2693,7 +2684,7 @@
       "get": {
         "operationId": "Queues_Get",
         "tags": [
-          "SBQueues"
+          "Queues"
         ],
         "description": "Returns a description for the specified queue.",
         "externalDocs": {
@@ -2750,7 +2741,7 @@
       "put": {
         "operationId": "Queues_CreateOrUpdate",
         "tags": [
-          "SBQueues"
+          "Queues"
         ],
         "description": "Creates or updates a Service Bus queue. This operation is idempotent.",
         "externalDocs": {
@@ -2816,7 +2807,7 @@
       "delete": {
         "operationId": "Queues_Delete",
         "tags": [
-          "SBQueues"
+          "Queues"
         ],
         "description": "Deletes a queue from the specified namespace in a resource group.",
         "externalDocs": {
@@ -3288,7 +3279,7 @@
       "get": {
         "operationId": "Topics_ListByNamespace",
         "tags": [
-          "SBTopics"
+          "Topics"
         ],
         "description": "Gets all the topics in a namespace.",
         "externalDocs": {
@@ -3361,7 +3352,7 @@
       "get": {
         "operationId": "Topics_Get",
         "tags": [
-          "SBTopics"
+          "Topics"
         ],
         "description": "Returns a description for the specified topic.",
         "externalDocs": {
@@ -3418,7 +3409,7 @@
       "put": {
         "operationId": "Topics_CreateOrUpdate",
         "tags": [
-          "SBTopics"
+          "Topics"
         ],
         "description": "Creates a topic in the specified namespace.",
         "externalDocs": {
@@ -3484,7 +3475,7 @@
       "delete": {
         "operationId": "Topics_Delete",
         "tags": [
-          "SBTopics"
+          "Topics"
         ],
         "description": "Deletes a topic from the specified namespace and resource group.",
         "externalDocs": {
@@ -3959,7 +3950,7 @@
       "get": {
         "operationId": "Subscriptions_ListByTopic",
         "tags": [
-          "SBSubscriptions"
+          "Subscriptions"
         ],
         "description": "List all the subscriptions under a specified topic.",
         "externalDocs": {
@@ -4040,7 +4031,7 @@
       "get": {
         "operationId": "Subscriptions_Get",
         "tags": [
-          "SBSubscriptions"
+          "Subscriptions"
         ],
         "description": "Returns a subscription description for the specified topic.",
         "externalDocs": {
@@ -4106,7 +4097,7 @@
       "put": {
         "operationId": "Subscriptions_CreateOrUpdate",
         "tags": [
-          "SBSubscriptions"
+          "Subscriptions"
         ],
         "description": "Creates a topic subscription.",
         "externalDocs": {
@@ -4181,7 +4172,7 @@
       "delete": {
         "operationId": "Subscriptions_Delete",
         "tags": [
-          "SBSubscriptions"
+          "Subscriptions"
         ],
         "description": "Deletes a subscription from the specified topic.",
         "externalDocs": {

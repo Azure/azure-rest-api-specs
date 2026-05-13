@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2025-11-01",
+    "availabilitySetName": "myAvailabilitySet",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "platformFaultDomainCount": 2,
+        "platformUpdateDomainCount": 20
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "sku": {
+          "name": "Classic"
+        },
+        "name": "myAvailabilitySet",
+        "properties": {
+          "scheduledEventsPolicy": {
+            "scheduledEventsAdditionalPublishingTargets": {
+              "eventGridAndResourceGraph": {
+                "enable": true,
+                "scheduledEventsApiVersion": "2020-07-01"
+              }
+            },
+            "userInitiatedRedeploy": {
+              "automaticallyApprove": true
+            },
+            "userInitiatedReboot": {
+              "automaticallyApprove": true
+            },
+            "allInstancesDown": {
+              "automaticallyApprove": true
+            }
+          },
+          "platformFaultDomainCount": 2,
+          "platformUpdateDomainCount": 20
+        },
+        "location": "westus",
+        "type": "Microsoft.Compute/availabilitySets",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/availabilitySets/myAvailabilitySet"
+      }
+    }
+  },
+  "operationId": "AvailabilitySets_CreateOrUpdate",
+  "title": "Create an availability set with Scheduled Event Policy."
+}
