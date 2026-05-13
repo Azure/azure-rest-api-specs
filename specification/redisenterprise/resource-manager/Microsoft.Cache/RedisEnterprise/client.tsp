@@ -39,7 +39,6 @@ using Microsoft.Cache;
   "RedisEnterpriseCustomerManagedKeyEncryptionKeyIdentity",
   "csharp"
 );
-@@clientName(ClusterUpdate, "RedisEnterpriseClusterUpdate", "csharp");
 @@clientName(CmkIdentityType,
   "RedisEnterpriseCustomerManagedKeyIdentityType",
   "csharp"
