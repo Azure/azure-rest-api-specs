@@ -9780,19 +9780,13 @@ components:
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
-        default_tool_config:
-          allOf:
-            - $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Default configuration applied to all tools unless
-            overridden by a tool-specific entry in `tool_configs`.
         tool_configs:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
-            Per-tool configuration map. Keys are tool names.
-            Entries here override `default_tool_config` for the matching tool.
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
             Unknown tool names are silently ignored at runtime.
         base_url:
           type: string
@@ -11298,19 +11292,13 @@ components:
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
-        default_tool_config:
-          allOf:
-            - $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Default configuration applied to all tools unless
-            overridden by a tool-specific entry in `tool_configs`.
         tool_configs:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
-            Per-tool configuration map. Keys are tool names.
-            Entries here override `default_tool_config` for the matching tool.
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
             Unknown tool names are silently ignored at runtime.
         azure_ai_search:
           allOf:
@@ -11477,19 +11465,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/AzureFunctionDefinition'
           description: The Azure Function Tool definition.
-        default_tool_config:
-          allOf:
-            - $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Default configuration applied to all tools unless
-            overridden by a tool-specific entry in `tool_configs`.
         tool_configs:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
-            Per-tool configuration map. Keys are tool names.
-            Entries here override `default_tool_config` for the matching tool.
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
             Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
@@ -11631,19 +11613,13 @@ components:
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
-        default_tool_config:
-          allOf:
-            - $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Default configuration applied to all tools unless
-            overridden by a tool-specific entry in `tool_configs`.
         tool_configs:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
-            Per-tool configuration map. Keys are tool names.
-            Entries here override `default_tool_config` for the matching tool.
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
             Unknown tool names are silently ignored at runtime.
         bing_custom_search_preview:
           allOf:
@@ -11769,19 +11745,13 @@ components:
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
-        default_tool_config:
-          allOf:
-            - $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Default configuration applied to all tools unless
-            overridden by a tool-specific entry in `tool_configs`.
         tool_configs:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
-            Per-tool configuration map. Keys are tool names.
-            Entries here override `default_tool_config` for the matching tool.
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
             Unknown tool names are silently ignored at runtime.
         bing_grounding:
           allOf:
@@ -11904,19 +11874,13 @@ components:
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
-        default_tool_config:
-          allOf:
-            - $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Default configuration applied to all tools unless
-            overridden by a tool-specific entry in `tool_configs`.
         tool_configs:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
-            Per-tool configuration map. Keys are tool names.
-            Entries here override `default_tool_config` for the matching tool.
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
             Unknown tool names are silently ignored at runtime.
         browser_automation_preview:
           allOf:
@@ -12011,19 +11975,13 @@ components:
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
-        default_tool_config:
-          allOf:
-            - $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Default configuration applied to all tools unless
-            overridden by a tool-specific entry in `tool_configs`.
         tool_configs:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
-            Per-tool configuration map. Keys are tool names.
-            Entries here override `default_tool_config` for the matching tool.
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
             Unknown tool names are silently ignored at runtime.
         outputs:
           allOf:
@@ -15826,19 +15784,13 @@ components:
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
-        default_tool_config:
-          allOf:
-            - $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Default configuration applied to all tools unless
-            overridden by a tool-specific entry in `tool_configs`.
         tool_configs:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
-            Per-tool configuration map. Keys are tool names.
-            Entries here override `default_tool_config` for the matching tool.
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
             Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
@@ -16729,19 +16681,13 @@ components:
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
-        default_tool_config:
-          allOf:
-            - $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Default configuration applied to all tools unless
-            overridden by a tool-specific entry in `tool_configs`.
         tool_configs:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
-            Per-tool configuration map. Keys are tool names.
-            Entries here override `default_tool_config` for the matching tool.
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
             Unknown tool names are silently ignored at runtime.
         memory_store_name:
           type: string
@@ -16782,19 +16728,13 @@ components:
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
-        default_tool_config:
-          allOf:
-            - $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Default configuration applied to all tools unless
-            overridden by a tool-specific entry in `tool_configs`.
         tool_configs:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
-            Per-tool configuration map. Keys are tool names.
-            Entries here override `default_tool_config` for the matching tool.
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
             Unknown tool names are silently ignored at runtime.
         memory_store_name:
           type: string
@@ -17174,19 +17114,13 @@ components:
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
-        default_tool_config:
-          allOf:
-            - $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Default configuration applied to all tools unless
-            overridden by a tool-specific entry in `tool_configs`.
         tool_configs:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
-            Per-tool configuration map. Keys are tool names.
-            Entries here override `default_tool_config` for the matching tool.
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
             Unknown tool names are silently ignored at runtime.
         fabric_dataagent_preview:
           allOf:
@@ -17949,19 +17883,13 @@ components:
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
-        default_tool_config:
-          allOf:
-            - $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Default configuration applied to all tools unless
-            overridden by a tool-specific entry in `tool_configs`.
         tool_configs:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
-            Per-tool configuration map. Keys are tool names.
-            Entries here override `default_tool_config` for the matching tool.
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
             Unknown tool names are silently ignored at runtime.
         container:
           anyOf:
@@ -21035,19 +20963,13 @@ components:
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
-        default_tool_config:
-          allOf:
-            - $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Default configuration applied to all tools unless
-            overridden by a tool-specific entry in `tool_configs`.
         tool_configs:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
-            Per-tool configuration map. Keys are tool names.
-            Entries here override `default_tool_config` for the matching tool.
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
             Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
@@ -22040,19 +21962,13 @@ components:
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
-        default_tool_config:
-          allOf:
-            - $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Default configuration applied to all tools unless
-            overridden by a tool-specific entry in `tool_configs`.
         tool_configs:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
-            Per-tool configuration map. Keys are tool names.
-            Entries here override `default_tool_config` for the matching tool.
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
             Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
@@ -22677,19 +22593,13 @@ components:
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
-        default_tool_config:
-          allOf:
-            - $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Default configuration applied to all tools unless
-            overridden by a tool-specific entry in `tool_configs`.
         tool_configs:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
-            Per-tool configuration map. Keys are tool names.
-            Entries here override `default_tool_config` for the matching tool.
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
             Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
@@ -26872,19 +26782,13 @@ components:
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
-        default_tool_config:
-          allOf:
-            - $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Default configuration applied to all tools unless
-            overridden by a tool-specific entry in `tool_configs`.
         tool_configs:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
-            Per-tool configuration map. Keys are tool names.
-            Entries here override `default_tool_config` for the matching tool.
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
             Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
@@ -27039,19 +26943,13 @@ components:
         project_connection_id:
           type: string
           description: The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
-        default_tool_config:
-          allOf:
-            - $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Default configuration applied to all tools unless
-            overridden by a tool-specific entry in `tool_configs`.
         tool_configs:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
-            Per-tool configuration map. Keys are tool names.
-            Entries here override `default_tool_config` for the matching tool.
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
             Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
@@ -32074,19 +31972,13 @@ components:
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
-        default_tool_config:
-          allOf:
-            - $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Default configuration applied to all tools unless
-            overridden by a tool-specific entry in `tool_configs`.
         tool_configs:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
-            Per-tool configuration map. Keys are tool names.
-            Entries here override `default_tool_config` for the matching tool.
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
             Unknown tool names are silently ignored at runtime.
         custom_search_configuration:
           allOf:
@@ -32272,19 +32164,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenApiFunctionDefinition'
           description: The openapi function definition.
-        default_tool_config:
-          allOf:
-            - $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Default configuration applied to all tools unless
-            overridden by a tool-specific entry in `tool_configs`.
         tool_configs:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
-            Per-tool configuration map. Keys are tool names.
-            Entries here override `default_tool_config` for the matching tool.
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
             Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
@@ -33488,19 +33374,13 @@ components:
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
-        default_tool_config:
-          allOf:
-            - $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Default configuration applied to all tools unless
-            overridden by a tool-specific entry in `tool_configs`.
         tool_configs:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
-            Per-tool configuration map. Keys are tool names.
-            Entries here override `default_tool_config` for the matching tool.
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
             Unknown tool names are silently ignored at runtime.
         sharepoint_grounding_preview:
           allOf:
@@ -34105,19 +33985,13 @@ components:
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
-        default_tool_config:
-          allOf:
-            - $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Default configuration applied to all tools unless
-            overridden by a tool-specific entry in `tool_configs`.
         tool_configs:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
-            Per-tool configuration map. Keys are tool names.
-            Entries here override `default_tool_config` for the matching tool.
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
             Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
@@ -34708,19 +34582,13 @@ components:
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
-        default_tool_config:
-          allOf:
-            - $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Default configuration applied to all tools unless
-            overridden by a tool-specific entry in `tool_configs`.
         tool_configs:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
-            Per-tool configuration map. Keys are tool names.
-            Entries here override `default_tool_config` for the matching tool.
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
             Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'

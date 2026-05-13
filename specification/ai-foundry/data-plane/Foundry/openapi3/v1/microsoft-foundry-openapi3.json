@@ -11627,20 +11627,12 @@
             "type": "string",
             "description": "Optional user-defined description for this tool or configuration."
           },
-          "default_tool_config": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ToolConfig"
-              }
-            ],
-            "description": "Default configuration applied to all tools unless\noverridden by a tool-specific entry in `tool_configs`."
-          },
           "tool_configs": {
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/ToolConfig"
             },
-            "description": "Per-tool configuration map. Keys are tool names.\nEntries here override `default_tool_config` for the matching tool.\nUnknown tool names are silently ignored at runtime."
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
           },
           "base_url": {
             "type": "string",
@@ -13360,20 +13352,12 @@
             "type": "string",
             "description": "Optional user-defined description for this tool or configuration."
           },
-          "default_tool_config": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ToolConfig"
-              }
-            ],
-            "description": "Default configuration applied to all tools unless\noverridden by a tool-specific entry in `tool_configs`."
-          },
           "tool_configs": {
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/ToolConfig"
             },
-            "description": "Per-tool configuration map. Keys are tool names.\nEntries here override `default_tool_config` for the matching tool.\nUnknown tool names are silently ignored at runtime."
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
           },
           "azure_ai_search": {
             "allOf": [
@@ -13633,20 +13617,12 @@
             ],
             "description": "The Azure Function Tool definition."
           },
-          "default_tool_config": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ToolConfig"
-              }
-            ],
-            "description": "Default configuration applied to all tools unless\noverridden by a tool-specific entry in `tool_configs`."
-          },
           "tool_configs": {
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/ToolConfig"
             },
-            "description": "Per-tool configuration map. Keys are tool names.\nEntries here override `default_tool_config` for the matching tool.\nUnknown tool names are silently ignored at runtime."
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
           }
         },
         "allOf": [
@@ -13858,20 +13834,12 @@
             "type": "string",
             "description": "Optional user-defined description for this tool or configuration."
           },
-          "default_tool_config": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ToolConfig"
-              }
-            ],
-            "description": "Default configuration applied to all tools unless\noverridden by a tool-specific entry in `tool_configs`."
-          },
           "tool_configs": {
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/ToolConfig"
             },
-            "description": "Per-tool configuration map. Keys are tool names.\nEntries here override `default_tool_config` for the matching tool.\nUnknown tool names are silently ignored at runtime."
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
           },
           "bing_custom_search_preview": {
             "allOf": [
@@ -14056,20 +14024,12 @@
             "type": "string",
             "description": "Optional user-defined description for this tool or configuration."
           },
-          "default_tool_config": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ToolConfig"
-              }
-            ],
-            "description": "Default configuration applied to all tools unless\noverridden by a tool-specific entry in `tool_configs`."
-          },
           "tool_configs": {
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/ToolConfig"
             },
-            "description": "Per-tool configuration map. Keys are tool names.\nEntries here override `default_tool_config` for the matching tool.\nUnknown tool names are silently ignored at runtime."
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
           },
           "bing_grounding": {
             "allOf": [
@@ -14266,20 +14226,12 @@
             "type": "string",
             "description": "Optional user-defined description for this tool or configuration."
           },
-          "default_tool_config": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ToolConfig"
-              }
-            ],
-            "description": "Default configuration applied to all tools unless\noverridden by a tool-specific entry in `tool_configs`."
-          },
           "tool_configs": {
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/ToolConfig"
             },
-            "description": "Per-tool configuration map. Keys are tool names.\nEntries here override `default_tool_config` for the matching tool.\nUnknown tool names are silently ignored at runtime."
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
           },
           "browser_automation_preview": {
             "allOf": [
@@ -14430,20 +14382,12 @@
             "type": "string",
             "description": "Optional user-defined description for this tool or configuration."
           },
-          "default_tool_config": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ToolConfig"
-              }
-            ],
-            "description": "Default configuration applied to all tools unless\noverridden by a tool-specific entry in `tool_configs`."
-          },
           "tool_configs": {
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/ToolConfig"
             },
-            "description": "Per-tool configuration map. Keys are tool names.\nEntries here override `default_tool_config` for the matching tool.\nUnknown tool names are silently ignored at runtime."
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
           },
           "outputs": {
             "allOf": [
@@ -18218,20 +18162,12 @@
             "type": "string",
             "description": "Optional user-defined description for this tool or configuration."
           },
-          "default_tool_config": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ToolConfig"
-              }
-            ],
-            "description": "Default configuration applied to all tools unless\noverridden by a tool-specific entry in `tool_configs`."
-          },
           "tool_configs": {
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/ToolConfig"
             },
-            "description": "Per-tool configuration map. Keys are tool names.\nEntries here override `default_tool_config` for the matching tool.\nUnknown tool names are silently ignored at runtime."
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
           }
         },
         "allOf": [
@@ -19466,20 +19402,12 @@
             "type": "string",
             "description": "Optional user-defined description for this tool or configuration."
           },
-          "default_tool_config": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ToolConfig"
-              }
-            ],
-            "description": "Default configuration applied to all tools unless\noverridden by a tool-specific entry in `tool_configs`."
-          },
           "tool_configs": {
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/ToolConfig"
             },
-            "description": "Per-tool configuration map. Keys are tool names.\nEntries here override `default_tool_config` for the matching tool.\nUnknown tool names are silently ignored at runtime."
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
           },
           "memory_store_name": {
             "type": "string",
@@ -20025,20 +19953,12 @@
             "type": "string",
             "description": "Optional user-defined description for this tool or configuration."
           },
-          "default_tool_config": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ToolConfig"
-              }
-            ],
-            "description": "Default configuration applied to all tools unless\noverridden by a tool-specific entry in `tool_configs`."
-          },
           "tool_configs": {
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/ToolConfig"
             },
-            "description": "Per-tool configuration map. Keys are tool names.\nEntries here override `default_tool_config` for the matching tool.\nUnknown tool names are silently ignored at runtime."
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
           },
           "fabric_dataagent_preview": {
             "allOf": [
@@ -21116,20 +21036,12 @@
             "type": "string",
             "description": "Optional user-defined description for this tool or configuration."
           },
-          "default_tool_config": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ToolConfig"
-              }
-            ],
-            "description": "Default configuration applied to all tools unless\noverridden by a tool-specific entry in `tool_configs`."
-          },
           "tool_configs": {
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/ToolConfig"
             },
-            "description": "Per-tool configuration map. Keys are tool names.\nEntries here override `default_tool_config` for the matching tool.\nUnknown tool names are silently ignored at runtime."
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
           },
           "container": {
             "anyOf": [
@@ -25472,20 +25384,12 @@
             "type": "string",
             "description": "Optional user-defined description for this tool or configuration."
           },
-          "default_tool_config": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ToolConfig"
-              }
-            ],
-            "description": "Default configuration applied to all tools unless\noverridden by a tool-specific entry in `tool_configs`."
-          },
           "tool_configs": {
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/ToolConfig"
             },
-            "description": "Per-tool configuration map. Keys are tool names.\nEntries here override `default_tool_config` for the matching tool.\nUnknown tool names are silently ignored at runtime."
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
           }
         },
         "allOf": [
@@ -26921,20 +26825,12 @@
             "type": "string",
             "description": "Optional user-defined description for this tool or configuration."
           },
-          "default_tool_config": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ToolConfig"
-              }
-            ],
-            "description": "Default configuration applied to all tools unless\noverridden by a tool-specific entry in `tool_configs`."
-          },
           "tool_configs": {
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/ToolConfig"
             },
-            "description": "Per-tool configuration map. Keys are tool names.\nEntries here override `default_tool_config` for the matching tool.\nUnknown tool names are silently ignored at runtime."
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
           }
         },
         "allOf": [
@@ -27628,20 +27524,12 @@
             "type": "string",
             "description": "Optional user-defined description for this tool or configuration."
           },
-          "default_tool_config": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ToolConfig"
-              }
-            ],
-            "description": "Default configuration applied to all tools unless\noverridden by a tool-specific entry in `tool_configs`."
-          },
           "tool_configs": {
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/ToolConfig"
             },
-            "description": "Per-tool configuration map. Keys are tool names.\nEntries here override `default_tool_config` for the matching tool.\nUnknown tool names are silently ignored at runtime."
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
           }
         },
         "allOf": [
@@ -33392,20 +33280,12 @@
             "type": "string",
             "description": "Optional user-defined description for this tool or configuration."
           },
-          "default_tool_config": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ToolConfig"
-              }
-            ],
-            "description": "Default configuration applied to all tools unless\noverridden by a tool-specific entry in `tool_configs`."
-          },
           "tool_configs": {
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/ToolConfig"
             },
-            "description": "Per-tool configuration map. Keys are tool names.\nEntries here override `default_tool_config` for the matching tool.\nUnknown tool names are silently ignored at runtime."
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
           }
         },
         "allOf": [
@@ -33610,20 +33490,12 @@
             "type": "string",
             "description": "The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server."
           },
-          "default_tool_config": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ToolConfig"
-              }
-            ],
-            "description": "Default configuration applied to all tools unless\noverridden by a tool-specific entry in `tool_configs`."
-          },
           "tool_configs": {
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/ToolConfig"
             },
-            "description": "Per-tool configuration map. Keys are tool names.\nEntries here override `default_tool_config` for the matching tool.\nUnknown tool names are silently ignored at runtime."
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
           }
         },
         "allOf": [
@@ -39894,20 +39766,12 @@
             "type": "string",
             "description": "Optional user-defined description for this tool or configuration."
           },
-          "default_tool_config": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ToolConfig"
-              }
-            ],
-            "description": "Default configuration applied to all tools unless\noverridden by a tool-specific entry in `tool_configs`."
-          },
           "tool_configs": {
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/ToolConfig"
             },
-            "description": "Per-tool configuration map. Keys are tool names.\nEntries here override `default_tool_config` for the matching tool.\nUnknown tool names are silently ignored at runtime."
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
           },
           "custom_search_configuration": {
             "allOf": [
@@ -40182,20 +40046,12 @@
             ],
             "description": "The openapi function definition."
           },
-          "default_tool_config": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ToolConfig"
-              }
-            ],
-            "description": "Default configuration applied to all tools unless\noverridden by a tool-specific entry in `tool_configs`."
-          },
           "tool_configs": {
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/ToolConfig"
             },
-            "description": "Per-tool configuration map. Keys are tool names.\nEntries here override `default_tool_config` for the matching tool.\nUnknown tool names are silently ignored at runtime."
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
           }
         },
         "allOf": [
@@ -41765,20 +41621,12 @@
             "type": "string",
             "description": "Optional user-defined description for this tool or configuration."
           },
-          "default_tool_config": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ToolConfig"
-              }
-            ],
-            "description": "Default configuration applied to all tools unless\noverridden by a tool-specific entry in `tool_configs`."
-          },
           "tool_configs": {
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/ToolConfig"
             },
-            "description": "Per-tool configuration map. Keys are tool names.\nEntries here override `default_tool_config` for the matching tool.\nUnknown tool names are silently ignored at runtime."
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
           },
           "sharepoint_grounding_preview": {
             "allOf": [
@@ -42591,20 +42439,12 @@
             "type": "string",
             "description": "Optional user-defined description for this tool or configuration."
           },
-          "default_tool_config": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ToolConfig"
-              }
-            ],
-            "description": "Default configuration applied to all tools unless\noverridden by a tool-specific entry in `tool_configs`."
-          },
           "tool_configs": {
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/ToolConfig"
             },
-            "description": "Per-tool configuration map. Keys are tool names.\nEntries here override `default_tool_config` for the matching tool.\nUnknown tool names are silently ignored at runtime."
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
           }
         },
         "allOf": [
@@ -43266,20 +43106,12 @@
             "type": "string",
             "description": "Optional user-defined description for this tool or configuration."
           },
-          "default_tool_config": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ToolConfig"
-              }
-            ],
-            "description": "Default configuration applied to all tools unless\noverridden by a tool-specific entry in `tool_configs`."
-          },
           "tool_configs": {
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/ToolConfig"
             },
-            "description": "Per-tool configuration map. Keys are tool names.\nEntries here override `default_tool_config` for the matching tool.\nUnknown tool names are silently ignored at runtime."
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
           }
         },
         "allOf": [

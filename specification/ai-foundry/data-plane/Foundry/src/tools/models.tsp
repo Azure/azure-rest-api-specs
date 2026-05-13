@@ -163,14 +163,8 @@ namespace Azure.AI.Projects {
    */
   alias ToolConfigExtension = {
     /**
-     * Default configuration applied to all tools unless
-     * overridden by a tool-specific entry in `tool_configs`.
-     */
-    default_tool_config?: ToolConfig;
-
-    /**
-     * Per-tool configuration map. Keys are tool names.
-     * Entries here override `default_tool_config` for the matching tool.
+     * Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+     * Resolution order: exact tool name match takes priority over `*`.
      * Unknown tool names are silently ignored at runtime.
      */
     tool_configs?: Record<ToolConfig>;
