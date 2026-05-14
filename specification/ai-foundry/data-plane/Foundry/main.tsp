@@ -27,3 +27,4 @@ import "./src/schedules/routes.tsp";
 import "./src/skills/routes.tsp";
 import "./src/toolboxes/routes.tsp";
 import "./src/data_generation_jobs/routes.tsp";
+import "./src/agents-optimization/routes.tsp";
