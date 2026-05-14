@@ -80,6 +80,33 @@ else {
   # Cache responses to GitHub web requests, for efficiency and to prevent rate limiting
   $responseCache = $_ResponseCache
 
+  function Invoke-CachedHead($url) {
+    # Avoid conflict with pipeline secret
+    $logUrl = $url -replace '^https://', ''
+    LogInfo "  Checking $logUrl"
+
+    $status = $responseCache[$url]
+    if ($null -ne $status) {
+      LogInfo "    Found in cache"
+    }
+    else {
+      LogInfo "    Not found in cache, making web request"
+      try {
+        $resp = Invoke-WebRequest -Uri $url -Method Head -SkipHttpErrorCheck
+        $status = $resp.StatusCode
+        $responseCache[$url] = $status
+      }
+      catch {
+        LogError "Exception making web request to ${logUrl}: $_"
+        LogJobFailure
+        exit 1
+      }
+    }
+
+    LogInfo "    Status: $status"
+    return $status
+  }
+
   # - Forward slashes on both Linux and Windows
   # - May be nested 4 or 5 levels deep, perhaps even deeper
   # - Examples
@@ -141,12 +168,9 @@ else {
       }
     }
 
-    # Extract path between "specification/" and "/(preview|stable)", the preview|stable segment,
-    # and the API version segment
-    if ($file -match "specification/(?<servicePath>[^/]+/($SpecType).*?)/(?<previewOrStable>preview|stable)/(?<apiVersion>[^/]+)/[^/]+\.json$") {
-      $servicePath = $Matches["servicePath"]
-      $previewOrStable = $Matches["previewOrStable"]
-      $apiVersion = $Matches["apiVersion"]
+    # Extract path between "specification/" and the final filename, including the "(preview|stable)/<apiVersion>" segments
+    if ($file -match "specification/(?<serviceApiVersion>[^/]+/($SpecType).*?/(preview|stable)/[^/]+)/[^/]+\.json$") {
+      $serviceApiVersion = $Matches["serviceApiVersion"]
     }
     else {
       LogError "Path to OpenAPI did not match expected regex.  Unable to extract service path."
@@ -154,41 +178,14 @@ else {
       exit 1
     }
 
-    function Invoke-CachedHead($url) {
-      # Avoid conflict with pipeline secret
-      $logUrl = $url -replace '^https://', ''
-      LogInfo "  Checking $logUrl"
-
-      $status = $responseCache[$url]
-      if ($null -ne $status) {
-        LogInfo "    Found in cache"
-      }
-      else {
-        LogInfo "    Not found in cache, making web request"
-        try {
-          $resp = Invoke-WebRequest -Uri $url -Method Head -SkipHttpErrorCheck
-          $status = $resp.StatusCode
-          $responseCache[$url] = $status
-        }
-        catch {
-          LogError "Exception making web request to ${logUrl}: $_"
-          LogJobFailure
-          exit 1
-        }
-      }
-
-      LogInfo "    Status: $status"
-      return $status
-    }
-
     # Check whether this specific API version already exists in main.  If not, it is a new
     # API version and must use TypeSpec.
-    $urlToApiVersion = "https://github.com/Azure/azure-rest-api-specs/tree/main/specification/$servicePath/$previewOrStable/$apiVersion"
+    $urlToApiVersion = "https://github.com/Azure/azure-rest-api-specs/tree/main/specification/$serviceApiVersion"
     $logUrlToApiVersion = $urlToApiVersion -replace '^https://', ''
     $apiVersionStatus = Invoke-CachedHead $urlToApiVersion
 
     if ($apiVersionStatus -eq 200) {
-      LogInfo "  Branch 'main' contains path '$servicePath/$previewOrStable/$apiVersion', so API version already exists and is not required to use TypeSpec"
+      LogInfo "  Branch 'main' contains path '$serviceApiVersion', so API version already exists and is not required to use TypeSpec"
 
       $warning = "WARNING: This PR uses OpenAPI / Swagger. All Azure services are required to convert to TypeSpec by March 30, 2026. PRs not using TypeSpec will be blocked after that date. Starting July 1, 2026, all SDKs will be generated from TypeSpec as the autorest toolchain is being retired. Please reach out to tspconversion@service.microsoft.com with any questions and see http://aka.ms/azsdk/typespec for more details on TypeSpec."
       LogWarningForFile $file $warning
@@ -199,7 +196,7 @@ else {
       }
     }
     elseif ($apiVersionStatus -eq 404) {
-      LogInfo "  Branch 'main' does not contain path '$servicePath/$previewOrStable/$apiVersion', so API version is new and must use TypeSpec"
+      LogInfo "  Branch 'main' does not contain path '$serviceApiVersion', so API version is new and must use TypeSpec"
       $pathsWithErrors += $file
     }
     else {
