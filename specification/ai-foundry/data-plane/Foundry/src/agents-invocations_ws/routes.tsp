@@ -39,8 +39,8 @@ interface AgentWebsocket {
       @query agent_session_id?: string;
 
       /** Preview feature flag, accepted as an alternative to the `Foundry-Features` header for browser clients that cannot set custom headers. Either this query parameter or the header must be supplied with the value `HostedAgents=V1Preview`. */
-      @query(#{ explode: false })
-      foundry_features?: AgentDefinitionOptInKeys[] = #[
+      @query(#{ explode: false, name: "foundry_features" })
+      foundry_features_query?: AgentDefinitionOptInKeys[] = #[
         AgentDefinitionOptInKeys.hosted_agents_v1_preview
       ];
     } & AgentWebsocketPreviewHeader,
