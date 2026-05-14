@@ -51,11 +51,14 @@ interface ServerKeys {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ServerKey,
-    Response = ArmResourceUpdatedResponse<ServerKey> | ArmResourceCreatedResponse<
-      ServerKey,
-      ArmLroLocationHeader<FinalResult = ServerKey> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<ServerKey>
+      | ArmResourceCreatedResponse<
+          ServerKey,
+          ArmLroLocationHeader<FinalResult = ServerKey> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -64,7 +67,10 @@ interface ServerKeys {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ServerKey,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -75,6 +81,7 @@ interface ServerKeys {
 
 @@doc(ServerKey.name, "The name of the server key to be retrieved.");
 @@doc(ServerKey.properties, "Resource properties.");
-@@doc(ServerKeys.createOrUpdate::parameters.resource,
+@@doc(
+  ServerKeys.createOrUpdate::parameters.resource,
   "The requested server key resource state."
 );

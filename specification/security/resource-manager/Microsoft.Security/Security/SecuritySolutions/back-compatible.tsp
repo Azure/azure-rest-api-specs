@@ -12,7 +12,8 @@ using Common;
 @@Legacy.flattenProperty(securitySolutionsReferenceData.properties);
 
 @@clientLocation(AllowedConnectionsResources.get, "AllowedConnections");
-@@clientLocation(AllowedConnectionsResources.listByHomeRegion,
+@@clientLocation(
+  AllowedConnectionsResources.listByHomeRegion,
   "AllowedConnections"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -21,7 +22,8 @@ using Common;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DiscoveredSecuritySolution.properties);
 
-@@clientName(JitNetworkAccessPolicies.createOrUpdate::parameters.resource,
+@@clientName(
+  JitNetworkAccessPolicies.createOrUpdate::parameters.resource,
   "body"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -30,16 +32,20 @@ using Common;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SecuritySolution.properties);
 
-@@clientLocation(ServerVulnerabilityAssessments.get,
+@@clientLocation(
+  ServerVulnerabilityAssessments.get,
   "ServerVulnerabilityAssessment"
 );
-@@clientLocation(ServerVulnerabilityAssessments.createOrUpdate,
+@@clientLocation(
+  ServerVulnerabilityAssessments.createOrUpdate,
   "ServerVulnerabilityAssessment"
 );
-@@clientLocation(ServerVulnerabilityAssessments.delete,
+@@clientLocation(
+  ServerVulnerabilityAssessments.delete,
   "ServerVulnerabilityAssessment"
 );
-@@clientLocation(ServerVulnerabilityAssessments.listByExtendedResource,
+@@clientLocation(
+  ServerVulnerabilityAssessments.listByExtendedResource,
   "ServerVulnerabilityAssessment"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -52,27 +58,33 @@ using Common;
 
 @@clientLocation(AllowedConnectionsOperationGroup.list, "AllowedConnections");
 
-@@clientLocation(DiscoveredSecuritySolutionsOperationGroup.list,
+@@clientLocation(
+  DiscoveredSecuritySolutionsOperationGroup.list,
   DiscoveredSecuritySolutions
 );
 
-@@clientLocation(ExternalSecuritySolutionsOperationGroup.list,
+@@clientLocation(
+  ExternalSecuritySolutionsOperationGroup.list,
   ExternalSecuritySolutions
 );
 
-@@clientLocation(JitNetworkAccessPoliciesOperationGroup.list,
+@@clientLocation(
+  JitNetworkAccessPoliciesOperationGroup.list,
   JitNetworkAccessPolicies
 );
-@@clientLocation(JitNetworkAccessPoliciesOperationGroup.listByResourceGroup,
+@@clientLocation(
+  JitNetworkAccessPoliciesOperationGroup.listByResourceGroup,
   JitNetworkAccessPolicies
 );
 
 @@clientLocation(SecuritySolutionsOperationGroup.list, SecuritySolutions);
 
-@@clientLocation(SecuritySolutionsReferenceDataOperationGroup.list,
+@@clientLocation(
+  SecuritySolutionsReferenceDataOperationGroup.list,
   "SecuritySolutionsReferenceData"
 );
-@@clientLocation(SecuritySolutionsReferenceDataOperationGroup.listByHomeRegion,
+@@clientLocation(
+  SecuritySolutionsReferenceDataOperationGroup.listByHomeRegion,
   "SecuritySolutionsReferenceData"
 );
 

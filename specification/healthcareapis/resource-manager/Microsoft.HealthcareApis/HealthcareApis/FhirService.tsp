@@ -64,14 +64,17 @@ interface FhirServices {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     FhirService,
-    Response = ArmResourceUpdatedResponse<FhirService> | ArmResourceCreatedResponse<
-      FhirService,
-      ArmLroLocationHeader<FinalResult = FhirService> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | (ArmAcceptedLroResponse & {
-      @bodyRoot
-      _: FhirService;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<FhirService>
+      | ArmResourceCreatedResponse<
+          FhirService,
+          ArmLroLocationHeader<FinalResult = FhirService> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | (ArmAcceptedLroResponse & {
+          @bodyRoot
+          _: FhirService;
+        }),
     Error = ErrorDetails
   >;
 
@@ -114,14 +117,17 @@ interface FhirServiceOperationGroup {
     /** The parameters for updating a FHIR Service. */
     @body
     fhirservicePatchResource: FhirServicePatchResource,
-  ): ArmResponse<FhirService> | (ArmAcceptedLroResponse<
-    "Resource update request accepted.",
-    LroHeaders = ArmLroLocationHeader<FinalResult = FhirService> &
-      Azure.Core.Foundations.RetryAfterHeader
-  > & {
-    @bodyRoot
-    _: FhirService;
-  }) | ErrorDetails;
+  ):
+    | ArmResponse<FhirService>
+    | (ArmAcceptedLroResponse<
+        "Resource update request accepted.",
+        LroHeaders = ArmLroLocationHeader<FinalResult = FhirService> &
+          Azure.Core.Foundations.RetryAfterHeader
+      > & {
+        @bodyRoot
+        _: FhirService;
+      })
+    | ErrorDetails;
 
   /**
    * Deletes a FHIR Service.
@@ -157,6 +163,7 @@ interface FhirServiceOperationGroup {
 @@minLength(FhirService.name, 3);
 @@doc(FhirService.name, "The name of FHIR Service resource.");
 @@doc(FhirService.properties, "Fhir Service configuration.");
-@@doc(FhirServices.createOrUpdate::parameters.resource,
+@@doc(
+  FhirServices.createOrUpdate::parameters.resource,
   "The parameters for creating or updating a Fhir Service resource."
 );

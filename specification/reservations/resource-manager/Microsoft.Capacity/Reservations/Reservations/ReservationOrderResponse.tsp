@@ -59,9 +59,11 @@ interface ReservationOrderResponses {
     ReservationOrderResponse,
     Request = PurchaseRequest,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
-    Response = ArmResourceUpdatedResponse<ReservationOrderResponse> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ReservationOrderResponse> &
-      Azure.Core.Foundations.RetryAfterHeader> &
-      Body<ReservationOrderResponse>),
+    Response =
+      | ArmResourceUpdatedResponse<ReservationOrderResponse>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ReservationOrderResponse> &
+          Azure.Core.Foundations.RetryAfterHeader> &
+          Body<ReservationOrderResponse>),
     Error = Error
   >;
 
@@ -85,8 +87,10 @@ interface ReservationOrderResponses {
   split is ArmResourceActionAsyncBase<
     ReservationOrderResponse,
     SplitRequest,
-    ArmResponse<ReservationResponse[]> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ReservationResponse[]> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+
+      | ArmResponse<ReservationResponse[]>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ReservationResponse[]> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Error = Error
   >;
@@ -99,8 +103,10 @@ interface ReservationOrderResponses {
   merge is ArmResourceActionAsyncBase<
     ReservationOrderResponse,
     MergeRequest,
-    ArmResponse<ReservationResponse[]> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ReservationResponse[]> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+
+      | ArmResponse<ReservationResponse[]>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ReservationResponse[]> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Error = Error
   >;
@@ -144,33 +150,42 @@ interface ReservationOrderResponses {
   returnPost is ArmResourceActionAsyncBase<
     ReservationOrderResponse,
     RefundRequest,
-    ArmResponse<ReservationOrderResponse> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ReservationOrderResponse> &
-      Azure.Core.Foundations.RetryAfterHeader> &
-      Body<RefundResponse>),
+
+      | ArmResponse<ReservationOrderResponse>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ReservationOrderResponse> &
+          Azure.Core.Foundations.RetryAfterHeader> &
+          Body<RefundResponse>),
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Error = Error
   >;
 }
 
 @@doc(ReservationOrderResponse.name, "Order Id of the reservation");
-@@doc(ReservationOrderResponse.properties,
+@@doc(
+  ReservationOrderResponse.properties,
   "Properties of a reservation order."
 );
-@@doc(ReservationOrderResponses.purchase::parameters.resource,
+@@doc(
+  ReservationOrderResponses.purchase::parameters.resource,
   "Information needed for calculate or purchase reservation"
 );
-@@doc(ReservationOrderResponses.split::parameters.body,
+@@doc(
+  ReservationOrderResponses.split::parameters.body,
   "Information needed to Split a reservation item"
 );
-@@doc(ReservationOrderResponses.merge::parameters.body,
+@@doc(
+  ReservationOrderResponses.merge::parameters.body,
   "Information needed for commercial request for a reservation"
 );
-@@doc(ReservationOrderResponses.changeDirectory::parameters.body,
+@@doc(
+  ReservationOrderResponses.changeDirectory::parameters.body,
   "Information needed to change directory of reservation order"
 );
-@@doc(ReservationOrderResponses.post::parameters.body,
+@@doc(
+  ReservationOrderResponses.post::parameters.body,
   "Information needed for calculating refund of a reservation."
 );
-@@doc(ReservationOrderResponses.returnPost::parameters.body,
+@@doc(
+  ReservationOrderResponses.returnPost::parameters.body,
   "Information needed for returning reservation."
 );

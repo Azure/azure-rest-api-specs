@@ -34,9 +34,11 @@ interface CapabilityTypes {
   >;
 }
 
-@@doc(CapabilityType.name,
+@@doc(
+  CapabilityType.name,
   "String that represents a Capability Type resource name."
 );
-@@doc(CapabilityType.properties,
+@@doc(
+  CapabilityType.properties,
   "The properties of the capability type resource."
 );

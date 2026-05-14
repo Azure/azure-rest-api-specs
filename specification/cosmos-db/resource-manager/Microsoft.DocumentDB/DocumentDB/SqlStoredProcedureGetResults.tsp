@@ -55,8 +55,10 @@ interface SqlStoredProcedureGetResultsOperationGroup {
   createUpdateSqlStoredProcedure is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     SqlStoredProcedureGetResults,
     Request = SqlStoredProcedureCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<SqlStoredProcedureGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = SqlStoredProcedureGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<SqlStoredProcedureGetResults>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = SqlStoredProcedureGetResults> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -64,7 +66,9 @@ interface SqlStoredProcedureGetResultsOperationGroup {
    */
   deleteSqlStoredProcedure is ArmResourceDeleteWithoutOkAsync<
     SqlStoredProcedureGetResults,
-    Response = NoContentResponse | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+    Response =
+      | NoContentResponse
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
   >;
 
   /**
@@ -78,13 +82,16 @@ interface SqlStoredProcedureGetResultsOperationGroup {
 }
 
 @@doc(SqlStoredProcedureGetResults.name, "Cosmos DB storedProcedure name.");
-@@doc(SqlStoredProcedureGetResults.properties,
+@@doc(
+  SqlStoredProcedureGetResults.properties,
   "The properties of an Azure Cosmos DB storedProcedure"
 );
-@@doc(SqlStoredProcedureGetResultsOperationGroup.createUpdateSqlStoredProcedure::parameters.resource,
+@@doc(
+  SqlStoredProcedureGetResultsOperationGroup.createUpdateSqlStoredProcedure::parameters.resource,
   "The parameters to provide for the current SQL storedProcedure."
 );
-@@visibility(SqlStoredProcedureGetResults.location,
+@@visibility(
+  SqlStoredProcedureGetResults.location,
   Lifecycle.Read,
   Lifecycle.Create,
   Lifecycle.Update

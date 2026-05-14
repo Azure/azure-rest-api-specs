@@ -54,8 +54,10 @@ interface GremlinDatabaseGetResultsOperationGroup {
   createUpdateGremlinDatabase is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     GremlinDatabaseGetResults,
     Request = GremlinDatabaseCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<GremlinDatabaseGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = GremlinDatabaseGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<GremlinDatabaseGetResults>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = GremlinDatabaseGetResults> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -63,7 +65,9 @@ interface GremlinDatabaseGetResultsOperationGroup {
    */
   deleteGremlinDatabase is ArmResourceDeleteWithoutOkAsync<
     GremlinDatabaseGetResults,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | NoContentResponse
+    Response =
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+      | NoContentResponse
   >;
 
   /**
@@ -76,13 +80,16 @@ interface GremlinDatabaseGetResultsOperationGroup {
 }
 
 @@doc(GremlinDatabaseGetResults.name, "Cosmos DB database name.");
-@@doc(GremlinDatabaseGetResults.properties,
+@@doc(
+  GremlinDatabaseGetResults.properties,
   "The properties of an Azure Cosmos DB SQL database"
 );
-@@doc(GremlinDatabaseGetResultsOperationGroup.createUpdateGremlinDatabase::parameters.resource,
+@@doc(
+  GremlinDatabaseGetResultsOperationGroup.createUpdateGremlinDatabase::parameters.resource,
   "The parameters to provide for the current Gremlin database."
 );
-@@visibility(GremlinDatabaseGetResults.location,
+@@visibility(
+  GremlinDatabaseGetResults.location,
   Lifecycle.Read,
   Lifecycle.Create,
   Lifecycle.Update

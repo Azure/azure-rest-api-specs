@@ -157,9 +157,11 @@ interface DefenderForStorageSettings {
 }
 
 @@doc(DefenderForStorageSetting.name, "Defender for Storage setting name.");
-@@doc(DefenderForStorageSetting.properties,
+@@doc(
+  DefenderForStorageSetting.properties,
   "Defender for Storage resource properties."
 );
-@@doc(DefenderForStorageSettings.create::parameters.resource,
+@@doc(
+  DefenderForStorageSettings.create::parameters.resource,
   "Defender for Storage Settings"
 );
