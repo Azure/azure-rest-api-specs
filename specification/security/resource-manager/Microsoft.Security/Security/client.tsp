@@ -406,6 +406,143 @@ op privateLinkResourcesGetCustomization(
   "VulnerabilityId",
   "csharp"
 );
+
+// C# MPG migration compatibility: preserve previous GA resource type names so
+// generated ARM resource, collection, extension, and mocking surfaces line up.
+@@clientName(IoTSecurityAPI.IoTSecuritySolutionModel,
+  "IotSecuritySolution",
+  "csharp"
+);
+@@clientName(IoTSecurityAPI.IoTSecurityAggregatedAlert,
+  "IotSecurityAggregatedAlert",
+  "csharp"
+);
+@@clientName(IoTSecurityAPI.IoTSecurityAggregatedRecommendation,
+  "IotSecurityAggregatedRecommendation",
+  "csharp"
+);
+@@clientName(AlertsAPI.Alert, "ResourceGroupSecurityAlert", "csharp");
+@@clientName(TasksAPI.SecurityTask, "ResourceGroupSecurityTask", "csharp");
+@@clientName(SecureScoreAPI.SecureScoreItem, "SecureScore", "csharp");
+@@clientName(AlertsSuppressionRulesAPI.AlertsSuppressionRule,
+  "SecurityAlertsSuppressionRule",
+  "csharp"
+);
+@@clientName(AssessmentAPI.SecurityAssessment,
+  "SecurityAssessmentGenerated",
+  "csharp"
+);
+@@clientName(AssessmentAPI.SecurityAssessmentResponse,
+  "SecurityAssessment",
+  "csharp"
+);
+@@clientName(AutomationsAPI.Automation, "SecurityAutomation", "csharp");
+@@clientName(LocationsAPI.AscLocation, "SecurityCenterLocation", "csharp");
+@@clientName(PricingsAPI.Pricing, "SecurityCenterPricing", "csharp");
+@@clientName(LegacySettingsAPI.Compliance, "SecurityCompliance", "csharp");
+@@clientName(ApplicationsAPI.Application,
+  "SecurityConnectorApplication",
+  "csharp"
+);
+@@clientName(GovernanceAPI.GovernanceRule,
+  "SecurityConnectorGovernanceRule",
+  "csharp"
+);
+@@clientName(SettingsAPI.Setting, "SecuritySetting", "csharp");
+@@clientName(LegacySettingsAPI.WorkspaceSetting,
+  "SecurityWorkspaceSetting",
+  "csharp"
+);
+@@clientName(AssessmentAPI.SecurityAssessmentMetadataResponse,
+  "SubscriptionAssessmentMetadata",
+  "csharp"
+);
+@@clientName(SqlVulnerabilityAssessmentsAPI.RuleResults,
+  "SqlVulnerabilityAssessmentBaselineRule",
+  "csharp"
+);
+@@clientName(SqlVulnerabilityAssessmentsAPI.ScanV2,
+  "SqlVulnerabilityAssessmentScan",
+  "csharp"
+);
+@@clientName(AssessmentAPI.Categories,
+  "SecurityAssessmentResourceCategory",
+  "csharp"
+);
+@@clientName(Common.Severity, "SecurityAssessmentSeverity", "csharp");
+@@clientName(AssessmentAPI.UserImpact,
+  "SecurityAssessmentUserImpact",
+  "csharp"
+);
+@@clientName(AssessmentAPI.Threats, "SecurityThreat", "csharp");
+@@clientName(AssessmentAPI.AssessmentType,
+  "SecurityAssessmentType",
+  "csharp"
+);
+@@clientName(AssessmentAPI.SecurityAssessmentMetadataPartnerData,
+  "SecurityAssessmentMetadataPartner",
+  "csharp"
+);
+@@clientName(IoTSecurityAPI.ValueType, "SecurityValueType", "csharp");
+@@clientName(SecuritySolutionsAPI.Protocol,
+  "JitNetworkAccessPortProtocol",
+  "csharp"
+);
+
+@@clientName(SecuritySolutionsAPI.Status,
+  "JitNetworkAccessPortStatus",
+  "csharp"
+);
+@@clientName(SecuritySolutionsAPI.StatusReason,
+  "JitNetworkAccessPortStatusReason",
+  "csharp"
+);
+@@clientName(SubAssessmentsAPI.CVSS, "SecurityCvss", "csharp");
+@@clientName(SubAssessmentsAPI.CVE, "SecurityCve", "csharp");
+@@clientName(SqlVulnerabilityAssessmentsAPI.Baseline,
+  "SqlVulnerabilityAssessmentBaseline",
+  "csharp"
+);
+@@clientName(SqlVulnerabilityAssessmentsAPI.RuleStatus,
+  "SqlVulnerabilityAssessmentScanResultRuleStatus",
+  "csharp"
+);
+@@clientName(SqlVulnerabilityAssessmentsAPI.ScanPropertiesV2,
+  "SqlVulnerabilityAssessmentScanProperties",
+  "csharp"
+);
+@@clientName(Common.State,
+  "SecurityAlertNotificationByRoleState",
+  "csharp"
+);
+@@clientName(AutomationsAPI.SecurityContactRole,
+  "SecurityAlertReceivingRole",
+  "csharp"
+);
+@@clientName(SecurityConnectorsAPI.DefenderForServersAwsOfferingVaAutoProvisioning,
+  "DefenderForServersAwsOfferingVulnerabilityAssessmentAutoProvisioning",
+  "csharp"
+);
+@@clientName(SecurityConnectorsAPI.DefenderForServersGcpOfferingDefenderForServers,
+  "GcpDefenderForServersInfo",
+  "csharp"
+);
+@@clientName(SecurityConnectorsAPI.DefenderForDatabasesGcpOfferingDefenderForDatabasesArcAutoProvisioning,
+  "GcpDefenderForDatabasesArcAutoProvisioning",
+  "csharp"
+);
+@@clientName(IoTSecurityAPI.RecommendationType,
+  "IotSecurityRecommendationType",
+  "csharp"
+);
+@@clientName(SqlVulnerabilityAssessmentsAPI.ScanTriggerType,
+  "SqlVulnerabilityAssessmentScanTriggerType",
+  "csharp"
+);
+@@clientName(SqlVulnerabilityAssessmentsAPI.ScanState,
+  "SqlVulnerabilityAssessmentScanState",
+  "csharp"
+);
 @@clientName(SecuritySolutionsAPI.DiscoveredSecuritySolutionsOperationGroup.list,
   "GetDiscoveredSecuritySolutions",
   "csharp"
