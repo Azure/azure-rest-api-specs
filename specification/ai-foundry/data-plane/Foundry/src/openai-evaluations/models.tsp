@@ -513,7 +513,7 @@ union InputMessages {
   template: OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesTemplate,
 
   /** A typed input-messages item reference for prompt agents. */
-  itemReference: OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesItemReference,
+  item_reference: OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesItemReference,
 }
 
 /** Represents the parameters for conversation simulation item generation. */
