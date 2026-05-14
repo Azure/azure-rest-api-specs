@@ -2070,15 +2070,14 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 op DataBoxEdgeDevicesCheckResourceCreationFeasibilityCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<DataBoxEdgeDevice>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+  ...Azure.ResourceManager.ProviderNamespace<DataBoxEdgeDevice>,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
   deviceName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @body
