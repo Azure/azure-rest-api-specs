@@ -69,7 +69,7 @@ test.concurrent("Generated from TypeSpec", async ({ expect }) => {
 
 test.concurrent("Hand-written, new API version", async ({ expect }) => {
   const { stdout, exitCode } = await checkAllUnder(
-    "specification/hand-written",
+    "specification/hand-written/resource-manager/Microsoft.HandWritten/stable",
     '@{"https://github.com/Azure/azure-rest-api-specs/tree/main/specification/hand-written/resource-manager/Microsoft.HandWritten/stable/2026-01-01"=404}',
   );
 
@@ -80,7 +80,7 @@ test.concurrent("Hand-written, new API version", async ({ expect }) => {
 
 test.concurrent("Hand-written, existing API version", async ({ expect }) => {
   const { stdout, exitCode } = await checkAllUnder(
-    "specification/hand-written",
+    "specification/hand-written/resource-manager/Microsoft.HandWritten/stable",
     '@{"https://github.com/Azure/azure-rest-api-specs/tree/main/specification/hand-written/resource-manager/Microsoft.HandWritten/stable/2026-01-01"=200}',
   );
 
@@ -93,11 +93,35 @@ test.concurrent("Hand-written, existing API version", async ({ expect }) => {
 
 test.concurrent("Hand-written, unexpected response checking main", async ({ expect }) => {
   const { stdout, exitCode } = await checkAllUnder(
-    "specification/hand-written",
+    "specification/hand-written/resource-manager/Microsoft.HandWritten/stable",
     '@{"https://github.com/Azure/azure-rest-api-specs/tree/main/specification/hand-written/resource-manager/Microsoft.HandWritten/stable/2026-01-01"=519}',
   );
 
   expect(stdout).toContain("was not generated from TypeSpec");
   expect(stdout).toContain("Unexpected response");
   expect(exitCode).toBe(1);
+});
+
+test.concurrent("Hand-written, new preview API version", async ({ expect }) => {
+  const { stdout, exitCode } = await checkAllUnder(
+    "specification/hand-written/resource-manager/Microsoft.HandWritten/preview",
+    '@{"https://github.com/Azure/azure-rest-api-specs/tree/main/specification/hand-written/resource-manager/Microsoft.HandWritten/preview/2026-02-01-preview"=404}',
+  );
+
+  expect(stdout).toContain("was not generated from TypeSpec");
+  expect(stdout).toContain("'main' does not contain path");
+  expect(exitCode).toBe(1);
+});
+
+test.concurrent("Hand-written, existing preview API version", async ({ expect }) => {
+  const { stdout, exitCode } = await checkAllUnder(
+    "specification/hand-written/resource-manager/Microsoft.HandWritten/preview",
+    '@{"https://github.com/Azure/azure-rest-api-specs/tree/main/specification/hand-written/resource-manager/Microsoft.HandWritten/preview/2026-02-01-preview"=200}',
+  );
+
+  expect(stdout).toContain("was not generated from TypeSpec");
+  expect(stdout).toContain("'main' contains path");
+  expect(stdout.toLowerCase()).toContain("warning");
+  expect(stdout).toContain("are required to convert");
+  expect(exitCode).toBe(0);
 });
