@@ -14,7 +14,6 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ClientGenerator.Core;
-using Azure.ClientGenerator.Core.Legacy;
 
 @client({
   name: "ResourceGraphClient",
@@ -25,12 +24,31 @@ namespace Microsoft.ResourceGraph;
 
 // Move namespace-level operations off the merged root client so each generated
 // client carries a consistent apiVersions set.
-@@clientLocation(ResourceChanges.resourceChanges, "ResourceChangesOperations");
-@@clientLocation(ResourceChanges.resourceChangeDetails,
-  "ResourceChangesOperations"
+@@clientLocation(ResourceChanges.resourceChanges,
+  "ResourceChangesOperations",
+  "csharp"
 );
-@@clientLocation(ResourceGraphApi.resources, "ResourceGraphOperations");
-@@clientLocation(ResourceHistory.resourcesHistory, "ResourceHistoryOperations");
+@@clientLocation(ResourceChanges.resourceChangeDetails,
+  "ResourceChangesOperations",
+  "csharp"
+);
+@@clientLocation(ResourceGraphApi.resources,
+  "ResourceGraphOperations",
+  "csharp"
+);
+@@clientLocation(ResourceHistory.resourcesHistory,
+  "ResourceHistoryOperations",
+  "csharp"
+);
+
+// Follow the Azure SDK Get* prefix convention for read operations.
+@@clientName(ResourceChanges.resourceChanges, "GetResourceChanges", "csharp");
+@@clientName(ResourceChanges.resourceChangeDetails,
+  "GetResourceChangeDetails",
+  "csharp"
+);
+@@clientName(ResourceHistory.resourcesHistory, "GetResourcesHistory", "csharp");
+
 // --- C# naming customizations to match GA SDK surface ---
 // Rename models to match existing GA API
 @@clientName(ResourceGraphApi.QueryRequest, "ResourceQueryContent", "csharp");
