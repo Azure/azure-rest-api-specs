@@ -107,6 +107,7 @@ interface Jobs {}
 @@clientLocation(Azure.AI.Projects.Jobs.list, Jobs);
 @@clientLocation(Azure.AI.Projects.Jobs.get, Jobs);
 @@clientLocation(Azure.AI.Projects.Jobs.showServices, Jobs);
+@@clientLocation(Azure.AI.Projects.Jobs.getRunDetails, Jobs);
 @@clientLocation(Azure.AI.Projects.Jobs.createOrUpdate, Jobs);
 @@clientLocation(Azure.AI.Projects.Jobs.beginDelete, Jobs);
 @@clientLocation(Azure.AI.Projects.Jobs.beginCancel, Jobs);

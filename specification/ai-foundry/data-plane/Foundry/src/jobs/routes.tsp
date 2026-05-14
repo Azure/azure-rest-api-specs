@@ -72,6 +72,23 @@ interface Jobs {
     nodeId: int32,
   ): RunServiceInstances;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Nested run-history sub-resource path; cannot be expressed with standard resource operations."
+  @doc("Get runtime details for a job's run, including current status, log file URLs, warnings and any error information. Used to poll job progress and to stream log output.")
+  @route("/jobs/{name}/history/runs/{runId}/details")
+  @get
+  getRunDetails(
+    ...FoundryDataPlaneApiVersionParameter,
+    ...JobsPreviewHeader,
+
+    @doc("The name of the Job.")
+    @path
+    name: string,
+
+    @doc("The run identifier. For Jobs this currently matches the job name.")
+    @path
+    runId: string,
+  ): RunDetails;
+
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "PUT create-or-update pattern required by the Job API wire format"
   @doc("Create and execute a Job. For update case, the Tags in the definition passed in will replace Tags in the existing job.")
   @put

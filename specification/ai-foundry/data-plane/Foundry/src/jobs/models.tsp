@@ -473,3 +473,261 @@ model RunServiceInstances {
   @doc("Service instances running on the node, keyed by service name.")
   instances?: Record<ServiceInstance>;
 }
+
+@doc("A warning that occurred during a run.")
+model RunDetailsWarning {
+  @doc("The source of the warning.")
+  source?: string;
+
+  @doc("The warning message.")
+  message?: string;
+}
+
+@doc("Identity of a user or service principal that created or modified a run.")
+model RunUser {
+  @doc("A user or service principal's object ID.")
+  userObjectId?: string;
+
+  @doc("A user or service principal's PuID.")
+  userPuId?: string;
+
+  @doc("A user identity provider (e.g. live.com).")
+  userIdp?: string;
+
+  @doc("A user alternate sec id (represents the user in a different identity provider system).")
+  userAltSecId?: string;
+
+  @doc("The issuer which issued the token for this user.")
+  userIss?: string;
+
+  @doc("A user or service principal's tenant ID.")
+  userTenantId?: string;
+
+  @doc("A user's full name or a service principal's app ID.")
+  userName?: string;
+}
+
+@doc("Cost information for a job run.")
+model JobCost {
+  @doc("Charged CPU core-seconds.")
+  chargedCpuCoreSeconds?: float64;
+
+  @doc("Charged CPU memory megabyte-seconds.")
+  chargedCpuMemoryMegabyteSeconds?: float64;
+
+  @doc("Charged GPU seconds.")
+  chargedGpuSeconds?: float64;
+
+  @doc("Charged node utilization seconds.")
+  chargedNodeUtilizationSeconds?: float64;
+}
+
+@doc("Run type categorization (orchestrator, traits, attribution, compute type).")
+model RunTypeV2 {
+  @doc("Orchestrator that produced the run (e.g. Execution, Pipeline, AutoML, HyperDrive, FineTuning).")
+  orchestrator?: string;
+
+  @doc("Traits associated with the run.")
+  traits?: string[];
+
+  @doc("Attribution of the run.")
+  attribution?: string;
+
+  @doc("Compute type used by the run.")
+  computeType?: string;
+}
+
+@doc("Interactive endpoint setting on a run service.")
+model RunEndpointSetting {
+  @doc("Endpoint type.")
+  type?: string;
+
+  @doc("Port the endpoint listens on.")
+  port?: int32;
+
+  @doc("SSL thumbprint for the endpoint.")
+  sslThumbprint?: string;
+
+  @doc("Endpoint URL.")
+  endpoint?: string;
+
+  @doc("Proxy endpoint URL.")
+  proxyEndpoint?: string;
+
+  @doc("Status of the endpoint.")
+  status?: string;
+
+  @doc("Error message if the endpoint failed to start.")
+  errorMessage?: string;
+
+  @doc("Whether the endpoint is enabled.")
+  enabled?: boolean;
+
+  @doc("Additional endpoint properties.")
+  properties?: Record<string>;
+
+  @doc("Nodes on which the endpoint is exposed.")
+  nodes?: string;
+}
+
+@doc("Reference to a typed asset (data, model, etc.) consumed or produced by a run.")
+model TypedAssetReference {
+  @doc("The asset id.")
+  assetId?: string;
+
+  @doc("The asset type.")
+  type?: string;
+}
+
+@doc("Standard error response payload (mirrors Common.Core.Contracts.ErrorResponse).")
+model RunErrorResponse {
+  @doc("The top level error that occurred.")
+  error?: RootError;
+
+  @doc("Dictionary containing correlation details for the error.")
+  correlation?: Record<string>;
+
+  @doc("The hosting environment.")
+  environment?: string;
+
+  @doc("The Azure region.")
+  location?: string;
+
+  @doc("The time in UTC when the error occurred.")
+  time?: utcDateTime;
+
+  @doc("Component name where the error originated or was encountered.")
+  componentName?: string;
+}
+
+@doc("Runtime details of a job's run, including status, log file URLs, warnings and any error information.")
+model RunDetails {
+  @doc("The identifier for the run.")
+  runId?: string;
+
+  @doc("A system generated id for the run.")
+  runUuid?: string;
+
+  @doc("A system generated id for the run's parent.")
+  parentRunUuid?: string;
+
+  @doc("A system generated id for the root of the run's hierarchy.")
+  rootRunUuid?: string;
+
+  @doc("The name of the compute target where the run is executed.")
+  target?: string;
+
+  @doc("The status of the run. The Status string value maps to the RunStatus enum.")
+  status?: string;
+
+  @doc("The parent of the run if the run is hierarchical.")
+  parentRunId?: string;
+
+  @doc("An identifier for the data associated with this run.")
+  dataContainerId?: string;
+
+  @doc("The creation time of the run in UTC.")
+  createdTimeUtc?: utcDateTime;
+
+  @doc("The start time of the run in UTC.")
+  startTimeUtc?: utcDateTime;
+
+  @doc("The end time of the run in UTC.")
+  endTimeUtc?: utcDateTime;
+
+  @doc("If an error occurred during the run, this will be populated.")
+  error?: RunErrorResponse;
+
+  @doc("A list of warnings that occurred during the run.")
+  warnings?: RunDetailsWarning[];
+
+  @doc("The tag dictionary for the run. Tags are mutable.")
+  tags?: Record<string>;
+
+  @doc("The properties dictionary for the run. Properties are immutable.")
+  properties?: Record<string>;
+
+  @doc("The parameters dictionary for the run. Parameters are immutable.")
+  parameters?: Record<unknown>;
+
+  @doc("The interactive run services for a run. Services are mutable.")
+  services?: Record<RunEndpointSetting>;
+
+  @doc("A list of datasets used as input to the run.")
+  inputDatasets?: unknown[];
+
+  @doc("A list of datasets used as output to the run.")
+  outputDatasets?: unknown[];
+
+  @doc("The run definition specification.")
+  runDefinition?: unknown;
+
+  @doc("Map of log file name to its (typically SAS-signed) URL.")
+  logFiles?: Record<string>;
+
+  @doc("Job cost information.")
+  jobCost?: JobCost;
+
+  @doc("Revision number.")
+  revision?: int64;
+
+  @doc("Run type information.")
+  runTypeV2?: RunTypeV2;
+
+  @doc("The run settings.")
+  settings?: Record<string>;
+
+  @doc("The compute requests.")
+  computeRequest?: unknown;
+
+  @doc("The compute record.")
+  compute?: unknown;
+
+  @doc("The user that created the run.")
+  createdBy?: RunUser;
+
+  @doc("Time spent in an active state for terminal runs (ISO 8601 duration).")
+  computeDuration?: duration;
+
+  @doc("Relative start time of active runs for ordering and computing active compute duration. Compute duration of an active run is now() - effectiveStartTimeUtc.")
+  effectiveStartTimeUtc?: utcDateTime;
+
+  @doc("The run number.")
+  runNumber?: int32;
+
+  @doc("The id of the root run in the hierarchy.")
+  rootRunId?: string;
+
+  @doc("The experiment id this run belongs to.")
+  experimentId?: string;
+
+  @doc("The id of the user that created the run.")
+  userId?: string;
+
+  @doc("Status revision number.")
+  statusRevision?: int64;
+
+  @doc("The cumulative time spent in an active status for an active run (ISO 8601 duration).")
+  currentComputeTime?: duration;
+
+  @doc("The last timestamp when a run transitioned from paused to running. Initialized when startTimeUtc is first set.")
+  lastStartTimeUtc?: utcDateTime;
+
+  @doc("The user that last modified the run.")
+  lastModifiedBy?: RunUser;
+
+  @doc("The time the run was last modified in UTC.")
+  lastModifiedUtc?: utcDateTime;
+
+  @doc("The total duration of a run (ISO 8601 duration).")
+  duration?: duration;
+
+  @doc("The inputs for the run, keyed by input name.")
+  inputs?: Record<TypedAssetReference>;
+
+  @doc("The outputs for the run, keyed by output name.")
+  outputs?: Record<TypedAssetReference>;
+
+  @doc("The AttemptId of the most recent attempt.")
+  currentAttemptId?: int32;
+}
