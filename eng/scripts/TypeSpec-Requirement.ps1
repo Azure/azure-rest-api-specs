@@ -167,7 +167,7 @@ else {
       try {
         $response = Invoke-WebRequest -Uri $urlToApiVersion -Method Head -SkipHttpErrorCheck
         $responseStatus = $response.StatusCode
-        $responseCache[$urlToStableFolder] = $responseStatus
+        $responseCache[$urlToApiVersion] = $responseStatus
       }
       catch {
         LogError "Exception making web request to ${logUrlToApiVersion}: $_"
