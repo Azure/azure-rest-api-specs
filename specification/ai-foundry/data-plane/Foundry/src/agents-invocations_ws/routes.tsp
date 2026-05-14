@@ -38,9 +38,6 @@ interface AgentWebsocket {
       /** Optional session/conversation ID. Pass the same value on a subsequent connection to reattach to an existing session. If not provided, the service auto-generates one. */
       @query agent_session_id?: string;
 
-      /** AAD bearer token for browser clients only. The W3C WebSocket API cannot set custom headers, so browser callers may pass the AAD token via this query parameter. Non-browser clients should use the `Authorization` header instead. */
-      @query authorization?: string;
-
       /** Preview feature flag, accepted as an alternative to the `Foundry-Features` header for browser clients that cannot set custom headers. Either this query parameter or the header must be supplied with the value `HostedAgents=V1Preview`. */
       @query(#{ explode: false }) foundry_features?: AgentDefinitionOptInKeys[] = #[AgentDefinitionOptInKeys.hosted_agents_v1_preview];
     } & AgentWebsocketPreviewHeader,
