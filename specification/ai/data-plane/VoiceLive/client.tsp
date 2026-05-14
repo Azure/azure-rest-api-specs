@@ -997,6 +997,14 @@ using Azure.ClientGenerator.Core;
 
 // Explicit client declaration for emitters that require at least one client (e.g. Python).
 // This service is WebSocket-only and has no HTTP operations, so a client must be declared explicitly.
-@client({ name: "VoiceLiveClient", service: VoiceLive }, "python")
-namespace VoiceLiveClient {}
+@client(
+  {
+    name: "VoiceLiveClient",
+    service: VoiceLive,
+  },
+  "python"
+)
+namespace VoiceLiveClient {
+
+}
 
