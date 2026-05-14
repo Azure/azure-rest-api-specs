@@ -46,9 +46,7 @@ interface ProfessionalServiceSubscriptionLevelPreflight {
 
     /** The preflight request body. */
     @body body: unknown,
-  ):
-    | ArmResponse<PreflightResult>
-    | ErrorResponse;
+  ): ArmResponse<PreflightResult> | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Global operations not scoped to a single resource"
