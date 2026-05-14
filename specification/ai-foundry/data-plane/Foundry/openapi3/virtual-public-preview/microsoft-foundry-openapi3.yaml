@@ -12301,9 +12301,9 @@ components:
           allOf:
             - $ref: '#/components/schemas/ConversationGenPreviewItemGenerationParams'
           description: The parameters for conversation generation.
-        input_messages:
+        initial_messages:
           allOf:
-            - $ref: '#/components/schemas/InputMessages'
+            - $ref: '#/components/schemas/InitialMessages'
           description: |-
             Input messages configuration. For prompt agents, this must be a typed InputMessages object
             (template or item_reference). For hosted agents with invocations protocol, freeform JSON
@@ -16031,6 +16031,11 @@ components:
           ManagedAzureSearch: '#/components/schemas/ManagedAzureAISearchIndexUpdate'
           CosmosDBNoSqlVectorStore: '#/components/schemas/CosmosDBIndexUpdate'
       description: Index resource Definition
+    InitialMessages:
+      anyOf:
+        - $ref: '#/components/schemas/OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesTemplate'
+        - $ref: '#/components/schemas/OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesItemReference'
+      description: Input messages accepted by conversation simulation eval runs.
     InputData:
       type: object
       required:
@@ -16060,11 +16065,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/InputData'
       description: Dataset as source for evaluation.
-    InputMessages:
-      anyOf:
-        - $ref: '#/components/schemas/OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesTemplate'
-        - $ref: '#/components/schemas/OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesItemReference'
-      description: Input messages accepted by conversation simulation eval runs.
     Insight:
       type: object
       required:

@@ -506,9 +506,9 @@ model RedTeamEvalRunDataSource extends EvalRunDataSource {
   target: Target;
 }
 
-/** Input messages accepted by conversation simulation eval runs. */
+/** Input messages template accepted by conversation simulation eval runs. */
 @removed(Versions.v1)
-union InputMessages {
+union InputMessagesTemplate {
   /** A typed input-messages template for prompt agents. */
   template: OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesTemplate,
 
@@ -553,11 +553,11 @@ model ConversationSimulationPreviewEvalRunDataSource extends EvalRunDataSource {
   item_generation_params: ConversationGenPreviewItemGenerationParams;
 
   /**
-   * Input messages configuration. For prompt agents, this must be a typed InputMessages object
+   * Input messages template configuration. For prompt agents, this must be a typed InputMessagesTemplate object
    * (template or item_reference). For hosted agents with invocations protocol, freeform JSON
    * object is also accepted.
    */
-  input_messages?: InputMessages;
+  input_messages_template?: InputMessagesTemplate;
 
   /** The target agent to simulate conversations against. */
   target: AzureAIAgentTarget;
