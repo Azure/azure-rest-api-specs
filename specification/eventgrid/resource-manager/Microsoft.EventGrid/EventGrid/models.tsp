@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.Core;
 using Azure.ResourceManager.Foundations;
@@ -3571,6 +3573,12 @@ model NamespaceProperties {
   inboundIpRules?: InboundIpRule[];
 
   /**
+   * This determines if traffic is allowed over IPv6. By default it is disabled.
+   */
+  @added(Versions.v2025_11_15_preview)
+  ipV6Enabled?: boolean;
+
+  /**
    * Minimum TLS version of the publisher allowed to publish to this namespace. Only TLS version 1.2 is supported.
    */
   minimumTlsVersionAllowed?: TlsVersion;
@@ -3964,6 +3972,12 @@ model NamespaceUpdateParameterProperties {
    */
   @identifiers(#[])
   inboundIpRules?: InboundIpRule[];
+
+  /**
+   * This determines if traffic is allowed over IPv6. By default it is disabled.
+   */
+  @added(Versions.v2025_11_15_preview)
+  ipV6Enabled?: boolean;
 }
 
 /**

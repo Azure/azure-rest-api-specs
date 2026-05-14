@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "EventGridManagementClient",
-    "version": "2025-07-15-preview",
+    "version": "2025-11-15-preview",
     "description": "Azure EventGrid Management Client",
     "x-typespec-generated": [
       {
@@ -15316,6 +15316,10 @@
           },
           "x-ms-identifiers": []
         },
+        "ipV6Enabled": {
+          "type": "boolean",
+          "description": "This determines if traffic is allowed over IPv6. By default it is disabled."
+        },
         "minimumTlsVersionAllowed": {
           "$ref": "#/definitions/TlsVersion",
           "description": "Minimum TLS version of the publisher allowed to publish to this namespace. Only TLS version 1.2 is supported."
@@ -15668,6 +15672,10 @@
             "$ref": "#/definitions/InboundIpRule"
           },
           "x-ms-identifiers": []
+        },
+        "ipV6Enabled": {
+          "type": "boolean",
+          "description": "This determines if traffic is allowed over IPv6. By default it is disabled."
         }
       }
     },
