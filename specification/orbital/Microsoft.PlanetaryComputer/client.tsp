@@ -168,7 +168,7 @@ interface Stac {
   replaceTileSettings is StacCollectionTileSettings.replace;
 
   // STAC Conformance
-  getConformanceClass is StacConformanceClass.get;
+  getConformanceClasses is StacConformanceClass.get;
 
   // STAC landing page
   getLandingPage is StacLandingPages.get;
