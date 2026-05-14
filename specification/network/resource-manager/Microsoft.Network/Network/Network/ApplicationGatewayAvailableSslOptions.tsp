@@ -47,7 +47,7 @@ alias ApplicationGatewayAvailableSslOptionsOps = Azure.ResourceManager.Legacy.Ro
     predefinedPolicyName: string;
   },
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableSslOptions/{applicationGatewayAvailableSslOption}/predefinedPolicies",
+    route: "/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableSslOptions/{applicationGatewayAvailableSslOption}/predefinedPolicies",
   }
 >;
 
