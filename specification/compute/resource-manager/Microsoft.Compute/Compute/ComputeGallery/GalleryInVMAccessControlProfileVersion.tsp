@@ -68,8 +68,10 @@ interface GalleryInVMAccessControlProfileVersions {
   @operationId("GalleryInVMAccessControlProfileVersions_Delete")
   delete is ComputeResourceDeleteAsync<
     GalleryInVMAccessControlProfileVersion,
-    Response = ArmDeleteAcceptedLroResponse<ArmLroLocationHeader &
-      ArmAsyncOperationHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader &
+          ArmAsyncOperationHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -83,15 +85,19 @@ interface GalleryInVMAccessControlProfileVersions {
   >;
 }
 
-@@doc(GalleryInVMAccessControlProfileVersion.name,
+@@doc(
+  GalleryInVMAccessControlProfileVersion.name,
   "The name of the gallery inVMAccessControlProfile version to be retrieved."
 );
-@@doc(GalleryInVMAccessControlProfileVersion.properties,
+@@doc(
+  GalleryInVMAccessControlProfileVersion.properties,
   "Describes the properties of an inVMAccessControlProfile version."
 );
-@@doc(GalleryInVMAccessControlProfileVersions.createOrUpdate::parameters.resource,
+@@doc(
+  GalleryInVMAccessControlProfileVersions.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update gallery inVMAccessControlProfile version operation."
 );
-@@doc(GalleryInVMAccessControlProfileVersions.update::parameters.properties,
+@@doc(
+  GalleryInVMAccessControlProfileVersions.update::parameters.properties,
   "Parameters supplied to the update gallery inVMAccessControlProfile version operation."
 );

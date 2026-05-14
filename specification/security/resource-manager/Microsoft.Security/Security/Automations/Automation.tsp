@@ -108,16 +108,20 @@ interface Automations {
 
 @@doc(Automation.name, "The security automation name.");
 @@doc(Automation.properties, "Security automation data");
-@@doc(Automations.createOrUpdate::parameters.resource,
+@@doc(
+  Automations.createOrUpdate::parameters.resource,
   "The security automation resource"
 );
-@@doc(Automations.update::parameters.properties,
+@@doc(
+  Automations.update::parameters.properties,
   "The update model of security automation resource"
 );
-@@doc(Automations.validate::parameters.body,
+@@doc(
+  Automations.validate::parameters.body,
   "The security automation resource"
 );
-@@visibility(Automation.location,
+@@visibility(
+  Automation.location,
   Lifecycle.Read,
   Lifecycle.Create,
   Lifecycle.Update

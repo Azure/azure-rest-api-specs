@@ -70,12 +70,15 @@ interface PrometheusRuleGroupResources {
 }
 
 @@doc(PrometheusRuleGroupResource.name, "The name of the rule group.");
-@@doc(PrometheusRuleGroupResource.properties,
+@@doc(
+  PrometheusRuleGroupResource.properties,
   "The Prometheus rule group properties of the resource."
 );
-@@doc(PrometheusRuleGroupResources.createOrUpdate::parameters.resource,
+@@doc(
+  PrometheusRuleGroupResources.createOrUpdate::parameters.resource,
   "The parameters of the rule group to create or update."
 );
-@@doc(PrometheusRuleGroupResources.update::parameters.properties,
+@@doc(
+  PrometheusRuleGroupResources.update::parameters.properties,
   "The parameters of the rule group to update."
 );

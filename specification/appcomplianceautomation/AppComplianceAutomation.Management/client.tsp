@@ -6,37 +6,44 @@ using Azure.Core;
 using Azure.ResourceManager.Foundations;
 using Microsoft.AppComplianceAutomation;
 
-@@clientName(Microsoft.AppComplianceAutomation,
+@@clientName(
+  Microsoft.AppComplianceAutomation,
   "AppComplianceAutomationMgmt",
   "python"
 );
 
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
   armResourceIdentifier,
   "csharp"
 );
 @@clientName(EvidenceResource, "AppComplianceReportEvidence", "csharp");
-@@clientName(EvidenceProperties,
+@@clientName(
+  EvidenceProperties,
   "AppComplianceReportEvidenceProperties",
   "csharp"
 );
 @@clientName(ReportResource, "AppComplianceReport", "csharp");
-@@clientName(ScopingConfigurationResource,
+@@clientName(
+  ScopingConfigurationResource,
   "AppComplianceReportScopingConfiguration",
   "csharp"
 );
-@@clientName(ScopingConfigurationProperties,
+@@clientName(
+  ScopingConfigurationProperties,
   "AppComplianceReportScopingConfigurationProperties",
   "csharp"
 );
 @@usage(SnapshotResource, Usage.input | Usage.output, "csharp");
 @@clientName(SnapshotResource, "AppComplianceReportSnapshot", "csharp");
-@@clientName(SnapshotProperties,
+@@clientName(
+  SnapshotProperties,
   "AppComplianceReportSnapshotProperties",
   "csharp"
 );
 @@clientName(WebhookResource, "AppComplianceReportWebhook", "csharp");
-@@clientName(WebhookProperties,
+@@clientName(
+  WebhookProperties,
   "AppComplianceReportWebhookProperties",
   "csharp"
 );
@@ -45,39 +52,47 @@ using Microsoft.AppComplianceAutomation;
 @@clientName(SendAllEvents, "SendAllEvent", "csharp");
 @@clientName(Category, "AppComplianceCategory", "csharp");
 @@clientName(CategoryStatus, "AppComplianceCategoryStatus", "csharp");
-@@clientName(ProviderActions.checkNameAvailability,
+@@clientName(
+  ProviderActions.checkNameAvailability,
   "CheckAppComplianceReportNameAvailability",
   "csharp"
 );
-@@clientName(Report.checkNameAvailability,
+@@clientName(
+  Report.checkNameAvailability,
   "CheckAppComplianceReportNestedResourceNameAvailability",
   "csharp"
 );
-@@clientName(CheckNameAvailabilityReason,
+@@clientName(
+  CheckNameAvailabilityReason,
   "AppComplianceReportNameUnavailabilityReason",
   "csharp"
 );
-@@clientName(CheckNameAvailabilityRequest,
+@@clientName(
+  CheckNameAvailabilityRequest,
   "AppComplianceReportNameAvailabilityContent",
   "csharp"
 );
 @@clientName(CheckNameAvailabilityRequest.type, "ResourceType", "csharp");
-@@clientName(CheckNameAvailabilityResponse,
+@@clientName(
+  CheckNameAvailabilityResponse,
   "AppComplianceReportNameAvailabilityResult",
   "csharp"
 );
-@@clientName(CheckNameAvailabilityResponse.nameAvailable,
+@@clientName(
+  CheckNameAvailabilityResponse.nameAvailable,
   "IsNameAvailable",
   "csharp"
 );
 @@alternateType(CheckNameAvailabilityRequest.type, armResourceType, "csharp");
 @@clientName(ComplianceReportItem, "AppComplianceReportItem", "csharp");
-@@alternateType(ComplianceReportItem.resourceId,
+@@alternateType(
+  ComplianceReportItem.resourceId,
   armResourceIdentifier,
   "csharp"
 );
 @@alternateType(ComplianceReportItem.resourceType, armResourceType, "csharp");
-@@clientName(ComplianceReportItem.resourceStatusChangeDate,
+@@clientName(
+  ComplianceReportItem.resourceStatusChangeDate,
   "ResourceStatusChangedOn",
   "csharp"
 );
@@ -89,60 +104,73 @@ using Microsoft.AppComplianceAutomation;
 @@clientName(ControlStatus, "AppComplianceControlStatus", "csharp");
 @@clientName(DeliveryStatus, "WebhookDeliveryStatus", "csharp");
 @@clientName(DownloadResponse, "AppComplianceDownloadResult", "csharp");
-@@clientName(DownloadResponseComplianceDetailedPdfReport,
+@@clientName(
+  DownloadResponseComplianceDetailedPdfReport,
   "AppComplianceDetailedPdfReport",
   "csharp"
 );
-@@alternateType(DownloadResponseComplianceDetailedPdfReport.sasUri,
+@@alternateType(
+  DownloadResponseComplianceDetailedPdfReport.sasUri,
   url,
   "csharp"
 );
-@@clientName(DownloadResponseCompliancePdfReport,
+@@clientName(
+  DownloadResponseCompliancePdfReport,
   "AppCompliancePdfReport",
   "csharp"
 );
 @@alternateType(DownloadResponseCompliancePdfReport.sasUri, url, "csharp");
 @@clientName(DownloadType, "AppComplianceDownloadType", "csharp");
-@@clientName(EvidenceFileDownloadResponse,
+@@clientName(
+  EvidenceFileDownloadResponse,
   "EvidenceFileDownloadResult",
   "csharp"
 );
-@@clientName(EvidenceFileDownloadResponseEvidenceFile,
+@@clientName(
+  EvidenceFileDownloadResponseEvidenceFile,
   "EvidenceFileUrlInfo",
   "csharp"
 );
 @@alternateType(EvidenceFileDownloadResponseEvidenceFile.url, url, "csharp");
 @@clientName(EvidenceType, "AppComplianceReportEvidenceType", "csharp");
-@@clientName(GetCollectionCountRequest,
+@@clientName(
+  GetCollectionCountRequest,
   "ReportCollectionGetCountContent",
   "csharp"
 );
-@@clientName(GetCollectionCountRequest.type,
+@@clientName(
+  GetCollectionCountRequest.type,
   "GetCollectionCountRequestType",
   "csharp"
 );
-@@clientName(GetCollectionCountResponse,
+@@clientName(
+  GetCollectionCountResponse,
   "ReportCollectionGetCountResult",
   "csharp"
 );
-@@clientName(GetOverviewStatusRequest,
+@@clientName(
+  GetOverviewStatusRequest,
   "AppComplianceGetOverviewStatusContent",
   "csharp"
 );
-@@clientName(GetOverviewStatusRequest.type,
+@@clientName(
+  GetOverviewStatusRequest.type,
   "GetOverviewStatusRequestType",
   "csharp"
 );
-@@clientName(GetOverviewStatusResponse,
+@@clientName(
+  GetOverviewStatusResponse,
   "AppComplianceGetOverviewStatusResult",
   "csharp"
 );
 @@clientName(InputType, "ScopingQuestionInputType", "csharp");
-@@clientName(ListInUseStorageAccountsRequest,
+@@clientName(
+  ListInUseStorageAccountsRequest,
   "ReportListInUseStorageAccountsContent",
   "csharp"
 );
-@@clientName(ListInUseStorageAccountsResponse,
+@@clientName(
+  ListInUseStorageAccountsResponse,
   "ReportListInUseStorageAccountsResult",
   "csharp"
 );
@@ -152,7 +180,8 @@ using Microsoft.AppComplianceAutomation;
 @@clientName(OverviewStatus, "ReportOverviewStatus", "csharp");
 @@clientName(ProvisioningState, "AppComplianceProvisioningState", "csharp");
 @@clientName(Recommendation, "RecommendationDetails", "csharp");
-@@clientName(ReportPatchProperties,
+@@clientName(
+  ReportPatchProperties,
   "AppComplianceReportPatchProperties",
   "csharp"
 );
@@ -174,12 +203,14 @@ using Microsoft.AppComplianceAutomation;
 @@clientName(ResponsibilityEnvironment.AWS, "Aws", "csharp");
 @@clientName(ResponsibilityEnvironment.GCP, "Gcp", "csharp");
 @@clientName(ResponsibilityResource, "ResponsibilityResourceItem", "csharp");
-@@alternateType(ResponsibilityResource.resourceId,
+@@alternateType(
+  ResponsibilityResource.resourceId,
   armResourceIdentifier,
   "csharp"
 );
 @@alternateType(ResponsibilityResource.resourceType, armResourceType, "csharp");
-@@clientName(ResponsibilityResource.resourceStatusChangeDate,
+@@clientName(
+  ResponsibilityResource.resourceStatusChangeDate,
   "ResourceStatusChangedOn",
   "csharp"
 );
@@ -192,35 +223,42 @@ using Microsoft.AppComplianceAutomation;
 @@clientName(TriggerEvaluationResponse, "TriggerEvaluationResult", "csharp");
 @@alternateType(QuickAssessment.resourceId, armResourceIdentifier, "csharp");
 @@clientName(QuickAssessment.timestamp, "CreatedOn", "csharp");
-@@clientName(SnapshotDownloadRequest,
+@@clientName(
+  SnapshotDownloadRequest,
   "SnapshotDownloadRequestContent",
   "csharp"
 );
 @@clientName(TriggerEvaluationRequest, "TriggerEvaluationContent", "csharp");
 @@alternateType(SnapshotDownloadRequest.reportCreatorTenantId, uuid, "csharp");
 @@clientName(SyncCertRecordRequest, "SyncCertRecordContent", "csharp");
-@@clientName(EvidenceFileDownloadRequest,
+@@clientName(
+  EvidenceFileDownloadRequest,
   "EvidenceFileDownloadRequestContent",
   "csharp"
 );
-@@alternateType(EvidenceFileDownloadRequest.reportCreatorTenantId,
+@@alternateType(
+  EvidenceFileDownloadRequest.reportCreatorTenantId,
   uuid,
   "csharp"
 );
-@@clientName(ProviderActions.getCollectionCount,
+@@clientName(
+  ProviderActions.getCollectionCount,
   "GetCollectionCountProviderAction",
   "csharp"
 );
-@@clientName(ProviderActions.listInUseStorageAccounts,
+@@clientName(
+  ProviderActions.listInUseStorageAccounts,
   "GetInUseStorageAccountsProviderAction",
   "csharp"
 );
-@@clientName(ProviderActions.getOverviewStatus,
+@@clientName(
+  ProviderActions.getOverviewStatus,
   "GetOverviewStatusProviderAction",
   "csharp"
 );
 @@clientName(ProviderActions.onboard, "OnboardProviderAction", "csharp");
-@@clientName(ProviderActions.triggerEvaluation,
+@@clientName(
+  ProviderActions.triggerEvaluation,
   "TriggerEvaluationProviderAction",
   "csharp"
 );

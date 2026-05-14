@@ -3,7 +3,8 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.AAD;
 
-@@clientName(DomainServices.createOrUpdate::parameters.resource,
+@@clientName(
+  DomainServices.createOrUpdate::parameters.resource,
   "domainService"
 );
 @@clientName(DomainServices.update::parameters.properties, "domainService");

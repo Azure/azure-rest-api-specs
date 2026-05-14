@@ -58,11 +58,13 @@ interface Namespaces {
   update is ArmCustomPatchAsync<
     Namespace,
     PatchModel = NamespaceUpdateParameters,
-    Response = ArmResponse<Namespace> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Namespace> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: Namespace;
-    })
+    Response =
+      | ArmResponse<Namespace>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Namespace> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: Namespace;
+        })
   >;
 
   /**
@@ -72,7 +74,10 @@ interface Namespaces {
   @summary("Delete a namespace.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Namespace,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -156,9 +161,11 @@ interface Namespaces {
 @@doc(Namespace.name, "Name of the namespace.");
 @@doc(Namespace.properties, "Properties of the Namespace resource.");
 @@doc(Namespaces.createOrUpdate::parameters.resource, "Namespace information.");
-@@doc(Namespaces.update::parameters.properties,
+@@doc(
+  Namespaces.update::parameters.properties,
   "Namespace update information."
 );
-@@doc(Namespaces.regenerateKey::parameters.body,
+@@doc(
+  Namespaces.regenerateKey::parameters.body,
   "Request body to regenerate key."
 );
