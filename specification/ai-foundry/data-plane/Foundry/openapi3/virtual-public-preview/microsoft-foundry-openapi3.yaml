@@ -4616,6 +4616,14 @@ paths:
       operationId: listMemoryStores
       description: List all memory stores.
       parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - MemoryStores=V1Preview
         - name: limit
           in: query
           required: false
@@ -4656,14 +4664,6 @@ paths:
           schema:
             type: string
           explode: false
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - MemoryStores=V1Preview
         - name: api-version
           in: query
           required: true
@@ -4713,12 +4713,6 @@ paths:
       operationId: updateMemoryStore
       description: Update a memory store.
       parameters:
-        - name: name
-          in: path
-          required: true
-          description: The name of the memory store to update.
-          schema:
-            type: string
         - name: Foundry-Features
           in: header
           required: true
@@ -4727,6 +4721,12 @@ paths:
             type: string
             enum:
               - MemoryStores=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The name of the memory store to update.
+          schema:
+            type: string
         - name: api-version
           in: query
           required: true
@@ -4772,12 +4772,6 @@ paths:
       operationId: getMemoryStore
       description: Retrieve a memory store.
       parameters:
-        - name: name
-          in: path
-          required: true
-          description: The name of the memory store to retrieve.
-          schema:
-            type: string
         - name: Foundry-Features
           in: header
           required: true
@@ -4786,6 +4780,12 @@ paths:
             type: string
             enum:
               - MemoryStores=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The name of the memory store to retrieve.
+          schema:
+            type: string
         - name: api-version
           in: query
           required: true
@@ -4815,12 +4815,6 @@ paths:
       operationId: deleteMemoryStore
       description: Delete a memory store.
       parameters:
-        - name: name
-          in: path
-          required: true
-          description: The name of the memory store to delete.
-          schema:
-            type: string
         - name: Foundry-Features
           in: header
           required: true
@@ -4829,6 +4823,12 @@ paths:
             type: string
             enum:
               - MemoryStores=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The name of the memory store to delete.
+          schema:
+            type: string
         - name: api-version
           in: query
           required: true
@@ -4859,12 +4859,6 @@ paths:
       operationId: createMemoryItem
       description: Create a memory item in a memory store.
       parameters:
-        - name: name
-          in: path
-          required: true
-          description: The name of the memory store.
-          schema:
-            type: string
         - name: Foundry-Features
           in: header
           required: true
@@ -4873,6 +4867,12 @@ paths:
             type: string
             enum:
               - MemoryStores=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The name of the memory store.
+          schema:
+            type: string
         - name: api-version
           in: query
           required: true
@@ -4923,6 +4923,14 @@ paths:
       operationId: listMemoryItems
       description: List all memory items in a memory store.
       parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - MemoryStores=V1Preview
         - name: name
           in: path
           required: true
@@ -4969,14 +4977,6 @@ paths:
           schema:
             type: string
           explode: false
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - MemoryStores=V1Preview
         - name: api-version
           in: query
           required: true
@@ -5026,6 +5026,14 @@ paths:
       operationId: updateMemoryItem
       description: Update a memory item in a memory store.
       parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - MemoryStores=V1Preview
         - name: name
           in: path
           required: true
@@ -5038,14 +5046,6 @@ paths:
           description: The ID of the memory item to update.
           schema:
             type: string
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - MemoryStores=V1Preview
         - name: api-version
           in: query
           required: true
@@ -5087,6 +5087,14 @@ paths:
       operationId: getMemoryItem
       description: Retrieve a memory item from a memory store.
       parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - MemoryStores=V1Preview
         - name: name
           in: path
           required: true
@@ -5099,14 +5107,6 @@ paths:
           description: The ID of the memory item to retrieve.
           schema:
             type: string
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - MemoryStores=V1Preview
         - name: api-version
           in: query
           required: true
@@ -5136,6 +5136,14 @@ paths:
       operationId: deleteMemoryItem
       description: Delete a memory item from a memory store.
       parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - MemoryStores=V1Preview
         - name: name
           in: path
           required: true
@@ -5148,14 +5156,6 @@ paths:
           description: The ID of the memory item to delete.
           schema:
             type: string
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - MemoryStores=V1Preview
         - name: api-version
           in: query
           required: true
@@ -5186,6 +5186,14 @@ paths:
       operationId: getUpdateResult
       description: Get memory store update result.
       parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - MemoryStores=V1Preview
         - name: name
           in: path
           required: true
@@ -5198,14 +5206,6 @@ paths:
           description: The ID of the memory update operation.
           schema:
             type: string
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - MemoryStores=V1Preview
         - name: api-version
           in: query
           required: true
@@ -5236,12 +5236,6 @@ paths:
       operationId: deleteScopeMemories
       description: Delete all memories associated with a specific scope from a memory store.
       parameters:
-        - name: name
-          in: path
-          required: true
-          description: The name of the memory store.
-          schema:
-            type: string
         - name: Foundry-Features
           in: header
           required: true
@@ -5250,6 +5244,12 @@ paths:
             type: string
             enum:
               - MemoryStores=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The name of the memory store.
+          schema:
+            type: string
         - name: api-version
           in: query
           required: true
@@ -5292,12 +5292,6 @@ paths:
       operationId: searchMemories
       description: Search for relevant memories from a memory store based on conversation context.
       parameters:
-        - name: name
-          in: path
-          required: true
-          description: The name of the memory store to search.
-          schema:
-            type: string
         - name: Foundry-Features
           in: header
           required: true
@@ -5306,6 +5300,12 @@ paths:
             type: string
             enum:
               - MemoryStores=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The name of the memory store to search.
+          schema:
+            type: string
         - name: api-version
           in: query
           required: true
@@ -5360,12 +5360,6 @@ paths:
       operationId: updateMemories
       description: Update memory store with conversation memories.
       parameters:
-        - name: name
-          in: path
-          required: true
-          description: The name of the memory store to update.
-          schema:
-            type: string
         - name: Foundry-Features
           in: header
           required: true
@@ -5374,6 +5368,12 @@ paths:
             type: string
             enum:
               - MemoryStores=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The name of the memory store to update.
+          schema:
+            type: string
         - name: api-version
           in: query
           required: true

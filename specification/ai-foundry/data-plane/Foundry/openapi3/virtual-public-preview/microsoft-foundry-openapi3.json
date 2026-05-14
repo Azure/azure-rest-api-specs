@@ -6996,6 +6996,18 @@
         "description": "List all memory stores.",
         "parameters": [
           {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MemoryStores=V1Preview"
+              ]
+            }
+          },
+          {
             "name": "limit",
             "in": "query",
             "required": false,
@@ -7036,18 +7048,6 @@
               "type": "string"
             },
             "explode": false
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "MemoryStores=V1Preview"
-              ]
-            }
           },
           {
             "name": "api-version",
@@ -7124,15 +7124,6 @@
         "description": "Update a memory store.",
         "parameters": [
           {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the memory store to update.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "Foundry-Features",
             "in": "header",
             "required": true,
@@ -7142,6 +7133,15 @@
               "enum": [
                 "MemoryStores=V1Preview"
               ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the memory store to update.",
+            "schema": {
+              "type": "string"
             }
           },
           {
@@ -7215,15 +7215,6 @@
         "description": "Retrieve a memory store.",
         "parameters": [
           {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the memory store to retrieve.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "Foundry-Features",
             "in": "header",
             "required": true,
@@ -7233,6 +7224,15 @@
               "enum": [
                 "MemoryStores=V1Preview"
               ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the memory store to retrieve.",
+            "schema": {
+              "type": "string"
             }
           },
           {
@@ -7282,15 +7282,6 @@
         "description": "Delete a memory store.",
         "parameters": [
           {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the memory store to delete.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "Foundry-Features",
             "in": "header",
             "required": true,
@@ -7300,6 +7291,15 @@
               "enum": [
                 "MemoryStores=V1Preview"
               ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the memory store to delete.",
+            "schema": {
+              "type": "string"
             }
           },
           {
@@ -7351,15 +7351,6 @@
         "description": "Create a memory item in a memory store.",
         "parameters": [
           {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the memory store.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "Foundry-Features",
             "in": "header",
             "required": true,
@@ -7369,6 +7360,15 @@
               "enum": [
                 "MemoryStores=V1Preview"
               ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the memory store.",
+            "schema": {
+              "type": "string"
             }
           },
           {
@@ -7451,6 +7451,18 @@
         "description": "List all memory items in a memory store.",
         "parameters": [
           {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MemoryStores=V1Preview"
+              ]
+            }
+          },
+          {
             "name": "name",
             "in": "path",
             "required": true,
@@ -7500,18 +7512,6 @@
               "type": "string"
             },
             "explode": false
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "MemoryStores=V1Preview"
-              ]
-            }
           },
           {
             "name": "api-version",
@@ -7588,6 +7588,18 @@
         "description": "Update a memory item in a memory store.",
         "parameters": [
           {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MemoryStores=V1Preview"
+              ]
+            }
+          },
+          {
             "name": "name",
             "in": "path",
             "required": true,
@@ -7603,18 +7615,6 @@
             "description": "The ID of the memory item to update.",
             "schema": {
               "type": "string"
-            }
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "MemoryStores=V1Preview"
-              ]
             }
           },
           {
@@ -7683,6 +7683,18 @@
         "description": "Retrieve a memory item from a memory store.",
         "parameters": [
           {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MemoryStores=V1Preview"
+              ]
+            }
+          },
+          {
             "name": "name",
             "in": "path",
             "required": true,
@@ -7698,18 +7710,6 @@
             "description": "The ID of the memory item to retrieve.",
             "schema": {
               "type": "string"
-            }
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "MemoryStores=V1Preview"
-              ]
             }
           },
           {
@@ -7759,6 +7759,18 @@
         "description": "Delete a memory item from a memory store.",
         "parameters": [
           {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MemoryStores=V1Preview"
+              ]
+            }
+          },
+          {
             "name": "name",
             "in": "path",
             "required": true,
@@ -7774,18 +7786,6 @@
             "description": "The ID of the memory item to delete.",
             "schema": {
               "type": "string"
-            }
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "MemoryStores=V1Preview"
-              ]
             }
           },
           {
@@ -7837,6 +7837,18 @@
         "description": "Get memory store update result.",
         "parameters": [
           {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MemoryStores=V1Preview"
+              ]
+            }
+          },
+          {
             "name": "name",
             "in": "path",
             "required": true,
@@ -7852,18 +7864,6 @@
             "description": "The ID of the memory update operation.",
             "schema": {
               "type": "string"
-            }
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "MemoryStores=V1Preview"
-              ]
             }
           },
           {
@@ -7915,15 +7915,6 @@
         "description": "Delete all memories associated with a specific scope from a memory store.",
         "parameters": [
           {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the memory store.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "Foundry-Features",
             "in": "header",
             "required": true,
@@ -7933,6 +7924,15 @@
               "enum": [
                 "MemoryStores=V1Preview"
               ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the memory store.",
+            "schema": {
+              "type": "string"
             }
           },
           {
@@ -8003,15 +8003,6 @@
         "description": "Search for relevant memories from a memory store based on conversation context.",
         "parameters": [
           {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the memory store to search.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "Foundry-Features",
             "in": "header",
             "required": true,
@@ -8021,6 +8012,15 @@
               "enum": [
                 "MemoryStores=V1Preview"
               ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the memory store to search.",
+            "schema": {
+              "type": "string"
             }
           },
           {
@@ -8110,15 +8110,6 @@
         "description": "Update memory store with conversation memories.",
         "parameters": [
           {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the memory store to update.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "Foundry-Features",
             "in": "header",
             "required": true,
@@ -8128,6 +8119,15 @@
               "enum": [
                 "MemoryStores=V1Preview"
               ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the memory store to update.",
+            "schema": {
+              "type": "string"
             }
           },
           {

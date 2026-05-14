@@ -8,8 +8,6 @@ using Azure.Core;
 
 namespace Azure.AI.Projects;
 
-alias MemoryStorePreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.memory_stores_v1_preview>;
-
 @tag("Memory Stores")
 interface MemoryStores {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
@@ -18,8 +16,9 @@ interface MemoryStores {
   @post
   @route("/memory_stores")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
-  createMemoryStore is FoundryDataPlaneOperation<
-    CreateMemoryStoreRequest & MemoryStorePreviewHeader,
+  createMemoryStore is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    CreateMemoryStoreRequest,
     MemoryStoreObject
   >;
 
@@ -29,8 +28,9 @@ interface MemoryStores {
   @post
   @route("/memory_stores/{name}")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
-  updateMemoryStore is FoundryDataPlaneOperation<
-    UpdateMemoryStoreRequest & MemoryStorePreviewHeader,
+  updateMemoryStore is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    UpdateMemoryStoreRequest,
     MemoryStoreObject
   >;
 
@@ -40,8 +40,9 @@ interface MemoryStores {
   @get
   @route("/memory_stores/{name}")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
-  getMemoryStore is FoundryDataPlaneOperation<
-    GetMemoryStoreRequest & MemoryStorePreviewHeader,
+  getMemoryStore is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    GetMemoryStoreRequest,
     MemoryStoreObject
   >;
 
@@ -52,8 +53,9 @@ interface MemoryStores {
   @list
   @route("/memory_stores")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
-  listMemoryStores is FoundryDataPlaneOperation<
-    ListMemoryStoresRequest & MemoryStorePreviewHeader,
+  listMemoryStores is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    ListMemoryStoresRequest,
     AgentsPagedResult<MemoryStoreObject>
   >;
 
@@ -63,8 +65,9 @@ interface MemoryStores {
   @delete
   @route("/memory_stores/{name}")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
-  deleteMemoryStore is FoundryDataPlaneOperation<
-    DeleteMemoryStoreRequest & MemoryStorePreviewHeader,
+  deleteMemoryStore is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    DeleteMemoryStoreRequest,
     DeleteMemoryStoreResponse
   >;
 
@@ -74,8 +77,9 @@ interface MemoryStores {
   @post
   @route("/memory_stores/{name}:search_memories")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
-  searchMemories is FoundryDataPlaneOperation<
-    MemoryStoreSearchRequest & MemoryStorePreviewHeader,
+  searchMemories is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    MemoryStoreSearchRequest,
     MemoryStoreSearchResponse
   >;
 
@@ -86,8 +90,9 @@ interface MemoryStores {
   @route("/memory_stores/{name}:update_memories")
   @pollingOperation(MemoryStores.getUpdateResult)
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
-  updateMemories is FoundryDataPlaneOperation<
-    MemoryStoreUpdateRequest & MemoryStorePreviewHeader,
+  updateMemories is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    MemoryStoreUpdateRequest,
     Foundations.AcceptedResponse &
       MemoryStoreUpdateResponse &
       Foundations.LongRunningStatusLocation<MemoryStoreUpdateCompletedResult>
@@ -99,8 +104,9 @@ interface MemoryStores {
   @get
   @route("/memory_stores/{name}/updates/{update_id}")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
-  getUpdateResult is FoundryDataPlaneOperation<
-    MemoryStoreGetUpdateResultRequest & MemoryStorePreviewHeader,
+  getUpdateResult is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    MemoryStoreGetUpdateResultRequest,
     MemoryStoreUpdateResponse
   >;
 
@@ -110,8 +116,9 @@ interface MemoryStores {
   @post
   @route("/memory_stores/{name}:delete_scope")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
-  deleteScope is FoundryDataPlaneOperation<
-    MemoryStoreDeleteScopeRequest & MemoryStorePreviewHeader,
+  deleteScope is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    MemoryStoreDeleteScopeRequest,
     MemoryStoreDeleteScopeResponse
   >;
 
@@ -121,8 +128,9 @@ interface MemoryStores {
   @post
   @route("/memory_stores/{name}/memories")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
-  createMemoryItem is FoundryDataPlaneOperation<
-    CreateMemoryItemRequest & MemoryStorePreviewHeader,
+  createMemoryItem is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    CreateMemoryItemRequest,
     MemoryItem
   >;
 
@@ -132,8 +140,9 @@ interface MemoryStores {
   @post
   @route("/memory_stores/{name}/memories/{memory_id}")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
-  updateMemoryItem is FoundryDataPlaneOperation<
-    UpdateMemoryItemRequest & MemoryStorePreviewHeader,
+  updateMemoryItem is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    UpdateMemoryItemRequest,
     MemoryItem
   >;
 
@@ -143,8 +152,9 @@ interface MemoryStores {
   @get
   @route("/memory_stores/{name}/memories/{memory_id}")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
-  getMemoryItem is FoundryDataPlaneOperation<
-    GetMemoryItemRequest & MemoryStorePreviewHeader,
+  getMemoryItem is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    GetMemoryItemRequest,
     MemoryItem
   >;
 
@@ -155,8 +165,9 @@ interface MemoryStores {
   @list
   @route("/memory_stores/{name}/memories")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
-  listMemoryItems is FoundryDataPlaneOperation<
-    ListMemoryItemsRequest & MemoryStorePreviewHeader,
+  listMemoryItems is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    ListMemoryItemsRequest,
     AgentsPagedResult<MemoryItem>
   >;
 
@@ -166,8 +177,9 @@ interface MemoryStores {
   @delete
   @route("/memory_stores/{name}/memories/{memory_id}")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
-  deleteMemoryItem is FoundryDataPlaneOperation<
-    DeleteMemoryItemRequest & MemoryStorePreviewHeader,
+  deleteMemoryItem is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    DeleteMemoryItemRequest,
     DeleteMemoryItemResponse
   >;
 }
