@@ -96,12 +96,15 @@ interface L2IsolationDomains {
 }
 
 @@doc(L2IsolationDomains.create::parameters.resource, "Request payload.");
-@@doc(L2IsolationDomains.update::parameters.properties,
+@@doc(
+  L2IsolationDomains.update::parameters.properties,
   "API to update certain properties of the L2 Isolation Domain resource.."
 );
-@@doc(L2IsolationDomains.updateAdministrativeStateDeprecated::parameters.body,
+@@doc(
+  L2IsolationDomains.updateAdministrativeStateDeprecated::parameters.body,
   "Request payload."
 );
-@@doc(L2IsolationDomains.updateAdministrativeState::parameters.body,
+@@doc(
+  L2IsolationDomains.updateAdministrativeState::parameters.body,
   "Request payload."
 );

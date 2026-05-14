@@ -80,7 +80,10 @@ interface ExpressRouteCircuits {
   @tag("ExpressRouteCircuits")
   delete is ArmResourceDeleteWithoutOkAsync<
     ExpressRouteCircuit,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -111,12 +114,15 @@ interface ExpressRouteCircuits {
 }
 
 @@doc(ExpressRouteCircuit.name, "The name of express route circuit.");
-@@doc(ExpressRouteCircuit.properties,
+@@doc(
+  ExpressRouteCircuit.properties,
   "Properties of the express route circuit."
 );
-@@doc(ExpressRouteCircuits.createOrUpdate::parameters.resource,
+@@doc(
+  ExpressRouteCircuits.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update express route circuit operation."
 );
-@@doc(ExpressRouteCircuits.updateTags::parameters.properties,
+@@doc(
+  ExpressRouteCircuits.updateTags::parameters.properties,
   "Parameters supplied to update express route circuit tags."
 );

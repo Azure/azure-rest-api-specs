@@ -78,12 +78,15 @@ interface AlertsSuppressionRules {
   >;
 }
 
-@@doc(AlertsSuppressionRule.name,
+@@doc(
+  AlertsSuppressionRule.name,
   "The unique name of the suppression alert rule"
 );
-@@doc(AlertsSuppressionRule.properties,
+@@doc(
+  AlertsSuppressionRule.properties,
   "describes AlertsSuppressionRule properties"
 );
-@@doc(AlertsSuppressionRules.update::parameters.resource,
+@@doc(
+  AlertsSuppressionRules.update::parameters.resource,
   "Suppression rule object"
 );

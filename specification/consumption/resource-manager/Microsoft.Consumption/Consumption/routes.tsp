@@ -48,7 +48,10 @@ interface PriceSheetOperationGroup {
     billingPeriodName: string,
 
     ...Azure.ResourceManager.Legacy.Provider,
-  ): OperationStatus | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatus>> | CommonTypes.ErrorResponse;
+  ):
+    | OperationStatus
+    | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatus>>
+    | CommonTypes.ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -617,7 +620,10 @@ interface ReservationRecommendationDetailsOperationGroup {
      */
     @query("$filter")
     $filter?: string,
-  ): ReservationRecommendationDetailsModel | NoContentResponse | HighCasedErrorResponse;
+  ):
+    | ReservationRecommendationDetailsModel
+    | NoContentResponse
+    | HighCasedErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

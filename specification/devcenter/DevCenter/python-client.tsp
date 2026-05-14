@@ -55,13 +55,16 @@ interface DevCenterClientOperations {
 }
 
 @@clientName(DevCenterService.LocalAdminStatus, "LocalAdministratorStatus");
-@@clientName(DevCenterService.StopOnDisconnectEnableStatus,
+@@clientName(
+  DevCenterService.StopOnDisconnectEnableStatus,
   "StopOnDisconnectStatus"
 );
-@@clientName(DevCenterService.EnvironmentTypeEnableStatus,
+@@clientName(
+  DevCenterService.EnvironmentTypeEnableStatus,
   "EnvironmentTypeStatus"
 );
-@@clientName(DevCenterService.DevBoxActionDelayResultStatus,
+@@clientName(
+  DevCenterService.DevBoxActionDelayResultStatus,
   "DevBoxActionDelayStatus"
 );
 
@@ -71,7 +74,8 @@ interface DevCenterClientOperations {
 @@clientName(DevCenterService.OsDisk, "OSDisk", "python");
 @@clientName(DevCenterService.OsDisk.diskSizeGB, "diskSizeGb", "python");
 @@clientName(DevCenterService.OperationStatus, "OperationDetails", "python");
-@@clientName(Azure.Core.Foundations.OperationState,
+@@clientName(
+  Azure.Core.Foundations.OperationState,
   "OperationStatus",
   "python"
 );

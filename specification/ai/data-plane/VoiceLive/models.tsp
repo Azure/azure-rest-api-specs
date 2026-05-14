@@ -8,8 +8,12 @@ using TypeSpec.Versioning;
 
 namespace VoiceLive;
 
-alias RequestUsage = Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.json;
-alias ResponseUsage = Azure.ClientGenerator.Core.Usage.output | Azure.ClientGenerator.Core.Usage.json;
+alias RequestUsage =
+  | Azure.ClientGenerator.Core.Usage.input
+  | Azure.ClientGenerator.Core.Usage.json;
+alias ResponseUsage =
+  | Azure.ClientGenerator.Core.Usage.output
+  | Azure.ClientGenerator.Core.Usage.json;
 alias DualUsage = RequestUsage | ResponseUsage;
 
 /** Error object returned in case of API failure. */

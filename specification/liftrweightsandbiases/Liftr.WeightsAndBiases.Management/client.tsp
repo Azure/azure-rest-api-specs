@@ -4,26 +4,31 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.WeightsAndBiases;
 
-@@clientName(Microsoft.WeightsAndBiases,
+@@clientName(
+  Microsoft.WeightsAndBiases,
   "WeightsAndBiasesMgmtClient",
   "python"
 );
-@@clientName(Microsoft.WeightsAndBiases,
+@@clientName(
+  Microsoft.WeightsAndBiases,
   "WeightsAndBiasesManagementClient",
   "java"
 );
 
 // csharp
 @@clientName(InstanceResource, "WeightsAndBiasesInstance", "csharp");
-@@clientName(InstanceProperties,
+@@clientName(
+  InstanceProperties,
   "WeightsAndBiasesInstanceProperties",
   "csharp"
 );
-@@clientName(LiftrBase.MarketplaceDetails,
+@@clientName(
+  LiftrBase.MarketplaceDetails,
   "WeightsAndBiasesMarketplaceDetails",
   "csharp"
 );
-@@clientName(LiftrBase.MarketplaceSubscriptionStatus,
+@@clientName(
+  LiftrBase.MarketplaceSubscriptionStatus,
   "WeightsAndBiasesMarketplaceSubscriptionStatus",
   "csharp"
 );
@@ -36,19 +41,23 @@ using Microsoft.WeightsAndBiases;
 @@clientName(Region.westeurope, "WestEurope", "csharp");
 @@clientName(Region.japaneast, "JapanEast", "csharp");
 @@clientName(Region.koreacentral, "KoreaCentral", "csharp");
-@@clientName(Azure.ResourceManager.ResourceProvisioningState,
+@@clientName(
+  Azure.ResourceManager.ResourceProvisioningState,
   "WeightsAndBiasesProvisioningState",
   "csharp"
 );
-@@clientName(LiftrBase.SingleSignOnPropertiesV2,
+@@clientName(
+  LiftrBase.SingleSignOnPropertiesV2,
   "WeightsAndBiasesSingleSignOnPropertiesV2",
   "csharp"
 );
-@@clientName(LiftrBase.SingleSignOnStates,
+@@clientName(
+  LiftrBase.SingleSignOnStates,
   "WeightsAndBiasesSingleSignOnState",
   "csharp"
 );
-@@clientName(LiftrBase.SingleSignOnType,
+@@clientName(
+  LiftrBase.SingleSignOnType,
   "WeightsAndBiasesSingleSignOnType",
   "csharp"
 );
