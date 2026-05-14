@@ -864,12 +864,28 @@ model AzureResourceHealthSignalStatus is SignalStatus {
   availabilityStatus?: string;
 
   @visibility(Lifecycle.Read)
-  @doc("When a context field is set to Platform, this field will reflect if the event was planned or unplanned.")
+  @doc("Whether the status changing event was planned or unplanned.")
   category?: string256;
 
   @visibility(Lifecycle.Read)
   @doc("Detailed status of the Azure resource as reported by Azure Resource Health.")
   detailedStatus?: string4096;
+
+  @visibility(Lifecycle.Read)
+  @doc("Human-readable summary of the current availability state from Azure Resource Health.")
+  summary?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("Reason type for the current availability state (e.g. 'Unplanned', 'Planned', 'UserInitiated').")
+  reasonType?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("Whether the current availability state is 'Persistent' or 'Transient'.")
+  reasonChronicity?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("Timestamp when Azure Resource Health observed the current availability state.")
+  availabilityReportedTime?: utcDateTime;
 }
 
 @added(Versions.v2026_05_01_preview)

@@ -2422,12 +2422,33 @@
         },
         "category": {
           "$ref": "#/definitions/string256",
-          "description": "When a context field is set to Platform, this field will reflect if the event was planned or unplanned.",
+          "description": "Whether the status changing event was planned or unplanned.",
           "readOnly": true
         },
         "detailedStatus": {
           "$ref": "#/definitions/string4096",
           "description": "Detailed status of the Azure resource as reported by Azure Resource Health.",
+          "readOnly": true
+        },
+        "summary": {
+          "type": "string",
+          "description": "Human-readable summary of the current availability state from Azure Resource Health.",
+          "readOnly": true
+        },
+        "reasonType": {
+          "type": "string",
+          "description": "Reason type for the current availability state (e.g. 'Unplanned', 'Planned', 'UserInitiated').",
+          "readOnly": true
+        },
+        "reasonChronicity": {
+          "type": "string",
+          "description": "Whether the current availability state is 'Persistent' or 'Transient'.",
+          "readOnly": true
+        },
+        "availabilityReportedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when Azure Resource Health observed the current availability state.",
           "readOnly": true
         }
       }
