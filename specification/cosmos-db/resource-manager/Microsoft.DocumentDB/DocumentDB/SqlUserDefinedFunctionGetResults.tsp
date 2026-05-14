@@ -47,8 +47,10 @@ interface SqlUserDefinedFunctionGetResultsOperationGroup {
   createUpdateSqlUserDefinedFunction is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     SqlUserDefinedFunctionGetResults,
     Request = SqlUserDefinedFunctionCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<SqlUserDefinedFunctionGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = SqlUserDefinedFunctionGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<SqlUserDefinedFunctionGetResults>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = SqlUserDefinedFunctionGetResults> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -56,7 +58,9 @@ interface SqlUserDefinedFunctionGetResultsOperationGroup {
    */
   deleteSqlUserDefinedFunction is ArmResourceDeleteWithoutOkAsync<
     SqlUserDefinedFunctionGetResults,
-    Response = NoContentResponse | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+    Response =
+      | NoContentResponse
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
   >;
 
   /**
@@ -68,16 +72,20 @@ interface SqlUserDefinedFunctionGetResultsOperationGroup {
   >;
 }
 
-@@doc(SqlUserDefinedFunctionGetResults.name,
+@@doc(
+  SqlUserDefinedFunctionGetResults.name,
   "Cosmos DB userDefinedFunction name."
 );
-@@doc(SqlUserDefinedFunctionGetResults.properties,
+@@doc(
+  SqlUserDefinedFunctionGetResults.properties,
   "The properties of an Azure Cosmos DB userDefinedFunction"
 );
-@@doc(SqlUserDefinedFunctionGetResultsOperationGroup.createUpdateSqlUserDefinedFunction::parameters.resource,
+@@doc(
+  SqlUserDefinedFunctionGetResultsOperationGroup.createUpdateSqlUserDefinedFunction::parameters.resource,
   "The parameters to provide for the current SQL userDefinedFunction."
 );
-@@visibility(SqlUserDefinedFunctionGetResults.location,
+@@visibility(
+  SqlUserDefinedFunctionGetResults.location,
   Lifecycle.Read,
   Lifecycle.Create,
   Lifecycle.Update

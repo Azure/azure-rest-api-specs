@@ -41,11 +41,14 @@ interface ServerAzureADAdministrators {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ServerAzureADAdministrator,
-    Response = ArmResourceUpdatedResponse<ServerAzureADAdministrator> | ArmResourceCreatedResponse<
-      ServerAzureADAdministrator,
-      ArmLroLocationHeader<FinalResult = ServerAzureADAdministrator> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<ServerAzureADAdministrator>
+      | ArmResourceCreatedResponse<
+          ServerAzureADAdministrator,
+          ArmLroLocationHeader<FinalResult = ServerAzureADAdministrator> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -54,7 +57,10 @@ interface ServerAzureADAdministrators {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ServerAzureADAdministrator,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -66,10 +72,12 @@ interface ServerAzureADAdministrators {
   >;
 }
 
-@@doc(ServerAzureADAdministrator.name,
+@@doc(
+  ServerAzureADAdministrator.name,
   "The name of server active directory administrator."
 );
 @@doc(ServerAzureADAdministrator.properties, "Resource properties.");
-@@doc(ServerAzureADAdministrators.createOrUpdate::parameters.resource,
+@@doc(
+  ServerAzureADAdministrators.createOrUpdate::parameters.resource,
   "The requested Azure Active Directory administrator Resource state."
 );

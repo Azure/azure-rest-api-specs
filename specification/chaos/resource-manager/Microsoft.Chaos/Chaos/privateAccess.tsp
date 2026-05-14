@@ -82,15 +82,19 @@ interface PrivateAccesses {
 }
 
 @@minLength(PrivateAccess.name, 1);
-@@doc(PrivateAccess.name,
+@@doc(
+  PrivateAccess.name,
   "The name of the private access resource that is being created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters."
 );
-@@doc(PrivateAccess.properties,
+@@doc(
+  PrivateAccess.properties,
   "The resource-specific properties for this resource."
 );
-@@doc(PrivateAccesses.createOrUpdate::parameters.resource,
+@@doc(
+  PrivateAccesses.createOrUpdate::parameters.resource,
   "private access resource to be created or updated."
 );
-@@doc(PrivateAccesses.update::parameters.properties,
+@@doc(
+  PrivateAccesses.update::parameters.properties,
   "private access resource's tags to be updated."
 );

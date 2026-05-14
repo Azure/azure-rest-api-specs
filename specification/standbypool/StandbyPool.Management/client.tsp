@@ -8,70 +8,85 @@ using Microsoft.StandbyPool;
 
 @@access(Operations.list, Access.internal, "csharp");
 
-@@clientName(StandbyContainerGroupPoolResource,
+@@clientName(
+  StandbyContainerGroupPoolResource,
   "StandbyContainerGroupPool",
   "csharp"
 );
-@@clientName(StandbyContainerGroupPoolResourceProperties,
+@@clientName(
+  StandbyContainerGroupPoolResourceProperties,
   "StandbyContainerGroupPoolProperties",
   "csharp"
 );
-@@clientName(StandbyVirtualMachinePoolResource,
+@@clientName(
+  StandbyVirtualMachinePoolResource,
   "StandbyVirtualMachinePool",
   "csharp"
 );
-@@clientName(StandbyVirtualMachinePoolResourceProperties,
+@@clientName(
+  StandbyVirtualMachinePoolResourceProperties,
   "StandbyVirtualMachinePoolProperties",
   "csharp"
 );
 @@clientName(StandbyVirtualMachineResource, "StandbyVirtualMachine", "csharp");
-@@clientName(StandbyVirtualMachineResourceProperties,
+@@clientName(
+  StandbyVirtualMachineResourceProperties,
   "StandbyVirtualMachineProperties",
   "csharp"
 );
 @@clientName(VirtualMachineState, "StandbyVirtualMachineState", "csharp");
 @@clientName(ContainerGroupProfile, "StandbyContainerGroupProfile", "csharp");
-@@clientName(ContainerGroupProperties,
+@@clientName(
+  ContainerGroupProperties,
   "StandbyContainerGroupProperties",
   "csharp"
 );
-@@clientName(StandbyContainerGroupPoolRuntimeViewResource,
+@@clientName(
+  StandbyContainerGroupPoolRuntimeViewResource,
   "StandbyContainerGroupPoolRuntimeView",
   "csharp"
 );
-@@clientName(StandbyContainerGroupPoolRuntimeViewResourceProperties,
+@@clientName(
+  StandbyContainerGroupPoolRuntimeViewResourceProperties,
   "StandbyContainerGroupPoolRuntimeViewProperties",
   "csharp"
 );
-@@clientName(StandbyVirtualMachinePoolRuntimeViewResource,
+@@clientName(
+  StandbyVirtualMachinePoolRuntimeViewResource,
   "StandbyVirtualMachinePoolRuntimeView",
   "csharp"
 );
-@@clientName(StandbyVirtualMachinePoolRuntimeViewResourceProperties,
+@@clientName(
+  StandbyVirtualMachinePoolRuntimeViewResourceProperties,
   "StandbyVirtualMachinePoolRuntimeViewProperties",
   "csharp"
 );
-@@clientName(VirtualMachineInstanceCountSummary,
+@@clientName(
+  VirtualMachineInstanceCountSummary,
   "StandbyVirtualMachineInstanceCountSummary",
   "csharp"
 );
 @@clientName(ProvisioningState, "StandbyProvisioningState", "csharp");
 @@clientName(RefillPolicy, "StandbyRefillPolicy", "csharp");
-@@clientName(Microsoft.StandbyPool,
+@@clientName(
+  Microsoft.StandbyPool,
   "StandbyPoolManagementClient",
   "javascript"
 );
 @@clientName(Microsoft.StandbyPool, "StandbyPoolMgmtClient", "python");
 @@clientName(Microsoft.StandbyPool, "StandbyPoolManagementClient", "java");
-@@clientNamespace(Microsoft.StandbyPool,
+@@clientNamespace(
+  Microsoft.StandbyPool,
   "com.azure.resourcemanager.standbypool",
   "java"
 );
-@@clientName(ContainerGroupInstanceCountSummary.instanceCountsByState,
+@@clientName(
+  ContainerGroupInstanceCountSummary.instanceCountsByState,
   "StandbyContainerGroupInstanceCountsByState",
   "csharp"
 );
-@@clientName(VirtualMachineInstanceCountSummary.instanceCountsByState,
+@@clientName(
+  VirtualMachineInstanceCountSummary.instanceCountsByState,
   "StandbyVirtualMachineInstanceCountsByState",
   "csharp"
 );
@@ -87,15 +102,18 @@ namespace Azure.ResourceManager.Models {
   }
 }
 
-@@alternateType(ContainerGroupProperties.subnetIds,
+@@alternateType(
+  ContainerGroupProperties.subnetIds,
   Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
-@@clientName(Microsoft.StandbyPool.Versions.`2024-03-01`,
+@@clientName(
+  Microsoft.StandbyPool.Versions.`2024-03-01`,
   "$DO_NOT_NORMALIZE$_20240301",
   "javascript"
 );
-@@clientName(Microsoft.StandbyPool.Versions.`2025-03-01`,
+@@clientName(
+  Microsoft.StandbyPool.Versions.`2025-03-01`,
   "$DO_NOT_NORMALIZE$_20250301",
   "javascript"
 );

@@ -20,13 +20,15 @@ using Microsoft.ExtendedLocation;
 
 @@clientName(CustomLocations.createOrUpdate::parameters.resource, "parameters");
 @@clientName(CustomLocations.update::parameters.properties, "parameters");
-@@clientName(CustomLocations.findTargetResourceGroup::parameters.body,
+@@clientName(
+  CustomLocations.findTargetResourceGroup::parameters.body,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(customLocation.properties);
 
-@@clientName(ResourceSyncRules.createOrUpdate::parameters.resource,
+@@clientName(
+  ResourceSyncRules.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(ResourceSyncRules.update::parameters.properties, "parameters");

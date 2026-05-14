@@ -67,6 +67,7 @@ interface TomcatWebServersController {
 }
 
 @@doc(TomcatWebServers.name, "Web server name.");
-@@doc(TomcatWebServers.properties,
+@@doc(
+  TomcatWebServers.properties,
   "The resource-specific properties for this resource."
 );

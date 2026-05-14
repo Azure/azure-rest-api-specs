@@ -121,7 +121,8 @@ interface Projects {
 
 @@doc(Project.name, "Name of the project");
 @@doc(Project.properties, "Project properties");
-@@doc(Projects.createOrUpdate::parameters.resource,
+@@doc(
+  Projects.createOrUpdate::parameters.resource,
   "Information about the project"
 );
 @@doc(Projects.update::parameters.properties, "Information about the project");

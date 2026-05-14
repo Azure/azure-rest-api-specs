@@ -10,13 +10,15 @@ using Microsoft.Maps;
 @@Legacy.flattenProperty(CreatorUpdateParameters.properties);
 
 @@clientName(Accounts.createOrUpdate::parameters.resource, "MapsAccount");
-@@clientName(Accounts.update::parameters.properties,
+@@clientName(
+  Accounts.update::parameters.properties,
   "MapsAccountUpdateParameters"
 );
 @@clientName(Accounts.listSas::parameters.body, "MapsAccountSasParameters");
 @@clientName(Accounts.regenerateKeys::parameters.body, "keySpecification");
 
-@@clientName(PrivateEndpointConnections.create::parameters.resource,
+@@clientName(
+  PrivateEndpointConnections.create::parameters.resource,
   "properties"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

@@ -62,11 +62,13 @@ namespace Microsoft.Relationships {
 
 // JavaScript SDK: use CreateOrUpdate-specific resource model for write operations,
 // which omits server-side read-only fields (sourceId, originInformation, metadata, etc.)
-@@alternateType(DependencyOfRelationships.createOrUpdate::parameters.resource,
+@@alternateType(
+  DependencyOfRelationships.createOrUpdate::parameters.resource,
   DependencyOfRelationshipCreateOrUpdate,
   "javascript"
 );
-@@alternateType(ServiceGroupMemberRelationships.createOrUpdate::parameters.resource,
+@@alternateType(
+  ServiceGroupMemberRelationships.createOrUpdate::parameters.resource,
   ServiceGroupMemberRelationshipCreateOrUpdate,
   "javascript"
 );

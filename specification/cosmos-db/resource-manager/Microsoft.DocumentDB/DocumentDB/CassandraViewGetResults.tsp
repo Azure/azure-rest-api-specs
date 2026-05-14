@@ -46,8 +46,10 @@ interface CassandraViewGetResultsOperationGroup {
   createUpdateCassandraView is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     CassandraViewGetResults,
     Request = CassandraViewCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<CassandraViewGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = CassandraViewGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<CassandraViewGetResults>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = CassandraViewGetResults> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -56,8 +58,11 @@ interface CassandraViewGetResultsOperationGroup {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deleteCassandraView is ArmResourceDeleteWithoutOkAsync<
     CassandraViewGetResults,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -70,14 +75,17 @@ interface CassandraViewGetResultsOperationGroup {
 }
 
 @@doc(CassandraViewGetResults.name, "Cosmos DB view name.");
-@@doc(CassandraViewGetResults.properties,
+@@doc(
+  CassandraViewGetResults.properties,
   "The properties of an Azure Cosmos DB Cassandra view"
 );
-@@doc(CassandraViewGetResultsOperationGroup.createUpdateCassandraView::parameters.resource,
+@@doc(
+  CassandraViewGetResultsOperationGroup.createUpdateCassandraView::parameters.resource,
   "The parameters to provide for the current Cassandra View."
 );
 
-@@visibility(CassandraViewGetResults.location,
+@@visibility(
+  CassandraViewGetResults.location,
   Lifecycle.Read,
   Lifecycle.Create,
   Lifecycle.Update
