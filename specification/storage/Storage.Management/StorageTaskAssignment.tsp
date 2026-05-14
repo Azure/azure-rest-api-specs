@@ -16,14 +16,23 @@ namespace Microsoft.Storage;
 /**
  * The storage task assignment.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(StorageAccount)
-model StorageTaskAssignment is ProxyResource<StorageTaskAssignmentProperties> {
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model StorageTaskAssignment extends Resource {
   ...ResourceNameParameter<
     Resource = StorageTaskAssignment,
     KeyName = "storageTaskAssignmentName",
     SegmentName = "storageTaskAssignments",
     NamePattern = "^[a-z][a-z0-9]{2,23}$"
   >;
+
+  /**
+   * Properties of the storage task assignment.
+   */
+  properties: StorageTaskAssignmentProperties;
 }
 
 @armResourceOperations
@@ -41,11 +50,8 @@ interface StorageTaskAssignments {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     StorageTaskAssignment,
-    Response =
-      | ArmResourceUpdatedResponse<StorageTaskAssignment>
-      | ArmResourceCreatedResponse<StorageTaskAssignment>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = StorageTaskAssignment> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    Response = ArmResourceUpdatedResponse<StorageTaskAssignment> | ArmResourceCreatedResponse<StorageTaskAssignment> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = StorageTaskAssignment> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Error = ErrorResponse
   >;
 
@@ -57,10 +63,8 @@ interface StorageTaskAssignments {
   update is ArmCustomPatchAsync<
     StorageTaskAssignment,
     StorageTaskAssignmentUpdateParameters,
-    Response =
-      | ArmResponse<StorageTaskAssignment>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = StorageTaskAssignment> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    Response = ArmResponse<StorageTaskAssignment> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = StorageTaskAssignment> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Error = ErrorResponse
   >;
 
@@ -77,10 +81,8 @@ interface StorageTaskAssignments {
   @delete
   delete is Azure.ResourceManager.ArmResourceDeleteAsyncBase<
     Resource = StorageTaskAssignment,
-    Response =
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-          Azure.Core.Foundations.RetryAfterHeader>
-      | NoContentResponse,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader> | NoContentResponse,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<StorageTaskAssignment>,
     Error = ErrorResponse
   >;
@@ -146,20 +148,16 @@ interface StorageTaskAssignments {
 
 @@maxLength(StorageTaskAssignment.name, 24);
 @@minLength(StorageTaskAssignment.name, 3);
-@@doc(
-  StorageTaskAssignment.name,
+@@doc(StorageTaskAssignment.name,
   "The name of the storage task assignment within the specified resource group. Storage task assignment names must be between 3 and 24 characters in length and use numbers and lower-case letters only."
 );
-@@doc(
-  StorageTaskAssignment.properties,
+@@doc(StorageTaskAssignment.properties,
   "Properties of the storage task assignment."
 );
-@@doc(
-  StorageTaskAssignments.create::parameters.resource,
+@@doc(StorageTaskAssignments.create::parameters.resource,
   "The parameters to create a Storage Task Assignment."
 );
-@@doc(
-  StorageTaskAssignments.update::parameters.properties,
+@@doc(StorageTaskAssignments.update::parameters.properties,
   "The parameters to update a Storage Task Assignment."
 );
 @@visibility(StorageTaskAssignment.name, Lifecycle.Read);
