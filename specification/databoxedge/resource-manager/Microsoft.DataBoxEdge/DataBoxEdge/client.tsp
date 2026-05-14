@@ -1320,10 +1320,10 @@ op DataBoxEdgeDevicesCreateOrUpdateSecuritySettingsCustomized(
   @path
   deviceName: string,
 
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-
   @body
   body: SecuritySettings,
+
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): void;
 
 @@override(
@@ -2186,10 +2186,10 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 op DataBoxEdgeDevicesCheckResourceCreationFeasibilityCustomized(
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
   ...Azure.ResourceManager.ProviderNamespace<DataBoxEdgeDevice>,
+  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
@@ -2211,4 +2211,154 @@ op DataBoxEdgeDevicesCheckResourceCreationFeasibilityCustomized(
 @@override(
   DataBoxEdgeDevices.checkResourceCreationFeasibility,
   DataBoxEdgeDevicesCheckResourceCreationFeasibilityCustomized
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op DataBoxEdgeDevicesCreateOrUpdateCustomized(
+  ...Azure.ResourceManager.ProviderNamespace<DataBoxEdgeDevice>,
+  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  deviceName: string,
+
+  @body
+  resource: DataBoxEdgeDevice,
+
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+): DataBoxEdgeDevice;
+
+@@override(
+  DataBoxEdgeDevices.createOrUpdate,
+  DataBoxEdgeDevicesCreateOrUpdateCustomized
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op DiagnosticSettingsGetDiagnosticProactiveLogCollectionSettingsCustomized(
+  ...Azure.ResourceManager.ProviderNamespace<DiagnosticProactiveLogCollectionSettings>,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  deviceName: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  diagnosticProactiveLogCollectionSetting: string,
+
+  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+): DiagnosticProactiveLogCollectionSettings;
+
+@@override(
+  DiagnosticSettings.getDiagnosticProactiveLogCollectionSettings,
+  DiagnosticSettingsGetDiagnosticProactiveLogCollectionSettingsCustomized
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "customization"
+op DiagnosticSettingsUpdateDiagnosticProactiveLogCollectionSettingsCustomized(
+  ...Azure.ResourceManager.ProviderNamespace<DiagnosticProactiveLogCollectionSettings>,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  deviceName: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  diagnosticProactiveLogCollectionSetting: string,
+
+  @body
+  resource: DiagnosticProactiveLogCollectionSettings,
+
+  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+): void;
+
+@@override(
+  DiagnosticSettings.updateDiagnosticProactiveLogCollectionSettings,
+  DiagnosticSettingsUpdateDiagnosticProactiveLogCollectionSettingsCustomized
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op DiagnosticSettingsGetDiagnosticRemoteSupportSettingsCustomized(
+  ...Azure.ResourceManager.ProviderNamespace<DiagnosticRemoteSupportSettings>,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  deviceName: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  diagnosticRemoteSupportSetting: string,
+
+  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+): DiagnosticRemoteSupportSettings;
+
+@@override(
+  DiagnosticRemoteSupportSettingsOperationGroup.getDiagnosticRemoteSupportSettings,
+  DiagnosticSettingsGetDiagnosticRemoteSupportSettingsCustomized
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "customization"
+op DiagnosticSettingsUpdateDiagnosticRemoteSupportSettingsCustomized(
+  ...Azure.ResourceManager.ProviderNamespace<DiagnosticRemoteSupportSettings>,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  deviceName: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  diagnosticRemoteSupportSetting: string,
+
+  @body
+  resource: DiagnosticRemoteSupportSettings,
+
+  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+): void;
+
+@@override(
+  DiagnosticRemoteSupportSettingsOperationGroup.updateDiagnosticRemoteSupportSettings,
+  DiagnosticSettingsUpdateDiagnosticRemoteSupportSettingsCustomized
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op DataBoxEdgeDevicesTriggerSupportPackageCustomized(
+  ...Azure.ResourceManager.ProviderNamespace<DataBoxEdgeDevice>,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  deviceName: string,
+
+  @body
+  body: TriggerSupportPackageRequest,
+
+  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+): void;
+
+@@override(
+  DataBoxEdgeDevices.triggerSupportPackage,
+  DataBoxEdgeDevicesTriggerSupportPackageCustomized
 );
