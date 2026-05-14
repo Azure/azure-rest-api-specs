@@ -80,6 +80,33 @@ else {
   # Cache responses to GitHub web requests, for efficiency and to prevent rate limiting
   $responseCache = $_ResponseCache
 
+  function Invoke-CachedHead($url) {
+    # Avoid conflict with pipeline secret
+    $logUrl = $url -replace '^https://', ''
+    LogInfo "  Checking $logUrl"
+
+    $status = $responseCache[$url]
+    if ($null -ne $status) {
+      LogInfo "    Found in cache"
+    }
+    else {
+      LogInfo "    Not found in cache, making web request"
+      try {
+        $resp = Invoke-WebRequest -Uri $url -Method Head -SkipHttpErrorCheck
+        $status = $resp.StatusCode
+        $responseCache[$url] = $status
+      }
+      catch {
+        LogError "Exception making web request to ${logUrl}: $_"
+        LogJobFailure
+        exit 1
+      }
+    }
+
+    LogInfo "    Status: $status"
+    return $status
+  }
+
   # - Forward slashes on both Linux and Windows
   # - May be nested 4 or 5 levels deep, perhaps even deeper
   # - Examples
