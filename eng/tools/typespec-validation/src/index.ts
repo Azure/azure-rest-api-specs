@@ -8,6 +8,7 @@ import { FolderStructureRule } from "./rules/folder-structure.js";
 import { FormatRule } from "./rules/format.js";
 import { LinterRulesetRule } from "./rules/linter-ruleset.js";
 import { NpmPrefixRule } from "./rules/npm-prefix.js";
+import { Rule } from "./rule.js";
 import { SdkTspConfigValidationRule } from "./rules/sdk-tspconfig-validation.js";
 import { fileExists, getSuppressions, normalizePath } from "./utils.js";
 
@@ -56,7 +57,7 @@ export async function main() {
     return;
   }
 
-  const rules = [
+  const rules: Rule[] = [
     new FolderStructureRule(),
     new NpmPrefixRule(),
     new EmitAutorestRule(),
