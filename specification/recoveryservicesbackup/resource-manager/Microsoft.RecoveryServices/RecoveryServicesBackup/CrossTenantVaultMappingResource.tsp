@@ -338,10 +338,16 @@ interface ProtectedItemOperationResultsFromCrossTenantVault {
   /**
    * Fetches the result of any cross-tenant operation on the backup item.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Phase 9 (PR #41694 issuecomment-4449163933): the .NET mgmt emitter's BuildExistsOperationPipelineProcessing NRE's when a 202 has no body. live1206 verified locally that giving the 202 a body matching the 200 fixes the crash. Wire is unchanged (BMS service still emits an empty 202 at runtime); spec is intentionally over-describing."
   @tag("CrossTenant")
   get is ProtectedItemOperationResultsFromCrossTenantVaultOps.Read<
     ProtectedItemResource,
-    Response = ArmResponse<ProtectedItemResource> | ArmAcceptedLroResponse
+    Response =
+      | ArmResponse<ProtectedItemResource>
+      | {
+          ...ArmAcceptedLroResponse;
+          @body body: ProtectedItemResource;
+        }
   >;
 }
 
@@ -473,13 +479,16 @@ interface ValidateOperationResultFromCrossTenantVault {
   /**
    * Gets the result of a specific validate operation for cross-tenant restore scenarios.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Phase 9 (PR #41694 issuecomment-4449163933): the .NET mgmt emitter's BuildExistsOperationPipelineProcessing NRE's when a 202 has no body. live1206 verified locally that giving the 202 a body matching the 200 fixes the crash. Wire is unchanged (BMS service still emits an empty 202 at runtime); spec is intentionally over-describing."
   @tag("CrossTenant")
   get is ValidateOperationResultFromCrossTenantVaultOps.Read<
-    ValidateOperationsResponse,
-    Response = ArmResponse<ValidateOperationsResponse> | ArmAcceptedResponse<
-      "Accepted",
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-    >
+    CrossTenantVaultMapping,
+    Response =
+      | ArmResponse<ValidateOperationsResponse>
+      | {
+          ...ArmAcceptedLroResponse;
+          @body body: ValidateOperationsResponse;
+        }
   >;
 }
 
@@ -569,10 +578,12 @@ model CrossTenantJobResourceList {
 
 @@doc(CrossTenantVaultMapping.name, "Cross-tenant vault mapping name.");
 @@doc(CrossTenantVaultMapping.properties, "CrossTenantVaultMapping properties");
-@@doc(CrossTenantVaultMappings.createOrUpdate::parameters.resource,
+@@doc(
+  CrossTenantVaultMappings.createOrUpdate::parameters.resource,
   "Request body for operation"
 );
-@@doc(CrossTenantVaultMappings.remove::parameters.body,
+@@doc(
+  CrossTenantVaultMappings.remove::parameters.body,
   "Request body for operation"
 );
 
@@ -645,13 +656,17 @@ interface CrossTenantVaultCredentialOperationResults {
    * Returns 202 Accepted while the TEE job is still in progress.
    * Returns 200 OK with VaultCredentialCertificateResponse when the job completes.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Phase 9 (PR #41694 issuecomment-4449163933): the .NET mgmt emitter's BuildExistsOperationPipelineProcessing NRE's when a 202 has no body. live1206 verified locally that giving the 202 a body matching the 200 fixes the crash. Wire is unchanged (BMS service still emits an empty 202 at runtime); spec is intentionally over-describing."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Phase 9 (PR #41694 issuecomment-4449163933): operation-result Read is templated against the parent CrossTenantVaultMapping resource (per live1206's suggested fix) so the .NET mgmt emitter resolves the resource type for Exists-pipeline generation; the 200 returns VaultCredentialCertificateResponse, which is the actual operation-result payload. RPC 008 (same schema across PUT/GET/PATCH/LIST) does not apply: this route is a polling GET, not a resource lifecycle operation."
   @tag("CrossTenant")
   get is CrossTenantVaultCredentialOperationResultsOps.Read<
-    VaultCredentialCertificateResponse,
-    Response = ArmResponse<VaultCredentialCertificateResponse> | ArmAcceptedResponse<
-      "Accepted",
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-    >
+    CrossTenantVaultMapping,
+    Response =
+      | ArmResponse<VaultCredentialCertificateResponse>
+      | {
+          ...ArmAcceptedLroResponse;
+          @body body: VaultCredentialCertificateResponse;
+        }
   >;
 }
 
