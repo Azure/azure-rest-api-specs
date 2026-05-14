@@ -11,7 +11,8 @@ import { normalizePath } from "./utils.js";
 
 const execFileAsync = promisify(execFile);
 
-const CONCURRENCY = cpus().length;
+// Double cpu as there should be a lot of IO wait
+const CONCURRENCY = cpus().length * 2;
 
 export interface ShardConfig {
   /** 1-based shard index */
