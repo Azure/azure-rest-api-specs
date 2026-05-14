@@ -227,7 +227,7 @@ export async function validateBreakingChange(context: Context): Promise<number> 
           `process.exitCode: ${process.exitCode}.`,
       );
     }
-    statusCode = Number(process.exitCode ?? 0);
+    statusCode = typeof process.exitCode === "number" ? process.exitCode : 0;
 
     await logFullOadMessagesList(msgs);
     await generateBreakingChangeResultSummary(
