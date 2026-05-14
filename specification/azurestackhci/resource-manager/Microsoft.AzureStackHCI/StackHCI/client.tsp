@@ -441,14 +441,6 @@ using Microsoft.AzureStackHCI;
 @@clientName(Step.startTimeUtc, "StartOn", "csharp");
 @@clientName(Step.endTimeUtc, "EndOn", "csharp");
 
-// ==================== Accessibility overrides ====================
-@@access(State, Access.public, "csharp");
-@@access(RebootRequirement, Access.public, "csharp");
-@@access(AvailabilityType, Access.public, "csharp");
-@@access(Step, Access.public, "csharp");
-@@access(ExtensionProfile, Access.public, "csharp");
-@@access(ExtensionInstanceView, Access.public, "csharp");
-
 // ==================== Usage overrides ====================
 // Offer/Sku/Publisher are read-only resources (no PUT/PATCH), so the generator
 // treats their properties as output-only (no setters, no public constructor).

@@ -737,7 +737,6 @@ using Azure.ResourceManager;
   "UriSigningKeys",
   "csharp"
 );
-@@access(DeepCreatedCustomDomainProperties, Access.public, "csharp");
 @@usage(
   DeepCreatedCustomDomainProperties,
 
@@ -1140,8 +1139,6 @@ using Azure.ResourceManager;
   "CompareDeploymentVersionsResult",
   "csharp"
 );
-@@access(RuleSet, Access.public, "csharp");
-@@access(Sku, Access.public, "csharp");
 @@usage(
   Sku,
 
@@ -1149,7 +1146,6 @@ using Azure.ResourceManager;
     | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-@@access(ManagedRuleSetDefinition, Access.public, "csharp");
 @@usage(
   ManagedRuleSetDefinition,
 
@@ -1157,7 +1153,6 @@ using Azure.ResourceManager;
     | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-@@access(ManagedRuleSetDefinitionProperties, Access.public, "csharp");
 @@usage(
   ManagedRuleSetDefinitionProperties,
 
@@ -1165,7 +1160,6 @@ using Azure.ResourceManager;
     | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-@@access(ManagedRuleGroupDefinition, Access.public, "csharp");
 @@usage(
   ManagedRuleGroupDefinition,
 
@@ -1173,8 +1167,6 @@ using Azure.ResourceManager;
     | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-@@access(ManagedRuleDefinition, Access.public, "csharp");
-@@access(DeepCreatedCustomDomainProperties, Access.public, "csharp");
 @@usage(
   ManagedRuleDefinition,
 
