@@ -181,6 +181,33 @@ model UpdateModelVersionRequest {
   tags?: Record<string>;
 }
 
+@doc("Represents a request for a pending upload of a model version.")
+model ModelPendingUploadRequest {
+  @doc("If PendingUploadId is not provided, a random GUID will be used.")
+  pendingUploadId?: string;
+
+  @doc("Azure Storage Account connection name to use for generating temporary SAS token")
+  connectionName?: string;
+
+  @doc("The type of pending upload. Only TemporaryBlobReference is supported for models.")
+  pendingUploadType: PendingUploadType.TemporaryBlobReference;
+}
+
+@doc("Represents the response for a model pending upload request.")
+model ModelPendingUploadResponse {
+  @doc("Container-level read, write, list SAS.")
+  blobReference: BlobReference;
+
+  @doc("ID for this upload request.")
+  pendingUploadId: string;
+
+  @doc("Version of asset to be created if user did not specify version when initially creating upload")
+  version?: string;
+
+  @doc("The type of pending upload. Only TemporaryBlobReference is supported for models.")
+  pendingUploadType: PendingUploadType.TemporaryBlobReference;
+}
+
 @doc("Request to fetch credentials for a model asset.")
 model ModelCredentialRequest {
   @doc("Blob URI of the model asset to fetch credentials for.")
@@ -193,5 +220,14 @@ model CreateModelVersionAsyncResponse {
 
   @doc("URL to poll for operation status.")
   @header("Location")
-  location: string;
+  location?: url;
+
+  @bodyRoot
+  body: {
+    @doc("URL to poll for operation status.")
+    location?: url;
+
+    @doc("URL to the operation result, or null if the operation is still in progress.")
+    operationResult?: url | null;
+  };
 }

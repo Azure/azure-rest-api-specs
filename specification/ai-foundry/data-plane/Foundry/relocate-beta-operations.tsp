@@ -49,6 +49,13 @@ interface Evaluators {}
 @@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.cancel, Evaluators);
 @@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.delete, Evaluators);
 
+// Evaluation suite generation jobs → nested under evaluations sub-client
+@@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.create, Evaluators);
+@@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.get, Evaluators);
+@@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.list, Evaluators);
+@@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.cancel, Evaluators);
+@@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.delete, Evaluators);
+
 interface Schedules {}
 @@clientLocation(Azure.AI.Projects.Schedules.delete, Schedules);
 @@clientLocation(Azure.AI.Projects.Schedules.get, Schedules);
@@ -134,9 +141,4 @@ interface Datasets {}
 @@clientLocation(Azure.AI.Projects.DataGenerationJobs.cancel, Datasets);
 @@clientLocation(Azure.AI.Projects.DataGenerationJobs.delete, Datasets);
 
-// Evaluation suite generation jobs → nested under evaluations sub-client
-@@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.get, Evaluators);
-@@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.list, Evaluators);
-@@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.create, Evaluators);
-@@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.cancel, Evaluators);
-@@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.delete, Evaluators);
+
