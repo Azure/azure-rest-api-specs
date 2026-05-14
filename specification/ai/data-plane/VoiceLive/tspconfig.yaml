@@ -16,13 +16,14 @@ options:
     azure-resource-provider-folder: "data-plane"
     emit-lro-options: "none"
   "@azure-tools/typespec-python":
-    package-dir: "azure-ai-voicelive"
-    namespace: "azure.ai.voicelive"
+    api-version: "2026-04-10"
+    package-mode: "dataplane"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-voicelive"
+    package-name: "azure-ai-voicelive"
+    flavor: azure
     generate-test: false
     generate-sample: false
-    flavor: azure
-    package-name: "azure-ai-voicelive"
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-voicelive"
+    examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/Azure.AI.VoiceLive"
     clear-output-folder: true
