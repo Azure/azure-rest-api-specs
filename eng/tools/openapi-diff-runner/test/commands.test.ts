@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createDummySwagger } from "../src/command-helpers.js";
 import { validateBreakingChange } from "../src/commands.js";
+import { checkCrossVersionBreakingChange } from "../src/detect-breaking-change.js";
 import { runOad } from "../src/run-oad.js";
 
 const serviceParent = "specification/foo/data-plane/";
@@ -27,6 +28,16 @@ vi.mock("../src/command-helpers.js", async () => {
   return {
     ...actual,
     createDummySwagger: vi.fn(),
+  };
+});
+
+vi.mock("../src/detect-breaking-change.js", async () => {
+  const actual = await vi.importActual<typeof import("../src/detect-breaking-change.js")>(
+    "../src/detect-breaking-change.js",
+  );
+  return {
+    ...actual,
+    checkCrossVersionBreakingChange: vi.fn(actual.checkCrossVersionBreakingChange),
   };
 });
 
@@ -351,6 +362,7 @@ const cases: TestCase[] = [
 describe("validateBreakingChange", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    process.exitCode = 0;
   });
 
   it.each(cases)(
@@ -418,6 +430,23 @@ describe("validateBreakingChange", () => {
       }
     },
   );
+
+  it("does not fail cross-version check when only non-error OAD violations are reported", async () => {
+    mockChangedFilesStatuses();
+    vi.mocked(checkCrossVersionBreakingChange).mockResolvedValueOnce({
+      msgs: [],
+      runtimeErrors: [],
+      oadViolationsCnt: 3,
+      errorCnt: 0,
+    });
+
+    const statusCode = await validateBreakingChange({
+      ...context,
+      runType: BREAKING_CHANGES_CHECK_TYPES.CROSS_VERSION,
+    });
+
+    expect(statusCode).toEqual(0);
+  });
 });
 
 function prependParentFolder(
