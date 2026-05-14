@@ -6777,6 +6777,38 @@ model EdgeMachinePatch {
 }
 
 /**
+ * The validate request for Edge Machine.
+ */
+@added(Versions.v2026_05_01_preview)
+model EdgeMachineValidateRequest {
+  /**
+   * Machine Ids against which, current machine has to be validated.
+   */
+  edgeMachineIds: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/edgeMachines";
+    }
+  ]>[];
+
+  /**
+   * Additional info required for validation.
+   */
+  additionalInfo?: string;
+}
+
+/**
+ * The validate response for Edge Machine.
+ */
+@added(Versions.v2026_05_01_preview)
+model EdgeMachineValidateResponse {
+  /**
+   * Edge machine validation status.
+   */
+  @visibility(Lifecycle.Read)
+  status?: string;
+}
+
+/**
  * Details for device provisioning.
  */
 @added(Versions.v2026_05_01_preview)
