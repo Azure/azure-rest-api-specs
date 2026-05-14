@@ -57,15 +57,15 @@ test.concurrent("Generated from TypeSpec", async ({ expect }) => {
 test.concurrent.each([
   {
     label: "stable",
-    path: "specification/hand-written/resource-manager/Microsoft.HandWritten/stable",
+    path: "specification/hand-written/resource-manager/Microsoft.HandWritten/HandWritten/stable",
     responseCache:
-      '@{"https://github.com/Azure/azure-rest-api-specs/tree/main/specification/hand-written/resource-manager/Microsoft.HandWritten/stable/2026-01-01"=404}',
+      '@{"https://github.com/Azure/azure-rest-api-specs/tree/main/specification/hand-written/resource-manager/Microsoft.HandWritten/HandWritten/stable/2026-01-01"=404}',
   },
   {
     label: "preview",
-    path: "specification/hand-written/resource-manager/Microsoft.HandWritten/preview",
+    path: "specification/hand-written/resource-manager/Microsoft.HandWritten/HandWritten/preview",
     responseCache:
-      '@{"https://github.com/Azure/azure-rest-api-specs/tree/main/specification/hand-written/resource-manager/Microsoft.HandWritten/preview/2026-02-01-preview"=404}',
+      '@{"https://github.com/Azure/azure-rest-api-specs/tree/main/specification/hand-written/resource-manager/Microsoft.HandWritten/HandWritten/preview/2026-02-01-preview"=404}',
   },
 ])("Hand-written, new $label API version", async ({ path, responseCache }) => {
   const { stdout, exitCode } = await checkAllUnder(path, responseCache);
@@ -75,11 +75,21 @@ test.concurrent.each([
   expect(exitCode).toBe(1);
 });
 
-test.concurrent("Hand-written, existing API version", async ({ expect }) => {
-  const { stdout, exitCode } = await checkAllUnder(
-    "specification/hand-written/resource-manager/Microsoft.HandWritten/stable",
-    '@{"https://github.com/Azure/azure-rest-api-specs/tree/main/specification/hand-written/resource-manager/Microsoft.HandWritten/stable/2026-01-01"=200}',
-  );
+test.concurrent.each([
+  {
+    label: "stable",
+    path: "specification/hand-written/resource-manager/Microsoft.HandWritten/HandWritten/stable",
+    responseCache:
+      '@{"https://github.com/Azure/azure-rest-api-specs/tree/main/specification/hand-written/resource-manager/Microsoft.HandWritten/HandWritten/stable/2026-01-01"=200}',
+  },
+  {
+    label: "preview",
+    path: "specification/hand-written/resource-manager/Microsoft.HandWritten/HandWritten/preview",
+    responseCache:
+      '@{"https://github.com/Azure/azure-rest-api-specs/tree/main/specification/hand-written/resource-manager/Microsoft.HandWritten/HandWritten/preview/2026-02-01-preview"=200}',
+  },
+])("Hand-written, existing $label API version", async ({ path, responseCache }) => {
+  const { stdout, exitCode } = await checkAllUnder(path, responseCache);
 
   expect(stdout).toContain("was not generated from TypeSpec");
   expect(stdout).toContain("'main' contains path");
@@ -90,24 +100,11 @@ test.concurrent("Hand-written, existing API version", async ({ expect }) => {
 
 test.concurrent("Hand-written, unexpected response checking main", async ({ expect }) => {
   const { stdout, exitCode } = await checkAllUnder(
-    "specification/hand-written/resource-manager/Microsoft.HandWritten/stable",
-    '@{"https://github.com/Azure/azure-rest-api-specs/tree/main/specification/hand-written/resource-manager/Microsoft.HandWritten/stable/2026-01-01"=519}',
+    "specification/hand-written/resource-manager/Microsoft.HandWritten/HandWritten/stable",
+    '@{"https://github.com/Azure/azure-rest-api-specs/tree/main/specification/hand-written/resource-manager/Microsoft.HandWritten/HandWritten/stable/2026-01-01"=519}',
   );
 
   expect(stdout).toContain("was not generated from TypeSpec");
   expect(stdout).toContain("Unexpected response");
   expect(exitCode).toBe(1);
-});
-
-test.concurrent("Hand-written, existing preview API version", async ({ expect }) => {
-  const { stdout, exitCode } = await checkAllUnder(
-    "specification/hand-written/resource-manager/Microsoft.HandWritten/preview",
-    '@{"https://github.com/Azure/azure-rest-api-specs/tree/main/specification/hand-written/resource-manager/Microsoft.HandWritten/preview/2026-02-01-preview"=200}',
-  );
-
-  expect(stdout).toContain("was not generated from TypeSpec");
-  expect(stdout).toContain("'main' contains path");
-  expect(stdout.toLowerCase()).toContain("warning");
-  expect(stdout).toContain("are required to convert");
-  expect(exitCode).toBe(0);
 });
