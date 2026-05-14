@@ -7,7 +7,8 @@ using Microsoft.Management;
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "For backward compatibility"
 namespace Microsoft.Management;
 
-@@clientName(Microsoft.Management,
+@@clientName(
+  Microsoft.Management,
   "ServiceGroupsManagementClient",
   "javascript"
 );
@@ -20,6 +21,7 @@ namespace Microsoft.Management;
 @@access(ServiceGroupCollectionResponse, Access.internal, "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Mark listAncestors as pageable to match the previous SDK Pageable<ServiceGroupResource> return type"
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(ServiceGroups.listAncestors,
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  ServiceGroups.listAncestors,
   "csharp"
 );

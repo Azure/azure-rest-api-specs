@@ -67,13 +67,16 @@ interface StandardAssignments {
   >;
 }
 
-@@doc(StandardAssignment.name,
+@@doc(
+  StandardAssignment.name,
   "The standard assignments assignment key - unique key for the standard assignment"
 );
-@@doc(StandardAssignment.properties,
+@@doc(
+  StandardAssignment.properties,
   "Properties of a standard assignments assignment"
 );
-@@doc(StandardAssignments.create::parameters.resource,
+@@doc(
+  StandardAssignments.create::parameters.resource,
   "Custom standard assignment over a pre-defined scope"
 );
 

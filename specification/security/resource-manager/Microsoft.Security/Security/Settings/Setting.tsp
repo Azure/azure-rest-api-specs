@@ -18,9 +18,11 @@ namespace SettingsAPI;
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Deprecated pattern in legacy API"
 @subscriptionResource
 @discriminator("kind")
-model Setting is Azure.ResourceManager.ProxyResource<{}> {
+model Setting
+  is Azure.ResourceManager.Legacy.DiscriminatedProxyResource<KindType = SettingKind> {
   ...ResourceNameParameter<
     Resource = Setting,
     KeyName = "settingName",
@@ -28,13 +30,11 @@ model Setting is Azure.ResourceManager.ProxyResource<{}> {
     NamePattern = "",
     Type = SettingName
   >;
-
-  /**
-   * the kind of the settings string
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  kind: SettingKind;
 }
+
+@@doc(Setting.kind, "the kind of the settings string");
+@@pattern(Setting.kind, "");
+@@visibility(Setting.kind, Lifecycle.Update);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations

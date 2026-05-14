@@ -122,10 +122,12 @@ interface NamespaceResources {
 @@minLength(NamespaceResource.name, 1);
 @@doc(NamespaceResource.name, "Namespace name");
 @@doc(NamespaceResource.properties, "Represents namespace properties.");
-@@doc(NamespaceResources.createOrUpdate::parameters.resource,
+@@doc(
+  NamespaceResources.createOrUpdate::parameters.resource,
   "Request content."
 );
 @@doc(NamespaceResources.update::parameters.properties, "Request content.");
-@@doc(NamespaceResources.checkNotificationHubAvailability::parameters.body,
+@@doc(
+  NamespaceResources.checkNotificationHubAvailability::parameters.body,
   "Request content."
 );

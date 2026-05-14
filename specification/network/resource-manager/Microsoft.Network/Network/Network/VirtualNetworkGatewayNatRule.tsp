@@ -66,7 +66,10 @@ interface VirtualNetworkGatewayNatRules {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualNetworkGatewayNatRule,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -80,12 +83,15 @@ interface VirtualNetworkGatewayNatRules {
   >;
 }
 
-@@doc(VirtualNetworkGatewayNatRule.name,
+@@doc(
+  VirtualNetworkGatewayNatRule.name,
   "The name of the resource that is unique within a resource group. This name can be used to access the resource."
 );
-@@doc(VirtualNetworkGatewayNatRule.properties,
+@@doc(
+  VirtualNetworkGatewayNatRule.properties,
   "Properties of the Virtual Network Gateway NAT rule."
 );
-@@doc(VirtualNetworkGatewayNatRules.createOrUpdate::parameters.resource,
+@@doc(
+  VirtualNetworkGatewayNatRules.createOrUpdate::parameters.resource,
   "Parameters supplied to create or Update a Nat Rule."
 );

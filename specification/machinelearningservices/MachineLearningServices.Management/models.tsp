@@ -7772,7 +7772,9 @@ model RegistryProperties {
    * Private endpoint connections info used for pending connections in private link portal
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
-  registryPrivateEndpointConnections?: RegistryPrivateEndpointConnection[] | null;
+  registryPrivateEndpointConnections?:
+    | RegistryPrivateEndpointConnection[]
+    | null;
 
   /**
    * Is the Registry accessible from the internet?
@@ -7871,7 +7873,9 @@ model RegistryPrivateEndpointConnectionProperties {
    * The connection state.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
-  registryPrivateLinkServiceConnectionState?: RegistryPrivateLinkServiceConnectionState | null;
+  registryPrivateLinkServiceConnectionState?:
+    | RegistryPrivateLinkServiceConnectionState
+    | null;
 
   /**
    * One of null, "Succeeded", "Provisioning", "Failed". While not approved, it's null.
@@ -10408,7 +10412,9 @@ model ComputeInstanceProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @summary("Compute Instance Authorization type.")
-  computeInstanceAuthorizationType?: ComputeInstanceAuthorizationType | null = ComputeInstanceAuthorizationType.personal;
+  computeInstanceAuthorizationType?:
+    | ComputeInstanceAuthorizationType
+    | null = ComputeInstanceAuthorizationType.personal;
 
   /**
    * Enable Auto OS Patching. Possible values are: true, false.
@@ -13299,7 +13305,9 @@ model TeacherModelSettings {
    * Teacher Model Request Settings.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
-  teacherModelEndpointRequestSettings?: TeacherModelEndpointRequestSettings | null;
+  teacherModelEndpointRequestSettings?:
+    | TeacherModelEndpointRequestSettings
+    | null;
 
   /**
    * Teacher Model Inference Settings.

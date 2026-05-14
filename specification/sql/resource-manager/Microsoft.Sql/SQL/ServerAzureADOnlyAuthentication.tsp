@@ -41,11 +41,14 @@ interface ServerAzureADOnlyAuthentications {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ServerAzureADOnlyAuthentication,
-    Response = ArmResourceUpdatedResponse<ServerAzureADOnlyAuthentication> | ArmResourceCreatedResponse<
-      ServerAzureADOnlyAuthentication,
-      ArmLroLocationHeader<FinalResult = ServerAzureADOnlyAuthentication> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<ServerAzureADOnlyAuthentication>
+      | ArmResourceCreatedResponse<
+          ServerAzureADOnlyAuthentication,
+          ArmLroLocationHeader<FinalResult = ServerAzureADOnlyAuthentication> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -54,7 +57,10 @@ interface ServerAzureADOnlyAuthentications {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ServerAzureADOnlyAuthentication,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -66,10 +72,12 @@ interface ServerAzureADOnlyAuthentications {
   >;
 }
 
-@@doc(ServerAzureADOnlyAuthentication.name,
+@@doc(
+  ServerAzureADOnlyAuthentication.name,
   "The name of server azure active directory only authentication."
 );
 @@doc(ServerAzureADOnlyAuthentication.properties, "Resource properties.");
-@@doc(ServerAzureADOnlyAuthentications.createOrUpdate::parameters.resource,
+@@doc(
+  ServerAzureADOnlyAuthentications.createOrUpdate::parameters.resource,
   "The required parameters for creating or updating an Active Directory only authentication property."
 );

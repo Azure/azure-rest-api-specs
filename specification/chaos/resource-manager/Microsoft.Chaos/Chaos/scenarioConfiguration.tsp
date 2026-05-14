@@ -91,6 +91,7 @@ interface ScenarioConfigurations {
 
 @@minLength(ScenarioConfiguration.name, 1);
 @@doc(ScenarioConfiguration.name, "Name of the scenario definition.");
-@@doc(ScenarioConfiguration.properties,
+@@doc(
+  ScenarioConfiguration.properties,
   "The properties of scenario definition."
 );

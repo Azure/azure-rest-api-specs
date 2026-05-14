@@ -7,21 +7,26 @@ using ScheduledQueryRuleApi;
 @@Legacy.flattenProperty(ScheduledQueryRuleResourcePatch.properties);
 
 @@clientLocation(ScheduledQueryRuleResources.get, "ScheduledQueryRules");
-@@clientLocation(ScheduledQueryRuleResources.createOrUpdate,
+@@clientLocation(
+  ScheduledQueryRuleResources.createOrUpdate,
   "ScheduledQueryRules"
 );
-@@clientName(ScheduledQueryRuleResources.createOrUpdate::parameters.resource,
+@@clientName(
+  ScheduledQueryRuleResources.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(ScheduledQueryRuleResources.update, "ScheduledQueryRules");
-@@clientName(ScheduledQueryRuleResources.update::parameters.properties,
+@@clientName(
+  ScheduledQueryRuleResources.update::parameters.properties,
   "parameters"
 );
 @@clientLocation(ScheduledQueryRuleResources.delete, "ScheduledQueryRules");
-@@clientLocation(ScheduledQueryRuleResources.listByResourceGroup,
+@@clientLocation(
+  ScheduledQueryRuleResources.listByResourceGroup,
   "ScheduledQueryRules"
 );
-@@clientLocation(ScheduledQueryRuleResources.listBySubscription,
+@@clientLocation(
+  ScheduledQueryRuleResources.listBySubscription,
   "ScheduledQueryRules"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

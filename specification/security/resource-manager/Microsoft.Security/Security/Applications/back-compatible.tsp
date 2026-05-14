@@ -12,10 +12,12 @@ using Common;
 @@clientLocation(Applications.createOrUpdate, "Application", "!java");
 @@clientName(Applications.createOrUpdate::parameters.resource, "application");
 @@clientLocation(Applications.delete, "Application", "!java");
-@@clientName(SecurityConnectorApplication.createOrUpdate::parameters.resource,
+@@clientName(
+  SecurityConnectorApplication.createOrUpdate::parameters.resource,
   "application"
 );
-@@clientLocation(SecurityConnectorApplication.list,
+@@clientLocation(
+  SecurityConnectorApplication.list,
   "SecurityConnectorApplications"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
