@@ -170,6 +170,7 @@ enum ListBlobsShowOnlyGo {
 @@clientName(BlobPropertiesInternal, "PathPropertiesInternal", "go");
 @@clientName(BlobPrefix, "PathPrefix", "go");
 @@clientName(BlobItem, "PathItemInternal", "go");
+@@clientName(ClientRequestIdParameter.clientRequestId, "RequestID", "go");
 @@clientName(ListBlobsHierarchySegmentResponse,
   "ListPathsHierarchySegmentResponse",
   "go"
@@ -181,3 +182,5 @@ enum ListBlobsShowOnlyGo {
   "FileSystemClientListPathHierarchySegmentResponse",
   "go"
 );
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(PathItem, "omitSerdeMethods", "all", "go");

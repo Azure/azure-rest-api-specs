@@ -558,7 +558,15 @@ alias ApiVersionHeader = {
 };
 
 /** The client request ID header parameter. */
-alias ClientRequestIdHeader = {
+alias ClientRequestIdParameter = {
+  /** Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. */
+  @access(Access.internal)
+  @header("x-ms-client-request-id")
+  clientRequestId?: string;
+};
+
+/** The client request ID header parameter. */
+alias ClientRequestIdResponseHeader = {
   /** Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. */
   @access(Access.internal)
   @header("x-ms-client-request-id")

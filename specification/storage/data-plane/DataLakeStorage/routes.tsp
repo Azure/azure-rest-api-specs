@@ -27,7 +27,7 @@ op DataLakeOperation<
   contentType: RequestMediaType,
 
   ...ApiVersionHeader,
-  ...ClientRequestIdHeader,
+  ...ClientRequestIdParameter,
   ...TParams,
 ): (TResponse & {
   /** Content-Type header */
@@ -38,7 +38,7 @@ op DataLakeOperation<
   ...DateResponseHeader;
   ...ApiVersionHeader;
   ...RequestIdResponseHeader;
-  ...ClientRequestIdHeader;
+  ...ClientRequestIdResponseHeader;
 }) | TError;
 
 /** DataLake operation template with no request body and no response body (headers only). */
@@ -47,11 +47,11 @@ op DataLakeOperationNoBody<
   TParams extends TypeSpec.Reflection.Model | void,
   TResponse extends TypeSpec.Reflection.Model | void,
   TError = StorageError
->(...ApiVersionHeader, ...ClientRequestIdHeader, ...TParams): (TResponse & {
+>(...ApiVersionHeader, ...ClientRequestIdParameter, ...TParams): (TResponse & {
   ...DateResponseHeader;
   ...ApiVersionHeader;
   ...RequestIdResponseHeader;
-  ...ClientRequestIdHeader;
+  ...ClientRequestIdResponseHeader;
 }) | TError;
 
 /** DataLake operation template with response body Content-Type but no request body. */
