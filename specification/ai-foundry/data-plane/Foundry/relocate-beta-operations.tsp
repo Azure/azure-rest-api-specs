@@ -170,3 +170,4 @@ interface AgentOptimizationJobs {}
 @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.getCandidate, AgentOptimizationJobs);
 @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.getCandidateConfig, AgentOptimizationJobs);
 @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.getCandidateResults, AgentOptimizationJobs);
+@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.promoteCandidate, AgentOptimizationJobs);

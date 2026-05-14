@@ -156,4 +156,24 @@ interface AgentOptimizationJobs {
     },
     CandidateResults
   >;
+
+  @summary("Promote a candidate to a Foundry agent version.")
+  @doc("Records a candidate as promoted, linking it to a target Foundry agent name and version. Idempotent — re-promoting updates the target.")
+  @route("agent_optimization_jobs/{jobId}/candidates/{candidateId}:promote")
+  @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
+  @post
+  promoteCandidate is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.agents_optimization_v1_preview,
+    {
+      @doc("The optimization job id.")
+      @path jobId: string;
+
+      @doc("The candidate id.")
+      @path candidateId: string;
+
+      @doc("Promotion target details.")
+      @body body: PromoteCandidateRequest;
+    },
+    PromoteCandidateResponse
+  >;
 }

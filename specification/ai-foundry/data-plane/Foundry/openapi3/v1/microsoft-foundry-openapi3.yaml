@@ -549,6 +549,64 @@ paths:
       x-ms-foundry-meta:
         conditional_previews:
           - AgentsOptimization=V1Preview
+  /agent_optimization_jobs/{jobId}/candidates/{candidateId}:promote:
+    post:
+      operationId: AgentOptimizationJobs_promoteCandidate
+      summary: Promote a candidate to a Foundry agent version.
+      description: Records a candidate as promoted, linking it to a target Foundry agent name and version. Idempotent — re-promoting updates the target.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentsOptimization=V1Preview
+        - name: jobId
+          in: path
+          required: true
+          description: The optimization job id.
+          schema:
+            type: string
+        - name: candidateId
+          in: path
+          required: true
+          description: The candidate id.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PromoteCandidateResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - AgentOptimizationJobs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PromoteCandidateRequest'
+        description: Promotion target details.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V1Preview
   /agent_optimization_jobs/{jobId}:cancel:
     post:
       operationId: AgentOptimizationJobs_cancel
@@ -10624,6 +10682,16 @@ components:
             $ref: '#/components/schemas/OptimizationTaskResult'
           description: Per-task evaluation rows.
       description: Full per-task evaluation results for a candidate, returned by GET /candidates/{id}/results.
+    CandidateStatus:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - evaluated
+            - best
+            - discarded
+            - promoted
+      description: Lifecycle status of an optimization candidate.
     CaptureStructuredOutputsTool:
       type: object
       required:
@@ -29886,6 +29954,24 @@ components:
         eval_run_id:
           type: string
           description: Foundry evaluation run identifier for this candidate's scoring run.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/CandidateStatus'
+          description: Candidate lifecycle status.
+          readOnly: true
+        promoted_at:
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
+          description: Timestamp when this candidate was promoted. Null if not promoted.
+          readOnly: true
+        promoted_agent_name:
+          type: string
+          description: Name of the Foundry agent this candidate was promoted to.
+          readOnly: true
+        promoted_agent_version:
+          type: string
+          description: Version of the Foundry agent this candidate was promoted to.
+          readOnly: true
       description: Aggregated evaluation result for a single candidate agent configuration across all tasks.
     OptimizationJob:
       type: object
@@ -30460,6 +30546,47 @@ components:
             - BlobReference
           description: The type of pending upload.
       description: Represents the response for a pending upload request
+    PromoteCandidateRequest:
+      type: object
+      required:
+        - agent_name
+        - agent_version
+      properties:
+        agent_name:
+          type: string
+          description: Name of the Foundry agent to promote this candidate to.
+        agent_version:
+          type: string
+          description: Version of the Foundry agent to promote this candidate to.
+      description: Request body for promoting an optimization candidate to a Foundry agent version.
+    PromoteCandidateResponse:
+      type: object
+      required:
+        - candidate_id
+        - status
+        - promoted_at
+        - agent_name
+        - agent_version
+      properties:
+        candidate_id:
+          type: string
+          description: The promoted candidate's identifier.
+        status:
+          type: string
+          enum:
+            - promoted
+          description: Candidate status after promotion.
+        promoted_at:
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
+          description: Timestamp when the candidate was promoted.
+        agent_name:
+          type: string
+          description: Name of the Foundry agent the candidate was promoted to.
+        agent_version:
+          type: string
+          description: Version of the Foundry agent the candidate was promoted to.
+      description: Result of a candidate promotion action.
     PromptAgentDefinition:
       type: object
       required:
