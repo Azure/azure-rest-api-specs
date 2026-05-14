@@ -63,6 +63,51 @@ suppressions:
     reason: This is false positive as this property is already part of previous preview version and cannot be changed.
     from: EventGrid.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}"].patch.parameters[3].schema.properties.properties
+
+  - code: PathContainsResourceType
+    reason: This path uses generic parentType/parentName parameters for accessing child resources as required by ARM extension resource pattern. This is the correct design and cannot be changed.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections"]
+
+  - code: PatchResponseCodes
+    reason: PartnerDestinations_Update is a long-running operation that uses azure-async-operation pattern. Response codes are correct per ARM LRO guidelines and match the previous preview version.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerDestinations/{partnerDestinationName}"].patch
+
+  - code: DeleteResponseCodes
+    reason: PartnerDestinations_Delete is a long-running operation that uses azure-async-operation pattern. Response codes are correct per ARM LRO guidelines and match the previous preview version.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerDestinations/{partnerDestinationName}"].delete
+
+  - code: GuidUsage
+    reason: federatedClientId is a GUID/UUID field used for federated identity and must use uuid format. This is pre-existing in the previous preview version.
+    from: EventGrid.json
+    where: $.definitions.FederatedIdentityCredentialInfo.properties.federatedClientId
+
+  - code: GuidUsage
+    reason: partnerRegistrationImmutableId is an immutable UUID identifier for partner registration. This is pre-existing in the previous preview version.
+    from: EventGrid.json
+    where: $.definitions.Partner.properties.partnerRegistrationImmutableId
+
+  - code: GuidUsage
+    reason: partnerRegistrationImmutableId is an immutable UUID identifier for partner registration. This is pre-existing in the previous preview version.
+    from: EventGrid.json
+    where: $.definitions.PartnerDestinationProperties.properties.partnerRegistrationImmutableId
+
+  - code: GuidUsage
+    reason: partnerRegistrationImmutableId is an immutable UUID identifier for partner registration. This is pre-existing in the previous preview version.
+    from: EventGrid.json
+    where: $.definitions.PartnerRegistrationProperties.properties.partnerRegistrationImmutableId
+
+  - code: GuidUsage
+    reason: partnerRegistrationImmutableId is an immutable UUID identifier for partner registration. This is pre-existing in the previous preview version.
+    from: EventGrid.json
+    where: $.definitions.PartnerTopicProperties.properties.partnerRegistrationImmutableId
+
+  - code: GuidUsage
+    reason: partnerRegistrationImmutableId is an immutable UUID identifier for partner registration. This is pre-existing in the previous preview version.
+    from: EventGrid.json
+    where: $.definitions.VerifiedPartnerProperties.properties.partnerRegistrationImmutableId
 ```
 
 ### Tag: package-2025-07-preview
