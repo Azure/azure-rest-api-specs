@@ -28,6 +28,7 @@ interface SaasSubscriptionLevel {
     void,
     AccessTokenResult
   >;
+  /** Unsubscribes from a SaaS subscription, optionally providing a reason and feedback. The resource remains in Azure but the subscription is cancelled. */
   unsubscribe is ArmResourceActionAsync<
     SaasResource,
     DeleteOptions,

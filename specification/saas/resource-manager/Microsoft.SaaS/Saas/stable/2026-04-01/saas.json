@@ -996,7 +996,7 @@
         "tags": [
           "SaasSubscriptionLevel"
         ],
-        "description": "A long-running resource action.",
+        "description": "Unsubscribes from a SaaS subscription, optionally providing a reason and feedback. The resource remains in Azure but the subscription is cancelled.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1111,29 +1111,8 @@
           "description": "The feedback."
         },
         "deletionSource": {
-          "type": "string",
-          "description": "The deletion source.",
-          "default": "CustomerCancellation",
-          "enum": [
-            "CustomerCancellation",
-            "AzureSubscriptionDeletion"
-          ],
-          "x-ms-enum": {
-            "name": "DeletionSource",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "CustomerCancellation",
-                "value": "CustomerCancellation",
-                "description": "Customer initiated cancellation"
-              },
-              {
-                "name": "AzureSubscriptionDeletion",
-                "value": "AzureSubscriptionDeletion",
-                "description": "Azure subscription deletion"
-              }
-            ]
-          }
+          "$ref": "#/definitions/DeletionSource",
+          "description": "The deletion source. Defaults to CustomerCancellation if not specified."
         }
       }
     },
@@ -1356,11 +1335,13 @@
         },
         "riskPropertyBagHeader": {
           "type": "string",
+          "format": "password",
           "description": "The risk property bag header (JSON format). Write-only — not returned in GET responses.",
           "x-ms-mutability": [
             "update",
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         },
         "termStartDate": {
           "type": "string",
@@ -1486,11 +1467,13 @@
         },
         "riskPropertyBagHeader": {
           "type": "string",
+          "format": "password",
           "description": "The risk property bag header (JSON format). Write-only — not returned in GET responses.",
           "x-ms-mutability": [
             "update",
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         },
         "autoRenew": {
           "type": "boolean",
@@ -1593,11 +1576,13 @@
         },
         "riskPropertyBagHeader": {
           "type": "string",
+          "format": "password",
           "description": "The risk property bag header (JSON format). Write-only — not returned in GET responses.",
           "x-ms-mutability": [
             "update",
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         },
         "autoRenew": {
           "type": "boolean",

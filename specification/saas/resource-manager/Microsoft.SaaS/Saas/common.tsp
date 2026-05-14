@@ -16,8 +16,8 @@ model DeleteOptions {
   /** The feedback. */
   feedback?: string;
 
-  /** The deletion source. */
-  deletionSource?: DeletionSource = DeletionSource.CustomerCancellation;
+  /** The deletion source. Defaults to CustomerCancellation if not specified. */
+  deletionSource?: DeletionSource;
 }
 
 /** The ISV access token result response. */

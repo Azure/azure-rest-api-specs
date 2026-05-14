@@ -50,6 +50,7 @@ model SaasResourceProperties {
 
   /** The risk property bag header (JSON format). Write-only — not returned in GET responses. */
   @visibility(Lifecycle.Create, Lifecycle.Update)
+  @secret
   riskPropertyBagHeader?: string;
 
   /** The start date of the current term. Server-calculated. */
