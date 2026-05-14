@@ -86,10 +86,12 @@ interface ApiManagementGatewayResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ApiManagementGatewayResource,
-    Response = (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ApiManagementGatewayResource>> & {
-      @bodyRoot
-      _: ApiManagementGatewayResource;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ApiManagementGatewayResource>> & {
+          @bodyRoot
+          _: ApiManagementGatewayResource;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -126,16 +128,20 @@ interface ApiManagementGatewayResources {
 
 @@maxLength(ApiManagementGatewayResource.name, 45);
 @@minLength(ApiManagementGatewayResource.name, 1);
-@@doc(ApiManagementGatewayResource.name,
+@@doc(
+  ApiManagementGatewayResource.name,
   "The name of the API Management gateway."
 );
 @@encodedName(ApiManagementGatewayResource.etag, "application/json", "etag");
-@@doc(ApiManagementGatewayResource.properties,
+@@doc(
+  ApiManagementGatewayResource.properties,
   "Properties of the API Management gateway."
 );
-@@doc(ApiManagementGatewayResources.createOrUpdate::parameters.resource,
+@@doc(
+  ApiManagementGatewayResources.createOrUpdate::parameters.resource,
   "Parameters supplied to the CreateOrUpdate API Management gateway operation."
 );
-@@doc(ApiManagementGatewayResources.update::parameters.properties,
+@@doc(
+  ApiManagementGatewayResources.update::parameters.properties,
   "Parameters supplied to the CreateOrUpdate API Management gateway operation."
 );

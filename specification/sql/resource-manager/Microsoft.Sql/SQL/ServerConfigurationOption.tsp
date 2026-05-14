@@ -50,10 +50,12 @@ interface ServerConfigurationOptions {
   listByManagedInstance is ArmResourceListByParent<ServerConfigurationOption>;
 }
 
-@@doc(ServerConfigurationOption.name,
+@@doc(
+  ServerConfigurationOption.name,
   "The name of the server configuration option."
 );
 @@doc(ServerConfigurationOption.properties, "Resource properties.");
-@@doc(ServerConfigurationOptions.createOrUpdate::parameters.resource,
+@@doc(
+  ServerConfigurationOptions.createOrUpdate::parameters.resource,
   "Server configuration option parameters."
 );

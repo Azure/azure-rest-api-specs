@@ -125,15 +125,19 @@ interface Entities {
 }
 
 @@doc(Entity.name, "entity ID");
-@@doc(Entities.runPlaybook::parameters.body,
+@@doc(
+  Entities.runPlaybook::parameters.body,
   "Describes the request body for triggering a playbook on an entity."
 );
-@@doc(Entities.expand::parameters.body,
+@@doc(
+  Entities.expand::parameters.body,
   "The parameters required to execute an expand operation on the given entity."
 );
-@@doc(Entities.getInsights::parameters.body,
+@@doc(
+  Entities.getInsights::parameters.body,
   "The parameters required to execute insights on the given entity."
 );
-@@doc(Entities.entitiesGetTimelineList::parameters.body,
+@@doc(
+  Entities.entitiesGetTimelineList::parameters.body,
   "The parameters required to execute an timeline operation on the given entity."
 );

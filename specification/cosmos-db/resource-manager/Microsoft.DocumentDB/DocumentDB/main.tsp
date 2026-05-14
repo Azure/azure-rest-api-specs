@@ -95,6 +95,7 @@ interface Operations
       ArmResponse<OperationListResult>,
       Azure.ResourceManager.CommonTypes.ErrorResponse
     > {}
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "Lists all of the available Cosmos DB Resource Provider operations."
 );

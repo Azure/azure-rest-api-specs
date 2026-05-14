@@ -111,10 +111,12 @@ using Microsoft.Cdn;
 
 @@clientName(Profiles.create::parameters.resource, "profile");
 @@clientName(Profiles.update::parameters.properties, "profileUpdateParameters");
-@@clientName(Profiles.checkEndpointNameAvailability::parameters.body,
+@@clientName(
+  Profiles.checkEndpointNameAvailability::parameters.body,
   "checkEndpointNameAvailabilityInput"
 );
-@@clientName(Profiles.checkHostNameAvailability::parameters.body,
+@@clientName(
+  Profiles.checkHostNameAvailability::parameters.body,
   "checkHostNameAvailabilityInput"
 );
 @@clientName(Profiles.validateSecret::parameters.body, "validateSecretInput");
@@ -124,32 +126,37 @@ using Microsoft.Cdn;
 @@flattenProperty(Profile.properties);
 
 @@clientName(AFDDomains.create::parameters.resource, "customDomain");
-@@clientName(AFDDomains.update::parameters.properties,
+@@clientName(
+  AFDDomains.update::parameters.properties,
   "customDomainUpdateProperties"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AFDDomain.properties);
 
 @@clientName(AFDEndpoints.create::parameters.resource, "endpoint", "!csharp");
-@@clientName(AFDEndpoints.update::parameters.properties,
+@@clientName(
+  AFDEndpoints.update::parameters.properties,
   "endpointUpdateProperties"
 );
 @@clientName(AFDEndpoints.purgeContent::parameters.body, "contents");
-@@clientName(AFDEndpoints.validateCustomDomain::parameters.body,
+@@clientName(
+  AFDEndpoints.validateCustomDomain::parameters.body,
   "customDomainProperties"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AFDEndpoint.properties);
 
 @@clientName(AFDOriginGroups.create::parameters.resource, "originGroup");
-@@clientName(AFDOriginGroups.update::parameters.properties,
+@@clientName(
+  AFDOriginGroups.update::parameters.properties,
   "originGroupUpdateProperties"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AFDOriginGroup.properties);
 
 @@clientName(AFDOrigins.create::parameters.resource, "origin");
-@@clientName(AFDOrigins.update::parameters.properties,
+@@clientName(
+  AFDOrigins.update::parameters.properties,
   "originUpdateProperties"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -169,7 +176,8 @@ using Microsoft.Cdn;
 @@flattenProperty(Rule.properties);
 
 @@clientName(SecurityPolicies.create::parameters.resource, "securityPolicy");
-@@clientName(SecurityPolicies.patch::parameters.properties,
+@@clientName(
+  SecurityPolicies.patch::parameters.properties,
   "securityPolicyUpdateProperties"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -180,17 +188,20 @@ using Microsoft.Cdn;
 @@flattenProperty(Secret.properties);
 
 @@clientName(KeyGroups.createUpdate::parameters.resource, "keyGroup");
-@@clientName(KeyGroups.update::parameters.properties,
+@@clientName(
+  KeyGroups.update::parameters.properties,
   "keyGroupUpdateProperties"
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(KeyGroup.properties);
 
-@@clientName(DeploymentVersions.update::parameters.properties,
+@@clientName(
+  DeploymentVersions.update::parameters.properties,
   "deploymentVersionUpdateProperties"
 );
-@@clientName(DeploymentVersions.compare::parameters.body,
+@@clientName(
+  DeploymentVersions.compare::parameters.body,
   "compareDeploymentVersionsParameter"
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -198,12 +209,14 @@ using Microsoft.Cdn;
 @@flattenProperty(DeploymentVersion.properties);
 
 @@clientName(Endpoints.create::parameters.resource, "endpoint", "!csharp");
-@@clientName(Endpoints.update::parameters.properties,
+@@clientName(
+  Endpoints.update::parameters.properties,
   "endpointUpdateProperties"
 );
 @@clientName(Endpoints.purgeContent::parameters.body, "contentFilePaths");
 @@clientName(Endpoints.loadContent::parameters.body, "contentFilePaths");
-@@clientName(Endpoints.validateCustomDomain::parameters.body,
+@@clientName(
+  Endpoints.validateCustomDomain::parameters.body,
   "customDomainProperties"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -215,60 +228,71 @@ using Microsoft.Cdn;
 @@flattenProperty(Origin.properties);
 
 @@clientName(OriginGroups.create::parameters.resource, "originGroup");
-@@clientName(OriginGroups.update::parameters.properties,
+@@clientName(
+  OriginGroups.update::parameters.properties,
   "originGroupUpdateProperties"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(OriginGroup.properties);
 
-@@clientName(CustomDomains.create::parameters.resource,
+@@clientName(
+  CustomDomains.create::parameters.resource,
   "customDomainProperties"
 );
-@@clientName(CustomDomains.enableCustomHttps::parameters.body,
+@@clientName(
+  CustomDomains.enableCustomHttps::parameters.body,
   "customDomainHttpsParameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(CustomDomain.properties);
 
 @@clientName(ProfileAgents.createOrUpdate::parameters.resource, "profileAgent");
-@@clientName(ProfileAgents.update::parameters.properties,
+@@clientName(
+  ProfileAgents.update::parameters.properties,
   "profileAgentUpdateParameters"
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ProfileAgent.properties);
 
-@@clientName(CdnWebApplicationFirewallPolicies.createOrUpdate::parameters.resource,
+@@clientName(
+  CdnWebApplicationFirewallPolicies.createOrUpdate::parameters.resource,
   "cdnWebApplicationFirewallPolicy"
 );
-@@clientName(CdnWebApplicationFirewallPolicies.update::parameters.properties,
+@@clientName(
+  CdnWebApplicationFirewallPolicies.update::parameters.properties,
   "cdnWebApplicationFirewallPolicyPatchParameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(CdnWebApplicationFirewallPolicy.properties);
 
 @@clientName(WebAgents.createOrUpdate::parameters.resource, "webAgent");
-@@clientName(WebAgents.update::parameters.properties,
+@@clientName(
+  WebAgents.update::parameters.properties,
   "webAgentUpdateParameters"
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(WebAgent.properties);
 
-@@clientName(KnowledgeSources.createOrUpdate::parameters.resource,
+@@clientName(
+  KnowledgeSources.createOrUpdate::parameters.resource,
   "knowledgeSource"
 );
-@@clientName(KnowledgeSources.update::parameters.properties,
+@@clientName(
+  KnowledgeSources.update::parameters.properties,
   "knowledgeSourceUpdateParameters"
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(KnowledgeSource.properties);
 
-@@clientName(checkNameAvailability::parameters.body,
+@@clientName(
+  checkNameAvailability::parameters.body,
   "checkNameAvailabilityInput"
 );
-@@clientName(checkNameAvailabilityWithSubscription::parameters.body,
+@@clientName(
+  checkNameAvailabilityWithSubscription::parameters.body,
   "checkNameAvailabilityInput"
 );
 @@clientName(validateProbe::parameters.body, "validateProbeInput");
@@ -277,7 +301,8 @@ using Microsoft.Cdn;
 @@clientName(CidrIpAddress, "cidrIpAddress");
 @@clientName(PolicySettings, "policySettings");
 
-@@clientLocation(Profiles.checkEndpointNameAvailability,
+@@clientLocation(
+  Profiles.checkEndpointNameAvailability,
   "AFDProfiles",
   "!java"
 );
@@ -297,7 +322,8 @@ using Microsoft.Cdn;
 @@clientLocation(AFDDomains.update, "AFDCustomDomains", "!java");
 @@clientLocation(AFDDomains.delete, "AFDCustomDomains", "!java");
 @@clientLocation(AFDDomains.listByProfile, "AFDCustomDomains", "!java");
-@@clientLocation(AFDDomains.refreshValidationToken,
+@@clientLocation(
+  AFDDomains.refreshValidationToken,
   "AFDCustomDomains",
   "!java"
 );
