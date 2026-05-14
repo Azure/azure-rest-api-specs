@@ -80,34 +80,15 @@ suppressions:
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerDestinations/{partnerDestinationName}"].delete
 
   - code: GuidUsage
-    reason: federatedClientId is a GUID/UUID field used for federated identity and must use uuid format. This is pre-existing in the previous preview version.
+    reason: These GUID fields (federatedClientId, partnerRegistrationImmutableId) are required identifiers pre-existing in the previous preview version. Usage is approved.
     from: EventGrid.json
-    where: $.definitions.FederatedIdentityCredentialInfo.properties.federatedClientId
-
-  - code: GuidUsage
-    reason: partnerRegistrationImmutableId is an immutable UUID identifier for partner registration. This is pre-existing in the previous preview version.
-    from: EventGrid.json
-    where: $.definitions.Partner.properties.partnerRegistrationImmutableId
-
-  - code: GuidUsage
-    reason: partnerRegistrationImmutableId is an immutable UUID identifier for partner registration. This is pre-existing in the previous preview version.
-    from: EventGrid.json
-    where: $.definitions.PartnerDestinationProperties.properties.partnerRegistrationImmutableId
-
-  - code: GuidUsage
-    reason: partnerRegistrationImmutableId is an immutable UUID identifier for partner registration. This is pre-existing in the previous preview version.
-    from: EventGrid.json
-    where: $.definitions.PartnerRegistrationProperties.properties.partnerRegistrationImmutableId
-
-  - code: GuidUsage
-    reason: partnerRegistrationImmutableId is an immutable UUID identifier for partner registration. This is pre-existing in the previous preview version.
-    from: EventGrid.json
-    where: $.definitions.PartnerTopicProperties.properties.partnerRegistrationImmutableId
-
-  - code: GuidUsage
-    reason: partnerRegistrationImmutableId is an immutable UUID identifier for partner registration. This is pre-existing in the previous preview version.
-    from: EventGrid.json
-    where: $.definitions.VerifiedPartnerProperties.properties.partnerRegistrationImmutableId
+    where:
+      - $.definitions.FederatedIdentityCredentialInfo.properties.federatedClientId.format
+      - $.definitions.Partner.properties.partnerRegistrationImmutableId.format
+      - $.definitions.PartnerDestinationProperties.properties.partnerRegistrationImmutableId.format
+      - $.definitions.PartnerRegistrationProperties.properties.partnerRegistrationImmutableId.format
+      - $.definitions.PartnerTopicProperties.properties.partnerRegistrationImmutableId.format
+      - $.definitions.VerifiedPartnerProperties.properties.partnerRegistrationImmutableId.format
 ```
 
 ### Tag: package-2025-07-preview
