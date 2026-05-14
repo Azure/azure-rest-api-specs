@@ -11,9 +11,7 @@ tags:
   - name: Deployments
   - name: Evaluation Taxonomies
   - name: Evaluation Rules
-  - name: EvaluationSuiteGenerationJobs
   - name: Evaluators
-  - name: EvaluatorGenerationJobs
   - name: Indexes
   - name: Insights
   - name: Models
@@ -26,8 +24,576 @@ tags:
   - name: Schedules
   - name: Skills
   - name: Toolboxes
-  - name: DataGenerationJobs
+  - name: AgentOptimizationJobs
 paths:
+  /agent_optimization_jobs:
+    post:
+      operationId: AgentOptimizationJobs_create
+      summary: Creates an agent optimization job.
+      description: Create an optimization job. Returns 201 with the queued job. Honours `Operation-Id` for idempotent retry.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentsOptimization=V1Preview
+        - name: Operation-Id
+          in: header
+          required: false
+          description: Client-generated unique ID for idempotent retries. When absent, the server creates the job unconditionally.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          headers:
+            Operation-Location:
+              required: true
+              description: URL to poll for the job status.
+              schema:
+                type: string
+            Location:
+              required: true
+              description: URL of the created job resource.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptimizationJob'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - AgentOptimizationJobs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OptimizationJob'
+        description: The job to create.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V1Preview
+    get:
+      operationId: AgentOptimizationJobs_list
+      summary: Returns a list of agent optimization jobs.
+      description: List optimization jobs. Supports cursor pagination and optional `status` / `agent_name` filters.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentsOptimization=V1Preview
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: status
+          in: query
+          required: false
+          description: Filter to jobs in this lifecycle state.
+          schema:
+            $ref: '#/components/schemas/JobStatus'
+          explode: false
+        - name: agent_name
+          in: query
+          required: false
+          description: Filter to jobs targeting this agent name.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/OptimizationJob'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - AgentOptimizationJobs
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V1Preview
+  /agent_optimization_jobs/{jobId}:
+    get:
+      operationId: AgentOptimizationJobs_get
+      summary: Get info about an agent optimization job.
+      description: Get an optimization job by id. Emits `Retry-After` while the job is non-terminal.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentsOptimization=V1Preview
+        - name: jobId
+          in: path
+          required: true
+          description: The ID of the job.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            Retry-After:
+              required: false
+              description: Recommended number of seconds to wait before polling again.
+              schema:
+                type: integer
+                format: int32
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptimizationJob'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - AgentOptimizationJobs
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V1Preview
+    delete:
+      operationId: AgentOptimizationJobs_delete
+      summary: Deletes an agent optimization job.
+      description: Delete the job and its candidate artifacts. Cancels first if non-terminal.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentsOptimization=V1Preview
+        - name: jobId
+          in: path
+          required: true
+          description: The ID of the job to delete.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - AgentOptimizationJobs
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V1Preview
+  /agent_optimization_jobs/{jobId}/candidates:
+    get:
+      operationId: AgentOptimizationJobs_listCandidates
+      summary: Returns a list of candidates for an optimization job.
+      description: List candidates produced by a job.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentsOptimization=V1Preview
+        - name: jobId
+          in: path
+          required: true
+          description: The optimization job id.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/OptimizationCandidate'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - AgentOptimizationJobs
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V1Preview
+  /agent_optimization_jobs/{jobId}/candidates/{candidateId}:
+    get:
+      operationId: AgentOptimizationJobs_getCandidate
+      summary: Get a candidate by id.
+      description: Get a single candidate manifest and aggregated evaluation summary.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentsOptimization=V1Preview
+        - name: jobId
+          in: path
+          required: true
+          description: The optimization job id.
+          schema:
+            type: string
+        - name: candidateId
+          in: path
+          required: true
+          description: The candidate id.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptimizationCandidate'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - AgentOptimizationJobs
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V1Preview
+  /agent_optimization_jobs/{jobId}/candidates/{candidateId}/config:
+    get:
+      operationId: AgentOptimizationJobs_getCandidateConfig
+      summary: Get candidate deploy config.
+      description: Get the candidate's deploy config JSON. Used to compose `agents.create_version(...)` from a candidate.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentsOptimization=V1Preview
+        - name: jobId
+          in: path
+          required: true
+          description: The optimization job id.
+          schema:
+            type: string
+        - name: candidateId
+          in: path
+          required: true
+          description: The candidate id.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CandidateDeployConfig'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - AgentOptimizationJobs
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V1Preview
+  /agent_optimization_jobs/{jobId}/candidates/{candidateId}/results:
+    get:
+      operationId: AgentOptimizationJobs_getCandidateResults
+      summary: Get candidate evaluation results.
+      description: Get full per-task evaluation results for a candidate.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentsOptimization=V1Preview
+        - name: jobId
+          in: path
+          required: true
+          description: The optimization job id.
+          schema:
+            type: string
+        - name: candidateId
+          in: path
+          required: true
+          description: The candidate id.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CandidateResults'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - AgentOptimizationJobs
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V1Preview
+  /agent_optimization_jobs/{jobId}:cancel:
+    post:
+      operationId: AgentOptimizationJobs_cancel
+      summary: Cancels an agent optimization job.
+      description: Request cancellation. Idempotent on terminal states.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentsOptimization=V1Preview
+        - name: jobId
+          in: path
+          required: true
+          description: The ID of the job to cancel.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptimizationJob'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - AgentOptimizationJobs
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V1Preview
   /agents:
     post:
       operationId: Agents_createAgent_Agents_createAgentFromCode
@@ -1765,319 +2331,6 @@ paths:
                 $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
       tags:
         - Connections
-  /data_generation_jobs:
-    get:
-      operationId: DataGenerationJobs_list
-      summary: Returns a list of data generation jobs
-      description: Returns a list of data generation jobs.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - DataGenerationJobs=V1Preview
-        - name: limit
-          in: query
-          required: false
-          description: |-
-            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
-            default is 20.
-          schema:
-            type: integer
-            format: int32
-            default: 20
-          explode: false
-        - name: order
-          in: query
-          required: false
-          description: |-
-            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
-            for descending order.
-          schema:
-            $ref: '#/components/schemas/PageOrder'
-          explode: false
-        - name: after
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include after=obj_foo in order to fetch the next page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: before
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: scenario
-          in: query
-          required: false
-          description: Filter data generation jobs by their scenario.
-          schema:
-            $ref: '#/components/schemas/DataGenerationJobScenario'
-          explode: false
-        - name: type
-          in: query
-          required: false
-          description: Filter data generation jobs by their type.
-          schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/DataGenerationJobType'
-          explode: false
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                  - data
-                  - has_more
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/DataGenerationJob'
-                    description: The requested list of items.
-                  first_id:
-                    type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - DataGenerationJobs
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
-    post:
-      operationId: DataGenerationJobs_create
-      summary: Creates a data generation job.
-      description: Creates a data generation job.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - DataGenerationJobs=V1Preview
-        - name: Operation-Id
-          in: header
-          required: false
-          description: Client-generated unique ID for idempotent retries. When absent, the server creates the job unconditionally.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '201':
-          description: The request has succeeded and a new resource has been created as a result.
-          headers:
-            Operation-Location:
-              required: true
-              description: URL to poll for the job status.
-              schema:
-                type: string
-            Location:
-              required: true
-              description: URL of the created job resource.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DataGenerationJob'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - DataGenerationJobs
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DataGenerationJob'
-        description: The job to create.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
-  /data_generation_jobs/{jobId}:
-    get:
-      operationId: DataGenerationJobs_get
-      summary: Get info about a data generation job.
-      description: Gets the details of a data generation job by its ID.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - DataGenerationJobs=V1Preview
-        - name: jobId
-          in: path
-          required: true
-          description: The ID of the job.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          headers:
-            Retry-After:
-              required: false
-              description: Recommended number of seconds to wait before polling again.
-              schema:
-                type: integer
-                format: int32
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DataGenerationJob'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - DataGenerationJobs
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
-    delete:
-      operationId: DataGenerationJobs_delete
-      summary: Deletes a data generation job.
-      description: Deletes a data generation job by its ID.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - DataGenerationJobs=V1Preview
-        - name: jobId
-          in: path
-          required: true
-          description: The ID of the job to delete.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '204':
-          description: There is no content to send for this request, but the headers may be useful.
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - DataGenerationJobs
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
-  /data_generation_jobs/{jobId}:cancel:
-    post:
-      operationId: DataGenerationJobs_cancel
-      summary: Cancels a data generation job.
-      description: Cancels a data generation job by its ID.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - DataGenerationJobs=V1Preview
-        - name: jobId
-          in: path
-          required: true
-          description: The ID of the job to cancel.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DataGenerationJob'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - DataGenerationJobs
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
   /datasets:
     get:
       operationId: Datasets_listLatest
@@ -2442,303 +2695,6 @@ paths:
                 $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
       tags:
         - Deployments
-  /evaluation_suite_generation_jobs:
-    post:
-      operationId: EvaluationSuiteGenerationJobs_create
-      summary: Creates an evaluation suite generation job.
-      description: Create a new job (preview). Includes optional Foundry-Features header and Operation-Id for idempotent retries.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
-        - name: Operation-Id
-          in: header
-          required: false
-          description: Client-generated unique ID for idempotent retries. When absent, the server creates the job unconditionally.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '201':
-          description: The request has succeeded and a new resource has been created as a result.
-          headers:
-            Operation-Location:
-              required: true
-              description: URL to poll for the job status.
-              schema:
-                type: string
-            Location:
-              required: true
-              description: URL of the created job resource.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EvaluationSuiteGenerationJob'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - EvaluationSuiteGenerationJobs
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/EvaluationSuiteGenerationJobCreate'
-        description: The job to create.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Evaluations=V1Preview
-    get:
-      operationId: EvaluationSuiteGenerationJobs_list
-      summary: Returns a list of evaluation suite generation jobs.
-      description: List jobs with cursor-based pagination (preview). Includes optional Foundry-Features header.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
-        - name: limit
-          in: query
-          required: false
-          description: |-
-            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
-            default is 20.
-          schema:
-            type: integer
-            format: int32
-            default: 20
-          explode: false
-        - name: order
-          in: query
-          required: false
-          description: |-
-            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
-            for descending order.
-          schema:
-            $ref: '#/components/schemas/PageOrder'
-          explode: false
-        - name: after
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include after=obj_foo in order to fetch the next page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: before
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                  - data
-                  - has_more
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/EvaluationSuiteGenerationJob'
-                    description: The requested list of items.
-                  first_id:
-                    type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - EvaluationSuiteGenerationJobs
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Evaluations=V1Preview
-  /evaluation_suite_generation_jobs/{jobId}:
-    get:
-      operationId: EvaluationSuiteGenerationJobs_get
-      summary: Get info about an evaluation suite generation job.
-      description: Get a job by ID (preview). Includes optional Foundry-Features header.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
-        - name: jobId
-          in: path
-          required: true
-          description: The ID of the job.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          headers:
-            Retry-After:
-              required: false
-              description: Recommended number of seconds to wait before polling again.
-              schema:
-                type: integer
-                format: int32
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EvaluationSuiteGenerationJob'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - EvaluationSuiteGenerationJobs
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Evaluations=V1Preview
-    delete:
-      operationId: EvaluationSuiteGenerationJobs_delete
-      summary: Deletes an evaluation suite generation job.
-      description: Delete a job (preview). Returns 204 No Content.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
-        - name: jobId
-          in: path
-          required: true
-          description: The ID of the job to delete.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '204':
-          description: There is no content to send for this request, but the headers may be useful.
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - EvaluationSuiteGenerationJobs
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Evaluations=V1Preview
-  /evaluation_suite_generation_jobs/{jobId}:cancel:
-    post:
-      operationId: EvaluationSuiteGenerationJobs_cancel
-      summary: Cancels an evaluation suite generation job.
-      description: Cancel a running job (preview). Returns 200 with the updated job.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
-        - name: jobId
-          in: path
-          required: true
-          description: The ID of the job to cancel.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EvaluationSuiteGenerationJob'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - EvaluationSuiteGenerationJobs
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Evaluations=V1Preview
   /evaluation_suites:
     get:
       operationId: EvaluationSuites_listLatest
@@ -3405,313 +3361,6 @@ paths:
             schema:
               $ref: '#/components/schemas/EvaluationTaxonomyUpdate'
         description: The evaluation taxonomy.
-  /evaluator_generation_jobs:
-    post:
-      operationId: EvaluatorGenerationJobs_create
-      summary: Creates an evaluator generation job.
-      description: |-
-        Creates an evaluator generation job. The service generates rubric-based evaluator
-        definitions from the provided source materials asynchronously.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
-        - name: Operation-Id
-          in: header
-          required: false
-          description: Client-generated unique ID for idempotent retries. When absent, the server creates the job unconditionally.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '201':
-          description: The request has succeeded and a new resource has been created as a result.
-          headers:
-            Operation-Location:
-              required: true
-              description: URL to poll for the job status.
-              schema:
-                type: string
-            Location:
-              required: true
-              description: URL of the created job resource.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EvaluatorGenerationJob'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - EvaluatorGenerationJobs
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/EvaluatorGenerationJobCreate'
-        description: The job to create.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Evaluations=V1Preview
-    get:
-      operationId: EvaluatorGenerationJobs_list
-      summary: Returns a list of evaluator generation jobs.
-      description: Returns a list of evaluator generation jobs.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
-        - name: limit
-          in: query
-          required: false
-          description: |-
-            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
-            default is 20.
-          schema:
-            type: integer
-            format: int32
-            default: 20
-          explode: false
-        - name: order
-          in: query
-          required: false
-          description: |-
-            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
-            for descending order.
-          schema:
-            $ref: '#/components/schemas/PageOrder'
-          explode: false
-        - name: after
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include after=obj_foo in order to fetch the next page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: before
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: category
-          in: query
-          required: false
-          description: Filter evaluator generation jobs by category.
-          schema:
-            $ref: '#/components/schemas/EvaluatorCategory'
-          explode: false
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                  - data
-                  - has_more
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/EvaluatorGenerationJob'
-                    description: The requested list of items.
-                  first_id:
-                    type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - EvaluatorGenerationJobs
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Evaluations=V1Preview
-  /evaluator_generation_jobs/{jobId}:
-    get:
-      operationId: EvaluatorGenerationJobs_get
-      summary: Get info about an evaluator generation job.
-      description: Gets the details of an evaluator generation job by its ID.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
-        - name: jobId
-          in: path
-          required: true
-          description: The ID of the job.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          headers:
-            Retry-After:
-              required: false
-              description: Recommended number of seconds to wait before polling again.
-              schema:
-                type: integer
-                format: int32
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EvaluatorGenerationJob'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - EvaluatorGenerationJobs
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Evaluations=V1Preview
-    delete:
-      operationId: EvaluatorGenerationJobs_delete
-      description: |-
-        Deletes an evaluator generation job by its ID. Deletes the job record only;
-        the generated evaluator (if any) is preserved.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
-        - name: jobId
-          in: path
-          required: true
-          description: The ID of the job to delete.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '204':
-          description: There is no content to send for this request, but the headers may be useful.
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - EvaluatorGenerationJobs
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Evaluations=V1Preview
-  /evaluator_generation_jobs/{jobId}:cancel:
-    post:
-      operationId: EvaluatorGenerationJobs_cancel
-      summary: Cancels an evaluator generation job.
-      description: Cancels an evaluator generation job by its ID.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
-        - name: jobId
-          in: path
-          required: true
-          description: The ID of the job to cancel.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EvaluatorGenerationJob'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - EvaluatorGenerationJobs
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Evaluations=V1Preview
   /evaluators:
     get:
       operationId: Evaluators_listLatestVersions
@@ -4441,6 +4090,14 @@ paths:
       operationId: listMemoryStores
       description: List all memory stores.
       parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - MemoryStores=V1Preview
         - name: limit
           in: query
           required: false
@@ -4481,14 +4138,6 @@ paths:
           schema:
             type: string
           explode: false
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - MemoryStores=V1Preview
         - name: api-version
           in: query
           required: true
@@ -4538,12 +4187,6 @@ paths:
       operationId: updateMemoryStore
       description: Update a memory store.
       parameters:
-        - name: name
-          in: path
-          required: true
-          description: The name of the memory store to update.
-          schema:
-            type: string
         - name: Foundry-Features
           in: header
           required: true
@@ -4552,6 +4195,12 @@ paths:
             type: string
             enum:
               - MemoryStores=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The name of the memory store to update.
+          schema:
+            type: string
         - name: api-version
           in: query
           required: true
@@ -4597,12 +4246,6 @@ paths:
       operationId: getMemoryStore
       description: Retrieve a memory store.
       parameters:
-        - name: name
-          in: path
-          required: true
-          description: The name of the memory store to retrieve.
-          schema:
-            type: string
         - name: Foundry-Features
           in: header
           required: true
@@ -4611,6 +4254,12 @@ paths:
             type: string
             enum:
               - MemoryStores=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The name of the memory store to retrieve.
+          schema:
+            type: string
         - name: api-version
           in: query
           required: true
@@ -4640,12 +4289,6 @@ paths:
       operationId: deleteMemoryStore
       description: Delete a memory store.
       parameters:
-        - name: name
-          in: path
-          required: true
-          description: The name of the memory store to delete.
-          schema:
-            type: string
         - name: Foundry-Features
           in: header
           required: true
@@ -4654,6 +4297,12 @@ paths:
             type: string
             enum:
               - MemoryStores=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The name of the memory store to delete.
+          schema:
+            type: string
         - name: api-version
           in: query
           required: true
@@ -4679,11 +4328,346 @@ paths:
       x-ms-foundry-meta:
         conditional_previews:
           - MemoryStores=V1Preview
+  /memory_stores/{name}/memories:
+    post:
+      operationId: createMemory
+      description: Create a memory item in a memory store.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - MemoryStores=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The name of the memory store.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemoryItem'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Memory Stores
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                scope:
+                  type: string
+                  description: The namespace that logically groups and isolates memories, such as a user ID.
+                content:
+                  type: string
+                  description: The content of the memory.
+                kind:
+                  allOf:
+                    - $ref: '#/components/schemas/MemoryItemKind'
+                  description: The kind of the memory item.
+              required:
+                - scope
+                - content
+                - kind
+      x-ms-foundry-meta:
+        conditional_previews:
+          - MemoryStores=V1Preview
+    get:
+      operationId: listMemories
+      description: List all memory items in a memory store.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - MemoryStores=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The name of the memory store.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/MemoryItem'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Memory Stores
+      x-ms-foundry-meta:
+        conditional_previews:
+          - MemoryStores=V1Preview
+  /memory_stores/{name}/memories/{memory_id}:
+    post:
+      operationId: updateMemory
+      description: Update a memory item in a memory store.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - MemoryStores=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The name of the memory store.
+          schema:
+            type: string
+        - name: memory_id
+          in: path
+          required: true
+          description: The ID of the memory item to update.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemoryItem'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Memory Stores
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                  description: The updated content of the memory.
+              required:
+                - content
+      x-ms-foundry-meta:
+        conditional_previews:
+          - MemoryStores=V1Preview
+    get:
+      operationId: getMemory
+      description: Retrieve a memory item from a memory store.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - MemoryStores=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The name of the memory store.
+          schema:
+            type: string
+        - name: memory_id
+          in: path
+          required: true
+          description: The ID of the memory item to retrieve.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemoryItem'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Memory Stores
+      x-ms-foundry-meta:
+        conditional_previews:
+          - MemoryStores=V1Preview
+    delete:
+      operationId: deleteMemory
+      description: Delete a memory item from a memory store.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - MemoryStores=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The name of the memory store.
+          schema:
+            type: string
+        - name: memory_id
+          in: path
+          required: true
+          description: The ID of the memory item to delete.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteMemoryResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Memory Stores
+      x-ms-foundry-meta:
+        conditional_previews:
+          - MemoryStores=V1Preview
   /memory_stores/{name}/updates/{update_id}:
     get:
       operationId: getUpdateResult
       description: Get memory store update result.
       parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - MemoryStores=V1Preview
         - name: name
           in: path
           required: true
@@ -4696,14 +4680,6 @@ paths:
           description: The ID of the memory update operation.
           schema:
             type: string
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - MemoryStores=V1Preview
         - name: api-version
           in: query
           required: true
@@ -4734,12 +4710,6 @@ paths:
       operationId: deleteScopeMemories
       description: Delete all memories associated with a specific scope from a memory store.
       parameters:
-        - name: name
-          in: path
-          required: true
-          description: The name of the memory store.
-          schema:
-            type: string
         - name: Foundry-Features
           in: header
           required: true
@@ -4748,6 +4718,12 @@ paths:
             type: string
             enum:
               - MemoryStores=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The name of the memory store.
+          schema:
+            type: string
         - name: api-version
           in: query
           required: true
@@ -4790,12 +4766,6 @@ paths:
       operationId: searchMemories
       description: Search for relevant memories from a memory store based on conversation context.
       parameters:
-        - name: name
-          in: path
-          required: true
-          description: The name of the memory store to search.
-          schema:
-            type: string
         - name: Foundry-Features
           in: header
           required: true
@@ -4804,6 +4774,12 @@ paths:
             type: string
             enum:
               - MemoryStores=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The name of the memory store to search.
+          schema:
+            type: string
         - name: api-version
           in: query
           required: true
@@ -4858,12 +4834,6 @@ paths:
       operationId: updateMemories
       description: Update memory store with conversation memories.
       parameters:
-        - name: name
-          in: path
-          required: true
-          description: The name of the memory store to update.
-          schema:
-            type: string
         - name: Foundry-Features
           in: header
           required: true
@@ -4872,6 +4842,12 @@ paths:
             type: string
             enum:
               - MemoryStores=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The name of the memory store to update.
+          schema:
+            type: string
         - name: api-version
           in: query
           required: true
@@ -4939,6 +4915,14 @@ paths:
       description: List the latest version of each ModelVersion
       parameters:
         - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Models=V1Preview
       responses:
         '200':
           description: The request has succeeded.
@@ -4972,6 +4956,14 @@ paths:
           description: The name of the resource
           schema:
             type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Models=V1Preview
       responses:
         '200':
           description: The request has succeeded.
@@ -5005,6 +4997,14 @@ paths:
           description: The name of the resource
           schema:
             type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Models=V1Preview
         - name: version
           in: path
           required: true
@@ -5032,9 +5032,12 @@ paths:
                 $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
       tags:
         - Models
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
     delete:
       operationId: Models_deleteVersion
-      description: Delete the specific version of the ModelVersion. The service returns 204 No Content if the ModelVersion was deleted successfully or if the ModelVersion does not exist.
+      description: Delete the specific version of the ModelVersion. The service returns 200 OK if the ModelVersion was deleted successfully or if the ModelVersion does not exist.
       parameters:
         - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
         - name: name
@@ -5043,6 +5046,14 @@ paths:
           description: The name of the resource
           schema:
             type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Models=V1Preview
         - name: version
           in: path
           required: true
@@ -5050,8 +5061,8 @@ paths:
           schema:
             type: string
       responses:
-        '204':
-          description: There is no content to send for this request, but the headers may be useful.
+        '200':
+          description: The request has succeeded.
         default:
           description: An unexpected error response.
           headers:
@@ -5066,6 +5077,9 @@ paths:
                 $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
       tags:
         - Models
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
     patch:
       operationId: Models_updateVersion
       description: Update an existing ModelVersion with the given version id
@@ -5083,6 +5097,14 @@ paths:
           description: The specific version id of the UpdateModelVersionRequest to create or update.
           schema:
             type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Models=V1Preview
       responses:
         '200':
           description: The request has succeeded.
@@ -5117,12 +5139,23 @@ paths:
             schema:
               $ref: '#/components/schemas/UpdateModelVersionRequest'
         description: The UpdateModelVersionRequest to create or update.
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
   /models/{name}/versions/{version}/createAsync:
     post:
       operationId: Models_createAsync
       description: Creates a model version asynchronously with blob content validation. Returns 202 Accepted with a Location header for polling.
       parameters:
         - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Models=V1Preview
         - name: name
           in: path
           required: true
@@ -5140,10 +5173,25 @@ paths:
           description: Accepted response for asynchronous model version creation, with polling location.
           headers:
             Location:
-              required: true
+              required: false
               description: URL to poll for operation status.
               schema:
                 type: string
+                format: uri
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  location:
+                    type: string
+                    format: uri
+                    description: URL to poll for operation status.
+                  operationResult:
+                    type: string
+                    format: uri
+                    nullable: true
+                    description: URL to the operation result, or null if the operation is still in progress.
         default:
           description: An unexpected error response.
           headers:
@@ -5165,12 +5213,23 @@ paths:
             schema:
               $ref: '#/components/schemas/ModelVersion'
         description: Model version to create.
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
   /models/{name}/versions/{version}/credentials:
     post:
       operationId: Models_getCredentials
       description: Get credentials for a model version asset.
       parameters:
         - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Models=V1Preview
         - name: name
           in: path
           required: true
@@ -5210,12 +5269,23 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/ModelCredentialRequest'
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
   /models/{name}/versions/{version}/startPendingUpload:
     post:
       operationId: Models_startPendingUpload
       description: Start or retrieve a pending upload for a model version.
       parameters:
         - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Models=V1Preview
         - name: name
           in: path
           required: true
@@ -5234,7 +5304,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PendingUploadResponse'
+                $ref: '#/components/schemas/ModelPendingUploadResponse'
         default:
           description: An unexpected error response.
           headers:
@@ -5254,7 +5324,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PendingUploadRequest'
+              $ref: '#/components/schemas/ModelPendingUploadRequest'
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
   /openai/v1/conversations:
     post:
       operationId: createConversation
@@ -8753,29 +8826,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/InsightResult'
       description: Insights from the agent cluster analysis.
-    AgentDataGenerationJobSource:
-      type: object
-      required:
-        - type
-        - agent_name
-      properties:
-        description:
-          type: string
-          description: Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').
-        type:
-          type: string
-          enum:
-            - agent
-          description: The source type for this source, which is Agent.
-        agent_name:
-          type: string
-          description: The agent name to fetch instructions from.
-        agent_version:
-          type: string
-          description: The agent version. If not specified, the latest version is used.
-      allOf:
-        - $ref: '#/components/schemas/DataGenerationJobSource'
-      description: Agent source for data generation jobs — references an agent to fetch instructions and metadata from.
     AgentDefinition:
       type: object
       required:
@@ -8883,53 +8933,8 @@ components:
             - activity
             - responses
             - a2a
+            - mcp
             - invocations
-    AgentEvaluationSuiteJobSource:
-      type: object
-      required:
-        - type
-        - agent_name
-      properties:
-        description:
-          type: string
-          description: Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').
-        type:
-          type: string
-          enum:
-            - agent
-          description: The source type for this source, which is Agent.
-        agent_name:
-          type: string
-          description: The agent name to fetch instructions from.
-        agent_version:
-          type: string
-          description: The agent version. If not specified, the latest version is used.
-      allOf:
-        - $ref: '#/components/schemas/EvaluationSuiteJobSource'
-      description: Agent source for evaluation suite generation jobs — references an agent to fetch instructions and metadata from.
-    AgentEvaluatorGenerationJobSource:
-      type: object
-      required:
-        - type
-        - agent_name
-      properties:
-        description:
-          type: string
-          description: Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').
-        type:
-          type: string
-          enum:
-            - agent
-          description: The source type for this source, which is Agent.
-        agent_name:
-          type: string
-          description: The agent name to fetch instructions from.
-        agent_version:
-          type: string
-          description: The agent version. If not specified, the latest version is used.
-      allOf:
-        - $ref: '#/components/schemas/EvaluatorGenerationJobSource'
-      description: Agent source for evaluator generation jobs — references an agent to fetch instructions and metadata from.
     AgentFilterTraceSource:
       type: object
       required:
@@ -9055,6 +9060,7 @@ components:
           enum:
             - activity_protocol
             - responses
+            - mcp
             - invocations
     AgentReference:
       type: object
@@ -9793,6 +9799,257 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvalRunDataSource'
       description: A wrapper data source that contains a polymorphic trace source to specify how traces are selected for evaluation.
+    AzureContentFilterBlocklistIdResult:
+      type: object
+      required:
+        - id
+        - filtered
+      properties:
+        id:
+          type: string
+          description: The ID of the custom blocklist.
+        filtered:
+          type: boolean
+          description: Whether the blocklist resulted in filtering.
+      description: A content filter blocklist ID result.
+    AzureContentFilterBlocklistResult:
+      type: object
+      required:
+        - filtered
+      properties:
+        filtered:
+          type: boolean
+          description: Whether any blocklist resulted in filtering.
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/AzureContentFilterBlocklistIdResult'
+          description: The pairs of individual blocklist IDs and their filtering results.
+      description: A collection of filtering results for configured custom blocklists.
+    AzureContentFilterCitation:
+      type: object
+      properties:
+        license:
+          type: string
+          description: The license associated with the detection.
+        url:
+          type: string
+          format: uri
+          description: The URL associated with the license.
+      description: Citation details for protected material detection.
+    AzureContentFilterCompletionTextSpan:
+      type: object
+      required:
+        - completion_start_offset
+        - completion_end_offset
+      properties:
+        completion_start_offset:
+          type: integer
+          format: int32
+          description: Offset of the UTF32 code point which begins the span.
+        completion_end_offset:
+          type: integer
+          format: int32
+          description: Offset of the first UTF32 code point which is excluded from the span.
+      description: A representation of a span of completion text as used by Azure OpenAI content filter results.
+    AzureContentFilterCompletionTextSpanDetectionResult:
+      type: object
+      required:
+        - filtered
+        - detected
+        - details
+      properties:
+        filtered:
+          type: boolean
+          description: Whether the content was filtered.
+        detected:
+          type: boolean
+          description: Whether the content category was detected.
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/AzureContentFilterCompletionTextSpan'
+          description: Detailed information about the detected completion text spans.
+      description: A content filter detection result with completion text span details.
+    AzureContentFilterDetectionResult:
+      type: object
+      required:
+        - filtered
+        - detected
+      properties:
+        filtered:
+          type: boolean
+          description: Whether the content was filtered.
+        detected:
+          type: boolean
+          description: Whether the content category was detected.
+      description: A content filter result indicating whether the content was detected and filtered.
+    AzureContentFilterDetectionWithCitationResult:
+      type: object
+      required:
+        - filtered
+        - detected
+      properties:
+        filtered:
+          type: boolean
+          description: Whether the content was filtered.
+        detected:
+          type: boolean
+          description: Whether the content category was detected.
+        citation:
+          allOf:
+            - $ref: '#/components/schemas/AzureContentFilterCitation'
+          description: Citation details describing the associated license and its location.
+      description: A content filter detection result that includes citation information for protected material.
+    AzureContentFilterDetectionWithReasonResult:
+      type: object
+      required:
+        - filtered
+        - detected
+      properties:
+        filtered:
+          type: boolean
+          description: Whether the content was filtered.
+        detected:
+          type: boolean
+          description: Whether the content category was detected.
+        reason:
+          type: string
+          description: A human-readable explanation of why the detection result was produced.
+      description: A content filter detection result that includes a reason description.
+    AzureContentFilterError:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: A machine-readable error code.
+        message:
+          type: string
+          description: A human-readable error message.
+      description: Error details from the content filtering system.
+    AzureContentFilterPersonallyIdentifiableInformationResult:
+      type: object
+      required:
+        - filtered
+        - detected
+      properties:
+        filtered:
+          type: boolean
+          description: Whether the content was filtered.
+        detected:
+          type: boolean
+          description: Whether PII was detected in the content.
+        sub_categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/AzureContentFilterPiiSubCategoryResult'
+          description: Detailed results for individual PII subcategories.
+      description: A content filter detection result for Personally Identifiable Information.
+    AzureContentFilterPiiSubCategoryResult:
+      type: object
+      required:
+        - sub_category
+        - filtered
+        - detected
+      properties:
+        sub_category:
+          type: string
+          description: The PII subcategory that was evaluated.
+        filtered:
+          type: boolean
+          description: Whether the content was filtered for this subcategory.
+        detected:
+          type: boolean
+          description: Whether the subcategory was detected in the content.
+      description: Result details for an individual PII subcategory.
+    AzureContentFilterResultsForResponses:
+      type: object
+      properties:
+        sexual:
+          allOf:
+            - $ref: '#/components/schemas/AzureContentFilterSeverityResult'
+          description: Severity result for sexual content.
+        hate:
+          allOf:
+            - $ref: '#/components/schemas/AzureContentFilterSeverityResult'
+          description: Severity result for hate content.
+        violence:
+          allOf:
+            - $ref: '#/components/schemas/AzureContentFilterSeverityResult'
+          description: Severity result for violence content.
+        self_harm:
+          allOf:
+            - $ref: '#/components/schemas/AzureContentFilterSeverityResult'
+          description: Severity result for self-harm content.
+        profanity:
+          allOf:
+            - $ref: '#/components/schemas/AzureContentFilterDetectionResult'
+          description: Detection result for profanity.
+        custom_blocklists:
+          allOf:
+            - $ref: '#/components/schemas/AzureContentFilterBlocklistResult'
+          description: Results for configured custom blocklists.
+        jailbreak:
+          allOf:
+            - $ref: '#/components/schemas/AzureContentFilterDetectionResult'
+          description: Detection result for jailbreak attempts.
+        task_adherence:
+          allOf:
+            - $ref: '#/components/schemas/AzureContentFilterDetectionWithReasonResult'
+          description: Detection result for task adherence evaluation.
+        protected_material_text:
+          allOf:
+            - $ref: '#/components/schemas/AzureContentFilterDetectionResult'
+          description: Detection result for protected material text.
+        protected_material_code:
+          allOf:
+            - $ref: '#/components/schemas/AzureContentFilterDetectionWithCitationResult'
+          description: Detection result for protected material code with citation.
+        ungrounded_material:
+          allOf:
+            - $ref: '#/components/schemas/AzureContentFilterCompletionTextSpanDetectionResult'
+          description: Detection result for ungrounded material with completion text span details.
+        personally_identifiable_information:
+          allOf:
+            - $ref: '#/components/schemas/AzureContentFilterPersonallyIdentifiableInformationResult'
+          description: Detection result for Personally Identifiable Information.
+        indirect_attack:
+          allOf:
+            - $ref: '#/components/schemas/AzureContentFilterDetectionResult'
+          description: Detection result for indirect attacks.
+        error:
+          allOf:
+            - $ref: '#/components/schemas/AzureContentFilterError'
+          description: Error details if content filtering evaluation failed.
+      description: Content filter results for the Responses API.
+    AzureContentFilterSeverity:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - safe
+            - low
+            - medium
+            - high
+      description: Ratings for the intensity and risk level of harmful content.
+    AzureContentFilterSeverityResult:
+      type: object
+      required:
+        - filtered
+        - severity
+      properties:
+        filtered:
+          type: boolean
+          description: Whether the content was filtered.
+        severity:
+          allOf:
+            - $ref: '#/components/schemas/AzureContentFilterSeverity'
+          description: The severity level of the content.
+      description: A content filter result indicating severity level and whether content was filtered.
     AzureFunctionBinding:
       type: object
       required:
@@ -10331,6 +10588,42 @@ components:
             - $ref: '#/components/schemas/BrowserAutomationToolConnectionParameters'
           description: The project connection parameters associated with the Browser Automation Tool.
       description: Definition of input parameters for the Browser Automation Tool.
+    CandidateDeployConfig:
+      type: object
+      properties:
+        instructions:
+          type: string
+          description: System prompt / instructions.
+        model:
+          type: string
+          description: Foundry deployment name.
+        temperature:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 2
+          description: Optional sampling temperature.
+        skills:
+          type: array
+          items:
+            $ref: '#/components/schemas/OptimizationAgentSkill'
+          description: Optional skill overrides.
+      description: Deploy-config blob for a candidate. Suitable for setting OPTIMIZATION_CONFIG on a hosted-agent version.
+    CandidateResults:
+      type: object
+      required:
+        - candidate_id
+        - results
+      properties:
+        candidate_id:
+          type: string
+          description: Owning candidate id.
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/OptimizationTaskResult'
+          description: Per-task evaluation rows.
+      description: Full per-task evaluation results for a candidate, returned by GET /candidates/{id}/results.
     CaptureStructuredOutputsTool:
       type: object
       required:
@@ -10616,6 +10909,27 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - CodeAgents=V1Preview
+    ContentFilterResult:
+      type: object
+      required:
+        - blocked
+        - source_type
+        - content_filter_results
+      properties:
+        blocked:
+          type: boolean
+          description: Whether the content was blocked by the content filter.
+        source_type:
+          type: string
+          description: The source type of the content filter evaluation (e.g., 'prompt', 'response', 'pre_tool_call', 'post_tool_call').
+        content_filter_results:
+          allOf:
+            - $ref: '#/components/schemas/AzureContentFilterResultsForResponses'
+          description: The content filter results for this evaluation.
+        tool_call_id:
+          type: string
+          description: The ID of the tool call associated with this content filter result, if applicable.
+      description: A content filter evaluation result for a specific source in the response.
     ContinuousEvaluationRuleAction:
       type: object
       required:
@@ -11149,227 +11463,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/RecurrenceSchedule'
       description: Daily recurrence schedule.
-    DataGenerationJob:
-      type: object
-      required:
-        - id
-        - status
-        - created_at
-      properties:
-        id:
-          type: string
-          description: Server-assigned unique identifier.
-          readOnly: true
-        inputs:
-          allOf:
-            - $ref: '#/components/schemas/DataGenerationJobInputs'
-          description: Caller-supplied inputs.
-        result:
-          allOf:
-            - $ref: '#/components/schemas/DataGenerationJobResult'
-          description: Result produced on success.
-          readOnly: true
-        status:
-          allOf:
-            - $ref: '#/components/schemas/JobStatus'
-          description: Current lifecycle status.
-          readOnly: true
-        error:
-          allOf:
-            - $ref: '#/components/schemas/OpenAI.Error'
-          description: Error details — populated only on failure.
-          readOnly: true
-        created_at:
-          allOf:
-            - $ref: '#/components/schemas/FoundryTimestamp'
-          description: The timestamp when the job was created, represented in Unix time (seconds since January 1, 1970).
-          readOnly: true
-        finished_at:
-          allOf:
-            - $ref: '#/components/schemas/FoundryTimestamp'
-          description: The timestamp when the job was finished, represented in Unix time (seconds since January 1, 1970).
-          readOnly: true
-      description: Data Generation Job resource.
-    DataGenerationJobInputs:
-      type: object
-      required:
-        - name
-        - sources
-        - options
-        - scenario
-      properties:
-        name:
-          type: string
-          description: The display name of the data generation job.
-        sources:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataGenerationJobSource'
-          description: The sources used for the data generation job.
-        options:
-          allOf:
-            - $ref: '#/components/schemas/DataGenerationJobOptions'
-          description: The options for the data generation job.
-        scenario:
-          allOf:
-            - $ref: '#/components/schemas/DataGenerationJobScenario'
-          description: The scenario of the data generation job. Either for fine-tuning or evaluation.
-      description: Caller-supplied inputs for a data generation job.
-    DataGenerationJobOptions:
-      type: object
-      required:
-        - type
-        - max_samples
-      properties:
-        type:
-          allOf:
-            - $ref: '#/components/schemas/DataGenerationJobType'
-          description: The data generation job type.
-        max_samples:
-          type: integer
-          format: int32
-          description: Maximum number of samples to generate.
-        train_split:
-          type: number
-          format: float
-          minimum: 0
-          maximum: 1
-          description: The proportion of the generated data to be used for training when the data is used for fine-tuning. The rest will be used for validation. Value should be between 0 and 1.
-        model_options:
-          allOf:
-            - $ref: '#/components/schemas/DataGenerationModelOptions'
-          description: The LLM model options.
-      discriminator:
-        propertyName: type
-        mapping:
-          simple_qna: '#/components/schemas/SimpleQnADataGenerationJobOptions'
-          traces: '#/components/schemas/TracesDataGenerationJobOptions'
-          tool_use: '#/components/schemas/ToolUseFineTuningDataGenerationJobOptions'
-      description: Options for managing data generation jobs.
-    DataGenerationJobOutput:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          allOf:
-            - $ref: '#/components/schemas/DataGenerationJobOutputType'
-          description: The type of the output.
-      discriminator:
-        propertyName: type
-        mapping:
-          file: '#/components/schemas/FileDataGenerationJobOutput'
-          dataset: '#/components/schemas/DatasetDataGenerationJobOutput'
-      description: Output information for a data generation job.
-    DataGenerationJobOutputType:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - file
-            - dataset
-      description: The supported output file types for a data generation job.
-    DataGenerationJobResult:
-      type: object
-      required:
-        - generated_samples
-      properties:
-        outputs:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataGenerationJobOutput'
-          description: 'The final job outputs: Azure OpenAI files for fine-tuning, or datasets for evaluation.'
-        generated_samples:
-          type: integer
-          format: int32
-          description: The number of samples actually generated.
-        token_usage:
-          allOf:
-            - $ref: '#/components/schemas/DataGenerationTokenUsage'
-          description: The token usage information for the data generation job.
-      description: Result produced by a successful data generation job.
-    DataGenerationJobScenario:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - supervised_finetuning
-            - reinforcement_finetuning
-            - evaluation
-      description: The supported scenarios for a data generation job.
-    DataGenerationJobSource:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          allOf:
-            - $ref: '#/components/schemas/DataGenerationJobSourceType'
-          description: The type of source.
-        description:
-          type: string
-          description: Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').
-      discriminator:
-        propertyName: type
-        mapping:
-          prompt: '#/components/schemas/PromptDataGenerationJobSource'
-          agent: '#/components/schemas/AgentDataGenerationJobSource'
-          traces: '#/components/schemas/TracesDataGenerationJobSource'
-          dataset: '#/components/schemas/DatasetDataGenerationJobSource'
-          file: '#/components/schemas/FileDataGenerationJobSource'
-      description: The base source model for data generation jobs.
-    DataGenerationJobSourceType:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - prompt
-            - agent
-            - traces
-            - dataset
-            - file
-      description: The supported source types for data generation jobs.
-    DataGenerationJobType:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - simple_qna
-            - traces
-            - tool_use
-      description: The supported data generation job types.
-    DataGenerationModelOptions:
-      type: object
-      required:
-        - model
-      properties:
-        model:
-          type: string
-          description: Base model name used to generate data.
-      description: LLM model options for data generation jobs.
-    DataGenerationTokenUsage:
-      type: object
-      required:
-        - prompt_tokens
-        - completion_tokens
-        - total_tokens
-      properties:
-        prompt_tokens:
-          type: integer
-          format: int64
-          description: The number of prompt tokens used.
-          readOnly: true
-        completion_tokens:
-          type: integer
-          format: int64
-          description: The number of completion tokens generated.
-          readOnly: true
-        total_tokens:
-          type: integer
-          format: int64
-          description: Total number of tokens used.
-          readOnly: true
-      description: Token usage information for a data generation job.
     DataSourceConfig:
       type: object
       required:
@@ -11387,120 +11480,49 @@ components:
         propertyName: type
         mapping: {}
       description: Base class for run data sources with discriminator support.
-    DatasetDataGenerationJobOutput:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - dataset
-          description: Dataset output.
-        id:
-          type: string
-          description: The id of the output dataset created.
-          readOnly: true
-        name:
-          type: string
-          description: The name of the output dataset and can be optionally set during job creation time.
-        version:
-          type: string
-          description: The version of the output dataset.
-          readOnly: true
-        description:
-          type: string
-          description: Description of the output dataset and can be optionally set during job creation time.
-        tags:
-          type: object
-          additionalProperties:
-            type: string
-          description: Tag dictionary of the output dataset and can be optionally set during job creation time.
-      allOf:
-        - $ref: '#/components/schemas/DataGenerationJobOutput'
-      description: Dataset output for a data generation job.
-    DatasetDataGenerationJobSource:
-      type: object
-      required:
-        - type
-        - name
-      properties:
-        description:
-          type: string
-          description: Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').
-        type:
-          type: string
-          enum:
-            - dataset
-          description: The source type for this source, which is Dataset.
-        name:
-          type: string
-          description: The name of the dataset.
-        version:
-          type: string
-          description: The version of the dataset. If not specified, the latest version is used.
-      allOf:
-        - $ref: '#/components/schemas/DataGenerationJobSource'
-      description: Dataset source for data generation jobs — reference to a dataset.
-    DatasetEvaluationSuiteJobSource:
-      type: object
-      required:
-        - type
-        - name
-      properties:
-        description:
-          type: string
-          description: Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').
-        type:
-          type: string
-          enum:
-            - dataset
-          description: The source type for this source, which is Dataset.
-        name:
-          type: string
-          description: The name of the dataset.
-        version:
-          type: string
-          description: The version of the dataset. If not specified, the latest version is used.
-      allOf:
-        - $ref: '#/components/schemas/EvaluationSuiteJobSource'
-      description: Dataset source for evaluation suite generation jobs — reference to a dataset.
-    DatasetEvaluatorGenerationJobSource:
-      type: object
-      required:
-        - type
-        - name
-      properties:
-        description:
-          type: string
-          description: Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').
-        type:
-          type: string
-          enum:
-            - dataset
-          description: The source type for this source, which is Dataset.
-        name:
-          type: string
-          description: The name of the dataset.
-        version:
-          type: string
-          description: The version of the dataset. If not specified, the latest version is used.
-      allOf:
-        - $ref: '#/components/schemas/EvaluatorGenerationJobSource'
-      description: Dataset source for evaluator generation jobs — reference to a dataset.
-    DatasetReference:
+    DatasetItem:
       type: object
       required:
         - name
-        - version
+        - query
+      properties:
+        name:
+          type: string
+          description: Unique-within-the-dataset identifier for this task.
+        query:
+          type: string
+          description: The user query / input for the task.
+        ground_truth:
+          type: string
+          description: Optional ground truth used by reference-based evaluators.
+        criteria:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluationCriterion'
+          description: Per-task evaluation criteria. Defaults to the job-level evaluators if unset.
+        eval_results:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvalRunOutputItemResult'
+          description: Pre-computed evaluation results in AOAI-compatible format. When provided together with `response_items`, the baseline run-and-evaluate phase is skipped.
+        response_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.OutputItem'
+          description: Pre-computed agent response output items. Captures the full trajectory (function calls, tool outputs, messages) from a prior agent run.
+      description: A single evaluation task with input query, expected output, and evaluation criteria.
+    DatasetRef:
+      type: object
+      required:
+        - name
       properties:
         name:
           type: string
           description: Dataset name.
         version:
           type: string
-          description: Dataset version.
-      description: Reference to a versioned Foundry Dataset.
+          description: Dataset version. If not specified, the latest version is used.
+      description: Reference to a registered dataset in the Foundry Dataset Service.
     DatasetType:
       anyOf:
         - type: string
@@ -11663,6 +11685,32 @@ components:
           type: boolean
           description: Whether the eval was successfully deleted.
       description: A deleted evaluation run Object.
+    DeleteMemoryResponse:
+      type: object
+      required:
+        - object
+        - name
+        - memory_id
+        - deleted
+      properties:
+        object:
+          type: string
+          enum:
+            - memory.deleted
+          description: The object type. Always 'memory.deleted'.
+        name:
+          type: string
+          description: The name of the memory store.
+        memory_id:
+          type: string
+          description: The unique ID of the deleted memory item.
+        deleted:
+          type: boolean
+          description: Whether the memory item was successfully deleted.
+      description: Response for deleting a memory item from a memory store.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - MemoryStores=V1Preview
     DeleteMemoryStoreResponse:
       type: object
       required:
@@ -12629,16 +12677,19 @@ components:
       allOf:
         - $ref: '#/components/schemas/InsightResult'
       description: Insights from the evaluation comparison.
-    EvaluationDataGenerationType:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - simple_qna
-            - traces
-            - tool_use
-            - task
-      description: The data generation type.
+    EvaluationCriterion:
+      type: object
+      required:
+        - name
+        - instruction
+      properties:
+        name:
+          type: string
+          description: Criterion name (referenced in evaluation result rows).
+        instruction:
+          type: string
+          description: Natural-language instruction passed to the judge LLM.
+      description: LLM-as-judge evaluation criterion applied to a single task.
     EvaluationDatasetReference:
       type: object
       required:
@@ -12830,164 +12881,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/ScheduleTask'
       description: Evaluation task for the schedule.
-    EvaluationSuiteDataGenerationOptions:
-      type: object
-      properties:
-        type:
-          allOf:
-            - $ref: '#/components/schemas/EvaluationDataGenerationType'
-          description: The data generation type. Defaults to 'simple_qna' if not specified.
-        max_samples:
-          type: integer
-          format: int32
-          minimum: 15
-          maximum: 1000
-          description: 'Maximum number of samples to generate. Valid range: 15-1000.'
-      description: Options for dataset generation within an evaluation suite generation job.
-    EvaluationSuiteGenerationCategory:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - quality
-            - safety
-      description: The category of evaluator generation.
-    EvaluationSuiteGenerationJob:
-      type: object
-      required:
-        - id
-        - status
-        - created_at
-      properties:
-        id:
-          type: string
-          description: Server-assigned unique identifier.
-          readOnly: true
-        inputs:
-          allOf:
-            - $ref: '#/components/schemas/EvaluationSuiteGenerationJobInputs'
-          description: Caller-supplied inputs.
-        result:
-          allOf:
-            - $ref: '#/components/schemas/EvaluationSuiteVersion'
-          description: Result produced on success.
-          readOnly: true
-        status:
-          allOf:
-            - $ref: '#/components/schemas/JobStatus'
-          description: Current lifecycle status.
-          readOnly: true
-        error:
-          allOf:
-            - $ref: '#/components/schemas/OpenAI.Error'
-          description: Error details — populated only on failure.
-          readOnly: true
-        created_at:
-          allOf:
-            - $ref: '#/components/schemas/FoundryTimestamp'
-          description: The timestamp when the job was created, represented in Unix time.
-          readOnly: true
-        finished_at:
-          allOf:
-            - $ref: '#/components/schemas/FoundryTimestamp'
-          description: The timestamp when the job finished, represented in Unix time.
-          readOnly: true
-        usage:
-          allOf:
-            - $ref: '#/components/schemas/EvaluationSuiteGenerationTokenUsage'
-          description: Token consumption summary. Populated on terminal states.
-          readOnly: true
-      description: Evaluation suite generation job resource — a long-running job that generates testing criteria and optionally a dataset from source materials. On success, the result is the persisted EvaluationSuiteVersion.
-    EvaluationSuiteGenerationJobCreate:
-      type: object
-      properties:
-        inputs:
-          allOf:
-            - $ref: '#/components/schemas/EvaluationSuiteGenerationJobInputs'
-          description: Caller-supplied inputs.
-      description: Evaluation suite generation job resource — a long-running job that generates testing criteria and optionally a dataset from source materials. On success, the result is the persisted EvaluationSuiteVersion.
-    EvaluationSuiteGenerationJobInputs:
-      type: object
-      required:
-        - evaluation_suite_name
-        - sources
-        - generation_model
-      properties:
-        evaluation_suite_name:
-          type: string
-          description: The evaluation suite name to create.
-        sources:
-          type: array
-          items:
-            $ref: '#/components/schemas/EvaluationSuiteJobSource'
-          description: Source materials for generation — agent context, prompts, traces, or datasets.
-        generation_model:
-          type: string
-          description: The LLM model to use for rubric and data generation (e.g., 'gpt-4o').
-        category:
-          allOf:
-            - $ref: '#/components/schemas/EvaluationSuiteGenerationCategory'
-          description: 'Category determines the generation focus. Default: quality.'
-          default: quality
-        initialization_parameters:
-          type: object
-          additionalProperties: {}
-          description: |-
-            Optional initialization parameters applied to all generated evaluators.
-            For example, deployment_name for LLM judge model, default threshold.
-        data_generation_options:
-          allOf:
-            - $ref: '#/components/schemas/EvaluationSuiteDataGenerationOptions'
-          description: |-
-            Data generation options. Controls how the evaluation dataset is generated.
-            If omitted, defaults are used (simple_qna, 100 max_samples).
-      description: Caller-supplied inputs for an evaluation suite generation job.
-    EvaluationSuiteGenerationTokenUsage:
-      type: object
-      properties:
-        input_tokens:
-          type: integer
-          format: int64
-          description: Number of input tokens consumed.
-        output_tokens:
-          type: integer
-          format: int64
-          description: Number of output tokens consumed.
-        total_tokens:
-          type: integer
-          format: int64
-          description: Total tokens consumed.
-      description: Token usage summary for an evaluation suite generation job.
-    EvaluationSuiteJobSource:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          allOf:
-            - $ref: '#/components/schemas/EvaluationSuiteJobSourceType'
-          description: The type of source.
-        description:
-          type: string
-          description: Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').
-      discriminator:
-        propertyName: type
-        mapping:
-          prompt: '#/components/schemas/PromptEvaluationSuiteJobSource'
-          agent: '#/components/schemas/AgentEvaluationSuiteJobSource'
-          traces: '#/components/schemas/TracesEvaluationSuiteJobSource'
-          dataset: '#/components/schemas/DatasetEvaluationSuiteJobSource'
-      description: The base source model for evaluation suite generation jobs. Polymorphic over `type`.
-    EvaluationSuiteJobSourceType:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - prompt
-            - agent
-            - traces
-            - dataset
-      description: The supported source types for evaluation suite generation jobs.
     EvaluationSuiteRunRequest:
       type: object
       properties:
@@ -13421,7 +13314,6 @@ components:
         mapping:
           code: '#/components/schemas/CodeBasedEvaluatorDefinition'
           prompt: '#/components/schemas/PromptBasedEvaluatorDefinition'
-          rubrics: '#/components/schemas/RubricBasedEvaluatorDefinition'
       description: Base evaluator configuration with discriminator
     EvaluatorDefinitionType:
       anyOf:
@@ -13433,153 +13325,7 @@ components:
             - prompt_and_code
             - service
             - openai_graders
-            - rubrics
       description: The type of evaluator definition
-    EvaluatorGenerationArtifacts:
-      type: object
-      required:
-        - dataset
-        - kinds
-      properties:
-        dataset:
-          allOf:
-            - $ref: '#/components/schemas/DatasetReference'
-          description: Reference to the single Foundry Dataset (one combined JSONL file, version-aligned to `EvaluatorVersion.version`) holding all artifacts produced by the generation pipeline. Each row in the JSONL carries a `kind` field discriminating its content (e.g. `spec`, `tools`, `context`).
-        kinds:
-          type: array
-          items:
-            type: string
-          description: The kinds of rows present in `dataset`. Always contains `"spec"` (the generated evaluation specification, a Markdown document describing what the evaluator measures). May additionally contain `"tools"` (when the generation pipeline produced or inferred OpenAI tool schemas) and/or `"context"` (when supplementary materials such as file uploads or trace samples were used during generation).
-      description: Service-managed provenance artifacts produced by an evaluator generation job. Present only on EvaluatorVersion resources created via the generation pipeline. The combined-JSONL Foundry Dataset is read-only and resolves to a versioned dataset in a service-reserved namespace.
-    EvaluatorGenerationInputs:
-      type: object
-      required:
-        - name
-        - sources
-        - model
-        - evaluator_name
-      properties:
-        name:
-          type: string
-          description: Display name for this generation job.
-        sources:
-          type: array
-          items:
-            $ref: '#/components/schemas/EvaluatorGenerationJobSource'
-          description: Source materials for generation — agent descriptions, prompts, traces, or datasets. Each entry is an `EvaluatorGenerationJobSource` variant discriminated by `type`.
-        category:
-          allOf:
-            - $ref: '#/components/schemas/EvaluatorCategory'
-          description: "Category determines the rubric generation focus: 'quality' (default) produces quality-focused rubric criteria, 'safety' produces policy-derived safety rubric criteria. Both use the same rubric structure. Singular because quality and safety generation are mutually exclusive pipelines — the output EvaluatorVersion.categories is an array (e.g., ['agents', 'quality'])."
-          default: quality
-        model:
-          type: string
-          description: The LLM model to use for rubric generation (e.g., 'gpt-4o'). Required — users must provide their own model rather than relying on service-owned capacity.
-        evaluator_name:
-          type: string
-          description: The evaluator name to create or update. If an evaluator with this name already exists, the service retrieves the latest version's criteria as context for improvement.
-      description: Caller-supplied inputs for an evaluator generation job.
-    EvaluatorGenerationJob:
-      type: object
-      required:
-        - id
-        - status
-        - created_at
-      properties:
-        id:
-          type: string
-          description: Server-assigned unique identifier.
-          readOnly: true
-        inputs:
-          allOf:
-            - $ref: '#/components/schemas/EvaluatorGenerationInputs'
-          description: Caller-supplied inputs.
-        result:
-          allOf:
-            - $ref: '#/components/schemas/EvaluatorVersion'
-          description: Result produced on success.
-          readOnly: true
-        status:
-          allOf:
-            - $ref: '#/components/schemas/JobStatus'
-          description: Current lifecycle status.
-          readOnly: true
-        error:
-          allOf:
-            - $ref: '#/components/schemas/OpenAI.Error'
-          description: Error details — populated only on failure.
-          readOnly: true
-        created_at:
-          allOf:
-            - $ref: '#/components/schemas/FoundryTimestamp'
-          description: The timestamp when the job was created, represented in Unix time (seconds since January 1, 1970).
-          readOnly: true
-        finished_at:
-          allOf:
-            - $ref: '#/components/schemas/FoundryTimestamp'
-          description: The timestamp when the job finished, represented in Unix time (seconds since January 1, 1970).
-          readOnly: true
-        usage:
-          allOf:
-            - $ref: '#/components/schemas/EvaluatorGenerationTokenUsage'
-          description: Token consumption summary. Populated when the job reaches a terminal state.
-          readOnly: true
-      description: Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion.
-    EvaluatorGenerationJobCreate:
-      type: object
-      properties:
-        inputs:
-          allOf:
-            - $ref: '#/components/schemas/EvaluatorGenerationInputs'
-          description: Caller-supplied inputs.
-      description: Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion.
-    EvaluatorGenerationJobSource:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          allOf:
-            - $ref: '#/components/schemas/EvaluatorGenerationJobSourceType'
-          description: The type of source.
-      discriminator:
-        propertyName: type
-        mapping:
-          prompt: '#/components/schemas/PromptEvaluatorGenerationJobSource'
-          agent: '#/components/schemas/AgentEvaluatorGenerationJobSource'
-          traces: '#/components/schemas/TracesEvaluatorGenerationJobSource'
-          dataset: '#/components/schemas/DatasetEvaluatorGenerationJobSource'
-      description: The base source model for evaluator generation jobs. Polymorphic over `type`.
-    EvaluatorGenerationJobSourceType:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - prompt
-            - agent
-            - traces
-            - dataset
-      description: The supported source types for evaluator generation jobs.
-    EvaluatorGenerationTokenUsage:
-      type: object
-      required:
-        - input_tokens
-        - output_tokens
-        - total_tokens
-      properties:
-        input_tokens:
-          type: integer
-          format: int64
-          description: Number of input (prompt) tokens consumed.
-        output_tokens:
-          type: integer
-          format: int64
-          description: Number of output (completion) tokens generated.
-        total_tokens:
-          type: integer
-          format: int64
-          description: Total tokens consumed (input + output).
-      description: Token consumption summary for an evaluator generation job. Populated when the job reaches a terminal state.
     EvaluatorMetric:
       type: object
       properties:
@@ -13666,11 +13412,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/EvaluatorDefinition'
           description: Definition of the evaluator
-        generation_artifacts:
-          allOf:
-            - $ref: '#/components/schemas/EvaluatorGenerationArtifacts'
-          description: Provenance artifacts from the generation pipeline. Read-only; present only on evaluator versions created via an EvaluatorGenerationJob. Each artifact resolves to a versioned Foundry Dataset.
-          readOnly: true
         created_by:
           type: string
           description: Creator of the evaluator
@@ -13860,46 +13601,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A FabricIQ server-side tool.
-    FileDataGenerationJobOutput:
-      type: object
-      required:
-        - type
-        - id
-        - filename
-      properties:
-        type:
-          type: string
-          enum:
-            - file
-          description: Azure OpenAI file output.
-        id:
-          type: string
-          description: The id of the output Azure OpenAI file.
-          readOnly: true
-        filename:
-          type: string
-          description: The filename of the output Azure OpenAI file.
-          readOnly: true
-      allOf:
-        - $ref: '#/components/schemas/DataGenerationJobOutput'
-      description: Azure OpenAI file output for a data generation job.
-    FileDataGenerationJobSource:
-      type: object
-      required:
-        - type
-        - id
-      properties:
-        type:
-          type: string
-          enum:
-            - file
-          description: The source type for this job, which is File.
-        id:
-          type: string
-          description: Input Azure Open AI file id used for data generation.
-      allOf:
-        - $ref: '#/components/schemas/DataGenerationJobSource'
-      description: File source for data generation jobs — Azure OpenAI file input.
     FileDatasetVersion:
       type: object
       required:
@@ -15109,6 +14810,46 @@ components:
       allOf:
         - $ref: '#/components/schemas/Deployment'
       description: Model Deployment Definition
+    ModelPendingUploadRequest:
+      type: object
+      required:
+        - pendingUploadType
+      properties:
+        pendingUploadId:
+          type: string
+          description: If PendingUploadId is not provided, a random GUID will be used.
+        connectionName:
+          type: string
+          description: Azure Storage Account connection name to use for generating temporary SAS token
+        pendingUploadType:
+          type: string
+          enum:
+            - TemporaryBlobReference
+          description: The type of pending upload. Only TemporaryBlobReference is supported for models.
+      description: Represents a request for a pending upload of a model version.
+    ModelPendingUploadResponse:
+      type: object
+      required:
+        - blobReference
+        - pendingUploadId
+        - pendingUploadType
+      properties:
+        blobReference:
+          allOf:
+            - $ref: '#/components/schemas/BlobReference'
+          description: Container-level read, write, list SAS.
+        pendingUploadId:
+          type: string
+          description: ID for this upload request.
+        version:
+          type: string
+          description: Version of asset to be created if user did not specify version when initially creating upload
+        pendingUploadType:
+          type: string
+          enum:
+            - TemporaryBlobReference
+          description: The type of pending upload. Only TemporaryBlobReference is supported for models.
+      description: Represents the response for a model pending upload request.
     ModelSamplingParams:
       type: object
       properties:
@@ -26328,6 +26069,11 @@ components:
             - $ref: '#/components/schemas/AgentReference'
           nullable: true
           description: The agent used for this response
+        content_filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentFilterResult'
+          description: The content filter evaluation results.
       title: The response object
     OpenAI.ResponseAudioDeltaEvent:
       type: object
@@ -30034,6 +29780,405 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: The output of an OpenAPI tool call.
+    OptimizationAgentDefinition:
+      type: object
+      required:
+        - agent_name
+      properties:
+        agent_name:
+          type: string
+          description: Registered Foundry agent name. Required — bare-model mode is not supported.
+        agent_version:
+          type: string
+          description: Pinned agent version. Defaults to latest if omitted.
+        model:
+          type: string
+          description: Model deployment name (e.g., 'gpt-4o'). Optional when agent_name is set — the agent definition provides the model.
+        system_prompt:
+          type: string
+          description: System prompt / instructions override. When set, used as the baseline instructions for the agent.
+        skills:
+          type: array
+          items:
+            $ref: '#/components/schemas/OptimizationAgentSkill'
+          description: Optional named skills the optimizer may tune. Tool descriptions and parameters.
+      description: The agent definition being optimized. Identifies the Foundry agent and optional configuration overrides.
+    OptimizationAgentSkill:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Skill name (matches the tool name on the agent).
+        description:
+          type: string
+          description: Free-form description used as the seed when tuning skill descriptions.
+      description: A named skill on the agent that the optimizer may tune.
+    OptimizationCandidate:
+      type: object
+      required:
+        - name
+        - config
+        - mutations
+        - rationale
+        - avg_score
+        - avg_tokens
+        - pass_rate
+        - task_scores
+        - is_pareto_optimal
+      properties:
+        candidate_id:
+          type: string
+          description: Server-assigned candidate identifier. Use with `GET /candidates/{id}` sub-endpoints.
+        name:
+          type: string
+          description: Display name of the candidate (e.g., 'baseline', 'instruction-v2').
+        config:
+          allOf:
+            - $ref: '#/components/schemas/OptimizationAgentDefinition'
+          description: The agent configuration that produced this candidate.
+        mutations:
+          type: object
+          additionalProperties: {}
+          description: "What was mutated from the baseline (e.g., {instructions: 'new prompt'})."
+        rationale:
+          type: string
+          description: Strategy rationale — why this candidate was generated.
+        avg_score:
+          type: number
+          format: double
+          description: Average composite score across all tasks.
+        avg_tokens:
+          type: number
+          format: double
+          description: Average token usage across all tasks.
+        pass_rate:
+          type: number
+          format: double
+          description: Fraction of tasks that met the pass threshold.
+        task_scores:
+          type: array
+          items:
+            $ref: '#/components/schemas/OptimizationTaskResult'
+          description: Individual task-level scores.
+        is_pareto_optimal:
+          type: boolean
+          description: Whether this candidate is on the Pareto frontier (score vs cost).
+        sample_avg_score:
+          type: number
+          format: double
+          description: Average score from sampled evaluation (null if full dataset was used).
+        sample_size:
+          type: integer
+          format: int32
+          description: Number of tasks in the sample (null if full dataset was used).
+        evaluation_type:
+          type: string
+          description: "'sample' if scored on a subset, 'full' if re-evaluated on the full dataset."
+        strategy:
+          allOf:
+            - $ref: '#/components/schemas/OptimizationStrategy'
+          description: Identifies the strategy that produced this candidate.
+        eval_id:
+          type: string
+          description: Foundry evaluation identifier used to score this candidate.
+        eval_run_id:
+          type: string
+          description: Foundry evaluation run identifier for this candidate's scoring run.
+      description: Aggregated evaluation result for a single candidate agent configuration across all tasks.
+    OptimizationJob:
+      type: object
+      required:
+        - id
+        - status
+        - created_at
+      properties:
+        id:
+          type: string
+          description: Server-assigned unique identifier.
+          readOnly: true
+        inputs:
+          allOf:
+            - $ref: '#/components/schemas/OptimizationJobInputs'
+          description: Caller-supplied inputs.
+        result:
+          allOf:
+            - $ref: '#/components/schemas/OptimizationJobResult'
+          description: Result produced on success.
+          readOnly: true
+        status:
+          allOf:
+            - $ref: '#/components/schemas/JobStatus'
+          description: Current lifecycle status.
+          readOnly: true
+        error:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.Error'
+          description: Error details — populated only on failure.
+          readOnly: true
+        created_at:
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
+          description: The timestamp when the job was created, represented in Unix time.
+          readOnly: true
+        updated_at:
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
+          description: The timestamp when the job was last updated, represented in Unix time.
+          readOnly: true
+        progress:
+          allOf:
+            - $ref: '#/components/schemas/OptimizationJobProgress'
+          description: Progress while in flight. Absent in terminal states.
+          readOnly: true
+      description: Agent optimization job resource — a long-running job that optimizes an agent's configuration (instructions, model, skills) to maximize evaluation scores. On success, the result contains scored candidates.
+    OptimizationJobInputs:
+      type: object
+      required:
+        - agent
+      properties:
+        agent:
+          allOf:
+            - $ref: '#/components/schemas/OptimizationAgentDefinition'
+          description: The agent (and pinned version) being optimized.
+        dataset:
+          type: array
+          items:
+            $ref: '#/components/schemas/DatasetItem'
+          description: Inline evaluation dataset. Mutually exclusive with `train_dataset_reference`.
+        train_dataset_reference:
+          allOf:
+            - $ref: '#/components/schemas/DatasetRef'
+          description: Reference to a registered training dataset. Mutually exclusive with `dataset`.
+        validation_dataset_reference:
+          allOf:
+            - $ref: '#/components/schemas/DatasetRef'
+          description: Optional held-out validation dataset for measuring generalization of the final candidate.
+        evaluators:
+          type: array
+          items:
+            type: string
+          description: "Job-level evaluators (referenced by `name`). Per-task `criteria` may override. Default: ['task_adherence']."
+        criteria:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluationCriterion'
+          description: Job-level evaluation criteria. Applied to all tasks unless overridden by per-task `criteria`.
+        options:
+          allOf:
+            - $ref: '#/components/schemas/OptimizationOptions'
+          description: Tuning knobs and run-mode.
+      description: Caller-supplied inputs for an optimization job.
+    OptimizationJobProgress:
+      type: object
+      required:
+        - current_strategy
+        - current_iteration
+        - tasks_completed
+        - tasks_total
+        - best_score
+        - elapsed_seconds
+      properties:
+        current_strategy:
+          allOf:
+            - $ref: '#/components/schemas/OptimizationStrategy'
+          description: Strategy currently being explored.
+        current_iteration:
+          type: integer
+          format: int32
+          description: 1-based current iteration index.
+        tasks_completed:
+          type: integer
+          format: int32
+          description: Tasks evaluated so far this iteration.
+        tasks_total:
+          type: integer
+          format: int32
+          description: Total tasks scheduled this iteration.
+        best_score:
+          type: number
+          format: double
+          description: Best score observed so far across all candidates.
+        elapsed_seconds:
+          type: number
+          format: double
+          description: Wall-clock time elapsed since the job began executing.
+      description: In-flight progress; only populated while status is `queued` or `in_progress`.
+    OptimizationJobResult:
+      type: object
+      properties:
+        baseline:
+          allOf:
+            - $ref: '#/components/schemas/OptimizationCandidate'
+          description: Evaluation scores for the original (un-optimized) agent configuration.
+        best:
+          allOf:
+            - $ref: '#/components/schemas/OptimizationCandidate'
+          description: The highest-scoring candidate found during optimization.
+        candidates:
+          type: array
+          items:
+            $ref: '#/components/schemas/OptimizationCandidate'
+          description: All evaluated candidates including baseline.
+        pareto_frontier:
+          type: array
+          items:
+            $ref: '#/components/schemas/OptimizationCandidate'
+          description: Candidates on the Pareto frontier (maximize score, minimize cost).
+        validation_score:
+          allOf:
+            - $ref: '#/components/schemas/OptimizationCandidate'
+          description: Score of the best candidate on the held-out validation dataset. Null when no validation dataset was provided.
+        options:
+          allOf:
+            - $ref: '#/components/schemas/OptimizationOptions'
+          description: The options used for this optimization run.
+        sample_size:
+          type: integer
+          format: int32
+          description: Number of tasks sampled during optimization iterations (null if sampling was not used).
+        warnings:
+          type: array
+          items:
+            type: string
+          description: Non-fatal warnings from the optimization run (e.g., strategy failures that were skipped).
+        all_strategies_failed:
+          type: boolean
+          description: True when all optimization strategies failed — only the baseline was evaluated.
+      description: Terminal-state result body. Populated when `status` is `succeeded` or `failed`.
+    OptimizationMode:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - optimize
+      description: Run mode for an optimization job.
+    OptimizationOptions:
+      type: object
+      properties:
+        strategies:
+          type: array
+          items:
+            $ref: '#/components/schemas/OptimizationStrategy'
+          description: "Strategies to apply this run. Default: ['instruction']."
+          default:
+            - instruction
+        budget:
+          type: integer
+          format: int32
+          description: 'Total candidate generation budget (number of candidates explored). Default: 10.'
+          default: 10
+        max_iterations:
+          type: integer
+          format: int32
+          description: 'Maximum optimization iterations per strategy. Default: 5.'
+          default: 5
+        tasks_per_iteration:
+          type: integer
+          format: int32
+          description: 'Tasks sampled per iteration (mutation step input). Default: service-decided (auto-computed).'
+        max_reflection_tasks:
+          type: integer
+          format: int32
+          description: 'Maximum tasks fed into the reflective-mutation LLM per iteration. Default: 5.'
+          default: 5
+        min_improvement:
+          type: number
+          format: double
+          description: 'Minimum score improvement between iterations to continue (plateau detection). Default: 0.005.'
+          default: 0.005
+        pass_threshold:
+          type: number
+          format: double
+          description: 'Composite score threshold for a task to be considered passing. Default: 0.5.'
+          default: 0.5
+        improvement_threshold:
+          type: number
+          format: double
+          description: 'Target average score at which optimization stops early (quality ceiling). Default: 0.95.'
+          default: 0.95
+        mode:
+          allOf:
+            - $ref: '#/components/schemas/OptimizationMode'
+          description: Run mode.
+        eval_model:
+          type: string
+          description: Foundry deployment name to use as the LLM-as-judge evaluation model. Required.
+        reflection_model:
+          type: string
+          description: Optional model deployment for strategy reflection (instruction rewriting, skill generation). Falls back to `eval_model` if unset.
+        task_timeout_seconds:
+          type: integer
+          format: int32
+          description: 'Per-task timeout for agent execution. Default: 300 seconds (5 minutes).'
+          default: 300
+        keep_versions:
+          type: boolean
+          description: 'If true, retain temporary candidate-evaluation agent versions for inspection. Default: false.'
+          default: false
+      description: Tuning knobs and run-mode for an optimization job.
+    OptimizationStrategy:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - instruction
+            - model
+            - skill
+      description: Optimization strategy dimension.
+    OptimizationTaskResult:
+      type: object
+      required:
+        - task_name
+        - scores
+        - composite_score
+        - tokens
+        - duration_seconds
+        - passed
+      properties:
+        task_name:
+          type: string
+          description: Task name (from the dataset).
+        query:
+          type: string
+          description: The user query / input for the task.
+        scores:
+          type: object
+          additionalProperties:
+            type: number
+            format: double
+          description: Per-evaluator scores keyed by evaluator name.
+        composite_score:
+          type: number
+          format: double
+          description: Composite score combining all evaluator scores.
+        tokens:
+          type: integer
+          format: int32
+          description: Total tokens consumed during the agent run for this task.
+        duration_seconds:
+          type: number
+          format: double
+          description: Wall-clock seconds for this task's agent execution.
+        passed:
+          type: boolean
+          description: Whether the task met the pass threshold.
+        error_message:
+          type: string
+          description: Error message if the task failed during execution.
+        rationales:
+          type: object
+          additionalProperties:
+            type: string
+          description: Per-evaluator reasoning keyed by evaluator name.
+        response:
+          type: string
+          description: Raw agent response text.
+        run_id:
+          type: string
+          description: Identifier of the agent run that produced this result.
+      description: Per-task evaluation result for a single candidate.
     OtlpTelemetryEndpoint:
       type: object
       required:
@@ -30289,8 +30434,8 @@ components:
         pendingUploadType:
           type: string
           enum:
-            - TemporaryBlobReference
-          description: TemporaryBlobReference is the only supported type.
+            - BlobReference
+          description: The type of pending upload.
       description: Represents a request for a pending upload.
     PendingUploadResponse:
       type: object
@@ -30312,8 +30457,8 @@ components:
         pendingUploadType:
           type: string
           enum:
-            - TemporaryBlobReference
-          description: TemporaryBlobReference is the only supported type
+            - BlobReference
+          description: The type of pending upload.
       description: Represents the response for a pending upload request
     PromptAgentDefinition:
       type: object
@@ -30409,66 +30554,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorDefinition'
       description: Prompt-based evaluator
-    PromptDataGenerationJobSource:
-      type: object
-      required:
-        - type
-        - prompt
-      properties:
-        description:
-          type: string
-          description: Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').
-        type:
-          type: string
-          enum:
-            - prompt
-          description: The source type for this source, which is Prompt.
-        prompt:
-          type: string
-          description: Inline prompt text (e.g., agent description, policy text, supplementary context).
-      allOf:
-        - $ref: '#/components/schemas/DataGenerationJobSource'
-      description: Prompt source for data generation jobs — inline text provided by the user.
-    PromptEvaluationSuiteJobSource:
-      type: object
-      required:
-        - type
-        - prompt
-      properties:
-        description:
-          type: string
-          description: Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').
-        type:
-          type: string
-          enum:
-            - prompt
-          description: The source type for this source, which is Prompt.
-        prompt:
-          type: string
-          description: Inline prompt text (e.g., agent description, policy text, supplementary context).
-      allOf:
-        - $ref: '#/components/schemas/EvaluationSuiteJobSource'
-      description: Prompt source for evaluation suite generation jobs — inline text provided by the user.
-    PromptEvaluatorGenerationJobSource:
-      type: object
-      required:
-        - type
-        - prompt
-      properties:
-        description:
-          type: string
-          description: Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').
-        type:
-          type: string
-          enum:
-            - prompt
-          description: The source type for this source, which is Prompt.
-        prompt:
-          type: string
-          description: Inline prompt text (e.g., agent description, policy text, supplementary context).
-      allOf:
-        - $ref: '#/components/schemas/EvaluatorGenerationJobSource'
-      description: Prompt source for evaluator generation jobs — inline text provided by the user.
     ProtocolVersionRecord:
       type: object
       required:
@@ -30772,48 +30857,6 @@ components:
             - SensitiveDataLeakage
             - TaskAdherence
       description: Risk category for the attack objective.
-    RubricBasedEvaluatorDefinition:
-      type: object
-      required:
-        - type
-        - rubric_criteria
-      properties:
-        type:
-          type: string
-          enum:
-            - rubrics
-        rubric_criteria:
-          type: array
-          items:
-            $ref: '#/components/schemas/RubricCriterion'
-          description: "Rubric criteria — the scoring blueprint used by the LLM judge. Quality evaluators include a non-editable residual criterion with rubric_id 'general_quality' (always_applicable: true); safety evaluators include 'general_policy_compliance'. Both use the same rubric structure."
-      allOf:
-        - $ref: '#/components/schemas/EvaluatorDefinition'
-      description: Rubric-based evaluator definition — stores rubric criteria produced by the generate API. Used for both quality and safety evaluators.
-    RubricCriterion:
-      type: object
-      required:
-        - rubric_id
-        - description
-        - weight
-      properties:
-        rubric_id:
-          type: string
-          description: Stable identifier for this rubric criterion (snake_case, e.g., `correct_resolution`). Required. Provided by the user when manually creating a rubric evaluator or during human-in-the-loop review of a generated catalog; the generation pipeline produces an initial value the user can edit. Editable when saving new versions.
-        description:
-          type: string
-          description: What this criterion measures (e.g., 'Correctly identifies the user's reservation intent and pursues the appropriate workflow').
-        weight:
-          type: integer
-          format: int32
-          minimum: 1
-          maximum: 10
-          description: Relative weight of this criterion (1-10). The generation pipeline assigns exactly one criterion weight 8-10; all others use 1-6. User edits are not constrained by this heuristic.
-        always_applicable:
-          type: boolean
-          description: When true, the LLM judge always scores this criterion regardless of relevance (skips applicability assessment). The service-generated general quality/policy criterion has this set to true and is non-editable. Users may set this on their own custom criteria.
-          default: false
-      description: A single rubric criterion — one measurable quality dimension in an evaluator's scoring blueprint.
     SASCredentials:
       type: object
       required:
@@ -31169,32 +31212,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: The input definition information for a sharepoint tool as used to configure an agent.
-    SimpleQnADataGenerationJobOptions:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - simple_qna
-          description: The data generation job type, which is SimpleQnA for this model.
-        question_types:
-          type: array
-          items:
-            $ref: '#/components/schemas/SimpleQnAFineTuningQuestionType'
-          description: The question types to generate. Used only for fine-tuning scenarios.
-      allOf:
-        - $ref: '#/components/schemas/DataGenerationJobOptions'
-      description: The options for a data generation job with SimpleQnA type.
-    SimpleQnAFineTuningQuestionType:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - short_answer
-            - long_answer
-      description: The supported question types for SimpleQnA data generation jobs used for fine-tuning scenarios.
     SkillObject:
       type: object
       required:
@@ -31678,19 +31695,6 @@ components:
           type: string
           description: A project connection in a ToolProjectConnectionList attached to this tool.
       description: A project connection resource.
-    ToolUseFineTuningDataGenerationJobOptions:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - tool_use
-          description: The data generation job type, which is ToolUse for this model.
-      allOf:
-        - $ref: '#/components/schemas/DataGenerationJobOptions'
-      description: The options for a data generation job with ToolUse type. Used only for fine-tuning scenarios.
     ToolboxObject:
       type: object
       required:
@@ -31836,133 +31840,6 @@ components:
             - agent_filter
             - agent_smart_filter
       description: Specifies the type of trace source used to select traces for evaluation.
-    TracesDataGenerationJobOptions:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - traces
-          description: The data generation job type, which is Traces for this model.
-      allOf:
-        - $ref: '#/components/schemas/DataGenerationJobOptions'
-      description: The options for a data generation job with Traces type.
-    TracesDataGenerationJobSource:
-      type: object
-      required:
-        - type
-        - agent_name
-      properties:
-        description:
-          type: string
-          description: Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').
-        type:
-          type: string
-          enum:
-            - traces
-          description: The source type for this source, which is Traces.
-        agent_id:
-          type: string
-          description: The unique agent ID used to filter traces. Optional — when omitted, traces are filtered by `agent_name` (and `agent_version` if specified).
-        agent_name:
-          type: string
-          description: The agent name to fetch traces for.
-        agent_version:
-          type: string
-          description: The agent version. If not specified, traces for ALL versions of the agent are included within the time window.
-        start_time:
-          allOf:
-            - $ref: '#/components/schemas/FoundryTimestamp'
-          description: Start of the time window (Unix timestamp in seconds) for fetching traces.
-        end_time:
-          allOf:
-            - $ref: '#/components/schemas/FoundryTimestamp'
-          description: End of the time window (Unix timestamp in seconds). Defaults to current time.
-        max_traces:
-          type: integer
-          format: int32
-          description: Maximum number of traces to retrieve.
-      allOf:
-        - $ref: '#/components/schemas/DataGenerationJobSource'
-      description: Traces source for data generation jobs — conversation traces from Application Insights.
-    TracesEvaluationSuiteJobSource:
-      type: object
-      required:
-        - type
-        - agent_name
-      properties:
-        description:
-          type: string
-          description: Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').
-        type:
-          type: string
-          enum:
-            - traces
-          description: The source type for this source, which is Traces.
-        agent_id:
-          type: string
-          description: The unique agent ID used to filter traces. Optional — when omitted, traces are filtered by `agent_name` (and `agent_version` if specified).
-        agent_name:
-          type: string
-          description: The agent name to fetch traces for.
-        agent_version:
-          type: string
-          description: The agent version. If not specified, traces for ALL versions of the agent are included within the time window.
-        start_time:
-          allOf:
-            - $ref: '#/components/schemas/FoundryTimestamp'
-          description: Start of the time window (Unix timestamp in seconds) for fetching traces.
-        end_time:
-          allOf:
-            - $ref: '#/components/schemas/FoundryTimestamp'
-          description: End of the time window (Unix timestamp in seconds). Defaults to current time.
-        max_traces:
-          type: integer
-          format: int32
-          description: Maximum number of traces to retrieve.
-      allOf:
-        - $ref: '#/components/schemas/EvaluationSuiteJobSource'
-      description: Traces source for evaluation suite generation jobs — conversation traces from Application Insights.
-    TracesEvaluatorGenerationJobSource:
-      type: object
-      required:
-        - type
-        - agent_name
-      properties:
-        description:
-          type: string
-          description: Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').
-        type:
-          type: string
-          enum:
-            - traces
-          description: The source type for this source, which is Traces.
-        agent_id:
-          type: string
-          description: The unique agent ID used to filter traces. Optional — when omitted, traces are filtered by `agent_name` (and `agent_version` if specified).
-        agent_name:
-          type: string
-          description: The agent name to fetch traces for.
-        agent_version:
-          type: string
-          description: The agent version. If not specified, traces for ALL versions of the agent are included within the time window.
-        start_time:
-          allOf:
-            - $ref: '#/components/schemas/FoundryTimestamp'
-          description: Start of the time window (Unix timestamp in seconds) for fetching traces.
-        end_time:
-          allOf:
-            - $ref: '#/components/schemas/FoundryTimestamp'
-          description: End of the time window (Unix timestamp in seconds). Defaults to current time.
-        max_traces:
-          type: integer
-          format: int32
-          description: Maximum number of traces to retrieve.
-      allOf:
-        - $ref: '#/components/schemas/EvaluatorGenerationJobSource'
-      description: Traces source for evaluator generation jobs — conversation traces from Application Insights.
     TracesPreviewEvalRunDataSource:
       type: object
       required:
