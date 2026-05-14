@@ -141,11 +141,8 @@ else {
       }
     }
 
-    # Extract path between "specification/" and "/(preview|stable)", the preview|stable segment,
-    # and the API version segment
-    if ($file -match "specification/(?<servicePath>[^/]+/($SpecType).*?)/(?<previewOrStable>preview|stable)/(?<apiVersion>[^/]+)/[^/]+\.json$") {
-      $servicePath = $Matches["servicePath"]
-      $previewOrStable = $Matches["previewOrStable"]
+    # Extract path to API version (between "specification" and swagger filename)
+    if ($file -match "specification/(?<apiVersion>[^/]+/($SpecType).*?/(preview|stable)/[^/]+)/[^/]+\.json$") {
       $apiVersion = $Matches["apiVersion"]
     }
     else {
@@ -154,41 +151,35 @@ else {
       exit 1
     }
 
-    function Invoke-CachedHead($url) {
-      # Avoid conflict with pipeline secret
-      $logUrl = $url -replace '^https://', ''
-      LogInfo "  Checking $logUrl"
+    $urlToApiVersion = "https://github.com/Azure/azure-rest-api-specs/tree/main/specification/$apiVersion"
 
-      $status = $responseCache[$url]
-      if ($null -ne $status) {
-        LogInfo "    Found in cache"
-      }
-      else {
-        LogInfo "    Not found in cache, making web request"
-        try {
-          $resp = Invoke-WebRequest -Uri $url -Method Head -SkipHttpErrorCheck
-          $status = $resp.StatusCode
-          $responseCache[$url] = $status
-        }
-        catch {
-          LogError "Exception making web request to ${logUrl}: $_"
-          LogJobFailure
-          exit 1
-        }
-      }
+    # Avoid conflict with pipeline secret
+    $logUrlToApiVersion = $urlToApiVersion -replace '^https://', ''
 
-      LogInfo "    Status: $status"
-      return $status
+    LogInfo "  Checking $logUrlToApiVersion"
+
+    $responseStatus = $responseCache[$urlToApiVersion];
+    if ($null -ne $responseStatus) {
+      LogInfo "    Found in cache"
+    }
+    else {
+      LogInfo "    Not found in cache, making web request"
+      try {
+        $response = Invoke-WebRequest -Uri $urlToApiVersion -Method Head -SkipHttpErrorCheck
+        $responseStatus = $response.StatusCode
+        $responseCache[$urlToStableFolder] = $responseStatus
+      }
+      catch {
+        LogError "Exception making web request to ${logUrlToApiVersion}: $_"
+        LogJobFailure
+        exit 1
+      }
     }
 
-    # Check whether this specific API version already exists in main.  If not, it is a new
-    # API version and must use TypeSpec.
-    $urlToApiVersion = "https://github.com/Azure/azure-rest-api-specs/tree/main/specification/$servicePath/$previewOrStable/$apiVersion"
-    $logUrlToApiVersion = $urlToApiVersion -replace '^https://', ''
-    $apiVersionStatus = Invoke-CachedHead $urlToApiVersion
+    LogInfo "    Status: $responseStatus"
 
-    if ($apiVersionStatus -eq 200) {
-      LogInfo "  Branch 'main' contains path '$servicePath/$previewOrStable/$apiVersion', so API version already exists and is not required to use TypeSpec"
+    if ($responseStatus -eq 200) {
+      LogInfo "  Branch 'main' contains path '$apiVersion', so API version already exists and is not required to use TypeSpec"
 
       $warning = "WARNING: This PR uses OpenAPI / Swagger. All Azure services are required to convert to TypeSpec by March 30, 2026. PRs not using TypeSpec will be blocked after that date. Starting July 1, 2026, all SDKs will be generated from TypeSpec as the autorest toolchain is being retired. Please reach out to tspconversion@service.microsoft.com with any questions and see http://aka.ms/azsdk/typespec for more details on TypeSpec."
       LogWarningForFile $file $warning
@@ -198,12 +189,12 @@ else {
         Add-Content -Path $env:GITHUB_OUTPUT -Value "brownfield=true"
       }
     }
-    elseif ($apiVersionStatus -eq 404) {
-      LogInfo "  Branch 'main' does not contain path '$servicePath/$previewOrStable/$apiVersion', so API version is new and must use TypeSpec"
+    elseif ($responseStatus -eq 404) {
+      LogInfo "  Branch 'main' does not contain path '$serviceApiVersion', so API version is new and must use TypeSpec"
       $pathsWithErrors += $file
     }
     else {
-      LogError "Unexpected response from ${logUrlToApiVersion}: ${apiVersionStatus}"
+      LogError "Unexpected response from ${logUrlToApiVersion}: ${responseStatus}"
       LogJobFailure
       exit 1
     }
@@ -217,7 +208,7 @@ if ($pathsWithErrors.Count -gt 0) {
   LogJobFailure
 
   foreach ($path in $pathsWithErrors) {
-    LogErrorForFile $path "OpenAPI was not generated from TypeSpec, and spec appears to be new"
+    LogErrorForFile $path "OpenAPI was not generated from TypeSpec, and API version appears to be new"
   }
   exit 1
 }
