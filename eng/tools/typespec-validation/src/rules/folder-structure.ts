@@ -14,18 +14,11 @@ debug.enable("simple-git");
 export class FolderStructureRule implements Rule {
   readonly name = "FolderStructure";
   readonly description = "Verify spec directory's folder structure and naming conventions.";
+  readonly suppressable = true;
   async execute(folder: string): Promise<RuleResult> {
     const suppressions = (await getSuppressions(folder)).filter((s) =>
       s.rules?.includes(this.name),
     );
-
-    const suppressAll = suppressions.find(
-      (s) => s.subRules === undefined || s.subRules.length === 0,
-    );
-
-    if (suppressAll) {
-      return { success: true, stdOutput: `suppressed: ${suppressAll.reason}` };
-    }
 
     let success = true;
     let stdOutput = "";

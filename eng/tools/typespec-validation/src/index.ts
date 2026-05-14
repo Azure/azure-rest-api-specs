@@ -70,6 +70,17 @@ export async function main() {
   for (let i = 0; i < rules.length; i++) {
     const rule = rules[i];
     console.log("\nExecuting rule: " + rule.name);
+
+    if (rule.suppressable) {
+      const ruleSuppressions = suppressions.filter(
+        (s) => s.rules?.includes(rule.name) && (!s.subRules || s.subRules.length === 0),
+      );
+      if (ruleSuppressions.length > 0) {
+        console.log(`  Suppressed: ${ruleSuppressions[0].reason}`);
+        continue;
+      }
+    }
+
     const result = await rule.execute(absolutePath);
     if (result.stdOutput) console.log(result.stdOutput);
     if (!result.success) {
