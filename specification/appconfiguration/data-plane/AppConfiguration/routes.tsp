@@ -467,3 +467,118 @@ op getOperationDetails is AppConfigOperation<
   },
   OperationDetails
 >;
+
+// --- Schema operations (added in 2026-10-01-preview) ---
+
+alias SchemasRequestParams = {
+  ...SyncTokenHeader;
+  ...AfterHeader;
+  ...IfMatchHeader;
+  ...IfNoneMatchHeader;
+  ...SelectQueryParam<SchemaFields>;
+
+  @doc("A filter for the name of the returned schemas.")
+  @query("name")
+  name?: string;
+
+  @doc("A filter for the status of the returned schemas.")
+  @query("status")
+  status?: SchemaStatus;
+
+  @doc("Set to 'true' to return built-in schemas.")
+  @query("builtIn")
+  builtIn?: boolean;
+
+  @doc("When set to 'kv', resolves the effective schema for a key/label.")
+  @query("target")
+  target?: string;
+
+  @doc("The key to use when resolving the effective schema (required when target=kv).")
+  @query("key")
+  key?: string;
+
+  @doc("The label to use when resolving the effective schema (optional when target=kv).")
+  @query("label")
+  label?: string;
+
+  #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Consistent with other tag filters."
+  @doc("A filter used to query by tags.")
+  @query(#{ name: "tags", explode: true })
+  tags?: string[];
+};
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Consistent naming"
+@summary("Gets a list of schemas.")
+@doc("Gets a list of schemas.")
+@added(Versions.v2026_10_01_preview)
+op getSchemas is Foundations.ResourceList<
+  Schema,
+  SchemasRequestParams,
+  SchemaListResult & SyncTokenHeader & ContentTypeHeader<"application/json">,
+  {},
+  Error
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+@summary("Gets a single schema.")
+@doc("Gets a single schema.")
+@route("/schemas/{schemaName}")
+@get
+@added(Versions.v2026_10_01_preview)
+op getSchema is AppConfigOperation<
+  {
+    ...SchemaNamePathParam<"The name of the schema to retrieve.">;
+    ...SyncTokenHeader;
+    ...IfMatchHeader;
+    ...IfNoneMatchHeader;
+    ...SelectQueryParam<SchemaFields>;
+  },
+  Body<Schema> &
+    AppConfigResponseHeaders &
+    ContentTypeHeader<"application/json">
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+@summary("Creates or updates a schema.")
+@doc("Creates or updates a schema.")
+@route("/schemas/{schemaName}")
+@put
+@added(Versions.v2026_10_01_preview)
+op putSchema is AppConfigOperation<
+  {
+    ...SchemaNamePathParam<"The name of the schema to create or update.">;
+    ...SyncTokenHeader;
+    ...IfMatchHeader;
+    ...IfNoneMatchHeader;
+
+    @doc("The schema resource to create or update.")
+    @body
+    entity: Schema;
+  },
+  Body<Schema> &
+    AppConfigResponseHeaders &
+    ContentTypeHeader<"application/json">
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+@summary("Deletes a schema.")
+@doc("Deletes a schema.")
+@route("/schemas/{schemaName}")
+@delete
+@added(Versions.v2026_10_01_preview)
+op deleteSchema is AppConfigOperation<
+  {
+    ...SchemaNamePathParam<"The name of the schema to delete.">;
+    ...SyncTokenHeader;
+    ...IfMatchHeader;
+  },
+  (Body<Schema> &
+    AppConfigResponseHeaders &
+    ContentTypeHeader<"application/json">) | {
+    @statusCode
+    statusCode: 204;
+
+    ...SyncTokenHeader;
+  }
+>;

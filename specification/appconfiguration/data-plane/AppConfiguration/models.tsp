@@ -1,9 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.Core;
 
 namespace AzureAppConfiguration;
@@ -437,4 +439,149 @@ alias NamePathParam<TDoc extends valueof string> = {
   @maxLength(256)
   @path
   name: string;
+};
+
+// --- Schema resource models (added in 2026-10-01-preview) ---
+
+@doc("Schema fields.")
+@added(Versions.v2026_10_01_preview)
+union SchemaFields {
+  @doc("Id field.")
+  id: "id",
+
+  @doc("Name field.")
+  name: "name",
+
+  @doc("Description field.")
+  description: "description",
+
+  @doc("Type field.")
+  type: "type",
+
+  @doc("Status field.")
+  status: "status",
+
+  @doc("Target field.")
+  target: "target",
+
+  @doc("Scope field.")
+  scope: "scope",
+
+  @doc("Tags field.")
+  tags: "tags",
+
+  @doc("JSON schema field.")
+  @encodedName("application/json", "json_schema")
+  jsonSchema: "json_schema",
+
+  @doc("Etag field.")
+  etag: "etag",
+
+  string,
+}
+
+@doc("Schema status.")
+@added(Versions.v2026_10_01_preview)
+union SchemaStatus {
+  @doc("Enabled")
+  enabled: "enabled",
+
+  @doc("Disabled")
+  disabled: "disabled",
+
+  string,
+}
+
+@doc("Schema type.")
+@added(Versions.v2026_10_01_preview)
+union SchemaType {
+  @doc("Custom user-defined schema.")
+  custom: "custom",
+
+  @doc("Built-in system-provided schema.")
+  builtIn: "builtIn",
+
+  string,
+}
+
+@doc("Schema target type.")
+@added(Versions.v2026_10_01_preview)
+union SchemaTarget {
+  @doc("Key-value target.")
+  kv: "kv",
+
+  @doc("No target.")
+  none: "",
+
+  string,
+}
+
+@doc("The scope of a schema resource.")
+@added(Versions.v2026_10_01_preview)
+model SchemaScope {
+  @doc("The key pattern for the schema scope.")
+  key: string;
+
+  @doc("The label pattern for the schema scope.")
+  label?: string;
+}
+
+@doc("The result of a schema list request.")
+@added(Versions.v2026_10_01_preview)
+model SchemaListResult {
+  @doc("The collection value.")
+  @pageItems
+  items?: Schema[];
+
+  @doc("The URI that can be used to request the next set of paged results.")
+  @nextLink
+  `@nextLink`?: string;
+}
+
+@doc("A schema resource used for write-time validation of key-values.")
+@resource("schemas")
+@added(Versions.v2026_10_01_preview)
+model Schema {
+  @doc("The unique identifier of the schema.")
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  @key
+  @doc("The name of the schema.")
+  @visibility(Lifecycle.Read)
+  name: string;
+
+  @doc("A description of the schema.")
+  description?: string;
+
+  @doc("The type of the schema.")
+  @visibility(Lifecycle.Read)
+  type?: SchemaType;
+
+  @doc("The status of the schema.")
+  status?: SchemaStatus;
+
+  @doc("The target resource type for the schema. Required when scope is present.")
+  target?: SchemaTarget;
+
+  @doc("The scope of the schema. Required when target is present.")
+  scope?: SchemaScope;
+
+  @doc("The tags of the schema.")
+  tags?: Record<string>;
+
+  @doc("The JSON Schema definition.")
+  @encodedName("application/json", "json_schema")
+  jsonSchema: Record<unknown>;
+
+  @doc("A value representing the current state of the resource.")
+  @visibility(Lifecycle.Read)
+  etag?: string;
+}
+
+alias SchemaNamePathParam<TDoc extends valueof string> = {
+  @doc(TDoc)
+  @maxLength(256)
+  @path
+  schemaName: string;
 };
