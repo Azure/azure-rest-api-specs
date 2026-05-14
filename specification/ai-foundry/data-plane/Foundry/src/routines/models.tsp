@@ -259,7 +259,7 @@ model InvokeAgentInvocationsApiDispatchPayload extends RoutineDispatchPayload {
   input?: string;
 }
 
-@doc("Request body for the public dispatchAsync route.")
+@doc("Request body for the public dispatch_async route.")
 @extension("x-ms-foundry-meta", RoutineRequiredPreviews)
 model DispatchRoutineRequest {
   @doc("A direct action-input override sent downstream when testing a routine.")
@@ -344,28 +344,6 @@ model RoutineRun {
   diagnostics?: RoutineRunDiagnostics;
 }
 
-@doc("A page of routines returned by the list operation.")
-@extension("x-ms-foundry-meta", RoutineRequiredPreviews)
-model RoutineListResponse {
-  @doc("The current page of routines.")
-  value: Routine[];
-
-  @doc("The continuation token to use on the next list request, when more results are available.")
-  @maxLength(4096)
-  continuation_token?: string;
-}
-
-@doc("A page of routine runs returned by the run history API.")
-@extension("x-ms-foundry-meta", RoutineRequiredPreviews)
-model RoutineRunsResponse {
-  @doc("The current page of routine runs.")
-  value: RoutineRun[];
-
-  @doc("The continuation token to use on the next run-history request, when more results are available.")
-  @maxLength(4096)
-  next_page_token?: string;
-}
-
 @doc("Parameters for creating or updating a routine.")
 model CreateOrUpdateRoutineParameters {
   @doc("The unique name of the routine.")
@@ -386,10 +364,7 @@ model GetRoutineParameters {
 
 @doc("Parameters for listing routines.")
 model ListRoutinesParameters {
-  @doc("A continuation token returned from a previous list response.")
-  @query
-  @maxLength(4096)
-  continuation_token?: string;
+  ...CommonPageQueryParameters;
 }
 
 @doc("Parameters for deleting a routine.")
@@ -411,19 +386,7 @@ model ListRoutineRunsParameters {
   @query
   filter?: string;
 
-  @doc("Optional MLflow ordering expressions.")
-  @query
-  order_by?: string[];
-
-  @doc("The maximum number of routine runs to return when provided.")
-  @query
-  @minValue(1)
-  max_results?: int32;
-
-  @doc("A continuation token returned from a previous run-history response.")
-  @query
-  @maxLength(4096)
-  page_token?: string;
+  ...CommonPageQueryParameters;
 }
 
 @doc("Parameters for dispatching a routine asynchronously.")

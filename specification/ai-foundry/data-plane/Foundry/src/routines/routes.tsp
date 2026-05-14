@@ -37,12 +37,13 @@ interface Routines {
   @doc("List routines.")
   @operationId("listRoutines")
   @get
+  @list
   @route("/routines")
   @extension("x-ms-foundry-meta", RoutineRequiredPreviews)
   listRoutines is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.routines_v1_preview,
     ListRoutinesParameters,
-    RoutineListResponse
+    AgentsPagedResult<Routine>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
@@ -61,19 +62,20 @@ interface Routines {
   @doc("List prior runs for a routine.")
   @operationId("listRoutineRuns")
   @get
+  @list
   @route("/routines/{routine_name}/runs")
   @extension("x-ms-foundry-meta", RoutineRequiredPreviews)
   listRoutineRuns is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.routines_v1_preview,
     ListRoutineRunsParameters,
-    RoutineRunsResponse
+    AgentsPagedResult<RoutineRun>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   @doc("Queue an asynchronous routine dispatch.")
   @operationId("dispatchRoutineAsync")
   @post
-  @route("/routines/{routine_name}:dispatchAsync")
+  @route("/routines/{routine_name}:dispatch_async")
   @extension("x-ms-foundry-meta", RoutineRequiredPreviews)
   dispatchRoutineAsync is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.routines_v1_preview,
