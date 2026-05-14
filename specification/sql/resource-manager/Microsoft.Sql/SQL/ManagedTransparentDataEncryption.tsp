@@ -48,10 +48,12 @@ interface ManagedTransparentDataEncryptions {
   listByDatabase is ArmResourceListByParent<ManagedTransparentDataEncryption>;
 }
 
-@@doc(ManagedTransparentDataEncryption.name,
+@@doc(
+  ManagedTransparentDataEncryption.name,
   "The name of the transparent data encryption configuration."
 );
 @@doc(ManagedTransparentDataEncryption.properties, "Resource properties.");
-@@doc(ManagedTransparentDataEncryptions.createOrUpdate::parameters.resource,
+@@doc(
+  ManagedTransparentDataEncryptions.createOrUpdate::parameters.resource,
   "The database transparent data encryption."
 );

@@ -472,13 +472,16 @@ interface SearchServices {
   >;
 }
 
-@@doc(SearchService.name,
+@@doc(
+  SearchService.name,
   "The name of the Azure AI Search service associated with the specified resource group."
 );
 @@doc(SearchService.properties, "Properties of the search service.");
-@@doc(SearchServices.createOrUpdate::parameters.resource,
+@@doc(
+  SearchServices.createOrUpdate::parameters.resource,
   "The definition of the search service to create or update. Create applies to both serverless and dedicated search services; update applies only to dedicated search services."
 );
-@@doc(SearchServices.update::parameters.properties,
+@@doc(
+  SearchServices.update::parameters.properties,
   "The definition of the search service to update."
 );

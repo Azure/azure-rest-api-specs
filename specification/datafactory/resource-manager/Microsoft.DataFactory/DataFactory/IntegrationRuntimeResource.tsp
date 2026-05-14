@@ -414,27 +414,35 @@ interface IntegrationRuntimeResources {
 @@minLength(IntegrationRuntimeResource.name, 3);
 @@doc(IntegrationRuntimeResource.name, "The integration runtime name.");
 @@doc(IntegrationRuntimeResource.properties, "Integration runtime properties.");
-@@doc(IntegrationRuntimeResources.createOrUpdate::parameters.resource,
+@@doc(
+  IntegrationRuntimeResources.createOrUpdate::parameters.resource,
   "Integration runtime resource definition."
 );
-@@doc(IntegrationRuntimeResources.update::parameters.properties,
+@@doc(
+  IntegrationRuntimeResources.update::parameters.properties,
   "The parameters for updating an integration runtime."
 );
-@@doc(IntegrationRuntimeResources.regenerateAuthKey::parameters.body,
+@@doc(
+  IntegrationRuntimeResources.regenerateAuthKey::parameters.body,
   "The parameters for regenerating integration runtime authentication key."
 );
-@@doc(IntegrationRuntimeResources.removeLinks::parameters.body,
+@@doc(
+  IntegrationRuntimeResources.removeLinks::parameters.body,
   "The data factory name for the linked integration runtime."
 );
-@@doc(IntegrationRuntimeResources.createLinkedIntegrationRuntime::parameters.body,
+@@doc(
+  IntegrationRuntimeResources.createLinkedIntegrationRuntime::parameters.body,
   "The linked integration runtime properties."
 );
-@@doc(IntegrationRuntimeResources.integrationRuntimeObjectMetadataGet::parameters.body,
+@@doc(
+  IntegrationRuntimeResources.integrationRuntimeObjectMetadataGet::parameters.body,
   "The parameters for getting a SSIS object metadata."
 );
-@@doc(IntegrationRuntimeResources.integrationRuntimeNodesUpdate::parameters.body,
+@@doc(
+  IntegrationRuntimeResources.integrationRuntimeNodesUpdate::parameters.body,
   "The parameters for updating an integration runtime node."
 );
-@@doc(IntegrationRuntimeResources.enableInteractiveQuery::parameters.body,
+@@doc(
+  IntegrationRuntimeResources.enableInteractiveQuery::parameters.body,
   "The enable interactive authoring integration runtime properties."
 );

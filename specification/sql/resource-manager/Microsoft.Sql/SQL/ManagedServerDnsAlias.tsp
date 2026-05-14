@@ -39,11 +39,14 @@ interface ManagedServerDnsAliases {
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     ManagedServerDnsAlias,
     Request = ManagedServerDnsAliasCreation,
-    Response = ArmResourceUpdatedResponse<ManagedServerDnsAlias> | ArmResourceCreatedResponse<
-      ManagedServerDnsAlias,
-      ArmLroLocationHeader<FinalResult = ManagedServerDnsAlias> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<ManagedServerDnsAlias>
+      | ArmResourceCreatedResponse<
+          ManagedServerDnsAlias,
+          ArmLroLocationHeader<FinalResult = ManagedServerDnsAlias> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -52,7 +55,10 @@ interface ManagedServerDnsAliases {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ManagedServerDnsAlias,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

@@ -110,9 +110,11 @@ interface PrivateLinkResources {
   >;
 }
 
-@@doc(PrivateLinkResource.name,
+@@doc(
+  PrivateLinkResource.name,
   "The name of private link resource will be either topic, domain, partnerNamespace or namespace."
 );
-@@doc(PrivateLinkResource.properties,
+@@doc(
+  PrivateLinkResource.properties,
   "Properties of the private link resource."
 );

@@ -223,22 +223,28 @@ interface VnetConnectionGatewayOperationGroup {
   >;
 }
 
-@@doc(VnetGateway.name,
+@@doc(
+  VnetGateway.name,
   "Name of the gateway. Only the 'primary' gateway is supported."
 );
 @@doc(VnetGateway.properties, "VnetGateway resource specific properties");
-@@doc(VnetGateways.updateVnetGateway::parameters.resource,
+@@doc(
+  VnetGateways.updateVnetGateway::parameters.resource,
   "Definition of the gateway."
 );
-@@doc(VnetGatewayOperationGroup.createOrUpdateVnetConnectionGatewaySlot::parameters.resource,
+@@doc(
+  VnetGatewayOperationGroup.createOrUpdateVnetConnectionGatewaySlot::parameters.resource,
   "The properties to update this gateway with."
 );
-@@doc(VnetGatewayOperationGroup.updateVnetConnectionGatewaySlot::parameters.properties,
+@@doc(
+  VnetGatewayOperationGroup.updateVnetConnectionGatewaySlot::parameters.properties,
   "The properties to update this gateway with."
 );
-@@doc(VnetConnectionGatewayOperationGroup.createOrUpdateVnetConnectionGateway::parameters.resource,
+@@doc(
+  VnetConnectionGatewayOperationGroup.createOrUpdateVnetConnectionGateway::parameters.resource,
   "The properties to update this gateway with."
 );
-@@doc(VnetConnectionGatewayOperationGroup.updateVnetConnectionGateway::parameters.properties,
+@@doc(
+  VnetConnectionGatewayOperationGroup.updateVnetConnectionGateway::parameters.properties,
   "The properties to update this gateway with."
 );

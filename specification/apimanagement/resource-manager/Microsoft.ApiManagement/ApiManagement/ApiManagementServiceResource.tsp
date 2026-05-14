@@ -175,11 +175,14 @@ interface ApiManagementServiceResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ApiManagementServiceResource,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ApiManagementServiceResource> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: ApiManagementServiceResource;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ApiManagementServiceResource> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: ApiManagementServiceResource;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -866,37 +869,48 @@ interface ApiManagementServiceResources {
 
 @@maxLength(ApiManagementServiceResource.name, 50);
 @@minLength(ApiManagementServiceResource.name, 1);
-@@doc(ApiManagementServiceResource.name,
+@@doc(
+  ApiManagementServiceResource.name,
   "The name of the API Management service."
 );
 @@encodedName(ApiManagementServiceResource.etag, "application/json", "etag");
-@@doc(ApiManagementServiceResource.properties,
+@@doc(
+  ApiManagementServiceResource.properties,
   "Properties of the API Management service."
 );
-@@doc(ApiManagementServiceResources.createOrUpdate::parameters.resource,
+@@doc(
+  ApiManagementServiceResources.createOrUpdate::parameters.resource,
   "Parameters supplied to the CreateOrUpdate API Management service operation."
 );
-@@doc(ApiManagementServiceResources.update::parameters.properties,
+@@doc(
+  ApiManagementServiceResources.update::parameters.properties,
   "Parameters supplied to the CreateOrUpdate API Management service operation."
 );
-@@doc(ApiManagementServiceResources.performConnectivityCheckAsync::parameters.body,
+@@doc(
+  ApiManagementServiceResources.performConnectivityCheckAsync::parameters.body,
   "Connectivity Check request parameters."
 );
-@@doc(ApiManagementServiceResources.restore::parameters.body,
+@@doc(
+  ApiManagementServiceResources.restore::parameters.body,
   "Parameters supplied to the Restore API Management service from backup operation."
 );
-@@doc(ApiManagementServiceResources.backup::parameters.body,
+@@doc(
+  ApiManagementServiceResources.backup::parameters.body,
   "Parameters supplied to the ApiManagementService_Backup operation."
 );
-@@doc(ApiManagementServiceResources.migrateToStv2::parameters.body,
+@@doc(
+  ApiManagementServiceResources.migrateToStv2::parameters.body,
   "Optional parameters supplied to migrate service."
 );
-@@doc(ApiManagementServiceResources.applyNetworkConfigurationUpdates::parameters.body,
+@@doc(
+  ApiManagementServiceResources.applyNetworkConfigurationUpdates::parameters.body,
   "Parameters supplied to the Apply Network Configuration operation. If the parameters are empty, all the regions in which the Api Management service is deployed will be updated sequentially without incurring downtime in the region."
 );
-@@doc(ApiManagementServiceResources.quotaByCounterKeysUpdate::parameters.body,
+@@doc(
+  ApiManagementServiceResources.quotaByCounterKeysUpdate::parameters.body,
   "The value of the quota counter to be applied to all quota counter periods."
 );
-@@doc(ApiManagementServiceResources.quotaByPeriodKeysUpdate::parameters.body,
+@@doc(
+  ApiManagementServiceResources.quotaByPeriodKeysUpdate::parameters.body,
   "The value of the Quota counter to be applied on the specified period."
 );

@@ -110,19 +110,21 @@ interface TagDescriptionContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<TagDescriptionContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      eTag: string;
-    }) | (ArmCreatedResponse<TagDescriptionContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      eTag: string;
-    })
+    Response =
+      | (ArmResponse<TagDescriptionContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
+      | (ArmCreatedResponse<TagDescriptionContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
   >;
 
   /**
@@ -172,12 +174,15 @@ interface TagDescriptionContracts {
 
 @@maxLength(TagDescriptionContract.name, 80);
 @@minLength(TagDescriptionContract.name, 1);
-@@doc(TagDescriptionContract.name,
+@@doc(
+  TagDescriptionContract.name,
   "Tag description identifier. Used when creating tagDescription for API/Tag association. Based on API and Tag names."
 );
-@@doc(TagDescriptionContract.properties,
+@@doc(
+  TagDescriptionContract.properties,
   "TagDescription entity contract properties."
 );
-@@doc(TagDescriptionContracts.createOrUpdate::parameters.resource,
+@@doc(
+  TagDescriptionContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );

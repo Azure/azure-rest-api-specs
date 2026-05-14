@@ -213,6 +213,7 @@ interface TriggerResources {
 @@minLength(TriggerResource.name, 1);
 @@doc(TriggerResource.name, "The trigger name.");
 @@doc(TriggerResource.properties, "Properties of the trigger.");
-@@doc(TriggerResources.createOrUpdate::parameters.resource,
+@@doc(
+  TriggerResources.createOrUpdate::parameters.resource,
   "Trigger resource definition."
 );

@@ -188,19 +188,21 @@ interface ProductContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<ProductContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      eTag: string;
-    }) | (ArmResourceCreatedSyncResponse<ProductContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      eTag: string;
-    })
+    Response =
+      | (ArmResponse<ProductContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
+      | (ArmResourceCreatedSyncResponse<ProductContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
   >;
 
   /**
@@ -341,7 +343,9 @@ interface ProductContracts {
   productApiCreateOrUpdate is ProductContractOps.CreateOrUpdateSync<
     ProductContract,
     Request = void,
-    Response = ArmResponse<ApiContract> | ArmResourceCreatedSyncResponse<ApiContract>,
+    Response =
+      | ArmResponse<ApiContract>
+      | ArmResourceCreatedSyncResponse<ApiContract>,
     Parameters = {
       /**
        * API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.
@@ -419,7 +423,9 @@ interface ProductContracts {
   productGroupCreateOrUpdate is ProductContractOps.CreateOrUpdateSync<
     ProductContract,
     Request = void,
-    Response = ArmResponse<GroupContract> | ArmResourceCreatedSyncResponse<GroupContract>,
+    Response =
+      | ArmResponse<GroupContract>
+      | ArmResourceCreatedSyncResponse<GroupContract>,
     Parameters = {
       /**
        * Group identifier. Must be unique in the current API Management service instance.
@@ -558,19 +564,21 @@ interface WorkspaceProduct {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<ProductContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      eTag: string;
-    }) | (ArmResourceCreatedSyncResponse<ProductContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      eTag: string;
-    })
+    Response =
+      | (ArmResponse<ProductContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
+      | (ArmResourceCreatedSyncResponse<ProductContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
   >;
 
   /**
@@ -662,15 +670,18 @@ interface WorkspaceProduct {
 
 @@maxLength(ProductContract.name, 256);
 @@minLength(ProductContract.name, 1);
-@@doc(ProductContract.name,
+@@doc(
+  ProductContract.name,
   "Product identifier. Must be unique in the current API Management service instance."
 );
 @@doc(ProductContract.properties, "Product entity contract properties.");
-@@doc(ProductContracts.createOrUpdate::parameters.resource,
+@@doc(
+  ProductContracts.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );
 @@doc(ProductContracts.update::parameters.properties, "Update parameters.");
-@@doc(WorkspaceProduct.createOrUpdate::parameters.resource,
+@@doc(
+  WorkspaceProduct.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );
 @@doc(WorkspaceProduct.update::parameters.properties, "Update parameters.");

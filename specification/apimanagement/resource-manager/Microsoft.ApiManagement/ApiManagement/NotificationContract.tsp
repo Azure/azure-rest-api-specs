@@ -297,7 +297,9 @@ interface NotificationContracts {
   notificationRecipientUserCreateOrUpdate is NotificationRecipientUserOps.ActionSync<
     NotificationContract,
     void,
-    Response = ArmResponse<RecipientUserContract> | ArmResourceCreatedSyncResponse<RecipientUserContract>
+    Response =
+      | ArmResponse<RecipientUserContract>
+      | ArmResourceCreatedSyncResponse<RecipientUserContract>
   >;
 
   /**
@@ -343,7 +345,9 @@ interface NotificationContracts {
   notificationRecipientEmailCreateOrUpdate is NotificationRecipientEmailOps.ActionSync<
     NotificationContract,
     void,
-    Response = ArmResponse<RecipientEmailContract> | ArmResourceCreatedSyncResponse<RecipientEmailContract>
+    Response =
+      | ArmResponse<RecipientEmailContract>
+      | ArmResourceCreatedSyncResponse<RecipientEmailContract>
   >;
 
   /**
@@ -459,9 +463,10 @@ interface WorkspaceNotification {
    * Determine if the Notification Recipient User is subscribed to the notification.
    */
   @head
-  checkEntityExists(
-    ...WorkspaceNotificationRecipientUserParameters,
-  ): NoContentResponse | NotFoundResponse | ErrorResponse;
+  checkEntityExists(...WorkspaceNotificationRecipientUserParameters):
+    | NoContentResponse
+    | NotFoundResponse
+    | ErrorResponse;
 
   /**
    * Adds the API Management User to the list of Recipients for the Notification.
@@ -470,7 +475,9 @@ interface WorkspaceNotification {
   workspaceNotificationRecipientUserCreateOrUpdate is WorkspaceNotificationOps.CreateOrUpdateSync<
     NotificationContract,
     Request = void,
-    Response = ArmResponse<RecipientUserContract> | ArmResourceCreatedSyncResponse<RecipientUserContract>,
+    Response =
+      | ArmResponse<RecipientUserContract>
+      | ArmResourceCreatedSyncResponse<RecipientUserContract>,
     Parameters = {
       /**
        * User identifier. Must be unique in the current API Management service instance.
@@ -489,9 +496,10 @@ interface WorkspaceNotification {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @delete
-  delete(
-    ...WorkspaceNotificationRecipientUserParameters,
-  ): OkResponse | NoContentResponse | ErrorResponse;
+  delete(...WorkspaceNotificationRecipientUserParameters):
+    | OkResponse
+    | NoContentResponse
+    | ErrorResponse;
 
   /**
    * Gets the list of the Notification Recipient Emails subscribed to a notification.
@@ -519,7 +527,9 @@ interface WorkspaceNotification {
   workspaceNotificationRecipientEmailCreateOrUpdate is WorkspaceNotificationOps.CreateOrUpdateSync<
     NotificationContract,
     Request = void,
-    Response = ArmResponse<RecipientEmailContract> | ArmResourceCreatedSyncResponse<RecipientEmailContract>,
+    Response =
+      | ArmResponse<RecipientEmailContract>
+      | ArmResourceCreatedSyncResponse<RecipientEmailContract>,
     Parameters = {
       /**
        * Email identifier.
@@ -541,6 +551,7 @@ interface WorkspaceNotification {
 }
 
 @@doc(NotificationContract.name, "Notification Name Identifier.");
-@@doc(NotificationContract.properties,
+@@doc(
+  NotificationContract.properties,
   "Notification entity contract properties."
 );

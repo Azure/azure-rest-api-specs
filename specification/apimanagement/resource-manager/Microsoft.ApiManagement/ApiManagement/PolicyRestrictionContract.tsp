@@ -68,19 +68,21 @@ interface PolicyRestrictionContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<PolicyRestrictionContract> & {
-      /**
-       * Current entity state version
-       */
-      @header("ETag")
-      eTag: string;
-    }) | (ArmResourceCreatedSyncResponse<PolicyRestrictionContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      eTag: string;
-    })
+    Response =
+      | (ArmResponse<PolicyRestrictionContract> & {
+          /**
+           * Current entity state version
+           */
+          @header("ETag")
+          eTag: string;
+        })
+      | (ArmResourceCreatedSyncResponse<PolicyRestrictionContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
   >;
 
   /**
@@ -133,15 +135,19 @@ interface PolicyRestrictionContracts {
 
 @@maxLength(PolicyRestrictionContract.name, 80);
 @@minLength(PolicyRestrictionContract.name, 1);
-@@doc(PolicyRestrictionContract.name,
+@@doc(
+  PolicyRestrictionContract.name,
   "Policy restrictions after an entity level"
 );
-@@doc(PolicyRestrictionContract.properties,
+@@doc(
+  PolicyRestrictionContract.properties,
   "Properties of the Policy Restriction."
 );
-@@doc(PolicyRestrictionContracts.createOrUpdate::parameters.resource,
+@@doc(
+  PolicyRestrictionContracts.createOrUpdate::parameters.resource,
   "The policy restriction to apply."
 );
-@@doc(PolicyRestrictionContracts.update::parameters.properties,
+@@doc(
+  PolicyRestrictionContracts.update::parameters.properties,
   "The policy restriction to apply."
 );

@@ -62,6 +62,7 @@ interface ReplicationEligibilityResultsOperationGroup {
 }
 
 @@doc(ReplicationEligibilityResults.name, "");
-@@doc(ReplicationEligibilityResults.properties,
+@@doc(
+  ReplicationEligibilityResults.properties,
   "Gets properties model for replication eligibility results API."
 );

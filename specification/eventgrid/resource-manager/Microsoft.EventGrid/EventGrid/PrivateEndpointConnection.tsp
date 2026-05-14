@@ -77,11 +77,13 @@ interface PrivateEndpointConnections {
     PrivateEndpointConnection,
     Request = PrivateEndpointConnection,
     Result = void,
-    Response = ArmResponse<PrivateEndpointConnection> | ArmResourceCreatedResponse<
-      PrivateEndpointConnection,
-      LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >,
+    Response =
+      | ArmResponse<PrivateEndpointConnection>
+      | ArmResourceCreatedResponse<
+          PrivateEndpointConnection,
+          LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >,
     Parameters = {
       /**
        * The type of the parent resource. This can be either \'topics\', \'domains\', or \'partnerNamespaces\' or \'namespaces\'.
@@ -150,12 +152,15 @@ interface PrivateEndpointConnections {
   >;
 }
 
-@@doc(PrivateEndpointConnection.name,
+@@doc(
+  PrivateEndpointConnection.name,
   "The name of the private endpoint connection connection."
 );
-@@doc(PrivateEndpointConnection.properties,
+@@doc(
+  PrivateEndpointConnection.properties,
   "Properties of the PrivateEndpointConnection."
 );
-@@doc(PrivateEndpointConnections.update::parameters.body,
+@@doc(
+  PrivateEndpointConnections.update::parameters.body,
   "The private endpoint connection object to update."
 );
