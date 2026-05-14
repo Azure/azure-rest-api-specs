@@ -105,10 +105,10 @@ model ScheduleRoutineTrigger extends RoutineTrigger {
   type: RoutineTriggerType.schedule;
 
   @doc("A 5-field cron expression. The service enforces a minimum interval of five minutes by default.")
-  cronExpression: string;
+  cron_expression: string;
 
   @doc("An IANA or Windows time zone identifier for the schedule.")
-  timeZone: string;
+  time_zone: string;
 }
 
 @doc("A one-shot timer routine trigger.")
@@ -117,11 +117,11 @@ model TimerRoutineTrigger extends RoutineTrigger {
   @doc("The trigger type.")
   type: RoutineTriggerType.timer;
 
-  @doc("A future timer expression. Supported values include an ISO-8601 timestamp with an explicit offset, a local timestamp paired with timeZone, or a positive duration from now.")
+  @doc("A future timer expression. Supported values include an ISO-8601 timestamp with an explicit offset, a local timestamp paired with time_zone, or a positive duration from now.")
   at: string;
 
   @doc("An optional IANA or Windows time zone identifier when the timer uses a local timestamp.")
-  timeZone?: string;
+  time_zone?: string;
 }
 
 @doc("A GitHub issue-opened routine trigger.")
@@ -132,7 +132,7 @@ model GitHubIssueOpenedRoutineTrigger extends RoutineTrigger {
 
   @doc("The workspace connection identifier that resolves the GitHub configuration for the trigger.")
   @maxLength(256)
-  connectionId: string;
+  connection_id: string;
 
   @doc("The GitHub assignee or organization filter that scopes which issues can fire the trigger.")
   @maxLength(128)
@@ -151,23 +151,23 @@ model RoutineAction {
   type: RoutineActionType;
 }
 
-@doc("Dispatches a routine through the responses API. Exactly one of agentId or agentEndpointId must be provided.")
+@doc("Dispatches a routine through the responses API. Exactly one of agent_name or agent_endpoint_id must be provided.")
 @extension("x-ms-foundry-meta", RoutineRequiredPreviews)
 model InvokeAgentResponsesApiRoutineAction extends RoutineAction {
   @doc("The action type.")
   type: RoutineActionType.invoke_agent_responses_api;
 
-  @doc("The project-scoped agent identifier for responses API dispatch.")
+  @doc("The project-scoped agent name for responses API dispatch.")
   @maxLength(256)
-  agentId?: string;
+  agent_name?: string;
 
   @doc("The endpoint-scoped agent identifier for responses API dispatch.")
   @maxLength(256)
-  agentEndpointId?: string;
+  agent_endpoint_id?: string;
 
   @doc("An optional existing conversation identifier to continue during the downstream dispatch.")
   @maxLength(256)
-  conversationId?: string;
+  conversation_id?: string;
 }
 
 @doc("Dispatches a routine through the raw invocations API.")
@@ -178,11 +178,11 @@ model InvokeAgentInvocationsApiRoutineAction extends RoutineAction {
 
   @doc("The endpoint-scoped agent identifier for invocations API dispatch.")
   @maxLength(256)
-  agentEndpointId: string;
+  agent_endpoint_id: string;
 
   @doc("An optional existing hosted-agent session identifier to continue during the downstream dispatch.")
   @maxLength(256)
-  sessionId?: string;
+  session_id?: string;
 }
 
 @doc("A routine definition returned by the service.")
@@ -206,10 +206,10 @@ model Routine {
   action: RoutineAction;
 
   @doc("The time when the routine was created.")
-  createdAt?: utcDateTime;
+  created_at?: FoundryTimestamp;
 
   @doc("The time when the routine was last updated.")
-  updatedAt?: utcDateTime;
+  updated_at?: FoundryTimestamp;
 }
 
 @doc("The request body used to create or update a routine.")
@@ -270,13 +270,13 @@ model DispatchRoutineRequest {
 @extension("x-ms-foundry-meta", RoutineRequiredPreviews)
 model DispatchRoutineResponse {
   @doc("The dispatch identifier created for the routine dispatch.")
-  dispatchId?: string;
+  dispatch_id?: string;
 
   @doc("A downstream action correlation identifier, when available.")
-  actionCorrelationId?: string;
+  action_correlation_id?: string;
 
   @doc("A workspace task identifier created for the dispatch, when available.")
-  taskId?: string;
+  task_id?: string;
 }
 
 @doc("Generic diagnostics captured on a routine run.")
@@ -305,40 +305,40 @@ model RoutineRun {
   phase?: RoutineRunPhase;
 
   @doc("The trigger type that produced the routine attempt.")
-  triggerType?: RoutineTriggerType;
+  trigger_type?: RoutineTriggerType;
 
   @doc("The source path that created the routine attempt.")
-  attemptSource?: RoutineAttemptSource;
+  attempt_source?: RoutineAttemptSource;
 
   @doc("The action type dispatched for the routine attempt.")
-  actionType?: RoutineActionType;
+  action_type?: RoutineActionType;
 
   @doc("The logical trigger time recorded for the routine attempt.")
-  triggeredAt?: utcDateTime;
+  triggered_at?: FoundryTimestamp;
 
   @doc("The time when the underlying run started.")
-  startedAt?: utcDateTime;
+  started_at?: FoundryTimestamp;
 
   @doc("The time when the underlying run reached a terminal state.")
-  endedAt?: utcDateTime;
+  ended_at?: FoundryTimestamp;
 
   @doc("The dispatch identifier associated with the routine attempt.")
-  dispatchId?: string;
+  dispatch_id?: string;
 
   @doc("The downstream action correlation identifier, when available.")
-  actionCorrelationId?: string;
+  action_correlation_id?: string;
 
   @doc("The downstream response or invocation identifier, when available.")
-  responseId?: string;
+  response_id?: string;
 
   @doc("The workspace task identifier linked to the routine attempt, when available.")
-  taskId?: string;
+  task_id?: string;
 
   @doc("The fully qualified error type captured for a failed attempt, when available.")
-  errorType?: string;
+  error_type?: string;
 
   @doc("The truncated failure message captured for a failed attempt, when available.")
-  errorMessage?: string;
+  error_message?: string;
 
   @doc("Diagnostic data captured for the routine attempt.")
   diagnostics?: RoutineRunDiagnostics;
@@ -352,7 +352,7 @@ model RoutineListResponse {
 
   @doc("The continuation token to use on the next list request, when more results are available.")
   @maxLength(4096)
-  continuationToken?: string;
+  continuation_token?: string;
 }
 
 @doc("A page of routine runs returned by the run history API.")
@@ -363,7 +363,7 @@ model RoutineRunsResponse {
 
   @doc("The continuation token to use on the next run-history request, when more results are available.")
   @maxLength(4096)
-  nextPageToken?: string;
+  next_page_token?: string;
 }
 
 @doc("Parameters for creating or updating a routine.")
@@ -371,7 +371,7 @@ model CreateOrUpdateRoutineParameters {
   @doc("The unique name of the routine.")
   @path
   @maxLength(128)
-  routineName: string;
+  routine_name: string;
 
   ...RoutineCreateOrUpdateRequest;
 }
@@ -381,7 +381,7 @@ model GetRoutineParameters {
   @doc("The unique name of the routine.")
   @path
   @maxLength(128)
-  routineName: string;
+  routine_name: string;
 }
 
 @doc("Parameters for listing routines.")
@@ -389,7 +389,7 @@ model ListRoutinesParameters {
   @doc("A continuation token returned from a previous list response.")
   @query
   @maxLength(4096)
-  continuationToken?: string;
+  continuation_token?: string;
 }
 
 @doc("Parameters for deleting a routine.")
@@ -397,7 +397,7 @@ model DeleteRoutineParameters {
   @doc("The unique name of the routine.")
   @path
   @maxLength(128)
-  routineName: string;
+  routine_name: string;
 }
 
 @doc("Parameters for listing runs for a routine.")
@@ -405,25 +405,25 @@ model ListRoutineRunsParameters {
   @doc("The unique name of the routine.")
   @path
   @maxLength(128)
-  routineName: string;
+  routine_name: string;
 
   @doc("An optional MLflow search-runs filter expression applied within the routine's experiment.")
   @query
   filter?: string;
 
   @doc("Optional MLflow ordering expressions.")
-  @query("orderBy")
-  orderBy?: string[];
+  @query
+  order_by?: string[];
 
   @doc("The maximum number of routine runs to return when provided.")
   @query
   @minValue(1)
-  maxResults?: int32;
+  max_results?: int32;
 
   @doc("A continuation token returned from a previous run-history response.")
   @query
   @maxLength(4096)
-  pageToken?: string;
+  page_token?: string;
 }
 
 @doc("Parameters for dispatching a routine asynchronously.")
@@ -431,7 +431,7 @@ model DispatchRoutineAsyncParameters {
   @doc("The unique name of the routine.")
   @path
   @maxLength(128)
-  routineName: string;
+  routine_name: string;
 
   ...DispatchRoutineRequest;
 }
