@@ -860,8 +860,8 @@ model PrometheusMetricsSignal extends SignalInstanceProperties {
 @doc("Status of an Azure Resource Health signal, including availability information reported by Azure Resource Health.")
 model AzureResourceHealthSignalStatus is SignalStatus {
   @visibility(Lifecycle.Read)
-  @doc("Availability status of the Azure resource as reported by Azure Resource Health.")
-  availabilityStatus?: string;
+  @doc("Availability state of the Azure resource as reported by Azure Resource Health.")
+  availabilityState?: string;
 
   @visibility(Lifecycle.Read)
   @doc("Whether the status changing event was planned or unplanned.")
@@ -891,8 +891,8 @@ model AzureResourceHealthSignalStatus is SignalStatus {
 @added(Versions.v2026_05_01_preview)
 @doc("Azure resource health signal configuration")
 model AzureResourceHealthSignal {
-  @doc("Whether to automatically add a signal for the Azure resource's availability status from Azure Resource Health. Defaults to Enabled.")
-  enabled?: ResourceHealthAvailabilityStatusSignalBehavior = ResourceHealthAvailabilityStatusSignalBehavior.Enabled;
+  @doc("Whether to automatically add a signal for the Azure resource's availability state from Azure Resource Health. Defaults to Enabled.")
+  enabled?: ResourceHealthAvailabilityStateSignalBehavior = ResourceHealthAvailabilityStateSignalBehavior.Enabled;
 
   @visibility(Lifecycle.Read)
   @doc("The unique name of the Azure resource health signal. System assigned.")
@@ -1136,8 +1136,8 @@ model DiscoveryRuleProperties {
   specification: DiscoveryRuleSpecification;
 
   @added(Versions.v2026_05_01_preview)
-  @doc("Whether to automatically add a signal for the Azure resource's availability status from Azure Resource Health to the discovered entities.")
-  addResourceHealthSignal: ResourceHealthAvailabilityStatusSignalBehavior;
+  @doc("Whether to automatically add a signal for the Azure resource's availability state from Azure Resource Health to the discovered entities.")
+  addResourceHealthSignal: ResourceHealthAvailabilityStateSignalBehavior;
 
   @removed(Versions.v2026_01_01_preview)
   @visibility(Lifecycle.Read)
@@ -1221,14 +1221,14 @@ union DiscoveryRuleRecommendedSignalsBehavior {
   Disabled: "Disabled",
 }
 
-@doc("Resource health availability status signal behavior")
-union ResourceHealthAvailabilityStatusSignalBehavior {
+@doc("Resource health availability state signal behavior")
+union ResourceHealthAvailabilityStateSignalBehavior {
   string,
 
-  @doc("Automatically add resource health availability status signal")
+  @doc("Automatically add resource health availability state signal")
   Enabled: "Enabled",
 
-  @doc("Do not automatically add resource health availability status signal")
+  @doc("Do not automatically add resource health availability state signal")
   Disabled: "Disabled",
 }
 

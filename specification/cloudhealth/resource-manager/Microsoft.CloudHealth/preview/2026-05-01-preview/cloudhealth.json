@@ -2350,25 +2350,25 @@
       "properties": {
         "enabled": {
           "type": "string",
-          "description": "Whether to automatically add a signal for the Azure resource's availability status from Azure Resource Health. Defaults to Enabled.",
+          "description": "Whether to automatically add a signal for the Azure resource's availability state from Azure Resource Health. Defaults to Enabled.",
           "default": "Enabled",
           "enum": [
             "Enabled",
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "ResourceHealthAvailabilityStatusSignalBehavior",
+            "name": "ResourceHealthAvailabilityStateSignalBehavior",
             "modelAsString": true,
             "values": [
               {
                 "name": "Enabled",
                 "value": "Enabled",
-                "description": "Automatically add resource health availability status signal"
+                "description": "Automatically add resource health availability state signal"
               },
               {
                 "name": "Disabled",
                 "value": "Disabled",
-                "description": "Do not automatically add resource health availability status signal"
+                "description": "Do not automatically add resource health availability state signal"
               }
             ]
           }
@@ -2415,9 +2415,9 @@
           "$ref": "#/definitions/string4096",
           "description": "Additional context as provided by the submitter"
         },
-        "availabilityStatus": {
+        "availabilityState": {
           "type": "string",
-          "description": "Availability status of the Azure resource as reported by Azure Resource Health.",
+          "description": "Availability state of the Azure resource as reported by Azure Resource Health.",
           "readOnly": true
         },
         "category": {
@@ -2832,8 +2832,8 @@
           "description": "Specification of the discovery rule defining how entities are discovered."
         },
         "addResourceHealthSignal": {
-          "$ref": "#/definitions/ResourceHealthAvailabilityStatusSignalBehavior",
-          "description": "Whether to automatically add a signal for the Azure resource's availability status from Azure Resource Health to the discovered entities."
+          "$ref": "#/definitions/ResourceHealthAvailabilityStateSignalBehavior",
+          "description": "Whether to automatically add a signal for the Azure resource's availability state from Azure Resource Health to the discovered entities."
         },
         "error": {
           "$ref": "#/definitions/DiscoveryError",
@@ -4025,26 +4025,26 @@
       ],
       "x-ms-discriminator-value": "ResourceGraphQuery"
     },
-    "ResourceHealthAvailabilityStatusSignalBehavior": {
+    "ResourceHealthAvailabilityStateSignalBehavior": {
       "type": "string",
-      "description": "Resource health availability status signal behavior",
+      "description": "Resource health availability state signal behavior",
       "enum": [
         "Enabled",
         "Disabled"
       ],
       "x-ms-enum": {
-        "name": "ResourceHealthAvailabilityStatusSignalBehavior",
+        "name": "ResourceHealthAvailabilityStateSignalBehavior",
         "modelAsString": true,
         "values": [
           {
             "name": "Enabled",
             "value": "Enabled",
-            "description": "Automatically add resource health availability status signal"
+            "description": "Automatically add resource health availability state signal"
           },
           {
             "name": "Disabled",
             "value": "Disabled",
-            "description": "Do not automatically add resource health availability status signal"
+            "description": "Do not automatically add resource health availability state signal"
           }
         ]
       }
