@@ -54,19 +54,6 @@ test.concurrent("Generated from TypeSpec", async ({ expect }) => {
   expect(exitCode).toBe(0);
 });
 
-// test.concurrent("Hand-written, exists in main", async ({ expect }) => {
-//   const { stdout, exitCode } = await checkAllUnder(
-//     "specification/hand-written",
-//     '@{"https://github.com/Azure/azure-rest-api-specs/tree/main/specification/hand-written/resource-manager/Microsoft.HandWritten/stable"=200}',
-//   );
-
-//   expect(stdout).toContain("was not generated from TypeSpec");
-//   expect(stdout).toContain("'main' contains path");
-//   expect(stdout.toLowerCase()).toContain("warning");
-//   expect(stdout).toContain("are required to convert");
-//   expect(exitCode).toBe(0);
-// });
-
 test.concurrent("Hand-written, new API version", async ({ expect }) => {
   const { stdout, exitCode } = await checkAllUnder(
     "specification/hand-written/resource-manager/Microsoft.HandWritten/stable",
