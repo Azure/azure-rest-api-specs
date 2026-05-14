@@ -59,6 +59,7 @@ interface WebPubSubHubs {
 
 @@doc(WebPubSubHub.name, "The hub name.");
 @@doc(WebPubSubHub.properties, "Properties of a hub.");
-@@doc(WebPubSubHubs.createOrUpdate::parameters.resource,
+@@doc(
+  WebPubSubHubs.createOrUpdate::parameters.resource,
   "The resource of WebPubSubHub and its properties"
 );

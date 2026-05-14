@@ -11,9 +11,9 @@ namespace AnomalyDetector.Univariate;
 
 @post
 @doc("Operation template for univariate anomaly detection service action.")
-op UnivariateServiceAction<TParams, TResponse>(
-  ...TParams,
-): TResponse | AnomalyDetectorError;
+op UnivariateServiceAction<TParams, TResponse>(...TParams):
+  | TResponse
+  | AnomalyDetectorError;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Azure core RpcOperation does not support custom error response"
 // https://github.com/Azure/typespec-azure/issues/2795

@@ -109,9 +109,11 @@ interface IoTSecuritySolutionModels {
 
 @@doc(IoTSecuritySolutionModel.name, "The name of the IoT Security solution.");
 @@doc(IoTSecuritySolutionModel.properties, "Security Solution data");
-@@doc(IoTSecuritySolutionModels.createOrUpdate::parameters.resource,
+@@doc(
+  IoTSecuritySolutionModels.createOrUpdate::parameters.resource,
   "The security solution data"
 );
-@@doc(IoTSecuritySolutionModels.update::parameters.properties,
+@@doc(
+  IoTSecuritySolutionModels.update::parameters.properties,
   "The security solution data"
 );

@@ -82,13 +82,16 @@ interface SecurityAssessmentResponses {
   >;
 }
 
-@@doc(SecurityAssessmentResponse.name,
+@@doc(
+  SecurityAssessmentResponse.name,
   "The Assessment Key - Unique key for the assessment type"
 );
-@@doc(SecurityAssessmentResponse.properties,
+@@doc(
+  SecurityAssessmentResponse.properties,
   "Describes properties of an assessment."
 );
-@@doc(SecurityAssessmentResponses.createOrUpdate::parameters.resource,
+@@doc(
+  SecurityAssessmentResponses.createOrUpdate::parameters.resource,
   "Calculated assessment on a pre-defined assessment metadata"
 );
 @@key(SecurityAssessmentResponsesScopeParameter.scope, "resourceId");

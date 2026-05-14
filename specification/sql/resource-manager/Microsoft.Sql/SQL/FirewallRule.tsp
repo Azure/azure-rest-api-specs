@@ -80,6 +80,7 @@ interface FirewallRules {
 }
 
 @@doc(FirewallRule.properties, "Resource properties.");
-@@doc(FirewallRules.createOrUpdate::parameters.resource,
+@@doc(
+  FirewallRules.createOrUpdate::parameters.resource,
   "The required parameters for creating or updating a firewall rule."
 );

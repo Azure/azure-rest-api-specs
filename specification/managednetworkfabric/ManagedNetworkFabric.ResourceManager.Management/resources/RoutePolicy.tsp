@@ -88,15 +88,19 @@ interface RoutePolicies {
 }
 
 @@doc(RoutePolicies.create::parameters.resource, "Request payload.");
-@@doc(RoutePolicies.update::parameters.properties,
+@@doc(
+  RoutePolicies.update::parameters.properties,
   "Route Policy properties to update."
 );
-@@doc(RoutePolicies.updateAdministrativeState::parameters.body,
+@@doc(
+  RoutePolicies.updateAdministrativeState::parameters.body,
   "Request payload."
 );
-@@doc(RoutePolicies.updateAdministrativeStateDeprecated::parameters.body,
+@@doc(
+  RoutePolicies.updateAdministrativeStateDeprecated::parameters.body,
   "Request payload."
 );
-@@doc(RoutePolicies.validateConfiguration::parameters.body,
+@@doc(
+  RoutePolicies.validateConfiguration::parameters.body,
   "Validate configuration properties."
 );

@@ -201,11 +201,13 @@ interface AttestationOperationGroup {
    */
   createOrUpdateAtResource is AttestationAtResourceOps.CreateOrUpdateAsync<
     Attestation,
-    Response = ArmResponse<Attestation> | ArmResourceCreatedResponse<
-      Attestation,
-      ArmLroLocationHeader<FinalResult = Attestation> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | ArmResponse<Attestation>
+      | ArmResourceCreatedResponse<
+          Attestation,
+          ArmLroLocationHeader<FinalResult = Attestation> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**
@@ -213,9 +215,11 @@ interface AttestationOperationGroup {
    */
   deleteAtResource is AttestationAtResourceOps.DeleteSync<
     Attestation,
-    Response = {
-      @statusCode statusCode: 200;
-    } | ArmDeletedNoContentResponse
+    Response =
+      | {
+          @statusCode statusCode: 200;
+        }
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -245,12 +249,15 @@ interface AttestationOperationGroup {
 
 @@doc(Attestation.name, "The name of the attestation.");
 @@doc(Attestation.properties, "Properties for the attestation.");
-@@doc(Attestations.createOrUpdateAtSubscription::parameters.resource,
+@@doc(
+  Attestations.createOrUpdateAtSubscription::parameters.resource,
   "The attestation parameters."
 );
-@@doc(AttestationResourceGroupOperations.createOrUpdateAtResourceGroup::parameters.resource,
+@@doc(
+  AttestationResourceGroupOperations.createOrUpdateAtResourceGroup::parameters.resource,
   "The attestation parameters."
 );
-@@doc(AttestationOperationGroup.createOrUpdateAtResource::parameters.resource,
+@@doc(
+  AttestationOperationGroup.createOrUpdateAtResource::parameters.resource,
   "The attestation parameters."
 );

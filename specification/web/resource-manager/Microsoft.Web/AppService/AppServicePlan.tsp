@@ -59,7 +59,7 @@ alias AppServicePlanActionParamsOps = Azure.ResourceManager.Legacy.RoutedOperati
     name: string;
   },
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/serverfarms",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms",
   }
 >;
 
@@ -81,7 +81,7 @@ interface AppServicePlans {
    * Description for Recycles a managed instance worker machine.
    */
   @summary("Recycles a managed instance worker machine.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/serverfarms/{name}/workers/{workerName}/recycleinstance")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/workers/{workerName}/recycleinstance")
   recycleManagedInstanceWorker is AppServicePlanActionParamsOps.ActionSync<
     AppServicePlan,
     void,
@@ -126,10 +126,12 @@ interface AppServicePlans {
   @summary("Creates or updates an App Service Plan.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AppServicePlan,
-    Response = ArmResourceUpdatedResponse<AppServicePlan> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = AppServicePlan>> & {
-      @bodyRoot
-      _: AppServicePlan;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<AppServicePlan>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = AppServicePlan>> & {
+          @bodyRoot
+          _: AppServicePlan;
+        }),
     Error = DefaultErrorResponse
   >;
 
@@ -143,10 +145,12 @@ interface AppServicePlans {
   update is ArmCustomPatchSync<
     AppServicePlan,
     PatchModel = AppServicePlanPatchResource,
-    Response = ArmResponse<AppServicePlan> | (AcceptedResponse & {
-      @bodyRoot
-      _: AppServicePlan;
-    }),
+    Response =
+      | ArmResponse<AppServicePlan>
+      | (AcceptedResponse & {
+          @bodyRoot
+          _: AppServicePlan;
+        }),
     Error = DefaultErrorResponse
   >;
 
@@ -302,7 +306,7 @@ interface AppServicePlans {
    */
   @summary("Reboot a worker machine in an App Service plan.")
   @action("reboot")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/serverfarms/{name}/workers/{workerName}/reboot")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/workers/{workerName}/reboot")
   rebootWorker is AppServicePlanActionParamsOps.ActionSync<
     AppServicePlan,
     void,
@@ -320,9 +324,11 @@ interface AppServicePlans {
 
 @@doc(AppServicePlan.name, "Name of the App Service plan.");
 @@doc(AppServicePlan.properties, "AppServicePlan resource specific properties");
-@@doc(AppServicePlans.createOrUpdate::parameters.resource,
+@@doc(
+  AppServicePlans.createOrUpdate::parameters.resource,
   "Details of the App Service plan."
 );
-@@doc(AppServicePlans.update::parameters.properties,
+@@doc(
+  AppServicePlans.update::parameters.properties,
   "Details of the App Service plan."
 );

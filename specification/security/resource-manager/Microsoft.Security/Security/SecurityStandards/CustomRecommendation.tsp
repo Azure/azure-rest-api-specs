@@ -62,9 +62,11 @@ interface CustomRecommendations {
 }
 
 @@doc(CustomRecommendation.name, "Name of the Custom Recommendation.");
-@@doc(CustomRecommendation.properties,
+@@doc(
+  CustomRecommendation.properties,
   "describes Custom Recommendation properties."
 );
-@@doc(CustomRecommendations.createOrUpdate::parameters.resource,
+@@doc(
+  CustomRecommendations.createOrUpdate::parameters.resource,
   "Custom Recommendation body"
 );

@@ -24,19 +24,21 @@ op StorageOperation<
   contentType: RequestMediaType,
 
   ...ApiVersionHeader,
-  ...ClientRequestIdHeader,
+  ...ClientRequestIdParameter,
   ...TParams,
-): (TResponse & {
-  /** Content-Type header */
-  #suppress "@typespec/http/content-type-ignored" "Template for existing API"
-  @header("Content-Type")
-  contentType: ResponseMediaType;
+):
+  | (TResponse & {
+      /** Content-Type header */
+      #suppress "@typespec/http/content-type-ignored" "Template for existing API"
+      @header("Content-Type")
+      contentType: ResponseMediaType;
 
-  ...ApiVersionHeader;
-  ...RequestIdResponseHeader;
-  ...ClientRequestIdHeader;
-  ...DateResponseHeader;
-}) | TError;
+      ...ApiVersionHeader;
+      ...RequestIdResponseHeader;
+      ...ClientRequestIdResponseHeader;
+      ...DateResponseHeader;
+    })
+  | TError;
 
 /** Azure Storage Queue basic operation template */
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
@@ -44,12 +46,14 @@ op StorageOperationNoBody<
   TParams extends TypeSpec.Reflection.Model | void,
   TResponse extends TypeSpec.Reflection.Model | void,
   TError = Error
->(...ApiVersionHeader, ...ClientRequestIdHeader, ...TParams): (TResponse & {
-  ...ApiVersionHeader;
-  ...RequestIdResponseHeader;
-  ...ClientRequestIdHeader;
-  ...DateResponseHeader;
-}) | TError;
+>(...ApiVersionHeader, ...ClientRequestIdParameter, ...TParams):
+  | (TResponse & {
+      ...ApiVersionHeader;
+      ...RequestIdResponseHeader;
+      ...ClientRequestIdResponseHeader;
+      ...DateResponseHeader;
+    })
+  | TError;
 
 /** Azure Storage Queue basic operation template */
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."

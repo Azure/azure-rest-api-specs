@@ -263,7 +263,10 @@ interface TagsOperationGroup {
     tagValue: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<TagValue> | ArmResourceCreatedSyncResponse<TagValue> | CloudError;
+  ):
+    | ArmResponse<TagValue>
+    | ArmResourceCreatedSyncResponse<TagValue>
+    | CloudError;
 
   /**
    * This operation allows adding a name to the list of predefined tag names for the given subscription. A tag name can have a maximum of 512 characters and is case-insensitive. Tag names cannot have the following prefixes which are reserved for Azure use: 'microsoft', 'azure', 'windows'.
@@ -283,7 +286,10 @@ interface TagsOperationGroup {
     tagName: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<TagDetails> | ArmResourceCreatedSyncResponse<TagDetails> | CloudError;
+  ):
+    | ArmResponse<TagDetails>
+    | ArmResourceCreatedSyncResponse<TagDetails>
+    | CloudError;
 
   /**
    * This operation allows deleting a name from the list of predefined tag names for the given subscription. The name being deleted must not be in use as a tag name for any resource. All predefined values for the given name must have already been deleted.
@@ -314,8 +320,7 @@ interface TagsOperationGroup {
   @route("/subscriptions/{subscriptionId}/tagNames")
   @get
   @list
-  list(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-  ): ArmResponse<TagsListResult> | CloudError;
+  list(...ApiVersionParameter, ...SubscriptionIdParameter):
+    | ArmResponse<TagsListResult>
+    | CloudError;
 }
