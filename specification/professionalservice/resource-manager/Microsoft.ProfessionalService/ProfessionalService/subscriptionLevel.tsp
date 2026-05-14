@@ -20,6 +20,7 @@ interface ProfessionalServiceSubscriptionLevel {
   delete is ArmResourceDeleteWithoutOkAsync<ProfessionalServiceResource>;
   listByResourceGroup is ArmResourceListByParent<ProfessionalServiceResource>;
   // NOTE: No listAccessToken (GenerateToken) — not supported for Professional Services.
+  /** Unsubscribes from a Professional Service subscription, optionally providing a reason and feedback. The resource remains in Azure but the subscription is cancelled. */
   unsubscribe is ArmResourceActionAsync<
     ProfessionalServiceResource,
     DeleteOptions,
