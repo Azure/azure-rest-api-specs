@@ -1,6 +1,6 @@
 import { execa } from "execa";
 import { join } from "path";
-import { test } from "vitest";
+import { expect, test } from "vitest";
 
 async function checkAllUnder(path: string, responseCache?: string) {
   const repoRoot = join(__dirname, "..", "..", "..", "..");
@@ -54,11 +54,21 @@ test.concurrent("Generated from TypeSpec", async ({ expect }) => {
   expect(exitCode).toBe(0);
 });
 
-test.concurrent("Hand-written, new API version", async ({ expect }) => {
-  const { stdout, exitCode } = await checkAllUnder(
-    "specification/hand-written/resource-manager/Microsoft.HandWritten/stable",
-    '@{"https://github.com/Azure/azure-rest-api-specs/tree/main/specification/hand-written/resource-manager/Microsoft.HandWritten/stable/2026-01-01"=404}',
-  );
+test.concurrent.each([
+  {
+    label: "stable",
+    path: "specification/hand-written/resource-manager/Microsoft.HandWritten/stable",
+    responseCache:
+      '@{"https://github.com/Azure/azure-rest-api-specs/tree/main/specification/hand-written/resource-manager/Microsoft.HandWritten/stable/2026-01-01"=404}',
+  },
+  {
+    label: "preview",
+    path: "specification/hand-written/resource-manager/Microsoft.HandWritten/preview",
+    responseCache:
+      '@{"https://github.com/Azure/azure-rest-api-specs/tree/main/specification/hand-written/resource-manager/Microsoft.HandWritten/preview/2026-02-01-preview"=404}',
+  },
+])("Hand-written, new $label API version", async ({ path, responseCache }) => {
+  const { stdout, exitCode } = await checkAllUnder(path, responseCache);
 
   expect(stdout).toContain("was not generated from TypeSpec");
   expect(stdout).toContain("'main' does not contain path");
@@ -86,17 +96,6 @@ test.concurrent("Hand-written, unexpected response checking main", async ({ expe
 
   expect(stdout).toContain("was not generated from TypeSpec");
   expect(stdout).toContain("Unexpected response");
-  expect(exitCode).toBe(1);
-});
-
-test.concurrent("Hand-written, new preview API version", async ({ expect }) => {
-  const { stdout, exitCode } = await checkAllUnder(
-    "specification/hand-written/resource-manager/Microsoft.HandWritten/preview",
-    '@{"https://github.com/Azure/azure-rest-api-specs/tree/main/specification/hand-written/resource-manager/Microsoft.HandWritten/preview/2026-02-01-preview"=404}',
-  );
-
-  expect(stdout).toContain("was not generated from TypeSpec");
-  expect(stdout).toContain("'main' does not contain path");
   expect(exitCode).toBe(1);
 });
 
