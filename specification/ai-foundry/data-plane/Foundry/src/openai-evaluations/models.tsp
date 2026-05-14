@@ -465,6 +465,9 @@ model TargetCompletionEvalRunDataSource extends EvalRunDataSource {
 
   /** The target configuration for the evaluation. */
   target: Target;
+
+  /** The parameters for item generation. ConversationGenPreviewItemGenerationParams enables conversation simulation previews. */
+  item_generation_params?: ItemGenerationParams;
 }
 
 /** Represents a reference to an uploaded CSV file used as a source for evaluation data. */
@@ -504,11 +507,6 @@ model ConversationGenPreviewItemGenerationParams extends ItemGenerationParams {
   /** The type of item generation parameters, always `conversation_gen_preview`. */
   type: ItemGenerationParamsType.conversationGenPreview;
 
-  /** The source of test scenarios, supporting file_id or file_content. */
-  #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
-  source: OpenAI.EvalJsonlFileContentSource | OpenAI.EvalJsonlFileIdSource;
-
   /** The model deployment used for simulation, in the format '{connectionName}/modelDeploymentName'. */
   `model`: string;
 
@@ -525,59 +523,6 @@ model ConversationGenPreviewItemGenerationParams extends ItemGenerationParams {
   sampling_params?: ModelSamplingParams;
 }
 
-/** Represents a data source for evaluation runs that generate multi-turn conversations via LLM simulation against a target agent. */
-model ConversationSimulationPreviewEvalRunDataSource extends EvalRunDataSource {
-  /** The type of data source, always `azure_ai_conversation_simulation_preview`. */
-  type: "azure_ai_conversation_simulation_preview";
-
-  /** The parameters for conversation generation. */
-  item_generation_params: ConversationGenPreviewItemGenerationParams;
-
-  /** The target agent to simulate conversations against. */
-  target: AzureAIAgentTarget;
-}
-
-// ── Agent Reference types (for trace source filtering) ────────────────────────
-
-/** Specifies the type of agent reference used for filtering traces. */
-union EvalAgentReferenceType {
-  string,
-
-  /** Reference by agent ID (for 3P / Assistants agents). */
-  agentId: "agent_id",
-
-  /** Reference by agent name and version (for Foundry agents). */
-  agentReference: "agent_reference",
-}
-
-/** Base class for polymorphic agent references used in evaluation trace filtering. The user supplies exactly one variant to identify the agent whose traces should be filtered. */
-@discriminator("type")
-model EvalAgentReference {
-  /** The discriminator that identifies which kind of agent reference this is. */
-  type: EvalAgentReferenceType;
-}
-
-/** Identifies a 3P (Assistants) agent by its opaque agent ID. */
-model EvalAgentIdReference extends EvalAgentReference {
-  /** The type of agent reference, always `agent_id`. */
-  type: EvalAgentReferenceType.agentId;
-
-  /** The unique identifier of the agent. */
-  agent_id: string;
-}
-
-/** Identifies a Foundry agent by its name and optional version. */
-model EvalFoundryAgentReference extends EvalAgentReference {
-  /** The type of agent reference, always `agent_reference`. */
-  type: EvalAgentReferenceType.agentReference;
-
-  /** The name of the agent. */
-  name: string;
-
-  /** The version identifier of the agent. If not specified, will look for any version. */
-  version?: string;
-}
-
 // ── Trace Source types ────────────────────────────────────────────────────────
 
 /** Specifies the type of trace source used to select traces for evaluation. */
@@ -592,9 +537,6 @@ union TraceSourceType {
 
   /** Selects traces by agent reference with time-based filtering. */
   agentFilter: "agent_filter",
-
-  /** An extended agent filter that also includes model information. */
-  agentSmartFilter: "agent_smart_filter",
 }
 
 /** Base class for polymorphic trace sources nested within an AzureAITraceDataSourcePreviewEvalRunDataSource. */
@@ -622,31 +564,24 @@ model ConversationIdTraceSource extends TraceSource {
   conversation_ids: string[];
 }
 
+/** Specifies the type of filter strategy used to select traces for evaluation. */
+union FilterStrategyType {
+  string,
+
+  /** Selects traces by random sampling. */
+  random_sampling: "random_sampling",
+
+  /** Selects interesting traces for evaluation */
+  smart_filtering: "smart_filtering",
+}
+
 /** A trace source that selects traces by agent reference with time-based filtering. */
 model AgentFilterTraceSource extends TraceSource {
   /** The type of trace source, always `agent_filter`. */
   type: TraceSourceType.agentFilter;
 
-  /** The agent reference to filter traces by. */
-  agent_reference: EvalAgentReference;
-
-  /** Start time for the trace query window, expressed as a Unix timestamp (seconds). */
-  start_time?: int64;
-
-  /** End time for the trace query window, expressed as a Unix timestamp (seconds). */
-  end_time?: int64;
-
-  /** Maximum number of traces to sample. Must be greater than 0. */
-  max_traces?: int32;
-}
-
-/** An extended agent filter trace source that also includes model information. */
-model AgentSmartFilterTraceSource extends TraceSource {
-  /** The type of trace source, always `agent_smart_filter`. */
-  type: TraceSourceType.agentSmartFilter;
-
-  /** The agent reference to filter traces by. */
-  agent_reference: EvalAgentReference;
+  /** The agent target to filter traces by. */
+  target: AzureAIAgentTarget;
 
   /** Start time for the trace query window, expressed as a Unix timestamp (seconds). */
   start_time?: int64;
@@ -657,8 +592,8 @@ model AgentSmartFilterTraceSource extends TraceSource {
   /** Maximum number of traces to sample. Must be greater than 0. */
   max_traces?: int32;
 
-  /** If you provide the model, it will be used for filtering. */
-  `model`?: string;
+  /** If true, enables smart filtering on the agent traces. */
+  filter_strategy?: FilterStrategyType;
 }
 
 // ── Trace Data Source ─────────────────────────────────────────────────────────

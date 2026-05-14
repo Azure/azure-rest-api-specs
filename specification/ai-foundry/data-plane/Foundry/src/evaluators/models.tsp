@@ -248,9 +248,6 @@ model EvaluatorGenerationInputs {
   @doc("Source materials for generation — agent descriptions, prompts, traces, or datasets. Each entry is an `EvaluatorGenerationJobSource` variant discriminated by `type`.")
   sources: EvaluatorGenerationJobSource[];
 
-  @doc("Category determines the rubric generation focus: 'quality' (default) produces quality-focused dimensions, 'safety' produces policy-derived safety dimensions. Both use the same Dimension structure. Singular because quality and safety generation are mutually exclusive pipelines — the output EvaluatorVersion.categories is an array (e.g., ['agents', 'quality']).")
-  category?: EvaluatorCategory = EvaluatorCategory.quality;
-
   @doc("The LLM model to use for rubric generation (e.g., 'gpt-4o'). Required — users must provide their own model rather than relying on service-owned capacity.")
   `model`: string;
 
