@@ -22,14 +22,18 @@ model GraphQueryResource
     NamePattern = "^[^<>&:\\?]*$"
   >;
 
-  /** The geo-location where the resource lives. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "location is needed for backward compatibility with TrackedResource via hierarchyBuilding"
-  location?: azureLocation;
-
-  /** Resource tags. */
+  /**
+   * Resource tags.
+   */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "tags is needed for backward compatibility with TrackedResource via hierarchyBuilding"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "tags is standard ARM tracked resource property"
   tags?: Record<string>;
+
+  /**
+   * The geo-location where the resource lives.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "location is needed for backward compatibility with TrackedResource via hierarchyBuilding"
+  location?: azureLocation;
 
   /**
    * This will be used to handle Optimistic Concurrency. If not present, it will always overwrite the existing resource without checking conflict.
