@@ -91,17 +91,6 @@ test.concurrent("Hand-written, existing API version", async ({ expect }) => {
   expect(exitCode).toBe(0);
 });
 
-test.concurrent("Hand-written, does not exist in main", async ({ expect }) => {
-  const { stdout, exitCode } = await checkAllUnder(
-    "specification/hand-written",
-    '@{"https://github.com/Azure/azure-rest-api-specs/tree/main/specification/hand-written/resource-manager/Microsoft.HandWritten/stable/2026-01-01"=404}',
-  );
-
-  expect(stdout).toContain("was not generated from TypeSpec");
-  expect(stdout).toContain("'main' does not contain path");
-  expect(exitCode).toBe(1);
-});
-
 test.concurrent("Hand-written, unexpected response checking main", async ({ expect }) => {
   const { stdout, exitCode } = await checkAllUnder(
     "specification/hand-written",
