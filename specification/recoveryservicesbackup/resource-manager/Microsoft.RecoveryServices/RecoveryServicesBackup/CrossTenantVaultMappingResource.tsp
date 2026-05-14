@@ -345,7 +345,7 @@ interface ProtectedItemOperationResultsFromCrossTenantVault {
     Response =
       | ArmResponse<ProtectedItemResource>
       | {
-          ...ArmAcceptedLroResponse;
+          ...AcceptedResponse;
           @body body: ProtectedItemResource;
         }
   >;
@@ -486,7 +486,7 @@ interface ValidateOperationResultFromCrossTenantVault {
     Response =
       | ArmResponse<ValidateOperationsResponse>
       | {
-          ...ArmAcceptedLroResponse;
+          ...AcceptedResponse;
           @body body: ValidateOperationsResponse;
         }
   >;
@@ -664,7 +664,7 @@ interface CrossTenantVaultCredentialOperationResults {
     Response =
       | ArmResponse<VaultCredentialCertificateResponse>
       | {
-          ...ArmAcceptedLroResponse;
+          ...AcceptedResponse;
           @body body: VaultCredentialCertificateResponse;
         }
   >;
