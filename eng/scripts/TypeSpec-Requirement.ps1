@@ -179,46 +179,29 @@ else {
       return $status
     }
 
-    $urlToStableFolder = "https://github.com/Azure/azure-rest-api-specs/tree/main/specification/$servicePath/stable"
-    $logUrlToStableFolder = $urlToStableFolder -replace '^https://', ''
-    $responseStatus = Invoke-CachedHead $urlToStableFolder
+    # Check whether this specific API version already exists in main.  If not, it is a new
+    # API version and must use TypeSpec.
+    $urlToApiVersion = "https://github.com/Azure/azure-rest-api-specs/tree/main/specification/$servicePath/stable/$apiVersion"
+    $logUrlToApiVersion = $urlToApiVersion -replace '^https://', ''
+    $apiVersionStatus = Invoke-CachedHead $urlToApiVersion
 
-    if ($responseStatus -eq 200) {
-      LogInfo "  Branch 'main' contains path '$servicePath/stable', so spec already exists"
+    if ($apiVersionStatus -eq 200) {
+      LogInfo "  Branch 'main' contains path '$servicePath/stable/$apiVersion', so API version already exists and is not required to use TypeSpec"
 
-      # Also verify that this specific API version already exists in main.  If not, it is a new
-      # API version and must use TypeSpec.
-      $urlToApiVersion = "https://github.com/Azure/azure-rest-api-specs/tree/main/specification/$servicePath/stable/$apiVersion"
-      $logUrlToApiVersion = $urlToApiVersion -replace '^https://', ''
-      $apiVersionStatus = Invoke-CachedHead $urlToApiVersion
+      $warning = "WARNING: This PR uses OpenAPI / Swagger. All Azure services are required to convert to TypeSpec by March 30, 2026. PRs not using TypeSpec will be blocked after that date. Starting July 1, 2026, all SDKs will be generated from TypeSpec as the autorest toolchain is being retired. Please reach out to tspconversion@service.microsoft.com with any questions and see http://aka.ms/azsdk/typespec for more details on TypeSpec."
+      LogWarningForFile $file $warning
 
-      if ($apiVersionStatus -eq 200) {
-        LogInfo "  Branch 'main' contains path '$servicePath/stable/$apiVersion', so API version already exists and is not required to use TypeSpec"
-
-        $warning = "WARNING: This PR uses OpenAPI / Swagger. All Azure services are required to convert to TypeSpec by March 30, 2026. PRs not using TypeSpec will be blocked after that date. Starting July 1, 2026, all SDKs will be generated from TypeSpec as the autorest toolchain is being retired. Please reach out to tspconversion@service.microsoft.com with any questions and see http://aka.ms/azsdk/typespec for more details on TypeSpec."
-        LogWarningForFile $file $warning
-
-        if ($env:GITHUB_OUTPUT) {
-          # Set output to be used later in /.github/workflows/TypeSpec-Requirement.yaml
-          Add-Content -Path $env:GITHUB_OUTPUT -Value "brownfield=true"
-        }
-      }
-      elseif ($apiVersionStatus -eq 404) {
-        LogInfo "  Branch 'main' does not contain path '$servicePath/stable/$apiVersion', so API version is new and must use TypeSpec"
-        $pathsWithErrors += $file
-      }
-      else {
-        LogError "Unexpected response from ${logUrlToApiVersion}: ${apiVersionStatus}"
-        LogJobFailure
-        exit 1
+      if ($env:GITHUB_OUTPUT) {
+        # Set output to be used later in /.github/workflows/TypeSpec-Requirement.yaml
+        Add-Content -Path $env:GITHUB_OUTPUT -Value "brownfield=true"
       }
     }
-    elseif ($responseStatus -eq 404) {
-      LogInfo "  Branch 'main' does not contain path '$servicePath/stable', so spec is new and must use TypeSpec"
+    elseif ($apiVersionStatus -eq 404) {
+      LogInfo "  Branch 'main' does not contain path '$servicePath/stable/$apiVersion', so API version is new and must use TypeSpec"
       $pathsWithErrors += $file
     }
     else {
-      LogError "Unexpected response from ${logUrlToStableFolder}: ${responseStatus}"
+      LogError "Unexpected response from ${logUrlToApiVersion}: ${apiVersionStatus}"
       LogJobFailure
       exit 1
     }
