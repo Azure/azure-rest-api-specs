@@ -38,6 +38,7 @@ namespace Quantum.Workspace.Services {
   alias CreateOperation<Resource extends TypeSpec.Reflection.Model> = AzureCoreOperations.ResourceCreateOrReplace<Resource>;
 
   /** Operation to patch a resource. */
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @patch(#{ implicitOptionality: true })
   @updatesResource(Resource)
   op PatchOperation<Resource extends Reflection.Model> is AzureCoreOperations.ResourceUpdate<
@@ -64,6 +65,7 @@ namespace Quantum.Workspace.Services {
     The Azure.Core.ResourceUpdate does not support NoContentResponse and the JsonPatchDocument request body.
     See https://github.com/Azure/typespec-azure/issues/475
     """
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @updatesResource(Resource)
   @patch(#{ implicitOptionality: true })
   op PatchOperationOld<Resource extends TypeSpec.Reflection.Model> is Azure.Core.Foundations.ResourceOperation<

@@ -132,6 +132,7 @@ interface Watchers {
     Watcher,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     Watcher,

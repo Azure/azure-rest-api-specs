@@ -241,6 +241,7 @@ model MoboBrokerResource {
 interface AgriService {
   get is ArmResourceRead<AgriServiceResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<AgriServiceResource>;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     AgriServiceResource,
