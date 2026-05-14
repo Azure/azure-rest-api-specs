@@ -126,13 +126,16 @@ interface Computes {
 
 @@maxLength(Compute.name, 63);
 @@minLength(Compute.name, 1);
-@@doc(Compute.name,
+@@doc(
+  Compute.name,
   "The name of the compute associated with the Cognitive Services Account."
 );
-@@doc(Compute.properties,
+@@doc(
+  Compute.properties,
   "Polymorphic properties of the compute resource. Use computeType to select Cluster or ContainerInstance."
 );
 @@doc(Computes.createOrUpdate::parameters.resource, "The compute properties.");
-@@doc(Computes.update::parameters.properties,
+@@doc(
+  Computes.update::parameters.properties,
   "The compute properties to update."
 );

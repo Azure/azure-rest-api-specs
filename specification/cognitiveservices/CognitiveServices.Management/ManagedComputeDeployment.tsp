@@ -85,16 +85,20 @@ interface ManagedComputeDeployments {
   >;
 }
 
-@@doc(ManagedComputeDeployment.name,
+@@doc(
+  ManagedComputeDeployment.name,
   "The name of the managed compute deployment associated with the Cognitive Services Account"
 );
 @@encodedName(ManagedComputeDeployment.etag, "application/json", "etag");
-@@doc(ManagedComputeDeployment.properties,
+@@doc(
+  ManagedComputeDeployment.properties,
   "Properties of the Cognitive Services managed compute deployment."
 );
-@@doc(ManagedComputeDeployments.createOrUpdate::parameters.resource,
+@@doc(
+  ManagedComputeDeployments.createOrUpdate::parameters.resource,
   "The managed compute deployment properties."
 );
-@@doc(ManagedComputeDeployments.update::parameters.properties,
+@@doc(
+  ManagedComputeDeployments.update::parameters.properties,
   "The managed compute deployment patch properties."
 );

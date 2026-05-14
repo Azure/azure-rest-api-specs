@@ -124,9 +124,11 @@ interface Workbenches {
 @@minLength(Workbench.name, 1);
 @@doc(Workbench.name, "The name of the workbench associated with the project.");
 @@doc(Workbench.properties, "Properties of the workbench resource.");
-@@doc(Workbenches.createOrUpdate::parameters.resource,
+@@doc(
+  Workbenches.createOrUpdate::parameters.resource,
   "The workbench properties."
 );
-@@doc(Workbenches.update::parameters.properties,
+@@doc(
+  Workbenches.update::parameters.properties,
   "The workbench properties to update."
 );

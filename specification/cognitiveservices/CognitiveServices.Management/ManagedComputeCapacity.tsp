@@ -65,9 +65,11 @@ interface ManagedComputeCapacities {
   >;
 }
 
-@@doc(ManagedComputeCapacity.name,
+@@doc(
+  ManagedComputeCapacity.name,
   "The name of the managed compute capacity resource."
 );
-@@doc(ManagedComputeCapacity.properties,
+@@doc(
+  ManagedComputeCapacity.properties,
   "Properties of the managed compute capacity resource."
 );
