@@ -85,10 +85,12 @@ interface Standards {
   >;
 }
 
-@@doc(Standard.name,
+@@doc(
+  Standard.name,
   "The Security Standard key - unique key for the standard type"
 );
 @@doc(Standard.properties, "Properties of a security standard");
-@@doc(Standards.createOrUpdate::parameters.resource,
+@@doc(
+  Standards.createOrUpdate::parameters.resource,
   "Custom security standard over a pre-defined scope"
 );

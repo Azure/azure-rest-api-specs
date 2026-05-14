@@ -40,7 +40,8 @@ interface PrivateLinkGroupResources {
   list is ArmResourceListByParent<PrivateLinkGroupResource>;
 }
 
-@@doc(PrivateLinkGroupResource.name,
+@@doc(
+  PrivateLinkGroupResource.name,
   "The group ID of the private link resource."
 );
 @@doc(PrivateLinkGroupResource.properties, "Resource properties.");

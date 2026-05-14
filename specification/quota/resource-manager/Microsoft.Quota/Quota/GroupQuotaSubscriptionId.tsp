@@ -80,11 +80,13 @@ interface GroupQuotaSubscriptionIds {
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is GroupQuotaSubscriptionIdsOps.CreateOrUpdateAsync<
     GroupQuotaSubscriptionId,
-    Response = ArmResourceUpdatedResponse<GroupQuotaSubscriptionId> | ArmResourceCreatedResponse<
-      GroupQuotaSubscriptionId,
-      ArmCombinedLroHeaders<FinalResult = GroupQuotaSubscriptionId> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >,
+    Response =
+      | ArmResourceUpdatedResponse<GroupQuotaSubscriptionId>
+      | ArmResourceCreatedResponse<
+          GroupQuotaSubscriptionId,
+          ArmCombinedLroHeaders<FinalResult = GroupQuotaSubscriptionId> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >,
     Request = void
   >;
 
@@ -96,8 +98,10 @@ interface GroupQuotaSubscriptionIds {
   update is GroupQuotaSubscriptionIdsOps.CustomPatchAsync<
     GroupQuotaSubscriptionId,
     PatchModel = void,
-    Response = ArmResponse<GroupQuotaSubscriptionId> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = GroupQuotaSubscriptionId> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResponse<GroupQuotaSubscriptionId>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = GroupQuotaSubscriptionId> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -106,8 +110,10 @@ interface GroupQuotaSubscriptionIds {
   delete is Extension.DeleteWithoutOkAsync<
     Extension.ManagementGroup<"managementGroupId">,
     GroupQuotaSubscriptionId,
-    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -122,7 +128,8 @@ interface GroupQuotaSubscriptionIds {
 
 #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@format(GroupQuotaSubscriptionId.name, "uuid");
-@@doc(GroupQuotaSubscriptionId.name,
+@@doc(
+  GroupQuotaSubscriptionId.name,
   "The ID of the target subscription. The value must be an UUID."
 );
 @@doc(GroupQuotaSubscriptionId.properties, "");

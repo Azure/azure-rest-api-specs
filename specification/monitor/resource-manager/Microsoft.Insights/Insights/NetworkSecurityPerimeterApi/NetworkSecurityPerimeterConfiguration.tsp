@@ -196,5 +196,6 @@ interface ScheduledQueryRule {
 }
 
 @@pageItems(CommonTypes.NetworkSecurityPerimeterConfigurationListResult.value);
-@@nextLink(CommonTypes.NetworkSecurityPerimeterConfigurationListResult.nextLink
+@@nextLink(
+  CommonTypes.NetworkSecurityPerimeterConfigurationListResult.nextLink
 );

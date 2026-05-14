@@ -7,37 +7,44 @@ using Azure.Core;
 using Azure.ResourceManager.Foundations;
 
 @@clientName(UsableStatus, "WorkspaceUsableStatus", "csharp");
-@@clientName(WorkspaceResourceProperties,
+@@clientName(
+  WorkspaceResourceProperties,
   "QuantumWorkspaceProperties",
   "csharp"
 );
-@@clientName(WorkspaceResourceProperties.apiKeyEnabled,
+@@clientName(
+  WorkspaceResourceProperties.apiKeyEnabled,
   "IsApiKeyEnabled",
   "csharp"
 );
 @@clientName(ApiKey, "WorkspaceApiKey", "csharp");
 @@clientName(ApiKeys, "WorkspaceApiKeys", "csharp");
-@@clientName(CheckNameAvailabilityRequest,
+@@clientName(
+  CheckNameAvailabilityRequest,
   "WorkspaceNameAvailabilityContent",
   "csharp"
 );
 @@clientName(CheckNameAvailabilityRequest.type, "ResourceType", "csharp");
 @@alternateType(CheckNameAvailabilityRequest.type, armResourceType, "csharp");
-@@clientName(CheckNameAvailabilityResponse,
+@@clientName(
+  CheckNameAvailabilityResponse,
   "WorkspaceNameAvailabilityResult",
   "csharp"
 );
-@@clientName(CheckNameAvailabilityResponse.nameAvailable,
+@@clientName(
+  CheckNameAvailabilityResponse.nameAvailable,
   "IsNameAvailable",
   "csharp"
 );
-@@clientName(Workspaces.checkNameAvailability,
+@@clientName(
+  Workspaces.checkNameAvailability,
   "CheckWorkspaceNameAvailability",
   "csharp"
 );
 @@clientName(Workspaces.listKeys, "GetKeysWorkspace", "csharp");
 @@clientName(Workspaces.regenerateKeys, "RegenerateKeysWorkspace", "csharp");
-@@clientName(Workspaces.regenerateKeys::parameters.body,
+@@clientName(
+  Workspaces.regenerateKeys::parameters.body,
   "keySpecification",
   "csharp"
 );
@@ -45,13 +52,15 @@ using Azure.ResourceManager.Foundations;
 @@clientName(ListKeysResult, "WorkspaceKeyListResult", "csharp");
 @@clientName(ListKeysResult.apiKeyEnabled, "IsApiKeyEnabled", "csharp");
 @@clientName(PricingDimension, "ProviderPricingDimension", "csharp");
-@@clientName(WorkspaceProvisioningStatus,
+@@clientName(
+  WorkspaceProvisioningStatus,
   "ProviderProvisioningStatus",
   "csharp"
 );
 @@clientName(ProviderStatus, "QuantumProvisioningStatus", "csharp");
 @@clientName(ProviderPropertiesAad, "ProviderAadInfo", "csharp");
-@@clientName(ProviderPropertiesManagedApplication,
+@@clientName(
+  ProviderPropertiesManagedApplication,
   "ProviderApplicationInfo",
   "csharp"
 );
@@ -66,11 +75,13 @@ using Azure.ResourceManager.Foundations;
 @@clientName(QuotaDimension, "QuantumQuotaDimension", "csharp");
 @@clientName(WorkspaceKind, "QuantumWorkspaceKind", "csharp");
 @@clientName(QuotaAllocations, "QuantumQuotaAllocations", "csharp");
-@@clientName(Azure.ResourceManager.CommonTypes.MoboBrokerResource,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.MoboBrokerResource,
   "MoboBrokerInfo",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityReason,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityReason,
   "WorkspaceNameUnavailableReason",
   "csharp"
 );

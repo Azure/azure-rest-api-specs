@@ -39,11 +39,14 @@ interface ManagedInstanceAdministrators {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ManagedInstanceAdministrator,
-    Response = ArmResourceUpdatedResponse<ManagedInstanceAdministrator> | ArmResourceCreatedResponse<
-      ManagedInstanceAdministrator,
-      ArmLroLocationHeader<FinalResult = ManagedInstanceAdministrator> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<ManagedInstanceAdministrator>
+      | ArmResourceCreatedResponse<
+          ManagedInstanceAdministrator,
+          ArmLroLocationHeader<FinalResult = ManagedInstanceAdministrator> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -63,6 +66,7 @@ interface ManagedInstanceAdministrators {
 
 @@doc(ManagedInstanceAdministrator.name, "");
 @@doc(ManagedInstanceAdministrator.properties, "Resource properties.");
-@@doc(ManagedInstanceAdministrators.createOrUpdate::parameters.resource,
+@@doc(
+  ManagedInstanceAdministrators.createOrUpdate::parameters.resource,
   "The requested administrator parameters."
 );

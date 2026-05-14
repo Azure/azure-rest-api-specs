@@ -99,9 +99,11 @@ interface Watchers {
 
 @@doc(Watcher.name, "The watcher name.");
 @@doc(Watcher.properties, "Gets or sets the watcher properties.");
-@@doc(Watchers.createOrUpdate::parameters.resource,
+@@doc(
+  Watchers.createOrUpdate::parameters.resource,
   "The create or update parameters for watcher."
 );
-@@doc(Watchers.update::parameters.properties,
+@@doc(
+  Watchers.update::parameters.properties,
   "The update parameters for watcher."
 );
