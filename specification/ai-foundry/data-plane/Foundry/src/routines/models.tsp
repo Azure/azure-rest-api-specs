@@ -296,16 +296,16 @@ model RoutineRunDiagnostics {
 @extension("x-ms-foundry-meta", RoutineRequiredPreviews)
 model RoutineRun {
   @doc("The MLflow run identifier for the routine attempt.")
-  id?: string;
+  id: string;
 
   @doc("The underlying MLflow run status.")
-  status?: string;
+  status: string;
 
   @doc("The AgentExtensions lifecycle phase for the routine attempt.")
   phase?: RoutineRunPhase;
 
   @doc("The trigger type that produced the routine attempt.")
-  trigger_type?: RoutineTriggerType;
+  trigger_type: RoutineTriggerType;
 
   @doc("The source path that created the routine attempt.")
   attempt_source?: RoutineAttemptSource;
@@ -317,7 +317,7 @@ model RoutineRun {
   triggered_at?: FoundryTimestamp;
 
   @doc("The time when the underlying run started.")
-  started_at?: FoundryTimestamp;
+  started_at: FoundryTimestamp;
 
   @doc("The time when the underlying run reached a terminal state.")
   ended_at?: FoundryTimestamp;
