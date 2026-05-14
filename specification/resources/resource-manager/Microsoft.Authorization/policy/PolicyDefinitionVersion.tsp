@@ -212,15 +212,19 @@ interface PolicyDefinitionVersions {
   >;
 }
 
-@@doc(PolicyDefinitionVersion.name,
+@@doc(
+  PolicyDefinitionVersion.name,
   "The policy definition version.  The format is x.y.z where x is the major version number, y is the minor version number, and z is the patch number"
 );
-@@doc(PolicyDefinitionVersion.properties,
+@@doc(
+  PolicyDefinitionVersion.properties,
   "The policy definition version properties."
 );
-@@doc(PolicyDefinitionVersions.createOrUpdate::parameters.resource,
+@@doc(
+  PolicyDefinitionVersions.createOrUpdate::parameters.resource,
   "The policy definition properties."
 );
-@@doc(PolicyDefinitionVersions.createOrUpdateAtManagementGroup::parameters.resource,
+@@doc(
+  PolicyDefinitionVersions.createOrUpdateAtManagementGroup::parameters.resource,
   "The policy definition properties."
 );

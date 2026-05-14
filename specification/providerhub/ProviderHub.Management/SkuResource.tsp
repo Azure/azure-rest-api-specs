@@ -298,15 +298,19 @@ interface SkuResourceOperationGroup {
 
 @@doc(SkuResource.name, "The SKU.");
 @@doc(SkuResource.properties, "");
-@@doc(SkuResources.createOrUpdate::parameters.resource,
+@@doc(
+  SkuResources.createOrUpdate::parameters.resource,
   "The required body parameters supplied to the resource sku operation."
 );
-@@doc(Skus.createOrUpdateNestedResourceTypeFirst::parameters.resource,
+@@doc(
+  Skus.createOrUpdateNestedResourceTypeFirst::parameters.resource,
   "The required body parameters supplied to the resource sku operation."
 );
-@@doc(SkuResourceOperations.createOrUpdateNestedResourceTypeSecond::parameters.resource,
+@@doc(
+  SkuResourceOperations.createOrUpdateNestedResourceTypeSecond::parameters.resource,
   "The required body parameters supplied to the resource sku operation."
 );
-@@doc(SkuResourceOperationGroup.createOrUpdateNestedResourceTypeThird::parameters.resource,
+@@doc(
+  SkuResourceOperationGroup.createOrUpdateNestedResourceTypeThird::parameters.resource,
   "The required body parameters supplied to the resource sku operation."
 );

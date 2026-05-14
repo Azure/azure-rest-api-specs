@@ -62,10 +62,12 @@ interface SecurityStandards {
   >;
 }
 
-@@doc(SecurityStandard.name,
+@@doc(
+  SecurityStandard.name,
   "The Security Standard key - unique key for the standard type"
 );
 @@doc(SecurityStandard.properties, "Properties of a security standard");
-@@doc(SecurityStandards.createOrUpdate::parameters.resource,
+@@doc(
+  SecurityStandards.createOrUpdate::parameters.resource,
   "Custom security standard over a pre-defined scope"
 );

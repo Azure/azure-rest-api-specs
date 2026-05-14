@@ -47,11 +47,14 @@ interface PartnerDestinations {
   update is ArmCustomPatchAsync<
     PartnerDestination,
     PatchModel = PartnerDestinationUpdateParameters,
-    Response = ArmResponse<PartnerDestination> | ArmResourceCreatedResponse<PartnerDestination> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PartnerDestination> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: PartnerDestination;
-    })
+    Response =
+      | ArmResponse<PartnerDestination>
+      | ArmResourceCreatedResponse<PartnerDestination>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PartnerDestination> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: PartnerDestination;
+        })
   >;
 
   /**
@@ -61,7 +64,10 @@ interface PartnerDestinations {
   @summary("Delete a partner destination.")
   delete is ArmResourceDeleteWithoutOkAsync<
     PartnerDestination,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -123,9 +129,11 @@ interface PartnerDestinations {
 @@minLength(PartnerDestination.name, 3);
 @@doc(PartnerDestination.name, "Name of the partner destination.");
 @@doc(PartnerDestination.properties, "Properties of the Partner Destination.");
-@@doc(PartnerDestinations.createOrUpdate::parameters.resource,
+@@doc(
+  PartnerDestinations.createOrUpdate::parameters.resource,
   "Partner destination create information."
 );
-@@doc(PartnerDestinations.update::parameters.properties,
+@@doc(
+  PartnerDestinations.update::parameters.properties,
   "Partner destination update information."
 );

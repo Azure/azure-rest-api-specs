@@ -10,7 +10,8 @@ using Microsoft.DevCenter;
 
 @@clientLocation(DevCenterEncryptionSets.get, "EncryptionSets");
 @@clientLocation(DevCenterEncryptionSets.createOrUpdate, "EncryptionSets");
-@@clientName(DevCenterEncryptionSets.createOrUpdate::parameters.resource,
+@@clientName(
+  DevCenterEncryptionSets.createOrUpdate::parameters.resource,
   "body"
 );
 @@clientLocation(DevCenterEncryptionSets.update, "EncryptionSets");
@@ -50,16 +51,20 @@ using Microsoft.DevCenter;
 @@clientLocation(CatalogOperationGroup.sync, Catalogs);
 @@clientLocation(CatalogOperationGroup.connect, Catalogs);
 
-@@clientLocation(EnvironmentDefinitions.getErrorDetails,
+@@clientLocation(
+  EnvironmentDefinitions.getErrorDetails,
   "ProjectCatalogEnvironmentDefinitions"
 );
-@@clientLocation(EnvironmentDefinitionOperationGroup.get,
+@@clientLocation(
+  EnvironmentDefinitionOperationGroup.get,
   EnvironmentDefinitions
 );
-@@clientLocation(EnvironmentDefinitionOperationGroup.listByCatalog,
+@@clientLocation(
+  EnvironmentDefinitionOperationGroup.listByCatalog,
   EnvironmentDefinitions
 );
-@@clientLocation(EnvironmentDefinitionOperationGroup.getErrorDetails,
+@@clientLocation(
+  EnvironmentDefinitionOperationGroup.getErrorDetails,
   EnvironmentDefinitions
 );
 
@@ -75,50 +80,63 @@ using Microsoft.DevCenter;
 @@clientName(EnvironmentTypes.update::parameters.properties, "body");
 
 @@clientLocation(AllowedEnvironmentTypes.get, "ProjectAllowedEnvironmentTypes");
-@@clientLocation(AllowedEnvironmentTypes.list,
+@@clientLocation(
+  AllowedEnvironmentTypes.list,
   "ProjectAllowedEnvironmentTypes"
 );
 
-@@clientName(ProjectEnvironmentTypes.createOrUpdate::parameters.resource,
+@@clientName(
+  ProjectEnvironmentTypes.createOrUpdate::parameters.resource,
   "body"
 );
 @@clientName(ProjectEnvironmentTypes.update::parameters.properties, "body");
 
 @@clientName(DevBoxDefinitions.createOrUpdate::parameters.resource, "body");
 @@clientName(DevBoxDefinitions.update::parameters.properties, "body");
-@@clientLocation(DevBoxDefinitionOperationGroup.getByProject,
+@@clientLocation(
+  DevBoxDefinitionOperationGroup.getByProject,
   DevBoxDefinitions
 );
-@@clientLocation(DevBoxDefinitionOperationGroup.listByProject,
+@@clientLocation(
+  DevBoxDefinitionOperationGroup.listByProject,
   DevBoxDefinitions
 );
 
-@@clientLocation(ImageDefinitions.getByDevCenterCatalog,
+@@clientLocation(
+  ImageDefinitions.getByDevCenterCatalog,
   "DevCenterCatalogImageDefinitions"
 );
-@@clientLocation(ImageDefinitions.listByDevCenterCatalog,
+@@clientLocation(
+  ImageDefinitions.listByDevCenterCatalog,
   "DevCenterCatalogImageDefinitions"
 );
-@@clientLocation(ImageDefinitions.getErrorDetails,
+@@clientLocation(
+  ImageDefinitions.getErrorDetails,
   "DevCenterCatalogImageDefinitions"
 );
-@@clientLocation(ImageDefinitions.buildImage,
+@@clientLocation(
+  ImageDefinitions.buildImage,
   "DevCenterCatalogImageDefinitions"
 );
 
-@@clientLocation(ImageDefinitionBuilds.get,
+@@clientLocation(
+  ImageDefinitionBuilds.get,
   "DevCenterCatalogImageDefinitionBuild"
 );
-@@clientLocation(ImageDefinitionBuilds.listByImageDefinition,
+@@clientLocation(
+  ImageDefinitionBuilds.listByImageDefinition,
   "DevCenterCatalogImageDefinitionBuilds"
 );
-@@clientLocation(ImageDefinitionBuilds.cancel,
+@@clientLocation(
+  ImageDefinitionBuilds.cancel,
   "DevCenterCatalogImageDefinitionBuild"
 );
-@@clientLocation(ImageDefinitionBuilds.getBuildDetails,
+@@clientLocation(
+  ImageDefinitionBuilds.getBuildDetails,
   "DevCenterCatalogImageDefinitionBuild"
 );
-@@clientLocation(ProjectCatalogImageDefinitionBuild.listByImageDefinition,
+@@clientLocation(
+  ProjectCatalogImageDefinitionBuild.listByImageDefinition,
   "ProjectCatalogImageDefinitionBuilds"
 );
 
@@ -131,10 +149,12 @@ using Microsoft.DevCenter;
 @@clientName(NetworkConnections.createOrUpdate::parameters.resource, "body");
 @@clientName(NetworkConnections.update::parameters.properties, "body");
 
-@@clientLocation(HealthCheckStatusDetailsOperationGroup.getHealthDetails,
+@@clientLocation(
+  HealthCheckStatusDetailsOperationGroup.getHealthDetails,
   NetworkConnections
 );
-@@clientLocation(HealthCheckStatusDetailsOperationGroup.listHealthDetails,
+@@clientLocation(
+  HealthCheckStatusDetailsOperationGroup.listHealthDetails,
   NetworkConnections
 );
 
@@ -144,111 +164,138 @@ using Microsoft.DevCenter;
 
 @@clientLocation(UsagesOperationGroup.listByLocation, "Usages");
 
-@@clientLocation(CheckNameAvailabilityOperationGroup.execute,
+@@clientLocation(
+  CheckNameAvailabilityOperationGroup.execute,
   "CheckNameAvailability"
 );
 
-@@clientLocation(CheckScopedNameAvailabilityOperationGroup.execute,
+@@clientLocation(
+  CheckScopedNameAvailabilityOperationGroup.execute,
   "CheckScopedNameAvailability"
 );
-@@clientName(CheckNameAvailabilityOperationGroup.execute::parameters.body,
+@@clientName(
+  CheckNameAvailabilityOperationGroup.execute::parameters.body,
   "nameAvailabilityRequest"
 );
-@@clientName(CheckScopedNameAvailabilityOperationGroup.execute::parameters.body,
+@@clientName(
+  CheckScopedNameAvailabilityOperationGroup.execute::parameters.body,
   "nameAvailabilityRequest"
 );
 
-@@clientName(Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentity,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentity,
   "CustomerManagedKeyEncryptionKeyIdentity",
   "python,javascript"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentityType,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentityType,
   "IdentityType",
   "python,javascript"
 );
 
 // Flatten properties for backward compatibility
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AllowedEnvironmentType.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  AllowedEnvironmentType.properties,
   "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AttachedNetworkConnection.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  AttachedNetworkConnection.properties,
   "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Catalog.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Catalog.properties,
   "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CustomizationTask.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  CustomizationTask.properties,
   "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DevBoxDefinition.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  DevBoxDefinition.properties,
   "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DevCenterEncryptionSet.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  DevCenterEncryptionSet.properties,
   "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DevCenter.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  DevCenter.properties,
   "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(EnvironmentDefinition.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  EnvironmentDefinition.properties,
   "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(EnvironmentType.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  EnvironmentType.properties,
   "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Gallery.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Gallery.properties,
   "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(HealthCheckStatusDetails.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  HealthCheckStatusDetails.properties,
   "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ImageDefinitionBuild.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ImageDefinitionBuild.properties,
   "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ImageDefinition.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ImageDefinition.properties,
   "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Image.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Image.properties,
   "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ImageVersion.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ImageVersion.properties,
   "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(NetworkConnection.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  NetworkConnection.properties,
   "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Pool.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Pool.properties,
   "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ProjectEnvironmentType.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ProjectEnvironmentType.properties,
   "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ProjectPolicy.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ProjectPolicy.properties,
   "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Project.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Project.properties,
   "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Schedule.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Schedule.properties,
   "autorest,java"
 );

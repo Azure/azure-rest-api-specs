@@ -3,33 +3,40 @@
 using Azure.ClientGenerator.Core;
 using SecurityConnectorsDevOpsAPI;
 
-@@clientName(AzureDevOpsOrgs.createOrUpdate::parameters.resource,
+@@clientName(
+  AzureDevOpsOrgs.createOrUpdate::parameters.resource,
   "azureDevOpsOrg"
 );
 @@clientName(AzureDevOpsOrgs.update::parameters.properties, "azureDevOpsOrg");
 
-@@clientName(AzureDevOpsProjects.createOrUpdate::parameters.resource,
+@@clientName(
+  AzureDevOpsProjects.createOrUpdate::parameters.resource,
   "azureDevOpsProject"
 );
-@@clientName(AzureDevOpsProjects.update::parameters.properties,
+@@clientName(
+  AzureDevOpsProjects.update::parameters.properties,
   "azureDevOpsProject"
 );
 
 @@clientLocation(AzureDevOpsRepositories.get, "AzureDevOpsRepos");
 @@clientLocation(AzureDevOpsRepositories.createOrUpdate, "AzureDevOpsRepos");
-@@clientName(AzureDevOpsRepositories.createOrUpdate::parameters.resource,
+@@clientName(
+  AzureDevOpsRepositories.createOrUpdate::parameters.resource,
   "azureDevOpsRepository"
 );
 @@clientLocation(AzureDevOpsRepositories.update, "AzureDevOpsRepos");
-@@clientName(AzureDevOpsRepositories.update::parameters.properties,
+@@clientName(
+  AzureDevOpsRepositories.update::parameters.properties,
   "azureDevOpsRepository"
 );
 @@clientLocation(AzureDevOpsRepositories.list, "AzureDevOpsRepos");
 
-@@clientName(DevOpsConfigurations.createOrUpdate::parameters.resource,
+@@clientName(
+  DevOpsConfigurations.createOrUpdate::parameters.resource,
   "devOpsConfiguration"
 );
-@@clientName(DevOpsConfigurations.update::parameters.properties,
+@@clientName(
+  DevOpsConfigurations.update::parameters.properties,
   "devOpsConfiguration"
 );
 @@clientLocation(DevOpsConfigurations.listAvailable, AzureDevOpsOrgs);
@@ -37,7 +44,8 @@ using SecurityConnectorsDevOpsAPI;
 @@clientName(DevOpsConfigurations.gitHubOwnersListAvailable, "ListAvailable");
 @@clientLocation(DevOpsConfigurations.gitLabGroupsListAvailable, GitLabGroups);
 @@clientName(DevOpsConfigurations.gitLabGroupsListAvailable, "ListAvailable");
-@@clientLocation(DevOpsConfigurations.devOpsOperationResultsGet,
+@@clientLocation(
+  DevOpsConfigurations.devOpsOperationResultsGet,
   "DevOpsOperationResults"
 );
 @@clientName(DevOpsConfigurations.devOpsOperationResultsGet, "Get");

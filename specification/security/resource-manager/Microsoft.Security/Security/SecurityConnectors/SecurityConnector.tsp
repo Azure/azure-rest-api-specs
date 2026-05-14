@@ -98,9 +98,11 @@ interface SecurityConnectors {
 
 @@doc(SecurityConnector.name, "The security connector name.");
 @@doc(SecurityConnector.properties, "Security connector data");
-@@doc(SecurityConnectors.createOrUpdate::parameters.resource,
+@@doc(
+  SecurityConnectors.createOrUpdate::parameters.resource,
   "The security connector resource"
 );
-@@doc(SecurityConnectors.update::parameters.properties,
+@@doc(
+  SecurityConnectors.update::parameters.properties,
   "The security connector resource"
 );

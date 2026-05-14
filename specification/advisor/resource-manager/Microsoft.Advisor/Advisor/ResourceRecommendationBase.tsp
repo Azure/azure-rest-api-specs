@@ -106,9 +106,11 @@ interface ResourceRecommendationBases {
 }
 
 @@doc(ResourceRecommendationBase.name, "The recommendation ID.");
-@@doc(ResourceRecommendationBase.properties,
+@@doc(
+  ResourceRecommendationBase.properties,
   "The properties of the recommendation."
 );
-@@doc(ResourceRecommendationBases.patch::parameters.properties,
+@@doc(
+  ResourceRecommendationBases.patch::parameters.properties,
   "The properties to update on the recommendation."
 );
