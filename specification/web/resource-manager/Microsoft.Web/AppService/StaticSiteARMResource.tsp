@@ -187,6 +187,7 @@ interface StaticSiteARMResources {
   /**
    * Description for Updates a user entry with the listed roles
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-path-casing-conflicts" "Legacy"
   @summary("Updates a user entry with the listed roles")
   @patch(#{ implicitOptionality: false })
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/staticSites/{name}/authproviders/{authprovider}/users/{userid}")
