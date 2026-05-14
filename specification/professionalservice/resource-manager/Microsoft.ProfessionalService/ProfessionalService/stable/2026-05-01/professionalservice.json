@@ -100,7 +100,7 @@
             "description": "The CheckAvailability request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityRequest"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/CheckNameAvailabilityRequest"
             }
           }
         ],
@@ -108,7 +108,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/CheckNameAvailabilityResponse"
             }
           },
           "default": {
@@ -624,38 +624,6 @@
     }
   },
   "definitions": {
-    "CheckNameAvailabilityRequest": {
-      "type": "object",
-      "description": "Check name availability request.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name to check availability for."
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type."
-        }
-      }
-    },
-    "CheckNameAvailabilityResponse": {
-      "type": "object",
-      "description": "Check name availability response.",
-      "properties": {
-        "nameAvailable": {
-          "type": "boolean",
-          "description": "Whether the name is available."
-        },
-        "reason": {
-          "type": "string",
-          "description": "Reason the name is not available."
-        },
-        "message": {
-          "type": "string",
-          "description": "Detailed message."
-        }
-      }
-    },
     "DeleteOptions": {
       "type": "object",
       "description": "Delete options for a Professional Service resource.",

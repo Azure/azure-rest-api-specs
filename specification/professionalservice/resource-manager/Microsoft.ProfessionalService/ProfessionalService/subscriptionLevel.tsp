@@ -51,10 +51,7 @@ interface ProfessionalServiceSubscriptionLevelPreflight {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Global operations not scoped to a single resource"
 interface ProfessionalServiceSubscriptionLevelGlobal {
   listByAzureSubscription is ArmListBySubscription<ProfessionalServiceResource>;
-  checkNameAvailability is checkGlobalNameAvailability<
-    CheckNameAvailabilityRequest,
-    CheckNameAvailabilityResponse
-  >;
+  checkNameAvailability is checkGlobalNameAvailability;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Custom operation status routes"
