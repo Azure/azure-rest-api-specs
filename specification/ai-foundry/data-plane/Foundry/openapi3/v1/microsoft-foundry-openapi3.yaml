@@ -7185,14 +7185,6 @@ paths:
           schema:
             type: string
           explode: false
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Toolboxes=V1Preview
         - name: api-version
           in: query
           required: true
@@ -7234,9 +7226,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Toolboxes
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Toolboxes=V1Preview
   /toolboxes/{name}:
     get:
       operationId: getToolbox
@@ -7248,14 +7237,6 @@ paths:
           description: The name of the toolbox to retrieve.
           schema:
             type: string
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Toolboxes=V1Preview
         - name: api-version
           in: query
           required: true
@@ -7278,22 +7259,11 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Toolboxes
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Toolboxes=V1Preview
     patch:
       operationId: updateToolbox
       description: Update a toolbox to point to a specific version.
       parameters:
         - $ref: '#/components/parameters/UpdateToolboxRequest.name'
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Toolboxes=V1Preview
         - name: api-version
           in: query
           required: true
@@ -7322,9 +7292,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateToolboxRequest'
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Toolboxes=V1Preview
     delete:
       operationId: deleteToolbox
       description: Delete a toolbox and all its versions.
@@ -7335,14 +7302,6 @@ paths:
           description: The name of the toolbox to delete.
           schema:
             type: string
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Toolboxes=V1Preview
         - name: api-version
           in: query
           required: true
@@ -7361,9 +7320,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Toolboxes
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Toolboxes=V1Preview
   /toolboxes/{name}/versions:
     post:
       operationId: createToolboxVersion
@@ -7376,14 +7332,6 @@ paths:
           schema:
             type: string
             maxLength: 256
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Toolboxes=V1Preview
         - name: api-version
           in: query
           required: true
@@ -7433,9 +7381,6 @@ paths:
                   description: Policy configuration for this toolbox version.
               required:
                 - tools
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Toolboxes=V1Preview
     get:
       operationId: listToolboxVersions
       description: List all versions of a toolbox.
@@ -7486,14 +7431,6 @@ paths:
           schema:
             type: string
           explode: false
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Toolboxes=V1Preview
         - name: api-version
           in: query
           required: true
@@ -7535,9 +7472,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Toolboxes
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Toolboxes=V1Preview
   /toolboxes/{name}/versions/{version}:
     get:
       operationId: getToolboxVersion
@@ -7555,14 +7489,6 @@ paths:
           description: The version identifier to retrieve.
           schema:
             type: string
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Toolboxes=V1Preview
         - name: api-version
           in: query
           required: true
@@ -7585,9 +7511,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Toolboxes
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Toolboxes=V1Preview
     delete:
       operationId: deleteToolboxVersion
       description: Delete a specific version of a toolbox.
@@ -7604,14 +7527,6 @@ paths:
           description: The version identifier to delete.
           schema:
             type: string
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Toolboxes=V1Preview
         - name: api-version
           in: query
           required: true
@@ -7630,9 +7545,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Toolboxes
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Toolboxes=V1Preview
 security:
   - OAuth2Auth:
       - https://ai.azure.com/.default
