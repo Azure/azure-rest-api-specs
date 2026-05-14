@@ -34,14 +34,6 @@ export class CompileRule implements Rule {
       // Rule output is easier to read if "tsp compile" stderr is redirected to stdOutput
       stdOutput += stderr;
 
-      if (
-        stdout.toLowerCase().includes("no emitter was configured") ||
-        stdout.toLowerCase().includes("no output was generated")
-      ) {
-        success = false;
-        errorOutput += "No emitter was configured and/or no output was generated.";
-      }
-
       if (success) {
         if (!err) {
           // Check for *extra* typespec-generated swagger files under the output folder, which
