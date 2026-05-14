@@ -15,7 +15,7 @@ interface AnalyticsItemsOperationGroup {
   /**
    * Gets a list of Analytics Items defined within an Application Insights component.
    */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/{scopePath}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.insights/components/{resourceName}/{scopePath}")
   @get
   list(
     ...ApiVersionParameter,
@@ -56,7 +56,7 @@ interface AnalyticsItemsOperationGroup {
   /**
    * Gets a specific Analytics Items defined within an Application Insights component.
    */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/{scopePath}/item")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.insights/components/{resourceName}/{scopePath}/item")
   @get
   get(
     ...ApiVersionParameter,
@@ -90,7 +90,7 @@ interface AnalyticsItemsOperationGroup {
   /**
    * Adds or Updates a specific Analytics Item within an Application Insights component.
    */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/{scopePath}/item")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.insights/components/{resourceName}/{scopePath}/item")
   @put
   put(
     ...ApiVersionParameter,
@@ -124,7 +124,7 @@ interface AnalyticsItemsOperationGroup {
   /**
    * Deletes a specific Analytics Items defined within an Application Insights component.
    */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/{scopePath}/item")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.insights/components/{resourceName}/{scopePath}/item")
   @delete
   delete(
     ...ApiVersionParameter,
