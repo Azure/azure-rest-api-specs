@@ -29,7 +29,7 @@ alias ActionGroupResourcesOps = Azure.ResourceManager.Legacy.RoutedOperations<
   ActionGroupResourcesParentParameters,
   ActionGroupResourcesParameters,
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/actionGroups/{actionGroupName}/notificationStatus/{notificationId}",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Insights/actionGroups/{actionGroupName}/notificationStatus/{notificationId}",
   }
 >;
 
@@ -148,23 +148,18 @@ interface ActionGroupResources {
 }
 
 @@doc(ActionGroupResource.name, "The name of the action group.");
-@@doc(
-  ActionGroupResource.properties,
+@@doc(ActionGroupResource.properties,
   "The action groups properties of the resource."
 );
-@@doc(
-  ActionGroupResources.createOrUpdate::parameters.resource,
+@@doc(ActionGroupResources.createOrUpdate::parameters.resource,
   "The action group to create or use for the update."
 );
-@@doc(
-  ActionGroupResources.update::parameters.properties,
+@@doc(ActionGroupResources.update::parameters.properties,
   "Parameters supplied to the operation."
 );
-@@doc(
-  ActionGroupResources.createNotificationsAtActionGroupResourceLevel::parameters.body,
+@@doc(ActionGroupResources.createNotificationsAtActionGroupResourceLevel::parameters.body,
   "The notification request body which includes the contact details"
 );
-@@doc(
-  ActionGroupResources.enableReceiver::parameters.body,
+@@doc(ActionGroupResources.enableReceiver::parameters.body,
   "The receiver to re-enable."
 );

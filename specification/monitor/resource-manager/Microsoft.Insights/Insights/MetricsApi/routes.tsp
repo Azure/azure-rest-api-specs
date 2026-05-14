@@ -82,7 +82,7 @@ interface MetricNamespacesOperationGroup {
   @action("metricNamespaces")
   @tag("metricNamespaces")
   @list
-  @route("/{+resourceUri}/providers/Microsoft.insights/metricNamespaces")
+  @route("/{+resourceUri}/providers/microsoft.insights/metricNamespaces")
   list(
     ...ApiVersionParameter,
 
