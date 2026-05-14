@@ -284,7 +284,7 @@ model MemoryStoreDeleteScopeResponse {
 
 @doc("Response for deleting a memory item from a memory store.")
 @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
-model DeleteMemoryItemResponse {
+model DeleteMemoryResponse {
   @doc("The object type. Always 'memory_item.deleted'.")
   object: MemoryStoreObjectType.memoryItemDeleted;
 
@@ -404,7 +404,7 @@ alias MemoryStoreDeleteScopeRequest = {
   scope: string;
 };
 
-alias CreateMemoryItemRequest = {
+alias CreateMemoryRequest = {
   @doc("The name of the memory store.")
   @path
   name: string;
@@ -419,7 +419,7 @@ alias CreateMemoryItemRequest = {
   kind: MemoryItemKind;
 };
 
-alias UpdateMemoryItemRequest = {
+alias UpdateMemoryRequest = {
   @doc("The name of the memory store.")
   @path
   name: string;
@@ -432,7 +432,7 @@ alias UpdateMemoryItemRequest = {
   content: string;
 };
 
-alias GetMemoryItemRequest = {
+alias GetMemoryRequest = {
   @doc("The name of the memory store.")
   @path
   name: string;
@@ -442,7 +442,7 @@ alias GetMemoryItemRequest = {
   memory_id: string;
 };
 
-alias ListMemoryItemsRequest = {
+alias ListMemoriesRequest = {
   @doc("The name of the memory store.")
   @path
   name: string;
@@ -450,7 +450,7 @@ alias ListMemoryItemsRequest = {
   ...CommonPageQueryParameters;
 };
 
-alias DeleteMemoryItemRequest = {
+alias DeleteMemoryRequest = {
   @doc("The name of the memory store.")
   @path
   name: string;

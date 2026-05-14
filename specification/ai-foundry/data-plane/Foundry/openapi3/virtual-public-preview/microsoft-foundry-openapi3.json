@@ -7347,7 +7347,7 @@
     },
     "/memory_stores/{name}/memories": {
       "post": {
-        "operationId": "createMemoryItem",
+        "operationId": "createMemory",
         "description": "Create a memory item in a memory store.",
         "parameters": [
           {
@@ -7447,7 +7447,7 @@
         }
       },
       "get": {
-        "operationId": "listMemoryItems",
+        "operationId": "listMemories",
         "description": "List all memory items in a memory store.",
         "parameters": [
           {
@@ -7584,7 +7584,7 @@
     },
     "/memory_stores/{name}/memories/{memory_id}": {
       "post": {
-        "operationId": "updateMemoryItem",
+        "operationId": "updateMemory",
         "description": "Update a memory item in a memory store.",
         "parameters": [
           {
@@ -7679,7 +7679,7 @@
         }
       },
       "get": {
-        "operationId": "getMemoryItem",
+        "operationId": "getMemory",
         "description": "Retrieve a memory item from a memory store.",
         "parameters": [
           {
@@ -7755,7 +7755,7 @@
         }
       },
       "delete": {
-        "operationId": "deleteMemoryItem",
+        "operationId": "deleteMemory",
         "description": "Delete a memory item from a memory store.",
         "parameters": [
           {
@@ -7805,7 +7805,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DeleteMemoryItemResponse"
+                  "$ref": "#/components/schemas/DeleteMemoryResponse"
                 }
               }
             }
@@ -17917,7 +17917,7 @@
         },
         "description": "A deleted evaluation run Object."
       },
-      "DeleteMemoryItemResponse": {
+      "DeleteMemoryResponse": {
         "type": "object",
         "required": [
           "object",

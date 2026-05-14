@@ -4856,7 +4856,7 @@ paths:
           - MemoryStores=V1Preview
   /memory_stores/{name}/memories:
     post:
-      operationId: createMemoryItem
+      operationId: createMemory
       description: Create a memory item in a memory store.
       parameters:
         - name: Foundry-Features
@@ -4920,7 +4920,7 @@ paths:
         conditional_previews:
           - MemoryStores=V1Preview
     get:
-      operationId: listMemoryItems
+      operationId: listMemories
       description: List all memory items in a memory store.
       parameters:
         - name: Foundry-Features
@@ -5023,7 +5023,7 @@ paths:
           - MemoryStores=V1Preview
   /memory_stores/{name}/memories/{memory_id}:
     post:
-      operationId: updateMemoryItem
+      operationId: updateMemory
       description: Update a memory item in a memory store.
       parameters:
         - name: Foundry-Features
@@ -5084,7 +5084,7 @@ paths:
         conditional_previews:
           - MemoryStores=V1Preview
     get:
-      operationId: getMemoryItem
+      operationId: getMemory
       description: Retrieve a memory item from a memory store.
       parameters:
         - name: Foundry-Features
@@ -5133,7 +5133,7 @@ paths:
         conditional_previews:
           - MemoryStores=V1Preview
     delete:
-      operationId: deleteMemoryItem
+      operationId: deleteMemory
       description: Delete a memory item from a memory store.
       parameters:
         - name: Foundry-Features
@@ -5169,7 +5169,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DeleteMemoryItemResponse'
+                $ref: '#/components/schemas/DeleteMemoryResponse'
         default:
           description: An unexpected error response.
           content:
@@ -11980,7 +11980,7 @@ components:
           type: boolean
           description: Whether the eval was successfully deleted.
       description: A deleted evaluation run Object.
-    DeleteMemoryItemResponse:
+    DeleteMemoryResponse:
       type: object
       required:
         - object
