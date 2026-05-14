@@ -29,11 +29,13 @@ using Microsoft.ServiceBus;
 @@clientName(TlsVersion, "ServiceBusMinimumTlsVersion", "csharp");
 @@clientName(MigrationConfigProperties, "MigrationConfiguration", "csharp");
 @@clientName(KeyType, "ServiceBusAccessKeyType", "csharp");
-@@clientName(RegenerateAccessKeyParameters,
+@@clientName(
+  RegenerateAccessKeyParameters,
   "ServiceBusRegenerateAccessKeyContent",
   "csharp"
 );
-@@clientName(ProvisioningStateDR,
+@@clientName(
+  ProvisioningStateDR,
   "ServiceBusDisasterRecoveryProvisioningState",
   "csharp"
 );
@@ -44,25 +46,30 @@ using Microsoft.ServiceBus;
 @@clientName(Rule, "ServiceBusRule", "csharp");
 @@clientName(Action, "ServiceBusFilterAction", "csharp");
 @@clientName(Encryption, "ServiceBusEncryption", "csharp");
-@@clientName(ConnectionState,
+@@clientName(
+  ConnectionState,
   "ServiceBusPrivateLinkServiceConnectionState",
   "csharp"
 );
-@@clientName(PrivateLinkConnectionStatus,
+@@clientName(
+  PrivateLinkConnectionStatus,
   "ServiceBusPrivateLinkConnectionStatus",
   "csharp"
 );
-@@clientName(EndPointProvisioningState,
+@@clientName(
+  EndPointProvisioningState,
   "ServiceBusPrivateEndpointConnectionProvisioningState",
   "csharp"
 );
-@@clientName(PublicNetworkAccessFlag,
+@@clientName(
+  PublicNetworkAccessFlag,
   "ServiceBusPublicNetworkAccessFlag",
   "csharp"
 );
 @@clientName(NWRuleSetIpRules, "ServiceBusNetworkRuleSetIPRules", "csharp");
 @@clientName(NetworkRuleIPAction, "ServiceBusNetworkRuleIPAction", "csharp");
-@@clientName(NWRuleSetVirtualNetworkRules,
+@@clientName(
+  NWRuleSetVirtualNetworkRules,
   "ServiceBusNetworkRuleSetVirtualNetworkRules",
   "csharp"
 );
@@ -70,7 +77,8 @@ using Microsoft.ServiceBus;
 @@clientName(SBTopic, "ServiceBusTopic", "csharp");
 @@clientName(SBQueue, "ServiceBusQueue", "csharp");
 @@clientName(SBSubscription, "ServiceBusSubscription", "csharp");
-@@clientName(SBClientAffineProperties,
+@@clientName(
+  SBClientAffineProperties,
   "ServiceBusClientAffineProperties",
   "csharp"
 );
@@ -78,69 +86,84 @@ using Microsoft.ServiceBus;
 @@clientName(SBNamespace, "ServiceBusNamespace", "csharp");
 @@clientName(SBSku, "ServiceBusSku", "csharp");
 @@clientName(SBAuthorizationRule, "ServiceBusAuthorizationRule", "csharp");
-@@clientName(CheckNameAvailability,
+@@clientName(
+  CheckNameAvailability,
   "ServiceBusNameAvailabilityContent",
   "csharp"
 );
-@@clientName(CheckNameAvailabilityResult,
+@@clientName(
+  CheckNameAvailabilityResult,
   "ServiceBusNameAvailabilityResult",
   "csharp"
 );
 @@clientName(NetworkRuleSet, "ServiceBusNetworkRuleSet", "csharp");
-@@clientName(NamespaceReplicaLocation,
+@@clientName(
+  NamespaceReplicaLocation,
   "ServiceBusNamespaceReplicaLocation",
   "csharp"
 );
-@@clientName(NetworkSecurityPerimeter,
+@@clientName(
+  NetworkSecurityPerimeter,
   "ServiceBusNetworkSecurityPerimeter",
   "csharp"
 );
-@@clientName(NetworkSecurityPerimeterConfiguration,
+@@clientName(
+  NetworkSecurityPerimeterConfiguration,
   "ServiceBusNetworkSecurityPerimeterConfiguration",
   "csharp"
 );
-@@clientName(NetworkSecurityPerimeterConfigurationPropertiesProfile,
+@@clientName(
+  NetworkSecurityPerimeterConfigurationPropertiesProfile,
   "ServiceBusNetworkSecurityPerimeterConfigurationPropertiesProfile",
   "csharp"
 );
-@@clientName(NetworkSecurityPerimeterConfigurationPropertiesResourceAssociation,
+@@clientName(
+  NetworkSecurityPerimeterConfigurationPropertiesResourceAssociation,
   "ServiceBusNetworkSecurityPerimeterConfigurationPropertiesResourceAssociation",
   "csharp"
 );
-@@clientName(NetworkSecurityPerimeterConfigurationProvisioningState,
+@@clientName(
+  NetworkSecurityPerimeterConfigurationProvisioningState,
   "ServiceBusNetworkSecurityPerimeterConfigurationProvisioningState",
   "csharp"
 );
 @@clientName(NspAccessRule, "ServiceBusNspAccessRule", "csharp");
-@@clientName(NspAccessRuleDirection,
+@@clientName(
+  NspAccessRuleDirection,
   "ServiceBusNspAccessRuleDirection",
   "csharp"
 );
-@@clientName(NspAccessRuleProperties,
+@@clientName(
+  NspAccessRuleProperties,
   "ServiceBusNspAccessRuleProperties",
   "csharp"
 );
-@@clientName(ResourceAssociationAccessMode,
+@@clientName(
+  ResourceAssociationAccessMode,
   "ServiceBusResourceAssociationAccessMode",
   "csharp"
 );
 @@clientName(Mode, "ServiceBusConfidentialComputeMode", "csharp");
-@@clientName(ProvisioningIssue,
+@@clientName(
+  ProvisioningIssue,
   "ServiceBusNspConfigurationProvisioningIssue",
   "csharp"
 );
-@@clientName(ProvisioningIssueProperties,
+@@clientName(
+  ProvisioningIssueProperties,
   "ServiceBusNspConfigurationProvisioningIssueProperties",
   "csharp"
 );
 @@clientName(FailOver, "ServiceBusNamespaceFailOver", "csharp");
-@@clientName(SBNamespaces.privateLinkResourcesGet,
+@@clientName(
+  SBNamespaces.privateLinkResourcesGet,
   "GetPrivateLinkResources",
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the operation back to pageable for backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(SBNamespaces.privateLinkResourcesGet,
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  SBNamespaces.privateLinkResourcesGet,
   "csharp"
 );
 @@clientName(NWRuleSetIpRules.ipMask, "IPMask", "csharp");
@@ -148,29 +171,35 @@ using Microsoft.ServiceBus;
 @@clientName(CorrelationFilter.to, "SendTo", "csharp");
 @@clientName(CorrelationFilter.label, "Subject", "csharp");
 @@clientName(SBNamespaceProperties.zoneRedundant, "IsZoneRedundant", "csharp");
-@@clientName(NetworkRuleSetProperties.trustedServiceAccessEnabled,
+@@clientName(
+  NetworkRuleSetProperties.trustedServiceAccessEnabled,
   "IsTrustedServiceAccessEnabled",
   "csharp"
 );
-@@clientName(CheckNameAvailabilityResult.nameAvailable,
+@@clientName(
+  CheckNameAvailabilityResult.nameAvailable,
   "IsNameAvailable",
   "csharp"
 );
-@@clientName(MigrationConfigPropertiesProperties.targetNamespace,
+@@clientName(
+  MigrationConfigPropertiesProperties.targetNamespace,
   "TargetServiceBusNamespace",
   "csharp"
 );
-@@alternateType(MigrationConfigPropertiesProperties.targetNamespace,
+@@alternateType(
+  MigrationConfigPropertiesProperties.targetNamespace,
   armResourceIdentifier,
   "csharp"
 );
 @@alternateType(Identity.tenantId, uuid, "csharp");
 @@alternateType(KeyVaultProperties.keyVaultUri, url, "csharp");
-@@alternateType(SBNamespace.identity,
+@@alternateType(
+  SBNamespace.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
-@@alternateType(SBNamespaceUpdateParameters.identity,
+@@alternateType(
+  SBNamespaceUpdateParameters.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
@@ -186,11 +215,13 @@ using Microsoft.ServiceBus;
 
 // Step 6: Fix property names (MembersMustExist)
 @@clientName(NetworkRuleSetProperties.ipRules, "IPRules", "csharp");
-@@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+@@clientName(
+  PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
   "ConnectionState",
   "csharp"
 );
-@@clientName(PrivateEndpointConnection,
+@@clientName(
+  PrivateEndpointConnection,
   "ServiceBusPrivateEndpointConnection",
   "csharp"
 );
@@ -212,11 +243,13 @@ using Microsoft.ServiceBus;
 @@alternateType(SBAuthorizationRule.location, azureLocation, "csharp");
 
 // Step 6: Fix operation names (MembersMustExist)
-@@clientName(NamespacesOperationGroup.checkNameAvailability,
+@@clientName(
+  NamespacesOperationGroup.checkNameAvailability,
   "CheckServiceBusNamespaceNameAvailability",
   "csharp"
 );
-@@clientName(SBNamespaces.checkNameAvailability,
+@@clientName(
+  SBNamespaces.checkNameAvailability,
   "CheckServiceBusDisasterRecoveryNameAvailability",
   "csharp"
 );
@@ -253,28 +286,34 @@ namespace Microsoft.ServiceBus {
   }
 } // namespace Microsoft.ServiceBus
 
-@@alternateType(SBNamespaceUpdateParameters,
+@@alternateType(
+  SBNamespaceUpdateParameters,
   SBNamespaceUpdateParametersReplacement,
   "csharp"
 );
-@@clientName(SBNamespaceUpdateParametersReplacement,
+@@clientName(
+  SBNamespaceUpdateParametersReplacement,
   "ServiceBusNamespacePatch",
   "csharp"
 );
-@@usage(SBNamespaceUpdateParametersReplacement,
+@@usage(
+  SBNamespaceUpdateParametersReplacement,
   Usage.input | Usage.output,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SBNamespaceUpdateParametersReplacement.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  SBNamespaceUpdateParametersReplacement.properties
 );
 
 @@alternateType(PrivateLinkResource, PrivateLinkResourceReplacement, "csharp");
-@@clientName(PrivateLinkResourceReplacement,
+@@clientName(
+  PrivateLinkResourceReplacement,
   "ServiceBusPrivateLinkResource",
   "csharp"
 );
 @@usage(PrivateLinkResourceReplacement, Usage.input | Usage.output, "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResourceReplacement.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateLinkResourceReplacement.properties
 );

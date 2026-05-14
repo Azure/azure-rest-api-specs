@@ -35,17 +35,19 @@ op StorageOperation<
   ...ApiVersionHeader,
   ...ClientRequestIdHeader,
   ...TParams,
-): (TResponse & {
-  /** Content-Type header */
-  #suppress "@typespec/http/content-type-ignored" "Template for existing API"
-  @header("Content-Type")
-  contentType: ResponseMediaType;
+):
+  | (TResponse & {
+      /** Content-Type header */
+      #suppress "@typespec/http/content-type-ignored" "Template for existing API"
+      @header("Content-Type")
+      contentType: ResponseMediaType;
 
-  ...DateResponseHeaderPrivate;
-  ...ApiVersionHeader;
-  ...RequestIdResponseHeader;
-  ...ClientRequestIdHeader;
-}) | TError;
+      ...DateResponseHeaderPrivate;
+      ...ApiVersionHeader;
+      ...RequestIdResponseHeader;
+      ...ClientRequestIdHeader;
+    })
+  | TError;
 
 /** Azure Storage Blob basic operation template */
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
@@ -53,12 +55,14 @@ op StorageOperationNoBody<
   TParams extends TypeSpec.Reflection.Model | void,
   TResponse extends TypeSpec.Reflection.Model | void,
   TError = Error
->(...ApiVersionHeader, ...ClientRequestIdHeader, ...TParams): (TResponse & {
-  ...DateResponseHeaderPrivate;
-  ...ApiVersionHeader;
-  ...RequestIdResponseHeader;
-  ...ClientRequestIdHeader;
-}) | TError;
+>(...ApiVersionHeader, ...ClientRequestIdHeader, ...TParams):
+  | (TResponse & {
+      ...DateResponseHeaderPrivate;
+      ...ApiVersionHeader;
+      ...RequestIdResponseHeader;
+      ...ClientRequestIdHeader;
+    })
+  | TError;
 
 /** Azure Storage Blob basic operation template */
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
@@ -213,19 +217,21 @@ interface Service {
 
     /** The batch request content. */
     ...MultipartBodyParameter,
-  ): (MultipartBodyParameter & {
-    @statusCode statusCode: 202;
+  ):
+    | (MultipartBodyParameter & {
+        @statusCode statusCode: 202;
 
-    /** The media type of the body of the response. For batch requests, this is multipart/mixed; boundary=batchresponse_GUID */
-    #suppress "@typespec/http/content-type-ignored" "Template for existing API"
-    @header("Content-Type")
-    @alternateType(string, "go")
-    contentType: "multipart/mixed";
+        /** The media type of the body of the response. For batch requests, this is multipart/mixed; boundary=batchresponse_GUID */
+        #suppress "@typespec/http/content-type-ignored" "Template for existing API"
+        @header("Content-Type")
+        @alternateType(string, "go")
+        contentType: "multipart/mixed";
 
-    ...ApiVersionHeader;
-    ...RequestIdResponseHeader;
-    ...ClientRequestIdHeader;
-  }) | Error;
+        ...ApiVersionHeader;
+        ...RequestIdResponseHeader;
+        ...ClientRequestIdHeader;
+      })
+    | Error;
 
   /** Lists blobs across all containers whose tags match a given search expression. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
@@ -461,17 +467,19 @@ interface Container {
 
     /** The batch request content. */
     ...MultipartBodyParameter,
-  ): ({
-    @statusCode statusCode: 202;
+  ):
+    | ({
+        @statusCode statusCode: 202;
 
-    /** The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
-    @header("Content-Type")
-    @alternateType(string, "go")
-    contentType: "multipart/mixed";
+        /** The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
+        @header("Content-Type")
+        @alternateType(string, "go")
+        contentType: "multipart/mixed";
 
-    ...RequestIdResponseHeader;
-    ...ApiVersionHeader;
-  } & MultipartBodyParameter) | Error;
+        ...RequestIdResponseHeader;
+        ...ApiVersionHeader;
+      } & MultipartBodyParameter)
+    | Error;
 
   /** Lists blobs in the specified container whose tags match a given search expression. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
@@ -711,109 +719,112 @@ interface Blob {
     ...IfUnmodifiedSinceParameter,
     ...IfNoneMatchParameter,
     ...IfMatchParameter,
-  ): (BodyParameter & {
-    /** The content type of the body of the response. */
-    @header("Content-Type")
-    contentType: "application/octet-stream";
+  ):
+    | (BodyParameter & {
+        /** The content type of the body of the response. */
+        @header("Content-Type")
+        contentType: "application/octet-stream";
 
-    ...RequestIdResponseHeader;
-    ...ClientRequestIdHeader;
-    ...MetadataHeaders;
-    ...ObjectReplicationHeaders;
-    ...LastModifiedResponseHeader;
-    ...CreationTimeResponseHeader;
-    ...ObjectReplicationPolicyIdResponseHeader;
-    ...ContentLengthResponseHeader;
-    ...ContentRangeResponseHeader;
-    ...EtagResponseHeader;
-    ...ContentMd5ResponseHeader;
-    ...ContentEncodingResponseParameter;
-    ...CacheControlResponseHeader;
-    ...ContentDispositionResponseHeader;
-    ...ContentLanguageResponseHeader;
-    ...BlobSequenceNumberResponseHeader;
-    ...BlobTypeResponseHeader;
-    ...CopyCompletionTimeResponseHeader;
-    ...CopyStatusDescriptionResponseHeader;
-    ...CopyIdResponseHeader;
-    ...CopyProgressResponseHeader;
-    ...CopyStatusResponseHeader;
-    ...CopySourceResponseHeader;
-    ...LeaseDurationResponseHeader;
-    ...LeaseStateResponseHeader;
-    ...LeaseStatusResponseHeader;
-    ...VersionIdResponseHeader;
-    ...IsCurrentVersionResponseHeader;
-    ...AcceptRangesResponseHeaderPrivate;
-    ...DateResponseHeaderPrivate;
-    ...BlobCommittedBlockCountResponseHeader;
-    ...ServerEncryptedResponseHeader;
-    ...EncryptionKeySha256ResponseHeader;
-    ...EncryptionScopeResponseHeader;
-    ...BlobContentMd5ResponseHeader;
-    ...TagCountResponseHeader;
-    ...IsSealedResponseHeader;
-    ...LastAccessedResponseHeader;
-    ...ImmutabilityPolicyExpiresOnResponseHeader;
-    ...ImmutabilityPolicyModeResponseHeader;
-    ...LegalHoldOptionalResponseHeader;
-    ...StructuredBodyTypeResponseHeader;
-    ...StructuredContentLengthResponseHeader;
-    ...ApiVersionHeader;
-  }) | (BodyParameter & {
-    #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard pattern"
-    @statusCode statusCode: 206;
+        ...RequestIdResponseHeader;
+        ...ClientRequestIdHeader;
+        ...MetadataHeaders;
+        ...ObjectReplicationHeaders;
+        ...LastModifiedResponseHeader;
+        ...CreationTimeResponseHeader;
+        ...ObjectReplicationPolicyIdResponseHeader;
+        ...ContentLengthResponseHeader;
+        ...ContentRangeResponseHeader;
+        ...EtagResponseHeader;
+        ...ContentMd5ResponseHeader;
+        ...ContentEncodingResponseParameter;
+        ...CacheControlResponseHeader;
+        ...ContentDispositionResponseHeader;
+        ...ContentLanguageResponseHeader;
+        ...BlobSequenceNumberResponseHeader;
+        ...BlobTypeResponseHeader;
+        ...CopyCompletionTimeResponseHeader;
+        ...CopyStatusDescriptionResponseHeader;
+        ...CopyIdResponseHeader;
+        ...CopyProgressResponseHeader;
+        ...CopyStatusResponseHeader;
+        ...CopySourceResponseHeader;
+        ...LeaseDurationResponseHeader;
+        ...LeaseStateResponseHeader;
+        ...LeaseStatusResponseHeader;
+        ...VersionIdResponseHeader;
+        ...IsCurrentVersionResponseHeader;
+        ...AcceptRangesResponseHeaderPrivate;
+        ...DateResponseHeaderPrivate;
+        ...BlobCommittedBlockCountResponseHeader;
+        ...ServerEncryptedResponseHeader;
+        ...EncryptionKeySha256ResponseHeader;
+        ...EncryptionScopeResponseHeader;
+        ...BlobContentMd5ResponseHeader;
+        ...TagCountResponseHeader;
+        ...IsSealedResponseHeader;
+        ...LastAccessedResponseHeader;
+        ...ImmutabilityPolicyExpiresOnResponseHeader;
+        ...ImmutabilityPolicyModeResponseHeader;
+        ...LegalHoldOptionalResponseHeader;
+        ...StructuredBodyTypeResponseHeader;
+        ...StructuredContentLengthResponseHeader;
+        ...ApiVersionHeader;
+      })
+    | (BodyParameter & {
+        #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard pattern"
+        @statusCode statusCode: 206;
 
-    /** The content type of the body of the response. */
-    @header("Content-Type")
-    contentType: "application/octet-stream";
+        /** The content type of the body of the response. */
+        @header("Content-Type")
+        contentType: "application/octet-stream";
 
-    ...RequestIdResponseHeader;
-    ...ClientRequestIdHeader;
-    ...MetadataHeaders;
-    ...ObjectReplicationHeaders;
-    ...LastModifiedResponseHeader;
-    ...CreationTimeResponseHeader;
-    ...ObjectReplicationPolicyIdResponseHeader;
-    ...ContentLengthResponseHeader;
-    ...ContentRangeResponseHeader;
-    ...EtagResponseHeader;
-    ...ContentMd5ResponseHeader;
-    ...ContentEncodingResponseParameter;
-    ...CacheControlResponseHeader;
-    ...ContentDispositionResponseHeader;
-    ...ContentLanguageResponseHeader;
-    ...BlobSequenceNumberResponseHeader;
-    ...BlobTypeResponseHeader;
-    ...ContentCrc64ResponseHeader;
-    ...CopyCompletionTimeResponseHeader;
-    ...CopyStatusDescriptionResponseHeader;
-    ...CopyIdResponseHeader;
-    ...CopyProgressResponseHeader;
-    ...CopyStatusResponseHeader;
-    ...CopySourceResponseHeader;
-    ...LeaseDurationResponseHeader;
-    ...LeaseStateResponseHeader;
-    ...LeaseStatusResponseHeader;
-    ...VersionIdResponseHeader;
-    ...IsCurrentVersionResponseHeader;
-    ...AcceptRangesResponseHeaderPrivate;
-    ...DateResponseHeaderPrivate;
-    ...BlobCommittedBlockCountResponseHeader;
-    ...ServerEncryptedResponseHeader;
-    ...EncryptionKeySha256ResponseHeader;
-    ...EncryptionScopeResponseHeader;
-    ...BlobContentMd5ResponseHeader;
-    ...TagCountResponseHeader;
-    ...IsSealedResponseHeader;
-    ...LastAccessedResponseHeader;
-    ...ImmutabilityPolicyExpiresOnResponseHeader;
-    ...ImmutabilityPolicyModeResponseHeader;
-    ...LegalHoldOptionalResponseHeader;
-    ...StructuredBodyTypeResponseHeader;
-    ...StructuredContentLengthResponseHeader;
-    ...ApiVersionHeader;
-  }) | Error;
+        ...RequestIdResponseHeader;
+        ...ClientRequestIdHeader;
+        ...MetadataHeaders;
+        ...ObjectReplicationHeaders;
+        ...LastModifiedResponseHeader;
+        ...CreationTimeResponseHeader;
+        ...ObjectReplicationPolicyIdResponseHeader;
+        ...ContentLengthResponseHeader;
+        ...ContentRangeResponseHeader;
+        ...EtagResponseHeader;
+        ...ContentMd5ResponseHeader;
+        ...ContentEncodingResponseParameter;
+        ...CacheControlResponseHeader;
+        ...ContentDispositionResponseHeader;
+        ...ContentLanguageResponseHeader;
+        ...BlobSequenceNumberResponseHeader;
+        ...BlobTypeResponseHeader;
+        ...ContentCrc64ResponseHeader;
+        ...CopyCompletionTimeResponseHeader;
+        ...CopyStatusDescriptionResponseHeader;
+        ...CopyIdResponseHeader;
+        ...CopyProgressResponseHeader;
+        ...CopyStatusResponseHeader;
+        ...CopySourceResponseHeader;
+        ...LeaseDurationResponseHeader;
+        ...LeaseStateResponseHeader;
+        ...LeaseStatusResponseHeader;
+        ...VersionIdResponseHeader;
+        ...IsCurrentVersionResponseHeader;
+        ...AcceptRangesResponseHeaderPrivate;
+        ...DateResponseHeaderPrivate;
+        ...BlobCommittedBlockCountResponseHeader;
+        ...ServerEncryptedResponseHeader;
+        ...EncryptionKeySha256ResponseHeader;
+        ...EncryptionScopeResponseHeader;
+        ...BlobContentMd5ResponseHeader;
+        ...TagCountResponseHeader;
+        ...IsSealedResponseHeader;
+        ...LastAccessedResponseHeader;
+        ...ImmutabilityPolicyExpiresOnResponseHeader;
+        ...ImmutabilityPolicyModeResponseHeader;
+        ...LegalHoldOptionalResponseHeader;
+        ...StructuredBodyTypeResponseHeader;
+        ...StructuredContentLengthResponseHeader;
+        ...ApiVersionHeader;
+      })
+    | Error;
 
   /** Returns all user-defined metadata, standard HTTP properties, and system properties for the specified blob. It does not return the content of the blob. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"

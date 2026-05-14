@@ -186,17 +186,21 @@ interface EndpointResources {
 
 @@doc(EndpointResource.name, "The endpoint name.");
 @@doc(EndpointResource.properties, "The endpoint properties.");
-@@doc(EndpointResources.createOrUpdate::parameters.resource,
+@@doc(
+  EndpointResources.createOrUpdate::parameters.resource,
   "Endpoint details"
 );
 @@doc(EndpointResources.update::parameters.properties, "Endpoint details");
-@@doc(EndpointResources.listManagedProxyDetails::parameters.body,
+@@doc(
+  EndpointResources.listManagedProxyDetails::parameters.body,
   "Object of type ManagedProxyRequest"
 );
-@@doc(EndpointResources.listIngressGatewayCredentials,
+@@doc(
+  EndpointResources.listIngressGatewayCredentials,
   "Gets the ingress gateway endpoint credentials "
 );
-@@doc(EndpointResources.listManagedProxyDetails,
+@@doc(
+  EndpointResources.listManagedProxyDetails,
   "Fetches the managed proxy details "
 );
 @@path(EndpointResource.name, #{ allowReserved: true });

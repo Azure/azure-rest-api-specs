@@ -58,7 +58,8 @@ interface AscLocations {
   >;
 }
 
-@@doc(AscLocation.name,
+@@doc(
+  AscLocation.name,
   "The location where ASC stores the data of the subscription. can be retrieved from Get locations"
 );
 @@doc(AscLocation.properties, "An empty set of properties");

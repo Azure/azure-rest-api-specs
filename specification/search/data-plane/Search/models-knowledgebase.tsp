@@ -806,11 +806,15 @@ model KnowledgeSourceIngestionParameters {
   /** Optional list of permission types to ingest together with document content. If specified, it will set the indexer permission options for the data source. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @removed(Versions.v2026_04_01)
-  ingestionPermissionOptions?: KnowledgeSourceIngestionPermissionOption[] | null;
+  ingestionPermissionOptions?:
+    | KnowledgeSourceIngestionPermissionOption[]
+    | null;
 
   /** Optional content extraction mode. Default is 'minimal'. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
-  contentExtractionMode?: KnowledgeSourceContentExtractionMode | null = KnowledgeSourceContentExtractionMode.Minimal;
+  contentExtractionMode?:
+    | KnowledgeSourceContentExtractionMode
+    | null = KnowledgeSourceContentExtractionMode.Minimal;
 
   /** Optional AI Services configuration for content processing. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"

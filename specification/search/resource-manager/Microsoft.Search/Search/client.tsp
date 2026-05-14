@@ -624,14 +624,17 @@ op SharedPrivateLinkResourcesCreateOrUpdateCustomization(
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   params?: `search-management-request-options`,
-): ArmResourceUpdatedResponse<SharedPrivateLinkResource> | ArmAcceptedLroResponse<
-  "Resource operation accepted.",
-  ArmAsyncOperationHeader<
-    ArmOperationStatus<never, ResourceProvisioningState>,
-    string,
-    SharedPrivateLinkResource
-  >
-> | CloudError;
+):
+  | ArmResourceUpdatedResponse<SharedPrivateLinkResource>
+  | ArmAcceptedLroResponse<
+      "Resource operation accepted.",
+      ArmAsyncOperationHeader<
+        ArmOperationStatus<never, ResourceProvisioningState>,
+        string,
+        SharedPrivateLinkResource
+      >
+    >
+  | CloudError;
 
 /**
  * Initiates the deletion of the shared private link resource from the search service.
@@ -675,224 +678,278 @@ op SharedPrivateLinkResourcesDeleteCustomization(
   | NotFoundResponse
   | CloudError;
 
-@@clientName(privateEndpointConnectionsUpdateCustomization::parameters.resource,
+@@clientName(
+  privateEndpointConnectionsUpdateCustomization::parameters.resource,
   "privateEndpointConnection",
   "go,javascript"
 );
-@@clientName(SharedPrivateLinkResourcesCreateOrUpdateCustomization::parameters.resource,
+@@clientName(
+  SharedPrivateLinkResourcesCreateOrUpdateCustomization::parameters.resource,
   "sharedPrivateLinkResource",
   "go,javascript"
 );
-@@clientName(servicesCheckNameAvailabilityCustomization::parameters.body,
+@@clientName(
+  servicesCheckNameAvailabilityCustomization::parameters.body,
   "checkNameAvailabilityInput",
   "go"
 );
-@@clientName(searchCreateOrUpdateCustomization::parameters.resource,
+@@clientName(
+  searchCreateOrUpdateCustomization::parameters.resource,
   "service",
   "javascript"
 );
-@@clientName(searchUpdateCustomization::parameters.properties,
+@@clientName(
+  searchUpdateCustomization::parameters.properties,
   "service",
   "javascript"
 );
 
-@@Azure.ClientGenerator.Core.override(ServicesOperationGroup.checkNameAvailability,
+@@Azure.ClientGenerator.Core.override(
+  ServicesOperationGroup.checkNameAvailability,
   servicesCheckNameAvailabilityCustomization,
   "go,csharp"
 );
-@@Azure.ClientGenerator.Core.override(ServicesOperationGroup.checkNameAvailability,
+@@Azure.ClientGenerator.Core.override(
+  ServicesOperationGroup.checkNameAvailability,
   servicesCheckNameAvailabilityCustomizationForJs,
   "javascript"
 );
 
-@@Azure.ClientGenerator.Core.override(UsagesOperationGroup.listBySubscription,
+@@Azure.ClientGenerator.Core.override(
+  UsagesOperationGroup.listBySubscription,
   usagesListBySubscriptionCustomization,
   "go,csharp,javascript"
 );
-@@Azure.ClientGenerator.Core.override(usageBySubscriptionSku,
+@@Azure.ClientGenerator.Core.override(
+  usageBySubscriptionSku,
   usageBySubscriptionSkuCustomization,
   "go,csharp,javascript"
 );
-@@Azure.ClientGenerator.Core.override(SearchServices.listBySubscription,
+@@Azure.ClientGenerator.Core.override(
+  SearchServices.listBySubscription,
   searchServicesListBySubscriptionCustomization,
   "go,csharp,javascript"
 );
-@@Azure.ClientGenerator.Core.override(SearchServices.listByResourceGroup,
+@@Azure.ClientGenerator.Core.override(
+  SearchServices.listByResourceGroup,
   searchServicesListByResourceGroupCustomization,
   "go,csharp,javascript"
 );
-@@Azure.ClientGenerator.Core.override(SearchServices.get,
+@@Azure.ClientGenerator.Core.override(
+  SearchServices.get,
   searchGetCustomization,
   "go,csharp,javascript"
 );
-@@Azure.ClientGenerator.Core.override(SearchServices.createOrUpdate,
+@@Azure.ClientGenerator.Core.override(
+  SearchServices.createOrUpdate,
   searchCreateOrUpdateCustomization,
   "go,csharp,javascript"
 );
-@@Azure.ClientGenerator.Core.override(SearchServices.update,
+@@Azure.ClientGenerator.Core.override(
+  SearchServices.update,
   searchUpdateCustomization,
   "go,csharp,javascript"
 );
-@@Azure.ClientGenerator.Core.override(SearchServices.delete,
+@@Azure.ClientGenerator.Core.override(
+  SearchServices.delete,
   searchDeleteCustomization,
   "go,csharp,javascript"
 );
-@@Azure.ClientGenerator.Core.override(SearchServices.create,
+@@Azure.ClientGenerator.Core.override(
+  SearchServices.create,
   queryKeysCreateCustomization,
   "go,csharp,javascript"
 );
-@@Azure.ClientGenerator.Core.override(SearchServices.queryKeysDelete,
+@@Azure.ClientGenerator.Core.override(
+  SearchServices.queryKeysDelete,
   queryKeysDeleteCustomization,
   "go,csharp,javascript"
 );
-@@Azure.ClientGenerator.Core.override(SearchServices.adminKeysGet,
+@@Azure.ClientGenerator.Core.override(
+  SearchServices.adminKeysGet,
   adminKeysGetCustomization,
   "go,csharp,javascript"
 );
-@@Azure.ClientGenerator.Core.override(SearchServices.listBySearchService,
+@@Azure.ClientGenerator.Core.override(
+  SearchServices.listBySearchService,
   queryKeysListBySearchServiceCustomization,
   "go,csharp,javascript"
 );
-@@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.listByService,
+@@Azure.ClientGenerator.Core.override(
+  PrivateEndpointConnections.listByService,
   privateEndpointConnectionsListByServiceCustomization,
   "go,csharp,javascript"
 );
-@@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.get,
+@@Azure.ClientGenerator.Core.override(
+  PrivateEndpointConnections.get,
   privateEndpointConnectionsGetCustomization,
   "go,csharp,javascript"
 );
-@@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.update,
+@@Azure.ClientGenerator.Core.override(
+  PrivateEndpointConnections.update,
   privateEndpointConnectionsUpdateCustomization,
   "go,csharp,javascript"
 );
-@@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.delete,
+@@Azure.ClientGenerator.Core.override(
+  PrivateEndpointConnections.delete,
   privateEndpointConnectionsDeleteCustomization,
   "go,csharp,javascript"
 );
-@@Azure.ClientGenerator.Core.override(SearchServices.listSupported,
+@@Azure.ClientGenerator.Core.override(
+  SearchServices.listSupported,
   privateLinkResourcesListSupportedCustomization,
   "go,csharp,javascript"
 );
-@@Azure.ClientGenerator.Core.override(SearchServices.regenerate,
+@@Azure.ClientGenerator.Core.override(
+  SearchServices.regenerate,
   privateLinkResourcesRegenerateCustomization,
   "go,csharp,javascript"
 );
-@@Azure.ClientGenerator.Core.override(SharedPrivateLinkResources.listByService,
+@@Azure.ClientGenerator.Core.override(
+  SharedPrivateLinkResources.listByService,
   SharedPrivateLinkResourcesListByServiceCustomization,
   "go,csharp,javascript"
 );
-@@Azure.ClientGenerator.Core.override(SharedPrivateLinkResources.get,
+@@Azure.ClientGenerator.Core.override(
+  SharedPrivateLinkResources.get,
   SharedPrivateLinkResourcesGetCustomization,
   "go,csharp,javascript"
 );
-@@Azure.ClientGenerator.Core.override(SharedPrivateLinkResources.createOrUpdate,
+@@Azure.ClientGenerator.Core.override(
+  SharedPrivateLinkResources.createOrUpdate,
   SharedPrivateLinkResourcesCreateOrUpdateCustomization,
   "go,csharp,javascript"
 );
-@@Azure.ClientGenerator.Core.override(SharedPrivateLinkResources.delete,
+@@Azure.ClientGenerator.Core.override(
+  SharedPrivateLinkResources.delete,
   SharedPrivateLinkResourcesDeleteCustomization,
   "go,csharp,javascript"
 );
 
-@@clientName(Microsoft.Search,
+@@clientName(
+  Microsoft.Search,
   "SearchManagementClient",
   "python,javascript,java"
 );
 
-@@clientName(servicesCheckNameAvailabilityCustomization::parameters.params,
+@@clientName(
+  servicesCheckNameAvailabilityCustomization::parameters.params,
   "searchManagementRequestOptions",
   "go,csharp"
 );
-@@clientName(servicesCheckNameAvailabilityCustomizationForJs::parameters.params,
+@@clientName(
+  servicesCheckNameAvailabilityCustomizationForJs::parameters.params,
   "searchManagementRequestOptions",
   "javascript"
 );
-@@clientName(usagesListBySubscriptionCustomization::parameters.params,
+@@clientName(
+  usagesListBySubscriptionCustomization::parameters.params,
   "searchManagementRequestOptions",
   "go,csharp,javascript"
 );
-@@clientName(usageBySubscriptionSkuCustomization::parameters.params,
+@@clientName(
+  usageBySubscriptionSkuCustomization::parameters.params,
   "searchManagementRequestOptions",
   "go,csharp,javascript"
 );
-@@clientName(searchServicesListBySubscriptionCustomization::parameters.params,
+@@clientName(
+  searchServicesListBySubscriptionCustomization::parameters.params,
   "searchManagementRequestOptions",
   "go,csharp,javascript"
 );
-@@clientName(searchServicesListByResourceGroupCustomization::parameters.params,
+@@clientName(
+  searchServicesListByResourceGroupCustomization::parameters.params,
   "searchManagementRequestOptions",
   "go,csharp,javascript"
 );
-@@clientName(searchGetCustomization::parameters.params,
+@@clientName(
+  searchGetCustomization::parameters.params,
   "searchManagementRequestOptions",
   "go,csharp,javascript"
 );
-@@clientName(searchCreateOrUpdateCustomization::parameters.params,
+@@clientName(
+  searchCreateOrUpdateCustomization::parameters.params,
   "searchManagementRequestOptions",
   "go,csharp,javascript"
 );
-@@clientName(searchUpdateCustomization::parameters.params,
+@@clientName(
+  searchUpdateCustomization::parameters.params,
   "searchManagementRequestOptions",
   "go,csharp,javascript"
 );
-@@clientName(searchDeleteCustomization::parameters.params,
+@@clientName(
+  searchDeleteCustomization::parameters.params,
   "searchManagementRequestOptions",
   "go,csharp,javascript"
 );
-@@clientName(queryKeysCreateCustomization::parameters.params,
+@@clientName(
+  queryKeysCreateCustomization::parameters.params,
   "searchManagementRequestOptions",
   "go,csharp,javascript"
 );
-@@clientName(queryKeysDeleteCustomization::parameters.params,
+@@clientName(
+  queryKeysDeleteCustomization::parameters.params,
   "searchManagementRequestOptions",
   "go,csharp,javascript"
 );
 
-@@clientName(adminKeysGetCustomization::parameters.params,
+@@clientName(
+  adminKeysGetCustomization::parameters.params,
   "searchManagementRequestOptions",
   "go,csharp,javascript"
 );
-@@clientName(queryKeysListBySearchServiceCustomization::parameters.params,
+@@clientName(
+  queryKeysListBySearchServiceCustomization::parameters.params,
   "searchManagementRequestOptions",
   "go,csharp,javascript"
 );
-@@clientName(privateEndpointConnectionsListByServiceCustomization::parameters.params,
+@@clientName(
+  privateEndpointConnectionsListByServiceCustomization::parameters.params,
   "searchManagementRequestOptions",
   "go,csharp,javascript"
 );
-@@clientName(privateEndpointConnectionsGetCustomization::parameters.params,
+@@clientName(
+  privateEndpointConnectionsGetCustomization::parameters.params,
   "searchManagementRequestOptions",
   "go,csharp,javascript"
 );
-@@clientName(privateEndpointConnectionsUpdateCustomization::parameters.params,
+@@clientName(
+  privateEndpointConnectionsUpdateCustomization::parameters.params,
   "searchManagementRequestOptions",
   "go,csharp,javascript"
 );
-@@clientName(privateEndpointConnectionsDeleteCustomization::parameters.params,
+@@clientName(
+  privateEndpointConnectionsDeleteCustomization::parameters.params,
   "searchManagementRequestOptions",
   "go,csharp,javascript"
 );
-@@clientName(privateLinkResourcesListSupportedCustomization::parameters.params,
+@@clientName(
+  privateLinkResourcesListSupportedCustomization::parameters.params,
   "searchManagementRequestOptions",
   "go,csharp,javascript"
 );
-@@clientName(privateLinkResourcesRegenerateCustomization::parameters.params,
+@@clientName(
+  privateLinkResourcesRegenerateCustomization::parameters.params,
   "searchManagementRequestOptions",
   "go,csharp,javascript"
 );
-@@clientName(SharedPrivateLinkResourcesListByServiceCustomization::parameters.params,
+@@clientName(
+  SharedPrivateLinkResourcesListByServiceCustomization::parameters.params,
   "searchManagementRequestOptions",
   "go,csharp,javascript"
 );
-@@clientName(SharedPrivateLinkResourcesGetCustomization::parameters.params,
+@@clientName(
+  SharedPrivateLinkResourcesGetCustomization::parameters.params,
   "searchManagementRequestOptions",
   "go,csharp,javascript"
 );
-@@clientName(SharedPrivateLinkResourcesCreateOrUpdateCustomization::parameters.params,
+@@clientName(
+  SharedPrivateLinkResourcesCreateOrUpdateCustomization::parameters.params,
   "searchManagementRequestOptions",
   "go,csharp,javascript"
 );
-@@clientName(SharedPrivateLinkResourcesDeleteCustomization::parameters.params,
+@@clientName(
+  SharedPrivateLinkResourcesDeleteCustomization::parameters.params,
   "searchManagementRequestOptions",
   "go,csharp,javascript"
 );
@@ -902,7 +959,8 @@ model AccessRulePropertiesSubscriptionsItem {
   /** The fully qualified Azure resource ID of the subscription e.g. ('/subscriptions/00000000-0000-0000-0000-000000000000') */
   id?: Azure.Core.armResourceIdentifier;
 }
-@@alternateType(Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscriptions,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscriptions,
   AccessRulePropertiesSubscriptionsItem[],
   "go,python,javascript,java"
 );
@@ -915,23 +973,27 @@ model AccessRulePropertiesSubscriptionsItem {
 
 // C# settings
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "flatten sku for backward compat with C# SDK"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SearchServiceUpdate.sku,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  SearchServiceUpdate.sku,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "flatten sku for backward compat with C# SDK"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SearchService.sku,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  SearchService.sku,
   "csharp"
 );
 @@clientName(HostingMode, "SearchServiceHostingMode", "csharp");
 @@clientName(ComputeType, "SearchServiceComputeType", "csharp");
 @@clientName(ProvisioningState, "SearchServiceProvisioningState", "csharp");
 @@clientName(IpRule, "SearchServiceIPRule", "csharp");
-@@clientName(DataPlaneAuthOptions,
+@@clientName(
+  DataPlaneAuthOptions,
   "SearchAadAuthDataPlaneAuthOptions",
   "csharp"
 );
 @@clientName(NetworkRuleSet, "SearchServiceNetworkRuleSet", "csharp");
-@@clientName(PublicNetworkAccess,
+@@clientName(
+  PublicNetworkAccess,
   "SearchServicePublicInternetAccess",
   "csharp"
 );
@@ -940,92 +1002,114 @@ model AccessRulePropertiesSubscriptionsItem {
 @@clientName(AdminKeyKind, "SearchServiceAdminKeyKind", "csharp");
 @@clientName(AdminKeyResult, "SearchServiceAdminKeyResult", "csharp");
 @@clientName(QueryKey, "SearchServiceQueryKey", "csharp");
-@@clientName(CheckNameAvailabilityInput,
+@@clientName(
+  CheckNameAvailabilityInput,
   "SearchServiceNameAvailabilityContent",
   "csharp"
 );
-@@clientName(CheckNameAvailabilityOutput,
+@@clientName(
+  CheckNameAvailabilityOutput,
   "SearchServiceNameAvailabilityResult",
   "csharp"
 );
 @@clientName(UpgradeAvailable, "SearchServiceUpgradeAvailable", "csharp");
-@@clientName(SharedPrivateLinkResource,
+@@clientName(
+  SharedPrivateLinkResource,
   "SharedSearchServicePrivateLinkResource",
   "csharp"
 );
-@@clientName(SharedPrivateLinkResourceProperties,
+@@clientName(
+  SharedPrivateLinkResourceProperties,
   "SharedSearchServicePrivateLinkResourceProperties",
   "csharp"
 );
-@@alternateType(SharedPrivateLinkResourceProperties.privateLinkResourceId,
+@@alternateType(
+  SharedPrivateLinkResourceProperties.privateLinkResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(SharedPrivateLinkResourceProperties.resourceRegion,
+@@alternateType(
+  SharedPrivateLinkResourceProperties.resourceRegion,
   azureLocation,
   "csharp"
 );
-@@clientName(SharedPrivateLinkResourceProperties.status,
+@@clientName(
+  SharedPrivateLinkResourceProperties.status,
   "SharedPrivateLinkResourceStatus",
   "csharp"
 );
-@@clientName(SharedPrivateLinkResourceProperties.provisioningState,
+@@clientName(
+  SharedPrivateLinkResourceProperties.provisioningState,
   "SharedPrivateLinkResourceProvisioningState",
   "csharp"
 );
-@@clientName(SharedPrivateLinkResourceStatus,
+@@clientName(
+  SharedPrivateLinkResourceStatus,
   "SearchServiceSharedPrivateLinkResourceStatus",
   "csharp"
 );
-@@clientName(SharedPrivateLinkResourceProvisioningState,
+@@clientName(
+  SharedPrivateLinkResourceProvisioningState,
   "SearchServiceSharedPrivateLinkResourceProvisioningState",
   "csharp"
 );
-@@clientName(ShareablePrivateLinkResourceProperties,
+@@clientName(
+  ShareablePrivateLinkResourceProperties,
   "ShareableSearchServicePrivateLinkResourceProperties",
   "csharp"
 );
-@@clientName(ShareablePrivateLinkResourceProperties.type,
+@@clientName(
+  ShareablePrivateLinkResourceProperties.type,
   "ShareablePrivateLinkResourcePropertiesType",
   "csharp"
 );
-@@clientName(ShareablePrivateLinkResourceType,
+@@clientName(
+  ShareablePrivateLinkResourceType,
   "ShareableSearchServicePrivateLinkResourceType",
   "csharp"
 );
-@@clientName(PrivateEndpointConnectionProperties,
+@@clientName(
+  PrivateEndpointConnectionProperties,
   "SearchServicePrivateEndpointConnectionProperties",
   "csharp"
 );
-@@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+@@clientName(
+  PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
   "ConnectionState",
   "csharp"
 );
-@@alternateType(PrivateEndpointConnectionPropertiesPrivateEndpoint.id,
+@@alternateType(
+  PrivateEndpointConnectionPropertiesPrivateEndpoint.id,
   armResourceIdentifier,
   "csharp"
 );
-@@clientName(PrivateEndpointConnectionPropertiesPrivateLinkServiceConnectionState,
+@@clientName(
+  PrivateEndpointConnectionPropertiesPrivateLinkServiceConnectionState,
   "SearchServicePrivateLinkServiceConnectionState",
   "csharp"
 );
-@@usage(NetworkSecurityPerimeterConfiguration,
+@@usage(
+  NetworkSecurityPerimeterConfiguration,
   Usage.input | Usage.output,
   "csharp"
 );
-@@clientName(NetworkSecurityPerimeterConfiguration,
+@@clientName(
+  NetworkSecurityPerimeterConfiguration,
   "SearchServiceNetworkSecurityPerimeterConfiguration",
   "csharp"
 );
-@@clientName(SearchServiceProperties.disableLocalAuth,
+@@clientName(
+  SearchServiceProperties.disableLocalAuth,
   "IsLocalAuthDisabled",
   "csharp"
 );
-@@clientName(SearchServiceProperties.publicNetworkAccess,
+@@clientName(
+  SearchServiceProperties.publicNetworkAccess,
   "PublicInternetAccess",
   "csharp"
 );
-@@clientName(SearchServiceProperties.upgradeAvailable,
+@@clientName(
+  SearchServiceProperties.upgradeAvailable,
   "IsUpgradeAvailable",
   "csharp"
 );
@@ -1034,76 +1118,93 @@ model AccessRulePropertiesSubscriptionsItem {
 @@clientName(SearchServices.adminKeysGet, "GetAdminKey", "csharp");
 @@clientName(SearchServices.regenerate, "RegenerateAdminKey", "csharp");
 @@clientName(SearchServices.create, "CreateQueryKey", "csharp");
-@@clientName(SearchServices.listBySearchService,
+@@clientName(
+  SearchServices.listBySearchService,
   "GetQueryKeysBySearchService",
   "csharp"
 );
 @@clientName(SearchServices.queryKeysDelete, "DeleteQueryKey", "csharp");
-@@clientName(SearchServices.listSupported,
+@@clientName(
+  SearchServices.listSupported,
   "GetSupportedPrivateLinkResources",
   "csharp"
 );
 @@alternateType(SearchServiceProperties.eTag, eTag, "csharp");
 @@clientName(AadAuthFailureMode, "SearchAadAuthFailureMode", "csharp");
-@@clientName(SearchEncryptionWithCmk,
+@@clientName(
+  SearchEncryptionWithCmk,
   "SearchEncryptionWithCmkEnforcement",
   "csharp"
 );
-@@clientName(UnavailableNameReason,
+@@clientName(
+  UnavailableNameReason,
   "SearchServiceNameUnavailableReason",
   "csharp"
 );
-@@clientName(PrivateLinkServiceConnectionProvisioningState,
+@@clientName(
+  PrivateLinkServiceConnectionProvisioningState,
   "SearchPrivateLinkServiceConnectionProvisioningState",
   "csharp"
 );
-@@clientName(PrivateLinkServiceConnectionStatus,
+@@clientName(
+  PrivateLinkServiceConnectionStatus,
   "SearchServicePrivateLinkServiceConnectionStatus",
   "csharp"
 );
-@@clientName(PrivateEndpointConnection,
+@@clientName(
+  PrivateEndpointConnection,
   "SearchPrivateEndpointConnection",
   "csharp"
 );
 @@clientName(EncryptionWithCmk, "SearchEncryptionWithCmk", "csharp");
-@@clientName(ServicesOperationGroup.checkNameAvailability,
+@@clientName(
+  ServicesOperationGroup.checkNameAvailability,
   "CheckSearchServiceNameAvailability",
   "csharp"
 );
-@@clientName(UsagesOperationGroup.listBySubscription,
+@@clientName(
+  UsagesOperationGroup.listBySubscription,
   "GetUsagesBySubscription",
   "csharp"
 );
-@@alternateType(Azure.ResourceManager.LocationParameter.location,
+@@alternateType(
+  Azure.ResourceManager.LocationParameter.location,
   azureLocation,
   "csharp"
 );
-@@alternateType(SearchService.identity,
+@@alternateType(
+  SearchService.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
-@@alternateType(SearchServiceUpdate.identity,
+@@alternateType(
+  SearchServiceUpdate.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
-@@alternateType(`search-management-request-options`.clientRequestId,
+@@alternateType(
+  `search-management-request-options`.clientRequestId,
   uuid,
   "csharp"
 );
 @@alternateType(QuotaUsageResult.id, armResourceIdentifier, "csharp");
-@@clientName(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationProperties,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationProperties,
   "SearchServiceNetworkSecurityPerimeterConfigurationProperties",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.AccessRule,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.AccessRule,
   "SearchServiceNetworkSecurityPerimeterAccessRule",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.AccessRuleDirection,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.AccessRuleDirection,
   "SearchServiceNetworkSecurityPerimeterAccessRuleDirection",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.AccessRuleProperties,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.AccessRuleProperties,
   "SearchServiceNetworkSecurityPerimeterAccessRuleProperties",
   "csharp"
 );
@@ -1112,72 +1213,88 @@ model SearchServiceNetworkSecurityPerimeterInboundRuleSubscription {
   /** The fully qualified Azure resource ID of the subscription e.g. ('/subscriptions/00000000-0000-0000-0000-000000000000') */
   id?: Azure.Core.armResourceIdentifier;
 }
-@@alternateType(Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscriptions,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscriptions,
   SearchServiceNetworkSecurityPerimeterInboundRuleSubscription[],
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeter,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeter,
   "SearchServiceNetworkSecurityPerimeter",
   "csharp"
 );
 // CSharp SDK: Preserve API compatibility — output-only model was previously round-trip
-@@usage(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeter,
+@@usage(
+  Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeter,
   Usage.input,
   "csharp"
 );
 @@usage(Azure.ResourceManager.CommonTypes.AccessRule, Usage.input, "csharp");
-@@usage(Azure.ResourceManager.CommonTypes.AccessRuleProperties,
+@@usage(
+  Azure.ResourceManager.CommonTypes.AccessRuleProperties,
   Usage.input,
   "csharp"
 );
-@@alternateType(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeter.location,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeter.location,
   azureLocation,
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationProperties,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationProperties,
   "SearchServiceNetworkSecurityPerimeterConfigurationProperties",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationProvisioningState,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationProvisioningState,
   "SearchServiceNetworkSecurityPerimeterConfigurationProvisioningState",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.NetworkSecurityProfile,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.NetworkSecurityProfile,
   "SearchNetworkSecurityProfile",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.ProvisioningIssue,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ProvisioningIssue,
   "SearchServiceNetworkSecurityPerimeterProvisioningIssue",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.ProvisioningIssueProperties,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ProvisioningIssueProperties,
   "SearchServiceNetworkSecurityPerimeterProvisioningIssueProperties",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.IssueType,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.IssueType,
   "SearchServiceNetworkSecurityPerimeterProvisioningIssueType",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.ResourceAssociation,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ResourceAssociation,
   "SearchServiceNetworkSecurityPerimeterResourceAssociation",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.ResourceAssociationAccessMode,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ResourceAssociationAccessMode,
   "SearchServiceNetworkSecurityPerimeterResourceAssociationAccessMode",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.Severity,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.Severity,
   "SearchServiceNetworkSecurityPerimeterProvisioningIssueSeverity",
   "csharp"
 );
 @@clientName(DataIdentity, "SearchDataIdentity", "csharp");
 @@clientName(DataNoneIdentity, "SearchDataNoneIdentity", "csharp");
 @@clientName(KnowledgeRetrieval, "SearchKnowledgeRetrieval", "csharp");
-@@clientName(DataUserAssignedIdentity,
+@@clientName(
+  DataUserAssignedIdentity,
   "SearchDataUserAssignedIdentity",
   "csharp"
 );
-@@clientName(AzureActiveDirectoryApplicationCredentials,
+@@clientName(
+  AzureActiveDirectoryApplicationCredentials,
   "SearchAadApplicationCredentials",
   "csharp"
 );
@@ -1188,7 +1305,8 @@ model SearchServiceNetworkSecurityPerimeterInboundRuleSubscription {
 @@clientName(Offerings.list, "GetOfferings", "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(SearchServiceUpdate,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  SearchServiceUpdate,
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );

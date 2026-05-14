@@ -6,119 +6,143 @@ using Azure.Core;
 using Microsoft.ConnectedCache;
 
 @@clientName(Microsoft.ConnectedCache, "ConnectedCacheMgmtClient", "python");
-@@clientName(Microsoft.ConnectedCache,
+@@clientName(
+  Microsoft.ConnectedCache,
   "ConnectedCacheManagementClient",
   "java"
 );
 
 // CSharp Client configuration
-@@clientName(EnterpriseMccCacheNodeResource,
+@@clientName(
+  EnterpriseMccCacheNodeResource,
   "EnterpriseMccCacheNode",
   "csharp"
 );
 @@clientName(EnterpriseMccCustomerResource, "EnterpriseMccCustomer", "csharp");
 @@clientName(IspCacheNodeResource, "IspCacheNode", "csharp");
 @@clientName(IspCustomerResource, "IspCustomer", "csharp");
-@@clientName(AdditionalCacheNodeProperties,
+@@clientName(
+  AdditionalCacheNodeProperties,
   "MccCacheNodeAdditionalProperties",
   "csharp"
 );
 @@clientName(AdditionalCacheNodeProperties.osType, "OSType", "csharp");
-@@clientName(AdditionalCustomerProperties,
+@@clientName(
+  AdditionalCustomerProperties,
   "MccCustomerAdditionalProperties",
   "csharp"
 );
-@@clientName(AdditionalCustomerProperties.peeringDbLastUpdateDate,
+@@clientName(
+  AdditionalCustomerProperties.peeringDbLastUpdateDate,
   "peeringDBLastUpdatedOn",
   "csharp"
 );
-@@clientName(AdditionalCustomerProperties.customerEntitlementExpiration,
+@@clientName(
+  AdditionalCustomerProperties.customerEntitlementExpiration,
   "customerEntitlementExpiryOn",
   "csharp"
 );
-@@clientName(BgpCidrsConfiguration,
+@@clientName(
+  BgpCidrsConfiguration,
   "MccCacheNodeBgpCidrsConfiguration",
   "csharp"
 );
 @@clientName(BgpConfiguration, "MccCacheNodeBgpConfiguration", "csharp");
-@@clientName(BgpConfiguration.asnToIpAddressMapping,
+@@clientName(
+  BgpConfiguration.asnToIpAddressMapping,
   "asnToIPAddressMapping",
   "csharp"
 );
 @@clientName(BgpReviewStateEnum, "MccCacheNodeBgpReviewState", "csharp");
 @@clientName(CacheNodeEntity, "MccCacheNodeEntity", "csharp");
 @@clientName(CacheNodeEntity.ipAddress, "IPAddress", "csharp");
-@@alternateType(CacheNodeEntity.fullyQualifiedResourceId,
+@@alternateType(
+  CacheNodeEntity.fullyQualifiedResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@clientName(CacheNodeEntity.cidrCsvLastUpdateTime,
+@@clientName(
+  CacheNodeEntity.cidrCsvLastUpdateTime,
   "cidrCsvLastUpdatedOn",
   "csharp"
 );
-@@clientName(CacheNodeEntity.lastSyncWithAzureTimestamp,
+@@clientName(
+  CacheNodeEntity.lastSyncWithAzureTimestamp,
   "lastSyncedWithAzureOn",
   "csharp"
 );
 @@clientName(CacheNodeEntity.lastUpdatedTimestamp, "lastUpdatedOn", "csharp");
-@@clientName(CacheNodeEntity.bgpCidrCsvLastUpdateTime,
+@@clientName(
+  CacheNodeEntity.bgpCidrCsvLastUpdateTime,
   "bgpCidrCsvLastUpdatedOn",
   "csharp"
 );
-@@clientName(CacheNodeEntity.bgpLastReportedTime,
+@@clientName(
+  CacheNodeEntity.bgpLastReportedTime,
   "bgpLastReportedOn",
   "csharp"
 );
-@@clientName(CacheNodeEntity.workerConnectionsLastUpdatedDateTime,
+@@clientName(
+  CacheNodeEntity.workerConnectionsLastUpdatedDateTime,
   "workerConnectionsLastUpdatedOn",
   "csharp"
 );
 @@alternateType(CacheNodeEntity.imageUri, url, "csharp");
 @@clientName(CacheNodeProperty, "MccCacheNodeProperty", "csharp");
-@@clientName(CacheNodeInstallProperties,
+@@clientName(
+  CacheNodeInstallProperties,
   "MccCacheNodeInstallProperties",
   "csharp"
 );
 @@clientName(ConfigurationState, "MccCacheNodeConfigurationState", "csharp");
 @@clientName(ConfigurationState.NotConfigured_Ip, "NotConfigured_IP", "csharp");
 @@clientName(CustomerEntity, "MccCustomerEntity", "csharp");
-@@alternateType(CustomerEntity.fullyQualifiedResourceId,
+@@alternateType(
+  CustomerEntity.fullyQualifiedResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@clientName(CustomerEntity.lastSyncWithAzureTimestamp,
+@@clientName(
+  CustomerEntity.lastSyncWithAzureTimestamp,
   "lastSyncedWithAzureOn",
   "csharp"
 );
 @@clientName(CustomerProperty, "MccCustomerProperty", "csharp");
-@@clientName(MccCacheNodeAutoUpdateHistory,
+@@clientName(
+  MccCacheNodeAutoUpdateHistory,
   "MccCacheNodeAutoUpdateHistoryData",
   "csharp"
 );
-@@clientName(MccCacheNodeAutoUpdateInfo.movedToTerminalStateDateTime,
+@@clientName(
+  MccCacheNodeAutoUpdateInfo.movedToTerminalStateDateTime,
   "movedToTerminalStateOn",
   "csharp"
 );
-@@clientName(MccCacheNodeAutoUpdateInfo.createdDateTimeUtc,
+@@clientName(
+  MccCacheNodeAutoUpdateInfo.createdDateTimeUtc,
   "createdOn",
   "csharp"
 );
-@@clientName(MccCacheNodeAutoUpdateInfo.updatedRegistryDateTimeUtc,
+@@clientName(
+  MccCacheNodeAutoUpdateInfo.updatedRegistryDateTimeUtc,
   "updatedRegistryOn",
   "csharp"
 );
-@@clientName(MccCacheNodeIssueHistory,
+@@clientName(
+  MccCacheNodeIssueHistory,
   "MccCacheNodeIssueHistoryData",
   "csharp"
 );
-@@clientName(MccCacheNodeTlsCertificateHistory,
+@@clientName(
+  MccCacheNodeTlsCertificateHistory,
   "MccCacheNodeTlsCertificateHistoryData",
   "csharp"
 );
 @@clientName(MccIssue, "MccCacheNodeIssue", "csharp");
 @@clientName(OsType, "MccCacheNodeOSType", "csharp");
 @@clientName(ProxyRequired, "MccCacheNodeProxyRequired", "csharp");
-@@clientName(ProxyUrlConfiguration,
+@@clientName(
+  ProxyUrlConfiguration,
   "MccCacheNodeProxyUriConfiguration",
   "csharp"
 );

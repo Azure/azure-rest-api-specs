@@ -359,7 +359,9 @@ interface GenerateAwsTemplate {
     @doc("ConnectorId and SolutionTypes and their properties to Generate AWS CFT Template.")
     @body
     generateAwsTemplateRequest: GenerateAwsTemplateRequest,
-  ): Azure.ResourceManager.ArmResponse<GenerateAwsTemplateResponse> | ErrorResponse;
+  ):
+    | Azure.ResourceManager.ArmResponse<GenerateAwsTemplateResponse>
+    | ErrorResponse;
 }
 
 /**

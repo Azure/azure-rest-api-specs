@@ -45,11 +45,14 @@ interface ManagedInstanceKeys {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ManagedInstanceKey,
-    Response = ArmResourceUpdatedResponse<ManagedInstanceKey> | ArmResourceCreatedResponse<
-      ManagedInstanceKey,
-      ArmLroLocationHeader<FinalResult = ManagedInstanceKey> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<ManagedInstanceKey>
+      | ArmResourceCreatedResponse<
+          ManagedInstanceKey,
+          ArmLroLocationHeader<FinalResult = ManagedInstanceKey> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -58,7 +61,10 @@ interface ManagedInstanceKeys {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ManagedInstanceKey,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -76,10 +82,12 @@ interface ManagedInstanceKeys {
   >;
 }
 
-@@doc(ManagedInstanceKey.name,
+@@doc(
+  ManagedInstanceKey.name,
   "The name of the managed instance key to be retrieved."
 );
 @@doc(ManagedInstanceKey.properties, "Resource properties.");
-@@doc(ManagedInstanceKeys.createOrUpdate::parameters.resource,
+@@doc(
+  ManagedInstanceKeys.createOrUpdate::parameters.resource,
   "The requested managed instance key resource state."
 );
