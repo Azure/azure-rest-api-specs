@@ -59,8 +59,5 @@ interface SaasSubscriptionLevelPreflight {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Global operations not scoped to a single resource"
 interface SaasSubscriptionLevelGlobal {
   listByAzureSubscription is ArmListBySubscription<SaasResource>;
-  checkNameAvailability is checkGlobalNameAvailability<
-    CheckNameAvailabilityRequest,
-    CheckNameAvailabilityResponse
-  >;
+  checkNameAvailability is checkGlobalNameAvailability;
 }

@@ -37,27 +37,6 @@ model AccessTokenResult {
   expiryTime?: utcDateTime;
 }
 
-/** Check name availability request. */
-model CheckNameAvailabilityRequest {
-  /** Name to check availability for. */
-  name?: string;
-
-  /** Resource type. */
-  type?: string;
-}
-
-/** Check name availability response. */
-model CheckNameAvailabilityResponse {
-  /** Whether the name is available. */
-  nameAvailable?: boolean;
-
-  /** Reason the name is not available. */
-  reason?: string;
-
-  /** Detailed message. */
-  message?: string;
-}
-
 /** Preflight validation result. */
 model PreflightResult {
   /** The status of the preflight validation. */

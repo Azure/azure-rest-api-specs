@@ -83,6 +83,7 @@ model SaasResourceProperties {
 
   /** The purchaser email. Server-derived from authenticated identity. */
   @visibility(Lifecycle.Read)
+  @secret
   purchaserEmail?: string;
 
   // NOTE: beneficiaryEmail removed from GA API.
