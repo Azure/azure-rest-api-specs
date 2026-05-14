@@ -114,7 +114,8 @@ model MemoryStoreDefaultOptions {
 
   @removed(Versions.v1)
   @doc("The default time-to-live for memories in seconds.  A value of 0 indicates that memories do not expire.")
-  default_ttl_seconds?: int32 = 0;
+  @encode(DurationKnownEncoding.seconds, int32)
+  default_ttl_seconds?: duration = duration.fromISO("P0D");
 }
 
 @doc("Usage statistics of a memory store operation.")
