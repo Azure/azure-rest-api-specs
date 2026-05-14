@@ -5033,6 +5033,177 @@ paths:
                 $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
       tags:
         - CommandJob
+  /jobs/{name}/history/experimentids/{experimentId}/runs/{runId}/artifacts:
+    get:
+      operationId: Jobs_listArtifacts
+      description: List artifacts produced by a job's run.
+      parameters:
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Jobs=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The name of the Job.
+          schema:
+            type: string
+        - name: experimentId
+          in: path
+          required: true
+          description: The id of the experiment that owns the run.
+          schema:
+            type: string
+        - name: runId
+          in: path
+          required: true
+          description: The run identifier. For Jobs this currently matches the job name.
+          schema:
+            type: string
+        - name: path
+          in: query
+          required: false
+          description: Optional artifact path or path prefix to filter by.
+          schema:
+            type: string
+          explode: false
+        - name: continuationToken
+          in: query
+          required: false
+          description: Continuation token for the next page.
+          schema:
+            type: string
+          explode: false
+        - name: pageSize
+          in: query
+          required: false
+          description: Maximum number of artifacts per page.
+          schema:
+            type: integer
+            format: int32
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArtifactList'
+      tags:
+        - CommandJob
+  /jobs/{name}/history/experimentids/{experimentId}/runs/{runId}/artifacts/prefix/contentinfo:
+    get:
+      operationId: Jobs_getArtifactContentInformation
+      description: Get content information for artifacts produced by a job's run.
+      parameters:
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Jobs=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The name of the Job.
+          schema:
+            type: string
+        - name: experimentId
+          in: path
+          required: true
+          description: The id of the experiment that owns the run.
+          schema:
+            type: string
+        - name: runId
+          in: path
+          required: true
+          description: The run identifier. For Jobs this currently matches the job name.
+          schema:
+            type: string
+        - name: path
+          in: query
+          required: false
+          description: Optional artifact path prefix to filter by.
+          schema:
+            type: string
+          explode: false
+        - name: continuationToken
+          in: query
+          required: false
+          description: Continuation token for the next page.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArtifactContentInformationList'
+      tags:
+        - CommandJob
+  /jobs/{name}/history/runs/{runId}:
+    get:
+      operationId: Jobs_getRun
+      description: Get a job's run.
+      parameters:
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Jobs=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The name of the Job.
+          schema:
+            type: string
+        - name: runId
+          in: path
+          required: true
+          description: The run identifier. For Jobs this currently matches the job name.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Run'
+      tags:
+        - CommandJob
   /jobs/{name}/history/runs/{runId}/details:
     get:
       operationId: Jobs_getRunDetails
@@ -10565,6 +10736,114 @@ components:
       allOf:
         - $ref: '#/components/schemas/BaseCredentials'
       description: API Key Credential definition
+    Artifact:
+      type: object
+      required:
+        - origin
+        - container
+        - path
+      properties:
+        artifactId:
+          type: string
+          description: The artifact id.
+        origin:
+          type: string
+          description: The artifact origin.
+        container:
+          type: string
+          description: The container name.
+        path:
+          type: string
+          description: The artifact path.
+        etag:
+          type: string
+          description: The artifact Etag.
+        createdTime:
+          type: string
+          format: date-time
+          description: The artifact creation time in UTC.
+        dataPath:
+          allOf:
+            - $ref: '#/components/schemas/ArtifactDataPath'
+          description: The artifact data path.
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+          description: The artifact tags.
+      description: An artifact.
+    ArtifactContentInformation:
+      type: object
+      properties:
+        contentUri:
+          type: string
+          format: uri
+          description: The content URI.
+        origin:
+          type: string
+          description: The artifact origin.
+        container:
+          type: string
+          description: The container name.
+        path:
+          type: string
+          description: The artifact path.
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+          description: The artifact tags.
+        contentLength:
+          type: integer
+          format: int64
+          description: The content byte length.
+      description: Artifact content information.
+    ArtifactContentInformationList:
+      type: object
+      required:
+        - value
+      properties:
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/ArtifactContentInformation'
+          description: The entries in the page.
+        continuationToken:
+          type: string
+          description: Token for the next page.
+        nextLink:
+          type: string
+          description: URL for the next page.
+      description: A page of artifact content information.
+    ArtifactDataPath:
+      type: object
+      properties:
+        dataStoreName:
+          type: string
+          description: The data store name.
+        relativePath:
+          type: string
+          description: The relative path within the data store.
+        sqlDataPath:
+          description: SQL data path information.
+      description: A data store path.
+    ArtifactList:
+      type: object
+      required:
+        - value
+      properties:
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Artifact'
+          description: The artifacts in the page.
+        continuationToken:
+          type: string
+          description: Token for the next page.
+        nextLink:
+          type: string
+          description: URL for the next page.
+      description: A page of artifacts.
     ArtifactProfile:
       type: object
       required:
@@ -11839,7 +12118,7 @@ components:
         distribution:
           allOf:
             - $ref: '#/components/schemas/DistributionConfiguration'
-          description: Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, or null.
+          description: Distribution configuration of the job.
         limits:
           allOf:
             - $ref: '#/components/schemas/CommandJobLimits'
@@ -11884,7 +12163,7 @@ components:
         timeout:
           type: string
           format: duration
-          description: The max run duration in ISO 8601 format, after which the job will be cancelled. Only supports duration with precision as low as Seconds.
+          description: The max run duration, after which the job will be cancelled.
       description: Command Job limit class.
     CompletionMessageToolCallChunk:
       type: object
@@ -13238,7 +13517,7 @@ components:
           PyTorch: '#/components/schemas/PyTorchDistribution'
           Mpi: '#/components/schemas/MpiDistribution'
           TensorFlow: '#/components/schemas/TensorFlowDistribution'
-      description: Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, or null.
+      description: Distribution configuration of the job.
     EntraAuthorizationScheme:
       type: object
       required:
@@ -15438,14 +15717,14 @@ components:
           description: Specifies the type of job input.
         uri:
           type: string
-          description: Input Asset URI. Required for uri_file, uri_folder, and safetensors_model types.
+          description: Input Asset URI.
         mode:
           allOf:
             - $ref: '#/components/schemas/InputOutputModes'
-          description: Input Asset Delivery Mode. Applies to uri-based inputs.
+          description: Input Asset Delivery Mode.
         value:
           type: string
-          description: Literal value. Required for literal type.
+          description: Literal value for literal-type inputs.
       description: Job input definition.
     InputData:
       type: object
@@ -15834,10 +16113,10 @@ components:
           description: Additional properties bag.
         shmSize:
           type: string
-          description: Size of the docker container's shared memory block. This should be in the format of (number)(unit) where number as to be greater than 0 and the unit can be one of b(bytes), k(kilobytes), m(megabytes), or g(gigabytes).
+          description: Size of the docker container's shared memory block.
         dockerArgs:
           type: string
-          description: Extra arguments to pass to the Docker run command. This would override any parameters that have already been set by the system, or in this section. This parameter is only supported for Azure ML compute types.
+          description: Extra arguments to pass to the Docker run command.
       description: Compute Resource configuration for the job.
     JobService:
       type: object
@@ -15860,7 +16139,7 @@ components:
         nodes:
           allOf:
             - $ref: '#/components/schemas/AllNodes'
-          description: Nodes that user would like to start the service on. If Nodes is not set or set to null, the service will only be started on leader node.
+          description: Nodes that user would like to start the service on.
         status:
           type: string
           description: Status of endpoint.
@@ -31592,7 +31871,7 @@ components:
           description: Output Asset URI.
         baseModelId:
           type: string
-          description: Base model ID. Applies to safetensors_model outputs.
+          description: Base model ID.
         description:
           type: string
           description: Description for the output.
@@ -32347,7 +32626,7 @@ components:
       properties:
         code:
           type: string
-          description: 'The service-defined error code. Supported error codes: ServiceError, UserError, ValidationError, AzureStorageError, TransientError, RequestThrottled.'
+          description: The service-defined error code.
         severity:
           type: integer
           format: int32
@@ -32362,16 +32641,16 @@ components:
           type: object
           additionalProperties:
             type: string
-          description: Value substitutions corresponding to the contents of MessageFormat.
+          description: Value substitutions for the message format.
         referenceCode:
           type: string
-          description: This code can optionally be set by the system generating the error. It should be used to classify the problem and identify the module and code area where the failure occurred.
+          description: A reference code for the error.
         detailsUri:
           type: string
-          description: A URI which points to more details about the context of the error.
+          description: A URI with more details about the error.
         target:
           type: string
-          description: The target of the error (e.g., the name of the property in error).
+          description: The target of the error.
         details:
           type: array
           items:
@@ -32429,6 +32708,229 @@ components:
           description: When true, the LLM judge always scores this criterion regardless of relevance (skips applicability assessment). The service-generated general quality/policy criterion has this set to true and is non-editable. Users may set this on their own custom criteria.
           default: false
       description: A single rubric criterion — one measurable quality dimension in an evaluator's scoring blueprint.
+    Run:
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: The display name of the run.
+        name:
+          type: string
+          description: The name of the run.
+        dataContainerId:
+          type: string
+          description: An identifier for the data associated with this run.
+        description:
+          type: string
+          description: A description of the run.
+        hidden:
+          type: boolean
+          description: Whether the run is hidden in run listings.
+        runType:
+          type: string
+          description: Run type categorization.
+        runTypeV2:
+          allOf:
+            - $ref: '#/components/schemas/RunTypeV2'
+          description: Run type information.
+        properties:
+          type: object
+          additionalProperties:
+            type: string
+          description: The properties dictionary for the run.
+        parameters:
+          type: object
+          additionalProperties: {}
+          description: The parameters dictionary for the run.
+        actionUris:
+          type: object
+          additionalProperties:
+            type: string
+          description: Action URIs for the run, keyed by action name.
+        scriptName:
+          type: string
+          description: The script name associated with the run.
+        target:
+          type: string
+          description: The name of the compute target where the run is executed.
+        uniqueChildRunComputeTargets:
+          type: array
+          items:
+            type: string
+          description: The set of unique compute targets used by child runs.
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+          description: The tag dictionary for the run. Tags are mutable.
+        settings:
+          type: object
+          additionalProperties:
+            type: string
+          description: The run settings.
+        services:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/RunEndpointSetting'
+          description: The interactive run services for a run.
+        inputDatasets:
+          type: array
+          items: {}
+          description: A list of datasets used as input to the run.
+        outputDatasets:
+          type: array
+          items: {}
+          description: A list of datasets used as output to the run.
+        runDefinition:
+          description: The run definition specification.
+        jobSpecification:
+          description: The job specification
+        primaryMetricName:
+          type: string
+          description: The primary metric name for the run.
+        createdFrom:
+          description: Information about the source that created this run.
+        cancelUri:
+          type: string
+          description: URI used to cancel this run.
+        completeUri:
+          type: string
+          description: URI used to mark this run as complete.
+        diagnosticsUri:
+          type: string
+          description: URI used to retrieve diagnostics for this run.
+        virtualWorkspaceStorageArmId:
+          type: string
+          description: ARM id of the workspace.
+        computeRequest:
+          description: The compute requests for this run.
+        compute:
+          description: The compute record for this run.
+        retainForLifetimeOfWorkspace:
+          type: boolean
+          description: Whether the run should be retained for the lifetime of the workspace (root runs only).
+        queueingInfo:
+          description: Queueing information for this run.
+        inputs:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/TypedAssetReference'
+          description: The inputs for the run, keyed by input name.
+        outputs:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/TypedAssetReference'
+          description: The outputs for the run, keyed by output name.
+        runId:
+          type: string
+          description: The identifier for the run.
+        parentRunId:
+          type: string
+          description: The parent of the run if the run is hierarchical; otherwise, null.
+        experimentId:
+          type: string
+          description: The id of the experiment that created this run.
+        status:
+          type: string
+          description: The status of the run.
+        startTimeUtc:
+          type: string
+          format: date-time
+          description: The start time of the run in UTC.
+        endTimeUtc:
+          type: string
+          format: date-time
+          description: The end time of the run in UTC.
+        scheduleId:
+          type: string
+          description: The schedule that created this run, if it was created by a schedule.
+        runNumber:
+          type: integer
+          format: int32
+          description: The run number.
+        rootRunId:
+          type: string
+          description: The id of the root run in the hierarchy.
+        createdUtc:
+          type: string
+          format: date-time
+          description: The time the run was created in UTC.
+        createdBy:
+          allOf:
+            - $ref: '#/components/schemas/RunUser'
+          description: The user that created the run.
+        userId:
+          type: string
+          description: The id of the user that created the run.
+        token:
+          type: string
+          description: A token used for authenticating a run.
+        tokenExpiryTimeUtc:
+          type: string
+          format: date-time
+          description: The Token expiration time in UTC.
+        error:
+          allOf:
+            - $ref: '#/components/schemas/RunErrorResponse'
+          description: Error details for the run, if any.
+        warnings:
+          type: array
+          items:
+            $ref: '#/components/schemas/RunDetailsWarning'
+          description: A list of warnings that occurred during the run.
+        revision:
+          type: integer
+          format: int64
+          description: Revision number.
+        statusRevision:
+          type: integer
+          format: int64
+          description: Status revision number.
+        runUuid:
+          type: string
+          description: A system generated id for the run.
+        parentRunUuid:
+          type: string
+          description: A system generated id for the run's parent.
+        rootRunUuid:
+          type: string
+          description: A system generated id for the root of the run's hierarchy.
+        lastStartTimeUtc:
+          type: string
+          format: date-time
+          description: The last start time of the run in UTC.
+        currentComputeTime:
+          type: string
+          format: duration
+          description: The cumulative compute time for an active run.
+        computeDuration:
+          type: string
+          format: duration
+          description: The total compute time for a terminal run.
+        effectiveStartTimeUtc:
+          type: string
+          format: date-time
+          description: The effective start time of the run in UTC.
+        lastModifiedBy:
+          allOf:
+            - $ref: '#/components/schemas/RunUser'
+          description: The user that last modified the run.
+        lastModifiedUtc:
+          type: string
+          format: date-time
+          description: The time the run was last modified in UTC.
+        duration:
+          type: string
+          format: duration
+          description: The total duration of the run.
+        cancelationReason:
+          type: string
+          description: The cancelation reason if the run was canceled.
+        currentAttemptId:
+          type: integer
+          format: int32
+          description: The AttemptId of the most recent attempt.
+      description: A job run.
     RunDetails:
       type: object
       properties:
@@ -32449,7 +32951,7 @@ components:
           description: The name of the compute target where the run is executed.
         status:
           type: string
-          description: The status of the run. The Status string value maps to the RunStatus enum.
+          description: The status of the run.
         parentRunId:
           type: string
           description: The parent of the run if the run is hierarchical.
@@ -32471,7 +32973,7 @@ components:
         error:
           allOf:
             - $ref: '#/components/schemas/RunErrorResponse'
-          description: If an error occurred during the run, this will be populated.
+          description: Error details for the run, if any.
         warnings:
           type: array
           items:
@@ -32510,7 +33012,7 @@ components:
           type: object
           additionalProperties:
             type: string
-          description: Map of log file name to its (typically SAS-signed) URL.
+          description: Map of log file name to its URL.
         jobCost:
           allOf:
             - $ref: '#/components/schemas/JobCost'
@@ -32539,11 +33041,11 @@ components:
         computeDuration:
           type: string
           format: duration
-          description: Time spent in an active state for terminal runs (ISO 8601 duration).
+          description: The total compute time for a terminal run.
         effectiveStartTimeUtc:
           type: string
           format: date-time
-          description: Relative start time of active runs for ordering and computing active compute duration. Compute duration of an active run is now() - effectiveStartTimeUtc.
+          description: The effective start time of the run in UTC.
         runNumber:
           type: integer
           format: int32
@@ -32564,11 +33066,11 @@ components:
         currentComputeTime:
           type: string
           format: duration
-          description: The cumulative time spent in an active status for an active run (ISO 8601 duration).
+          description: The cumulative compute time for an active run.
         lastStartTimeUtc:
           type: string
           format: date-time
-          description: The last timestamp when a run transitioned from paused to running. Initialized when startTimeUtc is first set.
+          description: The last start time of the run in UTC.
         lastModifiedBy:
           allOf:
             - $ref: '#/components/schemas/RunUser'
@@ -32580,7 +33082,7 @@ components:
         duration:
           type: string
           format: duration
-          description: The total duration of a run (ISO 8601 duration).
+          description: The total duration of the run.
         inputs:
           type: object
           additionalProperties:
@@ -32668,7 +33170,7 @@ components:
         componentName:
           type: string
           description: Component name where the error originated or was encountered.
-      description: Standard error response payload (mirrors Common.Core.Contracts.ErrorResponse).
+      description: Standard error response payload returned for a run.
     RunServiceInstances:
       type: object
       properties:
@@ -32683,7 +33185,7 @@ components:
       properties:
         orchestrator:
           type: string
-          description: Orchestrator that produced the run (e.g. Execution, Pipeline, AutoML, HyperDrive, FineTuning).
+          description: Orchestrator that produced the run.
         traits:
           type: array
           items:
@@ -32695,7 +33197,7 @@ components:
         computeType:
           type: string
           description: Compute type used by the run.
-      description: Run type categorization (orchestrator, traits, attribution, compute type).
+      description: Run type categorization.
     RunUser:
       type: object
       properties:
@@ -32707,10 +33209,10 @@ components:
           description: A user or service principal's PuID.
         userIdp:
           type: string
-          description: A user identity provider (e.g. live.com).
+          description: A user identity provider.
         userAltSecId:
           type: string
-          description: A user alternate sec id (represents the user in a different identity provider system).
+          description: A user alternate sec id.
         userIss:
           type: string
           description: The issuer which issued the token for this user.
@@ -32892,7 +33394,7 @@ components:
       properties:
         type:
           type: string
-          description: 'The service type (for example: SSH, JupyterLab, VSCode, TensorBoard, Custom).'
+          description: The service type.
         port:
           type: integer
           format: int32
@@ -32906,7 +33408,7 @@ components:
           description: Error details if the service failed to start.
         endpoint:
           type: string
-          description: Endpoint URL used to connect to the service. May contain a '<nodeIndex>' placeholder.
+          description: Endpoint URL used to connect to the service.
         properties:
           type: object
           additionalProperties:
@@ -33605,7 +34107,7 @@ components:
         workerCount:
           type: integer
           format: int32
-          description: Number of workers. If not specified, will default to the instance count.
+          description: Number of workers.
         parameterServerCount:
           type: integer
           format: int32

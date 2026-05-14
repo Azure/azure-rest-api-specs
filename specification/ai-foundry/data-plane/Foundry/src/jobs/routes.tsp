@@ -89,6 +89,85 @@ interface Jobs {
     runId: string,
   ): RunDetails;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Nested run-history sub-resource path; cannot be expressed with standard resource operations."
+  @doc("Get a job's run.")
+  @route("/jobs/{name}/history/runs/{runId}")
+  @get
+  getRun(
+    ...FoundryDataPlaneApiVersionParameter,
+    ...JobsPreviewHeader,
+
+    @doc("The name of the Job.")
+    @path
+    name: string,
+
+    @doc("The run identifier. For Jobs this currently matches the job name.")
+    @path
+    runId: string,
+  ): Run;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Nested run-history artifacts sub-resource path; cannot be expressed with standard resource operations."
+  @doc("List artifacts produced by a job's run.")
+  @route("/jobs/{name}/history/experimentids/{experimentId}/runs/{runId}/artifacts")
+  @get
+  listArtifacts(
+    ...FoundryDataPlaneApiVersionParameter,
+    ...JobsPreviewHeader,
+
+    @doc("The name of the Job.")
+    @path
+    name: string,
+
+    @doc("The id of the experiment that owns the run.")
+    @path
+    experimentId: string,
+
+    @doc("The run identifier. For Jobs this currently matches the job name.")
+    @path
+    runId: string,
+
+    @doc("Optional artifact path or path prefix to filter by.")
+    @query
+    path?: string,
+
+    @doc("Continuation token for the next page.")
+    @query
+    continuationToken?: string,
+
+    @doc("Maximum number of artifacts per page.")
+    @query
+    pageSize?: int32,
+  ): ArtifactList;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Nested run-history artifacts sub-resource path; cannot be expressed with standard resource operations."
+  @doc("Get content information for artifacts produced by a job's run.")
+  @route("/jobs/{name}/history/experimentids/{experimentId}/runs/{runId}/artifacts/prefix/contentinfo")
+  @get
+  getArtifactContentInformation(
+    ...FoundryDataPlaneApiVersionParameter,
+    ...JobsPreviewHeader,
+
+    @doc("The name of the Job.")
+    @path
+    name: string,
+
+    @doc("The id of the experiment that owns the run.")
+    @path
+    experimentId: string,
+
+    @doc("The run identifier. For Jobs this currently matches the job name.")
+    @path
+    runId: string,
+
+    @doc("Optional artifact path prefix to filter by.")
+    @query
+    path?: string,
+
+    @doc("Continuation token for the next page.")
+    @query
+    continuationToken?: string,
+  ): ArtifactContentInformationList;
+
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "PUT create-or-update pattern required by the Job API wire format"
   @doc("Create and execute a Job. For update case, the Tags in the definition passed in will replace Tags in the existing job.")
   @put

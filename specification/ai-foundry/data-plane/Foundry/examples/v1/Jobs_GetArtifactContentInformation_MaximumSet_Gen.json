@@ -1,0 +1,39 @@
+{
+  "title": "Jobs_GetArtifactContentInformation_MaximumSet",
+  "operationId": "Jobs_getArtifactContentInformation",
+  "parameters": {
+    "api-version": "v1",
+    "name": "test-job-for-interactive-debugging-1",
+    "experimentId": "46fdd7ae-a1bf-472e-b931-98c1309b8fa5",
+    "runId": "test-job-for-interactive-debugging-1",
+    "path": "user_logs",
+    "continuationToken": "",
+    "Foundry-Features": "Jobs=V1Preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "contentUri": "https://fdpcommandjobwestus2.blob.core.windows.net/test-job/user_logs/std_log.txt?sv=2024-11-04&sig=...",
+            "origin": "ExperimentRun",
+            "container": "dcid.test-job-for-interactive-debugging-1",
+            "path": "user_logs/std_log.txt",
+            "tags": { "category": "log" },
+            "contentLength": 204800
+          },
+          {
+            "contentUri": "https://fdpcommandjobwestus2.blob.core.windows.net/test-job/user_logs/std_err.txt?sv=2024-11-04&sig=...",
+            "origin": "ExperimentRun",
+            "container": "dcid.test-job-for-interactive-debugging-1",
+            "path": "user_logs/std_err.txt",
+            "tags": {},
+            "contentLength": 4096
+          }
+        ],
+        "continuationToken": "Mnw0fDV8Ng==",
+        "nextLink": "https://fdp-command-job-westus2.services.ai.azure.com/api/projects/fdp-command-job-westus2-proj/jobs/test-job-for-interactive-debugging-1/history/experimentids/46fdd7ae-a1bf-472e-b931-98c1309b8fa5/runs/test-job-for-interactive-debugging-1/artifacts/prefix/contentinfo?api-version=v1&continuationToken=Mnw0fDV8Ng%3D%3D"
+      }
+    }
+  }
+}

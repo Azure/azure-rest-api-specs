@@ -6,7 +6,7 @@ using TypeSpec.Http;
 namespace Azure.AI.Projects;
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Use an extensible union instead of a plain string"
-@doc("Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, or null.")
+@doc("Distribution configuration of the job.")
 @discriminator("distributionType")
 model DistributionConfiguration {
   @doc("Specifies the type of distribution framework.")
@@ -36,7 +36,7 @@ model TensorFlowDistribution extends DistributionConfiguration {
   @doc("Specifies the type of distribution framework.")
   distributionType: "TensorFlow";
 
-  @doc("Number of workers. If not specified, will default to the instance count.")
+  @doc("Number of workers.")
   workerCount?: int32;
 
   @doc("Number of parameter server tasks.")
@@ -86,14 +86,14 @@ model Input {
   @encodedName("application/json", "jobInputType")
   type: AssetTypes;
 
-  @doc("Input Asset URI. Required for uri_file, uri_folder, and safetensors_model types.")
+  @doc("Input Asset URI.")
   @encodedName("application/json", "uri")
   path?: string;
 
-  @doc("Input Asset Delivery Mode. Applies to uri-based inputs.")
+  @doc("Input Asset Delivery Mode.")
   mode?: InputOutputModes;
 
-  @doc("Literal value. Required for literal type.")
+  @doc("Literal value for literal-type inputs.")
   value?: string;
 }
 
@@ -115,7 +115,7 @@ model Output {
   @doc("Output Asset URI.")
   uri?: string;
 
-  @doc("Base model ID. Applies to safetensors_model outputs.")
+  @doc("Base model ID.")
   baseModelId?: string;
 
   @doc("Description for the output.")
@@ -150,7 +150,7 @@ model JobService {
   @doc("Additional properties to set on the endpoint.")
   properties?: Record<string>;
 
-  @doc("Nodes that user would like to start the service on. If Nodes is not set or set to null, the service will only be started on leader node.")
+  @doc("Nodes that user would like to start the service on.")
   nodes?: AllNodes;
 
   @doc("Status of endpoint.")
@@ -173,10 +173,10 @@ model JobResourceConfiguration {
   @doc("Additional properties bag.")
   properties?: Record<unknown>;
 
-  @doc("Size of the docker container's shared memory block. This should be in the format of (number)(unit) where number as to be greater than 0 and the unit can be one of b(bytes), k(kilobytes), m(megabytes), or g(gigabytes).")
+  @doc("Size of the docker container's shared memory block.")
   shmSize?: string;
 
-  @doc("Extra arguments to pass to the Docker run command. This would override any parameters that have already been set by the system, or in this section. This parameter is only supported for Azure ML compute types.")
+  @doc("Extra arguments to pass to the Docker run command.")
   dockerArgs?: string;
 }
 
@@ -185,7 +185,7 @@ model CommandJobLimits {
   @doc("JobLimit type.")
   jobLimitsType: "Command";
 
-  @doc("The max run duration in ISO 8601 format, after which the job will be cancelled. Only supports duration with precision as low as Seconds.")
+  @doc("The max run duration, after which the job will be cancelled.")
   timeout?: duration;
 }
 
@@ -281,7 +281,7 @@ model CommandJob extends JobProperties {
   @doc("Compute Resource configuration for the job.")
   resources?: JobResourceConfiguration;
 
-  @doc("Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, or null.")
+  @doc("Distribution configuration of the job.")
   distribution?: DistributionConfiguration;
 
   @doc("Command Job limit.")
@@ -392,7 +392,7 @@ model InnerErrorResponse {
 
 @doc("The root error.")
 model RootError {
-  @doc("The service-defined error code. Supported error codes: ServiceError, UserError, ValidationError, AzureStorageError, TransientError, RequestThrottled.")
+  @doc("The service-defined error code.")
   code?: string;
 
   @doc("The severity of the error.")
@@ -404,16 +404,16 @@ model RootError {
   @doc("An unformatted version of the message with no variable substitution.")
   messageFormat?: string;
 
-  @doc("Value substitutions corresponding to the contents of MessageFormat.")
+  @doc("Value substitutions for the message format.")
   messageParameters?: Record<string>;
 
-  @doc("This code can optionally be set by the system generating the error. It should be used to classify the problem and identify the module and code area where the failure occurred.")
+  @doc("A reference code for the error.")
   referenceCode?: string;
 
-  @doc("A URI which points to more details about the context of the error.")
+  @doc("A URI with more details about the error.")
   detailsUri?: string;
 
-  @doc("The target of the error (e.g., the name of the property in error).")
+  @doc("The target of the error.")
   target?: string;
 
   @doc("The related errors that occurred during the request.")
@@ -449,7 +449,7 @@ model JobErrorResponse {
 
 @doc("Runtime information about a single interactive service associated with a job's node.")
 model ServiceInstance {
-  @doc("The service type (for example: SSH, JupyterLab, VSCode, TensorBoard, Custom).")
+  @doc("The service type.")
   type?: string;
 
   @doc("The port the service is listening on.")
@@ -461,7 +461,7 @@ model ServiceInstance {
   @doc("Error details if the service failed to start.")
   error?: JobErrorResponse;
 
-  @doc("Endpoint URL used to connect to the service. May contain a '<nodeIndex>' placeholder.")
+  @doc("Endpoint URL used to connect to the service.")
   endpoint?: string;
 
   @doc("Additional service-specific properties.")
@@ -491,10 +491,10 @@ model RunUser {
   @doc("A user or service principal's PuID.")
   userPuId?: string;
 
-  @doc("A user identity provider (e.g. live.com).")
+  @doc("A user identity provider.")
   userIdp?: string;
 
-  @doc("A user alternate sec id (represents the user in a different identity provider system).")
+  @doc("A user alternate sec id.")
   userAltSecId?: string;
 
   @doc("The issuer which issued the token for this user.")
@@ -522,9 +522,9 @@ model JobCost {
   chargedNodeUtilizationSeconds?: float64;
 }
 
-@doc("Run type categorization (orchestrator, traits, attribution, compute type).")
+@doc("Run type categorization.")
 model RunTypeV2 {
-  @doc("Orchestrator that produced the run (e.g. Execution, Pipeline, AutoML, HyperDrive, FineTuning).")
+  @doc("Orchestrator that produced the run.")
   orchestrator?: string;
 
   @doc("Traits associated with the run.")
@@ -579,7 +579,7 @@ model TypedAssetReference {
   type?: string;
 }
 
-@doc("Standard error response payload (mirrors Common.Core.Contracts.ErrorResponse).")
+@doc("Standard error response payload returned for a run.")
 model RunErrorResponse {
   @doc("The top level error that occurred.")
   error?: RootError;
@@ -617,7 +617,7 @@ model RunDetails {
   @doc("The name of the compute target where the run is executed.")
   target?: string;
 
-  @doc("The status of the run. The Status string value maps to the RunStatus enum.")
+  @doc("The status of the run.")
   status?: string;
 
   @doc("The parent of the run if the run is hierarchical.")
@@ -635,7 +635,7 @@ model RunDetails {
   @doc("The end time of the run in UTC.")
   endTimeUtc?: utcDateTime;
 
-  @doc("If an error occurred during the run, this will be populated.")
+  @doc("Error details for the run, if any.")
   error?: RunErrorResponse;
 
   @doc("A list of warnings that occurred during the run.")
@@ -662,7 +662,7 @@ model RunDetails {
   @doc("The run definition specification.")
   runDefinition?: unknown;
 
-  @doc("Map of log file name to its (typically SAS-signed) URL.")
+  @doc("Map of log file name to its URL.")
   logFiles?: Record<string>;
 
   @doc("Job cost information.")
@@ -686,10 +686,10 @@ model RunDetails {
   @doc("The user that created the run.")
   createdBy?: RunUser;
 
-  @doc("Time spent in an active state for terminal runs (ISO 8601 duration).")
+  @doc("The total compute time for a terminal run.")
   computeDuration?: duration;
 
-  @doc("Relative start time of active runs for ordering and computing active compute duration. Compute duration of an active run is now() - effectiveStartTimeUtc.")
+  @doc("The effective start time of the run in UTC.")
   effectiveStartTimeUtc?: utcDateTime;
 
   @doc("The run number.")
@@ -707,10 +707,10 @@ model RunDetails {
   @doc("Status revision number.")
   statusRevision?: int64;
 
-  @doc("The cumulative time spent in an active status for an active run (ISO 8601 duration).")
+  @doc("The cumulative compute time for an active run.")
   currentComputeTime?: duration;
 
-  @doc("The last timestamp when a run transitioned from paused to running. Initialized when startTimeUtc is first set.")
+  @doc("The last start time of the run in UTC.")
   lastStartTimeUtc?: utcDateTime;
 
   @doc("The user that last modified the run.")
@@ -719,7 +719,7 @@ model RunDetails {
   @doc("The time the run was last modified in UTC.")
   lastModifiedUtc?: utcDateTime;
 
-  @doc("The total duration of a run (ISO 8601 duration).")
+  @doc("The total duration of the run.")
   duration?: duration;
 
   @doc("The inputs for the run, keyed by input name.")
@@ -730,4 +730,277 @@ model RunDetails {
 
   @doc("The AttemptId of the most recent attempt.")
   currentAttemptId?: int32;
+}
+
+@doc("A job run.")
+model Run {
+  @doc("The display name of the run.")
+  displayName?: string;
+
+  @doc("The name of the run.")
+  name?: string;
+
+  @doc("An identifier for the data associated with this run.")
+  dataContainerId?: string;
+
+  @doc("A description of the run.")
+  description?: string;
+
+  @doc("Whether the run is hidden in run listings.")
+  hidden?: boolean;
+
+  @doc("Run type categorization.")
+  runType?: string;
+
+  @doc("Run type information.")
+  runTypeV2?: RunTypeV2;
+
+  @doc("The properties dictionary for the run.")
+  properties?: Record<string>;
+
+  @doc("The parameters dictionary for the run.")
+  parameters?: Record<unknown>;
+
+  @doc("Action URIs for the run, keyed by action name.")
+  actionUris?: Record<string>;
+
+  @doc("The script name associated with the run.")
+  scriptName?: string;
+
+  @doc("The name of the compute target where the run is executed.")
+  target?: string;
+
+  @doc("The set of unique compute targets used by child runs.")
+  uniqueChildRunComputeTargets?: string[];
+
+  @doc("The tag dictionary for the run. Tags are mutable.")
+  tags?: Record<string>;
+
+  @doc("The run settings.")
+  settings?: Record<string>;
+
+  @doc("The interactive run services for a run.")
+  services?: Record<RunEndpointSetting>;
+
+  @doc("A list of datasets used as input to the run.")
+  inputDatasets?: unknown[];
+
+  @doc("A list of datasets used as output to the run.")
+  outputDatasets?: unknown[];
+
+  @doc("The run definition specification.")
+  runDefinition?: unknown;
+
+  @doc("The job specification")
+  jobSpecification?: unknown;
+
+  @doc("The primary metric name for the run.")
+  primaryMetricName?: string;
+
+  @doc("Information about the source that created this run.")
+  createdFrom?: unknown;
+
+  @doc("URI used to cancel this run.")
+  cancelUri?: string;
+
+  @doc("URI used to mark this run as complete.")
+  completeUri?: string;
+
+  @doc("URI used to retrieve diagnostics for this run.")
+  diagnosticsUri?: string;
+
+  @doc("ARM id of the workspace.")
+  virtualWorkspaceStorageArmId?: string;
+
+  @doc("The compute requests for this run.")
+  computeRequest?: unknown;
+
+  @doc("The compute record for this run.")
+  compute?: unknown;
+
+  @doc("Whether the run should be retained for the lifetime of the workspace (root runs only).")
+  retainForLifetimeOfWorkspace?: boolean;
+
+  @doc("Queueing information for this run.")
+  queueingInfo?: unknown;
+
+  @doc("The inputs for the run, keyed by input name.")
+  inputs?: Record<TypedAssetReference>;
+
+  @doc("The outputs for the run, keyed by output name.")
+  outputs?: Record<TypedAssetReference>;
+
+  @doc("The identifier for the run.")
+  runId?: string;
+
+  @doc("The parent of the run if the run is hierarchical; otherwise, null.")
+  parentRunId?: string;
+
+  @doc("The id of the experiment that created this run.")
+  experimentId?: string;
+
+  @doc("The status of the run.")
+  status?: string;
+
+  @doc("The start time of the run in UTC.")
+  startTimeUtc?: utcDateTime;
+
+  @doc("The end time of the run in UTC.")
+  endTimeUtc?: utcDateTime;
+
+  @doc("The schedule that created this run, if it was created by a schedule.")
+  scheduleId?: string;
+
+  @doc("The run number.")
+  runNumber?: int32;
+
+  @doc("The id of the root run in the hierarchy.")
+  rootRunId?: string;
+
+  @doc("The time the run was created in UTC.")
+  createdUtc?: utcDateTime;
+
+  @doc("The user that created the run.")
+  createdBy?: RunUser;
+
+  @doc("The id of the user that created the run.")
+  userId?: string;
+
+  @doc("A token used for authenticating a run.")
+  token?: string;
+
+  @doc("The Token expiration time in UTC.")
+  tokenExpiryTimeUtc?: utcDateTime;
+
+  @doc("Error details for the run, if any.")
+  error?: RunErrorResponse;
+
+  @doc("A list of warnings that occurred during the run.")
+  warnings?: RunDetailsWarning[];
+
+  @doc("Revision number.")
+  revision?: int64;
+
+  @doc("Status revision number.")
+  statusRevision?: int64;
+
+  @doc("A system generated id for the run.")
+  runUuid?: string;
+
+  @doc("A system generated id for the run's parent.")
+  parentRunUuid?: string;
+
+  @doc("A system generated id for the root of the run's hierarchy.")
+  rootRunUuid?: string;
+
+  @doc("The last start time of the run in UTC.")
+  lastStartTimeUtc?: utcDateTime;
+
+  @doc("The cumulative compute time for an active run.")
+  currentComputeTime?: duration;
+
+  @doc("The total compute time for a terminal run.")
+  computeDuration?: duration;
+
+  @doc("The effective start time of the run in UTC.")
+  effectiveStartTimeUtc?: utcDateTime;
+
+  @doc("The user that last modified the run.")
+  lastModifiedBy?: RunUser;
+
+  @doc("The time the run was last modified in UTC.")
+  lastModifiedUtc?: utcDateTime;
+
+  @doc("The total duration of the run.")
+  duration?: duration;
+
+  @doc("The cancelation reason if the run was canceled.")
+  cancelationReason?: string;
+
+  @doc("The AttemptId of the most recent attempt.")
+  currentAttemptId?: int32;
+}
+
+@doc("A data store path.")
+model ArtifactDataPath {
+  @doc("The data store name.")
+  dataStoreName?: string;
+
+  @doc("The relative path within the data store.")
+  relativePath?: string;
+
+  @doc("SQL data path information.")
+  sqlDataPath?: unknown;
+}
+
+@doc("An artifact.")
+model Artifact {
+  @doc("The artifact id.")
+  artifactId?: string;
+
+  @doc("The artifact origin.")
+  origin: string;
+
+  @doc("The container name.")
+  container: string;
+
+  @doc("The artifact path.")
+  path: string;
+
+  @doc("The artifact Etag.")
+  etag?: string;
+
+  @doc("The artifact creation time in UTC.")
+  createdTime?: utcDateTime;
+
+  @doc("The artifact data path.")
+  dataPath?: ArtifactDataPath;
+
+  @doc("The artifact tags.")
+  tags?: Record<string>;
+}
+
+@doc("A page of artifacts.")
+model ArtifactList {
+  @doc("The artifacts in the page.")
+  value: Artifact[];
+
+  @doc("Token for the next page.")
+  continuationToken?: string;
+
+  @doc("URL for the next page.")
+  nextLink?: string;
+}
+
+@doc("Artifact content information.")
+model ArtifactContentInformation {
+  @doc("The content URI.")
+  contentUri?: url;
+
+  @doc("The artifact origin.")
+  origin?: string;
+
+  @doc("The container name.")
+  container?: string;
+
+  @doc("The artifact path.")
+  path?: string;
+
+  @doc("The artifact tags.")
+  tags?: Record<string>;
+
+  @doc("The content byte length.")
+  contentLength?: int64;
+}
+
+@doc("A page of artifact content information.")
+model ArtifactContentInformationList {
+  @doc("The entries in the page.")
+  value: ArtifactContentInformation[];
+
+  @doc("Token for the next page.")
+  continuationToken?: string;
+
+  @doc("URL for the next page.")
+  nextLink?: string;
 }

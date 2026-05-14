@@ -329,6 +329,9 @@ using Azure.AI.Projects;
 @@clientName(Azure.AI.Projects.Jobs.beginDelete, "begin_delete", "python");
 @@clientName(Azure.AI.Projects.Jobs.beginCancel, "begin_cancel", "python");
 @@access(Azure.AI.Projects.Jobs.getRunDetails, Access.internal);
+@@access(Azure.AI.Projects.Jobs.getRun, Access.internal);
+@@access(Azure.AI.Projects.Jobs.listArtifacts, Access.internal);
+@@access(Azure.AI.Projects.Jobs.getArtifactContentInformation, Access.internal);
 
 // --------------------------------------------------------------------------------
 // Beta Agents sub-client
