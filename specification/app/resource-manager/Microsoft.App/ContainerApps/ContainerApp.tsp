@@ -93,7 +93,10 @@ interface ContainerApps {
   @summary("Delete a Container App.")
   delete is ArmResourceDeleteWithoutOkAsync<
     ContainerApp,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -168,12 +171,15 @@ interface ContainerApps {
 
 @@doc(ContainerApp.name, "Name of the Container App.");
 @@doc(ContainerApp.properties, "ContainerApp resource specific properties");
-@@doc(ContainerApp.identity,
+@@doc(
+  ContainerApp.identity,
   "managed identities for the Container App to interact with other Azure services without maintaining any secrets or credentials in code."
 );
-@@doc(ContainerApps.createOrUpdate::parameters.resource,
+@@doc(
+  ContainerApps.createOrUpdate::parameters.resource,
   "Properties used to create a container app"
 );
-@@doc(ContainerApps.update::parameters.properties,
+@@doc(
+  ContainerApps.update::parameters.properties,
   "Properties of a Container App that need to be updated"
 );

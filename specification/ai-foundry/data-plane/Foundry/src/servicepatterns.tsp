@@ -51,7 +51,9 @@ union FoundryFeaturesOptInKeys {
   memory_stores_v1_preview: "MemoryStores=V1Preview",
 }
 
-alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys> = {
+alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends
+  | FoundryFeaturesOptInKeys
+  | AgentDefinitionOptInKeys> = {
   /**
    * A feature flag opt-in required when using preview operations or modifying persisted preview resources.
    */
@@ -59,7 +61,9 @@ alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends Foundr
   foundry_features: RequiredPreviewOptInHeader;
 };
 
-alias WithConditionalFoundryPreviewHeader<OptionalPreviewOptInHeader extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys> = {
+alias WithConditionalFoundryPreviewHeader<OptionalPreviewOptInHeader extends
+  | FoundryFeaturesOptInKeys
+  | AgentDefinitionOptInKeys> = {
   /**
    * A feature flag opt-in required when using preview operations or modifying persisted preview resources.
    */
@@ -441,7 +445,9 @@ op deleteJob is FoundryDataPlaneOperation<
 /** Delete a job (preview). Returns 204 No Content. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job templates are project-standard operations"
 @delete
-op deleteJobPreview<AreaPreviewLabel extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys> is FoundryDataPlanePreviewOperation<
+op deleteJobPreview<AreaPreviewLabel extends
+  | FoundryFeaturesOptInKeys
+  | AgentDefinitionOptInKeys> is FoundryDataPlanePreviewOperation<
   AreaPreviewLabel,
   {
     /** The ID of the job to delete. */

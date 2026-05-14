@@ -48,10 +48,12 @@ interface DatabaseSecurityAlertPolicies {
   >;
 }
 
-@@doc(DatabaseSecurityAlertPolicy.name,
+@@doc(
+  DatabaseSecurityAlertPolicy.name,
   "The name of the security alert policy."
 );
 @@doc(DatabaseSecurityAlertPolicy.properties, "Resource properties.");
-@@doc(DatabaseSecurityAlertPolicies.createOrUpdate::parameters.resource,
+@@doc(
+  DatabaseSecurityAlertPolicies.createOrUpdate::parameters.resource,
   "The database security alert policy."
 );

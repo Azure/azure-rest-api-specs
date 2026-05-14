@@ -6,10 +6,12 @@ using WorkbooksApi;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(WorkbookUpdateParameters.properties);
 
-@@clientName(Workbooks.createOrUpdate::parameters.resource,
+@@clientName(
+  Workbooks.createOrUpdate::parameters.resource,
   "workbookProperties"
 );
-@@clientName(Workbooks.update::parameters.properties,
+@@clientName(
+  Workbooks.update::parameters.properties,
   "WorkbookUpdateParameters"
 );
 @@clientLocation(WorkbookOperationGroup.revisionGet, Workbooks);

@@ -6,28 +6,33 @@ using Microsoft.Cdn;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 
-@@clientName(CertificateSourceParameters,
+@@clientName(
+  CertificateSourceParameters,
   "CertificateSourceParametersBase",
   "go"
 );
 @@clientName(CdnEndpoint, "LinkedEndpoint", "go");
 @@clientName(CdnWebApplicationFirewallPolicy, "CdnWafPolicy", "go");
-@@clientName(WebApplicationFirewallPolicy,
+@@clientName(
+  WebApplicationFirewallPolicy,
   "WebApplicationFirewallPolicy",
   "go"
 );
-@@clientName(CdnWebApplicationFirewallPolicyProperties,
+@@clientName(
+  CdnWebApplicationFirewallPolicyProperties,
   "CdnWafPolicyProperties",
   "go"
 );
-@@clientName(WebApplicationFirewallPolicyProperties,
+@@clientName(
+  WebApplicationFirewallPolicyProperties,
   "WebApplicationFirewallPolicyProperties",
   "go"
 );
 
 @@clientLocation(checkEndpointNameAvailability, "ManagementClient", "go");
 @@clientLocation(checkNameAvailability, "ManagementClient", "go");
-@@clientLocation(checkNameAvailabilityWithSubscription,
+@@clientLocation(
+  checkNameAvailabilityWithSubscription,
   "ManagementClient",
   "go"
 );
@@ -38,27 +43,40 @@ using Azure.ResourceManager;
 @@clientName(ValidateProbeInput.probeURL, "probeUrl", "java");
 
 @@access(Certificate, Access.public, "java");
-@@usage(Certificate,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+@@usage(
+  Certificate,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "java"
 );
 @@access(CustomerCertificate, Access.public, "java");
-@@usage(CustomerCertificate,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+@@usage(
+  CustomerCertificate,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "java"
 );
 @@access(ManagedCertificate, Access.public, "java");
-@@usage(ManagedCertificate,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+@@usage(
+  ManagedCertificate,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "java"
 );
 @@access(AzureFirstPartyManagedCertificate, Access.public, "java");
-@@usage(AzureFirstPartyManagedCertificate,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+@@usage(
+  AzureFirstPartyManagedCertificate,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "java"
 );
 
-@@alternateType(RequestSchemeMatchConditionParameters.operator,
+@@alternateType(
+  RequestSchemeMatchConditionParameters.operator,
   "Equal",
   "java"
 );
@@ -75,7 +93,8 @@ using Azure.ResourceManager;
 @@clientLocation(Profiles.checkEndpointNameAvailability, "AfdProfiles", "java");
 @@clientLocation(Profiles.listResourceUsage, "AfdProfiles", "java");
 @@clientLocation(Profiles.checkHostNameAvailability, "AfdProfiles", "java");
-@@clientName(Profiles.checkHostNameAvailability,
+@@clientName(
+  Profiles.checkHostNameAvailability,
   "checkHostnameAvailability",
   "java"
 );
@@ -84,7 +103,8 @@ using Azure.ResourceManager;
 
 @@clientName(AFDDomain, "AfdDomain", "java");
 @@clientName(AFDDomainProperties, "AfdDomainProperties", "java");
-@@clientName(AFDDomainHttpsCustomizedCipherSuiteSet,
+@@clientName(
+  AFDDomainHttpsCustomizedCipherSuiteSet,
   "AfdDomainHttpsCustomizedCipherSuiteSet",
   "java"
 );
@@ -92,7 +112,8 @@ using Azure.ResourceManager;
 @@clientName(AFDDomainMtlsParameters, "AfdDomainMtlsParameters", "java");
 @@clientName(AFDDomains, "AfdDomains", "java");
 @@clientName(AFDDomainUpdateParameters, "AfdDomainUpdateParameters", "java");
-@@clientName(AFDDomainUpdatePropertiesParameters,
+@@clientName(
+  AFDDomainUpdatePropertiesParameters,
   "AfdDomainUpdatePropertiesParameters",
   "java"
 );
@@ -100,11 +121,13 @@ using Azure.ResourceManager;
 @@clientName(AFDEndpoint, "AfdEndpoint", "java");
 @@clientName(AFDEndpointProperties, "AfdEndpointProperties", "java");
 @@clientName(AFDEndpoints, "AfdEndpoints", "java");
-@@clientName(AFDEndpointUpdateParameters,
+@@clientName(
+  AFDEndpointUpdateParameters,
   "AfdEndpointUpdateParameters",
   "java"
 );
-@@clientName(AFDEndpointPropertiesUpdateParameters,
+@@clientName(
+  AFDEndpointPropertiesUpdateParameters,
   "AfdEndpointPropertiesUpdateParameters",
   "java"
 );
@@ -112,15 +135,18 @@ using Azure.ResourceManager;
 @@clientName(AFDOrigin, "AfdOrigin", "java");
 @@clientName(AFDOriginProperties, "AfdOriginProperties", "java");
 @@clientName(AFDOrigins, "AfdOrigins", "java");
-@@clientName(AFDOriginUpdatePropertiesParameters,
+@@clientName(
+  AFDOriginUpdatePropertiesParameters,
   "AfdOriginUpdatePropertiesParameters",
   "java"
 );
-@@clientName(AFDOriginGroupUpdateParameters,
+@@clientName(
+  AFDOriginGroupUpdateParameters,
   "AfdOriginGroupUpdateParameters",
   "java"
 );
-@@clientName(AFDOriginGroupUpdatePropertiesParameters,
+@@clientName(
+  AFDOriginGroupUpdatePropertiesParameters,
   "AfdOriginGroupUpdatePropertiesParameters",
   "java"
 );
@@ -128,11 +154,13 @@ using Azure.ResourceManager;
 @@clientName(AFDOriginGroup, "AfdOriginGroup", "java");
 @@clientName(AFDOriginGroupProperties, "AfdOriginGroupProperties", "java");
 @@clientName(AFDOriginGroups, "AfdOriginGroups", "java");
-@@clientName(AFDOriginGroupUpdateParameters,
+@@clientName(
+  AFDOriginGroupUpdateParameters,
   "AfdOriginGroupUpdateParameters",
   "java"
 );
-@@clientName(AFDOriginGroupUpdatePropertiesParameters,
+@@clientName(
+  AFDOriginGroupUpdatePropertiesParameters,
   "AfdOriginGroupUpdatePropertiesParameters",
   "java"
 );
@@ -145,41 +173,49 @@ using Azure.ResourceManager;
 @@clientName(EndpointProperties.hostName, "hostname", "java");
 @@clientName(ValidateCustomDomainInput.hostName, "hostname", "java");
 
-@@clientName(DeliveryRuleHostNameCondition,
+@@clientName(
+  DeliveryRuleHostNameCondition,
   "DeliveryRuleHostnameCondition",
   "java"
 );
 @@clientName(AFDOriginUpdateParameters, "AfdOriginUpdateParameters", "java");
-@@clientName(HostNameMatchConditionParameters,
+@@clientName(
+  HostNameMatchConditionParameters,
   "HostnameMatchConditionParameters",
   "java"
 );
 @@clientName(AFDEndpointProtocols, "AfdEndpointProtocols", "java");
 @@clientName(AFDRouteGrpcState, "AfdRouteGrpcState", "java");
-@@clientName(DeploymentVersionAFDOriginChange,
+@@clientName(
+  DeploymentVersionAFDOriginChange,
   "DeploymentVersionAfdOriginChange",
   "java"
 );
-@@clientName(DeploymentVersionAFDOriginGroupChange,
+@@clientName(
+  DeploymentVersionAFDOriginGroupChange,
   "DeploymentVersionAfdOriginGroupChange",
   "java"
 );
-@@clientName(CheckHostNameAvailabilityInput,
+@@clientName(
+  CheckHostNameAvailabilityInput,
   "CheckHostnameAvailabilityInput",
   "java"
 );
-@@clientName(RequestSchemeMatchValue,
+@@clientName(
+  RequestSchemeMatchValue,
   "RequestSchemeMatchConditionParametersMatchValuesItem",
   "java"
 );
-@@clientName(IsDeviceMatchValue,
+@@clientName(
+  IsDeviceMatchValue,
   "IsDeviceMatchConditionParametersMatchValuesItem",
   "java"
 );
 @@clientName(DeliveryRuleActionName, "DeliveryRuleActionValue", "java");
 @@clientName(AFDStateProperties, "AfdStateProperties", "java");
 @@clientName(HostNameOperator, "HostnameOperator", "java");
-@@clientName(RequestMethodMatchValue,
+@@clientName(
+  RequestMethodMatchValue,
   "RequestMethodMatchConditionParametersMatchValuesItem",
   "java"
 );
@@ -188,40 +224,48 @@ using Azure.ResourceManager;
 @@clientName(AFDEndpointProperties.hostName, "hostname", "java");
 @@clientName(AFDOriginUpdatePropertiesParameters.hostName, "hostname", "java");
 @@clientName(OriginProperties.hostName, "hostname", "java");
-@@clientName(Components1Gs0LlpSchemasMetricsresponsePropertiesSeriesItemsPropertiesDataItems,
+@@clientName(
+  Components1Gs0LlpSchemasMetricsresponsePropertiesSeriesItemsPropertiesDataItems,
   "MetricsResponseSeriesItemData",
   "java"
 );
-@@clientName(Components18OrqelSchemasWafmetricsresponsePropertiesSeriesItemsPropertiesDataItems,
+@@clientName(
+  Components18OrqelSchemasWafmetricsresponsePropertiesSeriesItemsPropertiesDataItems,
   "WafMetricsResponseSeriesItemData",
   "java"
 );
 
 @@clientName(Microsoft.Cdn, "CdnManagementClient", "javascript");
-@@clientName(PolicySettingsDefaultCustomBlockResponseStatusCode.`405`,
+@@clientName(
+  PolicySettingsDefaultCustomBlockResponseStatusCode.`405`,
   "FourHundredFive",
   "javascript,go,csharp"
 );
-@@clientName(PolicySettingsDefaultCustomBlockResponseStatusCode.`406`,
+@@clientName(
+  PolicySettingsDefaultCustomBlockResponseStatusCode.`406`,
   "FourHundredSix",
   "javascript,go,csharp"
 );
-@@clientName(PolicySettingsDefaultCustomBlockResponseStatusCode.`403`,
+@@clientName(
+  PolicySettingsDefaultCustomBlockResponseStatusCode.`403`,
   "FourHundredThree",
   "javascript,go,csharp"
 );
-@@clientName(PolicySettingsDefaultCustomBlockResponseStatusCode.`429`,
+@@clientName(
+  PolicySettingsDefaultCustomBlockResponseStatusCode.`429`,
   "FourHundredTwentyNine",
   "javascript,go,csharp"
 );
-@@clientName(PolicySettingsDefaultCustomBlockResponseStatusCode.`200`,
+@@clientName(
+  PolicySettingsDefaultCustomBlockResponseStatusCode.`200`,
   "TwoHundred",
   "javascript,go,csharp"
 );
 
 // C# SDK customizations: backward-compatible renames, access/usage configurations,
 // client name overrides, and type alternates for the CDN management API C# SDK.
-@@clientName(ActivatedResourceReference,
+@@clientName(
+  ActivatedResourceReference,
   "FrontDoorActivatedResourceInfo",
   "csharp"
 );
@@ -235,32 +279,38 @@ using Azure.ResourceManager;
 @@clientName(AgentPathType, "CdnWebAgentPathType", "csharp");
 // PR review feedback: rename nested WAF policy model to add RP context and disambiguate
 // from the existing CdnWebApplicationFirewallPolicyData ARM resource.
-@@clientName(WebApplicationFirewallPolicy,
+@@clientName(
+  WebApplicationFirewallPolicy,
   "FrontDoorWebApplicationFirewallPolicyProperties",
   "csharp"
 );
 // PR review feedback: singular + RP-prefixed name for WAF log scrubbing rule (each
 // instance represents a single rule entry, not a collection).
-@@clientName(WebApplicationFirewallScrubbingRules,
+@@clientName(
+  WebApplicationFirewallScrubbingRules,
   "FrontDoorWafLogScrubbingRule",
   "csharp"
 );
-@@clientName(AfdUrlSigningActionParameters,
+@@clientName(
+  AfdUrlSigningActionParameters,
   "FrontDoorUrlSigningActionContent",
   "csharp"
 );
-@@clientName(CompareDeploymentVersionsParameter,
+@@clientName(
+  CompareDeploymentVersionsParameter,
   "CompareDeploymentVersionsContent",
   "csharp"
 );
-@@clientName(DeliveryRuleEdgeActionParameters,
+@@clientName(
+  DeliveryRuleEdgeActionParameters,
   "DeliveryRuleEdgeActionProperties",
   "csharp"
 );
 @@clientName(ApprovalStatus, "DeploymentVersiongApprovalStatus", "csharp");
 @@clientName(ResourceUsageUnit, "CdnUsageUnit", "csharp");
 @@clientName(PolicySettings, "WafPolicySettings", "csharp");
-@@clientName(AfdSecretMtlsCertificateChain,
+@@clientName(
+  AfdSecretMtlsCertificateChain,
   "FrontDoorSecretMtlsCertificateChain",
   "csharp"
 );
@@ -279,7 +329,8 @@ using Azure.ResourceManager;
 // members are suppressed via [CodeGenSuppress] in the SDK customization, and the
 // underscored members are re-introduced there to preserve the v1.5.1 API surface.
 @@clientName(CustomRuleAfd, "CustomRuleFrontDoor", "csharp");
-@@clientName(ManagedRuleGroupOverrideAfd,
+@@clientName(
+  ManagedRuleGroupOverrideAfd,
   "ManagedRuleGroupOverrideFrontDoor",
   "csharp"
 );
@@ -298,49 +349,59 @@ using Azure.ResourceManager;
 @@clientName(DeploymentStages, "CdnDeploymentStages", "csharp");
 @@clientName(DeploymentRolloutStatus, "CdnDeploymentRolloutStatus", "csharp");
 @@clientName(DeploymentVersionChange, "CdnDeploymentVersionChange", "csharp");
-@@clientName(DeploymentVersionAFDOriginChange,
+@@clientName(
+  DeploymentVersionAFDOriginChange,
   "CdnDeploymentVersionFrontDoorOriginChange",
   "csharp"
 );
-@@clientName(DeploymentVersionAFDOriginGroupChange,
+@@clientName(
+  DeploymentVersionAFDOriginGroupChange,
   "CdnDeploymentVersionFrontDoorOriginGroupChange",
   "csharp"
 );
-@@clientName(DeploymentVersionRouteChange,
+@@clientName(
+  DeploymentVersionRouteChange,
   "CdnDeploymentVersionRouteChange",
   "csharp"
 );
-@@clientName(DeploymentVersionRuleChange,
+@@clientName(
+  DeploymentVersionRuleChange,
   "CdnDeploymentVersionRuleChange",
   "csharp"
 );
-@@clientName(DeploymentVersionRuleSetChange,
+@@clientName(
+  DeploymentVersionRuleSetChange,
   "CdnDeploymentVersionRuleSetChange",
   "csharp"
 );
-@@clientName(DeploymentVersionSecurityPolicyChange,
+@@clientName(
+  DeploymentVersionSecurityPolicyChange,
   "CdnDeploymentVersionSecurityPolicyChange",
   "csharp"
 );
 @@clientName(EdgeAction, "CdnEdgeAction", "csharp");
 @@clientName(GroupByVariable, "RateLimitGroupByVariable", "csharp");
 @@clientName(InvocationPoint, "EdgeActionInvocationPoint", "csharp");
-@@clientName(KnowledgeSourceProvisioningState,
+@@clientName(
+  KnowledgeSourceProvisioningState,
   "CdnWebAgentKnowledgeSourceProvisioningState",
   "csharp"
 );
 @@clientName(KnowledgeSourceType, "WebAgentKnowledgeSourceType", "csharp");
-@@clientName(KnowledgeSourceUpdateFrequency,
+@@clientName(
+  KnowledgeSourceUpdateFrequency,
   "WebAgentKnowledgeSourceUpdateFrequency",
   "csharp"
 );
 @@clientName(MatchVariable, "DeliveryRuleMatchVariable", "csharp");
-@@clientName(OriginCapacityResourceProperties,
+@@clientName(
+  OriginCapacityResourceProperties,
   "FrontDoorOriginCapacitySettings",
   "csharp"
 );
 @@clientName(ProfileAgentUpdateParameters, "CdnProfileAgentPatch", "csharp");
-@@clientName(ProfileAgentProvisioningState,
+@@clientName(
+  ProfileAgentProvisioningState,
   "CdnProfileAgentProvisioningState",
   "csharp"
 );
@@ -354,11 +415,13 @@ using Azure.ResourceManager;
 @@clientName(TypeName, "UrlSigningActionTypeName", "csharp");
 @@clientName(VariableName, "RateLimitGroupByVariableName", "csharp");
 @@clientName(WebAgentUpdateParameters, "CdnWebAgentPatch", "csharp");
-@@clientName(WebAgentProvisioningState,
+@@clientName(
+  WebAgentProvisioningState,
   "CdnWebAgentProvisioningState",
   "csharp"
 );
-@@clientName(EndpointProvisioningState,
+@@clientName(
+  EndpointProvisioningState,
   "CdnEndpointProvisioningState",
   "csharp"
 );
@@ -376,25 +439,30 @@ using Azure.ResourceManager;
 @@clientName(Endpoint, "CdnEndpoint", "csharp");
 @@clientName(Origin, "CdnOrigin", "csharp");
 @@clientName(OriginGroup, "CdnOriginGroup", "csharp");
-@@clientName(ValidateCustomDomainInput,
+@@clientName(
+  ValidateCustomDomainInput,
   "ValidateCustomDomainContent",
   "csharp"
 );
-@@clientName(ValidateCustomDomainOutput,
+@@clientName(
+  ValidateCustomDomainOutput,
   "ValidateCustomDomainResult",
   "csharp"
 );
 @@clientName(HealthProbeParameters, "HealthProbeSettings", "csharp");
-@@clientName(ResponseBasedOriginErrorDetectionParameters,
+@@clientName(
+  ResponseBasedOriginErrorDetectionParameters,
   "ResponseBasedOriginErrorDetectionSettings",
   "csharp"
 );
 @@clientName(HttpErrorRangeParameters, "HttpErrorRange", "csharp");
-@@clientName(CheckNameAvailabilityInput,
+@@clientName(
+  CheckNameAvailabilityInput,
   "CdnNameAvailabilityContent",
   "csharp"
 );
-@@clientName(CheckNameAvailabilityOutput,
+@@clientName(
+  CheckNameAvailabilityOutput,
   "CdnNameAvailabilityResult",
   "csharp"
 );
@@ -402,13 +470,15 @@ using Azure.ResourceManager;
 @@clientName(ResourceUsage, "CdnUsage", "csharp");
 @@clientName(CdnManagedHttpsParameters, "CdnManagedHttpsContent", "csharp");
 @@clientName(UserManagedHttpsParameters, "UserManagedHttpsContent", "csharp");
-@@clientName(LoadBalancingSettingsParameters,
+@@clientName(
+  LoadBalancingSettingsParameters,
   "LoadBalancingSettings",
   "csharp"
 );
 @@clientName(CompressionSettings, "RouteCacheCompressionSettings", "csharp");
 @@clientName(AfdPurgeParameters, "FrontDoorPurgeContent", "csharp");
-@@clientName(AfdRouteCacheConfiguration,
+@@clientName(
+  AfdRouteCacheConfiguration,
   "FrontDoorRouteCacheConfiguration",
   "csharp"
 );
@@ -422,33 +492,40 @@ using Azure.ResourceManager;
 @@clientName(ValidateSecretOutput, "ValidateSecretResult", "csharp");
 @@clientName(UsageName, "FrontDoorUsageResourceName", "csharp");
 @@clientName(Microsoft.Cdn.Usage, "FrontDoorUsage", "csharp");
-@@clientName(AzureFirstPartyManagedCertificateParameters,
+@@clientName(
+  AzureFirstPartyManagedCertificateParameters,
   "AzureFirstPartyManagedCertificateProperties",
   "csharp"
 );
-@@clientName(CheckHostNameAvailabilityInput,
+@@clientName(
+  CheckHostNameAvailabilityInput,
   "HostNameAvailabilityContent",
   "csharp"
 );
-@@clientName(CheckEndpointNameAvailabilityInput,
+@@clientName(
+  CheckEndpointNameAvailabilityInput,
   "EndpointNameAvailabilityContent",
   "csharp"
 );
-@@clientName(CheckEndpointNameAvailabilityOutput,
+@@clientName(
+  CheckEndpointNameAvailabilityOutput,
   "EndpointNameAvailabilityResult",
   "csharp"
 );
-@@clientName(SecurityPolicyWebApplicationFirewallParameters,
+@@clientName(
+  SecurityPolicyWebApplicationFirewallParameters,
   "SecurityPolicyWebApplicationFirewall",
   "csharp"
 );
 @@clientName(MatchCondition.operator, "matchOperator", "csharp");
 @@clientName(MatchConditionAfd.operator, "matchOperator", "csharp");
-@@clientName(CustomerCertificateParameters,
+@@clientName(
+  CustomerCertificateParameters,
   "CustomerCertificateProperties",
   "csharp"
 );
-@@clientName(CustomerCertificateParameters.expirationDate,
+@@clientName(
+  CustomerCertificateParameters.expirationDate,
   "ExpiresOn",
   "csharp"
 );
@@ -460,17 +537,20 @@ using Azure.ResourceManager;
 @@clientName(EdgeNodesOperationGroup.list, "GetEdgeNodes", "csharp");
 @@clientName(ProfilesOperationGroup.canMigrate, "CanMigrateProfile", "csharp");
 @@clientName(ProfilesOperationGroup.migrate, "MigrateProfile", "csharp");
-@@clientName(AutoGeneratedDomainNameLabelScope,
+@@clientName(
+  AutoGeneratedDomainNameLabelScope,
   "DomainNameLabelScope",
   "csharp"
 );
-@@clientName(ManagedCertificateParameters,
+@@clientName(
+  ManagedCertificateParameters,
   "ManagedCertificateProperties",
   "csharp"
 );
 @@clientName(SecretProperties, "CdnSecretProperties", "csharp");
 @@clientName(SecurityPolicyProperties, "CdnSecurityPolicyProperties", "csharp");
-@@clientName(SecurityPolicyPropertiesParameters,
+@@clientName(
+  SecurityPolicyPropertiesParameters,
   "SecurityPolicyProperties",
   "csharp"
 );
@@ -478,7 +558,8 @@ using Azure.ResourceManager;
 @@clientName(AfdCertificateType, "FrontDoorCertificateType", "csharp");
 @@clientName(AfdMinimumTlsVersion, "FrontDoorMinimumTlsVersion", "csharp");
 @@clientName(EdgeNodeProperties.ipAddressGroups, "IPAddressGroups", "csharp");
-@@clientName(AfdQueryStringCachingBehavior,
+@@clientName(
+  AfdQueryStringCachingBehavior,
   "FrontDoorQueryStringCachingBehavior",
   "csharp"
 );
@@ -487,7 +568,8 @@ using Azure.ResourceManager;
 @@clientName(UsageUnit, "FrontDoorUsageUnit", "csharp");
 @@clientName(ProtocolType, "SecureDeliveryProtocolType", "csharp");
 @@clientName(ProbeProtocol, "HealthProbeProtocol", "csharp");
-@@clientName(CustomHttpsProvisioningSubstate,
+@@clientName(
+  CustomHttpsProvisioningSubstate,
   "CustomHttpsAvailabilityState",
   "csharp"
 );
@@ -501,34 +583,40 @@ using Azure.ResourceManager;
 @@clientName(Transform.UrlEncode, "UriEncode", "csharp");
 @@clientName(Algorithm, "UriSigningAlgorithm", "csharp");
 @@clientName(Algorithm.SHA256, "Sha256", "csharp");
-@@clientName(WafMetricsSeriesUnit,
+@@clientName(
+  WafMetricsSeriesUnit,
   "WafMetricsResponseSeriesItemUnit",
   "csharp"
 );
 @@clientName(WafMetricsGranularity, "WafMetricsResponseGranularity", "csharp");
 @@clientName(MetricsSeriesUnit, "MetricsResponseSeriesItemUnit", "csharp");
 @@clientName(MetricsGranularity, "MetricsResponseGranularity", "csharp");
-@@clientName(ManagedRuleGroupOverride,
+@@clientName(
+  ManagedRuleGroupOverride,
   "ManagedRuleGroupOverrideSetting",
   "csharp"
 );
 @@clientName(ManagedRuleOverride, "ManagedRuleOverrideSetting", "csharp");
-@@clientName(DeliveryRuleActionParameters,
+@@clientName(
+  DeliveryRuleActionParameters,
   "DeliveryRuleActionProperties",
   "csharp"
 );
-@@clientName(DeliveryRuleConditionParameters,
+@@clientName(
+  DeliveryRuleConditionParameters,
   "DeliveryRuleConditionProperties",
   "csharp"
 );
-@@clientName(CertificateSourceParameters,
+@@clientName(
+  CertificateSourceParameters,
   "CertificateSourceProperties",
   "csharp"
 );
 @@clientName(KeyVaultSigningKeyParameters, "KeyVaultSigningKey", "csharp");
 @@clientName(KeyVaultSigningKeyParameters.typeName, "KeyType", "csharp");
 @@clientName(IsDeviceMatchValue, "IsDeviceMatchConditionMatchValue", "csharp");
-@@clientName(RequestMethodMatchValue,
+@@clientName(
+  RequestMethodMatchValue,
   "RequestMethodMatchConditionMatchValue",
   "csharp"
 );
@@ -541,47 +629,56 @@ using Azure.ResourceManager;
 @@clientName(RequestMethodMatchValue.TRACE, "Trace", "csharp");
 @@clientName(WafRankingType.clientIp, "ClientIP", "csharp");
 @@clientName(WafRankingType.url, "Uri", "csharp");
-@@clientName(RequestSchemeMatchValue,
+@@clientName(
+  RequestSchemeMatchValue,
   "RequestSchemeMatchConditionMatchValue",
   "csharp"
 );
 @@clientName(RequestSchemeMatchValue.HTTP, "Http", "csharp");
 @@clientName(RequestSchemeMatchValue.HTTPS, "Https", "csharp");
 @@clientName(UrlSigningKey, "UriSigningKey", "csharp");
-@@clientName(EndpointPropertiesUpdateParametersDeliveryPolicy,
+@@clientName(
+  EndpointPropertiesUpdateParametersDeliveryPolicy,
   "EndpointDeliveryPolicy",
   "csharp"
 );
 @@clientName(AFDEndpointProtocols, "FrontDoorEndpointProtocol", "csharp");
 @@clientName(CustomDomainHttpsParameters, "CustomDomainHttpsContent", "csharp");
-@@clientName(ProvisioningState,
+@@clientName(
+  ProvisioningState,
   "WebApplicationFirewallPolicyProvisioningState",
   "csharp"
 );
-@@clientName(RequestSchemeMatchConditionParametersOperator,
+@@clientName(
+  RequestSchemeMatchConditionParametersOperator,
   "RequestSchemeOperator",
   "csharp"
 );
 @@clientName(ScrubbingRuleEntryMatchOperator.Equals, "EqualsValue", "csharp");
-@@clientName(ManagedRuleExclusionSelectorMatchOperator.Equals,
+@@clientName(
+  ManagedRuleExclusionSelectorMatchOperator.Equals,
   "EqualsValue",
   "csharp"
 );
 @@clientName(AFDDomain, "FrontDoorCustomDomain", "csharp");
 @@clientName(AFDDomainProperties, "FrontDoorCustomDomainProperties", "csharp");
-@@clientName(AFDDomainHttpsParameters,
+@@clientName(
+  AFDDomainHttpsParameters,
   "FrontDoorCustomDomainHttpsContent",
   "csharp"
 );
-@@clientName(AFDDomainUpdatePropertiesParameters,
+@@clientName(
+  AFDDomainUpdatePropertiesParameters,
   "FrontDoorCustomDomainUpdatePropertiesParameters",
   "csharp"
 );
-@@clientName(AFDDomainHttpsCustomizedCipherSuiteSet,
+@@clientName(
+  AFDDomainHttpsCustomizedCipherSuiteSet,
   "FrontDoorCustomDomainHttpsCustomizedCipherSuiteSet",
   "csharp"
 );
-@@clientName(AFDDomainMtlsParameters,
+@@clientName(
+  AFDDomainMtlsParameters,
   "FrontDoorCustomDomainMtlsSettings",
   "csharp"
 );
@@ -589,26 +686,31 @@ using Azure.ResourceManager;
 @@clientName(AFDEndpoints.listResourceUsage, "GetResourceUsages", "csharp");
 @@clientName(AFDOriginGroups.listResourceUsage, "GetResourceUsages", "csharp");
 @@clientName(AFDEndpointProperties, "FrontDoorEndpointProperties", "csharp");
-@@clientName(AFDEndpointPropertiesUpdateParameters,
+@@clientName(
+  AFDEndpointPropertiesUpdateParameters,
   "FrontDoorEndpointPropertiesUpdateParameters",
   "csharp"
 );
 @@clientName(AFDOrigin, "FrontDoorOrigin", "csharp");
 @@clientName(AFDOriginProperties, "FrontDoorOriginProperties", "csharp");
-@@clientName(AFDOriginUpdatePropertiesParameters,
+@@clientName(
+  AFDOriginUpdatePropertiesParameters,
   "FrontDoorOriginUpdatePropertiesParameters",
   "csharp"
 );
 @@clientName(AFDOriginGroup, "FrontDoorOriginGroup", "csharp");
-@@clientName(AFDOriginGroupProperties,
+@@clientName(
+  AFDOriginGroupProperties,
   "FrontDoorOriginGroupProperties",
   "csharp"
 );
-@@clientName(AFDOriginGroupUpdatePropertiesParameters,
+@@clientName(
+  AFDOriginGroupUpdatePropertiesParameters,
   "FrontDoorOriginGroupUpdatePropertiesParameters",
   "csharp"
 );
-@@clientName(AFDOriginGroupUpdatePropertiesParameters.trafficRestorationTimeToHealedOrNewEndpointsInMinutes,
+@@clientName(
+  AFDOriginGroupUpdatePropertiesParameters.trafficRestorationTimeToHealedOrNewEndpointsInMinutes,
   "TrafficRestorationTimeInMinutes",
   "csharp"
 );
@@ -625,82 +727,102 @@ using Azure.ResourceManager;
 // CdnMigrationToAfdParameters: Cannot rename to FrontDoor — old type implements
 // IJsonModel<CdnMigrationToAfdContent>, renaming causes unfixable ApiCompat break.
 @@clientName(CdnMigrationToAfdParameters, "CdnMigrationToAfdContent", "csharp");
-@@clientName(EndpointProperties.customDomains,
+@@clientName(
+  EndpointProperties.customDomains,
   "DeepCreatedCustomDomains",
   "csharp"
 );
-@@clientName(EndpointPropertiesUpdateParameters.urlSigningKeys,
+@@clientName(
+  EndpointPropertiesUpdateParameters.urlSigningKeys,
   "UriSigningKeys",
   "csharp"
 );
 @@access(DeepCreatedCustomDomainProperties, Access.public, "csharp");
-@@usage(DeepCreatedCustomDomainProperties,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+@@usage(
+  DeepCreatedCustomDomainProperties,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-@@clientName(CdnWebApplicationFirewallPolicyProperties.rateLimitRules,
+@@clientName(
+  CdnWebApplicationFirewallPolicyProperties.rateLimitRules,
   "RateLimitSettings",
   "csharp"
 );
-@@clientName(CdnWebApplicationFirewallPolicyProperties.customRules,
+@@clientName(
+  CdnWebApplicationFirewallPolicyProperties.customRules,
   "CustomSettings",
   "csharp"
 );
-@@clientName(WebApplicationFirewallPolicyProperties.customRules,
+@@clientName(
+  WebApplicationFirewallPolicyProperties.customRules,
   "CustomSettings",
   "csharp"
 );
-@@clientName(Profiles.profilesListResourceUsage,
+@@clientName(
+  Profiles.profilesListResourceUsage,
   "GetCdnProfileResourceUsages",
   "csharp"
 );
 @@clientName(Profiles.migrationAbort, "AbortMigration", "csharp");
-@@clientName(Profiles.profilesListResourceUsage,
+@@clientName(
+  Profiles.profilesListResourceUsage,
   "GetCdnProfileResourceUsages",
   "csharp"
 );
-@@clientName(Profiles.cdnCanMigrateToAfd,
+@@clientName(
+  Profiles.cdnCanMigrateToAfd,
   "CheckCdnMigrationCompatibility",
   "csharp"
 );
-@@clientName(Profiles.checkEndpointNameAvailability,
+@@clientName(
+  Profiles.checkEndpointNameAvailability,
   "CheckEndpointNameAvailabilityFrontDoorProfile",
   "csharp"
 );
-@@clientName(Profiles.checkHostNameAvailability,
+@@clientName(
+  Profiles.checkHostNameAvailability,
   "CheckFrontDoorProfileHostNameAvailability",
   "csharp"
 );
-@@clientName(Profiles.listResourceUsage,
+@@clientName(
+  Profiles.listResourceUsage,
   "GetFrontDoorProfileResourceUsages",
   "csharp"
 );
 @@clientName(Profiles.upgrade, "UpgradeFrontDoorProfile", "csharp");
 @@clientName(Profiles.profilesListResourceUsage, "GetResourceUsages", "csharp");
 @@clientName(Profiles.cdnMigrateToAfd, "MigrateCdnToAfd", "csharp");
-@@clientName(Profiles.validateSecret,
+@@clientName(
+  Profiles.validateSecret,
   "ValidateSecretFrontDoorProfile",
   "csharp"
 );
 @@clientName(checkNameAvailability, "CheckCdnNameAvailability", "csharp");
-@@clientName(checkNameAvailabilityWithSubscription,
+@@clientName(
+  checkNameAvailabilityWithSubscription,
   "CheckCdnNameAvailabilityWithSubscription",
   "csharp"
 );
-@@clientName(CacheExpirationActionParameters,
+@@clientName(
+  CacheExpirationActionParameters,
   "CacheExpirationActionProperties",
   "csharp"
 );
-@@clientName(CacheKeyQueryStringActionParameters,
+@@clientName(
+  CacheKeyQueryStringActionParameters,
   "CacheKeyQueryStringActionProperties",
   "csharp"
 );
 @@clientName(HeaderActionParameters, "HeaderActionProperties", "csharp");
-@@clientName(OriginGroupOverrideActionParameters,
+@@clientName(
+  OriginGroupOverrideActionParameters,
   "OriginGroupOverrideActionProperties",
   "csharp"
 );
-@@clientName(RouteConfigurationOverrideActionParameters,
+@@clientName(
+  RouteConfigurationOverrideActionParameters,
   "RouteConfigurationOverrideActionProperties",
   "csharp"
 );
@@ -712,78 +834,95 @@ using Azure.ResourceManager;
 @@clientName(UrlSigningAction.parameters, "Properties", "csharp");
 @@clientName(OriginGroupOverrideAction.parameters, "Properties", "csharp");
 @@clientName(SecurityPolicyUpdateProperties.parameters, "Properties", "csharp");
-@@clientName(DeliveryRuleResponseHeaderAction.parameters,
+@@clientName(
+  DeliveryRuleResponseHeaderAction.parameters,
   "Properties",
   "csharp"
 );
-@@clientName(DeliveryRuleRequestUriCondition.parameters,
+@@clientName(
+  DeliveryRuleRequestUriCondition.parameters,
   "Properties",
   "csharp"
 );
-@@clientName(DeliveryRuleRequestSchemeCondition.parameters,
+@@clientName(
+  DeliveryRuleRequestSchemeCondition.parameters,
   "Properties",
   "csharp"
 );
-@@clientName(DeliveryRuleRequestHeaderCondition.parameters,
+@@clientName(
+  DeliveryRuleRequestHeaderCondition.parameters,
   "Properties",
   "csharp"
 );
-@@clientName(DeliveryRuleRequestHeaderAction.parameters,
+@@clientName(
+  DeliveryRuleRequestHeaderAction.parameters,
   "Properties",
   "csharp"
 );
-@@clientName(DeliveryRuleRemoteAddressCondition.parameters,
+@@clientName(
+  DeliveryRuleRemoteAddressCondition.parameters,
   "Properties",
   "csharp"
 );
-@@clientName(DeliveryRuleRequestBodyCondition.parameters,
+@@clientName(
+  DeliveryRuleRequestBodyCondition.parameters,
   "Properties",
   "csharp"
 );
-@@clientName(DeliveryRuleQueryStringCondition.parameters,
+@@clientName(
+  DeliveryRuleQueryStringCondition.parameters,
   "Properties",
   "csharp"
 );
 @@clientName(DeliveryRulePostArgsCondition.parameters, "Properties", "csharp");
 @@clientName(DeliveryRuleIsDeviceCondition.parameters, "Properties", "csharp");
-@@clientName(DeliveryRuleHttpVersionCondition.parameters,
+@@clientName(
+  DeliveryRuleHttpVersionCondition.parameters,
   "Properties",
   "csharp"
 );
 @@clientName(DeliveryRuleHostNameCondition.parameters, "Properties", "csharp");
 @@clientName(DeliveryRuleCookiesCondition.parameters, "Properties", "csharp");
-@@clientName(DeliveryRuleClientPortCondition.parameters,
+@@clientName(
+  DeliveryRuleClientPortCondition.parameters,
   "Properties",
   "csharp"
 );
-@@clientName(DeliveryRuleCacheKeyQueryStringAction.parameters,
+@@clientName(
+  DeliveryRuleCacheKeyQueryStringAction.parameters,
   "Properties",
   "csharp"
 );
-@@clientName(DeliveryRuleCacheExpirationAction.parameters,
+@@clientName(
+  DeliveryRuleCacheExpirationAction.parameters,
   "Properties",
   "csharp"
 );
-@@clientName(DeliveryRuleRequestMethodCondition.parameters,
+@@clientName(
+  DeliveryRuleRequestMethodCondition.parameters,
   "Properties",
   "csharp"
 );
 @@clientName(SecurityPolicyProperties.parameters, "Properties", "csharp");
 @@clientName(SecretProperties.parameters, "Properties", "csharp");
-@@clientName(UrlRedirectActionParameters,
+@@clientName(
+  UrlRedirectActionParameters,
   "UriRedirectActionProperties",
   "csharp"
 );
-@@clientName(UrlRewriteActionParameters,
+@@clientName(
+  UrlRewriteActionParameters,
   "UriRewriteActionProperties",
   "csharp"
 );
-@@clientName(UrlSigningActionParameters,
+@@clientName(
+  UrlSigningActionParameters,
   "UriSigningActionProperties",
   "csharp"
 );
 @@clientName(CanMigrateParameters, "CanMigrateContent", "csharp");
-@@clientName(CustomDomainParameters,
+@@clientName(
+  CustomDomainParameters,
   "CdnCustomDomainCreateOrUpdateContent",
   "csharp"
 );
@@ -793,132 +932,164 @@ using Azure.ResourceManager;
 @@clientName(ValidateProbeInput, "ValidateProbeContent", "csharp");
 @@clientName(ValidateProbeInput.probeURL, "ProbeUri", "csharp");
 @@clientName(SsoUri.ssoUriValue, "AvailableSsoUri", "csharp");
-@@clientName(OriginAuthenticationProperties.type,
+@@clientName(
+  OriginAuthenticationProperties.type,
   "AuthenticationType",
   "csharp"
 );
-@@clientName(ManagedCertificateParameters.expirationDate,
+@@clientName(
+  ManagedCertificateParameters.expirationDate,
   "ExpiresOn",
   "csharp"
 );
 @@clientName(DomainValidationProperties.expirationDate, "ExpiresOn", "csharp");
-@@clientName(ClientPortMatchConditionParameters,
+@@clientName(
+  ClientPortMatchConditionParameters,
   "ClientPortMatchCondition",
   "csharp"
 );
-@@clientName(CookiesMatchConditionParameters,
+@@clientName(
+  CookiesMatchConditionParameters,
   "CookiesMatchCondition",
   "csharp"
 );
-@@clientName(HostNameMatchConditionParameters,
+@@clientName(
+  HostNameMatchConditionParameters,
   "HostNameMatchCondition",
   "csharp"
 );
-@@clientName(HttpVersionMatchConditionParameters,
+@@clientName(
+  HttpVersionMatchConditionParameters,
   "HttpVersionMatchCondition",
   "csharp"
 );
-@@clientName(IsDeviceMatchConditionParameters,
+@@clientName(
+  IsDeviceMatchConditionParameters,
   "IsDeviceMatchCondition",
   "csharp"
 );
-@@clientName(PostArgsMatchConditionParameters,
+@@clientName(
+  PostArgsMatchConditionParameters,
   "PostArgsMatchCondition",
   "csharp"
 );
-@@clientName(QueryStringMatchConditionParameters,
+@@clientName(
+  QueryStringMatchConditionParameters,
   "QueryStringMatchCondition",
   "csharp"
 );
-@@clientName(RemoteAddressMatchConditionParameters,
+@@clientName(
+  RemoteAddressMatchConditionParameters,
   "RemoteAddressMatchCondition",
   "csharp"
 );
-@@clientName(RequestBodyMatchConditionParameters,
+@@clientName(
+  RequestBodyMatchConditionParameters,
   "RequestBodyMatchCondition",
   "csharp"
 );
-@@clientName(RequestHeaderMatchConditionParameters,
+@@clientName(
+  RequestHeaderMatchConditionParameters,
   "RequestHeaderMatchCondition",
   "csharp"
 );
-@@clientName(RequestMethodMatchConditionParameters,
+@@clientName(
+  RequestMethodMatchConditionParameters,
   "RequestMethodMatchCondition",
   "csharp"
 );
-@@clientName(RequestSchemeMatchConditionParameters,
+@@clientName(
+  RequestSchemeMatchConditionParameters,
   "RequestSchemeMatchCondition",
   "csharp"
 );
-@@clientName(RequestUriMatchConditionParameters,
+@@clientName(
+  RequestUriMatchConditionParameters,
   "RequestUriMatchCondition",
   "csharp"
 );
-@@clientName(ServerPortMatchConditionParameters,
+@@clientName(
+  ServerPortMatchConditionParameters,
   "ServerPortMatchCondition",
   "csharp"
 );
-@@clientName(SslProtocolMatchConditionParameters,
+@@clientName(
+  SslProtocolMatchConditionParameters,
   "DeliveryRuleSslProtocolMatchCondition",
   "csharp"
 );
-@@clientName(SocketAddrMatchConditionParameters,
+@@clientName(
+  SocketAddrMatchConditionParameters,
   "SocketAddressMatchCondition",
   "csharp"
 );
-@@clientName(UrlFileExtensionMatchConditionParameters,
+@@clientName(
+  UrlFileExtensionMatchConditionParameters,
   "UriFileExtensionMatchCondition",
   "csharp"
 );
-@@clientName(UrlFileNameMatchConditionParameters,
+@@clientName(
+  UrlFileNameMatchConditionParameters,
   "UriFileNameMatchCondition",
   "csharp"
 );
-@@clientName(UrlPathMatchConditionParameters,
+@@clientName(
+  UrlPathMatchConditionParameters,
   "UriPathMatchCondition",
   "csharp"
 );
-@@clientName(DeliveryRuleSocketAddrCondition,
+@@clientName(
+  DeliveryRuleSocketAddrCondition,
   "DeliveryRuleSocketAddressCondition",
   "csharp"
 );
-@@clientName(SecurityPolicyUpdateParameters.properties,
+@@clientName(
+  SecurityPolicyUpdateParameters.properties,
   "UpdateProperties",
   "csharp"
 );
-@@clientName(DeliveryRuleSocketAddrCondition.parameters,
+@@clientName(
+  DeliveryRuleSocketAddrCondition.parameters,
   "Properties",
   "csharp"
 );
-@@clientName(DeliveryRuleServerPortCondition.parameters,
+@@clientName(
+  DeliveryRuleServerPortCondition.parameters,
   "Properties",
   "csharp"
 );
-@@clientName(DeliveryRuleRouteConfigurationOverrideAction.parameters,
+@@clientName(
+  DeliveryRuleRouteConfigurationOverrideAction.parameters,
   "Properties",
   "csharp"
 );
-@@clientName(DeliveryRuleUrlFileExtensionCondition,
+@@clientName(
+  DeliveryRuleUrlFileExtensionCondition,
   "DeliveryRuleUriFileExtensionCondition",
   "csharp"
 );
-@@clientName(DeliveryRuleUrlFileExtensionCondition.parameters,
+@@clientName(
+  DeliveryRuleUrlFileExtensionCondition.parameters,
   "Properties",
   "csharp"
 );
-@@clientName(DeliveryRuleSslProtocolCondition.parameters,
+@@clientName(
+  DeliveryRuleSslProtocolCondition.parameters,
   "Properties",
   "csharp"
 );
-@@clientName(DeliveryRuleUrlFileNameCondition,
+@@clientName(
+  DeliveryRuleUrlFileNameCondition,
   "DeliveryRuleUriFileNameCondition",
   "csharp"
 );
-@@clientName(DeliveryRuleUrlFileNameCondition.parameters,
+@@clientName(
+  DeliveryRuleUrlFileNameCondition.parameters,
   "Properties",
   "csharp"
 );
-@@clientName(DeliveryRuleUrlPathCondition,
+@@clientName(
+  DeliveryRuleUrlPathCondition,
   "DeliveryRuleUriPathCondition",
   "csharp"
 );
@@ -930,256 +1101,325 @@ using Azure.ResourceManager;
 @@clientName(HealthProbeRequestType.GET, "Get", "csharp");
 @@clientName(HealthProbeRequestType.HEAD, "Head", "csharp");
 @@clientName(LogRanking.url, "Uri", "csharp");
-@@clientName(ResponseBasedDetectedErrorTypes,
+@@clientName(
+  ResponseBasedDetectedErrorTypes,
   "ResponseBasedDetectedErrorType",
   "csharp"
 );
 @@clientName(CdnCertificateSourceParameters, "CdnCertificateSource", "csharp");
-@@clientName(KeyVaultCertificateSourceParameters,
+@@clientName(
+  KeyVaultCertificateSourceParameters,
   "KeyVaultCertificateSource",
   "csharp"
 );
-@@clientName(KeyVaultSigningKeyParametersType,
+@@clientName(
+  KeyVaultSigningKeyParametersType,
   "KeyVaultSigningKeyType",
   "csharp"
 );
-@@clientName(KeyVaultSigningKeyParametersType.KeyVaultSigningKeyParameters,
+@@clientName(
+  KeyVaultSigningKeyParametersType.KeyVaultSigningKeyParameters,
   "KeyVaultSigningKey",
   "csharp"
 );
 @@clientName(Sku, "CdnSku", "csharp");
 @@clientName(UrlSigningParamIdentifier, "UriSigningParamIdentifier", "csharp");
 @@clientName(ResourceUsageOperationGroup.list, "GetResourceUsages", "csharp");
-@@clientName(ManagedRuleSetsOperationGroup.list,
+@@clientName(
+  ManagedRuleSetsOperationGroup.list,
   "GetManagedRuleSets",
   "csharp"
 );
-@@clientName(DeploymentVersions.compare::parameters.body,
+@@clientName(
+  DeploymentVersions.compare::parameters.body,
   "CompareDeploymentVersionsContent",
   "csharp"
 );
-@@clientName(CompareDeploymentVersionsResponse,
+@@clientName(
+  CompareDeploymentVersionsResponse,
   "CompareDeploymentVersionsResult",
   "csharp"
 );
 @@access(RuleSet, Access.public, "csharp");
 @@access(Sku, Access.public, "csharp");
-@@usage(Sku,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+@@usage(
+  Sku,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 @@access(ManagedRuleSetDefinition, Access.public, "csharp");
-@@usage(ManagedRuleSetDefinition,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+@@usage(
+  ManagedRuleSetDefinition,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 @@access(ManagedRuleSetDefinitionProperties, Access.public, "csharp");
-@@usage(ManagedRuleSetDefinitionProperties,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+@@usage(
+  ManagedRuleSetDefinitionProperties,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 @@access(ManagedRuleGroupDefinition, Access.public, "csharp");
-@@usage(ManagedRuleGroupDefinition,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+@@usage(
+  ManagedRuleGroupDefinition,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 @@access(ManagedRuleDefinition, Access.public, "csharp");
 @@access(DeepCreatedCustomDomainProperties, Access.public, "csharp");
-@@usage(ManagedRuleDefinition,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+@@usage(
+  ManagedRuleDefinition,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 @@usage(CustomDomain, Azure.ClientGenerator.Core.Usage.input, "csharp");
 @@usage(IpAddressGroup, Azure.ClientGenerator.Core.Usage.input, "csharp");
-@@usage(CustomDomainPropertiesParameters,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+@@usage(
+  CustomDomainPropertiesParameters,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 @@alternateType(WebApplicationFirewallPolicy.etag, Azure.Core.eTag, "csharp");
 @@alternateType(SsoUri.ssoUriValue, url, "csharp");
 @@alternateType(ValidateProbeInput.probeURL, url, "csharp");
-@@alternateType(ResourceReference.id,
+@@alternateType(
+  ResourceReference.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 @@alternateType(ProfileProperties.frontDoorId, Azure.Core.uuid, "csharp");
-@@alternateType(OriginProperties.privateLinkResourceId,
+@@alternateType(
+  OriginProperties.privateLinkResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(OriginUpdatePropertiesParameters.privateLinkResourceId,
+@@alternateType(
+  OriginUpdatePropertiesParameters.privateLinkResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(DeepCreatedOriginProperties.privateLinkResourceId,
+@@alternateType(
+  DeepCreatedOriginProperties.privateLinkResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(EndpointPropertiesUpdateParametersWebApplicationFirewallPolicyLink.id,
+@@alternateType(
+  EndpointPropertiesUpdateParametersWebApplicationFirewallPolicyLink.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ActivatedResourceReference.id,
+@@alternateType(
+  ActivatedResourceReference.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(Microsoft.Cdn.Usage.id,
+@@alternateType(
+  Microsoft.Cdn.Usage.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 @@alternateType(CdnEndpoint.id, Azure.Core.armResourceIdentifier, "csharp");
-@@alternateType(CdnWebApplicationFirewallPolicy.etag,
+@@alternateType(
+  CdnWebApplicationFirewallPolicy.etag,
   Azure.Core.eTag,
   "csharp"
 );
-@@alternateType(DeepCreatedOriginGroupProperties.origins,
+@@alternateType(
+  DeepCreatedOriginGroupProperties.origins,
   Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
-@@alternateType(OriginGroupUpdatePropertiesParameters.origins,
+@@alternateType(
+  OriginGroupUpdatePropertiesParameters.origins,
   Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
-@@alternateType(RouteUpdatePropertiesParameters.ruleSets,
+@@alternateType(
+  RouteUpdatePropertiesParameters.ruleSets,
   Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
 @@alternateType(PolicySettings.defaultRedirectUrl, url, "csharp");
-@@alternateType(CustomerCertificateParameters.expirationDate,
+@@alternateType(
+  CustomerCertificateParameters.expirationDate,
   utcDateTime,
   "csharp"
 );
-@@alternateType(ManagedCertificateParameters.expirationDate,
+@@alternateType(
+  ManagedCertificateParameters.expirationDate,
   utcDateTime,
   "csharp"
 );
-@@alternateType(DomainValidationProperties.expirationDate,
+@@alternateType(
+  DomainValidationProperties.expirationDate,
   utcDateTime,
   "csharp"
 );
-@@alternateType(CacheExpirationActionParameters.cacheDuration,
+@@alternateType(
+  CacheExpirationActionParameters.cacheDuration,
   duration,
   "csharp"
 );
 @@alternateType(PolicySettings.defaultCustomBlockResponseBody, bytes, "csharp");
-@@alternateType(CdnWebApplicationFirewallPolicyProperties.endpointLinks,
+@@alternateType(
+  CdnWebApplicationFirewallPolicyProperties.endpointLinks,
   Azure.ResourceManager.Models.SubResource[],
   "csharp"
 );
 @@alternateType(CacheConfiguration.cacheDuration, duration, "csharp");
 @@clientName(PolicySettings.defaultRedirectUrl, "DefaultRedirectUri", "csharp");
-@@clientName(CdnWebApplicationFirewallPolicyProperties.endpointLinks,
+@@clientName(
+  CdnWebApplicationFirewallPolicyProperties.endpointLinks,
   "EndpointLinks",
   "csharp"
 );
 @@clientName(CdnEndpoint.id, "Id", "csharp");
-@@clientName(ClientPortMatchConditionParameters.operator,
+@@clientName(
+  ClientPortMatchConditionParameters.operator,
   "ClientPortOperator",
   "csharp"
 );
-@@clientName(CookiesMatchConditionParameters.operator,
+@@clientName(
+  CookiesMatchConditionParameters.operator,
   "CookiesOperator",
   "csharp"
 );
-@@clientName(HostNameMatchConditionParameters.operator,
+@@clientName(
+  HostNameMatchConditionParameters.operator,
   "HostNameOperator",
   "csharp"
 );
-@@clientName(HttpVersionMatchConditionParameters.operator,
+@@clientName(
+  HttpVersionMatchConditionParameters.operator,
   "HttpVersionOperator",
   "csharp"
 );
-@@clientName(IsDeviceMatchConditionParameters.operator,
+@@clientName(
+  IsDeviceMatchConditionParameters.operator,
   "IsDeviceOperator",
   "csharp"
 );
-@@clientName(PostArgsMatchConditionParameters.operator,
+@@clientName(
+  PostArgsMatchConditionParameters.operator,
   "PostArgsOperator",
   "csharp"
 );
-@@clientName(QueryStringMatchConditionParameters.operator,
+@@clientName(
+  QueryStringMatchConditionParameters.operator,
   "QueryStringOperator",
   "csharp"
 );
-@@clientName(RemoteAddressMatchConditionParameters.operator,
+@@clientName(
+  RemoteAddressMatchConditionParameters.operator,
   "RemoteAddressOperator",
   "csharp"
 );
-@@clientName(RequestBodyMatchConditionParameters.operator,
+@@clientName(
+  RequestBodyMatchConditionParameters.operator,
   "RequestBodyOperator",
   "csharp"
 );
-@@clientName(RequestHeaderMatchConditionParameters.operator,
+@@clientName(
+  RequestHeaderMatchConditionParameters.operator,
   "RequestHeaderOperator",
   "csharp"
 );
-@@clientName(RequestMethodMatchConditionParameters.operator,
+@@clientName(
+  RequestMethodMatchConditionParameters.operator,
   "RequestMethodOperator",
   "csharp"
 );
-@@clientName(RequestSchemeMatchConditionParameters.operator,
+@@clientName(
+  RequestSchemeMatchConditionParameters.operator,
   "RequestSchemeOperator",
   "csharp"
 );
-@@clientName(RequestUriMatchConditionParameters.operator,
+@@clientName(
+  RequestUriMatchConditionParameters.operator,
   "RequestUriOperator",
   "csharp"
 );
-@@clientName(ServerPortMatchConditionParameters.operator,
+@@clientName(
+  ServerPortMatchConditionParameters.operator,
   "ServerPortOperator",
   "csharp"
 );
-@@clientName(SslProtocolMatchConditionParameters.operator,
+@@clientName(
+  SslProtocolMatchConditionParameters.operator,
   "SslProtocolOperator",
   "csharp"
 );
-@@clientName(SocketAddrMatchConditionParameters.operator,
+@@clientName(
+  SocketAddrMatchConditionParameters.operator,
   "SocketAddressOperator",
   "csharp"
 );
-@@clientName(UrlFileExtensionMatchConditionParameters.operator,
+@@clientName(
+  UrlFileExtensionMatchConditionParameters.operator,
   "UriFileExtensionOperator",
   "csharp"
 );
-@@clientName(UrlFileNameMatchConditionParameters.operator,
+@@clientName(
+  UrlFileNameMatchConditionParameters.operator,
   "UriFileNameOperator",
   "csharp"
 );
-@@clientName(UrlPathMatchConditionParameters.operator,
+@@clientName(
+  UrlPathMatchConditionParameters.operator,
   "UriPathOperator",
   "csharp"
 );
 @@clientName(AFDDomainProperties.azureDnsZone, "DnsZone", "csharp");
-@@clientName(AFDDomainUpdatePropertiesParameters.azureDnsZone,
+@@clientName(
+  AFDDomainUpdatePropertiesParameters.azureDnsZone,
   "DnsZone",
   "csharp"
 );
-@@clientName(AFDDomainProperties.preValidatedCustomDomainResourceId,
+@@clientName(
+  AFDDomainProperties.preValidatedCustomDomainResourceId,
   "PreValidatedCustomDomainResource",
   "csharp"
 );
-@@clientName(AFDDomainUpdatePropertiesParameters.preValidatedCustomDomainResourceId,
+@@clientName(
+  AFDDomainUpdatePropertiesParameters.preValidatedCustomDomainResourceId,
   "PreValidatedCustomDomainResource",
   "csharp"
 );
 @@clientName(AFDOriginProperties.azureOrigin, "Origin", "csharp");
-@@clientName(AFDOriginUpdatePropertiesParameters.azureOrigin,
+@@clientName(
+  AFDOriginUpdatePropertiesParameters.azureOrigin,
   "Origin",
   "csharp"
 );
-@@clientName(CustomDomainProperties.customHttpsParameters,
+@@clientName(
+  CustomDomainProperties.customHttpsParameters,
   "CustomDomainHttpsContent",
   "csharp"
 );
-@@clientName(CustomDomainProperties.customHttpsProvisioningSubstate,
+@@clientName(
+  CustomDomainProperties.customHttpsProvisioningSubstate,
   "CustomHttpsAvailabilityState",
   "csharp"
 );
-@@clientName(OriginGroupProperties.responseBasedOriginErrorDetectionSettings,
+@@clientName(
+  OriginGroupProperties.responseBasedOriginErrorDetectionSettings,
   "ResponseBasedOriginErrorDetectionSettings",
   "csharp"
 );
-@@clientName(ResponseBasedOriginErrorDetectionParameters.responseBasedDetectedErrorTypes,
+@@clientName(
+  ResponseBasedOriginErrorDetectionParameters.responseBasedDetectedErrorTypes,
   "ResponseBasedDetectedErrorType",
   "csharp"
 );
@@ -1187,7 +1427,8 @@ using Azure.ResourceManager;
 @@clientName(CheckEndpointNameAvailabilityInput.type, "ResourceType", "csharp");
 @@clientName(CanMigrateResult.type, "CanMigrateResultType", "csharp");
 @@clientName(CanMigrateResult.id, "ResourceId", "csharp");
-@@clientName(ValidateCustomDomainOutput.customDomainValidated,
+@@clientName(
+  ValidateCustomDomainOutput.customDomainValidated,
   "IsCustomDomainValid",
   "csharp"
 );

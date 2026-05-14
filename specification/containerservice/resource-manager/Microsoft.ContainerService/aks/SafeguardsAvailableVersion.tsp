@@ -35,7 +35,8 @@ model SafeguardsAvailableVersion
 @@maxLength(SafeguardsAvailableVersion.name, 24);
 @@minLength(SafeguardsAvailableVersion.name, 1);
 @@doc(SafeguardsAvailableVersion.name, "Safeguards version");
-@@doc(SafeguardsAvailableVersion.properties,
+@@doc(
+  SafeguardsAvailableVersion.properties,
   "Whether the version is default or not and support info."
 );
 

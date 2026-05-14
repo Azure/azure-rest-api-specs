@@ -103,6 +103,7 @@ interface GitHubRepositories {
 
 @@doc(GitHubRepository.name, "The repository name.");
 @@doc(GitHubRepository.properties, "GitHub Repository properties.");
-@@doc(GitHubRepositories.create::parameters.body,
+@@doc(
+  GitHubRepositories.create::parameters.body,
   "The request model containing details for creating the GitHub issue."
 );

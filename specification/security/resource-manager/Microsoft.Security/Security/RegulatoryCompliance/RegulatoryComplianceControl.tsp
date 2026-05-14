@@ -59,9 +59,11 @@ interface RegulatoryComplianceControls {
   >;
 }
 
-@@doc(RegulatoryComplianceControl.name,
+@@doc(
+  RegulatoryComplianceControl.name,
   "Name of the regulatory compliance control object"
 );
-@@doc(RegulatoryComplianceControl.properties,
+@@doc(
+  RegulatoryComplianceControl.properties,
   "Regulatory compliance control data"
 );

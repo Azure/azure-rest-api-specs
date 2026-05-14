@@ -323,11 +323,13 @@ interface BillingAccounts {
     BillingAccount,
     DocumentDownloadRequest[],
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
-    Response = ArmResponse<DocumentDownloadResult> | ArmAcceptedLroResponse<
-      "Resource operation accepted.",
-      ArmLroLocationHeader<FinalResult = DocumentDownloadResult> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | ArmResponse<DocumentDownloadResult>
+      | ArmAcceptedLroResponse<
+          "Resource operation accepted.",
+          ArmLroLocationHeader<FinalResult = DocumentDownloadResult> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**
@@ -472,26 +474,33 @@ alias BillingRoleAssignmentsResolveByBillingAccountParameters = {
   filter?: string;
 };
 
-@@doc(BillingAccount.name,
+@@doc(
+  BillingAccount.name,
   "The ID that uniquely identifies a billing account."
 );
 @@doc(BillingAccount.properties, "A billing account.");
 @@doc(BillingAccounts.update::parameters.properties, "A billing account.");
-@@doc(BillingAccounts.addPaymentTerms::parameters.body,
+@@doc(
+  BillingAccounts.addPaymentTerms::parameters.body,
   "The properties of payment term."
 );
-@@doc(BillingAccounts.cancelPaymentTerms::parameters.body,
+@@doc(
+  BillingAccounts.cancelPaymentTerms::parameters.body,
   "Date after which any payment terms that needs to be cancelled."
 );
-@@doc(BillingAccounts.validatePaymentTerms::parameters.body,
+@@doc(
+  BillingAccounts.validatePaymentTerms::parameters.body,
   "The properties of payment term."
 );
-@@doc(BillingAccounts.checkAccessByBillingAccount::parameters.body,
+@@doc(
+  BillingAccounts.checkAccessByBillingAccount::parameters.body,
   "The request object against which access of the caller will be checked."
 );
-@@doc(BillingAccounts.createByBillingAccount::parameters.body,
+@@doc(
+  BillingAccounts.createByBillingAccount::parameters.body,
   "The properties of the billing role assignment."
 );
-@@doc(BillingAccounts.downloadDocumentsByBillingAccount::parameters.body,
+@@doc(
+  BillingAccounts.downloadDocumentsByBillingAccount::parameters.body,
   "A list of download details for individual documents."
 );

@@ -68,19 +68,21 @@ interface WorkspaceContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<WorkspaceContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      eTag: string;
-    }) | (ArmResourceCreatedSyncResponse<WorkspaceContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      eTag: string;
-    })
+    Response =
+      | (ArmResponse<WorkspaceContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
+      | (ArmResourceCreatedSyncResponse<WorkspaceContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
   >;
 
   /**
@@ -154,13 +156,16 @@ interface WorkspaceContracts {
 
 @@maxLength(WorkspaceContract.name, 80);
 @@minLength(WorkspaceContract.name, 1);
-@@doc(WorkspaceContract.name,
+@@doc(
+  WorkspaceContract.name,
   "Workspace identifier. Must be unique in the current API Management service instance."
 );
 @@doc(WorkspaceContract.properties, "Workspace entity contract properties.");
-@@doc(WorkspaceContracts.createOrUpdate::parameters.resource,
+@@doc(
+  WorkspaceContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );
-@@doc(WorkspaceContracts.update::parameters.properties,
+@@doc(
+  WorkspaceContracts.update::parameters.properties,
   "Workspace Update parameters."
 );

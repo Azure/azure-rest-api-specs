@@ -46,8 +46,10 @@ interface GraphResources {
   createUpdateGraph is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     GraphResourceGetResults,
     Request = GraphResourceCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<GraphResourceGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = GraphResourceGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<GraphResourceGetResults>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = GraphResourceGetResults> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -56,7 +58,10 @@ interface GraphResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deleteGraphResource is ArmResourceDeleteWithoutOkAsync<
     GraphResourceGetResults,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -69,13 +74,16 @@ interface GraphResources {
 }
 
 @@doc(GraphResourceGetResults.name, "Cosmos DB graph resource name.");
-@@doc(GraphResourceGetResults.properties,
+@@doc(
+  GraphResourceGetResults.properties,
   "The properties of an Azure Cosmos DB Graph resource."
 );
-@@doc(GraphResources.createUpdateGraph::parameters.resource,
+@@doc(
+  GraphResources.createUpdateGraph::parameters.resource,
   "The parameters to provide for the current graph."
 );
-@@visibility(GraphResourceGetResults.location,
+@@visibility(
+  GraphResourceGetResults.location,
   Lifecycle.Read,
   Lifecycle.Create,
   Lifecycle.Update
