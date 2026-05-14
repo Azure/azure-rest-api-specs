@@ -48,6 +48,16 @@ union OptimizationMode {
   optimize: "optimize",
 }
 
+/** Lifecycle status of an optimization candidate. */
+union CandidateStatus {
+  string,
+
+  evaluated: "evaluated",
+  best: "best",
+  discarded: "discarded",
+  promoted: "promoted",
+}
+
 // ---------------------------------------------------------------------------
 // Input models
 // ---------------------------------------------------------------------------
@@ -260,6 +270,22 @@ model OptimizationCandidate {
 
   @doc("Foundry evaluation run identifier for this candidate's scoring run.")
   eval_run_id?: string;
+
+  @doc("Candidate lifecycle status.")
+  @visibility(Lifecycle.Read)
+  status?: CandidateStatus;
+
+  @doc("Timestamp when this candidate was promoted. Null if not promoted.")
+  @visibility(Lifecycle.Read)
+  promoted_at?: FoundryTimestamp;
+
+  @doc("Name of the Foundry agent this candidate was promoted to.")
+  @visibility(Lifecycle.Read)
+  promoted_agent_name?: string;
+
+  @doc("Version of the Foundry agent this candidate was promoted to.")
+  @visibility(Lifecycle.Read)
+  promoted_agent_version?: string;
 }
 
 @doc("Per-task evaluation result for a single candidate.")
@@ -376,4 +402,35 @@ model CandidateResults {
 
   @doc("Per-task evaluation rows.")
   results: OptimizationTaskResult[];
+}
+
+// ---------------------------------------------------------------------------
+// Candidate promotion
+// ---------------------------------------------------------------------------
+
+@doc("Request body for promoting an optimization candidate to a Foundry agent version.")
+model PromoteCandidateRequest {
+  @doc("Name of the Foundry agent to promote this candidate to.")
+  agent_name: string;
+
+  @doc("Version of the Foundry agent to promote this candidate to.")
+  agent_version: string;
+}
+
+@doc("Result of a candidate promotion action.")
+model PromoteCandidateResponse {
+  @doc("The promoted candidate's identifier.")
+  candidate_id: string;
+
+  @doc("Candidate status after promotion.")
+  status: "promoted";
+
+  @doc("Timestamp when the candidate was promoted.")
+  promoted_at: FoundryTimestamp;
+
+  @doc("Name of the Foundry agent the candidate was promoted to.")
+  agent_name: string;
+
+  @doc("Version of the Foundry agent the candidate was promoted to.")
+  agent_version: string;
 }

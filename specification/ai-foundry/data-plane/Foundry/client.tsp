@@ -417,6 +417,7 @@ model AIProjectClientOptions {
 @@clientName(AgentOptimizationJobs.getCandidate, "get_optimization_candidate", "python");
 @@clientName(AgentOptimizationJobs.getCandidateConfig, "get_optimization_candidate_config", "python");
 @@clientName(AgentOptimizationJobs.getCandidateResults, "get_optimization_candidate_results", "python");
+@@clientName(AgentOptimizationJobs.promoteCandidate, "promote_optimization_candidate", "python");
 
 // Agent optimization jobs — renamed for JavaScript SDK discoverability
 @@clientName(AgentOptimizationJobs.create, "createOptimizationJob", "javascript");
@@ -428,3 +429,4 @@ model AIProjectClientOptions {
 @@clientName(AgentOptimizationJobs.getCandidate, "getOptimizationCandidate", "javascript");
 @@clientName(AgentOptimizationJobs.getCandidateConfig, "getOptimizationCandidateConfig", "javascript");
 @@clientName(AgentOptimizationJobs.getCandidateResults, "getOptimizationCandidateResults", "javascript");
+@@clientName(AgentOptimizationJobs.promoteCandidate, "promoteOptimizationCandidate", "javascript");
