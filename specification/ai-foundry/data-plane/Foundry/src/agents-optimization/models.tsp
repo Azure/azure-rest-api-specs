@@ -114,8 +114,8 @@ model DatasetRef {
   @doc("Dataset name.")
   name: string;
 
-  @doc("Dataset version.")
-  version: string;
+  @doc("Dataset version. If not specified, the latest version is used.")
+  version?: string;
 }
 
 @doc("Tuning knobs and run-mode for an optimization job.")
