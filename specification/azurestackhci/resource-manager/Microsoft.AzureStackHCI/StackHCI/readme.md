@@ -327,6 +327,13 @@ suppressions:
     from: 
       - clusters.json
     reason: Making the body optional now would cause a breaking change in backward compatibility
+
+  - code: XMSSecretInResponse
+    from: hci.json
+    reason: "gpgPubKey is a GPG public key used for package verification, not a secret."
+    where:
+      - $.definitions.OsProvisionProfile.properties.gpgPubKey
+      - $.definitions.DownloadOsProfile.properties.gpgPubKey
 ```
 
 ### Tag: package-2026-04-30
