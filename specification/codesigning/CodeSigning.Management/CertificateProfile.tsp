@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.CodeSigning;
 @doc("Certificate profile resource.")
@@ -42,9 +43,17 @@ interface CertificateProfiles {
   listByCodeSigningAccount is ArmResourceListByParent<CertificateProfile>;
 
   @doc("Revoke a certificate under a certificate profile.")
+  @removed(Versions.v2026_05_15_preview)
   revokeCertificate is ArmResourceActionNoContentSync<
     CertificateProfile,
     RevokeCertificate
+  >;
+
+  @doc("Revokes certificates under a certificate profile.")
+  @added(Versions.v2026_05_15_preview)
+  revokeCertificates is ArmResourceActionNoContentSync<
+    CertificateProfile,
+    RevokeCertificateList
   >;
 }
 
@@ -55,4 +64,8 @@ interface CertificateProfiles {
 @@doc(
   CertificateProfiles.revokeCertificate::parameters.body,
   "Parameters to revoke the certificate profile"
+);
+@@doc(
+  CertificateProfiles.revokeCertificates::parameters.body,
+  "Parameters to revoke the certificates in the certificate profile"
 );
