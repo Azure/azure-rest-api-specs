@@ -79,11 +79,13 @@ interface NetworkVirtualApplianceConnections {
     NetworkVirtualAppliance,
     NetworkVirtualApplianceConnection,
     void,
-    Response = ArmResponse<NetworkVirtualApplianceConnection> | (ArmResourceCreatedResponse<
-      NetworkVirtualApplianceConnection,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = NetworkVirtualApplianceConnection>
-    > &
-      Azure.Core.Foundations.RetryAfterHeader),
+    Response =
+      | ArmResponse<NetworkVirtualApplianceConnection>
+      | (ArmResourceCreatedResponse<
+          NetworkVirtualApplianceConnection,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = NetworkVirtualApplianceConnection>
+        > &
+          Azure.Core.Foundations.RetryAfterHeader),
     OverrideErrorType = CloudError
   >;
 
@@ -108,9 +110,12 @@ interface NetworkVirtualApplianceConnections {
     NetworkVirtualAppliance,
     void,
     void,
-    Response = {
-      @body body: void;
-    } | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void>> | NoContentResponse,
+    Response =
+      | {
+          @body body: void;
+        }
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void>>
+      | NoContentResponse,
     OverrideErrorType = CloudError
   >;
 
@@ -175,7 +180,10 @@ interface NetworkVirtualAppliances {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     NetworkVirtualAppliance,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -226,24 +234,31 @@ interface NetworkVirtualAppliances {
 }
 
 @@doc(NetworkVirtualAppliance.name, "The name of Network Virtual Appliance.");
-@@doc(NetworkVirtualAppliance.properties,
+@@doc(
+  NetworkVirtualAppliance.properties,
   "Properties of the Network Virtual Appliance."
 );
-@@doc(NetworkVirtualAppliances.createOrUpdate::parameters.resource,
+@@doc(
+  NetworkVirtualAppliances.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update Network Virtual Appliance."
 );
-@@doc(NetworkVirtualAppliances.updateTags::parameters.properties,
+@@doc(
+  NetworkVirtualAppliances.updateTags::parameters.properties,
   "Parameters supplied to Update Network Virtual Appliance Tags."
 );
-@@doc(NetworkVirtualAppliances.restart::parameters.body,
+@@doc(
+  NetworkVirtualAppliances.restart::parameters.body,
   "Specifies a list of virtual machine instance IDs from the Network Virtual Appliance VM instances."
 );
-@@doc(NetworkVirtualAppliances.reimage::parameters.body,
+@@doc(
+  NetworkVirtualAppliances.reimage::parameters.body,
   "Specifies a list of virtual machine instance IDs from the Network Virtual Appliance VM instances."
 );
-@@doc(NetworkVirtualAppliances.getBootDiagnosticLogs::parameters.body,
+@@doc(
+  NetworkVirtualAppliances.getBootDiagnosticLogs::parameters.body,
   "Parameters supplied to retrieve boot diagnostic logs for a NVA VM instance"
 );
-@@doc(NetworkVirtualApplianceConnections.networkVirtualApplianceConnectionsCreateOrUpdate::parameters.body,
+@@doc(
+  NetworkVirtualApplianceConnections.networkVirtualApplianceConnectionsCreateOrUpdate::parameters.body,
   "Parameters supplied in an NetworkVirtualApplianceConnection PUT operation."
 );

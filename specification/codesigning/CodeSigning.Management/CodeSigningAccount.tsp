@@ -53,9 +53,11 @@ interface CodeSigningAccounts {
   >;
 }
 
-@@doc(CodeSigningAccounts.create::parameters.resource,
+@@doc(
+  CodeSigningAccounts.create::parameters.resource,
   "Parameters to create the artifact signing account"
 );
-@@doc(CodeSigningAccounts.update::parameters.properties,
+@@doc(
+  CodeSigningAccounts.update::parameters.properties,
   "Parameters supplied to update the artifact signing account"
 );
