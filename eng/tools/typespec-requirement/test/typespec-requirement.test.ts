@@ -56,16 +56,28 @@ test.concurrent("Generated from TypeSpec", async ({ expect }) => {
 
 test.concurrent.each([
   {
-    label: "stable",
+    label: "resource-manager stable",
     path: "specification/hand-written/resource-manager/Microsoft.HandWritten/HandWritten/stable",
     responseCache:
       '@{"https://github.com/Azure/azure-rest-api-specs/tree/main/specification/hand-written/resource-manager/Microsoft.HandWritten/HandWritten/stable/2026-01-01"=404}',
   },
   {
-    label: "preview",
+    label: "resource-manager preview",
     path: "specification/hand-written/resource-manager/Microsoft.HandWritten/HandWritten/preview",
     responseCache:
       '@{"https://github.com/Azure/azure-rest-api-specs/tree/main/specification/hand-written/resource-manager/Microsoft.HandWritten/HandWritten/preview/2026-02-01-preview"=404}',
+  },
+  {
+    label: "data-plane stable",
+    path: "specification/hand-written/data-plane/HandWritten.Analytics/stable",
+    responseCache:
+      '@{"https://github.com/Azure/azure-rest-api-specs/tree/main/specification/hand-written/data-plane/HandWritten.Analytics/stable/2026-01-01"=404}',
+  },
+  {
+    label: "data-plane preview",
+    path: "specification/hand-written/data-plane/HandWritten.Analytics/preview",
+    responseCache:
+      '@{"https://github.com/Azure/azure-rest-api-specs/tree/main/specification/hand-written/data-plane/HandWritten.Analytics/preview/2026-02-01-preview"=404}',
   },
 ])("Hand-written, new $label API version", async ({ path, responseCache }) => {
   const { stdout, exitCode } = await checkAllUnder(path, responseCache);
@@ -77,16 +89,28 @@ test.concurrent.each([
 
 test.concurrent.each([
   {
-    label: "stable",
+    label: "resource-manager stable",
     path: "specification/hand-written/resource-manager/Microsoft.HandWritten/HandWritten/stable",
     responseCache:
       '@{"https://github.com/Azure/azure-rest-api-specs/tree/main/specification/hand-written/resource-manager/Microsoft.HandWritten/HandWritten/stable/2026-01-01"=200}',
   },
   {
-    label: "preview",
+    label: "resource-manager preview",
     path: "specification/hand-written/resource-manager/Microsoft.HandWritten/HandWritten/preview",
     responseCache:
       '@{"https://github.com/Azure/azure-rest-api-specs/tree/main/specification/hand-written/resource-manager/Microsoft.HandWritten/HandWritten/preview/2026-02-01-preview"=200}',
+  },
+  {
+    label: "data-plane stable",
+    path: "specification/hand-written/data-plane/HandWritten.Analytics/stable",
+    responseCache:
+      '@{"https://github.com/Azure/azure-rest-api-specs/tree/main/specification/hand-written/data-plane/HandWritten.Analytics/stable/2026-01-01"=200}',
+  },
+  {
+    label: "data-plane preview",
+    path: "specification/hand-written/data-plane/HandWritten.Analytics/preview",
+    responseCache:
+      '@{"https://github.com/Azure/azure-rest-api-specs/tree/main/specification/hand-written/data-plane/HandWritten.Analytics/preview/2026-02-01-preview"=200}',
   },
 ])("Hand-written, existing $label API version", async ({ path, responseCache }) => {
   const { stdout, exitCode } = await checkAllUnder(path, responseCache);
