@@ -65,7 +65,28 @@ model ExtensionTypeProperties {
    * Additional details for the extension type.
    */
   @added(Versions.v2026_05_01)
-  additionalDetails?: Record<unknown>;
+  additionalDetails?: ExtensionTypePropertiesAdditionalDetails;
+}
+
+/**
+ * Additional details for the extension type, such as documentation and release notes links.
+ */
+@added(Versions.v2026_05_01)
+model ExtensionTypePropertiesAdditionalDetails {
+  /**
+   * Link to the documentation for the extension type.
+   */
+  docs?: string;
+
+  /**
+   * Link to the release notes for the extension type.
+   */
+  releaseNotes?: string;
+
+  /**
+   * Link to the troubleshooting guide for the extension type.
+   */
+  troubleshootingGuide?: string;
 }
 
 /**

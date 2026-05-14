@@ -210,12 +210,6 @@ interface SubscriptionExtensionTypes {
     @path
     @pattern("^[a-zA-Z][a-zA-Z0-9-_.]*$")
     extensionTypeName: string,
-
-    /**
-     * Filter results by release train (default value is stable)
-     */
-    @query("releaseTrain")
-    releaseTrain?: string,
   ): ArmResponse<ExtensionType> | ErrorResponse;
 
   /**
@@ -285,7 +279,7 @@ interface SubscriptionExtensionTypes {
 @@extension(SubscriptionExtensionTypes.list,
   "x-ms-examples",
   #{
-    `List Extension Types`: #{
+    `List Extension Types by Subscription`: #{
       $ref: "./examples/ListExtensionTypesBySubscription.json",
     },
   }
