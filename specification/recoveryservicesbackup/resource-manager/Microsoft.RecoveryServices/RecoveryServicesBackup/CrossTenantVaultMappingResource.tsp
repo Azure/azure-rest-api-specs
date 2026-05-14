@@ -347,6 +347,8 @@ interface ProtectedItemOperationResultsFromCrossTenantVault {
       | {
           ...AcceptedResponse;
           @body body: ProtectedItemResource;
+          @header("Location") location?: string;
+          @header("Retry-After") retryAfter?: int32;
         }
   >;
 }
@@ -488,6 +490,8 @@ interface ValidateOperationResultFromCrossTenantVault {
       | {
           ...AcceptedResponse;
           @body body: ValidateOperationsResponse;
+          @header("Location") location?: string;
+          @header("Retry-After") retryAfter?: int32;
         }
   >;
 }
@@ -666,6 +670,8 @@ interface CrossTenantVaultCredentialOperationResults {
       | {
           ...AcceptedResponse;
           @body body: VaultCredentialCertificateResponse;
+          @header("Location") location?: string;
+          @header("Retry-After") retryAfter?: int32;
         }
   >;
 }
