@@ -362,6 +362,22 @@ model GetRoutineParameters {
   routine_name: string;
 }
 
+@doc("Parameters for enabling a routine.")
+model EnableRoutineParameters {
+  @doc("The unique name of the routine.")
+  @path
+  @maxLength(128)
+  routine_name: string;
+}
+
+@doc("Parameters for disabling a routine.")
+model DisableRoutineParameters {
+  @doc("The unique name of the routine.")
+  @path
+  @maxLength(128)
+  routine_name: string;
+}
+
 @doc("Parameters for listing routines.")
 model ListRoutinesParameters {
   ...CommonPageQueryParameters;

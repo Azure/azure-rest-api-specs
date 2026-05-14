@@ -34,6 +34,30 @@ interface Routines {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @doc("Enable a routine.")
+  @operationId("enableRoutine")
+  @post
+  @route("/routines/{routine_name}:enable")
+  @extension("x-ms-foundry-meta", RoutineRequiredPreviews)
+  enableRoutine is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.routines_v1_preview,
+    EnableRoutineParameters,
+    Routine
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @doc("Disable a routine.")
+  @operationId("disableRoutine")
+  @post
+  @route("/routines/{routine_name}:disable")
+  @extension("x-ms-foundry-meta", RoutineRequiredPreviews)
+  disableRoutine is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.routines_v1_preview,
+    DisableRoutineParameters,
+    Routine
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   @doc("List routines.")
   @operationId("listRoutines")
   @get
