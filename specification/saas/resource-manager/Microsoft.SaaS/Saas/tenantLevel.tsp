@@ -57,7 +57,9 @@ interface SaasTenantLevelPreflight {
 
     /** The preflight request body. */
     @body body: unknown,
-  ): ArmResponse<PreflightResult> | ErrorResponse;
+  ):
+    | ArmResponse<PreflightResult>
+    | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Custom operation status routes"
@@ -70,7 +72,9 @@ interface SaasOperationStatuses {
 
     /** The operation ID. */
     @path operationId: string,
-  ): ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult> | ErrorResponse;
+  ):
+    | ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult>
+    | ErrorResponse;
 
   /** Gets the status of a long-running SaaS operation at the subscription scope. */
   @get
@@ -81,5 +85,7 @@ interface SaasOperationStatuses {
 
     /** The operation ID. */
     @path operationId: string,
-  ): ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult> | ErrorResponse;
+  ):
+    | ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult>
+    | ErrorResponse;
 }
