@@ -238,6 +238,10 @@ model CertificateProfileProperties {
   @madeRequired(Versions.v2024_09_30_preview)
   identityValidationId: string;
 
+  @doc("Indicates whether the resource is intended for a specific usage scenario.")
+  @added(Versions.v2026_05_15_preview)
+  programType?: string;
+
   @doc("Status of the current operation on certificate profile.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
@@ -318,6 +322,14 @@ model RevokeCertificate {
 
   @doc("Remarks for the revocation.")
   remarks?: string;
+}
+
+@doc("Defines the list of certificates for revocation in certificate profile.")
+@added(Versions.v2026_05_15_preview)
+model RevokeCertificateList {
+  @doc("List of certificates to be revoked in a certificate profile.")
+  @identifiers(#[])
+  revokeCertificates: RevokeCertificate[];
 }
 
 @doc("The parameters used to check the availability of the artifact signing account name.")

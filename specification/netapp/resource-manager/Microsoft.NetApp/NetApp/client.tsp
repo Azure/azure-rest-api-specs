@@ -865,14 +865,6 @@ using Microsoft.NetApp;
   "csharp"
 );
 
-// --- @@access: visibility overrides for C# ---
-
-// Make types public for C# SDK backward compatibility
-@@access(VolumePropertiesExportPolicy, Access.public, "csharp");
-@@access(VolumeBackupRelationshipStatus, Access.public, "csharp");
-@@access(VolumeReplicationRelationshipStatus, Access.public, "csharp");
-@@access(VolumeRestoreRelationshipStatus, Access.public, "csharp");
-
 // --- @@hierarchyBuilding: restore base types for backward compat ---
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore TrackedResourceData base type for backward compat"
 @@hierarchyBuilding(
