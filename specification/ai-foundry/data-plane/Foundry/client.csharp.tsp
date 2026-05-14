@@ -109,16 +109,6 @@ namespace Azure.AI.Projects;
 @@clientName(Indexes.listLatest, "listIndexes", "csharp");
 @@clientName(Indexes.listVersions, "listIndexVersions", "csharp");
 
-// Models
-@@clientName(Models.getVersion, "getModelVersion", "csharp");
-@@clientName(Models.listVersions, "listModelVersions", "csharp");
-@@clientName(Models.listLatest, "listModelVersions", "csharp");
-@@clientName(Models.deleteVersion, "deleteModelVersion", "csharp");
-@@clientName(Models.createOrUpdateVersion, "updateModelVersion", "csharp");
-@@clientName(Models.createAsync, "createModelVersionAsync", "csharp");
-@@clientName(Models.startPendingUpload, "startModelPendingUpload", "csharp");
-@@clientName(Models.getCredentials, "getModelCredentials", "csharp");
-
 // Make these two internal, since all SDKs hand-write a single public method with boolean "includeCredentials"
 // input parameter that calls either on these two.
 @@access(Connections.get, Access.internal);
@@ -217,3 +207,12 @@ namespace Azure.AI.Projects;
 // Models sub‐client
 // --------------------------------------------------------------------------------
 @@clientName(Models, "AIProjectModels");
+// Models
+@@clientName(Models.getVersion, "getModelVersion", "csharp");
+@@clientName(Models.listVersions, "getModelVersions", "csharp");
+@@clientName(Models.listLatest, "getLatestModelVersions", "csharp");
+@@clientName(Models.deleteVersion, "deleteModelVersion", "csharp");
+@@clientName(Models.createOrUpdateVersion, "updateModelVersion", "csharp");
+@@clientName(Models.createAsync, "createModelVersionAsync", "csharp");
+@@clientName(Models.startPendingUpload, "startModelPendingUpload", "csharp");
+@@clientName(Models.getCredentials, "getModelCredentials", "csharp");
