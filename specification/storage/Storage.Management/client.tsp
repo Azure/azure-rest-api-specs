@@ -1222,6 +1222,16 @@ namespace Microsoft.Storage {
   Microsoft.Storage.StorageTaskAssignmentReplacement,
   "csharp"
 );
+@@clientName(
+  Microsoft.Storage.StorageTaskAssignment,
+  "StorageTaskAssignmentTemp",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Storage.StorageTaskAssignmentReplacement,
+  "StorageTaskAssignment",
+  "csharp"
+);
 
 @@usage(
   StorageAccount,
