@@ -105,25 +105,23 @@ interface PolicyFragmentContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response =
-      | (ArmResponse<PolicyFragmentContract> &
-          ArmCombinedLroHeaders<FinalResult = PolicyFragmentContract> & {
-            /**
-             * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-             */
-            @header("ETag")
-            eTag: string;
-          })
-      | (ArmResourceCreatedResponse<
-          PolicyFragmentContract,
-          LroHeaders = ArmCombinedLroHeaders<FinalResult = PolicyFragmentContract>
-        > & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag: string;
-        })
+    Response = (ArmResponse<PolicyFragmentContract> &
+      ArmCombinedLroHeaders<FinalResult = PolicyFragmentContract> & {
+        /**
+         * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+         */
+        @header("ETag")
+        eTag: string;
+      }) | (ArmResourceCreatedResponse<
+      PolicyFragmentContract,
+      LroHeaders = ArmCombinedLroHeaders<FinalResult = PolicyFragmentContract>
+    > & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      eTag: string;
+    })
   >;
 
   /**
@@ -289,25 +287,23 @@ interface WorkspacePolicyFragment {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response =
-      | (ArmResponse<PolicyFragmentContract> &
-          ArmCombinedLroHeaders<FinalResult = PolicyFragmentContract> & {
-            /**
-             * Current entity state version
-             */
-            @header("ETag")
-            eTag: string;
-          })
-      | (ArmResourceCreatedResponse<
-          PolicyFragmentContract,
-          LroHeaders = ArmCombinedLroHeaders<FinalResult = PolicyFragmentContract>
-        > & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag: string;
-        })
+    Response = (ArmResponse<PolicyFragmentContract> &
+      ArmCombinedLroHeaders<FinalResult = PolicyFragmentContract> & {
+        /**
+         * Current entity state version
+         */
+        @header("ETag")
+        eTag: string;
+      }) | (ArmResourceCreatedResponse<
+      PolicyFragmentContract,
+      LroHeaders = ArmCombinedLroHeaders<FinalResult = PolicyFragmentContract>
+    > & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      eTag: string;
+    })
   >;
 
   /**
@@ -389,11 +385,9 @@ interface WorkspacePolicyFragment {
 @@minLength(PolicyFragmentContract.name, 1);
 @@doc(PolicyFragmentContract.name, "A resource identifier.");
 @@doc(PolicyFragmentContract.properties, "Properties of the Policy Fragment.");
-@@doc(
-  PolicyFragmentContracts.createOrUpdate::parameters.resource,
+@@doc(PolicyFragmentContracts.createOrUpdate::parameters.resource,
   "The policy fragment contents to apply."
 );
-@@doc(
-  WorkspacePolicyFragment.createOrUpdate::parameters.resource,
+@@doc(WorkspacePolicyFragment.createOrUpdate::parameters.resource,
   "The policy fragment contents to apply."
 );

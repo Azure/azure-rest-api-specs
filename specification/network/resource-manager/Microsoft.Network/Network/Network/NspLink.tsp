@@ -65,10 +65,7 @@ interface NspLinks {
   @tag("NetworkSecurityPerimeterLinks")
   delete is ArmResourceDeleteWithoutOkAsync<
     NspLink,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -99,11 +96,9 @@ interface NspLinks {
 
 @@maxLength(NspLink.name, 80);
 @@doc(NspLink.name, "The name of the NSP link.");
-@@doc(
-  NspLink.properties,
+@@doc(NspLink.properties,
   "Properties of the network security perimeter link resource."
 );
-@@doc(
-  NspLinks.createOrUpdate::parameters.resource,
+@@doc(NspLinks.createOrUpdate::parameters.resource,
   "Parameters that hold the NspLink resource to be created/updated."
 );

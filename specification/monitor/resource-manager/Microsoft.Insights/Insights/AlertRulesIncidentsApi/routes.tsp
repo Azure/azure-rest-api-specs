@@ -20,7 +20,7 @@ interface AlertRuleIncidentsOperationGroup {
    * Gets an incident associated to an alert rule
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/alertrules/{ruleName}/incidents/{incidentName}")
+  @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.insights/alertrules/{ruleName}/incidents/{incidentName}")
   @get
   @tag("AlertRuleIncidents")
   get(

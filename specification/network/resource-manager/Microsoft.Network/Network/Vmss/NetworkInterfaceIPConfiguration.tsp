@@ -73,7 +73,7 @@ interface NetworkInterfaceIPConfigurations {
    */
   @get
   @list
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}/ipConfigurations")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}/ipConfigurations")
   @tag("NetworkInterfaces")
   listVirtualMachineScaleSetIpConfigurations is NetworkInterfaceIPConfigurationOps.ActionSync<
     NetworkInterfaceIPConfiguration,
@@ -108,11 +108,9 @@ interface NetworkInterfaceIPConfigurations {
   >;
 }
 
-@@doc(
-  NetworkInterfaceIPConfiguration.name,
+@@doc(NetworkInterfaceIPConfiguration.name,
   "The name of the ip configuration."
 );
-@@doc(
-  NetworkInterfaceIPConfiguration.properties,
+@@doc(NetworkInterfaceIPConfiguration.properties,
   "Network interface IP configuration properties."
 );

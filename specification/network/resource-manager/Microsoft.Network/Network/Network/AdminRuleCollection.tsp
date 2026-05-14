@@ -69,10 +69,7 @@ interface AdminRuleCollections {
       @query("force")
       force?: boolean;
     },
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
     Error = CommonErrorResponse
   >;
 
@@ -100,15 +97,12 @@ interface AdminRuleCollections {
   >;
 }
 
-@@doc(
-  AdminRuleCollection.name,
+@@doc(AdminRuleCollection.name,
   "The name of the network manager security Configuration rule collection."
 );
-@@doc(
-  AdminRuleCollection.properties,
+@@doc(AdminRuleCollection.properties,
   "Indicates the properties for the network manager admin rule collection."
 );
-@@doc(
-  AdminRuleCollections.createOrUpdate::parameters.resource,
+@@doc(AdminRuleCollections.createOrUpdate::parameters.resource,
   "The Rule Collection to create or update"
 );

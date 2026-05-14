@@ -57,10 +57,7 @@ interface Channels {
   @summary("Delete a channel.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Channel,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**

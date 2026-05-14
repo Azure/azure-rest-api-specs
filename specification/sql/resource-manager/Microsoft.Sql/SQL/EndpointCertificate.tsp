@@ -38,8 +38,7 @@ interface EndpointCertificates {
   listByInstance is ArmResourceListByParent<EndpointCertificate>;
 }
 
-@@doc(
-  EndpointCertificate.name,
+@@doc(EndpointCertificate.name,
   "Type of the endpoint whose certificate the customer is looking for."
 );
 @@doc(EndpointCertificate.properties, "Resource properties.");

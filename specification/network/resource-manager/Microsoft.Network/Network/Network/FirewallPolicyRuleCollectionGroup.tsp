@@ -64,10 +64,7 @@ interface FirewallPolicyRuleCollectionGroups {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     FirewallPolicyRuleCollectionGroup,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -80,19 +77,15 @@ interface FirewallPolicyRuleCollectionGroups {
   >;
 }
 
-@@doc(
-  FirewallPolicyRuleCollectionGroup.name,
+@@doc(FirewallPolicyRuleCollectionGroup.name,
   "The name of the FirewallPolicyRuleCollectionGroup."
 );
-@@doc(
-  FirewallPolicyRuleCollectionGroup.name,
+@@doc(FirewallPolicyRuleCollectionGroup.name,
   "The name of the resource that is unique within a resource group. This name can be used to access the resource."
 );
-@@doc(
-  FirewallPolicyRuleCollectionGroup.properties,
+@@doc(FirewallPolicyRuleCollectionGroup.properties,
   "The properties of the firewall policy rule collection group."
 );
-@@doc(
-  FirewallPolicyRuleCollectionGroups.createOrUpdate::parameters.resource,
+@@doc(FirewallPolicyRuleCollectionGroups.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update FirewallPolicyRuleCollectionGroup operation."
 );

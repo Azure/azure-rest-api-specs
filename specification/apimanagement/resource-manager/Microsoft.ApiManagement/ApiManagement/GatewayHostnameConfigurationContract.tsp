@@ -68,21 +68,19 @@ interface GatewayHostnameConfigurationContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response =
-      | (ArmResponse<GatewayHostnameConfigurationContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag: string;
-        })
-      | (ArmCreatedResponse<GatewayHostnameConfigurationContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag: string;
-        })
+    Response = (ArmResponse<GatewayHostnameConfigurationContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      eTag: string;
+    }) | (ArmCreatedResponse<GatewayHostnameConfigurationContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      eTag: string;
+    })
   >;
 
   /**
@@ -132,15 +130,12 @@ interface GatewayHostnameConfigurationContracts {
 
 @@maxLength(GatewayHostnameConfigurationContract.name, 80);
 @@minLength(GatewayHostnameConfigurationContract.name, 1);
-@@doc(
-  GatewayHostnameConfigurationContract.name,
+@@doc(GatewayHostnameConfigurationContract.name,
   "Gateway hostname configuration identifier. Must be unique in the scope of parent Gateway entity."
 );
-@@doc(
-  GatewayHostnameConfigurationContract.properties,
+@@doc(GatewayHostnameConfigurationContract.properties,
   "Gateway hostname configuration details."
 );
-@@doc(
-  GatewayHostnameConfigurationContracts.createOrUpdate::parameters.resource,
+@@doc(GatewayHostnameConfigurationContracts.createOrUpdate::parameters.resource,
   ""
 );

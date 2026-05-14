@@ -68,21 +68,19 @@ interface IssueAttachmentContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response =
-      | (ArmResponse<IssueAttachmentContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag: string;
-        })
-      | (ArmCreatedResponse<IssueAttachmentContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag: string;
-        })
+    Response = (ArmResponse<IssueAttachmentContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      eTag: string;
+    }) | (ArmCreatedResponse<IssueAttachmentContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      eTag: string;
+    })
   >;
 
   /**
@@ -132,15 +130,12 @@ interface IssueAttachmentContracts {
 
 @@maxLength(IssueAttachmentContract.name, 256);
 @@minLength(IssueAttachmentContract.name, 1);
-@@doc(
-  IssueAttachmentContract.name,
+@@doc(IssueAttachmentContract.name,
   "Attachment identifier within an Issue. Must be unique in the current Issue."
 );
-@@doc(
-  IssueAttachmentContract.properties,
+@@doc(IssueAttachmentContract.properties,
   "Properties of the Issue Attachment."
 );
-@@doc(
-  IssueAttachmentContracts.createOrUpdate::parameters.resource,
+@@doc(IssueAttachmentContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );

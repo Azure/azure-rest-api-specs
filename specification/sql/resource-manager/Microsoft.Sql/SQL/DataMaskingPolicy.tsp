@@ -85,7 +85,7 @@ alias DataMaskingPoliciesOps = Azure.ResourceManager.Legacy.RoutedOperations<
   DataMaskingPoliciesParentParameters,
   DataMaskingPoliciesParameters,
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Sql/servers/{serverName}/databases/{databaseName}/dataMaskingPolicies/{dataMaskingPolicyName}/rules/{dataMaskingRuleName}",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/dataMaskingPolicies/{dataMaskingPolicyName}/rules/{dataMaskingRuleName}",
   }
 >;
 
@@ -134,22 +134,17 @@ interface DataMaskingPolicies {
   dataMaskingRulesCreateOrUpdate is DataMaskingPoliciesOps.ActionSync<
     DataMaskingPolicy,
     DataMaskingRule,
-    Response =
-      | ArmResponse<DataMaskingRule>
-      | ArmResourceCreatedSyncResponse<DataMaskingRule>
+    Response = ArmResponse<DataMaskingRule> | ArmResourceCreatedSyncResponse<DataMaskingRule>
   >;
 }
 
-@@doc(
-  DataMaskingPolicy.name,
+@@doc(DataMaskingPolicy.name,
   "The name of the database for which the data masking policy applies."
 );
 @@doc(DataMaskingPolicy.properties, "Resource properties.");
-@@doc(
-  DataMaskingPolicies.createOrUpdate::parameters.resource,
+@@doc(DataMaskingPolicies.createOrUpdate::parameters.resource,
   "Parameters for creating or updating a data masking policy."
 );
-@@doc(
-  DataMaskingPolicies.dataMaskingRulesCreateOrUpdate::parameters.body,
+@@doc(DataMaskingPolicies.dataMaskingRulesCreateOrUpdate::parameters.body,
   "The required parameters for creating or updating a data masking rule."
 );

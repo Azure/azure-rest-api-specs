@@ -86,10 +86,7 @@ interface AzureFirewalls {
   @tag("AzureFirewalls")
   delete is ArmResourceDeleteWithoutOkAsync<
     AzureFirewall,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -142,19 +139,15 @@ interface AzureFirewalls {
 
 @@doc(AzureFirewall.name, "The name of the Azure Firewall.");
 @@doc(AzureFirewall.properties, "Properties of the azure firewall.");
-@@doc(
-  AzureFirewalls.createOrUpdate::parameters.resource,
+@@doc(AzureFirewalls.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update Azure Firewall operation."
 );
-@@doc(
-  AzureFirewalls.updateTags::parameters.properties,
+@@doc(AzureFirewalls.updateTags::parameters.properties,
   "Parameters supplied to update azure firewall tags."
 );
-@@doc(
-  AzureFirewalls.packetCapture::parameters.body,
+@@doc(AzureFirewalls.packetCapture::parameters.body,
   "Parameters supplied to run packet capture on azure firewall."
 );
-@@doc(
-  AzureFirewalls.packetCaptureOperation::parameters.body,
+@@doc(AzureFirewalls.packetCaptureOperation::parameters.body,
   "Parameters supplied to run packet capture on azure firewall."
 );

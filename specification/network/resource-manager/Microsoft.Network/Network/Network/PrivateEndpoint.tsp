@@ -76,10 +76,7 @@ interface PrivateEndpoints {
   @autoRoute
   delete is ArmResourceDeleteWithoutOkAsync<
     Common.PrivateEndpoint,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
     Error = Error
   >;
 
@@ -110,13 +107,10 @@ interface PrivateEndpoints {
     Common.PrivateEndpoint,
     void,
     void,
-    Response =
-      | {
-          @body body: void;
-        }
-      | ArmAcceptedLroResponse<LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-          ArmLroLocationHeader<FinalResult = void>>
-      | NoContentResponse,
+    Response = {
+      @body body: void;
+    } | ArmAcceptedLroResponse<LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>> | NoContentResponse,
     OverrideErrorType = CloudError
   >;
 
@@ -145,13 +139,11 @@ interface PrivateEndpoints {
     Common.PrivateEndpoint,
     PrivateDnsZoneGroup,
     void,
-    Response =
-      | ArmResponse<PrivateDnsZoneGroup>
-      | ArmResourceCreatedResponse<
-          PrivateDnsZoneGroup,
-          LroHeaders = ArmAsyncOperationHeader<FinalResult = PrivateDnsZoneGroup> &
-            Azure.Core.Foundations.RetryAfterHeader
-        >,
+    Response = ArmResponse<PrivateDnsZoneGroup> | ArmResourceCreatedResponse<
+      PrivateDnsZoneGroup,
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = PrivateDnsZoneGroup> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >,
     OverrideErrorType = CloudError
   >;
 
@@ -173,11 +165,9 @@ interface PrivateEndpoints {
 
 @@doc(Common.PrivateEndpoint.name, "The name of the private endpoint.");
 @@doc(Common.PrivateEndpoint.properties, "Properties of the private endpoint.");
-@@doc(
-  PrivateEndpoints.createOrUpdate::parameters.resource,
+@@doc(PrivateEndpoints.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update private endpoint operation."
 );
-@@doc(
-  PrivateEndpoints.privateDnsZoneGroupsCreateOrUpdate::parameters.body,
+@@doc(PrivateEndpoints.privateDnsZoneGroupsCreateOrUpdate::parameters.body,
   "Parameters supplied to the create or update private dns zone group operation."
 );

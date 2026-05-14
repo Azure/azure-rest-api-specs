@@ -129,7 +129,6 @@ interface WebSiteInstanceStatusOperationGroup {
 }
 
 @@doc(WebSiteInstanceStatus.name, "");
-@@doc(
-  WebSiteInstanceStatus.properties,
+@@doc(WebSiteInstanceStatus.properties,
   "WebSiteInstanceStatus resource specific properties"
 );

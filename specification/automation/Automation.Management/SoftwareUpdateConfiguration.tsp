@@ -82,15 +82,12 @@ interface SoftwareUpdateConfigurations {
   >;
 }
 
-@@doc(
-  softwareUpdateConfiguration.name,
+@@doc(softwareUpdateConfiguration.name,
   "The name of the software update configuration to be created."
 );
-@@doc(
-  softwareUpdateConfiguration.properties,
+@@doc(softwareUpdateConfiguration.properties,
   "Software update configuration properties."
 );
-@@doc(
-  SoftwareUpdateConfigurations.create::parameters.resource,
+@@doc(SoftwareUpdateConfigurations.create::parameters.resource,
   "Request body."
 );

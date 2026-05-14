@@ -45,14 +45,11 @@ interface SyncMembers {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     SyncMember,
-    Response =
-      | ArmResourceUpdatedResponse<SyncMember>
-      | ArmResourceCreatedResponse<
-          SyncMember,
-          ArmLroLocationHeader<FinalResult = SyncMember> &
-            Azure.Core.Foundations.RetryAfterHeader
-        >
-      | ArmAcceptedLroResponse
+    Response = ArmResourceUpdatedResponse<SyncMember> | ArmResourceCreatedResponse<
+      SyncMember,
+      ArmLroLocationHeader<FinalResult = SyncMember> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > | ArmAcceptedLroResponse
   >;
 
   /**
@@ -67,10 +64,7 @@ interface SyncMembers {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     SyncMember,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -104,11 +98,9 @@ interface SyncMembers {
 
 @@doc(SyncMember.name, "The name of the sync member.");
 @@doc(SyncMember.properties, "Resource properties.");
-@@doc(
-  SyncMembers.createOrUpdate::parameters.resource,
+@@doc(SyncMembers.createOrUpdate::parameters.resource,
   "The requested sync member resource state."
 );
-@@doc(
-  SyncMembers.update::parameters.properties,
+@@doc(SyncMembers.update::parameters.properties,
   "The requested sync member resource state."
 );

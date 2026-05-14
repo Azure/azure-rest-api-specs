@@ -86,9 +86,7 @@ interface TriggeredJobHistories {
   @summary("List a triggered web job's history for an app, or a deployment slot.")
   listTriggeredWebJobHistorySlot is TriggeredJobHistoryOps.List<
     TriggeredJobHistory,
-    Response =
-      | ArmResponse<TriggeredJobHistoryCollection>
-      | ArmNotFoundResponse,
+    Response = ArmResponse<TriggeredJobHistoryCollection> | ArmNotFoundResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 }
@@ -141,15 +139,12 @@ interface TriggeredJobHistoryOperationGroup {
   @summary("List a triggered web job's history for an app, or a deployment slot.")
   listTriggeredWebJobHistory is TriggeredJobHistoryOperationGroupOps.List<
     TriggeredJobHistory,
-    Response =
-      | ArmResponse<TriggeredJobHistoryCollection>
-      | ArmNotFoundResponse,
+    Response = ArmResponse<TriggeredJobHistoryCollection> | ArmNotFoundResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 }
 
 @@doc(TriggeredJobHistory.name, "History ID.");
-@@doc(
-  TriggeredJobHistory.properties,
+@@doc(TriggeredJobHistory.properties,
   "TriggeredJobHistory resource specific properties"
 );

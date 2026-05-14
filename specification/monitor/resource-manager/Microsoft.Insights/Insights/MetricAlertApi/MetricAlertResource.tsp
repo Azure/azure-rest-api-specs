@@ -34,7 +34,7 @@ alias MetricAlertResourcesOps = Azure.ResourceManager.Legacy.RoutedOperations<
   MetricAlertResourcesParentParameters,
   MetricAlertResourcesParameters,
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Insights/metricAlerts/{ruleName}/status/{statusName}",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/metricAlerts/{ruleName}/status/{statusName}",
   }
 >;
 
@@ -160,15 +160,12 @@ interface MetricAlertResources {
 }
 
 @@doc(MetricAlertResource.name, "The name of the rule.");
-@@doc(
-  MetricAlertResource.properties,
+@@doc(MetricAlertResource.properties,
   "The alert rule properties of the resource."
 );
-@@doc(
-  MetricAlertResources.createOrUpdate::parameters.resource,
+@@doc(MetricAlertResources.createOrUpdate::parameters.resource,
   "The parameters of the rule to create or update."
 );
-@@doc(
-  MetricAlertResources.update::parameters.properties,
+@@doc(MetricAlertResources.update::parameters.properties,
   "The parameters of the rule to update."
 );

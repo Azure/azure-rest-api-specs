@@ -91,7 +91,6 @@ interface ApplicationGatewayWafDynamicManifestResults {
 }
 
 @@doc(ApplicationGatewayWafDynamicManifestResult.name, "");
-@@doc(
-  ApplicationGatewayWafDynamicManifestResult.properties,
+@@doc(ApplicationGatewayWafDynamicManifestResult.properties,
   "Properties of the ApplicationGatewayWafDynamicManifest ."
 );
