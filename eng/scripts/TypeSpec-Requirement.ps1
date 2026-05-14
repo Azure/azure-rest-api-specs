@@ -141,9 +141,11 @@ else {
       }
     }
 
-    # Extract path between "specification/" and "/(preview|stable)", and the API version segment
-    if ($file -match "specification/(?<servicePath>[^/]+/($SpecType).*?)/(preview|stable)/(?<apiVersion>[^/]+)/[^/]+\.json$") {
+    # Extract path between "specification/" and "/(preview|stable)", the preview|stable segment,
+    # and the API version segment
+    if ($file -match "specification/(?<servicePath>[^/]+/($SpecType).*?)/(?<previewOrStable>preview|stable)/(?<apiVersion>[^/]+)/[^/]+\.json$") {
       $servicePath = $Matches["servicePath"]
+      $previewOrStable = $Matches["previewOrStable"]
       $apiVersion = $Matches["apiVersion"]
     }
     else {
@@ -181,12 +183,12 @@ else {
 
     # Check whether this specific API version already exists in main.  If not, it is a new
     # API version and must use TypeSpec.
-    $urlToApiVersion = "https://github.com/Azure/azure-rest-api-specs/tree/main/specification/$servicePath/stable/$apiVersion"
+    $urlToApiVersion = "https://github.com/Azure/azure-rest-api-specs/tree/main/specification/$servicePath/$previewOrStable/$apiVersion"
     $logUrlToApiVersion = $urlToApiVersion -replace '^https://', ''
     $apiVersionStatus = Invoke-CachedHead $urlToApiVersion
 
     if ($apiVersionStatus -eq 200) {
-      LogInfo "  Branch 'main' contains path '$servicePath/stable/$apiVersion', so API version already exists and is not required to use TypeSpec"
+      LogInfo "  Branch 'main' contains path '$servicePath/$previewOrStable/$apiVersion', so API version already exists and is not required to use TypeSpec"
 
       $warning = "WARNING: This PR uses OpenAPI / Swagger. All Azure services are required to convert to TypeSpec by March 30, 2026. PRs not using TypeSpec will be blocked after that date. Starting July 1, 2026, all SDKs will be generated from TypeSpec as the autorest toolchain is being retired. Please reach out to tspconversion@service.microsoft.com with any questions and see http://aka.ms/azsdk/typespec for more details on TypeSpec."
       LogWarningForFile $file $warning
@@ -197,7 +199,7 @@ else {
       }
     }
     elseif ($apiVersionStatus -eq 404) {
-      LogInfo "  Branch 'main' does not contain path '$servicePath/stable/$apiVersion', so API version is new and must use TypeSpec"
+      LogInfo "  Branch 'main' does not contain path '$servicePath/$previewOrStable/$apiVersion', so API version is new and must use TypeSpec"
       $pathsWithErrors += $file
     }
     else {
