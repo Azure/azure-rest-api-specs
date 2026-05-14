@@ -38,10 +38,13 @@ interface Endpoints {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   create is ArmResourceCreateOrReplaceAsync<
     Endpoint,
-    Response = ArmResourceUpdatedResponse<Endpoint> | ArmResourceCreatedResponse<Endpoint> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Endpoint>> & {
-      @bodyRoot
-      _: Endpoint;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<Endpoint>
+      | ArmResourceCreatedResponse<Endpoint>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Endpoint>> & {
+          @bodyRoot
+          _: Endpoint;
+        })
   >;
 
   /**
@@ -52,10 +55,12 @@ interface Endpoints {
   update is ArmCustomPatchAsync<
     Endpoint,
     PatchModel = EndpointUpdateParameters,
-    Response = ArmResponse<Endpoint> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Endpoint>> & {
-      @bodyRoot
-      _: Endpoint;
-    })
+    Response =
+      | ArmResponse<Endpoint>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Endpoint>> & {
+          @bodyRoot
+          _: Endpoint;
+        })
   >;
 
   /**
@@ -64,7 +69,10 @@ interface Endpoints {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Endpoint,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -80,10 +88,12 @@ interface Endpoints {
   start is Azure.ResourceManager.ArmResourceActionAsyncBase<
     Endpoint,
     void,
-    (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Endpoint>> & {
-      @bodyRoot
-      _: Endpoint;
-    }) | ArmResponse<Endpoint>,
+
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Endpoint>> & {
+          @bodyRoot
+          _: Endpoint;
+        })
+      | ArmResponse<Endpoint>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Endpoint>
   >;
 
@@ -94,10 +104,12 @@ interface Endpoints {
   stop is Azure.ResourceManager.ArmResourceActionAsyncBase<
     Endpoint,
     void,
-    (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Endpoint>> & {
-      @bodyRoot
-      _: Endpoint;
-    }) | ArmResponse<Endpoint>,
+
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Endpoint>> & {
+          @bodyRoot
+          _: Endpoint;
+        })
+      | ArmResponse<Endpoint>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Endpoint>
   >;
 
@@ -144,20 +156,25 @@ interface Endpoints {
   >;
 }
 
-@@doc(Endpoint.name,
+@@doc(
+  Endpoint.name,
   "Name of the endpoint under the profile which is unique globally."
 );
-@@doc(Endpoint.properties,
+@@doc(
+  Endpoint.properties,
   "The JSON object that contains the properties required to create an endpoint."
 );
 @@doc(Endpoints.create::parameters.resource, "Endpoint properties");
 @@doc(Endpoints.update::parameters.properties, "Endpoint update properties");
-@@doc(Endpoints.purgeContent::parameters.body,
+@@doc(
+  Endpoints.purgeContent::parameters.body,
   "The path to the content to be purged. Path can be a full URL, e.g. '/pictures/city.png' which removes a single file, or a directory with a wildcard, e.g. '/pictures/*' which removes all folders and files in the directory."
 );
-@@doc(Endpoints.loadContent::parameters.body,
+@@doc(
+  Endpoints.loadContent::parameters.body,
   "The path to the content to be loaded. Path should be a full URL, e.g. ‘/pictures/city.png' which loads a single file "
 );
-@@doc(Endpoints.validateCustomDomain::parameters.body,
+@@doc(
+  Endpoints.validateCustomDomain::parameters.body,
   "Custom domain to be validated."
 );

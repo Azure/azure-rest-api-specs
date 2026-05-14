@@ -16,23 +16,27 @@ using Microsoft.EventGrid.SystemEvents;
 
 // [BEGIN] misc renames
 
-@@clientName(AcsRecordingFileStatusUpdatedEventData.recordingDurationMs,
+@@clientName(
+  AcsRecordingFileStatusUpdatedEventData.recordingDurationMs,
   "RecordingDurationMS",
   "go"
 );
 
 @@clientName(EventHubCaptureFileCreatedEventData.fileUrl, "FileURL", "go");
 
-@@clientName(StorageTaskAssignmentCompletedEventData.completedDateTime,
+@@clientName(
+  StorageTaskAssignmentCompletedEventData.completedDateTime,
   "CompletedOn",
   "go"
 );
-@@clientName(StorageTaskAssignmentCompletedEventData.summaryReportBlobUrl,
+@@clientName(
+  StorageTaskAssignmentCompletedEventData.summaryReportBlobUrl,
   "SummaryReportBlobURI",
   "go"
 );
 
-@@clientName(StorageTaskAssignmentQueuedEventData.queuedDateTime,
+@@clientName(
+  StorageTaskAssignmentQueuedEventData.queuedDateTime,
   "QueuedOn",
   "go"
 );
@@ -41,56 +45,68 @@ using Microsoft.EventGrid.SystemEvents;
 
 // [BEGIN] ResourceNotifications Info -> Details renames
 
-@@clientName(ResourceNotificationsHealthResourcesAnnotatedEventData.resourceInfo,
+@@clientName(
+  ResourceNotificationsHealthResourcesAnnotatedEventData.resourceInfo,
   "ResourceDetails",
   "go"
 );
-@@clientName(ResourceNotificationsHealthResourcesAnnotatedEventData.operationalInfo,
+@@clientName(
+  ResourceNotificationsHealthResourcesAnnotatedEventData.operationalInfo,
   "OperationalDetails",
   "go"
 );
 
-@@clientName(ResourceNotificationsHealthResourcesAvailabilityStatusChangedEventData.resourceInfo,
+@@clientName(
+  ResourceNotificationsHealthResourcesAvailabilityStatusChangedEventData.resourceInfo,
   "ResourceDetails",
   "go"
 );
-@@clientName(ResourceNotificationsHealthResourcesAvailabilityStatusChangedEventData.operationalInfo,
+@@clientName(
+  ResourceNotificationsHealthResourcesAvailabilityStatusChangedEventData.operationalInfo,
   "OperationalDetails",
   "go"
 );
 
-@@clientName(ResourceNotificationsResourceDeletedEventData.resourceInfo,
+@@clientName(
+  ResourceNotificationsResourceDeletedEventData.resourceInfo,
   "ResourceDetails",
   "go"
 );
-@@clientName(ResourceNotificationsResourceDeletedEventData.operationalInfo,
+@@clientName(
+  ResourceNotificationsResourceDeletedEventData.operationalInfo,
   "OperationalDetails",
   "go"
 );
 
-@@clientName(ResourceNotificationsResourceManagementCreatedOrUpdatedEventData.resourceInfo,
+@@clientName(
+  ResourceNotificationsResourceManagementCreatedOrUpdatedEventData.resourceInfo,
   "ResourceDetails",
   "go"
 );
-@@clientName(ResourceNotificationsResourceManagementCreatedOrUpdatedEventData.operationalInfo,
+@@clientName(
+  ResourceNotificationsResourceManagementCreatedOrUpdatedEventData.operationalInfo,
   "OperationalDetails",
   "go"
 );
-@@clientName(ResourceNotificationsResourceManagementDeletedEventData.resourceInfo,
+@@clientName(
+  ResourceNotificationsResourceManagementDeletedEventData.resourceInfo,
   "ResourceDetails",
   "go"
 );
 
-@@clientName(ResourceNotificationsResourceManagementDeletedEventData.operationalInfo,
+@@clientName(
+  ResourceNotificationsResourceManagementDeletedEventData.operationalInfo,
   "OperationalDetails",
   "go"
 );
 
-@@clientName(ResourceNotificationsResourceUpdatedEventData.resourceInfo,
+@@clientName(
+  ResourceNotificationsResourceUpdatedEventData.resourceInfo,
   "ResourceDetails",
   "go"
 );
-@@clientName(ResourceNotificationsResourceUpdatedEventData.operationalInfo,
+@@clientName(
+  ResourceNotificationsResourceUpdatedEventData.operationalInfo,
   "OperationalDetails",
   "go"
 );
@@ -106,32 +122,39 @@ using Microsoft.EventGrid.SystemEvents;
 @@clientName(AvsClusterUpdatedEventData, "AVSClusterUpdatedEventData", "go");
 @@clientName(AvsClusterUpdatingEventData, "AVSClusterUpdatingEventData", "go");
 @@clientName(AvsPrivateCloudEventData, "AVSPrivateCloudEventData", "go");
-@@clientName(AvsPrivateCloudFailedEventData,
+@@clientName(
+  AvsPrivateCloudFailedEventData,
   "AVSPrivateCloudFailedEventData",
   "go"
 );
-@@clientName(AvsPrivateCloudUpdatedEventData,
+@@clientName(
+  AvsPrivateCloudUpdatedEventData,
   "AVSPrivateCloudUpdatedEventData",
   "go"
 );
-@@clientName(AvsPrivateCloudUpdatingEventData,
+@@clientName(
+  AvsPrivateCloudUpdatingEventData,
   "AVSPrivateCloudUpdatingEventData",
   "go"
 );
-@@clientName(AvsScriptExecutionCancelledEventData,
+@@clientName(
+  AvsScriptExecutionCancelledEventData,
   "AVSScriptExecutionCancelledEventData",
   "go"
 );
 @@clientName(AvsScriptExecutionEventData, "AVSScriptExecutionEventData", "go");
-@@clientName(AvsScriptExecutionFailedEventData,
+@@clientName(
+  AvsScriptExecutionFailedEventData,
   "AVSScriptExecutionFailedEventData",
   "go"
 );
-@@clientName(AvsScriptExecutionFinishedEventData,
+@@clientName(
+  AvsScriptExecutionFinishedEventData,
   "AVSScriptExecutionFinishedEventData",
   "go"
 );
-@@clientName(AvsScriptExecutionStartedEventData,
+@@clientName(
+  AvsScriptExecutionStartedEventData,
   "AVSScriptExecutionStartedEventData",
   "go"
 );
@@ -140,23 +163,28 @@ using Microsoft.EventGrid.SystemEvents;
 
 // [BEGIN] IOT renames
 
-@@clientName(IotHubDeviceConnectedEventData,
+@@clientName(
+  IotHubDeviceConnectedEventData,
   "IOTHubDeviceConnectedEventData",
   "go"
 );
-@@clientName(IotHubDeviceCreatedEventData,
+@@clientName(
+  IotHubDeviceCreatedEventData,
   "IOTHubDeviceCreatedEventData",
   "go"
 );
-@@clientName(IotHubDeviceDeletedEventData,
+@@clientName(
+  IotHubDeviceDeletedEventData,
   "IOTHubDeviceDeletedEventData",
   "go"
 );
-@@clientName(IotHubDeviceDisconnectedEventData,
+@@clientName(
+  IotHubDeviceDisconnectedEventData,
   "IOTHubDeviceDisconnectedEventData",
   "go"
 );
-@@clientName(IotHubDeviceTelemetryEventData,
+@@clientName(
+  IotHubDeviceTelemetryEventData,
   "IOTHubDeviceTelemetryEventData",
   "go"
 );
@@ -165,64 +193,79 @@ using Microsoft.EventGrid.SystemEvents;
 
 // [BEGIN] Healthcare renames
 
-@@clientName(HealthcareFhirResourceCreatedEventData,
+@@clientName(
+  HealthcareFhirResourceCreatedEventData,
   "HealthcareFHIRResourceCreatedEventData",
   "go"
 );
-@@clientName(HealthcareFhirResourceDeletedEventData,
+@@clientName(
+  HealthcareFhirResourceDeletedEventData,
   "HealthcareFHIRResourceDeletedEventData",
   "go"
 );
-@@clientName(HealthcareFhirResourceUpdatedEventData,
+@@clientName(
+  HealthcareFhirResourceUpdatedEventData,
   "HealthcareFHIRResourceUpdatedEventData",
   "go"
 );
 
-@@clientName(HealthcareFhirResourceCreatedEventData.resourceFhirAccount,
+@@clientName(
+  HealthcareFhirResourceCreatedEventData.resourceFhirAccount,
   "FHIRServiceHostName",
   "go"
 );
-@@clientName(HealthcareFhirResourceCreatedEventData.resourceFhirId,
+@@clientName(
+  HealthcareFhirResourceCreatedEventData.resourceFhirId,
   "FHIRResourceID",
   "go"
 );
-@@clientName(HealthcareFhirResourceCreatedEventData.resourceVersionId,
+@@clientName(
+  HealthcareFhirResourceCreatedEventData.resourceVersionId,
   "FHIRResourceVersionID",
   "go"
 );
-@@clientName(HealthcareFhirResourceCreatedEventData.resourceType,
+@@clientName(
+  HealthcareFhirResourceCreatedEventData.resourceType,
   "FHIRResourceType",
   "go"
 );
-@@clientName(HealthcareFhirResourceUpdatedEventData.resourceFhirAccount,
+@@clientName(
+  HealthcareFhirResourceUpdatedEventData.resourceFhirAccount,
   "FHIRServiceHostName",
   "go"
 );
-@@clientName(HealthcareFhirResourceUpdatedEventData.resourceFhirId,
+@@clientName(
+  HealthcareFhirResourceUpdatedEventData.resourceFhirId,
   "FHIRResourceId",
   "go"
 );
-@@clientName(HealthcareFhirResourceUpdatedEventData.resourceVersionId,
+@@clientName(
+  HealthcareFhirResourceUpdatedEventData.resourceVersionId,
   "FHIRResourceVersionID",
   "go"
 );
-@@clientName(HealthcareFhirResourceUpdatedEventData.resourceType,
+@@clientName(
+  HealthcareFhirResourceUpdatedEventData.resourceType,
   "FHIRResourceType",
   "go"
 );
-@@clientName(HealthcareFhirResourceDeletedEventData.resourceFhirAccount,
+@@clientName(
+  HealthcareFhirResourceDeletedEventData.resourceFhirAccount,
   "FHIRServiceHostName",
   "go"
 );
-@@clientName(HealthcareFhirResourceDeletedEventData.resourceFhirId,
+@@clientName(
+  HealthcareFhirResourceDeletedEventData.resourceFhirId,
   "FHIRResourceID",
   "go"
 );
-@@clientName(HealthcareFhirResourceDeletedEventData.resourceVersionId,
+@@clientName(
+  HealthcareFhirResourceDeletedEventData.resourceVersionId,
   "FHIRResourceVersionID",
   "go"
 );
-@@clientName(HealthcareFhirResourceDeletedEventData.resourceType,
+@@clientName(
+  HealthcareFhirResourceDeletedEventData.resourceType,
   "FHIRResourceType",
   "go"
 );
@@ -232,128 +275,158 @@ using Microsoft.EventGrid.SystemEvents;
 // [BEGIN] ACS renames (and acronym casing)
 
 @@clientName(AcsChatEventBaseProperties, "ACSChatEventBaseProperties", "go");
-@@clientName(AcsChatEventInThreadBaseProperties,
+@@clientName(
+  AcsChatEventInThreadBaseProperties,
   "ACSChatEventInThreadBaseProperties",
   "go"
 );
-@@clientName(AcsChatMessageDeletedEventData,
+@@clientName(
+  AcsChatMessageDeletedEventData,
   "ACSChatMessageDeletedEventData",
   "go"
 );
-@@clientName(AcsChatMessageDeletedInThreadEventData,
+@@clientName(
+  AcsChatMessageDeletedInThreadEventData,
   "ACSChatMessageDeletedInThreadEventData",
   "go"
 );
-@@clientName(AcsChatMessageEditedEventData,
+@@clientName(
+  AcsChatMessageEditedEventData,
   "ACSChatMessageEditedEventData",
   "go"
 );
-@@clientName(AcsChatMessageEditedInThreadEventData,
+@@clientName(
+  AcsChatMessageEditedInThreadEventData,
   "ACSChatMessageEditedInThreadEventData",
   "go"
 );
-@@clientName(AcsChatMessageEventBaseProperties,
+@@clientName(
+  AcsChatMessageEventBaseProperties,
   "ACSChatMessageEventBaseProperties",
   "go"
 );
-@@clientName(AcsChatMessageEventInThreadBaseProperties,
+@@clientName(
+  AcsChatMessageEventInThreadBaseProperties,
   "ACSChatMessageEventInThreadBaseProperties",
   "go"
 );
-@@clientName(AcsChatMessageReceivedEventData,
+@@clientName(
+  AcsChatMessageReceivedEventData,
   "ACSChatMessageReceivedEventData",
   "go"
 );
-@@clientName(AcsChatMessageReceivedEventData,
+@@clientName(
+  AcsChatMessageReceivedEventData,
   "ACSChatMessageReceivedEventData",
   "go"
 );
-@@clientName(AcsChatMessageReceivedInThreadEventData,
+@@clientName(
+  AcsChatMessageReceivedInThreadEventData,
   "ACSChatMessageReceivedInThreadEventData",
   "go"
 );
-@@clientName(AcsChatParticipantAddedToThreadEventData,
+@@clientName(
+  AcsChatParticipantAddedToThreadEventData,
   "ACSChatParticipantAddedToThreadEventData",
   "go"
 );
-@@clientName(AcsChatParticipantAddedToThreadWithUserEventData,
+@@clientName(
+  AcsChatParticipantAddedToThreadWithUserEventData,
   "ACSChatParticipantAddedToThreadWithUserEventData",
   "go"
 );
-@@clientName(AcsChatParticipantRemovedFromThreadEventData,
+@@clientName(
+  AcsChatParticipantRemovedFromThreadEventData,
   "ACSChatParticipantRemovedFromThreadEventData",
   "go"
 );
-@@clientName(AcsChatParticipantRemovedFromThreadWithUserEventData,
+@@clientName(
+  AcsChatParticipantRemovedFromThreadWithUserEventData,
   "ACSChatParticipantRemovedFromThreadWithUserEventData",
   "go"
 );
-@@clientName(AcsChatThreadCreatedEventData,
+@@clientName(
+  AcsChatThreadCreatedEventData,
   "ACSChatThreadCreatedEventData",
   "go"
 );
-@@clientName(AcsChatThreadCreatedWithUserEventData,
+@@clientName(
+  AcsChatThreadCreatedWithUserEventData,
   "ACSChatThreadCreatedWithUserEventData",
   "go"
 );
-@@clientName(AcsChatThreadDeletedEventData,
+@@clientName(
+  AcsChatThreadDeletedEventData,
   "ACSChatThreadDeletedEventData",
   "go"
 );
-@@clientName(AcsChatThreadEventBaseProperties,
+@@clientName(
+  AcsChatThreadEventBaseProperties,
   "ACSChatThreadEventBaseProperties",
   "go"
 );
-@@clientName(AcsChatThreadEventInThreadBaseProperties,
+@@clientName(
+  AcsChatThreadEventInThreadBaseProperties,
   "ACSChatThreadEventInThreadBaseProperties",
   "go"
 );
-@@clientName(AcsChatThreadParticipantProperties,
+@@clientName(
+  AcsChatThreadParticipantProperties,
   "ACSChatThreadParticipantProperties",
   "go"
 );
-@@clientName(AcsChatThreadPropertiesUpdatedEventData,
+@@clientName(
+  AcsChatThreadPropertiesUpdatedEventData,
   "ACSChatThreadPropertiesUpdatedEventData",
   "go"
 );
-@@clientName(AcsChatThreadPropertiesUpdatedPerUserEventData,
+@@clientName(
+  AcsChatThreadPropertiesUpdatedPerUserEventData,
   "ACSChatThreadPropertiesUpdatedPerUserEventData",
   "go"
 );
-@@clientName(AcsChatThreadWithUserDeletedEventData,
+@@clientName(
+  AcsChatThreadWithUserDeletedEventData,
   "ACSChatThreadWithUserDeletedEventData",
   "go"
 );
-@@clientName(AcsEmailDeliveryReportReceivedEventData,
+@@clientName(
+  AcsEmailDeliveryReportReceivedEventData,
   "ACSEmailDeliveryReportReceivedEventData",
   "go"
 );
 
-@@clientName(AcsEmailDeliveryReportStatus,
+@@clientName(
+  AcsEmailDeliveryReportStatus,
   "ACSEmailDeliveryReportStatus",
   "go"
 );
-@@clientName(AcsEmailDeliveryReportStatusDetails,
+@@clientName(
+  AcsEmailDeliveryReportStatusDetails,
   "ACSEmailDeliveryReportStatusDetails",
   "go"
 );
 
-@@clientName(AcsEmailEngagementTrackingReportReceivedEventData,
+@@clientName(
+  AcsEmailEngagementTrackingReportReceivedEventData,
   "ACSEmailEngagementTrackingReportReceivedEventData",
   "go"
 );
-@@clientName(AcsEmailEngagementTrackingReportReceivedEventData.engagementType,
+@@clientName(
+  AcsEmailEngagementTrackingReportReceivedEventData.engagementType,
   "Engagement",
   "go"
 );
 
-@@clientName(AcsIncomingCallCustomContext,
+@@clientName(
+  AcsIncomingCallCustomContext,
   "ACSIncomingCallCustomContext",
   "go"
 );
 
 @@clientName(AcsIncomingCallEventData, "ACSIncomingCallEventData", "go");
-@@clientName(AcsIncomingCallEventData.from,
+@@clientName(
+  AcsIncomingCallEventData.from,
   "FromCommunicationIdentifier",
   "go"
 );
@@ -363,7 +436,8 @@ using Microsoft.EventGrid.SystemEvents;
 @@clientName(AcsMessageButtonContent, "ACSMessageButtonContent", "go");
 
 // we expose a custom error type and use this internally.
-@@clientName(AcsMessageChannelEventError,
+@@clientName(
+  AcsMessageChannelEventError,
   "internalACSMessageChannelEventError",
   "go"
 );
@@ -376,11 +450,13 @@ using Microsoft.EventGrid.SystemEvents;
 
 @@clientName(AcsMessageDeliveryStatus, "ACSMessageDeliveryStatus", "go");
 
-@@clientName(AcsMessageDeliveryStatusUpdatedEventData,
+@@clientName(
+  AcsMessageDeliveryStatusUpdatedEventData,
   "ACSMessageDeliveryStatusUpdatedEventData",
   "go"
 );
-@@clientName(AcsMessageDeliveryStatusUpdatedEventData.receivedTimeStamp,
+@@clientName(
+  AcsMessageDeliveryStatusUpdatedEventData.receivedTimeStamp,
   "ReceivedTimestamp",
   "go"
 );
@@ -388,20 +464,23 @@ using Microsoft.EventGrid.SystemEvents;
 @@clientName(AcsMessageEventData, "ACSMessageEventData", "go");
 @@clientName(AcsMessageEventData.receivedTimeStamp, "ReceivedTimestamp", "go");
 
-@@clientName(AcsMessageInteractiveButtonReplyContent,
+@@clientName(
+  AcsMessageInteractiveButtonReplyContent,
   "ACSMessageInteractiveButtonReplyContent",
   "go"
 );
 @@clientName(AcsMessageInteractiveButtonReplyContent.id, "ButtonID", "go");
 
-@@clientName(AcsMessageInteractiveContent,
+@@clientName(
+  AcsMessageInteractiveContent,
   "ACSMessageInteractiveContent",
   "go"
 );
 @@clientName(AcsMessageInteractiveContent.type, "ReplyKind", "go");
 
 @@clientName(AcsMessageInteractiveListReplyContent.id, "ListItemID", "go");
-@@clientName(AcsMessageInteractiveListReplyContent,
+@@clientName(
+  AcsMessageInteractiveListReplyContent,
   "ACSMessageInteractiveListReplyContent",
   "go"
 );
@@ -410,22 +489,26 @@ using Microsoft.EventGrid.SystemEvents;
 @@clientName(AcsMessageMediaContent.id, "MediaID", "go");
 
 @@clientName(AcsMessageReceivedEventData, "ACSMessageReceivedEventData", "go");
-@@clientName(AcsMessageReceivedEventData.interactive,
+@@clientName(
+  AcsMessageReceivedEventData.interactive,
   "InteractiveContent",
   "go"
 );
 @@clientName(AcsMessageReceivedEventData.media, "MediaContent", "go");
-@@clientName(AcsMessageReceivedEventData.receivedTimeStamp,
+@@clientName(
+  AcsMessageReceivedEventData.receivedTimeStamp,
   "ReceivedTimestamp",
   "go"
 );
 
-@@clientName(AcsRecordingChunkInfoProperties,
+@@clientName(
+  AcsRecordingChunkInfoProperties,
   "ACSRecordingChunkInfoProperties",
   "go"
 );
 
-@@clientName(AcsRecordingFileStatusUpdatedEventData,
+@@clientName(
+  AcsRecordingFileStatusUpdatedEventData,
   "ACSRecordingFileStatusUpdatedEventData",
   "go"
 );
@@ -454,107 +537,130 @@ using Microsoft.EventGrid.SystemEvents;
 @@clientName(KeyVaultSecretNewVersionCreatedEventData.NBF, "NBF", "go");
 @@clientName(KeyVaultSecretNewVersionCreatedEventData.EXP, "EXP", "go");
 
-@@clientName(AcsRecordingStorageInfoProperties,
+@@clientName(
+  AcsRecordingStorageInfoProperties,
   "ACSRecordingStorageInfoProperties",
   "go"
 );
-@@clientName(AcsRouterChannelConfiguration,
+@@clientName(
+  AcsRouterChannelConfiguration,
   "ACSRouterChannelConfiguration",
   "go"
 );
 
 // we expose a custom error type and use this internally.
-@@clientName(AcsRouterCommunicationError,
+@@clientName(
+  AcsRouterCommunicationError,
   "internalACSRouterCommunicationError",
   "go"
 );
 @@access(AcsRouterCommunicationError, Access.internal, "go");
 
 @@clientName(AcsRouterEventData, "ACSRouterEventData", "go");
-@@clientName(AcsRouterJobCancelledEventData,
+@@clientName(
+  AcsRouterJobCancelledEventData,
   "ACSRouterJobCancelledEventData",
   "go"
 );
-@@clientName(AcsRouterJobClassificationFailedEventData,
+@@clientName(
+  AcsRouterJobClassificationFailedEventData,
   "ACSRouterJobClassificationFailedEventData",
   "go"
 );
-@@clientName(AcsRouterJobClassifiedEventData,
+@@clientName(
+  AcsRouterJobClassifiedEventData,
   "ACSRouterJobClassifiedEventData",
   "go"
 );
 @@clientName(AcsRouterJobClosedEventData, "ACSRouterJobClosedEventData", "go");
-@@clientName(AcsRouterJobCompletedEventData,
+@@clientName(
+  AcsRouterJobCompletedEventData,
   "ACSRouterJobCompletedEventData",
   "go"
 );
-@@clientName(AcsRouterJobDeletedEventData,
+@@clientName(
+  AcsRouterJobDeletedEventData,
   "ACSRouterJobDeletedEventData",
   "go"
 );
 @@clientName(AcsRouterJobEventData, "ACSRouterJobEventData", "go");
-@@clientName(AcsRouterJobExceptionTriggeredEventData,
+@@clientName(
+  AcsRouterJobExceptionTriggeredEventData,
   "ACSRouterJobExceptionTriggeredEventData",
   "go"
 );
 @@clientName(AcsRouterJobQueuedEventData, "ACSRouterJobQueuedEventData", "go");
-@@clientName(AcsRouterJobReceivedEventData,
+@@clientName(
+  AcsRouterJobReceivedEventData,
   "ACSRouterJobReceivedEventData",
   "go"
 );
-@@clientName(AcsRouterJobSchedulingFailedEventData,
+@@clientName(
+  AcsRouterJobSchedulingFailedEventData,
   "ACSRouterJobSchedulingFailedEventData",
   "go"
 );
 @@clientName(AcsRouterJobStatus, "ACSRouterJobStatus", "go");
-@@clientName(AcsRouterJobUnassignedEventData,
+@@clientName(
+  AcsRouterJobUnassignedEventData,
   "ACSRouterJobUnassignedEventData",
   "go"
 );
-@@clientName(AcsRouterJobWaitingForActivationEventData,
+@@clientName(
+  AcsRouterJobWaitingForActivationEventData,
   "ACSRouterJobWaitingForActivationEventData",
   "go"
 );
-@@clientName(AcsRouterJobWorkerSelectorsExpiredEventData,
+@@clientName(
+  AcsRouterJobWorkerSelectorsExpiredEventData,
   "ACSRouterJobWorkerSelectorsExpiredEventData",
   "go"
 );
 @@clientName(AcsRouterLabelOperator, "ACSRouterLabelOperator", "go");
 @@clientName(AcsRouterQueueDetails, "ACSRouterQueueDetails", "go");
-@@clientName(AcsRouterUpdatedWorkerProperty,
+@@clientName(
+  AcsRouterUpdatedWorkerProperty,
   "ACSRouterUpdatedWorkerProperty",
   "go"
 );
-@@clientName(AcsRouterWorkerDeletedEventData,
+@@clientName(
+  AcsRouterWorkerDeletedEventData,
   "ACSRouterWorkerDeletedEventData",
   "go"
 );
-@@clientName(AcsRouterWorkerDeregisteredEventData,
+@@clientName(
+  AcsRouterWorkerDeregisteredEventData,
   "ACSRouterWorkerDeregisteredEventData",
   "go"
 );
 @@clientName(AcsRouterWorkerEventData, "ACSRouterWorkerEventData", "go");
-@@clientName(AcsRouterWorkerOfferAcceptedEventData,
+@@clientName(
+  AcsRouterWorkerOfferAcceptedEventData,
   "ACSRouterWorkerOfferAcceptedEventData",
   "go"
 );
-@@clientName(AcsRouterWorkerOfferDeclinedEventData,
+@@clientName(
+  AcsRouterWorkerOfferDeclinedEventData,
   "ACSRouterWorkerOfferDeclinedEventData",
   "go"
 );
-@@clientName(AcsRouterWorkerOfferExpiredEventData,
+@@clientName(
+  AcsRouterWorkerOfferExpiredEventData,
   "ACSRouterWorkerOfferExpiredEventData",
   "go"
 );
-@@clientName(AcsRouterWorkerOfferIssuedEventData,
+@@clientName(
+  AcsRouterWorkerOfferIssuedEventData,
   "ACSRouterWorkerOfferIssuedEventData",
   "go"
 );
-@@clientName(AcsRouterWorkerOfferRevokedEventData,
+@@clientName(
+  AcsRouterWorkerOfferRevokedEventData,
   "ACSRouterWorkerOfferRevokedEventData",
   "go"
 );
-@@clientName(AcsRouterWorkerRegisteredEventData,
+@@clientName(
+  AcsRouterWorkerRegisteredEventData,
   "ACSRouterWorkerRegisteredEventData",
   "go"
 );
@@ -564,25 +670,30 @@ using Microsoft.EventGrid.SystemEvents;
 @@clientName(AcsRouterWorkerSelector.ttlSeconds, "TimeToLive", "go");
 @@clientName(AcsRouterWorkerSelector.value, "labelValue", "go");
 
-@@clientName(AcsRouterWorkerSelectorState,
+@@clientName(
+  AcsRouterWorkerSelectorState,
   "ACSRouterWorkerSelectorState",
   "go"
 );
-@@clientName(AcsRouterWorkerUpdatedEventData,
+@@clientName(
+  AcsRouterWorkerUpdatedEventData,
   "ACSRouterWorkerUpdatedEventData",
   "go"
 );
-@@clientName(AcsSmsDeliveryAttemptProperties,
+@@clientName(
+  AcsSmsDeliveryAttemptProperties,
   "ACSSMSDeliveryAttemptProperties",
   "go"
 );
-@@clientName(AcsSmsDeliveryReportReceivedEventData,
+@@clientName(
+  AcsSmsDeliveryReportReceivedEventData,
   "ACSSMSDeliveryReportReceivedEventData",
   "go"
 );
 @@clientName(AcsSmsEventBaseProperties, "ACSSMSEventBaseProperties", "go");
 @@clientName(AcsSmsReceivedEventData, "ACSSMSReceivedEventData", "go");
-@@clientName(AcsUserDisconnectedEventData,
+@@clientName(
+  AcsUserDisconnectedEventData,
   "ACSUserDisconnectedEventData",
   "go"
 );
@@ -595,27 +706,32 @@ using Microsoft.EventGrid.SystemEvents;
 @@clientName(AcsCallEndedByKind, "ACSCallEndedByKind", "go");
 @@clientName(AcsCallEndedEventData, "ACSCallEndedEventData", "go");
 @@clientName(AcsCallGroupProperties, "ACSCallGroupProperties", "go");
-@@clientName(AcsCallParticipantAddedEventData,
+@@clientName(
+  AcsCallParticipantAddedEventData,
   "ACSCallParticipantAddedEventData",
   "go"
 );
 @@clientName(AcsCallParticipantEventData, "ACSCallParticipantEventData", "go");
-@@clientName(AcsCallParticipantProperties,
+@@clientName(
+  AcsCallParticipantProperties,
   "ACSCallParticipantProperties",
   "go"
 );
-@@clientName(AcsCallParticipantRemovedEventData,
+@@clientName(
+  AcsCallParticipantRemovedEventData,
   "ACSCallParticipantRemovedEventData",
   "go"
 );
 @@clientName(AcsCallRoomProperties, "ACSCallRoomProperties", "go");
 @@clientName(AcsCallStartedEventData, "ACSCallStartedEventData", "go");
 @@clientName(AcsCallingEventProperties, "ACSCallingEventProperties", "go");
-@@clientName(AcsChatAzureBotCommandReceivedInThreadEventData,
+@@clientName(
+  AcsChatAzureBotCommandReceivedInThreadEventData,
   "ACSChatAzureBotCommandReceivedInThreadEventData",
   "go"
 );
-@@clientName(AcsChatTypingIndicatorReceivedInThreadEventData,
+@@clientName(
+  AcsChatTypingIndicatorReceivedInThreadEventData,
   "ACSChatTypingIndicatorReceivedInThreadEventData",
   "go"
 );

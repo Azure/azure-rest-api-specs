@@ -82,9 +82,11 @@ interface Workspaces {
 @@minLength(Workspace.name, 1);
 @@doc(Workspace.name, "String that represents a Workspace resource name.");
 @@doc(Workspace.properties, "The properties of the Workspace resource.");
-@@doc(Workspaces.createOrUpdate::parameters.resource,
+@@doc(
+  Workspaces.createOrUpdate::parameters.resource,
   "Workspace resource to be created or updated."
 );
-@@doc(Workspaces.update::parameters.properties,
+@@doc(
+  Workspaces.update::parameters.properties,
   "Parameters supplied to the Update Workspace operation."
 );

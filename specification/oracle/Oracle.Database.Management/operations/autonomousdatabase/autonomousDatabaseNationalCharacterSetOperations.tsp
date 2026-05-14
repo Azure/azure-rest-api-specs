@@ -11,12 +11,14 @@ interface AutonomousDatabaseNationalCharacterSets
   extends OracleLocationBasedResource<AutonomousDatabaseNationalCharacterSet> {}
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(AutonomousDatabaseNationalCharacterSets.listByLocation,
+@@Autorest.example(
+  AutonomousDatabaseNationalCharacterSets.listByLocation,
   "./examples/autonomousDatabaseNationalCharacterSet_listByLocation.json",
   "List autonomous db national character sets by location"
 );
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(AutonomousDatabaseNationalCharacterSets.get,
+@@Autorest.example(
+  AutonomousDatabaseNationalCharacterSets.get,
   "./examples/autonomousDatabaseNationalCharacterSet_get.json",
   "Get autonomous db national character set"
 );

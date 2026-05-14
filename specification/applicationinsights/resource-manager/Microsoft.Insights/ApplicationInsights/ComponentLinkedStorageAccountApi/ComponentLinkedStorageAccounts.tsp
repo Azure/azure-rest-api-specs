@@ -80,15 +80,19 @@ interface ComponentLinkedStorageAccountsOperationGroup {
   delete is ComponentLinkedStorageAccountsOps.DeleteSync<ComponentLinkedStorageAccounts>;
 }
 
-@@doc(ComponentLinkedStorageAccounts.name,
+@@doc(
+  ComponentLinkedStorageAccounts.name,
   "The type of the Application Insights component data source for the linked storage account."
 );
-@@doc(ComponentLinkedStorageAccounts.properties,
+@@doc(
+  ComponentLinkedStorageAccounts.properties,
   "The properties of the linked storage accounts."
 );
-@@doc(ComponentLinkedStorageAccountsOperationGroup.createAndUpdate::parameters.resource,
+@@doc(
+  ComponentLinkedStorageAccountsOperationGroup.createAndUpdate::parameters.resource,
   "Properties that need to be specified to update linked storage accounts for an Application Insights component."
 );
-@@doc(ComponentLinkedStorageAccountsOperationGroup.update::parameters.properties,
+@@doc(
+  ComponentLinkedStorageAccountsOperationGroup.update::parameters.properties,
   "Properties that need to be specified to update a linked storage accounts for an Application Insights component."
 );

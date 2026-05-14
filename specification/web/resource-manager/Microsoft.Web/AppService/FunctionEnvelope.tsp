@@ -388,18 +388,23 @@ interface FunctionEnvelopeOperationGroup {
 }
 
 @@doc(FunctionEnvelope.name, "Function name.");
-@@doc(FunctionEnvelope.properties,
+@@doc(
+  FunctionEnvelope.properties,
   "FunctionEnvelope resource specific properties"
 );
-@@doc(FunctionEnvelopes.createFunction::parameters.resource,
+@@doc(
+  FunctionEnvelopes.createFunction::parameters.resource,
   "Function details."
 );
-@@doc(FunctionEnvelopes.createOrUpdateFunctionSecret::parameters.body,
+@@doc(
+  FunctionEnvelopes.createOrUpdateFunctionSecret::parameters.body,
   "The key to create or update"
 );
-@@doc(FunctionEnvelopeOperationGroup.createInstanceFunctionSlot::parameters.resource,
+@@doc(
+  FunctionEnvelopeOperationGroup.createInstanceFunctionSlot::parameters.resource,
   "Function details."
 );
-@@doc(FunctionEnvelopeOperationGroup.createOrUpdateFunctionSecretSlot::parameters.resource,
+@@doc(
+  FunctionEnvelopeOperationGroup.createOrUpdateFunctionSecretSlot::parameters.resource,
   "The key to create or update"
 );

@@ -6,19 +6,24 @@ using ServiceDiagnosticsSettingsApi;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ServiceDiagnosticSettingsResourcePatch.properties);
 
-@@clientLocation(ServiceDiagnosticSettingsResources.get,
+@@clientLocation(
+  ServiceDiagnosticSettingsResources.get,
   "ServiceDiagnosticSettings"
 );
-@@clientLocation(ServiceDiagnosticSettingsResources.createOrUpdate,
+@@clientLocation(
+  ServiceDiagnosticSettingsResources.createOrUpdate,
   "ServiceDiagnosticSettings"
 );
-@@clientName(ServiceDiagnosticSettingsResources.createOrUpdate::parameters.resource,
+@@clientName(
+  ServiceDiagnosticSettingsResources.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientLocation(ServiceDiagnosticSettingsResources.update,
+@@clientLocation(
+  ServiceDiagnosticSettingsResources.update,
   "ServiceDiagnosticSettings"
 );
-@@clientName(ServiceDiagnosticSettingsResources.update::parameters.properties,
+@@clientName(
+  ServiceDiagnosticSettingsResources.update::parameters.properties,
   "serviceDiagnosticSettingsResource"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

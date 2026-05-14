@@ -48,10 +48,12 @@ interface DatabaseAdvancedThreatProtections {
   listByDatabase is ArmResourceListByParent<DatabaseAdvancedThreatProtection>;
 }
 
-@@doc(DatabaseAdvancedThreatProtection.name,
+@@doc(
+  DatabaseAdvancedThreatProtection.name,
   "The name of the Advanced Threat Protection state."
 );
 @@doc(DatabaseAdvancedThreatProtection.properties, "Resource properties.");
-@@doc(DatabaseAdvancedThreatProtections.createOrUpdate::parameters.resource,
+@@doc(
+  DatabaseAdvancedThreatProtections.createOrUpdate::parameters.resource,
   "The database Advanced Threat Protection state."
 );
