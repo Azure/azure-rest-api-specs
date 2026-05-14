@@ -1,5 +1,5 @@
 {
-  "title": "Get Thread",
+  "title": "Threads Get",
   "operationId": "Threads_Get",
   "parameters": {
     "api-version": "2026-06-01-preview",
@@ -7,6 +7,23 @@
     "threadId": "sample-threadId"
   },
   "responses": {
-    "200": {}
+    "200": {
+      "body": {
+        "id": "sample-id-123",
+        "object": "thread",
+        "created_at": 0,
+        "title": "sample-string",
+        "owner_id": "sample-id-123"
+      }
+    },
+    "404": {},
+    "default": {
+      "body": {
+        "error": {
+          "code": "sample-string",
+          "message": "sample-string"
+        }
+      }
+    }
   }
 }

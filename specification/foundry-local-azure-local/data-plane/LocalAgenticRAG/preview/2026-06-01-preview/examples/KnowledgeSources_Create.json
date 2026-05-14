@@ -1,15 +1,37 @@
 {
-  "title": "Create Knowledge Source",
+  "title": "KnowledgeSources Create",
   "operationId": "KnowledgeSources_Create",
   "parameters": {
     "api-version": "2026-06-01-preview",
     "endpoint": "https://myservice.example.com",
     "body": {
       "name": "sample-string",
-      "kind": "remote_mcp"
+      "kind": "remote_mcp",
+      "auth_type": "microsoft_entra_id",
+      "description": "sample-string",
+      "created_by": "sample-string"
     }
   },
   "responses": {
-    "201": {}
+    "201": {
+      "body": {
+        "id": "00000000-0000-0000-0000-000000000000",
+        "name": "sample-string",
+        "kind": "remote_mcp",
+        "description": "sample-string",
+        "auth_type": "microsoft_entra_id"
+      }
+    },
+    "400": {},
+    "409": {},
+    "422": {},
+    "default": {
+      "body": {
+        "error": {
+          "code": "sample-string",
+          "message": "sample-string"
+        }
+      }
+    }
   }
 }

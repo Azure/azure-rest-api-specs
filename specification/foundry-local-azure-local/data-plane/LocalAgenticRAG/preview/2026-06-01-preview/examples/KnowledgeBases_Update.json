@@ -1,5 +1,5 @@
 {
-  "title": "Update Knowledge Base",
+  "title": "KnowledgeBases Update",
   "operationId": "KnowledgeBases_Update",
   "parameters": {
     "api-version": "2026-06-01-preview",
@@ -9,14 +9,31 @@
       "name": "sample-string",
       "description": "sample-string",
       "knowledge_source_ids": [
-        "sample-string"
+        "sample-id-123"
       ]
     }
   },
   "responses": {
     "200": {
       "body": {
-        "data": {}
+        "data": {
+          "id": "sample-id-123",
+          "object": "knowledge_base",
+          "created_at": "2026-06-01T00:00:00Z",
+          "updated_at": "2026-06-01T00:00:00Z",
+          "name": "sample-string"
+        }
+      }
+    },
+    "400": {},
+    "403": {},
+    "404": {},
+    "default": {
+      "body": {
+        "error": {
+          "code": "sample-string",
+          "message": "sample-string"
+        }
       }
     }
   }

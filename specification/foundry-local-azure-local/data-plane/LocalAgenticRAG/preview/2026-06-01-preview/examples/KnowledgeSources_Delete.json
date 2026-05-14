@@ -1,12 +1,21 @@
 {
-  "title": "Delete Knowledge Source",
+  "title": "KnowledgeSources Delete",
   "operationId": "KnowledgeSources_Delete",
   "parameters": {
     "api-version": "2026-06-01-preview",
     "endpoint": "https://myservice.example.com",
-    "ksId": "sample-ksId"
+    "ksId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
-    "204": {}
+    "204": {},
+    "404": {},
+    "default": {
+      "body": {
+        "error": {
+          "code": "sample-string",
+          "message": "sample-string"
+        }
+      }
+    }
   }
 }

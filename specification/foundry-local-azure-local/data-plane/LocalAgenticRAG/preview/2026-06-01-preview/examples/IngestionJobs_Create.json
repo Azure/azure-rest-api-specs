@@ -1,5 +1,5 @@
 {
-  "title": "Create Ingestion Job",
+  "title": "IngestionJobs Create",
   "operationId": "IngestionJobs_Create",
   "parameters": {
     "api-version": "2026-06-01-preview",
@@ -7,9 +7,18 @@
     "jobId": "sample-jobId",
     "body": {
       "datasource": {
-        "kind": {},
-        "connection": {},
-        "chunking": {}
+        "kind": "nfsv3",
+        "connection": {
+          "nfsServerPath": "sample-string",
+          "nfsUid": 0,
+          "nfsGid": 0,
+          "sharePointUrl": "sample-string",
+          "sharePointFolderPath": "sample-string"
+        },
+        "chunking": {
+          "chunkSize": "sample-string",
+          "chunkOverlap": "sample-string"
+        }
       },
       "collectionName": "sample-string",
       "dataRefreshIntervalInHours": 0,
@@ -22,6 +31,16 @@
       "body": {
         "status": "sample-string",
         "message": {}
+      }
+    },
+    "400": {},
+    "422": {},
+    "default": {
+      "body": {
+        "error": {
+          "code": "sample-string",
+          "message": "sample-string"
+        }
       }
     }
   }

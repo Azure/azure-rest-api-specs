@@ -1,5 +1,5 @@
 {
-  "title": "Get Run Step",
+  "title": "RunSteps Get",
   "operationId": "RunSteps_Get",
   "parameters": {
     "api-version": "2026-06-01-preview",
@@ -9,6 +9,23 @@
     "stepId": "sample-stepId"
   },
   "responses": {
-    "200": {}
+    "200": {
+      "body": {
+        "id": "sample-id-123",
+        "object": "thread.run.step",
+        "created_at": 0,
+        "run_id": "sample-id-123",
+        "thread_id": "sample-id-123"
+      }
+    },
+    "404": {},
+    "default": {
+      "body": {
+        "error": {
+          "code": "sample-string",
+          "message": "sample-string"
+        }
+      }
+    }
   }
 }

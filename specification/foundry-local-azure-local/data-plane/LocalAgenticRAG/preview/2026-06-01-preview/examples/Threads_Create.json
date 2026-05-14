@@ -1,15 +1,34 @@
 {
-  "title": "Create Thread",
+  "title": "Threads Create",
   "operationId": "Threads_Create",
   "parameters": {
     "api-version": "2026-06-01-preview",
     "endpoint": "https://myservice.example.com",
     "body": {
       "title": "sample-string",
-      "metadata": {}
+      "metadata": {
+        "key": "value"
+      }
     }
   },
   "responses": {
-    "201": {}
+    "201": {
+      "body": {
+        "id": "sample-id-123",
+        "object": "thread",
+        "created_at": 0,
+        "title": "sample-string",
+        "owner_id": "sample-id-123"
+      }
+    },
+    "400": {},
+    "default": {
+      "body": {
+        "error": {
+          "code": "sample-string",
+          "message": "sample-string"
+        }
+      }
+    }
   }
 }

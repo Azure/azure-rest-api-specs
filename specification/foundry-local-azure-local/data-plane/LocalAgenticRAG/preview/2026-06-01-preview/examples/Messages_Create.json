@@ -1,5 +1,5 @@
 {
-  "title": "Create Message",
+  "title": "Messages Create",
   "operationId": "Messages_Create",
   "parameters": {
     "api-version": "2026-06-01-preview",
@@ -8,13 +8,33 @@
     "body": {
       "role": "user",
       "content": "sample-string",
-      "metadata": {},
+      "metadata": {
+        "key": "value"
+      },
       "attachments": [
         {}
       ]
     }
   },
   "responses": {
-    "201": {}
+    "201": {
+      "body": {
+        "id": "sample-id-123",
+        "object": "thread.message",
+        "created_at": 0,
+        "thread_id": "sample-id-123",
+        "role": "user"
+      }
+    },
+    "400": {},
+    "404": {},
+    "default": {
+      "body": {
+        "error": {
+          "code": "sample-string",
+          "message": "sample-string"
+        }
+      }
+    }
   }
 }

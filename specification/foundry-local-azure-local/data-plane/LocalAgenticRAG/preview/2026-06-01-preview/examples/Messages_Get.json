@@ -1,5 +1,5 @@
 {
-  "title": "Get Message",
+  "title": "Messages Get",
   "operationId": "Messages_Get",
   "parameters": {
     "api-version": "2026-06-01-preview",
@@ -8,6 +8,23 @@
     "messageId": "sample-messageId"
   },
   "responses": {
-    "200": {}
+    "200": {
+      "body": {
+        "id": "sample-id-123",
+        "object": "thread.message",
+        "created_at": 0,
+        "thread_id": "sample-id-123",
+        "role": "user"
+      }
+    },
+    "404": {},
+    "default": {
+      "body": {
+        "error": {
+          "code": "sample-string",
+          "message": "sample-string"
+        }
+      }
+    }
   }
 }

@@ -1,20 +1,38 @@
 {
-  "title": "List Threads",
+  "title": "Threads List",
   "operationId": "Threads_List",
   "parameters": {
     "api-version": "2026-06-01-preview",
-    "endpoint": "https://myservice.example.com"
+    "endpoint": "https://myservice.example.com",
+    "limit": 0,
+    "order": "asc",
+    "after": "sample-string",
+    "before": "sample-string"
   },
   "responses": {
     "200": {
       "body": {
         "object": "list",
         "data": [
-          {}
+          {
+            "id": "sample-id-123",
+            "object": "thread",
+            "created_at": 0,
+            "title": "sample-string",
+            "owner_id": "sample-id-123"
+          }
         ],
-        "first_id": "sample-string",
-        "last_id": "sample-string",
+        "first_id": "sample-id-123",
+        "last_id": "sample-id-123",
         "has_more": true
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "sample-string",
+          "message": "sample-string"
+        }
       }
     }
   }

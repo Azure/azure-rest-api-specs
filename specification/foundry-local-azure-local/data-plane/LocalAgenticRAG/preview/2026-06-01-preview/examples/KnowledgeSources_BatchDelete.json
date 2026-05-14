@@ -1,12 +1,12 @@
 {
-  "title": "Batch Delete Knowledge Sources",
+  "title": "KnowledgeSources BatchDelete",
   "operationId": "KnowledgeSources_BatchDelete",
   "parameters": {
     "api-version": "2026-06-01-preview",
     "endpoint": "https://myservice.example.com",
     "body": {
       "ks_ids": [
-        "sample-string"
+        "00000000-0000-0000-0000-000000000000"
       ]
     }
   },
@@ -14,6 +14,15 @@
     "200": {
       "body": {
         "deleted_count": 0
+      }
+    },
+    "400": {},
+    "default": {
+      "body": {
+        "error": {
+          "code": "sample-string",
+          "message": "sample-string"
+        }
       }
     }
   }

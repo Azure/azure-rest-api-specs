@@ -1,5 +1,5 @@
 {
-  "title": "Get Run",
+  "title": "Runs Get",
   "operationId": "Runs_Get",
   "parameters": {
     "api-version": "2026-06-01-preview",
@@ -8,6 +8,23 @@
     "runId": "sample-runId"
   },
   "responses": {
-    "200": {}
+    "200": {
+      "body": {
+        "id": "sample-id-123",
+        "object": "thread.run",
+        "created_at": 0,
+        "thread_id": "sample-id-123",
+        "agent_id": "sample-id-123"
+      }
+    },
+    "404": {},
+    "default": {
+      "body": {
+        "error": {
+          "code": "sample-string",
+          "message": "sample-string"
+        }
+      }
+    }
   }
 }

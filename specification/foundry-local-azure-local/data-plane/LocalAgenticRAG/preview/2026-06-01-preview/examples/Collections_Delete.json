@@ -1,5 +1,5 @@
 {
-  "title": "Delete Collection",
+  "title": "Collections Delete",
   "operationId": "Collections_Delete",
   "parameters": {
     "api-version": "2026-06-01-preview",
@@ -12,11 +12,20 @@
         "status": "deleted",
         "deleted_resources": {
           "milvus_collections": [
-            {}
+            "sample-string"
           ],
           "postgres_tables": [
-            {}
+            "sample-string"
           ]
+        }
+      }
+    },
+    "409": {},
+    "default": {
+      "body": {
+        "error": {
+          "code": "sample-string",
+          "message": "sample-string"
         }
       }
     }

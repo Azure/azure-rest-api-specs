@@ -1,5 +1,5 @@
 {
-  "title": "List Ingestion Jobs",
+  "title": "IngestionJobs List",
   "operationId": "IngestionJobs_List",
   "parameters": {
     "api-version": "2026-06-01-preview",
@@ -9,8 +9,22 @@
     "200": {
       "body": {
         "jobRuns": [
-          {}
+          {
+            "jobId": "sample-id-123",
+            "runId": "sample-id-123",
+            "status": "PENDING",
+            "startTime": "2026-06-01T00:00:00Z",
+            "endTime": "2026-06-01T00:00:00Z"
+          }
         ]
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "sample-string",
+          "message": "sample-string"
+        }
       }
     }
   }

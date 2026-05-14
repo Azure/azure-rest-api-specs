@@ -1,22 +1,41 @@
 {
-  "title": "List Run Steps",
+  "title": "RunSteps List",
   "operationId": "RunSteps_List",
   "parameters": {
     "api-version": "2026-06-01-preview",
     "endpoint": "https://myservice.example.com",
     "threadId": "sample-threadId",
-    "runId": "sample-runId"
+    "runId": "sample-runId",
+    "limit": 0,
+    "order": "asc",
+    "after": "sample-string",
+    "before": "sample-string"
   },
   "responses": {
     "200": {
       "body": {
         "object": "list",
         "data": [
-          {}
+          {
+            "id": "sample-id-123",
+            "object": "thread.run.step",
+            "created_at": 0,
+            "run_id": "sample-id-123",
+            "thread_id": "sample-id-123"
+          }
         ],
-        "first_id": "sample-string",
-        "last_id": "sample-string",
+        "first_id": "sample-id-123",
+        "last_id": "sample-id-123",
         "has_more": true
+      }
+    },
+    "404": {},
+    "default": {
+      "body": {
+        "error": {
+          "code": "sample-string",
+          "message": "sample-string"
+        }
       }
     }
   }

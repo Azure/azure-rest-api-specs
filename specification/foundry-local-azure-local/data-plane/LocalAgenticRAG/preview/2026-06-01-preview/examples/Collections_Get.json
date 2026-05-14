@@ -1,5 +1,5 @@
 {
-  "title": "Get Collection",
+  "title": "Collections Get",
   "operationId": "Collections_Get",
   "parameters": {
     "api-version": "2026-06-01-preview",
@@ -7,6 +7,23 @@
     "name": "sample-name"
   },
   "responses": {
-    "200": {}
+    "200": {
+      "body": {
+        "name": "sample-string",
+        "description": "sample-string",
+        "created_at": "2026-06-01T00:00:00Z",
+        "created_by": "sample-string",
+        "status": "active"
+      }
+    },
+    "404": {},
+    "default": {
+      "body": {
+        "error": {
+          "code": "sample-string",
+          "message": "sample-string"
+        }
+      }
+    }
   }
 }

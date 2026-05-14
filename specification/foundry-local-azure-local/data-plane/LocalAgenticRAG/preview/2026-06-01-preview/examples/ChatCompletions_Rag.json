@@ -1,29 +1,65 @@
 {
-  "title": "RAG Chat Completion",
+  "title": "ChatCompletions Rag",
   "operationId": "ChatCompletions_Rag",
   "parameters": {
     "api-version": "2026-06-01-preview",
     "endpoint": "https://myservice.example.com",
+    "x-user-role": "dev",
     "body": {
       "messages": [
-        {}
+        {
+          "role": "system",
+          "content": "sample-string"
+        }
       ],
       "temperature": 0.0,
       "top_p": 0.0,
       "isMarkdown": true,
       "data_sources": [
-        {}
+        {
+          "type": "milvus",
+          "parameters": {
+            "endpoint": "sample-string",
+            "index_name": "sample-string",
+            "text_strictness": 0,
+            "image_strictness": 0,
+            "top_n_documents": 0
+          }
+        }
       ]
     }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "sample-string",
+        "id": "sample-id-123",
         "created": 0,
         "choices": [
-          {}
+          {
+            "content_filter_results": {},
+            "message": {
+              "content": "sample-string",
+              "role": "assistant",
+              "context": {
+                "citations": "sample-string"
+              },
+              "search_type": "sample-string",
+              "top_n_documents": 0
+            }
+          }
         ]
+      }
+    },
+    "400": {},
+    "401": {},
+    "403": {},
+    "404": {},
+    "default": {
+      "body": {
+        "error": {
+          "code": "sample-string",
+          "message": "sample-string"
+        }
       }
     }
   }
