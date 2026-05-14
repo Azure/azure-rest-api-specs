@@ -555,6 +555,7 @@ These settings apply only when `--tag=package-2018-01-01-preview-only` is specif
 
 ```yaml $(tag) == 'package-2018-01-01-preview-only'
 input-file:
+  - preview/2018-01-01-preview/authorization-ElevateAccessCalls.json
   - preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
   - preview/2018-01-01-preview/authorization-RoleAssignmentsCalls.json
   - preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
