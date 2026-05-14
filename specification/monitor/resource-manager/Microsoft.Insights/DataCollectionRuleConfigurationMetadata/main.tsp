@@ -52,5 +52,5 @@ interface DataCollectionRuleConfigurationMetadata {
     /** Request body containing filter options and stream metadata flag. */
     @body
     body?: DataCollectionRuleConfigurationMetadataRequest,
-  ):ArmResponse<DataCollectionRuleConfigurationMetadataResponse> | ErrorResponse;
+  ): ArmResponse<DataCollectionRuleConfigurationMetadataResponse> | ErrorResponse;
 }

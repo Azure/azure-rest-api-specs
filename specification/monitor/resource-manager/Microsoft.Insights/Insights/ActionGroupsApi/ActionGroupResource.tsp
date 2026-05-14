@@ -29,7 +29,7 @@ alias ActionGroupResourcesOps = Azure.ResourceManager.Legacy.RoutedOperations<
   ActionGroupResourcesParentParameters,
   ActionGroupResourcesParameters,
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/actionGroups/{actionGroupName}/notificationStatus/{notificationId}",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Insights/actionGroups/{actionGroupName}/notificationStatus/{notificationId}",
   }
 >;
 
