@@ -37,6 +37,71 @@ These settings apply only when `--tag=package-2025-11-preview` is specified on t
 ```yaml $(tag) == 'package-2025-11-preview'
 input-file:
 - preview/2025-11-15-preview/EventGrid.json
+suppressions:
+  - code: PathContainsResourceType
+    reason: This is false positive error because the resourceType is already defined in the path as an enum of domains and topics. This same style we used previously in other routes and it allows us to extend this route in the future with other resource types once we add support without the need for adding additional routes and operation Ids. Also, same style was used in previous preview API versions as well.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections"]
+  - code: PathContainsResourceType
+    reason: This is false positive error because the resourceType is already defined in the path as an enum of domains and topics. This same style we used previously in other routes and it allows us to extend this route in the future with other resource types once we add support without the need for adding additional routes and operation Ids. Also, same style was used in previous preview API versions as well.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections/{privateEndpointConnectionName}"]
+  - code: PathContainsResourceType
+    reason: This is false positive error because the resourceType is already defined in the path as an enum of domains and topics. This same style we used previously in other routes and it allows us to extend this route in the future with other resource types once we add support without the need for adding additional routes and operation Ids. Also, same style was used in previous preview API versions as well.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateLinkResources/{privateLinkResourceName}"]
+  - code: PathContainsResourceType
+    reason: This is false positive error because the resourceType is already defined in the path as an enum of domains and topics. This same style we used previously in other routes and it allows us to extend this route in the future with other resource types once we add support without the need for adding additional routes and operation Ids. Also, same style was used in previous preview API versions as well.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}"]
+  - code: PathContainsResourceType
+    reason: This is false positive error because the resourceType is already defined in the path as an enum of domains and topics. This same style we used previously in other routes and it allows us to extend this route in the future with other resource types once we add support without the need for adding additional routes and operation Ids. Also, same style was used in previous preview API versions as well.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations"]
+  - code: PathContainsResourceType
+    reason: This is false positive error because the resourceType is already defined in the path as an enum of domains and topics. This same style we used previously in other routes and it allows us to extend this route in the future with other resource types once we add support without the need for adding additional routes and operation Ids. Also, same style was used in previous preview API versions as well.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateLinkResources"]
+  - code: PatchResponseCodes
+    reason: The response code 201 is already present in previous preview version and can't be changed.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerDestinations/{partnerDestinationName}"].patch
+  - code: DeleteResponseCodes
+    reason: This is a false positive as the response code 200 is already part of previous preview version and can't be changed.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerDestinations/{partnerDestinationName}"].delete
+  - code: GuidUsage
+    reason: This is false positive as all the flagged properties are already part of previous preview version and cannot be changed.
+    from: EventGrid.json
+    where: $.definitions["Partner"].properties.partnerRegistrationImmutableId.format
+  - code: GuidUsage
+    reason: This is false positive as all the flagged properties are already part of previous preview version and cannot be changed.
+    from: EventGrid.json
+    where: $.definitions["PartnerRegistrationProperties"].properties.partnerRegistrationImmutableId.format
+  - code: GuidUsage
+    reason: This is false positive as all the flagged properties are already part of previous preview version and cannot be changed.
+    from: EventGrid.json
+    where: $.definitions["PartnerTopicProperties"].properties.partnerRegistrationImmutableId.format
+  - code: GuidUsage
+    reason: This is false positive as all the flagged properties are already part of previous preview version and cannot be changed.
+    from: EventGrid.json
+    where: $.definitions["VerifiedPartnerProperties"].properties.partnerRegistrationImmutableId.format
+  - code: GuidUsage
+    reason: This is false positive as all the flagged properties are already part of previous preview version and cannot be changed.
+    from: EventGrid.json
+    where: $.definitions["PartnerDestinationProperties"].properties.partnerRegistrationImmutableId.format
+  - code: GuidUsage
+    reason: This is false positive as all the flagged properties are already part of previous preview version and cannot be changed.
+    from: EventGrid.json
+    where: $.definitions["FederatedIdentityCredentialInfo"].properties.federatedClientId.format
+  - code: ProvisioningStateMustBeReadOnly
+    reason: This is a false positive. The property is from an existing preview version and cannot be made readOnly.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}"].get.responses.200.schema
+  - code: ProvisioningStateMustBeReadOnly
+    reason: This is a false positive. The property is from an existing preview version and cannot be made readOnly.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}/reconcile"].post.responses.200.schema
 ```
 
 ### Tag: package-2025-07-preview
