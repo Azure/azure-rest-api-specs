@@ -106,7 +106,7 @@ interface ContributorsOperationGroup {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @autoRoute
   @get
-  @action("providers/Microsoft.BillingBenefits/applicableContributors")
+  @action("providers/microsoft.BillingBenefits/applicableContributors")
   @list
   listFromApplicableMacc(
     ...ApiVersionParameter,
@@ -229,7 +229,7 @@ interface ConditionalCreditContributorsOperationGroup {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @autoRoute
   @get
-  @action("providers/Microsoft.BillingBenefits/applicableContributors")
+  @action("providers/microsoft.BillingBenefits/applicableContributors")
   @list
   listFromApplicableConditionalCredit(
     ...ApiVersionParameter,
