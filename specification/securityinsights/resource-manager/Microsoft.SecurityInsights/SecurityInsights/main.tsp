@@ -82,6 +82,7 @@ enum Versions {
 interface Operations
   extends Azure.ResourceManager.Legacy.Operations<OperationsList, CloudError> {}
 
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "Lists all operations available Azure Security Insights Resource Provider."
 );

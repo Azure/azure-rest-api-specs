@@ -15,6 +15,7 @@ import "./models.tsp";
 import "./VirtualMachineScaleSet.tsp";
 import "./RollingUpgradeStatusInfo.tsp";
 import "./VirtualMachineScaleSetExtension.tsp";
+import "./VirtualMachineScaleSetLifecycleHookEvent.tsp";
 import "./VirtualMachineScaleSetVM.tsp";
 import "./VirtualMachineScaleSetVMExtension.tsp";
 import "./VirtualMachine.tsp";
@@ -63,6 +64,12 @@ enum Versions {
    */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2025_04_01: "2025-04-01",
+
+  /**
+   * The 2025-11-01 API version.
+   */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+  v2025_11_01: "2025-11-01",
 }
 
 interface Operations extends Azure.ResourceManager.Legacy.ComputeOperations {}

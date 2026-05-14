@@ -1,0 +1,53 @@
+{
+  "title": "OccurrenceExtension_ListOccurrenceByVms_MaximumSet",
+  "operationId": "OccurrenceExtension_ListOccurrenceByVms",
+  "parameters": {
+    "api-version": "2026-04-15-preview",
+    "resourceUri": "subscriptions/732116BD-AF31-4E74-9283-B387C44B4A44/resourceGroups/rgcomputeschedule/providers/Microsoft.Compute/virtualMachines/myVm"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "resourceId": "/subscriptions/1d04e8f1-ee04-4056-b0b2-718f5bb45b04/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachines/myVm",
+              "notificationSettings": [
+                {
+                  "destination": "admin@contoso.com",
+                  "type": "Email",
+                  "language": "en-us",
+                  "disabled": true
+                }
+              ],
+              "scheduledTime": "2026-03-12T02:39:41.64Z",
+              "provisioningState": "Succeeded",
+              "errorDetails": {
+                "code": "ResourceNotFound",
+                "message": "The specified resource was not found.",
+                "target": "virtualMachines/myVm",
+                "details": [],
+                "innererror": {
+                  "code": "ResourceNotFoundError"
+                }
+              },
+              "scheduledActionId": "/subscriptions/83C27AB3-A7B9-498B-B165-D9440661474F/resourceGroups/myRg/providers/Microsoft.ComputeSchedule/scheduledActions/myScheduledAction"
+            },
+            "id": "/subscriptions/83C27AB3-A7B9-498B-B165-D9440661474F/resourceGroups/myRg/providers/Microsoft.ComputeSchedule/scheduledActions/myScheduledAction",
+            "name": "myScheduledAction",
+            "type": "Microsoft.ComputeSchedule/scheduledActions",
+            "systemData": {
+              "createdBy": "user@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2026-03-12T02:39:41.641Z",
+              "lastModifiedBy": "user@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2026-03-12T02:39:41.641Z"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/732116BD-AF31-4E74-9283-B387C44B4A44/providers/Microsoft.ComputeSchedule/scheduledActions?api-version=2026-04-15-preview&$skiptoken=abc123"
+      }
+    }
+  }
+}

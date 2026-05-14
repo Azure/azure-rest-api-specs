@@ -12,21 +12,26 @@ namespace Microsoft.RecoveryServices;
 /**
  * Private Endpoint Connection Response Properties
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy TrackedResourceWithOptionalLocation for back compatibility"
 @parentResource(VaultResource)
 model PrivateEndpointConnectionResource
-  is TrackedResourceWithOptionalLocation<PrivateEndpointConnection> {
+  is ProxyResource<PrivateEndpointConnection> {
   ...ResourceNameParameter<
     Resource = PrivateEndpointConnectionResource,
     KeyName = "privateEndpointConnectionName",
     SegmentName = "privateEndpointConnections",
     NamePattern = ""
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Optional location"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: Azure.Core.azureLocation;
 
   /**
    * Optional ETag.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Backward compatibility for optional ETag"
   eTag?: string;
 }
 
@@ -52,7 +57,10 @@ interface PrivateEndpointConnectionResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     PrivateEndpointConnectionResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 }
 
@@ -95,12 +103,15 @@ interface PrivateEndpointOperationStatuses {
   >;
 }
 
-@@doc(PrivateEndpointConnectionResource.name,
+@@doc(
+  PrivateEndpointConnectionResource.name,
   "The name of the private endpoint connection."
 );
-@@doc(PrivateEndpointConnectionResource.properties,
+@@doc(
+  PrivateEndpointConnectionResource.properties,
   "PrivateEndpointConnectionResource properties"
 );
-@@doc(PrivateEndpointConnectionResources.put::parameters.resource,
+@@doc(
+  PrivateEndpointConnectionResources.put::parameters.resource,
   "Request body for operation"
 );

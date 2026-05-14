@@ -53,7 +53,8 @@ interface RecommendationRuleOps
       }
     > {}
 
-@armResourceOperations
+@tag("Recommendations")
+@armResourceOperations(#{ omitTags: true })
 interface RecommendationRules {
   /**
    * Description for Get a recommendation rule for an app.
@@ -162,6 +163,7 @@ interface Recommendations {
 }
 
 @@doc(RecommendationRule.name, "Name of the recommendation.");
-@@doc(RecommendationRule.properties,
+@@doc(
+  RecommendationRule.properties,
   "RecommendationRule resource specific properties"
 );
