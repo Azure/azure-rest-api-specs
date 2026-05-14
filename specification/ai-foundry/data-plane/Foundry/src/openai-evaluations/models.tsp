@@ -523,19 +523,6 @@ model ConversationGenPreviewItemGenerationParams extends ItemGenerationParams {
   sampling_params?: ModelSamplingParams;
 }
 
-// ── Agent Reference types (for trace source filtering) ────────────────────────
-
-/** Specifies the type of agent reference used for filtering traces. */
-union EvalAgentReferenceType {
-  string,
-
-  /** Reference by agent ID (for 3P / Assistants agents). */
-  agentId: "agent_id",
-
-  /** Reference by agent name and version (for Foundry agents). */
-  agentReference: "agent_reference",
-}
-
 // ── Trace Source types ────────────────────────────────────────────────────────
 
 /** Specifies the type of trace source used to select traces for evaluation. */
@@ -577,6 +564,17 @@ model ConversationIdTraceSource extends TraceSource {
   conversation_ids: string[];
 }
 
+/** Specifies the type of filter strategy used to select traces for evaluation. */
+union FilterStrategyType {
+  string,
+
+  /** Selects traces by random sampling. */
+  random_sampling: "random_sampling",
+
+  /** Selects interesting traces for evaluation */
+  smart_filtering: "smart_filtering",
+}
+
 /** A trace source that selects traces by agent reference with time-based filtering. */
 model AgentFilterTraceSource extends TraceSource {
   /** The type of trace source, always `agent_filter`. */
@@ -595,7 +593,7 @@ model AgentFilterTraceSource extends TraceSource {
   max_traces?: int32;
 
   /** If true, enables smart filtering on the agent traces. */
-  smart_filter?: boolean;
+  filter_strategy?: FilterStrategyType;
 }
 
 // ── Trace Data Source ─────────────────────────────────────────────────────────
