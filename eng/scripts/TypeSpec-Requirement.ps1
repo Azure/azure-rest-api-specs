@@ -190,7 +190,7 @@ else {
       }
     }
     elseif ($responseStatus -eq 404) {
-      LogInfo "  Branch 'main' does not contain path '$serviceApiVersion', so API version is new and must use TypeSpec"
+      LogInfo "  Branch 'main' does not contain path '$apiVersion', so API version is new and must use TypeSpec"
       $pathsWithErrors += $file
     }
     else {
