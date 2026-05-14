@@ -11,19 +11,19 @@ union ProfessionalServiceResourceStatus {
   string,
 
   /** Subscription has not started */
-  "NotStarted",
+  NotStarted: "NotStarted",
 
   /** Pending fulfillment start */
-  "PendingFulfillmentStart",
+  PendingFulfillmentStart: "PendingFulfillmentStart",
 
   /** The subscription is active and in use */
-  "Subscribed",
+  Subscribed: "Subscribed",
 
   /** The subscription has been cancelled */
-  "Unsubscribed",
+  Unsubscribed: "Unsubscribed",
 
   /** The subscription is suspended */
-  "Suspended",
+  Suspended: "Suspended",
 }
 
 /** The reason for the subscription status. */
@@ -31,13 +31,13 @@ union SubscriptionStatusReason {
   string,
 
   /** No specific reason */
-  "None",
+  None: "None",
 
   /** Suspended internally */
-  "SuspendedInternal",
+  SuspendedInternal: "SuspendedInternal",
 
   /** Azure subscription deleted */
-  "AzureSubscriptionDeletion",
+  AzureSubscriptionDeletion: "AzureSubscriptionDeletion",
 }
 
 /** The deletion source. */
@@ -56,8 +56,8 @@ union PreflightStatus {
   string,
 
   /** Preflight validation succeeded. */
-  "Succeeded",
+  Succeeded: "Succeeded",
 
   /** Preflight validation failed. */
-  "Failed",
+  Failed: "Failed",
 }

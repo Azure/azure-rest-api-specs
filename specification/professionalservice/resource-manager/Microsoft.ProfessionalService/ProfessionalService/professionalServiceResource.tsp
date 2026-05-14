@@ -72,6 +72,7 @@ model ProfessionalServiceResourceProperties {
 
   /** The purchaser email. Server-derived from authenticated identity. */
   @visibility(Lifecycle.Read)
+  @secret
   purchaserEmail?: string;
 
   /** The private offer id. */
