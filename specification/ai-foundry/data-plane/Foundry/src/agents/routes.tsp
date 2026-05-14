@@ -451,6 +451,32 @@ interface Agents {
     NoContentResponse
   >;
 
+  
+  /**
+   * Stops a session.
+   * Returns 204 No Content when the stop succeeds.
+   * Returns a failed session resource when the stop attempt fails.
+   */
+  @post
+  @route("/agents/{agent_name}/endpoint/sessions/{session_id}/stop")
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
+    }
+  )
+  stopSession is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.agent_endpoint_v1_preview,
+    {
+      /** The name of the agent. */
+      @path agent_name: string;
+
+      /** The session identifier. */
+      @path session_id: string;
+    },
+    NoContentResponse | AgentSessionStopFailedResponse
+  >;
+
   /**
    * Returns a list of sessions for the specified agent.
    */
