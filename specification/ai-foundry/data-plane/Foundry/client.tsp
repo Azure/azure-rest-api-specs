@@ -200,6 +200,12 @@ using Azure.AI.Projects;
 @@clientName(EvaluationSuiteGenerationJobs.cancel, "cancelGenerationSuiteJob", "javascript");
 @@clientName(EvaluationSuiteGenerationJobs.delete, "deleteGenerationSuiteJob", "javascript");
 
+@@clientName(EvaluationSuites.createEvaluationSuiteVersion, "create_evaluation_suite_version");
+@@clientName(EvaluationSuites.run, "run_evaluation_suite");
+
+@@clientName(EvaluationSuites.createEvaluationSuiteVersion, "createEvaluationSuiteVersion", "javascript");
+@@clientName(EvaluationSuites.run, "runEvaluationSuite", "javascript");
+
 // EvaluatorVersion datetime fields are typed as string in the spec but carry ISO-8601 timestamps
 @@alternateType(EvaluatorVersion.created_at, utcDateTime, "python");
 @@alternateType(EvaluatorVersion.modified_at, utcDateTime, "python");

@@ -56,6 +56,10 @@ interface Evaluators {}
 @@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.cancel, Evaluators);
 @@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.delete, Evaluators);
 
+// Evaluation suites operations
+@@clientLocation(Azure.AI.Projects.EvaluationSuites.createEvaluationSuiteVersion, Evaluators);
+@@clientLocation(Azure.AI.Projects.EvaluationSuites.run, Evaluators);
+
 interface Schedules {}
 @@clientLocation(Azure.AI.Projects.Schedules.delete, Schedules);
 @@clientLocation(Azure.AI.Projects.Schedules.get, Schedules);

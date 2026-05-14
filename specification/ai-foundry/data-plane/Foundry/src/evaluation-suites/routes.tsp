@@ -5,7 +5,6 @@ import "./models.tsp";
 namespace Azure.AI.Projects;
 using Http;
 using OpenAPI;
-using Rest;
 using TypeSpec.Versioning;
 
 alias ListEvaluationSuiteVersionsParameters = {};
