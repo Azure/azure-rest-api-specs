@@ -15,6 +15,56 @@ import { fileExists, getSuppressions, normalizePath } from "./utils.js";
 // Context argument may add new properties or override checkingAllSpecs
 export let context: Record<string, unknown> = { checkingAllSpecs: false };
 
+export interface RunRulesResult {
+  success: boolean;
+  suppressed: string[];
+  executed: string[];
+  failed: string[];
+}
+
+/**
+ * Runs the given rules against a folder, handling per-rule suppressions
+ * for rules that opt in via `suppressable: true`.
+ */
+export async function runRules(
+  rules: Rule[],
+  folder: string,
+  suppressions: Suppression[],
+): Promise<RunRulesResult> {
+  const result: RunRulesResult = { success: true, suppressed: [], executed: [], failed: [] };
+
+  for (const rule of rules) {
+    console.log("\nExecuting rule: " + rule.name);
+
+    if (rule.suppressable) {
+      const ruleSuppressions = suppressions.filter(
+        (s) => s.rules?.includes(rule.name) && (!s.subRules || s.subRules.length === 0),
+      );
+      if (ruleSuppressions.length > 0) {
+        console.log(`  Suppressed: ${ruleSuppressions[0].reason}`);
+        result.suppressed.push(rule.name);
+        continue;
+      }
+    }
+
+    const ruleResult = await rule.execute(folder);
+    result.executed.push(rule.name);
+    if (ruleResult.stdOutput) console.log(ruleResult.stdOutput);
+    if (!ruleResult.success) {
+      result.success = false;
+      result.failed.push(rule.name);
+      console.log("Rule " + rule.name + " failed");
+      if (ruleResult.errorOutput) console.log(ruleResult.errorOutput);
+
+      // Stop executing more rules, since the results are more likely to be confusing than helpful
+      // Can add property like "RuleResult.ContinueOnError" if some rules want to continue
+      break;
+    }
+  }
+
+  return result;
+}
+
 export async function main() {
   const args = process.argv.slice(2);
   const options = {
@@ -67,35 +117,10 @@ export async function main() {
     new FormatRule(),
     new SdkTspConfigValidationRule(),
   ];
-  let success = true;
-  for (let i = 0; i < rules.length; i++) {
-    const rule = rules[i];
-    console.log("\nExecuting rule: " + rule.name);
 
-    if (rule.suppressable) {
-      const ruleSuppressions = suppressions.filter(
-        (s) => s.rules?.includes(rule.name) && (!s.subRules || s.subRules.length === 0),
-      );
-      if (ruleSuppressions.length > 0) {
-        console.log(`  Suppressed: ${ruleSuppressions[0].reason}`);
-        continue;
-      }
-    }
+  const result = await runRules(rules, absolutePath, suppressions);
 
-    const result = await rule.execute(absolutePath);
-    if (result.stdOutput) console.log(result.stdOutput);
-    if (!result.success) {
-      success = false;
-      console.log("Rule " + rule.name + " failed");
-      if (result.errorOutput) console.log(result.errorOutput);
-
-      // Stop executing more rules, since the results are more likely to be confusing than helpful
-      // Can add property like "RuleResult.ContinueOnError" if some rules want to continue
-      break;
-    }
-  }
-
-  if (!success) {
+  if (!result.success) {
     process.exitCode = 1;
   }
 }
