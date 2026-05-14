@@ -8460,6 +8460,18 @@
         "description": "List all memory stores.",
         "parameters": [
           {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MemoryStores=V1Preview"
+              ]
+            }
+          },
+          {
             "name": "limit",
             "in": "query",
             "required": false,
@@ -8500,18 +8512,6 @@
               "type": "string"
             },
             "explode": false
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "MemoryStores=V1Preview"
-              ]
-            }
           },
           {
             "name": "api-version",
@@ -8588,15 +8588,6 @@
         "description": "Update a memory store.",
         "parameters": [
           {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the memory store to update.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "Foundry-Features",
             "in": "header",
             "required": true,
@@ -8606,6 +8597,15 @@
               "enum": [
                 "MemoryStores=V1Preview"
               ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the memory store to update.",
+            "schema": {
+              "type": "string"
             }
           },
           {
@@ -8679,15 +8679,6 @@
         "description": "Retrieve a memory store.",
         "parameters": [
           {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the memory store to retrieve.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "Foundry-Features",
             "in": "header",
             "required": true,
@@ -8697,6 +8688,15 @@
               "enum": [
                 "MemoryStores=V1Preview"
               ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the memory store to retrieve.",
+            "schema": {
+              "type": "string"
             }
           },
           {
@@ -8746,15 +8746,6 @@
         "description": "Delete a memory store.",
         "parameters": [
           {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the memory store to delete.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "Foundry-Features",
             "in": "header",
             "required": true,
@@ -8764,6 +8755,15 @@
               "enum": [
                 "MemoryStores=V1Preview"
               ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the memory store to delete.",
+            "schema": {
+              "type": "string"
             }
           },
           {
@@ -8809,11 +8809,509 @@
         }
       }
     },
+    "/memory_stores/{name}/memories": {
+      "post": {
+        "operationId": "createMemory",
+        "description": "Create a memory item in a memory store.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MemoryStores=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the memory store.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MemoryItem"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Memory Stores"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "scope": {
+                    "type": "string",
+                    "description": "The namespace that logically groups and isolates memories, such as a user ID."
+                  },
+                  "content": {
+                    "type": "string",
+                    "description": "The content of the memory."
+                  },
+                  "kind": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/MemoryItemKind"
+                      }
+                    ],
+                    "description": "The kind of the memory item."
+                  }
+                },
+                "required": [
+                  "scope",
+                  "content",
+                  "kind"
+                ]
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "MemoryStores=V1Preview"
+          ]
+        }
+      },
+      "get": {
+        "operationId": "listMemories",
+        "description": "List all memory items in a memory store.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MemoryStores=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the memory store.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
+            "schema": {
+              "$ref": "#/components/schemas/PageOrder"
+            },
+            "explode": false
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "has_more"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/MemoryItem"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "first_id": {
+                      "type": "string",
+                      "description": "The first ID represented in this list."
+                    },
+                    "last_id": {
+                      "type": "string",
+                      "description": "The last ID represented in this list."
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    }
+                  },
+                  "description": "The response data for a requested list of items."
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Memory Stores"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "MemoryStores=V1Preview"
+          ]
+        }
+      }
+    },
+    "/memory_stores/{name}/memories/{memory_id}": {
+      "post": {
+        "operationId": "updateMemory",
+        "description": "Update a memory item in a memory store.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MemoryStores=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the memory store.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "memory_id",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the memory item to update.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MemoryItem"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Memory Stores"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "content": {
+                    "type": "string",
+                    "description": "The updated content of the memory."
+                  }
+                },
+                "required": [
+                  "content"
+                ]
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "MemoryStores=V1Preview"
+          ]
+        }
+      },
+      "get": {
+        "operationId": "getMemory",
+        "description": "Retrieve a memory item from a memory store.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MemoryStores=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the memory store.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "memory_id",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the memory item to retrieve.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MemoryItem"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Memory Stores"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "MemoryStores=V1Preview"
+          ]
+        }
+      },
+      "delete": {
+        "operationId": "deleteMemory",
+        "description": "Delete a memory item from a memory store.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MemoryStores=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the memory store.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "memory_id",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the memory item to delete.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteMemoryResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Memory Stores"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "MemoryStores=V1Preview"
+          ]
+        }
+      }
+    },
     "/memory_stores/{name}/updates/{update_id}": {
       "get": {
         "operationId": "getUpdateResult",
         "description": "Get memory store update result.",
         "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MemoryStores=V1Preview"
+              ]
+            }
+          },
           {
             "name": "name",
             "in": "path",
@@ -8830,18 +9328,6 @@
             "description": "The ID of the memory update operation.",
             "schema": {
               "type": "string"
-            }
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "MemoryStores=V1Preview"
-              ]
             }
           },
           {
@@ -8893,15 +9379,6 @@
         "description": "Delete all memories associated with a specific scope from a memory store.",
         "parameters": [
           {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the memory store.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "Foundry-Features",
             "in": "header",
             "required": true,
@@ -8911,6 +9388,15 @@
               "enum": [
                 "MemoryStores=V1Preview"
               ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the memory store.",
+            "schema": {
+              "type": "string"
             }
           },
           {
@@ -8981,15 +9467,6 @@
         "description": "Search for relevant memories from a memory store based on conversation context.",
         "parameters": [
           {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the memory store to search.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "Foundry-Features",
             "in": "header",
             "required": true,
@@ -8999,6 +9476,15 @@
               "enum": [
                 "MemoryStores=V1Preview"
               ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the memory store to search.",
+            "schema": {
+              "type": "string"
             }
           },
           {
@@ -9088,15 +9574,6 @@
         "description": "Update memory store with conversation memories.",
         "parameters": [
           {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the memory store to update.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "Foundry-Features",
             "in": "header",
             "required": true,
@@ -9106,6 +9583,15 @@
               "enum": [
                 "MemoryStores=V1Preview"
               ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the memory store to update.",
+            "schema": {
+              "type": "string"
             }
           },
           {
@@ -20487,6 +20973,42 @@
           }
         },
         "description": "A deleted evaluation run Object."
+      },
+      "DeleteMemoryResponse": {
+        "type": "object",
+        "required": [
+          "object",
+          "name",
+          "memory_id",
+          "deleted"
+        ],
+        "properties": {
+          "object": {
+            "type": "string",
+            "enum": [
+              "memory.deleted"
+            ],
+            "description": "The object type. Always 'memory.deleted'."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the memory store."
+          },
+          "memory_id": {
+            "type": "string",
+            "description": "The unique ID of the deleted memory item."
+          },
+          "deleted": {
+            "type": "boolean",
+            "description": "Whether the memory item was successfully deleted."
+          }
+        },
+        "description": "Response for deleting a memory item from a memory store.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "MemoryStores=V1Preview"
+          ]
+        }
       },
       "DeleteMemoryStoreResponse": {
         "type": "object",
