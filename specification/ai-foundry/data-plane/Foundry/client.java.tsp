@@ -240,4 +240,5 @@ model TimeZoneType {}
 
 @@clientDoc(Skills.downloadSkill,
   "Downloads a skill package as a ZIP archive containing {@code SKILL.md}. Returns the original uploaded archive for skills created via {@code createSkillFromPackage}; materializes a ZIP from stored instructions for skills created via {@code createSkill}.",
-  DocumentationMode.replace);
+  DocumentationMode.replace
+);

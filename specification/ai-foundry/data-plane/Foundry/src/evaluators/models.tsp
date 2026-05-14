@@ -212,29 +212,25 @@ model EvaluatorGenerationJobSource {
 
 @doc("Prompt source for evaluator generation jobs — inline text provided by the user.")
 @removed(Versions.v1)
-model PromptEvaluatorGenerationJobSource
-  extends EvaluatorGenerationJobSource {
+model PromptEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
   ...PromptJobSource;
 }
 
 @doc("Agent source for evaluator generation jobs — references an agent to fetch instructions and metadata from.")
 @removed(Versions.v1)
-model AgentEvaluatorGenerationJobSource
-  extends EvaluatorGenerationJobSource {
+model AgentEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
   ...AgentJobSource;
 }
 
 @doc("Traces source for evaluator generation jobs — conversation traces from Application Insights.")
 @removed(Versions.v1)
-model TracesEvaluatorGenerationJobSource
-  extends EvaluatorGenerationJobSource {
+model TracesEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
   ...TracesJobSource;
 }
 
 @doc("Dataset source for evaluator generation jobs — reference to a dataset.")
 @removed(Versions.v1)
-model DatasetEvaluatorGenerationJobSource
-  extends EvaluatorGenerationJobSource {
+model DatasetEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
   ...DatasetJobSource;
 }
 

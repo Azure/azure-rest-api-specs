@@ -126,8 +126,8 @@ interface Evaluators {
     Azure.Core.Foundations.ResourceOkResponse<EvaluatorVersion>
   >;
 
-  @removed(Versions.v1)
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @removed(Versions.v1)
   @doc("Start a new or get an existing pending upload of an evaluator for a specific version.")
   @post
   @route("/evaluators/{name}/versions/{version}/startPendingUpload")
@@ -153,9 +153,9 @@ interface Evaluators {
     PendingUploadResponse
   >;
 
-  @removed(Versions.v1)
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @removed(Versions.v1)
   @doc("Get the SAS credential to access the storage account associated with an Evaluator version.")
   @post
   @route("/evaluators/{name}/versions/{version}/credentials")
@@ -187,9 +187,7 @@ interface Evaluators {
 // ============================================================================
 
 const EvaluatorGenerationJobsRequiredPreviews = #{
-  conditional_previews: #[
-    FoundryFeaturesOptInKeys.evaluations_v1_preview
-  ],
+  conditional_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview],
 };
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
@@ -254,7 +252,5 @@ interface EvaluatorGenerationJobs {
    */
   @route("evaluator_generation_jobs/{jobId}")
   @extension("x-ms-foundry-meta", EvaluatorGenerationJobsRequiredPreviews)
-  delete is deleteJobPreview<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview
-  >;
+  delete is deleteJobPreview<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
 }
