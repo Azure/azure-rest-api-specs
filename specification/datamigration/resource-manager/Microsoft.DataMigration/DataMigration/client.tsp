@@ -4,59 +4,71 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Microsoft.DataMigration;
 
-@@clientName(Microsoft.DataMigration,
+@@clientName(
+  Microsoft.DataMigration,
   "DataMigrationManagementClient",
   "javascript,python"
 );
 
-@@clientName(ConnectToTargetSqlSqlDbSyncTaskProperties,
+@@clientName(
+  ConnectToTargetSqlSqlDbSyncTaskProperties,
   "ConnectToTargetSQLDbSyncTaskProperties",
   "go"
 );
-@@clientName(ConnectToTargetSqlSqlDbSyncTaskInput,
+@@clientName(
+  ConnectToTargetSqlSqlDbSyncTaskInput,
   "ConnectToTargetSQLDbSyncTaskInput",
   "go"
 );
-@@clientName(DatabaseMigrationCosmosDbMongos.getForScope,
+@@clientName(
+  DatabaseMigrationCosmosDbMongos.getForScope,
   "listForScope",
   "javascript"
 );
-@@clientName(DatabaseMigrationsMongoToCosmosDbvCoreMongo.getForScope,
+@@clientName(
+  DatabaseMigrationsMongoToCosmosDbvCoreMongo.getForScope,
   "listForScope",
   "javascript"
 );
 
-@@clientName(ConnectToTargetSqlSqlDbSyncTaskInput,
+@@clientName(
+  ConnectToTargetSqlSqlDbSyncTaskInput,
   "ConnectToTargetSqlDbSyncTaskInput",
   "python"
 );
-@@clientName(ConnectToTargetSqlSqlDbSyncTaskProperties,
+@@clientName(
+  ConnectToTargetSqlSqlDbSyncTaskProperties,
   "ConnectToTargetSqlDbSyncTaskProperties",
   "python"
 );
 
-@@clientName(ConnectToTargetSqlSqlDbSyncTaskInput,
+@@clientName(
+  ConnectToTargetSqlSqlDbSyncTaskInput,
   "ConnectToTargetSqlDbSyncTaskInput",
   "java"
 );
-@@clientName(ConnectToTargetSqlSqlDbSyncTaskProperties,
+@@clientName(
+  ConnectToTargetSqlSqlDbSyncTaskProperties,
   "ConnectToTargetSqlDbSyncTaskProperties",
   "java"
 );
 @@clientName(OracleOCIDriverInfo, "OracleOciDriverInfo", "java");
-@@clientName(CheckOCIDriverTaskProperties,
+@@clientName(
+  CheckOCIDriverTaskProperties,
   "CheckOciDriverTaskProperties",
   "java"
 );
 @@clientName(CheckOCIDriverTaskInput, "CheckOciDriverTaskInput", "java");
 @@clientName(CheckOCIDriverTaskOutput, "CheckOciDriverTaskOutput", "java");
-@@clientName(UploadOCIDriverTaskProperties,
+@@clientName(
+  UploadOCIDriverTaskProperties,
   "UploadOciDriverTaskProperties",
   "java"
 );
 @@clientName(UploadOCIDriverTaskInput, "UploadOciDriverTaskInput", "java");
 @@clientName(UploadOCIDriverTaskOutput, "UploadOciDriverTaskOutput", "java");
-@@clientName(InstallOCIDriverTaskProperties,
+@@clientName(
+  InstallOCIDriverTaskProperties,
   "InstallOciDriverTaskProperties",
   "java"
 );
@@ -71,7 +83,8 @@ using Microsoft.DataMigration;
 @@clientName(SqlBackupSetInfo.firstLSN, "firstLsn", "java");
 @@clientName(SqlBackupSetInfo.lastLSN, "lastLsn", "java");
 @@clientName(ResourceSkuCosts.meterID, "meterId", "java");
-@@clientName(MigrateSyncCompleteCommandInput.commitTimeStamp,
+@@clientName(
+  MigrateSyncCompleteCommandInput.commitTimeStamp,
   "commitTimestamp",
   "java"
 );

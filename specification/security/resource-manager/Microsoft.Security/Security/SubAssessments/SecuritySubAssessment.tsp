@@ -96,9 +96,11 @@ interface SecuritySubAssessments {
   >;
 }
 
-@@doc(SecuritySubAssessment.name,
+@@doc(
+  SecuritySubAssessment.name,
   "The Sub-Assessment Key - Unique key for the sub-assessment type"
 );
-@@doc(SecuritySubAssessment.properties,
+@@doc(
+  SecuritySubAssessment.properties,
   "Describes properties of an sub-assessment."
 );

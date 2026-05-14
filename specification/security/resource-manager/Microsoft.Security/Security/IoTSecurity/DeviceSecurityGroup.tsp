@@ -88,10 +88,12 @@ interface DeviceSecurityGroups {
   >;
 }
 
-@@doc(DeviceSecurityGroup.name,
+@@doc(
+  DeviceSecurityGroup.name,
   "The name of the device security group. Note that the name of the device security group is case insensitive."
 );
 @@doc(DeviceSecurityGroup.properties, "Device Security group data");
-@@doc(DeviceSecurityGroups.createOrUpdate::parameters.resource,
+@@doc(
+  DeviceSecurityGroups.createOrUpdate::parameters.resource,
   "Security group object."
 );

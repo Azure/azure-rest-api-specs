@@ -7,19 +7,19 @@ using Microsoft.Network;
 
 @@clientName(Endpoints.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Endpoints.update::parameters.properties, "parameters");
-@@clientName(Endpoints.updateV2::parameters.properties, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Endpoint.properties);
 
 @@clientName(Profiles.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Profiles.update::parameters.properties, "parameters");
-@@clientName(Profiles.updateV2::parameters.properties, "parameters");
 
-@@clientName(ProfilesOperationGroup.checkTrafficManagerRelativeDnsNameAvailability::parameters.body,
+@@clientName(
+  ProfilesOperationGroup.checkTrafficManagerRelativeDnsNameAvailability::parameters.body,
   "parameters"
 );
-@@clientName(ProfilesOperationGroup.checkTrafficManagerNameAvailabilityV2::parameters.body,
+@@clientName(
+  ProfilesOperationGroup.checkTrafficManagerNameAvailabilityV2::parameters.body,
   "parameters"
 );
 
@@ -27,12 +27,14 @@ using Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Profile.properties);
 
-@@clientLocation(TrafficManagerGeographicHierarchies.getDefault,
+@@clientLocation(
+  TrafficManagerGeographicHierarchies.getDefault,
   "GeographicHierarchies"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TrafficManagerGeographicHierarchy.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  TrafficManagerGeographicHierarchy.properties
 );
 
 @@clientLocation(HeatMapModels.get, "HeatMap");
@@ -42,7 +44,8 @@ using Microsoft.Network;
 
 @@clientLocation(UserMetricsModels.get, "TrafficManagerUserMetricsKeys");
 
-@@clientLocation(UserMetricsModels.createOrUpdate,
+@@clientLocation(
+  UserMetricsModels.createOrUpdate,
   "TrafficManagerUserMetricsKeys"
 );
 
@@ -50,16 +53,20 @@ using Microsoft.Network;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(UserMetricsModel.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  UserMetricsModel.properties
 );
 
-@@clientLocation(ProfilesOperationGroup.checkTrafficManagerRelativeDnsNameAvailability,
+@@clientLocation(
+  ProfilesOperationGroup.checkTrafficManagerRelativeDnsNameAvailability,
   Profiles
 );
-@@clientName(ProfilesOperationGroup.checkTrafficManagerRelativeDnsNameAvailability,
+@@clientName(
+  ProfilesOperationGroup.checkTrafficManagerRelativeDnsNameAvailability,
   "CheckTrafficManagerRelativeDnsNameAvailability"
 );
-@@clientLocation(ProfilesOperationGroup.checkTrafficManagerNameAvailabilityV2,
+@@clientLocation(
+  ProfilesOperationGroup.checkTrafficManagerNameAvailabilityV2,
   Profiles
 );
 @@clientLocation(HeatMapModels.get, "HeatMap");

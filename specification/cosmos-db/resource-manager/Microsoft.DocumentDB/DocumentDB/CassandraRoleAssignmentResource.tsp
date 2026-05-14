@@ -38,8 +38,10 @@ interface CassandraRoleAssignmentResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createUpdateCassandraRoleAssignment is ArmResourceCreateOrReplaceAsync<
     CassandraRoleAssignmentResource,
-    Response = ArmResourceUpdatedResponse<CassandraRoleAssignmentResource> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = CassandraRoleAssignmentResource> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<CassandraRoleAssignmentResource>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = CassandraRoleAssignmentResource> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -48,7 +50,10 @@ interface CassandraRoleAssignmentResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deleteCassandraRoleAssignment is ArmResourceDeleteWithoutOkAsync<
     CassandraRoleAssignmentResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -60,12 +65,15 @@ interface CassandraRoleAssignmentResources {
   >;
 }
 
-@@doc(CassandraRoleAssignmentResource.name,
+@@doc(
+  CassandraRoleAssignmentResource.name,
   "The GUID for the Role Assignment."
 );
-@@doc(CassandraRoleAssignmentResource.properties,
+@@doc(
+  CassandraRoleAssignmentResource.properties,
   "Properties to create and update an Azure Cosmos DB Cassandra Role Assignment."
 );
-@@doc(CassandraRoleAssignmentResources.createUpdateCassandraRoleAssignment::parameters.resource,
+@@doc(
+  CassandraRoleAssignmentResources.createUpdateCassandraRoleAssignment::parameters.resource,
   "The properties required to create or update a Role Assignment."
 );

@@ -13,14 +13,17 @@ namespace Azure.AI.Projects {
   // This is a temporary correction to the OpenAI source spec pending an upstream fix via overlay/origin.
   @@changePropertyType(OpenAI.MCPToolCall.error, Record<unknown>);
 
-  @@doc(OpenAI.CreateResponse.`model`,
+  @@doc(
+    OpenAI.CreateResponse.`model`,
     "The model deployment to use for the creation of this response."
   );
-  @@doc(OpenAI.Response.`model`,
+  @@doc(
+    OpenAI.Response.`model`,
     "The model deployment to use for the creation of this response."
   );
 
-  @@copyProperties(OpenAI.CreateResponse,
+  @@copyProperties(
+    OpenAI.CreateResponse,
     {
       /**
        * (Deprecated) Use agent_reference instead.
@@ -51,7 +54,8 @@ namespace Azure.AI.Projects {
     structured_inputs?: Record<unknown>;
   }
 
-  @@copyProperties(OpenAI.Response,
+  @@copyProperties(
+    OpenAI.Response,
     {
       /**
        * (Deprecated) Use agent_reference instead.
@@ -81,7 +85,8 @@ namespace Azure.AI.Projects {
   }
 
   @@withoutOmittedProperties(OpenAI.CodeInterpreterTool, "container");
-  @@copyProperties(OpenAI.CodeInterpreterTool,
+  @@copyProperties(
+    OpenAI.CodeInterpreterTool,
     {
       /** The code interpreter container. Can be a container ID or an object that
        * specifies uploaded file IDs to make available to your code, along with an
@@ -94,7 +99,8 @@ namespace Azure.AI.Projects {
   );
 
   // See GitHub issue https://github.com/microsoft/openai-openapi-pr/issues/644
-  @@summary(OpenAI.AutoCodeInterpreterToolParam,
+  @@summary(
+    OpenAI.AutoCodeInterpreterToolParam,
     "Automatic Code Interpreter Tool Parameters"
   );
 
@@ -176,7 +182,8 @@ namespace Azure.AI.Projects {
   @@copyVariants(OpenAI.OutputItemType, _AgentItemType);
 
   /* created_by conflicts with the property in OpenAI.FunctionShellCall, ApplyPatchToolCall, and ApplyPatchToolCallOutput, to work around it we use a union type here */
-  @@copyProperties(OpenAI.OutputItem,
+  @@copyProperties(
+    OpenAI.OutputItem,
     {
       /** The information about the creator of the item */
       #suppress "@azure-tools/typespec-autorest/union-unsupported" "Temporary suppression to allow union type."

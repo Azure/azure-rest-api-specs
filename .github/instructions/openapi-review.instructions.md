@@ -56,6 +56,33 @@ Flag every violation clearly with the file path, the **exact line number** (e.g.
   - Changing required/optional status of parameters
   - Renaming a model definition without adding `x-ms-client-name` to preserve the SDK-facing name
 
+## 2A. TypeSpec Required for New API Versions (TSP-REQUIRED-V1)
+
+**Policy.** TypeSpec with the Azure TypeSpec libraries (`@azure-tools/typespec-azure-core`, `@azure-tools/typespec-azure-resource-manager`, and related packages) is the **required** authoring format for **all new API versions**, both control plane and data plane. This rule applies whenever a PR introduces a new API version directory under `specification/**/{resource-manager,data-plane}/**/{stable|preview}/<version>/` that does not exist on the base branch.
+
+**Allowed.** In-place edits to handwritten OpenAPI inside an **existing** API version directory remain permitted. Do **not** flag PRs that only modify files in directories that already exist on the base branch.
+
+**Detection signals.** A new API version directory is compliant if **any** of the following is true:
+
+- A sibling TypeSpec project (a directory containing `main.tsp` and `tspconfig.yaml`) is present in the same service folder and emits OpenAPI to the new version directory.
+- The new swagger file contains the `x-typespec-generated` extension at the top level (added by the `@azure-tools/typespec-autorest` emitter).
+- The PR also adds or updates `.tsp` source files under the same service folder.
+
+If **none** of these signals are present, the new API version is being authored in handwritten OpenAPI — flag as **Blocking** with rule ID `TSP-REQUIRED-V1`.
+
+**Severity.** Blocking.
+
+**Fix.** Author the new API version in TypeSpec using the Azure TypeSpec libraries. See [Getting Started with TypeSpec specifications](../../documentation/Getting-started-with-TypeSpec-specifications.md) and the [TypeSpec dev process](../../documentation/typespec-rest-api-dev-process.md) for end-to-end guidance. Generated OpenAPI from `tsp compile .` is then checked in alongside the TypeSpec source.
+
+**Enforcement.** A deterministic CI check is in development to block such PRs automatically (tracked in [PR #42823](https://github.com/Azure/azure-rest-api-specs/pull/42823)). Until that check ships, this agent rule surfaces the same policy at review time.
+
+**False-positive avoidance.**
+
+- Do **not** flag updates to files inside pre-existing API version directories, even when those files are handwritten OpenAPI.
+- Do **not** flag PRs that add a new API version whose swagger is generated from sibling TypeSpec source.
+- If unsure whether a swagger file is TypeSpec-generated, look for the `x-typespec-generated` marker in the JSON before flagging.
+- Do **not** flag PRs that only add or modify example files (`examples/*.json`), `readme.md`, `tspconfig.yaml`, or `.tsp` files — the rule applies only when a new API version directory contains handwritten OpenAPI swagger.
+
 ## 3. Security Definitions
 
 **Reference: [Azure Guidelines — HTTP Headers](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#http-query-parameters-and-header-values)**
@@ -230,6 +257,12 @@ Flag every violation clearly with the file path, the **exact line number** (e.g.
 - Mark LRO operations with `"x-ms-long-running-operation": true`.
 - For POST LROs with a response schema, specify `"x-ms-long-running-operation-options"` with `"final-state-via": "location"` (or `"azure-async-operation"` only if the status monitor itself contains the result). For PUT, PATCH, and DELETE following standard ARM patterns, do **NOT** specify `final-state-via` -- the default SDK behavior is already correct. See [`.github/skills/azure-api-review/references/lro-final-state-via.md`](../skills/azure-api-review/references/lro-final-state-via.md) for the full decision table.
 - LRO operations **MUST** return `202-Accepted` (for POST/DELETE) or `201-Created` / `200-OK` (for PUT) with an `Operation-Location` or `Azure-AsyncOperation` header.
+
+> **Note:** This section describes general LRO patterns. For ARM control-plane,
+> see `armapi-review.instructions.md` sections 5-6 for precise response code
+> requirements per verb (sync vs async response codes differ). For data-plane,
+> see section 21 -- use `Operation-Location`, not `Azure-AsyncOperation`.
+
 - Status monitor responses **MUST** include `id`, `status` (one of `NotStarted`, `Running`, `Succeeded`, `Failed`, `Canceled`), and `error` (on failure).
 - LRO responses **SHOULD** include a `retry-after` header when the operation is not complete.
 
@@ -374,11 +407,11 @@ For data plane (non-ARM) swagger files, additionally verify:
 - An `api-version` query parameter is present and required on all operations.
 - The `host` and `basePath` are correctly defined for the data plane endpoint pattern.
 - Security definitions are appropriate for the service (may use API keys, bearer tokens, or other schemes instead of ARM OAuth2).
-- Data-plane LROs **MUST** use `Operation-Location` header for polling, **not** `Azure-AsyncOperation` (which is ARM-specific). 
+- Data-plane LROs **MUST** use `Operation-Location` header for polling, **not** `Azure-AsyncOperation` (which is ARM-specific).
 - Action operations follow the `:<action>` URL suffix pattern where applicable.
 - The spec includes `"produces": ["application/json"]` and `"consumes": ["application/json"]` (or appropriate media types).
 
-## 22. Example File Validation (EX-*)
+## 22. Example File Validation (EX-\*)
 
 Example files referenced by `x-ms-examples` are a critical part of the spec — they serve as documentation, SDK test cases, and validation inputs. Validate every example file in the PR against the following rules.
 
@@ -536,6 +569,7 @@ When reviewing, systematically check:
 
 - ✅ Valid JSON, correct directory placement, and proper file organization
 - ✅ API version follows `YYYY-MM-DD` format (only `-preview` suffix allowed); no version in URL path
+- ✅ New API versions are authored in TypeSpec (TSP-REQUIRED-V1) — handwritten swagger in new version directories is **Blocking**; updates to handwritten swagger in pre-existing API versions remain permitted
 - ✅ No breaking changes vs. previous version of the same API
 - ✅ Security definitions present and applied to all operations
 - ✅ All property names in camelCase, model names in PascalCase
@@ -560,7 +594,7 @@ When reviewing, systematically check:
 - ✅ Plural property names are arrays; scalar properties use singular names
 - ✅ Properties with `format` also specify `type`; ARM resource IDs use `format: arm-id`; URLs use `format: uri`
 - ✅ Every string property inspected for secret indicators (SEC-SECRET-DETECT): flag if property name, description, or examples suggest a secret but `x-ms-secret: true` is missing
-- ✅ Example files validated: titles match operations, resource IDs are valid and consistent, no `null` nextLink, LRO headers correct, timestamps in RFC3339, no malformed values, values are realistic and descriptive -- not filler like `aaaa` or `string`, no orphaned example files, adequate coverage for PUT/PATCH/LRO (EX-*)
+- ✅ Example files validated: titles match operations, resource IDs are valid and consistent, no `null` nextLink, LRO headers correct, timestamps in RFC3339, no malformed values, values are realistic and descriptive -- not filler like `aaaa` or `string`, no orphaned example files, adequate coverage for PUT/PATCH/LRO (EX-\*)
 - ✅ No `$ref` with sibling keywords (SCHEMA-REF-SIBLINGS)
 - ✅ Single common-types version per file; no outdated v2 in new specs (SCHEMA-COMMON-TYPES-VERSION)
 - ✅ String properties with datetime/UUID descriptions have matching `format` (SCHEMA-FORMAT-DETECT)
@@ -575,6 +609,7 @@ When reviewing, systematically check:
 Flag all violations clearly with JSON path references, the specific rule, and a concrete fix suggestion.
 
 ### Output Formatting
+
 - ✅ Every finding includes an **exact line number** (`line 42`, not "around line 42" or "near end of file")
 - ✅ If the spec is fully compliant, state that no blocking issues were found -- do not fabricate findings
 - ✅ Do NOT elevate process recommendations (e.g., "use common-types $ref") to blocking violations. A spec that defines ARM-standard shapes correctly inline is compliant.
