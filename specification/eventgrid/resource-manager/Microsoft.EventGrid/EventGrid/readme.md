@@ -27,7 +27,42 @@ These are the global settings for the Azure EventGrid API.
 ```yaml
 openapi-type: arm
 
-tag: package-2025-07-preview
+tag: package-2025-11-preview
+```
+
+### Tag: package-2025-11-preview
+
+These settings apply only when `--tag=package-2025-11-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-11-preview'
+input-file:
+- preview/2025-11-15-preview/EventGrid.json
+
+suppressions:
+  - code: PatchBodyParametersSchema
+    reason: This is false positive as this property is already part of previous preview version and cannot be changed.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerNamespaces/{partnerNamespaceName}/channels/{channelName}"].patch.parameters[4].schema.properties.properties
+
+  - code: PatchBodyParametersSchema
+    reason: This is false positive as this property is already part of previous preview version and cannot be changed.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}"].patch.parameters[3].schema.properties.sku
+
+  - code: PatchBodyParametersSchema
+    reason: This is false positive as this property will not be present by default. Only when used, this property will be required.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}"].patch.parameters[3].schema.properties.properties
+
+  - code: PatchBodyParametersSchema
+    reason: This is false positive as this property is already part of previous preview version and cannot be changed.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}"].patch.parameters[3].schema.properties.sku
+
+  - code: PatchBodyParametersSchema
+    reason: This is false positive as this property is already part of previous preview version and cannot be changed.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}"].patch.parameters[3].schema.properties.properties
 ```
 
 ### Tag: package-2025-07-preview
