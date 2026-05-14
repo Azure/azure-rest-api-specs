@@ -10,16 +10,20 @@ using Common;
 
 @@clientLocation(AlertOperationGroup.getResourceGroupLevel, Alerts);
 @@clientLocation(AlertOperationGroup.listResourceGroupLevelByRegion, Alerts);
-@@clientLocation(AlertOperationGroup.updateResourceGroupLevelStateToResolve,
+@@clientLocation(
+  AlertOperationGroup.updateResourceGroupLevelStateToResolve,
   Alerts
 );
-@@clientLocation(AlertOperationGroup.updateResourceGroupLevelStateToDismiss,
+@@clientLocation(
+  AlertOperationGroup.updateResourceGroupLevelStateToDismiss,
   Alerts
 );
-@@clientLocation(AlertOperationGroup.updateResourceGroupLevelStateToActivate,
+@@clientLocation(
+  AlertOperationGroup.updateResourceGroupLevelStateToActivate,
   Alerts
 );
-@@clientLocation(AlertOperationGroup.updateResourceGroupLevelStateToInProgress,
+@@clientLocation(
+  AlertOperationGroup.updateResourceGroupLevelStateToInProgress,
   Alerts
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

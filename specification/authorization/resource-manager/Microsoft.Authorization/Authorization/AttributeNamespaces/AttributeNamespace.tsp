@@ -60,6 +60,7 @@ interface AttributeNamespaces {
 }
 
 @@doc(AttributeNamespace.name, "The name of the attribute namespace to get.");
-@@doc(AttributeNamespaces.create::parameters.body,
+@@doc(
+  AttributeNamespaces.create::parameters.body,
   "Parameters for creating the attribute namespace."
 );

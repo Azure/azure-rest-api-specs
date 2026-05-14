@@ -25,5 +25,8 @@ interface GuestConfigurationAssignmentsOperationGroup {
     ...ApiVersionParameter,
     ...ResourceGroupParameter,
     ...SubscriptionIdParameter,
-  ): ArmResponse<GuestConfigurationAssignmentList> | NoContentResponse | ErrorResponse;
+  ):
+    | ArmResponse<GuestConfigurationAssignmentList>
+    | NoContentResponse
+    | ErrorResponse;
 }

@@ -3,68 +3,80 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Microsoft.ManagedIdentity;
 
-@@clientName(Microsoft.ManagedIdentity,
+@@clientName(
+  Microsoft.ManagedIdentity,
   "ManagedServiceIdentityClient",
   "javascript, java"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Identity.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Identity.properties,
   "java"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SystemAssignedIdentity.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  SystemAssignedIdentity.properties,
   "java"
 );
 
 @@clientName(Identity, "UserAssignedIdentity", "csharp");
-@@clientName(FederatedIdentityCredentialProperties.issuer,
+@@clientName(
+  FederatedIdentityCredentialProperties.issuer,
   "IssuerUri",
   "csharp"
 );
-@@clientName(ClaimsMatchingExpression,
+@@clientName(
+  ClaimsMatchingExpression,
   "FederatedIdentityClaimsMatchingExpression",
   "csharp"
 );
-@@alternateType(SystemAssignedIdentityProperties.tenantId,
+@@alternateType(
+  SystemAssignedIdentityProperties.tenantId,
   Azure.Core.uuid,
   "csharp"
 );
-@@alternateType(UserAssignedIdentityProperties.tenantId,
+@@alternateType(
+  UserAssignedIdentityProperties.tenantId,
   Azure.Core.uuid,
   "csharp"
 );
 
 // Fix: SystemAssignedIdentityData must inherit TrackedResourceData (matches pre-migration baseline)
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(SystemAssignedIdentity,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  SystemAssignedIdentity,
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
 
 // Fix: UserAssignedIdentityPatch must inherit TrackedResourceData (matches pre-migration baseline)
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(IdentityUpdate,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  IdentityUpdate,
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
 
 // Fix: Flatten SystemAssignedIdentity.properties for C# (back-compatible.tsp only scopes to "autorest")
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SystemAssignedIdentity.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  SystemAssignedIdentity.properties,
   "csharp"
 );
 
 // Fix: Flatten Identity (UserAssignedIdentity) .properties for C# (back-compatible.tsp only scopes to "autorest")
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Identity.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Identity.properties,
   "csharp"
 );
 
 // Fix: clientSecretUrl must produce Uri type (pre-migration baseline had System.Uri ClientSecretUri)
-@@alternateType(SystemAssignedIdentityProperties.clientSecretUrl,
+@@alternateType(
+  SystemAssignedIdentityProperties.clientSecretUrl,
   url,
   "csharp"
 );

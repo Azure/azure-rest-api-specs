@@ -184,8 +184,10 @@ interface EndpointDeployment {
   @summary("Create or update endpoint deployment resource with the specified parameters")
   createOrUpdate is EndpointDeploymentOps.CreateOrUpdateAsync<
     EndpointDeploymentResourcePropertiesBasicResource,
-    Response = ArmResourceUpdatedResponse<EndpointDeploymentResourcePropertiesBasicResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = EndpointDeploymentResourcePropertiesBasicResource>> &
-      Azure.Core.Foundations.RetryAfterHeader)
+    Response =
+      | ArmResourceUpdatedResponse<EndpointDeploymentResourcePropertiesBasicResource>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = EndpointDeploymentResourcePropertiesBasicResource>> &
+          Azure.Core.Foundations.RetryAfterHeader)
   >;
 
   /**
@@ -209,13 +211,16 @@ interface EndpointDeployment {
   >;
 }
 
-@@doc(EndpointDeploymentResourcePropertiesBasicResource.name,
+@@doc(
+  EndpointDeploymentResourcePropertiesBasicResource.name,
   "Name of the deployment resource"
 );
 @@doc(EndpointDeploymentResourcePropertiesBasicResource.properties, "");
-@@doc(EndpointDeploymentResourcePropertiesBasicResources.createOrUpdateDeployment::parameters.resource,
+@@doc(
+  EndpointDeploymentResourcePropertiesBasicResources.createOrUpdateDeployment::parameters.resource,
   "deployment object"
 );
-@@doc(EndpointDeployment.createOrUpdate::parameters.resource,
+@@doc(
+  EndpointDeployment.createOrUpdate::parameters.resource,
   "deployment object"
 );

@@ -51,7 +51,10 @@ interface ApplicationSecurityGroups {
   @tag("ApplicationSecurityGroups")
   delete is ArmResourceDeleteWithoutOkAsync<
     ApplicationSecurityGroup,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -71,15 +74,19 @@ interface ApplicationSecurityGroups {
   >;
 }
 
-@@doc(ApplicationSecurityGroup.name,
+@@doc(
+  ApplicationSecurityGroup.name,
   "The name of the application security group."
 );
-@@doc(ApplicationSecurityGroup.properties,
+@@doc(
+  ApplicationSecurityGroup.properties,
   "Properties of the application security group."
 );
-@@doc(ApplicationSecurityGroups.createOrUpdate::parameters.resource,
+@@doc(
+  ApplicationSecurityGroups.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update ApplicationSecurityGroup operation."
 );
-@@doc(ApplicationSecurityGroups.updateTags::parameters.properties,
+@@doc(
+  ApplicationSecurityGroups.updateTags::parameters.properties,
   "Parameters supplied to update application security group tags."
 );

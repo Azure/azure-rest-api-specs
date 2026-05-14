@@ -8,12 +8,14 @@ using Microsoft.ComputeLimit;
 
 @@clientName(GuestSubscription, "ComputeLimitGuestSubscription", "csharp");
 @@clientName(SharedLimit, "ComputeLimitSharedLimit", "csharp");
-@@clientName(Azure.ResourceManager.ResourceProvisioningState,
+@@clientName(
+  Azure.ResourceManager.ResourceProvisioningState,
   "ComputeLimitResourceProvisioningState",
   "csharp"
 );
 @@clientName(LimitName, "ComputeLimitLimitName", "csharp");
-@@clientName(SharedLimitProperties,
+@@clientName(
+  SharedLimitProperties,
   "ComputeLimitSharedLimitProperties",
   "csharp"
 );

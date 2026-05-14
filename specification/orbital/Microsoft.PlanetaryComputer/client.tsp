@@ -44,7 +44,8 @@ namespace Customizations;
 // types are excluded until the pygen fix is released.
 
 // Address naming convention violations for C# SDK
-@@clientName(TilerMosaicSearchRegistrationResponse,
+@@clientName(
+  TilerMosaicSearchRegistrationResponse,
   "TilerMosaicSearchRegistrationResult",
   "csharp"
 );
