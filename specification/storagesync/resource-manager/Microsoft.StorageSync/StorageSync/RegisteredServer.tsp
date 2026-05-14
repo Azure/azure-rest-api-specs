@@ -54,24 +54,26 @@ interface RegisteredServers {
   create is Legacy.CreateOrReplaceAsync<
     RegisteredServer,
     RegisteredServerCreateParameters,
-    Response = (ArmResourceUpdatedResponse<RegisteredServer> & {
-      @header("x-ms-correlation-request-id")
-      @doc("correlation request id.")
-      xMsCorrelationRequestId?: string;
+    Response =
+      | (ArmResourceUpdatedResponse<RegisteredServer> & {
+          @header("x-ms-correlation-request-id")
+          @doc("correlation request id.")
+          xMsCorrelationRequestId?: string;
 
-      @header("x-ms-request-id")
-      @doc("request id.")
-      xMsRequestId?: string;
-    }) | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = RegisteredServer> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @header("x-ms-correlation-request-id")
-      @doc("correlation request id.")
-      xMsCorrelationRequestId?: string;
+          @header("x-ms-request-id")
+          @doc("request id.")
+          xMsRequestId?: string;
+        })
+      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = RegisteredServer> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @header("x-ms-correlation-request-id")
+          @doc("correlation request id.")
+          xMsCorrelationRequestId?: string;
 
-      @header("x-ms-request-id")
-      @doc("request id.")
-      xMsRequestId?: string;
-    }),
+          @header("x-ms-request-id")
+          @doc("request id.")
+          xMsRequestId?: string;
+        }),
     Error = StorageSyncError
   >;
 
@@ -83,24 +85,26 @@ interface RegisteredServers {
   update is ArmCustomPatchAsync<
     RegisteredServer,
     PatchModel = RegisteredServerUpdateParameters,
-    Response = (ArmResourceUpdatedResponse<RegisteredServer> & {
-      @header("x-ms-correlation-request-id")
-      @doc("correlation request id.")
-      xMsCorrelationRequestId?: string;
+    Response =
+      | (ArmResourceUpdatedResponse<RegisteredServer> & {
+          @header("x-ms-correlation-request-id")
+          @doc("correlation request id.")
+          xMsCorrelationRequestId?: string;
 
-      @header("x-ms-request-id")
-      @doc("request id.")
-      xMsRequestId?: string;
-    }) | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = RegisteredServer> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @header("x-ms-correlation-request-id")
-      @doc("correlation request id.")
-      xMsCorrelationRequestId?: string;
+          @header("x-ms-request-id")
+          @doc("request id.")
+          xMsRequestId?: string;
+        })
+      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = RegisteredServer> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @header("x-ms-correlation-request-id")
+          @doc("correlation request id.")
+          xMsCorrelationRequestId?: string;
 
-      @header("x-ms-request-id")
-      @doc("request id.")
-      xMsRequestId?: string;
-    })
+          @header("x-ms-request-id")
+          @doc("request id.")
+          xMsRequestId?: string;
+        })
   >;
 
   /**
@@ -109,23 +113,26 @@ interface RegisteredServers {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     RegisteredServer,
-    Response = (ArmDeletedResponse & {
-      @header("x-ms-correlation-request-id")
-      @doc("correlation request id.")
-      xMsCorrelationRequestId?: string;
+    Response =
+      | (ArmDeletedResponse & {
+          @header("x-ms-correlation-request-id")
+          @doc("correlation request id.")
+          xMsCorrelationRequestId?: string;
 
-      @header("x-ms-request-id")
-      @doc("request id.")
-      xMsRequestId?: string;
-    }) | (ArmDeleteAcceptedLroResponse & {
-      @header("x-ms-correlation-request-id")
-      @doc("correlation request id.")
-      xMsCorrelationRequestId?: string;
+          @header("x-ms-request-id")
+          @doc("request id.")
+          xMsRequestId?: string;
+        })
+      | (ArmDeleteAcceptedLroResponse & {
+          @header("x-ms-correlation-request-id")
+          @doc("correlation request id.")
+          xMsCorrelationRequestId?: string;
 
-      @header("x-ms-request-id")
-      @doc("request id.")
-      xMsRequestId?: string;
-    }) | ArmDeletedNoContentResponse,
+          @header("x-ms-request-id")
+          @doc("request id.")
+          xMsRequestId?: string;
+        })
+      | ArmDeletedNoContentResponse,
     Error = StorageSyncError
   >;
 
@@ -154,36 +161,41 @@ interface RegisteredServers {
   triggerRollover is ArmResourceActionSync<
     RegisteredServer,
     TriggerRolloverRequest,
-    Response = (OkResponse & {
-      @header("x-ms-correlation-request-id")
-      @doc("correlation request id.")
-      xMsCorrelationRequestId?: string;
+    Response =
+      | (OkResponse & {
+          @header("x-ms-correlation-request-id")
+          @doc("correlation request id.")
+          xMsCorrelationRequestId?: string;
 
-      @header("x-ms-request-id")
-      @doc("request id.")
-      xMsRequestId?: string;
-    }) | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @header("x-ms-correlation-request-id")
-      @doc("correlation request id.")
-      xMsCorrelationRequestId?: string;
+          @header("x-ms-request-id")
+          @doc("request id.")
+          xMsRequestId?: string;
+        })
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @header("x-ms-correlation-request-id")
+          @doc("correlation request id.")
+          xMsCorrelationRequestId?: string;
 
-      @header("x-ms-request-id")
-      @doc("request id.")
-      xMsRequestId?: string;
-    }),
+          @header("x-ms-request-id")
+          @doc("request id.")
+          xMsRequestId?: string;
+        }),
     Error = StorageSyncError
   >;
 }
 
 @@doc(RegisteredServer.name, "GUID identifying the on-premises server.");
 @@doc(RegisteredServer.properties, "RegisteredServer properties.");
-@@doc(RegisteredServers.create::parameters.resource,
+@@doc(
+  RegisteredServers.create::parameters.resource,
   "Body of Registered Server object."
 );
-@@doc(RegisteredServers.update::parameters.properties,
+@@doc(
+  RegisteredServers.update::parameters.properties,
   "Body of Registered Server object."
 );
-@@doc(RegisteredServers.triggerRollover::parameters.body,
+@@doc(
+  RegisteredServers.triggerRollover::parameters.body,
   "Body of Trigger Rollover request."
 );
