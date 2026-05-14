@@ -42,6 +42,7 @@ using Azure.ResourceManager;
 
 @@clientName(ValidateProbeInput.probeURL, "probeUrl", "java");
 
+@@access(Certificate, Access.public, "java");
 @@usage(
   Certificate,
 
@@ -49,6 +50,7 @@ using Azure.ResourceManager;
     | Azure.ClientGenerator.Core.Usage.output,
   "java"
 );
+@@access(CustomerCertificate, Access.public, "java");
 @@usage(
   CustomerCertificate,
 
@@ -56,6 +58,7 @@ using Azure.ResourceManager;
     | Azure.ClientGenerator.Core.Usage.output,
   "java"
 );
+@@access(ManagedCertificate, Access.public, "java");
 @@usage(
   ManagedCertificate,
 
@@ -63,6 +66,7 @@ using Azure.ResourceManager;
     | Azure.ClientGenerator.Core.Usage.output,
   "java"
 );
+@@access(AzureFirstPartyManagedCertificate, Access.public, "java");
 @@usage(
   AzureFirstPartyManagedCertificate,
 
