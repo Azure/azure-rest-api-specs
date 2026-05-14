@@ -23,11 +23,11 @@ interface MemoryStores {}
 @@clientLocation(Azure.AI.Projects.MemoryStores.updateMemories, MemoryStores);
 @@clientLocation(Azure.AI.Projects.MemoryStores.getUpdateResult, MemoryStores);
 @@clientLocation(Azure.AI.Projects.MemoryStores.deleteScope, MemoryStores);
-@@clientLocation(Azure.AI.Projects.MemoryStores.createMemoryItem, MemoryStores);
-@@clientLocation(Azure.AI.Projects.MemoryStores.updateMemoryItem, MemoryStores);
-@@clientLocation(Azure.AI.Projects.MemoryStores.getMemoryItem, MemoryStores);
-@@clientLocation(Azure.AI.Projects.MemoryStores.listMemoryItems, MemoryStores);
-@@clientLocation(Azure.AI.Projects.MemoryStores.deleteMemoryItem, MemoryStores);
+@@clientLocation(Azure.AI.Projects.MemoryStores.createMemory, MemoryStores);
+@@clientLocation(Azure.AI.Projects.MemoryStores.updateMemory, MemoryStores);
+@@clientLocation(Azure.AI.Projects.MemoryStores.getMemory, MemoryStores);
+@@clientLocation(Azure.AI.Projects.MemoryStores.listMemories, MemoryStores);
+@@clientLocation(Azure.AI.Projects.MemoryStores.deleteMemory, MemoryStores);
 
 interface Evaluators {}
 @@clientLocation(Azure.AI.Projects.Evaluators.listVersions, Evaluators);

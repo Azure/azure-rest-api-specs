@@ -14,7 +14,7 @@ union MemoryStoreObjectType {
   memoryStore: "memory_store",
   memoryStoreDeleted: "memory_store.deleted",
   memoryStoreScopeDeleted: "memory_store.scope.deleted",
-  memoryItemDeleted: "memory_item.deleted",
+  memoryDeleted: "memory.deleted",
 }
 
 @doc("A memory store that can store and retrieve user memories.")
@@ -285,8 +285,8 @@ model MemoryStoreDeleteScopeResponse {
 @doc("Response for deleting a memory item from a memory store.")
 @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 model DeleteMemoryResponse {
-  @doc("The object type. Always 'memory_item.deleted'.")
-  object: MemoryStoreObjectType.memoryItemDeleted;
+  @doc("The object type. Always 'memory.deleted'.")
+  object: MemoryStoreObjectType.memoryDeleted;
 
   @doc("The name of the memory store.")
   name: string;
