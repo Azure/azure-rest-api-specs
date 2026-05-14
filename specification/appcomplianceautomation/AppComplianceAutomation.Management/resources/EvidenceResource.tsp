@@ -99,17 +99,20 @@ interface Evidence {
   >;
 }
 
-@@doc(Evidence.createOrUpdate::parameters.resource,
+@@doc(
+  Evidence.createOrUpdate::parameters.resource,
   "Parameters for the create or update operation"
 );
-@@encodedName(Evidence.download::parameters.body,
+@@encodedName(
+  Evidence.download::parameters.body,
   "application/json",
   "parameters"
 );
 @@doc(Evidence.download::parameters.body, "Parameters for the query operation");
 
 #suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
-@@encodedName(Evidence.createOrUpdate::parameters.resource,
+@@encodedName(
+  Evidence.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"
 );

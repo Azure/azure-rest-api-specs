@@ -44,11 +44,14 @@ interface InstancePools {
   @tag("InstancePools")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     InstancePool,
-    Response = ArmResourceUpdatedResponse<InstancePool> | ArmResourceCreatedResponse<
-      InstancePool,
-      ArmLroLocationHeader<FinalResult = InstancePool> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<InstancePool>
+      | ArmResourceCreatedResponse<
+          InstancePool,
+          ArmLroLocationHeader<FinalResult = InstancePool> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -65,7 +68,10 @@ interface InstancePools {
   @tag("InstancePools")
   delete is ArmResourceDeleteWithoutOkAsync<
     InstancePool,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -123,9 +129,11 @@ interface InstancePools {
 
 @@doc(InstancePool.name, "The name of the instance pool to be retrieved.");
 @@doc(InstancePool.properties, "Resource properties.");
-@@doc(InstancePools.createOrUpdate::parameters.resource,
+@@doc(
+  InstancePools.createOrUpdate::parameters.resource,
   "The requested instance pool resource state."
 );
-@@doc(InstancePools.update::parameters.properties,
+@@doc(
+  InstancePools.update::parameters.properties,
   "The requested instance pool resource state."
 );

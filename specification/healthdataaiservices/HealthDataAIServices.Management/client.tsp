@@ -3,7 +3,8 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-@@clientName(Microsoft.HealthDataAIServices,
+@@clientName(
+  Microsoft.HealthDataAIServices,
   "HealthDataAIServicesMgmt",
   "python"
 );
@@ -12,25 +13,30 @@ using Azure.ClientGenerator.Core;
 namespace Microsoft.HealthDataAIServices {
   @@access(Operations.list, Access.internal, "csharp");
 
-  @@clientName(PrivateEndpointConnectionResource,
+  @@clientName(
+    PrivateEndpointConnectionResource,
     "HealthDataAIServicesPrivateEndpointConnectionResource",
     "csharp"
   );
-  @@clientName(PublicNetworkAccess,
+  @@clientName(
+    PublicNetworkAccess,
     "HealthDataAIServicesPublicNetworkAccess",
     "csharp"
   );
-  @@clientName(ProvisioningState,
+  @@clientName(
+    ProvisioningState,
     "HealthDataAIServicesProvisioningState",
     "csharp"
   );
-  @@clientName(PrivateLinkResource,
+  @@clientName(
+    PrivateLinkResource,
     "HealthDataAIServicesPrivateLinkResourceData",
     "csharp"
   );
   @@clientName(PrivateLinks.listByDeidService, "GetPrivateLinks", "csharp");
 
-  @@clientName(Versions.v2024_09_20,
+  @@clientName(
+    Versions.v2024_09_20,
     "$DO_NOT_NORMALIZE$V2024_09_20",
     "javascript"
   );
