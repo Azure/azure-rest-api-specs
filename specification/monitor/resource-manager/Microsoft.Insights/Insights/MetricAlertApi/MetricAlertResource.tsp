@@ -34,7 +34,7 @@ alias MetricAlertResourcesOps = Azure.ResourceManager.Legacy.RoutedOperations<
   MetricAlertResourcesParentParameters,
   MetricAlertResourcesParameters,
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/metricAlerts/{ruleName}/status/{statusName}",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Insights/metricAlerts/{ruleName}/status/{statusName}",
   }
 >;
 
