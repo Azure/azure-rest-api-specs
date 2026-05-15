@@ -26,6 +26,7 @@ import "./Maintenance.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./PrivateLinkResource.tsp";
 import "./routes.tsp";
+import "./ServerUpgradeConfiguration.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
