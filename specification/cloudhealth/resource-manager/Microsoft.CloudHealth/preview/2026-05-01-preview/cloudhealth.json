@@ -3018,10 +3018,8 @@
           "maximum": 1000
         },
         "continuationToken": {
-          "$ref": "#/definitions/secretString4096",
-          "format": "password",
-          "description": "Continuation token from a previous response to retrieve the next page of results. Must not be combined with startAt or endAt.",
-          "x-ms-secret": true
+          "$ref": "#/definitions/string4096",
+          "description": "Continuation token from a previous response to retrieve the next page of results. Must not be combined with startAt or endAt."
         }
       }
     },
@@ -3044,10 +3042,8 @@
           ]
         },
         "continuationToken": {
-          "$ref": "#/definitions/secretString4096",
-          "format": "password",
-          "description": "Continuation token to retrieve the next page of results. Null if there are no more results.",
-          "x-ms-secret": true
+          "$ref": "#/definitions/string4096",
+          "description": "Continuation token to retrieve the next page of results. Null if there are no more results."
         }
       },
       "required": [
@@ -3237,10 +3233,8 @@
           "maximum": 100
         },
         "continuationToken": {
-          "$ref": "#/definitions/secretString4096",
-          "format": "password",
-          "description": "Continuation token from a previous response to retrieve the next page of results.",
-          "x-ms-secret": true
+          "$ref": "#/definitions/string4096",
+          "description": "Continuation token from a previous response to retrieve the next page of results."
         }
       }
     },
@@ -3263,10 +3257,8 @@
           ]
         },
         "continuationToken": {
-          "$ref": "#/definitions/secretString4096",
-          "format": "password",
-          "description": "Continuation token to retrieve the next page of results. Null if there are no more results.",
-          "x-ms-secret": true
+          "$ref": "#/definitions/string4096",
+          "description": "Continuation token to retrieve the next page of results. Null if there are no more results."
         }
       },
       "required": [
@@ -4355,10 +4347,8 @@
           "maximum": 1000
         },
         "continuationToken": {
-          "$ref": "#/definitions/secretString4096",
-          "format": "password",
-          "description": "Continuation token from a previous response to retrieve the next page of results. Must not be combined with startAt or endAt.",
-          "x-ms-secret": true
+          "$ref": "#/definitions/string4096",
+          "description": "Continuation token from a previous response to retrieve the next page of results. Must not be combined with startAt or endAt."
         }
       },
       "required": [
@@ -4388,10 +4378,8 @@
           ]
         },
         "continuationToken": {
-          "$ref": "#/definitions/secretString4096",
-          "format": "password",
-          "description": "Continuation token to retrieve the next page of results. Null if there are no more results.",
-          "x-ms-secret": true
+          "$ref": "#/definitions/string4096",
+          "description": "Continuation token to retrieve the next page of results. Null if there are no more results."
         }
       },
       "required": [
@@ -4586,13 +4574,6 @@
       "type": "string",
       "description": "Type for entity resource name.",
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$"
-    },
-    "secretString4096": {
-      "type": "string",
-      "format": "password",
-      "description": "Secret string with max length validation of 4096 characters",
-      "maxLength": 4096,
-      "x-ms-secret": true
     },
     "signalDefinitionName": {
       "type": "string",

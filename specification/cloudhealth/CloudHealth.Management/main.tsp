@@ -45,11 +45,6 @@ alias proxyResourceNameRegex = "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$";
 @doc("String with max length validation of 4096 characters")
 scalar string4096 extends string;
 
-@maxLength(4096)
-@secret
-@doc("Secret string with max length validation of 4096 characters")
-scalar secretString4096 extends string;
-
 @maxLength(256)
 @doc("String with max length validation of 256 characters")
 scalar string256 extends string;
@@ -1272,9 +1267,8 @@ model EntityHistoryRequest {
   top?: int32;
 
   @added(Versions.v2026_05_01_preview)
-  @secret
   @doc("Continuation token from a previous response to retrieve the next page of results. Must not be combined with startAt or endAt.")
-  continuationToken?: secretString4096;
+  continuationToken?: string4096;
 }
 
 @added(Versions.v2026_01_01_preview)
@@ -1288,9 +1282,8 @@ model EntityHistoryResponse {
   history: HealthStateTransition[];
 
   @added(Versions.v2026_05_01_preview)
-  @secret
   @doc("Continuation token to retrieve the next page of results. Null if there are no more results.")
-  continuationToken?: secretString4096;
+  continuationToken?: string4096;
 }
 
 @added(Versions.v2026_01_01_preview)
@@ -1328,9 +1321,8 @@ model SignalHistoryRequest {
   top?: int32;
 
   @added(Versions.v2026_05_01_preview)
-  @secret
   @doc("Continuation token from a previous response to retrieve the next page of results. Must not be combined with startAt or endAt.")
-  continuationToken?: secretString4096;
+  continuationToken?: string4096;
 }
 
 @added(Versions.v2026_01_01_preview)
@@ -1347,9 +1339,8 @@ model SignalHistoryResponse {
   history: SignalHistoryDataPoint[];
 
   @added(Versions.v2026_05_01_preview)
-  @secret
   @doc("Continuation token to retrieve the next page of results. Null if there are no more results.")
-  continuationToken?: secretString4096;
+  continuationToken?: string4096;
 }
 
 @added(Versions.v2026_01_01_preview)
@@ -1426,9 +1417,8 @@ model GetDataAnnotationsRequest {
   @minValue(1)
   top?: int32 = 100;
 
-  @secret
   @doc("Continuation token from a previous response to retrieve the next page of results.")
-  continuationToken?: secretString4096;
+  continuationToken?: string4096;
 }
 
 @added(Versions.v2026_05_01_preview)
@@ -1441,9 +1431,8 @@ model GetDataAnnotationsResponse {
   @identifiers(#["annotationId"])
   annotations: DataAnnotation[];
 
-  @secret
   @doc("Continuation token to retrieve the next page of results. Null if there are no more results.")
-  continuationToken?: secretString4096;
+  continuationToken?: string4096;
 }
 
 @added(Versions.v2026_01_01_preview)
