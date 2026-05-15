@@ -1,0 +1,57 @@
+parameters:
+  "service-dir":
+    default: "sdk/cosmosdb"
+  "dependencies":
+    default: ""
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{version-status}/{version}/openapi.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    emit-lro-options: "all"
+    examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-python":
+    service-dir: "sdk/cosmos"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-cosmosdb"
+    namespace: "azure.mgmt.cosmosdb"
+    generate-test: true
+    generate-sample: true
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-cosmosdb"
+    compatibility-lro: true
+    head-as-boolean: true
+    package-details:
+      name: "@azure/arm-cosmosdb"
+    flavor: azure
+    experimental-extensible-enums: true
+  "@azure-tools/typespec-java":
+    service-dir: "sdk/cosmos"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-cosmos"
+    namespace: com.azure.resourcemanager.cosmos
+    flavor: azure
+    premium: true
+    client-side-validations: true
+    enable-sync-stack: false
+    use-object-for-unknown: true
+    float32-as-double: false
+    customization-class: customization/src/main/java/CosmosCustomization.java
+    rename-model:
+      DatabaseAccountGetPropertiesDatabaseAccountOfferType: DatabaseAccountOfferType
+  "@azure-tools/typespec-go":
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcosmos"
+    service-dir: "sdk/resourcemanager/cosmos"
+    emitter-output-dir: "{output-dir}/{service-dir}/armcosmos"
+    generate-fakes: true
+    inject-spans: true
+    single-client: false
+    flavor: azure
+    generate-samples: true
+    head-as-boolean: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

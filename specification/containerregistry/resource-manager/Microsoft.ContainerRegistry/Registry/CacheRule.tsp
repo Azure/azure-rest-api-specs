@@ -4,10 +4,10 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./CacheRule.models.tsp";
 
-using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
+using TypeSpec.Rest;
+using Versioning;
 
 namespace Microsoft.ContainerRegistry;
 /**
@@ -21,6 +21,13 @@ model CacheRule is Azure.ResourceManager.ProxyResource<CacheRuleProperties> {
     SegmentName = "cacheRules",
     NamePattern = "^[a-zA-Z0-9-]*$"
   >;
+
+  /**
+   * The identity of the cache rule.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Unable to use `added` decorator on spread property. Use `...ManagedServiceIdentityProperty` instead when feature has been GA'd."
+  @added(Versions.vLatestPreview)
+  identity?: IdentityProperties;
 }
 
 @armResourceOperations
@@ -42,11 +49,13 @@ interface CacheRules {
   update is ArmCustomPatchAsync<
     CacheRule,
     PatchModel = CacheRuleUpdateParameters,
-    Response = ArmResponse<CacheRule> | ArmResourceCreatedResponse<
-      CacheRule,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = CacheRule> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | ArmResponse<CacheRule>
+      | ArmResourceCreatedResponse<
+          CacheRule,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = CacheRule> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**
@@ -68,9 +77,11 @@ interface CacheRules {
 @@minLength(CacheRule.name, 5);
 @@doc(CacheRule.name, "The name of the cache rule.");
 @@doc(CacheRule.properties, "The properties of the cache rule.");
-@@doc(CacheRules.create::parameters.resource,
+@@doc(
+  CacheRules.create::parameters.resource,
   "The parameters for creating a cache rule."
 );
-@@doc(CacheRules.update::parameters.properties,
+@@doc(
+  CacheRules.update::parameters.properties,
   "The parameters for updating a cache rule."
 );

@@ -26,32 +26,36 @@ model OrganizationResource
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-interface OrganizationResourceAPIKeyOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+alias OrganizationAPIKeyOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
 
-        /**
-         * Organization resource name
-         */
-        @path @segment("organizations") organizationName: string,
-      },
-      {
-        /**
-         * Confluent API Key id
-         */
-        @path @segment("apiKeys") apiKeyId: string,
-      },
-      ResourceProviderDefaultErrorResponse
-    > {}
+    /**
+     * Organization resource name
+     */
+    @path
+    @segment("organizations")
+    @key
+    organizationName: string;
+  },
+  {
+    /**
+     * Confluent API Key id
+     */
+    @path
+    @segment("apiKeys")
+    apiKeyId: string;
+  },
+  ErrorType = ResourceProviderDefaultErrorResponse,
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}",
+  }
+>;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface OrganizationResourceAPIKeyActions {
   /**
    * Get API key details of a kafka or schema registry cluster
@@ -60,9 +64,10 @@ interface OrganizationResourceAPIKeyActions {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @operationId("Organization_GetClusterAPIKey")
-  getClusterAPIKey is OrganizationResourceAPIKeyOps.Read<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/apiKeys/{apiKeyId}")
+  getClusterAPIKey is OrganizationAPIKeyOps.ActionSync<
     OrganizationResource,
-    {},
+    void,
     ArmResponse<APIKeyRecord>
   >;
 
@@ -73,10 +78,10 @@ interface OrganizationResourceAPIKeyActions {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @delete
   @operationId("Organization_DeleteClusterAPIKey")
-  deleteClusterAPIKey is OrganizationResourceAPIKeyOps.DeleteSync<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/apiKeys/{apiKeyId}")
+  deleteClusterAPIKey is OrganizationAPIKeyOps.DeleteSync<
     OrganizationResource,
-    {},
-    OkResponse | NoContentResponse
+    Response = OkResponse | NoContentResponse
   >;
 }
 
@@ -185,7 +190,10 @@ interface OrganizationResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     OrganizationResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = ResourceProviderDefaultErrorResponse
   >;
 
@@ -329,39 +337,51 @@ interface OrganizationResources {
 
 @@doc(OrganizationResource.name, "Organization resource name");
 @@doc(OrganizationResource.properties, "Organization resource properties");
-@@doc(OrganizationResources.create::parameters.resource,
+@@doc(
+  OrganizationResources.create::parameters.resource,
   "Organization resource model"
 );
-@@doc(OrganizationResources.update::parameters.properties,
+@@doc(
+  OrganizationResources.update::parameters.properties,
   "Updated Organization resource"
 );
-@@doc(OrganizationResources.listRegions::parameters.body,
+@@doc(
+  OrganizationResources.listRegions::parameters.body,
   "List Access Request Model"
 );
-@@doc(OrganizationResources.listUsers::parameters.body,
+@@doc(
+  OrganizationResources.listUsers::parameters.body,
   "List Access Request Model"
 );
-@@doc(OrganizationResources.listServiceAccounts::parameters.body,
+@@doc(
+  OrganizationResources.listServiceAccounts::parameters.body,
   "List Access Request Model"
 );
-@@doc(OrganizationResources.listInvitations::parameters.body,
+@@doc(
+  OrganizationResources.listInvitations::parameters.body,
   "List Access Request Model"
 );
-@@doc(OrganizationResources.inviteUser::parameters.body,
+@@doc(
+  OrganizationResources.inviteUser::parameters.body,
   "Invite user account model"
 );
-@@doc(OrganizationResources.listEnvironments::parameters.body,
+@@doc(
+  OrganizationResources.listEnvironments::parameters.body,
   "List Access Request Model"
 );
-@@doc(OrganizationResources.listClusters::parameters.body,
+@@doc(
+  OrganizationResources.listClusters::parameters.body,
   "List Access Request Model"
 );
-@@doc(OrganizationResources.listRoleBindings::parameters.body,
+@@doc(
+  OrganizationResources.listRoleBindings::parameters.body,
   "List Access Request Model"
 );
-@@doc(OrganizationResources.createRoleBinding::parameters.body,
+@@doc(
+  OrganizationResources.createRoleBinding::parameters.body,
   "Create role binding Request Model"
 );
-@@doc(OrganizationResources.listRoleBindingNameList::parameters.body,
+@@doc(
+  OrganizationResources.listRoleBindingNameList::parameters.body,
   "List Access Request Model"
 );

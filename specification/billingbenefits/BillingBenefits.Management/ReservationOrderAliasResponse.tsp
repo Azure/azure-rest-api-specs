@@ -42,7 +42,6 @@ interface ReservationOrderAliasResponses {
   /**
    * Get a reservation order alias.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is ArmResourceRead<
     ReservationOrderAliasResponse,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
@@ -51,7 +50,6 @@ interface ReservationOrderAliasResponses {
   /**
    * Create a reservation order alias.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @armResourceCreateOrUpdate(ReservationOrderAliasResponse)
   create is Azure.ResourceManager.Foundations.ArmCreateOperation<
     ResourceInstanceParameters<
@@ -59,21 +57,26 @@ interface ReservationOrderAliasResponses {
       Azure.ResourceManager.Foundations.DefaultBaseParameters<ReservationOrderAliasResponse>
     >,
     ReservationOrderAliasRequest,
-    ReservationOrderAliasResponse | ArmResourceCreatedResponse<
-      ReservationOrderAliasResponse,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = ReservationOrderAliasResponse> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >,
+
+      | ReservationOrderAliasResponse
+      | ArmResourceCreatedResponse<
+          ReservationOrderAliasResponse,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = ReservationOrderAliasResponse> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >,
     ErrorResponse
   >;
 }
 
-@@doc(ReservationOrderAliasResponse.name,
+@@doc(
+  ReservationOrderAliasResponse.name,
   "Name of the reservation order alias"
 );
-@@doc(ReservationOrderAliasResponse.properties,
+@@doc(
+  ReservationOrderAliasResponse.properties,
   "Reservation order alias response properties"
 );
-@@doc(ReservationOrderAliasResponses.create::parameters.resource,
+@@doc(
+  ReservationOrderAliasResponses.create::parameters.resource,
   "Request body for creating a reservation order alias"
 );

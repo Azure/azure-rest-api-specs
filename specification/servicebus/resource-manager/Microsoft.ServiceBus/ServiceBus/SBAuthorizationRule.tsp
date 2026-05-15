@@ -14,7 +14,7 @@ namespace Microsoft.ServiceBus;
 /**
  * Description of a namespace authorization rule.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
 @parentResource(SBNamespace)
 model SBAuthorizationRule
   is Azure.ResourceManager.ProxyResource<SBAuthorizationRuleProperties> {
@@ -28,12 +28,12 @@ model SBAuthorizationRule
   /**
    * The geo-location where the resource lives
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
   @visibility(Lifecycle.Read)
   location?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
 @armResourceOperations
 interface SBAuthorizationRuleOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -57,20 +57,23 @@ interface SBAuthorizationRuleOps
          * The authorization rule name.
          */
         @path
+        @key
         @segment("AuthorizationRules")
         @minLength(1)
         @maxLength(50)
         authorizationRuleName: string,
-      }
+      },
+      ResourceName = "ServiceBusNamespaceAuthorizationRule"
     > {}
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
 @armResourceOperations
+@tag("Namespaces AuthorizationRule")
 interface SBAuthorizationRules {
   /**
    * Gets an authorization rule for a namespace by rule name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639392.aspx")
   getAuthorizationRule is SBAuthorizationRuleOps.Read<
     SBAuthorizationRule,
@@ -80,8 +83,8 @@ interface SBAuthorizationRules {
   /**
    * Creates or updates an authorization rule for a namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639410.aspx")
   createOrUpdateAuthorizationRule is SBAuthorizationRuleOps.CreateOrUpdateSync<
     SBAuthorizationRule,
@@ -92,7 +95,7 @@ interface SBAuthorizationRules {
   /**
    * Deletes a namespace authorization rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639417.aspx")
   deleteAuthorizationRule is SBAuthorizationRuleOps.DeleteSync<
     SBAuthorizationRule,
@@ -102,7 +105,7 @@ interface SBAuthorizationRules {
   /**
    * Gets the authorization rules for a namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639376.aspx")
   listAuthorizationRules is SBAuthorizationRuleOps.List<
     SBAuthorizationRule,
@@ -112,7 +115,7 @@ interface SBAuthorizationRules {
   /**
    * Gets the primary and secondary connection strings for the namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639398.aspx")
   listKeys is SBAuthorizationRuleOps.ActionSync<
     SBAuthorizationRule,
@@ -124,7 +127,7 @@ interface SBAuthorizationRules {
   /**
    * Regenerates the primary or secondary connection strings for the namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt718977.aspx")
   regenerateKeys is SBAuthorizationRuleOps.ActionSync<
     SBAuthorizationRule,
@@ -169,7 +172,8 @@ interface DisasterRecoveryConfigOps
         @minLength(1)
         @maxLength(50)
         authorizationRuleName: string,
-      }
+      },
+      ResourceName = "ServiceBusDisasterRecoveryAuthorizationRule"
     > {}
 
 @armResourceOperations
@@ -177,7 +181,7 @@ interface DisasterRecoveryConfigs {
   /**
    * Gets an authorization rule for a namespace by rule name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639392.aspx")
   getAuthorizationRule is DisasterRecoveryConfigOps.Read<
     SBAuthorizationRule,
@@ -187,7 +191,7 @@ interface DisasterRecoveryConfigs {
   /**
    * Gets the authorization rules for a namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639376.aspx")
   listAuthorizationRules is DisasterRecoveryConfigOps.List<
     SBAuthorizationRule,
@@ -197,7 +201,7 @@ interface DisasterRecoveryConfigs {
   /**
    * Gets the primary and secondary connection strings for the namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639398.aspx")
   listKeys is DisasterRecoveryConfigOps.ActionSync<
     SBAuthorizationRule,
@@ -241,7 +245,8 @@ interface QueueOps
         @minLength(1)
         @maxLength(50)
         authorizationRuleName: string,
-      }
+      },
+      ResourceName = "ServiceBusQueueAuthorizationRule"
     > {}
 
 @armResourceOperations
@@ -249,7 +254,7 @@ interface Queues {
   /**
    * Gets an authorization rule for a queue by rule name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt705611.aspx")
   getAuthorizationRule is QueueOps.Read<
     SBAuthorizationRule,
@@ -259,7 +264,7 @@ interface Queues {
   /**
    * Creates an authorization rule for a queue.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
   createOrUpdateAuthorizationRule is QueueOps.CreateOrUpdateSync<
     SBAuthorizationRule,
     Response = ArmResourceUpdatedResponse<SBAuthorizationRule>,
@@ -269,7 +274,7 @@ interface Queues {
   /**
    * Deletes a queue authorization rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt705609.aspx")
   deleteAuthorizationRule is QueueOps.DeleteSync<
     SBAuthorizationRule,
@@ -279,7 +284,7 @@ interface Queues {
   /**
    * Gets all authorization rules for a queue.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt705607.aspx")
   listAuthorizationRules is QueueOps.List<
     SBAuthorizationRule,
@@ -289,7 +294,7 @@ interface Queues {
   /**
    * Primary and secondary connection strings to the queue.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
   @action("ListKeys")
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt705608.aspx")
   listKeys is QueueOps.ActionSync<
@@ -302,7 +307,7 @@ interface Queues {
   /**
    * Regenerates the primary or secondary connection strings to the queue.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt705606.aspx")
   regenerateKeys is QueueOps.ActionSync<
     SBAuthorizationRule,
@@ -346,7 +351,8 @@ interface TopicOps
         @minLength(1)
         @maxLength(50)
         authorizationRuleName: string,
-      }
+      },
+      ResourceName = "ServiceBusTopicAuthorizationRule"
     > {}
 
 @armResourceOperations
@@ -354,7 +360,7 @@ interface Topics {
   /**
    * Returns the specified authorization rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt720676.aspx")
   getAuthorizationRule is TopicOps.Read<
     SBAuthorizationRule,
@@ -364,8 +370,8 @@ interface Topics {
   /**
    * Creates an authorization rule for the specified topic.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt720678.aspx")
   createOrUpdateAuthorizationRule is TopicOps.CreateOrUpdateSync<
     SBAuthorizationRule,
@@ -376,7 +382,7 @@ interface Topics {
   /**
    * Deletes a topic authorization rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt720681.aspx")
   deleteAuthorizationRule is TopicOps.DeleteSync<
     SBAuthorizationRule,
@@ -386,7 +392,7 @@ interface Topics {
   /**
    * Gets authorization rules for a topic.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt720681.aspx")
   listAuthorizationRules is TopicOps.List<
     SBAuthorizationRule,
@@ -396,7 +402,7 @@ interface Topics {
   /**
    * Gets the primary and secondary connection strings for the topic.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
   @action("ListKeys")
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt720677.aspx")
   listKeys is TopicOps.ActionSync<
@@ -409,7 +415,7 @@ interface Topics {
   /**
    * Regenerates primary or secondary connection strings for the topic.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt720679.aspx")
   regenerateKeys is TopicOps.ActionSync<
     SBAuthorizationRule,
@@ -423,21 +429,27 @@ interface Topics {
 @@minLength(SBAuthorizationRule.name, 1);
 @@doc(SBAuthorizationRule.name, "The authorization rule name.");
 @@doc(SBAuthorizationRule.properties, "AuthorizationRule properties.");
-@@doc(SBAuthorizationRules.createOrUpdateAuthorizationRule::parameters.resource,
+@@doc(
+  SBAuthorizationRules.createOrUpdateAuthorizationRule::parameters.resource,
   "The shared access authorization rule."
 );
-@@doc(SBAuthorizationRules.regenerateKeys::parameters.body,
+@@doc(
+  SBAuthorizationRules.regenerateKeys::parameters.body,
   "Parameters supplied to regenerate the authorization rule."
 );
-@@doc(Queues.createOrUpdateAuthorizationRule::parameters.resource,
+@@doc(
+  Queues.createOrUpdateAuthorizationRule::parameters.resource,
   "The shared access authorization rule."
 );
-@@doc(Queues.regenerateKeys::parameters.body,
+@@doc(
+  Queues.regenerateKeys::parameters.body,
   "Parameters supplied to regenerate the authorization rule."
 );
-@@doc(Topics.createOrUpdateAuthorizationRule::parameters.resource,
+@@doc(
+  Topics.createOrUpdateAuthorizationRule::parameters.resource,
   "The shared access authorization rule."
 );
-@@doc(Topics.regenerateKeys::parameters.body,
+@@doc(
+  Topics.regenerateKeys::parameters.body,
   "Parameters supplied to regenerate the authorization rule."
 );

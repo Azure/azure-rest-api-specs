@@ -964,6 +964,31 @@
           "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+",
           "readOnly": true
         },
+        "reporting": {
+          "type": "string",
+          "description": "Indicates whether reporting is enabled for the workspace. When set to true, reports will be generated and available for the workspace.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnablementStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "The feature is enabled."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "The feature is disabled."
+              }
+            ]
+          }
+        },
         "storageUri": {
           "type": "string",
           "format": "uri",
@@ -1057,6 +1082,10 @@
         "localAuth": {
           "$ref": "#/definitions/EnablementStatus",
           "description": "Enables the workspace to use local authentication through service access tokens for operations."
+        },
+        "reporting": {
+          "$ref": "#/definitions/EnablementStatus",
+          "description": "Indicates whether reporting is enabled for the workspace. When set to true, reports will be generated and available for the workspace."
         },
         "storageUri": {
           "type": "string",

@@ -47,10 +47,12 @@ interface NodeTypes {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Day 0 Property"
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     NodeType,
-    Response = ArmResourceUpdatedResponse<NodeType> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = NodeType>> & {
-      @bodyRoot
-      _: NodeType;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<NodeType>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = NodeType>> & {
+          @bodyRoot
+          _: NodeType;
+        })
   >;
 
   /**
@@ -139,6 +141,8 @@ interface NodeTypes {
   /**
    * Starts a fault simulation on the node type.
    */
+  @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_05_01_preview)
   @tag("FaultSimulation")
   startFaultSimulation is ArmResourceActionAsync<
     NodeType,
@@ -151,6 +155,8 @@ interface NodeTypes {
   /**
    * Stops a fault simulation on the node type.
    */
+  @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_05_01_preview)
   @tag("FaultSimulation")
   stopFaultSimulation is ArmResourceActionAsync<
     NodeType,
@@ -163,6 +169,8 @@ interface NodeTypes {
   /**
    * Gets a fault simulation by the simulationId.
    */
+  @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_05_01_preview)
   @tag("FaultSimulation")
   getFaultSimulation is ArmResourceActionSync<
     NodeType,
@@ -173,6 +181,8 @@ interface NodeTypes {
   /**
    * Gets the list of recent fault simulations for the node type.
    */
+  @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_05_01_preview)
   @tag("FaultSimulation")
   @list
   listFaultSimulation is ArmResourceActionSync<
@@ -202,24 +212,29 @@ interface NodeTypeSkus {
 @@doc(NodeType.name, "The name of the node type.");
 @@doc(NodeType.properties, "The node type properties");
 @@doc(NodeTypes.createOrUpdate::parameters.resource, "The node type resource.");
-@@doc(NodeTypes.update::parameters.properties,
+@@doc(
+  NodeTypes.update::parameters.properties,
   "The parameters to update the node type configuration."
 );
-@@doc(NodeTypes.deallocate::parameters.body,
+@@doc(
+  NodeTypes.deallocate::parameters.body,
   "parameters for deallocate action."
 );
 @@doc(NodeTypes.deleteNode::parameters.body, "parameters for delete action.");
-@@doc(NodeTypes.getFaultSimulation::parameters.body,
+@@doc(
+  NodeTypes.getFaultSimulation::parameters.body,
   "parameter with fault simulation id."
 );
 @@doc(NodeTypes.redeploy::parameters.body, "parameters for redeploy action.");
 @@doc(NodeTypes.reimage::parameters.body, "parameters for reimage action.");
 @@doc(NodeTypes.restart::parameters.body, "parameters for restart action.");
 @@doc(NodeTypes.start::parameters.body, "parameters for start action.");
-@@doc(NodeTypes.startFaultSimulation::parameters.body,
+@@doc(
+  NodeTypes.startFaultSimulation::parameters.body,
   "parameters describing the fault simulation."
 );
-@@doc(NodeTypes.stopFaultSimulation::parameters.body,
+@@doc(
+  NodeTypes.stopFaultSimulation::parameters.body,
   "parameter with fault simulation id."
 );
 
@@ -545,6 +560,24 @@ model NodeTypeProperties {
    */
   @added(Versions.v2025_06_01_preview)
   isOutboundOnly?: boolean;
+
+  /**
+   * Specifies whether the node type should use a resilient ephemeral OS disk when using a supported SKU size. A resilient ephemeral OS disk provides improved reliability for ephemeral OS disks by enabling full caching.
+   */
+  @added(Versions.v2026_02_01)
+  enableResilientEphemeralOsDisk?: boolean;
+
+  /**
+   * Specifies the scale in policy for the node type, which will be used when scale in happens on the cluster. If not specified, the default is Default which means the platform will decide which nodes to remove during scale in.
+   */
+  @added(Versions.v2026_05_01_preview)
+  scaleInPolicy?: ScaleInPolicy;
+
+  /**
+   * Specifies the settings for the proxy agent on the node type.
+   */
+  @added(Versions.v2026_05_01_preview)
+  proxyAgentSettings?: ProxyAgentSettings;
 }
 
 /**
@@ -1283,3 +1316,81 @@ union NodeTypeSkuScaleType {
 }
 
 @@identifiers(NodeTypeListSkuResult.value, #[]);
+
+/**
+ * Specifies the scale in policy mode for a node type.
+ */
+union ScaleInPolicyMode {
+  string,
+
+  /**
+   * Default scale in policy mode where the system will choose which nodes to remove when scaling in.
+   */
+  Default: "Default",
+
+  /**
+   * OldestNodeFirst scale in policy mode where the oldest node in the node type will be removed first when scaling in.
+   */
+  OldestNodeFirst: "OldestNodeFirst",
+
+  /**
+   * NewestNodeFirst scale in policy mode where the newest node in the node type will be removed first when scaling in.
+   */
+  NewestNodeFirst: "NewestNodeFirst",
+}
+
+/**
+ * Scale in policy for a node type. This is used to specify the mode for scale in operations on a node type.
+ */
+model ScaleInPolicy {
+  /**
+   * The scale in policy mode for a node type.
+   */
+  mode?: ScaleInPolicyMode;
+}
+
+/**
+ * Specifies ProxyAgent settings for the virtual machine or virtual machine scale set.
+ */
+model ProxyAgentSettings {
+  /**
+   * Specifies whether ProxyAgent feature should be enabled on the virtual machine or virtual machine scale set.
+   */
+  enabled?: boolean;
+
+  /**
+   * Increasing the value of this property allows users to reset the key used for securing communication channel between guest and host.
+   */
+  keyIncarnationId?: int32;
+
+  /**
+   * Specifies the Wire Server endpoint settings while creating the virtual machine or virtual machine scale set.
+   */
+  wireServer?: HostEndpointSettings;
+
+  /**
+   * Specifies the IMDS endpoint settings while creating the virtual machine or virtual machine scale set.
+   */
+  imds?: HostEndpointSettings;
+
+  /**
+   * Specify whether to implicitly install the ProxyAgent Extension. This option is currently applicable only for Linux Os.
+   */
+  addProxyAgentExtension?: boolean;
+}
+
+/**
+ * Specifies particular host endpoint settings.
+ */
+model HostEndpointSettings {
+  /**
+   * Specifies the execution mode. In Audit mode, the system acts as if it is enforcing the access control policy, including emitting access denial entries in the logs but it does not actually deny any requests to host endpoints. In Enforce mode, the system will enforce the access control and it is the recommended mode of operation.
+   */
+  mode?: string;
+
+  /**
+   * Specifies the InVMAccessControlProfileVersion resource id in the format of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/inVMAccessControlProfiles/{profile}/versions/{version}
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is an abbreviation for virtual machine"
+  inVMAccessControlProfileReferenceId?: string;
+}

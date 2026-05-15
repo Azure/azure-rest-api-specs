@@ -20,7 +20,6 @@ interface AutonomousDatabaseBackups
     "./examples/autonomousDatabaseBackup_patch.json",
     "Patch Autonomous Database Backup."
   )
-  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     AutonomousDatabaseBackup,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -38,17 +37,20 @@ interface AutonomousDatabaseBackups
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(AutonomousDatabaseBackups.createOrUpdate,
+@@Autorest.example(
+  AutonomousDatabaseBackups.createOrUpdate,
   "./examples/autonomousDatabaseBackup_create.json",
   "Create Autonomous Database Backup."
 );
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(AutonomousDatabaseBackups.get,
+@@Autorest.example(
+  AutonomousDatabaseBackups.get,
   "./examples/autonomousDatabaseBackup_get.json",
   "Get Autonomous Database Backup."
 );
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(AutonomousDatabaseBackups.delete,
+@@Autorest.example(
+  AutonomousDatabaseBackups.delete,
   "./examples/autonomousDatabaseBackup_delete.json",
   "Delete Autonomous Database Backup."
 );

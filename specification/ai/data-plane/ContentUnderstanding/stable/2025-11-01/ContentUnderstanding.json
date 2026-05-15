@@ -557,30 +557,7 @@
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
-              "type": "object",
-              "description": "Provides status details for long running operations.",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "The unique ID of the operation."
-                },
-                "status": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-                  "description": "The status of the operation"
-                },
-                "error": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
-                  "description": "Error object that describes the error when status is \"Failed\"."
-                },
-                "result": {
-                  "$ref": "#/definitions/AnalyzeResult",
-                  "description": "The result of the operation."
-                }
-              },
-              "required": [
-                "id",
-                "status"
-              ]
+              "$ref": "#/definitions/ContentAnalyzerAnalyzeOperationStatus"
             },
             "headers": {
               "Operation-Location": {
@@ -657,30 +634,7 @@
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
-              "type": "object",
-              "description": "Provides status details for long running operations.",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "The unique ID of the operation."
-                },
-                "status": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-                  "description": "The status of the operation"
-                },
-                "error": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
-                  "description": "Error object that describes the error when status is \"Failed\"."
-                },
-                "result": {
-                  "$ref": "#/definitions/AnalyzeResult",
-                  "description": "The result of the operation."
-                }
-              },
-              "required": [
-                "id",
-                "status"
-              ]
+              "$ref": "#/definitions/ContentAnalyzerAnalyzeOperationStatus"
             },
             "headers": {
               "Operation-Location": {
@@ -755,33 +709,28 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
+          "200": {
+            "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "Provides status details for long running operations.",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "The unique ID of the operation."
-                },
-                "status": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-                  "description": "The status of the operation"
-                },
-                "error": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
-                  "description": "Error object that describes the error when status is \"Failed\"."
-                },
-                "result": {
-                  "$ref": "#/definitions/ContentAnalyzer",
-                  "description": "The result of the operation."
-                }
+              "$ref": "#/definitions/ContentAnalyzer"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
               },
-              "required": [
-                "id",
-                "status"
-              ]
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/ContentAnalyzer"
             },
             "headers": {
               "Operation-Location": {
@@ -971,7 +920,7 @@
       },
       "patch": {
         "operationId": "ContentAnalyzers_UpdateDefaults",
-        "description": "Return default settings for this Content Understanding resource.",
+        "description": "Update default settings for this Content Understanding resource.",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -1017,7 +966,76 @@
     }
   },
   "definitions": {
-    "AnalyzeInput": {
+    "AnalysisContent": {
+      "type": "object",
+      "description": "Media content base class.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AnalysisContentKind",
+          "description": "Content kind."
+        },
+        "mimeType": {
+          "type": "string",
+          "description": "Detected MIME type of the content.  Ex. application/pdf, image/jpeg, etc."
+        },
+        "analyzerId": {
+          "type": "string",
+          "description": "The analyzer that generated this content.",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9._-]{1,64}$"
+        },
+        "category": {
+          "type": "string",
+          "description": "Classified content category."
+        },
+        "path": {
+          "type": "string",
+          "description": "The path of the content in the input."
+        },
+        "markdown": {
+          "type": "string",
+          "description": "Markdown representation of the content."
+        },
+        "fields": {
+          "type": "object",
+          "description": "Extracted fields from the content.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ContentField"
+          }
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind",
+        "mimeType"
+      ]
+    },
+    "AnalysisContentKind": {
+      "type": "string",
+      "description": "Kind of media content.",
+      "enum": [
+        "document",
+        "audioVisual"
+      ],
+      "x-ms-enum": {
+        "name": "AnalysisContentKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "document",
+            "value": "document",
+            "description": "Document content, such as pdf, image, txt, etc."
+          },
+          {
+            "name": "audioVisual",
+            "value": "audioVisual",
+            "description": "Audio visual content, such as mp3, mp4, etc."
+          }
+        ]
+      }
+    },
+    "AnalysisInput": {
       "type": "object",
       "description": "Additional input to analyze.",
       "properties": {
@@ -1045,27 +1063,7 @@
         }
       }
     },
-    "AnalyzeRequest": {
-      "type": "object",
-      "description": "Analyze operation request.",
-      "properties": {
-        "inputs": {
-          "type": "array",
-          "description": "Inputs to analyze.  Currently, only pro mode supports multiple inputs.",
-          "items": {
-            "$ref": "#/definitions/AnalyzeInput"
-          }
-        },
-        "modelDeployments": {
-          "type": "object",
-          "description": "Override default mapping of model names to deployments.\nEx. { \"gpt-4.1\": \"myGpt41Deployment\", \"text-embedding-3-large\": \"myTextEmbedding3LargeDeployment\" }.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "AnalyzeResult": {
+    "AnalysisResult": {
       "type": "object",
       "description": "Analyze operation result.",
       "properties": {
@@ -1101,12 +1099,35 @@
           "type": "array",
           "description": "The extracted content.",
           "items": {
-            "$ref": "#/definitions/MediaContent"
+            "$ref": "#/definitions/AnalysisContent"
           }
         }
       },
       "required": [
         "contents"
+      ]
+    },
+    "AnalyzeRequest": {
+      "type": "object",
+      "description": "Analyze operation request.",
+      "properties": {
+        "inputs": {
+          "type": "array",
+          "description": "Inputs to analyze.  Currently, only pro mode supports multiple inputs.",
+          "items": {
+            "$ref": "#/definitions/AnalysisInput"
+          }
+        },
+        "modelDeployments": {
+          "type": "object",
+          "description": "Specify the default mapping of model names to LLM/embedding deployments in Microsoft Foundry. For details and current semantics, see https://aka.ms/cudoc-quickstart-rest.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "inputs"
       ]
     },
     "ArrayField": {
@@ -1189,7 +1210,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MediaContent"
+          "$ref": "#/definitions/AnalysisContent"
         }
       ],
       "x-ms-discriminator-value": "audioVisual"
@@ -1518,7 +1539,7 @@
           "description": "Error object that describes the error when status is \"Failed\"."
         },
         "result": {
-          "$ref": "#/definitions/AnalyzeResult",
+          "$ref": "#/definitions/AnalysisResult",
           "description": "The result of the operation."
         },
         "usage": {
@@ -1996,11 +2017,11 @@
     },
     "ContentUnderstandingDefaults": {
       "type": "object",
-      "description": "default settings for this Content Understanding resource.",
+      "description": "Default settings for this Content Understanding resource.",
       "properties": {
         "modelDeployments": {
           "type": "object",
-          "description": "Mapping of model names to deployments.\nEx. { \"gpt-4.1\": \"myGpt41Deployment\", \"text-embedding-3-large\": \"myTextEmbedding3LargeDeployment\" }.",
+          "description": "Specify the default mapping of model names to LLM/embedding deployments in Microsoft Foundry. For details and current semantics, see https://aka.ms/cudoc-quickstart-rest.",
           "additionalProperties": {
             "type": "string"
           },
@@ -2017,11 +2038,11 @@
     },
     "ContentUnderstandingDefaultsMergePatchUpdate": {
       "type": "object",
-      "description": "default settings for this Content Understanding resource.",
+      "description": "Default settings for this Content Understanding resource.",
       "properties": {
         "modelDeployments": {
           "type": "object",
-          "description": "Mapping of model names to deployments.\nEx. { \"gpt-4.1\": \"myGpt41Deployment\", \"text-embedding-3-large\": \"myTextEmbedding3LargeDeployment\" }.",
+          "description": "Specify the default mapping of model names to LLM/embedding deployments in Microsoft Foundry. For details and current semantics, see https://aka.ms/cudoc-quickstart-rest.",
           "additionalProperties": {
             "type": "string"
           }
@@ -2511,7 +2532,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MediaContent"
+          "$ref": "#/definitions/AnalysisContent"
         }
       ],
       "x-ms-discriminator-value": "document"
@@ -3236,75 +3257,6 @@
         ]
       }
     },
-    "MediaContent": {
-      "type": "object",
-      "description": "Media content base class.",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/MediaContentKind",
-          "description": "Content kind."
-        },
-        "mimeType": {
-          "type": "string",
-          "description": "Detected MIME type of the content.  Ex. application/pdf, image/jpeg, etc."
-        },
-        "analyzerId": {
-          "type": "string",
-          "description": "The analyzer that generated this content.",
-          "minLength": 1,
-          "maxLength": 64,
-          "pattern": "^[a-zA-Z0-9._-]{1,64}$"
-        },
-        "category": {
-          "type": "string",
-          "description": "Classified content category."
-        },
-        "path": {
-          "type": "string",
-          "description": "The path of the content in the input."
-        },
-        "markdown": {
-          "type": "string",
-          "description": "Markdown representation of the content."
-        },
-        "fields": {
-          "type": "object",
-          "description": "Extracted fields from the content.",
-          "additionalProperties": {
-            "$ref": "#/definitions/ContentField"
-          }
-        }
-      },
-      "discriminator": "kind",
-      "required": [
-        "kind",
-        "mimeType"
-      ]
-    },
-    "MediaContentKind": {
-      "type": "string",
-      "description": "Kind of media content.",
-      "enum": [
-        "document",
-        "audioVisual"
-      ],
-      "x-ms-enum": {
-        "name": "MediaContentKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "document",
-            "value": "document",
-            "description": "Document content, such as pdf, image, txt, etc."
-          },
-          {
-            "name": "audioVisual",
-            "value": "audioVisual",
-            "description": "Audio visual content, such as mp3, mp4, etc."
-          }
-        ]
-      }
-    },
     "NumberField": {
       "type": "object",
       "description": "Number field extracted from the content.",
@@ -3445,24 +3397,20 @@
       "description": "Chat completion and embedding models supported by the analyzer.",
       "properties": {
         "completion": {
-          "type": "object",
+          "type": "array",
           "description": "Chat completion models supported by the analyzer.",
-          "additionalProperties": {
+          "items": {
             "type": "string"
           }
         },
         "embedding": {
-          "type": "object",
+          "type": "array",
           "description": "Embedding models supported by the analyzer.",
-          "additionalProperties": {
+          "items": {
             "type": "string"
           }
         }
-      },
-      "required": [
-        "completion",
-        "embedding"
-      ]
+      }
     },
     "TimeField": {
       "type": "object",

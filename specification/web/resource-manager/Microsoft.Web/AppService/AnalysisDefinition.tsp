@@ -61,7 +61,8 @@ interface AnalysisDefinitionOps
       }
     > {}
 
-@armResourceOperations
+@tag("Diagnostics")
+@armResourceOperations(#{ omitTags: true })
 interface AnalysisDefinitions {
   /**
    * Description for Get Site Analysis
@@ -150,7 +151,8 @@ interface AnalysisDefinitionOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("Diagnostics")
+@armResourceOperations(#{ omitTags: true })
 interface AnalysisDefinitionOperationGroup {
   /**
    * Description for Get Site Analysis
@@ -205,6 +207,7 @@ interface AnalysisDefinitionOperationGroup {
 }
 
 @@doc(AnalysisDefinition.name, "Analysis Name");
-@@doc(AnalysisDefinition.properties,
+@@doc(
+  AnalysisDefinition.properties,
   "AnalysisDefinition resource specific properties"
 );

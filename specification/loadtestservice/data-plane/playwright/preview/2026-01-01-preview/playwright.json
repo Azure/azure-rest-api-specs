@@ -21,7 +21,9 @@
         "in": "path",
         "description": "Playwright Service API endpoint (protocol and hostname) formatted as https://{region}.api.playwright.microsoft.com.\nThe region corresponds to your Azure Playwright workspace location. You can find this value in your Azure Playwright workspace properties under `dataplaneUri`.",
         "required": true,
-        "type": "string"
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
       }
     ]
   },

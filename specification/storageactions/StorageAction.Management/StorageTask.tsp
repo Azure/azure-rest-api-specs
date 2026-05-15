@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.StorageActions;
 /**
@@ -44,11 +46,14 @@ interface StorageTasks {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     StorageTask,
-    Response = ArmResourceUpdatedResponse<StorageTask> | ArmResourceCreatedResponse<
-      StorageTask,
-      ArmLroLocationHeader<FinalResult = StorageTask> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<StorageTask>
+      | ArmResourceCreatedResponse<
+          StorageTask,
+          ArmLroLocationHeader<FinalResult = StorageTask> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -58,9 +63,11 @@ interface StorageTasks {
   update is ArmCustomPatchAsync<
     StorageTask,
     PatchModel = StorageTaskUpdateParameters,
-    Response = ArmResourceUpdatedResponse<StorageTask> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageTask> &
-      ArmLroLocationHeader<FinalResult = StorageTask> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<StorageTask>
+      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageTask> &
+          ArmLroLocationHeader<FinalResult = StorageTask> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -69,9 +76,11 @@ interface StorageTasks {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     StorageTask,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+          ArmLroLocationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -135,17 +144,36 @@ interface StorageTasks {
       $maxpagesize?: int32;
     }
   >;
+
+  /**
+   * Stops all active running assignments for the storage task
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Matches stopAssignment pattern in Microsoft.Storage"
+  @added(Versions.v2026_03_01)
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  @action("stopAllAssignments")
+  stopAllAssignments is ArmResourceActionAsync<
+    StorageTask,
+    void,
+    void,
+    LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 }
 
 @@maxLength(StorageTask.name, 18);
 @@minLength(StorageTask.name, 3);
-@@doc(StorageTask.name,
+@@doc(
+  StorageTask.name,
   "The name of the storage task within the specified resource group. Storage task names must be between 3 and 18 characters in length and use numbers and lower-case letters only."
 );
 @@doc(StorageTask.properties, "Properties of the storage task.");
-@@doc(StorageTasks.create::parameters.resource,
+@@doc(
+  StorageTasks.create::parameters.resource,
   "The parameters to create a Storage Task."
 );
-@@doc(StorageTasks.update::parameters.properties,
+@@doc(
+  StorageTasks.update::parameters.properties,
   "The parameters to provide to update the storage task resource."
 );

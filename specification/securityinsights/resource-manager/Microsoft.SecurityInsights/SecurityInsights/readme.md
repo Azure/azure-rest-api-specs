@@ -92,40 +92,7 @@ These settings apply only when `--tag=package-preview-2025-07-01` is specified o
 
 ```yaml $(tag) == 'package-preview-2025-07-01'
 input-file:
-  - preview/2025-07-01-preview/AlertRules.json
-  - preview/2025-07-01-preview/AutomationRules.json
-  - preview/2025-07-01-preview/BillingStatistics.json
-  - preview/2025-07-01-preview/Bookmarks.json
-  - preview/2025-07-01-preview/ContentPackages.json
-  - preview/2025-07-01-preview/ContentProductPackages.json
-  - preview/2025-07-01-preview/ContentProductTemplates.json
-  - preview/2025-07-01-preview/ContentTemplates.json
-  - preview/2025-07-01-preview/dataConnectorDefinitions.json
-  - preview/2025-07-01-preview/dataConnectors.json
-  - preview/2025-07-01-preview/EnrichmentWithWorkspace.json
-  - preview/2025-07-01-preview/Entities.json
-  - preview/2025-07-01-preview/EntityQueries.json
-  - preview/2025-07-01-preview/EntityQueryTemplates.json
-  - preview/2025-07-01-preview/FileImports.json
-  - preview/2025-07-01-preview/Hunts.json
-  - preview/2025-07-01-preview/Incidents.json
-  - preview/2025-07-01-preview/Metadata.json
-  - preview/2025-07-01-preview/OfficeConsents.json
-  - preview/2025-07-01-preview/OnboardingStates.json
-  - preview/2025-07-01-preview/operations.json
-  - preview/2025-07-01-preview/Recommendations.json
-  - preview/2025-07-01-preview/SecurityMLAnalyticsSettings.json
-  - preview/2025-07-01-preview/Settings.json
-  - preview/2025-07-01-preview/SourceControls.json
-  - preview/2025-07-01-preview/ThreatIntelligence.json
-  - preview/2025-07-01-preview/ThreatIntelligenceCount.json
-  - preview/2025-07-01-preview/ThreatIntelligenceQuery.json
-  - preview/2025-07-01-preview/TriggeredAnalyticsRuleRuns.json
-  - preview/2025-07-01-preview/Watchlists.json
-  - preview/2025-07-01-preview/WorkspaceManagerAssignments.json
-  - preview/2025-07-01-preview/WorkspaceManagerConfigurations.json
-  - preview/2025-07-01-preview/WorkspaceManagerGroups.json
-  - preview/2025-07-01-preview/WorkspaceManagerMembers.json
+  - preview/2025-07-01-preview/openapi.json
 suppressions:
   - code: AvoidAdditionalProperties
     from: dataConnectors.json

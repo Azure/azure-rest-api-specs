@@ -8,22 +8,27 @@ using Microsoft.Confluent;
 @@clientLocation(Operations.list, "OrganizationOperations", "!csharp");
 
 // OrganizationResourceAPIKeyActions interface
-@@clientLocation(OrganizationResourceAPIKeyActions.getClusterAPIKey,
+@@clientLocation(
+  OrganizationResourceAPIKeyActions.getClusterAPIKey,
   "Organization",
   "!csharp"
 );
-@@clientName(OrganizationResourceAPIKeyActions.getClusterAPIKey,
+@@clientName(
+  OrganizationResourceAPIKeyActions.getClusterAPIKey,
   "GetClusterAPIKey"
 );
-@@clientLocation(OrganizationResourceAPIKeyActions.deleteClusterAPIKey,
+@@clientLocation(
+  OrganizationResourceAPIKeyActions.deleteClusterAPIKey,
   "Organization",
   "!csharp"
 );
-@@clientName(OrganizationResourceAPIKeyActions.deleteClusterAPIKey,
+@@clientName(
+  OrganizationResourceAPIKeyActions.deleteClusterAPIKey,
   "DeleteClusterAPIKey"
 );
 // OrganizationResourceRoleBindingIdActions interface
-@@clientLocation(OrganizationResourceRoleBindingIdActions.deleteRoleBinding,
+@@clientLocation(
+  OrganizationResourceRoleBindingIdActions.deleteRoleBinding,
   "Access",
   "!csharp"
 );
@@ -33,17 +38,20 @@ using Microsoft.Confluent;
 @@clientLocation(OrganizationResources.create, "Organization", "!csharp");
 @@clientLocation(OrganizationResources.update, "Organization", "!csharp");
 @@clientLocation(OrganizationResources.delete, "Organization", "!csharp");
-@@clientLocation(OrganizationResources.listByResourceGroup,
+@@clientLocation(
+  OrganizationResources.listByResourceGroup,
   "Organization",
   "!csharp"
 );
-@@clientLocation(OrganizationResources.listBySubscription,
+@@clientLocation(
+  OrganizationResources.listBySubscription,
   "Organization",
   "!csharp"
 );
 @@clientLocation(OrganizationResources.listRegions, "Organization", "!csharp");
 @@clientLocation(OrganizationResources.listUsers, "Access", "!csharp");
-@@clientLocation(OrganizationResources.listServiceAccounts,
+@@clientLocation(
+  OrganizationResources.listServiceAccounts,
   "Access",
   "!csharp"
 );
@@ -53,7 +61,8 @@ using Microsoft.Confluent;
 @@clientLocation(OrganizationResources.listClusters, "Access", "!csharp");
 @@clientLocation(OrganizationResources.listRoleBindings, "Access", "!csharp");
 @@clientLocation(OrganizationResources.createRoleBinding, "Access", "!csharp");
-@@clientLocation(OrganizationResources.listRoleBindingNameList,
+@@clientLocation(
+  OrganizationResources.listRoleBindingNameList,
   "Access",
   "!csharp"
 );
@@ -65,21 +74,25 @@ using Microsoft.Confluent;
 @@clientLocation(ConnectorResources.list, "Connector", "!csharp");
 
 // MarketplaceAgreementsOperationGroup interface
-@@clientLocation(MarketplaceAgreementsOperationGroup.list,
+@@clientLocation(
+  MarketplaceAgreementsOperationGroup.list,
   "MarketplaceAgreements",
   "!csharp"
 );
-@@clientLocation(MarketplaceAgreementsOperationGroup.create,
+@@clientLocation(
+  MarketplaceAgreementsOperationGroup.create,
   "MarketplaceAgreements",
   "!csharp"
 );
 
 // ValidationsOperationGroup interface
-@@clientLocation(ValidationsOperationGroup.validateOrganization,
+@@clientLocation(
+  ValidationsOperationGroup.validateOrganization,
   "Validations",
   "!csharp"
 );
-@@clientLocation(ValidationsOperationGroup.validateOrganizationV2,
+@@clientLocation(
+  ValidationsOperationGroup.validateOrganizationV2,
   "Validations",
   "!csharp"
 );
@@ -93,23 +106,27 @@ using Microsoft.Confluent;
 @@clientName(SCClusterRecords.createAPIKey, "CreateApiKey");
 
 // SCEnvironmentRecords interface
-@@clientLocation(SCEnvironmentRecords.getEnvironmentById,
+@@clientLocation(
+  SCEnvironmentRecords.getEnvironmentById,
   "Organization",
   "!csharp"
 );
 @@clientLocation(SCEnvironmentRecords.createOrUpdate, "Environment", "!csharp");
 @@clientLocation(SCEnvironmentRecords.delete, "Environment", "!csharp");
-@@clientLocation(SCEnvironmentRecords.listEnvironments,
+@@clientLocation(
+  SCEnvironmentRecords.listEnvironments,
   "Organization",
   "!csharp"
 );
-@@clientLocation(SCEnvironmentRecords.listSchemaRegistryClusters,
+@@clientLocation(
+  SCEnvironmentRecords.listSchemaRegistryClusters,
   "Organization",
   "!csharp"
 );
 
 // SCEnvironmentRecordCluster interface
-@@clientLocation(SCEnvironmentRecordCluster.getSchemaRegistryClusterById,
+@@clientLocation(
+  SCEnvironmentRecordCluster.getSchemaRegistryClusterById,
   "Organization",
   "!csharp"
 );
@@ -122,12 +139,14 @@ using Microsoft.Confluent;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ConfluentAgreementResource.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ConfluentAgreementResource.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SchemaRegistryClusterRecord.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  SchemaRegistryClusterRecord.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -142,13 +161,15 @@ using Microsoft.Confluent;
 @@clientName(OrganizationResources.update::parameters.properties, "body");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(OrganizationResource.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  OrganizationResource.properties
 );
 
 @@clientName(SCEnvironmentRecords.createOrUpdate::parameters.resource, "body");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SCEnvironmentRecord.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  SCEnvironmentRecord.properties
 );
 
 @@clientName(SCClusterRecords.createOrUpdate::parameters.resource, "body");
@@ -159,7 +180,8 @@ using Microsoft.Confluent;
 @@clientName(ConnectorResources.createOrUpdate::parameters.resource, "body");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ConnectorResource.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ConnectorResource.properties
 );
 
 @@clientName(TopicRecords.create::parameters.resource, "body");

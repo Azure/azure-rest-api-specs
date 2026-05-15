@@ -1,0 +1,47 @@
+{
+  "operationId": "HorizonDbFirewallRules_CreateOrUpdate",
+  "title": "Create or update a HorizonDb firewall rule",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "clusterName": "examplecluster",
+    "poolName": "examplepool",
+    "firewallRuleName": "examplefirewallrule",
+    "api-version": "2026-01-20-preview",
+    "resource": {
+      "properties": {
+        "startIpAddress": "10.0.0.1",
+        "endIpAddress": "10.0.0.10",
+        "description": "Allow access from corporate network"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster/pools/examplepool/firewallRules/examplefirewallrule",
+        "name": "examplefirewallrule",
+        "type": "Microsoft.HorizonDb/clusters/pools/firewallRules",
+        "properties": {
+          "startIpAddress": "10.0.0.1",
+          "endIpAddress": "10.0.0.10",
+          "description": "Allow access from corporate network",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster/pools/examplepool/firewallRules/examplefirewallrule",
+        "name": "examplefirewallrule",
+        "type": "Microsoft.HorizonDb/clusters/pools/firewallRules",
+        "properties": {
+          "startIpAddress": "10.0.0.1",
+          "endIpAddress": "10.0.0.10",
+          "description": "Allow access from corporate network",
+          "provisioningState": "Provisioning"
+        }
+      }
+    }
+  }
+}
