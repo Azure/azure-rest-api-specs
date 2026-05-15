@@ -6532,7 +6532,6 @@ model DataShareConnection extends StorageConnectorConnection {
   /**
    * The type for data share connection
    */
-  @visibility(Lifecycle.Read)
   type: StorageConnectorConnectionType.DataShare;
 
   /**
