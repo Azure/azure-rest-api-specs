@@ -686,6 +686,20 @@ union HardwareClass {
 }
 
 /**
+ * Witness type for an Azure Stack HCI cluster.
+ */
+@added(Versions.v2026_05_01_preview)
+union WitnessType {
+  string,
+
+  /** Cloud witness backed by an Azure Storage account. */
+  Cloud: "Cloud",
+
+  /** File-share witness on a local SMB share. */
+  FileShare: "FileShare",
+}
+
+/**
  * Type of secrets to store
  */
 union SecretsType {
@@ -6477,8 +6491,8 @@ model HciAddServerJobProperties extends ClusterJobProperties {
   @Azure.ResourceManager.identifiers(#["secretName"])
   secrets?: EceDeploymentSecrets[];
 
-  /** Use a cloud witness if you have internet access and if you use an Azure Storage account to provide a vote on cluster quorum. A cloud witness uses Azure Blob Storage to read or write a blob file and then uses it to arbitrate in split-brain resolution. Only allowed values are 'Cloud', 'FileShare'. */
-  witnessType?: string;
+  /** Use a cloud witness if you have internet access and if you use an Azure Storage account to provide a vote on cluster quorum. A cloud witness uses Azure Blob Storage to read or write a blob file and then uses it to arbitrate in split-brain resolution. */
+  witnessType?: WitnessType;
 
   /** Specify the fileshare path for the local witness for your Azure Stack HCI cluster. */
   witnessPath?: string;
@@ -7677,7 +7691,7 @@ model OsProvisionProfile {
   /**
    * GPG Public Key used for package verification
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "GPG Public Key is not sensitive information"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "gpgPubKey holds only the GPG public key block used by the device to verify package signatures during OS provisioning. It contains no private key material."
   gpgPubKey?: string;
 
   /**
@@ -7724,7 +7738,7 @@ model DownloadOsProfile {
   /**
    * GPG Public Key used for package verification
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "GPG Public Key is not sensitive information"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "gpgPubKey holds only the GPG public key block used by the device to verify package signatures during OS provisioning. It contains no private key material."
   gpgPubKey?: string;
 }
 
