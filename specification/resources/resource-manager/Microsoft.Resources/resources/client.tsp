@@ -2,6 +2,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
+using Microsoft.Resources;
 
 @@clientName(
   Microsoft.Resources,
@@ -49,3 +50,4 @@ using Azure.ClientGenerator.Core;
   "ErrorResponse",
   "go"
 );
+@@visibility(ProviderResourceTypeListResult.nextLink, Lifecycle.Read);
