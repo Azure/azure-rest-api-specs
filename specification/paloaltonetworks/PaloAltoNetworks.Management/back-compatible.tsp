@@ -13,10 +13,12 @@ using PaloAltoNetworks.Cloudngfw;
 @@clientName(GlobalRulestackResources.commit, "commit");
 @@clientLocation(GlobalRulestackResources.getChangeLog, "GlobalRulestack");
 @@clientName(GlobalRulestackResources.getChangeLog, "getChangeLog");
-@@clientLocation(GlobalRulestackResources.listAdvancedSecurityObjects,
+@@clientLocation(
+  GlobalRulestackResources.listAdvancedSecurityObjects,
   "GlobalRulestack"
 );
-@@clientName(GlobalRulestackResources.listAdvancedSecurityObjects,
+@@clientName(
+  GlobalRulestackResources.listAdvancedSecurityObjects,
   "listAdvancedSecurityObjects"
 );
 @@clientLocation(GlobalRulestackResources.listAppIds, "GlobalRulestack");
@@ -25,16 +27,20 @@ using PaloAltoNetworks.Cloudngfw;
 @@clientName(GlobalRulestackResources.listCountries, "listCountries");
 @@clientLocation(GlobalRulestackResources.listFirewalls, "GlobalRulestack");
 @@clientName(GlobalRulestackResources.listFirewalls, "listFirewalls");
-@@clientLocation(GlobalRulestackResources.listPredefinedUrlCategories,
+@@clientLocation(
+  GlobalRulestackResources.listPredefinedUrlCategories,
   "GlobalRulestack"
 );
-@@clientName(GlobalRulestackResources.listPredefinedUrlCategories,
+@@clientName(
+  GlobalRulestackResources.listPredefinedUrlCategories,
   "listPredefinedUrlCategories"
 );
-@@clientLocation(GlobalRulestackResources.listSecurityServices,
+@@clientLocation(
+  GlobalRulestackResources.listSecurityServices,
   "GlobalRulestack"
 );
-@@clientName(GlobalRulestackResources.listSecurityServices,
+@@clientName(
+  GlobalRulestackResources.listSecurityServices,
   "listSecurityServices"
 );
 @@clientLocation(GlobalRulestackResources.revert, "GlobalRulestack");
@@ -42,31 +48,39 @@ using PaloAltoNetworks.Cloudngfw;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(GlobalRulestackResource.properties);
 
-@@clientLocation(CertificateObjectGlobalRulestackResources.get,
+@@clientLocation(
+  CertificateObjectGlobalRulestackResources.get,
   "CertificateObjectGlobalRulestack"
 );
-@@clientLocation(CertificateObjectGlobalRulestackResources.createOrUpdate,
+@@clientLocation(
+  CertificateObjectGlobalRulestackResources.createOrUpdate,
   "CertificateObjectGlobalRulestack"
 );
-@@clientLocation(CertificateObjectGlobalRulestackResources.delete,
+@@clientLocation(
+  CertificateObjectGlobalRulestackResources.delete,
   "CertificateObjectGlobalRulestack"
 );
-@@clientLocation(CertificateObjectGlobalRulestackResources.list,
+@@clientLocation(
+  CertificateObjectGlobalRulestackResources.list,
   "CertificateObjectGlobalRulestack"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(CertificateObjectGlobalRulestackResource.properties);
 
-@@clientLocation(FqdnListGlobalRulestackResources.get,
+@@clientLocation(
+  FqdnListGlobalRulestackResources.get,
   "FqdnListGlobalRulestack"
 );
-@@clientLocation(FqdnListGlobalRulestackResources.createOrUpdate,
+@@clientLocation(
+  FqdnListGlobalRulestackResources.createOrUpdate,
   "FqdnListGlobalRulestack"
 );
-@@clientLocation(FqdnListGlobalRulestackResources.delete,
+@@clientLocation(
+  FqdnListGlobalRulestackResources.delete,
   "FqdnListGlobalRulestack"
 );
-@@clientLocation(FqdnListGlobalRulestackResources.list,
+@@clientLocation(
+  FqdnListGlobalRulestackResources.list,
   "FqdnListGlobalRulestack"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -85,16 +99,20 @@ using PaloAltoNetworks.Cloudngfw;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(PostRulesResource.properties);
 
-@@clientLocation(PrefixListGlobalRulestackResources.get,
+@@clientLocation(
+  PrefixListGlobalRulestackResources.get,
   "PrefixListGlobalRulestack"
 );
-@@clientLocation(PrefixListGlobalRulestackResources.createOrUpdate,
+@@clientLocation(
+  PrefixListGlobalRulestackResources.createOrUpdate,
   "PrefixListGlobalRulestack"
 );
-@@clientLocation(PrefixListGlobalRulestackResources.delete,
+@@clientLocation(
+  PrefixListGlobalRulestackResources.delete,
   "PrefixListGlobalRulestack"
 );
-@@clientLocation(PrefixListGlobalRulestackResources.list,
+@@clientLocation(
+  PrefixListGlobalRulestackResources.list,
   "PrefixListGlobalRulestack"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -135,7 +153,8 @@ using PaloAltoNetworks.Cloudngfw;
 @@clientLocation(LocalRulestackResources.createOrUpdate, "LocalRulestacks");
 @@clientLocation(LocalRulestackResources.update, "LocalRulestacks");
 @@clientLocation(LocalRulestackResources.delete, "LocalRulestacks");
-@@clientLocation(LocalRulestackResources.listByResourceGroup,
+@@clientLocation(
+  LocalRulestackResources.listByResourceGroup,
   "LocalRulestacks"
 );
 @@clientLocation(LocalRulestackResources.listBySubscription, "LocalRulestacks");
@@ -145,10 +164,12 @@ using PaloAltoNetworks.Cloudngfw;
 @@clientName(LocalRulestackResources.getChangeLog, "getChangeLog");
 @@clientLocation(LocalRulestackResources.getSupportInfo, "LocalRulestacks");
 @@clientName(LocalRulestackResources.getSupportInfo, "getSupportInfo");
-@@clientLocation(LocalRulestackResources.listAdvancedSecurityObjects,
+@@clientLocation(
+  LocalRulestackResources.listAdvancedSecurityObjects,
   "LocalRulestacks"
 );
-@@clientName(LocalRulestackResources.listAdvancedSecurityObjects,
+@@clientName(
+  LocalRulestackResources.listAdvancedSecurityObjects,
   "listAdvancedSecurityObjects"
 );
 @@clientLocation(LocalRulestackResources.listAppIds, "LocalRulestacks");
@@ -157,16 +178,20 @@ using PaloAltoNetworks.Cloudngfw;
 @@clientName(LocalRulestackResources.listCountries, "listCountries");
 @@clientLocation(LocalRulestackResources.listFirewalls, "LocalRulestacks");
 @@clientName(LocalRulestackResources.listFirewalls, "listFirewalls");
-@@clientLocation(LocalRulestackResources.listPredefinedUrlCategories,
+@@clientLocation(
+  LocalRulestackResources.listPredefinedUrlCategories,
   "LocalRulestacks"
 );
-@@clientName(LocalRulestackResources.listPredefinedUrlCategories,
+@@clientName(
+  LocalRulestackResources.listPredefinedUrlCategories,
   "listPredefinedUrlCategories"
 );
-@@clientLocation(LocalRulestackResources.listSecurityServices,
+@@clientLocation(
+  LocalRulestackResources.listSecurityServices,
   "LocalRulestacks"
 );
-@@clientName(LocalRulestackResources.listSecurityServices,
+@@clientName(
+  LocalRulestackResources.listSecurityServices,
   "listSecurityServices"
 );
 @@clientLocation(LocalRulestackResources.revert, "LocalRulestacks");
@@ -175,13 +200,16 @@ using PaloAltoNetworks.Cloudngfw;
 @@flattenProperty(LocalRulestackResource.properties);
 
 @@clientLocation(MetricsObjectFirewallResources.get, "MetricsObjectFirewall");
-@@clientLocation(MetricsObjectFirewallResources.createOrUpdate,
+@@clientLocation(
+  MetricsObjectFirewallResources.createOrUpdate,
   "MetricsObjectFirewall"
 );
-@@clientLocation(MetricsObjectFirewallResources.delete,
+@@clientLocation(
+  MetricsObjectFirewallResources.delete,
   "MetricsObjectFirewall"
 );
-@@clientLocation(MetricsObjectFirewallResources.listByFirewalls,
+@@clientLocation(
+  MetricsObjectFirewallResources.listByFirewalls,
   "MetricsObjectFirewall"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -192,29 +220,36 @@ using PaloAltoNetworks.Cloudngfw;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(FirewallStatusResource.properties);
 
-@@clientLocation(CertificateObjectLocalRulestackResources.get,
+@@clientLocation(
+  CertificateObjectLocalRulestackResources.get,
   "CertificateObjectLocalRulestack"
 );
-@@clientLocation(CertificateObjectLocalRulestackResources.createOrUpdate,
+@@clientLocation(
+  CertificateObjectLocalRulestackResources.createOrUpdate,
   "CertificateObjectLocalRulestack"
 );
-@@clientLocation(CertificateObjectLocalRulestackResources.delete,
+@@clientLocation(
+  CertificateObjectLocalRulestackResources.delete,
   "CertificateObjectLocalRulestack"
 );
-@@clientLocation(CertificateObjectLocalRulestackResources.listByLocalRulestacks,
+@@clientLocation(
+  CertificateObjectLocalRulestackResources.listByLocalRulestacks,
   "CertificateObjectLocalRulestack"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(CertificateObjectLocalRulestackResource.properties);
 
 @@clientLocation(FqdnListLocalRulestackResources.get, "FqdnListLocalRulestack");
-@@clientLocation(FqdnListLocalRulestackResources.createOrUpdate,
+@@clientLocation(
+  FqdnListLocalRulestackResources.createOrUpdate,
   "FqdnListLocalRulestack"
 );
-@@clientLocation(FqdnListLocalRulestackResources.delete,
+@@clientLocation(
+  FqdnListLocalRulestackResources.delete,
   "FqdnListLocalRulestack"
 );
-@@clientLocation(FqdnListLocalRulestackResources.listByLocalRulestacks,
+@@clientLocation(
+  FqdnListLocalRulestackResources.listByLocalRulestacks,
   "FqdnListLocalRulestack"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -234,38 +269,48 @@ using PaloAltoNetworks.Cloudngfw;
 @@flattenProperty(LocalRulesResource.properties);
 
 @@clientLocation(PrefixListResources.get, "PrefixListLocalRulestack");
-@@clientLocation(PrefixListResources.createOrUpdate,
+@@clientLocation(
+  PrefixListResources.createOrUpdate,
   "PrefixListLocalRulestack"
 );
 @@clientLocation(PrefixListResources.delete, "PrefixListLocalRulestack");
-@@clientLocation(PrefixListResources.listByLocalRulestacks,
+@@clientLocation(
+  PrefixListResources.listByLocalRulestacks,
   "PrefixListLocalRulestack"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(PrefixListResource.properties);
 
-@@clientLocation(PaloAltoNetworksCloudngfwOperationsOperationGroup.createProductSerialNumber,
+@@clientLocation(
+  PaloAltoNetworksCloudngfwOperationsOperationGroup.createProductSerialNumber,
   "PaloAltoNetworksCloudngfwOperations"
 );
-@@clientName(PaloAltoNetworksCloudngfwOperationsOperationGroup.createProductSerialNumber,
+@@clientName(
+  PaloAltoNetworksCloudngfwOperationsOperationGroup.createProductSerialNumber,
   "createProductSerialNumber"
 );
-@@clientLocation(PaloAltoNetworksCloudngfwOperationsOperationGroup.listCloudManagerTenants,
+@@clientLocation(
+  PaloAltoNetworksCloudngfwOperationsOperationGroup.listCloudManagerTenants,
   "PaloAltoNetworksCloudngfwOperations"
 );
-@@clientName(PaloAltoNetworksCloudngfwOperationsOperationGroup.listCloudManagerTenants,
+@@clientName(
+  PaloAltoNetworksCloudngfwOperationsOperationGroup.listCloudManagerTenants,
   "listCloudManagerTenants"
 );
-@@clientLocation(PaloAltoNetworksCloudngfwOperationsOperationGroup.listProductSerialNumberStatus,
+@@clientLocation(
+  PaloAltoNetworksCloudngfwOperationsOperationGroup.listProductSerialNumberStatus,
   "PaloAltoNetworksCloudngfwOperations"
 );
-@@clientName(PaloAltoNetworksCloudngfwOperationsOperationGroup.listProductSerialNumberStatus,
+@@clientName(
+  PaloAltoNetworksCloudngfwOperationsOperationGroup.listProductSerialNumberStatus,
   "listProductSerialNumberStatus"
 );
-@@clientLocation(PaloAltoNetworksCloudngfwOperationsOperationGroup.listSupportInfo,
+@@clientLocation(
+  PaloAltoNetworksCloudngfwOperationsOperationGroup.listSupportInfo,
   "PaloAltoNetworksCloudngfwOperations"
 );
-@@clientName(PaloAltoNetworksCloudngfwOperationsOperationGroup.listSupportInfo,
+@@clientName(
+  PaloAltoNetworksCloudngfwOperationsOperationGroup.listSupportInfo,
   "listSupportInfo"
 );
 
@@ -275,52 +320,63 @@ using PaloAltoNetworks.Cloudngfw;
 @@clientName(SecurityServicesTypeList, "securityServicesTypeList");
 @@clientName(AdvSecurityObjectModel, "advSecurityObjectModel");
 
-@@clientName(AzureResourceManagerManagedIdentityProperties,
+@@clientName(
+  AzureResourceManagerManagedIdentityProperties,
   "Azure.ResourceManager.ManagedIdentityProperties",
   "!python"
 );
-@@clientName(AzureResourceManagerUserAssignedIdentity,
+@@clientName(
+  AzureResourceManagerUserAssignedIdentity,
   "Azure.ResourceManager.UserAssignedIdentity",
   "!python"
 );
 
-@@visibility(CertificateObjectGlobalRulestackResource.properties,
+@@visibility(
+  CertificateObjectGlobalRulestackResource.properties,
   Lifecycle.Read,
   Lifecycle.Create
 );
-@@visibility(CertificateObjectLocalRulestackResource.properties,
+@@visibility(
+  CertificateObjectLocalRulestackResource.properties,
   Lifecycle.Read,
   Lifecycle.Create
 );
 @@visibility(FirewallResource.properties, Lifecycle.Read, Lifecycle.Create);
-@@visibility(FirewallStatusResource.properties,
+@@visibility(
+  FirewallStatusResource.properties,
   Lifecycle.Read,
   Lifecycle.Create
 );
-@@visibility(FqdnListGlobalRulestackResource.properties,
+@@visibility(
+  FqdnListGlobalRulestackResource.properties,
   Lifecycle.Read,
   Lifecycle.Create
 );
-@@visibility(FqdnListLocalRulestackResource.properties,
+@@visibility(
+  FqdnListLocalRulestackResource.properties,
   Lifecycle.Read,
   Lifecycle.Create
 );
-@@visibility(GlobalRulestackResource.properties,
+@@visibility(
+  GlobalRulestackResource.properties,
   Lifecycle.Read,
   Lifecycle.Create
 );
 @@visibility(LocalRulesResource.properties, Lifecycle.Read, Lifecycle.Create);
-@@visibility(LocalRulestackResource.properties,
+@@visibility(
+  LocalRulestackResource.properties,
   Lifecycle.Read,
   Lifecycle.Create
 );
-@@visibility(MetricsObjectFirewallResource.properties,
+@@visibility(
+  MetricsObjectFirewallResource.properties,
   Lifecycle.Read,
   Lifecycle.Create
 );
 @@visibility(PostRulesResource.properties, Lifecycle.Read, Lifecycle.Create);
 @@visibility(PreRulesResource.properties, Lifecycle.Read, Lifecycle.Create);
-@@visibility(PrefixListGlobalRulestackResource.properties,
+@@visibility(
+  PrefixListGlobalRulestackResource.properties,
   Lifecycle.Read,
   Lifecycle.Create
 );

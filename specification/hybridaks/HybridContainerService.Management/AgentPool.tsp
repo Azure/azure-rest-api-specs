@@ -70,6 +70,7 @@ interface AgentPools {
   >;
 }
 
-@@doc(AgentPools.createOrUpdate::parameters.resource,
+@@doc(
+  AgentPools.createOrUpdate::parameters.resource,
   "Agent Pool resource definition"
 );

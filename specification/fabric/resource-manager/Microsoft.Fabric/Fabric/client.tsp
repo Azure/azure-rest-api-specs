@@ -6,43 +6,52 @@ using Azure.ClientGenerator.Core;
 namespace Microsoft.Fabric {
   @@access(Operations.list, Access.internal, "csharp");
 
-  @@clientName(FabricCapacities.checkNameAvailability,
+  @@clientName(
+    FabricCapacities.checkNameAvailability,
     "CheckFabricCapacityNameAvailability",
     "csharp"
   );
-  @@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest,
+  @@clientName(
+    Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest,
     "FabricNameAvailabilityContent",
     "csharp"
   );
-  @@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest.type,
+  @@clientName(
+    Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest.type,
     "ResourceType",
     "csharp"
   );
-  @@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse,
+  @@clientName(
+    Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse,
     "FabricNameAvailabilityResult",
     "csharp"
   );
-  @@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse.nameAvailable,
+  @@clientName(
+    Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse.nameAvailable,
     "IsNameAvailable",
     "csharp"
   );
-  @@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityReason,
+  @@clientName(
+    Azure.ResourceManager.CommonTypes.CheckNameAvailabilityReason,
     "FabricNameUnavailableReason",
     "csharp"
   );
   @@clientName(ProvisioningState, "FabricProvisioningState", "csharp");
   @@clientName(ResourceState, "FabricResourceState", "csharp");
-  @@clientName(RpSkuDetailsForNewResource,
+  @@clientName(
+    RpSkuDetailsForNewResource,
     "FabricSkuDetailsForNewCapacity",
     "csharp"
   );
-  @@clientName(RpSkuDetailsForExistingResource,
+  @@clientName(
+    RpSkuDetailsForExistingResource,
     "FabricSkuDetailsForExistingCapacity",
     "csharp"
   );
   @@clientName(RpSku, "FabricSku", "csharp");
   @@clientName(RpSkuTier, "FabricSkuTier", "csharp");
-  @@clientName(CapacityAdministration,
+  @@clientName(
+    CapacityAdministration,
     "FabricCapacityAdministration",
     "csharp"
   );

@@ -172,9 +172,11 @@ interface Operations
       CloudError
     > {}
 
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "Lists all of the available Network Rest API operations."
 );
-@@armResourceOperations(Azure.ResourceManager.Legacy.Operations,
+@@armResourceOperations(
+  Azure.ResourceManager.Legacy.Operations,
   #{ omitTags: true }
 );
