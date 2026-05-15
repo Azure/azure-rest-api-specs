@@ -12,7 +12,7 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.App;
 /**
- * Advanced Ingress routing for path/header based routing for a Container App Environment
+ * A set of host names and http request routing rules for a Container App Environment
  */
 @parentResource(ManagedEnvironment)
 model HttpRouteConfig

@@ -274,6 +274,80 @@ using Microsoft.App;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Revision.properties);
 
+// Collection value/nextLink description augments for swagger fidelity
+@@doc(AuthConfigCollection.value, "Collection of resources.");
+@@doc(AuthConfigCollection.nextLink, "Link to next page of resources.");
+@@doc(AvailableOperations.value, "Collection of available operation details");
+@@doc(AvailableOperations.nextLink,
+  "URL client should use to fetch the next page (per server side paging).\nIt's null for now, added for future use."
+);
+@@doc(AvailableWorkloadProfilesCollection.value,
+  "Collection of workload profiles."
+);
+@@doc(AvailableWorkloadProfilesCollection.nextLink,
+  "Link to next page of resources."
+);
+@@doc(CertificateCollection.value, "Collection of resources.");
+@@doc(CertificateCollection.nextLink, "Link to next page of resources.");
+@@doc(ConnectedEnvironmentCollection.value, "Collection of resources.");
+@@doc(ConnectedEnvironmentCollection.nextLink,
+  "Link to next page of resources."
+);
+@@doc(ContainerAppCollection.value, "Collection of resources.");
+@@doc(ContainerAppCollection.nextLink, "Link to next page of resources.");
+@@doc(ContainerAppJobExecutions.value, "Collection of resources.");
+@@doc(ContainerAppJobExecutions.nextLink, "Link to next page of resources.");
+@@doc(DaprComponentsCollection.value, "Collection of resources.");
+@@doc(DaprComponentsCollection.nextLink, "Link to next page of resources.");
+@@doc(DiagnosticsCollection.value, "Collection of diagnostic data.");
+@@doc(DiagnosticsCollection.nextLink, "Link to next page of resources.");
+@@doc(HttpRouteConfigCollection.value, "Collection of resources.");
+@@doc(HttpRouteConfigCollection.nextLink, "Link to next page of resources.");
+@@doc(JavaComponentsCollection.value, "Collection of resources.");
+@@doc(JavaComponentsCollection.nextLink, "Link to next page of resources.");
+@@doc(JobsCollection.value, "Collection of resources.");
+@@doc(JobsCollection.nextLink, "Link to next page of resources.");
+@@doc(ListUsagesResult.value, "The list of compute resource usages.");
+@@doc(ListUsagesResult.nextLink,
+  "The URI to fetch the next page of compute resource usage information. Call ListNext() with this to fetch the next page of compute resource usage information."
+);
+@@doc(MaintenanceConfigurationCollection.value,
+  "Results of the list maintenance configuration resources."
+);
+@@doc(MaintenanceConfigurationCollection.nextLink,
+  "Link for next page of results."
+);
+@@doc(ManagedCertificateCollection.value, "Collection of resources.");
+@@doc(ManagedCertificateCollection.nextLink, "Link to next page of resources.");
+@@doc(ManagedEnvironmentsCollection.value, "Collection of resources.");
+@@doc(ManagedEnvironmentsCollection.nextLink,
+  "Link to next page of resources."
+);
+@@doc(RevisionCollection.value, "Collection of resources.");
+@@doc(RevisionCollection.nextLink, "Link to next page of resources.");
+@@doc(SessionPoolCollection.value, "Collection of resources.");
+@@doc(SessionPoolCollection.nextLink, "Link to next page of resources.");
+@@doc(SourceControlCollection.value, "Collection of resources.");
+@@doc(SourceControlCollection.nextLink, "Link to next page of resources.");
+@@doc(WorkflowEnvelopeCollection.value, "Collection of resources.");
+@@doc(WorkflowEnvelopeCollection.nextLink, "Link to next page of resources.");
+@@doc(workloadProfileStatesCollection.value, "Collection of resources.");
+@@doc(workloadProfileStatesCollection.nextLink,
+  "Link to next page of resources."
+);
+
+// Individual property description augments for swagger fidelity
+@@doc(Diagnostics.properties, "Diagnostics resource specific properties");
+@@doc(Job.identity,
+  "Managed identities needed by a container app job to interact with other Azure services to not maintain any secrets or credentials in code."
+);
+@@doc(ManagedEnvironment.identity,
+  "Managed identities for the Managed Environment to interact with other Azure services without maintaining any secrets or credentials in code."
+);
+@@doc(SessionPool.identity,
+  "Managed identities needed by a session pool to interact with other Azure services to not maintain any secrets or credentials in code."
+);
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Replica.properties);
 

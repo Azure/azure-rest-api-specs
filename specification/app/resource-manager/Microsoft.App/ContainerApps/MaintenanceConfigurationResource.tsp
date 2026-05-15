@@ -84,17 +84,17 @@ interface MaintenanceConfigurations {
   /**
    * Create or update the maintenance configuration for Managed Environment.
    */
-  createOrUpdate is MaintenanceConfigurationResourceCustomErrorOps.CreateOrUpdateSync<MaintenanceConfigurationResource>;
+  createOrUpdate is MaintenanceConfigurationResourceOps.CreateOrUpdateSync<MaintenanceConfigurationResource>;
 
   /**
    * Deletes the maintenance configuration of a ManagedEnvironment .
    */
-  delete is MaintenanceConfigurationResourceCustomErrorOps.DeleteSync<MaintenanceConfigurationResource>;
+  delete is MaintenanceConfigurationResourceOps.DeleteSync<MaintenanceConfigurationResource>;
 
   /**
    * Gets all maintenance configurations in the specified Managed Environment.
    */
-  list is MaintenanceConfigurationResourceCustomErrorOps.List<
+  list is MaintenanceConfigurationResourceOps.List<
     MaintenanceConfigurationResource,
     Response = ArmResponse<MaintenanceConfigurationCollection>
   >;
