@@ -700,6 +700,28 @@ union WitnessType {
 }
 
 /**
+ * The Validated Solution Recipe (VSR) ring that determines when a cluster
+ * receives solution updates. Rings gate rollout progressively from internal
+ * validation through broad production deployment.
+ */
+@added(Versions.v2026_05_01_preview)
+union VsrRing {
+  string,
+
+  /** CI ring — used for automated continuous-integration testing and ProdCI validation without sideloading. */
+  CI: "CI",
+
+  /** Insider ring — available to all Insider-ring customers and OEMs for broader validation before general availability. */
+  Insider: "Insider",
+
+  /** EarlyAdopter ring — opt-in ring for customers who want updates ahead of the general Production rollout. */
+  EarlyAdopter: "EarlyAdopter",
+
+  /** Production ring — general-availability ring for all customers. */
+  Production: "Production",
+}
+
+/**
  * Type of secrets to store
  */
 union SecretsType {
@@ -1954,7 +1976,7 @@ model ClusterProperties {
    */
   @visibility(Lifecycle.Read)
   @added(Versions.v2026_05_01_preview)
-  ring?: string;
+  ring?: VsrRing;
 
   /**
    * Endpoint configured for management from the Azure portal.
@@ -2770,20 +2792,24 @@ model SoftwareAssuranceChangeRequestProperties {
   softwareAssuranceIntent?: SoftwareAssuranceIntent;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/**
+ * Request body for the change-ring action on a cluster.
+ */
 @added(Versions.v2026_05_01_preview)
 model ChangeRingRequest {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  properties?: ChangeRingRequestProperties;
+  /** Properties of the change-ring request. */
+  properties: ChangeRingRequestProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/**
+ * Properties for the change-ring request.
+ */
 @added(Versions.v2026_05_01_preview)
 model ChangeRingRequestProperties {
   /**
    * The target ring for the cluster.
    */
-  targetRing?: string;
+  targetRing: VsrRing;
 }
 
 /**

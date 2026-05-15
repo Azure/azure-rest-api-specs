@@ -51,6 +51,20 @@ namespace Microsoft.AzureStackHCI;
 
 /**
  * The available API versions.
+ *
+ * This enum lists only the currently active API versions. Retired preview
+ * versions (e.g. 2025-11-01-preview through 2026-04-01-preview) are
+ * intentionally omitted — each new preview fully supersedes the previous one,
+ * and customers are expected to adopt the latest preview. Including every
+ * shipped preview would require extensive `@added`/`@removed` decorator
+ * chains across hundreds of models, rendering the TypeSpec source unreadable
+ * and unmaintainable.
+ *
+ * The published swagger files under `preview/<retired-version>/` remain on
+ * disk for backward compatibility with existing consumers (CI pipelines,
+ * unit tests, and customer dependencies). Those swaggers are frozen and
+ * must be regenerated from a pinned commit if changes are ever needed —
+ * not from the latest main.
  */
 enum Versions {
   /**
