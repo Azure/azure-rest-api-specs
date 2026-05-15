@@ -54,6 +54,15 @@
           "jobLimitsType": "Command",
           "timeout": "PT2H30M"
         },
+        "services": {
+          "my_ssh": {
+            "jobServiceType": "SSH",
+            "nodes": { "nodesValueType": "All" },
+            "properties": {
+              "sshPublicKeys": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPykbeMQW4AN94tfWncTg3qegSMi6dwvIEmrW7rWq6OV user@host"
+            }
+          }
+        },
         "queueSettings": { "jobTier": "Standard" },
         "userAssignedIdentityId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/my-identity",
         "gpuCount": 4,
@@ -119,7 +128,15 @@
           },
           "services": {
             "Studio": { "jobServiceType": "Studio", "port": 8080, "endpoint": "https://studio.example.com" },
-            "Tracking": { "jobServiceType": "Tracking" }
+            "Tracking": { "jobServiceType": "Tracking" },
+            "my_ssh": {
+              "jobServiceType": "SSH",
+              "nodes": { "nodesValueType": "All" },
+              "properties": {
+                "sshPublicKeys": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPykbeMQW4AN94tfWncTg3qegSMi6dwvIEmrW7rWq6OV user@host"
+              },
+              "status": "Running"
+            }
           },
           "queueSettings": { "jobTier": "Standard" },
           "userAssignedIdentityId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/my-identity",
@@ -193,7 +210,14 @@
           },
           "services": {
             "Studio": { "jobServiceType": "Studio", "port": 8080, "endpoint": "https://studio.example.com" },
-            "Tracking": { "jobServiceType": "Tracking" }
+            "Tracking": { "jobServiceType": "Tracking" },
+            "my_ssh": {
+              "jobServiceType": "SSH",
+              "nodes": { "nodesValueType": "All" },
+              "properties": {
+                "sshPublicKeys": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPykbeMQW4AN94tfWncTg3qegSMi6dwvIEmrW7rWq6OV user@host"
+              }
+            }
           },
           "queueSettings": { "jobTier": "Standard" },
           "userAssignedIdentityId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/my-identity",

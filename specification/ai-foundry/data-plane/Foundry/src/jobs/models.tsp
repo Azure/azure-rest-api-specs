@@ -288,7 +288,6 @@ model CommandJob extends JobProperties {
   limits?: CommandJobLimits;
 
   @doc("List of job services.")
-  @visibility(Lifecycle.Read)
   services?: Record<JobService>;
 
   @doc("Queue settings for the job.")
