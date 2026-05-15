@@ -13,6 +13,7 @@ import "./src/evaluation-taxonomies/routes.tsp";
 import "./src/evaluators/routes.tsp";
 import "./src/insights/routes.tsp";
 import "./src/schedules/routes.tsp";
+import "./src/routines/routes.tsp";
 import "./src/skills/routes.tsp";
 import "./src/data_generation_jobs/routes.tsp";
 
@@ -240,4 +241,5 @@ model TimeZoneType {}
 
 @@clientDoc(Skills.downloadSkill,
   "Downloads a skill package as a ZIP archive containing {@code SKILL.md}. Returns the original uploaded archive for skills created via {@code createSkillFromPackage}; materializes a ZIP from stored instructions for skills created via {@code createSkill}.",
-  DocumentationMode.replace);
+  DocumentationMode.replace
+);

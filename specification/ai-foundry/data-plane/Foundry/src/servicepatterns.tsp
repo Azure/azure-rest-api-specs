@@ -50,6 +50,7 @@ union FoundryFeaturesOptInKeys {
   red_teams_v1_preview: "RedTeams=V1Preview",
   insights_v1_preview: "Insights=V1Preview",
   memory_stores_v1_preview: "MemoryStores=V1Preview",
+  routines_v1_preview: "Routines=V1Preview",
   toolboxes_v1_preview: "Toolboxes=V1Preview",
   skills_v1_preview: "Skills=V1Preview",
   data_generation_jobs_v1_preview: "DataGenerationJobs=V1Preview",
