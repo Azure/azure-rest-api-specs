@@ -50,4 +50,3 @@ using Microsoft.Resources;
   "ErrorResponse",
   "go"
 );
-@@visibility(ProviderResourceTypeListResult.nextLink, Lifecycle.Read);
