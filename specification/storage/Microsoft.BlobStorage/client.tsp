@@ -9,8 +9,35 @@ using TypeSpec.Versioning;
 
 namespace Customizations;
 
+// Cross-language modifications: python,csharp,javascript,go
 @@alternateType(KeyInfo.start, string, "python,csharp,javascript,go");
 @@alternateType(KeyInfo.expiry, string, "python,csharp,javascript,go");
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing SDKs didn't output pageable operations format"
+@@Azure.ClientGenerator.Core.Legacy.disablePageable(Service.listContainers,
+  "python,csharp,javascript,go"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing SDKs didn't output pageable operations format"
+@@Azure.ClientGenerator.Core.Legacy.disablePageable(Service.findBlobsByTags,
+  "python,csharp,javascript,go"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing SDKs didn't output pageable operations format"
+@@Azure.ClientGenerator.Core.Legacy.disablePageable(Container.findBlobsByTags,
+  "python,csharp,javascript,go"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing SDKs didn't output pageable operations format"
+@@Azure.ClientGenerator.Core.Legacy.disablePageable(Container.listBlobs,
+  "python,csharp,javascript,go"
+);
+
+@@clientName(FilterBlobResponse,
+  "FilterBlobSegment",
+  "python,csharp,javascript,go"
+);
+@@clientName(ListContainersResponse,
+  "ListContainersSegmentResponse",
+  "python,csharp,javascript,go"
+);
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
 @client(
