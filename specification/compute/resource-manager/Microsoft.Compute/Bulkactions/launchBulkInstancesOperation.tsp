@@ -73,10 +73,7 @@ alias LaunchCustomParams = {
   ...LaunchCommonParams;
   ...ProviderNamespace<LocationBasedLaunchBulkInstancesOperation>;
   ...LaunchLocationParameter;
-  ...ResourceNameParameter<
-    LocationBasedLaunchBulkInstancesOperation,
-    NamePattern = "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-  >;
+  ...LaunchBulkInstancesOperationId;
 };
 
 // ============================================================
@@ -268,6 +265,23 @@ model VirtualMachineListResult {
 // Resource: LaunchBulkInstancesOperation
 // ============================================================
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Bare envelope used as the @listsResource target; shape is documented via LocationBasedLaunchBulkInstancesOperation."
+@added(Microsoft.Compute.Versions.`2026-06-06-preview`)
+@doc("Envelope properties shared by LaunchBulkInstancesOperation. Used as the @listsResource target to avoid collision with the interface name.")
+model LaunchBulkInstancesOperationEnvelope {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Zones is a valid envelope property for this resource."
+  @doc("Zones in which the LaunchBulkInstancesOperation is available")
+  zones?: Array<string>;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tags free-form object matches the established compute contract."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Tags is a standard ARM resource property."
+  @doc("Resource tags.")
+  tags?: Record<string>;
+
+  ...ManagedServiceIdentityProperty;
+  ...ResourcePlanProperty;
+}
+
 @added(Microsoft.Compute.Versions.`2026-06-06-preview`)
 @doc("Location based LaunchBulkInstancesOperation resource. The location is part of the resource path.")
 model LocationBasedLaunchBulkInstancesOperation
@@ -280,17 +294,7 @@ model LocationBasedLaunchBulkInstancesOperation
   @visibility(Lifecycle.Read)
   location: azureLocation;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Zones is a valid envelope property for this resource."
-  @doc("Zones in which the LaunchBulkInstancesOperation is available")
-  zones?: Array<string>;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tags free-form object matches the established compute contract."
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Tags is a standard ARM resource property."
-  @doc("Resource tags.")
-  tags?: Record<string>;
-
-  ...ManagedServiceIdentityProperty;
-  ...ResourcePlanProperty;
+  ...LaunchBulkInstancesOperationEnvelope;
 }
 
 @added(Microsoft.Compute.Versions.`2026-06-06-preview`)
@@ -386,7 +390,7 @@ interface LaunchBulkInstancesOperation {
   @autoRoute
   @action("launchBulkInstancesOperations")
   @list
-  @listsResource(LocationBasedLaunchBulkInstancesOperation)
+  @listsResource(LaunchBulkInstancesOperationEnvelope)
   @armResourceList(LocationBasedLaunchBulkInstancesOperation)
   listByResourceGroup(
     ...LaunchCommonParams,
@@ -399,7 +403,7 @@ interface LaunchBulkInstancesOperation {
   @autoRoute
   @action("launchBulkInstancesOperations")
   @list
-  @listsResource(LocationBasedLaunchBulkInstancesOperation)
+  @listsResource(LaunchBulkInstancesOperationEnvelope)
   @armResourceList(LocationBasedLaunchBulkInstancesOperation)
   listBySubscription(
     ...LaunchSubscriptionParams,
