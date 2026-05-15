@@ -6581,7 +6581,7 @@ model ClaimDeviceRequest {
   devices: Azure.Core.armResourceIdentifier[];
 
   /**
-   * Resource Id of group device belongs to.
+   * Identifier of the group the device belongs to.
    */
   claimedBy?: string;
 }
@@ -6664,7 +6664,7 @@ model DeviceDetail {
   deviceResourceId?: Azure.Core.armResourceIdentifier;
 
   /**
-   * Resource Id of group device belongs to.
+   * Identifier of the group the device belongs to.
    */
   @visibility(Lifecycle.Read)
   claimedBy?: string;
