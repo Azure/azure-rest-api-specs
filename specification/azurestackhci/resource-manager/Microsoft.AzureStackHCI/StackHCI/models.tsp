@@ -8070,7 +8070,7 @@ model TimeConfiguration {
 /**
  * Represents properties of a kubernetes version.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "KubernetesVersion is a read-only catalog proxy resource exposing available versions; it has no lifecycle and therefore no provisioningState."
 @added(Versions.v2026_05_01_preview)
 model KubernetesVersionProperties {
   /**
@@ -8132,7 +8132,7 @@ model ClusterJobListResult is Azure.Core.Page<ClusterJob>;
 /**
  * Represents properties of a os image resource.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "OsImage is a read-only catalog proxy resource exposing available OS images; it has no lifecycle and therefore no provisioningState."
 @added(Versions.v2026_05_01_preview)
 model OsImageProperties {
   /**
@@ -8163,7 +8163,7 @@ model OsImageProperties {
 /**
  * Represents properties of a platform update resource.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "PlatformUpdate is a read-only catalog proxy resource exposing available platform updates; it has no lifecycle and therefore no provisioningState."
 @added(Versions.v2026_05_01_preview)
 model PlatformUpdateProperties {
   /**
@@ -8321,7 +8321,7 @@ union OwnershipVoucherValidationStatus {
 /**
  * Represents properties of a update content resource.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "UpdateContent is a read-only catalog proxy resource exposing update payloads; it has no lifecycle and therefore no provisioningState."
 @added(Versions.v2026_05_01_preview)
 model UpdateContentProperties {
   /**
