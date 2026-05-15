@@ -72,6 +72,7 @@ interface ServerSoftwareInventories {
 }
 
 @@doc(ServerSoftwareInventory.name, "Default value.");
-@@doc(ServerSoftwareInventory.properties,
+@@doc(
+  ServerSoftwareInventory.properties,
   "The resource-specific properties for this resource."
 );

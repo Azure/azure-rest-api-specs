@@ -81,6 +81,7 @@ interface Rules {
 @@minLength(Rule.name, 1);
 @@doc(Rule.name, "The rule name.");
 @@doc(Rule.properties, "Properties of Rule resource");
-@@doc(Rules.createOrUpdate::parameters.resource,
+@@doc(
+  Rules.createOrUpdate::parameters.resource,
   "Parameters supplied to create a rule."
 );

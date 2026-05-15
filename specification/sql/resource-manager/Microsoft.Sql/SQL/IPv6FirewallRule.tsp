@@ -83,6 +83,7 @@ interface IPv6FirewallRules {
 }
 
 @@doc(IPv6FirewallRule.properties, "Resource properties.");
-@@doc(IPv6FirewallRules.createOrUpdate::parameters.resource,
+@@doc(
+  IPv6FirewallRules.createOrUpdate::parameters.resource,
   "The required parameters for creating or updating an IPv6 firewall rule."
 );

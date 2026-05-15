@@ -35,7 +35,8 @@ interface ManagedDatabaseRestoreDetailsResults {
   get is ArmResourceRead<ManagedDatabaseRestoreDetailsResult>;
 }
 
-@@doc(ManagedDatabaseRestoreDetailsResult.name,
+@@doc(
+  ManagedDatabaseRestoreDetailsResult.name,
   "The name of the restore details to retrieve."
 );
 @@doc(ManagedDatabaseRestoreDetailsResult.properties, "Resource properties.");

@@ -19,7 +19,8 @@ using Microsoft.CostManagement;
 @@clientName(ReportURL, "ReportUrl", "java");
 
 // Rename statusModificationUserName back to statusModificationUsername for Java
-@@clientName(AlertProperties.statusModificationUserName,
+@@clientName(
+  AlertProperties.statusModificationUserName,
   "statusModificationUsername",
   "java"
 );
@@ -34,42 +35,51 @@ using Microsoft.CostManagement;
 @@clientName(Export.eTag, "etag", "java");
 @@clientName(Alert.eTag, "etag", "java");
 
-@@clientName(Microsoft.CostManagement.ErrorResponse,
+@@clientName(
+  Microsoft.CostManagement.ErrorResponse,
   "CostManagementErrorResponse",
   "csharp"
 );
 @@clientLocation(ViewOperationGroup.getByScope, ViewOperationGroup, "csharp");
-@@clientLocation(ViewOperationGroup.createOrUpdateByScope,
+@@clientLocation(
+  ViewOperationGroup.createOrUpdateByScope,
   ViewOperationGroup,
   "csharp"
 );
-@@clientLocation(ViewOperationGroup.deleteByScope,
+@@clientLocation(
+  ViewOperationGroup.deleteByScope,
   ViewOperationGroup,
   "csharp"
 );
 @@clientLocation(ViewOperationGroup.listByScope, ViewOperationGroup, "csharp");
-@@clientLocation(ScheduledActionOperationGroup.getByScope,
+@@clientLocation(
+  ScheduledActionOperationGroup.getByScope,
   ScheduledActionOperationGroup,
   "csharp"
 );
-@@clientLocation(ScheduledActionOperationGroup.createOrUpdateByScope,
+@@clientLocation(
+  ScheduledActionOperationGroup.createOrUpdateByScope,
   ScheduledActionOperationGroup,
   "csharp"
 );
-@@clientLocation(ScheduledActionOperationGroup.deleteByScope,
+@@clientLocation(
+  ScheduledActionOperationGroup.deleteByScope,
   ScheduledActionOperationGroup,
   "csharp"
 );
-@@clientLocation(ScheduledActionOperationGroup.listByScope,
+@@clientLocation(
+  ScheduledActionOperationGroup.listByScope,
   ScheduledActionOperationGroup,
   "csharp"
 );
-@@clientLocation(ScheduledActionOperationGroup.runByScope,
+@@clientLocation(
+  ScheduledActionOperationGroup.runByScope,
   ScheduledActionOperationGroup,
   "csharp"
 );
 @@clientName(Microsoft.CostManagement, "CostManagementClient", "python");
-@@clientName(Azure.ResourceManager.CommonTypes.ErrorResponse,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ErrorResponse,
   "ArmErrorResponse",
   "python,javascript,java"
 );
@@ -118,15 +128,18 @@ op GetGenerateDetailedCostReportOperationStatusCustomized(
   scope: string,
 ): GenerateDetailedCostReportOperationStatus;
 
-@@override(GenerateDetailedCostReportOperationResults.get,
+@@override(
+  GenerateDetailedCostReportOperationResults.get,
   GetGenerateDetailedCostReportOperationResultCustomized,
   "python,go,java,javascript"
 );
-@@override(GenerateDetailedCostReportOperationStatus.get,
+@@override(
+  GenerateDetailedCostReportOperationStatus.get,
   GetGenerateDetailedCostReportOperationStatusCustomized,
   "python,go,java,javascript"
 );
-@@clientName(DimensionsOperationGroup.byExternalCloudProviderType,
+@@clientName(
+  DimensionsOperationGroup.byExternalCloudProviderType,
   "listByExternalCloudProviderType",
   "javascript"
 );
@@ -153,7 +166,8 @@ op GetGenerateDetailedCostReportOperationStatusCustomized(
 @@clientName(AlertProperties.modificationTime, "ModifiedOn", "csharp");
 @@clientName(AlertProperties.creationTime, "CreatedOn", "csharp");
 @@clientName(AlertProperties.closeTime, "CloseOn", "csharp");
-@@clientName(AlertProperties.statusModificationTime,
+@@clientName(
+  AlertProperties.statusModificationTime,
   "StatusModifiedOn",
   "csharp"
 );
@@ -167,26 +181,31 @@ op GetGenerateDetailedCostReportOperationStatusCustomized(
 @@clientName(QueryDefinition.type, "ExportType", "csharp");
 @@clientName(QueryGrouping.type, "ColumnType", "csharp");
 @@clientName(ReportConfigGrouping.type, "QueryColumnType", "csharp");
-@@alternateType(ViewProperties.scope,
+@@alternateType(
+  ViewProperties.scope,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ScheduledActionProperties.scope,
+@@alternateType(
+  ScheduledActionProperties.scope,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ScheduledActionProperties.viewId,
+@@alternateType(
+  ScheduledActionProperties.viewId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ExportDeliveryDestination.resourceId,
+@@alternateType(
+  ExportDeliveryDestination.resourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 @@alternateType(KpiProperties.id, Azure.Core.armResourceIdentifier, "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the operation back to pageable for backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Exports.getExecutionHistory,
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  Exports.getExecutionHistory,
   "csharp"
 );
 
@@ -194,16 +213,19 @@ op GetGenerateDetailedCostReportOperationStatusCustomized(
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(Exports.list, "csharp");
 
 @@clientName(DimensionProperties.filterEnabled, "IsFilterEnabled", "csharp");
-@@clientName(DimensionProperties.groupingEnabled,
+@@clientName(
+  DimensionProperties.groupingEnabled,
   "IsGroupingEnabled",
   "csharp"
 );
 @@clientName(KpiProperties.enabled, "IsEnabled", "csharp");
-@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityReason,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityReason,
   "CostManagementUnavailabilityReason",
   "csharp"
 );
-@@clientName(BenefitUtilizationSummariesRequest,
+@@clientName(
+  BenefitUtilizationSummariesRequest,
   "BenefitUtilizationSummariesContent",
   "csharp"
 );
@@ -216,25 +238,30 @@ op GetGenerateDetailedCostReportOperationStatusCustomized(
 @@clientName(AlertsResult, "CostManagementAlertsResult", "csharp");
 @@clientName(AlertStatus, "CostManagementAlertStatus", "csharp");
 @@clientName(AlertType, "CostManagementAlertType", "csharp");
-@@clientName(DimensionsListResult,
+@@clientName(
+  DimensionsListResult,
   "CostManagementDimensionsListResult",
   "csharp"
 );
 @@clientName(PivotTypeType, "ViewPivotType", "csharp");
 @@clientName(KpiTypeType, "ViewKpiType", "csharp");
-@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest,
   "CostManagementNameAvailabilityContent",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse,
   "CostManagementNameAvailabilityResult",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse.nameAvailable,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse.nameAvailable,
   "NameAvailable",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest.type,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest.type,
   "ResourceType",
   "csharp"
 );
@@ -242,16 +269,19 @@ op GetGenerateDetailedCostReportOperationStatusCustomized(
 @@clientName(Reason, "CostAllocationRuleCheckNameAvailabilityReason", "csharp");
 
 @@clientName(CostAllocationRuleDefinition, "CostAllocationRule", "csharp");
-@@clientName(GenerateCostDetailsReportRequestDefinition,
+@@clientName(
+  GenerateCostDetailsReportRequestDefinition,
   "GenerateCostDetailsReportContent",
   "csharp"
 );
-@@clientName(GenerateDetailedCostReportDefinition,
+@@clientName(
+  GenerateDetailedCostReportDefinition,
   "GenerateDetailedCostReportContent",
   "csharp"
 );
 @@clientName(Status.status, "StatusValue", "csharp");
-@@clientName(ScheduledActionOperationGroup.listByScope,
+@@clientName(
+  ScheduledActionOperationGroup.listByScope,
   "GetAllByScope",
   "csharp"
 );
@@ -263,110 +293,135 @@ op GetGenerateDetailedCostReportOperationStatusCustomized(
 @@usage(ExportRun, Usage.input | Usage.output, "csharp");
 @@usage(ExportRunReplacement, Usage.input | Usage.output, "csharp");
 @@usage(ErrorDetails, Usage.input | Usage.output, "csharp");
-@@usage(IncludedQuantityUtilizationSummary,
+@@usage(
+  IncludedQuantityUtilizationSummary,
   Usage.input | Usage.output,
   "csharp"
 );
 @@usage(RecommendationUsageDetails, Usage.input | Usage.output, "csharp");
 @@usage(SavingsPlanUtilizationSummary, Usage.input | Usage.output, "csharp");
-@@usage(SharedScopeBenefitRecommendationProperties,
+@@usage(
+  SharedScopeBenefitRecommendationProperties,
   Usage.input | Usage.output,
   "csharp"
 );
-@@usage(SingleScopeBenefitRecommendationProperties,
+@@usage(
+  SingleScopeBenefitRecommendationProperties,
   Usage.input | Usage.output,
   "csharp"
 );
 
 @@clientName(DimensionsOperationGroup.list, "GetDimensions", "csharp");
-@@clientName(DimensionsOperationGroup.byExternalCloudProviderType,
+@@clientName(
+  DimensionsOperationGroup.byExternalCloudProviderType,
   "ByExternalCloudProviderTypeDimensions",
   "csharp"
 );
 @@clientName(QueryOperationGroup.usage, "UsageQuery", "csharp");
-@@clientName(QueryOperationGroup.usageByExternalCloudProviderType,
+@@clientName(
+  QueryOperationGroup.usageByExternalCloudProviderType,
   "UsageByExternalCloudProviderTypeQuery",
   "csharp"
 );
 @@clientName(ForecastOperationGroup.usage, "UsageForecast", "csharp");
-@@clientName(ForecastOperationGroup.externalCloudProviderUsage,
+@@clientName(
+  ForecastOperationGroup.externalCloudProviderUsage,
   "ExternalCloudProviderUsageForecast",
   "csharp"
 );
-@@clientName(BenefitRecommendationsOperationGroup.list,
+@@clientName(
+  BenefitRecommendationsOperationGroup.list,
   "GetBenefitRecommendations",
   "csharp"
 );
-@@clientName(BenefitUtilizationSummariesOperationGroup.listByBillingAccountId,
+@@clientName(
+  BenefitUtilizationSummariesOperationGroup.listByBillingAccountId,
   "GetBenefitUtilizationSummariesByBillingAccountId",
   "csharp"
 );
-@@clientName(BenefitUtilizationSummariesOperationGroup.listByBillingProfileId,
+@@clientName(
+  BenefitUtilizationSummariesOperationGroup.listByBillingProfileId,
   "GetBenefitUtilizationSummariesByBillingProfileId",
   "csharp"
 );
-@@clientName(BenefitUtilizationSummariesOperationGroup.listBySavingsPlanOrder,
+@@clientName(
+  BenefitUtilizationSummariesOperationGroup.listBySavingsPlanOrder,
   "GetBenefitUtilizationSummariesBySavingsPlanOrder",
   "csharp"
 );
-@@clientName(BenefitUtilizationSummariesOperationGroup.listBySavingsPlanId,
+@@clientName(
+  BenefitUtilizationSummariesOperationGroup.listBySavingsPlanId,
   "GetBenefitUtilizationSummariesBySavingsPlanId",
   "csharp"
 );
-@@clientName(GenerateBenefitUtilizationSummariesReportOperationGroup.generateByBillingAccount,
+@@clientName(
+  GenerateBenefitUtilizationSummariesReportOperationGroup.generateByBillingAccount,
   "GenerateBenefitUtilizationSummariesReportBillingAccountScope",
   "csharp"
 );
-@@clientName(GenerateBenefitUtilizationSummariesReportOperationGroup.generateByBillingProfile,
+@@clientName(
+  GenerateBenefitUtilizationSummariesReportOperationGroup.generateByBillingProfile,
   "GenerateBenefitUtilizationSummariesReportBillingProfileScope",
   "csharp"
 );
-@@clientName(GenerateBenefitUtilizationSummariesReportOperationGroup.generateByReservationOrderId,
+@@clientName(
+  GenerateBenefitUtilizationSummariesReportOperationGroup.generateByReservationOrderId,
   "GenerateBenefitUtilizationSummariesReportReservationOrderScope",
   "csharp"
 );
-@@clientName(GenerateBenefitUtilizationSummariesReportOperationGroup.generateByReservationId,
+@@clientName(
+  GenerateBenefitUtilizationSummariesReportOperationGroup.generateByReservationId,
   "GenerateBenefitUtilizationSummariesReportReservationScope",
   "csharp"
 );
-@@clientName(GenerateBenefitUtilizationSummariesReportOperationGroup.generateBySavingsPlanOrderId,
+@@clientName(
+  GenerateBenefitUtilizationSummariesReportOperationGroup.generateBySavingsPlanOrderId,
   "GenerateBenefitUtilizationSummariesReportSavingsPlanOrderScope",
   "csharp"
 );
-@@clientName(GenerateBenefitUtilizationSummariesReportOperationGroup.generateBySavingsPlanId,
+@@clientName(
+  GenerateBenefitUtilizationSummariesReportOperationGroup.generateBySavingsPlanId,
   "GenerateBenefitUtilizationSummariesReportAsyncSavingsPlanScope",
   "csharp"
 );
-@@clientName(GenerateReservationDetailsReportOperationGroup.byBillingAccountId,
+@@clientName(
+  GenerateReservationDetailsReportOperationGroup.byBillingAccountId,
   "ByBillingAccountIdGenerateReservationDetailsReport",
   "csharp"
 );
-@@clientName(GenerateReservationDetailsReportOperationGroup.byBillingProfileId,
+@@clientName(
+  GenerateReservationDetailsReportOperationGroup.byBillingProfileId,
   "ByBillingProfileIdGenerateReservationDetailsReport",
   "csharp"
 );
-@@clientName(PriceSheetOperationGroup.downloadByInvoice,
+@@clientName(
+  PriceSheetOperationGroup.downloadByInvoice,
   "DownloadPriceSheet",
   "csharp"
 );
-@@clientName(PriceSheetOperationGroup.downloadByBillingProfile,
+@@clientName(
+  PriceSheetOperationGroup.downloadByBillingProfile,
   "DownloadByBillingProfilePriceSheet",
   "csharp"
 );
-@@clientName(ScheduledActionsOperationGroup.checkNameAvailability,
+@@clientName(
+  ScheduledActionsOperationGroup.checkNameAvailability,
   "CheckCostManagementNameAvailabilityByScheduledAction",
   "csharp"
 );
-@@clientName(ScheduledActionsOperationGroup.checkNameAvailabilityByScope,
+@@clientName(
+  ScheduledActionsOperationGroup.checkNameAvailabilityByScope,
   "CheckCostManagementNameAvailabilityByScopeScheduledAction",
   "csharp"
 );
-@@clientName(AlertsOperationGroup.listExternal,
+@@clientName(
+  AlertsOperationGroup.listExternal,
   "GetCostManagementAlerts",
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the operation back to pageable for backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(AlertsOperationGroup.listExternal,
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  AlertsOperationGroup.listExternal,
   "csharp"
 );
 
@@ -380,7 +435,8 @@ op GetGenerateDetailedCostReportOperationStatusCustomized(
 @@clientName(BlobInfo, "ExportBlobInfo", "csharp");
 @@clientName(Notification, "BudgetNotification", "csharp");
 @@clientName(MCAPriceSheetProperties, "McaPriceSheetProperties", "csharp");
-@@clientName(PricesheetDownloadProperties,
+@@clientName(
+  PricesheetDownloadProperties,
   "PriceSheetDownloadProperties",
   "csharp"
 );
@@ -388,16 +444,19 @@ op GetGenerateDetailedCostReportOperationStatusCustomized(
 
 @@clientName(BenefitResource, "BenefitDetails", "csharp");
 @@clientName(CostAllocationResource, "CostAllocationEntity", "csharp");
-@@clientName(SourceCostAllocationResource,
+@@clientName(
+  SourceCostAllocationResource,
   "SourceCostAllocationEntity",
   "csharp"
 );
-@@clientName(TargetCostAllocationResource,
+@@clientName(
+  TargetCostAllocationResource,
   "TargetCostAllocationEntity",
   "csharp"
 );
 
-@@alternateType(Export.identity,
+@@alternateType(
+  Export.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
@@ -410,7 +469,8 @@ op GetGenerateDetailedCostReportOperationStatusCustomized(
 @@clientName(ReportConfigDefinition.type, "TypePropertiesQueryType", "csharp");
 
 @@alternateType(CostManagementResource.eTag, Azure.Core.eTag, "csharp");
-@@alternateType(CostManagementResource.location,
+@@alternateType(
+  CostManagementResource.location,
   Azure.Core.azureLocation,
   "csharp"
 );
@@ -463,19 +523,22 @@ model ExportRunReplacement extends Azure.ResourceManager.CommonTypes.Resource {
 @@clientName(ExportRunReplacement, "ExportRun", "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "flattenProperty is needed for C# backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ExportDataset.configuration,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ExportDataset.configuration,
   "csharp"
 );
 
 @@access(ExportDeliveryInfo, Access.public, "csharp");
 
-@@alternateType(ReportConfigDefinition.timeframe,
+@@alternateType(
+  ReportConfigDefinition.timeframe,
   ReportTimeframeType | null,
   "csharp"
 );
 @@alternateType(ReportConfigDefinition.type, ReportType | null, "csharp");
 
-@@alternateType(ScheduledActionProperties.status,
+@@alternateType(
+  ScheduledActionProperties.status,
   ScheduledActionStatus | null,
   "csharp"
 );

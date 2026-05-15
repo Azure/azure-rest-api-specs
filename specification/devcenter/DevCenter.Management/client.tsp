@@ -6,7 +6,8 @@ using Microsoft.DevCenter;
 
 @@clientName(Microsoft.DevCenter, "DevCenterMgmtClient", "python");
 
-@@clientName(Microsoft.DevCenter.DevCenterProjectCatalogSettings,
+@@clientName(
+  Microsoft.DevCenter.DevCenterProjectCatalogSettings,
   "ProjectCatalogSettingsInfo",
   "go"
 );
@@ -15,22 +16,26 @@ using Microsoft.DevCenter;
 
 @@clientName(Microsoft.DevCenter.UserRoleAssignment, "UserRoleAssignmentValue");
 
-@@clientName(Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentity,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentity,
   "CustomerManagedKeyEncryptionKeyIdentity",
   "java,go"
 );
 
-@@clientName(Microsoft.DevCenter.KeyEncryptionKeyIdentity,
+@@clientName(
+  Microsoft.DevCenter.KeyEncryptionKeyIdentity,
   "DevCenterKeyEncryptionKeyIdentity",
   "csharp"
 );
 
-@@clientName(Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentityType,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentityType,
   "IdentityType",
   "java"
 );
 
-@@alternateType(Microsoft.DevCenter.OperationStatus.properties,
+@@alternateType(
+  Microsoft.DevCenter.OperationStatus.properties,
   unknown,
   "java"
 );
@@ -38,55 +43,66 @@ using Microsoft.DevCenter;
 // Keep project-level operations in their original interfaces for C#
 // to avoid resource name collisions with devcenters-level resources.
 // AttachedNetwork: prevent merge of project ops into devcenters AttachedNetworks
-@@clientLocation(AttachedNetworkConnections.getByProject,
+@@clientLocation(
+  AttachedNetworkConnections.getByProject,
   AttachedNetworkConnections,
   "csharp"
 );
-@@clientLocation(AttachedNetworkConnections.listByProject,
+@@clientLocation(
+  AttachedNetworkConnections.listByProject,
   AttachedNetworkConnections,
   "csharp"
 );
 
 // DevBoxDefinition: prevent merge of project ops into devcenters DevBoxDefinitions
-@@clientLocation(DevBoxDefinitionOperationGroup.getByProject,
+@@clientLocation(
+  DevBoxDefinitionOperationGroup.getByProject,
   DevBoxDefinitionOperationGroup,
   "csharp"
 );
-@@clientLocation(DevBoxDefinitionOperationGroup.listByProject,
+@@clientLocation(
+  DevBoxDefinitionOperationGroup.listByProject,
   DevBoxDefinitionOperationGroup,
   "csharp"
 );
 
 // Image: prevent merge of project ops into devcenters Images
-@@clientLocation(ImageOperationGroup.getByProject,
+@@clientLocation(
+  ImageOperationGroup.getByProject,
   ImageOperationGroup,
   "csharp"
 );
-@@clientLocation(ImageOperationGroup.listByProject,
+@@clientLocation(
+  ImageOperationGroup.listByProject,
   ImageOperationGroup,
   "csharp"
 );
 
 // ImageVersion: prevent merge of project ops into devcenters ImageVersions
-@@clientLocation(ImageVersionOperationGroup.getByProject,
+@@clientLocation(
+  ImageVersionOperationGroup.getByProject,
   ImageVersionOperationGroup,
   "csharp"
 );
-@@clientLocation(ImageVersionOperationGroup.listByProject,
+@@clientLocation(
+  ImageVersionOperationGroup.listByProject,
   ImageVersionOperationGroup,
   "csharp"
 );
 
 // EnvironmentDefinition: prevent merge of devcenters ops into project EnvironmentDefinitions
-@@clientLocation(EnvironmentDefinitionOperationGroup.get,
+@@clientLocation(
+  EnvironmentDefinitionOperationGroup.get,
   EnvironmentDefinitionOperationGroup,
   "csharp"
 );
-@@clientLocation(EnvironmentDefinitionOperationGroup.listByCatalog,
+@@clientLocation(
+  EnvironmentDefinitionOperationGroup.listByCatalog,
   EnvironmentDefinitionOperationGroup,
   "csharp"
 );
-@@clientLocation(EnvironmentDefinitionOperationGroup.getErrorDetails,
+@@clientLocation(
+  EnvironmentDefinitionOperationGroup.getErrorDetails,
   EnvironmentDefinitionOperationGroup,
   "csharp"
 );
@@ -103,28 +119,34 @@ using Microsoft.DevCenter;
 
 // autorest.md migration: rename-mapping, format-by-name-rules, prepend-rp-prefix
 @@clientName(DevCenterSku, "DevCenterSkuDetails", "csharp");
-@@alternateType(GalleryProperties.galleryResourceId,
+@@alternateType(
+  GalleryProperties.galleryResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(AttachedNetworkConnectionProperties.networkConnectionId,
+@@alternateType(
+  AttachedNetworkConnectionProperties.networkConnectionId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(NetworkConnectionUpdateProperties.subnetId,
+@@alternateType(
+  NetworkConnectionUpdateProperties.subnetId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ProjectUpdateProperties.devCenterId,
+@@alternateType(
+  ProjectUpdateProperties.devCenterId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ProjectEnvironmentTypeUpdateProperties.deploymentTargetId,
+@@alternateType(
+  ProjectEnvironmentTypeUpdateProperties.deploymentTargetId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 @@alternateType(ImageReference.id, Azure.Core.armResourceIdentifier, "csharp");
-@@alternateType(DevCenterSku.resourceType,
+@@alternateType(
+  DevCenterSku.resourceType,
   Azure.Core.armResourceType,
   "csharp"
 );
@@ -138,17 +160,20 @@ using Microsoft.DevCenter;
 @@clientName(ScheduleEnableStatus.Disabled, "IsDisabled", "csharp");
 @@clientName(StopOnDisconnectEnableStatus.Enabled, "IsEnabled", "csharp");
 @@clientName(StopOnDisconnectEnableStatus.Disabled, "IsDisabled", "csharp");
-@@alternateType(AttachedNetworkConnectionProperties.networkConnectionLocation,
+@@alternateType(
+  AttachedNetworkConnectionProperties.networkConnectionLocation,
   Azure.Core.azureLocation,
   "csharp"
 );
 @@clientName(DomainJoinType.HybridAzureADJoin, "HybridAadJoin", "csharp");
 @@clientName(DomainJoinType.AzureADJoin, "AadJoin", "csharp");
-@@clientName(ImageVersionProperties.osDiskImageSizeInGb,
+@@clientName(
+  ImageVersionProperties.osDiskImageSizeInGb,
   "OSDiskImageSizeInGB",
   "csharp"
 );
-@@clientName(ImageVersionProperties.excludeFromLatest,
+@@clientName(
+  ImageVersionProperties.excludeFromLatest,
   "IsExcludedFromLatest",
   "csharp"
 );
@@ -183,90 +208,109 @@ using Microsoft.DevCenter;
 @@clientName(CatalogSyncState, "DevCenterCatalogSyncState", "csharp");
 
 // RP prefix for new models added in this API version
-@@clientName(ActiveHoursConfiguration,
+@@clientName(
+  ActiveHoursConfiguration,
   "DevCenterActiveHoursConfiguration",
   "csharp"
 );
 @@clientName(AssignedGroup, "DevCenterAssignedGroup", "csharp");
 @@clientName(CatalogConflictError, "DevCenterCatalogConflictError", "csharp");
 @@clientName(CatalogErrorDetails, "DevCenterCatalogErrorDetails", "csharp");
-@@clientName(CatalogResourceValidationErrorDetails,
+@@clientName(
+  CatalogResourceValidationErrorDetails,
   "DevCenterCatalogResourceValidationErrorDetails",
   "csharp"
 );
 @@clientName(CatalogSyncError, "DevCenterCatalogSyncError", "csharp");
 @@clientName(ConfigurationPolicies, "DevCenterConfigurationPolicies", "csharp");
-@@clientName(Azure.ResourceManager.CommonTypes.CustomerManagedKeyEncryption,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.CustomerManagedKeyEncryption,
   "DevCenterCustomerManagedKeyEncryption",
   "csharp"
 );
 @@clientName(CustomizationTask, "DevCenterCatalogTask", "csharp");
-@@clientName(CustomizationTaskInput,
+@@clientName(
+  CustomizationTaskInput,
   "DevCenterCustomizationTaskInput",
   "csharp"
 );
-@@clientName(CustomizationTaskInstance,
+@@clientName(
+  CustomizationTaskInstance,
   "DevCenterCustomizationTaskInstance",
   "csharp"
 );
 @@clientName(DefaultValue, "DevCenterDefaultValue", "csharp");
-@@clientName(DefinitionParametersItem,
+@@clientName(
+  DefinitionParametersItem,
   "DevCenterDefinitionParametersItem",
   "csharp"
 );
-@@clientName(DevBoxScheduleDeleteSettings,
+@@clientName(
+  DevBoxScheduleDeleteSettings,
   "DevCenterDevBoxScheduleDeleteSettings",
   "csharp"
 );
 @@clientName(FeatureState, "DevCenterFeatureState", "csharp");
-@@clientName(ImageCreationErrorDetails,
+@@clientName(
+  ImageCreationErrorDetails,
   "DevCenterImageCreationErrorDetails",
   "csharp"
 );
-@@clientName(ImageDefinitionBuildDetails,
+@@clientName(
+  ImageDefinitionBuildDetails,
   "DevCenterImageDefinitionBuildDetails",
   "csharp"
 );
-@@clientName(ImageDefinitionBuildTask,
+@@clientName(
+  ImageDefinitionBuildTask,
   "DevCenterImageDefinitionBuildTask",
   "csharp"
 );
-@@clientName(ImageDefinitionBuildTaskGroup,
+@@clientName(
+  ImageDefinitionBuildTaskGroup,
   "DevCenterImageDefinitionBuildTaskGroup",
   "csharp"
 );
-@@clientName(ImageDefinitionBuildTaskParametersItem,
+@@clientName(
+  ImageDefinitionBuildTaskParametersItem,
   "DevCenterImageDefinitionBuildTaskParametersItem",
   "csharp"
 );
-@@clientName(ImageDefinitionReference,
+@@clientName(
+  ImageDefinitionReference,
   "DevCenterImageDefinitionReference",
   "csharp"
 );
-@@clientName(InheritedProjectCatalogSettings,
+@@clientName(
+  InheritedProjectCatalogSettings,
   "DevCenterInheritedProjectCatalogSettings",
   "csharp"
 );
-@@clientName(InheritedSettingsForProject,
+@@clientName(
+  InheritedSettingsForProject,
   "DevCenterInheritedSettingsForProject",
   "csharp"
 );
 @@clientName(LatestImageBuild, "DevCenterLatestImageBuild", "csharp");
-@@clientName(ProjectCustomizationManagedIdentity,
+@@clientName(
+  ProjectCustomizationManagedIdentity,
   "DevCenterProjectCustomizationManagedIdentity",
   "csharp"
 );
-@@clientName(ProjectCustomizationSettings,
+@@clientName(
+  ProjectCustomizationSettings,
   "DevCenterProjectCustomizationSettings",
   "csharp"
 );
 @@clientName(ProjectPolicyUpdate, "DevCenterProjectPolicyPatch", "csharp");
 @@clientName(ResourcePolicy, "DevCenterResourcePolicy", "csharp");
-@@clientName(ServerlessGpuSessionsSettings,
+@@clientName(
+  ServerlessGpuSessionsSettings,
   "DevCenterServerlessGpuSessionsSettings",
   "csharp"
 );
-@@clientName(StopOnNoConnectConfiguration,
+@@clientName(
+  StopOnNoConnectConfiguration,
   "DevCenterStopOnNoConnectConfiguration",
   "csharp"
 );
@@ -279,84 +323,102 @@ using Microsoft.DevCenter;
 @@clientName(AssignedGroupScope, "DevCenterAssignedGroupScope", "csharp");
 @@clientName(AutoImageBuildStatus, "DevCenterAutoImageBuildStatus", "csharp");
 @@clientName(AutoStartEnableStatus, "DevCenterAutoStartEnableStatus", "csharp");
-@@clientName(CancelOnConnectEnableStatus,
+@@clientName(
+  CancelOnConnectEnableStatus,
   "DevCenterCancelOnConnectEnableStatus",
   "csharp"
 );
-@@clientName(CatalogAutoImageBuildEnableStatus,
+@@clientName(
+  CatalogAutoImageBuildEnableStatus,
   "DevCenterCatalogAutoImageBuildEnableStatus",
   "csharp"
 );
-@@clientName(CatalogConnectionState,
+@@clientName(
+  CatalogConnectionState,
   "DevCenterCatalogConnectionState",
   "csharp"
 );
-@@clientName(CatalogItemSyncEnableStatus,
+@@clientName(
+  CatalogItemSyncEnableStatus,
   "DevCenterCatalogItemSyncEnableStatus",
   "csharp"
 );
 @@clientName(CatalogItemType, "DevCenterCatalogItemType", "csharp");
-@@clientName(CatalogResourceValidationStatus,
+@@clientName(
+  CatalogResourceValidationStatus,
   "DevCenterCatalogResourceValidationStatus",
   "csharp"
 );
 @@clientName(CatalogSyncType, "DevCenterCatalogSyncType", "csharp");
 @@clientName(CmkIdentityType, "DevCenterCmkIdentityType", "csharp");
-@@clientName(CustomizationTaskInputType,
+@@clientName(
+  CustomizationTaskInputType,
   "DevCenterCustomizationTaskInputType",
   "csharp"
 );
 @@clientName(DevBoxDeleteMode, "DevCenterDevBoxDeleteMode", "csharp");
-@@clientName(DevBoxTunnelEnableStatus,
+@@clientName(
+  DevBoxTunnelEnableStatus,
   "DevCenterDevBoxTunnelEnableStatus",
   "csharp"
 );
-@@clientName(DevboxDisksEncryptionEnableStatus,
+@@clientName(
+  DevboxDisksEncryptionEnableStatus,
   "DevCenterDevboxDisksEncryptionEnableStatus",
   "csharp"
 );
-@@clientName(FeatureStateModifiable,
+@@clientName(
+  FeatureStateModifiable,
   "DevCenterFeatureStateModifiable",
   "csharp"
 );
 @@clientName(FeatureStatus, "DevCenterFeatureStatus", "csharp");
-@@clientName(ImageDefinitionBuildStatus,
+@@clientName(
+  ImageDefinitionBuildStatus,
   "DevCenterImageDefinitionBuildStatus",
   "csharp"
 );
-@@clientName(InstallAzureMonitorAgentEnableStatus,
+@@clientName(
+  InstallAzureMonitorAgentEnableStatus,
   "DevCenterInstallAzureMonitorAgentEnableStatus",
   "csharp"
 );
 @@clientName(KeepAwakeEnableStatus, "DevCenterKeepAwakeEnableStatus", "csharp");
-@@clientName(Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentityType,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentityType,
   "DevCenterKeyEncryptionKeyIdentityType",
   "csharp"
 );
-@@clientName(MicrosoftHostedNetworkEnableStatus,
+@@clientName(
+  MicrosoftHostedNetworkEnableStatus,
   "DevCenterMicrosoftHostedNetworkEnableStatus",
   "csharp"
 );
 @@clientName(ParameterType, "DevCenterParameterType", "csharp");
 @@clientName(PolicyAction, "DevCenterPolicyAction", "csharp");
-@@clientName(PoolDevBoxDefinitionType,
+@@clientName(
+  PoolDevBoxDefinitionType,
   "DevCenterPoolDevBoxDefinitionType",
   "csharp"
 );
-@@clientName(ProjectCustomizationIdentityType,
+@@clientName(
+  ProjectCustomizationIdentityType,
   "DevCenterProjectCustomizationIdentityType",
   "csharp"
 );
-@@clientName(ServerlessGpuSessionsMode,
+@@clientName(
+  ServerlessGpuSessionsMode,
   "DevCenterServerlessGpuSessionsMode",
   "csharp"
 );
 @@clientName(SingleSignOnStatus, "DevCenterSingleSignOnStatus", "csharp");
-@@clientName(StopOnNoConnectEnableStatus,
+@@clientName(
+  StopOnNoConnectEnableStatus,
   "DevCenterStopOnNoConnectEnableStatus",
   "csharp"
 );
-@@clientName(UserCustomizationsEnableStatus,
+@@clientName(
+  UserCustomizationsEnableStatus,
   "DevCenterUserCustomizationsEnableStatus",
   "csharp"
 );
@@ -364,30 +426,46 @@ using Microsoft.DevCenter;
 @@clientName(WorkspaceStorageMode, "DevCenterWorkspaceStorageMode", "csharp");
 
 // @@usage(Input): restore public constructors for output-only resource data models (ApiCompat)
-@@usage(AllowedEnvironmentType,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+@@usage(
+  AllowedEnvironmentType,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-@@usage(Image,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+@@usage(
+  Image,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-@@usage(HealthCheckStatusDetails,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+@@usage(
+  HealthCheckStatusDetails,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-@@usage(ImageVersion,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+@@usage(
+  ImageVersion,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-@@usage(DevCenterSku,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+@@usage(
+  DevCenterSku,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
 // Manual: directive-based renames from autorest.md
 @@clientName(ScheduleUpdateProperties.type, "ScheduledType", "csharp");
-@@alternateType(Azure.ResourceManager.CommonTypes.OperationStatusResult.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.OperationStatusResult.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
@@ -396,178 +474,216 @@ using Microsoft.DevCenter;
 @@clientName(UserRoleAssignment, "DevCenterUserRoleAssignments", "csharp");
 
 // Manual: override-operation-name from autorest.md
-@@clientName(OperationStatusesOperationGroup.get,
+@@clientName(
+  OperationStatusesOperationGroup.get,
   "GetDevCenterOperationStatus",
   "csharp"
 );
-@@clientName(UsagesOperationGroup.listByLocation,
+@@clientName(
+  UsagesOperationGroup.listByLocation,
   "GetDevCenterUsagesByLocation",
   "csharp"
 );
-@@clientName(CheckNameAvailabilityOperationGroup.execute,
+@@clientName(
+  CheckNameAvailabilityOperationGroup.execute,
   "CheckDevCenterNameAvailability",
   "csharp"
 );
-@@clientName(SkusOperationGroup.listBySubscription,
+@@clientName(
+  SkusOperationGroup.listBySubscription,
   "GetDevCenterSkusBySubscription",
   "csharp"
 );
-@@clientName(NetworkConnections.listOutboundNetworkDependenciesEndpoints,
+@@clientName(
+  NetworkConnections.listOutboundNetworkDependenciesEndpoints,
   "GetOutboundEnvironmentEndpoints",
   "csharp"
 );
 
 // AZC naming violations: rename types with forbidden suffixes
-@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest,
   "DevCenterNameAvailabilityContent",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse,
   "DevCenterNameAvailabilityResult",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse.nameAvailable,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse.nameAvailable,
   "IsNameAvailable",
   "csharp"
 );
-@@clientName(CheckScopedNameAvailabilityRequest,
+@@clientName(
+  CheckScopedNameAvailabilityRequest,
   "DevCenterScopedNameAvailabilityContent",
   "csharp"
 );
-@@clientName(EnvironmentDefinitionParameter,
+@@clientName(
+  EnvironmentDefinitionParameter,
   "DevCenterEnvironmentDefinitionParameterInfo",
   "csharp"
 );
-@@clientName(PoolDevBoxDefinition,
+@@clientName(
+  PoolDevBoxDefinition,
   "DevCenterPoolDevBoxDefinitionDetail",
   "csharp"
 );
 @@clientName(RecommendedMachineConfiguration.vCPUs, "VCpus", "csharp");
 @@clientName(CatalogUpdate, "DevCenterCatalogPatch", "csharp");
-@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityReason,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityReason,
   "DevCenterNameUnavailableReason",
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AllowedEnvironmentType.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  AllowedEnvironmentType.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AttachedNetworkConnection.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  AttachedNetworkConnection.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Catalog.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Catalog.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CustomizationTask.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  CustomizationTask.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DevBoxDefinition.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  DevBoxDefinition.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DevCenterEncryptionSet.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  DevCenterEncryptionSet.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DevCenter.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  DevCenter.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(EnvironmentDefinition.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  EnvironmentDefinition.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(EnvironmentType.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  EnvironmentType.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Gallery.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Gallery.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(HealthCheckStatusDetails.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  HealthCheckStatusDetails.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ImageDefinitionBuild.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ImageDefinitionBuild.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ImageDefinition.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ImageDefinition.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Image.properties, "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ImageVersion.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ImageVersion.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(NetworkConnection.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  NetworkConnection.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Pool.properties, "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ProjectEnvironmentType.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ProjectEnvironmentType.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ProjectPolicy.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ProjectPolicy.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Project.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Project.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Schedule.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Schedule.properties,
   "csharp"
 );
 
-@@alternateType(TrackedResourceUpdate.location,
+@@alternateType(
+  TrackedResourceUpdate.location,
   Azure.Core.azureLocation,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(DevCenterUpdate,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  DevCenterUpdate,
   TrackedResourceUpdate,
   "csharp"
 );
 @@clientName(DevCenterUpdate, "DevCenterPatch", "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(DevBoxDefinitionUpdate,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  DevBoxDefinitionUpdate,
   TrackedResourceUpdate,
   "csharp"
 );
 @@clientName(DevBoxDefinitionUpdate, "DevBoxDefinitionPatch", "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(NetworkConnectionUpdate,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  NetworkConnectionUpdate,
   TrackedResourceUpdate,
   "csharp"
 );
-@@clientName(NetworkConnectionUpdate,
+@@clientName(
+  NetworkConnectionUpdate,
   "DevCenterNetworkConnectionPatch",
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(PoolUpdate,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  PoolUpdate,
   TrackedResourceUpdate,
   "csharp"
 );
 @@clientName(PoolUpdate, "DevCenterPoolPatch", "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ProjectUpdate,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  ProjectUpdate,
   TrackedResourceUpdate,
   "csharp"
 );
@@ -586,7 +702,8 @@ model ScheduleUpdateReplacement extends TrackedResourceUpdate {
 @@alternateType(ScheduleUpdate, ScheduleUpdateReplacement, "csharp");
 @@clientName(ScheduleUpdateReplacement, "DevCenterSchedulePatch", "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScheduleUpdateReplacement.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ScheduleUpdateReplacement.properties,
   "csharp"
 );
 
@@ -598,25 +715,30 @@ model ScheduleUpdatePropertiesReplacement {
   ...OmitProperties<ScheduleUpdateProperties, "tags" | "location">;
 }
 
-@@clientName(DevBoxDefinitionUpdateProperties.osStorageType,
+@@clientName(
+  DevBoxDefinitionUpdateProperties.osStorageType,
   "OSStorageType",
   "csharp"
 );
 @@alternateType(GitCatalog.uri, url, "csharp");
-@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest.type,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest.type,
   "ResourceType",
   "csharp"
 );
-@@alternateType(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest.type,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest.type,
   Azure.Core.armResourceType,
   "csharp"
 );
 @@clientName(DevCenters.listByDevCenter, "GetImages", "csharp");
-@@alternateType(UsagesOperationGroup.listByLocation::parameters.location,
+@@alternateType(
+  UsagesOperationGroup.listByLocation::parameters.location,
   Azure.Core.azureLocation,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ProjectEnvironmentTypeUpdateProperties.creatorRoleAssignment,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ProjectEnvironmentTypeUpdateProperties.creatorRoleAssignment,
   "csharp"
 );

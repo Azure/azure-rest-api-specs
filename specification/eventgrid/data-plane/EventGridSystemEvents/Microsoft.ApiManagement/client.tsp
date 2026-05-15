@@ -2,276 +2,366 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 //Models
-@@usage(Microsoft.EventGrid.SystemEvents.ApiManagementUserCreatedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ApiManagementUserCreatedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ApiManagementUserCreatedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ApiManagementUserCreatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ApiManagementUserUpdatedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ApiManagementUserUpdatedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ApiManagementUserUpdatedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ApiManagementUserUpdatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ApiManagementUserDeletedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ApiManagementUserDeletedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ApiManagementUserDeletedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ApiManagementUserDeletedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ApiManagementSubscriptionCreatedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ApiManagementSubscriptionCreatedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ApiManagementSubscriptionCreatedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ApiManagementSubscriptionCreatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ApiManagementSubscriptionUpdatedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ApiManagementSubscriptionUpdatedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ApiManagementSubscriptionUpdatedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ApiManagementSubscriptionUpdatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ApiManagementSubscriptionDeletedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ApiManagementSubscriptionDeletedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ApiManagementSubscriptionDeletedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ApiManagementSubscriptionDeletedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ApiManagementProductCreatedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ApiManagementProductCreatedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ApiManagementProductCreatedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ApiManagementProductCreatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ApiManagementProductUpdatedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ApiManagementProductUpdatedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ApiManagementProductUpdatedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ApiManagementProductUpdatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ApiManagementProductDeletedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ApiManagementProductDeletedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ApiManagementProductDeletedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ApiManagementProductDeletedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ApiManagementApiCreatedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ApiManagementApiCreatedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ApiManagementApiCreatedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ApiManagementApiCreatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ApiManagementApiUpdatedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ApiManagementApiUpdatedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ApiManagementApiUpdatedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ApiManagementApiUpdatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ApiManagementApiDeletedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ApiManagementApiDeletedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ApiManagementApiDeletedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ApiManagementApiDeletedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ApiManagementApiReleaseCreatedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ApiManagementApiReleaseCreatedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ApiManagementApiReleaseCreatedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ApiManagementApiReleaseCreatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ApiManagementApiReleaseUpdatedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ApiManagementApiReleaseUpdatedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ApiManagementApiReleaseUpdatedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ApiManagementApiReleaseUpdatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ApiManagementApiReleaseDeletedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ApiManagementApiReleaseDeletedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ApiManagementApiReleaseDeletedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ApiManagementApiReleaseDeletedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayCreatedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ApiManagementGatewayCreatedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayCreatedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ApiManagementGatewayCreatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayUpdatedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ApiManagementGatewayUpdatedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayUpdatedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ApiManagementGatewayUpdatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayDeletedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ApiManagementGatewayDeletedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayDeletedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ApiManagementGatewayDeletedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayHostnameConfigurationCreatedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ApiManagementGatewayHostnameConfigurationCreatedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayHostnameConfigurationCreatedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ApiManagementGatewayHostnameConfigurationCreatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayHostnameConfigurationUpdatedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ApiManagementGatewayHostnameConfigurationUpdatedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayHostnameConfigurationUpdatedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ApiManagementGatewayHostnameConfigurationUpdatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayHostnameConfigurationDeletedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ApiManagementGatewayHostnameConfigurationDeletedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayHostnameConfigurationDeletedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ApiManagementGatewayHostnameConfigurationDeletedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayCertificateAuthorityCreatedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ApiManagementGatewayCertificateAuthorityCreatedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayCertificateAuthorityCreatedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ApiManagementGatewayCertificateAuthorityCreatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayCertificateAuthorityUpdatedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ApiManagementGatewayCertificateAuthorityUpdatedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayCertificateAuthorityUpdatedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ApiManagementGatewayCertificateAuthorityUpdatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayCertificateAuthorityDeletedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ApiManagementGatewayCertificateAuthorityDeletedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayCertificateAuthorityDeletedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ApiManagementGatewayCertificateAuthorityDeletedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayApiAddedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ApiManagementGatewayApiAddedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayApiAddedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ApiManagementGatewayApiAddedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayApiRemovedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ApiManagementGatewayApiRemovedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayApiRemovedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ApiManagementGatewayApiRemovedEventData,
   Access.public
 );
-@@access(Microsoft.EventGrid.SystemEvents.ApiManagementCircuitBreakerOpenedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ApiManagementCircuitBreakerOpenedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ApiManagementCircuitBreakerOpenedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ApiManagementCircuitBreakerOpenedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ApiManagementCircuitBreakerClosedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ApiManagementCircuitBreakerClosedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ApiManagementCircuitBreakerClosedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ApiManagementCircuitBreakerClosedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayTokenNearExpiryEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ApiManagementGatewayTokenNearExpiryEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayTokenNearExpiryEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ApiManagementGatewayTokenNearExpiryEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayTokenExpiredEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ApiManagementGatewayTokenExpiredEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayTokenExpiredEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ApiManagementGatewayTokenExpiredEventData,
   Usage.output | Usage.json
 );
 //Enums
 
 //useSystemTextJsonConverter decorators
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ApiManagementUserCreatedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.ApiManagementUserCreatedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ApiManagementUserUpdatedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.ApiManagementUserUpdatedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ApiManagementUserDeletedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.ApiManagementUserDeletedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ApiManagementSubscriptionCreatedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.ApiManagementSubscriptionCreatedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ApiManagementSubscriptionUpdatedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.ApiManagementSubscriptionUpdatedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ApiManagementSubscriptionDeletedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.ApiManagementSubscriptionDeletedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ApiManagementProductCreatedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.ApiManagementProductCreatedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ApiManagementProductUpdatedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.ApiManagementProductUpdatedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ApiManagementProductDeletedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.ApiManagementProductDeletedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ApiManagementApiCreatedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.ApiManagementApiCreatedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ApiManagementApiUpdatedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.ApiManagementApiUpdatedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ApiManagementApiDeletedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.ApiManagementApiDeletedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ApiManagementApiReleaseCreatedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.ApiManagementApiReleaseCreatedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ApiManagementApiReleaseUpdatedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.ApiManagementApiReleaseUpdatedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ApiManagementApiReleaseDeletedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.ApiManagementApiReleaseDeletedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayCreatedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.ApiManagementGatewayCreatedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayUpdatedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.ApiManagementGatewayUpdatedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayDeletedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.ApiManagementGatewayDeletedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayHostnameConfigurationCreatedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.ApiManagementGatewayHostnameConfigurationCreatedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayHostnameConfigurationUpdatedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.ApiManagementGatewayHostnameConfigurationUpdatedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayHostnameConfigurationDeletedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.ApiManagementGatewayHostnameConfigurationDeletedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayCertificateAuthorityCreatedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.ApiManagementGatewayCertificateAuthorityCreatedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayCertificateAuthorityUpdatedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.ApiManagementGatewayCertificateAuthorityUpdatedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayCertificateAuthorityDeletedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.ApiManagementGatewayCertificateAuthorityDeletedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayApiAddedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.ApiManagementGatewayApiAddedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayApiRemovedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.ApiManagementGatewayApiRemovedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ApiManagementCircuitBreakerOpenedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.ApiManagementCircuitBreakerOpenedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ApiManagementCircuitBreakerClosedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.ApiManagementCircuitBreakerClosedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayTokenNearExpiryEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.ApiManagementGatewayTokenNearExpiryEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayTokenExpiredEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.ApiManagementGatewayTokenExpiredEventData,
   "csharp"
 );
