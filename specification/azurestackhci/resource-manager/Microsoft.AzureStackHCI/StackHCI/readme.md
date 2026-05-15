@@ -330,7 +330,7 @@ suppressions:
 
   - code: XMSSecretInResponse
     from: hci.json
-    reason: "gpgPubKey is a GPG public key used for package verification, not a secret."
+    reason: "gpgPubKey holds only the GPG public key block (begins with '-----BEGIN PGP PUBLIC KEY BLOCK-----') used by the device to verify package signatures during OS provisioning. It contains no private key material."
     where:
       - $.definitions.OsProvisionProfile.properties.gpgPubKey
       - $.definitions.DownloadOsProfile.properties.gpgPubKey
