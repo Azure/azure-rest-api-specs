@@ -7590,17 +7590,27 @@
       "type": "object",
       "description": "Represents the Software Defined Networking (SDN) configuration state of the Azure Stack HCI cluster.",
       "properties": {
+        "sdnStatus": {
+          "$ref": "#/definitions/SdnStatus",
+          "description": "Indicates the current Software Defined Networking (SDN) status of the resource, which may be an individual device or a cluster.",
+          "readOnly": true
+        },
+        "sdnDomainName": {
+          "type": "string",
+          "description": "The fully qualified domain name (FQDN) associated with the SDN deployment. This value is propagated from the Device Management Extension to the cluster resource. It is typically in the format `<sdnPrefix>-nc.<domain>` when SDN is enabled. May be null or absent in unsupported or disabled states.",
+          "readOnly": true
+        },
+        "sdnApiAddress": {
+          "type": "string",
+          "description": "Represents the API address for the SDN deployment.",
+          "readOnly": true
+        },
         "sdnIntegrationIntent": {
           "$ref": "#/definitions/SdnIntegrationIntent",
           "description": "Indicates whether Software Defined Networking (SDN) integration should be enabled or disabled for this deployment.",
           "readOnly": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/SdnProperties"
-        }
-      ]
+      }
     },
     "CollectLogJobProperties": {
       "type": "object",
@@ -11128,7 +11138,7 @@
         },
         "sdnProperties": {
           "$ref": "#/definitions/SdnProperties",
-          "description": "oftware Defined Networking Properties of the cluster",
+          "description": "Software Defined Networking Properties of the device.",
           "readOnly": true
         }
       }

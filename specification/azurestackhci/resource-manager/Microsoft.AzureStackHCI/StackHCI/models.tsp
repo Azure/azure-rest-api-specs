@@ -5733,9 +5733,7 @@ model HciNetworkProfile {
   @visibility(Lifecycle.Read)
   hostNetwork?: HciEdgeDeviceHostNetwork;
 
-  /** 
-    oftware Defined Networking Properties of the cluster
-   */
+  /** Software Defined Networking Properties of the device. */
   @visibility(Lifecycle.Read)
   @added(Versions.v2026_05_01_preview)
   sdnProperties?: SdnProperties;
@@ -6373,9 +6371,10 @@ union IgvmStatus {
 /**
  * Represents the Software Defined Networking (SDN) configuration state of the Azure Stack HCI cluster.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @added(Versions.v2026_05_01_preview)
-model ClusterSdnProperties extends SdnProperties {
+model ClusterSdnProperties {
+  ...SdnProperties;
+
   /**
    * Indicates whether Software Defined Networking (SDN) integration should be enabled or disabled for this deployment.
    */
