@@ -43,4 +43,7 @@ model SessionDirectoryListResponse {
 
   @doc("The directory entries.")
   entries: SessionDirectoryEntry[];
+
+  @doc("A value indicating whether there are additional values available not captured in this list.")
+  has_more: boolean;
 }
