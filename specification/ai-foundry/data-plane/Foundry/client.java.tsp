@@ -13,6 +13,7 @@ import "./src/evaluation-taxonomies/routes.tsp";
 import "./src/evaluators/routes.tsp";
 import "./src/insights/routes.tsp";
 import "./src/schedules/routes.tsp";
+import "./src/routines/routes.tsp";
 import "./src/skills/routes.tsp";
 import "./src/data_generation_jobs/routes.tsp";
 
