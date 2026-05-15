@@ -21,6 +21,7 @@ import "./operationStatus.tsp";
 import "./workspace.tsp";
 import "./discoveredResource.tsp";
 import "./scenario.tsp";
+import "./scenarioConfiguration.tsp";
 import "./scenarioRun.tsp";
 import "./back-compatible.tsp";
 import "./client.tsp";

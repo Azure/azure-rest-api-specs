@@ -8,6 +8,7 @@ using Microsoft.Chaos;
 @@clientName(Workspace, "ChaosWorkspace", "csharp");
 @@clientName(Scenario, "ChaosScenario", "csharp");
 @@clientName(ScenarioRun, "ChaosScenarioRun", "csharp");
+@@clientName(ScenarioConfiguration, "ChaosScenarioConfiguration", "csharp");
 @@clientName(ExperimentExecution, "ChaosExperimentExecution", "csharp");
 @@clientName(Experiment, "ChaosExperiment", "csharp");
 @@clientName(ExperimentExecution, "ChaosExperimentExecution", "csharp");
@@ -40,6 +41,10 @@ using Microsoft.Chaos;
   "csharp"
 );
 @@clientName(Microsoft.Chaos.Workspaces.listAll, "getWorkspaces", "csharp");
+@@clientName(FixResourcePermissionsRequest,
+  "ChaosFixResourcePermissionsRequestContent",
+  "csharp"
+);
 @@clientName(ScenarioParameter, "ChaosScenarioParameterInfo", "csharp");
 @@clientName(Action, "ChaosAction", "csharp");
 @@clientName(ActionVersion, "ChaosActionVersion", "csharp");
