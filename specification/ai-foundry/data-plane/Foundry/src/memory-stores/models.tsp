@@ -3,6 +3,7 @@ import "../openai-responses/models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
@@ -106,6 +107,13 @@ model MemoryStoreDefaultOptions {
 
   @doc("Whether to enable chat summary extraction and storage. Default is true.")
   chat_summary_enabled: boolean = true;
+
+  @doc("Whether to enable procedural memory extraction and storage. Default is true.")
+  procedural_memory_enabled?: boolean = true;
+
+  @doc("The default time-to-live for memories in seconds.  A value of 0 indicates that memories do not expire.")
+  @encode(DurationKnownEncoding.seconds, int32)
+  default_ttl_seconds?: duration = duration.fromISO("P0D");
 }
 
 @doc("Usage statistics of a memory store operation.")
@@ -230,6 +238,9 @@ union MemoryItemKind {
 
   @doc("Summary of chat conversations.")
   chat_summary: "chat_summary",
+
+  @doc("Routine procedures extracted from conversations.")
+  procedural: "procedural",
 }
 
 @doc("A single memory item stored in the memory store, containing content and metadata.")
@@ -264,6 +275,12 @@ model UserProfileMemoryItem extends MemoryItem {
 model ChatSummaryMemoryItem extends MemoryItem {
   @doc("The kind of the memory item.")
   kind: MemoryItemKind.chat_summary;
+}
+
+@doc("A memory item containing a procedure extracted from conversations.")
+model ProceduralMemoryItem extends MemoryItem {
+  @doc("The kind of the memory item.")
+  kind: MemoryItemKind.procedural;
 }
 
 @doc("Response for deleting memories from a scope.")
