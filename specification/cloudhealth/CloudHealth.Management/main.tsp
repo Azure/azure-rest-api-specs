@@ -3,12 +3,10 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using TypeSpec.OpenAPI;
 using Azure.Core;
 using Azure.ResourceManager;
 
@@ -1464,7 +1462,6 @@ model DataAnnotation {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Annotation details are user-defined key-value pairs with arbitrary keys that cannot be modelled with a fixed schema"
   @doc("Annotation details as a dynamic key-value pair bag. Each value is limited to 256 characters. A maximum of 10 entries is permitted per annotation.")
-  @extension("maxProperties", 10)
   annotationDetails: Record<string256>;
 
   @doc("Optional description of the annotation")
