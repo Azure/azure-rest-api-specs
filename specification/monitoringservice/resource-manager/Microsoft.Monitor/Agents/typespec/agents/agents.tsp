@@ -46,11 +46,13 @@ namespace Microsoft.Monitor {
     listBySubscription is ArmListBySubscription<ObservabilityAgentResource>;
   }
 
-  @@doc(ObservabilityAgentResource.name,
+  @@doc(
+    ObservabilityAgentResource.name,
     "The name of the observability agent resource. The name is case insensitive"
   );
   @@doc(ObservabilityAgentResource.properties, "Resource properties");
-  @@doc(ObservabilityAgents.createOrUpdate::parameters.resource,
+  @@doc(
+    ObservabilityAgents.createOrUpdate::parameters.resource,
     "Properties that need to be specified to create or update an observability agent"
   );
 }
