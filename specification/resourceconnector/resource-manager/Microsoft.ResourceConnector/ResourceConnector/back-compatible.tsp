@@ -24,11 +24,13 @@ using Microsoft.ResourceConnector;
 @@clientName(ApplianceListResult, "applianceListResult");
 @@clientName(ApplianceListCredentialResults, "applianceListCredentialResults");
 @@clientName(ApplianceListKeysResults, "applianceListKeysResults");
-@@clientName(ApplianceGetTelemetryConfigResult,
+@@clientName(
+  ApplianceGetTelemetryConfigResult,
   "applianceGetTelemetryConfigResult"
 );
 @@clientName(ApplianceOperationValueDisplay, "applianceOperationValueDisplay");
 @@clientName(ApplianceCredentialKubeconfig, "applianceCredentialKubeconfig");
-@@clientName(AppliancePropertiesInfrastructureConfig,
+@@clientName(
+  AppliancePropertiesInfrastructureConfig,
   "appliancePropertiesInfrastructureConfig"
 );

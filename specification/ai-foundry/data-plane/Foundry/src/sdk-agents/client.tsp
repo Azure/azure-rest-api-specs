@@ -15,7 +15,8 @@ using Azure.AI.Projects;
 @@clientName(OpenAI.OutputTextContent.logprobs, "logProbs");
 @@clientName(OpenAI.LocalShellExecAction.timeout_ms, "Duration");
 @@clientName(OpenAI.LogProb.logprob, "logProb");
-@@clientName(MicrosoftFabricPreviewTool.fabric_dataagent_preview,
+@@clientName(
+  MicrosoftFabricPreviewTool.fabric_dataagent_preview,
   "FabricDataAgentPreview"
 );
 
@@ -42,7 +43,8 @@ using Azure.AI.Projects;
 @@clientName(CreateAgentVersionRequest, "CreateAgentVersionInput");
 @@clientName(CreateAgentFromManifestRequest, "CreateAgentFromManifestInput");
 @@clientName(UpdateAgentFromManifestRequest, "UpdateAgentFromManifestInput");
-@@clientName(CreateAgentVersionFromManifestRequest,
+@@clientName(
+  CreateAgentVersionFromManifestRequest,
   "CreateAgentVersionFromManifestInput"
 );
 
@@ -66,10 +68,12 @@ using Azure.AI.Projects;
 
 @@clientName(MemorySearchPreviewTool.update_delay, "updateDelaySeconds");
 
-@@clientName(OpenAI.ResponseFormatJsonSchemaSchema,
+@@clientName(
+  OpenAI.ResponseFormatJsonSchemaSchema,
   "ResponseFormatJsonSchemaInner"
 );
-@@clientName(OpenAI.ResponseUsageInputTokensDetails.cached_tokens,
+@@clientName(
+  OpenAI.ResponseUsageInputTokensDetails.cached_tokens,
   "cachedTokensCount"
 );
 
@@ -88,47 +92,57 @@ using Azure.AI.Projects;
 
 @@clientName(OpenAI.ApplyPatchToolParam, "ApplyPatchToolParameter", "java");
 @@clientName(OpenAI.CustomToolParam, "CustomToolParameter", "java");
-@@clientName(OpenAI.FunctionShellToolParam,
+@@clientName(
+  OpenAI.FunctionShellToolParam,
   "FunctionShellToolParameter",
   "java"
 );
 @@clientName(OpenAI.LocalShellToolParam, "LocalShellToolParameter", "java");
-@@clientName(OpenAI.CustomGrammarFormatParam,
+@@clientName(
+  OpenAI.CustomGrammarFormatParam,
   "CustomGrammarFormatParameter",
   "java"
 );
-@@clientName(OpenAI.AutoCodeInterpreterToolParam,
+@@clientName(
+  OpenAI.AutoCodeInterpreterToolParam,
   "AutoCodeInterpreterToolParameter",
   "java"
 );
 @@clientName(OpenAI.ContainerAutoParam, "ContainerAutoParameter", "java");
-@@clientName(OpenAI.ContainerNetworkPolicyParam,
+@@clientName(
+  OpenAI.ContainerNetworkPolicyParam,
   "ContainerNetworkPolicyParameter",
   "java"
 );
-@@clientName(OpenAI.ContainerNetworkPolicyAllowlistParam,
+@@clientName(
+  OpenAI.ContainerNetworkPolicyAllowlistParam,
   "ContainerNetworkPolicyAllowlistParameter",
   "java"
 );
-@@clientName(OpenAI.ContainerNetworkPolicyDisabledParam,
+@@clientName(
+  OpenAI.ContainerNetworkPolicyDisabledParam,
   "ContainerNetworkPolicyDisabledParameter",
   "java"
 );
-@@clientName(OpenAI.ContainerNetworkPolicyDomainSecretParam,
+@@clientName(
+  OpenAI.ContainerNetworkPolicyDomainSecretParam,
   "ContainerNetworkPolicyDomainSecretParameter",
   "java"
 );
 @@clientName(OpenAI.CustomTextFormatParam, "CustomTextFormatParameter", "java");
-@@clientName(OpenAI.FunctionShellToolParamEnvironmentContainerReferenceParam,
+@@clientName(
+  OpenAI.FunctionShellToolParamEnvironmentContainerReferenceParam,
   "FunctionShellToolParameterEnvironmentContainerReferenceParameter",
   "java"
 );
-@@clientName(OpenAI.FunctionShellToolParamEnvironmentLocalEnvironmentParam,
+@@clientName(
+  OpenAI.FunctionShellToolParamEnvironmentLocalEnvironmentParam,
   "FunctionShellToolParameterEnvironmentLocalEnvironmentParameter",
   "java"
 );
 @@clientName(OpenAI.InlineSkillParam, "InlineSkillParameter", "java");
-@@clientName(OpenAI.InlineSkillSourceParam,
+@@clientName(
+  OpenAI.InlineSkillSourceParam,
   "InlineSkillSourceParameter",
   "java"
 );
@@ -198,26 +212,30 @@ using Azure.AI.Projects;
 //   ComparisonFilter + ComparisonFilterType  → com.openai.models.ComparisonFilter
 //   CompoundFilter + CompoundFilterType      → com.openai.models.CompoundFilter
 //   Reasoning + ReasoningSummary/GenerateSummary/Effort → com.openai.models.Reasoning
-@@alternateType(OpenAI.ComparisonFilter,
+@@alternateType(
+  OpenAI.ComparisonFilter,
   {
     identity: "com.openai.models.ComparisonFilter",
   },
   "java"
 );
-@@alternateType(OpenAI.CompoundFilter,
+@@alternateType(
+  OpenAI.CompoundFilter,
   {
     identity: "com.openai.models.CompoundFilter",
   },
   "java"
 );
-@@alternateType(OpenAI.Reasoning,
+@@alternateType(
+  OpenAI.Reasoning,
   {
     identity: "com.openai.models.Reasoning",
   },
   "java"
 );
 //   ConversationResource → com.openai.models.conversations.Conversation
-@@alternateType(OpenAI.ConversationResource,
+@@alternateType(
+  OpenAI.ConversationResource,
   {
     identity: "com.openai.models.conversations.Conversation",
   },
@@ -234,7 +252,8 @@ using Azure.AI.Projects;
 model TimeZoneType {}
 
 @@alternateType(OpenAI.ApproximateLocation.timezone, TimeZoneType, "java");
-@@alternateType(OpenAI.WebSearchApproximateLocation.timezone,
+@@alternateType(
+  OpenAI.WebSearchApproximateLocation.timezone,
   TimeZoneType,
   "java"
 );

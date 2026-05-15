@@ -158,9 +158,11 @@ interface VariableValues {
 
 @@doc(VariableValue.name, "The name of the variable value to operate on.");
 @@doc(VariableValue.properties, "Properties for the variable value.");
-@@doc(VariableValues.createOrUpdate::parameters.resource,
+@@doc(
+  VariableValues.createOrUpdate::parameters.resource,
   "Parameters for the variable value."
 );
-@@doc(VariableValues.createOrUpdateAtManagementGroup::parameters.resource,
+@@doc(
+  VariableValues.createOrUpdateAtManagementGroup::parameters.resource,
   "Parameters for the variable value."
 );

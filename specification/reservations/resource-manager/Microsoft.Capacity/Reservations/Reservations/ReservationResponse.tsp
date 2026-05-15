@@ -161,12 +161,15 @@ interface ReservationResponses {
 }
 
 @@doc(ReservationResponse.name, "Id of the reservation item");
-@@doc(ReservationResponse.properties,
+@@doc(
+  ReservationResponse.properties,
   "The properties associated to this reservation "
 );
-@@doc(ReservationResponses.update::parameters.properties,
+@@doc(
+  ReservationResponses.update::parameters.properties,
   "Information needed to patch a reservation item"
 );
-@@doc(ReservationResponses.availableScopes::parameters.body,
+@@doc(
+  ReservationResponses.availableScopes::parameters.body,
   "Scopes to be checked for eligibility."
 );

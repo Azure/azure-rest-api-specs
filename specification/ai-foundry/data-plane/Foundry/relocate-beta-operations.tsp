@@ -8,15 +8,18 @@ using Azure.ClientGenerator.Core;
 namespace Azure.AI.Projects.Beta;
 
 interface MemoryStores {}
-@@clientLocation(Azure.AI.Projects.MemoryStores.createMemoryStore,
+@@clientLocation(
+  Azure.AI.Projects.MemoryStores.createMemoryStore,
   MemoryStores
 );
-@@clientLocation(Azure.AI.Projects.MemoryStores.updateMemoryStore,
+@@clientLocation(
+  Azure.AI.Projects.MemoryStores.updateMemoryStore,
   MemoryStores
 );
 @@clientLocation(Azure.AI.Projects.MemoryStores.getMemoryStore, MemoryStores);
 @@clientLocation(Azure.AI.Projects.MemoryStores.listMemoryStores, MemoryStores);
-@@clientLocation(Azure.AI.Projects.MemoryStores.deleteMemoryStore,
+@@clientLocation(
+  Azure.AI.Projects.MemoryStores.deleteMemoryStore,
   MemoryStores
 );
 @@clientLocation(Azure.AI.Projects.MemoryStores.searchMemories, MemoryStores);
@@ -51,18 +54,23 @@ interface Insights {}
 @@clientLocation(Azure.AI.Projects.Insights.list, Insights);
 
 interface EvaluationTaxonomies {}
-@@clientLocation(Azure.AI.Projects.EvaluationTaxonomies.get,
+@@clientLocation(
+  Azure.AI.Projects.EvaluationTaxonomies.get,
   EvaluationTaxonomies
 );
-@@clientLocation(Azure.AI.Projects.EvaluationTaxonomies.list,
+@@clientLocation(
+  Azure.AI.Projects.EvaluationTaxonomies.list,
   EvaluationTaxonomies
 );
-@@clientLocation(Azure.AI.Projects.EvaluationTaxonomies.delete,
+@@clientLocation(
+  Azure.AI.Projects.EvaluationTaxonomies.delete,
   EvaluationTaxonomies
 );
-@@clientLocation(Azure.AI.Projects.EvaluationTaxonomies.create,
+@@clientLocation(
+  Azure.AI.Projects.EvaluationTaxonomies.create,
   EvaluationTaxonomies
 );
-@@clientLocation(Azure.AI.Projects.EvaluationTaxonomies.update,
+@@clientLocation(
+  Azure.AI.Projects.EvaluationTaxonomies.update,
   EvaluationTaxonomies
 );

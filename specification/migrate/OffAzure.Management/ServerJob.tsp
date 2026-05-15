@@ -39,6 +39,7 @@ interface ServerJobs {
 }
 
 @@doc(ServerJob.name, " Jobs name");
-@@doc(ServerJob.properties,
+@@doc(
+  ServerJob.properties,
   "The resource-specific properties for this resource."
 );

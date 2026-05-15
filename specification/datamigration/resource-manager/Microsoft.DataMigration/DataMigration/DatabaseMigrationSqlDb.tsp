@@ -134,7 +134,10 @@ interface DatabaseMigrationSqlDbs {
       @query("force")
       force?: boolean;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -170,15 +173,19 @@ interface DatabaseMigrationSqlDbs {
 }
 
 @@doc(DatabaseMigrationSqlDb.name, "The name of the target database.");
-@@doc(DatabaseMigrationSqlDb.properties,
+@@doc(
+  DatabaseMigrationSqlDb.properties,
   "Database Migration Resource properties for SQL database."
 );
-@@doc(DatabaseMigrationSqlDbs.createOrUpdate::parameters.resource,
+@@doc(
+  DatabaseMigrationSqlDbs.createOrUpdate::parameters.resource,
   "Details of Sql Db migration resource."
 );
-@@doc(DatabaseMigrationSqlDbs.cancel::parameters.body,
+@@doc(
+  DatabaseMigrationSqlDbs.cancel::parameters.body,
   "Required migration operation ID for which cancel will be initiated."
 );
-@@doc(DatabaseMigrationSqlDbs.retry::parameters.body,
+@@doc(
+  DatabaseMigrationSqlDbs.retry::parameters.body,
   "Required migration operation ID for which retry will be initiated."
 );
