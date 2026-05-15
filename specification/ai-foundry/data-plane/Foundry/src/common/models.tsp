@@ -27,6 +27,16 @@ alias AcceptJsonHeader = {
   @header accept: "application/json";
 };
 
+/**
+ * Optional request header carrying an opaque per-user isolation key forwarded to the agent
+ * endpoint. When present, the service scopes endpoint-scoped data access (responses,
+ * conversations, sessions) to the supplied user.
+ */
+alias UserIsolationKeyHeader = {
+  /** Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user. */
+  @header("x-ms-user-isolation-key") user_isolation_key?: string;
+};
+
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
 op OpenAIOperation<
