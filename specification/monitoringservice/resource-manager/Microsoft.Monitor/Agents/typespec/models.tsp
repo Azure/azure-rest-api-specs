@@ -16,17 +16,26 @@ namespace Microsoft.Monitor {
     @visibility(Lifecycle.Read)
     provisioningState?: Azure.ResourceManager.ResourceProvisioningState;
 
-    /** The resource ID of the Azure Monitor workspace used as the issue container. */
-    monitoringAccountId?: Azure.Core.armResourceIdentifier;
+    /** Resource ID of the Azure Monitor workspace where this agent stores the issues it produces. */
+    monitoringAccountId: Azure.Core.armResourceIdentifier<[{type: "Microsoft.Monitor/accounts"}]>;
 
-    /** Whether the observability agent is enabled. */
+    /** Whether the observability agent is enabled. Defaults to true when not specified. */
     enabled?: boolean;
 
-    /** List of autonomous operations that are disabled on this observability agent. Currently supported values: AutoInvestigate. Additional values may be added in the future. */
-    disableAutonomousOperations?: string[];
+    /** List of autonomous operations that are disabled on this observability agent. When omitted, no autonomous operations are disabled. Currently supported values: AutoInvestigate. Additional values may be added in the future. */
+    disableAutonomousOperations?: AutonomousOperation[];
 
-    /** Configuration for agent operations. */
+    /** Configuration overrides for agent operations. When omitted, default behavior applies for all operations. */
     operations?: AgentOperations;
+  }
+
+  /**
+   * Autonomous operations supported by an observability agent.
+   */
+  union AutonomousOperation {
+    /** AI-driven autonomous investigation of detected issues. */
+    autoInvestigate: "AutoInvestigate",
+    string,
   }
 
   /**
@@ -42,6 +51,7 @@ namespace Microsoft.Monitor {
    */
   model OperationSettings {
     /** Custom instructions that guide the agent's behavior for this operation. */
+    @maxLength(4096)
     customInstructions?: string;
   }
 
@@ -54,7 +64,7 @@ namespace Microsoft.Monitor {
       Resource = ObservabilityAgentResource,
       KeyName = "observabilityAgentName",
       SegmentName = "observabilityAgents",
-      NamePattern = "^(?!-)[a-zA-Z0-9-]+[^-]$"
+      NamePattern = "^(?=.{1,63}$)(?!-)[a-zA-Z0-9-]*[a-zA-Z0-9]$"
     >;
     ...ManagedServiceIdentityProperty;
   }
