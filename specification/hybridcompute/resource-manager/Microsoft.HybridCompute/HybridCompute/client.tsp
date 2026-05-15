@@ -121,8 +121,7 @@ union CustomPublicNetworkAccessType {
 @@clientName(VMGuestPatchClassification_Linux, "VmGuestPatchClassificationLinux", "csharp");
 
 // C# rename-mapping equivalents
-// Note: LocationData is Azure.ResourceManager.CommonTypes.LocationData and cannot be renamed here
-// It will be handled as a breaking change in ApiCompatBaseline.txt
+@@clientName(CommonTypes.LocationData, "HybridComputeLocation", "csharp");
 @@clientName(OSProfileLinuxConfiguration, "HybridComputeLinuxConfiguration", "csharp");
 @@clientName(OSProfileWindowsConfiguration, "HybridComputeWindowsConfiguration", "csharp");
 @@clientName(PatchOperationStatus, "MachineOperationStatus", "csharp");
@@ -225,3 +224,10 @@ union CustomPublicNetworkAccessType {
 
 // armResourceIdentifier alternate type: old AutoRest SDK generated ResourceIdentifier for gatewayId
 @@alternateType(GatewayProperties.gatewayId, Azure.Core.armResourceIdentifier, "csharp");
+
+// C# API review naming/type fixes for new TypeSpec-generated surface
+@@clientName(MachineRunCommandProperties.asyncExecution, "IsAsyncExecution", "csharp");
+@@alternateType(MachineProperties.hardwareResourceId, Azure.Core.armResourceIdentifier, "csharp");
+@@clientName(SetupExtensionRequest, "SetupExtensionContent", "csharp");
+@@clientName(RunCommandInputParameter, "RunCommandInputContent", "csharp");
+@@clientName(ExtensionsResourceStatus.time, "TimeOn", "csharp");
