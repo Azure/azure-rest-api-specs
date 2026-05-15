@@ -81,7 +81,7 @@ alias AdvancedThreatProtectionSettingNameAlias = {
   @path
   @segment("advancedThreatProtectionSettings")
   @key
-  settingName: "current";
+  settingName: AdvancedThreatProtectionSettingName;
 };
 
 @@doc(AdvancedThreatProtectionSetting.name, "");

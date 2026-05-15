@@ -409,7 +409,7 @@ model JitNetworkAccessPortRule {
   /**
    * Maximum duration requests can be made for. In ISO 8601 duration format. Minimum 5 minutes, maximum 1 day
    */
-  maxRequestAccessDuration: duration;
+  maxRequestAccessDuration: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

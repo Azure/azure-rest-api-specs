@@ -536,6 +536,11 @@ op privateLinkResourcesGetCustomization(
   "JitNetworkAccessPortStatusReason",
   "csharp"
 );
+@@alternateType(
+  SecuritySolutionsAPI.JitNetworkAccessPortRule.maxRequestAccessDuration,
+  duration,
+  "csharp"
+);
 @@clientName(SubAssessmentsAPI.CVSS, "SecurityCvss", "csharp");
 @@clientName(SubAssessmentsAPI.CVE, "SecurityCve", "csharp");
 @@clientName(SqlVulnerabilityAssessmentsAPI.Baseline,
@@ -679,7 +684,8 @@ op privateLinkResourcesGetCustomization(
 );
 @@Azure.ClientGenerator.Core.alternateType(
   AdvancedThreatProtectionSettingNameAlias.settingName,
-  "current"
+  "current",
+  "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
 @@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
