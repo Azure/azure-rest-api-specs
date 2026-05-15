@@ -112,6 +112,8 @@ namespace Microsoft.ApiCenter;
   "csharp"
 );
 
+@@clientName(Microsoft.ApiCenter, "AzureApiCenter", "java");
+
 // Java back-compat: keep `customProperties` as java.lang.Object (was Object in the
 // Swagger-generated SDK). Combined with `use-object-for-unknown: true` in
 // tspconfig.yaml, `unknown` maps to java.lang.Object instead of BinaryData.
