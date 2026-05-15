@@ -201,5 +201,32 @@ using Microsoft.Cache;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(
   Azure.ResourceManager.CommonTypes.PrivateLinkResource.properties,
-  "csharp"
+  "csharp,javascript"
+);
+@@clientName(
+  DatabasePropertiesGeoReplication,
+  "DatabaseCommonPropertiesGeoReplication",
+  "javascript"
+);
+@@clientName(DatabaseProperties, "DatabaseCommonProperties", "javascript");
+@@clientName(
+  ClusterPropertiesEncryptionCustomerManagedKeyEncryptionKeyIdentity,
+  "ClusterCommonPropertiesEncryptionCustomerManagedKeyEncryptionKeyIdentity",
+  "javascript"
+);
+@@clientName(
+  ClusterPropertiesEncryptionCustomerManagedKeyEncryption,
+  "ClusterCommonPropertiesEncryptionCustomerManagedKeyEncryption",
+  "javascript"
+);
+@@clientName(
+  ClusterPropertiesEncryption,
+  "ClusterCommonPropertiesEncryption",
+  "javascript"
+);
+@@clientName(ClusterProperties, "ClusterCommonProperties", "javascript");
+@@clientName(
+  Azure.ResourceManager.Legacy.ManagedServiceIdentityType.SystemAndUserAssigned,
+  "SystemAssignedUserAssigned",
+  "javascript"
 );

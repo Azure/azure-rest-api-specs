@@ -173,11 +173,19 @@ PUT operation is missing `201` response for resource creation. ARM PUT must retu
 **Fix:** Add a `201` response with the same schema as the `200` response.
 ```
 
-Every comment **MUST** end with the hidden HTML marker:
+Every comment **MUST** end with a hidden HTML telemetry marker as the very last line. The format is:
 
 ```html
-<!-- posted-by: arm-api-reviewer-agent -->
+<!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: blocking|warning|suggestion | classification: new|existing -->
 ```
+
+- **`rule`**: The rule ID of the finding (e.g., `RPC-Put-V1-11`, `OAPI027`). Use `summary` for summary comments.
+- **`severity`**: One of `blocking`, `warning`, or `suggestion`.
+- **`classification`**: One of `new` or `existing`.
+
+Example: `<!-- posted-by: arm-api-reviewer-agent | rule: RPC-Put-V1-11 | severity: blocking | classification: new -->`
+
+To detect agent-posted comments during reconciliation, check for the substring `posted-by: arm-api-reviewer-agent` (matches both old and new marker formats).
 
 ---
 
@@ -246,7 +254,7 @@ When reviewing a PR that already has comments from a prior review:
 The existing comment already covers this violation. **Skip posting.**
 
 **Scenario B -- Same finding, line shifted, agent-posted comment:**
-The existing comment has the marker `<!-- posted-by: arm-api-reviewer-agent -->`.
+The existing comment body contains the substring `posted-by: arm-api-reviewer-agent`.
 Resolve the outdated comment and post a new one at the correct line.
 
 **Scenario C -- Same finding, line shifted, human-posted comment:**
