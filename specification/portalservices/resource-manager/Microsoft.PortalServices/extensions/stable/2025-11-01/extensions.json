@@ -53,7 +53,7 @@
         "tags": [
           "PortalTenant"
         ],
-        "description": "compiles a file using inline content.",
+        "description": "Compiles a file using inline content.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -96,7 +96,7 @@
         "tags": [
           "Operations"
         ],
-        "description": "List the operations for the provider",
+        "description": "List the operations for the Microsoft.PortalServices provider.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -146,11 +146,6 @@
           "type": "object",
           "description": "The contents of referenced files. The property name is the relative file path and the value is its contents.",
           "additionalProperties": {}
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The current registration or provisioning state which only appears in the response.",
-          "readOnly": true
         }
       },
       "required": [
@@ -161,91 +156,6 @@
       "type": "object",
       "description": "The contents of the file to compile.",
       "additionalProperties": {}
-    },
-    "ProvisioningState": {
-      "type": "string",
-      "description": "The provisioning state.",
-      "enum": [
-        "NotSpecified",
-        "Accepted",
-        "Running",
-        "Ready",
-        "Creating",
-        "Created",
-        "Deleting",
-        "Deleted",
-        "Canceled",
-        "Failed",
-        "Succeeded",
-        "Updating"
-      ],
-      "x-ms-enum": {
-        "name": "ProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NotSpecified",
-            "value": "NotSpecified",
-            "description": "The operation is not specified."
-          },
-          {
-            "name": "Accepted",
-            "value": "Accepted",
-            "description": "The operation is accepted."
-          },
-          {
-            "name": "Running",
-            "value": "Running",
-            "description": "The operation is running."
-          },
-          {
-            "name": "Ready",
-            "value": "Ready",
-            "description": "The operation is ready."
-          },
-          {
-            "name": "Creating",
-            "value": "Creating",
-            "description": "The operation is creating."
-          },
-          {
-            "name": "Created",
-            "value": "Created",
-            "description": "The operation is created."
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "The operation is deleting."
-          },
-          {
-            "name": "Deleted",
-            "value": "Deleted",
-            "description": "The operation is deleted."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "The operation is canceled."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "The operation is failed."
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "The operation is succeeded."
-          },
-          {
-            "name": "Updating",
-            "value": "Updating",
-            "description": "The operation is updating."
-          }
-        ]
-      },
-      "readOnly": true
     }
   },
   "parameters": {}

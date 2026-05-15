@@ -1,6 +1,5 @@
 {
   "parameters": {
-    "portalExtensionName": "testPortalTenant",
     "api-version": "2025-11-01",
     "portalTenantCompileFile": {
       "contents": {
@@ -24,15 +23,18 @@
           "contentField": true
         }
       }
-    },
-    "resource": {
-      "location": "eastus"
     }
   },
   "responses": {
     "200": {
       "body": {
-        "location": "eastus"
+        "view": {
+          "kind": "Markdown",
+          "export": true,
+          "properties": {
+            "content": "# This is an example of a markdown view!"
+          }
+        }
       }
     }
   },
