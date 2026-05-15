@@ -5,7 +5,8 @@ namespace Microsoft.PortalServices;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@@doc(Azure.ResourceManager.Operations.list,
+@@doc(
+  Azure.ResourceManager.Operations.list,
   "List the operations for the Microsoft.PortalServices provider."
 );
 
