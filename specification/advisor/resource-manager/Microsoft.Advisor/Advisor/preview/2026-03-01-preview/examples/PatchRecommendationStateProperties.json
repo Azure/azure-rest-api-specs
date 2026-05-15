@@ -1,8 +1,15 @@
 {
   "parameters": {
-    "resourceUri": "subscriptions/a5481ee1-95df-47d0-85d4-dd3f0dfa19bc/resourceGroups/resourceGroup/providers/Microsoft.Compute/availabilitysets/armavset",
+    "subscriptionId": "a5481ee1-95df-47d0-85d4-dd3f0dfa19bc",
     "recommendationId": "2e7c72b2d7987ec224a1ebae03398b0fbdaa9a5a6a762e6fcf1c806599744b45",
-    "api-version": "2026-03-01-preview"
+    "api-version": "2026-03-01-preview",
+    "properties": {
+      "properties": {
+        "recommendationStatus": "Postponed",
+        "postponedUntilDateTime": "2024-09-01T00:00:00Z",
+        "recommendationDismissReason": "NotRelevant"
+      }
+    }
   },
   "responses": {
     "200": {
@@ -14,11 +21,11 @@
           "impact": "Medium",
           "impactedField": "Microsoft.Compute/availabilitysets",
           "impactedValue": "armavset",
-          "recommendationStatus": "New",
-          "recommendationDismissReason": "None",
-          "postponedUntilDateTime": "2020-10-25T22:24:43.3216408Z",
-          "lastRefreshed": "2020-10-25T22:24:43.3216408Z",
-          "lastUpdated": "2017-02-24T22:24:43.3216408Z",
+          "recommendationStatus": "Postponed",
+          "recommendationDismissReason": "NotRelevant",
+          "postponedUntilDateTime": "2024-09-01T00:00:00Z",
+          "lastRefreshed": "2024-08-01T19:05:00Z",
+          "lastUpdated": "2024-09-01T00:00:00Z",
           "risk": "Warning",
           "shortDescription": {
             "problem": "Monitoring agent should be installed on your machines",
@@ -70,6 +77,6 @@
       }
     }
   },
-  "operationId": "Recommendations_Get",
-  "title": "GetRecommendationDetailSubscriptionResourceUri"
+  "operationId": "Recommendations_Update",
+  "title": "PatchRecommendationStateProperties"
 }

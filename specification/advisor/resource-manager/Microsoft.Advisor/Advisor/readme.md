@@ -35,7 +35,20 @@ These settings apply only when `--tag=package-2026-03-preview` is specified on t
 ```yaml $(tag) == 'package-2026-03-preview'
 input-file:
   - preview/2026-03-01-preview/openapi.json
-tag: package-2026-02-preview
+suppressions:
+  - code: ArmResourcePropertiesBag
+    reason: Suppressing for now to avoid breaking change.
+    from:
+      - openapi.json
+    where:
+      - $.definitions["AssessmentResult"]
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: Suppressing for now to avoid breaking change.
+    from:
+      - openapi.json
+    where:
+      - $.definitions["AssessmentTypeListResult"]
+      - $.definitions["WorkloadListResult"]
 ```
 ### Tag: package-2026-02-preview
 These settings apply only when `--tag=package-2026-02-preview` is specified on the command line.
