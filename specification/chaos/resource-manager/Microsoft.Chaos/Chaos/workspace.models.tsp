@@ -35,7 +35,8 @@ model Workspace extends Azure.ResourceManager.Foundations.TrackedResource {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility with arm-resource-flattening configuration"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Workspace.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Workspace.properties,
   "autorest"
 );
 

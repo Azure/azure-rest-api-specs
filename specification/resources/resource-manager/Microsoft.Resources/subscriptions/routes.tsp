@@ -40,10 +40,9 @@ interface Subscriptions {
   @tag("Subscriptions")
   @route("/subscriptions/{subscriptionId}")
   @get
-  get(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-  ): ArmResponse<Subscription> | CloudError;
+  get(...ApiVersionParameter, ...SubscriptionIdParameter):
+    | ArmResponse<Subscription>
+    | CloudError;
 
   /**
    * Gets all subscriptions for a tenant.
@@ -51,9 +50,9 @@ interface Subscriptions {
   @route("/subscriptions")
   @list
   @tag("Subscriptions")
-  list(
-    ...ApiVersionParameter,
-  ): ArmResponse<SubscriptionListResult> | CloudError;
+  list(...ApiVersionParameter):
+    | ArmResponse<SubscriptionListResult>
+    | CloudError;
 
   /**
    * Compares a subscriptions logical zone mapping

@@ -11,41 +11,49 @@ namespace LiftrBase;
 
 @@clientName(Qumulo.Storage, "QumuloMgmtClient", "python");
 @@clientName(FileSystemResource, "QumuloFileSystemResource", "csharp");
-@@clientName(FileSystemResourceProperties.storageSku,
+@@clientName(
+  FileSystemResourceProperties.storageSku,
   "StorageSkuName",
   "csharp"
 );
-@@clientName(FileSystemResourceProperties.clusterLoginUrl,
+@@clientName(
+  FileSystemResourceProperties.clusterLoginUrl,
   "clusterLoginUri",
   "csharp"
 );
 @@alternateType(FileSystemResourceProperties.clusterLoginUrl, url, "csharp");
-@@alternateType(FileSystemResourceProperties.privateIPs,
+@@alternateType(
+  FileSystemResourceProperties.privateIPs,
   ipV4Address[],
   "csharp"
 );
 @@clientName(ProvisioningState, "QumuloArmProvisioningState", "csharp");
-@@clientName(FileSystemResourceProperties.provisioningState,
+@@clientName(
+  FileSystemResourceProperties.provisioningState,
   "ArmProvisioningState",
   "csharp"
 );
 @@clientName(UserDetails, "QumuloUserDetails", "csharp");
-@@clientName(MarketplaceSubscriptionStatus,
+@@clientName(
+  MarketplaceSubscriptionStatus,
   "QumuloMarketplaceSubscriptionStatus",
   "csharp"
 );
-@@clientName(MarketplaceDetails.marketplaceSubscriptionStatus,
+@@clientName(
+  MarketplaceDetails.marketplaceSubscriptionStatus,
   "QumuloMarketplaceSubscriptionStatus",
   "csharp"
 );
-@@alternateType(FileSystemResourceUpdateProperties.delegatedSubnetId,
+@@alternateType(
+  FileSystemResourceUpdateProperties.delegatedSubnetId,
   armResourceIdentifier,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "for backward compatibility purpose"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(LiftrBase.Storage.FileSystemResource.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  LiftrBase.Storage.FileSystemResource.properties,
   "csharp"
 );
 
@@ -94,7 +102,8 @@ enum OldMarketplaceSubscriptionStatus {
   Suspended,
   Unsubscribed,
 }
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );

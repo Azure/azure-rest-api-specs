@@ -147,8 +147,10 @@ interface ExpressRouteCrossConnections {
       @segment("arpTables")
       devicePath: string;
     },
-    Response = ArmResponse<ExpressRouteCircuitsArpTableListResult> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ExpressRouteCircuitsArpTableListResult> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResponse<ExpressRouteCircuitsArpTableListResult>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ExpressRouteCircuitsArpTableListResult> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = CloudError
   >;
 
@@ -175,8 +177,10 @@ interface ExpressRouteCrossConnections {
       @segment("routeTablesSummary")
       devicePath: string;
     },
-    Response = ArmResponse<ExpressRouteCrossConnectionsRoutesTableSummaryListResult> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ExpressRouteCrossConnectionsRoutesTableSummaryListResult> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResponse<ExpressRouteCrossConnectionsRoutesTableSummaryListResult>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ExpressRouteCrossConnectionsRoutesTableSummaryListResult> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = CloudError
   >;
 
@@ -203,8 +207,10 @@ interface ExpressRouteCrossConnections {
       @segment("routeTables")
       devicePath: string;
     },
-    Response = ArmResponse<ExpressRouteCircuitsRoutesTableListResult> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ExpressRouteCircuitsRoutesTableListResult> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResponse<ExpressRouteCircuitsRoutesTableListResult>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ExpressRouteCircuitsRoutesTableListResult> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = CloudError
   >;
 
@@ -233,10 +239,13 @@ interface ExpressRouteCrossConnections {
     ExpressRouteCrossConnection,
     void,
     void,
-    Response = {
-      @body body: void;
-    } | ArmAcceptedLroResponse<LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmLroLocationHeader<FinalResult = void>> | NoContentResponse,
+    Response =
+      | {
+          @body body: void;
+        }
+      | ArmAcceptedLroResponse<LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+          ArmLroLocationHeader<FinalResult = void>>
+      | NoContentResponse,
     OverrideErrorType = CloudError
   >;
 
@@ -267,27 +276,34 @@ interface ExpressRouteCrossConnections {
     void,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = ExpressRouteCrossConnectionPeering> &
       Azure.Core.Foundations.RetryAfterHeader,
-    Response = ArmResponse<ExpressRouteCrossConnectionPeering> | ArmResourceCreatedResponse<
-      ExpressRouteCrossConnectionPeering,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = ExpressRouteCrossConnectionPeering> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >,
+    Response =
+      | ArmResponse<ExpressRouteCrossConnectionPeering>
+      | ArmResourceCreatedResponse<
+          ExpressRouteCrossConnectionPeering,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = ExpressRouteCrossConnectionPeering> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >,
     OverrideErrorType = CloudError
   >;
 }
 
-@@doc(ExpressRouteCrossConnection.name,
+@@doc(
+  ExpressRouteCrossConnection.name,
   "The name of the ExpressRouteCrossConnection (service key of the circuit)."
 );
-@@doc(ExpressRouteCrossConnection.properties,
+@@doc(
+  ExpressRouteCrossConnection.properties,
   "Properties of the express route cross connection."
 );
-@@doc(ExpressRouteCrossConnections.createOrUpdate::parameters.resource,
+@@doc(
+  ExpressRouteCrossConnections.createOrUpdate::parameters.resource,
   "Parameters supplied to the update express route crossConnection operation."
 );
-@@doc(ExpressRouteCrossConnections.updateTags::parameters.properties,
+@@doc(
+  ExpressRouteCrossConnections.updateTags::parameters.properties,
   "Parameters supplied to update express route cross connection tags."
 );
-@@doc(ExpressRouteCrossConnections.expressRouteCrossConnectionPeeringsCreateOrUpdate::parameters.body,
+@@doc(
+  ExpressRouteCrossConnections.expressRouteCrossConnectionPeeringsCreateOrUpdate::parameters.body,
   "Parameters supplied to the create or update ExpressRouteCrossConnection peering operation."
 );

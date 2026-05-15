@@ -4,20 +4,24 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Compute;
 
-@@clientName(NetworkApiVersion.`2020-11-01`,
+@@clientName(
+  NetworkApiVersion.`2020-11-01`,
   "TwoThousandTwenty1101",
   "go, javascript"
 );
-@@clientName(NetworkApiVersion.`2022-11-01`,
+@@clientName(
+  NetworkApiVersion.`2022-11-01`,
   "TwoThousandTwentyTwo1101",
   "go, javascript"
 );
 
-@@alternateType(VirtualMachineScaleSetStorageProfile.diskControllerType,
+@@alternateType(
+  VirtualMachineScaleSetStorageProfile.diskControllerType,
   string,
   "go"
 );
-@@alternateType(VirtualMachineScaleSetUpdateStorageProfile.diskControllerType,
+@@alternateType(
+  VirtualMachineScaleSetUpdateStorageProfile.diskControllerType,
   string,
   "go"
 );
@@ -26,52 +30,62 @@ using Compute;
 @@clientName(VirtualMachineSizeTypes.Standard_B2ms, "StandardB2Ms", "go");
 @@clientName(VirtualMachineSizeTypes.Standard_B4ms, "StandardB4Ms", "go");
 @@clientName(VirtualMachineSizeTypes.Standard_B8ms, "StandardB8Ms", "go");
-@@clientName(VirtualMachineSizeTypes.`Standard_M128-32ms`,
+@@clientName(
+  VirtualMachineSizeTypes.`Standard_M128-32ms`,
   "StandardM12832Ms",
   "go"
 );
-@@clientName(VirtualMachineSizeTypes.`Standard_M128-64ms`,
+@@clientName(
+  VirtualMachineSizeTypes.`Standard_M128-64ms`,
   "StandardM12864Ms",
   "go"
 );
 @@clientName(VirtualMachineSizeTypes.Standard_M128ms, "StandardM128Ms", "go");
-@@clientName(VirtualMachineSizeTypes.`Standard_M64-16ms`,
+@@clientName(
+  VirtualMachineSizeTypes.`Standard_M64-16ms`,
   "StandardM6416Ms",
   "go"
 );
-@@clientName(VirtualMachineSizeTypes.`Standard_M64-32ms`,
+@@clientName(
+  VirtualMachineSizeTypes.`Standard_M64-32ms`,
   "StandardM6432Ms",
   "go"
 );
 @@clientName(VirtualMachineSizeTypes.Standard_M64ms, "StandardM64Ms", "go");
 
 @@alternateType(AdditionalUnattendContent.passName, "OobeSystem", "go");
-@@alternateType(AdditionalUnattendContent.componentName,
+@@alternateType(
+  AdditionalUnattendContent.componentName,
   "Microsoft-Windows-Shell-Setup",
   "go"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.Operation,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.Operation,
   "OperationValue",
   "go"
 );
 
 // Property case changes: diskIOPSReadWrite -> diskIopsReadWrite (retain old Java name)
-@@clientName(VirtualMachineScaleSetDataDisk.diskIOPSReadWrite,
+@@clientName(
+  VirtualMachineScaleSetDataDisk.diskIOPSReadWrite,
   "diskIopsReadWrite",
   "java"
 );
 @@clientName(DataDisk.diskIOPSReadWrite, "diskIopsReadWrite", "java");
 
 // Property case changes: enableIPForwarding -> enableIpForwarding (retain old Java name)
-@@clientName(VirtualMachineScaleSetNetworkConfigurationProperties.enableIPForwarding,
+@@clientName(
+  VirtualMachineScaleSetNetworkConfigurationProperties.enableIPForwarding,
   "enableIpForwarding",
   "java"
 );
-@@clientName(VirtualMachineScaleSetUpdateNetworkConfigurationProperties.enableIPForwarding,
+@@clientName(
+  VirtualMachineScaleSetUpdateNetworkConfigurationProperties.enableIPForwarding,
   "enableIpForwarding",
   "java"
 );
-@@clientName(VirtualMachineNetworkInterfaceConfigurationProperties.enableIPForwarding,
+@@clientName(
+  VirtualMachineNetworkInterfaceConfigurationProperties.enableIPForwarding,
   "enableIpForwarding",
   "java"
 );
@@ -84,35 +98,43 @@ using Compute;
 @@clientName(PublicIPAllocationMethod, "PublicIpAllocationMethod", "java");
 @@clientName(IPVersion, "IpVersion", "java");
 @@clientName(IPVersions, "IpVersions", "java");
-@@clientName(VirtualMachineScaleSetPublicIPAddressConfiguration,
+@@clientName(
+  VirtualMachineScaleSetPublicIPAddressConfiguration,
   "VirtualMachineScaleSetPublicIpAddressConfiguration",
   "java"
 );
-@@clientName(VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings,
+@@clientName(
+  VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings,
   "VirtualMachineScaleSetPublicIpAddressConfigurationDnsSettings",
   "java"
 );
-@@clientName(VirtualMachineScaleSetIPConfiguration,
+@@clientName(
+  VirtualMachineScaleSetIPConfiguration,
   "VirtualMachineScaleSetIpConfiguration",
   "java"
 );
-@@clientName(VirtualMachineScaleSetUpdateIPConfiguration,
+@@clientName(
+  VirtualMachineScaleSetUpdateIPConfiguration,
   "VirtualMachineScaleSetUpdateIpConfiguration",
   "java"
 );
-@@clientName(VirtualMachineScaleSetUpdatePublicIPAddressConfiguration,
+@@clientName(
+  VirtualMachineScaleSetUpdatePublicIPAddressConfiguration,
   "VirtualMachineScaleSetUpdatePublicIpAddressConfiguration",
   "java"
 );
-@@clientName(VirtualMachineNetworkInterfaceIPConfiguration,
+@@clientName(
+  VirtualMachineNetworkInterfaceIPConfiguration,
   "VirtualMachineNetworkInterfaceIpConfiguration",
   "java"
 );
-@@clientName(VirtualMachinePublicIPAddressConfiguration,
+@@clientName(
+  VirtualMachinePublicIPAddressConfiguration,
   "VirtualMachinePublicIpAddressConfiguration",
   "java"
 );
-@@clientName(VirtualMachinePublicIPAddressDnsSettingsConfiguration,
+@@clientName(
+  VirtualMachinePublicIPAddressDnsSettingsConfiguration,
   "VirtualMachinePublicIpAddressDnsSettingsConfiguration",
   "java"
 );
@@ -124,72 +146,86 @@ using Compute;
 
 // Property case change: ultraSSDEnabled -> ultraSsdEnabled
 @@clientName(AdditionalCapabilities.ultraSSDEnabled, "ultraSsdEnabled", "java");
-@@clientName(DedicatedHostGroupPropertiesAdditionalCapabilities.ultraSSDEnabled,
+@@clientName(
+  DedicatedHostGroupPropertiesAdditionalCapabilities.ultraSSDEnabled,
   "ultraSsdEnabled",
   "java"
 );
 
 // Scale set IP configuration properties
-@@clientName(VirtualMachineScaleSetIPConfigurationProperties.publicIPAddressConfiguration,
+@@clientName(
+  VirtualMachineScaleSetIPConfigurationProperties.publicIPAddressConfiguration,
   "publicIpAddressConfiguration",
   "java"
 );
-@@clientName(VirtualMachineScaleSetIPConfigurationProperties.privateIPAddressVersion,
+@@clientName(
+  VirtualMachineScaleSetIPConfigurationProperties.privateIPAddressVersion,
   "privateIpAddressVersion",
   "java"
 );
 
 // Scale set public IP configuration properties
-@@clientName(VirtualMachineScaleSetPublicIPAddressConfigurationProperties.publicIPAddressVersion,
+@@clientName(
+  VirtualMachineScaleSetPublicIPAddressConfigurationProperties.publicIPAddressVersion,
   "publicIpAddressVersion",
   "java"
 );
-@@clientName(VirtualMachineScaleSetPublicIPAddressConfigurationProperties.publicIPPrefix,
+@@clientName(
+  VirtualMachineScaleSetPublicIPAddressConfigurationProperties.publicIPPrefix,
   "publicIpPrefix",
   "java"
 );
 
 // Scale set UPDATE IP configuration properties
-@@clientName(VirtualMachineScaleSetUpdateIPConfigurationProperties.publicIPAddressConfiguration,
+@@clientName(
+  VirtualMachineScaleSetUpdateIPConfigurationProperties.publicIPAddressConfiguration,
   "publicIpAddressConfiguration",
   "java"
 );
-@@clientName(VirtualMachineScaleSetUpdateIPConfigurationProperties.privateIPAddressVersion,
+@@clientName(
+  VirtualMachineScaleSetUpdateIPConfigurationProperties.privateIPAddressVersion,
   "privateIpAddressVersion",
   "java"
 );
 
 // Scale set UPDATE public IP configuration properties
-@@clientName(VirtualMachineScaleSetUpdatePublicIPAddressConfigurationProperties.publicIPPrefix,
+@@clientName(
+  VirtualMachineScaleSetUpdatePublicIPAddressConfigurationProperties.publicIPPrefix,
   "publicIpPrefix",
   "java"
 );
 
 // Network interface IP configuration properties
-@@clientName(VirtualMachineNetworkInterfaceIPConfigurationProperties.publicIPAddressConfiguration,
+@@clientName(
+  VirtualMachineNetworkInterfaceIPConfigurationProperties.publicIPAddressConfiguration,
   "publicIpAddressConfiguration",
   "java"
 );
-@@clientName(VirtualMachineNetworkInterfaceIPConfigurationProperties.privateIPAddressVersion,
+@@clientName(
+  VirtualMachineNetworkInterfaceIPConfigurationProperties.privateIPAddressVersion,
   "privateIpAddressVersion",
   "java"
 );
 
 // VM-level public IP address configuration properties
-@@clientName(VirtualMachinePublicIPAddressConfigurationProperties.publicIPAddressVersion,
+@@clientName(
+  VirtualMachinePublicIPAddressConfigurationProperties.publicIPAddressVersion,
   "publicIpAddressVersion",
   "java"
 );
-@@clientName(VirtualMachinePublicIPAddressConfigurationProperties.publicIPPrefix,
+@@clientName(
+  VirtualMachinePublicIPAddressConfigurationProperties.publicIPPrefix,
   "publicIpPrefix",
   "java"
 );
-@@clientName(VirtualMachinePublicIPAddressConfigurationProperties.publicIPAllocationMethod,
+@@clientName(
+  VirtualMachinePublicIPAddressConfigurationProperties.publicIPAllocationMethod,
   "publicIpAllocationMethod",
   "java"
 );
 
-@@clientName(VirtualMachineScaleSets.getOSUpgradeHistory,
+@@clientName(
+  VirtualMachineScaleSets.getOSUpgradeHistory,
   "listOSUpgradeHistory",
   "javascript"
 );

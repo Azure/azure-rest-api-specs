@@ -160,9 +160,11 @@ interface PolicyExemptions {
 
 @@doc(PolicyExemption.name, "The name of the policy exemption to get.");
 @@doc(PolicyExemption.properties, "Properties for the policy exemption.");
-@@doc(PolicyExemptions.createOrUpdate::parameters.resource,
+@@doc(
+  PolicyExemptions.createOrUpdate::parameters.resource,
   "Parameters for the policy exemption."
 );
-@@doc(PolicyExemptions.update::parameters.properties,
+@@doc(
+  PolicyExemptions.update::parameters.properties,
   "Parameters for policy exemption patch request."
 );

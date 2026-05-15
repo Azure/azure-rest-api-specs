@@ -71,7 +71,9 @@ interface DatabaseAccounts {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     DatabaseAccountGetResults,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | NoContentResponse
+    Response =
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+      | NoContentResponse
   >;
 
   /**
@@ -97,8 +99,10 @@ interface DatabaseAccounts {
   failoverPriorityChange is ArmResourceActionAsyncBase<
     DatabaseAccountGetResults,
     Request = FailoverPolicies,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader> | NoContentResponse,
+    Response =
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | NoContentResponse,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<DatabaseAccountGetResults>
   >;
 
@@ -736,28 +740,36 @@ interface DatabaseAccounts {
 @@maxLength(DatabaseAccountGetResults.name, 50);
 @@minLength(DatabaseAccountGetResults.name, 3);
 @@doc(DatabaseAccountGetResults.name, "Cosmos DB database account name.");
-@@doc(DatabaseAccountGetResults.properties,
+@@doc(
+  DatabaseAccountGetResults.properties,
   "Properties for the database account."
 );
-@@doc(DatabaseAccounts.createOrUpdate::parameters.resource,
+@@doc(
+  DatabaseAccounts.createOrUpdate::parameters.resource,
   "The parameters to provide for the current database account."
 );
-@@doc(DatabaseAccounts.update::parameters.properties,
+@@doc(
+  DatabaseAccounts.update::parameters.properties,
   "The parameters to provide for the current database account."
 );
-@@doc(DatabaseAccounts.failoverPriorityChange::parameters.body,
+@@doc(
+  DatabaseAccounts.failoverPriorityChange::parameters.body,
   "The new failover policies for the database account."
 );
-@@doc(DatabaseAccounts.offlineRegion::parameters.body,
+@@doc(
+  DatabaseAccounts.offlineRegion::parameters.body,
   "Cosmos DB region to offline for the database account."
 );
-@@doc(DatabaseAccounts.onlineRegion::parameters.body,
+@@doc(
+  DatabaseAccounts.onlineRegion::parameters.body,
   "Cosmos DB region to online for the database account."
 );
-@@doc(DatabaseAccounts.regenerateKey::parameters.body,
+@@doc(
+  DatabaseAccounts.regenerateKey::parameters.body,
   "The name of the key to regenerate."
 );
-@@visibility(DatabaseAccountGetResults.location,
+@@visibility(
+  DatabaseAccountGetResults.location,
   Lifecycle.Read,
   Lifecycle.Create,
   Lifecycle.Update

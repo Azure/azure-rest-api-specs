@@ -42,8 +42,10 @@ interface LedgerDigestUploadsOperationGroup {
   @tag("LedgerDigestUploads")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     LedgerDigestUploads,
-    Response = ArmResourceUpdatedResponse<LedgerDigestUploads> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LedgerDigestUploads> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<LedgerDigestUploads>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LedgerDigestUploads> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -65,6 +67,7 @@ interface LedgerDigestUploadsOperationGroup {
 
 @@doc(LedgerDigestUploads.name, "");
 @@doc(LedgerDigestUploads.properties, "Resource properties.");
-@@doc(LedgerDigestUploadsOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  LedgerDigestUploadsOperationGroup.createOrUpdate::parameters.resource,
   ""
 );

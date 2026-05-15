@@ -102,9 +102,11 @@ interface CreditSources {
 
 @@doc(CreditSource.name, "Name of the credit source");
 @@doc(CreditSource.properties, "Credit source properties");
-@@doc(CreditSources.create::parameters.resource,
+@@doc(
+  CreditSources.create::parameters.resource,
   "Credit source create request"
 );
-@@doc(CreditSources.update::parameters.properties,
+@@doc(
+  CreditSources.update::parameters.properties,
   "Credit source patch request"
 );

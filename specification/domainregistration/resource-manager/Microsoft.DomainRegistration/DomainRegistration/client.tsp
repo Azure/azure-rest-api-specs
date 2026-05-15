@@ -5,11 +5,13 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Microsoft.DomainRegistration;
 
-@@clientName(Microsoft.DomainRegistration,
+@@clientName(
+  Microsoft.DomainRegistration,
   "DomainRegistrationManagementClient",
   "javascript"
 );
-@@clientName(Microsoft.DomainRegistration,
+@@clientName(
+  Microsoft.DomainRegistration,
   "DomainRegistrationMgmtClient",
   "python"
 );
@@ -18,33 +20,40 @@ using Microsoft.DomainRegistration;
 @@clientName(DomainProperties.autoRenew, "IsAutoRenew", "csharp");
 @@clientName(DomainProperties.expirationTime, "ExpireOn", "csharp");
 @@clientName(DomainProperties.privacy, "IsDomainPrivacyEnabled", "csharp");
-@@clientName(DomainProperties.readyForDnsRecordManagement,
+@@clientName(
+  DomainProperties.readyForDnsRecordManagement,
   "IsDnsRecordManagementReady",
   "csharp"
 );
 @@clientName(DomainCollection, "AppServiceDomainListResult", "csharp");
-@@clientName(DomainControlCenterSsoRequest,
+@@clientName(
+  DomainControlCenterSsoRequest,
   "DomainControlCenterSsoRequestInfo",
   "csharp"
 );
-@@clientName(DomainOwnershipIdentifierCollection,
+@@clientName(
+  DomainOwnershipIdentifierCollection,
   "DomainOwnershipIdentifierListResult",
   "csharp"
 );
 @@clientName(DomainPatchResourceProperties.autoRenew, "IsAutoRenew", "csharp");
-@@clientName(DomainPatchResourceProperties.privacy,
+@@clientName(
+  DomainPatchResourceProperties.privacy,
   "IsDomainPrivacyEnabled",
   "csharp"
 );
-@@clientName(DomainPatchResourceProperties.readyForDnsRecordManagement,
+@@clientName(
+  DomainPatchResourceProperties.readyForDnsRecordManagement,
   "IsDnsRecordManagementReady",
   "csharp"
 );
-@@clientName(TopLevelDomainProperties.privacy,
+@@clientName(
+  TopLevelDomainProperties.privacy,
   "IsDomainPrivacySupported",
   "csharp"
 );
-@@clientName(TopLevelDomainAgreementOption.forTransfer,
+@@clientName(
+  TopLevelDomainAgreementOption.forTransfer,
   "IsForTransfer",
   "csharp"
 );
@@ -58,36 +67,43 @@ using Microsoft.DomainRegistration;
 @@clientName(HostName, "AppServiceHostName", "csharp");
 @@clientName(HostNameType, "AppServiceHostNameType", "csharp");
 @@clientName(DomainAvailabilityCheckResult.available, "IsAvailable", "csharp");
-@@clientName(DomainRecommendationSearchParameters,
+@@clientName(
+  DomainRecommendationSearchParameters,
   "DomainRecommendationSearchContent",
   "csharp"
 );
 @@clientName(NameIdentifier, "AppServiceDomainNameIdentifier", "csharp");
-@@clientName(NameIdentifierCollection,
+@@clientName(
+  NameIdentifierCollection,
   "AppServiceDomainNameIdentifierListResult",
   "csharp"
 );
 @@clientName(ProvisioningState, "AppServiceDomainProvisioningState", "csharp");
 @@clientName(ResourceNotRenewableReason, "DomainNotRenewableReason", "csharp");
-@@clientName(TopLevelDomainAgreementOption.forTransfer,
+@@clientName(
+  TopLevelDomainAgreementOption.forTransfer,
   "IsForTransfer",
   "csharp"
 );
-@@clientName(TopLevelDomainAgreementOption.includePrivacy,
+@@clientName(
+  TopLevelDomainAgreementOption.includePrivacy,
   "IsPrivacyIncluded",
   "csharp"
 );
-@@clientName(TopLevelDomainAgreementOption,
+@@clientName(
+  TopLevelDomainAgreementOption,
   "TopLevelDomainAgreementContent",
   "csharp"
 );
 @@clientName(TldLegalAgreement, "TopLevelDomainLegalAgreement", "csharp");
 @@alternateType(TldLegalAgreement.url, url, "csharp");
-@@clientName(DomainsOperationGroup.checkAvailability,
+@@clientName(
+  DomainsOperationGroup.checkAvailability,
   "CheckAppServiceDomainRegistrationAvailability",
   "csharp"
 );
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
   armResourceIdentifier,
   "csharp"
 );
