@@ -8921,29 +8921,37 @@ components:
       type: object
       required:
         - type
-        - agent_reference
       properties:
         type:
           type: string
           enum:
             - agent_filter
           description: The type of trace source, always `agent_filter`.
-        agent_reference:
-          allOf:
-            - $ref: '#/components/schemas/EvalAgentReference'
-          description: The agent reference to filter traces by.
+        agent_id:
+          type: string
+          description: The identifier of the agent to filter traces by.
+        agent_name:
+          type: string
+          description: The name of the agent to filter traces by.
+        agent_version:
+          type: string
+          description: The version of the agent to filter traces by.
         start_time:
-          type: integer
-          format: int64
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
           description: Start time for the trace query window, expressed as a Unix timestamp (seconds).
         end_time:
-          type: integer
-          format: int64
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
           description: End time for the trace query window, expressed as a Unix timestamp (seconds).
         max_traces:
           type: integer
           format: int32
           description: Maximum number of traces to sample. Must be greater than 0.
+        filter_strategy:
+          allOf:
+            - $ref: '#/components/schemas/FilterStrategyType'
+          description: The strategy used to filter traces.
       allOf:
         - $ref: '#/components/schemas/TraceSource'
       description: A trace source that selects traces by agent reference with time-based filtering.
@@ -9118,39 +9126,6 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - AgentEndpoints=V1Preview
-    AgentSmartFilterTraceSource:
-      type: object
-      required:
-        - type
-        - agent_reference
-      properties:
-        type:
-          type: string
-          enum:
-            - agent_smart_filter
-          description: The type of trace source, always `agent_smart_filter`.
-        agent_reference:
-          allOf:
-            - $ref: '#/components/schemas/EvalAgentReference'
-          description: The agent reference to filter traces by.
-        start_time:
-          type: integer
-          format: int64
-          description: Start time for the trace query window, expressed as a Unix timestamp (seconds).
-        end_time:
-          type: integer
-          format: int64
-          description: End time for the trace query window, expressed as a Unix timestamp (seconds).
-        max_traces:
-          type: integer
-          format: int32
-          description: Maximum number of traces to sample. Must be greater than 0.
-        model:
-          type: string
-          description: If you provide the model, it will be used for filtering.
-      allOf:
-        - $ref: '#/components/schemas/TraceSource'
-      description: An extended agent filter trace source that also includes model information.
     AgentTaxonomyInput:
       type: object
       required:
@@ -9473,6 +9448,10 @@ components:
           items:
             $ref: '#/components/schemas/ToolDescription'
           description: The parameters used to control the sampling behavior of the agent during text generation.
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.Tool'
       allOf:
         - $ref: '#/components/schemas/Target'
       description: Represents a target specifying an Azure AI agent.
@@ -9495,6 +9474,10 @@ components:
           items:
             $ref: '#/components/schemas/ToolDescription'
           description: The parameters used to control the sampling behavior of the agent during text generation.
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.Tool'
       allOf:
         - $ref: '#/components/schemas/TargetUpdate'
       description: Represents a target specifying an Azure AI agent.
@@ -10936,7 +10919,6 @@ components:
       type: object
       required:
         - type
-        - source
         - model
       properties:
         type:
@@ -10944,11 +10926,6 @@ components:
           enum:
             - conversation_gen_preview
           description: The type of item generation parameters, always `conversation_gen_preview`.
-        source:
-          anyOf:
-            - $ref: '#/components/schemas/OpenAI.EvalJsonlFileContentSource'
-            - $ref: '#/components/schemas/OpenAI.EvalJsonlFileIdSource'
-          description: The source of test scenarios, supporting file_id or file_content.
         model:
           type: string
           description: The model deployment used for simulation, in the format '{connectionName}/modelDeploymentName'.
@@ -10993,29 +10970,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/TraceSource'
       description: A trace source that selects traces by conversation IDs.
-    ConversationSimulationPreviewEvalRunDataSource:
-      type: object
-      required:
-        - type
-        - item_generation_params
-        - target
-      properties:
-        type:
-          type: string
-          enum:
-            - azure_ai_conversation_simulation_preview
-          description: The type of data source, always `azure_ai_conversation_simulation_preview`.
-        item_generation_params:
-          allOf:
-            - $ref: '#/components/schemas/ConversationGenPreviewItemGenerationParams'
-          description: The parameters for conversation generation.
-        target:
-          allOf:
-            - $ref: '#/components/schemas/AzureAIAgentTarget'
-          description: The target agent to simulate conversations against.
-      allOf:
-        - $ref: '#/components/schemas/EvalRunDataSource'
-      description: Represents a data source for evaluation runs that generate multi-turn conversations via LLM simulation against a target agent.
     CosmosDBIndex:
       type: object
       required:
@@ -11908,46 +11862,6 @@ components:
               "test": "synthetics",
             }
           }
-    EvalAgentIdReference:
-      type: object
-      required:
-        - type
-        - agent_id
-      properties:
-        type:
-          type: string
-          enum:
-            - agent_id
-          description: The type of agent reference, always `agent_id`.
-        agent_id:
-          type: string
-          description: The unique identifier of the agent.
-      allOf:
-        - $ref: '#/components/schemas/EvalAgentReference'
-      description: Identifies a 3P (Assistants) agent by its opaque agent ID.
-    EvalAgentReference:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          allOf:
-            - $ref: '#/components/schemas/EvalAgentReferenceType'
-          description: The discriminator that identifies which kind of agent reference this is.
-      discriminator:
-        propertyName: type
-        mapping:
-          agent_id: '#/components/schemas/EvalAgentIdReference'
-          agent_reference: '#/components/schemas/EvalFoundryAgentReference'
-      description: Base class for polymorphic agent references used in evaluation trace filtering. The user supplies exactly one variant to identify the agent whose traces should be filtered.
-    EvalAgentReferenceType:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - agent_id
-            - agent_reference
-      description: Specifies the type of agent reference used for filtering traces.
     EvalCsvFileIdSource:
       type: object
       required:
@@ -11981,26 +11895,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvalRunDataSource'
       description: Represents a CSV data source for evaluation runs.
-    EvalFoundryAgentReference:
-      type: object
-      required:
-        - type
-        - name
-      properties:
-        type:
-          type: string
-          enum:
-            - agent_reference
-          description: The type of agent reference, always `agent_reference`.
-        name:
-          type: string
-          description: The name of the agent.
-        version:
-          type: string
-          description: The version identifier of the agent. If not specified, will look for any version.
-      allOf:
-        - $ref: '#/components/schemas/EvalAgentReference'
-      description: Identifies a Foundry agent by its name and optional version.
     EvalResult:
       type: object
       required:
@@ -12321,7 +12215,6 @@ components:
           azure_ai_target_completions: '#/components/schemas/TargetCompletionEvalRunDataSource'
           csv: '#/components/schemas/EvalCsvRunDataSource'
           azure_ai_red_team: '#/components/schemas/RedTeamEvalRunDataSource'
-          azure_ai_conversation_simulation_preview: '#/components/schemas/ConversationSimulationPreviewEvalRunDataSource'
           azure_ai_trace_data_source_preview: '#/components/schemas/AzureAITraceDataSourcePreviewEvalRunDataSource'
           azure_ai_benchmark_preview: '#/components/schemas/AzureAIBenchmarkPreviewEvalRunDataSource'
       description: Base class for run data sources with discriminator support.
@@ -13609,6 +13502,14 @@ components:
       allOf:
         - $ref: '#/components/schemas/DatasetVersionUpdate'
       description: FileDatasetVersion Definition
+    FilterStrategyType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - random_sampling
+            - smart_filtering
+      description: Specifies the type of filter strategy used to select traces for evaluation.
     FixedRatioVersionSelectionRule:
       type: object
       required:
@@ -31430,6 +31331,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Target'
           description: The target configuration for the evaluation.
+        item_generation_params:
+          allOf:
+            - $ref: '#/components/schemas/ItemGenerationParams'
+          description: The parameters for item generation. ConversationGenPreviewItemGenerationParams enables conversation simulation previews.
       allOf:
         - $ref: '#/components/schemas/EvalRunDataSource'
       description: Represents a data source for target-based completion evaluation configuration.
@@ -31810,7 +31715,6 @@ components:
           trace_id_source: '#/components/schemas/TraceIdTraceSource'
           conversation_id_source: '#/components/schemas/ConversationIdTraceSource'
           agent_filter: '#/components/schemas/AgentFilterTraceSource'
-          agent_smart_filter: '#/components/schemas/AgentSmartFilterTraceSource'
       description: Base class for polymorphic trace sources nested within an AzureAITraceDataSourcePreviewEvalRunDataSource.
     TraceSourceType:
       anyOf:
@@ -31820,7 +31724,6 @@ components:
             - trace_id_source
             - conversation_id_source
             - agent_filter
-            - agent_smart_filter
       description: Specifies the type of trace source used to select traces for evaluation.
     TracesPreviewEvalRunDataSource:
       type: object
