@@ -8576,3 +8576,45 @@ model ContentPayload {
    */
   fileName?: string;
 }
+
+/** Represents an available update for an edge machine. */
+@added(Versions.v2026_05_01_preview)
+model EdgeMachineUpdateInfo {
+  /** The VSR version of the update. */
+  vsrVersion: string;
+
+  /** The display name of the update. */
+  displayName?: string;
+
+  /** Link to the release notes for this update. */
+  releaseNotesLink?: string;
+
+  /** Total size of the update in bytes. */
+  totalSizeBytes?: int64;
+
+  /** Indicates whether a reboot is required after installing this update. */
+  rebootRequired?: boolean;
+
+  /** Estimated time in minutes to install this update. */
+  estimatedInstallTimeMinutes?: int32;
+
+  /** The type of update (e.g., FullImage). */
+  updateType?: string;
+
+  /** The Arc agent version included in this update. */
+  arcAgentVersion?: string;
+}
+
+/** Properties for EdgeMachineUpdate resource. */
+@added(Versions.v2026_05_01_preview)
+model EdgeMachineUpdateProperties {
+  /** The list of available updates. */
+  @identifiers(#[])
+  values: EdgeMachineUpdateInfo[];
+
+  /**
+   * Provisioning state of the updates resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
