@@ -125,10 +125,12 @@ interface TriageRecommendations {
   >;
 }
 
-@@doc(TriageRecommendation.name,
+@@doc(
+  TriageRecommendation.name,
   "Existing triage recommendation id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)."
 );
 @@doc(TriageRecommendation.properties, "Advisor resiliency review properties.");
-@@doc(TriageRecommendations.rejectTriageRecommendation::parameters.body,
+@@doc(
+  TriageRecommendations.rejectTriageRecommendation::parameters.body,
   "JSON object that contains reason for rejecting triage recommendation."
 );

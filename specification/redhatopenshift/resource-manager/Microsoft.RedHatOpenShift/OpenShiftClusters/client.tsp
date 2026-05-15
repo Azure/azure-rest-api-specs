@@ -5,7 +5,8 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Microsoft.RedHatOpenShift;
 
-@@clientName(Microsoft.RedHatOpenShift,
+@@clientName(
+  Microsoft.RedHatOpenShift,
   "AzureRedHatOpenShiftClient",
   "javascript,python"
 );
@@ -25,7 +26,8 @@ using Microsoft.RedHatOpenShift;
 @@clientName(WorkerProfile, "OpenShiftWorkerProfile", "csharp");
 @@clientName(IngressProfile, "OpenShiftIngressProfile", "csharp");
 @@clientName(LoadBalancerProfile, "OpenShiftLoadBalancerProfile", "csharp");
-@@clientName(ServicePrincipalProfile,
+@@clientName(
+  ServicePrincipalProfile,
   "OpenShiftServicePrincipalProfile",
   "csharp"
 );
@@ -34,60 +36,73 @@ using Microsoft.RedHatOpenShift;
 @@clientName(EncryptionAtHost, "OpenShiftEncryptionAtHost", "csharp");
 @@clientName(FipsValidatedModules, "OpenShiftFipsValidatedModule", "csharp");
 @@clientName(PreconfiguredNSG, "OpenShiftPreconfiguredNsg", "csharp");
-@@clientName(PlatformWorkloadIdentity,
+@@clientName(
+  PlatformWorkloadIdentity,
   "OpenShiftPlatformWorkloadIdentity",
   "csharp"
 );
-@@clientName(PlatformWorkloadIdentityProfile,
+@@clientName(
+  PlatformWorkloadIdentityProfile,
   "OpenShiftPlatformWorkloadIdentityProfile",
   "csharp"
 );
-@@clientName(PlatformWorkloadIdentityRole,
+@@clientName(
+  PlatformWorkloadIdentityRole,
   "OpenShiftPlatformWorkloadIdentityRole",
   "csharp"
 );
 @@clientName(ConsoleProfile, "OpenShiftConsoleProfile", "csharp");
 @@clientName(ManagedOutboundIPs, "OpenShiftManagedOutboundIPs", "csharp");
-@@clientName(OpenShiftClusterProperties.apiserverProfile,
+@@clientName(
+  OpenShiftClusterProperties.apiserverProfile,
   "ApiServerProfile",
   "csharp"
 );
 @@clientName(NetworkProfile.preconfiguredNSG, "PreconfiguredNsg", "csharp");
 @@clientName(NetworkProfile.preconfiguredNSG, "PreconfiguredNsg", "csharp");
-@@clientName(PlatformWorkloadIdentityRoleSet,
+@@clientName(
+  PlatformWorkloadIdentityRoleSet,
   "OpenShiftPlatformWorkloadIdentityRoleSet",
   "csharp"
 );
 
-@@alternateType(MasterProfile.subnetId,
+@@alternateType(
+  MasterProfile.subnetId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(MasterProfile.diskEncryptionSetId,
+@@alternateType(
+  MasterProfile.diskEncryptionSetId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(WorkerProfile.subnetId,
+@@alternateType(
+  WorkerProfile.subnetId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(WorkerProfile.diskEncryptionSetId,
+@@alternateType(
+  WorkerProfile.diskEncryptionSetId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ClusterProfile.resourceGroupId,
+@@alternateType(
+  ClusterProfile.resourceGroupId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(PlatformWorkloadIdentity.resourceId,
+@@alternateType(
+  PlatformWorkloadIdentity.resourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(PlatformWorkloadIdentityRole.roleDefinitionId,
+@@alternateType(
+  PlatformWorkloadIdentityRole.roleDefinitionId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(EffectiveOutboundIP.id,
+@@alternateType(
+  EffectiveOutboundIP.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );

@@ -106,21 +106,23 @@ interface SchemaContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<SchemaContract> &
-      ArmCombinedLroHeaders<FinalResult = SchemaContract> & {
-        /**
-         * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-         */
-        @header("ETag")
-        eTag: string;
-      }) | (ArmCreatedResponse<SchemaContract> &
-      ArmCombinedLroHeaders<FinalResult = SchemaContract> & {
-        /**
-         * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-         */
-        @header("ETag")
-        eTag: string;
-      })
+    Response =
+      | (ArmResponse<SchemaContract> &
+          ArmCombinedLroHeaders<FinalResult = SchemaContract> & {
+            /**
+             * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+             */
+            @header("ETag")
+            eTag: string;
+          })
+      | (ArmCreatedResponse<SchemaContract> &
+          ArmCombinedLroHeaders<FinalResult = SchemaContract> & {
+            /**
+             * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+             */
+            @header("ETag")
+            eTag: string;
+          })
   >;
 
   /**
@@ -263,21 +265,23 @@ interface WorkspaceApiSchema {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<SchemaContract> &
-      ArmCombinedLroHeaders<FinalResult = SchemaContract> & {
-        /**
-         * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-         */
-        @header("ETag")
-        eTag: string;
-      }) | (ArmResourceCreatedResponse<SchemaContract> &
-      ArmCombinedLroHeaders<FinalResult = SchemaContract> & {
-        /**
-         * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-         */
-        @header("ETag")
-        eTag: string;
-      })
+    Response =
+      | (ArmResponse<SchemaContract> &
+          ArmCombinedLroHeaders<FinalResult = SchemaContract> & {
+            /**
+             * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+             */
+            @header("ETag")
+            eTag: string;
+          })
+      | (ArmResourceCreatedResponse<SchemaContract> &
+          ArmCombinedLroHeaders<FinalResult = SchemaContract> & {
+            /**
+             * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+             */
+            @header("ETag")
+            eTag: string;
+          })
   >;
 
   /**
@@ -333,13 +337,16 @@ interface WorkspaceApiSchema {
 
 @@maxLength(SchemaContract.name, 80);
 @@minLength(SchemaContract.name, 1);
-@@doc(SchemaContract.name,
+@@doc(
+  SchemaContract.name,
   "Schema id identifier. Must be unique in the current API Management service instance."
 );
 @@doc(SchemaContract.properties, "Properties of the API Schema.");
-@@doc(SchemaContracts.createOrUpdate::parameters.resource,
+@@doc(
+  SchemaContracts.createOrUpdate::parameters.resource,
   "The schema contents to apply."
 );
-@@doc(WorkspaceApiSchema.createOrUpdate::parameters.resource,
+@@doc(
+  WorkspaceApiSchema.createOrUpdate::parameters.resource,
   "The schema contents to apply."
 );

@@ -16,7 +16,8 @@ using Common;
 
 @@clientLocation(SecurityAssessmentMetadataResponses.get, AssessmentsMetadata);
 @@clientLocation(SecurityAssessmentMetadataResponses.list, AssessmentsMetadata);
-@@clientName(AssessmentsMetadata.createInSubscription::parameters.resource,
+@@clientName(
+  AssessmentsMetadata.createInSubscription::parameters.resource,
   "assessmentMetadata"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -24,7 +25,8 @@ using Common;
 
 @@clientLocation(SecurityAssessmentResponses.get, "Assessments");
 @@clientLocation(SecurityAssessmentResponses.createOrUpdate, "Assessments");
-@@clientName(SecurityAssessmentResponses.createOrUpdate::parameters.resource,
+@@clientName(
+  SecurityAssessmentResponses.createOrUpdate::parameters.resource,
   "assessment"
 );
 @@clientLocation(SecurityAssessmentResponses.delete, "Assessments");

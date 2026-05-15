@@ -75,7 +75,9 @@ interface StorageAppliances {
       ...IfMatchParameter;
       ...IfNoneMatchParameter;
     },
-    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -133,11 +135,13 @@ interface StorageAppliances {
 
 @@doc(StorageAppliance.name, "The name of the storage appliance.");
 @@doc(StorageAppliance.properties, "The list of the resource properties.");
-@@doc(StorageAppliances.createOrUpdate::parameters.resource,
+@@doc(
+  StorageAppliances.createOrUpdate::parameters.resource,
   "The request body."
 );
 @@doc(StorageAppliances.update::parameters.properties, "The request body.");
-@@doc(StorageAppliances.enableRemoteVendorManagement::parameters.body,
+@@doc(
+  StorageAppliances.enableRemoteVendorManagement::parameters.body,
   "The request body."
 );
 @@doc(StorageAppliances.runReadCommands::parameters.body, "The request body.");
