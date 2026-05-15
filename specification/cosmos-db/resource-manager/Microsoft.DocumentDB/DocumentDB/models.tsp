@@ -1664,7 +1664,7 @@ model DatabaseAccountGetProperties {
   enableMaterializedViews?: boolean;
 
   /**
-   * Flag to indicate whether to enable EmbeddingGenerator on the Cosmos DB account
+   * Flag to indicate whether to enable Integrated Embeddings on the Cosmos DB account
    */
   enableEmbeddingGenerator?: boolean;
 
@@ -2451,7 +2451,7 @@ model DatabaseAccountUpdateProperties {
   enableMaterializedViews?: boolean;
 
   /**
-   * Flag to indicate whether to enable EmbeddingGenerator on the Cosmos DB account
+   * Flag to indicate whether to enable Integrated Embeddings on the Cosmos DB account
    */
   enableEmbeddingGenerator?: boolean;
 
@@ -2678,7 +2678,7 @@ model DatabaseAccountCreateUpdateProperties {
   enableMaterializedViews?: boolean;
 
   /**
-   * Flag to indicate whether to enable EmbeddingGenerator on the Cosmos DB account
+   * Flag to indicate whether to enable Integrated Embeddings on the Cosmos DB account
    */
   enableEmbeddingGenerator?: boolean;
 
@@ -4301,7 +4301,7 @@ model EmbeddingSource {
   sourcePaths?: string[];
 
   /**
-   * The Azure OpenAI or AI service endpoint used for generating embeddings.
+   * The endpoint URL of the Microsoft Foundry resource.
    */
   endpoint?: string;
 
@@ -4316,7 +4316,7 @@ model EmbeddingSource {
   modelName?: string;
 
   /**
-   * The type of authentication to use when calling the embedding service.
+   * The authentication type Azure Cosmos DB uses when calling the embedding model endpoint.
    */
   authType?: EmbeddingSourceAuthenticationType;
 }
@@ -4327,7 +4327,7 @@ model EmbeddingSource {
 union EmbeddingSourceAuthenticationType {
   string,
 
-  /** Entra (Azure Active Directory) based authentication. */
+  /** Microsoft Entra ID based authentication. */
   Entra: "Entra",
 }
 
