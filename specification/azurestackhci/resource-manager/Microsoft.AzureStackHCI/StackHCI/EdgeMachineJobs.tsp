@@ -12,7 +12,6 @@ namespace Microsoft.AzureStackHCI;
 /**
  * Cluster Jobs resource
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
 @added(Versions.v2026_05_01_preview)
 @parentResource(EdgeMachine)
 model EdgeMachineJob
