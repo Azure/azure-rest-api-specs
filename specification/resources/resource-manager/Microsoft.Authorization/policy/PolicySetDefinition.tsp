@@ -249,13 +249,16 @@ interface PolicySetDefinitions {
   >;
 }
 
-@@doc(PolicySetDefinition.name,
+@@doc(
+  PolicySetDefinition.name,
   "The name of the policy set definition to get."
 );
 @@doc(PolicySetDefinition.properties, "The policy set definition properties.");
-@@doc(PolicySetDefinitions.createOrUpdate::parameters.resource,
+@@doc(
+  PolicySetDefinitions.createOrUpdate::parameters.resource,
   "The policy set definition properties."
 );
-@@doc(PolicySetDefinitions.createOrUpdateAtManagementGroup::parameters.resource,
+@@doc(
+  PolicySetDefinitions.createOrUpdateAtManagementGroup::parameters.resource,
   "The policy set definition properties."
 );

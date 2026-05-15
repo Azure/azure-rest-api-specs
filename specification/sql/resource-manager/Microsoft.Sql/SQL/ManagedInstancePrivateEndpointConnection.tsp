@@ -38,8 +38,10 @@ interface ManagedInstancePrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ManagedInstancePrivateEndpointConnection,
-    Response = ArmResourceUpdatedResponse<ManagedInstancePrivateEndpointConnection> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedInstancePrivateEndpointConnection> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<ManagedInstancePrivateEndpointConnection>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedInstancePrivateEndpointConnection> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -48,7 +50,10 @@ interface ManagedInstancePrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ManagedInstancePrivateEndpointConnection,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -57,12 +62,15 @@ interface ManagedInstancePrivateEndpointConnections {
   listByManagedInstance is ArmResourceListByParent<ManagedInstancePrivateEndpointConnection>;
 }
 
-@@doc(ManagedInstancePrivateEndpointConnection.name,
+@@doc(
+  ManagedInstancePrivateEndpointConnection.name,
   "The name of the private endpoint connection."
 );
-@@doc(ManagedInstancePrivateEndpointConnection.properties,
+@@doc(
+  ManagedInstancePrivateEndpointConnection.properties,
   "Resource properties."
 );
-@@doc(ManagedInstancePrivateEndpointConnections.createOrUpdate::parameters.resource,
+@@doc(
+  ManagedInstancePrivateEndpointConnections.createOrUpdate::parameters.resource,
   ""
 );

@@ -53,8 +53,10 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
   @summary("PUT API for managed network settings of a machine learning workspace.")
   put is ArmResourceCreateOrReplaceAsync<
     ManagedNetworkSettingsPropertiesBasicResource,
-    Response = ArmResourceUpdatedResponse<ManagedNetworkSettingsPropertiesBasicResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedNetworkSettingsPropertiesBasicResource>> &
-      Azure.Core.Foundations.RetryAfterHeader)
+    Response =
+      | ArmResourceUpdatedResponse<ManagedNetworkSettingsPropertiesBasicResource>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedNetworkSettingsPropertiesBasicResource>> &
+          Azure.Core.Foundations.RetryAfterHeader)
   >;
 
   /**
@@ -91,18 +93,23 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
   >;
 }
 
-@@doc(ManagedNetworkSettingsPropertiesBasicResource.name,
+@@doc(
+  ManagedNetworkSettingsPropertiesBasicResource.name,
   "Name of the managedNetwork associated with the workspace. Only 'default' is supported."
 );
-@@doc(ManagedNetworkSettingsPropertiesBasicResource.properties,
+@@doc(
+  ManagedNetworkSettingsPropertiesBasicResource.properties,
   "The properties of the managed network settings of a machine learning workspace."
 );
-@@doc(ManagedNetworkSettingsPropertiesBasicResources.put::parameters.resource,
+@@doc(
+  ManagedNetworkSettingsPropertiesBasicResources.put::parameters.resource,
   "The Managed Network Settings object of the workspace."
 );
-@@doc(ManagedNetworkSettingsPropertiesBasicResources.patch::parameters.properties,
+@@doc(
+  ManagedNetworkSettingsPropertiesBasicResources.patch::parameters.properties,
   "The Managed Network Settings object of the workspace."
 );
-@@doc(ManagedNetworkSettingsPropertiesBasicResources.post::parameters.body,
+@@doc(
+  ManagedNetworkSettingsPropertiesBasicResources.post::parameters.body,
   "The Managed Network Settings object of the workspace."
 );

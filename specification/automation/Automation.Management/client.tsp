@@ -6,7 +6,8 @@ using Microsoft.Automation;
 
 // Model renames
 @@clientName(SUCScheduleProperties, "SucScheduleProperties", "java");
-@@clientName(UserAssignedIdentitiesProperties,
+@@clientName(
+  UserAssignedIdentitiesProperties,
   "IdentityUserAssignedIdentities",
   "java"
 );
@@ -18,35 +19,42 @@ using Microsoft.Automation;
 @@clientName(CredentialUpdateProperties.userName, "username", "java");
 
 // Interface/client renames
-@@clientLocation(AutomationAccounts.convertGraphRunbookContent,
+@@clientLocation(
+  AutomationAccounts.convertGraphRunbookContent,
   "ResourceProviders",
   "java"
 );
-@@alternateType(softwareUpdateConfigurationProperties.error,
+@@alternateType(
+  softwareUpdateConfigurationProperties.error,
   Azure.ResourceManager.CommonTypes.ErrorDetail,
   "java"
 );
-@@alternateType(updateConfigurationMachineRunProperties.error,
+@@alternateType(
+  updateConfigurationMachineRunProperties.error,
   Azure.ResourceManager.CommonTypes.ErrorDetail,
   "java"
 );
 
-@@clientName(Azure.ResourceManager.CommonTypes.ErrorResponse,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ErrorResponse,
   "ArmErrorResponse",
   "go"
 );
 @@clientLocation(AutomationAccounts.convertGraphRunbookContent, "Client", "go");
 
-@@clientLocation(AutomationAccounts.convertGraphRunbookContent,
+@@clientLocation(
+  AutomationAccounts.convertGraphRunbookContent,
   Microsoft.Automation,
   "python,javascript"
 );
-@@clientLocation(deletedAutomationAccountsOperationGroup.listBySubscription,
+@@clientLocation(
+  deletedAutomationAccountsOperationGroup.listBySubscription,
   "DeletedAutomationAccounts",
   "python"
 );
 @@clientName(AutomationAccounts.automation, "listAutomation", "javascript");
-@@clientName(UserAssignedIdentitiesProperties,
+@@clientName(
+  UserAssignedIdentitiesProperties,
   "ComponentsSgqdofSchemasIdentityPropertiesUserassignedidentitiesAdditionalproperties",
   "javascript"
 );

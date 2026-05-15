@@ -64,11 +64,13 @@ interface ClusterResources {
   update is ArmCustomPatchAsync<
     ClusterResource,
     PatchModel = ClusterResource,
-    Response = ArmResponse<ClusterResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ClusterResource> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: ClusterResource;
-    }),
+    Response =
+      | ArmResponse<ClusterResource>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ClusterResource> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: ClusterResource;
+        }),
     Error = CloudError
   >;
 
@@ -121,8 +123,10 @@ interface ClusterResources {
     ClusterResource,
     CommandAsyncPostBody,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<CommandPublicResource>,
-    Response = ArmResponse<CommandPublicResource> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = CommandPublicResource> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResponse<CommandPublicResource>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = CommandPublicResource> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = Azure.ResourceManager.CommonTypes.ErrorResponse
   >;
 
@@ -235,19 +239,24 @@ interface ClusterResources {
 @@minLength(ClusterResource.name, 1);
 @@doc(ClusterResource.name, "Managed Cassandra cluster name.");
 @@doc(ClusterResource.properties, "Properties of a managed Cassandra cluster.");
-@@doc(ClusterResources.createUpdate::parameters.resource,
+@@doc(
+  ClusterResources.createUpdate::parameters.resource,
   "The properties specifying the desired state of the managed Cassandra cluster."
 );
-@@doc(ClusterResources.update::parameters.properties,
+@@doc(
+  ClusterResources.update::parameters.properties,
   "Parameters to provide for specifying the managed Cassandra cluster."
 );
-@@doc(ClusterResources.invokeCommand::parameters.body,
+@@doc(
+  ClusterResources.invokeCommand::parameters.body,
   "Specification which command to run where"
 );
-@@doc(ClusterResources.invokeCommandAsync::parameters.body,
+@@doc(
+  ClusterResources.invokeCommandAsync::parameters.body,
   "Specification which command to run where"
 );
-@@visibility(ClusterResource.location,
+@@visibility(
+  ClusterResource.location,
   Lifecycle.Read,
   Lifecycle.Create,
   Lifecycle.Update

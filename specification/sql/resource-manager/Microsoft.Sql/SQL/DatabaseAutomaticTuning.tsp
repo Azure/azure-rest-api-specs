@@ -47,6 +47,7 @@ interface DatabaseAutomaticTunings {
 
 @@doc(DatabaseAutomaticTuning.name, "");
 @@doc(DatabaseAutomaticTuning.properties, "Resource properties.");
-@@doc(DatabaseAutomaticTunings.update::parameters.properties,
+@@doc(
+  DatabaseAutomaticTunings.update::parameters.properties,
   "The requested automatic tuning resource state."
 );

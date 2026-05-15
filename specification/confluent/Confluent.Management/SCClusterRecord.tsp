@@ -145,9 +145,11 @@ interface SCClusterRecords {
 
 @@doc(SCClusterRecord.name, "Confluent kafka or schema registry cluster id");
 @@doc(SCClusterRecord.properties, "Cluster Properties");
-@@doc(SCClusterRecords.createOrUpdate::parameters.resource,
+@@doc(
+  SCClusterRecords.createOrUpdate::parameters.resource,
   "Confluent Cluster resource model"
 );
-@@doc(SCClusterRecords.createAPIKey::parameters.body,
+@@doc(
+  SCClusterRecords.createAPIKey::parameters.body,
   "Request payload for get creating API Key for schema registry Cluster ID or Kafka Cluster ID under a environment"
 );
