@@ -14,6 +14,7 @@ namespace Microsoft.CognitiveServices;
 /**
  * Cognitive Services project is an Azure resource representing the provisioned account's project, it's type, location and SKU.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy usage decorator required for 'Project' to maintain SDK backward compatibility"
 @parentResource(Account)
 model Project is Azure.ResourceManager.ProxyResource<ProjectProperties> {
   ...ResourceNameParameter<
@@ -24,9 +25,11 @@ model Project is Azure.ResourceManager.ProxyResource<ProjectProperties> {
   >;
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
-  /** The geo-location where the resource lives */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  /**
+   * The geo-location where the resource lives
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   location?: string;
 
   /**
