@@ -1392,7 +1392,7 @@
       },
       "delete": {
         "operationId": "Agents_deleteAgent",
-        "description": "Deletes an agent. For hosted agents, if any version has active sessions, the request\nis rejected with HTTP 409 unless `force` is set to true. When force is true, all\nassociated sessions are cascade-deleted along with the agent and its versions.",
+        "description": "Deletes an agent.",
         "parameters": [
           {
             "name": "agent_name",
@@ -1401,16 +1401,6 @@
             "description": "The name of the agent to delete.",
             "schema": {
               "type": "string"
-            }
-          },
-          {
-            "name": "force",
-            "in": "query",
-            "required": false,
-            "description": "If true, force-deletes the agent even if its versions have active sessions (hosted agents), cascading deletion to all associated sessions. Defaults to false.",
-            "schema": {
-              "type": "boolean",
-              "default": false
             }
           },
           {
@@ -1531,7 +1521,7 @@
     "/agents/{agent_name}/code:download": {
       "get": {
         "operationId": "Agents_downloadAgentCode",
-        "description": "Download the code zip for a code-based hosted agent.\nReturns the previously-uploaded zip (`application/zip`).\n\nIf `agent_version` is supplied, returns that version's code zip; otherwise\nreturns the latest version's code zip.\n\nThe SHA-256 digest of the returned bytes matches the `content_hash` on the\nresolved version's `code_configuration`.",
+        "description": "Download the code zip for the latest version of a code-based hosted agent.\nReturns the previously-uploaded zip (`application/zip`).\nThe SHA-256 digest of the returned bytes matches the `content_hash` on the latest version's `code_configuration`.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -1549,20 +1539,10 @@
             "name": "agent_name",
             "in": "path",
             "required": true,
-            "description": "The name of the agent.",
+            "description": "The name of the agent whose latest-version code zip should be downloaded.",
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "name": "agent_version",
-            "in": "query",
-            "required": false,
-            "description": "The version of the agent whose code zip should be downloaded.\nIf omitted, the latest version's code zip is returned.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
           },
           {
             "name": "api-version",
@@ -1578,15 +1558,6 @@
         "responses": {
           "200": {
             "description": "Response body for downloading a hosted agent's code zip.\nBody is the raw zip bytes; `Content-Type` declares `application/zip` so clients\ncan route to a zip-aware handler. Streaming is preserved (`bytes` body) regardless\nof the content-type label.",
-            "headers": {
-              "x-ms-agent-version": {
-                "required": true,
-                "description": "The version of the agent whose code zip is returned in the response body.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
             "content": {
               "application/zip": {
                 "schema": {
@@ -3246,7 +3217,7 @@
       },
       "delete": {
         "operationId": "Agents_deleteAgentVersion",
-        "description": "Deletes a specific version of an agent. For hosted agents, if the version has active\nsessions, the request is rejected with HTTP 409 unless `force` is set to true. When\nforce is true, all sessions associated with this version are cascade-deleted.",
+        "description": "Deletes a specific version of an agent.",
         "parameters": [
           {
             "name": "agent_name",
@@ -3264,16 +3235,6 @@
             "description": "The version of the agent to delete",
             "schema": {
               "type": "string"
-            }
-          },
-          {
-            "name": "force",
-            "in": "query",
-            "required": false,
-            "description": "If true, force-deletes the version even if it has active sessions (hosted agents), cascading deletion to all associated sessions. Defaults to false.",
-            "schema": {
-              "type": "boolean",
-              "default": false
             }
           },
           {
@@ -3312,6 +3273,85 @@
         "tags": [
           "Agents"
         ]
+      }
+    },
+    "/agents/{agent_name}/versions/{agent_version}/code:download": {
+      "get": {
+        "operationId": "Agents_downloadAgentVersionCode",
+        "description": "Download the code zip for a specific version of a code-based hosted agent.\nReturns the previously-uploaded zip (`application/zip`).\nThe SHA-256 digest of the returned bytes matches the `content_hash` on the agent version's `code_configuration`.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "CodeAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "agent_version",
+            "in": "path",
+            "required": true,
+            "description": "The version of the agent whose code zip should be downloaded.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response body for downloading a hosted agent's code zip.\nBody is the raw zip bytes; `Content-Type` declares `application/zip` so clients\ncan route to a zip-aware handler. Streaming is preserved (`bytes` body) regardless\nof the content-type label.",
+            "content": {
+              "application/zip": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agents"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "CodeAgents=V1Preview"
+          ]
+        }
       }
     },
     "/agents/{agent_name}/versions/{agent_version}/containers/default": {
@@ -17134,7 +17174,8 @@
       "AgentFilterTraceSource": {
         "type": "object",
         "required": [
-          "type"
+          "type",
+          "agent_reference"
         ],
         "properties": {
           "type": {
@@ -17144,46 +17185,28 @@
             ],
             "description": "The type of trace source, always `agent_filter`."
           },
-          "agent_id": {
-            "type": "string",
-            "description": "The identifier of the agent to filter traces by."
-          },
-          "agent_name": {
-            "type": "string",
-            "description": "The name of the agent to filter traces by."
-          },
-          "agent_version": {
-            "type": "string",
-            "description": "The version of the agent to filter traces by."
-          },
-          "start_time": {
+          "agent_reference": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/FoundryTimestamp"
+                "$ref": "#/components/schemas/EvalAgentReference"
               }
             ],
+            "description": "The agent reference to filter traces by."
+          },
+          "start_time": {
+            "type": "integer",
+            "format": "int64",
             "description": "Start time for the trace query window, expressed as a Unix timestamp (seconds)."
           },
           "end_time": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/FoundryTimestamp"
-              }
-            ],
+            "type": "integer",
+            "format": "int64",
             "description": "End time for the trace query window, expressed as a Unix timestamp (seconds)."
           },
           "max_traces": {
             "type": "integer",
             "format": "int32",
             "description": "Maximum number of traces to sample. Must be greater than 0."
-          },
-          "filter_strategy": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/FilterStrategyType"
-              }
-            ],
-            "description": "The strategy used to filter traces."
           }
         },
         "allOf": [
@@ -17485,6 +17508,55 @@
             "AgentEndpoints=V1Preview"
           ]
         }
+      },
+      "AgentSmartFilterTraceSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "agent_reference"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "agent_smart_filter"
+            ],
+            "description": "The type of trace source, always `agent_smart_filter`."
+          },
+          "agent_reference": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvalAgentReference"
+              }
+            ],
+            "description": "The agent reference to filter traces by."
+          },
+          "start_time": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Start time for the trace query window, expressed as a Unix timestamp (seconds)."
+          },
+          "end_time": {
+            "type": "integer",
+            "format": "int64",
+            "description": "End time for the trace query window, expressed as a Unix timestamp (seconds)."
+          },
+          "max_traces": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Maximum number of traces to sample. Must be greater than 0."
+          },
+          "model": {
+            "type": "string",
+            "description": "If you provide the model, it will be used for filtering."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TraceSource"
+          }
+        ],
+        "description": "An extended agent filter trace source that also includes model information."
       },
       "AgentTaxonomyInput": {
         "type": "object",
@@ -17991,12 +18063,6 @@
               "$ref": "#/components/schemas/ToolDescription"
             },
             "description": "The parameters used to control the sampling behavior of the agent during text generation."
-          },
-          "tools": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OpenAI.Tool"
-            }
           }
         },
         "allOf": [
@@ -18030,12 +18096,6 @@
               "$ref": "#/components/schemas/ToolDescription"
             },
             "description": "The parameters used to control the sampling behavior of the agent during text generation."
-          },
-          "tools": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OpenAI.Tool"
-            }
           }
         },
         "allOf": [
@@ -20350,6 +20410,7 @@
         "type": "object",
         "required": [
           "type",
+          "source",
           "model"
         ],
         "properties": {
@@ -20359,6 +20420,17 @@
               "conversation_gen_preview"
             ],
             "description": "The type of item generation parameters, always `conversation_gen_preview`."
+          },
+          "source": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.EvalJsonlFileContentSource"
+              },
+              {
+                "$ref": "#/components/schemas/OpenAI.EvalJsonlFileIdSource"
+              }
+            ],
+            "description": "The source of test scenarios, supporting file_id or file_content."
           },
           "model": {
             "type": "string",
@@ -20427,6 +20499,45 @@
           }
         ],
         "description": "A trace source that selects traces by conversation IDs."
+      },
+      "ConversationSimulationPreviewEvalRunDataSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "item_generation_params",
+          "target"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "azure_ai_conversation_simulation_preview"
+            ],
+            "description": "The type of data source, always `azure_ai_conversation_simulation_preview`."
+          },
+          "item_generation_params": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ConversationGenPreviewItemGenerationParams"
+              }
+            ],
+            "description": "The parameters for conversation generation."
+          },
+          "target": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AzureAIAgentTarget"
+              }
+            ],
+            "description": "The target agent to simulate conversations against."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvalRunDataSource"
+          }
+        ],
+        "description": "Represents a data source for evaluation runs that generate multi-turn conversations via LLM simulation against a target agent."
       },
       "CosmosDBIndex": {
         "type": "object",
@@ -22305,6 +22416,71 @@
           "example": "{\n  \"object\": \"eval\",\n  \"id\": \"eval_67abd54d9b0081909a86353f6fb9317a\",\n  \"data_source_config\": {\n    \"type\": \"custom\",\n    \"item_schema\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"label\": {\"type\": \"string\"},\n      },\n      \"required\": [\"label\"]\n    },\n    \"include_sample_schema\": true\n  },\n  \"testing_criteria\": [\n    {\n      \"name\": \"My string check grader\",\n      \"type\": \"string_check\",\n      \"input\": \"{{sample.output_text}}\",\n      \"reference\": \"{{item.label}}\",\n      \"operation\": \"eq\",\n    }\n  ],\n  \"name\": \"External Data Eval\",\n  \"created_at\": 1739314509,\n  \"metadata\": {\n    \"test\": \"synthetics\",\n  }\n}\n"
         }
       },
+      "EvalAgentIdReference": {
+        "type": "object",
+        "required": [
+          "type",
+          "agent_id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "agent_id"
+            ],
+            "description": "The type of agent reference, always `agent_id`."
+          },
+          "agent_id": {
+            "type": "string",
+            "description": "The unique identifier of the agent."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvalAgentReference"
+          }
+        ],
+        "description": "Identifies a 3P (Assistants) agent by its opaque agent ID."
+      },
+      "EvalAgentReference": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvalAgentReferenceType"
+              }
+            ],
+            "description": "The discriminator that identifies which kind of agent reference this is."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "agent_id": "#/components/schemas/EvalAgentIdReference",
+            "agent_reference": "#/components/schemas/EvalFoundryAgentReference"
+          }
+        },
+        "description": "Base class for polymorphic agent references used in evaluation trace filtering. The user supplies exactly one variant to identify the agent whose traces should be filtered."
+      },
+      "EvalAgentReferenceType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "agent_id",
+              "agent_reference"
+            ]
+          }
+        ],
+        "description": "Specifies the type of agent reference used for filtering traces."
+      },
       "EvalCsvFileIdSource": {
         "type": "object",
         "required": [
@@ -22355,6 +22531,36 @@
           }
         ],
         "description": "Represents a CSV data source for evaluation runs."
+      },
+      "EvalFoundryAgentReference": {
+        "type": "object",
+        "required": [
+          "type",
+          "name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "agent_reference"
+            ],
+            "description": "The type of agent reference, always `agent_reference`."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the agent."
+          },
+          "version": {
+            "type": "string",
+            "description": "The version identifier of the agent. If not specified, will look for any version."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvalAgentReference"
+          }
+        ],
+        "description": "Identifies a Foundry agent by its name and optional version."
       },
       "EvalResult": {
         "type": "object",
@@ -22551,6 +22757,7 @@
             "azure_ai_target_completions": "#/components/schemas/TargetCompletionEvalRunDataSource",
             "csv": "#/components/schemas/EvalCsvRunDataSource",
             "azure_ai_red_team": "#/components/schemas/RedTeamEvalRunDataSource",
+            "azure_ai_conversation_simulation_preview": "#/components/schemas/ConversationSimulationPreviewEvalRunDataSource",
             "azure_ai_trace_data_source_preview": "#/components/schemas/AzureAITraceDataSourcePreviewEvalRunDataSource",
             "azure_ai_benchmark_preview": "#/components/schemas/AzureAIBenchmarkPreviewEvalRunDataSource"
           }
@@ -24373,6 +24580,15 @@
             },
             "description": "Source materials for generation — agent descriptions, prompts, traces, or datasets. Each entry is an `EvaluatorGenerationJobSource` variant discriminated by `type`."
           },
+          "category": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluatorCategory"
+              }
+            ],
+            "description": "Category determines the rubric generation focus: 'quality' (default) produces quality-focused dimensions, 'safety' produces policy-derived safety dimensions. Both use the same Dimension structure. Singular because quality and safety generation are mutually exclusive pipelines — the output EvaluatorVersion.categories is an array (e.g., ['agents', 'quality']).",
+            "default": "quality"
+          },
           "model": {
             "type": "string",
             "description": "The LLM model to use for rubric generation (e.g., 'gpt-4o'). Required — users must provide their own model rather than relying on service-owned capacity."
@@ -24838,8 +25054,7 @@
           },
           "otel_agent_id": {
             "type": "string",
-            "description": "The OpenTelemetry agent identifier used to attribute customer-emitted spans to this Foundry agent.\nSpans must include the attribute `gen_ai.agent.id = <otel_agent_id>` to appear under this registration.\nDefaults to the top-level agent name when omitted. Provide an explicit value only for migration scenarios\nwhere the running external agent already emits a stable id that differs from the Foundry agent name.\nThe resolved value is always echoed on read.",
-            "example": "gcp-travel-planner-agent"
+            "description": "The OpenTelemetry agent identifier used to attribute customer-emitted spans to this Foundry agent.\nSpans must include the attribute `gen_ai.agent.id = <otel_agent_id>` to appear under this registration.\nDefaults to the top-level agent name when omitted. Provide an explicit value only for migration scenarios\nwhere the running external agent already emits a stable id that differs from the Foundry agent name.\nThe resolved value is always echoed on read."
           }
         },
         "allOf": [
@@ -25111,21 +25326,6 @@
           }
         ],
         "description": "FileDatasetVersion Definition"
-      },
-      "FilterStrategyType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "random_sampling",
-              "smart_filtering"
-            ]
-          }
-        ],
-        "description": "Specifies the type of filter strategy used to select traces for evaluation."
       },
       "FixedRatioVersionSelectionRule": {
         "type": "object",
@@ -49839,14 +50039,6 @@
               }
             ],
             "description": "The target configuration for the evaluation."
-          },
-          "item_generation_params": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ItemGenerationParams"
-              }
-            ],
-            "description": "The parameters for item generation. ConversationGenPreviewItemGenerationParams enables conversation simulation previews."
           }
         },
         "allOf": [
@@ -50428,7 +50620,8 @@
           "mapping": {
             "trace_id_source": "#/components/schemas/TraceIdTraceSource",
             "conversation_id_source": "#/components/schemas/ConversationIdTraceSource",
-            "agent_filter": "#/components/schemas/AgentFilterTraceSource"
+            "agent_filter": "#/components/schemas/AgentFilterTraceSource",
+            "agent_smart_filter": "#/components/schemas/AgentSmartFilterTraceSource"
           }
         },
         "description": "Base class for polymorphic trace sources nested within an AzureAITraceDataSourcePreviewEvalRunDataSource."
@@ -50443,7 +50636,8 @@
             "enum": [
               "trace_id_source",
               "conversation_id_source",
-              "agent_filter"
+              "agent_filter",
+              "agent_smart_filter"
             ]
           }
         ],
