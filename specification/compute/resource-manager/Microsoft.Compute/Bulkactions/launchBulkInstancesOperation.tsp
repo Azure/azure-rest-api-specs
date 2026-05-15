@@ -301,6 +301,10 @@ model LocationBasedLaunchBulkInstancesOperation
 @doc("Details of the LaunchBulkInstancesOperation.")
 model LaunchBulkInstancesOperationProperties {
   @visibility(Lifecycle.Read)
+  @doc("The UTC time the LaunchBulkInstancesOperation resource was created.")
+  createdTime?: utcDateTime;
+
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
