@@ -24880,7 +24880,7 @@
         },
         "deploymentName": {
           "type": "string",
-          "description": "The name of the model deployment used for generating embeddings."
+          "description": "The model deployment name used for generating embeddings."
         },
         "modelName": {
           "type": "string",
@@ -24896,8 +24896,7 @@
       "type": "string",
       "description": "The type of authentication to use when calling the embedding provider API.",
       "enum": [
-        "Entra",
-        "ApiKey"
+        "Entra"
       ],
       "x-ms-enum": {
         "name": "EmbeddingSourceAuthenticationType",
@@ -24907,11 +24906,6 @@
             "name": "Entra",
             "value": "Entra",
             "description": "Entra (Azure Active Directory) based authentication."
-          },
-          {
-            "name": "ApiKey",
-            "value": "ApiKey",
-            "description": "API Key based authentication."
           }
         ]
       }
@@ -32666,7 +32660,7 @@
         },
         "embeddingSource": {
           "$ref": "#/definitions/EmbeddingSource",
-          "description": "The embedding source configuration for automatic embedding generation. When specified, the Embedding Generator service will automatically generate embeddings for the vector field."
+          "description": "The embedding source configuration to automatically generate embeddings at the configured paths."
         }
       },
       "required": [

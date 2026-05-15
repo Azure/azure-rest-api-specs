@@ -4285,7 +4285,7 @@ model VectorEmbedding {
   dimensions: int32;
 
   /**
-   * The embedding source configuration for automatic embedding generation. When specified, the Embedding Generator service will automatically generate embeddings for the vector field.
+   * The embedding source configuration to automatically generate embeddings at the configured paths.
    */
   embeddingSource?: EmbeddingSource;
 }
@@ -4306,7 +4306,7 @@ model EmbeddingSource {
   endpoint?: string;
 
   /**
-   * The name of the model deployment used for generating embeddings.
+   * The model deployment name used for generating embeddings.
    */
   deploymentName?: string;
 
@@ -4329,9 +4329,6 @@ union EmbeddingSourceAuthenticationType {
 
   /** Entra (Azure Active Directory) based authentication. */
   Entra: "Entra",
-
-  /** API Key based authentication. */
-  ApiKey: "ApiKey",
 }
 
 /**
