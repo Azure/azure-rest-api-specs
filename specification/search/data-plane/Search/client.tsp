@@ -547,13 +547,16 @@ namespace KnowledgeBaseRetrievalClient {
   Access.internal,
   "java"
 );
-@@access(DebugInfo, Access.internal, "python");
 @@access(DebugInfo, Access.internal, "java");
 @@access(AutocompleteMode, Access.public, "python");
+@@access(HybridCountAndFacetMode, Access.public, "python");
+@@access(HybridSearch, Access.public, "python");
 @@access(IndexActionType, Access.public, "python");
 @@access(QueryAnswerType, Access.public, "python");
 @@access(QueryCaptionType, Access.public, "python");
 @@access(QueryDebugMode, Access.public, "python");
+@@access(QueryLanguage, Access.public, "python");
+@@access(QuerySpellerType, Access.public, "python");
 @@access(QueryType, Access.public, "python");
 @@access(ScoringStatistics, Access.public, "python");
 @@access(SearchMode, Access.public, "python");
