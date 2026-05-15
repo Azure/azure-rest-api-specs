@@ -8,7 +8,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.Network;
+namespace Common;
 /**
  * An application security group in a resource group.
  */
@@ -33,9 +33,11 @@ model ApplicationSecurityGroup extends Resource {
   etag?: string;
 }
 
-@@doc(ApplicationSecurityGroup.name,
+@@doc(
+  ApplicationSecurityGroup.name,
   "The name of the application security group."
 );
-@@doc(ApplicationSecurityGroup.properties,
+@@doc(
+  ApplicationSecurityGroup.properties,
   "Properties of the application security group."
 );

@@ -4,11 +4,13 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./VpnSiteLinkConnection.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -110,10 +112,12 @@ interface ConnectionSharedKeyResults {
   >;
 }
 
-@@doc(ConnectionSharedKeyResult.name,
+@@doc(
+  ConnectionSharedKeyResult.name,
   "The name of the resource that is unique within a resource group. This name can be used to access the resource."
 );
 @@doc(ConnectionSharedKeyResult.properties, "Properties of the shared key.");
-@@doc(ConnectionSharedKeyResults.setOrInitDefaultSharedKey::parameters.resource,
+@@doc(
+  ConnectionSharedKeyResults.setOrInitDefaultSharedKey::parameters.resource,
   "Parameters supplied to set or auto generate the shared key for the vpn link connection."
 );

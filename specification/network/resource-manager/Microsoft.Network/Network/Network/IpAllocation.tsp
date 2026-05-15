@@ -3,11 +3,13 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -19,7 +21,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-model IpAllocation extends Resource {
+model IpAllocation extends Common.Resource {
   properties?: IpAllocationPropertiesFormat;
 
   @visibility(Lifecycle.Read)
@@ -77,7 +79,10 @@ interface IpAllocations {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     IpAllocation,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -97,9 +102,11 @@ interface IpAllocations {
 
 @@doc(IpAllocation.name, "The name of the IpAllocation.");
 @@doc(IpAllocation.properties, "Properties of the IpAllocation.");
-@@doc(IpAllocations.createOrUpdate::parameters.resource,
+@@doc(
+  IpAllocations.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update virtual network operation."
 );
-@@doc(IpAllocations.updateTags::parameters.properties,
+@@doc(
+  IpAllocations.updateTags::parameters.properties,
   "Parameters supplied to update IpAllocation tags."
 );

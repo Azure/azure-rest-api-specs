@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Network;
 
@@ -37,7 +38,10 @@ interface VirtualNetworkTaps {
   @tag("VirtualNetworkTap")
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualNetworkTap,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -59,9 +63,11 @@ interface VirtualNetworkTaps {
 
 @@doc(VirtualNetworkTap.name, "The name of virtual network tap.");
 @@doc(VirtualNetworkTap.properties, "Virtual Network Tap Properties.");
-@@doc(VirtualNetworkTaps.createOrUpdate::parameters.resource,
+@@doc(
+  VirtualNetworkTaps.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update virtual network tap operation."
 );
-@@doc(VirtualNetworkTaps.updateTags::parameters.properties,
+@@doc(
+  VirtualNetworkTaps.updateTags::parameters.properties,
   "Parameters supplied to update VirtualNetworkTap tags."
 );

@@ -6,32 +6,39 @@ using Microsoft.AzureLargeInstance;
 
 @@clientName(AzureLargeStorageInstance, "LargeStorageInstance", "csharp");
 @@clientName(AzureLargeInstance, "LargeInstance", "csharp");
-@@clientName(AzureLargeInstanceForcePowerState,
+@@clientName(
+  AzureLargeInstanceForcePowerState,
   "LargeInstanceForcePowerState",
   "csharp"
 );
-@@clientName(AzureLargeInstanceHardwareTypeNamesEnum,
+@@clientName(
+  AzureLargeInstanceHardwareTypeNamesEnum,
   "LargeInstanceHardwareTypeName",
   "csharp"
 );
-@@clientName(AzureLargeInstanceHardwareTypeNamesEnum.Cisco_UCS,
+@@clientName(
+  AzureLargeInstanceHardwareTypeNamesEnum.Cisco_UCS,
   "CiscoUcs",
   "csharp"
 );
 @@clientName(AzureLargeInstanceHardwareTypeNamesEnum.HPE, "Hpe", "csharp");
-@@clientName(AzureLargeInstanceHardwareTypeNamesEnum.SDFLEX,
+@@clientName(
+  AzureLargeInstanceHardwareTypeNamesEnum.SDFLEX,
   "SDFlex",
   "csharp"
 );
-@@clientName(AzureLargeInstancePowerStateEnum,
+@@clientName(
+  AzureLargeInstancePowerStateEnum,
   "LargeInstancePowerState",
   "csharp"
 );
-@@clientName(AzureLargeInstanceProvisioningStatesEnum,
+@@clientName(
+  AzureLargeInstanceProvisioningStatesEnum,
   "LargeInstanceProvisioningState",
   "csharp"
 );
-@@clientName(AzureLargeInstanceSizeNamesEnum,
+@@clientName(
+  AzureLargeInstanceSizeNamesEnum,
   "LargeInstanceSizeName",
   "csharp"
 );
@@ -39,7 +46,8 @@ using Microsoft.AzureLargeInstance;
 @@clientName(Disk.diskSizeGB, "DiskSizeInGB", "csharp");
 @@clientName(ForceState, "LargeInstanceForceState", "csharp");
 @@clientName(HardwareProfile, "LargeInstanceHardwareProfile", "csharp");
-@@clientName(HardwareProfile.azureLargeInstanceSize,
+@@clientName(
+  HardwareProfile.azureLargeInstanceSize,
   "LargeInstanceSize",
   "csharp"
 );
@@ -47,7 +55,8 @@ using Microsoft.AzureLargeInstance;
 @@clientName(NetworkProfile, "LargeInstanceNetworkProfile", "csharp");
 @@clientName(OsProfile, "LargeInstanceOSProfile", "csharp");
 @@clientName(OsProfile.osType, "OSType", "csharp");
-@@clientName(StorageBillingProperties,
+@@clientName(
+  StorageBillingProperties,
   "LargeInstanceStorageBillingProperties",
   "csharp"
 );
@@ -55,20 +64,24 @@ using Microsoft.AzureLargeInstance;
 @@clientName(StorageProfile.nfsIpAddress, "NfsIPAddress", "csharp");
 @@clientName(StorageProfile.osDisks, "OSDisk", "csharp");
 @@clientName(StorageProperties, "LargeInstanceStorageProperties", "csharp");
-@@clientName(ProvisioningState,
+@@clientName(
+  ProvisioningState,
   "LargeStorageInstanceProvisioningState",
   "csharp"
 );
-@@clientName(AzureLargeStorageInstanceProperties,
+@@clientName(
+  AzureLargeStorageInstanceProperties,
   "LargeStorageInstanceProperties",
   "csharp"
 );
 @@clientName(AzureLargeInstanceProperties, "LargeInstanceProperties", "csharp");
-@@clientName(AzureLargeInstanceProperties.hwRevision,
+@@clientName(
+  AzureLargeInstanceProperties.hwRevision,
   "HardwareRevision",
   "csharp"
 );
-@@clientName(AzureLargeInstanceProperties.azureLargeInstanceId,
+@@clientName(
+  AzureLargeInstanceProperties.azureLargeInstanceId,
   "LargeInstanceId",
   "csharp"
 );

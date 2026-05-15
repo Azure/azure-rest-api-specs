@@ -75,7 +75,7 @@ alias FunctionEnvelopesOps = Azure.ResourceManager.Legacy.RoutedOperations<
     functionName: string;
   },
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/functions",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functions",
   }
 >;
 
@@ -145,7 +145,8 @@ interface FunctionEnvelopeSlotOperationWithoutKeysGroupOps
       }
     > {}
 
-@armResourceOperations(#{ allowStaticRoutes: true })
+@tag("WebApps")
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface FunctionEnvelopes {
   /**
    * Description for Get function information by its ID for web site, or a deployment slot.
@@ -199,7 +200,7 @@ interface FunctionEnvelopes {
    */
   @summary("Add or update a function secret.")
   @put
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/functions/{functionName}/keys/{keyName}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functions/{functionName}/keys/{keyName}")
   createOrUpdateFunctionSecret is FunctionEnvelopesOps.ActionSync<
     FunctionEnvelope,
     KeyInfo,
@@ -217,7 +218,7 @@ interface FunctionEnvelopes {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Delete a function secret.")
   @delete
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/functions/{functionName}/keys/{keyName}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functions/{functionName}/keys/{keyName}")
   deleteFunctionSecret is FunctionEnvelopesOps.ActionSync<
     FunctionEnvelope,
     void,
@@ -284,7 +285,8 @@ interface FunctionEnvelopeOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface FunctionEnvelopeOperationGroup {
   /**
    * Description for Get function information by its ID for web site, or a deployment slot.
@@ -386,18 +388,23 @@ interface FunctionEnvelopeOperationGroup {
 }
 
 @@doc(FunctionEnvelope.name, "Function name.");
-@@doc(FunctionEnvelope.properties,
+@@doc(
+  FunctionEnvelope.properties,
   "FunctionEnvelope resource specific properties"
 );
-@@doc(FunctionEnvelopes.createFunction::parameters.resource,
+@@doc(
+  FunctionEnvelopes.createFunction::parameters.resource,
   "Function details."
 );
-@@doc(FunctionEnvelopes.createOrUpdateFunctionSecret::parameters.body,
+@@doc(
+  FunctionEnvelopes.createOrUpdateFunctionSecret::parameters.body,
   "The key to create or update"
 );
-@@doc(FunctionEnvelopeOperationGroup.createInstanceFunctionSlot::parameters.resource,
+@@doc(
+  FunctionEnvelopeOperationGroup.createInstanceFunctionSlot::parameters.resource,
   "Function details."
 );
-@@doc(FunctionEnvelopeOperationGroup.createOrUpdateFunctionSecretSlot::parameters.resource,
+@@doc(
+  FunctionEnvelopeOperationGroup.createOrUpdateFunctionSecretSlot::parameters.resource,
   "The key to create or update"
 );

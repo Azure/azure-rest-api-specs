@@ -8,28 +8,33 @@ using Microsoft.CloudHealth;
 @@clientName(Microsoft.CloudHealth, "CloudHealthMgmtClient", "python");
 
 // CSharp
-@@clientName(AuthenticationSetting,
+@@clientName(
+  AuthenticationSetting,
   "HealthModelAuthenticationSetting",
   "csharp"
 );
-@@clientName(AuthenticationSettingProperties,
+@@clientName(
+  AuthenticationSettingProperties,
   "HealthModelAuthenticationSettingProperties",
   "csharp"
 );
 @@clientName(DiscoveryRule, "HealthModelDiscoveryRule", "csharp");
-@@clientName(DiscoveryRuleProperties,
+@@clientName(
+  DiscoveryRuleProperties,
   "HealthModelDiscoveryRuleProperties",
   "csharp"
 );
 @@clientName(Entity, "HealthModelEntity", "csharp");
 @@clientName(EntityProperties, "HealthModelEntityProperties", "csharp");
 @@clientName(Relationship, "HealthModelRelationship", "csharp");
-@@clientName(RelationshipProperties,
+@@clientName(
+  RelationshipProperties,
   "HealthModelRelationshipProperties",
   "csharp"
 );
 @@clientName(SignalDefinition, "HealthModelSignalDefinition", "csharp");
-@@clientName(SignalDefinitionProperties,
+@@clientName(
+  SignalDefinitionProperties,
   "HealthModelSignalDefinitionProperties",
   "csharp"
 );
