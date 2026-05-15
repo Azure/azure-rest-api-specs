@@ -50,7 +50,7 @@ alias PipelineRunsOps = Azure.ResourceManager.Legacy.RoutedOperations<
     factoryName: string;
   },
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories",
   }
 >;
 
@@ -193,7 +193,7 @@ interface Factories {
    */
   @tag("pipelineruns")
   @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}")
   pipelineRunsGet is PipelineRunsOps.ActionSync<
     Factory,
     void,
@@ -212,7 +212,7 @@ interface Factories {
    * Cancel a pipeline run by its run ID.
    */
   @tag("pipelineruns")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}/cancel")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}/cancel")
   cancel is PipelineRunsOps.ActionSync<
     Factory,
     void,
@@ -237,7 +237,7 @@ interface Factories {
    * Query activity runs based on input filter conditions.
    */
   @tag("activityruns")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}/queryActivityruns")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}/queryActivityruns")
   queryByPipelineRun is PipelineRunsOps.ActionSync<
     Factory,
     RunFilterParameters,
