@@ -50,6 +50,8 @@ interface AgentInvocations {
       /** The content type of the request body. */
       @header contentType: string;
 
+      ...VersionOverrideHeader;
+
       /** The request body. */
       @body request: unknown;
 

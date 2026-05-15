@@ -45,6 +45,7 @@ interface AgentWebsocket {
       ];
 
       ...UserIsolationKeyHeader;
+      ...VersionOverrideHeader;
     } & AgentWebsocketPreviewHeader,
     {
       /** Session ID for this WebSocket connection. Returns the provided session ID or an auto-generated one if not provided in the request. */
