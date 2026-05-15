@@ -8084,6 +8084,10 @@
         "version"
       ]
     },
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
+    },
     "Azure.Core.uuid": {
       "type": "string",
       "format": "uuid",
@@ -16164,6 +16168,11 @@
           "description": "Properties of the factory.",
           "x-ms-client-flatten": true
         },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
@@ -16172,17 +16181,12 @@
           }
         },
         "location": {
-          "type": "string",
-          "description": "The geo-location where the resource lives",
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The resource location.",
           "x-ms-mutability": [
             "read",
             "create"
           ]
-        },
-        "eTag": {
-          "type": "string",
-          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
-          "readOnly": true
         },
         "identity": {
           "$ref": "#/definitions/FactoryIdentity",
@@ -16192,7 +16196,7 @@
       "additionalProperties": {},
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
