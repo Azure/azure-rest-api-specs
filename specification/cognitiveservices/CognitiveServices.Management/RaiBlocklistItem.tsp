@@ -70,13 +70,16 @@ interface RaiBlocklistItems {
   >;
 }
 
-@@doc(RaiBlocklistItem.name,
+@@doc(
+  RaiBlocklistItem.name,
   "The name of the RaiBlocklist Item associated with the custom blocklist"
 );
 @@encodedName(RaiBlocklistItem.etag, "application/json", "etag");
-@@doc(RaiBlocklistItem.properties,
+@@doc(
+  RaiBlocklistItem.properties,
   "Properties of Cognitive Services RaiBlocklist Item."
 );
-@@doc(RaiBlocklistItems.createOrUpdate::parameters.resource,
+@@doc(
+  RaiBlocklistItems.createOrUpdate::parameters.resource,
   "Properties describing the custom blocklist."
 );

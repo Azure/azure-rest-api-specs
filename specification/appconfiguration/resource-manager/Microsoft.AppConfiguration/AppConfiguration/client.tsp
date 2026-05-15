@@ -5,12 +5,14 @@ using Microsoft.AppConfiguration;
 using Azure.ClientGenerator.Core;
 
 // Fix the property name change in KeyValue model - eTag should remain as etag
-@@clientName(Microsoft.AppConfiguration.KeyValueProperties.eTag,
+@@clientName(
+  Microsoft.AppConfiguration.KeyValueProperties.eTag,
   "etag",
   "java"
 );
 
-@@clientName(Microsoft.AppConfiguration,
+@@clientName(
+  Microsoft.AppConfiguration,
   "AppConfigurationManagementClient",
   "javascript,python"
 );
@@ -19,14 +21,16 @@ using Azure.ClientGenerator.Core;
 @@clientName(ApiKey.lastModified, "LastModifiedOn", "csharp");
 @@clientName(ApiKey.readOnly, "IsReadOnly", "csharp");
 @@clientName(ApiKey, "AppConfigurationStoreApiKey", "csharp");
-@@clientName(ApiKeyListResult,
+@@clientName(
+  ApiKeyListResult,
   "AppConfigurationStoreApiKeyListResult",
   "csharp"
 );
 @@clientName(ActionsRequired, "AppConfigurationActionsRequired", "csharp");
 @@clientName(AuthenticationMode, "DataPlaneProxyAuthenticationMode", "csharp");
 @@clientName(CompositionType, "SnapshotCompositionType", "csharp");
-@@clientName(DeletedConfigurationStoreProperties.purgeProtectionEnabled,
+@@clientName(
+  DeletedConfigurationStoreProperties.purgeProtectionEnabled,
   "IsPurgeProtectionEnabled",
   "csharp"
 );
@@ -35,77 +39,94 @@ using Azure.ClientGenerator.Core;
 @@clientName(KeyValueProperties.lastModified, "LastModifiedOn", "csharp");
 @@clientName(KeyValueProperties.locked, "IsLocked", "csharp");
 @@clientName(KeyValueFilter, "SnapshotKeyValueFilter", "csharp");
-@@clientName(KeyVaultProperties,
+@@clientName(
+  KeyVaultProperties,
   "AppConfigurationKeyVaultProperties",
   "csharp"
 );
-@@clientName(CheckNameAvailabilityParameters,
+@@clientName(
+  CheckNameAvailabilityParameters,
   "AppConfigurationNameAvailabilityContent",
   "csharp"
 );
 @@clientName(CheckNameAvailabilityParameters.type, "ResourceType", "csharp");
 @@clientName(CreateMode, "AppConfigurationCreateMode", "csharp");
-@@clientName(ConfigurationResourceType,
+@@clientName(
+  ConfigurationResourceType,
   "AppConfigurationResourceType",
   "csharp"
 );
 @@clientName(ConfigurationStore, "AppConfigurationStore", "csharp");
-@@clientName(ConnectionStatus,
+@@clientName(
+  ConnectionStatus,
   "AppConfigurationPrivateLinkServiceConnectionStatus",
   "csharp"
 );
-@@clientName(DataPlaneProxyProperties,
+@@clientName(
+  DataPlaneProxyProperties,
   "AppConfigurationDataPlaneProxyProperties",
   "csharp"
 );
-@@clientName(DeletedConfigurationStore,
+@@clientName(
+  DeletedConfigurationStore,
   "DeletedAppConfigurationStore",
   "csharp"
 );
-@@clientName(EncryptionProperties,
+@@clientName(
+  EncryptionProperties,
   "AppConfigurationStoreEncryptionProperties",
   "csharp"
 );
-@@clientName(NameAvailabilityStatus,
+@@clientName(
+  NameAvailabilityStatus,
   "AppConfigurationNameAvailabilityResult",
   "csharp"
 );
-@@clientName(PublicNetworkAccess,
+@@clientName(
+  PublicNetworkAccess,
   "AppConfigurationPublicNetworkAccess",
   "csharp"
 );
-@@clientName(PrivateLinkResource,
+@@clientName(
+  PrivateLinkResource,
   "AppConfigurationPrivateLinkResource",
   "csharp"
 );
 @@clientName(PrivateLinkResources, "AppConfigurationPrivateLink", "csharp");
-@@clientName(PrivateEndpointConnection,
+@@clientName(
+  PrivateEndpointConnection,
   "AppConfigurationPrivateEndpointConnection",
   "csharp"
 );
-@@clientName(PrivateEndpointConnections,
+@@clientName(
+  PrivateEndpointConnections,
   "AppConfigurationPrivateEndpointConnection",
   "csharp"
 );
-@@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+@@clientName(
+  PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
   "ConnectionState",
   "csharp"
 );
-@@clientName(PrivateEndpointConnectionReference,
+@@clientName(
+  PrivateEndpointConnectionReference,
   "AppConfigurationPrivateEndpointConnectionReference",
   "csharp"
 );
 @@clientName(ProvisioningState, "AppConfigurationProvisioningState", "csharp");
-@@clientName(PrivateLinkDelegation,
+@@clientName(
+  PrivateLinkDelegation,
   "DataPlaneProxyPrivateLinkDelegation",
   "csharp"
 );
-@@clientName(RegenerateKeyParameters,
+@@clientName(
+  RegenerateKeyParameters,
   "AppConfigurationRegenerateKeyContent",
   "csharp"
 );
 @@clientName(Replica, "AppConfigurationReplica", "csharp");
-@@clientName(ReplicaProvisioningState,
+@@clientName(
+  ReplicaProvisioningState,
   "AppConfigurationReplicaProvisioningState",
   "csharp"
 );
@@ -113,45 +134,55 @@ using Azure.ClientGenerator.Core;
 @@clientName(Snapshot, "AppConfigurationSnapshot", "csharp");
 @@clientName(SnapshotProperties.created, "CreatedOn", "csharp");
 @@clientName(SnapshotProperties.expires, "ExpireOn", "csharp");
-@@clientName(OperationsOperationGroup.checkNameAvailability,
+@@clientName(
+  OperationsOperationGroup.checkNameAvailability,
   "CheckAppConfigurationNameAvailability",
   "csharp"
 );
-@@clientName(OperationsOperationGroup.regionalCheckNameAvailability,
+@@clientName(
+  OperationsOperationGroup.regionalCheckNameAvailability,
   "CheckAppConfigurationRegionalNameAvailability",
   "csharp"
 );
-@@alternateType(DeletedConfigurationStoreProperties.configurationStoreId,
+@@alternateType(
+  DeletedConfigurationStoreProperties.configurationStoreId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(DeletedConfigurationStoreProperties.location,
+@@alternateType(
+  DeletedConfigurationStoreProperties.location,
   Azure.Core.azureLocation,
   "csharp"
 );
-@@alternateType(ConfigurationStore.identity,
+@@alternateType(
+  ConfigurationStore.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
-@@alternateType(ConfigurationStoreUpdateParameters.identity,
+@@alternateType(
+  ConfigurationStoreUpdateParameters.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
 @@alternateType(Replica.location, Azure.Core.azureLocation, "csharp");
 @@alternateType(PrivateEndpoint.id, Azure.Core.armResourceIdentifier, "csharp");
-@@alternateType(KeyValueProperties.eTag,
+@@alternateType(
+  KeyValueProperties.eTag,
   Azure.Core.EtagProperty.etag,
   "csharp"
 );
-@@alternateType(SnapshotProperties.etag,
+@@alternateType(
+  SnapshotProperties.etag,
   Azure.Core.EtagProperty.etag,
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.ManagedOnBehalfOfConfiguration,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ManagedOnBehalfOfConfiguration,
   "AppConfigurationManagedOnBehalfOfConfiguration",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.MoboBrokerResource,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.MoboBrokerResource,
   "AppConfigurationMoboBrokerResourceInfo",
   "csharp"
 );

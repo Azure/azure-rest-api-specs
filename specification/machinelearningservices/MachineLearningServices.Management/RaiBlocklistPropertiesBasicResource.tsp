@@ -119,16 +119,20 @@ interface RaiBlocklistPropertiesBasicResources {
   >;
 }
 
-@@doc(RaiBlocklistPropertiesBasicResource.name,
+@@doc(
+  RaiBlocklistPropertiesBasicResource.name,
   "The name of the RaiBlocklist."
 );
-@@doc(RaiBlocklistPropertiesBasicResource.properties,
+@@doc(
+  RaiBlocklistPropertiesBasicResource.properties,
   "RAI Custom Blocklist properties."
 );
 @@doc(RaiBlocklistPropertiesBasicResources.create::parameters.resource, "");
-@@doc(RaiBlocklistPropertiesBasicResources.addBulk::parameters.body,
+@@doc(
+  RaiBlocklistPropertiesBasicResources.addBulk::parameters.body,
   "Properties describing the custom blocklist items."
 );
-@@doc(RaiBlocklistPropertiesBasicResources.deleteBulk::parameters.body,
+@@doc(
+  RaiBlocklistPropertiesBasicResources.deleteBulk::parameters.body,
   "List of RAI Blocklist Items Names."
 );

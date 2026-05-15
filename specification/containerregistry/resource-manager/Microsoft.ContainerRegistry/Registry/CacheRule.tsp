@@ -49,11 +49,13 @@ interface CacheRules {
   update is ArmCustomPatchAsync<
     CacheRule,
     PatchModel = CacheRuleUpdateParameters,
-    Response = ArmResponse<CacheRule> | ArmResourceCreatedResponse<
-      CacheRule,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = CacheRule> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | ArmResponse<CacheRule>
+      | ArmResourceCreatedResponse<
+          CacheRule,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = CacheRule> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**
@@ -75,9 +77,11 @@ interface CacheRules {
 @@minLength(CacheRule.name, 5);
 @@doc(CacheRule.name, "The name of the cache rule.");
 @@doc(CacheRule.properties, "The properties of the cache rule.");
-@@doc(CacheRules.create::parameters.resource,
+@@doc(
+  CacheRules.create::parameters.resource,
   "The parameters for creating a cache rule."
 );
-@@doc(CacheRules.update::parameters.properties,
+@@doc(
+  CacheRules.update::parameters.properties,
   "The parameters for updating a cache rule."
 );

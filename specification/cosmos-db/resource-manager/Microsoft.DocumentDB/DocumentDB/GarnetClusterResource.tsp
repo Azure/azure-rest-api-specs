@@ -56,8 +56,10 @@ interface GarnetClusters {
   update is ArmCustomPatchAsync<
     GarnetClusterResource,
     PatchModel = GarnetClusterResourcePatch,
-    Response = ArmResponse<GarnetClusterResource> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = GarnetClusterResource> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResponse<GarnetClusterResource>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = GarnetClusterResource> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -65,8 +67,10 @@ interface GarnetClusters {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     GarnetClusterResource,
-    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**

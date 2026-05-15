@@ -41,14 +41,17 @@ interface CustomDomains {
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     CustomDomain,
     CustomDomainParameters,
-    Response = ArmResourceUpdatedResponse<CustomDomain> | ArmResourceCreatedResponse<
-      CustomDomain,
-      ArmLroLocationHeader<FinalResult = CustomDomain> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CustomDomain>> & {
-      @bodyRoot
-      _: CustomDomain;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<CustomDomain>
+      | ArmResourceCreatedResponse<
+          CustomDomain,
+          ArmLroLocationHeader<FinalResult = CustomDomain> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CustomDomain>> & {
+          @bodyRoot
+          _: CustomDomain;
+        }),
     Error = ErrorResponse
   >;
 
@@ -59,10 +62,13 @@ interface CustomDomains {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     CustomDomain,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> & {
-      @bodyRoot
-      _: CustomDomain;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> & {
+          @bodyRoot
+          _: CustomDomain;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -78,10 +84,12 @@ interface CustomDomains {
   disableCustomHttps is ArmResourceActionAsyncBase<
     CustomDomain,
     void,
-    ArmResponse<CustomDomain> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CustomDomain>> & {
-      @bodyRoot
-      _: CustomDomain;
-    }),
+
+      | ArmResponse<CustomDomain>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CustomDomain>> & {
+          @bodyRoot
+          _: CustomDomain;
+        }),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<CustomDomain>
   >;
 
@@ -92,22 +100,27 @@ interface CustomDomains {
   enableCustomHttps is ArmResourceActionAsyncBase<
     CustomDomain,
     CustomDomainHttpsParameters,
-    ArmResponse<CustomDomain> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CustomDomain>> & {
-      @bodyRoot
-      _: CustomDomain;
-    }),
+
+      | ArmResponse<CustomDomain>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CustomDomain>> & {
+          @bodyRoot
+          _: CustomDomain;
+        }),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<CustomDomain>,
     OptionalRequestBody = true
   >;
 }
 
 @@doc(CustomDomain.name, "Name of the custom domain within an endpoint.");
-@@doc(CustomDomain.properties,
+@@doc(
+  CustomDomain.properties,
   "The JSON object that contains the properties of the custom domain to create."
 );
-@@doc(CustomDomains.create::parameters.resource,
+@@doc(
+  CustomDomains.create::parameters.resource,
   "Properties required to create a new custom domain."
 );
-@@doc(CustomDomains.enableCustomHttps::parameters.body,
+@@doc(
+  CustomDomains.enableCustomHttps::parameters.body,
   "The configuration specifying how to enable HTTPS for the custom domain - using CDN managed certificate or user's own certificate. If not specified, enabling ssl uses CDN managed certificate by default."
 );

@@ -52,9 +52,11 @@ interface NetworkSecurityPerimeterConfigurations {
   >;
 }
 
-@@doc(NetworkSecurityPerimeterConfiguration.name,
+@@doc(
+  NetworkSecurityPerimeterConfiguration.name,
   "The name for Network Security Perimeter configuration"
 );
-@@doc(NetworkSecurityPerimeterConfiguration.properties,
+@@doc(
+  NetworkSecurityPerimeterConfiguration.properties,
   "Network security configuration properties."
 );

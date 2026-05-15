@@ -85,8 +85,10 @@ interface EndpointResourcePropertiesBasicResources {
   @summary("Create or update endpoint resource with the specified parameters")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     EndpointResourcePropertiesBasicResource,
-    Response = ArmResourceUpdatedResponse<EndpointResourcePropertiesBasicResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = EndpointResourcePropertiesBasicResource>> &
-      Azure.Core.Foundations.RetryAfterHeader)
+    Response =
+      | ArmResourceUpdatedResponse<EndpointResourcePropertiesBasicResource>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = EndpointResourcePropertiesBasicResource>> &
+          Azure.Core.Foundations.RetryAfterHeader)
   >;
 
   /**
@@ -134,13 +136,16 @@ interface EndpointResourcePropertiesBasicResources {
   >;
 }
 
-@@doc(EndpointResourcePropertiesBasicResource.name,
+@@doc(
+  EndpointResourcePropertiesBasicResource.name,
   "Name of the endpoint resource."
 );
 @@doc(EndpointResourcePropertiesBasicResource.properties, "");
-@@doc(EndpointResourcePropertiesBasicResources.createOrUpdate::parameters.resource,
+@@doc(
+  EndpointResourcePropertiesBasicResources.createOrUpdate::parameters.resource,
   "Endpoint resource object"
 );
-@@doc(EndpointResourcePropertiesBasicResources.regenerateKeys::parameters.body,
+@@doc(
+  EndpointResourcePropertiesBasicResources.regenerateKeys::parameters.body,
   ""
 );

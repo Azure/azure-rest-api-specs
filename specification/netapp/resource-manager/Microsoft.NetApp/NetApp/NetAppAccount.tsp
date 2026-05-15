@@ -702,11 +702,13 @@ interface NetAppAccounts {
   updatePrevious is ArmCustomPatchAsync<
     NetAppAccount,
     PatchModel = NetAppAccountPatchStable,
-    Response = ArmResponse<NetAppAccount> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetAppAccount> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: NetAppAccount;
-    })
+    Response =
+      | ArmResponse<NetAppAccount>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetAppAccount> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: NetAppAccount;
+        })
   >;
 
   /**
@@ -721,11 +723,13 @@ interface NetAppAccounts {
   update is ArmCustomPatchAsync<
     NetAppAccount,
     PatchModel = NetAppAccountPatch,
-    Response = ArmResponse<NetAppAccount> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetAppAccount> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: NetAppAccount;
-    })
+    Response =
+      | ArmResponse<NetAppAccount>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetAppAccount> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: NetAppAccount;
+        })
   >;
 
   /**
@@ -825,21 +829,27 @@ interface NetAppAccounts {
 
 @@doc(NetAppAccount.name, "The name of the NetApp account");
 @@doc(NetAppAccount.properties, "NetApp Account properties");
-@@doc(NetAppAccounts.createOrUpdate::parameters.resource,
+@@doc(
+  NetAppAccounts.createOrUpdate::parameters.resource,
   "NetApp Account object supplied in the body of the operation."
 );
-@@doc(NetAppAccounts.update::parameters.properties,
+@@doc(
+  NetAppAccounts.update::parameters.properties,
   "NetApp Account object supplied in the body of the operation."
 );
-@@doc(NetAppAccounts.updatePrevious::parameters.properties,
+@@doc(
+  NetAppAccounts.updatePrevious::parameters.properties,
   "NetApp Account object supplied in the body of the operation."
 );
-@@doc(NetAppAccounts.transitionToCmk::parameters.body,
+@@doc(
+  NetAppAccounts.transitionToCmk::parameters.body,
   "The required parameters to perform encryption transition."
 );
-@@doc(NetAppAccounts.changeKeyVault::parameters.body,
+@@doc(
+  NetAppAccounts.changeKeyVault::parameters.body,
   "The required parameters to perform encryption migration."
 );
-@@doc(NetAppAccounts.migrateBackups::parameters.body,
+@@doc(
+  NetAppAccounts.migrateBackups::parameters.body,
   "Migrate backups under an account payload supplied in the body of the operation."
 );

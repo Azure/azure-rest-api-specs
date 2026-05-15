@@ -99,7 +99,8 @@ interface DataTransferJobs {
 }
 
 @@doc(DataTransferJobGetResults.name, "Name of the Data Transfer Job");
-@@doc(DataTransferJobGetResults.properties,
+@@doc(
+  DataTransferJobGetResults.properties,
   "The properties of a DataTransfer Job"
 );
 @@doc(DataTransferJobs.create::parameters.resource, "");

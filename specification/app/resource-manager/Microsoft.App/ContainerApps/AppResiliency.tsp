@@ -91,9 +91,11 @@ interface AppResiliencies {
 
 @@doc(AppResiliency.name, "Name of the resiliency policy.");
 @@doc(AppResiliency.properties, "App Resiliency resource specific properties");
-@@doc(AppResiliencies.createOrUpdate::parameters.resource,
+@@doc(
+  AppResiliencies.createOrUpdate::parameters.resource,
   "The resiliency policy to create or update."
 );
-@@doc(AppResiliencies.update::parameters.properties,
+@@doc(
+  AppResiliencies.update::parameters.properties,
   "The resiliency policy to update."
 );

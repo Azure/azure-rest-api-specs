@@ -46,7 +46,9 @@ interface ThroughputPoolAccountResources {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     ThroughputPoolAccountResource,
-    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -60,12 +62,15 @@ interface ThroughputPoolAccountResources {
 
 @@maxLength(ThroughputPoolAccountResource.name, 50);
 @@minLength(ThroughputPoolAccountResource.name, 3);
-@@doc(ThroughputPoolAccountResource.name,
+@@doc(
+  ThroughputPoolAccountResource.name,
   "Cosmos DB global database account in a Throughput Pool"
 );
-@@doc(ThroughputPoolAccountResource.properties,
+@@doc(
+  ThroughputPoolAccountResource.properties,
   "An Azure Cosmos DB Global Database Account which is part of a Throughputpool."
 );
-@@doc(ThroughputPoolAccountResources.create::parameters.resource,
+@@doc(
+  ThroughputPoolAccountResources.create::parameters.resource,
   "The parameters to provide for the current ThroughputPoolAccount."
 );

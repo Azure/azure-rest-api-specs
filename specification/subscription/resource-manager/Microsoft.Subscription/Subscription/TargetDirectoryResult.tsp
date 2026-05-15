@@ -76,9 +76,11 @@ interface TargetDirectoryResults {
 }
 
 @@doc(TargetDirectoryResult.name, "");
-@@doc(TargetDirectoryResult.properties,
+@@doc(
+  TargetDirectoryResult.properties,
   "Subscription Changed Target Directory response properties."
 );
-@@doc(TargetDirectoryResults.putTargetDirectory::parameters.resource,
+@@doc(
+  TargetDirectoryResults.putTargetDirectory::parameters.resource,
   "Target Directory Request"
 );

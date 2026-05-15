@@ -38,11 +38,14 @@ interface WorkloadClassifiers {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     WorkloadClassifier,
-    Response = ArmResourceUpdatedResponse<WorkloadClassifier> | ArmResourceCreatedResponse<
-      WorkloadClassifier,
-      ArmLroLocationHeader<FinalResult = WorkloadClassifier> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<WorkloadClassifier>
+      | ArmResourceCreatedResponse<
+          WorkloadClassifier,
+          ArmLroLocationHeader<FinalResult = WorkloadClassifier> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -51,7 +54,10 @@ interface WorkloadClassifiers {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     WorkloadClassifier,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -62,6 +68,7 @@ interface WorkloadClassifiers {
 
 @@doc(WorkloadClassifier.name, "The name of the workload classifier.");
 @@doc(WorkloadClassifier.properties, "Resource properties.");
-@@doc(WorkloadClassifiers.createOrUpdate::parameters.resource,
+@@doc(
+  WorkloadClassifiers.createOrUpdate::parameters.resource,
   "The properties of the workload classifier."
 );

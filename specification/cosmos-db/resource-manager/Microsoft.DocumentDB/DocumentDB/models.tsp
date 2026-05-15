@@ -9194,7 +9194,6 @@ alias BaseCosmosDataTransferDataSourceSinkProperties = {
 /**
  * A CosmosDB Cassandra API data source/sink
  */
-#suppress "@azure-tools/typespec-client-generator-core/legacy-hierarchy-building-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   BaseCosmosDataTransferDataSourceSink
@@ -9212,7 +9211,6 @@ model CosmosCassandraDataTransferDataSourceSink
 /**
  * A CosmosDB Mongo API data source/sink
  */
-#suppress "@azure-tools/typespec-client-generator-core/legacy-hierarchy-building-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   BaseCosmosDataTransferDataSourceSink
@@ -9246,7 +9244,6 @@ model CosmosMongoVCoreDataTransferDataSourceSink
 /**
  * A CosmosDB No Sql API data source/sink
  */
-#suppress "@azure-tools/typespec-client-generator-core/legacy-hierarchy-building-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   BaseCosmosDataTransferDataSourceSink
@@ -9263,11 +9260,6 @@ model CosmosSqlDataTransferDataSourceSink extends DataTransferDataSourceSink {
 /**
  * An Azure Blob Storage data source/sink
  */
-#suppress "@azure-tools/typespec-client-generator-core/legacy-hierarchy-building-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
-  BaseCosmosDataTransferDataSourceSink
-)
 model AzureBlobDataTransferDataSourceSink extends DataTransferDataSourceSink {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   containerName: string;
