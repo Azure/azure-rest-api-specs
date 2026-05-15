@@ -37,18 +37,6 @@ These settings apply only when `--tag=package-2026-05-11-preview` is specified o
 ``` yaml $(tag) == 'package-2026-05-11-preview'
 input-file:
   - PaloAltoNetworks.Cloudngfw/preview/2026-05-11-preview/PaloAltoNetworks.Cloudngfw.json
-suppressions:
-  - code: NestedResourcesMustHaveListOperation
-    from: PaloAltoNetworks.Cloudngfw.json
-    where: $.definitions.CustomCaptureConfigurationsFirewallResource
-    reason: customCaptureConfigurations is a singleton sync proxy resource (name is fixed to 'default'). A list operation is not meaningful for a singleton and is intentionally not exposed by this API.
-  - code: AllProxyResourcesShouldHaveDelete
-    from: PaloAltoNetworks.Cloudngfw.json
-    where: $.definitions.CustomCaptureConfigurationsFirewallResource
-    reason: customCaptureConfigurations is intentionally a sync proxy exposing only GET and PUT; each PUT replaces the previous configuration in-place. Delete is not supported by this API.
-  - code: LatestVersionOfCommonTypesMustBeUsed
-    from: PaloAltoNetworks.Cloudngfw.json
-    reason: PaloAltoNetworks.Cloudngfw uses common-types v3 across all API versions for consistency. Migrating to v6 will be performed as a holistic, spec-wide change in a future API version (v6 enforces stricter arm-id format validation that requires updating all auto-generated examples across the RP) rather than introducing inconsistency in a single resource.
 ```
 
 ### Tag: package-2026-01-26-preview

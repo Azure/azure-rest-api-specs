@@ -2990,6 +2990,59 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PaloAltoNetworks.Cloudngfw/firewalls/{firewallName}/customCaptureConfigurations": {
+      "get": {
+        "operationId": "CustomCaptureConfigurationsFirewallResources_ListByFirewall",
+        "tags": [
+          "CustomCaptureConfigurationsFirewallResources"
+        ],
+        "description": "List Custom Capture Configurations under a firewall. The resource is a singleton (name is fixed to 'default'), so the response contains at most one entry.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "firewallName",
+            "in": "path",
+            "description": "Firewall resource name",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![-_])(?!.*[-_]{2})(?!.*[-_]$)[a-zA-Z0-9][a-zA-Z0-9-]{0,127}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CustomCaptureConfigurationsFirewallResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CustomCaptureConfigurationsFirewallResources_ListByFirewall_MaximumSet_Gen": {
+            "$ref": "./examples/CustomCaptureConfigurationsFirewallResources_ListByFirewall_MaximumSet_Gen.json"
+          },
+          "CustomCaptureConfigurationsFirewallResources_ListByFirewall_MinimumSet_Gen": {
+            "$ref": "./examples/CustomCaptureConfigurationsFirewallResources_ListByFirewall_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PaloAltoNetworks.Cloudngfw/firewalls/{firewallName}/customCaptureConfigurations/default": {
       "get": {
         "operationId": "CustomCaptureConfigurationsFirewallResources_Get",
@@ -3099,6 +3152,54 @@
           },
           "CustomCaptureConfigurationsFirewallResources_CreateOrUpdate_MinimumSet_Gen": {
             "$ref": "./examples/CustomCaptureConfigurationsFirewallResources_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "CustomCaptureConfigurationsFirewallResources_Delete",
+        "tags": [
+          "CustomCaptureConfigurationsFirewallResources"
+        ],
+        "description": "Delete the Custom Capture Configuration on a firewall. SYNC — clears any in-progress or terminal capture state. Returns 200 on success or 204 when no configuration exists.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "firewallName",
+            "in": "path",
+            "description": "Firewall resource name",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![-_])(?!.*[-_]{2})(?!.*[-_]$)[a-zA-Z0-9][a-zA-Z0-9-]{0,127}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CustomCaptureConfigurationsFirewallResources_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/CustomCaptureConfigurationsFirewallResources_Delete_MaximumSet_Gen.json"
+          },
+          "CustomCaptureConfigurationsFirewallResources_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/CustomCaptureConfigurationsFirewallResources_Delete_MinimumSet_Gen.json"
           }
         }
       }
@@ -6346,6 +6447,27 @@
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "CustomCaptureConfigurationsFirewallResourceListResult": {
+      "type": "object",
+      "description": "The response of a CustomCaptureConfigurationsFirewallResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CustomCaptureConfigurationsFirewallResource items on this page",
+          "items": {
+            "$ref": "#/definitions/CustomCaptureConfigurationsFirewallResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "CustomCaptureConfigurationsProperties": {

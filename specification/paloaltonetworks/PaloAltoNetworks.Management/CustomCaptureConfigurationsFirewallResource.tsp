@@ -31,7 +31,6 @@ model CustomCaptureConfigurationsFirewallResource
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Custom Capture Configurations is intentionally a sync proxy singleton exposing only GET and PUT; delete is not supported in this API."
 @added(Versions.v2026_05_11_preview)
 @armResourceOperations
 interface CustomCaptureConfigurationsFirewallResources {
@@ -40,4 +39,10 @@ interface CustomCaptureConfigurationsFirewallResources {
 
   @doc("Start a Custom Capture Configuration on a firewall. SYNC — returns 200 OK + body immediately. Body's properties.pcapStatus reflects current state (typically InProgress). Caller polls GET on its own clock using properties.nextCheckInSeconds as the cadence hint.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<CustomCaptureConfigurationsFirewallResource>;
+
+  @doc("Delete the Custom Capture Configuration on a firewall. SYNC — clears any in-progress or terminal capture state. Returns 200 on success or 204 when no configuration exists.")
+  delete is ArmResourceDeleteSync<CustomCaptureConfigurationsFirewallResource>;
+
+  @doc("List Custom Capture Configurations under a firewall. The resource is a singleton (name is fixed to 'default'), so the response contains at most one entry.")
+  listByFirewall is ArmResourceListByParent<CustomCaptureConfigurationsFirewallResource>;
 }
