@@ -61,7 +61,9 @@ model RouterConditionalRequestHeaders {
  */
 @trait("ConditionalRequests")
 @traitAdded(TVersionAdded)
-model SupportsRouterConditionalPatchUpdateRequests<TVersionAdded extends EnumMember | null = null> {
+model SupportsRouterConditionalPatchUpdateRequests<TVersionAdded extends
+  | EnumMember
+  | null = null> {
   #suppress "@azure-tools/typespec-providerhub/no-inline-model" "This inline model is never used directly in operations."
   conditionalRequests: {
     @traitContext(TraitContext.Update)
@@ -72,7 +74,9 @@ model SupportsRouterConditionalPatchUpdateRequests<TVersionAdded extends EnumMem
 
 @trait("RouterReturnConditionalResponseHeaders")
 @traitAdded(TVersionAdded)
-model RouterReturnConditionalResponseHeaders<TVersionAdded extends EnumMember | null = null> {
+model RouterReturnConditionalResponseHeaders<TVersionAdded extends
+  | EnumMember
+  | null = null> {
   conditionalResponseHeaders: {
     @traitContext(TraitContext.Create | TraitContext.Update | TraitContext.Read)
     @traitLocation(TraitLocation.Response)

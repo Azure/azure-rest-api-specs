@@ -67,15 +67,19 @@ interface NginxConfigurationResponses {
   >;
 }
 
-@@doc(NginxConfigurationResponse.name,
+@@doc(
+  NginxConfigurationResponse.name,
   "The name of configuration, only 'default' is supported value due to the singleton of NGINX conf"
 );
-@@doc(NginxConfigurationResponse.properties,
+@@doc(
+  NginxConfigurationResponse.properties,
   "Nginx Configuration Response Properties"
 );
-@@doc(NginxConfigurationResponses.createOrUpdate::parameters.resource,
+@@doc(
+  NginxConfigurationResponses.createOrUpdate::parameters.resource,
   "The NGINX configuration"
 );
-@@doc(NginxConfigurationResponses.analysis::parameters.body,
+@@doc(
+  NginxConfigurationResponses.analysis::parameters.body,
   "The NGINX configuration to analyze"
 );

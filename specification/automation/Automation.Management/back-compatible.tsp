@@ -55,14 +55,16 @@ using Microsoft.Automation;
 @@Legacy.flattenProperty(DscConfigurationUpdateParameters.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(DscNodeConfigurationCreateOrUpdateParameters.properties
+@@Legacy.flattenProperty(
+  DscNodeConfigurationCreateOrUpdateParameters.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(HybridRunbookWorkerCreateParameters.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(HybridRunbookWorkerGroupCreateOrUpdateParameters.properties
+@@Legacy.flattenProperty(
+  HybridRunbookWorkerGroupCreateOrUpdateParameters.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -158,7 +160,8 @@ using Microsoft.Automation;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(WebhookUpdateParameters.properties);
 
-@@clientName(SoftwareUpdateConfigurations.create::parameters.resource,
+@@clientName(
+  SoftwareUpdateConfigurations.create::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -178,7 +181,8 @@ using Microsoft.Automation;
 
 @@clientLocation(AutomationAccounts.get, "AutomationAccount");
 @@clientLocation(AutomationAccounts.createOrUpdate, "AutomationAccount");
-@@clientName(AutomationAccounts.createOrUpdate::parameters.resource,
+@@clientName(
+  AutomationAccounts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(AutomationAccounts.update, "AutomationAccount");
@@ -186,63 +190,78 @@ using Microsoft.Automation;
 @@clientLocation(AutomationAccounts.delete, "AutomationAccount");
 @@clientLocation(AutomationAccounts.listByResourceGroup, "AutomationAccount");
 @@clientLocation(AutomationAccounts.list, "AutomationAccount");
-@@clientLocation(AutomationAccounts.nodeCountInformationGet,
+@@clientLocation(
+  AutomationAccounts.nodeCountInformationGet,
   "NodeCountInformation"
 );
 @@clientName(AutomationAccounts.nodeCountInformationGet, "Get");
-@@clientLocation(AutomationAccounts.softwareUpdateConfigurationsList,
+@@clientLocation(
+  AutomationAccounts.softwareUpdateConfigurationsList,
   SoftwareUpdateConfigurations
 );
 @@clientName(AutomationAccounts.softwareUpdateConfigurationsList, "List");
 @@clientLocation(AutomationAccounts.automation, "PrivateLinkResources");
-@@clientLocation(AutomationAccounts.agentRegistrationInformationGet,
+@@clientLocation(
+  AutomationAccounts.agentRegistrationInformationGet,
   "AgentRegistrationInformation"
 );
 @@clientName(AutomationAccounts.agentRegistrationInformationGet, "Get");
-@@clientLocation(AutomationAccounts.regenerateKey,
+@@clientLocation(
+  AutomationAccounts.regenerateKey,
   "AgentRegistrationInformation"
 );
 @@clientName(AutomationAccounts.regenerateKey::parameters.body, "parameters");
 @@clientLocation(AutomationAccounts.listDeletedRunbooks, "AutomationAccount");
 @@clientLocation(AutomationAccounts.listByAutomationAccount, "Statistics");
 @@clientLocation(AutomationAccounts.usagesListByAutomationAccount, "Usages");
-@@clientName(AutomationAccounts.usagesListByAutomationAccount,
+@@clientName(
+  AutomationAccounts.usagesListByAutomationAccount,
   "ListByAutomationAccount"
 );
 @@clientLocation(AutomationAccounts.keysListByAutomationAccount, "Keys");
-@@clientName(AutomationAccounts.keysListByAutomationAccount,
+@@clientName(
+  AutomationAccounts.keysListByAutomationAccount,
   "ListByAutomationAccount"
 );
 @@clientLocation(AutomationAccounts.jobListByAutomationAccount, "Job");
-@@clientName(AutomationAccounts.jobListByAutomationAccount,
+@@clientName(
+  AutomationAccounts.jobListByAutomationAccount,
   "ListByAutomationAccount"
 );
 @@clientLocation(AutomationAccounts.linkedWorkspaceGet, "LinkedWorkspace");
 @@clientName(AutomationAccounts.linkedWorkspaceGet, "Get");
 @@clientLocation(AutomationAccounts.listFieldsByType, "ObjectDataTypes");
 @@clientLocation(AutomationAccounts.convertGraphRunbookContent, "");
-@@clientName(AutomationAccounts.convertGraphRunbookContent,
+@@clientName(
+  AutomationAccounts.convertGraphRunbookContent,
   "convertGraphRunbookContent"
 );
-@@clientName(AutomationAccounts.convertGraphRunbookContent::parameters.body,
+@@clientName(
+  AutomationAccounts.convertGraphRunbookContent::parameters.body,
   "parameters"
 );
-@@clientLocation(AutomationAccounts.getById,
+@@clientLocation(
+  AutomationAccounts.getById,
   "SoftwareUpdateConfigurationMachineRuns"
 );
-@@clientLocation(AutomationAccounts.softwareUpdateConfigurationMachineRunsList,
+@@clientLocation(
+  AutomationAccounts.softwareUpdateConfigurationMachineRunsList,
   "SoftwareUpdateConfigurationMachineRuns"
 );
-@@clientName(AutomationAccounts.softwareUpdateConfigurationMachineRunsList,
+@@clientName(
+  AutomationAccounts.softwareUpdateConfigurationMachineRunsList,
   "List"
 );
-@@clientLocation(AutomationAccounts.softwareUpdateConfigurationRunsGetById,
+@@clientLocation(
+  AutomationAccounts.softwareUpdateConfigurationRunsGetById,
   "SoftwareUpdateConfigurationRuns"
 );
-@@clientName(AutomationAccounts.softwareUpdateConfigurationRunsGetById,
+@@clientName(
+  AutomationAccounts.softwareUpdateConfigurationRunsGetById,
   "GetById"
 );
-@@clientLocation(AutomationAccounts.softwareUpdateConfigurationRunsList,
+@@clientLocation(
+  AutomationAccounts.softwareUpdateConfigurationRunsList,
   "SoftwareUpdateConfigurationRuns"
 );
 @@clientName(AutomationAccounts.softwareUpdateConfigurationRunsList, "List");
@@ -250,7 +269,8 @@ using Microsoft.Automation;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(AutomationAccount.properties);
 
-@@clientName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
+@@clientName(
+  PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -296,7 +316,8 @@ using Microsoft.Automation;
 
 @@clientLocation(DscConfigurations.get, "DscConfiguration");
 @@clientLocation(DscConfigurations.createOrUpdate, "DscConfiguration");
-@@clientName(DscConfigurations.createOrUpdate::parameters.resource,
+@@clientName(
+  DscConfigurations.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(DscConfigurations.update, "DscConfiguration");
@@ -309,23 +330,28 @@ using Microsoft.Automation;
 
 @@clientLocation(DscNodeConfigurations.get, "DscNodeConfiguration");
 @@clientLocation(DscNodeConfigurations.createOrUpdate, "DscNodeConfiguration");
-@@clientName(DscNodeConfigurations.createOrUpdate::parameters.resource,
+@@clientName(
+  DscNodeConfigurations.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(DscNodeConfigurations.delete, "DscNodeConfiguration");
-@@clientLocation(DscNodeConfigurations.listByAutomationAccount,
+@@clientLocation(
+  DscNodeConfigurations.listByAutomationAccount,
   "DscNodeConfiguration"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DscNodeConfiguration.properties);
 
-@@clientName(HybridRunbookWorkers.create::parameters.resource,
+@@clientName(
+  HybridRunbookWorkers.create::parameters.resource,
   "HybridRunbookWorkerCreationParameters"
 );
-@@clientName(HybridRunbookWorkers.patch::parameters.properties,
+@@clientName(
+  HybridRunbookWorkers.patch::parameters.properties,
   "HybridRunbookWorkerCreationParameters"
 );
-@@clientName(HybridRunbookWorkers.move::parameters.body,
+@@clientName(
+  HybridRunbookWorkers.move::parameters.body,
   "HybridRunbookWorkerMoveParameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -333,15 +359,18 @@ using Microsoft.Automation;
 
 @@clientLocation(HybridRunbookWorkerGroups.get, "HybridRunbookWorkerGroup");
 @@clientLocation(HybridRunbookWorkerGroups.create, "HybridRunbookWorkerGroup");
-@@clientName(HybridRunbookWorkerGroups.create::parameters.resource,
+@@clientName(
+  HybridRunbookWorkerGroups.create::parameters.resource,
   "HybridRunbookWorkerGroupCreationParameters"
 );
 @@clientLocation(HybridRunbookWorkerGroups.update, "HybridRunbookWorkerGroup");
-@@clientName(HybridRunbookWorkerGroups.update::parameters.properties,
+@@clientName(
+  HybridRunbookWorkerGroups.update::parameters.properties,
   "HybridRunbookWorkerGroupUpdationParameters"
 );
 @@clientLocation(HybridRunbookWorkerGroups.delete, "HybridRunbookWorkerGroup");
-@@clientLocation(HybridRunbookWorkerGroups.listByAutomationAccount,
+@@clientLocation(
+  HybridRunbookWorkerGroups.listByAutomationAccount,
   "HybridRunbookWorkerGroup"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -449,18 +478,22 @@ using Microsoft.Automation;
 @@clientLocation(SourceControls.delete, "SourceControl");
 @@clientLocation(SourceControls.listByAutomationAccount, "SourceControl");
 @@clientLocation(SourceControls.create, "SourceControlSyncJob");
-@@clientLocation(SourceControls.sourceControlSyncJobGet,
+@@clientLocation(
+  SourceControls.sourceControlSyncJobGet,
   "SourceControlSyncJob"
 );
 @@clientName(SourceControls.sourceControlSyncJobGet, "Get");
-@@clientLocation(SourceControls.sourceControlSyncJobListByAutomationAccount,
+@@clientLocation(
+  SourceControls.sourceControlSyncJobListByAutomationAccount,
   "SourceControlSyncJob"
 );
-@@clientName(SourceControls.sourceControlSyncJobListByAutomationAccount,
+@@clientName(
+  SourceControls.sourceControlSyncJobListByAutomationAccount,
   "ListByAutomationAccount"
 );
 @@clientLocation(SourceControls.listBySyncJob, "SourceControlSyncJobStreams");
-@@clientLocation(SourceControls.sourceControlSyncJobStreamsGet,
+@@clientLocation(
+  SourceControls.sourceControlSyncJobStreamsGet,
   "SourceControlSyncJobStreams"
 );
 @@clientName(SourceControls.sourceControlSyncJobStreamsGet, "Get");
@@ -499,7 +532,8 @@ using Microsoft.Automation;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Webhook.properties);
 
-@@clientLocation(deletedAutomationAccountsOperationGroup.listBySubscription,
+@@clientLocation(
+  deletedAutomationAccountsOperationGroup.listBySubscription,
   "deletedAutomationAccounts"
 );
 

@@ -59,9 +59,11 @@ interface RegulatoryComplianceAssessments {
   >;
 }
 
-@@doc(RegulatoryComplianceAssessment.name,
+@@doc(
+  RegulatoryComplianceAssessment.name,
   "Name of the regulatory compliance assessment object"
 );
-@@doc(RegulatoryComplianceAssessment.properties,
+@@doc(
+  RegulatoryComplianceAssessment.properties,
   "Regulatory compliance assessment data"
 );

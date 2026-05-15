@@ -84,12 +84,15 @@ interface LogProfileResources {
 }
 
 @@doc(LogProfileResource.name, "The name of the log profile.");
-@@doc(LogProfileResource.properties,
+@@doc(
+  LogProfileResource.properties,
   "The log profile properties of the resource."
 );
-@@doc(LogProfileResources.createOrUpdate::parameters.resource,
+@@doc(
+  LogProfileResources.createOrUpdate::parameters.resource,
   "Parameters supplied to the operation."
 );
-@@doc(LogProfileResources.update::parameters.properties,
+@@doc(
+  LogProfileResources.update::parameters.properties,
   "Parameters supplied to the operation."
 );

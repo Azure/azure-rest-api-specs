@@ -57,7 +57,8 @@ model EdgeActionVersion is TrackedResource<EdgeActionVersionProperties> {
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Extension needed for backwards compatibility with 2024-07-22-preview"
 @@extension(EdgeActionVersion.properties, "x-ms-client-flatten", true);
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Extension needed for backwards compatibility with 2024-07-22-preview"
-@@extension(EdgeActionVersion.properties,
+@@extension(
+  EdgeActionVersion.properties,
   "x-ms-mutability",
   #["read", "create"]
 );
@@ -76,7 +77,8 @@ model EdgeActionExecutionFilter
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Extension needed for backwards compatibility with 2024-07-22-preview"
 @@extension(EdgeActionExecutionFilter.properties, "x-ms-client-flatten", true);
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Extension needed for backwards compatibility with 2024-07-22-preview"
-@@extension(EdgeActionExecutionFilter.properties,
+@@extension(
+  EdgeActionExecutionFilter.properties,
   "x-ms-mutability",
   #["read", "create"]
 );
@@ -92,7 +94,10 @@ interface EdgeActions {
     Azure.ResourceManager.Foundations.BaseParameters<EdgeAction>,
     ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader,
     {},
-    ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
   listByResourceGroup is ArmResourceListByParent<EdgeAction>;
   listBySubscription is ArmListBySubscription<EdgeAction>;
@@ -129,7 +134,10 @@ interface EdgeActionVersions {
     Azure.ResourceManager.Foundations.BaseParameters<EdgeActionVersion>,
     ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader,
     {},
-    ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
   listByEdgeAction is ArmResourceListByParent<EdgeActionVersion>;
   deployVersionCode is ArmResourceActionAsync<
@@ -179,7 +187,10 @@ interface EdgeActionExecutionFilters {
     Azure.ResourceManager.Foundations.BaseParameters<EdgeActionExecutionFilter>,
     ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader,
     {},
-    ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
   listByEdgeAction is ArmResourceListByParent<EdgeActionExecutionFilter>;
 }

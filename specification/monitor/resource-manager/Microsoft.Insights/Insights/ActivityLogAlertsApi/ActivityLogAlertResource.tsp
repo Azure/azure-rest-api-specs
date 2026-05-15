@@ -79,15 +79,19 @@ interface ActivityLogAlertResources {
   >;
 }
 
-@@doc(ActivityLogAlertResource.name,
+@@doc(
+  ActivityLogAlertResource.name,
   "The name of the Activity Log Alert rule."
 );
-@@doc(ActivityLogAlertResource.properties,
+@@doc(
+  ActivityLogAlertResource.properties,
   "The Activity Log Alert rule properties of the resource."
 );
-@@doc(ActivityLogAlertResources.createOrUpdate::parameters.resource,
+@@doc(
+  ActivityLogAlertResources.createOrUpdate::parameters.resource,
   "The Activity Log Alert rule to create or use for the update."
 );
-@@doc(ActivityLogAlertResources.update::parameters.properties,
+@@doc(
+  ActivityLogAlertResources.update::parameters.properties,
   "Parameters supplied to the operation."
 );
