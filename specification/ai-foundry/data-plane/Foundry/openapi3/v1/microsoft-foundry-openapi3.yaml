@@ -9466,6 +9466,10 @@ components:
           items:
             $ref: '#/components/schemas/ToolDescription'
           description: The parameters used to control the sampling behavior of the agent during text generation.
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.Tool'
       allOf:
         - $ref: '#/components/schemas/Target'
       description: Represents a target specifying an Azure AI agent.
@@ -9488,6 +9492,10 @@ components:
           items:
             $ref: '#/components/schemas/ToolDescription'
           description: The parameters used to control the sampling behavior of the agent during text generation.
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.Tool'
       allOf:
         - $ref: '#/components/schemas/TargetUpdate'
       description: Represents a target specifying an Azure AI agent.

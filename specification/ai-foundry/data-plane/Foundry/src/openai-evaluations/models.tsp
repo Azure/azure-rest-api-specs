@@ -324,6 +324,8 @@ model AzureAIAgentTarget extends Target {
 
   /** The parameters used to control the sampling behavior of the agent during text generation. */
   tool_descriptions?: ToolDescription[];
+
+  tools?: OpenAI.Tool[];
 }
 
 /** Description of a tool that can be used by an agent. */
