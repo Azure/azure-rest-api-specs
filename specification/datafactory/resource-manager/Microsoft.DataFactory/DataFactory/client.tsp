@@ -1105,3 +1105,80 @@ using Microsoft.DataFactory;
   Azure.ResourceManager.CommonTypes.TrackedResource,
   "csharp"
 );
+
+// MPG migration: backward-compat class renames (Request/Parameters → Content suffix to match previously published SDK).
+@@clientName(
+  ExposureControlBatchRequest,
+  "ExposureControlBatchContent",
+  "csharp"
+);
+@@clientName(GitHubAccessTokenRequest, "GitHubAccessTokenContent", "csharp");
+@@clientName(
+  IntegrationRuntimeRegenerateKeyParameters,
+  "IntegrationRuntimeRegenerateKeyContent",
+  "csharp"
+);
+@@clientName(
+  LinkedIntegrationRuntimeRequest,
+  "LinkedIntegrationRuntimeContent",
+  "csharp"
+);
+@@clientName(
+  CreateLinkedIntegrationRuntimeRequest,
+  "CreateLinkedIntegrationRuntimeContent",
+  "csharp"
+);
+@@clientName(
+  GetSsisObjectMetadataRequest,
+  "GetSsisObjectMetadataContent",
+  "csharp"
+);
+@@clientName(
+  UpdateIntegrationRuntimeNodeRequest,
+  "UpdateIntegrationRuntimeNodeContent",
+  "csharp"
+);
+@@clientName(
+  EnableInteractiveQueryRequest,
+  "EnableInteractiveQueryContent",
+  "csharp"
+);
+@@clientName(TriggerFilterParameters, "TriggerFilterContent", "csharp");
+@@clientName(
+  DeleteDataFlowDebugSessionRequest,
+  "DeleteDataFlowDebugSessionContent",
+  "csharp"
+);
+@@clientName(
+  DataFlowDebugCommandRequest,
+  "DataFlowDebugCommandContent",
+  "csharp"
+);
+@@clientName(
+  PrivateLinkConnectionApprovalRequestResource,
+  "DataFactoryPrivateEndpointConnectionCreateOrUpdateContent",
+  "csharp"
+);
+
+// MPG migration: backward-compat property casing renames.
+@@clientName(
+  ChangeDataCapture.allowVNetOverride,
+  "AllowVnetOverride",
+  "csharp"
+);
+@@clientName(
+  IntegrationRuntimeComputeProperties.vNetProperties,
+  "VnetProperties",
+  "csharp"
+);
+
+// MPG migration: map AzureKeyVaultSecretReference to the external
+// Azure.Core.Expressions.DataFactory.DataFactoryKeyVaultSecret type so property
+// types match the legacy SDK surface (avoids exposing local AzureKeyVaultSecretReference).
+@@alternateType(
+  AzureKeyVaultSecretReference,
+  {
+    identity: "Azure.Core.Expressions.DataFactory.DataFactoryKeyVaultSecret",
+  },
+  "csharp"
+);
