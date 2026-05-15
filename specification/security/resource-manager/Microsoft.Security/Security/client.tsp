@@ -282,7 +282,7 @@ op privateEndpointConnectionsCreateOrUpdateCustomization(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateEndpointConnectionName: string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  resource: Azure.ResourceManager.PrivateEndpointConnection,
+  resource: PrivateLinksAPI.PrivateEndpointConnection,
 ):
   | ArmResourceUpdatedResponse<PrivateLinksAPI.PrivateLinkResource>
   | ArmResourceCreatedResponse<
