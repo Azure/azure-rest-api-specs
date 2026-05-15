@@ -90,7 +90,10 @@ interface ApplyUpdatesOperationGroup {
      */
     @path
     resourceName: string,
-  ): ArmResponse<ApplyUpdate> | ArmCreatedResponse<ApplyUpdate> | MaintenanceError;
+  ):
+    | ArmResponse<ApplyUpdate>
+    | ArmCreatedResponse<ApplyUpdate>
+    | MaintenanceError;
 
   /**
    * Apply maintenance updates to resource
@@ -120,7 +123,10 @@ interface ApplyUpdatesOperationGroup {
      */
     @path
     resourceName: string,
-  ): ArmResponse<ApplyUpdate> | ArmCreatedResponse<ApplyUpdate> | MaintenanceError;
+  ):
+    | ArmResponse<ApplyUpdate>
+    | ArmCreatedResponse<ApplyUpdate>
+    | MaintenanceError;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

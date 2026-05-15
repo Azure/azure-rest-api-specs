@@ -146,12 +146,15 @@ interface VirtualMachineScaleSetVMExtensions {
   >;
 }
 
-@@doc(VirtualMachineScaleSetVMExtension.properties,
+@@doc(
+  VirtualMachineScaleSetVMExtension.properties,
   "Describes the properties of a Virtual Machine Extension."
 );
-@@doc(VirtualMachineScaleSetVMExtensions.createOrUpdate::parameters.resource,
+@@doc(
+  VirtualMachineScaleSetVMExtensions.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Virtual Machine Extension operation."
 );
-@@doc(VirtualMachineScaleSetVMExtensions.update::parameters.properties,
+@@doc(
+  VirtualMachineScaleSetVMExtensions.update::parameters.properties,
   "Parameters supplied to the Update Virtual Machine Extension operation."
 );

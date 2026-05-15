@@ -48,12 +48,15 @@ interface ManagedDatabaseAdvancedThreatProtections {
   listByDatabase is ArmResourceListByParent<ManagedDatabaseAdvancedThreatProtection>;
 }
 
-@@doc(ManagedDatabaseAdvancedThreatProtection.name,
+@@doc(
+  ManagedDatabaseAdvancedThreatProtection.name,
   "The name of the Advanced Threat Protection state."
 );
-@@doc(ManagedDatabaseAdvancedThreatProtection.properties,
+@@doc(
+  ManagedDatabaseAdvancedThreatProtection.properties,
   "Resource properties."
 );
-@@doc(ManagedDatabaseAdvancedThreatProtections.createOrUpdate::parameters.resource,
+@@doc(
+  ManagedDatabaseAdvancedThreatProtections.createOrUpdate::parameters.resource,
   "The managed database Advanced Threat Protection state."
 );

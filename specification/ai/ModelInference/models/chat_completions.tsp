@@ -530,7 +530,9 @@ model ChatResponseMessage {
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "External API shape is defined in OpenAPI 3.0 as oneOf."
 #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
-alias ChatCompletionsToolChoice = ChatCompletionsToolChoicePreset | ChatCompletionsNamedToolChoice;
+alias ChatCompletionsToolChoice =
+  | ChatCompletionsToolChoicePreset
+  | ChatCompletionsNamedToolChoice;
 
 @doc("Represents a generic policy for how a chat completions tool may be selected.")
 union ChatCompletionsToolChoicePreset {
