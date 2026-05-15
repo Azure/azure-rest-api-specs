@@ -1250,7 +1250,6 @@ namespace Azure.AI.Projects {
     memories?: MemoryItem[] | null;
   }
 
-  @removed(Versions.v1)
   @doc("A memory command tool call.")
   model MemoryCommandToolCall extends OpenAI.OutputItem {
     type: "memory_command_preview_call";
@@ -1265,7 +1264,6 @@ namespace Azure.AI.Projects {
     status: ToolCallStatus;
   }
 
-  @removed(Versions.v1)
   @doc("The output of a memory command tool call.")
   model MemoryCommandToolCallOutput extends OpenAI.OutputItem {
     type: "memory_command_preview_call_output";

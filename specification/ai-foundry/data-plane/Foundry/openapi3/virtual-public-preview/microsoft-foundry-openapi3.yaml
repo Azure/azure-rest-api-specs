@@ -7,6 +7,7 @@ tags:
   - name: Agent Containers
   - name: Agent Session Files
   - name: Agent Invocations
+  - name: Agent Invocations WebSocket
   - name: Connections
   - name: Datasets
   - name: Deployments
@@ -28,7 +29,576 @@ tags:
   - name: Skills
   - name: Toolboxes
   - name: DataGenerationJobs
+  - name: AgentOptimizationJobs
 paths:
+  /agent_optimization_jobs:
+    post:
+      operationId: AgentOptimizationJobs_create
+      summary: Creates an agent optimization job.
+      description: Create an optimization job. Returns 201 with the queued job. Honours `Operation-Id` for idempotent retry.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentsOptimization=V1Preview
+        - name: Operation-Id
+          in: header
+          required: false
+          description: Client-generated unique ID for idempotent retries. When absent, the server creates the job unconditionally.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          headers:
+            Operation-Location:
+              required: true
+              description: URL to poll for the job status.
+              schema:
+                type: string
+            Location:
+              required: true
+              description: URL of the created job resource.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptimizationJob'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - AgentOptimizationJobs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OptimizationJob'
+        description: The job to create.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V1Preview
+    get:
+      operationId: AgentOptimizationJobs_list
+      summary: Returns a list of agent optimization jobs.
+      description: List optimization jobs. Supports cursor pagination and optional `status` / `agent_name` filters.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentsOptimization=V1Preview
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: status
+          in: query
+          required: false
+          description: Filter to jobs in this lifecycle state.
+          schema:
+            $ref: '#/components/schemas/JobStatus'
+          explode: false
+        - name: agent_name
+          in: query
+          required: false
+          description: Filter to jobs targeting this agent name.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/OptimizationJob'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - AgentOptimizationJobs
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V1Preview
+  /agent_optimization_jobs/{jobId}:
+    get:
+      operationId: AgentOptimizationJobs_get
+      summary: Get info about an agent optimization job.
+      description: Get an optimization job by id. Emits `Retry-After` while the job is non-terminal.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentsOptimization=V1Preview
+        - name: jobId
+          in: path
+          required: true
+          description: The ID of the job.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            Retry-After:
+              required: false
+              description: Recommended number of seconds to wait before polling again.
+              schema:
+                type: integer
+                format: int32
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptimizationJob'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - AgentOptimizationJobs
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V1Preview
+    delete:
+      operationId: AgentOptimizationJobs_delete
+      summary: Deletes an agent optimization job.
+      description: Delete the job and its candidate artifacts. Cancels first if non-terminal.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentsOptimization=V1Preview
+        - name: jobId
+          in: path
+          required: true
+          description: The ID of the job to delete.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - AgentOptimizationJobs
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V1Preview
+  /agent_optimization_jobs/{jobId}/candidates:
+    get:
+      operationId: AgentOptimizationJobs_listCandidates
+      summary: Returns a list of candidates for an optimization job.
+      description: List candidates produced by a job.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentsOptimization=V1Preview
+        - name: jobId
+          in: path
+          required: true
+          description: The optimization job id.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/OptimizationCandidate'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - AgentOptimizationJobs
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V1Preview
+  /agent_optimization_jobs/{jobId}/candidates/{candidateId}:
+    get:
+      operationId: AgentOptimizationJobs_getCandidate
+      summary: Get a candidate by id.
+      description: Get a single candidate manifest and aggregated evaluation summary.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentsOptimization=V1Preview
+        - name: jobId
+          in: path
+          required: true
+          description: The optimization job id.
+          schema:
+            type: string
+        - name: candidateId
+          in: path
+          required: true
+          description: The candidate id.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptimizationCandidate'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - AgentOptimizationJobs
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V1Preview
+  /agent_optimization_jobs/{jobId}/candidates/{candidateId}/config:
+    get:
+      operationId: AgentOptimizationJobs_getCandidateConfig
+      summary: Get candidate deploy config.
+      description: Get the candidate's deploy config JSON. Used to compose `agents.create_version(...)` from a candidate.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentsOptimization=V1Preview
+        - name: jobId
+          in: path
+          required: true
+          description: The optimization job id.
+          schema:
+            type: string
+        - name: candidateId
+          in: path
+          required: true
+          description: The candidate id.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CandidateDeployConfig'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - AgentOptimizationJobs
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V1Preview
+  /agent_optimization_jobs/{jobId}/candidates/{candidateId}/results:
+    get:
+      operationId: AgentOptimizationJobs_getCandidateResults
+      summary: Get candidate evaluation results.
+      description: Get full per-task evaluation results for a candidate.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentsOptimization=V1Preview
+        - name: jobId
+          in: path
+          required: true
+          description: The optimization job id.
+          schema:
+            type: string
+        - name: candidateId
+          in: path
+          required: true
+          description: The candidate id.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CandidateResults'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - AgentOptimizationJobs
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V1Preview
+  /agent_optimization_jobs/{jobId}:cancel:
+    post:
+      operationId: AgentOptimizationJobs_cancel
+      summary: Cancels an agent optimization job.
+      description: Request cancellation. Idempotent on terminal states.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentsOptimization=V1Preview
+        - name: jobId
+          in: path
+          required: true
+          description: The ID of the job to cancel.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptimizationJob'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - AgentOptimizationJobs
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V1Preview
   /agents:
     post:
       operationId: Agents_createAgent_Agents_createAgentFromCode
@@ -187,6 +757,87 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agents
+  /agents/endpoint/protocols/invocations_ws:
+    get:
+      operationId: AgentWebsocket_connectEndpointWebsocket
+      description: |-
+        Establishes a WebSocket connection to a hosted agent. The target project and
+        agent are passed as query parameters. The service resolves (or creates) a
+        session, resolves the agent version, then relays text and binary frames
+        bidirectionally between the client and the agent (1 MB maximum frame size).
+
+        The client must send an HTTP GET with `Upgrade: websocket` headers.
+      parameters:
+        - name: project_name
+          in: query
+          required: true
+          description: The name of the project.
+          schema:
+            type: string
+          explode: false
+        - name: agent_name
+          in: query
+          required: true
+          description: The name of the hosted agent.
+          schema:
+            type: string
+          explode: false
+        - name: agent_session_id
+          in: query
+          required: false
+          description: Optional session/conversation ID. Pass the same value on a subsequent connection to reattach to an existing session. If not provided, the service auto-generates one.
+          schema:
+            type: string
+          explode: false
+        - name: foundry_features
+          in: query
+          required: false
+          description: Preview feature flag, accepted as an alternative to the `Foundry-Features` header for browser clients that cannot set custom headers. Either this query parameter or the header must be supplied with the value `HostedAgents=V1Preview`.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/AgentDefinitionOptInKeys'
+            default:
+              - HostedAgents=V1Preview
+          explode: false
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - HostedAgents=V1Preview
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            x-agent-session-id:
+              required: true
+              description: Session ID for this WebSocket connection. Returns the provided session ID or an auto-generated one if not provided in the request.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Invocations WebSocket
+      x-ms-foundry-meta:
+        required_previews:
+          - HostedAgents=V1Preview
   /agents/{agent_name}:
     get:
       operationId: Agents_getAgent
@@ -10629,6 +11280,7 @@ components:
             - a2a
             - mcp
             - invocations
+            - invocations_ws
     AgentEvaluation:
       type: object
       required:
@@ -12488,6 +13140,42 @@ components:
             - $ref: '#/components/schemas/BrowserAutomationToolConnectionParameters'
           description: The project connection parameters associated with the Browser Automation Tool.
       description: Definition of input parameters for the Browser Automation Tool.
+    CandidateDeployConfig:
+      type: object
+      properties:
+        instructions:
+          type: string
+          description: System prompt / instructions.
+        model:
+          type: string
+          description: Foundry deployment name.
+        temperature:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 2
+          description: Optional sampling temperature.
+        skills:
+          type: array
+          items:
+            $ref: '#/components/schemas/OptimizationAgentSkill'
+          description: Optional skill overrides.
+      description: Deploy-config blob for a candidate. Suitable for setting OPTIMIZATION_CONFIG on a hosted-agent version.
+    CandidateResults:
+      type: object
+      required:
+        - candidate_id
+        - results
+      properties:
+        candidate_id:
+          type: string
+          description: Owning candidate id.
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/OptimizationTaskResult'
+          description: Per-task evaluation rows.
+      description: Full per-task evaluation results for a candidate, returned by GET /candidates/{id}/results.
     CaptureStructuredOutputsTool:
       type: object
       required:
@@ -13813,6 +14501,49 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorGenerationJobSource'
       description: Dataset source for evaluator generation jobs — reference to a dataset.
+    DatasetItem:
+      type: object
+      required:
+        - name
+        - query
+      properties:
+        name:
+          type: string
+          description: Unique-within-the-dataset identifier for this task.
+        query:
+          type: string
+          description: The user query / input for the task.
+        ground_truth:
+          type: string
+          description: Optional ground truth used by reference-based evaluators.
+        criteria:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluationCriterion'
+          description: Per-task evaluation criteria. Defaults to the job-level evaluators if unset.
+        eval_results:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvalRunOutputItemResult'
+          description: Pre-computed evaluation results in AOAI-compatible format. When provided together with `response_items`, the baseline run-and-evaluate phase is skipped.
+        response_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.OutputItem'
+          description: Pre-computed agent response output items. Captures the full trajectory (function calls, tool outputs, messages) from a prior agent run.
+      description: A single evaluation task with input query, expected output, and evaluation criteria.
+    DatasetRef:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Dataset name.
+        version:
+          type: string
+          description: Dataset version. If not specified, the latest version is used.
+      description: Reference to a registered dataset in the Foundry Dataset Service.
     DatasetReference:
       type: object
       required:
@@ -15066,6 +15797,19 @@ components:
       allOf:
         - $ref: '#/components/schemas/InsightResult'
       description: Insights from the evaluation comparison.
+    EvaluationCriterion:
+      type: object
+      required:
+        - name
+        - instruction
+      properties:
+        name:
+          type: string
+          description: Criterion name (referenced in evaluation result rows).
+        instruction:
+          type: string
+          description: Natural-language instruction passed to the judge LLM.
+      description: LLM-as-judge evaluation criterion applied to a single task.
     EvaluationDataGenerationType:
       anyOf:
         - type: string
@@ -32752,6 +33496,405 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: The output of an OpenAPI tool call.
+    OptimizationAgentDefinition:
+      type: object
+      required:
+        - agent_name
+      properties:
+        agent_name:
+          type: string
+          description: Registered Foundry agent name. Required — bare-model mode is not supported.
+        agent_version:
+          type: string
+          description: Pinned agent version. Defaults to latest if omitted.
+        model:
+          type: string
+          description: Model deployment name (e.g., 'gpt-4o'). Optional when agent_name is set — the agent definition provides the model.
+        system_prompt:
+          type: string
+          description: System prompt / instructions override. When set, used as the baseline instructions for the agent.
+        skills:
+          type: array
+          items:
+            $ref: '#/components/schemas/OptimizationAgentSkill'
+          description: Optional named skills the optimizer may tune. Tool descriptions and parameters.
+      description: The agent definition being optimized. Identifies the Foundry agent and optional configuration overrides.
+    OptimizationAgentSkill:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Skill name (matches the tool name on the agent).
+        description:
+          type: string
+          description: Free-form description used as the seed when tuning skill descriptions.
+      description: A named skill on the agent that the optimizer may tune.
+    OptimizationCandidate:
+      type: object
+      required:
+        - name
+        - config
+        - mutations
+        - rationale
+        - avg_score
+        - avg_tokens
+        - pass_rate
+        - task_scores
+        - is_pareto_optimal
+      properties:
+        candidate_id:
+          type: string
+          description: Server-assigned candidate identifier. Use with `GET /candidates/{id}` sub-endpoints.
+        name:
+          type: string
+          description: Display name of the candidate (e.g., 'baseline', 'instruction-v2').
+        config:
+          allOf:
+            - $ref: '#/components/schemas/OptimizationAgentDefinition'
+          description: The agent configuration that produced this candidate.
+        mutations:
+          type: object
+          additionalProperties: {}
+          description: "What was mutated from the baseline (e.g., {instructions: 'new prompt'})."
+        rationale:
+          type: string
+          description: Strategy rationale — why this candidate was generated.
+        avg_score:
+          type: number
+          format: double
+          description: Average composite score across all tasks.
+        avg_tokens:
+          type: number
+          format: double
+          description: Average token usage across all tasks.
+        pass_rate:
+          type: number
+          format: double
+          description: Fraction of tasks that met the pass threshold.
+        task_scores:
+          type: array
+          items:
+            $ref: '#/components/schemas/OptimizationTaskResult'
+          description: Individual task-level scores.
+        is_pareto_optimal:
+          type: boolean
+          description: Whether this candidate is on the Pareto frontier (score vs cost).
+        sample_avg_score:
+          type: number
+          format: double
+          description: Average score from sampled evaluation (null if full dataset was used).
+        sample_size:
+          type: integer
+          format: int32
+          description: Number of tasks in the sample (null if full dataset was used).
+        evaluation_type:
+          type: string
+          description: "'sample' if scored on a subset, 'full' if re-evaluated on the full dataset."
+        strategy:
+          allOf:
+            - $ref: '#/components/schemas/OptimizationStrategy'
+          description: Identifies the strategy that produced this candidate.
+        eval_id:
+          type: string
+          description: Foundry evaluation identifier used to score this candidate.
+        eval_run_id:
+          type: string
+          description: Foundry evaluation run identifier for this candidate's scoring run.
+      description: Aggregated evaluation result for a single candidate agent configuration across all tasks.
+    OptimizationJob:
+      type: object
+      required:
+        - id
+        - status
+        - created_at
+      properties:
+        id:
+          type: string
+          description: Server-assigned unique identifier.
+          readOnly: true
+        inputs:
+          allOf:
+            - $ref: '#/components/schemas/OptimizationJobInputs'
+          description: Caller-supplied inputs.
+        result:
+          allOf:
+            - $ref: '#/components/schemas/OptimizationJobResult'
+          description: Result produced on success.
+          readOnly: true
+        status:
+          allOf:
+            - $ref: '#/components/schemas/JobStatus'
+          description: Current lifecycle status.
+          readOnly: true
+        error:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.Error'
+          description: Error details — populated only on failure.
+          readOnly: true
+        created_at:
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
+          description: The timestamp when the job was created, represented in Unix time.
+          readOnly: true
+        updated_at:
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
+          description: The timestamp when the job was last updated, represented in Unix time.
+          readOnly: true
+        progress:
+          allOf:
+            - $ref: '#/components/schemas/OptimizationJobProgress'
+          description: Progress while in flight. Absent in terminal states.
+          readOnly: true
+      description: Agent optimization job resource — a long-running job that optimizes an agent's configuration (instructions, model, skills) to maximize evaluation scores. On success, the result contains scored candidates.
+    OptimizationJobInputs:
+      type: object
+      required:
+        - agent
+      properties:
+        agent:
+          allOf:
+            - $ref: '#/components/schemas/OptimizationAgentDefinition'
+          description: The agent (and pinned version) being optimized.
+        dataset:
+          type: array
+          items:
+            $ref: '#/components/schemas/DatasetItem'
+          description: Inline evaluation dataset. Mutually exclusive with `train_dataset_reference`.
+        train_dataset_reference:
+          allOf:
+            - $ref: '#/components/schemas/DatasetRef'
+          description: Reference to a registered training dataset. Mutually exclusive with `dataset`.
+        validation_dataset_reference:
+          allOf:
+            - $ref: '#/components/schemas/DatasetRef'
+          description: Optional held-out validation dataset for measuring generalization of the final candidate.
+        evaluators:
+          type: array
+          items:
+            type: string
+          description: "Job-level evaluators (referenced by `name`). Per-task `criteria` may override. Default: ['task_adherence']."
+        criteria:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluationCriterion'
+          description: Job-level evaluation criteria. Applied to all tasks unless overridden by per-task `criteria`.
+        options:
+          allOf:
+            - $ref: '#/components/schemas/OptimizationOptions'
+          description: Tuning knobs and run-mode.
+      description: Caller-supplied inputs for an optimization job.
+    OptimizationJobProgress:
+      type: object
+      required:
+        - current_strategy
+        - current_iteration
+        - tasks_completed
+        - tasks_total
+        - best_score
+        - elapsed_seconds
+      properties:
+        current_strategy:
+          allOf:
+            - $ref: '#/components/schemas/OptimizationStrategy'
+          description: Strategy currently being explored.
+        current_iteration:
+          type: integer
+          format: int32
+          description: 1-based current iteration index.
+        tasks_completed:
+          type: integer
+          format: int32
+          description: Tasks evaluated so far this iteration.
+        tasks_total:
+          type: integer
+          format: int32
+          description: Total tasks scheduled this iteration.
+        best_score:
+          type: number
+          format: double
+          description: Best score observed so far across all candidates.
+        elapsed_seconds:
+          type: number
+          format: double
+          description: Wall-clock time elapsed since the job began executing.
+      description: In-flight progress; only populated while status is `queued` or `in_progress`.
+    OptimizationJobResult:
+      type: object
+      properties:
+        baseline:
+          allOf:
+            - $ref: '#/components/schemas/OptimizationCandidate'
+          description: Evaluation scores for the original (un-optimized) agent configuration.
+        best:
+          allOf:
+            - $ref: '#/components/schemas/OptimizationCandidate'
+          description: The highest-scoring candidate found during optimization.
+        candidates:
+          type: array
+          items:
+            $ref: '#/components/schemas/OptimizationCandidate'
+          description: All evaluated candidates including baseline.
+        pareto_frontier:
+          type: array
+          items:
+            $ref: '#/components/schemas/OptimizationCandidate'
+          description: Candidates on the Pareto frontier (maximize score, minimize cost).
+        validation_score:
+          allOf:
+            - $ref: '#/components/schemas/OptimizationCandidate'
+          description: Score of the best candidate on the held-out validation dataset. Null when no validation dataset was provided.
+        options:
+          allOf:
+            - $ref: '#/components/schemas/OptimizationOptions'
+          description: The options used for this optimization run.
+        sample_size:
+          type: integer
+          format: int32
+          description: Number of tasks sampled during optimization iterations (null if sampling was not used).
+        warnings:
+          type: array
+          items:
+            type: string
+          description: Non-fatal warnings from the optimization run (e.g., strategy failures that were skipped).
+        all_strategies_failed:
+          type: boolean
+          description: True when all optimization strategies failed — only the baseline was evaluated.
+      description: Terminal-state result body. Populated when `status` is `succeeded` or `failed`.
+    OptimizationMode:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - optimize
+      description: Run mode for an optimization job.
+    OptimizationOptions:
+      type: object
+      properties:
+        strategies:
+          type: array
+          items:
+            $ref: '#/components/schemas/OptimizationStrategy'
+          description: "Strategies to apply this run. Default: ['instruction']."
+          default:
+            - instruction
+        budget:
+          type: integer
+          format: int32
+          description: 'Total candidate generation budget (number of candidates explored). Default: 10.'
+          default: 10
+        max_iterations:
+          type: integer
+          format: int32
+          description: 'Maximum optimization iterations per strategy. Default: 5.'
+          default: 5
+        tasks_per_iteration:
+          type: integer
+          format: int32
+          description: 'Tasks sampled per iteration (mutation step input). Default: service-decided (auto-computed).'
+        max_reflection_tasks:
+          type: integer
+          format: int32
+          description: 'Maximum tasks fed into the reflective-mutation LLM per iteration. Default: 5.'
+          default: 5
+        min_improvement:
+          type: number
+          format: double
+          description: 'Minimum score improvement between iterations to continue (plateau detection). Default: 0.005.'
+          default: 0.005
+        pass_threshold:
+          type: number
+          format: double
+          description: 'Composite score threshold for a task to be considered passing. Default: 0.5.'
+          default: 0.5
+        improvement_threshold:
+          type: number
+          format: double
+          description: 'Target average score at which optimization stops early (quality ceiling). Default: 0.95.'
+          default: 0.95
+        mode:
+          allOf:
+            - $ref: '#/components/schemas/OptimizationMode'
+          description: Run mode.
+        eval_model:
+          type: string
+          description: Foundry deployment name to use as the LLM-as-judge evaluation model. Required.
+        reflection_model:
+          type: string
+          description: Optional model deployment for strategy reflection (instruction rewriting, skill generation). Falls back to `eval_model` if unset.
+        task_timeout_seconds:
+          type: integer
+          format: int32
+          description: 'Per-task timeout for agent execution. Default: 300 seconds (5 minutes).'
+          default: 300
+        keep_versions:
+          type: boolean
+          description: 'If true, retain temporary candidate-evaluation agent versions for inspection. Default: false.'
+          default: false
+      description: Tuning knobs and run-mode for an optimization job.
+    OptimizationStrategy:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - instruction
+            - model
+            - skill
+      description: Optimization strategy dimension.
+    OptimizationTaskResult:
+      type: object
+      required:
+        - task_name
+        - scores
+        - composite_score
+        - tokens
+        - duration_seconds
+        - passed
+      properties:
+        task_name:
+          type: string
+          description: Task name (from the dataset).
+        query:
+          type: string
+          description: The user query / input for the task.
+        scores:
+          type: object
+          additionalProperties:
+            type: number
+            format: double
+          description: Per-evaluator scores keyed by evaluator name.
+        composite_score:
+          type: number
+          format: double
+          description: Composite score combining all evaluator scores.
+        tokens:
+          type: integer
+          format: int32
+          description: Total tokens consumed during the agent run for this task.
+        duration_seconds:
+          type: number
+          format: double
+          description: Wall-clock seconds for this task's agent execution.
+        passed:
+          type: boolean
+          description: Whether the task met the pass threshold.
+        error_message:
+          type: string
+          description: Error message if the task failed during execution.
+        rationales:
+          type: object
+          additionalProperties:
+            type: string
+          description: Per-evaluator reasoning keyed by evaluator name.
+        response:
+          type: string
+          description: Raw agent response text.
+        run_id:
+          type: string
+          description: Identifier of the agent run that produced this result.
+      description: Per-task evaluation result for a single candidate.
     OtlpTelemetryEndpoint:
       type: object
       required:

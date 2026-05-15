@@ -108,11 +108,9 @@ model MemoryStoreDefaultOptions {
   @doc("Whether to enable chat summary extraction and storage. Default is true.")
   chat_summary_enabled: boolean = true;
 
-  @removed(Versions.v1)
   @doc("Whether to enable procedural memory extraction and storage. Default is true.")
   procedural_memory_enabled?: boolean = true;
 
-  @removed(Versions.v1)
   @doc("The default time-to-live for memories in seconds.  A value of 0 indicates that memories do not expire.")
   @encode(DurationKnownEncoding.seconds, int32)
   default_ttl_seconds?: duration = duration.fromISO("P0D");
@@ -241,7 +239,6 @@ union MemoryItemKind {
   @doc("Summary of chat conversations.")
   chat_summary: "chat_summary",
 
-  @removed(Versions.v1)
   @doc("Routine procedures extracted from conversations.")
   procedural: "procedural",
 }
@@ -280,7 +277,6 @@ model ChatSummaryMemoryItem extends MemoryItem {
   kind: MemoryItemKind.chat_summary;
 }
 
-@removed(Versions.v1)
 @doc("A memory item containing a procedure extracted from conversations.")
 model ProceduralMemoryItem extends MemoryItem {
   @doc("The kind of the memory item.")
