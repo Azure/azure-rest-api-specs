@@ -952,6 +952,7 @@ namespace Azure.AI.Projects {
     type: "toolbox_search_preview";
 
     ...ToolNameAndDescriptionExtension;
+    ...ToolConfigExtension;
   }
 
   alias MemorySearchToolCallItemBase = {
