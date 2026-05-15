@@ -53,6 +53,7 @@ alias NamespaceDevicePropertiesUpdate = {
 
 @doc("Request payload for revoking device credentials.")
 @added(Versions.v2026_03_01_preview)
+@removed(Versions.v2026_04_01)
 model DeviceCredentialsRevokeRequest {
   @doc("Indicates whether to disable the device(s) after revoking credentials. Prevents new credentials to be issued.")
   disable?: boolean;
@@ -60,6 +61,7 @@ model DeviceCredentialsRevokeRequest {
 
 @doc("Request payload for revoking device credentials.")
 @added(Versions.v2026_03_01_preview)
+@removed(Versions.v2026_04_01)
 model DeviceCredentialsRevokeResponse {
   @doc("Indicates whether revocation succeeded or failed.")
   result: string;
@@ -76,6 +78,7 @@ interface NamespaceDevices {
   // Using 'ArmCustomPatchAsync' instead of 'ArmResourcePatchAsync' to define the correct patch payload for the resource.
   // This is a workaround to fix the patch payload that otherwise will expose the 'location' field (not present in patch),
   // since otherwise it extends the ARM TrackedResource type.
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     NamespaceDevice,
@@ -88,6 +91,7 @@ interface NamespaceDevices {
   listByResourceGroup is ArmResourceListByParent<NamespaceDevice>;
 
   @added(Versions.v2026_03_01_preview)
+  @removed(Versions.v2026_04_01)
   revoke is ArmResourceActionAsync<
     NamespaceDevice,
     DeviceCredentialsRevokeRequest,

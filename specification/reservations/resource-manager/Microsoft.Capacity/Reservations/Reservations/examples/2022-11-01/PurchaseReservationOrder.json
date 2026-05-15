@@ -1,0 +1,82 @@
+{
+  "parameters": {
+    "api-version": "2022-11-01",
+    "body": {
+      "location": "westus",
+      "properties": {
+        "appliedScopeType": "Shared",
+        "appliedScopes": null,
+        "billingPlan": "Monthly",
+        "billingScopeId": "/subscriptions/ed3a1871-612d-abcd-a849-c2542a68be83",
+        "displayName": "TestReservationOrder",
+        "quantity": 1,
+        "renew": false,
+        "reservedResourceProperties": {
+          "instanceFlexibility": "On"
+        },
+        "reservedResourceType": "VirtualMachines",
+        "term": "P1Y"
+      },
+      "sku": {
+        "name": "standard_D1"
+      }
+    },
+    "reservationOrderId": "a075419f-44cc-497f-b68a-14ee811d48b9"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "1f14354c-dc12-4c8d-8090-6f295a3a34aa",
+        "type": "Microsoft.Capacity/reservationOrders",
+        "etag": 7,
+        "id": "/providers/microsoft.capacity/reservationOrders/1f14354c-dc12-4c8d-8090-6f295a3a34aa",
+        "properties": {
+          "billingPlan": "Monthly",
+          "createdDateTime": "2017-08-30T03:51:49.8083758Z",
+          "displayName": "cabri",
+          "expiryDate": "2018-08-30",
+          "expiryDateTime": "2018-08-30T03:51:49.8083758Z",
+          "originalQuantity": 7,
+          "provisioningState": "Succeeded",
+          "requestDateTime": "2017-08-30T03:49:19.0252126Z",
+          "reservations": [
+            {
+              "id": "/providers/microsoft.capacity/reservationOrders/1f14354c-dc12-4c8d-8090-6f295a3a34aa/reservations/c8c926bd-fc5d-4e29-9d43-b68340ac23a6"
+            }
+          ],
+          "term": "P1Y"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "1f14354c-dc12-4c8d-8090-6f295a3a34aa",
+        "type": "Microsoft.Capacity/reservationOrders",
+        "etag": 7,
+        "id": "/providers/microsoft.capacity/reservationOrders/1f14354c-dc12-4c8d-8090-6f295a3a34aa",
+        "properties": {
+          "billingPlan": "Monthly",
+          "createdDateTime": "2017-08-30T03:51:49.8083758Z",
+          "displayName": "cabri",
+          "expiryDate": "2018-08-30",
+          "expiryDateTime": "2018-08-30T03:51:49.8083758Z",
+          "originalQuantity": 7,
+          "provisioningState": "Succeeded",
+          "requestDateTime": "2017-08-30T03:49:19.0252126Z",
+          "reservations": [
+            {
+              "id": "/providers/microsoft.capacity/reservationOrders/1f14354c-dc12-4c8d-8090-6f295a3a34aa/reservations/c8c926bd-fc5d-4e29-9d43-b68340ac23a6"
+            }
+          ],
+          "term": "P1Y"
+        }
+      },
+      "headers": {
+        "Location": "https://management.azure.com/providers/microsoft.capacity/reservationOrders/1f14354c-dc12-4c8d-8090-6f295a3a34aa?api-version=2022-11-01",
+        "Retry-After": 120
+      }
+    }
+  },
+  "operationId": "ReservationOrder_Purchase",
+  "title": "Purchase"
+}

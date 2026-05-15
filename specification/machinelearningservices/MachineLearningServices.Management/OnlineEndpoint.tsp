@@ -26,7 +26,7 @@ model OnlineEndpoint
   /**
    * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API includes additional envelope properties"
   kind?: string;
 
   ...Azure.ResourceManager.ResourceSkuProperty;
@@ -47,16 +47,18 @@ interface OnlineEndpoints {
   @summary("Create or update Online Endpoint (asynchronous).")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     OnlineEndpoint,
-    Response = ArmResourceUpdatedResponse<OnlineEndpoint> | (ArmResourceCreatedResponse<
-      OnlineEndpoint,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = OnlineEndpoint>
-    > & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<OnlineEndpoint>
+      | (ArmResourceCreatedResponse<
+          OnlineEndpoint,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = OnlineEndpoint>
+        > & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
   >;
 
   /**
@@ -67,30 +69,35 @@ interface OnlineEndpoints {
   update is ArmCustomPatchAsync<
     OnlineEndpoint,
     PatchModel = PartialMinimalTrackedResourceWithIdentity,
-    Response = OnlineEndpoint | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OnlineEndpoint>> &
-      Azure.Core.Foundations.RetryAfterHeader & {
-        /**
-         * Timeout for the client to use when polling the asynchronous operation.
-         */
-        @header("x-ms-async-operation-timeout")
-        timeout: duration;
-      })
+    Response =
+      | OnlineEndpoint
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OnlineEndpoint>> &
+          Azure.Core.Foundations.RetryAfterHeader & {
+            /**
+             * Timeout for the client to use when polling the asynchronous operation.
+             */
+            @header("x-ms-async-operation-timeout")
+            timeout: duration;
+          })
   >;
 
   /**
    * Delete Online Endpoint (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API returns additional response codes for LRO delete"
   @summary("Delete Online Endpoint (asynchronous).")
   delete is ArmResourceDeleteWithoutOkAsync<
     OnlineEndpoint,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -178,21 +185,27 @@ interface OnlineEndpoints {
 }
 
 @@doc(OnlineEndpoint.name, "Online Endpoint name.");
-@@doc(OnlineEndpoint.properties,
+@@doc(
+  OnlineEndpoint.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(OnlineEndpoints.createOrUpdate::parameters.resource,
+@@doc(
+  OnlineEndpoints.createOrUpdate::parameters.resource,
   "Online Endpoint entity to apply during operation."
 );
-@@doc(OnlineEndpoints.update::parameters.properties,
+@@doc(
+  OnlineEndpoints.update::parameters.properties,
   "Online Endpoint entity to apply during operation."
 );
-@@doc(OnlineEndpoints.regenerateKeys::parameters.body,
+@@doc(
+  OnlineEndpoints.regenerateKeys::parameters.body,
   "RegenerateKeys request ."
 );
-@@doc(OnlineEndpoint.identity,
+@@doc(
+  OnlineEndpoint.identity,
   "Managed service identity (system assigned and/or user assigned identities)"
 );
-@@doc(OnlineEndpoint.sku,
+@@doc(
+  OnlineEndpoint.sku,
   "Sku details required for ARM contract for Autoscaling."
 );

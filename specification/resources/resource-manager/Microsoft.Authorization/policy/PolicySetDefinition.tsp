@@ -2,9 +2,11 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -247,13 +249,16 @@ interface PolicySetDefinitions {
   >;
 }
 
-@@doc(PolicySetDefinition.name,
+@@doc(
+  PolicySetDefinition.name,
   "The name of the policy set definition to get."
 );
 @@doc(PolicySetDefinition.properties, "The policy set definition properties.");
-@@doc(PolicySetDefinitions.createOrUpdate::parameters.resource,
+@@doc(
+  PolicySetDefinitions.createOrUpdate::parameters.resource,
   "The policy set definition properties."
 );
-@@doc(PolicySetDefinitions.createOrUpdateAtManagementGroup::parameters.resource,
+@@doc(
+  PolicySetDefinitions.createOrUpdateAtManagementGroup::parameters.resource,
   "The policy set definition properties."
 );

@@ -8,6 +8,7 @@ import {
   markdown,
   resourceManager,
   swagger,
+  typespec,
 } from "../../../shared/src/changed-files.js";
 import { CoreLogger } from "../core-logger.js";
 import { PullRequestChanges } from "./pr-changes.js";
@@ -136,6 +137,20 @@ function hasSignificantFileOperations(changedFilesStatuses, core) {
     return true;
   }
 
+  // New TypeSpec files are non-trivial (conservative approach)
+  const newTypeSpecFiles = changedFilesStatuses.additions.filter(typespec);
+  if (newTypeSpecFiles.length > 0) {
+    core.info(`Significant: New TypeSpec files detected: ${newTypeSpecFiles.join(", ")}`);
+    return true;
+  }
+
+  // Deleted TypeSpec files are non-trivial (conservative approach)
+  const deletedTypeSpecFiles = changedFilesStatuses.deletions.filter(typespec);
+  if (deletedTypeSpecFiles.length > 0) {
+    core.info(`Significant: Deleted TypeSpec files detected: ${deletedTypeSpecFiles.join(", ")}`);
+    return true;
+  }
+
   // Any file renames/moves are non-trivial (conservative approach)
   if (changedFilesStatuses.renames.length > 0) {
     core.info(
@@ -161,12 +176,13 @@ async function analyzeAndUpdatePullRequestChanges(changedFiles, git, core, chang
   const documentationFiles = changedFiles.filter(markdown);
   const exampleFiles = changedFiles.filter(example);
   const specFiles = changedFiles.filter(swagger);
+  const typespecFiles = changedFiles.filter(typespec);
   const otherFiles = changedFiles.filter(
-    (file) => !markdown(file) && !example(file) && !swagger(file),
+    (file) => !markdown(file) && !example(file) && !swagger(file) && !typespec(file),
   );
 
   core.info(
-    `File breakdown: ${documentationFiles.length} docs, ${exampleFiles.length} examples, ${specFiles.length} specs, ${otherFiles.length} other`,
+    `File breakdown: ${documentationFiles.length} docs, ${exampleFiles.length} examples, ${specFiles.length} specs, ${typespecFiles.length} typespec, ${otherFiles.length} other`,
   );
 
   // Set flags for file types present
@@ -176,6 +192,10 @@ async function analyzeAndUpdatePullRequestChanges(changedFiles, git, core, chang
 
   if (exampleFiles.length > 0) {
     changes.rmExamples = true;
+  }
+
+  if (typespecFiles.length > 0) {
+    changes.rmTypeSpec = true;
   }
 
   if (otherFiles.length > 0) {

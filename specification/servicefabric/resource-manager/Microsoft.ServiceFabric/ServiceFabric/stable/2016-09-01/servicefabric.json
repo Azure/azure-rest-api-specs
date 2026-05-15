@@ -83,7 +83,10 @@
             }
           },
           "202": {
-            "description": "Accepted - Update request accepted; the operation will complete asynchronously."
+            "description": "The request was accepted and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
           },
           "default": {
             "description": "Error",
@@ -503,6 +506,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorModel"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List available operations": {
+            "$ref": "./examples/Operations_example.json"
           }
         },
         "x-ms-pageable": {

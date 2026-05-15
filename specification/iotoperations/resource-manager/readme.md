@@ -99,7 +99,7 @@ These are the global settings for the IoTOperations.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-07-01-preview
+tag: package-2026-03-01
 ```
 
 ### Tag: package-2024-07-01-preview
@@ -163,4 +163,13 @@ These settings apply only when `--tag=package-2025-10-01` is specified on the co
 ```yaml $(tag) == 'package-2025-10-01'
 input-file:
   - Microsoft.IoTOperations/stable/2025-10-01/iotoperations.json
+```
+
+### Tag: package-2026-03-01
+
+These settings apply only when `--tag=package-2026-03-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-03-01'
+input-file:
+  - Microsoft.IoTOperations/stable/2026-03-01/iotoperations.json
 ```

@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2025-08-01-preview",
+    "clusterName": "cache1",
+    "body": {
+      "sourceResourceId": "/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/resourceGroups/rg1/providers/Microsoft.Cache/redis/cache1",
+      "skipDataMigration": true,
+      "forceMigrate": false
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "isValid": false,
+        "errors": [
+          {
+            "disparities": [
+              {
+                "category": "TLS",
+                "message": "The source resource only accepts TLS connections, but the target resource only accepts non-TLS connections."
+              }
+            ]
+          }
+        ],
+        "warnings": [
+          {
+            "disparities": [
+              {
+                "category": "Managed Identity",
+                "message": "The source resource has a system-assigned managed identity. Managed identities are not copied as part of migration."
+              },
+              {
+                "category": "Persistence",
+                "message": "The source resource has RDB persistence enabled. Persistence settings are not copied as part of migration."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Migrations_Validate",
+  "title": "RedisEnterpriseMigrationValidate"
+}

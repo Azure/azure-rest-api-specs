@@ -6,68 +6,89 @@ using Azure.ResourceManager.Foundations;
 using Microsoft.FileShares;
 
 @@clientName(Microsoft.FileShares, "FileSharesManagementClient", "java");
+@@clientName(Microsoft.FileShares, "FileSharesMgmtClient", "python");
 
 @@scope(Operations.list, "!csharp");
 @@clientName(Microsoft.FileShares.FileShares, "FileSharesInterface", "csharp");
-@@clientName(CheckNameAvailabilityRequest,
+@@clientName(
+  CheckNameAvailabilityRequest,
   "FileShareNameAvailabilityContent",
   "csharp"
 );
-@@clientName(CheckNameAvailabilityResponse,
+@@clientName(
+  CheckNameAvailabilityResponse,
   "FileShareNameAvailabilityResult",
   "csharp"
 );
-@@clientName(CheckNameAvailabilityResponse.nameAvailable,
+@@clientName(
+  CheckNameAvailabilityResponse.nameAvailable,
   "IsNameAvailable",
   "csharp"
 );
-@@clientName(CheckNameAvailabilityReason,
+@@clientName(
+  CheckNameAvailabilityReason,
   "FileShareNameUnavailableReason",
   "csharp"
 );
-@@clientName(FileShares.checkNameAvailability,
+@@clientName(
+  FileShares.checkNameAvailability,
   "CheckFileShareNameAvailability",
   "csharp"
 );
 @@clientName(FileShareLimitsResponse, "FileShareLimitsResult", "csharp");
-@@clientName(FileShareProvisioningRecommendationResponse,
+@@clientName(
+  FileShareProvisioningRecommendationResponse,
   "FileShareProvisioningRecommendationResult",
   "csharp"
 );
-@@clientName(FileShareProvisioningRecommendationOutput,
+@@clientName(
+  FileShareProvisioningRecommendationOutput,
   "FileShareProvisioningRecommendationOutputProperties",
   "csharp"
 );
 @@clientName(FileShareUsageDataResponse, "FileShareUsageDataResult", "csharp");
-@@clientName(FileShareUsageDataOutput,
+@@clientName(
+  FileShareUsageDataOutput,
   "FileShareUsageDataProperties",
   "csharp"
 );
-@@clientName(FileShareProperties.provisionedStorageGiB,
+@@clientName(
+  FileShareProperties.provisionedStorageGiB,
   "ProvisionedStorageInGiB",
   "csharp"
 );
-@@clientName(FileShareProperties.provisionedStorageNextAllowedDowngrade,
+@@clientName(
+  FileShareProperties.provisionedStorageNextAllowedDowngrade,
   "ProvisionedStorageNextAllowedDowngradeOn",
   "csharp"
 );
-@@clientName(FileShareProperties.provisionedIOPerSecNextAllowedDowngrade,
+@@clientName(
+  FileShareProperties.provisionedIOPerSecNextAllowedDowngrade,
   "ProvisionedIOPerSecNextAllowedDowngradeOn",
   "csharp"
 );
-@@clientName(FileShareProperties.provisionedThroughputNextAllowedDowngrade,
+@@clientName(
+  FileShareProperties.provisionedThroughputNextAllowedDowngrade,
   "ProvisionedThroughputNextAllowedDowngradeOn",
   "csharp"
 );
-@@clientName(FileShareProvisioningRecommendationRequest,
+@@clientName(
+  FileShareProvisioningRecommendationRequest,
   "FileShareProvisioningRecommendationContent",
   "csharp"
 );
-@@clientName(FileShareProvisioningRecommendationInput,
+@@clientName(
+  FileShareProvisioningRecommendationInput,
   "FileShareProvisioningRecommendationInputProperties",
   "csharp"
 );
-@@clientName(FileShareProvisioningRecommendationInput.provisionedStorageGiB,
+@@clientName(
+  FileShareProvisioningRecommendationInput.provisionedStorageGiB,
+  "ProvisionedStorageInGiB",
+  "csharp"
+);
+@@clientName(
+  FileSharePatchProperties.provisionedStorageGiB,
   "ProvisionedStorageInGiB",
   "csharp"
 );
@@ -77,19 +98,34 @@ using Microsoft.FileShares;
 @@clientName(Redundancy, "FileShareRedundancyLevel", "csharp");
 @@clientName(Protocol, "FileShareProtocol", "csharp");
 @@clientName(Protocol.NFS, "Nfs", "csharp");
-@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProperties,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProperties,
   "FileSharePrivateEndpointConnectionProperties",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.PrivateLinkServiceConnectionState,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.PrivateLinkServiceConnectionState,
   "FileSharePrivateLinkServiceConnectionState",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProvisioningState,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProvisioningState,
   "FileSharePrivateEndpointConnectionProvisioningState",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.PrivateEndpointConnection,
+@@clientName(
+  Azure.ResourceManager.PrivateEndpointConnection,
+  "FileSharePrivateEndpointConnection",
+  "csharp"
+);
+@@clientName(PrivateLinkResource, "FileSharePrivateLinkResource", "csharp");
+@@clientName(
+  PrivateLinkResourceProperties,
+  "FileSharePrivateLinkResourceProperties",
+  "csharp"
+);
+@@clientName(
+  PrivateEndpointConnection,
   "FileSharePrivateEndpointConnection",
   "csharp"
 );

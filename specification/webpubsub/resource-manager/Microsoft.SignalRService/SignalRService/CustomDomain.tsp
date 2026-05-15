@@ -41,10 +41,12 @@ interface CustomDomains {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     CustomDomain,
-    Response = ArmResourceCreatedResponse<
-      CustomDomain,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = CustomDomain>
-    > | ErrorResponse
+    Response =
+      | ArmResourceCreatedResponse<
+          CustomDomain,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = CustomDomain>
+        >
+      | ErrorResponse
   >;
 
   /**

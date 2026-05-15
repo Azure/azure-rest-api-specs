@@ -29,10 +29,9 @@ op AtlasOperation<
   TParams extends TypeSpec.Reflection.Model,
   TResponse,
   Traits extends TypeSpec.Reflection.Model = {}
->(
-  ...TraitProperties<Traits, TraitLocation.ApiVersionParameter>,
-  ...TParams,
-): TResponse | AtlasErrorResponse;
+>(...TraitProperties<Traits, TraitLocation.ApiVersionParameter>, ...TParams):
+  | TResponse
+  | AtlasErrorResponse;
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
 op AtlasRpcOperation<
@@ -308,6 +307,10 @@ interface Entity {
       @doc("The name of the classification.")
       @path
       classificationName: string;
+
+      @doc("To prevent classification changes from being overridden during regular scans, set this parameter to true. The default value is false.")
+      @query
+      suppressDeletedClassification?: boolean;
     },
     void,
     {}

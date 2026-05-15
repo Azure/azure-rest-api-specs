@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./RaiBlocklistPropertiesBasicResource.tsp";
 
@@ -9,9 +10,16 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.MachineLearningServices;
 
+/**
+ * RaiBlocklistItemPropertiesBasicResource is a preview-only resource.
+ */
+@removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
 @parentResource(RaiBlocklistPropertiesBasicResource)
 model RaiBlocklistItemPropertiesBasicResource
   is Azure.ResourceManager.ProxyResource<RaiBlocklistItemProperties, false> {
@@ -23,6 +31,12 @@ model RaiBlocklistItemPropertiesBasicResource
   >;
 }
 
+/**
+ * RaiBlocklistItemPropertiesBasicResources interface is preview-only.
+ */
+@removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
 @armResourceOperations
 interface RaiBlocklistItemPropertiesBasicResources {
   /**
@@ -68,10 +82,12 @@ interface RaiBlocklistItemPropertiesBasicResources {
   >;
 }
 
-@@doc(RaiBlocklistItemPropertiesBasicResource.name,
+@@doc(
+  RaiBlocklistItemPropertiesBasicResource.name,
   "Name of the RaiBlocklist Item"
 );
-@@doc(RaiBlocklistItemPropertiesBasicResource.properties,
+@@doc(
+  RaiBlocklistItemPropertiesBasicResource.properties,
   "RAI Custom Blocklist Item properties."
 );
 @@doc(RaiBlocklistItemPropertiesBasicResources.create::parameters.resource, "");

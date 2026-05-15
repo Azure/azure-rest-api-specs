@@ -14,6 +14,12 @@ namespace Microsoft.DurableTask;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+model SchedulerPrivateLinkResource is PrivateLink;
+alias PrivateLinkOperations = PrivateLinks<SchedulerPrivateLinkResource>;
+
+model PrivateEndpointConnection is PrivateEndpointConnectionResource;
+alias PrivateEndpointOperations = PrivateEndpoints<PrivateEndpointConnection>;
+
 @doc("API Versions")
 enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -27,6 +33,10 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   @doc("2025-11-01")
   v2025_11_01: "2025-11-01",
+
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  @doc("2026-02-01")
+  v2026_02_01: "2026-02-01",
 }
 
 @doc("A Durable Task Scheduler resource")
@@ -56,6 +66,15 @@ model SchedulerProperties {
 
   @doc("SKU of the durable task scheduler")
   sku: SchedulerSku;
+
+  @added(Versions.v2026_02_01)
+  @doc("Allow or disallow public network access to durable task scheduler")
+  publicNetworkAccess?: PublicNetworkAccess;
+
+  /** The private endpoints exposed by this resource */
+  @added(Versions.v2026_02_01)
+  @visibility(Lifecycle.Read)
+  privateEndpointConnections?: PrivateEndpointConnection[];
 }
 
 @doc("The SKU (Stock Keeping Unit) assigned to this durable task scheduler")
@@ -155,6 +174,18 @@ model RetentionPolicyDetails {
   orchestrationState?: PurgeableOrchestrationState;
 }
 
+@doc("State of the public network access.")
+@added(Versions.v2026_02_01)
+union PublicNetworkAccess {
+  string,
+
+  @doc("The public network access is enabled")
+  Enabled: "Enabled",
+
+  @doc("The public network access is disabled")
+  Disabled: "Disabled",
+}
+
 @doc("Purgeable orchestration state to be used in retention policies")
 @added(Versions.v2025_04_01_Preview)
 union PurgeableOrchestrationState {
@@ -211,6 +242,10 @@ model SchedulerPropertiesUpdate {
 
   @doc("SKU of the durable task scheduler")
   sku?: SchedulerSkuUpdate;
+
+  @added(Versions.v2026_02_01)
+  @doc("Allow or disallow public network access to durable task scheduler")
+  publicNetworkAccess?: PublicNetworkAccess;
 }
 
 @doc("The SKU (Stock Keeping Unit) properties to be updated")
@@ -244,6 +279,29 @@ interface Schedulers {
   listByResourceGroup is ArmResourceListByParent<Scheduler>;
   @doc("List Schedulers by subscription")
   listBySubscription is ArmListBySubscription<Scheduler>;
+
+  @added(Versions.v2026_02_01)
+  @doc("Get a private link resource for the durable task scheduler")
+  getPrivateLink is PrivateLinkOperations.Read<Scheduler>;
+  @added(Versions.v2026_02_01)
+  @doc("List private link resources for the durable task scheduler")
+  listPrivateLinks is PrivateLinkOperations.ListByParent<Scheduler>;
+
+  @added(Versions.v2026_02_01)
+  @doc("Get a private endpoint connection for the durable task scheduler")
+  getPrivateEndpointConnection is PrivateEndpointOperations.Read<Scheduler>;
+  @added(Versions.v2026_02_01)
+  @doc("Create or update a private endpoint connection for the durable task scheduler")
+  createOrUpdatePrivateEndpointConnection is PrivateEndpointOperations.CreateOrUpdateAsync<Scheduler>;
+  @added(Versions.v2026_02_01)
+  @doc("Update a private endpoint connection for the durable task scheduler")
+  updatePrivateEndpointConnection is PrivateEndpointOperations.CustomPatchAsync<Scheduler>;
+  @added(Versions.v2026_02_01)
+  @doc("Delete a private endpoint connection for the durable task scheduler")
+  deletePrivateEndpointConnection is PrivateEndpointOperations.DeleteAsync<Scheduler>;
+  @added(Versions.v2026_02_01)
+  @doc("List private endpoint connections for the durable task scheduler")
+  listPrivateEndpointConnections is PrivateEndpointOperations.ListByParent<Scheduler>;
 }
 
 @armResourceOperations(TaskHub)

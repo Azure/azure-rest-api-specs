@@ -92,33 +92,38 @@ interface DataContainers {
   @summary("Create or update container.")
   createOrUpdate is DataContainerwithNamePatternOps.CreateOrUpdateAsync<
     DataContainer,
-    Response = ArmResourceUpdatedResponse<DataContainer> | (ArmResourceCreatedResponse<
-      DataContainer,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = DataContainer> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<DataContainer>
+      | (ArmResourceCreatedResponse<
+          DataContainer,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = DataContainer> &
+            Azure.Core.Foundations.RetryAfterHeader
+        > & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
   >;
 
   /**
    * Delete container.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API returns additional response codes for LRO delete"
   @summary("Delete container.")
   delete is DataContainerOps.DeleteWithoutOkAsync<
     DataContainer,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -212,12 +217,15 @@ interface DataContainerOperationGroup {
 }
 
 @@doc(DataContainer.name, "Container name.");
-@@doc(DataContainer.properties,
+@@doc(
+  DataContainer.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(DataContainers.createOrUpdate::parameters.resource,
+@@doc(
+  DataContainers.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );
-@@doc(DataContainerOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  DataContainerOperationGroup.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );

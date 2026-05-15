@@ -66,32 +66,34 @@ interface ModelContainers {
   @summary("Create or update model container.")
   createOrUpdate is ModelContainerOps.CreateOrUpdateAsync<
     ModelContainer,
-    Response = ArmResourceUpdatedResponse<ModelContainer> | (ArmResourceCreatedResponse<
-      ModelContainer,
-      ArmAsyncOperationHeader
-    > & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<ModelContainer>
+      | (ArmResourceCreatedResponse<ModelContainer, ArmAsyncOperationHeader> & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
   >;
 
   /**
    * Delete container.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API returns additional response codes for LRO delete"
   @summary("Delete container.")
   delete is ModelContainerOps.DeleteWithoutOkAsync<
     ModelContainer,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -191,12 +193,15 @@ interface ModelContainerOperationGroup {
 }
 
 @@doc(ModelContainer.name, "Container name. This is case-sensitive.");
-@@doc(ModelContainer.properties,
+@@doc(
+  ModelContainer.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(ModelContainers.createOrUpdate::parameters.resource,
+@@doc(
+  ModelContainers.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );
-@@doc(ModelContainerOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  ModelContainerOperationGroup.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );

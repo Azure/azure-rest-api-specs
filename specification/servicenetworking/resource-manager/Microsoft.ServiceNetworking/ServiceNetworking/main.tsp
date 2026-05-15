@@ -318,7 +318,6 @@ interface AssociationsInterface {
     Association,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<Association, AssociationUpdate>;
   delete is ArmResourceDeleteWithoutOkAsync<Association>;
   listByTrafficController is ArmResourceListByParent<Association>;
@@ -333,6 +332,7 @@ interface FrontendsInterface {
     Frontend,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     Frontend,
@@ -355,6 +355,7 @@ interface SecurityPoliciesInterface {
     SecurityPolicy,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     SecurityPolicy,
@@ -376,6 +377,7 @@ interface TrafficControllerInterface {
     TrafficController,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     TrafficController,

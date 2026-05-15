@@ -1,6 +1,7 @@
 {
   "parameters": {
-    "endpoint": "https://myservice.search.windows.net",
+    "searchServiceName": "myservice",
+    "searchDnsSuffix": "search.windows.net",
     "skillsetName": "demoskillset",
     "api-version": "2019-05-06-Preview",
     "Prefer": "return=representation",
@@ -109,53 +110,7 @@
           ],
           "httpHeaders": {}
         }
-      ],
-      "knowledgeStore": {
-        "storageConnectionString": "DefaultEndpointsProtocol=https;AccountName=myStorage;AccountKey=myStorageKey;EndpointSuffix=core.windows.net",
-        "projections": [
-          {
-            "tables": [
-              {
-                "tableName": "Reviews",
-                "generatedKeyName": "ReviewId",
-                "source": "/document/Review",
-                "sourceContext": null,
-                "inputs": []
-              },
-              {
-                "tableName": "Sentences",
-                "generatedKeyName": "SentenceId",
-                "source": "/document/Review/Sentences/*",
-                "sourceContext": null,
-                "inputs": []
-              },
-              {
-                "tableName": "KeyPhrases",
-                "generatedKeyName": "KeyPhraseId",
-                "source": "/document/Review/Sentences/*/KeyPhrases",
-                "sourceContext": null,
-                "inputs": []
-              },
-              {
-                "tableName": "Entities",
-                "generatedKeyName": "EntityId",
-                "source": "/document/Review/Sentences/*/Entities/*",
-                "sourceContext": null,
-                "inputs": []
-              }
-            ]
-          },
-          {
-            "objects": [
-              {
-                "storageContainer": "Reviews",
-                "source": "/document/Review",
-                "generatedKeyName": "/document/Review/Id"
-              }
-            ]
-          }
-        ]
-      }
+      ]
     }
   },
   "responses": {

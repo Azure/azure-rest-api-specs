@@ -41,11 +41,12 @@ alias DiagnosticsOps = Azure.ResourceManager.Legacy.RoutedOperations<
     name: string;
   },
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/hostingEnvironments",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments",
   }
 >;
 
-@armResourceOperations(#{ allowStaticRoutes: true })
+@tag("AppServiceEnvironments")
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface AppServiceEnvironmentResources {
   /**
    * Description for Get the properties of an App Service Environment.
@@ -64,15 +65,18 @@ interface AppServiceEnvironmentResources {
   @summary("Create or update an App Service Environment.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AppServiceEnvironmentResource,
-    Response = ArmResourceUpdatedResponse<AppServiceEnvironmentResource> | ArmResourceCreatedResponse<
-      AppServiceEnvironmentResource,
-      ArmLroLocationHeader<FinalResult = AppServiceEnvironmentResource> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = AppServiceEnvironmentResource>> &
-      Azure.Core.Foundations.RetryAfterHeader & {
-        @bodyRoot
-        _: AppServiceEnvironmentResource;
-      }),
+    Response =
+      | ArmResourceUpdatedResponse<AppServiceEnvironmentResource>
+      | ArmResourceCreatedResponse<
+          AppServiceEnvironmentResource,
+          ArmLroLocationHeader<FinalResult = AppServiceEnvironmentResource> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = AppServiceEnvironmentResource>> &
+          Azure.Core.Foundations.RetryAfterHeader & {
+            @bodyRoot
+            _: AppServiceEnvironmentResource;
+          }),
     Error = DefaultErrorResponse
   >;
 
@@ -86,10 +90,13 @@ interface AppServiceEnvironmentResources {
   update is ArmCustomPatchSync<
     AppServiceEnvironmentResource,
     PatchModel = AppServiceEnvironmentPatchResource,
-    Response = ArmResponse<AppServiceEnvironmentResource> | ArmResourceCreatedSyncResponse<AppServiceEnvironmentResource> | (AcceptedResponse & {
-      @bodyRoot
-      _: AppServiceEnvironmentResource;
-    }),
+    Response =
+      | ArmResponse<AppServiceEnvironmentResource>
+      | ArmResourceCreatedSyncResponse<AppServiceEnvironmentResource>
+      | (AcceptedResponse & {
+          @bodyRoot
+          _: AppServiceEnvironmentResource;
+        }),
     Error = DefaultErrorResponse
   >;
 
@@ -153,10 +160,12 @@ interface AppServiceEnvironmentResources {
   changeVnet is Azure.ResourceManager.ArmResourceActionAsyncBase<
     AppServiceEnvironmentResource,
     VirtualNetworkProfile,
-    ArmResponse<WebAppCollection> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WebAppCollection>> & {
-      @bodyRoot
-      _: WebAppCollection;
-    }),
+
+      | ArmResponse<WebAppCollection>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WebAppCollection>> & {
+          @bodyRoot
+          _: WebAppCollection;
+        }),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<WebAppCollection>,
     Error = DefaultErrorResponse
   >;
@@ -179,7 +188,7 @@ interface AppServiceEnvironmentResources {
    */
   @summary("Get a diagnostics item for an App Service Environment.")
   @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/hostingEnvironments/{name}/diagnostics/{diagnosticsName}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/diagnostics/{diagnosticsName}")
   getDiagnosticsItem is DiagnosticsOps.ActionSync<
     AppServiceEnvironmentResource,
     void,
@@ -294,10 +303,12 @@ interface AppServiceEnvironmentResources {
   resume is ArmResourceActionAsyncBase<
     AppServiceEnvironmentResource,
     void,
-    ArmResponse<WebAppCollection> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WebAppCollection>> & {
-      @bodyRoot
-      _: WebAppCollection;
-    }),
+
+      | ArmResponse<WebAppCollection>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WebAppCollection>> & {
+          @bodyRoot
+          _: WebAppCollection;
+        }),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AppServiceEnvironmentResource>,
     Error = DefaultErrorResponse
   >;
@@ -346,10 +357,12 @@ interface AppServiceEnvironmentResources {
   suspend is ArmResourceActionAsyncBase<
     AppServiceEnvironmentResource,
     void,
-    ArmResponse<WebAppCollection> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WebAppCollection>> & {
-      @bodyRoot
-      _: WebAppCollection;
-    }),
+
+      | ArmResponse<WebAppCollection>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WebAppCollection>> & {
+          @bodyRoot
+          _: WebAppCollection;
+        }),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AppServiceEnvironmentResource>,
     Error = DefaultErrorResponse
   >;
@@ -374,7 +387,11 @@ interface AppServiceEnvironmentResources {
     },
     Error = DefaultErrorResponse
   >;
+}
 
+@tag("Recommendations")
+@armResourceOperations(#{ omitTags: true })
+interface AppServiceEnvironmentRecommendations {
   /**
    * Description for Get past recommendations for an app, optionally specified by the time range.
    */
@@ -488,16 +505,20 @@ interface AppServiceEnvironmentResources {
   >;
 }
 
-@@doc(AppServiceEnvironmentResource.name,
+@@doc(
+  AppServiceEnvironmentResource.name,
   "Name of the App Service Environment."
 );
 @@doc(AppServiceEnvironmentResource.properties, "Core resource properties");
-@@doc(AppServiceEnvironmentResources.createOrUpdate::parameters.resource,
+@@doc(
+  AppServiceEnvironmentResources.createOrUpdate::parameters.resource,
   "Configuration details of the App Service Environment."
 );
-@@doc(AppServiceEnvironmentResources.update::parameters.properties,
+@@doc(
+  AppServiceEnvironmentResources.update::parameters.properties,
   "Configuration details of the App Service Environment."
 );
-@@doc(AppServiceEnvironmentResources.changeVnet::parameters.body,
+@@doc(
+  AppServiceEnvironmentResources.changeVnet::parameters.body,
   "Details for the new virtual network."
 );

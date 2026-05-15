@@ -12,14 +12,16 @@ using Azure.Core;
 @service(#{ title: "Azure.AI.DocumentTranslation" })
 @versioned(DocumentTranslation.Versions)
 @useAuth(
-  ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | OAuth2Auth<[
-    {
-      type: OAuth2FlowType.authorizationCode,
-      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
-      tokenUrl: "https://login.microsoftonline.com/common/oauth2/token",
-      scopes: ["https://cognitiveservices.azure.com/.default"],
-    }
-  ]>
+
+    | ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">
+    | OAuth2Auth<[
+        {
+          type: OAuth2FlowType.authorizationCode,
+          authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
+          tokenUrl: "https://login.microsoftonline.com/common/oauth2/token",
+          scopes: ["https://cognitiveservices.azure.com/.default"],
+        }
+      ]>
 )
 @server(
   "{endpoint}/translator",
@@ -37,4 +39,5 @@ namespace DocumentTranslation;
 enum Versions {
   v2024_05_01: "2024-05-01",
   v2024_11_01_preview: "2024-11-01-preview",
+  v2025_12_01_preview: "2025-12-01-preview",
 }

@@ -132,7 +132,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "body",
@@ -178,7 +178,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "body",
@@ -224,7 +224,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "body",
@@ -270,7 +270,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "body",
@@ -405,7 +405,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           }
         ],
         "responses": {
@@ -523,7 +523,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "body",
@@ -588,7 +588,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           }
         ],
         "responses": {
@@ -2997,6 +2997,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -3021,7 +3026,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
+          "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/SvmPeerCommandResponse"
         },
         "x-ms-long-running-operation": true
@@ -3995,6 +4000,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -4019,7 +4029,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
+          "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/ClusterPeerCommandResponse"
         },
         "x-ms-long-running-operation": true
@@ -8592,9 +8602,25 @@
       "type": "object",
       "description": "Information about cluster peering process",
       "properties": {
-        "peerAcceptCommand": {
+        "properties": {
+          "$ref": "#/definitions/ClusterPeerCommandResponseProperties",
+          "description": "Represents the properties of the cluster peer command response."
+        }
+      }
+    },
+    "ClusterPeerCommandResponseProperties": {
+      "type": "object",
+      "description": "Properties of the cluster peer command response.",
+      "properties": {
+        "clusterPeeringCommand": {
           "type": "string",
-          "description": "A command that needs to be run on the external ONTAP to accept cluster peering.  Will only be present if <code>clusterPeeringStatus</code> is <code>pending</code>"
+          "description": "ClusterPeeringCommand to run to accept cluster peer. Will only be present if <code>clusterPeeringStatus</code> is <code>pending</code>.",
+          "example": "cluster peer create -peer-addresses 10.0.0.1,10.0.0.2"
+        },
+        "passphrase": {
+          "type": "string",
+          "description": "Passphrase for use with cluster peer command",
+          "example": "SecurePassphrase123"
         }
       }
     },
@@ -8732,7 +8758,7 @@
         },
         "federatedClientId": {
           "type": "string",
-          "description": "ClientId of the multi-tenant AAD Application. Used to access cross-tenant keyvaults."
+          "description": "ClientId of the multi-tenant Entra ID Application. Used to access cross-tenant keyvaults."
         }
       }
     },
@@ -10083,6 +10109,42 @@
         "resourceGroup"
       ]
     },
+    "QuotaType": {
+      "type": "string",
+      "description": "Type of quota",
+      "enum": [
+        "DefaultUserQuota",
+        "DefaultGroupQuota",
+        "IndividualUserQuota",
+        "IndividualGroupQuota"
+      ],
+      "x-ms-enum": {
+        "name": "QuotaType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DefaultUserQuota",
+            "value": "DefaultUserQuota",
+            "description": "Default user quota"
+          },
+          {
+            "name": "DefaultGroupQuota",
+            "value": "DefaultGroupQuota",
+            "description": "Default group quota"
+          },
+          {
+            "name": "IndividualUserQuota",
+            "value": "IndividualUserQuota",
+            "description": "Individual user quota"
+          },
+          {
+            "name": "IndividualGroupQuota",
+            "value": "IndividualGroupQuota",
+            "description": "Individual group quota"
+          }
+        ]
+      }
+    },
     "ReestablishReplicationRequest": {
       "type": "object",
       "description": "Re-establish request object supplied in the body of the operation.",
@@ -10284,10 +10346,7 @@
           "type": "string",
           "description": "The remote region for the other end of the Volume Replication."
         }
-      },
-      "required": [
-        "remoteVolumeResourceId"
-      ]
+      }
     },
     "ReplicationObject": {
       "type": "object",
@@ -11053,46 +11112,20 @@
       "type": "object",
       "description": "Information about svm peering process",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/SvmPeerCommandResponseProperties",
+          "description": "Represents the properties of the SVM peer command response."
+        }
+      }
+    },
+    "SvmPeerCommandResponseProperties": {
+      "type": "object",
+      "description": "Properties of the SVM peer command response.",
+      "properties": {
         "svmPeeringCommand": {
           "type": "string",
           "description": "A command that needs to be run on the external ONTAP to accept svm peering.  Will only be present if <code>svmPeeringStatus</code> is <code>pending</code>"
         }
-      }
-    },
-    "Type": {
-      "type": "string",
-      "description": "Type of quota",
-      "enum": [
-        "DefaultUserQuota",
-        "DefaultGroupQuota",
-        "IndividualUserQuota",
-        "IndividualGroupQuota"
-      ],
-      "x-ms-enum": {
-        "name": "Type",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "DefaultUserQuota",
-            "value": "DefaultUserQuota",
-            "description": "Default user quota"
-          },
-          {
-            "name": "DefaultGroupQuota",
-            "value": "DefaultGroupQuota",
-            "description": "Default group quota"
-          },
-          {
-            "name": "IndividualUserQuota",
-            "value": "IndividualUserQuota",
-            "description": "Individual user quota"
-          },
-          {
-            "name": "IndividualGroupQuota",
-            "value": "IndividualGroupQuota",
-            "description": "Individual group quota"
-          }
-        ]
       }
     },
     "UnixPermissions": {
@@ -12467,7 +12500,7 @@
           "description": "Size of quota"
         },
         "quotaType": {
-          "$ref": "#/definitions/Type",
+          "$ref": "#/definitions/QuotaType",
           "description": "Type of quota",
           "x-ms-mutability": [
             "read",

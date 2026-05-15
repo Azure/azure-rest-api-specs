@@ -15,40 +15,48 @@ namespace Microsoft.Resources.DeploymentStacks;
 
 // Interface for all what-if operations for deployment stacks.
 @added(Versions.v2025_07_01)
-interface DeploymentStackWhatIfCommon<TBaseParams extends TypeSpec.Reflection.Model> {
+interface DeploymentStackWhatIfCommon<
+  Scope extends Azure.ResourceManager.Foundations.SimpleResource,
+  ResourceName extends valueof string = ""
+> {
   /** Gets the Deployment stack with the given name. */
-  get is ArmResourceRead<
+  get is Extension.Read<
+    Scope,
     DeploymentStacksWhatIfResult,
-    BaseParameters = TBaseParams
+    OverrideResourceName = ResourceName
   >;
 
   /** Lists Deployment stacks at the specified scope. */
-  list is ArmResourceListByParent<
+  list is Extension.ListByTarget<
+    Scope,
     DeploymentStacksWhatIfResult,
-    BaseParameters = TBaseParams
+    OverrideResourceName = ResourceName
   >;
 
   /** Creates or updates a Deployment stack at the specified scope. */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is Extension.CreateOrReplaceAsync<
+    Scope,
     DeploymentStacksWhatIfResult,
-    BaseParameters = TBaseParams
+    OverrideResourceName = ResourceName
   >;
 
   /** Deletes a Deployment stack by name at the specified scope. When operation completes, status code 200 returned without content. */
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is Extension.DeleteWithoutOkAsync<
+    Scope,
     DeploymentStacksWhatIfResult,
-    BaseParameters = TBaseParams,
+    OverrideResourceName = ResourceName,
     Parameters = ActionOnUnmanageDeleteParameters,
     Response = ArmDeletedResponse | ArmDeletedNoContentResponse
   >;
 
   /** Returns property-level changes that will be made by the deployment if executed. */
   @action("whatIf")
-  whatIf is ArmResourceActionAsync<
+  whatIf is Extension.ActionAsync<
+    Scope,
     DeploymentStacksWhatIfResult,
     void,
     DeploymentStacksWhatIfResult,
-    BaseParameters = TBaseParams
+    OverrideResourceName = ResourceName
   >;
 }
 
@@ -56,16 +64,16 @@ interface DeploymentStackWhatIfCommon<TBaseParams extends TypeSpec.Reflection.Mo
 @added(Versions.v2025_07_01)
 @tag("DeploymentStacksWhatIfResultsAtResourceGroup")
 interface DeploymentStacksWhatIfResultsAtResourceGroup
-  extends DeploymentStackWhatIfCommon<ResourceGroupBaseParameters> {}
+  extends DeploymentStackWhatIfCommon<Extension.ResourceGroup> {}
 
 @armResourceOperations
 @added(Versions.v2025_07_01)
 @tag("DeploymentStacksWhatIfResultsAtSubscription")
 interface DeploymentStacksWhatIfResultsAtSubscription
-  extends DeploymentStackWhatIfCommon<SubscriptionBaseParameters> {}
+  extends DeploymentStackWhatIfCommon<Extension.Subscription> {}
 
 @armResourceOperations
 @added(Versions.v2025_07_01)
 @tag("DeploymentStacksWhatIfResultsAtManagementGroup")
 interface DeploymentStacksWhatIfResultsAtManagementGroup
-  extends DeploymentStackWhatIfCommon<ManagementGroupIdBaseParameters> {}
+  extends DeploymentStackWhatIfCommon<Extension.ManagementGroup<"managementGroupId">> {}

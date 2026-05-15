@@ -96,33 +96,38 @@ interface FeaturesetVersions {
   @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     FeaturesetVersion,
-    Response = ArmResourceUpdatedResponse<FeaturesetVersion> | (ArmResourceCreatedResponse<
-      FeaturesetVersion,
-      LroHeaders = ArmAsyncOperationHeader
-    > &
-      Azure.Core.Foundations.RetryAfterHeader & {
-        /**
-         * Timeout for the client to use when polling the asynchronous operation.
-         */
-        @header("x-ms-async-operation-timeout")
-        timeout: duration;
-      })
+    Response =
+      | ArmResourceUpdatedResponse<FeaturesetVersion>
+      | (ArmResourceCreatedResponse<
+          FeaturesetVersion,
+          LroHeaders = ArmAsyncOperationHeader
+        > &
+          Azure.Core.Foundations.RetryAfterHeader & {
+            /**
+             * Timeout for the client to use when polling the asynchronous operation.
+             */
+            @header("x-ms-async-operation-timeout")
+            timeout: duration;
+          })
   >;
 
   /**
    * Delete version.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API returns additional response codes for LRO delete"
   @summary("Delete version.")
   delete is ArmResourceDeleteWithoutOkAsync<
     FeaturesetVersion,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -147,12 +152,15 @@ interface FeaturesetVersions {
 }
 
 @@doc(FeaturesetVersion.name, "Version identifier. This is case-sensitive.");
-@@doc(FeaturesetVersion.properties,
+@@doc(
+  FeaturesetVersion.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(FeaturesetVersions.createOrUpdate::parameters.resource,
+@@doc(
+  FeaturesetVersions.createOrUpdate::parameters.resource,
   "Version entity to create or update."
 );
-@@doc(FeaturesetVersions.backfill::parameters.body,
+@@doc(
+  FeaturesetVersions.backfill::parameters.body,
   "Feature set version backfill request entity."
 );

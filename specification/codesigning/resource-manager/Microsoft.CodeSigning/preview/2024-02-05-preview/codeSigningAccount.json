@@ -77,7 +77,7 @@
           }
         },
         "x-ms-examples": {
-          "List trusted signing account operations.": {
+          "List artifact signing account operations.": {
             "$ref": "./examples/Operations_List.json"
           }
         },
@@ -92,7 +92,7 @@
         "tags": [
           "CodeSigningAccounts"
         ],
-        "description": "Checks that the trusted signing account name is valid and is not already in use.",
+        "description": "Checks if the artifact signing account name is valid and is not already in use.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -125,7 +125,7 @@
           }
         },
         "x-ms-examples": {
-          "Checks that the trusted signing account name is available.": {
+          "Checks if the artifact signing account name is available.": {
             "$ref": "./examples/CodeSigningAccounts_CheckNameAvailability.json"
           }
         }
@@ -137,7 +137,7 @@
         "tags": [
           "CodeSigningAccounts"
         ],
-        "description": "Lists trusted signing accounts within a subscription.",
+        "description": "Lists artifact signing accounts within a subscription.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -161,7 +161,7 @@
           }
         },
         "x-ms-examples": {
-          "Lists trusted signing accounts within a subscription.": {
+          "Lists artifact signing accounts within a subscription.": {
             "$ref": "./examples/CodeSigningAccounts_ListBySubscription.json"
           }
         },
@@ -176,7 +176,7 @@
         "tags": [
           "CodeSigningAccounts"
         ],
-        "description": "Lists trusted signing accounts within a resource group.",
+        "description": "Lists artifact signing accounts within a resource group.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -203,7 +203,7 @@
           }
         },
         "x-ms-examples": {
-          "Lists trusted signing accounts within a resource group.": {
+          "Lists artifact signing accounts within a resource group.": {
             "$ref": "./examples/CodeSigningAccounts_ListByResourceGroup.json"
           }
         },
@@ -218,7 +218,7 @@
         "tags": [
           "CodeSigningAccounts"
         ],
-        "description": "Get a trusted Signing Account.",
+        "description": "Get an artifact Signing Account.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -232,7 +232,7 @@
           {
             "name": "accountName",
             "in": "path",
-            "description": "Trusted Signing account name.",
+            "description": "Artifact Signing account name.",
             "required": true,
             "type": "string",
             "pattern": "^(?=.{3,24}$)[^0-9][A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
@@ -253,7 +253,7 @@
           }
         },
         "x-ms-examples": {
-          "Get a Trusted Signing Account": {
+          "Get an artifact signing account": {
             "$ref": "./examples/CodeSigningAccounts_Get.json"
           }
         }
@@ -263,7 +263,7 @@
         "tags": [
           "CodeSigningAccounts"
         ],
-        "description": "Create a trusted Signing Account.",
+        "description": "Create an artifact Signing Account.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -277,7 +277,7 @@
           {
             "name": "accountName",
             "in": "path",
-            "description": "Trusted Signing account name.",
+            "description": "Artifact Signing account name.",
             "required": true,
             "type": "string",
             "pattern": "^(?=.{3,24}$)[^0-9][A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
@@ -285,7 +285,7 @@
           {
             "name": "resource",
             "in": "body",
-            "description": "Parameters to create the trusted signing account",
+            "description": "Parameters to create the artifact signing account",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CodeSigningAccount"
@@ -320,7 +320,7 @@
           }
         },
         "x-ms-examples": {
-          "Create a trusted Signing Account.": {
+          "Create an artifact signing account.": {
             "$ref": "./examples/CodeSigningAccounts_Create.json"
           }
         },
@@ -334,7 +334,7 @@
         "tags": [
           "CodeSigningAccounts"
         ],
-        "description": "Update a trusted signing account.",
+        "description": "Update an artifact signing account.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -348,7 +348,7 @@
           {
             "name": "accountName",
             "in": "path",
-            "description": "Trusted Signing account name.",
+            "description": "Artifact Signing account name.",
             "required": true,
             "type": "string",
             "pattern": "^(?=.{3,24}$)[^0-9][A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
@@ -356,7 +356,7 @@
           {
             "name": "properties",
             "in": "body",
-            "description": "Parameters supplied to update the trusted signing account",
+            "description": "Parameters supplied to update the artifact signing account",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CodeSigningAccountPatch"
@@ -392,7 +392,7 @@
           }
         },
         "x-ms-examples": {
-          "Update a trusted signing account.": {
+          "Update an artifact signing account.": {
             "$ref": "./examples/CodeSigningAccounts_Update.json"
           }
         },
@@ -406,7 +406,7 @@
         "tags": [
           "CodeSigningAccounts"
         ],
-        "description": "Delete a trusted signing account.",
+        "description": "Delete an artifact signing account.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -420,7 +420,7 @@
           {
             "name": "accountName",
             "in": "path",
-            "description": "Trusted Signing account name.",
+            "description": "Artifact Signing account name.",
             "required": true,
             "type": "string",
             "pattern": "^(?=.{3,24}$)[^0-9][A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
@@ -452,7 +452,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete a trusted signing account.": {
+          "Delete an artifact signing account.": {
             "$ref": "./examples/CodeSigningAccounts_Delete.json"
           }
         },
@@ -468,7 +468,7 @@
         "tags": [
           "CertificateProfiles"
         ],
-        "description": "List certificate profiles under a trusted signing account.",
+        "description": "List certificate profiles under an artifact signing account.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -482,7 +482,7 @@
           {
             "name": "accountName",
             "in": "path",
-            "description": "Trusted Signing account name.",
+            "description": "Artifact Signing account name.",
             "required": true,
             "type": "string",
             "pattern": "^(?=.{3,24}$)[^0-9][A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
@@ -503,7 +503,7 @@
           }
         },
         "x-ms-examples": {
-          "List certificate profiles under a trusted signing account.": {
+          "List certificate profiles under an artifact signing account.": {
             "$ref": "./examples/CertificateProfiles_ListByCodeSigningAccount.json"
           }
         },
@@ -532,7 +532,7 @@
           {
             "name": "accountName",
             "in": "path",
-            "description": "Trusted Signing account name.",
+            "description": "Artifact Signing account name.",
             "required": true,
             "type": "string",
             "pattern": "^(?=.{3,24}$)[^0-9][A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
@@ -585,7 +585,7 @@
           {
             "name": "accountName",
             "in": "path",
-            "description": "Trusted Signing account name.",
+            "description": "Artifact Signing account name.",
             "required": true,
             "type": "string",
             "pattern": "^(?=.{3,24}$)[^0-9][A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
@@ -664,7 +664,7 @@
           {
             "name": "accountName",
             "in": "path",
-            "description": "Trusted Signing account name.",
+            "description": "Artifact Signing account name.",
             "required": true,
             "type": "string",
             "pattern": "^(?=.{3,24}$)[^0-9][A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
@@ -734,7 +734,7 @@
           {
             "name": "accountName",
             "in": "path",
-            "description": "Trusted Signing account name.",
+            "description": "Artifact Signing account name.",
             "required": true,
             "type": "string",
             "pattern": "^(?=.{3,24}$)[^0-9][A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
@@ -779,7 +779,7 @@
   "definitions": {
     "AccountSku": {
       "type": "object",
-      "description": "SKU of the trusted signing account.",
+      "description": "SKU of the artifact signing account.",
       "properties": {
         "name": {
           "$ref": "#/definitions/SkuName",
@@ -1030,7 +1030,7 @@
     },
     "CheckNameAvailability": {
       "type": "object",
-      "description": "The parameters used to check the availability of the trusted signing account name.",
+      "description": "The parameters used to check the availability of the artifact signing account name.",
       "properties": {
         "type": {
           "type": "string",
@@ -1038,7 +1038,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Trusted signing account name."
+          "description": "Artifact signing account name."
         }
       },
       "required": [
@@ -1057,7 +1057,7 @@
         },
         "reason": {
           "$ref": "#/definitions/NameUnavailabilityReason",
-          "description": "The reason that a trusted signing account name could not be used. The Reason element is only returned if nameAvailable is false.",
+          "description": "The reason that an artifact signing account name could not be used. The Reason element is only returned if nameAvailable is false.",
           "readOnly": true
         },
         "message": {
@@ -1069,7 +1069,7 @@
     },
     "CodeSigningAccount": {
       "type": "object",
-      "description": "Trusted signing account resource.",
+      "description": "Artifact signing account resource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/CodeSigningAccountProperties",
@@ -1106,7 +1106,7 @@
     },
     "CodeSigningAccountPatch": {
       "type": "object",
-      "description": "Parameters for creating or updating a trusted signing account.",
+      "description": "Parameters for creating or updating an artifact signing account.",
       "properties": {
         "tags": {
           "type": "object",
@@ -1117,44 +1117,44 @@
         },
         "properties": {
           "$ref": "#/definitions/CodeSigningAccountPatchProperties",
-          "description": "Properties of the trusted signing account.",
+          "description": "Properties of the artifact signing account.",
           "x-ms-client-flatten": true
         }
       }
     },
     "CodeSigningAccountPatchProperties": {
       "type": "object",
-      "description": "Properties of the trusted signing account.",
+      "description": "Properties of the artifact signing account.",
       "properties": {
         "sku": {
           "$ref": "#/definitions/AccountSku",
-          "description": "SKU of the trusted signing account."
+          "description": "SKU of the artifact signing account."
         }
       }
     },
     "CodeSigningAccountProperties": {
       "type": "object",
-      "description": "Properties of the trusted signing account.",
+      "description": "Properties of the artifact signing account.",
       "properties": {
         "accountUri": {
           "type": "string",
-          "description": "The URI of the trusted signing account which is used during signing files.",
+          "description": "The URI of the artifact signing account which is used during signing files.",
           "readOnly": true
         },
         "sku": {
           "$ref": "#/definitions/AccountSku",
-          "description": "SKU of the trusted signing account."
+          "description": "SKU of the artifact signing account."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Status of the current operation on trusted signing account.",
+          "description": "Status of the current operation on artifact signing account.",
           "readOnly": true
         }
       }
     },
     "NameUnavailabilityReason": {
       "type": "string",
-      "description": "The reason that a trusted signing account name could not be used. The Reason element is only returned if nameAvailable is false.",
+      "description": "The reason that an artifact signing account name could not be used. The Reason element is only returned if nameAvailable is false.",
       "enum": [
         "AccountNameInvalid",
         "AlreadyExists"

@@ -29,12 +29,14 @@ using Microsoft.NotificationHubs;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(BrowserCredential.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  BrowserCredential.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(XiaomiCredential.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  XiaomiCredential.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -43,66 +45,78 @@ using Microsoft.NotificationHubs;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(NotificationHubPatchParameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  NotificationHubPatchParameters.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DebugSendResponse.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  DebugSendResponse.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PnsCredentialsResource.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PnsCredentialsResource.properties
 );
 
-@@clientName(NotificationHubResources.createOrUpdate::parameters.resource,
+@@clientName(
+  NotificationHubResources.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(NotificationHubResources.update::parameters.properties,
+@@clientName(
+  NotificationHubResources.update::parameters.properties,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(NotificationHubResource.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  NotificationHubResource.properties
 );
 
-@@clientName(SharedAccessAuthorizationRuleResources.createOrUpdateAuthorizationRule::parameters.resource,
+@@clientName(
+  SharedAccessAuthorizationRuleResources.createOrUpdateAuthorizationRule::parameters.resource,
   "parameters"
 );
-@@clientName(SharedAccessAuthorizationRuleResources.regenerateKeys::parameters.body,
+@@clientName(
+  SharedAccessAuthorizationRuleResources.regenerateKeys::parameters.body,
   "parameters"
 );
-@@clientName(Namespaces.createOrUpdateAuthorizationRule::parameters.resource,
+@@clientName(
+  Namespaces.createOrUpdateAuthorizationRule::parameters.resource,
   "parameters"
 );
 @@clientName(Namespaces.regenerateKeys::parameters.body, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SharedAccessAuthorizationRuleResource.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  SharedAccessAuthorizationRuleResource.properties
 );
 
-@@clientName(NamespaceResources.createOrUpdate::parameters.resource,
+@@clientName(
+  NamespaceResources.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(NamespaceResources.update::parameters.properties, "parameters");
-@@clientName(NamespaceResources.checkNotificationHubAvailability::parameters.body,
+@@clientName(
+  NamespaceResources.checkNotificationHubAvailability::parameters.body,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(NamespaceResource.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  NamespaceResource.properties
 );
 
-@@clientName(PrivateEndpointConnectionResources.update::parameters.resource,
+@@clientName(
+  PrivateEndpointConnectionResources.update::parameters.resource,
   "parameters"
 );
-@@clientName(NamespacesOperationGroup.checkAvailability::parameters.body,
+@@clientName(
+  NamespacesOperationGroup.checkAvailability::parameters.body,
   "parameters"
 );
-@@clientName(CheckAvailabilityParameters, "CheckAvailabilityContent", "csharp");
-@@clientName(DebugSendResponse, "DebugSendResponseResult", "csharp");
-@@clientName(Operation, "Info", "csharp");
 
 // @@clientLocation decorators for operations with @operationId
 @@clientLocation(NamespaceResources.get, Namespaces);
@@ -117,85 +131,128 @@ using Microsoft.NotificationHubs;
 @@clientName(NamespaceResources.list, "List");
 @@clientLocation(NamespaceResources.listAll, Namespaces);
 @@clientName(NamespaceResources.listAll, "ListAll");
-@@clientLocation(NamespaceResources.checkNotificationHubAvailability,
-  "NotificationHubs"
+@@clientLocation(
+  NamespaceResources.checkNotificationHubAvailability,
+  "NotificationHubs",
+  "!csharp"
 );
-@@clientName(NamespaceResources.checkNotificationHubAvailability,
+@@clientName(
+  NamespaceResources.checkNotificationHubAvailability,
   "CheckNotificationHubAvailability"
 );
 @@clientLocation(NamespaceResources.getPnsCredentials, Namespaces);
 @@clientName(NamespaceResources.getPnsCredentials, "GetPnsCredentials");
-@@clientLocation(NotificationHubResources.get, "NotificationHubs");
+@@clientLocation(NotificationHubResources.get, "NotificationHubs", "!csharp");
 @@clientName(NotificationHubResources.get, "Get");
-@@clientLocation(NotificationHubResources.createOrUpdate, "NotificationHubs");
+@@clientLocation(
+  NotificationHubResources.createOrUpdate,
+  "NotificationHubs",
+  "!csharp"
+);
 @@clientName(NotificationHubResources.createOrUpdate, "CreateOrUpdate");
-@@clientLocation(NotificationHubResources.update, "NotificationHubs");
+@@clientLocation(
+  NotificationHubResources.update,
+  "NotificationHubs",
+  "!csharp"
+);
 @@clientName(NotificationHubResources.update, "Update");
-@@clientLocation(NotificationHubResources.delete, "NotificationHubs");
+@@clientLocation(
+  NotificationHubResources.delete,
+  "NotificationHubs",
+  "!csharp"
+);
 @@clientName(NotificationHubResources.delete, "Delete");
-@@clientLocation(NotificationHubResources.list, "NotificationHubs");
+@@clientLocation(NotificationHubResources.list, "NotificationHubs", "!csharp");
 @@clientName(NotificationHubResources.list, "List");
-@@clientLocation(NotificationHubResources.debugSend, "NotificationHubs");
+@@clientLocation(
+  NotificationHubResources.debugSend,
+  "NotificationHubs",
+  "!csharp"
+);
 @@clientName(NotificationHubResources.debugSend, "DebugSend");
-@@clientLocation(NotificationHubResources.getPnsCredentials,
-  "NotificationHubs"
+@@clientLocation(
+  NotificationHubResources.getPnsCredentials,
+  "NotificationHubs",
+  "!csharp"
 );
 @@clientName(NotificationHubResources.getPnsCredentials, "GetPnsCredentials");
-@@clientLocation(PrivateEndpointConnectionResources.get,
+@@clientLocation(
+  PrivateEndpointConnectionResources.get,
   "PrivateEndpointConnections"
 );
 @@clientName(PrivateEndpointConnectionResources.get, "Get");
-@@clientLocation(PrivateEndpointConnectionResources.update,
+@@clientLocation(
+  PrivateEndpointConnectionResources.update,
   "PrivateEndpointConnections"
 );
 @@clientName(PrivateEndpointConnectionResources.update, "Update");
-@@clientLocation(PrivateEndpointConnectionResources.delete,
+@@clientLocation(
+  PrivateEndpointConnectionResources.delete,
   "PrivateEndpointConnections"
 );
 @@clientName(PrivateEndpointConnectionResources.delete, "Delete");
-@@clientLocation(PrivateEndpointConnectionResources.list,
+@@clientLocation(
+  PrivateEndpointConnectionResources.list,
   "PrivateEndpointConnections"
 );
 @@clientName(PrivateEndpointConnectionResources.list, "List");
 @@clientLocation(PrivateLinkResources.getGroupId, "PrivateEndpointConnections");
 @@clientName(PrivateLinkResources.getGroupId, "GetGroupId");
-@@clientLocation(PrivateLinkResources.listGroupIds,
+@@clientLocation(
+  PrivateLinkResources.listGroupIds,
   "PrivateEndpointConnections"
 );
 @@clientName(PrivateLinkResources.listGroupIds, "ListGroupIds");
 @@clientLocation(NamespacesOperationGroup.checkAvailability, Namespaces);
 @@clientName(NamespacesOperationGroup.checkAvailability, "CheckAvailability");
-@@clientLocation(SharedAccessAuthorizationRuleResources.getAuthorizationRule,
-  "NotificationHubs"
+@@clientLocation(
+  SharedAccessAuthorizationRuleResources.getAuthorizationRule,
+  "NotificationHubs",
+  "!csharp"
 );
-@@clientName(SharedAccessAuthorizationRuleResources.getAuthorizationRule,
+@@clientName(
+  SharedAccessAuthorizationRuleResources.getAuthorizationRule,
   "GetAuthorizationRule"
 );
-@@clientLocation(SharedAccessAuthorizationRuleResources.createOrUpdateAuthorizationRule,
-  "NotificationHubs"
+@@clientLocation(
+  SharedAccessAuthorizationRuleResources.createOrUpdateAuthorizationRule,
+  "NotificationHubs",
+  "!csharp"
 );
-@@clientName(SharedAccessAuthorizationRuleResources.createOrUpdateAuthorizationRule,
+@@clientName(
+  SharedAccessAuthorizationRuleResources.createOrUpdateAuthorizationRule,
   "CreateOrUpdateAuthorizationRule"
 );
-@@clientLocation(SharedAccessAuthorizationRuleResources.deleteAuthorizationRule,
-  "NotificationHubs"
+@@clientLocation(
+  SharedAccessAuthorizationRuleResources.deleteAuthorizationRule,
+  "NotificationHubs",
+  "!csharp"
 );
-@@clientName(SharedAccessAuthorizationRuleResources.deleteAuthorizationRule,
+@@clientName(
+  SharedAccessAuthorizationRuleResources.deleteAuthorizationRule,
   "DeleteAuthorizationRule"
 );
-@@clientLocation(SharedAccessAuthorizationRuleResources.listAuthorizationRules,
-  "NotificationHubs"
+@@clientLocation(
+  SharedAccessAuthorizationRuleResources.listAuthorizationRules,
+  "NotificationHubs",
+  "!csharp"
 );
-@@clientName(SharedAccessAuthorizationRuleResources.listAuthorizationRules,
+@@clientName(
+  SharedAccessAuthorizationRuleResources.listAuthorizationRules,
   "ListAuthorizationRules"
 );
-@@clientLocation(SharedAccessAuthorizationRuleResources.listKeys,
-  "NotificationHubs"
+@@clientLocation(
+  SharedAccessAuthorizationRuleResources.listKeys,
+  "NotificationHubs",
+  "!csharp"
 );
 @@clientName(SharedAccessAuthorizationRuleResources.listKeys, "ListKeys");
-@@clientLocation(SharedAccessAuthorizationRuleResources.regenerateKeys,
-  "NotificationHubs"
+@@clientLocation(
+  SharedAccessAuthorizationRuleResources.regenerateKeys,
+  "NotificationHubs",
+  "!csharp"
 );
-@@clientName(SharedAccessAuthorizationRuleResources.regenerateKeys,
+@@clientName(
+  SharedAccessAuthorizationRuleResources.regenerateKeys,
   "RegenerateKeys"
 );

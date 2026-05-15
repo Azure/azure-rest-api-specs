@@ -5,49 +5,61 @@ using Azure.ClientGenerator.Core;
 using Microsoft.CodeSigning;
 using Azure.Core;
 
-@@clientName(Microsoft.CodeSigning, "TrustedSigningMgmtClient", "python");
-@@clientName(Microsoft.CodeSigning, "TrustedSigningManagementClient", "java");
+@@clientName(Microsoft.CodeSigning, "ArtifactSigningMgmtClient", "python");
+@@clientName(Microsoft.CodeSigning, "ArtifactSigningManagementClient", "java");
 
-@@clientName(AccountSku, "TrustedSigningAccountSku", "csharp");
-@@clientName(Certificate, "TrustedSigningCertificate", "csharp");
-@@clientName(CertificateProfile, "TrustedSigningCertificateProfile", "csharp");
-@@clientName(CertificateStatus, "TrustedSigningCertificateStatus", "csharp");
-@@clientName(ProvisioningState, "TrustedSigningProvisioningState", "csharp");
-@@clientName(CheckNameAvailability,
-  "TrustedSigningAccountNameAvailabilityContent",
+@@clientName(AccountSku, "ArtifactSigningAccountSku", "csharp");
+@@clientName(Certificate, "ArtifactSigningCertificate", "csharp");
+@@clientName(CertificateProfile, "ArtifactSigningCertificateProfile", "csharp");
+@@clientName(CertificateStatus, "ArtifactSigningCertificateStatus", "csharp");
+@@clientName(ProvisioningState, "ArtifactSigningProvisioningState", "csharp");
+@@clientName(
+  CheckNameAvailability,
+  "ArtifactSigningAccountNameAvailabilityContent",
   "csharp"
 );
 @@clientName(CheckNameAvailability.type, "ResourceType", "csharp");
-@@clientName(CheckNameAvailabilityResult,
-  "TrustedSigningAccountNameAvailabilityResult",
+@@clientName(
+  CheckNameAvailabilityResult,
+  "ArtifactSigningAccountNameAvailabilityResult",
   "csharp"
 );
-@@clientName(CheckNameAvailabilityResult.nameAvailable,
+@@clientName(
+  CheckNameAvailabilityResult.nameAvailable,
   "IsNameAvailable",
   "csharp"
 );
-@@clientName(NameUnavailabilityReason,
-  "TrustedSigningAccountNameUnavailabilityReason",
+@@clientName(
+  NameUnavailabilityReason,
+  "ArtifactSigningAccountNameUnavailabilityReason",
   "csharp"
 );
-@@clientName(CodeSigningAccount, "TrustedSigningAccount", "csharp");
+@@clientName(CodeSigningAccount, "ArtifactSigningAccount", "csharp");
 @@clientName(ProfileType, "CertificateProfileType", "csharp");
 @@clientName(ProfileType.VBSEnclave, "VbsEnclave", "csharp");
+@@clientName(
+  CertificateProfileProperties.profileType,
+  "CertificateProfileType",
+  "csharp"
+);
 @@clientName(RevocationStatus, "CertificateRevocationStatus", "csharp");
 @@clientName(RevokeCertificate, "RevokeCertificateContent", "csharp");
 @@clientName(Certificate.createdDate, "CreateOn", "csharp");
 @@clientName(Certificate.expiryDate, "ExpireOn", "csharp");
 @@clientName(Revocation.status, "RevocationStatus", "csharp");
 
-@@clientName(CodeSigningAccounts.checkNameAvailability,
-  "CheckTrustedSigningAccountNameAvailability",
+@@clientName(
+  CodeSigningAccounts.checkNameAvailability,
+  "CheckArtifactSigningAccountNameAvailability",
   "csharp"
 );
-@@clientName(CodeSigningAccounts.checkNameAvailability::parameters.body,
+@@clientName(
+  CodeSigningAccounts.checkNameAvailability::parameters.body,
   "content",
   "csharp"
 );
-@@clientName(CertificateProfiles.revokeCertificate::parameters.body,
+@@clientName(
+  CertificateProfiles.revokeCertificate::parameters.body,
   "content",
   "csharp"
 );
