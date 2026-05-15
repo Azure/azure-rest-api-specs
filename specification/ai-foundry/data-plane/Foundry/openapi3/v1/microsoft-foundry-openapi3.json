@@ -13494,8 +13494,7 @@
       "AgentFilterTraceSource": {
         "type": "object",
         "required": [
-          "type",
-          "target"
+          "type"
         ],
         "properties": {
           "type": {
@@ -13505,22 +13504,32 @@
             ],
             "description": "The type of trace source, always `agent_filter`."
           },
-          "target": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AzureAIAgentTarget"
-              }
-            ],
-            "description": "The agent target to filter traces by."
+          "agent_id": {
+            "type": "string",
+            "description": "The identifier of the agent to filter traces by."
+          },
+          "agent_name": {
+            "type": "string",
+            "description": "The name of the agent to filter traces by."
+          },
+          "agent_version": {
+            "type": "string",
+            "description": "The version of the agent to filter traces by."
           },
           "start_time": {
-            "type": "integer",
-            "format": "int64",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
             "description": "Start time for the trace query window, expressed as a Unix timestamp (seconds)."
           },
           "end_time": {
-            "type": "integer",
-            "format": "int64",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
             "description": "End time for the trace query window, expressed as a Unix timestamp (seconds)."
           },
           "max_traces": {
@@ -13534,7 +13543,7 @@
                 "$ref": "#/components/schemas/FilterStrategyType"
               }
             ],
-            "description": "If true, enables smart filtering on the agent traces."
+            "description": "The strategy used to filter traces."
           }
         },
         "allOf": [

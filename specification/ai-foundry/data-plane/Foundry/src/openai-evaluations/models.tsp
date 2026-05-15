@@ -571,7 +571,7 @@ union FilterStrategyType {
   /** Selects traces by random sampling. */
   random_sampling: "random_sampling",
 
-  /** Selects interesting traces for evaluation */
+  /** Selects traces using an algorithm to identify the most relevant ones. */
   smart_filtering: "smart_filtering",
 }
 
@@ -580,19 +580,25 @@ model AgentFilterTraceSource extends TraceSource {
   /** The type of trace source, always `agent_filter`. */
   type: TraceSourceType.agentFilter;
 
-  /** The agent target to filter traces by. */
-  target: AzureAIAgentTarget;
+  /** The identifier of the agent to filter traces by. */
+  agent_id?: string;
+
+  /** The name of the agent to filter traces by. */
+  agent_name?: string;
+
+  /** The version of the agent to filter traces by. */
+  agent_version?: string;
 
   /** Start time for the trace query window, expressed as a Unix timestamp (seconds). */
-  start_time?: int64;
+  start_time?: FoundryTimestamp;
 
   /** End time for the trace query window, expressed as a Unix timestamp (seconds). */
-  end_time?: int64;
+  end_time?: FoundryTimestamp;
 
   /** Maximum number of traces to sample. Must be greater than 0. */
   max_traces?: int32;
 
-  /** If true, enables smart filtering on the agent traces. */
+  /** The strategy used to filter traces. */
   filter_strategy?: FilterStrategyType;
 }
 
@@ -633,7 +639,7 @@ model AzureAIBenchmarkPreviewEvalRunDataSource extends EvalRunDataSource {
     | OpenAI.CreateEvalJsonlRunDataSource
     | OpenAI.CreateEvalCompletionsRunDataSource
     | OpenAI.CreateEvalResponsesRunDataSource
-    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionsEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesPreviewEvalRunDataSource | AzureAIBenchmarkPreviewEvalRunDataSource | ConversationSimulationPreviewEvalRunDataSource | AzureAITraceDataSourcePreviewEvalRunDataSource */
+    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionsEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesPreviewEvalRunDataSource | AzureAIBenchmarkPreviewEvalRunDataSource | AzureAITraceDataSourcePreviewEvalRunDataSource */
 );
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
@@ -690,7 +696,7 @@ model EvalRun is OpenAI.EvalRun {
     | OpenAI.CreateEvalJsonlRunDataSource
     | OpenAI.CreateEvalCompletionsRunDataSource
     | OpenAI.CreateEvalResponsesRunDataSource
-    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionsEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesPreviewEvalRunDataSource | AzureAIBenchmarkPreviewEvalRunDataSource | ConversationSimulationPreviewEvalRunDataSource | AzureAITraceDataSourcePreviewEvalRunDataSource */
+    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionsEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesPreviewEvalRunDataSource | AzureAIBenchmarkPreviewEvalRunDataSource | AzureAITraceDataSourcePreviewEvalRunDataSource */
 );
 
 model CreateEvalRunRequest is OpenAI.CreateEvalRunRequest {
