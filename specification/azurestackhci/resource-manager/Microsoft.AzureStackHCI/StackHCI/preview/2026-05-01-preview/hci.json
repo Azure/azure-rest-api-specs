@@ -10623,8 +10623,8 @@
           ]
         },
         "witnessType": {
-          "type": "string",
-          "description": "Use a cloud witness if you have internet access and if you use an Azure Storage account to provide a vote on cluster quorum. A cloud witness uses Azure Blob Storage to read or write a blob file and then uses it to arbitrate in split-brain resolution. Only allowed values are 'Cloud', 'FileShare'."
+          "$ref": "#/definitions/WitnessType",
+          "description": "Use a cloud witness if you have internet access and if you use an Azure Storage account to provide a vote on cluster quorum. A cloud witness uses Azure Blob Storage to read or write a blob file and then uses it to arbitrate in split-brain resolution."
         },
         "witnessPath": {
           "type": "string",
@@ -16763,6 +16763,30 @@
             "name": "Enabled",
             "value": "Enabled",
             "description": "Windows Server Subscription is enabled."
+          }
+        ]
+      }
+    },
+    "WitnessType": {
+      "type": "string",
+      "description": "Witness type for an Azure Stack HCI cluster.",
+      "enum": [
+        "Cloud",
+        "FileShare"
+      ],
+      "x-ms-enum": {
+        "name": "WitnessType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Cloud",
+            "value": "Cloud",
+            "description": "Cloud witness backed by an Azure Storage account."
+          },
+          {
+            "name": "FileShare",
+            "value": "FileShare",
+            "description": "File-share witness on a local SMB share."
           }
         ]
       }
