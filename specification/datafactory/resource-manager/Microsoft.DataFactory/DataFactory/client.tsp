@@ -363,6 +363,7 @@ using Microsoft.DataFactory;
 );
 @@clientName(DataFlowResource, "DataFactoryDataFlow", "csharp");
 @@clientName(Dataset, "DataFactoryDatasetProperties", "csharp");
+@@clientName(Dataset.type, "DatasetType", "csharp");
 @@clientName(DatasetListResponse, "DataFactoryDatasetListResult", "csharp");
 @@clientName(DatasetDataElement.name, "ColumnName", "csharp");
 @@clientName(DatasetDataElement.type, "ColumnType", "csharp");
@@ -1180,5 +1181,47 @@ using Microsoft.DataFactory;
   {
     identity: "Azure.Core.Expressions.DataFactory.DataFactoryKeyVaultSecret",
   },
+  "csharp"
+);
+
+// MPG migration: rename TypeSpec `type` properties to back-compat names so the
+// generator emits the legacy property names (e.g. ParameterType, ReferenceType).
+@@clientName(ParameterSpecification.type, "ParameterType", "csharp");
+@@clientName(Expression.type, "ExpressionType", "csharp");
+@@clientName(CredentialReference.type, "ReferenceType", "csharp");
+@@clientName(PipelineReference.type, "ReferenceType", "csharp");
+@@clientName(TriggerReference.type, "ReferenceType", "csharp");
+@@clientName(DataFlowReference.type, "ReferenceType", "csharp");
+@@clientName(DatasetReference.type, "ReferenceType", "csharp");
+@@clientName(IntegrationRuntimeReference.type, "ReferenceType", "csharp");
+@@clientName(ManagedVirtualNetworkReference.type, "ReferenceType", "csharp");
+@@clientName(
+  BigDataPoolParametrizationReference.type,
+  "ReferenceType",
+  "csharp"
+);
+@@clientName(
+  SparkConfigurationParametrizationReference.type,
+  "ReferenceType",
+  "csharp"
+);
+@@clientName(
+  EntityReference.type,
+  "IntegrationRuntimeEntityReferenceType",
+  "csharp"
+);
+@@clientName(MapperAttributeMapping.type, "MappingType", "csharp");
+@@clientName(MapperConnection.type, "ConnectionType", "csharp");
+@@clientName(MapperConnectionReference.type, "ConnectionType", "csharp");
+@@clientName(NotebookParameter.type, "ParameterType", "csharp");
+@@clientName(VariableSpecification.type, "VariableType", "csharp");
+@@clientName(ScriptActivityParameter.type, "ParameterType", "csharp");
+@@clientName(SSISLogLocation.type, "LocationType", "csharp");
+@@clientName(SSISPackageLocation.type, "LocationType", "csharp");
+@@clientName(SynapseNotebookReference.type, "NotebookReferenceType", "csharp");
+@@clientName(SynapseSparkJobReference.type, "SparkJobReferenceType", "csharp");
+@@clientName(
+  WebActivityAuthentication.type,
+  "WebActivityAuthenticationType",
   "csharp"
 );
