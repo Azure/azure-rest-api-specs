@@ -17,7 +17,11 @@ namespace Microsoft.Monitor {
     provisioningState?: Azure.ResourceManager.ResourceProvisioningState;
 
     /** Resource ID of the Azure Monitor workspace where this agent stores the issues it produces. */
-    monitoringAccountId: Azure.Core.armResourceIdentifier<[{type: "Microsoft.Monitor/accounts"}]>;
+    monitoringAccountId: Azure.Core.armResourceIdentifier<[
+      {
+        type: "Microsoft.Monitor/accounts";
+      }
+    ]>;
 
     /** Whether the observability agent is enabled. Defaults to true when not specified. */
     enabled?: boolean;
@@ -35,6 +39,7 @@ namespace Microsoft.Monitor {
   union AutonomousOperation {
     /** AI-driven autonomous investigation of detected issues. */
     autoInvestigate: "AutoInvestigate",
+
     string,
   }
 
