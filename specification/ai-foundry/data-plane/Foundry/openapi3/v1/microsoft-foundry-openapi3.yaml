@@ -934,9 +934,14 @@ paths:
     get:
       operationId: Agents_downloadAgentCode
       description: |-
-        Download the code zip for the latest version of a code-based hosted agent.
+        Download the code zip for a code-based hosted agent.
         Returns the previously-uploaded zip (`application/zip`).
-        The SHA-256 digest of the returned bytes matches the `content_hash` on the latest version's `code_configuration`.
+
+        If `agent_version` is supplied, returns that version's code zip; otherwise
+        returns the latest version's code zip.
+
+        The SHA-256 digest of the returned bytes matches the `content_hash` on the
+        resolved version's `code_configuration`.
       parameters:
         - name: Foundry-Features
           in: header
@@ -949,9 +954,18 @@ paths:
         - name: agent_name
           in: path
           required: true
-          description: The name of the agent whose latest-version code zip should be downloaded.
+          description: The name of the agent.
           schema:
             type: string
+        - name: agent_version
+          in: query
+          required: false
+          description: |-
+            The version of the agent whose code zip should be downloaded.
+            If omitted, the latest version's code zip is returned.
+          schema:
+            type: string
+          explode: false
         - name: api-version
           in: query
           required: true
@@ -966,6 +980,12 @@ paths:
             Body is the raw zip bytes; `Content-Type` declares `application/zip` so clients
             can route to a zip-aware handler. Streaming is preserved (`bytes` body) regardless
             of the content-type label.
+          headers:
+            x-ms-agent-version:
+              required: true
+              description: The version of the agent whose code zip is returned in the response body.
+              schema:
+                type: string
           content:
             application/zip:
               schema:
@@ -1986,64 +2006,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agents
-  /agents/{agent_name}/versions/{agent_version}/code:download:
-    get:
-      operationId: Agents_downloadAgentVersionCode
-      description: |-
-        Download the code zip for a specific version of a code-based hosted agent.
-        Returns the previously-uploaded zip (`application/zip`).
-        The SHA-256 digest of the returned bytes matches the `content_hash` on the agent version's `code_configuration`.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - CodeAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: agent_version
-          in: path
-          required: true
-          description: The version of the agent whose code zip should be downloaded.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: |-
-            Response body for downloading a hosted agent's code zip.
-            Body is the raw zip bytes; `Content-Type` declares `application/zip` so clients
-            can route to a zip-aware handler. Streaming is preserved (`bytes` body) regardless
-            of the content-type label.
-          content:
-            application/zip:
-              schema:
-                type: string
-                format: binary
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agents
-      x-ms-foundry-meta:
-        required_previews:
-          - CodeAgents=V1Preview
   /agents/{agent_name}/versions/{agent_version}/sessions/{session_id}:logstream:
     get:
       operationId: Agents_getSessionLogStream

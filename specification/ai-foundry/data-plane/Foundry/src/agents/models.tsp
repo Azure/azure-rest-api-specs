@@ -925,6 +925,10 @@ model DownloadAgentCodeResponse {
   @header("Content-Type")
   content_type: "application/zip";
 
+  @doc("The version of the agent whose code zip is returned in the response body.")
+  @header("x-ms-agent-version")
+  agent_version: string;
+
   @doc("The zip code package content.")
   @body
   content: bytes;
