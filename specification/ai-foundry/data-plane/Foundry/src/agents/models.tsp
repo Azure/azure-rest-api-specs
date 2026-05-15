@@ -467,7 +467,6 @@ model ExternalAgentDefinition extends AgentDefinition {
     where the running external agent already emits a stable id that differs from the Foundry agent name.
     The resolved value is always echoed on read.
     """)
-  @example("gcp-travel-planner-agent")
   otel_agent_id?: string;
 }
 
