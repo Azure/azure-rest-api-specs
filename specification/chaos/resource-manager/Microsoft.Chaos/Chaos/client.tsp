@@ -40,10 +40,6 @@ using Microsoft.Chaos;
   "csharp"
 );
 @@clientName(Microsoft.Chaos.Workspaces.listAll, "getWorkspaces", "csharp");
-@@clientName(FixResourcePermissionsRequest,
-  "ChaosFixResourcePermissionsRequestContent",
-  "csharp"
-);
 @@clientName(ScenarioParameter, "ChaosScenarioParameterInfo", "csharp");
 @@clientName(Action, "ChaosAction", "csharp");
 @@clientName(ActionVersion, "ChaosActionVersion", "csharp");
