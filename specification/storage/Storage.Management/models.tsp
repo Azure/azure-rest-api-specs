@@ -6561,7 +6561,6 @@ model ManagedIdentityAuthProperties extends StorageConnectorAuthProperties {
   /**
    * The type of managed identity auth
    */
-  @visibility(Lifecycle.Read)
   type: StorageConnectorAuthType.ManagedIdentity;
 
   /**
