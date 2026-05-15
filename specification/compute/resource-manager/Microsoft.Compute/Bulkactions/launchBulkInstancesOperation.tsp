@@ -158,8 +158,8 @@ union ArchitectureType {
   string,
 }
 
-@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
 #suppress "@azure-tools/typespec-azure-core/casing-style" "VMAttributeSupport which does not follow camel casing"
+@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
 @doc("VMSizes supported by Azure VMs. Included is a union of Excluded and Required.")
 union VMAttributeSupport {
   @doc("All VMSizes having the feature support will be excluded.")
@@ -301,8 +301,8 @@ union VMOperationStatus {
 // Supporting models
 // ============================================================
 
-@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
 #suppress "@azure-tools/typespec-azure-core/casing-style" "VMAttributeMinMaxInteger which does not follow camel casing"
+@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
 @doc("While retrieving VMSizes from CRS, Min = 0 (uint.MinValue) if not specified, Max = 4294967295 (uint.MaxValue) if not specified. This allows to filter VMAttributes on all available VMSizes.")
 model VMAttributeMinMaxInteger {
   @minValue(0)
@@ -314,8 +314,8 @@ model VMAttributeMinMaxInteger {
   max?: int32;
 }
 
-@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
 #suppress "@azure-tools/typespec-azure-core/casing-style" "VMAttributeMinMaxDouble which does not follow camel casing"
+@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
 @doc("VMAttributes using double values.")
 model VMAttributeMinMaxDouble {
   @minValue(0.0)
@@ -327,8 +327,8 @@ model VMAttributeMinMaxDouble {
   max?: float64;
 }
 
-@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
 #suppress "@azure-tools/typespec-azure-core/casing-style" "VMAttributes which does not follow camel casing"
+@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
 @doc("VMAttributes that will be used to filter VMSizes which will be used to launch instances.")
 model VMAttributes {
   @doc("The range of vCpuCount specified from Min to Max. Must be specified if VMAttributes are specified, either Min or Max is required if specified.")
@@ -408,6 +408,7 @@ model ComputeProfile {
   @doc("Base Virtual Machine Profile Properties to be specified according to specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/{computeApiVersion}/virtualMachine.json#/definitions/VirtualMachineProperties")
   virtualMachineProfile: BulkactionVMProperties;
 
+  @identifiers(#["name"])
   @doc("Virtual Machine Extensions Array to be specified according to specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/{computeApiVersion}/virtualMachine.json#/definitions/VirtualMachineExtension")
   extensions?: Array<BulkactionVMExtension>;
 
@@ -560,6 +561,7 @@ model LocationBasedLaunchBulkInstancesOperation
 @doc("List of LaunchBulkInstancesOperation resources.")
 model LaunchBulkInstancesOperationListResult {
   @pageItems
+  @identifiers(#["id"])
   @doc("The list of LaunchBulkInstancesOperation resources.")
   value: LocationBasedLaunchBulkInstancesOperation[];
 
