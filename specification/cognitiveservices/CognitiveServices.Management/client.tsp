@@ -789,7 +789,7 @@ op regenerateKeyCustom(
   "GetModelCapacities",
   "csharp"
 );
-@@clientName(DeletedAccounts.list, "GetDeletedAccounts", "csharp");
+@@clientName(DeletedAccounts.list, "GetCognitiveServicesDeletedAccounts", "csharp");
 @@clientName(
   ManagedNetworkSettingsPropertiesBasicResources.post,
   "UpdateOutboundRules",
