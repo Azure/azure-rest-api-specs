@@ -75,7 +75,10 @@ interface DdosCustomPolicies {
   @tag("ddosCustomPolicies")
   delete is ArmResourceDeleteWithoutOkAsync<
     DdosCustomPolicy,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -96,9 +99,11 @@ interface DdosCustomPolicies {
 
 @@doc(DdosCustomPolicy.name, "The name of the DDoS custom policy.");
 @@doc(DdosCustomPolicy.properties, "Properties of the DDoS custom policy.");
-@@doc(DdosCustomPolicies.createOrUpdate::parameters.resource,
+@@doc(
+  DdosCustomPolicies.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update operation."
 );
-@@doc(DdosCustomPolicies.updateTags::parameters.properties,
+@@doc(
+  DdosCustomPolicies.updateTags::parameters.properties,
   "Parameters supplied to update DDoS custom policy resource tags."
 );

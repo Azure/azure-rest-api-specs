@@ -469,7 +469,7 @@ model SignedIdentifier {
 
 /** The result of the Find Blobs by Tags API. */
 @Xml.name("EnumerationResults")
-model FilterBlobResponse {
+model FilteredBlobResponse {
   /** The service endpoint. */
   @Xml.attribute
   @Xml.name("ServiceEndpoint")
@@ -481,7 +481,7 @@ model FilterBlobResponse {
   /** The list of filtered blobs. */
   @pageItems
   @Xml.name("Blobs")
-  blobs: FilterBlobItem[];
+  blobItems: FilterBlobItem[];
 
   /** An opaque string value that identifies the portion of the result set to be returned with the next operation. Use this value in the next request to continue the listing operation. */
   @continuationToken
@@ -1321,15 +1321,6 @@ model ListBlobsResponse {
   @continuationToken
   @Xml.name("NextMarker")
   nextMarker?: string;
-}
-
-/** The blob flat list segment. */
-model BlobFlatListSegment {
-  /** The blob items. */
-  @pageItems
-  @Xml.name("Blob")
-  @Xml.unwrapped
-  blobItems: BlobItem[];
 }
 
 /** The result of the Get Pages API. */
@@ -2534,8 +2525,8 @@ model BlobPrefix {
   @Xml.name("Name") name: BlobName;
 }
 
-/** Represents a list of blobs. */
-model BlobHierarchyListSegment {
+/** Represents an array of blobs. */
+model BlobHierarchyList {
   /** The blob items. */
   @pageItems
   @Xml.name("Blob")
@@ -2550,7 +2541,7 @@ model BlobHierarchyListSegment {
 
 /** The result of the List Blobs Hierarchical API. */
 @Xml.name("EnumerationResults")
-model ListBlobsHierarchySegmentResponse {
+model ListBlobsHierarchicalResponse {
   /** The service endpoint. */
   @Xml.attribute
   @Xml.name("ServiceEndpoint")
@@ -2573,9 +2564,9 @@ model ListBlobsHierarchySegmentResponse {
   /** The maximum number of blobs to be returned with this operation. */
   @Xml.name("MaxResults") maxResults?: int32;
 
-  /** The list of blobs. */
+  /** The list of hierarchical blobs. */
   @Xml.name("Blobs")
-  segment: BlobHierarchyListSegment;
+  hierarchicalList: BlobHierarchyList;
 
   /** An opaque string value that identifies the portion of the result set to be returned with the next operation. Use this value in the next request to continue the listing operation. */
   @continuationToken

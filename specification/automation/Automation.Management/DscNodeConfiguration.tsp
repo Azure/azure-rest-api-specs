@@ -45,11 +45,13 @@ interface DscNodeConfigurations {
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     DscNodeConfiguration,
     Request = DscNodeConfigurationCreateOrUpdateParameters,
-    Response = OkResponse | ArmResourceCreatedResponse<
-      DscNodeConfiguration,
-      ArmLroLocationHeader<FinalResult = DscNodeConfiguration> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | OkResponse
+      | ArmResourceCreatedResponse<
+          DscNodeConfiguration,
+          ArmLroLocationHeader<FinalResult = DscNodeConfiguration> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**
@@ -100,9 +102,11 @@ interface DscNodeConfigurations {
 }
 
 @@doc(DscNodeConfiguration.name, "The Dsc node configuration name.");
-@@doc(DscNodeConfiguration.properties,
+@@doc(
+  DscNodeConfiguration.properties,
   "Gets or sets the configuration properties."
 );
-@@doc(DscNodeConfigurations.createOrUpdate::parameters.resource,
+@@doc(
+  DscNodeConfigurations.createOrUpdate::parameters.resource,
   "The create or update parameters for configuration."
 );

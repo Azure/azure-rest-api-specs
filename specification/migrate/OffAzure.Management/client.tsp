@@ -7,7 +7,8 @@ using Microsoft.OffAzure;
 // Mitigate Java breaking changes: model renames (case changes from Swagger → TypeSpec)
 @@clientName(FCIInstanceState, "FciInstanceState", "java");
 @@clientName(FileMetaData, "FileMetadata", "java");
-@@clientName(MicrosoftAzureFDSWebRoleHealthErrorDetailsSource,
+@@clientName(
+  MicrosoftAzureFDSWebRoleHealthErrorDetailsSource,
   "MicrosoftAzureFdsWebRoleHealthErrorDetailsSource",
   "java"
 );

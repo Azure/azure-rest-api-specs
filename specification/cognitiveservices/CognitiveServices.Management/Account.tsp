@@ -94,11 +94,14 @@ interface Accounts {
   @tag("CognitiveServicesAccounts")
   create is AccountOps.CreateOrUpdateAsync<
     Account,
-    Response = ArmResourceUpdatedResponse<Account> | ArmResourceCreatedResponse<Account> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Account> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: Account;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<Account>
+      | ArmResourceCreatedResponse<Account>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Account> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: Account;
+        })
   >;
 
   /**
@@ -110,11 +113,13 @@ interface Accounts {
   update is AccountOps.CustomPatchAsync<
     Account,
     PatchModel = Account,
-    Response = ArmResponse<Account> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Account> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: Account;
-    })
+    Response =
+      | ArmResponse<Account>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Account> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: Account;
+        })
   >;
 
   /**
@@ -124,7 +129,10 @@ interface Accounts {
   @tag("CognitiveServicesAccounts")
   delete is AccountOps.DeleteWithoutOkAsync<
     Account,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -220,7 +228,9 @@ interface Accounts {
   createOrUpdate is AccountOps.CreateOrUpdateSync<
     Account,
     Request = RaiExternalSafetyProviderSchema,
-    Response = ArmResponse<RaiExternalSafetyProviderSchema> | ArmResourceCreatedSyncResponse<RaiExternalSafetyProviderSchema>,
+    Response =
+      | ArmResponse<RaiExternalSafetyProviderSchema>
+      | ArmResourceCreatedSyncResponse<RaiExternalSafetyProviderSchema>,
     Parameters = {
       /**
        * The name of the Rai External Safety Provider associated with the Cognitive Services Account
@@ -284,7 +294,10 @@ interface DeletedAccounts {
   @tag("CognitiveServicesAccounts")
   purge is DeletedAccountOps.DeleteWithoutOkAsync<
     Account,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 }
 
@@ -292,13 +305,16 @@ interface DeletedAccounts {
 @@minLength(Account.name, 2);
 @@doc(Account.name, "The name of Cognitive Services account.");
 @@doc(Account.properties, "Properties of Cognitive Services account.");
-@@doc(Accounts.create::parameters.resource,
+@@doc(
+  Accounts.create::parameters.resource,
   "The parameters to provide for the created account."
 );
-@@doc(Accounts.update::parameters.properties,
+@@doc(
+  Accounts.update::parameters.properties,
   "The parameters to provide for the created account."
 );
 @@doc(Accounts.regenerateKey::parameters.body, "regenerate key parameters.");
-@@doc(Accounts.createOrUpdate::parameters.resource,
+@@doc(
+  Accounts.createOrUpdate::parameters.resource,
   "Properties describing the rai external safety provider."
 );

@@ -9,70 +9,86 @@ using Microsoft.Carbon;
 @@clientName(Microsoft.Carbon, "CarbonOptimizationManagementClient", "java");
 
 // CSharp
-@@clientName(CarbonService.queryCarbonEmissionReports,
+@@clientName(
+  CarbonService.queryCarbonEmissionReports,
   "QueryCarbonEmissionReports",
   "csharp"
 );
-@@clientName(CarbonService.queryCarbonEmissionDataAvailableDateRange,
+@@clientName(
+  CarbonService.queryCarbonEmissionDataAvailableDateRange,
   "QueryCarbonEmissionAvailableDateRange",
   "csharp"
 );
-@@clientName(CarbonEmissionDataListResult,
+@@clientName(
+  CarbonEmissionDataListResult,
   "CarbonEmissionListResult",
   "csharp"
 );
-@@clientName(CarbonEmissionTopItemMonthlySummaryData,
+@@clientName(
+  CarbonEmissionTopItemMonthlySummaryData,
   "CarbonEmissionTopItemMonthlySummary",
   "csharp"
 );
-@@clientName(CarbonEmissionTopItemsSummaryData,
+@@clientName(
+  CarbonEmissionTopItemsSummaryData,
   "CarbonEmissionTopItemsSummary",
   "csharp"
 );
 @@clientName(CarbonEmissionData, "CarbonEmission", "csharp");
-@@clientName(CarbonEmissionItemDetailData,
+@@clientName(
+  CarbonEmissionItemDetailData,
   "CarbonEmissionItemDetail",
   "csharp"
 );
-@@clientName(CarbonEmissionMonthlySummaryData,
+@@clientName(
+  CarbonEmissionMonthlySummaryData,
   "CarbonEmissionMonthlySummary",
   "csharp"
 );
-@@clientName(CarbonEmissionOverallSummaryData,
+@@clientName(
+  CarbonEmissionOverallSummaryData,
   "CarbonEmissionOverallSummary",
   "csharp"
 );
-@@clientName(ResourceGroupCarbonEmissionTopItemsSummaryData,
+@@clientName(
+  ResourceGroupCarbonEmissionTopItemsSummaryData,
   "ResourceGroupCarbonEmissionTopItemsSummary",
   "csharp"
 );
-@@clientName(ResourceCarbonEmissionItemDetailData,
+@@clientName(
+  ResourceCarbonEmissionItemDetailData,
   "ResourceCarbonEmissionItemDetail",
   "csharp"
 );
-@@clientName(ResourceCarbonEmissionTopItemMonthlySummaryData,
+@@clientName(
+  ResourceCarbonEmissionTopItemMonthlySummaryData,
   "ResourceCarbonEmissionTopItemMonthlySummary",
   "csharp"
 );
-@@clientName(ResourceCarbonEmissionTopItemsSummaryData,
+@@clientName(
+  ResourceCarbonEmissionTopItemsSummaryData,
   "ResourceCarbonEmissionTopItemsSummary",
   "csharp"
 );
-@@clientName(ResourceGroupCarbonEmissionItemDetailData,
+@@clientName(
+  ResourceGroupCarbonEmissionItemDetailData,
   "ResourceGroupCarbonEmissionItemDetail",
   "csharp"
 );
-@@clientName(ResourceGroupCarbonEmissionTopItemMonthlySummaryData,
+@@clientName(
+  ResourceGroupCarbonEmissionTopItemMonthlySummaryData,
   "ResourceGroupCarbonEmissionTopItemMonthlySummary",
   "csharp"
 );
 @@clientName(Microsoft.Carbon, "CarbonOptimizationMgmtClient", "python");
 @@clientName(Microsoft.Carbon, "CarbonOptimizationManagementClient", "java");
-@@clientName(Microsoft.Carbon,
+@@clientName(
+  Microsoft.Carbon,
   "CarbonOptimizationManagementClient",
   "javascript"
 );
-@@clientName(CarbonEmissionDataAvailableDateRange,
+@@clientName(
+  CarbonEmissionDataAvailableDateRange,
   "CarbonEmissionAvailableDateRange",
   "csharp"
 );
@@ -85,59 +101,72 @@ using Microsoft.Carbon;
 @@clientName(DateRange.end, "EndOn", "csharp");
 @@clientName(QueryFilter, "CarbonEmissionQueryFilter", "csharp");
 @@clientName(OrderByColumnEnum, "CarbonEmissionQueryOrderByColumn", "csharp");
-@@clientName(ResourceGroupCarbonEmissionTopItemsSummaryData.resourceGroupUrl,
+@@clientName(
+  ResourceGroupCarbonEmissionTopItemsSummaryData.resourceGroupUrl,
   "ResourceGroupId",
   "csharp"
 );
-@@alternateType(ResourceGroupCarbonEmissionTopItemsSummaryData.resourceGroupUrl,
+@@alternateType(
+  ResourceGroupCarbonEmissionTopItemsSummaryData.resourceGroupUrl,
   armResourceIdentifier,
   "csharp"
 );
-@@clientName(ResourceGroupCarbonEmissionTopItemMonthlySummaryData.resourceGroupUrl,
+@@clientName(
+  ResourceGroupCarbonEmissionTopItemMonthlySummaryData.resourceGroupUrl,
   "ResourceGroupId",
   "csharp"
 );
-@@alternateType(ResourceGroupCarbonEmissionTopItemMonthlySummaryData.resourceGroupUrl,
+@@alternateType(
+  ResourceGroupCarbonEmissionTopItemMonthlySummaryData.resourceGroupUrl,
   armResourceIdentifier,
   "csharp"
 );
-@@clientName(ResourceGroupCarbonEmissionItemDetailData.resourceGroupUrl,
+@@clientName(
+  ResourceGroupCarbonEmissionItemDetailData.resourceGroupUrl,
   "ResourceGroupId",
   "csharp"
 );
-@@alternateType(ResourceGroupCarbonEmissionItemDetailData.resourceGroupUrl,
+@@alternateType(
+  ResourceGroupCarbonEmissionItemDetailData.resourceGroupUrl,
   armResourceIdentifier,
   "csharp"
 );
 @@clientName(ResponseDataTypeEnum, "CarbonEmissionDataType", "csharp");
 @@clientName(SortDirectionEnum, "CarbonEmissionQuerySortDirection", "csharp");
-@@alternateType(ResourceCarbonEmissionTopItemsSummaryData.resourceId,
+@@alternateType(
+  ResourceCarbonEmissionTopItemsSummaryData.resourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ResourceCarbonEmissionTopItemMonthlySummaryData.resourceId,
+@@alternateType(
+  ResourceCarbonEmissionTopItemMonthlySummaryData.resourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ResourceCarbonEmissionItemDetailData.resourceId,
+@@alternateType(
+  ResourceCarbonEmissionItemDetailData.resourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ResourceCarbonEmissionItemDetailData.location,
+@@alternateType(
+  ResourceCarbonEmissionItemDetailData.location,
   azureLocation,
   "csharp"
 );
 @@alternateType(QueryFilter.locationList, azureLocation[], "csharp");
-@@alternateType(ResourceCarbonEmissionItemDetailData.resourceType,
+@@alternateType(
+  ResourceCarbonEmissionItemDetailData.resourceType,
   armResourceType,
   "csharp"
 );
 @@alternateType(QueryFilter.resourceTypeList, armResourceType[], "csharp");
-@@alternateType(CarbonEmissionDataAvailableDateRange.startDate,
+@@alternateType(
+  CarbonEmissionDataAvailableDateRange.startDate,
   utcDateTime,
   "csharp"
 );
-@@alternateType(CarbonEmissionDataAvailableDateRange.endDate,
+@@alternateType(
+  CarbonEmissionDataAvailableDateRange.endDate,
   utcDateTime,
   "csharp"
 );

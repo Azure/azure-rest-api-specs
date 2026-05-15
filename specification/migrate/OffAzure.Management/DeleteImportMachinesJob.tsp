@@ -43,6 +43,7 @@ interface DeleteImportMachinesJobs {
 }
 
 @@doc(DeleteImportMachinesJob.name, "Job Arm Name.");
-@@doc(DeleteImportMachinesJob.properties,
+@@doc(
+  DeleteImportMachinesJob.properties,
   "The resource-specific properties for this resource."
 );

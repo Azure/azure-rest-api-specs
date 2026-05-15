@@ -84,9 +84,11 @@ interface WorkspaceSettings {
 
 @@doc(WorkspaceSetting.name, "Name of the security setting");
 @@doc(WorkspaceSetting.properties, "Workspace setting data");
-@@doc(WorkspaceSettings.create::parameters.resource,
+@@doc(
+  WorkspaceSettings.create::parameters.resource,
   "Security data setting object"
 );
-@@doc(WorkspaceSettings.update::parameters.properties,
+@@doc(
+  WorkspaceSettings.update::parameters.properties,
   "Security data setting object"
 );

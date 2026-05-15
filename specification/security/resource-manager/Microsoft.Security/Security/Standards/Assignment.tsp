@@ -85,10 +85,12 @@ interface Assignments {
   >;
 }
 
-@@doc(Assignment.name,
+@@doc(
+  Assignment.name,
   "The security assignment key - unique key for the standard assignment"
 );
 @@doc(Assignment.properties, "Properties of a security assignment");
-@@doc(Assignments.createOrUpdate::parameters.resource,
+@@doc(
+  Assignments.createOrUpdate::parameters.resource,
   "Custom standard assignment over a pre-defined scope"
 );

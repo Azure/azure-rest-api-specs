@@ -3,14 +3,8 @@ import "./ProductSupportStatus.tsp";
 import "./CommonEnums.tsp";
 import "../Enums/Enums.tsp";
 import "./CommonAssessmentPropertiesEnums.tsp";
-import "../Enums/Enums.tsp";
 
-using TypeSpec.Http;
-using TypeSpec.Rest;
-using TypeSpec.Versioning;
-using Azure.Core;
 using Azure.ResourceManager;
-using OpenAPI;
 
 namespace Microsoft.Migrate;
 
