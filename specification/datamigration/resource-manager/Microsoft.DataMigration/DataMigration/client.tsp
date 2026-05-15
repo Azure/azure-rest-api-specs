@@ -462,3 +462,7 @@ using Microsoft.DataMigration;
 @@clientName(SyncTableMigrationState.ERROR, "Error", "csharp");
 @@clientName(SyncTableMigrationState.FAILED, "Failed", "csharp");
 @@clientName(SyncTableMigrationState.FULL_LOAD, "FullLoad", "csharp");
+
+// --- Regular enum casing fixes ---
+@@clientName(ServerLevelPermissionsGroup.MigrationFromMySQLToAzureDBForMySQL, "MigrationFromMySqlToAzureDBForMySql", "csharp");
+@@clientName(ServerLevelPermissionsGroup.MigrationFromSqlServerToAzureVM, "MigrationFromSqlServerToAzureVm", "csharp");
