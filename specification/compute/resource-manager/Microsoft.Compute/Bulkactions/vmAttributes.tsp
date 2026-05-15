@@ -16,7 +16,7 @@ namespace Microsoft.Compute;
 // can import without duplicating the union and model definitions.
 // ============================================================
 
-@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@added(Microsoft.Compute.Versions.`2026-06-06-preview`)
 @doc("Architecture types supported by Azure VMs.")
 union ArchitectureType {
   @doc("ARM64 Architecture")
@@ -29,7 +29,7 @@ union ArchitectureType {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "VMAttributeSupport which does not follow camel casing"
-@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@added(Microsoft.Compute.Versions.`2026-06-06-preview`)
 @doc("VMSizes supported by Azure VMs. Included is a union of Excluded and Required.")
 union VMAttributeSupport {
   @doc("All VMSizes having the feature support will be excluded.")
@@ -44,7 +44,7 @@ union VMAttributeSupport {
   string,
 }
 
-@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@added(Microsoft.Compute.Versions.`2026-06-06-preview`)
 @doc("Local storage disk types supported by Azure VMs.")
 union LocalStorageDiskType {
   @doc("HDD DiskType.")
@@ -56,7 +56,7 @@ union LocalStorageDiskType {
   string,
 }
 
-@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@added(Microsoft.Compute.Versions.`2026-06-06-preview`)
 @doc("Accelerator manufacturers supported by Azure VMs.")
 union AcceleratorManufacturer {
   @doc("AMD GpuType")
@@ -71,7 +71,7 @@ union AcceleratorManufacturer {
   string,
 }
 
-@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@added(Microsoft.Compute.Versions.`2026-06-06-preview`)
 @doc("Accelerator types supported by Azure VMs.")
 union AcceleratorType {
   @doc("GPU Accelerator")
@@ -83,7 +83,7 @@ union AcceleratorType {
   string,
 }
 
-@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@added(Microsoft.Compute.Versions.`2026-06-06-preview`)
 @doc("VMCategories defined for Azure VMs.")
 union VMCategory {
   @doc("General purpose VM sizes provide balanced CPU-to-memory ratio. Ideal for testing and development, small to medium databases, and low to medium traffic web servers.")
@@ -110,7 +110,7 @@ union VMCategory {
   string,
 }
 
-@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@added(Microsoft.Compute.Versions.`2026-06-06-preview`)
 @doc("Cpu Manufacturers supported by Azure VMs.")
 union CpuManufacturer {
   @doc("Intel CPU.")
@@ -128,7 +128,7 @@ union CpuManufacturer {
   string,
 }
 
-@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@added(Microsoft.Compute.Versions.`2026-06-06-preview`)
 @doc("HyperVGenerations supported by Azure VMs.")
 union HyperVGeneration {
   @doc("Gen1 hyperV.")
@@ -141,7 +141,7 @@ union HyperVGeneration {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "VMAttributeMinMaxInteger which does not follow camel casing"
-@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@added(Microsoft.Compute.Versions.`2026-06-06-preview`)
 @doc("While retrieving VMSizes from CRS, Min = 0 (uint.MinValue) if not specified, Max = 4294967295 (uint.MaxValue) if not specified. This allows to filter VMAttributes on all available VMSizes.")
 model VMAttributeMinMaxInteger {
   @minValue(0)
@@ -154,7 +154,7 @@ model VMAttributeMinMaxInteger {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "VMAttributeMinMaxDouble which does not follow camel casing"
-@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@added(Microsoft.Compute.Versions.`2026-06-06-preview`)
 @doc("VMAttributes using double values.")
 model VMAttributeMinMaxDouble {
   @minValue(0.0)
@@ -167,7 +167,7 @@ model VMAttributeMinMaxDouble {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "VMAttributes which does not follow camel casing"
-@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@added(Microsoft.Compute.Versions.`2026-06-06-preview`)
 @doc("VMAttributes that will be used to filter VMSizes which will be used to launch instances.")
 model VMAttributes {
   @doc("The range of vCpuCount specified from Min to Max. Must be specified if VMAttributes are specified, either Min or Max is required if specified.")

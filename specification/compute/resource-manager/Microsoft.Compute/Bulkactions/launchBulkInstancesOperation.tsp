@@ -83,7 +83,7 @@ alias LaunchCustomParams = {
 // Enums
 // ============================================================
 
-@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@added(Microsoft.Compute.Versions.`2026-06-06-preview`)
 @Azure.Core.lroStatus
 @doc("The status of the LaunchBulkInstancesOperation.")
 union ProvisioningState {
@@ -105,7 +105,7 @@ union ProvisioningState {
   string,
 }
 
-@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@added(Microsoft.Compute.Versions.`2026-06-06-preview`)
 @doc("Capacity types for LaunchBulkInstancesOperation.")
 union CapacityType {
   @doc("Default. VM is the default capacity type for LaunchBulkInstancesOperation where capacity is provisioned in terms of VMs.")
@@ -117,7 +117,7 @@ union CapacityType {
   string,
 }
 
-@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@added(Microsoft.Compute.Versions.`2026-06-06-preview`)
 @doc("Different kind of eviction policies")
 union EvictionPolicy {
   @doc("When evicted, the Spot VM will be deleted and the corresponding capacity will be updated to reflect this.")
@@ -129,7 +129,7 @@ union EvictionPolicy {
   string,
 }
 
-@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@added(Microsoft.Compute.Versions.`2026-06-06-preview`)
 @doc("Distribution strategies for LaunchBulkInstancesOperation zone allocation policy.")
 union ZoneDistributionStrategy {
   @doc("Default. Launch instances in a single zone based on best effort. If capacity is not available, LaunchBulkInstancesOperation can allocate capacity in different zones.")
@@ -147,7 +147,7 @@ union ZoneDistributionStrategy {
   string,
 }
 
-@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@added(Microsoft.Compute.Versions.`2026-06-06-preview`)
 @doc("Virtual Machine operation status values.")
 union VMOperationStatus {
   @doc("Indicates that the virtual machine is either in the process of being created or is scheduled to be created.")
@@ -178,7 +178,7 @@ union VMOperationStatus {
 // Supporting models
 // ============================================================
 
-@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@added(Microsoft.Compute.Versions.`2026-06-06-preview`)
 @doc("Compute Profile to configure the Virtual Machines.")
 model ComputeProfile {
   @doc("Base Virtual Machine Profile Properties to be specified according to specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/{computeApiVersion}/virtualMachine.json#/definitions/VirtualMachineProperties")
@@ -192,7 +192,7 @@ model ComputeProfile {
   computeApiVersion?: string;
 }
 
-@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@added(Microsoft.Compute.Versions.`2026-06-06-preview`)
 @doc("API error base.")
 model ApiErrorBase {
   @doc("The error code.")
@@ -205,7 +205,7 @@ model ApiErrorBase {
   message?: string;
 }
 
-@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@added(Microsoft.Compute.Versions.`2026-06-06-preview`)
 @doc("Inner error details.")
 model InnerError {
   @doc("The exception type.")
@@ -215,7 +215,7 @@ model InnerError {
   errorDetail?: string;
 }
 
-@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@added(Microsoft.Compute.Versions.`2026-06-06-preview`)
 @doc("ApiError for Fleet")
 model ApiError is ApiErrorBase {
   @identifiers(#["message", "target"])
@@ -226,7 +226,7 @@ model ApiError is ApiErrorBase {
   innererror?: InnerError;
 }
 
-@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@added(Microsoft.Compute.Versions.`2026-06-06-preview`)
 @doc("A virtual machine launched by a LaunchBulkInstancesOperation.")
 model VirtualMachine {
   @doc("The name of the virtual machine.")
@@ -252,7 +252,7 @@ model VirtualMachine {
   error?: ApiError;
 }
 
-@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@added(Microsoft.Compute.Versions.`2026-06-06-preview`)
 @doc("The response of a virtual machine list operation.")
 model VirtualMachineListResult {
   @pageItems
@@ -268,7 +268,7 @@ model VirtualMachineListResult {
 // Resource: LaunchBulkInstancesOperation
 // ============================================================
 
-@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@added(Microsoft.Compute.Versions.`2026-06-06-preview`)
 @doc("A LaunchBulkInstancesOperation resource. Holds envelope properties shared between the request shape and the location-keyed resource.")
 model LaunchBulkInstancesOperation {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Zones is a valid envelope property for this resource."
@@ -284,7 +284,7 @@ model LaunchBulkInstancesOperation {
   ...ResourcePlanProperty;
 }
 
-@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@added(Microsoft.Compute.Versions.`2026-06-06-preview`)
 @doc("Details of the LaunchBulkInstancesOperation.")
 model LaunchBulkInstancesOperationProperties {
   @visibility(Lifecycle.Read)
@@ -318,7 +318,7 @@ model LaunchBulkInstancesOperationProperties {
   retryPolicy?: RetryPolicy;
 }
 
-@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@added(Microsoft.Compute.Versions.`2026-06-06-preview`)
 @doc("Location based LaunchBulkInstancesOperation resource. The location is part of the resource path.")
 model LocationBasedLaunchBulkInstancesOperation
   is Azure.ResourceManager.ProxyResource<LaunchBulkInstancesOperationProperties> {
@@ -333,7 +333,7 @@ model LocationBasedLaunchBulkInstancesOperation
   ...LaunchBulkInstancesOperation;
 }
 
-@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@added(Microsoft.Compute.Versions.`2026-06-06-preview`)
 @doc("List of LaunchBulkInstancesOperation resources.")
 model LaunchBulkInstancesOperationListResult {
   @pageItems
@@ -350,7 +350,7 @@ model LaunchBulkInstancesOperationListResult {
 // Routes: BulkActions interface (8 operations)
 // ============================================================
 
-@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@added(Microsoft.Compute.Versions.`2026-06-06-preview`)
 @armResourceOperations(#{ allowStaticRoutes: true })
 interface BulkActions {
   @doc("Gets an instance of LaunchBulkInstancesOperations.")

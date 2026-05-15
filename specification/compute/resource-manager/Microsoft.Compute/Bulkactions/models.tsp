@@ -163,8 +163,8 @@ model VmSizeProfile {
   @minLength(1)
   name: string;
 
-  @doc("The rank of this VM size in the priority order. Used with AllocationStrategy.Prioritized; ignored otherwise.")
-  rank?: int32;
+  @doc("The rank of this VM size in the priority order")
+  rank: int32;
 }
 
 @added(Microsoft.Compute.Versions.`2026-04-06-preview`)
@@ -174,10 +174,12 @@ model PriorityProfile {
   type?: PriorityType;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "maxPricePerVM has VM which does not follow camel casing"
-  @doc("Price per hour of each Spot VM will never exceed this.")
+  @doc("Price per hour of each Spot VM will never exceed this. Available from 2026-06-06-preview.")
+  @added(Microsoft.Compute.Versions.`2026-06-06-preview`)
   maxPricePerVM?: float32;
 
-  @doc("Eviction Policy to follow when evicting Spot VMs.")
+  @doc("Eviction Policy to follow when evicting Spot VMs. Available from 2026-06-06-preview.")
+  @added(Microsoft.Compute.Versions.`2026-06-06-preview`)
   evictionPolicy?: EvictionPolicy;
 
   @doc("The allocation strategy for VM size selection")
@@ -190,8 +192,8 @@ model ZonePreference {
   @doc("The zone identifier")
   zone: string;
 
-  @doc("The rank of this zone in the priority order. Used with Prioritized DistributionStrategy; ignored otherwise.")
-  rank?: int32;
+  @doc("The rank of this zone in the priority order")
+  rank: int32;
 }
 
 @added(Microsoft.Compute.Versions.`2026-04-06-preview`)
