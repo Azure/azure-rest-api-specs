@@ -5,8 +5,7 @@ using Microsoft.Consumption;
 using Azure.ClientGenerator.Core;
 using Azure.Core;
 
-@@clientName(
-  Microsoft.Consumption,
+@@clientName(Microsoft.Consumption,
   "ConsumptionManagementClient",
   "python,javascript"
 );
@@ -26,19 +25,28 @@ using Azure.Core;
 
 // Fix USD property name changes (costInUSD -> costInUsd, paygCostInUSD -> paygCostInUsd)
 @@clientName(ModernUsageDetailProperties.costInUSD, "costInUsd", "java");
-@@clientName(
-  ModernUsageDetailProperties.paygCostInUSD,
+@@clientName(ModernUsageDetailProperties.paygCostInUSD,
   "paygCostInUsd",
   "java"
 );
 
-@@clientName(
-  LegacyChargeSummaryProperties.azureMarketplaceCharges,
+@@clientName(LegacyChargeSummaryProperties.azureMarketplaceCharges,
   "marketplaceCharges",
   "go"
 );
 
-// csharp configurations
+// =============================================================================
+// C# (Azure.ResourceManager.Consumption) customizations
+// -----------------------------------------------------------------------------
+// All decorators below preserve source/binary back-compat with the shipped
+// v1.1.0 surface (originally produced from Swagger via AutoRest). Companion
+// SDK customizations live under
+// sdk/consumption/Azure.ResourceManager.Consumption/src/Custom/ — each subgroup
+// notes the Custom/ file it pairs with when applicable.
+// =============================================================================
+
+// --- Type renames: keep the shipped `Consumption*` prefix on every public
+//     model so v1.x customers don't see type-name breaks. -----------------------
 @@clientName(Budget, "ConsumptionBudget", "csharp");
 @@clientName(CategoryType, "BudgetCategory", "csharp");
 @@clientName(CurrentSpend, "BudgetCurrentSpend", "csharp");
@@ -51,7 +59,12 @@ using Azure.Core;
 @@clientName(BalanceProperties.priceHidden, "IsPriceHidden", "csharp");
 @@clientName(CreditSummary, "ConsumptionCreditSummary", "csharp");
 @@clientName(EventSummary, "ConsumptionEventSummary", "csharp");
+// Rename the generated property to InternalETag so the custom partial in
+// Custom/Models/ConsumptionEventSummary.cs can re-expose a settable ETag wrapper
+// (the shipped v1.x AutoRest surface had a settable ETag).
 @@clientName(EventSummary.eTag, "InternalETag", "csharp");
+// Date-typed properties (utcDateTime in the spec) are renamed to end with `On`
+// to comply with the .NET SDK design guideline DATE001.
 @@clientName(EventProperties.transactionDate, "TransactOn", "csharp");
 @@clientName(EventType, "ConsumptionEventType", "csharp");
 @@clientName(ManagementGroupAggregatedCostResult,
@@ -193,6 +206,9 @@ using Azure.Core;
   "csharp"
 );
 @@clientName(EventsOperationGroup.listByBillingAccount, "GetEvents", "csharp");
+// The inner Properties bag also has an `eTag` field that flattens to the same
+// generated container; rename to `PropertiesETag` to avoid colliding with the
+// resource-level ETag and to match the shipped v1.x AutoRest property names.
 @@clientName(CreditSummaryProperties.eTag, "PropertiesETag", "csharp");
 @@clientName(EventProperties.eTag, "PropertiesETag", "csharp");
 @@clientName(LotProperties.eTag, "PropertiesETag", "csharp");
@@ -202,6 +218,15 @@ using Azure.Core;
 );
 @@clientName(ReservationDetail, "ConsumptionReservationDetail", "csharp");
 
+// SDK guideline DATE001: DateTime/DateTimeOffset properties must end with `On`
+// or `At`. The property lives on PricesheetDownloadProperties but is flattened
+// onto OperationStatus by the generator. OperationStatus is a new (1.2.0-beta.1)
+// type, so renaming is free.
+@@clientName(PricesheetDownloadProperties.validTill, "ExpiresOn", "csharp");
+
+// --- Operation renames and relocations: keep shipped v1.x method names
+//     (Get*, GetPriceSheet, ...) and move `PriceSheetResults.get` onto its own
+//     client surface to match the original AutoRest layout. -------------------
 @@clientLocation(PriceSheetResults.get, PriceSheetResults, "csharp");
 @@clientName(PriceSheetResults.get, "GetPriceSheet", "csharp");
 @@clientName(UsageDetailsOperationGroup.list,
@@ -221,11 +246,6 @@ using Azure.Core;
   "GetConsumptionReservationRecommendations",
   "csharp"
 );
-// Restore the v1.x SDK signature: rename the action method to
-// "GetConsumptionReservationRecommendationDetails" and rename the colliding
-// query parameter `scope` to `recommendationScope` (the path uses `scope`
-// as the ResourceIdentifier, so the auto-generated rename to `scope0` is
-// not back-compatible).
 @@clientName(ReservationRecommendationDetailsOperationGroup.get,
   "GetConsumptionReservationRecommendationDetails",
   "csharp"
@@ -237,9 +257,16 @@ using Azure.Core;
 @@clientName(UsageDetailsListParameters.$skiptoken, "skipToken ", "csharp");
 @@clientName(MarketplacesListParameters.$skiptoken, "skipToken ", "csharp");
 
+// --- Discriminator subclasses must remain public so consumers (and the SDK's
+//     ArmConsumptionModelFactory factory overloads in
+//     Custom/ArmConsumptionModelFactory.cs) can construct/cast them.
+//     Without @@access(Public, ...) the MPG generator emits them as internal.
 @@access(ModernChargeSummary, Access.public, "csharp");
 @@access(LegacyChargeSummary, Access.public, "csharp");
 
+// --- Strongly-typed property aliases: surface ResourceIdentifier / Guid /
+//     AzureLocation / ETag instead of plain string, matching the shipped v1.x
+//     types produced by AutoRest from the original swagger format hints. ------
 @@alternateType(ReservationDetailProperties.instanceId,
   armResourceIdentifier,
   "csharp"
@@ -285,6 +312,16 @@ using Azure.Core;
   azureLocation,
   "csharp"
 );
+// SDK guideline TYPE003: properties representing an Azure region should be
+// typed as AzureLocation, not string. Pairs with the `LocationPropertiesLocation`
+// accessor in Custom/Models/ConsumptionModernReservationRecommendation.cs.
+@@alternateType(ModernReservationRecommendationProperties.location,
+  azureLocation,
+  "csharp"
+);
+// --- ETag aliases: every resource-level `etag` / `eTag` is surfaced as
+//     Azure.ETag (the shipped v1.x AutoRest type) instead of the spec's raw
+//     `eTag` scalar / string. -------------------------------------------------
 @@alternateType(ReservationRecommendationDetailsModel.etag, eTag, "csharp");
 @@alternateType(Budget.eTag, eTag, "csharp");
 @@alternateType(Balance.etag, eTag, "csharp");
@@ -309,30 +346,21 @@ using Azure.Core;
   uuid,
   "csharp"
 );
-
-// Match shipped v1.x SDK surface: AutoRest emitted these required value-type/enum
-// properties as nullable on ConsumptionBudgetData. Using `| null` keeps the wire
-// contract (still required) but maps to nullable in C# for back-compat.
+// --- Nullable value-type back-compat for required BudgetProperties scalars.
+//     The shipped v1.x surface exposed these as nullable; the spec marks them
+//     required. `T | null` preserves wire required-ness but emits `T?` in C#.
 @@alternateType(BudgetProperties.amount, decimal | null, "csharp");
 @@alternateType(BudgetProperties.timeGrain, TimeGrainType | null, "csharp");
 @@alternateType(BudgetProperties.category, CategoryType | null, "csharp");
-// Restore the v1.x SDK base type: ConsumptionReservationRecommendation must
-// inherit ResourceData. The cleaner approach
-// `@@Legacy.hierarchyBuilding(ReservationRecommendation, Foundations.Resource, "csharp")`
-// crashes the MPG generator with
-// `System.InvalidOperationException: Sequence contains no matching element`
-// in `InheritableSystemObjectModelVisitor.UpdateFullConstructor`, because
-// `ReservationRecommendation` is not bound to an `@armResourceOperations`
-// resource (its routes are list-only on `ReservationRecommendationsOperationGroup`)
-// and the visitor cannot synthesize a ResourceData base for a non-resource
-// model that already spreads `Foundations.Resource`.
-//
-// Workaround: declare csharp-only TypeSpec replacement models that `extends`
-// `Foundations.Resource` (which the MPG generator translates to
-// `: ResourceData`), redeclare every non-Resource property, re-declare the
-// Legacy / Modern discriminator subclasses against the new base, then swap
-// them in for csharp via @@alternateType so OpenAPI / other languages stay
-// unchanged.
+
+// --- Redirect the discriminated ReservationRecommendation hierarchy to the
+//     wrapper models declared below. The spec's ReservationRecommendation uses
+//     `...Foundations.Resource` (spread, not extends), which makes the MPG
+//     generator drop ResourceData inheritance and the flattened scalar surface
+//     that shipped v1.x had. The wrappers extend Foundations.Resource directly
+//     so the generator emits ResourceData semantics, and the SDK Custom partials
+//     (Custom/Models/Consumption{Legacy,Modern}ReservationRecommendation.cs)
+//     re-expose Properties members on the discriminator leaves.
 @@alternateType(ReservationRecommendation,
   ConsumptionReservationRecommendation,
   "csharp"
@@ -346,6 +374,13 @@ using Azure.Core;
   "csharp"
 );
 
+// Wrapper models for the ReservationRecommendation hierarchy. These intentionally
+// `extends Azure.ResourceManager.Foundations.Resource` (vs. the spread used in
+// the spec) so the MPG generator emits them with ResourceData semantics —
+// matching the shipped v1.x AutoRest-generated surface. Their `properties`
+// bag is itself discriminated (@discriminator("scope")), so we CANNOT use
+// @@Legacy.flattenProperty here (flatten-polymorphism rule); the SDK Custom
+// partials surface the inner members instead.
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -389,15 +424,29 @@ model ConsumptionModernReservationRecommendation
   kind: "modern";
 }
 
+// --- Usage overrides ---
+// Tag / TagsResult / ChargeSummary are produced by service responses but the
+// shipped v1.x surface exposed them with public parameterless ctors and
+// settable required-properties (matching AutoRest output-as-input behavior).
+// Forcing Usage.input restores those surfaces so the SDK Custom factories
+// (ArmConsumptionModelFactory.cs) and customer mocking can construct them.
 @@usage(Tag, Usage.input, "csharp");
 @@usage(TagsResult, Usage.input, "csharp");
 @@usage(ChargeSummary, Usage.input, "csharp");
 
-// Keep LotSummary/EventSummary as input + output to preserve public parameterless ctor and settable properties (matches shipped v1.0.1 surface).
+// Keep LotSummary/EventSummary as input + output to preserve public parameterless
+// ctor and settable properties (matches shipped v1.0.1 surface).
 @@usage(LotSummary, Usage.input | Usage.output, "csharp");
 @@usage(EventSummary, Usage.input | Usage.output, "csharp");
 
-// Flatten properties-envelope models so generated discriminator subclasses expose shipped flat-property surface.
+// --- Flatten the `properties` envelope on the four "summary/usage" discriminator
+//     types so the generated subclasses expose the shipped flat-property surface
+//     (the equivalent of AutoRest's swagger `x-ms-client-flatten: true` on the
+//     inner `properties` reference). The ReservationRecommendation hierarchy is
+//     intentionally NOT flattened — its `properties` is itself
+//     @discriminator("scope"), which is incompatible with @@Legacy.flattenProperty
+//     (TCGC flatten-polymorphism rule). For that hierarchy the flattening is
+//     done via SDK Custom partials instead.
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(LegacyUsageDetail.properties,
   "csharp"
