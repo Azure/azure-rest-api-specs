@@ -87,7 +87,6 @@ const EvaluationSuiteGenerationJobsRequiredPreviews = #{
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client via Operation-Location"
-@removed(Versions.v1)
 @tag("EvaluationSuiteGenerationJobs")
 interface EvaluationSuiteGenerationJobs {
   @summary("Creates an evaluation suite generation job.")

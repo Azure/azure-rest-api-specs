@@ -55,7 +55,6 @@ union EvaluatorDefinitionType {
   openai_graders: "openai_graders",
 
   @doc("Rubric-based evaluator definition. Stores dimensions (the scoring blueprint) for both quality and safety evaluators. Can be created via the generate API or manually via createVersion.")
-  @removed(Versions.v1)
   rubric: "rubric",
 }
 
@@ -118,7 +117,6 @@ model PromptBasedEvaluatorDefinition extends EvaluatorDefinition {
 // ============================================================================
 
 @doc("A single dimension — one independent, measurable quality dimension within a rubric evaluator's scoring blueprint.")
-@removed(Versions.v1)
 model Dimension {
   @doc("Stable identifier for this dimension (snake_case, e.g., `correct_resolution`). Required. Provided by the user when manually creating a rubric evaluator or during human-in-the-loop review of a generated set; the generation pipeline produces an initial value the user can edit. Editable when saving new versions.")
   dimension_id: string;
@@ -136,7 +134,6 @@ model Dimension {
 }
 
 @doc("Rubric-based evaluator definition — stores dimensions produced by the generate API. Used for both quality and safety evaluators.")
-@removed(Versions.v1)
 model RubricBasedEvaluatorDefinition extends EvaluatorDefinition {
   type: EvaluatorDefinitionType.rubric;
 
@@ -154,7 +151,6 @@ model RubricBasedEvaluatorDefinition extends EvaluatorDefinition {
 // ============================================================================
 
 @doc("Reference to a versioned Foundry Dataset.")
-@removed(Versions.v1)
 model DatasetReference {
   @doc("Dataset name.")
   name: string;
@@ -164,7 +160,6 @@ model DatasetReference {
 }
 
 @doc("Service-managed provenance artifacts produced by an evaluator generation job. Present only on EvaluatorVersion resources created via the generation pipeline. The combined-JSONL Foundry Dataset is read-only and resolves to a versioned dataset in a service-reserved namespace.")
-@removed(Versions.v1)
 model EvaluatorGenerationArtifacts {
   @doc("Reference to the single Foundry Dataset (one combined JSONL file, version-aligned to `EvaluatorVersion.version`) holding all artifacts produced by the generation pipeline. Each row in the JSONL carries a `kind` field discriminating its content (e.g. `spec`, `tools`, `context`).")
   dataset: DatasetReference;
@@ -181,7 +176,6 @@ model EvaluatorGenerationArtifacts {
 // ============================================================================
 
 @doc("The supported source types for evaluator generation jobs.")
-@removed(Versions.v1)
 union EvaluatorGenerationJobSourceType {
   string,
 
@@ -200,7 +194,6 @@ union EvaluatorGenerationJobSourceType {
 
 @doc("The base source model for evaluator generation jobs. Polymorphic over `type`.")
 @discriminator("type")
-@removed(Versions.v1)
 model EvaluatorGenerationJobSource {
   @doc("The type of source.")
   type: EvaluatorGenerationJobSourceType;
@@ -211,28 +204,24 @@ model EvaluatorGenerationJobSource {
 // the discriminated base would emit `description` twice in the union.
 
 @doc("Prompt source for evaluator generation jobs — inline text provided by the user.")
-@removed(Versions.v1)
 model PromptEvaluatorGenerationJobSource
   extends EvaluatorGenerationJobSource {
   ...PromptJobSource;
 }
 
 @doc("Agent source for evaluator generation jobs — references an agent to fetch instructions and metadata from.")
-@removed(Versions.v1)
 model AgentEvaluatorGenerationJobSource
   extends EvaluatorGenerationJobSource {
   ...AgentJobSource;
 }
 
 @doc("Traces source for evaluator generation jobs — conversation traces from Application Insights.")
-@removed(Versions.v1)
 model TracesEvaluatorGenerationJobSource
   extends EvaluatorGenerationJobSource {
   ...TracesJobSource;
 }
 
 @doc("Dataset source for evaluator generation jobs — reference to a dataset.")
-@removed(Versions.v1)
 model DatasetEvaluatorGenerationJobSource
   extends EvaluatorGenerationJobSource {
   ...DatasetJobSource;
@@ -243,7 +232,6 @@ model DatasetEvaluatorGenerationJobSource
 // ============================================================================
 
 @doc("Caller-supplied inputs for an evaluator generation job.")
-@removed(Versions.v1)
 model EvaluatorGenerationInputs {
   @doc("Source materials for generation — agent descriptions, prompts, traces, or datasets. Each entry is an `EvaluatorGenerationJobSource` variant discriminated by `type`.")
   sources: EvaluatorGenerationJobSource[];
@@ -268,7 +256,6 @@ model EvaluatorGenerationInputs {
 }
 
 @doc("Token consumption summary for an evaluator generation job. Populated when the job reaches a terminal state.")
-@removed(Versions.v1)
 model EvaluatorGenerationTokenUsage {
   @doc("Number of input (prompt) tokens consumed.")
   input_tokens: int64;
@@ -281,7 +268,6 @@ model EvaluatorGenerationTokenUsage {
 }
 
 @doc("Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion.")
-@removed(Versions.v1)
 model EvaluatorGenerationJob
   is JobLike<EvaluatorVersion, EvaluatorGenerationInputs> {
   @doc("The timestamp when the job was created, represented in Unix time (seconds since January 1, 1970).")
@@ -319,7 +305,6 @@ model EvaluatorVersion {
 
   @doc("Provenance artifacts from the generation pipeline. Read-only; present only on evaluator versions created via an EvaluatorGenerationJob. Each artifact resolves to a versioned Foundry Dataset.")
   @visibility(Lifecycle.Read)
-  @removed(Versions.v1)
   generation_artifacts?: EvaluatorGenerationArtifacts;
 
   @visibility(Lifecycle.Read)
