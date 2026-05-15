@@ -20,6 +20,8 @@ import "./targetType.tsp";
 import "./operationStatus.tsp";
 import "./workspace.tsp";
 import "./discoveredResource.tsp";
+import "./workspaceDiscovery.tsp";
+import "./workspaceEvaluation.tsp";
 import "./scenario.tsp";
 import "./scenarioConfiguration.tsp";
 import "./scenarioRun.tsp";

@@ -82,6 +82,12 @@
       "name": "DiscoveredResources"
     },
     {
+      "name": "WorkspaceDiscoveries"
+    },
+    {
+      "name": "WorkspaceEvaluations"
+    },
+    {
       "name": "Scenarios"
     },
     {
@@ -89,6 +95,12 @@
     },
     {
       "name": "ScenarioConfigurations"
+    },
+    {
+      "name": "ScenarioConfigurationValidations"
+    },
+    {
+      "name": "ScenarioConfigurationPermissionsFixes"
     }
   ],
   "paths": {
@@ -2933,6 +2945,102 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/discoveries/latest": {
+      "get": {
+        "operationId": "WorkspaceDiscoveries_Get",
+        "tags": [
+          "WorkspaceDiscoveries"
+        ],
+        "description": "Get the latest workspace discovery result.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "String that represents a Workspace resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^<>%&:?#/\\\\]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceDiscovery"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the latest discovery for the workspace.": {
+            "$ref": "./examples/WorkspaceDiscoveries_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/evaluations/latest": {
+      "get": {
+        "operationId": "WorkspaceEvaluations_Get",
+        "tags": [
+          "WorkspaceEvaluations"
+        ],
+        "description": "Get the latest workspace evaluation result.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "String that represents a Workspace resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^<>%&:?#/\\\\]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceEvaluation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the latest evaluation for the workspace.": {
+            "$ref": "./examples/WorkspaceEvaluations_Get.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/refreshRecommendations": {
       "post": {
         "operationId": "Workspaces_RefreshRecommendations",
@@ -3692,6 +3800,72 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/scenarios/{scenarioName}/configurations/{scenarioConfigurationName}/fixResourcePermissions/latest": {
+      "get": {
+        "operationId": "ScenarioConfigurationPermissionsFixes_Get",
+        "tags": [
+          "ScenarioConfigurationPermissionsFixes"
+        ],
+        "description": "Get the latest permission fix result for the scenario configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "String that represents a Workspace resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^<>%&:?#/\\\\]+$"
+          },
+          {
+            "name": "scenarioName",
+            "in": "path",
+            "description": "Name of the scenario.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^<>%&:?#/\\\\]+$"
+          },
+          {
+            "name": "scenarioConfigurationName",
+            "in": "path",
+            "description": "Name of the scenario definition.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^<>%&:?#/\\\\]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PermissionsFix"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the latest permission fix result for the scenario configuration.": {
+            "$ref": "./examples/ScenarioConfigurationPermissionsFixes_Get.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/scenarios/{scenarioName}/configurations/{scenarioConfigurationName}/validate": {
       "post": {
         "operationId": "ScenarioConfigurations_Validate",
@@ -3768,6 +3942,72 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/scenarios/{scenarioName}/configurations/{scenarioConfigurationName}/validations/latest": {
+      "get": {
+        "operationId": "ScenarioConfigurationValidations_Get",
+        "tags": [
+          "ScenarioConfigurationValidations"
+        ],
+        "description": "Get the latest validation result for the scenario configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "String that represents a Workspace resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^<>%&:?#/\\\\]+$"
+          },
+          {
+            "name": "scenarioName",
+            "in": "path",
+            "description": "Name of the scenario.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^<>%&:?#/\\\\]+$"
+          },
+          {
+            "name": "scenarioConfigurationName",
+            "in": "path",
+            "description": "Name of the scenario definition.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^<>%&:?#/\\\\]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Validation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the latest validation for the scenario configuration.": {
+            "$ref": "./examples/ScenarioConfigurationValidations_Get.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/scenarios/{scenarioName}/runs": {
@@ -4725,65 +4965,6 @@
         "zones": {
           "type": "array",
           "description": "List of Azure availability zones to filter targets by.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "ConfigurationExclusions": {
-      "type": "object",
-      "description": "Model that represents exclusion criteria for protecting resources from fault injection.\nUses union (OR) logic - a resource is excluded if it matches ANY criteria.",
-      "properties": {
-        "resources": {
-          "type": "array",
-          "description": "Array of specific resource IDs to exclude from fault injection.",
-          "items": {
-            "type": "string",
-            "format": "arm-id",
-            "description": "A type definition that refers the id to an Azure Resource Manager resource."
-          }
-        },
-        "tags": {
-          "type": "array",
-          "description": "Array of tag key-value pairs. Resources with matching tags are excluded.",
-          "items": {
-            "$ref": "#/definitions/KeyValuePair"
-          },
-          "x-ms-identifiers": [
-            "key"
-          ]
-        },
-        "types": {
-          "type": "array",
-          "description": "Array of resource types. All resources of these types are excluded.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "ConfigurationFilters": {
-      "type": "object",
-      "description": "Model that represents filter criteria for constraining which discovered\nresources participate in fault injection.\n\nUses intersection (AND) logic — a resource is included only if it matches all criteria.",
-      "properties": {
-        "locations": {
-          "type": "array",
-          "description": "Array of Azure location strings. Only resources in these locations are included.\n\nNull or omitted means all locations (no filter). Empty array means include nothing.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "zones": {
-          "type": "array",
-          "description": "Array of availability zone identifiers (\"1\", \"2\", \"3\", \"zone-redundant\").\nOnly resources whose zones intersect this list are included.\n\nNull or omitted means all zones (including non-zonal). Empty array means include nothing.\n\nMutually exclusive with `physicalZones` — set one or the other, not both.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "physicalZones": {
-          "type": "array",
-          "description": "Array of physical availability zone identifiers in `{region}-az{N}` format\n(e.g., `\"westus2-az1\"`). Only resources in the corresponding logical zone\nfor each subscription are included.\n\nAt execution time, each physical zone is resolved to per-subscription\nlogical zones via the Azure locations API. The resolved mapping is surfaced\non the scenario run response (`zoneResolution`).\n\nNull or omitted means physical zone targeting is not used.\nOnly one physical zone is supported in preview.\n\nMutually exclusive with `zones` — set one or the other, not both.",
           "items": {
             "type": "string"
           }
@@ -6118,6 +6299,73 @@
         "remediationUri"
       ]
     },
+    "ResourceTargeting": {
+      "type": "object",
+      "description": "Model that represents unified resource targeting with symmetric include/exclude criteria.\nBoth sides support the same set of dimensions.",
+      "properties": {
+        "include": {
+          "$ref": "#/definitions/ResourceTargetingCriteria",
+          "description": "Inclusion criteria. Resources must match ALL active dimensions to be candidates.\nNull or omitted means no inclusion filtering (all resources are candidates)."
+        },
+        "exclude": {
+          "$ref": "#/definitions/ResourceTargetingCriteria",
+          "description": "Exclusion criteria. Resources matching ANY active dimension are removed.\nNull or omitted means no exclusions applied."
+        }
+      }
+    },
+    "ResourceTargetingCriteria": {
+      "type": "object",
+      "description": "Model that represents a set of targeting criteria for resource selection.\nUsed on both the include and exclude sides of ResourceTargeting.\n\nAll dimensions use unified null/empty semantics:\n- Null or omitted means \"no constraint\" (this dimension is inactive).\n- Empty array is treated the same as null (no constraint).\n- Non-empty array means the dimension is active.",
+      "properties": {
+        "locations": {
+          "type": "array",
+          "description": "Array of Azure location strings (e.g., \"eastus\", \"westeurope\", \"global\").\nCase-insensitive, normalized form only (e.g., \"eastus\" not \"East US\").",
+          "items": {
+            "type": "string"
+          }
+        },
+        "zones": {
+          "type": "array",
+          "description": "Array of logical availability zone identifiers (e.g., \"1\", \"2\", \"3\", \"zone-redundant\").\n\nMutually exclusive with `physicalZones` — set one or the other, not both.\nWhen set, `locations` must also be set on the same side (zone IDs are only meaningful within a region).",
+          "items": {
+            "type": "string"
+          }
+        },
+        "physicalZones": {
+          "type": "array",
+          "description": "Array of physical datacenter zone identifiers in `{region}-az{N}` format\n(e.g., \"westus2-az1\"). Resolved to logical zones per-subscription at execution time.\n\nMutually exclusive with `zones` — set one or the other, not both.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "types": {
+          "type": "array",
+          "description": "Array of Azure resource type strings (e.g., \"Microsoft.Compute/virtualMachines\").\nCase-insensitive equality. Supports trailing wildcard (e.g., \"Microsoft.Compute/*\").",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "description": "Array of tag key-value pairs for filtering by Azure resource tags.\nKey and value are matched case-insensitively. Use \"*\" as value to match any value for a key.",
+          "items": {
+            "$ref": "#/definitions/KeyValuePair"
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
+        },
+        "resources": {
+          "type": "array",
+          "description": "Array of fully qualified Azure resource IDs. Case-insensitive equality.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        }
+      }
+    },
     "RoleAssignmentError": {
       "type": "object",
       "description": "Error details for a failed role assignment.",
@@ -6404,18 +6652,14 @@
             "key"
           ]
         },
-        "exclusions": {
-          "$ref": "#/definitions/ConfigurationExclusions",
-          "description": "Exclusion criteria for protecting resources from fault injection."
-        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Most recent provisioning state for the given scenario resource.",
           "readOnly": true
         },
-        "filters": {
-          "$ref": "#/definitions/ConfigurationFilters",
-          "description": "Filter criteria used to constrain which discovered resources participate in fault injection."
+        "resourceTargeting": {
+          "$ref": "#/definitions/ResourceTargeting",
+          "description": "Unified resource targeting policy that controls which discovered resources participate\nin fault injection. Replaces the separate `exclusions` and `filters` properties with\nsymmetric include/exclude criteria.\n\nInclude uses AND logic — a resource must match ALL active include dimensions.\nExclude uses OR logic — a resource is removed if it matches ANY exclude dimension.\nWhen include and exclude conflict on the same resource, exclude wins.\n\nNull or omitted means all discovered resources participate (no targeting constraints)."
         }
       },
       "required": [
@@ -7297,6 +7541,111 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
+    },
+    "WorkspaceDiscovery": {
+      "type": "object",
+      "description": "Model that represents the latest workspace discovery result.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WorkspaceDiscoveryProperties",
+          "description": "The properties of the workspace discovery."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "WorkspaceDiscoveryProperties": {
+      "type": "object",
+      "description": "Model that represents the properties of the workspace discovery.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/WorkspaceDiscoveryStatus",
+          "description": "The discovery status.",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The discovery UTC start time.",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The discovery UTC end time.",
+          "readOnly": true
+        },
+        "errors": {
+          "type": "array",
+          "description": "System or infrastructure errors encountered during discovery.",
+          "items": {
+            "$ref": "#/definitions/OperationError"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "workspaceId": {
+          "type": "string",
+          "description": "The workspace ID this discovery belongs to.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "status",
+        "workspaceId"
+      ]
+    },
+    "WorkspaceDiscoveryStatus": {
+      "type": "string",
+      "description": "Enum of the workspace discovery status.",
+      "enum": [
+        "Pending",
+        "Queued",
+        "InProgress",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "WorkspaceDiscoveryStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "The discovery is pending and has not started."
+          },
+          {
+            "name": "Queued",
+            "value": "Queued",
+            "description": "The discovery has been accepted and is queued for execution."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The discovery is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The discovery completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The discovery failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The discovery was canceled."
+          }
+        ]
+      },
+      "readOnly": true
     },
     "WorkspaceEvaluation": {
       "type": "object",

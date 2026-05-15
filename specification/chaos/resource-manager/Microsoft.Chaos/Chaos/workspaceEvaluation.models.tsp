@@ -8,6 +8,7 @@ import "./common.models.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.Core;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Chaos;
 

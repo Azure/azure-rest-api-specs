@@ -8,12 +8,15 @@ import "./common.models.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.Core;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Chaos;
 
 /**
  * Model that represents the latest workspace discovery result.
  */
+@added(Microsoft.Chaos.Versions.v2026_05_01_preview)
+@removed(Microsoft.Chaos.Versions.v2025_01_01)
 @parentResource(Workspace)
 @singleton("latest")
 model WorkspaceDiscovery
