@@ -6842,20 +6842,29 @@
     },
     "ChangeRingRequest": {
       "type": "object",
+      "description": "Request body for the change-ring action on a cluster.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ChangeRingRequestProperties"
+          "$ref": "#/definitions/ChangeRingRequestProperties",
+          "description": "Properties of the change-ring request."
         }
-      }
+      },
+      "required": [
+        "properties"
+      ]
     },
     "ChangeRingRequestProperties": {
       "type": "object",
+      "description": "Properties for the change-ring request.",
       "properties": {
         "targetRing": {
-          "type": "string",
+          "$ref": "#/definitions/VsrRing",
           "description": "The target ring for the cluster."
         }
-      }
+      },
+      "required": [
+        "targetRing"
+      ]
     },
     "CheckUpdatesRequest": {
       "type": "object",
@@ -7307,7 +7316,7 @@
           "readOnly": true
         },
         "ring": {
-          "type": "string",
+          "$ref": "#/definitions/VsrRing",
           "description": "The ring to which this cluster belongs to.",
           "readOnly": true
         },
@@ -10546,8 +10555,8 @@
           ]
         },
         "witnessType": {
-          "type": "string",
-          "description": "Use a cloud witness if you have internet access and if you use an Azure Storage account to provide a vote on cluster quorum. A cloud witness uses Azure Blob Storage to read or write a blob file and then uses it to arbitrate in split-brain resolution. Only allowed values are 'Cloud', 'FileShare'."
+          "$ref": "#/definitions/WitnessType",
+          "description": "Use a cloud witness if you have internet access and if you use an Azure Storage account to provide a vote on cluster quorum. A cloud witness uses Azure Blob Storage to read or write a blob file and then uses it to arbitrate in split-brain resolution."
         },
         "witnessPath": {
           "type": "string",
@@ -16482,6 +16491,42 @@
         ]
       }
     },
+    "VsrRing": {
+      "type": "string",
+      "description": "The Validated Solution Recipe (VSR) ring that determines when a cluster\nreceives solution updates. Rings gate rollout progressively from internal\nvalidation through broad production deployment.",
+      "enum": [
+        "CI",
+        "Insider",
+        "EarlyAdopter",
+        "Production"
+      ],
+      "x-ms-enum": {
+        "name": "VsrRing",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CI",
+            "value": "CI",
+            "description": "CI ring — used for automated continuous-integration testing and ProdCI validation without sideloading."
+          },
+          {
+            "name": "Insider",
+            "value": "Insider",
+            "description": "Insider ring — available to all Insider-ring customers and OEMs for broader validation before general availability."
+          },
+          {
+            "name": "EarlyAdopter",
+            "value": "EarlyAdopter",
+            "description": "EarlyAdopter ring — opt-in ring for customers who want updates ahead of the general Production rollout."
+          },
+          {
+            "name": "Production",
+            "value": "Production",
+            "description": "Production ring — general-availability ring for all customers."
+          }
+        ]
+      }
+    },
     "WebProxyConfiguration": {
       "type": "object",
       "description": "Web proxy configuration.",
@@ -16526,6 +16571,30 @@
             "name": "Enabled",
             "value": "Enabled",
             "description": "Windows Server Subscription is enabled."
+          }
+        ]
+      }
+    },
+    "WitnessType": {
+      "type": "string",
+      "description": "Witness type for an Azure Stack HCI cluster.",
+      "enum": [
+        "Cloud",
+        "FileShare"
+      ],
+      "x-ms-enum": {
+        "name": "WitnessType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Cloud",
+            "value": "Cloud",
+            "description": "Cloud witness backed by an Azure Storage account."
+          },
+          {
+            "name": "FileShare",
+            "value": "FileShare",
+            "description": "File-share witness on a local SMB share."
           }
         ]
       }
