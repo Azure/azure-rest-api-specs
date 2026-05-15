@@ -117,6 +117,7 @@ interface AvailableBalanceOperationGroup {
 }
 
 @@doc(AvailableBalance.name, "");
-@@doc(AvailableBalance.properties,
+@@doc(
+  AvailableBalance.properties,
   "The Available Credit or Payment on Account Balance. The credit balance can be used to settle due or past due invoices."
 );

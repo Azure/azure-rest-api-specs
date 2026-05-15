@@ -62,8 +62,11 @@ interface NewRelicMonitorResources {
       @query("userEmail")
       userEmail: string;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -112,8 +115,10 @@ interface NewRelicMonitorResources {
   switchBilling is ArmResourceActionSync<
     NewRelicMonitorResource,
     SwitchBillingRequest,
-    ArmResponse<NewRelicMonitorResource> | (AcceptedResponse &
-      Azure.Core.Foundations.RetryAfterHeader) | NoContentResponse
+
+      | ArmResponse<NewRelicMonitorResource>
+      | (AcceptedResponse & Azure.Core.Foundations.RetryAfterHeader)
+      | NoContentResponse
   >;
 
   /**
@@ -222,28 +227,36 @@ interface NewRelicMonitorResources {
 }
 
 @@doc(NewRelicMonitorResource.name, "Name of the Monitors resource");
-@@doc(NewRelicMonitorResource.properties,
+@@doc(
+  NewRelicMonitorResource.properties,
   "The resource-specific properties for this resource."
 );
-@@doc(NewRelicMonitorResources.getMetricRules::parameters.body,
+@@doc(
+  NewRelicMonitorResources.getMetricRules::parameters.body,
   "The details of the get metrics status request."
 );
-@@doc(NewRelicMonitorResources.getMetricStatus::parameters.body,
+@@doc(
+  NewRelicMonitorResources.getMetricStatus::parameters.body,
   "The details of the get metrics status request."
 );
-@@doc(NewRelicMonitorResources.listAppServices::parameters.body,
+@@doc(
+  NewRelicMonitorResources.listAppServices::parameters.body,
   "The details of the app services get request."
 );
-@@doc(NewRelicMonitorResources.switchBilling::parameters.body,
+@@doc(
+  NewRelicMonitorResources.switchBilling::parameters.body,
   "The details of the switch billing request."
 );
-@@doc(NewRelicMonitorResources.listHosts::parameters.body,
+@@doc(
+  NewRelicMonitorResources.listHosts::parameters.body,
   "The details of the Hosts get request."
 );
-@@doc(NewRelicMonitorResources.linkSaaS::parameters.body,
+@@doc(
+  NewRelicMonitorResources.linkSaaS::parameters.body,
   "Link SaaS body parameter"
 );
-@@doc(NewRelicMonitorResources.resubscribe::parameters.body,
+@@doc(
+  NewRelicMonitorResources.resubscribe::parameters.body,
   "Resubscribe Properties"
 );
 @@doc(NewRelicMonitorResources.list::parameters.body, "Email Id of the user");

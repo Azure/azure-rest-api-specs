@@ -400,42 +400,53 @@ interface NetworkFabrics {
 }
 
 @@doc(NetworkFabrics.create::parameters.resource, "Request payload.");
-@@doc(NetworkFabrics.update::parameters.properties,
+@@doc(
+  NetworkFabrics.update::parameters.properties,
   "Network Fabric properties to update."
 );
-@@doc(NetworkFabrics.upgradeDeprecated::parameters.body,
+@@doc(
+  NetworkFabrics.upgradeDeprecated::parameters.body,
   "Network Fabric properties to update."
 );
-@@doc(NetworkFabrics.upgrade::parameters.body,
+@@doc(
+  NetworkFabrics.upgrade::parameters.body,
   "Network Fabric properties to update."
 );
-@@doc(NetworkFabrics.updateWorkloadManagementBfdConfiguration::parameters.body,
+@@doc(
+  NetworkFabrics.updateWorkloadManagementBfdConfiguration::parameters.body,
   "Request payload."
 );
-@@doc(NetworkFabrics.updateWorkloadManagementBfdConfigurationDeprecated::parameters.body,
+@@doc(
+  NetworkFabrics.updateWorkloadManagementBfdConfigurationDeprecated::parameters.body,
   "Request payload."
 );
-@@doc(NetworkFabrics.updateInfraManagementBfdConfiguration::parameters.body,
+@@doc(
+  NetworkFabrics.updateInfraManagementBfdConfiguration::parameters.body,
   "Request payload."
 );
-@@doc(NetworkFabrics.updateInfraManagementBfdConfigurationDeprecated::parameters.body,
+@@doc(
+  NetworkFabrics.updateInfraManagementBfdConfigurationDeprecated::parameters.body,
   "Request payload."
 );
 
-@@doc(NetworkFabrics.validateConfiguration::parameters.body,
+@@doc(
+  NetworkFabrics.validateConfiguration::parameters.body,
   "Validate configuration properties."
 );
-@@doc(NetworkFabrics.commitBatchStatusDeprecated::parameters.body,
+@@doc(
+  NetworkFabrics.commitBatchStatusDeprecated::parameters.body,
   "Request payload."
 );
 @@doc(NetworkFabrics.commitBatchStatus::parameters.body, "Request payload.");
 @@doc(NetworkFabrics.lockFabricDeprecated::parameters.body, "Request payload.");
 @@doc(NetworkFabrics.lockFabric::parameters.body, "Request payload.");
-@@doc(NetworkFabrics.discardCommitBatchDeprecated::parameters.body,
+@@doc(
+  NetworkFabrics.discardCommitBatchDeprecated::parameters.body,
   "Request payload."
 );
 @@doc(NetworkFabrics.discardCommitBatch::parameters.body, "Request payload.");
 @@doc(NetworkFabrics.refreshConfiguration::parameters.body, "Request payload.");
-@@doc(NetworkFabrics.refreshConfigurationDeprecated::parameters.body,
+@@doc(
+  NetworkFabrics.refreshConfigurationDeprecated::parameters.body,
   "Request payload."
 );

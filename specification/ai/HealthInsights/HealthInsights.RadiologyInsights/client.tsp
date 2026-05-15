@@ -65,104 +65,128 @@ interface RadiologyInsightsClient {
 @@clientName(Fhir.R4.ConditionStage, "Fhir_R4_ConditionStage", "csharp");
 @@clientName(Fhir.R4.Observation, "Fhir_R4_Observation", "java");
 @@clientName(Fhir.R4.Observation, "Fhir_R4_Observation", "csharp");
-@@clientName(Fhir.R4.ObservationReferenceRange,
+@@clientName(
+  Fhir.R4.ObservationReferenceRange,
   "Fhir_R4_ObservationReferenceRange",
   "java"
 );
-@@clientName(Fhir.R4.ObservationReferenceRange,
+@@clientName(
+  Fhir.R4.ObservationReferenceRange,
   "Fhir_R4_ObservationReferenceRange",
   "csharp"
 );
-@@clientName(Fhir.R4.ObservationComponent,
+@@clientName(
+  Fhir.R4.ObservationComponent,
   "Fhir_R4_ObservationComponent",
   "java"
 );
-@@clientName(Fhir.R4.ObservationComponent,
+@@clientName(
+  Fhir.R4.ObservationComponent,
   "Fhir_R4_ObservationComponent",
   "csharp"
 );
 @@clientName(Fhir.R4.ResearchStudy, "Fhir_R4_ResearchStudy", "java");
 @@clientName(Fhir.R4.ResearchStudy, "Fhir_R4_ResearchStudy", "csharp");
 
-@@clientName(AzureHealthInsights.FollowupCommunicationInference.wasAcknowledged,
+@@clientName(
+  AzureHealthInsights.FollowupCommunicationInference.wasAcknowledged,
   "acknowledged",
   "java"
 );
 
-@@clientName(AzureHealthInsights.DocumentAuthor,
+@@clientName(
+  AzureHealthInsights.DocumentAuthor,
   "ClinicalDocumentAuthor",
   "csharp, java"
 );
-@@clientName(AzureHealthInsights.DocumentType,
+@@clientName(
+  AzureHealthInsights.DocumentType,
   "ClinicalDocumentContentType",
   "csharp, java"
 );
-@@clientName(AzureHealthInsights.DocumentContent,
+@@clientName(
+  AzureHealthInsights.DocumentContent,
   "ClinicalDocumentContent",
   "csharp, java"
 );
 @@clientName(AzureHealthInsights.QualityMeasureType.Mips76, "MIPS_76", "java");
-@@clientName(AzureHealthInsights.QualityMeasureType.Mips147,
+@@clientName(
+  AzureHealthInsights.QualityMeasureType.Mips147,
   "MIPS_147",
   "java"
 );
-@@clientName(AzureHealthInsights.QualityMeasureType.Mips195,
+@@clientName(
+  AzureHealthInsights.QualityMeasureType.Mips195,
   "MIPS_195",
   "java"
 );
-@@clientName(AzureHealthInsights.QualityMeasureType.Mips360,
+@@clientName(
+  AzureHealthInsights.QualityMeasureType.Mips360,
   "MIPS_360",
   "java"
 );
-@@clientName(AzureHealthInsights.QualityMeasureType.Mips364,
+@@clientName(
+  AzureHealthInsights.QualityMeasureType.Mips364,
   "MIPS_364",
   "java"
 );
-@@clientName(AzureHealthInsights.QualityMeasureType.Mips405,
+@@clientName(
+  AzureHealthInsights.QualityMeasureType.Mips405,
   "MIPS_405",
   "java"
 );
-@@clientName(AzureHealthInsights.QualityMeasureType.Mips406,
+@@clientName(
+  AzureHealthInsights.QualityMeasureType.Mips406,
   "MIPS_406",
   "java"
 );
-@@clientName(AzureHealthInsights.QualityMeasureType.Mips436,
+@@clientName(
+  AzureHealthInsights.QualityMeasureType.Mips436,
   "MIPS_436",
   "java"
 );
-@@clientName(AzureHealthInsights.QualityMeasureType.Mips145,
+@@clientName(
+  AzureHealthInsights.QualityMeasureType.Mips145,
   "MIPS_145",
   "java"
 );
-@@clientName(AzureHealthInsights.QualityMeasureType.Acrad36,
+@@clientName(
+  AzureHealthInsights.QualityMeasureType.Acrad36,
   "ACRAD_36",
   "java"
 );
-@@clientName(AzureHealthInsights.QualityMeasureType.Acrad37,
+@@clientName(
+  AzureHealthInsights.QualityMeasureType.Acrad37,
   "ACRAD_37",
   "java"
 );
-@@clientName(AzureHealthInsights.QualityMeasureType.Acrad38,
+@@clientName(
+  AzureHealthInsights.QualityMeasureType.Acrad38,
   "ACRAD_38",
   "java"
 );
-@@clientName(AzureHealthInsights.QualityMeasureType.Acrad39,
+@@clientName(
+  AzureHealthInsights.QualityMeasureType.Acrad39,
   "ACRAD_39",
   "java"
 );
-@@clientName(AzureHealthInsights.QualityMeasureType.Acrad40,
+@@clientName(
+  AzureHealthInsights.QualityMeasureType.Acrad40,
   "ACRAD_40",
   "java"
 );
-@@clientName(AzureHealthInsights.QualityMeasureType.Acrad41,
+@@clientName(
+  AzureHealthInsights.QualityMeasureType.Acrad41,
   "ACRAD_41",
   "java"
 );
-@@clientName(AzureHealthInsights.QualityMeasureType.Acrad42,
+@@clientName(
+  AzureHealthInsights.QualityMeasureType.Acrad42,
   "ACRAD_42",
   "java"
 );
-@@clientName(AzureHealthInsights.QualityMeasureType.Mednax55,
+@@clientName(
+  AzureHealthInsights.QualityMeasureType.Mednax55,
   "MEDNAX_55",
   "java"
 );
@@ -172,139 +196,173 @@ interface RadiologyInsightsClient {
 @@clientName(AzureHealthInsights.QualityMeasureType.Qmm17, "QMM_17", "java");
 @@clientName(AzureHealthInsights.QualityMeasureType.Qmm18, "QMM_18", "java");
 @@clientName(AzureHealthInsights.QualityMeasureType.Qmm19, "QMM_19", "java");
-@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.BIRADS,
+@@clientName(
+  AzureHealthInsights.ScoringAndAssessmentCategoryType.BIRADS,
   "Birads",
   "csharp"
 );
-@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.C_RADS_COLONIC_FINDINGS,
+@@clientName(
+  AzureHealthInsights.ScoringAndAssessmentCategoryType.C_RADS_COLONIC_FINDINGS,
   "CRadsColonicFindings",
   "csharp"
 );
-@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.CAD_RADS,
+@@clientName(
+  AzureHealthInsights.ScoringAndAssessmentCategoryType.CAD_RADS,
   "CadRads",
   "csharp"
 );
-@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.LI_RADS,
+@@clientName(
+  AzureHealthInsights.ScoringAndAssessmentCategoryType.LI_RADS,
   "LiRads",
   "csharp"
 );
-@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.LUNG_RADS,
+@@clientName(
+  AzureHealthInsights.ScoringAndAssessmentCategoryType.LUNG_RADS,
   "LungRads",
   "csharp"
 );
-@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.NI_RADS,
+@@clientName(
+  AzureHealthInsights.ScoringAndAssessmentCategoryType.NI_RADS,
   "NiRads",
   "csharp"
 );
-@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.O_RADS,
+@@clientName(
+  AzureHealthInsights.ScoringAndAssessmentCategoryType.O_RADS,
   "ORads",
   "csharp"
 );
-@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.PI_RADS,
+@@clientName(
+  AzureHealthInsights.ScoringAndAssessmentCategoryType.PI_RADS,
   "PiRads",
   "csharp"
 );
-@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.TI_RADS,
+@@clientName(
+  AzureHealthInsights.ScoringAndAssessmentCategoryType.TI_RADS,
   "TiRads",
   "csharp"
 );
-@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.C_RADS_EXTRACOLONIC_FINDINGS,
+@@clientName(
+  AzureHealthInsights.ScoringAndAssessmentCategoryType.C_RADS_EXTRACOLONIC_FINDINGS,
   "CRadsExtracolonicFindings",
   "csharp"
 );
-@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.LIFETIME_BREAST_CANCER_RISK,
+@@clientName(
+  AzureHealthInsights.ScoringAndAssessmentCategoryType.LIFETIME_BREAST_CANCER_RISK,
   "LifetimeBreastCancerRisk",
   "csharp"
 );
-@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.ASCVD_RISK,
+@@clientName(
+  AzureHealthInsights.ScoringAndAssessmentCategoryType.ASCVD_RISK,
   "AscvdRisk",
   "csharp"
 );
-@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.MODIFIED_GAIL_MODEL_RISK,
+@@clientName(
+  AzureHealthInsights.ScoringAndAssessmentCategoryType.MODIFIED_GAIL_MODEL_RISK,
   "ModifiedGailModelRisk",
   "csharp"
 );
-@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.TYRER_CUSICK_MODEL_RISK,
+@@clientName(
+  AzureHealthInsights.ScoringAndAssessmentCategoryType.TYRER_CUSICK_MODEL_RISK,
   "TyrerCusickModelRisk",
   "csharp"
 );
-@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.AGATSTON_SCORE,
+@@clientName(
+  AzureHealthInsights.ScoringAndAssessmentCategoryType.AGATSTON_SCORE,
   "AgatstonScore",
   "csharp"
 );
-@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.TEN_YEAR_CHD_RISK,
+@@clientName(
+  AzureHealthInsights.ScoringAndAssessmentCategoryType.TEN_YEAR_CHD_RISK,
   "TenYearChdRisk",
   "csharp"
 );
-@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.Z_SCORE,
+@@clientName(
+  AzureHealthInsights.ScoringAndAssessmentCategoryType.Z_SCORE,
   "ZScore",
   "csharp"
 );
-@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.T_SCORE,
+@@clientName(
+  AzureHealthInsights.ScoringAndAssessmentCategoryType.T_SCORE,
   "TScore",
   "csharp"
 );
-@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.CALCIUM_VOLUME_SCORE,
+@@clientName(
+  AzureHealthInsights.ScoringAndAssessmentCategoryType.CALCIUM_VOLUME_SCORE,
   "CalciumVolumeScore",
   "csharp"
 );
-@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.US_LI_RADS_VISUALIZATION_SCORE,
+@@clientName(
+  AzureHealthInsights.ScoringAndAssessmentCategoryType.US_LI_RADS_VISUALIZATION_SCORE,
   "UsLiRadsVisualizationScore",
   "csharp"
 );
-@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.US_LI_RADS,
+@@clientName(
+  AzureHealthInsights.ScoringAndAssessmentCategoryType.US_LI_RADS,
   "UsLiRads",
   "csharp"
 );
-@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.CEUS_LI_RADS,
+@@clientName(
+  AzureHealthInsights.ScoringAndAssessmentCategoryType.CEUS_LI_RADS,
   "CeusLiRads",
   "csharp"
 );
-@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.TREATMENT_RESPONSE_LI_RADS,
+@@clientName(
+  AzureHealthInsights.ScoringAndAssessmentCategoryType.TREATMENT_RESPONSE_LI_RADS,
   "TreatmentResponseLiRads",
   "csharp"
 );
-@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.O_RADS_MRI,
+@@clientName(
+  AzureHealthInsights.ScoringAndAssessmentCategoryType.O_RADS_MRI,
   "ORadsMri",
   "csharp"
 );
-@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.CALCIUM_MASS_SCORE,
+@@clientName(
+  AzureHealthInsights.ScoringAndAssessmentCategoryType.CALCIUM_MASS_SCORE,
   "CalciumMassScore",
   "csharp"
 );
-@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.RISK_OF_MALIGNANCY_INDEX,
+@@clientName(
+  AzureHealthInsights.ScoringAndAssessmentCategoryType.RISK_OF_MALIGNANCY_INDEX,
   "RiskOfMalignancyIndex",
   "csharp"
 );
-@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.HNPCC_MUTATION_RISK,
+@@clientName(
+  AzureHealthInsights.ScoringAndAssessmentCategoryType.HNPCC_MUTATION_RISK,
   "HnpccMutationRisk",
   "csharp"
 );
-@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.ALBERTA_STROKE_PROGRAM_EARLY_CT_SCORE,
+@@clientName(
+  AzureHealthInsights.ScoringAndAssessmentCategoryType.ALBERTA_STROKE_PROGRAM_EARLY_CT_SCORE,
   "AlbertaStrokeProgramEarlyCtScore",
   "csharp"
 );
-@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.KELLGREN_LAWRENCE_GRADING_SCALE,
+@@clientName(
+  AzureHealthInsights.ScoringAndAssessmentCategoryType.KELLGREN_LAWRENCE_GRADING_SCALE,
   "KellgrenLawrenceGradingScale",
   "csharp"
 );
-@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.TONNIS_CLASSIFICATION,
+@@clientName(
+  AzureHealthInsights.ScoringAndAssessmentCategoryType.TONNIS_CLASSIFICATION,
   "TonnisClassification",
   "csharp"
 );
-@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.CALCIUM_SCORE_UNSPECIFIED,
+@@clientName(
+  AzureHealthInsights.ScoringAndAssessmentCategoryType.CALCIUM_SCORE_UNSPECIFIED,
   "CalciumScoreUnspecified",
   "csharp"
 );
-@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.TEN_YEAR_CHD_RISK_OBSERVED_AGE,
+@@clientName(
+  AzureHealthInsights.ScoringAndAssessmentCategoryType.TEN_YEAR_CHD_RISK_OBSERVED_AGE,
   "TenYearChdRiskObservedAge",
   "csharp"
 );
-@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.TEN_YEAR_CHD_RISK_ARTERIAL_AGE,
+@@clientName(
+  AzureHealthInsights.ScoringAndAssessmentCategoryType.TEN_YEAR_CHD_RISK_ARTERIAL_AGE,
   "TenYearChdRiskArterialAge",
   "csharp"
 );
-@@clientName(AzureHealthInsights.ScoringAndAssessmentCategoryType.FRAX_SCORE,
+@@clientName(
+  AzureHealthInsights.ScoringAndAssessmentCategoryType.FRAX_SCORE,
   "FraxScore",
   "csharp"
 );
