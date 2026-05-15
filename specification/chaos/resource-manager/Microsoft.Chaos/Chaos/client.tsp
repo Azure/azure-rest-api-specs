@@ -8,7 +8,6 @@ using Microsoft.Chaos;
 @@clientName(Workspace, "ChaosWorkspace", "csharp");
 @@clientName(Scenario, "ChaosScenario", "csharp");
 @@clientName(ScenarioRun, "ChaosScenarioRun", "csharp");
-@@clientName(ScenarioConfiguration, "ChaosScenarioConfiguration", "csharp");
 @@clientName(ExperimentExecution, "ChaosExperimentExecution", "csharp");
 @@clientName(Experiment, "ChaosExperiment", "csharp");
 @@clientName(ExperimentExecution, "ChaosExperimentExecution", "csharp");
