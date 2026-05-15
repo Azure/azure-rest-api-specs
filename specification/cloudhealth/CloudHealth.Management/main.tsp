@@ -184,7 +184,7 @@ model EvaluationRule {
   @doc("Configure to use ML-based dynamic thresholds. When used, degradedRule and unhealthyRule must not be set.")
   dynamicDetectionRule?: DynamicDetectionRule;
 
-  @doc("Degraded threshold rule.")
+  @doc("Degraded threshold rule. Not applicable when dynamic thresholds are used.")
   @typeChangedFrom(Versions.v2026_01_01_preview, ThresholdRule)
   degradedRule?: ThresholdRuleV2;
 
@@ -209,7 +209,7 @@ model ThresholdRule {
 @added(Versions.v2026_01_01_preview)
 @doc("Threshold-based evaluation rule for a signal definition")
 model ThresholdRuleV2 {
-  @doc("Operator how to compare the signal value with the threshold")
+  @doc("Operator how to compare the signal value with the threshold. Dynamic is only available for an unhealthy threshold rule. Dynamic thresholds use deviation from a ML computed baseline to determine health state transitions.")
   operator: SignalOperator;
 
   @madeOptional(Versions.v2026_05_01_preview)

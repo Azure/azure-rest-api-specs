@@ -3170,7 +3170,7 @@
       "properties": {
         "degradedRule": {
           "$ref": "#/definitions/ThresholdRuleV2",
-          "description": "Degraded threshold rule."
+          "description": "Degraded threshold rule. Not applicable when dynamic thresholds are used."
         },
         "unhealthyRule": {
           "$ref": "#/definitions/ThresholdRuleV2",
@@ -3430,7 +3430,7 @@
       "properties": {
         "degradedRule": {
           "$ref": "#/definitions/ThresholdRuleV2",
-          "description": "Degraded threshold rule."
+          "description": "Degraded threshold rule. Not applicable when dynamic thresholds are used."
         },
         "unhealthyRule": {
           "$ref": "#/definitions/ThresholdRuleV2",
@@ -4552,7 +4552,7 @@
       "properties": {
         "operator": {
           "$ref": "#/definitions/SignalOperator",
-          "description": "Operator how to compare the signal value with the threshold"
+          "description": "Operator how to compare the signal value with the threshold. Dynamic is only available for an unhealthy threshold rule. Dynamic thresholds use deviation from a ML computed baseline to determine health state transitions."
         },
         "threshold": {
           "type": "number",
