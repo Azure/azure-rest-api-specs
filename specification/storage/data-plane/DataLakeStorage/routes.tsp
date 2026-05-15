@@ -29,17 +29,19 @@ op DataLakeOperation<
   ...ApiVersionHeader,
   ...ClientRequestIdParameter,
   ...TParams,
-): (TResponse & {
-  /** Content-Type header */
-  #suppress "@typespec/http/content-type-ignored" "Template for existing API"
-  @header("Content-Type")
-  contentType: ResponseMediaType;
+):
+  | (TResponse & {
+      /** Content-Type header */
+      #suppress "@typespec/http/content-type-ignored" "Template for existing API"
+      @header("Content-Type")
+      contentType: ResponseMediaType;
 
-  ...DateResponseHeader;
-  ...ApiVersionHeader;
-  ...RequestIdResponseHeader;
-  ...ClientRequestIdResponseHeader;
-}) | TError;
+      ...DateResponseHeader;
+      ...ApiVersionHeader;
+      ...RequestIdResponseHeader;
+      ...ClientRequestIdResponseHeader;
+    })
+  | TError;
 
 /** DataLake operation template with no request body and no response body (headers only). */
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
@@ -47,12 +49,14 @@ op DataLakeOperationNoBody<
   TParams extends TypeSpec.Reflection.Model | void,
   TResponse extends TypeSpec.Reflection.Model | void,
   TError = StorageError
->(...ApiVersionHeader, ...ClientRequestIdParameter, ...TParams): (TResponse & {
-  ...DateResponseHeader;
-  ...ApiVersionHeader;
-  ...RequestIdResponseHeader;
-  ...ClientRequestIdResponseHeader;
-}) | TError;
+>(...ApiVersionHeader, ...ClientRequestIdParameter, ...TParams):
+  | (TResponse & {
+      ...DateResponseHeader;
+      ...ApiVersionHeader;
+      ...RequestIdResponseHeader;
+      ...ClientRequestIdResponseHeader;
+    })
+  | TError;
 
 /** DataLake operation template with response body Content-Type but no request body. */
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."

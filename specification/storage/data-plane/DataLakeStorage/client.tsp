@@ -33,7 +33,8 @@ interface PathClient extends Path {}
 )
 interface ServiceClient extends Service {}
 
-@@clientName(Storage.DataLake.EtagResponseHeader.eTag,
+@@clientName(
+  Storage.DataLake.EtagResponseHeader.eTag,
   "etag",
   "javascript,python"
 );
@@ -41,22 +42,26 @@ interface ServiceClient extends Service {}
 @@clientName(Storage.DataLake.PathItem.eTag, "etag", "javascript,python");
 
 @@clientName(Storage.DataLake.BlobItem, "BlobItemModel", "javascript");
-@@clientName(Storage.DataLake.BlobPropertiesInternal,
+@@clientName(
+  Storage.DataLake.BlobPropertiesInternal,
   "BlobPropertiesModel",
   "javascript"
 );
-@@clientName(Storage.DataLake.BlobPropertiesInternal.isSealed,
+@@clientName(
+  Storage.DataLake.BlobPropertiesInternal.isSealed,
   "sealed",
   "javascript"
 );
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
-@@clientOption(Storage.DataLake.StorageError,
+@@clientOption(
+  Storage.DataLake.StorageError,
   "header",
   "x-ms-error-code:errorCode",
   "javascript"
 );
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
-@@clientOption(Storage.DataLake.StorageError,
+@@clientOption(
+  Storage.DataLake.StorageError,
   "restErrorCodeHeader",
   "x-ms-error-code",
   "javascript"
@@ -65,7 +70,8 @@ interface ServiceClient extends Service {}
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(Storage.DataLake, "includeRootSlash", false, "javascript");
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
-@@clientOption(Storage.DataLake,
+@@clientOption(
+  Storage.DataLake,
   "omitSlashFromEmptyRoute",
   true,
   "csharp,python"
@@ -82,7 +88,8 @@ model FileSystemClientParameters {
   resource: Storage.DataLake.FileSystemResourceType;
 }
 
-@@clientInitialization(Storage.DataLake.FileSystem,
+@@clientInitialization(
+  Storage.DataLake.FileSystem,
   {
     parameters: FileSystemClientParameters,
   },
@@ -100,15 +107,18 @@ enum EncryptionAlgorithmTypeCustom {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" ""
-@@Legacy.disablePageable(Storage.DataLake.Service.listFileSystems,
+@@Legacy.disablePageable(
+  Storage.DataLake.Service.listFileSystems,
   "python,javascript,csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" ""
-@@Legacy.disablePageable(Storage.DataLake.FileSystem.listPaths,
+@@Legacy.disablePageable(
+  Storage.DataLake.FileSystem.listPaths,
   "python,javascript,csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" ""
-@@Legacy.disablePageable(Storage.DataLake.FileSystem.listBlobHierarchySegment,
+@@Legacy.disablePageable(
+  Storage.DataLake.FileSystem.listBlobHierarchySegment,
   "python,javascript,csharp,go"
 );
 
@@ -118,7 +128,8 @@ enum EncryptionAlgorithmTypeCustom {
 @@clientName(Storage.DataLake.LeaseAction, "DataLakeLeaseAction", "csharp");
 @@clientName(Storage.DataLake.PathItem, "Path", "csharp");
 @@clientName(Storage.DataLake.BlobItem, "BlobItemInternal", "csharp");
-@@clientName(EncryptionAlgorithmTypeCustom,
+@@clientName(
+  EncryptionAlgorithmTypeCustom,
   "EncryptionAlgorithmType",
   "csharp,go"
 );
@@ -128,20 +139,24 @@ enum EncryptionAlgorithmTypeCustom {
 @@alternateType(Storage.DataLake.PathItem.isDirectory, string, "csharp");
 @@alternateType(Storage.DataLake.PathItem.eTag, string, "csharp");
 @@alternateType(Storage.DataLake.BlobPropertiesInternal.etag, string, "csharp");
-@@alternateType(Storage.DataLake.EncryptionAlgorithmType,
+@@alternateType(
+  Storage.DataLake.EncryptionAlgorithmType,
   EncryptionAlgorithmTypeCustom,
   "csharp,go"
 );
 @@alternateType(Storage.DataLake.IfMatchParameter.ifMatch, string, "csharp");
-@@alternateType(Storage.DataLake.IfNoneMatchParameter.ifNoneMatch,
+@@alternateType(
+  Storage.DataLake.IfNoneMatchParameter.ifNoneMatch,
   string,
   "csharp"
 );
-@@alternateType(Storage.DataLake.SourceIfMatchParameter.sourceIfMatch,
+@@alternateType(
+  Storage.DataLake.SourceIfMatchParameter.sourceIfMatch,
   string,
   "csharp"
 );
-@@alternateType(Storage.DataLake.SourceIfNoneMatchParameter.sourceIfNoneMatch,
+@@alternateType(
+  Storage.DataLake.SourceIfNoneMatchParameter.sourceIfNoneMatch,
   string,
   "csharp"
 );
@@ -171,13 +186,15 @@ enum ListBlobsShowOnlyGo {
 @@clientName(BlobPrefix, "PathPrefix", "go");
 @@clientName(BlobItem, "PathItemInternal", "go");
 @@clientName(ClientRequestIdParameter.clientRequestId, "RequestID", "go");
-@@clientName(ListBlobsHierarchySegmentResponse,
+@@clientName(
+  ListBlobsHierarchySegmentResponse,
   "ListPathsHierarchySegmentResponse",
   "go"
 );
 @@clientName(BlobHierarchyListSegment, "PathHierarchyListSegment", "go");
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
-@@clientOption(FileSystem.listBlobHierarchySegment,
+@@clientOption(
+  FileSystem.listBlobHierarchySegment,
   "responseEnvelopeName",
   "FileSystemClientListPathHierarchySegmentResponse",
   "go"
