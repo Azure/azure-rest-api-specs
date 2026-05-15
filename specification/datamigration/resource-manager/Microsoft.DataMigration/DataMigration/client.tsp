@@ -115,6 +115,7 @@ using Microsoft.DataMigration;
   "CheckDataMigrationNameAvailability",
   "csharp"
 );
+@@clientName(UsagesOperationGroup.list, "GetUsages", "csharp");
 
 // --- Type renames (from autorest.md rename-mapping) ---
 @@clientName(AuthenticationKeys, "SqlMigrationAuthenticationKeys", "csharp");
