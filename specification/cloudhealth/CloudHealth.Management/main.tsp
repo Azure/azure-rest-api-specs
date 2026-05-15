@@ -1327,7 +1327,7 @@ model EntityHistoryRequest {
   @doc("Maximum number of health state transitions to return per page. Defaults to 1000.")
   @maxValue(1000)
   @minValue(1)
-  top?: int32;
+  top?: int32 = 1000;
 
   @added(Versions.v2026_05_01_preview)
   @doc("An opaque string value that identifies the portion of the result set to be returned with the next operation. Must not be combined with startAt or endAt.")
@@ -1383,7 +1383,7 @@ model SignalHistoryRequest {
   @doc("Maximum number of data points to return per page. Defaults to 1000.")
   @maxValue(1000)
   @minValue(1)
-  top?: int32;
+  top?: int32 = 1000;
 
   @added(Versions.v2026_05_01_preview)
   @doc("An opaque string value that identifies the portion of the result set to be returned with the next operation. Must not be combined with startAt or endAt.")
@@ -1480,7 +1480,7 @@ model GetDataAnnotationsRequest {
   @doc("End of UTC time range. Defaults to now if not specified.")
   endAt?: utcDateTime;
 
-  @doc("Maximum number of annotations to return per page.")
+  @doc("Maximum number of annotations to return per page. Defaults to 100.")
   @maxValue(100)
   @minValue(1)
   top?: int32 = 100;

@@ -2481,7 +2481,7 @@
         },
         "dimensionFilter": {
           "type": "string",
-          "description": "Optional: Dimension filter to apply to the dimension. Must only be set if also Dimension is set.",
+          "description": "Optional: Dimension filter to apply to the dimension. Must only be set if Dimension is set.",
           "minLength": 1,
           "maxLength": 256
         },
@@ -3035,6 +3035,7 @@
           "type": "integer",
           "format": "int32",
           "description": "Maximum number of health state transitions to return per page. Defaults to 1000.",
+          "default": 1000,
           "minimum": 1,
           "maximum": 1000
         },
@@ -3248,7 +3249,7 @@
         "top": {
           "type": "integer",
           "format": "int32",
-          "description": "Maximum number of annotations to return per page.",
+          "description": "Maximum number of annotations to return per page. Defaults to 100.",
           "default": 100,
           "minimum": 1,
           "maximum": 100
@@ -4180,7 +4181,7 @@
         },
         "dimensionFilter": {
           "type": "string",
-          "description": "Optional: Dimension filter to apply to the dimension. Must only be set if also Dimension is set.",
+          "description": "Optional: Dimension filter to apply to the dimension. Must only be set if Dimension is set.",
           "minLength": 1,
           "maxLength": 256
         }
@@ -4454,6 +4455,7 @@
           "type": "integer",
           "format": "int32",
           "description": "Maximum number of data points to return per page. Defaults to 1000.",
+          "default": 1000,
           "minimum": 1,
           "maximum": 1000
         },
