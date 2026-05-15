@@ -13,7 +13,8 @@ using Azure.ResourceManager;
 );
 @@clientName(CdnEndpoint, "LinkedEndpoint", "go");
 @@clientName(WebApplicationFirewallPolicy, "WafPolicy", "go");
-@@clientName(WebApplicationFirewallPolicyProperties,
+@@clientName(
+  WebApplicationFirewallPolicyProperties,
   "WafPolicyProperties",
   "go"
 );
