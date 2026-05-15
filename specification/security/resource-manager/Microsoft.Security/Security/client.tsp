@@ -655,6 +655,8 @@ op privateLinkResourcesGetCustomization(
 @@access(AssessmentAPI.SecurityAssessmentMetadataResponses.get, Access.internal, "csharp");
 @@access(TasksAPI.Tasks.getResourceGroupLevelTask, Access.internal, "csharp");
 @@access(PricingsAPI.Pricings.list, Access.internal, "csharp");
+@@access(TasksAPI.SecurityTaskProperties, Access.public, "csharp");
+@@access(ExternalSecuritySolutionKind, Access.public, "csharp");
 @@markAsPageable(PricingsAPI.Pricings.list, "csharp");
 @@clientName(
   Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
