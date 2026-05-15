@@ -124,6 +124,11 @@ namespace ReservationsClient;
 // ExchangeRequestSessionId is GA strongly-typed as Guid.
 @@alternateType(Reservations.ExchangeRequestProperties.sessionId, Azure.Core.uuid, "csharp");
 
+// Resource keys are GA strongly-typed as Guid.
+@@alternateType(Reservations.ReservationOrderResponse.name, Azure.Core.uuid, "csharp");
+@@alternateType(Reservations.ReservationResponse.name, Azure.Core.uuid, "csharp");
+@@alternateType(Quota.QuotaRequestDetails.name, Azure.Core.uuid, "csharp");
+
 // BillingScopeId / ReservationId are GA strongly-typed as ResourceIdentifier.
 @@alternateType(Reservations.PurchaseRequestProperties.billingScopeId, Azure.Core.armResourceIdentifier, "csharp");
 @@alternateType(Reservations.SavingsPlanPurchaseRequestProperties.billingScopeId, Azure.Core.armResourceIdentifier, "csharp");
