@@ -451,7 +451,6 @@ union PersonalVoiceModels {
   "PhoenixLatestNeural",
 
   /** Use the Phoenix V2 model. */
-  @removed(Versions.v2026_04_10)
   "PhoenixV2Neural",
 
   /** Use the latest Dragon HD Omni model. */
