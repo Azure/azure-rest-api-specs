@@ -6479,7 +6479,6 @@ model DataShareSource extends StorageConnectorSource {
   /**
    * The type for data share source
    */
-  @visibility(Lifecycle.Read)
   type: StorageConnectorSourceType.DataShare;
 
   /**
