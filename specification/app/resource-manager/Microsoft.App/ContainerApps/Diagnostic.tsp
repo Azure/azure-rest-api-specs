@@ -83,7 +83,9 @@ interface ContainerAppsDiagnostics {
   @summary("Get a revision of a Container App.")
   getRevision is ContainerAppsDiagnosticsRevisionOps.Read<Revision>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-odata needed for swagger fidelity"
   @summary("Get the Revisions for a given Container App.")
+  @extension("x-ms-odata", "#/definitions/Revision")
   @get
   @list
   @action("detectorProperties/revisionsApi/revisions/")

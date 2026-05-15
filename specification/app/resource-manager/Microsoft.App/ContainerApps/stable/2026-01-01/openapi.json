@@ -2409,6 +2409,7 @@
             "$ref": "./examples/Revisions_List1.json"
           }
         },
+        "x-ms-odata": "#/definitions/Revision",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -3134,6 +3135,7 @@
             "$ref": "./examples/Revisions_List.json"
           }
         },
+        "x-ms-odata": "#/definitions/Revision",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -6570,7 +6572,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -6696,7 +6698,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -6749,7 +6751,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -8242,7 +8244,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The AuthConfig items on this page",
+          "description": "Collection of resources.",
           "items": {
             "$ref": "#/definitions/AuthConfig"
           }
@@ -8250,7 +8252,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "Link to next page of resources."
         }
       },
       "required": [
@@ -8307,7 +8309,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The OperationDetail items on this page",
+          "description": "Collection of available operation details",
           "items": {
             "$ref": "#/definitions/OperationDetail"
           },
@@ -8318,7 +8320,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "URL client should use to fetch the next page (per server side paging).\nIt's null for now, added for future use."
         }
       },
       "required": [
@@ -8383,7 +8385,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The AvailableWorkloadProfile items on this page",
+          "description": "Collection of workload profiles.",
           "items": {
             "$ref": "#/definitions/AvailableWorkloadProfile"
           }
@@ -8391,7 +8393,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "Link to next page of resources."
         }
       },
       "required": [
@@ -8498,7 +8500,6 @@
       "properties": {
         "clientId": {
           "type": "string",
-          "format": "password",
           "description": "Client Id.",
           "x-ms-mutability": [
             "update",
@@ -8508,7 +8509,6 @@
         },
         "clientSecret": {
           "type": "string",
-          "format": "password",
           "description": "Client Secret.",
           "x-ms-mutability": [
             "update",
@@ -8518,7 +8518,6 @@
         },
         "tenantId": {
           "type": "string",
-          "format": "password",
           "description": "Tenant Id.",
           "x-ms-mutability": [
             "update",
@@ -8550,7 +8549,6 @@
         },
         "accountKey": {
           "type": "string",
-          "format": "password",
           "description": "Storage account key for azure file.",
           "x-ms-secret": true
         },
@@ -8733,9 +8731,12 @@
       "properties": {
         "sasUrlSettingName": {
           "type": "string",
-          "description": "The name of the app secrets containing the SAS URL of the blob storage containing the tokens. Should not be used along with blobContainerUri."
+          "description": "The name of the app secrets containing the SAS URL of the blob storage containing the tokens."
         }
-      }
+      },
+      "required": [
+        "sasUrlSettingName"
+      ]
     },
     "Certificate": {
       "type": "object",
@@ -8758,7 +8759,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The Certificate items on this page",
+          "description": "Collection of resources.",
           "items": {
             "$ref": "#/definitions/Certificate"
           }
@@ -8766,7 +8767,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "Link to next page of resources."
         }
       },
       "required": [
@@ -8821,7 +8822,6 @@
         },
         "password": {
           "type": "string",
-          "format": "password",
           "description": "Certificate password.",
           "x-ms-mutability": [
             "create"
@@ -8843,7 +8843,7 @@
         },
         "value": {
           "type": "string",
-          "format": "password",
+          "format": "byte",
           "description": "PFX or PEM blob",
           "x-ms-mutability": [
             "create"
@@ -8990,12 +8990,11 @@
         },
         "activeRevisionsMode": {
           "type": "string",
-          "description": "ActiveRevisionsMode controls how active revisions are handled for the Container app:\n<list><item>Single: Only one revision can be active at a time. Traffic weights cannot be used. This is the default.</item><item>Multiple: Multiple revisions can be active, including optional traffic weights and labels.</item><item>Labels: Only revisions with labels are active. Traffic weights can be applied to labels.</item></list>",
+          "description": "ActiveRevisionsMode controls how active revisions are handled for the Container app:\n<list><item>Multiple: multiple revisions can be active.</item><item>Single: Only one revision can be active at a time. Revision weights can not be used in this mode. If no value if provided, this is the default.</item></list>",
           "default": "Single",
           "enum": [
             "Multiple",
-            "Single",
-            "Labels"
+            "Single"
           ],
           "x-ms-enum": {
             "name": "ActiveRevisionsMode",
@@ -9010,11 +9009,6 @@
                 "name": "Single",
                 "value": "Single",
                 "description": "Single"
-              },
-              {
-                "name": "Labels",
-                "value": "Labels",
-                "description": "Labels"
               }
             ]
           }
@@ -9088,7 +9082,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The ConnectedEnvironment items on this page",
+          "description": "Collection of resources.",
           "items": {
             "$ref": "#/definitions/ConnectedEnvironment"
           }
@@ -9096,7 +9090,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "Link to next page of resources."
         }
       },
       "required": [
@@ -9137,7 +9131,6 @@
         },
         "daprAIConnectionString": {
           "type": "string",
-          "format": "password",
           "description": "Application Insights connection string used by Dapr to export Service to Service communication telemetry",
           "x-ms-secret": true
         },
@@ -9388,7 +9381,6 @@
       "properties": {
         "token": {
           "type": "string",
-          "format": "password",
           "description": "Auth token value.",
           "readOnly": true,
           "x-ms-secret": true
@@ -9407,7 +9399,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The ContainerApp items on this page",
+          "description": "Collection of resources.",
           "items": {
             "$ref": "#/definitions/ContainerApp"
           }
@@ -9415,7 +9407,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "Link to next page of resources."
         }
       },
       "required": [
@@ -9458,7 +9450,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The JobExecution items on this page",
+          "description": "Collection of resources.",
           "items": {
             "$ref": "#/definitions/JobExecution"
           }
@@ -9466,7 +9458,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "Link to next page of resources."
         }
       },
       "required": [
@@ -9795,7 +9787,6 @@
         },
         "value": {
           "type": "string",
-          "format": "password",
           "description": "Secret Value.",
           "readOnly": true,
           "x-ms-secret": true
@@ -10020,13 +10011,12 @@
         },
         "certificateValue": {
           "type": "string",
-          "format": "password",
+          "format": "byte",
           "description": "PFX or PEM blob",
           "x-ms-secret": true
         },
         "certificatePassword": {
           "type": "string",
-          "format": "password",
           "description": "Certificate password",
           "x-ms-secret": true
         },
@@ -10489,7 +10479,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The DaprComponent items on this page",
+          "description": "Collection of resources.",
           "items": {
             "$ref": "#/definitions/DaprComponent"
           }
@@ -10497,7 +10487,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "Link to next page of resources."
         }
       },
       "required": [
@@ -10544,7 +10534,6 @@
         },
         "value": {
           "type": "string",
-          "format": "password",
           "description": "Secret Value.",
           "readOnly": true,
           "x-ms-secret": true
@@ -10742,7 +10731,8 @@
         "rows": {
           "type": "array",
           "description": "Rows in the table",
-          "items": {}
+          "items": {},
+          "x-ms-identifiers": []
         }
       }
     },
@@ -10791,7 +10781,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DiagnosticsProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "Diagnostics resource specific properties"
         }
       },
       "allOf": [
@@ -10806,7 +10796,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The Diagnostics items on this page",
+          "description": "Collection of diagnostic data.",
           "items": {
             "$ref": "#/definitions/Diagnostics"
           }
@@ -10814,7 +10804,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "Link to next page of resources."
         }
       },
       "required": [
@@ -11008,7 +10998,6 @@
       "properties": {
         "token": {
           "type": "string",
-          "format": "password",
           "description": "Auth token value.",
           "readOnly": true,
           "x-ms-secret": true
@@ -11298,7 +11287,6 @@
         },
         "githubPersonalAccessToken": {
           "type": "string",
-          "format": "password",
           "description": "One time Github PAT to configure github environment",
           "x-ms-mutability": [
             "update",
@@ -11373,7 +11361,7 @@
     },
     "HttpRoute": {
       "type": "object",
-      "description": "Http Routes configuration, including paths to match on and whether or not rewrites are to be done.",
+      "description": "Http Routes, including paths to match on and whether or not rewrites are to be done.",
       "properties": {
         "match": {
           "$ref": "#/definitions/HttpRouteMatch",
@@ -11397,7 +11385,7 @@
     },
     "HttpRouteConfig": {
       "type": "object",
-      "description": "Advanced Ingress routing for path/header based routing for a Container App Environment",
+      "description": "A set of host names and http request routing rules for a Container App Environment",
       "properties": {
         "properties": {
           "$ref": "#/definitions/HttpRouteConfigProperties",
@@ -11412,11 +11400,11 @@
     },
     "HttpRouteConfigCollection": {
       "type": "object",
-      "description": "Collection of Advanced Ingress Routing Config resources.",
+      "description": "Collection of rule based Http Route Config resources.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The HttpRouteConfig items on this page",
+          "description": "Collection of resources.",
           "items": {
             "$ref": "#/definitions/HttpRouteConfig"
           }
@@ -11424,7 +11412,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "Link to next page of resources."
         }
       },
       "required": [
@@ -11499,7 +11487,7 @@
     },
     "HttpRouteProvisioningErrors": {
       "type": "object",
-      "description": "List of provisioning errors for a http route config object",
+      "description": "List of provisioning errors for a Http Route Config object",
       "properties": {
         "timestamp": {
           "type": "string",
@@ -11570,7 +11558,7 @@
     },
     "HttpRouteRule": {
       "type": "object",
-      "description": "Http Route rule.",
+      "description": "A set of routing conditions and targets.",
       "properties": {
         "targets": {
           "type": "array",
@@ -11612,7 +11600,7 @@
         },
         "label": {
           "type": "string",
-          "description": "Label/Revision to route requests to"
+          "description": "Label to route requests to"
         }
       },
       "required": [
@@ -11728,9 +11716,9 @@
           "description": "Use to select the lifecycle stages of a Container App during which the Managed Identity should be available.",
           "default": "All",
           "enum": [
-            "None",
-            "Main",
             "Init",
+            "Main",
+            "None",
             "All"
           ],
           "x-ms-enum": {
@@ -11738,9 +11726,9 @@
             "modelAsString": true,
             "values": [
               {
-                "name": "None",
-                "value": "None",
-                "description": "None"
+                "name": "Init",
+                "value": "Init",
+                "description": "Init"
               },
               {
                 "name": "Main",
@@ -11748,9 +11736,9 @@
                 "description": "Main"
               },
               {
-                "name": "Init",
-                "value": "Init",
-                "description": "Init"
+                "name": "None",
+                "value": "None",
+                "description": "None"
               },
               {
                 "name": "All",
@@ -12202,7 +12190,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The JavaComponent items on this page",
+          "description": "Collection of resources.",
           "items": {
             "$ref": "#/definitions/JavaComponent"
           }
@@ -12210,7 +12198,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "Link to next page of resources."
         }
       },
       "required": [
@@ -12228,7 +12216,7 @@
         },
         "identity": {
           "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+          "description": "Managed identities needed by a container app job to interact with other Azure services to not maintain any secrets or credentials in code."
         }
       },
       "allOf": [
@@ -12764,7 +12752,7 @@
         },
         "identity": {
           "type": "string",
-          "description": "The resource ID of a user-assigned managed identity that is assigned to the job, or 'system' for system-assigned identity."
+          "description": "The resource ID of a user-assigned managed identity that is assigned to the Container App, or 'system' for system-assigned identity."
         }
       }
     },
@@ -12829,7 +12817,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The Job items on this page",
+          "description": "Collection of resources.",
           "items": {
             "$ref": "#/definitions/Job"
           }
@@ -12837,7 +12825,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "Link to next page of resources."
         }
       },
       "required": [
@@ -12949,7 +12937,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The Usage items on this page",
+          "description": "The list of compute resource usages.",
           "items": {
             "$ref": "#/definitions/Usage"
           },
@@ -12960,7 +12948,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The URI to fetch the next page of compute resource usage information. Call ListNext() with this to fetch the next page of compute resource usage information."
         }
       },
       "required": [
@@ -12977,7 +12965,6 @@
         },
         "sharedKey": {
           "type": "string",
-          "format": "password",
           "description": "Log analytics customer key",
           "x-ms-mutability": [
             "update",
@@ -13105,7 +13092,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The MaintenanceConfigurationResource items on this page",
+          "description": "Results of the list maintenance configuration resources.",
           "items": {
             "$ref": "#/definitions/MaintenanceConfigurationResource"
           }
@@ -13113,7 +13100,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "Link for next page of results."
         }
       },
       "required": [
@@ -13157,7 +13144,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The ManagedCertificate items on this page",
+          "description": "Collection of resources.",
           "items": {
             "$ref": "#/definitions/ManagedCertificate"
           }
@@ -13165,7 +13152,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "Link to next page of resources."
         }
       },
       "required": [
@@ -13259,7 +13246,7 @@
         },
         "identity": {
           "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+          "description": "Managed identities for the Managed Environment to interact with other Azure services without maintaining any secrets or credentials in code."
         }
       },
       "allOf": [
@@ -13279,13 +13266,11 @@
         },
         "daprAIInstrumentationKey": {
           "type": "string",
-          "format": "password",
           "description": "Azure Monitor instrumentation key used by Dapr to export Service to Service communication telemetry",
           "x-ms-secret": true
         },
         "daprAIConnectionString": {
           "type": "string",
-          "format": "password",
           "description": "Application Insights connection string used by Dapr to export Service to Service communication telemetry",
           "x-ms-secret": true
         },
@@ -13462,7 +13447,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The ManagedEnvironment items on this page",
+          "description": "Collection of resources.",
           "items": {
             "$ref": "#/definitions/ManagedEnvironment"
           }
@@ -13470,7 +13455,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "Link to next page of resources."
         }
       },
       "required": [
@@ -13491,12 +13476,10 @@
           "default": "None",
           "enum": [
             "None",
-            "Main",
-            "Init",
-            "All"
+            "Main"
           ],
           "x-ms-enum": {
-            "name": "IdentitySettingsLifeCycle",
+            "name": "SessionPoolIdentityLifeCycle",
             "modelAsString": true,
             "values": [
               {
@@ -13508,16 +13491,6 @@
                 "name": "Main",
                 "value": "Main",
                 "description": "Main"
-              },
-              {
-                "name": "Init",
-                "value": "Init",
-                "description": "Init"
-              },
-              {
-                "name": "All",
-                "value": "All",
-                "description": "All"
               }
             ]
           }
@@ -13543,7 +13516,7 @@
       "properties": {
         "server": {
           "type": "string",
-          "description": "Server for NFS azure file."
+          "description": "Server for NFS azure file. Specify the Azure storage account server address."
         },
         "accessMode": {
           "$ref": "#/definitions/AccessMode",
@@ -13789,8 +13762,7 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/PrivateEndpointConnectionProvisioningState",
-          "description": "The provisioning state of the private endpoint connection resource.",
-          "readOnly": true
+          "description": "The provisioning state of the private endpoint connection resource."
         }
       },
       "required": [
@@ -14065,7 +14037,8 @@
           "x-ms-mutability": [
             "update",
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         }
       }
     },
@@ -14230,7 +14203,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The Revision items on this page",
+          "description": "Collection of resources.",
           "items": {
             "$ref": "#/definitions/Revision"
           }
@@ -14238,7 +14211,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "Link to next page of resources."
         }
       },
       "required": [
@@ -14476,12 +14449,12 @@
         "cooldownPeriod": {
           "type": "integer",
           "format": "int32",
-          "description": "Optional. KEDA Cooldown Period. Defaults to 300 seconds if not set."
+          "description": "Optional. KEDA Cooldown Period in seconds. Defaults to 300 seconds if not set."
         },
         "pollingInterval": {
           "type": "integer",
           "format": "int32",
-          "description": "Optional. KEDA Polling Interval. Defaults to 30 seconds if not set."
+          "description": "Optional. KEDA Polling Interval in seconds. Defaults to 30 seconds if not set."
         },
         "rules": {
           "type": "array",
@@ -14628,7 +14601,6 @@
         },
         "value": {
           "type": "string",
-          "format": "password",
           "description": "Secret Value.",
           "x-ms-mutability": [
             "update",
@@ -14833,7 +14805,7 @@
         },
         "identity": {
           "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+          "description": "Managed identities needed by a session pool to interact with other Azure services to not maintain any secrets or credentials in code."
         }
       },
       "allOf": [
@@ -14848,7 +14820,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The SessionPool items on this page",
+          "description": "Collection of resources.",
           "items": {
             "$ref": "#/definitions/SessionPool"
           }
@@ -14856,7 +14828,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "Link to next page of resources."
         }
       },
       "required": [
@@ -15003,7 +14975,6 @@
         },
         "value": {
           "type": "string",
-          "format": "password",
           "description": "Secret Value.",
           "x-ms-mutability": [
             "update",
@@ -15116,7 +15087,6 @@
         },
         "password": {
           "type": "string",
-          "format": "password",
           "description": "The password for the user.",
           "x-ms-secret": true
         },
@@ -15148,7 +15118,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The SourceControl items on this page",
+          "description": "Collection of resources.",
           "items": {
             "$ref": "#/definitions/SourceControl"
           }
@@ -15156,7 +15126,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "Link to next page of resources."
         }
       },
       "required": [
@@ -15836,7 +15806,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The WorkflowEnvelope items on this page",
+          "description": "Collection of resources.",
           "items": {
             "$ref": "#/definitions/WorkflowEnvelope"
           }
@@ -15844,7 +15814,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "Link to next page of resources."
         }
       },
       "required": [
@@ -16069,7 +16039,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The workloadProfileStates items on this page",
+          "description": "Collection of resources.",
           "items": {
             "$ref": "#/definitions/workloadProfileStates"
           }
@@ -16077,7 +16047,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "Link to next page of resources."
         }
       },
       "required": [
