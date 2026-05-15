@@ -862,7 +862,7 @@ model VMSizePropertiesWithAdditionalProperties {
   "csharp"
 );
 @@clientName(VMScaleSetLifecycleHookEventUpdate,
-  "VmScaleSetLifecycleHookEventUpdate",
+  "VmScaleSetLifecycleHookEventPatch",
   "csharp"
 );
 @@clientName(VMScaleSetLifecycleHookEventListResult,
