@@ -5,19 +5,17 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "resourceGroupName",
     "accountName": "accountName",
-    "deploymentName": "myVmManagedComputeDeployment",
+    "deploymentName": "myManagedComputeDeployment",
     "api-version": "2026-03-15-preview",
     "resource": {
       "sku": {
-        "name": "VmManagedCompute",
+        "name": "GlobalManagedCompute",
         "capacity": 1
       },
-      "priority": "High",
       "properties": {
-        "model": "azureml://registries/azureml-meta/models/Llama-3-8B-Instruct/versions/1",
-        "deploymentTemplate": "azureml://registries/azureml-meta/deploymenttemplates/Llama-3-8B-Instruct/versions/1",
-        "instanceType": "Standard_NC24ads_A100_v4",
-        "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/computes/myFoundryCompute",
+        "model": "azureml://registries/azureml/models/Llama-3.1-8B-Instruct/versions/3",
+        "deploymentTemplate": "azureml://registries/azureml/deploymenttemplates/Llama-3.1-8B-Instruct/versions/3",
+        "acceleratorType": "H100_80GB",
         "versionUpgradeOption": "OnceNewDefaultVersionAvailable"
       }
     }
@@ -25,64 +23,47 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/managedComputeDeployments/myVmManagedComputeDeployment",
-        "name": "myVmManagedComputeDeployment",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/managedComputeDeployments/myManagedComputeDeployment",
+        "name": "myManagedComputeDeployment",
         "type": "Microsoft.CognitiveServices/accounts/managedComputeDeployments",
         "sku": {
-          "name": "VmManagedCompute",
+          "name": "GlobalManagedCompute",
           "capacity": 1
-        },
-        "priority": "High",
-        "backend": {
-          "vmManagedCompute": {
-            "singularityAccountName": "sg-managedcompute-eastus",
-            "singularityAccountResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/managedComputeResourceGroup/providers/Microsoft.Singularity/accounts/sg-managedcompute-eastus",
-            "templatedModelName": "myVmManagedComputeDeployment",
-            "templatedModelResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/managedComputeResourceGroup/providers/Microsoft.Singularity/accounts/sg-managedcompute-eastus/templatedModels/myVmManagedComputeDeployment",
-            "operationUri": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2026-03-15-preview",
-            "endpointMode": "Managed",
-            "backendRegion": "eastus",
-            "publicIp": "20.50.1.2",
-            "hostFqdn": "myVmManagedComputeDeployment.eastus.inference.ml.azure.com",
-            "currentInstanceCount": 1,
-            "targetHostPool": "managedcompute-h100-pool"
-          }
         },
         "etag": "\"00000000-0000-0000-0000-000000000000\"",
         "properties": {
-          "model": "azureml://registries/azureml-meta/models/Llama-3-8B-Instruct/versions/1",
-          "deploymentTemplate": "azureml://registries/azureml-meta/deploymenttemplates/Llama-3-8B-Instruct/versions/1",
-          "instanceType": "Standard_NC24ads_A100_v4",
-          "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/computes/myFoundryCompute",
+          "model": "azureml://registries/azureml/models/Llama-3.1-8B-Instruct/versions/3",
+          "deploymentTemplate": "azureml://registries/azureml/deploymenttemplates/Llama-3.1-8B-Instruct/versions/3",
+          "acceleratorType": "H100_80GB",
           "versionUpgradeOption": "OnceNewDefaultVersionAvailable",
+          "acceleratorsPerInstance": 8,
+          "totalAccelerators": 8,
           "provisioningState": "Succeeded",
           "provisioningDetails": {
             "message": "Deployment provisioned successfully.",
             "lastOperationTimestamp": "2026-03-15T12:00:00Z"
           },
           "routes": {
-            "chatCompletionsScoringPath": "/managedComputeDeployments/myVmManagedComputeDeployment/v1/chat/completions",
-            "swagger": "/managedComputeDeployments/myVmManagedComputeDeployment/swagger.json",
-            "messagesApiScoringPath": "/managedComputeDeployments/myVmManagedComputeDeployment/v1/messages"
+            "chatCompletionsScoringPath": "/managedComputeDeployments/myManagedComputeDeployment/chat/completions",
+            "swagger": "/managedComputeDeployments/myManagedComputeDeployment/swagger.json",
+            "messagesApiScoringPath": "/managedComputeDeployments/myManagedComputeDeployment/messages"
           }
         }
       }
     },
     "201": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/managedComputeDeployments/myVmManagedComputeDeployment",
-        "name": "myVmManagedComputeDeployment",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/managedComputeDeployments/myManagedComputeDeployment",
+        "name": "myManagedComputeDeployment",
         "type": "Microsoft.CognitiveServices/accounts/managedComputeDeployments",
         "sku": {
-          "name": "VmManagedCompute",
+          "name": "GlobalManagedCompute",
           "capacity": 1
         },
-        "priority": "High",
         "properties": {
-          "model": "azureml://registries/azureml-meta/models/Llama-3-8B-Instruct/versions/1",
-          "deploymentTemplate": "azureml://registries/azureml-meta/deploymenttemplates/Llama-3-8B-Instruct/versions/1",
-          "instanceType": "Standard_NC24ads_A100_v4",
-          "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/computes/myFoundryCompute",
+          "model": "azureml://registries/azureml/models/Llama-3.1-8B-Instruct/versions/3",
+          "deploymentTemplate": "azureml://registries/azureml/deploymenttemplates/Llama-3.1-8B-Instruct/versions/3",
+          "acceleratorType": "H100_80GB",
           "versionUpgradeOption": "OnceNewDefaultVersionAvailable",
           "provisioningState": "Accepted"
         }
