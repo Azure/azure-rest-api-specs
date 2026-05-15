@@ -344,6 +344,29 @@ union DeploymentModelVersionUpgradeOption {
 }
 
 /**
+ * Scheduling priority for a VM managed compute deployment.
+ */
+@added(Versions.v2026_03_15_preview)
+union ManagedComputeDeploymentPriority {
+  string,
+
+  /**
+   * Low scheduling priority.
+   */
+  Low: "Low",
+
+  /**
+   * Medium scheduling priority.
+   */
+  Medium: "Medium",
+
+  /**
+   * High scheduling priority.
+   */
+  High: "High",
+}
+
+/**
  * The service tier for the deployment. Determines the pricing and performance level for request processing. Use 'Default' for standard pricing or 'Priority' for higher-priority processing with premium pricing. Note: Pause operations are only supported on Standard, DataZoneStandard, and GlobalStandard SKUs.
  */
 union ServiceTier {
@@ -5690,6 +5713,18 @@ model ManagedComputeDeploymentProperties {
   versionUpgradeOption?: DeploymentModelVersionUpgradeOption;
 
   /**
+   * Azure VM SKU selector for VM-backed managed compute deployments. Required when sku.name is VmManagedCompute; immutable after creation.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  instanceType?: string;
+
+  /**
+   * Foundry compute ARM resource ID for VM-backed managed compute deployments. Required when sku.name is VmManagedCompute; immutable after creation.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  computeId?: string;
+
+  /**
    * Read-only. Number of accelerators (GPUs) consumed by each model instance, sourced from the deployment template.
    */
   @visibility(Lifecycle.Read)
@@ -5756,6 +5791,90 @@ model ManagedComputeDeploymentRoutes {
    * Relative path to the messages API scoring endpoint.
    */
   messagesApiScoringPath?: string;
+}
+
+/**
+ * Read-only backend projection details for a managed compute deployment.
+ */
+@added(Versions.v2026_03_15_preview)
+model DeploymentBackendProperties {
+  /**
+   * VM managed compute backend details.
+   */
+  @visibility(Lifecycle.Read)
+  vmManagedCompute?: VmManagedComputeBackendProperties;
+}
+
+/**
+ * Read-only VM managed compute backend projection details.
+ */
+@added(Versions.v2026_03_15_preview)
+model VmManagedComputeBackendProperties {
+  /**
+   * Singularity account name used for the templated model.
+   */
+  @visibility(Lifecycle.Read)
+  singularityAccountName?: string;
+
+  /**
+   * Singularity account ARM resource ID used for the templated model.
+   */
+  @visibility(Lifecycle.Read)
+  singularityAccountResourceId?: string;
+
+  /**
+   * Singularity templated model name.
+   */
+  @visibility(Lifecycle.Read)
+  templatedModelName?: string;
+
+  /**
+   * Singularity templated model ARM resource ID.
+   */
+  @visibility(Lifecycle.Read)
+  templatedModelResourceId?: string;
+
+  /**
+   * Backend operation URI.
+   */
+  @visibility(Lifecycle.Read)
+  operationUri?: string;
+
+  /**
+   * Backend endpoint mode.
+   */
+  @visibility(Lifecycle.Read)
+  endpointMode?: string;
+
+  /**
+   * Backend region where the VM managed compute deployment is provisioned.
+   */
+  @visibility(Lifecycle.Read)
+  backendRegion?: string;
+
+  /**
+   * Backend public IP address.
+   */
+  @visibility(Lifecycle.Read)
+  publicIp?: string;
+
+  /**
+   * Backend host FQDN.
+   */
+  @visibility(Lifecycle.Read)
+  hostFqdn?: string;
+
+  /**
+   * Current backend instance count.
+   */
+  @visibility(Lifecycle.Read)
+  currentInstanceCount?: int32;
+
+  /**
+   * Target backend host pool.
+   */
+  @visibility(Lifecycle.Read)
+  targetHostPool?: string;
 }
 
 /**
