@@ -241,6 +241,10 @@ using Microsoft.AppComplianceAutomation;
   "nestedResourceCheckNameAvailability",
   "java"
 );
+@@clientName(Microsoft.AppComplianceAutomation,
+  "AppComplianceAutomationClient",
+  "java"
+);
 @@usage(Category, Usage.input, "java");
 @@usage(Control, Usage.input, "java");
 @@usage(Responsibility, Usage.input, "java");
