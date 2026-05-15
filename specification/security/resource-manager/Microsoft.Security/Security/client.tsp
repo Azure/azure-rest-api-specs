@@ -1,35 +1,35 @@
-import "./Alerts/main.tsp";
-import "./AlertsSuppressionRules/main.tsp";
-import "./ApiCollections/main.tsp";
-import "./Applications/main.tsp";
-import "./Assessment/main.tsp";
-import "./ATPSettings/main.tsp";
-import "./Automations/main.tsp";
-import "./ComplianceResults/main.tsp";
-import "./DefenderForStorage/main.tsp";
-import "./Governance/main.tsp";
-import "./HealthReports/main.tsp";
-import "./IoTSecurity/main.tsp";
-import "./LegacySettings/main.tsp";
-import "./Locations/main.tsp";
-import "./MdeOnboarding/main.tsp";
-import "./Operations/main.tsp";
-import "./Pricings/main.tsp";
-import "./PrivateLinks/main.tsp";
-import "./RegulatoryCompliance/main.tsp";
-import "./SecureScore/main.tsp";
-import "./SecurityConnectors/main.tsp";
-import "./SecurityConnectorsDevOps/main.tsp";
-import "./SecurityOperators/main.tsp";
-import "./SecuritySolutions/main.tsp";
-import "./SecurityStandards/main.tsp";
-import "./SensitivitySettings/main.tsp";
-import "./ServerVulnerabilityAssessmentsSettings/main.tsp";
-import "./Settings/main.tsp";
-import "./SqlVulnerabilityAssessments/main.tsp";
-import "./Standards/main.tsp";
-import "./SubAssessments/main.tsp";
-import "./Tasks/main.tsp";
+import "./AlertsAPI/main.tsp";
+import "./AlertsSuppressionRulesAPI/main.tsp";
+import "./ApiCollectionsAPI/main.tsp";
+import "./ApplicationsAPI/main.tsp";
+import "./AssessmentAPI/main.tsp";
+import "./ATPSettingsAPI/main.tsp";
+import "./AutomationsAPI/main.tsp";
+import "./ComplianceResultsAPI/main.tsp";
+import "./DefenderForStorageAPI/main.tsp";
+import "./GovernanceAPI/main.tsp";
+import "./HealthReportsAPI/main.tsp";
+import "./IoTSecurityAPI/main.tsp";
+import "./LegacySettingsAPI/main.tsp";
+import "./LocationsAPI/main.tsp";
+import "./MdeOnboardingAPI/main.tsp";
+import "./OperationsAPI/main.tsp";
+import "./PricingsAPI/main.tsp";
+import "./PrivateLinksAPI/main.tsp";
+import "./RegulatoryComplianceAPI/main.tsp";
+import "./SecureScoreAPI/main.tsp";
+import "./SecurityConnectorsAPI/main.tsp";
+import "./SecurityConnectorsDevOpsAPI/main.tsp";
+import "./SecurityOperatorsAPI/main.tsp";
+import "./SecuritySolutionsAPI/main.tsp";
+import "./SecurityStandardsAPI/main.tsp";
+import "./SensitivitySettingsAPI/main.tsp";
+import "./ServerVulnerabilityAssessmentsSettingsAPI/main.tsp";
+import "./SettingsAPI/main.tsp";
+import "./SqlVulnerabilityAssessmentsAPI/main.tsp";
+import "./StandardsAPI/main.tsp";
+import "./SubAssessmentsAPI/main.tsp";
+import "./TasksAPI/main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 import "@typespec/versioning";
 
@@ -118,8 +118,7 @@ op privateLinksGetCustomization(
   privateLinkName: `private-link-parameters`,
 ): ArmResponse<PrivateLinksAPI.PrivateLinkResource> | ErrorResponse;
 
-@@Azure.ClientGenerator.Core.override(
-  PrivateLinkResources.get,
+@@Azure.ClientGenerator.Core.override(PrivateLinkResources.get,
   privateLinksGetCustomization,
   "!python,!java"
 );
@@ -137,21 +136,16 @@ op privateLinksCreateCustomization(
   privateLinkName: `private-link-parameters`,
 
   resource: PrivateLinksAPI.PrivateLinkResource,
-):
-  | ArmResourceUpdatedResponse<PrivateLinksAPI.PrivateLinkResource>
-  | ArmResourceCreatedResponse<
-      PrivateLinksAPI.PrivateLinkResource,
-      ArmAsyncOperationHeader<FinalResult = PrivateLinksAPI.PrivateLinkResource> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
-  | ErrorResponse;
+): ArmResourceUpdatedResponse<PrivateLinksAPI.PrivateLinkResource> | ArmResourceCreatedResponse<
+  PrivateLinksAPI.PrivateLinkResource,
+  ArmAsyncOperationHeader<FinalResult = PrivateLinksAPI.PrivateLinkResource> &
+    Azure.Core.Foundations.RetryAfterHeader
+> | ErrorResponse;
 
-@@clientName(
-  privateLinksCreateCustomization::parameters.resource,
+@@clientName(privateLinksCreateCustomization::parameters.resource,
   "privateLink"
 );
-@@Azure.ClientGenerator.Core.override(
-  PrivateLinkResources.create,
+@@Azure.ClientGenerator.Core.override(PrivateLinkResources.create,
   privateLinksCreateCustomization,
   "!python,!java"
 );
@@ -171,12 +165,10 @@ op privateLinksUpdateCustomization(
   properties: PrivateLinksAPI.PrivateLinkUpdate,
 ): ArmResponse<PrivateLinksAPI.PrivateLinkResource> | ErrorResponse;
 
-@@clientName(
-  privateLinksUpdateCustomization::parameters.properties,
+@@clientName(privateLinksUpdateCustomization::parameters.properties,
   "privateLink"
 );
-@@Azure.ClientGenerator.Core.override(
-  PrivateLinkResources.update,
+@@Azure.ClientGenerator.Core.override(PrivateLinkResources.update,
   privateLinksUpdateCustomization,
   "!python,!java"
 );
@@ -193,14 +185,10 @@ op privateLinksDeleteCustomization(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query
   privateLinkName: `private-link-parameters`,
-):
-  | ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader>
-  | ArmDeletedNoContentResponse
-  | ErrorResponse;
+): ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+  Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse | ErrorResponse;
 
-@@Azure.ClientGenerator.Core.override(
-  PrivateLinkResources.delete,
+@@Azure.ClientGenerator.Core.override(PrivateLinkResources.delete,
   privateLinksDeleteCustomization,
   "!python,!java"
 );
@@ -219,8 +207,7 @@ op privateLinksHeadCustomization(
   privateLinkName: `private-link-parameters`,
 ): OkResponse | ErrorResponse;
 
-@@Azure.ClientGenerator.Core.override(
-  PrivateLinkResources.head,
+@@Azure.ClientGenerator.Core.override(PrivateLinkResources.head,
   privateLinksHeadCustomization,
   "!python,!java"
 );
@@ -236,12 +223,9 @@ op privateEndpointConnectionsListCustomization(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query
   privateLinkName: `private-link-parameters`,
-):
-  | ArmResponse<ResourceListResult<PrivateLinksAPI.PrivateEndpointConnection>>
-  | ErrorResponse;
+): ArmResponse<ResourceListResult<PrivateLinksAPI.PrivateEndpointConnection>> | ErrorResponse;
 
-@@Azure.ClientGenerator.Core.override(
-  PrivateEndpointConnections.list,
+@@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.list,
   privateEndpointConnectionsListCustomization,
   "!python,!java"
 );
@@ -261,8 +245,7 @@ op privateEndpointConnectionsGetCustomization(
   privateEndpointConnectionName: string,
 ): ArmResponse<Azure.ResourceManager.PrivateEndpointConnection> | ErrorResponse;
 
-@@Azure.ClientGenerator.Core.override(
-  PrivateEndpointConnections.get,
+@@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.get,
   privateEndpointConnectionsGetCustomization,
   "!python,!java"
 );
@@ -283,22 +266,17 @@ op privateEndpointConnectionsCreateOrUpdateCustomization(
   privateEndpointConnectionName: string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resource: Azure.ResourceManager.PrivateEndpointConnection,
-):
-  | ArmResourceUpdatedResponse<PrivateLinksAPI.PrivateLinkResource>
-  | ArmResourceCreatedResponse<
-      PrivateLinksAPI.PrivateLinkResource,
-      ArmAsyncOperationHeader<FinalResult = PrivateLinksAPI.PrivateLinkResource> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
-  | ErrorResponse;
+): ArmResourceUpdatedResponse<PrivateLinksAPI.PrivateLinkResource> | ArmResourceCreatedResponse<
+  PrivateLinksAPI.PrivateLinkResource,
+  ArmAsyncOperationHeader<FinalResult = PrivateLinksAPI.PrivateLinkResource> &
+    Azure.Core.Foundations.RetryAfterHeader
+> | ErrorResponse;
 
-@@Azure.ClientGenerator.Core.override(
-  PrivateEndpointConnections.createOrUpdate,
+@@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.createOrUpdate,
   privateEndpointConnectionsCreateOrUpdateCustomization,
   "!python,!java"
 );
-@@clientName(
-  privateEndpointConnectionsCreateOrUpdateCustomization::parameters.resource,
+@@clientName(privateEndpointConnectionsCreateOrUpdateCustomization::parameters.resource,
   "privateEndpointConnection"
 );
 
@@ -317,14 +295,10 @@ op privateEndpointConnectionsDeleteCustomization(
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateEndpointConnectionName: string,
-):
-  | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader>
-  | ArmDeletedNoContentResponse
-  | ErrorResponse;
+): ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+  Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse | ErrorResponse;
 
-@@Azure.ClientGenerator.Core.override(
-  PrivateEndpointConnections.delete,
+@@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.delete,
   privateEndpointConnectionsDeleteCustomization,
   "!python,!java"
 );
@@ -342,8 +316,7 @@ op privateLinkResourcesListCustomization(
   privateLinkName: `private-link-parameters`,
 ): ArmResponse<ResourceListResult<PrivateLinkGroupResource>> | ErrorResponse;
 
-@@Azure.ClientGenerator.Core.override(
-  PrivateLinkGroupResources.list,
+@@Azure.ClientGenerator.Core.override(PrivateLinkGroupResources.list,
   privateLinkResourcesListCustomization,
   "!python,!java"
 );
@@ -364,93 +337,78 @@ op privateLinkResourcesGetCustomization(
   groupId: string,
 ): ArmResponse<PrivateLinkGroupResource> | ErrorResponse;
 
-@@Azure.ClientGenerator.Core.override(
-  PrivateLinkGroupResources.get,
+@@Azure.ClientGenerator.Core.override(PrivateLinkGroupResources.get,
   privateLinkResourcesGetCustomization,
   "!python,!java"
 );
-@@clientName(
-  SecurityStandardsAPI.SecurityStandard,
+@@clientName(SecurityStandardsAPI.SecurityStandard,
   "ArmSecurityStandard",
   "go"
 );
 @@clientName(SecurityOperatorsAPI.SecurityOperator, "OperatorResource", "go");
-@@clientLocation(
-  SecurityStandards.createOrUpdate,
+@@clientLocation(SecurityStandards.createOrUpdate,
   "ArmSecurityStandards",
   "go"
 );
 @@clientLocation(SecurityStandards.get, "ArmSecurityStandards", "go");
 @@clientLocation(SecurityStandards.delete, "ArmSecurityStandards", "go");
 @@clientLocation(SecurityStandards.list, "ArmSecurityStandards", "go");
-@@clientName(
-  SecurityStandardsAPI.SecurityStandardProperties,
+@@clientName(SecurityStandardsAPI.SecurityStandardProperties,
   "ArmSecurityStandardProperties",
   "go"
 );
 @@usage(IoTSecurityAPI.CustomAlertRule, Usage.input | Usage.output, "go");
 
-@@clientName(
-  Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo,
+@@clientName(Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo,
   "ArmErrorAdditionalInfo",
   "java"
 );
-@@clientName(
-  Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
+@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
   "ArmPrivateEndpointConnection",
   "java,javascript,go"
 );
-@@clientName(
-  Azure.ResourceManager.CommonTypes.ActionType,
+@@clientName(Azure.ResourceManager.CommonTypes.ActionType,
   "ArmActionType",
   "java,go"
 );
 @@clientName(StandardsAPI.StandardList, "ArmSecurityStandardList", "go");
 
-@@clientName(
-  IoTSecurityAPI.RecommendationType.IoT_ACRAuthentication,
+@@clientName(IoTSecurityAPI.RecommendationType.IoT_ACRAuthentication,
   "IoTAcrauthentication",
   "javascript,go"
 );
-@@clientName(
-  IoTSecurityAPI.RecommendationType.IoT_IPFilter_DenyAll,
+@@clientName(IoTSecurityAPI.RecommendationType.IoT_IPFilter_DenyAll,
   "IoTIpfilterDenyAll",
   "javascript,go"
 );
-@@clientName(
-  IoTSecurityAPI.RecommendationType.IoT_IPFilter_PermissiveRule,
+@@clientName(IoTSecurityAPI.RecommendationType.IoT_IPFilter_PermissiveRule,
   "IoTIpfilterPermissiveRule",
   "javascript,go"
 );
 @@clientName(SubAssessmentsAPI.CVE, "Cve", "javascript,java");
 
-@@clientName(
-  SecurityConnectorsAPI.DefenderCspmAwsOfferingCiemCiemDiscovery,
+@@clientName(SecurityConnectorsAPI.DefenderCspmAwsOfferingCiemCiemDiscovery,
   "DefenderCspmAwsOfferingCiemDiscovery",
   "go,javascript,python,java"
 );
 
-@@clientName(
-  SecurityConnectorsAPI.DefenderCspmAwsOfferingCiemCiemOidc,
+@@clientName(SecurityConnectorsAPI.DefenderCspmAwsOfferingCiemCiemOidc,
   "DefenderCspmAwsOfferingCiemOidc",
   "go,javascript,python,java"
 );
 
 @@clientName(Common.ResourceDetails, "CommonResourceDetails", "python,go");
 @@clientName(HealthReportsAPI.status, "StatusAutoGenerated", "python");
-@@clientName(
-  Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
+@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
   "ArmPrivateEndpointConnection",
   "python"
 );
-@@clientName(
-  Azure.ResourceManager.CommonTypes.ActionType,
+@@clientName(Azure.ResourceManager.CommonTypes.ActionType,
   "ArmActionType",
   "python,javascript"
 );
 @@clientName(AadConnectivityState, "AadConnectivityStateEnum", "python");
-@@clientName(
-  ExternalSecuritySolutionKind,
+@@clientName(ExternalSecuritySolutionKind,
   "ExternalSecuritySolutionKindEnum",
   "python"
 );
@@ -459,33 +417,27 @@ op privateLinkResourcesGetCustomization(
 @@clientName(OperationResultStatus, "OperationResult", "python");
 @@clientName(OperationResult, "OperationResultAutoGenerated", "python");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
-  AdvancedThreatProtectionSettingNameAlias.settingName,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(AdvancedThreatProtectionSettingNameAlias.settingName,
   "current",
   "python"
 );
-@@Azure.ClientGenerator.Core.alternateType(
-  AdvancedThreatProtectionSettingNameAlias.settingName,
+@@Azure.ClientGenerator.Core.alternateType(AdvancedThreatProtectionSettingNameAlias.settingName,
   "current"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
-  JitNetworkAccessPolicyInitiateTypeAlias.jitNetworkAccessPolicyInitiateType,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(JitNetworkAccessPolicyInitiateTypeAlias.jitNetworkAccessPolicyInitiateType,
   "initiate",
   "python"
 );
-@@Azure.ClientGenerator.Core.alternateType(
-  JitNetworkAccessPolicyInitiateTypeAlias.jitNetworkAccessPolicyInitiateType,
+@@Azure.ClientGenerator.Core.alternateType(JitNetworkAccessPolicyInitiateTypeAlias.jitNetworkAccessPolicyInitiateType,
   "initiate"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
-  ServerVulnerabilityAssessmentNameAlias.serverVulnerabilityAssessment,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(ServerVulnerabilityAssessmentNameAlias.serverVulnerabilityAssessment,
   "default",
   "python"
 );
-@@Azure.ClientGenerator.Core.alternateType(
-  ServerVulnerabilityAssessmentNameAlias.serverVulnerabilityAssessment,
+@@Azure.ClientGenerator.Core.alternateType(ServerVulnerabilityAssessmentNameAlias.serverVulnerabilityAssessment,
   "default"
 );
 
@@ -537,8 +489,7 @@ op sqlVulnerabilityAssessmentScanResultsList(
   resourceId: string,
 ): ArmResponse<ScanResults> | Common.CloudError;
 
-@@override(
-  SqlVulnerabilityAssessmentScanResults.list,
+@@override(SqlVulnerabilityAssessmentScanResults.list,
   sqlVulnerabilityAssessmentScanResultsList
 );
 
@@ -569,8 +520,7 @@ op sqlVulnerabilityAssessmentScanResultsGet(
   resourceId: string,
 ): ArmResponse<ScanResult> | Common.CloudError;
 
-@@override(
-  SqlVulnerabilityAssessmentScanResults.get,
+@@override(SqlVulnerabilityAssessmentScanResults.get,
   sqlVulnerabilityAssessmentScanResultsGet
 );
 
@@ -590,79 +540,65 @@ op alertsListResourceGroupLevelByRegionCustomized(
   ...Azure.ResourceManager.Legacy.Provider,
 ): ArmResponse<AlertList> | ErrorResponse;
 
-@@override(
-  AlertOperationGroup.listResourceGroupLevelByRegion,
+@@override(AlertOperationGroup.listResourceGroupLevelByRegion,
   alertsListResourceGroupLevelByRegionCustomized,
   "python,go,java"
 );
 
-@@alternateType(
-  Azure.ResourceManager.CommonTypes.Identity.type,
+@@alternateType(Azure.ResourceManager.CommonTypes.Identity.type,
   "SystemAssigned",
   "go"
 );
 
-@@clientName(
-  HealthReportsAPI.resourceDetails,
+@@clientName(HealthReportsAPI.resourceDetails,
   "HealthReportResourceDetails",
   "java"
 );
-@@clientLocation(
-  ApiCollections.getByAzureApiManagementService,
+@@clientLocation(ApiCollections.getByAzureApiManagementService,
   "ApiCollections",
   "java"
 );
-@@clientLocation(
-  ApiCollections.onboardAzureApiManagementApi,
+@@clientLocation(ApiCollections.onboardAzureApiManagementApi,
   "ApiCollections",
   "java"
 );
-@@clientLocation(
-  ApiCollections.offboardAzureApiManagementApi,
+@@clientLocation(ApiCollections.offboardAzureApiManagementApi,
   "ApiCollections",
   "java"
 );
-@@clientLocation(
-  ApiCollections.listByAzureApiManagementService,
+@@clientLocation(ApiCollections.listByAzureApiManagementService,
   "ApiCollections",
   "java"
 );
 @@clientLocation(ApiCollections.listBySubscription, "ApiCollections", "java");
-@@clientLocation(
-  ApiCollectionsOperationGroup.listByResourceGroup,
+@@clientLocation(ApiCollectionsOperationGroup.listByResourceGroup,
   "ApiCollections",
   "java"
 );
 
 @@clientName(SecurityManagementClient, "SecurityCenter", "java");
 @@clientName(SubAssessmentsAPI.CVSS, "Cvss", "java");
-@@clientName(
-  SecurityAssessmentPropertiesBaseRiskPathsItemEdgeItem,
+@@clientName(SecurityAssessmentPropertiesBaseRiskPathsItemEdgeItem,
   "SecurityAssessmentPropertiesBaseRiskPathsItemEdge",
   "java"
 );
-@@clientName(
-  SecurityAssessmentPropertiesBaseRiskPathsItemNodesItem,
+@@clientName(SecurityAssessmentPropertiesBaseRiskPathsItemNodesItem,
   "SecurityAssessmentPropertiesBaseRiskPathsPropertiesItemsItem",
   "java"
 );
-@@clientLocation(
-  ApplicationsAPI.SecurityConnectorApplication.get,
+@@clientLocation(ApplicationsAPI.SecurityConnectorApplication.get,
   "SecurityConnectorApplications",
   "java"
 );
-@@clientLocation(
-  ApplicationsAPI.SecurityConnectorApplication.createOrUpdate,
+@@clientLocation(ApplicationsAPI.SecurityConnectorApplication.createOrUpdate,
   "SecurityConnectorApplications",
   "java"
 );
-@@clientLocation(
-  ApplicationsAPI.SecurityConnectorApplication.delete,
+@@clientLocation(ApplicationsAPI.SecurityConnectorApplication.delete,
   "SecurityConnectorApplications",
   "java"
 );
-@@clientLocation(
-  ApplicationsAPI.SecurityConnectorApplication.list,
+@@clientLocation(ApplicationsAPI.SecurityConnectorApplication.list,
   "SecurityConnectorApplications",
   "java"
 );
