@@ -24,7 +24,6 @@ namespace Napster.CompanionAPI {
   /** The available API versions. */
   enum Versions {
     /** 2025-12-24-preview version */
-    @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
     @useDependency(LiftrBase.Versions.v3_preview)
     v2025_12_24_preview: "2025-12-24-preview",
   }
