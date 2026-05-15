@@ -18098,6 +18098,37 @@
           }
         ]
       }
+    },
+    "WorkloadDetails": {
+      "type": "object",
+      "description": "Represents the details of a workload.",
+      "properties": {
+        "workloadId": {
+          "type": "string",
+          "description": "workload Id to which GPU is assigned.",
+          "readOnly": true
+        },
+        "workloadName": {
+          "type": "string",
+          "description": "This gives information about workload name (VM/AKS) specifically the VM Name or AKS Name.",
+          "readOnly": true
+        },
+        "workloadStatus": {
+          "type": "string",
+          "description": "This gives information about workload status, running or down.",
+          "readOnly": true
+        },
+        "workloadType": {
+          "type": "string",
+          "description": "This tells if workload is VM, AKS, etc.",
+          "readOnly": true
+        },
+        "slotLocation": {
+          "type": "string",
+          "description": "This is the unique instance path for a workload using GPU-P.",
+          "readOnly": true
+        }
+      }
     }
   },
   "parameters": {}
