@@ -1,6 +1,6 @@
 {
-  "operationId": "Agents_downloadAgentVersionCode",
-  "title": "Agents_DownloadAgentVersionCode",
+  "operationId": "Agents_downloadAgentCode",
+  "title": "Agents_DownloadAgentCode_WithVersion",
   "parameters": {
     "api-version": "2025-11-15-preview",
     "agent_name": "my-code-agent",
@@ -10,7 +10,8 @@
   "responses": {
     "200": {
       "headers": {
-        "Content-Type": "application/zip"
+        "Content-Type": "application/zip",
+        "x-ms-agent-version": "1"
       },
       "body": "<binary zip content>"
     }

@@ -16,7 +16,6 @@ const DataGenerationJobsRequiredPreviews = #{
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client via Operation-Location"
 @tag("DataGenerationJobs")
-@removed(Versions.v1)
 interface DataGenerationJobs {
   /**
    * Gets the details of a data generation job by its ID.

@@ -126,7 +126,6 @@ interface Evaluators {
     Azure.Core.Foundations.ResourceOkResponse<EvaluatorVersion>
   >;
 
-  @removed(Versions.v1)
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Start a new or get an existing pending upload of an evaluator for a specific version.")
   @post
@@ -153,7 +152,6 @@ interface Evaluators {
     PendingUploadResponse
   >;
 
-  @removed(Versions.v1)
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Get the SAS credential to access the storage account associated with an Evaluator version.")
@@ -196,7 +194,6 @@ const EvaluatorGenerationJobsRequiredPreviews = #{
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client via Operation-Location"
 @tag("EvaluatorGenerationJobs")
-@removed(Versions.v1)
 interface EvaluatorGenerationJobs {
   /**
    * Creates an evaluator generation job. The service generates rubric-based evaluator
