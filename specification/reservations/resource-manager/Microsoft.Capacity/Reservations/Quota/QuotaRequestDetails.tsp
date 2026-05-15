@@ -20,7 +20,6 @@ model QuotaRequestDetails
     Resource = QuotaRequestDetails,
     KeyName = "id",
     SegmentName = "serviceLimitsRequests",
-    Type = Azure.Core.uuid,
     NamePattern = ""
   >;
 }
