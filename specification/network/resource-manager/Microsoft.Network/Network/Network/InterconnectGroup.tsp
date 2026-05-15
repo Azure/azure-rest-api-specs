@@ -144,15 +144,19 @@ interface Subgroups {
 
 @@doc(InterconnectGroup.name, "The name of the interconnect group.");
 @@doc(InterconnectGroup.properties, "Properties of the interconnect group.");
-@@doc(InterconnectGroups.createOrUpdate::parameters.resource,
+@@doc(
+  InterconnectGroups.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update interconnect group operation."
 );
-@@doc(InterconnectGroups.updateTags::parameters.properties,
+@@doc(
+  InterconnectGroups.updateTags::parameters.properties,
   "Parameters supplied to update interconnect group tags."
 );
-@@clientName(InterconnectGroups.createOrUpdate::parameters.resource,
+@@clientName(
+  InterconnectGroups.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(InterconnectGroups.updateTags::parameters.properties,
+@@clientName(
+  InterconnectGroups.updateTags::parameters.properties,
   "parameters"
 );

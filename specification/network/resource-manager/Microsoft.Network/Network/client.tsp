@@ -77,7 +77,8 @@ namespace CombineClient;
 @@clientName(Microsoft.Network.QosIpRange.startIP, "startIp", "java");
 @@clientName(Microsoft.Network.QosIpRange.endIP, "endIp", "java");
 // Mitigate ProvisioningState split: create unified union with all values
-@@clientName(Common.ProvisioningState,
+@@clientName(
+  Common.ProvisioningState,
   "CommonProvisioningState",
   "java,javascript"
 );
