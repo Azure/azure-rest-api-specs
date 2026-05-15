@@ -71,10 +71,10 @@ alias LaunchSubscriptionParams = {
 
 alias LaunchCustomParams = {
   ...LaunchCommonParams;
-  ...ProviderNamespace<LaunchBulkInstancesOperation>;
+  ...ProviderNamespace<LocationBasedLaunchBulkInstancesOperation>;
   ...LaunchLocationParameter;
   ...ResourceNameParameter<
-    LaunchBulkInstancesOperation,
+    LocationBasedLaunchBulkInstancesOperation,
     NamePattern = "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
   >;
 };
@@ -269,8 +269,17 @@ model VirtualMachineListResult {
 // ============================================================
 
 @added(Microsoft.Compute.Versions.`2026-06-06-preview`)
-@doc("A LaunchBulkInstancesOperation resource. Holds envelope properties shared between the request shape and the location-keyed resource.")
-model LaunchBulkInstancesOperation {
+@doc("Location based LaunchBulkInstancesOperation resource. The location is part of the resource path.")
+model LocationBasedLaunchBulkInstancesOperation
+  is Azure.ResourceManager.ProxyResource<LaunchBulkInstancesOperationProperties> {
+  @doc("The location name.")
+  @path
+  @minLength(1)
+  @segment("locations")
+  @key
+  @visibility(Lifecycle.Read)
+  location: azureLocation;
+
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Zones is a valid envelope property for this resource."
   @doc("Zones in which the LaunchBulkInstancesOperation is available")
   zones?: Array<string>;
@@ -319,21 +328,6 @@ model LaunchBulkInstancesOperationProperties {
 }
 
 @added(Microsoft.Compute.Versions.`2026-06-06-preview`)
-@doc("Location based LaunchBulkInstancesOperation resource. The location is part of the resource path.")
-model LocationBasedLaunchBulkInstancesOperation
-  is Azure.ResourceManager.ProxyResource<LaunchBulkInstancesOperationProperties> {
-  @doc("The location name.")
-  @path
-  @minLength(1)
-  @segment("locations")
-  @key
-  @visibility(Lifecycle.Read)
-  location: azureLocation;
-
-  ...LaunchBulkInstancesOperation;
-}
-
-@added(Microsoft.Compute.Versions.`2026-06-06-preview`)
 @doc("List of LaunchBulkInstancesOperation resources.")
 model LaunchBulkInstancesOperationListResult {
   @pageItems
@@ -352,7 +346,7 @@ model LaunchBulkInstancesOperationListResult {
 
 @added(Microsoft.Compute.Versions.`2026-06-06-preview`)
 @armResourceOperations(#{ allowStaticRoutes: true })
-interface BulkActions {
+interface LaunchBulkInstancesOperation {
   @doc("Gets an instance of LaunchBulkInstancesOperations.")
   get is ArmResourceRead<
     Resource = LocationBasedLaunchBulkInstancesOperation,
@@ -392,7 +386,7 @@ interface BulkActions {
   @autoRoute
   @action("launchBulkInstancesOperations")
   @list
-  @listsResource(LaunchBulkInstancesOperation)
+  @listsResource(LocationBasedLaunchBulkInstancesOperation)
   @armResourceList(LocationBasedLaunchBulkInstancesOperation)
   listByResourceGroup(
     ...LaunchCommonParams,
@@ -405,7 +399,7 @@ interface BulkActions {
   @autoRoute
   @action("launchBulkInstancesOperations")
   @list
-  @listsResource(LaunchBulkInstancesOperation)
+  @listsResource(LocationBasedLaunchBulkInstancesOperation)
   @armResourceList(LocationBasedLaunchBulkInstancesOperation)
   listBySubscription(
     ...LaunchSubscriptionParams,
