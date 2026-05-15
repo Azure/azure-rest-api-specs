@@ -24010,6 +24010,10 @@
           "type": "boolean",
           "description": "Flag to indicate whether to enable MaterializedViews on the Cosmos DB account"
         },
+        "enableEmbeddingGenerator": {
+          "type": "boolean",
+          "description": "Flag to indicate whether to enable EmbeddingGenerator on the Cosmos DB account"
+        },
         "keysMetadata": {
           "$ref": "#/definitions/DatabaseAccountKeysMetadata",
           "description": "This property is ignored during the update/create operation, as the metadata is read-only. The object represents the metadata for the Account Keys of the Cosmos DB account.",
@@ -24276,6 +24280,10 @@
         "enableMaterializedViews": {
           "type": "boolean",
           "description": "Flag to indicate whether to enable MaterializedViews on the Cosmos DB account"
+        },
+        "enableEmbeddingGenerator": {
+          "type": "boolean",
+          "description": "Flag to indicate whether to enable EmbeddingGenerator on the Cosmos DB account"
         },
         "keysMetadata": {
           "$ref": "#/definitions/DatabaseAccountKeysMetadata",
@@ -24643,6 +24651,10 @@
           "type": "boolean",
           "description": "Flag to indicate whether to enable MaterializedViews on the Cosmos DB account"
         },
+        "enableEmbeddingGenerator": {
+          "type": "boolean",
+          "description": "Flag to indicate whether to enable EmbeddingGenerator on the Cosmos DB account"
+        },
         "keysMetadata": {
           "$ref": "#/definitions/DatabaseAccountKeysMetadata",
           "description": "This property is ignored during the update operation, as the metadata is read-only. The object represents the metadata for the Account Keys of the Cosmos DB account.",
@@ -24808,6 +24820,98 @@
           {
             "name": "Dotproduct",
             "value": "dotproduct"
+          }
+        ]
+      }
+    },
+    "EmbeddingGeneratorRegionalServiceResource": {
+      "type": "object",
+      "description": "Resource for a regional service location.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RegionalServiceResource"
+        }
+      ]
+    },
+    "EmbeddingGeneratorServiceResourceCreateUpdateProperties": {
+      "type": "object",
+      "description": "Properties for Create or Update request for EmbeddingGeneratorServiceResource",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceResourceCreateUpdateProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "EmbeddingGenerator"
+    },
+    "EmbeddingGeneratorServiceResourceProperties": {
+      "type": "object",
+      "description": "Properties for EmbeddingGeneratorServiceResource.",
+      "properties": {
+        "locations": {
+          "type": "array",
+          "description": "An array that contains all of the locations for the service.",
+          "items": {
+            "$ref": "#/definitions/EmbeddingGeneratorRegionalServiceResource"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceResourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "EmbeddingGenerator"
+    },
+    "EmbeddingSource": {
+      "type": "object",
+      "description": "Represents the embedding source configuration for the Embedding Generator service.\nWhen specified on a vector embedding, the service will automatically generate embeddings from source document fields.",
+      "properties": {
+        "sourcePaths": {
+          "type": "array",
+          "description": "The list of source paths in the document to generate embeddings from.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "The Azure OpenAI or AI service endpoint used for generating embeddings."
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "The name of the model deployment used for generating embeddings."
+        },
+        "modelName": {
+          "type": "string",
+          "description": "The name of the embedding model."
+        },
+        "authType": {
+          "$ref": "#/definitions/EmbeddingSourceAuthenticationType",
+          "description": "The type of authentication to use when calling the embedding service."
+        }
+      }
+    },
+    "EmbeddingSourceAuthenticationType": {
+      "type": "string",
+      "description": "The type of authentication to use when calling the embedding provider API.",
+      "enum": [
+        "Entra",
+        "ApiKey"
+      ],
+      "x-ms-enum": {
+        "name": "EmbeddingSourceAuthenticationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Entra",
+            "value": "Entra",
+            "description": "Entra (Azure Active Directory) based authentication."
+          },
+          {
+            "name": "ApiKey",
+            "value": "ApiKey",
+            "description": "API Key based authentication."
           }
         ]
       }
@@ -30427,7 +30531,8 @@
         "SqlDedicatedGateway",
         "DataTransfer",
         "GraphAPICompute",
-        "MaterializedViewsBuilder"
+        "MaterializedViewsBuilder",
+        "EmbeddingGenerator"
       ],
       "x-ms-enum": {
         "name": "ServiceType",
@@ -30448,6 +30553,11 @@
           {
             "name": "MaterializedViewsBuilder",
             "value": "MaterializedViewsBuilder"
+          },
+          {
+            "name": "EmbeddingGenerator",
+            "value": "EmbeddingGenerator",
+            "description": "Embedding Generator service type."
           }
         ]
       }
@@ -32553,6 +32663,10 @@
           "type": "integer",
           "format": "int32",
           "description": "The number of dimensions in the vector."
+        },
+        "embeddingSource": {
+          "$ref": "#/definitions/EmbeddingSource",
+          "description": "The embedding source configuration for automatic embedding generation. When specified, the Embedding Generator service will automatically generate embeddings for the vector field."
         }
       },
       "required": [
