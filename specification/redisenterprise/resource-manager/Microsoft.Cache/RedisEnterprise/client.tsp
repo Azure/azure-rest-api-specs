@@ -211,7 +211,7 @@ using Microsoft.Cache;
 @@clientName(DatabaseProperties, "DatabaseCommonProperties", "javascript");
 @@clientName(
   ClusterPropertiesEncryptionCustomerManagedKeyEncryptionKeyIdentity,
-  "ClusterPropertiesEncryptionCustomerManagedKeyEncryptionKeyIdentity",
+  "ClusterCommonPropertiesEncryptionCustomerManagedKeyEncryptionKeyIdentity",
   "javascript"
 );
 @@clientName(
