@@ -79,9 +79,11 @@ interface AgentSessionFiles {
   /**
    * List files and directories at a given path in the session sandbox.
    * Returns only the immediate children of the specified directory (non-recursive).
+   * If path is not provided, lists the session home directory.
    */
   @get
   @route("/agents/{agent_name}/endpoint/sessions/{session_id}/files")
+  @list
   @extension(
     "x-ms-foundry-meta",
     #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
@@ -95,8 +97,8 @@ interface AgentSessionFiles {
       /** The session ID. */
       @path session_id: string;
 
-      /** The directory path to list, relative to the session home directory. */
-      @query path: string;
+      /** The directory path to list, relative to the session home directory. Defaults to the home directory if not provided. */
+      @query path?: string;
     },
     SessionDirectoryListResponse
   >;
