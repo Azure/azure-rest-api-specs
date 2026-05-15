@@ -151,6 +151,7 @@ interface Commits {
 
 @@doc(Commit.name, "The name of the commit.");
 @@doc(Commit.properties, "The Commit properties");
-@@doc(Commits.createOrUpdate::parameters.resource,
+@@doc(
+  Commits.createOrUpdate::parameters.resource,
   "Parameters supplied to specify which commit to create"
 );

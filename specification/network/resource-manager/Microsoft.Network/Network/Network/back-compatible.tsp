@@ -2092,6 +2092,7 @@ using TypeSpec.Versioning;
 
 @@added(DdosSettings.ddosCustomPolicy, Microsoft.Network.Versions.v2025_07_01);
 
-@@added(DdosCustomPolicyPropertiesFormat.publicIPAddresses,
+@@added(
+  DdosCustomPolicyPropertiesFormat.publicIPAddresses,
   Microsoft.Network.Versions.v2025_07_01
 );

@@ -79,12 +79,15 @@ interface ConnectionPolicies {
   >;
 }
 
-@@doc(ConnectionPolicy.name,
+@@doc(
+  ConnectionPolicy.name,
   "The name of the ConnectionPolicy that is unique within a VirtualHub. This name can be used to access the resource."
 );
-@@doc(ConnectionPolicy.properties,
+@@doc(
+  ConnectionPolicy.properties,
   "Properties of the ConnectionPolicy resource."
 );
-@@doc(ConnectionPolicies.createOrUpdate::parameters.resource,
+@@doc(
+  ConnectionPolicies.createOrUpdate::parameters.resource,
   "Parameters supplied to create or update a ConnectionPolicy."
 );
