@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2025-12-24-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-12-24-preview'
 input-file:
-  - preview/2025-12-24-preview/napstercompanionapi.json
+  - preview/2025-12-24-preview/openapi.json
 ```
 ## Suppression
 ``` yaml
