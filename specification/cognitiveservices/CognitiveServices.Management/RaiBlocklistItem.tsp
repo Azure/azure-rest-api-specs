@@ -27,15 +27,15 @@ model RaiBlocklistItem
   /**
    * Resource Etag.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'etag' on the resource envelope for backward compatibility"
   @visibility(Lifecycle.Read)
   etag?: string;
 
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'tags' on the resource envelope for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<tags> type used for 'RaiBlocklistItem' to support extensible key-value pairs matching service behavior"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 }
@@ -70,13 +70,16 @@ interface RaiBlocklistItems {
   >;
 }
 
-@@doc(RaiBlocklistItem.name,
+@@doc(
+  RaiBlocklistItem.name,
   "The name of the RaiBlocklist Item associated with the custom blocklist"
 );
 @@encodedName(RaiBlocklistItem.etag, "application/json", "etag");
-@@doc(RaiBlocklistItem.properties,
+@@doc(
+  RaiBlocklistItem.properties,
   "Properties of Cognitive Services RaiBlocklist Item."
 );
-@@doc(RaiBlocklistItems.createOrUpdate::parameters.resource,
+@@doc(
+  RaiBlocklistItems.createOrUpdate::parameters.resource,
   "Properties describing the custom blocklist."
 );

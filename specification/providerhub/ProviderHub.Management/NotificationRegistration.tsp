@@ -55,6 +55,7 @@ interface NotificationRegistrations {
 
 @@doc(NotificationRegistration.name, "The notification registration.");
 @@doc(NotificationRegistration.properties, "");
-@@doc(NotificationRegistrations.createOrUpdate::parameters.resource,
+@@doc(
+  NotificationRegistrations.createOrUpdate::parameters.resource,
   "The required body parameters supplied to the notification registration operation."
 );

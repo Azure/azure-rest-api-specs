@@ -39,8 +39,8 @@ namespace PurviewUnifiedCatalog;
 
 @doc("Service API versions")
 enum ApiVersions {
-  @doc("2025-09-15-preview service API version")
-  v2025_09_15_preview: "2025-09-15-preview",
+  @doc("2026-03-20-preview service API version")
+  v2026_03_20_preview: "2026-03-20-preview",
 }
 
 alias AuthToken = OAuth2Auth<[

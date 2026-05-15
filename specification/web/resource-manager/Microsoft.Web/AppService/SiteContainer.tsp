@@ -56,7 +56,8 @@ interface SiteContainerOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface SiteContainers {
   /**
    * Gets a site container of a site, or a deployment slot.
@@ -126,7 +127,8 @@ interface SiteContainerOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface SiteContainerOperationGroup {
   /**
    * Gets a site container of a site, or a deployment slot.
@@ -168,9 +170,11 @@ interface SiteContainerOperationGroup {
 
 @@doc(SiteContainer.name, "Site Container Name");
 @@doc(SiteContainer.properties, "SiteContainer resource specific properties");
-@@doc(SiteContainers.createOrUpdateSiteContainer::parameters.resource,
+@@doc(
+  SiteContainers.createOrUpdateSiteContainer::parameters.resource,
   "Container Entity"
 );
-@@doc(SiteContainerOperationGroup.createOrUpdateSiteContainerSlot::parameters.resource,
+@@doc(
+  SiteContainerOperationGroup.createOrUpdateSiteContainerSlot::parameters.resource,
   "Container Entity"
 );

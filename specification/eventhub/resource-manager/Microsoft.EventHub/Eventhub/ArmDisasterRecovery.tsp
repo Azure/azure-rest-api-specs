@@ -27,7 +27,7 @@ model ArmDisasterRecovery
   /**
    * The geo-location where the resource lives
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This property is an existing envelope property from the original OpenAPI specification and cannot be changed without breaking compatibility."
   @visibility(Lifecycle.Read)
   location?: string;
 }
@@ -82,9 +82,11 @@ interface ArmDisasterRecoveries {
 @@maxLength(ArmDisasterRecovery.name, 50);
 @@minLength(ArmDisasterRecovery.name, 1);
 @@doc(ArmDisasterRecovery.name, "The Disaster Recovery configuration name");
-@@doc(ArmDisasterRecovery.properties,
+@@doc(
+  ArmDisasterRecovery.properties,
   "Properties required to the Create Or Update Alias(Disaster Recovery configurations)"
 );
-@@doc(ArmDisasterRecoveries.createOrUpdate::parameters.resource,
+@@doc(
+  ArmDisasterRecoveries.createOrUpdate::parameters.resource,
   "Parameters required to create an Alias(Disaster Recovery configuration)"
 );

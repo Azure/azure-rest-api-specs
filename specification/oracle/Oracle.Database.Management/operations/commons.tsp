@@ -67,8 +67,9 @@ interface ListActions {
     TResource extends Foundations.Resource,
     TResponse extends {} | void,
     TBaseParameters = BaseParameters<TResource>
-  >(
-    ...ResourceInstanceParameters<TResource, TBaseParameters>,
-  ): ArmResponse<TResponse> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = TResponse> &
-    Azure.Core.Foundations.RetryAfterHeader> | ErrorResponse;
+  >(...ResourceInstanceParameters<TResource, TBaseParameters>):
+    | ArmResponse<TResponse>
+    | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = TResponse> &
+        Azure.Core.Foundations.RetryAfterHeader>
+    | ErrorResponse;
 }

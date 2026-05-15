@@ -45,7 +45,8 @@ interface AuthorizationRuleOps
         ...Azure.ResourceManager.Legacy.Provider,
         ...KeysOf<RelayNamespaceNameParameter>,
       },
-      KeysOf<AuthorizationRuleNameParameter>
+      KeysOf<AuthorizationRuleNameParameter>,
+      ResourceName = "RelayNamespaceAuthorizationRule"
     > {}
 
 @armResourceOperations
@@ -103,7 +104,8 @@ interface HybridConnectionOps
         ...KeysOf<RelayNamespaceNameParameter>,
         ...KeysOf<HybridConnectionNameParameter>,
       },
-      KeysOf<AuthorizationRuleNameParameter>
+      KeysOf<AuthorizationRuleNameParameter>,
+      ResourceName = "RelayHybridConnectionAuthorizationRule"
     > {}
 
 @armResourceOperations
@@ -162,7 +164,8 @@ interface WCFRelayOps
         ...KeysOf<RelayNamespaceNameParameter>,
         ...KeysOf<WcfRelayNameParameter>,
       },
-      KeysOf<AuthorizationRuleNameParameter>
+      KeysOf<AuthorizationRuleNameParameter>,
+      ResourceName = "WcfRelayAuthorizationRule"
     > {}
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
@@ -210,24 +213,31 @@ interface WCFRelays {
   >;
 }
 
-@@doc(AuthorizationRule.properties,
+@@doc(
+  AuthorizationRule.properties,
   "Properties supplied to create or update AuthorizationRule"
 );
-@@doc(AuthorizationRules.createOrUpdateAuthorizationRule::parameters.resource,
+@@doc(
+  AuthorizationRules.createOrUpdateAuthorizationRule::parameters.resource,
   "The authorization rule parameters."
 );
-@@doc(AuthorizationRules.regenerateKeys::parameters.body,
+@@doc(
+  AuthorizationRules.regenerateKeys::parameters.body,
   "Parameters supplied to regenerate authorization rule."
 );
-@@doc(HybridConnections.createOrUpdateAuthorizationRule::parameters.resource,
+@@doc(
+  HybridConnections.createOrUpdateAuthorizationRule::parameters.resource,
   "The authorization rule parameters."
 );
-@@doc(HybridConnections.regenerateKeys::parameters.body,
+@@doc(
+  HybridConnections.regenerateKeys::parameters.body,
   "Parameters supplied to regenerate authorization rule."
 );
-@@doc(WCFRelays.createOrUpdateAuthorizationRule::parameters.resource,
+@@doc(
+  WCFRelays.createOrUpdateAuthorizationRule::parameters.resource,
   "The authorization rule parameters."
 );
-@@doc(WCFRelays.regenerateKeys::parameters.body,
+@@doc(
+  WCFRelays.regenerateKeys::parameters.body,
   "Parameters supplied to regenerate authorization rule."
 );

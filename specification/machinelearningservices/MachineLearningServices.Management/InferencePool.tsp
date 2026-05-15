@@ -19,6 +19,8 @@ namespace Microsoft.MachineLearningServices;
  * InferencePool is a preview-only resource.
  */
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
 @parentResource(Workspace)
 model InferencePool
   is Azure.ResourceManager.TrackedResource<InferencePoolProperties, false> {
@@ -43,6 +45,8 @@ model InferencePool
  * InferencePools interface is preview-only.
  */
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
 @armResourceOperations
 interface InferencePools {
   /**
@@ -58,16 +62,18 @@ interface InferencePools {
   @useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     InferencePool,
-    Response = ArmResourceUpdatedResponse<InferencePool> | (ArmResourceCreatedResponse<
-      InferencePool,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = InferencePool>
-    > & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<InferencePool>
+      | (ArmResourceCreatedResponse<
+          InferencePool,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = InferencePool>
+        > & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
   >;
 
   /**
@@ -78,14 +84,16 @@ interface InferencePools {
   update is ArmCustomPatchAsync<
     InferencePool,
     PatchModel = PartialMinimalTrackedResourceWithSkuAndIdentity,
-    Response = InferencePool | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = InferencePool>> &
-      Azure.Core.Foundations.RetryAfterHeader & {
-        /**
-         * Timeout for the client to use when polling the asynchronous operation.
-         */
-        @header("x-ms-async-operation-timeout")
-        timeout: duration;
-      })
+    Response =
+      | InferencePool
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = InferencePool>> &
+          Azure.Core.Foundations.RetryAfterHeader & {
+            /**
+             * Timeout for the client to use when polling the asynchronous operation.
+             */
+            @header("x-ms-async-operation-timeout")
+            timeout: duration;
+          })
   >;
 
   /**
@@ -95,13 +103,16 @@ interface InferencePools {
   @summary("Delete InferencePool (asynchronous).")
   delete is ArmResourceDeleteWithoutOkAsync<
     InferencePool,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -146,18 +157,23 @@ interface InferencePools {
 }
 
 @@doc(InferencePool.name, "Name of InferencePool");
-@@doc(InferencePool.properties,
+@@doc(
+  InferencePool.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(InferencePools.createOrUpdate::parameters.resource,
+@@doc(
+  InferencePools.createOrUpdate::parameters.resource,
   "InferencePool entity to apply during operation."
 );
-@@doc(InferencePools.update::parameters.properties,
+@@doc(
+  InferencePools.update::parameters.properties,
   "Inference Pool entity to apply during operation."
 );
-@@doc(InferencePool.identity,
+@@doc(
+  InferencePool.identity,
   "Managed service identity (system assigned and/or user assigned identities)"
 );
-@@doc(InferencePool.sku,
+@@doc(
+  InferencePool.sku,
   "Sku details required for ARM contract for Autoscaling."
 );

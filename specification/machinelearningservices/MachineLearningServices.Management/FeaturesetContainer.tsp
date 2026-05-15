@@ -84,17 +84,19 @@ interface FeaturesetContainers {
   @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     FeaturesetContainer,
-    Response = ArmResourceUpdatedResponse<FeaturesetContainer> | (ArmResourceCreatedResponse<
-      FeaturesetContainer,
-      LroHeaders = ArmAsyncOperationHeader
-    > &
-      Azure.Core.Foundations.RetryAfterHeader & {
-        /**
-         * Timeout for the client to use when polling the asynchronous operation.
-         */
-        @header("x-ms-async-operation-timeout")
-        timeout: duration;
-      })
+    Response =
+      | ArmResourceUpdatedResponse<FeaturesetContainer>
+      | (ArmResourceCreatedResponse<
+          FeaturesetContainer,
+          LroHeaders = ArmAsyncOperationHeader
+        > &
+          Azure.Core.Foundations.RetryAfterHeader & {
+            /**
+             * Timeout for the client to use when polling the asynchronous operation.
+             */
+            @header("x-ms-async-operation-timeout")
+            timeout: duration;
+          })
   >;
 
   /**
@@ -104,13 +106,16 @@ interface FeaturesetContainers {
   @summary("Delete container.")
   delete is ArmResourceDeleteWithoutOkAsync<
     FeaturesetContainer,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -125,9 +130,11 @@ interface FeaturesetContainers {
 }
 
 @@doc(FeaturesetContainer.name, "Container name. This is case-sensitive.");
-@@doc(FeaturesetContainer.properties,
+@@doc(
+  FeaturesetContainer.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(FeaturesetContainers.createOrUpdate::parameters.resource,
+@@doc(
+  FeaturesetContainers.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );

@@ -26,21 +26,21 @@ model Deployment is Azure.ResourceManager.ProxyResource<DeploymentProperties> {
   /**
    * The resource model definition representing SKU
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'sku' on the resource envelope for backward compatibility"
   sku?: Sku;
 
   /**
    * Resource Etag.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'etag' on the resource envelope for backward compatibility"
   @visibility(Lifecycle.Read)
   etag?: string;
 
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'tags' on the resource envelope for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<tags> type used for 'Deployment' to support extensible key-value pairs matching service behavior"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 }
@@ -60,7 +60,7 @@ interface Deployments {
   /**
    * Update specified deployments associated with the Cognitive Services account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "PATCH for 'createOrUpdate' follows existing service implementation pattern"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Deployment,
@@ -70,10 +70,13 @@ interface Deployments {
   /**
    * Deletes the specified deployment associated with the Cognitive Services account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Delete response codes for 'update' match existing service endpoint behavior"
   delete is ArmResourceDeleteWithoutOkAsync<
     Deployment,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -104,14 +107,17 @@ interface Deployments {
   resume is ArmResourceActionSync<Deployment, void, ArmResponse<Deployment>>;
 }
 
-@@doc(Deployment.name,
+@@doc(
+  Deployment.name,
   "The name of the deployment associated with the Cognitive Services Account"
 );
 @@encodedName(Deployment.etag, "application/json", "etag");
-@@doc(Deployment.properties,
+@@doc(
+  Deployment.properties,
   "Properties of Cognitive Services account deployment."
 );
-@@doc(Deployments.createOrUpdate::parameters.resource,
+@@doc(
+  Deployments.createOrUpdate::parameters.resource,
   "The deployment properties."
 );
 @@doc(Deployments.update::parameters.properties, "The deployment properties.");

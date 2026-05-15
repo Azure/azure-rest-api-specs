@@ -11,21 +11,25 @@ namespace Microsoft.RecoveryServices;
 /**
  * Base class for backup ProtectionIntent.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy TrackedResourceWithOptionalLocation for back compatibility"
 @parentResource(BackupFabricResource)
-model ProtectionIntentResource
-  is TrackedResourceWithOptionalLocation<ProtectionIntent> {
+model ProtectionIntentResource is ProxyResource<ProtectionIntent> {
   ...ResourceNameParameter<
     Resource = ProtectionIntentResource,
     KeyName = "intentObjectName",
     SegmentName = "backupProtectionIntent",
     NamePattern = ""
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Optional location"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: Azure.Core.azureLocation;
 
   /**
    * Optional ETag.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Backward compatibility for optional ETag"
   eTag?: string;
 }
 
@@ -56,12 +60,15 @@ interface ProtectionIntentResources {
   >;
 }
 
-@@doc(ProtectionIntentResource.name,
+@@doc(
+  ProtectionIntentResource.name,
   "Backed up item name whose details are to be fetched."
 );
-@@doc(ProtectionIntentResource.properties,
+@@doc(
+  ProtectionIntentResource.properties,
   "ProtectionIntentResource properties"
 );
-@@doc(ProtectionIntentResources.createOrUpdate::parameters.resource,
+@@doc(
+  ProtectionIntentResources.createOrUpdate::parameters.resource,
   "resource backed up item"
 );

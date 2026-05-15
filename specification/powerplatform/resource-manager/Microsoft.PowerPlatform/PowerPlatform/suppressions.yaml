@@ -1,3 +1,14 @@
 - tool: TypeSpecRequirement
   path: ./preview/2020-10-30-preview/*.json
   reason: Brownfield service not ready to migrate
+- tool: TypeSpecValidation
+  reason: >
+    Java, Python, TS don't have released SDKs yet, so we need to suppress validation errors for now.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-java.*
+    - options.@azure-tools/typespec-python.*
+    - options.@azure-tools/typespec-ts.*
+    - parameters.service-dir.default
+  paths: 
+    - tspconfig.yaml

@@ -36,6 +36,11 @@ namespace Microsoft.KubernetesConfiguration;
  */
 enum Versions {
   /**
+   * The 2025-03-01 API version.
+   */
+  v2025_03_01: "2025-03-01",
+
+  /**
    * The 2025-04-01 API version.
    */
   v2025_04_01: "2025-04-01",
@@ -46,6 +51,7 @@ interface Operations
       ArmResponse<ResourceProviderOperationList>,
       ErrorResponse
     > {}
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "List all the available operations the KubernetesConfiguration resource provider supports."
 );

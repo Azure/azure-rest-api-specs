@@ -13,39 +13,46 @@ namespace Microsoft.CognitiveServices;
 /**
  * Cognitive Services account is an Azure resource representing the provisioned account, it's type, location and SKU.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model Account
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<AccountProperties> {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy usage decorator required for 'Account' to maintain SDK backward compatibility"
+model Account is Azure.ResourceManager.ProxyResource<AccountProperties> {
   ...ResourceNameParameter<
     Resource = Account,
     KeyName = "accountName",
     SegmentName = "accounts",
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /**
+   * The geo-location where the resource lives
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  location?: string;
 
   /**
    * Resource Etag.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'etag' on the resource envelope for backward compatibility"
   @visibility(Lifecycle.Read)
   etag?: string;
 
   /**
    * The kind (type) of cognitive service account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'kind' on the resource envelope for backward compatibility"
   kind?: string;
 
   /**
    * The resource model definition representing SKU
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'sku' on the resource envelope for backward compatibility"
   sku?: Sku;
 
   /**
    * Identity for the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'identity' on the resource envelope for backward compatibility"
   identity?: Identity;
 }
 
@@ -67,7 +74,8 @@ interface AccountOps
         @minLength(2)
         @maxLength(64)
         accountName: string,
-      }
+      },
+      ResourceName = "CognitiveServicesAccount"
     > {}
 
 @armResourceOperations(#{ omitTags: true })
@@ -81,42 +89,50 @@ interface Accounts {
   /**
    * Create Cognitive Services Account. Accounts is a resource group wide resource type. It holds the keys for developer to access intelligent APIs. It's also the resource type for billing.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "PUT response codes for 'get' match existing service endpoint behavior"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "'get' returns no response body, matching existing service endpoint behavior"
   @tag("CognitiveServicesAccounts")
   create is AccountOps.CreateOrUpdateAsync<
     Account,
-    Response = ArmResourceUpdatedResponse<Account> | ArmResourceCreatedResponse<Account> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Account> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: Account;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<Account>
+      | ArmResourceCreatedResponse<Account>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Account> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: Account;
+        })
   >;
 
   /**
    * Updates a Cognitive Services account
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "'create' returns no response body, matching existing service endpoint behavior"
   @tag("CognitiveServicesAccounts")
   @patch(#{ implicitOptionality: false })
   update is AccountOps.CustomPatchAsync<
     Account,
     PatchModel = Account,
-    Response = ArmResponse<Account> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Account> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: Account;
-    })
+    Response =
+      | ArmResponse<Account>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Account> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: Account;
+        })
   >;
 
   /**
    * Deletes a Cognitive Services account from the resource group.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Delete response codes for 'update' match existing service endpoint behavior"
   @tag("CognitiveServicesAccounts")
   delete is AccountOps.DeleteWithoutOkAsync<
     Account,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -206,13 +222,15 @@ interface Accounts {
   /**
    * Test the rai safety provider associated with the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Operation response for 'privateLinkResourcesList' matches existing service endpoint behavior"
   @tag("TestRaiExternalSafetyProvider")
   @put
   createOrUpdate is AccountOps.CreateOrUpdateSync<
     Account,
     Request = RaiExternalSafetyProviderSchema,
-    Response = ArmResponse<RaiExternalSafetyProviderSchema> | ArmResourceCreatedSyncResponse<RaiExternalSafetyProviderSchema>,
+    Response =
+      | ArmResponse<RaiExternalSafetyProviderSchema>
+      | ArmResourceCreatedSyncResponse<RaiExternalSafetyProviderSchema>,
     Parameters = {
       /**
        * The name of the Rai External Safety Provider associated with the Cognitive Services Account
@@ -222,18 +240,6 @@ interface Accounts {
       @segment("testRaiExternalSafetyProvider")
       safetyProviderName: string;
     }
-  >;
-
-  /**
-   * Provisions the managed network of a cognitive services account.
-   */
-  @tag("ManagedNetwork")
-  provisionManagedNetwork is AccountOps.ActionAsync<
-    Account,
-    Request = ManagedNetworkProvisionOptions,
-    Result = void,
-    Response = ArmResponse<ManagedNetworkProvisionStatus> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedNetworkProvisionStatus>>,
-    OptionalRequestBody = true
   >;
 }
 @armResourceOperations
@@ -248,12 +254,12 @@ interface DeletedAccountOps
         @segment("providers")
         @key
         providerNamespace: "Microsoft.CognitiveServices",
-
-        ...LocationParameter,
-        ...ResourceGroupParameter,
       },
       {},
       {
+        ...LocationParameter,
+        ...ResourceGroupParameter,
+
         /** The name of Cognitive Services account. */
         @path
         @segment("deletedAccounts")
@@ -262,11 +268,19 @@ interface DeletedAccountOps
         @maxLength(64)
         @minLength(2)
         accountName: string,
-      }
+      },
+      ResourceName = "CognitiveServicesDeletedAccount"
     > {}
 
 @armResourceOperations(#{ omitTags: true })
 interface DeletedAccounts {
+  /**
+   * Returns all the resources of a particular type belonging to a subscription.
+   */
+  @tag("CognitiveServicesAccounts")
+  @segment("deletedAccounts")
+  list is DeletedAccountOps.List<Account, Response = AccountListResult>;
+
   /**
    * Returns a Cognitive Services account specified by the parameters.
    */
@@ -276,11 +290,14 @@ interface DeletedAccounts {
   /**
    * Deletes a Cognitive Services account from the resource group.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Delete response codes for 'get' match existing service endpoint behavior"
   @tag("CognitiveServicesAccounts")
   purge is DeletedAccountOps.DeleteWithoutOkAsync<
     Account,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 }
 
@@ -288,19 +305,16 @@ interface DeletedAccounts {
 @@minLength(Account.name, 2);
 @@doc(Account.name, "The name of Cognitive Services account.");
 @@doc(Account.properties, "Properties of Cognitive Services account.");
-@@doc(Accounts.create::parameters.resource,
+@@doc(
+  Accounts.create::parameters.resource,
   "The parameters to provide for the created account."
 );
-@@doc(Accounts.update::parameters.properties,
+@@doc(
+  Accounts.update::parameters.properties,
   "The parameters to provide for the created account."
 );
 @@doc(Accounts.regenerateKey::parameters.body, "regenerate key parameters.");
-@@doc(Accounts.createOrUpdate::parameters.resource,
+@@doc(
+  Accounts.createOrUpdate::parameters.resource,
   "Properties describing the rai external safety provider."
-);
-@@doc(Accounts.provisionManagedNetwork::parameters.body,
-  "Managed Network Provisioning Options for a cognitive services account."
-);
-@@summary(Accounts.provisionManagedNetwork,
-  "Provisions the managed network of a cognitive services account."
 );

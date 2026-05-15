@@ -56,7 +56,8 @@ interface PrivateAccessOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface PrivateAccesses {
   /**
    * Description for Gets data around private site access enablement and authorized Virtual Networks that can access the site.
@@ -109,7 +110,8 @@ interface PrivateAccessOperationGroupOps
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface PrivateAccessOperationGroup {
   /**
    * Description for Gets data around private site access enablement and authorized Virtual Networks that can access the site.
@@ -134,9 +136,11 @@ interface PrivateAccessOperationGroup {
 
 @@doc(PrivateAccess.name, "");
 @@doc(PrivateAccess.properties, "PrivateAccess resource specific properties");
-@@doc(PrivateAccesses.putPrivateAccessVnet::parameters.resource,
+@@doc(
+  PrivateAccesses.putPrivateAccessVnet::parameters.resource,
   "The information for the private access"
 );
-@@doc(PrivateAccessOperationGroup.putPrivateAccessVnetSlot::parameters.resource,
+@@doc(
+  PrivateAccessOperationGroup.putPrivateAccessVnetSlot::parameters.resource,
   "The information for the private access"
 );

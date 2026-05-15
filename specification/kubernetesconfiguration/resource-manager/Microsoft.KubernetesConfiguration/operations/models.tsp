@@ -20,7 +20,7 @@ model ResourceProviderOperationList {
   @visibility(Lifecycle.Read)
   @identifiers(#["name"])
   @pageItems
-  value: ResourceProviderOperation[];
+  value?: ResourceProviderOperation[];
 
   /**
    * URL to the next set of results, if any.
@@ -33,7 +33,21 @@ model ResourceProviderOperationList {
 /**
  * The async operations in progress, in the cluster.
  */
-model OperationStatusList is Azure.Core.Page<OperationStatusResult>;
+model OperationStatusList {
+  /**
+   * List of async operations in progress, in the cluster.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: OperationStatusResult[];
+
+  /**
+   * URL to get the next set of Operation Result objects, if any.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
 
 /**
  * The current status of an async operation.
@@ -64,8 +78,9 @@ model OperationStatusResult {
   /**
    * If present, details of the operation error.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  error?: Azure.ResourceManager.CommonTypes.ErrorDetail;
+  error?: Azure.ResourceManager.CommonTypes.ErrorDetail | null;
 }
 
 /**
