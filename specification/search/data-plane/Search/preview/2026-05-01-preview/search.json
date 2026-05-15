@@ -10074,7 +10074,6 @@
         "indexedOneLake",
         "web",
         "remoteSharePoint",
-        "workIQ",
         "fabricDataAgent",
         "fabricOntology",
         "modelQueryPlanning",
@@ -10115,11 +10114,6 @@
             "name": "remoteSharePoint",
             "value": "remoteSharePoint",
             "description": "Remote SharePoint retrieval activity."
-          },
-          {
-            "name": "workIQ",
-            "value": "workIQ",
-            "description": "WorkIQ retrieval activity."
           },
           {
             "name": "fabricDataAgent",
@@ -10745,7 +10739,6 @@
         "indexedOneLake",
         "web",
         "remoteSharePoint",
-        "workIQ",
         "fabricDataAgent",
         "fabricOntology"
       ],
@@ -10782,11 +10775,6 @@
             "name": "remoteSharePoint",
             "value": "remoteSharePoint",
             "description": "Remote SharePoint document reference."
-          },
-          {
-            "name": "workIQ",
-            "value": "workIQ",
-            "description": "Work IQ document reference."
           },
           {
             "name": "fabricDataAgent",
@@ -11136,51 +11124,6 @@
         }
       ],
       "x-ms-discriminator-value": "web"
-    },
-    "KnowledgeBaseWorkIQActivityArguments": {
-      "type": "object",
-      "description": "Represents the arguments the WorkIQ retrieval activity was run with.",
-      "properties": {
-        "search": {
-          "type": "string",
-          "description": "The search string used to query the WorkIQ knowledge source."
-        }
-      }
-    },
-    "KnowledgeBaseWorkIQActivityRecord": {
-      "type": "object",
-      "description": "Represents a WorkIQ retrieval activity record.",
-      "properties": {
-        "workIQArguments": {
-          "$ref": "#/definitions/KnowledgeBaseWorkIQActivityArguments",
-          "description": "The WorkIQ arguments for the retrieval activity."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeBaseRetrievalActivityRecord"
-        }
-      ],
-      "x-ms-discriminator-value": "workIQ"
-    },
-    "KnowledgeBaseWorkIQReference": {
-      "type": "object",
-      "description": "Represents a WorkIQ document reference.",
-      "properties": {
-        "attributions": {
-          "type": "array",
-          "description": "The attributions for the reference.",
-          "items": {
-            "$ref": "#/definitions/WorkIQAttribution"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeBaseReference"
-        }
-      ],
-      "x-ms-discriminator-value": "workIQ"
     },
     "KnowledgeRetrievalIntent": {
       "type": "object",
@@ -11568,7 +11511,6 @@
         "indexedSql",
         "web",
         "remoteSharePoint",
-        "workIQ",
         "file",
         "mcpServer",
         "fabricDataAgent",
@@ -11612,11 +11554,6 @@
             "name": "RemoteSharePoint",
             "value": "remoteSharePoint",
             "description": "A knowledge source that reads data from remote SharePoint."
-          },
-          {
-            "name": "WorkIQ",
-            "value": "workIQ",
-            "description": "A knowledge source that reads data from work IQ"
           },
           {
             "name": "File",
@@ -22717,37 +22654,6 @@
         }
       ],
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.WordDelimiterTokenFilter"
-    },
-    "WorkIQAttribution": {
-      "type": "object",
-      "description": "Attribution information for a WorkIQ reference.",
-      "properties": {
-        "seeMoreWebUrl": {
-          "type": "string",
-          "format": "uri",
-          "description": "The URL for the attribution."
-        }
-      }
-    },
-    "WorkIQKnowledgeSource": {
-      "type": "object",
-      "description": "Configuration for WorkIQ knowledge source.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeSource"
-        }
-      ],
-      "x-ms-discriminator-value": "workIQ"
-    },
-    "WorkIQKnowledgeSourceParams": {
-      "type": "object",
-      "description": "Specifies runtime parameters for a WorkIQ knowledge source",
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeSourceParams"
-        }
-      ],
-      "x-ms-discriminator-value": "workIQ"
     }
   },
   "parameters": {

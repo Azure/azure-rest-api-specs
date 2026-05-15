@@ -373,8 +373,6 @@ namespace KnowledgeBaseRetrievalClient {
 @@usage(WebKnowledgeSource, Usage.input);
 @@access(RemoteSharePointKnowledgeSource, Access.public);
 @@usage(RemoteSharePointKnowledgeSource, Usage.input);
-@@access(WorkIQKnowledgeSource, Access.public);
-@@usage(WorkIQKnowledgeSource, Usage.input);
 @@access(McpServerKnowledgeSource, Access.public);
 @@usage(McpServerKnowledgeSource, Usage.input);
 @@access(IndexedSqlKnowledgeSource, Access.public);
@@ -1987,15 +1985,6 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientNamespace(
   Search.EmbeddingColumnMapping,
-  "com.azure.search.documents.indexes",
-  "java"
-);
-@@clientNamespace(
-  Search.WorkIQKnowledgeSource,
-  "Azure.Search.Documents.Indexes"
-);
-@@clientNamespace(
-  Search.WorkIQKnowledgeSource,
   "com.azure.search.documents.indexes",
   "java"
 );
@@ -4895,51 +4884,6 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientNamespace(
   Search.PurviewSensitivityLabelInfo,
-  "com.azure.search.documents.knowledgebases",
-  "java"
-);
-@@clientNamespace(
-  Search.WorkIQKnowledgeSourceParams,
-  "Azure.Search.Documents.KnowledgeBases"
-);
-@@clientNamespace(
-  Search.WorkIQKnowledgeSourceParams,
-  "com.azure.search.documents.knowledgebases",
-  "java"
-);
-@@clientNamespace(
-  Search.KnowledgeBaseWorkIQActivityRecord,
-  "Azure.Search.Documents.KnowledgeBases"
-);
-@@clientNamespace(
-  Search.KnowledgeBaseWorkIQActivityRecord,
-  "com.azure.search.documents.knowledgebases",
-  "java"
-);
-@@clientNamespace(
-  Search.KnowledgeBaseWorkIQActivityArguments,
-  "Azure.Search.Documents.KnowledgeBases"
-);
-@@clientNamespace(
-  Search.KnowledgeBaseWorkIQActivityArguments,
-  "com.azure.search.documents.knowledgebases",
-  "java"
-);
-@@clientNamespace(
-  Search.KnowledgeBaseWorkIQReference,
-  "Azure.Search.Documents.KnowledgeBases"
-);
-@@clientNamespace(
-  Search.KnowledgeBaseWorkIQReference,
-  "com.azure.search.documents.knowledgebases",
-  "java"
-);
-@@clientNamespace(
-  Search.WorkIQAttribution,
-  "Azure.Search.Documents.KnowledgeBases"
-);
-@@clientNamespace(
-  Search.WorkIQAttribution,
   "com.azure.search.documents.knowledgebases",
   "java"
 );

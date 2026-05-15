@@ -241,14 +241,6 @@ model RemoteSharePointKnowledgeSourceParams extends KnowledgeSourceParams {
   filterExpressionAddOn?: string;
 }
 
-/** Specifies runtime parameters for a WorkIQ knowledge source */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
-@added(Versions.v2026_05_01_preview)
-model WorkIQKnowledgeSourceParams extends KnowledgeSourceParams {
-  /** The discriminator value. */
-  kind: KnowledgeSourceKind.WorkIQ;
-}
-
 /** Specifies runtime parameters for a Fabric Data Agent knowledge source */
 @added(Versions.v2026_05_01_preview)
 model FabricDataAgentKnowledgeSourceParams extends KnowledgeSourceParams {
@@ -363,10 +355,6 @@ union KnowledgeBaseActivityRecordType {
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   remoteSharePoint: "remoteSharePoint",
-
-  /** WorkIQ retrieval activity. */
-  @added(Versions.v2026_05_01_preview)
-  workIQ: "workIQ",
 
   /** Fabric Data Agent retrieval activity. */
   @added(Versions.v2026_05_01_preview)
@@ -576,29 +564,6 @@ model KnowledgeBaseRemoteSharePointActivityArguments {
   filterExpressionAddOn?: string;
 }
 
-/** Represents a WorkIQ retrieval activity record. */
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-#suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
-@added(Versions.v2026_05_01_preview)
-model KnowledgeBaseWorkIQActivityRecord
-  extends KnowledgeBaseRetrievalActivityRecord {
-  /** The discriminator value. */
-  type: KnowledgeBaseActivityRecordType.workIQ;
-
-  /** The WorkIQ arguments for the retrieval activity. */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
-  workIQArguments?: KnowledgeBaseWorkIQActivityArguments;
-}
-
-/** Represents the arguments the WorkIQ retrieval activity was run with. */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
-@added(Versions.v2026_05_01_preview)
-model KnowledgeBaseWorkIQActivityArguments {
-  /** The search string used to query the WorkIQ knowledge source. */
-  search?: string;
-}
-
 /** Represents a Fabric Data Agent retrieval activity record. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 #suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
@@ -738,10 +703,6 @@ union KnowledgeBaseReferenceType {
   @removed(Versions.v2026_04_01)
   remoteSharePoint: "remoteSharePoint",
 
-  /** Work IQ document reference. */
-  @added(Versions.v2026_05_01_preview)
-  workIQ: "workIQ",
-
   /** Fabric Data Agent document reference. */
   @added(Versions.v2026_05_01_preview)
   fabricDataAgent: "fabricDataAgent",
@@ -861,27 +822,6 @@ model KnowledgeBaseRemoteSharePointReference extends KnowledgeBaseReference {
   /** The sensitivity label information for the reference. */
   @added(Versions.v2026_05_01_preview)
   searchSensitivityLabelInfo?: PurviewSensitivityLabelInfo;
-}
-
-/** Represents a WorkIQ document reference. */
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
-@added(Versions.v2026_05_01_preview)
-model KnowledgeBaseWorkIQReference extends KnowledgeBaseReference {
-  /** The discriminator value. */
-  type: KnowledgeBaseReferenceType.workIQ;
-
-  /** The attributions for the reference. */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
-  attributions?: WorkIQAttribution[];
-}
-
-/** Attribution information for a WorkIQ reference. */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
-@added(Versions.v2026_05_01_preview)
-model WorkIQAttribution {
-  /** The URL for the attribution. */
-  seeMoreWebUrl?: url;
 }
 
 /** Represents a Fabric Data Agent document reference. */

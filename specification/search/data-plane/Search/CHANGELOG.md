@@ -51,7 +51,6 @@ It is maintained for internal engineering reference and API Stewardship Board re
 [NEW in this preview]
 
 - **`IndexedSql`**: `IndexedSqlKnowledgeSource`, `IndexedSqlKnowledgeSourceParameters` (connection string, query, column mappings), `ContentColumnMapping`, `EmbeddingColumnMapping`.
-- **`WorkIQ`**: `WorkIQKnowledgeSource`, `WorkIQKnowledgeSourceParams`.
 - **`File`**: `FileKnowledgeSource`, `FileKnowledgeSourceParameters`, `KnowledgeSourceFile`, `ListKnowledgeSourceFilesResult`.
 - **`McpServer`**: `McpServerKnowledgeSource`, `McpServerKnowledgeSourceParameters`; auth via `McpServerAuthentication` (Foundry/StoredHeaders variants); tools via `McpServerTool`; output via `McpServerOutputParsing` (`auto`, `json`, `split`, `none`).
 - **`FabricDataAgent`**: `FabricDataAgentKnowledgeSource`, `FabricDataAgentKnowledgeSourceParameters`; activity/reference types.
@@ -105,14 +104,13 @@ It is maintained for internal engineering reference and API Stewardship Board re
 
 [NEW in this preview]
 
-- **WorkIQ**: `KnowledgeBaseWorkIQActivityRecord`, `KnowledgeBaseWorkIQActivityArguments`, `KnowledgeBaseWorkIQReference` (`WorkIQAttribution[]`, `searchSensitivityLabelInfo`), `WorkIQAttribution` (`seeMoreWebUrl`).
 - **LLM web summarization**: `KnowledgeBaseModelWebSummarizationActivityRecord` (`inputTokens`, `outputTokens`, `modelName`).
-- **New enum values**: `modelWebSummarization`, `workIQ`, `fabricDataAgent`, `fabricOntology` → `KnowledgeBaseActivityRecordType`; `workIQ`, `fabricDataAgent`, `fabricOntology` → `KnowledgeBaseReferenceType`.
+- **New enum values**: `modelWebSummarization`, `fabricDataAgent`, `fabricOntology` → `KnowledgeBaseActivityRecordType`; `fabricDataAgent`, `fabricOntology` → `KnowledgeBaseReferenceType`.
 
 **Sensitivity label model**:
 
 [NEW in this preview]
-- `PurviewSensitivityLabelInfo` (replaces `SharePointSensitivityLabelInfo`): `displayName`, `sensitivityLabelId`, `toolTip`, `priority`, `color`, `isEncrypted`; added to `KnowledgeBaseSearchIndexReference`, `KnowledgeBaseAzureBlobReference`, `KnowledgeBaseIndexedOneLakeReference`, `KnowledgeBaseWorkIQReference`.
+- `PurviewSensitivityLabelInfo` (replaces `SharePointSensitivityLabelInfo`): `displayName`, `sensitivityLabelId`, `toolTip`, `priority`, `color`, `isEncrypted`; added to `KnowledgeBaseSearchIndexReference`, `KnowledgeBaseAzureBlobReference`, `KnowledgeBaseIndexedOneLakeReference`.
 
 ### Preview-to-Preview Changes (2025-11-01-preview → 2026-05-01-preview)
 
