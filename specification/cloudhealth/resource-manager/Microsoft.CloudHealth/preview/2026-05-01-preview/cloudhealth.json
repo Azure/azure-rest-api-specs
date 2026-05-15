@@ -2416,12 +2416,12 @@
           "description": "Additional context as provided by the submitter"
         },
         "availabilityState": {
-          "type": "string",
+          "$ref": "#/definitions/ResourceHealthAvailabilityState",
           "description": "Availability state of the Azure resource as reported by Azure Resource Health.",
           "readOnly": true
         },
         "category": {
-          "$ref": "#/definitions/string256",
+          "$ref": "#/definitions/ResourceHealthCategory",
           "description": "Whether the status changing event was planned or unplanned.",
           "readOnly": true
         },
@@ -2436,12 +2436,12 @@
           "readOnly": true
         },
         "reasonType": {
-          "type": "string",
+          "$ref": "#/definitions/ResourceHealthReasonType",
           "description": "Reason type for the current availability state (e.g. 'Unplanned', 'Planned', 'UserInitiated').",
           "readOnly": true
         },
         "reasonChronicity": {
-          "type": "string",
+          "$ref": "#/definitions/ResourceHealthReasonChronicity",
           "description": "Whether the current availability state is 'Persistent' or 'Transient'.",
           "readOnly": true
         },
@@ -2481,7 +2481,7 @@
         },
         "dimensionFilter": {
           "type": "string",
-          "description": "Optional: Dimension filter to apply to the metric. OData filter syntax, e.g. \"dimension eq '*'\" or \"dimension eq 'value'\"",
+          "description": "Optional: Dimension filter to apply to the dimension. Must only be set if also Dimension is set.",
           "minLength": 1,
           "maxLength": 256
         },
@@ -2620,6 +2620,7 @@
         "annotationDetails": {
           "type": "object",
           "description": "Annotation details as a dynamic key-value pair bag. Each value is limited to 256 characters. A maximum of 10 entries is permitted per annotation.",
+          "maxProperties": 10,
           "additionalProperties": {
             "$ref": "#/definitions/string256"
           }
@@ -2832,8 +2833,29 @@
           "description": "Specification of the discovery rule defining how entities are discovered."
         },
         "addResourceHealthSignal": {
-          "$ref": "#/definitions/ResourceHealthAvailabilityStateSignalBehavior",
-          "description": "Whether to automatically add a signal for the Azure resource's availability state from Azure Resource Health to the discovered entities."
+          "type": "string",
+          "description": "Whether to automatically add a signal for the Azure resource's availability state from Azure Resource Health to the discovered entities.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceHealthAvailabilityStateSignalBehavior",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Automatically add resource health availability state signal"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Do not automatically add resource health availability state signal"
+              }
+            ]
+          }
         },
         "error": {
           "$ref": "#/definitions/DiscoveryError",
@@ -2851,7 +2873,6 @@
         "discoverRelationships",
         "addRecommendedSignals",
         "specification",
-        "addResourceHealthSignal",
         "entityName"
       ]
     },
@@ -3003,12 +3024,12 @@
         "startAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Start time for the history query. Defaults to 24 hours ago if not specified. Must be omitted when continuationToken is specified."
+          "description": "Start time for the history query. Defaults to 24 hours ago if not specified."
         },
         "endAt": {
           "type": "string",
           "format": "date-time",
-          "description": "End time for the history query. Defaults to now if not specified. Must be omitted when continuationToken is specified."
+          "description": "End time for the history query. Defaults to now if not specified."
         },
         "top": {
           "type": "integer",
@@ -3017,9 +3038,9 @@
           "minimum": 1,
           "maximum": 1000
         },
-        "continuationToken": {
+        "nextMarker": {
           "$ref": "#/definitions/string4096",
-          "description": "Continuation token from a previous response to retrieve the next page of results. Must not be combined with startAt or endAt."
+          "description": "An opaque string value that identifies the portion of the result set to be returned with the next operation. Must not be combined with startAt or endAt."
         }
       }
     },
@@ -3041,9 +3062,9 @@
             "occurredAt"
           ]
         },
-        "continuationToken": {
+        "nextMarker": {
           "$ref": "#/definitions/string4096",
-          "description": "Continuation token to retrieve the next page of results. Null if there are no more results."
+          "description": "An opaque string value that identifies the portion of the result set to be returned with the next operation."
         }
       },
       "required": [
@@ -3166,7 +3187,7 @@
       "properties": {
         "degradedRule": {
           "$ref": "#/definitions/ThresholdRuleV2",
-          "description": "Degraded threshold rule. Not applicable when dynamic thresholds are used."
+          "description": "Degraded rule with static threshold."
         },
         "unhealthyRule": {
           "$ref": "#/definitions/ThresholdRuleV2",
@@ -3217,12 +3238,12 @@
         "startAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Start of UTC time range. Defaults to 24 hours ago if not specified. Must be omitted when continuationToken is specified."
+          "description": "Start of UTC time range. Defaults to 24 hours ago if not specified."
         },
         "endAt": {
           "type": "string",
           "format": "date-time",
-          "description": "End of UTC time range. Defaults to now if not specified. Must be omitted when continuationToken is specified."
+          "description": "End of UTC time range. Defaults to now if not specified."
         },
         "top": {
           "type": "integer",
@@ -3232,9 +3253,9 @@
           "minimum": 1,
           "maximum": 100
         },
-        "continuationToken": {
+        "nextMarker": {
           "$ref": "#/definitions/string4096",
-          "description": "Continuation token from a previous response to retrieve the next page of results."
+          "description": "An opaque string value that identifies the portion of the result set to be returned with the next operation. Must not be combined with startAt or endAt."
         }
       }
     },
@@ -3256,9 +3277,9 @@
             "annotationId"
           ]
         },
-        "continuationToken": {
+        "nextMarker": {
           "$ref": "#/definitions/string4096",
-          "description": "Continuation token to retrieve the next page of results. Null if there are no more results."
+          "description": "An opaque string value that identifies the portion of the result set to be returned with the next operation."
         }
       },
       "required": [
@@ -3422,7 +3443,7 @@
       "properties": {
         "degradedRule": {
           "$ref": "#/definitions/ThresholdRuleV2",
-          "description": "Degraded threshold rule. Not applicable when dynamic thresholds are used."
+          "description": "Degraded rule with static threshold."
         },
         "unhealthyRule": {
           "$ref": "#/definitions/ThresholdRuleV2",
@@ -4017,26 +4038,116 @@
       ],
       "x-ms-discriminator-value": "ResourceGraphQuery"
     },
-    "ResourceHealthAvailabilityStateSignalBehavior": {
+    "ResourceHealthAvailabilityState": {
       "type": "string",
-      "description": "Resource health availability state signal behavior",
+      "description": "Availability state of an Azure resource as reported by Azure Resource Health.",
       "enum": [
-        "Enabled",
-        "Disabled"
+        "Available",
+        "Unavailable",
+        "Degraded",
+        "Unknown"
       ],
       "x-ms-enum": {
-        "name": "ResourceHealthAvailabilityStateSignalBehavior",
+        "name": "ResourceHealthAvailabilityState",
         "modelAsString": true,
         "values": [
           {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "Automatically add resource health availability state signal"
+            "name": "Available",
+            "value": "Available",
+            "description": "The resource is available."
           },
           {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Do not automatically add resource health availability state signal"
+            "name": "Unavailable",
+            "value": "Unavailable",
+            "description": "The resource is unavailable."
+          },
+          {
+            "name": "Degraded",
+            "value": "Degraded",
+            "description": "The resource is degraded."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The resource availability state is unknown."
+          }
+        ]
+      }
+    },
+    "ResourceHealthCategory": {
+      "type": "string",
+      "description": "Whether an Azure Resource Health status changing event was planned or unplanned.",
+      "enum": [
+        "Planned",
+        "Unplanned"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceHealthCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Planned",
+            "value": "Planned",
+            "description": "The event was planned."
+          },
+          {
+            "name": "Unplanned",
+            "value": "Unplanned",
+            "description": "The event was unplanned."
+          }
+        ]
+      }
+    },
+    "ResourceHealthReasonChronicity": {
+      "type": "string",
+      "description": "Whether the current Azure Resource Health availability state is persistent or transient.",
+      "enum": [
+        "Persistent",
+        "Transient"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceHealthReasonChronicity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Persistent",
+            "value": "Persistent",
+            "description": "Persistent state."
+          },
+          {
+            "name": "Transient",
+            "value": "Transient",
+            "description": "Transient state."
+          }
+        ]
+      }
+    },
+    "ResourceHealthReasonType": {
+      "type": "string",
+      "description": "Reason type for the current Azure Resource Health availability state.",
+      "enum": [
+        "Unplanned",
+        "Planned",
+        "UserInitiated"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceHealthReasonType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unplanned",
+            "value": "Unplanned",
+            "description": "Unplanned reason."
+          },
+          {
+            "name": "Planned",
+            "value": "Planned",
+            "description": "Planned reason."
+          },
+          {
+            "name": "UserInitiated",
+            "value": "UserInitiated",
+            "description": "User-initiated reason."
           }
         ]
       }
@@ -4069,7 +4180,7 @@
         },
         "dimensionFilter": {
           "type": "string",
-          "description": "Optional: Dimension filter to apply to the metric. OData filter syntax, e.g. \"dimension eq '*'\" or \"dimension eq 'value'\"",
+          "description": "Optional: Dimension filter to apply to the dimension. Must only be set if also Dimension is set.",
           "minLength": 1,
           "maxLength": 256
         }
@@ -4332,12 +4443,12 @@
         "startAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Start time for the history query. Defaults to 24 hours ago if not specified. Must be omitted when continuationToken is specified."
+          "description": "Start time for the history query. Defaults to 24 hours ago if not specified."
         },
         "endAt": {
           "type": "string",
           "format": "date-time",
-          "description": "End time for the history query. Defaults to now if not specified. Must be omitted when continuationToken is specified."
+          "description": "End time for the history query. Defaults to now if not specified."
         },
         "top": {
           "type": "integer",
@@ -4346,9 +4457,9 @@
           "minimum": 1,
           "maximum": 1000
         },
-        "continuationToken": {
+        "nextMarker": {
           "$ref": "#/definitions/string4096",
-          "description": "Continuation token from a previous response to retrieve the next page of results. Must not be combined with startAt or endAt."
+          "description": "An opaque string value that identifies the portion of the result set to be returned with the next operation. Must not be combined with startAt or endAt."
         }
       },
       "required": [
@@ -4377,9 +4488,9 @@
             "occurredAt"
           ]
         },
-        "continuationToken": {
+        "nextMarker": {
           "$ref": "#/definitions/string4096",
-          "description": "Continuation token to retrieve the next page of results. Null if there are no more results."
+          "description": "An opaque string value that identifies the portion of the result set to be returned with the next operation."
         }
       },
       "required": [
@@ -4497,7 +4608,7 @@
           {
             "name": "Dynamic",
             "value": "Dynamic",
-            "description": "Dynamic threshold — uses statistical analysis of historical signal values"
+            "description": "Dynamic threshold — uses deviation from a ML-computed baseline to determine health state transitions. Only valid for the unhealthy threshold rule."
           }
         ]
       }
@@ -4540,12 +4651,12 @@
       "properties": {
         "operator": {
           "$ref": "#/definitions/SignalOperator",
-          "description": "Operator how to compare the signal value with the threshold. Dynamic is only available for an unhealthy threshold rule. Dynamic thresholds use deviation from a ML computed baseline to determine health state transitions."
+          "description": "Operator how to compare the signal value with the threshold"
         },
         "threshold": {
           "type": "number",
           "format": "double",
-          "description": "Threshold value. Required for static operators. Not applicable when operator is Dynamic."
+          "description": "Threshold value"
         },
         "sensitivity": {
           "$ref": "#/definitions/DynamicThresholdSensitivity",
@@ -4553,6 +4664,7 @@
         },
         "lookBackWindow": {
           "type": "string",
+          "format": "duration",
           "description": "ISO 8601 duration for the historical look-back window used by dynamic threshold computation. Only applicable when operator is Dynamic."
         }
       },
