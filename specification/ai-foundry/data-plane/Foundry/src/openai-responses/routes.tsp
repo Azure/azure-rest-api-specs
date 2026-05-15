@@ -24,7 +24,7 @@ interface Responses {
   @post
   @sharedRoute
   createResponse is OpenAIOperation<
-    OpenAI.CreateResponse,
+    OpenAI.CreateResponse & UserIsolationKeyHeader,
     AgentSessionIdResponseHeader & {
       @body body: OpenAI.Response;
     }
@@ -37,7 +37,7 @@ interface Responses {
   @post
   @sharedRoute
   createResponseStream is OpenAIOperation<
-    OpenAI.CreateResponse,
+    OpenAI.CreateResponse & UserIsolationKeyHeader,
     AgentSessionIdResponseHeader & SseResponseOf<OpenAI.CreateResponseStreamingResponse>
   >;
 
@@ -64,6 +64,8 @@ interface Responses {
 
       @query stream?: boolean = false;
       @query starting_after?: int32;
+
+      ...UserIsolationKeyHeader;
     },
     AgentSessionIdResponseHeader & {
       @body body: OpenAI.Response;
@@ -92,6 +94,8 @@ interface Responses {
 
       @header accept: "text/event-stream";
       @query starting_after?: int32;
+
+      ...UserIsolationKeyHeader;
     },
     AgentSessionIdResponseHeader & SseResponseOf<OpenAI.CreateResponseStreamingResponse>
   >;
@@ -110,6 +114,8 @@ interface Responses {
       @path
       @example("resp_677efb5139a88190b512bc3fef8e535d")
       response_id: string;
+
+      ...UserIsolationKeyHeader;
     },
     AgentSessionIdResponseHeader & {
       @body body: DeleteResponseResult;
@@ -130,6 +136,8 @@ interface Responses {
       @path
       @example("resp_677efb5139a88190b512bc3fef8e535d")
       response_id: string;
+
+      ...UserIsolationKeyHeader;
     },
     AgentSessionIdResponseHeader & {
       @body body: OpenAI.Response;
@@ -150,6 +158,7 @@ interface Responses {
       response_id: string;
 
       ...CommonPageQueryParameters;
+      ...UserIsolationKeyHeader;
     },
     AgentSessionIdResponseHeader & {
       @body body: AgentsPagedResult<OpenAI.ItemResource>;
@@ -168,6 +177,7 @@ interface Responses {
       ...AgentNameQueryParam;
       ...AgentIdQueryParam;
       ...ConversationIdQueryParam;
+      ...UserIsolationKeyHeader;
     },
     AgentsPagedResult<OpenAI.Response>
   >;
