@@ -5,7 +5,8 @@ using Microsoft.Consumption;
 using Azure.ClientGenerator.Core;
 using Azure.Core;
 
-@@clientName(Microsoft.Consumption,
+@@clientName(
+  Microsoft.Consumption,
   "ConsumptionManagementClient",
   "python,javascript"
 );
@@ -25,12 +26,14 @@ using Azure.Core;
 
 // Fix USD property name changes (costInUSD -> costInUsd, paygCostInUSD -> paygCostInUsd)
 @@clientName(ModernUsageDetailProperties.costInUSD, "costInUsd", "java");
-@@clientName(ModernUsageDetailProperties.paygCostInUSD,
+@@clientName(
+  ModernUsageDetailProperties.paygCostInUSD,
   "paygCostInUsd",
   "java"
 );
 
-@@clientName(LegacyChargeSummaryProperties.azureMarketplaceCharges,
+@@clientName(
+  LegacyChargeSummaryProperties.azureMarketplaceCharges,
   "marketplaceCharges",
   "go"
 );
@@ -67,15 +70,18 @@ using Azure.Core;
 // to comply with the .NET SDK design guideline DATE001.
 @@clientName(EventProperties.transactionDate, "TransactOn", "csharp");
 @@clientName(EventType, "ConsumptionEventType", "csharp");
-@@clientName(ManagementGroupAggregatedCostResult,
+@@clientName(
+  ManagementGroupAggregatedCostResult,
   "ConsumptionAggregatedCostResult",
   "csharp"
 );
-@@clientName(ManagementGroupAggregatedCostProperties.usageStart,
+@@clientName(
+  ManagementGroupAggregatedCostProperties.usageStart,
   "UsageStartOn",
   "csharp"
 );
-@@clientName(ManagementGroupAggregatedCostProperties.usageEnd,
+@@clientName(
+  ManagementGroupAggregatedCostProperties.usageEnd,
   "UsageEndOn",
   "csharp"
 );
@@ -84,33 +90,40 @@ using Azure.Core;
 @@clientName(Status, "ConsumptionLotStatus", "csharp");
 @@clientName(ReservationSummary, "ConsumptionReservationSummary", "csharp");
 @@clientName(Datagrain, "ReservationSummaryDataGrain", "csharp");
-@@clientName(ReservationTransaction,
+@@clientName(
+  ReservationTransaction,
   "ConsumptionReservationTransaction",
   "csharp"
 );
-@@clientName(LegacyReservationTransactionProperties.eventDate,
+@@clientName(
+  LegacyReservationTransactionProperties.eventDate,
   "TransactOn",
   "csharp"
 );
-@@clientName(ModernReservationTransaction,
+@@clientName(
+  ModernReservationTransaction,
   "ConsumptionModernReservationTransaction",
   "csharp"
 );
-@@clientName(ModernReservationTransactionProperties.eventDate,
+@@clientName(
+  ModernReservationTransactionProperties.eventDate,
   "TransactOn",
   "csharp"
 );
 @@clientName(Amount, "ConsumptionAmount", "csharp");
-@@clientName(AmountWithExchangeRate,
+@@clientName(
+  AmountWithExchangeRate,
   "ConsumptionAmountWithExchangeRate",
   "csharp"
 );
 @@clientName(BillingFrequency, "ConsumptionBillingFrequency", "csharp");
-@@clientName(BalancePropertiesAdjustmentDetailsItem,
+@@clientName(
+  BalancePropertiesAdjustmentDetailsItem,
   "ConsumptionBalanceAdjustmentDetail",
   "csharp"
 );
-@@clientName(BalancePropertiesNewPurchasesDetailsItem,
+@@clientName(
+  BalancePropertiesNewPurchasesDetailsItem,
   "ConsumptionBalanceNewPurchasesDetail",
   "csharp"
 );
@@ -143,17 +156,20 @@ using Azure.Core;
 @@clientName(ReservationSummaryProperties.usageDate, "UseOn", "csharp");
 @@clientName(ChargeSummary, "ConsumptionChargeSummary", "csharp");
 @@clientName(Marketplace, "ConsumptionMarketplace", "csharp");
-@@clientName(ReservationRecommendationDetailsModel,
+@@clientName(
+  ReservationRecommendationDetailsModel,
   "ConsumptionReservationRecommendationDetails",
   "csharp"
 );
-@@clientName(ReservationRecommendationDetailsModel.properties,
+@@clientName(
+  ReservationRecommendationDetailsModel.properties,
   "ReserRecomDetailsProperties",
   "csharp"
 );
 @@clientName(Scope, "ConsumptionReservationRecommendationScope", "csharp");
 @@clientName(Term, "ConsumptionReservationRecommendationTerm", "csharp");
-@@clientName(LookBackPeriod,
+@@clientName(
+  LookBackPeriod,
   "ConsumptionReservationRecommendationLookBackPeriod",
   "csharp"
 );
@@ -165,12 +181,14 @@ using Azure.Core;
 @@clientName(ModernUsageDetailProperties.date, "On", "csharp");
 @@clientName(MarketplaceProperties.usageStart, "UsageStartOn", "csharp");
 @@clientName(MarketplaceProperties.usageEnd, "UsageEndOn", "csharp");
-@@clientName(ReservationRecommendationDetailsProperties.resource,
+@@clientName(
+  ReservationRecommendationDetailsProperties.resource,
   "Properties",
   "csharp"
 );
 @@clientName(LegacyChargeSummary, "ConsumptionLegacyChargeSummary", "csharp");
-@@clientName(LegacyChargeSummaryProperties.azureMarketplaceCharges,
+@@clientName(
+  LegacyChargeSummaryProperties.azureMarketplaceCharges,
   "MarketplaceCharges",
   "csharp"
 );
@@ -178,30 +196,36 @@ using Azure.Core;
 @@clientName(Metrictype, "ConsumptionMetricType", "csharp");
 @@clientName(ModernChargeSummary, "ConsumptionModernChargeSummary", "csharp");
 @@clientName(PricingModelType, "ConsumptionPricingModelType", "csharp");
-@@clientName(ReservationRecommendationDetailsCalculatedSavingsProperties,
+@@clientName(
+  ReservationRecommendationDetailsCalculatedSavingsProperties,
   "ConsumptionCalculatedSavingsProperties",
   "csharp"
 );
-@@clientName(ReservationRecommendationDetailsResourceProperties,
+@@clientName(
+  ReservationRecommendationDetailsResourceProperties,
   "ConsumptionResourceProperties",
   "csharp"
 );
-@@clientName(ReservationRecommendationDetailsSavingsProperties,
+@@clientName(
+  ReservationRecommendationDetailsSavingsProperties,
   "ConsumptionSavingsProperties",
   "csharp"
 );
-@@clientName(ReservationRecommendationDetailsUsageProperties,
+@@clientName(
+  ReservationRecommendationDetailsUsageProperties,
   "ConsumptionUsageProperties",
   "csharp"
 );
 @@clientName(SkuProperty, "ConsumptionSkuProperty", "csharp");
 @@clientName(Tag, "ConsumptionTag", "csharp");
-@@clientName(BalancesOperationGroup.getByBillingAccount,
+@@clientName(
+  BalancesOperationGroup.getByBillingAccount,
   "GetBalance",
   "csharp"
 );
 @@clientName(PriceSheet.getByBillingPeriod, "GetPriceSheet", "csharp");
-@@clientName(AggregatedCostOperationGroup.getByManagementGroup,
+@@clientName(
+  AggregatedCostOperationGroup.getByManagementGroup,
   "GetAggregatedCost",
   "csharp"
 );
@@ -212,7 +236,8 @@ using Azure.Core;
 @@clientName(CreditSummaryProperties.eTag, "PropertiesETag", "csharp");
 @@clientName(EventProperties.eTag, "PropertiesETag", "csharp");
 @@clientName(LotProperties.eTag, "PropertiesETag", "csharp");
-@@clientName(ReservationDetailProperties.usageDate,
+@@clientName(
+  ReservationDetailProperties.usageDate,
   "ConsumptionOccurredOn",
   "csharp"
 );
@@ -229,28 +254,34 @@ using Azure.Core;
 //     client surface to match the original AutoRest layout. -------------------
 @@clientLocation(PriceSheetResults.get, PriceSheetResults, "csharp");
 @@clientName(PriceSheetResults.get, "GetPriceSheet", "csharp");
-@@clientName(UsageDetailsOperationGroup.list,
+@@clientName(
+  UsageDetailsOperationGroup.list,
   "GetConsumptionUsageDetails",
   "csharp"
 );
-@@clientName(MarketplacesOperationGroup.list,
+@@clientName(
+  MarketplacesOperationGroup.list,
   "GetConsumptionMarketPlaces",
   "csharp"
 );
 @@clientName(TagsOperationGroup.get, "GetConsumptionTags", "csharp");
-@@clientName(ReservationsDetailsOperationGroup.list,
+@@clientName(
+  ReservationsDetailsOperationGroup.list,
   "GetConsumptionReservationsDetails",
   "csharp"
 );
-@@clientName(ReservationRecommendationsOperationGroup.list,
+@@clientName(
+  ReservationRecommendationsOperationGroup.list,
   "GetConsumptionReservationRecommendations",
   "csharp"
 );
-@@clientName(ReservationRecommendationDetailsOperationGroup.get,
+@@clientName(
+  ReservationRecommendationDetailsOperationGroup.get,
   "GetConsumptionReservationRecommendationDetails",
   "csharp"
 );
-@@clientName(ReservationRecommendationDetailsOperationGroup.get::parameters.scope,
+@@clientName(
+  ReservationRecommendationDetailsOperationGroup.get::parameters.scope,
   "reservationScope",
   "csharp"
 );
@@ -267,55 +298,66 @@ using Azure.Core;
 // --- Strongly-typed property aliases: surface ResourceIdentifier / Guid /
 //     AzureLocation / ETag instead of plain string, matching the shipped v1.x
 //     types produced by AutoRest from the original swagger format hints. ------
-@@alternateType(ReservationDetailProperties.instanceId,
+@@alternateType(
+  ReservationDetailProperties.instanceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(PriceSheetProperties.billingPeriodId,
+@@alternateType(
+  PriceSheetProperties.billingPeriodId,
   armResourceIdentifier,
   "csharp"
 );
 @@alternateType(PriceSheetProperties.meterId, uuid, "csharp");
-@@alternateType(EventProperties.billingProfileId,
+@@alternateType(
+  EventProperties.billingProfileId,
   armResourceIdentifier,
   "csharp"
 );
 @@alternateType(EventProperties.lotId, armResourceIdentifier, "csharp");
-@@alternateType(ModernReservationTransactionProperties.billingProfileId,
+@@alternateType(
+  ModernReservationTransactionProperties.billingProfileId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ModernReservationTransactionProperties.invoiceId,
+@@alternateType(
+  ModernReservationTransactionProperties.invoiceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ModernReservationTransactionProperties.invoiceSectionId,
+@@alternateType(
+  ModernReservationTransactionProperties.invoiceSectionId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ModernReservationTransactionProperties.purchasingSubscriptionGuid,
+@@alternateType(
+  ModernReservationTransactionProperties.purchasingSubscriptionGuid,
   uuid,
   "csharp"
 );
-@@alternateType(LegacyReservationTransactionProperties.purchasingSubscriptionGuid,
+@@alternateType(
+  LegacyReservationTransactionProperties.purchasingSubscriptionGuid,
   uuid,
   "csharp"
 );
 @@alternateType(MarketplaceProperties.meterId, uuid, "csharp");
 @@alternateType(MarketplaceProperties.subscriptionGuid, uuid, "csharp");
 @@alternateType(Reseller.resellerId, armResourceIdentifier, "csharp");
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ReservationRecommendationDetailsModel.location,
+@@alternateType(
+  ReservationRecommendationDetailsModel.location,
   azureLocation,
   "csharp"
 );
 // SDK guideline TYPE003: properties representing an Azure region should be
 // typed as AzureLocation, not string. Pairs with the `LocationPropertiesLocation`
 // accessor in Custom/Models/ConsumptionModernReservationRecommendation.cs.
-@@alternateType(ModernReservationRecommendationProperties.location,
+@@alternateType(
+  ModernReservationRecommendationProperties.location,
   azureLocation,
   "csharp"
 );
@@ -338,11 +380,13 @@ using Azure.Core;
 @@alternateType(TagsResult.eTag, eTag, "csharp");
 @@alternateType(LegacyUsageDetailProperties.meterId, uuid, "csharp");
 @@alternateType(ModernUsageDetailProperties.meterId, uuid, "csharp");
-@@alternateType(LegacyReservationRecommendationProperties.meterId,
+@@alternateType(
+  LegacyReservationRecommendationProperties.meterId,
   uuid,
   "csharp"
 );
-@@alternateType(ModernReservationRecommendationProperties.meterId,
+@@alternateType(
+  ModernReservationRecommendationProperties.meterId,
   uuid,
   "csharp"
 );
@@ -361,15 +405,18 @@ using Azure.Core;
 //     so the generator emits ResourceData semantics, and the SDK Custom partials
 //     (Custom/Models/Consumption{Legacy,Modern}ReservationRecommendation.cs)
 //     re-expose Properties members on the discriminator leaves.
-@@alternateType(ReservationRecommendation,
+@@alternateType(
+  ReservationRecommendation,
   ConsumptionReservationRecommendation,
   "csharp"
 );
-@@alternateType(LegacyReservationRecommendation,
+@@alternateType(
+  LegacyReservationRecommendation,
   ConsumptionLegacyReservationRecommendation,
   "csharp"
 );
-@@alternateType(ModernReservationRecommendation,
+@@alternateType(
+  ModernReservationRecommendation,
   ConsumptionModernReservationRecommendation,
   "csharp"
 );
@@ -448,18 +495,22 @@ model ConsumptionModernReservationRecommendation
 //     (TCGC flatten-polymorphism rule). For that hierarchy the flattening is
 //     done via SDK Custom partials instead.
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(LegacyUsageDetail.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  LegacyUsageDetail.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ModernUsageDetail.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ModernUsageDetail.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(LegacyChargeSummary.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  LegacyChargeSummary.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ModernChargeSummary.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ModernChargeSummary.properties,
   "csharp"
 );
