@@ -121,7 +121,7 @@ union CustomPublicNetworkAccessType {
 @@clientName(VMGuestPatchClassification_Linux, "VmGuestPatchClassificationLinux", "csharp");
 
 // C# rename-mapping equivalents
-@@clientName(CommonTypes.LocationData, "HybridComputeLocation", "csharp");
+@@clientName(Azure.ResourceManager.CommonTypes.LocationData, "HybridComputeLocation", "csharp");
 @@clientName(OSProfileLinuxConfiguration, "HybridComputeLinuxConfiguration", "csharp");
 @@clientName(OSProfileWindowsConfiguration, "HybridComputeWindowsConfiguration", "csharp");
 @@clientName(PatchOperationStatus, "MachineOperationStatus", "csharp");
