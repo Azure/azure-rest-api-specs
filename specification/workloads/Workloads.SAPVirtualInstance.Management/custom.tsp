@@ -35,7 +35,7 @@ op CustomizedArmResourceActionAsync<
   ...ResourceInstanceParameters<Resource, BaseParameters>,
   ...Parameters,
   @bodyRoot body?: Request,
-): ArmAcceptedLroResponse<
-  "Resource operation accepted.",
-  LroHeaders
-> | Response | Error;
+):
+  | ArmAcceptedLroResponse<"Resource operation accepted.", LroHeaders>
+  | Response
+  | Error;

@@ -79,15 +79,19 @@ interface TenantActivityLogAlertResources {
   >;
 }
 
-@@doc(TenantActivityLogAlertResource.name,
+@@doc(
+  TenantActivityLogAlertResource.name,
   "The name of the Tenant Activity Log Alert rule."
 );
-@@doc(TenantActivityLogAlertResource.properties,
+@@doc(
+  TenantActivityLogAlertResource.properties,
   "The Activity Log Alert rule properties of the resource."
 );
-@@doc(TenantActivityLogAlertResources.createOrUpdate::parameters.resource,
+@@doc(
+  TenantActivityLogAlertResources.createOrUpdate::parameters.resource,
   "The Tenant Activity Log Alert rule to create or use for the update."
 );
-@@doc(TenantActivityLogAlertResources.update::parameters.properties,
+@@doc(
+  TenantActivityLogAlertResources.update::parameters.properties,
   "Parameters supplied to the operation."
 );

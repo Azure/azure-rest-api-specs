@@ -105,9 +105,11 @@ interface DnsSecurityRules {
 @@minLength(DnsSecurityRule.name, 1);
 @@doc(DnsSecurityRule.name, "The name of the DNS security rule.");
 @@doc(DnsSecurityRule.properties, "Properties of the DNS security rule.");
-@@doc(DnsSecurityRules.createOrUpdate::parameters.resource,
+@@doc(
+  DnsSecurityRules.createOrUpdate::parameters.resource,
   "Parameters supplied to the CreateOrUpdate operation."
 );
-@@doc(DnsSecurityRules.update::parameters.properties,
+@@doc(
+  DnsSecurityRules.update::parameters.properties,
   "Parameters supplied to the Update operation."
 );

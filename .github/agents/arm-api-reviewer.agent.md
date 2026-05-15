@@ -163,6 +163,14 @@ For each file type, read the corresponding instruction file(s) listed in "Author
 
 **How to fetch previous versions:** Use GitHub MCP `get_file_contents` with `ref: "main"` (or the PR's base branch) to fetch files from the previous API version folder. To discover which prior version folders exist, use `get_file_contents` to list the directory (e.g., `specification/<service>/resource-manager/<ResourceProviderNamespace>/stable/`) on the base branch.
 
+**TypeSpec-required check (TSP-REQUIRED-V1).** While locating the previous version folder, also determine whether the PR is introducing a **new API version directory** (a directory under `specification/**/{resource-manager,data-plane}/**/{stable|preview}/<version>/` that does **not** exist on the base branch). If a new API version directory contains handwritten OpenAPI (`.json`) and **none** of the following compliance signals is present, record a **Blocking** finding for rule `TSP-REQUIRED-V1`:
+
+- A sibling TypeSpec project (a directory containing `main.tsp` and `tspconfig.yaml`) is present in the same service folder.
+- The new swagger file contains the `x-typespec-generated` extension at the top level.
+- The PR also adds or updates `.tsp` source files under the same service folder.
+
+Do **not** flag updates to files inside pre-existing API version directories, even when those files are handwritten OpenAPI. Do **not** flag PRs that only modify example files, `readme.md`, `tspconfig.yaml`, or `.tsp` files. The full rule definition is in [`openapi-review.instructions.md` §2A](../instructions/openapi-review.instructions.md). A deterministic CI check is in development (PR [#42823](https://github.com/Azure/azure-rest-api-specs/pull/42823)); until it ships, this agent rule is the primary enforcement point.
+
 ### Step 4: Systematic Review
 
 For each changed specification file, load the applicable instruction file(s) and work through **every item** in their review checklists. Do not skip sections.
@@ -306,10 +314,10 @@ After presenting the review findings to the human reviewer for approval:
    The existing comment already covers the exact same rule violation on the same file and line. **Skip posting.** No action needed.
 
    **Scenario B - Same finding, different line, comment was from _this agent or the same engineer running the agent_:**
-   The code has shifted (e.g., lines were added/removed) and the existing comment now points to an outdated line, but the violation still exists at a new location. **Resolve the outdated comment** (to reduce noise) and **post a new comment at the correct line** with the updated finding. In the new comment, reference the resolved thread (e.g., "_(Updated from previous comment at \<url\> - line shifted due to code changes.)_"). To identify whether an existing comment was posted by this agent, check if its body contains the hidden marker `<!-- posted-by: arm-api-reviewer-agent -->`. Comments with this marker are agent-posted; comments without it are from human reviewers (apply Scenario C instead).
+   The code has shifted (e.g., lines were added/removed) and the existing comment now points to an outdated line, but the violation still exists at a new location. **Resolve the outdated comment** (to reduce noise) and **post a new comment at the correct line** with the updated finding. In the new comment, reference the resolved thread (e.g., "_(Updated from previous comment at \<url\> - line shifted due to code changes.)_"). To identify whether an existing comment was posted by this agent, check if its body contains the substring `posted-by: arm-api-reviewer-agent`. Comments with this substring are agent-posted; comments without it are from human reviewers (apply Scenario C instead).
 
    **Scenario C - Same finding, different line, comment was from a _different_ human reviewer:**
-   Another ARM reviewer (not this agent) posted the comment at the old line -- i.e., the comment body does **not** contain `<!-- posted-by: arm-api-reviewer-agent -->`. Do **not** resolve their comment - it is their review thread and they may be tracking the conversation. Do **not** post a duplicate comment. Instead, **add a reply** to the existing thread noting the line shift: e.g., "_The code referenced by this comment has moved. The same violation now appears at `<file>` - line <N>. The issue is still unresolved._" This helps the author and reviewer find the right code without creating duplicate threads.
+   Another ARM reviewer (not this agent) posted the comment at the old line -- i.e., the comment body does **not** contain the substring `posted-by: arm-api-reviewer-agent`. Do **not** resolve their comment - it is their review thread and they may be tracking the conversation. Do **not** post a duplicate comment. Instead, **add a reply** to the existing thread noting the line shift: e.g., "_The code referenced by this comment has moved. The same violation now appears at `<file>` - line <N>. The issue is still unresolved._" This helps the author and reviewer find the right code without creating duplicate threads.
 
    **Scenario D - No new findings beyond what existing comments already cover:**
    If every finding from the current review is already covered by an existing comment (same file, same or nearby line, same rule), **do not post any new comments**. Report to the human reviewer: "_All findings from this review are already covered by existing comments on the PR. No new comments are needed - the existing threads already highlight the required changes._" List the existing comment threads that match, **including the comment URL** for each so the reviewer can click through and verify.
@@ -325,7 +333,22 @@ After presenting the review findings to the human reviewer for approval:
 5. Every posted comment **MUST** clearly tag the issue as `[NEW]` or `[EXISTING]` with an explanation of the classification (e.g., "This issue also exists in `2025-12-01-preview` at the same JSON path" or "Introduced in this PR - this property did not exist in the previous version").
 6. For `[NEW]` issues, include the severity level: `🔴 Blocking`, `🟡 Warning`, or `💡 Suggestion`.
 7. Use the format: ``**[NEW] 🔴 Blocking** **[<Rule ID>]** `<file-path>` - line <N> - <issue description>`` or ``**[EXISTING]** **[<Rule ID>]** `<file-path>` - line <N> - <issue description>`` followed by the classification reasoning and suggested fix.
-8. Every posted comment **MUST** end with the hidden HTML marker `<!-- posted-by: arm-api-reviewer-agent -->` as the very last line of the comment body. This marker is invisible in rendered markdown but enables querying agent-posted comments via the GitHub API and distinguishing them from manually posted comments during reconciliation. Do not omit this marker.
+8. Every posted comment **MUST** end with a hidden HTML telemetry marker as the very last line of the comment body. The marker format is:
+
+   ```html
+   <!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: blocking|warning|suggestion | classification: new|existing -->
+   ```
+
+   - **`rule`**: The rule ID of the finding (e.g., `RPC-Put-V1-01`, `OAPI027`, `SEC-SECRET-DETECT`). Use `summary` for summary comments that don't flag a single rule.
+   - **`severity`**: One of `blocking`, `warning`, or `suggestion`.
+   - **`classification`**: One of `new` (introduced in this PR) or `existing` (pre-existing technical debt).
+
+   Example: `<!-- posted-by: arm-api-reviewer-agent | rule: RPC-Put-V1-11 | severity: blocking | classification: new -->`
+
+   This marker is invisible in rendered markdown but enables querying agent-posted comments via the GitHub API, computing telemetry (comments per day, top rule violations, new-vs-existing ratio), and distinguishing agent comments from human comments during reconciliation. Do not omit this marker. All fields after `posted-by` are required.
+
+   **Backward compatibility:** To detect whether an existing comment was posted by this agent (e.g., during reconciliation in Scenarios B and C), check if the comment body contains the substring `posted-by: arm-api-reviewer-agent`. This matches both the old simple marker and the new extended marker.
+
 9. Prioritize posting **New** issues first, as these are the PR author's direct responsibility.
 10. **Report a reconciliation summary** to the human reviewer before posting:
     - Findings to **post as new comments** (with line numbers)

@@ -49,14 +49,17 @@ interface DicomServices {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     DicomService,
-    Response = ArmResourceUpdatedResponse<DicomService> | ArmResourceCreatedResponse<
-      DicomService,
-      ArmLroLocationHeader<FinalResult = DicomService> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | (ArmAcceptedLroResponse & {
-      @bodyRoot
-      _: DicomService;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<DicomService>
+      | ArmResourceCreatedResponse<
+          DicomService,
+          ArmLroLocationHeader<FinalResult = DicomService> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | (ArmAcceptedLroResponse & {
+          @bodyRoot
+          _: DicomService;
+        }),
     Error = ErrorDetails
   >;
 
@@ -99,14 +102,17 @@ interface DicomServiceOperationGroup {
     /** The parameters for updating a Dicom Service. */
     @body
     dicomservicePatchResource: DicomServicePatchResource,
-  ): ArmResponse<DicomService> | (ArmAcceptedLroResponse<
-    "Resource update request accepted.",
-    LroHeaders = ArmLroLocationHeader<FinalResult = DicomService> &
-      Azure.Core.Foundations.RetryAfterHeader
-  > & {
-    @bodyRoot
-    _: DicomService;
-  }) | ErrorDetails;
+  ):
+    | ArmResponse<DicomService>
+    | (ArmAcceptedLroResponse<
+        "Resource update request accepted.",
+        LroHeaders = ArmLroLocationHeader<FinalResult = DicomService> &
+          Azure.Core.Foundations.RetryAfterHeader
+      > & {
+        @bodyRoot
+        _: DicomService;
+      })
+    | ErrorDetails;
 
   /**
    * Deletes a DICOM Service.
@@ -142,6 +148,7 @@ interface DicomServiceOperationGroup {
 @@minLength(DicomService.name, 3);
 @@doc(DicomService.name, "The name of DICOM Service resource.");
 @@doc(DicomService.properties, "Dicom Service configuration.");
-@@doc(DicomServices.createOrUpdate::parameters.resource,
+@@doc(
+  DicomServices.createOrUpdate::parameters.resource,
   "The parameters for creating or updating a Dicom Service resource."
 );
