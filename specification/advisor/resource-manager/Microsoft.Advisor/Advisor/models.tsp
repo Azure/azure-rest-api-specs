@@ -9,7 +9,6 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
-using TypeSpec.Versioning;
 
 namespace Microsoft.Advisor;
 
