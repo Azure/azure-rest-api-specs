@@ -413,6 +413,12 @@ paths:
             Body is the raw zip bytes; `Content-Type` declares `application/zip` so clients
             can route to a zip-aware handler. Streaming is preserved (`bytes` body) regardless
             of the content-type label.
+          headers:
+            x-ms-agent-version:
+              required: true
+              description: The version of the agent whose code zip is returned in the response body.
+              schema:
+                type: string
           content:
             application/zip:
               schema:
