@@ -17,13 +17,13 @@ using LiftrBase;
 @armProviderNamespace
 @service(#{ title: "Napster.CompanionAPI management service" })
 @versioned(Napster.CompanionAPI.Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Napster.CompanionAPI {
   interface Operations extends Azure.ResourceManager.Operations {}
 
   /** The available API versions. */
   enum Versions {
     /** 2025-12-24-preview version */
+    @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
     @useDependency(LiftrBase.Versions.v3_preview)
     v2025_12_24_preview: "2025-12-24-preview",
   }
