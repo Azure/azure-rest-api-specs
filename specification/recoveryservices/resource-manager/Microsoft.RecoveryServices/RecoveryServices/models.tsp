@@ -1758,27 +1758,35 @@ model DeletedVaultUndeleteInput {
   properties: DeletedVaultUndeleteInputProperties;
 }
 
-@@doc(VaultPropertiesEncryption.infrastructureEncryption,
+@@doc(
+  VaultPropertiesEncryption.infrastructureEncryption,
   "Enabling/Disabling the Double Encryption state"
 );
-@@doc(VaultPropertiesMoveDetails.operationId,
+@@doc(
+  VaultPropertiesMoveDetails.operationId,
   "OperationId of the Resource Move Operation"
 );
-@@doc(VaultPropertiesMoveDetails.startTimeUtc,
+@@doc(
+  VaultPropertiesMoveDetails.startTimeUtc,
   "Start Time of the Resource Move Operation"
 );
-@@doc(VaultPropertiesMoveDetails.completionTimeUtc,
+@@doc(
+  VaultPropertiesMoveDetails.completionTimeUtc,
   "End Time of the Resource Move Operation"
 );
-@@doc(VaultPropertiesMoveDetails.sourceResourceId,
+@@doc(
+  VaultPropertiesMoveDetails.sourceResourceId,
   "Source Resource of the Resource Move Operation"
 );
-@@doc(VaultPropertiesMoveDetails.targetResourceId,
+@@doc(
+  VaultPropertiesMoveDetails.targetResourceId,
   "Target Resource of the Resource Move Operation"
 );
-@@doc(VaultPropertiesRedundancySettings.standardTierStorageRedundancy,
+@@doc(
+  VaultPropertiesRedundancySettings.standardTierStorageRedundancy,
   "The storage redundancy setting of a vault"
 );
-@@doc(VaultPropertiesRedundancySettings.crossRegionRestore,
+@@doc(
+  VaultPropertiesRedundancySettings.crossRegionRestore,
   "Flag to show if Cross Region Restore is enabled on the Vault or not"
 );

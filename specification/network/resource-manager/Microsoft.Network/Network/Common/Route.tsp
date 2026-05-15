@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.Network;
+namespace Common;
 /**
  * Route resource.
  */
@@ -38,7 +38,8 @@ model Route extends SubResourceModel {
   etag?: string;
 }
 
-@@doc(Route.name,
+@@doc(
+  Route.name,
   "The name of the resource that is unique within a resource group. This name can be used to access the resource."
 );
 @@doc(Route.type, "Resource type.");

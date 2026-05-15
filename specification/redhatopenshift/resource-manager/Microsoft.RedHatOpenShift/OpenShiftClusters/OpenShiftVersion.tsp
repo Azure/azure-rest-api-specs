@@ -64,9 +64,11 @@ interface OpenShiftVersions {
 
 @@maxLength(OpenShiftVersion.name, 63);
 @@minLength(OpenShiftVersion.name, 1);
-@@doc(OpenShiftVersion.name,
+@@doc(
+  OpenShiftVersion.name,
   "The desired version value of the OpenShiftVersion resource."
 );
-@@doc(OpenShiftVersion.properties,
+@@doc(
+  OpenShiftVersion.properties,
   "The properties for the OpenShiftVersion resource."
 );

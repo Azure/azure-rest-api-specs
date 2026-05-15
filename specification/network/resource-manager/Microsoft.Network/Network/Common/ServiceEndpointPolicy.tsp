@@ -8,7 +8,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.Network;
+namespace Common;
 /**
  * Service End point policy resource.
  */
@@ -43,6 +43,7 @@ model ServiceEndpointPolicy extends Resource {
 }
 
 @@doc(ServiceEndpointPolicy.name, "The name of the service endpoint policy.");
-@@doc(ServiceEndpointPolicy.properties,
+@@doc(
+  ServiceEndpointPolicy.properties,
   "Properties of the service end point policy."
 );

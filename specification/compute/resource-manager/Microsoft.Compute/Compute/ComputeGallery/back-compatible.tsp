@@ -10,47 +10,56 @@ using ComputeGallery;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GalleryImageUpdate.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  GalleryImageUpdate.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GalleryImageVersionUpdate.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  GalleryImageVersionUpdate.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GalleryApplicationUpdate.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  GalleryApplicationUpdate.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GalleryApplicationVersionUpdate.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  GalleryApplicationVersionUpdate.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GallerySoftDeletedResource.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  GallerySoftDeletedResource.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GalleryInVMAccessControlProfileVersionUpdate.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  GalleryInVMAccessControlProfileVersionUpdate.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PirSharedGalleryResource.identifier
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PirSharedGalleryResource.identifier
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PirCommunityGalleryResource.identifier
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PirCommunityGalleryResource.identifier
 );
 
 @@clientName(Galleries.createOrUpdate::parameters.resource, "gallery");
 @@clientName(Galleries.update::parameters.properties, "gallery");
-@@clientName(Galleries.gallerySharingProfileUpdate::parameters.body,
+@@clientName(
+  Galleries.gallerySharingProfileUpdate::parameters.body,
   "sharingUpdate"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
@@ -63,67 +72,84 @@ using ComputeGallery;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(GalleryImage.properties);
 
-@@clientName(GalleryImageVersions.createOrUpdate::parameters.resource,
+@@clientName(
+  GalleryImageVersions.createOrUpdate::parameters.resource,
   "galleryImageVersion"
 );
-@@clientName(GalleryImageVersions.update::parameters.properties,
+@@clientName(
+  GalleryImageVersions.update::parameters.properties,
   "galleryImageVersion"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GalleryImageVersion.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  GalleryImageVersion.properties
 );
 
-@@clientName(GalleryApplications.createOrUpdate::parameters.resource,
+@@clientName(
+  GalleryApplications.createOrUpdate::parameters.resource,
   "galleryApplication"
 );
-@@clientName(GalleryApplications.update::parameters.properties,
+@@clientName(
+  GalleryApplications.update::parameters.properties,
   "galleryApplication"
 );
 
-@@clientName(GalleryScripts.createOrUpdate::parameters.resource,
+@@clientName(
+  GalleryScripts.createOrUpdate::parameters.resource,
   "galleryScript"
 );
 @@clientName(GalleryScripts.update::parameters.properties, "galleryScript");
 
-@@clientName(GalleryScriptVersions.createOrUpdate::parameters.resource,
+@@clientName(
+  GalleryScriptVersions.createOrUpdate::parameters.resource,
   "galleryScriptVersion"
 );
-@@clientName(GalleryScriptVersions.update::parameters.properties,
+@@clientName(
+  GalleryScriptVersions.update::parameters.properties,
   "galleryScriptVersion"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flatten retained for backward compatibility."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GalleryApplication.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  GalleryApplication.properties
 );
 
-@@clientName(GalleryApplicationVersions.createOrUpdate::parameters.resource,
+@@clientName(
+  GalleryApplicationVersions.createOrUpdate::parameters.resource,
   "galleryApplicationVersion"
 );
-@@clientName(GalleryApplicationVersions.update::parameters.properties,
+@@clientName(
+  GalleryApplicationVersions.update::parameters.properties,
   "galleryApplicationVersion"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GalleryApplicationVersion.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  GalleryApplicationVersion.properties
 );
 
-@@clientName(GalleryInVMAccessControlProfiles.createOrUpdate::parameters.resource,
+@@clientName(
+  GalleryInVMAccessControlProfiles.createOrUpdate::parameters.resource,
   "galleryInVMAccessControlProfile"
 );
-@@clientName(GalleryInVMAccessControlProfiles.update::parameters.properties,
+@@clientName(
+  GalleryInVMAccessControlProfiles.update::parameters.properties,
   "galleryInVMAccessControlProfile"
 );
 
-@@clientName(GalleryInVMAccessControlProfileVersions.createOrUpdate::parameters.resource,
+@@clientName(
+  GalleryInVMAccessControlProfileVersions.createOrUpdate::parameters.resource,
   "galleryInVMAccessControlProfileVersion"
 );
-@@clientName(GalleryInVMAccessControlProfileVersions.update::parameters.properties,
+@@clientName(
+  GalleryInVMAccessControlProfileVersions.update::parameters.properties,
   "galleryInVMAccessControlProfileVersion"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GalleryInVMAccessControlProfileVersion.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  GalleryInVMAccessControlProfileVersion.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
@@ -132,34 +158,41 @@ using ComputeGallery;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SharedGalleryImage.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  SharedGalleryImage.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SharedGalleryImageVersion.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  SharedGalleryImageVersion.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CommunityGallery.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  CommunityGallery.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CommunityGalleryImage.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  CommunityGalleryImage.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CommunityGalleryImageVersion.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  CommunityGalleryImageVersion.properties
 );
 
-@@clientLocation(Galleries.listByArtifactName,
+@@clientLocation(
+  Galleries.listByArtifactName,
   "SoftDeletedResource",
   "!csharp"
 );
-@@clientLocation(Galleries.gallerySharingProfileUpdate,
+@@clientLocation(
+  Galleries.gallerySharingProfileUpdate,
   "GallerySharingProfile",
   "!csharp"
 );
