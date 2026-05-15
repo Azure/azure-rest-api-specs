@@ -955,6 +955,9 @@
           "Create Managed Cluster with user-assigned NAT gateway as outbound type": {
             "$ref": "./examples/ManagedClustersCreate_UserAssignedNATGateway.json"
           },
+          "Create Managed Private Cluster With Managed Bastion": {
+            "$ref": "./examples/ManagedClustersCreate_EnableManagedBastion.json"
+          },
           "Create Managed Private Cluster with Public FQDN specified": {
             "$ref": "./examples/ManagedClustersCreate_PrivateClusterPublicFQDN.json"
           },
@@ -7263,6 +7266,80 @@
         }
       }
     },
+    "BastionProfile": {
+      "type": "object",
+      "description": "Profile to enable managed Azure Bastion or reference to an existing Bastion for the managed cluster.\nSee https://aka.ms/aks/BastionConnect for more details.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether managed bastion is enabled."
+        },
+        "bastionId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the managed bastion associated with the managed cluster.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/bastionHosts"
+              }
+            ]
+          }
+        },
+        "sku": {
+          "$ref": "#/definitions/BastionSku",
+          "description": "The SKU of the managed bastion.\n\nOnly Standard and Premium SKUs are supported.\nSKU downgrading is not allowed. To downgrade SKU, please disable then re-enable the managed bastion with new SKU.\n\nSee https://aka.ms/aks/BastionSKUs for more details."
+        },
+        "scaleUnits": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The scale units of the managed bastion. Default value is 2.",
+          "minimum": 2,
+          "maximum": 50
+        },
+        "publicIpAddressId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the public IP address associated with the managed bastion.\n\nWhen provided during creation, the managed bastion will reference this existing public IP address instead of creating a new one.\nThe referenced public IP address must be in the same subscription and region as the managed cluster.\n\nWhen not provided during creation, AKS will automatically create a new public IP address.\n\nThis field cannot be updated. To change IP address after creation, please disable and re-enable the managed bastion with the new public IP address.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/publicIPAddresses"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "BastionSku": {
+      "type": "string",
+      "description": "The SKU of the managed Azure Bastion. The default is 'Standard'. See https://aka.ms/aks/BastionSKUs for more information about the differences between Azure Bastion SKUs.",
+      "enum": [
+        "Standard",
+        "Premium"
+      ],
+      "x-ms-enum": {
+        "name": "BastionSku",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Use the standard SKU of Azure Bastion."
+          },
+          {
+            "name": "Premium",
+            "value": "Premium",
+            "description": "Use the premium SKU of Azure Bastion."
+          }
+        ]
+      }
+    },
     "ClusterUpgradeSettings": {
       "type": "object",
       "description": "Settings for upgrading a cluster.",
@@ -7574,6 +7651,10 @@
         "loadBalancerProfile": {
           "$ref": "#/definitions/ManagedClusterLoadBalancerProfile",
           "description": "Profile of the cluster load balancer."
+        },
+        "bastionProfile": {
+          "$ref": "#/definitions/BastionProfile",
+          "description": "Profile of the Bastion Host associated with the managed cluster.\nSee https://aka.ms/aks/BastionConnect for more details."
         },
         "natGatewayProfile": {
           "$ref": "#/definitions/ManagedClusterNATGatewayProfile",
