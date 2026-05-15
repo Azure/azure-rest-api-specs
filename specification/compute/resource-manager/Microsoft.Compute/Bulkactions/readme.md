@@ -57,9 +57,9 @@ suppressions:
       is in effect.
     from: Bulkactions.json
   - code: ParameterNotUsingCommonTypes
-    reason:
+    reason: >
       LaunchBulkInstancesOperation uses location as a resource path segment key
-      (location: azureLocation in the resource model), so the location parameter
+      (location is azureLocation in the resource model), so the location parameter
       cannot be a $ref to common-types LocationParameter without losing the resource key binding.
     from: Bulkactions.json
   - code: MissingSegmentsInNestedResourceListOperation
