@@ -1264,7 +1264,7 @@
       },
       "delete": {
         "operationId": "Agents_deleteAgent",
-        "description": "Deletes an agent.",
+        "description": "Deletes an agent. For hosted agents, if any version has active sessions, the request\nis rejected with HTTP 409 unless `force` is set to true. When force is true, all\nassociated sessions are cascade-deleted along with the agent and its versions.",
         "parameters": [
           {
             "name": "agent_name",
@@ -1273,6 +1273,16 @@
             "description": "The name of the agent to delete.",
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "name": "force",
+            "in": "query",
+            "required": false,
+            "description": "If true, force-deletes the agent even if its versions have active sessions (hosted agents), cascading deletion to all associated sessions. Defaults to false.",
+            "schema": {
+              "type": "boolean",
+              "default": false
             }
           },
           {
@@ -2893,7 +2903,7 @@
       },
       "delete": {
         "operationId": "Agents_deleteAgentVersion",
-        "description": "Deletes a specific version of an agent.",
+        "description": "Deletes a specific version of an agent. For hosted agents, if the version has active\nsessions, the request is rejected with HTTP 409 unless `force` is set to true. When\nforce is true, all sessions associated with this version are cascade-deleted.",
         "parameters": [
           {
             "name": "agent_name",
@@ -2911,6 +2921,16 @@
             "description": "The version of the agent to delete",
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "name": "force",
+            "in": "query",
+            "required": false,
+            "description": "If true, force-deletes the version even if it has active sessions (hosted agents), cascading deletion to all associated sessions. Defaults to false.",
+            "schema": {
+              "type": "boolean",
+              "default": false
             }
           },
           {
