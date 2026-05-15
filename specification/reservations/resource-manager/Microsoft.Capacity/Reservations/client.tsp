@@ -16,6 +16,7 @@ namespace ReservationsClient;
 @@clientName(BillingPlan.P1M, "P1_M", "python");
 
 // C# customizations for backward compatibility with the GA SDK.
+@@access(Reservations.Operation.list, Access.internal, "csharp");
 @@clientName(Reservations.PurchaseRequest, "ReservationPurchaseContent", "csharp");
 @@clientName(Reservations.Price, "PurchasePrice", "csharp");
 @@clientName(Reservations.SavingsPlanPurchaseRequest, "SavingsPlanPurchase", "csharp");
