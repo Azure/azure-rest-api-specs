@@ -126,7 +126,7 @@ alias ListFilterParameter = {
    * OData filter options.
    */
   @query("$filter")
-  $filter?: string;
+  filter?: string;
 };
 
 alias ListSkipTokenParameter = {
@@ -134,7 +134,7 @@ alias ListSkipTokenParameter = {
    * skipToken Filter.
    */
   @query("$skipToken")
-  $skipToken?: string;
+  skipToken?: string;
 };
 
 /**
