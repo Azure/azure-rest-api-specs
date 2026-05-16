@@ -27,6 +27,65 @@ This file contains **ARM control plane–specific** review rules that supplement
 
 Flag every violation clearly with the file path, the **exact line number** (e.g., `line 42` or `line 10-15` for ranges), the JSON path (e.g., `$.definitions.Widget.properties.name`), the specific rule ID, and a concrete suggestion for how to fix it. Vague references like "near end of file" or "around line 50" are not acceptable -- always resolve the actual line number by reading the file content. Respond in markdown format.
 
+### Rule Citation Format (REQUIRED for posted PR comments)
+
+Every rule ID cited in a posted PR comment **MUST** be accompanied by a markdown hyperlink to the rule's authoritative location in this repository. A bare rule ID without a link is **not acceptable** -- reviewers and authors must be able to one-click navigate to the exact section that defines the rule.
+
+**Format.** Use a markdown link whose visible text is the rule ID and whose target is a permanent GitHub URL (use the `main` branch ref) anchored to the section that defines the rule:
+
+```
+[<RULE-ID>](https://github.com/Azure/azure-rest-api-specs/blob/main/<path-to-rule-file>#<section-anchor>)
+```
+
+**Where to link.** Pick the most specific source for the rule:
+
+- ARM RPC rules (e.g., `RPC-Put-V1-12`, `RPC-Async-V1-06`, `RPC-Patch-V1-10`) → link to the corresponding section in `.github/instructions/armapi-review.instructions.md`.
+- Generic OpenAPI rules (e.g., `OAPI020`, `OAPI027`, `OAPI034`, `WHATIF-001`, `PLCY008`, `TSP-REQUIRED-V1`) → link to the rule's section in `.github/instructions/openapi-review.instructions.md` **or** to the dedicated reference file under `.github/skills/azure-api-review/references/*.md` when the rule has a full reference page (e.g., `property-mutability.md#oapi034`, `secret-detection.md`, `provisioning-state.md`).
+- TypeSpec-only rules → link to the corresponding section in `.github/instructions/typespec-review.instructions.md`.
+
+**Multiple rule IDs.** When a finding cites more than one rule ID (e.g., a combined ARG/Section/OAPI citation), each ID **MUST** be its own hyperlink:
+
+```
+[ARG-DiscoverableState](...) / [Section 12.1](...) / [OAPI034](...)
+```
+
+**Anchor resolution.** GitHub auto-generates section anchors by lowercasing the heading, replacing spaces with `-`, and stripping punctuation. For example, the heading `### 8.20 Fields Must Have Clear Ownership — Server or Client (OAPI034)` becomes `#820-fields-must-have-clear-ownership--server-or-client-oapi034`. When in doubt, open the rendered file on GitHub and copy the link from the heading's anchor icon.
+
+**Negative example (do NOT post):**
+
+> **[NEW] 🔴 Blocking** **[OAPI034 / Section 12.1]** ...
+
+**Positive example (DO post):**
+
+> **[NEW] 🔴 Blocking** **[[OAPI034](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/skills/azure-api-review/references/property-mutability.md#oapi034) / [Section 12.1](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/instructions/armapi-review.instructions.md#121-use-post-actions-sparingly)]** ...
+
+### Reviewer-Posted Parity (REQUIRED -- no divergence)
+
+The set of findings posted to the GitHub PR **MUST** be **byte-for-byte identical** to the set of findings shown to the reviewer in chat. There **MUST** be no discrepancy in content, count, ordering, severity, rule IDs, links, code blocks, JSON examples, fix snippets, or the `<!-- posted-by: arm-api-reviewer-agent -->` marker.
+
+**Hard rules.**
+
+1. **Single source of truth.** Build the exact comment body **once** as the canonical text for each finding. The text rendered to the reviewer in chat and the text written into the GitHub review payload **MUST** come from that same string -- not a reconstructed, re-summarized, or shortened variant.
+2. **Verbatim reproduction.** When constructing the GitHub review payload (`POST /repos/{owner}/{repo}/pulls/{pull_number}/reviews` with inline `comments[]`), each comment's `body` field **MUST** contain the canonical finding text **unchanged**. Do **not** drop, paraphrase, collapse, or shorten:
+   - the rule ID hyperlinks,
+   - the JSON / TypeSpec / code blocks under **Fix:**,
+   - inline examples,
+   - file path / line number / JSON path citations,
+   - the trailing `<!-- posted-by: arm-api-reviewer-agent -->` marker.
+3. **No re-authoring during payload assembly.** Heredoc rebuilds, JSON-string escaping, multi-finding consolidation, or any step that involves "rewriting the body inline" is **forbidden**. Generate each comment body once, store it, and reference the stored value when building the payload.
+4. **Exact one-to-one mapping.** Every finding shown to the reviewer **MUST** map to exactly one inline comment in the posted review. The reviewer **MUST NOT** see N findings and the PR receive N-1 (something dropped) or N+1 (something added). Severity tags (`🔴 Blocking`, `🟡 Warning`, `🔵 Suggestion`) and `[NEW]`/`[EXISTING]` classifications **MUST** match.
+5. **Post-post verification (REQUIRED).** Immediately after posting the review, the agent **MUST** fetch the live comment bodies (`GET /repos/{owner}/{repo}/pulls/comments/{id}` for each created comment) and verify, for every comment:
+   - body length matches the canonical text length (within normalisation tolerance for line endings only),
+   - the rule ID hyperlinks are present,
+   - any code-fence (` ``` `) blocks present in the canonical text are present in the posted body,
+   - the `<!-- posted-by: arm-api-reviewer-agent -->` marker is present.
+     If any check fails, the agent **MUST** PATCH the affected comment(s) (`PATCH /repos/{owner}/{repo}/pulls/comments/{id}`) to restore the canonical text and re-verify -- before reporting completion to the user.
+6. **Failure handling.** If a finding cannot be posted as-is (e.g., GitHub API rejects the body, a line anchor cannot be resolved), the agent **MUST** report the discrepancy explicitly to the reviewer rather than silently posting a shortened or altered variant.
+
+**Negative example (do NOT do):** Show the reviewer a finding with a JSON code-block under **Fix:**, then build a multi-comment payload heredoc that omits the code-block to keep the JSON string short.
+
+**Positive example (DO):** Build each finding's body string once with hyperlinks, code blocks, and marker included; serialize that exact string into the `body` field of each `comments[]` entry in the review payload; after posting, re-fetch each comment and confirm the live body matches.
+
 **False-positive avoidance.** If a spec is fully compliant with all ARM RPC rules -- has all required CRUD operations, correct response codes, provisioningState, systemData, x-ms-mutability on location, x-ms-pageable on list operations, x-ms-enum with modelAsString, descriptions on all elements, and proper security definitions -- state that no blocking issues were found. Do not fabricate violations or elevate process-level recommendations to blocking findings. Specifically:
 
 - **Inline definitions vs. common-types `$ref`:** A spec that correctly defines ARM-standard shapes inline (ErrorResponse, SystemData, Operation, OperationListResult, TrackedResource, etc.) with all required fields is **functionally compliant**. Preferring `$ref` to common-types is a process recommendation, NOT a blocking error. Flag it as a **suggestion** only.
