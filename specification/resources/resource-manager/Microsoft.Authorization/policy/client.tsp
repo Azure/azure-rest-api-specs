@@ -444,8 +444,10 @@ namespace Microsoft.Authorization {
 );
 
 // TODO: Temporary C# workaround for mgmt resource-detection duplicate method
-// names. Remove this scope after the generator disambiguates the resource-level
-// policy enrollment and policy exemption list operations.
+// names. Remove these scopes after the generator disambiguates resource-level
+// policy assignment, exemption, and enrollment list operations.
+@@scope(Microsoft.Authorization.PolicyAssignments.listForResource, "!csharp");
+@@scope(Microsoft.Authorization.PolicyExemptions.listForResource, "!csharp");
 @@scope(Microsoft.Authorization.PolicyEnrollments.listForResource, "!csharp");
 
 @@scope(Microsoft.Authorization.Variables.getAtManagementGroup, "!csharp");
