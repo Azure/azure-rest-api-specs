@@ -1,6 +1,7 @@
 import "../common/service.tsp";
 import "../tools/models.tsp";
 import "../agents/models.tsp";
+import "../skills/models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -19,9 +20,11 @@ model ToolboxPolicies {
 
 @doc("A reference to a skill to include in a toolbox.")
 model SkillReference {
+  @doc("The type of skill reference.")
+  type: "skill_reference";
+
   @doc("The name of the skill.")
-  @maxLength(63)
-  name: string;
+  name: SkillName;
 
   @doc("The version of the skill. If not specified, the skill's default version is used. When a version is specified, the reference is pinned to that immutable version.")
   version?: string;

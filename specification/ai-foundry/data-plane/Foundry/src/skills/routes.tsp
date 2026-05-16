@@ -13,17 +13,6 @@ alias SkillsPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptI
 @tag("Skills")
 interface Skills {
   /**
-   * Creates a skill.
-   */
-  @post
-  @route("/skills")
-  @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
-  createSkill is FoundryDataPlaneOperation<
-    CreateSkillRequest & SkillsPreviewHeader,
-    ResourceCreatedResponse<Skill>
-  >;
-
-  /**
    * Retrieves a skill.
    */
   @get
@@ -42,7 +31,7 @@ interface Skills {
   @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   listSkills is FoundryDataPlaneOperation<
     ListSkillsRequest & SkillsPreviewHeader,
-    AgentsPagedResult<Skill>
+    SkillsPagedResult<Skill>
   >;
 
   /**
@@ -79,9 +68,32 @@ interface Skills {
   @operationId("createSkillVersion")
   @post
   @route("/skills/{name}/versions")
+  @sharedRoute
   @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   createSkillVersion is FoundryDataPlaneOperation<
     CreateSkillVersionRequest & SkillsPreviewHeader,
+    SkillVersion
+  >;
+
+  /**
+   * Creates a new version of a skill from uploaded files via multipart form data.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+  #suppress "@azure-tools/typespec-azure-core/byos" "Skill file upload uses multipart form data"
+  @operationId("createSkillVersionFromFiles")
+  @post
+  @route("/skills/{name}/versions")
+  @sharedRoute
+  @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
+  createSkillVersionFromFiles is FoundryDataPlaneOperation<
+    {
+      @doc("The name of the skill.")
+      @path
+      name: SkillName;
+
+      @header contentType: "multipart/form-data";
+      @multipartBody content: CreateSkillVersionFromFilesBody;
+    } & SkillsPreviewHeader,
     SkillVersion
   >;
 
@@ -96,7 +108,7 @@ interface Skills {
   @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   listSkillVersions is FoundryDataPlaneOperation<
     ListSkillVersionsRequest & SkillsPreviewHeader,
-    AgentsPagedResult<SkillVersion>
+    SkillsPagedResult<SkillVersion>
   >;
 
   /**
@@ -148,6 +160,6 @@ interface Skills {
   @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   deleteSkillVersion is FoundryDataPlaneOperation<
     DeleteSkillVersionRequest & SkillsPreviewHeader,
-    void
+    DeleteSkillVersionResponse
   >;
 }

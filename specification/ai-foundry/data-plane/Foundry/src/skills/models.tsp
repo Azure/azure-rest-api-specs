@@ -1,28 +1,70 @@
 using TypeSpec.Http;
+using TypeSpec.Rest;
 
 namespace Azure.AI.Projects;
+
+@doc("A paginated list of items.")
+model SkillsPagedResult<T> {
+  @doc("The requested list of items.")
+  @pageItems
+  data: T[];
+
+  @doc("The first ID represented in this list.")
+  first_id?: string;
+
+  @doc("The last ID represented in this list.")
+  @continuationToken
+  last_id?: string;
+
+  @doc("Whether there are additional values available not captured in this list.")
+  has_more: boolean;
+}
+
+@doc("A skill name following the agentskills.io spec: lowercase letters, numbers, and hyphens only. Must not start or end with a hyphen or contain consecutive hyphens.")
+@maxLength(64)
+@pattern("^[a-z0-9]([a-z0-9\\-]*[a-z0-9])?$")
+scalar SkillName extends string;
 
 const SkillsRequiredPreviews = #{
   conditional_previews: #[FoundryFeaturesOptInKeys.skills_v1_preview],
 };
 
-alias CreateSkillRequest = {
-  @doc("The unique name of the skill.")
-  @maxLength(63)
-  name: string;
-
-  @doc("Skill files to upload as a zip package.")
-  files: bytes;
-
-  @doc("A human-readable description of the skill.")
+@doc("Inline content for defining a simple skill without uploading files. Follows the agentskills.io SKILL.md specification.")
+model SkillInlineContent {
+  @doc("A human-readable description of what the skill does and when to use it.")
   @maxLength(1024)
-  description?: string;
-};
+  description: string;
+
+  @doc("The skill instructions in markdown format. This is the body content of the SKILL.md file.")
+  instructions: string;
+
+  @doc("Environment requirements or compatibility notes for the skill.")
+  @maxLength(500)
+  compatibility?: string;
+
+  @doc("Space-separated list of pre-approved tools the skill may use. Experimental.")
+  allowed_tools?: string;
+}
+
+@doc("Metadata for creating a skill version via multipart file upload.")
+model CreateSkillVersionMetadata {
+  @doc("Whether to set this version as the default.")
+  default?: boolean;
+}
+
+@doc("Multipart request body for creating a skill version from files.")
+model CreateSkillVersionFromFilesBody {
+  @doc("JSON metadata including description and default flag.")
+  metadata: HttpPart<CreateSkillVersionMetadata>;
+
+  @doc("Skill files to upload. Each file includes its relative path in the filename.")
+  files: HttpPart<File>[];
+}
 
 alias GetSkillRequest = {
   @doc("The unique name of the skill.")
   @path
-  name: string;
+  name: SkillName;
 };
 
 alias ListSkillsRequest = {
@@ -32,7 +74,7 @@ alias ListSkillsRequest = {
 alias DeleteSkillRequest = {
   @doc("The unique name of the skill.")
   @path
-  name: string;
+  name: SkillName;
 };
 
 @doc("A skill resource.")
@@ -41,8 +83,7 @@ model Skill {
   id: string;
 
   @doc("The unique name of the skill.")
-  @maxLength(63)
-  name: string;
+  name: SkillName;
 
   @doc("A human-readable description of the skill.")
   @maxLength(1024)
@@ -71,8 +112,7 @@ model SkillVersion {
   skill_id: string;
 
   @doc("The name of the skill version.")
-  @maxLength(63)
-  name: string;
+  name: SkillName;
 
   @doc("The version identifier. Skill versions are immutable.")
   version: string;
@@ -92,15 +132,10 @@ model SkillVersion {
 alias CreateSkillVersionRequest = {
   @doc("The name of the skill. If the skill does not exist, it will be created.")
   @path
-  @maxLength(63)
-  name: string;
+  name: SkillName;
 
-  @doc("Skill files to upload as a zip package.")
-  files: bytes;
-
-  @doc("A human-readable description of the skill version.")
-  @maxLength(1024)
-  description?: string;
+  @doc("Inline skill content for simple skills without file uploads. Foundry-specific extension.")
+  inline_content?: SkillInlineContent;
 
   @doc("Whether to set this version as the default.")
   default?: boolean;
@@ -109,7 +144,7 @@ alias CreateSkillVersionRequest = {
 alias GetSkillVersionRequest = {
   @doc("The name of the skill.")
   @path
-  name: string;
+  name: SkillName;
 
   @doc("The version identifier to retrieve.")
   @path
@@ -119,7 +154,7 @@ alias GetSkillVersionRequest = {
 alias ListSkillVersionsRequest = {
   @doc("The name of the skill to list versions for.")
   @path
-  name: string;
+  name: SkillName;
 
   ...CommonPageQueryParameters;
 };
@@ -127,13 +162,13 @@ alias ListSkillVersionsRequest = {
 alias GetSkillContentRequest = {
   @doc("The name of the skill.")
   @path
-  name: string;
+  name: SkillName;
 };
 
 alias GetSkillVersionContentRequest = {
   @doc("The name of the skill.")
   @path
-  name: string;
+  name: SkillName;
 
   @doc("The version to download content for.")
   @path
@@ -143,7 +178,7 @@ alias GetSkillVersionContentRequest = {
 model UpdateSkillDefaultVersionRequest {
   @doc("The name of the skill to update.")
   @path
-  name: string;
+  name: SkillName;
 
   @doc("The version identifier that the skill should point to. When set, the skill's default version will resolve to this version instead of the latest.")
   default_version: string;
@@ -152,7 +187,7 @@ model UpdateSkillDefaultVersionRequest {
 alias DeleteSkillVersionRequest = {
   @doc("The name of the skill.")
   @path
-  name: string;
+  name: SkillName;
 
   @doc("The version identifier to delete.")
   @path
@@ -162,10 +197,22 @@ alias DeleteSkillVersionRequest = {
 @doc("A deleted skill.")
 model DeleteSkillResponse {
   @doc("The unique name of the skill.")
-  name: string;
+  name: SkillName;
 
   @doc("Whether the skill was successfully deleted.")
   deleted: boolean;
+}
+
+@doc("A deleted skill version.")
+model DeleteSkillVersionResponse {
+  @doc("The unique identifier of the deleted skill version.")
+  id: string;
+
+  @doc("Whether the skill version was successfully deleted.")
+  deleted: boolean;
+
+  @doc("The version that was deleted.")
+  version: string;
 }
 
 @doc("The response body for downloading a skill package.")
