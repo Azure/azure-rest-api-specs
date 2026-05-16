@@ -418,6 +418,7 @@ namespace Microsoft.Authorization {
 // TODO: Temporary C# workaround for mgmt resource-detection duplicate method
 // names. Remove these scopes after the generator disambiguates the list-all
 // policy definition version and policy set definition version operations.
+// Track removal in https://github.com/Azure/azure-sdk-for-net/issues/59286.
 @@scope(
   Microsoft.Authorization.PolicyDefinitionVersionsOperationGroup.listAllBuiltins,
   "!csharp"
@@ -446,6 +447,7 @@ namespace Microsoft.Authorization {
 // TODO: Temporary C# workaround for mgmt resource-detection duplicate method
 // names. Remove these scopes after the generator disambiguates resource-level
 // policy assignment, exemption, and enrollment list operations.
+// Track removal in https://github.com/Azure/azure-sdk-for-net/issues/59286.
 @@scope(Microsoft.Authorization.PolicyAssignments.listForResource, "!csharp");
 @@scope(Microsoft.Authorization.PolicyExemptions.listForResource, "!csharp");
 @@scope(Microsoft.Authorization.PolicyEnrollments.listForResource, "!csharp");
