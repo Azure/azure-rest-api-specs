@@ -1,3 +1,5 @@
+import "../servicepatterns.tsp";
+
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
@@ -33,11 +35,17 @@ model SessionDirectoryEntry {
   modified_time: utcDateTime;
 }
 
-@doc("Response from listing a directory in a session sandbox.")
-model SessionDirectoryListResponse {
-  @doc("The path that was listed, relative to the session home directory.")
-  path: string;
+@doc("Parameters for listing files in a session sandbox directory.")
+model ListSessionFilesParameters {
+  /** The name of the agent. */
+  @path agent_name: string;
 
-  @doc("The directory entries.")
-  entries: SessionDirectoryEntry[];
+  /** The session ID. */
+  @path agent_session_id: string;
+
+  /** The directory path to list, relative to the session home directory. Defaults to the home directory if not provided. */
+  @query path?: string;
+
+  ...UserIsolationKeyHeader;
+  ...CommonPageQueryParameters;
 }
