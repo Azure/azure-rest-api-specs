@@ -281,6 +281,21 @@ model EvaluationSuiteGenerationJobInputs {
     If omitted, defaults are used (simple_qna, 100 max_samples).
     """)
   data_generation_options?: EvaluationSuiteDataGenerationOptions;
+
+  @doc("""
+    Target for the generated suite. Stored on the suite so it can be run
+    immediately after generation completes.
+    Supports azure_ai_agent, azure_ai_model, azure_ai_assistant.
+    """)
+  target?: Target;
+
+  @doc("""
+    How to send dataset rows to the target.
+    If omitted and target is provided, defaults to a template using {{item.query}}.
+    """)
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Supporting both input message types"
+  input_messages?: OpenAI.CreateEvalResponsesRunDataSourceInputMessagesTemplate
+    | OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesItemReference;
 }
 
 @doc("Options for dataset generation within an evaluation suite generation job.")
