@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "VoiceLive",
-    "version": "2025-10-01",
+    "version": "2026-04-10",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -21,6 +21,116 @@
   "tags": [],
   "paths": {},
   "definitions": {
+    "ActionFind": {
+      "type": "object",
+      "description": "A find action to search text within a page.",
+      "properties": {
+        "pattern": {
+          "type": "string",
+          "description": "The pattern or text to search for within the page."
+        },
+        "type": {
+          "type": "string",
+          "description": "The action type. Always 'find'.",
+          "enum": [
+            "find"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL of the page searched for the pattern."
+        }
+      },
+      "required": [
+        "pattern",
+        "type",
+        "url"
+      ]
+    },
+    "ActionOpenPage": {
+      "type": "object",
+      "description": "An open page action.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The action type. Always 'open_page'.",
+          "enum": [
+            "open_page"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL opened by the model."
+        }
+      },
+      "required": [
+        "type",
+        "url"
+      ]
+    },
+    "ActionSearch": {
+      "type": "object",
+      "description": "A web search action.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The search query."
+        },
+        "type": {
+          "type": "string",
+          "description": "The action type. Always 'search'.",
+          "enum": [
+            "search"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "sources": {
+          "type": "array",
+          "description": "The sources used in the search.",
+          "items": {
+            "$ref": "#/definitions/ActionSearchSource"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "ActionSearchSource": {
+      "type": "object",
+      "description": "A search action source URL.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of source. Always 'url'.",
+          "enum": [
+            "url"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL of the source."
+        }
+      },
+      "required": [
+        "type",
+        "url"
+      ]
+    },
     "AgentConfig": {
       "type": "object",
       "description": "Configuration for the agent.",
@@ -162,6 +272,8 @@
             "whisper-1",
             "gpt-4o-transcribe",
             "gpt-4o-mini-transcribe",
+            "gpt-4o-transcribe-diarize",
+            "mai-transcribe-1",
             "azure-speech"
           ],
           "x-ms-enum": {
@@ -234,6 +346,10 @@
       "type": "object",
       "description": "Configuration for avatar streaming and behavior during the session.",
       "properties": {
+        "type": {
+          "$ref": "#/definitions/AvatarConfigTypes",
+          "description": "Type of avatar to use."
+        },
         "ice_servers": {
           "type": "array",
           "description": "Optional list of ICE servers to use for WebRTC connection establishment.",
@@ -249,6 +365,10 @@
           "type": "string",
           "description": "Optional avatar style, such as emotional tone or speaking style."
         },
+        "model": {
+          "$ref": "#/definitions/PhotoAvatarBaseModes",
+          "description": "Base model to use for the avatar. Required for photo avatar."
+        },
         "customized": {
           "type": "boolean",
           "description": "Indicates whether the avatar is customized or not."
@@ -256,12 +376,155 @@
         "video": {
           "$ref": "#/definitions/VideoParams",
           "description": "Optional video configuration including resolution, bitrate, and codec."
+        },
+        "scene": {
+          "$ref": "#/definitions/Scene",
+          "description": "Configuration for the avatar's zoom level, position, rotation and movement amplitude in the video frame."
+        },
+        "output_protocol": {
+          "type": "string",
+          "description": "Output protocol for avatar streaming. Default is 'webrtc'.",
+          "default": "webrtc",
+          "enum": [
+            "webrtc",
+            "websocket"
+          ],
+          "x-ms-enum": {
+            "name": "AvatarOutputProtocol",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "webrtc",
+                "value": "webrtc",
+                "description": "WebRTC protocol, output the audio/video streams via WebRTC"
+              },
+              {
+                "name": "websocket",
+                "value": "websocket",
+                "description": "WebSocket protocol, output the video frames over WebSocket"
+              }
+            ]
+          }
+        },
+        "output_audit_audio": {
+          "type": "boolean",
+          "description": "When enabled, forwards audit audio via WebSocket for review/debugging purposes, even when avatar output is delivered via WebRTC.",
+          "default": false
         }
       },
       "required": [
         "character",
         "customized"
       ]
+    },
+    "AvatarConfigTypes": {
+      "type": "string",
+      "description": "Avatar config types",
+      "enum": [
+        "video-avatar",
+        "photo-avatar"
+      ],
+      "x-ms-enum": {
+        "name": "AvatarConfigTypes",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "video-avatar",
+            "value": "video-avatar",
+            "description": "Video avatar"
+          },
+          {
+            "name": "photo-avatar",
+            "value": "photo-avatar",
+            "description": "Photo avatar"
+          }
+        ]
+      }
+    },
+    "AvatarOutputProtocol": {
+      "type": "string",
+      "description": "Avatar config output protocols",
+      "enum": [
+        "webrtc",
+        "websocket"
+      ],
+      "x-ms-enum": {
+        "name": "AvatarOutputProtocol",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "webrtc",
+            "value": "webrtc",
+            "description": "WebRTC protocol, output the audio/video streams via WebRTC"
+          },
+          {
+            "name": "websocket",
+            "value": "websocket",
+            "description": "WebSocket protocol, output the video frames over WebSocket"
+          }
+        ]
+      }
+    },
+    "AzureAvatarVoiceSyncVoice": {
+      "type": "object",
+      "description": "Azure avatar voice sync configuration. Uses personal voice synthesis with avatar character.",
+      "properties": {
+        "model": {
+          "$ref": "#/definitions/PersonalVoiceModels",
+          "description": "Underlying neural model to use."
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "Temperature must be between 0.0 and 1.0.",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "custom_lexicon_url": {
+          "type": "string",
+          "description": "URL of a custom lexicon file for pronunciation customization."
+        },
+        "custom_text_normalization_url": {
+          "type": "string",
+          "description": "URL of a custom text normalization endpoint."
+        },
+        "prefer_locales": {
+          "type": "array",
+          "description": "Preferred locales in BCP-47 format that change the accents of languages.\nIf not set, TTS uses the default accent for each language (e.g., American English for English,\nMexican Spanish for Spanish). Setting this to `[\"en-GB\", \"es-ES\"]` changes the English accent\nto British English and the Spanish accent to European Spanish, while TTS can still speak other\nlanguages like French or Chinese with their default accents.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "locale": {
+          "type": "string",
+          "description": "Enforced locale in BCP-47 format for TTS output. If set, TTS will always use the specified\nlocale to speak. For example, setting locale to `en-US` forces American English accent for all\ntext content, even if the text is in another language, and TTS will output silence for\nunsupported languages (e.g., Chinese text with `en-US` locale). If not set, TTS automatically\ndetects the language from the text content."
+        },
+        "style": {
+          "type": "string",
+          "description": "Speaking style for the voice (e.g., 'cheerful', 'sad')."
+        },
+        "pitch": {
+          "type": "string",
+          "description": "Pitch adjustment for the voice output. Follows the same rules as the `pitch` attribute of the\nSSML `prosody` element (see\nhttps://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody).\nTypical values: a named level (`x-low`, `low`, `medium`, `high`, `x-high`, `default`),\na relative change (e.g., `+10%`, `-5%`, `+50Hz`, `-2st`), or an absolute frequency (e.g., `200Hz`)."
+        },
+        "rate": {
+          "type": "string",
+          "description": "Speaking rate adjustment for the voice output. Follows the same rules as the `rate` attribute of\nthe SSML `prosody` element (see\nhttps://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody).\nTypical values: a named level (`x-slow`, `slow`, `medium`, `fast`, `x-fast`, `default`),\na relative percentage (e.g., `+20%`, `-10%`), or a non-negative multiplier (e.g., `0.5`, `1.5`)."
+        },
+        "volume": {
+          "type": "string",
+          "description": "Volume adjustment for the voice output. Follows the same rules as the `volume` attribute of the\nSSML `prosody` element (see\nhttps://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody).\nTypical values: a named level (`silent`, `x-soft`, `soft`, `medium`, `loud`, `x-loud`, `default`),\nan absolute number from 0.0 to 100.0, or a relative change (e.g., `+10`, `-6dB`)."
+        }
+      },
+      "required": [
+        "model"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureVoice"
+        }
+      ],
+      "x-ms-discriminator-value": "avatar-voice-sync"
     },
     "AzureCustomVoice": {
       "type": "object",
@@ -734,7 +997,8 @@
       "enum": [
         "azure-custom",
         "azure-standard",
-        "azure-personal"
+        "azure-personal",
+        "avatar-voice-sync"
       ],
       "x-ms-enum": {
         "name": "AzureVoiceType",
@@ -754,6 +1018,11 @@
             "name": "azure_personal",
             "value": "azure-personal",
             "description": "Azure personal voice."
+          },
+          {
+            "name": "avatar_voice_sync",
+            "value": "avatar-voice-sync",
+            "description": "Azure avatar voice sync."
           }
         ]
       }
@@ -1037,6 +1306,16 @@
       ],
       "x-ms-discriminator-value": "input_audio.turn.start"
     },
+    "ClientEventOutputAudioBufferClear": {
+      "type": "object",
+      "description": "Client request to clear the avatar output buffer.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "output_audio_buffer.clear"
+    },
     "ClientEventResponseCancel": {
       "type": "object",
       "description": "Send this event to cancel an in-progress response. The server will respond\nwith a `response.cancelled` event or an error if there is no response to\ncancel.",
@@ -1128,7 +1407,9 @@
         "conversation.item.delete",
         "response.create",
         "response.cancel",
-        "session.avatar.connect"
+        "session.avatar.connect",
+        "mcp_approval_response",
+        "output_audio_buffer.clear"
       ],
       "x-ms-enum": {
         "name": "ClientEventType",
@@ -1197,6 +1478,15 @@
           {
             "name": "session_avatar_connect",
             "value": "session.avatar.connect"
+          },
+          {
+            "name": "mcp_approval_response",
+            "value": "mcp_approval_response"
+          },
+          {
+            "name": "output_audio_buffer_clear",
+            "value": "output_audio_buffer.clear",
+            "description": "Client request to clear the avatar output buffer."
           }
         ]
       }
@@ -1219,6 +1509,7 @@
       "enum": [
         "input_text",
         "input_audio",
+        "input_image",
         "text",
         "audio"
       ],
@@ -1233,6 +1524,10 @@
           {
             "name": "input_audio",
             "value": "input_audio"
+          },
+          {
+            "name": "input_image",
+            "value": "input_image"
           },
           {
             "name": "text",
@@ -1334,6 +1629,36 @@
       "required": [
         "error"
       ]
+    },
+    "FileSearchResult": {
+      "type": "object",
+      "description": "A file search result entry.",
+      "properties": {
+        "attributes": {
+          "type": "object",
+          "description": "Key-value pairs for filtering file search results.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "file_id": {
+          "type": "string",
+          "description": "The unique ID of the file."
+        },
+        "filename": {
+          "type": "string",
+          "description": "The name of the file."
+        },
+        "score": {
+          "type": "number",
+          "format": "float",
+          "description": "The relevance score of the file search result."
+        },
+        "text": {
+          "type": "string",
+          "description": "The text content of the file that matched the query."
+        }
+      }
     },
     "FunctionCallItem": {
       "type": "object",
@@ -1542,6 +1867,85 @@
         "cached_tokens_details"
       ]
     },
+    "InterimResponseConfig": {},
+    "InterimResponseConfigBase": {
+      "type": "object",
+      "description": "Base model for interim response configuration.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/InterimResponseConfigType",
+          "description": "The type of interim response configuration."
+        },
+        "triggers": {
+          "type": "array",
+          "description": "List of triggers that can fire the interim response. Any trigger can activate it (OR logic).\nSupported: 'latency', 'tool'.",
+          "default": [
+            "latency"
+          ],
+          "items": {
+            "$ref": "#/definitions/InterimResponseTrigger"
+          }
+        },
+        "latency_threshold_ms": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Latency threshold in milliseconds before triggering interim response. Default is 2000ms.",
+          "minimum": 0
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "InterimResponseConfigType": {
+      "type": "string",
+      "description": "Interim response configuration types.",
+      "enum": [
+        "static_interim_response",
+        "llm_interim_response"
+      ],
+      "x-ms-enum": {
+        "name": "InterimResponseConfigType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "static_interim_response",
+            "value": "static_interim_response",
+            "description": "Static interim response configuration type."
+          },
+          {
+            "name": "llm_interim_response",
+            "value": "llm_interim_response",
+            "description": "LLM-based interim response configuration type."
+          }
+        ]
+      }
+    },
+    "InterimResponseTrigger": {
+      "type": "string",
+      "description": "Triggers that can activate interim response generation.",
+      "enum": [
+        "latency",
+        "tool"
+      ],
+      "x-ms-enum": {
+        "name": "InterimResponseTrigger",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "latency",
+            "value": "latency",
+            "description": "Trigger interim response when response latency exceeds threshold."
+          },
+          {
+            "name": "tool",
+            "value": "tool",
+            "description": "Trigger interim response when a tool call is being executed."
+          }
+        ]
+      }
+    },
     "ItemParamStatus": {
       "type": "string",
       "description": "Indicates the processing status of an item or parameter.",
@@ -1571,7 +1975,13 @@
       "enum": [
         "message",
         "function_call",
-        "function_call_output"
+        "function_call_output",
+        "mcp_list_tools",
+        "mcp_call",
+        "mcp_approval_request",
+        "mcp_approval_response",
+        "web_search_call",
+        "file_search_call"
       ],
       "x-ms-enum": {
         "name": "ItemType",
@@ -1588,9 +1998,62 @@
           {
             "name": "function_call_output",
             "value": "function_call_output"
+          },
+          {
+            "name": "mcp_list_tools",
+            "value": "mcp_list_tools"
+          },
+          {
+            "name": "mcp_call",
+            "value": "mcp_call"
+          },
+          {
+            "name": "mcp_approval_request",
+            "value": "mcp_approval_request"
+          },
+          {
+            "name": "mcp_approval_response",
+            "value": "mcp_approval_response"
+          },
+          {
+            "name": "web_search_call",
+            "value": "web_search_call",
+            "description": "Web search call item."
+          },
+          {
+            "name": "file_search_call",
+            "value": "file_search_call",
+            "description": "File search call item."
           }
         ]
       }
+    },
+    "LlmInterimResponseConfig": {
+      "type": "object",
+      "description": "Configuration for LLM-based interim response generation.\nUses LLM to generate context-aware interim responses when any trigger condition is met.",
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "The model to use for LLM-based interim response generation. Default is gpt-4.1-mini."
+        },
+        "instructions": {
+          "type": "string",
+          "description": "Custom instructions for generating interim responses. If not provided, a default prompt is used."
+        },
+        "max_completion_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of tokens to generate for the interim response.",
+          "default": 50,
+          "minimum": 1
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/InterimResponseConfigBase"
+        }
+      ],
+      "x-ms-discriminator-value": "llm_interim_response"
     },
     "LogProbProperties": {
       "type": "object",
@@ -1618,6 +2081,116 @@
         "token",
         "logprob",
         "bytes"
+      ]
+    },
+    "MCPApprovalResponseRequestItem": {
+      "type": "object",
+      "description": "A request item that represents a response to an MCP approval request.",
+      "properties": {
+        "approval_request_id": {
+          "type": "string",
+          "description": "The ID of the approval request."
+        },
+        "approve": {
+          "type": "boolean",
+          "description": "Whether the tool call was approved."
+        }
+      },
+      "required": [
+        "approval_request_id",
+        "approve"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationRequestItem"
+        }
+      ],
+      "x-ms-discriminator-value": "mcp_approval_response"
+    },
+    "MCPApprovalType": {
+      "type": "string",
+      "description": "The available set of MCP approval types.",
+      "enum": [
+        "never",
+        "always"
+      ],
+      "x-ms-enum": {
+        "name": "MCPApprovalType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Never",
+            "value": "never",
+            "description": "Approval is never required."
+          },
+          {
+            "name": "Always",
+            "value": "always",
+            "description": "Approval is always required."
+          }
+        ]
+      }
+    },
+    "MCPServer": {
+      "type": "object",
+      "description": "The definition of an MCP server as used by the voicelive endpoint.",
+      "properties": {
+        "server_label": {
+          "type": "string"
+        },
+        "server_url": {
+          "type": "string"
+        },
+        "authorization": {
+          "type": "string"
+        },
+        "headers": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "allowed_tools": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "require_approval": {}
+      },
+      "required": [
+        "server_label",
+        "server_url"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Tool"
+        }
+      ],
+      "x-ms-discriminator-value": "mcp"
+    },
+    "MCPTool": {
+      "type": "object",
+      "description": "Represents a mcp tool definition.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the tool."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the tool."
+        },
+        "input_schema": {
+          "description": "The input schema for the tool."
+        },
+        "annotations": {
+          "description": "The annotations for the tool."
+        }
+      },
+      "required": [
+        "name",
+        "input_schema"
       ]
     },
     "MessageContentPart": {
@@ -1739,7 +2312,9 @@
         "echo",
         "sage",
         "shimmer",
-        "verse"
+        "verse",
+        "marin",
+        "cedar"
       ],
       "x-ms-enum": {
         "name": "OAIVoice",
@@ -1784,6 +2359,16 @@
             "name": "verse",
             "value": "verse",
             "description": "Verse voice."
+          },
+          {
+            "name": "marin",
+            "value": "marin",
+            "description": "Marin voice."
+          },
+          {
+            "name": "cedar",
+            "value": "cedar",
+            "description": "Cedar voice."
           }
         ]
       }
@@ -1817,6 +2402,8 @@
       "description": "Output audio format types supported.",
       "enum": [
         "pcm16",
+        "pcm16_8000hz",
+        "pcm16_16000hz",
         "g711_ulaw",
         "g711_alaw"
       ],
@@ -1828,6 +2415,16 @@
             "name": "pcm16",
             "value": "pcm16",
             "description": "16-bit PCM audio format at default sampling rate (24kHz)"
+          },
+          {
+            "name": "pcm16_8000hz",
+            "value": "pcm16_8000hz",
+            "description": "16-bit PCM audio format at 8kHz sampling rate"
+          },
+          {
+            "name": "pcm16_16000hz",
+            "value": "pcm16_16000hz",
+            "description": "16-bit PCM audio format at 16kHz sampling rate"
           },
           {
             "name": "g711_ulaw",
@@ -1874,6 +2471,11 @@
           "type": "integer",
           "format": "int32",
           "description": "Number of audio tokens generated in the output."
+        },
+        "reasoning_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of reasoning tokens generated in the output."
         }
       },
       "required": [
@@ -1887,7 +2489,9 @@
       "enum": [
         "DragonLatestNeural",
         "PhoenixLatestNeural",
-        "PhoenixV2Neural"
+        "PhoenixV2Neural",
+        "DragonHDOmniLatestNeural",
+        "MAI-Voice-1"
       ],
       "x-ms-enum": {
         "name": "PersonalVoiceModels",
@@ -1907,6 +2511,82 @@
             "name": "PhoenixV2Neural",
             "value": "PhoenixV2Neural",
             "description": "Use the Phoenix V2 model."
+          },
+          {
+            "name": "DragonHDOmniLatestNeural",
+            "value": "DragonHDOmniLatestNeural",
+            "description": "Use the latest Dragon HD Omni model."
+          },
+          {
+            "name": "MAI-Voice-1",
+            "value": "MAI-Voice-1",
+            "description": "Use the MAI-Voice-1 model."
+          }
+        ]
+      }
+    },
+    "PhotoAvatarBaseModes": {
+      "type": "string",
+      "description": "Photo avatar base modes",
+      "enum": [
+        "vasa-1"
+      ],
+      "x-ms-enum": {
+        "name": "PhotoAvatarBaseModes",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "vasa-1",
+            "value": "vasa-1",
+            "description": "VASA-1 model"
+          }
+        ]
+      }
+    },
+    "ReasoningEffort": {
+      "type": "string",
+      "description": "Constrains effort on reasoning for reasoning models. Check model documentation for supported values for each model.\nReducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.",
+      "enum": [
+        "none",
+        "minimal",
+        "low",
+        "medium",
+        "high",
+        "xhigh"
+      ],
+      "x-ms-enum": {
+        "name": "ReasoningEffort",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "none",
+            "value": "none",
+            "description": "No reasoning effort."
+          },
+          {
+            "name": "minimal",
+            "value": "minimal",
+            "description": "Minimal reasoning effort."
+          },
+          {
+            "name": "low",
+            "value": "low",
+            "description": "Low reasoning effort - faster responses with less reasoning."
+          },
+          {
+            "name": "medium",
+            "value": "medium",
+            "description": "Medium reasoning effort - balanced between speed and reasoning depth."
+          },
+          {
+            "name": "high",
+            "value": "high",
+            "description": "High reasoning effort - more thorough reasoning, may take longer."
+          },
+          {
+            "name": "xhigh",
+            "value": "xhigh",
+            "description": "Extra high reasoning effort - maximum reasoning depth."
           }
         ]
       }
@@ -1933,6 +2613,54 @@
         }
       ],
       "x-ms-discriminator-value": "input_audio"
+    },
+    "RequestImageContentPart": {
+      "type": "object",
+      "description": "Input image content part.",
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "detail": {
+          "$ref": "#/definitions/RequestImageContentPartDetail"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContentPart"
+        }
+      ],
+      "x-ms-discriminator-value": "input_image"
+    },
+    "RequestImageContentPartDetail": {
+      "type": "string",
+      "description": "Specifies an image's detail level. Can be 'auto', 'low', 'high', or an unknown future value.",
+      "enum": [
+        "auto",
+        "low",
+        "high"
+      ],
+      "x-ms-enum": {
+        "name": "RequestImageContentPartDetail",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "auto",
+            "value": "auto",
+            "description": "Automatically select an appropriate detail level."
+          },
+          {
+            "name": "low",
+            "value": "low",
+            "description": "Use a lower detail level to reduce bandwidth or cost."
+          },
+          {
+            "name": "high",
+            "value": "high",
+            "description": "Use a higher detail level—potentially more resource-intensive."
+          }
+        ]
+      }
     },
     "RequestSession": {
       "type": "object",
@@ -2004,6 +2732,8 @@
           "default": "pcm16",
           "enum": [
             "pcm16",
+            "pcm16_8000hz",
+            "pcm16_16000hz",
             "g711_ulaw",
             "g711_alaw"
           ],
@@ -2015,6 +2745,16 @@
                 "name": "pcm16",
                 "value": "pcm16",
                 "description": "16-bit PCM audio format at default sampling rate (24kHz)"
+              },
+              {
+                "name": "pcm16_8000hz",
+                "value": "pcm16_8000hz",
+                "description": "16-bit PCM audio format at 8kHz sampling rate"
+              },
+              {
+                "name": "pcm16_16000hz",
+                "value": "pcm16_16000hz",
+                "description": "16-bit PCM audio format at 16kHz sampling rate"
               },
               {
                 "name": "g711_ulaw",
@@ -2074,6 +2814,28 @@
         },
         "max_response_output_tokens": {
           "description": "Maximum number of tokens to generate in the response. Default is unlimited."
+        },
+        "reasoning_effort": {
+          "$ref": "#/definitions/ReasoningEffort",
+          "description": "Constrains effort on reasoning for reasoning models. Check model documentation for supported values for each model.\nReducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+        },
+        "interim_response": {
+          "$ref": "#/definitions/InterimResponseConfig",
+          "description": "Configuration for interim response generation during latency or tool calls."
+        },
+        "include": {
+          "type": "array",
+          "description": "List of include options for the session (e.g., logprobs, phrases, file search results).",
+          "items": {
+            "$ref": "#/definitions/SessionIncludeOption"
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Set of up to 16 key-value pairs that can be attached to the session. This is useful for\nstoring additional information about the session in a structured format, such as tracking IDs,\nuser context, or application-specific labels. These key-value pairs are also included in\nFoundry resource logs for tracing and diagnostics. Keys can be a maximum of 64 characters\nlong and values can be a maximum of 512 characters long.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -2150,6 +2912,8 @@
           "default": "pcm16",
           "enum": [
             "pcm16",
+            "pcm16_8000hz",
+            "pcm16_16000hz",
             "g711_ulaw",
             "g711_alaw"
           ],
@@ -2161,6 +2925,16 @@
                 "name": "pcm16",
                 "value": "pcm16",
                 "description": "16-bit PCM audio format at default sampling rate (24kHz)"
+              },
+              {
+                "name": "pcm16_8000hz",
+                "value": "pcm16_8000hz",
+                "description": "16-bit PCM audio format at 8kHz sampling rate"
+              },
+              {
+                "name": "pcm16_16000hz",
+                "value": "pcm16_16000hz",
+                "description": "16-bit PCM audio format at 16kHz sampling rate"
               },
               {
                 "name": "g711_ulaw",
@@ -2281,6 +3055,8 @@
           "default": "pcm16",
           "enum": [
             "pcm16",
+            "pcm16_8000hz",
+            "pcm16_16000hz",
             "g711_ulaw",
             "g711_alaw"
           ],
@@ -2292,6 +3068,16 @@
                 "name": "pcm16",
                 "value": "pcm16",
                 "description": "16-bit PCM audio format at default sampling rate (24kHz)"
+              },
+              {
+                "name": "pcm16_8000hz",
+                "value": "pcm16_8000hz",
+                "description": "16-bit PCM audio format at 8kHz sampling rate"
+              },
+              {
+                "name": "pcm16_16000hz",
+                "value": "pcm16_16000hz",
+                "description": "16-bit PCM audio format at 16kHz sampling rate"
               },
               {
                 "name": "g711_ulaw",
@@ -2329,12 +3115,20 @@
           "$ref": "#/definitions/AssistantMessageItem",
           "description": "Create the response with pre-generated assistant message. The message item would be\nadded into the conversation history and returned with synthesized audio output in the created response."
         },
+        "reasoning_effort": {
+          "$ref": "#/definitions/ReasoningEffort",
+          "description": "Constrains effort on reasoning for reasoning models. Check model documentation for supported values for each model.\nReducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+        },
         "metadata": {
           "type": "object",
           "description": "Set of up to 16 key-value pairs that can be attached to an object.\nThis can be useful for storing additional information about the object in a structured format.\nKeys can be a maximum of 64 characters long and values can be a maximum of 512 characters long.",
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "interim_response": {
+          "$ref": "#/definitions/InterimResponseConfig",
+          "description": "Configuration for interim response generation during latency or tool calls."
         }
       }
     },
@@ -2353,6 +3147,53 @@
         }
       ],
       "x-ms-discriminator-value": "failed"
+    },
+    "ResponseFileSearchCallItem": {
+      "type": "object",
+      "description": "A response item that represents a file search call.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique ID of the file search tool call."
+        },
+        "queries": {
+          "type": "array",
+          "description": "The queries used for the file search.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the file search tool call.",
+          "enum": [
+            "in_progress",
+            "searching",
+            "completed",
+            "incomplete",
+            "failed"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        },
+        "results": {
+          "type": "array",
+          "description": "The results of the file search.",
+          "items": {
+            "$ref": "#/definitions/FileSearchResult"
+          }
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResponseItem"
+        }
+      ],
+      "x-ms-discriminator-value": "file_search_call"
     },
     "ResponseFunctionCallItem": {
       "type": "object",
@@ -2486,6 +3327,129 @@
         ]
       }
     },
+    "ResponseMCPApprovalRequestItem": {
+      "type": "object",
+      "description": "A response item that represents a request for approval to call an MCP tool.",
+      "properties": {
+        "arguments": {
+          "type": "string",
+          "description": "The arguments for the tool call."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the tool to call."
+        },
+        "server_label": {
+          "type": "string",
+          "description": "The label of the server that provides the tool."
+        }
+      },
+      "required": [
+        "name",
+        "server_label"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResponseItem"
+        }
+      ],
+      "x-ms-discriminator-value": "mcp_approval_request"
+    },
+    "ResponseMCPApprovalResponseItem": {
+      "type": "object",
+      "description": "A response item that represents a response to an MCP approval request.",
+      "properties": {
+        "approval_request_id": {
+          "type": "string",
+          "description": "The ID of the approval request."
+        },
+        "approve": {
+          "type": "boolean",
+          "description": "Whether the tool call was approved."
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for the approval decision."
+        }
+      },
+      "required": [
+        "approval_request_id",
+        "approve"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResponseItem"
+        }
+      ],
+      "x-ms-discriminator-value": "mcp_approval_response"
+    },
+    "ResponseMCPCallItem": {
+      "type": "object",
+      "description": "A response item that represents a call to an MCP tool.",
+      "properties": {
+        "approval_request_id": {
+          "type": "string",
+          "description": "The ID of the approval request, if any."
+        },
+        "arguments": {
+          "type": "string",
+          "description": "The arguments for the tool call."
+        },
+        "server_label": {
+          "type": "string",
+          "description": "The label of the server that provides the tool."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the tool to call."
+        },
+        "output": {
+          "type": "string",
+          "description": "The output of the tool call."
+        },
+        "error": {
+          "description": "The error, if any, from the tool call."
+        }
+      },
+      "required": [
+        "arguments",
+        "server_label",
+        "name"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResponseItem"
+        }
+      ],
+      "x-ms-discriminator-value": "mcp_call"
+    },
+    "ResponseMCPListToolItem": {
+      "type": "object",
+      "description": "A response item that lists the tools available on an MCP server.",
+      "properties": {
+        "tools": {
+          "type": "array",
+          "description": "The tools available on the server.",
+          "items": {
+            "$ref": "#/definitions/MCPTool"
+          }
+        },
+        "server_label": {
+          "type": "string",
+          "description": "The label of the server that provides the tools."
+        }
+      },
+      "required": [
+        "tools",
+        "server_label"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResponseItem"
+        }
+      ],
+      "x-ms-discriminator-value": "mcp_list_tools"
+    },
     "ResponseMessageItem": {
       "type": "object",
       "description": "Base type for message item within a conversation.",
@@ -2585,6 +3549,8 @@
           "default": "pcm16",
           "enum": [
             "pcm16",
+            "pcm16_8000hz",
+            "pcm16_16000hz",
             "g711_ulaw",
             "g711_alaw"
           ],
@@ -2596,6 +3562,16 @@
                 "name": "pcm16",
                 "value": "pcm16",
                 "description": "16-bit PCM audio format at default sampling rate (24kHz)"
+              },
+              {
+                "name": "pcm16_8000hz",
+                "value": "pcm16_8000hz",
+                "description": "16-bit PCM audio format at 8kHz sampling rate"
+              },
+              {
+                "name": "pcm16_16000hz",
+                "value": "pcm16_16000hz",
+                "description": "16-bit PCM audio format at 16kHz sampling rate"
               },
               {
                 "name": "g711_ulaw",
@@ -2655,6 +3631,28 @@
         },
         "max_response_output_tokens": {
           "description": "Maximum number of tokens to generate in the response. Default is unlimited."
+        },
+        "reasoning_effort": {
+          "$ref": "#/definitions/ReasoningEffort",
+          "description": "Constrains effort on reasoning for reasoning models. Check model documentation for supported values for each model.\nReducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+        },
+        "interim_response": {
+          "$ref": "#/definitions/InterimResponseConfig",
+          "description": "Configuration for interim response generation during latency or tool calls."
+        },
+        "include": {
+          "type": "array",
+          "description": "List of include options for the session (e.g., logprobs, phrases, file search results).",
+          "items": {
+            "$ref": "#/definitions/SessionIncludeOption"
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Set of up to 16 key-value pairs that can be attached to the session. This is useful for\nstoring additional information about the session in a structured format, such as tracking IDs,\nuser context, or application-specific labels. These key-value pairs are also included in\nFoundry resource logs for tracing and diagnostics. Keys can be a maximum of 64 characters\nlong and values can be a maximum of 512 characters long.",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "agent": {
           "$ref": "#/definitions/AgentConfig",
@@ -2731,6 +3729,86 @@
       ],
       "x-ms-discriminator-value": "text"
     },
+    "ResponseWebSearchCallItem": {
+      "type": "object",
+      "description": "A response item that represents a web search call.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique ID of the web search tool call."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the web search tool call.",
+          "enum": [
+            "in_progress",
+            "searching",
+            "completed",
+            "failed"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResponseItem"
+        }
+      ],
+      "x-ms-discriminator-value": "web_search_call"
+    },
+    "Scene": {
+      "type": "object",
+      "description": "Configuration for avatar's zoom level, position, rotation and movement amplitude in the video frame.",
+      "properties": {
+        "zoom": {
+          "type": "number",
+          "format": "float",
+          "description": "Zoom level of the avatar. Range is (0, +∞). Values less than 1 zoom out, values greater than 1 zoom in.",
+          "default": 0
+        },
+        "position_x": {
+          "type": "number",
+          "format": "float",
+          "description": "Horizontal position of the avatar. Range is [-1, 1], as a proportion of frame width. Negative values move left, positive values move right.",
+          "default": 0
+        },
+        "position_y": {
+          "type": "number",
+          "format": "float",
+          "description": "Vertical position of the avatar. Range is [-1, 1], as a proportion of frame height. Negative values move up, positive values move down.",
+          "default": 0
+        },
+        "rotation_x": {
+          "type": "number",
+          "format": "float",
+          "description": "Rotation around the X-axis (pitch). Range is [-π, π] in radians. Negative values rotate up, positive values rotate down.",
+          "default": 0
+        },
+        "rotation_y": {
+          "type": "number",
+          "format": "float",
+          "description": "Rotation around the Y-axis (yaw). Range is [-π, π] in radians. Negative values rotate left, positive values rotate right.",
+          "default": 0
+        },
+        "rotation_z": {
+          "type": "number",
+          "format": "float",
+          "description": "Rotation around the Z-axis (roll). Range is [-π, π] in radians. Negative values rotate anticlockwise, positive values rotate clockwise.",
+          "default": 0
+        },
+        "amplitude": {
+          "type": "number",
+          "format": "float",
+          "description": "Amplitude of the avatar movement. Range is (0, 1]. Values in (0, 1) mean reduced amplitude, 1 means full amplitude.",
+          "default": 0
+        }
+      }
+    },
     "ServerEvent": {
       "type": "object",
       "description": "A voicelive server event.",
@@ -2802,6 +3880,20 @@
         "transcript": {
           "type": "string",
           "description": "The transcribed text."
+        },
+        "logprobs": {
+          "type": "array",
+          "description": "The log probabilities of the transcription tokens.",
+          "items": {
+            "$ref": "#/definitions/LogProbProperties"
+          }
+        },
+        "phrases": {
+          "type": "array",
+          "description": "The transcription phrases with timing information.",
+          "items": {
+            "$ref": "#/definitions/TranscriptionPhrase"
+          }
         }
       },
       "required": [
@@ -3061,6 +4153,73 @@
         }
       ],
       "x-ms-discriminator-value": "input_audio_buffer.speech_stopped"
+    },
+    "ServerEventMcpListToolsCompleted": {
+      "type": "object",
+      "description": "MCP list tools completed message.",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "description": "The item ID."
+        }
+      },
+      "required": [
+        "item_id"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "mcp_list_tools.completed"
+    },
+    "ServerEventMcpListToolsFailed": {
+      "type": "object",
+      "description": "MCP list tools failed message.",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "description": "The item ID."
+        }
+      },
+      "required": [
+        "item_id"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "mcp_list_tools.failed"
+    },
+    "ServerEventMcpListToolsInProgress": {
+      "type": "object",
+      "description": "MCP list tools in progress message.",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "description": "The item ID."
+        }
+      },
+      "required": [
+        "item_id"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "mcp_list_tools.in_progress"
+    },
+    "ServerEventOutputAudioBufferCleared": {
+      "type": "object",
+      "description": "Returned when the output audio buffer has been cleared.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "output_audio_buffer.cleared"
     },
     "ServerEventResponseAnimationBlendshapeDelta": {
       "type": "object",
@@ -3368,6 +4527,52 @@
       ],
       "x-ms-discriminator-value": "response.audio_timestamp.done"
     },
+    "ServerEventResponseAudioTranscriptAnnotationAdded": {
+      "type": "object",
+      "description": "Returned when an audio transcript annotation is added to a response.",
+      "properties": {
+        "response_id": {
+          "type": "string",
+          "description": "The ID of the response."
+        },
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output item in the response."
+        },
+        "content_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the content part in the item's content array."
+        },
+        "annotation_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the annotation."
+        },
+        "annotation": {
+          "description": "The annotation object."
+        }
+      },
+      "required": [
+        "response_id",
+        "item_id",
+        "output_index",
+        "content_index",
+        "annotation_index",
+        "annotation"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.audio_transcript.annotation.added"
+    },
     "ServerEventResponseAudioTranscriptDelta": {
       "type": "object",
       "description": "Returned when the model-generated transcription of audio output is updated.",
@@ -3568,6 +4773,114 @@
       ],
       "x-ms-discriminator-value": "response.done"
     },
+    "ServerEventResponseFileSearchCallCompleted": {
+      "type": "object",
+      "description": "Returned when a file search call has completed.",
+      "properties": {
+        "response_id": {
+          "type": "string",
+          "description": "The ID of the response."
+        },
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output item in the response."
+        },
+        "sequence_number": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The sequence number of the file search call."
+        }
+      },
+      "required": [
+        "response_id",
+        "item_id",
+        "output_index",
+        "sequence_number"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.file_search_call.completed"
+    },
+    "ServerEventResponseFileSearchCallInProgress": {
+      "type": "object",
+      "description": "Returned when a file search call is in progress.",
+      "properties": {
+        "response_id": {
+          "type": "string",
+          "description": "The ID of the response."
+        },
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output item in the response."
+        },
+        "sequence_number": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The sequence number of the file search call."
+        }
+      },
+      "required": [
+        "response_id",
+        "item_id",
+        "output_index",
+        "sequence_number"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.file_search_call.in_progress"
+    },
+    "ServerEventResponseFileSearchCallSearching": {
+      "type": "object",
+      "description": "Returned when a file search call is searching.",
+      "properties": {
+        "response_id": {
+          "type": "string",
+          "description": "The ID of the response."
+        },
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output item in the response."
+        },
+        "sequence_number": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The sequence number of the file search call."
+        }
+      },
+      "required": [
+        "response_id",
+        "item_id",
+        "output_index",
+        "sequence_number"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.file_search_call.searching"
+    },
     "ServerEventResponseFunctionCallArgumentsDelta": {
       "type": "object",
       "description": "Returned when the model-generated function call arguments are updated.",
@@ -3652,6 +4965,154 @@
         }
       ],
       "x-ms-discriminator-value": "response.function_call_arguments.done"
+    },
+    "ServerEventResponseMcpCallArgumentsDelta": {
+      "type": "object",
+      "description": "Represents a delta update of the arguments for an MCP tool call.",
+      "properties": {
+        "delta": {
+          "type": "string",
+          "description": "The delta of the arguments."
+        },
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item associated with the event."
+        },
+        "response_id": {
+          "type": "string",
+          "description": "The ID of the response associated with the event."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output associated with the event."
+        },
+        "obfuscation": {
+          "type": "string",
+          "description": "The obfuscation of the arguments."
+        }
+      },
+      "required": [
+        "delta",
+        "item_id",
+        "response_id",
+        "output_index"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.mcp_call_arguments.delta"
+    },
+    "ServerEventResponseMcpCallArgumentsDone": {
+      "type": "object",
+      "description": "Indicates the completion of the arguments for an MCP tool call.",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item associated with the event."
+        },
+        "response_id": {
+          "type": "string",
+          "description": "The ID of the response associated with the event."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output associated with the event."
+        },
+        "arguments": {
+          "type": "string",
+          "description": "The full arguments for the tool call."
+        }
+      },
+      "required": [
+        "item_id",
+        "response_id",
+        "output_index"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.mcp_call_arguments.done"
+    },
+    "ServerEventResponseMcpCallCompleted": {
+      "type": "object",
+      "description": "Indicates the MCP call has completed.",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item associated with the event."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output associated with the event."
+        }
+      },
+      "required": [
+        "item_id",
+        "output_index"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.mcp_call.completed"
+    },
+    "ServerEventResponseMcpCallFailed": {
+      "type": "object",
+      "description": "Indicates the MCP call has failed.",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item associated with the event."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output associated with the event."
+        }
+      },
+      "required": [
+        "item_id",
+        "output_index"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.mcp_call.failed"
+    },
+    "ServerEventResponseMcpCallInProgress": {
+      "type": "object",
+      "description": "Indicates the MCP call running.",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item associated with the event."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output associated with the event."
+        }
+      },
+      "required": [
+        "item_id",
+        "output_index"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.mcp_call.in_progress"
     },
     "ServerEventResponseOutputItemAdded": {
       "type": "object",
@@ -3791,6 +5252,144 @@
       ],
       "x-ms-discriminator-value": "response.text.done"
     },
+    "ServerEventResponseVideoDelta": {
+      "type": "object",
+      "description": "Returned when avatar video frame data is streamed.",
+      "properties": {
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output item in the response."
+        },
+        "codec": {
+          "type": "string",
+          "description": "The codec used for the video data."
+        },
+        "delta": {
+          "type": "string",
+          "description": "The base64-encoded video frame data."
+        }
+      },
+      "required": [
+        "output_index",
+        "codec",
+        "delta"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.video.delta"
+    },
+    "ServerEventResponseWebSearchCallCompleted": {
+      "type": "object",
+      "description": "Returned when a web search call has completed.",
+      "properties": {
+        "response_id": {
+          "type": "string",
+          "description": "The ID of the response."
+        },
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output item in the response."
+        },
+        "sequence_number": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The sequence number of the web search call."
+        }
+      },
+      "required": [
+        "response_id",
+        "item_id",
+        "output_index",
+        "sequence_number"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.web_search_call.completed"
+    },
+    "ServerEventResponseWebSearchCallInProgress": {
+      "type": "object",
+      "description": "Returned when a web search call is in progress.",
+      "properties": {
+        "response_id": {
+          "type": "string",
+          "description": "The ID of the response."
+        },
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output item in the response."
+        },
+        "sequence_number": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The sequence number of the web search call."
+        }
+      },
+      "required": [
+        "response_id",
+        "item_id",
+        "output_index",
+        "sequence_number"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.web_search_call.in_progress"
+    },
+    "ServerEventResponseWebSearchCallSearching": {
+      "type": "object",
+      "description": "Returned when a web search call is searching.",
+      "properties": {
+        "response_id": {
+          "type": "string",
+          "description": "The ID of the response."
+        },
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output item in the response."
+        },
+        "sequence_number": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The sequence number of the web search call."
+        }
+      },
+      "required": [
+        "response_id",
+        "item_id",
+        "output_index",
+        "sequence_number"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.web_search_call.searching"
+    },
     "ServerEventSessionAvatarConnecting": {
       "type": "object",
       "description": "Sent when the server is in the process of establishing an avatar media connection and provides its SDP answer.",
@@ -3809,6 +5408,38 @@
         }
       ],
       "x-ms-discriminator-value": "session.avatar.connecting"
+    },
+    "ServerEventSessionAvatarSwitchToIdle": {
+      "type": "object",
+      "description": "Returned when the avatar switches to idle state.",
+      "properties": {
+        "turn_id": {
+          "type": "string",
+          "description": "The ID of the turn associated with the avatar state change."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "session.avatar.switch_to_idle"
+    },
+    "ServerEventSessionAvatarSwitchToSpeaking": {
+      "type": "object",
+      "description": "Returned when the avatar switches to speaking state.",
+      "properties": {
+        "turn_id": {
+          "type": "string",
+          "description": "The ID of the turn associated with the avatar state change."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "session.avatar.switch_to_speaking"
     },
     "ServerEventSessionCreated": {
       "type": "object",
@@ -3851,6 +5482,7 @@
       "description": "Server event types used in VoiceLive protocol.",
       "enum": [
         "error",
+        "warning",
         "session.avatar.connecting",
         "session.created",
         "session.updated",
@@ -3884,7 +5516,26 @@
         "response.animation_viseme.delta",
         "response.animation_viseme.done",
         "response.function_call_arguments.delta",
-        "response.function_call_arguments.done"
+        "response.function_call_arguments.done",
+        "mcp_list_tools.in_progress",
+        "mcp_list_tools.completed",
+        "mcp_list_tools.failed",
+        "response.mcp_call_arguments.delta",
+        "response.mcp_call_arguments.done",
+        "response.mcp_call.in_progress",
+        "response.mcp_call.completed",
+        "response.mcp_call.failed",
+        "session.avatar.switch_to_speaking",
+        "session.avatar.switch_to_idle",
+        "response.video.delta",
+        "response.web_search_call.searching",
+        "response.web_search_call.in_progress",
+        "response.web_search_call.completed",
+        "response.file_search_call.searching",
+        "response.file_search_call.in_progress",
+        "response.file_search_call.completed",
+        "output_audio_buffer.cleared",
+        "response.audio_transcript.annotation.added"
       ],
       "x-ms-enum": {
         "name": "ServerEventType",
@@ -3893,6 +5544,10 @@
           {
             "name": "error",
             "value": "error"
+          },
+          {
+            "name": "warning",
+            "value": "warning"
           },
           {
             "name": "session_avatar_connecting",
@@ -4029,9 +5684,136 @@
           {
             "name": "response_function_call_arguments_done",
             "value": "response.function_call_arguments.done"
+          },
+          {
+            "name": "mcp_list_tools_in_progress",
+            "value": "mcp_list_tools.in_progress"
+          },
+          {
+            "name": "mcp_list_tools_completed",
+            "value": "mcp_list_tools.completed"
+          },
+          {
+            "name": "mcp_list_tools_failed",
+            "value": "mcp_list_tools.failed"
+          },
+          {
+            "name": "response_mcp_call_arguments_delta",
+            "value": "response.mcp_call_arguments.delta"
+          },
+          {
+            "name": "response_mcp_call_arguments_done",
+            "value": "response.mcp_call_arguments.done"
+          },
+          {
+            "name": "response_mcp_call_in_progress",
+            "value": "response.mcp_call.in_progress"
+          },
+          {
+            "name": "response_mcp_call_completed",
+            "value": "response.mcp_call.completed"
+          },
+          {
+            "name": "response_mcp_call_failed",
+            "value": "response.mcp_call.failed"
+          },
+          {
+            "name": "session_avatar_switch_to_speaking",
+            "value": "session.avatar.switch_to_speaking",
+            "description": "Avatar switches to speaking state."
+          },
+          {
+            "name": "session_avatar_switch_to_idle",
+            "value": "session.avatar.switch_to_idle",
+            "description": "Avatar switches to idle state."
+          },
+          {
+            "name": "response_video_delta",
+            "value": "response.video.delta",
+            "description": "Delta update for avatar video frames."
+          },
+          {
+            "name": "response_web_search_call_searching",
+            "value": "response.web_search_call.searching",
+            "description": "Web search call is searching."
+          },
+          {
+            "name": "response_web_search_call_in_progress",
+            "value": "response.web_search_call.in_progress",
+            "description": "Web search call is in progress."
+          },
+          {
+            "name": "response_web_search_call_completed",
+            "value": "response.web_search_call.completed",
+            "description": "Web search call completed."
+          },
+          {
+            "name": "response_file_search_call_searching",
+            "value": "response.file_search_call.searching",
+            "description": "File search call is searching."
+          },
+          {
+            "name": "response_file_search_call_in_progress",
+            "value": "response.file_search_call.in_progress",
+            "description": "File search call is in progress."
+          },
+          {
+            "name": "response_file_search_call_completed",
+            "value": "response.file_search_call.completed",
+            "description": "File search call completed."
+          },
+          {
+            "name": "output_audio_buffer_cleared",
+            "value": "output_audio_buffer.cleared",
+            "description": "Output audio buffer has been cleared."
+          },
+          {
+            "name": "response_audio_transcript_annotation_added",
+            "value": "response.audio_transcript.annotation.added",
+            "description": "Audio transcript annotation added."
           }
         ]
       }
+    },
+    "ServerEventWarning": {
+      "type": "object",
+      "description": "Returned when a warning occurs that does not interrupt the conversation flow.\nWarnings are informational and the session will continue normally.",
+      "properties": {
+        "warning": {
+          "$ref": "#/definitions/ServerEventWarningDetails",
+          "description": "Details of the warning."
+        }
+      },
+      "required": [
+        "warning"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "warning"
+    },
+    "ServerEventWarningDetails": {
+      "type": "object",
+      "description": "Details of the warning.",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "A human-readable warning message."
+        },
+        "code": {
+          "type": "string",
+          "description": "Warning code, if any."
+        },
+        "param": {
+          "type": "string",
+          "description": "Parameter related to the warning, if any."
+        }
+      },
+      "required": [
+        "message"
+      ]
     },
     "ServerVad": {
       "type": "object",
@@ -4084,6 +5866,55 @@
     "SessionBase": {
       "type": "object",
       "description": "VoiceLive session object configuration."
+    },
+    "SessionIncludeOption": {
+      "type": "string",
+      "description": "Options for what additional data to include in session responses.",
+      "enum": [
+        "item.input_audio_transcription.logprobs",
+        "item.input_audio_transcription.phrases",
+        "file_search_call.results"
+      ],
+      "x-ms-enum": {
+        "name": "SessionIncludeOption",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "item_input_audio_transcription_logprobs",
+            "value": "item.input_audio_transcription.logprobs",
+            "description": "Include log probabilities for input audio transcription."
+          },
+          {
+            "name": "item_input_audio_transcription_phrases",
+            "value": "item.input_audio_transcription.phrases",
+            "description": "Include phrase-level details for input audio transcription."
+          },
+          {
+            "name": "file_search_call_results",
+            "value": "file_search_call.results",
+            "description": "Include file search call results."
+          }
+        ]
+      }
+    },
+    "StaticInterimResponseConfig": {
+      "type": "object",
+      "description": "Configuration for static interim response generation.\nRandomly selects from configured texts when any trigger condition is met.",
+      "properties": {
+        "texts": {
+          "type": "array",
+          "description": "List of interim response text options to randomly select from.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/InterimResponseConfigBase"
+        }
+      ],
+      "x-ms-discriminator-value": "static_interim_response"
     },
     "SystemMessageItem": {
       "type": "object",
@@ -4210,7 +6041,8 @@
       "type": "string",
       "description": "The supported tool type discriminators for voicelive tools.\nCurrently, only 'function' tools are supported.",
       "enum": [
-        "function"
+        "function",
+        "mcp"
       ],
       "x-ms-enum": {
         "name": "ToolType",
@@ -4219,9 +6051,79 @@
           {
             "name": "function",
             "value": "function"
+          },
+          {
+            "name": "mcp",
+            "value": "mcp"
           }
         ]
       }
+    },
+    "TranscriptionPhrase": {
+      "type": "object",
+      "description": "A transcribed phrase with timing information.",
+      "properties": {
+        "offset_milliseconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Offset from the start of the audio in milliseconds."
+        },
+        "duration_milliseconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Duration of the phrase in milliseconds."
+        },
+        "text": {
+          "type": "string",
+          "description": "The transcribed text of the phrase."
+        },
+        "words": {
+          "type": "array",
+          "description": "The individual words in the phrase with timing information.",
+          "items": {
+            "$ref": "#/definitions/TranscriptionWord"
+          }
+        },
+        "locale": {
+          "type": "string",
+          "description": "The locale of the transcription (e.g., 'en-US')."
+        },
+        "confidence": {
+          "type": "number",
+          "format": "float",
+          "description": "The confidence score of the transcription."
+        }
+      },
+      "required": [
+        "offset_milliseconds",
+        "duration_milliseconds",
+        "text"
+      ]
+    },
+    "TranscriptionWord": {
+      "type": "object",
+      "description": "A time-stamped word in the transcription.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The transcribed word text."
+        },
+        "offset_milliseconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Offset from the start of the audio in milliseconds."
+        },
+        "duration_milliseconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Duration of the word in milliseconds."
+        }
+      },
+      "required": [
+        "text",
+        "offset_milliseconds",
+        "duration_milliseconds"
+      ]
     },
     "TurnDetection": {
       "type": "object",
