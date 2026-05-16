@@ -15,14 +15,29 @@ const RoutineRequiredPreviews = #{
 union RoutineTriggerType {
   string,
 
-  @doc("A GitHub issue-opened trigger.")
-  github_issue_opened: "github_issue_opened",
+  @doc("A custom routine trigger.")
+  custom: "custom",
+
+  @doc("A GitHub issue trigger.")
+  github_issue: "github_issue",
 
   @doc("A recurring cron-based trigger.")
   schedule: "schedule",
 
   @doc("A one-shot timer trigger.")
   timer: "timer",
+}
+
+@doc("The GitHub issue events supported for routine triggers.")
+@extension("x-ms-foundry-meta", RoutineRequiredPreviews)
+union GitHubIssueEvent {
+  string,
+
+  @doc("Fires when an issue is opened.")
+  opened: "opened",
+
+  @doc("Fires when an issue is closed.")
+  closed: "closed",
 }
 
 @doc("The discriminator values supported for routine actions.")
@@ -124,23 +139,44 @@ model TimerRoutineTrigger extends RoutineTrigger {
   time_zone?: string;
 }
 
-@doc("A GitHub issue-opened routine trigger.")
+@doc("A GitHub issue routine trigger.")
 @extension("x-ms-foundry-meta", RoutineRequiredPreviews)
-model GitHubIssueOpenedRoutineTrigger extends RoutineTrigger {
+model GitHubIssueRoutineTrigger extends RoutineTrigger {
   @doc("The trigger type.")
-  type: RoutineTriggerType.github_issue_opened;
+  type: RoutineTriggerType.github_issue;
 
   @doc("The workspace connection identifier that resolves the GitHub configuration for the trigger.")
   @maxLength(256)
   connection_id: string;
 
-  @doc("The GitHub assignee or organization filter that scopes which issues can fire the trigger.")
+  @doc("The GitHub owner or organization that scopes which issues can fire the trigger.")
   @maxLength(128)
-  assignee: string;
+  owner: string;
 
   @doc("The GitHub repository filter that scopes which issues can fire the trigger.")
   @maxLength(128)
   repository: string;
+
+  @doc("The GitHub issue event that can fire the trigger.")
+  issue_event: GitHubIssueEvent;
+}
+
+@doc("A custom routine trigger.")
+@extension("x-ms-foundry-meta", RoutineRequiredPreviews)
+model CustomRoutineTrigger extends RoutineTrigger {
+  @doc("The trigger type.")
+  type: RoutineTriggerType.custom;
+
+  @doc("The provider or source identifier for the custom trigger.")
+  @maxLength(128)
+  provider: string;
+
+  @doc("An optional provider-specific event name for the custom trigger.")
+  @maxLength(128)
+  event_name?: string;
+
+  @doc("Provider-specific parameters for the custom trigger.")
+  parameters: Record<unknown>;
 }
 
 @doc("Base model for a routine action.")
