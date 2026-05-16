@@ -415,6 +415,39 @@ namespace Microsoft.Authorization {
   "!csharp"
 );
 
+// TODO: Temporary C# workaround for mgmt resource-detection duplicate method
+// names. Remove these scopes after the generator disambiguates the list-all
+// policy definition version and policy set definition version operations.
+@@scope(
+  Microsoft.Authorization.PolicyDefinitionVersionsOperationGroup.listAllBuiltins,
+  "!csharp"
+);
+@@scope(
+  Microsoft.Authorization.PolicyDefinitionVersionsOperationGroup.listAllAtManagementGroup,
+  "!csharp"
+);
+@@scope(
+  Microsoft.Authorization.PolicyDefinitionVersionsOperationGroup.listAll,
+  "!csharp"
+);
+@@scope(
+  Microsoft.Authorization.PolicySetDefinitionVersionsOperationGroup.listAllBuiltins,
+  "!csharp"
+);
+@@scope(
+  Microsoft.Authorization.PolicySetDefinitionVersionsOperationGroup.listAllAtManagementGroup,
+  "!csharp"
+);
+@@scope(
+  Microsoft.Authorization.PolicySetDefinitionVersionsOperationGroup.listAll,
+  "!csharp"
+);
+
+// TODO: Temporary C# workaround for mgmt resource-detection duplicate method
+// names. Remove this scope after the generator disambiguates the resource-level
+// policy enrollment and policy exemption list operations.
+@@scope(Microsoft.Authorization.PolicyEnrollments.listForResource, "!csharp");
+
 @@scope(Microsoft.Authorization.Variables.getAtManagementGroup, "!csharp");
 @@scope(
   Microsoft.Authorization.Variables.createOrUpdateAtManagementGroup,
