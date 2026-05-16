@@ -86,36 +86,37 @@ model SkillObject {
   @maxLength(1024)
   description?: string;
 
-  @doc("The version identifier that the skill currently points to. Defaults to the latest version. Can be changed via updateSkillDefaultVersion.")
+  @doc("The Unix timestamp (seconds) when the skill was created.")
+  @encode("unixTimestamp", int32)
+  created_at?: utcDateTime;
+
+  @doc("The default version for the skill. Can be changed via updateSkillDefaultVersion.")
   default_version?: string;
+
+  @doc("The latest version for the skill.")
+  latest_version?: string;
 
   ...MetadataPropertyForRequest;
 }
 
 @doc("A specific version of a skill.")
 model SkillVersionObject {
-  ...MetadataPropertyForResponse;
-
   @doc("The unique identifier of the skill version.")
   id: string;
 
-  @doc("The name of the skill.")
+  @doc("The identifier of the skill for this version.")
+  skill_id: string;
+
+  @doc("The name of the skill version.")
   @maxLength(63)
   name: string;
 
-  @doc("The version identifier of the skill. Skill versions are immutable and every update creates a new version.")
+  @doc("The version number for this skill. Skill versions are immutable and every update creates a new version.")
   version: string;
 
-  @doc("A human-readable description of the skill.")
+  @doc("A human-readable description of the skill version.")
   @maxLength(1024)
   description?: string;
-
-  @doc("Instructions that define the behavior of the skill.")
-  @maxLength(102400)
-  instructions?: string;
-
-  @doc("Whether the skill version was created from a zip blob package.")
-  has_blob: boolean;
 
   @doc("The Unix timestamp (seconds) when the skill version was created.")
   @encode("unixTimestamp", int32)
@@ -128,30 +129,14 @@ alias CreateSkillVersionRequest = {
   @maxLength(63)
   name: string;
 
-  @doc("A human-readable description of the skill.")
+  @doc("A human-readable description of the skill version.")
   @maxLength(1024)
   description?: string;
 
-  @doc("Instructions that define the behavior of the skill.")
-  @maxLength(102400)
-  instructions?: string;
+  @doc("Whether to set this version as the default.")
+  default?: boolean;
 
   ...MetadataPropertyForRequest;
-};
-
-alias CreateSkillVersionFromPackageRequest = {
-  @doc("The name of the skill. If the skill does not exist, it will be created.")
-  @path
-  @maxLength(63)
-  name: string;
-
-  @doc("The content type of the incoming skill package payload.")
-  @header("Content-Type")
-  content_type: "application/zip";
-
-  @doc("The zip package used to create the skill version.")
-  @body
-  content: bytes;
 };
 
 alias GetSkillVersionRequest = {
@@ -172,12 +157,18 @@ alias ListSkillVersionsRequest = {
   ...CommonPageQueryParameters;
 };
 
-alias DownloadSkillVersionRequest = {
+alias GetSkillContentRequest = {
+  @doc("The name of the skill.")
+  @path
+  name: string;
+};
+
+alias GetSkillVersionContentRequest = {
   @doc("The name of the skill.")
   @path
   name: string;
 
-  @doc("The version identifier to download.")
+  @doc("The version to download content for.")
   @path
   version: string;
 };

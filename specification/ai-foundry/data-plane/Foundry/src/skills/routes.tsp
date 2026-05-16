@@ -110,19 +110,6 @@ interface Skills {
   >;
 
   /**
-   * Creates a new version of a skill from a zip package. If the skill does not exist, it will be created.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
-  @operationId("createSkillVersionFromPackage")
-  @post
-  @route("/skills/{name}/versions:import")
-  @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
-  createSkillVersionFromPackage is FoundryDataPlaneOperation<
-    CreateSkillVersionFromPackageRequest & SkillsPreviewHeader,
-    SkillVersionObject
-  >;
-
-  /**
    * List all versions of a skill.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
@@ -150,15 +137,28 @@ interface Skills {
   >;
 
   /**
-   * Downloads the zip package for a specific version of a skill.
+   * Download the zip content for the default version of a skill.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
-  @operationId("downloadSkillVersion")
+  @operationId("getSkillContent")
   @get
-  @route("/skills/{name}/versions/{version}:download")
+  @route("/skills/{name}/content")
   @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
-  downloadSkillVersion is FoundryDataPlaneOperation<
-    DownloadSkillVersionRequest & SkillsPreviewHeader,
+  getSkillContent is FoundryDataPlaneOperation<
+    GetSkillContentRequest & SkillsPreviewHeader,
+    DownloadSkillResponse
+  >;
+
+  /**
+   * Download the zip content for a specific version of a skill.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+  @operationId("getSkillVersionContent")
+  @get
+  @route("/skills/{name}/versions/{version}/content")
+  @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
+  getSkillVersionContent is FoundryDataPlaneOperation<
+    GetSkillVersionContentRequest & SkillsPreviewHeader,
     DownloadSkillResponse
   >;
 
