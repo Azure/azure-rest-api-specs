@@ -10740,6 +10740,14 @@ components:
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
+        tool_configs:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
         base_url:
           type: string
           format: uri
@@ -12228,6 +12236,14 @@ components:
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
+        tool_configs:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
         azure_ai_search:
           allOf:
             - $ref: '#/components/schemas/AzureAISearchToolResource'
@@ -12644,6 +12660,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/AzureFunctionDefinition'
           description: The Azure Function Tool definition.
+        tool_configs:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: The input definition information for an Azure Function Tool, as used to configure an Agent.
@@ -12784,6 +12808,14 @@ components:
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
+        tool_configs:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
         bing_custom_search_preview:
           allOf:
             - $ref: '#/components/schemas/BingCustomSearchToolParameters'
@@ -12908,6 +12940,14 @@ components:
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
+        tool_configs:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
         bing_grounding:
           allOf:
             - $ref: '#/components/schemas/BingGroundingSearchToolParameters'
@@ -13029,6 +13069,14 @@ components:
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
+        tool_configs:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
         browser_automation_preview:
           allOf:
             - $ref: '#/components/schemas/BrowserAutomationToolParameters'
@@ -13158,6 +13206,14 @@ components:
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
+        tool_configs:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
         outputs:
           allOf:
             - $ref: '#/components/schemas/StructuredOutputDefinition'
@@ -16967,6 +17023,14 @@ components:
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
+        tool_configs:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A FabricIQ server-side tool.
@@ -17912,6 +17976,14 @@ components:
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
+        tool_configs:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
         memory_store_name:
           type: string
           description: The name of the memory store to use.
@@ -17951,6 +18023,14 @@ components:
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
+        tool_configs:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
         memory_store_name:
           type: string
           description: The name of the memory store to use.
@@ -18315,6 +18395,14 @@ components:
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
+        tool_configs:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
         fabric_dataagent_preview:
           allOf:
             - $ref: '#/components/schemas/FabricDataAgentToolParameters'
@@ -19076,6 +19164,14 @@ components:
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
+        tool_configs:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
         container:
           anyOf:
             - type: string
@@ -22148,6 +22244,14 @@ components:
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
+        tool_configs:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that searches for relevant content from uploaded files. Learn more about the [file search tool](https://platform.openai.com/docs/guides/tools-file-search).
@@ -23139,6 +23243,14 @@ components:
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
+        tool_configs:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that allows the model to execute shell commands.
@@ -23762,6 +23874,14 @@ components:
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
+        tool_configs:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that generates images using the GPT image models.
@@ -27946,6 +28066,14 @@ components:
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
+        tool_configs:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that allows the model to execute shell commands in a local environment.
@@ -28099,6 +28227,14 @@ components:
         project_connection_id:
           type: string
           description: The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
+        tool_configs:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: |-
@@ -33129,6 +33265,14 @@ components:
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
+        tool_configs:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
         custom_search_configuration:
           allOf:
             - $ref: '#/components/schemas/WebSearchConfiguration'
@@ -33313,6 +33457,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenApiFunctionDefinition'
           description: The openapi function definition.
+        tool_configs:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: The input definition information for an OpenAPI tool as used to configure an agent.
@@ -34927,6 +35079,14 @@ components:
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
+        tool_configs:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
         sharepoint_grounding_preview:
           allOf:
             - $ref: '#/components/schemas/SharepointGroundingToolParameters'
@@ -35445,6 +35605,21 @@ components:
         - incomplete
         - failed
       description: The status of a tool call.
+    ToolConfig:
+      type: object
+      properties:
+        pin:
+          type: boolean
+          description: |-
+            When true, the tool is always included in agent context and visible in `tools/list`.
+            When false (default), the tool is hidden from `tools/list` and only discoverable via `tool_search`.
+        additional_search_text:
+          type: string
+          maxLength: 1000
+          description: |-
+            Additional text indexed for tool_search. Supplements the native tool description
+            to improve discoverability. Does not alter `tools/list` output.
+      description: Per-tool configuration that controls tool visibility and search behavior.
     ToolDescription:
       type: object
       properties:
@@ -36106,6 +36281,14 @@ components:
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
+        tool_configs:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A WorkIQ server-side tool.
