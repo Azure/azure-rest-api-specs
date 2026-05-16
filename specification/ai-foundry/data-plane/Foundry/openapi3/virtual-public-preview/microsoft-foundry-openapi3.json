@@ -15377,18 +15377,6 @@
             "explode": false
           },
           {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Toolboxes=V1Preview"
-              ]
-            }
-          },
-          {
             "name": "api-version",
             "in": "query",
             "required": true,
@@ -15449,12 +15437,7 @@
         },
         "tags": [
           "Toolboxes"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Toolboxes=V1Preview"
-          ]
-        }
+        ]
       }
     },
     "/toolboxes/{name}": {
@@ -15469,18 +15452,6 @@
             "description": "The name of the toolbox to retrieve.",
             "schema": {
               "type": "string"
-            }
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Toolboxes=V1Preview"
-              ]
             }
           },
           {
@@ -15518,12 +15489,7 @@
         },
         "tags": [
           "Toolboxes"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Toolboxes=V1Preview"
-          ]
-        }
+        ]
       },
       "patch": {
         "operationId": "updateToolbox",
@@ -15531,18 +15497,6 @@
         "parameters": [
           {
             "$ref": "#/components/parameters/UpdateToolboxRequest.name"
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Toolboxes=V1Preview"
-              ]
-            }
           },
           {
             "name": "api-version",
@@ -15589,11 +15543,6 @@
               }
             }
           }
-        },
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Toolboxes=V1Preview"
-          ]
         }
       },
       "delete": {
@@ -15607,18 +15556,6 @@
             "description": "The name of the toolbox to delete.",
             "schema": {
               "type": "string"
-            }
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Toolboxes=V1Preview"
-              ]
             }
           },
           {
@@ -15649,12 +15586,7 @@
         },
         "tags": [
           "Toolboxes"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Toolboxes=V1Preview"
-          ]
-        }
+        ]
       }
     },
     "/toolboxes/{name}/versions": {
@@ -15670,18 +15602,6 @@
             "schema": {
               "type": "string",
               "maxLength": 256
-            }
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Toolboxes=V1Preview"
-              ]
             }
           },
           {
@@ -15761,11 +15681,6 @@
               }
             }
           }
-        },
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Toolboxes=V1Preview"
-          ]
         }
       },
       "get": {
@@ -15822,18 +15737,6 @@
               "type": "string"
             },
             "explode": false
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Toolboxes=V1Preview"
-              ]
-            }
           },
           {
             "name": "api-version",
@@ -15896,12 +15799,7 @@
         },
         "tags": [
           "Toolboxes"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Toolboxes=V1Preview"
-          ]
-        }
+        ]
       }
     },
     "/toolboxes/{name}/versions/{version}": {
@@ -15925,18 +15823,6 @@
             "description": "The version identifier to retrieve.",
             "schema": {
               "type": "string"
-            }
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Toolboxes=V1Preview"
-              ]
             }
           },
           {
@@ -15974,12 +15860,7 @@
         },
         "tags": [
           "Toolboxes"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Toolboxes=V1Preview"
-          ]
-        }
+        ]
       },
       "delete": {
         "operationId": "deleteToolboxVersion",
@@ -16001,18 +15882,6 @@
             "description": "The version identifier to delete.",
             "schema": {
               "type": "string"
-            }
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Toolboxes=V1Preview"
-              ]
             }
           },
           {
@@ -16043,12 +15912,7 @@
         },
         "tags": [
           "Toolboxes"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Toolboxes=V1Preview"
-          ]
-        }
+        ]
       }
     }
   },
