@@ -169,3 +169,14 @@ interface AgentOptimizationJobs {}
 @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.getCandidate, AgentOptimizationJobs);
 @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.getCandidateConfig, AgentOptimizationJobs);
 @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.getCandidateResults, AgentOptimizationJobs);
+
+// Routines operations
+interface Routines {}
+@@clientLocation(Azure.AI.Projects.Routines.createOrUpdateRoutine, Routines);
+@@clientLocation(Azure.AI.Projects.Routines.getRoutine, Routines);
+@@clientLocation(Azure.AI.Projects.Routines.enableRoutine, Routines);
+@@clientLocation(Azure.AI.Projects.Routines.disableRoutine, Routines);
+@@clientLocation(Azure.AI.Projects.Routines.listRoutines, Routines);
+@@clientLocation(Azure.AI.Projects.Routines.deleteRoutine, Routines);
+@@clientLocation(Azure.AI.Projects.Routines.listRoutineRuns, Routines);
+@@clientLocation(Azure.AI.Projects.Routines.dispatchRoutineAsync, Routines);

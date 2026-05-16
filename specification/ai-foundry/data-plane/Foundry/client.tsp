@@ -158,6 +158,8 @@ using Azure.AI.Projects;
 @@clientName(Routines.createOrUpdateRoutine, "create_or_update", "python");
 @@clientName(Routines.createOrUpdateRoutine, "createOrUpdate", "javascript");
 @@clientName(Routines.getRoutine, "get");
+@@clientName(Routines.enableRoutine, "enable");
+@@clientName(Routines.disableRoutine, "disable");
 @@clientName(Routines.listRoutines, "list");
 @@clientName(Routines.deleteRoutine, "delete");
 @@clientName(Routines.listRoutineRuns, "list_runs", "python");
