@@ -23,6 +23,11 @@ interface MemoryStores {}
 @@clientLocation(Azure.AI.Projects.MemoryStores.updateMemories, MemoryStores);
 @@clientLocation(Azure.AI.Projects.MemoryStores.getUpdateResult, MemoryStores);
 @@clientLocation(Azure.AI.Projects.MemoryStores.deleteScope, MemoryStores);
+@@clientLocation(Azure.AI.Projects.MemoryStores.createMemory, MemoryStores);
+@@clientLocation(Azure.AI.Projects.MemoryStores.updateMemory, MemoryStores);
+@@clientLocation(Azure.AI.Projects.MemoryStores.getMemory, MemoryStores);
+@@clientLocation(Azure.AI.Projects.MemoryStores.listMemories, MemoryStores);
+@@clientLocation(Azure.AI.Projects.MemoryStores.deleteMemory, MemoryStores);
 
 interface Models {}
 @@clientLocation(Azure.AI.Projects.Models.listVersions, Models);
@@ -41,6 +46,8 @@ interface Evaluators {}
 @@clientLocation(Azure.AI.Projects.Evaluators.deleteVersion, Evaluators);
 @@clientLocation(Azure.AI.Projects.Evaluators.createVersion, Evaluators);
 @@clientLocation(Azure.AI.Projects.Evaluators.updateVersion, Evaluators);
+@@clientLocation(Azure.AI.Projects.Evaluators.startPendingUpload, Evaluators);
+@@clientLocation(Azure.AI.Projects.Evaluators.getCredentials, Evaluators);
 
 // Evaluator generation jobs → nested under Evaluators sub-client
 @@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.create, Evaluators);
@@ -55,6 +62,15 @@ interface Evaluators {}
 @@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.list, Evaluators);
 @@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.cancel, Evaluators);
 @@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.delete, Evaluators);
+
+// Evaluation suites operations
+@@clientLocation(Azure.AI.Projects.EvaluationSuites.listVersions, Evaluators);
+@@clientLocation(Azure.AI.Projects.EvaluationSuites.listLatest, Evaluators);
+@@clientLocation(Azure.AI.Projects.EvaluationSuites.getVersion, Evaluators);
+@@clientLocation(Azure.AI.Projects.EvaluationSuites.deleteVersion, Evaluators);
+@@clientLocation(Azure.AI.Projects.EvaluationSuites.createOrUpdateVersion, Evaluators);
+@@clientLocation(Azure.AI.Projects.EvaluationSuites.createEvaluationSuiteVersion, Evaluators);
+@@clientLocation(Azure.AI.Projects.EvaluationSuites.run, Evaluators);
 
 interface Schedules {}
 @@clientLocation(Azure.AI.Projects.Schedules.delete, Schedules);
@@ -119,7 +135,6 @@ interface Agents {}
 @@clientLocation(Azure.AI.Projects.Agents.updateAgentFromCode, Agents);
 @@clientLocation(Azure.AI.Projects.Agents.createAgentVersionFromCode, Agents);
 @@clientLocation(Azure.AI.Projects.Agents.downloadAgentCode, Agents);
-@@clientLocation(Azure.AI.Projects.Agents.downloadAgentVersionCode, Agents);
 
 
 interface Datasets {}
@@ -131,4 +146,25 @@ interface Datasets {}
 @@clientLocation(Azure.AI.Projects.DataGenerationJobs.cancel, Datasets);
 @@clientLocation(Azure.AI.Projects.DataGenerationJobs.delete, Datasets);
 
+// Agent optimization jobs → own sub-client
+interface AgentOptimizationJobs {}
+@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.create, AgentOptimizationJobs);
+@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.get, AgentOptimizationJobs);
+@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.list, AgentOptimizationJobs);
+@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.cancel, AgentOptimizationJobs);
+@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.delete, AgentOptimizationJobs);
+@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.listCandidates, AgentOptimizationJobs);
+@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.getCandidate, AgentOptimizationJobs);
+@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.getCandidateConfig, AgentOptimizationJobs);
+@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.getCandidateResults, AgentOptimizationJobs);
 
+// Routines operations
+interface Routines {}
+@@clientLocation(Azure.AI.Projects.Routines.createOrUpdateRoutine, Routines);
+@@clientLocation(Azure.AI.Projects.Routines.getRoutine, Routines);
+@@clientLocation(Azure.AI.Projects.Routines.enableRoutine, Routines);
+@@clientLocation(Azure.AI.Projects.Routines.disableRoutine, Routines);
+@@clientLocation(Azure.AI.Projects.Routines.listRoutines, Routines);
+@@clientLocation(Azure.AI.Projects.Routines.deleteRoutine, Routines);
+@@clientLocation(Azure.AI.Projects.Routines.listRoutineRuns, Routines);
+@@clientLocation(Azure.AI.Projects.Routines.dispatchRoutineAsync, Routines);

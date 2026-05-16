@@ -44,6 +44,24 @@ namespace Azure.AI.Projects {
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
   @@copyVariants(OpenAI.IncludeEnum, Azure.AI.Projects._AgentIncludable);
 
+  /**
+   * Per-tool configuration that controls tool visibility and search behavior.
+   */
+  model ToolConfig {
+    /**
+     * When true, the tool is always included in agent context and visible in `tools/list`.
+     * When false (default), the tool is hidden from `tools/list` and only discoverable via `tool_search`.
+     */
+    pin?: boolean;
+
+    /**
+     * Additional text indexed for tool_search. Supplements the native tool description
+     * to improve discoverability. Does not alter `tools/list` output.
+     */
+    @maxLength(1000)
+    additional_search_text?: string;
+  }
+
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
   @@copyProperties(OpenAI.MCPTool,
     {
@@ -51,6 +69,8 @@ namespace Azure.AI.Projects {
        * The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
        */
       project_connection_id?: string,
+
+      ...ToolConfigExtension,
     }
   );
 
@@ -58,6 +78,7 @@ namespace Azure.AI.Projects {
   @@copyProperties(OpenAI.WebSearchTool,
     {
       ...ToolNameAndDescriptionExtension,
+      ...ToolConfigExtension,
 
       /**
        * The project connections attached to this tool. There can be a maximum of 1 connection
@@ -71,6 +92,7 @@ namespace Azure.AI.Projects {
   @@copyProperties(OpenAI.CodeInterpreterTool,
     {
       ...ToolNameAndDescriptionExtension,
+      ...ToolConfigExtension,
     }
   );
 
@@ -78,6 +100,7 @@ namespace Azure.AI.Projects {
   @@copyProperties(OpenAI.ImageGenTool,
     {
       ...ToolNameAndDescriptionExtension,
+      ...ToolConfigExtension,
     }
   );
 
@@ -85,6 +108,7 @@ namespace Azure.AI.Projects {
   @@copyProperties(OpenAI.LocalShellToolParam,
     {
       ...ToolNameAndDescriptionExtension,
+      ...ToolConfigExtension,
     }
   );
 
@@ -92,6 +116,7 @@ namespace Azure.AI.Projects {
   @@copyProperties(OpenAI.FunctionShellToolParam,
     {
       ...ToolNameAndDescriptionExtension,
+      ...ToolConfigExtension,
     }
   );
 
@@ -99,6 +124,7 @@ namespace Azure.AI.Projects {
   @@copyProperties(OpenAI.FileSearchTool,
     {
       ...ToolNameAndDescriptionExtension,
+      ...ToolConfigExtension,
     }
   );
 
@@ -133,6 +159,18 @@ namespace Azure.AI.Projects {
   };
 
   /**
+   * Optional tool configuration extension for controlling tool visibility and search behavior.
+   */
+  alias ToolConfigExtension = {
+    /**
+     * Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+     * Resolution order: exact tool name match takes priority over `*`.
+     * Unknown tool names are silently ignored at runtime.
+     */
+    tool_configs?: Record<ToolConfig>;
+  };
+
+  /**
    * The input definition information for a bing grounding search tool as used to configure an agent.
    */
   model BingGroundingTool extends OpenAI.Tool {
@@ -142,6 +180,7 @@ namespace Azure.AI.Projects {
     type: "bing_grounding";
 
     ...ToolNameAndDescriptionExtension;
+    ...ToolConfigExtension;
 
     /**
      * The bing grounding search tool parameters.
@@ -171,6 +210,7 @@ namespace Azure.AI.Projects {
     type: "fabric_dataagent_preview";
 
     ...ToolNameAndDescriptionExtension;
+    ...ToolConfigExtension;
 
     /**
      * The fabric data agent tool parameters.
@@ -200,6 +240,7 @@ namespace Azure.AI.Projects {
     type: "sharepoint_grounding_preview";
 
     ...ToolNameAndDescriptionExtension;
+    ...ToolConfigExtension;
 
     /**
      * The sharepoint grounding tool parameters.
@@ -217,6 +258,7 @@ namespace Azure.AI.Projects {
     type: "azure_ai_search";
 
     ...ToolNameAndDescriptionExtension;
+    ...ToolConfigExtension;
 
     /**
      * The azure ai search index resource.
@@ -311,6 +353,8 @@ namespace Azure.AI.Projects {
      * The openapi function definition.
      */
     openapi: OpenApiFunctionDefinition;
+
+    ...ToolConfigExtension;
   }
 
   /**
@@ -323,6 +367,7 @@ namespace Azure.AI.Projects {
     type: "bing_custom_search_preview";
 
     ...ToolNameAndDescriptionExtension;
+    ...ToolConfigExtension;
 
     /**
      * The bing custom search tool parameters.
@@ -340,6 +385,7 @@ namespace Azure.AI.Projects {
     type: "browser_automation_preview";
 
     ...ToolNameAndDescriptionExtension;
+    ...ToolConfigExtension;
 
     /**
      * The Browser Automation Tool parameters.
@@ -380,6 +426,8 @@ namespace Azure.AI.Projects {
      * The Azure Function Tool definition.
      */
     azure_function: AzureFunctionDefinition;
+
+    ...ToolConfigExtension;
   }
 
   /**
@@ -730,6 +778,7 @@ namespace Azure.AI.Projects {
     type: "capture_structured_outputs";
 
     ...ToolNameAndDescriptionExtension;
+    ...ToolConfigExtension;
 
     /**
      * The structured outputs to capture from the model.
@@ -747,6 +796,7 @@ namespace Azure.AI.Projects {
     type: "a2a_preview";
 
     ...ToolNameAndDescriptionExtension;
+    ...ToolConfigExtension;
 
     /**
      * Base URL of the agent.
@@ -781,6 +831,7 @@ namespace Azure.AI.Projects {
     project_connection_id: string;
 
     ...ToolNameAndDescriptionExtension;
+    ...ToolConfigExtension;
   }
 
   /**
@@ -815,6 +866,7 @@ namespace Azure.AI.Projects {
     require_approval?: OpenAI.MCPToolRequireApproval | string | null = "always";
 
     ...ToolNameAndDescriptionExtension;
+    ...ToolConfigExtension;
   }
 
   /**
@@ -827,6 +879,7 @@ namespace Azure.AI.Projects {
     type: "memory_search_preview";
 
     ...ToolNameAndDescriptionExtension;
+    ...ToolConfigExtension;
 
     /**
      * The name of the memory store to use.
@@ -862,6 +915,7 @@ namespace Azure.AI.Projects {
     type: "memory_search";
 
     ...ToolNameAndDescriptionExtension;
+    ...ToolConfigExtension;
 
     /**
      * The name of the memory store to use.
@@ -898,29 +952,7 @@ namespace Azure.AI.Projects {
     type: "toolbox_search_preview";
 
     ...ToolNameAndDescriptionExtension;
-  }
-
-  alias MemorySearchToolCallItemBase = {
-    @doc("The results returned from the memory search.")
-    results?: MemorySearchItem[] | null;
-  };
-
-  model MemorySearchToolCallItemParam extends OpenAI.Item {
-    type: "memory_search_call";
-    ...MemorySearchToolCallItemBase;
-  }
-
-  model MemorySearchToolCallItemResource extends OpenAI.OutputItem {
-    type: "memory_search_call";
-
-    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
-    @doc("""
-      The status of the memory search tool call. One of `in_progress`,
-      `searching`, `completed`, `incomplete` or `failed`,
-      """)
-    status: "in_progress" | "searching" | "completed" | "incomplete" | "failed";
-
-    ...MemorySearchToolCallItemBase;
+    ...ToolConfigExtension;
   }
 
   // ==============================================================================
@@ -1253,6 +1285,46 @@ namespace Azure.AI.Projects {
 
     @doc("The output from the A2A tool call.")
     output?: ToolCallOutputContent;
+
+    @doc("The status of the tool call.")
+    status: ToolCallStatus;
+  }
+
+  // ==============================================================================
+  // Memory Search Tool Call Models
+  // ==============================================================================
+
+  @doc("A memory search tool call.")
+  model MemorySearchToolCall extends OpenAI.OutputItem {
+    type: "memory_search_call";
+
+    @doc("The status of the tool call.")
+    status: ToolCallStatus;
+
+    @doc("The results returned from the memory search.")
+    memories?: MemoryItem[] | null;
+  }
+
+  @doc("A memory command tool call.")
+  model MemoryCommandToolCall extends OpenAI.OutputItem {
+    type: "memory_command_preview_call";
+
+    @doc("The unique ID of the tool call generated by the model.")
+    call_id: string;
+
+    @doc("A JSON string of the arguments to pass to the tool, including `action` (`remember` or `forget`) and `content`.")
+    arguments: string;
+
+    @doc("The status of the tool call.")
+    status: ToolCallStatus;
+  }
+
+  @doc("The output of a memory command tool call.")
+  model MemoryCommandToolCallOutput extends OpenAI.OutputItem {
+    type: "memory_command_preview_call_output";
+
+    @doc("The unique ID of the tool call generated by the model.")
+    call_id: string;
 
     @doc("The status of the tool call.")
     status: ToolCallStatus;
