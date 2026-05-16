@@ -183,7 +183,8 @@ interface SqlSites {
 }
 
 @@doc(SqlSite.name, "SQL site name.");
-@@doc(SqlSite.properties,
+@@doc(
+  SqlSite.properties,
   "The resource-specific properties for this resource."
 );
 @@doc(SqlSites.importUri::parameters.body, "Import parameters");

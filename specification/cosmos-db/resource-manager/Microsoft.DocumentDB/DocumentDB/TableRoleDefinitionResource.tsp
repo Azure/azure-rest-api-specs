@@ -38,7 +38,9 @@ interface TableRoleDefinitionResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createUpdateTableRoleDefinition is ArmResourceCreateOrReplaceAsync<
     TableRoleDefinitionResource,
-    Response = ArmResourceUpdatedResponse<TableRoleDefinitionResource> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = TableRoleDefinitionResource>>,
+    Response =
+      | ArmResourceUpdatedResponse<TableRoleDefinitionResource>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = TableRoleDefinitionResource>>,
     LroHeaders = ArmLroLocationHeader<FinalResult = TableRoleDefinitionResource> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -49,7 +51,10 @@ interface TableRoleDefinitionResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deleteTableRoleDefinition is ArmResourceDeleteWithoutOkAsync<
     TableRoleDefinitionResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -62,9 +67,11 @@ interface TableRoleDefinitionResources {
 }
 
 @@doc(TableRoleDefinitionResource.name, "The GUID for the Role Definition.");
-@@doc(TableRoleDefinitionResource.properties,
+@@doc(
+  TableRoleDefinitionResource.properties,
   "Properties to create and update an Azure Cosmos DB Table Role Definition."
 );
-@@doc(TableRoleDefinitionResources.createUpdateTableRoleDefinition::parameters.resource,
+@@doc(
+  TableRoleDefinitionResources.createUpdateTableRoleDefinition::parameters.resource,
   "The properties required to create or update a Role Definition."
 );

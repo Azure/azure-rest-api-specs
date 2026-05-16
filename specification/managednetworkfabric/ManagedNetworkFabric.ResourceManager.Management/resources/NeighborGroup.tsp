@@ -66,6 +66,7 @@ interface NeighborGroups {
 }
 
 @@doc(NeighborGroups.create::parameters.resource, "Request payload.");
-@@doc(NeighborGroups.update::parameters.properties,
+@@doc(
+  NeighborGroups.update::parameters.properties,
   "Neighbor Group properties to update. Only annotations are supported."
 );

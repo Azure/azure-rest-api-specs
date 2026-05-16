@@ -70,12 +70,15 @@ interface SessionHostConfigurations {
 
 @@maxLength(SessionHostConfiguration.name, 24);
 @@minLength(SessionHostConfiguration.name, 3);
-@@doc(SessionHostConfiguration.name,
+@@doc(
+  SessionHostConfiguration.name,
   "The name of the SessionHostConfiguration"
 );
-@@doc(SessionHostConfiguration.properties,
+@@doc(
+  SessionHostConfiguration.properties,
   "Detailed properties for SessionHostConfiguration"
 );
-@@clientName(SessionHostConfigurations.update::parameters.body,
+@@clientName(
+  SessionHostConfigurations.update::parameters.body,
   "sessionHostConfiguration"
 );
