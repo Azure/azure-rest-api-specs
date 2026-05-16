@@ -17,7 +17,6 @@ using LiftrBase;
 @armProviderNamespace
 @service(#{ title: "Napster.CompanionAPI management service" })
 @versioned(Napster.CompanionAPI.Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Napster.CompanionAPI {
   interface Operations extends Azure.ResourceManager.Operations {}
 
