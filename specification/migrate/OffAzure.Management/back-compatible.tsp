@@ -60,35 +60,43 @@ using Microsoft.OffAzure;
 @@clientLocation(HypervSites.exportMachineErrors, "HypervSitesController");
 @@clientLocation(HypervSites.listHealthSummary, "HypervSitesController");
 @@clientLocation(HypervSites.summary, "HypervSitesController");
-@@clientLocation(HypervSites.clientGroupMembers,
+@@clientLocation(
+  HypervSites.clientGroupMembers,
   "HypervDependencyMapController"
 );
 @@clientName(HypervSites.clientGroupMembers::parameters.body, "mapRequest");
-@@clientLocation(HypervSites.exportDependencies,
+@@clientLocation(
+  HypervSites.exportDependencies,
   "HypervDependencyMapController"
 );
 @@clientName(HypervSites.exportDependencies::parameters.body, "requestBody");
-@@clientLocation(HypervSites.generateCoarseMap,
+@@clientLocation(
+  HypervSites.generateCoarseMap,
   "HypervDependencyMapController"
 );
 @@clientName(HypervSites.generateCoarseMap::parameters.body, "mapRequest");
-@@clientLocation(HypervSites.generateDetailedMap,
+@@clientLocation(
+  HypervSites.generateDetailedMap,
   "HypervDependencyMapController"
 );
 @@clientName(HypervSites.generateDetailedMap::parameters.body, "mapRequest");
-@@clientLocation(HypervSites.serverGroupMembers,
+@@clientLocation(
+  HypervSites.serverGroupMembers,
   "HypervDependencyMapController"
 );
 @@clientName(HypervSites.serverGroupMembers::parameters.body, "mapRequest");
-@@clientLocation(HypervSites.updateDependencyMapStatus,
+@@clientLocation(
+  HypervSites.updateDependencyMapStatus,
   "HypervDependencyMapController"
 );
-@@clientName(HypervSites.updateDependencyMapStatus::parameters.body,
+@@clientName(
+  HypervSites.updateDependencyMapStatus::parameters.body,
   "mapRequest"
 );
 @@clientLocation(HypervSites.updateProperties, "HypervMachinesController");
 @@clientName(HypervSites.updateProperties::parameters.body, "metaData");
-@@clientLocation(HypervSites.getHypervOperationsStatus,
+@@clientLocation(
+  HypervSites.getHypervOperationsStatus,
   "HypervOperationsStatusController"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -117,23 +125,28 @@ using Microsoft.OffAzure;
 @@clientLocation(MasterSites.listBySubscription, "MasterSitesController");
 @@clientLocation(MasterSites.errorSummary, "MasterSitesController");
 @@clientLocation(MasterSites.refreshArcStatus, "MasterSitesController");
-@@clientLocation(MasterSites.getVmwareOperationStatus,
+@@clientLocation(
+  MasterSites.getVmwareOperationStatus,
   "MasterSitesOperationsStatusController"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(MasterSite.properties, "!java");
 
-@@clientLocation(PrivateEndpointConnections.get,
+@@clientLocation(
+  PrivateEndpointConnections.get,
   "PrivateEndpointConnectionController"
 );
-@@clientLocation(PrivateEndpointConnections.create,
+@@clientLocation(
+  PrivateEndpointConnections.create,
   "PrivateEndpointConnectionController"
 );
 @@clientName(PrivateEndpointConnections.create::parameters.resource, "body");
-@@clientLocation(PrivateEndpointConnections.delete,
+@@clientLocation(
+  PrivateEndpointConnections.delete,
   "PrivateEndpointConnectionController"
 );
-@@clientLocation(PrivateEndpointConnections.listByMasterSite,
+@@clientLocation(
+  PrivateEndpointConnections.listByMasterSite,
   "PrivateEndpointConnectionController"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -145,66 +158,85 @@ using Microsoft.OffAzure;
 @@clientLocation(ServerSiteResources.update, "ServerSitesController");
 @@clientName(ServerSiteResources.update::parameters.properties, "body");
 @@clientLocation(ServerSiteResources.delete, "ServerSitesController");
-@@clientLocation(ServerSiteResources.listByResourceGroup,
+@@clientLocation(
+  ServerSiteResources.listByResourceGroup,
   "ServerSitesController"
 );
-@@clientLocation(ServerSiteResources.listBySubscription,
+@@clientLocation(
+  ServerSiteResources.listBySubscription,
   "ServerSitesController"
 );
-@@clientLocation(ServerSiteResources.computeErrorSummary,
+@@clientLocation(
+  ServerSiteResources.computeErrorSummary,
   "ServerSitesController"
 );
 @@clientLocation(ServerSiteResources.computeusage, "ServerSitesController");
-@@clientLocation(ServerSiteResources.exportApplications,
+@@clientLocation(
+  ServerSiteResources.exportApplications,
   "ServerSitesController"
 );
-@@clientLocation(ServerSiteResources.exportMachineErrors,
+@@clientLocation(
+  ServerSiteResources.exportMachineErrors,
   "ServerSitesController"
 );
-@@clientLocation(ServerSiteResources.listHealthSummary,
+@@clientLocation(
+  ServerSiteResources.listHealthSummary,
   "ServerSitesController"
 );
 @@clientLocation(ServerSiteResources.refreshSite, "ServerSitesController");
 @@clientLocation(ServerSiteResources.summary, "ServerSitesController");
-@@clientLocation(ServerSiteResources.updateDependencyMapStatus,
+@@clientLocation(
+  ServerSiteResources.updateDependencyMapStatus,
   "ServerSitesController"
 );
-@@clientName(ServerSiteResources.updateDependencyMapStatus::parameters.body,
+@@clientName(
+  ServerSiteResources.updateDependencyMapStatus::parameters.body,
   "mapRequest"
 );
 @@clientLocation(ServerSiteResources.updateProperties, "ServerSitesController");
 @@clientName(ServerSiteResources.updateProperties::parameters.body, "metaData");
-@@clientLocation(ServerSiteResources.clientGroupMembers,
+@@clientLocation(
+  ServerSiteResources.clientGroupMembers,
   "ServerDependencyMapController"
 );
-@@clientName(ServerSiteResources.clientGroupMembers::parameters.body,
+@@clientName(
+  ServerSiteResources.clientGroupMembers::parameters.body,
   "mapRequest"
 );
-@@clientLocation(ServerSiteResources.exportDependencies,
+@@clientLocation(
+  ServerSiteResources.exportDependencies,
   "ServerDependencyMapController"
 );
-@@clientName(ServerSiteResources.exportDependencies::parameters.body,
+@@clientName(
+  ServerSiteResources.exportDependencies::parameters.body,
   "requestBody"
 );
-@@clientLocation(ServerSiteResources.generateCoarseMap,
+@@clientLocation(
+  ServerSiteResources.generateCoarseMap,
   "ServerDependencyMapController"
 );
-@@clientName(ServerSiteResources.generateCoarseMap::parameters.body,
+@@clientName(
+  ServerSiteResources.generateCoarseMap::parameters.body,
   "mapRequest"
 );
-@@clientLocation(ServerSiteResources.generateDetailedMap,
+@@clientLocation(
+  ServerSiteResources.generateDetailedMap,
   "ServerDependencyMapController"
 );
-@@clientName(ServerSiteResources.generateDetailedMap::parameters.body,
+@@clientName(
+  ServerSiteResources.generateDetailedMap::parameters.body,
   "mapRequest"
 );
-@@clientLocation(ServerSiteResources.serverGroupMembers,
+@@clientLocation(
+  ServerSiteResources.serverGroupMembers,
   "ServerDependencyMapController"
 );
-@@clientName(ServerSiteResources.serverGroupMembers::parameters.body,
+@@clientName(
+  ServerSiteResources.serverGroupMembers::parameters.body,
   "mapRequest"
 );
-@@clientLocation(ServerSiteResources.getServerSiteOperationsStatus,
+@@clientLocation(
+  ServerSiteResources.getServerSiteOperationsStatus,
   "ServerOperationsStatusController"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -235,19 +267,23 @@ using Microsoft.OffAzure;
 @@clientName(VmwareSites.generateDetailedMap::parameters.body, "mapRequest");
 @@clientLocation(VmwareSites.serverGroupMembers, "DependencyMapController");
 @@clientName(VmwareSites.serverGroupMembers::parameters.body, "mapRequest");
-@@clientLocation(VmwareSites.getVmwareOperationStatus,
+@@clientLocation(
+  VmwareSites.getVmwareOperationStatus,
   "VmwareOperationsStatus"
 );
-@@clientLocation(VmwareSites.updateDependencyMapStatus,
+@@clientLocation(
+  VmwareSites.updateDependencyMapStatus,
   "VmwarePropertiesController"
 );
-@@clientName(VmwareSites.updateDependencyMapStatus::parameters.body,
+@@clientName(
+  VmwareSites.updateDependencyMapStatus::parameters.body,
   "updateMachineDepMapStatus"
 );
 @@clientLocation(VmwareSites.updateProperties, "VmwarePropertiesController");
 @@clientName(VmwareSites.updateProperties::parameters.body, "metaData");
 @@clientLocation(VmwareSites.updateRunAsAccount, "VmwarePropertiesController");
-@@clientName(VmwareSites.updateRunAsAccount::parameters.body,
+@@clientName(
+  VmwareSites.updateRunAsAccount::parameters.body,
   "updateMachineRunAsAccount"
 );
 @@clientLocation(VmwareSites.updateTags, "VmwarePropertiesController");
@@ -281,35 +317,42 @@ using Microsoft.OffAzure;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(HypervMachine.properties, "!java");
 
-@@clientLocation(HypervVmSoftwareInventories.getMachineSoftwareInventory,
+@@clientLocation(
+  HypervVmSoftwareInventories.getMachineSoftwareInventory,
   "HypervSoftwareInventoriesController"
 );
-@@clientLocation(HypervVmSoftwareInventories.listByHypervMachine,
+@@clientLocation(
+  HypervVmSoftwareInventories.listByHypervMachine,
   "HypervSoftwareInventoriesController"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(HypervVmSoftwareInventory.properties, "!java");
 
-@@clientLocation(HypervRunAsAccountResources.get,
+@@clientLocation(
+  HypervRunAsAccountResources.get,
   "HypervRunAsAccountsController"
 );
-@@clientLocation(HypervRunAsAccountResources.listByHypervSite,
+@@clientLocation(
+  HypervRunAsAccountResources.listByHypervSite,
   "HypervRunAsAccountsController"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(HypervRunAsAccountResource.properties, "!java");
 
 @@clientLocation(DeleteImportMachinesJobs.getDeletejob, "ImportJobsController");
-@@clientLocation(DeleteImportMachinesJobs.listDeletejobs,
+@@clientLocation(
+  DeleteImportMachinesJobs.listDeletejobs,
   "ImportJobsController"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DeleteImportMachinesJob.properties, "!java");
 
-@@clientLocation(ExportImportedMachinesJobs.getExportjob,
+@@clientLocation(
+  ExportImportedMachinesJobs.getExportjob,
   "ImportJobsController"
 );
-@@clientLocation(ExportImportedMachinesJobs.listExportjobs,
+@@clientLocation(
+  ExportImportedMachinesJobs.listExportjobs,
   "ImportJobsController"
 );
 
@@ -328,7 +371,8 @@ using Microsoft.OffAzure;
 @@Legacy.flattenProperty(ImportMachine.properties, "!java");
 
 @@clientLocation(PrivateLinkResources.get, "PrivateLinkResourcesController");
-@@clientLocation(PrivateLinkResources.listByMasterSite,
+@@clientLocation(
+  PrivateLinkResources.listByMasterSite,
   "PrivateLinkResourcesController"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -348,32 +392,39 @@ using Microsoft.OffAzure;
 @@clientLocation(SqlSites.summary, "SqlSitesController");
 @@clientLocation(SqlSites.importUri, "SqlSitesController");
 @@clientLocation(SqlSites.validateAndImportUri, "SqlSitesController");
-@@clientLocation(SqlSites.getSqlOperationStatus,
+@@clientLocation(
+  SqlSites.getSqlOperationStatus,
   "SqlOperationsStatusController"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlSite.properties, "!java");
 
-@@clientLocation(SqlDiscoverySiteDataSources.get,
+@@clientLocation(
+  SqlDiscoverySiteDataSources.get,
   "SqlDiscoverySiteDataSourceController"
 );
-@@clientLocation(SqlDiscoverySiteDataSources.create,
+@@clientLocation(
+  SqlDiscoverySiteDataSources.create,
   "SqlDiscoverySiteDataSourceController"
 );
 @@clientName(SqlDiscoverySiteDataSources.create::parameters.resource, "body");
-@@clientLocation(SqlDiscoverySiteDataSources.delete,
+@@clientLocation(
+  SqlDiscoverySiteDataSources.delete,
   "SqlDiscoverySiteDataSourceController"
 );
-@@clientLocation(SqlDiscoverySiteDataSources.listBySqlSite,
+@@clientLocation(
+  SqlDiscoverySiteDataSources.listBySqlSite,
   "SqlDiscoverySiteDataSourceController"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlDiscoverySiteDataSource.properties, "!java");
 
-@@clientLocation(ImportSqlInventoryJobs.getImportjob,
+@@clientLocation(
+  ImportSqlInventoryJobs.getImportjob,
   "SqlImportJobsController"
 );
-@@clientLocation(ImportSqlInventoryJobs.listImportjobs,
+@@clientLocation(
+  ImportSqlInventoryJobs.listImportjobs,
   "SqlImportJobsController"
 );
 
@@ -388,7 +439,8 @@ using Microsoft.OffAzure;
 @@Legacy.flattenProperty(SqlRunAsAccount.properties, "!java");
 
 @@clientLocation(SqlAvailabilityGroups.get, "SqlAvailabilityGroupsController");
-@@clientLocation(SqlAvailabilityGroups.listBySqlSite,
+@@clientLocation(
+  SqlAvailabilityGroups.listBySqlSite,
   "SqlAvailabilityGroupsController"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -418,41 +470,50 @@ using Microsoft.OffAzure;
 @@clientLocation(WebAppSites.summary, "WebAppSitesController");
 @@clientLocation(WebAppSites.updateProperties, "WebAppPropertiesController");
 @@clientLocation(WebAppSites.listByWebAppSite, "WebApplicationsController");
-@@clientLocation(WebAppSites.webServersControllerListByWebAppSite,
+@@clientLocation(
+  WebAppSites.webServersControllerListByWebAppSite,
   "WebServersController"
 );
-@@clientName(WebAppSites.webServersControllerListByWebAppSite,
+@@clientName(
+  WebAppSites.webServersControllerListByWebAppSite,
   "ListByWebAppSite"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(WebAppSite.properties, "!java");
 
-@@clientLocation(DiscoverySiteDataSources.get,
+@@clientLocation(
+  DiscoverySiteDataSources.get,
   "WebAppDiscoverySiteDataSourcesController"
 );
-@@clientLocation(DiscoverySiteDataSources.create,
+@@clientLocation(
+  DiscoverySiteDataSources.create,
   "WebAppDiscoverySiteDataSourcesController"
 );
 @@clientName(DiscoverySiteDataSources.create::parameters.resource, "body");
-@@clientLocation(DiscoverySiteDataSources.delete,
+@@clientLocation(
+  DiscoverySiteDataSources.delete,
   "WebAppDiscoverySiteDataSourcesController"
 );
-@@clientLocation(DiscoverySiteDataSources.listByWebAppSite,
+@@clientLocation(
+  DiscoverySiteDataSources.listByWebAppSite,
   "WebAppDiscoverySiteDataSourcesController"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DiscoverySiteDataSource.properties, "!java");
 
-@@clientLocation(WebAppExtendedMachines.get,
+@@clientLocation(
+  WebAppExtendedMachines.get,
   "WebAppExtendedMachinesController"
 );
-@@clientLocation(WebAppExtendedMachines.listByWebAppSite,
+@@clientLocation(
+  WebAppExtendedMachines.listByWebAppSite,
   "WebAppExtendedMachinesController"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(WebAppExtendedMachine.properties, "!java");
 
-@@clientName(IisWebApplicationsController.update::parameters.properties,
+@@clientName(
+  IisWebApplicationsController.update::parameters.properties,
   "body"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -462,7 +523,8 @@ using Microsoft.OffAzure;
 @@Legacy.flattenProperty(IisWebServers.properties, "!java");
 
 @@clientLocation(WebAppRunAsAccounts.get, "WebAppRunAsAccountsController");
-@@clientLocation(WebAppRunAsAccounts.listByWebAppSite,
+@@clientLocation(
+  WebAppRunAsAccounts.listByWebAppSite,
   "WebAppRunAsAccountsController"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -487,17 +549,20 @@ using Microsoft.OffAzure;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Server.properties, "!java");
 
-@@clientLocation(ServerSoftwareInventories.getMachineSoftwareInventory,
+@@clientLocation(
+  ServerSoftwareInventories.getMachineSoftwareInventory,
   "ServerSoftwareInventoriesController"
 );
-@@clientLocation(ServerSoftwareInventories.listByServer,
+@@clientLocation(
+  ServerSoftwareInventories.listByServer,
   "ServerSoftwareInventoriesController"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ServerSoftwareInventory.properties, "!java");
 
 @@clientLocation(ServerRunAsAccounts.get, "ServerRunAsAccountsController");
-@@clientLocation(ServerRunAsAccounts.listByServerSiteResource,
+@@clientLocation(
+  ServerRunAsAccounts.listByServerSiteResource,
   "ServerRunAsAccountsController"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -522,17 +587,20 @@ using Microsoft.OffAzure;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(MachineResource.properties, "!java");
 
-@@clientLocation(VmwareMachineSoftwareInventories.getMachineSoftwareInventory,
+@@clientLocation(
+  VmwareMachineSoftwareInventories.getMachineSoftwareInventory,
   "VmwareSoftwareInventoriesController"
 );
-@@clientLocation(VmwareMachineSoftwareInventories.listByMachineResource,
+@@clientLocation(
+  VmwareMachineSoftwareInventories.listByMachineResource,
   "VmwareSoftwareInventoriesController"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(VmwareMachineSoftwareInventory.properties, "!java");
 
 @@clientLocation(VmwareRunAsAccountResources.get, "RunAsAccountsController");
-@@clientLocation(VmwareRunAsAccountResources.listByVmwareSite,
+@@clientLocation(
+  VmwareRunAsAccountResources.listByVmwareSite,
   "RunAsAccountsController"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -546,11 +614,13 @@ using Microsoft.OffAzure;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Vcenter.properties, "!java");
 
-@@visibility(DeleteImportMachinesJob.properties,
+@@visibility(
+  DeleteImportMachinesJob.properties,
   Lifecycle.Read,
   Lifecycle.Create
 );
-@@visibility(DiscoverySiteDataSource.properties,
+@@visibility(
+  DiscoverySiteDataSource.properties,
   Lifecycle.Read,
   Lifecycle.Create
 );
@@ -558,12 +628,14 @@ using Microsoft.OffAzure;
 @@visibility(HypervHost.properties, Lifecycle.Read, Lifecycle.Create);
 @@visibility(HypervJob.properties, Lifecycle.Read, Lifecycle.Create);
 @@visibility(HypervMachine.properties, Lifecycle.Read, Lifecycle.Create);
-@@visibility(HypervRunAsAccountResource.properties,
+@@visibility(
+  HypervRunAsAccountResource.properties,
   Lifecycle.Read,
   Lifecycle.Create
 );
 @@visibility(HypervSite.properties, Lifecycle.Read, Lifecycle.Create);
-@@visibility(HypervVmSoftwareInventory.properties,
+@@visibility(
+  HypervVmSoftwareInventory.properties,
   Lifecycle.Read,
   Lifecycle.Create
 );
@@ -574,7 +646,8 @@ using Microsoft.OffAzure;
 @@visibility(ImportSite.properties, Lifecycle.Read, Lifecycle.Create);
 @@visibility(MachineResource.properties, Lifecycle.Read, Lifecycle.Create);
 @@visibility(MasterSite.properties, Lifecycle.Read, Lifecycle.Create);
-@@visibility(PrivateEndpointConnection.properties,
+@@visibility(
+  PrivateEndpointConnection.properties,
   Lifecycle.Read,
   Lifecycle.Create
 );
@@ -583,13 +656,15 @@ using Microsoft.OffAzure;
 @@visibility(ServerJob.properties, Lifecycle.Read, Lifecycle.Create);
 @@visibility(ServerRunAsAccount.properties, Lifecycle.Read, Lifecycle.Create);
 @@visibility(ServerSiteResource.properties, Lifecycle.Read, Lifecycle.Create);
-@@visibility(ServerSoftwareInventory.properties,
+@@visibility(
+  ServerSoftwareInventory.properties,
   Lifecycle.Read,
   Lifecycle.Create
 );
 @@visibility(SqlAvailabilityGroup.properties, Lifecycle.Read, Lifecycle.Create);
 @@visibility(SqlDatabaseV2.properties, Lifecycle.Read, Lifecycle.Create);
-@@visibility(SqlDiscoverySiteDataSource.properties,
+@@visibility(
+  SqlDiscoverySiteDataSource.properties,
   Lifecycle.Read,
   Lifecycle.Create
 );
@@ -597,7 +672,8 @@ using Microsoft.OffAzure;
 @@visibility(SqlRunAsAccount.properties, Lifecycle.Read, Lifecycle.Create);
 @@visibility(SqlServerV2.properties, Lifecycle.Read, Lifecycle.Create);
 @@visibility(SqlSite.properties, Lifecycle.Read, Lifecycle.Create);
-@@visibility(TomcatWebApplications.properties,
+@@visibility(
+  TomcatWebApplications.properties,
   Lifecycle.Read,
   Lifecycle.Create
 );
@@ -605,21 +681,25 @@ using Microsoft.OffAzure;
 @@visibility(Vcenter.properties, Lifecycle.Read, Lifecycle.Create);
 @@visibility(VmwareHost.properties, Lifecycle.Read, Lifecycle.Create);
 @@visibility(VmwareJob.properties, Lifecycle.Read, Lifecycle.Create);
-@@visibility(VmwareMachineSoftwareInventory.properties,
+@@visibility(
+  VmwareMachineSoftwareInventory.properties,
   Lifecycle.Read,
   Lifecycle.Create
 );
-@@visibility(VmwareRunAsAccountResource.properties,
+@@visibility(
+  VmwareRunAsAccountResource.properties,
   Lifecycle.Read,
   Lifecycle.Create
 );
 @@visibility(VmwareSite.properties, Lifecycle.Read, Lifecycle.Create);
-@@visibility(WebAppExtendedMachine.properties,
+@@visibility(
+  WebAppExtendedMachine.properties,
   Lifecycle.Read,
   Lifecycle.Create
 );
 @@visibility(WebAppRunAsAccount.properties, Lifecycle.Read, Lifecycle.Create);
 @@visibility(WebAppSite.properties, Lifecycle.Read, Lifecycle.Create);
-@@Azure.ResourceManager.identifiers(SiteHealthSummaryCollection.value,
+@@Azure.ResourceManager.identifiers(
+  SiteHealthSummaryCollection.value,
   #["applianceName"]
 );

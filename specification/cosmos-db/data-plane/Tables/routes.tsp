@@ -11,11 +11,13 @@ namespace Data.Tables {
   op TablesXmlOperation<
     TParams extends TypeSpec.Reflection.Model,
     TResponse extends TypeSpec.Reflection.Model
-  >(...ApiVersionHeader, ...ClientRequestIdHeader, ...TParams): (TResponse & {
-    ...ApiVersionHeader;
-    ...RequestIdResponseHeader;
-    ...ClientRequestIdHeader;
-  }) | TablesServiceError;
+  >(...ApiVersionHeader, ...ClientRequestIdHeader, ...TParams):
+    | (TResponse & {
+        ...ApiVersionHeader;
+        ...RequestIdResponseHeader;
+        ...ClientRequestIdHeader;
+      })
+    | TablesServiceError;
 
   /** Azure Tables operation template. Supported by both Storage and Cosmos. */
   op TablesJsonOperation<
@@ -29,12 +31,14 @@ namespace Data.Tables {
     ...ApiVersionHeader,
     ...ClientRequestIdHeader,
     ...TParams,
-  ): (TResponse & {
-    ...ApiVersionHeader;
-    ...RequestIdResponseHeader;
-    ...ClientRequestIdHeader;
-    ...DateResponseHeader;
-  }) | TablesError;
+  ):
+    | (TResponse & {
+        ...ApiVersionHeader;
+        ...RequestIdResponseHeader;
+        ...ClientRequestIdHeader;
+        ...DateResponseHeader;
+      })
+    | TablesError;
 
   namespace Table {
     /**
@@ -123,13 +127,15 @@ namespace Data.Tables {
        */
       @header("Accept")
       accept: "application/json",
-    ): {
-      @statusCode statusCode: 204;
-      ...ApiVersionHeader;
-      ...RequestIdResponseHeader;
-      ...ClientRequestIdHeader;
-      ...DateResponseHeader;
-    } | TablesError;
+    ):
+      | {
+          @statusCode statusCode: 204;
+          ...ApiVersionHeader;
+          ...RequestIdResponseHeader;
+          ...ClientRequestIdHeader;
+          ...DateResponseHeader;
+        }
+      | TablesError;
 
     /**
      * Queries entities under the given table.

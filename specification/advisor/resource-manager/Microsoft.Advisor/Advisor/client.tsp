@@ -4,31 +4,38 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Microsoft.Advisor;
 
-@@clientName(ResourceRecommendationBases.patch::parameters.properties,
+@@clientName(
+  ResourceRecommendationBases.patch::parameters.properties,
   "trackedProperties"
 );
-@@clientName(SuppressionContracts.create::parameters.resource,
+@@clientName(
+  SuppressionContracts.create::parameters.resource,
   "suppressionContract"
 );
 @@clientName(AssessmentResults.put::parameters.resource, "assessmentContract");
-@@clientName(TriageRecommendations.rejectTriageRecommendation::parameters.body,
+@@clientName(
+  TriageRecommendations.rejectTriageRecommendation::parameters.body,
   "recommendationRejectBody"
 );
 @@clientName(AdvisorScoreEntity, "ScoreEntityForAdvisor", "go");
 @@clientName(Microsoft.Advisor, "AdvisorManagementClient", "javascript,python");
-@@clientName(Microsoft.Advisor.CpuThreshold.`5`,
+@@clientName(
+  Microsoft.Advisor.CpuThreshold.`5`,
   "Five",
   "javascript,go,csharp"
 );
-@@clientName(Microsoft.Advisor.CpuThreshold.`10`,
+@@clientName(
+  Microsoft.Advisor.CpuThreshold.`10`,
   "Ten",
   "javascript,go,csharp"
 );
-@@clientName(Microsoft.Advisor.CpuThreshold.`15`,
+@@clientName(
+  Microsoft.Advisor.CpuThreshold.`15`,
   "Fifteen",
   "javascript,go,csharp"
 );
-@@clientName(Microsoft.Advisor.CpuThreshold.`20`,
+@@clientName(
+  Microsoft.Advisor.CpuThreshold.`20`,
   "Twenty",
   "javascript,go,csharp"
 );
@@ -40,23 +47,27 @@ using Microsoft.Advisor;
 @@scope(ResourceRecommendationBases.list, "!csharp");
 @@scope(Operations.list, "!csharp");
 @@clientName(PredictionResponse, "AdvisorPredictionResult", "csharp");
-@@clientName(PredictionResponseProperties,
+@@clientName(
+  PredictionResponseProperties,
   "AdvisorPredictionResultProperties",
   "csharp"
 );
 @@clientName(TriageResource, "AdvisorTriageResourceData", "csharp");
 @@clientName(TriageResourceCollection, "AdvisorTriageListResult", "csharp");
 @@clientName(AssessmentResult, "AdvisorAssessment", "csharp");
-@@clientName(AssessmentResultProperties,
+@@clientName(
+  AssessmentResultProperties,
   "AdvisorAssessmentProperties",
   "csharp"
 );
 @@clientName(ResiliencyReview, "AdvisorResiliencyReview", "csharp");
-@@clientName(ResiliencyReviewProperties,
+@@clientName(
+  ResiliencyReviewProperties,
   "AdvisorResiliencyReviewProperties",
   "csharp"
 );
-@@clientName(ResiliencyReviewCollection,
+@@clientName(
+  ResiliencyReviewCollection,
   "AdvisorResiliencyReviewListResult",
   "csharp"
 );
@@ -66,14 +77,16 @@ using Microsoft.Advisor;
 @@clientName(OperationDisplayInfo, "AdvisorOperationDisplayInfo", "csharp");
 @@clientName(Category, "RecommendationCategory", "csharp");
 @@clientName(Impact, "RecommendationBusinessImpact", "csharp");
-@@clientName(PredictionResponseProperties.lastUpdated,
+@@clientName(
+  PredictionResponseProperties.lastUpdated,
   "LastUpdatedOn",
   "csharp"
 );
 @@clientName(Priority, "RecommendationPriority", "csharp");
 @@clientName(PriorityName, "RecommendationPriorityName", "csharp");
 @@clientName(Reason, "RecommendationStateChangeReason", "csharp");
-@@clientName(RecommendationPropertiesResourceWorkload,
+@@clientName(
+  RecommendationPropertiesResourceWorkload,
   "RecommendationResourceWorkload",
   "csharp"
 );
@@ -88,11 +101,13 @@ using Microsoft.Advisor;
 @@clientName(PredictionType, "AdvisorPredictionType", "csharp");
 @@clientName(ReasonForRejectionName, "AdvisorReasonForRejectionName", "csharp");
 @@clientName(PredictionRequest, "AdvisorPredictionContent", "csharp");
-@@clientName(PredictionRequestProperties,
+@@clientName(
+  PredictionRequestProperties,
   "AdvisorPredictionContentProperties",
   "csharp"
 );
-@@clientName(TriageResourceProperties.resourceType,
+@@clientName(
+  TriageResourceProperties.resourceType,
   "TriageResourceType",
   "csharp"
 );
@@ -101,33 +116,39 @@ using Microsoft.Advisor;
 @@alternateType(ResiliencyReviewProperties.publishedAt, utcDateTime, "csharp");
 @@alternateType(ResiliencyReviewProperties.updatedAt, utcDateTime, "csharp");
 @@clientName(ConfigurationsOperationGroup, "Configurations", "csharp");
-@@clientName(RecommendationsOperationGroup.generate,
+@@clientName(
+  RecommendationsOperationGroup.generate,
   "GenerateRecommendation",
   "csharp"
 );
-@@clientName(RecommendationsOperationGroup.getGenerateStatus,
+@@clientName(
+  RecommendationsOperationGroup.getGenerateStatus,
   "GetGenerateStatusRecommendation",
   "csharp"
 );
 @@clientName(predict, "AdvisorPredict", "csharp");
-@@clientName(AssessmentTypesOperationGroup.list,
+@@clientName(
+  AssessmentTypesOperationGroup.list,
   "GetAdvisorAssessmentTypes",
   "csharp"
 );
 @@clientName(WorkloadsOperationGroup.list, "GetAdvisorWorkloads", "csharp");
-@@alternateType(RecommendationsOperationGroup.getGenerateStatus::parameters.operationId,
+@@alternateType(
+  RecommendationsOperationGroup.getGenerateStatus::parameters.operationId,
   Azure.Core.uuid,
   "csharp"
 );
 @@clientName(TriageResource, "AdvisorTriage", "csharp");
 @@clientName(TriageResourceProperties, "AdvisorTriageProperties", "csharp");
 @@clientName(MetadataEntity, "AdvisorMetadataEntity", "csharp");
-@@clientName(MetadataEntityProperties,
+@@clientName(
+  MetadataEntityProperties,
   "AdvisorMetadataEntityProperties",
   "csharp"
 );
 @@clientName(ResourceRecommendationBase, "AdvisorRecommendation", "csharp");
-@@clientName(RecommendationProperties,
+@@clientName(
+  RecommendationProperties,
   "AdvisorRecommendationProperties",
   "csharp"
 );
@@ -137,20 +158,24 @@ using Microsoft.Advisor;
 @@clientName(SuppressionProperties, "AdvisorSuppressionProperties", "csharp");
 @@clientName(SuppressionProperties.expirationTimeStamp, "ExpireOn", "csharp");
 @@clientName(TriageRecommendation, "AdvisorTriageRecommendation", "csharp");
-@@clientName(TriageRecommendationProperties,
+@@clientName(
+  TriageRecommendationProperties,
   "AdvisorTriageRecommendationProperties",
   "csharp"
 );
 @@clientName(TriageRecommendationProperties.updatedAt, "UpdatedOn", "csharp");
-@@alternateType(TriageRecommendationProperties.updatedAt,
+@@alternateType(
+  TriageRecommendationProperties.updatedAt,
   utcDateTime,
   "csharp"
 );
-@@clientName(TrackedRecommendationPropertiesPayload,
+@@clientName(
+  TrackedRecommendationPropertiesPayload,
   "AdvisorRecommendationPatch",
   "csharp"
 );
-@@clientName(TrackedRecommendationPropertiesPayloadProperties,
+@@clientName(
+  TrackedRecommendationPropertiesPayloadProperties,
   "AdvisorRecommendationPatchProperties",
   "csharp"
 );
@@ -158,7 +183,8 @@ using Microsoft.Advisor;
 @@clientName(ConfigData, "AdvisorConfigurationData", "csharp");
 @@clientName(ConfigDataProperties, "AdvisorConfigurationProperties", "csharp");
 @@clientName(ConfigDataProperties.exclude, "IsExcluded", "csharp");
-@@clientName(ConfigurationListResult,
+@@clientName(
+  ConfigurationListResult,
   "AdvisorConfigurationListResult",
   "csharp"
 );
@@ -168,40 +194,48 @@ using Microsoft.Advisor;
 @@clientName(RecommendationRejectBody, "RecommendationRejectContent", "csharp");
 @@clientName(ReasonForRejectionName, "RejectingRecommendationReason", "csharp");
 @@clientName(ResourceMetadata, "RecommendationResourceMetadata", "csharp");
-@@alternateType(ResourceMetadata.resourceId,
+@@alternateType(
+  ResourceMetadata.resourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 @@clientName(Risk, "RecommendationRisk", "csharp");
 @@clientName(Scenario, "MetadataScenarioType", "csharp");
 @@clientName(ShortDescription, "RecommendationShortDescription", "csharp");
-@@clientName(TrackedRecommendationProperties.postponedTime,
+@@clientName(
+  TrackedRecommendationProperties.postponedTime,
   "PostponedUntil",
   "csharp"
 );
-@@clientName(TriageRecommendationCollection,
+@@clientName(
+  TriageRecommendationCollection,
   "AdvisorTriageRecommendationListResult",
   "csharp"
 );
 @@clientName(ConfigurationName, "AdvisorConfigurationName", "csharp");
 
-@@clientName(ConfigurationsOperationGroup.listBySubscription,
+@@clientName(
+  ConfigurationsOperationGroup.listBySubscription,
   "GetAdvisorConfigurationsBySubscription",
   "csharp"
 );
-@@clientName(ConfigurationsOperationGroup.listByResourceGroup,
+@@clientName(
+  ConfigurationsOperationGroup.listByResourceGroup,
   "GetAdvisorConfigurationsByResourceGroup",
   "csharp"
 );
-@@clientName(ConfigurationsOperationGroup.createInSubscription,
+@@clientName(
+  ConfigurationsOperationGroup.createInSubscription,
   "CreateAdvisorConfigurationInSubscription",
   "csharp"
 );
-@@clientName(ConfigurationsOperationGroup.createInResourceGroup,
+@@clientName(
+  ConfigurationsOperationGroup.createInResourceGroup,
   "CreateAdvisorConfigurationInResourceGroup",
   "csharp"
 );
-@@clientName(SuppressionsOperationGroup.list,
+@@clientName(
+  SuppressionsOperationGroup.list,
   "GetAdvisorSuppressionContracts",
   "csharp"
 );
