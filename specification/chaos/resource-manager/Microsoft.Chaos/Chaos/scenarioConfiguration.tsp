@@ -95,23 +95,3 @@ interface ScenarioConfigurations {
 @@doc(ScenarioConfiguration.properties,
   "The properties of scenario definition."
 );
-
-@added(Microsoft.Chaos.Versions.v2026_05_01_preview)
-@removed(Microsoft.Chaos.Versions.v2025_01_01)
-@armResourceOperations
-interface ScenarioConfigurationValidations {
-  /**
-   * Get the latest validation result for the scenario configuration.
-   */
-  get is ArmResourceRead<Validation>;
-}
-
-@added(Microsoft.Chaos.Versions.v2026_05_01_preview)
-@removed(Microsoft.Chaos.Versions.v2025_01_01)
-@armResourceOperations
-interface ScenarioConfigurationPermissionsFixes {
-  /**
-   * Get the latest permission fix result for the scenario configuration.
-   */
-  get is ArmResourceRead<PermissionsFix>;
-}
