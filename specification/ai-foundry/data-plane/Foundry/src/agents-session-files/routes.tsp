@@ -47,7 +47,6 @@ interface AgentSessionFiles {
       @header("Content-Type") contentType: "application/octet-stream";
 
       @body content: bytes;
-
       ...UserIsolationKeyHeader;
     },
     ResourceCreatedResponse<SessionFileWriteResponse>
@@ -93,8 +92,20 @@ interface AgentSessionFiles {
   )
   listSessionFiles is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.hosted_agents_v1_preview,
-    ListSessionFilesParameters,
-    AgentsPagedResult<SessionDirectoryEntry>
+    {
+      /** The name of the agent. */
+      @path agent_name: string;
+
+      /** The session ID. */
+      @path agent_session_id: string;
+
+      /** The directory path to list, relative to the session home directory. */
+      @query path: string;
+
+      ...UserIsolationKeyHeader;
+      ...CommonPageQueryParameters;
+    },
+    SessionDirectoryListResponse
   >;
 
   /**

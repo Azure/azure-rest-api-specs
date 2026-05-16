@@ -25,6 +25,7 @@ tags:
   - name: Fine-Tuning
   - name: Responses
   - name: Redteams
+  - name: Routines
   - name: Schedules
   - name: Skills
   - name: Toolboxes
@@ -800,6 +801,12 @@ paths:
             default:
               - HostedAgents=V1Preview
           explode: false
+        - name: x-ms-user-isolation-key
+          in: header
+          required: false
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
+          schema:
+            type: string
         - name: Foundry-Features
           in: header
           required: false
@@ -951,10 +958,11 @@ paths:
         - name: force
           in: query
           required: false
-          description: If true, force-deletes the agent even if its versions have active sessions (hosted agents), cascading deletion to all associated sessions. Defaults to false.
+          description: For Hosted Agents, if true, force-deletes the agent even if its versions have active sessions, cascading deletion to all associated sessions. This value is not relevant for other Agent types. Defaults to false.
           schema:
             type: boolean
             default: false
+          explode: false
         - name: api-version
           in: query
           required: true
@@ -1116,6 +1124,12 @@ paths:
           schema:
             type: string
           explode: false
+        - name: x-ms-user-isolation-key
+          in: header
+          required: false
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
+          schema:
+            type: string
         - name: Foundry-Features
           in: header
           required: true
@@ -1231,6 +1245,12 @@ paths:
           description: The unique identifier of the invocation.
           schema:
             type: string
+        - name: x-ms-user-isolation-key
+          in: header
+          required: false
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
+          schema:
+            type: string
         - name: Foundry-Features
           in: header
           required: true
@@ -1286,6 +1306,12 @@ paths:
           in: path
           required: true
           description: The unique identifier of the invocation to cancel.
+          schema:
+            type: string
+        - name: x-ms-user-isolation-key
+          in: header
+          required: false
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
           schema:
             type: string
         - name: Foundry-Features
@@ -1493,6 +1519,7 @@ paths:
       description: |-
         List files and directories at a given path in the session sandbox.
         Returns only the immediate children of the specified directory (non-recursive).
+        If path is not provided, lists the session home directory.
       parameters:
         - name: Foundry-Features
           in: header
@@ -1518,6 +1545,52 @@ paths:
           in: query
           required: true
           description: The directory path to list, relative to the session home directory.
+          schema:
+            type: string
+          explode: false
+        - name: x-ms-user-isolation-key
+          in: header
+          required: false
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
           schema:
             type: string
           explode: false
@@ -1587,6 +1660,12 @@ paths:
             type: boolean
             default: false
           explode: false
+        - name: x-ms-user-isolation-key
+          in: header
+          required: false
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
+          schema:
+            type: string
         - name: api-version
           in: query
           required: true
@@ -1642,6 +1721,12 @@ paths:
           schema:
             type: string
           explode: false
+        - name: x-ms-user-isolation-key
+          in: header
+          required: false
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
+          schema:
+            type: string
         - name: api-version
           in: query
           required: true
@@ -1705,6 +1790,12 @@ paths:
           schema:
             type: string
           explode: false
+        - name: x-ms-user-isolation-key
+          in: header
+          required: false
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
+          schema:
+            type: string
         - name: api-version
           in: query
           required: true
@@ -2239,10 +2330,11 @@ paths:
         - name: force
           in: query
           required: false
-          description: If true, force-deletes the version even if it has active sessions (hosted agents), cascading deletion to all associated sessions. Defaults to false.
+          description: For Hosted Agents, if true, force-deletes the version even if it has active sessions, cascading deletion to all associated sessions. This value is not relevant for other Agent types. Defaults to false.
           schema:
             type: boolean
             default: false
+          explode: false
         - name: api-version
           in: query
           required: true
@@ -7474,7 +7566,13 @@ paths:
     post:
       operationId: createConversation
       description: Create a conversation.
-      parameters: []
+      parameters:
+        - name: x-ms-user-isolation-key
+          in: header
+          required: false
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
+          schema:
+            type: string
       responses:
         '200':
           description: The request has succeeded.
@@ -7554,6 +7652,12 @@ paths:
           schema:
             type: string
           explode: false
+        - name: x-ms-user-isolation-key
+          in: header
+          required: false
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
+          schema:
+            type: string
       responses:
         '200':
           description: The request has succeeded.
@@ -7599,6 +7703,12 @@ paths:
           description: The id of the conversation to update.
           schema:
             type: string
+        - name: x-ms-user-isolation-key
+          in: header
+          required: false
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
+          schema:
+            type: string
       responses:
         '200':
           description: The request has succeeded.
@@ -7630,6 +7740,12 @@ paths:
           description: The id of the conversation to retrieve.
           schema:
             type: string
+        - name: x-ms-user-isolation-key
+          in: header
+          required: false
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
+          schema:
+            type: string
       responses:
         '200':
           description: The request has succeeded.
@@ -7653,6 +7769,12 @@ paths:
           in: path
           required: true
           description: The id of the conversation to delete.
+          schema:
+            type: string
+        - name: x-ms-user-isolation-key
+          in: header
+          required: false
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
           schema:
             type: string
       responses:
@@ -7692,6 +7814,12 @@ paths:
             items:
               type: string
           explode: false
+        - name: x-ms-user-isolation-key
+          in: header
+          required: false
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
+          schema:
+            type: string
       responses:
         '200':
           description: The request has succeeded.
@@ -7779,6 +7907,12 @@ paths:
           schema:
             $ref: '#/components/schemas/OpenAI.ItemType'
           explode: false
+        - name: x-ms-user-isolation-key
+          in: header
+          required: false
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
+          schema:
+            type: string
       responses:
         '200':
           description: The request has succeeded.
@@ -7830,6 +7964,12 @@ paths:
           description: The id of the conversation item to retrieve.
           schema:
             type: string
+        - name: x-ms-user-isolation-key
+          in: header
+          required: false
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
+          schema:
+            type: string
       responses:
         '200':
           description: The request has succeeded.
@@ -7859,6 +7999,12 @@ paths:
           in: path
           required: true
           description: The id of the conversation item to delete.
+          schema:
+            type: string
+        - name: x-ms-user-isolation-key
+          in: header
+          required: false
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
           schema:
             type: string
       responses:
@@ -8727,7 +8873,13 @@ paths:
   /openai/v1/responses:
     post:
       operationId: createResponse_createResponseStream
-      parameters: []
+      parameters:
+        - name: x-ms-user-isolation-key
+          in: header
+          required: false
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
+          schema:
+            type: string
       description: Creates a model response. Creates a model response (streaming response).
       responses:
         '200':
@@ -9112,6 +9264,12 @@ paths:
           schema:
             type: string
           explode: false
+        - name: x-ms-user-isolation-key
+          in: header
+          required: false
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
+          schema:
+            type: string
       responses:
         '200':
           description: The request has succeeded.
@@ -9203,6 +9361,12 @@ paths:
             type: integer
             format: int32
           explode: false
+        - name: x-ms-user-isolation-key
+          in: header
+          required: false
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
+          schema:
+            type: string
         - name: accept
           in: header
           required: false
@@ -9245,6 +9409,12 @@ paths:
           description: The ID of the response to delete.
           schema:
             type: string
+        - name: x-ms-user-isolation-key
+          in: header
+          required: false
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
+          schema:
+            type: string
       responses:
         '200':
           description: The request has succeeded.
@@ -9275,6 +9445,12 @@ paths:
           in: path
           required: true
           description: The ID of the response to cancel.
+          schema:
+            type: string
+        - name: x-ms-user-isolation-key
+          in: header
+          required: false
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
           schema:
             type: string
       responses:
@@ -9348,6 +9524,12 @@ paths:
           schema:
             type: string
           explode: false
+        - name: x-ms-user-isolation-key
+          in: header
+          required: false
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
+          schema:
+            type: string
       responses:
         '200':
           description: The request has succeeded.
@@ -9506,6 +9688,442 @@ paths:
             schema:
               $ref: '#/components/schemas/RedTeam'
         description: Redteam to be run
+  /routines:
+    get:
+      operationId: listRoutines
+      description: List routines.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Routines=V1Preview
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Routine'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Routines
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
+  /routines/{routine_name}:
+    put:
+      operationId: createOrUpdateRoutine
+      description: Create or update a routine.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Routines=V1Preview
+        - $ref: '#/components/parameters/CreateOrUpdateRoutineParameters.routine_name'
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Routine'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Routines
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoutineCreateOrUpdateRequest'
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
+    get:
+      operationId: getRoutine
+      description: Retrieve a routine.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Routines=V1Preview
+        - $ref: '#/components/parameters/GetRoutineParameters'
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Routine'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Routines
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
+    delete:
+      operationId: deleteRoutine
+      description: Delete a routine.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Routines=V1Preview
+        - $ref: '#/components/parameters/DeleteRoutineParameters'
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Routines
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
+  /routines/{routine_name}/runs:
+    get:
+      operationId: listRoutineRuns
+      description: List prior runs for a routine.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Routines=V1Preview
+        - $ref: '#/components/parameters/ListRoutineRunsParameters.routine_name'
+        - $ref: '#/components/parameters/ListRoutineRunsParameters.filter'
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RoutineRun'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Routines
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
+  /routines/{routine_name}:disable:
+    post:
+      operationId: disableRoutine
+      description: Disable a routine.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Routines=V1Preview
+        - $ref: '#/components/parameters/DisableRoutineParameters'
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Routine'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Routines
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
+  /routines/{routine_name}:dispatch_async:
+    post:
+      operationId: dispatchRoutineAsync
+      description: Queue an asynchronous routine dispatch.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Routines=V1Preview
+        - $ref: '#/components/parameters/DispatchRoutineAsyncParameters.routine_name'
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DispatchRoutineResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Routines
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DispatchRoutineRequest'
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
+  /routines/{routine_name}:enable:
+    post:
+      operationId: enableRoutine
+      description: Enable a routine.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Routines=V1Preview
+        - $ref: '#/components/parameters/EnableRoutineParameters'
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Routine'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Routines
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
   /schedules:
     get:
       operationId: Schedules_list
@@ -10716,6 +11334,70 @@ components:
         type: string
         minLength: 1
       explode: false
+    CreateOrUpdateRoutineParameters.routine_name:
+      name: routine_name
+      in: path
+      required: true
+      description: The unique name of the routine.
+      schema:
+        type: string
+        maxLength: 128
+    DeleteRoutineParameters:
+      name: routine_name
+      in: path
+      required: true
+      description: The unique name of the routine.
+      schema:
+        type: string
+        maxLength: 128
+    DisableRoutineParameters:
+      name: routine_name
+      in: path
+      required: true
+      description: The unique name of the routine.
+      schema:
+        type: string
+        maxLength: 128
+    DispatchRoutineAsyncParameters.routine_name:
+      name: routine_name
+      in: path
+      required: true
+      description: The unique name of the routine.
+      schema:
+        type: string
+        maxLength: 128
+    EnableRoutineParameters:
+      name: routine_name
+      in: path
+      required: true
+      description: The unique name of the routine.
+      schema:
+        type: string
+        maxLength: 128
+    GetRoutineParameters:
+      name: routine_name
+      in: path
+      required: true
+      description: The unique name of the routine.
+      schema:
+        type: string
+        maxLength: 128
+    ListRoutineRunsParameters.filter:
+      name: filter
+      in: query
+      required: false
+      description: An optional MLflow search-runs filter expression applied within the routine's experiment.
+      schema:
+        type: string
+      explode: false
+    ListRoutineRunsParameters.routine_name:
+      name: routine_name
+      in: path
+      required: true
+      description: The unique name of the routine.
+      schema:
+        type: string
+        maxLength: 128
     UpdateToolboxRequest.name:
       name: name
       in: path
@@ -11177,6 +11859,7 @@ components:
           hosted: '#/components/schemas/HostedAgentDefinition'
           prompt: '#/components/schemas/PromptAgentDefinition'
           workflow: '#/components/schemas/WorkflowAgentDefinition'
+          external: '#/components/schemas/ExternalAgentDefinition'
           container_app: '#/components/schemas/ContainerAppAgentDefinition'
       x-ms-foundry-meta:
         conditional_previews:
@@ -11184,6 +11867,7 @@ components:
           - ContainerAgents=V1Preview
           - WorkflowAgents=V1Preview
           - CodeAgents=V1Preview
+          - ExternalAgents=V1Preview
     AgentDefinitionOptInKeys:
       type: string
       enum:
@@ -11192,6 +11876,7 @@ components:
         - ContainerAgents=V1Preview
         - AgentEndpoints=V1Preview
         - CodeAgents=V1Preview
+        - ExternalAgents=V1Preview
       description: Feature opt-in keys for agent definition operations supporting hosted or workflow agents.
     AgentEndpointAuthorizationScheme:
       type: object
@@ -11516,6 +12201,7 @@ components:
             - prompt
             - hosted
             - workflow
+            - external
             - container_app
     AgentObject:
       type: object
@@ -13794,6 +14480,7 @@ components:
               - ContainerAgents=V1Preview
               - WorkflowAgents=V1Preview
               - CodeAgents=V1Preview
+              - ExternalAgents=V1Preview
         blueprint_reference:
           allOf:
             - $ref: '#/components/schemas/AgentBlueprintReference'
@@ -13821,6 +14508,7 @@ components:
           - ContainerAgents=V1Preview
           - WorkflowAgents=V1Preview
           - CodeAgents=V1Preview
+          - ExternalAgents=V1Preview
     CreateAgentSessionRequest:
       type: object
       required:
@@ -13944,6 +14632,7 @@ components:
               - ContainerAgents=V1Preview
               - WorkflowAgents=V1Preview
               - CodeAgents=V1Preview
+              - ExternalAgents=V1Preview
         blueprint_reference:
           allOf:
             - $ref: '#/components/schemas/AgentBlueprintReference'
@@ -13957,6 +14646,7 @@ components:
           - ContainerAgents=V1Preview
           - WorkflowAgents=V1Preview
           - CodeAgents=V1Preview
+          - ExternalAgents=V1Preview
     CreateEvalRequest:
       type: object
       required:
@@ -14858,6 +15548,33 @@ components:
           description: When true, the LLM judge always scores this dimension regardless of relevance (skips applicability assessment). The service-generated general quality/policy dimension has this set to true and is non-editable. Users may set this on their own custom dimensions.
           default: false
       description: A single dimension — one independent, measurable quality dimension within a rubric evaluator's scoring blueprint.
+    DispatchRoutineRequest:
+      type: object
+      properties:
+        payload:
+          allOf:
+            - $ref: '#/components/schemas/RoutineDispatchPayload'
+          description: A direct action-input override sent downstream when testing a routine.
+      description: Request body for the public dispatch_async route.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
+    DispatchRoutineResponse:
+      type: object
+      properties:
+        dispatch_id:
+          type: string
+          description: The dispatch identifier created for the routine dispatch.
+        action_correlation_id:
+          type: string
+          description: A downstream action correlation identifier, when available.
+        task_id:
+          type: string
+          description: A workspace task identifier created for the dispatch, when available.
+      description: Identifiers returned after a routine dispatch is queued.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
     EntraAuthorizationScheme:
       type: object
       required:
@@ -16924,6 +17641,32 @@ components:
             type: string
           description: Tag dictionary. Tags can be added, removed, and updated.
       description: Evaluator Definition
+    ExternalAgentDefinition:
+      type: object
+      required:
+        - kind
+      properties:
+        kind:
+          type: string
+          enum:
+            - external
+        otel_agent_id:
+          type: string
+          description: |-
+            The OpenTelemetry agent identifier used to attribute customer-emitted spans to this Foundry agent.
+            Spans must include the attribute `gen_ai.agent.id = <otel_agent_id>` to appear under this registration.
+            Defaults to the top-level agent name when omitted. Provide an explicit value only for migration scenarios
+            where the running external agent already emits a stable id that differs from the Foundry agent name.
+            The resolved value is always echoed on read.
+      allOf:
+        - $ref: '#/components/schemas/AgentDefinition'
+      description: |-
+        The external agent definition. Represents a third-party agent hosted outside Foundry (for example, on GCP or AWS).
+        Registration is metadata-only: Foundry records the agent definition to light up observability experiences (traces, evaluations)
+        over customer-emitted OpenTelemetry data.
+      x-ms-foundry-meta:
+        required_previews:
+          - ExternalAgents=V1Preview
     FabricDataAgentToolCall:
       type: object
       required:
@@ -17227,6 +17970,37 @@ components:
           type: string
           description: The arguments to call the function with, as generated by the model in JSON format.
       description: Details of a function tool call.
+    GitHubIssueOpenedRoutineTrigger:
+      type: object
+      required:
+        - type
+        - connection_id
+        - assignee
+        - repository
+      properties:
+        type:
+          type: string
+          enum:
+            - github_issue_opened
+          description: The trigger type.
+        connection_id:
+          type: string
+          maxLength: 256
+          description: The workspace connection identifier that resolves the GitHub configuration for the trigger.
+        assignee:
+          type: string
+          maxLength: 128
+          description: The GitHub assignee or organization filter that scopes which issues can fire the trigger.
+        repository:
+          type: string
+          maxLength: 128
+          description: The GitHub repository filter that scopes which issues can fire the trigger.
+      allOf:
+        - $ref: '#/components/schemas/RoutineTrigger'
+      description: A GitHub issue-opened routine trigger.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
     HeaderTelemetryEndpointAuth:
       type: object
       required:
@@ -17696,6 +18470,99 @@ components:
           format: date-time
           description: The timestamp when the insights were completed.
       description: Metadata about the insights.
+    InvokeAgentInvocationsApiDispatchPayload:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - invoke_agent_invocations_api
+          description: The manual dispatch payload type.
+        input:
+          type: string
+          maxLength: 32768
+          description: The raw input sent to the downstream invocations target.
+      allOf:
+        - $ref: '#/components/schemas/RoutineDispatchPayload'
+      description: A manual payload used to test an invocations API routine dispatch.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
+    InvokeAgentInvocationsApiRoutineAction:
+      type: object
+      required:
+        - type
+        - agent_endpoint_id
+      properties:
+        type:
+          type: string
+          enum:
+            - invoke_agent_invocations_api
+          description: The action type.
+        agent_endpoint_id:
+          type: string
+          maxLength: 256
+          description: The endpoint-scoped agent identifier for invocations API dispatch.
+        session_id:
+          type: string
+          maxLength: 256
+          description: An optional existing hosted-agent session identifier to continue during the downstream dispatch.
+      allOf:
+        - $ref: '#/components/schemas/RoutineAction'
+      description: Dispatches a routine through the raw invocations API.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
+    InvokeAgentResponsesApiDispatchPayload:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - invoke_agent_responses_api
+          description: The manual dispatch payload type.
+        input:
+          type: string
+          maxLength: 32768
+          description: The user input sent to the downstream responses target.
+      allOf:
+        - $ref: '#/components/schemas/RoutineDispatchPayload'
+      description: A manual payload used to test a responses API routine dispatch.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
+    InvokeAgentResponsesApiRoutineAction:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - invoke_agent_responses_api
+          description: The action type.
+        agent_name:
+          type: string
+          maxLength: 256
+          description: The project-scoped agent name for responses API dispatch.
+        agent_endpoint_id:
+          type: string
+          maxLength: 256
+          description: The endpoint-scoped agent identifier for responses API dispatch.
+        conversation_id:
+          type: string
+          maxLength: 256
+          description: An optional existing conversation identifier to continue during the downstream dispatch.
+      allOf:
+        - $ref: '#/components/schemas/RoutineAction'
+      description: Dispatches a routine through the responses API. Exactly one of agent_name or agent_endpoint_id must be provided.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
     ItemGenerationParams:
       type: object
       required:
@@ -34706,6 +35573,283 @@ components:
             - SensitiveDataLeakage
             - TaskAdherence
       description: Risk category for the attack objective.
+    Routine:
+      type: object
+      required:
+        - name
+        - enabled
+        - triggers
+        - action
+      properties:
+        name:
+          type: string
+          maxLength: 128
+          description: The routine name.
+        description:
+          type: string
+          maxLength: 1024
+          description: A human-readable description of the routine.
+        enabled:
+          type: boolean
+          description: Whether the routine is enabled.
+        triggers:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/RoutineTrigger'
+          description: The triggers configured for the routine.
+        action:
+          allOf:
+            - $ref: '#/components/schemas/RoutineAction'
+          description: The action executed when the routine fires.
+        created_at:
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
+          description: The time when the routine was created.
+        updated_at:
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
+          description: The time when the routine was last updated.
+      description: A routine definition returned by the service.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
+    RoutineAction:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/RoutineActionType'
+          description: The action type.
+      discriminator:
+        propertyName: type
+        mapping:
+          invoke_agent_responses_api: '#/components/schemas/InvokeAgentResponsesApiRoutineAction'
+          invoke_agent_invocations_api: '#/components/schemas/InvokeAgentInvocationsApiRoutineAction'
+      description: Base model for a routine action.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
+    RoutineActionType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - invoke_agent_responses_api
+            - invoke_agent_invocations_api
+      description: The discriminator values supported for routine actions.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
+    RoutineAttemptSource:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - event_fire
+            - manual_dispatch
+            - queued_dispatch
+            - schedule_delivery
+            - timer_delivery
+      description: Known source paths that can produce a routine run.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
+    RoutineCreateOrUpdateRequest:
+      type: object
+      required:
+        - triggers
+        - action
+      properties:
+        description:
+          type: string
+          maxLength: 1024
+          description: A human-readable description of the routine.
+        enabled:
+          type: boolean
+          description: Whether the routine is enabled.
+        triggers:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/RoutineTrigger'
+          description: The triggers configured for the routine. In v1, exactly one trigger entry is supported.
+        action:
+          allOf:
+            - $ref: '#/components/schemas/RoutineAction'
+          description: The action executed when the routine fires.
+      description: The request body used to create or update a routine.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
+    RoutineDispatchPayload:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/RoutineDispatchPayloadType'
+          description: The manual dispatch payload type.
+      discriminator:
+        propertyName: type
+        mapping:
+          invoke_agent_responses_api: '#/components/schemas/InvokeAgentResponsesApiDispatchPayload'
+          invoke_agent_invocations_api: '#/components/schemas/InvokeAgentInvocationsApiDispatchPayload'
+      description: Base model for a manual dispatch payload.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
+    RoutineDispatchPayloadType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - invoke_agent_responses_api
+            - invoke_agent_invocations_api
+      description: The discriminator values supported for manual routine dispatch payloads.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
+    RoutineRun:
+      type: object
+      required:
+        - id
+        - status
+        - trigger_type
+        - started_at
+      properties:
+        id:
+          type: string
+          description: The MLflow run identifier for the routine attempt.
+        status:
+          type: string
+          description: The underlying MLflow run status.
+        phase:
+          allOf:
+            - $ref: '#/components/schemas/RoutineRunPhase'
+          description: The AgentExtensions lifecycle phase for the routine attempt.
+        trigger_type:
+          allOf:
+            - $ref: '#/components/schemas/RoutineTriggerType'
+          description: The trigger type that produced the routine attempt.
+        attempt_source:
+          allOf:
+            - $ref: '#/components/schemas/RoutineAttemptSource'
+          description: The source path that created the routine attempt.
+        action_type:
+          allOf:
+            - $ref: '#/components/schemas/RoutineActionType'
+          description: The action type dispatched for the routine attempt.
+        triggered_at:
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
+          description: The logical trigger time recorded for the routine attempt.
+        started_at:
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
+          description: The time when the underlying run started.
+        ended_at:
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
+          description: The time when the underlying run reached a terminal state.
+        dispatch_id:
+          type: string
+          description: The dispatch identifier associated with the routine attempt.
+        action_correlation_id:
+          type: string
+          description: The downstream action correlation identifier, when available.
+        response_id:
+          type: string
+          description: The downstream response or invocation identifier, when available.
+        task_id:
+          type: string
+          description: The workspace task identifier linked to the routine attempt, when available.
+        error_type:
+          type: string
+          description: The fully qualified error type captured for a failed attempt, when available.
+        error_message:
+          type: string
+          description: The truncated failure message captured for a failed attempt, when available.
+        diagnostics:
+          allOf:
+            - $ref: '#/components/schemas/RoutineRunDiagnostics'
+          description: Diagnostic data captured for the routine attempt.
+      description: A single routine run returned from the run history API.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
+    RoutineRunDiagnostics:
+      type: object
+      required:
+        - parameters
+        - tags
+        - metrics
+      properties:
+        parameters:
+          type: object
+          additionalProperties:
+            type: string
+          description: MLflow parameters recorded on the run, keyed by parameter name.
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+          description: MLflow tags recorded on the run, keyed by tag name.
+        metrics:
+          type: object
+          additionalProperties:
+            type: number
+            format: double
+          description: Latest MLflow metric values recorded on the run, keyed by metric name.
+      description: Generic diagnostics captured on a routine run.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
+    RoutineRunPhase:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - queued
+            - dispatching
+            - completed
+            - failed
+      description: Known lifecycle phases recorded for a routine run.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
+    RoutineTrigger:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/RoutineTriggerType'
+          description: The trigger type.
+      discriminator:
+        propertyName: type
+        mapping:
+          schedule: '#/components/schemas/ScheduleRoutineTrigger'
+          timer: '#/components/schemas/TimerRoutineTrigger'
+          github_issue_opened: '#/components/schemas/GitHubIssueOpenedRoutineTrigger'
+      description: Base model for a routine trigger.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
+    RoutineTriggerType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - github_issue_opened
+            - schedule
+            - timer
+      description: The discriminator values supported for routine triggers.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
     RubricBasedEvaluatorDefinition:
       type: object
       required:
@@ -34836,6 +35980,30 @@ components:
             - Succeeded
             - Failed
       description: Schedule provisioning status.
+    ScheduleRoutineTrigger:
+      type: object
+      required:
+        - type
+        - cron_expression
+        - time_zone
+      properties:
+        type:
+          type: string
+          enum:
+            - schedule
+          description: The trigger type.
+        cron_expression:
+          type: string
+          description: A 5-field cron expression. The service enforces a minimum interval of five minutes by default.
+        time_zone:
+          type: string
+          description: An IANA or Windows time zone identifier for the schedule.
+      allOf:
+        - $ref: '#/components/schemas/RoutineTrigger'
+      description: A recurring cron-based routine trigger.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
     ScheduleRun:
       type: object
       required:
@@ -34924,18 +36092,28 @@ components:
     SessionDirectoryListResponse:
       type: object
       required:
+        - data
+        - has_more
         - path
-        - entries
       properties:
-        path:
-          type: string
-          description: The path that was listed, relative to the session home directory.
-        entries:
+        data:
           type: array
           items:
             $ref: '#/components/schemas/SessionDirectoryEntry'
-          description: The directory entries.
-      description: Response from listing a directory in a session sandbox.
+          description: The requested list of items.
+        first_id:
+          type: string
+          description: The first ID represented in this list.
+        last_id:
+          type: string
+          description: The last ID represented in this list.
+        has_more:
+          type: boolean
+          description: A value indicating whether there are additional values available not captured in this list.
+        path:
+          type: string
+          description: The path that was listed, relative to the session home directory.
+      description: The response data for a requested list of items.
     SessionFileWriteResponse:
       type: object
       required:
@@ -35589,6 +36767,29 @@ components:
           description: The model to use for the evaluation. Must support structured outputs.
       description: An Azure AI Evaluator grader used as testing criterion in evaluations.
       title: AzureAIEvaluatorGrader
+    TimerRoutineTrigger:
+      type: object
+      required:
+        - type
+        - at
+      properties:
+        type:
+          type: string
+          enum:
+            - timer
+          description: The trigger type.
+        at:
+          type: string
+          description: A future timer expression. Supported values include an ISO-8601 timestamp with an explicit offset, a local timestamp paired with time_zone, or a positive duration from now.
+        time_zone:
+          type: string
+          description: An optional IANA or Windows time zone identifier when the timer uses a local timestamp.
+      allOf:
+        - $ref: '#/components/schemas/RoutineTrigger'
+      description: A one-shot timer routine trigger.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
     ToolCallOutputContent:
       anyOf:
         - type: object
@@ -35694,6 +36895,14 @@ components:
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
+        tool_configs:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: |-
@@ -36056,6 +37265,7 @@ components:
               - ContainerAgents=V1Preview
               - WorkflowAgents=V1Preview
               - CodeAgents=V1Preview
+              - ExternalAgents=V1Preview
         blueprint_reference:
           allOf:
             - $ref: '#/components/schemas/AgentBlueprintReference'
