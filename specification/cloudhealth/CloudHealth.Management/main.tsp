@@ -183,7 +183,7 @@ model EvaluationRule {
   @typeChangedFrom(Versions.v2026_01_01_preview, ThresholdRule)
   degradedRule?: ThresholdRuleV2;
 
-  @doc("Unhealthy threshold rule.")
+  @doc("Unhealthy rule with static threshold.")
   @typeChangedFrom(Versions.v2026_01_01_preview, ThresholdRule)
   @madeRequired(Versions.v2026_01_01_preview)
   unhealthyRule: ThresholdRuleV2;
@@ -330,7 +330,7 @@ model ResourceMetricSignalDefinitionProperties
   @maxLength(256)
   dimension?: string;
 
-  @doc("Optional: Dimension filter to apply to the dimension. Must only be set if Dimension is set.")
+  @doc("Optional: Dimension filter to apply to the dimension. Must only be set if also Dimension is set.")
   @minLength(1)
   @maxLength(256)
   dimensionFilter?: string;
@@ -419,7 +419,7 @@ union SignalOperator {
   NotEqual: "NotEqual",
 
   @added(Versions.v2026_05_01_preview)
-  @doc("Dynamic threshold — uses deviation from a ML-computed baseline to determine health state transitions. Only valid for the unhealthy threshold rule.")
+  @doc("Dynamic threshold — uses deviation from a ML-computed baseline to determine health state transitions. Only valid for the unhealthy threshold rule. Requires `sensitivity` and `lookBackWindow` on the rule; `threshold` is ignored.")
   Dynamic: "Dynamic",
 }
 
@@ -1135,7 +1135,7 @@ model DiscoveryRuleProperties {
   specification: DiscoveryRuleSpecification;
 
   @added(Versions.v2026_05_01_preview)
-  @doc("Whether to automatically add a signal for the Azure resource's availability state from Azure Resource Health to the discovered entities.")
+  @doc("Whether to automatically add a signal for the Azure resource's availability state from Azure Resource Health to the discovered entities. Defaults to `Enabled`: discovery rules updated via this API version without setting this field will begin emitting a Resource Health availability signal. Pass `Disabled` to preserve pre-`2026-05-01-preview` behavior.")
   addResourceHealthSignal?: ResourceHealthAvailabilityStateSignalBehavior = ResourceHealthAvailabilityStateSignalBehavior.Enabled;
 
   @removed(Versions.v2026_01_01_preview)
@@ -1221,6 +1221,7 @@ union DiscoveryRuleRecommendedSignalsBehavior {
 }
 
 @doc("Resource health availability state signal behavior")
+@added(Versions.v2026_05_01_preview)
 union ResourceHealthAvailabilityStateSignalBehavior {
   string,
 
@@ -1461,7 +1462,7 @@ model DataAnnotation {
   createdAt?: utcDateTime;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Annotation details are user-defined key-value pairs with arbitrary keys that cannot be modelled with a fixed schema"
-  @doc("Annotation details as a dynamic key-value pair bag. Each value is limited to 256 characters. A maximum of 10 entries is permitted per annotation.")
+  @doc("Annotation details as a dynamic key-value pair bag. Service-enforced limits: a maximum of 10 entries per annotation and a maximum value length of 256 characters. Requests exceeding these limits will be rejected with a 400 response.")
   annotationDetails: Record<string256>;
 
   @doc("Optional description of the annotation")
