@@ -275,11 +275,13 @@ using Microsoft.AppComplianceAutomation;
 @@usage(ComplianceResult, Usage.input, "csharp");
 
 // Java SDK: preserve compatibility for renamed operation and round-trip models.
-@@clientName(Report.checkNameAvailability,
+@@clientName(
+  Report.checkNameAvailability,
   "nestedResourceCheckNameAvailability",
   "java"
 );
-@@clientName(Microsoft.AppComplianceAutomation,
+@@clientName(
+  Microsoft.AppComplianceAutomation,
   "AppComplianceAutomationClient",
   "java"
 );
