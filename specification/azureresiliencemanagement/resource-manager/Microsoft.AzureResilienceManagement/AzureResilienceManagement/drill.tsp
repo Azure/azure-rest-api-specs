@@ -118,9 +118,11 @@ interface Drills {
   @armResourceAction(Drill)
   @post
   @doc("This enables the user to include, exclude or update resources from their Drill.")
-  addOrUpdateResources is ArmResourceActionNoResponseContentAsync<
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Per Azure REST API guidelines and the Spectral PostResponseCodes rule, LRO POST operations with no final body must return 202 + 204 + default. This TSP ARM library rule conflicts with that requirement; we follow the official guideline."
+  addOrUpdateResources is ArmResourceActionAsync<
     Drill,
     AddOrUpdateResourcesRequest,
+    ArmNoContentResponse,
     ServiceGroupAndRequestHeadersParameters,
     LroHeaders = ArmAsyncOperationHeader &
       ArmLroLocationHeader &
@@ -132,9 +134,11 @@ interface Drills {
   @armResourceAction(Drill)
   @post
   @doc("This triggers detection of any drifts from the desired state of Resources and RBAC.")
-  refreshReadinessState is ArmResourceActionNoResponseContentAsync<
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Per Azure REST API guidelines and the Spectral PostResponseCodes rule, LRO POST operations with no final body must return 202 + 204 + default. This TSP ARM library rule conflicts with that requirement; we follow the official guideline."
+  refreshReadinessState is ArmResourceActionAsync<
     Drill,
     void,
+    ArmNoContentResponse,
     ServiceGroupAndRequestHeadersParameters,
     LroHeaders = ArmAsyncOperationHeader &
       ArmLroLocationHeader &
@@ -146,9 +150,11 @@ interface Drills {
   @armResourceAction(Drill)
   @post
   @doc("This triggers detection of any drifts from the desired state of Resources and RBAC.")
-  resyncReadinessCheck is ArmResourceActionNoResponseContentAsync<
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Per Azure REST API guidelines and the Spectral PostResponseCodes rule, LRO POST operations with no final body must return 202 + 204 + default. This TSP ARM library rule conflicts with that requirement; we follow the official guideline."
+  resyncReadinessCheck is ArmResourceActionAsync<
     Drill,
     void,
+    ArmNoContentResponse,
     ServiceGroupAndRequestHeadersParameters,
     LroHeaders = ArmAsyncOperationHeader &
       ArmLroLocationHeader &

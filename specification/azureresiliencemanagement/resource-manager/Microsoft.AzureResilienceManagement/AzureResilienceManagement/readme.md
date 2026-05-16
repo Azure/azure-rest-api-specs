@@ -28,7 +28,20 @@ These are the global settings for the AzureResilienceManagement.
 title: AzureResilienceManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2026-04-01-preview
+tag: package-preview-2026-04
+```
+
+### Tag: package-preview-2026-04
+
+These settings apply only when `--tag=package-preview-2026-04` is specified on the command line.
+This multi-version tag is used as the default so that all APIs across the active preview API
+versions are represented in the default view (a few APIs from prior preview versions were not
+carried forward into `2026-04-01-preview`).
+
+```yaml $(tag) == 'package-preview-2026-04'
+input-file:
+  - preview/2026-04-01-preview/openapi.json
+  - preview/2026-03-01-preview/openapi.json
 ```
 
 ### Tag: package-2026-04-01-preview
@@ -37,7 +50,7 @@ These settings apply only when `--tag=package-2026-04-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2026-04-01-preview'
 input-file:
-  - Microsoft.AzureResilienceManagement/preview/2026-04-01-preview/openapi.json
+  - preview/2026-04-01-preview/openapi.json
 ```
 
 ### Tag: package-2026-03-01-preview
@@ -46,7 +59,7 @@ These settings apply only when `--tag=package-2026-03-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2026-03-01-preview'
 input-file:
-  - Microsoft.AzureResilienceManagement/preview/2026-03-01-preview/openapi.json
+  - preview/2026-03-01-preview/openapi.json
 ```
 
 ### Tag: package-2025-02-01-preview
@@ -55,7 +68,7 @@ These settings apply only when `--tag=package-2025-02-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-02-01-preview'
 input-file:
-  - Microsoft.AzureResilienceManagement/preview/2025-02-01-preview/openapi.json
+  - preview/2025-02-01-preview/openapi.json
 ```
 
 ### Suppression
@@ -75,4 +88,9 @@ suppressions:
     - code: TenantLevelAPIsNotAllowed
       from: openapi.json
       reason: Resiliency scenarios are modelled around a SG (Service Group), which is a Tenant level resource.
+
+    - code: XMSSecretInResponse
+      from: openapi.json
+      where: $.definitions.ServiceGroupTenantParameters.properties.skipToken
+      reason: 'skipToken' is the standard Azure OData paging continuation token ($skipToken), not a secret. The linter flags it due to the 'Token' substring in the name; the property carries opaque pagination state and is not sensitive.
 ```
