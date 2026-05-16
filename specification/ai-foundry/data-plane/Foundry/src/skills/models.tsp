@@ -11,50 +11,15 @@ alias CreateSkillRequest = {
   @maxLength(63)
   name: string;
 
-  @doc("A human-readable description of the skill.")
-  @maxLength(1024)
-  description?: string;
-
-  @doc("Instructions that define the behavior of the skill.")
-  @maxLength(102400)
-  instructions?: string;
-
-  ...MetadataPropertyForRequest;
-};
-
-alias CreateSkillFromPackageRequest = {
-  @doc("The content type of the incoming skill package payload.")
-  @header("Content-Type")
-  content_type: "application/zip";
-
-  @doc("The zip package used to create the skill.")
-  @body
-  content: bytes;
-};
-
-alias UpdateSkillRequest = {
-  @doc("The unique name of the skill.")
-  @path
-  name: string;
+  @doc("Skill files to upload as a zip package.")
+  files: bytes;
 
   @doc("A human-readable description of the skill.")
   @maxLength(1024)
   description?: string;
-
-  @doc("Instructions that define the behavior of the skill.")
-  @maxLength(102400)
-  instructions?: string;
-
-  ...MetadataPropertyForRequest;
 };
 
 alias GetSkillRequest = {
-  @doc("The unique name of the skill.")
-  @path
-  name: string;
-};
-
-alias DownloadSkillRequest = {
   @doc("The unique name of the skill.")
   @path
   name: string;
@@ -70,13 +35,10 @@ alias DeleteSkillRequest = {
   name: string;
 };
 
-@doc("A skill object.")
-model SkillObject {
+@doc("A skill resource.")
+model Skill {
   @doc("The unique identifier of the skill.")
-  skill_id: string;
-
-  @doc("Whether the skill was created from a zip blob package.")
-  has_blob: boolean;
+  id: string;
 
   @doc("The unique name of the skill.")
   @maxLength(63)
@@ -88,30 +50,31 @@ model SkillObject {
 
   @doc("The Unix timestamp (seconds) when the skill was created.")
   @encode("unixTimestamp", int32)
-  created_at?: utcDateTime;
+  created_at: utcDateTime;
 
   @doc("The default version for the skill. Can be changed via updateSkillDefaultVersion.")
-  default_version?: string;
+  default_version: string;
 
   @doc("The latest version for the skill.")
-  latest_version?: string;
+  latest_version: string;
 
-  ...MetadataPropertyForRequest;
+  @doc("The object type, which is always 'skill'.")
+  object: "skill";
 }
 
 @doc("A specific version of a skill.")
-model SkillVersionObject {
+model SkillVersion {
   @doc("The unique identifier of the skill version.")
   id: string;
 
-  @doc("The identifier of the skill for this version.")
+  @doc("The identifier of the parent skill.")
   skill_id: string;
 
   @doc("The name of the skill version.")
   @maxLength(63)
   name: string;
 
-  @doc("The version number for this skill. Skill versions are immutable and every update creates a new version.")
+  @doc("The version identifier. Skill versions are immutable.")
   version: string;
 
   @doc("A human-readable description of the skill version.")
@@ -121,6 +84,9 @@ model SkillVersionObject {
   @doc("The Unix timestamp (seconds) when the skill version was created.")
   @encode("unixTimestamp", int32)
   created_at: utcDateTime;
+
+  @doc("The object type, which is always 'skill.version'.")
+  object: "skill.version";
 }
 
 alias CreateSkillVersionRequest = {
@@ -129,14 +95,15 @@ alias CreateSkillVersionRequest = {
   @maxLength(63)
   name: string;
 
+  @doc("Skill files to upload as a zip package.")
+  files: bytes;
+
   @doc("A human-readable description of the skill version.")
   @maxLength(1024)
   description?: string;
 
   @doc("Whether to set this version as the default.")
   default?: boolean;
-
-  ...MetadataPropertyForRequest;
 };
 
 alias GetSkillVersionRequest = {
@@ -192,7 +159,7 @@ alias DeleteSkillVersionRequest = {
   version: string;
 };
 
-@doc("A deleted skill Object")
+@doc("A deleted skill.")
 model DeleteSkillResponse {
   @doc("The unique name of the skill.")
   name: string;

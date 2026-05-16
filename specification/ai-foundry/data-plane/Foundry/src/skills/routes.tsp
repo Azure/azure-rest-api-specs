@@ -4,12 +4,8 @@ import "./models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Azure.ClientGenerator.Core;
 
 namespace Azure.AI.Projects;
-
-@@usage(UpdateSkillDefaultVersionRequest, Usage.input);
-@@access(UpdateSkillDefaultVersionRequest, Access.public);
 
 alias SkillsPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.skills_v1_preview>;
 
@@ -24,18 +20,7 @@ interface Skills {
   @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   createSkill is FoundryDataPlaneOperation<
     CreateSkillRequest & SkillsPreviewHeader,
-    ResourceCreatedResponse<SkillObject>
-  >;
-
-  /**
-   * Creates a skill from a zip package.
-   */
-  @post
-  @route("/skills:import")
-  @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
-  createSkillFromPackage is FoundryDataPlaneOperation<
-    CreateSkillFromPackageRequest & SkillsPreviewHeader,
-    ResourceCreatedResponse<SkillObject>
+    ResourceCreatedResponse<Skill>
   >;
 
   /**
@@ -46,18 +31,7 @@ interface Skills {
   @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   getSkill is FoundryDataPlaneOperation<
     GetSkillRequest & SkillsPreviewHeader,
-    SkillObject
-  >;
-
-  /**
-   * Downloads a skill package.
-   */
-  @get
-  @route("/skills/{name}:download")
-  @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
-  downloadSkill is FoundryDataPlaneOperation<
-    DownloadSkillRequest & SkillsPreviewHeader,
-    DownloadSkillResponse
+    Skill
   >;
 
   /**
@@ -68,18 +42,20 @@ interface Skills {
   @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   listSkills is FoundryDataPlaneOperation<
     ListSkillsRequest & SkillsPreviewHeader,
-    AgentsPagedResult<SkillObject>
+    AgentsPagedResult<Skill>
   >;
 
   /**
-   * Updates an existing skill.
+   * Update the default version pointer for a skill.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+  @operationId("updateSkillDefaultVersion")
   @post
   @route("/skills/{name}")
   @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
-  updateSkill is FoundryDataPlaneOperation<
-    UpdateSkillRequest & SkillsPreviewHeader,
-    SkillObject
+  updateSkillDefaultVersion is FoundryDataPlaneOperation<
+    UpdateSkillDefaultVersionRequest & SkillsPreviewHeader,
+    Skill
   >;
 
   /**
@@ -106,7 +82,7 @@ interface Skills {
   @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   createSkillVersion is FoundryDataPlaneOperation<
     CreateSkillVersionRequest & SkillsPreviewHeader,
-    SkillVersionObject
+    SkillVersion
   >;
 
   /**
@@ -120,7 +96,7 @@ interface Skills {
   @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   listSkillVersions is FoundryDataPlaneOperation<
     ListSkillVersionsRequest & SkillsPreviewHeader,
-    AgentsPagedResult<SkillVersionObject>
+    AgentsPagedResult<SkillVersion>
   >;
 
   /**
@@ -133,7 +109,7 @@ interface Skills {
   @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   getSkillVersion is FoundryDataPlaneOperation<
     GetSkillVersionRequest & SkillsPreviewHeader,
-    SkillVersionObject
+    SkillVersion
   >;
 
   /**
@@ -160,19 +136,6 @@ interface Skills {
   getSkillVersionContent is FoundryDataPlaneOperation<
     GetSkillVersionContentRequest & SkillsPreviewHeader,
     DownloadSkillResponse
-  >;
-
-  /**
-   * Update a skill to point to a specific version.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
-  @operationId("updateSkillDefaultVersion")
-  @patch
-  @route("/skills/{name}")
-  @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
-  updateSkillDefaultVersion is FoundryDataPlaneOperation<
-    UpdateSkillDefaultVersionRequest & SkillsPreviewHeader,
-    SkillObject
   >;
 
   /**
