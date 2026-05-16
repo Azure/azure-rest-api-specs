@@ -6,4 +6,15 @@
   rules: [SdkTspConfigValidation]
   sub-rules:
     - options.@azure-tools/typespec-ts.*
-  paths: [AzureResilience.Management/tspconfig.yaml]
+  paths: [resource-manager/Microsoft.AzureResilienceManagement/AzureResilienceManagement/tspconfig.yaml]
+
+- tool: Avocado
+  reason: >
+    The default tag (package-2026-04-01-preview) intentionally does not include all paths
+    from previous preview versions. The 2026-04-01-preview API version (current latest)
+    deprecated and removed several operations (chaosjobs/*, drillrunchildjobs, drill testfailover,
+    drill testfailovercleanup, drill refreshreadinessstate, recoverychildjobs) that existed
+    in 2026-03-01-preview. This is an intentional API evolution in private preview; consumers
+    needing the removed operations should use the per-version tag package-2026-03-01-preview.
+  rules: [MISSING_APIS_IN_DEFAULT_TAG]
+  paths: [resource-manager/Microsoft.AzureResilienceManagement/AzureResilienceManagement/readme.md]
