@@ -85,7 +85,7 @@ namespace Microsoft.Resources.DeploymentStacks {
   interface DeploymentStacksWhatIfAtScope
     extends DeploymentStackWhatIfCommon<
         Extension.ScopeParameter,
-        "deploymentStackWhatIfResult"
+        "DeploymentStackWhatIfResult"
       > {}
 
   @@scope(DeploymentStacksWhatIfAtScope.get, "csharp");
