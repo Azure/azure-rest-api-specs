@@ -46,6 +46,8 @@ interface Evaluators {}
 @@clientLocation(Azure.AI.Projects.Evaluators.deleteVersion, Evaluators);
 @@clientLocation(Azure.AI.Projects.Evaluators.createVersion, Evaluators);
 @@clientLocation(Azure.AI.Projects.Evaluators.updateVersion, Evaluators);
+@@clientLocation(Azure.AI.Projects.Evaluators.startPendingUpload, Evaluators);
+@@clientLocation(Azure.AI.Projects.Evaluators.getCredentials, Evaluators);
 
 // Evaluator generation jobs → nested under Evaluators sub-client
 @@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.create, Evaluators);
@@ -62,6 +64,11 @@ interface Evaluators {}
 @@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.delete, Evaluators);
 
 // Evaluation suites operations
+@@clientLocation(Azure.AI.Projects.EvaluationSuites.listVersions, Evaluators);
+@@clientLocation(Azure.AI.Projects.EvaluationSuites.listLatest, Evaluators);
+@@clientLocation(Azure.AI.Projects.EvaluationSuites.getVersion, Evaluators);
+@@clientLocation(Azure.AI.Projects.EvaluationSuites.deleteVersion, Evaluators);
+@@clientLocation(Azure.AI.Projects.EvaluationSuites.createOrUpdateVersion, Evaluators);
 @@clientLocation(Azure.AI.Projects.EvaluationSuites.createEvaluationSuiteVersion, Evaluators);
 @@clientLocation(Azure.AI.Projects.EvaluationSuites.run, Evaluators);
 
@@ -148,15 +155,6 @@ interface Datasets {}
 @@clientLocation(Azure.AI.Projects.DataGenerationJobs.create, Datasets);
 @@clientLocation(Azure.AI.Projects.DataGenerationJobs.cancel, Datasets);
 @@clientLocation(Azure.AI.Projects.DataGenerationJobs.delete, Datasets);
-
-
-
-// Evaluation suite generation jobs → nested under evaluations sub-client
-@@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.get, Evaluators);
-@@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.list, Evaluators);
-@@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.create, Evaluators);
-@@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.cancel, Evaluators);
-@@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.delete, Evaluators);
 
 // Agent optimization jobs → own sub-client
 interface AgentOptimizationJobs {}

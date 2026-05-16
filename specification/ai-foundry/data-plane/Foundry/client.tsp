@@ -190,6 +190,9 @@ using Azure.AI.Projects;
 // Need to explicitly mention both languages to avoid compile error
 @@clientName(Evaluators.listLatestVersions, "list", "python, javascript");
 
+// Evaluator pending upload
+@@clientName(Evaluators.startPendingUpload, "pendingUpload");
+
 // Evaluator generation jobs — unscoped names (fixes AllScopes conflict)
 @@clientName(EvaluatorGenerationJobs.create, "create_generation_job");
 @@clientName(EvaluatorGenerationJobs.get, "get_generation_job");
@@ -227,10 +230,21 @@ using Azure.AI.Projects;
 @@clientName(EvaluationSuiteGenerationJobs.cancel, "cancelGenerationSuiteJob", "javascript");
 @@clientName(EvaluationSuiteGenerationJobs.delete, "deleteGenerationSuiteJob", "javascript");
 
-@@clientName(EvaluationSuites.createEvaluationSuiteVersion, "create_evaluation_suite_version");
+// EvaluationSuites versioned operations
+@@clientName(EvaluationSuites.listVersions, "list_evaluation_suite_versions");
+@@clientName(EvaluationSuites.listLatest, "list_evaluation_suites");
+@@clientName(EvaluationSuites.getVersion, "get_evaluation_suite");
+@@clientName(EvaluationSuites.deleteVersion, "delete_evaluation_suite");
+@@clientName(EvaluationSuites.createOrUpdateVersion, "create_or_update_evaluation_suite");
+@@clientName(EvaluationSuites.createEvaluationSuiteVersion, "create_evaluation_suite");
 @@clientName(EvaluationSuites.run, "run_evaluation_suite");
 
-@@clientName(EvaluationSuites.createEvaluationSuiteVersion, "createEvaluationSuiteVersion", "javascript");
+@@clientName(EvaluationSuites.listVersions, "listEvaluationSuiteVersions", "javascript");
+@@clientName(EvaluationSuites.listLatest, "listEvaluationSuites", "javascript");
+@@clientName(EvaluationSuites.getVersion, "getEvaluationSuite", "javascript");
+@@clientName(EvaluationSuites.deleteVersion, "deleteEvaluationSuite", "javascript");
+@@clientName(EvaluationSuites.createOrUpdateVersion, "createOrUpdateEvaluationSuite", "javascript");
+@@clientName(EvaluationSuites.createEvaluationSuiteVersion, "createEvaluationSuite", "javascript");
 @@clientName(EvaluationSuites.run, "runEvaluationSuite", "javascript");
 // EvaluatorVersion datetime fields are typed as string in the spec but carry ISO-8601 timestamps
 @@alternateType(EvaluatorVersion.created_at, utcDateTime, "python");
