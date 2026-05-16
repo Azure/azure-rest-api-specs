@@ -99,8 +99,8 @@ interface AgentSessionFiles {
       /** The session ID. */
       @path agent_session_id: string;
 
-      /** The directory path to list, relative to the session home directory. */
-      @query path: string;
+      /** The directory path to list, relative to the session home directory. Defaults to the home directory if not provided. */
+      @query path?: string;
 
       ...UserIsolationKeyHeader;
       ...CommonPageQueryParameters;
