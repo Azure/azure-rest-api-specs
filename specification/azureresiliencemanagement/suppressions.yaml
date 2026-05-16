@@ -8,7 +8,8 @@
     - options.@azure-tools/typespec-ts.*
   paths: [resource-manager/Microsoft.AzureResilienceManagement/AzureResilienceManagement/tspconfig.yaml]
 
-- tool: Avocado
+- tool: Swagger Avocado
+  path: resource-manager/Microsoft.AzureResilienceManagement/AzureResilienceManagement/preview/2026-03-01-preview/openapi.json
   reason: >
     The default tag (package-2026-04-01-preview) intentionally does not include all paths
     from previous preview versions. The 2026-04-01-preview API version (current latest)
@@ -16,5 +17,9 @@
     drill testfailovercleanup, drill refreshreadinessstate, recoverychildjobs) that existed
     in 2026-03-01-preview. This is an intentional API evolution in private preview; consumers
     needing the removed operations should use the per-version tag package-2026-03-01-preview.
-  rules: [MISSING_APIS_IN_DEFAULT_TAG]
-  paths: [resource-manager/Microsoft.AzureResilienceManagement/AzureResilienceManagement/readme.md]
+- tool: Swagger Avocado
+  path: resource-manager/Microsoft.AzureResilienceManagement/AzureResilienceManagement/preview/2025-02-01-preview/openapi.json
+  reason: >
+    Older preview API version retained for compatibility. The default tag points to
+    2026-04-01-preview; consumers needing 2025-02-01-preview should use the per-version
+    tag package-2025-02-01-preview.
