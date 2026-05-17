@@ -5,6 +5,9 @@ namespace Azure.AI.Projects;
 
 @doc("A paginated list of items.")
 model SkillsPagedResult<T> {
+  @doc("The object type, which is always 'list'.")
+  object: "list";
+
   @doc("The requested list of items.")
   @pageItems
   data: T[];
@@ -38,9 +41,15 @@ model SkillInlineContent {
   @doc("The skill instructions in markdown format. This is the body content of the SKILL.md file.")
   instructions: string;
 
+  @doc("License name or reference to a bundled license file.")
+  license?: string;
+
   @doc("Environment requirements or compatibility notes for the skill.")
   @maxLength(500)
   compatibility?: string;
+
+  @doc("Arbitrary key-value metadata for additional properties.")
+  metadata?: Record<string>;
 
   @doc("Space-separated list of pre-approved tools the skill may use. Experimental.")
   allowed_tools?: string;
@@ -87,7 +96,7 @@ model Skill {
 
   @doc("A human-readable description of the skill.")
   @maxLength(1024)
-  description?: string;
+  description: string;
 
   @doc("The Unix timestamp (seconds) when the skill was created.")
   @encode("unixTimestamp", int32)
@@ -119,7 +128,7 @@ model SkillVersion {
 
   @doc("A human-readable description of the skill version.")
   @maxLength(1024)
-  description?: string;
+  description: string;
 
   @doc("The Unix timestamp (seconds) when the skill version was created.")
   @encode("unixTimestamp", int32)
@@ -201,6 +210,9 @@ model DeleteSkillResponse {
 
   @doc("Whether the skill was successfully deleted.")
   deleted: boolean;
+
+  @doc("The object type, which is always 'skill.deleted'.")
+  object: "skill.deleted";
 }
 
 @doc("A deleted skill version.")
@@ -213,6 +225,9 @@ model DeleteSkillVersionResponse {
 
   @doc("The version that was deleted.")
   version: string;
+
+  @doc("The object type, which is always 'skill.version.deleted'.")
+  object: "skill.version.deleted";
 }
 
 @doc("The response body for downloading a skill package.")
