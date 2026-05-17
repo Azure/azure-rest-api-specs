@@ -79,6 +79,11 @@ using Microsoft.AppConfiguration;
   ConfigurationStoresOperationGroup.listDeleted,
   ConfigurationStores
 );
+@@clientName(
+  ConfigurationStoresOperationGroup.listDeleted,
+  "GetDeletedAppConfigurationStores",
+  "csharp"
+);
 
 @@clientLocation(OperationsOperationGroup.checkNameAvailability, Operations);
 @@clientLocation(
