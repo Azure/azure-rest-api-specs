@@ -379,6 +379,10 @@
         "issueCreation": {
           "$ref": "#/definitions/OperationSettings",
           "description": "Settings for the issue creation operation."
+        },
+        "investigation": {
+          "$ref": "#/definitions/OperationSettings",
+          "description": "Settings for the investigation operation."
         }
       }
     },
@@ -574,7 +578,7 @@
       "description": "Execution mode for a specific agent operation.",
       "enum": [
         "Auto",
-        "ManualOnly"
+        "Manual"
       ],
       "x-ms-enum": {
         "name": "OperationMode",
@@ -586,8 +590,8 @@
             "description": "The operation runs autonomously."
           },
           {
-            "name": "manualOnly",
-            "value": "ManualOnly",
+            "name": "manual",
+            "value": "Manual",
             "description": "The operation runs only when triggered manually."
           }
         ]
