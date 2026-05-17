@@ -86,11 +86,14 @@ interface DataMigrationServices {
   @tag("PUT")
   createOrUpdate is DataMigrationServiceOps.CreateOrUpdateAsync<
     DataMigrationService,
-    Response = ArmResourceUpdatedResponse<DataMigrationService> | ArmResourceCreatedResponse<
-      DataMigrationService,
-      ArmLroLocationHeader<FinalResult = DataMigrationService> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<DataMigrationService>
+      | ArmResourceCreatedResponse<
+          DataMigrationService,
+          ArmLroLocationHeader<FinalResult = DataMigrationService> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -123,7 +126,10 @@ interface DataMigrationServices {
       @query("deleteRunningTasks")
       deleteRunningTasks?: boolean;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -224,12 +230,15 @@ interface DataMigrationServices {
 
 @@doc(DataMigrationService.name, "Name of the service");
 @@doc(DataMigrationService.properties, "Custom service properties");
-@@doc(DataMigrationServices.createOrUpdate::parameters.resource,
+@@doc(
+  DataMigrationServices.createOrUpdate::parameters.resource,
   "Information about the service"
 );
-@@doc(DataMigrationServices.update::parameters.properties,
+@@doc(
+  DataMigrationServices.update::parameters.properties,
   "Information about the service"
 );
-@@doc(DataMigrationServices.checkChildrenNameAvailability::parameters.body,
+@@doc(
+  DataMigrationServices.checkChildrenNameAvailability::parameters.body,
   "Requested name to validate"
 );

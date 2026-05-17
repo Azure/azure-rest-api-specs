@@ -50,6 +50,7 @@ interface JobTargetGroups {
 
 @@doc(JobTargetGroup.name, "The name of the target group.");
 @@doc(JobTargetGroup.properties, "Resource properties.");
-@@doc(JobTargetGroups.createOrUpdate::parameters.resource,
+@@doc(
+  JobTargetGroups.createOrUpdate::parameters.resource,
   "The requested state of the target group."
 );

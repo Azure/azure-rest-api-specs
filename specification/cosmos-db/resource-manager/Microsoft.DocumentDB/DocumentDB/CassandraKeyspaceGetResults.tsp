@@ -46,8 +46,10 @@ interface CassandraKeyspaceGetResultsOperationGroup {
   createUpdateCassandraKeyspace is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     CassandraKeyspaceGetResults,
     Request = CassandraKeyspaceCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<CassandraKeyspaceGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = CassandraKeyspaceGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<CassandraKeyspaceGetResults>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = CassandraKeyspaceGetResults> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -55,7 +57,9 @@ interface CassandraKeyspaceGetResultsOperationGroup {
    */
   deleteCassandraKeyspace is ArmResourceDeleteWithoutOkAsync<
     CassandraKeyspaceGetResults,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | NoContentResponse
+    Response =
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+      | NoContentResponse
   >;
 
   /**
@@ -68,13 +72,16 @@ interface CassandraKeyspaceGetResultsOperationGroup {
 }
 
 @@doc(CassandraKeyspaceGetResults.name, "Cosmos DB keyspace name.");
-@@doc(CassandraKeyspaceGetResults.properties,
+@@doc(
+  CassandraKeyspaceGetResults.properties,
   "The properties of an Azure Cosmos DB Cassandra keyspace"
 );
-@@doc(CassandraKeyspaceGetResultsOperationGroup.createUpdateCassandraKeyspace::parameters.resource,
+@@doc(
+  CassandraKeyspaceGetResultsOperationGroup.createUpdateCassandraKeyspace::parameters.resource,
   "The parameters to provide for the current Cassandra keyspace."
 );
-@@visibility(CassandraKeyspaceGetResults.location,
+@@visibility(
+  CassandraKeyspaceGetResults.location,
   Lifecycle.Read,
   Lifecycle.Create,
   Lifecycle.Update

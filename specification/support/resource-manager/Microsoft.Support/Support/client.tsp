@@ -5,22 +5,26 @@ using Azure.ClientGenerator.Core;
 using Microsoft.Support;
 
 @@clientName(CommunicationDetails, "SupportTicketCommunication", "csharp");
-@@clientName(CommunicationDirection,
+@@clientName(
+  CommunicationDirection,
   "SupportTicketCommunicationDirection",
   "csharp"
 );
 @@clientName(CommunicationType, "SupportTicketCommunicationType", "csharp");
 @@clientName(SupportTicketDetails, "SupportTicket", "csharp");
-@@clientName(CheckNameAvailabilityInput,
+@@clientName(
+  CheckNameAvailabilityInput,
   "SupportNameAvailabilityContent",
   "csharp"
 );
 @@clientName(CheckNameAvailabilityInput.type, "ResourceType", "csharp");
-@@clientName(CheckNameAvailabilityOutput,
+@@clientName(
+  CheckNameAvailabilityOutput,
   "SupportNameAvailabilityResult",
   "csharp"
 );
-@@clientName(CheckNameAvailabilityOutput.nameAvailable,
+@@clientName(
+  CheckNameAvailabilityOutput.nameAvailable,
   "IsNameAvailable",
   "csharp"
 );
@@ -33,12 +37,14 @@ using Microsoft.Support;
 @@clientName(Consent, "AdvancedDiagnosticConsent", "csharp");
 @@clientName(MessageProperties, "ChatTranscriptMessageProperties", "csharp");
 @@clientName(UploadFile, "UploadFileContent", "csharp");
-@@clientName(ProblemClassificationProperties.secondaryConsentEnabled,
+@@clientName(
+  ProblemClassificationProperties.secondaryConsentEnabled,
   "SecondaryConsentEnabledInfo",
   "csharp"
 );
 @@clientName(SecondaryConsent.type, "SecondaryConsentType", "csharp");
-@@clientName(SecondaryConsentEnabled.type,
+@@clientName(
+  SecondaryConsentEnabled.type,
   "SecondaryConsentEnabledType",
   "csharp"
 );
@@ -46,15 +52,18 @@ using Microsoft.Support;
 @@clientName(SeverityLevel, "SupportSeverityLevel", "csharp");
 @@clientName(ContactProfile, "SupportContactProfile", "csharp");
 @@clientName(ServiceLevelAgreement, "SupportServiceLevelAgreement", "csharp");
-@@clientName(LookUpResourceIdRequest,
+@@clientName(
+  LookUpResourceIdRequest,
   "SupportLookUpResourceIdContent",
   "csharp"
 );
-@@clientName(LookUpResourceIdResponse,
+@@clientName(
+  LookUpResourceIdResponse,
   "SupportLookUpResourceIdResult",
   "csharp"
 );
-@@clientName(ServiceClassificationRequest,
+@@clientName(
+  ServiceClassificationRequest,
   "SupportServiceClassificationContent",
   "csharp"
 );
@@ -63,63 +72,76 @@ using Microsoft.Support;
 @@clientName(FileDetails, "SupportFileDetail", "csharp");
 @@clientName(FileWorkspaces, "SubscriptionFileWorkspace", "csharp");
 @@clientName(SupportTickets, "SubscriptionSupportTicket", "csharp");
-@@clientName(SupportTickets.checkNameAvailability,
+@@clientName(
+  SupportTickets.checkNameAvailability,
   "CheckCommunicationNameAvailability",
   "csharp"
 );
 @@clientName(ChatTranscripts, "SupportTicketChatTranscript", "csharp");
 @@clientName(Communications, "SupportTicketCommunication", "csharp");
 @@clientName(Files, "SupportTicketFile", "csharp");
-@@clientName(ChatTranscriptsNoSubscription,
+@@clientName(
+  ChatTranscriptsNoSubscription,
   "SupportTicketNoSubChatTranscript",
   "csharp"
 );
-@@clientName(CommunicationsNoSubscription,
+@@clientName(
+  CommunicationsNoSubscription,
   "SupportTicketNoSubCommunication",
   "csharp"
 );
 @@clientName(FilesNoSubscription, "SupportTicketNoSubFile", "csharp");
 @@clientName(ClassificationService, "SupportClassificationService", "csharp");
-@@clientName(DirectConnectEscalation,
+@@clientName(
+  DirectConnectEscalation,
   "SupportDirectConnectEscalation",
   "csharp"
 );
 @@clientName(EscalationStatus, "SupportEscalationStatus", "csharp");
-@@clientName(ServiceClassificationAnswer,
+@@clientName(
+  ServiceClassificationAnswer,
   "SupportServiceClassificationAnswer",
   "csharp"
 );
-@@clientName(ServiceClassificationOutput,
+@@clientName(
+  ServiceClassificationOutput,
   "SupportServiceClassificationOutput",
   "csharp"
 );
 @@clientName(FileWorkspacesNoSubscription, "TenantFileWorkspace", "csharp");
 @@clientName(SupportTicketsNoSubscription, "TenantSupportTicket", "csharp");
-@@clientName(SupportTicketsNoSubscription.checkNameAvailability,
+@@clientName(
+  SupportTicketsNoSubscription.checkNameAvailability,
   "CheckNameAvailabilityCommunicationsNoSubscription",
   "csharp"
 );
-@@clientName(SupportTicketsOperationGroup.checkNameAvailability,
+@@clientName(
+  SupportTicketsOperationGroup.checkNameAvailability,
   "CheckSupportTicketNameAvailability",
   "csharp"
 );
-@@clientName(SupportTicketsNoSubscriptionOperationGroup.checkNameAvailability,
+@@clientName(
+  SupportTicketsNoSubscriptionOperationGroup.checkNameAvailability,
   "CheckNameAvailabilitySupportTicketsNoSubscription",
   "csharp"
 );
-@@alternateType(LookUpResourceIdRequest.identifier,
+@@alternateType(
+  LookUpResourceIdRequest.identifier,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(LookUpResourceIdResponse.resourceId,
+@@alternateType(
+  LookUpResourceIdResponse.resourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(TechnicalTicketDetails.resourceId,
+@@alternateType(
+  TechnicalTicketDetails.resourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ClassificationService.resourceTypes,
+@@alternateType(
+  ClassificationService.resourceTypes,
   Azure.Core.armResourceType[],
   "csharp"
 );
