@@ -26,19 +26,19 @@ namespace Microsoft.Monitor {
     /** Whether the observability agent is enabled. Defaults to true when not specified. */
     enabled?: boolean;
 
-    /** List of autonomous operations that are disabled on this observability agent. When omitted, no autonomous operations are disabled. Currently supported values: AutoInvestigate. Additional values may be added in the future. */
-    disableAutonomousOperations?: AutonomousOperation[];
-
     /** Configuration overrides for agent operations. When omitted, default behavior applies for all operations. */
     operations?: AgentOperations;
   }
 
   /**
-   * Autonomous operations supported by an observability agent.
+   * Execution mode for a specific agent operation.
    */
-  union AutonomousOperation {
-    /** AI-driven autonomous investigation of detected issues. */
-    autoInvestigate: "AutoInvestigate",
+  union OperationMode {
+    /** The operation runs autonomously. */
+    auto: "Auto",
+
+    /** The operation runs only when triggered manually. */
+    manualOnly: "ManualOnly",
 
     string,
   }
@@ -55,6 +55,9 @@ namespace Microsoft.Monitor {
    * Settings for a specific agent operation.
    */
   model OperationSettings {
+    /** Execution mode for this operation. Defaults to Auto when not specified. */
+    mode?: OperationMode;
+
     /** Custom instructions that guide the agent's behavior for this operation. */
     @maxLength(4096)
     customInstructions?: string;
