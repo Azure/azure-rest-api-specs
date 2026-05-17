@@ -7,12 +7,14 @@ using Data.Tables;
 namespace ClientCustomizations;
 
 @@clientNamespace(Data.Tables, "Azure.Data.Tables._generated", "python");
-@@clientNamespace(Data.Tables.Service,
+@@clientNamespace(
+  Data.Tables.Service,
   "Azure.Data.Tables._generated",
   "python"
 );
 @@clientNamespace(Data.Tables.Table, "Azure.Data.Tables._generated", "python");
-@@clientNamespace(ClientCustomizations,
+@@clientNamespace(
+  ClientCustomizations,
   "Azure.Data.Tables._generated",
   "python"
 );

@@ -192,6 +192,7 @@ interface Incidents {
 @@doc(Incident.name, "Incident ID");
 @@doc(Incident.properties, "Incident properties");
 @@doc(Incidents.createOrUpdate::parameters.resource, "The incident");
-@@doc(Incidents.runPlaybook::parameters.body,
+@@doc(
+  Incidents.runPlaybook::parameters.body,
   "Describes the request body for triggering a playbook on an incident."
 );

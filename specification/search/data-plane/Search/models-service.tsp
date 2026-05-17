@@ -3035,6 +3035,7 @@ union StopwordsList {
 }
 
 /** Options with various types of permission data to index. */
+@removed(Versions.v2026_04_01)
 union IndexerPermissionOption {
   string,
 
@@ -3370,7 +3371,9 @@ model IndexingParametersConfiguration {
 
   /** Specifies the submode that will determine whether a markdown file will be parsed into exactly one search document or multiple search documents. Default is `oneToMany`. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
-  markdownParsingSubmode?: MarkdownParsingSubmode | null = MarkdownParsingSubmode.OneToMany;
+  markdownParsingSubmode?:
+    | MarkdownParsingSubmode
+    | null = MarkdownParsingSubmode.OneToMany;
 
   /** Specifies the max header depth that will be considered while grouping markdown content. Default is `h6`. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
@@ -4369,7 +4372,9 @@ model RescoringOptions {
 
   /** Controls the storage method for original vectors. This setting is immutable. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
-  rescoreStorageMethod?: VectorSearchCompressionRescoreStorageMethod | null = VectorSearchCompressionRescoreStorageMethod.PreserveOriginals;
+  rescoreStorageMethod?:
+    | VectorSearchCompressionRescoreStorageMethod
+    | null = VectorSearchCompressionRescoreStorageMethod.PreserveOriginals;
 }
 
 /** Response from a List Indexes request. If successful, it includes the full definitions of all indexes. */
@@ -6348,15 +6353,21 @@ model DocumentExtractionSkill extends SearchIndexerSkill {
 model DocumentIntelligenceLayoutSkill extends SearchIndexerSkill {
   /** Controls the output format. Default is 'markdown'. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
-  outputFormat?: DocumentIntelligenceLayoutSkillOutputFormat | null = DocumentIntelligenceLayoutSkillOutputFormat.Markdown;
+  outputFormat?:
+    | DocumentIntelligenceLayoutSkillOutputFormat
+    | null = DocumentIntelligenceLayoutSkillOutputFormat.Markdown;
 
   /** Controls the cardinality of the output produced by the skill. Default is 'oneToMany'. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
-  outputMode?: DocumentIntelligenceLayoutSkillOutputMode | null = DocumentIntelligenceLayoutSkillOutputMode.OneToMany;
+  outputMode?:
+    | DocumentIntelligenceLayoutSkillOutputMode
+    | null = DocumentIntelligenceLayoutSkillOutputMode.OneToMany;
 
   /** The depth of headers in the markdown output. Default is h6. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
-  markdownHeaderDepth?: DocumentIntelligenceLayoutSkillMarkdownHeaderDepth | null = DocumentIntelligenceLayoutSkillMarkdownHeaderDepth.H6;
+  markdownHeaderDepth?:
+    | DocumentIntelligenceLayoutSkillMarkdownHeaderDepth
+    | null = DocumentIntelligenceLayoutSkillMarkdownHeaderDepth.H6;
 
   /** Controls the cardinality of the content extracted from the document by the skill. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
@@ -6494,7 +6505,9 @@ union ContentUnderstandingSkillExtractionOptions {
 model ContentUnderstandingSkillChunkingProperties {
   /** The unit of the chunk. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
-  unit?: ContentUnderstandingSkillChunkingUnit | null = ContentUnderstandingSkillChunkingUnit.Characters;
+  unit?:
+    | ContentUnderstandingSkillChunkingUnit
+    | null = ContentUnderstandingSkillChunkingUnit.Characters;
 
   /** The maximum chunk length in characters. Default is 500. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
@@ -6675,7 +6688,9 @@ model ListIndexStatsSummary {
 model DocumentIntelligenceLayoutSkillChunkingProperties {
   /** The unit of the chunk. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
-  unit?: DocumentIntelligenceLayoutSkillChunkingUnit | null = DocumentIntelligenceLayoutSkillChunkingUnit.Characters;
+  unit?:
+    | DocumentIntelligenceLayoutSkillChunkingUnit
+    | null = DocumentIntelligenceLayoutSkillChunkingUnit.Characters;
 
   /** The maximum chunk length in characters. Default is 500. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"

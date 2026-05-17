@@ -62,9 +62,11 @@ interface SuppressionLists {
 @@maxLength(SuppressionListResource.name, 253);
 @@minLength(SuppressionListResource.name, 1);
 @@doc(SuppressionListResource.name, "The name of the suppression list.");
-@@doc(SuppressionListResource.properties,
+@@doc(
+  SuppressionListResource.properties,
   "The properties of a SuppressionList resource."
 );
-@@doc(SuppressionLists.createOrUpdate::parameters.resource,
+@@doc(
+  SuppressionLists.createOrUpdate::parameters.resource,
   "Parameters for the create or update operation"
 );
