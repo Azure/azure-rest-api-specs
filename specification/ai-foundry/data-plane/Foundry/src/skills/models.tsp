@@ -55,19 +55,13 @@ model SkillInlineContent {
   allowed_tools?: string;
 }
 
-@doc("Metadata for creating a skill version via multipart file upload.")
-model CreateSkillVersionMetadata {
-  @doc("Whether to set this version as the default.")
-  default?: boolean;
-}
-
-@doc("Multipart request body for creating a skill version from files.")
+@doc("Multipart request body for creating a skill version from files. Accepts either a single zip file or multiple individual skill files (directory upload). For zip uploads, the server extracts and validates contents. For directory uploads, files are validated as-is.")
 model CreateSkillVersionFromFilesBody {
-  @doc("JSON metadata including description and default flag.")
-  metadata: HttpPart<CreateSkillVersionMetadata>;
-
-  @doc("Skill files to upload. Each file includes its relative path in the filename.")
+  @doc("Skill files to upload. Upload a single zip file or multiple individual files with relative paths.")
   files: HttpPart<File>[];
+
+  @doc("Whether to set this version as the default.")
+  default?: HttpPart<boolean>;
 }
 
 alias GetSkillRequest = {
