@@ -38,7 +38,7 @@ namespace Microsoft.Monitor {
     auto: "Auto",
 
     /** The operation runs only when triggered manually. */
-    manualOnly: "ManualOnly",
+    manual: "Manual",
 
     string,
   }
@@ -49,6 +49,9 @@ namespace Microsoft.Monitor {
   model AgentOperations {
     /** Settings for the issue creation operation. */
     issueCreation?: OperationSettings;
+
+    /** Settings for the investigation operation. */
+    investigation?: OperationSettings;
   }
 
   /**
