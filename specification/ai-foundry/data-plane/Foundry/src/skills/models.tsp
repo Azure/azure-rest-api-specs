@@ -205,6 +205,9 @@ alias DeleteSkillVersionRequest = {
 
 @doc("A deleted skill.")
 model DeleteSkillResponse {
+  @doc("The unique identifier of the deleted skill.")
+  id: string;
+
   @doc("The unique name of the skill.")
   name: SkillName;
 
@@ -219,6 +222,9 @@ model DeleteSkillResponse {
 model DeleteSkillVersionResponse {
   @doc("The unique identifier of the deleted skill version.")
   id: string;
+
+  @doc("The name of the skill.")
+  name: SkillName;
 
   @doc("Whether the skill version was successfully deleted.")
   deleted: boolean;
