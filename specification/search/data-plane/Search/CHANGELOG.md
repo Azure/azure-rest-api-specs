@@ -53,7 +53,7 @@ It is maintained for internal engineering reference and API Stewardship Board re
 - **`IndexedSql`**: `IndexedSqlKnowledgeSource`, `IndexedSqlKnowledgeSourceParameters` (connection string, query, column mappings), `ContentColumnMapping`, `EmbeddingColumnMapping`.
 - **`WorkIQ`**: `WorkIQKnowledgeSource`, `WorkIQKnowledgeSourceParams`.
 - **`File`**: `FileKnowledgeSource`, `FileKnowledgeSourceParameters`, `KnowledgeSourceFile`, `ListKnowledgeSourceFilesResult`.
-- **`McpServer`**: `McpServerKnowledgeSource`, `McpServerKnowledgeSourceParameters`; auth via `McpServerAuthentication` (Foundry/StoredHeaders variants); tools via `McpServerTool`; output via `McpServerOutputParsing` (`auto`, `json`, `split`, `none`).
+- **`McpServer`**: `McpServerKnowledgeSource`, `McpServerKnowledgeSourceParameters`, `McpServerKnowledgeSourceParams`; auth via `McpServerAuthentication` (Foundry/StoredHeaders variants); tools via `McpServerTool`; output via `McpServerOutputParsing` (`auto`, `json`, `split`, `none`).
 - **`FabricDataAgent`**: `FabricDataAgentKnowledgeSource`, `FabricDataAgentKnowledgeSourceParameters`; activity/reference types.
 - **`FabricOntology`**: `FabricOntologyKnowledgeSource`, `FabricOntologyKnowledgeSourceParameters`; activity/reference types.
 
@@ -106,8 +106,9 @@ It is maintained for internal engineering reference and API Stewardship Board re
 [NEW in this preview]
 
 - **WorkIQ**: `KnowledgeBaseWorkIQActivityRecord`, `KnowledgeBaseWorkIQActivityArguments`, `KnowledgeBaseWorkIQReference` (`WorkIQAttribution[]`, `searchSensitivityLabelInfo`), `WorkIQAttribution` (`seeMoreWebUrl`).
+- **MCP Server**: `KnowledgeBaseMcpServerActivityRecord`, `KnowledgeBaseMcpServerActivityArguments` (`toolName`, `toolArguments`), `KnowledgeBaseMcpServerReference` (`toolName`, `title`).
 - **LLM web summarization**: `KnowledgeBaseModelWebSummarizationActivityRecord` (`inputTokens`, `outputTokens`, `modelName`).
-- **New enum values**: `modelWebSummarization`, `workIQ`, `fabricDataAgent`, `fabricOntology` → `KnowledgeBaseActivityRecordType`; `workIQ`, `fabricDataAgent`, `fabricOntology` → `KnowledgeBaseReferenceType`.
+- **New enum values**: `modelWebSummarization`, `workIQ`, `fabricDataAgent`, `fabricOntology`, `mcpServer` → `KnowledgeBaseActivityRecordType`; `workIQ`, `fabricDataAgent`, `fabricOntology`, `mcpServer` → `KnowledgeBaseReferenceType`.
 
 **Sensitivity label model**:
 
