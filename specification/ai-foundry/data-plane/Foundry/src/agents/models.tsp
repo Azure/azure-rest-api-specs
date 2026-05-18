@@ -1059,6 +1059,23 @@ model CreateAgentSessionRequest {
 
 /**
  * Known SSE event types emitted by the hosted agent session log stream.
+
+/** Response returned when stopping an agent session fails. */
+@doc("Response returned when stopping an agent session fails.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
+)
+model AgentSessionStopFailedResponse {
+  /** The session resource at the time of failure. */
+  @visibility(Lifecycle.Read)
+  session: AgentSessionResource;
+
+  /** Error details describing why the stop operation failed. */
+  error: ApiError;
+}
+
+/**
  * Additional event types may be introduced in future versions.
  */
 @extension(

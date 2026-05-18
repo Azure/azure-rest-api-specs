@@ -458,7 +458,7 @@ interface Agents {
    * Returns a failed session resource when the stop attempt fails.
    */
   @post
-  @route("/agents/{agent_name}/endpoint/sessions/{session_id}/stop")
+  @route("/agents/{agent_name}/endpoint/sessions/{session_id}:stop")
   @extension(
     "x-ms-foundry-meta",
     #{
