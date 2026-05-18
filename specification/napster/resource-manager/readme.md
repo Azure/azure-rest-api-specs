@@ -53,3 +53,4 @@ directive:
   - suppress: PathResourceProviderNamePascalCase
     from: openapi.json
     reason: This is a specific resource provider name requested by liftr partner.
+```

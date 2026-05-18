@@ -31,7 +31,7 @@ use-internal-constructors: true
 add-credentials: true
 ```
 
-### Tag: package-2026-04-tsp
+### Tag: package-2026-02-tsp
 
 These settings apply only when `--tag=package-2026-02-tsp` is specified on the command line.
 
