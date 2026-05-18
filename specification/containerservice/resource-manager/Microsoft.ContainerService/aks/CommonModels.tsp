@@ -3773,7 +3773,7 @@ model ManagedClusterAzureMonitorProfileMetrics {
   /**
    * Control plane metrics collection profile for the Azure Managed Prometheus addon. Configures collection of operational runtime metrics from managed control plane components (kube-apiserver, etcd, etc). See aka.ms/aks/controlplane-metrics for an overview.
    */
-  @added(Versions.v2026_04_02_preview)
+  @added(Versions.v2026_04_01)
   controlPlane?: ManagedClusterAzureMonitorProfileMetricsControlPlane;
 }
 
@@ -3795,7 +3795,7 @@ model ManagedClusterAzureMonitorProfileKubeStateMetrics {
 /**
  * Control plane metrics collection profile for the Azure Managed Prometheus addon. Configures collection of operational runtime metrics from managed control plane components (kube-apiserver, etcd, etc). See aka.ms/aks/controlplane-metrics for an overview.
  */
-@added(Versions.v2026_04_02_preview)
+@added(Versions.v2026_04_01)
 model ManagedClusterAzureMonitorProfileMetricsControlPlane {
   /**
    * Whether to enable or disable collection of control plane metrics by the Azure Managed Prometheus addon. Defaults to disabled. See aka.ms/aks/controlplane-metrics for details.
