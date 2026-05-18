@@ -291,6 +291,7 @@ using Microsoft.DataFactory;
 @@clientName(CassandraSourceReadConsistencyLevels.ALL, "All", "csharp");
 @@clientName(CassandraSourceReadConsistencyLevels.ONE, "One", "csharp");
 @@clientName(CassandraSourceReadConsistencyLevels.TWO, "Two", "csharp");
+@@clientName(WebHookActivityMethod.POST, "Post", "csharp");
 @@clientName(
   CassandraSourceReadConsistencyLevels.LOCAL_ONE,
   "LocalOne",
