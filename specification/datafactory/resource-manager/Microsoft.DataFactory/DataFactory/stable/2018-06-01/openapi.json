@@ -3296,6 +3296,279 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/nodes/{nodeName}": {
+      "get": {
+        "operationId": "IntegrationRuntimeNodes_Get",
+        "tags": [
+          "integrationRuntimeNodes"
+        ],
+        "description": "Gets a self-hosted integration runtime node.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "factoryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "integrationRuntimeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "The integration runtime node name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 150,
+            "pattern": "^[a-z0-9A-Z][a-z0-9A-Z_-]{0,149}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SelfHostedIntegrationRuntimeNode"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IntegrationRuntimeNodes_Get": {
+            "$ref": "./examples/IntegrationRuntimeNodes_Get.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "IntegrationRuntimeNodes_Update",
+        "tags": [
+          "integrationRuntimeNodes"
+        ],
+        "description": "Updates a self-hosted integration runtime node.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "factoryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "integrationRuntimeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "The integration runtime node name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 150,
+            "pattern": "^[a-z0-9A-Z][a-z0-9A-Z_-]{0,149}$"
+          },
+          {
+            "name": "updateIntegrationRuntimeNodeRequest",
+            "in": "body",
+            "description": "The parameters for updating an integration runtime node.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateIntegrationRuntimeNodeRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SelfHostedIntegrationRuntimeNode"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IntegrationRuntimeNodes_Update": {
+            "$ref": "./examples/IntegrationRuntimeNodes_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "IntegrationRuntimeNodes_Delete",
+        "tags": [
+          "integrationRuntimeNodes"
+        ],
+        "description": "Deletes a self-hosted integration runtime node.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "factoryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "integrationRuntimeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "The integration runtime node name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 150,
+            "pattern": "^[a-z0-9A-Z][a-z0-9A-Z_-]{0,149}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IntegrationRuntimesNodes_Delete": {
+            "$ref": "./examples/IntegrationRuntimeNodes_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/nodes/{nodeName}/ipAddress": {
+      "post": {
+        "operationId": "IntegrationRuntimeNodes_GetIpAddress",
+        "tags": [
+          "integrationRuntimeNodes"
+        ],
+        "description": "Get the IP address of self-hosted integration runtime node.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "factoryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "integrationRuntimeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "nodeName",
+            "in": "path",
+            "description": "The integration runtime node name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 150,
+            "pattern": "^[a-z0-9A-Z][a-z0-9A-Z_-]{0,149}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IntegrationRuntimeNodeIpAddress"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IntegrationRuntimeNodes_GetIpAddress": {
+            "$ref": "./examples/IntegrationRuntimeNodes_GetIpAddress.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/outboundNetworkDependenciesEndpoints": {
       "get": {
         "operationId": "IntegrationRuntimes_ListOutboundNetworkDependenciesEndpoints",
@@ -4565,6 +4838,184 @@
         "x-ms-examples": {
           "ManagedVirtualNetworks_Delete": {
             "$ref": "./examples/ManagedPrivateEndpoints_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}": {
+      "get": {
+        "operationId": "PipelineRuns_Get",
+        "tags": [
+          "pipelineruns"
+        ],
+        "description": "Get a pipeline run by its run ID.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "factoryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "runId",
+            "in": "path",
+            "description": "The pipeline run identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PipelineRun"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PipelineRuns_Get": {
+            "$ref": "./examples/PipelineRuns_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}/cancel": {
+      "post": {
+        "operationId": "PipelineRuns_Cancel",
+        "tags": [
+          "pipelineruns"
+        ],
+        "description": "Cancel a pipeline run by its run ID.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "factoryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "runId",
+            "in": "path",
+            "description": "The pipeline run identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "isRecursive",
+            "in": "query",
+            "description": "If true, cancel all the Child pipelines that are triggered by the current pipeline.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PipelineRuns_Cancel": {
+            "$ref": "./examples/PipelineRuns_Cancel.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}/queryActivityruns": {
+      "post": {
+        "operationId": "ActivityRuns_QueryByPipelineRun",
+        "tags": [
+          "activityruns"
+        ],
+        "description": "Query activity runs based on input filter conditions.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "factoryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "runId",
+            "in": "path",
+            "description": "The pipeline run identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "filterParameters",
+            "in": "body",
+            "description": "Parameters to filter the activity runs.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RunFilterParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ActivityRunsQueryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ActivityRuns_QueryByPipelineRun": {
+            "$ref": "./examples/ActivityRuns_QueryByPipelineRun.json"
           }
         }
       }
@@ -6021,6 +6472,128 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/triggerRuns/{runId}/cancel": {
+      "post": {
+        "operationId": "TriggerRuns_Cancel",
+        "tags": [
+          "triggerruns"
+        ],
+        "description": "Cancel a single trigger instance by runId.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "factoryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "triggerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$"
+          },
+          {
+            "name": "runId",
+            "in": "path",
+            "description": "The pipeline run identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Triggers_Cancel": {
+            "$ref": "./examples/TriggerRuns_Cancel.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/triggerRuns/{runId}/rerun": {
+      "post": {
+        "operationId": "TriggerRuns_Rerun",
+        "tags": [
+          "triggerruns"
+        ],
+        "description": "Rerun single trigger instance by runId.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "factoryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
+          },
+          {
+            "name": "triggerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$"
+          },
+          {
+            "name": "runId",
+            "in": "path",
+            "description": "The pipeline run identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Triggers_Rerun": {
+            "$ref": "./examples/TriggerRuns_Rerun.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/unsubscribeFromEvents": {
       "post": {
         "operationId": "Triggers_UnsubscribeFromEvents",
@@ -6097,579 +6670,6 @@
           "final-state-schema": "#/definitions/TriggerSubscriptionOperationStatus"
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/nodes/{nodeName}": {
-      "get": {
-        "operationId": "IntegrationRuntimeNodes_Get",
-        "tags": [
-          "integrationRuntimeNodes"
-        ],
-        "description": "Gets a self-hosted integration runtime node.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "factoryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
-          },
-          {
-            "name": "integrationRuntimeName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
-          },
-          {
-            "name": "nodeName",
-            "in": "path",
-            "description": "The integration runtime node name.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 150,
-            "pattern": "^[a-z0-9A-Z][a-z0-9A-Z_-]{0,149}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SelfHostedIntegrationRuntimeNode"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "IntegrationRuntimeNodes_Get": {
-            "$ref": "./examples/IntegrationRuntimeNodes_Get.json"
-          }
-        }
-      },
-      "patch": {
-        "operationId": "IntegrationRuntimeNodes_Update",
-        "tags": [
-          "integrationRuntimeNodes"
-        ],
-        "description": "Updates a self-hosted integration runtime node.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "factoryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
-          },
-          {
-            "name": "integrationRuntimeName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
-          },
-          {
-            "name": "nodeName",
-            "in": "path",
-            "description": "The integration runtime node name.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 150,
-            "pattern": "^[a-z0-9A-Z][a-z0-9A-Z_-]{0,149}$"
-          },
-          {
-            "name": "updateIntegrationRuntimeNodeRequest",
-            "in": "body",
-            "description": "The parameters for updating an integration runtime node.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UpdateIntegrationRuntimeNodeRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SelfHostedIntegrationRuntimeNode"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "IntegrationRuntimeNodes_Update": {
-            "$ref": "./examples/IntegrationRuntimeNodes_Update.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "IntegrationRuntimeNodes_Delete",
-        "tags": [
-          "integrationRuntimeNodes"
-        ],
-        "description": "Deletes a self-hosted integration runtime node.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "factoryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
-          },
-          {
-            "name": "integrationRuntimeName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
-          },
-          {
-            "name": "nodeName",
-            "in": "path",
-            "description": "The integration runtime node name.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 150,
-            "pattern": "^[a-z0-9A-Z][a-z0-9A-Z_-]{0,149}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded."
-          },
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "IntegrationRuntimesNodes_Delete": {
-            "$ref": "./examples/IntegrationRuntimeNodes_Delete.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/nodes/{nodeName}/ipAddress": {
-      "post": {
-        "operationId": "IntegrationRuntimeNodes_GetIpAddress",
-        "tags": [
-          "integrationRuntimeNodes"
-        ],
-        "description": "Get the IP address of self-hosted integration runtime node.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "factoryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
-          },
-          {
-            "name": "integrationRuntimeName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
-          },
-          {
-            "name": "nodeName",
-            "in": "path",
-            "description": "The integration runtime node name.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 150,
-            "pattern": "^[a-z0-9A-Z][a-z0-9A-Z_-]{0,149}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/IntegrationRuntimeNodeIpAddress"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "IntegrationRuntimeNodes_GetIpAddress": {
-            "$ref": "./examples/IntegrationRuntimeNodes_GetIpAddress.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}": {
-      "get": {
-        "operationId": "PipelineRuns_Get",
-        "tags": [
-          "pipelineruns"
-        ],
-        "description": "Get a pipeline run by its run ID.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "factoryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
-          },
-          {
-            "name": "runId",
-            "in": "path",
-            "description": "The pipeline run identifier.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PipelineRun"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PipelineRuns_Get": {
-            "$ref": "./examples/PipelineRuns_Get.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}/cancel": {
-      "post": {
-        "operationId": "PipelineRuns_Cancel",
-        "tags": [
-          "pipelineruns"
-        ],
-        "description": "Cancel a pipeline run by its run ID.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "factoryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
-          },
-          {
-            "name": "runId",
-            "in": "path",
-            "description": "The pipeline run identifier.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "isRecursive",
-            "in": "query",
-            "description": "If true, cancel all the Child pipelines that are triggered by the current pipeline.",
-            "required": false,
-            "type": "boolean"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PipelineRuns_Cancel": {
-            "$ref": "./examples/PipelineRuns_Cancel.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}/queryActivityruns": {
-      "post": {
-        "operationId": "ActivityRuns_QueryByPipelineRun",
-        "tags": [
-          "activityruns"
-        ],
-        "description": "Query activity runs based on input filter conditions.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "factoryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
-          },
-          {
-            "name": "runId",
-            "in": "path",
-            "description": "The pipeline run identifier.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "filterParameters",
-            "in": "body",
-            "description": "Parameters to filter the activity runs.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RunFilterParameters"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ActivityRunsQueryResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ActivityRuns_QueryByPipelineRun": {
-            "$ref": "./examples/ActivityRuns_QueryByPipelineRun.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/triggerRuns/{runId}/cancel": {
-      "post": {
-        "operationId": "TriggerRuns_Cancel",
-        "tags": [
-          "triggerruns"
-        ],
-        "description": "Cancel a single trigger instance by runId.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "factoryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
-          },
-          {
-            "name": "triggerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 260,
-            "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$"
-          },
-          {
-            "name": "runId",
-            "in": "path",
-            "description": "The pipeline run identifier.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Triggers_Cancel": {
-            "$ref": "./examples/TriggerRuns_Cancel.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/triggerRuns/{runId}/rerun": {
-      "post": {
-        "operationId": "TriggerRuns_Rerun",
-        "tags": [
-          "triggerruns"
-        ],
-        "description": "Rerun single trigger instance by runId.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "factoryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
-          },
-          {
-            "name": "triggerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 260,
-            "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$"
-          },
-          {
-            "name": "runId",
-            "in": "path",
-            "description": "The pipeline run identifier.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Triggers_Rerun": {
-            "$ref": "./examples/TriggerRuns_Rerun.json"
-          }
-        }
       }
     }
   },

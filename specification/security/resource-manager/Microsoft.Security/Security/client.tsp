@@ -1,35 +1,35 @@
-import "./Alerts/main.tsp";
-import "./AlertsSuppressionRules/main.tsp";
-import "./ApiCollections/main.tsp";
-import "./Applications/main.tsp";
-import "./Assessment/main.tsp";
-import "./ATPSettings/main.tsp";
-import "./Automations/main.tsp";
-import "./ComplianceResults/main.tsp";
-import "./DefenderForStorage/main.tsp";
-import "./Governance/main.tsp";
-import "./HealthReports/main.tsp";
-import "./IoTSecurity/main.tsp";
-import "./LegacySettings/main.tsp";
-import "./Locations/main.tsp";
-import "./MdeOnboarding/main.tsp";
-import "./Operations/main.tsp";
-import "./Pricings/main.tsp";
-import "./PrivateLinks/main.tsp";
-import "./RegulatoryCompliance/main.tsp";
-import "./SecureScore/main.tsp";
-import "./SecurityConnectors/main.tsp";
-import "./SecurityConnectorsDevOps/main.tsp";
-import "./SecurityOperators/main.tsp";
-import "./SecuritySolutions/main.tsp";
-import "./SecurityStandards/main.tsp";
-import "./SensitivitySettings/main.tsp";
-import "./ServerVulnerabilityAssessmentsSettings/main.tsp";
-import "./Settings/main.tsp";
-import "./SqlVulnerabilityAssessments/main.tsp";
-import "./Standards/main.tsp";
-import "./SubAssessments/main.tsp";
-import "./Tasks/main.tsp";
+import "./AlertsAPI/main.tsp";
+import "./AlertsSuppressionRulesAPI/main.tsp";
+import "./ApiCollectionsAPI/main.tsp";
+import "./ApplicationsAPI/main.tsp";
+import "./AssessmentAPI/main.tsp";
+import "./ATPSettingsAPI/main.tsp";
+import "./AutomationsAPI/main.tsp";
+import "./ComplianceResultsAPI/main.tsp";
+import "./DefenderForStorageAPI/main.tsp";
+import "./GovernanceAPI/main.tsp";
+import "./HealthReportsAPI/main.tsp";
+import "./IoTSecurityAPI/main.tsp";
+import "./LegacySettingsAPI/main.tsp";
+import "./LocationsAPI/main.tsp";
+import "./MdeOnboardingAPI/main.tsp";
+import "./OperationsAPI/main.tsp";
+import "./PricingsAPI/main.tsp";
+import "./PrivateLinksAPI/main.tsp";
+import "./RegulatoryComplianceAPI/main.tsp";
+import "./SecureScoreAPI/main.tsp";
+import "./SecurityConnectorsAPI/main.tsp";
+import "./SecurityConnectorsDevOpsAPI/main.tsp";
+import "./SecurityOperatorsAPI/main.tsp";
+import "./SecuritySolutionsAPI/main.tsp";
+import "./SecurityStandardsAPI/main.tsp";
+import "./SensitivitySettingsAPI/main.tsp";
+import "./ServerVulnerabilityAssessmentsSettingsAPI/main.tsp";
+import "./SettingsAPI/main.tsp";
+import "./SqlVulnerabilityAssessmentsAPI/main.tsp";
+import "./StandardsAPI/main.tsp";
+import "./SubAssessmentsAPI/main.tsp";
+import "./TasksAPI/main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 import "@typespec/versioning";
 
@@ -282,7 +282,7 @@ op privateEndpointConnectionsCreateOrUpdateCustomization(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateEndpointConnectionName: string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  resource: Azure.ResourceManager.PrivateEndpointConnection,
+  resource: PrivateLinksAPI.PrivateEndpointConnection,
 ):
   | ArmResourceUpdatedResponse<PrivateLinksAPI.PrivateLinkResource>
   | ArmResourceCreatedResponse<
