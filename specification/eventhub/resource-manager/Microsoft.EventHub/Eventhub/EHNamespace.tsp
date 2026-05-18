@@ -68,7 +68,7 @@ interface EHNamespaces {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Existing long-running operation does not use the standard location header pattern as defined in the original OpenAPI specification."
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  update is ArmCustomPatchAsync<
     EHNamespace,
     PatchModel = EHNamespace,
     Response =
