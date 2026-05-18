@@ -50,3 +50,4 @@ using Reservations;
 @@clientLocation(CalculateExchangeOperationGroup.post, "CalculateExchange");
 
 @@clientLocation(ExchangeOperationGroup.post, "Exchange");
+@@clientLocation(Operations.list, "Operation");

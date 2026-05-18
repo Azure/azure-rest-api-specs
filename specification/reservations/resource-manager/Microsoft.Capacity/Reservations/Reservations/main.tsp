@@ -44,20 +44,8 @@ enum Versions {
   v2022_11_01: "2022-11-01",
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" ""
-interface Operation {
-  /**
-   * List all the operations.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @tag("Operation")
-  @autoRoute
-  @segment("operations")
-  @summary("Get operations.")
-  @get
-  @list
-  list(
-    ...ApiVersionParameter,
-    ...Azure.ResourceManager.Legacy.Provider,
-  ): ArmResponse<OperationList> | Error;
-}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<
+      ArmResponse<OperationList>,
+      Error
+    > {}
