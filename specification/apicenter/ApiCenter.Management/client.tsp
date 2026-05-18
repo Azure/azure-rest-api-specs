@@ -126,3 +126,5 @@ namespace Microsoft.ApiCenter;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
+
+@@clientName(Microsoft.ApiCenter, "AzureApiCenter", "java");
