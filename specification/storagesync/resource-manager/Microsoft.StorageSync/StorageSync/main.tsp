@@ -59,11 +59,11 @@ interface Operations {
     | (ArmResponse<OperationEntityListResult> & {
         @header("x-ms-correlation-request-id")
         @doc("correlation request id.")
-        correlationRequestId?: string;
+        xMsCorrelationRequestId?: string;
 
         @header("x-ms-request-id")
         @doc("request id.")
-        requestId?: string;
+        xMsRequestId?: string;
       })
     | StorageSyncError;
 }
