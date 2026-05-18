@@ -126,7 +126,7 @@ interface MemoryStores {
   @doc("Create a memory item in a memory store.")
   @operationId("createMemory")
   @post
-  @route("/memory_stores/{name}/items")
+  @route("/memory_stores/{name}/memories")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
   createMemory is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.memory_stores_v1_preview,
@@ -138,7 +138,7 @@ interface MemoryStores {
   @doc("Update a memory item in a memory store.")
   @operationId("updateMemory")
   @post
-  @route("/memory_stores/{name}/items/{memory_id}")
+  @route("/memory_stores/{name}/memories/{memory_id}")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
   updateMemory is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.memory_stores_v1_preview,
@@ -150,7 +150,7 @@ interface MemoryStores {
   @doc("Retrieve a memory item from a memory store.")
   @operationId("getMemory")
   @get
-  @route("/memory_stores/{name}/items/{memory_id}")
+  @route("/memory_stores/{name}/memories/{memory_id}")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
   getMemory is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.memory_stores_v1_preview,
@@ -161,9 +161,9 @@ interface MemoryStores {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   @doc("List all memory items in a memory store.")
   @operationId("listMemories")
-  @post
+  @get
   @list
-  @route("/memory_stores/{name}/items:list")
+  @route("/memory_stores/{name}/memories")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
   listMemories is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.memory_stores_v1_preview,
@@ -175,7 +175,7 @@ interface MemoryStores {
   @doc("Delete a memory item from a memory store.")
   @operationId("deleteMemory")
   @delete
-  @route("/memory_stores/{name}/items/{memory_id}")
+  @route("/memory_stores/{name}/memories/{memory_id}")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
   deleteMemory is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.memory_stores_v1_preview,
