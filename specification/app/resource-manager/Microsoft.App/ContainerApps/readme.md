@@ -65,6 +65,40 @@ These settings apply only when `--tag=package-2026-01-01` is specified on the co
 ```yaml $(tag) == 'package-2026-01-01'
 input-file:
   - stable/2026-01-01/openapi.json
+directive:
+  - suppress: PatchBodyParametersSchema
+    from: openapi.json
+    reason: |
+      Pre-existing. Java Component and Session Pool use discriminator/identity type as required property.
+      Managed Service Identity requires type for patching.
+  - suppress: AvoidAdditionalProperties
+    from: openapi.json
+    reason: |
+      Pre-existing. Scale rule metadata and service bind customized keys use additionalProperties.
+  - suppress: PutResponseCodes
+    from: openapi.json
+    reason: |
+      Pre-existing. Do not introduce breaking changes in GA services.
+  - suppress: TrackedExtensionResourcesAreNotAllowed
+    from: openapi.json
+    reason: |
+      Pre-existing. Do not introduce breaking changes in GA services.
+  - suppress: ProvisioningStateMustBeReadOnly
+    from: openapi.json
+    reason: |
+      Pre-existing. PrivateEndpointConnectionProperties.provisioningState was not readOnly in the original swagger.
+  - suppress: ResourceNameRestriction
+    from: openapi.json
+    reason: |
+      Pre-existing. connectedEnvironmentName lacks pattern restriction in the original swagger.
+  - suppress: XmsPageableForListCalls
+    from: openapi.json
+    reason: |
+      Pre-existing. BillingMeters list operation lacks x-ms-pageable in the original swagger.
+  - suppress: LroErrorContent
+    from: openapi.json
+    reason: |
+      Pre-existing. Using the same error response as other APIs.
 ```
 
 ### Tag: package-2025-07-01
