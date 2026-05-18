@@ -49,3 +49,5 @@ interface Operations
       ArmResponse<OperationList>,
       Error
     > {}
+@@summary(Operations.list, "Get operations.");
+@@doc(Operations.list, "List all the operations.");
