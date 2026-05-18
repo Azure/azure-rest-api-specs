@@ -157,7 +157,7 @@
       "properties": {
         "model": {
           "type": "string",
-          "description": "The transcription model to use. Supported values:\n'whisper-1', 'gpt-4o-transcribe', 'gpt-4o-mini-transcribe',\n'azure-speech'.",
+          "description": "The transcription model to use. Supported values:\n'whisper-1', 'gpt-4o-transcribe', 'gpt-4o-mini-transcribe',\n'mai-transcribe-1', 'azure-speech'.",
           "enum": [
             "whisper-1",
             "gpt-4o-transcribe",
@@ -375,31 +375,39 @@
           "maximum": 1
         },
         "custom_lexicon_url": {
-          "type": "string"
+          "type": "string",
+          "description": "URL of a custom lexicon file for pronunciation customization."
         },
         "custom_text_normalization_url": {
-          "type": "string"
+          "type": "string",
+          "description": "URL of a custom text normalization endpoint."
         },
         "prefer_locales": {
           "type": "array",
+          "description": "Preferred locales in BCP-47 format that change the accents of languages.\nIf not set, TTS uses the default accent for each language (e.g., American English for English,\nMexican Spanish for Spanish). Setting this to `[\"en-GB\", \"es-ES\"]` changes the English accent\nto British English and the Spanish accent to European Spanish, while TTS can still speak other\nlanguages like French or Chinese with their default accents.",
           "items": {
             "type": "string"
           }
         },
         "locale": {
-          "type": "string"
+          "type": "string",
+          "description": "Enforced locale in BCP-47 format for TTS output. If set, TTS will always use the specified\nlocale to speak. For example, setting locale to `en-US` forces American English accent for all\ntext content, even if the text is in another language, and TTS will output silence for\nunsupported languages (e.g., Chinese text with `en-US` locale). If not set, TTS automatically\ndetects the language from the text content."
         },
         "style": {
-          "type": "string"
+          "type": "string",
+          "description": "Speaking style for the voice (e.g., 'cheerful', 'sad')."
         },
         "pitch": {
-          "type": "string"
+          "type": "string",
+          "description": "Pitch adjustment for the voice output. Follows the same rules as the `pitch` attribute of the\nSSML `prosody` element (see\nhttps://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody).\nTypical values: a named level (`x-low`, `low`, `medium`, `high`, `x-high`, `default`),\na relative change (e.g., `+10%`, `-5%`, `+50Hz`, `-2st`), or an absolute frequency (e.g., `200Hz`)."
         },
         "rate": {
-          "type": "string"
+          "type": "string",
+          "description": "Speaking rate adjustment for the voice output. Follows the same rules as the `rate` attribute of\nthe SSML `prosody` element (see\nhttps://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody).\nTypical values: a named level (`x-slow`, `slow`, `medium`, `fast`, `x-fast`, `default`),\na relative percentage (e.g., `+20%`, `-10%`), or a non-negative multiplier (e.g., `0.5`, `1.5`)."
         },
         "volume": {
-          "type": "string"
+          "type": "string",
+          "description": "Volume adjustment for the voice output. Follows the same rules as the `volume` attribute of the\nSSML `prosody` element (see\nhttps://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody).\nTypical values: a named level (`silent`, `x-soft`, `soft`, `medium`, `loud`, `x-loud`, `default`),\nan absolute number from 0.0 to 100.0, or a relative change (e.g., `+10`, `-6dB`)."
         }
       },
       "required": [
@@ -434,31 +442,39 @@
           "description": "Underlying neural model to use for personal voice."
         },
         "custom_lexicon_url": {
-          "type": "string"
+          "type": "string",
+          "description": "URL of a custom lexicon file for pronunciation customization."
         },
         "custom_text_normalization_url": {
-          "type": "string"
+          "type": "string",
+          "description": "URL of a custom text normalization endpoint."
         },
         "prefer_locales": {
           "type": "array",
+          "description": "Preferred locales in BCP-47 format that change the accents of languages.\nIf not set, TTS uses the default accent for each language (e.g., American English for English,\nMexican Spanish for Spanish). Setting this to `[\"en-GB\", \"es-ES\"]` changes the English accent\nto British English and the Spanish accent to European Spanish, while TTS can still speak other\nlanguages like French or Chinese with their default accents.",
           "items": {
             "type": "string"
           }
         },
         "locale": {
-          "type": "string"
+          "type": "string",
+          "description": "Enforced locale in BCP-47 format for TTS output. If set, TTS will always use the specified\nlocale to speak. For example, setting locale to `en-US` forces American English accent for all\ntext content, even if the text is in another language, and TTS will output silence for\nunsupported languages (e.g., Chinese text with `en-US` locale). If not set, TTS automatically\ndetects the language from the text content."
         },
         "style": {
-          "type": "string"
+          "type": "string",
+          "description": "Speaking style for the voice (e.g., 'cheerful', 'sad')."
         },
         "pitch": {
-          "type": "string"
+          "type": "string",
+          "description": "Pitch adjustment for the voice output. Follows the same rules as the `pitch` attribute of the\nSSML `prosody` element (see\nhttps://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody).\nTypical values: a named level (`x-low`, `low`, `medium`, `high`, `x-high`, `default`),\na relative change (e.g., `+10%`, `-5%`, `+50Hz`, `-2st`), or an absolute frequency (e.g., `200Hz`)."
         },
         "rate": {
-          "type": "string"
+          "type": "string",
+          "description": "Speaking rate adjustment for the voice output. Follows the same rules as the `rate` attribute of\nthe SSML `prosody` element (see\nhttps://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody).\nTypical values: a named level (`x-slow`, `slow`, `medium`, `fast`, `x-fast`, `default`),\na relative percentage (e.g., `+20%`, `-10%`), or a non-negative multiplier (e.g., `0.5`, `1.5`)."
         },
         "volume": {
-          "type": "string"
+          "type": "string",
+          "description": "Volume adjustment for the voice output. Follows the same rules as the `volume` attribute of the\nSSML `prosody` element (see\nhttps://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody).\nTypical values: a named level (`silent`, `x-soft`, `soft`, `medium`, `loud`, `x-loud`, `default`),\nan absolute number from 0.0 to 100.0, or a relative change (e.g., `+10`, `-6dB`)."
         }
       },
       "required": [
@@ -545,44 +561,54 @@
         "threshold": {
           "type": "number",
           "format": "float",
+          "description": "Activation threshold for VAD detection. Range: 0.0 to 1.0.",
           "minimum": 0,
           "maximum": 1
         },
         "prefix_padding_ms": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Amount of audio to include before speech is detected, in milliseconds."
         },
         "silence_duration_ms": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Duration of silence required to end speech detection, in milliseconds."
         },
         "end_of_utterance_detection": {
-          "$ref": "#/definitions/EouDetection"
+          "$ref": "#/definitions/EouDetection",
+          "description": "Configuration for end-of-utterance detection."
         },
         "speech_duration_ms": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Minimum speech duration in milliseconds to trigger detection."
         },
         "remove_filler_words": {
           "type": "boolean",
+          "description": "Whether to remove filler words (e.g., 'um', 'uh') from transcription.",
           "default": false
         },
         "languages": {
           "type": "array",
+          "description": "List of BCP-47 language codes for speech detection.",
           "items": {
             "type": "string"
           }
         },
         "auto_truncate": {
           "type": "boolean",
+          "description": "Whether to automatically truncate the audio buffer when speech stops.",
           "default": false
         },
         "create_response": {
           "type": "boolean",
+          "description": "Whether to automatically create a response when speech stops.",
           "default": false
         },
         "interrupt_response": {
           "type": "boolean",
+          "description": "Whether to allow the user's speech to interrupt the assistant's response.",
           "default": false
         }
       },
@@ -600,38 +626,47 @@
         "threshold": {
           "type": "number",
           "format": "float",
+          "description": "Activation threshold for VAD detection. Range: 0.0 to 1.0.",
           "minimum": 0,
           "maximum": 1
         },
         "prefix_padding_ms": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Amount of audio to include before speech is detected, in milliseconds."
         },
         "silence_duration_ms": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Duration of silence required to end speech detection, in milliseconds."
         },
         "end_of_utterance_detection": {
-          "$ref": "#/definitions/EouDetection"
+          "$ref": "#/definitions/EouDetection",
+          "description": "Configuration for end-of-utterance detection."
         },
         "speech_duration_ms": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Minimum speech duration in milliseconds to trigger detection."
         },
         "remove_filler_words": {
           "type": "boolean",
+          "description": "Whether to remove filler words (e.g., 'um', 'uh') from transcription.",
           "default": false
         },
         "auto_truncate": {
           "type": "boolean",
+          "description": "Whether to automatically truncate the audio buffer when speech stops.",
           "default": false
         },
         "create_response": {
           "type": "boolean",
+          "description": "Whether to automatically create a response when speech stops.",
           "default": false
         },
         "interrupt_response": {
           "type": "boolean",
+          "description": "Whether to allow the user's speech to interrupt the assistant's response.",
           "default": false
         }
       },
@@ -649,44 +684,54 @@
         "threshold": {
           "type": "number",
           "format": "float",
+          "description": "Activation threshold for VAD detection. Range: 0.0 to 1.0.",
           "minimum": 0,
           "maximum": 1
         },
         "prefix_padding_ms": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Amount of audio to include before speech is detected, in milliseconds."
         },
         "silence_duration_ms": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Duration of silence required to end speech detection, in milliseconds."
         },
         "end_of_utterance_detection": {
-          "$ref": "#/definitions/EouDetection"
+          "$ref": "#/definitions/EouDetection",
+          "description": "Configuration for end-of-utterance detection."
         },
         "speech_duration_ms": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Minimum speech duration in milliseconds to trigger detection."
         },
         "remove_filler_words": {
           "type": "boolean",
+          "description": "Whether to remove filler words (e.g., 'um', 'uh') from transcription.",
           "default": false
         },
         "languages": {
           "type": "array",
+          "description": "List of BCP-47 language codes for speech detection.",
           "items": {
             "type": "string"
           }
         },
         "auto_truncate": {
           "type": "boolean",
+          "description": "Whether to automatically truncate the audio buffer when speech stops.",
           "default": false
         },
         "create_response": {
           "type": "boolean",
+          "description": "Whether to automatically create a response when speech stops.",
           "default": false
         },
         "interrupt_response": {
           "type": "boolean",
+          "description": "Whether to allow the user's speech to interrupt the assistant's response.",
           "default": false
         }
       },
@@ -714,31 +759,39 @@
           "maximum": 1
         },
         "custom_lexicon_url": {
-          "type": "string"
+          "type": "string",
+          "description": "URL of a custom lexicon file for pronunciation customization."
         },
         "custom_text_normalization_url": {
-          "type": "string"
+          "type": "string",
+          "description": "URL of a custom text normalization endpoint."
         },
         "prefer_locales": {
           "type": "array",
+          "description": "Preferred locales in BCP-47 format that change the accents of languages.\nIf not set, TTS uses the default accent for each language (e.g., American English for English,\nMexican Spanish for Spanish). Setting this to `[\"en-GB\", \"es-ES\"]` changes the English accent\nto British English and the Spanish accent to European Spanish, while TTS can still speak other\nlanguages like French or Chinese with their default accents.",
           "items": {
             "type": "string"
           }
         },
         "locale": {
-          "type": "string"
+          "type": "string",
+          "description": "Enforced locale in BCP-47 format for TTS output. If set, TTS will always use the specified\nlocale to speak. For example, setting locale to `en-US` forces American English accent for all\ntext content, even if the text is in another language, and TTS will output silence for\nunsupported languages (e.g., Chinese text with `en-US` locale). If not set, TTS automatically\ndetects the language from the text content."
         },
         "style": {
-          "type": "string"
+          "type": "string",
+          "description": "Speaking style for the voice (e.g., 'cheerful', 'sad')."
         },
         "pitch": {
-          "type": "string"
+          "type": "string",
+          "description": "Pitch adjustment for the voice output. Follows the same rules as the `pitch` attribute of the\nSSML `prosody` element (see\nhttps://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody).\nTypical values: a named level (`x-low`, `low`, `medium`, `high`, `x-high`, `default`),\na relative change (e.g., `+10%`, `-5%`, `+50Hz`, `-2st`), or an absolute frequency (e.g., `200Hz`)."
         },
         "rate": {
-          "type": "string"
+          "type": "string",
+          "description": "Speaking rate adjustment for the voice output. Follows the same rules as the `rate` attribute of\nthe SSML `prosody` element (see\nhttps://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody).\nTypical values: a named level (`x-slow`, `slow`, `medium`, `fast`, `x-fast`, `default`),\na relative percentage (e.g., `+20%`, `-10%`), or a non-negative multiplier (e.g., `0.5`, `1.5`)."
         },
         "volume": {
-          "type": "string"
+          "type": "string",
+          "description": "Volume adjustment for the voice output. Follows the same rules as the `volume` attribute of the\nSSML `prosody` element (see\nhttps://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody).\nTypical values: a named level (`silent`, `x-soft`, `soft`, `medium`, `loud`, `x-loud`, `default`),\nan absolute number from 0.0 to 100.0, or a relative change (e.g., `+10`, `-6dB`)."
         }
       },
       "required": [
@@ -4990,30 +5043,37 @@
         "threshold": {
           "type": "number",
           "format": "float",
+          "description": "Activation threshold for VAD detection. Range: 0.0 to 1.0.",
           "minimum": 0,
           "maximum": 1
         },
         "prefix_padding_ms": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Amount of audio to include before speech is detected, in milliseconds."
         },
         "silence_duration_ms": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Duration of silence required to end speech detection, in milliseconds."
         },
         "end_of_utterance_detection": {
-          "$ref": "#/definitions/EouDetection"
+          "$ref": "#/definitions/EouDetection",
+          "description": "Configuration for end-of-utterance detection."
         },
         "auto_truncate": {
           "type": "boolean",
+          "description": "Whether to automatically truncate the audio buffer when speech stops.",
           "default": false
         },
         "create_response": {
           "type": "boolean",
+          "description": "Whether to automatically create a response when speech stops.",
           "default": false
         },
         "interrupt_response": {
           "type": "boolean",
+          "description": "Whether to allow the user's speech to interrupt the assistant's response.",
           "default": false
         }
       },

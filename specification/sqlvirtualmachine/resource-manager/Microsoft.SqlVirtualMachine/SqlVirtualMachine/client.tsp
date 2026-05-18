@@ -5,63 +5,76 @@ using Azure.ClientGenerator.Core;
 using Microsoft.SqlVirtualMachine;
 
 @@clientName(SqlVirtualMachine, "SqlVm", "csharp");
-@@clientName(SqlVirtualMachineProperties.wsfcDomainCredentials,
+@@clientName(
+  SqlVirtualMachineProperties.wsfcDomainCredentials,
   "WindowsServerFailoverClusterDomainCredentials",
   "csharp"
 );
-@@clientName(SqlVirtualMachineProperties.wsfcStaticIp,
+@@clientName(
+  SqlVirtualMachineProperties.wsfcStaticIp,
   "WindowsServerFailoverClusterStaticIP",
   "csharp"
 );
-@@clientName(SqlVirtualMachineProperties.sqlVirtualMachineGroupResourceId,
+@@clientName(
+  SqlVirtualMachineProperties.sqlVirtualMachineGroupResourceId,
   "SqlVmGroupResourceId",
   "csharp"
 );
 @@clientName(SqlVirtualMachineGroup, "SqlVmGroup", "csharp");
-@@clientName(SqlVirtualMachineGroupProperties.wsfcDomainProfile,
+@@clientName(
+  SqlVirtualMachineGroupProperties.wsfcDomainProfile,
   "WindowsServerFailoverClusterDomainProfile",
   "csharp"
 );
 @@clientName(SqlVirtualMachineUpdate, "SqlVmPatch", "csharp");
-@@clientName(AvailabilityGroupListenerProperties.multiSubnetIpConfigurations,
+@@clientName(
+  AvailabilityGroupListenerProperties.multiSubnetIpConfigurations,
   "MultiSubnetIPConfigurations",
   "csharp"
 );
-@@clientName(LoadBalancerConfiguration,
+@@clientName(
+  LoadBalancerConfiguration,
   "AvailabilityGroupListenerLoadBalancerConfiguration",
   "csharp"
 );
-@@clientName(LoadBalancerConfiguration.privateIpAddress,
+@@clientName(
+  LoadBalancerConfiguration.privateIpAddress,
   "PrivateIPAddress",
   "csharp"
 );
-@@clientName(LoadBalancerConfiguration.publicIpAddressResourceId,
+@@clientName(
+  LoadBalancerConfiguration.publicIpAddressResourceId,
   "PublicIPAddressResourceId",
   "csharp"
 );
-@@clientName(LoadBalancerConfiguration.sqlVirtualMachineInstances,
+@@clientName(
+  LoadBalancerConfiguration.sqlVirtualMachineInstances,
   "SqlVmInstances",
   "csharp"
 );
-@@clientName(PrivateIPAddress,
+@@clientName(
+  PrivateIPAddress,
   "AvailabilityGroupListenerPrivateIPAddress",
   "csharp"
 );
 @@clientName(PrivateIPAddress.ipAddress, "IPAddress", "csharp");
 @@clientName(AgConfiguration, "AvailabilityGroupConfiguration", "csharp");
 @@clientName(AgReplica, "AvailabilityGroupReplica", "csharp");
-@@clientName(AgReplica.sqlVirtualMachineInstanceId,
+@@clientName(
+  AgReplica.sqlVirtualMachineInstanceId,
   "SqlVmInstanceId",
   "csharp"
 );
 @@clientName(Commit, "AvailabilityGroupReplicaCommitMode", "csharp");
 @@clientName(Failover, "AvailabilityGroupReplicaFailoverMode", "csharp");
 @@clientName(Role, "AvailabilityGroupReplicaRole", "csharp");
-@@clientName(AutoBackupSettings.backupSystemDbs,
+@@clientName(
+  AutoBackupSettings.backupSystemDbs,
   "AreSystemDbsIncludedInBackup",
   "csharp"
 );
-@@clientName(AutoBackupSettings.enableEncryption,
+@@clientName(
+  AutoBackupSettings.enableEncryption,
   "IsEncryptionEnabled",
   "csharp"
 );
@@ -80,26 +93,31 @@ using Microsoft.SqlVirtualMachine;
 @@clientName(Schedule, "SqlVmAssessmentSchedule", "csharp");
 @@clientName(Schedule.enable, "IsEnabled", "csharp");
 @@clientName(SQLInstanceSettings, "SqlInstanceSettings", "csharp");
-@@clientName(SQLInstanceSettings.maxServerMemoryMB,
+@@clientName(
+  SQLInstanceSettings.maxServerMemoryMB,
   "MaxServerMemoryInMB",
   "csharp"
 );
-@@clientName(SQLInstanceSettings.minServerMemoryMB,
+@@clientName(
+  SQLInstanceSettings.minServerMemoryMB,
   "MinServerMemoryInMB",
   "csharp"
 );
 @@clientName(ReadableSecondary, "ReadableSecondaryMode", "csharp");
 @@clientName(AutoBackupSettings, "SqlVmAutoBackupSettings", "csharp");
-@@clientName(AutoBackupSettings.fullBackupStartTime,
+@@clientName(
+  AutoBackupSettings.fullBackupStartTime,
   "FullBackupStartHour",
   "csharp"
 );
-@@clientName(AutoBackupSettings.retentionPeriod,
+@@clientName(
+  AutoBackupSettings.retentionPeriod,
   "RetentionPeriodInDays",
   "csharp"
 );
 @@clientName(AutoPatchingSettings, "SqlVmAutoPatchingSettings", "csharp");
-@@clientName(AutoPatchingSettings.maintenanceWindowDuration,
+@@clientName(
+  AutoPatchingSettings.maintenanceWindowDuration,
   "MaintenanceWindowDurationInMinutes",
   "csharp"
 );
@@ -112,24 +130,29 @@ using Microsoft.SqlVirtualMachine;
 @@clientName(ClusterManagerType, "SqlVmClusterManagerType", "csharp");
 @@clientName(ClusterManagerType.WSFC, "WindowsServerFailoverCluster", "csharp");
 @@clientName(ClusterSubnetType, "SqlVmClusterSubnetType", "csharp");
-@@clientName(StorageConfigurationSettings,
+@@clientName(
+  StorageConfigurationSettings,
   "SqlVmStorageConfigurationSettings",
   "csharp"
 );
-@@clientName(StorageConfigurationSettings.sqlSystemDbOnDataDisk,
+@@clientName(
+  StorageConfigurationSettings.sqlSystemDbOnDataDisk,
   "IsSqlSystemDBOnDataDisk",
   "csharp"
 );
-@@clientName(StorageConfigurationSettings.sqlTempDbSettings,
+@@clientName(
+  StorageConfigurationSettings.sqlTempDbSettings,
   "SqlTempDBSettings",
   "csharp"
 );
-@@clientName(KeyVaultCredentialSettings,
+@@clientName(
+  KeyVaultCredentialSettings,
   "SqlVmKeyVaultCredentialSettings",
   "csharp"
 );
 @@clientName(KeyVaultCredentialSettings.enable, "IsEnabled", "csharp");
-@@clientName(ServerConfigurationsManagementSettings,
+@@clientName(
+  ServerConfigurationsManagementSettings,
   "SqlServerConfigurationsManagementSettings",
   "csharp"
 );
@@ -140,19 +163,23 @@ using Microsoft.SqlVirtualMachine;
 @@clientName(VmIdentityType, "SqlVmVmIdentityType", "csharp");
 @@clientName(AdditionalOsPatch, "SqlVmAdditionalOsPatch", "csharp");
 @@clientName(AdditionalVmPatch, "SqlVmAdditionalVmPatch", "csharp");
-@@clientName(MultiSubnetIpConfiguration,
+@@clientName(
+  MultiSubnetIpConfiguration,
   "MultiSubnetIPConfiguration",
   "csharp"
 );
-@@clientName(MultiSubnetIpConfiguration.privateIpAddress,
+@@clientName(
+  MultiSubnetIpConfiguration.privateIpAddress,
   "PrivateIPAddress",
   "csharp"
 );
-@@clientName(MultiSubnetIpConfiguration.sqlVirtualMachineInstance,
+@@clientName(
+  MultiSubnetIpConfiguration.sqlVirtualMachineInstance,
   "SqlVmInstance",
   "csharp"
 );
-@@clientName(DiskConfigAssessmentRequest,
+@@clientName(
+  DiskConfigAssessmentRequest,
   "SqlVmDiskConfigAssessmentContent",
   "csharp"
 );
@@ -168,68 +195,83 @@ using Microsoft.SqlVirtualMachine;
 @@clientName(SQLStorageSettings.luns, "Luns", "csharp");
 @@clientName(SQLTempDbSettings, "SqlTempDBSettings", "csharp");
 @@clientName(SQLTempDbSettings.luns, "LogicalUnitNumbers", "csharp");
-@@clientName(WsfcDomainCredentials,
+@@clientName(
+  WsfcDomainCredentials,
   "WindowsServerFailoverClusterDomainCredentials",
   "csharp"
 );
-@@clientName(WsfcDomainProfile,
+@@clientName(
+  WsfcDomainProfile,
   "WindowsServerFailoverClusterDomainProfile",
   "csharp"
 );
 @@clientName(WsfcDomainProfile.ouPath, "OrganizationalUnitPath", "csharp");
-@@clientName(SqlVirtualMachineGroups.listBySqlVmGroup,
+@@clientName(
+  SqlVirtualMachineGroups.listBySqlVmGroup,
   "GetSqlVmsBySqlVmGroup",
   "csharp"
 );
 @@clientName(LeastPrivilegeMode, "SqlVmLeastPrivilegeMode", "csharp");
 @@clientName(SqlVirtualMachine.name, "sqlVmName", "csharp");
-@@clientName(SqlVirtualMachines.update::parameters.properties,
+@@clientName(
+  SqlVirtualMachines.update::parameters.properties,
   "patch",
   "csharp"
 );
 @@clientName(SqlVirtualMachineGroup.name, "sqlVmGroupName", "csharp");
-@@clientName(SqlVirtualMachineGroups.update::parameters.properties,
+@@clientName(
+  SqlVirtualMachineGroups.update::parameters.properties,
   "patch",
   "csharp"
 );
-@@alternateType(LoadBalancerConfiguration.sqlVirtualMachineInstances,
+@@alternateType(
+  LoadBalancerConfiguration.sqlVirtualMachineInstances,
   Azure.Core.armResourceIdentifier[],
   "csharp"
 );
-@@alternateType(LoadBalancerConfiguration.loadBalancerResourceId,
+@@alternateType(
+  LoadBalancerConfiguration.loadBalancerResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(LoadBalancerConfiguration.publicIpAddressResourceId,
+@@alternateType(
+  LoadBalancerConfiguration.publicIpAddressResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(SqlVirtualMachine.identity,
+@@alternateType(
+  SqlVirtualMachine.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
-@@alternateType(SqlVirtualMachineProperties.virtualMachineResourceId,
+@@alternateType(
+  SqlVirtualMachineProperties.virtualMachineResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(SqlVirtualMachineProperties.wsfcStaticIp,
+@@alternateType(
+  SqlVirtualMachineProperties.wsfcStaticIp,
   Azure.Core.ipV4Address,
   "csharp"
 );
 @@alternateType(PrivateIPAddress.ipAddress, Azure.Core.ipV4Address, "csharp");
-@@alternateType(PrivateIPAddress.subnetResourceId,
+@@alternateType(
+  PrivateIPAddress.subnetResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(AgReplica.sqlVirtualMachineInstanceId,
+@@alternateType(
+  AgReplica.sqlVirtualMachineInstanceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(SqlVirtualMachineProperties.sqlVirtualMachineGroupResourceId,
+@@alternateType(
+  SqlVirtualMachineProperties.sqlVirtualMachineGroupResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
@@ -243,7 +285,8 @@ using Microsoft.SqlVirtualMachine;
 @@clientName(AADAuthenticationSettings, "AadAuthenticationSettings", "java");
 @@clientName(SQLInstanceSettings, "SqlInstanceSettings", "java");
 @@clientName(PrivateIPAddress, "PrivateIpAddress", "java");
-@@clientName(SqlConnectivityUpdateSettings.sqlAuthUpdateUserName,
+@@clientName(
+  SqlConnectivityUpdateSettings.sqlAuthUpdateUserName,
   "sqlAuthUpdateUsername",
   "java"
 );

@@ -48,6 +48,7 @@ interface DynatraceSingleSignOnResources {
 }
 
 @@doc(DynatraceSingleSignOnResource.name, "Single Sign On Configuration Name");
-@@doc(DynatraceSingleSignOnResource.properties,
+@@doc(
+  DynatraceSingleSignOnResource.properties,
   "The resource-specific properties for this resource."
 );

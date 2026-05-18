@@ -41,8 +41,10 @@ interface OutboundRuleBasicResources {
     OutboundRuleBasicResource,
     LroHeaders = ArmLroLocationHeader<FinalResult = OutboundRuleBasicResource> &
       Azure.Core.Foundations.RetryAfterHeader,
-    Response = ArmResourceUpdatedResponse<OutboundRuleBasicResource> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OutboundRuleBasicResource> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<OutboundRuleBasicResource>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OutboundRuleBasicResource> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -61,22 +63,28 @@ interface OutboundRuleBasicResources {
   >;
 }
 
-@@doc(OutboundRuleBasicResource.name,
+@@doc(
+  OutboundRuleBasicResource.name,
   "Name of the cognitive services account managed network outbound rule"
 );
-@@doc(OutboundRuleBasicResource.properties,
+@@doc(
+  OutboundRuleBasicResource.properties,
   "Outbound Rule for the managed network of a cognitive services account."
 );
 @@doc(OutboundRuleBasicResources.createOrUpdate::parameters.resource, "");
-@@summary(OutboundRuleBasicResources.list,
+@@summary(
+  OutboundRuleBasicResources.list,
   "The GET API for retrieving the list of outbound rules of the managed network associated with the cognitive services account."
 );
-@@summary(OutboundRuleBasicResources.get,
+@@summary(
+  OutboundRuleBasicResources.get,
   "The GET API for retrieving a single outbound rule of the managed network associated with the cognitive services account."
 );
-@@summary(OutboundRuleBasicResources.createOrUpdate,
+@@summary(
+  OutboundRuleBasicResources.createOrUpdate,
   "The PUT API for creating or updating a single outbound rule of the managed network associated with the cognitive services account."
 );
-@@summary(OutboundRuleBasicResources.delete,
+@@summary(
+  OutboundRuleBasicResources.delete,
   "The DELETE API for deleting a single outbound rule of the managed network associated with the cognitive services account."
 );

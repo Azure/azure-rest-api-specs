@@ -163,6 +163,7 @@ interface Recommendations {
 }
 
 @@doc(RecommendationRule.name, "Name of the recommendation.");
-@@doc(RecommendationRule.properties,
+@@doc(
+  RecommendationRule.properties,
   "RecommendationRule resource specific properties"
 );

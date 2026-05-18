@@ -59,7 +59,10 @@ interface CommunicationServices {
   @tag("CommunicationServices")
   delete is ArmResourceDeleteWithoutOkAsync<
     CommunicationServiceResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -131,21 +134,27 @@ interface CommunicationServices {
 
 @@maxLength(CommunicationServiceResource.name, 63);
 @@minLength(CommunicationServiceResource.name, 1);
-@@doc(CommunicationServiceResource.name,
+@@doc(
+  CommunicationServiceResource.name,
   "The name of the CommunicationService resource."
 );
-@@doc(CommunicationServiceResource.properties,
+@@doc(
+  CommunicationServiceResource.properties,
   "The properties of the service."
 );
-@@doc(CommunicationServices.createOrUpdate::parameters.resource,
+@@doc(
+  CommunicationServices.createOrUpdate::parameters.resource,
   "Parameters for the create or update operation"
 );
-@@doc(CommunicationServices.update::parameters.properties,
+@@doc(
+  CommunicationServices.update::parameters.properties,
   "Parameters for the update operation"
 );
-@@doc(CommunicationServices.linkNotificationHub::parameters.body,
+@@doc(
+  CommunicationServices.linkNotificationHub::parameters.body,
   "Parameters supplied to the operation."
 );
-@@doc(CommunicationServices.regenerateKey::parameters.body,
+@@doc(
+  CommunicationServices.regenerateKey::parameters.body,
   "Parameter that describes the Regenerate Key Operation."
 );

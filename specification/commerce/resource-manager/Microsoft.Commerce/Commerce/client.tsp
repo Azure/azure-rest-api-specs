@@ -7,7 +7,8 @@ using Microsoft.Commerce;
 @@clientName(Microsoft.Commerce, "UsageManagementClient", "python, javascript");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(UsageAggregatesOperationGroupListParameters.aggregationGranularity,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  UsageAggregatesOperationGroupListParameters.aggregationGranularity,
   "Daily",
   "javascript,python"
 );
