@@ -1628,6 +1628,7 @@ model BlobStorageTokenStore {
   /**
    * The name of the app secrets containing the SAS URL of the blob storage containing the tokens.
    */
+  @madeRequired(Versions.v2026_01_01)
   sasUrlSettingName: string;
 
   /**
