@@ -109,7 +109,7 @@ union CustomPublicNetworkAccessType {
 @@clientName(ProvisioningIssueType, "HybridComputeProvisioningIssueType", "csharp");
 @@clientName(LicenseProfile, "HybridComputeLicenseProfile", "csharp");
 @@clientName(LicenseProfileUpdate, "HybridComputeLicenseProfileUpdate", "csharp");
-@@clientName(ProductFeatureUpdate, "HybridComputeProductFeatureUpdate", "csharp");
+@@clientName(ProductFeatureUpdate, "HybridComputeProductFeaturePatch", "csharp");
 @@clientName(Disk, "HybridComputeDisk", "csharp");
 @@clientName(HardwareProfile, "HybridComputeHardwareProfile", "csharp");
 @@clientName(Processor, "HybridComputeProcessor", "csharp");
@@ -213,8 +213,10 @@ union CustomPublicNetworkAccessType {
 @@clientName(MachineExtensionInstanceView.type, "MachineExtensionInstanceViewType", "csharp");
 @@clientName(MachineExtensionUpdateProperties.type, "MachineExtensionUpdatePropertiesType", "csharp");
 
-// LicenseProfileMachineInstanceView.softwareAssuranceCustomer -> IsSoftwareAssuranceCustomer
+// LicenseProfile softwareAssuranceCustomer -> IsSoftwareAssuranceCustomer
 @@clientName(LicenseProfileMachineInstanceViewSoftwareAssurance.softwareAssuranceCustomer, "IsSoftwareAssuranceCustomer", "csharp");
+@@clientName(LicenseProfilePropertiesSoftwareAssurance.softwareAssuranceCustomer, "IsSoftwareAssuranceCustomer", "csharp");
+@@clientName(LicenseProfileUpdatePropertiesSoftwareAssurance.softwareAssuranceCustomer, "IsSoftwareAssuranceCustomer", "csharp");
 
 // uuid alternate types: old AutoRest SDK generated Guid? for uuid-formatted fields
 @@alternateType(LicenseProperties.tenantId, Azure.Core.uuid, "csharp");
