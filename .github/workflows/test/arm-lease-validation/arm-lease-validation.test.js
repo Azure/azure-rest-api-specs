@@ -35,6 +35,9 @@ describe("validate-arm-leases", () => {
       expect(isFileAllowed(".github/arm-leases/anything/here")).toBe(false);
       expect(isFileAllowed(".github/arm-leases/testservice/Microsoft.Test/other.yaml")).toBe(false);
       expect(isFileAllowed(".github/arm-leases/badtest/No.Yaml/no.md")).toBe(false);
+      // Scripts should now be in .github/workflows/cmd/, not allowed in arm-leases folder
+      expect(isFileAllowed(".github/arm-leases/scripts/fetch-resource-providers.js")).toBe(false);
+      expect(isFileAllowed(".github/arm-leases/scripts/generate-lease-files.js")).toBe(false);
     });
   });
 
@@ -49,10 +52,15 @@ describe("validate-arm-leases", () => {
 
       expect(
         validateFolderStructure([
-          ".github/arm-leases/TestService/Microsoft.Test/lease.yaml", // uppercase org
+          ".github/arm-leases/TestService/Microsoft.Test/lease.yaml", // uppercase org is valid
+        ]),
+      ).toHaveLength(0);
+
+      expect(
+        validateFolderStructure([
           ".github/arm-leases/compute/Microsoft.Compute/stable/lease.yaml", // stable not allowed
         ]),
-      ).toHaveLength(2);
+      ).toHaveLength(1);
     });
   });
 

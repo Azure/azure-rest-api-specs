@@ -99,12 +99,15 @@ interface ContainerAppsSessionPools {
 @@maxLength(SessionPool.name, 63);
 @@minLength(SessionPool.name, 3);
 @@doc(SessionPool.name, "Name of the session pool.");
-@@doc(SessionPool.properties,
+@@doc(
+  SessionPool.properties,
   "Container App session pool resource specific properties"
 );
-@@doc(ContainerAppsSessionPools.createOrUpdate::parameters.resource,
+@@doc(
+  ContainerAppsSessionPools.createOrUpdate::parameters.resource,
   "Properties used to create a session pool"
 );
-@@doc(ContainerAppsSessionPools.update::parameters.properties,
+@@doc(
+  ContainerAppsSessionPools.update::parameters.properties,
   "Properties used to create a session pool"
 );
