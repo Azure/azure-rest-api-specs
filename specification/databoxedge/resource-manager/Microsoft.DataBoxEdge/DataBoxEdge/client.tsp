@@ -335,7 +335,7 @@ op MonitoringMetricConfigurationsCreateOrUpdateCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 
   @body
-  MonitoringMetricConfiguration: MonitoringMetricConfiguration,
+  monitoringMetricConfiguration: MonitoringMetricConfiguration,
 ): void;
 
 @@override(
@@ -475,7 +475,7 @@ op RolesCreateOrUpdateCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 
   @body
-  resource: Role,
+  role: Role,
 ): void;
 
 @@override(
@@ -590,7 +590,7 @@ op SharesCreateOrUpdateCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 
   @body
-  resource: Share,
+  share: Share,
 ): void;
 
 @@override(
@@ -733,7 +733,7 @@ op ContainersCreateOrUpdateCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 
   @body
-  resource: Container,
+  container: Container,
 ): void;
 
 @@override(
@@ -855,6 +855,12 @@ op OrdersCreateOrUpdateCustomized(
   resource: Order,
 ): void;
 
+@@clientName(
+  OrdersCreateOrUpdateCustomized::parameters.resource,
+  "order",
+  "javascript"
+);
+
 @@override(
   Orders.createOrUpdate,
   OrdersCreateOrUpdateCustomized,
@@ -947,7 +953,7 @@ op TriggersCreateOrUpdateCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 
   @body
-  resource: Trigger,
+  trigger: Trigger,
 ): void;
 
 @@override(
@@ -1054,7 +1060,7 @@ op AddonsCreateOrUpdateCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 
   @body
-  resource: Addon,
+  addon: Addon,
 ): void;
 
 @@override(
@@ -1195,7 +1201,7 @@ op BandwidthSchedulesCreateOrUpdateCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 
   @body
-  resource: BandwidthSchedule,
+  parameters: BandwidthSchedule,
 ): void;
 
 @@override(
@@ -1294,7 +1300,7 @@ op StorageAccountCredentialsCreateOrUpdateCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 
   @body
-  resource: StorageAccountCredential,
+  storageAccountCredential: StorageAccountCredential,
 ): void;
 
 @@override(
@@ -1361,7 +1367,7 @@ op DataBoxEdgeDevicesCreateOrUpdateSecuritySettingsCustomized(
   deviceName: string,
 
   @body
-  body: SecuritySettings,
+  securitySettings: SecuritySettings,
 
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): void;
@@ -1387,7 +1393,7 @@ op DataBoxEdgeDevicesUploadCertificateCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 
   @body
-  body: UploadCertificateRequest,
+  parameters: UploadCertificateRequest,
 ): UploadCertificateResponse;
 
 @@override(
@@ -1530,7 +1536,7 @@ op DataBoxEdgeDevicesUpdateCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 
   @body
-  properties: DataBoxEdgeDevicePatch,
+  parameters: DataBoxEdgeDevicePatch,
 ): DataBoxEdgeDevices;
 
 @@override(
@@ -1579,7 +1585,7 @@ op DataBoxEdgeDevicesUpdateExtendedInformationCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 
   @body
-  body: DataBoxEdgeDeviceExtendedInfoPatch,
+  parameters: DataBoxEdgeDeviceExtendedInfoPatch,
 ): DataBoxEdgeDeviceExtendedInfo;
 
 @@override(
