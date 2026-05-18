@@ -40,38 +40,11 @@ interface TomcatWebApplicationsController {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("TomcatWebApplicationsController")
-  @patch
-  update(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-    ...Azure.ResourceManager.Legacy.Provider,
-
-    /** Site name. */
-    @path
-    @segment("masterSites")
-    @key("siteName")
-    @pattern("^[a-zA-Z0-9-]{3,24}$")
-    siteName: string,
-
-    /** Web app site name. */
-    @path
-    @segment("webAppSites")
-    @key("webAppSiteName")
-    @pattern("^[a-zA-Z0-9-]{3,24}$")
-    webAppSiteName: string,
-
-    /** Web application name. */
-    @path
-    @segment("tomcatWebApplications")
-    @key("webApplicationName")
-    @pattern("^[a-zA-Z0-9-]{3,24}$")
-    webApplicationName: string,
-
-    /** Patch request body. */
-    @body
-    body: unknown,
-  ): TomcatWebApplications | ErrorResponse;
+  @patch(#{ implicitOptionality: false })
+  update is Azure.ResourceManager.Legacy.CustomPatchSync<
+    TomcatWebApplications,
+    PatchModel = Record<unknown>
+  >;
 
   /**
    * Method to get all Tomcat web application.
