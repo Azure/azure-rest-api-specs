@@ -99,7 +99,6 @@ interface FabricMirroringSettings {
   @doc("Get Fabric Mirroring settings.")
   get is ArmResourceRead<FabricMirroringSetting>;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Async PUT returns 202 Accepted for long-running operations"
   @doc("Create or update Fabric Mirroring settings.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     FabricMirroringSetting,
@@ -107,7 +106,7 @@ interface FabricMirroringSettings {
       FabricMirroringSetting,
       ArmAsyncOperationHeader<FinalResult = FabricMirroringSetting> &
         Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    >
   >;
 
   @doc("List Fabric Mirroring settings by server.")
