@@ -1255,7 +1255,7 @@
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DataAnnotation"
+              "$ref": "#/definitions/AddDataAnnotationRequest"
             }
           }
         ],
@@ -2118,6 +2118,26 @@
     }
   },
   "definitions": {
+    "AddDataAnnotationRequest": {
+      "type": "object",
+      "description": "Request body for adding a data annotation.",
+      "properties": {
+        "annotationDetails": {
+          "type": "object",
+          "description": "Annotation details as a dynamic key-value pair bag. Service-enforced limits: a maximum of 10 entries per annotation and a maximum value length of 256 characters. Requests exceeding these limits will be rejected with a 400 response.",
+          "additionalProperties": {
+            "$ref": "#/definitions/string256"
+          }
+        },
+        "description": {
+          "$ref": "#/definitions/string4096",
+          "description": "Optional description of the annotation"
+        }
+      },
+      "required": [
+        "annotationDetails"
+      ]
+    },
     "AlertConfiguration": {
       "type": "object",
       "description": "Alert configuration details",
@@ -3310,7 +3330,11 @@
             "signalId"
           ]
         }
-      }
+      },
+      "required": [
+        "recommendedSignals",
+        "recommendedConfigurations"
+      ]
     },
     "HealthModel": {
       "type": "object",

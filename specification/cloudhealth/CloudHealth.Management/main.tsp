@@ -1491,6 +1491,17 @@ model DataAnnotation {
 }
 
 @added(Versions.v2026_05_01_preview)
+@doc("Request body for adding a data annotation.")
+model AddDataAnnotationRequest {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Annotation details are user-defined key-value pairs with arbitrary keys that cannot be modelled with a fixed schema"
+  @doc("Annotation details as a dynamic key-value pair bag. Service-enforced limits: a maximum of 10 entries per annotation and a maximum value length of 256 characters. Requests exceeding these limits will be rejected with a 400 response.")
+  annotationDetails: Record<string256>;
+
+  @doc("Optional description of the annotation")
+  description?: string4096;
+}
+
+@added(Versions.v2026_05_01_preview)
 @doc("Request body for querying data annotations")
 model GetDataAnnotationsRequest {
   @doc("Start of UTC time range. Defaults to 24 hours ago if not specified.")
@@ -1535,11 +1546,11 @@ model HealthReportEvaluationRule {
 model GetSignalRecommendationsResponse {
   @doc("Signals that are broadly recommended to be enabled by default for health models monitoring an Entity of this resource type. Each entry is a complete signal configuration (metric, aggregation, thresholds) ready to be added to a health model. Independent of `recommendedConfigurations` — not paired by index.")
   @identifiers(#["signalId"])
-  recommendedSignals?: SignalConfiguration[];
+  recommendedSignals: SignalConfiguration[];
 
   @doc("Additional signal configurations for metrics that are not broadly applicable to every health model for an Entity of this resource type, but if a caller chooses to monitor one of these metrics, the provided thresholds are suggested as a starting point. Independent of `recommendedSignals` — not paired by index.")
   @identifiers(#["signalId"])
-  recommendedConfigurations?: SignalConfiguration[];
+  recommendedConfigurations: SignalConfiguration[];
 }
 
 @added(Versions.v2026_05_01_preview)
@@ -1723,7 +1734,7 @@ interface Entities {
   @action("addDataAnnotation")
   addDataAnnotation is ArmResourceActionSync<
     Entity,
-    DataAnnotation,
+    AddDataAnnotationRequest,
     DataAnnotation
   >;
 
