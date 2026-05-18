@@ -2412,3 +2412,6 @@ op DataBoxEdgeDevicesTriggerSupportPackageCustomized(
   DataBoxEdgeDevices.triggerSupportPackage,
   DataBoxEdgeDevicesTriggerSupportPackageCustomized
 );
+
+@@clientName(DataBoxEdgeSku, "ResourceTypeSku", "java");
+@@clientLocation(AvailableSkusOperationGroup.list, "Skus", "java");
