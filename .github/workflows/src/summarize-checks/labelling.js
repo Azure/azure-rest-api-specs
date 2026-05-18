@@ -899,9 +899,16 @@ const rulesPri0NotReadyForArmReview = [
     troubleshootingGuide: wrapInArmReviewMessage(
       "This PR has <code>ARMModelingReviewRequired</code> label. " +
         "This means it is introducing a new Resource Provider namespace or a new resource type. " +
-        "New RPs and new resource types require a discussion with the ARM Modeling Review team before merging.<br/>" +
+        "New RPs and new resource types require a discussion with the ARM Modeling Review team before merging.<br/><br/>" +
+        "<b>If you haven't discussed yet:</b><br/>" +
         "Please schedule a meeting at " +
-        `${href("ARM API Modeling Office Hours", "https://outlook.office365.com/book/ARMOfficeHours1@microsoft.onmicrosoft.com/?ismsaljsauthenabled=true")}.`,
+        `${href("ARM API Modeling Office Hours", "https://outlook.office365.com/book/ARMOfficeHours1@microsoft.onmicrosoft.com/?ismsaljsauthenabled=true")}.<br/><br/>` +
+        "<b>If <code>ARMModelingSignedOff</code> label was removed by automation:</b><br/>" +
+        "This happens when the lease file is not found. Please check with the PM you discussed your design with " +
+        "to confirm if the lease file PR has been merged. " +
+        "In the public repo, lease files reflect immediately after merge. " +
+        "In the private repo (<code>azure-rest-api-specs-pr</code>), lease files typically sync within a few hours, but it can take up to 1-2 business days depending on sync pipeline timing and queue load. " +
+        "Please wait for the sync to complete.",
     ),
   },
 ];

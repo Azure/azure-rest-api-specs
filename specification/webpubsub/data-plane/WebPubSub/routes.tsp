@@ -23,7 +23,9 @@ namespace WebPubSubService {
   @head
   op getServiceStatus is Azure.Core.Foundations.Operation<
     {},
-    GetServiceStatusOkResponse
+    GetServiceStatusOkResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -47,7 +49,9 @@ namespace WebPubSubService {
       @bodyRoot
       groupsToAdd: AddToGroupsRequest;
     },
-    OkResponse
+    OkResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -77,13 +81,16 @@ namespace WebPubSubService {
       @query
       reason?: string;
     },
-    void
+    void,
+    {},
+    ErrorResponse
   >;
 
   /**
    * Generate token for the client to connect Azure Web PubSub service.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "Preserving existing wire contract with multiple success content types and a typed content-type response header."
   @tag("webpubsub")
   @summary("Generate token for the client to connect Azure Web PubSub service.")
   @route("/api/hubs/{hub}/:generateToken")
@@ -127,7 +134,9 @@ namespace WebPubSubService {
     ClientTokenResponse & {
       @header("content-type")
       contentType: ResponseContentType;
-    }
+    },
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -151,7 +160,9 @@ namespace WebPubSubService {
       @bodyRoot
       groupsToRemove: RemoveFromGroupsRequest;
     },
-    OkResponse
+    OkResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -198,7 +209,9 @@ namespace WebPubSubService {
       @bodyRoot
       message: bytes;
     },
-    AcceptedResponse
+    AcceptedResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -230,7 +243,9 @@ namespace WebPubSubService {
       @query
       reason?: string;
     },
-    void
+    void,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -255,7 +270,9 @@ namespace WebPubSubService {
       @path
       connectionId: string;
     },
-    OkResponse | NotFoundResponse
+    OkResponse | NotFoundResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -299,7 +316,9 @@ namespace WebPubSubService {
       @bodyRoot
       message: bytes;
     },
-    AcceptedResponse
+    AcceptedResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -325,7 +344,9 @@ namespace WebPubSubService {
       @path
       connectionId: string;
     },
-    void
+    void,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -352,7 +373,9 @@ namespace WebPubSubService {
       @path
       group: string;
     },
-    OkResponse | NotFoundResponse
+    OkResponse | NotFoundResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -391,7 +414,9 @@ namespace WebPubSubService {
       @query
       reason?: string;
     },
-    void
+    void,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -447,7 +472,9 @@ namespace WebPubSubService {
       @bodyRoot
       message: bytes;
     },
-    AcceptedResponse
+    AcceptedResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -455,6 +482,7 @@ namespace WebPubSubService {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "Preserving existing pageable response contract generated from the shared paged body shape."
   @tag("webpubsub")
   @summary("List connections in a group.")
   @route("/api/hubs/{hub}/groups/{group}/connections")
@@ -493,7 +521,9 @@ namespace WebPubSubService {
       @continuationToken
       continuationToken?: string;
     },
-    GroupMemberPagedValues
+    GroupMemberPagedValues,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -528,7 +558,9 @@ namespace WebPubSubService {
       @path
       connectionId: string;
     },
-    void
+    void,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -563,7 +595,9 @@ namespace WebPubSubService {
       @path
       connectionId: string;
     },
-    OkResponse
+    OkResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -599,7 +633,9 @@ namespace WebPubSubService {
       @query
       targetName?: string;
     },
-    void
+    void,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -635,7 +671,9 @@ namespace WebPubSubService {
       @query
       targetName?: string;
     },
-    OkResponse | NotFoundResponse
+    OkResponse | NotFoundResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -671,7 +709,9 @@ namespace WebPubSubService {
       @query
       targetName?: string;
     },
-    OkResponse
+    OkResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -696,7 +736,9 @@ namespace WebPubSubService {
       @path
       userId: string;
     },
-    OkResponse | NotFoundResponse
+    OkResponse | NotFoundResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -734,7 +776,9 @@ namespace WebPubSubService {
       @query
       reason?: string;
     },
-    void
+    void,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -782,7 +826,9 @@ namespace WebPubSubService {
       @bodyRoot
       message: bytes;
     },
-    AcceptedResponse
+    AcceptedResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -808,7 +854,9 @@ namespace WebPubSubService {
       @path
       userId: string;
     },
-    void
+    void,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -843,7 +891,9 @@ namespace WebPubSubService {
       @path
       userId: string;
     },
-    void
+    void,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -878,6 +928,8 @@ namespace WebPubSubService {
       @path
       userId: string;
     },
-    OkResponse
+    OkResponse,
+    {},
+    ErrorResponse
   >;
 }

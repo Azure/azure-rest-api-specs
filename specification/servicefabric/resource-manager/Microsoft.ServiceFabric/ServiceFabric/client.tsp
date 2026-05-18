@@ -4,27 +4,32 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.ServiceFabric;
 
-@@clientName(Microsoft.ServiceFabric,
+@@clientName(
+  Microsoft.ServiceFabric,
   "ServiceFabricManagementClient",
   "javascript,python"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.ProxyResource,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ProxyResource,
   "ArmProxyResource",
   "python,java,javascript,csharp"
 );
 
 // Rename the custom PatchProxyResource to avoid collision with common types
-@@clientName(Microsoft.ServiceFabric.PatchProxyResource,
+@@clientName(
+  Microsoft.ServiceFabric.PatchProxyResource,
   "ServiceFabricProxyResource",
   "csharp"
 );
 
-@@clientName(Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "ManagedIdentity",
   "java"
 );
 
-@@clientName(Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType,
   "ManagedIdentityType",
   "java"
 );
@@ -34,190 +39,232 @@ using Microsoft.ServiceFabric;
 // generated as empty stubs. We use CodeGenSuppress + custom code on the SDK side
 // to provide full implementations.
 @@clientName(Microsoft.ServiceFabric.Cluster, "ServiceFabricCluster", "csharp");
-@@clientName(Microsoft.ServiceFabric.ApplicationResource,
+@@clientName(
+  Microsoft.ServiceFabric.ApplicationResource,
   "ServiceFabricApplication",
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.ApplicationTypeResource,
+@@clientName(
+  Microsoft.ServiceFabric.ApplicationTypeResource,
   "ServiceFabricApplicationType",
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.ApplicationTypeVersionResource,
+@@clientName(
+  Microsoft.ServiceFabric.ApplicationTypeVersionResource,
   "ServiceFabricApplicationTypeVersion",
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.ServiceResource,
+@@clientName(
+  Microsoft.ServiceFabric.ServiceResource,
   "ServiceFabricService",
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.VMSizeResource,
+@@clientName(
+  Microsoft.ServiceFabric.VMSizeResource,
   "ServiceFabricVmSizeResource",
   "csharp"
 );
 @@clientName(Microsoft.ServiceFabric.VMSize.size, "VmSize", "csharp");
 
 // Rename ClusterVersions operations to match GA SDK method names
-@@clientName(Microsoft.ServiceFabric.ClusterVersionsOperationGroup.get,
+@@clientName(
+  Microsoft.ServiceFabric.ClusterVersionsOperationGroup.get,
   "GetClusterVersions",
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.ClusterVersionsOperationGroup.getByEnvironment,
+@@clientName(
+  Microsoft.ServiceFabric.ClusterVersionsOperationGroup.getByEnvironment,
   "GetClusterVersionsByEnvironment",
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.ClusterVersionsOperationGroup.list,
+@@clientName(
+  Microsoft.ServiceFabric.ClusterVersionsOperationGroup.list,
   "GetClusterVersions",
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.ClusterVersionsOperationGroup.listByEnvironment,
+@@clientName(
+  Microsoft.ServiceFabric.ClusterVersionsOperationGroup.listByEnvironment,
   "GetClusterVersionsByEnvironment",
   "csharp"
 );
 
 // Split get/getByEnvironment into a separate client group for C# to avoid
 // CollectionResultOfT name collision with list/listByEnvironment (generator bug #58138)
-@@clientLocation(Microsoft.ServiceFabric.ClusterVersionsOperationGroup.get,
+@@clientLocation(
+  Microsoft.ServiceFabric.ClusterVersionsOperationGroup.get,
   "ClusterVersionDetails",
   "csharp"
 );
-@@clientLocation(Microsoft.ServiceFabric.ClusterVersionsOperationGroup.getByEnvironment,
+@@clientLocation(
+  Microsoft.ServiceFabric.ClusterVersionsOperationGroup.getByEnvironment,
   "ClusterVersionDetails",
   "csharp"
 );
 
 // Mark ClusterVersions operations as pageable (old API had Pageable<ClusterCodeVersionsResult>)
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Mark as pageable for backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Microsoft.ServiceFabric.ClusterVersionsOperationGroup.get,
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  Microsoft.ServiceFabric.ClusterVersionsOperationGroup.get,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Mark as pageable for backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Microsoft.ServiceFabric.ClusterVersionsOperationGroup.getByEnvironment,
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  Microsoft.ServiceFabric.ClusterVersionsOperationGroup.getByEnvironment,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Mark as pageable for backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Microsoft.ServiceFabric.ClusterVersionsOperationGroup.list,
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  Microsoft.ServiceFabric.ClusterVersionsOperationGroup.list,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Mark as pageable for backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Microsoft.ServiceFabric.ClusterVersionsOperationGroup.listByEnvironment,
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  Microsoft.ServiceFabric.ClusterVersionsOperationGroup.listByEnvironment,
   "csharp"
 );
 
 // Override location parameter type from string to AzureLocation for list operations
 // (ArmProviderActionSync uses LocationParameter which has string, but old API used AzureLocation)
-@@alternateType(Microsoft.ServiceFabric.ClusterVersionsOperationGroup.list::parameters.location,
+@@alternateType(
+  Microsoft.ServiceFabric.ClusterVersionsOperationGroup.list::parameters.location,
   Azure.Core.azureLocation,
   "csharp"
 );
-@@alternateType(Microsoft.ServiceFabric.ClusterVersionsOperationGroup.listByEnvironment::parameters.location,
+@@alternateType(
+  Microsoft.ServiceFabric.ClusterVersionsOperationGroup.listByEnvironment::parameters.location,
   Azure.Core.azureLocation,
   "csharp"
 );
 
 // Model type renames
-@@clientName(Microsoft.ServiceFabric.AzureActiveDirectory,
+@@clientName(
+  Microsoft.ServiceFabric.AzureActiveDirectory,
   "ClusterAadSetting",
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.CertificateDescription,
+@@clientName(
+  Microsoft.ServiceFabric.CertificateDescription,
   "ClusterCertificateDescription",
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.ClientCertificateCommonName,
+@@clientName(
+  Microsoft.ServiceFabric.ClientCertificateCommonName,
   "ClusterClientCertificateCommonName",
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.ClientCertificateThumbprint,
+@@clientName(
+  Microsoft.ServiceFabric.ClientCertificateThumbprint,
   "ClusterClientCertificateThumbprint",
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.EndpointRangeDescription,
+@@clientName(
+  Microsoft.ServiceFabric.EndpointRangeDescription,
   "ClusterEndpointRangeDescription",
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.NodeTypeDescription,
+@@clientName(
+  Microsoft.ServiceFabric.NodeTypeDescription,
   "ClusterNodeTypeDescription",
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.Notification,
+@@clientName(
+  Microsoft.ServiceFabric.Notification,
   "ClusterNotification",
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.NotificationTarget,
+@@clientName(
+  Microsoft.ServiceFabric.NotificationTarget,
   "ClusterNotificationTarget",
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.ServerCertificateCommonName,
+@@clientName(
+  Microsoft.ServiceFabric.ServerCertificateCommonName,
   "ClusterServerCertificateCommonName",
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.ServerCertificateCommonNames,
+@@clientName(
+  Microsoft.ServiceFabric.ServerCertificateCommonNames,
   "ClusterServerCertificateCommonNames",
   "csharp"
 );
 
 // Enum/union type renames
-@@clientName(Microsoft.ServiceFabric.AddOnFeatures,
+@@clientName(
+  Microsoft.ServiceFabric.AddOnFeatures,
   "ClusterAddOnFeature",
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.DurabilityLevel,
+@@clientName(
+  Microsoft.ServiceFabric.DurabilityLevel,
   "ClusterDurabilityLevel",
   "csharp"
 );
 @@clientName(Microsoft.ServiceFabric.MoveCost, "ApplicationMoveCost", "csharp");
-@@clientName(Microsoft.ServiceFabric.NotificationCategory,
+@@clientName(
+  Microsoft.ServiceFabric.NotificationCategory,
   "ClusterNotificationCategory",
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.NotificationChannel,
+@@clientName(
+  Microsoft.ServiceFabric.NotificationChannel,
   "ClusterNotificationChannel",
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.NotificationLevel,
+@@clientName(
+  Microsoft.ServiceFabric.NotificationLevel,
   "ClusterNotificationLevel",
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.ReliabilityLevel,
+@@clientName(
+  Microsoft.ServiceFabric.ReliabilityLevel,
   "ClusterReliabilityLevel",
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.RollingUpgradeMode,
+@@clientName(
+  Microsoft.ServiceFabric.RollingUpgradeMode,
   "ApplicationRollingUpgradeMode",
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.ServiceKind,
+@@clientName(
+  Microsoft.ServiceFabric.ServiceKind,
   "ApplicationServiceKind",
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.StoreName,
+@@clientName(
+  Microsoft.ServiceFabric.StoreName,
   "ClusterCertificateStoreName",
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.UpgradeMode,
+@@clientName(
+  Microsoft.ServiceFabric.UpgradeMode,
   "ClusterUpgradeMode",
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.ClusterState,
+@@clientName(
+  Microsoft.ServiceFabric.ClusterState,
   "ServiceFabricClusterState",
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.ProvisioningState,
+@@clientName(
+  Microsoft.ServiceFabric.ProvisioningState,
   "ServiceFabricProvisioningState",
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.PartitionScheme,
+@@clientName(
+  Microsoft.ServiceFabric.PartitionScheme,
   "ApplicationPartitionScheme",
   "csharp"
 );
 
 // Access modifiers - types that were public in old API but generated as internal
 @@access(Microsoft.ServiceFabric.AzureActiveDirectory, Access.public, "csharp");
-@@access(Microsoft.ServiceFabric.ClusterVersionDetails,
+@@access(
+  Microsoft.ServiceFabric.ClusterVersionDetails,
   Access.public,
   "csharp"
 );
-@@access(Microsoft.ServiceFabric.DiagnosticsStorageAccountConfig,
+@@access(
+  Microsoft.ServiceFabric.DiagnosticsStorageAccountConfig,
   Access.public,
   "csharp"
 );
@@ -225,195 +272,236 @@ using Microsoft.ServiceFabric;
 @@access(Microsoft.ServiceFabric.ProvisioningState, Access.public, "csharp");
 
 // Property renames on ClusterProperties (and ClusterPropertiesUpdateParameters)
-@@clientName(Microsoft.ServiceFabric.ClusterProperties.eventStoreServiceEnabled,
+@@clientName(
+  Microsoft.ServiceFabric.ClusterProperties.eventStoreServiceEnabled,
   "IsEventStoreServiceEnabled",
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.ClusterProperties.infrastructureServiceManager,
+@@clientName(
+  Microsoft.ServiceFabric.ClusterProperties.infrastructureServiceManager,
   "IsInfrastructureServiceManagerEnabled",
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.ClusterProperties.waveUpgradePaused,
+@@clientName(
+  Microsoft.ServiceFabric.ClusterProperties.waveUpgradePaused,
   "IsWaveUpgradePaused",
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.ClusterProperties.upgradePauseStartTimestampUtc,
+@@clientName(
+  Microsoft.ServiceFabric.ClusterProperties.upgradePauseStartTimestampUtc,
   "UpgradePauseStartOn",
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.ClusterProperties.upgradePauseEndTimestampUtc,
+@@clientName(
+  Microsoft.ServiceFabric.ClusterProperties.upgradePauseEndTimestampUtc,
   "UpgradePauseEndOn",
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.ClusterProperties.sfZonalUpgradeMode,
+@@clientName(
+  Microsoft.ServiceFabric.ClusterProperties.sfZonalUpgradeMode,
   "ServiceFabricZonalUpgradeMode",
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.ClusterProperties.clusterEndpoint,
+@@clientName(
+  Microsoft.ServiceFabric.ClusterProperties.clusterEndpoint,
   "ClusterEndpoint",
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.ClusterProperties.managementEndpoint,
+@@clientName(
+  Microsoft.ServiceFabric.ClusterProperties.managementEndpoint,
   "ManagementEndpoint",
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.ClusterProperties.enableHttpGatewayExclusiveAuthMode,
+@@clientName(
+  Microsoft.ServiceFabric.ClusterProperties.enableHttpGatewayExclusiveAuthMode,
   "IsHttpGatewayExclusiveAuthModeEnabled",
   "csharp"
 );
 
 // Same renames on ClusterPropertiesUpdateParameters
-@@clientName(Microsoft.ServiceFabric.ClusterPropertiesUpdateParameters.eventStoreServiceEnabled,
+@@clientName(
+  Microsoft.ServiceFabric.ClusterPropertiesUpdateParameters.eventStoreServiceEnabled,
   "IsEventStoreServiceEnabled",
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.ClusterPropertiesUpdateParameters.infrastructureServiceManager,
+@@clientName(
+  Microsoft.ServiceFabric.ClusterPropertiesUpdateParameters.infrastructureServiceManager,
   "IsInfrastructureServiceManagerEnabled",
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.ClusterPropertiesUpdateParameters.waveUpgradePaused,
+@@clientName(
+  Microsoft.ServiceFabric.ClusterPropertiesUpdateParameters.waveUpgradePaused,
   "IsWaveUpgradePaused",
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.ClusterPropertiesUpdateParameters.upgradePauseStartTimestampUtc,
+@@clientName(
+  Microsoft.ServiceFabric.ClusterPropertiesUpdateParameters.upgradePauseStartTimestampUtc,
   "UpgradePauseStartOn",
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.ClusterPropertiesUpdateParameters.upgradePauseEndTimestampUtc,
+@@clientName(
+  Microsoft.ServiceFabric.ClusterPropertiesUpdateParameters.upgradePauseEndTimestampUtc,
   "UpgradePauseEndOn",
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.ClusterPropertiesUpdateParameters.enableHttpGatewayExclusiveAuthMode,
+@@clientName(
+  Microsoft.ServiceFabric.ClusterPropertiesUpdateParameters.enableHttpGatewayExclusiveAuthMode,
   "IsHttpGatewayExclusiveAuthModeEnabled",
   "csharp"
 );
 
 // Property renames on NodeTypeDescription
-@@clientName(Microsoft.ServiceFabric.NodeTypeDescription.multipleAvailabilityZones,
+@@clientName(
+  Microsoft.ServiceFabric.NodeTypeDescription.multipleAvailabilityZones,
   "IsMultipleAvailabilityZonesSupported",
   "csharp"
 );
 
 // Property renames on ClusterVersionDetails
-@@clientName(Microsoft.ServiceFabric.ClusterVersionDetails.supportExpiryUtc,
+@@clientName(
+  Microsoft.ServiceFabric.ClusterVersionDetails.supportExpiryUtc,
   "SupportExpireOn",
   "csharp"
 );
 
 // Type overrides for URI properties
-@@alternateType(Microsoft.ServiceFabric.ClusterProperties.clusterEndpoint,
+@@alternateType(
+  Microsoft.ServiceFabric.ClusterProperties.clusterEndpoint,
   url,
   "csharp"
 );
-@@alternateType(Microsoft.ServiceFabric.ClusterProperties.managementEndpoint,
+@@alternateType(
+  Microsoft.ServiceFabric.ClusterProperties.managementEndpoint,
   url,
   "csharp"
 );
-@@alternateType(Microsoft.ServiceFabric.DiagnosticsStorageAccountConfig.blobEndpoint,
+@@alternateType(
+  Microsoft.ServiceFabric.DiagnosticsStorageAccountConfig.blobEndpoint,
   url,
   "csharp"
 );
-@@alternateType(Microsoft.ServiceFabric.DiagnosticsStorageAccountConfig.queueEndpoint,
+@@alternateType(
+  Microsoft.ServiceFabric.DiagnosticsStorageAccountConfig.queueEndpoint,
   url,
   "csharp"
 );
-@@alternateType(Microsoft.ServiceFabric.DiagnosticsStorageAccountConfig.tableEndpoint,
+@@alternateType(
+  Microsoft.ServiceFabric.DiagnosticsStorageAccountConfig.tableEndpoint,
   url,
   "csharp"
 );
 
 // Type overrides for Guid properties (old API used System.Guid)
-@@alternateType(Microsoft.ServiceFabric.AzureActiveDirectory.tenantId,
+@@alternateType(
+  Microsoft.ServiceFabric.AzureActiveDirectory.tenantId,
   Azure.Core.uuid,
   "csharp"
 );
-@@alternateType(Microsoft.ServiceFabric.ApplicationUserAssignedIdentity.principalId,
+@@alternateType(
+  Microsoft.ServiceFabric.ApplicationUserAssignedIdentity.principalId,
   Azure.Core.uuid,
   "csharp"
 );
 
 // Type override for DateTimeOffset property (old API used System.DateTimeOffset?)
-@@alternateType(Microsoft.ServiceFabric.ClusterVersionDetails.supportExpiryUtc,
+@@alternateType(
+  Microsoft.ServiceFabric.ClusterVersionDetails.supportExpiryUtc,
   utcDateTime,
   "csharp"
 );
 
 // Type overrides for BinaryData properties (old API used System.BinaryData for thumbprints)
-@@alternateType(Microsoft.ServiceFabric.CertificateDescription.thumbprint,
+@@alternateType(
+  Microsoft.ServiceFabric.CertificateDescription.thumbprint,
   bytes,
   "csharp"
 );
-@@alternateType(Microsoft.ServiceFabric.ClientCertificateCommonName.certificateIssuerThumbprint,
+@@alternateType(
+  Microsoft.ServiceFabric.ClientCertificateCommonName.certificateIssuerThumbprint,
   bytes,
   "csharp"
 );
-@@alternateType(Microsoft.ServiceFabric.ClientCertificateThumbprint.certificateThumbprint,
+@@alternateType(
+  Microsoft.ServiceFabric.ClientCertificateThumbprint.certificateThumbprint,
   bytes,
   "csharp"
 );
-@@alternateType(Microsoft.ServiceFabric.ServerCertificateCommonName.certificateIssuerThumbprint,
+@@alternateType(
+  Microsoft.ServiceFabric.ServerCertificateCommonName.certificateIssuerThumbprint,
   bytes,
   "csharp"
 );
 
 // Type overrides for TimeSpan properties (old API used System.TimeSpan)
-@@alternateType(Microsoft.ServiceFabric.ClusterUpgradePolicy.upgradeReplicaSetCheckTimeout,
+@@alternateType(
+  Microsoft.ServiceFabric.ClusterUpgradePolicy.upgradeReplicaSetCheckTimeout,
   duration,
   "csharp"
 );
-@@alternateType(Microsoft.ServiceFabric.ApplicationUpgradePolicy.upgradeReplicaSetCheckTimeout,
+@@alternateType(
+  Microsoft.ServiceFabric.ApplicationUpgradePolicy.upgradeReplicaSetCheckTimeout,
   duration,
   "csharp"
 );
 
 // Type overrides for ETag properties (old API used Azure.ETag)
-@@alternateType(Microsoft.ServiceFabric.Cluster.etag,
+@@alternateType(
+  Microsoft.ServiceFabric.Cluster.etag,
   Azure.Core.eTag,
   "csharp"
 );
-@@alternateType(Microsoft.ServiceFabric.ApplicationResource.etag,
+@@alternateType(
+  Microsoft.ServiceFabric.ApplicationResource.etag,
   Azure.Core.eTag,
   "csharp"
 );
-@@alternateType(Microsoft.ServiceFabric.ApplicationTypeResource.etag,
+@@alternateType(
+  Microsoft.ServiceFabric.ApplicationTypeResource.etag,
   Azure.Core.eTag,
   "csharp"
 );
-@@alternateType(Microsoft.ServiceFabric.ApplicationTypeVersionResource.etag,
+@@alternateType(
+  Microsoft.ServiceFabric.ApplicationTypeVersionResource.etag,
   Azure.Core.eTag,
   "csharp"
 );
-@@alternateType(Microsoft.ServiceFabric.ServiceResource.etag,
+@@alternateType(
+  Microsoft.ServiceFabric.ServiceResource.etag,
   Azure.Core.eTag,
   "csharp"
 );
 
 // Type override for Guid property (old API used System.Guid?)
-@@alternateType(Microsoft.ServiceFabric.ClusterProperties.clusterId,
+@@alternateType(
+  Microsoft.ServiceFabric.ClusterProperties.clusterId,
   Azure.Core.uuid,
   "csharp"
 );
 
 // Type override for Uri property (old API used System.Uri)
-@@alternateType(Microsoft.ServiceFabric.ApplicationTypeVersionResourceProperties.appPackageUrl,
+@@alternateType(
+  Microsoft.ServiceFabric.ApplicationTypeVersionResourceProperties.appPackageUrl,
   url,
   "csharp"
 );
-@@clientName(Microsoft.ServiceFabric.ApplicationTypeVersionResourceProperties.appPackageUrl,
+@@clientName(
+  Microsoft.ServiceFabric.ApplicationTypeVersionResourceProperties.appPackageUrl,
   "AppPackageUri",
   "csharp"
 );
 
 // Override Resource.id type from string to armResourceIdentifier for C#
 // (common-types v3 has id as string; v4+ has armResourceIdentifier)
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 
 // Override custom ManagedIdentity to use common ManagedServiceIdentity for C#
 // (GA SDK uses Azure.ResourceManager.Models.ManagedServiceIdentity)
-@@alternateType(Microsoft.ServiceFabric.ApplicationResource.identity,
+@@alternateType(
+  Microsoft.ServiceFabric.ApplicationResource.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
@@ -426,29 +514,34 @@ using Microsoft.ServiceFabric;
 // Spec has them as ProxyResource (location is optional), but the GA SDK ships with
 // TrackedResourceData, so we use hierarchyBuilding to restore that for C#.
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change base to TrackedResource for backward compatibility with GA SDK"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Microsoft.ServiceFabric.ApplicationResource,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.ServiceFabric.ApplicationResource,
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change base to TrackedResource for backward compatibility with GA SDK"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Microsoft.ServiceFabric.ApplicationTypeResource,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.ServiceFabric.ApplicationTypeResource,
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change base to TrackedResource for backward compatibility with GA SDK"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Microsoft.ServiceFabric.ApplicationTypeVersionResource,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.ServiceFabric.ApplicationTypeVersionResource,
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change base to TrackedResource for backward compatibility with GA SDK"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Microsoft.ServiceFabric.ServiceResource,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.ServiceFabric.ServiceResource,
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
 
 // Base type override for Patch models: old SDK had TrackedResourceData.
 // ETag property is lost since TrackedResource doesn't have it — restored via custom code.
-@@alternateType(PatchProxyResource,
+@@alternateType(
+  PatchProxyResource,
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
@@ -465,10 +558,12 @@ model ClusterCodeVersionsReplacement
   properties?: ClusterVersionDetails;
 }
 @@alternateType(ClusterCodeVersions, ClusterCodeVersionsReplacement, "csharp");
-@@clientName(ClusterCodeVersionsReplacement,
+@@clientName(
+  ClusterCodeVersionsReplacement,
   "ClusterCodeVersionsResult",
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ClusterCodeVersionsReplacement.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ClusterCodeVersionsReplacement.properties
 );

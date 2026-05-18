@@ -14,64 +14,78 @@ using Microsoft.DependencyMap;
 @@clientName(MapsResourceProperties, "DependencyMapProperties", "csharp");
 @@clientName(ProvisioningState, "DependencyMapProvisioningState", "csharp");
 @@clientName(DiscoverySourceResource, "DependencyMapDiscoverySource", "csharp");
-@@clientName(DiscoverySourceResourceProperties,
+@@clientName(
+  DiscoverySourceResourceProperties,
   "DependencyMapDiscoverySourceProperties",
   "csharp"
 );
 @@clientName(DateTimeFilter, "DependencyMapDateTimeFilter", "csharp");
 @@clientName(DateTimeFilter.startDateTimeUtc, "StartOn", "csharp");
 @@clientName(DateTimeFilter.endDateTimeUtc, "EndOn", "csharp");
-@@clientName(OffAzureDiscoverySourceResourceProperties,
+@@clientName(
+  OffAzureDiscoverySourceResourceProperties,
   "OffAzureDiscoverySourceProperties",
   "csharp"
 );
 @@clientName(ProcessNameFilter, "DependencyMapProcessNameFilter", "csharp");
-@@clientName(ProcessNameFilterOperator,
+@@clientName(
+  ProcessNameFilterOperator,
   "DependencyMapProcessNameFilterOperator",
   "csharp"
 );
 @@clientName(ExportDependenciesRequest, "ExportDependenciesContent", "csharp");
-@@clientName(GetDependencyViewForFocusedMachineRequest,
+@@clientName(
+  GetDependencyViewForFocusedMachineRequest,
   "GetDependencyViewForFocusedMachineContent",
   "csharp"
 );
-@@clientName(GetConnectionsForProcessOnFocusedMachineRequest,
+@@clientName(
+  GetConnectionsForProcessOnFocusedMachineRequest,
   "GetConnectionsForProcessOnFocusedMachineContent",
   "csharp"
 );
-@@clientName(GetConnectionsWithConnectedMachineForFocusedMachineRequest,
+@@clientName(
+  GetConnectionsWithConnectedMachineForFocusedMachineRequest,
   "GetConnectionsWithConnectedMachineForFocusedMachineContent",
   "csharp"
 );
-@@clientName(GetDependencyViewForAllMachinesRequest,
+@@clientName(
+  GetDependencyViewForAllMachinesRequest,
   "GetDependencyViewForAllMachinesContent",
   "csharp"
 );
-@@alternateType(GetDependencyViewForFocusedMachineRequest.focusedMachineId,
+@@alternateType(
+  GetDependencyViewForFocusedMachineRequest.focusedMachineId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(GetConnectionsWithConnectedMachineForFocusedMachineRequest.focusedMachineId,
+@@alternateType(
+  GetConnectionsWithConnectedMachineForFocusedMachineRequest.focusedMachineId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(GetConnectionsWithConnectedMachineForFocusedMachineRequest.connectedMachineId,
+@@alternateType(
+  GetConnectionsWithConnectedMachineForFocusedMachineRequest.connectedMachineId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(GetConnectionsForProcessOnFocusedMachineRequest.focusedMachineId,
+@@alternateType(
+  GetConnectionsForProcessOnFocusedMachineRequest.focusedMachineId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ExportDependenciesRequest.focusedMachineId,
+@@alternateType(
+  ExportDependenciesRequest.focusedMachineId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(DiscoverySourceResourceProperties.sourceId,
+@@alternateType(
+  DiscoverySourceResourceProperties.sourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
   armResourceIdentifier,
   "csharp"
 );
