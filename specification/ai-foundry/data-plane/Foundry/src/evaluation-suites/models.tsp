@@ -279,7 +279,6 @@ model EvaluationSuiteGenerationJobInputs {
   @doc("""
     Data generation options. Controls how the evaluation dataset is generated.
     If omitted, defaults are used (simple_qna, 100 max_samples).
-    For conversation level, dataset generation is skipped — user provides their own dataset.
     """)
   data_generation_options?: EvaluationSuiteDataGenerationOptions;
 
@@ -303,8 +302,7 @@ model EvaluationSuiteGenerationJobInputs {
   @doc("""
     Evaluation level for the generated suite.
     Default: turn (single-turn evaluation).
-    Use conversation for multi-turn evaluation — dataset generation is skipped
-    and the user provides their own multi-turn dataset.
+    Use conversation for multi-turn evaluation.
     """)
   evaluation_level?: EvaluationLevel;
 }
