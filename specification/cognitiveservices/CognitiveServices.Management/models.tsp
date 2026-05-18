@@ -5713,12 +5713,6 @@ model ManagedComputeDeploymentProperties {
   versionUpgradeOption?: DeploymentModelVersionUpgradeOption;
 
   /**
-   * Azure VM SKU selector for VM-backed managed compute deployments. Required when sku.name is VmManagedCompute; immutable after creation.
-   */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  instanceType?: string;
-
-  /**
    * Foundry compute ARM resource ID for VM-backed managed compute deployments. Required when sku.name is VmManagedCompute; immutable after creation.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
