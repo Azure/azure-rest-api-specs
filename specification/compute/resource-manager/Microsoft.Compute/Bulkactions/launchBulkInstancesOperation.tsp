@@ -363,16 +363,14 @@ interface LaunchBulkInstancesOperation {
   @doc("Deletes LaunchBulkInstancesOperations.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Resource = LocationBasedLaunchBulkInstancesOperation,
-    Parameters = LaunchBulkInstancesOperationId & DeleteInstancesParameter,
-    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+    Parameters = LaunchBulkInstancesOperationId & DeleteInstancesParameter
   >;
 
   @doc("Cancels LaunchBulkInstancesOperation instances that have not yet launched.")
   cancel is ArmResourceActionNoResponseContentAsync<
     Resource = LocationBasedLaunchBulkInstancesOperation,
     Request = void,
-    Parameters = LaunchBulkInstancesOperationId,
-    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+    Parameters = LaunchBulkInstancesOperationId
   >;
 
   @doc("List LaunchBulkInstancesOperation resources by resource group.")
