@@ -81,7 +81,7 @@ alias QuotaCounterKeyOps = Azure.ResourceManager.Legacy.RoutedOperations<
   QuotaCounterKeyParentParameters,
   QuotaCounterKeyParameters,
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}",
   }
 >;
 
@@ -124,7 +124,7 @@ alias QuotaPeriodKeyOps = Azure.ResourceManager.Legacy.RoutedOperations<
   QuotaPeriodKeyParentParameters,
   QuotaPeriodKeyParameters,
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}/periods",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}/periods",
   }
 >;
 

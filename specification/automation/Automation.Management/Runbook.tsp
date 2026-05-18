@@ -42,7 +42,7 @@ alias RunbookOps = Azure.ResourceManager.Legacy.RoutedOperations<
     ...KeysOf<Runbook>;
   },
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Automation/automationAccounts/{automationAccountName}/runbooks/{runbookName}",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runbooks/{runbookName}",
   }
 >;
 
