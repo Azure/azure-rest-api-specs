@@ -708,6 +708,9 @@ model AgentEndpointAuthorizationScheme {
 )
 model EntraAuthorizationScheme extends AgentEndpointAuthorizationScheme {
   type: AgentEndpointAuthorizationSchemeType.Entra;
+
+  @doc("The source from which the per-user isolation key is derived for requests authorized via this scheme. Defaults to Entra-based isolation when omitted.")
+  isolation_key_source?: IsolationKeySource;
 }
 
 @extension(
