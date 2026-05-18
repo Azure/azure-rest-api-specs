@@ -8478,19 +8478,14 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/PolicyProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The RP-specific properties for this resource."
         },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          }
         },
         "location": {
           "type": "string",
@@ -8503,7 +8498,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         }
       ]
     },
@@ -8552,12 +8547,7 @@
           "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          }
         },
         "properties": {
           "$ref": "#/definitions/PolicyUpdateProperties",
