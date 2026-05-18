@@ -217,7 +217,25 @@ model ThresholdRuleV2 {
 
   @added(Versions.v2026_05_01_preview)
   @doc("ISO 8601 duration for the historical look-back window used by dynamic threshold computation. Only applicable when operator is Dynamic.")
-  lookBackWindow?: duration;
+  lookBackWindow?: LookBackWindow;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("Allowed look-back window durations for dynamic threshold computation")
+union LookBackWindow {
+  string,
+
+  @doc("Five minutes")
+  PT5M: "PT5M",
+
+  @doc("Fifteen minutes")
+  PT15M: "PT15M",
+
+  @doc("Thirty minutes")
+  PT30M: "PT30M",
+
+  @doc("One hour")
+  PT1H: "PT1H",
 }
 
 @added(Versions.v2026_05_01_preview)
@@ -866,10 +884,12 @@ model AzureResourceHealthSignalStatus is SignalStatus {
 
   @visibility(Lifecycle.Read)
   @doc("Detailed status of the Azure resource as reported by Azure Resource Health.")
+  @added(Versions.v2026_05_01_preview)
   detailedStatus?: string4096;
 
   @visibility(Lifecycle.Read)
   @doc("Human-readable summary of the current availability state from Azure Resource Health.")
+  @added(Versions.v2026_05_01_preview)
   summary?: string;
 
   @visibility(Lifecycle.Read)
@@ -884,6 +904,7 @@ model AzureResourceHealthSignalStatus is SignalStatus {
 
   @visibility(Lifecycle.Read)
   @doc("Timestamp when Azure Resource Health observed the current availability state.")
+  @added(Versions.v2026_05_01_preview)
   availabilityReportedTime?: utcDateTime;
 }
 
@@ -1519,22 +1540,24 @@ model GetSignalRecommendationsRequest {
 }
 
 @added(Versions.v2026_05_01_preview)
-@doc("Response containing recommended signal configurations for a given Azure resource type.")
+@doc("Response from `getSignalRecommendations` containing two independent suggestion streams for the requested Azure resource type. `recommendedSignals` lists signals broadly recommended to be enabled by default; `recommendedConfigurations` lists additional metrics that are not broadly applicable but, if a caller chooses to monitor one of them, ship with suggested starting-point thresholds. The two arrays are independent — items are not paired by index, and callers should treat them as two separate suggestion streams.")
 model GetSignalRecommendationsResponse {
-  @doc("List of recommended signal configurations for the specified resource type. These signals are generally recommended to be used on the specified resource type.")
-  @identifiers(#["id"])
+  @doc("Signals that are broadly recommended to be enabled by default for health models monitoring the specified resource type. Each entry is a complete signal configuration (metric, aggregation, thresholds) ready to be added to a health model. Independent of `recommendedConfigurations` — not paired by index.")
+  @identifiers(#["signalId"])
   recommendedSignals?: SignalConfiguration[];
 
-  @doc("List of recommended configurations (thresholds etc.) for the specified resource type.")
-  @identifiers(#["id"])
+  @doc("Additional signal configurations for metrics that are not broadly applicable to every health model for this resource type, but if a caller chooses to monitor one of these metrics, the provided thresholds are suggested as a starting point. Independent of `recommendedSignals` — not paired by index.")
+  @identifiers(#["signalId"])
   recommendedConfigurations?: SignalConfiguration[];
 }
 
 @added(Versions.v2026_05_01_preview)
 @doc("A signal configuration for an Azure resource type")
 model SignalConfiguration {
-  @doc("Unique identifier of the recommended signal.")
-  id: string;
+  @doc("Unique identifier of the recommended signal configuration.")
+  @minLength(1)
+  @maxLength(256)
+  signalId: string;
 
   @doc("Metric namespace (e.g. 'microsoft.compute/virtualmachines').")
   @minLength(1)
