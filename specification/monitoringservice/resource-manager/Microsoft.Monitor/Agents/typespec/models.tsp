@@ -62,7 +62,7 @@ namespace Microsoft.Monitor {
     mode?: OperationMode;
 
     /** Custom instructions that guide the agent's behavior for this operation. */
-    @maxLength(4096)
+    @maxLength(8192)
     customInstructions?: string;
   }
 
