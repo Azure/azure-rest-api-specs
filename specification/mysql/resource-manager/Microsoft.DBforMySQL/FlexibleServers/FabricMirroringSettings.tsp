@@ -110,5 +110,5 @@ interface FabricMirroringSettings {
   >;
 
   @doc("List Fabric Mirroring settings by server.")
-  listByServer is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<FabricMirroringSetting>;
+  listByServer is ArmResourceListByParent<FabricMirroringSetting>;
 }
