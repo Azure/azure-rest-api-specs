@@ -29,7 +29,6 @@ model Group is TrackedResource<GroupProperties> {
   ...ManagedSystemAssignedIdentityProperty;
 }
 
-@@added(GroupRefreshMode, Versions.v2026_11_02_preview);
 @@added(GroupType, Versions.v2026_11_02_preview);
 @@added(GroupMembershipState, Versions.v2026_11_02_preview);
 @@added(GroupPropertiesBase, Versions.v2026_11_02_preview);
@@ -74,10 +73,10 @@ interface Groups {
     GroupSampleOfMembersResponse
   >;
 
-  @doc("Refreshes the members of this group. Invalid for groups with Continuous refresh mode.")
+  @doc("Refreshes the members of this group.")
   refreshMembers is ArmResourceActionNoResponseContentAsync<Group, void>;
 
-  @doc("Returns the current count of members of this group. Invalid for groups with Continuous refresh mode.")
+  @doc("Returns the current count of members of this group.")
   getCurrentMemberCount is ArmResourceActionSync<
     Group,
     void,

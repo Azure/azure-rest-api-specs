@@ -2197,7 +2197,7 @@
     },
     "DataPlaneResourceBase": {
       "type": "object",
-      "description": "Resource metadata properties (etag and systemData).",
+      "description": "Resource metadata properties (etag).",
       "properties": {
         "name": {
           "type": "string",
@@ -2224,11 +2224,6 @@
         "etag": {
           "type": "string",
           "description": "The entity tag for the resource.",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "Metadata containing createdBy and modifiedBy information.",
           "readOnly": true
         }
       },
@@ -2268,11 +2263,6 @@
           "description": "The entity tag for the resource.",
           "readOnly": true
         },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "Metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/DeviceProperties",
           "description": "The resource-specific properties for this device."
@@ -2303,11 +2293,6 @@
         "etag": {
           "type": "string",
           "description": "The entity tag for the resource.",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "Metadata containing createdBy and modifiedBy information.",
           "readOnly": true
         },
         "name": {
@@ -2438,11 +2423,6 @@
           "description": "The entity tag for the resource.",
           "readOnly": true
         },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "Metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/DeviceCapabilityProperties",
           "description": "The resource-specific properties for this capability."
@@ -2452,6 +2432,30 @@
         "name",
         "type"
       ]
+    },
+    "DeviceCapabilityActivationState": {
+      "type": "string",
+      "description": "Whether a capability is enabled or disabled.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceCapabilityActivationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The capability is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The capability is disabled."
+          }
+        ]
+      }
     },
     "DeviceCapabilityCreateOrUpdate": {
       "type": "object",
@@ -2505,16 +2509,16 @@
           "description": "The provisioning status of this capability.",
           "readOnly": true
         },
-        "provisioningError": {
-          "$ref": "#/definitions/ProvisioningError",
-          "description": "The error information for why linking failed.",
-          "readOnly": true
+        "activationState": {
+          "$ref": "#/definitions/DeviceCapabilityActivationState",
+          "description": "Whether a capability is enabled or disabled."
         }
       },
       "discriminator": "capabilityType",
       "required": [
         "capabilityType",
-        "capabilityProvider"
+        "capabilityProvider",
+        "activationState"
       ]
     },
     "DeviceCapabilityPropertiesCreateOrUpdate": {
@@ -2536,6 +2540,10 @@
             "read",
             "create"
           ]
+        },
+        "activationState": {
+          "$ref": "#/definitions/DeviceCapabilityActivationState",
+          "description": "Whether a capability is enabled or disabled."
         }
       },
       "discriminator": "capabilityType",
@@ -2543,38 +2551,10 @@
         "capabilityType"
       ]
     },
-    "DeviceEnabledStatus": {
-      "type": "string",
-      "description": "Whether a device is enabled or disabled.",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "DeviceEnabledStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "The device is enabled."
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "The device is disabled."
-          }
-        ]
-      }
-    },
     "DeviceProperties": {
       "type": "object",
       "description": "Properties of a device resource.",
       "properties": {
-        "enabled": {
-          "$ref": "#/definitions/DeviceEnabledStatus",
-          "description": "Indicates if the device is enabled or not."
-        },
         "externalDeviceId": {
           "type": "string",
           "description": "The Device ID provided by the customer. Also used by IoT Hub to hold the IoT Hub device ID.",
@@ -2614,10 +2594,6 @@
           "type": "string",
           "description": "Globally unique, immutable, non-reusable ID.",
           "readOnly": true
-        },
-        "enabled": {
-          "$ref": "#/definitions/DeviceEnabledStatus",
-          "description": "Indicates if the device is enabled or not."
         },
         "externalDeviceId": {
           "type": "string",
@@ -2676,11 +2652,6 @@
           "description": "The entity tag for the resource.",
           "readOnly": true
         },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "Metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/DeviceProperties",
           "description": "The resource-specific properties for this device."
@@ -2711,11 +2682,6 @@
         "etag": {
           "type": "string",
           "description": "The entity tag for the resource.",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "Metadata containing createdBy and modifiedBy information.",
           "readOnly": true
         },
         "name": {
@@ -2954,11 +2920,6 @@
           "description": "The entity tag for the resource.",
           "readOnly": true
         },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "Metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
-        },
         "groups": {
           "type": "array",
           "description": "The groups that this device belongs to.",
@@ -3002,11 +2963,6 @@
         "etag": {
           "type": "string",
           "description": "The entity tag for the resource.",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "Metadata containing createdBy and modifiedBy information.",
           "readOnly": true
         },
         "properties": {
@@ -3125,14 +3081,6 @@
           "type": "string",
           "description": "Human-readable display name for the group."
         },
-        "refreshMode": {
-          "$ref": "#/definitions/GroupRefreshMode",
-          "description": "The refresh mode that determines how group membership is maintained.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
         "groupType": {
           "$ref": "#/definitions/GroupType",
           "description": "The type of group that determines what kind of resources can be members.",
@@ -3167,7 +3115,6 @@
         }
       },
       "required": [
-        "refreshMode",
         "groupType",
         "query"
       ]
@@ -3188,14 +3135,6 @@
         "displayName": {
           "type": "string",
           "description": "Human-readable display name for the group."
-        },
-        "refreshMode": {
-          "$ref": "#/definitions/GroupRefreshMode",
-          "description": "The refresh mode that determines how group membership is maintained.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
         },
         "groupType": {
           "$ref": "#/definitions/GroupType",
@@ -3226,7 +3165,6 @@
         }
       },
       "required": [
-        "refreshMode",
         "groupType",
         "query"
       ]
@@ -3243,30 +3181,6 @@
       "required": [
         "groupUuid"
       ]
-    },
-    "GroupRefreshMode": {
-      "type": "string",
-      "description": "The refresh mode for group membership.",
-      "enum": [
-        "Continuous",
-        "Manual"
-      ],
-      "x-ms-enum": {
-        "name": "GroupRefreshMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Continuous",
-            "value": "Continuous",
-            "description": "Group membership is refreshed continuously."
-          },
-          {
-            "name": "Manual",
-            "value": "Manual",
-            "description": "Group membership is refreshed manually."
-          }
-        ]
-      }
     },
     "GroupType": {
       "type": "string",
@@ -4158,38 +4072,6 @@
         "secondaryKey": {
           "type": "string",
           "description": "The secondary symmetric key."
-        }
-      }
-    },
-    "SystemData": {
-      "type": "object",
-      "description": "Metadata pertaining to creation and last modification of the resource.",
-      "properties": {
-        "createdBy": {
-          "type": "string",
-          "description": "The identity that created the resource."
-        },
-        "createdByType": {
-          "type": "string",
-          "description": "The type of identity that created the resource."
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource creation (UTC)."
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "The identity that last modified the resource."
-        },
-        "lastModifiedByType": {
-          "type": "string",
-          "description": "The type of identity that last modified the resource."
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource last modification (UTC)."
         }
       }
     },
