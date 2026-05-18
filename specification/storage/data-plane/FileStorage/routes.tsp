@@ -25,17 +25,19 @@ op StorageOperation<
   ...ApiVersionHeader,
   ...ClientRequestIdParameter,
   ...TParams,
-): (TResponse & {
-  /** Content-Type header */
-  #suppress "@typespec/http/content-type-ignored" "Template for existing API"
-  @header("Content-Type")
-  contentType: ResponseMediaType;
+):
+  | (TResponse & {
+      /** Content-Type header */
+      #suppress "@typespec/http/content-type-ignored" "Template for existing API"
+      @header("Content-Type")
+      contentType: ResponseMediaType;
 
-  ...ApiVersionHeader;
-  ...RequestIdResponseHeader;
-  ...ClientRequestIdResponseHeader;
-  ...DateResponseHeader;
-}) | TError;
+      ...ApiVersionHeader;
+      ...RequestIdResponseHeader;
+      ...ClientRequestIdResponseHeader;
+      ...DateResponseHeader;
+    })
+  | TError;
 
 /** Azure Storage File basic operation template */
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
@@ -43,12 +45,14 @@ op StorageOperationNoBody<
   TParams extends TypeSpec.Reflection.Model | void,
   TResponse extends TypeSpec.Reflection.Model | void,
   TError = Error
->(...ApiVersionHeader, ...ClientRequestIdParameter, ...TParams): (TResponse & {
-  ...ApiVersionHeader;
-  ...RequestIdResponseHeader;
-  ...ClientRequestIdResponseHeader;
-  ...DateResponseHeader;
-}) | TError;
+>(...ApiVersionHeader, ...ClientRequestIdParameter, ...TParams):
+  | (TResponse & {
+      ...ApiVersionHeader;
+      ...RequestIdResponseHeader;
+      ...ClientRequestIdResponseHeader;
+      ...DateResponseHeader;
+    })
+  | TError;
 
 /** Azure Storage File basic operation template */
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
@@ -86,15 +90,11 @@ op StorageOperationRequestBody<
   TError
 >;
 
-/**
- * Service operations
- */
+/** Service operations */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing storage API."
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 interface Service {
-  /**
-   * Sets properties for a storage account's File service endpoint, including properties for Storage Analytics metrics and CORS (Cross-Origin Resource Sharing) rules.
-   */
+  /** Sets properties for a storage account's File service endpoint, including properties for Storage Analytics metrics and CORS (Cross-Origin Resource Sharing) rules. */
   @route("/?restype=service&comp=properties")
   @put
   setProperties is StorageOperationRequestBody<
@@ -110,9 +110,7 @@ interface Service {
     }
   >;
 
-  /**
-   * Gets the properties of a storage account's File service, including properties for Storage Analytics metrics and CORS (Cross-Origin Resource Sharing) rules.
-   */
+  /** Gets the properties of a storage account's File service, including properties for Storage Analytics metrics and CORS (Cross-Origin Resource Sharing) rules. */
   @route("/?restype=service&comp=properties")
   @get
   getProperties is StorageOperationResponseBody<
@@ -125,9 +123,7 @@ interface Service {
     }
   >;
 
-  /**
-   * The List Shares Segment operation returns a list of the shares and share snapshots under the specified account.
-   */
+  /** The List Shares Segment operation returns a list of the shares and share snapshots under the specified account. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("/?comp=list")
   @get
@@ -148,9 +144,7 @@ interface Service {
     }
   >;
 
-  /**
-   * Retrieves a user delegation key for the File service. This can be used to generate a user delegation SAS.
-   */
+  /** Retrieves a user delegation key for the File service. This can be used to generate a user delegation SAS. */
   @route("/?restype=service&comp=userdelegationkey")
   @post
   getUserDelegationKey is StorageOperation<
@@ -166,15 +160,11 @@ interface Service {
   >;
 }
 
-/**
- * Share operations
- */
+/** Share operations */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing storage API."
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 interface Share {
-  /**
-   * Creates a new share under the specified account. If the share with the same name already exists, the operation fails.
-   */
+  /** Creates a new share under the specified account. If the share with the same name already exists, the operation fails. */
   @route("?restype=share")
   @put
   create is StorageOperationNoBody<
@@ -207,9 +197,7 @@ interface Share {
     }
   >;
 
-  /**
-   * Returns all user-defined metadata and system properties for the specified share or share snapshot.
-   */
+  /** Returns all user-defined metadata and system properties for the specified share or share snapshot. */
   @route("?restype=share")
   @get
   getProperties is StorageOperationNoBody<
@@ -298,9 +286,7 @@ interface Share {
     }
   >;
 
-  /**
-   * Operation marks the specified share or share snapshot for deletion. The share or share snapshot and any files contained within it are later deleted during garbage collection.
-   */
+  /** Operation marks the specified share or share snapshot for deletion. The share or share snapshot and any files contained within it are later deleted during garbage collection. */
   @route("?restype=share")
   @delete
   delete is StorageOperationNoBody<
@@ -321,9 +307,7 @@ interface Share {
     }
   >;
 
-  /**
-   * The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.
-   */
+  /** The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @sharedRoute
   @route("?restype=share&comp=lease")
@@ -345,9 +329,7 @@ interface Share {
     }
   >;
 
-  /**
-   * The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.
-   */
+  /** The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @sharedRoute
   @route("?restype=share&comp=lease")
@@ -366,9 +348,7 @@ interface Share {
     }
   >;
 
-  /**
-   * The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.
-   */
+  /** The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @sharedRoute
   @route("?restype=share&comp=lease")
@@ -389,9 +369,7 @@ interface Share {
     }
   >;
 
-  /**
-   * The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.
-   */
+  /** The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @sharedRoute
   @route("?restype=share&comp=lease")
@@ -411,9 +389,7 @@ interface Share {
     }
   >;
 
-  /**
-   * The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.
-   */
+  /** The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite. */
   @sharedRoute
   @route("?restype=share&comp=lease")
   @put
@@ -435,9 +411,7 @@ interface Share {
     }
   >;
 
-  /**
-   * Creates a read-only snapshot of a share.
-   */
+  /** Creates a read-only snapshot of a share. */
   @route("?restype=share&comp=snapshot")
   @put
   createSnapshot is StorageOperationNoBody<
@@ -454,9 +428,7 @@ interface Share {
     }
   >;
 
-  /**
-   * Create a permission (a security descriptor). This is used to support file level ACLs for SMB shares.
-   */
+  /** Create a permission (a security descriptor). This is used to support file level ACLs for SMB shares. */
   @route("?restype=share&comp=filepermission")
   @put
   createPermission is StorageOperationRequestBody<
@@ -474,9 +446,7 @@ interface Share {
     "application/json"
   >;
 
-  /**
-   * Returns the permission (security descriptor) for a given permission key. This is used to support file level ACLs for SMB shares.
-   */
+  /** Returns the permission (security descriptor) for a given permission key. This is used to support file level ACLs for SMB shares. */
   @route("?restype=share&comp=filepermission")
   @get
   getPermission is StorageOperationResponseBody<
@@ -492,9 +462,7 @@ interface Share {
     "application/json"
   >;
 
-  /**
-   * Sets properties for the specified share.
-   */
+  /** Sets properties for the specified share. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("?restype=share&comp=properties")
   @put
@@ -520,9 +488,7 @@ interface Share {
     }
   >;
 
-  /**
-   * Sets one or more user-defined name-value pairs for the specified share.
-   */
+  /** Sets one or more user-defined name-value pairs for the specified share. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("?restype=share&comp=metadata")
   @put
@@ -539,9 +505,7 @@ interface Share {
     }
   >;
 
-  /**
-   * Returns information about stored access policies specified on the share that may be used with Shared Access Signatures.
-   */
+  /** Returns information about stored access policies specified on the share that may be used with Shared Access Signatures. */
   @route("?restype=share&comp=acl")
   @get
   getAccessPolicy is StorageOperationResponseBody<
@@ -559,9 +523,7 @@ interface Share {
     }
   >;
 
-  /**
-   * Sets stored access policies for the share that may be used with Shared Access Signatures.
-   */
+  /** Sets stored access policies for the share that may be used with Shared Access Signatures. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("?restype=share&comp=acl")
   @put
@@ -586,9 +548,7 @@ interface Share {
     }
   >;
 
-  /**
-   * Retrieves statistics related to the share.
-   */
+  /** Retrieves statistics related to the share. */
   @route("?restype=share&comp=stats")
   @get
   getStatistics is StorageOperationResponseBody<
@@ -604,9 +564,7 @@ interface Share {
     }
   >;
 
-  /**
-   * Restores a previously deleted share.
-   */
+  /** Restores a previously deleted share. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("?restype=share&comp=undelete")
   @put
@@ -626,15 +584,11 @@ interface Share {
   >;
 }
 
-/**
- * Directory operations
- */
+/** Directory operations */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing storage API."
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 interface Directory {
-  /**
-   * Creates a new directory under the specified share or parent directory.
-   */
+  /** Creates a new directory under the specified share or parent directory. */
   @route("?restype=directory")
   @put
   create is StorageOperationNoBody<
@@ -658,9 +612,7 @@ interface Directory {
     }
   >;
 
-  /**
-   * Returns all system properties for the specified directory, and can also be used to check the existence of a directory.
-   */
+  /** Returns all system properties for the specified directory, and can also be used to check the existence of a directory. */
   @route("?restype=directory")
   @get
   getProperties is StorageOperationNoBody<
@@ -680,9 +632,7 @@ interface Directory {
     }
   >;
 
-  /**
-   * Removes the specified empty directory. Note that the directory must be empty before it can be deleted.
-   */
+  /** Removes the specified empty directory. Note that the directory must be empty before it can be deleted. */
   @route("?restype=directory")
   @delete
   delete is StorageOperationNoBody<
@@ -696,9 +646,7 @@ interface Directory {
     }
   >;
 
-  /**
-   * Sets properties for the specified directory.
-   */
+  /** Sets properties for the specified directory. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("?restype=directory&comp=properties")
   @put
@@ -722,9 +670,7 @@ interface Directory {
     }
   >;
 
-  /**
-   * Sets one or more user-defined name-value pairs for the specified directory.
-   */
+  /** Sets one or more user-defined name-value pairs for the specified directory. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("?restype=directory&comp=metadata")
   @put
@@ -742,9 +688,7 @@ interface Directory {
     }
   >;
 
-  /**
-   * Returns a list of files and directories under the specified share or directory. It lists the contents only for a single level of the directory hierarchy.
-   */
+  /** Returns a list of files and directories under the specified share or directory. It lists the contents only for a single level of the directory hierarchy. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("?restype=directory&comp=list")
   @get
@@ -768,9 +712,7 @@ interface Directory {
     }
   >;
 
-  /**
-   * Lists handles for directory.
-   */
+  /** Lists handles for directory. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @sharedRoute
   @route("?comp=listhandles")
@@ -791,9 +733,7 @@ interface Directory {
     }
   >;
 
-  /**
-   * Closes all handles open for given directory.
-   */
+  /** Closes all handles open for given directory. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @sharedRoute
   @route("?comp=forceclosehandles")
@@ -813,9 +753,7 @@ interface Directory {
     }
   >;
 
-  /**
-   * Renames a directory. By default, the destination is overwritten and if the destination already exists and has a read-only attribute set, the operation will fail.
-   */
+  /** Renames a directory. By default, the destination is overwritten and if the destination already exists and has a read-only attribute set, the operation will fail. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("?restype=directory&comp=rename")
   @put
@@ -845,15 +783,11 @@ interface Directory {
   >;
 }
 
-/**
- * File operations
- */
+/** File operations */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing storage API."
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 interface File {
-  /**
-   * Creates a new file or replaces a file. Note it only initializes the file with no content.
-   */
+  /** Creates a new file or replaces a file. Note it only initializes the file with no content. */
   #suppress "@azure-tools/typespec-azure-core/byos" "Existing storage API."
   @sharedRoute
   @put
@@ -902,9 +836,7 @@ interface File {
     }
   >;
 
-  /**
-   * Reads or downloads a file from the system, including its metadata and properties.
-   */
+  /** Reads or downloads a file from the system, including its metadata and properties. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @get
   download is StorageOperationResponseBody<
@@ -942,9 +874,7 @@ interface File {
     "application/octet-stream"
   >;
 
-  /**
-   * Returns all user-defined metadata, standard HTTP properties, and system properties for the file.
-   */
+  /** Returns all user-defined metadata, standard HTTP properties, and system properties for the file. */
   @head
   getProperties is StorageOperationNoBody<
     {
@@ -975,9 +905,7 @@ interface File {
     }
   >;
 
-  /**
-   * Removes the file from the storage account.
-   */
+  /** Removes the file from the storage account. */
   @delete
   delete is StorageOperationNoBody<
     {
@@ -992,9 +920,7 @@ interface File {
     }
   >;
 
-  /**
-   * Sets HTTP headers on a file.
-   */
+  /** Sets HTTP headers on a file. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("?comp=properties")
   @put
@@ -1025,9 +951,7 @@ interface File {
     }
   >;
 
-  /**
-   * Sets one or more user-defined name-value pairs for the specified file.
-   */
+  /** Sets one or more user-defined name-value pairs for the specified file. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("?comp=metadata")
   @put
@@ -1046,9 +970,7 @@ interface File {
     }
   >;
 
-  /**
-   * The Lease File operation establishes and manages a lock on a file for write and delete operations.
-   */
+  /** The Lease File operation establishes and manages a lock on a file for write and delete operations. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
@@ -1072,9 +994,7 @@ interface File {
     }
   >;
 
-  /**
-   * The Lease File operation establishes and manages a lock on a file for write and delete operations.
-   */
+  /** The Lease File operation establishes and manages a lock on a file for write and delete operations. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
@@ -1095,9 +1015,7 @@ interface File {
     }
   >;
 
-  /**
-   * The Lease File operation establishes and manages a lock on a file for write and delete operations.
-   */
+  /** The Lease File operation establishes and manages a lock on a file for write and delete operations. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
@@ -1120,9 +1038,7 @@ interface File {
     }
   >;
 
-  /**
-   * The Lease File operation establishes and manages a lock on a file for write and delete operations.
-   */
+  /** The Lease File operation establishes and manages a lock on a file for write and delete operations. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
@@ -1145,9 +1061,7 @@ interface File {
     }
   >;
 
-  /**
-   * Upload a range of bytes to a file.
-   */
+  /** Upload a range of bytes to a file. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   #suppress "@azure-tools/typespec-azure-core/byos" "Existing storage API."
   @sharedRoute
@@ -1187,9 +1101,7 @@ interface File {
     }
   >;
 
-  /**
-   * Upload a range of bytes to a file where the contents are read from a URL.
-   */
+  /** Upload a range of bytes to a file where the contents are read from a URL. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @sharedRoute
   @route("?comp=range")
@@ -1239,9 +1151,7 @@ interface File {
     }
   >;
 
-  /**
-   * Returns the list of valid page ranges for a file or snapshot of a file.
-   */
+  /** Returns the list of valid page ranges for a file or snapshot of a file. */
   @route("?comp=rangelist")
   @get
   getRangeList is StorageOperationResponseBody<
@@ -1263,9 +1173,7 @@ interface File {
     }
   >;
 
-  /**
-   * Copies a blob or file to a destination file within the storage account.
-   */
+  /** Copies a blob or file to a destination file within the storage account. */
   @sharedRoute
   @put
   startCopy is StorageOperationNoBody<
@@ -1300,9 +1208,7 @@ interface File {
     }
   >;
 
-  /**
-   * Aborts a pending Copy File operation, and leaves a destination file with zero length and full metadata.
-   */
+  /** Aborts a pending Copy File operation, and leaves a destination file with zero length and full metadata. */
   @sharedRoute
   @route("?comp=copy")
   @put
@@ -1320,9 +1226,7 @@ interface File {
     }
   >;
 
-  /**
-   * Lists handles for file.
-   */
+  /** Lists handles for file. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @sharedRoute
   @route("?comp=listhandles")
@@ -1342,9 +1246,7 @@ interface File {
     }
   >;
 
-  /**
-   * Closes all handles open for given file.
-   */
+  /** Closes all handles open for given file. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @sharedRoute
   @route("?comp=forceclosehandles")
@@ -1363,9 +1265,7 @@ interface File {
     }
   >;
 
-  /**
-   * Renames a file. By default, the destination is overwritten and if the destination already exists and has a read-only attribute set, the operation will fail.
-   */
+  /** Renames a file. By default, the destination is overwritten and if the destination already exists and has a read-only attribute set, the operation will fail. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("?comp=rename")
   @put
@@ -1398,9 +1298,7 @@ interface File {
     }
   >;
 
-  /**
-   * Creates a symbolic link to a target file. NFS only.
-   */
+  /** Creates a symbolic link to a target file. NFS only. */
   @route("?restype=symboliclink")
   @put
   createSymbolicLink is StorageOperationNoBody<
@@ -1423,9 +1321,7 @@ interface File {
     }
   >;
 
-  /**
-   * Returns the target of a symbolic link. NFS only.
-   */
+  /** Returns the target of a symbolic link. NFS only. */
   @route("?restype=symboliclink")
   @get
   getSymbolicLink is StorageOperationNoBody<
@@ -1441,9 +1337,7 @@ interface File {
     }
   >;
 
-  /**
-   * Creates a hard link to a target file. NFS only.
-   */
+  /** Creates a hard link to a target file. NFS only. */
   @route("?restype=hardlink")
   @put
   createHardLink is StorageOperationNoBody<

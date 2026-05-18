@@ -9,395 +9,239 @@ using Azure.ClientGenerator.Core;
 
 namespace Storage.File;
 
-/**
- * Error codes returned by the service
- */
+/** Error codes returned by the service */
 union StorageErrorCode {
   string,
 
-  /**
-   * AccountAlreadyExists
-   */
+  /** AccountAlreadyExists */
   AccountAlreadyExists: "AccountAlreadyExists",
 
-  /**
-   * AccountBeingCreated
-   */
+  /** AccountBeingCreated */
   AccountBeingCreated: "AccountBeingCreated",
 
-  /**
-   * AccountIsDisabled
-   */
+  /** AccountIsDisabled */
   AccountIsDisabled: "AccountIsDisabled",
 
-  /**
-   * AuthenticationFailed
-   */
+  /** AuthenticationFailed */
   AuthenticationFailed: "AuthenticationFailed",
 
-  /**
-   * AuthorizationFailure
-   */
+  /** AuthorizationFailure */
   AuthorizationFailure: "AuthorizationFailure",
 
-  /**
-   * ConditionHeadersNotSupported
-   */
+  /** ConditionHeadersNotSupported */
   ConditionHeadersNotSupported: "ConditionHeadersNotSupported",
 
-  /**
-   * ConditionNotMet
-   */
+  /** ConditionNotMet */
   ConditionNotMet: "ConditionNotMet",
 
-  /**
-   * EmptyMetadataKey
-   */
+  /** EmptyMetadataKey */
   EmptyMetadataKey: "EmptyMetadataKey",
 
-  /**
-   * FileShareProvisionedBandwidthDowngradeNotAllowed
-   */
+  /** FileShareProvisionedBandwidthDowngradeNotAllowed */
   FileShareProvisionedBandwidthDowngradeNotAllowed: "FileShareProvisionedBandwidthDowngradeNotAllowed",
 
-  /**
-   * FileShareProvisionedIopsDowngradeNotAllowed
-   */
+  /** FileShareProvisionedIopsDowngradeNotAllowed */
   FileShareProvisionedIopsDowngradeNotAllowed: "FileShareProvisionedIopsDowngradeNotAllowed",
 
-  /**
-   * InsufficientAccountPermissions
-   */
+  /** InsufficientAccountPermissions */
   InsufficientAccountPermissions: "InsufficientAccountPermissions",
 
-  /**
-   * InternalError
-   */
+  /** InternalError */
   InternalError: "InternalError",
 
-  /**
-   * InvalidAuthenticationInfo
-   */
+  /** InvalidAuthenticationInfo */
   InvalidAuthenticationInfo: "InvalidAuthenticationInfo",
 
-  /**
-   * InvalidHeaderValue
-   */
+  /** InvalidHeaderValue */
   InvalidHeaderValue: "InvalidHeaderValue",
 
-  /**
-   * InvalidHttpVerb
-   */
+  /** InvalidHttpVerb */
   InvalidHttpVerb: "InvalidHttpVerb",
 
-  /**
-   * InvalidInput
-   */
+  /** InvalidInput */
   InvalidInput: "InvalidInput",
 
-  /**
-   * InvalidMd5
-   */
+  /** InvalidMd5 */
   InvalidMd5: "InvalidMd5",
 
-  /**
-   * InvalidMetadata
-   */
+  /** InvalidMetadata */
   InvalidMetadata: "InvalidMetadata",
 
-  /**
-   * InvalidQueryParameterValue
-   */
+  /** InvalidQueryParameterValue */
   InvalidQueryParameterValue: "InvalidQueryParameterValue",
 
-  /**
-   * InvalidRange
-   */
+  /** InvalidRange */
   InvalidRange: "InvalidRange",
 
-  /**
-   * InvalidResourceName
-   */
+  /** InvalidResourceName */
   InvalidResourceName: "InvalidResourceName",
 
-  /**
-   * InvalidUri
-   */
+  /** InvalidUri */
   InvalidUri: "InvalidUri",
 
-  /**
-   * InvalidXmlDocument
-   */
+  /** InvalidXmlDocument */
   InvalidXmlDocument: "InvalidXmlDocument",
 
-  /**
-   * InvalidXmlNodeValue
-   */
+  /** InvalidXmlNodeValue */
   InvalidXmlNodeValue: "InvalidXmlNodeValue",
 
-  /**
-   * Md5Mismatch
-   */
+  /** Md5Mismatch */
   Md5Mismatch: "Md5Mismatch",
 
-  /**
-   * MetadataTooLarge
-   */
+  /** MetadataTooLarge */
   MetadataTooLarge: "MetadataTooLarge",
 
-  /**
-   * MissingContentLengthHeader
-   */
+  /** MissingContentLengthHeader */
   MissingContentLengthHeader: "MissingContentLengthHeader",
 
-  /**
-   * MissingRequiredQueryParameter
-   */
+  /** MissingRequiredQueryParameter */
   MissingRequiredQueryParameter: "MissingRequiredQueryParameter",
 
-  /**
-   * MissingRequiredHeader
-   */
+  /** MissingRequiredHeader */
   MissingRequiredHeader: "MissingRequiredHeader",
 
-  /**
-   * MissingRequiredXmlNode
-   */
+  /** MissingRequiredXmlNode */
   MissingRequiredXmlNode: "MissingRequiredXmlNode",
 
-  /**
-   * MultipleConditionHeadersNotSupported
-   */
+  /** MultipleConditionHeadersNotSupported */
   MultipleConditionHeadersNotSupported: "MultipleConditionHeadersNotSupported",
 
-  /**
-   * OperationTimedOut
-   */
+  /** OperationTimedOut */
   OperationTimedOut: "OperationTimedOut",
 
-  /**
-   * OutOfRangeInput
-   */
+  /** OutOfRangeInput */
   OutOfRangeInput: "OutOfRangeInput",
 
-  /**
-   * OutOfRangeQueryParameterValue
-   */
+  /** OutOfRangeQueryParameterValue */
   OutOfRangeQueryParameterValue: "OutOfRangeQueryParameterValue",
 
-  /**
-   * RequestBodyTooLarge
-   */
+  /** RequestBodyTooLarge */
   RequestBodyTooLarge: "RequestBodyTooLarge",
 
-  /**
-   * ResourceTypeMismatch
-   */
+  /** ResourceTypeMismatch */
   ResourceTypeMismatch: "ResourceTypeMismatch",
 
-  /**
-   * RequestUrlFailedToParse
-   */
+  /** RequestUrlFailedToParse */
   RequestUrlFailedToParse: "RequestUrlFailedToParse",
 
-  /**
-   * ResourceAlreadyExists
-   */
+  /** ResourceAlreadyExists */
   ResourceAlreadyExists: "ResourceAlreadyExists",
 
-  /**
-   * ResourceNotFound
-   */
+  /** ResourceNotFound */
   ResourceNotFound: "ResourceNotFound",
 
-  /**
-   * ServerBusy
-   */
+  /** ServerBusy */
   ServerBusy: "ServerBusy",
 
-  /**
-   * UnsupportedHeader
-   */
+  /** UnsupportedHeader */
   UnsupportedHeader: "UnsupportedHeader",
 
-  /**
-   * UnsupportedXmlNode
-   */
+  /** UnsupportedXmlNode */
   UnsupportedXmlNode: "UnsupportedXmlNode",
 
-  /**
-   * UnsupportedQueryParameter
-   */
+  /** UnsupportedQueryParameter */
   UnsupportedQueryParameter: "UnsupportedQueryParameter",
 
-  /**
-   * UnsupportedHttpVerb
-   */
+  /** UnsupportedHttpVerb */
   UnsupportedHttpVerb: "UnsupportedHttpVerb",
 
-  /**
-   * CannotDeleteFileOrDirectory
-   */
+  /** CannotDeleteFileOrDirectory */
   CannotDeleteFileOrDirectory: "CannotDeleteFileOrDirectory",
 
-  /**
-   * ClientCacheFlushDelay
-   */
+  /** ClientCacheFlushDelay */
   ClientCacheFlushDelay: "ClientCacheFlushDelay",
 
-  /**
-   * DeletePending
-   */
+  /** DeletePending */
   DeletePending: "DeletePending",
 
-  /**
-   * DirectoryNotEmpty
-   */
+  /** DirectoryNotEmpty */
   DirectoryNotEmpty: "DirectoryNotEmpty",
 
-  /**
-   * FileLockConflict
-   */
+  /** FileLockConflict */
   FileLockConflict: "FileLockConflict",
 
-  /**
-   * InvalidFileOrDirectoryPathName
-   */
+  /** InvalidFileOrDirectoryPathName */
   InvalidFileOrDirectoryPathName: "InvalidFileOrDirectoryPathName",
 
-  /**
-   * ParentNotFound
-   */
+  /** ParentNotFound */
   ParentNotFound: "ParentNotFound",
 
-  /**
-   * ReadOnlyAttribute
-   */
+  /** ReadOnlyAttribute */
   ReadOnlyAttribute: "ReadOnlyAttribute",
 
-  /**
-   * ShareAlreadyExists
-   */
+  /** ShareAlreadyExists */
   ShareAlreadyExists: "ShareAlreadyExists",
 
-  /**
-   * ShareBeingDeleted
-   */
+  /** ShareBeingDeleted */
   ShareBeingDeleted: "ShareBeingDeleted",
 
-  /**
-   * ShareDisabled
-   */
+  /** ShareDisabled */
   ShareDisabled: "ShareDisabled",
 
-  /**
-   * ShareNotFound
-   */
+  /** ShareNotFound */
   ShareNotFound: "ShareNotFound",
 
-  /**
-   * SharingViolation
-   */
+  /** SharingViolation */
   SharingViolation: "SharingViolation",
 
-  /**
-   * ShareSnapshotInProgress
-   */
+  /** ShareSnapshotInProgress */
   ShareSnapshotInProgress: "ShareSnapshotInProgress",
 
-  /**
-   * ShareSnapshotCountExceeded
-   */
+  /** ShareSnapshotCountExceeded */
   ShareSnapshotCountExceeded: "ShareSnapshotCountExceeded",
 
-  /**
-   * ShareSnapshotOperationNotSupported
-   */
+  /** ShareSnapshotOperationNotSupported */
   ShareSnapshotOperationNotSupported: "ShareSnapshotOperationNotSupported",
 
-  /**
-   * ShareHasSnapshots
-   */
+  /** ShareHasSnapshots */
   ShareHasSnapshots: "ShareHasSnapshots",
 
-  /**
-   * PreviousSnapshotNotFound
-   */
+  /** PreviousSnapshotNotFound */
   PreviousSnapshotNotFound: "PreviousSnapshotNotFound",
 
-  /**
-   * ContainerQuotaDowngradeNotAllowed
-   */
+  /** ContainerQuotaDowngradeNotAllowed */
   ContainerQuotaDowngradeNotAllowed: "ContainerQuotaDowngradeNotAllowed",
 
-  /**
-   * AuthorizationSourceIPMismatch
-   */
+  /** AuthorizationSourceIPMismatch */
   AuthorizationSourceIPMismatch: "AuthorizationSourceIPMismatch",
 
-  /**
-   * AuthorizationProtocolMismatch
-   */
+  /** AuthorizationProtocolMismatch */
   AuthorizationProtocolMismatch: "AuthorizationProtocolMismatch",
 
-  /**
-   * AuthorizationPermissionMismatch
-   */
+  /** AuthorizationPermissionMismatch */
   AuthorizationPermissionMismatch: "AuthorizationPermissionMismatch",
 
-  /**
-   * AuthorizationServiceMismatch
-   */
+  /** AuthorizationServiceMismatch */
   AuthorizationServiceMismatch: "AuthorizationServiceMismatch",
 
-  /**
-   * AuthorizationResourceTypeMismatch
-   */
+  /** AuthorizationResourceTypeMismatch */
   AuthorizationResourceTypeMismatch: "AuthorizationResourceTypeMismatch",
 
-  /**
-   * FeatureVersionMismatch
-   */
+  /** FeatureVersionMismatch */
   FeatureVersionMismatch: "FeatureVersionMismatch",
 
-  /**
-   * ShareSnapshotNotFound
-   */
+  /** ShareSnapshotNotFound */
   ShareSnapshotNotFound: "ShareSnapshotNotFound",
 
-  /**
-   * FileShareProvisionedIopsInvalid
-   */
+  /** FileShareProvisionedIopsInvalid */
   FileShareProvisionedIopsInvalid: "FileShareProvisionedIopsInvalid",
 
-  /**
-   * FileShareProvisionedBandwidthInvalid
-   */
+  /** FileShareProvisionedBandwidthInvalid */
   FileShareProvisionedBandwidthInvalid: "FileShareProvisionedBandwidthInvalid",
 
-  /**
-   * FileShareProvisionedStorageInvalid
-   */
+  /** FileShareProvisionedStorageInvalid */
   FileShareProvisionedStorageInvalid: "FileShareProvisionedStorageInvalid",
 
-  /**
-   * TotalSharesProvisionedCapacityExceedsAccountLimit
-   */
+  /** TotalSharesProvisionedCapacityExceedsAccountLimit */
   TotalSharesProvisionedCapacityExceedsAccountLimit: "TotalSharesProvisionedCapacityExceedsAccountLimit",
 
-  /**
-   * TotalSharesProvisionedIopsExceedsAccountLimit
-   */
+  /** TotalSharesProvisionedIopsExceedsAccountLimit */
   TotalSharesProvisionedIopsExceedsAccountLimit: "TotalSharesProvisionedIopsExceedsAccountLimit",
 
-  /**
-   * TotalSharesProvisionedBandwidthExceedsAccountLimit
-   */
+  /** TotalSharesProvisionedBandwidthExceedsAccountLimit */
   TotalSharesProvisionedBandwidthExceedsAccountLimit: "TotalSharesProvisionedBandwidthExceedsAccountLimit",
 
-  /**
-   * TotalSharesCountExceedsAccountLimit
-   */
+  /** TotalSharesCountExceedsAccountLimit */
   TotalSharesCountExceedsAccountLimit: "TotalSharesCountExceedsAccountLimit",
 }
 
@@ -405,24 +249,16 @@ union StorageErrorCode {
 union ShareAccessTier {
   string,
 
-  /**
-   * TransactionOptimized
-   */
+  /** TransactionOptimized */
   TransactionOptimized: "TransactionOptimized",
 
-  /**
-   * Hot
-   */
+  /** Hot */
   Hot: "Hot",
 
-  /**
-   * Cool
-   */
+  /** Cool */
   Cool: "Cool",
 
-  /**
-   * Premium
-   */
+  /** Premium */
   Premium: "Premium",
 }
 
@@ -430,9 +266,7 @@ union ShareAccessTier {
 union ShareTokenIntent {
   string,
 
-  /**
-   * backup
-   */
+  /** backup */
   backup: "backup",
 }
 
@@ -440,19 +274,13 @@ union ShareTokenIntent {
 union NfsFileType {
   string,
 
-  /**
-   * Regular
-   */
+  /** Regular */
   Regular: "Regular",
 
-  /**
-   * Directory
-   */
+  /** Directory */
   Directory: "Directory",
 
-  /**
-   * SymLink
-   */
+  /** SymLink */
   SymLink: "SymLink",
 }
 
@@ -460,82 +288,52 @@ union NfsFileType {
 union FilePropertySemantics {
   string,
 
-  /**
-   * New
-   */
+  /** New */
   New: "New",
 
-  /**
-   * Restore
-   */
+  /** Restore */
   Restore: "Restore",
 }
 
-/**
- * Access rights of the access policy.
- */
+/** Access rights of the access policy. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum AccessRight {
-  /**
-   * Read
-   */
+  /** Read */
   Read,
 
-  /**
-   * Write
-   */
+  /** Write */
   Write,
 
-  /**
-   * Delete
-   */
+  /** Delete */
   Delete,
 }
 
-/**
- * The current lease status of the share.
- */
+/** The current lease status of the share. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum LeaseStatusType {
-  /**
-   * locked
-   */
+  /** locked */
   locked,
 
-  /**
-   * unlocked
-   */
+  /** unlocked */
   unlocked,
 }
 
-/**
- * Lease state of the share.
- */
+/** Lease state of the share. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum LeaseStateType {
-  /**
-   * available
-   */
+  /** available */
   available,
 
-  /**
-   * leased
-   */
+  /** leased */
   leased,
 
-  /**
-   * expired
-   */
+  /** expired */
   expired,
 
-  /**
-   * breaking
-   */
+  /** breaking */
   breaking,
 
-  /**
-   * broken
-   */
+  /** broken */
   broken,
 }
 
@@ -545,166 +343,116 @@ enum LeaseStateType {
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum LeaseDurationType {
-  /**
-   * infinite
-   */
+  /** infinite */
   infinite,
 
-  /**
-   * fixed
-   */
+  /** fixed */
   fixed,
 }
 
 /** The root squash setting for the share. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum ShareRootSquash {
-  /**
-   * NoRootSquash
-   */
+  /** NoRootSquash */
   NoRootSquash,
 
-  /**
-   * RootSquash
-   */
+  /** RootSquash */
   RootSquash,
 
-  /**
-   * AllSquash
-   */
+  /** AllSquash */
   AllSquash,
 }
 
 /** The file permission format. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum FilePermissionFormat {
-  /**
-   * Sddl
-   */
+  /** Sddl */
   Sddl,
 
-  /**
-   * Binary
-   */
+  /** Binary */
   Binary,
 }
 
 /** The type of file information to include in the listing. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum ListFilesIncludeType {
-  /**
-   * Timestamps
-   */
+  /** Timestamps */
   Timestamps,
 
-  /**
-   * Etag
-   */
+  /** Etag */
   Etag,
 
-  /**
-   * Attributes
-   */
+  /** Attributes */
   Attributes,
 
-  /**
-   * PermissionKey
-   */
+  /** PermissionKey */
   PermissionKey,
 }
 
 /** The type of share information to include in the listing. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum ListSharesIncludeType {
-  /**
-   * snapshots
-   */
+  /** snapshots */
   snapshots,
 
-  /**
-   * metadata
-   */
+  /** metadata */
   metadata,
 
-  /**
-   * deleted
-   */
+  /** deleted */
   deleted,
 }
 
 /** The permission copy mode type. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum PermissionCopyModeType {
-  /**
-   * source
-   */
+  /** source */
   source,
 
-  /**
-   * override
-   */
+  /** override */
   override,
 }
 
 /** The mode copy mode. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum ModeCopyMode {
-  /**
-   * source
-   */
+  /** source */
   source,
 
-  /**
-   * override
-   */
+  /** override */
   override,
 }
 
 /** The owner copy mode. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum OwnerCopyMode {
-  /**
-   * source
-   */
+  /** source */
   source,
 
-  /**
-   * override
-   */
+  /** override */
   override,
 }
 
 /** The delete snapshots option type. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum DeleteSnapshotsOptionType {
-  /**
-   * include
-   */
+  /** include */
   include,
 
-  /**
-   * include-leased
-   */
+  /** include-leased */
   `include-leased`,
 }
 
 /** The file last written mode. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum FileLastWrittenMode {
-  /**
-   * Now
-   */
+  /** Now */
   Now,
 
-  /**
-   * Preserve
-   */
+  /** Preserve */
   Preserve,
 }
 
-/**
- * An Access policy.
- */
+/** An Access policy. */
 model AccessPolicy {
   /** The date-time the policy is active. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Storage requires 7 digit precision"
@@ -720,9 +468,7 @@ model AccessPolicy {
   @encode("rfc3339-fixed-width")
   expiry?: utcDateTime;
 
-  /**
-   * The permissions for the ACL policy.
-   */
+  /** The permissions for the ACL policy. */
   @Xml.name("Permission") permission?: string;
 }
 
@@ -750,9 +496,7 @@ model CorsRule {
    */
   @Xml.name("AllowedMethods") allowedMethods: string;
 
-  /**
-   * The request headers that the origin domain may specify on the CORS request.
-   */
+  /** The request headers that the origin domain may specify on the CORS request. */
   @Xml.name("AllowedHeaders") allowedHeaders: string;
 
   /**
@@ -768,9 +512,7 @@ model CorsRule {
   @Xml.name("MaxAgeInSeconds") maxAgeInSeconds: int32;
 }
 
-/**
- * Abstract for entries that can be listed from Directory.
- */
+/** Abstract for entries that can be listed from Directory. */
 model FilesAndDirectoriesListSegment {
   /** The directory items. */
   @Xml.unwrapped
@@ -783,9 +525,7 @@ model FilesAndDirectoriesListSegment {
   fileItems: FileItem[];
 }
 
-/**
- * A listed directory item.
- */
+/** A listed directory item. */
 @Xml.name("Directory")
 model DirectoryItem {
   /** The directory name. */
@@ -794,9 +534,7 @@ model DirectoryItem {
   /** The file ID. */
   @Xml.name("FileId") fileId?: string;
 
-  /**
-   * File properties.
-   */
+  /** File properties. */
   @Xml.name("Properties") properties?: FileProperty;
 
   /** The file attributes. */
@@ -817,9 +555,7 @@ model StringEncoded {
   @Xml.unwrapped content?: string;
 }
 
-/**
- * File properties.
- */
+/** File properties. */
 model FileProperty {
   /**
    * Content length of the file. This value may not be up-to-date since an SMB
@@ -854,9 +590,7 @@ model FileProperty {
   @Xml.name("Etag") eTag?: Azure.Core.eTag;
 }
 
-/**
- * A listed file item.
- */
+/** A listed file item. */
 @Xml.name("File")
 model FileItem {
   /** The file name. */
@@ -865,9 +599,7 @@ model FileItem {
   /** The file ID. */
   @Xml.name("FileId") fileId?: string;
 
-  /**
-   * File properties.
-   */
+  /** File properties. */
   @Xml.name("Properties") properties: FileProperty;
 
   /** The file attributes. */
@@ -877,42 +609,28 @@ model FileItem {
   @Xml.name("PermissionKey") permissionKey?: string;
 }
 
-/**
- * A listed Azure Storage handle item.
- */
+/** A listed Azure Storage handle item. */
 @Xml.name("Handle")
 model HandleItem {
-  /**
-   * XSMB service handle ID
-   */
+  /** XSMB service handle ID */
   @Xml.name("HandleId") handleId: string;
 
   /** The path. */
   @Xml.name("Path") path: StringEncoded;
 
-  /**
-   * FileId uniquely identifies the file or directory.
-   */
+  /** FileId uniquely identifies the file or directory. */
   @Xml.name("FileId") fileId: string;
 
-  /**
-   * ParentId uniquely identifies the parent directory of the object.
-   */
+  /** ParentId uniquely identifies the parent directory of the object. */
   @Xml.name("ParentId") parentId?: string;
 
-  /**
-   * SMB session ID in context of which the file handle was opened
-   */
+  /** SMB session ID in context of which the file handle was opened */
   @Xml.name("SessionId") sessionId: string;
 
-  /**
-   * Client IP that opened the handle
-   */
+  /** Client IP that opened the handle */
   @Xml.name("ClientIp") clientIp: string;
 
-  /**
-   * Name of the client machine where the share is being mounted
-   */
+  /** Name of the client machine where the share is being mounted */
   @Xml.name("ClientName") clientName: string;
 
   /**
@@ -923,9 +641,7 @@ model HandleItem {
   @Xml.name("OpenTime")
   openTime: utcDateTime;
 
-  /**
-   * Time handle was last connected to (UTC)
-   */
+  /** Time handle was last connected to (UTC) */
   @encode("rfc7231")
   @Xml.name("LastReconnectTime")
   lastReconnectTime?: utcDateTime;
@@ -934,9 +650,7 @@ model HandleItem {
   @Xml.name("AccessRightList") accessRightList?: AccessRight[];
 }
 
-/**
- * An enumeration of directories and files.
- */
+/** An enumeration of directories and files. */
 @Xml.name("EnumerationResults")
 model ListFilesAndDirectoriesSegmentResponse {
   /** The service endpoint. */
@@ -973,9 +687,7 @@ model ListFilesAndDirectoriesSegmentResponse {
   /** The max results. */
   @Xml.name("MaxResults") maxResults?: int32;
 
-  /**
-   * Abstract for entries that can be listed from Directory.
-   */
+  /** Abstract for entries that can be listed from Directory. */
   @Xml.name("Entries")
   segment: FilesAndDirectoriesListSegment;
 
@@ -988,9 +700,7 @@ model ListFilesAndDirectoriesSegmentResponse {
   @Xml.name("DirectoryId") directoryId?: string;
 }
 
-/**
- * An enumeration of handles.
- */
+/** An enumeration of handles. */
 @Xml.name("EnumerationResults")
 model ListHandlesResponse {
   /** The handle list. */
@@ -1004,9 +714,7 @@ model ListHandlesResponse {
   nextMarker: string;
 }
 
-/**
- * An enumeration of shares.
- */
+/** An enumeration of shares. */
 @Xml.name("EnumerationResults")
 model ListSharesResponse {
   /** The service endpoint. */
@@ -1034,9 +742,7 @@ model ListSharesResponse {
   nextMarker: string;
 }
 
-/**
- * A listed Azure Storage share item.
- */
+/** A listed Azure Storage share item. */
 @Xml.name("Share")
 model ShareItemInternal {
   /** The share name. */
@@ -1051,20 +757,14 @@ model ShareItemInternal {
   /** The share version. */
   @Xml.name("Version") version?: string;
 
-  /**
-   * Properties of a share.
-   */
+  /** Properties of a share. */
   @Xml.name("Properties") properties: SharePropertiesInternal;
 
-  /**
-   * Dictionary of <string>
-   */
+  /** Dictionary of <string> */
   @Xml.name("Metadata") metadata?: Record<string>;
 }
 
-/**
- * Properties of a share.
- */
+/** Properties of a share. */
 model SharePropertiesInternal {
   /** The last modified time. */
   @encode("rfc7231")
@@ -1115,14 +815,10 @@ model SharePropertiesInternal {
   /** The access tier transition state. */
   @Xml.name("AccessTierTransitionState") accessTierTransitionState?: string;
 
-  /**
-   * The current lease status of the share.
-   */
+  /** The current lease status of the share. */
   @Xml.name("LeaseStatus") leaseStatus?: LeaseStatusType;
 
-  /**
-   * Lease state of the share.
-   */
+  /** Lease state of the share. */
   @Xml.name("LeaseState") leaseState?: LeaseStateType;
 
   /**
@@ -1171,18 +867,12 @@ model SharePropertiesInternal {
   @Xml.name("EnableSmbDirectoryLease") enableSmbDirectoryLease?: boolean;
 }
 
-/**
- * Storage Analytics metrics for file service.
- */
+/** Storage Analytics metrics for file service. */
 model Metrics {
-  /**
-   * The version of Storage Analytics to configure.
-   */
+  /** The version of Storage Analytics to configure. */
   @Xml.name("Version") version: string;
 
-  /**
-   * Indicates whether metrics are enabled for the File service.
-   */
+  /** Indicates whether metrics are enabled for the File service. */
   @Xml.name("Enabled") enabled: boolean;
 
   /**
@@ -1191,15 +881,11 @@ model Metrics {
    */
   @Xml.name("IncludeAPIs") includeApis?: boolean;
 
-  /**
-   * The retention policy.
-   */
+  /** The retention policy. */
   @Xml.name("RetentionPolicy") retentionPolicy?: RetentionPolicy;
 }
 
-/**
- * The retention policy.
- */
+/** The retention policy. */
 model RetentionPolicy {
   /**
    * Indicates whether a retention policy is enabled for the File service. If false,
@@ -1218,30 +904,20 @@ model RetentionPolicy {
   days?: int32;
 }
 
-/**
- * Settings for SMB multichannel
- */
+/** Settings for SMB multichannel */
 @Xml.name("Multichannel")
 model SmbMultichannel {
-  /**
-   * If SMB multichannel is enabled.
-   */
+  /** If SMB multichannel is enabled. */
   @Xml.name("Enabled") enabled?: boolean;
 }
 
-/**
- * An Azure Storage file range.
- */
+/** An Azure Storage file range. */
 @Xml.name("Range")
 model FileRange {
-  /**
-   * Start of the range.
-   */
+  /** Start of the range. */
   @Xml.name("Start") start: int64;
 
-  /**
-   * End of the range.
-   */
+  /** End of the range. */
   @Xml.name("End") end: int64;
 }
 
@@ -1255,74 +931,48 @@ model ClearRange {
   @Xml.name("End") end: int64;
 }
 
-/**
- * Protocol settings
- */
+/** Protocol settings */
 @Xml.name("ProtocolSettings")
 model ShareProtocolSettings {
-  /**
-   * Settings for SMB protocol.
-   */
+  /** Settings for SMB protocol. */
   @Xml.name("SMB") smb?: ShareSmbSettings;
 
-  /**
-   * Settings for NFS protocol.
-   */
+  /** Settings for NFS protocol. */
   @Xml.name("NFS") nfs?: ShareNfsSettings;
 }
 
-/**
- * Settings for SMB protocol.
- */
+/** Settings for SMB protocol. */
 @Xml.name("SMB")
 model ShareSmbSettings {
-  /**
-   * Settings for SMB Multichannel.
-   */
+  /** Settings for SMB Multichannel. */
   @Xml.name("Multichannel") multichannel?: SmbMultichannel;
 
-  /**
-   * Enable or disable encryption in transit.
-   */
+  /** Enable or disable encryption in transit. */
   @Xml.name("EncryptionInTransit")
   encryptionInTransit?: ShareSmbSettingsEncryptionInTransit;
 }
 
-/**
- * Enable or disable encryption in transit.
- */
+/** Enable or disable encryption in transit. */
 model ShareSmbSettingsEncryptionInTransit {
-  /**
-   * If encryption in transit is required
-   */
+  /** If encryption in transit is required */
   @Xml.name("Required") required?: boolean;
 }
 
-/**
- * Settings for SMB protocol.
- */
+/** Settings for SMB protocol. */
 @Xml.name("NFS")
 model ShareNfsSettings {
-  /**
-   * Enable or disable encryption in transit.
-   */
+  /** Enable or disable encryption in transit. */
   @Xml.name("EncryptionInTransit")
   encryptionInTransit?: ShareNfsSettingsEncryptionInTransit;
 }
 
-/**
- * Enable or disable encryption in transit.
- */
+/** Enable or disable encryption in transit. */
 model ShareNfsSettingsEncryptionInTransit {
-  /**
-   * If encryption in transit is required
-   */
+  /** If encryption in transit is required */
   @Xml.name("Required") required?: boolean;
 }
 
-/**
- * The list of file ranges
- */
+/** The list of file ranges */
 @Xml.name("Ranges")
 model ShareFileRangeList {
   /** The file ranges. */
@@ -1372,9 +1022,7 @@ model Error {
   @Xml.name("CopySourceErrorMessage") copySourceErrorMessage?: string;
 }
 
-/**
- * Stats for the share.
- */
+/** Stats for the share. */
 model ShareStats {
   /**
    * The approximate size of the data stored in bytes. Note that this value may not
@@ -1391,116 +1039,74 @@ model SignedIdentifiers {
   items: Array<SignedIdentifier>;
 }
 
-/**
- * Signed identifier.
- */
+/** Signed identifier. */
 @Xml.name("SignedIdentifier")
 model SignedIdentifier {
-  /**
-   * A unique id.
-   */
+  /** A unique id. */
   @Xml.name("Id") id: string;
 
-  /**
-   * The access policy.
-   */
+  /** The access policy. */
   @Xml.name("AccessPolicy") accessPolicy?: AccessPolicy;
 }
 
-/**
- * Storage service properties.
- */
+/** Storage service properties. */
 model StorageServiceProperties {
-  /**
-   * A summary of request statistics grouped by API in hourly aggregates for files.
-   */
+  /** A summary of request statistics grouped by API in hourly aggregates for files. */
   @Xml.name("HourMetrics") hourMetrics?: Metrics;
 
-  /**
-   * A summary of request statistics grouped by API in minute aggregates for files.
-   */
+  /** A summary of request statistics grouped by API in minute aggregates for files. */
   @Xml.name("MinuteMetrics") minuteMetrics?: Metrics;
 
-  /**
-   * Protocol settings
-   */
+  /** Protocol settings */
   @Xml.name("ProtocolSettings") protocol?: ShareProtocolSettings;
 
-  /**
-   * The set of CORS rules.
-   */
+  /** The set of CORS rules. */
   @Xml.name("Cors") cors?: CorsRule[];
 }
 
-/**
- * A permission (a security descriptor) at the share level.
- */
+/** A permission (a security descriptor) at the share level. */
 model SharePermission {
-  /**
-   * The permission in the Security Descriptor Definition Language (SDDL).
-   */
+  /** The permission in the Security Descriptor Definition Language (SDDL). */
   permission: string;
 
   /** The permission format. */
   format?: FilePermissionFormat;
 }
 
-/**
- * Key information
- */
+/** Key information */
 model KeyInfo {
-  /**
-   * The date-time the key is active in ISO 8601 UTC time
-   */
+  /** The date-time the key is active in ISO 8601 UTC time */
   @Xml.name("Start")
   start?: utcDateTime;
 
-  /**
-   * The date-time the key expires in ISO 8601 UTC time
-   */
+  /** The date-time the key expires in ISO 8601 UTC time */
   @Xml.name("Expiry")
   expiry: utcDateTime;
 
-  /**
-   * The delegated user tenant id in Azure AD
-   */
+  /** The delegated user tenant id in Azure AD */
   @Xml.name("DelegatedUserTid") delegatedUserTid?: string;
 }
 
-/**
- * A user delegation key
- */
+/** A user delegation key */
 model UserDelegationKey {
-  /**
-   * The Azure Active Directory object ID in GUID format.
-   */
+  /** The Azure Active Directory object ID in GUID format. */
   @Xml.name("SignedOid") signedOid: string;
 
-  /**
-   * The Azure Active Directory tenant ID in GUID format
-   */
+  /** The Azure Active Directory tenant ID in GUID format */
   @Xml.name("SignedTid") signedTid: string;
 
-  /**
-   * The date-time the key is active
-   */
+  /** The date-time the key is active */
   @Xml.name("SignedStart")
   signedStart: utcDateTime;
 
-  /**
-   * The date-time the key expires
-   */
+  /** The date-time the key expires */
   @Xml.name("SignedExpiry")
   signedExpiry: utcDateTime;
 
-  /**
-   * Abbreviation of the Azure Storage service that accepts the key
-   */
+  /** Abbreviation of the Azure Storage service that accepts the key */
   @Xml.name("SignedService") signedService: string;
 
-  /**
-   * The service version that created the key
-   */
+  /** The service version that created the key */
   @Xml.name("SignedVersion") signedVersion: string;
 
   /**
@@ -1509,9 +1115,7 @@ model UserDelegationKey {
    */
   @Xml.name("SignedDelegatedUserTid") signedDelegatedUserTid?: string;
 
-  /**
-   * The key as a base64 string
-   */
+  /** The key as a base64 string */
   @Xml.name("Value") value: string;
 }
 
