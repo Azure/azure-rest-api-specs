@@ -63,6 +63,12 @@
               "type": "file"
             }
           },
+          "401": {
+            "description": "Unauthorized error response, returned when JWT authentication is required and the request fails authentication.",
+            "schema": {
+              "type": "file"
+            }
+          },
           "404": {
             "description": "Not found error response",
             "schema": {
@@ -92,6 +98,13 @@
             "description": "Service unavailable error response",
             "schema": {
               "type": "file"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry the same request after a suggested number of seconds"
+              }
             }
           }
         },
@@ -134,6 +147,12 @@
               "type": "file"
             }
           },
+          "401": {
+            "description": "Unauthorized error response, returned when JWT authentication is required and the request fails authentication.",
+            "schema": {
+              "type": "file"
+            }
+          },
           "404": {
             "description": "Not found error response",
             "schema": {
@@ -163,6 +182,13 @@
             "description": "Service unavailable error response",
             "schema": {
               "type": "file"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry the same request after a suggested number of seconds"
+              }
             }
           }
         },
@@ -206,6 +232,13 @@
             "description": "Service unavailable error response",
             "schema": {
               "type": "file"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry the same request after a suggested number of seconds"
+              }
             }
           }
         },
@@ -221,7 +254,7 @@
         "operationId": "CreateEntry",
         "description": "Post an entry to be registered on the CodeTransparency instance, mandatory in IETF SCITT draft",
         "produces": [
-          "application/cose",
+          "application/scitt-receipt+cose",
           "application/concise-problem-details+cbor"
         ],
         "consumes": [
@@ -277,6 +310,12 @@
               "type": "file"
             }
           },
+          "401": {
+            "description": "Unauthorized error response, returned when JWT authentication is required and the request fails authentication.",
+            "schema": {
+              "type": "file"
+            }
+          },
           "404": {
             "description": "Not found error response",
             "schema": {
@@ -308,9 +347,10 @@
               "type": "file"
             },
             "headers": {
-              "x-ms-ccf-transaction-id": {
-                "type": "string",
-                "description": "Transaction ID for the rolled back entry"
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry the same request after a suggested number of seconds"
               }
             }
           }
@@ -327,7 +367,7 @@
         "operationId": "GetEntry",
         "description": "Get receipt",
         "produces": [
-          "application/cose",
+          "application/scitt-receipt+cose",
           "application/concise-problem-details+cbor"
         ],
         "parameters": [
@@ -338,7 +378,7 @@
             "$ref": "#/parameters/EntryIdParameter"
           },
           {
-            "$ref": "#/parameters/AcceptCoseHeader"
+            "$ref": "#/parameters/AcceptScittReceiptHeader"
           }
         ],
         "responses": {
@@ -374,6 +414,12 @@
               "type": "file"
             }
           },
+          "401": {
+            "description": "Unauthorized error response, returned when JWT authentication is required and the request fails authentication.",
+            "schema": {
+              "type": "file"
+            }
+          },
           "404": {
             "description": "Not found error response",
             "schema": {
@@ -403,6 +449,13 @@
             "description": "Service unavailable error response",
             "schema": {
               "type": "file"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry the same request after a suggested number of seconds"
+              }
             }
           }
         },
@@ -445,6 +498,12 @@
               "type": "file"
             }
           },
+          "401": {
+            "description": "Unauthorized error response, returned when JWT authentication is required and the request fails authentication.",
+            "schema": {
+              "type": "file"
+            }
+          },
           "404": {
             "description": "Not found error response",
             "schema": {
@@ -474,6 +533,13 @@
             "description": "Service unavailable error response",
             "schema": {
               "type": "file"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry the same request after a suggested number of seconds"
+              }
             }
           }
         },
@@ -510,6 +576,12 @@
               "type": "file"
             }
           },
+          "401": {
+            "description": "Unauthorized error response, returned when JWT authentication is required and the request fails authentication.",
+            "schema": {
+              "type": "file"
+            }
+          },
           "404": {
             "description": "Not found error response",
             "schema": {
@@ -539,6 +611,13 @@
             "description": "Service unavailable error response",
             "schema": {
               "type": "file"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry the same request after a suggested number of seconds"
+              }
             }
           }
         },
@@ -601,6 +680,12 @@
               "type": "file"
             }
           },
+          "401": {
+            "description": "Unauthorized error response, returned when JWT authentication is required and the request fails authentication.",
+            "schema": {
+              "type": "file"
+            }
+          },
           "404": {
             "description": "Not found error response",
             "schema": {
@@ -630,6 +715,13 @@
             "description": "Service unavailable error response",
             "schema": {
               "type": "file"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry the same request after a suggested number of seconds"
+              }
             }
           }
         },
@@ -643,6 +735,10 @@
     }
   },
   "definitions": {
+    "AcceptCoseHeader": {
+      "type": "object",
+      "description": "Accept application/cose header"
+    },
     "CreateEntryCreated": {
       "type": "object",
       "description": "Response of entry submission if the response can be served immediately, mandatory in IETF SCITT draft",
@@ -807,6 +903,20 @@
         "error"
       ]
     },
+    "Response401Cbor": {
+      "type": "object",
+      "description": "Unauthorized error response, returned when JWT authentication is required and the request fails authentication.",
+      "properties": {
+        "error": {
+          "type": "string",
+          "format": "byte",
+          "description": "CBOR content of the error object"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
     "Response404Cbor": {
       "type": "object",
       "description": "Not found error response",
@@ -857,20 +967,6 @@
           "type": "string",
           "format": "byte",
           "description": "CBOR content of the error object"
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
-    "Response503CborWithReceipt": {
-      "type": "object",
-      "description": "Service unavailable with CBOR error response for waitForCommit rollback",
-      "properties": {
-        "error": {
-          "type": "string",
-          "format": "byte",
-          "description": "CBOR error content for rollback"
         }
       },
       "required": [
@@ -949,20 +1045,6 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "AcceptCoseHeader": {
-      "name": "accept",
-      "in": "header",
-      "description": "Accept header",
-      "required": true,
-      "type": "string",
-      "enum": [
-        "application/cose"
-      ],
-      "x-ms-enum": {
-        "modelAsString": false
-      },
-      "x-ms-parameter-location": "method"
-    },
     "AcceptCoseOrCborHeader": {
       "name": "accept",
       "in": "header",
@@ -971,6 +1053,20 @@
       "type": "string",
       "enum": [
         "application/cose; application/cbor"
+      ],
+      "x-ms-enum": {
+        "modelAsString": false
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "AcceptScittReceiptHeader": {
+      "name": "accept",
+      "in": "header",
+      "description": "Accept header",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "application/scitt-receipt+cose"
       ],
       "x-ms-enum": {
         "modelAsString": false

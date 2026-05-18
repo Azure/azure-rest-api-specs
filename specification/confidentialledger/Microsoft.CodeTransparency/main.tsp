@@ -165,7 +165,7 @@ op getEntry is Foundations.Operation<
 @doc("Get receipt")
 @route("/entries/{entryId}")
 op getEntryV09 is Foundations.Operation<
-  EntryIdParameter & AcceptCoseHeader,
+  EntryIdParameter & AcceptScittReceiptHeader,
   ReceiptEntry | ReceiptEntryPending,
   ServiceTraits,
   AnyCborError
@@ -248,6 +248,10 @@ model CreateEntryPending {
   @doc("Retry-After seconds value to help with polling")
   @header("Retry-After")
   retryAfter?: int32;
+
+  @doc("Transaction ID for the submitted entry")
+  @header("x-ms-ccf-transaction-id")
+  transactionId?: string;
 
   // Example CBOR:
   // {
@@ -371,8 +375,14 @@ model TransparentStatement {
 model ReceiptEntry {
   @doc("The MIME content type for receipt is application/cose.")
   @added(Versions.`2025-01-31-preview`)
+  @removed(Versions.`2026-03-26`)
   @header("Content-Type")
   contentType: "application/cose";
+
+  @doc("The MIME content type for SCRAPI v09 receipts is application/scitt-receipt+cose.")
+  @added(Versions.`2026-03-26`)
+  @header("Content-Type")
+  contentTypeV09: "application/scitt-receipt+cose";
 
   @doc("Location of the receipt")
   @header("Location")
@@ -442,6 +452,14 @@ model AcceptScittStatementHeader {
   @doc("Accept header")
   @header
   accept: "application/scitt-statement+cose";
+}
+
+@doc("Accept application/scitt-receipt+cose header")
+@added(Versions.`2026-03-26`)
+model AcceptScittReceiptHeader {
+  @doc("Accept header")
+  @header
+  accept: "application/scitt-receipt+cose";
 }
 
 @doc("Accept application/cbor header")
