@@ -41,7 +41,7 @@ interface Routes {
     Route,
     Response =
       | ArmResourceUpdatedResponse<Route>
-      | ArmResourceCreatedResponse<Route, LroHeaders = {}>
+      | ArmResourceCreatedResponse<Route>
       | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Route>> &
           ArmLroLocationHeader<FinalResult = Route> & {
             @bodyRoot
