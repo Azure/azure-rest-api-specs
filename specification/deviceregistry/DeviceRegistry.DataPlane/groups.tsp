@@ -16,7 +16,7 @@ namespace Microsoft.DeviceRegistry;
 
 // ──────────────────────────────────────────────
 // Group resource
-// Shared types (GroupRefreshMode, GroupType, GroupMembershipState) are defined
+// Shared types (GroupType, GroupMembershipState) are defined
 // in specification/deviceregistry/common/groupTypes.tsp.
 // ──────────────────────────────────────────────
 

@@ -3125,14 +3125,6 @@
           "type": "string",
           "description": "Human-readable display name for the group."
         },
-        "refreshMode": {
-          "$ref": "#/definitions/GroupRefreshMode",
-          "description": "The refresh mode that determines how group membership is maintained.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
         "groupType": {
           "$ref": "#/definitions/GroupType",
           "description": "The type of group that determines what kind of resources can be members.",
@@ -3167,7 +3159,6 @@
         }
       },
       "required": [
-        "refreshMode",
         "groupType",
         "query"
       ]
@@ -3188,14 +3179,6 @@
         "displayName": {
           "type": "string",
           "description": "Human-readable display name for the group."
-        },
-        "refreshMode": {
-          "$ref": "#/definitions/GroupRefreshMode",
-          "description": "The refresh mode that determines how group membership is maintained.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
         },
         "groupType": {
           "$ref": "#/definitions/GroupType",
@@ -3226,7 +3209,6 @@
         }
       },
       "required": [
-        "refreshMode",
         "groupType",
         "query"
       ]
@@ -3243,30 +3225,6 @@
       "required": [
         "groupUuid"
       ]
-    },
-    "GroupRefreshMode": {
-      "type": "string",
-      "description": "The refresh mode for group membership.",
-      "enum": [
-        "Continuous",
-        "Manual"
-      ],
-      "x-ms-enum": {
-        "name": "GroupRefreshMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Continuous",
-            "value": "Continuous",
-            "description": "Group membership is refreshed continuously."
-          },
-          {
-            "name": "Manual",
-            "value": "Manual",
-            "description": "Group membership is refreshed manually."
-          }
-        ]
-      }
     },
     "GroupType": {
       "type": "string",
