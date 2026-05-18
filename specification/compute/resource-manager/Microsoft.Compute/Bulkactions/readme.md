@@ -31,7 +31,7 @@ title: ComputeBulkActionsResourceProviderClient
 ```yaml
 description: The Compute Bulk Actions Resource Provider Client
 openapi-type: arm
-tag: package-2026-06-06-preview
+tag: package-2026-04-06-preview
 
 suppressions:
   - code: DefinitionsPropertiesNamesCamelCase
@@ -59,15 +59,6 @@ These settings apply only when `--tag=package-2026-04-06-preview` is specified o
 ```yaml $(tag) == 'package-2026-04-06-preview'
 input-file:
   - preview/2026-04-06-preview/Bulkactions.json
-```
-
-### Tag: package-2026-06-06-preview
-
-These settings apply only when `--tag=package-2026-06-06-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2026-06-06-preview'
-input-file:
-  - preview/2026-06-06-preview/Bulkactions.json
 suppressions:
   - code: PostResponseCodes
     reason: >
@@ -78,10 +69,30 @@ suppressions:
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/launchBulkInstancesOperations/{name}/cancel"].post
   - code: ParameterNotUsingCommonTypes
     reason: >
-      LaunchBulkInstancesOperation uses location as a resource path segment key
-      (location is azureLocation in the resource model), so the location parameter
-      cannot be a $ref to common-types LocationParameter without losing the resource key binding.
+      The location parameter is a resource path segment key (location is azureLocation in the
+      resource model) for LaunchBulkInstancesOperation, and is also used as a segment-bound
+      parameter in the existing VirtualMachineBulkOperations action paths. In both cases the
+      parameter cannot be a $ref to common-types LocationParameter without losing the resource
+      key binding.
     from: Bulkactions.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/launchBulkInstancesOperations"].get.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/launchBulkInstancesOperations"].get.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/launchBulkInstancesOperations/{name}"].get.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/launchBulkInstancesOperations/{name}"].put.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/launchBulkInstancesOperations/{name}"].delete.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/launchBulkInstancesOperations/{name}/cancel"].post.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/launchBulkInstancesOperations/{name}/virtualMachines"].get.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/operations/{id}"].get.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkCancel"].post.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkCreate"].post.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkDeallocate"].post.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkDelete"].post.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkGetOperationStatus"].post.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkHibernate"].post.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkReimage"].post.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkStart"].post.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkVdiFlexCreate"].post.parameters[?(@.name=='location')]
   - code: MissingSegmentsInNestedResourceListOperation
     reason: >
       listVirtualMachines is the canonical child resource list URL pattern emitted by
