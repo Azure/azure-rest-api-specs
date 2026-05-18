@@ -91,13 +91,16 @@ interface SuiteOffers {
 }
 
 @@doc(QuantumWorkspace.name, "The name of the quantum workspace resource.");
-@@doc(QuantumWorkspace.properties,
+@@doc(
+  QuantumWorkspace.properties,
   "Gets or sets the properties. Define quantum workspace's specific properties."
 );
 @@doc(Workspaces.createOrUpdate::parameters.resource, "Workspace details.");
-@@doc(Workspaces.updateTags::parameters.properties,
+@@doc(
+  Workspaces.updateTags::parameters.properties,
   "Parameters supplied to update tags."
 );
-@@doc(Workspaces.regenerateKeys::parameters.body,
+@@doc(
+  Workspaces.regenerateKeys::parameters.body,
   "Which key to regenerate:  primary or secondary."
 );

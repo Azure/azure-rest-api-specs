@@ -37,29 +37,8 @@ describe("folder-structure", function () {
       ]);
     });
 
-    it("should succeed with first suppression reason when rule is suppressed", async function () {
-      vi.spyOn(utils, "getSuppressions").mockResolvedValue([
-        {
-          tool: "TypeSpecValidation",
-          paths: ["."],
-          reason: "test suppression reason",
-          rules: ["FolderStructure"],
-        },
-        {
-          tool: "TypeSpecValidation",
-          paths: ["."],
-          reason: "foo",
-          rules: ["FolderStructure"],
-        },
-      ]);
-
-      const consoleSpy = vi.spyOn(console, "log");
-      const result = await new FolderStructureRule().execute(mockFolder);
-      assert(result.success);
-      const allOutput = consoleSpy.mock.calls.map((args) => String(args[0])).join("\n");
-      assert(allOutput.includes("suppressed"));
-      assert(allOutput.includes("test suppression reason"));
-      assert(!allOutput.includes("foo"));
+    it("should have suppressable flag set to true", function () {
+      assert.equal(new FolderStructureRule().suppressable, true);
     });
 
     it("should not suppress when suppression targets a different rule", async function () {

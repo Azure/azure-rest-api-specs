@@ -14,20 +14,8 @@ debug.enable("simple-git");
 export class FolderStructureRule implements Rule {
   readonly name = "FolderStructure";
   readonly description = "Verify spec directory's folder structure and naming conventions.";
+  readonly suppressable = true;
   async execute(folder: string): Promise<RuleResult> {
-    const suppressions = (await getSuppressions(folder)).filter((s) =>
-      s.rules?.includes(this.name),
-    );
-
-    const suppressAll = suppressions.find(
-      (s) => s.subRules === undefined || s.subRules.length === 0,
-    );
-
-    if (suppressAll) {
-      console.log(`suppressed: ${suppressAll.reason}`);
-      return { success: true };
-    }
-
     let success = true;
     let stdOutput = "";
     let errorOutput = "";
@@ -40,6 +28,9 @@ export class FolderStructureRule implements Rule {
       relativePath.includes("data-plane") || relativePath.includes("resource-manager") ? 2 : 1;
 
     if (structureVersion === 1) {
+      const suppressions = (await getSuppressions(folder)).filter((s) =>
+        s.rules?.includes(this.name),
+      );
       const suppressMustUseV2 = suppressions.find((s) => s.subRules?.includes("MustUseV2"));
 
       if (suppressMustUseV2) {
@@ -47,7 +38,8 @@ export class FolderStructureRule implements Rule {
       } else {
         return {
           success: false,
-          reason: `Folder '${folder}' must use "folder structure v2". See https://github.com/Azure/azure-rest-api-specs/wiki/Folder-Structure \n`,
+          stdOutput: stdOutput,
+          errorOutput: `Folder '${folder}' must use "folder structure v2". See https://aka.ms/azsdk/spec-dirs \n`,
         };
       }
     }

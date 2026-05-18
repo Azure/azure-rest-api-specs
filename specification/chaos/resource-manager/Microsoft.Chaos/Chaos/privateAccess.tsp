@@ -14,6 +14,7 @@ namespace Microsoft.Chaos;
 
 @armResourceOperations
 @removed(Microsoft.Chaos.Versions.v2025_01_01)
+@added(Microsoft.Chaos.Versions.v2026_05_01_preview)
 interface PrivateAccesses {
   /**
    * Get a private access resource
@@ -69,8 +70,10 @@ interface PrivateAccesses {
   /**
    * Gets the private link resources possible under private access resource
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for Swagger LintDiff validation - x-ms-pageable extension must be specified for LIST APIs"
   @get
-  @list
+  @action("privateLinkResources")
+  @OpenAPI.extension("x-ms-pageable", #{ nextLinkName: "nextLink" })
   privateLinkResources is ArmResourceActionSync<
     PrivateAccess,
     void,
@@ -79,15 +82,19 @@ interface PrivateAccesses {
 }
 
 @@minLength(PrivateAccess.name, 1);
-@@doc(PrivateAccess.name,
+@@doc(
+  PrivateAccess.name,
   "The name of the private access resource that is being created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters."
 );
-@@doc(PrivateAccess.properties,
+@@doc(
+  PrivateAccess.properties,
   "The resource-specific properties for this resource."
 );
-@@doc(PrivateAccesses.createOrUpdate::parameters.resource,
+@@doc(
+  PrivateAccesses.createOrUpdate::parameters.resource,
   "private access resource to be created or updated."
 );
-@@doc(PrivateAccesses.update::parameters.properties,
+@@doc(
+  PrivateAccesses.update::parameters.properties,
   "private access resource's tags to be updated."
 );

@@ -12,13 +12,13 @@ Search using [agentic search](agentic-search.md) in below documents to determine
 - MUST use a user friendly way to collect information.
   e.g. you MUST List features from latest version and let user select which to carry over vs exclude, rather than assume user wants to carry over all features.
 
-  | Doc                      | Guide URL                                                                                     |
-  | ------------------------ | --------------------------------------------------------------------------------------------- |
-  | Preview version overview | `https://azure.github.io/typespec-azure/docs/howtos/versioning/01-preview-version`            |
-  | preview > preview        | `https://azure.github.io/typespec-azure/docs/howtos/versioning/arm/02-preview-after-preview/` |
-  | preview > stable         | `https://azure.github.io/typespec-azure/docs/howtos/versioning/arm/03-stable-after-preview/`  |
-  | stable > preview         | `https://azure.github.io/typespec-azure/docs/howtos/versioning/arm/04-preview-after-stable/`  |
-  | stable > stable          | `https://azure.github.io/typespec-azure/docs/howtos/versioning/arm/05-stable-after-stable/`   |
+  | Doc                      | Guide URL                                                                                 |
+  | ------------------------ | ----------------------------------------------------------------------------------------- |
+  | Preview version overview | `https://azure.github.io/typespec-azure/docs/howtos/versioning/01-about-versioning/`      |
+  | preview > preview        | `https://azure.github.io/typespec-azure/docs/howtos/versioning/02-preview-after-preview/` |
+  | preview > stable         | `https://azure.github.io/typespec-azure/docs/howtos/versioning/03-stable-after-preview/`  |
+  | stable > preview         | `https://azure.github.io/typespec-azure/docs/howtos/versioning/04-preview-after-stable/`  |
+  | stable > stable          | `https://azure.github.io/typespec-azure/docs/howtos/versioning/05-stable-after-stable/`   |
 
 ---
 
