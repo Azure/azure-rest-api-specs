@@ -38,18 +38,16 @@ interface Actions {
   @doc("Query actions with filters and pagination.")
   @route("/actions/query")
   @post
-  query(
-    ...ApiVersionParameter,
-    @body body: ActionQueryRequest,
-  ): ActionQueryResponse | ErrorResponse;
+  query(...ApiVersionParameter, @body body: ActionQueryRequest):
+    | ActionQueryResponse
+    | ErrorResponse;
 
   @doc("Query actions grouped by a specified field.")
   @route("/actions/grouped")
   @post
-  queryGrouped(
-    ...ApiVersionParameter,
-    @body body: ActionGroupedRequest,
-  ): GroupedActionsResponse | ErrorResponse;
+  queryGrouped(...ApiVersionParameter, @body body: ActionGroupedRequest):
+    | GroupedActionsResponse
+    | ErrorResponse;
 
   @doc("Get an action by its unique identifier.")
   @route("/actions/{actionId}")
@@ -80,10 +78,9 @@ interface Actions {
   @doc("Get faceted aggregations for actions based on filters.")
   @route("/actions/facets")
   @post
-  getFacets(
-    ...ApiVersionParameter,
-    @body body: ActionFacetRequest,
-  ): FacetResponse | ErrorResponse;
+  getFacets(...ApiVersionParameter, @body body: ActionFacetRequest):
+    | FacetResponse
+    | ErrorResponse;
 }
 
 // ============================================================================
@@ -259,18 +256,16 @@ interface Schedules {
   @doc("Trigger a control schedule run.")
   @route("/controls/schedule/trigger")
   @post
-  trigger(
-    ...ApiVersionParameter,
-    @body body: TriggerScheduleRequest,
-  ): ScheduleTriggerResponse | ErrorResponse;
+  trigger(...ApiVersionParameter, @body body: TriggerScheduleRequest):
+    | ScheduleTriggerResponse
+    | ErrorResponse;
 
   @doc("Create or update the global control schedule.")
   @route("/controls/schedule")
   @put
-  createOrUpdate(
-    ...ApiVersionParameter,
-    @body body: Schedule,
-  ): ScheduleResponse | ErrorResponse;
+  createOrUpdate(...ApiVersionParameter, @body body: Schedule):
+    | ScheduleResponse
+    | ErrorResponse;
 }
 
 // ============================================================================
@@ -385,17 +380,16 @@ interface Settings {
   @doc("Get the current storage configuration.")
   @route("/settings/storageConfig")
   @get
-  getStorageConfig(
-    ...ApiVersionParameter,
-  ): StorageConfigResponse | ErrorResponse;
+  getStorageConfig(...ApiVersionParameter):
+    | StorageConfigResponse
+    | ErrorResponse;
 
   @doc("Update the storage configuration.")
   @route("/settings/storageConfig")
   @post
-  updateStorageConfig(
-    ...ApiVersionParameter,
-    @body body: StorageConfig,
-  ): Created201Response<StorageConfig> | ErrorResponse;
+  updateStorageConfig(...ApiVersionParameter, @body body: StorageConfig):
+    | Created201Response<StorageConfig>
+    | ErrorResponse;
 
   @doc("Test storage configuration connectivity.")
   @route("/settings/storageConfig/connectivity")
@@ -411,7 +405,10 @@ interface Settings {
   checkManagedPrivateEndpointExists(
     ...ApiVersionParameter,
     @body body: ManagedPrivateEndpointRequest,
-  ): ManagedPrivateEndpointExistsResponse | Created201Response<ManagedPrivateEndpointExistsResponse> | ErrorResponse;
+  ):
+    | ManagedPrivateEndpointExistsResponse
+    | Created201Response<ManagedPrivateEndpointExistsResponse>
+    | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom LRO operation requires x-ms-long-running-operation extension."
   #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the service client, not via a standard polling operation."
@@ -439,10 +436,9 @@ interface StatusPalettes {
   @doc("Create a new status palette.")
   @route("/controls/statusPalette")
   @post
-  create(
-    ...ApiVersionParameter,
-    @body body: StatusPalette,
-  ): Created201Response<StatusPalette> | ErrorResponse;
+  create(...ApiVersionParameter, @body body: StatusPalette):
+    | Created201Response<StatusPalette>
+    | ErrorResponse;
 
   @doc("Get a status palette by its unique identifier.")
   @route("/controls/statusPalette/{id}")
