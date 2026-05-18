@@ -9,6 +9,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.Core;
 using Azure.Core.Traits;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Chaos;
 
@@ -82,6 +83,16 @@ model ScenarioRunProperties {
    */
   @visibility(Lifecycle.Read)
   managedIdentityPrincipalId: string;
+
+  /**
+   * The resource snapshot ID this run is pinned to. Resolved from the scenario's
+   * pinned evaluation snapshot (template scenarios) or the latest discovery
+   * snapshot (custom scenarios) at run creation, ensuring the run executes against
+   * the same set of discovered resources that produced the recommendation.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  resourceSnapshotId?: string;
 
   /**
    * The scenario run status.
