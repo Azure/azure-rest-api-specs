@@ -100,12 +100,15 @@ interface MaintenanceConfigurations {
   >;
 }
 
-@@doc(MaintenanceConfigurationResource.name,
+@@doc(
+  MaintenanceConfigurationResource.name,
   "The name of the maintenance configuration."
 );
-@@doc(MaintenanceConfigurationResource.properties,
+@@doc(
+  MaintenanceConfigurationResource.properties,
   "The resource-specific properties for this resource."
 );
-@@doc(MaintenanceConfigurations.createOrUpdate::parameters.resource,
+@@doc(
+  MaintenanceConfigurations.createOrUpdate::parameters.resource,
   "Parameters to set the maintenance configuration for ManagedEnvironment ."
 );

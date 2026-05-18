@@ -20,17 +20,20 @@ using Microsoft.App;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(PrivateLinkResource.properties);
 
-@@clientName(AppResiliencies.createOrUpdate::parameters.resource,
+@@clientName(
+  AppResiliencies.createOrUpdate::parameters.resource,
   "resiliencyEnvelope"
 );
-@@clientName(AppResiliencies.update::parameters.properties,
+@@clientName(
+  AppResiliencies.update::parameters.properties,
   "resiliencyEnvelope"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(AppResiliency.properties);
 
-@@clientName(ContainerAppsAuthConfigs.createOrUpdate::parameters.resource,
+@@clientName(
+  ContainerAppsAuthConfigs.createOrUpdate::parameters.resource,
   "authConfigEnvelope"
 );
 
@@ -50,23 +53,28 @@ using Microsoft.App;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(BuildResource.properties);
 
-@@clientName(ConnectedEnvironments.createOrUpdate::parameters.resource,
+@@clientName(
+  ConnectedEnvironments.createOrUpdate::parameters.resource,
   "environmentEnvelope"
 );
-@@clientName(ConnectedEnvironments.update::parameters.properties,
+@@clientName(
+  ConnectedEnvironments.update::parameters.properties,
   "environmentEnvelope"
 );
-@@clientName(ConnectedEnvironments.checkNameAvailability::parameters.body,
+@@clientName(
+  ConnectedEnvironments.checkNameAvailability::parameters.body,
   "checkNameAvailabilityRequest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ConnectedEnvironment.properties);
 
 @@clientLocation(Certificates.get, "ConnectedEnvironmentsCertificates");
-@@clientLocation(Certificates.createOrUpdate,
+@@clientLocation(
+  Certificates.createOrUpdate,
   "ConnectedEnvironmentsCertificates"
 );
-@@clientName(Certificates.createOrUpdate::parameters.resource,
+@@clientName(
+  Certificates.createOrUpdate::parameters.resource,
   "certificateEnvelope"
 );
 @@clientLocation(Certificates.update, "ConnectedEnvironmentsCertificates");
@@ -79,72 +87,89 @@ using Microsoft.App;
 @@clientName(Certificates.deleteCertificates, "Delete");
 @@clientName(Certificates.createOrUpdateCertificates, "CreateOrUpdate");
 @@clientName(Certificates.updateCertificates, "Update");
-@@clientName(Certificates.createOrUpdateCertificates::parameters.resource,
+@@clientName(
+  Certificates.createOrUpdateCertificates::parameters.resource,
   "certificateEnvelope"
 );
-@@clientName(Certificates.updateCertificates::parameters.properties,
+@@clientName(
+  Certificates.updateCertificates::parameters.properties,
   "certificateEnvelope"
 );
 
-@@clientName(DaprComponents.createOrUpdate::parameters.resource,
+@@clientName(
+  DaprComponents.createOrUpdate::parameters.resource,
   "daprComponentEnvelope"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DaprComponent.properties);
 
-@@clientName(ConnectedEnvironmentsStorages.createOrUpdate::parameters.resource,
+@@clientName(
+  ConnectedEnvironmentsStorages.createOrUpdate::parameters.resource,
   "storageEnvelope"
 );
 
-@@clientName(ManagedEnvironments.createOrUpdate::parameters.resource,
+@@clientName(
+  ManagedEnvironments.createOrUpdate::parameters.resource,
   "environmentEnvelope"
 );
-@@clientName(ManagedEnvironments.update::parameters.properties,
+@@clientName(
+  ManagedEnvironments.update::parameters.properties,
   "environmentEnvelope"
 );
 @@clientLocation(ManagedEnvironments.checkNameAvailability, "Namespaces");
-@@clientName(ManagedEnvironments.checkNameAvailability::parameters.body,
+@@clientName(
+  ManagedEnvironments.checkNameAvailability::parameters.body,
   "checkNameAvailabilityRequest"
 );
-@@clientLocation(ManagedEnvironments.list,
+@@clientLocation(
+  ManagedEnvironments.list,
   "ManagedEnvironmentPrivateLinkResources"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ManagedEnvironment.properties);
 
-@@clientLocation(PrivateEndpointConnections.get,
+@@clientLocation(
+  PrivateEndpointConnections.get,
   "ManagedEnvironmentPrivateEndpointConnections"
 );
-@@clientLocation(PrivateEndpointConnections.createOrUpdate,
+@@clientLocation(
+  PrivateEndpointConnections.createOrUpdate,
   "ManagedEnvironmentPrivateEndpointConnections"
 );
-@@clientName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
+@@clientName(
+  PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "privateEndpointConnectionEnvelope"
 );
-@@clientLocation(PrivateEndpointConnections.delete,
+@@clientLocation(
+  PrivateEndpointConnections.delete,
   "ManagedEnvironmentPrivateEndpointConnections"
 );
-@@clientLocation(PrivateEndpointConnections.list,
+@@clientLocation(
+  PrivateEndpointConnections.list,
   "ManagedEnvironmentPrivateEndpointConnections"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(PrivateEndpointConnection.properties);
 
-@@clientName(ManagedCertificates.createOrUpdate::parameters.resource,
+@@clientName(
+  ManagedCertificates.createOrUpdate::parameters.resource,
   "managedCertificateEnvelope"
 );
-@@clientName(ManagedCertificates.update::parameters.properties,
+@@clientName(
+  ManagedCertificates.update::parameters.properties,
   "managedCertificateEnvelope"
 );
 
-@@clientName(DaprComponentResiliencyPolicies.createOrUpdate::parameters.resource,
+@@clientName(
+  DaprComponentResiliencyPolicies.createOrUpdate::parameters.resource,
   "daprComponentResiliencyPolicyEnvelope"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DaprComponentResiliencyPolicy.properties);
 
-@@clientName(DaprSubscriptions.createOrUpdate::parameters.resource,
+@@clientName(
+  DaprSubscriptions.createOrUpdate::parameters.resource,
   "daprSubscriptionEnvelope"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -152,24 +177,28 @@ using Microsoft.App;
 
 @@clientLocation(HttpRouteConfigs.get, "HttpRouteConfig");
 @@clientLocation(HttpRouteConfigs.createOrUpdate, "HttpRouteConfig");
-@@clientName(HttpRouteConfigs.createOrUpdate::parameters.resource,
+@@clientName(
+  HttpRouteConfigs.createOrUpdate::parameters.resource,
   "httpRouteConfigEnvelope"
 );
 @@clientLocation(HttpRouteConfigs.update, "HttpRouteConfig");
-@@clientName(HttpRouteConfigs.update::parameters.properties,
+@@clientName(
+  HttpRouteConfigs.update::parameters.properties,
   "httpRouteConfigEnvelope"
 );
 @@clientLocation(HttpRouteConfigs.delete, "HttpRouteConfig");
 @@clientLocation(HttpRouteConfigs.list, "HttpRouteConfig");
 
-@@clientName(MaintenanceConfigurations.createOrUpdate::parameters.resource,
+@@clientName(
+  MaintenanceConfigurations.createOrUpdate::parameters.resource,
   "maintenanceConfigurationEnvelope"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(MaintenanceConfigurationResource.properties);
 
-@@clientName(ManagedEnvironmentsStorages.createOrUpdate::parameters.resource,
+@@clientName(
+  ManagedEnvironmentsStorages.createOrUpdate::parameters.resource,
   "storageEnvelope"
 );
 
@@ -184,7 +213,8 @@ using Microsoft.App;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(JobExecution.properties);
 
-@@clientLocation(AvailableWorkloadProfilesOperationGroup.get,
+@@clientLocation(
+  AvailableWorkloadProfilesOperationGroup.get,
   "AvailableWorkloadProfiles"
 );
 
@@ -196,11 +226,13 @@ using Microsoft.App;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ContainerAppAuthToken.properties);
 
-@@clientName(ContainerAppsSessionPools.createOrUpdate::parameters.resource,
+@@clientName(
+  ContainerAppsSessionPools.createOrUpdate::parameters.resource,
   "sessionPoolEnvelope"
 );
 
-@@clientName(ContainerAppsSessionPools.update::parameters.properties,
+@@clientName(
+  ContainerAppsSessionPools.update::parameters.properties,
   "sessionPoolEnvelope"
 );
 
@@ -210,10 +242,12 @@ using Microsoft.App;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SourceControl.properties);
 
-@@clientName(ContainerApps.createOrUpdate::parameters.resource,
+@@clientName(
+  ContainerApps.createOrUpdate::parameters.resource,
   "containerAppEnvelope"
 );
-@@clientName(ContainerApps.update::parameters.properties,
+@@clientName(
+  ContainerApps.update::parameters.properties,
   "containerAppEnvelope"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -232,7 +266,8 @@ using Microsoft.App;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ContainerAppsFunction.properties);
 
-@@clientName(ContainerAppsPatches.skipConfigure::parameters.body,
+@@clientName(
+  ContainerAppsPatches.skipConfigure::parameters.body,
   "patchSkipConfig"
 );
 
@@ -243,19 +278,23 @@ using Microsoft.App;
 @@doc(AuthConfigCollection.value, "Collection of resources.");
 @@doc(AuthConfigCollection.nextLink, "Link to next page of resources.");
 @@doc(AvailableOperations.value, "Collection of available operation details");
-@@doc(AvailableOperations.nextLink,
+@@doc(
+  AvailableOperations.nextLink,
   "URL client should use to fetch the next page (per server side paging).\nIt's null for now, added for future use."
 );
-@@doc(AvailableWorkloadProfilesCollection.value,
+@@doc(
+  AvailableWorkloadProfilesCollection.value,
   "Collection of workload profiles."
 );
-@@doc(AvailableWorkloadProfilesCollection.nextLink,
+@@doc(
+  AvailableWorkloadProfilesCollection.nextLink,
   "Link to next page of resources."
 );
 @@doc(CertificateCollection.value, "Collection of resources.");
 @@doc(CertificateCollection.nextLink, "Link to next page of resources.");
 @@doc(ConnectedEnvironmentCollection.value, "Collection of resources.");
-@@doc(ConnectedEnvironmentCollection.nextLink,
+@@doc(
+  ConnectedEnvironmentCollection.nextLink,
   "Link to next page of resources."
 );
 @@doc(ContainerAppCollection.value, "Collection of resources.");
@@ -273,19 +312,23 @@ using Microsoft.App;
 @@doc(JobsCollection.value, "Collection of resources.");
 @@doc(JobsCollection.nextLink, "Link to next page of resources.");
 @@doc(ListUsagesResult.value, "The list of compute resource usages.");
-@@doc(ListUsagesResult.nextLink,
+@@doc(
+  ListUsagesResult.nextLink,
   "The URI to fetch the next page of compute resource usage information. Call ListNext() with this to fetch the next page of compute resource usage information."
 );
-@@doc(MaintenanceConfigurationCollection.value,
+@@doc(
+  MaintenanceConfigurationCollection.value,
   "Results of the list maintenance configuration resources."
 );
-@@doc(MaintenanceConfigurationCollection.nextLink,
+@@doc(
+  MaintenanceConfigurationCollection.nextLink,
   "Link for next page of results."
 );
 @@doc(ManagedCertificateCollection.value, "Collection of resources.");
 @@doc(ManagedCertificateCollection.nextLink, "Link to next page of resources.");
 @@doc(ManagedEnvironmentsCollection.value, "Collection of resources.");
-@@doc(ManagedEnvironmentsCollection.nextLink,
+@@doc(
+  ManagedEnvironmentsCollection.nextLink,
   "Link to next page of resources."
 );
 @@doc(RevisionCollection.value, "Collection of resources.");
@@ -297,42 +340,51 @@ using Microsoft.App;
 @@doc(WorkflowEnvelopeCollection.value, "Collection of resources.");
 @@doc(WorkflowEnvelopeCollection.nextLink, "Link to next page of resources.");
 @@doc(workloadProfileStatesCollection.value, "Collection of resources.");
-@@doc(workloadProfileStatesCollection.nextLink,
+@@doc(
+  workloadProfileStatesCollection.nextLink,
   "Link to next page of resources."
 );
 
 // Individual property description augments for swagger fidelity
 @@doc(Diagnostics.properties, "Diagnostics resource specific properties");
-@@doc(Job.identity,
+@@doc(
+  Job.identity,
   "Managed identities needed by a container app job to interact with other Azure services to not maintain any secrets or credentials in code."
 );
-@@doc(ManagedEnvironment.identity,
+@@doc(
+  ManagedEnvironment.identity,
   "Managed identities for the Managed Environment to interact with other Azure services without maintaining any secrets or credentials in code."
 );
-@@doc(SessionPool.identity,
+@@doc(
+  SessionPool.identity,
   "Managed identities needed by a session pool to interact with other Azure services to not maintain any secrets or credentials in code."
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Replica.properties);
 
-@@clientName(DotNetComponents.createOrUpdate::parameters.resource,
+@@clientName(
+  DotNetComponents.createOrUpdate::parameters.resource,
   "dotNetComponentEnvelope"
 );
-@@clientName(DotNetComponents.update::parameters.properties,
+@@clientName(
+  DotNetComponents.update::parameters.properties,
   "dotNetComponentEnvelope"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DotNetComponent.properties);
 
-@@clientName(JavaComponents.createOrUpdate::parameters.resource,
+@@clientName(
+  JavaComponents.createOrUpdate::parameters.resource,
   "javaComponentEnvelope"
 );
-@@clientName(JavaComponents.update::parameters.properties,
+@@clientName(
+  JavaComponents.update::parameters.properties,
   "javaComponentEnvelope"
 );
 
-@@clientName(LogicApps.deployWorkflowArtifacts::parameters.body,
+@@clientName(
+  LogicApps.deployWorkflowArtifacts::parameters.body,
   "workflowArtifacts"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -340,7 +392,8 @@ using Microsoft.App;
 
 @@clientLocation(UsagesOperationGroup.list, "Usages");
 
-@@clientLocation(ManagedEnvironmentUsagesOperationGroup.list,
+@@clientLocation(
+  ManagedEnvironmentUsagesOperationGroup.list,
   "ManagedEnvironmentUsages"
 );
 
@@ -349,10 +402,12 @@ using Microsoft.App;
 @@Azure.ResourceManager.identifiers(ListUsagesResult.value, #["name"]);
 @@clientName(ScheduledEntries.scheduledEntries, "ScheduledEntries");
 
-@@clientLocation(ManagedEnvironmentsDiagnostics.listDetectors,
+@@clientLocation(
+  ManagedEnvironmentsDiagnostics.listDetectors,
   "ManagedEnvironmentDiagnostics"
 );
-@@clientLocation(ManagedEnvironmentsDiagnostics.getDetector,
+@@clientLocation(
+  ManagedEnvironmentsDiagnostics.getDetector,
   "ManagedEnvironmentDiagnostics"
 );
 
@@ -362,9 +417,11 @@ using Microsoft.App;
 @@clientLocation(AppResiliencies.delete, "AppResiliency");
 @@clientLocation(AppResiliencies.get, "AppResiliency");
 
-@@clientName(ConnectedEnvironmentsDaprComponents.createOrUpdate::parameters.resource,
+@@clientName(
+  ConnectedEnvironmentsDaprComponents.createOrUpdate::parameters.resource,
   "daprComponentEnvelope"
 );
-@@clientName(ContainerAppsSourceControls.createOrUpdate::parameters.resource,
+@@clientName(
+  ContainerAppsSourceControls.createOrUpdate::parameters.resource,
   "sourceControlEnvelope"
 );
