@@ -45,7 +45,7 @@ alias UserIsolationKeyHeader = {
  */
 alias VersionOverrideHeader = {
   /** Optional agent version override. Overrides the pinned/latest version selected by the endpoint's version selector for this request only. */
-  @header("x-agent-version-override") x_agent_version_override?: string;
+  @header("x-agent-version-override") agent_version_override?: string;
 };
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
