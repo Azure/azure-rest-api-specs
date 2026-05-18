@@ -38,10 +38,12 @@ op FoundryDataPlaneOperation<
 union AgentDefinitionOptInKeys {
   hosted_agents_v1_preview: "HostedAgents=V1Preview",
   workflow_agents_v1_preview: "WorkflowAgents=V1Preview",
-  container_agents_v1_preview: "ContainerAgents=V1Preview",
   agent_endpoint_v1_preview: "AgentEndpoints=V1Preview",
   code_agents_v1_preview: "CodeAgents=V1Preview",
   external_agents_v1_preview: "ExternalAgents=V1Preview",
+
+  @removed(Versions.v1)
+  container_agents_v1_preview: "ContainerAgents=V1Preview",
 }
 
 union FoundryFeaturesOptInKeys {

@@ -10,7 +10,6 @@ namespace Azure.AI.Projects;
 const AllConditionalAgentDefinitionPreviews = #{
   conditional_previews: #[
     AgentDefinitionOptInKeys.hosted_agents_v1_preview,
-    AgentDefinitionOptInKeys.container_agents_v1_preview,
     AgentDefinitionOptInKeys.workflow_agents_v1_preview,
     AgentDefinitionOptInKeys.code_agents_v1_preview,
     AgentDefinitionOptInKeys.external_agents_v1_preview
