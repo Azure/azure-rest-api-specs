@@ -225,8 +225,10 @@ union CustomPublicNetworkAccessType {
 @@alternateType(GatewayProperties.gatewayId, Azure.Core.armResourceIdentifier, "csharp");
 
 // C# API review naming/type fixes for new TypeSpec-generated surface
-@@clientName(MachineRunCommandProperties.asyncExecution, "IsAsyncExecution", "csharp");
 @@alternateType(MachineProperties.hardwareResourceId, Azure.Core.armResourceIdentifier, "csharp");
 @@clientName(SetupExtensionRequest, "SetupExtensionContent", "csharp");
-@@clientName(RunCommandInputParameter, "RunCommandInputContent", "csharp");
 @@clientName(ExtensionsResourceStatus.time, "TimeOn", "csharp");
+
+// MachineRunCommandData backward compatibility with the existing SDK API.
+@@alternateType(MachineRunCommandProperties.outputBlobUri, url, "csharp");
+@@alternateType(MachineRunCommandProperties.errorBlobUri, url, "csharp");
