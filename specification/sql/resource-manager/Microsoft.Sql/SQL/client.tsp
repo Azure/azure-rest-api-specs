@@ -90,6 +90,7 @@ using Microsoft.Sql;
 @@clientName(AvailabilityZoneType.`3`, "THREE", "python");
 
 @@alternateType(BlobAuditingPolicyName, "default", "go,javascript");
+@@alternateType(DataMaskingPolicyName, "Default", "javascript");
 @@alternateType(CurrentSensitivityLabelSource, "current", "go,javascript");
 @@alternateType(
   RecommendedSensitivityLabelSource,
