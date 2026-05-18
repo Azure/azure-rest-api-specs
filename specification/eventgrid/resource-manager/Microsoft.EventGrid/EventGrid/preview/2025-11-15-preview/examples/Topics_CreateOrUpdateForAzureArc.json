@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "api-version": "2025-07-15-preview",
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "8f6b6269-84f2-4d09-9e31-1127efcd1e40",
+    "topicInfo": {
+      "extendedLocation": {
+        "name": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourcegroups/examplerg/providers/Microsoft.ExtendedLocation/CustomLocations/exampleCustomLocation",
+        "type": "CustomLocation"
+      },
+      "kind": "AzureArc",
+      "location": "westus2",
+      "properties": {
+        "inputSchema": "CloudEventSchemaV1_0"
+      },
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    },
+    "topicName": "exampletopic1"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "exampletopic1",
+        "type": "Microsoft.EventGrid/topics",
+        "extendedLocation": {
+          "name": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourcegroups/examplerg/providers/Microsoft.ExtendedLocation/CustomLocations/exampleCustomLocation",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/topics/exampletopic1",
+        "kind": "AzureArc",
+        "location": "westus2",
+        "properties": {
+          "endpoint": "https://exampletopic1.westus2-1.eventgrid.azure.net/api/events",
+          "inputSchema": "CloudEventSchemaV1_0",
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        }
+      }
+    }
+  },
+  "operationId": "Topics_CreateOrUpdate",
+  "title": "Topics_CreateOrUpdateForAzureArc"
+}
