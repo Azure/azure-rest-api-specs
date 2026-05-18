@@ -42,6 +42,7 @@ suppressions:
     reason: Approved scenario for dynamic annotation key-value properties
     where:
       - $.definitions.DataAnnotation.properties.annotationDetails
+      - $.definitions.AddDataAnnotationRequest.properties.annotationDetails
 ```
 
 ### Tag: package-2026-01-01-preview
