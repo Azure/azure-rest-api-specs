@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.Core;
 using Azure.ResourceManager.Foundations;
@@ -2735,6 +2736,12 @@ model DomainProperties {
    * Data Residency Boundary of the resource.
    */
   dataResidencyBoundary?: DataResidencyBoundary;
+
+  /**
+   * This is an optional property used to specify if trusted azure services should bypass network rules.
+   */
+  @added(Versions.v2025_10_15_preview)
+  trustedServiceAccessEnabled?: boolean;
 }
 
 /**
@@ -2953,6 +2960,12 @@ model DomainUpdateParameterProperties {
    * The eventTypeInfo for the domain.
    */
   eventTypeInfo?: EventTypeInfo;
+
+  /**
+   * This is an optional property used to specify if trusted azure services should bypass network rules.
+   */
+  @added(Versions.v2025_10_15_preview)
+  trustedServiceAccessEnabled?: boolean;
 }
 
 /**
@@ -3574,6 +3587,12 @@ model NamespaceProperties {
    * Minimum TLS version of the publisher allowed to publish to this namespace. Only TLS version 1.2 is supported.
    */
   minimumTlsVersionAllowed?: TlsVersion;
+
+  /**
+   * This is an optional property used to specify if trusted azure services should bypass network rules.
+   */
+  @added(Versions.v2025_10_15_preview)
+  trustedServiceAccessEnabled?: boolean;
 }
 
 /**
@@ -5032,6 +5051,12 @@ model TopicProperties {
    * Represents the platform capabilities of the resource, including Azure Confidential Compute related properties.
    */
   platformCapabilities?: PlatformCapabilities;
+
+  /**
+   * This is an optional property used to specify if trusted azure services should bypass network rules.
+   */
+  @added(Versions.v2025_10_15_preview)
+  trustedServiceAccessEnabled?: boolean;
 }
 
 /**
@@ -5110,6 +5135,12 @@ model TopicUpdateParameterProperties {
    * The eventTypeInfo for the topic.
    */
   eventTypeInfo?: EventTypeInfo;
+
+  /**
+   * This boolean is used to enable or disable trust mode. Default value is false. When the property is set to true, trusted services will bypass network firewalls.
+   */
+  @added(Versions.v2025_10_15_preview)
+  trustedServiceAccessEnabled?: boolean;
 }
 
 /**
