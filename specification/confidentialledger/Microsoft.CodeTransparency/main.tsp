@@ -113,7 +113,7 @@ op createEntryV09 is Foundations.Operation<
   SignedStatement & AcceptCoseOrCborHeader & WaitForCommitParameter,
   CreateEntryCreated | CreateEntrySeeOther,
   ServiceTraits,
-  AnyCborError | Response503CborWithReceipt
+  AnyCborError
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -206,8 +206,14 @@ model CreateEntryCreated {
   statusCode: 201;
 
   @doc("The MIME content type a Cose body is application/cose, containing a CoseSign1 signature.")
+  @removed(Versions.`2026-03-26`)
   @header("Content-Type")
   contentType: "application/cose";
+
+  @doc("The MIME content type for SCRAPI v09 receipts is application/scitt-receipt+cose.")
+  @added(Versions.`2026-03-26`)
+  @header("Content-Type")
+  contentTypeV09: "application/scitt-receipt+cose";
 
   @doc("Location of the receipt")
   @header("Location")
@@ -665,26 +671,6 @@ model Response503Cbor {
   contentType: "application/concise-problem-details+cbor";
 
   @doc("CBOR content of the error object")
-  @body
-  error: ConciseProblemDetailsCbor;
-}
-
-@added(Versions.`2026-03-26`)
-@doc("Service unavailable with CBOR error response for waitForCommit rollback")
-model Response503CborWithReceipt {
-  @doc("Status code")
-  @statusCode
-  statusCode: 503;
-
-  @doc("The MIME content type for error, see RFC9290")
-  @header
-  contentType: "application/concise-problem-details+cbor";
-
-  @doc("Transaction ID for the rolled back entry")
-  @header("x-ms-ccf-transaction-id")
-  transactionId?: string;
-
-  @doc("CBOR error content for rollback")
   @body
   error: ConciseProblemDetailsCbor;
 }
