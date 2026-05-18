@@ -1,16 +1,5 @@
 namespace Microsoft.DeviceRegistry;
 
-/** The refresh mode for group membership. */
-union GroupRefreshMode {
-  string,
-
-  /** Group membership is refreshed continuously. */
-  Continuous: "Continuous",
-
-  /** Group membership is refreshed manually. */
-  Manual: "Manual",
-}
-
 /** The type of group. */
 union GroupType {
   string,
@@ -47,10 +36,6 @@ model GroupPropertiesBase {
 
   /** Human-readable display name for the group. */
   displayName?: string;
-
-  /** The refresh mode that determines how group membership is maintained. */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  refreshMode: GroupRefreshMode;
 
   /** The type of group that determines what kind of resources can be members. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
