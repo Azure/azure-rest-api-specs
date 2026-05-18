@@ -272,7 +272,7 @@ op WebPubSubHubsGetCustomized(
   resourceName: string,
 ): WebPubSubHub;
 
-@@override(WebPubSubHubs.get, WebPubSubHubsGetCustomized, "go");
+@@override(WebPubSubHubs.get, WebPubSubHubsGetCustomized);
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -294,11 +294,7 @@ op WebPubSubHubsCreateOrUpdateCustomized(
   resourceName: string,
 ): void;
 
-@@override(
-  WebPubSubHubs.createOrUpdate,
-  WebPubSubHubsCreateOrUpdateCustomized,
-  "go"
-);
+@@override(WebPubSubHubs.createOrUpdate, WebPubSubHubsCreateOrUpdateCustomized);
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -319,7 +315,7 @@ op WebPubSubHubsDeleteCustomized(
   resourceName: string,
 ): void;
 
-@@override(WebPubSubHubs.delete, WebPubSubHubsDeleteCustomized, "go");
+@@override(WebPubSubHubs.delete, WebPubSubHubsDeleteCustomized);
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -342,8 +338,7 @@ op PrivateEndpointConnectionsGetCustomized(
 
 @@override(
   PrivateEndpointConnections.get,
-  PrivateEndpointConnectionsGetCustomized,
-  "go"
+  PrivateEndpointConnectionsGetCustomized
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -368,8 +363,7 @@ op PrivateEndpointConnectionsUpdateCustomized(
 
 @@override(
   PrivateEndpointConnections.update,
-  PrivateEndpointConnectionsUpdateCustomized,
-  "go"
+  PrivateEndpointConnectionsUpdateCustomized
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -393,8 +387,7 @@ op PrivateEndpointConnectionsDeleteCustomized(
 
 @@override(
   PrivateEndpointConnections.delete,
-  PrivateEndpointConnectionsDeleteCustomized,
-  "go"
+  PrivateEndpointConnectionsDeleteCustomized
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -417,8 +410,7 @@ op WebPubSubSharedPrivateLinkResourcesGetCustomized(
 
 @@override(
   WebPubSubSharedPrivateLinkResources.get,
-  WebPubSubSharedPrivateLinkResourcesGetCustomized,
-  "go"
+  WebPubSubSharedPrivateLinkResourcesGetCustomized
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -442,8 +434,7 @@ op WebPubSubSharedPrivateLinkResourcesCreateOrUpdateCustomized(
 
 @@override(
   WebPubSubSharedPrivateLinkResources.createOrUpdate,
-  WebPubSubSharedPrivateLinkResourcesCreateOrUpdateCustomized,
-  "go"
+  WebPubSubSharedPrivateLinkResourcesCreateOrUpdateCustomized
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -466,6 +457,5 @@ op WebPubSubSharedPrivateLinkResourcesDeleteCustomized(
 
 @@override(
   WebPubSubSharedPrivateLinkResources.delete,
-  WebPubSubSharedPrivateLinkResourcesDeleteCustomized,
-  "go"
+  WebPubSubSharedPrivateLinkResourcesDeleteCustomized
 );
