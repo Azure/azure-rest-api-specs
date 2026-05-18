@@ -83,6 +83,7 @@ interface Reservations {
 
 @@doc(Reservation.name, "Id of the reservation item");
 @@doc(Reservation.properties, "The properties associated to this reservation");
-@@doc(Reservations.updateByBillingAccount::parameters.properties,
+@@doc(
+  Reservations.updateByBillingAccount::parameters.properties,
   "Request body for patching a reservation"
 );

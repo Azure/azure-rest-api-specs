@@ -155,7 +155,8 @@ op listSecretPropertiesVersions is KeyVaultOperation<
 @@clientName(SecretRestoreParameters, "RestoreSecretParameters", "go");
 @@clientName(SecretSetParameters, "SetSecretParameters", "go");
 @@clientName(SecretUpdateParameters, "UpdateSecretPropertiesParameters", "go");
-@@clientName(DeletedSecretListResult,
+@@clientName(
+  DeletedSecretListResult,
   "DeletedSecretPropertiesListResult",
   "go"
 );
@@ -173,11 +174,13 @@ op listSecretPropertiesVersions is KeyVaultOperation<
 @@clientName(SecretBundle, "Secret", "rust");
 @@clientName(SecretRestoreParameters, "RestoreSecretParameters", "rust");
 @@clientName(SecretSetParameters, "SetSecretParameters", "rust");
-@@clientName(SecretUpdateParameters,
+@@clientName(
+  SecretUpdateParameters,
   "UpdateSecretPropertiesParameters",
   "rust"
 );
-@@clientName(DeletedSecretListResult,
+@@clientName(
+  DeletedSecretListResult,
   "ListDeletedSecretPropertiesResult",
   "rust"
 );
@@ -189,7 +192,8 @@ op listSecretPropertiesVersions is KeyVaultOperation<
 // Work around issue where previous @override prevent the following line from working without "KeyVault." prefix.
 @@clientName(KeyVault.updateSecret, "UpdateSecretProperties", "rust");
 
-@@clientName(SecretRestoreParameters.secretBundleBackup,
+@@clientName(
+  SecretRestoreParameters.secretBundleBackup,
   "SecretBackup",
   "rust"
 );

@@ -59,10 +59,12 @@ interface GeoBackupPolicies {
   list is ArmResourceListByParent<GeoBackupPolicy>;
 }
 
-@@doc(GeoBackupPolicy.name,
+@@doc(
+  GeoBackupPolicy.name,
   "The name of the Geo backup policy. This should always be 'Default'."
 );
 @@doc(GeoBackupPolicy.properties, "Resource properties.");
-@@doc(GeoBackupPolicies.createOrUpdate::parameters.resource,
+@@doc(
+  GeoBackupPolicies.createOrUpdate::parameters.resource,
   "The required parameters for creating or updating the geo backup policy."
 );

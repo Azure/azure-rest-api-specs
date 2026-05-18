@@ -52,10 +52,13 @@ interface EHNamespaces {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     EHNamespace,
-    Response = ArmResourceUpdatedResponse<EHNamespace> | ArmResourceCreatedResponse<
-      EHNamespace,
-      ArmAsyncOperationHeader<FinalResult = EHNamespace>
-    > | ArmAcceptedLroResponse,
+    Response =
+      | ArmResourceUpdatedResponse<EHNamespace>
+      | ArmResourceCreatedResponse<
+          EHNamespace,
+          ArmAsyncOperationHeader<FinalResult = EHNamespace>
+        >
+      | ArmAcceptedLroResponse,
     Error = ErrorResponse
   >;
 
@@ -68,8 +71,10 @@ interface EHNamespaces {
   update is ArmCustomPatchSync<
     EHNamespace,
     PatchModel = EHNamespace,
-    Response = ArmResponse<EHNamespace> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = EHNamespace> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResponse<EHNamespace>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = EHNamespace> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = ErrorResponse
   >;
 
@@ -80,8 +85,11 @@ interface EHNamespaces {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing DELETE operation response codes match the original OpenAPI specification. Changing would be a breaking change for existing clients."
   delete is ArmResourceDeleteWithoutOkAsync<
     EHNamespace,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse,
     Error = ErrorResponse
   >;
 
@@ -140,18 +148,23 @@ interface EHNamespaces {
 @@maxLength(EHNamespace.name, 50);
 @@minLength(EHNamespace.name, 6);
 @@doc(EHNamespace.name, "The Namespace name");
-@@doc(EHNamespace.properties,
+@@doc(
+  EHNamespace.properties,
   "Namespace properties supplied for create namespace operation."
 );
-@@doc(EHNamespaces.createOrUpdate::parameters.resource,
+@@doc(
+  EHNamespaces.createOrUpdate::parameters.resource,
   "Parameters for creating a namespace resource."
 );
-@@doc(EHNamespaces.update::parameters.properties,
+@@doc(
+  EHNamespaces.update::parameters.properties,
   "Parameters for updating a namespace resource."
 );
-@@doc(EHNamespaces.failover::parameters.body,
+@@doc(
+  EHNamespaces.failover::parameters.body,
   "Parameters for updating a namespace resource."
 );
-@@doc(EHNamespaces.checkNameAvailability::parameters.body,
+@@doc(
+  EHNamespaces.checkNameAvailability::parameters.body,
   "Parameters to check availability of the given Alias name"
 );
