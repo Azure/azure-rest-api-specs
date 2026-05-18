@@ -286,14 +286,12 @@ model EvaluationSuiteGenerationJobInputs {
     Target for the generated suite. Stored on the suite so it can be run
     immediately after generation completes.
     Supports azure_ai_agent, azure_ai_model, azure_ai_assistant.
-    Required for turn-level evaluation. Optional for conversation-level.
     """)
   target?: Target;
 
   @doc("""
     How to send dataset rows to the target.
     If omitted and target is provided, defaults to a template using item.query.
-    Not applicable for conversation-level evaluation.
     """)
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Supporting both input message types"
   input_messages?: OpenAI.CreateEvalResponsesRunDataSourceInputMessagesTemplate
