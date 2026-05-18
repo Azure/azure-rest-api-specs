@@ -107,7 +107,7 @@ directive:
     reason: Pre-existing API pattern from stable/2015-07-01. The ElevateAccess POST returns 200 with no body by design.
   - suppress: LatestVersionOfCommonTypesMustBeUsed
     from: authorization-ElevateAccessCalls.json
-    reason: Matching the existing stable/2015-07-01 ElevateAccess spec which uses common-types v2.  
+    reason: Matching the existing stable/2015-07-01 ElevateAccess spec which uses common-types v2. Upgrading would introduce a breaking change in the ErrorResponse schema for this tenant-level POST endpoint.
 ```
 
 ### Tag: package-2025-12-01-preview
@@ -137,7 +137,6 @@ These settings apply only when `--tag=package-2024-09-01-preview` is specified o
 input-file:
   - stable/2015-07-01/ClassicAdmin.json
   - stable/2015-07-01/authorization-ElevateAccessCalls.json
-  - stable/2018-01-01/authorization-ElevateAccessCalls.json
   - stable/2022-04-01/authorization-DenyAssignmentCalls.json
   - stable/2022-04-01/authorization-ProviderOperationsCalls.json
   - stable/2022-04-01/authorization-RoleAssignmentsCalls.json
@@ -326,7 +325,6 @@ input-file:
   - stable/2015-07-01/authorization-RoleDefinitionsCalls.json
   - stable/2015-07-01/authorization-ProviderOperationsCalls.json
   - stable/2015-07-01/authorization-ElevateAccessCalls.json
-  - stable/2018-01-01/authorization-ElevateAccessCalls.json
   - stable/2015-07-01/authorization-RoleAssignmentsCalls.json
   - stable/2015-07-01/authorization-ClassicAdminCalls.json
   - stable/2020-10-01/common-types.json
@@ -412,7 +410,6 @@ input-file:
   - stable/2015-07-01/authorization-RoleDefinitionsCalls.json
   - stable/2015-07-01/authorization-ProviderOperationsCalls.json
   - stable/2015-07-01/authorization-ElevateAccessCalls.json
-  - stable/2018-01-01/authorization-ElevateAccessCalls.json
   - stable/2015-07-01/authorization-RoleAssignmentsCalls.json
 ```
 
@@ -424,7 +421,6 @@ These settings apply only when `--tag=package-2020-08-01-preview` is specified o
 input-file:
   - stable/2015-06-01/authorization-ClassicAdminCalls.json
   - stable/2015-07-01/authorization-ElevateAccessCalls.json
-  - stable/2018-01-01/authorization-ElevateAccessCalls.json
   - preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
   - preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
   - preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
@@ -440,7 +436,6 @@ These settings apply only when `--tag=package-2020-04-01-preview` is specified o
 input-file:
   - stable/2015-06-01/authorization-ClassicAdminCalls.json
   - stable/2015-07-01/authorization-ElevateAccessCalls.json
-  - stable/2018-01-01/authorization-ElevateAccessCalls.json
   - preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
   - preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
   - preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
@@ -491,7 +486,6 @@ input-file:
   - stable/2015-07-01/authorization-RoleDefinitionsCalls.json
   - stable/2015-07-01/authorization-ProviderOperationsCalls.json
   - stable/2015-07-01/authorization-ElevateAccessCalls.json
-  - stable/2018-01-01/authorization-ElevateAccessCalls.json
   - stable/2015-07-01/authorization-RoleAssignmentsCalls.json
 ```
 
@@ -503,7 +497,6 @@ These settings apply only when `--tag=package-2018-09-01-preview` is specified o
 input-file:
   - stable/2015-06-01/authorization-ClassicAdminCalls.json
   - stable/2015-07-01/authorization-ElevateAccessCalls.json
-  - stable/2018-01-01/authorization-ElevateAccessCalls.json
   - preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
   - preview/2018-09-01-preview/authorization-RoleAssignmentsCalls.json
   - preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
@@ -527,7 +520,6 @@ These settings apply only when `--tag=package-2018-07-01-preview` is specified o
 input-file:
   - stable/2015-06-01/authorization-ClassicAdminCalls.json
   - stable/2015-07-01/authorization-ElevateAccessCalls.json
-  - stable/2018-01-01/authorization-ElevateAccessCalls.json
   - preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
   - preview/2018-01-01-preview/authorization-RoleAssignmentsCalls.json
   - preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
@@ -560,7 +552,6 @@ These settings apply only when `--tag=package-2018-01-01-preview` is specified o
 input-file:
   - stable/2015-06-01/authorization-ClassicAdminCalls.json
   - stable/2015-07-01/authorization-ElevateAccessCalls.json
-  - stable/2018-01-01/authorization-ElevateAccessCalls.json
   - preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
   - preview/2018-01-01-preview/authorization-RoleAssignmentsCalls.json
   - preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
