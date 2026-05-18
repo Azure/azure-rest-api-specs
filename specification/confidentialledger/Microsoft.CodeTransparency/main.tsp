@@ -582,6 +582,22 @@ model Response400Cbor {
 }
 
 @added(Versions.`2025-01-31-preview`)
+@doc("Unauthorized error response, returned when JWT authentication is required and the request fails authentication.")
+model Response401Cbor {
+  @doc("Status code")
+  @statusCode
+  statusCode: 401;
+
+  @doc("The MIME content type for error is application/concise-problem-details+cbor, see RFC9290")
+  @header
+  contentType: "application/concise-problem-details+cbor";
+
+  @doc("CBOR content of the error object")
+  @body
+  error: ConciseProblemDetailsCbor;
+}
+
+@added(Versions.`2025-01-31-preview`)
 @doc("Not found error response")
 model Response404Cbor {
   @doc("Status code")
@@ -675,6 +691,7 @@ model Response503CborWithReceipt {
 
 alias AnyCborError =
   | Response400Cbor
+  | Response401Cbor
   | Response404Cbor
   | Response429Cbor
   | Response500Cbor
