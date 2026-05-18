@@ -7368,30 +7368,6 @@
         }
       }
     },
-    "DeviceEnabledStatus": {
-      "type": "string",
-      "description": "Whether a device is enabled or disabled.",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "DeviceEnabledStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "The device is enabled."
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "The device is disabled."
-          }
-        ]
-      }
-    },
     "DeviceMessagingEndpoint": {
       "type": "object",
       "description": "Device messaging endpoint model.",
@@ -7431,10 +7407,6 @@
           "type": "string",
           "description": "Globally unique, immutable, non-reusable ID.",
           "readOnly": true
-        },
-        "enabled": {
-          "$ref": "#/definitions/DeviceEnabledStatus",
-          "description": "Indicates if the device is enabled or not."
         },
         "externalDeviceId": {
           "type": "string",
@@ -9478,10 +9450,6 @@
           "type": "string",
           "description": "Globally unique, immutable, non-reusable ID.",
           "readOnly": true
-        },
-        "enabled": {
-          "$ref": "#/definitions/DeviceEnabledStatus",
-          "description": "Indicates if the device is enabled or not."
         },
         "externalDeviceId": {
           "type": "string",

@@ -45,7 +45,6 @@ model NamespaceAdaptiveDeviceProperties {
   provisioningState?: ProvisioningState;
 }
 
-@@added(DeviceEnabledStatus, Versions.v2026_11_01_preview);
 @@added(DevicePropertiesBase, Versions.v2026_11_01_preview);
 
 @added(Versions.v2026_11_01_preview)

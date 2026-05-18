@@ -2453,6 +2453,30 @@
         "type"
       ]
     },
+    "DeviceCapabilityActivationState": {
+      "type": "string",
+      "description": "Whether a capability is enabled or disabled.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceCapabilityActivationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The capability is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The capability is disabled."
+          }
+        ]
+      }
+    },
     "DeviceCapabilityCreateOrUpdate": {
       "type": "object",
       "description": "A device capability resource.",
@@ -2505,16 +2529,16 @@
           "description": "The provisioning status of this capability.",
           "readOnly": true
         },
-        "provisioningError": {
-          "$ref": "#/definitions/ProvisioningError",
-          "description": "The error information for why linking failed.",
-          "readOnly": true
+        "activationState": {
+          "$ref": "#/definitions/DeviceCapabilityActivationState",
+          "description": "Whether a capability is enabled or disabled."
         }
       },
       "discriminator": "capabilityType",
       "required": [
         "capabilityType",
-        "capabilityProvider"
+        "capabilityProvider",
+        "activationState"
       ]
     },
     "DeviceCapabilityPropertiesCreateOrUpdate": {
@@ -2536,6 +2560,10 @@
             "read",
             "create"
           ]
+        },
+        "activationState": {
+          "$ref": "#/definitions/DeviceCapabilityActivationState",
+          "description": "Whether a capability is enabled or disabled."
         }
       },
       "discriminator": "capabilityType",
@@ -2543,38 +2571,10 @@
         "capabilityType"
       ]
     },
-    "DeviceEnabledStatus": {
-      "type": "string",
-      "description": "Whether a device is enabled or disabled.",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "DeviceEnabledStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "The device is enabled."
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "The device is disabled."
-          }
-        ]
-      }
-    },
     "DeviceProperties": {
       "type": "object",
       "description": "Properties of a device resource.",
       "properties": {
-        "enabled": {
-          "$ref": "#/definitions/DeviceEnabledStatus",
-          "description": "Indicates if the device is enabled or not."
-        },
         "externalDeviceId": {
           "type": "string",
           "description": "The Device ID provided by the customer. Also used by IoT Hub to hold the IoT Hub device ID.",
@@ -2614,10 +2614,6 @@
           "type": "string",
           "description": "Globally unique, immutable, non-reusable ID.",
           "readOnly": true
-        },
-        "enabled": {
-          "$ref": "#/definitions/DeviceEnabledStatus",
-          "description": "Indicates if the device is enabled or not."
         },
         "externalDeviceId": {
           "type": "string",

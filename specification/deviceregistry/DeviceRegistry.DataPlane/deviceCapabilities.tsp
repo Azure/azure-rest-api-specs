@@ -46,9 +46,19 @@ model DeviceCapabilityProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: CapabilityProvisioningState;
 
-  /** The error information for why linking failed. */
-  @visibility(Lifecycle.Read)
-  provisioningError?: ProvisioningError;
+  /** Whether a capability is enabled or disabled. */
+  activationState: DeviceCapabilityActivationState;
+}
+
+/** Whether a capability is enabled or disabled. */
+union DeviceCapabilityActivationState {
+  string,
+
+  /** The capability is enabled. */
+  Enabled: "Enabled",
+
+  /** The capability is disabled. */
+  Disabled: "Disabled",
 }
 
 /** The authentication type for IoT Hub. */
