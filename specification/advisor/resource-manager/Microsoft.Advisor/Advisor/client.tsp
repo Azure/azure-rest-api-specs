@@ -4,6 +4,20 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Microsoft.Advisor;
 
+// Preserve the pre-TypeSpec Go SDK names for `Duration` enum members
+// (`DurationSeven`/`DurationFourteen`/...) instead of the `Duration7`/`Duration14`/...
+// that the Go emitter would otherwise produce from the numeric variant names.
+@@clientName(Microsoft.Advisor.Duration.`7`, "Seven", "go");
+@@clientName(Microsoft.Advisor.Duration.`14`, "Fourteen", "go");
+@@clientName(Microsoft.Advisor.Duration.`21`, "TwentyOne", "go");
+@@clientName(Microsoft.Advisor.Duration.`30`, "Thirty", "go");
+@@clientName(Microsoft.Advisor.Duration.`60`, "Sixty", "go");
+@@clientName(Microsoft.Advisor.Duration.`90`, "Ninety", "go");
+
+// Preserve the pre-TypeSpec Go SDK root client name (`ManagementClient`) instead
+// of the default `Client` derived from the `Microsoft.Advisor` namespace.
+@@clientName(Microsoft.Advisor, "ManagementClient", "go");
+
 @@clientName(
   ResourceRecommendationBases.patch::parameters.properties,
   "trackedProperties"
