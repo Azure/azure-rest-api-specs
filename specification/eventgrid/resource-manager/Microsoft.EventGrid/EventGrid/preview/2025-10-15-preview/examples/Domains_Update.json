@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "api-version": "2025-07-15-preview",
+    "domainName": "exampledomain1",
+    "domainUpdateParameters": {
+      "properties": {
+        "inboundIpRules": [
+          {
+            "action": "Allow",
+            "ipMask": "12.18.30.15"
+          },
+          {
+            "action": "Allow",
+            "ipMask": "12.18.176.1"
+          }
+        ],
+        "publicNetworkAccess": "Enabled"
+      },
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    },
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "8f6b6269-84f2-4d09-9e31-1127efcd1e40"
+  },
+  "responses": {
+    "200": {},
+    "201": {
+      "body": {
+        "name": "exampledomain1",
+        "type": "Microsoft.EventGrid/domains",
+        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/domains/exampledomain1",
+        "location": "westus2",
+        "properties": {
+          "endpoint": "https://exampledomain1.westus2-1.eventgrid.azure.net/api/events",
+          "inboundIpRules": [
+            {
+              "action": "Allow",
+              "ipMask": "12.18.30.15"
+            },
+            {
+              "action": "Allow",
+              "ipMask": "12.18.176.1"
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "publicNetworkAccess": "Enabled"
+        },
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        }
+      }
+    }
+  },
+  "operationId": "Domains_Update",
+  "title": "Domains_Update"
+}
