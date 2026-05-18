@@ -1,5 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 
@@ -8,6 +9,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.Core;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Microsoft.EventGrid;
 
@@ -3574,6 +3576,12 @@ model NamespaceProperties {
    * Minimum TLS version of the publisher allowed to publish to this namespace. Only TLS version 1.2 is supported.
    */
   minimumTlsVersionAllowed?: TlsVersion;
+
+  /**
+   * This property indicates if IPv6 is enabled for the namespace.
+   */
+  @added(Versions.v2026_06_15_preview)
+  ipV6Enabled?: boolean;
 }
 
 /**
@@ -3964,6 +3972,12 @@ model NamespaceUpdateParameterProperties {
    */
   @identifiers(#[])
   inboundIpRules?: InboundIpRule[];
+
+  /**
+   * This property indicates if IPv6 is enabled for the namespace.
+   */
+  @added(Versions.v2026_06_15_preview)
+  ipV6Enabled?: boolean;
 }
 
 /**
