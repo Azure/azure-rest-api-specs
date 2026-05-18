@@ -55609,12 +55609,9 @@
           "description": "Resource properties.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The name and tier of the SKU."
         },
         "location": {
           "type": "string",
@@ -55624,9 +55621,12 @@
             "create"
           ]
         },
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The name and tier of the SKU."
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "allOf": [
