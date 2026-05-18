@@ -21,6 +21,7 @@ using Azure.AI.Projects;
 
 @@clientName(AgentObject, "AgentDetails");
 @@clientName(AgentVersionObject, "AgentVersionDetails");
+@@clientName(Agents.patchAgentObject, "updateAgentDetails");
 
 @@clientName(MemoryStoreObject, "MemoryStoreDetails");
 
@@ -47,6 +48,7 @@ using Azure.AI.Projects;
 @@clientName(CreateAgentVersionFromManifestRequest,
   "CreateAgentVersionFromManifestInput"
 );
+@@clientName(UpdateToolboxRequest, "UpdateToolboxInput");
 
 @@clientName(OpenAI.ContainerMemoryLimit.`1g`, "MEMORY_1GB");
 @@clientName(OpenAI.ContainerMemoryLimit.`4g`, "MEMORY_4GB");
@@ -137,6 +139,11 @@ using Azure.AI.Projects;
 @@clientName(OpenAI.LocalSkillParam, "LocalSkillParameter", "java");
 @@clientName(OpenAI.SkillReferenceParam, "SkillReferenceParameter", "java");
 
+@@clientName(ToolboxVersionObject, "ToolboxVersionDetails", "java");
+@@clientName(ToolboxObject, "ToolboxDetails", "java");
+
+@@clientName(WorkIQPreviewTool, "WorkIqPreviewTool", "java");
+
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
 // --------------------------------------------------------------------------------
@@ -194,6 +201,21 @@ using Azure.AI.Projects;
 
 @@usage(AzureCreateResponseDetails, Usage.output);
 @@access(AzureCreateResponseDetails, Access.public);
+
+@@usage(CreateAgentVersionRequest, Usage.input);
+@@access(CreateAgentVersionRequest, Access.public);
+
+
+// Ensure SessionLogEvent and SessionLogEventType are emitted
+@@usage(SessionLogEvent, Usage.output);
+@@access(SessionLogEvent, Access.public);
+@@usage(SessionLogEventType, Usage.output);
+@@access(SessionLogEventType, Access.public);
+
+//Disabled convenient API generation for getSessionLogStream to handle deserialization manually
+@@convenientAPI(Agents.getSessionLogStream, false, "java");
+
+@@access(UpdateToolboxRequest, Access.internal, "java");
 
 // --------------------------------------------------------------------------------
 // Type overrides

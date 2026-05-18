@@ -5,7 +5,7 @@ using Microsoft.BillingBenefits;
 
 // @@clientLocation and @@clientName decorators for operations that originally had @operationId
 // All @operationId decorators have been removed and replaced with these client customizations
-@@clientLocation(SavingsPlanOperationGroup.listAll, "SavingsPlan");
+@@clientLocation(SavingsPlanOperationGroup.listAll, "SavingsPlan", "!csharp");
 
 @@clientLocation(DiscountsOperationGroup.scopeList, Discounts);
 @@clientLocation(ReservationOrderAliasResponses.get, "ReservationOrderAlias");

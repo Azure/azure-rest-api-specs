@@ -394,7 +394,7 @@ namespace Azure.AI.Projects {
   // Renames for tools.
   // --------------------------------------------------------------------------------
   @@clientName(OpenAI.FunctionCallOutputStatusEnum,
-    "ResponsesFunctionCallOutputStatusEnum"
+    "ResponsesFunctionCallOutputStatus"
   );
   @@clientName(OpenAI.FunctionCallStatus, "ResponsesFunctionCallStatus");
   @@clientName(OpenAI.ToolSearchExecutionType,

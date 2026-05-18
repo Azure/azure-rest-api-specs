@@ -14,7 +14,7 @@ namespace Microsoft.ServiceBus;
 /**
  * Description of topic resource.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
 @parentResource(SBNamespace)
 model SBTopic is Azure.ResourceManager.ProxyResource<SBTopicProperties> {
   ...ResourceNameParameter<
@@ -27,26 +27,27 @@ model SBTopic is Azure.ResourceManager.ProxyResource<SBTopicProperties> {
   /**
    * The geo-location where the resource lives
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
   @visibility(Lifecycle.Read)
   location?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
 @armResourceOperations
+@tag("Topics")
 interface SBTopics {
   /**
    * Returns a description for the specified topic.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639399.aspx")
   get is ArmResourceRead<SBTopic, Error = ErrorResponse>;
 
   /**
    * Creates a topic in the specified namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639409.aspx")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     SBTopic,
@@ -57,14 +58,14 @@ interface SBTopics {
   /**
    * Deletes a topic from the specified namespace and resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639404.aspx")
   delete is ArmResourceDeleteSync<SBTopic, Error = ErrorResponse>;
 
   /**
    * Gets all the topics in a namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639388.aspx")
   listByNamespace is ArmResourceListByParent<
     SBTopic,

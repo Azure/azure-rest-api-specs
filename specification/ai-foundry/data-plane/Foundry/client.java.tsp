@@ -13,6 +13,8 @@ import "./src/evaluation-taxonomies/routes.tsp";
 import "./src/evaluators/routes.tsp";
 import "./src/insights/routes.tsp";
 import "./src/schedules/routes.tsp";
+import "./src/routines/routes.tsp";
+import "./src/skills/routes.tsp";
 import "./src/data_generation_jobs/routes.tsp";
 
 using Azure.ClientGenerator.Core;
@@ -129,6 +131,9 @@ namespace Azure.AI.Projects;
 @@clientName(EvalRunResultComparison, "EvaluationRunResultComparison");
 @@clientName(EvalRunResultSummary, "EvaluationRunResultSummary");
 
+@@clientName(SkillObject, "SkillDetails");
+@@clientName(SkillObject.has_blob, "blobPresent");
+
 @@clientName(Index, "AIProjectIndex", "java");
 
 @@clientName(Azure.Core.Foundations.ResourceBody.resource, "schedule");
@@ -137,6 +142,7 @@ namespace Azure.AI.Projects;
 @@clientName(SasCredential.sasUri, "sasUrl");
 @@clientName(DatasetVersion.dataUri, "dataUrl");
 @@clientName(FolderDatasetVersion.dataUri, "dataUrl");
+@@clientName(CodeBasedEvaluatorDefinition.blob_uri, "blobUrl");
 
 // Rename OpenAI.Error to avoid conflict with Azure.Core.Foundations.Error.
 // OpenAI.Error is the object type of the `error` properties in `ApiErrorResponse`
@@ -182,6 +188,9 @@ namespace Azure.AI.Projects;
 // is_primary -> primary so accessors become isPrimary()/setPrimary()
 @@clientName(EvaluatorMetric.is_primary, "primary", "java");
 
+// Disabled convenient API generation and make private to provide a custom shim returning `void` in the client
+@@convenientAPI(Skills.deleteSkill, false, "java");
+
 // --------------------------------------------------------------------------------
 // Type replacements / encodings
 // --------------------------------------------------------------------------------
@@ -189,6 +198,13 @@ namespace Azure.AI.Projects;
 @@alternateType(DayOfWeek,
   {
     identity: "java.time.DayOfWeek",
+  },
+  "java"
+);
+
+@@alternateType(PageOrder,
+  {
+    identity: "com.azure.ai.agents.models.PageOrder",
   },
   "java"
 );
@@ -218,3 +234,12 @@ namespace Azure.AI.Projects;
 model TimeZoneType {}
 
 @@alternateType(RecurrenceTrigger.timeZone, TimeZoneType, "java");
+
+// --------------------------------------------------------------------------------
+// Javadoc / Documentation overrides
+// --------------------------------------------------------------------------------
+
+@@clientDoc(Skills.downloadSkill,
+  "Downloads a skill package as a ZIP archive containing {@code SKILL.md}. Returns the original uploaded archive for skills created via {@code createSkillFromPackage}; materializes a ZIP from stored instructions for skills created via {@code createSkill}.",
+  DocumentationMode.replace
+);
