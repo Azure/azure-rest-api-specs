@@ -25,9 +25,9 @@ namespace Microsoft.Monitor {
     /**
      * Updates part of an Azure Monitor Workspace
      */
-    update is ArmResourcePatchSync<
+    update is ArmCustomPatchSync<
       AzureMonitorWorkspaceResource,
-      AzureMonitorWorkspace
+      AzureMonitorWorkspaceResourceUpdate
     >;
 
     /**

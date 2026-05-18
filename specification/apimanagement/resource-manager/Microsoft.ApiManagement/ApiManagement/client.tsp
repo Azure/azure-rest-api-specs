@@ -159,3 +159,8 @@ op replacePurge(
   "xml",
   "javascript"
 );
+
+@@apiVersion(ApiContractProperties.apiVersionSet, false);
+@@apiVersion(ApiRevisionInfoContract.apiVersionSet, false);
+@@apiVersion(ApiManagementServiceBaseProperties.apiVersionConstraint, false);
+@@apiVersion(ApiManagementSku.apiVersions, false);
