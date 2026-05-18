@@ -49,21 +49,18 @@ interface Evaluators {}
 @@clientLocation(Azure.AI.Projects.Evaluators.startPendingUpload, Evaluators);
 @@clientLocation(Azure.AI.Projects.Evaluators.getCredentials, Evaluators);
 
-// Evaluator generation jobs → nested under Evaluators sub-client
 @@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.create, Evaluators);
 @@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.get, Evaluators);
 @@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.list, Evaluators);
 @@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.cancel, Evaluators);
 @@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.delete, Evaluators);
 
-// Evaluation suite generation jobs → nested under evaluations sub-client
 @@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.create, Evaluators);
 @@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.get, Evaluators);
 @@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.list, Evaluators);
 @@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.cancel, Evaluators);
 @@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.delete, Evaluators);
 
-// Evaluation suites operations
 @@clientLocation(Azure.AI.Projects.EvaluationSuites.listVersions, Evaluators);
 @@clientLocation(Azure.AI.Projects.EvaluationSuites.listLatest, Evaluators);
 @@clientLocation(Azure.AI.Projects.EvaluationSuites.getVersion, Evaluators);
@@ -117,14 +114,13 @@ interface Skills {}
 @@clientLocation(Azure.AI.Projects.Skills.deleteSkill, Skills);
 
 interface Agents {}
-// Move AgentSessionFiles
 @@clientLocation(Azure.AI.Projects.AgentSessionFiles.uploadSessionFile, Agents);
 @@clientLocation(Azure.AI.Projects.AgentSessionFiles.downloadSessionFile,
   Agents
 );
 @@clientLocation(Azure.AI.Projects.AgentSessionFiles.listSessionFiles, Agents);
 @@clientLocation(Azure.AI.Projects.AgentSessionFiles.deleteSessionFile, Agents);
-// Move preview operations out of root Agent into Beta Agents
+
 @@clientLocation(Azure.AI.Projects.Agents.patchAgentObject, Agents);
 @@clientLocation(Azure.AI.Projects.Agents.createSession, Agents);
 @@clientLocation(Azure.AI.Projects.Agents.getSession, Agents);
@@ -136,29 +132,23 @@ interface Agents {}
 @@clientLocation(Azure.AI.Projects.Agents.createAgentVersionFromCode, Agents);
 @@clientLocation(Azure.AI.Projects.Agents.downloadAgentCode, Agents);
 
+@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.create, Agents);
+@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.get, Agents);
+@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.list, Agents);
+@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.cancel, Agents);
+@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.delete, Agents);
+@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.listCandidates, Agents);
+@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.getCandidate, Agents);
+@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.getCandidateConfig, Agents);
+@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.getCandidateResults, Agents);
 
 interface Datasets {}
-
-// Data generation jobs → nested under datasets sub-client
 @@clientLocation(Azure.AI.Projects.DataGenerationJobs.get, Datasets);
 @@clientLocation(Azure.AI.Projects.DataGenerationJobs.list, Datasets);
 @@clientLocation(Azure.AI.Projects.DataGenerationJobs.create, Datasets);
 @@clientLocation(Azure.AI.Projects.DataGenerationJobs.cancel, Datasets);
 @@clientLocation(Azure.AI.Projects.DataGenerationJobs.delete, Datasets);
 
-// Agent optimization jobs → own sub-client
-interface AgentOptimizationJobs {}
-@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.create, AgentOptimizationJobs);
-@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.get, AgentOptimizationJobs);
-@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.list, AgentOptimizationJobs);
-@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.cancel, AgentOptimizationJobs);
-@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.delete, AgentOptimizationJobs);
-@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.listCandidates, AgentOptimizationJobs);
-@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.getCandidate, AgentOptimizationJobs);
-@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.getCandidateConfig, AgentOptimizationJobs);
-@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.getCandidateResults, AgentOptimizationJobs);
-
-// Routines operations
 interface Routines {}
 @@clientLocation(Azure.AI.Projects.Routines.createOrUpdateRoutine, Routines);
 @@clientLocation(Azure.AI.Projects.Routines.getRoutine, Routines);
