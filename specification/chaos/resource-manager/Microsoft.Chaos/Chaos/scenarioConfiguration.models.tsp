@@ -19,7 +19,7 @@ namespace Microsoft.Chaos;
  */
 @parentResource(Scenario)
 model ScenarioConfiguration
-  is Azure.ResourceManager.ProxyResource<ScenarioConfigurationProperties> {
+  is ProxyResource<ScenarioConfigurationProperties> {
   ...ResourceNameParameter<
     Resource = ScenarioConfiguration,
     KeyName = "scenarioConfigurationName",
@@ -212,7 +212,7 @@ model ResourceTargetingCriteria {
 
 @parentResource(ScenarioConfiguration)
 @singleton("latest")
-model Validation is Azure.ResourceManager.ProxyResource<ValidationProperties> {
+model Validation is ProxyResource<ValidationProperties> {
   ...ResourceNameParameter<Validation>;
 }
 
@@ -447,7 +447,7 @@ model ScenarioConfigurationListResult is Azure.Core.Page<ScenarioConfiguration>;
  */
 @parentResource(ScenarioConfiguration)
 @singleton("latest")
-model PermissionsFix is Azure.ResourceManager.ProxyResource<PermissionsFixProperties> {
+model PermissionsFix is ProxyResource<PermissionsFixProperties> {
   ...ResourceNameParameter<
     Resource = PermissionsFix,
     KeyName = "PermissionsFixName",
