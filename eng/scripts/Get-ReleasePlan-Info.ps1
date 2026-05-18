@@ -19,7 +19,7 @@ Set-StrictMode -Version 3
 $releasePlanInfoUnavailableMessage = "Release plan information is not available. Create a release plan and link SDK pull request to the release plan. Refer aka.ms/azsdk/releaseplan-dashboard for more info."
 $releasePlanInfo = $releasePlanInfoUnavailableMessage
 
-if (($null -eq $ReleasePlanWorkItemId) -or ([string]::IsNullOrWhiteSpace("$ReleasePlanWorkItemId")) -or ($ReleasePlanWorkItemId -eq 0))
+if (([string]::IsNullOrWhiteSpace("$ReleasePlanWorkItemId")) -or ($ReleasePlanWorkItemId -eq 0))
 {
     Write-Host "Release plan information is not available for work item ID: $ReleasePlanWorkItemId"
     Write-Output $releasePlanInfo
