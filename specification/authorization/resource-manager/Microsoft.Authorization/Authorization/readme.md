@@ -102,6 +102,12 @@ directive:
   - suppress: RepeatedPathInfo
     from: authorization-DenyAssignmentCalls.json
     reason: The scope property in DenyAssignmentProperties is readOnly and returned in responses only. It does not repeat the path parameter in requests.
+  - suppress: PostResponseCodes
+    from: authorization-ElevateAccessCalls.json
+    reason: Pre-existing API pattern from stable/2015-07-01. The ElevateAccess POST returns 200 with no body by design.
+  - suppress: LatestVersionOfCommonTypesMustBeUsed
+    from: authorization-ElevateAccessCalls.json
+    reason: Matching the existing stable/2015-07-01 ElevateAccess spec which uses common-types v2.  
 ```
 
 ### Tag: package-2025-12-01-preview
