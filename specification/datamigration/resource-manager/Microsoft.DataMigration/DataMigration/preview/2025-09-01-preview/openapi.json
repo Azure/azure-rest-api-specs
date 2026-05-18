@@ -7226,19 +7226,6 @@
           "description": "Custom service properties",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
         "etag": {
           "type": "string",
           "description": "HTTP strong entity tag value. Ignored if submitted"
@@ -7250,6 +7237,19 @@
         "sku": {
           "$ref": "#/definitions/ServiceSku",
           "description": "Service SKU"
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "allOf": [
@@ -14482,11 +14482,9 @@
           "description": "Project properties",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "etag": {
+          "type": "string",
+          "description": "HTTP strong entity tag value. This is ignored if submitted."
         },
         "location": {
           "type": "string",
@@ -14495,9 +14493,11 @@
             "create"
           ]
         },
-        "etag": {
-          "type": "string",
-          "description": "HTTP strong entity tag value. This is ignored if submitted."
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "allOf": [
@@ -16273,18 +16273,18 @@
           "description": "The SQL Migration Service properties.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "location": {
           "type": "string",
           "x-ms-mutability": [
             "read",
             "create"
           ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "allOf": [
