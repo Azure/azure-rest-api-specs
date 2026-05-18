@@ -1531,22 +1531,13 @@ model HealthReportEvaluationRule {
 }
 
 @added(Versions.v2026_05_01_preview)
-@doc("Request body for getting recommended signals for a given Azure resource type.")
-model GetSignalRecommendationsRequest {
-  @doc("Azure resource type to get recommended signals for (e.g. 'microsoft.compute/virtualMachines').")
-  @minLength(1)
-  @maxLength(256)
-  resourceType: string;
-}
-
-@added(Versions.v2026_05_01_preview)
-@doc("Response from `getSignalRecommendations` containing two independent suggestion streams for the requested Azure resource type. `recommendedSignals` lists signals broadly recommended to be enabled by default; `recommendedConfigurations` lists additional metrics that are not broadly applicable but, if a caller chooses to monitor one of them, ship with suggested starting-point thresholds. The two arrays are independent — items are not paired by index, and callers should treat them as two separate suggestion streams.")
+@doc("Response from `getSignalRecommendations` containing two independent suggestion streams for the Azure resource type represented by the target Entity. `recommendedSignals` lists signals broadly recommended to be enabled by default; `recommendedConfigurations` lists additional metrics that are not broadly applicable but, if a caller chooses to monitor one of them, ship with suggested starting-point thresholds. The two arrays are independent — items are not paired by index, and callers should treat them as two separate suggestion streams.")
 model GetSignalRecommendationsResponse {
-  @doc("Signals that are broadly recommended to be enabled by default for health models monitoring the specified resource type. Each entry is a complete signal configuration (metric, aggregation, thresholds) ready to be added to a health model. Independent of `recommendedConfigurations` — not paired by index.")
+  @doc("Signals that are broadly recommended to be enabled by default for health models monitoring an Entity of this resource type. Each entry is a complete signal configuration (metric, aggregation, thresholds) ready to be added to a health model. Independent of `recommendedConfigurations` — not paired by index.")
   @identifiers(#["signalId"])
   recommendedSignals?: SignalConfiguration[];
 
-  @doc("Additional signal configurations for metrics that are not broadly applicable to every health model for this resource type, but if a caller chooses to monitor one of these metrics, the provided thresholds are suggested as a starting point. Independent of `recommendedSignals` — not paired by index.")
+  @doc("Additional signal configurations for metrics that are not broadly applicable to every health model for an Entity of this resource type, but if a caller chooses to monitor one of these metrics, the provided thresholds are suggested as a starting point. Independent of `recommendedSignals` — not paired by index.")
   @identifiers(#["signalId"])
   recommendedConfigurations?: SignalConfiguration[];
 }
@@ -1613,16 +1604,6 @@ interface HealthModels {
   delete is ArmResourceDeleteWithoutOkAsync<HealthModel>;
   listByResourceGroup is ArmResourceListByParent<HealthModel>;
   listBySubscription is ArmListBySubscription<HealthModel>;
-
-  @added(Versions.v2026_05_01_preview)
-  @doc("Get recommended signal configurations for a given Azure resource type")
-  @post
-  @action("getSignalRecommendations")
-  getSignalRecommendations is ArmResourceActionSync<
-    HealthModel,
-    GetSignalRecommendationsRequest,
-    GetSignalRecommendationsResponse
-  >;
 }
 
 @armResourceOperations(SignalDefinition)
@@ -1754,6 +1735,16 @@ interface Entities {
     Entity,
     GetDataAnnotationsRequest,
     GetDataAnnotationsResponse
+  >;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Get recommended signal configurations for a given Entity (only applicable for Entities representing Azure resources)")
+  @post
+  @action("getSignalRecommendations")
+  getSignalRecommendations is ArmResourceActionSync<
+    Entity,
+    void,
+    GetSignalRecommendationsResponse
   >;
 }
 

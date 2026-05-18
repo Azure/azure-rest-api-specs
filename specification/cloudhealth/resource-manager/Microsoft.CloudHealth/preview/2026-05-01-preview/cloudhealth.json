@@ -1472,6 +1472,61 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudHealth/healthmodels/{healthModelName}/entities/{entityName}/getSignalRecommendations": {
+      "post": {
+        "operationId": "Entities_GetSignalRecommendations",
+        "tags": [
+          "Entities"
+        ],
+        "description": "Get recommended signal configurations for a given Entity (only applicable for Entities representing Azure resources)",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "healthModelName",
+            "in": "path",
+            "description": "Name of health model resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,42}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "entityName",
+            "in": "path",
+            "description": "Name of the entity. Must be unique within a health model.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GetSignalRecommendationsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Entities_GetSignalRecommendations": {
+            "$ref": "./examples/Entities_GetSignalRecommendations.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudHealth/healthmodels/{healthModelName}/entities/{entityName}/ingestHealthReport": {
       "post": {
         "operationId": "Entities_IngestHealthReport",
@@ -1529,62 +1584,6 @@
         "x-ms-examples": {
           "Entities_IngestHealthReport": {
             "$ref": "./examples/Entities_IngestHealthReport.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudHealth/healthmodels/{healthModelName}/getSignalRecommendations": {
-      "post": {
-        "operationId": "HealthModels_GetSignalRecommendations",
-        "tags": [
-          "HealthModels"
-        ],
-        "description": "Get recommended signal configurations for a given Azure resource type",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "healthModelName",
-            "in": "path",
-            "description": "Name of health model resource",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,42}[a-zA-Z0-9]$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GetSignalRecommendationsRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/GetSignalRecommendationsResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "HealthModels_GetSignalRecommendations": {
-            "$ref": "./examples/HealthModels_GetSignalRecommendations.json"
           }
         }
       }
@@ -3287,28 +3286,13 @@
         "annotations"
       ]
     },
-    "GetSignalRecommendationsRequest": {
-      "type": "object",
-      "description": "Request body for getting recommended signals for a given Azure resource type.",
-      "properties": {
-        "resourceType": {
-          "type": "string",
-          "description": "Azure resource type to get recommended signals for (e.g. 'microsoft.compute/virtualMachines').",
-          "minLength": 1,
-          "maxLength": 256
-        }
-      },
-      "required": [
-        "resourceType"
-      ]
-    },
     "GetSignalRecommendationsResponse": {
       "type": "object",
-      "description": "Response from `getSignalRecommendations` containing two independent suggestion streams for the requested Azure resource type. `recommendedSignals` lists signals broadly recommended to be enabled by default; `recommendedConfigurations` lists additional metrics that are not broadly applicable but, if a caller chooses to monitor one of them, ship with suggested starting-point thresholds. The two arrays are independent — items are not paired by index, and callers should treat them as two separate suggestion streams.",
+      "description": "Response from `getSignalRecommendations` containing two independent suggestion streams for the Azure resource type represented by the target Entity. `recommendedSignals` lists signals broadly recommended to be enabled by default; `recommendedConfigurations` lists additional metrics that are not broadly applicable but, if a caller chooses to monitor one of them, ship with suggested starting-point thresholds. The two arrays are independent — items are not paired by index, and callers should treat them as two separate suggestion streams.",
       "properties": {
         "recommendedSignals": {
           "type": "array",
-          "description": "Signals that are broadly recommended to be enabled by default for health models monitoring the specified resource type. Each entry is a complete signal configuration (metric, aggregation, thresholds) ready to be added to a health model. Independent of `recommendedConfigurations` — not paired by index.",
+          "description": "Signals that are broadly recommended to be enabled by default for health models monitoring an Entity of this resource type. Each entry is a complete signal configuration (metric, aggregation, thresholds) ready to be added to a health model. Independent of `recommendedConfigurations` — not paired by index.",
           "items": {
             "$ref": "#/definitions/SignalConfiguration"
           },
@@ -3318,7 +3302,7 @@
         },
         "recommendedConfigurations": {
           "type": "array",
-          "description": "Additional signal configurations for metrics that are not broadly applicable to every health model for this resource type, but if a caller chooses to monitor one of these metrics, the provided thresholds are suggested as a starting point. Independent of `recommendedSignals` — not paired by index.",
+          "description": "Additional signal configurations for metrics that are not broadly applicable to every health model for an Entity of this resource type, but if a caller chooses to monitor one of these metrics, the provided thresholds are suggested as a starting point. Independent of `recommendedSignals` — not paired by index.",
           "items": {
             "$ref": "#/definitions/SignalConfiguration"
           },
