@@ -365,6 +365,11 @@ using Microsoft.RecoveryServices;
 );
 @@alternateType(RegisteredClusterNodes.biosId, Azure.Core.uuid, "csharp");
 @@alternateType(RegisteredClusterNodes.machineId, Azure.Core.uuid, "csharp");
+// Preserve baseline-compatible C# names for `resyncRequired` boolean properties on the A2A
+// disk-detail models. Legacy AutoRest (v1.x) auto-prefixed boolean properties with "Is", so
+// the shipped public surface is `IsResyncRequired`. The InMage*/VMwareCbt* variants are
+// strings (not booleans), so they ship as bare `ResyncRequired` — see the renames near the
+// end of this file. Removing these renames would break ApiCompat.
 @@clientName(
   A2AProtectedManagedDiskDetails.resyncRequired,
   "IsResyncRequired",
@@ -4392,7 +4397,7 @@ using Microsoft.RecoveryServices;
 @@clientName(SupportedOSProperty.supportedOs, "SupportedOS", "csharp");
 @@clientName(
   SupportedOSProperties.supportedOsList,
-  "SupportedOSListInternal",
+  "SupportedOSList",
   "csharp"
 );
 @@clientName(
@@ -4453,17 +4458,9 @@ using Microsoft.RecoveryServices;
   "csharp"
 );
 
-// ResyncRequired casing
-@@clientName(
-  A2AProtectedDiskDetails.resyncRequired,
-  "IsResyncRequired",
-  "csharp"
-);
-@@clientName(
-  A2AProtectedManagedDiskDetails.resyncRequired,
-  "IsResyncRequired",
-  "csharp"
-);
+// ResyncRequired casing — these models declare `resyncRequired` as `string` (not boolean),
+// so legacy AutoRest did NOT add an "Is" prefix and the shipped baseline name is the bare
+// `ResyncRequired`. Required to keep ApiCompat green.
 @@clientName(
   InMageAzureV2ProtectedDiskDetails.resyncRequired,
   "ResyncRequired",
