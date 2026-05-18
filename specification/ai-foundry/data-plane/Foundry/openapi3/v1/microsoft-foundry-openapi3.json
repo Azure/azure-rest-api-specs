@@ -30,7 +30,13 @@
       "name": "Evaluation Rules"
     },
     {
+      "name": "EvaluationSuiteGenerationJobs"
+    },
+    {
       "name": "Evaluators"
+    },
+    {
+      "name": "EvaluatorGenerationJobs"
     },
     {
       "name": "Indexes"
@@ -60,6 +66,9 @@
       "name": "Redteams"
     },
     {
+      "name": "Routines"
+    },
+    {
       "name": "Schedules"
     },
     {
@@ -67,6 +76,9 @@
     },
     {
       "name": "Toolboxes"
+    },
+    {
+      "name": "DataGenerationJobs"
     },
     {
       "name": "AgentOptimizationJobs"
@@ -1279,11 +1291,12 @@
             "name": "force",
             "in": "query",
             "required": false,
-            "description": "If true, force-deletes the agent even if its versions have active sessions (hosted agents), cascading deletion to all associated sessions. Defaults to false.",
+            "description": "For Hosted Agents, if true, force-deletes the agent even if its versions have active sessions, cascading deletion to all associated sessions. This value is not relevant for other Agent types. Defaults to false.",
             "schema": {
               "type": "boolean",
               "default": false
-            }
+            },
+            "explode": false
           },
           {
             "name": "api-version",
@@ -1514,6 +1527,15 @@
             "explode": false
           },
           {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "Foundry-Features",
             "in": "header",
             "required": true,
@@ -1685,6 +1707,15 @@
             }
           },
           {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "Foundry-Features",
             "in": "header",
             "required": true,
@@ -1765,6 +1796,15 @@
             "in": "path",
             "required": true,
             "description": "The unique identifier of the invocation to cancel.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
             "schema": {
               "type": "string"
             }
@@ -2100,6 +2140,15 @@
             "explode": false
           },
           {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "api-version",
             "in": "query",
             "required": true,
@@ -2197,6 +2246,15 @@
             "explode": false
           },
           {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "api-version",
             "in": "query",
             "required": true,
@@ -2276,6 +2334,15 @@
               "type": "string"
             },
             "explode": false
+          },
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "name": "api-version",
@@ -2373,6 +2440,15 @@
               "type": "string"
             },
             "explode": false
+          },
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "name": "api-version",
@@ -2927,11 +3003,12 @@
             "name": "force",
             "in": "query",
             "required": false,
-            "description": "If true, force-deletes the version even if it has active sessions (hosted agents), cascading deletion to all associated sessions. Defaults to false.",
+            "description": "For Hosted Agents, if true, force-deletes the version even if it has active sessions, cascading deletion to all associated sessions. This value is not relevant for other Agent types. Defaults to false.",
             "schema": {
               "type": "boolean",
               "default": false
-            }
+            },
+            "explode": false
           },
           {
             "name": "api-version",
@@ -3381,6 +3458,464 @@
         "tags": [
           "Connections"
         ]
+      }
+    },
+    "/data_generation_jobs": {
+      "get": {
+        "operationId": "DataGenerationJobs_list",
+        "summary": "Returns a list of data generation jobs",
+        "description": "Returns a list of data generation jobs.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "DataGenerationJobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
+            "schema": {
+              "$ref": "#/components/schemas/PageOrder"
+            },
+            "explode": false
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "scenario",
+            "in": "query",
+            "required": false,
+            "description": "Filter data generation jobs by their scenario.",
+            "schema": {
+              "$ref": "#/components/schemas/DataGenerationJobScenario"
+            },
+            "explode": false
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "description": "Filter data generation jobs by their type.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/DataGenerationJobType"
+              }
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "has_more"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/DataGenerationJob"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "first_id": {
+                      "type": "string",
+                      "description": "The first ID represented in this list."
+                    },
+                    "last_id": {
+                      "type": "string",
+                      "description": "The last ID represented in this list."
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    }
+                  },
+                  "description": "The response data for a requested list of items."
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "DataGenerationJobs"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
+      },
+      "post": {
+        "operationId": "DataGenerationJobs_create",
+        "summary": "Creates a data generation job.",
+        "description": "Creates a data generation job.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "DataGenerationJobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "Operation-Id",
+            "in": "header",
+            "required": false,
+            "description": "Client-generated unique ID for idempotent retries. When absent, the server creates the job unconditionally.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "headers": {
+              "Operation-Location": {
+                "required": true,
+                "description": "URL to poll for the job status.",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Location": {
+                "required": true,
+                "description": "URL of the created job resource.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataGenerationJob"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "DataGenerationJobs"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DataGenerationJob"
+              }
+            }
+          },
+          "description": "The job to create."
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
+      }
+    },
+    "/data_generation_jobs/{jobId}": {
+      "get": {
+        "operationId": "DataGenerationJobs_get",
+        "summary": "Get info about a data generation job.",
+        "description": "Gets the details of a data generation job by its ID.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "DataGenerationJobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the job.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "Retry-After": {
+                "required": false,
+                "description": "Recommended number of seconds to wait before polling again.",
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataGenerationJob"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "DataGenerationJobs"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
+      },
+      "delete": {
+        "operationId": "DataGenerationJobs_delete",
+        "summary": "Deletes a data generation job.",
+        "description": "Deletes a data generation job by its ID.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "DataGenerationJobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the job to delete.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "DataGenerationJobs"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
+      }
+    },
+    "/data_generation_jobs/{jobId}:cancel": {
+      "post": {
+        "operationId": "DataGenerationJobs_cancel",
+        "summary": "Cancels a data generation job.",
+        "description": "Cancels a data generation job by its ID.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "DataGenerationJobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the job to cancel.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataGenerationJob"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "DataGenerationJobs"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       }
     },
     "/datasets": {
@@ -3969,6 +4504,441 @@
         "tags": [
           "Deployments"
         ]
+      }
+    },
+    "/evaluation_suite_generation_jobs": {
+      "post": {
+        "operationId": "EvaluationSuiteGenerationJobs_create",
+        "summary": "Creates an evaluation suite generation job.",
+        "description": "Create a new job (preview). Includes optional Foundry-Features header and Operation-Id for idempotent retries.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "Operation-Id",
+            "in": "header",
+            "required": false,
+            "description": "Client-generated unique ID for idempotent retries. When absent, the server creates the job unconditionally.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "headers": {
+              "Operation-Location": {
+                "required": true,
+                "description": "URL to poll for the job status.",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Location": {
+                "required": true,
+                "description": "URL of the created job resource.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluationSuiteGenerationJob"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "EvaluationSuiteGenerationJobs"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvaluationSuiteGenerationJobCreate"
+              }
+            }
+          },
+          "description": "The job to create."
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "get": {
+        "operationId": "EvaluationSuiteGenerationJobs_list",
+        "summary": "Returns a list of evaluation suite generation jobs.",
+        "description": "List jobs with cursor-based pagination (preview). Includes optional Foundry-Features header.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
+            "schema": {
+              "$ref": "#/components/schemas/PageOrder"
+            },
+            "explode": false
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "has_more"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/EvaluationSuiteGenerationJob"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "first_id": {
+                      "type": "string",
+                      "description": "The first ID represented in this list."
+                    },
+                    "last_id": {
+                      "type": "string",
+                      "description": "The last ID represented in this list."
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    }
+                  },
+                  "description": "The response data for a requested list of items."
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "EvaluationSuiteGenerationJobs"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      }
+    },
+    "/evaluation_suite_generation_jobs/{jobId}": {
+      "get": {
+        "operationId": "EvaluationSuiteGenerationJobs_get",
+        "summary": "Get info about an evaluation suite generation job.",
+        "description": "Get a job by ID (preview). Includes optional Foundry-Features header.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the job.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "Retry-After": {
+                "required": false,
+                "description": "Recommended number of seconds to wait before polling again.",
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluationSuiteGenerationJob"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "EvaluationSuiteGenerationJobs"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "delete": {
+        "operationId": "EvaluationSuiteGenerationJobs_delete",
+        "summary": "Deletes an evaluation suite generation job.",
+        "description": "Delete a job (preview). Returns 204 No Content.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the job to delete.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "EvaluationSuiteGenerationJobs"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      }
+    },
+    "/evaluation_suite_generation_jobs/{jobId}:cancel": {
+      "post": {
+        "operationId": "EvaluationSuiteGenerationJobs_cancel",
+        "summary": "Cancels an evaluation suite generation job.",
+        "description": "Cancel a running job (preview). Returns 200 with the updated job.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the job to cancel.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluationSuiteGenerationJob"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "EvaluationSuiteGenerationJobs"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       }
     },
     "/evaluation_suites": {
@@ -5035,6 +6005,450 @@
         }
       }
     },
+    "/evaluator_generation_jobs": {
+      "post": {
+        "operationId": "EvaluatorGenerationJobs_create",
+        "summary": "Creates an evaluator generation job.",
+        "description": "Creates an evaluator generation job. The service generates rubric-based evaluator\ndefinitions from the provided source materials asynchronously.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "Operation-Id",
+            "in": "header",
+            "required": false,
+            "description": "Client-generated unique ID for idempotent retries. When absent, the server creates the job unconditionally.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "headers": {
+              "Operation-Location": {
+                "required": true,
+                "description": "URL to poll for the job status.",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Location": {
+                "required": true,
+                "description": "URL of the created job resource.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluatorGenerationJob"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "EvaluatorGenerationJobs"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvaluatorGenerationJobCreate"
+              }
+            }
+          },
+          "description": "The job to create."
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "get": {
+        "operationId": "EvaluatorGenerationJobs_list",
+        "summary": "Returns a list of evaluator generation jobs.",
+        "description": "Returns a list of evaluator generation jobs.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
+            "schema": {
+              "$ref": "#/components/schemas/PageOrder"
+            },
+            "explode": false
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "required": false,
+            "description": "Filter evaluator generation jobs by category.",
+            "schema": {
+              "$ref": "#/components/schemas/EvaluatorCategory"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "has_more"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/EvaluatorGenerationJob"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "first_id": {
+                      "type": "string",
+                      "description": "The first ID represented in this list."
+                    },
+                    "last_id": {
+                      "type": "string",
+                      "description": "The last ID represented in this list."
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    }
+                  },
+                  "description": "The response data for a requested list of items."
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "EvaluatorGenerationJobs"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      }
+    },
+    "/evaluator_generation_jobs/{jobId}": {
+      "get": {
+        "operationId": "EvaluatorGenerationJobs_get",
+        "summary": "Get info about an evaluator generation job.",
+        "description": "Gets the details of an evaluator generation job by its ID.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the job.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "Retry-After": {
+                "required": false,
+                "description": "Recommended number of seconds to wait before polling again.",
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluatorGenerationJob"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "EvaluatorGenerationJobs"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "delete": {
+        "operationId": "EvaluatorGenerationJobs_delete",
+        "description": "Deletes an evaluator generation job by its ID. Deletes the job record only;\nthe generated evaluator (if any) is preserved.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the job to delete.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "EvaluatorGenerationJobs"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      }
+    },
+    "/evaluator_generation_jobs/{jobId}:cancel": {
+      "post": {
+        "operationId": "EvaluatorGenerationJobs_cancel",
+        "summary": "Cancels an evaluator generation job.",
+        "description": "Cancels an evaluator generation job by its ID.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the job to cancel.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluatorGenerationJob"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "EvaluatorGenerationJobs"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      }
+    },
     "/evaluators": {
       "get": {
         "operationId": "Evaluators_listLatestVersions",
@@ -5518,6 +6932,182 @@
             }
           },
           "description": "Evaluator resource"
+        }
+      }
+    },
+    "/evaluators/{name}/versions/{version}/credentials": {
+      "post": {
+        "operationId": "Evaluators_getCredentials",
+        "description": "Get the SAS credential to access the storage account associated with an Evaluator version.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "The specific version id of the EvaluatorVersion to operate on.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssetCredentialResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Evaluators"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvaluatorCredentialRequest"
+              }
+            }
+          },
+          "description": "The credential request parameters"
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      }
+    },
+    "/evaluators/{name}/versions/{version}/startPendingUpload": {
+      "post": {
+        "operationId": "Evaluators_startPendingUpload",
+        "description": "Start a new or get an existing pending upload of an evaluator for a specific version.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "The specific version id of the EvaluatorVersion to operate on.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PendingUploadResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Evaluators"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PendingUploadRequest"
+              }
+            }
+          },
+          "description": "The pending upload request parameters"
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
         }
       }
     },
@@ -8080,7 +9670,17 @@
       "post": {
         "operationId": "createConversation",
         "description": "Create a conversation.",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
@@ -8182,6 +9782,15 @@
               "type": "string"
             },
             "explode": false
+          },
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -8250,6 +9859,15 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -8300,6 +9918,15 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -8337,6 +9964,15 @@
             "in": "path",
             "required": true,
             "description": "The id of the conversation to delete.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
             "schema": {
               "type": "string"
             }
@@ -8395,6 +10031,15 @@
               }
             },
             "explode": false
+          },
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -8510,6 +10155,15 @@
               "$ref": "#/components/schemas/OpenAI.ItemType"
             },
             "explode": false
+          },
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -8587,6 +10241,15 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -8633,6 +10296,15 @@
             "in": "path",
             "required": true,
             "description": "The id of the conversation item to delete.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
             "schema": {
               "type": "string"
             }
@@ -9949,7 +11621,17 @@
     "/openai/v1/responses": {
       "post": {
         "operationId": "createResponse_createResponseStream",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "description": "Creates a model response. Creates a model response (streaming response).",
         "responses": {
           "200": {
@@ -10477,6 +12159,15 @@
               "type": "string"
             },
             "explode": false
+          },
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -10619,6 +12310,15 @@
             "explode": false
           },
           {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "accept",
             "in": "header",
             "required": false,
@@ -10683,6 +12383,15 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -10731,6 +12440,15 @@
             "in": "path",
             "required": true,
             "description": "The ID of the response to cancel.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
             "schema": {
               "type": "string"
             }
@@ -10826,6 +12544,15 @@
               "type": "string"
             },
             "explode": false
+          },
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -11076,6 +12803,655 @@
             }
           },
           "description": "Redteam to be run"
+        }
+      }
+    },
+    "/routines": {
+      "get": {
+        "operationId": "listRoutines",
+        "description": "List routines.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Routines=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
+            "schema": {
+              "$ref": "#/components/schemas/PageOrder"
+            },
+            "explode": false
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "has_more"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Routine"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "first_id": {
+                      "type": "string",
+                      "description": "The first ID represented in this list."
+                    },
+                    "last_id": {
+                      "type": "string",
+                      "description": "The last ID represented in this list."
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    }
+                  },
+                  "description": "The response data for a requested list of items."
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Routines"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      }
+    },
+    "/routines/{routine_name}": {
+      "put": {
+        "operationId": "createOrUpdateRoutine",
+        "description": "Create or update a routine.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Routines=V1Preview"
+              ]
+            }
+          },
+          {
+            "$ref": "#/components/parameters/CreateOrUpdateRoutineParameters.routine_name"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Routine"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Routines"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoutineCreateOrUpdateRequest"
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
+      "get": {
+        "operationId": "getRoutine",
+        "description": "Retrieve a routine.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Routines=V1Preview"
+              ]
+            }
+          },
+          {
+            "$ref": "#/components/parameters/GetRoutineParameters"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Routine"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Routines"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
+      "delete": {
+        "operationId": "deleteRoutine",
+        "description": "Delete a routine.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Routines=V1Preview"
+              ]
+            }
+          },
+          {
+            "$ref": "#/components/parameters/DeleteRoutineParameters"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Routines"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      }
+    },
+    "/routines/{routine_name}/runs": {
+      "get": {
+        "operationId": "listRoutineRuns",
+        "description": "List prior runs for a routine.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Routines=V1Preview"
+              ]
+            }
+          },
+          {
+            "$ref": "#/components/parameters/ListRoutineRunsParameters.routine_name"
+          },
+          {
+            "$ref": "#/components/parameters/ListRoutineRunsParameters.filter"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
+            "schema": {
+              "$ref": "#/components/schemas/PageOrder"
+            },
+            "explode": false
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "has_more"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/RoutineRun"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "first_id": {
+                      "type": "string",
+                      "description": "The first ID represented in this list."
+                    },
+                    "last_id": {
+                      "type": "string",
+                      "description": "The last ID represented in this list."
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    }
+                  },
+                  "description": "The response data for a requested list of items."
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Routines"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      }
+    },
+    "/routines/{routine_name}:disable": {
+      "post": {
+        "operationId": "disableRoutine",
+        "description": "Disable a routine.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Routines=V1Preview"
+              ]
+            }
+          },
+          {
+            "$ref": "#/components/parameters/DisableRoutineParameters"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Routine"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Routines"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      }
+    },
+    "/routines/{routine_name}:dispatch_async": {
+      "post": {
+        "operationId": "dispatchRoutineAsync",
+        "description": "Queue an asynchronous routine dispatch.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Routines=V1Preview"
+              ]
+            }
+          },
+          {
+            "$ref": "#/components/parameters/DispatchRoutineAsyncParameters.routine_name"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DispatchRoutineResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Routines"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DispatchRoutineRequest"
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      }
+    },
+    "/routines/{routine_name}:enable": {
+      "post": {
+        "operationId": "enableRoutine",
+        "description": "Enable a routine.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Routines=V1Preview"
+              ]
+            }
+          },
+          {
+            "$ref": "#/components/parameters/EnableRoutineParameters"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Routine"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Routines"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
         }
       }
     },
@@ -12738,6 +15114,86 @@
         },
         "explode": false
       },
+      "CreateOrUpdateRoutineParameters.routine_name": {
+        "name": "routine_name",
+        "in": "path",
+        "required": true,
+        "description": "The unique name of the routine.",
+        "schema": {
+          "type": "string",
+          "maxLength": 128
+        }
+      },
+      "DeleteRoutineParameters": {
+        "name": "routine_name",
+        "in": "path",
+        "required": true,
+        "description": "The unique name of the routine.",
+        "schema": {
+          "type": "string",
+          "maxLength": 128
+        }
+      },
+      "DisableRoutineParameters": {
+        "name": "routine_name",
+        "in": "path",
+        "required": true,
+        "description": "The unique name of the routine.",
+        "schema": {
+          "type": "string",
+          "maxLength": 128
+        }
+      },
+      "DispatchRoutineAsyncParameters.routine_name": {
+        "name": "routine_name",
+        "in": "path",
+        "required": true,
+        "description": "The unique name of the routine.",
+        "schema": {
+          "type": "string",
+          "maxLength": 128
+        }
+      },
+      "EnableRoutineParameters": {
+        "name": "routine_name",
+        "in": "path",
+        "required": true,
+        "description": "The unique name of the routine.",
+        "schema": {
+          "type": "string",
+          "maxLength": 128
+        }
+      },
+      "GetRoutineParameters": {
+        "name": "routine_name",
+        "in": "path",
+        "required": true,
+        "description": "The unique name of the routine.",
+        "schema": {
+          "type": "string",
+          "maxLength": 128
+        }
+      },
+      "ListRoutineRunsParameters.filter": {
+        "name": "filter",
+        "in": "query",
+        "required": false,
+        "description": "An optional MLflow search-runs filter expression applied within the routine's experiment.",
+        "schema": {
+          "type": "string"
+        },
+        "explode": false
+      },
+      "ListRoutineRunsParameters.routine_name": {
+        "name": "routine_name",
+        "in": "path",
+        "required": true,
+        "description": "The unique name of the routine.",
+        "schema": {
+          "type": "string",
+          "maxLength": 128
+        }
+      },
       "UpdateToolboxRequest.name": {
         "name": "name",
         "in": "path",
@@ -13151,6 +15607,40 @@
         ],
         "description": "Insights from the agent cluster analysis."
       },
+      "AgentDataGenerationJobSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "agent_name"
+        ],
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "agent"
+            ],
+            "description": "The source type for this source, which is Agent."
+          },
+          "agent_name": {
+            "type": "string",
+            "description": "The agent name to fetch instructions from."
+          },
+          "agent_version": {
+            "type": "string",
+            "description": "The agent version. If not specified, the latest version is used."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataGenerationJobSource"
+          }
+        ],
+        "description": "Agent source for data generation jobs — references an agent to fetch instructions and metadata from."
+      },
       "AgentDefinition": {
         "type": "object",
         "required": [
@@ -13181,7 +15671,6 @@
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "HostedAgents=V1Preview",
-            "ContainerAgents=V1Preview",
             "WorkflowAgents=V1Preview",
             "CodeAgents=V1Preview",
             "ExternalAgents=V1Preview"
@@ -13193,7 +15682,6 @@
         "enum": [
           "HostedAgents=V1Preview",
           "WorkflowAgents=V1Preview",
-          "ContainerAgents=V1Preview",
           "AgentEndpoints=V1Preview",
           "CodeAgents=V1Preview",
           "ExternalAgents=V1Preview"
@@ -13324,6 +15812,74 @@
             ]
           }
         ]
+      },
+      "AgentEvaluationSuiteJobSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "agent_name"
+        ],
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "agent"
+            ],
+            "description": "The source type for this source, which is Agent."
+          },
+          "agent_name": {
+            "type": "string",
+            "description": "The agent name to fetch instructions from."
+          },
+          "agent_version": {
+            "type": "string",
+            "description": "The agent version. If not specified, the latest version is used."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvaluationSuiteJobSource"
+          }
+        ],
+        "description": "Agent source for evaluation suite generation jobs — references an agent to fetch instructions and metadata from."
+      },
+      "AgentEvaluatorGenerationJobSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "agent_name"
+        ],
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "agent"
+            ],
+            "description": "The source type for this source, which is Agent."
+          },
+          "agent_name": {
+            "type": "string",
+            "description": "The agent name to fetch instructions from."
+          },
+          "agent_version": {
+            "type": "string",
+            "description": "The agent version. If not specified, the latest version is used."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvaluatorGenerationJobSource"
+          }
+        ],
+        "description": "Agent source for evaluator generation jobs — references an agent to fetch instructions and metadata from."
       },
       "AgentFilterTraceSource": {
         "type": "object",
@@ -16599,7 +19155,6 @@
             "x-ms-foundry-meta": {
               "conditional_previews": [
                 "HostedAgents=V1Preview",
-                "ContainerAgents=V1Preview",
                 "WorkflowAgents=V1Preview",
                 "CodeAgents=V1Preview",
                 "ExternalAgents=V1Preview"
@@ -16649,7 +19204,6 @@
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "HostedAgents=V1Preview",
-            "ContainerAgents=V1Preview",
             "WorkflowAgents=V1Preview",
             "CodeAgents=V1Preview",
             "ExternalAgents=V1Preview"
@@ -16799,7 +19353,6 @@
             "x-ms-foundry-meta": {
               "conditional_previews": [
                 "HostedAgents=V1Preview",
-                "ContainerAgents=V1Preview",
                 "WorkflowAgents=V1Preview",
                 "CodeAgents=V1Preview",
                 "ExternalAgents=V1Preview"
@@ -16823,7 +19376,6 @@
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "HostedAgents=V1Preview",
-            "ContainerAgents=V1Preview",
             "WorkflowAgents=V1Preview",
             "CodeAgents=V1Preview",
             "ExternalAgents=V1Preview"
@@ -17073,6 +19625,380 @@
         ],
         "description": "Daily recurrence schedule."
       },
+      "DataGenerationJob": {
+        "type": "object",
+        "required": [
+          "id",
+          "status",
+          "created_at"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Server-assigned unique identifier.",
+            "readOnly": true
+          },
+          "inputs": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DataGenerationJobInputs"
+              }
+            ],
+            "description": "Caller-supplied inputs."
+          },
+          "result": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DataGenerationJobResult"
+              }
+            ],
+            "description": "Result produced on success.",
+            "readOnly": true
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/JobStatus"
+              }
+            ],
+            "description": "Current lifecycle status.",
+            "readOnly": true
+          },
+          "error": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.Error"
+              }
+            ],
+            "description": "Error details — populated only on failure.",
+            "readOnly": true
+          },
+          "created_at": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "The timestamp when the job was created, represented in Unix time (seconds since January 1, 1970).",
+            "readOnly": true
+          },
+          "finished_at": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "The timestamp when the job was finished, represented in Unix time (seconds since January 1, 1970).",
+            "readOnly": true
+          }
+        },
+        "description": "Data Generation Job resource."
+      },
+      "DataGenerationJobInputs": {
+        "type": "object",
+        "required": [
+          "name",
+          "sources",
+          "options",
+          "scenario"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The display name of the data generation job."
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataGenerationJobSource"
+            },
+            "description": "The sources used for the data generation job."
+          },
+          "options": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DataGenerationJobOptions"
+              }
+            ],
+            "description": "The options for the data generation job."
+          },
+          "scenario": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DataGenerationJobScenario"
+              }
+            ],
+            "description": "The scenario of the data generation job. Either for fine-tuning or evaluation."
+          },
+          "output_options": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DataGenerationJobOutputOptions"
+              }
+            ],
+            "description": "Optional caller-supplied metadata for the job's output. See individual fields for whether they apply to file outputs (fine-tuning scenarios), dataset outputs (evaluation scenario), or both."
+          }
+        },
+        "description": "Caller-supplied inputs for a data generation job."
+      },
+      "DataGenerationJobOptions": {
+        "type": "object",
+        "required": [
+          "type",
+          "max_samples"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DataGenerationJobType"
+              }
+            ],
+            "description": "The data generation job type."
+          },
+          "max_samples": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Maximum number of samples to generate."
+          },
+          "train_split": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "The proportion of the generated data to be used for training when the data is used for fine-tuning. The rest will be used for validation. Value should be between 0 and 1."
+          },
+          "model_options": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DataGenerationModelOptions"
+              }
+            ],
+            "description": "The LLM model options."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "simple_qna": "#/components/schemas/SimpleQnADataGenerationJobOptions",
+            "traces": "#/components/schemas/TracesDataGenerationJobOptions",
+            "tool_use": "#/components/schemas/ToolUseFineTuningDataGenerationJobOptions"
+          }
+        },
+        "description": "Options for managing data generation jobs."
+      },
+      "DataGenerationJobOutput": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DataGenerationJobOutputType"
+              }
+            ],
+            "description": "The type of the output."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "file": "#/components/schemas/FileDataGenerationJobOutput",
+            "dataset": "#/components/schemas/DatasetDataGenerationJobOutput"
+          }
+        },
+        "description": "Output information for a data generation job."
+      },
+      "DataGenerationJobOutputOptions": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name to assign to the output. Used as the filename for Azure OpenAI file outputs (fine-tuning scenarios) and as the dataset name for dataset outputs (evaluation scenario)."
+          },
+          "description": {
+            "type": "string",
+            "description": "Description to assign to the output. Applies only to dataset outputs (evaluation scenario); ignored for Azure OpenAI file outputs."
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Tags to assign to the output. Applies only to dataset outputs (evaluation scenario); ignored for Azure OpenAI file outputs."
+          }
+        },
+        "description": "Output options for data generation job."
+      },
+      "DataGenerationJobOutputType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "file",
+              "dataset"
+            ]
+          }
+        ],
+        "description": "The supported output file types for a data generation job."
+      },
+      "DataGenerationJobResult": {
+        "type": "object",
+        "required": [
+          "generated_samples"
+        ],
+        "properties": {
+          "outputs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataGenerationJobOutput"
+            },
+            "description": "The final job outputs: Azure OpenAI files for fine-tuning, or datasets for evaluation."
+          },
+          "generated_samples": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of samples actually generated."
+          },
+          "token_usage": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DataGenerationTokenUsage"
+              }
+            ],
+            "description": "The token usage information for the data generation job."
+          }
+        },
+        "description": "Result produced by a successful data generation job."
+      },
+      "DataGenerationJobScenario": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "supervised_finetuning",
+              "reinforcement_finetuning",
+              "evaluation"
+            ]
+          }
+        ],
+        "description": "The supported scenarios for a data generation job."
+      },
+      "DataGenerationJobSource": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DataGenerationJobSourceType"
+              }
+            ],
+            "description": "The type of source."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "prompt": "#/components/schemas/PromptDataGenerationJobSource",
+            "agent": "#/components/schemas/AgentDataGenerationJobSource",
+            "traces": "#/components/schemas/TracesDataGenerationJobSource",
+            "dataset": "#/components/schemas/DatasetDataGenerationJobSource",
+            "file": "#/components/schemas/FileDataGenerationJobSource"
+          }
+        },
+        "description": "The base source model for data generation jobs."
+      },
+      "DataGenerationJobSourceType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "prompt",
+              "agent",
+              "traces",
+              "dataset",
+              "file"
+            ]
+          }
+        ],
+        "description": "The supported source types for data generation jobs."
+      },
+      "DataGenerationJobType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "simple_qna",
+              "traces",
+              "tool_use"
+            ]
+          }
+        ],
+        "description": "The supported data generation job types."
+      },
+      "DataGenerationModelOptions": {
+        "type": "object",
+        "required": [
+          "model"
+        ],
+        "properties": {
+          "model": {
+            "type": "string",
+            "description": "Base model name used to generate data."
+          }
+        },
+        "description": "LLM model options for data generation jobs."
+      },
+      "DataGenerationTokenUsage": {
+        "type": "object",
+        "required": [
+          "prompt_tokens",
+          "completion_tokens",
+          "total_tokens"
+        ],
+        "properties": {
+          "prompt_tokens": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The number of prompt tokens used.",
+            "readOnly": true
+          },
+          "completion_tokens": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The number of completion tokens generated.",
+            "readOnly": true
+          },
+          "total_tokens": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Total number of tokens used.",
+            "readOnly": true
+          }
+        },
+        "description": "Token usage information for a data generation job."
+      },
       "DataSourceConfig": {
         "type": "object",
         "required": [
@@ -17095,6 +20021,157 @@
           "mapping": {}
         },
         "description": "Base class for run data sources with discriminator support."
+      },
+      "DatasetDataGenerationJobOutput": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "dataset"
+            ],
+            "description": "Dataset output."
+          },
+          "id": {
+            "type": "string",
+            "description": "The id of the output dataset created.",
+            "readOnly": true
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the output dataset.",
+            "readOnly": true
+          },
+          "version": {
+            "type": "string",
+            "description": "The version of the output dataset.",
+            "readOnly": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the output dataset.",
+            "readOnly": true
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Tag dictionary of the output dataset.",
+            "readOnly": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataGenerationJobOutput"
+          }
+        ],
+        "description": "Dataset output for a data generation job."
+      },
+      "DatasetDataGenerationJobSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "name"
+        ],
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "dataset"
+            ],
+            "description": "The source type for this source, which is Dataset."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the dataset."
+          },
+          "version": {
+            "type": "string",
+            "description": "The version of the dataset. If not specified, the latest version is used."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataGenerationJobSource"
+          }
+        ],
+        "description": "Dataset source for data generation jobs — reference to a dataset."
+      },
+      "DatasetEvaluationSuiteJobSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "name"
+        ],
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "dataset"
+            ],
+            "description": "The source type for this source, which is Dataset."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the dataset."
+          },
+          "version": {
+            "type": "string",
+            "description": "The version of the dataset. If not specified, the latest version is used."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvaluationSuiteJobSource"
+          }
+        ],
+        "description": "Dataset source for evaluation suite generation jobs — reference to a dataset."
+      },
+      "DatasetEvaluatorGenerationJobSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "name"
+        ],
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "dataset"
+            ],
+            "description": "The source type for this source, which is Dataset."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the dataset."
+          },
+          "version": {
+            "type": "string",
+            "description": "The version of the dataset. If not specified, the latest version is used."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvaluatorGenerationJobSource"
+          }
+        ],
+        "description": "Dataset source for evaluator generation jobs — reference to a dataset."
       },
       "DatasetItem": {
         "type": "object",
@@ -17155,6 +20232,24 @@
           }
         },
         "description": "Reference to a registered dataset in the Foundry Dataset Service."
+      },
+      "DatasetReference": {
+        "type": "object",
+        "required": [
+          "name",
+          "version"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Dataset name."
+          },
+          "version": {
+            "type": "string",
+            "description": "Dataset version."
+          }
+        },
+        "description": "Reference to a versioned Foundry Dataset."
       },
       "DatasetType": {
         "anyOf": [
@@ -17541,6 +20636,79 @@
             ]
           }
         ]
+      },
+      "Dimension": {
+        "type": "object",
+        "required": [
+          "dimension_id",
+          "description",
+          "weight"
+        ],
+        "properties": {
+          "dimension_id": {
+            "type": "string",
+            "description": "Stable identifier for this dimension (snake_case, e.g., `correct_resolution`). Required. Provided by the user when manually creating a rubric evaluator or during human-in-the-loop review of a generated set; the generation pipeline produces an initial value the user can edit. Editable when saving new versions."
+          },
+          "description": {
+            "type": "string",
+            "description": "What this dimension measures (e.g., 'Correctly identifies the user's reservation intent and pursues the appropriate workflow')."
+          },
+          "weight": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 10,
+            "description": "Relative weight of this dimension (1-10). The generation pipeline assigns exactly one dimension weight 8-10; all others use 1-6. User edits are not constrained by this heuristic."
+          },
+          "always_applicable": {
+            "type": "boolean",
+            "description": "When true, the LLM judge always scores this dimension regardless of relevance (skips applicability assessment). The service-generated general quality/policy dimension has this set to true and is non-editable. Users may set this on their own custom dimensions.",
+            "default": false
+          }
+        },
+        "description": "A single dimension — one independent, measurable quality dimension within a rubric evaluator's scoring blueprint."
+      },
+      "DispatchRoutineRequest": {
+        "type": "object",
+        "properties": {
+          "payload": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RoutineDispatchPayload"
+              }
+            ],
+            "description": "A direct action-input override sent downstream when testing a routine."
+          }
+        },
+        "description": "Request body for the public dispatch_async route.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
+      "DispatchRoutineResponse": {
+        "type": "object",
+        "properties": {
+          "dispatch_id": {
+            "type": "string",
+            "description": "The dispatch identifier created for the routine dispatch."
+          },
+          "action_correlation_id": {
+            "type": "string",
+            "description": "A downstream action correlation identifier, when available."
+          },
+          "task_id": {
+            "type": "string",
+            "description": "A workspace task identifier created for the dispatch, when available."
+          }
+        },
+        "description": "Identifiers returned after a routine dispatch is queued.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
       },
       "EntraAuthorizationScheme": {
         "type": "object",
@@ -18377,6 +21545,23 @@
         },
         "description": "LLM-as-judge evaluation criterion applied to a single task."
       },
+      "EvaluationDataGenerationType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "simple_qna",
+              "traces",
+              "tool_use",
+              "task"
+            ]
+          }
+        ],
+        "description": "The data generation type."
+      },
       "EvaluationDatasetReference": {
         "type": "object",
         "required": [
@@ -18673,6 +21858,250 @@
           }
         ],
         "description": "Evaluation task for the schedule."
+      },
+      "EvaluationSuiteDataGenerationOptions": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationDataGenerationType"
+              }
+            ],
+            "description": "The data generation type. Defaults to 'simple_qna' if not specified."
+          },
+          "max_samples": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 15,
+            "maximum": 1000,
+            "description": "Maximum number of samples to generate. Valid range: 15-1000."
+          }
+        },
+        "description": "Options for dataset generation within an evaluation suite generation job."
+      },
+      "EvaluationSuiteGenerationCategory": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "quality",
+              "safety"
+            ]
+          }
+        ],
+        "description": "The category of evaluator generation."
+      },
+      "EvaluationSuiteGenerationJob": {
+        "type": "object",
+        "required": [
+          "id",
+          "status",
+          "created_at"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Server-assigned unique identifier.",
+            "readOnly": true
+          },
+          "inputs": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationSuiteGenerationJobInputs"
+              }
+            ],
+            "description": "Caller-supplied inputs."
+          },
+          "result": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationSuiteVersion"
+              }
+            ],
+            "description": "Result produced on success.",
+            "readOnly": true
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/JobStatus"
+              }
+            ],
+            "description": "Current lifecycle status.",
+            "readOnly": true
+          },
+          "error": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.Error"
+              }
+            ],
+            "description": "Error details — populated only on failure.",
+            "readOnly": true
+          },
+          "created_at": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "The timestamp when the job was created, represented in Unix time.",
+            "readOnly": true
+          },
+          "finished_at": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "The timestamp when the job finished, represented in Unix time.",
+            "readOnly": true
+          },
+          "usage": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationSuiteGenerationTokenUsage"
+              }
+            ],
+            "description": "Token consumption summary. Populated on terminal states.",
+            "readOnly": true
+          }
+        },
+        "description": "Evaluation suite generation job resource — a long-running job that generates testing criteria and optionally a dataset from source materials. On success, the result is the persisted EvaluationSuiteVersion."
+      },
+      "EvaluationSuiteGenerationJobCreate": {
+        "type": "object",
+        "properties": {
+          "inputs": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationSuiteGenerationJobInputs"
+              }
+            ],
+            "description": "Caller-supplied inputs."
+          }
+        },
+        "description": "Evaluation suite generation job resource — a long-running job that generates testing criteria and optionally a dataset from source materials. On success, the result is the persisted EvaluationSuiteVersion."
+      },
+      "EvaluationSuiteGenerationJobInputs": {
+        "type": "object",
+        "required": [
+          "evaluation_suite_name",
+          "sources",
+          "generation_model"
+        ],
+        "properties": {
+          "evaluation_suite_name": {
+            "type": "string",
+            "description": "The evaluation suite name to create."
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EvaluationSuiteJobSource"
+            },
+            "description": "Source materials for generation — agent context, prompts, traces, or datasets."
+          },
+          "generation_model": {
+            "type": "string",
+            "description": "The LLM model to use for rubric and data generation (e.g., 'gpt-4o')."
+          },
+          "category": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationSuiteGenerationCategory"
+              }
+            ],
+            "description": "Category determines the generation focus. Default: quality.",
+            "default": "quality"
+          },
+          "initialization_parameters": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Optional initialization parameters applied to all generated evaluators.\nFor example, deployment_name for LLM judge model, default threshold."
+          },
+          "data_generation_options": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationSuiteDataGenerationOptions"
+              }
+            ],
+            "description": "Data generation options. Controls how the evaluation dataset is generated.\nIf omitted, defaults are used (simple_qna, 100 max_samples)."
+          }
+        },
+        "description": "Caller-supplied inputs for an evaluation suite generation job."
+      },
+      "EvaluationSuiteGenerationTokenUsage": {
+        "type": "object",
+        "properties": {
+          "input_tokens": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Number of input tokens consumed."
+          },
+          "output_tokens": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Number of output tokens consumed."
+          },
+          "total_tokens": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Total tokens consumed."
+          }
+        },
+        "description": "Token usage summary for an evaluation suite generation job."
+      },
+      "EvaluationSuiteJobSource": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationSuiteJobSourceType"
+              }
+            ],
+            "description": "The type of source."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "prompt": "#/components/schemas/PromptEvaluationSuiteJobSource",
+            "agent": "#/components/schemas/AgentEvaluationSuiteJobSource",
+            "traces": "#/components/schemas/TracesEvaluationSuiteJobSource",
+            "dataset": "#/components/schemas/DatasetEvaluationSuiteJobSource"
+          }
+        },
+        "description": "The base source model for evaluation suite generation jobs. Polymorphic over `type`."
+      },
+      "EvaluationSuiteJobSourceType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "prompt",
+              "agent",
+              "traces",
+              "dataset"
+            ]
+          }
+        ],
+        "description": "The supported source types for evaluation suite generation jobs."
       },
       "EvaluationSuiteRunRequest": {
         "type": "object",
@@ -19262,6 +22691,25 @@
         ],
         "description": "The category of the evaluator"
       },
+      "EvaluatorCredentialRequest": {
+        "type": "object",
+        "required": [
+          "blob_uri"
+        ],
+        "properties": {
+          "blob_uri": {
+            "type": "string",
+            "format": "uri",
+            "description": "The blob URI for the evaluator storage. Example: `https://account.blob.core.windows.net:443/container`"
+          }
+        },
+        "description": "Request body for getting evaluator credentials",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
       "EvaluatorDefinition": {
         "type": "object",
         "required": [
@@ -19298,7 +22746,8 @@
           "propertyName": "type",
           "mapping": {
             "code": "#/components/schemas/CodeBasedEvaluatorDefinition",
-            "prompt": "#/components/schemas/PromptBasedEvaluatorDefinition"
+            "prompt": "#/components/schemas/PromptBasedEvaluatorDefinition",
+            "rubric": "#/components/schemas/RubricBasedEvaluatorDefinition"
           }
         },
         "description": "Base evaluator configuration with discriminator"
@@ -19315,11 +22764,235 @@
               "code",
               "prompt_and_code",
               "service",
-              "openai_graders"
+              "openai_graders",
+              "rubric"
             ]
           }
         ],
         "description": "The type of evaluator definition"
+      },
+      "EvaluatorGenerationArtifacts": {
+        "type": "object",
+        "required": [
+          "dataset",
+          "kinds"
+        ],
+        "properties": {
+          "dataset": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DatasetReference"
+              }
+            ],
+            "description": "Reference to the single Foundry Dataset (one combined JSONL file, version-aligned to `EvaluatorVersion.version`) holding all artifacts produced by the generation pipeline. Each row in the JSONL carries a `kind` field discriminating its content (e.g. `spec`, `tools`, `context`)."
+          },
+          "kinds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The kinds of rows present in `dataset`. Always contains `\"spec\"` (the generated evaluation specification, a Markdown document describing what the evaluator measures). May additionally contain `\"tools\"` (when the generation pipeline produced or inferred OpenAI tool schemas) and/or `\"context\"` (when supplementary materials such as file uploads or trace samples were used during generation)."
+          }
+        },
+        "description": "Service-managed provenance artifacts produced by an evaluator generation job. Present only on EvaluatorVersion resources created via the generation pipeline. The combined-JSONL Foundry Dataset is read-only and resolves to a versioned dataset in a service-reserved namespace."
+      },
+      "EvaluatorGenerationInputs": {
+        "type": "object",
+        "required": [
+          "sources",
+          "model",
+          "evaluator_name"
+        ],
+        "properties": {
+          "sources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EvaluatorGenerationJobSource"
+            },
+            "description": "Source materials for generation — agent descriptions, prompts, traces, or datasets. Each entry is an `EvaluatorGenerationJobSource` variant discriminated by `type`."
+          },
+          "model": {
+            "type": "string",
+            "description": "The LLM model to use for rubric generation (e.g., 'gpt-4o'). Required — users must provide their own model rather than relying on service-owned capacity."
+          },
+          "evaluator_name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "pattern": "^[A-Za-z0-9_.~-]+$",
+            "description": "The evaluator name (immutable identifier). 1-256 characters; allowed characters are ASCII letters, digits, underscore (`_`), period (`.`), tilde (`~`), and hyphen (`-`). The prefix `builtin.` is reserved for system-managed evaluators and is rejected by the service. If an evaluator with this name already exists in the project (and is rubric-subtype), the service creates a new version under the same name and uses the prior version's `dimensions` as context for incremental improvement (foundation of the post-//build adaptive loop). Old versions remain queryable via `get_version(name, version)`. If the existing evaluator is not a rubric-subtype evaluator (built-in, prompt-based, code-based), the request is rejected with `400 Bad Request`."
+          },
+          "evaluator_display_name": {
+            "type": "string",
+            "description": "Optional human-friendly display name for the resulting evaluator. Surfaced as `EvaluatorVersion.display_name` on the persisted evaluator. When omitted, the service uses `evaluator_name` as the display name. The `evaluator_` prefix disambiguates this from the immutable `evaluator_name` identifier."
+          },
+          "evaluator_description": {
+            "type": "string",
+            "description": "Optional human-friendly description for the resulting evaluator. Surfaced as `EvaluatorVersion.description` on the persisted evaluator. Typically collected from the UI alongside `evaluator_display_name`. The `evaluator_` prefix disambiguates this from any other description fields on related models."
+          }
+        },
+        "description": "Caller-supplied inputs for an evaluator generation job."
+      },
+      "EvaluatorGenerationJob": {
+        "type": "object",
+        "required": [
+          "id",
+          "status",
+          "created_at"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Server-assigned unique identifier.",
+            "readOnly": true
+          },
+          "inputs": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluatorGenerationInputs"
+              }
+            ],
+            "description": "Caller-supplied inputs."
+          },
+          "result": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluatorVersion"
+              }
+            ],
+            "description": "Result produced on success.",
+            "readOnly": true
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/JobStatus"
+              }
+            ],
+            "description": "Current lifecycle status.",
+            "readOnly": true
+          },
+          "error": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.Error"
+              }
+            ],
+            "description": "Error details — populated only on failure.",
+            "readOnly": true
+          },
+          "created_at": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "The timestamp when the job was created, represented in Unix time (seconds since January 1, 1970).",
+            "readOnly": true
+          },
+          "finished_at": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "The timestamp when the job finished, represented in Unix time (seconds since January 1, 1970).",
+            "readOnly": true
+          },
+          "usage": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluatorGenerationTokenUsage"
+              }
+            ],
+            "description": "Token consumption summary. Populated when the job reaches a terminal state.",
+            "readOnly": true
+          }
+        },
+        "description": "Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion."
+      },
+      "EvaluatorGenerationJobCreate": {
+        "type": "object",
+        "properties": {
+          "inputs": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluatorGenerationInputs"
+              }
+            ],
+            "description": "Caller-supplied inputs."
+          }
+        },
+        "description": "Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion."
+      },
+      "EvaluatorGenerationJobSource": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluatorGenerationJobSourceType"
+              }
+            ],
+            "description": "The type of source."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "prompt": "#/components/schemas/PromptEvaluatorGenerationJobSource",
+            "agent": "#/components/schemas/AgentEvaluatorGenerationJobSource",
+            "traces": "#/components/schemas/TracesEvaluatorGenerationJobSource",
+            "dataset": "#/components/schemas/DatasetEvaluatorGenerationJobSource"
+          }
+        },
+        "description": "The base source model for evaluator generation jobs. Polymorphic over `type`."
+      },
+      "EvaluatorGenerationJobSourceType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "prompt",
+              "agent",
+              "traces",
+              "dataset"
+            ]
+          }
+        ],
+        "description": "The supported source types for evaluator generation jobs."
+      },
+      "EvaluatorGenerationTokenUsage": {
+        "type": "object",
+        "required": [
+          "input_tokens",
+          "output_tokens",
+          "total_tokens"
+        ],
+        "properties": {
+          "input_tokens": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Number of input (prompt) tokens consumed."
+          },
+          "output_tokens": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Number of output (completion) tokens generated."
+          },
+          "total_tokens": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Total tokens consumed (input + output)."
+          }
+        },
+        "description": "Token consumption summary for an evaluator generation job. Populated when the job reaches a terminal state."
       },
       "EvaluatorMetric": {
         "type": "object",
@@ -19455,6 +23128,15 @@
               }
             ],
             "description": "Definition of the evaluator"
+          },
+          "generation_artifacts": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluatorGenerationArtifacts"
+              }
+            ],
+            "description": "Provenance artifacts from the generation pipeline. Read-only; present only on evaluator versions created via an EvaluatorGenerationJob. Each artifact resolves to a versioned Foundry Dataset.",
+            "readOnly": true
           },
           "created_by": {
             "type": "string",
@@ -19594,8 +23276,7 @@
           },
           "otel_agent_id": {
             "type": "string",
-            "description": "The OpenTelemetry agent identifier used to attribute customer-emitted spans to this Foundry agent.\nSpans must include the attribute `gen_ai.agent.id = <otel_agent_id>` to appear under this registration.\nDefaults to the top-level agent name when omitted. Provide an explicit value only for migration scenarios\nwhere the running external agent already emits a stable id that differs from the Foundry agent name.\nThe resolved value is always echoed on read.",
-            "example": "gcp-travel-planner-agent"
+            "description": "The OpenTelemetry agent identifier used to attribute customer-emitted spans to this Foundry agent.\nSpans must include the attribute `gen_ai.agent.id = <otel_agent_id>` to appear under this registration.\nDefaults to the top-level agent name when omitted. Provide an explicit value only for migration scenarios\nwhere the running external agent already emits a stable id that differs from the Foundry agent name.\nThe resolved value is always echoed on read."
           }
         },
         "allOf": [
@@ -19773,6 +23454,65 @@
           }
         ],
         "description": "A FabricIQ server-side tool."
+      },
+      "FileDataGenerationJobOutput": {
+        "type": "object",
+        "required": [
+          "type",
+          "id",
+          "filename"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "file"
+            ],
+            "description": "Azure OpenAI file output."
+          },
+          "id": {
+            "type": "string",
+            "description": "The id of the output Azure OpenAI file.",
+            "readOnly": true
+          },
+          "filename": {
+            "type": "string",
+            "description": "The filename of the output Azure OpenAI file.",
+            "readOnly": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataGenerationJobOutput"
+          }
+        ],
+        "description": "Azure OpenAI file output for a data generation job."
+      },
+      "FileDataGenerationJobSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "file"
+            ],
+            "description": "The source type for this job, which is File."
+          },
+          "id": {
+            "type": "string",
+            "description": "Input Azure Open AI file id used for data generation."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataGenerationJobSource"
+          }
+        ],
+        "description": "File source for data generation jobs — Azure OpenAI file input."
       },
       "FileDatasetVersion": {
         "type": "object",
@@ -20024,6 +23764,50 @@
           }
         },
         "description": "Details of a function tool call."
+      },
+      "GitHubIssueOpenedRoutineTrigger": {
+        "type": "object",
+        "required": [
+          "type",
+          "connection_id",
+          "assignee",
+          "repository"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "github_issue_opened"
+            ],
+            "description": "The trigger type."
+          },
+          "connection_id": {
+            "type": "string",
+            "maxLength": 256,
+            "description": "The workspace connection identifier that resolves the GitHub configuration for the trigger."
+          },
+          "assignee": {
+            "type": "string",
+            "maxLength": 128,
+            "description": "The GitHub assignee or organization filter that scopes which issues can fire the trigger."
+          },
+          "repository": {
+            "type": "string",
+            "maxLength": 128,
+            "description": "The GitHub repository filter that scopes which issues can fire the trigger."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RoutineTrigger"
+          }
+        ],
+        "description": "A GitHub issue-opened routine trigger.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
       },
       "HeaderTelemetryEndpointAuth": {
         "type": "object",
@@ -20664,6 +24448,146 @@
           }
         },
         "description": "Metadata about the insights."
+      },
+      "InvokeAgentInvocationsApiDispatchPayload": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "invoke_agent_invocations_api"
+            ],
+            "description": "The manual dispatch payload type."
+          },
+          "input": {
+            "type": "string",
+            "maxLength": 32768,
+            "description": "The raw input sent to the downstream invocations target."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RoutineDispatchPayload"
+          }
+        ],
+        "description": "A manual payload used to test an invocations API routine dispatch.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
+      "InvokeAgentInvocationsApiRoutineAction": {
+        "type": "object",
+        "required": [
+          "type",
+          "agent_endpoint_id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "invoke_agent_invocations_api"
+            ],
+            "description": "The action type."
+          },
+          "agent_endpoint_id": {
+            "type": "string",
+            "maxLength": 256,
+            "description": "The endpoint-scoped agent identifier for invocations API dispatch."
+          },
+          "session_id": {
+            "type": "string",
+            "maxLength": 256,
+            "description": "An optional existing hosted-agent session identifier to continue during the downstream dispatch."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RoutineAction"
+          }
+        ],
+        "description": "Dispatches a routine through the raw invocations API.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
+      "InvokeAgentResponsesApiDispatchPayload": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "invoke_agent_responses_api"
+            ],
+            "description": "The manual dispatch payload type."
+          },
+          "input": {
+            "type": "string",
+            "maxLength": 32768,
+            "description": "The user input sent to the downstream responses target."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RoutineDispatchPayload"
+          }
+        ],
+        "description": "A manual payload used to test a responses API routine dispatch.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
+      "InvokeAgentResponsesApiRoutineAction": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "invoke_agent_responses_api"
+            ],
+            "description": "The action type."
+          },
+          "agent_name": {
+            "type": "string",
+            "maxLength": 256,
+            "description": "The project-scoped agent name for responses API dispatch."
+          },
+          "agent_endpoint_id": {
+            "type": "string",
+            "maxLength": 256,
+            "description": "The endpoint-scoped agent identifier for responses API dispatch."
+          },
+          "conversation_id": {
+            "type": "string",
+            "maxLength": 256,
+            "description": "An optional existing conversation identifier to continue during the downstream dispatch."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RoutineAction"
+          }
+        ],
+        "description": "Dispatches a routine through the responses API. Exactly one of agent_name or agent_endpoint_id must be provided.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
       },
       "ItemGenerationParams": {
         "type": "object",
@@ -42970,6 +46894,96 @@
         ],
         "description": "Prompt-based evaluator"
       },
+      "PromptDataGenerationJobSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "prompt"
+        ],
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "prompt"
+            ],
+            "description": "The source type for this source, which is Prompt."
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Inline prompt text (e.g., agent description, policy text, supplementary context)."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataGenerationJobSource"
+          }
+        ],
+        "description": "Prompt source for data generation jobs — inline text provided by the user."
+      },
+      "PromptEvaluationSuiteJobSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "prompt"
+        ],
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "prompt"
+            ],
+            "description": "The source type for this source, which is Prompt."
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Inline prompt text (e.g., agent description, policy text, supplementary context)."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvaluationSuiteJobSource"
+          }
+        ],
+        "description": "Prompt source for evaluation suite generation jobs — inline text provided by the user."
+      },
+      "PromptEvaluatorGenerationJobSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "prompt"
+        ],
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "prompt"
+            ],
+            "description": "The source type for this source, which is Prompt."
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Inline prompt text (e.g., agent description, policy text, supplementary context)."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvaluatorGenerationJobSource"
+          }
+        ],
+        "description": "Prompt source for evaluator generation jobs — inline text provided by the user."
+      },
       "ProtocolVersionRecord": {
         "type": "object",
         "required": [
@@ -43425,6 +47439,488 @@
         ],
         "description": "Risk category for the attack objective."
       },
+      "Routine": {
+        "type": "object",
+        "required": [
+          "name",
+          "enabled",
+          "triggers",
+          "action"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 128,
+            "description": "The routine name."
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 1024,
+            "description": "A human-readable description of the routine."
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "Whether the routine is enabled."
+          },
+          "triggers": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/RoutineTrigger"
+            },
+            "description": "The triggers configured for the routine."
+          },
+          "action": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RoutineAction"
+              }
+            ],
+            "description": "The action executed when the routine fires."
+          },
+          "created_at": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "The time when the routine was created."
+          },
+          "updated_at": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "The time when the routine was last updated."
+          }
+        },
+        "description": "A routine definition returned by the service.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
+      "RoutineAction": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RoutineActionType"
+              }
+            ],
+            "description": "The action type."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "invoke_agent_responses_api": "#/components/schemas/InvokeAgentResponsesApiRoutineAction",
+            "invoke_agent_invocations_api": "#/components/schemas/InvokeAgentInvocationsApiRoutineAction"
+          }
+        },
+        "description": "Base model for a routine action.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
+      "RoutineActionType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "invoke_agent_responses_api",
+              "invoke_agent_invocations_api"
+            ]
+          }
+        ],
+        "description": "The discriminator values supported for routine actions.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
+      "RoutineAttemptSource": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "event_fire",
+              "manual_dispatch",
+              "queued_dispatch",
+              "schedule_delivery",
+              "timer_delivery"
+            ]
+          }
+        ],
+        "description": "Known source paths that can produce a routine run.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
+      "RoutineCreateOrUpdateRequest": {
+        "type": "object",
+        "required": [
+          "triggers",
+          "action"
+        ],
+        "properties": {
+          "description": {
+            "type": "string",
+            "maxLength": 1024,
+            "description": "A human-readable description of the routine."
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "Whether the routine is enabled."
+          },
+          "triggers": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/RoutineTrigger"
+            },
+            "description": "The triggers configured for the routine. In v1, exactly one trigger entry is supported."
+          },
+          "action": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RoutineAction"
+              }
+            ],
+            "description": "The action executed when the routine fires."
+          }
+        },
+        "description": "The request body used to create or update a routine.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
+      "RoutineDispatchPayload": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RoutineDispatchPayloadType"
+              }
+            ],
+            "description": "The manual dispatch payload type."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "invoke_agent_responses_api": "#/components/schemas/InvokeAgentResponsesApiDispatchPayload",
+            "invoke_agent_invocations_api": "#/components/schemas/InvokeAgentInvocationsApiDispatchPayload"
+          }
+        },
+        "description": "Base model for a manual dispatch payload.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
+      "RoutineDispatchPayloadType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "invoke_agent_responses_api",
+              "invoke_agent_invocations_api"
+            ]
+          }
+        ],
+        "description": "The discriminator values supported for manual routine dispatch payloads.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
+      "RoutineRun": {
+        "type": "object",
+        "required": [
+          "id",
+          "status",
+          "trigger_type",
+          "started_at"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The MLflow run identifier for the routine attempt."
+          },
+          "status": {
+            "type": "string",
+            "description": "The underlying MLflow run status."
+          },
+          "phase": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RoutineRunPhase"
+              }
+            ],
+            "description": "The AgentExtensions lifecycle phase for the routine attempt."
+          },
+          "trigger_type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RoutineTriggerType"
+              }
+            ],
+            "description": "The trigger type that produced the routine attempt."
+          },
+          "attempt_source": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RoutineAttemptSource"
+              }
+            ],
+            "description": "The source path that created the routine attempt."
+          },
+          "action_type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RoutineActionType"
+              }
+            ],
+            "description": "The action type dispatched for the routine attempt."
+          },
+          "triggered_at": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "The logical trigger time recorded for the routine attempt."
+          },
+          "started_at": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "The time when the underlying run started."
+          },
+          "ended_at": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "The time when the underlying run reached a terminal state."
+          },
+          "dispatch_id": {
+            "type": "string",
+            "description": "The dispatch identifier associated with the routine attempt."
+          },
+          "action_correlation_id": {
+            "type": "string",
+            "description": "The downstream action correlation identifier, when available."
+          },
+          "response_id": {
+            "type": "string",
+            "description": "The downstream response or invocation identifier, when available."
+          },
+          "task_id": {
+            "type": "string",
+            "description": "The workspace task identifier linked to the routine attempt, when available."
+          },
+          "error_type": {
+            "type": "string",
+            "description": "The fully qualified error type captured for a failed attempt, when available."
+          },
+          "error_message": {
+            "type": "string",
+            "description": "The truncated failure message captured for a failed attempt, when available."
+          },
+          "diagnostics": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RoutineRunDiagnostics"
+              }
+            ],
+            "description": "Diagnostic data captured for the routine attempt."
+          }
+        },
+        "description": "A single routine run returned from the run history API.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
+      "RoutineRunDiagnostics": {
+        "type": "object",
+        "required": [
+          "parameters",
+          "tags",
+          "metrics"
+        ],
+        "properties": {
+          "parameters": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "MLflow parameters recorded on the run, keyed by parameter name."
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "MLflow tags recorded on the run, keyed by tag name."
+          },
+          "metrics": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "number",
+              "format": "double"
+            },
+            "description": "Latest MLflow metric values recorded on the run, keyed by metric name."
+          }
+        },
+        "description": "Generic diagnostics captured on a routine run.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
+      "RoutineRunPhase": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "queued",
+              "dispatching",
+              "completed",
+              "failed"
+            ]
+          }
+        ],
+        "description": "Known lifecycle phases recorded for a routine run.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
+      "RoutineTrigger": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RoutineTriggerType"
+              }
+            ],
+            "description": "The trigger type."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "schedule": "#/components/schemas/ScheduleRoutineTrigger",
+            "timer": "#/components/schemas/TimerRoutineTrigger",
+            "github_issue_opened": "#/components/schemas/GitHubIssueOpenedRoutineTrigger"
+          }
+        },
+        "description": "Base model for a routine trigger.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
+      "RoutineTriggerType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "github_issue_opened",
+              "schedule",
+              "timer"
+            ]
+          }
+        ],
+        "description": "The discriminator values supported for routine triggers.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
+      "RubricBasedEvaluatorDefinition": {
+        "type": "object",
+        "required": [
+          "type",
+          "dimensions"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "rubric"
+            ]
+          },
+          "dimensions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Dimension"
+            },
+            "description": "The set of dimensions — the scoring blueprint used by the LLM judge. Quality evaluators include a non-editable residual dimension with dimension_id 'general_quality' (always_applicable: true); safety evaluators include 'general_policy_compliance'. Both use the same Dimension structure."
+          },
+          "pass_threshold": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Pass/fail threshold for the aggregate rubric score, on the same normalized 0.0-1.0 scale as the emitted `score`. When the runtime weighted average meets or exceeds this value, the result is `pass`. Defaults to 0.5 (equivalent to a raw 1-5 weighted average of 3.0). The 'any dimension scored 1 → fail' rule still applies regardless of this threshold.",
+            "default": 0.5
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvaluatorDefinition"
+          }
+        ],
+        "description": "Rubric-based evaluator definition — stores dimensions produced by the generate API. Used for both quality and safety evaluators."
+      },
       "SASCredentials": {
         "type": "object",
         "required": [
@@ -43583,6 +48079,42 @@
           }
         ],
         "description": "Schedule provisioning status."
+      },
+      "ScheduleRoutineTrigger": {
+        "type": "object",
+        "required": [
+          "type",
+          "cron_expression",
+          "time_zone"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "schedule"
+            ],
+            "description": "The trigger type."
+          },
+          "cron_expression": {
+            "type": "string",
+            "description": "A 5-field cron expression. The service enforces a minimum interval of five minutes by default."
+          },
+          "time_zone": {
+            "type": "string",
+            "description": "An IANA or Windows time zone identifier for the schedule."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RoutineTrigger"
+          }
+        ],
+        "description": "A recurring cron-based routine trigger.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
       },
       "ScheduleRun": {
         "type": "object",
@@ -43931,6 +48463,49 @@
           }
         ],
         "description": "The input definition information for a sharepoint tool as used to configure an agent."
+      },
+      "SimpleQnADataGenerationJobOptions": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "simple_qna"
+            ],
+            "description": "The data generation job type, which is SimpleQnA for this model."
+          },
+          "question_types": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SimpleQnAFineTuningQuestionType"
+            },
+            "description": "The question types to generate. Used only for fine-tuning scenarios."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataGenerationJobOptions"
+          }
+        ],
+        "description": "The options for a data generation job with SimpleQnA type."
+      },
+      "SimpleQnAFineTuningQuestionType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "short_answer",
+              "long_answer"
+            ]
+          }
+        ],
+        "description": "The supported question types for SimpleQnA data generation jobs used for fine-tuning scenarios."
       },
       "SkillObject": {
         "type": "object",
@@ -44608,6 +49183,41 @@
         "description": "An Azure AI Evaluator grader used as testing criterion in evaluations.",
         "title": "AzureAIEvaluatorGrader"
       },
+      "TimerRoutineTrigger": {
+        "type": "object",
+        "required": [
+          "type",
+          "at"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "timer"
+            ],
+            "description": "The trigger type."
+          },
+          "at": {
+            "type": "string",
+            "description": "A future timer expression. Supported values include an ISO-8601 timestamp with an explicit offset, a local timestamp paired with time_zone, or a positive duration from now."
+          },
+          "time_zone": {
+            "type": "string",
+            "description": "An optional IANA or Windows time zone identifier when the timer uses a local timestamp."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RoutineTrigger"
+          }
+        ],
+        "description": "A one-shot timer routine trigger.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
       "ToolCallOutputContent": {
         "anyOf": [
           {
@@ -44676,6 +49286,27 @@
         },
         "description": "A project connection resource."
       },
+      "ToolUseFineTuningDataGenerationJobOptions": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "tool_use"
+            ],
+            "description": "The data generation job type, which is ToolUse for this model."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataGenerationJobOptions"
+          }
+        ],
+        "description": "The options for a data generation job with ToolUse type. Used only for fine-tuning scenarios."
+      },
       "ToolboxObject": {
         "type": "object",
         "required": [
@@ -44734,6 +49365,13 @@
           "description": {
             "type": "string",
             "description": "Optional user-defined description for this tool or configuration."
+          },
+          "tool_configs": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
           }
         },
         "allOf": [
@@ -44873,6 +49511,189 @@
           }
         ],
         "description": "Specifies the type of trace source used to select traces for evaluation."
+      },
+      "TracesDataGenerationJobOptions": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "traces"
+            ],
+            "description": "The data generation job type, which is Traces for this model."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataGenerationJobOptions"
+          }
+        ],
+        "description": "The options for a data generation job with Traces type."
+      },
+      "TracesDataGenerationJobSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "start_time"
+        ],
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "traces"
+            ],
+            "description": "The source type for this source, which is Traces."
+          },
+          "agent_id": {
+            "type": "string",
+            "description": "The unique agent ID used to filter traces. Provide either `agent_id` or `agent_name` — at least one is required."
+          },
+          "agent_name": {
+            "type": "string",
+            "description": "The agent name to fetch traces for. Provide either `agent_id` or `agent_name` — at least one is required."
+          },
+          "agent_version": {
+            "type": "string",
+            "description": "The agent version. If not specified, traces for ALL versions of the agent are included within the time window."
+          },
+          "start_time": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "Start of the time window (Unix timestamp in seconds) for fetching traces."
+          },
+          "end_time": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "End of the time window (Unix timestamp in seconds). Defaults to current time."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataGenerationJobSource"
+          }
+        ],
+        "description": "Traces source for data generation jobs — conversation traces from Application Insights."
+      },
+      "TracesEvaluationSuiteJobSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "start_time"
+        ],
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "traces"
+            ],
+            "description": "The source type for this source, which is Traces."
+          },
+          "agent_id": {
+            "type": "string",
+            "description": "The unique agent ID used to filter traces. Provide either `agent_id` or `agent_name` — at least one is required."
+          },
+          "agent_name": {
+            "type": "string",
+            "description": "The agent name to fetch traces for. Provide either `agent_id` or `agent_name` — at least one is required."
+          },
+          "agent_version": {
+            "type": "string",
+            "description": "The agent version. If not specified, traces for ALL versions of the agent are included within the time window."
+          },
+          "start_time": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "Start of the time window (Unix timestamp in seconds) for fetching traces."
+          },
+          "end_time": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "End of the time window (Unix timestamp in seconds). Defaults to current time."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvaluationSuiteJobSource"
+          }
+        ],
+        "description": "Traces source for evaluation suite generation jobs — conversation traces from Application Insights."
+      },
+      "TracesEvaluatorGenerationJobSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "start_time"
+        ],
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "traces"
+            ],
+            "description": "The source type for this source, which is Traces."
+          },
+          "agent_id": {
+            "type": "string",
+            "description": "The unique agent ID used to filter traces. Provide either `agent_id` or `agent_name` — at least one is required."
+          },
+          "agent_name": {
+            "type": "string",
+            "description": "The agent name to fetch traces for. Provide either `agent_id` or `agent_name` — at least one is required."
+          },
+          "agent_version": {
+            "type": "string",
+            "description": "The agent version. If not specified, traces for ALL versions of the agent are included within the time window."
+          },
+          "start_time": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "Start of the time window (Unix timestamp in seconds) for fetching traces."
+          },
+          "end_time": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "End of the time window (Unix timestamp in seconds). Defaults to current time."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvaluatorGenerationJobSource"
+          }
+        ],
+        "description": "Traces source for evaluator generation jobs — conversation traces from Application Insights."
       },
       "TracesPreviewEvalRunDataSource": {
         "type": "object",
@@ -45062,7 +49883,6 @@
             "x-ms-foundry-meta": {
               "conditional_previews": [
                 "HostedAgents=V1Preview",
-                "ContainerAgents=V1Preview",
                 "WorkflowAgents=V1Preview",
                 "CodeAgents=V1Preview",
                 "ExternalAgents=V1Preview"
