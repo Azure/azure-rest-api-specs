@@ -629,6 +629,13 @@ using Microsoft.DataMigration;
   "csharp"
 );
 
+// --- Property renames for GA compat (replacing SDK-side shims) ---
+@@clientName(MongoDbClusterInfo.type, "ClusterType", "csharp");
+@@clientName(MongoDbError.type, "ErrorType", "csharp");
+@@clientName(ResourceSkuCosts.meterID, "MeterId", "csharp");
+@@clientName(ResourceSkuRestrictions.type, "RestrictionsType", "csharp");
+@@clientName(NameAvailabilityRequest.type, "ResourceType", "csharp");
+
 // --- Naming convention fixes (AZC0030) ---
 @@clientName(
   MongoMigrationCollection,
