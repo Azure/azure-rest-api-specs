@@ -27,7 +27,9 @@ op accountsCreateOrUpdate(
    */
   @body
   parameters: Account,
-): ArmResourceUpdatedResponse<Account> | ArmResourceCreatedSyncResponse<Account>;
+):
+  | ArmResourceUpdatedResponse<Account>
+  | ArmResourceCreatedSyncResponse<Account>;
 
 @@override(Accounts.createOrUpdate, accountsCreateOrUpdate);
 
@@ -111,7 +113,9 @@ op enterpriseCreateOrUpdate(
    */
   @body
   parameters: EnterprisePolicy,
-): ArmResourceUpdatedResponse<EnterprisePolicy> | ArmResourceCreatedSyncResponse<EnterprisePolicy>;
+):
+  | ArmResourceUpdatedResponse<EnterprisePolicy>
+  | ArmResourceCreatedSyncResponse<EnterprisePolicy>;
 
 @@override(EnterprisePolicies.createOrUpdate, enterpriseCreateOrUpdate);
 

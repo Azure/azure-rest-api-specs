@@ -232,18 +232,23 @@ interface Machines {
 @@minLength(Machine.name, 1);
 @@doc(Machine.name, "The name of the hybrid machine.");
 @@doc(Machine.properties, "Hybrid Compute Machine properties");
-@@doc(Machines.createOrUpdate::parameters.resource,
+@@doc(
+  Machines.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create hybrid machine operation."
 );
-@@doc(Machines.update::parameters.properties,
+@@doc(
+  Machines.update::parameters.properties,
   "Parameters supplied to the Update hybrid machine operation."
 );
-@@doc(Machines.installPatches::parameters.body,
+@@doc(
+  Machines.installPatches::parameters.body,
   "Input for InstallPatches as directly received by the API"
 );
-@@doc(Machines.upgradeExtensions::parameters.body,
+@@doc(
+  Machines.upgradeExtensions::parameters.body,
   "Parameters supplied to the Upgrade Extensions operation."
 );
-@@doc(Machines.setupExtensions::parameters.body,
+@@doc(
+  Machines.setupExtensions::parameters.body,
   "Parameters supplied to the Setup Extensions operation."
 );

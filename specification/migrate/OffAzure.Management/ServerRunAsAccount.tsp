@@ -40,6 +40,7 @@ interface ServerRunAsAccounts {
 }
 
 @@doc(ServerRunAsAccount.name, " RunAsAccounts name");
-@@doc(ServerRunAsAccount.properties,
+@@doc(
+  ServerRunAsAccount.properties,
   "The resource-specific properties for this resource."
 );

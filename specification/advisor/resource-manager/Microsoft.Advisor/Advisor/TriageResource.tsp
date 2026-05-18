@@ -90,7 +90,8 @@ interface TriageResources {
   >;
 }
 
-@@doc(TriageResource.name,
+@@doc(
+  TriageResource.name,
   "Existing recommendation triage resource associated with a triage recommendation. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)."
 );
 @@doc(TriageResource.properties, "Triage resource properties.");

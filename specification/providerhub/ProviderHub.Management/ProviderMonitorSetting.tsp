@@ -68,6 +68,7 @@ interface ProviderMonitorSettings {
 
 @@doc(ProviderMonitorSetting.name, "The name of the provider monitor setting.");
 @@doc(ProviderMonitorSetting.properties, "");
-@@doc(ProviderMonitorSettings.create::parameters.resource,
+@@doc(
+  ProviderMonitorSettings.create::parameters.resource,
   "The provider monitor setting properties supplied to the create operation."
 );

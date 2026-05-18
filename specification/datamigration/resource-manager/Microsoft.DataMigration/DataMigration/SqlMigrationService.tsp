@@ -47,9 +47,11 @@ interface SqlMigrationServices {
   update is ArmCustomPatchAsync<
     SqlMigrationService,
     PatchModel = SqlMigrationServiceUpdate,
-    Response = (ArmResponse<SqlMigrationService> &
-      ArmLroLocationHeader<FinalResult = SqlMigrationService> &
-      Azure.Core.Foundations.RetryAfterHeader) | ArmResourceCreatedResponse<SqlMigrationService>
+    Response =
+      | (ArmResponse<SqlMigrationService> &
+          ArmLroLocationHeader<FinalResult = SqlMigrationService> &
+          Azure.Core.Foundations.RetryAfterHeader)
+      | ArmResourceCreatedResponse<SqlMigrationService>
   >;
 
   /**
@@ -58,7 +60,10 @@ interface SqlMigrationServices {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     SqlMigrationService,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -137,15 +142,19 @@ interface SqlMigrationServices {
 
 @@doc(SqlMigrationService.name, "Name of the SQL Migration Service.");
 @@doc(SqlMigrationService.properties, "The SQL Migration Service properties.");
-@@doc(SqlMigrationServices.createOrUpdate::parameters.resource,
+@@doc(
+  SqlMigrationServices.createOrUpdate::parameters.resource,
   "Details of SqlMigrationService resource."
 );
-@@doc(SqlMigrationServices.update::parameters.properties,
+@@doc(
+  SqlMigrationServices.update::parameters.properties,
   "Details of SqlMigrationService resource."
 );
-@@doc(SqlMigrationServices.regenerateAuthKeys::parameters.body,
+@@doc(
+  SqlMigrationServices.regenerateAuthKeys::parameters.body,
   "Details of SqlMigrationService resource."
 );
-@@doc(SqlMigrationServices.deleteNode::parameters.body,
+@@doc(
+  SqlMigrationServices.deleteNode::parameters.body,
   "Details of SqlMigrationService resource."
 );

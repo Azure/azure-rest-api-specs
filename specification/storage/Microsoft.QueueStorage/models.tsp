@@ -636,7 +636,14 @@ alias ApiVersionHeader = {
   version: string;
 };
 
-alias ClientRequestIdHeader = {
+alias ClientRequestIdParameter = {
+  /** An opaque, globally-unique, client-generated string identifier for the request. */
+  @access(Access.internal)
+  @header("x-ms-client-request-id")
+  clientRequestId?: uuid;
+};
+
+alias ClientRequestIdResponseHeader = {
   /** An opaque, globally-unique, client-generated string identifier for the request. */
   @access(Access.internal)
   @header("x-ms-client-request-id")
@@ -656,12 +663,10 @@ alias QueueMessageBodyParameter = {
 model KeyInfo {
   /** The date-time the key is active in ISO 8601 UTC time. */
   @Xml.name("Start")
-  @encode("rfc3339")
   start?: utcDateTime;
 
   /** The date-time the key expires in ISO 8601 UTC time. */
   @Xml.name("Expiry")
-  @encode("rfc3339")
   expiry: utcDateTime;
 
   /** The delegated user tenant ID in Entra ID. */
@@ -681,12 +686,10 @@ model UserDelegationKey {
 
   /** The date-time the key is active. */
   @Xml.name("SignedStart")
-  @encode("rfc7231")
   signedStart: utcDateTime;
 
   /** The date-time the key expires. */
   @Xml.name("SignedExpiry")
-  @encode("rfc7231")
   signedExpiry: utcDateTime;
 
   /** The service that created the key. */

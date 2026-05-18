@@ -555,12 +555,15 @@ interface Buckets {
 @@minLength(Bucket.name, 3);
 @@doc(Bucket.name, "The name of the bucket");
 @@doc(Bucket.properties, "Bucket properties");
-@@doc(Buckets.createOrUpdate::parameters.resource,
+@@doc(
+  Buckets.createOrUpdate::parameters.resource,
   "The bucket details including user details, and the volume path that should be mounted inside the bucket."
 );
-@@doc(Buckets.update::parameters.properties,
+@@doc(
+  Buckets.update::parameters.properties,
   "The bucket details including user details, and the volume path that should be mounted inside the bucket."
 );
-@@doc(Buckets.generateCredentials::parameters.body,
+@@doc(
+  Buckets.generateCredentials::parameters.body,
   "The bucket's Access and Secret key pair expiry time expressed as the number of days from now."
 );

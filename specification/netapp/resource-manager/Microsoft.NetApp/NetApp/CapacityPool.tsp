@@ -301,9 +301,11 @@ interface CapacityPools {
 @@minLength(CapacityPool.name, 1);
 @@doc(CapacityPool.name, "The name of the capacity pool");
 @@doc(CapacityPool.properties, "Capacity pool properties");
-@@doc(CapacityPools.createOrUpdate::parameters.resource,
+@@doc(
+  CapacityPools.createOrUpdate::parameters.resource,
   "Capacity pool object supplied in the body of the operation."
 );
-@@doc(CapacityPools.update::parameters.properties,
+@@doc(
+  CapacityPools.update::parameters.properties,
   "Capacity pool object supplied in the body of the operation."
 );

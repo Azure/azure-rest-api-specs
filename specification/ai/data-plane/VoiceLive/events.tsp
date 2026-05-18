@@ -24,6 +24,10 @@ union ClientEventType {
 
   @added(Versions.v2026_01_01_preview)
   mcp_approval_response: "mcp_approval_response",
+
+  /** Client request to clear the avatar output buffer. */
+  @added(Versions.v2026_04_10)
+  output_audio_buffer_clear: "output_audio_buffer.clear",
 }
 
 /** Server event types used in VoiceLive protocol. */
@@ -92,4 +96,48 @@ union ServerEventType {
 
   @added(Versions.v2026_01_01_preview)
   response_mcp_call_failed: "response.mcp_call.failed",
+
+  /** Avatar switches to speaking state. */
+  @added(Versions.v2026_04_10)
+  session_avatar_switch_to_speaking: "session.avatar.switch_to_speaking",
+
+  /** Avatar switches to idle state. */
+  @added(Versions.v2026_04_10)
+  session_avatar_switch_to_idle: "session.avatar.switch_to_idle",
+
+  /** Delta update for avatar video frames. */
+  @added(Versions.v2026_04_10)
+  response_video_delta: "response.video.delta",
+
+  /** Web search call is searching. */
+  @added(Versions.v2026_04_10)
+  response_web_search_call_searching: "response.web_search_call.searching",
+
+  /** Web search call is in progress. */
+  @added(Versions.v2026_04_10)
+  response_web_search_call_in_progress: "response.web_search_call.in_progress",
+
+  /** Web search call completed. */
+  @added(Versions.v2026_04_10)
+  response_web_search_call_completed: "response.web_search_call.completed",
+
+  /** File search call is searching. */
+  @added(Versions.v2026_04_10)
+  response_file_search_call_searching: "response.file_search_call.searching",
+
+  /** File search call is in progress. */
+  @added(Versions.v2026_04_10)
+  response_file_search_call_in_progress: "response.file_search_call.in_progress",
+
+  /** File search call completed. */
+  @added(Versions.v2026_04_10)
+  response_file_search_call_completed: "response.file_search_call.completed",
+
+  /** Output audio buffer has been cleared. */
+  @added(Versions.v2026_04_10)
+  output_audio_buffer_cleared: "output_audio_buffer.cleared",
+
+  /** Audio transcript annotation added. */
+  @added(Versions.v2026_04_10)
+  response_audio_transcript_annotation_added: "response.audio_transcript.annotation.added",
 }

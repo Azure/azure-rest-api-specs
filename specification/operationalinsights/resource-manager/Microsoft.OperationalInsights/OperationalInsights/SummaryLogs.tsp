@@ -38,9 +38,11 @@ interface SummaryLogsOperationGroup {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is SummaryLogsOps.CreateOrUpdateAsync<
     SummaryLogs,
-    Response = (ArmResourceUpdatedResponse<SummaryLogs> &
-      ArmCombinedLroHeaders<FinalResult = SummaryLogs> &
-      Azure.Core.Foundations.RetryAfterHeader) | ArmResourceCreatedResponse<SummaryLogs>
+    Response =
+      | (ArmResourceUpdatedResponse<SummaryLogs> &
+          ArmCombinedLroHeaders<FinalResult = SummaryLogs> &
+          Azure.Core.Foundations.RetryAfterHeader)
+      | ArmResourceCreatedResponse<SummaryLogs>
   >;
 
   /**
@@ -126,9 +128,11 @@ alias SummaryLogsOps = Azure.ResourceManager.Legacy.LegacyOperations<
 
 @@doc(SummaryLogs.name, "The name of the summary logs. Must not contain '/'.");
 @@doc(SummaryLogs.properties, "Summary rule properties.");
-@@doc(SummaryLogsOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  SummaryLogsOperationGroup.createOrUpdate::parameters.resource,
   "The parameters required to update summary rules properties."
 );
-@@doc(SummaryLogsOperationGroup.retryBin::parameters.body,
+@@doc(
+  SummaryLogsOperationGroup.retryBin::parameters.body,
   "The parameters required to retry a Summary rule bin."
 );
