@@ -43,6 +43,30 @@ model TensorFlowDistribution extends DistributionConfiguration {
   parameterServerCount?: int32;
 }
 
+@doc("Ray distribution configuration.")
+model RayDistribution extends DistributionConfiguration {
+  @doc("Specifies the type of distribution framework.")
+  distributionType: "Ray";
+
+  @doc("The port of the head Ray process.")
+  port?: int32;
+
+  @doc("The address of the Ray head node.")
+  address?: string;
+
+  @doc("Whether to start the Ray dashboard GUI.")
+  includeDashboard?: boolean;
+
+  @doc("The port to bind the dashboard server to.")
+  dashboardPort?: int32;
+
+  @doc("Additional arguments passed to ray start on the head node.")
+  headNodeAdditionalArgs?: string;
+
+  @doc("Additional arguments passed to ray start on worker nodes.")
+  workerNodeAdditionalArgs?: string;
+}
+
 @doc("Enum to determine the input/output data delivery mode.")
 union InputOutputModes {
   string,
