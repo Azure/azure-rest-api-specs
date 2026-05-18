@@ -7997,7 +7997,8 @@ model SshPublicKeyResourceProperties {
 model InterconnectBlockListResult is Azure.Core.Page<InterconnectBlock>;
 
 @@doc(InterconnectBlockListResult.value, "The list of Interconnect Blocks.");
-@@doc(InterconnectBlockListResult.nextLink,
+@@doc(
+  InterconnectBlockListResult.nextLink,
   "The URI to fetch the next page of Interconnect Blocks. Call ListNext() with this URI to fetch the next page of Interconnect Blocks."
 );
 
