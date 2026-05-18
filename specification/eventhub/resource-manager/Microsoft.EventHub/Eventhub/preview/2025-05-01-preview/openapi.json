@@ -4644,12 +4644,9 @@
           "description": "Event Hubs Cluster properties supplied in responses in List or Get operations.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "sku": {
+          "$ref": "#/definitions/ClusterSku",
+          "description": "Properties of the cluster SKU."
         },
         "location": {
           "type": "string",
@@ -4659,9 +4656,12 @@
             "create"
           ]
         },
-        "sku": {
-          "$ref": "#/definitions/ClusterSku",
-          "description": "Properties of the cluster SKU."
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "allOf": [
@@ -4946,12 +4946,13 @@
           "description": "Namespace properties supplied for create namespace operation.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Properties of sku resource"
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "Properties of BYOK Identity description"
         },
         "location": {
           "type": "string",
@@ -4961,13 +4962,12 @@
             "create"
           ]
         },
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "Properties of sku resource"
-        },
-        "identity": {
-          "$ref": "#/definitions/Identity",
-          "description": "Properties of BYOK Identity description"
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "allOf": [
