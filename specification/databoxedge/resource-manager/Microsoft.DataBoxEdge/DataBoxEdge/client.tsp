@@ -1366,10 +1366,10 @@ op DataBoxEdgeDevicesCreateOrUpdateSecuritySettingsCustomized(
   @path
   deviceName: string,
 
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+
   @body
   securitySettings: SecuritySettings,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): void;
 
 @@override(
@@ -2270,10 +2270,11 @@ op DataBoxEdgeDevicesCreateOrUpdateCustomized(
   @path
   deviceName: string,
 
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+
   @body
   dataBoxEdgeDevice: DataBoxEdgeDevice,
 
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
 ): DataBoxEdgeDevice;
 
@@ -2321,11 +2322,12 @@ op DiagnosticSettingsUpdateDiagnosticProactiveLogCollectionSettingsCustomized(
   @path
   diagnosticProactiveLogCollectionSetting: string,
 
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+
   @body
   proactiveLogCollectionSettings: DiagnosticProactiveLogCollectionSettings,
 
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
 ): void;
 
@@ -2373,11 +2375,12 @@ op DiagnosticSettingsUpdateDiagnosticRemoteSupportSettingsCustomized(
   @path
   diagnosticRemoteSupportSetting: string,
 
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+
   @body
   diagnosticRemoteSupportSettings: DiagnosticRemoteSupportSettings,
 
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
 ): void;
 
@@ -2396,11 +2399,12 @@ op DataBoxEdgeDevicesTriggerSupportPackageCustomized(
   @path
   deviceName: string,
 
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+
   @body
   triggerSupportPackageRequest: TriggerSupportPackageRequest,
 
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
 ): void;
 
