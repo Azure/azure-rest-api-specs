@@ -529,13 +529,6 @@
           "description": "The Activity Log Alert rule properties of the resource.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "type": "object",
-          "description": "The tags of the resource.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "location": {
           "type": "string",
           "description": "The location of the resource. Since Azure Activity Log Alerts is a global service, the location of the rules should always be 'global'.",
@@ -544,6 +537,13 @@
             "read",
             "create"
           ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "The tags of the resource.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "required": [
