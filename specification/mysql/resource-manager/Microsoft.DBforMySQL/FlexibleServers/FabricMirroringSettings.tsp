@@ -67,6 +67,17 @@ model FabricMirroringSettingsProperties {
 }
 
 /**
+ * The name of the Fabric Mirroring settings resource (singleton: only "default" is allowed).
+ */
+@added(Versions.v2025_12_01_preview)
+union FabricMirroringSettingsName {
+  /** The default Fabric Mirroring settings instance. */
+  Default: "default",
+
+  string,
+}
+
+/**
  * Fabric Mirroring settings proxy resource.
  */
 @parentResource(Server)
@@ -76,7 +87,8 @@ model FabricMirroringSetting
     Resource = FabricMirroringSetting,
     KeyName = "fabricMirroringSettingsName",
     SegmentName = "fabricMirroringSettings",
-    NamePattern = "^[a-zA-Z0-9-]{3,24}$"
+    NamePattern = "",
+    Type = FabricMirroringSettingsName
   >;
 }
 
