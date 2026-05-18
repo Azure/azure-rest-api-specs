@@ -3,7 +3,6 @@ import "../openai-responses/models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
@@ -15,7 +14,7 @@ union MemoryStoreObjectType {
   memoryStore: "memory_store",
   memoryStoreDeleted: "memory_store.deleted",
   memoryStoreScopeDeleted: "memory_store.scope.deleted",
-  memoryDeleted: "memory.deleted",
+  memoryDeleted: "memory_store.item.deleted",
 }
 
 @doc("A memory store that can store and retrieve user memories.")
@@ -278,6 +277,7 @@ model ChatSummaryMemoryItem extends MemoryItem {
 }
 
 @doc("A memory item containing a procedure extracted from conversations.")
+@extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 model ProceduralMemoryItem extends MemoryItem {
   @doc("The kind of the memory item.")
   kind: MemoryItemKind.procedural;
@@ -302,11 +302,8 @@ model MemoryStoreDeleteScopeResponse {
 @doc("Response for deleting a memory item from a memory store.")
 @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 model DeleteMemoryResponse {
-  @doc("The object type. Always 'memory.deleted'.")
+  @doc("The object type. Always 'memory_store.item.deleted'.")
   object: MemoryStoreObjectType.memoryDeleted;
-
-  @doc("The name of the memory store.")
-  name: string;
 
   @doc("The unique ID of the deleted memory item.")
   memory_id: string;
@@ -463,6 +460,13 @@ alias ListMemoriesRequest = {
   @doc("The name of the memory store.")
   @path
   name: string;
+
+  @doc("The kind of the memory item.")
+  @query
+  kind?: MemoryItemKind;
+
+  @doc("The namespace that logically groups and isolates memories, such as a user ID.")
+  scope: string;
 
   ...CommonPageQueryParameters;
 };
