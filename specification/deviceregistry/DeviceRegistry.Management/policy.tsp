@@ -85,17 +85,7 @@ union SupportedKeyType {
 @doc("The leaf certificate configuration.")
 model LeafCertificateConfiguration {
   @doc("The validity period in days.")
-  @removed(Versions.v2026_11_01_preview)
-  @minValue(7)
-  @maxValue(30)
   validityPeriodInDays: int32;
-
-  @added(Versions.v2026_11_01_preview)
-  @encodedName("application/json", "validityPeriodInDays")
-  @doc("The validity period in days.")
-  @minValue(1)
-  @maxValue(90)
-  validityPeriodInDays1To90: int32;
 }
 
 // ============================================================
@@ -132,17 +122,7 @@ model CertificateConfigurationUpdate {
 @doc("Leaf certificate configuration for update operations.")
 model LeafCertificateConfigurationUpdate {
   @doc("The validity period in days.")
-  @removed(Versions.v2026_11_01_preview)
-  @minValue(7)
-  @maxValue(30)
   validityPeriodInDays?: int32;
-
-  @added(Versions.v2026_11_01_preview)
-  @encodedName("application/json", "validityPeriodInDays")
-  @doc("The validity period in days.")
-  @minValue(1)
-  @maxValue(90)
-  validityPeriodInDays1To90?: int32;
 }
 
 @added(Versions.v2025_08_01_preview)
