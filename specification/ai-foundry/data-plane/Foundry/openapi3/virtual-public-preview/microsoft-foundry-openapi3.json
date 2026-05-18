@@ -23051,6 +23051,14 @@
             "enum": [
               "Entra"
             ]
+          },
+          "isolation_key_source": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IsolationKeySource"
+              }
+            ],
+            "description": "The source from which the per-user isolation key is derived for requests authorized via this scheme. Defaults to Entra-based isolation when omitted."
           }
         },
         "allOf": [
@@ -23085,6 +23093,30 @@
           }
         ],
         "description": "Entra ID credential definition"
+      },
+      "EntraIsolationKeySource": {
+        "type": "object",
+        "required": [
+          "kind"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "Entra"
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/IsolationKeySource"
+          }
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
       },
       "Eval": {
         "type": "object",
@@ -26269,6 +26301,30 @@
           ]
         }
       },
+      "HeaderIsolationKeySource": {
+        "type": "object",
+        "required": [
+          "kind"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "Header"
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/IsolationKeySource"
+          }
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
       "HeaderTelemetryEndpointAuth": {
         "type": "object",
         "required": [
@@ -27119,6 +27175,48 @@
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "Routines=V1Preview"
+          ]
+        }
+      },
+      "IsolationKeySource": {
+        "type": "object",
+        "required": [
+          "kind"
+        ],
+        "properties": {
+          "kind": {
+            "$ref": "#/components/schemas/IsolationKeySourceKind"
+          }
+        },
+        "discriminator": {
+          "propertyName": "kind",
+          "mapping": {
+            "Entra": "#/components/schemas/EntraIsolationKeySource",
+            "Header": "#/components/schemas/HeaderIsolationKeySource"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
+      "IsolationKeySourceKind": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "Entra",
+              "Header"
+            ]
+          }
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
           ]
         }
       },
