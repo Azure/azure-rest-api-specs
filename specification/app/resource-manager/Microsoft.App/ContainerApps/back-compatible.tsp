@@ -278,19 +278,23 @@ using Microsoft.App;
 @@doc(AuthConfigCollection.value, "Collection of resources.");
 @@doc(AuthConfigCollection.nextLink, "Link to next page of resources.");
 @@doc(AvailableOperations.value, "Collection of available operation details");
-@@doc(AvailableOperations.nextLink,
+@@doc(
+  AvailableOperations.nextLink,
   "URL client should use to fetch the next page (per server side paging).\nIt's null for now, added for future use."
 );
-@@doc(AvailableWorkloadProfilesCollection.value,
+@@doc(
+  AvailableWorkloadProfilesCollection.value,
   "Collection of workload profiles."
 );
-@@doc(AvailableWorkloadProfilesCollection.nextLink,
+@@doc(
+  AvailableWorkloadProfilesCollection.nextLink,
   "Link to next page of resources."
 );
 @@doc(CertificateCollection.value, "Collection of resources.");
 @@doc(CertificateCollection.nextLink, "Link to next page of resources.");
 @@doc(ConnectedEnvironmentCollection.value, "Collection of resources.");
-@@doc(ConnectedEnvironmentCollection.nextLink,
+@@doc(
+  ConnectedEnvironmentCollection.nextLink,
   "Link to next page of resources."
 );
 @@doc(ContainerAppCollection.value, "Collection of resources.");
@@ -308,19 +312,23 @@ using Microsoft.App;
 @@doc(JobsCollection.value, "Collection of resources.");
 @@doc(JobsCollection.nextLink, "Link to next page of resources.");
 @@doc(ListUsagesResult.value, "The list of compute resource usages.");
-@@doc(ListUsagesResult.nextLink,
+@@doc(
+  ListUsagesResult.nextLink,
   "The URI to fetch the next page of compute resource usage information. Call ListNext() with this to fetch the next page of compute resource usage information."
 );
-@@doc(MaintenanceConfigurationCollection.value,
+@@doc(
+  MaintenanceConfigurationCollection.value,
   "Results of the list maintenance configuration resources."
 );
-@@doc(MaintenanceConfigurationCollection.nextLink,
+@@doc(
+  MaintenanceConfigurationCollection.nextLink,
   "Link for next page of results."
 );
 @@doc(ManagedCertificateCollection.value, "Collection of resources.");
 @@doc(ManagedCertificateCollection.nextLink, "Link to next page of resources.");
 @@doc(ManagedEnvironmentsCollection.value, "Collection of resources.");
-@@doc(ManagedEnvironmentsCollection.nextLink,
+@@doc(
+  ManagedEnvironmentsCollection.nextLink,
   "Link to next page of resources."
 );
 @@doc(RevisionCollection.value, "Collection of resources.");
@@ -332,19 +340,23 @@ using Microsoft.App;
 @@doc(WorkflowEnvelopeCollection.value, "Collection of resources.");
 @@doc(WorkflowEnvelopeCollection.nextLink, "Link to next page of resources.");
 @@doc(workloadProfileStatesCollection.value, "Collection of resources.");
-@@doc(workloadProfileStatesCollection.nextLink,
+@@doc(
+  workloadProfileStatesCollection.nextLink,
   "Link to next page of resources."
 );
 
 // Individual property description augments for swagger fidelity
 @@doc(Diagnostics.properties, "Diagnostics resource specific properties");
-@@doc(Job.identity,
+@@doc(
+  Job.identity,
   "Managed identities needed by a container app job to interact with other Azure services to not maintain any secrets or credentials in code."
 );
-@@doc(ManagedEnvironment.identity,
+@@doc(
+  ManagedEnvironment.identity,
   "Managed identities for the Managed Environment to interact with other Azure services without maintaining any secrets or credentials in code."
 );
-@@doc(SessionPool.identity,
+@@doc(
+  SessionPool.identity,
   "Managed identities needed by a session pool to interact with other Azure services to not maintain any secrets or credentials in code."
 );
 
