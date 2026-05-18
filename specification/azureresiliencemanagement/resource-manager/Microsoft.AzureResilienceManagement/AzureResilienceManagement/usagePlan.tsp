@@ -22,7 +22,7 @@ interface UsagePlans {
 
   createOrUpdate is ArmResourceCreateOrReplaceAsync<UsagePlan>;
 
-  update is ArmTagsPatchSync<UsagePlan>;
+  update is ArmTagsPatchAsync<UsagePlan>;
 
   delete is ArmResourceDeleteWithoutOkAsync<UsagePlan>;
 
