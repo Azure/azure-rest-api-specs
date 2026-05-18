@@ -66,7 +66,7 @@ op UsersDeleteCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): void;
 
-@@override(Users.delete, UsersDeleteCustomized, "python,go");
+@@override(Users.delete, UsersDeleteCustomized, "python,go,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -90,7 +90,7 @@ op UsersListByDataBoxEdgeDeviceCustomized(
 @@override(
   Users.listByDataBoxEdgeDevice,
   UsersListByDataBoxEdgeDeviceCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -112,7 +112,7 @@ op UsersGetCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): User;
 
-@@override(Users.get, UsersGetCustomized, "python,go");
+@@override(Users.get, UsersGetCustomized, "python,go,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -136,7 +136,11 @@ op UsersCreateOrUpdateCustomized(
   user: User,
 ): void;
 
-@@override(Users.createOrUpdate, UsersCreateOrUpdateCustomized, "python,go");
+@@override(
+  Users.createOrUpdate,
+  UsersCreateOrUpdateCustomized,
+  "python,go,javascript"
+);
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -160,7 +164,7 @@ op StorageAccountsDeleteCustomized(
 @@override(
   StorageAccounts.delete,
   StorageAccountsDeleteCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -181,7 +185,7 @@ op StorageAccountsListByDataBoxEdgeDeviceCustomized(
 @@override(
   StorageAccounts.listByDataBoxEdgeDevice,
   StorageAccountsListByDataBoxEdgeDeviceCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -203,7 +207,11 @@ op StorageAccountsGetCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): StorageAccount;
 
-@@override(StorageAccounts.get, StorageAccountsGetCustomized, "python,go");
+@@override(
+  StorageAccounts.get,
+  StorageAccountsGetCustomized,
+  "python,go,javascript"
+);
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -230,7 +238,7 @@ op StorageAccountsCreateOrUpdateCustomized(
 @@override(
   StorageAccounts.createOrUpdate,
   StorageAccountsCreateOrUpdateCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -255,7 +263,7 @@ op MonitoringMetricConfigurationsDeleteCustomized(
 @@override(
   MonitoringMetricConfigurations.delete,
   MonitoringMetricConfigurationsDeleteCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -280,7 +288,7 @@ op MonitoringMetricConfigurationsListCustomized(
 @@override(
   MonitoringMetricConfigurations.list,
   MonitoringMetricConfigurationsListCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -305,7 +313,7 @@ op MonitoringMetricConfigurationsGetCustomized(
 @@override(
   MonitoringMetricConfigurations.get,
   MonitoringMetricConfigurationsGetCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -333,7 +341,7 @@ op MonitoringMetricConfigurationsCreateOrUpdateCustomized(
 @@override(
   MonitoringMetricConfigurations.createOrUpdate,
   MonitoringMetricConfigurationsCreateOrUpdateCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -355,7 +363,11 @@ op OperationsStatusGetCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): OperationsStatus;
 
-@@override(OperationsStatus.get, OperationsStatusGetCustomized, "python,go");
+@@override(
+  OperationsStatus.get,
+  OperationsStatusGetCustomized,
+  "python,go,javascript"
+);
 
 // Core lib supports query operation status, so scope out this operation for .NET.
 @@scope(OperationsStatus.get, "!csharp");
@@ -379,7 +391,7 @@ op JobsGetCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): Job;
 
-@@override(Jobs.get, JobsGetCustomized, "python,go");
+@@override(Jobs.get, JobsGetCustomized, "python,go,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -400,7 +412,7 @@ op RolesDeleteCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): void;
 
-@@override(Roles.delete, RolesDeleteCustomized, "python,go");
+@@override(Roles.delete, RolesDeleteCustomized, "python,go,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -420,7 +432,7 @@ op RolesListByDataBoxEdgeDeviceCustomized(
 @@override(
   Roles.listByDataBoxEdgeDevice,
   RolesListByDataBoxEdgeDeviceCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -442,7 +454,7 @@ op RolesGetCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): Role;
 
-@@override(Roles.get, RolesGetCustomized, "python,go");
+@@override(Roles.get, RolesGetCustomized, "python,go,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -466,7 +478,11 @@ op RolesCreateOrUpdateCustomized(
   resource: Role,
 ): void;
 
-@@override(Roles.createOrUpdate, RolesCreateOrUpdateCustomized, "python,go");
+@@override(
+  Roles.createOrUpdate,
+  RolesCreateOrUpdateCustomized,
+  "python,go,javascript"
+);
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -487,7 +503,7 @@ op SharesDeleteCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): void;
 
-@@override(Shares.delete, SharesDeleteCustomized, "python,go");
+@@override(Shares.delete, SharesDeleteCustomized, "python,go,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -507,7 +523,7 @@ op SharesListByDataBoxEdgeDeviceCustomized(
 @@override(
   Shares.listByDataBoxEdgeDevice,
   SharesListByDataBoxEdgeDeviceCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -532,7 +548,7 @@ op SharesRefreshCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): void;
 
-@@override(Shares.refresh, SharesRefreshCustomized, "python,go");
+@@override(Shares.refresh, SharesRefreshCustomized, "python,go,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -553,7 +569,7 @@ op SharesGetCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): Share;
 
-@@override(Shares.get, SharesGetCustomized, "python,go");
+@@override(Shares.get, SharesGetCustomized, "python,go,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -577,7 +593,11 @@ op SharesCreateOrUpdateCustomized(
   resource: Share,
 ): void;
 
-@@override(Shares.createOrUpdate, SharesCreateOrUpdateCustomized, "python,go");
+@@override(
+  Shares.createOrUpdate,
+  SharesCreateOrUpdateCustomized,
+  "python,go,javascript"
+);
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -602,7 +622,11 @@ op ContainersDeleteCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): void;
 
-@@override(Containers.delete, ContainersDeleteCustomized, "python,go");
+@@override(
+  Containers.delete,
+  ContainersDeleteCustomized,
+  "python,go,javascript"
+);
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -630,7 +654,11 @@ op ContainersRefreshCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): void;
 
-@@override(Containers.refresh, ContainersRefreshCustomized, "python,go");
+@@override(
+  Containers.refresh,
+  ContainersRefreshCustomized,
+  "python,go,javascript"
+);
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -654,7 +682,7 @@ op ContainersListByStorageAccountCustomized(
 @@override(
   Containers.listByStorageAccount,
   ContainersListByStorageAccountCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -680,7 +708,7 @@ op ContainersGetCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): Container;
 
-@@override(Containers.get, ContainersGetCustomized, "python,go");
+@@override(Containers.get, ContainersGetCustomized, "python,go,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -711,7 +739,7 @@ op ContainersCreateOrUpdateCustomized(
 @@override(
   Containers.createOrUpdate,
   ContainersCreateOrUpdateCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -733,7 +761,7 @@ op OrdersDeleteCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): void;
 
-@@override(Orders.delete, OrdersDeleteCustomized, "python,go");
+@@override(Orders.delete, OrdersDeleteCustomized, "python,go,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -760,7 +788,7 @@ op OrderslistDCAccessCodeCustomized(
 @@override(
   Orders.listDCAccessCode,
   OrderslistDCAccessCodeCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -781,7 +809,7 @@ op OrdersListByDataBoxEdgeDeviceCustomized(
 @@override(
   Orders.listByDataBoxEdgeDevice,
   OrdersListByDataBoxEdgeDeviceCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -803,7 +831,7 @@ op OrdersGetCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): Order;
 
-@@override(Orders.get, OrdersGetCustomized, "python,go");
+@@override(Orders.get, OrdersGetCustomized, "python,go,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -827,7 +855,11 @@ op OrdersCreateOrUpdateCustomized(
   resource: Order,
 ): void;
 
-@@override(Orders.createOrUpdate, OrdersCreateOrUpdateCustomized, "python,go");
+@@override(
+  Orders.createOrUpdate,
+  OrdersCreateOrUpdateCustomized,
+  "python,go,javascript"
+);
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -848,7 +880,7 @@ op TriggersDeleteCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): void;
 
-@@override(Triggers.delete, TriggersDeleteCustomized, "python,go");
+@@override(Triggers.delete, TriggersDeleteCustomized, "python,go,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -872,7 +904,7 @@ op TriggersListByDataBoxEdgeDeviceCustomized(
 @@override(
   Triggers.listByDataBoxEdgeDevice,
   TriggersListByDataBoxEdgeDeviceCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -894,7 +926,7 @@ op TriggersGetCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): Trigger;
 
-@@override(Triggers.get, TriggersGetCustomized, "python,go");
+@@override(Triggers.get, TriggersGetCustomized, "python,go,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -921,7 +953,7 @@ op TriggersCreateOrUpdateCustomized(
 @@override(
   Triggers.createOrUpdate,
   TriggersCreateOrUpdateCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -947,7 +979,7 @@ op AddonsDeleteCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): void;
 
-@@override(Addons.delete, AddonsDeleteCustomized, "python,go");
+@@override(Addons.delete, AddonsDeleteCustomized, "python,go,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -968,7 +1000,11 @@ op AddonsListByRoleCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): AddonList;
 
-@@override(Addons.listByRole, AddonsListByRoleCustomized, "python,go");
+@@override(
+  Addons.listByRole,
+  AddonsListByRoleCustomized,
+  "python,go,javascript"
+);
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -993,7 +1029,7 @@ op AddonsGetCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): Addon;
 
-@@override(Addons.get, AddonsGetCustomized, "python,go");
+@@override(Addons.get, AddonsGetCustomized, "python,go,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -1021,7 +1057,11 @@ op AddonsCreateOrUpdateCustomized(
   resource: Addon,
 ): void;
 
-@@override(Addons.createOrUpdate, AddonsCreateOrUpdateCustomized, "python,go");
+@@override(
+  Addons.createOrUpdate,
+  AddonsCreateOrUpdateCustomized,
+  "python,go,javascript"
+);
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -1041,7 +1081,7 @@ op AlertsListByDataBoxEdgeDeviceCustomized(
 @@override(
   Alerts.listByDataBoxEdgeDevice,
   AlertsListByDataBoxEdgeDeviceCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1063,7 +1103,7 @@ op AlertsGetCustomized(
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): Alert;
 
-@@override(Alerts.get, AlertsGetCustomized, "python,go");
+@@override(Alerts.get, AlertsGetCustomized, "python,go,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -1087,7 +1127,7 @@ op BandwidthSchedulesDeleteCustomized(
 @@override(
   BandwidthSchedules.delete,
   BandwidthSchedulesDeleteCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1108,7 +1148,7 @@ op BandwidthSchedulesListByDataBoxEdgeDeviceCustomized(
 @@override(
   BandwidthSchedules.listByDataBoxEdgeDevice,
   BandwidthSchedulesListByDataBoxEdgeDeviceCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1133,7 +1173,7 @@ op BandwidthSchedulesGetCustomized(
 @@override(
   BandwidthSchedules.get,
   BandwidthSchedulesGetCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1161,7 +1201,7 @@ op BandwidthSchedulesCreateOrUpdateCustomized(
 @@override(
   BandwidthSchedules.createOrUpdate,
   BandwidthSchedulesCreateOrUpdateCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1186,7 +1226,7 @@ op StorageAccountCredentialsDeleteCustomized(
 @@override(
   StorageAccountCredentials.delete,
   StorageAccountCredentialsDeleteCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1207,7 +1247,7 @@ op StorageAccountCredentialsListByDataBoxEdgeDeviceCustomized(
 @@override(
   StorageAccountCredentials.listByDataBoxEdgeDevice,
   StorageAccountCredentialsListByDataBoxEdgeDeviceCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1232,7 +1272,7 @@ op StorageAccountCredentialsGetCustomized(
 @@override(
   StorageAccountCredentials.get,
   StorageAccountCredentialsGetCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1260,7 +1300,7 @@ op StorageAccountCredentialsCreateOrUpdateCustomized(
 @@override(
   StorageAccountCredentials.createOrUpdate,
   StorageAccountCredentialsCreateOrUpdateCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1284,7 +1324,7 @@ op DataBoxEdgeDevicesListByDataBoxEdgeDeviceCustomized(
 @@override(
   DataBoxEdgeDevices.listByDataBoxEdgeDevice,
   DataBoxEdgeDevicesListByDataBoxEdgeDeviceCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1305,7 +1345,7 @@ op DataBoxEdgeDevicesDeleteCustomized(
 @@override(
   DataBoxEdgeDevices.delete,
   DataBoxEdgeDevicesDeleteCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1329,7 +1369,7 @@ op DataBoxEdgeDevicesCreateOrUpdateSecuritySettingsCustomized(
 @@override(
   DataBoxEdgeDevices.createOrUpdateSecuritySettings,
   DataBoxEdgeDevicesCreateOrUpdateSecuritySettingsCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1353,7 +1393,7 @@ op DataBoxEdgeDevicesUploadCertificateCustomized(
 @@override(
   DataBoxEdgeDevices.uploadCertificate,
   DataBoxEdgeDevicesUploadCertificateCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1377,7 +1417,7 @@ op DataBoxEdgeDevicesInstallUpdatesCustomized(
 @@override(
   DataBoxEdgeDevices.installUpdates,
   DataBoxEdgeDevicesInstallUpdatesCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1402,7 +1442,7 @@ op DataBoxEdgeDevicesGetNetworkSettingsCustomized(
 @@override(
   Devices.getNetworkSettings,
   DataBoxEdgeDevicesGetNetworkSettingsCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1427,7 +1467,7 @@ op DataBoxEdgeDevicesGenerateCertificateCustomized(
 @@override(
   DataBoxEdgeDevices.generateCertificate,
   DataBoxEdgeDevicesGenerateCertificateCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1451,7 +1491,7 @@ op DataBoxEdgeDevicesScanForUpdatesCustomized(
 @@override(
   DataBoxEdgeDevices.scanForUpdates,
   DataBoxEdgeDevicesScanForUpdatesCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1472,7 +1512,7 @@ op DataBoxEdgeDevicesGetCustomized(
 @@override(
   DataBoxEdgeDevices.get,
   DataBoxEdgeDevicesGetCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1496,7 +1536,7 @@ op DataBoxEdgeDevicesUpdateCustomized(
 @@override(
   DataBoxEdgeDevices.update,
   DataBoxEdgeDevicesUpdateCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1521,7 +1561,7 @@ op DataBoxEdgeDevicesGetUpdateSummaryCustomized(
 @@override(
   UpdateSummaries.getUpdateSummary,
   DataBoxEdgeDevicesGetUpdateSummaryCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1545,7 +1585,7 @@ op DataBoxEdgeDevicesUpdateExtendedInformationCustomized(
 @@override(
   DataBoxEdgeDevices.updateExtendedInformation,
   DataBoxEdgeDevicesUpdateExtendedInformationCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1569,7 +1609,7 @@ op DataBoxEdgeDevicesDownloadUpdatesCustomized(
 @@override(
   DataBoxEdgeDevices.downloadUpdates,
   DataBoxEdgeDevicesDownloadUpdatesCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -1593,7 +1633,7 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
 @@override(
   DataBoxEdgeDevices.getExtendedInformation,
   DataBoxEdgeDevicesGetExtendedInformationCustomized,
-  "python,go"
+  "python,go,javascript"
 );
 
 @@clientName(DataBoxEdgeSkuList, "AvailableDataBoxEdgeSkuList", "csharp");
@@ -2225,7 +2265,7 @@ op DataBoxEdgeDevicesCreateOrUpdateCustomized(
   deviceName: string,
 
   @body
-  resource: DataBoxEdgeDevice,
+  dataBoxEdgeDevice: DataBoxEdgeDevice,
 
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -2276,7 +2316,7 @@ op DiagnosticSettingsUpdateDiagnosticProactiveLogCollectionSettingsCustomized(
   diagnosticProactiveLogCollectionSetting: string,
 
   @body
-  resource: DiagnosticProactiveLogCollectionSettings,
+  proactiveLogCollectionSettings: DiagnosticProactiveLogCollectionSettings,
 
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
@@ -2328,7 +2368,7 @@ op DiagnosticSettingsUpdateDiagnosticRemoteSupportSettingsCustomized(
   diagnosticRemoteSupportSetting: string,
 
   @body
-  resource: DiagnosticRemoteSupportSettings,
+  diagnosticRemoteSupportSettings: DiagnosticRemoteSupportSettings,
 
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
@@ -2351,7 +2391,7 @@ op DataBoxEdgeDevicesTriggerSupportPackageCustomized(
   deviceName: string,
 
   @body
-  body: TriggerSupportPackageRequest,
+  triggerSupportPackageRequest: TriggerSupportPackageRequest,
 
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
