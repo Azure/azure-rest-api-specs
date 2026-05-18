@@ -263,6 +263,13 @@ model FabricOntologyKnowledgeSourceParams extends KnowledgeSourceParams {
   kind: KnowledgeSourceKind.FabricOntology;
 }
 
+/** Specifies runtime parameters for an MCP server knowledge source */
+@added(Versions.v2026_05_01_preview)
+model McpServerKnowledgeSourceParams extends KnowledgeSourceParams {
+  /** The discriminator value. */
+  kind: KnowledgeSourceKind.McpServer;
+}
+
 /** An intended query to execute without model query planning. */
 @discriminator("type")
 model KnowledgeRetrievalIntent {
@@ -375,6 +382,10 @@ union KnowledgeBaseActivityRecordType {
   /** Fabric Ontology retrieval activity. */
   @added(Versions.v2026_05_01_preview)
   fabricOntology: "fabricOntology",
+
+  /** MCP server retrieval activity. */
+  @added(Versions.v2026_05_01_preview)
+  mcpServer: "mcpServer",
 
   /** LLM query planning activity. */
   @added(Versions.v2026_05_01_preview)
@@ -639,6 +650,30 @@ model KnowledgeBaseFabricOntologyActivityArguments {
   search?: string;
 }
 
+/** Represents an MCP server retrieval activity record. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+#suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseMcpServerActivityRecord
+  extends KnowledgeBaseRetrievalActivityRecord {
+  /** The discriminator value. */
+  type: KnowledgeBaseActivityRecordType.mcpServer;
+
+  /** The MCP server arguments for the retrieval activity. */
+  mcpServerArguments?: KnowledgeBaseMcpServerActivityArguments;
+}
+
+/** Represents the arguments the MCP server retrieval activity was run with. */
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseMcpServerActivityArguments {
+  /** The name of the MCP server tool used for the retrieval activity. */
+  toolName?: string;
+
+  /** The arguments passed to the MCP server tool. */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Allows arbitrary JSON via additionalProperties: true."
+  toolArguments?: Record<unknown>;
+}
+
 /** Represents an LLM query planning activity record. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 @added(Versions.v2026_05_01_preview)
@@ -749,6 +784,10 @@ union KnowledgeBaseReferenceType {
   /** Fabric Ontology document reference. */
   @added(Versions.v2026_05_01_preview)
   fabricOntology: "fabricOntology",
+
+  /** MCP server document reference. */
+  @added(Versions.v2026_05_01_preview)
+  mcpServer: "mcpServer",
 }
 
 /** Base type for references. */
@@ -910,6 +949,20 @@ model KnowledgeBaseFabricOntologyReference extends KnowledgeBaseReference {
 
   /** The ontology ID within the workspace. */
   ontologyId?: string;
+}
+
+/** Represents an MCP server document reference. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseMcpServerReference extends KnowledgeBaseReference {
+  /** The discriminator value. */
+  type: KnowledgeBaseReferenceType.mcpServer;
+
+  /** The name of the MCP server tool that produced the reference. */
+  toolName?: string;
+
+  /** The title of the MCP server tool result. */
+  title?: string;
 }
 
 /** Information about the sensitivity label applied to a SharePoint document. */
