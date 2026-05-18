@@ -2197,7 +2197,7 @@
     },
     "DataPlaneResourceBase": {
       "type": "object",
-      "description": "Resource metadata properties (etag and systemData).",
+      "description": "Resource metadata properties (etag).",
       "properties": {
         "name": {
           "type": "string",
@@ -2224,11 +2224,6 @@
         "etag": {
           "type": "string",
           "description": "The entity tag for the resource.",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "Metadata containing createdBy and modifiedBy information.",
           "readOnly": true
         }
       },
@@ -2268,11 +2263,6 @@
           "description": "The entity tag for the resource.",
           "readOnly": true
         },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "Metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/DeviceProperties",
           "description": "The resource-specific properties for this device."
@@ -2303,11 +2293,6 @@
         "etag": {
           "type": "string",
           "description": "The entity tag for the resource.",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "Metadata containing createdBy and modifiedBy information.",
           "readOnly": true
         },
         "name": {
@@ -2436,11 +2421,6 @@
         "etag": {
           "type": "string",
           "description": "The entity tag for the resource.",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "Metadata containing createdBy and modifiedBy information.",
           "readOnly": true
         },
         "properties": {
@@ -2672,11 +2652,6 @@
           "description": "The entity tag for the resource.",
           "readOnly": true
         },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "Metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/DeviceProperties",
           "description": "The resource-specific properties for this device."
@@ -2707,11 +2682,6 @@
         "etag": {
           "type": "string",
           "description": "The entity tag for the resource.",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "Metadata containing createdBy and modifiedBy information.",
           "readOnly": true
         },
         "name": {
@@ -2950,11 +2920,6 @@
           "description": "The entity tag for the resource.",
           "readOnly": true
         },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "Metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
-        },
         "groups": {
           "type": "array",
           "description": "The groups that this device belongs to.",
@@ -2998,11 +2963,6 @@
         "etag": {
           "type": "string",
           "description": "The entity tag for the resource.",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "Metadata containing createdBy and modifiedBy information.",
           "readOnly": true
         },
         "properties": {
@@ -4112,38 +4072,6 @@
         "secondaryKey": {
           "type": "string",
           "description": "The secondary symmetric key."
-        }
-      }
-    },
-    "SystemData": {
-      "type": "object",
-      "description": "Metadata pertaining to creation and last modification of the resource.",
-      "properties": {
-        "createdBy": {
-          "type": "string",
-          "description": "The identity that created the resource."
-        },
-        "createdByType": {
-          "type": "string",
-          "description": "The type of identity that created the resource."
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource creation (UTC)."
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "The identity that last modified the resource."
-        },
-        "lastModifiedByType": {
-          "type": "string",
-          "description": "The type of identity that last modified the resource."
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource last modification (UTC)."
         }
       }
     },
