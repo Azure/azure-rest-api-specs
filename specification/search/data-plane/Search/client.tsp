@@ -4907,6 +4907,24 @@ namespace KnowledgeBaseRetrievalClient {
   "java"
 );
 @@clientNamespace(
+  Search.FileKnowledgeSourceParams,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.FileKnowledgeSourceParams,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.IndexedSqlKnowledgeSourceParams,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.IndexedSqlKnowledgeSourceParams,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
   Search.KnowledgeBaseMcpServerActivityRecord,
   "Azure.Search.Documents.KnowledgeBases"
 );
@@ -4930,6 +4948,60 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientNamespace(
   Search.KnowledgeBaseMcpServerReference,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseFileActivityRecord,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseFileActivityRecord,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseFileActivityArguments,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseFileActivityArguments,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseFileReference,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseFileReference,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseIndexedSqlActivityRecord,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseIndexedSqlActivityRecord,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseIndexedSqlActivityArguments,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseIndexedSqlActivityArguments,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseIndexedSqlReference,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseIndexedSqlReference,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
