@@ -505,6 +505,8 @@ using Microsoft.DataFactory;
   "IntegrationRuntimeOutboundNetworkDependenciesResult",
   "csharp"
 );
+@@clientName(SalesforceV2Source.SOQLQuery, "SoqlQuery ", "csharp");
+@@clientName(SalesforceServiceCloudV2Source.SOQLQuery, "SoqlQuery ", "csharp");
 @@clientName(
   IntegrationRuntimeResource,
   "DataFactoryIntegrationRuntime",
@@ -574,6 +576,7 @@ using Microsoft.DataFactory;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
+@@alternateType(PrivateEndpoint.id, Azure.Core.armResourceIdentifier, "csharp");
 @@clientName(
   managedPrivateEndpointListResponse,
   "DataFactoryPrivateEndpointListResult",
@@ -655,7 +658,18 @@ using Microsoft.DataFactory;
   "ScriptActivityTypeLogSettings",
   "csharp"
 );
+@@clientName(TarGZipReadSettings, "TarGzipReadSettings", "csharp");
 @@clientName(ScriptActivityScriptBlock.type, "QueryType", "csharp");
+@@clientName(WebActivityMethod.GET, "Get", "csharp");
+@@clientName(WebActivityMethod.POST, "Post", "csharp");
+@@clientName(WebActivityMethod.PUT, "Put", "csharp");
+@@clientName(WebActivityMethod.DELETE, "Delete", "csharp");
+@@clientName(SqlServerAuthenticationType.SQL, "Sql", "csharp");
+@@clientName(SparkThriftTransportProtocol.SASL, "Sasl", "csharp");
+@@clientName(SparkThriftTransportProtocol.`HTTP `, "Http", "csharp");
+@@clientName(RunQueryOrder.ASC, "Asc", "csharp");
+@@clientName(RunQueryOrder.DESC, "Desc", "csharp");
+@@clientName(PrestoAuthenticationType.LDAP, "Ldap", "csharp");
 // Map SecretBase and LinkedServiceReference to the external Azure.Core.Expressions.DataFactory types
 // so baseline API surface matches (avoids exposing local DataFactorySecret/Reference classes).
 @@alternateType(
@@ -703,6 +717,11 @@ using Microsoft.DataFactory;
 @@clientName(
   SelfHostedIntegrationRuntimeStatusTypeProperties.selfContainedInteractiveAuthoringEnabled,
   "IsSelfContainedInteractiveAuthoringEnabled",
+  "csharp"
+);
+@@clientName(
+  SelfHostedIntegrationRuntimeStatusTypeProperties.autoUpdateETA,
+  "AutoUpdateEta",
   "csharp"
 );
 @@alternateType(
@@ -1226,3 +1245,5 @@ using Microsoft.DataFactory;
   "WebActivityAuthenticationType",
   "csharp"
 );
+
+@@usage(OutputColumn, Usage.input, "csharp");
