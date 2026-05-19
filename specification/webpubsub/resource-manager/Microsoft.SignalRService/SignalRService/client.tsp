@@ -284,7 +284,6 @@ op WebPubSubHubsCreateOrUpdateCustomized(
   @path
   hubName: string,
 
-  @body parameters: WebPubSubHub,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
@@ -292,6 +291,8 @@ op WebPubSubHubsCreateOrUpdateCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
   resourceName: string,
+
+  @body parameters: WebPubSubHub,
 ): void;
 
 @@override(WebPubSubHubs.createOrUpdate, WebPubSubHubsCreateOrUpdateCustomized);
@@ -351,7 +352,6 @@ op PrivateEndpointConnectionsUpdateCustomized(
   @path
   privateEndpointConnectionName: string,
 
-  @body parameters: PrivateEndpointConnection,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
@@ -359,6 +359,8 @@ op PrivateEndpointConnectionsUpdateCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
   resourceName: string,
+
+  @body parameters: PrivateEndpointConnection,
 ): PrivateEndpointConnection;
 
 @@override(
@@ -421,7 +423,6 @@ op WebPubSubSharedPrivateLinkResourcesCreateOrUpdateCustomized(
   @path
   sharedPrivateLinkResourceName: string,
 
-  @body parameters: SharedPrivateLinkResource,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
@@ -430,6 +431,8 @@ op WebPubSubSharedPrivateLinkResourcesCreateOrUpdateCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
   resourceName: string,
+
+  @body parameters: SharedPrivateLinkResource,
 ): void;
 
 @@override(
