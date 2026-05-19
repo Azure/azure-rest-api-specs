@@ -109,7 +109,7 @@ union OpenIdConnectClientCredentialMethod {
 
 // C# @@alternateType customizations.
 @@alternateType(
-  Azure.ResourceManager.LocationResourceParameter.location,
+  Azure.ResourceManager.LocationParameter.location,
   Azure.Core.azureLocation,
   "csharp"
 );
