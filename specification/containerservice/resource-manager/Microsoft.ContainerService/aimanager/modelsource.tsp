@@ -53,28 +53,15 @@ union ModelSourceType {
 }
 
 @added(Versions.v2026_05_02_preview)
-@doc("A credential value, discriminated by `type`.")
-@discriminator("type")
+@doc("A credential value. Exactly one variant must be set.")
 model CredentialValue {
-  @doc("The credential source type.")
-  type: CredentialSourceType;
-}
-
-@added(Versions.v2026_05_02_preview)
-@doc("The credential source type.")
-union CredentialSourceType {
-  string,
-
-  @doc("A credential provided inline as a secret value in the request payload.")
-  Inline: "Inline",
+  @doc("An inline credential containing a secret value supplied in the request payload.")
+  inline?: InlineCredential;
 }
 
 @added(Versions.v2026_05_02_preview)
 @doc("A credential provided inline.")
-model InlineCredential extends CredentialValue {
-  @doc("The credential source type.")
-  type: CredentialSourceType.Inline;
-
+model InlineCredential {
   @secret
   @visibility(Lifecycle.Create, Lifecycle.Update)
   @doc("The access token, password, or other secret value.")
@@ -99,8 +86,7 @@ interface ModelSources {
       IfMatchParameters<ModelSource>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "AIManager is a valid name"
-  listByAIManager is ArmResourceListByParent<ModelSource>;
+  list is ArmResourceListByParent<ModelSource>;
 }
 
 @@maxLength(ModelSource.name, 63);

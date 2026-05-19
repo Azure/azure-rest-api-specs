@@ -251,15 +251,6 @@
             "minLength": 1,
             "maxLength": 128,
             "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CalculateCostRequest"
-            }
           }
         ],
         "responses": {
@@ -657,7 +648,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers/{aiManagerName}/modelSources": {
       "get": {
-        "operationId": "ModelSources_ListByAIManager",
+        "operationId": "ModelSources_List",
         "tags": [
           "ModelSources"
         ],
@@ -698,8 +689,8 @@
           }
         },
         "x-ms-examples": {
-          "ModelSources_ListByAIManager_MaximumSet": {
-            "$ref": "./examples/ModelSources_ListByAIManager.json"
+          "ModelSources_List_MaximumSet": {
+            "$ref": "./examples/ModelSources_List.json"
           }
         },
         "x-ms-pageable": {
@@ -2049,9 +2040,9 @@
           "type": "string",
           "description": "An optional, free-form description of the model."
         },
-        "resolvedSpec": {
-          "$ref": "#/definitions/ResolvedModelSpec",
-          "description": "Platform-resolved specification of the model.",
+        "spec": {
+          "$ref": "#/definitions/ModelSpec",
+          "description": "Specification of the model.",
           "readOnly": true
         }
       }
@@ -2068,28 +2059,26 @@
         ]
       }
     },
-    "AutoscalingProfile": {
+    "AutoscaleProfile": {
       "type": "object",
-      "description": "Autoscaling configuration for a model deployment.",
+      "description": "Autoscaling configuration: scale replica count between a minimum and maximum.",
       "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "Whether autoscaling is enabled for this deployment.",
-          "default": false
-        },
         "minReplicas": {
           "type": "integer",
           "format": "int32",
-          "description": "The minimum number of replicas when autoscaling is enabled.",
+          "description": "The minimum number of replicas.",
           "minimum": 1
         },
         "maxReplicas": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of replicas when autoscaling is enabled. If not specified, the service derives a default from the subscription GPU quota.",
+          "description": "The maximum number of replicas. If not specified, the service derives a default from the subscription GPU quota.",
           "minimum": 1
         }
-      }
+      },
+      "required": [
+        "minReplicas"
+      ]
     },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
@@ -2137,17 +2126,17 @@
         "vmsPerReplica": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of cluster nodes required to host one replica on this SKU."
+          "description": "Number of vms required to host one replica on this SKU."
         },
         "vmHourlyPrice": {
           "type": "number",
           "format": "double",
-          "description": "On-demand hourly price for a single node of this SKU, in `currency`."
+          "description": "On-demand hourly price for a single vm of this SKU, in `currency`."
         },
         "totalHourlyPrice": {
           "type": "number",
           "format": "double",
-          "description": "Projected hourly cost for `replicas * vmsPerReplica` nodes, in `currency`. Omitted when the plan is infeasible."
+          "description": "Projected hourly cost for one replica (`vmsPerReplica` vms), in `currency`. Omitted when the plan is infeasible."
         },
         "priceAsOf": {
           "type": "string",
@@ -2158,13 +2147,9 @@
           "type": "boolean",
           "description": "Whether the caller can actually deploy this plan today (region availability, GPU quota, model fit, ...)."
         },
-        "infeasibleCode": {
-          "$ref": "#/definitions/InfeasibleCode",
-          "description": "Machine-readable reason when `feasible=false`. Omitted when `feasible=true`."
-        },
-        "infeasibleMessage": {
-          "type": "string",
-          "description": "Human-readable message accompanying `infeasibleCode`. Omitted when `feasible=true`."
+        "infeasibleError": {
+          "$ref": "#/definitions/InfeasibleError",
+          "description": "Error detail explaining why the plan is not deployable. Omitted when `feasible=true`."
         }
       },
       "required": [
@@ -2174,28 +2159,10 @@
         "feasible"
       ]
     },
-    "CalculateCostRequest": {
-      "type": "object",
-      "description": "Request body for the AI model `calculateCost` action.",
-      "properties": {
-        "replicas": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of replicas to price.",
-          "default": 1,
-          "minimum": 1
-        }
-      }
-    },
     "CalculateCostResponse": {
       "type": "object",
       "description": "Response body for the AI model `calculateCost` action.",
       "properties": {
-        "replicas": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Echoes the effective replica count used for totals."
-        },
         "currency": {
           "type": "string",
           "description": "ISO 4217 currency code, e.g. \"USD\"."
@@ -2212,7 +2179,6 @@
         }
       },
       "required": [
-        "replicas",
         "currency",
         "plans"
       ]
@@ -2250,37 +2216,15 @@
         }
       }
     },
-    "CredentialSourceType": {
-      "type": "string",
-      "description": "The credential source type.",
-      "enum": [
-        "Inline"
-      ],
-      "x-ms-enum": {
-        "name": "CredentialSourceType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Inline",
-            "value": "Inline",
-            "description": "A credential provided inline as a secret value in the request payload."
-          }
-        ]
-      }
-    },
     "CredentialValue": {
       "type": "object",
-      "description": "A credential value, discriminated by `type`.",
+      "description": "A credential value. Exactly one variant must be set.",
       "properties": {
-        "type": {
-          "$ref": "#/definitions/CredentialSourceType",
-          "description": "The credential source type."
+        "inline": {
+          "$ref": "#/definitions/InlineCredential",
+          "description": "An inline credential containing a secret value supplied in the request payload."
         }
-      },
-      "discriminator": "type",
-      "required": [
-        "type"
-      ]
+      }
     },
     "DeletePolicy": {
       "type": "string",
@@ -2336,6 +2280,24 @@
         ]
       }
     },
+    "InfeasibleError": {
+      "type": "object",
+      "description": "Error detail explaining why a `CalculateCostPlan` is not deployable.",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/InfeasibleCode",
+          "description": "Machine-readable reason code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable message accompanying `code`."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
     "InlineCredential": {
       "type": "object",
       "description": "A credential provided inline.",
@@ -2353,13 +2315,7 @@
       },
       "required": [
         "value"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/CredentialValue"
-        }
-      ],
-      "x-ms-discriminator-value": "Inline"
+      ]
     },
     "ModelDeployment": {
       "type": "object",
@@ -2482,15 +2438,9 @@
             "create"
           ]
         },
-        "replicas": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Desired replica count. Ignored when `autoscaling.enabled` is true.",
-          "minimum": 1
-        },
-        "autoscaling": {
-          "$ref": "#/definitions/AutoscalingProfile",
-          "description": "The autoscaling configuration for the deployment."
+        "scale": {
+          "$ref": "#/definitions/ScalingProfile",
+          "description": "Scaling configuration for the deployment. Provide either `manual` (fixed replica count) or `autoscale` (autoscaling between min/max replicas), but not both."
         },
         "overrides": {
           "$ref": "#/definitions/ModelDeploymentOverrides",
@@ -2590,7 +2540,13 @@
         "desiredReplicas": {
           "type": "integer",
           "format": "int32",
-          "description": "The desired replica count reported by the controller. Equals `properties.replicas` when autoscaler is disabled; current target replica count otherwise.",
+          "description": "The desired replica count reported by the controller. Equals `properties.scale.manual.replicas` when manual scaling is used; current target replica count derived from autoscaler otherwise.",
+          "readOnly": true
+        },
+        "currentReplicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The current number of ready replicas serving traffic.",
           "readOnly": true
         },
         "peakTokensPerMinute": {
@@ -2602,7 +2558,7 @@
         "estimatedProvisionTimeSeconds": {
           "type": "integer",
           "format": "int32",
-          "description": "Estimated total time, in seconds, for the deployment to become ready end-to-end (GPU node provisioning, image/weight pull, engine warm-up).",
+          "description": "Estimated total time, in seconds, for the deployment to become ready end-to-end (GPU vm provisioning, image/weight pull, engine warm-up).",
           "readOnly": true
         }
       }
@@ -2740,18 +2696,18 @@
         "primaryKey"
       ]
     },
-    "ResolvedModelSpec": {
+    "ModelSpec": {
       "type": "object",
-      "description": "The platform-resolved specification of a model. All fields are read-only.",
+      "description": "The specification of a model. All fields are read-only.",
       "properties": {
         "license": {
           "type": "string",
-          "description": "The license of the model, when known.",
+          "description": "The license of the model, when known. SPDX license identifier, e.g. `mit`, `apache-2.0`.",
           "readOnly": true
         },
-        "gated": {
+        "isRestricted": {
           "type": "boolean",
-          "description": "Whether the model is gated and requires explicit access approval.",
+          "description": "Whether access to the model is restricted and requires credential.",
           "readOnly": true
         },
         "maxContextLength": {
@@ -2762,7 +2718,37 @@
         }
       },
       "required": [
+        "isRestricted",
         "maxContextLength"
+      ]
+    },
+    "ScalingProfile": {
+      "type": "object",
+      "description": "Scaling configuration for a model deployment. Exactly one of `manual` or `autoscale` must be set.",
+      "properties": {
+        "manual": {
+          "$ref": "#/definitions/ManualScalingProfile",
+          "description": "Manual scaling configuration with a fixed replica count. Mutually exclusive with `autoscale`."
+        },
+        "autoscale": {
+          "$ref": "#/definitions/AutoscaleProfile",
+          "description": "Autoscaling configuration. Mutually exclusive with `manual`."
+        }
+      }
+    },
+    "ManualScalingProfile": {
+      "type": "object",
+      "description": "Manual scaling configuration: fixed replica count.",
+      "properties": {
+        "replicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Fixed number of replicas.",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "replicas"
       ]
     }
   },

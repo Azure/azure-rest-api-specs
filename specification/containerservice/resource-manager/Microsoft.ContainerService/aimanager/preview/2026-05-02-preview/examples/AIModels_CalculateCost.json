@@ -5,15 +5,11 @@
     "api-version": "2026-05-02-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "location": "eastus",
-    "aiModelName": "microsoft--Phi-4-mini-instruct",
-    "body": {
-      "replicas": 2
-    }
+    "aiModelName": "microsoft--Phi-4-mini-instruct"
   },
   "responses": {
     "200": {
       "body": {
-        "replicas": 2,
         "currency": "USD",
         "plans": [
           {
@@ -21,7 +17,7 @@
             "quantization": "fp16",
             "vmsPerReplica": 1,
             "vmHourlyPrice": 3.67,
-            "totalHourlyPrice": 7.34,
+            "totalHourlyPrice": 3.67,
             "priceAsOf": "2026-05-05T06:05:51.775Z",
             "feasible": true
           },
@@ -32,8 +28,10 @@
             "vmHourlyPrice": 98.32,
             "priceAsOf": "2026-05-05T06:05:51.775Z",
             "feasible": false,
-            "infeasibleCode": "InsufficientQuota",
-            "infeasibleMessage": "Subscription does not have sufficient H100 quota in the target region."
+            "infeasibleError": {
+              "code": "InsufficientQuota",
+              "message": "Subscription does not have sufficient H100 quota in the target region."
+            }
           }
         ]
       }

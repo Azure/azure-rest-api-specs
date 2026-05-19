@@ -74,12 +74,8 @@ model ModelDeploymentProperties {
   @doc("Azure VM SKU used to host the deployment, e.g. \"Standard_NC96ads_A100_v4\". Immutable after creation.")
   vmSize: string;
 
-  @doc("Desired replica count. Ignored when `autoscaling.enabled` is true.")
-  @minValue(1)
-  replicas?: int32;
-
-  @doc("The autoscaling configuration for the deployment.")
-  autoscaling?: AutoscalingProfile;
+  @doc("Scaling configuration for the deployment. Provide either `manual` (fixed replica count) or `autoscale` (autoscaling between min/max replicas), but not both.")
+  scale?: ScalingProfile;
 
   @doc("User overrides layered on top of profile resolution.")
   overrides?: ModelDeploymentOverrides;
@@ -144,15 +140,19 @@ model ModelDeploymentStatus {
   quantization?: string;
 
   @visibility(Lifecycle.Read)
-  @doc("The desired replica count reported by the controller. Equals `properties.replicas` when autoscaler is disabled; current target replica count otherwise.")
+  @doc("The desired replica count reported by the controller. Equals `properties.scale.manual.replicas` when manual scaling is used; current target replica count derived from autoscaler otherwise.")
   desiredReplicas?: int32;
+
+  @visibility(Lifecycle.Read)
+  @doc("The current number of ready replicas serving traffic.")
+  currentReplicas?: int32;
 
   @visibility(Lifecycle.Read)
   @doc("The peak tokens per minute measured by live stress test.")
   peakTokensPerMinute?: int32;
 
   @visibility(Lifecycle.Read)
-  @doc("Estimated total time, in seconds, for the deployment to become ready end-to-end (GPU node provisioning, image/weight pull, engine warm-up).")
+  @doc("Estimated total time, in seconds, for the deployment to become ready end-to-end (GPU vm provisioning, image/weight pull, engine warm-up).")
   estimatedProvisionTimeSeconds?: int32;
 }
 
@@ -165,16 +165,31 @@ model ModelDeploymentOverrides {
 }
 
 @added(Versions.v2026_05_02_preview)
-@doc("Autoscaling configuration for a model deployment.")
-model AutoscalingProfile {
-  @doc("Whether autoscaling is enabled for this deployment.")
-  enabled?: boolean = false;
+@doc("Scaling configuration for a model deployment. Exactly one of `manual` or `autoscale` must be set.")
+model ScalingProfile {
+  @doc("Manual scaling configuration with a fixed replica count. Mutually exclusive with `autoscale`.")
+  manual?: ManualScalingProfile;
 
-  @doc("The minimum number of replicas when autoscaling is enabled.")
+  @doc("Autoscaling configuration. Mutually exclusive with `manual`.")
+  autoscale?: AutoscaleProfile;
+}
+
+@added(Versions.v2026_05_02_preview)
+@doc("Manual scaling configuration: fixed replica count.")
+model ManualScalingProfile {
+  @doc("Fixed number of replicas.")
   @minValue(1)
-  minReplicas?: int32;
+  replicas: int32;
+}
 
-  @doc("The maximum number of replicas when autoscaling is enabled. If not specified, the service derives a default from the subscription GPU quota.")
+@added(Versions.v2026_05_02_preview)
+@doc("Autoscaling configuration: scale replica count between a minimum and maximum.")
+model AutoscaleProfile {
+  @doc("The minimum number of replicas.")
+  @minValue(1)
+  minReplicas: int32;
+
+  @doc("The maximum number of replicas. If not specified, the service derives a default from the subscription GPU quota.")
   @minValue(1)
   maxReplicas?: int32;
 }

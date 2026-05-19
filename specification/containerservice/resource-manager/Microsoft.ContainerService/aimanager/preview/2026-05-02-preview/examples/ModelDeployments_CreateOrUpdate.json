@@ -16,11 +16,11 @@
         "modelSourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgaimanagers/providers/Microsoft.ContainerService/aiManagers/aimanager1/modelSources/huggingface",
         "performanceMode": "Balanced",
         "vmSize": "ecyhtyrhzenvimowshz",
-        "replicas": 3,
-        "autoscaling": {
-          "enabled": true,
-          "minReplicas": 22,
-          "maxReplicas": 28
+        "scale": {
+          "autoscale": {
+            "minReplicas": 22,
+            "maxReplicas": 28
+          }
         },
         "overrides": {
           "values": {
@@ -40,11 +40,11 @@
           "modelSourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgaimanagers/providers/Microsoft.ContainerService/aiManagers/aimanager1/modelSources/huggingface",
           "performanceMode": "Balanced",
           "vmSize": "ecyhtyrhzenvimowshz",
-          "replicas": 3,
-          "autoscaling": {
-            "enabled": true,
-            "minReplicas": 22,
-            "maxReplicas": 28
+          "scale": {
+            "autoscale": {
+              "minReplicas": 22,
+              "maxReplicas": 28
+            }
           },
           "overrides": {
             "values": {
@@ -58,6 +58,7 @@
             "maxModelLen": 22,
             "quantization": "kqycribwnygkbufdlduehdpxm",
             "desiredReplicas": 18,
+            "currentReplicas": 16,
             "peakTokensPerMinute": 30,
             "estimatedProvisionTimeSeconds": 10
           }
@@ -87,11 +88,11 @@
           "modelSourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgaimanagers/providers/Microsoft.ContainerService/aiManagers/aimanager1/modelSources/huggingface",
           "performanceMode": "Balanced",
           "vmSize": "ecyhtyrhzenvimowshz",
-          "replicas": 3,
-          "autoscaling": {
-            "enabled": true,
-            "minReplicas": 22,
-            "maxReplicas": 28
+          "scale": {
+            "autoscale": {
+              "minReplicas": 22,
+              "maxReplicas": 28
+            }
           },
           "overrides": {
             "values": {
@@ -105,6 +106,7 @@
             "maxModelLen": 22,
             "quantization": "kqycribwnygkbufdlduehdpxm",
             "desiredReplicas": 18,
+            "currentReplicas": 16,
             "peakTokensPerMinute": 30,
             "estimatedProvisionTimeSeconds": 10
           }

@@ -38,20 +38,20 @@ model AIModelProperties {
   description?: string;
 
   @visibility(Lifecycle.Read)
-  @doc("Platform-resolved specification of the model.")
-  resolvedSpec?: ResolvedModelSpec;
+  @doc("Specification of the model.")
+  spec?: ModelSpec;
 }
 
 @added(Versions.v2026_05_02_preview)
-@doc("The platform-resolved specification of a model. All fields are read-only.")
-model ResolvedModelSpec {
+@doc("The specification of a model. All fields are read-only.")
+model ModelSpec {
   @visibility(Lifecycle.Read)
-  @doc("The license of the model, when known.")
+  @doc("The license of the model, when known. SPDX license identifier, e.g. `mit`, `apache-2.0`.")
   license?: string;
 
   @visibility(Lifecycle.Read)
-  @doc("Whether the model is gated and requires explicit access approval.")
-  gated?: boolean;
+  @doc("Whether access to the model is restricted and requires credential.")
+  isRestricted: boolean;
 
   @visibility(Lifecycle.Read)
   @doc("The maximum context length supported by the model, in tokens.")
@@ -59,19 +59,8 @@ model ResolvedModelSpec {
 }
 
 @added(Versions.v2026_05_02_preview)
-@doc("Request body for the AI model `calculateCost` action.")
-model CalculateCostRequest {
-  @doc("Number of replicas to price.")
-  @minValue(1)
-  replicas?: int32 = 1;
-}
-
-@added(Versions.v2026_05_02_preview)
 @doc("Response body for the AI model `calculateCost` action.")
 model CalculateCostResponse {
-  @doc("Echoes the effective replica count used for totals.")
-  replicas: int32;
-
   @doc("ISO 4217 currency code, e.g. \"USD\".")
   currency: string;
 
@@ -89,13 +78,13 @@ model CalculateCostPlan {
   @doc("Resolved quantization on this SKU.")
   quantization?: string;
 
-  @doc("Number of cluster nodes required to host one replica on this SKU.")
+  @doc("Number of vms required to host one replica on this SKU.")
   vmsPerReplica: int32;
 
-  @doc("On-demand hourly price for a single node of this SKU, in `currency`.")
+  @doc("On-demand hourly price for a single vm of this SKU, in `currency`.")
   vmHourlyPrice: float64;
 
-  @doc("Projected hourly cost for `replicas * vmsPerReplica` nodes, in `currency`. Omitted when the plan is infeasible.")
+  @doc("Projected hourly cost for one replica (`vmsPerReplica` vms), in `currency`. Omitted when the plan is infeasible.")
   totalHourlyPrice?: float64;
 
   @doc("UTC timestamp of the price snapshot used for this plan. Overrides any response-level snapshot if present.")
@@ -104,11 +93,18 @@ model CalculateCostPlan {
   @doc("Whether the caller can actually deploy this plan today (region availability, GPU quota, model fit, ...).")
   feasible: boolean;
 
-  @doc("Machine-readable reason when `feasible=false`. Omitted when `feasible=true`.")
-  infeasibleCode?: InfeasibleCode;
+  @doc("Error detail explaining why the plan is not deployable. Omitted when `feasible=true`.")
+  infeasibleError?: InfeasibleError;
+}
 
-  @doc("Human-readable message accompanying `infeasibleCode`. Omitted when `feasible=true`.")
-  infeasibleMessage?: string;
+@added(Versions.v2026_05_02_preview)
+@doc("Error detail explaining why a `CalculateCostPlan` is not deployable.")
+model InfeasibleError {
+  @doc("Machine-readable reason code.")
+  code: InfeasibleCode;
+
+  @doc("Human-readable message accompanying `code`.")
+  message: string;
 }
 
 @added(Versions.v2026_05_02_preview)
@@ -139,7 +135,7 @@ interface AIModels {
   @action("calculateCost")
   calculateCost is ArmResourceActionSync<
     AIModel,
-    CalculateCostRequest,
+    void,
     ArmResponse<CalculateCostResponse>
   >;
 }
