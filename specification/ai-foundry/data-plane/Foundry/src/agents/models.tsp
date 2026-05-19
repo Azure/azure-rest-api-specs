@@ -287,6 +287,9 @@ union AgentProtocol {
   responses: "responses",
   mcp: "mcp",
   invocations: "invocations",
+
+  @doc("WebSocket-based protocol for hosted voice and real-time streaming agents.")
+  invocations_ws: "invocations_ws",
 }
 
 union AgentEndpointProtocol {
@@ -298,7 +301,6 @@ union AgentEndpointProtocol {
   invocations: "invocations",
 
   @doc("WebSocket-based protocol for hosted voice and real-time streaming agents.")
-  @removed(Versions.v1)
   invocations_ws: "invocations_ws",
 }
 
@@ -488,6 +490,7 @@ model HostedAgentDefinition extends AgentDefinition {
   @example(#[
     #{ protocol: "responses", version: "v0.1.1" },
     #{ protocol: "invocations", version: "v0.0.1" },
+    #{ protocol: "invocations_ws", version: "1.0.0" },
     #{ protocol: "a2a", version: "v0.3.0" }
   ])
   container_protocol_versions?: ProtocolVersionRecord[];
