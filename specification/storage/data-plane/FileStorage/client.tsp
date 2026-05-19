@@ -8,27 +8,33 @@ using Storage.File;
 
 namespace Customizations;
 
-@@alternateType(FileCreationTimeParameter.fileCreationTime,
+@@alternateType(
+  FileCreationTimeParameter.fileCreationTime,
   string,
   "python,csharp,javascript,go"
 );
-@@alternateType(FileLastWriteTimeParameter.fileLastWriteTime,
+@@alternateType(
+  FileLastWriteTimeParameter.fileLastWriteTime,
   string,
   "python,csharp,javascript,go"
 );
-@@alternateType(FileChangeTimeParameter.fileChangeTime,
+@@alternateType(
+  FileChangeTimeParameter.fileChangeTime,
   string,
   "python,csharp,javascript,go"
 );
-@@alternateType(FileCreationTimeResponseHeader.fileCreationTime,
+@@alternateType(
+  FileCreationTimeResponseHeader.fileCreationTime,
   string,
   "python,csharp"
 );
-@@alternateType(FileLastWriteTimeResponseHeader.fileLastWriteTime,
+@@alternateType(
+  FileLastWriteTimeResponseHeader.fileLastWriteTime,
   string,
   "python,csharp"
 );
-@@alternateType(FileChangeTimeResponseHeader.fileChangeTime,
+@@alternateType(
+  FileChangeTimeResponseHeader.fileChangeTime,
   string,
   "python,csharp"
 );
@@ -85,11 +91,13 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@alternateType(DirectoryItem.name, string, "go");
 @@alternateType(FileItem.name, string, "go");
 @@alternateType(FileChangeTimeResponseHeader.fileChangeTime, utcDateTime, "go");
-@@alternateType(FileCreationTimeResponseHeader.fileCreationTime,
+@@alternateType(
+  FileCreationTimeResponseHeader.fileCreationTime,
   utcDateTime,
   "go"
 );
-@@alternateType(FileLastWriteTimeResponseHeader.fileLastWriteTime,
+@@alternateType(
+  FileLastWriteTimeResponseHeader.fileLastWriteTime,
   utcDateTime,
   "go"
 );
@@ -100,11 +108,13 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@alternateType(LinkCountResponseHeader.linkCount, int64, "go");
 @@alternateType(ListFilesAndDirectoriesSegmentResponse.prefix, string, "go");
 @@alternateType(NfsTimestampResponseHeaders.fileChangeTime, utcDateTime, "go");
-@@alternateType(NfsTimestampResponseHeaders.fileCreationTime,
+@@alternateType(
+  NfsTimestampResponseHeaders.fileCreationTime,
   utcDateTime,
   "go"
 );
-@@alternateType(NfsTimestampResponseHeaders.fileLastWriteTime,
+@@alternateType(
+  NfsTimestampResponseHeaders.fileLastWriteTime,
   utcDateTime,
   "go"
 );
@@ -112,11 +122,13 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@alternateType(SignedIdentifiers, SignedIdentifiersGo, "go");
 @@alternateType(ShareProvisioningResponseHeaders.quota, int64, "go");
 @@alternateType(ShareProvisioningResponseHeaders.provisionedIops, int64, "go");
-@@alternateType(ShareProvisioningResponseHeaders.provisionedBandwidthMibps,
+@@alternateType(
+  ShareProvisioningResponseHeaders.provisionedBandwidthMibps,
   int64,
   "go"
 );
-@@alternateType(ShareProvisioningResponseHeaders.includedBurstIops,
+@@alternateType(
+  ShareProvisioningResponseHeaders.includedBurstIops,
   int64,
   "go"
 );
@@ -127,14 +139,16 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@clientName(ContentCrc64ResponseHeader.contentCrc64, "XMSContentCRC64", "go");
 @@clientName(DirectoryItem, "Directory", "go");
 @@clientName(DirectoryItem.fileId, "ID", "go");
-@@clientName(EnableSmbDirectoryLeaseHeader.enableSmbDirectoryLease,
+@@clientName(
+  EnableSmbDirectoryLeaseHeader.enableSmbDirectoryLease,
   "EnableSMBDirectoryLease",
   "go"
 );
 @@clientName(EtagResponseHeader.etag, "ETag", "go");
 @@clientName(FileItem, "File", "go");
 @@clientName(FileItem.fileId, "ID", "go");
-@@clientName(FilesAndDirectoriesListSegment.directoryItems,
+@@clientName(
+  FilesAndDirectoriesListSegment.directoryItems,
   "Directories",
   "go"
 );
@@ -152,11 +166,13 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@clientName(NfsTimestampResponseHeaders.fileId, "ID", "go");
 @@clientName(NfsTimestampResponseHeaders.fileParentId, "ParentID", "go");
 @@clientName(OptionalBody.optionalBody, "Optionalbody", "go");
-@@clientName(RequestServerEncryptedResponseHeader.requestServerEncrypted,
+@@clientName(
+  RequestServerEncryptedResponseHeader.requestServerEncrypted,
   "IsServerEncrypted",
   "go"
 );
-@@clientName(ServerEncryptedResponseHeader.serverEncrypted,
+@@clientName(
+  ServerEncryptedResponseHeader.serverEncrypted,
   "IsServerEncrypted",
   "go"
 );
@@ -164,30 +180,36 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 
 @@clientName(ShareItemInternal, "Share", "go");
 @@clientName(ShareNfsSettings, "ShareNFSSettings", "go");
-@@clientName(ShareNfsSettingsEncryptionInTransit,
+@@clientName(
+  ShareNfsSettingsEncryptionInTransit,
   "ShareNFSSettingsEncryptionInTransit",
   "go"
 );
 @@clientName(SharePropertiesInternal, "ShareProperties", "go");
-@@clientName(SharePropertiesInternal.enableSmbDirectoryLease,
+@@clientName(
+  SharePropertiesInternal.enableSmbDirectoryLease,
   "EnableSMBDirectoryLease",
   "go"
 );
 @@clientName(ShareProtocolSettings, "ProtocolSettings", "go");
-@@clientName(ShareSmbSettingsEncryptionInTransit,
+@@clientName(
+  ShareSmbSettingsEncryptionInTransit,
   "SMBSettingsEncryptionInTransit",
   "go"
 );
-@@clientName(ShareUsageResponseHeader.shareUsageBytes,
+@@clientName(
+  ShareUsageResponseHeader.shareUsageBytes,
   "FileShareUsageBytes",
   "go"
 );
-@@clientName(ShareSnapshotUsageResponseHeader.shareSnapshotUsageBytes,
+@@clientName(
+  ShareSnapshotUsageResponseHeader.shareSnapshotUsageBytes,
   "FileShareSnapshotUsageBytes",
   "go"
 );
 @@clientName(ShareSmbSettings, "SMBSettings", "go");
-@@clientName(Storage.File.UserDelegationKey.signedDelegatedUserTid,
+@@clientName(
+  Storage.File.UserDelegationKey.signedDelegatedUserTid,
   "signedDelegatedUserTenantID",
   "go"
 );
@@ -198,7 +220,8 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(HandleItem, "omitSerdeMethods", "all", "go");
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
-@@clientOption(Directory.listFilesAndDirectoriesSegment,
+@@clientOption(
+  Directory.listFilesAndDirectoriesSegment,
   "preserveContentTypeHeader",
   true,
   "go"
@@ -206,19 +229,22 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(Directory.listHandles, "preserveContentTypeHeader", true, "go");
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
-@@clientOption(Storage.File.File.download,
+@@clientOption(
+  Storage.File.File.download,
   "preserveContentTypeHeader",
   true,
   "go"
 );
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
-@@clientOption(Storage.File.File.getProperties,
+@@clientOption(
+  Storage.File.File.getProperties,
   "preserveContentTypeHeader",
   true,
   "go"
 );
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
-@@clientOption(Storage.File.File.listHandles,
+@@clientOption(
+  Storage.File.File.listHandles,
   "preserveContentTypeHeader",
   true,
   "go"
@@ -230,104 +256,126 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@clientName(Storage.File.AccessPolicy.expiry, "expiresOn", "javascript");
 @@clientName(Storage.File.AccessPolicy.permission, "permissions", "javascript");
 
-@@alternateType(Storage.File.UserDelegationKey.signedStart,
+@@alternateType(
+  Storage.File.UserDelegationKey.signedStart,
   string,
   "javascript,python"
 );
-@@alternateType(Storage.File.UserDelegationKey.signedExpiry,
+@@alternateType(
+  Storage.File.UserDelegationKey.signedExpiry,
   string,
   "javascript,python"
 );
-@@clientName(Storage.File.UserDelegationKey.signedOid,
+@@clientName(
+  Storage.File.UserDelegationKey.signedOid,
   "signedObjectId",
   "javascript"
 );
-@@clientName(Storage.File.UserDelegationKey.signedTid,
+@@clientName(
+  Storage.File.UserDelegationKey.signedTid,
   "signedTenantId",
   "javascript"
 );
-@@clientName(Storage.File.UserDelegationKey.signedStart,
+@@clientName(
+  Storage.File.UserDelegationKey.signedStart,
   "signedStartsOn",
   "javascript"
 );
-@@clientName(Storage.File.UserDelegationKey.signedExpiry,
+@@clientName(
+  Storage.File.UserDelegationKey.signedExpiry,
   "signedExpiresOn",
   "javascript"
 );
 
 @@clientName(Storage.File.Metrics.includeApis, "includeAPIs", "javascript");
 
-@@clientName(Storage.File.StorageServiceProperties,
+@@clientName(
+  Storage.File.StorageServiceProperties,
   "FileServiceProperties",
   "javascript"
 );
 
-@@clientName(Storage.File.TimeoutParameter.timeout,
+@@clientName(
+  Storage.File.TimeoutParameter.timeout,
   "timeoutInSeconds",
   "javascript"
 );
 
-@@clientName(Storage.File.ShareSnapshotParameter.sharesnapshot,
+@@clientName(
+  Storage.File.ShareSnapshotParameter.sharesnapshot,
   "shareSnapshot",
   "javascript"
 );
 
-@@clientName(Storage.File.MaxResultsParameter.maxresults,
+@@clientName(
+  Storage.File.MaxResultsParameter.maxresults,
   "maxResults",
   "javascript"
 );
 
-@@clientName(Storage.File.ListSharesResponse.nextMarker,
+@@clientName(
+  Storage.File.ListSharesResponse.nextMarker,
   "continuationToken",
   "javascript"
 );
-@@clientName(Storage.File.ListFilesAndDirectoriesSegmentResponse.nextMarker,
+@@clientName(
+  Storage.File.ListFilesAndDirectoriesSegmentResponse.nextMarker,
   "continuationToken",
   "javascript"
 );
-@@clientName(Storage.File.ListHandlesResponse.nextMarker,
+@@clientName(
+  Storage.File.ListHandlesResponse.nextMarker,
   "continuationToken",
   "javascript"
 );
 
 @@clientName(Storage.File.EtagResponseHeader.etag, "etag", "javascript,python");
-@@clientName(Storage.File.SharePropertiesInternal.eTag,
+@@clientName(
+  Storage.File.SharePropertiesInternal.eTag,
   "etag",
   "javascript,python"
 );
 @@clientName(Storage.File.FileProperty.eTag, "etag", "javascript,python");
 
-@@clientName(Storage.File.FileSmtPropertyRequestHeaders.fileCreationTime,
+@@clientName(
+  Storage.File.FileSmtPropertyRequestHeaders.fileCreationTime,
   "fileCreatedOn",
   "javascript"
 );
-@@clientName(Storage.File.FileSmtPropertyRequestHeaders.fileLastWriteTime,
+@@clientName(
+  Storage.File.FileSmtPropertyRequestHeaders.fileLastWriteTime,
   "fileLastWriteOn",
   "javascript"
 );
-@@clientName(Storage.File.FileSmtPropertyRequestHeaders.fileChangeTime,
+@@clientName(
+  Storage.File.FileSmtPropertyRequestHeaders.fileChangeTime,
   "fileChangeOn",
   "javascript"
 );
-@@clientName(Storage.File.FileSmtPropertyResponseHeaders.fileCreationTime,
+@@clientName(
+  Storage.File.FileSmtPropertyResponseHeaders.fileCreationTime,
   "fileCreatedOn",
   "javascript"
 );
-@@clientName(Storage.File.FileSmtPropertyResponseHeaders.fileLastWriteTime,
+@@clientName(
+  Storage.File.FileSmtPropertyResponseHeaders.fileLastWriteTime,
   "fileLastWriteOn",
   "javascript"
 );
-@@clientName(Storage.File.FileSmtPropertyResponseHeaders.fileChangeTime,
+@@clientName(
+  Storage.File.FileSmtPropertyResponseHeaders.fileChangeTime,
   "fileChangeOn",
   "javascript"
 );
 
-@@clientName(Storage.File.CopyStatusResponseHeaders.copyCompletionTime,
+@@clientName(
+  Storage.File.CopyStatusResponseHeaders.copyCompletionTime,
   "copyCompletedOn",
   "javascript"
 );
 
-@@clientName(Storage.File.LeaseTimeResponseHeader.leaseTime,
+@@clientName(
+  Storage.File.LeaseTimeResponseHeader.leaseTime,
   "leaseTimeInSeconds",
   "javascript"
 );
@@ -335,20 +383,23 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@clientName(Storage.File.OptionalBody.optionalBody, "body", "javascript");
 
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
-@@clientOption(Storage.File.Error,
+@@clientOption(
+  Storage.File.Error,
   "header",
   "x-ms-error-code:errorCode",
   "javascript"
 );
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
-@@clientOption(Storage.File.Error,
+@@clientOption(
+  Storage.File.Error,
   "restErrorCodeHeader",
   "x-ms-error-code",
   "javascript"
 );
 
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
-@@clientOption(Storage.File.MetadataHeaders.metadata,
+@@clientOption(
+  Storage.File.MetadataHeaders.metadata,
   "headerCollectionPrefix",
   "x-ms-meta",
   "javascript"
@@ -360,33 +411,40 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(Storage.File, "omitSlashFromEmptyRoute", true, "python,csharp");
 
-@@clientName(Storage.File.UserDelegationKey.signedDelegatedUserTid,
+@@clientName(
+  Storage.File.UserDelegationKey.signedDelegatedUserTid,
   "signedDelegatedUserTenantId",
   "javascript"
 );
 
-@@clientName(Storage.File.ShareUsageResponseHeader.shareUsageBytes,
+@@clientName(
+  Storage.File.ShareUsageResponseHeader.shareUsageBytes,
   "usageBytes",
   "javascript"
 );
-@@clientName(Storage.File.ShareSnapshotUsageResponseHeader.shareSnapshotUsageBytes,
+@@clientName(
+  Storage.File.ShareSnapshotUsageResponseHeader.shareSnapshotUsageBytes,
   "snapshotUsageBytes",
   "javascript"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This is for legacy compatibility"
-@@Legacy.disablePageable(Storage.File.Service.listSharesSegment,
+@@Legacy.disablePageable(
+  Storage.File.Service.listSharesSegment,
   "python,javascript,csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This is for legacy compatibility"
-@@Legacy.disablePageable(Storage.File.Directory.listFilesAndDirectoriesSegment,
+@@Legacy.disablePageable(
+  Storage.File.Directory.listFilesAndDirectoriesSegment,
   "python,javascript,csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This is for legacy compatibility"
-@@Legacy.disablePageable(Storage.File.Directory.listHandles,
+@@Legacy.disablePageable(
+  Storage.File.Directory.listHandles,
   "python,javascript,csharp,go"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This is for legacy compatibility"
-@@Legacy.disablePageable(Storage.File.File.listHandles,
+@@Legacy.disablePageable(
+  Storage.File.File.listHandles,
   "python,javascript,csharp,go"
 );
 
@@ -424,21 +482,24 @@ model DirectoryClientParameters {
   allowSourceTrailingDot?: boolean;
 }
 
-@@clientInitialization(Storage.File,
+@@clientInitialization(
+  Storage.File,
   {
     parameters: ShareClientParameters,
   },
   "csharp"
 );
 
-@@clientInitialization(Storage.File.Directory,
+@@clientInitialization(
+  Storage.File.Directory,
   {
     parameters: DirectoryClientParameters,
   },
   "csharp"
 );
 
-@@clientInitialization(Storage.File.File,
+@@clientInitialization(
+  Storage.File.File,
   {
     parameters: FileClientParameters,
   },
@@ -473,7 +534,8 @@ model DirectoryClientParameters {
 @@access(AccessRight, Access.internal, "csharp");
 
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
-@@clientOption(Storage.File.MetadataHeaders.metadata,
+@@clientOption(
+  Storage.File.MetadataHeaders.metadata,
   "collectionHeaderPrefix",
   "x-ms-meta-",
   "csharp"
