@@ -1211,6 +1211,12 @@ union OpenIdConnectClientCredentialMethod {
 
 // C# @@usage customizations.
 @@usage(
+  LogicAppProperties,
+  Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@usage(
   ContainerAppAuthToken,
   Azure.ClientGenerator.Core.Usage.output,
   "csharp"
@@ -1349,6 +1355,12 @@ union OpenIdConnectClientCredentialMethod {
 );
 
 @@usage(
+  JavaComponentProperties,
+  Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@usage(
   WorkflowEnvelope,
   Azure.ClientGenerator.Core.Usage.output,
   "csharp"
@@ -1368,6 +1380,18 @@ union OpenIdConnectClientCredentialMethod {
 
 @@usage(
   ErrorEntity,
+  Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@usage(
+  UsageUnit,
+  Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@usage(
+  OpenIdConnectClientCredentialMethod,
   Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
