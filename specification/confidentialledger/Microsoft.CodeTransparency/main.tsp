@@ -684,6 +684,11 @@ model Response503Cbor {
   @header
   contentType: "application/concise-problem-details+cbor";
 
+  @doc("Transaction ID associated with the failed request, when available")
+  @added(Versions.`2026-03-26`)
+  @header("x-ms-ccf-transaction-id")
+  transactionId?: string;
+
   @doc("CBOR content of the error object")
   @body
   error: ConciseProblemDetailsCbor;
