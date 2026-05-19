@@ -72,7 +72,7 @@ op listScittKeys is Foundations.Operation<
   AcceptCborHeader,
   ScittKeysResponse,
   ServiceTraits,
-  AnyCborError
+  AnyCborErrorV09
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -84,7 +84,7 @@ op getScittKey is Foundations.Operation<
   KidParameter & AcceptCborHeader,
   ScittKeyResponse,
   ServiceTraits,
-  AnyCborError
+  AnyCborErrorV09
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -113,7 +113,7 @@ op createEntryV09 is Foundations.Operation<
   SignedStatement & AcceptCoseOrCborHeader & WaitForCommitParameter,
   CreateEntryCreated | CreateEntrySeeOther,
   ServiceTraits,
-  AnyCborError
+  AnyCborErrorV09
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -141,7 +141,7 @@ op getOperationV09 is Foundations.Operation<
   OperationIdParameter & AcceptCborHeader,
   OperationStatusComplete | OperationStatusPending,
   ServiceTraits,
-  AnyCborError
+  AnyCborErrorV09
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -168,7 +168,7 @@ op getEntryV09 is Foundations.Operation<
   EntryIdParameter & AcceptScittReceiptHeader,
   ReceiptEntry | ReceiptEntryPending,
   ServiceTraits,
-  AnyCborError
+  AnyCborErrorV09
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -195,7 +195,7 @@ op getEntryStatementV09 is Foundations.Operation<
   EntryIdParameter & AcceptScittStatementHeader,
   TransparentStatement,
   ServiceTraits,
-  AnyCborError
+  AnyCborErrorV09
 >;
 
 @added(Versions.`2025-01-31-preview`)
@@ -694,15 +694,18 @@ model Response503Cbor {
   error: ConciseProblemDetailsCbor;
 }
 
-union AnyCborError {
-  Response400Cbor,
+alias AnyCborError =
+  | Response400Cbor
+  | Response404Cbor
+  | Response429Cbor
+  | Response500Cbor
+  | Response503Cbor;
 
-  @added(Versions.`2026-03-26`)
-  Response401Cbor,
-
-  Response404Cbor,
-  Response429Cbor,
-  Response500Cbor,
-  Response503Cbor,
-}
+alias AnyCborErrorV09 =
+  | Response400Cbor
+  | Response401Cbor
+  | Response404Cbor
+  | Response429Cbor
+  | Response500Cbor
+  | Response503Cbor;
 alias CborServerErrors = Response500Cbor | Response503Cbor;
