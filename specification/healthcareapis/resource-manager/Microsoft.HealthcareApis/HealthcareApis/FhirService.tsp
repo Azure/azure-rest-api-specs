@@ -14,16 +14,25 @@ namespace Microsoft.HealthcareApis;
 /**
  * The description of Fhir Service
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Workspace)
 model FhirService
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<FhirServiceProperties> {
+  is Azure.ResourceManager.ProxyResource<FhirServiceProperties> {
   ...ResourceNameParameter<
     Resource = FhirService,
     KeyName = "fhirServiceName",
     SegmentName = "fhirservices",
     NamePattern = ""
   >;
+
+  /** The common properties of tracked resources in the service. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  tags?: Record<string>;
+
+  /** The common properties for any location based resource, tracked or proxy. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  location?: string;
 
   /**
    * An etag associated with the resource, used for optimistic concurrency when editing it.
