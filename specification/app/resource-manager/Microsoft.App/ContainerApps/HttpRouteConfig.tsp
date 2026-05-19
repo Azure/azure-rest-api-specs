@@ -11,6 +11,17 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.App;
+
+/** Response model for HttpRouteConfig delete accepted (202) with lowercase location header */
+model HttpRouteConfigDeleteAcceptedResponse {
+  /** The 202 status code. */
+  @statusCode statusCode: 202;
+
+  @header("location")
+  @doc("URL to check the status of the delete operation.")
+  location?: string;
+}
+
 /**
  * A set of host names and http request routing rules for a Container App Environment
  */
@@ -86,7 +97,11 @@ interface HttpRouteConfigs {
    * Deletes the specified Managed Http Route.
    */
   @summary("Deletes the specified Managed Http Route.")
-  delete is ArmResourceDeleteWithoutOkAsync<HttpRouteConfig>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Custom response to match original swagger lowercase location header"
+  delete is ArmResourceDeleteWithoutOkAsync<
+    HttpRouteConfig,
+    Response = HttpRouteConfigDeleteAcceptedResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Get the Managed Http Routes in a given managed environment.

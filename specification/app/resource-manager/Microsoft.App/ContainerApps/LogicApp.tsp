@@ -37,6 +37,19 @@ alias LogicAppParentParameter = {
   containerAppName: string;
 };
 
+alias LogicAppOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  LogicAppParentParameter,
+  {
+    /** Name of the Logic App, the extension resource. */
+    @path
+    @segment("providers/Microsoft.App/logicApps")
+    @key
+    @pattern("^[-\\w\\._\\(\\)]+$")
+    logicAppName: string;
+  },
+  ErrorType = DefaultErrorResponse
+>;
+
 @armResourceOperations
 interface LogicApps {
   /**
@@ -52,10 +65,9 @@ interface LogicApps {
   /**
    * Create or update a Logic App extension resource
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is LogicAppOps.CreateOrUpdateSync<
     LogicApp,
-    LogicAppParentParameter,
-    Error = DefaultErrorResponse
+    OptionalRequestBody = true
   >;
 
   /**

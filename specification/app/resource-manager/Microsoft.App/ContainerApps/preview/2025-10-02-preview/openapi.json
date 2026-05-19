@@ -481,7 +481,12 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "name": "location",
+            "in": "path",
+            "description": "The location for which resource usage is queried.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$"
           }
         ],
         "responses": {
@@ -1417,7 +1422,7 @@
             "name": "environmentEnvelope",
             "in": "body",
             "description": "Configuration details of the connectedEnvironment.",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/ConnectedEnvironmentPatchResource"
             }
@@ -4317,7 +4322,7 @@
             "name": "resource",
             "in": "body",
             "description": "Logic app resource properties.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/LogicApp"
             }
@@ -9287,16 +9292,11 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "Response model for HttpRouteConfig delete accepted (202) with lowercase location header",
             "headers": {
-              "Location": {
+              "location": {
                 "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+                "description": "URL to check the status of the delete operation."
               }
             }
           },
@@ -9314,11 +9314,7 @@
           "Delete Certificate": {
             "$ref": "./examples/HttpRouteConfig_Delete.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/javaComponents": {
@@ -21615,6 +21611,7 @@
       "description": "Additional workflow properties.",
       "properties": {
         "files": {
+          "$ref": "#/definitions/WorkflowFiles",
           "description": "Gets or sets the files."
         },
         "flowState": {
@@ -21626,6 +21623,10 @@
           "description": "Gets or sets workflow health."
         }
       }
+    },
+    "WorkflowFiles": {
+      "type": "object",
+      "description": "Represents an object representing files in the form of { \"<filename>\" : \"<filecontent>\"}."
     },
     "WorkflowHealth": {
       "type": "object",

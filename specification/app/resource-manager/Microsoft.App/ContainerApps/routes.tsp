@@ -13,6 +13,15 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.App;
 
+/** Custom location parameter with pattern matching original swagger */
+alias AppLocationParameter = {
+  /** The location for which resource usage is queried. */
+  @path
+  @segment("locations")
+  @pattern("^[-\\w\\._]+$")
+  location: string;
+};
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface AvailableWorkloadProfilesOperationGroup {
   /**
