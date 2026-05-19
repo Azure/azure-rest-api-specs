@@ -42,6 +42,11 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/azure-data-appconfiguration"
     namespace: com.azure.data.appconfiguration
     flavor: azure
+    partial-update: true
+    enable-sync-stack: true
+    generate-test: false
+    generate-sample: false
+    customization-class: customization/src/main/java/AppConfigCustomization.java
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
