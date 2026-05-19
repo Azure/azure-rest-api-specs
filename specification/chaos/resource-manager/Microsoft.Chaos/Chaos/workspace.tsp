@@ -3,6 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./workspace.models.tsp";
+import "./workspaceEvaluation.models.tsp";
 import "./lro-helpers.tsp";
 
 using Azure.ResourceManager;
