@@ -506,8 +506,31 @@ using Microsoft.DataFactory;
   "IntegrationRuntimeOutboundNetworkDependenciesResult",
   "csharp"
 );
-@@clientName(SalesforceV2Source.SOQLQuery, "SoqlQuery ", "csharp");
-@@clientName(SalesforceServiceCloudV2Source.SOQLQuery, "SoqlQuery ", "csharp");
+@@clientName(SalesforceV2Source.SOQLQuery, "SoqlQuery", "csharp");
+@@clientName(SalesforceServiceCloudV2Source.SOQLQuery, "SoqlQuery", "csharp");
+// MPG migration: align IntegrationRuntimeNodeIpAddress class & operation naming
+// with the legacy AutoRest SDK (IPAddress capitalization, GetIPAddressIntegrationRuntimeNode method name).
+@@clientName(
+  IntegrationRuntimeNodeIpAddress,
+  "IntegrationRuntimeNodeIPAddress",
+  "csharp"
+);
+@@clientName(
+  IntegrationRuntimeResources.getIpAddress,
+  "GetIPAddressIntegrationRuntimeNode",
+  "csharp"
+);
+// MPG migration: SelfHostedIntegrationRuntimeStatusTypeProperties.nodes & links
+// are output-only collections (all other props in the same model are @visibility(Read));
+// mark them Read so the generator emits IReadOnlyList to match the legacy SDK surface.
+@@visibility(
+  SelfHostedIntegrationRuntimeStatusTypeProperties.nodes,
+  Lifecycle.Read
+);
+@@visibility(
+  SelfHostedIntegrationRuntimeStatusTypeProperties.links,
+  Lifecycle.Read
+);
 @@clientName(
   IntegrationRuntimeResource,
   "DataFactoryIntegrationRuntime",
@@ -1253,7 +1276,11 @@ using Microsoft.DataFactory;
 @@clientName(SSISPackageLocation.type, "LocationType", "csharp");
 @@clientName(SynapseNotebookReference.type, "NotebookReferenceType", "csharp");
 @@clientName(SynapseSparkJobReference.type, "SparkJobReferenceType", "csharp");
-@@clientName(ManagedIntegrationRuntimeOperationResult.type, "ManagedIntegrationRuntimeOperationResultType", "csharp");
+@@clientName(
+  ManagedIntegrationRuntimeOperationResult.type,
+  "ManagedIntegrationRuntimeOperationResultType",
+  "csharp"
+);
 @@clientName(
   WebActivityAuthentication.type,
   "WebActivityAuthenticationType",
@@ -1267,4 +1294,3 @@ using Microsoft.DataFactory;
 
 @@usage(OutputColumn, Usage.input | Usage.output, "csharp");
 @@usage(ScriptType, Usage.input | Usage.output, "csharp");
-
