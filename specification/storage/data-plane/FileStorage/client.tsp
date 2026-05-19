@@ -80,7 +80,6 @@ interface ShareClient extends Storage.File.Share {}
 
 @@access(StorageErrorCode, Access.public, "go");
 @@usage(StorageErrorCode, Usage.output, "go");
-@@usage(StringEncoded, Usage.output, "go");
 
 /** Represents an array of signed identifiers */
 @clientName("SignedIdentifiers", "go")
@@ -220,8 +219,6 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@clientName(UserDelegationKey.signedTid, "SignedTID", "go");
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(HandleItem, "omitSerdeMethods", "all", "go");
-#suppress "@azure-tools/typespec-client-generator-core/client-option"
-@@clientOption(StringEncoded, "omitSerdeMethods", "all", "go");
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(
   Directory.listFilesAndDirectoriesSegment,
