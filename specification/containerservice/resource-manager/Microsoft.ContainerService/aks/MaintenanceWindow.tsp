@@ -43,9 +43,7 @@ model MaintenanceWindowResource
 
 @@maxLength(MaintenanceWindowResource.name, 63);
 @@minLength(MaintenanceWindowResource.name, 1);
-@@doc(MaintenanceWindowResource.name,
-  "The name of the maintenance window."
-);
+@@doc(MaintenanceWindowResource.name, "The name of the maintenance window.");
 @@doc(MaintenanceWindowResource.properties,
   "Properties of a maintenance window."
 );
