@@ -89,39 +89,6 @@ model CSharpDiagnosticsDefinition
   score?: float32;
 }
 
-/**
- * C# compatibility replacement for flattened blob storage token store settings.
- */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "CSharp prefix marks this as a C#-only compatibility replacement during MPG migration"
-model CSharpBlobStorageTokenStore {
-  /**
-   * The name of the app secrets containing the SAS URL of the blob storage containing the tokens.
-   */
-  sasUrlSettingName?: string;
-}
-
-/**
- * C# compatibility replacement for flattened runtime settings.
- */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "CSharp prefix marks this as a C#-only compatibility replacement during MPG migration"
-model CSharpRuntime {
-  /**
-   * Java app configuration.
-   */
-  java?: CSharpRuntimeJava;
-}
-
-/**
- * C# compatibility replacement for flattened Java runtime settings.
- */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "CSharp prefix marks this as a C#-only compatibility replacement during MPG migration"
-model CSharpRuntimeJava {
-  /**
-   * Enable jmx core metrics for the java app.
-   */
-  enableMetrics?: boolean;
-}
-
 namespace Microsoft.App {
   /**
    * C# compatibility diagnostics data for a Container Apps Job.
@@ -142,28 +109,12 @@ namespace Microsoft.App {
    */
   model JobDiagnosticsCollection is Azure.Core.Page<JobDiagnostic>;
 
-  /**
-   * C# compatibility Container Apps Job proxy API resource.
-   */
-  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Preserve the previous C# job proxy resource hierarchy during MPG migration"
-  @TypeSpec.Rest.parentResource(Job)
-  model JobProxy is Azure.ResourceManager.ProxyResource<JobProperties> {
-    /** Proxy API Name for Container App Job. */
-    @TypeSpec.Http.path
-    @TypeSpec.Rest.segment("detectorProperties")
-    @key
-    @pattern("^[-\\w\\._]+$")
-    @visibility(Lifecycle.Read)
-    apiName: string;
-  }
 }
 
 /**
  * C# compatibility usage unit enum.
  */
-union UsageUnit {
-  string,
-
+enum UsageUnit {
   /**
    * Count.
    */
@@ -174,13 +125,11 @@ union UsageUnit {
  * C# compatibility enum for custom OpenID Connect client credential methods.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "CSharp prefix marks this as a C#-only compatibility replacement during MPG migration"
-union CSharpOpenIdConnectClientCredentialMethod {
+enum CSharpOpenIdConnectClientCredentialMethod {
   /**
    * Client secret post authentication.
    */
   ClientSecretPost: "ClientSecretPost",
-
-  string,
 }
 
 // C# @@alternateType customizations.
@@ -192,19 +141,11 @@ union CSharpOpenIdConnectClientCredentialMethod {
 
 @@alternateType(DiagnosticsDefinition, CSharpDiagnosticsDefinition, "csharp");
 
-@@alternateType(
-  TokenStore.azureBlobStorage,
-  CSharpBlobStorageTokenStore,
-  "csharp"
-);
-
-@@alternateType(Configuration.runtime, CSharpRuntime, "csharp");
-
-@@alternateType(Microsoft.App.Usage.unit, UsageUnit, "csharp");
+@@alternateType(Microsoft.App.Usage.unit, UsageUnit | string, "csharp");
 
 @@alternateType(
   OpenIdConnectClientCredential.method,
-  CSharpOpenIdConnectClientCredentialMethod,
+  CSharpOpenIdConnectClientCredentialMethod | string,
   "csharp"
 );
 
@@ -237,8 +178,6 @@ union CSharpOpenIdConnectClientCredentialMethod {
 @@alternateType(ContainerAppProperties.eventStreamEndpoint, url, "csharp");
 
 @@alternateType(JobDiagnostic, Diagnostics, "csharp");
-
-@@alternateType(JobProxy, Job, "csharp");
 
 @@alternateType(ManagedEnvironmentProperties.staticIp, ipV4Address, "csharp");
 
@@ -297,10 +236,8 @@ union CSharpOpenIdConnectClientCredentialMethod {
   "csharp"
 );
 
-// Keep Container Apps Job diagnostics and detector-property operations grouped
-// with the compatibility job detector resource types declared above.
-@@clientLocation(Jobs.proxyGet, "ContainerAppJobDetectorProperties", "csharp");
-
+// Keep Container Apps Job diagnostics operations grouped with the compatibility
+// job detector resource type declared above.
 @@clientLocation(Jobs.getDetector, "ContainerAppJobDetectors", "csharp");
 
 @@clientLocation(Jobs.listDetectors, "ContainerAppJobDetectors", "csharp");
@@ -1048,8 +985,6 @@ union CSharpOpenIdConnectClientCredentialMethod {
   "csharp"
 );
 
-@@clientName(JobProxy, "ContainerAppJobDetectorProperty", "csharp");
-
 @@clientName(JobConfiguration, "ContainerAppJobConfiguration", "csharp");
 
 @@clientName(
@@ -1356,12 +1291,6 @@ union CSharpOpenIdConnectClientCredentialMethod {
 
 @@clientName(TokenStore, "ContainerAppTokenStore", "csharp");
 
-@@clientName(
-  CSharpBlobStorageTokenStore.sasUrlSettingName,
-  "AzureBlobStorageSasUrlSettingName",
-  "csharp"
-);
-
 @@clientName(TokenStore.enabled, "IsEnabled", "csharp");
 
 @@clientName(TrafficWeight, "ContainerAppRevisionTrafficWeight", "csharp");
@@ -1646,6 +1575,18 @@ union CSharpOpenIdConnectClientCredentialMethod {
   "csharp"
 );
 
+@@usage(
+  UsageUnit,
+  Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@usage(
+  CSharpOpenIdConnectClientCredentialMethod,
+  Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
 // C# @@doc customizations.
 @@doc(
   JobPatchProperties.properties,
@@ -1671,7 +1612,7 @@ union CSharpOpenIdConnectClientCredentialMethod {
 // C# @@flattenProperty customizations.
 #suppress "deprecated" "Preserve the previous flattened C# runtime.java.enableMetrics property during MPG migration"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the previous flattened C# runtime.java.enableMetrics property during MPG migration"
-@@flattenProperty(CSharpRuntime.java, "csharp");
+@@flattenProperty(Runtime.java, "csharp");
 
 #suppress "deprecated" "Preserve the previous flattened C# runtime.java.enableMetrics property during MPG migration"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the previous flattened C# runtime.java.enableMetrics property during MPG migration"

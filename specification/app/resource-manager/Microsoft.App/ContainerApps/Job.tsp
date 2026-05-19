@@ -224,25 +224,6 @@ interface Jobs {
   >;
 
   /**
-   * Get the properties of a Container App Job.
-   */
-  @tag("Jobs")
-  @tag("Diagnostics")
-  @summary("Get the properties for a given Container App Job.")
-  proxyGet is ArmResourceRead<
-    Job,
-    Parameters = {
-      /** Proxy API Name for Container App Job. */
-      @path
-      @segment("detectorProperties")
-      @key
-      @pattern("^[-\\w\\._]+$")
-      apiName: string;
-    },
-    Error = DefaultErrorResponse
-  >;
-
-  /**
    * Get the list of diagnostics for a Container App Job.
    */
   @tag("Jobs")
@@ -262,6 +243,48 @@ interface Jobs {
   getDetector is JobsDiagnosticsDetectorOps.Read<
     Diagnostics,
     Response = ArmResponse<Diagnostics>
+  >;
+}
+
+alias JobDetectorPropertyOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** Name of the Container App Job. */
+    @path
+    @segment("jobs")
+    @key
+    @pattern("^[-\\w\\._\\(\\)]+$")
+    jobName: string;
+  },
+  {
+    /** Proxy API Name for Container App Job. */
+    @path
+    @segment("detectorProperties")
+    @key
+    @pattern("^[-\\w\\._]+$")
+    apiName: string;
+  },
+  ErrorType = DefaultErrorResponse,
+  ResourceName = "ContainerAppJobDetectorProperty"
+>;
+
+@armResourceOperations
+@tag("Jobs")
+@tag("Diagnostics")
+interface JobDetectorProperties {
+  /**
+   * Get the properties of a Container App Job.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserve the existing OpenAPI operation id while modeling proxyGet as a resource read for C# generation."
+  @summary("Get the properties for a given Container App Job.")
+  @operationId("Jobs_ProxyGet")
+  get is JobDetectorPropertyOps.Read<
+    Job,
+    Response = ArmResponse<Job>
   >;
 }
 
