@@ -33,34 +33,22 @@ interface NetworkGatewayResources {
   /**
    * Get confluent network gateway by Id
    */
-  get is ArmResourceRead<
-    NetworkGatewayResource,
-    Error = ResourceProviderDefaultErrorResponse
-  >;
+  get is ArmResourceRead<NetworkGatewayResource>;
 
   /**
    * Create or replace a confluent network gateway
    */
-  createOrReplace is ArmResourceCreateOrReplaceAsync<
-    NetworkGatewayResource,
-    Error = ResourceProviderDefaultErrorResponse
-  >;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<NetworkGatewayResource>;
 
   /**
    * Delete confluent network gateway by id
    */
-  delete is ArmResourceDeleteWithoutOkAsync<
-    NetworkGatewayResource,
-    Error = ResourceProviderDefaultErrorResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<NetworkGatewayResource>;
 
   /**
    * Lists all network gateways in an environment
    */
-  list is ArmResourceListByParent<
-    NetworkGatewayResource,
-    Error = ResourceProviderDefaultErrorResponse
-  >;
+  list is ArmResourceListByParent<NetworkGatewayResource>;
 }
 
 @@doc(NetworkGatewayResource.name, "Confluent network gateway id");

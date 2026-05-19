@@ -34,26 +34,17 @@ interface AccessPointResources {
   /**
    * Get confluent access point by Id
    */
-  get is ArmResourceRead<
-    AccessPointResource,
-    Error = ResourceProviderDefaultErrorResponse
-  >;
+  get is ArmResourceRead<AccessPointResource>;
 
   /**
    * Create or replace a confluent access point
    */
-  createOrReplace is ArmResourceCreateOrReplaceAsync<
-    AccessPointResource,
-    Error = ResourceProviderDefaultErrorResponse
-  >;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<AccessPointResource>;
 
   /**
    * Delete confluent access point by id
    */
-  delete is ArmResourceDeleteWithoutOkAsync<
-    AccessPointResource,
-    Error = ResourceProviderDefaultErrorResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<AccessPointResource>;
 }
 
 @@doc(AccessPointResource.name, "Confluent access point id");
