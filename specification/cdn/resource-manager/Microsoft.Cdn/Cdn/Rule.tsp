@@ -39,11 +39,14 @@ interface Rules {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     Rule,
-    Response = ArmResourceUpdatedResponse<Rule> | ArmResourceCreatedResponse<Rule> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Rule> &
-      ArmLroLocationHeader<FinalResult = Rule>> & {
-      @bodyRoot
-      _: Rule;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<Rule>
+      | ArmResourceCreatedResponse<Rule>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Rule> &
+          ArmLroLocationHeader<FinalResult = Rule>> & {
+          @bodyRoot
+          _: Rule;
+        })
   >;
 
   /**
@@ -54,11 +57,13 @@ interface Rules {
   update is ArmCustomPatchAsync<
     Rule,
     PatchModel = RuleUpdateParameters,
-    Response = ArmResponse<Rule> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Rule> &
-      ArmLroLocationHeader<FinalResult = Rule>> & {
-      @bodyRoot
-      _: Rule;
-    })
+    Response =
+      | ArmResponse<Rule>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Rule> &
+          ArmLroLocationHeader<FinalResult = Rule>> & {
+          @bodyRoot
+          _: Rule;
+        })
   >;
 
   /**
@@ -69,9 +74,12 @@ interface Rules {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     Rule,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+          ArmLroLocationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -81,10 +89,12 @@ interface Rules {
   listByRuleSet is ArmResourceListByParent<Rule>;
 }
 
-@@doc(Rule.name,
+@@doc(
+  Rule.name,
   "Name of the delivery rule which is unique within the endpoint."
 );
-@@doc(Rule.properties,
+@@doc(
+  Rule.properties,
   "The JSON object that contains the properties of the Rules to create."
 );
 @@doc(Rules.create::parameters.resource, "The delivery rule properties.");

@@ -5484,6 +5484,7 @@ model ProvisioningStatusProperty {
 model ResourceProviderOperationListResult
   is Azure.Core.Page<ResourceProviderOperation>;
 
-@@Azure.ResourceManager.identifiers(ResourceProviderOperationListResult.value,
+@@Azure.ResourceManager.identifiers(
+  ResourceProviderOperationListResult.value,
   #[]
 );

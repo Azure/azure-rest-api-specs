@@ -291,6 +291,7 @@ interface VmwareSites {
 }
 
 @@doc(VmwareSite.name, "Site name");
-@@doc(VmwareSite.properties,
+@@doc(
+  VmwareSite.properties,
   "The resource-specific properties for this resource."
 );

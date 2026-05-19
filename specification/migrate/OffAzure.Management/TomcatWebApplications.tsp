@@ -108,6 +108,7 @@ interface TomcatWebApplicationsController {
 }
 
 @@doc(TomcatWebApplications.name, "Web application name.");
-@@doc(TomcatWebApplications.properties,
+@@doc(
+  TomcatWebApplications.properties,
   "The resource-specific properties for this resource."
 );

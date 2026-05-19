@@ -39,11 +39,14 @@ interface FirewallRules {
   @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     FirewallRule,
-    Response = ArmResourceUpdatedResponse<FirewallRule> | ArmResourceCreatedResponse<
-      FirewallRule,
-      ArmLroLocationHeader<FinalResult = FirewallRule> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<FirewallRule>
+      | ArmResourceCreatedResponse<
+          FirewallRule,
+          ArmLroLocationHeader<FinalResult = FirewallRule> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -52,7 +55,10 @@ interface FirewallRules {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     FirewallRule,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -66,6 +72,7 @@ interface FirewallRules {
 
 @@doc(FirewallRule.name, "The name of the server firewall rule.");
 @@doc(FirewallRule.properties, "The properties of a firewall rule.");
-@@doc(FirewallRules.createOrUpdate::parameters.resource,
+@@doc(
+  FirewallRules.createOrUpdate::parameters.resource,
   "The required parameters for creating or updating a firewall rule."
 );

@@ -35,7 +35,8 @@ model GuardrailsAvailableVersion
 @@maxLength(GuardrailsAvailableVersion.name, 24);
 @@minLength(GuardrailsAvailableVersion.name, 1);
 @@doc(GuardrailsAvailableVersion.name, "Safeguards version");
-@@doc(GuardrailsAvailableVersion.properties,
+@@doc(
+  GuardrailsAvailableVersion.properties,
   "Whether the version is default or not and support info."
 );
 

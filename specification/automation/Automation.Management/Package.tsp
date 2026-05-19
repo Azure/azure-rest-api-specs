@@ -70,9 +70,11 @@ interface Packages {
 
 @@doc(Package.name, "The Package name.");
 @@doc(Package.properties, "Gets or sets the Package properties.");
-@@doc(Packages.createOrUpdate::parameters.resource,
+@@doc(
+  Packages.createOrUpdate::parameters.resource,
   "The create or update parameters for Package."
 );
-@@doc(Packages.update::parameters.properties,
+@@doc(
+  Packages.update::parameters.properties,
   "The update parameters for Package."
 );

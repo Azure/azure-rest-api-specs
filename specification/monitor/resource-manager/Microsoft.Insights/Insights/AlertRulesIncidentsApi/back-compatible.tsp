@@ -4,9 +4,11 @@ using Azure.ClientGenerator.Core;
 using AlertRulesIncidentsApi;
 
 @@clientLocation(AlertRuleIncidentsOperationGroup.get, "AlertRuleIncidents");
-@@clientLocation(AlertRuleIncidentsOperationGroup.listByAlertRule,
+@@clientLocation(
+  AlertRuleIncidentsOperationGroup.listByAlertRule,
   "AlertRuleIncidents"
 );
-@@TypeSpec.Rest.segment(Azure.ResourceManager.ResourceGroupParameter.resourceGroupName,
+@@TypeSpec.Rest.segment(
+  Azure.ResourceManager.ResourceGroupParameter.resourceGroupName,
   "resourcegroups"
 );

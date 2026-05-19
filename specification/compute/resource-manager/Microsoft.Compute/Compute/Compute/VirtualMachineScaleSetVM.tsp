@@ -135,10 +135,12 @@ interface VirtualMachineScaleSetVMS {
       @header("If-None-Match")
       IfNoneMatch?: string;
     },
-    Response = ArmResourceUpdatedResponse<VirtualMachineScaleSetVM> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = VirtualMachineScaleSetVM> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot _: VirtualMachineScaleSetVM;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<VirtualMachineScaleSetVM>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = VirtualMachineScaleSetVM> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot _: VirtualMachineScaleSetVM;
+        })
   >;
 
   /**
@@ -373,18 +375,23 @@ interface VirtualMachineScaleSetVMS {
 }
 
 @@doc(VirtualMachineScaleSetVM.name, "The instance ID of the virtual machine.");
-@@doc(VirtualMachineScaleSetVM.properties,
+@@doc(
+  VirtualMachineScaleSetVM.properties,
   "Describes the properties of a virtual machine scale set virtual machine."
 );
-@@doc(VirtualMachineScaleSetVMS.update::parameters.resource,
+@@doc(
+  VirtualMachineScaleSetVMS.update::parameters.resource,
   "Parameters supplied to the Update Virtual Machine Scale Sets VM operation."
 );
-@@doc(VirtualMachineScaleSetVMS.reimage::parameters.body,
+@@doc(
+  VirtualMachineScaleSetVMS.reimage::parameters.body,
   "Parameters for the Reimaging Virtual machine in ScaleSet."
 );
-@@doc(VirtualMachineScaleSetVMS.attachDetachDataDisks::parameters.body,
+@@doc(
+  VirtualMachineScaleSetVMS.attachDetachDataDisks::parameters.body,
   "Parameters supplied to the attach and detach data disks operation on a Virtual Machine Scale Sets VM."
 );
-@@doc(VirtualMachineScaleSetVMS.runCommand::parameters.body,
+@@doc(
+  VirtualMachineScaleSetVMS.runCommand::parameters.body,
   "Parameters supplied to the Run command operation."
 );
