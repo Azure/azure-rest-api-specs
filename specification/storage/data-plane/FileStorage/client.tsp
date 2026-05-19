@@ -78,6 +78,9 @@ interface ServiceClient extends Storage.File.Service {}
 )
 interface ShareClient extends Storage.File.Share {}
 
+@@access(StorageErrorCode, Access.public, "go");
+@@usage(StorageErrorCode, Usage.output, "go");
+
 /** Represents an array of signed identifiers */
 @clientName("SignedIdentifiers", "go")
 model SignedIdentifiersGo is Array<SignedIdentifier>;
