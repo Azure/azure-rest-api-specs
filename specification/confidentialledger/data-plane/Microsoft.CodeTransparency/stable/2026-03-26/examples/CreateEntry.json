@@ -10,7 +10,8 @@
   "responses": {
     "201": {
       "headers": {
-        "Content-Type": "application/cose"
+        "Content-Type": "application/scitt-receipt+cose",
+        "x-ms-ccf-transaction-id": "2.131"
       },
       "body": "{binary}"
     },
@@ -21,6 +22,12 @@
       }
     },
     "400": {
+      "headers": {
+        "Content-Type": "application/concise-problem-details+cbor"
+      },
+      "body": "{binary}"
+    },
+    "401": {
       "headers": {
         "Content-Type": "application/concise-problem-details+cbor"
       },
