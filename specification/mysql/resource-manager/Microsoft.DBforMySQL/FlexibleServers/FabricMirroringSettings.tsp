@@ -58,7 +58,7 @@ model FabricMirroringSettingsProperties {
   /** State of Fabric Mirroring (Enabled or Disabled). */
   state?: FabricMirroringState;
 
-  /** Resource ID of the user-assigned managed identity used for Fabric Mirroring. */
+  /** Resource ID of the user-assigned managed identity used for Fabric Mirroring. Required when state is Enabled. */
   identityResourceId?: armResourceIdentifier;
 
   /** Provisioning state of Fabric Mirroring. */
@@ -72,7 +72,7 @@ model FabricMirroringSettingsProperties {
 @added(Versions.v2025_12_01_preview)
 union FabricMirroringSettingsName {
   /** The default Fabric Mirroring settings instance. */
-  Default: "default",
+  Default: "Default",
 
   string,
 }
@@ -99,6 +99,7 @@ interface FabricMirroringSettings {
   @doc("Get Fabric Mirroring settings.")
   get is ArmResourceRead<FabricMirroringSetting>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "The live service returns 202 Accepted for async PUT operations using both Location and Azure-AsyncOperation polling headers. This is the established pattern for this resource provider."
   @doc("Create or update Fabric Mirroring settings.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     FabricMirroringSetting,
@@ -106,9 +107,9 @@ interface FabricMirroringSettings {
       FabricMirroringSetting,
       ArmAsyncOperationHeader<FinalResult = FabricMirroringSetting> &
         Azure.Core.Foundations.RetryAfterHeader
-    >
+    > | ArmAcceptedLroResponse
   >;
 
   @doc("List Fabric Mirroring settings by server.")
-  listByServer is ArmResourceListByParent<FabricMirroringSetting>;
+  listByServer is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<FabricMirroringSetting>;
 }
