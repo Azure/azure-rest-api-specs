@@ -67,6 +67,17 @@ model FabricMirroringSettingsProperties {
 }
 
 /**
+ * The name of the Fabric Mirroring settings resource (singleton: only "default" is allowed).
+ */
+@added(Versions.v2025_12_01_preview)
+union FabricMirroringSettingsName {
+  /** The default Fabric Mirroring settings instance. */
+  Default: "default",
+
+  string,
+}
+
+/**
  * Fabric Mirroring settings proxy resource.
  */
 @parentResource(Server)
@@ -76,18 +87,18 @@ model FabricMirroringSetting
     Resource = FabricMirroringSetting,
     KeyName = "fabricMirroringSettingsName",
     SegmentName = "fabricMirroringSettings",
-    NamePattern = "^[a-zA-Z0-9-]{3,24}$"
+    NamePattern = "",
+    Type = FabricMirroringSettingsName
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FabricMirroringSettings is a server-intrinsic singleton whose lifecycle is tied to the parent server. Settings are toggled via PUT with state Enabled/Disabled rather than created or deleted independently."
 @armResourceOperations
 @added(Versions.v2025_12_01_preview)
 interface FabricMirroringSettings {
   @doc("Get Fabric Mirroring settings.")
   get is ArmResourceRead<FabricMirroringSetting>;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Async PUT returns 202 Accepted for long-running operations"
   @doc("Create or update Fabric Mirroring settings.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     FabricMirroringSetting,
@@ -95,9 +106,9 @@ interface FabricMirroringSettings {
       FabricMirroringSetting,
       ArmAsyncOperationHeader<FinalResult = FabricMirroringSetting> &
         Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    >
   >;
 
   @doc("List Fabric Mirroring settings by server.")
-  listByServer is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<FabricMirroringSetting>;
+  listByServer is ArmResourceListByParent<FabricMirroringSetting>;
 }
