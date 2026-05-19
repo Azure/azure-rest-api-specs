@@ -12,21 +12,25 @@ namespace Microsoft.RecoveryServices;
 /**
  * Base class for container with backup items. Containers with specific workloads are derived from this class.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy TrackedResourceWithOptionalLocation for back compatibility"
 @parentResource(BackupFabricResource)
-model ProtectionContainerResource
-  is TrackedResourceWithOptionalLocation<ProtectionContainer> {
+model ProtectionContainerResource is ProxyResource<ProtectionContainer> {
   ...ResourceNameParameter<
     Resource = ProtectionContainerResource,
     KeyName = "containerName",
     SegmentName = "protectionContainers",
     NamePattern = ""
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Optional location"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: Azure.Core.azureLocation;
 
   /**
    * Optional ETag.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Backward compatibility for optional ETag"
   eTag?: string;
 }
 
@@ -45,8 +49,10 @@ interface ProtectionContainers {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   register is ArmResourceCreateOrUpdateAsync<
     ProtectionContainerResource,
-    Response = ArmResourceUpdatedResponse<ProtectionContainerResource> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ProtectionContainerResource> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<ProtectionContainerResource>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ProtectionContainerResource> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -57,7 +63,10 @@ interface ProtectionContainers {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   unregister is ArmResourceDeleteSync<
     ProtectionContainerResource,
-    Response = ArmDeletedResponse | AcceptedResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | AcceptedResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -146,16 +155,22 @@ interface ProtectionContainerOperationResults {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is ProtectionContainerOperationResultOps.Read<
     ProtectionContainerResource,
-    Response = ArmResponse<ProtectionContainerResource> | AcceptedResponse | ArmNoContentResponse
+    Response =
+      | ArmResponse<ProtectionContainerResource>
+      | AcceptedResponse
+      | ArmNoContentResponse
   >;
 }
 
-@@doc(ProtectionContainerResource.name,
+@@doc(
+  ProtectionContainerResource.name,
   "Name of the container whose details need to be fetched."
 );
-@@doc(ProtectionContainerResource.properties,
+@@doc(
+  ProtectionContainerResource.properties,
   "ProtectionContainerResource properties"
 );
-@@doc(ProtectionContainers.register::parameters.resource,
+@@doc(
+  ProtectionContainers.register::parameters.resource,
   "Request body for operation"
 );

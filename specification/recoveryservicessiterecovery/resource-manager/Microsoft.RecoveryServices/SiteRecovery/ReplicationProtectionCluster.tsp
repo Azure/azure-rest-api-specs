@@ -78,9 +78,11 @@ interface ReplicationProtectionClusters {
   @summary("Create Replication protection Cluster.")
   create is ReplicationProtectionClusterOps.CreateOrUpdateAsync<
     ReplicationProtectionCluster,
-    Response = ArmResourceUpdatedResponse<ReplicationProtectionCluster> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ReplicationProtectionCluster> &
-      ArmAsyncOperationHeader<FinalResult = ReplicationProtectionCluster> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<ReplicationProtectionCluster>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ReplicationProtectionCluster> &
+          ArmAsyncOperationHeader<FinalResult = ReplicationProtectionCluster> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -89,9 +91,11 @@ interface ReplicationProtectionClusters {
   @summary("Purge the replication protection cluster.")
   purge is ReplicationProtectionClusterOps.DeleteWithoutOkAsync<
     ReplicationProtectionCluster,
-    Response = ArmDeleteAcceptedLroResponse<ArmLroLocationHeader &
-      ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader &
+          ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -236,22 +240,28 @@ interface ReplicationProtectionClusterOperationGroup {
   >;
 }
 
-@@doc(ReplicationProtectionCluster.name,
+@@doc(
+  ReplicationProtectionCluster.name,
   "Replication protection cluster name."
 );
 @@doc(ReplicationProtectionCluster.properties, "The custom data.");
-@@doc(ReplicationProtectionClusters.create::parameters.resource,
+@@doc(
+  ReplicationProtectionClusters.create::parameters.resource,
   "Create replication protection cluster Input."
 );
-@@doc(ReplicationProtectionClusters.applyRecoveryPoint::parameters.body,
+@@doc(
+  ReplicationProtectionClusters.applyRecoveryPoint::parameters.body,
   "Apply recovery point input."
 );
-@@doc(ReplicationProtectionClusters.testFailover::parameters.body,
+@@doc(
+  ReplicationProtectionClusters.testFailover::parameters.body,
   "Cluster test failover input body."
 );
-@@doc(ReplicationProtectionClusters.testFailoverCleanup::parameters.body,
+@@doc(
+  ReplicationProtectionClusters.testFailoverCleanup::parameters.body,
   "Test failover cleanup input."
 );
-@@doc(ReplicationProtectionClusters.unplannedFailover::parameters.body,
+@@doc(
+  ReplicationProtectionClusters.unplannedFailover::parameters.body,
   "Failover input."
 );

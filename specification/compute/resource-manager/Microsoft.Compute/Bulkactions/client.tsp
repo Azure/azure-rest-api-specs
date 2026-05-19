@@ -5,51 +5,48 @@ using Azure.ClientGenerator.Core;
 
 namespace Microsoft.Compute;
 
-@@clientName(VirtualMachineBulkOperations.virtualMachinesBulkDeallocate,
-  "ExecuteVirtualMachineDeallocate",
-  "csharp"
+@@clientName(
+  VirtualMachineBulkOperations.bulkDeallocate,
+  "BulkDeallocateOperation"
 );
-@@clientName(VirtualMachineBulkOperations.virtualMachinesBulkHibernate,
-  "ExecuteVirtualMachineHibernate",
-  "csharp"
+@@clientName(
+  VirtualMachineBulkOperations.bulkHibernate,
+  "BulkHibernateOperation"
 );
-@@clientName(VirtualMachineBulkOperations.virtualMachinesBulkStart,
-  "ExecuteVirtualMachineStart",
-  "csharp"
+@@clientName(VirtualMachineBulkOperations.bulkStart, "BulkStartOperation");
+@@clientName(
+  VirtualMachineBulkOperations.bulkGetOperationsStatus,
+  "BulkGetOperationsStatus"
 );
-@@clientName(VirtualMachineBulkOperations.virtualMachinesBulkGetOperationStatus,
-  "GetVirtualMachineOperationStatus",
-  "csharp"
-);
-@@clientName(VirtualMachineBulkOperations.virtualMachinesBulkCancelOperations,
-  "CancelVirtualMachineOperations",
-  "csharp"
-);
-@@clientName(VirtualMachineBulkOperations.virtualMachinesBulkCreate,
-  "ExecuteVirtualMachineCreateOperation",
-  "csharp"
-);
-@@clientName(VirtualMachineBulkOperations.virtualMachinesBulkDelete,
-  "ExecuteVirtualMachineDeleteOperation",
-  "csharp"
+@@clientName(VirtualMachineBulkOperations.bulkCancel, "BulkCancelOperations");
+@@clientName(VirtualMachineBulkOperations.bulkCreate, "BulkCreateOperation");
+@@clientName(VirtualMachineBulkOperations.bulkDelete, "BulkDeleteOperation");
+@@clientName(VirtualMachineBulkOperations.bulkReimage, "BulkReimageOperation");
+@@clientName(
+  VirtualMachineBulkOperations.bulkVdiFlexCreate,
+  "BulkVdiFlexCreateOperation"
 );
 
 @@clientName(CancelOperationsResponse, "CancelOperationsResult", "csharp");
 @@clientName(DeadlineType, "ScheduledActionDeadlineType", "csharp");
-@@clientName(DeallocateResourceOperationResponse,
+@@clientName(
+  DeallocateResourceOperationResponse,
   "DeallocateResourceOperationResult",
   "csharp"
 );
-@@clientName(DeallocateResourceOperationResponse.type,
+@@clientName(
+  DeallocateResourceOperationResponse.type,
   "ResourceType",
   "csharp"
 );
-@@clientName(ExecutionParameters,
+@@clientName(
+  ExecutionParameters,
   "ScheduledActionExecutionParameterDetail",
   "csharp"
 );
 @@clientName(GetOperationStatusResponse, "GetOperationStatusResult", "csharp");
-@@clientName(HibernateResourceOperationResponse,
+@@clientName(
+  HibernateResourceOperationResponse,
   "HibernateResourceOperationResult",
   "csharp"
 );
@@ -59,22 +56,26 @@ namespace Microsoft.Compute;
 @@clientName(ResourceOperation, "ResourceOperationResult", "csharp");
 @@clientName(Resources, "UserRequestResources", "csharp");
 @@clientName(RetryPolicy, "UserRequestRetryPolicy", "csharp");
-@@clientName(StartResourceOperationResponse,
+@@clientName(
+  StartResourceOperationResponse,
   "StartResourceOperationResult",
   "csharp"
 );
 @@clientName(StartResourceOperationResponse.type, "ResourceType", "csharp");
 @@clientName(ExecuteDeleteRequest.forceDeletion, "IsForceDeletion", "csharp");
-@@clientName(OperationErrorDetails.timeStamp,
+@@clientName(
+  OperationErrorDetails.timeStamp,
   "errorDetailsTimestamp",
   "csharp,javascript,java,python"
 );
 
-@@clientName(DeleteResourceOperationResponse,
+@@clientName(
+  DeleteResourceOperationResponse,
   "DeleteResourceOperationResult",
   "csharp"
 );
-@@clientName(CreateResourceOperationResponse,
+@@clientName(
+  CreateResourceOperationResponse,
   "CreateResourceOperationResult",
   "csharp"
 );
@@ -88,12 +89,47 @@ namespace Microsoft.Compute;
 @@clientName(ManagedDiskParameters, "ManagedDiskParametersContent");
 @@clientName(DiskEncryptionSetParameters, "DiskEncryptionSetParametersContent");
 
-@@clientName(UserInitiatedRedeploy.automaticallyApprove,
+@@clientName(
+  UserInitiatedRedeploy.automaticallyApprove,
   "UserInitiatedRedeployAutomaticallyApprove"
 );
-@@clientName(UserInitiatedReboot.automaticallyApprove,
+@@clientName(
+  UserInitiatedReboot.automaticallyApprove,
   "UserInitiatedRebootAutomaticallyApprove"
 );
-@@clientName(AllInstancesDown.automaticallyApprove,
+@@clientName(
+  AllInstancesDown.automaticallyApprove,
   "AllInstancesDownAutomaticallyApprove"
 );
+@@clientName(
+  ExecuteVdiCreateRequest,
+  "BulkActionsExecuteVdiCreateRequestContent",
+  "csharp"
+);
+@@clientName(
+  ExecuteReimageRequest,
+  "BulkActionsExecuteReimageRequestContent",
+  "csharp"
+);
+@@clientName(
+  ReimageResourceOperationResponse,
+  "BulkActionsReimageResourceOperationResponseResult",
+  "csharp"
+);
+@@clientName(
+  VirtualMachineReimageParameters,
+  "BulkActionsVirtualMachineReimageParametersContent",
+  "csharp"
+);
+@@clientName(
+  OSProfileProvisioningData,
+  "BulkActionsOsProfileProvisioningContent",
+  "csharp"
+);
+// =====================================================================
+// Fix: Go SDK Validation incorrectly detects networkApiVersion as an API version
+// parameter because its name contains "apiversion". This causes
+// the Go emitter to crash with "unexpected constant client side default
+// 2026-04-15-preview for field NetworkAPIVersion". Override the heuristic.
+// =====================================================================
+@@apiVersion(NetworkProfile.networkApiVersion, false, "go");

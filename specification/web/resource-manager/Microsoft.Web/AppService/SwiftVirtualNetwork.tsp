@@ -56,7 +56,8 @@ interface SwiftVirtualNetworkOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface SwiftVirtualNetworks {
   /**
    * Description for Gets a Swift Virtual Network connection.
@@ -132,7 +133,8 @@ interface SwiftVirtualNetworkOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface SwiftVirtualNetworkOperationGroup {
   /**
    * Description for Gets a Swift Virtual Network connection.
@@ -180,18 +182,23 @@ interface SwiftVirtualNetworkOperationGroup {
 }
 
 @@doc(SwiftVirtualNetwork.name, "");
-@@doc(SwiftVirtualNetwork.properties,
+@@doc(
+  SwiftVirtualNetwork.properties,
   "SwiftVirtualNetwork resource specific properties"
 );
-@@doc(SwiftVirtualNetworks.createOrUpdateSwiftVirtualNetworkConnectionWithCheck::parameters.resource,
+@@doc(
+  SwiftVirtualNetworks.createOrUpdateSwiftVirtualNetworkConnectionWithCheck::parameters.resource,
   "Properties of the Virtual Network connection. See example."
 );
-@@doc(SwiftVirtualNetworks.updateSwiftVirtualNetworkConnectionWithCheck::parameters.properties,
+@@doc(
+  SwiftVirtualNetworks.updateSwiftVirtualNetworkConnectionWithCheck::parameters.properties,
   "Properties of the Virtual Network connection. See example."
 );
-@@doc(SwiftVirtualNetworkOperationGroup.createOrUpdateSwiftVirtualNetworkConnectionWithCheckSlot::parameters.resource,
+@@doc(
+  SwiftVirtualNetworkOperationGroup.createOrUpdateSwiftVirtualNetworkConnectionWithCheckSlot::parameters.resource,
   "Properties of the Virtual Network connection. See example."
 );
-@@doc(SwiftVirtualNetworkOperationGroup.updateSwiftVirtualNetworkConnectionWithCheckSlot::parameters.properties,
+@@doc(
+  SwiftVirtualNetworkOperationGroup.updateSwiftVirtualNetworkConnectionWithCheckSlot::parameters.properties,
   "Properties of the Virtual Network connection. See example."
 );

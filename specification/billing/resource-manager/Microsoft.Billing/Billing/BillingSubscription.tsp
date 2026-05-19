@@ -348,27 +348,35 @@ alias BillingSubscriptionsListByBillingAccountParameters = {
   search?: string;
 };
 
-@@doc(BillingSubscription.name,
+@@doc(
+  BillingSubscription.name,
   "The ID that uniquely identifies a subscription."
 );
-@@doc(BillingSubscription.properties,
+@@doc(
+  BillingSubscription.properties,
   "The properties of a(n) BillingSubscription"
 );
-@@doc(BillingSubscriptionOperationGroup.update::parameters.properties,
+@@doc(
+  BillingSubscriptionOperationGroup.update::parameters.properties,
   "The billing properties of a subscription."
 );
-@@doc(BillingSubscriptionOperationGroup.cancel::parameters.body,
+@@doc(
+  BillingSubscriptionOperationGroup.cancel::parameters.body,
   "Request parameters for cancel customer subscription."
 );
-@@doc(BillingSubscriptionOperationGroup.merge::parameters.body,
+@@doc(
+  BillingSubscriptionOperationGroup.merge::parameters.body,
   "Request parameters that are provided to merge the two billing subscriptions."
 );
-@@doc(BillingSubscriptionOperationGroup.move::parameters.body,
+@@doc(
+  BillingSubscriptionOperationGroup.move::parameters.body,
   "Request parameters to transfer billing subscription."
 );
-@@doc(BillingSubscriptionOperationGroup.split::parameters.body,
+@@doc(
+  BillingSubscriptionOperationGroup.split::parameters.body,
   "Request parameters that are provided to split the billing subscription."
 );
-@@doc(BillingSubscriptionOperationGroup.validateMoveEligibility::parameters.body,
+@@doc(
+  BillingSubscriptionOperationGroup.validateMoveEligibility::parameters.body,
   "Request parameters to transfer billing subscription."
 );

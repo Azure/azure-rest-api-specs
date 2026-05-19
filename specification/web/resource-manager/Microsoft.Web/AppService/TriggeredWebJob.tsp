@@ -61,7 +61,8 @@ interface TriggeredWebJobOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface TriggeredWebJobs {
   /**
    * Description for Gets a triggered web job by its ID for an app, or a deployment slot.
@@ -101,9 +102,11 @@ interface TriggeredWebJobs {
   runTriggeredWebJobSlot is TriggeredWebJobOps.ActionSync<
     TriggeredWebJob,
     void,
-    {
-      @body body: void;
-    } | ArmNotFoundResponse,
+
+      | {
+          @body body: void;
+        }
+      | ArmNotFoundResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 }
@@ -131,7 +134,8 @@ interface TriggeredWebJobOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface TriggeredWebJobOperationGroup {
   /**
    * Description for Gets a triggered web job by its ID for an app, or a deployment slot.
@@ -171,14 +175,17 @@ interface TriggeredWebJobOperationGroup {
   runTriggeredWebJob is TriggeredWebJobOperationGroupOps.ActionSync<
     TriggeredWebJob,
     void,
-    {
-      @body body: void;
-    } | ArmNotFoundResponse,
+
+      | {
+          @body body: void;
+        }
+      | ArmNotFoundResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 }
 
 @@doc(TriggeredWebJob.name, "Name of Web Job.");
-@@doc(TriggeredWebJob.properties,
+@@doc(
+  TriggeredWebJob.properties,
   "TriggeredWebJob resource specific properties"
 );

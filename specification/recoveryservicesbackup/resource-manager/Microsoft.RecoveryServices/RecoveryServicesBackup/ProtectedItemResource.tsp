@@ -13,22 +13,26 @@ namespace Microsoft.RecoveryServices;
 /**
  * Base class for backup items.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/beyond-nesting-levels" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy TrackedResourceWithOptionalLocation for back compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/beyond-nesting-levels" "Backward compatibility with existing API structure."
 @parentResource(ProtectionContainerResource)
-model ProtectedItemResource
-  is TrackedResourceWithOptionalLocation<ProtectedItem> {
+model ProtectedItemResource is ProxyResource<ProtectedItem> {
   ...ResourceNameParameter<
     Resource = ProtectedItemResource,
     KeyName = "protectedItemName",
     SegmentName = "protectedItems",
     NamePattern = ""
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Optional location"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: Azure.Core.azureLocation;
 
   /**
    * Optional ETag.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Backward compatibility for optional ETag"
   eTag?: string;
 }
 
@@ -62,8 +66,10 @@ interface ProtectedItems {
       @header
       `x-ms-authorization-auxiliary`?: string;
     },
-    Response = ArmResourceUpdatedResponse<ProtectedItemResource> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ProtectedItemResource> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<ProtectedItemResource>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ProtectedItemResource> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -74,7 +80,10 @@ interface ProtectedItems {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteSync<
     ProtectedItemResource,
-    Response = ArmDeletedResponse | AcceptedResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | AcceptedResponse
+      | ArmDeletedNoContentResponse
   >;
 }
 
@@ -201,18 +210,24 @@ interface ProtectedItemOperationResults {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is ProtectedItemOperationResultOps.Read<
     ProtectedItemResource,
-    Response = ArmResponse<ProtectedItemResource> | AcceptedResponse | ArmNoContentResponse
+    Response =
+      | ArmResponse<ProtectedItemResource>
+      | AcceptedResponse
+      | ArmNoContentResponse
   >;
 }
 
-@@doc(ProtectedItemResource.name,
+@@doc(
+  ProtectedItemResource.name,
   "Backed up item name whose details are to be fetched."
 );
 @@doc(ProtectedItemResource.properties, "ProtectedItemResource properties");
-@@doc(ProtectedItems.createOrUpdate::parameters.resource,
+@@doc(
+  ProtectedItems.createOrUpdate::parameters.resource,
   "resource backed up item"
 );
 @@doc(Backups.trigger::parameters.body, "resource backup request");
-@@doc(RecoveryPointsRecommendedForMove.list::parameters.body,
+@@doc(
+  RecoveryPointsRecommendedForMove.list::parameters.body,
   "List Recovery points Recommended for Move Request"
 );

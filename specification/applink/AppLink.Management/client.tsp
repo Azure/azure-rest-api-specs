@@ -7,47 +7,53 @@ namespace Microsoft.AppLink;
 
 @@clientName(Microsoft.AppLink, "AppNetworkMgmtClient", "python");
 
-// Fix selfManagedVersions flattening name collision in C#
-@@clientName(AvailableVersionProperties.selfManagedVersions,
+@@clientName(
+  AvailableVersionProperties.selfManagedVersions,
   "selfManagedVersionDetail",
   "csharp"
 );
 
-// Contextual naming: add AppLink prefix to avoid cross-SDK collisions in C#
 @@clientName(ProvisioningState, "AppLinkProvisioningState", "csharp");
 @@clientName(ClusterType, "AppLinkClusterType", "csharp");
+@@clientName(
+  EastWestGatewayVisibility,
+  "AppLinkEastWestGatewayVisibility",
+  "csharp"
+);
 @@clientName(UpgradeMode, "AppLinkUpgradeMode", "csharp");
 @@clientName(UpgradeReleaseChannel, "AppLinkUpgradeReleaseChannel", "csharp");
 @@clientName(ConnectivityProfile, "AppLinkConnectivityProfile", "csharp");
 @@clientName(UpgradeProfile, "AppLinkUpgradeProfile", "csharp");
 @@clientName(ReleaseChannelInfo, "AppLinkReleaseChannelInfo", "csharp");
 @@clientName(VersionInfo, "AppLinkVersionInfo", "csharp");
-
-// Contextual naming: add AppLink prefix to resource types
 @@clientName(AvailableVersion, "AppLinkAvailableVersion", "csharp");
-@@clientName(AvailableVersionProperties,
+@@clientName(
+  AvailableVersionProperties,
   "AppLinkAvailableVersionProperties",
   "csharp"
 );
 @@clientName(UpgradeHistory, "AppLinkUpgradeHistory", "csharp");
-@@clientName(UpgradeHistoryProperties,
+@@clientName(
+  UpgradeHistoryProperties,
   "AppLinkUpgradeHistoryProperties",
   "csharp"
 );
 
-// Operation renames: method names should clearly indicate what is listed
-@@clientName(AvailableVersions.listByLocation,
+@@clientName(
+  AvailableVersions.listByLocation,
   "GetAppLinkAvailableVersionsByLocation",
   "csharp"
 );
-@@clientName(UpgradeHistories.listByAppLinkMember,
+@@clientName(
+  UpgradeHistories.listByAppLinkMember,
   "GetAppLinkUpgradeHistories",
   "csharp"
 );
 
-// DateTimeOffset properties should follow *On naming convention in C#
 @@clientName(UpgradeHistoryProperties.startTimestamp, "startOn", "csharp");
 @@clientName(UpgradeHistoryProperties.endTimestamp, "endOn", "csharp");
+
+@@clientName(ClusterType.AKS, "Aks", "csharp");
 
 @doc("The type used for update operations of the AppLink.")
 model AppLinkUpdate {
@@ -56,7 +62,8 @@ model AppLinkUpdate {
   tags?: Record<string>;
 }
 
-@@alternateType(Microsoft.AppLink.AppLinks.update::parameters.properties,
+@@alternateType(
+  Microsoft.AppLink.AppLinks.update::parameters.properties,
   AppLinkUpdate,
   "javascript,go,python,java,csharp"
 );
@@ -83,7 +90,8 @@ model AppLinkMemberUpdate {
   properties?: AppLinkMemberUpdateProperties;
 }
 
-@@alternateType(Microsoft.AppLink.AppLinkMembers.update::parameters.properties,
+@@alternateType(
+  Microsoft.AppLink.AppLinkMembers.update::parameters.properties,
   AppLinkMemberUpdate,
   "javascript,go,python,java,csharp"
 );

@@ -3,16 +3,20 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.GuestConfiguration;
 
-@@clientName(GuestConfigurationAssignments.createOrUpdate::parameters.resource,
+@@clientName(
+  GuestConfigurationAssignments.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(GuestConfigurationHCRPAssignments.createOrUpdate::parameters.resource,
+@@clientName(
+  GuestConfigurationHCRPAssignments.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(GuestConfigurationAssignmentsVMSS.createOrUpdate::parameters.resource,
+@@clientName(
+  GuestConfigurationAssignmentsVMSS.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(GuestConfigurationConnectedVMwarevSphereAssignments.createOrUpdate::parameters.resource,
+@@clientName(
+  GuestConfigurationConnectedVMwarevSphereAssignments.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(VmssvmInfo, "VMSSVMInfo");
@@ -25,97 +29,123 @@ using Microsoft.GuestConfiguration;
 // These ensure consistent operationId generation in the output
 
 // GuestConfigurationAssignmentsOperationGroup interface operations
-@@clientLocation(GuestConfigurationAssignmentsOperationGroup.rGList,
+@@clientLocation(
+  GuestConfigurationAssignmentsOperationGroup.rGList,
   GuestConfigurationAssignments
 );
 
 // GuestConfigurationAssignments interface operations
-@@clientLocation(GuestConfigurationAssignments.guestConfigurationAssignmentReportsList,
+@@clientLocation(
+  GuestConfigurationAssignments.guestConfigurationAssignmentReportsList,
   "GuestConfigurationAssignmentReports"
 );
-@@clientName(GuestConfigurationAssignments.guestConfigurationAssignmentReportsList,
+@@clientName(
+  GuestConfigurationAssignments.guestConfigurationAssignmentReportsList,
   "List",
   "!csharp"
 );
-@@clientLocation(GuestConfigurationAssignments.guestConfigurationAssignmentReportsGet,
+@@clientLocation(
+  GuestConfigurationAssignments.guestConfigurationAssignmentReportsGet,
   "GuestConfigurationAssignmentReports"
 );
-@@clientName(GuestConfigurationAssignments.guestConfigurationAssignmentReportsGet,
+@@clientName(
+  GuestConfigurationAssignments.guestConfigurationAssignmentReportsGet,
   "Get",
   "!csharp"
 );
 // GuestConfigurationHCRPAssignments interface operations
-@@clientLocation(GuestConfigurationHCRPAssignments.get,
+@@clientLocation(
+  GuestConfigurationHCRPAssignments.get,
   GuestConfigurationHCRPAssignments
 );
-@@clientLocation(GuestConfigurationHCRPAssignments.createOrUpdate,
+@@clientLocation(
+  GuestConfigurationHCRPAssignments.createOrUpdate,
   GuestConfigurationHCRPAssignments
 );
-@@clientLocation(GuestConfigurationHCRPAssignments.delete,
+@@clientLocation(
+  GuestConfigurationHCRPAssignments.delete,
   GuestConfigurationHCRPAssignments
 );
-@@clientLocation(GuestConfigurationHCRPAssignments.list,
+@@clientLocation(
+  GuestConfigurationHCRPAssignments.list,
   GuestConfigurationHCRPAssignments
 );
-@@clientLocation(GuestConfigurationHCRPAssignments.guestConfigurationHCRPAssignmentReportsList,
+@@clientLocation(
+  GuestConfigurationHCRPAssignments.guestConfigurationHCRPAssignmentReportsList,
   "GuestConfigurationHCRPAssignmentReports"
 );
-@@clientName(GuestConfigurationHCRPAssignments.guestConfigurationHCRPAssignmentReportsList,
+@@clientName(
+  GuestConfigurationHCRPAssignments.guestConfigurationHCRPAssignmentReportsList,
   "List",
   "!csharp"
 );
-@@clientLocation(GuestConfigurationHCRPAssignments.guestConfigurationHCRPAssignmentReportsGet,
+@@clientLocation(
+  GuestConfigurationHCRPAssignments.guestConfigurationHCRPAssignmentReportsGet,
   "GuestConfigurationHCRPAssignmentReports"
 );
-@@clientName(GuestConfigurationHCRPAssignments.guestConfigurationHCRPAssignmentReportsGet,
+@@clientName(
+  GuestConfigurationHCRPAssignments.guestConfigurationHCRPAssignmentReportsGet,
   "Get",
   "!csharp"
 );
 
 // GuestConfigurationAssignmentsVMSS interface operations
-@@clientLocation(GuestConfigurationAssignmentsVMSS.get,
+@@clientLocation(
+  GuestConfigurationAssignmentsVMSS.get,
   GuestConfigurationAssignmentsVMSS
 );
-@@clientLocation(GuestConfigurationAssignmentsVMSS.createOrUpdate,
+@@clientLocation(
+  GuestConfigurationAssignmentsVMSS.createOrUpdate,
   GuestConfigurationAssignmentsVMSS
 );
-@@clientLocation(GuestConfigurationAssignmentsVMSS.delete,
+@@clientLocation(
+  GuestConfigurationAssignmentsVMSS.delete,
   GuestConfigurationAssignmentsVMSS
 );
-@@clientLocation(GuestConfigurationAssignmentsVMSS.list,
+@@clientLocation(
+  GuestConfigurationAssignmentsVMSS.list,
   GuestConfigurationAssignmentsVMSS
 );
-@@clientLocation(GuestConfigurationAssignmentsVMSS.guestConfigurationAssignmentReportsVMSSList,
+@@clientLocation(
+  GuestConfigurationAssignmentsVMSS.guestConfigurationAssignmentReportsVMSSList,
   "GuestConfigurationAssignmentReportsVMSS"
 );
-@@clientName(GuestConfigurationAssignmentsVMSS.guestConfigurationAssignmentReportsVMSSList,
+@@clientName(
+  GuestConfigurationAssignmentsVMSS.guestConfigurationAssignmentReportsVMSSList,
   "List",
   "!csharp"
 );
-@@clientLocation(GuestConfigurationAssignmentsVMSS.guestConfigurationAssignmentReportsVMSSGet,
+@@clientLocation(
+  GuestConfigurationAssignmentsVMSS.guestConfigurationAssignmentReportsVMSSGet,
   "GuestConfigurationAssignmentReportsVMSS"
 );
-@@clientName(GuestConfigurationAssignmentsVMSS.guestConfigurationAssignmentReportsVMSSGet,
+@@clientName(
+  GuestConfigurationAssignmentsVMSS.guestConfigurationAssignmentReportsVMSSGet,
   "Get",
   "!csharp"
 );
 
 // GuestConfigurationConnectedVMwarevSphereAssignments interface operations
-@@clientLocation(GuestConfigurationConnectedVMwarevSphereAssignments.guestConfigurationConnectedVMwarevSphereAssignmentsReportsList,
+@@clientLocation(
+  GuestConfigurationConnectedVMwarevSphereAssignments.guestConfigurationConnectedVMwarevSphereAssignmentsReportsList,
   "GuestConfigurationConnectedVMwarevSphereAssignmentsReports"
 );
-@@clientName(GuestConfigurationConnectedVMwarevSphereAssignments.guestConfigurationConnectedVMwarevSphereAssignmentsReportsList,
+@@clientName(
+  GuestConfigurationConnectedVMwarevSphereAssignments.guestConfigurationConnectedVMwarevSphereAssignmentsReportsList,
   "List",
   "!csharp"
 );
-@@clientLocation(GuestConfigurationConnectedVMwarevSphereAssignments.guestConfigurationConnectedVMwarevSphereAssignmentsReportsGet,
+@@clientLocation(
+  GuestConfigurationConnectedVMwarevSphereAssignments.guestConfigurationConnectedVMwarevSphereAssignmentsReportsGet,
   "GuestConfigurationConnectedVMwarevSphereAssignmentsReports"
 );
-@@clientName(GuestConfigurationConnectedVMwarevSphereAssignments.guestConfigurationConnectedVMwarevSphereAssignmentsReportsGet,
+@@clientName(
+  GuestConfigurationConnectedVMwarevSphereAssignments.guestConfigurationConnectedVMwarevSphereAssignmentsReportsGet,
   "Get",
   "!csharp"
 );
-@@clientName(GuestConfigurationAssignmentsOperationGroup.rGList,
+@@clientName(
+  GuestConfigurationAssignmentsOperationGroup.rGList,
   "rg_list",
   "python"
 );

@@ -31,7 +31,7 @@ model User is Azure.ResourceManager.ProxyResource<UserProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface Users {
   /**
    * Description for Gets publishing user
@@ -62,6 +62,7 @@ interface Users {
 
 @@doc(User.name, "");
 @@doc(User.properties, "User resource specific properties");
-@@doc(Users.updatePublishingUser::parameters.resource,
+@@doc(
+  Users.updatePublishingUser::parameters.resource,
   "Details of publishing user"
 );

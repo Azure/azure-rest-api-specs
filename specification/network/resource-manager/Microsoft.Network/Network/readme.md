@@ -28,7 +28,116 @@ These are the global settings for the Network API.
 title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
-tag: package-2025-05-01
+tag: package-2025-07-01
+```
+
+### Tag: package-2025-07-01
+
+These settings apply only when `--tag=package-2025-07-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-07-01'
+input-file:
+  - stable/2025-07-01/applicationGateway.json
+  - stable/2025-07-01/azureWebCategory.json
+  - stable/2025-07-01/common.json
+  - stable/2025-07-01/expressRoute.json
+  - stable/2025-07-01/firewall.json
+  - stable/2025-07-01/firewallPolicy.json
+  - stable/2025-07-01/interconnectGroup.json
+  - stable/2025-07-01/loadBalancer.json
+  - stable/2025-07-01/networkGateway.json
+  - stable/2025-07-01/networkingOperations.json
+  - stable/2025-07-01/networkManager.json
+  - stable/2025-07-01/networkSecurityPerimeter.json
+  - stable/2025-07-01/networkWatcher.json
+  - stable/2025-07-01/serviceGateway.json
+  - stable/2025-07-01/virtualNetwork.json
+  - stable/2025-07-01/virtualNetworkAppliance.json
+  - stable/2025-07-01/virtualWan.json
+  - stable/2018-10-01/vmssNetwork.json
+suppressions:
+  - code: ParametersInPointGet
+    from: loadBalancer.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}"].get.parameters
+    reason: '"detailLevel" query parameter approved for GET LoadBalancer to reduce response payload for large resources. Approved in ARM Office Hours by Gary Li on 2/13/2025.'
+  - code: ProvisioningStateMustBeReadOnly
+    from: networkManager.json
+    reason: provisioningState is correctly marked readOnly in CommitProperties definition. The linter does not follow $ref chains to verify readOnly in referenced schemas.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commits/{commitName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commits/{commitName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commits/{commitName}"].put.responses["201"].schema
+  - code: PutResponseCodes
+    reason: Required for multiple response codes. Reviewed by ARM team.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"].put
+  - code: DeleteResponseCodes
+    reason: Required for multiple response codes. Reviewed by ARM team.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}"].delete
+  - code: ProvisioningStateMustBeReadOnly
+    from: interconnectGroup.json
+    reason: provisioningState is correctly marked readOnly in the referenced schema. The linter does not follow $ref chains to verify readOnly.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}"].get.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}"].put.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}"].put.responses["201"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}"].patch.responses["200"].schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}/subgroups/{subgroupName}"].get.responses["200"].schema
+  - code: ResourceNameRestriction
+    from: interconnectGroup.json
+    reason: Subgroup is a read-only child resource with no PUT operation. Pattern restriction is not applicable.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}/subgroups/{subgroupName}"]
+  - code: RequiredPropertiesMissingInResourceModel
+    from: interconnectGroup.json
+    reason: name, id and type properties are inherited from the upper level
+    where:
+      - $.definitions.InterconnectGroup
+      - $.definitions.InterconnectGroupListResult
+      - $.definitions.Subgroup
+      - $.definitions.SubgroupListResult
+  - code: PatchIdentityProperty
+    reason: False alarm.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}"].patch.parameters[2]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/flowLogs/{flowLogName}"].patch.parameters[3]
+  - code: SystemDataDefinitionsCommonTypes
+    from: virtualNetwork.json
+    reason: False alarm for common type errors.
+  - code: SystemDataDefinitionsCommonTypes
+    from: common.json
+    reason: False alarm.
+  - code: PutRequestResponseSchemeArm
+    from: common.json
+    reason: API spec code issue in PutRequestResponseSchemeArm validation.
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: Not a standard azure resource.
+    where:
+      - $.definitions.GetServiceGatewayAddressLocationsResult
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: Not a standard azure resource.
+    where:
+      - $.definitions.GetServiceGatewayServicesResult
+directive:
+  - from: specification/common-types/resource-management/v6/types.json
+    where: "$.definitions.ProxyResource"
+    transform: >
+      $["x-ms-client-name"] = "SecurityPerimeterProxyResource"
+
+  - from: specification/common-types/resource-management/v6/types.json
+    where: "$.definitions.Resource"
+    transform: >
+      $["x-ms-client-name"] = "SecurityPerimeterResource"
+
+  - from: specification/common-types/resource-management/v6/types.json
+    where: "$.definitions.systemData"
+    transform: >
+      $["x-ms-client-name"] = "SecurityPerimeterSystemData"
 ```
 
 ### Tag: package-2025-05-01
@@ -38,73 +147,22 @@ These settings apply only when `--tag=package-2025-05-01` is specified on the co
 ```yaml $(tag) == 'package-2025-05-01'
 input-file:
   - stable/2025-05-01/applicationGateway.json
-  - stable/2025-05-01/applicationGatewayWafDynamicManifests.json
-  - stable/2025-05-01/applicationSecurityGroup.json
-  - stable/2025-05-01/availableDelegations.json
-  - stable/2025-05-01/availableServiceAliases.json
-  - stable/2025-05-01/azureFirewall.json
-  - stable/2025-05-01/azureFirewallFqdnTag.json
   - stable/2025-05-01/azureWebCategory.json
-  - stable/2025-05-01/bastionHost.json
-  - stable/2025-05-01/checkDnsAvailability.json
-  - stable/2025-05-01/cloudServiceNetworkInterface.json
-  - stable/2025-05-01/cloudServicePublicIpAddress.json
-  - stable/2025-05-01/cloudServiceSwap.json
-  - stable/2025-05-01/customIpPrefix.json
-  - stable/2025-05-01/ddosCustomPolicy.json
-  - stable/2025-05-01/ddosProtectionPlan.json
-  - stable/2025-05-01/dscpConfiguration.json
-  - stable/2025-05-01/endpointService.json
-  - stable/2025-05-01/expressRouteCircuit.json
-  - stable/2025-05-01/expressRouteCrossConnection.json
-  - stable/2025-05-01/expressRoutePort.json
-  - stable/2025-05-01/expressRouteProviderPort.json
+  - stable/2025-05-01/common.json
+  - stable/2025-05-01/expressRoute.json
+  - stable/2025-05-01/firewall.json
   - stable/2025-05-01/firewallPolicy.json
-  - stable/2025-05-01/ipAddressManager.json
-  - stable/2025-05-01/ipAllocation.json
-  - stable/2025-05-01/ipGroups.json
   - stable/2025-05-01/loadBalancer.json
-  - stable/2025-05-01/natGateway.json
-  - stable/2025-05-01/network.json
-  - stable/2025-05-01/networkInterface.json
+  - stable/2025-05-01/networkGateway.json
+  - stable/2025-05-01/networkingOperations.json
   - stable/2025-05-01/networkManager.json
-  - stable/2025-05-01/networkManagerActiveConfiguration.json
-  - stable/2025-05-01/networkManagerConnection.json
-  - stable/2025-05-01/networkManagerConnectivityConfiguration.json
-  - stable/2025-05-01/networkManagerEffectiveConfiguration.json
-  - stable/2025-05-01/networkManagerGroup.json
-  - stable/2025-05-01/networkManagerRoutingConfiguration.json
-  - stable/2025-05-01/networkManagerScopeConnection.json
-  - stable/2025-05-01/networkManagerSecurityAdminConfiguration.json
-  - stable/2025-05-01/networkManagerSecurityUserConfiguration.json
-  - stable/2025-05-01/networkProfile.json
-  - stable/2025-05-01/networkSecurityGroup.json
   - stable/2025-05-01/networkSecurityPerimeter.json
-  - stable/2025-05-01/networkVerifier.json
-  - stable/2025-05-01/networkVirtualAppliance.json
   - stable/2025-05-01/networkWatcher.json
-  - stable/2025-05-01/operation.json
-  - stable/2025-05-01/privateEndpoint.json
-  - stable/2025-05-01/privateLinkService.json
-  - stable/2025-05-01/publicIpAddress.json
-  - stable/2025-05-01/publicIpPrefix.json
-  - stable/2025-05-01/routeFilter.json
-  - stable/2025-05-01/routeTable.json
-  - stable/2025-05-01/securityPartnerProvider.json
-  - stable/2025-05-01/serviceCommunity.json
-  - stable/2025-05-01/serviceEndpointPolicy.json
   - stable/2025-05-01/serviceGateway.json
-  - stable/2025-05-01/serviceTags.json
-  - stable/2025-05-01/usage.json
   - stable/2025-05-01/virtualNetwork.json
   - stable/2025-05-01/virtualNetworkAppliance.json
-  - stable/2025-05-01/virtualNetworkGateway.json
-  - stable/2025-05-01/virtualNetworkTap.json
-  - stable/2025-05-01/virtualRouter.json
   - stable/2025-05-01/virtualWan.json
-  - stable/2025-05-01/vmssNetworkInterface.json
-  - stable/2025-05-01/vmssPublicIpAddress.json
-  - stable/2025-05-01/webapplicationfirewall.json
+  - stable/2018-10-01/vmssNetwork.json
 suppressions:
   - code: PutResponseCodes
     reason: Required for multiple response codes. Reviewed by ARM team.
@@ -123,13 +181,13 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}"].patch.parameters[2]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/flowLogs/{flowLogName}"].patch.parameters[3]
   - code: SystemDataDefinitionsCommonTypes
-    from: networkVerifier.json
+    from: virtualNetwork.json
     reason: False alarm for common type errors.
   - code: SystemDataDefinitionsCommonTypes
-    from: network.json
+    from: common.json
     reason: False alarm.
   - code: PutRequestResponseSchemeArm
-    from: serviceGateway.json
+    from: common.json
     reason: API spec code issue in PutRequestResponseSchemeArm validation.
   - code: RequiredPropertiesMissingInResourceModel
     reason: Not a standard azure resource.
@@ -4317,6 +4375,12 @@ input-file:
 
 ```yaml
 directive:
+  - suppress: ResourceNameRestriction
+    from: virtualWan.json
+    reason: virtualHubName is an existing parent resource path parameter established in prior API versions. Adding a pattern constraint would be a breaking change to 2025-05-01 and earlier versions.
+  - suppress: ProvisioningStateMustBeReadOnly
+    from: virtualWan.json
+    reason: The Common.ProvisioningState type is marked readOnly in TypeSpec via @visibility(Lifecycle.Read), but the autorest emitter places readOnly as a sibling of $ref rather than in the type definition itself. The linter does not follow $ref siblings per OpenAPI 2.0 spec. Known issue https://github.com/Azure/azure-openapi-validator/issues/637
   - suppress: PutRequestResponseSchemeArm
     from: virtualNetworkAppliance.json
     reason: Known issue. Github link https://github.com/Azure/azure-openapi-validator/issues/752
@@ -4582,6 +4646,12 @@ directive:
   - suppress: ParametersInPost
     from: virtualNetworkGateway.json
     reason: There are existing APIs in the file using the same format. Suppress it to avoid breaking change because it is referenced by all Virtual Network Gateway APIs.
+  - suppress: ParametersInPost
+    from: expressRoute.json
+    reason: Backend APIs require these as query parameters for consistency with existing VirtualNetworkGateway failover APIs.
+  - suppress: ParametersInPost
+    from: virtualWan.json
+    reason: Backend APIs require these as query parameters for consistency with existing VirtualNetworkGateway failover and insights APIs.
   - suppress: AvoidAdditionalProperties
     from: virtualNetworkGateway.json
     reason: We are using Dictionaries in the NRP APIs which are already rolled out. Suppress it since this is used by the Gateway Resiliency APIs.
@@ -4642,6 +4712,30 @@ directive:
     reason: name, id and type properties are inherited from the upper level
 
 suppressions:
+  - code: ResourceNameRestriction
+    from: expressRoute.json
+    reason: The resource name parameter 'circuitName' is not defined with a 'pattern' restriction. Suppress it for now to avoid breaking change because it is referenced by all ExpressRoute circuit link failover APIs.
+    where:
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/getCircuitLinkFailoverAllTestsDetails"]
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/getCircuitLinkFailoverSingleTestDetails"]
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/startCircuitLinkFailoverTest"]
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/stopCircuitLinkFailoverTest"]
+  - code: ParametersInPost
+    from: expressRoute.json
+    reason: Backend APIs require these as query parameters for consistency with existing VirtualNetworkGateway failover APIs.
+  - code: ResourceNameRestriction
+    from: virtualWan.json
+    reason: The resource name parameter 'expressRouteGatewayName' is not defined with a 'pattern' restriction. Suppress it for now to avoid breaking change because it is referenced by all ExpressRoute gateway failover and insights APIs.
+    where:
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/getFailoverAllTestsDetails"]
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/getFailoverSingleTestDetails"]
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/startSiteFailoverTest"]
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/stopSiteFailoverTest"]
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/getRoutesInformation"]
+      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/getResiliencyInformation"]
+  - code: ParametersInPost
+    from: virtualWan.json
+    reason: Backend APIs require these as query parameters for consistency with existing VirtualNetworkGateway failover and insights APIs.
   - code: ResourceNameRestriction
     from: bastionhost.json
     reason: The resource name parameter 'bastionHostName' is not defined with a 'pattern' restriction. Suppress it for now to avoid breaking change because it is referenced by all Bastion APIs.
