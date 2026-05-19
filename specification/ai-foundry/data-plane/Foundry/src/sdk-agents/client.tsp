@@ -144,6 +144,9 @@ using Azure.AI.Projects;
 
 @@clientName(WorkIQPreviewTool, "WorkIqPreviewTool", "java");
 
+// Rename listSessionFiles to getSessionFiles for better accuracy, since it's a GET operation and returns the list of files in the response.
+@@clientName(AgentSessionFiles.listSessionFiles, "getSessionFiles");
+
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
 // --------------------------------------------------------------------------------
@@ -204,7 +207,6 @@ using Azure.AI.Projects;
 
 @@usage(CreateAgentVersionRequest, Usage.input);
 @@access(CreateAgentVersionRequest, Access.public);
-
 
 // Ensure SessionLogEvent and SessionLogEventType are emitted
 @@usage(SessionLogEvent, Usage.output);
