@@ -50,7 +50,7 @@ union FeatureState {
 @added(Versions.v2026_06_01)
 model FeatureEnableRequest {
   /** The Service Tree identifier associated with this feature action. */
-  serviceTreeId?: Azure.Core.uuid;
+  serviceTreeId?: string;
 }
 
 /** Location-scoped operations for compute limit features. */
