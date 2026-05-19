@@ -602,8 +602,8 @@ alias MultipartBodyParameterGo = {
 /** Represents an array of signed identifiers */
 @clientName("SignedIdentifiers", "go")
 model SignedIdentifiersGo is Array<SignedIdentifier>;
-@@access(StorageErrorCode, Access.public);
-@@usage(StorageErrorCode, Usage.output);
+@@access(StorageErrorCode, Access.public, "go");
+@@usage(StorageErrorCode, Usage.output, "go");
 @@alternateType(AccessPolicy.start, utcDateTime, "go");
 @@alternateType(AccessPolicy.expiry, utcDateTime, "go");
 @@alternateType(BlobDeleteType, BlobDeleteTypeCustom, "go");
