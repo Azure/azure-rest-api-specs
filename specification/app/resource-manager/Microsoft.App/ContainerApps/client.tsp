@@ -174,95 +174,8 @@ union OpenIdConnectClientCredentialMethod {
 );
 
 @@clientLocation(
-  ContainerAppsDiagnostics.getDetector,
-  "ContainerAppDetectors",
-  "csharp"
-);
-
-@@clientLocation(
-  ContainerAppsDiagnostics.listDetectors,
-  "ContainerAppDetectors",
-  "csharp"
-);
-
-@@clientLocation(
   ContainerAppManagedEnvironmentDetectorResourceProperties.getRoot,
   "ContainerAppManagedEnvironmentDetectorResourceProperties",
-  "csharp"
-);
-
-@@clientLocation(
-  ManagedEnvironmentsDiagnostics.getDetector,
-  "ContainerAppManagedEnvironmentDetectors",
-  "csharp"
-);
-
-@@clientLocation(
-  ManagedEnvironmentsDiagnostics.listDetectors,
-  "ContainerAppManagedEnvironmentDetectors",
-  "csharp"
-);
-
-// The Certificates interface contains operations for both connected
-// environments and managed environments. Split them into the matching C# parent
-// resource groups to preserve the existing SDK shape.
-@@clientLocation(
-  Certificates.get,
-  "ContainerAppConnectedEnvironmentCertificates",
-  "csharp"
-);
-
-@@clientLocation(
-  Certificates.createOrUpdate,
-  "ContainerAppConnectedEnvironmentCertificates",
-  "csharp"
-);
-
-@@clientLocation(
-  Certificates.update,
-  "ContainerAppConnectedEnvironmentCertificates",
-  "csharp"
-);
-
-@@clientLocation(
-  Certificates.delete,
-  "ContainerAppConnectedEnvironmentCertificates",
-  "csharp"
-);
-
-@@clientLocation(
-  Certificates.list,
-  "ContainerAppConnectedEnvironmentCertificates",
-  "csharp"
-);
-
-@@clientLocation(
-  Certificates.getCertificates,
-  "ContainerAppManagedEnvironmentCertificates",
-  "csharp"
-);
-
-@@clientLocation(
-  Certificates.createOrUpdateCertificates,
-  "ContainerAppManagedEnvironmentCertificates",
-  "csharp"
-);
-
-@@clientLocation(
-  Certificates.updateCertificates,
-  "ContainerAppManagedEnvironmentCertificates",
-  "csharp"
-);
-
-@@clientLocation(
-  Certificates.deleteCertificates,
-  "ContainerAppManagedEnvironmentCertificates",
-  "csharp"
-);
-
-@@clientLocation(
-  Certificates.listCertificates,
-  "ContainerAppManagedEnvironmentCertificates",
   "csharp"
 );
 
@@ -508,15 +421,25 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(ConnectedEnvironmentProperties.staticIp, "StaticIP", "csharp");
 
-@@clientName(Certificates.get, "Get", "csharp");
+@@clientName(
+  ConnectedEnvironmentCertificates,
+  "ContainerAppConnectedEnvironmentCertificates",
+  "csharp"
+);
 
-@@clientName(Certificates.list, "List", "csharp");
+@@clientName(ConnectedEnvironmentCertificates.get, "Get", "csharp");
 
-@@clientName(Certificates.delete, "Delete", "csharp");
+@@clientName(ConnectedEnvironmentCertificates.list, "List", "csharp");
 
-@@clientName(Certificates.createOrUpdate, "CreateOrUpdate", "csharp");
+@@clientName(ConnectedEnvironmentCertificates.delete, "Delete", "csharp");
 
-@@clientName(Certificates.update, "Update", "csharp");
+@@clientName(
+  ConnectedEnvironmentCertificates.createOrUpdate,
+  "CreateOrUpdate",
+  "csharp"
+);
+
+@@clientName(ConnectedEnvironmentCertificates.update, "Update", "csharp");
 
 @@clientName(
   ConnectedEnvironmentProvisioningState,
@@ -983,6 +906,26 @@ union OpenIdConnectClientCredentialMethod {
 @@clientName(ManagedEnvironmentProperties.staticIp, "StaticIP", "csharp");
 
 @@clientName(
+  ManagedEnvironmentCertificates,
+  "ContainerAppManagedEnvironmentCertificates",
+  "csharp"
+);
+
+@@clientName(ManagedEnvironmentCertificates.getCertificates, "Get", "csharp");
+
+@@clientName(ManagedEnvironmentCertificates.listCertificates, "List", "csharp");
+
+@@clientName(ManagedEnvironmentCertificates.deleteCertificates, "Delete", "csharp");
+
+@@clientName(
+  ManagedEnvironmentCertificates.createOrUpdateCertificates,
+  "CreateOrUpdate",
+  "csharp"
+);
+
+@@clientName(ManagedEnvironmentCertificates.updateCertificates, "Update", "csharp");
+
+@@clientName(
   ManagedEnvironmentProperties.zoneRedundant,
   "IsZoneRedundant",
   "csharp"
@@ -1288,7 +1231,7 @@ union OpenIdConnectClientCredentialMethod {
 @@markAsPageable(ContainerAppsRevisionReplicas.listReplicas, "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the previous pageable diagnostics SDK surface during MPG migration"
-@@markAsPageable(ManagedEnvironmentsDiagnostics.listDetectors, "csharp");
+@@markAsPageable(ContainerAppManagedEnvironmentDetectors.listDetectors, "csharp");
 
 // C# @@scope customizations.
 @@scope(ContainerAppsLabelHistory.listLabelHistory, "!csharp");

@@ -68,31 +68,49 @@ using Microsoft.App;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ConnectedEnvironment.properties);
 
-@@clientLocation(Certificates.get, "ConnectedEnvironmentsCertificates");
 @@clientLocation(
-  Certificates.createOrUpdate,
+  ConnectedEnvironmentCertificates.get,
+  "ConnectedEnvironmentsCertificates"
+);
+@@clientLocation(
+  ConnectedEnvironmentCertificates.createOrUpdate,
   "ConnectedEnvironmentsCertificates"
 );
 @@clientName(
-  Certificates.createOrUpdate::parameters.resource,
+  ConnectedEnvironmentCertificates.createOrUpdate::parameters.resource,
   "certificateEnvelope"
 );
-@@clientLocation(Certificates.update, "ConnectedEnvironmentsCertificates");
-@@clientName(Certificates.update::parameters.properties, "certificateEnvelope");
-@@clientLocation(Certificates.delete, "ConnectedEnvironmentsCertificates");
-@@clientLocation(Certificates.list, "ConnectedEnvironmentsCertificates");
+@@clientLocation(
+  ConnectedEnvironmentCertificates.update,
+  "ConnectedEnvironmentsCertificates"
+);
+@@clientName(
+  ConnectedEnvironmentCertificates.update::parameters.properties,
+  "certificateEnvelope"
+);
+@@clientLocation(
+  ConnectedEnvironmentCertificates.delete,
+  "ConnectedEnvironmentsCertificates"
+);
+@@clientLocation(
+  ConnectedEnvironmentCertificates.list,
+  "ConnectedEnvironmentsCertificates"
+);
 
-@@clientName(Certificates.getCertificates, "Get");
-@@clientName(Certificates.listCertificates, "List");
-@@clientName(Certificates.deleteCertificates, "Delete");
-@@clientName(Certificates.createOrUpdateCertificates, "CreateOrUpdate");
-@@clientName(Certificates.updateCertificates, "Update");
+@@clientName(ManagedEnvironmentCertificates.getCertificates, "Get");
+@@clientName(ManagedEnvironmentCertificates.listCertificates, "List");
+@@clientName(ManagedEnvironmentCertificates.deleteCertificates, "Delete");
 @@clientName(
-  Certificates.createOrUpdateCertificates::parameters.resource,
+  ManagedEnvironmentCertificates.createOrUpdateCertificates,
+  "CreateOrUpdate"
+);
+@@clientName(ManagedEnvironmentCertificates.updateCertificates, "Update");
+@@clientName(
+  ManagedEnvironmentCertificates.createOrUpdateCertificates::parameters.resource,
   "certificateEnvelope"
 );
 @@clientName(
-  Certificates.updateCertificates::parameters.properties,
+  ManagedEnvironmentCertificates.updateCertificates::parameters.properties,
   "certificateEnvelope"
 );
 
@@ -317,11 +335,11 @@ using Microsoft.App;
 @@clientName(ScheduledEntries.scheduledEntries, "ScheduledEntries");
 
 @@clientLocation(
-  ManagedEnvironmentsDiagnostics.listDetectors,
+  ContainerAppManagedEnvironmentDetectors.listDetectors,
   "ManagedEnvironmentDiagnostics"
 );
 @@clientLocation(
-  ManagedEnvironmentsDiagnostics.getDetector,
+  ContainerAppManagedEnvironmentDetectors.getDetector,
   "ManagedEnvironmentDiagnostics"
 );
 

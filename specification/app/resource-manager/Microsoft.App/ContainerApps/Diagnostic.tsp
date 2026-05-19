@@ -121,7 +121,12 @@ interface ContainerAppsDiagnostics {
     },
     Error = DefaultErrorResponse
   >;
+}
 
+@armResourceOperations
+@tag("ContainerApps")
+@tag("Diagnostics")
+interface ContainerAppDetectors {
   /**
    * Get the list of diagnostics for a given Container App.
    */
@@ -203,7 +208,8 @@ alias ManagedEnvironmentDetectorOps = Azure.ResourceManager.Legacy.LegacyOperati
     @key
     detectorName: string;
   },
-  ErrorType = DefaultErrorResponse
+  ErrorType = DefaultErrorResponse,
+  ResourceName = "ContainerAppManagedEnvironmentDetector"
 >;
 
 alias ContainerAppManagedEnvironmentDetectorResourcePropertyOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -232,7 +238,7 @@ alias ContainerAppManagedEnvironmentDetectorResourcePropertyOps = Azure.Resource
 @armResourceOperations
 @tag("ManagedEnvironments")
 @tag("Diagnostics")
-interface ManagedEnvironmentsDiagnostics {
+interface ContainerAppManagedEnvironmentDetectors {
   /**
    * Get the list of diagnostics for a Managed Environment used to host container apps.
    */
