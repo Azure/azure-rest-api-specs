@@ -14,27 +14,33 @@ namespace Customizations;
 @@alternateType(KeyInfo.expiry, string, "python,csharp,javascript,go");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing SDKs didn't output pageable operations format"
-@@Azure.ClientGenerator.Core.Legacy.disablePageable(Service.listContainers,
+@@Azure.ClientGenerator.Core.Legacy.disablePageable(
+  Service.listContainers,
   "python,csharp,javascript,go"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing SDKs didn't output pageable operations format"
-@@Azure.ClientGenerator.Core.Legacy.disablePageable(Service.findBlobsByTags,
+@@Azure.ClientGenerator.Core.Legacy.disablePageable(
+  Service.findBlobsByTags,
   "python,csharp,javascript,go"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing SDKs didn't output pageable operations format"
-@@Azure.ClientGenerator.Core.Legacy.disablePageable(Container.findBlobsByTags,
+@@Azure.ClientGenerator.Core.Legacy.disablePageable(
+  Container.findBlobsByTags,
   "python,csharp,javascript,go"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing SDKs didn't output pageable operations format"
-@@Azure.ClientGenerator.Core.Legacy.disablePageable(Container.listBlobs,
+@@Azure.ClientGenerator.Core.Legacy.disablePageable(
+  Container.listBlobs,
   "python,csharp,javascript,go"
 );
 
-@@clientName(FilterBlobResponse,
+@@clientName(
+  FilteredBlobResponse,
   "FilterBlobSegment",
   "python,csharp,javascript,go"
 );
-@@clientName(ListContainersResponse,
+@@clientName(
+  ListContainersResponse,
   "ListContainersSegmentResponse",
   "python,csharp,javascript,go"
 );
