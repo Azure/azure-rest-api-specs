@@ -75,10 +75,11 @@ describe("compile", function () {
         Promise.resolve([null, "not-swagger", ""]),
     );
 
-    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
-      success: true,
-      stdOutput: expect.stringContaining("skipping extra swagger check") as unknown,
-    });
+    const consoleSpy = vi.spyOn(console, "log");
+    const result = await new CompileRule().execute(mockFolder);
+    expect(result).toMatchObject({ success: true });
+    const allOutput = consoleSpy.mock.calls.map((args) => String(args[0])).join("\n");
+    expect(allOutput).toContain("skipping extra swagger check");
   });
 
   it("should fail if extra swaggers", async function () {
