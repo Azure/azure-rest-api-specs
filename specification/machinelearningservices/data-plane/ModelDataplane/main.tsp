@@ -36,6 +36,6 @@ enum Versions {
   /** The 1.0.0 API version. */
   v1_0_0: "1.0.0",
 
-  /** The 1.1.0 API version. */
-  v1_1_0: "1.1.0",
+  /** The 2026-05-01 API version. */
+  v2026_05_01: "2026-05-01",
 }

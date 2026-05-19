@@ -730,12 +730,12 @@ model Model {
   assetId?: string;
 
   /** List of allowed deployment templates for the model. */
-  @added(Versions.v1_1_0)
+  @added(Versions.v2026_05_01)
   allowedDeploymentTemplates?: ModelDeploymentTemplateDetails[];
 }
 
 /** Details of a deployment template reference. */
-@added(Versions.v1_1_0)
+@added(Versions.v2026_05_01)
 model ModelDeploymentTemplateDetails {
   /** The asset ID of the deployment template. */
   assetId?: string;
