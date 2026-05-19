@@ -102,9 +102,11 @@ interface HttpRouteConfigs {
 @@minLength(HttpRouteConfig.name, 3);
 @@doc(HttpRouteConfig.name, "Name of the Http Route Config Resource.");
 @@doc(HttpRouteConfig.properties, "Http Route Config properties");
-@@doc(HttpRouteConfigs.createOrUpdate::parameters.resource,
+@@doc(
+  HttpRouteConfigs.createOrUpdate::parameters.resource,
   "Http Route config to be created or updated"
 );
-@@doc(HttpRouteConfigs.update::parameters.properties,
+@@doc(
+  HttpRouteConfigs.update::parameters.properties,
   "Properties of http route config that need to be updated"
 );

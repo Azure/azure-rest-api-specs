@@ -104,7 +104,9 @@ interface ConfigurationAssignments {
    */
   deleteParent is ConfigurationAssignmentOps.DeleteSync<
     ConfigurationAssignment,
-    Response = ArmResponse<ConfigurationAssignment> | ArmDeletedNoContentResponse,
+    Response =
+      | ArmResponse<ConfigurationAssignment>
+      | ArmDeletedNoContentResponse,
     ErrorType = MaintenanceError
   >;
 
@@ -183,7 +185,9 @@ interface ConfigurationAssignmentOperationGroup {
    */
   delete is ConfigurationAssignmentOperationGroupOps.DeleteSync<
     ConfigurationAssignment,
-    Response = ArmResponse<ConfigurationAssignment> | ArmDeletedNoContentResponse,
+    Response =
+      | ArmResponse<ConfigurationAssignment>
+      | ArmDeletedNoContentResponse,
     ErrorType = MaintenanceError
   >;
 }
@@ -244,7 +248,9 @@ interface ConfigurationAssignmentsForSubscriptions {
    */
   delete is ConfigurationAssignmentsForSubscriptionOps.DeleteSync<
     ConfigurationAssignment,
-    Response = ArmResponse<ConfigurationAssignment> | ArmDeletedNoContentResponse,
+    Response =
+      | ArmResponse<ConfigurationAssignment>
+      | ArmDeletedNoContentResponse,
     ErrorType = MaintenanceError
   >;
 
@@ -314,30 +320,39 @@ interface ConfigurationAssignmentsForResourceGroup {
    */
   delete is ConfigurationAssignmentsForResourceGroupOps.DeleteSync<
     ConfigurationAssignment,
-    Response = ArmResponse<ConfigurationAssignment> | ArmDeletedNoContentResponse,
+    Response =
+      | ArmResponse<ConfigurationAssignment>
+      | ArmDeletedNoContentResponse,
     ErrorType = MaintenanceError
   >;
 }
 
 @@doc(ConfigurationAssignment.name, "Configuration assignment name");
-@@doc(ConfigurationAssignment.properties,
+@@doc(
+  ConfigurationAssignment.properties,
   "Properties of the configuration assignment"
 );
-@@doc(ConfigurationAssignments.createOrUpdateParent::parameters.resource,
+@@doc(
+  ConfigurationAssignments.createOrUpdateParent::parameters.resource,
   "The configurationAssignment"
 );
-@@doc(ConfigurationAssignmentOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  ConfigurationAssignmentOperationGroup.createOrUpdate::parameters.resource,
   "The configurationAssignment"
 );
-@@doc(ConfigurationAssignmentsForSubscriptions.createOrUpdate::parameters.resource,
+@@doc(
+  ConfigurationAssignmentsForSubscriptions.createOrUpdate::parameters.resource,
   "The configurationAssignment"
 );
-@@doc(ConfigurationAssignmentsForSubscriptions.update::parameters.properties,
+@@doc(
+  ConfigurationAssignmentsForSubscriptions.update::parameters.properties,
   "The configurationAssignment"
 );
-@@doc(ConfigurationAssignmentsForResourceGroup.createOrUpdate::parameters.resource,
+@@doc(
+  ConfigurationAssignmentsForResourceGroup.createOrUpdate::parameters.resource,
   "The configurationAssignment"
 );
-@@doc(ConfigurationAssignmentsForResourceGroup.update::parameters.properties,
+@@doc(
+  ConfigurationAssignmentsForResourceGroup.update::parameters.properties,
   "The configurationAssignment"
 );

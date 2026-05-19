@@ -3248,6 +3248,9 @@
           "SearchServiceListKnowledgeSourcesIndexedSharePoint": {
             "$ref": "./examples/SearchServiceListKnowledgeSourcesIndexedSharePoint.json"
           },
+          "SearchServiceListKnowledgeSourcesMcpServer": {
+            "$ref": "./examples/SearchServiceListKnowledgeSourcesMcpServer.json"
+          },
           "SearchServiceListKnowledgeSourcesWeb": {
             "$ref": "./examples/SearchServiceListKnowledgeSourcesWeb.json"
           }
@@ -3316,6 +3319,9 @@
           },
           "SearchServiceCreateKnowledgeSourceIndexedSharePoint": {
             "$ref": "./examples/SearchServiceCreateKnowledgeSourceIndexedSharePoint.json"
+          },
+          "SearchServiceCreateKnowledgeSourceMcpServer": {
+            "$ref": "./examples/SearchServiceCreateKnowledgeSourceMcpServer.json"
           },
           "SearchServiceCreateKnowledgeSourceWeb": {
             "$ref": "./examples/SearchServiceCreateKnowledgeSourceWeb.json"
@@ -3389,6 +3395,9 @@
           },
           "SearchServiceGetKnowledgeSourceIndexedSharePoint": {
             "$ref": "./examples/SearchServiceGetKnowledgeSourceIndexedSharePoint.json"
+          },
+          "SearchServiceGetKnowledgeSourceMcpServer": {
+            "$ref": "./examples/SearchServiceGetKnowledgeSourceMcpServer.json"
           },
           "SearchServiceGetKnowledgeSourceWeb": {
             "$ref": "./examples/SearchServiceGetKnowledgeSourceWeb.json"
@@ -3502,6 +3511,9 @@
           },
           "SearchServiceCreateOrUpdateKnowledgeSourceIndexedSharePoint": {
             "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceIndexedSharePoint.json"
+          },
+          "SearchServiceCreateOrUpdateKnowledgeSourceMcpServer": {
+            "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceMcpServer.json"
           },
           "SearchServiceCreateOrUpdateKnowledgeSourceWeb": {
             "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceWeb.json"
@@ -10077,6 +10089,7 @@
         "workIQ",
         "fabricDataAgent",
         "fabricOntology",
+        "mcpServer",
         "modelQueryPlanning",
         "modelAnswerSynthesis",
         "modelWebSummarization",
@@ -10130,6 +10143,11 @@
             "name": "fabricOntology",
             "value": "fabricOntology",
             "description": "Fabric Ontology retrieval activity."
+          },
+          {
+            "name": "mcpServer",
+            "value": "mcpServer",
+            "description": "MCP server retrieval activity."
           },
           {
             "name": "modelQueryPlanning",
@@ -10494,6 +10512,57 @@
       ],
       "x-ms-discriminator-value": "indexedSharePoint"
     },
+    "KnowledgeBaseMcpServerActivityArguments": {
+      "type": "object",
+      "description": "Represents the arguments the MCP server retrieval activity was run with.",
+      "properties": {
+        "toolName": {
+          "type": "string",
+          "description": "The name of the MCP server tool used for the retrieval activity."
+        },
+        "toolArguments": {
+          "type": "object",
+          "description": "The arguments passed to the MCP server tool.",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "KnowledgeBaseMcpServerActivityRecord": {
+      "type": "object",
+      "description": "Represents an MCP server retrieval activity record.",
+      "properties": {
+        "mcpServerArguments": {
+          "$ref": "#/definitions/KnowledgeBaseMcpServerActivityArguments",
+          "description": "The MCP server arguments for the retrieval activity."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeBaseRetrievalActivityRecord"
+        }
+      ],
+      "x-ms-discriminator-value": "mcpServer"
+    },
+    "KnowledgeBaseMcpServerReference": {
+      "type": "object",
+      "description": "Represents an MCP server document reference.",
+      "properties": {
+        "toolName": {
+          "type": "string",
+          "description": "The name of the MCP server tool that produced the reference."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the MCP server tool result."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeBaseReference"
+        }
+      ],
+      "x-ms-discriminator-value": "mcpServer"
+    },
     "KnowledgeBaseMessage": {
       "type": "object",
       "description": "The natural language message style object.",
@@ -10747,7 +10816,8 @@
         "remoteSharePoint",
         "workIQ",
         "fabricDataAgent",
-        "fabricOntology"
+        "fabricOntology",
+        "mcpServer"
       ],
       "x-ms-enum": {
         "name": "KnowledgeBaseReferenceType",
@@ -10797,6 +10867,11 @@
             "name": "fabricOntology",
             "value": "fabricOntology",
             "description": "Fabric Ontology document reference."
+          },
+          {
+            "name": "mcpServer",
+            "value": "mcpServer",
+            "description": "MCP server document reference."
           }
         ]
       }
@@ -13249,6 +13324,16 @@
         "serverURL",
         "tools"
       ]
+    },
+    "McpServerKnowledgeSourceParams": {
+      "type": "object",
+      "description": "Specifies runtime parameters for an MCP server knowledge source",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSourceParams"
+        }
+      ],
+      "x-ms-discriminator-value": "mcpServer"
     },
     "McpServerNoneOutputParsing": {
       "type": "object",

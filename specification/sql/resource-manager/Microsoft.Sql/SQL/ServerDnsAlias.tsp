@@ -39,11 +39,14 @@ interface ServerDnsAliases {
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     ServerDnsAlias,
     Request = void,
-    Response = ArmResourceUpdatedResponse<ServerDnsAlias> | ArmResourceCreatedResponse<
-      ServerDnsAlias,
-      ArmLroLocationHeader<FinalResult = ServerDnsAlias> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<ServerDnsAlias>
+      | ArmResourceCreatedResponse<
+          ServerDnsAlias,
+          ArmLroLocationHeader<FinalResult = ServerDnsAlias> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -52,7 +55,10 @@ interface ServerDnsAliases {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ServerDnsAlias,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

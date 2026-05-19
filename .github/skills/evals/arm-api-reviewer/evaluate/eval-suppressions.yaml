@@ -1,0 +1,70 @@
+name: arm-api-reviewer-eval-suppressions
+description: |
+  Suppression analysis tests (05xxxx).
+  Validates detection of suppressions without justification and
+  suppressions of security-related rules with vague reasons.
+
+config:
+  runs: 1
+  timeout: 120
+  model: claude-sonnet-4.6
+  judge_model: claude-sonnet-4.6
+
+scoring:
+  threshold: 0.7
+
+stimuli:
+  # 050001 — Suppressions without reason
+  - name: detect-suppression-no-reason
+    environment:
+      files:
+        - src: "../fixtures/readme/readme-new-suppression-no-reason.md"
+          dest: "specification/nosupprsvc/resource-manager/readme.md"
+    prompt: >
+      Review the following readme.md suppression file for an ARM specification.
+      This is a new API version with no previous readme.md to compare against.
+      Check all suppressions for proper justification per Azure suppression
+      guidelines.
+
+      File: specification/nosupprsvc/resource-manager/readme.md
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        config:
+          pattern: "(?i)reason|justification"
+      - type: output-contains
+        config:
+          substring: "suppress"
+      - type: prompt
+    rubric:
+      - Flagged the AvoidAdditionalProperties suppression as missing a reason field
+      - Flagged the PatchBodyParametersSchema suppression as missing a reason field
+      - Cited suppression justification requirements (RPC-SUPPRESS-GA/SCOPE)
+
+  # 050002 — Security rule suppressions
+  - name: detect-suppression-security-rule
+    environment:
+      files:
+        - src: "../fixtures/readme/readme-security-suppression.md"
+          dest: "specification/secsupprsvc/resource-manager/readme.md"
+    prompt: >
+      Review the following readme.md suppression file for an ARM specification.
+      This is a new API version with no previous readme.md to compare against.
+      Check all suppressions for proper justification per Azure suppression
+      guidelines. Pay special attention to suppressions of security-related rules.
+
+      File: specification/secsupprsvc/resource-manager/readme.md
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        config:
+          pattern: "(?i)security|secret"
+      - type: prompt
+    rubric:
+      - Flagged the XmsSecretNotReadBack suppression with vague reason "existing pattern" — this is a security rule suppression
+      - Flagged the SecretPropertyMustBeWriteOnly suppression with vague reason "will fix later" — this is a security rule suppression
+      - Identified both as blocking because they suppress security-related rules with insufficient justification

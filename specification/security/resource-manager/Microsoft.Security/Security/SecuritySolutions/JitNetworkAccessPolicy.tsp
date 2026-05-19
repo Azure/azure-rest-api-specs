@@ -139,7 +139,8 @@ interface JitNetworkAccessPolicies {
 enum JitNetworkAccessPolicyInitiateType {
   initiate,
 }
-@@doc(JitNetworkAccessPolicy.name,
+@@doc(
+  JitNetworkAccessPolicy.name,
   "Name of a Just-in-Time access configuration policy."
 );
 @@doc(JitNetworkAccessPolicy.properties, "");

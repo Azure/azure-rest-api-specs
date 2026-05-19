@@ -47,8 +47,10 @@ interface SqlTriggerGetResultsOperationGroup {
   createUpdateSqlTrigger is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     SqlTriggerGetResults,
     Request = SqlTriggerCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<SqlTriggerGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = SqlTriggerGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<SqlTriggerGetResults>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = SqlTriggerGetResults> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -56,7 +58,9 @@ interface SqlTriggerGetResultsOperationGroup {
    */
   deleteSqlTrigger is ArmResourceDeleteWithoutOkAsync<
     SqlTriggerGetResults,
-    Response = NoContentResponse | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+    Response =
+      | NoContentResponse
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
   >;
 
   /**
@@ -69,13 +73,16 @@ interface SqlTriggerGetResultsOperationGroup {
 }
 
 @@doc(SqlTriggerGetResults.name, "Cosmos DB trigger name.");
-@@doc(SqlTriggerGetResults.properties,
+@@doc(
+  SqlTriggerGetResults.properties,
   "The properties of an Azure Cosmos DB trigger"
 );
-@@doc(SqlTriggerGetResultsOperationGroup.createUpdateSqlTrigger::parameters.resource,
+@@doc(
+  SqlTriggerGetResultsOperationGroup.createUpdateSqlTrigger::parameters.resource,
   "The parameters to provide for the current SQL trigger."
 );
-@@visibility(SqlTriggerGetResults.location,
+@@visibility(
+  SqlTriggerGetResults.location,
   Lifecycle.Read,
   Lifecycle.Create,
   Lifecycle.Update

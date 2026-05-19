@@ -49,14 +49,17 @@ interface GalleryImageVersions {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     GalleryImageVersion,
-    Response = ArmResourceUpdatedResponse<GalleryImageVersion> | ArmResourceCreatedResponse<
-      GalleryImageVersion,
-      ArmLroLocationHeader<FinalResult = GalleryImageVersion> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | (ArmAcceptedLroResponse & {
-      @bodyRoot
-      _: GalleryImageVersion;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<GalleryImageVersion>
+      | ArmResourceCreatedResponse<
+          GalleryImageVersion,
+          ArmLroLocationHeader<FinalResult = GalleryImageVersion> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | (ArmAcceptedLroResponse & {
+          @bodyRoot
+          _: GalleryImageVersion;
+        })
   >;
 
   /**
@@ -77,7 +80,10 @@ interface GalleryImageVersions {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ComputeResourceDeleteAsync<
     GalleryImageVersion,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -89,15 +95,19 @@ interface GalleryImageVersions {
   >;
 }
 
-@@doc(GalleryImageVersion.name,
+@@doc(
+  GalleryImageVersion.name,
   "The name of the gallery image version to be retrieved."
 );
-@@doc(GalleryImageVersion.properties,
+@@doc(
+  GalleryImageVersion.properties,
   "Describes the properties of a gallery image version."
 );
-@@doc(GalleryImageVersions.createOrUpdate::parameters.resource,
+@@doc(
+  GalleryImageVersions.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update gallery image version operation."
 );
-@@doc(GalleryImageVersions.update::parameters.properties,
+@@doc(
+  GalleryImageVersions.update::parameters.properties,
   "Parameters supplied to the update gallery image version operation."
 );

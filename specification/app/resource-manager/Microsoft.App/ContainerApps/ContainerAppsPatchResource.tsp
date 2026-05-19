@@ -106,9 +106,11 @@ interface ContainerAppsPatches {
 @@maxLength(ContainerAppsPatchResource.name, 64);
 @@minLength(ContainerAppsPatchResource.name, 2);
 @@doc(ContainerAppsPatchResource.name, "The name of the patch");
-@@doc(ContainerAppsPatchResource.properties,
+@@doc(
+  ContainerAppsPatchResource.properties,
   "Properties that describes current states of the patch resource."
 );
-@@doc(ContainerAppsPatches.skipConfigure::parameters.body,
+@@doc(
+  ContainerAppsPatches.skipConfigure::parameters.body,
   "Configure patcher to skip a patch or not."
 );

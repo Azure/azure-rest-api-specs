@@ -237,10 +237,12 @@ interface SensitivityLabelOperationGroup {
 
 @@doc(SensitivityLabel.name, "The source of the sensitivity label.");
 @@doc(SensitivityLabel.properties, "Resource properties.");
-@@doc(SensitivityLabels.createOrUpdate::parameters.resource,
+@@doc(
+  SensitivityLabels.createOrUpdate::parameters.resource,
   "The column sensitivity label resource."
 );
-@@doc(SensitivityLabelOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  SensitivityLabelOperationGroup.createOrUpdate::parameters.resource,
   "The column sensitivity label resource."
 );
 
