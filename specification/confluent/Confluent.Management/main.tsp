@@ -19,6 +19,8 @@ import "./SCEnvironmentRecord.tsp";
 import "./SCClusterRecord.tsp";
 import "./ConnectorResource.tsp";
 import "./TopicRecord.tsp";
+import "./NetworkGatewayResource.tsp";
+import "./AccessPointResource.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;
@@ -70,8 +72,7 @@ interface Operations {
   @segment("operations")
   @get
   @list
-  list(
-    ...ApiVersionParameter,
-    ...Azure.ResourceManager.Legacy.Provider,
-  ): ArmResponse<OperationListResult> | ResourceProviderDefaultErrorResponse;
+  list(...ApiVersionParameter, ...Azure.ResourceManager.Legacy.Provider):
+    | ArmResponse<OperationListResult>
+    | ResourceProviderDefaultErrorResponse;
 }

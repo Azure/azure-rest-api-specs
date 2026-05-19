@@ -55,6 +55,12 @@
     },
     {
       "name": "TopicRecords"
+    },
+    {
+      "name": "NetworkGatewayResources"
+    },
+    {
+      "name": "AccessPointResources"
     }
   ],
   "paths": {
@@ -2401,6 +2407,588 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/environments/{environmentId}/networkGateways": {
+      "get": {
+        "operationId": "NetworkGatewayResources_List",
+        "tags": [
+          "NetworkGatewayResources"
+        ],
+        "description": "Lists all network gateways in an environment",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Organization resource name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "environmentId",
+            "in": "path",
+            "description": "Confluent environment id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkGatewayResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkGatewayResources_List_MaximumSet": {
+            "$ref": "./examples/NetworkGatewayResources_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/environments/{environmentId}/networkGateways/{networkGatewayId}": {
+      "get": {
+        "operationId": "NetworkGatewayResources_Get",
+        "tags": [
+          "NetworkGatewayResources"
+        ],
+        "description": "Get confluent network gateway by Id",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Organization resource name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "environmentId",
+            "in": "path",
+            "description": "Confluent environment id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "networkGatewayId",
+            "in": "path",
+            "description": "Confluent network gateway id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkGatewayResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkGatewayResources_Get_MaximumSet": {
+            "$ref": "./examples/NetworkGatewayResources_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "NetworkGatewayResources_CreateOrReplace",
+        "tags": [
+          "NetworkGatewayResources"
+        ],
+        "description": "Create or replace a confluent network gateway",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Organization resource name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "environmentId",
+            "in": "path",
+            "description": "Confluent environment id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "networkGatewayId",
+            "in": "path",
+            "description": "Confluent network gateway id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Confluent Network Gateway resource model",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkGatewayResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'NetworkGatewayResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NetworkGatewayResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'NetworkGatewayResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NetworkGatewayResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkGatewayResources_CreateOrReplace_MaximumSet": {
+            "$ref": "./examples/NetworkGatewayResources_CreateOrReplace_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "NetworkGatewayResources_Delete",
+        "tags": [
+          "NetworkGatewayResources"
+        ],
+        "description": "Delete confluent network gateway by id",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Organization resource name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "environmentId",
+            "in": "path",
+            "description": "Confluent environment id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "networkGatewayId",
+            "in": "path",
+            "description": "Confluent network gateway id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkGatewayResources_Delete_MaximumSet": {
+            "$ref": "./examples/NetworkGatewayResources_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/environments/{environmentId}/networkGateways/{networkGatewayId}/accessPoints": {
+      "get": {
+        "operationId": "AccessPointResources_List",
+        "tags": [
+          "AccessPointResources"
+        ],
+        "description": "Lists all access points in a network gateway",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Organization resource name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "environmentId",
+            "in": "path",
+            "description": "Confluent environment id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "networkGatewayId",
+            "in": "path",
+            "description": "Confluent network gateway id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AccessPointResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccessPointResources_List_MaximumSet": {
+            "$ref": "./examples/AccessPointResources_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/environments/{environmentId}/networkGateways/{networkGatewayId}/accessPoints/{accessPointId}": {
+      "get": {
+        "operationId": "AccessPointResources_Get",
+        "tags": [
+          "AccessPointResources"
+        ],
+        "description": "Get confluent access point by Id",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Organization resource name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "environmentId",
+            "in": "path",
+            "description": "Confluent environment id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "networkGatewayId",
+            "in": "path",
+            "description": "Confluent network gateway id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "accessPointId",
+            "in": "path",
+            "description": "Confluent access point id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AccessPointResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccessPointResources_Get_MaximumSet": {
+            "$ref": "./examples/AccessPointResources_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AccessPointResources_CreateOrReplace",
+        "tags": [
+          "AccessPointResources"
+        ],
+        "description": "Create or replace a confluent access point",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Organization resource name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "environmentId",
+            "in": "path",
+            "description": "Confluent environment id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "networkGatewayId",
+            "in": "path",
+            "description": "Confluent network gateway id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "accessPointId",
+            "in": "path",
+            "description": "Confluent access point id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Confluent Access Point resource model",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccessPointResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AccessPointResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AccessPointResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'AccessPointResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AccessPointResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccessPointResources_CreateOrReplace_MaximumSet": {
+            "$ref": "./examples/AccessPointResources_CreateOrReplace_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "AccessPointResources_Delete",
+        "tags": [
+          "AccessPointResources"
+        ],
+        "description": "Delete confluent access point by id",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Organization resource name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "environmentId",
+            "in": "path",
+            "description": "Confluent environment id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "networkGatewayId",
+            "in": "path",
+            "description": "Confluent network gateway id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "accessPointId",
+            "in": "path",
+            "description": "Confluent access point id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccessPointResources_Delete_MaximumSet": {
+            "$ref": "./examples/AccessPointResources_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/environments/{environmentId}/schemaRegistryClusters": {
       "get": {
         "operationId": "Organization_ListSchemaRegistryClusters",
@@ -2992,6 +3580,107 @@
           }
         }
       }
+    },
+    "AccessPointProperties": {
+      "type": "object",
+      "description": "Access Point Properties",
+      "properties": {
+        "accessPointName": {
+          "type": "string",
+          "description": "Display name of the access point"
+        },
+        "region": {
+          "type": "string",
+          "description": "The cloud service provider region for the access point"
+        },
+        "vnetId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the virtual network",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks"
+              }
+            ]
+          }
+        },
+        "subnetId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the delegated subnet",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          }
+        },
+        "egressRoutes": {
+          "type": "string",
+          "description": "IP ranges to route through your virtual network instead of Confluent's default path. Required for Kafka clients in peered VNets or on-premises networks (e.g., 10.0.0.0/8, 172.16.0.0/12)."
+        },
+        "metadata": {
+          "$ref": "#/definitions/SCMetadataEntity",
+          "description": "Metadata of the record"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisionState",
+          "description": "Provisioning state of the access point",
+          "readOnly": true
+        },
+        "dictionary": {
+          "type": "array",
+          "description": "Additional properties for extensibility",
+          "items": {
+            "$ref": "#/definitions/KeyValuePair"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "accessPointName",
+        "region",
+        "vnetId",
+        "subnetId"
+      ]
+    },
+    "AccessPointResource": {
+      "type": "object",
+      "description": "Details of access point record",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AccessPointProperties",
+          "description": "Access Point Properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AccessPointResourceListResult": {
+      "type": "object",
+      "description": "The response of a AccessPointResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AccessPointResource items on this page",
+          "items": {
+            "$ref": "#/definitions/AccessPointResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "AccessRoleBindingNameListSuccessResponse": {
       "type": "object",
@@ -4170,6 +4859,24 @@
       ],
       "x-ms-discriminator-value": "KafkaAzureSynapseAnalyticsSink"
     },
+    "KeyValuePair": {
+      "type": "object",
+      "description": "Network Gateway PropertiesA key-value pair for extensibility.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value."
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ]
+    },
     "LinkOrganization": {
       "type": "object",
       "description": "Link an existing Confluent organization",
@@ -4324,6 +5031,77 @@
           "description": "Deleted Date time"
         }
       }
+    },
+    "NetworkGatewayProperties": {
+      "type": "object",
+      "description": "Network Gateway Properties",
+      "properties": {
+        "networkGatewayName": {
+          "type": "string",
+          "description": "Display name of the network gateway"
+        },
+        "region": {
+          "type": "string",
+          "description": "The cloud service provider region for the network gateway"
+        },
+        "metadata": {
+          "$ref": "#/definitions/SCMetadataEntity",
+          "description": "Metadata of the record"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisionState",
+          "description": "Provisioning state of the network gateway",
+          "readOnly": true
+        },
+        "dictionary": {
+          "type": "array",
+          "description": "Additional properties for extensibility",
+          "items": {
+            "$ref": "#/definitions/KeyValuePair"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "networkGatewayName",
+        "region"
+      ]
+    },
+    "NetworkGatewayResource": {
+      "type": "object",
+      "description": "Details of network gateway record",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkGatewayProperties",
+          "description": "Network Gateway Properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NetworkGatewayResourceListResult": {
+      "type": "object",
+      "description": "The response of a NetworkGatewayResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NetworkGatewayResource items on this page",
+          "items": {
+            "$ref": "#/definitions/NetworkGatewayResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "OfferDetail": {
       "type": "object",
