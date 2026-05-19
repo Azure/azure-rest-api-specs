@@ -66,10 +66,8 @@ model Object {
 /**
  * Represents an object representing files in the form of { "<filename>" : "<filecontent>"}.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model WorkflowFiles {
-  ...Record<unknown>;
-}
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Matches original Object definition"
+model WorkflowFiles {}
 
 /**
  * Custom domain verification Id of a subscription
@@ -8889,8 +8887,8 @@ model WorkflowEnvelopeProperties {
   /**
    * Gets or sets the files.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  files?: unknown;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses untyped object"
+  files?: WorkflowFiles;
 
   /**
    * Gets or sets the state of the workflow.

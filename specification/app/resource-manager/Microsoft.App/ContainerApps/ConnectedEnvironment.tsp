@@ -52,7 +52,6 @@ interface ConnectedEnvironments {
   update is Azure.ResourceManager.Legacy.CustomPatchSync<
     ConnectedEnvironment,
     PatchModel = ConnectedEnvironmentPatchResource,
-    OptionalRequestBody = true,
     Error = DefaultErrorResponse
   >;
 
