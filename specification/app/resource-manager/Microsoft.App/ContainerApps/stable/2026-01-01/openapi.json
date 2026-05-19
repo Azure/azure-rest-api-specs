@@ -12549,9 +12549,8 @@
           "description": "Type of the scale rule\neg: azure-servicebus, redis etc."
         },
         "metadata": {
-          "type": "object",
-          "description": "Metadata properties to describe the scale rule.",
-          "additionalProperties": {}
+          "$ref": "#/definitions/JobScaleRuleMetadata",
+          "description": "Metadata properties to describe the scale rule."
         },
         "auth": {
           "type": "array",
@@ -12565,6 +12564,10 @@
           "description": "The resource ID of a user-assigned managed identity that is assigned to the Container App, or 'system' for system-assigned identity."
         }
       }
+    },
+    "JobScaleRuleMetadata": {
+      "type": "object",
+      "description": "Metadata properties to describe the scale rule."
     },
     "JobSecretsCollection": {
       "type": "object",

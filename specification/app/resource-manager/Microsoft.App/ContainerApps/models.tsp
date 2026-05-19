@@ -70,6 +70,12 @@ model Object {
 model WorkflowFiles {}
 
 /**
+ * Metadata properties to describe the scale rule.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Matches original swagger {type: object} without additionalProperties"
+model JobScaleRuleMetadata {}
+
+/**
  * Custom domain verification Id of a subscription
  */
 scalar CustomDomainVerificationId extends string;
@@ -4058,8 +4064,7 @@ model JobScaleRule {
   /**
    * Metadata properties to describe the scale rule.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses untyped object"
-  metadata?: Record<unknown>;
+  metadata?: JobScaleRuleMetadata;
 
   /**
    * Authentication secrets for the scale rule.
