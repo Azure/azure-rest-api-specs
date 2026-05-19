@@ -33,6 +33,7 @@ model GraphQueryResource
    * The geo-location where the resource lives.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "location is needed for backward compatibility with TrackedResource via hierarchyBuilding"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   location?: azureLocation;
 
   /**
@@ -97,15 +98,12 @@ interface GraphQueryResources {
 }
 
 @@doc(GraphQueryResource.name, "The name of the Graph Query resource.");
-@@doc(
-  GraphQueryResource.properties,
+@@doc(GraphQueryResource.properties,
   "Metadata describing a graph query for an Azure resource."
 );
-@@doc(
-  GraphQueryResources.createOrUpdate::parameters.resource,
+@@doc(GraphQueryResources.createOrUpdate::parameters.resource,
   "Properties that need to be specified to create a new graph query."
 );
-@@doc(
-  GraphQueryResources.update::parameters.properties,
+@@doc(GraphQueryResources.update::parameters.properties,
   "Properties that need to be specified to create a new graph query."
 );
