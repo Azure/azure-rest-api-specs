@@ -24,7 +24,7 @@ interface Responses {
   @post
   @sharedRoute
   createResponse is OpenAIOperation<
-    OpenAI.CreateResponse & UserIsolationKeyHeader,
+    OpenAI.CreateResponse & UserIsolationKeyHeader & VersionOverrideHeader,
     AgentSessionIdResponseHeader & {
       @body body: OpenAI.Response;
     }
@@ -37,7 +37,7 @@ interface Responses {
   @post
   @sharedRoute
   createResponseStream is OpenAIOperation<
-    OpenAI.CreateResponse & UserIsolationKeyHeader,
+    OpenAI.CreateResponse & UserIsolationKeyHeader & VersionOverrideHeader,
     AgentSessionIdResponseHeader & SseResponseOf<OpenAI.CreateResponseStreamingResponse>
   >;
 

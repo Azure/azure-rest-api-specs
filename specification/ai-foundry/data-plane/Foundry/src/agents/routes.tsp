@@ -397,6 +397,7 @@ interface Agents {
       /** The name of the agent to create a session for. */
       @path agent_name: string;
 
+      ...VersionOverrideHeader;
       ...CreateAgentSessionRequest;
     },
     ResourceCreatedResponse<AgentSessionResource>

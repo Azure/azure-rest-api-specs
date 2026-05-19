@@ -37,6 +37,17 @@ alias UserIsolationKeyHeader = {
   @header("x-ms-user-isolation-key") user_isolation_key?: string;
 };
 
+/**
+ * Optional request header that overrides the agent version selected for an endpoint-scoped
+ * invocation. When supplied with a valid version, the service routes the request to that
+ * version instead of the endpoint's pinned/latest version; if the supplied version does not
+ * exist, the service falls back to the pinned/latest version.
+ */
+alias VersionOverrideHeader = {
+  /** Optional agent version override. Overrides the pinned/latest version selected by the endpoint's version selector for this request only. */
+  @header("x-agent-version-override") agent_version_override?: string;
+};
+
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
 op OpenAIOperation<
