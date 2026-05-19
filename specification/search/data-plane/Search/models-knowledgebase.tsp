@@ -270,6 +270,20 @@ model McpServerKnowledgeSourceParams extends KnowledgeSourceParams {
   kind: KnowledgeSourceKind.McpServer;
 }
 
+/** Specifies runtime parameters for a File knowledge source */
+@added(Versions.v2026_05_01_preview)
+model FileKnowledgeSourceParams extends KnowledgeSourceParams {
+  /** The discriminator value. */
+  kind: KnowledgeSourceKind.File;
+}
+
+/** Specifies runtime parameters for an indexed SQL knowledge source */
+@added(Versions.v2026_05_01_preview)
+model IndexedSqlKnowledgeSourceParams extends KnowledgeSourceParams {
+  /** The discriminator value. */
+  kind: KnowledgeSourceKind.IndexedSql;
+}
+
 /** An intended query to execute without model query planning. */
 @discriminator("type")
 model KnowledgeRetrievalIntent {
@@ -386,6 +400,14 @@ union KnowledgeBaseActivityRecordType {
   /** MCP server retrieval activity. */
   @added(Versions.v2026_05_01_preview)
   mcpServer: "mcpServer",
+
+  /** File retrieval activity. */
+  @added(Versions.v2026_05_01_preview)
+  file: "file",
+
+  /** Indexed SQL retrieval activity. */
+  @added(Versions.v2026_05_01_preview)
+  indexedSql: "indexedSql",
 
   /** LLM query planning activity. */
   @added(Versions.v2026_05_01_preview)
@@ -674,6 +696,46 @@ model KnowledgeBaseMcpServerActivityArguments {
   toolArguments?: Record<unknown>;
 }
 
+/** Represents a File retrieval activity record. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+#suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseFileActivityRecord
+  extends KnowledgeBaseRetrievalActivityRecord {
+  /** The discriminator value. */
+  type: KnowledgeBaseActivityRecordType.file;
+
+  /** The File arguments for the retrieval activity. */
+  fileArguments?: KnowledgeBaseFileActivityArguments;
+}
+
+/** Represents the arguments the File retrieval activity was run with. */
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseFileActivityArguments {
+  /** The search string used to query file contents. */
+  search?: string;
+}
+
+/** Represents an indexed SQL retrieval activity record. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+#suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseIndexedSqlActivityRecord
+  extends KnowledgeBaseRetrievalActivityRecord {
+  /** The discriminator value. */
+  type: KnowledgeBaseActivityRecordType.indexedSql;
+
+  /** The indexed SQL arguments for the retrieval activity. */
+  indexedSqlArguments?: KnowledgeBaseIndexedSqlActivityArguments;
+}
+
+/** Represents the arguments the indexed SQL retrieval activity was run with. */
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseIndexedSqlActivityArguments {
+  /** The search string used to query indexed SQL contents. */
+  search?: string;
+}
+
 /** Represents an LLM query planning activity record. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 @added(Versions.v2026_05_01_preview)
@@ -788,6 +850,14 @@ union KnowledgeBaseReferenceType {
   /** MCP server document reference. */
   @added(Versions.v2026_05_01_preview)
   mcpServer: "mcpServer",
+
+  /** File document reference. */
+  @added(Versions.v2026_05_01_preview)
+  file: "file",
+
+  /** Indexed SQL document reference. */
+  @added(Versions.v2026_05_01_preview)
+  indexedSql: "indexedSql",
 }
 
 /** Base type for references. */
@@ -963,6 +1033,28 @@ model KnowledgeBaseMcpServerReference extends KnowledgeBaseReference {
 
   /** The title of the MCP server tool result. */
   title?: string;
+}
+
+/** Represents a file document reference. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseFileReference extends KnowledgeBaseReference {
+  /** The discriminator value. */
+  type: KnowledgeBaseReferenceType.file;
+
+  /** The document name for the reference. */
+  docName?: string;
+}
+
+/** Represents an Azure SQL document reference. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseIndexedSqlReference extends KnowledgeBaseReference {
+  /** The discriminator value. */
+  type: KnowledgeBaseReferenceType.indexedSql;
+
+  /** The document URL for the reference. */
+  docUrl?: string;
 }
 
 /** Information about the sensitivity label applied to a SharePoint document. */

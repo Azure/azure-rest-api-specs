@@ -8027,6 +8027,16 @@
         }
       }
     },
+    "FileKnowledgeSourceParams": {
+      "type": "object",
+      "description": "Specifies runtime parameters for a File knowledge source",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSourceParams"
+        }
+      ],
+      "x-ms-discriminator-value": "file"
+    },
     "FreshnessPolicy": {
       "type": "object",
       "description": "Configuration for freshness-aware retrieval. When set, newer documents receive a ranking boost during retrieval.",
@@ -8966,6 +8976,16 @@
         "connectionString",
         "tableOrView"
       ]
+    },
+    "IndexedSqlKnowledgeSourceParams": {
+      "type": "object",
+      "description": "Specifies runtime parameters for an indexed SQL knowledge source",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSourceParams"
+        }
+      ],
+      "x-ms-discriminator-value": "indexedSql"
     },
     "IndexerCurrentState": {
       "type": "object",
@@ -10090,6 +10110,8 @@
         "fabricDataAgent",
         "fabricOntology",
         "mcpServer",
+        "file",
+        "indexedSql",
         "modelQueryPlanning",
         "modelAnswerSynthesis",
         "modelWebSummarization",
@@ -10148,6 +10170,16 @@
             "name": "mcpServer",
             "value": "mcpServer",
             "description": "MCP server retrieval activity."
+          },
+          {
+            "name": "file",
+            "value": "file",
+            "description": "File retrieval activity."
+          },
+          {
+            "name": "indexedSql",
+            "value": "indexedSql",
+            "description": "Indexed SQL retrieval activity."
           },
           {
             "name": "modelQueryPlanning",
@@ -10406,6 +10438,48 @@
       ],
       "x-ms-discriminator-value": "fabricOntology"
     },
+    "KnowledgeBaseFileActivityArguments": {
+      "type": "object",
+      "description": "Represents the arguments the File retrieval activity was run with.",
+      "properties": {
+        "search": {
+          "type": "string",
+          "description": "The search string used to query file contents."
+        }
+      }
+    },
+    "KnowledgeBaseFileActivityRecord": {
+      "type": "object",
+      "description": "Represents a File retrieval activity record.",
+      "properties": {
+        "fileArguments": {
+          "$ref": "#/definitions/KnowledgeBaseFileActivityArguments",
+          "description": "The File arguments for the retrieval activity."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeBaseRetrievalActivityRecord"
+        }
+      ],
+      "x-ms-discriminator-value": "file"
+    },
+    "KnowledgeBaseFileReference": {
+      "type": "object",
+      "description": "Represents a file document reference.",
+      "properties": {
+        "docName": {
+          "type": "string",
+          "description": "The document name for the reference."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeBaseReference"
+        }
+      ],
+      "x-ms-discriminator-value": "file"
+    },
     "KnowledgeBaseImageContent": {
       "type": "object",
       "description": "Image content.",
@@ -10511,6 +10585,48 @@
         }
       ],
       "x-ms-discriminator-value": "indexedSharePoint"
+    },
+    "KnowledgeBaseIndexedSqlActivityArguments": {
+      "type": "object",
+      "description": "Represents the arguments the indexed SQL retrieval activity was run with.",
+      "properties": {
+        "search": {
+          "type": "string",
+          "description": "The search string used to query indexed SQL contents."
+        }
+      }
+    },
+    "KnowledgeBaseIndexedSqlActivityRecord": {
+      "type": "object",
+      "description": "Represents an indexed SQL retrieval activity record.",
+      "properties": {
+        "indexedSqlArguments": {
+          "$ref": "#/definitions/KnowledgeBaseIndexedSqlActivityArguments",
+          "description": "The indexed SQL arguments for the retrieval activity."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeBaseRetrievalActivityRecord"
+        }
+      ],
+      "x-ms-discriminator-value": "indexedSql"
+    },
+    "KnowledgeBaseIndexedSqlReference": {
+      "type": "object",
+      "description": "Represents an Azure SQL document reference.",
+      "properties": {
+        "docUrl": {
+          "type": "string",
+          "description": "The document URL for the reference."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeBaseReference"
+        }
+      ],
+      "x-ms-discriminator-value": "indexedSql"
     },
     "KnowledgeBaseMcpServerActivityArguments": {
       "type": "object",
@@ -10817,7 +10933,9 @@
         "workIQ",
         "fabricDataAgent",
         "fabricOntology",
-        "mcpServer"
+        "mcpServer",
+        "file",
+        "indexedSql"
       ],
       "x-ms-enum": {
         "name": "KnowledgeBaseReferenceType",
@@ -10872,6 +10990,16 @@
             "name": "mcpServer",
             "value": "mcpServer",
             "description": "MCP server document reference."
+          },
+          {
+            "name": "file",
+            "value": "file",
+            "description": "File document reference."
+          },
+          {
+            "name": "indexedSql",
+            "value": "indexedSql",
+            "description": "Indexed SQL document reference."
           }
         ]
       }
