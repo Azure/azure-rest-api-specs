@@ -2097,7 +2097,7 @@
     "/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files": {
       "get": {
         "operationId": "AgentSessionFiles_listSessionFiles",
-        "description": "List files and directories at a given path in the session sandbox.\nReturns only the immediate children of the specified directory (non-recursive).",
+        "description": "List files and directories at a given path in the session sandbox.\nReturns only the immediate children of the specified directory (non-recursive).\nIf path is not provided, lists the session home directory.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -2132,8 +2132,8 @@
           {
             "name": "path",
             "in": "query",
-            "required": true,
-            "description": "The directory path to list, relative to the session home directory.",
+            "required": false,
+            "description": "The directory path to list, relative to the session home directory. Defaults to the home directory if not provided.",
             "schema": {
               "type": "string"
             },
@@ -2147,6 +2147,48 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
+            "schema": {
+              "$ref": "#/components/schemas/PageOrder"
+            },
+            "explode": false
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
           },
           {
             "name": "api-version",
@@ -48360,10 +48402,23 @@
       "SessionDirectoryListResponse": {
         "type": "object",
         "required": [
+          "has_more",
           "path",
           "entries"
         ],
         "properties": {
+          "first_id": {
+            "type": "string",
+            "description": "The first ID represented in this list."
+          },
+          "last_id": {
+            "type": "string",
+            "description": "The last ID represented in this list."
+          },
+          "has_more": {
+            "type": "boolean",
+            "description": "A value indicating whether there are additional values available not captured in this list."
+          },
           "path": {
             "type": "string",
             "description": "The path that was listed, relative to the session home directory."
@@ -48375,8 +48430,7 @@
             },
             "description": "The directory entries."
           }
-        },
-        "description": "Response from listing a directory in a session sandbox."
+        }
       },
       "SessionFileWriteResponse": {
         "type": "object",
