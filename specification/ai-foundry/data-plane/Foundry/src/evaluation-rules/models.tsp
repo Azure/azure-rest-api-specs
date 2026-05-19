@@ -7,7 +7,7 @@ using TypeSpec.Versioning;
 namespace Azure.AI.Projects;
 
 const AllConditionalEvaluationRuleActionPreviews = #{
-  conditional_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview],
+  required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview],
 };
 
 @doc("Type of the evaluation action.")

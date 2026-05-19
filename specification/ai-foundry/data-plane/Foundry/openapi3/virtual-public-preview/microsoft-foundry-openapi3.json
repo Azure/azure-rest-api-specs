@@ -72,6 +72,9 @@
       "name": "Redteams"
     },
     {
+      "name": "Routines"
+    },
+    {
       "name": "Schedules"
     },
     {
@@ -1185,6 +1188,15 @@
             "explode": false
           },
           {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "Foundry-Features",
             "in": "header",
             "required": false,
@@ -1407,11 +1419,12 @@
             "name": "force",
             "in": "query",
             "required": false,
-            "description": "If true, force-deletes the agent even if its versions have active sessions (hosted agents), cascading deletion to all associated sessions. Defaults to false.",
+            "description": "For Hosted Agents, if true, force-deletes the agent even if its versions have active sessions, cascading deletion to all associated sessions. This value is not relevant for other Agent types. Defaults to false.",
             "schema": {
               "type": "boolean",
               "default": false
-            }
+            },
+            "explode": false
           },
           {
             "name": "api-version",
@@ -1642,6 +1655,15 @@
             "explode": false
           },
           {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "Foundry-Features",
             "in": "header",
             "required": true,
@@ -1813,6 +1835,15 @@
             }
           },
           {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "Foundry-Features",
             "in": "header",
             "required": true,
@@ -1893,6 +1924,15 @@
             "in": "path",
             "required": true,
             "description": "The unique identifier of the invocation to cancel.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
             "schema": {
               "type": "string"
             }
@@ -2228,6 +2268,15 @@
             "explode": false
           },
           {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "api-version",
             "in": "query",
             "required": true,
@@ -2325,6 +2374,15 @@
             "explode": false
           },
           {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "api-version",
             "in": "query",
             "required": true,
@@ -2404,6 +2462,15 @@
               "type": "string"
             },
             "explode": false
+          },
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "name": "api-version",
@@ -2501,6 +2568,15 @@
               "type": "string"
             },
             "explode": false
+          },
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "name": "api-version",
@@ -3270,11 +3346,12 @@
             "name": "force",
             "in": "query",
             "required": false,
-            "description": "If true, force-deletes the version even if it has active sessions (hosted agents), cascading deletion to all associated sessions. Defaults to false.",
+            "description": "For Hosted Agents, if true, force-deletes the version even if it has active sessions, cascading deletion to all associated sessions. This value is not relevant for other Agent types. Defaults to false.",
             "schema": {
               "type": "boolean",
               "default": false
-            }
+            },
+            "explode": false
           },
           {
             "name": "api-version",
@@ -4592,7 +4669,7 @@
           "DataGenerationJobs"
         ],
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "DataGenerationJobs=V1Preview"
           ]
         }
@@ -4687,7 +4764,7 @@
           "description": "The job to create."
         },
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "DataGenerationJobs=V1Preview"
           ]
         }
@@ -4767,7 +4844,7 @@
           "DataGenerationJobs"
         ],
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "DataGenerationJobs=V1Preview"
           ]
         }
@@ -4828,7 +4905,7 @@
           "DataGenerationJobs"
         ],
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "DataGenerationJobs=V1Preview"
           ]
         }
@@ -4898,7 +4975,7 @@
           "DataGenerationJobs"
         ],
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "DataGenerationJobs=V1Preview"
           ]
         }
@@ -7415,7 +7492,7 @@
           "description": "The job to create."
         },
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "Evaluations=V1Preview"
           ]
         }
@@ -7476,16 +7553,6 @@
             "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
             "schema": {
               "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "category",
-            "in": "query",
-            "required": false,
-            "description": "Filter evaluator generation jobs by category.",
-            "schema": {
-              "$ref": "#/components/schemas/EvaluatorCategory"
             },
             "explode": false
           },
@@ -7552,7 +7619,7 @@
           "EvaluatorGenerationJobs"
         ],
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "Evaluations=V1Preview"
           ]
         }
@@ -7632,7 +7699,7 @@
           "EvaluatorGenerationJobs"
         ],
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "Evaluations=V1Preview"
           ]
         }
@@ -7692,7 +7759,7 @@
           "EvaluatorGenerationJobs"
         ],
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "Evaluations=V1Preview"
           ]
         }
@@ -7762,7 +7829,7 @@
           "EvaluatorGenerationJobs"
         ],
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "Evaluations=V1Preview"
           ]
         }
@@ -9359,7 +9426,7 @@
           }
         },
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "MemoryStores=V1Preview"
           ]
         }
@@ -9485,7 +9552,7 @@
           "Memory Stores"
         ],
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "MemoryStores=V1Preview"
           ]
         }
@@ -9578,7 +9645,7 @@
           }
         },
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "MemoryStores=V1Preview"
           ]
         }
@@ -9645,7 +9712,7 @@
           "Memory Stores"
         ],
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "MemoryStores=V1Preview"
           ]
         }
@@ -9712,13 +9779,13 @@
           "Memory Stores"
         ],
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "MemoryStores=V1Preview"
           ]
         }
       }
     },
-    "/memory_stores/{name}/memories": {
+    "/memory_stores/{name}/items": {
       "post": {
         "operationId": "createMemory",
         "description": "Create a memory item in a memory store.",
@@ -9814,12 +9881,263 @@
           }
         },
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
+            "MemoryStores=V1Preview"
+          ]
+        }
+      }
+    },
+    "/memory_stores/{name}/items/{memory_id}": {
+      "post": {
+        "operationId": "updateMemory",
+        "description": "Update a memory item in a memory store.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MemoryStores=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the memory store.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "memory_id",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the memory item to update.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MemoryItem"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Memory Stores"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "content": {
+                    "type": "string",
+                    "description": "The updated content of the memory."
+                  }
+                },
+                "required": [
+                  "content"
+                ]
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
             "MemoryStores=V1Preview"
           ]
         }
       },
       "get": {
+        "operationId": "getMemory",
+        "description": "Retrieve a memory item from a memory store.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MemoryStores=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the memory store.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "memory_id",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the memory item to retrieve.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MemoryItem"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Memory Stores"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "MemoryStores=V1Preview"
+          ]
+        }
+      },
+      "delete": {
+        "operationId": "deleteMemory",
+        "description": "Delete a memory item from a memory store.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MemoryStores=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the memory store.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "memory_id",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the memory item to delete.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteMemoryResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Memory Stores"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "MemoryStores=V1Preview"
+          ]
+        }
+      }
+    },
+    "/memory_stores/{name}/items:list": {
+      "post": {
         "operationId": "listMemories",
         "description": "List all memory items in a memory store.",
         "parameters": [
@@ -9843,6 +10161,16 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "kind",
+            "in": "query",
+            "required": false,
+            "description": "The kind of the memory item.",
+            "schema": {
+              "$ref": "#/components/schemas/MemoryItemKind"
+            },
+            "explode": false
           },
           {
             "name": "limit",
@@ -9948,84 +10276,6 @@
         "tags": [
           "Memory Stores"
         ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "MemoryStores=V1Preview"
-          ]
-        }
-      }
-    },
-    "/memory_stores/{name}/memories/{memory_id}": {
-      "post": {
-        "operationId": "updateMemory",
-        "description": "Update a memory item in a memory store.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "MemoryStores=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the memory store.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "memory_id",
-            "in": "path",
-            "required": true,
-            "description": "The ID of the memory item to update.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/MemoryItem"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Memory Stores"
-        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -10033,172 +10283,20 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "content": {
+                  "scope": {
                     "type": "string",
-                    "description": "The updated content of the memory."
+                    "description": "The namespace that logically groups and isolates memories, such as a user ID."
                   }
                 },
                 "required": [
-                  "content"
+                  "scope"
                 ]
               }
             }
           }
         },
         "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "MemoryStores=V1Preview"
-          ]
-        }
-      },
-      "get": {
-        "operationId": "getMemory",
-        "description": "Retrieve a memory item from a memory store.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "MemoryStores=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the memory store.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "memory_id",
-            "in": "path",
-            "required": true,
-            "description": "The ID of the memory item to retrieve.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/MemoryItem"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Memory Stores"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "MemoryStores=V1Preview"
-          ]
-        }
-      },
-      "delete": {
-        "operationId": "deleteMemory",
-        "description": "Delete a memory item from a memory store.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "MemoryStores=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the memory store.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "memory_id",
-            "in": "path",
-            "required": true,
-            "description": "The ID of the memory item to delete.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DeleteMemoryResponse"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Memory Stores"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "MemoryStores=V1Preview"
           ]
         }
@@ -10276,7 +10374,7 @@
           "Memory Stores"
         ],
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "MemoryStores=V1Preview"
           ]
         }
@@ -10364,7 +10462,7 @@
           }
         },
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "MemoryStores=V1Preview"
           ]
         }
@@ -10471,7 +10569,7 @@
           }
         },
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "MemoryStores=V1Preview"
           ]
         }
@@ -10586,7 +10684,7 @@
           }
         },
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "MemoryStores=V1Preview"
           ]
         }
@@ -11263,7 +11361,17 @@
       "post": {
         "operationId": "createConversation",
         "description": "Create a conversation.",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
@@ -11365,6 +11473,15 @@
               "type": "string"
             },
             "explode": false
+          },
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -11433,6 +11550,15 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -11483,6 +11609,15 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -11520,6 +11655,15 @@
             "in": "path",
             "required": true,
             "description": "The id of the conversation to delete.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
             "schema": {
               "type": "string"
             }
@@ -11578,6 +11722,15 @@
               }
             },
             "explode": false
+          },
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -11693,6 +11846,15 @@
               "$ref": "#/components/schemas/OpenAI.ItemType"
             },
             "explode": false
+          },
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -11770,6 +11932,15 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -11816,6 +11987,15 @@
             "in": "path",
             "required": true,
             "description": "The id of the conversation item to delete.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
             "schema": {
               "type": "string"
             }
@@ -13132,7 +13312,17 @@
     "/openai/v1/responses": {
       "post": {
         "operationId": "createResponse_createResponseStream",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "description": "Creates a model response. Creates a model response (streaming response).",
         "responses": {
           "200": {
@@ -13684,6 +13874,15 @@
               "type": "string"
             },
             "explode": false
+          },
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -13826,6 +14025,15 @@
             "explode": false
           },
           {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "accept",
             "in": "header",
             "required": false,
@@ -13890,6 +14098,15 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -13938,6 +14155,15 @@
             "in": "path",
             "required": true,
             "description": "The ID of the response to cancel.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
             "schema": {
               "type": "string"
             }
@@ -14033,6 +14259,15 @@
               "type": "string"
             },
             "explode": false
+          },
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -14283,6 +14518,655 @@
             }
           },
           "description": "Redteam to be run"
+        }
+      }
+    },
+    "/routines": {
+      "get": {
+        "operationId": "listRoutines",
+        "description": "List routines.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Routines=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
+            "schema": {
+              "$ref": "#/components/schemas/PageOrder"
+            },
+            "explode": false
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "has_more"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Routine"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "first_id": {
+                      "type": "string",
+                      "description": "The first ID represented in this list."
+                    },
+                    "last_id": {
+                      "type": "string",
+                      "description": "The last ID represented in this list."
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    }
+                  },
+                  "description": "The response data for a requested list of items."
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Routines"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      }
+    },
+    "/routines/{routine_name}": {
+      "put": {
+        "operationId": "createOrUpdateRoutine",
+        "description": "Create or update a routine.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Routines=V1Preview"
+              ]
+            }
+          },
+          {
+            "$ref": "#/components/parameters/CreateOrUpdateRoutineParameters.routine_name"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Routine"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Routines"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoutineCreateOrUpdateRequest"
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
+      "get": {
+        "operationId": "getRoutine",
+        "description": "Retrieve a routine.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Routines=V1Preview"
+              ]
+            }
+          },
+          {
+            "$ref": "#/components/parameters/GetRoutineParameters"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Routine"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Routines"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
+      "delete": {
+        "operationId": "deleteRoutine",
+        "description": "Delete a routine.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Routines=V1Preview"
+              ]
+            }
+          },
+          {
+            "$ref": "#/components/parameters/DeleteRoutineParameters"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Routines"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      }
+    },
+    "/routines/{routine_name}/runs": {
+      "get": {
+        "operationId": "listRoutineRuns",
+        "description": "List prior runs for a routine.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Routines=V1Preview"
+              ]
+            }
+          },
+          {
+            "$ref": "#/components/parameters/ListRoutineRunsParameters.routine_name"
+          },
+          {
+            "$ref": "#/components/parameters/ListRoutineRunsParameters.filter"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
+            "schema": {
+              "$ref": "#/components/schemas/PageOrder"
+            },
+            "explode": false
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "has_more"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/RoutineRun"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "first_id": {
+                      "type": "string",
+                      "description": "The first ID represented in this list."
+                    },
+                    "last_id": {
+                      "type": "string",
+                      "description": "The last ID represented in this list."
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    }
+                  },
+                  "description": "The response data for a requested list of items."
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Routines"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      }
+    },
+    "/routines/{routine_name}:disable": {
+      "post": {
+        "operationId": "disableRoutine",
+        "description": "Disable a routine.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Routines=V1Preview"
+              ]
+            }
+          },
+          {
+            "$ref": "#/components/parameters/DisableRoutineParameters"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Routine"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Routines"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      }
+    },
+    "/routines/{routine_name}:dispatch_async": {
+      "post": {
+        "operationId": "dispatchRoutineAsync",
+        "description": "Queue an asynchronous routine dispatch.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Routines=V1Preview"
+              ]
+            }
+          },
+          {
+            "$ref": "#/components/parameters/DispatchRoutineAsyncParameters.routine_name"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DispatchRoutineResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Routines"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DispatchRoutineRequest"
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      }
+    },
+    "/routines/{routine_name}:enable": {
+      "post": {
+        "operationId": "enableRoutine",
+        "description": "Enable a routine.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Routines=V1Preview"
+              ]
+            }
+          },
+          {
+            "$ref": "#/components/parameters/EnableRoutineParameters"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Routine"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Routines"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
         }
       }
     },
@@ -14822,7 +15706,7 @@
           }
         },
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "Skills=V1Preview"
           ]
         }
@@ -14948,7 +15832,7 @@
           "Skills"
         ],
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "Skills=V1Preview"
           ]
         }
@@ -15017,7 +15901,7 @@
           "Skills"
         ],
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "Skills=V1Preview"
           ]
         }
@@ -15114,7 +15998,7 @@
           }
         },
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "Skills=V1Preview"
           ]
         }
@@ -15181,7 +16065,7 @@
           "Skills"
         ],
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "Skills=V1Preview"
           ]
         }
@@ -15251,7 +16135,7 @@
           "Skills"
         ],
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "Skills=V1Preview"
           ]
         }
@@ -15323,7 +16207,7 @@
           "description": "The zip package used to create the skill."
         },
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "Skills=V1Preview"
           ]
         }
@@ -15375,18 +16259,6 @@
               "type": "string"
             },
             "explode": false
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Toolboxes=V1Preview"
-              ]
-            }
           },
           {
             "name": "api-version",
@@ -15449,12 +16321,7 @@
         },
         "tags": [
           "Toolboxes"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Toolboxes=V1Preview"
-          ]
-        }
+        ]
       }
     },
     "/toolboxes/{name}": {
@@ -15469,18 +16336,6 @@
             "description": "The name of the toolbox to retrieve.",
             "schema": {
               "type": "string"
-            }
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Toolboxes=V1Preview"
-              ]
             }
           },
           {
@@ -15518,12 +16373,7 @@
         },
         "tags": [
           "Toolboxes"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Toolboxes=V1Preview"
-          ]
-        }
+        ]
       },
       "patch": {
         "operationId": "updateToolbox",
@@ -15531,18 +16381,6 @@
         "parameters": [
           {
             "$ref": "#/components/parameters/UpdateToolboxRequest.name"
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Toolboxes=V1Preview"
-              ]
-            }
           },
           {
             "name": "api-version",
@@ -15589,11 +16427,6 @@
               }
             }
           }
-        },
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Toolboxes=V1Preview"
-          ]
         }
       },
       "delete": {
@@ -15607,18 +16440,6 @@
             "description": "The name of the toolbox to delete.",
             "schema": {
               "type": "string"
-            }
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Toolboxes=V1Preview"
-              ]
             }
           },
           {
@@ -15649,12 +16470,7 @@
         },
         "tags": [
           "Toolboxes"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Toolboxes=V1Preview"
-          ]
-        }
+        ]
       }
     },
     "/toolboxes/{name}/versions": {
@@ -15670,18 +16486,6 @@
             "schema": {
               "type": "string",
               "maxLength": 256
-            }
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Toolboxes=V1Preview"
-              ]
             }
           },
           {
@@ -15761,11 +16565,6 @@
               }
             }
           }
-        },
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Toolboxes=V1Preview"
-          ]
         }
       },
       "get": {
@@ -15822,18 +16621,6 @@
               "type": "string"
             },
             "explode": false
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Toolboxes=V1Preview"
-              ]
-            }
           },
           {
             "name": "api-version",
@@ -15896,12 +16683,7 @@
         },
         "tags": [
           "Toolboxes"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Toolboxes=V1Preview"
-          ]
-        }
+        ]
       }
     },
     "/toolboxes/{name}/versions/{version}": {
@@ -15925,18 +16707,6 @@
             "description": "The version identifier to retrieve.",
             "schema": {
               "type": "string"
-            }
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Toolboxes=V1Preview"
-              ]
             }
           },
           {
@@ -15974,12 +16744,7 @@
         },
         "tags": [
           "Toolboxes"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Toolboxes=V1Preview"
-          ]
-        }
+        ]
       },
       "delete": {
         "operationId": "deleteToolboxVersion",
@@ -16001,18 +16766,6 @@
             "description": "The version identifier to delete.",
             "schema": {
               "type": "string"
-            }
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Toolboxes=V1Preview"
-              ]
             }
           },
           {
@@ -16043,12 +16796,7 @@
         },
         "tags": [
           "Toolboxes"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Toolboxes=V1Preview"
-          ]
-        }
+        ]
       }
     }
   },
@@ -16081,6 +16829,86 @@
         },
         "explode": false
       },
+      "CreateOrUpdateRoutineParameters.routine_name": {
+        "name": "routine_name",
+        "in": "path",
+        "required": true,
+        "description": "The unique name of the routine.",
+        "schema": {
+          "type": "string",
+          "maxLength": 128
+        }
+      },
+      "DeleteRoutineParameters": {
+        "name": "routine_name",
+        "in": "path",
+        "required": true,
+        "description": "The unique name of the routine.",
+        "schema": {
+          "type": "string",
+          "maxLength": 128
+        }
+      },
+      "DisableRoutineParameters": {
+        "name": "routine_name",
+        "in": "path",
+        "required": true,
+        "description": "The unique name of the routine.",
+        "schema": {
+          "type": "string",
+          "maxLength": 128
+        }
+      },
+      "DispatchRoutineAsyncParameters.routine_name": {
+        "name": "routine_name",
+        "in": "path",
+        "required": true,
+        "description": "The unique name of the routine.",
+        "schema": {
+          "type": "string",
+          "maxLength": 128
+        }
+      },
+      "EnableRoutineParameters": {
+        "name": "routine_name",
+        "in": "path",
+        "required": true,
+        "description": "The unique name of the routine.",
+        "schema": {
+          "type": "string",
+          "maxLength": 128
+        }
+      },
+      "GetRoutineParameters": {
+        "name": "routine_name",
+        "in": "path",
+        "required": true,
+        "description": "The unique name of the routine.",
+        "schema": {
+          "type": "string",
+          "maxLength": 128
+        }
+      },
+      "ListRoutineRunsParameters.filter": {
+        "name": "filter",
+        "in": "query",
+        "required": false,
+        "description": "An optional MLflow search-runs filter expression applied within the routine's experiment.",
+        "schema": {
+          "type": "string"
+        },
+        "explode": false
+      },
+      "ListRoutineRunsParameters.routine_name": {
+        "name": "routine_name",
+        "in": "path",
+        "required": true,
+        "description": "The unique name of the routine.",
+        "schema": {
+          "type": "string",
+          "maxLength": 128
+        }
+      },
       "UpdateToolboxRequest.name": {
         "name": "name",
         "in": "path",
@@ -16112,6 +16940,13 @@
           "description": {
             "type": "string",
             "description": "Optional user-defined description for this tool or configuration."
+          },
+          "tool_configs": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
           },
           "base_url": {
             "type": "string",
@@ -16323,6 +17158,7 @@
             "items": {
               "$ref": "#/components/schemas/AgentCardSkill"
             },
+            "minItems": 1,
             "maxItems": 16,
             "description": "The set of skills that an agent can perform."
           }
@@ -16418,6 +17254,7 @@
             "items": {
               "$ref": "#/components/schemas/AgentCardSkill"
             },
+            "minItems": 1,
             "maxItems": 16,
             "description": "The set of skills that an agent can perform."
           }
@@ -16751,7 +17588,6 @@
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "HostedAgents=V1Preview",
-            "ContainerAgents=V1Preview",
             "WorkflowAgents=V1Preview",
             "CodeAgents=V1Preview",
             "ExternalAgents=V1Preview"
@@ -16763,10 +17599,10 @@
         "enum": [
           "HostedAgents=V1Preview",
           "WorkflowAgents=V1Preview",
-          "ContainerAgents=V1Preview",
           "AgentEndpoints=V1Preview",
           "CodeAgents=V1Preview",
-          "ExternalAgents=V1Preview"
+          "ExternalAgents=V1Preview",
+          "ContainerAgents=V1Preview"
         ],
         "description": "Feature opt-in keys for agent definition operations supporting hosted or workflow agents."
       },
@@ -18345,6 +19181,13 @@
             "type": "string",
             "description": "Optional user-defined description for this tool or configuration."
           },
+          "tool_configs": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
+          },
           "azure_ai_search": {
             "allOf": [
               {
@@ -18991,6 +19834,13 @@
               }
             ],
             "description": "The Azure Function Tool definition."
+          },
+          "tool_configs": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
           }
         },
         "allOf": [
@@ -19202,6 +20052,13 @@
             "type": "string",
             "description": "Optional user-defined description for this tool or configuration."
           },
+          "tool_configs": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
+          },
           "bing_custom_search_preview": {
             "allOf": [
               {
@@ -19384,6 +20241,13 @@
           "description": {
             "type": "string",
             "description": "Optional user-defined description for this tool or configuration."
+          },
+          "tool_configs": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
           },
           "bing_grounding": {
             "allOf": [
@@ -19579,6 +20443,13 @@
           "description": {
             "type": "string",
             "description": "Optional user-defined description for this tool or configuration."
+          },
+          "tool_configs": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
           },
           "browser_automation_preview": {
             "allOf": [
@@ -19778,6 +20649,13 @@
             "type": "string",
             "description": "Optional user-defined description for this tool or configuration."
           },
+          "tool_configs": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
+          },
           "outputs": {
             "allOf": [
               {
@@ -19841,7 +20719,7 @@
         ],
         "description": "A memory item containing a summary extracted from conversations.",
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "MemoryStores=V1Preview"
           ]
         }
@@ -20564,7 +21442,6 @@
             "x-ms-foundry-meta": {
               "conditional_previews": [
                 "HostedAgents=V1Preview",
-                "ContainerAgents=V1Preview",
                 "WorkflowAgents=V1Preview",
                 "CodeAgents=V1Preview",
                 "ExternalAgents=V1Preview"
@@ -20614,7 +21491,6 @@
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "HostedAgents=V1Preview",
-            "ContainerAgents=V1Preview",
             "WorkflowAgents=V1Preview",
             "CodeAgents=V1Preview",
             "ExternalAgents=V1Preview"
@@ -20764,7 +21640,6 @@
             "x-ms-foundry-meta": {
               "conditional_previews": [
                 "HostedAgents=V1Preview",
-                "ContainerAgents=V1Preview",
                 "WorkflowAgents=V1Preview",
                 "CodeAgents=V1Preview",
                 "ExternalAgents=V1Preview"
@@ -20788,7 +21663,6 @@
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "HostedAgents=V1Preview",
-            "ContainerAgents=V1Preview",
             "WorkflowAgents=V1Preview",
             "CodeAgents=V1Preview",
             "ExternalAgents=V1Preview"
@@ -21934,7 +22808,6 @@
         "type": "object",
         "required": [
           "object",
-          "name",
           "memory_id",
           "deleted"
         ],
@@ -21942,13 +22815,9 @@
           "object": {
             "type": "string",
             "enum": [
-              "memory.deleted"
+              "memory_store.item.deleted"
             ],
-            "description": "The object type. Always 'memory.deleted'."
-          },
-          "name": {
-            "type": "string",
-            "description": "The name of the memory store."
+            "description": "The object type. Always 'memory_store.item.deleted'."
           },
           "memory_id": {
             "type": "string",
@@ -21961,7 +22830,7 @@
         },
         "description": "Response for deleting a memory item from a memory store.",
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "MemoryStores=V1Preview"
           ]
         }
@@ -21991,7 +22860,7 @@
           }
         },
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "MemoryStores=V1Preview"
           ]
         }
@@ -22114,12 +22983,12 @@
       "Dimension": {
         "type": "object",
         "required": [
-          "dimension_id",
+          "id",
           "description",
           "weight"
         ],
         "properties": {
-          "dimension_id": {
+          "id": {
             "type": "string",
             "description": "Stable identifier for this dimension (snake_case, e.g., `correct_resolution`). Required. Provided by the user when manually creating a rubric evaluator or during human-in-the-loop review of a generated set; the generation pipeline produces an initial value the user can edit. Editable when saving new versions."
           },
@@ -22142,6 +23011,48 @@
         },
         "description": "A single dimension — one independent, measurable quality dimension within a rubric evaluator's scoring blueprint."
       },
+      "DispatchRoutineRequest": {
+        "type": "object",
+        "properties": {
+          "payload": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RoutineDispatchPayload"
+              }
+            ],
+            "description": "A direct action-input override sent downstream when testing a routine."
+          }
+        },
+        "description": "Request body for the public dispatch_async route.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
+      "DispatchRoutineResponse": {
+        "type": "object",
+        "properties": {
+          "dispatch_id": {
+            "type": "string",
+            "description": "The dispatch identifier created for the routine dispatch."
+          },
+          "action_correlation_id": {
+            "type": "string",
+            "description": "A downstream action correlation identifier, when available."
+          },
+          "task_id": {
+            "type": "string",
+            "description": "A workspace task identifier created for the dispatch, when available."
+          }
+        },
+        "description": "Identifiers returned after a routine dispatch is queued.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
       "EntraAuthorizationScheme": {
         "type": "object",
         "required": [
@@ -22153,6 +23064,14 @@
             "enum": [
               "Entra"
             ]
+          },
+          "isolation_key_source": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IsolationKeySource"
+              }
+            ],
+            "description": "The source from which the per-user isolation key is derived for requests authorized via this scheme. Defaults to Entra-based isolation when omitted."
           }
         },
         "allOf": [
@@ -22187,6 +23106,30 @@
           }
         ],
         "description": "Entra ID credential definition"
+      },
+      "EntraIsolationKeySource": {
+        "type": "object",
+        "required": [
+          "kind"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "Entra"
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/IsolationKeySource"
+          }
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
       },
       "Eval": {
         "type": "object",
@@ -23157,7 +24100,7 @@
             ],
             "description": "Definition of the evaluation rule action.",
             "x-ms-foundry-meta": {
-              "conditional_previews": [
+              "required_previews": [
                 "Evaluations=V1Preview"
               ]
             }
@@ -24838,8 +25781,7 @@
           },
           "otel_agent_id": {
             "type": "string",
-            "description": "The OpenTelemetry agent identifier used to attribute customer-emitted spans to this Foundry agent.\nSpans must include the attribute `gen_ai.agent.id = <otel_agent_id>` to appear under this registration.\nDefaults to the top-level agent name when omitted. Provide an explicit value only for migration scenarios\nwhere the running external agent already emits a stable id that differs from the Foundry agent name.\nThe resolved value is always echoed on read.",
-            "example": "gcp-travel-planner-agent"
+            "description": "The OpenTelemetry agent identifier used to attribute customer-emitted spans to this Foundry agent.\nSpans must include the attribute `gen_ai.agent.id = <otel_agent_id>` to appear under this registration.\nDefaults to the top-level agent name when omitted. Provide an explicit value only for migration scenarios\nwhere the running external agent already emits a stable id that differs from the Foundry agent name.\nThe resolved value is always echoed on read."
           }
         },
         "allOf": [
@@ -25002,6 +25944,13 @@
           "description": {
             "type": "string",
             "description": "Optional user-defined description for this tool or configuration."
+          },
+          "tool_configs": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
           }
         },
         "allOf": [
@@ -25320,6 +26269,74 @@
           }
         },
         "description": "Details of a function tool call."
+      },
+      "GitHubIssueOpenedRoutineTrigger": {
+        "type": "object",
+        "required": [
+          "type",
+          "connection_id",
+          "assignee",
+          "repository"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "github_issue_opened"
+            ],
+            "description": "The trigger type."
+          },
+          "connection_id": {
+            "type": "string",
+            "maxLength": 256,
+            "description": "The workspace connection identifier that resolves the GitHub configuration for the trigger."
+          },
+          "assignee": {
+            "type": "string",
+            "maxLength": 128,
+            "description": "The GitHub assignee or organization filter that scopes which issues can fire the trigger."
+          },
+          "repository": {
+            "type": "string",
+            "maxLength": 128,
+            "description": "The GitHub repository filter that scopes which issues can fire the trigger."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RoutineTrigger"
+          }
+        ],
+        "description": "A GitHub issue-opened routine trigger.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
+      "HeaderIsolationKeySource": {
+        "type": "object",
+        "required": [
+          "kind"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "Header"
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/IsolationKeySource"
+          }
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
       },
       "HeaderTelemetryEndpointAuth": {
         "type": "object",
@@ -26034,6 +27051,188 @@
         },
         "description": "Metadata about the insights."
       },
+      "InvokeAgentInvocationsApiDispatchPayload": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "invoke_agent_invocations_api"
+            ],
+            "description": "The manual dispatch payload type."
+          },
+          "input": {
+            "type": "string",
+            "maxLength": 32768,
+            "description": "The raw input sent to the downstream invocations target."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RoutineDispatchPayload"
+          }
+        ],
+        "description": "A manual payload used to test an invocations API routine dispatch.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
+      "InvokeAgentInvocationsApiRoutineAction": {
+        "type": "object",
+        "required": [
+          "type",
+          "agent_endpoint_id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "invoke_agent_invocations_api"
+            ],
+            "description": "The action type."
+          },
+          "agent_endpoint_id": {
+            "type": "string",
+            "maxLength": 256,
+            "description": "The endpoint-scoped agent identifier for invocations API dispatch."
+          },
+          "session_id": {
+            "type": "string",
+            "maxLength": 256,
+            "description": "An optional existing hosted-agent session identifier to continue during the downstream dispatch."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RoutineAction"
+          }
+        ],
+        "description": "Dispatches a routine through the raw invocations API.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
+      "InvokeAgentResponsesApiDispatchPayload": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "invoke_agent_responses_api"
+            ],
+            "description": "The manual dispatch payload type."
+          },
+          "input": {
+            "type": "string",
+            "maxLength": 32768,
+            "description": "The user input sent to the downstream responses target."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RoutineDispatchPayload"
+          }
+        ],
+        "description": "A manual payload used to test a responses API routine dispatch.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
+      "InvokeAgentResponsesApiRoutineAction": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "invoke_agent_responses_api"
+            ],
+            "description": "The action type."
+          },
+          "agent_name": {
+            "type": "string",
+            "maxLength": 256,
+            "description": "The project-scoped agent name for responses API dispatch."
+          },
+          "agent_endpoint_id": {
+            "type": "string",
+            "maxLength": 256,
+            "description": "The endpoint-scoped agent identifier for responses API dispatch."
+          },
+          "conversation_id": {
+            "type": "string",
+            "maxLength": 256,
+            "description": "An optional existing conversation identifier to continue during the downstream dispatch."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RoutineAction"
+          }
+        ],
+        "description": "Dispatches a routine through the responses API. Exactly one of agent_name or agent_endpoint_id must be provided.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
+      "IsolationKeySource": {
+        "type": "object",
+        "required": [
+          "kind"
+        ],
+        "properties": {
+          "kind": {
+            "$ref": "#/components/schemas/IsolationKeySourceKind"
+          }
+        },
+        "discriminator": {
+          "propertyName": "kind",
+          "mapping": {
+            "Entra": "#/components/schemas/EntraIsolationKeySource",
+            "Header": "#/components/schemas/HeaderIsolationKeySource"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
+      "IsolationKeySourceKind": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "Entra",
+              "Header"
+            ]
+          }
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
       "ItemGenerationParams": {
         "type": "object",
         "required": [
@@ -26331,7 +27530,7 @@
         },
         "description": "A single memory item stored in the memory store, containing content and metadata.",
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "MemoryStores=V1Preview"
           ]
         }
@@ -26352,7 +27551,7 @@
         ],
         "description": "Memory item kind.",
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "MemoryStores=V1Preview"
           ]
         }
@@ -26383,7 +27582,7 @@
         },
         "description": "Represents a single memory operation (create, update, or delete) performed on a memory item.",
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "MemoryStores=V1Preview"
           ]
         }
@@ -26404,7 +27603,7 @@
         ],
         "description": "Memory operation kind.",
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "MemoryStores=V1Preview"
           ]
         }
@@ -26426,7 +27625,7 @@
         },
         "description": "A retrieved memory item from memory search.",
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "MemoryStores=V1Preview"
           ]
         }
@@ -26442,7 +27641,7 @@
         },
         "description": "Memory search options.",
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "MemoryStores=V1Preview"
           ]
         }
@@ -26469,6 +27668,13 @@
           "description": {
             "type": "string",
             "description": "Optional user-defined description for this tool or configuration."
+          },
+          "tool_configs": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
           },
           "memory_store_name": {
             "type": "string",
@@ -26522,6 +27728,13 @@
           "description": {
             "type": "string",
             "description": "Optional user-defined description for this tool or configuration."
+          },
+          "tool_configs": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
           },
           "memory_store_name": {
             "type": "string",
@@ -26629,7 +27842,7 @@
         ],
         "description": "Default memory store implementation.",
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "MemoryStores=V1Preview"
           ]
         }
@@ -26669,7 +27882,7 @@
         },
         "description": "Default memory store configurations.",
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "MemoryStores=V1Preview"
           ]
         }
@@ -26697,7 +27910,7 @@
         },
         "description": "Base definition for memory store configurations.",
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "MemoryStores=V1Preview"
           ]
         }
@@ -26733,7 +27946,7 @@
         },
         "description": "Response for deleting memories from a scope.",
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "MemoryStores=V1Preview"
           ]
         }
@@ -26752,7 +27965,7 @@
         ],
         "description": "The type of memory store implementation to use.",
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "MemoryStores=V1Preview"
           ]
         }
@@ -26823,7 +28036,7 @@
         },
         "description": "A memory store that can store and retrieve user memories.",
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "MemoryStores=V1Preview"
           ]
         }
@@ -26887,7 +28100,7 @@
         },
         "description": "Usage statistics of a memory store operation.",
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "MemoryStores=V1Preview"
           ]
         }
@@ -26922,7 +28135,7 @@
         },
         "description": "Memory search response.",
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "MemoryStores=V1Preview"
           ]
         }
@@ -26952,7 +28165,7 @@
         },
         "description": "Memory update result.",
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "MemoryStores=V1Preview"
           ]
         }
@@ -26999,7 +28212,7 @@
         },
         "description": "Provides the status of a memory store update operation.",
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "MemoryStores=V1Preview"
           ]
         }
@@ -27022,7 +28235,7 @@
         ],
         "description": "Status of a memory store update operation.",
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "MemoryStores=V1Preview"
           ]
         }
@@ -27083,6 +28296,13 @@
           "description": {
             "type": "string",
             "description": "Optional user-defined description for this tool or configuration."
+          },
+          "tool_configs": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
           },
           "fabric_dataagent_preview": {
             "allOf": [
@@ -28159,6 +29379,13 @@
           "description": {
             "type": "string",
             "description": "Optional user-defined description for this tool or configuration."
+          },
+          "tool_configs": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
           },
           "container": {
             "anyOf": [
@@ -32500,6 +33727,13 @@
           "description": {
             "type": "string",
             "description": "Optional user-defined description for this tool or configuration."
+          },
+          "tool_configs": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
           }
         },
         "allOf": [
@@ -33934,6 +35168,13 @@
           "description": {
             "type": "string",
             "description": "Optional user-defined description for this tool or configuration."
+          },
+          "tool_configs": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
           }
         },
         "allOf": [
@@ -34626,6 +35867,13 @@
           "description": {
             "type": "string",
             "description": "Optional user-defined description for this tool or configuration."
+          },
+          "tool_configs": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
           }
         },
         "allOf": [
@@ -40378,6 +41626,13 @@
           "description": {
             "type": "string",
             "description": "Optional user-defined description for this tool or configuration."
+          },
+          "tool_configs": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
           }
         },
         "allOf": [
@@ -40581,6 +41836,13 @@
           "project_connection_id": {
             "type": "string",
             "description": "The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server."
+          },
+          "tool_configs": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
           }
         },
         "allOf": [
@@ -46887,6 +48149,13 @@
             "type": "string",
             "description": "Optional user-defined description for this tool or configuration."
           },
+          "tool_configs": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
+          },
           "custom_search_configuration": {
             "allOf": [
               {
@@ -47159,6 +48428,13 @@
               }
             ],
             "description": "The openapi function definition."
+          },
+          "tool_configs": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
           }
         },
         "allOf": [
@@ -48310,7 +49586,12 @@
             "$ref": "#/components/schemas/MemoryItem"
           }
         ],
-        "description": "A memory item containing a procedure extracted from conversations."
+        "description": "A memory item containing a procedure extracted from conversations.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "MemoryStores=V1Preview"
+          ]
+        }
       },
       "PromptAgentDefinition": {
         "type": "object",
@@ -48981,6 +50262,452 @@
         ],
         "description": "Risk category for the attack objective."
       },
+      "Routine": {
+        "type": "object",
+        "required": [
+          "name",
+          "enabled",
+          "triggers",
+          "action"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 128,
+            "description": "The routine name."
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 1024,
+            "description": "A human-readable description of the routine."
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "Whether the routine is enabled."
+          },
+          "triggers": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/RoutineTrigger"
+            },
+            "description": "The triggers configured for the routine."
+          },
+          "action": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RoutineAction"
+              }
+            ],
+            "description": "The action executed when the routine fires."
+          },
+          "created_at": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "The time when the routine was created."
+          },
+          "updated_at": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "The time when the routine was last updated."
+          }
+        },
+        "description": "A routine definition returned by the service.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
+      "RoutineAction": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RoutineActionType"
+              }
+            ],
+            "description": "The action type."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "invoke_agent_responses_api": "#/components/schemas/InvokeAgentResponsesApiRoutineAction",
+            "invoke_agent_invocations_api": "#/components/schemas/InvokeAgentInvocationsApiRoutineAction"
+          }
+        },
+        "description": "Base model for a routine action.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
+      "RoutineActionType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "invoke_agent_responses_api",
+              "invoke_agent_invocations_api"
+            ]
+          }
+        ],
+        "description": "The discriminator values supported for routine actions.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
+      "RoutineAttemptSource": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "event_fire",
+              "manual_dispatch",
+              "queued_dispatch",
+              "schedule_delivery",
+              "timer_delivery"
+            ]
+          }
+        ],
+        "description": "Known source paths that can produce a routine run.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
+      "RoutineCreateOrUpdateRequest": {
+        "type": "object",
+        "required": [
+          "triggers",
+          "action"
+        ],
+        "properties": {
+          "description": {
+            "type": "string",
+            "maxLength": 1024,
+            "description": "A human-readable description of the routine."
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "Whether the routine is enabled."
+          },
+          "triggers": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/RoutineTrigger"
+            },
+            "description": "The triggers configured for the routine. In v1, exactly one trigger entry is supported."
+          },
+          "action": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RoutineAction"
+              }
+            ],
+            "description": "The action executed when the routine fires."
+          }
+        },
+        "description": "The request body used to create or update a routine.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
+      "RoutineDispatchPayload": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RoutineDispatchPayloadType"
+              }
+            ],
+            "description": "The manual dispatch payload type."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "invoke_agent_responses_api": "#/components/schemas/InvokeAgentResponsesApiDispatchPayload",
+            "invoke_agent_invocations_api": "#/components/schemas/InvokeAgentInvocationsApiDispatchPayload"
+          }
+        },
+        "description": "Base model for a manual dispatch payload.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
+      "RoutineDispatchPayloadType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "invoke_agent_responses_api",
+              "invoke_agent_invocations_api"
+            ]
+          }
+        ],
+        "description": "The discriminator values supported for manual routine dispatch payloads.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
+      "RoutineRun": {
+        "type": "object",
+        "required": [
+          "id",
+          "status",
+          "trigger_type",
+          "started_at"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The MLflow run identifier for the routine attempt."
+          },
+          "status": {
+            "type": "string",
+            "description": "The underlying MLflow run status."
+          },
+          "phase": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RoutineRunPhase"
+              }
+            ],
+            "description": "The AgentExtensions lifecycle phase for the routine attempt."
+          },
+          "trigger_type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RoutineTriggerType"
+              }
+            ],
+            "description": "The trigger type that produced the routine attempt."
+          },
+          "attempt_source": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RoutineAttemptSource"
+              }
+            ],
+            "description": "The source path that created the routine attempt."
+          },
+          "action_type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RoutineActionType"
+              }
+            ],
+            "description": "The action type dispatched for the routine attempt."
+          },
+          "triggered_at": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "The logical trigger time recorded for the routine attempt."
+          },
+          "started_at": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "The time when the underlying run started."
+          },
+          "ended_at": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "The time when the underlying run reached a terminal state."
+          },
+          "dispatch_id": {
+            "type": "string",
+            "description": "The dispatch identifier associated with the routine attempt."
+          },
+          "action_correlation_id": {
+            "type": "string",
+            "description": "The downstream action correlation identifier, when available."
+          },
+          "response_id": {
+            "type": "string",
+            "description": "The downstream response or invocation identifier, when available."
+          },
+          "task_id": {
+            "type": "string",
+            "description": "The workspace task identifier linked to the routine attempt, when available."
+          },
+          "error_type": {
+            "type": "string",
+            "description": "The fully qualified error type captured for a failed attempt, when available."
+          },
+          "error_message": {
+            "type": "string",
+            "description": "The truncated failure message captured for a failed attempt, when available."
+          },
+          "diagnostics": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RoutineRunDiagnostics"
+              }
+            ],
+            "description": "Diagnostic data captured for the routine attempt."
+          }
+        },
+        "description": "A single routine run returned from the run history API.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
+      "RoutineRunDiagnostics": {
+        "type": "object",
+        "required": [
+          "parameters",
+          "tags",
+          "metrics"
+        ],
+        "properties": {
+          "parameters": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "MLflow parameters recorded on the run, keyed by parameter name."
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "MLflow tags recorded on the run, keyed by tag name."
+          },
+          "metrics": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "number",
+              "format": "double"
+            },
+            "description": "Latest MLflow metric values recorded on the run, keyed by metric name."
+          }
+        },
+        "description": "Generic diagnostics captured on a routine run.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
+      "RoutineRunPhase": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "queued",
+              "dispatching",
+              "completed",
+              "failed"
+            ]
+          }
+        ],
+        "description": "Known lifecycle phases recorded for a routine run.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
+      "RoutineTrigger": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RoutineTriggerType"
+              }
+            ],
+            "description": "The trigger type."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "schedule": "#/components/schemas/ScheduleRoutineTrigger",
+            "timer": "#/components/schemas/TimerRoutineTrigger",
+            "github_issue_opened": "#/components/schemas/GitHubIssueOpenedRoutineTrigger"
+          }
+        },
+        "description": "Base model for a routine trigger.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
+      "RoutineTriggerType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "github_issue_opened",
+              "schedule",
+              "timer"
+            ]
+          }
+        ],
+        "description": "The discriminator values supported for routine triggers.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
       "RubricBasedEvaluatorDefinition": {
         "type": "object",
         "required": [
@@ -48999,7 +50726,7 @@
             "items": {
               "$ref": "#/components/schemas/Dimension"
             },
-            "description": "The set of dimensions — the scoring blueprint used by the LLM judge. Quality evaluators include a non-editable residual dimension with dimension_id 'general_quality' (always_applicable: true); safety evaluators include 'general_policy_compliance'. Both use the same Dimension structure."
+            "description": "The set of dimensions — the scoring blueprint used by the LLM judge. Quality evaluators include a non-editable residual dimension with id 'general_quality' (always_applicable: true); safety evaluators include 'general_policy_compliance'. Both use the same Dimension structure."
           },
           "pass_threshold": {
             "type": "number",
@@ -49175,6 +50902,42 @@
           }
         ],
         "description": "Schedule provisioning status."
+      },
+      "ScheduleRoutineTrigger": {
+        "type": "object",
+        "required": [
+          "type",
+          "cron_expression",
+          "time_zone"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "schedule"
+            ],
+            "description": "The trigger type."
+          },
+          "cron_expression": {
+            "type": "string",
+            "description": "A 5-field cron expression. The service enforces a minimum interval of five minutes by default."
+          },
+          "time_zone": {
+            "type": "string",
+            "description": "An IANA or Windows time zone identifier for the schedule."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RoutineTrigger"
+          }
+        ],
+        "description": "A recurring cron-based routine trigger.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
       },
       "ScheduleRun": {
         "type": "object",
@@ -49500,6 +51263,13 @@
           "description": {
             "type": "string",
             "description": "Optional user-defined description for this tool or configuration."
+          },
+          "tool_configs": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
           },
           "sharepoint_grounding_preview": {
             "allOf": [
@@ -50262,6 +52032,41 @@
         "description": "An Azure AI Evaluator grader used as testing criterion in evaluations.",
         "title": "AzureAIEvaluatorGrader"
       },
+      "TimerRoutineTrigger": {
+        "type": "object",
+        "required": [
+          "type",
+          "at"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "timer"
+            ],
+            "description": "The trigger type."
+          },
+          "at": {
+            "type": "string",
+            "description": "A future timer expression. Supported values include an ISO-8601 timestamp with an explicit offset, a local timestamp paired with time_zone, or a positive duration from now."
+          },
+          "time_zone": {
+            "type": "string",
+            "description": "An optional IANA or Windows time zone identifier when the timer uses a local timestamp."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RoutineTrigger"
+          }
+        ],
+        "description": "A one-shot timer routine trigger.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
       "ToolCallOutputContent": {
         "anyOf": [
           {
@@ -50287,6 +52092,21 @@
           "failed"
         ],
         "description": "The status of a tool call."
+      },
+      "ToolConfig": {
+        "type": "object",
+        "properties": {
+          "pin": {
+            "type": "boolean",
+            "description": "When true, the tool is always included in agent context and visible in `tools/list`.\nWhen false (default), the tool is hidden from `tools/list` and only discoverable via `tool_search`."
+          },
+          "additional_search_text": {
+            "type": "string",
+            "maxLength": 1000,
+            "description": "Additional text indexed for tool_search. Supplements the native tool description\nto improve discoverability. Does not alter `tools/list` output."
+          }
+        },
+        "description": "Per-tool configuration that controls tool visibility and search behavior."
       },
       "ToolDescription": {
         "type": "object",
@@ -50394,6 +52214,13 @@
           "description": {
             "type": "string",
             "description": "Optional user-defined description for this tool or configuration."
+          },
+          "tool_configs": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
           }
         },
         "allOf": [
@@ -50905,7 +52732,6 @@
             "x-ms-foundry-meta": {
               "conditional_previews": [
                 "HostedAgents=V1Preview",
-                "ContainerAgents=V1Preview",
                 "WorkflowAgents=V1Preview",
                 "CodeAgents=V1Preview",
                 "ExternalAgents=V1Preview"
@@ -51027,7 +52853,7 @@
         ],
         "description": "A memory item specifically containing user profile information extracted from conversations, such as preferences, interests, and personal details.",
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "MemoryStores=V1Preview"
           ]
         }
@@ -51262,6 +53088,13 @@
           "description": {
             "type": "string",
             "description": "Optional user-defined description for this tool or configuration."
+          },
+          "tool_configs": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
           }
         },
         "allOf": [

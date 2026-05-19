@@ -10,7 +10,6 @@ namespace Azure.AI.Projects;
 const AllConditionalAgentDefinitionPreviews = #{
   conditional_previews: #[
     AgentDefinitionOptInKeys.hosted_agents_v1_preview,
-    AgentDefinitionOptInKeys.container_agents_v1_preview,
     AgentDefinitionOptInKeys.workflow_agents_v1_preview,
     AgentDefinitionOptInKeys.code_agents_v1_preview,
     AgentDefinitionOptInKeys.external_agents_v1_preview
@@ -708,6 +707,9 @@ model AgentEndpointAuthorizationScheme {
 )
 model EntraAuthorizationScheme extends AgentEndpointAuthorizationScheme {
   type: AgentEndpointAuthorizationSchemeType.Entra;
+
+  @doc("The source from which the per-user isolation key is derived for requests authorized via this scheme. Defaults to Entra-based isolation when omitted.")
+  isolation_key_source?: IsolationKeySource;
 }
 
 @extension(
@@ -888,6 +890,7 @@ model AgentCard {
 
   @doc("The set of skills that an agent can perform.")
   @maxItems(16)
+  @minItems(1)
   skills: AgentCardSkill[];
 }
 

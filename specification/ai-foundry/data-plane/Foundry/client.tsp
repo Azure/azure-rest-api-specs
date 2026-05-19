@@ -47,6 +47,18 @@ using Azure.AI.Projects;
 // To fix circular dependency in Python, remaining OpenAI types are emitted as Azure.AI.Projects
 @@clientNamespace(OpenAI, "azure.ai.projects", "python");
 
+
+// ********************************************************************************
+// ********************************************************************************
+// ********************************************************************************
+//
+//                       PART 1 - RELATED TO GA OPERATIONS
+//
+// ********************************************************************************
+// ********************************************************************************
+// ********************************************************************************
+
+
 // --------------------------------------------------------------------------------
 // Agents sub‐client
 // --------------------------------------------------------------------------------
@@ -98,7 +110,151 @@ using Azure.AI.Projects;
 @@clientName(AgentSessionFiles.listSessionFiles, "getSessionFiles");
 
 // --------------------------------------------------------------------------------
-// Memories sub-client
+// Datasets sub‐client
+// --------------------------------------------------------------------------------
+
+// Shorter method names for SDK datasets operations
+@@clientName(Datasets.listLatest, "list");
+@@clientName(Datasets.getVersion, "get");
+@@clientName(Datasets.deleteVersion, "delete");
+@@clientName(Datasets.createOrUpdateVersion, "createOrUpdate");
+@@clientName(Datasets.startPendingUploadVersion, "pendingUpload");
+
+// Data generation jobs — renamed for Python SDK discoverability
+@@clientName(DataGenerationJobs.get, "get_generation_job", "python");
+@@clientName(DataGenerationJobs.list, "list_generation_jobs", "python");
+@@clientName(DataGenerationJobs.create, "create_generation_job", "python");
+@@clientName(DataGenerationJobs.cancel, "cancel_generation_job", "python");
+@@clientName(DataGenerationJobs.delete, "delete_generation_job", "python");
+
+// Data generation jobs — renamed for JavaScript SDK discoverability
+@@clientName(DataGenerationJobs.get, "getGenerationJob", "javascript");
+@@clientName(DataGenerationJobs.list, "listGenerationJobs", "javascript");
+@@clientName(DataGenerationJobs.create, "createGenerationJob", "javascript");
+@@clientName(DataGenerationJobs.cancel, "cancelGenerationJob", "javascript");
+@@clientName(DataGenerationJobs.delete, "deleteGenerationJob", "javascript");
+
+// More accurate naming
+@@clientName(AssetCredentialResponse, "DatasetCredential");
+@@clientName(SasCredential, "BlobReferenceSasCredential"); // Not to be confused with class "SASCredentials"
+
+// --------------------------------------------------------------------------------
+// Indexes sub‐client
+// --------------------------------------------------------------------------------
+
+// Shorter method names for SDK Index operations
+@@clientName(Indexes.listLatest, "list");
+@@clientName(Indexes.getVersion, "get");
+@@clientName(Indexes.deleteVersion, "delete");
+@@clientName(Indexes.createOrUpdateVersion, "createOrUpdate");
+
+// --------------------------------------------------------------------------------
+// Toolboxes sub-client
+// --------------------------------------------------------------------------------
+
+@@clientName(Toolboxes.createToolboxVersion, "create_version");
+@@clientName(Toolboxes.updateToolbox, "update");
+@@clientName(Toolboxes.getToolbox, "get");
+@@clientName(Toolboxes.getToolboxVersion, "get_version");
+@@clientName(Toolboxes.listToolboxes, "list");
+@@clientName(Toolboxes.listToolboxVersions, "list_versions");
+@@clientName(Toolboxes.deleteToolbox, "delete");
+@@clientName(Toolboxes.deleteToolboxVersion, "delete_version");
+
+// --------------------------------------------------------------------------------
+// Connections sub‐client
+// --------------------------------------------------------------------------------
+
+// Make these two internal, since all SDKs hand-write a single public method with boolean "includeCredentials"
+// input parameter that calls either on these two.
+@@access(Connections.get, Access.internal);
+@@access(Connections.getWithCredentials, Access.internal);
+
+// --------------------------------------------------------------------------------
+// Deployment sub‐client
+// --------------------------------------------------------------------------------
+
+// Less generic names
+@@clientName(Sku, "ModelDeploymentSku");
+
+// --------------------------------------------------------------------------------
+// Other
+// --------------------------------------------------------------------------------
+
+// Rename OpenAI.Error to avoid conflict with Azure.Core.Foundations.Error.
+// OpenAI.Error is the object type of the `error` properties in `ApiErrorResponse`
+// and `MemoryStoreUpdateResponse`.
+@@clientName(OpenAI.Error, "ApiError");
+
+
+// ********************************************************************************
+// ********************************************************************************
+// ********************************************************************************
+//
+//                       PART 2 - RELATED TO BETA OPERATIONS
+//
+// ********************************************************************************
+// ********************************************************************************
+// ********************************************************************************
+
+
+// --------------------------------------------------------------------------------
+// Beta Agents sub-client
+// --------------------------------------------------------------------------------
+
+@@clientName(AgentOptimizationJobs.create, "create_optimization_job", "python");
+@@clientName(AgentOptimizationJobs.get, "get_optimization_job", "python");
+@@clientName(AgentOptimizationJobs.list, "list_optimization_jobs", "python");
+@@clientName(AgentOptimizationJobs.cancel, "cancel_optimization_job", "python");
+@@clientName(AgentOptimizationJobs.delete, "delete_optimization_job", "python");
+@@clientName(AgentOptimizationJobs.listCandidates, "list_optimization_candidates", "python");
+@@clientName(AgentOptimizationJobs.getCandidate, "get_optimization_candidate", "python");
+@@clientName(AgentOptimizationJobs.getCandidateConfig, "get_optimization_candidate_config", "python");
+@@clientName(AgentOptimizationJobs.getCandidateResults, "get_optimization_candidate_results", "python");
+
+@@clientName(AgentOptimizationJobs.create, "createOptimizationJob", "javascript");
+@@clientName(AgentOptimizationJobs.get, "getOptimizationJob", "javascript");
+@@clientName(AgentOptimizationJobs.list, "listOptimizationJobs", "javascript");
+@@clientName(AgentOptimizationJobs.cancel, "cancelOptimizationJob", "javascript");
+@@clientName(AgentOptimizationJobs.delete, "deleteOptimizationJob", "javascript");
+@@clientName(AgentOptimizationJobs.listCandidates, "listOptimizationCandidates", "javascript");
+@@clientName(AgentOptimizationJobs.getCandidate, "getOptimizationCandidate", "javascript");
+@@clientName(AgentOptimizationJobs.getCandidateConfig, "getOptimizationCandidateConfig", "javascript");
+@@clientName(AgentOptimizationJobs.getCandidateResults, "getOptimizationCandidateResults", "javascript");
+
+// Make this method internal, since it's patched with a new one that supports either binary or file-path input
+@@access(AgentSessionFiles.uploadSessionFile, Access.internal, "python");
+@@usage(SessionFileWriteResponse, Usage.output);
+@@access(SessionFileWriteResponse, Access.public);
+
+// Exclude these operations entirely from emitted Python SDK
+@@scope(Agents.createAgentFromCode, "!(python)");
+
+@@clientName(DownloadAgentCodeResponse, "DownloadAgentCodeResult", "python");
+@@clientName(SessionDirectoryListResponse,
+  "SessionDirectoryListResult",
+  "python"
+);
+@@clientName(SessionFileWriteResponse, "SessionFileWriteResult", "python");
+
+// --------------------------------------------------------------------------------
+// Class renames related to Responses
+// --------------------------------------------------------------------------------
+
+// Allow assigning a `dict[str, Any]` object directly to the "schema" property of TextResponseFormatJsonSchema
+@@alternateType(OpenAI.ResponseFormatJsonSchemaSchema, Record<unknown>);
+
+// Note there is also OpenAI.TextResponseFormatJsonSchema (which extends OpenAI.TextResponseFormatConfiguration). It already has a good name.
+@@clientName(OpenAI.TextResponseFormatConfiguration, "TextResponseFormat");
+@@clientName(OpenAI.TextResponseFormatConfigurationResponseFormatText,
+  "TextResponseFormatText"
+);
+@@clientName(OpenAI.TextResponseFormatConfigurationResponseFormatJsonObject,
+  "TextResponseFormatJsonObject"
+);
+
+// --------------------------------------------------------------------------------
+// Beta Memories sub-client
 // --------------------------------------------------------------------------------
 
 @@clientName(MemoryStores.createMemoryStore, "create");
@@ -152,12 +308,14 @@ using Azure.AI.Projects;
 @@clientName(MemoryStoreObject, "MemoryStore", "javascript");
 
 // --------------------------------------------------------------------------------
-// Routines sub-client
+// Beta Routines sub-client
 // --------------------------------------------------------------------------------
 
 @@clientName(Routines.createOrUpdateRoutine, "create_or_update", "python");
 @@clientName(Routines.createOrUpdateRoutine, "createOrUpdate", "javascript");
 @@clientName(Routines.getRoutine, "get");
+@@clientName(Routines.enableRoutine, "enable");
+@@clientName(Routines.disableRoutine, "disable");
 @@clientName(Routines.listRoutines, "list");
 @@clientName(Routines.deleteRoutine, "delete");
 @@clientName(Routines.listRoutineRuns, "list_runs", "python");
@@ -166,27 +324,14 @@ using Azure.AI.Projects;
 @@clientName(Routines.dispatchRoutineAsync, "dispatchAsync", "javascript");
 
 // --------------------------------------------------------------------------------
-// Responses sub‐client
-// --------------------------------------------------------------------------------
-
-// Allow assigning a `dict[str, Any]` object directly to the "schema" property of TextResponseFormatJsonSchema
-@@alternateType(OpenAI.ResponseFormatJsonSchemaSchema, Record<unknown>);
-
-// Note there is also OpenAI.TextResponseFormatJsonSchema (which extends OpenAI.TextResponseFormatConfiguration). It already has a good name.
-@@clientName(OpenAI.TextResponseFormatConfiguration, "TextResponseFormat");
-@@clientName(OpenAI.TextResponseFormatConfigurationResponseFormatText,
-  "TextResponseFormatText"
-);
-@@clientName(OpenAI.TextResponseFormatConfigurationResponseFormatJsonObject,
-  "TextResponseFormatJsonObject"
-);
-
-// --------------------------------------------------------------------------------
-// Evaluators sub‐client
+// Beta Evaluators sub‐client
 // --------------------------------------------------------------------------------
 
 // Need to explicitly mention both languages to avoid compile error
 @@clientName(Evaluators.listLatestVersions, "list", "python, javascript");
+
+// Evaluator pending upload
+@@clientName(Evaluators.startPendingUpload, "pendingUpload");
 
 // Evaluator generation jobs — unscoped names (fixes AllScopes conflict)
 @@clientName(EvaluatorGenerationJobs.create, "create_generation_job");
@@ -225,23 +370,47 @@ using Azure.AI.Projects;
 @@clientName(EvaluationSuiteGenerationJobs.cancel, "cancelGenerationSuiteJob", "javascript");
 @@clientName(EvaluationSuiteGenerationJobs.delete, "deleteGenerationSuiteJob", "javascript");
 
-@@clientName(EvaluationSuites.createEvaluationSuiteVersion, "create_evaluation_suite_version");
+// EvaluationSuites versioned operations
+@@clientName(EvaluationSuites.listVersions, "list_evaluation_suite_versions");
+@@clientName(EvaluationSuites.listLatest, "list_evaluation_suites");
+@@clientName(EvaluationSuites.getVersion, "get_evaluation_suite");
+@@clientName(EvaluationSuites.deleteVersion, "delete_evaluation_suite");
+@@clientName(EvaluationSuites.createOrUpdateVersion, "create_or_update_evaluation_suite");
+@@clientName(EvaluationSuites.createEvaluationSuiteVersion, "create_evaluation_suite");
 @@clientName(EvaluationSuites.run, "run_evaluation_suite");
 
-@@clientName(EvaluationSuites.createEvaluationSuiteVersion, "createEvaluationSuiteVersion", "javascript");
+@@clientName(EvaluationSuites.listVersions, "listEvaluationSuiteVersions", "javascript");
+@@clientName(EvaluationSuites.listLatest, "listEvaluationSuites", "javascript");
+@@clientName(EvaluationSuites.getVersion, "getEvaluationSuite", "javascript");
+@@clientName(EvaluationSuites.deleteVersion, "deleteEvaluationSuite", "javascript");
+@@clientName(EvaluationSuites.createOrUpdateVersion, "createOrUpdateEvaluationSuite", "javascript");
+@@clientName(EvaluationSuites.createEvaluationSuiteVersion, "createEvaluationSuite", "javascript");
 @@clientName(EvaluationSuites.run, "runEvaluationSuite", "javascript");
 // EvaluatorVersion datetime fields are typed as string in the spec but carry ISO-8601 timestamps
 @@alternateType(EvaluatorVersion.created_at, utcDateTime, "python");
 @@alternateType(EvaluatorVersion.modified_at, utcDateTime, "python");
 
+// Evaluator generation jobs — renamed for Python SDK discoverability
+@@clientName(EvaluatorGenerationJobs.create, "create_generation_job", "python");
+@@clientName(EvaluatorGenerationJobs.get, "get_generation_job", "python");
+@@clientName(EvaluatorGenerationJobs.list, "list_generation_jobs", "python");
+@@clientName(EvaluatorGenerationJobs.cancel, "cancel_generation_job", "python");
+@@clientName(EvaluatorGenerationJobs.delete, "delete_generation_job", "python");
+// Evaluation Suite Generation Jobs — unique names to avoid collision with evaluator gen methods
+@@clientName(EvaluationSuiteGenerationJobs.create, "create_generation_suite_job", "python");
+@@clientName(EvaluationSuiteGenerationJobs.get, "get_generation_suite_job", "python");
+@@clientName(EvaluationSuiteGenerationJobs.list, "list_generation_suite_jobs", "python");
+@@clientName(EvaluationSuiteGenerationJobs.cancel, "cancel_generation_suite_job", "python");
+@@clientName(EvaluationSuiteGenerationJobs.delete, "delete_generation_suite_job", "python");
+
 // --------------------------------------------------------------------------------
-// Insights sub‐client
+// Beta Insights sub‐client
 // --------------------------------------------------------------------------------
 @@clientName(Azure.AI.Projects.Insight.id, "insight_id");
 @@clientName(InsightsGetParams.id, "insight_id");
 
 // --------------------------------------------------------------------------------
-// Models sub‐client
+// Beta Models sub‐client
 // --------------------------------------------------------------------------------
 
 // Shorter method names for SDK models operations
@@ -254,46 +423,7 @@ using Azure.AI.Projects;
 @@clientName(Models.getCredentials, "getCredentials");
 
 // --------------------------------------------------------------------------------
-// Datasets sub‐client
-// --------------------------------------------------------------------------------
-
-// Shorter method names for SDK datasets operations
-@@clientName(Datasets.listLatest, "list");
-@@clientName(Datasets.getVersion, "get");
-@@clientName(Datasets.deleteVersion, "delete");
-@@clientName(Datasets.createOrUpdateVersion, "createOrUpdate");
-@@clientName(Datasets.startPendingUploadVersion, "pendingUpload");
-
-// Data generation jobs — renamed for Python SDK discoverability
-@@clientName(DataGenerationJobs.get, "get_generation_job", "python");
-@@clientName(DataGenerationJobs.list, "list_generation_jobs", "python");
-@@clientName(DataGenerationJobs.create, "create_generation_job", "python");
-@@clientName(DataGenerationJobs.cancel, "cancel_generation_job", "python");
-@@clientName(DataGenerationJobs.delete, "delete_generation_job", "python");
-
-// Data generation jobs — renamed for JavaScript SDK discoverability
-@@clientName(DataGenerationJobs.get, "getGenerationJob", "javascript");
-@@clientName(DataGenerationJobs.list, "listGenerationJobs", "javascript");
-@@clientName(DataGenerationJobs.create, "createGenerationJob", "javascript");
-@@clientName(DataGenerationJobs.cancel, "cancelGenerationJob", "javascript");
-@@clientName(DataGenerationJobs.delete, "deleteGenerationJob", "javascript");
-
-// More accurate naming
-@@clientName(AssetCredentialResponse, "DatasetCredential");
-@@clientName(SasCredential, "BlobReferenceSasCredential"); // Not to be confused with class "SASCredentials"
-
-// --------------------------------------------------------------------------------
-// Indexes sub‐client
-// --------------------------------------------------------------------------------
-
-// Shorter method names for SDK Index operations
-@@clientName(Indexes.listLatest, "list");
-@@clientName(Indexes.getVersion, "get");
-@@clientName(Indexes.deleteVersion, "delete");
-@@clientName(Indexes.createOrUpdateVersion, "createOrUpdate");
-
-// --------------------------------------------------------------------------------
-// Schedules sub‐client
+// Beta Schedules sub‐client
 // --------------------------------------------------------------------------------
 
 @@clientName(SchedulesCreateOrUpdateParams.resource, "schedule");
@@ -308,20 +438,7 @@ using Azure.AI.Projects;
 @@alternateType(ScheduleRun.triggerTime, utcDateTime, "python");
 
 // --------------------------------------------------------------------------------
-// Toolboxes sub-client
-// --------------------------------------------------------------------------------
-
-@@clientName(Toolboxes.createToolboxVersion, "create_version");
-@@clientName(Toolboxes.updateToolbox, "update");
-@@clientName(Toolboxes.getToolbox, "get");
-@@clientName(Toolboxes.getToolboxVersion, "get_version");
-@@clientName(Toolboxes.listToolboxes, "list");
-@@clientName(Toolboxes.listToolboxVersions, "list_versions");
-@@clientName(Toolboxes.deleteToolbox, "delete");
-@@clientName(Toolboxes.deleteToolboxVersion, "delete_version");
-
-// --------------------------------------------------------------------------------
-// Skills sub-client
+// Beta Skills sub-client
 // --------------------------------------------------------------------------------
 
 @@clientName(Skills.createSkill, "create");
@@ -337,42 +454,7 @@ using Azure.AI.Projects;
 @@clientName(DownloadSkillResponse, "DownloadSkillResult", "python");
 
 // --------------------------------------------------------------------------------
-// Connections sub‐client
-// --------------------------------------------------------------------------------
-
-// Make these two internal, since all SDKs hand-write a single public method with boolean "includeCredentials"
-// input parameter that calls either on these two.
-@@access(Connections.get, Access.internal);
-@@access(Connections.getWithCredentials, Access.internal);
-
-// --------------------------------------------------------------------------------
-// Deployment sub‐client
-// --------------------------------------------------------------------------------
-
-// Less generic names
-@@clientName(Sku, "ModelDeploymentSku");
-
-// --------------------------------------------------------------------------------
-// Beta Agents sub-client
-// --------------------------------------------------------------------------------
-
-// Make this method internal, since it's patched with a new one that supports either binary or file-path input
-@@access(AgentSessionFiles.uploadSessionFile, Access.internal, "python");
-@@usage(SessionFileWriteResponse, Usage.output);
-@@access(SessionFileWriteResponse, Access.public);
-
-// Exclude these operations entirely from emitted Python SDK
-@@scope(Agents.createAgentFromCode, "!(python)");
-
-@@clientName(DownloadAgentCodeResponse, "DownloadAgentCodeResult", "python");
-@@clientName(SessionDirectoryListResponse,
-  "SessionDirectoryListResult",
-  "python"
-);
-@@clientName(SessionFileWriteResponse, "SessionFileWriteResult", "python");
-
-// --------------------------------------------------------------------------------
-// Evaluation Taxonomies sub-client
+// Beta Evaluation Taxonomies sub-client
 // --------------------------------------------------------------------------------
 
 // Note that we can't rename it in src\openai-evaluations\models.tsp, since in
@@ -411,46 +493,5 @@ model AIProjectClientOptions {
   "python"
 );
 
-// --------------------------------------------------------------------------------
-// Other
-// --------------------------------------------------------------------------------
 
-// Rename OpenAI.Error to avoid conflict with Azure.Core.Foundations.Error.
-// OpenAI.Error is the object type of the `error` properties in `ApiErrorResponse`
-// and `MemoryStoreUpdateResponse`.
-@@clientName(OpenAI.Error, "ApiError");
 
-// Evaluator generation jobs — renamed for Python SDK discoverability
-@@clientName(EvaluatorGenerationJobs.create, "create_generation_job", "python");
-@@clientName(EvaluatorGenerationJobs.get, "get_generation_job", "python");
-@@clientName(EvaluatorGenerationJobs.list, "list_generation_jobs", "python");
-@@clientName(EvaluatorGenerationJobs.cancel, "cancel_generation_job", "python");
-@@clientName(EvaluatorGenerationJobs.delete, "delete_generation_job", "python");
-// Evaluation Suite Generation Jobs — unique names to avoid collision with evaluator gen methods
-@@clientName(EvaluationSuiteGenerationJobs.create, "create_generation_suite_job", "python");
-@@clientName(EvaluationSuiteGenerationJobs.get, "get_generation_suite_job", "python");
-@@clientName(EvaluationSuiteGenerationJobs.list, "list_generation_suite_jobs", "python");
-@@clientName(EvaluationSuiteGenerationJobs.cancel, "cancel_generation_suite_job", "python");
-@@clientName(EvaluationSuiteGenerationJobs.delete, "delete_generation_suite_job", "python");
-
-// Agent optimization jobs — renamed for Python SDK discoverability
-@@clientName(AgentOptimizationJobs.create, "create_optimization_job", "python");
-@@clientName(AgentOptimizationJobs.get, "get_optimization_job", "python");
-@@clientName(AgentOptimizationJobs.list, "list_optimization_jobs", "python");
-@@clientName(AgentOptimizationJobs.cancel, "cancel_optimization_job", "python");
-@@clientName(AgentOptimizationJobs.delete, "delete_optimization_job", "python");
-@@clientName(AgentOptimizationJobs.listCandidates, "list_optimization_candidates", "python");
-@@clientName(AgentOptimizationJobs.getCandidate, "get_optimization_candidate", "python");
-@@clientName(AgentOptimizationJobs.getCandidateConfig, "get_optimization_candidate_config", "python");
-@@clientName(AgentOptimizationJobs.getCandidateResults, "get_optimization_candidate_results", "python");
-
-// Agent optimization jobs — renamed for JavaScript SDK discoverability
-@@clientName(AgentOptimizationJobs.create, "createOptimizationJob", "javascript");
-@@clientName(AgentOptimizationJobs.get, "getOptimizationJob", "javascript");
-@@clientName(AgentOptimizationJobs.list, "listOptimizationJobs", "javascript");
-@@clientName(AgentOptimizationJobs.cancel, "cancelOptimizationJob", "javascript");
-@@clientName(AgentOptimizationJobs.delete, "deleteOptimizationJob", "javascript");
-@@clientName(AgentOptimizationJobs.listCandidates, "listOptimizationCandidates", "javascript");
-@@clientName(AgentOptimizationJobs.getCandidate, "getOptimizationCandidate", "javascript");
-@@clientName(AgentOptimizationJobs.getCandidateConfig, "getOptimizationCandidateConfig", "javascript");
-@@clientName(AgentOptimizationJobs.getCandidateResults, "getOptimizationCandidateResults", "javascript");
