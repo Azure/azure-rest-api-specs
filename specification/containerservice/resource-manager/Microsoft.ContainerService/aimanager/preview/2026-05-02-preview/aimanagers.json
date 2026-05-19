@@ -2317,6 +2317,21 @@
         "value"
       ]
     },
+    "ManualScalingProfile": {
+      "type": "object",
+      "description": "Manual scaling configuration: fixed replica count.",
+      "properties": {
+        "replicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Fixed number of replicas.",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "replicas"
+      ]
+    },
     "ModelDeployment": {
       "type": "object",
       "description": "A running deployment of a model in an AI Manager namespace.",
@@ -2664,6 +2679,32 @@
         ]
       }
     },
+    "ModelSpec": {
+      "type": "object",
+      "description": "The specification of a model. All fields are read-only.",
+      "properties": {
+        "license": {
+          "type": "string",
+          "description": "The license of the model, when known. SPDX license identifier, e.g. `mit`, `apache-2.0`.",
+          "readOnly": true
+        },
+        "isRestricted": {
+          "type": "boolean",
+          "description": "Whether access to the model is restricted and requires credential.",
+          "readOnly": true
+        },
+        "maxContextLength": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum context length supported by the model, in tokens.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "isRestricted",
+        "maxContextLength"
+      ]
+    },
     "NamespaceAccessInfo": {
       "type": "object",
       "description": "Access information for an AI Manager namespace, including the OpenAI-compatible gateway endpoint and the API keys used to authenticate against it.",
@@ -2696,32 +2737,6 @@
         "primaryKey"
       ]
     },
-    "ModelSpec": {
-      "type": "object",
-      "description": "The specification of a model. All fields are read-only.",
-      "properties": {
-        "license": {
-          "type": "string",
-          "description": "The license of the model, when known. SPDX license identifier, e.g. `mit`, `apache-2.0`.",
-          "readOnly": true
-        },
-        "isRestricted": {
-          "type": "boolean",
-          "description": "Whether access to the model is restricted and requires credential.",
-          "readOnly": true
-        },
-        "maxContextLength": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum context length supported by the model, in tokens.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "isRestricted",
-        "maxContextLength"
-      ]
-    },
     "ScalingProfile": {
       "type": "object",
       "description": "Scaling configuration for a model deployment. Exactly one of `manual` or `autoscale` must be set.",
@@ -2735,21 +2750,6 @@
           "description": "Autoscaling configuration. Mutually exclusive with `manual`."
         }
       }
-    },
-    "ManualScalingProfile": {
-      "type": "object",
-      "description": "Manual scaling configuration: fixed replica count.",
-      "properties": {
-        "replicas": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Fixed number of replicas.",
-          "minimum": 1
-        }
-      },
-      "required": [
-        "replicas"
-      ]
     }
   },
   "parameters": {}
