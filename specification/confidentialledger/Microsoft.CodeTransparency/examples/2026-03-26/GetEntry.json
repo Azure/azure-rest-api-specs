@@ -3,13 +3,13 @@
   "operationId": "GetEntry",
   "parameters": {
     "api-version": "2026-03-26",
-    "accept": "application/cose",
+    "accept": "application/scitt-receipt+cose",
     "entryId": "2.131"
   },
   "responses": {
     "200": {
       "headers": {
-        "Content-Type": "application/cose"
+        "Content-Type": "application/scitt-receipt+cose"
       },
       "body": "{binary}"
     },
@@ -20,6 +20,12 @@
       }
     },
     "400": {
+      "headers": {
+        "Content-Type": "application/concise-problem-details+cbor"
+      },
+      "body": "{binary}"
+    },
+    "401": {
       "headers": {
         "Content-Type": "application/concise-problem-details+cbor"
       },
