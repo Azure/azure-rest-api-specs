@@ -227,11 +227,16 @@ union CustomPublicNetworkAccessType {
 // C# API review naming/type fixes for new TypeSpec-generated surface
 @@alternateType(MachineProperties.hardwareResourceId, Azure.Core.armResourceIdentifier, "csharp");
 @@clientName(SetupExtensionRequest, "SetupExtensionContent", "csharp");
-@@clientName(ExtensionsResourceStatus.time, "TimeOn", "csharp");
 
 // MachineRunCommandData backward compatibility with the existing SDK API.
 @@alternateType(MachineRunCommandProperties.outputBlobUri, url, "csharp");
 @@alternateType(MachineRunCommandProperties.errorBlobUri, url, "csharp");
+
+// C# backward compatibility with the checked-in .NET API listings.
+@@clientName(ExtensionsStatusLevelTypes, "ExtensionsStatusLevelType", "csharp");
+@@alternateType(MachineRunCommandScriptSource.scriptUri, url, "csharp");
+@@alternateType(RunCommandManagedIdentity.clientId, Azure.Core.uuid, "csharp");
+@@alternateType(RunCommandManagedIdentity.objectId, Azure.Core.uuid, "csharp");
 
 // C# backward-compat fixes for ApiCompat issues found during MPG migration.
 @@alternateType(PrivateEndpointProperty.id,
