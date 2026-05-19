@@ -166,9 +166,11 @@ interface PolicyEnrollments {
 
 @@doc(PolicyEnrollment.name, "The name of the policy enrollment.");
 @@doc(PolicyEnrollment.properties, "The properties of the policy enrollment.");
-@@doc(PolicyEnrollments.createOrUpdate::parameters.resource,
+@@doc(
+  PolicyEnrollments.createOrUpdate::parameters.resource,
   "The policy enrollment resource to create or replace."
 );
-@@doc(PolicyEnrollments.update::parameters.properties,
+@@doc(
+  PolicyEnrollments.update::parameters.properties,
   "The properties to update in the policy enrollment."
 );

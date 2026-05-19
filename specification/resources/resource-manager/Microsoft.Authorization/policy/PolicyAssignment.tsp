@@ -191,9 +191,11 @@ interface PolicyAssignments {
 
 @@doc(PolicyAssignment.name, "The name of the policy assignment to get.");
 @@doc(PolicyAssignment.properties, "Properties for the policy assignment.");
-@@doc(PolicyAssignments.create::parameters.resource,
+@@doc(
+  PolicyAssignments.create::parameters.resource,
   "Parameters for the policy assignment."
 );
-@@doc(PolicyAssignments.update::parameters.properties,
+@@doc(
+  PolicyAssignments.update::parameters.properties,
   "Parameters for policy assignment patch request."
 );
