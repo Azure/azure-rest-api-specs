@@ -22,7 +22,7 @@ model PolicyDefinition
     Resource = PolicyDefinition,
     KeyName = "policyDefinitionName",
     SegmentName = "policyDefinitions",
-    NamePattern = "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+    NamePattern = "^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$"
   >;
 }
 
@@ -214,11 +214,9 @@ interface PolicyDefinitions {
 
 @@doc(PolicyDefinition.name, "The name of the policy definition to get.");
 @@doc(PolicyDefinition.properties, "The policy definition properties.");
-@@doc(
-  PolicyDefinitions.createOrUpdate::parameters.resource,
+@@doc(PolicyDefinitions.createOrUpdate::parameters.resource,
   "The policy definition properties."
 );
-@@doc(
-  PolicyDefinitions.createOrUpdateAtManagementGroup::parameters.resource,
+@@doc(PolicyDefinitions.createOrUpdateAtManagementGroup::parameters.resource,
   "The policy definition properties."
 );
