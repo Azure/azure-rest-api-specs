@@ -80,6 +80,7 @@ interface Features {
   @renamedFrom(Versions.v2026_06_01, "enable")
   @sharedRoute
   @action("enable")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Explicit operationId needed to match renamed operation"
   @operationId("Features_Enable")
   enableV2 is ArmResourceActionAsync<
     Feature,
