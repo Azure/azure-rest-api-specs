@@ -90,9 +90,6 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "OrganizationOperations_List_MaximumSet": {
             "$ref": "./examples/OrganizationOperations_List_MaximumSet_Gen.json"
@@ -100,6 +97,9 @@
           "OrganizationOperations_List_MinimumSet": {
             "$ref": "./examples/OrganizationOperations_List_MinimumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -130,16 +130,16 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "MarketplaceAgreements_List_MaximumSet": {
+          "List Confluent marketplace agreements in the subscription. (Maximumset)": {
             "$ref": "./examples/MarketplaceAgreements_List_MaximumSet_Gen.json"
           },
-          "MarketplaceAgreements_List_MinimumSet": {
+          "List Confluent marketplace agreements in the subscription. (Minimumset)": {
             "$ref": "./examples/MarketplaceAgreements_List_MinimumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -180,10 +180,10 @@
           }
         },
         "x-ms-examples": {
-          "MarketplaceAgreements_Create_MaximumSet": {
+          "Create Confluent Marketplace agreement in the subscription. (Maximumset)": {
             "$ref": "./examples/MarketplaceAgreements_Create_MaximumSet_Gen.json"
           },
-          "MarketplaceAgreements_Create_MinimumSet": {
+          "Create Confluent Marketplace agreement in the subscription. (MinimumSet)": {
             "$ref": "./examples/MarketplaceAgreements_Create_MinimumSet_Gen.json"
           }
         }
@@ -218,13 +218,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Organization_ListBySubscription_MaximumSet": {
             "$ref": "./examples/Organization_ListBySubscription_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -260,13 +260,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Organization_ListByResourceGroup_MaximumSet": {
             "$ref": "./examples/Organization_ListByResourceGroup_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -379,15 +379,15 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Organization_Create_MaximumSet": {
             "$ref": "./examples/Organization_Create_MaximumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "Organization_Update",
@@ -494,10 +494,6 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Organization_Delete_MaximumSet": {
             "$ref": "./examples/Organization_Delete_MaximumSet_Gen.json"
@@ -505,7 +501,11 @@
           "Organization_Delete_MinimumSet": {
             "$ref": "./examples/Organization_Delete_MinimumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/createInvitation": {
@@ -1241,13 +1241,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Organization_ListEnvironments_MaximumSet": {
             "$ref": "./examples/Organization_ListEnvironments_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1425,10 +1425,6 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Environment_Delete_MaximumSet": {
             "$ref": "./examples/Environment_Delete_MaximumSet_Gen.json"
@@ -1436,7 +1432,11 @@
           "Environment_Delete_MinimumSet": {
             "$ref": "./examples/Environment_Delete_MinimumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/environments/{environmentId}/clusters": {
@@ -1500,13 +1500,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Organization_ListClusters_MaximumSet": {
             "$ref": "./examples/Organization_ListClusters_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1705,10 +1705,6 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Cluster_Delete_MaximumSet": {
             "$ref": "./examples/Cluster_Delete_MaximumSet_Gen.json"
@@ -1716,7 +1712,11 @@
           "Cluster_Delete_MinimumSet": {
             "$ref": "./examples/Cluster_Delete_MinimumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/environments/{environmentId}/clusters/{clusterId}/connectors": {
@@ -1787,13 +1787,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Connector_List_MaximumSet": {
             "$ref": "./examples/Connector_List_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2013,10 +2013,6 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Connector_Delete_MaximumSet": {
             "$ref": "./examples/Connector_Delete_MaximumSet_Gen.json"
@@ -2024,7 +2020,11 @@
           "Connector_Delete_MinimumSet": {
             "$ref": "./examples/Connector_Delete_MinimumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/environments/{environmentId}/clusters/{clusterId}/createAPIKey": {
@@ -2167,13 +2167,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Topics_List_MaximumSet": {
             "$ref": "./examples/Topics_List_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2393,10 +2393,6 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Topics_Delete_MaximumSet": {
             "$ref": "./examples/Topics_Delete_MaximumSet_Gen.json"
@@ -2404,7 +2400,11 @@
           "Topics_Delete_MinimumSet": {
             "$ref": "./examples/Topics_Delete_MinimumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/environments/{environmentId}/networkGateways": {
@@ -2453,13 +2453,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "NetworkGatewayResources_List_MaximumSet": {
             "$ref": "./examples/NetworkGatewayResources_List_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2600,15 +2600,15 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "NetworkGatewayResources_CreateOrReplace_MaximumSet": {
             "$ref": "./examples/NetworkGatewayResources_CreateOrReplace_MaximumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "NetworkGatewayResources_Delete",
@@ -2673,15 +2673,15 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "NetworkGatewayResources_Delete_MaximumSet": {
             "$ref": "./examples/NetworkGatewayResources_Delete_MaximumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/environments/{environmentId}/networkGateways/{networkGatewayId}/accessPoints/{accessPointId}": {
@@ -2835,15 +2835,15 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "AccessPointResources_CreateOrReplace_MaximumSet": {
             "$ref": "./examples/AccessPointResources_CreateOrReplace_MaximumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "AccessPointResources_Delete",
@@ -2915,15 +2915,15 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "AccessPointResources_Delete_MaximumSet": {
             "$ref": "./examples/AccessPointResources_Delete_MaximumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/environments/{environmentId}/schemaRegistryClusters": {
@@ -2987,9 +2987,6 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Organization_ListSchemaRegistryClusters_MaximumSet": {
             "$ref": "./examples/Organization_ListSchemaRegistryClusters_MaximumSet_Gen.json"
@@ -2997,6 +2994,9 @@
           "Organization_ListSchemaRegistryClusters_MinimumSet": {
             "$ref": "./examples/Organization_ListSchemaRegistryClusters_MinimumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3165,7 +3165,7 @@
           }
         },
         "x-ms-examples": {
-          "Validations_ValidateOrganization_MaximumSet": {
+          "Organization Validate proxy resource": {
             "$ref": "./examples/Validations_ValidateOrganization_MaximumSet_Gen.json"
           }
         }
@@ -3218,7 +3218,7 @@
           }
         },
         "x-ms-examples": {
-          "Validations_ValidateOrganizationV2_MaximumSet": {
+          "Organization Validate proxy resource": {
             "$ref": "./examples/Validations_ValidateOrganizationV2_MaximumSet_Gen.json"
           }
         }
