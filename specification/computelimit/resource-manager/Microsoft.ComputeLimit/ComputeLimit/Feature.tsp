@@ -76,18 +76,21 @@ interface Features {
   >;
 
   /** Enables a compute limit feature for the subscription at the specified location. */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Explicit operationId needed to match renamed operation"
   @added(Versions.v2026_06_01)
   @renamedFrom(Versions.v2026_06_01, "enable")
   @sharedRoute
   @action("enable")
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Explicit operationId needed to match renamed operation"
   @operationId("Features_Enable")
   enableV2 is ArmResourceActionAsync<
     Feature,
     FeatureEnableRequest,
     Azure.ResourceManager.Foundations.OperationStatusResult,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<Feature>,
-    ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+    ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader,
+    {},
+    ErrorResponse,
+    true
   >;
 
   /** Disables a compute limit feature for the subscription at the specified location. */
