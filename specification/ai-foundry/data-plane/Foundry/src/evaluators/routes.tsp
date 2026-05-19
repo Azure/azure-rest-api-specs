@@ -185,7 +185,7 @@ interface Evaluators {
 // ============================================================================
 
 const EvaluatorGenerationJobsRequiredPreviews = #{
-  conditional_previews: #[
+  required_previews: #[
     FoundryFeaturesOptInKeys.evaluations_v1_preview
   ],
 };
@@ -226,12 +226,7 @@ interface EvaluatorGenerationJobs {
   @extension("x-ms-foundry-meta", EvaluatorGenerationJobsRequiredPreviews)
   list is listJobsPreview<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
-    EvaluatorGenerationJob,
-    {
-      @doc("Filter evaluator generation jobs by category.")
-      @query
-      category?: EvaluatorCategory;
-    }
+    EvaluatorGenerationJob
   >;
 
   /**

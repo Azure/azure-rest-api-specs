@@ -7,7 +7,7 @@ using TypeSpec.Versioning;
 namespace Azure.AI.Projects;
 
 const DataGenerationJobsRequiredPreviews = #{
-  conditional_previews: #[
+  required_previews: #[
     FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview
   ],
 };

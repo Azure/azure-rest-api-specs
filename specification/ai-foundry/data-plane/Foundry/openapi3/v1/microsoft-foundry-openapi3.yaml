@@ -2514,7 +2514,7 @@ paths:
       tags:
         - DataGenerationJobs
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - DataGenerationJobs=V1Preview
     post:
       operationId: DataGenerationJobs_create
@@ -2576,7 +2576,7 @@ paths:
               $ref: '#/components/schemas/DataGenerationJob'
         description: The job to create.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - DataGenerationJobs=V1Preview
   /data_generation_jobs/{jobId}:
     get:
@@ -2628,7 +2628,7 @@ paths:
       tags:
         - DataGenerationJobs
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - DataGenerationJobs=V1Preview
     delete:
       operationId: DataGenerationJobs_delete
@@ -2668,7 +2668,7 @@ paths:
       tags:
         - DataGenerationJobs
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - DataGenerationJobs=V1Preview
   /data_generation_jobs/{jobId}:cancel:
     post:
@@ -2713,7 +2713,7 @@ paths:
       tags:
         - DataGenerationJobs
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - DataGenerationJobs=V1Preview
   /datasets:
     get:
@@ -4105,7 +4105,7 @@ paths:
               $ref: '#/components/schemas/EvaluatorGenerationJobCreate'
         description: The job to create.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - Evaluations=V1Preview
     get:
       operationId: EvaluatorGenerationJobs_list
@@ -4160,13 +4160,6 @@ paths:
           schema:
             type: string
           explode: false
-        - name: category
-          in: query
-          required: false
-          description: Filter evaluator generation jobs by category.
-          schema:
-            $ref: '#/components/schemas/EvaluatorCategory'
-          explode: false
         - name: api-version
           in: query
           required: true
@@ -4209,7 +4202,7 @@ paths:
       tags:
         - EvaluatorGenerationJobs
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - Evaluations=V1Preview
   /evaluator_generation_jobs/{jobId}:
     get:
@@ -4261,7 +4254,7 @@ paths:
       tags:
         - EvaluatorGenerationJobs
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - Evaluations=V1Preview
     delete:
       operationId: EvaluatorGenerationJobs_delete
@@ -4302,7 +4295,7 @@ paths:
       tags:
         - EvaluatorGenerationJobs
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - Evaluations=V1Preview
   /evaluator_generation_jobs/{jobId}:cancel:
     post:
@@ -4347,7 +4340,7 @@ paths:
       tags:
         - EvaluatorGenerationJobs
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - Evaluations=V1Preview
   /evaluators:
     get:
@@ -5184,7 +5177,7 @@ paths:
                 - name
                 - definition
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     get:
       operationId: listMemoryStores
@@ -5280,7 +5273,7 @@ paths:
       tags:
         - Memory Stores
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
   /memory_stores/{name}:
     post:
@@ -5340,7 +5333,7 @@ paths:
                     type: string
                   description: Arbitrary key-value metadata to associate with the memory store.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     get:
       operationId: getMemoryStore
@@ -5383,7 +5376,7 @@ paths:
       tags:
         - Memory Stores
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     delete:
       operationId: deleteMemoryStore
@@ -5426,9 +5419,9 @@ paths:
       tags:
         - Memory Stores
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
-  /memory_stores/{name}/memories:
+  /memory_stores/{name}/items:
     post:
       operationId: createMemory
       description: Create a memory item in a memory store.
@@ -5491,9 +5484,170 @@ paths:
                 - content
                 - kind
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
+          - MemoryStores=V1Preview
+  /memory_stores/{name}/items/{memory_id}:
+    post:
+      operationId: updateMemory
+      description: Update a memory item in a memory store.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - MemoryStores=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The name of the memory store.
+          schema:
+            type: string
+        - name: memory_id
+          in: path
+          required: true
+          description: The ID of the memory item to update.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemoryItem'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Memory Stores
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                  description: The updated content of the memory.
+              required:
+                - content
+      x-ms-foundry-meta:
+        required_previews:
           - MemoryStores=V1Preview
     get:
+      operationId: getMemory
+      description: Retrieve a memory item from a memory store.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - MemoryStores=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The name of the memory store.
+          schema:
+            type: string
+        - name: memory_id
+          in: path
+          required: true
+          description: The ID of the memory item to retrieve.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemoryItem'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Memory Stores
+      x-ms-foundry-meta:
+        required_previews:
+          - MemoryStores=V1Preview
+    delete:
+      operationId: deleteMemory
+      description: Delete a memory item from a memory store.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - MemoryStores=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The name of the memory store.
+          schema:
+            type: string
+        - name: memory_id
+          in: path
+          required: true
+          description: The ID of the memory item to delete.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteMemoryResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Memory Stores
+      x-ms-foundry-meta:
+        required_previews:
+          - MemoryStores=V1Preview
+  /memory_stores/{name}/items:list:
+    post:
       operationId: listMemories
       description: List all memory items in a memory store.
       parameters:
@@ -5511,6 +5665,13 @@ paths:
           description: The name of the memory store.
           schema:
             type: string
+        - name: kind
+          in: query
+          required: false
+          description: The kind of the memory item.
+          schema:
+            $ref: '#/components/schemas/MemoryItemKind'
+          explode: false
         - name: limit
           in: query
           required: false
@@ -5592,56 +5753,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Memory Stores
-      x-ms-foundry-meta:
-        conditional_previews:
-          - MemoryStores=V1Preview
-  /memory_stores/{name}/memories/{memory_id}:
-    post:
-      operationId: updateMemory
-      description: Update a memory item in a memory store.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - MemoryStores=V1Preview
-        - name: name
-          in: path
-          required: true
-          description: The name of the memory store.
-          schema:
-            type: string
-        - name: memory_id
-          in: path
-          required: true
-          description: The ID of the memory item to update.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MemoryItem'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Memory Stores
       requestBody:
         required: true
         content:
@@ -5649,111 +5760,13 @@ paths:
             schema:
               type: object
               properties:
-                content:
+                scope:
                   type: string
-                  description: The updated content of the memory.
+                  description: The namespace that logically groups and isolates memories, such as a user ID.
               required:
-                - content
+                - scope
       x-ms-foundry-meta:
-        conditional_previews:
-          - MemoryStores=V1Preview
-    get:
-      operationId: getMemory
-      description: Retrieve a memory item from a memory store.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - MemoryStores=V1Preview
-        - name: name
-          in: path
-          required: true
-          description: The name of the memory store.
-          schema:
-            type: string
-        - name: memory_id
-          in: path
-          required: true
-          description: The ID of the memory item to retrieve.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MemoryItem'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Memory Stores
-      x-ms-foundry-meta:
-        conditional_previews:
-          - MemoryStores=V1Preview
-    delete:
-      operationId: deleteMemory
-      description: Delete a memory item from a memory store.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - MemoryStores=V1Preview
-        - name: name
-          in: path
-          required: true
-          description: The name of the memory store.
-          schema:
-            type: string
-        - name: memory_id
-          in: path
-          required: true
-          description: The ID of the memory item to delete.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DeleteMemoryResponse'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Memory Stores
-      x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
   /memory_stores/{name}/updates/{update_id}:
     get:
@@ -5803,7 +5816,7 @@ paths:
       tags:
         - Memory Stores
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
   /memory_stores/{name}:delete_scope:
     post:
@@ -5859,7 +5872,7 @@ paths:
               required:
                 - scope
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
   /memory_stores/{name}:search_memories:
     post:
@@ -5927,7 +5940,7 @@ paths:
               required:
                 - scope
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
   /memory_stores/{name}:update_memories:
     post:
@@ -6007,7 +6020,7 @@ paths:
               required:
                 - scope
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
   /models:
     get:
@@ -9316,7 +9329,7 @@ paths:
               required:
                 - name
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - Skills=V1Preview
     get:
       operationId: Skills_listSkills
@@ -9412,7 +9425,7 @@ paths:
       tags:
         - Skills
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - Skills=V1Preview
   /skills/{name}:
     get:
@@ -9456,7 +9469,7 @@ paths:
       tags:
         - Skills
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - Skills=V1Preview
     post:
       operationId: Skills_updateSkill
@@ -9526,7 +9539,7 @@ paths:
                     with a maximum length of 512 characters.
                   x-oaiTypeLabel: map
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - Skills=V1Preview
     delete:
       operationId: Skills_deleteSkill
@@ -9569,7 +9582,7 @@ paths:
       tags:
         - Skills
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - Skills=V1Preview
   /skills/{name}:download:
     get:
@@ -9614,7 +9627,7 @@ paths:
       tags:
         - Skills
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - Skills=V1Preview
   /skills:import:
     post:
@@ -9660,7 +9673,7 @@ paths:
               format: binary
         description: The zip package used to create the skill.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - Skills=V1Preview
   /toolboxes:
     get:
@@ -9707,14 +9720,6 @@ paths:
           schema:
             type: string
           explode: false
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Toolboxes=V1Preview
         - name: api-version
           in: query
           required: true
@@ -9756,9 +9761,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Toolboxes
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Toolboxes=V1Preview
   /toolboxes/{name}:
     get:
       operationId: getToolbox
@@ -9770,14 +9772,6 @@ paths:
           description: The name of the toolbox to retrieve.
           schema:
             type: string
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Toolboxes=V1Preview
         - name: api-version
           in: query
           required: true
@@ -9800,22 +9794,11 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Toolboxes
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Toolboxes=V1Preview
     patch:
       operationId: updateToolbox
       description: Update a toolbox to point to a specific version.
       parameters:
         - $ref: '#/components/parameters/UpdateToolboxRequest.name'
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Toolboxes=V1Preview
         - name: api-version
           in: query
           required: true
@@ -9844,9 +9827,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateToolboxRequest'
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Toolboxes=V1Preview
     delete:
       operationId: deleteToolbox
       description: Delete a toolbox and all its versions.
@@ -9857,14 +9837,6 @@ paths:
           description: The name of the toolbox to delete.
           schema:
             type: string
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Toolboxes=V1Preview
         - name: api-version
           in: query
           required: true
@@ -9883,9 +9855,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Toolboxes
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Toolboxes=V1Preview
   /toolboxes/{name}/versions:
     post:
       operationId: createToolboxVersion
@@ -9898,14 +9867,6 @@ paths:
           schema:
             type: string
             maxLength: 256
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Toolboxes=V1Preview
         - name: api-version
           in: query
           required: true
@@ -9955,9 +9916,6 @@ paths:
                   description: Policy configuration for this toolbox version.
               required:
                 - tools
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Toolboxes=V1Preview
     get:
       operationId: listToolboxVersions
       description: List all versions of a toolbox.
@@ -10008,14 +9966,6 @@ paths:
           schema:
             type: string
           explode: false
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Toolboxes=V1Preview
         - name: api-version
           in: query
           required: true
@@ -10057,9 +10007,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Toolboxes
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Toolboxes=V1Preview
   /toolboxes/{name}/versions/{version}:
     get:
       operationId: getToolboxVersion
@@ -10077,14 +10024,6 @@ paths:
           description: The version identifier to retrieve.
           schema:
             type: string
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Toolboxes=V1Preview
         - name: api-version
           in: query
           required: true
@@ -10107,9 +10046,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Toolboxes
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Toolboxes=V1Preview
     delete:
       operationId: deleteToolboxVersion
       description: Delete a specific version of a toolbox.
@@ -10126,14 +10062,6 @@ paths:
           description: The version identifier to delete.
           schema:
             type: string
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Toolboxes=V1Preview
         - name: api-version
           in: query
           required: true
@@ -10152,9 +10080,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Toolboxes
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Toolboxes=V1Preview
 security:
   - OAuth2Auth:
       - https://ai.azure.com/.default
@@ -10413,6 +10338,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AgentCardSkill'
+          minItems: 1
           maxItems: 16
           description: The set of skills that an agent can perform.
       x-ms-foundry-meta:
@@ -10482,6 +10408,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AgentCardSkill'
+          minItems: 1
           maxItems: 16
           description: The set of skills that an agent can perform.
       x-ms-foundry-meta:
@@ -10568,7 +10495,6 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - HostedAgents=V1Preview
-          - ContainerAgents=V1Preview
           - WorkflowAgents=V1Preview
           - CodeAgents=V1Preview
           - ExternalAgents=V1Preview
@@ -10577,7 +10503,6 @@ components:
       enum:
         - HostedAgents=V1Preview
         - WorkflowAgents=V1Preview
-        - ContainerAgents=V1Preview
         - AgentEndpoints=V1Preview
         - CodeAgents=V1Preview
         - ExternalAgents=V1Preview
@@ -12484,7 +12409,7 @@ components:
         - $ref: '#/components/schemas/MemoryItem'
       description: A memory item containing a summary extracted from conversations.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     ClusterInsightResult:
       type: object
@@ -12922,7 +12847,6 @@ components:
           x-ms-foundry-meta:
             conditional_previews:
               - HostedAgents=V1Preview
-              - ContainerAgents=V1Preview
               - WorkflowAgents=V1Preview
               - CodeAgents=V1Preview
               - ExternalAgents=V1Preview
@@ -12950,7 +12874,6 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - HostedAgents=V1Preview
-          - ContainerAgents=V1Preview
           - WorkflowAgents=V1Preview
           - CodeAgents=V1Preview
           - ExternalAgents=V1Preview
@@ -13074,7 +12997,6 @@ components:
           x-ms-foundry-meta:
             conditional_previews:
               - HostedAgents=V1Preview
-              - ContainerAgents=V1Preview
               - WorkflowAgents=V1Preview
               - CodeAgents=V1Preview
               - ExternalAgents=V1Preview
@@ -13088,7 +13010,6 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - HostedAgents=V1Preview
-          - ContainerAgents=V1Preview
           - WorkflowAgents=V1Preview
           - CodeAgents=V1Preview
           - ExternalAgents=V1Preview
@@ -13823,18 +13744,14 @@ components:
       type: object
       required:
         - object
-        - name
         - memory_id
         - deleted
       properties:
         object:
           type: string
           enum:
-            - memory.deleted
-          description: The object type. Always 'memory.deleted'.
-        name:
-          type: string
-          description: The name of the memory store.
+            - memory_store.item.deleted
+          description: The object type. Always 'memory_store.item.deleted'.
         memory_id:
           type: string
           description: The unique ID of the deleted memory item.
@@ -13843,7 +13760,7 @@ components:
           description: Whether the memory item was successfully deleted.
       description: Response for deleting a memory item from a memory store.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     DeleteMemoryStoreResponse:
       type: object
@@ -13864,7 +13781,7 @@ components:
           type: boolean
           description: Whether the memory store was successfully deleted.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     DeleteResponseResult:
       type: object
@@ -13928,11 +13845,11 @@ components:
     Dimension:
       type: object
       required:
-        - dimension_id
+        - id
         - description
         - weight
       properties:
-        dimension_id:
+        id:
           type: string
           description: Stable identifier for this dimension (snake_case, e.g., `correct_resolution`). Required. Provided by the user when manually creating a rubric evaluator or during human-in-the-loop review of a generated set; the generation pipeline produces an initial value the user can edit. Editable when saving new versions.
         description:
@@ -13985,6 +13902,10 @@ components:
           type: string
           enum:
             - Entra
+        isolation_key_source:
+          allOf:
+            - $ref: '#/components/schemas/IsolationKeySource'
+          description: The source from which the per-user isolation key is derived for requests authorized via this scheme. Defaults to Entra-based isolation when omitted.
       allOf:
         - $ref: '#/components/schemas/AgentEndpointAuthorizationScheme'
       x-ms-foundry-meta:
@@ -14004,6 +13925,20 @@ components:
       allOf:
         - $ref: '#/components/schemas/BaseCredentials'
       description: Entra ID credential definition
+    EntraIsolationKeySource:
+      type: object
+      required:
+        - kind
+      properties:
+        kind:
+          type: string
+          enum:
+            - Entra
+      allOf:
+        - $ref: '#/components/schemas/IsolationKeySource'
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentEndpoints=V1Preview
     Eval:
       type: object
       required:
@@ -14892,7 +14827,7 @@ components:
             - $ref: '#/components/schemas/EvaluationRuleAction'
           description: Definition of the evaluation rule action.
           x-ms-foundry-meta:
-            conditional_previews:
+            required_previews:
               - Evaluations=V1Preview
         filter:
           allOf:
@@ -16316,6 +16251,20 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - Routines=V1Preview
+    HeaderIsolationKeySource:
+      type: object
+      required:
+        - kind
+      properties:
+        kind:
+          type: string
+          enum:
+            - Header
+      allOf:
+        - $ref: '#/components/schemas/IsolationKeySource'
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentEndpoints=V1Preview
     HeaderTelemetryEndpointAuth:
       type: object
       required:
@@ -16832,6 +16781,31 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - Routines=V1Preview
+    IsolationKeySource:
+      type: object
+      required:
+        - kind
+      properties:
+        kind:
+          $ref: '#/components/schemas/IsolationKeySourceKind'
+      discriminator:
+        propertyName: kind
+        mapping:
+          Entra: '#/components/schemas/EntraIsolationKeySource'
+          Header: '#/components/schemas/HeaderIsolationKeySource'
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentEndpoints=V1Preview
+    IsolationKeySourceKind:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - Entra
+            - Header
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentEndpoints=V1Preview
     ItemGenerationParams:
       type: object
       required:
@@ -17018,7 +16992,7 @@ components:
           procedural: '#/components/schemas/ProceduralMemoryItem'
       description: A single memory item stored in the memory store, containing content and metadata.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     MemoryItemKind:
       anyOf:
@@ -17030,7 +17004,7 @@ components:
             - procedural
       description: Memory item kind.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     MemoryOperation:
       type: object
@@ -17048,7 +17022,7 @@ components:
           description: The memory item to create, update, or delete.
       description: Represents a single memory operation (create, update, or delete) performed on a memory item.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     MemoryOperationKind:
       anyOf:
@@ -17060,7 +17034,7 @@ components:
             - delete
       description: Memory operation kind.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     MemorySearchItem:
       type: object
@@ -17073,7 +17047,7 @@ components:
           description: Retrieved memory item.
       description: A retrieved memory item from memory search.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     MemorySearchOptions:
       type: object
@@ -17084,7 +17058,7 @@ components:
           description: Maximum number of memory items to return.
       description: Memory search options.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     MemorySearchPreviewTool:
       type: object
@@ -17182,7 +17156,7 @@ components:
         - $ref: '#/components/schemas/MemoryStoreDefinition'
       description: Default memory store implementation.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     MemoryStoreDefaultOptions:
       type: object
@@ -17212,7 +17186,7 @@ components:
           default: 0
       description: Default memory store configurations.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     MemoryStoreDefinition:
       type: object
@@ -17229,7 +17203,7 @@ components:
           default: '#/components/schemas/MemoryStoreDefaultDefinition'
       description: Base definition for memory store configurations.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     MemoryStoreDeleteScopeResponse:
       type: object
@@ -17255,7 +17229,7 @@ components:
           description: Whether the deletion operation was successful.
       description: Response for deleting memories from a scope.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     MemoryStoreKind:
       anyOf:
@@ -17265,7 +17239,7 @@ components:
             - default
       description: The type of memory store implementation to use.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     MemoryStoreObject:
       type: object
@@ -17312,7 +17286,7 @@ components:
           description: The definition of the memory store.
       description: A memory store that can store and retrieve user memories.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     MemoryStoreOperationUsage:
       type: object
@@ -17350,7 +17324,7 @@ components:
           description: The total number of tokens used.
       description: Usage statistics of a memory store operation.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     MemoryStoreSearchResponse:
       type: object
@@ -17373,7 +17347,7 @@ components:
           description: Usage statistics associated with the memory search operation.
       description: Memory search response.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     MemoryStoreUpdateCompletedResult:
       type: object
@@ -17392,7 +17366,7 @@ components:
           description: Usage statistics associated with the memory update operation.
       description: Memory update result.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     MemoryStoreUpdateResponse:
       type: object
@@ -17420,7 +17394,7 @@ components:
           description: Error object that describes the error when status is "failed".
       description: Provides the status of a memory store update operation.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     MemoryStoreUpdateStatus:
       anyOf:
@@ -17434,7 +17408,7 @@ components:
             - superseded
       description: Status of a memory store update operation.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     MicrosoftFabricPreviewTool:
       type: object
@@ -33257,6 +33231,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/MemoryItem'
       description: A memory item containing a procedure extracted from conversations.
+      x-ms-foundry-meta:
+        required_previews:
+          - MemoryStores=V1Preview
     PromptAgentDefinition:
       type: object
       required:
@@ -34005,7 +33982,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Dimension'
-          description: "The set of dimensions — the scoring blueprint used by the LLM judge. Quality evaluators include a non-editable residual dimension with dimension_id 'general_quality' (always_applicable: true); safety evaluators include 'general_policy_compliance'. Both use the same Dimension structure."
+          description: "The set of dimensions — the scoring blueprint used by the LLM judge. Quality evaluators include a non-editable residual dimension with id 'general_quality' (always_applicable: true); safety evaluators include 'general_policy_compliance'. Both use the same Dimension structure."
         pass_threshold:
           type: number
           format: float
@@ -35385,7 +35362,6 @@ components:
           x-ms-foundry-meta:
             conditional_previews:
               - HostedAgents=V1Preview
-              - ContainerAgents=V1Preview
               - WorkflowAgents=V1Preview
               - CodeAgents=V1Preview
               - ExternalAgents=V1Preview
@@ -35447,7 +35423,7 @@ components:
         - $ref: '#/components/schemas/MemoryItem'
       description: A memory item specifically containing user profile information extracted from conversations, such as preferences, interests, and personal details.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - MemoryStores=V1Preview
     VersionIndicator:
       type: object
