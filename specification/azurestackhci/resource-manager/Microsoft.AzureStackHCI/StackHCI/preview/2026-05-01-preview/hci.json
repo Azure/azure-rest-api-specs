@@ -7793,7 +7793,7 @@
       "description": "Properties for the change-ring request.",
       "properties": {
         "targetRing": {
-          "$ref": "#/definitions/VsrRing",
+          "type": "string",
           "description": "The target ring for the cluster."
         }
       },
@@ -8251,7 +8251,7 @@
           "readOnly": true
         },
         "ring": {
-          "$ref": "#/definitions/VsrRing",
+          "type": "string",
           "description": "The ring to which this cluster belongs to.",
           "readOnly": true
         },
@@ -18347,42 +18347,6 @@
             "name": "ThinProvisioned",
             "value": "ThinProvisioned",
             "description": "Thin provisioned provisioning type."
-          }
-        ]
-      }
-    },
-    "VsrRing": {
-      "type": "string",
-      "description": "The Validated Solution Recipe (VSR) ring that determines when a cluster\nreceives solution updates. Rings gate rollout progressively from internal\nvalidation through broad production deployment.",
-      "enum": [
-        "CI",
-        "Insider",
-        "EarlyAdopter",
-        "Production"
-      ],
-      "x-ms-enum": {
-        "name": "VsrRing",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "CI",
-            "value": "CI",
-            "description": "CI ring — used for automated continuous-integration testing and ProdCI validation without sideloading."
-          },
-          {
-            "name": "Insider",
-            "value": "Insider",
-            "description": "Insider ring — available to all Insider-ring customers and OEMs for broader validation before general availability."
-          },
-          {
-            "name": "EarlyAdopter",
-            "value": "EarlyAdopter",
-            "description": "EarlyAdopter ring — opt-in ring for customers who want updates ahead of the general Production rollout."
-          },
-          {
-            "name": "Production",
-            "value": "Production",
-            "description": "Production ring — general-availability ring for all customers."
           }
         ]
       }

@@ -706,28 +706,6 @@ union WitnessType {
 }
 
 /**
- * The Validated Solution Recipe (VSR) ring that determines when a cluster
- * receives solution updates. Rings gate rollout progressively from internal
- * validation through broad production deployment.
- */
-@added(Versions.v2026_05_01_preview)
-union VsrRing {
-  string,
-
-  /** CI ring — used for automated continuous-integration testing and ProdCI validation without sideloading. */
-  CI: "CI",
-
-  /** Insider ring — available to all Insider-ring customers and OEMs for broader validation before general availability. */
-  Insider: "Insider",
-
-  /** EarlyAdopter ring — opt-in ring for customers who want updates ahead of the general Production rollout. */
-  EarlyAdopter: "EarlyAdopter",
-
-  /** Production ring — general-availability ring for all customers. */
-  Production: "Production",
-}
-
-/**
  * Type of secrets to store
  */
 union SecretsType {
@@ -2040,7 +2018,7 @@ model ClusterProperties {
    */
   @visibility(Lifecycle.Read)
   @added(Versions.v2026_05_01_preview)
-  ring?: VsrRing;
+  ring?: string;
 
   /**
    * Endpoint configured for management from the Azure portal.
@@ -2873,7 +2851,7 @@ model ChangeRingRequestProperties {
   /**
    * The target ring for the cluster.
    */
-  targetRing: VsrRing;
+  targetRing: string;
 }
 
 /**
