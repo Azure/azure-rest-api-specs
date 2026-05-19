@@ -48,6 +48,9 @@ enum APIVersions {
 
   @doc("The 2025-11-01-preview version of the Azure Load Testing API.")
   v2025_11_01_preview: "2025-11-01-preview",
+
+  @doc("The 2026-04-01 version of the Azure Load Testing API.")
+  v2026_04_01: "2026-04-01",
 }
 
 @doc("OAuth 2.0 Flow with Microsoft Entra ID.")
