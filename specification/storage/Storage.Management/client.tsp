@@ -352,7 +352,11 @@ op getDeletedAccountCustomized(
 ):
   | Azure.ResourceManager.ArmResponse<Microsoft.Storage.DeletedAccount>
   | Microsoft.Storage.ErrorResponse;
-@@override(DeletedAccounts.get, getDeletedAccountCustomized, "java,go,python");
+@@override(
+  DeletedAccounts.get,
+  getDeletedAccountCustomized,
+  "java,go,python,javascript"
+);
 @@clientName(
   Azure.ResourceManager.CommonTypes.ProxyResource,
   "ArmProxyResource",
