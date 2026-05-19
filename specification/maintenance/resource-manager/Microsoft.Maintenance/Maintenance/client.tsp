@@ -8,6 +8,11 @@ using Microsoft.Maintenance;
   "MaintenanceManagementClient",
   "javascript"
 );
+@@clientName(
+  Microsoft.Maintenance,
+  "MaintenanceManagementClient",
+  "python"
+);
 
 // csharp configurations
 @@clientName(
