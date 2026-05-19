@@ -88,9 +88,11 @@ interface ManagedPrivateEndpointResources {
 @@maxLength(ManagedPrivateEndpointResource.name, 127);
 @@minLength(ManagedPrivateEndpointResource.name, 1);
 @@doc(ManagedPrivateEndpointResource.name, "Managed private endpoint name");
-@@doc(ManagedPrivateEndpointResource.properties,
+@@doc(
+  ManagedPrivateEndpointResource.properties,
   "Managed private endpoint properties."
 );
-@@doc(ManagedPrivateEndpointResources.createOrUpdate::parameters.resource,
+@@doc(
+  ManagedPrivateEndpointResources.createOrUpdate::parameters.resource,
   "Managed private endpoint resource definition."
 );

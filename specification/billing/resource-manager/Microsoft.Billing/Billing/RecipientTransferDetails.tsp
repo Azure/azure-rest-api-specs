@@ -86,13 +86,16 @@ interface RecipientTransfers {
   >;
 }
 
-@@doc(RecipientTransferDetails.name,
+@@doc(
+  RecipientTransferDetails.name,
   "The ID that uniquely identifies a transfer request."
 );
 @@doc(RecipientTransferDetails.properties, "Details of the transfer.");
-@@doc(RecipientTransfers.accept::parameters.body,
+@@doc(
+  RecipientTransfers.accept::parameters.body,
   "Request parameters that are provided to the accept transfer operation."
 );
-@@doc(RecipientTransfers.validate::parameters.body,
+@@doc(
+  RecipientTransfers.validate::parameters.body,
   "Request parameters that are provided to the validate transfer operation."
 );

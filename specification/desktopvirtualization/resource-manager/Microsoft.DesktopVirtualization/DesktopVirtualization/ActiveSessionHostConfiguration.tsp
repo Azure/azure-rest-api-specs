@@ -2,17 +2,21 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./HostPool.tsp";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.DesktopVirtualization;
 /**
  * Schema for ActiveSessionHostConfiguration properties.
+ * @Introduced in 2023-11-01-preview
  */
+@added(Versions.vLatestPreview)
 @parentResource(HostPool)
 @singleton("default")
 model ActiveSessionHostConfiguration
@@ -27,6 +31,10 @@ model ActiveSessionHostConfiguration
   >;
 }
 
+/**
+ * @Introduced in 2023-11-01-preview
+ */
+@added(Versions.vLatestPreview)
 @armResourceOperations
 interface ActiveSessionHostConfigurations {
   /**
@@ -49,9 +57,11 @@ interface ActiveSessionHostConfigurations {
 
 @@maxLength(ActiveSessionHostConfiguration.name, 24);
 @@minLength(ActiveSessionHostConfiguration.name, 3);
-@@doc(ActiveSessionHostConfiguration.name,
+@@doc(
+  ActiveSessionHostConfiguration.name,
   "The name of the ActiveSessionHostConfiguration within the specified ActiveSessionHostConfiguration group"
 );
-@@doc(ActiveSessionHostConfiguration.properties,
+@@doc(
+  ActiveSessionHostConfiguration.properties,
   "Detailed properties for ActiveSessionHostConfiguration"
 );
