@@ -1209,6 +1209,169 @@ union OpenIdConnectClientCredentialMethod {
 // C# @@scope customizations.
 @@scope(ContainerAppsLabelHistory.listLabelHistory, "!csharp");
 
+// C# @@usage customizations.
+@@usage(
+  ContainerAppAuthToken,
+  Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@usage(
+  AvailableWorkloadProfile,
+  Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@usage(
+  AvailableWorkloadProfileProperties,
+  Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@usage(
+  BillingMeter,
+  Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@usage(
+  BillingMeterProperties,
+  Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@usage(
+  Diagnostics,
+  Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@usage(
+  DiagnosticsProperties,
+  Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@usage(
+  DiagnosticsDefinition,
+  Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@usage(
+  DiagnosticsStatus,
+  Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@usage(
+  DiagnosticDataProviderMetadata,
+  Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@usage(
+  DiagnosticDataProviderMetadataPropertyBagItem,
+  Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@usage(
+  DiagnosticDataTableResponseObject,
+  Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@usage(
+  DiagnosticDataTableResponseColumn,
+  Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@usage(
+  DiagnosticRendering,
+  Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@usage(
+  DiagnosticsDataApiResponse,
+  Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@usage(
+  DiagnosticSupportTopic,
+  Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@usage(
+  EnvironmentAuthToken,
+  Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@usage(
+  PrivateLinkResource,
+  Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@usage(
+  Replica,
+  Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@usage(
+  ReplicaContainer,
+  Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@usage(
+  Revision,
+  Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@usage(
+  workloadProfileStates,
+  Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@usage(
+  WorkloadProfileStatesProperties,
+  Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@usage(
+  WorkflowEnvelope,
+  Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@usage(
+  WorkflowEnvelopeProperties,
+  Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@usage(
+  WorkflowHealth,
+  Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@usage(
+  ErrorEntity,
+  Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
 // C# @@doc customizations.
 @@doc(
   JobPatchProperties.properties,
