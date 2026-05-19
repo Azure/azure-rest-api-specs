@@ -134,21 +134,11 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "Retry-After seconds value to help with polling"
-              },
-              "x-ms-ccf-transaction-id": {
-                "type": "string",
-                "description": "Transaction ID for the submitted entry"
               }
             }
           },
           "400": {
             "description": "Validation error response",
-            "schema": {
-              "type": "file"
-            }
-          },
-          "401": {
-            "description": "Unauthorized error response, returned when JWT authentication is required and the request fails authentication.",
             "schema": {
               "type": "file"
             }
@@ -237,12 +227,6 @@
               "type": "file"
             }
           },
-          "401": {
-            "description": "Unauthorized error response, returned when JWT authentication is required and the request fails authentication.",
-            "schema": {
-              "type": "file"
-            }
-          },
           "404": {
             "description": "Not found error response",
             "schema": {
@@ -321,12 +305,6 @@
               "type": "file"
             }
           },
-          "401": {
-            "description": "Unauthorized error response, returned when JWT authentication is required and the request fails authentication.",
-            "schema": {
-              "type": "file"
-            }
-          },
           "404": {
             "description": "Not found error response",
             "schema": {
@@ -395,12 +373,6 @@
           },
           "400": {
             "description": "Validation error response",
-            "schema": {
-              "type": "file"
-            }
-          },
-          "401": {
-            "description": "Unauthorized error response, returned when JWT authentication is required and the request fails authentication.",
             "schema": {
               "type": "file"
             }
@@ -503,12 +475,6 @@
               "type": "file"
             }
           },
-          "401": {
-            "description": "Unauthorized error response, returned when JWT authentication is required and the request fails authentication.",
-            "schema": {
-              "type": "file"
-            }
-          },
           "404": {
             "description": "Not found error response",
             "schema": {
@@ -557,6 +523,7 @@
     }
   },
   "definitions": {
+    "AnyCborError": {},
     "CreateEntryCreated": {
       "type": "object",
       "description": "Response of entry submission if the response can be served immediately, mandatory in IETF SCITT draft",
@@ -716,20 +683,6 @@
     "Response400Cbor": {
       "type": "object",
       "description": "Validation error response",
-      "properties": {
-        "error": {
-          "type": "string",
-          "format": "byte",
-          "description": "CBOR content of the error object"
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
-    "Response401Cbor": {
-      "type": "object",
-      "description": "Unauthorized error response, returned when JWT authentication is required and the request fails authentication.",
       "properties": {
         "error": {
           "type": "string",

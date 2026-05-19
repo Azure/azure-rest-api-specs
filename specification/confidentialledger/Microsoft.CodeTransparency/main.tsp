@@ -249,10 +249,6 @@ model CreateEntryPending {
   @header("Retry-After")
   retryAfter?: int32;
 
-  @doc("Transaction ID for the submitted entry")
-  @header("x-ms-ccf-transaction-id")
-  transactionId?: string;
-
   // Example CBOR:
   // {
   //   / locator / "OperationID": "67f89d5f0042e3ad42...35a1f190",
@@ -605,7 +601,7 @@ model Response400Cbor {
   error: ConciseProblemDetailsCbor;
 }
 
-@added(Versions.`2025-01-31-preview`)
+@added(Versions.`2026-03-26`)
 @doc("Unauthorized error response, returned when JWT authentication is required and the request fails authentication.")
 model Response401Cbor {
   @doc("Status code")
@@ -693,11 +689,15 @@ model Response503Cbor {
   error: ConciseProblemDetailsCbor;
 }
 
-alias AnyCborError =
-  | Response400Cbor
-  | Response401Cbor
-  | Response404Cbor
-  | Response429Cbor
-  | Response500Cbor
-  | Response503Cbor;
+union AnyCborError {
+  Response400Cbor,
+
+  @added(Versions.`2026-03-26`)
+  Response401Cbor,
+
+  Response404Cbor,
+  Response429Cbor,
+  Response500Cbor,
+  Response503Cbor,
+}
 alias CborServerErrors = Response500Cbor | Response503Cbor;
