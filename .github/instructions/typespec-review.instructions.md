@@ -35,6 +35,78 @@ of file" or "around line 50" are not acceptable -- always resolve the
 actual line number by reading the file content. Respond in markdown
 format.
 
+### Rule Citation Format (REQUIRED for posted PR comments)
+
+Every rule ID cited in a posted PR comment **MUST** be accompanied by a
+markdown hyperlink to the rule's authoritative location in this
+repository. A bare rule ID without a link is **not acceptable** --
+authors must be able to one-click navigate to the exact section that
+defines the rule.
+
+**Format.** Use a markdown link whose visible text is the rule ID and
+whose target is a permanent GitHub URL (use the `main` branch ref)
+anchored to the section that defines the rule:
+
+```
+[<RULE-ID>](https://github.com/Azure/azure-rest-api-specs/blob/main/<path-to-rule-file>#<section-anchor>)
+```
+
+**Where to link.** Pick the most specific source for the rule:
+
+- TypeSpec-specific rules → link to the corresponding section in
+  `.github/instructions/typespec-review.instructions.md` or
+  `.github/instructions/typespec-project.instructions.md`.
+- ARM RPC rules (e.g., `RPC-Put-V1-12`, `RPC-Async-V1-06`) → link to
+  `.github/instructions/armapi-review.instructions.md`.
+- Generic OpenAPI rules (e.g., `OAPI020`, `OAPI034`, `WHATIF-001`) →
+  link to `.github/instructions/openapi-review.instructions.md` or to
+  the dedicated reference file under
+  `.github/skills/azure-api-review/references/*.md`.
+
+**Multiple rule IDs.** When a finding cites more than one rule ID, each
+ID **MUST** be its own hyperlink (e.g., `[OAPI034](...) / [RPC-Put-V1-12](...)`).
+
+**Anchor resolution.** GitHub auto-generates section anchors by
+lowercasing the heading, replacing spaces with `-`, and stripping
+punctuation. When in doubt, open the rendered file on GitHub and copy
+the link from the heading's anchor icon.
+
+### Reviewer-Posted Parity (REQUIRED -- no divergence)
+
+The set of findings posted to the GitHub PR **MUST** be
+**byte-for-byte identical** to the set of findings shown to the
+reviewer in chat. There **MUST** be no discrepancy in content,
+count, ordering, severity, rule IDs, links, code blocks, examples,
+fix snippets, or the agent's posted-by marker.
+
+**Hard rules.**
+
+1. **Single source of truth.** Build each comment body **once** as the
+   canonical text for that finding. The text rendered to the reviewer
+   in chat and the text written into the GitHub review payload **MUST**
+   come from that same string -- never a reconstructed or shortened
+   variant.
+2. **Verbatim reproduction.** When assembling the review payload
+   (`POST /repos/{owner}/{repo}/pulls/{pull_number}/reviews`), each
+   `comments[].body` **MUST** contain the canonical text unchanged:
+   rule-ID hyperlinks, code blocks, examples, citations, and the
+   trailing posted-by HTML comment.
+3. **No re-authoring during payload assembly.** Heredoc rebuilds,
+   payload-time paraphrasing, or multi-finding consolidation that
+   drops content is **forbidden**.
+4. **Exact one-to-one mapping.** Every finding shown to the reviewer
+   maps to exactly one posted inline comment. Severity tags and
+   `[NEW]`/`[EXISTING]` classifications **MUST** match.
+5. **Post-post verification (REQUIRED).** Immediately after posting,
+   the agent **MUST** re-fetch each created comment
+   (`GET /repos/{owner}/{repo}/pulls/comments/{id}`) and confirm body
+   length, hyperlinks, code-fence blocks, and marker. On any mismatch,
+   PATCH the comment to restore the canonical text and re-verify
+   before reporting completion.
+6. **Failure handling.** If a finding cannot be posted as-is, report
+   the discrepancy explicitly to the reviewer instead of silently
+   posting a shortened variant.
+
 ---
 
 ## 1. Project Structure & File Organization
@@ -211,8 +283,8 @@ Flag these issues when found:
 - **Doc comment copy-paste errors** — verify that doc comments accurately describe the element they annotate (e.g., a `WorkspaceUpdate` model should not be documented as "Describes an experiment update").
 - **Spelling/typo errors in doc comments and descriptions** — flag common misspellings (e.g., `payed` → `paid`, `consoto` → `contoso`) as they propagate into generated SDKs and documentation.
 - **Deprecated operations missing description text** -- the TypeSpec `#deprecated` directive does not always surface in generated swagger JSON. For deprecated operations, also include deprecation notice in the `@doc` description (e.g., "This operation is deprecated and will be removed in a future version. Use resetSmbPassword instead.") so it appears in generated SDKs and documentation.
-- **Key Vault URI properties** -- properties referencing an Azure Key Vault should use ``armResourceIdentifier`` with type ``Microsoft.KeyVault/vaults`` (generating ``format: arm-id``), not a ``url``/``string`` with a vault URI. ARM resource IDs are the standard way to reference Azure resources, enabling linked access checks and RBAC integration.
-- **Enum values with underscores or ALL_CAPS** -- union/enum member values **MUST** use PascalCase (e.g., ``InProgress``, not ``In_Progress`` or ``IN_PROGRESS``). Underscores and all-caps violate Azure naming conventions and look inconsistent in generated SDKs.
+- **Key Vault URI properties** -- properties referencing an Azure Key Vault should use `armResourceIdentifier` with type `Microsoft.KeyVault/vaults` (generating `format: arm-id`), not a `url`/`string` with a vault URI. ARM resource IDs are the standard way to reference Azure resources, enabling linked access checks and RBAC integration.
+- **Enum values with underscores or ALL_CAPS** -- union/enum member values **MUST** use PascalCase (e.g., `InProgress`, not `In_Progress` or `IN_PROGRESS`). Underscores and all-caps violate Azure naming conventions and look inconsistent in generated SDKs.
 - **Polymorphic-format properties** — a single property that accepts multiple formats (e.g., both an integer `5` and a percentage string `"20%"`) creates ambiguity and error-prone client code. Model these as separate properties (e.g., `maxConcurrency: int32` and `maxConcurrencyPercent: string`) or use a discriminated union model.
 - **`@added` version misalignment** — when using `@added(Versions.vXXXX)` to gate a new feature, verify that the feature does not inadvertently alter descriptions or schemas of earlier API versions. If the feature is for version `2025-08-01`, it must not affect the generated OpenAPI for `2025-06-01`.
 - **`@flattenProperty` on new APIs** — do not add new `@flattenProperty` decorators. Flattening creates SDK-breaking issues and is discouraged for new resource types and properties. Existing flattened properties may remain for backward compatibility.
@@ -290,11 +362,12 @@ Flag these issues when found:
 
 ## 9. TypeSpec Adoption Requirements
 
-### 9.1 TypeSpec Mandate
+### 9.1 TypeSpec Mandate (TSP-REQUIRED-V1)
 
-- As of March 30, 2026, all brownfield services are expected to have migrated to TypeSpec.
-- Starting Q4 FY26, new API version PRs without TypeSpec source will be blocked from merge, and SDK releases from non-TypeSpec specifications will be blocked.
-- If a PR introduces a new API version using hand-authored OpenAPI (without TypeSpec source), flag it and ask whether TypeSpec migration is in progress.
+- TypeSpec with the Azure TypeSpec libraries (`@azure-tools/typespec-azure-core`, `@azure-tools/typespec-azure-resource-manager`, and related packages) is **required** for all new API versions, both control plane and data plane. The full rule definition is in [`openapi-review.instructions.md` §2A](./openapi-review.instructions.md) (rule ID `TSP-REQUIRED-V1`).
+- Brownfield services were required to complete migration to TypeSpec by March 30, 2026.
+- Updates to handwritten OpenAPI inside **existing** API version directories remain permitted; only new API versions must use TypeSpec.
+- A deterministic CI check to block non-compliant PRs is in development (PR [#42823](https://github.com/Azure/azure-rest-api-specs/pull/42823)). Until that check ships, this rule is enforced by the ARM API Reviewer agent.
 
 ---
 
@@ -334,7 +407,7 @@ When reviewing TypeSpec files, verify:
 - ✅ `@added` version targeting is correct — features don't leak into earlier API version outputs
 - ✅ TypeSpec conversion PRs: no API changes (horizontal only); generated OpenAPI matches original
 - ✅ TypeSpec conversion PRs: `swagger-to-sdk` entries removed; `readme.{language}.md` files deleted
-- ✅ New API version PRs use TypeSpec source (hand-authored OpenAPI flagged post-Q4 FY26)
+- ✅ New API versions use TypeSpec source (TSP-REQUIRED-V1) — updates to existing handwritten OpenAPI remain permitted
 - ✅ No polymorphic-format properties — use separate typed properties or discriminated unions
 - ✅ Numeric properties use numeric types, not string (TSP-NUMERIC-TYPE)
 - ✅ No `Record<>` usage when typed models can be defined

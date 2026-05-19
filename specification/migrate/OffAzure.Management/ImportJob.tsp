@@ -39,6 +39,7 @@ interface ImportJobs {
 }
 
 @@doc(ImportJob.name, " Jobs name");
-@@doc(ImportJob.properties,
+@@doc(
+  ImportJob.properties,
   "The resource-specific properties for this resource."
 );

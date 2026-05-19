@@ -47,9 +47,12 @@ interface DatabasePrincipalAssignments {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     DatabasePrincipalAssignment,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
-      ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+          ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -61,10 +64,12 @@ interface DatabasePrincipalAssignments {
   >;
 }
 
-@@doc(DatabasePrincipalAssignment.name,
+@@doc(
+  DatabasePrincipalAssignment.name,
   "The name of the Kusto principalAssignment."
 );
 @@doc(DatabasePrincipalAssignment.properties, "The database principal.");
-@@doc(DatabasePrincipalAssignments.createOrUpdate::parameters.resource,
+@@doc(
+  DatabasePrincipalAssignments.createOrUpdate::parameters.resource,
   "The Kusto principalAssignments parameters supplied for the operation."
 );

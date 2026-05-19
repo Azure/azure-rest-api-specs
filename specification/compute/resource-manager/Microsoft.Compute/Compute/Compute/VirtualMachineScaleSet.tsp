@@ -471,54 +471,71 @@ interface VirtualMachineScaleSets {
 }
 
 @@doc(VirtualMachineScaleSet.name, "The name of the VM scale set.");
-@@doc(VirtualMachineScaleSet.properties,
+@@doc(
+  VirtualMachineScaleSet.properties,
   "Describes the properties of a Virtual Machine Scale Set."
 );
-@@doc(VirtualMachineScaleSets.createOrUpdate::parameters.resource,
+@@doc(
+  VirtualMachineScaleSets.createOrUpdate::parameters.resource,
   "The scale set object."
 );
-@@doc(VirtualMachineScaleSets.update::parameters.properties,
+@@doc(
+  VirtualMachineScaleSets.update::parameters.properties,
   "The scale set object."
 );
-@@doc(VirtualMachineScaleSets.approveRollingUpgrade::parameters.body,
+@@doc(
+  VirtualMachineScaleSets.approveRollingUpgrade::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
 );
-@@doc(VirtualMachineScaleSets.convertToSinglePlacementGroup::parameters.body,
+@@doc(
+  VirtualMachineScaleSets.convertToSinglePlacementGroup::parameters.body,
   "The input object for ConvertToSinglePlacementGroup API."
 );
-@@doc(VirtualMachineScaleSets.deallocate::parameters.body,
+@@doc(
+  VirtualMachineScaleSets.deallocate::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
 );
-@@doc(VirtualMachineScaleSets.deleteInstances::parameters.body,
+@@doc(
+  VirtualMachineScaleSets.deleteInstances::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
 );
-@@doc(VirtualMachineScaleSets.updateInstances::parameters.body,
+@@doc(
+  VirtualMachineScaleSets.updateInstances::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
 );
-@@doc(VirtualMachineScaleSets.performMaintenance::parameters.body,
+@@doc(
+  VirtualMachineScaleSets.performMaintenance::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
 );
-@@doc(VirtualMachineScaleSets.powerOff::parameters.body,
+@@doc(
+  VirtualMachineScaleSets.powerOff::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
 );
-@@doc(VirtualMachineScaleSets.redeploy::parameters.body,
+@@doc(
+  VirtualMachineScaleSets.redeploy::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
 );
-@@doc(VirtualMachineScaleSets.reimage::parameters.body,
+@@doc(
+  VirtualMachineScaleSets.reimage::parameters.body,
   "Parameters for Reimaging VM ScaleSet."
 );
-@@doc(VirtualMachineScaleSets.reimageAll::parameters.body,
+@@doc(
+  VirtualMachineScaleSets.reimageAll::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
 );
-@@doc(VirtualMachineScaleSets.restart::parameters.body,
+@@doc(
+  VirtualMachineScaleSets.restart::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
 );
-@@doc(VirtualMachineScaleSets.setOrchestrationServiceState::parameters.body,
+@@doc(
+  VirtualMachineScaleSets.setOrchestrationServiceState::parameters.body,
   "The input object for SetOrchestrationServiceState API."
 );
-@@doc(VirtualMachineScaleSets.start::parameters.body,
+@@doc(
+  VirtualMachineScaleSets.start::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
 );
-@@doc(VirtualMachineScaleSets.scaleOut::parameters.body,
+@@doc(
+  VirtualMachineScaleSets.scaleOut::parameters.body,
   "The input object for ScaleOut API."
 );

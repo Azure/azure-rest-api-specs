@@ -40,10 +40,12 @@ model VMScaleSetLifecycleHookEventListResult
 
 @@identifiers(VMScaleSetLifecycleHookEventListResult.value, #["name", "id"]);
 
-@@doc(VMScaleSetLifecycleHookEventListResult.value,
+@@doc(
+  VMScaleSetLifecycleHookEventListResult.value,
   "The list of virtual machine scale set lifecycle hook events created for a virtual machine scale set resource."
 );
-@@doc(VMScaleSetLifecycleHookEventListResult.nextLink,
+@@doc(
+  VMScaleSetLifecycleHookEventListResult.nextLink,
   "The uri to fetch the next page of virtual machine scale set lifecycle hook events. Call ListNext() with this to fetch the next page of virtual machine scale set lifecycle hook events."
 );
 
@@ -74,9 +76,11 @@ interface VirtualMachineScaleSetLifeCycleHookEvents {
   >;
 }
 
-@@doc(VMScaleSetLifecycleHookEvent.properties,
+@@doc(
+  VMScaleSetLifecycleHookEvent.properties,
   "Defines the virtual machine scale set lifecycle hook event properties."
 );
-@@doc(VirtualMachineScaleSetLifeCycleHookEvents.update::parameters.properties,
+@@doc(
+  VirtualMachineScaleSetLifeCycleHookEvents.update::parameters.properties,
   "Parameters supplied to the Update virtual machine scale set lifecycle hook event operation."
 );

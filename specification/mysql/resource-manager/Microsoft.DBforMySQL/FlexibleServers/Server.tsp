@@ -52,11 +52,14 @@ interface Servers {
   @Azure.Core.useFinalStateVia("original-uri")
   create is ArmResourceCreateOrReplaceAsync<
     Server,
-    Response = ArmResourceUpdatedResponse<Server> | ArmResourceCreatedResponse<
-      Server,
-      ArmLroLocationHeader<FinalResult = Server> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<Server>
+      | ArmResourceCreatedResponse<
+          Server,
+          ArmLroLocationHeader<FinalResult = Server> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -73,8 +76,11 @@ interface Servers {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Server,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -99,8 +105,10 @@ interface Servers {
   failover is ArmResourceActionAsyncBase<
     Server,
     void,
-    OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader>,
+
+      | OkResponse
+      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+          ArmLroLocationHeader>,
     Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
   >;
 
@@ -119,8 +127,10 @@ interface Servers {
   restart is ArmResourceActionAsyncBase<
     Server,
     ServerRestartParameter,
-    OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader>,
+
+      | OkResponse
+      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+          ArmLroLocationHeader>,
     Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
   >;
 
@@ -130,8 +140,10 @@ interface Servers {
   start is ArmResourceActionAsyncBase<
     Server,
     void,
-    OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader>,
+
+      | OkResponse
+      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+          ArmLroLocationHeader>,
     Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
   >;
 
@@ -141,8 +153,10 @@ interface Servers {
   stop is ArmResourceActionAsyncBase<
     Server,
     void,
-    OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader>,
+
+      | OkResponse
+      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+          ArmLroLocationHeader>,
     Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
   >;
 
@@ -153,8 +167,10 @@ interface Servers {
   resetGtid is ArmResourceActionAsyncBase<
     Server,
     ServerGtidSetParameter,
-    OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader>,
+
+      | OkResponse
+      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+          ArmLroLocationHeader>,
     Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
   >;
 
@@ -230,24 +246,31 @@ interface ServersMigration {
 
 @@doc(Server.name, "The name of the server.");
 @@doc(Server.properties, "Properties of the server.");
-@@doc(Servers.create::parameters.resource,
+@@doc(
+  Servers.create::parameters.resource,
   "The required parameters for creating or updating a server."
 );
-@@doc(Servers.update::parameters.properties,
+@@doc(
+  Servers.update::parameters.properties,
   "The required parameters for updating a server."
 );
-@@doc(BackupAndExport.create::parameters.body,
+@@doc(
+  BackupAndExport.create::parameters.body,
   "The required parameters for creating and exporting backup of the given server."
 );
-@@doc(Servers.validateEstimateHighAvailability::parameters.body,
+@@doc(
+  Servers.validateEstimateHighAvailability::parameters.body,
   "The required parameters for validation of high availability deployment."
 );
-@@doc(Servers.restart::parameters.body,
+@@doc(
+  Servers.restart::parameters.body,
   "The required parameters for restarting a server."
 );
-@@doc(Servers.resetGtid::parameters.body,
+@@doc(
+  Servers.resetGtid::parameters.body,
   "The required parameters for resetting GTID on a server."
 );
-@@doc(Servers.detachVNet::parameters.body,
+@@doc(
+  Servers.detachVNet::parameters.body,
   "The required parameters for detach vnet on a server."
 );

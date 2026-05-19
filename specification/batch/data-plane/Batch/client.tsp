@@ -107,15 +107,18 @@ interface BatchClient {
 @@access(Azure.Batch.Jobs.terminateJob, Access.internal, "csharp");
 @@clientName(BatchClient.terminateJob, "terminateJobInternal", "csharp");
 @@access(Azure.Batch.JobSchedules.deleteJobSchedule, Access.internal, "csharp");
-@@clientName(BatchClient.deleteJobSchedule,
+@@clientName(
+  BatchClient.deleteJobSchedule,
   "deleteJobScheduleInternal",
   "csharp"
 );
-@@access(Azure.Batch.JobSchedules.terminateJobSchedule,
+@@access(
+  Azure.Batch.JobSchedules.terminateJobSchedule,
   Access.internal,
   "csharp"
 );
-@@clientName(BatchClient.terminateJobSchedule,
+@@clientName(
+  BatchClient.terminateJobSchedule,
   "terminateJobScheduleInternal",
   "csharp"
 );
@@ -139,38 +142,45 @@ interface BatchClient {
 @@clientName(BatchClient.poolExists, "poolExistsInternal", "csharp");
 @@access(Azure.Batch.JobSchedules.jobScheduleExists, Access.internal, "csharp");
 @@convenientAPI(Azure.Batch.JobSchedules.jobScheduleExists, false, "csharp");
-@@clientName(BatchClient.jobScheduleExists,
+@@clientName(
+  BatchClient.jobScheduleExists,
   "jobScheduleExistsInternal",
   "csharp"
 );
 @@access(Azure.Batch.Tasks.getTaskFileProperties, Access.internal, "csharp");
-@@clientName(BatchClient.getTaskFileProperties,
+@@clientName(
+  BatchClient.getTaskFileProperties,
   "getTaskFilePropertiesInternal",
   "csharp"
 );
 @@access(Azure.Batch.Nodes.getNodeFileProperties, Access.internal, "csharp");
-@@clientName(BatchClient.getNodeFileProperties,
+@@clientName(
+  BatchClient.getNodeFileProperties,
   "getNodeFilePropertiesInternal",
   "csharp"
 );
 @@alternateType(Azure.Batch.DiskCustomerManagedKey.keyUrl, url, "csharp");
 @@clientName(Azure.Batch.DiskCustomerManagedKey.keyUrl, "keyUri", "csharp");
 
-@@clientName(BatchClient.listJobsFromSchedule,
+@@clientName(
+  BatchClient.listJobsFromSchedule,
   "listJobsFromSchedule",
   "csharp"
 );
-@@clientName(BatchClient.listJobPreparationAndReleaseTaskStatus,
+@@clientName(
+  BatchClient.listJobPreparationAndReleaseTaskStatus,
   "listJobPreparationAndReleaseTaskStatuses",
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(Azure.Batch.CommonParameters.returnClientRequestId,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  Azure.Batch.CommonParameters.returnClientRequestId,
   true,
   "csharp"
 );
 
-@@clientName(Azure.Batch.BatchPoolLifetimeOption.JobSchedule,
+@@clientName(
+  Azure.Batch.BatchPoolLifetimeOption.JobSchedule,
   "jobScheduleOption",
   "csharp"
 );
@@ -181,113 +191,136 @@ interface BatchClient {
 @@clientName(Azure.Batch.BatchJobStatistics.url, "uri", "csharp");
 @@clientName(Azure.Batch.BatchNodeFile.url, "uri", "csharp");
 @@clientName(Azure.Batch.BatchJobSchedule.url, "uri", "csharp");
-@@clientName(Azure.Batch.BatchJobScheduleConfiguration.doNotRunUntil,
+@@clientName(
+  Azure.Batch.BatchJobScheduleConfiguration.doNotRunUntil,
   "doNotRunBefore ",
   "csharp"
 );
-@@clientName(Azure.Batch.SecurityProfile.encryptionAtHost,
+@@clientName(
+  Azure.Batch.SecurityProfile.encryptionAtHost,
   "isEncryptedAtHost",
   "csharp"
 );
-@@clientName(Azure.Batch.ContainerRegistryReference.registryServer,
+@@clientName(
+  Azure.Batch.ContainerRegistryReference.registryServer,
   "registryServerUri",
   "csharp"
 );
-@@clientName(Azure.Batch.ResourceFile.storageContainerUrl,
+@@clientName(
+  Azure.Batch.ResourceFile.storageContainerUrl,
   "storageContainerUri",
   "csharp"
 );
 @@clientName(Azure.Batch.ResourceFile.httpUrl, "httpUri", "csharp");
-@@clientName(Azure.Batch.OutputFileBlobContainerDestination.containerUrl,
+@@clientName(
+  Azure.Batch.OutputFileBlobContainerDestination.containerUrl,
   "containerUri",
   "csharp"
 );
-@@clientName(Azure.Batch.VMExtension.autoUpgradeMinorVersion,
+@@clientName(
+  Azure.Batch.VMExtension.autoUpgradeMinorVersion,
   "isMinorVersionAutoUpgradeEnabled",
   "csharp"
 );
-@@clientName(Azure.Batch.VMExtension.enableAutomaticUpgrade,
+@@clientName(
+  Azure.Batch.VMExtension.enableAutomaticUpgrade,
   "isAutomaticUpgradeEnabled",
   "csharp"
 );
-@@clientName(Azure.Batch.BatchOsDisk.writeAcceleratorEnabled,
+@@clientName(
+  Azure.Batch.BatchOsDisk.writeAcceleratorEnabled,
   "isWriteAcceleratorEnabled",
   "csharp"
 );
-@@clientName(Azure.Batch.AzureFileShareConfiguration.azureFileUrl,
+@@clientName(
+  Azure.Batch.AzureFileShareConfiguration.azureFileUrl,
   "azureFileUri",
   "csharp"
 );
 @@clientName(Azure.Batch.RecentBatchJob.url, "uri", "csharp");
 @@clientName(Azure.Batch.BatchJobScheduleStatistics.url, "uri", "csharp");
-@@clientName(Azure.Batch.BatchJobScheduleStatistics.wallClockTime,
+@@clientName(
+  Azure.Batch.BatchJobScheduleStatistics.wallClockTime,
   "duration",
   "csharp"
 );
 @@clientName(Azure.Batch.BatchJob.url, "uri", "csharp");
-@@clientName(Azure.Batch.BatchJobDisableOptions.disableTasks,
+@@clientName(
+  Azure.Batch.BatchJobDisableOptions.disableTasks,
   "jobOption",
   "csharp"
 );
-@@clientName(Azure.Batch.BatchJobPreparationAndReleaseTaskStatus.nodeUrl,
+@@clientName(
+  Azure.Batch.BatchJobPreparationAndReleaseTaskStatus.nodeUrl,
   "nodeUri",
   "csharp"
 );
-@@clientName(Azure.Batch.BatchJobPreparationTaskExecutionInfo.taskRootDirectoryUrl,
+@@clientName(
+  Azure.Batch.BatchJobPreparationTaskExecutionInfo.taskRootDirectoryUrl,
   "taskRootDirectoryUri",
   "csharp"
 );
-@@clientName(Azure.Batch.BatchCreateTaskCollectionResult.value,
+@@clientName(
+  Azure.Batch.BatchCreateTaskCollectionResult.value,
   "results",
   "csharp"
 );
 @@clientName(Azure.Batch.BatchNodeCounts.upgradingOS, "upgradingOS", "csharp");
-@@clientName(Azure.Batch.HostEndpointSettingsModeTypes,
+@@clientName(
+  Azure.Batch.HostEndpointSettingsModeTypes,
   "HostEndpointSettingsModeType",
   "csharp"
 );
 @@clientName(Azure.Batch.NameValuePair, "BatchNameValuePair", "csharp");
 @@clientName(Azure.Batch.InboundEndpoint.publicFQDN, "publicFqdn", "csharp");
-@@clientName(Azure.Batch.ExitConditions.default,
+@@clientName(
+  Azure.Batch.ExitConditions.default,
   "defaultExitOptions ",
   "csharp"
 );
-@@clientName(Azure.Batch.BatchJobReleaseTaskExecutionInfo.taskRootDirectoryUrl,
+@@clientName(
+  Azure.Batch.BatchJobReleaseTaskExecutionInfo.taskRootDirectoryUrl,
   "taskRootDirectoryUri",
   "csharp"
 );
-@@clientName(Azure.Batch.CommonListParameters.maxresults,
+@@clientName(
+  Azure.Batch.CommonListParameters.maxresults,
   "maxResults",
   "csharp"
 );
 @@clientName(Azure.Batch.BatchPool.url, "uri", "csharp");
 @@clientName(Azure.Batch.BatchTask.url, "uri", "csharp");
 @@clientName(Azure.Batch.BatchNodeInfo.nodeUrl, "nodeUri", "csharp");
-@@clientName(Azure.Batch.BatchNodeInfo.taskRootDirectoryUrl,
+@@clientName(
+  Azure.Batch.BatchNodeInfo.taskRootDirectoryUrl,
   "taskRootDirectoryUri",
   "csharp"
 );
 @@clientName(Azure.Batch.BatchTaskStatistics.url, "uri", "csharp");
-@@clientName(Azure.Batch.RollingUpgradePolicy.enableCrossZoneUpgrade,
+@@clientName(
+  Azure.Batch.RollingUpgradePolicy.enableCrossZoneUpgrade,
   "isCrossZoneUpgradeEnabled",
   "csharp"
 );
 @@clientName(Azure.Batch.BatchTaskGroup.value, "tasks", "csharp");
 @@clientName(Azure.Batch.BatchNode.url, "uri", "csharp");
 @@clientName(Azure.Batch.BatchTaskInfo.taskUrl, "taskUri", "csharp");
-@@clientName(Azure.Batch.UploadBatchServiceLogsOptions.containerUrl,
+@@clientName(
+  Azure.Batch.UploadBatchServiceLogsOptions.containerUrl,
   "containerUri",
   "csharp"
 );
 
 /* PYTHON OVERRIDES */
 @@access(Azure.Batch.Tasks.getTaskFileProperties, Access.internal, "python");
-@@clientName(BatchClient.getTaskFileProperties,
+@@clientName(
+  BatchClient.getTaskFileProperties,
   "getTaskFilePropertiesInternal",
   "python"
 );
 @@access(Azure.Batch.Nodes.getNodeFileProperties, Access.internal, "python");
-@@clientName(BatchClient.getNodeFileProperties,
+@@clientName(
+  BatchClient.getNodeFileProperties,
   "getNodeFilePropertiesInternal",
   "python"
 );
@@ -309,26 +342,31 @@ interface BatchClient {
 @@access(Azure.Batch.Jobs.terminateJob, Access.internal, "python");
 @@clientName(BatchClient.terminateJob, "terminateJobInternal", "python");
 @@access(Azure.Batch.JobSchedules.deleteJobSchedule, Access.internal, "python");
-@@clientName(BatchClient.deleteJobSchedule,
+@@clientName(
+  BatchClient.deleteJobSchedule,
   "deleteJobScheduleInternal",
   "python"
 );
-@@clientName(Azure.Batch.OutputFileUploadConfig,
+@@clientName(
+  Azure.Batch.OutputFileUploadConfig,
   "OutputFileUploadConfiguration",
   "python"
 );
-@@access(Azure.Batch.JobSchedules.terminateJobSchedule,
+@@access(
+  Azure.Batch.JobSchedules.terminateJobSchedule,
   Access.internal,
   "python"
 );
-@@clientName(BatchClient.terminateJobSchedule,
+@@clientName(
+  BatchClient.terminateJobSchedule,
   "terminateJobScheduleInternal",
   "python"
 );
 @@clientName(Azure.Batch.AutoScaleRunError.values, "error_values", "python");
 @@clientName(Azure.Batch.BatchTaskGroup.value, "task_values", "python");
 @@clientName(Azure.Batch.ResizeError.values, "error_values", "python");
-@@clientName(Azure.Batch.BatchCreateTaskCollectionResult.value,
+@@clientName(
+  Azure.Batch.BatchCreateTaskCollectionResult.value,
   "result_values",
   "python"
 );
@@ -338,39 +376,48 @@ interface BatchClient {
 @@clientName(Azure.Batch.BatchPool.eTag, "etag", "python");
 @@clientName(Azure.Batch.BatchTask.eTag, "etag", "python");
 @@clientName(Azure.Batch.BatchTaskCreateResult.eTag, "etag", "python");
-@@clientName(Azure.Batch.BatchPoolResourceStatistics.avgDiskGiB,
+@@clientName(
+  Azure.Batch.BatchPoolResourceStatistics.avgDiskGiB,
   "avg_disk_gib ",
   "python"
 );
-@@clientName(Azure.Batch.BatchPoolResourceStatistics.avgMemoryGiB,
+@@clientName(
+  Azure.Batch.BatchPoolResourceStatistics.avgMemoryGiB,
   "avg_memory_gib ",
   "python"
 );
-@@clientName(Azure.Batch.BatchPoolResourceStatistics.peakMemoryGiB,
+@@clientName(
+  Azure.Batch.BatchPoolResourceStatistics.peakMemoryGiB,
   "peak_memory_gib ",
   "python"
 );
-@@clientName(Azure.Batch.BatchPoolResourceStatistics.peakDiskGiB,
+@@clientName(
+  Azure.Batch.BatchPoolResourceStatistics.peakDiskGiB,
   "peak_disk_gib ",
   "python"
 );
-@@clientName(Azure.Batch.BatchPoolResourceStatistics.diskReadGiB,
+@@clientName(
+  Azure.Batch.BatchPoolResourceStatistics.diskReadGiB,
   "disk_read_gib ",
   "python"
 );
-@@clientName(Azure.Batch.BatchPoolResourceStatistics.diskWriteGiB,
+@@clientName(
+  Azure.Batch.BatchPoolResourceStatistics.diskWriteGiB,
   "disk_write_gib ",
   "python"
 );
-@@clientName(Azure.Batch.BatchPoolResourceStatistics.networkReadGiB,
+@@clientName(
+  Azure.Batch.BatchPoolResourceStatistics.networkReadGiB,
   "network_read_gib ",
   "python"
 );
-@@clientName(Azure.Batch.BatchPoolResourceStatistics.networkWriteGiB,
+@@clientName(
+  Azure.Batch.BatchPoolResourceStatistics.networkWriteGiB,
   "network_write_gib ",
   "python"
 );
-@@clientName(Azure.Batch.BatchNodeUserUpdateOptions,
+@@clientName(
+  Azure.Batch.BatchNodeUserUpdateOptions,
   "BatchNodeUserReplaceOptions",
   "python"
 );
@@ -397,33 +444,40 @@ interface BatchClient {
 @@access(Azure.Batch.DisableBatchJobOption, Access.public, "python");
 
 /* JAVASCRIPT OVERRIDES */
-@@clientName(Azure.Batch.CommonListParameters.maxresults,
+@@clientName(
+  Azure.Batch.CommonListParameters.maxresults,
   "maxResults",
   "javascript"
 );
-@@clientName(Azure.Batch.CommonParameters.timeOut,
+@@clientName(
+  Azure.Batch.CommonParameters.timeOut,
   "timeoutInSeconds",
   "javascript"
 );
 @@clientName(Azure.Batch.CommonParameters.ocpdate, "ocpDate", "javascript");
-@@clientName(Azure.Batch.BatchSupportedImage.batchSupportEndOfLife,
+@@clientName(
+  Azure.Batch.BatchSupportedImage.batchSupportEndOfLife,
   "supportEndDate",
   "javascript"
 );
 @@clientName(Azure.Batch.VMExtension.type, "extensionType", "javascript");
-@@clientName(Azure.Batch.ListPoolUsageMetricsOptionalParameters.endtime,
+@@clientName(
+  Azure.Batch.ListPoolUsageMetricsOptionalParameters.endtime,
   "endTime",
   "javascript"
 );
-@@clientName(Azure.Batch.BatchNodeDeallocateOptions.nodeDeallocateOption,
+@@clientName(
+  Azure.Batch.BatchNodeDeallocateOptions.nodeDeallocateOption,
   "nodeDeallocationOption",
   "javascript"
 );
-@@clientName(Azure.Batch.ExitConditions.default,
+@@clientName(
+  Azure.Batch.ExitConditions.default,
   "defaultOptions",
   "javascript"
 );
-@@clientName(Azure.Batch.CifsMountConfiguration,
+@@clientName(
+  Azure.Batch.CifsMountConfiguration,
   "BatchCifsMountConfiguration",
   "javascript"
 );
@@ -432,92 +486,112 @@ interface BatchClient {
 // don't export API for this operation because it retired before the first Go SDK release
 @@access(Azure.Batch.Pools.listPoolUsageMetrics, Access.internal, "go");
 // ODataNextLink -> NextLink
-@@clientName(Azure.Batch.BatchAccountListSupportedImagesResult.`odata.nextLink`,
+@@clientName(
+  Azure.Batch.BatchAccountListSupportedImagesResult.`odata.nextLink`,
   "NextLink",
   "go"
 );
-@@clientName(Azure.Batch.BatchApplicationListResult.`odata.nextLink`,
+@@clientName(
+  Azure.Batch.BatchApplicationListResult.`odata.nextLink`,
   "NextLink",
   "go"
 );
 @@clientName(Azure.Batch.BatchJobListResult.`odata.nextLink`, "NextLink", "go");
-@@clientName(Azure.Batch.BatchJobPreparationAndReleaseTaskStatusListResult.`odata.nextLink`,
+@@clientName(
+  Azure.Batch.BatchJobPreparationAndReleaseTaskStatusListResult.`odata.nextLink`,
   "NextLink",
   "go"
 );
-@@clientName(Azure.Batch.BatchJobScheduleListResult.`odata.nextLink`,
+@@clientName(
+  Azure.Batch.BatchJobScheduleListResult.`odata.nextLink`,
   "NextLink",
   "go"
 );
-@@clientName(Azure.Batch.BatchNodeFileListResult.`odata.nextLink`,
+@@clientName(
+  Azure.Batch.BatchNodeFileListResult.`odata.nextLink`,
   "NextLink",
   "go"
 );
-@@clientName(Azure.Batch.BatchNodeListResult.`odata.nextLink`,
+@@clientName(
+  Azure.Batch.BatchNodeListResult.`odata.nextLink`,
   "NextLink",
   "go"
 );
-@@clientName(Azure.Batch.BatchNodeVMExtensionListResult.`odata.nextLink`,
+@@clientName(
+  Azure.Batch.BatchNodeVMExtensionListResult.`odata.nextLink`,
   "NextLink",
   "go"
 );
-@@clientName(Azure.Batch.BatchPoolListResult.`odata.nextLink`,
+@@clientName(
+  Azure.Batch.BatchPoolListResult.`odata.nextLink`,
   "NextLink",
   "go"
 );
-@@clientName(Azure.Batch.BatchPoolListUsageMetricsResult.`odata.nextLink`,
+@@clientName(
+  Azure.Batch.BatchPoolListUsageMetricsResult.`odata.nextLink`,
   "NextLink",
   "go"
 );
-@@clientName(Azure.Batch.BatchPoolNodeCountsListResult.`odata.nextLink`,
+@@clientName(
+  Azure.Batch.BatchPoolNodeCountsListResult.`odata.nextLink`,
   "NextLink",
   "go"
 );
-@@clientName(Azure.Batch.BatchTaskListResult.`odata.nextLink`,
+@@clientName(
+  Azure.Batch.BatchTaskListResult.`odata.nextLink`,
   "NextLink",
   "go"
 );
-@@clientName(Azure.Batch.BatchTaskListSubtasksResult.`odata.nextLink`,
+@@clientName(
+  Azure.Batch.BatchTaskListSubtasksResult.`odata.nextLink`,
   "NextLink",
   "go"
 );
 // capitalize initialisms
-@@clientName(Azure.Batch.AutomaticOsUpgradePolicy,
+@@clientName(
+  Azure.Batch.AutomaticOsUpgradePolicy,
   "AutomaticOSUpgradePolicy",
   "go"
 );
-@@clientName(Azure.Batch.AzureBlobFileSystemConfiguration.sasKey,
+@@clientName(
+  Azure.Batch.AzureBlobFileSystemConfiguration.sasKey,
   "SASKey",
   "go"
 );
 @@clientName(Azure.Batch.BatchJobScheduleStatistics.readIOps, "ReadIOPS", "go");
-@@clientName(Azure.Batch.BatchJobScheduleStatistics.writeIOps,
+@@clientName(
+  Azure.Batch.BatchJobScheduleStatistics.writeIOps,
   "WriteIOPS",
   "go"
 );
-@@clientName(Azure.Batch.BatchPoolResourceStatistics.diskReadIOps,
+@@clientName(
+  Azure.Batch.BatchPoolResourceStatistics.diskReadIOps,
   "DiskReadIOPS",
   "go"
 );
-@@clientName(Azure.Batch.BatchPoolResourceStatistics.diskWriteIOps,
+@@clientName(
+  Azure.Batch.BatchPoolResourceStatistics.diskWriteIOps,
   "DiskWriteIOPS",
   "go"
 );
 @@clientName(Azure.Batch.BatchTaskStatistics.readIOps, "ReadIOPS", "go");
 @@clientName(Azure.Batch.BatchTaskStatistics.writeIOps, "WriteIOPS", "go");
-@@clientName(Azure.Batch.CifsMountConfiguration,
+@@clientName(
+  Azure.Batch.CifsMountConfiguration,
   "CIFSMountConfiguration",
   "go"
 );
 @@clientName(Azure.Batch.CommonListParameters.maxresults, "MaxResults", "go");
 @@clientName(Azure.Batch.BatchInboundNatPool, "InboundNATPool", "go");
-@@clientName(Azure.Batch.IpAddressProvisioningType,
+@@clientName(
+  Azure.Batch.IpAddressProvisioningType,
   "IPAddressProvisioningType",
   "go"
 );
 @@clientName(Azure.Batch.LinuxUserConfiguration.gid, "GID", "go");
 @@clientName(Azure.Batch.NfsMountConfiguration, "NFSMountConfiguration", "go");
-@@clientName(Azure.Batch.BatchPublicIpAddressConfiguration,
+@@clientName(
+  Azure.Batch.BatchPublicIpAddressConfiguration,
   "PublicIPAddressConfiguration",
   "go"
 );
@@ -526,45 +600,54 @@ interface BatchClient {
 // align model names with method names
 @@clientName(Azure.Batch.BatchJobCreateOptions, "CreateJobOptions", "go");
 @@clientName(Azure.Batch.BatchJobDisableOptions, "DisableJobOptions", "go");
-@@clientName(Azure.Batch.BatchJobScheduleCreateOptions,
+@@clientName(
+  Azure.Batch.BatchJobScheduleCreateOptions,
   "CreateJobScheduleOptions",
   "go"
 );
 @@clientName(Azure.Batch.BatchJobTerminateOptions, "TerminateJobOptions", "go");
 @@clientName(Azure.Batch.BatchJobUpdateOptions, "UpdateJobOptions", "go");
-@@clientName(Azure.Batch.BatchJobScheduleUpdateOptions,
+@@clientName(
+  Azure.Batch.BatchJobScheduleUpdateOptions,
   "UpdateJobScheduleOptions",
   "go"
 );
-@@clientName(Azure.Batch.BatchNodeDeallocateOptions,
+@@clientName(
+  Azure.Batch.BatchNodeDeallocateOptions,
   "DeallocateNodeOptions",
   "go"
 );
-@@clientName(Azure.Batch.BatchNodeDisableSchedulingOptions,
+@@clientName(
+  Azure.Batch.BatchNodeDisableSchedulingOptions,
   "DisableNodeSchedulingOptions",
   "go"
 );
 @@clientName(Azure.Batch.BatchPoolCreateOptions, "CreatePoolOptions", "go");
-@@clientName(Azure.Batch.BatchPoolEnableAutoScaleOptions,
+@@clientName(
+  Azure.Batch.BatchPoolEnableAutoScaleOptions,
   "EnablePoolAutoScaleOptions",
   "go"
 );
-@@clientName(Azure.Batch.BatchPoolEvaluateAutoScaleOptions,
+@@clientName(
+  Azure.Batch.BatchPoolEvaluateAutoScaleOptions,
   "EvaluatePoolAutoScaleOptions",
   "go"
 );
-@@clientName(Azure.Batch.BatchPoolListUsageMetricsResult,
+@@clientName(
+  Azure.Batch.BatchPoolListUsageMetricsResult,
   "ListPoolUsageMetricsResult",
   "go"
 );
-@@clientName(Azure.Batch.BatchPoolNodeCountsListResult,
+@@clientName(
+  Azure.Batch.BatchPoolNodeCountsListResult,
   "ListPoolNodeCountsResult",
   "go"
 );
 @@clientName(Azure.Batch.BatchPoolReplaceOptions, "ReplacePoolOptions", "go");
 @@clientName(Azure.Batch.BatchPoolResizeOptions, "ResizePoolOptions", "go");
 @@clientName(Azure.Batch.BatchPoolUpdateOptions, "UpdatePoolOptions", "go");
-@@clientName(Azure.Batch.BatchCreateTaskCollectionResult,
+@@clientName(
+  Azure.Batch.BatchCreateTaskCollectionResult,
   "CreateTaskCollectionResult",
   "go"
 );
@@ -572,35 +655,42 @@ interface BatchClient {
 @@clientName(Azure.Batch.BatchNodeRebootOptions, "RebootNodeOptions", "go");
 @@clientName(Azure.Batch.BatchNodeReimageOptions, "ReimageNodeOptions", "go");
 @@clientName(Azure.Batch.BatchNodeRemoveOptions, "RemoveNodeOptions", "go");
-@@clientName(Azure.Batch.BatchNodeUserCreateOptions,
+@@clientName(
+  Azure.Batch.BatchNodeUserCreateOptions,
   "CreateNodeUserOptions",
   "go"
 );
-@@clientName(Azure.Batch.BatchNodeUserUpdateOptions,
+@@clientName(
+  Azure.Batch.BatchNodeUserUpdateOptions,
   "UpdateNodeUserOptions",
   "go"
 );
-@@clientName(Azure.Batch.UploadBatchServiceLogsOptions,
+@@clientName(
+  Azure.Batch.UploadBatchServiceLogsOptions,
   "UploadNodeLogsOptions",
   "go"
 );
-@@clientName(Azure.Batch.UploadBatchServiceLogsResult,
+@@clientName(
+  Azure.Batch.UploadBatchServiceLogsResult,
   "UploadNodeLogsResult",
   "go"
 );
 // remove "Batch" from field names
-@@clientName(Azure.Batch.ContainerHostBatchBindMountEntry,
+@@clientName(
+  Azure.Batch.ContainerHostBatchBindMountEntry,
   "ContainerHostBindMountEntry",
   "go"
 );
 @@clientName(Azure.Batch.DisableBatchJobOption, "DisableJobOption", "go");
-@@clientName(Azure.Batch.BatchAllTasksCompleteMode,
+@@clientName(
+  Azure.Batch.BatchAllTasksCompleteMode,
   "AllTasksCompleteMode",
   "go"
 );
 @@clientName(Azure.Batch.BatchTaskFailureMode, "TaskFailureMode", "go");
 @@clientName(Azure.Batch.RecentBatchJob, "RecentJob", "go");
-@@clientName(Azure.Batch.BatchVmDiskSecurityProfile,
+@@clientName(
+  Azure.Batch.BatchVmDiskSecurityProfile,
   "VMDiskSecurityProfile",
   "go"
 );
