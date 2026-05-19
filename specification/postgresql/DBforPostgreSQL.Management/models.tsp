@@ -4172,7 +4172,7 @@ model MajorVersionUpgradePrecheckResponse {
   status?: string;
 }
 
-@doc("Maintenance event resource for a PostgreSQL flexible server.")
+@doc("Major version upgrade precheck resource for a PostgreSQL flexible server.")
 @parentResource(Server)
 @added(Versions.v2026_04_01)
 model MajorVersionUpgradePrecheckResource
