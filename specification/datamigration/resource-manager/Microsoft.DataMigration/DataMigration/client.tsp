@@ -2,6 +2,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
+using Azure.ClientGenerator.Core.Legacy;
 using Microsoft.DataMigration;
 
 @@clientName(
@@ -622,7 +623,44 @@ using Microsoft.DataMigration;
 @@clientName(SqlDbOfflineConfiguration.offline, "IsOfflineMigration", "csharp");
 @@clientName(WaitStatistics.waitTimeMs, "WaitTimeInMilliseconds", "csharp");
 
-// --- Format overrides (arm-id) ---
+// --- Restore TrackedResourceData base type for GA backward compat ---
+// The generator maps TrackedResourceWithOptionalLocation to ResourceData,
+// but the GA SDK shipped these as TrackedResourceData.
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore TrackedResourceData base type for backward compat"
+@@hierarchyBuilding(
+  DataMigrationService,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore TrackedResourceData base type for backward compat"
+@@hierarchyBuilding(
+  Project,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore TrackedResourceData base type for backward compat"
+@@hierarchyBuilding(
+  SqlMigrationService,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+
+// --- Format overrides (arm-id, azureLocation) ---
+@@alternateType(
+  DataMigrationService.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  Project.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  SqlMigrationService.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
 @@alternateType(
   MiSqlConnectionInfo.managedInstanceResourceId,
   Azure.Core.armResourceIdentifier,
