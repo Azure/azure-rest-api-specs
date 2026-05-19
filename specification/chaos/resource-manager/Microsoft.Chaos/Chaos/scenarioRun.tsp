@@ -28,19 +28,20 @@ interface ScenarioRuns {
   @autoRoute
   @armResourceRead(ScenarioRun)
   @get
-  get(
-    ...ResourceInstanceParameters<ScenarioRun>,
-  ): ArmResponse<ScenarioRun> | (AcceptedResponse & {
-    @doc("The Location header contains the URL where the status of the long running operation can be checked.")
-    @header("Location")
-    location: string;
+  get(...ResourceInstanceParameters<ScenarioRun>):
+    | ArmResponse<ScenarioRun>
+    | (AcceptedResponse & {
+        @doc("The Location header contains the URL where the status of the long running operation can be checked.")
+        @header("Location")
+        location: string;
 
-    @doc("The Retry-After header can indicate how long the client should wait before polling the operation status.")
-    @header("Retry-After")
-    retryAfter?: int32;
+        @doc("The Retry-After header can indicate how long the client should wait before polling the operation status.")
+        @header("Retry-After")
+        retryAfter?: int32;
 
-    @bodyRoot body: ScenarioRun;
-  }) | ErrorResponse;
+        @bodyRoot body: ScenarioRun;
+      })
+    | ErrorResponse;
 
   /**
    * Get a list of scenario runs.

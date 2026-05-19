@@ -3,53 +3,68 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using DataCollectionApi;
 
-@@clientLocation(DataCollectionEndpointResources.get,
+@@clientLocation(
+  DataCollectionEndpointResources.get,
   "DataCollectionEndpoints"
 );
-@@clientLocation(DataCollectionEndpointResources.create,
+@@clientLocation(
+  DataCollectionEndpointResources.create,
   "DataCollectionEndpoints"
 );
-@@clientName(DataCollectionEndpointResources.create::parameters.resource,
+@@clientName(
+  DataCollectionEndpointResources.create::parameters.resource,
   "body"
 );
-@@clientLocation(DataCollectionEndpointResources.update,
+@@clientLocation(
+  DataCollectionEndpointResources.update,
   "DataCollectionEndpoints"
 );
-@@clientName(DataCollectionEndpointResources.update::parameters.properties,
+@@clientName(
+  DataCollectionEndpointResources.update::parameters.properties,
   "body"
 );
-@@clientLocation(DataCollectionEndpointResources.delete,
+@@clientLocation(
+  DataCollectionEndpointResources.delete,
   "DataCollectionEndpoints"
 );
-@@clientLocation(DataCollectionEndpointResources.listByResourceGroup,
+@@clientLocation(
+  DataCollectionEndpointResources.listByResourceGroup,
   "DataCollectionEndpoints"
 );
-@@clientLocation(DataCollectionEndpointResources.listBySubscription,
+@@clientLocation(
+  DataCollectionEndpointResources.listBySubscription,
   "DataCollectionEndpoints"
 );
-@@clientLocation(DataCollectionEndpointResources.listByDataCollectionEndpoint,
+@@clientLocation(
+  DataCollectionEndpointResources.listByDataCollectionEndpoint,
   "DataCollectionRuleAssociations"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DataCollectionEndpointResource.properties);
 
-@@clientLocation(DataCollectionRuleAssociationProxyOnlyResources.get,
+@@clientLocation(
+  DataCollectionRuleAssociationProxyOnlyResources.get,
   "DataCollectionRuleAssociations"
 );
-@@clientLocation(DataCollectionRuleAssociationProxyOnlyResources.create,
+@@clientLocation(
+  DataCollectionRuleAssociationProxyOnlyResources.create,
   "DataCollectionRuleAssociations"
 );
-@@clientName(DataCollectionRuleAssociationProxyOnlyResources.create::parameters.resource,
+@@clientName(
+  DataCollectionRuleAssociationProxyOnlyResources.create::parameters.resource,
   "body"
 );
-@@clientLocation(DataCollectionRuleAssociationProxyOnlyResources.delete,
+@@clientLocation(
+  DataCollectionRuleAssociationProxyOnlyResources.delete,
   "DataCollectionRuleAssociations"
 );
-@@clientLocation(DataCollectionRuleAssociationProxyOnlyResources.listByResource,
+@@clientLocation(
+  DataCollectionRuleAssociationProxyOnlyResources.listByResource,
   "DataCollectionRuleAssociations"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(DataCollectionRuleAssociationProxyOnlyResource.properties
+@@Legacy.flattenProperty(
+  DataCollectionRuleAssociationProxyOnlyResource.properties
 );
 
 @@clientLocation(DataCollectionRuleResources.get, "DataCollectionRules");
@@ -58,17 +73,21 @@ using DataCollectionApi;
 @@clientLocation(DataCollectionRuleResources.update, "DataCollectionRules");
 @@clientName(DataCollectionRuleResources.update::parameters.properties, "body");
 @@clientLocation(DataCollectionRuleResources.delete, "DataCollectionRules");
-@@clientLocation(DataCollectionRuleResources.listByResourceGroup,
+@@clientLocation(
+  DataCollectionRuleResources.listByResourceGroup,
   "DataCollectionRules"
 );
-@@clientLocation(DataCollectionRuleResources.listBySubscription,
+@@clientLocation(
+  DataCollectionRuleResources.listBySubscription,
   "DataCollectionRules"
 );
-@@clientLocation(DataCollectionRuleResources.listByRule,
+@@clientLocation(
+  DataCollectionRuleResources.listByRule,
   "DataCollectionRuleAssociations"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DataCollectionRuleResource.properties);
-@@doc(Azure.ResourceManager.Legacy.EntityTagProperty.etag,
+@@doc(
+  Azure.ResourceManager.Legacy.EntityTagProperty.etag,
   "Resource entity tag (ETag)."
 );

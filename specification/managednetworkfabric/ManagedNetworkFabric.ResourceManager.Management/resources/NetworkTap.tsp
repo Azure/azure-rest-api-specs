@@ -95,12 +95,15 @@ interface NetworkTaps {
 }
 
 @@doc(NetworkTaps.create::parameters.resource, "Request payload.");
-@@doc(NetworkTaps.update::parameters.properties,
+@@doc(
+  NetworkTaps.update::parameters.properties,
   "Network Tap properties to update."
 );
-@@doc(NetworkTaps.updateAdministrativeStateDeprecated::parameters.body,
+@@doc(
+  NetworkTaps.updateAdministrativeStateDeprecated::parameters.body,
   "Request payload."
 );
-@@doc(NetworkTaps.updateAdministrativeState::parameters.body,
+@@doc(
+  NetworkTaps.updateAdministrativeState::parameters.body,
   "Request payload."
 );

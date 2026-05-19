@@ -12,3 +12,15 @@
     - RBAC
     - Settings
     - EKM
+- tool: TypeSpecValidation
+  reason: >
+    These sub-projects exist only for SDK generation (e.g. Go) and do not need to
+    emit autorest swagger individually. The parent Administration project handles
+    swagger generation for all sub-projects.
+    Responsibility: Service team.
+  rules: [EmitAutorest]
+  paths:
+    - BackupRestore
+    - RBAC
+    - Settings
+    - EKM

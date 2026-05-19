@@ -45,6 +45,7 @@ interface SystemAssignedIdentities {
 }
 
 @@doc(SystemAssignedIdentity.name, "");
-@@doc(SystemAssignedIdentity.properties,
+@@doc(
+  SystemAssignedIdentity.properties,
   "The properties associated with the identity."
 );

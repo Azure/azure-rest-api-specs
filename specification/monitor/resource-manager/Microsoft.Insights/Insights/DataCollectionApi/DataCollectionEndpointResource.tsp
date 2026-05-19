@@ -126,13 +126,16 @@ interface DataCollectionEndpointResources {
   >;
 }
 
-@@doc(DataCollectionEndpointResource.name,
+@@doc(
+  DataCollectionEndpointResource.name,
   "The name of the data collection endpoint. The name is case insensitive."
 );
 @@doc(DataCollectionEndpointResource.properties, "");
-@@doc(DataCollectionEndpointResources.create::parameters.resource,
+@@doc(
+  DataCollectionEndpointResources.create::parameters.resource,
   "The payload"
 );
-@@doc(DataCollectionEndpointResources.update::parameters.properties,
+@@doc(
+  DataCollectionEndpointResources.update::parameters.properties,
   "The payload"
 );

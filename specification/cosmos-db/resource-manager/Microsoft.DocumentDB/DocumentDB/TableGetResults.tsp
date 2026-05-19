@@ -46,8 +46,10 @@ interface TableGetResultsOperationGroup {
   createUpdateTable is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     TableGetResults,
     Request = TableCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<TableGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = TableGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<TableGetResults>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = TableGetResults> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -55,7 +57,9 @@ interface TableGetResultsOperationGroup {
    */
   deleteTable is ArmResourceDeleteWithoutOkAsync<
     TableGetResults,
-    Response = NoContentResponse | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+    Response =
+      | NoContentResponse
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
   >;
 
   /**
@@ -79,13 +83,16 @@ interface TableGetResultsOperationGroup {
 
 @@doc(TableGetResults.name, "Cosmos DB table name.");
 @@doc(TableGetResults.properties, "The properties of an Azure Cosmos DB Table");
-@@doc(TableGetResultsOperationGroup.createUpdateTable::parameters.resource,
+@@doc(
+  TableGetResultsOperationGroup.createUpdateTable::parameters.resource,
   "The parameters to provide for the current Table."
 );
-@@doc(TableGetResultsOperationGroup.retrieveContinuousBackupInformation::parameters.body,
+@@doc(
+  TableGetResultsOperationGroup.retrieveContinuousBackupInformation::parameters.body,
   "The name of the continuous backup restore location."
 );
-@@visibility(TableGetResults.location,
+@@visibility(
+  TableGetResults.location,
   Lifecycle.Read,
   Lifecycle.Create,
   Lifecycle.Update

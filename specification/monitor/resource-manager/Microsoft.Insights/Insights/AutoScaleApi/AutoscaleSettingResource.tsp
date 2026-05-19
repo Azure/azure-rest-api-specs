@@ -128,12 +128,15 @@ interface AutoscaleSettingResources {
 }
 
 @@doc(AutoscaleSettingResource.name, "The autoscale setting name.");
-@@doc(AutoscaleSettingResource.properties,
+@@doc(
+  AutoscaleSettingResource.properties,
   "The autoscale setting of the resource."
 );
-@@doc(AutoscaleSettingResources.createOrUpdate::parameters.resource,
+@@doc(
+  AutoscaleSettingResources.createOrUpdate::parameters.resource,
   "Parameters supplied to the operation."
 );
-@@doc(AutoscaleSettingResources.update::parameters.properties,
+@@doc(
+  AutoscaleSettingResources.update::parameters.properties,
   "Parameters supplied to the operation."
 );
