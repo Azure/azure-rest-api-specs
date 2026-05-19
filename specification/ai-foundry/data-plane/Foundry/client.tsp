@@ -26,7 +26,7 @@ import "./src/toolboxes/routes.tsp";
 import "./src/skills/routes.tsp";
 import "./src/agents-session-files/routes.tsp";
 import "./src/data_generation_jobs/routes.tsp";
-import "./src/evaluation-suites/routes.tsp";
+//import "./src/evaluation-suites/routes.tsp";
 import "./src/agents-optimization/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
@@ -369,36 +369,6 @@ using Azure.AI.Projects;
   "javascript"
 );
 
-// Evaluation Suite Generation Jobs — unscoped names (fixes AllScopes conflict)
-@@clientName(EvaluationSuiteGenerationJobs.create, "create_generation_suite_job");
-@@clientName(EvaluationSuiteGenerationJobs.get, "get_generation_suite_job");
-@@clientName(EvaluationSuiteGenerationJobs.list, "list_generation_suite_jobs");
-@@clientName(EvaluationSuiteGenerationJobs.cancel, "cancel_generation_suite_job");
-@@clientName(EvaluationSuiteGenerationJobs.delete, "delete_generation_suite_job");
-
-// Evaluation Suite Generation Jobs — renamed for JavaScript SDK discoverability
-@@clientName(EvaluationSuiteGenerationJobs.create, "createGenerationSuiteJob", "javascript");
-@@clientName(EvaluationSuiteGenerationJobs.get, "getGenerationSuiteJob", "javascript");
-@@clientName(EvaluationSuiteGenerationJobs.list, "listGenerationSuiteJobs", "javascript");
-@@clientName(EvaluationSuiteGenerationJobs.cancel, "cancelGenerationSuiteJob", "javascript");
-@@clientName(EvaluationSuiteGenerationJobs.delete, "deleteGenerationSuiteJob", "javascript");
-
-// EvaluationSuites versioned operations
-@@clientName(EvaluationSuites.listVersions, "list_evaluation_suite_versions");
-@@clientName(EvaluationSuites.listLatest, "list_evaluation_suites");
-@@clientName(EvaluationSuites.getVersion, "get_evaluation_suite");
-@@clientName(EvaluationSuites.deleteVersion, "delete_evaluation_suite");
-@@clientName(EvaluationSuites.createOrUpdateVersion, "create_or_update_evaluation_suite");
-@@clientName(EvaluationSuites.createEvaluationSuiteVersion, "create_evaluation_suite");
-@@clientName(EvaluationSuites.run, "run_evaluation_suite");
-
-@@clientName(EvaluationSuites.listVersions, "listEvaluationSuiteVersions", "javascript");
-@@clientName(EvaluationSuites.listLatest, "listEvaluationSuites", "javascript");
-@@clientName(EvaluationSuites.getVersion, "getEvaluationSuite", "javascript");
-@@clientName(EvaluationSuites.deleteVersion, "deleteEvaluationSuite", "javascript");
-@@clientName(EvaluationSuites.createOrUpdateVersion, "createOrUpdateEvaluationSuite", "javascript");
-@@clientName(EvaluationSuites.createEvaluationSuiteVersion, "createEvaluationSuite", "javascript");
-@@clientName(EvaluationSuites.run, "runEvaluationSuite", "javascript");
 // EvaluatorVersion datetime fields are typed as string in the spec but carry ISO-8601 timestamps
 @@alternateType(EvaluatorVersion.created_at, utcDateTime, "python");
 @@alternateType(EvaluatorVersion.modified_at, utcDateTime, "python");
@@ -409,12 +379,37 @@ using Azure.AI.Projects;
 @@clientName(EvaluatorGenerationJobs.list, "list_generation_jobs", "python");
 @@clientName(EvaluatorGenerationJobs.cancel, "cancel_generation_job", "python");
 @@clientName(EvaluatorGenerationJobs.delete, "delete_generation_job", "python");
-// Evaluation Suite Generation Jobs — unique names to avoid collision with evaluator gen methods
-@@clientName(EvaluationSuiteGenerationJobs.create, "create_generation_suite_job", "python");
-@@clientName(EvaluationSuiteGenerationJobs.get, "get_generation_suite_job", "python");
-@@clientName(EvaluationSuiteGenerationJobs.list, "list_generation_suite_jobs", "python");
-@@clientName(EvaluationSuiteGenerationJobs.cancel, "cancel_generation_suite_job", "python");
-@@clientName(EvaluationSuiteGenerationJobs.delete, "delete_generation_suite_job", "python");
+
+// // EvaluationSuites versioned operations
+// @@clientName(EvaluationSuites.listVersions, "list_evaluation_suite_versions");
+// @@clientName(EvaluationSuites.listLatest, "list_evaluation_suites");
+// @@clientName(EvaluationSuites.getVersion, "get_evaluation_suite");
+// @@clientName(EvaluationSuites.deleteVersion, "delete_evaluation_suite");
+// @@clientName(EvaluationSuites.createOrUpdateVersion, "create_or_update_evaluation_suite");
+// @@clientName(EvaluationSuites.createEvaluationSuiteVersion, "create_evaluation_suite");
+// @@clientName(EvaluationSuites.run, "run_evaluation_suite");
+
+// @@clientName(EvaluationSuites.listVersions, "listEvaluationSuiteVersions", "javascript");
+// @@clientName(EvaluationSuites.listLatest, "listEvaluationSuites", "javascript");
+// @@clientName(EvaluationSuites.getVersion, "getEvaluationSuite", "javascript");
+// @@clientName(EvaluationSuites.deleteVersion, "deleteEvaluationSuite", "javascript");
+// @@clientName(EvaluationSuites.createOrUpdateVersion, "createOrUpdateEvaluationSuite", "javascript");
+// @@clientName(EvaluationSuites.createEvaluationSuiteVersion, "createEvaluationSuite", "javascript");
+// @@clientName(EvaluationSuites.run, "runEvaluationSuite", "javascript");
+
+// // Evaluation Suite Generation Jobs — unscoped names (fixes AllScopes conflict)
+// @@clientName(EvaluationSuiteGenerationJobs.create, "create_generation_suite_job");
+// @@clientName(EvaluationSuiteGenerationJobs.get, "get_generation_suite_job");
+// @@clientName(EvaluationSuiteGenerationJobs.list, "list_generation_suite_jobs");
+// @@clientName(EvaluationSuiteGenerationJobs.cancel, "cancel_generation_suite_job");
+// @@clientName(EvaluationSuiteGenerationJobs.delete, "delete_generation_suite_job");
+
+// // Evaluation Suite Generation Jobs — renamed for JavaScript SDK discoverability
+// @@clientName(EvaluationSuiteGenerationJobs.create, "createGenerationSuiteJob", "javascript");
+// @@clientName(EvaluationSuiteGenerationJobs.get, "getGenerationSuiteJob", "javascript");
+// @@clientName(EvaluationSuiteGenerationJobs.list, "listGenerationSuiteJobs", "javascript");
+// @@clientName(EvaluationSuiteGenerationJobs.cancel, "cancelGenerationSuiteJob", "javascript");
+// @@clientName(EvaluationSuiteGenerationJobs.delete, "deleteGenerationSuiteJob", "javascript");
 
 // --------------------------------------------------------------------------------
 // Beta Insights sub‐client
