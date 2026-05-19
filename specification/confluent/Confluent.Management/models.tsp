@@ -2476,3 +2476,105 @@ model KafkaAzureSynapseAnalyticsSinkConnectorInfo extends PartnerInfoBase {
    */
   partnerConnectorType: "KafkaAzureSynapseAnalyticsSink";
 }
+
+/**
+ * Network Gateway Properties
+ */
+/**
+ * A key-value pair for extensibility.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
+model KeyValuePair {
+  /** The key. */
+  key: string;
+
+  /** The value. */
+  value: string;
+}
+
+/**
+ * Network Gateway Properties
+ */
+model NetworkGatewayProperties {
+  /**
+   * Display name of the network gateway
+   */
+  networkGatewayName: string;
+
+  /**
+   * The cloud service provider region for the network gateway
+   */
+  region: string;
+
+  /**
+   * Metadata of the record
+   */
+  metadata?: SCMetadataEntity;
+
+  /**
+   * Provisioning state of the network gateway
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisionState;
+
+  /**
+   * Additional properties for extensibility
+   */
+  @identifiers(#[])
+  dictionary?: KeyValuePair[];
+}
+
+/**
+ * Access Point Properties
+ */
+model AccessPointProperties {
+  /**
+   * Display name of the access point
+   */
+  accessPointName: string;
+
+  /**
+   * The cloud service provider region for the access point
+   */
+  region: string;
+
+  /**
+   * The resource ID of the virtual network
+   */
+  vnetId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/virtualNetworks";
+    }
+  ]>;
+
+  /**
+   * The resource ID of the delegated subnet
+   */
+  subnetId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/virtualNetworks/subnets";
+    }
+  ]>;
+
+  /**
+   * IP ranges to route through your virtual network instead of Confluent's default path. Required for Kafka clients in peered VNets or on-premises networks (e.g., 10.0.0.0/8, 172.16.0.0/12).
+   */
+  egressRoutes?: string;
+
+  /**
+   * Metadata of the record
+   */
+  metadata?: SCMetadataEntity;
+
+  /**
+   * Provisioning state of the access point
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisionState;
+
+  /**
+   * Additional properties for extensibility
+   */
+  @identifiers(#[])
+  dictionary?: KeyValuePair[];
+}
