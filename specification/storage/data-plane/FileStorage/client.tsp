@@ -80,6 +80,7 @@ interface ShareClient extends Storage.File.Share {}
 
 @@access(StorageErrorCode, Access.public, "go");
 @@usage(StorageErrorCode, Usage.output, "go");
+@@usage(StringEncoded, Usage.output, "go");
 
 /** Represents an array of signed identifiers */
 @clientName("SignedIdentifiers", "go")
