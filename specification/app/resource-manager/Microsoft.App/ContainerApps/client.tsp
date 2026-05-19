@@ -152,33 +152,6 @@ union OpenIdConnectClientCredentialMethod {
 
 @@alternateType(SourceControlProperties.repoUrl, url, "csharp");
 
-// C# @@clientLocation customizations.
-// Keep detector metadata operations grouped under the same detector-related
-// resource/collection names that the previous C# SDK exposed.
-@@clientLocation(
-  ContainerAppsDiagnostics.getRevision,
-  "ContainerAppDetectorPropertyRevisions",
-  "csharp"
-);
-
-@@clientLocation(
-  ContainerAppsDiagnostics.listRevisions,
-  "ContainerAppDetectorPropertyRevisions",
-  "csharp"
-);
-
-@@clientLocation(
-  ContainerAppDetectorProperties.getRoot,
-  "ContainerAppDetectorProperties",
-  "csharp"
-);
-
-@@clientLocation(
-  ContainerAppManagedEnvironmentDetectorResourceProperties.getRoot,
-  "ContainerAppManagedEnvironmentDetectorResourceProperties",
-  "csharp"
-);
-
 // C# @@clientName customizations.
 @@clientName(
   AvailableWorkloadProfilesOperationGroup.get,

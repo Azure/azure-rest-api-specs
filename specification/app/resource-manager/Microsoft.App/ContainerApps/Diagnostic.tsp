@@ -47,7 +47,8 @@ alias ContainerAppsDiagnosticsRevisionOps = Azure.ResourceManager.Legacy.LegacyO
     @key
     revisionName: string;
   },
-  ErrorType = DefaultErrorResponse
+  ErrorType = DefaultErrorResponse,
+  ResourceName = "ContainerAppDetectorPropertyRevision"
 >;
 
 alias ContainerAppsDetectorOps = Azure.ResourceManager.Legacy.LegacyOperations<
