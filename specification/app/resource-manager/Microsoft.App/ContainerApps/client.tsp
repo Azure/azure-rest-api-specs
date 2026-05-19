@@ -112,40 +112,31 @@ namespace Microsoft.App {
 }
 
 /**
- * C# compatibility usage unit enum.
+ * C# compatibility usage unit extensible enum.
  */
-enum UsageUnit {
-  /**
-   * Count.
-   */
+union UsageUnit {
+  string,
+  /** Count. */
   Count: "Count",
 }
 
 /**
- * C# compatibility enum for custom OpenID Connect client credential methods.
+ * C# compatibility custom OpenID Connect client credential method extensible enum.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "CSharp prefix marks this as a C#-only compatibility replacement during MPG migration"
-enum CSharpOpenIdConnectClientCredentialMethod {
-  /**
-   * Client secret post authentication.
-   */
+union OpenIdConnectClientCredentialMethod {
+  string,
+  /** Client secret post authentication. */
   ClientSecretPost: "ClientSecretPost",
 }
 
 // C# @@alternateType customizations.
-@@alternateType(
-  Azure.ResourceManager.LocationResourceParameter.location,
-  Azure.Core.azureLocation,
-  "csharp"
-);
-
 @@alternateType(DiagnosticsDefinition, CSharpDiagnosticsDefinition, "csharp");
 
-@@alternateType(Microsoft.App.Usage.unit, UsageUnit | string, "csharp");
+@@alternateType(Microsoft.App.Usage.unit, UsageUnit, "csharp");
 
 @@alternateType(
   OpenIdConnectClientCredential.method,
-  CSharpOpenIdConnectClientCredentialMethod | string,
+  OpenIdConnectClientCredentialMethod,
   "csharp"
 );
 
@@ -242,20 +233,6 @@ enum CSharpOpenIdConnectClientCredentialMethod {
 
 @@clientLocation(Jobs.listDetectors, "ContainerAppJobDetectors", "csharp");
 
-// Keep revision operations on the existing ContainerAppRevision resource group
-// instead of generating a separate operation group from the TypeSpec interface.
-@@clientLocation(
-  ContainerAppsRevisions.getRevision,
-  "ContainerAppRevisions",
-  "csharp"
-);
-
-@@clientLocation(
-  ContainerAppsRevisions.listRevisions,
-  "ContainerAppRevisions",
-  "csharp"
-);
-
 // The Certificates interface contains operations for both connected
 // environments and managed environments. Split them into the matching C# parent
 // resource groups to preserve the existing SDK shape.
@@ -319,68 +296,6 @@ enum CSharpOpenIdConnectClientCredentialMethod {
   "csharp"
 );
 
-// Connected-environment and managed-environment Dapr components share similar
-// operation names. Route each set to the matching C# parent resource group.
-@@clientLocation(
-  ConnectedEnvironmentsDaprComponents.get,
-  "ContainerAppConnectedEnvironmentDaprComponents",
-  "csharp"
-);
-
-@@clientLocation(
-  ConnectedEnvironmentsDaprComponents.createOrUpdate,
-  "ContainerAppConnectedEnvironmentDaprComponents",
-  "csharp"
-);
-
-@@clientLocation(
-  ConnectedEnvironmentsDaprComponents.delete,
-  "ContainerAppConnectedEnvironmentDaprComponents",
-  "csharp"
-);
-
-@@clientLocation(
-  ConnectedEnvironmentsDaprComponents.list,
-  "ContainerAppConnectedEnvironmentDaprComponents",
-  "csharp"
-);
-
-@@clientLocation(
-  ConnectedEnvironmentsDaprComponents.listSecrets,
-  "ContainerAppConnectedEnvironmentDaprComponents",
-  "csharp"
-);
-
-@@clientLocation(
-  DaprComponents.get,
-  "ContainerAppManagedEnvironmentDaprComponents",
-  "csharp"
-);
-
-@@clientLocation(
-  DaprComponents.createOrUpdate,
-  "ContainerAppManagedEnvironmentDaprComponents",
-  "csharp"
-);
-
-@@clientLocation(
-  DaprComponents.delete,
-  "ContainerAppManagedEnvironmentDaprComponents",
-  "csharp"
-);
-
-@@clientLocation(
-  DaprComponents.list,
-  "ContainerAppManagedEnvironmentDaprComponents",
-  "csharp"
-);
-
-@@clientLocation(
-  DaprComponents.listSecrets,
-  "ContainerAppManagedEnvironmentDaprComponents",
-  "csharp"
-);
-
 // C# @@clientName customizations.
 @@clientName(
   AvailableWorkloadProfilesOperationGroup.get,
@@ -417,7 +332,7 @@ enum CSharpOpenIdConnectClientCredentialMethod {
 @@clientName(UsagesOperationGroup.list, "GetUsages", "csharp");
 
 @@clientName(
-  CSharpOpenIdConnectClientCredentialMethod,
+  OpenIdConnectClientCredentialMethod,
   "ContainerAppOpenIdConnectClientCredentialMethod",
   "csharp"
 );
@@ -645,6 +560,12 @@ enum CSharpOpenIdConnectClientCredentialMethod {
   "csharp"
 );
 
+@@clientName(
+  ConnectedEnvironmentsDaprComponents,
+  "ContainerAppConnectedEnvironmentDaprComponents",
+  "csharp"
+);
+
 @@clientName(Container, "ContainerAppContainer", "csharp");
 
 @@clientName(
@@ -654,6 +575,8 @@ enum CSharpOpenIdConnectClientCredentialMethod {
 );
 
 @@clientName(ContainerAppAuthTokenProperties.expires, "ExpireOn", "csharp");
+
+@@clientName(ContainerAppsRevisions, "ContainerAppRevisions", "csharp");
 
 @@clientName(ContainerAppProbe.type, "ProbeType", "csharp");
 
@@ -722,6 +645,12 @@ enum CSharpOpenIdConnectClientCredentialMethod {
 @@clientName(CustomScaleRule.type, "CustomScaleRuleType", "csharp");
 
 @@clientName(DaprComponent, "ContainerAppDaprComponent", "csharp");
+
+@@clientName(
+  DaprComponents,
+  "ContainerAppManagedEnvironmentDaprComponents",
+  "csharp"
+);
 
 @@clientName(ConnectedEnvironmentsDaprComponents.get, "Get", "csharp");
 
@@ -1582,7 +1511,7 @@ enum CSharpOpenIdConnectClientCredentialMethod {
 );
 
 @@usage(
-  CSharpOpenIdConnectClientCredentialMethod,
+  OpenIdConnectClientCredentialMethod,
   Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
