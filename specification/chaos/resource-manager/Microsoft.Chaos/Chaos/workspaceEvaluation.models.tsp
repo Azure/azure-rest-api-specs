@@ -16,8 +16,7 @@ namespace Microsoft.Chaos;
  */
 @parentResource(Workspace)
 @singleton("latest")
-model WorkspaceEvaluation
-  is ProxyResource<WorkspaceEvaluationProperties> {
+model WorkspaceEvaluation is ProxyResource<WorkspaceEvaluationProperties> {
   ...ResourceNameParameter<
     Resource = WorkspaceEvaluation,
     KeyName = "evaluationName",

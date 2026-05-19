@@ -18,8 +18,7 @@ namespace Microsoft.Chaos;
  * Model that represents the scenario.
  */
 @parentResource(Scenario)
-model ScenarioConfiguration
-  is ProxyResource<ScenarioConfigurationProperties> {
+model ScenarioConfiguration is ProxyResource<ScenarioConfigurationProperties> {
   ...ResourceNameParameter<
     Resource = ScenarioConfiguration,
     KeyName = "scenarioConfigurationName",
