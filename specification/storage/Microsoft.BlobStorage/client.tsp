@@ -39,7 +39,7 @@ namespace Customizations;
   "FilterBlobSegment",
   "python,csharp,javascript,go"
 );
-@@clientName(FilteredBlobResponse.blobItems, "blobs", "javascript");
+@@clientName(FilteredBlobResponse.blobItems, "blobs", "javascript,go");
 @@clientName(
   ListContainersResponse,
   "ListContainersSegmentResponse",
@@ -347,6 +347,16 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@scope(Storage.Blob.Service.submitBatch, "!rust");
 
 // GO SPECIFICATION
+
+/** The blob flat list segment. */
+model BlobFlatListSegment {
+  /** The blob items. */
+  @pageItems
+  @Xml.name("Blob")
+  @Xml.unwrapped
+  blobItems: BlobItem[];
+}
+
 /** The type of blob deletions. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum BlobDeleteTypeCustom {
@@ -592,6 +602,8 @@ alias MultipartBodyParameterGo = {
 /** Represents an array of signed identifiers */
 @clientName("SignedIdentifiers", "go")
 model SignedIdentifiersGo is Array<SignedIdentifier>;
+@@access(StorageErrorCode, Access.public);
+@@usage(StorageErrorCode, Usage.output);
 @@alternateType(AccessPolicy.start, utcDateTime, "go");
 @@alternateType(AccessPolicy.expiry, utcDateTime, "go");
 @@alternateType(BlobDeleteType, BlobDeleteTypeCustom, "go");
@@ -638,6 +650,11 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
   ListBlobsIncludeItemGo[],
   "go"
 );
+@@alternateType(
+  ListBlobsResponse.blobItems,
+  BlobFlatListSegment,
+  "go"
+);
 @@alternateType(UserDelegationKey.signedExpiry, utcDateTime, "go");
 @@alternateType(UserDelegationKey.signedStart, utcDateTime, "go");
 @@alternateType(UserDelegationKey.value, string, "go");
@@ -648,6 +665,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@clientName(BlobServiceClient, "ServiceClient", "go");
 @@clientName(BlobDeleteTypeCustom, "DeleteType", "go");
 @@clientName(BlobExpiryOptions, "ExpiryOptions", "go");
+@@clientName(BlobHierarchyList, "BlobHierarchyListSegment", "go");
 @@clientName(BlobItem.objectReplicationMetadata, "OrMetadata", "go");
 @@clientName(BlobPublicAccessResponseHeader.access, "BlobPublicAccess", "go");
 @@clientName(BlobServiceProperties, "StorageServiceProperties", "go");
@@ -679,6 +697,12 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
   "ListBlobsHierarchySegmentResponse",
   "go"
 );
+@@clientName(
+  ListBlobsHierarchicalResponse.hierarchicalList,
+  "segment",
+  "go"
+);
+@@clientName(ListBlobsResponse.blobItems, "segment", "go");
 @@clientName(Metrics.includeApis, "IncludeAPIs", "go");
 @@clientName(QueryType, "QueryFormatType", "go");
 @@clientName(Storage.Blob.Blob.setProperties, "SetHTTPHeaders", "go");
