@@ -45,6 +45,11 @@ interface AccessPointResources {
    * Delete confluent access point by id
    */
   delete is ArmResourceDeleteWithoutOkAsync<AccessPointResource>;
+
+  /**
+   * Lists all access points in a network gateway
+   */
+  list is ArmResourceListByParent<AccessPointResource>;
 }
 
 @@doc(AccessPointResource.name, "Confluent access point id");

@@ -2684,6 +2684,69 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/environments/{environmentId}/networkGateways/{networkGatewayId}/accessPoints": {
+      "get": {
+        "operationId": "AccessPointResources_List",
+        "tags": [
+          "AccessPointResources"
+        ],
+        "description": "Lists all access points in a network gateway",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Organization resource name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "environmentId",
+            "in": "path",
+            "description": "Confluent environment id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "networkGatewayId",
+            "in": "path",
+            "description": "Confluent network gateway id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AccessPointResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccessPointResources_List_MaximumSet": {
+            "$ref": "./examples/AccessPointResources_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/environments/{environmentId}/networkGateways/{networkGatewayId}/accessPoints/{accessPointId}": {
       "get": {
         "operationId": "AccessPointResources_Get",
@@ -3596,6 +3659,27 @@
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "AccessPointResourceListResult": {
+      "type": "object",
+      "description": "The response of a AccessPointResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AccessPointResource items on this page",
+          "items": {
+            "$ref": "#/definitions/AccessPointResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "AccessRoleBindingNameListSuccessResponse": {
