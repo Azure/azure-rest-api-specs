@@ -23,39 +23,48 @@ using Microsoft.Storage;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StorageAccountCreateParameters.properties);
-@@clientName(StorageAccountPropertiesCreateParameters.isSftpEnabled,
+@@clientName(
+  StorageAccountPropertiesCreateParameters.isSftpEnabled,
   "IsSftpEnabled"
 );
-@@clientName(StorageAccountPropertiesCreateParameters.isLocalUserEnabled,
+@@clientName(
+  StorageAccountPropertiesCreateParameters.isLocalUserEnabled,
   "IsLocalUserEnabled"
 );
-@@clientName(StorageAccountPropertiesCreateParameters.isHnsEnabled,
+@@clientName(
+  StorageAccountPropertiesCreateParameters.isHnsEnabled,
   "IsHnsEnabled"
 );
 
 @@clientName(Encryption.keyvaultproperties, "KeyVaultProperties");
 @@clientName(Encryption.identity, "EncryptionIdentity");
-@@clientName(Encryption.requireInfrastructureEncryption,
+@@clientName(
+  Encryption.requireInfrastructureEncryption,
   "RequireInfrastructureEncryption"
 );
 
 @@clientName(KeyVaultProperties.keyname, "KeyName");
 @@clientName(KeyVaultProperties.keyversion, "KeyVersion");
 @@clientName(KeyVaultProperties.keyvaulturi, "KeyVaultUri");
-@@clientName(KeyVaultProperties.currentVersionedKeyIdentifier,
+@@clientName(
+  KeyVaultProperties.currentVersionedKeyIdentifier,
   "CurrentVersionedKeyIdentifier"
 );
-@@clientName(KeyVaultProperties.lastKeyRotationTimestamp,
+@@clientName(
+  KeyVaultProperties.lastKeyRotationTimestamp,
   "LastKeyRotationTimestamp"
 );
-@@clientName(KeyVaultProperties.currentVersionedKeyExpirationTimestamp,
+@@clientName(
+  KeyVaultProperties.currentVersionedKeyExpirationTimestamp,
   "CurrentVersionedKeyExpirationTimestamp"
 );
 
-@@clientName(EncryptionIdentity.userAssignedIdentity,
+@@clientName(
+  EncryptionIdentity.userAssignedIdentity,
   "EncryptionUserAssignedIdentity"
 );
-@@clientName(EncryptionIdentity.federatedIdentityClientId,
+@@clientName(
+  EncryptionIdentity.federatedIdentityClientId,
   "EncryptionFederatedIdentityClientId"
 );
 
@@ -65,7 +74,8 @@ using Microsoft.Storage;
 
 @@clientName(NetworkRuleSet.bypass, "Bypass");
 
-@@clientName(StorageAccountProperties.supportsHttpsTrafficOnly,
+@@clientName(
+  StorageAccountProperties.supportsHttpsTrafficOnly,
   "EnableHttpsTrafficOnly"
 );
 @@clientName(StorageAccountProperties.networkAcls, "NetworkRuleSet");
@@ -73,63 +83,79 @@ using Microsoft.Storage;
 @@clientName(StorageAccountProperties.isLocalUserEnabled, "IsLocalUserEnabled");
 @@clientName(StorageAccountProperties.isHnsEnabled, "IsHnsEnabled");
 @@clientName(StorageAccountProperties.isNfsV3Enabled, "EnableNfsV3");
-@@clientName(StorageAccountProperties.isSkuConversionBlocked,
+@@clientName(
+  StorageAccountProperties.isSkuConversionBlocked,
   "IsSkuConversionBlocked"
 );
-@@clientName(StorageAccountProperties.enableExtendedGroups,
+@@clientName(
+  StorageAccountProperties.enableExtendedGroups,
   "EnableExtendedGroups"
 );
-@@clientName(StorageAccountProperties.geoReplicationStats,
+@@clientName(
+  StorageAccountProperties.geoReplicationStats,
   "GeoReplicationStats"
 );
 @@clientName(StorageAccountProperties.failoverInProgress, "FailoverInProgress");
 @@clientName(StorageAccountProperties.routingPreference, "RoutingPreference");
 @@clientName(StorageAccountProperties.blobRestoreStatus, "BlobRestoreStatus");
-@@clientName(StorageAccountProperties.allowBlobPublicAccess,
+@@clientName(
+  StorageAccountProperties.allowBlobPublicAccess,
   "AllowBlobPublicAccess"
 );
-@@clientName(StorageAccountProperties.immutableStorageWithVersioning,
+@@clientName(
+  StorageAccountProperties.immutableStorageWithVersioning,
   "ImmutableStorageWithVersioning"
 );
-@@clientName(StorageAccountProperties.storageAccountSkuConversionStatus,
+@@clientName(
+  StorageAccountProperties.storageAccountSkuConversionStatus,
   "StorageAccountSkuConversionStatus"
 );
-@@clientName(StorageAccountProperties.accountMigrationInProgress,
+@@clientName(
+  StorageAccountProperties.accountMigrationInProgress,
   "AccountMigrationInProgress"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StorageAccountUpdateParameters.properties);
 
-@@clientName(StorageAccountPropertiesUpdateParameters.supportsHttpsTrafficOnly,
+@@clientName(
+  StorageAccountPropertiesUpdateParameters.supportsHttpsTrafficOnly,
   "EnableHttpsTrafficOnly"
 );
-@@clientName(StorageAccountPropertiesUpdateParameters.isSftpEnabled,
+@@clientName(
+  StorageAccountPropertiesUpdateParameters.isSftpEnabled,
   "IsSftpEnabled"
 );
-@@clientName(StorageAccountPropertiesUpdateParameters.isLocalUserEnabled,
+@@clientName(
+  StorageAccountPropertiesUpdateParameters.isLocalUserEnabled,
   "IsLocalUserEnabled"
 );
-@@clientName(StorageAccountPropertiesUpdateParameters.networkAcls,
+@@clientName(
+  StorageAccountPropertiesUpdateParameters.networkAcls,
   "NetworkRuleSet"
 );
-@@clientName(StorageAccountPropertiesUpdateParameters.enableExtendedGroups,
+@@clientName(
+  StorageAccountPropertiesUpdateParameters.enableExtendedGroups,
   "EnableExtendedGroups"
 );
-@@clientName(StorageAccountPropertiesUpdateParameters.routingPreference,
+@@clientName(
+  StorageAccountPropertiesUpdateParameters.routingPreference,
   "RoutingPreference"
 );
-@@clientName(StorageAccountPropertiesUpdateParameters.allowBlobPublicAccess,
+@@clientName(
+  StorageAccountPropertiesUpdateParameters.allowBlobPublicAccess,
   "AllowBlobPublicAccess"
 );
-@@clientName(StorageAccountPropertiesUpdateParameters.immutableStorageWithVersioning,
+@@clientName(
+  StorageAccountPropertiesUpdateParameters.immutableStorageWithVersioning,
   "ImmutableStorageWithVersioning"
 );
 
 @@clientName(AccountSasParameters.signedServices, "Services");
 @@clientName(AccountSasParameters.signedResourceTypes, "ResourceTypes");
 @@clientName(AccountSasParameters.signedPermission, "Permissions");
-@@clientName(AccountSasParameters.signedIp,
+@@clientName(
+  AccountSasParameters.signedIp,
   "IPAddressOrRange",
   "!java, !javascript"
 );
@@ -139,7 +165,8 @@ using Microsoft.Storage;
 
 @@clientName(ServiceSasParameters.signedResource, "Resource");
 @@clientName(ServiceSasParameters.signedPermission, "Permissions");
-@@clientName(ServiceSasParameters.signedIp,
+@@clientName(
+  ServiceSasParameters.signedIp,
   "IPAddressOrRange",
   "!java, !javascript"
 );
@@ -160,12 +187,17 @@ using Microsoft.Storage;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(PrivateLinkResource.properties);
 
-@@clientName(BlobServices.setServiceProperties::parameters.resource,
+@@clientName(
+  BlobServices.setServiceProperties::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(BlobServiceProperties.properties);
-@@clientName(BlobServiceProperties.properties, "BlobServiceProperties");
+@@clientName(
+  BlobServiceProperties.properties,
+  "BlobServiceProperties",
+  "!javascript"
+);
 
 @@clientName(BlobContainers.create::parameters.resource, "blobContainer");
 @@clientName(BlobContainers.update::parameters.properties, "blobContainer");
@@ -174,45 +206,56 @@ using Microsoft.Storage;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(BlobContainer.properties);
-@@clientName(BlobContainer.properties, "ContainerProperties");
+@@clientName(BlobContainer.properties, "ContainerProperties", "!javascript");
 
 @@clientName(ContainerProperties.immutabilityPolicy, "ImmutabilityPolicy");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ImmutabilityPolicy.properties);
 
-@@clientName(FileServices.setServiceProperties::parameters.resource,
+@@clientName(
+  FileServices.setServiceProperties::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(FileServiceProperties.properties);
-@@clientName(FileServiceProperties.properties, "FileServiceProperties");
+@@clientName(
+  FileServiceProperties.properties,
+  "FileServiceProperties",
+  "!javascript"
+);
 
 @@clientName(FileShares.create::parameters.resource, "fileShare");
 @@clientName(FileShares.update::parameters.properties, "fileShare");
 @@clientName(FileShares.restore::parameters.body, "deletedShare");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(FileShare.properties);
-@@clientName(FileShare.properties, "FileShareProperties");
+@@clientName(FileShare.properties, "FileShareProperties", "!javascript");
 
-@@clientName(QueueServices.setServiceProperties::parameters.resource,
+@@clientName(
+  QueueServices.setServiceProperties::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(QueueServiceProperties.properties);
-@@clientName(QueueServiceProperties.properties, "QueueServiceProperties");
+@@clientName(
+  QueueServiceProperties.properties,
+  "QueueServiceProperties",
+  "!javascript"
+);
 
 @@clientName(StorageQueues.create::parameters.resource, "queue");
 @@clientName(StorageQueues.update::parameters.properties, "queue");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StorageQueue.properties);
-@@clientName(StorageQueue.properties, "QueueProperties");
+@@clientName(StorageQueue.properties, "QueueProperties", "!javascript");
 
 @@clientName(StorageAccounts.create::parameters.resource, "parameters");
 @@clientName(StorageAccounts.update::parameters.properties, "parameters");
 @@clientName(StorageAccounts.regenerateKey::parameters.body, "regenerateKey");
 @@clientName(StorageAccounts.listAccountSAS::parameters.body, "parameters");
 @@clientName(StorageAccounts.listServiceSAS::parameters.body, "parameters");
-@@clientName(StorageAccounts.customerInitiatedMigration::parameters.body,
+@@clientName(
+  StorageAccounts.customerInitiatedMigration::parameters.body,
   "parameters"
 );
 @@clientName(StorageAccounts.restoreBlobRanges::parameters.body, "parameters");
@@ -226,29 +269,35 @@ using Microsoft.Storage;
 @@flattenProperty(DeletedAccount.properties);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StorageAccountMigration.properties);
-@@clientName(StorageAccountMigration.properties,
-  "StorageAccountMigrationDetails"
+@@clientName(
+  StorageAccountMigration.properties,
+  "StorageAccountMigrationDetails",
+  "!javascript"
 );
 
-@@clientName(ManagementPolicies.createOrUpdate::parameters.resource,
+@@clientName(
+  ManagementPolicies.createOrUpdate::parameters.resource,
   "properties"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ManagementPolicy.properties);
 
-@@clientName(BlobInventoryPolicies.createOrUpdate::parameters.resource,
+@@clientName(
+  BlobInventoryPolicies.createOrUpdate::parameters.resource,
   "properties"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(BlobInventoryPolicy.properties);
 
-@@clientName(ObjectReplicationPolicyOperationGroup.createOrUpdate::parameters.resource,
+@@clientName(
+  ObjectReplicationPolicyOperationGroup.createOrUpdate::parameters.resource,
   "properties"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ObjectReplicationPolicy.properties);
 
-@@clientName(LocalUserOperationGroup.createOrUpdate::parameters.resource,
+@@clientName(
+  LocalUserOperationGroup.createOrUpdate::parameters.resource,
   "properties"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -258,25 +307,35 @@ using Microsoft.Storage;
 @@clientName(EncryptionScopes.patch::parameters.properties, "encryptionScope");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(EncryptionScope.properties);
-@@clientName(EncryptionScope.properties, "EncryptionScopeProperties");
+@@clientName(
+  EncryptionScope.properties,
+  "EncryptionScopeProperties",
+  "!javascript"
+);
 
-@@clientName(TableServices.setServiceProperties::parameters.resource,
+@@clientName(
+  TableServices.setServiceProperties::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(TableServiceProperties.properties);
-@@clientName(TableServiceProperties.properties, "TableServiceProperties");
+@@clientName(
+  TableServiceProperties.properties,
+  "TableServiceProperties",
+  "!javascript"
+);
 
 @@clientName(Tables.create::parameters.resource, "parameters");
 @@clientName(Tables.update::parameters.properties, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Table.properties);
-@@clientName(Table.properties, "TableProperties");
+@@clientName(Table.properties, "TableProperties", "!javascript");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(NetworkSecurityPerimeterConfiguration.properties);
 
 @@clientName(StorageTaskAssignments.create::parameters.resource, "parameters");
-@@clientName(StorageTaskAssignments.update::parameters.properties,
+@@clientName(
+  StorageTaskAssignments.update::parameters.properties,
   "parameters"
 );
 @@visibility(FileShareItems.value, Lifecycle.Read);
@@ -287,82 +346,102 @@ using Microsoft.Storage;
 @@visibility(FileServiceUsages.value, Lifecycle.Read);
 @@visibility(StorageTaskReportSummary.value, Lifecycle.Read);
 
-@@clientName(StorageAccounts.checkNameAvailability::parameters.body,
+@@clientName(
+  StorageAccounts.checkNameAvailability::parameters.body,
   "accountName"
 );
-@@clientName(ImmutabilityPolicies.createOrUpdateImmutabilityPolicy::parameters.resource,
+@@clientName(
+  ImmutabilityPolicies.createOrUpdateImmutabilityPolicy::parameters.resource,
   "parameters"
 );
-@@clientName(StorageAccountPropertiesCreateParameters.enableExtendedGroups,
+@@clientName(
+  StorageAccountPropertiesCreateParameters.enableExtendedGroups,
   "EnableExtendedGroups"
 );
-@@clientName(StorageAccountPropertiesCreateParameters.routingPreference,
+@@clientName(
+  StorageAccountPropertiesCreateParameters.routingPreference,
   "RoutingPreference"
 );
-@@clientName(StorageAccountPropertiesCreateParameters.allowBlobPublicAccess,
+@@clientName(
+  StorageAccountPropertiesCreateParameters.allowBlobPublicAccess,
   "AllowBlobPublicAccess"
 );
-@@clientName(StorageAccountPropertiesCreateParameters.immutableStorageWithVersioning,
+@@clientName(
+  StorageAccountPropertiesCreateParameters.immutableStorageWithVersioning,
   "ImmutableStorageWithVersioning"
 );
-@@clientName(StorageAccountPropertiesCreateParameters.networkAcls,
+@@clientName(
+  StorageAccountPropertiesCreateParameters.networkAcls,
   "NetworkRuleSet"
 );
-@@clientName(StorageAccountPropertiesCreateParameters.supportsHttpsTrafficOnly,
+@@clientName(
+  StorageAccountPropertiesCreateParameters.supportsHttpsTrafficOnly,
   "EnableHttpsTrafficOnly"
 );
-@@clientName(StorageAccountPropertiesCreateParameters.isNfsV3Enabled,
+@@clientName(
+  StorageAccountPropertiesCreateParameters.isNfsV3Enabled,
   "EnableNfsV3"
 );
 @@visibility(StorageTaskAssignmentsList.value, Lifecycle.Read);
 
-@@clientLocation(BlobServices.blobContainersList, BlobContainers);
+@@clientLocation(BlobServices.blobContainersList, BlobContainers, "!csharp");
 @@clientName(BlobServices.blobContainersList, "List");
 @@clientName(BlobContainers.lease::parameters.body, "parameters");
 @@clientLocation(ImmutabilityPolicies.getImmutabilityPolicy, BlobContainers);
-@@clientLocation(ImmutabilityPolicies.createOrUpdateImmutabilityPolicy,
+@@clientLocation(
+  ImmutabilityPolicies.createOrUpdateImmutabilityPolicy,
   BlobContainers
 );
-@@clientName(ImmutabilityPolicies.createOrUpdateImmutabilityPolicy::parameters.resource,
+@@clientName(
+  ImmutabilityPolicies.createOrUpdateImmutabilityPolicy::parameters.resource,
   "parameters"
 );
 @@clientLocation(ImmutabilityPolicies.deleteImmutabilityPolicy, BlobContainers);
 @@clientLocation(ImmutabilityPolicies.lockImmutabilityPolicy, BlobContainers);
 @@clientLocation(ImmutabilityPolicies.extendImmutabilityPolicy, BlobContainers);
-@@clientName(ImmutabilityPolicies.extendImmutabilityPolicy::parameters.body,
+@@clientName(
+  ImmutabilityPolicies.extendImmutabilityPolicy::parameters.body,
   "parameters"
 );
-@@clientLocation(FileServices.fileSharesList, FileShares);
+@@clientLocation(FileServices.fileSharesList, FileShares, "!csharp");
 @@clientName(FileServices.fileSharesList, "List");
 @@clientLocation(FileServiceUsageOperationGroup.getServiceUsage, FileServices);
-@@clientLocation(FileServiceUsageOperationGroup.listServiceUsages,
+@@clientLocation(
+  FileServiceUsageOperationGroup.listServiceUsages,
   FileServices
 );
 @@clientName(FileShares.lease::parameters.body, "parameters");
-@@clientLocation(QueueServices.queueList, "Queue");
+@@clientLocation(QueueServices.queueList, "Queue", "!csharp");
 @@clientName(QueueServices.queueList, "List");
 @@clientLocation(StorageQueues.get, "Queue");
 @@clientLocation(StorageQueues.create, "Queue");
 @@clientLocation(StorageQueues.update, "Queue");
 @@clientLocation(StorageQueues.delete, "Queue");
 @@clientLocation(StorageAccounts.listByStorageAccount, "PrivateLinkResources");
-@@clientLocation(StorageAccounts.storageTaskAssignmentsInstancesReportList,
-  "StorageTaskAssignmentsInstancesReport"
+@@clientLocation(
+  StorageAccounts.storageTaskAssignmentsInstancesReportList,
+  "StorageTaskAssignmentsInstancesReport",
+  "!csharp"
 );
 @@clientName(StorageAccounts.storageTaskAssignmentsInstancesReportList, "List");
-@@clientLocation(StorageAccountMigrations.getCustomerInitiatedMigration,
+@@clientLocation(
+  StorageAccountMigrations.getCustomerInitiatedMigration,
   StorageAccounts
 );
-@@clientLocation(ObjectReplicationPolicyOperationGroup.get,
+@@clientLocation(
+  ObjectReplicationPolicyOperationGroup.get,
   "ObjectReplicationPolicies"
 );
-@@clientLocation(ObjectReplicationPolicyOperationGroup.createOrUpdate,
+@@clientLocation(
+  ObjectReplicationPolicyOperationGroup.createOrUpdate,
   "ObjectReplicationPolicies"
 );
-@@clientLocation(ObjectReplicationPolicyOperationGroup.delete,
+@@clientLocation(
+  ObjectReplicationPolicyOperationGroup.delete,
   "ObjectReplicationPolicies"
 );
-@@clientLocation(ObjectReplicationPolicyOperationGroup.list,
+@@clientLocation(
+  ObjectReplicationPolicyOperationGroup.list,
   "ObjectReplicationPolicies"
 );
 @@clientLocation(LocalUserOperationGroup.get, "LocalUsers");
@@ -376,12 +455,39 @@ using Microsoft.Storage;
 @@clientLocation(Tables.update, "Table");
 @@clientLocation(Tables.delete, "Table");
 @@clientLocation(Tables.list, "Table");
-@@clientLocation(StorageTaskAssignments.storageTaskAssignmentInstancesReportList,
-  "StorageTaskAssignmentInstancesReport"
+@@clientLocation(
+  StorageTaskAssignments.storageTaskAssignmentInstancesReportList,
+  "StorageTaskAssignmentInstancesReport",
+  "!csharp"
 );
-@@clientName(StorageTaskAssignments.storageTaskAssignmentInstancesReportList,
+@@clientName(
+  StorageTaskAssignments.storageTaskAssignmentInstancesReportList,
   "List"
 );
 @@clientLocation(SkusOperationGroup.list, "Skus");
 @@clientLocation(DeletedAccountsOperationGroup.list, DeletedAccounts);
 @@clientLocation(UsagesOperationGroup.listByLocation, "Usages");
+
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ErrorResponse,
+  "ErrorResponseAutoGenerated",
+  "python"
+);
+
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ErrorResponse,
+  "ErrorResponseAutoGenerated",
+  "go"
+);
+
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ErrorResponse,
+  "ErrorResponseAutoGenerated",
+  "java"
+);
+
+@@clientName(
+  Azure.ResourceManager.CommonTypes.Resource,
+  "ResourceAutoGenerated",
+  "java"
+);

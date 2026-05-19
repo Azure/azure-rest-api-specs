@@ -33,7 +33,8 @@ model StaticSiteCustomDomainOverviewARMResource
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
+@tag("StaticSites")
+@armResourceOperations(#{ omitTags: true })
 interface StaticSiteCustomDomainOverviewARMResources {
   /**
    * Description for Gets an existing custom domain for a particular static site.
@@ -53,10 +54,12 @@ interface StaticSiteCustomDomainOverviewARMResources {
   createOrUpdateStaticSiteCustomDomain is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     StaticSiteCustomDomainOverviewARMResource,
     StaticSiteCustomDomainRequestPropertiesARMResource,
-    Response = ArmResourceUpdatedResponse<StaticSiteCustomDomainOverviewARMResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StaticSiteCustomDomainOverviewARMResource>> & {
-      @bodyRoot
-      _: StaticSiteCustomDomainOverviewARMResource;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<StaticSiteCustomDomainOverviewARMResource>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StaticSiteCustomDomainOverviewARMResource>> & {
+          @bodyRoot
+          _: StaticSiteCustomDomainOverviewARMResource;
+        }),
     Error = DefaultErrorResponse
   >;
 
@@ -98,15 +101,19 @@ interface StaticSiteCustomDomainOverviewARMResources {
   >;
 }
 
-@@doc(StaticSiteCustomDomainOverviewARMResource.name,
+@@doc(
+  StaticSiteCustomDomainOverviewARMResource.name,
   "The custom domain name."
 );
-@@doc(StaticSiteCustomDomainOverviewARMResource.properties,
+@@doc(
+  StaticSiteCustomDomainOverviewARMResource.properties,
   "StaticSiteCustomDomainOverviewARMResource resource specific properties"
 );
-@@doc(StaticSiteCustomDomainOverviewARMResources.createOrUpdateStaticSiteCustomDomain::parameters.resource,
+@@doc(
+  StaticSiteCustomDomainOverviewARMResources.createOrUpdateStaticSiteCustomDomain::parameters.resource,
   "A JSON representation of the static site custom domain request properties. See example."
 );
-@@doc(StaticSiteCustomDomainOverviewARMResources.validateCustomDomainCanBeAddedToStaticSite::parameters.body,
+@@doc(
+  StaticSiteCustomDomainOverviewARMResources.validateCustomDomainCanBeAddedToStaticSite::parameters.body,
   "A JSON representation of the static site custom domain request properties. See example."
 );

@@ -35,6 +35,8 @@ tag: package-2024-12-01
 directive:
   - suppress: LROStatusCodesReturnTypeSchema
     reason: For this data plane API, it is not a long run operation and the status code indicates the results.
+  - suppress: LroExtension
+    reason: These are fire-and-forget APIs; 202 indicates the request is accepted, not that it is long-running.
   - suppress: XmsExamplesRequired
     reason: There are a lot of APIs that does not have the example. While it is being worked upon disabling this to ensure that we catch and fix other violations
 ```

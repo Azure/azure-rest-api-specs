@@ -10,12 +10,10 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.Search"
-    clear-output-folder: true
-    model-namespace: false
+  "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.Search"
-    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    enable-wire-path-attribute: true
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-search"
     namespace: "azure.mgmt.search"
@@ -25,16 +23,19 @@ options:
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-search"
     namespace: "com.azure.resourcemanager.search"
-    service-name: "Search"
+    service-name: "Search Service"
     flavor: azure
     use-object-for-unknown: true
+    uuid-as-string: false
     premium: true
+    generate-tests: false
     enable-sync-stack: false
     remove-inner: CheckNameAvailabilityOutput
     client-side-validations: true
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-search"
     flavor: azure
+    compatibility-lro: true
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-search"

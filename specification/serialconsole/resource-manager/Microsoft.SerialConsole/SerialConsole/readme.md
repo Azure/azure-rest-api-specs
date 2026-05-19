@@ -31,8 +31,7 @@ These settings apply only when `--tag=package-2024-07` is specified on the comma
 
 ``` yaml $(tag) == 'package-2024-07'
 input-file:
-- stable/2024-07-01/serialconsole.json
-- stable/2024-07-01/serialport.json
+- stable/2024-07-01/openapi.json
 ```
 
 ### Tag: package-2023-01

@@ -1,0 +1,67 @@
+{
+  "title": "List policy enrollments for subscription",
+  "operationId": "PolicyEnrollments_List",
+  "parameters": {
+    "subscriptionId": "ae640e6b-ba3e-4256-9d62-2993eecfa6f2",
+    "api-version": "2026-01-01-preview",
+    "$filter": "atScope()"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "policyAssignmentId": "/providers/Microsoft.Management/managementGroups/DevOrg/providers/Microsoft.Authorization/policyAssignments/CostManagement",
+              "policyDefinitionReferenceIds": [
+                "Limit_Skus"
+              ],
+              "policyAssignmentInstanceId": "00000000-0000-0000-0000-000000000000",
+              "displayName": "Enroll demo cluster",
+              "description": "Enroll demo cluster from limit sku",
+              "metadata": {
+                "reason": "Enrollment for a expensive VM demo"
+              }
+            },
+            "systemData": {
+              "createdBy": "string",
+              "createdByType": "User",
+              "createdAt": "2020-07-01T01:01:01.1075056Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2020-07-01T02:01:01.1075056Z"
+            },
+            "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyEnrollments/TestVMSub",
+            "type": "Microsoft.Authorization/policyEnrollments",
+            "eTag": "00000000-0000-0000-0000-000000000000",
+            "name": "TestVMSub"
+          },
+          {
+            "properties": {
+              "policyAssignmentId": "/providers/Microsoft.Management/managementGroups/DevOrg/providers/Microsoft.Authorization/policyAssignments/LimitPorts",
+              "policyAssignmentInstanceId": "00000000-0000-0000-0000-000000000000",
+              "displayName": "Enroll jump box open ports",
+              "description": "Enroll jump box open ports from limit ports policy",
+              "metadata": {
+                "reason": "Need to open RDP port to corp net"
+              }
+            },
+            "systemData": {
+              "createdBy": "string",
+              "createdByType": "User",
+              "createdAt": "2020-07-01T01:01:01.1075056Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2020-07-01T02:01:01.1075056Z"
+            },
+            "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyEnrollments/TestVNetSub",
+            "type": "Microsoft.Authorization/policyEnrollments",
+            "eTag": "00000000-0000-0000-0000-000000000000",
+            "name": "TestVNetSub"
+          }
+        ]
+      }
+    }
+  }
+}

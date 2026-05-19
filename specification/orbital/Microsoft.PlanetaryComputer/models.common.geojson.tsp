@@ -55,7 +55,7 @@ model Feature {
    * Feature properties
    */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Properties are user-provided"
-  properties?: Record<unknown> = #{};
+  properties?: Record<unknown>;
 }
 
 /**

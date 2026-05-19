@@ -4,182 +4,355 @@ using Azure.ClientGenerator.Core;
 using Microsoft.DataProtection;
 
 // Recovery Points operations
-@@clientLocation(AzureBackupRecoveryPointResources.get, "RecoveryPoints");
-@@clientLocation(AzureBackupRecoveryPointResources.list, "RecoveryPoints");
+@@clientLocation(
+  AzureBackupRecoveryPointResources.get,
+  "RecoveryPoints",
+  "!csharp"
+);
+@@clientLocation(
+  AzureBackupRecoveryPointResources.list,
+  "RecoveryPoints",
+  "!csharp"
+);
 
 // Jobs operations
-@@clientLocation(AzureBackupJobResources.get, "Jobs");
-@@clientLocation(AzureBackupJobResources.list, "Jobs");
+@@clientLocation(AzureBackupJobResources.get, "Jobs", "!csharp");
+@@clientLocation(AzureBackupJobResources.list, "Jobs", "!csharp");
 
 // BackupVaults operations
-@@clientLocation(BackupVaultResources.get, "BackupVaults");
-@@clientLocation(BackupVaultResources.createOrUpdate, "BackupVaults");
-@@clientLocation(BackupVaultResources.update, "BackupVaults");
-@@clientLocation(BackupVaultResources.delete, "BackupVaults");
-@@clientLocation(BackupVaultResources.getInSubscription, "BackupVaults");
-@@clientLocation(BackupVaultResources.operationStatusBackupVaultContextGet,
-  "OperationStatusBackupVaultContext"
+@@clientLocation(BackupVaultResources.get, "BackupVaults", "!csharp");
+@@clientLocation(
+  BackupVaultResources.createOrUpdate,
+  "BackupVaults",
+  "!csharp"
 );
-@@clientLocation(BackupVaultResources.trigger, "ExportJobs");
-@@clientLocation(BackupVaultOperationResults.getInResourceGroup,
-  "BackupVaults"
+@@clientLocation(BackupVaultResources.update, "BackupVaults", "!csharp");
+@@clientLocation(BackupVaultResources.delete, "BackupVaults", "!csharp");
+@@clientLocation(
+  BackupVaultResources.getInSubscription,
+  "BackupVaults",
+  "!csharp"
 );
-@@clientLocation(BackupVaultsOperationGroup.checkNameAvailability,
-  "BackupVaults"
+@@clientLocation(
+  BackupVaultResources.operationStatusBackupVaultContextGet,
+  "OperationStatusBackupVaultContext",
+  "!csharp"
+);
+@@clientLocation(BackupVaultResources.trigger, "ExportJobs", "!csharp");
+@@clientLocation(
+  BackupVaultOperationResults.getInResourceGroup,
+  "BackupVaults",
+  "!csharp"
+);
+@@clientLocation(
+  BackupVaultsOperationGroup.checkNameAvailability,
+  "BackupVaults",
+  "!csharp"
 );
 
 // BackupPolicies operations
-@@clientLocation(BaseBackupPolicyResources.get, "BackupPolicies");
-@@clientLocation(BaseBackupPolicyResources.createOrUpdate, "BackupPolicies");
-@@clientLocation(BaseBackupPolicyResources.delete, "BackupPolicies");
-@@clientLocation(BaseBackupPolicyResources.list, "BackupPolicies");
+@@clientLocation(BaseBackupPolicyResources.get, "BackupPolicies", "!csharp");
+@@clientLocation(
+  BaseBackupPolicyResources.createOrUpdate,
+  "BackupPolicies",
+  "!csharp"
+);
+@@clientLocation(BaseBackupPolicyResources.delete, "BackupPolicies", "!csharp");
+@@clientLocation(BaseBackupPolicyResources.list, "BackupPolicies", "!csharp");
 
 // DeletedBackupInstances operations
-@@clientLocation(DeletedBackupInstanceResources.get, "DeletedBackupInstances");
-@@clientLocation(DeletedBackupInstanceResources.list, "DeletedBackupInstances");
-@@clientLocation(DeletedBackupInstanceResources.undelete,
-  "DeletedBackupInstances"
+@@clientLocation(
+  DeletedBackupInstanceResources.get,
+  "DeletedBackupInstances",
+  "!csharp"
+);
+@@clientLocation(
+  DeletedBackupInstanceResources.list,
+  "DeletedBackupInstances",
+  "!csharp"
+);
+@@clientLocation(
+  DeletedBackupInstanceResources.undelete,
+  "DeletedBackupInstances",
+  "!csharp"
 );
 
 // BackupInstances operations
-@@clientLocation(BackupInstanceResources.get, BackupInstances);
-@@clientLocation(BackupInstanceResources.createOrUpdate, BackupInstances);
-@@clientLocation(BackupInstanceResources.delete, BackupInstances);
-@@clientLocation(BackupInstanceResources.adhocBackup, BackupInstances);
-@@clientLocation(BackupInstanceResources.validateForModifyBackup,
-  BackupInstances
+@@clientLocation(BackupInstanceResources.get, BackupInstances, "!csharp");
+@@clientLocation(
+  BackupInstanceResources.createOrUpdate,
+  BackupInstances,
+  "!csharp"
 );
-@@clientLocation(BackupInstanceResources.triggerRehydrate, BackupInstances);
-@@clientLocation(BackupInstanceResources.triggerRestore, BackupInstances);
-@@clientLocation(BackupInstanceResources.resumeBackups, BackupInstances);
-@@clientLocation(BackupInstanceResources.resumeProtection, BackupInstances);
-@@clientLocation(BackupInstanceResources.stopProtection, BackupInstances);
-@@clientLocation(BackupInstanceResources.suspendBackups, BackupInstances);
-@@clientLocation(BackupInstanceResources.syncBackupInstance, BackupInstances);
-@@clientLocation(BackupInstanceResources.validateForRestore, BackupInstances);
-@@clientLocation(BackupInstanceResources.find, "RestorableTimeRanges");
-@@clientLocation(BackupInstancesOperationGroup.triggerCrossRegionRestore,
-  BackupInstances
+@@clientLocation(BackupInstanceResources.delete, BackupInstances, "!csharp");
+@@clientLocation(
+  BackupInstanceResources.adhocBackup,
+  BackupInstances,
+  "!csharp"
 );
-@@clientLocation(BackupInstancesOperationGroup.validateCrossRegionRestore,
-  BackupInstances
+@@clientLocation(
+  BackupInstanceResources.validateForModifyBackup,
+  BackupInstances,
+  "!csharp"
 );
-@@clientLocation(BackupVaultResources.validateForBackup, BackupInstances);
-@@clientLocation(BackupVaultResources.exportJobsOperationResultGet,
-  "ExportJobsOperationResult"
+@@clientLocation(
+  BackupInstanceResources.triggerRehydrate,
+  BackupInstances,
+  "!csharp"
+);
+@@clientLocation(
+  BackupInstanceResources.triggerRestore,
+  BackupInstances,
+  "!csharp"
+);
+@@clientLocation(
+  BackupInstanceResources.resumeBackups,
+  BackupInstances,
+  "!csharp"
+);
+@@clientLocation(
+  BackupInstanceResources.resumeProtection,
+  BackupInstances,
+  "!csharp"
+);
+@@clientLocation(
+  BackupInstanceResources.resumeProtectionLegacy,
+  BackupInstances,
+  "!csharp"
+);
+@@clientLocation(
+  BackupInstanceResources.stopProtection,
+  BackupInstances,
+  "!csharp"
+);
+@@clientLocation(
+  BackupInstanceResources.suspendBackups,
+  BackupInstances,
+  "!csharp"
+);
+@@clientLocation(
+  BackupInstanceResources.syncBackupInstance,
+  BackupInstances,
+  "!csharp"
+);
+@@clientLocation(
+  BackupInstanceResources.validateForRestore,
+  BackupInstances,
+  "!csharp"
+);
+@@clientLocation(
+  BackupInstanceResources.find,
+  "RestorableTimeRanges",
+  "!csharp"
+);
+@@clientLocation(
+  BackupInstancesOperationGroup.triggerCrossRegionRestore,
+  BackupInstances,
+  "!csharp"
+);
+@@clientLocation(
+  BackupInstancesOperationGroup.validateCrossRegionRestore,
+  BackupInstances,
+  "!csharp"
+);
+@@clientLocation(
+  BackupVaultResources.validateForBackup,
+  BackupInstances,
+  "!csharp"
+);
+@@clientLocation(
+  BackupVaultResources.exportJobsOperationResultGet,
+  "ExportJobsOperationResult",
+  "!csharp"
 );
 // ResourceGuards operations
-@@clientLocation(ResourceGuardResources.get, ResourceGuards);
-@@clientLocation(ResourceGuardResources.put, ResourceGuards);
-@@clientLocation(ResourceGuardResources.patch, ResourceGuards);
-@@clientLocation(ResourceGuardResources.delete, ResourceGuards);
-@@clientLocation(ResourceGuardResources.getResourcesInResourceGroup,
-  ResourceGuards
+@@clientLocation(ResourceGuardResources.get, ResourceGuards, "!csharp");
+@@clientLocation(ResourceGuardResources.put, ResourceGuards, "!csharp");
+@@clientLocation(ResourceGuardResources.patch, ResourceGuards, "!csharp");
+@@clientLocation(ResourceGuardResources.delete, ResourceGuards, "!csharp");
+@@clientLocation(
+  ResourceGuardResources.getResourcesInResourceGroup,
+  ResourceGuards,
+  "!csharp"
 );
-@@clientLocation(ResourceGuardResources.getResourcesInSubscription,
-  ResourceGuards
+@@clientLocation(
+  ResourceGuardResources.getResourcesInSubscription,
+  ResourceGuards,
+  "!csharp"
 );
-@@clientLocation(DppBaseResourceOperationGroup.getDefaultDisableSoftDeleteRequestsObject,
-  ResourceGuards
+@@clientLocation(
+  DppBaseResourceOperationGroup.getDefaultDisableSoftDeleteRequestsObject,
+  ResourceGuards,
+  "!csharp"
 );
-@@clientLocation(DppBaseResourceOperationGroup.getDisableSoftDeleteRequestsObjects,
-  ResourceGuards
+@@clientLocation(
+  DppBaseResourceOperationGroup.getDisableSoftDeleteRequestsObjects,
+  ResourceGuards,
+  "!csharp"
 );
-@@clientLocation(DppBaseResourceOperationGroup.getDefaultUpdateProtectedItemRequestsObject,
-  ResourceGuards
+@@clientLocation(
+  DppBaseResourceOperationGroup.getDefaultUpdateProtectedItemRequestsObject,
+  ResourceGuards,
+  "!csharp"
 );
-@@clientLocation(DppBaseResourceOperationGroup.getUpdateProtectedItemRequestsObjects,
-  ResourceGuards
+@@clientLocation(
+  DppBaseResourceOperationGroup.getUpdateProtectedItemRequestsObjects,
+  ResourceGuards,
+  "!csharp"
 );
-@@clientLocation(DppBaseResourceOperationGroup.getDefaultUpdateProtectionPolicyRequestsObject,
-  ResourceGuards
+@@clientLocation(
+  DppBaseResourceOperationGroup.getDefaultUpdateProtectionPolicyRequestsObject,
+  ResourceGuards,
+  "!csharp"
 );
-@@clientLocation(DppBaseResourceOperationGroup.getUpdateProtectionPolicyRequestsObjects,
-  ResourceGuards
+@@clientLocation(
+  DppBaseResourceOperationGroup.getUpdateProtectionPolicyRequestsObjects,
+  ResourceGuards,
+  "!csharp"
 );
-@@clientLocation(DppBaseResourceOperationGroup.getDefaultDeleteProtectedItemRequestsObject,
-  ResourceGuards
+@@clientLocation(
+  DppBaseResourceOperationGroup.getDefaultDeleteProtectedItemRequestsObject,
+  ResourceGuards,
+  "!csharp"
 );
-@@clientLocation(DppBaseResourceOperationGroup.getDeleteProtectedItemRequestsObjects,
-  ResourceGuards
+@@clientLocation(
+  DppBaseResourceOperationGroup.getDeleteProtectedItemRequestsObjects,
+  ResourceGuards,
+  "!csharp"
 );
-@@clientLocation(DppBaseResourceOperationGroup.getDefaultBackupSecurityPINRequestsObject,
-  ResourceGuards
+@@clientLocation(
+  DppBaseResourceOperationGroup.getDefaultBackupSecurityPINRequestsObject,
+  ResourceGuards,
+  "!csharp"
 );
-@@clientLocation(DppBaseResourceOperationGroup.getBackupSecurityPINRequestsObjects,
-  ResourceGuards
+@@clientLocation(
+  DppBaseResourceOperationGroup.getBackupSecurityPINRequestsObjects,
+  ResourceGuards,
+  "!csharp"
 );
 
 // ResourceGuardProxy operations
-@@clientLocation(ResourceGuardProxyBaseResources.get, "DppResourceGuardProxy");
-@@clientLocation(ResourceGuardProxyBaseResources.createOrUpdate,
-  "DppResourceGuardProxy"
+@@clientLocation(
+  ResourceGuardProxyBaseResources.get,
+  "DppResourceGuardProxy",
+  "!csharp"
 );
-@@clientLocation(ResourceGuardProxyBaseResources.delete,
-  "DppResourceGuardProxy"
+@@clientLocation(
+  ResourceGuardProxyBaseResources.createOrUpdate,
+  "DppResourceGuardProxy",
+  "!csharp"
 );
-@@clientLocation(ResourceGuardProxyBaseResources.list, "DppResourceGuardProxy");
-@@clientLocation(ResourceGuardProxyBaseResources.unlockDelete,
-  "DppResourceGuardProxy"
+@@clientLocation(
+  ResourceGuardProxyBaseResources.delete,
+  "DppResourceGuardProxy",
+  "!csharp"
+);
+@@clientLocation(
+  ResourceGuardProxyBaseResources.list,
+  "DppResourceGuardProxy",
+  "!csharp"
+);
+@@clientLocation(
+  ResourceGuardProxyBaseResources.unlockDelete,
+  "DppResourceGuardProxy",
+  "!csharp"
 );
 
 // Other operations
-@@clientLocation(OperationResultOperationGroup.get, "OperationResult");
-@@clientLocation(OperationStatusOperationGroup.get, "OperationStatus");
-@@clientLocation(OperationStatusResourceGroupContextOperationGroup.get,
-  "OperationStatusResourceGroupContext"
+@@clientLocation(
+  OperationResultOperationGroup.get,
+  "OperationResult",
+  "!csharp"
 );
-@@clientLocation(DataProtectionOperationGroup.checkFeatureSupport,
-  "DataProtection"
+@@clientLocation(
+  OperationStatusOperationGroup.get,
+  "OperationStatus",
+  "!csharp"
 );
-@@clientLocation(FetchSecondaryRecoveryPointsOperationGroup.list,
-  "FetchSecondaryRecoveryPoints"
+@@clientLocation(
+  OperationStatusResourceGroupContextOperationGroup.get,
+  "OperationStatusResourceGroupContext",
+  "!csharp"
 );
-@@clientLocation(FetchCrossRegionRestoreJobOperationGroup.get,
-  "FetchCrossRegionRestoreJob"
+@@clientLocation(
+  DataProtectionOperationGroup.checkFeatureSupport,
+  "DataProtection",
+  "!csharp"
 );
-@@clientLocation(FetchCrossRegionRestoreJobsOperationGroup.list,
-  "FetchCrossRegionRestoreJobs"
+@@clientLocation(
+  FetchSecondaryRecoveryPointsOperationGroup.list,
+  "FetchSecondaryRecoveryPoints",
+  "!csharp"
 );
-@@clientLocation(BackupInstancesExtensionRoutingOperationGroup.list,
-  "BackupInstancesExtensionRouting"
+@@clientLocation(
+  FetchCrossRegionRestoreJobOperationGroup.get,
+  "FetchCrossRegionRestoreJob",
+  "!csharp"
+);
+@@clientLocation(
+  FetchCrossRegionRestoreJobsOperationGroup.list,
+  "FetchCrossRegionRestoreJobs",
+  "!csharp"
+);
+@@clientLocation(
+  BackupInstancesExtensionRoutingOperationGroup.list,
+  "BackupInstancesExtensionRouting",
+  "!csharp"
 );
 
-@@clientName(BackupVaultResources.exportJobsOperationResultGet, "Get");
+@@clientName(
+  BackupVaultResources.exportJobsOperationResultGet,
+  "Get",
+  "!csharp"
+);
 
-@@clientName(BackupVaultResources.operationStatusBackupVaultContextGet, "Get");
+@@clientName(
+  BackupVaultResources.operationStatusBackupVaultContextGet,
+  "Get",
+  "!csharp"
+);
 
-@@clientName(BackupVaultResources.createOrUpdate::parameters.resource,
+@@clientName(
+  BackupVaultResources.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(BackupVaultResources.update::parameters.properties, "parameters");
-@@clientName(BackupVaultResources.validateForBackup::parameters.body,
+@@clientName(
+  BackupVaultResources.validateForBackup::parameters.body,
   "parameters"
 );
 
-@@clientName(BaseBackupPolicyResources.createOrUpdate::parameters.resource,
+@@clientName(
+  BaseBackupPolicyResources.createOrUpdate::parameters.resource,
   "parameters"
 );
 
-@@clientName(BackupInstanceResources.createOrUpdate::parameters.resource,
+@@clientName(
+  BackupInstanceResources.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(BackupInstanceResources.adhocBackup::parameters.body,
+@@clientName(
+  BackupInstanceResources.adhocBackup::parameters.body,
   "parameters"
 );
-@@clientName(BackupInstanceResources.validateForModifyBackup::parameters.body,
+@@clientName(
+  BackupInstanceResources.validateForModifyBackup::parameters.body,
   "parameters"
 );
-@@clientName(BackupInstanceResources.triggerRehydrate::parameters.body,
+@@clientName(
+  BackupInstanceResources.triggerRehydrate::parameters.body,
   "parameters"
 );
-@@clientName(BackupInstanceResources.triggerRestore::parameters.body,
+@@clientName(
+  BackupInstanceResources.triggerRestore::parameters.body,
   "parameters"
 );
-@@clientName(BackupInstanceResources.syncBackupInstance::parameters.body,
+@@clientName(
+  BackupInstanceResources.syncBackupInstance::parameters.body,
   "parameters"
 );
-@@clientName(BackupInstanceResources.validateForRestore::parameters.body,
+@@clientName(
+  BackupInstanceResources.validateForRestore::parameters.body,
   "parameters"
 );
 @@clientName(BackupInstanceResources.find::parameters.body, "parameters");
@@ -187,30 +360,41 @@ using Microsoft.DataProtection;
 @@clientName(ResourceGuardResources.put::parameters.resource, "parameters");
 @@clientName(ResourceGuardResources.patch::parameters.properties, "parameters");
 
-@@clientName(ResourceGuardProxyBaseResources.createOrUpdate::parameters.resource,
+@@clientName(
+  ResourceGuardProxyBaseResources.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(ResourceGuardProxyBaseResources.unlockDelete::parameters.body,
+@@clientName(
+  ResourceGuardProxyBaseResources.unlockDelete::parameters.body,
   "parameters"
 );
-@@clientName(DataProtectionOperationGroup.checkFeatureSupport::parameters.body,
+@@clientName(
+  DataProtectionOperationGroup.checkFeatureSupport::parameters.body,
   "parameters"
 );
 @@clientName(Operations, "DataProtectionOperations");
 @@clientName(EncryptionSettings, "encryptionSettings");
-@@clientName(BackupInstanceResources.suspendBackups::parameters.body,
+@@clientName(
+  BackupInstanceResources.suspendBackups::parameters.body,
   "parameters"
 );
-@@clientName(BackupInstanceResources.stopProtection::parameters.body,
+@@clientName(
+  BackupInstanceResources.resumeProtection::parameters.body,
+  "parameters"
+);
+@@clientName(
+  BackupInstanceResources.stopProtection::parameters.body,
   "parameters"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(AzureBackupRestoreWithRehydrationRequest,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  AzureBackupRestoreWithRehydrationRequest,
   AzureBackupRecoveryPointBasedRestoreRequest
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(AdlsBlobBackupDatasourceParameters,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  AdlsBlobBackupDatasourceParameters,
   BlobBackupDatasourceParameters
 );

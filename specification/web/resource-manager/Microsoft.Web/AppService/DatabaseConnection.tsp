@@ -63,7 +63,8 @@ interface DatabaseConnectionOps
       }
     > {}
 
-@armResourceOperations
+@tag("StaticSites")
+@armResourceOperations(#{ omitTags: true })
 interface DatabaseConnections {
   /**
    * Returns overview of a database connection for a static site build by name
@@ -152,7 +153,8 @@ interface DatabaseConnectionOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("StaticSites")
+@armResourceOperations(#{ omitTags: true })
 interface DatabaseConnectionOperationGroup {
   /**
    * Returns overview of a database connection for a static site by name
@@ -218,18 +220,23 @@ interface DatabaseConnectionOperationGroup {
 }
 
 @@doc(DatabaseConnection.name, "Name of the database connection.");
-@@doc(DatabaseConnection.properties,
+@@doc(
+  DatabaseConnection.properties,
   "DatabaseConnection resource specific properties"
 );
-@@doc(DatabaseConnections.createOrUpdateBuildDatabaseConnection::parameters.resource,
+@@doc(
+  DatabaseConnections.createOrUpdateBuildDatabaseConnection::parameters.resource,
   "A JSON representation of the database connection request properties"
 );
-@@doc(DatabaseConnections.updateBuildDatabaseConnection::parameters.properties,
+@@doc(
+  DatabaseConnections.updateBuildDatabaseConnection::parameters.properties,
   "A JSON representation of the database connection request properties"
 );
-@@doc(DatabaseConnectionOperationGroup.createOrUpdateDatabaseConnection::parameters.resource,
+@@doc(
+  DatabaseConnectionOperationGroup.createOrUpdateDatabaseConnection::parameters.resource,
   "A JSON representation of the database connection request properties"
 );
-@@doc(DatabaseConnectionOperationGroup.updateDatabaseConnection::parameters.properties,
+@@doc(
+  DatabaseConnectionOperationGroup.updateDatabaseConnection::parameters.properties,
   "A JSON representation of the database connection request properties"
 );

@@ -180,6 +180,11 @@ model DeviceStatusEndpoint {
   @doc("Defines the error related to this endpoint.")
   @visibility(Lifecycle.Read)
   error?: StatusError;
+
+  @doc("Health state of the endpoint.")
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  healthState?: HealthState;
 }
 
 @added(Versions.v2025_07_01_preview)

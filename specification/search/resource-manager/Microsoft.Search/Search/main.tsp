@@ -42,6 +42,11 @@ enum Versions {
    * The 2025-05-01 API version.
    */
   v2025_05_01: "2025-05-01",
+
+  /**
+   * The 2026-03-01-preview API version.
+   */
+  v2026_03_01_preview: "2026-03-01-preview",
 }
 
 interface Operations
@@ -49,6 +54,7 @@ interface Operations
       ArmResponse<OperationListResult>,
       CloudError
     > {}
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "Lists all of the available REST API operations of the Microsoft.Search provider."
 );

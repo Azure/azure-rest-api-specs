@@ -10,16 +10,19 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
+#suppress "@azure-tools/typespec-autorest/unsupported-auth" "NoAuth is supported"
 @doc("Live Metrics REST APIs.")
 @versioned(Versions)
 @useAuth(
-  OAuth2Auth<[
-    {
-      type: OAuth2FlowType.implicit,
-      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
-      scopes: ["https://monitor.azure.com/.default"],
-    }
-  ]>
+
+    | NoAuth
+    | OAuth2Auth<[
+        {
+          type: OAuth2FlowType.implicit,
+          authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
+          scopes: ["https://monitor.azure.com/.default"],
+        }
+      ]>
 )
 @service(#{ title: "Live Metrics REST APIs for client SDKs." })
 @server(
@@ -27,7 +30,7 @@ using Azure.Core.Traits;
   "Existing Live Metrics global endpoint.",
   {
     @doc("The endpoint of the Live Metrics service.")
-    endpoint: string = "https://global.livediagnostics.monitor.azure.com",
+    endpoint: url = "https://global.livediagnostics.monitor.azure.com",
   }
 )
 namespace Azure.Monitor.LiveMetrics;

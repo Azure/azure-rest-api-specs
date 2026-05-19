@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "api-version": "2025-02-01-preview",
+    "managedInstanceName": "testinstance",
+    "resourceGroupName": "testrg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testinstance",
+        "type": "Microsoft.Sql/managedInstances",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testinstance",
+        "location": "japaneast",
+        "properties": {
+          "administratorLogin": "dummylogin",
+          "authenticationMetadata": "Windows",
+          "collation": "SQL_Latin1_General_CP1_CI_AS",
+          "createTime": "2022-11-01T01:01:01.011Z",
+          "databaseFormat": "SQLServer2022",
+          "dnsZone": "1b4e2caff2530",
+          "externalGovernanceStatus": "Enabled",
+          "fullyQualifiedDomainName": "testinstance.1b4e2caff2530.database.windows.net",
+          "instancePoolId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/instancePools/instancePool1",
+          "licenseType": "LicenseIncluded",
+          "maintenanceConfigurationId": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Maintenance/publicMaintenanceConfigurations/SQL_JapanEast_MI_1",
+          "minimalTlsVersion": "1.2",
+          "pricingModel": "Regular",
+          "provisioningState": "Updating",
+          "proxyOverride": "Default",
+          "publicDataEndpointEnabled": false,
+          "requestedLogicalAvailabilityZone": "1",
+          "state": "Ready",
+          "storageSizeInGB": 1024,
+          "subnetId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
+          "vCores": 8,
+          "virtualClusterId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/virtualClusters/vc-5555555-6666-7777-8888-999999999999"
+        },
+        "sku": {
+          "name": "GP_Gen5",
+          "capacity": 8,
+          "family": "Gen5",
+          "tier": "GeneralPurpose"
+        },
+        "tags": {
+          "key": "value"
+        }
+      }
+    }
+  },
+  "operationId": "ManagedInstances_Get",
+  "title": "Get managed instance while resource is updating"
+}

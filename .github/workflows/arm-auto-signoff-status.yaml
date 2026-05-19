@@ -46,7 +46,7 @@ jobs:
        (github.event.label.name == 'Approved-Suppression' ||
         github.event.label.name == 'ARMAutoSignedOff' ||
         github.event.label.name == 'ARMAutoSignedOff-IncrementalTSP' ||
-        github.event.label.name == 'ARMAutoSignedOff-Trivial-Test' ||
+        github.event.label.name == 'ARMAutoSignedOff-Trivial' ||
         github.event.label.name == 'ARMReview' ||
         github.event.label.name == 'ARMSignedOff' ||
         github.event.label.name == 'NotReadyForARMReview' ||
@@ -76,7 +76,7 @@ jobs:
       #   labelActions: {
       #     'ARMSignedOff': 'none'|'add'|'remove',
       #     'ARMAutoSignedOff-IncrementalTSP': 'none'|'add'|'remove',
-      #     'ARMAutoSignedOff-Trivial-Test': 'none'|'add'|'remove'
+      #     'ARMAutoSignedOff-Trivial': 'none'|'add'|'remove'
       #   }
       # }
       - id: get-label-action
@@ -104,12 +104,12 @@ jobs:
           name: "ARMAutoSignedOff-IncrementalTSP"
           value: "${{ fromJson(steps.get-label-action.outputs.result).labelActions['ARMAutoSignedOff-IncrementalTSP'] == 'add' }}"
 
-      - if: fromJson(steps.get-label-action.outputs.result).labelActions['ARMAutoSignedOff-Trivial-Test'] != 'none'
-        name: Upload artifact for ARMAutoSignedOff-Trivial-Test label
+      - if: fromJson(steps.get-label-action.outputs.result).labelActions['ARMAutoSignedOff-Trivial'] != 'none'
+        name: Upload artifact for ARMAutoSignedOff-Trivial label
         uses: ./.github/actions/add-label-artifact
         with:
-          name: "ARMAutoSignedOff-Trivial-Test"
-          value: "${{ fromJson(steps.get-label-action.outputs.result).labelActions['ARMAutoSignedOff-Trivial-Test'] == 'add' }}"
+          name: "ARMAutoSignedOff-Trivial"
+          value: "${{ fromJson(steps.get-label-action.outputs.result).labelActions['ARMAutoSignedOff-Trivial'] == 'add' }}"
 
       # Required for consumers to identify the head SHA associated with this workflow run.
       # Output can be trusted, because it was uploaded from a workflow that is trusted,

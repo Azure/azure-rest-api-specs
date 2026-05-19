@@ -18,6 +18,9 @@ namespace Microsoft.MachineLearningServices;
  * EndpointDeploymentResourcePropertiesBasicResource is preview-only.
  */
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 @parentResource(WorkspaceConnectionPropertiesV2BasicResource)
 model EndpointDeploymentResourcePropertiesBasicResource
   is Azure.ResourceManager.ProxyResource<
@@ -36,6 +39,9 @@ model EndpointDeploymentResourcePropertiesBasicResource
  * EndpointDeploymentResourcePropertiesBasicResourceOps is preview-only.
  */
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 @armResourceOperations
 interface EndpointDeploymentResourcePropertiesBasicResourceOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -73,6 +79,9 @@ interface EndpointDeploymentResourcePropertiesBasicResourceOps
  * EndpointDeploymentResourcePropertiesBasicResources is preview-only.
  */
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 @armResourceOperations
 interface EndpointDeploymentResourcePropertiesBasicResources {
   /**
@@ -88,12 +97,7 @@ interface EndpointDeploymentResourcePropertiesBasicResources {
   createOrUpdateDeployment is EndpointDeploymentResourcePropertiesBasicResourceOps.CreateOrUpdateAsync<
     EndpointDeploymentResourcePropertiesBasicResource,
     Parameters = {
-      /**
-       * Api version used by proxy call
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
-      @query("proxy-api-version")
-      `proxy-api-version`?: string;
+      ...ProxyApiVersion;
     },
     LroHeaders = ArmLroLocationHeader<FinalResult = EndpointDeploymentResourcePropertiesBasicResource> &
       Azure.Core.Foundations.RetryAfterHeader
@@ -106,12 +110,7 @@ interface EndpointDeploymentResourcePropertiesBasicResources {
   deleteDeployment is EndpointDeploymentResourcePropertiesBasicResourceOps.DeleteWithoutOkAsync<
     EndpointDeploymentResourcePropertiesBasicResource,
     Parameters = {
-      /**
-       * Api version used by proxy call
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
-      @query("proxy-api-version")
-      `proxy-api-version`?: string;
+      ...ProxyApiVersion;
     }
   >;
 
@@ -122,12 +121,7 @@ interface EndpointDeploymentResourcePropertiesBasicResources {
   listDeployments is EndpointDeploymentResourcePropertiesBasicResourceOps.List<
     EndpointDeploymentResourcePropertiesBasicResource,
     Parameters = {
-      /**
-       * Api version used by proxy call
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
-      @query("proxy-api-version")
-      `proxy-api-version`?: string;
+      ...ProxyApiVersion;
     },
     Response = ArmResponse<EndpointDeploymentResourcePropertiesBasicResourceArmPaginatedResult>
   >;
@@ -137,6 +131,9 @@ interface EndpointDeploymentResourcePropertiesBasicResources {
  * EndpointDeploymentOps is preview-only.
  */
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 @armResourceOperations
 interface EndpointDeploymentOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -174,6 +171,9 @@ interface EndpointDeploymentOps
  * EndpointDeployment is preview-only.
  */
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 @armResourceOperations
 interface EndpointDeployment {
   /**
@@ -189,8 +189,10 @@ interface EndpointDeployment {
   @summary("Create or update endpoint deployment resource with the specified parameters")
   createOrUpdate is EndpointDeploymentOps.CreateOrUpdateAsync<
     EndpointDeploymentResourcePropertiesBasicResource,
-    Response = ArmResourceUpdatedResponse<EndpointDeploymentResourcePropertiesBasicResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = EndpointDeploymentResourcePropertiesBasicResource>> &
-      Azure.Core.Foundations.RetryAfterHeader)
+    Response =
+      | ArmResourceUpdatedResponse<EndpointDeploymentResourcePropertiesBasicResource>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = EndpointDeploymentResourcePropertiesBasicResource>> &
+          Azure.Core.Foundations.RetryAfterHeader)
   >;
 
   /**
@@ -200,12 +202,7 @@ interface EndpointDeployment {
   delete is EndpointDeploymentOps.DeleteWithoutOkAsync<
     EndpointDeploymentResourcePropertiesBasicResource,
     Parameters = {
-      /**
-       * Api version used by proxy call
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
-      @query("proxy-api-version")
-      `proxy-api-version`?: string;
+      ...ProxyApiVersion;
     }
   >;
 
@@ -219,13 +216,16 @@ interface EndpointDeployment {
   >;
 }
 
-@@doc(EndpointDeploymentResourcePropertiesBasicResource.name,
+@@doc(
+  EndpointDeploymentResourcePropertiesBasicResource.name,
   "Name of the deployment resource"
 );
 @@doc(EndpointDeploymentResourcePropertiesBasicResource.properties, "");
-@@doc(EndpointDeploymentResourcePropertiesBasicResources.createOrUpdateDeployment::parameters.resource,
+@@doc(
+  EndpointDeploymentResourcePropertiesBasicResources.createOrUpdateDeployment::parameters.resource,
   "deployment object"
 );
-@@doc(EndpointDeployment.createOrUpdate::parameters.resource,
+@@doc(
+  EndpointDeployment.createOrUpdate::parameters.resource,
   "deployment object"
 );
