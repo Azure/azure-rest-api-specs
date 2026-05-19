@@ -221,6 +221,8 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(HandleItem, "omitSerdeMethods", "all", "go");
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(StringEncoded, "omitSerdeMethods", "all", "go");
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(
   Directory.listFilesAndDirectoriesSegment,
   "preserveContentTypeHeader",
