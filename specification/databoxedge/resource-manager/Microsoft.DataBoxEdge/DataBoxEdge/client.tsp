@@ -756,7 +756,7 @@ op OrdersDeleteCustomized(
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
-  order: string,
+  orderName: string,
 
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): void;
@@ -777,7 +777,7 @@ op OrderslistDCAccessCodeCustomized(
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
-  order: string,
+  orderName: string,
 
   @body
   body: void,
@@ -826,7 +826,7 @@ op OrdersGetCustomized(
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
-  order: string,
+  orderName: string,
 
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 ): Order;
@@ -847,19 +847,13 @@ op OrdersCreateOrUpdateCustomized(
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
-  order: string,
+  orderName: string,
 
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
 
   @body
-  resource: Order,
+  order: Order,
 ): void;
-
-@@clientName(
-  OrdersCreateOrUpdateCustomized::parameters.resource,
-  "order",
-  "javascript"
-);
 
 @@override(
   Orders.createOrUpdate,
