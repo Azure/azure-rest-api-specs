@@ -183,15 +183,13 @@ namespace SearchIndexClient {
   op getKnowledgeSourceStatus is Search.KnowledgeSources.getStatus;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/byos" "Direct file upload is intentional for File knowledge source"
   op uploadKnowledgeSourceFile is Search.KnowledgeSources.uploadFile;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   op listKnowledgeSourceFiles is Search.KnowledgeSources.listFiles;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   op deleteKnowledgeSourceFile is Search.KnowledgeSources.deleteFile;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -635,11 +633,13 @@ namespace KnowledgeBaseRetrievalClient {
 @@access(SearchIndexClient.deleteKnowledgeBase, Access.internal, "python");
 @@access(SearchIndexClient.createOrUpdateKnowledgeSource, Access.internal);
 @@access(SearchIndexClient.deleteKnowledgeSource, Access.internal, "python");
-@@access(SearchIndexClient.uploadKnowledgeSourceFile,
+@@access(
+  SearchIndexClient.uploadKnowledgeSourceFile,
   Access.internal,
   "python"
 );
-@@access(SearchIndexClient.deleteKnowledgeSourceFile,
+@@access(
+  SearchIndexClient.deleteKnowledgeSourceFile,
   Access.internal,
   "python"
 );
