@@ -292,6 +292,8 @@ interface Clients {
   "EventGridPrivateEndpointConnection",
   "csharp"
 );
+// PrivateLinkResource clientName - generates EventGridPrivateLinkResourceData (shared data class)
+@@clientName(PrivateLinkResource, "EventGridPrivateLinkResource", "csharp");
 // Rename PrivateLinkServiceConnectionState back to ConnectionState for backward compat
 @@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
   "ConnectionState",
