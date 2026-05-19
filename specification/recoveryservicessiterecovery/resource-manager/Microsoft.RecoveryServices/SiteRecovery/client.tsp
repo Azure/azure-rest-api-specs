@@ -4652,3 +4652,44 @@ using Microsoft.RecoveryServices;
   "csharp"
 );
 @@access(ClusterTestFailoverCleanupInputProperties, Access.public, "csharp");
+
+// --- Self-review follow-ups (PR #59061 review #4316400754) ---
+
+// (1) SUFFIX003: POST/PUT body model should use *Content suffix.
+// `ReinstallMobilityService` is a POST LRO action; rename its request body to *Content.
+@@clientName(
+  ReinstallMobilityServiceRequest,
+  "ReinstallMobilityServiceContent",
+  "csharp"
+);
+
+// (2) Flattened accessor name carries the parent model name as a defensive prefix.
+// NOTE: NOT fixable via @@clientName. The flattened accessor (e.g.
+// `ReinstallMobilityServiceContent.ReinstallMobilityServiceRequestRunAsAccountId`) is
+// synthesized by the MPG emitter using the *original* TypeSpec parent-model name +
+// inner property name; renaming the inner property via @@clientName does not propagate
+// into the flattened accessor name. Since this model is brand-new in 1.4.0-beta.1
+// (not in 1.3.1), the prefix is a cosmetic wart, not a binary issue. Leaving as-is.
+
+// (3, 4) Contextual naming: these enums are SiteRecovery-specific (consumed only
+// inside A2A disk details) but have generic names that read like Compute concepts.
+// Prefix them with the RP short name to disambiguate in the public surface.
+@@clientName(
+  DiskNetworkAccessPolicy,
+  "SiteRecoveryDiskNetworkAccessPolicy",
+  "csharp"
+);
+@@clientName(
+  DiskPublicNetworkAccess,
+  "SiteRecoveryDiskPublicNetworkAccess",
+  "csharp"
+);
+
+// (5) Rule 4.5: NOT fixable via @@clientName. See `Custom/SiteRecoveryProtectionContainerResource.cs`
+// for the full rationale. Briefly: MPG synthesizes parent-resource accessor names from the child
+// resource model name (without the "Resource" suffix), while v1.x AutoRest included "Resource" in
+// the accessor verb. Trying to rename via @@clientName on `ReplicationProtectionClusterOperationGroup.listByReplicationProtectionContainers`
+// or `ReplicationProtectionClusters.get` does not affect the synthesized parent accessor; renaming
+// the model itself to end with "Resource" would cascade into the *Data / *Properties class names
+// (which v1.x kept without that suffix), introducing fresh ApiCompat breaks. The custom forwarders
+// are the least-bad option.
