@@ -657,6 +657,28 @@ op privateLinkResourcesGetCustomization(
 @@access(PricingsAPI.Pricings.list, Access.internal, "csharp");
 @@access(TasksAPI.SecurityTaskProperties, Access.public, "csharp");
 @@access(ExternalSecuritySolutionKind, Access.public, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResourceData for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(IoTSecurityAPI.IoTSecuritySolutionModel,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResourceData for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(AutomationsAPI.Automation,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResourceData for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(SecurityConnectorsAPI.SecurityConnector,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+@@clientName(SecuritySolutionsAPI.ExternalSecuritySolution, "ExternalSecuritySolution", "csharp");
+@@clientName(SecurityConnectorsAPI.cloudOffering, "SecurityCenterCloudOffering", "csharp");
+@@clientName(SecurityConnectorsAPI.AwsOrganizationalData, "AwsOrganizationalInfo", "csharp");
+@@clientName(Common.ResourceDetails, "SecurityCenterResourceDetails", "csharp");
+@@clientName(AlertsAPI.ResourceIdentifier, "SecurityAlertResourceIdentifier", "csharp");
+@@clientName(SubAssessmentsAPI.AdditionalData, "SecuritySubAssessmentAdditionalInfo", "csharp");
+@@clientName(IoTSecurityAPI.TagsResource, "SecurityCenterTagsResourceInfo", "csharp");
 @@markAsPageable(PricingsAPI.Pricings.list, "csharp");
 @@clientName(
   Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
