@@ -2495,7 +2495,6 @@ model KeyValuePair {
 /**
  * Network Gateway Properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Network gateway provisioning is managed by Confluent Cloud, not ARM."
 model NetworkGatewayProperties {
   /**
    * Display name of the network gateway
@@ -2511,6 +2510,12 @@ model NetworkGatewayProperties {
    * Metadata of the record
    */
   metadata?: SCMetadataEntity;
+
+  /**
+   * Provisioning state of the network gateway
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisionState;
 
   /**
    * Additional properties for extensibility
@@ -2552,7 +2557,7 @@ model AccessPointProperties {
   ]>;
 
   /**
-   * Egress routes for the access point
+   * IP ranges to route through your virtual network instead of Confluent's default path. Required for Kafka clients in peered VNets or on-premises networks (e.g., 10.0.0.0/8, 172.16.0.0/12).
    */
   egressRoutes?: string;
 

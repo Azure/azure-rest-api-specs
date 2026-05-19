@@ -3234,7 +3234,7 @@
         },
         "egressRoutes": {
           "type": "string",
-          "description": "Egress routes for the access point"
+          "description": "IP ranges to route through your virtual network instead of Confluent's default path. Required for Kafka clients in peered VNets or on-premises networks (e.g., 10.0.0.0/8, 172.16.0.0/12)."
         },
         "metadata": {
           "$ref": "#/definitions/SCMetadataEntity",
@@ -4641,6 +4641,11 @@
         "metadata": {
           "$ref": "#/definitions/SCMetadataEntity",
           "description": "Metadata of the record"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisionState",
+          "description": "Provisioning state of the network gateway",
+          "readOnly": true
         },
         "dictionary": {
           "type": "array",
