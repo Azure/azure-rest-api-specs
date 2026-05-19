@@ -8266,7 +8266,7 @@
           {
             "name": "siteName",
             "in": "path",
-            "description": "Site name.",
+            "description": "Site name",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -8290,14 +8290,17 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Patch request body.",
+            "description": "The resource properties to be updated.",
             "required": true,
-            "schema": {}
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/TomcatWebApplications"
             }
