@@ -232,3 +232,31 @@ union CustomPublicNetworkAccessType {
 // MachineRunCommandData backward compatibility with the existing SDK API.
 @@alternateType(MachineRunCommandProperties.outputBlobUri, url, "csharp");
 @@alternateType(MachineRunCommandProperties.errorBlobUri, url, "csharp");
+
+// C# backward-compat fixes for ApiCompat issues found during MPG migration.
+@@alternateType(PrivateEndpointProperty.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(PrivateEndpointConnectionDataModel.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the previous .NET resource-data shape for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(PrivateEndpointConnectionDataModel,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+@@usage(PrivateLinkResource, Usage.input | Usage.output, "csharp");
+@@usage(PrivateLinkResourceProperties, Usage.input | Usage.output, "csharp");
+@@usage(LicenseProfileMachineInstanceView, Usage.input | Usage.output, "csharp");
+@@usage(LicenseProfileMachineInstanceViewSoftwareAssurance,
+  Usage.input | Usage.output,
+  "csharp"
+);
+@@usage(LicenseProfileArmProductProfileProperties,
+  Usage.input | Usage.output,
+  "csharp"
+);
