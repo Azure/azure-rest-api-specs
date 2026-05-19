@@ -881,10 +881,43 @@ model AudioNoiseReduction {
 }
 
 /** Echo cancellation configuration for server-side audio processing. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case.
 @usage(RequestUsage)
 model AudioEchoCancellation {
   /** The type of echo cancellation model to use. */
   type: "server_echo_cancellation";
+
+  /**
+   * The source of the echo cancellation reference signal.
+   * - `server`: EC uses the internal TTS loopback as the reference signal (default, existing behavior).
+   * - `client`: EC uses the client-supplied reference channel (ch1 of stereo input). Internal TTS loopback is skipped.
+   */
+  @added(Versions.v2026_06_01_preview)
+  reference_source?: EchoCancellationReferenceSource = EchoCancellationReferenceSource.server;
+
+  /**
+   * Number of input audio channels.
+   * - `1`: Mono input (default).
+   * - `2`: Interleaved stereo input where channel 0 is the microphone signal and channel 1 is the echo reference signal.
+   * When set to 2, `reference_source` must be `client` and `input_audio_format` must be `pcm16`.
+   */
+  @added(Versions.v2026_06_01_preview)
+  @minValue(1)
+  @maxValue(2)
+  channels?: int32 = 1;
+}
+
+/** The source of the echo cancellation reference signal. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case.
+@added(Versions.v2026_06_01_preview)
+union EchoCancellationReferenceSource {
+  string,
+
+  /** EC uses the internal TTS loopback as the reference signal. */
+  server: "server",
+
+  /** EC uses the client-supplied reference channel from the stereo input stream. */
+  client: "client",
 }
 
 /** Output timestamp types supported in audio response content. */
