@@ -39,6 +39,7 @@ namespace Customizations;
   "FilterBlobSegment",
   "python,csharp,javascript,go"
 );
+@@clientName(FilteredBlobResponse.blobItems, "blobs", "javascript");
 @@clientName(
   ListContainersResponse,
   "ListContainersSegmentResponse",
