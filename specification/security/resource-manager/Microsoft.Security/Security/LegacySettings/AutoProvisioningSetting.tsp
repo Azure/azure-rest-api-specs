@@ -62,6 +62,7 @@ interface AutoProvisioningSettings {
 
 @@doc(AutoProvisioningSetting.name, "Auto provisioning setting key");
 @@doc(AutoProvisioningSetting.properties, "Auto provisioning setting data");
-@@doc(AutoProvisioningSettings.create::parameters.resource,
+@@doc(
+  AutoProvisioningSettings.create::parameters.resource,
   "Auto provisioning setting key"
 );

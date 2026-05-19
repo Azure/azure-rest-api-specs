@@ -62,6 +62,7 @@ interface Roles {
 
 @@doc(Role.name, "The name of the cluster role.");
 @@doc(Role.properties, "The properties of a role.");
-@@doc(Roles.create::parameters.resource,
+@@doc(
+  Roles.create::parameters.resource,
   "The required parameters for creating or updating a role."
 );

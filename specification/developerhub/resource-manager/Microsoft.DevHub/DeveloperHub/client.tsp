@@ -22,54 +22,66 @@ using Microsoft.DevHub;
 @@clientName(AdooAuthResponses.getADOOAuthInfo, "getAdoOAuthInfo", "java");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "list should be pageable"
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(GitHubOAuthResponses.listGitHubOAuth,
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  GitHubOAuthResponses.listGitHubOAuth,
   "java"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Workflow.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Workflow.properties,
   "java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkflowProperties.artifactGenerationProperties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  WorkflowProperties.artifactGenerationProperties,
   "java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GitHubOAuthResponse.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  GitHubOAuthResponse.properties,
   "java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkflowProperties.githubWorkflowProfile,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  WorkflowProperties.githubWorkflowProfile,
   "java"
 );
 
-@@clientLocation(GitHubOAuthResponses.gitHubOAuthCallback,
+@@clientLocation(
+  GitHubOAuthResponses.gitHubOAuthCallback,
   Microsoft.DevHub,
   "javascript"
 );
-@@clientLocation(GitHubOAuthResponses.listGitHubOAuth,
+@@clientLocation(
+  GitHubOAuthResponses.listGitHubOAuth,
   Microsoft.DevHub,
   "javascript"
 );
-@@clientLocation(GitHubOAuthResponses.gitHubOAuth,
+@@clientLocation(
+  GitHubOAuthResponses.gitHubOAuth,
   Microsoft.DevHub,
   "javascript"
 );
 
-@@clientLocation(GitHubOAuthResponses.gitHubOAuthCallback,
+@@clientLocation(
+  GitHubOAuthResponses.gitHubOAuthCallback,
   "DeveloperHubServiceClient",
   "go"
 );
-@@clientLocation(GitHubOAuthResponses.listGitHubOAuth,
+@@clientLocation(
+  GitHubOAuthResponses.listGitHubOAuth,
   "DeveloperHubServiceClient",
   "go"
 );
-@@clientLocation(GitHubOAuthResponses.gitHubOAuth,
+@@clientLocation(
+  GitHubOAuthResponses.gitHubOAuth,
   "DeveloperHubServiceClient",
   "go"
 );
 @@clientLocation(generatePreviewArtifacts, "DeveloperHubServiceClient", "go");
-@@clientLocation(AdooAuthResponses.getADOOAuthInfo,
+@@clientLocation(
+  AdooAuthResponses.getADOOAuthInfo,
   "DeveloperHubServiceClient",
   "go"
 );

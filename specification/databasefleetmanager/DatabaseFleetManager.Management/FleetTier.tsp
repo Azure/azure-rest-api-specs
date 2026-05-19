@@ -82,6 +82,7 @@ interface FleetTiers {
 
 @@doc(FleetTier.name, "Name of the tier.");
 @@doc(FleetTier.properties, "A Fleet tier properties.");
-@@doc(FleetTiers.createOrUpdate::parameters.resource,
+@@doc(
+  FleetTiers.createOrUpdate::parameters.resource,
   "The tier object to create or update."
 );

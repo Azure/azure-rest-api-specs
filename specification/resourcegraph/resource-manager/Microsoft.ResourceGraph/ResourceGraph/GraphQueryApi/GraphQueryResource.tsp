@@ -4,6 +4,7 @@ import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
+using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 
@@ -11,14 +12,28 @@ namespace GraphQueryApi;
 /**
  * Graph Query entity definition.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GraphQueryResource
-  is Azure.ResourceManager.TrackedResource<GraphQueryProperties> {
+  is Azure.ResourceManager.ProxyResource<GraphQueryProperties> {
   ...ResourceNameParameter<
     Resource = GraphQueryResource,
     KeyName = "resourceName",
     SegmentName = "queries",
     NamePattern = "^[^<>&:\\?]*$"
   >;
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "tags is needed for backward compatibility with TrackedResource via hierarchyBuilding"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "tags is standard ARM tracked resource property"
+  tags?: Record<string>;
+
+  /**
+   * The geo-location where the resource lives.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "location is needed for backward compatibility with TrackedResource via hierarchyBuilding"
+  location?: azureLocation;
 
   /**
    * This will be used to handle Optimistic Concurrency. If not present, it will always overwrite the existing resource without checking conflict.
@@ -82,12 +97,15 @@ interface GraphQueryResources {
 }
 
 @@doc(GraphQueryResource.name, "The name of the Graph Query resource.");
-@@doc(GraphQueryResource.properties,
+@@doc(
+  GraphQueryResource.properties,
   "Metadata describing a graph query for an Azure resource."
 );
-@@doc(GraphQueryResources.createOrUpdate::parameters.resource,
+@@doc(
+  GraphQueryResources.createOrUpdate::parameters.resource,
   "Properties that need to be specified to create a new graph query."
 );
-@@doc(GraphQueryResources.update::parameters.properties,
+@@doc(
+  GraphQueryResources.update::parameters.properties,
   "Properties that need to be specified to create a new graph query."
 );

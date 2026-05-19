@@ -72,6 +72,7 @@ interface SourceControls {
 @@doc(SourceControl.name, "Source control Id");
 @@doc(SourceControl.properties, "source control properties");
 @@doc(SourceControls.create::parameters.resource, "The SourceControl");
-@@doc(SourceControls.delete::parameters.body,
+@@doc(
+  SourceControls.delete::parameters.body,
   "The repository access credentials."
 );

@@ -84,15 +84,19 @@ interface PrivateLinkResources {
 
 @@maxLength(PrivateLinkResource.name, 63);
 @@minLength(PrivateLinkResource.name, 3);
-@@doc(PrivateLinkResource.name,
+@@doc(
+  PrivateLinkResource.name,
   "The name of the private link resource. Must be unique within the resource group and follow Azure naming conventions."
 );
-@@doc(PrivateLinkResource.properties,
+@@doc(
+  PrivateLinkResource.properties,
   "Properties specific to the private link resource"
 );
-@@doc(PrivateLinkResources.create::parameters.resource,
+@@doc(
+  PrivateLinkResources.create::parameters.resource,
   "Private link request payload containing the resource information for create operations."
 );
-@@doc(PrivateLinkResources.update::parameters.properties,
+@@doc(
+  PrivateLinkResources.update::parameters.properties,
   "private link update payload containing only the properties to be updated."
 );
