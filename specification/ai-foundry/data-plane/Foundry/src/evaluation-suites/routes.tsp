@@ -25,7 +25,6 @@ const EvaluationSuitesRequiredPreviews = #{
   ],
 };
 
-@removed(Versions.v1)
 interface EvaluationSuites
   extends VersionedOperations<
       EvaluationSuiteVersion,

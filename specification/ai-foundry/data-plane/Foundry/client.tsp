@@ -23,7 +23,7 @@ import "./src/red-teams/routes.tsp";
 import "./src/routines/routes.tsp";
 import "./src/schedules/routes.tsp";
 import "./src/toolboxes/routes.tsp";
-//import "./src/evaluation-suites/routes.tsp";
+import "./src/evaluation-suites/routes.tsp";
 import "./src/skills/routes.tsp";
 import "./src/agents-session-files/routes.tsp";
 import "./src/data_generation_jobs/routes.tsp";
@@ -380,6 +380,23 @@ using Azure.AI.Projects;
 @@clientName(EvaluatorGenerationJobs.cancel, "cancel_generation_job", "python");
 @@clientName(EvaluatorGenerationJobs.delete, "delete_generation_job", "python");
 
+// EvaluationSuites versioned operations
+@@clientName(EvaluationSuites.listVersions, "list_evaluation_suite_versions");
+@@clientName(EvaluationSuites.listLatest, "list_evaluation_suites");
+@@clientName(EvaluationSuites.getVersion, "get_evaluation_suite");
+@@clientName(EvaluationSuites.deleteVersion, "delete_evaluation_suite");
+@@clientName(EvaluationSuites.createOrUpdateVersion, "create_or_update_evaluation_suite");
+@@clientName(EvaluationSuites.createEvaluationSuiteVersion, "create_evaluation_suite");
+@@clientName(EvaluationSuites.run, "run_evaluation_suite");
+
+@@clientName(EvaluationSuites.listVersions, "listEvaluationSuiteVersions", "javascript");
+@@clientName(EvaluationSuites.listLatest, "listEvaluationSuites", "javascript");
+@@clientName(EvaluationSuites.getVersion, "getEvaluationSuite", "javascript");
+@@clientName(EvaluationSuites.deleteVersion, "deleteEvaluationSuite", "javascript");
+@@clientName(EvaluationSuites.createOrUpdateVersion, "createOrUpdateEvaluationSuite", "javascript");
+@@clientName(EvaluationSuites.createEvaluationSuiteVersion, "createEvaluationSuite", "javascript");
+@@clientName(EvaluationSuites.run, "runEvaluationSuite", "javascript");
+
 // // Evaluation Suite Generation Jobs — unscoped names (fixes AllScopes conflict)
 // @@clientName(EvaluationSuiteGenerationJobs.create, "create_generation_suite_job");
 // @@clientName(EvaluationSuiteGenerationJobs.get, "get_generation_suite_job");
@@ -393,23 +410,6 @@ using Azure.AI.Projects;
 // @@clientName(EvaluationSuiteGenerationJobs.list, "listGenerationSuiteJobs", "javascript");
 // @@clientName(EvaluationSuiteGenerationJobs.cancel, "cancelGenerationSuiteJob", "javascript");
 // @@clientName(EvaluationSuiteGenerationJobs.delete, "deleteGenerationSuiteJob", "javascript");
-
-// // EvaluationSuites versioned operations
-// @@clientName(EvaluationSuites.listVersions, "list_evaluation_suite_versions");
-// @@clientName(EvaluationSuites.listLatest, "list_evaluation_suites");
-// @@clientName(EvaluationSuites.getVersion, "get_evaluation_suite");
-// @@clientName(EvaluationSuites.deleteVersion, "delete_evaluation_suite");
-// @@clientName(EvaluationSuites.createOrUpdateVersion, "create_or_update_evaluation_suite");
-// @@clientName(EvaluationSuites.createEvaluationSuiteVersion, "create_evaluation_suite");
-// @@clientName(EvaluationSuites.run, "run_evaluation_suite");
-
-// @@clientName(EvaluationSuites.listVersions, "listEvaluationSuiteVersions", "javascript");
-// @@clientName(EvaluationSuites.listLatest, "listEvaluationSuites", "javascript");
-// @@clientName(EvaluationSuites.getVersion, "getEvaluationSuite", "javascript");
-// @@clientName(EvaluationSuites.deleteVersion, "deleteEvaluationSuite", "javascript");
-// @@clientName(EvaluationSuites.createOrUpdateVersion, "createOrUpdateEvaluationSuite", "javascript");
-// @@clientName(EvaluationSuites.createEvaluationSuiteVersion, "createEvaluationSuite", "javascript");
-// @@clientName(EvaluationSuites.run, "runEvaluationSuite", "javascript");
 
 // --------------------------------------------------------------------------------
 // Beta Insights sub‐client
