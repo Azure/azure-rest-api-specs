@@ -201,6 +201,12 @@ using Microsoft.Storage;
 @@clientName(BlobServiceProperties, "BlobService", "csharp");
 @@clientName(QueueServiceProperties, "QueueService", "csharp");
 @@clientName(TableServiceProperties, "TableService", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This operation is pageable for .Net SDK"
+@@markAsPageable(FileServices.list, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This operation is pageable for .Net SDK"
+@@markAsPageable(QueueServices.list, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This operation is pageable for .Net SDK"
+@@markAsPageable(TableServices.list, "csharp");
 @@clientName(ManagementPolicy, "StorageAccountManagementPolicy", "csharp");
 @@clientName(
   PrivateEndpointConnection,
