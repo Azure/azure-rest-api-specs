@@ -14,7 +14,8 @@ model WebPubSubChatServiceClientOptions {
 
 @@clientName(WebPubSubChat.Chat, "WebPubSubChatService");
 
-@@clientInitialization(WebPubSubChat.Chat,
+@@clientInitialization(
+  WebPubSubChat.Chat,
   {
     parameters: WebPubSubChatServiceClientOptions,
   }
