@@ -12,20 +12,10 @@ using Azure.ResourceManager;
   "go"
 );
 @@clientName(CdnEndpoint, "LinkedEndpoint", "go");
-@@clientName(CdnWebApplicationFirewallPolicy, "CdnWafPolicy", "go");
-@@clientName(
-  WebApplicationFirewallPolicy,
-  "WebApplicationFirewallPolicy",
-  "go"
-);
-@@clientName(
-  CdnWebApplicationFirewallPolicyProperties,
-  "CdnWafPolicyProperties",
-  "go"
-);
+@@clientName(WebApplicationFirewallPolicy, "WafPolicy", "go");
 @@clientName(
   WebApplicationFirewallPolicyProperties,
-  "WebApplicationFirewallPolicyProperties",
+  "WafPolicyProperties",
   "go"
 );
 
@@ -737,7 +727,6 @@ using Azure.ResourceManager;
   "UriSigningKeys",
   "csharp"
 );
-@@access(DeepCreatedCustomDomainProperties, Access.public, "csharp");
 @@usage(
   DeepCreatedCustomDomainProperties,
 
@@ -1140,8 +1129,6 @@ using Azure.ResourceManager;
   "CompareDeploymentVersionsResult",
   "csharp"
 );
-@@access(RuleSet, Access.public, "csharp");
-@@access(Sku, Access.public, "csharp");
 @@usage(
   Sku,
 
@@ -1149,7 +1136,6 @@ using Azure.ResourceManager;
     | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-@@access(ManagedRuleSetDefinition, Access.public, "csharp");
 @@usage(
   ManagedRuleSetDefinition,
 
@@ -1157,7 +1143,6 @@ using Azure.ResourceManager;
     | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-@@access(ManagedRuleSetDefinitionProperties, Access.public, "csharp");
 @@usage(
   ManagedRuleSetDefinitionProperties,
 
@@ -1165,7 +1150,6 @@ using Azure.ResourceManager;
     | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-@@access(ManagedRuleGroupDefinition, Access.public, "csharp");
 @@usage(
   ManagedRuleGroupDefinition,
 
@@ -1173,8 +1157,6 @@ using Azure.ResourceManager;
     | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-@@access(ManagedRuleDefinition, Access.public, "csharp");
-@@access(DeepCreatedCustomDomainProperties, Access.public, "csharp");
 @@usage(
   ManagedRuleDefinition,
 
