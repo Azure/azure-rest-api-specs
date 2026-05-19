@@ -55,13 +55,6 @@ namespace Microsoft.ResourceGraph;
 );
 @@clientName(ResourceHistory.resourcesHistory, "GetResourcesHistory", "csharp");
 
-@client({
-  name: "ResourceGraphClient",
-  service: [ResourceChanges, ResourceGraphApi, ResourceHistory, GraphQueryApi],
-  autoMergeServices: true,
-})
-namespace Microsoft.ResourceGraph;
-
 // --- C# naming customizations to match GA SDK surface ---
 // Rename models to match existing GA API
 @@clientName(ResourceGraphApi.QueryRequest, "ResourceQueryContent", "csharp");
