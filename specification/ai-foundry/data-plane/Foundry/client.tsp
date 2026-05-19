@@ -227,8 +227,12 @@ using Azure.AI.Projects;
 @@usage(SessionFileWriteResponse, Usage.output);
 @@access(SessionFileWriteResponse, Access.public);
 
-// Exclude these operations entirely from emitted Python SDK
-@@scope(Agents.createAgentFromCode, "!(python)");
+// Exclude these operations entirely from emitted SDK
+@@scope(Agents.createAgentFromCode, "!(python, javascript)");
+@@scope(Agents.updateAgentFromCode, "!(python, javascript)");
+
+@@clientName(Agents.createAgentVersionFromCode, "create_version_from_code", "python");
+@@clientName(Agents.createAgentVersionFromCode, "createVersionFromCode", "javascript");
 
 @@clientName(DownloadAgentCodeResponse, "DownloadAgentCodeResult", "python");
 @@clientName(SessionDirectoryListResponse,
