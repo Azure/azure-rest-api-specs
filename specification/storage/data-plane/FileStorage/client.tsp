@@ -211,6 +211,11 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@clientName(UserDelegationKey.signedTid, "SignedTID", "go");
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(HandleItem, "omitSerdeMethods", "all", "go");
+@@clientOption(Directory.listFilesAndDirectoriesSegment, "preserveContentTypeHeader", true, "go");
+@@clientOption(Directory.listHandles, "preserveContentTypeHeader", true, "go");
+@@clientOption(Storage.File.File.download, "preserveContentTypeHeader", true, "go");
+@@clientOption(Storage.File.File.getProperties, "preserveContentTypeHeader", true, "go");
+@@clientOption(Storage.File.File.listHandles, "preserveContentTypeHeader", true, "go");
 
 @@alternateType(Storage.File.AccessPolicy.start, string, "javascript,python");
 @@alternateType(Storage.File.AccessPolicy.expiry, string, "javascript,python");
