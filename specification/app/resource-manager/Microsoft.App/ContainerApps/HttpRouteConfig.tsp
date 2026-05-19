@@ -96,11 +96,13 @@ interface HttpRouteConfigs {
   /**
    * Deletes the specified Managed Http Route.
    */
-  @summary("Deletes the specified Managed Http Route.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Custom response to match original swagger lowercase location header"
+  @summary("Deletes the specified Managed Http Route.")
   delete is ArmResourceDeleteWithoutOkAsync<
     HttpRouteConfig,
-    Response = HttpRouteConfigDeleteAcceptedResponse | ArmDeletedNoContentResponse
+    Response =
+      | HttpRouteConfigDeleteAcceptedResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
