@@ -152,7 +152,7 @@ interface ManagedEnvironments {
   list is ManagedEnvironmentOps.ActionSync<
     ManagedEnvironment,
     void,
-    ArmResponse<ResourceListResult<PrivateLinkResource>>
+    ArmResponse<PrivateLinkResourceListResult>
   >;
 }
 

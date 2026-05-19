@@ -314,10 +314,6 @@
           "Subscriptions"
         ],
         "description": "Get the verification id of a subscription used for verifying custom domains",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -11082,9 +11078,9 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
+              "Location": {
                 "type": "string",
-                "description": "A link to the status monitor"
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -11106,7 +11102,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "location",
           "final-state-schema": "#/definitions/SessionPool"
         },
         "x-ms-long-running-operation": true
@@ -11309,20 +11305,8 @@
         "Deny"
       ],
       "x-ms-enum": {
-        "name": "Action",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Allow",
-            "value": "Allow",
-            "description": "Allow"
-          },
-          {
-            "name": "Deny",
-            "value": "Deny",
-            "description": "Deny"
-          }
-        ]
+        "name": "action",
+        "modelAsString": true
       }
     },
     "Affinity": {
@@ -11333,20 +11317,8 @@
         "none"
       ],
       "x-ms-enum": {
-        "name": "Affinity",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "sticky",
-            "value": "sticky",
-            "description": "sticky"
-          },
-          {
-            "name": "none",
-            "value": "none",
-            "description": "none"
-          }
-        ]
+        "name": "affinity",
+        "modelAsString": true
       }
     },
     "AllowedAudiencesValidation": {
@@ -11573,8 +11545,8 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "Link to next page of resources."
+          "description": "Link to next page of resources.",
+          "readOnly": true
         }
       },
       "required": [
@@ -11641,13 +11613,9 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
           "description": "URL client should use to fetch the next page (per server side paging).\nIt's null for now, added for future use."
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "AvailableWorkloadProfile": {
       "type": "object",
@@ -11714,8 +11682,8 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "Link to next page of resources."
+          "description": "Link to next page of resources.",
+          "readOnly": true
         }
       },
       "required": [
@@ -12030,25 +11998,8 @@
         "Auto"
       ],
       "x-ms-enum": {
-        "name": "BindingType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Disabled"
-          },
-          {
-            "name": "SniEnabled",
-            "value": "SniEnabled",
-            "description": "SniEnabled"
-          },
-          {
-            "name": "Auto",
-            "value": "Auto",
-            "description": "Auto"
-          }
-        ]
+        "name": "bindingType",
+        "modelAsString": true
       }
     },
     "BlobStorageTokenStore": {
@@ -12472,8 +12423,8 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "Link to next page of resources."
+          "description": "Link to next page of resources.",
+          "readOnly": true
         }
       },
       "required": [
@@ -12833,13 +12784,10 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "Link to next page of resources."
+          "description": "Link to next page of resources.",
+          "readOnly": true
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "ConnectedEnvironmentPatchResource": {
       "type": "object",
@@ -13150,8 +13098,8 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "Link to next page of resources."
+          "description": "Link to next page of resources.",
+          "readOnly": true
         }
       },
       "required": [
@@ -13201,8 +13149,8 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "Link to next page of resources."
+          "description": "Link to next page of resources.",
+          "readOnly": true
         }
       },
       "required": [
@@ -14256,20 +14204,8 @@
             "grpc"
           ],
           "x-ms-enum": {
-            "name": "AppProtocol",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "http",
-                "value": "http",
-                "description": "http"
-              },
-              {
-                "name": "grpc",
-                "value": "grpc",
-                "description": "grpc"
-              }
-            ]
+            "name": "appProtocol",
+            "modelAsString": true
           }
         },
         "appPort": {
@@ -14633,8 +14569,8 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "Link to next page of resources."
+          "description": "Link to next page of resources.",
+          "readOnly": true
         }
       },
       "required": [
@@ -15073,7 +15009,10 @@
         "rows": {
           "type": "array",
           "description": "Rows in the table",
-          "items": {},
+          "items": {
+            "type": "object",
+            "additionalProperties": {}
+          },
           "x-ms-identifiers": []
         }
       }
@@ -15145,8 +15084,8 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "Link to next page of resources."
+          "description": "Link to next page of resources.",
+          "readOnly": true
         }
       },
       "required": [
@@ -15217,7 +15156,7 @@
         },
         "score": {
           "type": "number",
-          "format": "float",
+          "format": "double",
           "description": "Authors' names of the detector",
           "readOnly": true
         }
@@ -15731,12 +15670,12 @@
           "description": "The name of the extended location."
         },
         "type": {
-          "$ref": "#/definitions/ExtendedLocationTypes",
+          "$ref": "#/definitions/ExtendedLocationType",
           "description": "The type of the extended location."
         }
       }
     },
-    "ExtendedLocationTypes": {
+    "ExtendedLocationType": {
       "type": "string",
       "description": "The type of extendedLocation.",
       "enum": [
@@ -15744,14 +15683,7 @@
       ],
       "x-ms-enum": {
         "name": "ExtendedLocationTypes",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "CustomLocation",
-            "value": "CustomLocation",
-            "description": "CustomLocation"
-          }
-        ]
+        "modelAsString": true
       }
     },
     "Facebook": {
@@ -16157,8 +16089,8 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "Link to next page of resources."
+          "description": "Link to next page of resources.",
+          "readOnly": true
         }
       },
       "required": [
@@ -16481,22 +16413,22 @@
               {
                 "name": "Init",
                 "value": "Init",
-                "description": "Init"
+                "description": "Use managed identity during the init stage of the Container App lifecycle."
               },
               {
                 "name": "Main",
                 "value": "Main",
-                "description": "Main"
+                "description": "Use managed identity during the main stage of the Container App lifecycle."
               },
               {
                 "name": "None",
                 "value": "None",
-                "description": "None"
+                "description": "Do not use managed identity during any lifecycle stage."
               },
               {
                 "name": "All",
                 "value": "All",
-                "description": "All"
+                "description": "Use managed identity during all lifecycle stages of the Container App."
               }
             ]
           }
@@ -17014,8 +16946,8 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "Link to next page of resources."
+          "description": "Link to next page of resources.",
+          "readOnly": true
         }
       },
       "required": [
@@ -17615,7 +17547,9 @@
           "description": "Type of the scale rule\neg: azure-servicebus, redis etc."
         },
         "metadata": {
-          "description": "Metadata properties to describe the scale rule."
+          "type": "object",
+          "description": "Metadata properties to describe the scale rule.",
+          "additionalProperties": {}
         },
         "auth": {
           "type": "array",
@@ -17698,8 +17632,8 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "Link to next page of resources."
+          "description": "Link to next page of resources.",
+          "readOnly": true
         }
       },
       "required": [
@@ -17745,20 +17679,8 @@
         "functionapp"
       ],
       "x-ms-enum": {
-        "name": "Kind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "workflowapp",
-            "value": "workflowapp",
-            "description": "workflowapp"
-          },
-          {
-            "name": "functionapp",
-            "value": "functionapp",
-            "description": "functionapp"
-          }
-        ]
+        "name": "kind",
+        "modelAsString": true
       }
     },
     "LabelHistory": {
@@ -17936,7 +17858,7 @@
     },
     "ListUsagesResult": {
       "type": "object",
-      "description": "Paged collection of Usage items",
+      "description": "Legacy page model for collection responses where value is optional and nextLink is not readOnly.",
       "properties": {
         "value": {
           "type": "array",
@@ -17950,13 +17872,9 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
           "description": "The URI to fetch the next page of compute resource usage information. Call ListNext() with this to fetch the next page of compute resource usage information."
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "LogAnalyticsConfiguration": {
       "type": "object",
@@ -17991,30 +17909,8 @@
         "error"
       ],
       "x-ms-enum": {
-        "name": "LogLevel",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "info",
-            "value": "info",
-            "description": "info"
-          },
-          {
-            "name": "debug",
-            "value": "debug",
-            "description": "debug"
-          },
-          {
-            "name": "warn",
-            "value": "warn",
-            "description": "warn"
-          },
-          {
-            "name": "error",
-            "value": "error",
-            "description": "error"
-          }
-        ]
+        "name": "logLevel",
+        "modelAsString": true
       }
     },
     "LoggerSetting": {
@@ -18137,13 +18033,10 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "Link for next page of results."
+          "description": "Link for next page of results.",
+          "readOnly": true
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "MaintenanceConfigurationResource": {
       "type": "object",
@@ -18189,8 +18082,8 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "Link to next page of resources."
+          "description": "Link to next page of resources.",
+          "readOnly": true
         }
       },
       "required": [
@@ -18516,8 +18409,8 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "Link to next page of resources."
+          "description": "Link to next page of resources.",
+          "readOnly": true
         }
       },
       "required": [
@@ -18541,20 +18434,8 @@
             "Main"
           ],
           "x-ms-enum": {
-            "name": "SessionPoolIdentityLifeCycle",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "None",
-                "value": "None",
-                "description": "None"
-              },
-              {
-                "name": "Main",
-                "value": "Main",
-                "description": "Main"
-              }
-            ]
+            "name": "IdentitySettingsLifeCycle",
+            "modelAsString": true
           }
         }
       },
@@ -18687,6 +18568,7 @@
             "ClientSecretPost"
           ],
           "x-ms-enum": {
+            "name": "ClientCredentialMethod",
             "modelAsString": false
           }
         },
@@ -19225,7 +19107,7 @@
     },
     "PrivateEndpointConnectionListResult": {
       "type": "object",
-      "description": "The response of a PrivateEndpointConnection list operation.",
+      "description": "List of private endpoint connections for a managed environment.",
       "properties": {
         "value": {
           "type": "array",
@@ -19236,13 +19118,10 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "PrivateEndpointConnectionProperties": {
       "type": "object",
@@ -19381,7 +19260,7 @@
     },
     "PrivateLinkResourceListResult": {
       "type": "object",
-      "description": "The response of a PrivateLinkResource list operation.",
+      "description": "List of private link resources for a managed environment.",
       "properties": {
         "value": {
           "type": "array",
@@ -19392,13 +19271,10 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "PrivateLinkResourceProperties": {
       "type": "object",
@@ -19739,8 +19615,8 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "Link to next page of resources."
+          "description": "Link to next page of resources.",
+          "readOnly": true
         }
       },
       "required": [
@@ -20463,8 +20339,8 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "Link to next page of resources."
+          "description": "Link to next page of resources.",
+          "readOnly": true
         }
       },
       "required": [
@@ -20909,8 +20785,8 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "Link to next page of resources."
+          "description": "Link to next page of resources.",
+          "readOnly": true
         }
       },
       "required": [
@@ -21487,6 +21363,7 @@
             "Count"
           ],
           "x-ms-enum": {
+            "name": "UsageUnit",
             "modelAsString": false
           }
         },
@@ -21728,8 +21605,8 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "Link to next page of resources."
+          "description": "Link to next page of resources.",
+          "readOnly": true
         }
       },
       "required": [
@@ -21966,8 +21843,8 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "Link to next page of resources."
+          "description": "Link to next page of resources.",
+          "readOnly": true
         }
       },
       "required": [

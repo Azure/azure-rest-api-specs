@@ -78,7 +78,10 @@ interface PrivateEndpointConnections {
    * List private endpoint connections for a given managed environment.
    */
   @summary("List private endpoint connections for a given managed environment.")
-  list is PrivateEndpointConnectionOps.List<PrivateEndpointConnection>;
+  list is PrivateEndpointConnectionOps.List<
+    PrivateEndpointConnection,
+    Response = ArmResponse<PrivateEndpointConnectionListResult>
+  >;
 }
 
 @@doc(
