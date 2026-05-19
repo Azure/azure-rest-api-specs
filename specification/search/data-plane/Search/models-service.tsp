@@ -4938,6 +4938,7 @@ model EmbeddingColumnMapping {
 /** Configuration for File knowledge source that supports direct file upload and indexing. */
 @added(Versions.v2026_05_01_preview)
 model FileKnowledgeSource extends KnowledgeSource {
+  /** The discriminator value. */
   kind: KnowledgeSourceKind.File;
 
   /** The parameters for the File knowledge source. */
@@ -5068,6 +5069,7 @@ model RemoteSharePointKnowledgeSourceParameters {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
 @added(Versions.v2026_05_01_preview)
 model WorkIQKnowledgeSource extends KnowledgeSource {
+  /** The discriminator value. */
   kind: KnowledgeSourceKind.WorkIQ;
 }
 
