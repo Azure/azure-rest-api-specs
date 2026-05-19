@@ -301,7 +301,7 @@ suppressions:
      variant. It must remain required in the PATCH body so callers can identify which derived auth schema they are sending;
      making it optional would break discriminated deserialization.
     where:
-        - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/cacheRules/{cacheRuleName}"].patch.parameters[4].schema.properties.properties.properties.additionalAuthenticationProperties
+        - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/cacheRules/{cacheRuleName}"].patch.parameters[4].schema.properties.properties
   - code: RequestSchemaForTrackedResourcesMustHaveTags
     from: containerregistry.json
     reason: Previously existing implementation, flagged as part of Typespec conversion
