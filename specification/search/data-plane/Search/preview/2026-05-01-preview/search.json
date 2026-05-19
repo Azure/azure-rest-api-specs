@@ -10444,7 +10444,7 @@
       "properties": {
         "search": {
           "type": "string",
-          "description": "The search string used to query the File knowledge source."
+          "description": "The search string used to query file contents."
         }
       }
     },
@@ -10466,15 +10466,11 @@
     },
     "KnowledgeBaseFileReference": {
       "type": "object",
-      "description": "Represents a File document reference.",
+      "description": "Represents a file document reference.",
       "properties": {
-        "fileId": {
+        "docName": {
           "type": "string",
-          "description": "The unique identifier of the file."
-        },
-        "fileName": {
-          "type": "string",
-          "description": "The name of the file."
+          "description": "The document name for the reference."
         }
       },
       "allOf": [
@@ -10596,7 +10592,7 @@
       "properties": {
         "search": {
           "type": "string",
-          "description": "The search string used to query the indexed SQL knowledge source."
+          "description": "The search string used to query indexed SQL contents."
         }
       }
     },
@@ -10618,11 +10614,11 @@
     },
     "KnowledgeBaseIndexedSqlReference": {
       "type": "object",
-      "description": "Represents an indexed SQL document reference.",
+      "description": "Represents an Azure SQL document reference.",
       "properties": {
-        "docKey": {
+        "docUrl": {
           "type": "string",
-          "description": "The document key for the reference."
+          "description": "The document URL for the reference."
         }
       },
       "allOf": [

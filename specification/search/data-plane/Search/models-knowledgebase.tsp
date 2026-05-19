@@ -712,7 +712,7 @@ model KnowledgeBaseFileActivityRecord
 /** Represents the arguments the File retrieval activity was run with. */
 @added(Versions.v2026_05_01_preview)
 model KnowledgeBaseFileActivityArguments {
-  /** The search string used to query the File knowledge source. */
+  /** The search string used to query file contents. */
   search?: string;
 }
 
@@ -732,7 +732,7 @@ model KnowledgeBaseIndexedSqlActivityRecord
 /** Represents the arguments the indexed SQL retrieval activity was run with. */
 @added(Versions.v2026_05_01_preview)
 model KnowledgeBaseIndexedSqlActivityArguments {
-  /** The search string used to query the indexed SQL knowledge source. */
+  /** The search string used to query indexed SQL contents. */
   search?: string;
 }
 
@@ -1035,29 +1035,26 @@ model KnowledgeBaseMcpServerReference extends KnowledgeBaseReference {
   title?: string;
 }
 
-/** Represents a File document reference. */
+/** Represents a file document reference. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 @added(Versions.v2026_05_01_preview)
 model KnowledgeBaseFileReference extends KnowledgeBaseReference {
   /** The discriminator value. */
   type: KnowledgeBaseReferenceType.file;
 
-  /** The unique identifier of the file. */
-  fileId?: string;
-
-  /** The name of the file. */
-  fileName?: string;
+  /** The document name for the reference. */
+  docName?: string;
 }
 
-/** Represents an indexed SQL document reference. */
+/** Represents an Azure SQL document reference. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 @added(Versions.v2026_05_01_preview)
 model KnowledgeBaseIndexedSqlReference extends KnowledgeBaseReference {
   /** The discriminator value. */
   type: KnowledgeBaseReferenceType.indexedSql;
 
-  /** The document key for the reference. */
-  docKey?: string;
+  /** The document URL for the reference. */
+  docUrl?: string;
 }
 
 /** Information about the sensitivity label applied to a SharePoint document. */
