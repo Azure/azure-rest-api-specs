@@ -14,22 +14,21 @@
         "type": "Microsoft.DBforPostgreSQL/flexibleServers/majorVersionUpgradePrecheck",
         "properties": {
           "createTime": "2026-04-10T00:55:46.0983792Z",
-          "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
-          "status": "Succeeded",
+          "status": "Failed",
           "precheckResult": {
             "action": "Precheck",
             "upgradeSequence": {
               "sourceVersion": "14",
-              "targetVersion": "18"
+              "targetVersion": "11"
             },
             "errorInfo": [
               {
-                "errorCode": 1020,
-                "errorMessage": ""
+                "errorCode": 1032,
+                "errorMessage": "Major version upgrade failed because the target version (11) must be greater than the current source version (14). Please specify a higher PostgreSQL major version as the upgrade target."
               }
             ]
           },
-          "targetVersion": "18",
+          "targetVersion": "11",
           "policyDetails": [
             {
               "policyName": "NotSupportedExtensionPrecheckPolicy",
