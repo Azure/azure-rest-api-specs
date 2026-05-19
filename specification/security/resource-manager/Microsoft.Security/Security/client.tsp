@@ -623,6 +623,22 @@ op privateLinkResourcesGetCustomization(
   "GetAllowedConnections",
   "csharp"
 );
+@@clientName(MdeOnboardingAPI.MdeOnboardings.list,
+  "GetMdeOnboardings",
+  "csharp"
+);
+@@clientName(SecureScoreAPI.SecureScoreControlDefinitionsOperationGroup.list,
+  "GetSecureScoreControlDefinitions",
+  "csharp"
+);
+@@clientName(SecureScoreAPI.SecureScoreControlDefinitionsOperationGroup.listBySubscription,
+  "GetSecureScoreControlDefinitionsBySubscription",
+  "csharp"
+);
+@@clientName(SensitivitySettingsAPI.GetSensitivitySettingsResponses.list,
+  "GetSensitivitySettings",
+  "csharp"
+);
 @@clientName(SecuritySolutionsAPI.TopologyOperationGroup.list,
   "GetTopologies",
   "csharp"
