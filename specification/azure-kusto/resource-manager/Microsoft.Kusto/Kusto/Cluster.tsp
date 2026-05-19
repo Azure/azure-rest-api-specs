@@ -89,20 +89,23 @@ interface Clusters {
       @header("If-Match")
       IfMatch?: string;
     },
-    Response = ArmResponse<Cluster> | ArmResourceCreatedResponse<
-      Cluster,
-      LroHeaders = ArmLroLocationHeader<FinalResult = Cluster> &
-        ArmAsyncOperationHeader<FinalResult = Cluster> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | (ArmAcceptedLroResponse<
-      "Update accepted.",
-      LroHeaders = ArmLroLocationHeader<FinalResult = Cluster> &
-        ArmAsyncOperationHeader<FinalResult = Cluster> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > & {
-      @bodyRoot
-      _: Cluster;
-    })
+    Response =
+      | ArmResponse<Cluster>
+      | ArmResourceCreatedResponse<
+          Cluster,
+          LroHeaders = ArmLroLocationHeader<FinalResult = Cluster> &
+            ArmAsyncOperationHeader<FinalResult = Cluster> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | (ArmAcceptedLroResponse<
+          "Update accepted.",
+          LroHeaders = ArmLroLocationHeader<FinalResult = Cluster> &
+            ArmAsyncOperationHeader<FinalResult = Cluster> &
+            Azure.Core.Foundations.RetryAfterHeader
+        > & {
+          @bodyRoot
+          _: Cluster;
+        })
   >;
 
   /**
@@ -112,9 +115,12 @@ interface Clusters {
   @tag("Clusters")
   delete is ArmResourceDeleteWithoutOkAsync<
     Cluster,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
-      ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+          ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -142,12 +148,14 @@ interface Clusters {
   stop is ArmResourceActionAsyncBase<
     Cluster,
     void,
-    ArmAcceptedLroResponse<
-      "Resource operation accepted.",
-      LroHeaders = ArmLroLocationHeader &
-        ArmAsyncOperationHeader &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | OkResponse,
+
+      | ArmAcceptedLroResponse<
+          "Resource operation accepted.",
+          LroHeaders = ArmLroLocationHeader &
+            ArmAsyncOperationHeader &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | OkResponse,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>
   >;
 
@@ -158,12 +166,14 @@ interface Clusters {
   start is ArmResourceActionAsyncBase<
     Cluster,
     void,
-    ArmAcceptedLroResponse<
-      "Resource operation accepted.",
-      LroHeaders = ArmLroLocationHeader &
-        ArmAsyncOperationHeader &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | OkResponse,
+
+      | ArmAcceptedLroResponse<
+          "Resource operation accepted.",
+          LroHeaders = ArmLroLocationHeader &
+            ArmAsyncOperationHeader &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | OkResponse,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>
   >;
 
@@ -174,12 +184,14 @@ interface Clusters {
   migrate is ArmResourceActionAsyncBase<
     Cluster,
     ClusterMigrateRequest,
-    ArmAcceptedLroResponse<
-      "Resource operation accepted.",
-      LroHeaders = ArmLroLocationHeader &
-        ArmAsyncOperationHeader &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | OkResponse,
+
+      | ArmAcceptedLroResponse<
+          "Resource operation accepted.",
+          LroHeaders = ArmLroLocationHeader &
+            ArmAsyncOperationHeader &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | OkResponse,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>
   >;
 
@@ -214,12 +226,14 @@ interface Clusters {
   detachFollowerDatabases is ArmResourceActionAsyncBase<
     Cluster,
     FollowerDatabaseDefinition,
-    ArmAcceptedLroResponse<
-      "Resource operation accepted.",
-      LroHeaders = ArmLroLocationHeader &
-        ArmAsyncOperationHeader &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | OkResponse,
+
+      | ArmAcceptedLroResponse<
+          "Resource operation accepted.",
+          LroHeaders = ArmLroLocationHeader &
+            ArmAsyncOperationHeader &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | OkResponse,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>
   >;
 
@@ -230,12 +244,14 @@ interface Clusters {
   diagnoseVirtualNetwork is ArmResourceActionAsyncBase<
     Cluster,
     void,
-    ArmAcceptedLroResponse<
-      "Diagnose virtual network request accepted.",
-      LroHeaders = ArmLroLocationHeader<FinalResult = DiagnoseVirtualNetworkResult> &
-        ArmAsyncOperationHeader<FinalResult = DiagnoseVirtualNetworkResult> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmResponse<DiagnoseVirtualNetworkResult>,
+
+      | ArmAcceptedLroResponse<
+          "Diagnose virtual network request accepted.",
+          LroHeaders = ArmLroLocationHeader<FinalResult = DiagnoseVirtualNetworkResult> &
+            ArmAsyncOperationHeader<FinalResult = DiagnoseVirtualNetworkResult> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmResponse<DiagnoseVirtualNetworkResult>,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>
   >;
 
@@ -272,12 +288,14 @@ interface Clusters {
   addCalloutPolicies is ArmResourceActionAsyncBase<
     Cluster,
     CalloutPoliciesList,
-    ArmAcceptedLroResponse<
-      "Resource operation accepted.",
-      LroHeaders = ArmLroLocationHeader &
-        ArmAsyncOperationHeader &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | OkResponse,
+
+      | ArmAcceptedLroResponse<
+          "Resource operation accepted.",
+          LroHeaders = ArmLroLocationHeader &
+            ArmAsyncOperationHeader &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | OkResponse,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>
   >;
 
@@ -288,12 +306,14 @@ interface Clusters {
   removeCalloutPolicy is ArmResourceActionAsyncBase<
     Cluster,
     CalloutPolicyToRemove,
-    ArmAcceptedLroResponse<
-      "Resource operation accepted.",
-      LroHeaders = ArmLroLocationHeader &
-        ArmAsyncOperationHeader &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | OkResponse,
+
+      | ArmAcceptedLroResponse<
+          "Resource operation accepted.",
+          LroHeaders = ArmLroLocationHeader &
+            ArmAsyncOperationHeader &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | OkResponse,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>
   >;
 
@@ -326,12 +346,14 @@ interface Clusters {
   addLanguageExtensions is ArmResourceActionAsyncBase<
     Cluster,
     LanguageExtensionsList,
-    ArmAcceptedLroResponse<
-      "Resource operation accepted.",
-      LroHeaders = ArmLroLocationHeader &
-        ArmAsyncOperationHeader &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | OkResponse,
+
+      | ArmAcceptedLroResponse<
+          "Resource operation accepted.",
+          LroHeaders = ArmLroLocationHeader &
+            ArmAsyncOperationHeader &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | OkResponse,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>
   >;
 
@@ -342,12 +364,14 @@ interface Clusters {
   removeLanguageExtensions is ArmResourceActionAsyncBase<
     Cluster,
     LanguageExtensionsList,
-    ArmAcceptedLroResponse<
-      "Resource operation accepted.",
-      LroHeaders = ArmLroLocationHeader &
-        ArmAsyncOperationHeader &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | OkResponse,
+
+      | ArmAcceptedLroResponse<
+          "Resource operation accepted.",
+          LroHeaders = ArmLroLocationHeader &
+            ArmAsyncOperationHeader &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | OkResponse,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>
   >;
 
@@ -407,42 +431,55 @@ interface Clusters {
 
 @@doc(Cluster.name, "The name of the Kusto cluster.");
 @@doc(Cluster.properties, "The cluster properties.");
-@@doc(Clusters.createOrUpdate::parameters.resource,
+@@doc(
+  Clusters.createOrUpdate::parameters.resource,
   "The Kusto cluster parameters supplied to the CreateOrUpdate operation."
 );
-@@doc(Clusters.update::parameters.properties,
+@@doc(
+  Clusters.update::parameters.properties,
   "The Kusto cluster parameters supplied to the Update operation."
 );
-@@doc(Clusters.migrate::parameters.body,
+@@doc(
+  Clusters.migrate::parameters.body,
   "The cluster migrate request parameters."
 );
-@@doc(Clusters.detachFollowerDatabases::parameters.body,
+@@doc(
+  Clusters.detachFollowerDatabases::parameters.body,
   "The follower databases properties to remove."
 );
-@@doc(Clusters.addCalloutPolicies::parameters.body,
+@@doc(
+  Clusters.addCalloutPolicies::parameters.body,
   "The callout policies to add."
 );
-@@doc(Clusters.removeCalloutPolicy::parameters.body,
+@@doc(
+  Clusters.removeCalloutPolicy::parameters.body,
   "The callout policies to remove."
 );
-@@doc(Clusters.addLanguageExtensions::parameters.body,
+@@doc(
+  Clusters.addLanguageExtensions::parameters.body,
   "The language extensions to add."
 );
-@@doc(Clusters.removeLanguageExtensions::parameters.body,
+@@doc(
+  Clusters.removeLanguageExtensions::parameters.body,
   "The language extensions to remove."
 );
-@@doc(Clusters.checkNameAvailability::parameters.body,
+@@doc(
+  Clusters.checkNameAvailability::parameters.body,
   "The name of the principal assignment."
 );
-@@doc(Clusters.databasesCheckNameAvailability::parameters.body,
+@@doc(
+  Clusters.databasesCheckNameAvailability::parameters.body,
   "The name of the resource."
 );
-@@doc(Clusters.attachedDatabaseConfigurationsCheckNameAvailability::parameters.body,
+@@doc(
+  Clusters.attachedDatabaseConfigurationsCheckNameAvailability::parameters.body,
   "The name of the resource."
 );
-@@doc(Clusters.managedPrivateEndpointsCheckNameAvailability::parameters.body,
+@@doc(
+  Clusters.managedPrivateEndpointsCheckNameAvailability::parameters.body,
   "The name of the resource."
 );
-@@doc(Clusters.sandboxCustomImagesCheckNameAvailability::parameters.body,
+@@doc(
+  Clusters.sandboxCustomImagesCheckNameAvailability::parameters.body,
   "The name of the resource."
 );

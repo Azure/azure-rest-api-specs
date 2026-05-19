@@ -68,7 +68,8 @@ interface MonitoredSubscriptions {
 }
 
 @@doc(MonitoredSubscriptionProperties.name, "");
-@@doc(MonitoredSubscriptionProperties.properties,
+@@doc(
+  MonitoredSubscriptionProperties.properties,
   "The request to update subscriptions needed to be monitored by the Dynatrace monitor resource."
 );
 @@doc(MonitoredSubscriptions.createOrUpdate::parameters.resource, "");

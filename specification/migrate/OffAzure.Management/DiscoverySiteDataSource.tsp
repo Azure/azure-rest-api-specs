@@ -49,7 +49,10 @@ interface DiscoverySiteDataSources {
   @tag("WebAppDiscoverySiteDataSourcesController")
   delete is ArmResourceDeleteWithoutOkAsync<
     DiscoverySiteDataSource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -60,6 +63,7 @@ interface DiscoverySiteDataSources {
 }
 
 @@doc(DiscoverySiteDataSource.name, "Data Source ARM name.");
-@@doc(DiscoverySiteDataSource.properties,
+@@doc(
+  DiscoverySiteDataSource.properties,
   "The resource-specific properties for this resource."
 );

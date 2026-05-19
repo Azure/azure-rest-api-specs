@@ -87,6 +87,7 @@ interface StaticMembers {
 
 @@doc(StaticMember.name, "The name of the static member.");
 @@doc(StaticMember.properties, "The Static Member properties");
-@@doc(StaticMembers.createOrUpdate::parameters.resource,
+@@doc(
+  StaticMembers.createOrUpdate::parameters.resource,
   "Parameters supplied to the specify the static member to create"
 );

@@ -67,6 +67,7 @@ interface SqlDatabaseV2s {
 }
 
 @@doc(SqlDatabaseV2.name, "SQL Database name.");
-@@doc(SqlDatabaseV2.properties,
+@@doc(
+  SqlDatabaseV2.properties,
   "The resource-specific properties for this resource."
 );
