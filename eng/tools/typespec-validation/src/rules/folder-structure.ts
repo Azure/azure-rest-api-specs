@@ -36,10 +36,10 @@ export class FolderStructureRule implements Rule {
       if (suppressMustUseV2) {
         stdOutput += `Folder '${folder}' is not using "folder structure v2", but was suppressed.\n`;
       } else {
+        if (stdOutput) console.log(stdOutput);
         return {
           success: false,
-          stdOutput: stdOutput,
-          errorOutput: `Folder '${folder}' must use "folder structure v2". See https://aka.ms/azsdk/spec-dirs \n`,
+          reason: `Folder '${folder}' must use "folder structure v2". See https://aka.ms/azsdk/spec-dirs \n`,
         };
       }
     }
