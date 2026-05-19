@@ -143,10 +143,12 @@ interface Policies {
   >;
 }
 
-@@doc(CustomerPolicy.name,
+@@doc(
+  CustomerPolicy.name,
   "Service-defined resource names such as 'default' which are reserved resource names."
 );
 @@doc(CustomerPolicy.properties, "A policy at customer scope.");
-@@doc(Policies.createOrUpdateByCustomerAtBillingAccount::parameters.resource,
+@@doc(
+  Policies.createOrUpdateByCustomerAtBillingAccount::parameters.resource,
   "A policy at customer scope."
 );

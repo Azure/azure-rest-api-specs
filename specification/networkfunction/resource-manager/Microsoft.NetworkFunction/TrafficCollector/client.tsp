@@ -4,7 +4,8 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Microsoft.NetworkFunction;
 
-@@clientName(Microsoft.NetworkFunction,
+@@clientName(
+  Microsoft.NetworkFunction,
   "AzureTrafficCollectorClient",
   "javascript"
 );
@@ -18,15 +19,18 @@ using Microsoft.NetworkFunction;
 @@clientName(EmissionType.IPFIX, "Ipfix", "csharp");
 @@clientName(IngestionType.IPFIX, "Ipfix", "csharp");
 
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ResourceReference.id,
+@@alternateType(
+  ResourceReference.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(AzureTrafficCollectorPropertiesFormat.collectorPolicies,
+@@alternateType(
+  AzureTrafficCollectorPropertiesFormat.collectorPolicies,
   Azure.ResourceManager.Models.SubResource[],
   "csharp"
 );
@@ -34,12 +38,14 @@ using Microsoft.NetworkFunction;
 // Change resource model inheritance from ProxyResource to TrackedResource for C#
 // These resources have location and tags properties, making them tracked resources in the existing SDK
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(AzureTrafficCollector,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  AzureTrafficCollector,
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(CollectorPolicy,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  CollectorPolicy,
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );

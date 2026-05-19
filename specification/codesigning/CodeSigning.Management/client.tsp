@@ -13,27 +13,32 @@ using Azure.Core;
 @@clientName(CertificateProfile, "ArtifactSigningCertificateProfile", "csharp");
 @@clientName(CertificateStatus, "ArtifactSigningCertificateStatus", "csharp");
 @@clientName(ProvisioningState, "ArtifactSigningProvisioningState", "csharp");
-@@clientName(CheckNameAvailability,
+@@clientName(
+  CheckNameAvailability,
   "ArtifactSigningAccountNameAvailabilityContent",
   "csharp"
 );
 @@clientName(CheckNameAvailability.type, "ResourceType", "csharp");
-@@clientName(CheckNameAvailabilityResult,
+@@clientName(
+  CheckNameAvailabilityResult,
   "ArtifactSigningAccountNameAvailabilityResult",
   "csharp"
 );
-@@clientName(CheckNameAvailabilityResult.nameAvailable,
+@@clientName(
+  CheckNameAvailabilityResult.nameAvailable,
   "IsNameAvailable",
   "csharp"
 );
-@@clientName(NameUnavailabilityReason,
+@@clientName(
+  NameUnavailabilityReason,
   "ArtifactSigningAccountNameUnavailabilityReason",
   "csharp"
 );
 @@clientName(CodeSigningAccount, "ArtifactSigningAccount", "csharp");
 @@clientName(ProfileType, "CertificateProfileType", "csharp");
 @@clientName(ProfileType.VBSEnclave, "VbsEnclave", "csharp");
-@@clientName(CertificateProfileProperties.profileType,
+@@clientName(
+  CertificateProfileProperties.profileType,
   "CertificateProfileType",
   "csharp"
 );
@@ -43,15 +48,18 @@ using Azure.Core;
 @@clientName(Certificate.expiryDate, "ExpireOn", "csharp");
 @@clientName(Revocation.status, "RevocationStatus", "csharp");
 
-@@clientName(CodeSigningAccounts.checkNameAvailability,
+@@clientName(
+  CodeSigningAccounts.checkNameAvailability,
   "CheckArtifactSigningAccountNameAvailability",
   "csharp"
 );
-@@clientName(CodeSigningAccounts.checkNameAvailability::parameters.body,
+@@clientName(
+  CodeSigningAccounts.checkNameAvailability::parameters.body,
   "content",
   "csharp"
 );
-@@clientName(CertificateProfiles.revokeCertificate::parameters.body,
+@@clientName(
+  CertificateProfiles.revokeCertificate::parameters.body,
   "content",
   "csharp"
 );

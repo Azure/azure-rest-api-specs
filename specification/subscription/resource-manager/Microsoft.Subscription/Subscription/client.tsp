@@ -7,7 +7,8 @@ using Azure.Core;
 namespace Microsoft.Subscription;
 
 @@clientName(Microsoft.Subscription, "SubscriptionClient", "python");
-@@clientName(SubscriptionOperationGroup.acceptOwnership::parameters.body,
+@@clientName(
+  SubscriptionOperationGroup.acceptOwnership::parameters.body,
   "requestbody_body",
   "python"
 );
@@ -20,12 +21,14 @@ namespace Microsoft.Subscription;
 @@scope(TargetDirectoryResults.listTargetDirectory, "!csharp"); // Singleton, no need to have list operation in sdk.
 
 @@clientName(SubscriptionAliasResponse, "SubscriptionAlias", "csharp");
-@@clientName(SubscriptionAliasResponseProperties,
+@@clientName(
+  SubscriptionAliasResponseProperties,
   "SubscriptionAliasProperties",
   "csharp"
 );
 @@clientName(BillingAccountPoliciesResponse, "BillingAccountPolicy", "csharp");
-@@clientName(BillingAccountPoliciesResponseProperties,
+@@clientName(
+  BillingAccountPoliciesResponseProperties,
   "BillingAccountPolicyProperties",
   "csharp"
 );
@@ -36,133 +39,165 @@ namespace Microsoft.Subscription;
 @@clientName(AcceptOwnership, "AcceptOwnershipState", "csharp");
 @@clientName(Provisioning, "AcceptOwnershipProvisioningState", "csharp");
 @@clientName(ProvisioningState, "SubscriptionProvisioningState", "csharp");
-@@clientName(PutAliasRequestAdditionalProperties,
+@@clientName(
+  PutAliasRequestAdditionalProperties,
   "SubscriptionAliasAdditionalProperties",
   "csharp"
 );
 @@clientName(ServiceTenantResponse, "ServiceTenant", "csharp");
 @@clientName(Workload, "SubscriptionWorkload", "csharp");
-@@clientName(SubscriptionAliasResponseProperties.acceptOwnershipUrl,
+@@clientName(
+  SubscriptionAliasResponseProperties.acceptOwnershipUrl,
   "acceptOwnershipUri",
   "csharp"
 );
-@@alternateType(SubscriptionAliasResponseProperties.acceptOwnershipUrl,
+@@alternateType(
+  SubscriptionAliasResponseProperties.acceptOwnershipUrl,
   url,
   "csharp"
 );
-@@clientName(SubscriptionAliasResponseProperties.createdTime,
+@@clientName(
+  SubscriptionAliasResponseProperties.createdTime,
   "createdOn",
   "csharp"
 );
-@@alternateType(SubscriptionAliasResponseProperties.createdTime,
+@@alternateType(
+  SubscriptionAliasResponseProperties.createdTime,
   utcDateTime,
   "csharp"
 );
 @@clientName(AcceptOwnershipRequest, "AcceptOwnershipContent", "csharp");
-@@clientName(PutAliasRequest,
+@@clientName(
+  PutAliasRequest,
   "SubscriptionAliasCreateOrUpdateContent",
   "csharp"
 );
-@@clientName(PutTenantPolicyRequestProperties,
+@@clientName(
+  PutTenantPolicyRequestProperties,
   "TenantPolicyCreateOrUpdateContent",
   "csharp"
 );
 @@clientName(TargetDirectoryRequest, "TargetDirectoryContent", "csharp");
-@@clientName(TargetDirectoryRequestProperties,
+@@clientName(
+  TargetDirectoryRequestProperties,
   "TargetDirectoryProperties",
   "csharp"
 );
-@@clientName(SubscriptionOperationGroup.acceptOwnership,
+@@clientName(
+  SubscriptionOperationGroup.acceptOwnership,
   "AcceptSubscriptionOwnership",
   "csharp"
 );
-@@clientName(SubscriptionOperationGroup.acceptOwnershipStatus,
+@@clientName(
+  SubscriptionOperationGroup.acceptOwnershipStatus,
   "GetAcceptOwnershipStatus",
   "csharp"
 );
 @@clientName(SubscriptionOperationGroup.cancel, "CancelSubscription", "csharp");
 @@clientName(SubscriptionOperationGroup.rename, "RenameSubscription", "csharp");
 @@clientName(SubscriptionOperationGroup.enable, "EnableSubscription", "csharp");
-@@alternateType(TargetDirectoryRequestProperties.destinationOwnerId,
+@@alternateType(
+  TargetDirectoryRequestProperties.destinationOwnerId,
   uuid,
   "csharp"
 );
-@@alternateType(TargetDirectoryRequestProperties.destinationOwnerId,
+@@alternateType(
+  TargetDirectoryRequestProperties.destinationOwnerId,
   uuid,
   "csharp"
 );
-@@alternateType(TargetDirectoryRequestProperties.destinationTenantId,
+@@alternateType(
+  TargetDirectoryRequestProperties.destinationTenantId,
   uuid,
   "csharp"
 );
-@@alternateType(TargetDirectoryResultProperties.destinationTenantId,
+@@alternateType(
+  TargetDirectoryResultProperties.destinationTenantId,
   uuid,
   "csharp"
 );
-@@alternateType(TargetDirectoryResultProperties.destinationOwnerId,
+@@alternateType(
+  TargetDirectoryResultProperties.destinationOwnerId,
   uuid,
   "csharp"
 );
 @@alternateType(TargetDirectoryResultProperties.sourceOwnerId, uuid, "csharp");
 @@alternateType(TargetDirectoryResultProperties.sourceTenantId, uuid, "csharp");
-@@clientName(SubscriptionName.subscriptionName,
+@@clientName(
+  SubscriptionName.subscriptionName,
   "SubscriptionNameValue",
   "csharp"
 );
 
-@@clientLocation(SubscriptionOperationGroup.cancel::parameters.subscriptionId,
+@@clientLocation(
+  SubscriptionOperationGroup.cancel::parameters.subscriptionId,
   SubscriptionOperationGroup.cancel
 );
-@@clientLocation(SubscriptionOperationGroup.rename::parameters.subscriptionId,
+@@clientLocation(
+  SubscriptionOperationGroup.rename::parameters.subscriptionId,
   SubscriptionOperationGroup.rename
 );
-@@clientLocation(SubscriptionOperationGroup.enable::parameters.subscriptionId,
+@@clientLocation(
+  SubscriptionOperationGroup.enable::parameters.subscriptionId,
   SubscriptionOperationGroup.enable
 );
-@@clientLocation(SubscriptionOperationGroup.acceptOwnership::parameters.subscriptionId,
+@@clientLocation(
+  SubscriptionOperationGroup.acceptOwnership::parameters.subscriptionId,
   SubscriptionOperationGroup.acceptOwnership
 );
-@@clientLocation(SubscriptionOperationGroup.acceptOwnershipStatus::parameters.subscriptionId,
+@@clientLocation(
+  SubscriptionOperationGroup.acceptOwnershipStatus::parameters.subscriptionId,
   SubscriptionOperationGroup.acceptOwnershipStatus
 );
 
-@@clientLocation(SubscriptionsOperationGroup.acceptTargetDirectory::parameters.subscriptionId,
+@@clientLocation(
+  SubscriptionsOperationGroup.acceptTargetDirectory::parameters.subscriptionId,
   SubscriptionsOperationGroup.acceptTargetDirectory
 );
-@@clientLocation(SubscriptionsOperationGroup.targetDirectoryStatus::parameters.subscriptionId,
+@@clientLocation(
+  SubscriptionsOperationGroup.targetDirectoryStatus::parameters.subscriptionId,
   SubscriptionsOperationGroup.targetDirectoryStatus
 );
 
-@@clientLocation(Microsoft.Subscription.SubscriptionOperationGroup.cancel,
+@@clientLocation(
+  Microsoft.Subscription.SubscriptionOperationGroup.cancel,
   "Subscriptions",
   "java"
 );
-@@clientLocation(Microsoft.Subscription.SubscriptionOperationGroup.rename,
+@@clientLocation(
+  Microsoft.Subscription.SubscriptionOperationGroup.rename,
   "Subscriptions",
   "java"
 );
-@@clientLocation(Microsoft.Subscription.SubscriptionOperationGroup.enable,
+@@clientLocation(
+  Microsoft.Subscription.SubscriptionOperationGroup.enable,
   "Subscriptions",
   "java"
 );
-@@clientLocation(Microsoft.Subscription.SubscriptionOperationGroup.acceptOwnership,
+@@clientLocation(
+  Microsoft.Subscription.SubscriptionOperationGroup.acceptOwnership,
   "Subscriptions",
   "java"
 );
-@@clientLocation(Microsoft.Subscription.SubscriptionOperationGroup.acceptOwnershipStatus,
+@@clientLocation(
+  Microsoft.Subscription.SubscriptionOperationGroup.acceptOwnershipStatus,
   "Subscriptions",
   "java"
 );
 
-@@clientLocation(GetTargetDirectoryBaseParameters.subscriptionId,
+@@clientLocation(
+  GetTargetDirectoryBaseParameters.subscriptionId,
   TargetDirectoryResults.getTargetDirectory
 );
-@@clientLocation(PutTargetDirectoryBaseParameters.subscriptionId,
+@@clientLocation(
+  PutTargetDirectoryBaseParameters.subscriptionId,
   TargetDirectoryResults.putTargetDirectory
 );
-@@clientLocation(DeleteTargetDirectoryBaseParameters.subscriptionId,
+@@clientLocation(
+  DeleteTargetDirectoryBaseParameters.subscriptionId,
   TargetDirectoryResults.deleteTargetDirectory
 );
-@@clientLocation(ListTargetDirectoryBaseParameters.subscriptionId,
+@@clientLocation(
+  ListTargetDirectoryBaseParameters.subscriptionId,
   TargetDirectoryResults.listTargetDirectory
 );

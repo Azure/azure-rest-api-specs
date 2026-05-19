@@ -47,6 +47,7 @@ interface ProviderInstances {
   listByMonitor is ArmResourceListByParent<ProviderInstance>;
 }
 
-@@doc(ProviderInstances.create::parameters.resource,
+@@doc(
+  ProviderInstances.create::parameters.resource,
   "Request body representing a provider instance associated with a SAP monitor."
 );

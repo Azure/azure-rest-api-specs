@@ -11,24 +11,28 @@ using Microsoft.App;
 @@clientLocation(getCustomDomainVerificationId, "ContainerAppsAPIClient", "go");
 @@clientLocation(Jobs.jobExecution, "ContainerAppsAPIClient", "go");
 
-@@clientName(VnetConfiguration.platformReservedDnsIP,
+@@clientName(
+  VnetConfiguration.platformReservedDnsIP,
   "platformReservedDnsIp",
   "java"
 );
 @@clientName(RegistryInfo.registryUserName, "registryUsername", "java");
 @@clientName(CustomHostnameAnalysisResult.hostName, "hostname", "java");
-@@clientName(AzureActiveDirectoryLogin.disableWWWAuthenticate,
+@@clientName(
+  AzureActiveDirectoryLogin.disableWWWAuthenticate,
   "disableWwwAuthenticate",
   "java"
 );
-@@clientName(ContainerApps.listCustomHostNameAnalysis,
+@@clientName(
+  ContainerApps.listCustomHostNameAnalysis,
   "listCustomHostnameAnalysis",
   "java"
 );
 
 @@clientLocation(Jobs.jobExecution, Microsoft.App, "java,javascript");
 @@clientName(RuntimeJavaJavaAgent, "RuntimeJavaAgent", "go,python");
-@@clientName(RuntimeJavaJavaAgentLogging,
+@@clientName(
+  RuntimeJavaJavaAgentLogging,
   "RuntimeJavaAgentLogging",
   "go,python"
 );

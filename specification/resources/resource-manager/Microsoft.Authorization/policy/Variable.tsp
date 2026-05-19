@@ -135,9 +135,11 @@ interface Variables {
 
 @@doc(Variable.name, "The name of the variable to operate on.");
 @@doc(Variable.properties, "Properties for the variable.");
-@@doc(Variables.createOrUpdate::parameters.resource,
+@@doc(
+  Variables.createOrUpdate::parameters.resource,
   "Parameters for the variable."
 );
-@@doc(Variables.createOrUpdateAtManagementGroup::parameters.resource,
+@@doc(
+  Variables.createOrUpdateAtManagementGroup::parameters.resource,
   "Parameters for the variable."
 );
