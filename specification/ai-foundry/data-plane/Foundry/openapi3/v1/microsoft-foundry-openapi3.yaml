@@ -34233,15 +34233,10 @@ components:
     SessionDirectoryListResponse:
       type: object
       required:
-        - data
         - has_more
         - path
+        - entries
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/SessionDirectoryEntry'
-          description: The requested list of items.
         first_id:
           type: string
           description: The first ID represented in this list.
@@ -34254,7 +34249,11 @@ components:
         path:
           type: string
           description: The path that was listed, relative to the session home directory.
-      description: The response data for a requested list of items.
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/SessionDirectoryEntry'
+          description: The directory entries.
     SessionFileWriteResponse:
       type: object
       required:

@@ -51124,18 +51124,11 @@
       "SessionDirectoryListResponse": {
         "type": "object",
         "required": [
-          "data",
           "has_more",
-          "path"
+          "path",
+          "entries"
         ],
         "properties": {
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SessionDirectoryEntry"
-            },
-            "description": "The requested list of items."
-          },
           "first_id": {
             "type": "string",
             "description": "The first ID represented in this list."
@@ -51151,9 +51144,15 @@
           "path": {
             "type": "string",
             "description": "The path that was listed, relative to the session home directory."
+          },
+          "entries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SessionDirectoryEntry"
+            },
+            "description": "The directory entries."
           }
-        },
-        "description": "The response data for a requested list of items."
+        }
       },
       "SessionFileWriteResponse": {
         "type": "object",
