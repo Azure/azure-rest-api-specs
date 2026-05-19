@@ -8042,7 +8042,7 @@
           "Memory Stores"
         ],
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "MemoryStores=V1Preview"
           ]
         }
@@ -8211,7 +8211,7 @@
           }
         },
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "MemoryStores=V1Preview"
           ]
         }
@@ -8384,7 +8384,7 @@
           "Memory Stores"
         ],
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "MemoryStores=V1Preview"
           ]
         }
@@ -8626,7 +8626,7 @@
           }
         },
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "MemoryStores=V1Preview"
           ]
         }
@@ -8704,7 +8704,7 @@
           "Memory Stores"
         ],
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "MemoryStores=V1Preview"
           ]
         }
@@ -14627,12 +14627,7 @@
         },
         "tags": [
           "Toolboxes"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Toolboxes=V1Preview"
-          ]
-        }
+        ]
       }
     },
     "/toolboxes/{name}": {
@@ -14684,12 +14679,7 @@
         },
         "tags": [
           "Toolboxes"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Toolboxes=V1Preview"
-          ]
-        }
+        ]
       },
       "patch": {
         "operationId": "updateToolbox",
@@ -14743,11 +14733,6 @@
               }
             }
           }
-        },
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Toolboxes=V1Preview"
-          ]
         }
       },
       "delete": {
@@ -14791,12 +14776,7 @@
         },
         "tags": [
           "Toolboxes"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Toolboxes=V1Preview"
-          ]
-        }
+        ]
       }
     },
     "/toolboxes/{name}/versions": {
@@ -14891,11 +14871,6 @@
               }
             }
           }
-        },
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Toolboxes=V1Preview"
-          ]
         }
       },
       "get": {
@@ -15014,12 +14989,7 @@
         },
         "tags": [
           "Toolboxes"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Toolboxes=V1Preview"
-          ]
-        }
+        ]
       }
     },
     "/toolboxes/{name}/versions/{version}": {
@@ -15080,12 +15050,7 @@
         },
         "tags": [
           "Toolboxes"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Toolboxes=V1Preview"
-          ]
-        }
+        ]
       },
       "delete": {
         "operationId": "deleteToolboxVersion",
@@ -15137,12 +15102,7 @@
         },
         "tags": [
           "Toolboxes"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Toolboxes=V1Preview"
-          ]
-        }
+        ]
       }
     }
   },
@@ -15504,6 +15464,7 @@
             "items": {
               "$ref": "#/components/schemas/AgentCardSkill"
             },
+            "minItems": 1,
             "maxItems": 16,
             "description": "The set of skills that an agent can perform."
           }
@@ -15599,6 +15560,7 @@
             "items": {
               "$ref": "#/components/schemas/AgentCardSkill"
             },
+            "minItems": 1,
             "maxItems": 16,
             "description": "The set of skills that an agent can perform."
           }
@@ -20569,7 +20531,7 @@
         },
         "description": "Response for deleting a memory item from a memory store.",
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "MemoryStores=V1Preview"
           ]
         }
@@ -20777,6 +20739,14 @@
             "enum": [
               "Entra"
             ]
+          },
+          "isolation_key_source": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IsolationKeySource"
+              }
+            ],
+            "description": "The source from which the per-user isolation key is derived for requests authorized via this scheme. Defaults to Entra-based isolation when omitted."
           }
         },
         "allOf": [
@@ -20811,6 +20781,30 @@
           }
         ],
         "description": "Entra ID credential definition"
+      },
+      "EntraIsolationKeySource": {
+        "type": "object",
+        "required": [
+          "kind"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "Entra"
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/IsolationKeySource"
+          }
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
       },
       "Eval": {
         "type": "object",
@@ -23865,6 +23859,30 @@
           ]
         }
       },
+      "HeaderIsolationKeySource": {
+        "type": "object",
+        "required": [
+          "kind"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "Header"
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/IsolationKeySource"
+          }
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
       "HeaderTelemetryEndpointAuth": {
         "type": "object",
         "required": [
@@ -24642,6 +24660,48 @@
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "Routines=V1Preview"
+          ]
+        }
+      },
+      "IsolationKeySource": {
+        "type": "object",
+        "required": [
+          "kind"
+        ],
+        "properties": {
+          "kind": {
+            "$ref": "#/components/schemas/IsolationKeySourceKind"
+          }
+        },
+        "discriminator": {
+          "propertyName": "kind",
+          "mapping": {
+            "Entra": "#/components/schemas/EntraIsolationKeySource",
+            "Header": "#/components/schemas/HeaderIsolationKeySource"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
+      "IsolationKeySourceKind": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "Entra",
+              "Header"
+            ]
+          }
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
           ]
         }
       },
@@ -46826,7 +46886,7 @@
         ],
         "description": "A memory item containing a procedure extracted from conversations.",
         "x-ms-foundry-meta": {
-          "conditional_previews": [
+          "required_previews": [
             "MemoryStores=V1Preview"
           ]
         }
