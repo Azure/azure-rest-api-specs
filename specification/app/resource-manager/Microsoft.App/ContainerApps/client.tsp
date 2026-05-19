@@ -1218,187 +1218,187 @@ union OpenIdConnectClientCredentialMethod {
 // C# @@usage customizations.
 @@usage(
   LogicAppProperties,
-  Usage.input | Usage.output,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
 @@usage(
   ContainerAppAuthToken,
-  Usage.input | Usage.output,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
 @@usage(
   AvailableWorkloadProfile,
-  Usage.input | Usage.output,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
 @@usage(
   AvailableWorkloadProfileProperties,
-  Usage.input | Usage.output,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
 @@usage(
   BillingMeter,
-  Usage.input | Usage.output,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
 @@usage(
   BillingMeterProperties,
-  Usage.input | Usage.output,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
 @@usage(
   Diagnostics,
-  Usage.input | Usage.output,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
 @@usage(
   DiagnosticsProperties,
-  Usage.input | Usage.output,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
 @@usage(
   DiagnosticsDefinition,
-  Usage.input | Usage.output,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
 @@usage(
   DiagnosticsStatus,
-  Usage.input | Usage.output,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
 @@usage(
   DiagnosticDataProviderMetadata,
-  Usage.input | Usage.output,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
 @@usage(
   DiagnosticDataProviderMetadataPropertyBagItem,
-  Usage.input | Usage.output,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
 @@usage(
   DiagnosticDataTableResponseObject,
-  Usage.input | Usage.output,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
 @@usage(
   DiagnosticDataTableResponseColumn,
-  Usage.input | Usage.output,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
 @@usage(
   DiagnosticRendering,
-  Usage.input | Usage.output,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
 @@usage(
   DiagnosticsDataApiResponse,
-  Usage.input | Usage.output,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
 @@usage(
   DiagnosticSupportTopic,
-  Usage.input | Usage.output,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
 @@usage(
   EnvironmentAuthToken,
-  Usage.input | Usage.output,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
 @@usage(
   PrivateLinkResource,
-  Usage.input | Usage.output,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
 @@usage(
   Replica,
-  Usage.input | Usage.output,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
 @@usage(
   ReplicaContainer,
-  Usage.input | Usage.output,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
 @@usage(
   Revision,
-  Usage.input | Usage.output,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
 @@usage(
   workloadProfileStates,
-  Usage.input | Usage.output,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
 @@usage(
   WorkloadProfileStatesProperties,
-  Usage.input | Usage.output,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
 @@usage(
   JavaComponentProperties,
-  Usage.input | Usage.output,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
 @@usage(
   WorkflowEnvelope,
-  Usage.input | Usage.output,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
 @@usage(
   WorkflowEnvelopeProperties,
-  Usage.input | Usage.output,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
 @@usage(
   WorkflowHealth,
-  Usage.input | Usage.output,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
 @@usage(
   ErrorEntity,
-  Usage.input | Usage.output,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
 @@usage(
   UsageUnit,
-  Usage.input | Usage.output,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
 @@usage(
   OpenIdConnectClientCredentialMethod,
-  Usage.input | Usage.output,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
