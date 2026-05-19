@@ -55,15 +55,15 @@ interface Evaluators {}
 @@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.cancel, Evaluators);
 @@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.delete, Evaluators);
 
-@@clientLocation(Azure.AI.Projects.EvaluationSuites.listVersions, Evaluators);
-@@clientLocation(Azure.AI.Projects.EvaluationSuites.listLatest, Evaluators);
-@@clientLocation(Azure.AI.Projects.EvaluationSuites.getVersion, Evaluators);
-@@clientLocation(Azure.AI.Projects.EvaluationSuites.deleteVersion, Evaluators);
-@@clientLocation(Azure.AI.Projects.EvaluationSuites.createOrUpdateVersion, Evaluators);
-@@clientLocation(Azure.AI.Projects.EvaluationSuites.createEvaluationSuiteVersion, Evaluators);
-@@clientLocation(Azure.AI.Projects.EvaluationSuites.run, Evaluators);
-
 // These were removed from v1:
+// @@clientLocation(Azure.AI.Projects.EvaluationSuites.listVersions, Evaluators);
+// @@clientLocation(Azure.AI.Projects.EvaluationSuites.listLatest, Evaluators);
+// @@clientLocation(Azure.AI.Projects.EvaluationSuites.getVersion, Evaluators);
+// @@clientLocation(Azure.AI.Projects.EvaluationSuites.deleteVersion, Evaluators);
+// @@clientLocation(Azure.AI.Projects.EvaluationSuites.createOrUpdateVersion, Evaluators);
+// @@clientLocation(Azure.AI.Projects.EvaluationSuites.createEvaluationSuiteVersion, Evaluators);
+// @@clientLocation(Azure.AI.Projects.EvaluationSuites.run, Evaluators);
+
 // @@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.create, Evaluators);
 // @@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.get, Evaluators);
 // @@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.list, Evaluators);
