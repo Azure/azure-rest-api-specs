@@ -242,10 +242,6 @@
           "Subscriptions"
         ],
         "description": "Get the verification id of a subscription used for verifying custom domains",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -3595,13 +3591,6 @@
             "type": "string"
           },
           {
-            "name": "x-ms-github-auxiliary",
-            "in": "header",
-            "description": "Github personal access token used for SourceControl.",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "sourceControlEnvelope",
             "in": "body",
             "description": "Properties used to create a Container App SourceControl",
@@ -3683,27 +3672,6 @@
             "description": "Name of the Container App SourceControl.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "x-ms-github-auxiliary",
-            "in": "header",
-            "description": "Github personal access token used for SourceControl.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "ignoreWorkflowDeletionFailure",
-            "in": "query",
-            "description": "Ignore Workflow Deletion Failure.",
-            "required": false,
-            "type": "boolean"
-          },
-          {
-            "name": "deleteWorkflow",
-            "in": "query",
-            "description": "Delete workflow.",
-            "required": false,
-            "type": "boolean"
           }
         ],
         "responses": {
@@ -7935,9 +7903,9 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
+              "Location": {
                 "type": "string",
-                "description": "A link to the status monitor"
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -7959,7 +7927,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "location",
           "final-state-schema": "#/definitions/SessionPool"
         },
         "x-ms-long-running-operation": true
@@ -8062,20 +8030,8 @@
         "Deny"
       ],
       "x-ms-enum": {
-        "name": "Action",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Allow",
-            "value": "Allow",
-            "description": "Allow"
-          },
-          {
-            "name": "Deny",
-            "value": "Deny",
-            "description": "Deny"
-          }
-        ]
+        "name": "action",
+        "modelAsString": true
       }
     },
     "Affinity": {
@@ -8086,20 +8042,8 @@
         "none"
       ],
       "x-ms-enum": {
-        "name": "Affinity",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "sticky",
-            "value": "sticky",
-            "description": "sticky"
-          },
-          {
-            "name": "none",
-            "value": "none",
-            "description": "none"
-          }
-        ]
+        "name": "affinity",
+        "modelAsString": true
       }
     },
     "AllowedAudiencesValidation": {
@@ -8248,8 +8192,8 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "Link to next page of resources."
+          "description": "Link to next page of resources.",
+          "readOnly": true
         }
       },
       "required": [
@@ -8316,13 +8260,9 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
           "description": "URL client should use to fetch the next page (per server side paging).\nIt's null for now, added for future use."
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "AvailableWorkloadProfile": {
       "type": "object",
@@ -8389,8 +8329,8 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "Link to next page of resources."
+          "description": "Link to next page of resources.",
+          "readOnly": true
         }
       },
       "required": [
@@ -8701,25 +8641,8 @@
         "Auto"
       ],
       "x-ms-enum": {
-        "name": "BindingType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Disabled"
-          },
-          {
-            "name": "SniEnabled",
-            "value": "SniEnabled",
-            "description": "SniEnabled"
-          },
-          {
-            "name": "Auto",
-            "value": "Auto",
-            "description": "Auto"
-          }
-        ]
+        "name": "bindingType",
+        "modelAsString": true
       }
     },
     "BlobStorageTokenStore": {
@@ -8763,8 +8686,8 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "Link to next page of resources."
+          "description": "Link to next page of resources.",
+          "readOnly": true
         }
       },
       "required": [
@@ -8878,10 +8801,6 @@
           "type": "string",
           "description": "Public key hash.",
           "readOnly": true
-        },
-        "certificateType": {
-          "$ref": "#/definitions/CertificateType",
-          "description": "The type of the certificate. Allowed values are `ServerSSLCertificate` and `ImagePullTrustedCA`"
         }
       }
     },
@@ -8929,30 +8848,6 @@
             "name": "Deleting",
             "value": "Deleting",
             "description": "Deleting"
-          }
-        ]
-      }
-    },
-    "CertificateType": {
-      "type": "string",
-      "description": "The type of the certificate. Allowed values are `ServerSSLCertificate` and `ImagePullTrustedCA`",
-      "enum": [
-        "ServerSSLCertificate",
-        "ImagePullTrustedCA"
-      ],
-      "x-ms-enum": {
-        "name": "CertificateType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ServerSSLCertificate",
-            "value": "ServerSSLCertificate",
-            "description": "ServerSSLCertificate"
-          },
-          {
-            "name": "ImagePullTrustedCA",
-            "value": "ImagePullTrustedCA",
-            "description": "ImagePullTrustedCA"
           }
         ]
       }
@@ -9086,13 +8981,10 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "Link to next page of resources."
+          "description": "Link to next page of resources.",
+          "readOnly": true
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "ConnectedEnvironmentPatchResource": {
       "type": "object",
@@ -9229,10 +9121,6 @@
         "azureFile": {
           "$ref": "#/definitions/AzureFileProperties",
           "description": "Azure file properties"
-        },
-        "smb": {
-          "$ref": "#/definitions/SmbStorage",
-          "description": "SMB storage properties"
         }
       }
     },
@@ -9403,8 +9291,8 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "Link to next page of resources."
+          "description": "Link to next page of resources.",
+          "readOnly": true
         }
       },
       "required": [
@@ -9454,8 +9342,8 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "Link to next page of resources."
+          "description": "Link to next page of resources.",
+          "readOnly": true
         }
       },
       "required": [
@@ -9825,9 +9713,7 @@
       "description": "The container type of the sessions. You can use your own container to build the session pool, or you can use a predefined container to run workload with specific language.",
       "enum": [
         "CustomContainer",
-        "PythonLTS",
-        "Shell",
-        "NodeLTS"
+        "PythonLTS"
       ],
       "x-ms-enum": {
         "name": "ContainerType",
@@ -9842,16 +9728,6 @@
             "name": "PythonLTS",
             "value": "PythonLTS",
             "description": "PythonLTS"
-          },
-          {
-            "name": "Shell",
-            "value": "Shell",
-            "description": "Shell"
-          },
-          {
-            "name": "NodeLTS",
-            "value": "NodeLTS",
-            "description": "NodeLTS"
           }
         ]
       }
@@ -10238,20 +10114,8 @@
             "grpc"
           ],
           "x-ms-enum": {
-            "name": "AppProtocol",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "http",
-                "value": "http",
-                "description": "http"
-              },
-              {
-                "name": "grpc",
-                "value": "grpc",
-                "description": "grpc"
-              }
-            ]
+            "name": "appProtocol",
+            "modelAsString": true
           }
         },
         "appPort": {
@@ -10388,16 +10252,6 @@
             "type": "string"
           }
         },
-        "serviceComponentBind": {
-          "type": "array",
-          "description": "List of container app services that are bound to the Dapr component",
-          "items": {
-            "$ref": "#/definitions/DaprComponentServiceBinding"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
         "provisioningState": {
           "$ref": "#/definitions/DaprComponentProvisioningState",
           "description": "Provisioning state of the Connected Environment Dapr Component.",
@@ -10452,24 +10306,6 @@
         ]
       }
     },
-    "DaprComponentServiceBinding": {
-      "type": "object",
-      "description": "Configuration to bind a Dapr Component to a dev ContainerApp Service",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the service bind"
-        },
-        "serviceId": {
-          "type": "string",
-          "description": "Resource id of the target service"
-        },
-        "metadata": {
-          "$ref": "#/definitions/DaprServiceBindMetadata",
-          "description": "Service bind metadata"
-        }
-      }
-    },
     "DaprComponentsCollection": {
       "type": "object",
       "description": "Dapr Components ARM resource.",
@@ -10483,8 +10319,8 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "Link to next page of resources."
+          "description": "Link to next page of resources.",
+          "readOnly": true
         }
       },
       "required": [
@@ -10555,20 +10391,6 @@
       "required": [
         "value"
       ]
-    },
-    "DaprServiceBindMetadata": {
-      "type": "object",
-      "description": "Dapr component metadata.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Service bind metadata property name."
-        },
-        "value": {
-          "type": "string",
-          "description": "Service bind metadata property value."
-        }
-      }
     },
     "DefaultAuthorizationPolicy": {
       "type": "object",
@@ -10728,7 +10550,10 @@
         "rows": {
           "type": "array",
           "description": "Rows in the table",
-          "items": {},
+          "items": {
+            "type": "object",
+            "additionalProperties": {}
+          },
           "x-ms-identifiers": []
         }
       }
@@ -10800,8 +10625,8 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "Link to next page of resources."
+          "description": "Link to next page of resources.",
+          "readOnly": true
         }
       },
       "required": [
@@ -10872,7 +10697,7 @@
         },
         "score": {
           "type": "number",
-          "format": "float",
+          "format": "double",
           "description": "Authors' names of the detector",
           "readOnly": true
         }
@@ -11155,12 +10980,12 @@
           "description": "The name of the extended location."
         },
         "type": {
-          "$ref": "#/definitions/ExtendedLocationTypes",
+          "$ref": "#/definitions/ExtendedLocationType",
           "description": "The type of the extended location."
         }
       }
     },
-    "ExtendedLocationTypes": {
+    "ExtendedLocationType": {
       "type": "string",
       "description": "The type of extendedLocation.",
       "enum": [
@@ -11168,14 +10993,7 @@
       ],
       "x-ms-enum": {
         "name": "ExtendedLocationTypes",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "CustomLocation",
-            "value": "CustomLocation",
-            "description": "CustomLocation"
-          }
-        ]
+        "modelAsString": true
       }
     },
     "Facebook": {
@@ -11408,8 +11226,8 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "Link to next page of resources."
+          "description": "Link to next page of resources.",
+          "readOnly": true
         }
       },
       "required": [
@@ -11725,22 +11543,22 @@
               {
                 "name": "Init",
                 "value": "Init",
-                "description": "Init"
+                "description": "Use managed identity during the init stage of the Container App lifecycle."
               },
               {
                 "name": "Main",
                 "value": "Main",
-                "description": "Main"
+                "description": "Use managed identity during the main stage of the Container App lifecycle."
               },
               {
                 "name": "None",
                 "value": "None",
-                "description": "None"
+                "description": "Do not use managed identity during any lifecycle stage."
               },
               {
                 "name": "All",
                 "value": "All",
-                "description": "All"
+                "description": "Use managed identity during all lifecycle stages of the Container App."
               }
             ]
           }
@@ -12194,8 +12012,8 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "Link to next page of resources."
+          "description": "Link to next page of resources.",
+          "readOnly": true
         }
       },
       "required": [
@@ -12738,7 +12556,9 @@
           "description": "Type of the scale rule\neg: azure-servicebus, redis etc."
         },
         "metadata": {
-          "description": "Metadata properties to describe the scale rule."
+          "type": "object",
+          "description": "Metadata properties to describe the scale rule.",
+          "additionalProperties": {}
         },
         "auth": {
           "type": "array",
@@ -12821,8 +12641,8 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "Link to next page of resources."
+          "description": "Link to next page of resources.",
+          "readOnly": true
         }
       },
       "required": [
@@ -12868,20 +12688,8 @@
         "functionapp"
       ],
       "x-ms-enum": {
-        "name": "Kind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "workflowapp",
-            "value": "workflowapp",
-            "description": "workflowapp"
-          },
-          {
-            "name": "functionapp",
-            "value": "functionapp",
-            "description": "functionapp"
-          }
-        ]
+        "name": "kind",
+        "modelAsString": true
       }
     },
     "LifecycleConfiguration": {
@@ -12930,7 +12738,7 @@
     },
     "ListUsagesResult": {
       "type": "object",
-      "description": "Paged collection of Usage items",
+      "description": "Legacy page model for collection responses where value is optional and nextLink is not readOnly.",
       "properties": {
         "value": {
           "type": "array",
@@ -12944,13 +12752,9 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
           "description": "The URI to fetch the next page of compute resource usage information. Call ListNext() with this to fetch the next page of compute resource usage information."
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "LogAnalyticsConfiguration": {
       "type": "object",
@@ -12981,30 +12785,8 @@
         "error"
       ],
       "x-ms-enum": {
-        "name": "LogLevel",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "info",
-            "value": "info",
-            "description": "info"
-          },
-          {
-            "name": "debug",
-            "value": "debug",
-            "description": "debug"
-          },
-          {
-            "name": "warn",
-            "value": "warn",
-            "description": "warn"
-          },
-          {
-            "name": "error",
-            "value": "error",
-            "description": "error"
-          }
-        ]
+        "name": "logLevel",
+        "modelAsString": true
       }
     },
     "LogicApp": {
@@ -13096,13 +12878,10 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "Link for next page of results."
+          "description": "Link for next page of results.",
+          "readOnly": true
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "MaintenanceConfigurationResource": {
       "type": "object",
@@ -13148,8 +12927,8 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "Link to next page of resources."
+          "description": "Link to next page of resources.",
+          "readOnly": true
         }
       },
       "required": [
@@ -13451,8 +13230,8 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "Link to next page of resources."
+          "description": "Link to next page of resources.",
+          "readOnly": true
         }
       },
       "required": [
@@ -13476,20 +13255,8 @@
             "Main"
           ],
           "x-ms-enum": {
-            "name": "SessionPoolIdentityLifeCycle",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "None",
-                "value": "None",
-                "description": "None"
-              },
-              {
-                "name": "Main",
-                "value": "Main",
-                "description": "Main"
-              }
-            ]
+            "name": "IdentitySettingsLifeCycle",
+            "modelAsString": true
           }
         }
       },
@@ -13550,6 +13317,7 @@
             "ClientSecretPost"
           ],
           "x-ms-enum": {
+            "name": "ClientCredentialMethod",
             "modelAsString": false
           }
         },
@@ -13718,7 +13486,7 @@
     },
     "PrivateEndpointConnectionListResult": {
       "type": "object",
-      "description": "The response of a PrivateEndpointConnection list operation.",
+      "description": "List of private endpoint connections for a managed environment.",
       "properties": {
         "value": {
           "type": "array",
@@ -13729,13 +13497,10 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "PrivateEndpointConnectionProperties": {
       "type": "object",
@@ -13874,7 +13639,7 @@
     },
     "PrivateLinkResourceListResult": {
       "type": "object",
-      "description": "The response of a PrivateLinkResource list operation.",
+      "description": "List of private link resources for a managed environment.",
       "properties": {
         "value": {
           "type": "array",
@@ -13885,13 +13650,10 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "PrivateLinkResourceProperties": {
       "type": "object",
@@ -14207,8 +13969,8 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "Link to next page of resources."
+          "description": "Link to next page of resources.",
+          "readOnly": true
         }
       },
       "required": [
@@ -14286,14 +14048,6 @@
           "type": "integer",
           "format": "int32",
           "description": "Traffic weight assigned to this revision",
-          "readOnly": true
-        },
-        "labels": {
-          "type": "array",
-          "description": "List of labels assigned to this revision.",
-          "items": {
-            "type": "string"
-          },
           "readOnly": true
         },
         "provisioningError": {
@@ -14824,8 +14578,8 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "Link to next page of resources."
+          "description": "Link to next page of resources.",
+          "readOnly": true
         }
       },
       "required": [
@@ -14891,11 +14645,6 @@
         "sessionNetworkConfiguration": {
           "$ref": "#/definitions/SessionNetworkConfiguration",
           "description": "The network configuration of the sessions in the session pool."
-        },
-        "templateUpdateStatus": {
-          "$ref": "#/definitions/TemplateUpdateStatus",
-          "description": "The template status of the session pool, showing active template, or desired template during session pool update. This is only available if the containerType is CustomContainer.",
-          "readOnly": true
         },
         "poolManagementEndpoint": {
           "type": "string",
@@ -15062,37 +14811,6 @@
         }
       }
     },
-    "SmbStorage": {
-      "type": "object",
-      "description": "SMB storage properties",
-      "properties": {
-        "host": {
-          "type": "string",
-          "description": "The host name or IP address of the SMB server."
-        },
-        "shareName": {
-          "type": "string",
-          "description": "The path to the SMB shared folder."
-        },
-        "username": {
-          "type": "string",
-          "description": "The user to log on to the SMB server."
-        },
-        "domain": {
-          "type": "string",
-          "description": "The domain name for the user."
-        },
-        "password": {
-          "type": "string",
-          "description": "The password for the user.",
-          "x-ms-secret": true
-        },
-        "accessMode": {
-          "$ref": "#/definitions/AccessMode",
-          "description": "Access mode for storage"
-        }
-      }
-    },
     "SourceControl": {
       "type": "object",
       "description": "Container App SourceControl.",
@@ -15122,8 +14840,8 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "Link to next page of resources."
+          "description": "Link to next page of resources.",
+          "readOnly": true
         }
       },
       "required": [
@@ -15238,8 +14956,7 @@
         "AzureFile",
         "EmptyDir",
         "Secret",
-        "NfsAzureFile",
-        "Smb"
+        "NfsAzureFile"
       ],
       "x-ms-enum": {
         "name": "StorageType",
@@ -15264,11 +14981,6 @@
             "name": "NfsAzureFile",
             "value": "NfsAzureFile",
             "description": "NfsAzureFile"
-          },
-          {
-            "name": "Smb",
-            "value": "Smb",
-            "description": "Smb"
           }
         ]
       }
@@ -15356,88 +15068,6 @@
           "x-ms-identifiers": [
             "name"
           ]
-        }
-      }
-    },
-    "TemplatePoolStatus": {
-      "type": "object",
-      "description": "The status of pods in the pool of this template.",
-      "properties": {
-        "expectedCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The expected count of pods in this pool"
-        },
-        "readyCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The ready count of pods in this pool"
-        },
-        "pendingCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The pending count of pods in this pool"
-        },
-        "imagePullFailCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The image pull fail count of pods in this pool"
-        },
-        "crashCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The crash count of pods in this pool"
-        },
-        "allocatedCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The allocated count of pods in this pool"
-        }
-      }
-    },
-    "TemplateStatus": {
-      "type": "object",
-      "description": "The status of the session pool template.",
-      "properties": {
-        "details": {
-          "type": "string",
-          "description": "The detailed status of this template."
-        },
-        "createdTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The creation time of this template."
-        },
-        "status": {
-          "$ref": "#/definitions/TemplatePoolStatus",
-          "description": "The status of this template."
-        },
-        "containers": {
-          "type": "array",
-          "description": "List of container definitions for the sessions of this template.",
-          "items": {
-            "$ref": "#/definitions/SessionContainer"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "ingress": {
-          "$ref": "#/definitions/SessionIngress",
-          "description": "Session pool ingress configuration of this template."
-        }
-      }
-    },
-    "TemplateUpdateStatus": {
-      "type": "object",
-      "properties": {
-        "activeTemplate": {
-          "$ref": "#/definitions/TemplateStatus",
-          "description": "The status of the current active template."
-        },
-        "desiredTemplate": {
-          "$ref": "#/definitions/TemplateStatus",
-          "description": "The status of the desired template during session pool update."
         }
       }
     },
@@ -15589,6 +15219,7 @@
             "Count"
           ],
           "x-ms-enum": {
+            "name": "UsageUnit",
             "modelAsString": false
           }
         },
@@ -15810,8 +15441,8 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "Link to next page of resources."
+          "description": "Link to next page of resources.",
+          "readOnly": true
         }
       },
       "required": [
@@ -16043,8 +15674,8 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "Link to next page of resources."
+          "description": "Link to next page of resources.",
+          "readOnly": true
         }
       },
       "required": [

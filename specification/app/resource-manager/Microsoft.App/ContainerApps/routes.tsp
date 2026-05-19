@@ -57,6 +57,8 @@ interface BillingMetersOperationGroup {
 @tag("Subscriptions")
 op getCustomDomainVerificationId is ArmProviderActionSync<
   Response = OkResponse & {
+    @header("Content-Type") contentType: "application/json";
+
     @bodyRoot
     customDomainVerificationId: CustomDomainVerificationId;
   },

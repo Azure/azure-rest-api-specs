@@ -15,15 +15,61 @@ using TypeSpec.Versioning;
 namespace Microsoft.App;
 
 /**
+ * Legacy page model for collection responses where value is required and nextLink is readOnly.
+ */
+model LegacyPage<T> {
+  /** Collection of resources. */
+  @pageItems
+  value: T[];
+
+  /** Link to next page of resources. */
+  @visibility(Lifecycle.Read)
+  @nextLink
+  nextLink?: string;
+}
+
+/**
+ * Legacy page model for collection responses where value is optional and nextLink is readOnly.
+ */
+model LegacyPageOptionalValue<T> {
+  /** Collection of resources. */
+  @pageItems
+  value?: T[];
+
+  /** Link to next page of resources. */
+  @visibility(Lifecycle.Read)
+  @nextLink
+  nextLink?: string;
+}
+
+/**
+ * Legacy page model for collection responses where value is optional and nextLink is not readOnly.
+ */
+model LegacyPageSimple<T> {
+  /** Collection of resources. */
+  @pageItems
+  value?: T[];
+
+  /** Link to next page of resources. */
+  @nextLink
+  nextLink?: string;
+}
+
+/**
  * Logic App call response object.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model Object is Record<unknown>;
+model Object {
+  ...Record<unknown>;
+}
 
 /**
  * Represents an object representing files in the form of { "<filename>" : "<filecontent>"}.
  */
-model WorkflowFiles is Object;
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model WorkflowFiles {
+  ...Record<unknown>;
+}
 
 /**
  * Custom domain verification Id of a subscription
@@ -957,7 +1003,7 @@ model AppResiliencyCollection is Azure.Core.Page<AppResiliency>;
 /**
  * AuthConfig collection ARM resource.
  */
-model AuthConfigCollection is Azure.Core.Page<AuthConfig>;
+model AuthConfigCollection is LegacyPage<AuthConfig>;
 
 /**
  * AuthConfig resource specific properties
@@ -1499,6 +1545,11 @@ model OpenIdConnectClientCredential {
   /**
    * The method that should be used to authenticate the user.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-enum name needed for backward compatibility"
+  @extension(
+    "x-ms-enum",
+    #{ name: "ClientCredentialMethod", modelAsString: false }
+  )
   method?: "ClientSecretPost";
 
   /**
@@ -1752,7 +1803,7 @@ model EncryptionSettings {
  * Collection of available workload profiles in the location.
  */
 model AvailableWorkloadProfilesCollection
-  is Azure.Core.Page<AvailableWorkloadProfile>;
+  is LegacyPage<AvailableWorkloadProfile>;
 
 /**
  * A workload profile with specific hardware configure to run container apps.
@@ -2031,7 +2082,8 @@ model BuildToken {
 /**
  * Collection of connectedEnvironments
  */
-model ConnectedEnvironmentCollection is Azure.Core.Page<ConnectedEnvironment>;
+model ConnectedEnvironmentCollection
+  is LegacyPageOptionalValue<ConnectedEnvironment>;
 
 /**
  * ConnectedEnvironment resource specific properties
@@ -2168,7 +2220,7 @@ model ResourceTags {
 /**
  * Collection of Certificates.
  */
-model CertificateCollection is Azure.Core.Page<Certificate>;
+model CertificateCollection is LegacyPage<Certificate>;
 
 /**
  * Certificate resource specific properties
@@ -2262,6 +2314,8 @@ model CertificateProperties {
   /**
    * The type of the certificate. Allowed values are `ServerSSLCertificate` and `ImagePullTrustedCA`
    */
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   certificateType?: CertificateType;
 }
 
@@ -2279,7 +2333,7 @@ model CertificatePatch {
 /**
  * Dapr Components ARM resource.
  */
-model DaprComponentsCollection is Azure.Core.Page<DaprComponent>;
+model DaprComponentsCollection is LegacyPage<DaprComponent>;
 
 /**
  * Dapr Component resource specific properties
@@ -2330,6 +2384,8 @@ model DaprComponentProperties {
   /**
    * List of container app services that are bound to the Dapr component
    */
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   @identifiers(#["name"])
   serviceComponentBind?: DaprComponentServiceBinding[];
 
@@ -2468,6 +2524,8 @@ model ConnectedEnvironmentStorageProperties {
   /**
    * SMB storage properties
    */
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   smb?: SmbStorage;
 }
 
@@ -2560,7 +2618,7 @@ model SmbStorage {
 /**
  * Collection of Environments
  */
-model ManagedEnvironmentsCollection is Azure.Core.Page<ManagedEnvironment>;
+model ManagedEnvironmentsCollection is LegacyPage<ManagedEnvironment>;
 
 /**
  * Managed environment resource specific properties
@@ -3210,7 +3268,7 @@ model ManagedCertificatePatch {
 /**
  * Collection of Managed Certificates.
  */
-model ManagedCertificateCollection is Azure.Core.Page<ManagedCertificate>;
+model ManagedCertificateCollection is LegacyPage<ManagedCertificate>;
 
 /**
  * Environment Auth Token.
@@ -3249,7 +3307,7 @@ model EnvironmentAuthTokenProperties {
  * Collection of workloadProfileStates
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model workloadProfileStatesCollection is Azure.Core.Page<workloadProfileStates>;
+model workloadProfileStatesCollection is LegacyPage<workloadProfileStates>;
 
 /**
  * Collection of all the workload Profile States for a Managed Environment..
@@ -3315,6 +3373,34 @@ model PrivateLinkResourceProperties {
    * The private link resource private link DNS zone name.
    */
   requiredZoneNames?: string[];
+}
+
+/**
+ * List of private link resources for a managed environment.
+ */
+model PrivateLinkResourceListResult {
+  /** The PrivateLinkResource items on this page */
+  @pageItems
+  value?: PrivateLinkResource[];
+
+  /** The link to the next page of items */
+  @visibility(Lifecycle.Read)
+  @nextLink
+  nextLink?: string;
+}
+
+/**
+ * List of private endpoint connections for a managed environment.
+ */
+model PrivateEndpointConnectionListResult {
+  /** The PrivateEndpointConnection items on this page */
+  @pageItems
+  value?: PrivateEndpointConnection[];
+
+  /** The link to the next page of items */
+  @visibility(Lifecycle.Read)
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -3678,13 +3764,13 @@ model HttpRouteAction {
 /**
  * Collection of rule based Http Route Config resources.
  */
-model HttpRouteConfigCollection is Azure.Core.Page<HttpRouteConfig>;
+model HttpRouteConfigCollection is LegacyPage<HttpRouteConfig>;
 
 /**
  * The response of list maintenance configuration resources.
  */
 model MaintenanceConfigurationCollection
-  is Azure.Core.Page<MaintenanceConfigurationResource>;
+  is LegacyPageOptionalValue<MaintenanceConfigurationResource>;
 
 /**
  * List of maintenance schedules for a managed environment.
@@ -3769,7 +3855,7 @@ model NfsAzureFileProperties {
 /**
  * Container Apps Jobs collection ARM resource.
  */
-model JobsCollection is Azure.Core.Page<Job>;
+model JobsCollection is LegacyPage<Job>;
 
 /**
  * Container Apps Job resource specific properties.
@@ -3974,8 +4060,8 @@ model JobScaleRule {
   /**
    * Metadata properties to describe the scale rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  metadata?: unknown;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses untyped object"
+  metadata?: Record<unknown>;
 
   /**
    * Authentication secrets for the scale rule.
@@ -4260,7 +4346,7 @@ model JobExecutionBase {
 /**
  * Container App executions collection ARM resource.
  */
-model ContainerAppJobExecutions is Azure.Core.Page<JobExecution>;
+model ContainerAppJobExecutions is LegacyPage<JobExecution>;
 
 /**
  * Container Apps Job execution specific properties.
@@ -4508,7 +4594,7 @@ model Template {
 /**
  * Diagnostics data collection for a resource.
  */
-model DiagnosticsCollection is Azure.Core.Page<Diagnostics>;
+model DiagnosticsCollection is LegacyPage<Diagnostics>;
 
 /**
  * Diagnostics resource specific properties
@@ -4591,7 +4677,7 @@ model DiagnosticsDefinition {
    * Authors' names of the detector
    */
   @visibility(Lifecycle.Read)
-  score?: float32;
+  score?: float64;
 }
 
 /**
@@ -4645,8 +4731,10 @@ model DiagnosticDataTableResponseObject {
    * Rows in the table
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-identifiers needed for swagger fidelity"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses untyped object"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Existing API has empty identifiers"
   @extension("x-ms-identifiers", #[])
-  rows?: unknown[];
+  rows?: Record<unknown>[];
 }
 
 /**
@@ -4769,11 +4857,15 @@ union ContainerType {
   /**
    * Shell
    */
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   Shell: "Shell",
 
   /**
    * NodeLTS
    */
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   NodeLTS: "NodeLTS",
 }
 
@@ -4901,22 +4993,22 @@ union IdentitySettingsLifeCycle {
   string,
 
   /**
-   * Init
+   * Use managed identity during the init stage of the Container App lifecycle.
    */
   Init: "Init",
 
   /**
-   * Main
+   * Use managed identity during the main stage of the Container App lifecycle.
    */
   Main: "Main",
 
   /**
-   * None
+   * Do not use managed identity during any lifecycle stage.
    */
   None: "None",
 
   /**
-   * All
+   * Use managed identity during all lifecycle stages of the Container App.
    */
   All: "All",
 }
@@ -4924,16 +5016,21 @@ union IdentitySettingsLifeCycle {
 /**
  * Use to select the lifecycle stages of a Session Pool during which the Managed Identity should be available.
  */
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-enum name needed for backward compatibility"
+@extension(
+  "x-ms-enum",
+  #{ name: "IdentitySettingsLifeCycle", modelAsString: true }
+)
 union SessionPoolIdentityLifeCycle {
   string,
 
   /**
-   * None
+   * Do not use managed identity during any lifecycle stage.
    */
   None: "None",
 
   /**
-   * Main
+   * Use managed identity during the main stage of the Session Pool lifecycle.
    */
   Main: "Main",
 }
@@ -4995,7 +5092,9 @@ union SourceControlOperationState {
 /**
  * The type of extendedLocation.
  */
-union ExtendedLocationTypes {
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-enum name needed for backward compatibility"
+@extension("x-ms-enum", #{ name: "ExtendedLocationTypes", modelAsString: true })
+union ExtendedLocationType {
   string,
 
   /**
@@ -5007,6 +5106,8 @@ union ExtendedLocationTypes {
 /**
  * Metadata to represent the container app kind, representing if a container app is workflowapp or functionapp.
  */
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-enum name needed for backward compatibility"
+@extension("x-ms-enum", #{ name: "kind", modelAsString: true })
 union Kind {
   string,
 
@@ -5162,6 +5263,8 @@ union IngressTransportMethod {
 /**
  * Custom Domain binding type.
  */
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-enum name needed for backward compatibility"
+@extension("x-ms-enum", #{ name: "bindingType", modelAsString: true })
 union BindingType {
   string,
 
@@ -5184,6 +5287,8 @@ union BindingType {
 /**
  * Allow or Deny rules to determine for incoming IP. Note: Rules can only consist of ALL Allow or ALL Deny
  */
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-enum name needed for backward compatibility"
+@extension("x-ms-enum", #{ name: "action", modelAsString: true })
 union Action {
   string,
 
@@ -5201,6 +5306,8 @@ union Action {
 /**
  * Sticky Session Affinity
  */
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-enum name needed for backward compatibility"
+@extension("x-ms-enum", #{ name: "affinity", modelAsString: true })
 union Affinity {
   string,
 
@@ -5257,6 +5364,8 @@ union IngressTargetPortHttpScheme {
 /**
  * Tells Dapr which protocol your application is using. Valid options are http and grpc. Default is http
  */
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-enum name needed for backward compatibility"
+@extension("x-ms-enum", #{ name: "appProtocol", modelAsString: true })
 union AppProtocol {
   string,
 
@@ -5274,6 +5383,8 @@ union AppProtocol {
 /**
  * Sets the log level for the Dapr sidecar. Allowed values are debug, info, warn, error. Default is info.
  */
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-enum name needed for backward compatibility"
+@extension("x-ms-enum", #{ name: "logLevel", modelAsString: true })
 union LogLevel {
   string,
 
@@ -5403,6 +5514,8 @@ union StorageType {
   /**
    * Smb
    */
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   Smb: "Smb",
 }
 
@@ -5970,7 +6083,7 @@ enum WorkflowHealthState {
 /**
  * Session pool collection Azure resource.
  */
-model SessionPoolCollection is Azure.Core.Page<SessionPool>;
+model SessionPoolCollection is LegacyPage<SessionPool>;
 
 /**
  * Container App session pool resource specific properties
@@ -6031,6 +6144,8 @@ model SessionPoolProperties {
   /**
    * The template status of the session pool, showing active template, or desired template during session pool update. This is only available if the containerType is CustomContainer.
    */
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   @visibility(Lifecycle.Read)
   templateUpdateStatus?: TemplateUpdateStatus;
 
@@ -6566,7 +6681,7 @@ model McpServerCredential {
 /**
  * SourceControl collection ARM resource.
  */
-model SourceControlCollection is Azure.Core.Page<SourceControl>;
+model SourceControlCollection is LegacyPage<SourceControl>;
 
 /**
  * SourceControl resource specific properties
@@ -6784,7 +6899,7 @@ model DefaultErrorResponseErrorDetailsItem {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ListUsagesResult is Azure.Core.Page<Usage>;
+model ListUsagesResult is LegacyPageSimple<Usage>;
 
 /**
  * Describes Compute Resource Usage.
@@ -6793,6 +6908,8 @@ model Usage {
   /**
    * An enum describing the unit of usage measurement.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-enum name needed for backward compatibility"
+  @extension("x-ms-enum", #{ name: "UsageUnit", modelAsString: false })
   unit: "Count";
 
   /**
@@ -6829,7 +6946,7 @@ model UsageName {
 /**
  * Container App collection ARM resource.
  */
-model ContainerAppCollection is Azure.Core.Page<ContainerApp>;
+model ContainerAppCollection is LegacyPage<ContainerApp>;
 
 /**
  * The complex type of the extended location.
@@ -6843,7 +6960,7 @@ model ExtendedLocation {
   /**
    * The type of the extended location.
    */
-  type?: ExtendedLocationTypes;
+  type?: ExtendedLocationType;
 }
 
 /**
@@ -8350,7 +8467,7 @@ model PatchSkipConfig {
 /**
  * Container App Revisions collection ARM resource.
  */
-model RevisionCollection is Azure.Core.Page<Revision>;
+model RevisionCollection is LegacyPage<Revision>;
 
 /**
  * Revision resource specific properties
@@ -8406,6 +8523,8 @@ model RevisionProperties {
   /**
    * List of labels assigned to this revision.
    */
+  @added(Versions.v2025_10_02_preview)
+  @removed(Versions.v2026_01_01)
   @visibility(Lifecycle.Read)
   labels?: string[];
 
@@ -8660,7 +8779,7 @@ model OperationDisplay {
 /**
  * Java Components ARM resource.
  */
-model JavaComponentsCollection is Azure.Core.Page<JavaComponent>;
+model JavaComponentsCollection is LegacyPage<JavaComponent>;
 
 /**
  * Java Component common properties.
@@ -8744,7 +8863,16 @@ model JavaComponentServiceBind {
 /**
  * Collection of workflow information elements.
  */
-model WorkflowEnvelopeCollection is Azure.Core.Page<WorkflowEnvelope>;
+model WorkflowEnvelopeCollection {
+  /** Collection of resources. */
+  @pageItems
+  value: WorkflowEnvelope[];
+
+  /** Link to next page of resources. */
+  @visibility(Lifecycle.Read)
+  @nextLink
+  nextLink?: string;
+}
 
 /**
  * The properties of logic apps extension.
@@ -8987,7 +9115,7 @@ model SpringCloudConfigComponent extends JavaComponentProperties {
 /**
  * Available operations of the service
  */
-model AvailableOperations is Azure.Core.Page<OperationDetail>;
+model AvailableOperations is LegacyPageSimple<OperationDetail>;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @error
