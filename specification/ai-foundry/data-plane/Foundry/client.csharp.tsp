@@ -2,6 +2,7 @@ import "./src/common/service.tsp";
 import "./src/connections/routes.tsp";
 import "./src/datasets/routes.tsp";
 import "./src/indexes/routes.tsp";
+import "./src/models/routes.tsp";
 import "./src/deployments/routes.tsp";
 import "./src/red-teams/routes.tsp";
 import "./src/evaluation-rules/routes.tsp";
@@ -10,6 +11,7 @@ import "./src/evaluators/routes.tsp";
 import "./src/insights/routes.tsp";
 import "./src/schedules/routes.tsp";
 import "./src/memory-stores/routes.tsp";
+import "./src/routines/routes.tsp";
 import "./src/data_generation_jobs/routes.tsp";
 
 using Azure.ClientGenerator.Core;
@@ -141,9 +143,6 @@ namespace Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 @@access(EvaluatorDefinitionType, Access.public);
 
-// Hide classes not currently used
-@@clientName(EvaluationTarget, "InternalEvaluationTarget", "csharp");
-@@access(EvaluationTarget, Access.internal);
 // Rename Target from openai-evaluations to EvaluationTarget.
 @@clientName(Target, "EvaluationTarget", "csharp");
 
@@ -204,3 +203,17 @@ namespace Azure.AI.Projects;
 @@access(EvaluatorGenerationJobs.create, Access.internal);
 @@access(EvaluatorGenerationJobs.cancel, Access.internal);
 @@access(EvaluatorGenerationJobs.delete, Access.internal);
+
+// --------------------------------------------------------------------------------
+// Models sub‐client
+// --------------------------------------------------------------------------------
+@@clientName(Models, "AIProjectModels");
+// Models
+@@clientName(Models.getVersion, "getModelVersion", "csharp");
+@@clientName(Models.listVersions, "getModelVersions", "csharp");
+@@clientName(Models.listLatest, "getLatestModelVersions", "csharp");
+@@clientName(Models.deleteVersion, "deleteModelVersion", "csharp");
+@@clientName(Models.createOrUpdateVersion, "updateModelVersion", "csharp");
+@@clientName(Models.createAsync, "createModelVersionAsync", "csharp");
+@@clientName(Models.startPendingUpload, "startModelPendingUpload", "csharp");
+@@clientName(Models.getCredentials, "getModelCredentials", "csharp");

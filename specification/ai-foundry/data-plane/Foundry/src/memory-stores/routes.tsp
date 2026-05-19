@@ -8,8 +8,6 @@ using Azure.Core;
 
 namespace Azure.AI.Projects;
 
-alias MemoryStorePreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.memory_stores_v1_preview>;
-
 @tag("Memory Stores")
 interface MemoryStores {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
@@ -18,8 +16,9 @@ interface MemoryStores {
   @post
   @route("/memory_stores")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
-  createMemoryStore is FoundryDataPlaneOperation<
-    CreateMemoryStoreRequest & MemoryStorePreviewHeader,
+  createMemoryStore is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    CreateMemoryStoreRequest,
     MemoryStoreObject
   >;
 
@@ -29,8 +28,9 @@ interface MemoryStores {
   @post
   @route("/memory_stores/{name}")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
-  updateMemoryStore is FoundryDataPlaneOperation<
-    UpdateMemoryStoreRequest & MemoryStorePreviewHeader,
+  updateMemoryStore is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    UpdateMemoryStoreRequest,
     MemoryStoreObject
   >;
 
@@ -40,8 +40,9 @@ interface MemoryStores {
   @get
   @route("/memory_stores/{name}")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
-  getMemoryStore is FoundryDataPlaneOperation<
-    GetMemoryStoreRequest & MemoryStorePreviewHeader,
+  getMemoryStore is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    GetMemoryStoreRequest,
     MemoryStoreObject
   >;
 
@@ -52,8 +53,9 @@ interface MemoryStores {
   @list
   @route("/memory_stores")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
-  listMemoryStores is FoundryDataPlaneOperation<
-    ListMemoryStoresRequest & MemoryStorePreviewHeader,
+  listMemoryStores is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    ListMemoryStoresRequest,
     AgentsPagedResult<MemoryStoreObject>
   >;
 
@@ -63,8 +65,9 @@ interface MemoryStores {
   @delete
   @route("/memory_stores/{name}")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
-  deleteMemoryStore is FoundryDataPlaneOperation<
-    DeleteMemoryStoreRequest & MemoryStorePreviewHeader,
+  deleteMemoryStore is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    DeleteMemoryStoreRequest,
     DeleteMemoryStoreResponse
   >;
 
@@ -74,8 +77,9 @@ interface MemoryStores {
   @post
   @route("/memory_stores/{name}:search_memories")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
-  searchMemories is FoundryDataPlaneOperation<
-    MemoryStoreSearchRequest & MemoryStorePreviewHeader,
+  searchMemories is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    MemoryStoreSearchRequest,
     MemoryStoreSearchResponse
   >;
 
@@ -86,8 +90,9 @@ interface MemoryStores {
   @route("/memory_stores/{name}:update_memories")
   @pollingOperation(MemoryStores.getUpdateResult)
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
-  updateMemories is FoundryDataPlaneOperation<
-    MemoryStoreUpdateRequest & MemoryStorePreviewHeader,
+  updateMemories is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    MemoryStoreUpdateRequest,
     Foundations.AcceptedResponse &
       MemoryStoreUpdateResponse &
       Foundations.LongRunningStatusLocation<MemoryStoreUpdateCompletedResult>
@@ -99,8 +104,9 @@ interface MemoryStores {
   @get
   @route("/memory_stores/{name}/updates/{update_id}")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
-  getUpdateResult is FoundryDataPlaneOperation<
-    MemoryStoreGetUpdateResultRequest & MemoryStorePreviewHeader,
+  getUpdateResult is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    MemoryStoreGetUpdateResultRequest,
     MemoryStoreUpdateResponse
   >;
 
@@ -110,8 +116,70 @@ interface MemoryStores {
   @post
   @route("/memory_stores/{name}:delete_scope")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
-  deleteScope is FoundryDataPlaneOperation<
-    MemoryStoreDeleteScopeRequest & MemoryStorePreviewHeader,
+  deleteScope is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    MemoryStoreDeleteScopeRequest,
     MemoryStoreDeleteScopeResponse
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @doc("Create a memory item in a memory store.")
+  @operationId("createMemory")
+  @post
+  @route("/memory_stores/{name}/items")
+  @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
+  createMemory is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    CreateMemoryRequest,
+    MemoryItem
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @doc("Update a memory item in a memory store.")
+  @operationId("updateMemory")
+  @post
+  @route("/memory_stores/{name}/items/{memory_id}")
+  @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
+  updateMemory is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    UpdateMemoryRequest,
+    MemoryItem
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @doc("Retrieve a memory item from a memory store.")
+  @operationId("getMemory")
+  @get
+  @route("/memory_stores/{name}/items/{memory_id}")
+  @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
+  getMemory is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    GetMemoryRequest,
+    MemoryItem
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @doc("List all memory items in a memory store.")
+  @operationId("listMemories")
+  @post
+  @list
+  @route("/memory_stores/{name}/items:list")
+  @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
+  listMemories is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    ListMemoriesRequest,
+    AgentsPagedResult<MemoryItem>
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @doc("Delete a memory item from a memory store.")
+  @operationId("deleteMemory")
+  @delete
+  @route("/memory_stores/{name}/items/{memory_id}")
+  @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
+  deleteMemory is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.memory_stores_v1_preview,
+    DeleteMemoryRequest,
+    DeleteMemoryResponse
   >;
 }

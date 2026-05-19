@@ -1,5 +1,4 @@
 import "../common/models.tsp";
-import "../evaluations/models.tsp";
 import "../red-teams/models.tsp";
 
 using Azure.Core.Experimental;
@@ -34,6 +33,17 @@ model DeleteEvalRunResponse {
 
   @doc("Whether the eval was successfully deleted.")
   deleted?: boolean;
+}
+
+@doc("The level at which evaluation is performed.")
+union EvaluationLevel {
+  @doc("Evaluation is performed at the turn level.")
+  turn: "turn",
+
+  @doc("Evaluation is performed at the conversation level.")
+  conversation: "conversation",
+
+  string,
 }
 
 /** Grader Azure AI Evaluator definition for foundry evaluators. */
@@ -314,6 +324,8 @@ model AzureAIAgentTarget extends Target {
 
   /** The parameters used to control the sampling behavior of the agent during text generation. */
   tool_descriptions?: ToolDescription[];
+
+  tools?: OpenAI.Tool[];
 }
 
 /** Description of a tool that can be used by an agent. */
@@ -455,6 +467,9 @@ model TargetCompletionEvalRunDataSource extends EvalRunDataSource {
 
   /** The target configuration for the evaluation. */
   target: Target;
+
+  /** The parameters for item generation. ConversationGenPreviewItemGenerationParams enables conversation simulation previews. */
+  item_generation_params?: ItemGenerationParams;
 }
 
 /** Represents a reference to an uploaded CSV file used as a source for evaluation data. */
@@ -494,11 +509,6 @@ model ConversationGenPreviewItemGenerationParams extends ItemGenerationParams {
   /** The type of item generation parameters, always `conversation_gen_preview`. */
   type: ItemGenerationParamsType.conversationGenPreview;
 
-  /** The source of test scenarios, supporting file_id or file_content. */
-  #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
-  source: OpenAI.EvalJsonlFileContentSource | OpenAI.EvalJsonlFileIdSource;
-
   /** The model deployment used for simulation, in the format '{connectionName}/modelDeploymentName'. */
   `model`: string;
 
@@ -515,59 +525,6 @@ model ConversationGenPreviewItemGenerationParams extends ItemGenerationParams {
   sampling_params?: ModelSamplingParams;
 }
 
-/** Represents a data source for evaluation runs that generate multi-turn conversations via LLM simulation against a target agent. */
-model ConversationSimulationPreviewEvalRunDataSource extends EvalRunDataSource {
-  /** The type of data source, always `azure_ai_conversation_simulation_preview`. */
-  type: "azure_ai_conversation_simulation_preview";
-
-  /** The parameters for conversation generation. */
-  item_generation_params: ConversationGenPreviewItemGenerationParams;
-
-  /** The target agent to simulate conversations against. */
-  target: AzureAIAgentTarget;
-}
-
-// ── Agent Reference types (for trace source filtering) ────────────────────────
-
-/** Specifies the type of agent reference used for filtering traces. */
-union EvalAgentReferenceType {
-  string,
-
-  /** Reference by agent ID (for 3P / Assistants agents). */
-  agentId: "agent_id",
-
-  /** Reference by agent name and version (for Foundry agents). */
-  agentReference: "agent_reference",
-}
-
-/** Base class for polymorphic agent references used in evaluation trace filtering. The user supplies exactly one variant to identify the agent whose traces should be filtered. */
-@discriminator("type")
-model EvalAgentReference {
-  /** The discriminator that identifies which kind of agent reference this is. */
-  type: EvalAgentReferenceType;
-}
-
-/** Identifies a 3P (Assistants) agent by its opaque agent ID. */
-model EvalAgentIdReference extends EvalAgentReference {
-  /** The type of agent reference, always `agent_id`. */
-  type: EvalAgentReferenceType.agentId;
-
-  /** The unique identifier of the agent. */
-  agent_id: string;
-}
-
-/** Identifies a Foundry agent by its name and optional version. */
-model EvalFoundryAgentReference extends EvalAgentReference {
-  /** The type of agent reference, always `agent_reference`. */
-  type: EvalAgentReferenceType.agentReference;
-
-  /** The name of the agent. */
-  name: string;
-
-  /** The version identifier of the agent. If not specified, will look for any version. */
-  version?: string;
-}
-
 // ── Trace Source types ────────────────────────────────────────────────────────
 
 /** Specifies the type of trace source used to select traces for evaluation. */
@@ -582,9 +539,6 @@ union TraceSourceType {
 
   /** Selects traces by agent reference with time-based filtering. */
   agentFilter: "agent_filter",
-
-  /** An extended agent filter that also includes model information. */
-  agentSmartFilter: "agent_smart_filter",
 }
 
 /** Base class for polymorphic trace sources nested within an AzureAITraceDataSourcePreviewEvalRunDataSource. */
@@ -612,43 +566,42 @@ model ConversationIdTraceSource extends TraceSource {
   conversation_ids: string[];
 }
 
+/** Specifies the type of filter strategy used to select traces for evaluation. */
+union FilterStrategyType {
+  string,
+
+  /** Selects traces by random sampling. */
+  random_sampling: "random_sampling",
+
+  /** Selects traces using an algorithm to identify the most relevant ones. */
+  smart_filtering: "smart_filtering",
+}
+
 /** A trace source that selects traces by agent reference with time-based filtering. */
 model AgentFilterTraceSource extends TraceSource {
   /** The type of trace source, always `agent_filter`. */
   type: TraceSourceType.agentFilter;
 
-  /** The agent reference to filter traces by. */
-  agent_reference: EvalAgentReference;
+  /** The identifier of the agent to filter traces by. */
+  agent_id?: string;
+
+  /** The name of the agent to filter traces by. */
+  agent_name?: string;
+
+  /** The version of the agent to filter traces by. */
+  agent_version?: string;
 
   /** Start time for the trace query window, expressed as a Unix timestamp (seconds). */
-  start_time?: int64;
+  start_time?: FoundryTimestamp;
 
   /** End time for the trace query window, expressed as a Unix timestamp (seconds). */
-  end_time?: int64;
-
-  /** Maximum number of traces to sample. Must be greater than 0. */
-  max_traces?: int32;
-}
-
-/** An extended agent filter trace source that also includes model information. */
-model AgentSmartFilterTraceSource extends TraceSource {
-  /** The type of trace source, always `agent_smart_filter`. */
-  type: TraceSourceType.agentSmartFilter;
-
-  /** The agent reference to filter traces by. */
-  agent_reference: EvalAgentReference;
-
-  /** Start time for the trace query window, expressed as a Unix timestamp (seconds). */
-  start_time?: int64;
-
-  /** End time for the trace query window, expressed as a Unix timestamp (seconds). */
-  end_time?: int64;
+  end_time?: FoundryTimestamp;
 
   /** Maximum number of traces to sample. Must be greater than 0. */
   max_traces?: int32;
 
-  /** If you provide the model, it will be used for filtering. */
-  `model`?: string;
+  /** The strategy used to filter traces. */
+  filter_strategy?: FilterStrategyType;
 }
 
 // ── Trace Data Source ─────────────────────────────────────────────────────────
@@ -688,7 +641,7 @@ model AzureAIBenchmarkPreviewEvalRunDataSource extends EvalRunDataSource {
     | OpenAI.CreateEvalJsonlRunDataSource
     | OpenAI.CreateEvalCompletionsRunDataSource
     | OpenAI.CreateEvalResponsesRunDataSource
-    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionsEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesPreviewEvalRunDataSource | AzureAIBenchmarkPreviewEvalRunDataSource | ConversationSimulationPreviewEvalRunDataSource | AzureAITraceDataSourcePreviewEvalRunDataSource */
+    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionsEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesPreviewEvalRunDataSource | AzureAIBenchmarkPreviewEvalRunDataSource | AzureAITraceDataSourcePreviewEvalRunDataSource */
 );
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
@@ -745,7 +698,7 @@ model EvalRun is OpenAI.EvalRun {
     | OpenAI.CreateEvalJsonlRunDataSource
     | OpenAI.CreateEvalCompletionsRunDataSource
     | OpenAI.CreateEvalResponsesRunDataSource
-    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionsEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesPreviewEvalRunDataSource | AzureAIBenchmarkPreviewEvalRunDataSource | ConversationSimulationPreviewEvalRunDataSource | AzureAITraceDataSourcePreviewEvalRunDataSource */
+    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionsEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesPreviewEvalRunDataSource | AzureAIBenchmarkPreviewEvalRunDataSource | AzureAITraceDataSourcePreviewEvalRunDataSource */
 );
 
 model CreateEvalRunRequest is OpenAI.CreateEvalRunRequest {

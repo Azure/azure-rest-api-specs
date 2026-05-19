@@ -65,7 +65,7 @@ interface Agents {
       @header("x-ms-code-zip-sha256")
       codeZipSha256: string;
 
-      @multipartBody body: CreateAgentFromCodeContent;
+      @multipartBody content: CreateAgentFromCodeContent;
     },
     AgentObject
   >;
@@ -121,7 +121,7 @@ interface Agents {
       @header("x-ms-code-zip-sha256")
       codeZipSha256: string;
 
-      @multipartBody body: CreateAgentVersionFromCodeContent;
+      @multipartBody content: CreateAgentVersionFromCodeContent;
     },
     AgentObject
   >;
@@ -153,7 +153,9 @@ interface Agents {
   >;
 
   /**
-   * Deletes an agent.
+   * Deletes an agent. For hosted agents, if any version has active sessions, the request
+   * is rejected with HTTP 409 unless `force` is set to true. When force is true, all
+   * associated sessions are cascade-deleted along with the agent and its versions.
    */
   @delete
   @route("/agents/{agent_name}")
@@ -161,6 +163,9 @@ interface Agents {
     {
       /** The name of the agent to delete. */
       @path agent_name: string;
+
+      /** For Hosted Agents, if true, force-deletes the agent even if its versions have active sessions, cascading deletion to all associated sessions. This value is not relevant for other Agent types. Defaults to false. */
+      @query force?: boolean = false;
     },
     DeleteAgentResponse
   >;
@@ -241,7 +246,9 @@ interface Agents {
   >;
 
   /**
-   * Deletes a specific version of an agent.
+   * Deletes a specific version of an agent. For hosted agents, if the version has active
+   * sessions, the request is rejected with HTTP 409 unless `force` is set to true. When
+   * force is true, all sessions associated with this version are cascade-deleted.
    */
   @delete
   @route("/agents/{agent_name}/versions/{agent_version}")
@@ -252,6 +259,9 @@ interface Agents {
 
       /** The version of the agent to delete */
       @path agent_version: string;
+
+      /** For Hosted Agents, if true, force-deletes the version even if it has active sessions, cascading deletion to all associated sessions. This value is not relevant for other Agent types. Defaults to false. */
+      @query force?: boolean = false;
     },
     DeleteAgentVersionResponse
   >;
@@ -330,38 +340,20 @@ interface Agents {
       @header("x-ms-code-zip-sha256")
       codeZipSha256: string;
 
-      @multipartBody body: CreateAgentVersionFromCodeContent;
+      @multipartBody content: CreateAgentVersionFromCodeContent;
     },
     AgentVersionObject
   >;
 
   /**
-   * Download the code zip for a specific version of a code-based hosted agent.
+   * Download the code zip for a code-based hosted agent.
    * Returns the previously-uploaded zip (`application/zip`).
-   * The SHA-256 digest of the returned bytes matches the `content_hash` on the agent version's `code_configuration`.
-   */
-  @get
-  @route("/agents/{agent_name}/versions/{agent_version}/code:download")
-  @extension(
-    "x-ms-foundry-meta",
-    #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
-  )
-  downloadAgentVersionCode is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys.code_agents_v1_preview,
-    {
-      /** The name of the agent. */
-      @path agent_name: string;
-
-      /** The version of the agent whose code zip should be downloaded. */
-      @path agent_version: string;
-    },
-    DownloadAgentCodeResponse
-  >;
-
-  /**
-   * Download the code zip for the latest version of a code-based hosted agent.
-   * Returns the previously-uploaded zip (`application/zip`).
-   * The SHA-256 digest of the returned bytes matches the `content_hash` on the latest version's `code_configuration`.
+   *
+   * If `agent_version` is supplied, returns that version's code zip; otherwise
+   * returns the latest version's code zip.
+   *
+   * The SHA-256 digest of the returned bytes matches the `content_hash` on the
+   * resolved version's `code_configuration`.
    */
   @get
   @route("/agents/{agent_name}/code:download")
@@ -372,8 +364,14 @@ interface Agents {
   downloadAgentCode is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.code_agents_v1_preview,
     {
-      /** The name of the agent whose latest-version code zip should be downloaded. */
+      /** The name of the agent. */
       @path agent_name: string;
+
+      /**
+       * The version of the agent whose code zip should be downloaded.
+       * If omitted, the latest version's code zip is returned.
+       */
+      @query agent_version?: string;
     },
     DownloadAgentCodeResponse
   >;

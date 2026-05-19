@@ -10,9 +10,9 @@ namespace Azure.AI.Projects;
 const AllConditionalAgentDefinitionPreviews = #{
   conditional_previews: #[
     AgentDefinitionOptInKeys.hosted_agents_v1_preview,
-    AgentDefinitionOptInKeys.container_agents_v1_preview,
     AgentDefinitionOptInKeys.workflow_agents_v1_preview,
-    AgentDefinitionOptInKeys.code_agents_v1_preview
+    AgentDefinitionOptInKeys.code_agents_v1_preview,
+    AgentDefinitionOptInKeys.external_agents_v1_preview
   ],
 };
 
@@ -284,6 +284,7 @@ union AgentProtocol {
   string,
   activity_protocol: "activity_protocol",
   responses: "responses",
+  mcp: "mcp",
   invocations: "invocations",
 }
 
@@ -292,7 +293,12 @@ union AgentEndpointProtocol {
   activity: "activity",
   responses: "responses",
   a2a: "a2a",
+  mcp: "mcp",
   invocations: "invocations",
+
+  @doc("WebSocket-based protocol for hosted voice and real-time streaming agents.")
+  @removed(Versions.v1)
+  invocations_ws: "invocations_ws",
 }
 
 union AgentKind {
@@ -300,6 +306,7 @@ union AgentKind {
   prompt: "prompt",
   hosted: "hosted",
   workflow: "workflow",
+  external: "external",
 
   @removed(Versions.v1)
   container_app: "container_app",
@@ -438,6 +445,28 @@ union CodeDependencyResolution {
 
   @doc("The service builds dependencies remotely from the manifest included in the uploaded zip.")
   remote_build: "remote_build",
+}
+
+@doc("""
+  The external agent definition. Represents a third-party agent hosted outside Foundry (for example, on GCP or AWS).
+  Registration is metadata-only: Foundry records the agent definition to light up observability experiences (traces, evaluations)
+  over customer-emitted OpenTelemetry data.
+  """)
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.external_agents_v1_preview] }
+)
+model ExternalAgentDefinition extends AgentDefinition {
+  kind: AgentKind.external;
+
+  @doc("""
+    The OpenTelemetry agent identifier used to attribute customer-emitted spans to this Foundry agent.
+    Spans must include the attribute `gen_ai.agent.id = <otel_agent_id>` to appear under this registration.
+    Defaults to the top-level agent name when omitted. Provide an explicit value only for migration scenarios
+    where the running external agent already emits a stable id that differs from the Foundry agent name.
+    The resolved value is always echoed on read.
+    """)
+  otel_agent_id?: string;
 }
 
 @doc("The hosted agent definition.")
@@ -678,6 +707,9 @@ model AgentEndpointAuthorizationScheme {
 )
 model EntraAuthorizationScheme extends AgentEndpointAuthorizationScheme {
   type: AgentEndpointAuthorizationSchemeType.Entra;
+
+  @doc("The source from which the per-user isolation key is derived for requests authorized via this scheme. Defaults to Entra-based isolation when omitted.")
+  isolation_key_source?: IsolationKeySource;
 }
 
 @extension(
@@ -858,6 +890,7 @@ model AgentCard {
 
   @doc("The set of skills that an agent can perform.")
   @maxItems(16)
+  @minItems(1)
   skills: AgentCardSkill[];
 }
 
@@ -871,7 +904,7 @@ model AgentCard {
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
 )
-model CreateAgentVersionFromCodeRequest {
+model CreateAgentVersionFromCodeMetadata {
   @doc("A human-readable description of the agent.")
   @maxLength(512)
   description?: string;
@@ -889,7 +922,7 @@ model CreateAgentVersionFromCodeRequest {
 )
 model CreateAgentVersionFromCodeContent {
   /** JSON metadata including description and hosted definition. */
-  metadata: HttpPart<CreateAgentVersionFromCodeRequest>;
+  metadata: HttpPart<CreateAgentVersionFromCodeMetadata>;
 
   /** The code zip file (max 250 MB). */
   code: HttpPart<bytes>;
@@ -919,9 +952,13 @@ model DownloadAgentCodeResponse {
   @header("Content-Type")
   content_type: "application/zip";
 
+  @doc("The version of the agent whose code zip is returned in the response body.")
+  @header("x-ms-agent-version")
+  agent_version: string;
+
   @doc("The zip code package content.")
   @body
-  body: bytes;
+  content: bytes;
 }
 
 // ══════════════════════════════════════════════════════════

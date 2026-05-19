@@ -126,7 +126,6 @@ interface Evaluators {
     Azure.Core.Foundations.ResourceOkResponse<EvaluatorVersion>
   >;
 
-  @removed(Versions.v1)
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Start a new or get an existing pending upload of an evaluator for a specific version.")
   @post
@@ -153,7 +152,6 @@ interface Evaluators {
     PendingUploadResponse
   >;
 
-  @removed(Versions.v1)
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Get the SAS credential to access the storage account associated with an Evaluator version.")
@@ -228,12 +226,7 @@ interface EvaluatorGenerationJobs {
   @extension("x-ms-foundry-meta", EvaluatorGenerationJobsRequiredPreviews)
   list is listJobsPreview<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
-    EvaluatorGenerationJob,
-    {
-      @doc("Filter evaluator generation jobs by category.")
-      @query
-      category?: EvaluatorCategory;
-    }
+    EvaluatorGenerationJob
   >;
 
   /**

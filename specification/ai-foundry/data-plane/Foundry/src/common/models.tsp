@@ -27,6 +27,16 @@ alias AcceptJsonHeader = {
   @header accept: "application/json";
 };
 
+/**
+ * Optional request header carrying an opaque per-user isolation key forwarded to the agent
+ * endpoint. When present, the service scopes endpoint-scoped data access (responses,
+ * conversations, sessions) to the supplied user.
+ */
+alias UserIsolationKeyHeader = {
+  /** Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user. */
+  @header("x-ms-user-isolation-key") user_isolation_key?: string;
+};
+
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
 op OpenAIOperation<
@@ -153,23 +163,20 @@ model TracesJobSource {
   @doc("The source type for this source, which is Traces.")
   type: "traces";
 
-  @doc("The unique agent ID used to filter traces. Optional — when omitted, traces are filtered by `agent_name` (and `agent_version` if specified).")
+  @doc("The unique agent ID used to filter traces. Provide either `agent_id` or `agent_name` — at least one is required.")
   agent_id?: string;
 
-  @doc("The agent name to fetch traces for.")
-  agent_name: string;
+  @doc("The agent name to fetch traces for. Provide either `agent_id` or `agent_name` — at least one is required.")
+  agent_name?: string;
 
   @doc("The agent version. If not specified, traces for ALL versions of the agent are included within the time window.")
   agent_version?: string;
 
   @doc("Start of the time window (Unix timestamp in seconds) for fetching traces.")
-  start_time?: FoundryTimestamp;
+  start_time: FoundryTimestamp;
 
   @doc("End of the time window (Unix timestamp in seconds). Defaults to current time.")
   end_time?: FoundryTimestamp;
-
-  @doc("Maximum number of traces to retrieve.")
-  max_traces?: int32;
 }
 
 @doc("Dataset source — reference to a dataset. Reusable shape spread into per-context discriminated subtypes.")
