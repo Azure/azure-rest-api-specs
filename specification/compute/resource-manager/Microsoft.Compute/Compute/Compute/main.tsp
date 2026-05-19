@@ -70,7 +70,6 @@ enum Versions {
    */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2025_11_01: "2025-11-01",
-
 }
 
 interface Operations extends Azure.ResourceManager.Legacy.ComputeOperations {}
