@@ -4731,10 +4731,10 @@ model DiagnosticDataTableResponseObject {
    * Rows in the table
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-identifiers needed for swagger fidelity"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses untyped object"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses untyped array items"
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Existing API has empty identifiers"
   @extension("x-ms-identifiers", #[])
-  rows?: Record<unknown>[];
+  rows?: unknown[];
 }
 
 /**
