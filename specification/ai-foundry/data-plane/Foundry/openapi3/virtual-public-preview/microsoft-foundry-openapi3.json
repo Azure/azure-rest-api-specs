@@ -7557,16 +7557,6 @@
             "explode": false
           },
           {
-            "name": "category",
-            "in": "query",
-            "required": false,
-            "description": "Filter evaluator generation jobs by category.",
-            "schema": {
-              "$ref": "#/components/schemas/EvaluatorCategory"
-            },
-            "explode": false
-          },
-          {
             "name": "api-version",
             "in": "query",
             "required": true,
@@ -22991,12 +22981,12 @@
       "Dimension": {
         "type": "object",
         "required": [
-          "dimension_id",
+          "id",
           "description",
           "weight"
         ],
         "properties": {
-          "dimension_id": {
+          "id": {
             "type": "string",
             "description": "Stable identifier for this dimension (snake_case, e.g., `correct_resolution`). Required. Provided by the user when manually creating a rubric evaluator or during human-in-the-loop review of a generated set; the generation pipeline produces an initial value the user can edit. Editable when saving new versions."
           },
@@ -50636,7 +50626,7 @@
             "items": {
               "$ref": "#/components/schemas/Dimension"
             },
-            "description": "The set of dimensions — the scoring blueprint used by the LLM judge. Quality evaluators include a non-editable residual dimension with dimension_id 'general_quality' (always_applicable: true); safety evaluators include 'general_policy_compliance'. Both use the same Dimension structure."
+            "description": "The set of dimensions — the scoring blueprint used by the LLM judge. Quality evaluators include a non-editable residual dimension with id 'general_quality' (always_applicable: true); safety evaluators include 'general_policy_compliance'. Both use the same Dimension structure."
           },
           "pass_threshold": {
             "type": "number",
