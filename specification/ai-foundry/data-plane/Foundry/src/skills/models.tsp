@@ -178,7 +178,7 @@ alias GetSkillVersionContentRequest = {
   version: string;
 };
 
-model UpdateSkillDefaultVersionRequest {
+model UpdateSkillRequest {
   @doc("The name of the skill to update.")
   @path
   name: SkillName;

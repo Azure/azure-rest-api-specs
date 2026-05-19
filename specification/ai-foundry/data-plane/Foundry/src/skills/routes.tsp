@@ -35,15 +35,15 @@ interface Skills {
   >;
 
   /**
-   * Update the default version pointer for a skill.
+   * Update a skill.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
-  @operationId("updateSkillDefaultVersion")
+  @operationId("updateSkill")
   @post
   @route("/skills/{name}")
   @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
-  updateSkillDefaultVersion is FoundryDataPlaneOperation<
-    UpdateSkillDefaultVersionRequest & SkillsPreviewHeader,
+  updateSkill is FoundryDataPlaneOperation<
+    UpdateSkillRequest & SkillsPreviewHeader,
     Skill
   >;
 
