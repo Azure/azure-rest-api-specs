@@ -650,11 +650,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
   ListBlobsIncludeItemGo[],
   "go"
 );
-@@alternateType(
-  ListBlobsResponse.blobItems,
-  BlobFlatListSegment,
-  "go"
-);
+@@alternateType(ListBlobsResponse.blobItems, BlobFlatListSegment, "go");
 @@alternateType(UserDelegationKey.signedExpiry, utcDateTime, "go");
 @@alternateType(UserDelegationKey.signedStart, utcDateTime, "go");
 @@alternateType(UserDelegationKey.value, string, "go");
@@ -697,11 +693,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
   "ListBlobsHierarchySegmentResponse",
   "go"
 );
-@@clientName(
-  ListBlobsHierarchicalResponse.hierarchicalList,
-  "segment",
-  "go"
-);
+@@clientName(ListBlobsHierarchicalResponse.hierarchicalList, "segment", "go");
 @@clientName(ListBlobsResponse.blobItems, "segment", "go");
 @@clientName(Metrics.includeApis, "IncludeAPIs", "go");
 @@clientName(QueryType, "QueryFormatType", "go");
