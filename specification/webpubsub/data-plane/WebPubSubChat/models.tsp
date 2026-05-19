@@ -133,10 +133,25 @@ model ChatRoomMember {
   ...EtagProperty;
 }
 
-/** Represents a user profile in the chat system. */
+/** Discriminator for the kind of chat user. */
+union ChatUserKind {
+  string,
+
+  /** A human end-user. */
+  Human: "Human",
+}
+
+/**
+ * Represents a user profile in the chat system. This is a discriminated base type;
+ * concrete payloads are selected by the `kind` field (e.g. `HumanChatUser`).
+ */
+@discriminator("kind")
 @resource("chat/users")
 @parentResource(Hub)
 model ChatUser {
+  /** The kind of user. */
+  kind: ChatUserKind;
+
   /** User identifier. */
   @key("userId")
   @visibility(Lifecycle.Read)
@@ -151,13 +166,18 @@ model ChatUser {
   @maxLength(64)
   nickname: string;
 
-  /** Global user role assigned to the user. */
+  ...EtagProperty;
+}
+
+/** A human end-user, identified by a user role. */
+model HumanChatUser extends ChatUser {
+  kind: ChatUserKind.Human;
+
+  /** Global user role assigned to the user. Must start with `user.`. */
   @pattern("^user\\.[a-z0-9_-]{1,59}$")
   @minLength(1)
   @maxLength(64)
   roleName: string;
-
-  ...EtagProperty;
 }
 
 /** Message content body. */

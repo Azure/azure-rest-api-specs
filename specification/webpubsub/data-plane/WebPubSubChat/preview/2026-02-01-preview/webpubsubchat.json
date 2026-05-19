@@ -1159,7 +1159,7 @@
           "chat"
         ],
         "summary": "Get a user's profile.",
-        "description": "Get a user's profile.",
+        "description": "Get a user's profile. The response is a polymorphic `ChatUser` (e.g. `HumanChatUser`) selected by the `kind` discriminator.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1217,7 +1217,7 @@
           "chat"
         ],
         "summary": "Create or replace a user.",
-        "description": "Create or replace a user.",
+        "description": "Create or replace a user. The request body is a polymorphic `ChatUser` (e.g. `HumanChatUser`) selected by the `kind` discriminator.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1628,8 +1628,12 @@
     },
     "ChatUser": {
       "type": "object",
-      "description": "Represents a user profile in the chat system.",
+      "description": "Represents a user profile in the chat system. This is a discriminated base type;\nconcrete payloads are selected by the `kind` field (e.g. `HumanChatUser`).",
       "properties": {
+        "kind": {
+          "$ref": "#/definitions/ChatUserKind",
+          "description": "The kind of user."
+        },
         "id": {
           "type": "string",
           "description": "User identifier.",
@@ -1645,25 +1649,37 @@
           "maxLength": 64,
           "pattern": "^[^\\p{Cc}]{1,64}$"
         },
-        "roleName": {
-          "type": "string",
-          "description": "Global user role assigned to the user.",
-          "minLength": 1,
-          "maxLength": 64,
-          "pattern": "^user\\.[a-z0-9_-]{1,59}$"
-        },
         "etag": {
           "$ref": "#/definitions/Azure.Core.eTag",
           "description": "The entity tag for this resource.",
           "readOnly": true
         }
       },
+      "discriminator": "kind",
       "required": [
+        "kind",
         "id",
         "nickname",
-        "roleName",
         "etag"
       ]
+    },
+    "ChatUserKind": {
+      "type": "string",
+      "description": "Discriminator for the kind of chat user.",
+      "enum": [
+        "Human"
+      ],
+      "x-ms-enum": {
+        "name": "ChatUserKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Human",
+            "value": "Human",
+            "description": "A human end-user."
+          }
+        ]
+      }
     },
     "Hub": {
       "type": "object",
@@ -1681,6 +1697,28 @@
       "required": [
         "hub"
       ]
+    },
+    "HumanChatUser": {
+      "type": "object",
+      "description": "A human end-user, identified by a user role.",
+      "properties": {
+        "roleName": {
+          "type": "string",
+          "description": "Global user role assigned to the user. Must start with `user.`.",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^user\\.[a-z0-9_-]{1,59}$"
+        }
+      },
+      "required": [
+        "roleName"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatUser"
+        }
+      ],
+      "x-ms-discriminator-value": "Human"
     },
     "MessageContent": {
       "type": "object",

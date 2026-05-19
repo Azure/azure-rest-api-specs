@@ -132,11 +132,11 @@ interface Chat {
 
   // --- Users ---
 
-  /** Get a user's profile. */
+  /** Get a user's profile. The response is a polymorphic `ChatUser` (e.g. `HumanChatUser`) selected by the `kind` discriminator. */
   @summary("Get a user's profile.")
   getUser is Operations.ResourceRead<ChatUser>;
 
-  /** Create or replace a user. */
+  /** Create or replace a user. The request body is a polymorphic `ChatUser` (e.g. `HumanChatUser`) selected by the `kind` discriminator. */
   @summary("Create or replace a user.")
   createOrReplaceUser is ConditionalOperations.ResourceCreateOrReplace<ChatUser>;
 
