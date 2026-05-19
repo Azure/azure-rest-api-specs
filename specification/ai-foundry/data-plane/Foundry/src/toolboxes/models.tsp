@@ -18,9 +18,16 @@ model ToolboxPolicies {
   rai_config?: RaiConfig;
 }
 
-@doc("A reference to a skill to include in a toolbox.")
-model SkillReference {
-  @doc("The type of skill reference.")
+@doc("A skill source included in a toolbox.")
+@discriminator("type")
+model ToolboxSkill {
+  @doc("The type of skill source.")
+  type: string;
+}
+
+@doc("A reference to an existing skill to include in a toolbox.")
+model ToolboxSkillReference extends ToolboxSkill {
+  @doc("The type of skill source.")
   type: "skill_reference";
 
   @doc("The name of the skill.")
@@ -68,8 +75,8 @@ model ToolboxVersionObject {
   @doc("The list of tools contained in this toolbox version.")
   tools: OpenAI.Tool[];
 
-  @doc("The list of skill references included in this toolbox version.")
-  skills?: SkillReference[];
+  @doc("The list of skill sources included in this toolbox version.")
+  skills?: ToolboxSkill[];
 
   @doc("Policy configuration for the toolbox version.")
   policies?: ToolboxPolicies;
@@ -91,8 +98,8 @@ alias CreateToolboxVersionRequest = {
   @doc("The list of tools to include in this version.")
   tools: OpenAI.Tool[];
 
-  @doc("The list of skill references to include in this version. Each reference specifies a skill name and optionally a version. If version is omitted, the skill's default version is used.")
-  skills?: SkillReference[];
+  @doc("The list of skill sources to include in this version. A skill reference specifies a skill name and optionally a version. If version is omitted, the skill's default version is used.")
+  skills?: ToolboxSkill[];
 
   @doc("Policy configuration for this toolbox version.")
   policies?: ToolboxPolicies;
