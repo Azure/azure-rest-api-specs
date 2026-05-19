@@ -664,7 +664,7 @@ export const getRPaaSFolderList = async (
   repoName: string,
 ): Promise<string[]> => {
   const branch = "main";
-  const folder = "specification";
+  const folder = ".github/arm-leases";
 
   const res = await client.rest.repos.getContent({
     owner,
@@ -674,7 +674,7 @@ export const getRPaaSFolderList = async (
   });
 
   console.log(
-    `Get RPSaaS folder list from ${owner}/${repoName}/${folder} successfully. status: ${res.status}`,
+    `Get RPaaS proxy folder list from ${owner}/${repoName}/${folder} successfully. status: ${res.status}`,
   );
 
   // Extract folder names from the response
