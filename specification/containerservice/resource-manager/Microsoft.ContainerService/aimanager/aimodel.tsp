@@ -142,6 +142,7 @@ interface AIModels {
 
 @@maxLength(AIModel.name, 128);
 @@minLength(AIModel.name, 1);
-@@doc(AIModel.name,
+@@doc(
+  AIModel.name,
   "The name of the AI model resource. Derived from the upstream model id by replacing the publisher separator `/` with `--` (e.g. upstream `microsoft/Phi-4-mini-instruct` becomes `microsoft--Phi-4-mini-instruct`). Because Hugging Face repo ids forbid `--`, this mapping is unambiguously reversible. Allowed characters: letters, digits, `.`, `-`, `_`."
 );
