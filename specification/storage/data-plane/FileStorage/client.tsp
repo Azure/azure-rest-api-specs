@@ -164,6 +164,10 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 
 @@clientName(ShareItemInternal, "Share", "go");
 @@clientName(ShareNfsSettings, "ShareNFSSettings", "go");
+@@clientName(ShareNfsSettingsEncryptionInTransit,
+  "ShareNFSSettingsEncryptionInTransit",
+  "go"
+);
 @@clientName(SharePropertiesInternal, "ShareProperties", "go");
 @@clientName(SharePropertiesInternal.enableSmbDirectoryLease,
   "EnableSMBDirectoryLease",
