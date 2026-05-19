@@ -528,8 +528,6 @@ model ExportRunReplacement extends Azure.ResourceManager.CommonTypes.Resource {
   "csharp"
 );
 
-@@access(ExportDeliveryInfo, Access.public, "csharp");
-
 @@alternateType(
   ReportConfigDefinition.timeframe,
   ReportTimeframeType | null,

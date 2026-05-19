@@ -2123,8 +2123,6 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
 @@usage(NetworkSettings, Usage.input | Usage.output, "csharp");
 @@usage(UpdateSummary, Usage.input | Usage.output, "csharp");
 
-@@access(RoleSinkInfo, Access.public, "csharp");
-@@access(FileSourceInfo, Access.public, "csharp");
 
 @@alternateType(
   DataBoxEdgeDeviceExtendedInfoProperties.clientSecretStoreUrl,

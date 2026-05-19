@@ -8,8 +8,6 @@ using TypeSpec.Versioning;
 @@clientName(Microsoft.AzureFleet, "ComputeFleetMgmtClient", "python");
 @@clientName(Microsoft.AzureFleet, "ComputeFleetManagementClient", "java");
 
-@@access(Operations.list, Access.internal, "csharp");
-
 @@clientName(ApiError, "ComputeFleetApiError", "csharp");
 @@clientName(ApplicationProfile, "ComputeFleetApplicationProfile", "csharp");
 @@clientName(BootDiagnostics, "ComputeFleetBootDiagnostics", "csharp");

@@ -17,7 +17,6 @@ using Azure.ClientGenerator.Core;
 );
 
 namespace Informatica.DataManagement {
-  @@access(Operations.list, Access.internal);
 
   @@clientName(
     InformaticaOrganizationResource,

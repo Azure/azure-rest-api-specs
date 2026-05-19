@@ -470,7 +470,6 @@ using Microsoft.ProviderHub;
   ResourceType.identityManagement,
   "csharp"
 );
-@@access(ResourceProviderAuthentication, Access.internal, "csharp");
 
 @@clientName(
   ResourceProviderAuthentication.allowedAudiences,
@@ -516,8 +515,6 @@ using Microsoft.ProviderHub;
 );
 
 @@alternateType(AuthorizedApplication.name, Azure.Core.uuid, "csharp");
-
-@@access(ManifestLevelPropertyBag, Access.public, "csharp");
 
 @@alternateType(SkuLocationInfo.location, Azure.Core.azureLocation, "csharp");
 
@@ -685,7 +682,6 @@ using Microsoft.ProviderHub;
 
 @@usage(ResourceProviderAuthentication, Usage.input | Usage.output, "csharp");
 @@usage(FeaturesRule, Usage.input | Usage.output, "csharp");
-@@access(FeaturesRule, Access.public, "csharp");
 @@usage(
   PrivateResourceProviderConfiguration,
   Usage.input | Usage.output,

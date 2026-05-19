@@ -241,7 +241,6 @@ using Microsoft.ContainerInstance;
   "NGroupContainerGroupPropertyContainer",
   "csharp"
 );
-@@access(ContainerGroupProvisioningState, Access.public, "csharp");
 
 // Fix identity types to use ARM common ManagedServiceIdentity for backward compat
 @@alternateType(

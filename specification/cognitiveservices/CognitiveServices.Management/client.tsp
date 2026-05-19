@@ -986,20 +986,3 @@ op regenerateKeyCustom(
     | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-
-@@access(AbusePenalty, Access.public, "csharp");
-@@access(ApiProperties, Access.public, "csharp");
-@@access(CallRateLimit, Access.public, "csharp");
-@@access(CommitmentPlanAssociation, Access.public, "csharp");
-@@access(KeyVaultProperties, Access.public, "csharp");
-@@access(MultiRegionSettings, Access.public, "csharp");
-@@access(NetworkRuleSet, Access.public, "csharp");
-@@access(ProvisioningState, Access.public, "csharp");
-@@access(PublicNetworkAccess, Access.public, "csharp");
-@@access(QuotaLimit, Access.public, "csharp");
-@@access(RaiMonitorConfig, Access.public, "csharp");
-@@access(Sku, Access.public, "csharp");
-@@access(SkuCapability, Access.public, "csharp");
-@@access(SkuChangeInfo, Access.public, "csharp");
-@@access(UserOwnedAmlWorkspace, Access.public, "csharp");
-@@access(UserOwnedStorage, Access.public, "csharp");
