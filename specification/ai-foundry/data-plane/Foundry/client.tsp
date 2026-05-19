@@ -222,6 +222,12 @@ using Azure.AI.Projects;
 @@clientName(AgentOptimizationJobs.getCandidateConfig, "getOptimizationCandidateConfig", "javascript");
 @@clientName(AgentOptimizationJobs.getCandidateResults, "getOptimizationCandidateResults", "javascript");
 
+// DatasetItem model has a property `response_items?: OpenAI.OutputItem[]`. It is used
+// to define Agent optimization request. If emitted as-is, it pulls in a lot of
+// OpenAI responses classes. We want Foundry SDK to be free of those, therefore for the
+// time being we define output item as a generic dictionary.
+@@alternateType(OpenAI.OutputItem, Record<unknown>);
+
 // Make this method internal, since it's patched with a new one that supports either binary or file-path input
 @@access(AgentSessionFiles.uploadSessionFile, Access.internal, "python");
 @@usage(SessionFileWriteResponse, Usage.output);
@@ -278,6 +284,9 @@ using Azure.AI.Projects;
 // define OpenAI.InputItem as inputs. This pulls in ~100 OpenAI classes related to input items. We want the
 // Foundry SDK to be free of those, therefore for the time being we define input item as a generic dictionary.
 @@alternateType(OpenAI.InputItem, Record<unknown>);
+
+// Note the doc string replacement below is for JavaScript only, because for Python we hand-write the
+// relevant methods with proper doc strings (see `begin_update_memories` and `search_memories` methods)
 @@clientDoc(MemoryStoreUpdateRequest.items,
   "A list of messages to store in memory, each one represented as an object with `role`, `content` and `type` keys. Similar to how OpenAI defines input items in Responses operations. Example of an item: {\"role\": \"user\", \"type\": \"message\", \"content\": \"my user message\"}. Only messages with `type` equals `message` are currently processed. Others are ignored.",
   DocumentationMode.replace,
