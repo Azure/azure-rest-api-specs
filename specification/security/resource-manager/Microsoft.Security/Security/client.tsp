@@ -639,6 +639,10 @@ op privateLinkResourcesGetCustomization(
   "GetSensitivitySettings",
   "csharp"
 );
+@@clientName(SensitivitySettingsAPI.GetSensitivitySettingsListResponse,
+  "SensitivitySettingsListResult",
+  "csharp"
+);
 @@clientName(SecuritySolutionsAPI.TopologyOperationGroup.list,
   "GetTopologies",
   "csharp"
