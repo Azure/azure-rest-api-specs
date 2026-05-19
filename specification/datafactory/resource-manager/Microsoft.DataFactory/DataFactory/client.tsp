@@ -454,6 +454,7 @@ using Microsoft.DataFactory;
   "DataFactoryIntegrationRuntimeProperties",
   "csharp"
 );
+@@clientName(IntegrationRuntime.type, "IntegrationRuntimeType", "csharp");
 @@clientName(
   IntegrationRuntimeAutoUpdate,
   "IntegrationRuntimeAutoUpdateState",
@@ -540,6 +541,8 @@ using Microsoft.DataFactory;
   "csharp"
 );
 @@clientName(LinkedService, "DataFactoryLinkedServiceProperties", "csharp");
+@@clientName(LinkedService.version, "LinkedServiceVersion", "csharp");
+@@clientName(LinkedService.type, "LinkedServiceType", "csharp");
 @@clientName(
   LinkedServiceDebugResource,
   "DataFactoryLinkedServiceDebugInfo",
@@ -658,6 +661,11 @@ using Microsoft.DataFactory;
   "ScriptActivityTypeLogSettings",
   "csharp"
 );
+@@clientName(
+  ScriptActivityTypePropertiesLogSettings.logLocationSettings,
+  "LogLocation",
+  "csharp"
+);
 @@clientName(TarGZipReadSettings, "TarGzipReadSettings", "csharp");
 @@clientName(ScriptActivityScriptBlock.type, "QueryType", "csharp");
 @@clientName(WebActivityMethod.GET, "Get", "csharp");
@@ -752,6 +760,7 @@ using Microsoft.DataFactory;
 @@clientName(SsisParameter.valueSet, "HasValueSet", "csharp");
 @@clientName(SsisVariable.sensitive, "IsSensitive", "csharp");
 @@clientName(SwitchCase, "SwitchCaseActivity", "csharp");
+@@clientName(ScriptType, "DataFactoryScriptType", "csharp");
 @@clientName(TextFormat, "DatasetTextFormat", "csharp");
 @@clientName(Transformation, "DataFlowTransformation", "csharp");
 @@clientName(Trigger, "DataFactoryTriggerProperties", "csharp");
@@ -794,9 +803,11 @@ using Microsoft.DataFactory;
 );
 @@clientName(WebActivityTypeProperties.headers, "RequestHeaders", "csharp");
 @@clientName(WebHookActivityTypeProperties.headers, "RequestHeaders", "csharp");
-@@clientName(LinkedService.version, "LinkedServiceVersion", "csharp");
 @@clientName(SapOdpLinkedServiceTypeProperties.sncMode, "SncFlag", "csharp");
 @@clientName(SapTableLinkedServiceTypeProperties.sncMode, "SncFlag", "csharp");
+@@clientName(StoreWriteSettings.type, "StoreWriteSettingsType", "csharp");
+@@clientName(StoreReadSettings.type, "StoreReadSettingsType", "csharp");
+@@clientName(SsisObjectMetadata.type, "MetadataType", "csharp");
 
 // Force-rename shared/unions to their baseline DataFactory*-prefixed names so the
 // generator emits a file with the matching name and downstream references resolve.
@@ -1105,6 +1116,8 @@ using Microsoft.DataFactory;
 @@clientName(ExpressionV2Type, "DataFactoryExpressionV2Type", "csharp");
 @@clientName(HttpDataset, "DataFactoryHttpDataset", "csharp");
 @@clientName(LogSettings, "DataFactoryLogSettings", "csharp");
+@@clientName(LogSettings.logLocationSettings, "LogLocation", "csharp");
+@@clientName(LogLocationSettings.path, "Settings", "csharp");
 @@clientName(
   PipelineReferenceType,
   "DataFactoryPipelineReferenceType",
@@ -1240,10 +1253,18 @@ using Microsoft.DataFactory;
 @@clientName(SSISPackageLocation.type, "LocationType", "csharp");
 @@clientName(SynapseNotebookReference.type, "NotebookReferenceType", "csharp");
 @@clientName(SynapseSparkJobReference.type, "SparkJobReferenceType", "csharp");
+@@clientName(ManagedIntegrationRuntimeOperationResult.type, "ManagedIntegrationRuntimeOperationResultType", "csharp");
 @@clientName(
   WebActivityAuthentication.type,
   "WebActivityAuthenticationType",
   "csharp"
 );
+@@clientName(
+  PrestoLinkedServiceTypeProperties.timeZoneID,
+  "TimeZoneId",
+  "csharp"
+);
 
-@@usage(OutputColumn, Usage.input, "csharp");
+@@usage(OutputColumn, Usage.input | Usage.output, "csharp");
+@@usage(ScriptType, Usage.input | Usage.output, "csharp");
+
