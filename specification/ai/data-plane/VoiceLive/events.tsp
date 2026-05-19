@@ -140,4 +140,8 @@ union ServerEventType {
   /** Audio transcript annotation added. */
   @added(Versions.v2026_04_10)
   response_audio_transcript_annotation_added: "response.audio_transcript.annotation.added",
+
+  /** Invocation passthrough delta from hosted agent. */
+  @added(Versions.v2026_06_01_preview)
+  response_invocation_delta: "response.invocation.delta",
 }
