@@ -1415,8 +1415,10 @@
         },
         "protectedSettings": {
           "type": "object",
+          "format": "password",
           "description": "The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.",
-          "additionalProperties": {}
+          "additionalProperties": {},
+          "x-ms-secret": true
         },
         "suppressFailures": {
           "type": "boolean",
@@ -1424,7 +1426,9 @@
         },
         "protectedSettingsFromKeyVault": {
           "$ref": "#/definitions/KeyVaultSecretReference",
-          "description": "The extensions protected settings that are passed by reference, and consumed from key vault"
+          "format": "password",
+          "description": "The extensions protected settings that are passed by reference, and consumed from key vault",
+          "x-ms-secret": true
         },
         "provisionAfterExtensions": {
           "type": "array",
