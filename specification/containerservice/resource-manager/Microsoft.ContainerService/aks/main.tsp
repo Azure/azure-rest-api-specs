@@ -21,6 +21,7 @@ import "./SafeguardsAvailableVersion.tsp";
 import "./MeshRevisionProfile.tsp";
 import "./MeshUpgradeProfile.tsp";
 import "./MaintenanceConfiguration.tsp";
+import "./MaintenanceWindow.tsp";
 import "./ManagedNamespace.tsp";
 import "./AgentPool.tsp";
 import "./AgentPoolUpgradeProfile.tsp";
