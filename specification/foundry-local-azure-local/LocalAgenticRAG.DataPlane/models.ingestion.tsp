@@ -118,8 +118,10 @@ model IngestionCreateResponse {
   /** The status of the ingestion job creation. */
   status?: string;
 
-  /** Any object */
-  message?: Record<string>;
+  /** Additional details about the ingestion job creation. */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Message payload structure varies by ingestion type"
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Message payload structure varies by ingestion type"
+  message?: Record<unknown>;
 }
 
 /** A list of ingestion job runs. */
@@ -172,6 +174,8 @@ model IngestionRunDetail {
   /** The number of items that failed processing. */
   failedItems?: int32;
 
-  /** Any object */
-  errorInfo?: Record<string>;
+  /** Error details if the run failed. */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Error info structure varies by failure type"
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Error info structure varies by failure type"
+  errorInfo?: Record<unknown>;
 }

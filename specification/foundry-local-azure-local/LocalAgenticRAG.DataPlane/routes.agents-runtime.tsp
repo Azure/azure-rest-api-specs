@@ -177,7 +177,8 @@ interface MessagesOperationGroup {
 interface RunsOperationGroup {
   /**
    * Creates and executes a run against a thread. Supports synchronous and streaming
-   * (SSE) modes.
+   * (SSE) modes. When `stream=true`, the response is returned as a server-sent events
+   * (text/event-stream) stream instead of a single JSON object.
    */
   @summary("Create Run")
   @route("/threads/{threadId}/runs")

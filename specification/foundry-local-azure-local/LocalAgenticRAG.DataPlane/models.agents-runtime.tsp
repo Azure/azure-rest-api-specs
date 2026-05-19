@@ -326,9 +326,9 @@ model Run {
   /** The instructions used for this run. */
   instructions?: string;
 
-  /** Any object */
+  /** The last error that occurred during the run, if any. */
   @encodedName("application/json", "last_error")
-  lastError?: Record<string>;
+  lastError?: RunError;
 
   /** Token usage statistics for the run. */
   usage?: Usage;
@@ -414,11 +414,22 @@ model RunStep {
   /** The type of this run step. */
   type?: RunStepType;
 
-  /** Details vary by step type. */
+  /** Details vary by step type. Contains step-specific structured data. */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Step details are polymorphic and vary by step type"
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Step details are polymorphic and vary by step type"
   @encodedName("application/json", "step_details")
-  stepDetails?: Record<string>;
+  stepDetails?: Record<unknown>;
 
   /** Unix epoch timestamp of when the step completed. */
   @encodedName("application/json", "completed_at")
   completedAt?: int64;
+}
+
+/** Represents an error that occurred during a run. */
+model RunError {
+  /** The error code. */
+  code?: string;
+
+  /** A human-readable error message. */
+  message?: string;
 }

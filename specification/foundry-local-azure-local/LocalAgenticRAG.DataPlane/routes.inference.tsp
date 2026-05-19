@@ -21,6 +21,7 @@ interface ChatCompletionsOperationGroup {
        * dev = uses request body parameters directly. user = loads developer-configured
        * settings.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "HTTP header name"
       @header
       `x-user-role`: UserRole;
 
@@ -41,6 +42,7 @@ interface ChatCompletionsOperationGroup {
   modelOnlyChatCompletion is Azure.Core.RpcOperation<
     {
       /** The role of the user making the request. */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "HTTP header name"
       @header
       `x-user-role`?: UserRole;
 

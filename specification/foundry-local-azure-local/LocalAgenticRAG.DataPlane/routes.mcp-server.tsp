@@ -20,6 +20,7 @@ interface McpOperationGroup {
   mcpRequest is Azure.Core.RpcOperation<
     {
       /** Session ID from initialize response. Required for tools/list and tools/call. */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "HTTP header name"
       @header
       `Mcp-Session-Id`?: string;
 

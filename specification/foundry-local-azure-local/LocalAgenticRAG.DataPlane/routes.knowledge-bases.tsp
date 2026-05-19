@@ -61,6 +61,10 @@ interface KnowledgeBasesOperationGroup {
       @path
       kbId: string;
 
+      /** Content type for merge-patch requests. */
+      @header
+      contentType: "application/merge-patch+json";
+
       /** The request body containing fields to update. */
       @bodyRoot
       body: UpdateKnowledgeBaseRequest;

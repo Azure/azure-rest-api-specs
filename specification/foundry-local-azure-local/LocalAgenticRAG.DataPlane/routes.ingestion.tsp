@@ -3,17 +3,21 @@ import "@typespec/rest";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.Core;
+using Azure.Core.Traits;
 
 namespace FoundryLocal.AgenticRAG;
 
 /** Operations for managing ingestion jobs. */
 interface IngestionJobsOperationGroup {
   /**
-   * Starts an ingestion job that parses, chunks, embeds, and stores documents into
-   * a collection.
+   * Starts a long-running ingestion job that parses, chunks, embeds, and stores
+   * documents into a collection. Returns an `operation-location` header to poll
+   * for run status via `getIngestionRun`.
    */
   @summary("Create Ingestion Job")
   @route("/edgeai/ingestion/jobs/{jobId}")
+  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Polling is done via getIngestionRun but cannot use @pollingOperation due to different path parameters"
   @post
   createIngestionJob is Azure.Core.RpcOperation<
     {
@@ -25,7 +29,11 @@ interface IngestionJobsOperationGroup {
       @bodyRoot
       body: CreateIngestionRequest;
     },
-    IngestionCreateResponse
+    IngestionCreateResponse & {
+      /** URI to monitor the run. */
+      @header("operation-location")
+      operationLocation?: string;
+    }
   >;
 
   /** List Ingestion Jobs */

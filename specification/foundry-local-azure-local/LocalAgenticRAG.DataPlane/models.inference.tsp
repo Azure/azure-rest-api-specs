@@ -129,6 +129,7 @@ model MilvusDataSourceParameters {
   imageStrictness?: int32 = 1;
 
   /** Maximum number of documents to retrieve. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "topNDocuments follows camelCase with acronym N"
   @encodedName("application/json", "top_n_documents")
   topNDocuments?: int32 = 5;
 
@@ -151,9 +152,11 @@ model ChatCompletionResponse {
 
 /** A single completion choice in a chat response. */
 model Choice {
-  /** Any object */
+  /** Content filter results for this choice. */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Content filter results have dynamic structure"
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Content filter results have dynamic structure"
   @encodedName("application/json", "content_filter_results")
-  contentFilterResults?: Record<string>;
+  contentFilterResults?: Record<unknown>;
 
   /** The assistant message for this choice. */
   message?: AssistantMessage;
@@ -175,6 +178,7 @@ model AssistantMessage {
   searchType?: string;
 
   /** The number of documents retrieved. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "topNDocuments follows camelCase with acronym N"
   @encodedName("application/json", "top_n_documents")
   topNDocuments?: int32;
 

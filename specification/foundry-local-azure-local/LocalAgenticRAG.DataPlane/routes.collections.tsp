@@ -43,6 +43,10 @@ interface CollectionsOperationGroup {
       @path
       name: string;
 
+      /** Content type for merge-patch requests. */
+      @header
+      contentType: "application/merge-patch+json";
+
       /** The request body containing the updated description. */
       @bodyRoot
       body: UpdateCollectionRequest;

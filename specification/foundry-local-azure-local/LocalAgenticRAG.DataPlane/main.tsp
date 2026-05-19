@@ -37,9 +37,10 @@ using Azure.Core;
   "{endpoint}",
   "Foundry Local Agentic RAG service endpoint.",
   {
-    endpoint: string,
+    endpoint: url,
   }
 )
+#suppress "@azure-tools/typespec-azure-core/casing-style" "RAG is an acronym in the service namespace"
 namespace FoundryLocal.AgenticRAG;
 
 /**
