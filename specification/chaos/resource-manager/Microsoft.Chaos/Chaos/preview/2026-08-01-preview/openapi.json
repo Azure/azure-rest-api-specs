@@ -2825,66 +2825,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/refreshRecommendations": {
-      "post": {
-        "operationId": "Workspaces_RefreshRecommendations",
-        "tags": [
-          "Workspaces"
-        ],
-        "description": "Refreshes recommendation status for all scenarios in a given workspace.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "String that represents a Workspace resource name.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "pattern": "^[^<>%&:?#/\\\\]+$"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Refresh recommendations for all scenarios in a workspace.": {
-            "$ref": "./examples/Workspaces_RefreshRecommendations.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/discoveredResources": {
       "get": {
         "operationId": "DiscoveredResources_ListByWorkspace",
@@ -2991,6 +2931,66 @@
             "$ref": "./examples/DiscoveredResources_Get.json"
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/refreshRecommendations": {
+      "post": {
+        "operationId": "Workspaces_RefreshRecommendations",
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Refreshes recommendation status for all scenarios in a given workspace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "String that represents a Workspace resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^<>%&:?#/\\\\]+$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Refresh recommendations for all scenarios in a workspace.": {
+            "$ref": "./examples/Workspaces_RefreshRecommendations.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/scenarios": {
@@ -6466,6 +6466,24 @@
         "resource"
       ]
     },
+    "ScenarioEvaluationResultItem": {
+      "type": "object",
+      "description": "Model that represents a single scenario evaluation result.",
+      "properties": {
+        "scenarioName": {
+          "type": "string",
+          "description": "The name of the scenario that was evaluated."
+        },
+        "evaluationResult": {
+          "$ref": "#/definitions/RecommendationStatus",
+          "description": "The evaluation result for this scenario."
+        }
+      },
+      "required": [
+        "scenarioName",
+        "evaluationResult"
+      ]
+    },
     "ScenarioListResult": {
       "type": "object",
       "description": "Model that represents a list of scenarios and a link for pagination.",
@@ -7283,6 +7301,157 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
+    },
+    "WorkspaceEvaluation": {
+      "type": "object",
+      "description": "Model that represents the latest workspace evaluation result.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WorkspaceEvaluationProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "WorkspaceEvaluationProperties": {
+      "type": "object",
+      "description": "Model that represents the properties of the workspace evaluation.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/WorkspaceEvaluationStatus",
+          "description": "The evaluation status.",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The evaluation UTC start time.",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The evaluation UTC end time.",
+          "readOnly": true
+        },
+        "errors": {
+          "type": "array",
+          "description": "System or infrastructure errors encountered during evaluation.",
+          "items": {
+            "$ref": "#/definitions/OperationError"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "workspaceId": {
+          "type": "string",
+          "description": "The workspace ID this evaluation belongs to.",
+          "readOnly": true
+        },
+        "numScenariosToEvaluate": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of scenarios to evaluate.",
+          "readOnly": true
+        },
+        "numScenariosEvaluatedSucceeded": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of scenarios that evaluated successfully.",
+          "readOnly": true
+        },
+        "numScenariosEvaluatedFailed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of scenarios that failed evaluation.",
+          "readOnly": true
+        },
+        "numScenariosEvaluatedCancelled": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of scenarios that were cancelled during evaluation.",
+          "readOnly": true
+        },
+        "evaluationResult": {
+          "$ref": "#/definitions/RecommendationStatus",
+          "description": "The overall evaluation result.",
+          "readOnly": true
+        },
+        "results": {
+          "type": "array",
+          "description": "Per-scenario evaluation results.",
+          "items": {
+            "$ref": "#/definitions/ScenarioEvaluationResultItem"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "scenarioName"
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "workspaceId"
+      ]
+    },
+    "WorkspaceEvaluationStatus": {
+      "type": "string",
+      "description": "Enum of the workspace evaluation status.",
+      "enum": [
+        "Pending",
+        "Queued",
+        "InProgress",
+        "Succeeded",
+        "PartiallySucceeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "WorkspaceEvaluationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "The evaluation is pending and has not started."
+          },
+          {
+            "name": "Queued",
+            "value": "Queued",
+            "description": "The evaluation has been accepted and is queued for execution."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The evaluation is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The evaluation completed successfully."
+          },
+          {
+            "name": "PartiallySucceeded",
+            "value": "PartiallySucceeded",
+            "description": "The evaluation partially succeeded — some scenarios succeeded while others failed."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The evaluation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The evaluation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
     },
     "WorkspaceListResult": {
       "type": "object",
