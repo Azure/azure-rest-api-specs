@@ -184,6 +184,18 @@ namespace SearchIndexClient {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op uploadKnowledgeSourceFile is Search.KnowledgeSources.uploadFile;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op listKnowledgeSourceFiles is Search.KnowledgeSources.listFiles;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op deleteKnowledgeSourceFile is Search.KnowledgeSources.deleteFile;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   op getServiceStatistics is Search.getServiceStatistics;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -594,6 +606,14 @@ namespace KnowledgeBaseRetrievalClient {
 @@access(SearchIndexClient.deleteKnowledgeBase, Access.internal, "python");
 @@access(SearchIndexClient.createOrUpdateKnowledgeSource, Access.internal);
 @@access(SearchIndexClient.deleteKnowledgeSource, Access.internal, "python");
+@@access(SearchIndexClient.uploadKnowledgeSourceFile,
+  Access.internal,
+  "python"
+);
+@@access(SearchIndexClient.deleteKnowledgeSourceFile,
+  Access.internal,
+  "python"
+);
 
 @@clientNamespace(Search.ErrorResponse, "Azure.Search.Documents");
 @@clientNamespace(Search.ErrorResponse, "com.azure.search.documents", "java");
