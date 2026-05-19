@@ -179,7 +179,8 @@ alias JobsDiagnosticsDetectorOps = Azure.ResourceManager.Legacy.LegacyOperations
     @pattern("^[-\\w\\._\\(\\)]+$")
     detectorName: string;
   },
-  ErrorType = DefaultErrorResponse
+  ErrorType = DefaultErrorResponse,
+  ResourceName = "ContainerAppJobDetector"
 >;
 
 alias ManagedEnvironmentDetectorOps = Azure.ResourceManager.Legacy.LegacyOperations<

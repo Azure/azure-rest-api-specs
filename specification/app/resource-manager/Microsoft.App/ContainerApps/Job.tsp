@@ -223,11 +223,15 @@ interface Jobs {
     Error = DefaultErrorResponse
   >;
 
+}
+
+@armResourceOperations
+@tag("Jobs")
+@tag("Diagnostics")
+interface JobDetectors {
   /**
    * Get the list of diagnostics for a Container App Job.
    */
-  @tag("Jobs")
-  @tag("Diagnostics")
   @summary("Get the list of diagnostics for a given Container App Job.")
   listDetectors is JobsDiagnosticsDetectorOps.List<
     Diagnostics,
@@ -237,8 +241,6 @@ interface Jobs {
   /**
    * Get the diagnostics data for a Container App Job.
    */
-  @tag("Jobs")
-  @tag("Diagnostics")
   @summary("Get the diagnostics data for a given Container App Job.")
   getDetector is JobsDiagnosticsDetectorOps.Read<
     Diagnostics,

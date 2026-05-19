@@ -89,28 +89,6 @@ model CSharpDiagnosticsDefinition
   score?: float32;
 }
 
-namespace Microsoft.App {
-  /**
-   * C# compatibility diagnostics data for a Container Apps Job.
-   */
-  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Preserve the previous C# job diagnostics resource hierarchy during MPG migration"
-  model JobDiagnostic
-    is Azure.ResourceManager.ProxyResource<DiagnosticsProperties> {
-    /** Name of the detector. */
-    @TypeSpec.Http.path
-    @TypeSpec.Rest.segment("detectors")
-    @key
-    @visibility(Lifecycle.Read)
-    detectorName: string;
-  }
-
-  /**
-   * C# compatibility collection of diagnostics for a Container Apps Job.
-   */
-  model JobDiagnosticsCollection is Azure.Core.Page<JobDiagnostic>;
-
-}
-
 /**
  * C# compatibility usage unit extensible enum.
  */
@@ -168,8 +146,6 @@ union OpenIdConnectClientCredentialMethod {
 
 @@alternateType(ContainerAppProperties.eventStreamEndpoint, url, "csharp");
 
-@@alternateType(JobDiagnostic, Diagnostics, "csharp");
-
 @@alternateType(ManagedEnvironmentProperties.staticIp, ipV4Address, "csharp");
 
 @@alternateType(RegistryInfo.registryUrl, url, "csharp");
@@ -226,12 +202,6 @@ union OpenIdConnectClientCredentialMethod {
   "ContainerAppManagedEnvironmentDetectors",
   "csharp"
 );
-
-// Keep Container Apps Job diagnostics operations grouped with the compatibility
-// job detector resource type declared above.
-@@clientLocation(Jobs.getDetector, "ContainerAppJobDetectors", "csharp");
-
-@@clientLocation(Jobs.listDetectors, "ContainerAppJobDetectors", "csharp");
 
 // The Certificates interface contains operations for both connected
 // environments and managed environments. Split them into the matching C# parent
@@ -906,14 +876,6 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(Jobs, "ContainerAppJobs", "csharp");
 
-@@clientName(JobDiagnostic, "ContainerAppJobDetector", "csharp");
-
-@@clientName(
-  JobDiagnosticsCollection,
-  "ContainerAppJobDetectorCollection",
-  "csharp"
-);
-
 @@clientName(JobConfiguration, "ContainerAppJobConfiguration", "csharp");
 
 @@clientName(
@@ -925,6 +887,8 @@ union OpenIdConnectClientCredentialMethod {
 @@clientName(JobExecution, "ContainerAppJobExecution", "csharp");
 
 @@clientName(JobExecutionBase, "ContainerAppJobExecutionBase", "csharp");
+
+@@clientName(JobDetectors, "ContainerAppJobDetectors", "csharp");
 
 @@clientName(
   JobExecutionTemplate,
