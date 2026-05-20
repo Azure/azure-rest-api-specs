@@ -42,11 +42,14 @@ interface WorkloadGroups {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     WorkloadGroup,
-    Response = ArmResourceUpdatedResponse<WorkloadGroup> | ArmResourceCreatedResponse<
-      WorkloadGroup,
-      ArmLroLocationHeader<FinalResult = WorkloadGroup> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<WorkloadGroup>
+      | ArmResourceCreatedResponse<
+          WorkloadGroup,
+          ArmLroLocationHeader<FinalResult = WorkloadGroup> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -55,7 +58,10 @@ interface WorkloadGroups {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     WorkloadGroup,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -66,6 +72,7 @@ interface WorkloadGroups {
 
 @@doc(WorkloadGroup.name, "The name of the workload group.");
 @@doc(WorkloadGroup.properties, "Resource properties.");
-@@doc(WorkloadGroups.createOrUpdate::parameters.resource,
+@@doc(
+  WorkloadGroups.createOrUpdate::parameters.resource,
   "The requested workload group state."
 );

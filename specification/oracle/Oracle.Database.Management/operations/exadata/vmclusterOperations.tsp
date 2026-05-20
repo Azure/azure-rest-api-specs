@@ -48,32 +48,38 @@ interface CloudVmClusters
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(CloudVmClusters.listBySubscription,
+@@Autorest.example(
+  CloudVmClusters.listBySubscription,
   "./examples/vmClusters_listBySubscription.json",
   "List VM Clusters by subscription"
 );
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(CloudVmClusters.createOrUpdate,
+@@Autorest.example(
+  CloudVmClusters.createOrUpdate,
   "./examples/vmClusters_create.json",
   "Create VM Cluster"
 );
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(CloudVmClusters.get,
+@@Autorest.example(
+  CloudVmClusters.get,
   "./examples/vmClusters_get.json",
   "Get VM Cluster"
 );
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(CloudVmClusters.update,
+@@Autorest.example(
+  CloudVmClusters.update,
   "./examples/vmClusters_patch.json",
   "Patch VM Cluster"
 );
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(CloudVmClusters.delete,
+@@Autorest.example(
+  CloudVmClusters.delete,
   "./examples/vmClusters_delete.json",
   "Delete VM Cluster"
 );
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(CloudVmClusters.listByResourceGroup,
+@@Autorest.example(
+  CloudVmClusters.listByResourceGroup,
   "./examples/vmClusters_listByResourceGroup.json",
   "List VM Clusters by resource group"
 );

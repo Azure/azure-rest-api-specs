@@ -40,9 +40,11 @@ interface PrivateLinkResources {
   listGroupIds is ArmResourceListByParent<PrivateLinkResource>;
 }
 
-@@doc(PrivateLinkResource.name,
+@@doc(
+  PrivateLinkResource.name,
   "Name of the Private Link sub-resource. The only supported sub-resource is \"namespace\""
 );
-@@doc(PrivateLinkResource.properties,
+@@doc(
+  PrivateLinkResource.properties,
   "Represents properties of Private Link Resource."
 );

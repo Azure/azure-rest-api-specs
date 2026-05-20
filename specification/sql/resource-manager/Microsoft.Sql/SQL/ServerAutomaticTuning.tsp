@@ -51,6 +51,7 @@ interface ServerAutomaticTunings {
 
 @@doc(ServerAutomaticTuning.name, "");
 @@doc(ServerAutomaticTuning.properties, "Resource properties.");
-@@doc(ServerAutomaticTunings.update::parameters.properties,
+@@doc(
+  ServerAutomaticTunings.update::parameters.properties,
   "The requested automatic tuning resource state."
 );

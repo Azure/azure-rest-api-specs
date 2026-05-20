@@ -49,11 +49,14 @@ interface ManagedInstanceAzureADOnlyAuthentications {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ManagedInstanceAzureADOnlyAuthentication,
-    Response = ArmResourceUpdatedResponse<ManagedInstanceAzureADOnlyAuthentication> | ArmResourceCreatedResponse<
-      ManagedInstanceAzureADOnlyAuthentication,
-      ArmLroLocationHeader<FinalResult = ManagedInstanceAzureADOnlyAuthentication> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<ManagedInstanceAzureADOnlyAuthentication>
+      | ArmResourceCreatedResponse<
+          ManagedInstanceAzureADOnlyAuthentication,
+          ArmLroLocationHeader<FinalResult = ManagedInstanceAzureADOnlyAuthentication> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -62,7 +65,10 @@ interface ManagedInstanceAzureADOnlyAuthentications {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ManagedInstanceAzureADOnlyAuthentication,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -74,12 +80,15 @@ interface ManagedInstanceAzureADOnlyAuthentications {
   >;
 }
 
-@@doc(ManagedInstanceAzureADOnlyAuthentication.name,
+@@doc(
+  ManagedInstanceAzureADOnlyAuthentication.name,
   "The name of server azure active directory only authentication."
 );
-@@doc(ManagedInstanceAzureADOnlyAuthentication.properties,
+@@doc(
+  ManagedInstanceAzureADOnlyAuthentication.properties,
   "Resource properties."
 );
-@@doc(ManagedInstanceAzureADOnlyAuthentications.createOrUpdate::parameters.resource,
+@@doc(
+  ManagedInstanceAzureADOnlyAuthentications.createOrUpdate::parameters.resource,
   "The required parameters for creating or updating an Active Directory only authentication property."
 );

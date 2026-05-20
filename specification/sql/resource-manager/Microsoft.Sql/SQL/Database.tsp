@@ -100,10 +100,13 @@ interface Databases {
   @Azure.ResourceManager.Legacy.feature(Features.Databases)
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Database,
-    Response = ArmResourceUpdatedResponse<Database> | ArmResourceCreatedResponse<
-      Database,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = Database>
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<Database>
+      | ArmResourceCreatedResponse<
+          Database,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = Database>
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -124,7 +127,10 @@ interface Databases {
   @Azure.ResourceManager.Legacy.feature(Features.Databases)
   delete is ArmResourceDeleteWithoutOkAsync<
     Database,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -405,10 +411,13 @@ interface Databases {
     Database,
     Request = CreateDatabaseRestorePointDefinition,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Database>,
-    Response = ArmResponse<RestorePoint> | ArmResourceCreatedResponse<
-      RestorePoint,
-      LroHeaders = ArmLroLocationHeader<FinalResult = RestorePoint>
-    > | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = RestorePoint>>
+    Response =
+      | ArmResponse<RestorePoint>
+      | ArmResourceCreatedResponse<
+          RestorePoint,
+          LroHeaders = ArmLroLocationHeader<FinalResult = RestorePoint>
+        >
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = RestorePoint>>
   >;
 
   /**
@@ -545,22 +554,28 @@ interface Databases {
 
 @@doc(Database.name, "The name of the database.");
 @@doc(Database.properties, "Resource properties.");
-@@doc(Databases.createOrUpdate::parameters.resource,
+@@doc(
+  Databases.createOrUpdate::parameters.resource,
   "The requested database resource state."
 );
-@@doc(Databases.update::parameters.properties,
+@@doc(
+  Databases.update::parameters.properties,
   "The requested database resource state."
 );
-@@doc(Databases.export::parameters.body,
+@@doc(
+  Databases.export::parameters.body,
   "The database export request parameters."
 );
-@@doc(Databases.importDatabase::parameters.body,
+@@doc(
+  Databases.importDatabase::parameters.body,
   "The database import request parameters."
 );
-@@doc(Databases.rename::parameters.body,
+@@doc(
+  Databases.rename::parameters.body,
   "The resource move definition for renaming this database."
 );
-@@doc(Databases.create::parameters.body,
+@@doc(
+  Databases.create::parameters.body,
   "The definition for creating the restore point of this database."
 );
 @@doc(Databases.sensitivityLabelsUpdate::parameters.body, "");

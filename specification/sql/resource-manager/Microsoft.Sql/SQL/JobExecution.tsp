@@ -75,11 +75,14 @@ interface JobExecutions {
   createOrUpdate is JobExecutionOps.CreateOrUpdateAsync<
     JobExecution,
     Request = void,
-    Response = ArmResourceUpdatedResponse<JobExecution> | ArmResourceCreatedResponse<
-      JobExecution,
-      ArmLroLocationHeader<FinalResult = JobExecution> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<JobExecution>
+      | ArmResourceCreatedResponse<
+          JobExecution,
+          ArmLroLocationHeader<FinalResult = JobExecution> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**

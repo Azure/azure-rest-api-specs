@@ -207,6 +207,7 @@ interface AnalysisDefinitionOperationGroup {
 }
 
 @@doc(AnalysisDefinition.name, "Analysis Name");
-@@doc(AnalysisDefinition.properties,
+@@doc(
+  AnalysisDefinition.properties,
   "AnalysisDefinition resource specific properties"
 );

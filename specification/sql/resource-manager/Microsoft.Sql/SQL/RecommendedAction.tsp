@@ -71,6 +71,7 @@ interface RecommendedActions {
 
 @@doc(RecommendedAction.name, "The name of Database Recommended Action.");
 @@doc(RecommendedAction.properties, "Resource properties.");
-@@doc(RecommendedActions.update::parameters.properties,
+@@doc(
+  RecommendedActions.update::parameters.properties,
   "The requested recommended action resource state."
 );

@@ -50,8 +50,10 @@ interface ServerAdvancedThreatProtections {
   @tag("ServerAdvancedThreatProtectionSettings")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ServerAdvancedThreatProtection,
-    Response = ArmResourceUpdatedResponse<ServerAdvancedThreatProtection> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ServerAdvancedThreatProtection> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<ServerAdvancedThreatProtection>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ServerAdvancedThreatProtection> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -64,10 +66,12 @@ interface ServerAdvancedThreatProtections {
   >;
 }
 
-@@doc(ServerAdvancedThreatProtection.name,
+@@doc(
+  ServerAdvancedThreatProtection.name,
   "The name of the Advanced Threat Protection state."
 );
 @@doc(ServerAdvancedThreatProtection.properties, "Resource properties.");
-@@doc(ServerAdvancedThreatProtections.createOrUpdate::parameters.resource,
+@@doc(
+  ServerAdvancedThreatProtections.createOrUpdate::parameters.resource,
   "The server Advanced Threat Protection state."
 );

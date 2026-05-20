@@ -65,11 +65,14 @@ interface Servers {
   @Azure.ResourceManager.Legacy.feature(Features.Servers)
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Server,
-    Response = ArmResourceUpdatedResponse<Server> | ArmResourceCreatedResponse<
-      Server,
-      ArmLroLocationHeader<FinalResult = Server> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<Server>
+      | ArmResourceCreatedResponse<
+          Server,
+          ArmLroLocationHeader<FinalResult = Server> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -90,7 +93,10 @@ interface Servers {
   @Azure.ResourceManager.Legacy.feature(Features.Servers)
   delete is ArmResourceDeleteWithoutOkAsync<
     Server,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -246,16 +252,20 @@ interface Servers {
 
 @@doc(Server.name, "The name of the server.");
 @@doc(Server.properties, "Resource properties.");
-@@doc(Servers.createOrUpdate::parameters.resource,
+@@doc(
+  Servers.createOrUpdate::parameters.resource,
   "The requested server resource state."
 );
-@@doc(Servers.update::parameters.properties,
+@@doc(
+  Servers.update::parameters.properties,
   "The requested server resource state."
 );
 @@doc(Servers.replace::parameters.body, "");
-@@doc(Servers.importDatabase::parameters.body,
+@@doc(
+  Servers.importDatabase::parameters.body,
   "The database import request parameters."
 );
-@@doc(Servers.create::parameters.body,
+@@doc(
+  Servers.create::parameters.body,
   "The requested TDE certificate to be created or updated."
 );

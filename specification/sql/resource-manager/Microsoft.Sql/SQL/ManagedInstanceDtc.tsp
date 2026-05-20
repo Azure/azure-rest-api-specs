@@ -56,6 +56,7 @@ interface ManagedInstanceDtcs {
 
 @@doc(ManagedInstanceDtc.name, "The name of the managed instance DTC.");
 @@doc(ManagedInstanceDtc.properties, "Resource properties.");
-@@doc(ManagedInstanceDtcs.createOrUpdate::parameters.resource,
+@@doc(
+  ManagedInstanceDtcs.createOrUpdate::parameters.resource,
   "Managed instance DTC settings."
 );

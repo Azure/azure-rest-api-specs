@@ -47,8 +47,10 @@ interface ManagedInstanceLongTermRetentionPolicies {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ManagedInstanceLongTermRetentionPolicy,
-    Response = ArmResourceUpdatedResponse<ManagedInstanceLongTermRetentionPolicy> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedInstanceLongTermRetentionPolicy> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<ManagedInstanceLongTermRetentionPolicy>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedInstanceLongTermRetentionPolicy> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -57,7 +59,9 @@ interface ManagedInstanceLongTermRetentionPolicies {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ManagedInstanceLongTermRetentionPolicy,
-    Response = ArmResponse<ManagedInstanceLongTermRetentionPolicy> | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedInstanceLongTermRetentionPolicy>>
+    Response =
+      | ArmResponse<ManagedInstanceLongTermRetentionPolicy>
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedInstanceLongTermRetentionPolicy>>
   >;
 
   /**
@@ -66,12 +70,15 @@ interface ManagedInstanceLongTermRetentionPolicies {
   listByDatabase is ArmResourceListByParent<ManagedInstanceLongTermRetentionPolicy>;
 }
 
-@@doc(ManagedInstanceLongTermRetentionPolicy.name,
+@@doc(
+  ManagedInstanceLongTermRetentionPolicy.name,
   "The policy name. Should always be Default."
 );
-@@doc(ManagedInstanceLongTermRetentionPolicy.properties,
+@@doc(
+  ManagedInstanceLongTermRetentionPolicy.properties,
   "Resource properties."
 );
-@@doc(ManagedInstanceLongTermRetentionPolicies.createOrUpdate::parameters.resource,
+@@doc(
+  ManagedInstanceLongTermRetentionPolicies.createOrUpdate::parameters.resource,
   "The long term retention policy info."
 );

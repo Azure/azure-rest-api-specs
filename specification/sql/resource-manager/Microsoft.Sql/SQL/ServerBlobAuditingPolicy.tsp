@@ -60,8 +60,10 @@ interface ServerBlobAuditingPolicies {
   @tag("BlobAuditing")
   createOrUpdate is ServerBlobAuditingPoliciesOps.CreateOrUpdateAsync<
     ServerBlobAuditingPolicy,
-    Response = ArmResourceUpdatedResponse<ServerBlobAuditingPolicy> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ServerBlobAuditingPolicy> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<ServerBlobAuditingPolicy>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ServerBlobAuditingPolicy> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -73,7 +75,8 @@ interface ServerBlobAuditingPolicies {
 
 @@doc(ServerBlobAuditingPolicy.name, "");
 @@doc(ServerBlobAuditingPolicy.properties, "Resource properties.");
-@@doc(ServerBlobAuditingPolicies.createOrUpdate::parameters.resource,
+@@doc(
+  ServerBlobAuditingPolicies.createOrUpdate::parameters.resource,
   "Properties of blob auditing policy"
 );
 

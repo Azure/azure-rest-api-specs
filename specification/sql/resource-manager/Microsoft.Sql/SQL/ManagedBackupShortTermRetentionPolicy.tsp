@@ -71,8 +71,10 @@ interface ManagedBackupShortTermRetentionPolicies {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ManagedBackupShortTermRetentionPolicyOps.CreateOrUpdateAsync<
     ManagedBackupShortTermRetentionPolicy,
-    Response = ArmResourceUpdatedResponse<ManagedBackupShortTermRetentionPolicy> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedBackupShortTermRetentionPolicy> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<ManagedBackupShortTermRetentionPolicy>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedBackupShortTermRetentionPolicy> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -135,8 +137,10 @@ interface ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicyOps.CreateOrUpdateAsync<
     ManagedBackupShortTermRetentionPolicy,
-    Response = ArmResourceUpdatedResponse<ManagedBackupShortTermRetentionPolicy> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedBackupShortTermRetentionPolicy> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<ManagedBackupShortTermRetentionPolicy>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedBackupShortTermRetentionPolicy> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -156,15 +160,19 @@ interface ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies {
 
 @@doc(ManagedBackupShortTermRetentionPolicy.name, "The policy name.");
 @@doc(ManagedBackupShortTermRetentionPolicy.properties, "Resource properties.");
-@@doc(ManagedBackupShortTermRetentionPolicies.createOrUpdate::parameters.resource,
+@@doc(
+  ManagedBackupShortTermRetentionPolicies.createOrUpdate::parameters.resource,
   "The short term retention policy info."
 );
-@@doc(ManagedBackupShortTermRetentionPolicies.update::parameters.properties,
+@@doc(
+  ManagedBackupShortTermRetentionPolicies.update::parameters.properties,
   "The short term retention policy info."
 );
-@@doc(ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies.createOrUpdate::parameters.resource,
+@@doc(
+  ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies.createOrUpdate::parameters.resource,
   "The short term retention policy info."
 );
-@@doc(ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies.update::parameters.properties,
+@@doc(
+  ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies.update::parameters.properties,
   "The short term retention policy info."
 );

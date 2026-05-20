@@ -50,8 +50,10 @@ interface ImportExportExtensionsOperationResults {
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     ImportExportExtensionsOperationResult,
     Request = DatabaseExtensions,
-    Response = ArmResourceUpdatedResponse<ImportExportExtensionsOperationResult> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ImportExportExtensionsOperationResult> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<ImportExportExtensionsOperationResult>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ImportExportExtensionsOperationResult> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -66,6 +68,7 @@ interface ImportExportExtensionsOperationResults {
 
 @@doc(ImportExportExtensionsOperationResult.name, "");
 @@doc(ImportExportExtensionsOperationResult.properties, "Resource properties.");
-@@doc(ImportExportExtensionsOperationResults.createOrUpdate::parameters.resource,
+@@doc(
+  ImportExportExtensionsOperationResults.createOrUpdate::parameters.resource,
   "The database import request parameters."
 );
