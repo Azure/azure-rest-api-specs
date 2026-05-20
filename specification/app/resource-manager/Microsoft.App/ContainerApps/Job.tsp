@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-autorest";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
@@ -9,6 +10,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Autorest;
 
 namespace Microsoft.App;
 /**
@@ -232,7 +234,13 @@ interface JobDetectors {
   /**
    * Get the list of diagnostics for a Container App Job.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserve the existing OpenAPI operation id during MPG migration."
   @summary("Get the list of diagnostics for a given Container App Job.")
+  @operationId("Jobs_ListDetectors")
+  @Autorest.example(
+    "./examples/Job_ListDetectors.json",
+    "Get the list of available diagnostic data for a Container App Job"
+  )
   listDetectors is JobsDiagnosticsDetectorOps.List<
     Diagnostics,
     Response = ArmResponse<DiagnosticsCollection>
@@ -241,7 +249,13 @@ interface JobDetectors {
   /**
    * Get the diagnostics data for a Container App Job.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserve the existing OpenAPI operation id during MPG migration."
   @summary("Get the diagnostics data for a given Container App Job.")
+  @operationId("Jobs_GetDetector")
+  @Autorest.example(
+    "./examples/Job_GetDetector.json",
+    "Get diagnostic data for a Container App Job"
+  )
   getDetector is JobsDiagnosticsDetectorOps.Read<
     Diagnostics,
     Response = ArmResponse<Diagnostics>
@@ -255,7 +269,7 @@ alias JobDetectorPropertyOps = Azure.ResourceManager.Legacy.LegacyOperations<
     ...ResourceGroupParameter;
     ...Azure.ResourceManager.Legacy.Provider;
 
-    /** Name of the Container App Job. */
+    /** Job Name */
     @path
     @segment("jobs")
     @key

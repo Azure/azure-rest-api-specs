@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-autorest";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
@@ -10,6 +11,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Autorest;
 
 namespace Microsoft.App;
 
@@ -131,7 +133,13 @@ interface ContainerAppDetectors {
   /**
    * Get the list of diagnostics for a given Container App.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserve the existing OpenAPI operation id during MPG migration."
   @summary("Get the list of diagnostics for a given Container App.")
+  @operationId("ContainerAppsDiagnostics_ListDetectors")
+  @Autorest.example(
+    "./examples/ContainerAppsDiagnostics_List.json",
+    "Get the list of available diagnostics for a given Container App"
+  )
   listDetectors is ContainerAppsDetectorOps.List<
     Diagnostics,
     Response = ArmResponse<DiagnosticsCollection>
@@ -140,7 +148,13 @@ interface ContainerAppDetectors {
   /**
    * Get a diagnostics result of a Container App.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserve the existing OpenAPI operation id during MPG migration."
   @summary("Get a diagnostics result of a Container App.")
+  @operationId("ContainerAppsDiagnostics_GetDetector")
+  @Autorest.example(
+    "./examples/ContainerAppsDiagnostics_Get.json",
+    "Get Container App's diagnostics info"
+  )
   getDetector is ContainerAppsDetectorOps.Read<
     Diagnostics,
     Response = ArmResponse<Diagnostics>
