@@ -1099,6 +1099,12 @@ model CSharpDiagnosticsDefinition
 
 @@clientName(TokenStore.enabled, "IsEnabled", "csharp");
 
+@@clientName(
+  BlobStorageTokenStore.sasUrlSettingName,
+  "AzureBlobStorageSasUrlSettingName",
+  "csharp"
+);
+
 @@clientName(TrafficWeight, "ContainerAppRevisionTrafficWeight", "csharp");
 
 @@clientName(TrafficWeight.latestRevision, "IsLatestRevision", "csharp");
