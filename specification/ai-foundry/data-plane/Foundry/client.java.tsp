@@ -111,11 +111,41 @@ namespace Azure.AI.Projects;
 @@clientName(Models.getCredentials, "getModelCredentials");
 
 //Evaluator generation jobs
-@@clientName(EvaluatorGenerationJobs.create, "createGenerationJob");
-@@clientName(EvaluatorGenerationJobs.get, "getGenerationJob");
-@@clientName(EvaluatorGenerationJobs.list, "listGenerationJobs");
-@@clientName(EvaluatorGenerationJobs.cancel, "cancelGenerationJob");
-@@clientName(EvaluatorGenerationJobs.delete, "deleteGenerationJob");
+@@clientName(EvaluatorGenerationJobs.create, "createEvaluatorGenerationJob");
+@@clientName(EvaluatorGenerationJobs.get, "getEvaluatorGenerationJob");
+@@clientName(EvaluatorGenerationJobs.list, "listEvaluatorGenerationJobs");
+@@clientName(EvaluatorGenerationJobs.cancel, "cancelEvaluatorGenerationJob");
+@@clientName(EvaluatorGenerationJobs.delete, "deleteEvaluatorGenerationJob");
+
+// Evaluation Suite operations
+@@clientName(EvaluationSuites.listVersions, "listEvaluationSuiteVersions");
+@@clientName(EvaluationSuites.listLatest, "listEvaluationSuites");
+@@clientName(EvaluationSuites.getVersion, "getEvaluationSuite");
+@@clientName(EvaluationSuites.deleteVersion, "deleteEvaluationSuite");
+@@clientName(EvaluationSuites.createOrUpdateVersion,
+  "createOrUpdateEvaluationSuite"
+);
+@@clientName(EvaluationSuites.createEvaluationSuiteVersion,
+  "createEvaluationSuite"
+);
+@@clientName(EvaluationSuites.run, "runEvaluationSuite");
+
+// Evaluation Suite Generation Jobs
+@@clientName(EvaluationSuiteGenerationJobs.create,
+  "createEvaluationSuiteGenerationJob"
+);
+@@clientName(EvaluationSuiteGenerationJobs.get,
+  "getEvaluationSuiteGenerationJob"
+);
+@@clientName(EvaluationSuiteGenerationJobs.list,
+  "listEvaluationSuiteGenerationJobs"
+);
+@@clientName(EvaluationSuiteGenerationJobs.cancel,
+  "cancelEvaluationSuiteGenerationJob"
+);
+@@clientName(EvaluationSuiteGenerationJobs.delete,
+  "deleteEvaluationSuiteGenerationJob"
+);
 
 // --------------------------------------------------------------------------------
 // Renames - models
@@ -253,3 +283,28 @@ model TimeZoneType {}
   "Downloads a skill package as a ZIP archive containing {@code SKILL.md}. Returns the original uploaded archive for skills created via {@code createSkillFromPackage}; materializes a ZIP from stored instructions for skills created via {@code createSkill}.",
   DocumentationMode.replace
 );
+
+// --------------------------------------------------------------------------------
+// Relocate EvaluatorGenerationJobs, EvaluationSuites, and
+// EvaluationSuiteGenerationJobs onto the Evaluators sub-client
+// --------------------------------------------------------------------------------
+
+@@clientLocation(EvaluatorGenerationJobs.create, Evaluators);
+@@clientLocation(EvaluatorGenerationJobs.get, Evaluators);
+@@clientLocation(EvaluatorGenerationJobs.list, Evaluators);
+@@clientLocation(EvaluatorGenerationJobs.cancel, Evaluators);
+@@clientLocation(EvaluatorGenerationJobs.delete, Evaluators);
+
+@@clientLocation(EvaluationSuites.listVersions, Evaluators);
+@@clientLocation(EvaluationSuites.listLatest, Evaluators);
+@@clientLocation(EvaluationSuites.getVersion, Evaluators);
+@@clientLocation(EvaluationSuites.deleteVersion, Evaluators);
+@@clientLocation(EvaluationSuites.createOrUpdateVersion, Evaluators);
+@@clientLocation(EvaluationSuites.createEvaluationSuiteVersion, Evaluators);
+@@clientLocation(EvaluationSuites.run, Evaluators);
+
+@@clientLocation(EvaluationSuiteGenerationJobs.create, Evaluators);
+@@clientLocation(EvaluationSuiteGenerationJobs.get, Evaluators);
+@@clientLocation(EvaluationSuiteGenerationJobs.list, Evaluators);
+@@clientLocation(EvaluationSuiteGenerationJobs.cancel, Evaluators);
+@@clientLocation(EvaluationSuiteGenerationJobs.delete, Evaluators);
