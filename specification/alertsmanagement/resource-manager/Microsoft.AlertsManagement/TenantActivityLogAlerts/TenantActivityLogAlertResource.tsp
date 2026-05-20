@@ -13,18 +13,24 @@ namespace Microsoft.AlertsManagement;
 /**
  * A Tenant Activity Log Alert rule resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TenantActivityLogAlertResource
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
-    AlertRuleProperties,
-    false
-  > {
+  is Azure.ResourceManager.ProxyResource<AlertRuleProperties, false> {
   ...ResourceNameParameter<
     Resource = TenantActivityLogAlertResource,
     KeyName = "alertRuleName",
     SegmentName = "tenantActivityLogAlerts",
     NamePattern = "^[-\\w\\._\\(\\)]+$"
   >;
+
+  /** The location of the resource. Since Azure Activity Log Alerts is a global service, the location of the rules should always be 'global'. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: string = "global";
+
+  /** The tags of the resource. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
 }
 
 @armResourceOperations
