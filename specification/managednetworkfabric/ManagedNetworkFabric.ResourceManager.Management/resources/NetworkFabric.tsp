@@ -9,7 +9,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 @doc("The Network Fabric resource definition.")
-model NetworkFabric is Azure.ResourceManager.TrackedResource<NetworkFabricProperties> {
+model NetworkFabric is Azure.ResourceManager.TrackedResource<NetworkFabricProperties, false> {
   @doc("Name of the Network Fabric.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -24,6 +24,7 @@ model NetworkFabric is Azure.ResourceManager.TrackedResource<NetworkFabricProper
   identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
+@@doc(NetworkFabric.properties, "The NetworkFabric Properties");
 @armResourceOperations
 interface NetworkFabrics {
   @doc("Get Network Fabric resource details.")

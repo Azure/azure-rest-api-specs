@@ -9,7 +9,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 @doc("The Internet Gateway resource definition.")
-model InternetGateway is Azure.ResourceManager.TrackedResource<InternetGatewayProperties> {
+model InternetGateway is Azure.ResourceManager.TrackedResource<InternetGatewayProperties, false> {
   @doc("Name of the Internet Gateway.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -19,6 +19,7 @@ model InternetGateway is Azure.ResourceManager.TrackedResource<InternetGatewayPr
   name: string;
 }
 
+@@doc(InternetGateway.properties, "The Internet Gateway Properties");
 @armResourceOperations
 interface InternetGateways {
   @doc("Implements Gateway GET method.")

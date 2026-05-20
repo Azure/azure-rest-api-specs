@@ -10,7 +10,7 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 @doc("The NetworkMonitor resource definition.")
 @added(Versions.v2024_06_15_preview)
-model NetworkMonitor is Azure.ResourceManager.TrackedResource<NetworkMonitorProperties> {
+model NetworkMonitor is Azure.ResourceManager.TrackedResource<NetworkMonitorProperties, false> {
   @doc("Name of the Network Monitor.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -20,6 +20,7 @@ model NetworkMonitor is Azure.ResourceManager.TrackedResource<NetworkMonitorProp
   name: string;
 }
 
+@@doc(NetworkMonitor.properties, "The NetworkMonitor properties.");
 @armResourceOperations
 @added(Versions.v2024_06_15_preview)
 interface NetworkMonitors {

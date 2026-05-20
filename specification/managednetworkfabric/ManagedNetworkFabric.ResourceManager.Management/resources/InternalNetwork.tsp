@@ -11,7 +11,7 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 @doc("Defines the Internal Network resource.")
 @parentResource(L3IsolationDomain)
-model InternalNetwork is Azure.ResourceManager.ProxyResource<InternalNetworkProperties> {
+model InternalNetwork is Azure.ResourceManager.ProxyResource<InternalNetworkProperties, false> {
   @doc("Name of the Internal Network.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -21,6 +21,7 @@ model InternalNetwork is Azure.ResourceManager.ProxyResource<InternalNetworkProp
   name: string;
 }
 
+@@doc(InternalNetwork.properties, "The Internal Network Properties");
 @armResourceOperations
 interface InternalNetworks {
   @doc("Gets a InternalNetworks.")

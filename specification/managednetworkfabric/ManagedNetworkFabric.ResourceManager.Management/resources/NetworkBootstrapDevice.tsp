@@ -9,7 +9,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance is required here to maintain compatibility with existing API structure"
 @doc("The Network Bootstrap Device resource definition.")
-model NetworkBootstrapDevice is Azure.ResourceManager.TrackedResource<NetworkBootstrapDeviceProperties> {
+model NetworkBootstrapDevice is Azure.ResourceManager.TrackedResource<NetworkBootstrapDeviceProperties, false> {
   @doc("Name of the Network Bootstrap Device.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -22,6 +22,7 @@ model NetworkBootstrapDevice is Azure.ResourceManager.TrackedResource<NetworkBoo
   identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
+@@doc(NetworkBootstrapDevice.properties, "The NetworkBootstrapDevice properties");
 @armResourceOperations
 @added(Versions.v2025_07_15)
 interface NetworkBootstrapDevices {

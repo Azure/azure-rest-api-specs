@@ -12,7 +12,7 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 @doc("The Network To Network Interconnect resource definition.")
 @parentResource(NetworkFabric)
-model NetworkToNetworkInterconnect is Azure.ResourceManager.ProxyResource<NetworkToNetworkInterconnectProperties> {
+model NetworkToNetworkInterconnect is Azure.ResourceManager.ProxyResource<NetworkToNetworkInterconnectProperties, false> {
   @doc("Name of the Network to Network Interconnect.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -22,6 +22,7 @@ model NetworkToNetworkInterconnect is Azure.ResourceManager.ProxyResource<Networ
   name: string;
 }
 
+@@doc(NetworkToNetworkInterconnect.properties, "The NetworkToNetworkInterconnect Properties");
 @armResourceOperations
 interface NetworkToNetworkInterconnects {
   @doc("Implements NetworkToNetworkInterconnects GET method.")

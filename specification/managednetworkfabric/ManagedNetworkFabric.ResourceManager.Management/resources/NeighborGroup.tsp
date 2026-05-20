@@ -9,7 +9,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 @doc("Defines the Neighbor Group.")
-model NeighborGroup is Azure.ResourceManager.TrackedResource<NeighborGroupProperties> {
+model NeighborGroup is Azure.ResourceManager.TrackedResource<NeighborGroupProperties, false> {
   @doc("Name of the Neighbor Group.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -23,6 +23,7 @@ model NeighborGroup is Azure.ResourceManager.TrackedResource<NeighborGroupProper
   identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
+@@doc(NeighborGroup.properties, "The NeighborGroup Properties");
 @armResourceOperations
 interface NeighborGroups {
   @doc("Gets the Neighbor Group.")

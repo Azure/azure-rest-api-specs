@@ -9,7 +9,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 @doc("The RoutePolicy resource definition.")
-model RoutePolicy is Azure.ResourceManager.TrackedResource<RoutePolicyProperties> {
+model RoutePolicy is Azure.ResourceManager.TrackedResource<RoutePolicyProperties, false> {
   @doc("Name of the Route Policy.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -19,6 +19,7 @@ model RoutePolicy is Azure.ResourceManager.TrackedResource<RoutePolicyProperties
   name: string;
 }
 
+@@doc(RoutePolicy.properties, "The RoutePolicy properties");
 @armResourceOperations
 interface RoutePolicies {
   @doc("Implements Route Policy GET method.")

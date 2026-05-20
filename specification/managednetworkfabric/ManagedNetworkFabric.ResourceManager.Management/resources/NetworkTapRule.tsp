@@ -7,7 +7,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 @doc("The NetworkTapRule resource definition.")
-model NetworkTapRule is Azure.ResourceManager.TrackedResource<NetworkTapRuleProperties> {
+model NetworkTapRule is Azure.ResourceManager.TrackedResource<NetworkTapRuleProperties, false> {
   @doc("Name of the Network Tap Rule.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -21,6 +21,7 @@ model NetworkTapRule is Azure.ResourceManager.TrackedResource<NetworkTapRuleProp
   identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
+@@doc(NetworkTapRule.properties, "The NetworkTapRule Properties");
 @armResourceOperations
 interface NetworkTapRules {
   @doc("Get Network Tap Rule resource details.")

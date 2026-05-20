@@ -10,7 +10,7 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 @doc("Defines the NetworkInterface resource.")
 @parentResource(NetworkDevice)
-model NetworkInterface is Azure.ResourceManager.ProxyResource<NetworkInterfaceProperties> {
+model NetworkInterface is Azure.ResourceManager.ProxyResource<NetworkInterfaceProperties, false> {
   @doc("Name of the Network Interface.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -24,6 +24,7 @@ model NetworkInterface is Azure.ResourceManager.ProxyResource<NetworkInterfacePr
   identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
+@@doc(NetworkInterface.properties, "The NetworkInterface properties");
 @armResourceOperations
 interface NetworkInterfaces {
   @doc("Get the Network Interface resource details.")

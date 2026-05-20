@@ -10,7 +10,7 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 @doc("The NetworkDeviceSku resource definition.")
 @subscriptionResource
-model NetworkDeviceSku is Azure.ResourceManager.ProxyResource<NetworkDeviceSkuProperties> {
+model NetworkDeviceSku is Azure.ResourceManager.ProxyResource<NetworkDeviceSkuProperties, false> {
   @doc("Name of the Network Device SKU.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -20,6 +20,7 @@ model NetworkDeviceSku is Azure.ResourceManager.ProxyResource<NetworkDeviceSkuPr
   name: string;
 }
 
+@@doc(NetworkDeviceSku.properties, "The Network Device SKU properties.");
 @armResourceOperations
 interface NetworkDeviceSkus {
   @doc("Get a Network Device SKU details.")
