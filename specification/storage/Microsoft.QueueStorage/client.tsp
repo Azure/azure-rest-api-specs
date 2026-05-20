@@ -57,6 +57,8 @@ interface QueueClient extends Queue {}
 @@scope(Service.getUserDelegationKey, "!rust");
 
 // Go customizations
+@@access(StorageErrorCode, Access.public, "go");
+@@usage(StorageErrorCode, Usage.output, "go");
 /**
  * List wrapper for EnqueuedMessage array
  */
