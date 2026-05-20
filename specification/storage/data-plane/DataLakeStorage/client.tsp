@@ -179,6 +179,7 @@ enum ListBlobsShowOnlyGo {
   directories: "directories",
 }
 @@alternateType(ListBlobsShowOnly, ListBlobsShowOnlyGo, "go");
+@@alternateType(ContentMD5ResponseHeader.contentMD5, string, "go");
 @@clientName(PathItem, "Path", "go");
 @@clientName(BlobItem, "PathItemInternal", "go");
 @@clientName(BlobHierarchyListSegment.blobItems, "PathItems", "go");
