@@ -1206,12 +1206,6 @@ union OpenIdConnectClientCredentialMethod {
 // C# @@scope customizations.
 @@scope(ContainerAppsLabelHistory.listLabelHistory, "!csharp");
 
-// C# @@access customizations.
-@@access(AppResiliencyCollection, Access.internal, "csharp");
-@@access(ContainerAppCollection, Access.internal, "csharp");
-@@access(ContainerAppsFunctionCollection, Access.internal, "csharp");
-@@access(SessionPoolCollection, Access.internal, "csharp");
-
 // C# @@usage customizations.
 @@usage(LogicAppProperties, Azure.ClientGenerator.Core.Usage.input, "csharp");
 
