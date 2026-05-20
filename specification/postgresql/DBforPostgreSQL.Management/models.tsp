@@ -3993,6 +3993,10 @@ model MaintenanceEventResourceProperties {
   @doc("The time this maintenance event record was last updated (UTC).")
   @visibility(Lifecycle.Read)
   lastUpdatedTime?: utcDateTime;
+
+  @doc("The original scheduled start time before this event was rescheduled.")
+  @visibility(Lifecycle.Read)
+  originalStartTime?: utcDateTime;
 }
 
 @doc("Filter for maintenance event status.")
