@@ -2474,7 +2474,7 @@
         "tags": [
           "Snapshots"
         ],
-        "description": "Updates the immutability policy of a snapshot.",
+        "description": "Updates the immutability policy of a snapshot. Sets or extends an unlocked immutability policy\nwith the specified duration and type. If the snapshot already has a locked policy, the request\nwill be rejected. Use updateImmutabilityPolicyLock to lock an existing unlocked policy.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -2512,6 +2512,10 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -2536,7 +2540,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       }
@@ -2547,7 +2551,7 @@
         "tags": [
           "Snapshots"
         ],
-        "description": "Updates the immutability policy lock of a snapshot.",
+        "description": "Locks the immutability policy of a snapshot. Once locked, the policy cannot be modified or\nremoved until the lock period expires. The snapshot must already have an unlocked immutability\npolicy configured via updateImmutabilityPolicy before it can be locked.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -2571,7 +2575,7 @@
             "description": "Immutability policy data supplied in the body of the update immutability policy lock operation.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ImmutabilityPolicyData"
+              "$ref": "#/definitions/ImmutabilityPolicyLockData"
             }
           }
         ],
@@ -2585,6 +2589,10 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -2609,7 +2617,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       }
@@ -4206,6 +4214,40 @@
         }
       }
     },
+    "ImmutabilityPolicy": {
+      "type": "object",
+      "description": "The immutability policy currently applied to a snapshot.",
+      "properties": {
+        "immutabilityDurationDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The immutability duration for the snapshot, in number of days.",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/ImmutabilityPolicyType",
+          "description": "The type of the immutability policy.",
+          "readOnly": true
+        },
+        "policyStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the immutability policy was set on the snapshot.",
+          "readOnly": true
+        },
+        "policyExpirationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the immutability policy will expire on the snapshot.",
+          "readOnly": true
+        },
+        "isPolicyExpired": {
+          "type": "boolean",
+          "description": "Indicates whether the immutability policy has expired.",
+          "readOnly": true
+        }
+      }
+    },
     "ImmutabilityPolicyData": {
       "type": "object",
       "description": "Data used for updating the immutability policy of a snapshot.",
@@ -4213,17 +4255,42 @@
         "immutabilityDurationDays": {
           "type": "integer",
           "format": "int32",
-          "description": "The immutability duration for the snapshot, in number of days."
+          "description": "The immutability duration for the snapshot, in number of days.",
+          "minimum": 1
         },
         "type": {
           "$ref": "#/definitions/ImmutabilityPolicyType",
-          "description": "The type of the immutability policy. Possible values include: 'Unlocked', 'Locked'."
+          "description": "The type of the immutability policy. 'Unlocked' allows the policy to be modified by privileged users; 'Locked' prevents reduction of the immutability duration but allows extension of the lock period."
         }
-      }
+      },
+      "required": [
+        "immutabilityDurationDays",
+        "type"
+      ]
+    },
+    "ImmutabilityPolicyLockData": {
+      "type": "object",
+      "description": "Data used for locking the immutability policy of a snapshot.",
+      "properties": {
+        "immutabilityDurationDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The immutability duration for the snapshot, in number of days.",
+          "minimum": 0
+        },
+        "type": {
+          "$ref": "#/definitions/ImmutabilityPolicyType",
+          "description": "The type of the immutability policy. 'Unlocked' allows the policy to be modified by privileged users; 'Locked' prevents reduction of the immutability duration but allows extension of the lock period."
+        }
+      },
+      "required": [
+        "immutabilityDurationDays",
+        "type"
+      ]
     },
     "ImmutabilityPolicyType": {
       "type": "string",
-      "description": "The state of the immutability policy.",
+      "description": "The type of the immutability policy. 'Unlocked' allows the policy to be modified by privileged users; 'Locked' prevents reduction of the immutability duration but allows extension of the lock period.",
       "enum": [
         "Unlocked",
         "Locked"
@@ -4240,7 +4307,7 @@
           {
             "name": "Locked",
             "value": "Locked",
-            "description": "The snapshot immutability policy cannot be modified by any user until the lock period expires."
+            "description": "The snapshot immutability policy duration cannot be reduced but can be extended. The policy cannot be removed until the lock period expires."
           }
         ]
       }
@@ -4787,6 +4854,11 @@
         "snapshotAccessState": {
           "$ref": "#/definitions/Common.SnapshotAccessState",
           "description": "The state of snapshot which determines the access availability of the snapshot.",
+          "readOnly": true
+        },
+        "immutabilityPolicy": {
+          "$ref": "#/definitions/ImmutabilityPolicy",
+          "description": "The immutability policy currently applied to this snapshot. Present only when an immutability policy has been configured.",
           "readOnly": true
         }
       },
