@@ -10478,6 +10478,7 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - HostedAgents=V1Preview
+          - EgressPolicy=V1Preview
           - WorkflowAgents=V1Preview
           - CodeAgents=V1Preview
           - ExternalAgents=V1Preview
@@ -10485,11 +10486,12 @@ components:
       type: string
       enum:
         - HostedAgents=V1Preview
+        - EgressPolicy=V1Preview
         - WorkflowAgents=V1Preview
         - AgentEndpoints=V1Preview
         - CodeAgents=V1Preview
         - ExternalAgents=V1Preview
-      description: Feature opt-in keys for agent definition operations supporting hosted or workflow agents.
+      description: Feature opt-in keys for agent definition operations supporting preview agent capabilities.
     AgentEndpointAuthorizationScheme:
       type: object
       required:
@@ -12830,6 +12832,7 @@ components:
           x-ms-foundry-meta:
             conditional_previews:
               - HostedAgents=V1Preview
+              - EgressPolicy=V1Preview
               - WorkflowAgents=V1Preview
               - CodeAgents=V1Preview
               - ExternalAgents=V1Preview
@@ -12857,6 +12860,7 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - HostedAgents=V1Preview
+          - EgressPolicy=V1Preview
           - WorkflowAgents=V1Preview
           - CodeAgents=V1Preview
           - ExternalAgents=V1Preview
@@ -12980,6 +12984,7 @@ components:
           x-ms-foundry-meta:
             conditional_previews:
               - HostedAgents=V1Preview
+              - EgressPolicy=V1Preview
               - WorkflowAgents=V1Preview
               - CodeAgents=V1Preview
               - ExternalAgents=V1Preview
@@ -12993,6 +12998,7 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - HostedAgents=V1Preview
+          - EgressPolicy=V1Preview
           - WorkflowAgents=V1Preview
           - CodeAgents=V1Preview
           - ExternalAgents=V1Preview
@@ -13399,7 +13405,8 @@ components:
           description: The overall object JSON schema for the run data source items.
       discriminator:
         propertyName: type
-        mapping: {}
+        mapping:
+          azure_ai_source: '#/components/schemas/AzureAIDataSourceConfig'
       description: Base class for run data sources with discriminator support.
     DatasetDataGenerationJobOutput:
       type: object
@@ -13876,6 +13883,108 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - Routines=V1Preview
+    EgressPolicyConfig:
+      type: object
+      required:
+        - mode
+        - rules
+      properties:
+        mode:
+          allOf:
+            - $ref: '#/components/schemas/EgressPolicyMode'
+          description: The policy enforcement mode. V1 supports only enforced mode.
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/EgressPolicyRuleConfig'
+          description: Ordered egress policy rules. Enforced mode denies application egress when no rule matches.
+      description: Customer-authored egress policy for hosted-agent application traffic.
+      x-ms-foundry-meta:
+        required_previews:
+          - EgressPolicy=V1Preview
+    EgressPolicyMode:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - enforced
+      description: Enforcement mode for a hosted-agent egress policy.
+      x-ms-foundry-meta:
+        required_previews:
+          - EgressPolicy=V1Preview
+    EgressPolicyRuleActionConfig:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/EgressPolicyRuleActionType'
+          description: The action type.
+      description: Action to take when a hosted-agent egress policy rule matches.
+      x-ms-foundry-meta:
+        required_previews:
+          - EgressPolicy=V1Preview
+    EgressPolicyRuleActionType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - allow
+            - deny
+      description: Action type for a hosted-agent egress policy rule.
+      x-ms-foundry-meta:
+        required_previews:
+          - EgressPolicy=V1Preview
+    EgressPolicyRuleConfig:
+      type: object
+      required:
+        - type
+        - name
+        - match
+        - action
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/EgressPolicyRuleType'
+          description: The rule type. V1 supports only FQDN rules.
+        name:
+          type: string
+          description: A user-defined rule name that is unique within the policy.
+        match:
+          allOf:
+            - $ref: '#/components/schemas/EgressPolicyRuleMatchConfig'
+          description: Traffic matching criteria for the rule.
+        action:
+          allOf:
+            - $ref: '#/components/schemas/EgressPolicyRuleActionConfig'
+          description: The action to take when traffic matches the rule.
+      description: A single hosted-agent egress policy rule.
+      x-ms-foundry-meta:
+        required_previews:
+          - EgressPolicy=V1Preview
+    EgressPolicyRuleMatchConfig:
+      type: object
+      required:
+        - host
+      properties:
+        host:
+          type: string
+          description: Host pattern to match, such as an exact host, a leading wildcard subdomain, or '*'.
+      description: Traffic matching criteria for a hosted-agent egress policy rule.
+      x-ms-foundry-meta:
+        required_previews:
+          - EgressPolicy=V1Preview
+    EgressPolicyRuleType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - fqdn
+      description: Rule type for a hosted-agent egress policy rule.
+      x-ms-foundry-meta:
+        required_previews:
+          - EgressPolicy=V1Preview
     EntraAuthorizationScheme:
       type: object
       required:
@@ -16329,6 +16438,13 @@ components:
           type: string
           description: The image ID for the agent, applicable to image-based hosted agents.
           example: my-registry.azurecr.io/my-hosted-agent:latest
+        egress_policy_preview:
+          allOf:
+            - $ref: '#/components/schemas/EgressPolicyConfig'
+          description: Customer-authored egress policy for hosted-agent application traffic.
+          x-ms-foundry-meta:
+            required_previews:
+              - EgressPolicy=V1Preview
         container_configuration:
           allOf:
             - $ref: '#/components/schemas/ContainerConfiguration'
@@ -16806,6 +16922,7 @@ components:
           red_team_taxonomy: '#/components/schemas/RedTeamTaxonomyItemGenerationParams'
           response_retrieval: '#/components/schemas/ResponseRetrievalItemGenerationParams'
           conversation_gen_preview: '#/components/schemas/ConversationGenPreviewItemGenerationParams'
+          synthetic_data_gen_preview: '#/components/schemas/SyntheticDataGenerationPreviewItemGenerationParams'
       description: Represents the set of parameters used to control item generation operations.
     ItemGenerationParamsType:
       anyOf:
@@ -19672,6 +19789,7 @@ components:
         mapping:
           text: '#/components/schemas/OpenAI.CreateChatCompletionRequestResponseFormatResponseFormatText'
           json_object: '#/components/schemas/OpenAI.CreateChatCompletionRequestResponseFormatResponseFormatJsonObject'
+          json_schema: '#/components/schemas/OpenAI.ResponseFormatJsonSchema'
       description: |-
         An object specifying the format that the model must output.
         Setting to `{ "type": "json_schema", "json_schema": {...} }` enables
@@ -27306,6 +27424,7 @@ components:
           refusal: '#/components/schemas/OpenAI.MessageContentRefusalContent'
           input_image: '#/components/schemas/OpenAI.MessageContentInputImageContent'
           input_file: '#/components/schemas/OpenAI.MessageContentInputFileContent'
+          summary_text: '#/components/schemas/OpenAI.SummaryTextContent'
       description: A content part that makes up an input or output item.
     OpenAI.MessageContentInputFileContent:
       type: object
@@ -35336,6 +35455,7 @@ components:
           x-ms-foundry-meta:
             conditional_previews:
               - HostedAgents=V1Preview
+              - EgressPolicy=V1Preview
               - WorkflowAgents=V1Preview
               - CodeAgents=V1Preview
               - ExternalAgents=V1Preview
