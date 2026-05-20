@@ -67,7 +67,12 @@ interface Features {
     FeatureEnableRequest,
     Azure.ResourceManager.Foundations.OperationStatusResult,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<Feature>,
-    ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader,
+    ArmLroLocationHeader<
+      Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>,
+      Azure.ResourceManager.Foundations.OperationStatusResult,
+      string
+    > &
+      Azure.Core.Foundations.RetryAfterHeader,
     {},
     ErrorResponse,
     true
@@ -79,8 +84,6 @@ interface Features {
   disable is ArmResourceActionAsync<
     Feature,
     void,
-    Azure.ResourceManager.Foundations.OperationStatusResult,
-    Azure.ResourceManager.Foundations.DefaultBaseParameters<Feature>,
-    ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+    Azure.ResourceManager.Foundations.OperationStatusResult
   >;
 }
