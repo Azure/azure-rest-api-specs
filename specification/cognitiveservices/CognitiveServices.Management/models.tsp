@@ -38,6 +38,11 @@ union ProvisioningState {
   Accepted: "Accepted",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Resource is being created"
   Creating: "Creating",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Resource is being updated"
+  @added(Versions.v2026_03_15_preview)
+  Updating: "Updating",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Resource is being deleted"
   Deleting: "Deleting",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "CognitiveServices-specific: account is being moved between regions"
@@ -3247,6 +3252,40 @@ model SkuResource {
 }
 
 /**
+ * Managed compute deployment SKU name.
+ */
+@added(Versions.v2026_03_15_preview)
+union ManagedComputeDeploymentSkuName {
+  string,
+
+  /** Foundry-managed global accelerator pool. */
+  GlobalManagedCompute: "GlobalManagedCompute",
+
+  /** Foundry-managed data-zone accelerator pool. */
+  DataZoneManagedCompute: "DataZoneManagedCompute",
+
+  /** Customer-owned Foundry Compute cluster. */
+  VmManagedCompute: "VmManagedCompute",
+}
+
+/**
+ * The SKU definition for a managed compute deployment.
+ */
+@added(Versions.v2026_03_15_preview)
+model ManagedComputeDeploymentSku {
+  /**
+   * The SKU name.
+   */
+  name: ManagedComputeDeploymentSkuName;
+
+  /**
+   * The number of model instances to deploy.
+   */
+  @minValue(1)
+  capacity: int32;
+}
+
+/**
  * The object being used to update sku of a resource, in general used for PATCH operations.
  */
 @added(Versions.v2026_03_15_preview)
@@ -3254,7 +3293,7 @@ model PatchResourceSku {
   /**
    * The resource model definition representing SKU
    */
-  sku?: Sku;
+  sku: ManagedComputeDeploymentSku;
 }
 
 /**
@@ -5753,23 +5792,9 @@ model ManagedComputeDeploymentProvisioningDetails {
  * Inference route paths for a managed compute deployment, relative to the account endpoint.
  * Populated when provisioningState is Succeeded.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Managed compute deployment routes are dynamic key-value pairs sourced from the deployment template."
 @added(Versions.v2026_03_15_preview)
-model ManagedComputeDeploymentRoutes {
-  /**
-   * Relative path to the chat completions scoring endpoint.
-   */
-  chatCompletionsScoringPath?: string;
-
-  /**
-   * Relative path to the Swagger/OpenAPI endpoint.
-   */
-  swagger?: string;
-
-  /**
-   * Relative path to the messages API scoring endpoint.
-   */
-  messagesApiScoringPath?: string;
-}
+model ManagedComputeDeploymentRoutes is Record<string>;
 
 /**
  * The list of managed compute deployments.

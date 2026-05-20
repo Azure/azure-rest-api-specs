@@ -16031,7 +16031,7 @@
           "description": "Properties of the Cognitive Services managed compute deployment."
         },
         "sku": {
-          "$ref": "#/definitions/Sku",
+          "$ref": "#/definitions/ManagedComputeDeploymentSku",
           "description": "The resource model definition representing SKU"
         },
         "etag": {
@@ -16040,6 +16040,10 @@
           "readOnly": true
         }
       },
+      "required": [
+        "properties",
+        "sku"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
@@ -16195,19 +16199,58 @@
     "ManagedComputeDeploymentRoutes": {
       "type": "object",
       "description": "Inference route paths for a managed compute deployment, relative to the account endpoint.\nPopulated when provisioningState is Succeeded.",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "ManagedComputeDeploymentSku": {
+      "type": "object",
+      "description": "The SKU definition for a managed compute deployment.",
       "properties": {
-        "chatCompletionsScoringPath": {
-          "type": "string",
-          "description": "Relative path to the chat completions scoring endpoint."
+        "name": {
+          "$ref": "#/definitions/ManagedComputeDeploymentSkuName",
+          "description": "The SKU name."
         },
-        "swagger": {
-          "type": "string",
-          "description": "Relative path to the Swagger/OpenAPI endpoint."
-        },
-        "messagesApiScoringPath": {
-          "type": "string",
-          "description": "Relative path to the messages API scoring endpoint."
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of model instances to deploy.",
+          "minimum": 1
         }
+      },
+      "required": [
+        "name",
+        "capacity"
+      ]
+    },
+    "ManagedComputeDeploymentSkuName": {
+      "type": "string",
+      "description": "Managed compute deployment SKU name.",
+      "enum": [
+        "GlobalManagedCompute",
+        "DataZoneManagedCompute",
+        "VmManagedCompute"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedComputeDeploymentSkuName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "GlobalManagedCompute",
+            "value": "GlobalManagedCompute",
+            "description": "Foundry-managed global accelerator pool."
+          },
+          {
+            "name": "DataZoneManagedCompute",
+            "value": "DataZoneManagedCompute",
+            "description": "Foundry-managed data-zone accelerator pool."
+          },
+          {
+            "name": "VmManagedCompute",
+            "value": "VmManagedCompute",
+            "description": "Customer-owned Foundry Compute cluster."
+          }
+        ]
       }
     },
     "ManagedComputeUsage": {
@@ -17300,10 +17343,13 @@
       "description": "The object being used to update sku of a resource, in general used for PATCH operations.",
       "properties": {
         "sku": {
-          "$ref": "#/definitions/Sku",
+          "$ref": "#/definitions/ManagedComputeDeploymentSku",
           "description": "The resource model definition representing SKU"
         }
-      }
+      },
+      "required": [
+        "sku"
+      ]
     },
     "PatchResourceTags": {
       "type": "object",
@@ -17868,6 +17914,7 @@
       "enum": [
         "Accepted",
         "Creating",
+        "Updating",
         "Deleting",
         "Moving",
         "Failed",
@@ -17886,6 +17933,10 @@
           {
             "name": "Creating",
             "value": "Creating"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating"
           },
           {
             "name": "Deleting",
