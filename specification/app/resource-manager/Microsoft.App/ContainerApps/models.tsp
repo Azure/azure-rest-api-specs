@@ -1500,16 +1500,6 @@ model OpenIdConnectClientCredential {
 }
 
 /**
- * Custom OpenID Connect client credential method extensible enum.
- */
-union OpenIdConnectClientCredentialMethod {
-  string,
-
-  /** Client secret post authentication. */
-  ClientSecretPost: "ClientSecretPost",
-}
-
-/**
  * The configuration settings of the endpoints used for the custom Open ID Connect provider.
  */
 model OpenIdConnectConfig {
@@ -6702,16 +6692,6 @@ model Usage {
    * The name of the type of usage.
    */
   name: UsageName;
-}
-
-/**
- * Usage unit extensible enum.
- */
-union UsageUnit {
-  string,
-
-  /** Count. */
-  Count: "Count",
 }
 
 /**

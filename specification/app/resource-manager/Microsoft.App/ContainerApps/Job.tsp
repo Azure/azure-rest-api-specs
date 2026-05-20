@@ -1,6 +1,5 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@azure-tools/typespec-autorest";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
@@ -10,7 +9,6 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Autorest;
 
 namespace Microsoft.App;
 /**
@@ -32,6 +30,32 @@ model Job is Azure.ResourceManager.TrackedResource<JobProperties> {
 
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
+
+alias JobDetectorPropertyOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** Job Name */
+    @path
+    @segment("jobs")
+    @key
+    @pattern("^[-\\w\\._\\(\\)]+$")
+    jobName: string;
+  },
+  {
+    /** Proxy API Name for Container App Job. */
+    @path
+    @segment("detectorProperties")
+    @key
+    @pattern("^[-\\w\\._]+$")
+    apiName: string;
+  },
+  ErrorType = DefaultErrorResponse,
+  ResourceName = "ContainerAppJobDetectorProperty"
+>;
 
 @armResourceOperations(#{ omitTags: true })
 interface Jobs {
@@ -224,22 +248,21 @@ interface Jobs {
     DefaultBaseParameters<Job>,
     Error = DefaultErrorResponse
   >;
-}
 
-@armResourceOperations
-@tag("Jobs")
-@tag("Diagnostics")
-interface JobDetectors {
+  /**
+   * Get the properties of a Container App Job.
+   */
+  @tag("Jobs")
+  @tag("Diagnostics")
+  @summary("Get the properties for a given Container App Job.")
+  proxyGet is JobDetectorPropertyOps.Read<Job, Response = ArmResponse<Job>>;
+
   /**
    * Get the list of diagnostics for a Container App Job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserve the existing OpenAPI operation id during MPG migration."
+  @tag("Jobs")
+  @tag("Diagnostics")
   @summary("Get the list of diagnostics for a given Container App Job.")
-  @operationId("Jobs_ListDetectors")
-  @Autorest.example(
-    "./examples/Job_ListDetectors.json",
-    "Get the list of available diagnostic data for a Container App Job"
-  )
   listDetectors is JobsDiagnosticsDetectorOps.List<
     Diagnostics,
     Response = ArmResponse<DiagnosticsCollection>
@@ -248,56 +271,13 @@ interface JobDetectors {
   /**
    * Get the diagnostics data for a Container App Job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserve the existing OpenAPI operation id during MPG migration."
+  @tag("Jobs")
+  @tag("Diagnostics")
   @summary("Get the diagnostics data for a given Container App Job.")
-  @operationId("Jobs_GetDetector")
-  @Autorest.example(
-    "./examples/Job_GetDetector.json",
-    "Get diagnostic data for a Container App Job"
-  )
   getDetector is JobsDiagnosticsDetectorOps.Read<
     Diagnostics,
     Response = ArmResponse<Diagnostics>
   >;
-}
-
-alias JobDetectorPropertyOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
-
-    /** Job Name */
-    @path
-    @segment("jobs")
-    @key
-    @pattern("^[-\\w\\._\\(\\)]+$")
-    jobName: string;
-  },
-  {
-    /** Proxy API Name for Container App Job. */
-    @path
-    @segment("detectorProperties")
-    @key
-    @pattern("^[-\\w\\._]+$")
-    apiName: string;
-  },
-  ErrorType = DefaultErrorResponse,
-  ResourceName = "ContainerAppJobDetectorProperty"
->;
-
-@armResourceOperations
-@tag("Jobs")
-@tag("Diagnostics")
-interface JobDetectorProperties {
-  /**
-   * Get the properties of a Container App Job.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserve the existing OpenAPI operation id while modeling proxyGet as a resource read for C# generation."
-  @summary("Get the properties for a given Container App Job.")
-  @operationId("Jobs_ProxyGet")
-  get is JobDetectorPropertyOps.Read<Job, Response = ArmResponse<Job>>;
 }
 
 @@doc(Job.name, "Job Name");

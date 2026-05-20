@@ -96,6 +96,26 @@ model CSharpDiagnosticsDefinition
   score?: float32;
 }
 
+/**
+ * C# compatibility usage unit extensible enum.
+ */
+union UsageUnit {
+  string,
+
+  /** Count. */
+  Count: "Count",
+}
+
+/**
+ * C# compatibility custom OpenID Connect client credential method extensible enum.
+ */
+union OpenIdConnectClientCredentialMethod {
+  string,
+
+  /** Client secret post authentication. */
+  ClientSecretPost: "ClientSecretPost",
+}
+
 // C# @@alternateType customizations.
 @@alternateType(DiagnosticsDefinition, CSharpDiagnosticsDefinition, "csharp");
 
@@ -384,24 +404,20 @@ model CSharpDiagnosticsDefinition
 @@clientName(ConnectedEnvironmentProperties.staticIp, "StaticIP", "csharp");
 
 @@clientName(
-  ConnectedEnvironmentCertificates,
+  Certificates,
   "ContainerAppConnectedEnvironmentCertificates",
   "csharp"
 );
 
-@@clientName(ConnectedEnvironmentCertificates.get, "Get", "csharp");
+@@clientName(Certificates.get, "Get", "csharp");
 
-@@clientName(ConnectedEnvironmentCertificates.list, "List", "csharp");
+@@clientName(Certificates.list, "List", "csharp");
 
-@@clientName(ConnectedEnvironmentCertificates.delete, "Delete", "csharp");
+@@clientName(Certificates.delete, "Delete", "csharp");
 
-@@clientName(
-  ConnectedEnvironmentCertificates.createOrUpdate,
-  "CreateOrUpdate",
-  "csharp"
-);
+@@clientName(Certificates.createOrUpdate, "CreateOrUpdate", "csharp");
 
-@@clientName(ConnectedEnvironmentCertificates.update, "Update", "csharp");
+@@clientName(Certificates.update, "Update", "csharp");
 
 @@clientName(
   ConnectedEnvironmentProvisioningState,
@@ -773,8 +789,6 @@ model CSharpDiagnosticsDefinition
 
 @@clientName(JobExecutionBase, "ContainerAppJobExecutionBase", "csharp");
 
-@@clientName(JobDetectors, "ContainerAppJobDetectors", "csharp");
-
 @@clientName(
   JobExecutionTemplate,
   "ContainerAppJobExecutionTemplate",
@@ -867,33 +881,19 @@ model CSharpDiagnosticsDefinition
 
 @@clientName(ManagedEnvironmentProperties.staticIp, "StaticIP", "csharp");
 
-@@clientName(
-  ManagedEnvironmentCertificates,
-  "ContainerAppManagedEnvironmentCertificates",
-  "csharp"
-);
+@@clientName(Certificates.getCertificates, "Get", "csharp");
 
-@@clientName(ManagedEnvironmentCertificates.getCertificates, "Get", "csharp");
+@@clientName(Certificates.listCertificates, "List", "csharp");
 
-@@clientName(ManagedEnvironmentCertificates.listCertificates, "List", "csharp");
+@@clientName(Certificates.deleteCertificates, "Delete", "csharp");
 
 @@clientName(
-  ManagedEnvironmentCertificates.deleteCertificates,
-  "Delete",
-  "csharp"
-);
-
-@@clientName(
-  ManagedEnvironmentCertificates.createOrUpdateCertificates,
+  Certificates.createOrUpdateCertificates,
   "CreateOrUpdate",
   "csharp"
 );
 
-@@clientName(
-  ManagedEnvironmentCertificates.updateCertificates,
-  "Update",
-  "csharp"
-);
+@@clientName(Certificates.updateCertificates, "Update", "csharp");
 
 @@clientName(
   ManagedEnvironmentProperties.zoneRedundant,
@@ -1207,10 +1207,7 @@ model CSharpDiagnosticsDefinition
 @@markAsPageable(ContainerAppsRevisionReplicas.listReplicas, "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the previous pageable diagnostics SDK surface during MPG migration"
-@@markAsPageable(
-  ContainerAppManagedEnvironmentDetectors.listDetectors,
-  "csharp"
-);
+@@markAsPageable(ManagedEnvironmentsDiagnostics.listDetectors, "csharp");
 
 // C# @@scope customizations.
 @@scope(ContainerAppsLabelHistory.listLabelHistory, "!csharp");

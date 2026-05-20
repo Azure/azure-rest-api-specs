@@ -1,6 +1,5 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@azure-tools/typespec-autorest";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
@@ -11,7 +10,6 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Autorest;
 
 namespace Microsoft.App;
 
@@ -124,22 +122,19 @@ interface ContainerAppsDiagnostics {
     },
     Error = DefaultErrorResponse
   >;
-}
+  /**
+   * Get the properties of a Container App.
+   */
+  @summary("Get the properties of a Container App.")
+  getRoot is ContainerAppDetectorPropertyOps.Read<
+    ContainerApp,
+    Response = ArmResponse<ContainerApp> | ContainerAppsNotFoundError
+  >;
 
-@armResourceOperations
-@tag("ContainerApps")
-@tag("Diagnostics")
-interface ContainerAppDetectors {
   /**
    * Get the list of diagnostics for a given Container App.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserve the existing OpenAPI operation id during MPG migration."
   @summary("Get the list of diagnostics for a given Container App.")
-  @operationId("ContainerAppsDiagnostics_ListDetectors")
-  @Autorest.example(
-    "./examples/ContainerAppsDiagnostics_List.json",
-    "Get the list of available diagnostics for a given Container App"
-  )
   listDetectors is ContainerAppsDetectorOps.List<
     Diagnostics,
     Response = ArmResponse<DiagnosticsCollection>
@@ -148,32 +143,10 @@ interface ContainerAppDetectors {
   /**
    * Get a diagnostics result of a Container App.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserve the existing OpenAPI operation id during MPG migration."
   @summary("Get a diagnostics result of a Container App.")
-  @operationId("ContainerAppsDiagnostics_GetDetector")
-  @Autorest.example(
-    "./examples/ContainerAppsDiagnostics_Get.json",
-    "Get Container App's diagnostics info"
-  )
   getDetector is ContainerAppsDetectorOps.Read<
     Diagnostics,
     Response = ArmResponse<Diagnostics>
-  >;
-}
-
-@armResourceOperations
-@tag("ContainerApps")
-@tag("Diagnostics")
-interface ContainerAppDetectorProperties {
-  /**
-   * Get the properties of a Container App.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserve the existing OpenAPI operation id while modeling getRoot as a resource read for C# generation."
-  @summary("Get the properties of a Container App.")
-  @operationId("ContainerAppsDiagnostics_GetRoot")
-  getRoot is ContainerAppDetectorPropertyOps.Read<
-    ContainerApp,
-    Response = ArmResponse<ContainerApp> | ContainerAppsNotFoundError
   >;
 }
 
@@ -253,7 +226,16 @@ alias ContainerAppManagedEnvironmentDetectorResourcePropertyOps = Azure.Resource
 @armResourceOperations
 @tag("ManagedEnvironments")
 @tag("Diagnostics")
-interface ContainerAppManagedEnvironmentDetectors {
+interface ManagedEnvironmentsDiagnostics {
+  /**
+   * Get the properties of a Managed Environment used to host container apps.
+   */
+  @summary("Get the properties of a Managed Environment.")
+  getRoot is ContainerAppManagedEnvironmentDetectorResourcePropertyOps.Read<
+    ManagedEnvironment,
+    Response = ArmResponse<ManagedEnvironment>
+  >;
+
   /**
    * Get the list of diagnostics for a Managed Environment used to host container apps.
    */
@@ -270,21 +252,5 @@ interface ContainerAppManagedEnvironmentDetectors {
   getDetector is ManagedEnvironmentDetectorOps.Read<
     Diagnostics,
     Response = ArmResponse<Diagnostics>
-  >;
-}
-
-@armResourceOperations
-@tag("ManagedEnvironments")
-@tag("Diagnostics")
-interface ContainerAppManagedEnvironmentDetectorResourceProperties {
-  /**
-   * Get the properties of a Managed Environment used to host container apps.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserve the existing OpenAPI operation id while modeling getRoot as a resource read for C# generation."
-  @summary("Get the properties of a Managed Environment.")
-  @operationId("ManagedEnvironmentsDiagnostics_GetRoot")
-  getRoot is ContainerAppManagedEnvironmentDetectorResourcePropertyOps.Read<
-    ManagedEnvironment,
-    Response = ArmResponse<ManagedEnvironment>
   >;
 }
