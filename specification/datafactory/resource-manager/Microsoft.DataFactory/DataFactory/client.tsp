@@ -684,11 +684,6 @@ using Microsoft.DataFactory;
   "ScriptActivityTypeLogSettings",
   "csharp"
 );
-@@clientName(
-  ScriptActivityTypePropertiesLogSettings.logLocationSettings,
-  "LogLocation",
-  "csharp"
-);
 @@clientName(TarGZipReadSettings, "TarGzipReadSettings", "csharp");
 @@clientName(ScriptActivityScriptBlock.type, "QueryType", "csharp");
 @@clientName(WebActivityMethod.GET, "Get", "csharp");
@@ -1139,8 +1134,6 @@ using Microsoft.DataFactory;
 @@clientName(ExpressionV2Type, "DataFactoryExpressionV2Type", "csharp");
 @@clientName(HttpDataset, "DataFactoryHttpDataset", "csharp");
 @@clientName(LogSettings, "DataFactoryLogSettings", "csharp");
-@@clientName(LogSettings.logLocationSettings, "LogLocation", "csharp");
-@@clientName(LogLocationSettings.path, "Settings", "csharp");
 @@clientName(
   PipelineReferenceType,
   "DataFactoryPipelineReferenceType",
@@ -1294,3 +1287,114 @@ using Microsoft.DataFactory;
 
 @@usage(OutputColumn, Usage.input | Usage.output, "csharp");
 @@usage(ScriptType, Usage.input | Usage.output, "csharp");
+@@usage(DatasetDataElement, Usage.input | Usage.output, "csharp");
+@@usage(RemotePrivateEndpointConnection, Usage.input | Usage.output, "csharp");
+
+// MPG migration: enum value casing renames (back-compat with previously published SDK).
+@@clientName(AzureSqlDWAuthenticationType.SQL, "Sql", "csharp");
+@@clientName(AzureSqlMIAuthenticationType.SQL, "Sql", "csharp");
+@@clientName(AzureFunctionActivityMethod.GET, "Get", "csharp");
+@@clientName(AzureFunctionActivityMethod.POST, "Post", "csharp");
+@@clientName(AzureFunctionActivityMethod.PUT, "Put", "csharp");
+@@clientName(AzureFunctionActivityMethod.DELETE, "Delete", "csharp");
+@@clientName(AzureFunctionActivityMethod.OPTIONS, "Options", "csharp");
+@@clientName(AzureFunctionActivityMethod.HEAD, "Head", "csharp");
+@@clientName(AzureFunctionActivityMethod.TRACE, "Trace", "csharp");
+@@clientName(HiveThriftTransportProtocol.SASL, "Sasl", "csharp");
+@@clientName(HiveThriftTransportProtocol.`HTTP `, "Http", "csharp");
+@@clientName(ImpalaThriftTransportProtocol.HTTP, "Http", "csharp");
+@@clientName(ImpalaAuthenticationType.SASLUsername, "SaslUsername", "csharp");
+@@clientName(
+  CassandraSourceReadConsistencyLevels.EACH_QUORUM,
+  "EachQuorum",
+  "csharp"
+);
+@@clientName(CassandraSourceReadConsistencyLevels.QUORUM, "Quorum", "csharp");
+@@clientName(
+  CassandraSourceReadConsistencyLevels.LOCAL_QUORUM,
+  "LocalQuorum",
+  "csharp"
+);
+@@clientName(CassandraSourceReadConsistencyLevels.THREE, "Three", "csharp");
+@@clientName(CassandraSourceReadConsistencyLevels.SERIAL, "Serial", "csharp");
+@@clientName(
+  CassandraSourceReadConsistencyLevels.LOCAL_SERIAL,
+  "LocalSerial",
+  "csharp"
+);
+
+// MPG migration: rename BlobEventTypes -> DataFactoryBlobEventType to match previously published SDK.
+@@clientName(BlobEventTypes, "DataFactoryBlobEventType", "csharp");
+
+// MPG migration: property casing renames (ML*, ID -> Id) to match previously published SDK.
+@@clientName(
+  AzureMLLinkedServiceTypeProperties.mlEndpoint,
+  "MLEndpoint",
+  "csharp"
+);
+@@clientName(
+  AzureMLServiceLinkedServiceTypeProperties.mlWorkspaceName,
+  "MLWorkspaceName",
+  "csharp"
+);
+@@clientName(
+  AzureMLExecutePipelineActivityTypeProperties.mlPipelineId,
+  "MLPipelineId",
+  "csharp"
+);
+@@clientName(
+  AzureMLExecutePipelineActivityTypeProperties.mlPipelineEndpointId,
+  "MLPipelineEndpointId",
+  "csharp"
+);
+@@clientName(
+  AzureMLExecutePipelineActivityTypeProperties.mlPipelineParameters,
+  "MLPipelineParameters",
+  "csharp"
+);
+@@clientName(
+  AzureMLExecutePipelineActivityTypeProperties.mlParentRunId,
+  "MLParentRunId",
+  "csharp"
+);
+@@clientName(
+  GoogleAdWordsLinkedServiceTypeProperties.clientCustomerID,
+  "ClientCustomerId",
+  "csharp"
+);
+@@clientName(
+  GoogleAdWordsLinkedServiceTypeProperties.loginCustomerID,
+  "LoginCustomerId",
+  "csharp"
+);
+
+// MPG migration: rename ExecuteSSISPackageActivity to ExecuteSsisPackageActivity for consistent casing.
+@@clientName(
+  ExecuteSSISPackageActivity,
+  "ExecuteSsisPackageActivity",
+  "csharp"
+);
+@@clientName(
+  ExecuteSSISPackageActivityTypeProperties,
+  "ExecuteSsisPackageActivityTypeProperties",
+  "csharp"
+);
+
+// MPG migration: change ExpressionV2.type -> V2Type so the public surface keeps a single V2Type property.
+@@clientName(ExpressionV2.type, "V2Type", "csharp");
+
+// MPG migration: model CustomActivity.retentionTimeInDays as BinaryData (back-compat with previously published SDK).
+@@alternateType(
+  CustomActivityTypeProperties.retentionTimeInDays,
+  unknown,
+  "csharp"
+);
+
+// MPG migration: make PrivateLinkConnectionApprovalRequestResource (DataFactoryPrivateEndpointConnectionCreateOrUpdateContent)
+// inherit from ResourceData instead of the spec's local SubResource (back-compat).
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  PrivateLinkConnectionApprovalRequestResource,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
