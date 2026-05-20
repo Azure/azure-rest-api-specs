@@ -82,8 +82,8 @@ interface EHNamespaces {
     PatchModel = EHNamespace,
     Response =
       | ArmResponse<EHNamespace>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = EHNamespace> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+      | ArmCreatedResponse<ResponseBody = EHNamespace>
+      | ArmAcceptedResponse,
     Error = ErrorResponse
   >;
 
