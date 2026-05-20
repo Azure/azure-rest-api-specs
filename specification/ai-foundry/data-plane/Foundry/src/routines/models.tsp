@@ -203,7 +203,7 @@ model InvokeAgentResponsesApiRoutineAction extends RoutineAction {
 
   @doc("An optional existing conversation identifier to continue during the downstream dispatch.")
   @maxLength(256)
-  conversation_id?: string;
+  conversation?: string;
 }
 
 @doc("Dispatches a routine through the raw invocations API.")
