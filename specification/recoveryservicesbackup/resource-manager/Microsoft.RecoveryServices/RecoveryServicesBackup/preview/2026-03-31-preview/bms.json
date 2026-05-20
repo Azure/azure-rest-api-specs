@@ -6939,6 +6939,11 @@
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
     },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "AzureBackupGoalFeatureSupportRequest": {
       "type": "object",
       "description": "Azure backup goal feature specific request.",
@@ -10588,7 +10593,7 @@
           }
         },
         "sourceTenantId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Tenant ID of the source vault for cross-tenant mapping.",
           "readOnly": true
         },
@@ -16511,18 +16516,19 @@
         },
         "aadAuthority": {
           "type": "string",
+          "format": "uri",
           "description": "AAD authority URL."
         },
         "aadTenantId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "AAD tenant ID of the source vault."
         },
         "servicePrincipalClientId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Service principal client ID for the vault."
         },
         "servicePrincipalObjectId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Service principal object ID for the vault."
         },
         "azureManagementEndpointAudience": {
@@ -16531,6 +16537,7 @@
         },
         "aadAudience": {
           "type": "string",
+          "format": "uri",
           "description": "AAD audience URI for the vault."
         },
         "subject": {
