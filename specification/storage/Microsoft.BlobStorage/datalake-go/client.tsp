@@ -36,7 +36,7 @@ interface BlobClient {
   setExpiry is Blob.setExpiry;
 }
 
-
+@@alternateType(ExpiryTimeParameter.expiresOn, string, "go");
 @@alternateType(KeyInfo.start, string, "go");
 @@alternateType(KeyInfo.expiry, string, "go");
 @@alternateType(UserDelegationKey.value, string, "go");
