@@ -22,15 +22,11 @@ interface NodeCustomizations {
   >;
 
   #deprecated "Node Customization APIs are deprecated. Use Prepared Image Specification APIs instead."
-  @doc("Deprecated: Update a node customization. Use Prepared Image Specification APIs instead.")
-  update is ArmCustomPatchAsync<
+  @doc("Deprecated: Update the tags of a node customization. Use Prepared Image Specification APIs instead.")
+  update is ArmCustomPatchSync<
     NodeCustomization,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      NodeCustomization,
-      NodeCustomizationProperties
-    >,
-    Azure.ResourceManager.Foundations.BaseParameters<NodeCustomization> &
-      IfMatchParameters<NodeCustomization>
+    PatchModel = NodeCustomizationPatch,
+    Parameters = IfMatchParameters<NodeCustomization>
   >;
 
   #deprecated "Node Customization APIs are deprecated. Use Prepared Image Specification APIs instead."

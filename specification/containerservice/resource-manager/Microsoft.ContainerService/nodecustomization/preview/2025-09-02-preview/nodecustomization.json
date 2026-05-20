@@ -314,7 +314,7 @@
         "tags": [
           "NodeCustomizations"
         ],
-        "description": "Deprecated: Update a node customization. Use Prepared Image Specification APIs instead.",
+        "description": "Deprecated: Update the tags of a node customization. Use Prepared Image Specification APIs instead.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -324,14 +324,6 @@
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "description": "The request should only proceed if the targeted resource's etag matches the value provided.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "nodeCustomizationName",
@@ -344,12 +336,20 @@
             "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
           },
           {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if the targeted resource's etag matches the value provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
             "name": "properties",
             "in": "body",
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NodeCustomizationUpdate"
+              "$ref": "#/definitions/NodeCustomizationPatch"
             }
           }
         ],
@@ -358,20 +358,6 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/NodeCustomization"
-            }
-          },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
             }
           },
           "default": {
@@ -386,11 +372,7 @@
           "NodeCustomizations_Update": {
             "$ref": "./examples/NodeCustomizations_Update.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "delete": {
         "operationId": "NodeCustomizations_Delete",
@@ -725,6 +707,19 @@
         "value"
       ]
     },
+    "NodeCustomizationPatch": {
+      "type": "object",
+      "description": "Node customization patch resource",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "NodeCustomizationProperties": {
       "type": "object",
       "description": "The properties of the Node Customization resource.",
@@ -799,48 +794,6 @@
         "executionPoint",
         "scriptType"
       ]
-    },
-    "NodeCustomizationUpdate": {
-      "type": "object",
-      "description": "The type used for update operations of the NodeCustomization.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/NodeCustomizationUpdateProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      }
-    },
-    "NodeCustomizationUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the NodeCustomization.",
-      "properties": {
-        "containerImages": {
-          "type": "array",
-          "description": "The list of container images to cache on nodes. See https://kubernetes.io/docs/concepts/containers/images/#image-names",
-          "items": {
-            "type": "string"
-          }
-        },
-        "identityProfile": {
-          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity",
-          "description": "The identity used to execute node customization tasks during image build time and provisioning time. \nIf not specified the default agentpool identity will be used.\nThis does not affect provisioned nodes."
-        },
-        "customizationScripts": {
-          "type": "array",
-          "description": "The scripts to customize the node before or after image capture.",
-          "items": {
-            "$ref": "#/definitions/NodeCustomizationScript"
-          },
-          "x-ms-identifiers": []
-        }
-      }
     },
     "NodeCustomizationVersion": {
       "type": "object",

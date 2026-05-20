@@ -122,6 +122,11 @@ union ProvisioningState {
   Accepted: "Accepted",
 }
 
+@doc("Node customization patch resource")
+model NodeCustomizationPatch {
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+}
+
 @parentResource(NodeCustomization)
 @doc("A version of the Node Customization resource.")
 model NodeCustomizationVersion is ProxyResource<NodeCustomizationProperties> {
