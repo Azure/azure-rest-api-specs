@@ -4,7 +4,6 @@ import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
-using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 
@@ -12,7 +11,6 @@ namespace GraphQueryApi;
 /**
  * Graph Query entity definition.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GraphQueryResource
   is Azure.ResourceManager.ProxyResource<GraphQueryProperties> {
   ...ResourceNameParameter<
@@ -22,19 +20,15 @@ model GraphQueryResource
     NamePattern = "^[^<>&:\\?]*$"
   >;
 
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "tags is needed for backward compatibility with TrackedResource via hierarchyBuilding"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "tags is standard ARM tracked resource property"
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
-  /**
-   * The geo-location where the resource lives.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "location is needed for backward compatibility with TrackedResource via hierarchyBuilding"
+  /** The location of the resource */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  location?: azureLocation;
+  location?: string;
 
   /**
    * This will be used to handle Optimistic Concurrency. If not present, it will always overwrite the existing resource without checking conflict.

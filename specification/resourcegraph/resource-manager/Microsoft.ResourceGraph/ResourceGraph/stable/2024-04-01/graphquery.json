@@ -330,10 +330,6 @@
     }
   },
   "definitions": {
-    "Azure.Core.azureLocation": {
-      "type": "string",
-      "description": "Represents an Azure geography region where supported resource providers live."
-    },
     "ErrorFieldContract": {
       "type": "object",
       "description": "Error Field contract.",
@@ -464,8 +460,8 @@
           }
         },
         "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
-          "description": "The geo-location where the resource lives.",
+          "type": "string",
+          "description": "The location of the resource",
           "x-ms-mutability": [
             "read",
             "create"
