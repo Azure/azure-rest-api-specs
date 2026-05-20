@@ -5671,11 +5671,12 @@ model ManagedComputeDeploymentProperties {
   `model`: url;
 
   /**
-   * AzureML Registry deployment template URI. Optional on creation.
-   * Example: azureml://registries/{registry}/deploymenttemplates/{template}/versions/{version}
+   * Deployment template identifier. Optional on creation.
+   * Accepts an AzureML Registry deployment template URI or a project-scoped deployment template path for VmManagedCompute.
+   * Examples: azureml://registries/{registry}/deploymenttemplates/{template}/versions/{version}, projects/{project}/deploymentTemplates/{template}/versions/{version}
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  deploymentTemplate?: url;
+  deploymentTemplate?: string;
 
   /**
    * Accelerator type (e.g., H100_80GB). Optional on creation; immutable after creation.
@@ -5688,6 +5689,18 @@ model ManagedComputeDeploymentProperties {
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   versionUpgradeOption?: DeploymentModelVersionUpgradeOption;
+
+  /**
+   * Foundry compute ARM resource ID for VM-backed managed compute deployments. Required when sku.name is VmManagedCompute; immutable after creation.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  computeId?: string;
+
+  /**
+   * Scheduling priority for VM-backed managed compute deployments. Immutable after creation.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  priority?: string;
 
   /**
    * Read-only. Number of accelerators (GPUs) consumed by each model instance, sourced from the deployment template.

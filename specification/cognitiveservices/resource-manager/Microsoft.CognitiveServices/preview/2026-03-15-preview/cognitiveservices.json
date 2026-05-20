@@ -4591,6 +4591,9 @@
         "x-ms-examples": {
           "ListManagedComputeDeployments": {
             "$ref": "./examples/ListManagedComputeDeployments.json"
+          },
+          "ListVmManagedComputeDeployments": {
+            "$ref": "./examples/ListVmManagedComputeDeployments.json"
           }
         },
         "x-ms-pageable": {
@@ -4651,6 +4654,9 @@
         "x-ms-examples": {
           "GetManagedComputeDeployment": {
             "$ref": "./examples/GetManagedComputeDeployment.json"
+          },
+          "GetVmManagedComputeDeployment": {
+            "$ref": "./examples/GetVmManagedComputeDeployment.json"
           }
         }
       },
@@ -4732,6 +4738,9 @@
         "x-ms-examples": {
           "CreateOrUpdateManagedComputeDeployment": {
             "$ref": "./examples/CreateOrUpdateManagedComputeDeployment.json"
+          },
+          "CreateOrUpdateVmManagedComputeDeployment": {
+            "$ref": "./examples/CreateOrUpdateVmManagedComputeDeployment.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -4819,6 +4828,9 @@
         "x-ms-examples": {
           "UpdateManagedComputeDeployment": {
             "$ref": "./examples/UpdateManagedComputeDeployment.json"
+          },
+          "UpdateVmManagedComputeDeployment": {
+            "$ref": "./examples/UpdateVmManagedComputeDeployment.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -4863,17 +4875,25 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -16087,8 +16107,7 @@
         },
         "deploymentTemplate": {
           "type": "string",
-          "format": "uri",
-          "description": "AzureML Registry deployment template URI. Optional on creation.\nExample: azureml://registries/{registry}/deploymenttemplates/{template}/versions/{version}",
+          "description": "Deployment template identifier. Optional on creation.\nAccepts an AzureML Registry deployment template URI or a project-scoped deployment template path for VmManagedCompute.\nExamples: azureml://registries/{registry}/deploymenttemplates/{template}/versions/{version}, projects/{project}/deploymentTemplates/{template}/versions/{version}",
           "x-ms-mutability": [
             "read",
             "create"
@@ -16105,6 +16124,22 @@
         "versionUpgradeOption": {
           "$ref": "#/definitions/DeploymentModelVersionUpgradeOption",
           "description": "Template auto-upgrade policy. Defaults to OnceNewDefaultVersionAvailable.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "computeId": {
+          "type": "string",
+          "description": "Foundry compute ARM resource ID for VM-backed managed compute deployments. Required when sku.name is VmManagedCompute; immutable after creation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "priority": {
+          "type": "string",
+          "description": "Scheduling priority for VM-backed managed compute deployments. Immutable after creation.",
           "x-ms-mutability": [
             "read",
             "create"
