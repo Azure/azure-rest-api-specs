@@ -2844,9 +2844,6 @@
           "List a server's Fabric Mirroring settings.": {
             "$ref": "./examples/FabricMirroringSettingsList.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2884,7 +2881,7 @@
             "required": true,
             "type": "string",
             "enum": [
-              "default"
+              "Default"
             ],
             "x-ms-enum": {
               "name": "FabricMirroringSettingsName",
@@ -2892,7 +2889,7 @@
               "values": [
                 {
                   "name": "Default",
-                  "value": "default",
+                  "value": "Default",
                   "description": "The default Fabric Mirroring settings instance."
                 }
               ]
@@ -2952,7 +2949,7 @@
             "required": true,
             "type": "string",
             "enum": [
-              "default"
+              "Default"
             ],
             "x-ms-enum": {
               "name": "FabricMirroringSettingsName",
@@ -2960,7 +2957,7 @@
               "values": [
                 {
                   "name": "Default",
-                  "value": "default",
+                  "value": "Default",
                   "description": "The default Fabric Mirroring settings instance."
                 }
               ]
@@ -3000,6 +2997,20 @@
               }
             }
           },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -3013,7 +3024,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "location",
           "final-state-schema": "#/definitions/FabricMirroringSetting"
         },
         "x-ms-long-running-operation": true
@@ -5577,7 +5588,8 @@
           },
           {
             "name": "Rename",
-            "value": "Rename"
+            "value": "Rename",
+            "description": "Rename an existing server *"
           }
         ]
       }
@@ -5790,7 +5802,7 @@
         "identityResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Resource ID of the user-assigned managed identity used for Fabric Mirroring."
+          "description": "Resource ID of the user-assigned managed identity used for Fabric Mirroring. Required when state is Enabled."
         },
         "provisioningState": {
           "$ref": "#/definitions/FabricMirroringProvisioningState",
