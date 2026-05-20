@@ -510,9 +510,6 @@ union SchemaTarget {
   @doc("Key-value target.")
   kv: "kv",
 
-  @doc("No target.")
-  none: "",
-
   string,
 }
 
