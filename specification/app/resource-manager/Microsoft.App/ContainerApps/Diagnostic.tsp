@@ -71,7 +71,8 @@ alias ContainerAppsDetectorOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @key
     detectorName: string;
   },
-  ErrorType = DefaultErrorResponse
+  ErrorType = DefaultErrorResponse,
+  ResourceName = "ContainerAppDetector"
 >;
 
 alias ContainerAppDetectorPropertyOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -94,7 +95,8 @@ alias ContainerAppDetectorPropertyOps = Azure.ResourceManager.Legacy.LegacyOpera
     @key
     rootApi: "rootApi/";
   },
-  ErrorType = DefaultErrorResponse
+  ErrorType = DefaultErrorResponse,
+  ResourceName = "ContainerAppDetectorProperty"
 >;
 
 @armResourceOperations
@@ -220,7 +222,8 @@ alias ContainerAppManagedEnvironmentDetectorResourcePropertyOps = Azure.Resource
     @key
     rootApi: "rootApi/";
   },
-  ErrorType = DefaultErrorResponse
+  ErrorType = DefaultErrorResponse,
+  ResourceName = "ContainerAppManagedEnvironmentDetectorResourceProperty"
 >;
 
 @armResourceOperations

@@ -13,90 +13,6 @@ using Microsoft.App;
 @@clientLocation(getCustomDomainVerificationId, "ContainerAppsAPIClient", "go");
 @@clientLocation(Jobs.jobExecution, "ContainerAppsAPIClient", "go");
 
-@@clientLocation(
-  Certificates.get,
-  "ContainerAppConnectedEnvironmentCertificates",
-  "csharp"
-);
-@@clientLocation(
-  Certificates.createOrUpdate,
-  "ContainerAppConnectedEnvironmentCertificates",
-  "csharp"
-);
-@@clientLocation(
-  Certificates.update,
-  "ContainerAppConnectedEnvironmentCertificates",
-  "csharp"
-);
-@@clientLocation(
-  Certificates.delete,
-  "ContainerAppConnectedEnvironmentCertificates",
-  "csharp"
-);
-@@clientLocation(
-  Certificates.list,
-  "ContainerAppConnectedEnvironmentCertificates",
-  "csharp"
-);
-@@clientLocation(
-  Certificates.getCertificates,
-  "ContainerAppManagedEnvironmentCertificates",
-  "csharp"
-);
-@@clientLocation(
-  Certificates.createOrUpdateCertificates,
-  "ContainerAppManagedEnvironmentCertificates",
-  "csharp"
-);
-@@clientLocation(
-  Certificates.updateCertificates,
-  "ContainerAppManagedEnvironmentCertificates",
-  "csharp"
-);
-@@clientLocation(
-  Certificates.deleteCertificates,
-  "ContainerAppManagedEnvironmentCertificates",
-  "csharp"
-);
-@@clientLocation(
-  Certificates.listCertificates,
-  "ContainerAppManagedEnvironmentCertificates",
-  "csharp"
-);
-@@clientLocation(
-  ContainerAppsDiagnostics.getRoot,
-  "ContainerAppDetectorProperties",
-  "csharp"
-);
-@@clientLocation(
-  ContainerAppsDiagnostics.listDetectors,
-  "ContainerAppDetectors",
-  "csharp"
-);
-@@clientLocation(
-  ContainerAppsDiagnostics.getDetector,
-  "ContainerAppDetectors",
-  "csharp"
-);
-@@clientLocation(Jobs.proxyGet, "JobDetectorProperties", "csharp");
-@@clientLocation(Jobs.listDetectors, "JobDetectors", "csharp");
-@@clientLocation(Jobs.getDetector, "JobDetectors", "csharp");
-@@clientLocation(
-  ManagedEnvironmentsDiagnostics.getRoot,
-  "ContainerAppManagedEnvironmentDetectorResourceProperties",
-  "csharp"
-);
-@@clientLocation(
-  ManagedEnvironmentsDiagnostics.listDetectors,
-  "ContainerAppManagedEnvironmentDetectors",
-  "csharp"
-);
-@@clientLocation(
-  ManagedEnvironmentsDiagnostics.getDetector,
-  "ContainerAppManagedEnvironmentDetectors",
-  "csharp"
-);
-
 @@clientName(
   VnetConfiguration.platformReservedDnsIP,
   "platformReservedDnsIp",
@@ -486,12 +402,6 @@ union OpenIdConnectClientCredentialMethod {
 );
 
 @@clientName(ConnectedEnvironmentProperties.staticIp, "StaticIP", "csharp");
-
-@@clientName(
-  Certificates,
-  "ContainerAppConnectedEnvironmentCertificates",
-  "csharp"
-);
 
 @@clientName(Certificates.get, "Get", "csharp");
 
