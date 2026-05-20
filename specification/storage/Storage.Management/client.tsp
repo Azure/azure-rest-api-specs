@@ -855,6 +855,11 @@ namespace Azure.ResourceManager.Models {
   "ShouldTestConnection",
   "csharp"
 );
+@@clientName(
+  StorageConnectorPropertiesUpdate.testConnection,
+  "ShouldTestConnection",
+  "csharp"
+);
 @@alternateType(
   ManagedIdentityAuthProperties.identityResourceId,
   Azure.Core.armResourceIdentifier,
@@ -866,27 +871,6 @@ namespace Azure.ResourceManager.Models {
   "csharp"
 );
 
-// Shared key access boolean property names
-@@clientName(
-  StorageAccountSharedKeyAccessProperties.blob,
-  "IsBlobEnabled",
-  "csharp"
-);
-@@clientName(
-  StorageAccountSharedKeyAccessProperties.file,
-  "IsFileEnabled",
-  "csharp"
-);
-@@clientName(
-  StorageAccountSharedKeyAccessProperties.queue,
-  "IsQueueEnabled",
-  "csharp"
-);
-@@clientName(
-  StorageAccountSharedKeyAccessProperties.table,
-  "IsTableEnabled",
-  "csharp"
-);
 // LocalUser property renames
 @@clientName(
   LocalUserProperties.allowAclAuthorization,
