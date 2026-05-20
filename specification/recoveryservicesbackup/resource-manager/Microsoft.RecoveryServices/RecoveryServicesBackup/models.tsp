@@ -8779,7 +8779,7 @@ model CrossTenantVaultMappingProperties {
    * Tenant ID of the source vault for cross-tenant mapping.
    */
   @visibility(Lifecycle.Read)
-  sourceTenantId?: uuid;
+  sourceTenantId?: string;
 
   /**
    * Name of the mapping.
@@ -8916,22 +8916,22 @@ model VaultCredentialCertificateProperties {
   /**
    * AAD authority URL.
    */
-  aadAuthority?: url;
+  aadAuthority?: string;
 
   /**
    * AAD tenant ID of the source vault.
    */
-  aadTenantId?: uuid;
+  aadTenantId?: string;
 
   /**
    * Service principal client ID for the vault.
    */
-  servicePrincipalClientId?: uuid;
+  servicePrincipalClientId?: string;
 
   /**
    * Service principal object ID for the vault.
    */
-  servicePrincipalObjectId?: uuid;
+  servicePrincipalObjectId?: string;
 
   /**
    * Azure management endpoint audience.
@@ -8941,7 +8941,7 @@ model VaultCredentialCertificateProperties {
   /**
    * AAD audience URI for the vault.
    */
-  aadAudience?: url;
+  aadAudience?: string;
 
   /**
    * Certificate subject.
