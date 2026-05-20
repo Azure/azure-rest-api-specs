@@ -1036,6 +1036,28 @@ using Azure.ClientGenerator.Core;
   "javascript"
 );
 
+@@clientName(
+  VoiceLive.TranscriptionWord.offset_milliseconds,
+  "offsetInMs",
+  "javascript"
+);
+@@clientName(
+  VoiceLive.TranscriptionWord.duration_milliseconds,
+  "durationInMs",
+  "javascript"
+);
+@@clientName(
+  VoiceLive.TranscriptionPhrase.offset_milliseconds,
+  "offsetInMs",
+  "javascript"
+);
+@@clientName(
+  VoiceLive.TranscriptionPhrase.duration_milliseconds,
+  "durationInMs",
+  "javascript"
+);
+@@clientName(VoiceLive.Response, "VoiceLiveResponse", "javascript");
+
 // Explicit client declaration for emitters that require at least one client (e.g. Python).
 // This service is WebSocket-only and has no HTTP operations, so a client must be declared explicitly.
 // Marked internal so it is not part of the public Python API surface; a hand-written client wraps it.
