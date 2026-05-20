@@ -3889,12 +3889,15 @@
             "headers": {
               "Location": {
                 "type": "string",
+                "format": "uri",
                 "description": "The URL where the status of the long-running operation can be polled."
               },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
-                "description": "The number of seconds the client should wait before polling again."
+                "description": "The number of seconds the client should wait before polling again.",
+                "minimum": 0,
+                "maximum": 2147483647
               }
             }
           },

@@ -24,11 +24,13 @@ model ScenarioRunInProgressResponse {
    * The URL where the status of the long-running operation can be polled.
    */
   @header("Location")
-  location: string;
+  location: url;
 
   /**
    * The number of seconds the client should wait before polling again.
    */
+  @minValue(0)
+  @maxValue(2147483647)
   @header("Retry-After")
   retryAfter?: int32;
 
