@@ -4,6 +4,7 @@ import "../Common/main.tsp";
 using Azure.ClientGenerator.Core;
 using Common;
 using Microsoft.Network;
+using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ApplicationGatewayIPConfiguration.properties);
@@ -2087,4 +2088,11 @@ using Microsoft.Network;
 @@Azure.ClientGenerator.Core.alternateType(
   SingletonResourceAlias.singletonResource,
   "swap"
+);
+
+@@added(DdosSettings.ddosCustomPolicy, Microsoft.Network.Versions.v2025_07_01);
+
+@@added(
+  DdosCustomPolicyPropertiesFormat.publicIPAddresses,
+  Microsoft.Network.Versions.v2025_07_01
 );
