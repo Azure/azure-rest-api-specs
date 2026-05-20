@@ -56,13 +56,10 @@ interface SBNamespaces {
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639408.aspx")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     SBNamespace,
-    Response =
-      | ArmResourceUpdatedResponse<SBNamespace>
-      | ArmResourceCreatedResponse<
-          SBNamespace,
-          LroHeaders = ArmLroLocationHeader<FinalResult = SBNamespace>
-        >
-      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SBNamespace>>,
+    Response = ArmResourceUpdatedResponse<SBNamespace> | ArmResourceCreatedResponse<
+      SBNamespace,
+      LroHeaders = ArmLroLocationHeader<FinalResult = SBNamespace>
+    > | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SBNamespace>>,
     Error = ErrorResponse
   >;
 
@@ -76,10 +73,8 @@ interface SBNamespaces {
   update is ArmCustomPatchSync<
     SBNamespace,
     PatchModel = SBNamespaceUpdateParameters,
-    Response =
-      | ArmResponse<SBNamespace>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = SBNamespace> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    Response = ArmResponse<SBNamespace> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = SBNamespace> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Error = ErrorResponse
   >;
 
@@ -92,10 +87,7 @@ interface SBNamespaces {
   @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639389.aspx")
   delete is ArmResourceDeleteWithoutOkAsync<
     SBNamespace,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>
-      | ArmDeletedNoContentResponse,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> | ArmDeletedNoContentResponse,
     Error = ErrorResponse
   >;
 
@@ -162,19 +154,15 @@ interface SBNamespaces {
 @@minLength(SBNamespace.name, 6);
 @@doc(SBNamespace.name, "The namespace name");
 @@doc(SBNamespace.properties, "Properties of the namespace.");
-@@doc(
-  SBNamespaces.createOrUpdate::parameters.resource,
+@@doc(SBNamespaces.createOrUpdate::parameters.resource,
   "Parameters supplied to create a namespace resource."
 );
-@@doc(
-  SBNamespaces.update::parameters.properties,
+@@doc(SBNamespaces.update::parameters.properties,
   "Parameters supplied to update a namespace resource."
 );
-@@doc(
-  SBNamespaces.failover::parameters.body,
+@@doc(SBNamespaces.failover::parameters.body,
   "Parameters for updating a namespace resource."
 );
-@@doc(
-  SBNamespaces.checkNameAvailability::parameters.body,
+@@doc(SBNamespaces.checkNameAvailability::parameters.body,
   "Parameters to check availability of the given namespace name"
 );

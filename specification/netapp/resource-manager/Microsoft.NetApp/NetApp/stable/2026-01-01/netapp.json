@@ -144,7 +144,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
             "name": "body",
@@ -190,7 +190,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
             "name": "body",
@@ -236,7 +236,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
             "name": "body",
@@ -282,7 +282,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
             "name": "body",
@@ -417,7 +417,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           }
         ],
         "responses": {
@@ -535,7 +535,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
             "name": "body",
@@ -600,7 +600,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           }
         ],
         "responses": {
@@ -3093,8 +3093,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/Cache"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -3179,8 +3178,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/Cache"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -11131,8 +11129,7 @@
         "certificateKeyVaultUri": {
           "type": "string",
           "format": "uri",
-          "description": "The base URI of the Azure Key Vault that is used when retrieving the bucket certificate.",
-          "example": "https://<REDACTED>.vault.azure.net/"
+          "description": "The base URI of the Azure Key Vault that is used when retrieving the bucket certificate."
         },
         "certificateName": {
           "type": "string",
@@ -11341,13 +11338,11 @@
       "properties": {
         "clusterPeeringCommand": {
           "type": "string",
-          "description": "ClusterPeeringCommand to run to accept cluster peer. Will only be present if <code>clusterPeeringStatus</code> is <code>pending</code>.",
-          "example": "cluster peer create -peer-addresses 10.0.0.1,10.0.0.2"
+          "description": "ClusterPeeringCommand to run to accept cluster peer. Will only be present if <code>clusterPeeringStatus</code> is <code>pending</code>."
         },
         "passphrase": {
           "type": "string",
-          "description": "Passphrase for use with cluster peer command",
-          "example": "SecurePassphrase123"
+          "description": "Passphrase for use with cluster peer command"
         }
       }
     },
@@ -11407,8 +11402,7 @@
         "credentialsKeyVaultUri": {
           "type": "string",
           "format": "uri",
-          "description": "The base URI of the Azure Key Vault that is used when storing the bucket credentials.",
-          "example": "https://<REDACTED>.vault.azure.net/"
+          "description": "The base URI of the Azure Key Vault that is used when storing the bucket credentials."
         },
         "secretName": {
           "type": "string",

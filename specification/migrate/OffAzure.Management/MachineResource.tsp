@@ -101,7 +101,6 @@ interface MachineResources {
 }
 
 @@doc(MachineResource.name, "Machine name");
-@@doc(
-  MachineResource.properties,
+@@doc(MachineResource.properties,
   "The resource-specific properties for this resource."
 );

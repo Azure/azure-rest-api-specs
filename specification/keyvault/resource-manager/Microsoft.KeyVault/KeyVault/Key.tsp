@@ -140,7 +140,6 @@ interface KeyOperationGroup {
 
 @@doc(Key.name, "The name of the key to be retrieved.");
 @@doc(Key.properties, "The properties of the key.");
-@@doc(
-  Keys.createIfNotExist::parameters.resource,
+@@doc(Keys.createIfNotExist::parameters.resource,
   "The parameters used to create the specified key."
 );

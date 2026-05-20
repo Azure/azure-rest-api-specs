@@ -27,8 +27,7 @@ interface Authorizations {
   delete is ArmResourceDeleteAsync<ExpressRouteAuthorization>;
 }
 
-@@clientName(
-  Authorizations.createOrUpdate::parameters.resource,
+@@clientName(Authorizations.createOrUpdate::parameters.resource,
   "authorization"
 );
 

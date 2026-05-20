@@ -68,11 +68,8 @@ interface InvoicesOperationGroup {
     @body
     @identifiers(#[])
     downloadUrls: DocumentDownloadRequest[],
-  ):
-    | ArmResponse<DocumentDownloadResult>
-    | ArmAcceptedLroResponse<
-        "Resource operation accepted.",
-        LroHeaders = ArmLroLocationHeader<FinalResult = DocumentDownloadResult>
-      >
-    | ErrorResponse;
+  ): ArmResponse<DocumentDownloadResult> | ArmAcceptedLroResponse<
+    "Resource operation accepted.",
+    LroHeaders = ArmLroLocationHeader<FinalResult = DocumentDownloadResult>
+  > | ErrorResponse;
 }

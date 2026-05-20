@@ -66,7 +66,7 @@ interface SubscriptionContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -80,7 +80,7 @@ interface SubscriptionContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -112,21 +112,19 @@ interface SubscriptionContracts {
       @query("appType")
       appType?: AppType;
     },
-    Response =
-      | (ArmResponse<SubscriptionContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag: string;
-        })
-      | (ArmResourceCreatedSyncResponse<SubscriptionContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag: string;
-        })
+    Response = (ArmResponse<SubscriptionContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmResourceCreatedSyncResponse<SubscriptionContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
@@ -163,7 +161,7 @@ interface SubscriptionContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -240,7 +238,7 @@ interface SubscriptionContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 }
@@ -293,7 +291,7 @@ interface UserSubscription {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -376,7 +374,7 @@ interface WorkspaceSubscription {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -390,7 +388,7 @@ interface WorkspaceSubscription {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -422,21 +420,19 @@ interface WorkspaceSubscription {
       @query("appType")
       appType?: AppType;
     },
-    Response =
-      | (ArmResponse<SubscriptionContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag: string;
-        })
-      | (ArmResourceCreatedSyncResponse<SubscriptionContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag: string;
-        })
+    Response = (ArmResponse<SubscriptionContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmResourceCreatedSyncResponse<SubscriptionContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
@@ -473,7 +469,7 @@ interface WorkspaceSubscription {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -550,30 +546,25 @@ interface WorkspaceSubscription {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 }
 
 @@maxLength(SubscriptionContract.name, 256);
-@@doc(
-  SubscriptionContract.name,
+@@doc(SubscriptionContract.name,
   "Subscription entity Identifier. The entity represents the association between a user and a product in API Management."
 );
 @@doc(SubscriptionContract.properties, "Subscription contract properties.");
-@@doc(
-  SubscriptionContracts.createOrUpdate::parameters.resource,
+@@doc(SubscriptionContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );
-@@doc(
-  SubscriptionContracts.update::parameters.properties,
+@@doc(SubscriptionContracts.update::parameters.properties,
   "Update parameters."
 );
-@@doc(
-  WorkspaceSubscription.createOrUpdate::parameters.resource,
+@@doc(WorkspaceSubscription.createOrUpdate::parameters.resource,
   "Create parameters."
 );
-@@doc(
-  WorkspaceSubscription.update::parameters.properties,
+@@doc(WorkspaceSubscription.update::parameters.properties,
   "Update parameters."
 );

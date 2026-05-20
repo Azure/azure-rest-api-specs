@@ -1559,6 +1559,5 @@ alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Ht
 alias ResourceUpdatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<200> &
   T;
 
-alias ResourceCreatedOrOkResponse<T extends TypeSpec.Reflection.Model> =
-  | ResourceCreatedResponse<T>
-  | (TypeSpec.Http.Response<200> & T);
+alias ResourceCreatedOrOkResponse<T extends TypeSpec.Reflection.Model> = ResourceCreatedResponse<T> | (TypeSpec.Http.Response<200> &
+  T);

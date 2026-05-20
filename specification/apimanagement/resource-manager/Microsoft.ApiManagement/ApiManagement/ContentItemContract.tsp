@@ -37,7 +37,7 @@ interface ContentItemContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -51,7 +51,7 @@ interface ContentItemContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -68,21 +68,19 @@ interface ContentItemContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response =
-      | (ArmResponse<ContentItemContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag: string;
-        })
-      | (ArmResourceCreatedSyncResponse<ContentItemContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag: string;
-        })
+    Response = (ArmResponse<ContentItemContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmResourceCreatedSyncResponse<ContentItemContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
@@ -113,7 +111,6 @@ interface ContentItemContracts {
 @@minLength(ContentItemContract.name, 1);
 @@doc(ContentItemContract.name, "Content item identifier.");
 @@doc(ContentItemContract.properties, "Properties of the content item.");
-@@doc(
-  ContentItemContracts.createOrUpdate::parameters.resource,
+@@doc(ContentItemContracts.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );

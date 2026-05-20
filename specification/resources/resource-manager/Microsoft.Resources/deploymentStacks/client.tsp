@@ -57,24 +57,21 @@ namespace Microsoft.Resources.DeploymentStacks {
   // DeploymentStacksWhatIfResults
   @@scope(DeploymentStacksWhatIfResultsAtResourceGroup.get, "!csharp");
   @@scope(DeploymentStacksWhatIfResultsAtResourceGroup.list, "!csharp");
-  @@scope(
-    DeploymentStacksWhatIfResultsAtResourceGroup.createOrUpdate,
+  @@scope(DeploymentStacksWhatIfResultsAtResourceGroup.createOrUpdate,
     "!csharp"
   );
   @@scope(DeploymentStacksWhatIfResultsAtResourceGroup.delete, "!csharp");
   @@scope(DeploymentStacksWhatIfResultsAtResourceGroup.whatIf, "!csharp");
   @@scope(DeploymentStacksWhatIfResultsAtSubscription.get, "!csharp");
   @@scope(DeploymentStacksWhatIfResultsAtSubscription.list, "!csharp");
-  @@scope(
-    DeploymentStacksWhatIfResultsAtSubscription.createOrUpdate,
+  @@scope(DeploymentStacksWhatIfResultsAtSubscription.createOrUpdate,
     "!csharp"
   );
   @@scope(DeploymentStacksWhatIfResultsAtSubscription.delete, "!csharp");
   @@scope(DeploymentStacksWhatIfResultsAtSubscription.whatIf, "!csharp");
   @@scope(DeploymentStacksWhatIfResultsAtManagementGroup.get, "!csharp");
   @@scope(DeploymentStacksWhatIfResultsAtManagementGroup.list, "!csharp");
-  @@scope(
-    DeploymentStacksWhatIfResultsAtManagementGroup.createOrUpdate,
+  @@scope(DeploymentStacksWhatIfResultsAtManagementGroup.createOrUpdate,
     "!csharp"
   );
   @@scope(DeploymentStacksWhatIfResultsAtManagementGroup.delete, "!csharp");
@@ -95,18 +92,15 @@ namespace Microsoft.Resources.DeploymentStacks {
   @@scope(DeploymentStacksWhatIfAtScope.whatIf, "csharp");
 }
 @@clientName(DeploymentParameter, "DeploymentParameterItem", "csharp"); // .NET SDK validation: cannot end in "Parameter"
-@@clientName(
-  DeploymentStackTemplateDefinition,
+@@clientName(DeploymentStackTemplateDefinition,
   "DeploymentStackTemplateExportResult",
   "csharp"
 ); // .NET SDK validation: cannot end in "Definition"
-@@clientName(
-  DeploymentStacksWhatIfResult,
+@@clientName(DeploymentStacksWhatIfResult,
   "DeploymentStackWhatIfResult",
   "csharp"
 );
-@@clientName(
-  DeploymentStacksWhatIfResultProperties,
+@@clientName(DeploymentStacksWhatIfResultProperties,
   "DeploymentStackWhatIfResultProperties",
   "csharp"
 );
@@ -120,38 +114,32 @@ namespace Microsoft.Resources.DeploymentStacks {
 @@alternateType(ResourceReference.id, armResourceIdentifier, "csharp");
 @@alternateType(ResourceReference.type, armResourceType, "csharp");
 @@alternateType(ResourceReference.identifiers, unknown, "csharp");
-@@clientName(
-  DeploymentStacksWhatIfResultProperties.deploymentStackLastModified,
+@@clientName(DeploymentStacksWhatIfResultProperties.deploymentStackLastModified,
   "DeploymentStackLastModifiedOn",
   "csharp"
 );
-@@alternateType(
-  DeploymentStacksWhatIfResultProperties.deploymentStackResourceId,
+@@alternateType(DeploymentStacksWhatIfResultProperties.deploymentStackResourceId,
   armResourceIdentifier,
   "csharp"
 );
 @@alternateType(KeyVaultReference.id, armResourceIdentifier, "csharp");
-@@alternateType(
-  DeploymentStacksWhatIfResourceChange.resourceConfigurationChanges,
+@@alternateType(DeploymentStacksWhatIfResourceChange.resourceConfigurationChanges,
   DeploymentStacksChangeDelta<unknown>,
   "csharp"
 );
 @@alternateType(DeploymentStackTemplateDefinition.template, unknown, "csharp");
-@@usage(
-  DeploymentStackValidateProperties,
+@@usage(DeploymentStackValidateProperties,
   Usage.input | Usage.output,
   "csharp"
 );
 @@usage(ManagedResourceReference, Usage.input | Usage.output, "csharp");
 @@usage(ResourceReferenceExtended, Usage.input | Usage.output, "csharp");
 @@clientName(ResourceReference, "DeploymentStackResourceReference", "csharp");
-@@clientName(
-  ManagedResourceReference,
+@@clientName(ManagedResourceReference,
   "DeploymentStackManagedResourceReference",
   "csharp"
 );
-@@clientName(
-  ResourceReferenceExtended,
+@@clientName(ResourceReferenceExtended,
   "DeploymentStackResourceReferenceExtended",
   "csharp"
 );
@@ -159,22 +147,19 @@ namespace Microsoft.Resources.DeploymentStacks {
 @@clientName(DenySettings, "DeploymentStackDenySettings", "csharp");
 @@clientName(DenySettingsMode, "DeploymentStackDenySettingsMode", "csharp");
 @@clientName(DenyStatusMode, "DeploymentStackDenyStatusMode", "csharp");
-@@clientName(
-  Azure.ResourceManager.Foundations.ErrorAdditionalInfo,
+@@clientName(Azure.ResourceManager.Foundations.ErrorAdditionalInfo,
   "DeploymentStackAdditionalErrorInfo",
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "update base model for SDK backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
-  DeploymentStackValidateResult,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(DeploymentStackValidateResult,
   Azure.ResourceManager.Foundations.ProxyResource,
   "csharp"
 );
 
 // CSharp SDK: Preserve API compatibility — output-only model was previously round-trip
 @@usage(DeploymentExtension, Usage.input, "csharp");
-@@usage(
-  Azure.ResourceManager.Foundations.ErrorAdditionalInfo,
+@@usage(Azure.ResourceManager.Foundations.ErrorAdditionalInfo,
   Usage.input,
   "csharp"
 );

@@ -76,15 +76,12 @@ interface BackupResourceVaultConfigs {
 }
 
 @@doc(BackupResourceVaultConfigResource.name, "");
-@@doc(
-  BackupResourceVaultConfigResource.properties,
+@@doc(BackupResourceVaultConfigResource.properties,
   "BackupResourceVaultConfigResource properties"
 );
-@@doc(
-  BackupResourceVaultConfigs.put::parameters.resource,
+@@doc(BackupResourceVaultConfigs.put::parameters.resource,
   "resource config request"
 );
-@@doc(
-  BackupResourceVaultConfigs.update::parameters.properties,
+@@doc(BackupResourceVaultConfigs.update::parameters.properties,
   "resource config request"
 );

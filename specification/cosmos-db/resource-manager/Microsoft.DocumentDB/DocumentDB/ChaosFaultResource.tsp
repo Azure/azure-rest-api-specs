@@ -54,11 +54,9 @@ interface ChaosFaultResources {
 }
 
 @@doc(chaosFaultResource.name, "The name of the ChaosFault.");
-@@doc(
-  chaosFaultResource.properties,
+@@doc(chaosFaultResource.properties,
   "A request object to enable/disable the chaos fault."
 );
-@@doc(
-  ChaosFaultResources.enableDisable::parameters.resource,
+@@doc(ChaosFaultResources.enableDisable::parameters.resource,
   "A request object to enable/disable the chaos fault."
 );

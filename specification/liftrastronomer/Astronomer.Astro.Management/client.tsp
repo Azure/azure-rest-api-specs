@@ -9,13 +9,11 @@ using LiftrBase;
 
 @@clientName(Astronomer.Astro, "AstroMgmtClient", "python");
 
-@@clientName(
-  Data.OrganizationProperties,
+@@clientName(Data.OrganizationProperties,
   "AstroOrganizationProperties",
   "csharp"
 );
-@@clientName(
-  Data.PartnerOrganizationProperties,
+@@clientName(Data.PartnerOrganizationProperties,
   "AstroPartnerOrganizationProperties",
   "csharp"
 );
@@ -27,8 +25,7 @@ using LiftrBase;
 @@clientName(RenewalMode, "AstroRenewalMode", "csharp");
 @@clientName(OrganizationResource, "AstroOrganization", "csharp");
 @@clientName(SingleSignOnStates, "AstroSingleSignOnState", "csharp");
-@@clientName(
-  ResourceProvisioningState,
+@@clientName(ResourceProvisioningState,
   "AstroResourceProvisioningState",
   "csharp"
 );

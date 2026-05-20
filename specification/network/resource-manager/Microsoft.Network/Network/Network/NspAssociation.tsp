@@ -61,14 +61,11 @@ interface NspAssociations {
   @tag("NetworkSecurityPerimeterAssociations")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     NspAssociation,
-    Response =
-      | ArmResourceUpdatedResponse<NspAssociation>
-      | ArmResourceCreatedResponse<NspAssociation>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader> &
-          Azure.Core.Foundations.RetryAfterHeader & {
-            @bodyRoot
-            _: NspAssociation;
-          }),
+    Response = ArmResourceUpdatedResponse<NspAssociation> | ArmResourceCreatedResponse<NspAssociation> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader> &
+      Azure.Core.Foundations.RetryAfterHeader & {
+        @bodyRoot
+        _: NspAssociation;
+      }),
     Error = CloudError
   >;
 
@@ -80,11 +77,8 @@ interface NspAssociations {
   @tag("NetworkSecurityPerimeterAssociations")
   delete is ArmResourceDeleteWithoutOkAsync<
     NspAssociation,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-          Azure.Core.Foundations.RetryAfterHeader>
-      | ArmDeletedNoContentResponse,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -128,11 +122,9 @@ interface NspAssociations {
 @@maxLength(NspAssociation.name, 80);
 @@doc(NspAssociation.name, "The name of the NSP association.");
 @@doc(NspAssociation.properties, "Properties of the NSP resource association.");
-@@doc(
-  NspAssociations.createOrUpdate::parameters.resource,
+@@doc(NspAssociations.createOrUpdate::parameters.resource,
   "Parameters that hold the NspAssociation resource to be created/updated."
 );
-@@doc(
-  NspAssociations.reconcile::parameters.body,
+@@doc(NspAssociations.reconcile::parameters.body,
   "Parameters for NSP association reconcile"
 );

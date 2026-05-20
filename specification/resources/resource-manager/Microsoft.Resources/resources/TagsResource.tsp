@@ -48,10 +48,8 @@ interface TagsResources {
   createOrUpdateAtScope is Extension.CreateOrReplaceAsync<
     Extension.ScopeParameter,
     TagsResource,
-    Response =
-      | ArmResourceUpdatedResponse<TagsResource>
-      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = TagsResource> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    Response = ArmResourceUpdatedResponse<TagsResource> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = TagsResource> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Error = CloudError
   >;
 

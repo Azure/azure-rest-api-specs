@@ -70,10 +70,7 @@ interface SecurityUserConfigurations {
       @query("force")
       force?: boolean;
     },
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -101,15 +98,12 @@ interface SecurityUserConfigurations {
   >;
 }
 
-@@doc(
-  SecurityUserConfiguration.name,
+@@doc(SecurityUserConfiguration.name,
   "The name of the network manager Security Configuration."
 );
-@@doc(
-  SecurityUserConfiguration.properties,
+@@doc(SecurityUserConfiguration.properties,
   "Indicates the properties for the network manager security user configuration."
 );
-@@doc(
-  SecurityUserConfigurations.createOrUpdate::parameters.resource,
+@@doc(SecurityUserConfigurations.createOrUpdate::parameters.resource,
   "The security user configuration to create or update"
 );

@@ -220,10 +220,7 @@ interface VolumeGroups {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     VolumeGroupDetails,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 }
 
@@ -231,7 +228,6 @@ interface VolumeGroups {
 @@minLength(VolumeGroupDetails.name, 1);
 @@doc(VolumeGroupDetails.name, "The name of the volumeGroup");
 @@doc(VolumeGroupDetails.properties, "Volume group properties");
-@@doc(
-  VolumeGroups.create::parameters.resource,
+@@doc(VolumeGroups.create::parameters.resource,
   "Volume Group object supplied in the body of the operation."
 );

@@ -5,32 +5,27 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Microsoft.OnlineExperimentation;
 
-@@clientName(
-  Microsoft.OnlineExperimentation,
+@@clientName(Microsoft.OnlineExperimentation,
   "OnlineExperimentationMgmtClient",
   "java"
 );
 
-@@clientName(
-  Microsoft.OnlineExperimentation,
+@@clientName(Microsoft.OnlineExperimentation,
   "OnlineExperimentationMgmtClient",
   "python"
 );
 
 // CSharp
-@@clientName(
-  Azure.ResourceManager.ResourceProvisioningState,
+@@clientName(Azure.ResourceManager.ResourceProvisioningState,
   "OnlineExperimentationProvisioningState",
   "csharp"
 );
-@@alternateType(
-  OnlineExperimentationWorkspaceProperties.workspaceId,
+@@alternateType(OnlineExperimentationWorkspaceProperties.workspaceId,
   uuid,
   "csharp"
 );
 
-@@clientName(
-  PrivateEndpointConnection,
+@@clientName(PrivateEndpointConnection,
   "OnlineExperimentationPrivateEndpointConnection",
   "csharp"
 );
@@ -46,8 +41,7 @@ namespace Azure.ResourceManager.Models {
   }
 }
 
-@@alternateType(
-  Azure.ResourceManager.PrivateEndpointConnectionProperties.privateEndpoint,
+@@alternateType(Azure.ResourceManager.PrivateEndpointConnectionProperties.privateEndpoint,
   Azure.ResourceManager.Models.SubResource,
   "csharp"
 );

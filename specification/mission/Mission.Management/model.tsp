@@ -52,8 +52,7 @@ model CommunityResource is TrackedResource<CommunityProperties> {
   ...ManagedServiceIdentityProperty;
 }
 
-@@added(
-  CommunityResource.identity,
+@@added(CommunityResource.identity,
   Microsoft.Mission.Versions.v2024_06_01_preview
 );
 
@@ -70,8 +69,7 @@ model EnclaveResource is TrackedResource<VirtualEnclaveProperties> {
   ...ManagedServiceIdentityProperty;
 }
 
-@@added(
-  EnclaveResource.identity,
+@@added(EnclaveResource.identity,
   Microsoft.Mission.Versions.v2024_06_01_preview
 );
 

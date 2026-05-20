@@ -150,11 +150,9 @@ interface ServerAdvisors {
 
 @@doc(Advisor.name, "The name of the Database Advisor.");
 @@doc(Advisor.properties, "Resource properties.");
-@@doc(
-  Advisors.update::parameters.properties,
+@@doc(Advisors.update::parameters.properties,
   "The requested advisor resource state."
 );
-@@doc(
-  ServerAdvisors.update::parameters.properties,
+@@doc(ServerAdvisors.update::parameters.properties,
   "The requested advisor resource state."
 );

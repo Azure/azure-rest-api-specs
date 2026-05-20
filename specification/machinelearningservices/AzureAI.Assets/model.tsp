@@ -4,9 +4,14 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./common.tsp";
 import "@typespec/openapi";
+import "@typespec/versioning";
 
-using Rest;
-using Versioning;
+using TypeSpec.OpenAPI;
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.Core;
+using Azure.Core.Traits;
 
 namespace Microsoft.MachineLearningServices;
 
@@ -142,6 +147,5 @@ alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Ht
   T;
 
 #suppress "@azure-tools/typespec-providerhub/no-inline-model" "Need to create reponses correctly"
-alias ResourceCreatedOrOkResponse<T extends TypeSpec.Reflection.Model> =
-  | ResourceCreatedResponse<T>
-  | (TypeSpec.Http.Response<200> & T);
+alias ResourceCreatedOrOkResponse<T extends TypeSpec.Reflection.Model> = ResourceCreatedResponse<T> | (TypeSpec.Http.Response<200> &
+  T);

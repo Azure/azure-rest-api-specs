@@ -52,13 +52,11 @@ interface PrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "'get' returns no response body, matching existing service endpoint behavior"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     PrivateEndpointConnection,
-    Response =
-      | ArmResourceUpdatedResponse<PrivateEndpointConnection>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
-          Azure.Core.Foundations.RetryAfterHeader> & {
-          @bodyRoot
-          _: PrivateEndpointConnection;
-        })
+    Response = ArmResourceUpdatedResponse<PrivateEndpointConnection> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @bodyRoot
+      _: PrivateEndpointConnection;
+    })
   >;
 
   /**
@@ -67,10 +65,7 @@ interface PrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Delete response codes for 'createOrUpdate' match existing service endpoint behavior"
   delete is ArmResourceDeleteWithoutOkAsync<
     PrivateEndpointConnection,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -82,12 +77,10 @@ interface PrivateEndpointConnections {
   >;
 }
 
-@@doc(
-  PrivateEndpointConnection.name,
+@@doc(PrivateEndpointConnection.name,
   "The name of the private endpoint connection associated with the Cognitive Services Account"
 );
 @@doc(PrivateEndpointConnection.properties, "Resource properties.");
-@@doc(
-  PrivateEndpointConnections.createOrUpdate::parameters.resource,
+@@doc(PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "The private endpoint connection properties."
 );

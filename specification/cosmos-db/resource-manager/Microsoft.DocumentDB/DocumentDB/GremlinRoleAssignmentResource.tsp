@@ -38,10 +38,8 @@ interface GremlinRoleAssignmentResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createUpdateGremlinRoleAssignment is ArmResourceCreateOrReplaceAsync<
     GremlinRoleAssignmentResource,
-    Response =
-      | ArmResourceUpdatedResponse<GremlinRoleAssignmentResource>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = GremlinRoleAssignmentResource> &
-          Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmResourceUpdatedResponse<GremlinRoleAssignmentResource> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = GremlinRoleAssignmentResource> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -50,10 +48,7 @@ interface GremlinRoleAssignmentResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deleteGremlinRoleAssignment is ArmResourceDeleteWithoutOkAsync<
     GremlinRoleAssignmentResource,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -66,11 +61,9 @@ interface GremlinRoleAssignmentResources {
 }
 
 @@doc(GremlinRoleAssignmentResource.name, "The GUID for the Role Assignment.");
-@@doc(
-  GremlinRoleAssignmentResource.properties,
+@@doc(GremlinRoleAssignmentResource.properties,
   "Properties to create and update an Azure Cosmos DB Gremlin Role Assignment."
 );
-@@doc(
-  GremlinRoleAssignmentResources.createUpdateGremlinRoleAssignment::parameters.resource,
+@@doc(GremlinRoleAssignmentResources.createUpdateGremlinRoleAssignment::parameters.resource,
   "The properties required to create or update a Role Assignment."
 );

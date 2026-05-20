@@ -46,7 +46,6 @@ interface Runs {
 
   /** Add or modify a run. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
-  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @route("/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/runs/{runId}")
   @patch(#{ implicitOptionality: true })
   addOrModifyExperiment is Operation<
@@ -143,7 +142,6 @@ interface Runs {
 
   /** Add or modify run service instances. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
-  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @route("/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/runs/{runId}/serviceinstances/{nodeId}")
   @patch(#{ implicitOptionality: true })
   addOrModifyRunServiceInstances is Operation<
@@ -264,7 +262,6 @@ interface Runs {
 
   /** Add or modify a run by experiment ID. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
-  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @route("/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experimentids/{experimentId}/runs/{runId}")
   @patch(#{ implicitOptionality: true })
   addOrModifyByExperimentId is Operation<
@@ -377,7 +374,6 @@ interface Runs {
 
   /** Modify or delete run tags by experiment ID. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
-  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @route("/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experimentids/{experimentId}/runs/{runId}/tags")
   @patch(#{ implicitOptionality: true })
   modifyOrDeleteTagsByExperimentId is Operation<
@@ -452,7 +448,6 @@ interface Runs {
 
   /** Batch add or modify runs by experiment ID. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
-  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @route("/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experimentids/{experimentId}/batch/runs")
   @patch(#{ implicitOptionality: true })
   batchAddOrModifyByExperimentId is Operation<
@@ -491,7 +486,6 @@ interface Runs {
 
   /** Add or modify a run by experiment name. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
-  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @route("/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}/runs/{runId}")
   @patch(#{ implicitOptionality: true })
   addOrModifyByExperimentName is Operation<
@@ -604,7 +598,6 @@ interface Runs {
 
   /** Modify or delete run tags by experiment name. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
-  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @route("/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}/runs/{runId}/tags")
   @patch(#{ implicitOptionality: true })
   modifyOrDeleteTagsByExperimentName is Operation<
@@ -679,7 +672,6 @@ interface Runs {
 
   /** Batch add or modify runs by experiment name. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
-  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @route("/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}/batch/runs")
   @patch(#{ implicitOptionality: true })
   batchAddOrModifyByExperimentName is Operation<

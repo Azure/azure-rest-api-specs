@@ -47,13 +47,11 @@ interface RelayNamespaces {
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     RelayNamespace,
-    Response =
-      | ArmResourceUpdatedResponse<RelayNamespace>
-      | ArmResourceCreatedResponse<
-          RelayNamespace,
-          ArmLroLocationHeader<FinalResult = RelayNamespace> &
-            Azure.Core.Foundations.RetryAfterHeader
-        >
+    Response = ArmResourceUpdatedResponse<RelayNamespace> | ArmResourceCreatedResponse<
+      RelayNamespace,
+      ArmLroLocationHeader<FinalResult = RelayNamespace> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >
   >;
 
   /**
@@ -63,9 +61,7 @@ interface RelayNamespaces {
   update is ArmCustomPatchSync<
     RelayNamespace,
     PatchModel = RelayUpdateParameters,
-    Response =
-      | ArmResponse<RelayNamespace>
-      | ArmResourceCreatedSyncResponse<RelayNamespace>
+    Response = ArmResponse<RelayNamespace> | ArmResourceCreatedSyncResponse<RelayNamespace>
   >;
 
   /**
@@ -74,10 +70,7 @@ interface RelayNamespaces {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     RelayNamespace,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -92,11 +85,9 @@ interface RelayNamespaces {
 }
 
 @@doc(RelayNamespace.properties, "Description of Relay namespace");
-@@doc(
-  RelayNamespaces.createOrUpdate::parameters.resource,
+@@doc(RelayNamespaces.createOrUpdate::parameters.resource,
   "Parameters supplied to create a namespace resource."
 );
-@@doc(
-  RelayNamespaces.update::parameters.properties,
+@@doc(RelayNamespaces.update::parameters.properties,
   "Parameters for updating a namespace resource."
 );

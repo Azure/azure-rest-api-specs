@@ -66,7 +66,7 @@ interface BackendContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -80,7 +80,7 @@ interface BackendContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -97,21 +97,19 @@ interface BackendContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response =
-      | (ArmResponse<BackendContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag: string;
-        })
-      | (ArmCreatedResponse<BackendContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag: string;
-        })
+    Response = (ArmResponse<BackendContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<BackendContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
@@ -134,7 +132,7 @@ interface BackendContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -244,7 +242,7 @@ interface WorkspaceBackend {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -258,7 +256,7 @@ interface WorkspaceBackend {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -275,21 +273,19 @@ interface WorkspaceBackend {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response =
-      | (ArmResponse<BackendContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag: string;
-        })
-      | (ArmCreatedResponse<BackendContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag: string;
-        })
+    Response = (ArmResponse<BackendContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<BackendContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
@@ -312,7 +308,7 @@ interface WorkspaceBackend {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -363,22 +359,18 @@ interface WorkspaceBackend {
 
 @@maxLength(BackendContract.name, 80);
 @@minLength(BackendContract.name, 1);
-@@doc(
-  BackendContract.name,
+@@doc(BackendContract.name,
   "Identifier of the Backend entity. Must be unique in the current API Management service instance."
 );
 @@doc(BackendContract.properties, "Backend entity contract properties.");
-@@doc(
-  BackendContracts.createOrUpdate::parameters.resource,
+@@doc(BackendContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );
 @@doc(BackendContracts.update::parameters.properties, "Update parameters.");
-@@doc(
-  BackendContracts.reconnect::parameters.body,
+@@doc(BackendContracts.reconnect::parameters.body,
   "Reconnect request parameters."
 );
-@@doc(
-  WorkspaceBackend.createOrUpdate::parameters.resource,
+@@doc(WorkspaceBackend.createOrUpdate::parameters.resource,
   "Create parameters."
 );
 @@doc(WorkspaceBackend.update::parameters.properties, "Update parameters.");

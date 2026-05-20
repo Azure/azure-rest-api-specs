@@ -612,7 +612,7 @@ interface Caches {
     Cache,
     PoolChangeRequest,
     Cache,
-    LroHeaders = ArmLroLocationHeader<FinalResult = Cache> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -625,13 +625,12 @@ interface Caches {
     Resource = Cache,
     Request = void,
     Response = Cache,
-    LroHeaders = ArmLroLocationHeader<FinalResult = Cache> &
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 
-@@doc(
-  Caches.poolChange::parameters.body,
+@@doc(Caches.poolChange::parameters.body,
   "Move cache to the pool supplied in the body of the operation."
 );
 

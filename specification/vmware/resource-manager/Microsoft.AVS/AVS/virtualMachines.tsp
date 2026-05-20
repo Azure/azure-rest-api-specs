@@ -23,8 +23,7 @@ interface VirtualMachines {
   >;
 }
 
-@@clientName(
-  VirtualMachines.restrictMovement::parameters.body,
+@@clientName(VirtualMachines.restrictMovement::parameters.body,
   "restrictMovement"
 );
 

@@ -40,10 +40,8 @@ interface ReplicationLinks {
   @tag("ReplicationLinks")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ReplicationLink,
-    Response =
-      | ArmResourceUpdatedResponse<ReplicationLink>
-      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ReplicationLink> &
-          Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmResourceUpdatedResponse<ReplicationLink> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ReplicationLink> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

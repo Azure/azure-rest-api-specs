@@ -63,10 +63,7 @@ interface ConnectedEnvironments {
   @summary("Delete an connectedEnvironment.")
   delete is ArmResourceDeleteWithoutOkAsync<
     ConnectedEnvironment,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
     Error = DefaultErrorResponse
   >;
 
@@ -102,19 +99,15 @@ interface ConnectedEnvironments {
 }
 
 @@doc(ConnectedEnvironment.name, "Name of the connectedEnvironment.");
-@@doc(
-  ConnectedEnvironment.properties,
+@@doc(ConnectedEnvironment.properties,
   "ConnectedEnvironment resource specific properties"
 );
-@@doc(
-  ConnectedEnvironments.createOrUpdate::parameters.resource,
+@@doc(ConnectedEnvironments.createOrUpdate::parameters.resource,
   "Configuration details of the connectedEnvironment."
 );
-@@doc(
-  ConnectedEnvironments.update::parameters.properties,
+@@doc(ConnectedEnvironments.update::parameters.properties,
   "Configuration details of the connectedEnvironment."
 );
-@@doc(
-  ConnectedEnvironments.checkNameAvailability::parameters.body,
+@@doc(ConnectedEnvironments.checkNameAvailability::parameters.body,
   "The check connectedEnvironmentName availability request."
 );

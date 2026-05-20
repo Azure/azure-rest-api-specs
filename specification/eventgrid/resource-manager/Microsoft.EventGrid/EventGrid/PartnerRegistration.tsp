@@ -39,13 +39,11 @@ interface PartnerRegistrations {
   @summary("Create a partner registration.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     PartnerRegistration,
-    Response =
-      | ArmResourceUpdatedResponse<PartnerRegistration>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PartnerRegistration> &
-          Azure.Core.Foundations.RetryAfterHeader> & {
-          @bodyRoot
-          _: PartnerRegistration;
-        }),
+    Response = ArmResourceUpdatedResponse<PartnerRegistration> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PartnerRegistration> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @bodyRoot
+      _: PartnerRegistration;
+    }),
     LroHeaders = ArmLroLocationHeader<FinalResult = PartnerRegistration> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -59,15 +57,13 @@ interface PartnerRegistrations {
   update is ArmCustomPatchAsync<
     PartnerRegistration,
     PatchModel = PartnerRegistrationUpdateParameters,
-    Response =
-      | {
-          @body body: void;
-        }
-      | ArmResourceCreatedResponse<
-          PartnerRegistration,
-          LroHeaders = ArmLroLocationHeader<FinalResult = PartnerRegistration> &
-            Azure.Core.Foundations.RetryAfterHeader
-        >
+    Response = {
+      @body body: void;
+    } | ArmResourceCreatedResponse<
+      PartnerRegistration,
+      LroHeaders = ArmLroLocationHeader<FinalResult = PartnerRegistration> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >
   >;
 
   /**
@@ -77,10 +73,7 @@ interface PartnerRegistrations {
   @summary("Delete a partner registration.")
   delete is ArmResourceDeleteWithoutOkAsync<
     PartnerRegistration,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -129,15 +122,12 @@ interface PartnerRegistrations {
 }
 
 @@doc(PartnerRegistration.name, "Name of the partner registration.");
-@@doc(
-  PartnerRegistration.properties,
+@@doc(PartnerRegistration.properties,
   "Properties of the partner registration."
 );
-@@doc(
-  PartnerRegistrations.createOrUpdate::parameters.resource,
+@@doc(PartnerRegistrations.createOrUpdate::parameters.resource,
   "PartnerRegistration information."
 );
-@@doc(
-  PartnerRegistrations.update::parameters.properties,
+@@doc(PartnerRegistrations.update::parameters.properties,
   "Partner registration update information."
 );

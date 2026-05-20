@@ -39,10 +39,8 @@ interface DeletedVaults {
   purgeDeleted is ArmResourceActionAsyncBase<
     DeletedVault,
     void,
-    Response =
-      | OkResponse
-      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Error = CloudError
   >;

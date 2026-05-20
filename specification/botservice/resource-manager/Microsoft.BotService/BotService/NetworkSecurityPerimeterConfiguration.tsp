@@ -51,11 +51,9 @@ interface NetworkSecurityPerimeterConfigurations {
   >;
 }
 
-@@doc(
-  NetworkSecurityPerimeterConfiguration.name,
+@@doc(NetworkSecurityPerimeterConfiguration.name,
   "The resource association Name. Composed of parameter guid and association name."
 );
-@@doc(
-  NetworkSecurityPerimeterConfiguration.properties,
+@@doc(NetworkSecurityPerimeterConfiguration.properties,
   "Properties of the Network Security Perimeter configuration"
 );

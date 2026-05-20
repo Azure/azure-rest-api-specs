@@ -38,10 +38,8 @@ interface MachineExtensions {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     MachineExtension,
-    Response =
-      | ArmResourceUpdatedResponse<MachineExtension>
-      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = MachineExtension> &
-          Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmResourceUpdatedResponse<MachineExtension> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = MachineExtension> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -61,11 +59,8 @@ interface MachineExtensions {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     MachineExtension,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-          Azure.Core.Foundations.RetryAfterHeader>
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -86,11 +81,9 @@ interface MachineExtensions {
 
 @@doc(MachineExtension.name, "The name of the machine extension.");
 @@doc(MachineExtension.properties, "Describes Machine Extension Properties.");
-@@doc(
-  MachineExtensions.createOrUpdate::parameters.resource,
+@@doc(MachineExtensions.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Machine Extension operation."
 );
-@@doc(
-  MachineExtensions.update::parameters.properties,
+@@doc(MachineExtensions.update::parameters.properties,
   "Parameters supplied to the Create Machine Extension operation."
 );

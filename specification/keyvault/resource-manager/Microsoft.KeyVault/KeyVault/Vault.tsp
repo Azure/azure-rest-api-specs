@@ -77,13 +77,11 @@ interface Vaults {
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     Vault,
     Request = VaultCreateOrUpdateParameters,
-    Response =
-      | Vault
-      | ArmResourceCreatedResponse<
-          Vault,
-          LroHeaders = ArmLroLocationHeader<FinalResult = Vault> &
-            Azure.Core.Foundations.RetryAfterHeader
-        >,
+    Response = Vault | ArmResourceCreatedResponse<
+      Vault,
+      LroHeaders = ArmLroLocationHeader<FinalResult = Vault> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >,
     Error = CloudError
   >;
 
@@ -141,9 +139,7 @@ interface Vaults {
   updateAccessPolicy is VaultsOps.ActionSync<
     Vault,
     Request = VaultAccessPolicyParameters,
-    Response =
-      | ArmResponse<VaultAccessPolicyParameters>
-      | ArmResourceCreatedSyncResponse<VaultAccessPolicyParameters>,
+    Response = ArmResponse<VaultAccessPolicyParameters> | ArmResourceCreatedSyncResponse<VaultAccessPolicyParameters>,
     OverrideErrorType = CloudError
   >;
 
@@ -162,12 +158,10 @@ interface Vaults {
 
 @@doc(Vault.name, "The name of the vault.");
 @@doc(Vault.properties, "Properties of the vault");
-@@doc(
-  Vaults.createOrUpdate::parameters.resource,
+@@doc(Vaults.createOrUpdate::parameters.resource,
   "Parameters to create or update the vault"
 );
 @@doc(Vaults.update::parameters.properties, "Parameters to patch the vault");
-@@doc(
-  Vaults.updateAccessPolicy::parameters.body,
+@@doc(Vaults.updateAccessPolicy::parameters.body,
   "Access policy to merge into the vault"
 );

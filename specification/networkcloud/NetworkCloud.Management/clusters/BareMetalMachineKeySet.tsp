@@ -81,9 +81,7 @@ interface BareMetalMachineKeySets {
       ...IfMatchParameter;
       ...IfNoneMatchParameter;
     },
-    Response =
-      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>
-      | ArmDeletedNoContentResponse
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -99,19 +97,15 @@ interface BareMetalMachineKeySets {
   >;
 }
 
-@@doc(
-  BareMetalMachineKeySet.name,
+@@doc(BareMetalMachineKeySet.name,
   "The name of the bare metal machine key set."
 );
-@@doc(
-  BareMetalMachineKeySet.properties,
+@@doc(BareMetalMachineKeySet.properties,
   "The list of the resource properties."
 );
-@@doc(
-  BareMetalMachineKeySets.createOrUpdate::parameters.resource,
+@@doc(BareMetalMachineKeySets.createOrUpdate::parameters.resource,
   "The request body."
 );
-@@doc(
-  BareMetalMachineKeySets.update::parameters.properties,
+@@doc(BareMetalMachineKeySets.update::parameters.properties,
   "The request body."
 );

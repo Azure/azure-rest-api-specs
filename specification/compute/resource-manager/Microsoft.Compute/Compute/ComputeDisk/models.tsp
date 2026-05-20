@@ -1856,11 +1856,9 @@ model SnapshotUpdateProperties {
 }
 
 @@doc(SnapshotList.value, "A list of snapshots.");
-@@doc(
-  ResourceUriList.nextLink,
+@@doc(ResourceUriList.nextLink,
   "The uri to fetch the next page of encrypted resources. Call ListNext() with this to fetch the next page of encrypted resources."
 );
-@@doc(
-  ResourceUriList.value,
+@@doc(ResourceUriList.value,
   "A list of IDs or Owner IDs of resources which are encrypted with the disk encryption set."
 );

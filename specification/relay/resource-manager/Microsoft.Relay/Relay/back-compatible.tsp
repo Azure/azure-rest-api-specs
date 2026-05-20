@@ -6,47 +6,39 @@ using Microsoft.Relay;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  RelayUpdateParameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RelayUpdateParameters.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Operation.properties);
 
-@@clientName(
-  AuthorizationRules.createOrUpdateAuthorizationRule::parameters.resource,
+@@clientName(AuthorizationRules.createOrUpdateAuthorizationRule::parameters.resource,
   "parameters"
 );
 @@clientName(AuthorizationRules.regenerateKeys::parameters.body, "parameters");
-@@clientName(
-  HybridConnections.createOrUpdateAuthorizationRule::parameters.resource,
+@@clientName(HybridConnections.createOrUpdateAuthorizationRule::parameters.resource,
   "parameters"
 );
 @@clientName(HybridConnections.regenerateKeys::parameters.body, "parameters");
-@@clientName(
-  WCFRelays.createOrUpdateAuthorizationRule::parameters.resource,
+@@clientName(WCFRelays.createOrUpdateAuthorizationRule::parameters.resource,
   "parameters"
 );
 @@clientName(WCFRelays.regenerateKeys::parameters.body, "parameters");
-@@clientName(
-  NamespacesOperationGroup.checkNameAvailability::parameters.body,
+@@clientName(NamespacesOperationGroup.checkNameAvailability::parameters.body,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  AuthorizationRule.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AuthorizationRule.properties
 );
 
-@@clientName(
-  HybridConnectionOperationGroup.createOrUpdate::parameters.resource,
+@@clientName(HybridConnectionOperationGroup.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  HybridConnection.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(HybridConnection.properties
 );
 
 @@clientName(RelayNamespaces.createOrUpdate::parameters.resource, "parameters");
@@ -55,24 +47,20 @@ using Microsoft.Relay;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(RelayNamespace.properties);
 
-@@clientName(
-  PrivateEndpointConnections.createOrUpdate::parameters.resource,
+@@clientName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  PrivateEndpointConnection.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  PrivateLinkResource.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties
 );
 
-@@clientName(
-  NetworkRuleSets.createOrUpdateNetworkRuleSet::parameters.resource,
+@@clientName(NetworkRuleSets.createOrUpdateNetworkRuleSet::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -86,8 +74,7 @@ using Microsoft.Relay;
 
 // AuthorizationRules operations
 @@clientLocation(AuthorizationRules.getAuthorizationRule, "Namespaces");
-@@clientLocation(
-  AuthorizationRules.createOrUpdateAuthorizationRule,
+@@clientLocation(AuthorizationRules.createOrUpdateAuthorizationRule,
   "Namespaces"
 );
 @@clientLocation(AuthorizationRules.deleteAuthorizationRule, "Namespaces");
@@ -97,13 +84,11 @@ using Microsoft.Relay;
 
 // HybridConnectionOperationGroup operations
 @@clientLocation(HybridConnectionOperationGroup.get, HybridConnections);
-@@clientLocation(
-  HybridConnectionOperationGroup.createOrUpdate,
+@@clientLocation(HybridConnectionOperationGroup.createOrUpdate,
   HybridConnections
 );
 @@clientLocation(HybridConnectionOperationGroup.delete, HybridConnections);
-@@clientLocation(
-  HybridConnectionOperationGroup.listByNamespace,
+@@clientLocation(HybridConnectionOperationGroup.listByNamespace,
   HybridConnections
 );
 
@@ -128,8 +113,7 @@ using Microsoft.Relay;
 // NamespacesOperationGroup operations
 @@clientLocation(NamespacesOperationGroup.checkNameAvailability, "Namespaces");
 
-@@clientName(
-  Azure.ResourceManager.CommonTypes.Resource,
+@@clientName(Azure.ResourceManager.CommonTypes.Resource,
   "ArmResource",
   "python"
 );

@@ -138,11 +138,9 @@ interface Products {
 @@doc(Product.name, "The ID that uniquely identifies a product.");
 @@doc(Product.properties, "A product.");
 @@doc(Products.update::parameters.properties, "A product.");
-@@doc(
-  Products.move::parameters.body,
+@@doc(Products.move::parameters.body,
   "The properties of the product to initiate a transfer."
 );
-@@doc(
-  Products.validateMoveEligibility::parameters.body,
+@@doc(Products.validateMoveEligibility::parameters.body,
   "The properties of the product to initiate a transfer."
 );

@@ -12,8 +12,7 @@ using Microsoft.Edge;
 @@clientName(Site, "EdgeSite", "csharp");
 @@clientName(Sites, "ResourceGroupEdgeSite", "csharp");
 @@clientName(SiteProperties, "EdgeSiteProperties", "csharp");
-@@clientName(
-  Azure.ResourceManager.ResourceProvisioningState,
+@@clientName(Azure.ResourceManager.ResourceProvisioningState,
   "EdgeSiteProvisioningState",
   "csharp"
 );

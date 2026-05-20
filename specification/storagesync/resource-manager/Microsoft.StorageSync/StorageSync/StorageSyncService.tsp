@@ -34,11 +34,11 @@ interface StorageSyncServices {
     Response = ArmResponse<StorageSyncService> & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
-      xMsCorrelationRequestId?: string;
+      correlationRequestId?: string;
 
       @header("x-ms-request-id")
       @doc("request id.")
-      xMsRequestId?: string;
+      requestId?: string;
     },
     Error = StorageSyncError
   >;
@@ -52,18 +52,16 @@ interface StorageSyncServices {
   create is Legacy.CreateOrReplaceAsync<
     StorageSyncService,
     StorageSyncServiceCreateParameters,
-    Response =
-      | ArmResourceUpdatedResponse<StorageSyncService>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = StorageSyncService> &
-          Azure.Core.Foundations.RetryAfterHeader> & {
-          @header("x-ms-correlation-request-id")
-          @doc("correlation request id")
-          xMsCorrelationRequestId?: string;
+    Response = ArmResourceUpdatedResponse<StorageSyncService> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = StorageSyncService> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id")
+      correlationRequestId?: string;
 
-          @header("x-ms-request-id")
-          @doc("Request id")
-          xMsRequestId?: string;
-        }),
+      @header("x-ms-request-id")
+      @doc("Request id")
+      requestId?: string;
+    }),
     Error = StorageSyncError
   >;
 
@@ -75,26 +73,24 @@ interface StorageSyncServices {
   update is Legacy.CustomPatchSync<
     StorageSyncService,
     PatchModel = StorageSyncServiceUpdateParameters,
-    Response =
-      | (ArmResourceUpdatedResponse<StorageSyncService> & {
-          @header("x-ms-correlation-request-id")
-          @doc("correlation request id.")
-          xMsCorrelationRequestId?: string;
+    Response = (ArmResourceUpdatedResponse<StorageSyncService> & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
 
-          @header("x-ms-request-id")
-          @doc("request id.")
-          xMsRequestId?: string;
-        })
-      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = StorageSyncService> &
-          Azure.Core.Foundations.RetryAfterHeader> & {
-          @header("x-ms-correlation-request-id")
-          @doc("correlation request id")
-          xMsCorrelationRequestId?: string;
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    }) | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = StorageSyncService> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id")
+      correlationRequestId?: string;
 
-          @header("x-ms-request-id")
-          @doc("Request id")
-          xMsRequestId?: string;
-        }),
+      @header("x-ms-request-id")
+      @doc("Request id")
+      requestId?: string;
+    }),
     Error = StorageSyncError,
     OptionalRequestBody = true
   >;
@@ -106,27 +102,24 @@ interface StorageSyncServices {
   @Azure.Core.useFinalStateVia("location")
   delete is ArmResourceDeleteWithoutOkAsync<
     StorageSyncService,
-    Response =
-      | (ArmDeletedResponse & {
-          @header("x-ms-correlation-request-id")
-          @doc("correlation request id.")
-          xMsCorrelationRequestId?: string;
+    Response = (ArmDeletedResponse & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
 
-          @header("x-ms-request-id")
-          @doc("request id.")
-          xMsRequestId?: string;
-        })
-      | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
-          Azure.Core.Foundations.RetryAfterHeader> & {
-          @header("x-ms-correlation-request-id")
-          @doc("correlation request id")
-          xMsCorrelationRequestId?: string;
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    }) | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id")
+      correlationRequestId?: string;
 
-          @header("x-ms-request-id")
-          @doc("Request id")
-          xMsRequestId?: string;
-        })
-      | ArmDeletedNoContentResponse,
+      @header("x-ms-request-id")
+      @doc("Request id")
+      requestId?: string;
+    }) | ArmDeletedNoContentResponse,
     Error = StorageSyncError
   >;
 
@@ -138,11 +131,11 @@ interface StorageSyncServices {
     Response = ArmResponse<StorageSyncServiceArray> & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
-      xMsCorrelationRequestId?: string;
+      correlationRequestId?: string;
 
       @header("x-ms-request-id")
       @doc("request id.")
-      xMsRequestId?: string;
+      requestId?: string;
     },
     Error = StorageSyncError
   >;
@@ -155,11 +148,11 @@ interface StorageSyncServices {
     Response = StorageSyncServiceArray & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
-      xMsCorrelationRequestId?: string;
+      correlationRequestId?: string;
 
       @header("x-ms-request-id")
       @doc("request id.")
-      xMsRequestId?: string;
+      requestId?: string;
     },
     Error = StorageSyncError
   >;
@@ -180,11 +173,9 @@ interface StorageSyncServices {
 
 @@doc(StorageSyncService.name, "Name of Storage Sync Service resource.");
 @@doc(StorageSyncService.properties, "Storage Sync Service properties.");
-@@doc(
-  StorageSyncServices.create::parameters.resource,
+@@doc(StorageSyncServices.create::parameters.resource,
   "Storage Sync Service resource name."
 );
-@@doc(
-  StorageSyncServices.update::parameters.properties,
+@@doc(StorageSyncServices.update::parameters.properties,
   "Storage Sync Service resource."
 );

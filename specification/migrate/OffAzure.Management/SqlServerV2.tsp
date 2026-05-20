@@ -73,7 +73,6 @@ interface SqlServerV2s {
 }
 
 @@doc(SqlServerV2.name, "SQL server name.");
-@@doc(
-  SqlServerV2.properties,
+@@doc(SqlServerV2.properties,
   "The resource-specific properties for this resource."
 );

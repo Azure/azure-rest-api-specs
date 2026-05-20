@@ -60,11 +60,8 @@ interface SignalRResources {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     SignalRResource,
-    Response =
-      | ArmResourceUpdatedResponse<SignalRResource>
-      | ArmResourceCreatedResponse<SignalRResource>
-      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SignalRResource> &
-          Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmResourceUpdatedResponse<SignalRResource> | ArmResourceCreatedResponse<SignalRResource> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SignalRResource> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -79,10 +76,7 @@ interface SignalRResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     SignalRResource,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -117,12 +111,10 @@ interface SignalRResources {
   regenerateKey is ArmResourceActionAsyncBase<
     SignalRResource,
     RegenerateKeyParameters,
-
-      | ArmResponse<SignalRKeys>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SignalRKeys> &
-          Azure.Core.Foundations.RetryAfterHeader> & {
-          @bodyRoot body: SignalRKeys;
-        }),
+    ArmResponse<SignalRKeys> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SignalRKeys> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @bodyRoot body: SignalRKeys;
+    }),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<SignalRResource>
   >;
 
@@ -159,19 +151,15 @@ interface SignalRResources {
 @@maxLength(SignalRResource.name, 63);
 @@minLength(SignalRResource.name, 3);
 @@doc(SignalRResource.name, "The name of the resource.");
-@@doc(
-  SignalRResource.properties,
+@@doc(SignalRResource.properties,
   "A class that describes the properties of the resource"
 );
-@@doc(
-  SignalRResources.createOrUpdate::parameters.resource,
+@@doc(SignalRResources.createOrUpdate::parameters.resource,
   "Parameters for the create or update operation"
 );
-@@doc(
-  SignalRResources.update::parameters.properties,
+@@doc(SignalRResources.update::parameters.properties,
   "Parameters for the update operation"
 );
-@@doc(
-  SignalRResources.regenerateKey::parameters.body,
+@@doc(SignalRResources.regenerateKey::parameters.body,
   "Parameter that describes the Regenerate Key Operation."
 );

@@ -37,7 +37,7 @@ interface UserContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -51,7 +51,7 @@ interface UserContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -75,21 +75,19 @@ interface UserContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response =
-      | (ArmResponse<UserContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag: string;
-        })
-      | (ArmCreatedResponse<UserContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag: string;
-        })
+    Response = (ArmResponse<UserContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<UserContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
@@ -112,7 +110,7 @@ interface UserContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -147,9 +145,7 @@ interface UserContracts {
       @query("appType")
       appType?: AppType;
     },
-    Response =
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void>>
-      | NoContentResponse
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void>> | NoContentResponse
   >;
 
   /**
@@ -271,17 +267,14 @@ interface UserContracts {
 
 @@maxLength(UserContract.name, 80);
 @@minLength(UserContract.name, 1);
-@@doc(
-  UserContract.name,
+@@doc(UserContract.name,
   "User identifier. Must be unique in the current API Management service instance."
 );
 @@doc(UserContract.properties, "User entity contract properties.");
-@@doc(
-  UserContracts.createOrUpdate::parameters.resource,
+@@doc(UserContracts.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );
 @@doc(UserContracts.update::parameters.properties, "Update parameters.");
-@@doc(
-  UserContracts.getSharedAccessToken::parameters.body,
+@@doc(UserContracts.getSharedAccessToken::parameters.body,
   "Create Authorization Token parameters."
 );

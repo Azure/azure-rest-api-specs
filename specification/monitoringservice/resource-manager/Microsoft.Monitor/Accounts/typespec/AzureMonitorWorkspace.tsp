@@ -25,9 +25,9 @@ namespace Microsoft.Monitor {
     /**
      * Updates part of an Azure Monitor Workspace
      */
-    update is ArmCustomPatchSync<
+    update is ArmResourcePatchSync<
       AzureMonitorWorkspaceResource,
-      AzureMonitorWorkspaceResourceUpdate
+      AzureMonitorWorkspace
     >;
 
     /**
@@ -46,13 +46,11 @@ namespace Microsoft.Monitor {
     listBySubscription is ArmListBySubscription<AzureMonitorWorkspaceResource>;
   }
 
-  @@doc(
-    AzureMonitorWorkspaceResource.name,
+  @@doc(AzureMonitorWorkspaceResource.name,
     "The name of the Azure Monitor Workspace. The name is case insensitive"
   );
   @@doc(AzureMonitorWorkspaceResource.properties, "Resource properties");
-  @@doc(
-    AzureMonitorWorkspaces.createOrUpdate::parameters.resource,
+  @@doc(AzureMonitorWorkspaces.createOrUpdate::parameters.resource,
     "Properties that need to be specified to create a new Azure Monitor Workspace"
   );
 }

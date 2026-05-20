@@ -64,9 +64,7 @@ interface DeletedServers {
     DeletedServer,
     void,
     void,
-    Response =
-      | ArmResponse<DeletedServer>
-      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = DeletedServer>>
+    Response = ArmResponse<DeletedServer> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = DeletedServer>>
   >;
 }
 

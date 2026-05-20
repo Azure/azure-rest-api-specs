@@ -40,7 +40,6 @@ interface HypervRunAsAccountResources {
 }
 
 @@doc(HypervRunAsAccountResource.name, " RunAsAccounts name");
-@@doc(
-  HypervRunAsAccountResource.properties,
+@@doc(HypervRunAsAccountResource.properties,
   "The resource-specific properties for this resource."
 );

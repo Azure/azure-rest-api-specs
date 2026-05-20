@@ -38,12 +38,10 @@ interface ProjectPolicies {
     ProjectPolicy,
     PatchModel = ProjectPolicyUpdate,
     LroHeaders = ArmLroLocationHeader,
-    Response =
-      | ProjectPolicy
-      | ArmAcceptedLroResponse<
-          "Resource update request accepted.",
-          ArmLroLocationHeader<FinalResult = ProjectPolicy>
-        >
+    Response = ProjectPolicy | ArmAcceptedLroResponse<
+      "Resource update request accepted.",
+      ArmLroLocationHeader<FinalResult = ProjectPolicy>
+    >
   >;
 
   @doc("Deletes an project policy.")
@@ -68,11 +66,9 @@ interface ProjectPolicies {
 @@minLength(ProjectPolicy.name, 3);
 @@doc(ProjectPolicy.name, "The name of the project policy.");
 @@doc(ProjectPolicy.properties, "Properties of an project policy.");
-@@doc(
-  ProjectPolicies.createOrUpdate::parameters.resource,
+@@doc(ProjectPolicies.createOrUpdate::parameters.resource,
   "Represents an project policy."
 );
-@@doc(
-  ProjectPolicies.update::parameters.properties,
+@@doc(ProjectPolicies.update::parameters.properties,
   "Updatable project policy properties."
 );

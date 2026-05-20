@@ -15,17 +15,13 @@ permissions:
 
 env:
   # Users allowed to edit protected files without failing check
-  user-allowed: >-
-    ${{
-      github.event.pull_request.user.login == 'azure-sdk' ||
-      github.event.pull_request.user.login == 'azure-sdk-automation[bot]'
-    }}
+  user-allowed: ${{ github.event.pull_request.user.login == 'azure-sdk' }}
 
 jobs:
   protected-files:
     name: Protected Files
 
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-slim
 
     steps:
       # Since check is required, the job must pass instead of being skipped

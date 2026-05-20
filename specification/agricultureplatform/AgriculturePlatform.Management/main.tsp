@@ -241,7 +241,6 @@ model MoboBrokerResource {
 interface AgriService {
   get is ArmResourceRead<AgriServiceResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<AgriServiceResource>;
-  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     AgriServiceResource,
@@ -270,9 +269,9 @@ op ArmResourceListActionSync<
   TResource extends Azure.ResourceManager.Foundations.Resource,
   TResponse extends {},
   TBaseParameters = Azure.ResourceManager.Foundations.BaseParameters<TResource>
->(...ResourceInstanceParameters<TResource, TBaseParameters>):
-  | ArmResponse<TResponse>
-  | ErrorResponse;
+>(
+  ...ResourceInstanceParameters<TResource, TBaseParameters>,
+): ArmResponse<TResponse> | ErrorResponse;
 
 @doc("The list of available agri solutions.")
 model AvailableAgriSolutionListResult {

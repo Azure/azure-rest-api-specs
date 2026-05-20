@@ -151,17 +151,15 @@ interface Deployments {
     DeploymentExtended,
     Deployment,
     DeploymentValidateResult,
-    Error =
-      | CloudError
-      | {
-          ...Response<400>;
+    Error = CloudError | {
+      ...Response<400>;
 
-          /**
-           * The template deployment validation detected failures.
-           */
-          @bodyRoot
-          body: DeploymentValidateResult;
-        }
+      /**
+       * The template deployment validation detected failures.
+       */
+      @bodyRoot
+      body: DeploymentValidateResult;
+    }
   >;
 
   /**
@@ -306,17 +304,15 @@ interface DeploymentsExtendedTenant {
     DeploymentExtended,
     ScopedDeployment,
     DeploymentValidateResult,
-    Error =
-      | CloudError
-      | {
-          ...Response<400>;
+    Error = CloudError | {
+      ...Response<400>;
 
-          /**
-           * The template deployment validation detected failures.
-           */
-          @bodyRoot
-          body: DeploymentValidateResult;
-        }
+      /**
+       * The template deployment validation detected failures.
+       */
+      @bodyRoot
+      body: DeploymentValidateResult;
+    }
   >;
 
   /**
@@ -528,17 +524,15 @@ interface DeploymentExtendedManagementGroup {
     DeploymentExtended,
     ScopedDeployment,
     DeploymentValidateResult,
-    Error =
-      | CloudError
-      | {
-          ...Response<400>;
+    Error = CloudError | {
+      ...Response<400>;
 
-          /**
-           * The template deployment validation detected failures.
-           */
-          @bodyRoot
-          body: DeploymentValidateResult;
-        }
+      /**
+       * The template deployment validation detected failures.
+       */
+      @bodyRoot
+      body: DeploymentValidateResult;
+    }
   >;
 
   /**
@@ -720,17 +714,15 @@ interface DeploymentExtendedSubscriptionGroup {
     DeploymentExtended,
     Deployment,
     DeploymentValidateResult,
-    Error =
-      | CloudError
-      | {
-          ...Response<400>;
+    Error = CloudError | {
+      ...Response<400>;
 
-          /**
-           * The template deployment validation detected failures.
-           */
-          @bodyRoot
-          body: DeploymentValidateResult;
-        }
+      /**
+       * The template deployment validation detected failures.
+       */
+      @bodyRoot
+      body: DeploymentValidateResult;
+    }
   >;
 
   /**
@@ -898,17 +890,15 @@ interface DeploymentExtendedOperationGroup {
     DeploymentExtended,
     Deployment,
     DeploymentValidateResult,
-    OverrideErrorType =
-      | CloudError
-      | {
-          ...Response<400>;
+    OverrideErrorType = CloudError | {
+      ...Response<400>;
 
-          /**
-           * The template deployment validation detected failures.
-           */
-          @bodyRoot
-          body: DeploymentValidateResult;
-        }
+      /**
+       * The template deployment validation detected failures.
+       */
+      @bodyRoot
+      body: DeploymentValidateResult;
+    }
   >;
 
   /**
@@ -936,57 +926,44 @@ interface DeploymentExtendedOperationGroup {
 @@minLength(DeploymentExtended.name, 1);
 @@doc(DeploymentExtended.name, "The name of the deployment.");
 @@doc(DeploymentExtended.properties, "Deployment properties.");
-@@doc(
-  Deployments.createOrUpdateAtScope::parameters.resource,
+@@doc(Deployments.createOrUpdateAtScope::parameters.resource,
   "Additional parameters supplied to the operation."
 );
 @@doc(Deployments.validateAtScope::parameters.body, "Parameters to validate.");
-@@doc(
-  DeploymentsExtendedTenant.createOrUpdateAtTenantScope::parameters.resource,
+@@doc(DeploymentsExtendedTenant.createOrUpdateAtTenantScope::parameters.resource,
   "Additional parameters supplied to the operation."
 );
-@@doc(
-  DeploymentsExtendedTenant.validateAtTenantScope::parameters.body,
+@@doc(DeploymentsExtendedTenant.validateAtTenantScope::parameters.body,
   "Parameters to validate."
 );
-@@doc(
-  DeploymentsExtendedTenant.whatIfAtTenantScope::parameters.body,
+@@doc(DeploymentsExtendedTenant.whatIfAtTenantScope::parameters.body,
   "Parameters to validate."
 );
-@@doc(
-  DeploymentExtendedManagementGroup.createOrUpdateAtManagementGroupScope::parameters.resource,
+@@doc(DeploymentExtendedManagementGroup.createOrUpdateAtManagementGroupScope::parameters.resource,
   "Additional parameters supplied to the operation."
 );
-@@doc(
-  DeploymentExtendedManagementGroup.validateAtManagementGroupScope::parameters.body,
+@@doc(DeploymentExtendedManagementGroup.validateAtManagementGroupScope::parameters.body,
   "Parameters to validate."
 );
-@@doc(
-  DeploymentExtendedManagementGroup.whatIfAtManagementGroupScope::parameters.body,
+@@doc(DeploymentExtendedManagementGroup.whatIfAtManagementGroupScope::parameters.body,
   "Parameters to validate."
 );
-@@doc(
-  DeploymentExtendedSubscriptionGroup.createOrUpdateAtSubscriptionScope::parameters.resource,
+@@doc(DeploymentExtendedSubscriptionGroup.createOrUpdateAtSubscriptionScope::parameters.resource,
   "Additional parameters supplied to the operation."
 );
-@@doc(
-  DeploymentExtendedSubscriptionGroup.validateAtSubscriptionScope::parameters.body,
+@@doc(DeploymentExtendedSubscriptionGroup.validateAtSubscriptionScope::parameters.body,
   "Parameters to validate."
 );
-@@doc(
-  DeploymentExtendedSubscriptionGroup.whatIfAtSubscriptionScope::parameters.body,
+@@doc(DeploymentExtendedSubscriptionGroup.whatIfAtSubscriptionScope::parameters.body,
   "Parameters to What If."
 );
-@@doc(
-  DeploymentExtendedOperationGroup.createOrUpdate::parameters.resource,
+@@doc(DeploymentExtendedOperationGroup.createOrUpdate::parameters.resource,
   "Additional parameters supplied to the operation."
 );
-@@doc(
-  DeploymentExtendedOperationGroup.validate::parameters.body,
+@@doc(DeploymentExtendedOperationGroup.validate::parameters.body,
   "Parameters to validate."
 );
-@@doc(
-  DeploymentExtendedOperationGroup.whatIf::parameters.body,
+@@doc(DeploymentExtendedOperationGroup.whatIf::parameters.body,
   "Parameters to validate."
 );
 @@maxLength(Extension.ManagementGroup.name, 90);

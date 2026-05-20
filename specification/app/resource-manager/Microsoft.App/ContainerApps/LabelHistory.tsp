@@ -82,7 +82,6 @@ interface ContainerAppsLabelHistory {
 }
 
 @@doc(LabelHistory.name, "Name of the Container App label.");
-@@doc(
-  LabelHistory.properties,
+@@doc(LabelHistory.properties,
   "Container App Label History resource specific properties"
 );

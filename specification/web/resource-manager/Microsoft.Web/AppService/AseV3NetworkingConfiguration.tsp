@@ -58,11 +58,9 @@ interface AseV3NetworkingConfigurations {
 }
 
 @@doc(AseV3NetworkingConfiguration.name, "");
-@@doc(
-  AseV3NetworkingConfiguration.properties,
+@@doc(AseV3NetworkingConfiguration.properties,
   "AseV3NetworkingConfiguration resource specific properties"
 );
-@@doc(
-  AseV3NetworkingConfigurations.updateAseNetworkingConfiguration::parameters.resource,
+@@doc(AseV3NetworkingConfigurations.updateAseNetworkingConfiguration::parameters.resource,
   ""
 );

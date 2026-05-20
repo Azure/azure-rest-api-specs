@@ -81,8 +81,7 @@ interface PaymentMethodLinks {
   >;
 }
 
-@@doc(
-  PaymentMethodLink.name,
+@@doc(PaymentMethodLink.name,
   "The ID that uniquely identifies a payment method."
 );
 @@doc(PaymentMethodLink.properties, "Payment method link properties");

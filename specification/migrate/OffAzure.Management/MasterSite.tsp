@@ -127,7 +127,6 @@ interface MasterSites {
 }
 
 @@doc(MasterSite.name, "Site name");
-@@doc(
-  MasterSite.properties,
+@@doc(MasterSite.properties,
   "The resource-specific properties for this resource."
 );

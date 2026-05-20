@@ -525,7 +525,6 @@ model AzureLargeStorageInstanceTagsUpdate {
 
   ...ManagedServiceIdentityProperty;
 }
-@@added(
-  AzureLargeStorageInstanceTagsUpdate.identity,
+@@added(AzureLargeStorageInstanceTagsUpdate.identity,
   Versions.v2024_08_01_preview
 );

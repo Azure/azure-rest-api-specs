@@ -67,7 +67,7 @@ interface ApiVersionSetContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -81,7 +81,7 @@ interface ApiVersionSetContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -98,21 +98,19 @@ interface ApiVersionSetContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response =
-      | (ArmResponse<ApiVersionSetContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag: string;
-        })
-      | (ArmResourceCreatedSyncResponse<ApiVersionSetContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag: string;
-        })
+    Response = (ArmResponse<ApiVersionSetContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmResourceCreatedSyncResponse<ApiVersionSetContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
@@ -135,7 +133,7 @@ interface ApiVersionSetContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -234,7 +232,7 @@ interface WorkspaceApiVersionSet {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -248,7 +246,7 @@ interface WorkspaceApiVersionSet {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -265,21 +263,19 @@ interface WorkspaceApiVersionSet {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response =
-      | (ArmResponse<ApiVersionSetContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag: string;
-        })
-      | (ArmResourceCreatedSyncResponse<ApiVersionSetContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag: string;
-        })
+    Response = (ArmResponse<ApiVersionSetContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmResourceCreatedSyncResponse<ApiVersionSetContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
@@ -302,7 +298,7 @@ interface WorkspaceApiVersionSet {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -354,24 +350,19 @@ interface WorkspaceApiVersionSet {
 @@maxLength(ApiVersionSetContract.name, 80);
 @@minLength(ApiVersionSetContract.name, 1);
 
-@@doc(
-  ApiVersionSetContract.name,
+@@doc(ApiVersionSetContract.name,
   "Api Version Set identifier. Must be unique in the current API Management service instance."
 );
 @@doc(ApiVersionSetContract.properties, "API VersionSet contract properties.");
-@@doc(
-  ApiVersionSetContracts.createOrUpdate::parameters.resource,
+@@doc(ApiVersionSetContracts.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );
-@@doc(
-  ApiVersionSetContracts.update::parameters.properties,
+@@doc(ApiVersionSetContracts.update::parameters.properties,
   "Update parameters."
 );
-@@doc(
-  WorkspaceApiVersionSet.createOrUpdate::parameters.resource,
+@@doc(WorkspaceApiVersionSet.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );
-@@doc(
-  WorkspaceApiVersionSet.update::parameters.properties,
+@@doc(WorkspaceApiVersionSet.update::parameters.properties,
   "Update parameters."
 );

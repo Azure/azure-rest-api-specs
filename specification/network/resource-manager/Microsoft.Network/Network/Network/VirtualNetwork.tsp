@@ -60,10 +60,7 @@ interface VirtualNetworks {
   @tag("VirtualNetworks")
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualNetwork,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -189,19 +186,15 @@ interface EffectiveConfigurations {
 
 @@doc(VirtualNetwork.name, "The name of the virtual network.");
 @@doc(VirtualNetwork.properties, "Properties of the virtual network.");
-@@doc(
-  VirtualNetworks.createOrUpdate::parameters.resource,
+@@doc(VirtualNetworks.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update virtual network operation."
 );
-@@doc(
-  VirtualNetworks.updateTags::parameters.properties,
+@@doc(VirtualNetworks.updateTags::parameters.properties,
   "Parameters supplied to update virtual network tags."
 );
-@@doc(
-  EffectiveConfigurations.listNetworkManagerEffectiveConnectivityConfigurations::parameters.body,
+@@doc(EffectiveConfigurations.listNetworkManagerEffectiveConnectivityConfigurations::parameters.body,
   "Parameters supplied to list correct page."
 );
-@@doc(
-  EffectiveConfigurations.listNetworkManagerEffectiveSecurityAdminRules::parameters.body,
+@@doc(EffectiveConfigurations.listNetworkManagerEffectiveSecurityAdminRules::parameters.body,
   "Parameters supplied to list correct page."
 );

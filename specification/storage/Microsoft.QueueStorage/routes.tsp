@@ -24,7 +24,7 @@ op StorageOperation<
   contentType: RequestMediaType,
 
   ...ApiVersionHeader,
-  ...ClientRequestIdParameter,
+  ...ClientRequestIdHeader,
   ...TParams,
 ):
   | (TResponse & {
@@ -35,7 +35,7 @@ op StorageOperation<
 
       ...ApiVersionHeader;
       ...RequestIdResponseHeader;
-      ...ClientRequestIdResponseHeader;
+      ...ClientRequestIdHeader;
       ...DateResponseHeader;
     })
   | TError;
@@ -46,11 +46,11 @@ op StorageOperationNoBody<
   TParams extends TypeSpec.Reflection.Model | void,
   TResponse extends TypeSpec.Reflection.Model | void,
   TError = Error
->(...ApiVersionHeader, ...ClientRequestIdParameter, ...TParams):
+>(...ApiVersionHeader, ...ClientRequestIdHeader, ...TParams):
   | (TResponse & {
       ...ApiVersionHeader;
       ...RequestIdResponseHeader;
-      ...ClientRequestIdResponseHeader;
+      ...ClientRequestIdHeader;
       ...DateResponseHeader;
     })
   | TError;

@@ -72,7 +72,6 @@ interface HypervVmSoftwareInventories {
 }
 
 @@doc(HypervVmSoftwareInventory.name, "Default value.");
-@@doc(
-  HypervVmSoftwareInventory.properties,
+@@doc(HypervVmSoftwareInventory.properties,
   "The resource-specific properties for this resource."
 );

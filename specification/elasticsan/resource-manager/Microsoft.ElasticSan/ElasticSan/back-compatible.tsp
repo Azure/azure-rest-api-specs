@@ -5,22 +5,19 @@ using Microsoft.ElasticSan;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  ElasticSanUpdate.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ElasticSanUpdate.properties,
   "!javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  PrivateLinkResource.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties,
   "!javascript"
 );
 
 @@clientName(EncryptionProperties.identity, "EncryptionIdentity");
 
-@@clientName(
-  EncryptionIdentity.userAssignedIdentity,
+@@clientName(EncryptionIdentity.userAssignedIdentity,
   "EncryptionUserAssignedIdentity"
 );
 
@@ -28,15 +25,13 @@ using Microsoft.ElasticSan;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  VolumeGroupUpdate.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VolumeGroupUpdate.properties,
   "!javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  VolumeUpdate.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VolumeUpdate.properties,
   "!javascript"
 );
 
@@ -44,19 +39,16 @@ using Microsoft.ElasticSan;
 @@clientName(ElasticSans.update::parameters.properties, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  ElasticSan.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ElasticSan.properties,
   "!javascript"
 );
 
-@@clientName(
-  PrivateEndpointConnections.create::parameters.resource,
+@@clientName(PrivateEndpointConnections.create::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  PrivateEndpointConnection.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties,
   "!javascript"
 );
 
@@ -66,16 +58,14 @@ using Microsoft.ElasticSan;
 @@clientName(VolumeGroups.preRestore::parameters.body, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  VolumeGroup.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VolumeGroup.properties,
   "!javascript"
 );
 
 @@clientName(Snapshots.create::parameters.resource, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  Snapshot.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Snapshot.properties,
   "!javascript"
 );
 
@@ -83,8 +73,7 @@ using Microsoft.ElasticSan;
 @@clientName(Volumes.update::parameters.properties, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  Volume.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Volume.properties,
   "!javascript"
 );
 
@@ -93,16 +82,13 @@ using Microsoft.ElasticSan;
 @@clientName(KeyVaultProperties.keyName, "KeyName");
 @@clientName(KeyVaultProperties.keyVersion, "KeyVersion");
 @@clientName(KeyVaultProperties.keyVaultUri, "KeyVaultUri");
-@@clientName(
-  KeyVaultProperties.currentVersionedKeyIdentifier,
+@@clientName(KeyVaultProperties.currentVersionedKeyIdentifier,
   "CurrentVersionedKeyIdentifier"
 );
-@@clientName(
-  KeyVaultProperties.lastKeyRotationTimestamp,
+@@clientName(KeyVaultProperties.lastKeyRotationTimestamp,
   "LastKeyRotationTimestamp"
 );
-@@clientName(
-  KeyVaultProperties.currentVersionedKeyExpirationTimestamp,
+@@clientName(KeyVaultProperties.currentVersionedKeyExpirationTimestamp,
   "CurrentVersionedKeyExpirationTimestamp"
 );
 @@clientName(ManagedByInfo.resourceId, "ResourceId");
@@ -129,8 +115,7 @@ using Microsoft.ElasticSan;
 
 @@clientName(`x-ms-delete-snapshots`, "XMsDeleteSnapshots", "python");
 @@clientName(`x-ms-force-delete`, "XMsForceDelete", "python");
-@@clientName(
-  `x-ms-access-soft-deleted-resources`,
+@@clientName(`x-ms-access-soft-deleted-resources`,
   "XMsAccessSoftDeletedResources",
   "python"
 );

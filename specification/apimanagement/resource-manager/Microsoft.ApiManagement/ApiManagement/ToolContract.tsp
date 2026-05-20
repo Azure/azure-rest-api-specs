@@ -37,7 +37,7 @@ interface ToolContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -51,7 +51,7 @@ interface ToolContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -60,21 +60,19 @@ interface ToolContracts {
    */
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ToolContract,
-    Response =
-      | (ArmResponse<ToolContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag: string;
-        })
-      | (ArmCreatedResponse<ToolContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag: string;
-        })
+    Response = (ArmResponse<ToolContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<ToolContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
@@ -89,7 +87,7 @@ interface ToolContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -129,13 +127,11 @@ interface ToolContracts {
 
 @@maxLength(ToolContract.name, 80);
 @@minLength(ToolContract.name, 1);
-@@doc(
-  ToolContract.name,
+@@doc(ToolContract.name,
   "Tool identifier within an API. Must be unique in the current API Management service instance."
 );
 @@doc(ToolContract.properties, "Properties of the Tool Contract.");
 @@doc(ToolContracts.createOrUpdate::parameters.resource, "Create parameters.");
-@@doc(
-  ToolContracts.update::parameters.properties,
+@@doc(ToolContracts.update::parameters.properties,
   "API Tool Update parameters."
 );

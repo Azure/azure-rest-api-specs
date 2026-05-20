@@ -127,8 +127,7 @@ namespace Azure.AI.Projects;
 @@clientName(ApiKeyCredentials, "ApiKeyCredential", "java");
 @@clientName(EntraIDCredentials, "EntraIdCredential", "java");
 @@clientName(NoAuthenticationCredentials, "NoAuthenticationCredential", "java");
-@@clientName(
-  AgenticIdentityPreviewCredentials,
+@@clientName(AgenticIdentityPreviewCredentials,
   "AgenticIdentityPreviewCredential",
   "java"
 );
@@ -148,8 +147,7 @@ namespace Azure.AI.Projects;
 // Type replacements / encodings
 // --------------------------------------------------------------------------------
 
-@@alternateType(
-  DayOfWeek,
+@@alternateType(DayOfWeek,
   {
     identity: "java.time.DayOfWeek",
   },

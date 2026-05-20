@@ -13,8 +13,7 @@ model ApiErrorResponse {
 }
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-@@copyProperties(
-  OpenAI.Error,
+@@copyProperties(OpenAI.Error,
   {
     details?: OpenAI.Error[],
     additionalInfo?: Record<unknown>,
@@ -43,9 +42,10 @@ op OpenAIOperationWithPreview<
   Params extends Reflection.Model,
   Response,
   ErrorResponse = ApiErrorResponse
->(...WithConditionalFoundryPreviewHeader<AreaPreviewLabel>, ...Params):
-  | Response
-  | ErrorResponse;
+>(
+  ...WithConditionalFoundryPreviewHeader<AreaPreviewLabel>,
+  ...Params,
+): Response | ErrorResponse;
 
 alias AssetBase = {
   @doc("Asset ID, a unique identifier for the asset")

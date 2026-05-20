@@ -249,7 +249,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
             "name": "body",
@@ -295,7 +295,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
             "name": "body",
@@ -341,7 +341,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
             "name": "body",
@@ -387,7 +387,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
             "name": "body",
@@ -522,7 +522,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           }
         ],
         "responses": {
@@ -640,7 +640,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
             "name": "body",
@@ -705,7 +705,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           }
         ],
         "responses": {
@@ -6668,8 +6668,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/Cache"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -6754,8 +6753,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/Cache"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -15017,8 +15015,7 @@
         "certificateKeyVaultUri": {
           "type": "string",
           "format": "uri",
-          "description": "The base URI of the Azure Key Vault that is used when retrieving the bucket certificate.",
-          "example": "https://<REDACTED>.vault.azure.net/"
+          "description": "The base URI of the Azure Key Vault that is used when retrieving the bucket certificate."
         },
         "certificateName": {
           "type": "string",
@@ -15324,13 +15321,11 @@
       "properties": {
         "clusterPeeringCommand": {
           "type": "string",
-          "description": "ClusterPeeringCommand to run to accept cluster peer. Will only be present if <code>clusterPeeringStatus</code> is <code>pending</code>.",
-          "example": "cluster peer create -peer-addresses 10.0.0.1,10.0.0.2"
+          "description": "ClusterPeeringCommand to run to accept cluster peer. Will only be present if <code>clusterPeeringStatus</code> is <code>pending</code>."
         },
         "passphrase": {
           "type": "string",
-          "description": "Passphrase for use with cluster peer command",
-          "example": "SecurePassphrase123"
+          "description": "Passphrase for use with cluster peer command"
         }
       }
     },
@@ -15390,8 +15385,7 @@
         "credentialsKeyVaultUri": {
           "type": "string",
           "format": "uri",
-          "description": "The base URI of the Azure Key Vault that is used when storing the bucket credentials.",
-          "example": "https://<REDACTED>.vault.azure.net/"
+          "description": "The base URI of the Azure Key Vault that is used when storing the bucket credentials."
         },
         "secretName": {
           "type": "string",
@@ -16846,16 +16840,14 @@
           "format": "int32",
           "description": "Indicates which hour in UTC timezone a snapshot should be taken",
           "minimum": 0,
-          "maximum": 23,
-          "example": 11
+          "maximum": 23
         },
         "minute": {
           "type": "integer",
           "format": "int32",
           "description": "Indicates which minute snapshot should be taken",
           "minimum": 0,
-          "maximum": 59,
-          "example": 30
+          "maximum": 59
         }
       }
     },
@@ -16875,8 +16867,7 @@
           "format": "int32",
           "description": "Indicates which minute snapshot should be taken",
           "minimum": 0,
-          "maximum": 59,
-          "example": 30
+          "maximum": 59
         }
       }
     },
@@ -16918,28 +16909,21 @@
           "items": {
             "type": "integer",
             "format": "int32"
-          },
-          "example": [
-            1,
-            11,
-            21
-          ]
+          }
         },
         "hour": {
           "type": "integer",
           "format": "int32",
           "description": "Indicates which hour in UTC timezone a snapshot should be taken",
           "minimum": 0,
-          "maximum": 23,
-          "example": 11
+          "maximum": 23
         },
         "minute": {
           "type": "integer",
           "format": "int32",
           "description": "Indicates which minute snapshot should be taken",
           "minimum": 0,
-          "maximum": 59,
-          "example": 30
+          "maximum": 59
         }
       }
     },
@@ -17054,27 +17038,21 @@
           "description": "Indicates which weekday(s) snapshot(s) should be taken, accepts a list of week day names in english",
           "items": {
             "$ref": "#/definitions/DayOfWeek"
-          },
-          "example": [
-            "Sunday",
-            "Monday"
-          ]
+          }
         },
         "hour": {
           "type": "integer",
           "format": "int32",
           "description": "Indicates which hour in UTC timezone a snapshot should be taken",
           "minimum": 0,
-          "maximum": 23,
-          "example": 11
+          "maximum": 23
         },
         "minute": {
           "type": "integer",
           "format": "int32",
           "description": "Indicates which minute snapshot should be taken",
           "minimum": 0,
-          "maximum": 59,
-          "example": 30
+          "maximum": 59
         }
       }
     },

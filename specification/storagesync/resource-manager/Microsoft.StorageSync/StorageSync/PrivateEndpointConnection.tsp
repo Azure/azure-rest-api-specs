@@ -36,18 +36,16 @@ interface PrivateEndpointConnections {
   @Azure.Core.useFinalStateVia("location")
   create is PrivateEndpointOperations.CreateOrUpdateAsync<
     StorageSyncService,
-    Response =
-      | ArmResourceUpdatedResponse<PrivateEndpointConnection>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PrivateEndpointConnection> &
-          Azure.Core.Foundations.RetryAfterHeader> & {
-          @header("x-ms-correlation-request-id")
-          @doc("correlation request id")
-          xMsCorrelationRequestId?: string;
+    Response = ArmResourceUpdatedResponse<PrivateEndpointConnection> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PrivateEndpointConnection> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id")
+      correlationRequestId?: string;
 
-          @header("x-ms-request-id")
-          @doc("Request id")
-          xMsRequestId?: string;
-        }),
+      @header("x-ms-request-id")
+      @doc("Request id")
+      requestId?: string;
+    }),
     Error = StorageSyncError
   >;
 
@@ -58,19 +56,16 @@ interface PrivateEndpointConnections {
   @Azure.Core.useFinalStateVia("location")
   delete is PrivateEndpointOperations.DeleteAsync<
     StorageSyncService,
-    Response =
-      | ArmDeletedResponse
-      | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
-          Azure.Core.Foundations.RetryAfterHeader> & {
-          @header("x-ms-correlation-request-id")
-          @doc("correlation request id")
-          xMsCorrelationRequestId?: string;
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id")
+      correlationRequestId?: string;
 
-          @header("x-ms-request-id")
-          @doc("Request id")
-          xMsRequestId?: string;
-        })
-      | ArmDeletedNoContentResponse,
+      @header("x-ms-request-id")
+      @doc("Request id")
+      requestId?: string;
+    }) | ArmDeletedNoContentResponse,
     Error = StorageSyncError
   >;
 
@@ -84,18 +79,17 @@ interface PrivateEndpointConnections {
     Response = ArmResponse<PrivateEndpointConnectionListResult> & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
-      xMsCorrelationRequestId?: string;
+      correlationRequestId?: string;
 
       @header("x-ms-request-id")
       @doc("request id.")
-      xMsRequestId?: string;
+      requestId?: string;
     },
     Error = StorageSyncError
   >;
 }
 
 @@doc(PrivateEndpointConnection.properties, "Resource properties.");
-@@doc(
-  PrivateEndpointConnections.create::parameters.resource,
+@@doc(PrivateEndpointConnections.create::parameters.resource,
   "The private endpoint connection properties."
 );

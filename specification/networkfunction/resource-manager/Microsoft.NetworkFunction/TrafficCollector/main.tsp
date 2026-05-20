@@ -48,7 +48,6 @@ interface Operations
       CloudError
     > {}
 
-@@doc(
-  Operations.list,
+@@doc(Operations.list,
   "Lists all of the available NetworkFunction Rest API operations."
 );

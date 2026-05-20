@@ -70,10 +70,8 @@ interface AutoImportJobs {
   @tag("autoImportJobs")
   delete is ArmResourceDeleteWithoutOkAsync<
     AutoImportJob,
-    Response =
-      | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<FinalResult = void> &
-          Azure.Core.Foundations.RetryAfterHeader>
-      | ArmDeletedNoContentResponse,
+    Response = ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
     Error = ErrorResponse
   >;
 
@@ -92,16 +90,13 @@ interface AutoImportJobs {
 
 @@maxLength(AutoImportJob.name, 80);
 @@minLength(AutoImportJob.name, 2);
-@@doc(
-  AutoImportJob.name,
+@@doc(AutoImportJob.name,
   "Name for the auto import job. Allows alphanumerics, underscores, and hyphens. Start and end with alphanumeric."
 );
 @@doc(AutoImportJob.properties, "Properties of the auto import job.");
-@@doc(
-  AutoImportJobs.createOrUpdate::parameters.resource,
+@@doc(AutoImportJobs.createOrUpdate::parameters.resource,
   "Object containing the user-selectable properties of the auto import job. If read-only properties are included, they must match the existing values of those properties."
 );
-@@doc(
-  AutoImportJobs.update::parameters.properties,
+@@doc(AutoImportJobs.update::parameters.properties,
   "Object containing the user-selectable properties of the auto import job. If read-only properties are included, they must match the existing values of those properties."
 );

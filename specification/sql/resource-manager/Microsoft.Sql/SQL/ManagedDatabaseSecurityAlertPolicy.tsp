@@ -45,12 +45,10 @@ interface ManagedDatabaseSecurityAlertPolicies {
   listByDatabase is ArmResourceListByParent<ManagedDatabaseSecurityAlertPolicy>;
 }
 
-@@doc(
-  ManagedDatabaseSecurityAlertPolicy.name,
+@@doc(ManagedDatabaseSecurityAlertPolicy.name,
   "The name of the security alert policy."
 );
 @@doc(ManagedDatabaseSecurityAlertPolicy.properties, "Resource properties.");
-@@doc(
-  ManagedDatabaseSecurityAlertPolicies.createOrUpdate::parameters.resource,
+@@doc(ManagedDatabaseSecurityAlertPolicies.createOrUpdate::parameters.resource,
   "The database security alert policy."
 );

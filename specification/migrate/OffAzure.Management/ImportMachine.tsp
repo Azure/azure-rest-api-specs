@@ -73,7 +73,6 @@ interface ImportMachines {
 }
 
 @@doc(ImportMachine.name, "Machine name");
-@@doc(
-  ImportMachine.properties,
+@@doc(ImportMachine.properties,
   "The resource-specific properties for this resource."
 );

@@ -119,7 +119,6 @@ interface NetworkSecurityPerimeterConfigurations {
 }
 
 @@doc(NetworkSecurityPerimeterConfiguration.name, "");
-@@doc(
-  NetworkSecurityPerimeterConfiguration.properties,
+@@doc(NetworkSecurityPerimeterConfiguration.properties,
   "Properties of the network security perimeter configuration."
 );

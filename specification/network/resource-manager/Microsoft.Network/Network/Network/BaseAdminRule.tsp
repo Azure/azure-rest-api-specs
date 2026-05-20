@@ -79,10 +79,7 @@ interface BaseAdminRules {
       @query("force")
       force?: boolean;
     },
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
     Error = CommonErrorResponse
   >;
 
@@ -113,7 +110,6 @@ interface BaseAdminRules {
 }
 
 @@doc(BaseAdminRule.name, "The name of the rule.");
-@@doc(
-  BaseAdminRules.createOrUpdate::parameters.resource,
+@@doc(BaseAdminRules.createOrUpdate::parameters.resource,
   "The admin rule to create or update"
 );

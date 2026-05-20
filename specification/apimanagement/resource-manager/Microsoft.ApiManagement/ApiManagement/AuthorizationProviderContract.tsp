@@ -37,7 +37,7 @@ interface AuthorizationProviderContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -54,21 +54,19 @@ interface AuthorizationProviderContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response =
-      | (ArmResponse<AuthorizationProviderContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag: string;
-        })
-      | (ArmCreatedResponse<AuthorizationProviderContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag: string;
-        })
+    Response = (ArmResponse<AuthorizationProviderContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<AuthorizationProviderContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
@@ -126,22 +124,19 @@ interface AuthorizationProviderContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 }
 
 @@maxLength(AuthorizationProviderContract.name, 256);
 @@minLength(AuthorizationProviderContract.name, 1);
-@@doc(
-  AuthorizationProviderContract.name,
+@@doc(AuthorizationProviderContract.name,
   "Identifier of the authorization provider."
 );
-@@doc(
-  AuthorizationProviderContract.properties,
+@@doc(AuthorizationProviderContract.properties,
   "Properties of the Authorization Provider Contract."
 );
-@@doc(
-  AuthorizationProviderContracts.createOrUpdate::parameters.resource,
+@@doc(AuthorizationProviderContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );

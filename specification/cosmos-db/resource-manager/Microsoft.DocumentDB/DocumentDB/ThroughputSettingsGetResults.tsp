@@ -14,25 +14,17 @@ namespace Microsoft.DocumentDB;
 /**
  * An Azure Cosmos DB resource throughput.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @singleton("default")
 @parentResource(SqlDatabaseGetResults)
 model ThroughputSettingsGetResults
-  is Azure.ResourceManager.ProxyResource<ThroughputSettingsGetProperties> {
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ThroughputSettingsGetProperties> {
   ...ResourceNameParameter<
     Resource = ThroughputSettingsGetResults,
     KeyName = "throughputSetting",
     SegmentName = "throughputSettings",
     NamePattern = ""
   >;
-
-  /** The location of the resource group to which the resource belongs. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  location?: string;
-
-  /** Tags are a list of key-value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters. For example, the default experience for a template type is set with \"defaultExperience\": \"Cassandra\". Current \"defaultExperience\" values also include \"Table\", \"Graph\", \"DocumentDB\", and \"MongoDB\". */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
 
   /**
    * Identity for the resource.
@@ -86,10 +78,8 @@ interface ThroughputSettingsGetResultsOperationGroup {
   updateSqlDatabaseThroughput is ThroughputSettingsGetResultsOperationGroupOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
-    Response =
-      | ArmResourceUpdatedResponse<ThroughputSettingsGetResults>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
-          Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -100,10 +90,8 @@ interface ThroughputSettingsGetResultsOperationGroup {
     ThroughputSettingsGetResults,
     void,
     ThroughputSettingsGetResults,
-    Response =
-      | ArmResponse<ThroughputSettingsGetResults>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    Response = ArmResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
 
@@ -115,10 +103,8 @@ interface ThroughputSettingsGetResultsOperationGroup {
     ThroughputSettingsGetResults,
     void,
     ThroughputSettingsGetResults,
-    Response =
-      | ArmResponse<ThroughputSettingsGetResults>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    Response = ArmResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
 
@@ -130,10 +116,8 @@ interface ThroughputSettingsGetResultsOperationGroup {
     ThroughputSettingsGetResults,
     RetrieveThroughputParameters,
     PhysicalPartitionThroughputInfoResult,
-    Response =
-      | ArmResponse<PhysicalPartitionThroughputInfoResult>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionThroughputInfoResult> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    Response = ArmResponse<PhysicalPartitionThroughputInfoResult> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionThroughputInfoResult> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
 
@@ -145,10 +129,8 @@ interface ThroughputSettingsGetResultsOperationGroup {
     ThroughputSettingsGetResults,
     RedistributeThroughputParameters,
     PhysicalPartitionThroughputInfoResult,
-    Response =
-      | ArmResponse<PhysicalPartitionThroughputInfoResult>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionThroughputInfoResult> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    Response = ArmResponse<PhysicalPartitionThroughputInfoResult> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionThroughputInfoResult> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
 }
@@ -204,10 +186,8 @@ interface SqlResourcesThroughputSettingsGetResultsOperationGroup {
   updateSqlContainerThroughput is SqlResourcesThroughputSettingsGetResultsOperationGroupOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
-    Response =
-      | ArmResourceUpdatedResponse<ThroughputSettingsGetResults>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
-          Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -218,9 +198,7 @@ interface SqlResourcesThroughputSettingsGetResultsOperationGroup {
     ThroughputSettingsGetResults,
     void,
     ThroughputSettingsGetResults,
-    Response =
-      | ArmResponse<ThroughputSettingsGetResults>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults>>,
+    Response = ArmResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults>>,
     OverrideErrorType = CloudError
   >;
 
@@ -232,9 +210,7 @@ interface SqlResourcesThroughputSettingsGetResultsOperationGroup {
     ThroughputSettingsGetResults,
     void,
     ThroughputSettingsGetResults,
-    Response =
-      | ArmResponse<ThroughputSettingsGetResults>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults>>,
+    Response = ArmResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults>>,
     OverrideErrorType = CloudError
   >;
 
@@ -246,9 +222,7 @@ interface SqlResourcesThroughputSettingsGetResultsOperationGroup {
     ThroughputSettingsGetResults,
     RetrieveThroughputParameters,
     PhysicalPartitionThroughputInfoResult,
-    Response =
-      | ArmResponse<PhysicalPartitionThroughputInfoResult>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionThroughputInfoResult>>,
+    Response = ArmResponse<PhysicalPartitionThroughputInfoResult> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionThroughputInfoResult>>,
     OverrideErrorType = CloudError
   >;
 
@@ -260,9 +234,7 @@ interface SqlResourcesThroughputSettingsGetResultsOperationGroup {
     ThroughputSettingsGetResults,
     RedistributeThroughputParameters,
     PhysicalPartitionThroughputInfoResult,
-    Response =
-      | ArmResponse<PhysicalPartitionThroughputInfoResult>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionThroughputInfoResult>>,
+    Response = ArmResponse<PhysicalPartitionThroughputInfoResult> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionThroughputInfoResult>>,
     OverrideErrorType = CloudError
   >;
 }
@@ -312,10 +284,8 @@ interface MongoDBResources {
   updateMongoDBDatabaseThroughput is MongoDBResourceOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
-    Response =
-      | ArmResourceUpdatedResponse<ThroughputSettingsGetResults>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
 
@@ -328,10 +298,8 @@ interface MongoDBResources {
     ThroughputSettingsGetResults,
     void,
     ThroughputSettingsGetResults,
-    Response =
-      | ArmResponse<ThroughputSettingsGetResults>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    Response = ArmResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
 
@@ -344,10 +312,8 @@ interface MongoDBResources {
     ThroughputSettingsGetResults,
     void,
     ThroughputSettingsGetResults,
-    Response =
-      | ArmResponse<ThroughputSettingsGetResults>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    Response = ArmResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
 
@@ -359,10 +325,8 @@ interface MongoDBResources {
     ThroughputSettingsGetResults,
     RetrieveThroughputParameters,
     PhysicalPartitionThroughputInfoResult,
-    Response =
-      | ArmResponse<PhysicalPartitionThroughputInfoResult>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionThroughputInfoResult> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    Response = ArmResponse<PhysicalPartitionThroughputInfoResult> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionThroughputInfoResult> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
 
@@ -374,10 +338,8 @@ interface MongoDBResources {
     ThroughputSettingsGetResults,
     RedistributeThroughputParameters,
     PhysicalPartitionThroughputInfoResult,
-    Response =
-      | ArmResponse<PhysicalPartitionThroughputInfoResult>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionThroughputInfoResult> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    Response = ArmResponse<PhysicalPartitionThroughputInfoResult> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionThroughputInfoResult> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
 }
@@ -434,10 +396,8 @@ interface MongoDBResourcesThroughputSettingsGetResultsOperationGroup {
   updateMongoDBCollectionThroughput is MongoDBResourcesThroughputSettingsGetResultsOperationGroupOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
-    Response =
-      | ArmResourceUpdatedResponse<ThroughputSettingsGetResults>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
-          Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -448,10 +408,8 @@ interface MongoDBResourcesThroughputSettingsGetResultsOperationGroup {
     ThroughputSettingsGetResults,
     RetrieveThroughputParameters,
     PhysicalPartitionThroughputInfoResult,
-    Response =
-      | ArmResponse<PhysicalPartitionThroughputInfoResult>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionThroughputInfoResult> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    Response = ArmResponse<PhysicalPartitionThroughputInfoResult> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionThroughputInfoResult> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
 
@@ -464,10 +422,8 @@ interface MongoDBResourcesThroughputSettingsGetResultsOperationGroup {
     ThroughputSettingsGetResults,
     RedistributeThroughputParameters,
     PhysicalPartitionThroughputInfoResult,
-    Response =
-      | ArmResponse<PhysicalPartitionThroughputInfoResult>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionThroughputInfoResult> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    Response = ArmResponse<PhysicalPartitionThroughputInfoResult> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionThroughputInfoResult> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
 
@@ -479,10 +435,8 @@ interface MongoDBResourcesThroughputSettingsGetResultsOperationGroup {
     ThroughputSettingsGetResults,
     void,
     ThroughputSettingsGetResults,
-    Response =
-      | ArmResponse<ThroughputSettingsGetResults>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    Response = ArmResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
 
@@ -495,10 +449,8 @@ interface MongoDBResourcesThroughputSettingsGetResultsOperationGroup {
     ThroughputSettingsGetResults,
     void,
     ThroughputSettingsGetResults,
-    Response =
-      | ArmResponse<ThroughputSettingsGetResults>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    Response = ArmResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
 }
@@ -547,10 +499,8 @@ interface TableResources {
   updateTableThroughput is TableResourceOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
-    Response =
-      | ArmResourceUpdatedResponse<ThroughputSettingsGetResults>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
-          Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -561,10 +511,8 @@ interface TableResources {
     ThroughputSettingsGetResults,
     void,
     ThroughputSettingsGetResults,
-    Response =
-      | ArmResponse<ThroughputSettingsGetResults>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    Response = ArmResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
 
@@ -576,10 +524,8 @@ interface TableResources {
     ThroughputSettingsGetResults,
     void,
     ThroughputSettingsGetResults,
-    Response =
-      | ArmResponse<ThroughputSettingsGetResults>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    Response = ArmResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
 }
@@ -628,10 +574,8 @@ interface CassandraResources {
   updateCassandraKeyspaceThroughput is CassandraResourceOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
-    Response =
-      | ArmResourceUpdatedResponse<ThroughputSettingsGetResults>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
-          Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -642,10 +586,8 @@ interface CassandraResources {
     ThroughputSettingsGetResults,
     void,
     ThroughputSettingsGetResults,
-    Response =
-      | ArmResourceUpdatedResponse<ThroughputSettingsGetResults>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
 
@@ -657,10 +599,8 @@ interface CassandraResources {
     ThroughputSettingsGetResults,
     void,
     ThroughputSettingsGetResults,
-    Response =
-      | ArmResourceUpdatedResponse<ThroughputSettingsGetResults>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
 }
@@ -716,10 +656,8 @@ interface CassandraResourcesThroughputSettingsGetResultsOperationGroup {
   updateCassandraTableThroughput is CassandraResourcesThroughputSettingsGetResultsOperationGroupOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
-    Response =
-      | ArmResponse<ThroughputSettingsGetResults>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
-          Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -730,10 +668,8 @@ interface CassandraResourcesThroughputSettingsGetResultsOperationGroup {
     ThroughputSettingsGetResults,
     void,
     ThroughputSettingsGetResults,
-    Response =
-      | ArmResponse<ThroughputSettingsGetResults>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    Response = ArmResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
 
@@ -745,10 +681,8 @@ interface CassandraResourcesThroughputSettingsGetResultsOperationGroup {
     ThroughputSettingsGetResults,
     void,
     ThroughputSettingsGetResults,
-    Response =
-      | ArmResponse<ThroughputSettingsGetResults>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    Response = ArmResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
 }
@@ -803,10 +737,8 @@ interface ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup {
   updateCassandraViewThroughput is ViewCassandraResourcesThroughputSettingsGetResultsOperationGroupOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
-    Response =
-      | ArmResourceUpdatedResponse<ThroughputSettingsGetResults>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
-          Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -817,10 +749,8 @@ interface ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup {
     ThroughputSettingsGetResults,
     void,
     ThroughputSettingsGetResults,
-    Response =
-      | ArmResponse<ThroughputSettingsGetResults>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    Response = ArmResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
 
@@ -832,10 +762,8 @@ interface ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup {
     ThroughputSettingsGetResults,
     void,
     ThroughputSettingsGetResults,
-    Response =
-      | ArmResponse<ThroughputSettingsGetResults>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    Response = ArmResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
 }
@@ -884,10 +812,8 @@ interface GremlinResources {
   updateGremlinDatabaseThroughput is GremlinResourceOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
-    Response =
-      | ArmResourceUpdatedResponse<ThroughputSettingsGetResults>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
-          Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -898,10 +824,8 @@ interface GremlinResources {
     ThroughputSettingsGetResults,
     void,
     ThroughputSettingsGetResults,
-    Response =
-      | ArmResourceUpdatedResponse<ThroughputSettingsGetResults>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
 
@@ -913,10 +837,8 @@ interface GremlinResources {
     ThroughputSettingsGetResults,
     void,
     ThroughputSettingsGetResults,
-    Response =
-      | ArmResourceUpdatedResponse<ThroughputSettingsGetResults>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
 }
@@ -972,10 +894,8 @@ interface GremlinResourcesThroughputSettingsGetResultsOperationGroup {
   updateGremlinGraphThroughput is GremlinResourcesThroughputSettingsGetResultsOperationGroupOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
-    Response =
-      | ArmResourceUpdatedResponse<ThroughputSettingsGetResults>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
-          Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -986,10 +906,8 @@ interface GremlinResourcesThroughputSettingsGetResultsOperationGroup {
     ThroughputSettingsGetResults,
     void,
     ThroughputSettingsGetResults,
-    Response =
-      | ArmResponse<ThroughputSettingsGetResults>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    Response = ArmResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
 
@@ -1001,93 +919,71 @@ interface GremlinResourcesThroughputSettingsGetResultsOperationGroup {
     ThroughputSettingsGetResults,
     void,
     ThroughputSettingsGetResults,
-    Response =
-      | ArmResponse<ThroughputSettingsGetResults>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    Response = ArmResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
 }
 
 @@doc(ThroughputSettingsGetResults.name, "");
-@@doc(
-  ThroughputSettingsGetResults.properties,
+@@doc(ThroughputSettingsGetResults.properties,
   "The properties of an Azure Cosmos DB resource throughput"
 );
-@@doc(
-  ThroughputSettingsGetResultsOperationGroup.updateSqlDatabaseThroughput::parameters.resource,
+@@doc(ThroughputSettingsGetResultsOperationGroup.updateSqlDatabaseThroughput::parameters.resource,
   "The parameters to provide for the RUs per second of the current SQL database."
 );
-@@doc(
-  ThroughputSettingsGetResultsOperationGroup.sqlDatabaseRetrieveThroughputDistribution::parameters.body,
+@@doc(ThroughputSettingsGetResultsOperationGroup.sqlDatabaseRetrieveThroughputDistribution::parameters.body,
   "The parameters to provide for retrieving throughput distribution for the current SQL database."
 );
-@@doc(
-  ThroughputSettingsGetResultsOperationGroup.sqlDatabaseRedistributeThroughput::parameters.body,
+@@doc(ThroughputSettingsGetResultsOperationGroup.sqlDatabaseRedistributeThroughput::parameters.body,
   "The parameters to provide for redistributing throughput for the current SQL database."
 );
-@@doc(
-  SqlResourcesThroughputSettingsGetResultsOperationGroup.updateSqlContainerThroughput::parameters.resource,
+@@doc(SqlResourcesThroughputSettingsGetResultsOperationGroup.updateSqlContainerThroughput::parameters.resource,
   "The parameters to provide for the RUs per second of the current SQL container."
 );
-@@doc(
-  SqlResourcesThroughputSettingsGetResultsOperationGroup.sqlContainerRetrieveThroughputDistribution::parameters.body,
+@@doc(SqlResourcesThroughputSettingsGetResultsOperationGroup.sqlContainerRetrieveThroughputDistribution::parameters.body,
   "The parameters to provide for retrieving throughput distribution for the current SQL container."
 );
-@@doc(
-  SqlResourcesThroughputSettingsGetResultsOperationGroup.sqlContainerRedistributeThroughput::parameters.body,
+@@doc(SqlResourcesThroughputSettingsGetResultsOperationGroup.sqlContainerRedistributeThroughput::parameters.body,
   "The parameters to provide for redistributing throughput for the current SQL container."
 );
-@@doc(
-  MongoDBResources.updateMongoDBDatabaseThroughput::parameters.resource,
+@@doc(MongoDBResources.updateMongoDBDatabaseThroughput::parameters.resource,
   "The RUs per second of the parameters to provide for the current MongoDB database."
 );
-@@doc(
-  MongoDBResources.mongoDBDatabaseRetrieveThroughputDistribution::parameters.body,
+@@doc(MongoDBResources.mongoDBDatabaseRetrieveThroughputDistribution::parameters.body,
   "The parameters to provide for retrieving throughput distribution for the current MongoDB database."
 );
-@@doc(
-  MongoDBResources.mongoDBDatabaseRedistributeThroughput::parameters.body,
+@@doc(MongoDBResources.mongoDBDatabaseRedistributeThroughput::parameters.body,
   "The parameters to provide for redistributing throughput for the current MongoDB database."
 );
-@@doc(
-  MongoDBResourcesThroughputSettingsGetResultsOperationGroup.updateMongoDBCollectionThroughput::parameters.resource,
+@@doc(MongoDBResourcesThroughputSettingsGetResultsOperationGroup.updateMongoDBCollectionThroughput::parameters.resource,
   "The RUs per second of the parameters to provide for the current MongoDB collection."
 );
-@@doc(
-  MongoDBResourcesThroughputSettingsGetResultsOperationGroup.mongoDBContainerRetrieveThroughputDistribution::parameters.body,
+@@doc(MongoDBResourcesThroughputSettingsGetResultsOperationGroup.mongoDBContainerRetrieveThroughputDistribution::parameters.body,
   "The parameters to provide for retrieving throughput distribution for the current MongoDB container."
 );
-@@doc(
-  MongoDBResourcesThroughputSettingsGetResultsOperationGroup.mongoDBContainerRedistributeThroughput::parameters.body,
+@@doc(MongoDBResourcesThroughputSettingsGetResultsOperationGroup.mongoDBContainerRedistributeThroughput::parameters.body,
   "The parameters to provide for redistributing throughput for the current MongoDB container."
 );
-@@doc(
-  TableResources.updateTableThroughput::parameters.resource,
+@@doc(TableResources.updateTableThroughput::parameters.resource,
   "The parameters to provide for the RUs per second of the current Table."
 );
-@@doc(
-  CassandraResources.updateCassandraKeyspaceThroughput::parameters.resource,
+@@doc(CassandraResources.updateCassandraKeyspaceThroughput::parameters.resource,
   "The RUs per second of the parameters to provide for the current Cassandra Keyspace."
 );
-@@doc(
-  CassandraResourcesThroughputSettingsGetResultsOperationGroup.updateCassandraTableThroughput::parameters.resource,
+@@doc(CassandraResourcesThroughputSettingsGetResultsOperationGroup.updateCassandraTableThroughput::parameters.resource,
   "The RUs per second of the parameters to provide for the current Cassandra table."
 );
-@@doc(
-  ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup.updateCassandraViewThroughput::parameters.resource,
+@@doc(ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup.updateCassandraViewThroughput::parameters.resource,
   "The RUs per second of the parameters to provide for the current Cassandra view."
 );
-@@doc(
-  GremlinResources.updateGremlinDatabaseThroughput::parameters.resource,
+@@doc(GremlinResources.updateGremlinDatabaseThroughput::parameters.resource,
   "The RUs per second of the parameters to provide for the current Gremlin database."
 );
-@@doc(
-  GremlinResourcesThroughputSettingsGetResultsOperationGroup.updateGremlinGraphThroughput::parameters.resource,
+@@doc(GremlinResourcesThroughputSettingsGetResultsOperationGroup.updateGremlinGraphThroughput::parameters.resource,
   "The RUs per second of the parameters to provide for the current Gremlin graph."
 );
-@@visibility(
-  ThroughputSettingsGetResults.location,
+@@visibility(ThroughputSettingsGetResults.location,
   Lifecycle.Read,
   Lifecycle.Create,
   Lifecycle.Update

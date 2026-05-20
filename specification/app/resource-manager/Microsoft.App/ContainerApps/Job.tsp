@@ -31,32 +31,6 @@ model Job is Azure.ResourceManager.TrackedResource<JobProperties> {
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
-alias JobDetectorPropertyOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
-
-    /** Job Name */
-    @path
-    @segment("jobs")
-    @key
-    @pattern("^[-\\w\\._\\(\\)]+$")
-    jobName: string;
-  },
-  {
-    /** Proxy API Name for Container App Job. */
-    @path
-    @segment("detectorProperties")
-    @key
-    @pattern("^[-\\w\\._]+$")
-    apiName: string;
-  },
-  ErrorType = DefaultErrorResponse,
-  ResourceName = "ContainerAppJobDetectorProperty"
->;
-
 @armResourceOperations(#{ omitTags: true })
 interface Jobs {
   /**
@@ -96,10 +70,7 @@ interface Jobs {
   @summary("Delete a Container Apps Job.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Job,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
     Error = DefaultErrorResponse
   >;
 
@@ -133,10 +104,8 @@ interface Jobs {
   start is ArmResourceActionAsyncBase<
     Job,
     JobExecutionTemplate,
-
-      | ArmResponse<JobExecutionBase>
-      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = JobExecutionBase> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    ArmResponse<JobExecutionBase> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = JobExecutionBase> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     DefaultBaseParameters<Job>,
     OptionalRequestBody = true,
     Error = DefaultErrorResponse
@@ -151,10 +120,8 @@ interface Jobs {
   stopMultipleExecutions is ArmResourceActionAsyncBase<
     Job,
     void,
-
-      | ArmResponse<ContainerAppJobExecutions>
-      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ContainerAppJobExecutions> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    ArmResponse<ContainerAppJobExecutions> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ContainerAppJobExecutions> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     DefaultBaseParameters<Job>,
     Error = DefaultErrorResponse
   >;
@@ -180,11 +147,9 @@ interface Jobs {
   resume is ArmResourceActionAsyncBase<
     Job,
     void,
-
-      | ArmResponse<Job>
-      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Job> &
-          ArmLroLocationHeader<FinalResult = Job> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    ArmResponse<Job> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Job> &
+      ArmLroLocationHeader<FinalResult = Job> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     DefaultBaseParameters<Job>
   >;
 
@@ -197,11 +162,9 @@ interface Jobs {
   suspend is ArmResourceActionAsyncBase<
     Job,
     void,
-
-      | ArmResponse<Job>
-      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Job> &
-          ArmLroLocationHeader<FinalResult = Job> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    ArmResponse<Job> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Job> &
+      ArmLroLocationHeader<FinalResult = Job> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     DefaultBaseParameters<Job>
   >;
 
@@ -241,10 +204,8 @@ interface Jobs {
   stopExecution is ArmResourceActionAsyncBase<
     JobExecution,
     void,
-
-      | OkResponse
-      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader>,
     DefaultBaseParameters<Job>,
     Error = DefaultErrorResponse
   >;
@@ -255,7 +216,18 @@ interface Jobs {
   @tag("Jobs")
   @tag("Diagnostics")
   @summary("Get the properties for a given Container App Job.")
-  proxyGet is JobDetectorPropertyOps.Read<Job, Response = ArmResponse<Job>>;
+  proxyGet is ArmResourceRead<
+    Job,
+    Parameters = {
+      /** Proxy API Name for Container App Job. */
+      @path
+      @segment("detectorProperties")
+      @key
+      @pattern("^[-\\w\\._]+$")
+      apiName: string;
+    },
+    Error = DefaultErrorResponse
+  >;
 
   /**
    * Get the list of diagnostics for a Container App Job.
@@ -282,12 +254,10 @@ interface Jobs {
 
 @@doc(Job.name, "Job Name");
 @@doc(Job.properties, "Container Apps Job resource specific properties.");
-@@doc(
-  Jobs.createOrUpdate::parameters.resource,
+@@doc(Jobs.createOrUpdate::parameters.resource,
   "Properties used to create a container apps job"
 );
-@@doc(
-  Jobs.update::parameters.properties,
+@@doc(Jobs.update::parameters.properties,
   "Properties used to create a container apps job"
 );
 @@doc(Jobs.start::parameters.body, "Properties used to start a job execution.");

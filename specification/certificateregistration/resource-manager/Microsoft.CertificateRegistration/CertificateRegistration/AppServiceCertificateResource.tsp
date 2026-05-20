@@ -46,12 +46,10 @@ interface AppServiceCertificateResources {
    */
   createOrUpdateCertificate is ArmResourceCreateOrReplaceAsync<
     AppServiceCertificateResource,
-    Response =
-      | ArmResponse<AppServiceCertificateResource>
-      | ArmResourceCreatedResponse<
-          AppServiceCertificateResource,
-          LroHeaders = ArmLroLocationHeader<FinalResult = AppServiceCertificateResource>
-        >,
+    Response = ArmResponse<AppServiceCertificateResource> | ArmResourceCreatedResponse<
+      AppServiceCertificateResource,
+      LroHeaders = ArmLroLocationHeader<FinalResult = AppServiceCertificateResource>
+    >,
     Error = DefaultErrorResponse
   >;
 
@@ -85,31 +83,24 @@ interface AppServiceCertificateResources {
 
 @@doc(AppServiceCertificateResource.name, "Name of the certificate.");
 @@doc(AppServiceCertificateResource.properties, "Core resource properties");
-@@doc(
-  AppServiceCertificateResources.createOrUpdateCertificate::parameters.resource,
+@@doc(AppServiceCertificateResources.createOrUpdateCertificate::parameters.resource,
   "Key vault certificate resource Id."
 );
-@@doc(
-  AppServiceCertificateResources.updateCertificate::parameters.properties,
+@@doc(AppServiceCertificateResources.updateCertificate::parameters.properties,
   "Key vault certificate resource Id."
 );
-@@summary(
-  AppServiceCertificateResources.deleteCertificate,
+@@summary(AppServiceCertificateResources.deleteCertificate,
   "Delete the certificate associated with a certificate order."
 );
-@@summary(
-  AppServiceCertificateResources.listCertificates,
+@@summary(AppServiceCertificateResources.listCertificates,
   "List all certificates associated with a certificate order."
 );
-@@summary(
-  AppServiceCertificateResources.getCertificate,
+@@summary(AppServiceCertificateResources.getCertificate,
   "Get the certificate associated with a certificate order."
 );
-@@summary(
-  AppServiceCertificateResources.createOrUpdateCertificate,
+@@summary(AppServiceCertificateResources.createOrUpdateCertificate,
   "Creates or updates a certificate and associates with key vault secret."
 );
-@@summary(
-  AppServiceCertificateResources.updateCertificate,
+@@summary(AppServiceCertificateResources.updateCertificate,
   "Creates or updates a certificate and associates with key vault secret."
 );

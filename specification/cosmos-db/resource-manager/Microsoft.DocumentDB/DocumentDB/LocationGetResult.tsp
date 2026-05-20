@@ -46,8 +46,7 @@ interface LocationGetResults {
   >;
 }
 
-@@doc(
-  LocationGetResult.name,
+@@doc(LocationGetResult.name,
   "Cosmos DB region, with spaces between words and each word capitalized."
 );
 @@doc(LocationGetResult.properties, "Cosmos DB location metadata");

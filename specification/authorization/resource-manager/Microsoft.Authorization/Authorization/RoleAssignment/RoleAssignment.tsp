@@ -265,8 +265,7 @@ interface RoleAssignments {
 }
 
 @@doc(RoleAssignment.properties, "Role assignment properties.");
-@@doc(
-  RoleAssignments.create::parameters.resource,
+@@doc(RoleAssignments.create::parameters.resource,
   "Parameters for the role assignment."
 );
 

@@ -51,7 +51,6 @@ interface OperationsPutContents {
 
 @@doc(OperationsPutContent.name, "");
 @@doc(OperationsPutContent.properties, "");
-@@doc(
-  OperationsPutContents.createOrUpdate::parameters.resource,
+@@doc(OperationsPutContents.createOrUpdate::parameters.resource,
   "The operations content properties supplied to the CreateOrUpdate operation."
 );

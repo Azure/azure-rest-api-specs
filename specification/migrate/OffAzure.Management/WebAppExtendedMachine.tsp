@@ -67,7 +67,6 @@ interface WebAppExtendedMachines {
 }
 
 @@doc(WebAppExtendedMachine.name, "Extended machine name.");
-@@doc(
-  WebAppExtendedMachine.properties,
+@@doc(WebAppExtendedMachine.properties,
   "The resource-specific properties for this resource."
 );

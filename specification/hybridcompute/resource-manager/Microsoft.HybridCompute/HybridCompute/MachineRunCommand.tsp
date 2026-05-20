@@ -68,7 +68,6 @@ interface MachineRunCommands {
 
 @@doc(MachineRunCommand.name, "The name of the run command.");
 @@doc(MachineRunCommand.properties, "Describes Run Command Properties");
-@@doc(
-  MachineRunCommands.createOrUpdate::parameters.resource,
+@@doc(MachineRunCommands.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Run Command."
 );

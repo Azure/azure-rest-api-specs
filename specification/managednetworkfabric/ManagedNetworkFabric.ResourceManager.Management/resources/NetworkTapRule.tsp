@@ -91,11 +91,9 @@ interface NetworkTapRules {
 }
 
 @@doc(NetworkTapRules.create::parameters.resource, "Request payload.");
-@@doc(
-  NetworkTapRules.update::parameters.properties,
+@@doc(NetworkTapRules.update::parameters.properties,
   "Network Tap Rule properties to update."
 );
-@@doc(
-  NetworkTapRules.updateAdministrativeState::parameters.body,
+@@doc(NetworkTapRules.updateAdministrativeState::parameters.body,
   "Request payload."
 );

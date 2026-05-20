@@ -37,13 +37,11 @@ interface PortalTenant {
   ): ArmResponse<PortalTenantCompileFileResult> | ErrorResponse;
 }
 
-@@clientName(
-  PortalTenant.compilefile::parameters.body,
+@@clientName(PortalTenant.compilefile::parameters.body,
   "portalTenantCompileFile"
 );
 #suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
-@@encodedName(
-  PortalTenant.compilefile::parameters.body,
+@@encodedName(PortalTenant.compilefile::parameters.body,
   "application/json",
   "portalTenantCompileFile"
 );

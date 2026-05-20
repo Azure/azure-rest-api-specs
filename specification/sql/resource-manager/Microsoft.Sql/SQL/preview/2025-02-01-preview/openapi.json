@@ -55609,9 +55609,12 @@
           "description": "Resource properties.",
           "x-ms-client-flatten": true
         },
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The name and tier of the SKU."
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "location": {
           "type": "string",
@@ -55621,17 +55624,14 @@
             "create"
           ]
         },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The name and tier of the SKU."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         }
       ]
     },

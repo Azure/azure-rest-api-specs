@@ -222,11 +222,9 @@ interface SourceControls {
 
 @@doc(SourceControl.name, "The name of source control.");
 @@doc(SourceControl.properties, "The properties of the source control.");
-@@doc(
-  SourceControls.createOrUpdate::parameters.resource,
+@@doc(SourceControls.createOrUpdate::parameters.resource,
   "The parameters supplied to the create or update source control operation."
 );
-@@doc(
-  SourceControls.update::parameters.properties,
+@@doc(SourceControls.update::parameters.properties,
   "The parameters supplied to the update source control operation."
 );

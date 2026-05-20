@@ -21,9 +21,10 @@ namespace Azure.ResourceManager.Legacy {
     @segment("operations")
     @get
     @list
-    list(...ApiVersionParameter, ...Azure.ResourceManager.Legacy.Provider):
-      | ArmResponse<Azure.ResourceManager.Foundations.OperationListResult>
-      | Common.CloudError;
+    list(
+      ...ApiVersionParameter,
+      ...Azure.ResourceManager.Legacy.Provider,
+    ): ArmResponse<Azure.ResourceManager.Foundations.OperationListResult> | Common.CloudError;
   }
 
   interface ComputeLegacyOperations<
@@ -52,9 +53,10 @@ namespace Azure.ResourceManager.Legacy {
       LroHeaders extends TypeSpec.Reflection.Model = ArmAsyncOperationHeader<FinalResult = Resource> &
         Azure.Core.Foundations.RetryAfterHeader,
       Parameters extends {} = {},
-      Response extends {} =
-        | ArmResourceUpdatedResponse<Resource>
-        | ArmResourceCreatedResponse<Resource, LroHeaders>
+      Response extends {} = ArmResourceUpdatedResponse<Resource> | ArmResourceCreatedResponse<
+        Resource,
+        LroHeaders
+      >
     >(
       ...ParentParameters,
       ...ResourceTypeParameter,
@@ -76,9 +78,7 @@ namespace Azure.ResourceManager.Legacy {
     CreateOrUpdateSync<
       Resource extends Azure.ResourceManager.CommonTypes.Resource,
       Parameters extends {} = {},
-      Response extends {} =
-        | ArmResourceUpdatedResponse<Resource>
-        | ArmResourceCreatedSyncResponse<Resource>
+      Response extends {} = ArmResourceUpdatedResponse<Resource> | ArmResourceCreatedSyncResponse<Resource>
     >(
       ...ParentParameters,
       ...ResourceTypeParameter,
@@ -108,12 +108,10 @@ namespace Azure.ResourceManager.Legacy {
       > &
         Azure.Core.Foundations.RetryAfterHeader,
       Parameters extends {} = {},
-      Response extends {} =
-        | ArmResponse<Resource>
-        | ArmAcceptedLroResponse<
-            "Resource update request accepted.",
-            LroHeaders
-          >
+      Response extends {} = ArmResponse<Resource> | ArmAcceptedLroResponse<
+        "Resource update request accepted.",
+        LroHeaders
+      >
     >(
       ...ParentParameters,
       ...ResourceTypeParameter,
@@ -161,13 +159,12 @@ namespace Azure.ResourceManager.Legacy {
       LroHeaders extends TypeSpec.Reflection.Model = ArmLroLocationHeader &
         Azure.Core.Foundations.RetryAfterHeader,
       Parameters extends {} = {},
-      Response extends {} =
-        | ArmDeletedResponse
-        | ArmDeleteAcceptedLroResponse<LroHeaders>
-        | ArmDeletedNoContentResponse
-    >(...ParentParameters, ...ResourceTypeParameter, ...Parameters):
-      | Response
-      | ErrorType;
+      Response extends {} = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders> | ArmDeletedNoContentResponse
+    >(
+      ...ParentParameters,
+      ...ResourceTypeParameter,
+      ...Parameters,
+    ): Response | ErrorType;
 
     /**
      * @dev Delete a resource synchronously
@@ -184,9 +181,11 @@ namespace Azure.ResourceManager.Legacy {
       Resource extends Azure.ResourceManager.CommonTypes.Resource,
       Parameters extends {} = {},
       Response extends {} = ArmDeletedResponse | ArmDeletedNoContentResponse
-    >(...ParentParameters, ...ResourceTypeParameter, ...Parameters):
-      | Response
-      | ErrorType;
+    >(
+      ...ParentParameters,
+      ...ResourceTypeParameter,
+      ...Parameters,
+    ): Response | ErrorType;
 
     /**
      * @dev Get a resource
@@ -203,9 +202,11 @@ namespace Azure.ResourceManager.Legacy {
       Resource extends Azure.ResourceManager.CommonTypes.Resource,
       Parameters extends {} = {},
       Response extends {} = ArmResponse<Resource>
-    >(...ParentParameters, ...ResourceTypeParameter, ...Parameters):
-      | Response
-      | ErrorType;
+    >(
+      ...ParentParameters,
+      ...ResourceTypeParameter,
+      ...Parameters,
+    ): Response | ErrorType;
 
     /**
      * @dev Get a resource
@@ -221,9 +222,11 @@ namespace Azure.ResourceManager.Legacy {
       Resource extends Azure.ResourceManager.CommonTypes.Resource,
       Parameters extends {} = {},
       Response extends {} = ArmResponse<Resource>
-    >(...ParentParameters, ...ResourceTypeParameter, ...Parameters):
-      | Response
-      | ErrorType;
+    >(
+      ...ParentParameters,
+      ...ResourceTypeParameter,
+      ...Parameters,
+    ): Response | ErrorType;
 
     /**
      * @dev List a resource
@@ -330,9 +333,10 @@ namespace Azure.ResourceManager.Legacy {
       > &
         Azure.Core.Foundations.RetryAfterHeader,
       Parameters extends {} = {},
-      Response extends {} | void =
-        | ArmAcceptedLroResponse<"Resource operation accepted.", LroHeaders>
-        | Result
+      Response extends {} | void = ArmAcceptedLroResponse<
+        "Resource operation accepted.",
+        LroHeaders
+      > | Result
     >(
       ...ParentParameters,
       ...ResourceTypeParameter,

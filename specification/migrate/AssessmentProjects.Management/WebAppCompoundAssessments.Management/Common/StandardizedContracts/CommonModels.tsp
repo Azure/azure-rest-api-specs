@@ -3,6 +3,7 @@ import "./ProductSupportStatus.tsp";
 import "./CommonEnums.tsp";
 import "../Enums/Enums.tsp";
 import "./CommonAssessmentPropertiesEnums.tsp";
+import "../Enums/Enums.tsp";
 
 using Azure.ResourceManager;
 

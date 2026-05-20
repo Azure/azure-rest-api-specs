@@ -62,7 +62,6 @@ interface triggeredAnalyticsRuleRun {
 }
 
 @@doc(TriggeredAnalyticsRuleRun.name, "the triggered rule id");
-@@doc(
-  TriggeredAnalyticsRuleRun.properties,
+@@doc(TriggeredAnalyticsRuleRun.properties,
   "The triggered analytics rule run Properties"
 );

@@ -74,7 +74,6 @@ interface HypervMachines {
 }
 
 @@doc(HypervMachine.name, " HypervMachine name");
-@@doc(
-  HypervMachine.properties,
+@@doc(HypervMachine.properties,
   "The resource-specific properties for this resource."
 );

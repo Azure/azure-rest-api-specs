@@ -51,10 +51,7 @@ interface PrivateEndpointConnections {
   @summary("Deletes private endpoint connection.")
   delete is ArmResourceDeleteWithoutOkAsync<
     PrivateEndpointConnection,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
     Error = ErrorResponseModel
   >;
 
@@ -76,12 +73,10 @@ interface PrivateEndpointConnections {
   >;
 }
 
-@@doc(
-  PrivateEndpointConnection.name,
+@@doc(PrivateEndpointConnection.name,
   "Name of the private endpoint connection."
 );
 @@doc(PrivateEndpointConnection.properties, "The connection identifier.");
-@@doc(
-  PrivateEndpointConnections.createOrUpdate::parameters.resource,
+@@doc(PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "The request."
 );

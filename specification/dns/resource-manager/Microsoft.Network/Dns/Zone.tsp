@@ -90,10 +90,7 @@ interface Zones {
       @header("If-Match")
       IfMatch?: string;
     },
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -185,11 +182,9 @@ interface Zones {
 
 @@doc(Zone.name, "The name of the DNS zone (without a terminating dot).");
 @@doc(Zone.properties, "The properties of the zone.");
-@@doc(
-  Zones.createOrUpdate::parameters.resource,
+@@doc(Zones.createOrUpdate::parameters.resource,
   "Parameters supplied to the CreateOrUpdate operation."
 );
-@@doc(
-  Zones.update::parameters.properties,
+@@doc(Zones.update::parameters.properties,
   "Parameters supplied to the Update operation."
 );

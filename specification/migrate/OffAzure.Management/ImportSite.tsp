@@ -93,7 +93,6 @@ interface ImportSites {
 }
 
 @@doc(ImportSite.name, "Site name");
-@@doc(
-  ImportSite.properties,
+@@doc(ImportSite.properties,
   "The resource-specific properties for this resource."
 );

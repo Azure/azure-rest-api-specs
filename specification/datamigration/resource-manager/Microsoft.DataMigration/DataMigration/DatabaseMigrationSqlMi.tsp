@@ -101,11 +101,8 @@ interface DatabaseMigrationSqlMis {
       @query("force")
       force?: boolean;
     },
-    Response =
-      | ArmResponse<DatabaseMigrationSqlMi>
-      | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader<FinalResult = DatabaseMigrationSqlMi> &
-          Azure.Core.Foundations.RetryAfterHeader>
-      | ArmDeletedNoContentResponse
+    Response = ArmResponse<DatabaseMigrationSqlMi> | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader<FinalResult = DatabaseMigrationSqlMi> &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -136,19 +133,15 @@ interface DatabaseMigrationSqlMis {
 }
 
 @@doc(DatabaseMigrationSqlMi.name, "The name of the target database.");
-@@doc(
-  DatabaseMigrationSqlMi.properties,
+@@doc(DatabaseMigrationSqlMi.properties,
   "Database Migration Resource properties for SQL Managed Instance."
 );
-@@doc(
-  DatabaseMigrationSqlMis.createOrUpdate::parameters.resource,
+@@doc(DatabaseMigrationSqlMis.createOrUpdate::parameters.resource,
   "Details of SqlMigrationService resource."
 );
-@@doc(
-  DatabaseMigrationSqlMis.cancel::parameters.body,
+@@doc(DatabaseMigrationSqlMis.cancel::parameters.body,
   "Required migration operation ID for which cancel will be initiated."
 );
-@@doc(
-  DatabaseMigrationSqlMis.cutover::parameters.body,
+@@doc(DatabaseMigrationSqlMis.cutover::parameters.body,
   "Required migration operation ID for which cutover will be initiated."
 );

@@ -11,27 +11,23 @@ namespace Microsoft.ApiCenter;
 // Rename mapping for C# client
 @@clientName(ApiSources, "ApiCenterApiSource", "csharp");
 @@clientName(ApiSourceLinkState, "ApiCenterApiSourceLinkState", "csharp");
-@@clientName(
-  AzureApiManagementSource,
+@@clientName(AzureApiManagementSource,
   "ApiCenterApiManagementSource",
   "csharp"
 );
-@@clientName(
-  ImportSpecificationOptions,
+@@clientName(ImportSpecificationOptions,
   "ApiCenterImportSpecificationModel",
   "csharp"
 );
 @@clientName(Contact, "ApiContactInformation", "csharp");
 @@clientName(DeletedService, "ApiCenterDeletedService", "csharp");
-@@clientName(
-  DeletedServiceProperties,
+@@clientName(DeletedServiceProperties,
   "ApiCenterDeletedServiceProperties",
   "csharp"
 );
 @@clientName(License, "ApiLicenseInformation", "csharp");
 @@clientName(Onboarding, "EnvironmentOnboardingInformation", "csharp");
-@@clientName(
-  ApiDefinitionPropertiesSpecification,
+@@clientName(ApiDefinitionPropertiesSpecification,
   "ApiSpecificationDetails",
   "csharp"
 );
@@ -45,8 +41,7 @@ namespace Microsoft.ApiCenter;
 @@clientName(ApiSources.head, "HeadApiSource", "csharp");
 @@clientName(Environments.head, "HeadEnvironment", "csharp");
 @@clientName(ApiSpecImportRequest, "ApiSpecImportContent", "csharp");
-@@clientName(
-  MetadataSchemaExportRequest,
+@@clientName(MetadataSchemaExportRequest,
   "MetadataSchemaExportContent",
   "csharp"
 );
@@ -59,8 +54,7 @@ namespace Microsoft.ApiCenter;
 @@clientName(Service, "ApiCenterService", "csharp");
 @@clientName(Workspace, "ApiCenterWorkspace", "csharp");
 @@clientName(ApiProperties, "ApiCenterApiProperties", "csharp");
-@@clientName(
-  ApiDefinitionProperties,
+@@clientName(ApiDefinitionProperties,
   "ApiCenterApiDefinitionProperties",
   "csharp"
 );
@@ -71,8 +65,7 @@ namespace Microsoft.ApiCenter;
 @@clientName(EnvironmentProperties, "ApiCenterEnvironmentProperties", "csharp");
 @@clientName(EnvironmentServer, "ApiCenterEnvironmentServer", "csharp");
 @@clientName(MetadataAssignment, "ApiCenterMetadataAssignment", "csharp");
-@@clientName(
-  MetadataSchemaProperties,
+@@clientName(MetadataSchemaProperties,
   "ApiCenterMetadataSchemaProperties",
   "csharp"
 );
@@ -83,46 +76,38 @@ namespace Microsoft.ApiCenter;
 @@clientName(DeploymentServer, "ApiCenterDeploymentServer", "csharp");
 @@clientName(LinkState, "ApiCenterLinkState", "csharp");
 @@clientName(EnvironmentServer.type, "EnvironmentServerType", "csharp");
-@@clientName(
-  EnvironmentServerType.`Azure API Management`,
+@@clientName(EnvironmentServerType.`Azure API Management`,
   "AzureApiManagement",
   "csharp"
 );
-@@clientName(
-  EnvironmentServerType.`Apigee API Management`,
+@@clientName(EnvironmentServerType.`Apigee API Management`,
   "ApigeeApiManagement",
   "csharp"
 );
-@@clientName(
-  EnvironmentServerType.`AWS API Gateway`,
+@@clientName(EnvironmentServerType.`AWS API Gateway`,
   "AwsApiGateway",
   "csharp"
 );
-@@clientName(
-  EnvironmentServerType.`Kong API Gateway`,
+@@clientName(EnvironmentServerType.`Kong API Gateway`,
   "KongApiGateway",
   "csharp"
 );
-@@clientName(
-  EnvironmentServerType.`MuleSoft API Management`,
+@@clientName(EnvironmentServerType.`MuleSoft API Management`,
   "MuleSoftApiManagement",
   "csharp"
 );
-@@clientName(
-  ApiDefinitions.importSpecification,
+@@clientName(ApiDefinitions.importSpecification,
   "ImportSpecification",
   "csharp"
 );
 @@alternateType(ApiProperties.customProperties, unknown, "csharp");
 @@alternateType(DeploymentProperties.customProperties, unknown, "csharp");
 @@alternateType(EnvironmentProperties.customProperties, unknown, "csharp");
-@@alternateType(
-  DeploymentProperties.environmentId,
+@@alternateType(DeploymentProperties.environmentId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(
-  DeploymentProperties.definitionId,
+@@alternateType(DeploymentProperties.definitionId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );

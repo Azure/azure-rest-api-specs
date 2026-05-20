@@ -8,8 +8,7 @@ using TypeSpec.Versioning;
 @versioned(LogsIngestion.Versions)
 namespace ClientCustomizations;
 
-@@clientNamespace(
-  LogsIngestion,
+@@clientNamespace(LogsIngestion,
   "com.azure.monitor.ingestion.implementation",
   "java"
 );

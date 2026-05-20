@@ -47,7 +47,6 @@ enum Versions {
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@@path(
-  Azure.ResourceManager.Foundations.BaseParameters.resourceUri,
+@@path(Azure.ResourceManager.Foundations.BaseParameters.resourceUri,
   #{ name: "scope", allowReserved: true }
 );

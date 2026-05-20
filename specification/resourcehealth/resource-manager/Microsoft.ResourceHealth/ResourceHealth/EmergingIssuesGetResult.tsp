@@ -51,7 +51,6 @@ interface EmergingIssuesGetResults {
 }
 
 @@doc(EmergingIssuesGetResult.name, "The name of the emerging issue.");
-@@doc(
-  EmergingIssuesGetResult.properties,
+@@doc(EmergingIssuesGetResult.properties,
   "The emerging issue entity properties."
 );

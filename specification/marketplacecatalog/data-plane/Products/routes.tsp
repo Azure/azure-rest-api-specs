@@ -47,9 +47,10 @@ op getProduct(
 @get
 @list
 @route("/products")
-op listProducts(...ApiVersionParameter, ...ProductsListingTraits):
-  | DiscoveryApiPagedProductsResult
-  | DiscoveryErrorPayload;
+op listProducts(
+  ...ApiVersionParameter,
+  ...ProductsListingTraits,
+): DiscoveryApiPagedProductsResult | DiscoveryErrorPayload;
 
 // Skus listing traits
 alias SkusListingTraits = ServiceParameter &
@@ -67,6 +68,7 @@ alias SkusListingTraits = ServiceParameter &
 @list
 @get
 @route("/skus")
-op listSkus(...ApiVersionParameter, ...SkusListingTraits):
-  | DiscoveryApiPagedSkusResult
-  | DiscoveryErrorPayload;
+op listSkus(
+  ...ApiVersionParameter,
+  ...SkusListingTraits,
+): DiscoveryApiPagedSkusResult | DiscoveryErrorPayload;

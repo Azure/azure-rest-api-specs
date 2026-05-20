@@ -40,7 +40,6 @@ interface WebAppRunAsAccounts {
 }
 
 @@doc(WebAppRunAsAccount.name, "Run as account ARM name.");
-@@doc(
-  WebAppRunAsAccount.properties,
+@@doc(WebAppRunAsAccount.properties,
   "The resource-specific properties for this resource."
 );

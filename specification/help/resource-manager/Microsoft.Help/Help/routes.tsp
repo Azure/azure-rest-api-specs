@@ -86,7 +86,6 @@ interface DiscoverySolutionNLPOperationGroup {
   >;
 }
 
-@@doc(
-  CheckNameAvailabilityOperationGroup.checkNameAvailability::parameters.body,
+@@doc(CheckNameAvailabilityOperationGroup.checkNameAvailability::parameters.body,
   "The required parameters for availability check."
 );

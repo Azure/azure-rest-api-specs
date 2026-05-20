@@ -38,10 +38,8 @@ interface GremlinRoleDefinitionResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createUpdateGremlinRoleDefinition is ArmResourceCreateOrReplaceAsync<
     GremlinRoleDefinitionResource,
-    Response =
-      | ArmResourceUpdatedResponse<GremlinRoleDefinitionResource>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = GremlinRoleDefinitionResource> &
-          Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmResourceUpdatedResponse<GremlinRoleDefinitionResource> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = GremlinRoleDefinitionResource> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -50,10 +48,7 @@ interface GremlinRoleDefinitionResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deleteGremlinRoleDefinition is ArmResourceDeleteWithoutOkAsync<
     GremlinRoleDefinitionResource,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -66,11 +61,9 @@ interface GremlinRoleDefinitionResources {
 }
 
 @@doc(GremlinRoleDefinitionResource.name, "The GUID for the Role Definition.");
-@@doc(
-  GremlinRoleDefinitionResource.properties,
+@@doc(GremlinRoleDefinitionResource.properties,
   "Properties to create and update an Azure Cosmos DB Gremlin Role Definition."
 );
-@@doc(
-  GremlinRoleDefinitionResources.createUpdateGremlinRoleDefinition::parameters.resource,
+@@doc(GremlinRoleDefinitionResources.createUpdateGremlinRoleDefinition::parameters.resource,
   "The properties required to create or update a Role Definition."
 );

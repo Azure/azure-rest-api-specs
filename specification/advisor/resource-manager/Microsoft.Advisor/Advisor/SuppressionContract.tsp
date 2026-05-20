@@ -63,7 +63,6 @@ interface SuppressionContracts {
 
 @@doc(SuppressionContract.name, "The name of the suppression.");
 @@doc(SuppressionContract.properties, "The properties of the suppression.");
-@@doc(
-  SuppressionContracts.create::parameters.resource,
+@@doc(SuppressionContracts.create::parameters.resource,
   "The snoozed or dismissed attribute; for example, the snooze duration."
 );

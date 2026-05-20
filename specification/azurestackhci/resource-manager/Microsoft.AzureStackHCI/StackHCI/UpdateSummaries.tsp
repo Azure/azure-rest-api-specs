@@ -57,11 +57,8 @@ interface UpdateSummariesOperationGroup {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     UpdateSummaries,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-          Azure.Core.Foundations.RetryAfterHeader>
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -92,7 +89,6 @@ interface UpdateSummariesOperationGroup {
 
 @@doc(UpdateSummaries.name, "");
 @@doc(UpdateSummaries.properties, "Update summaries properties");
-@@doc(
-  UpdateSummariesOperationGroup.put::parameters.resource,
+@@doc(UpdateSummariesOperationGroup.put::parameters.resource,
   "Properties of the UpdateSummaries resource"
 );

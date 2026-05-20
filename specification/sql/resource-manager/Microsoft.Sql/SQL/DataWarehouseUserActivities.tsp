@@ -41,8 +41,7 @@ interface DataWarehouseUserActivitiesOperationGroup {
   listByDatabase is ArmResourceListByParent<DataWarehouseUserActivities>;
 }
 
-@@doc(
-  DataWarehouseUserActivities.name,
+@@doc(DataWarehouseUserActivities.name,
   "The activity name of the data warehouse. "
 );
 @@doc(DataWarehouseUserActivities.properties, "Resource properties.");

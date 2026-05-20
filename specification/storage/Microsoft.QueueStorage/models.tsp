@@ -636,14 +636,7 @@ alias ApiVersionHeader = {
   version: string;
 };
 
-alias ClientRequestIdParameter = {
-  /** An opaque, globally-unique, client-generated string identifier for the request. */
-  @access(Access.internal)
-  @header("x-ms-client-request-id")
-  clientRequestId?: uuid;
-};
-
-alias ClientRequestIdResponseHeader = {
+alias ClientRequestIdHeader = {
   /** An opaque, globally-unique, client-generated string identifier for the request. */
   @access(Access.internal)
   @header("x-ms-client-request-id")

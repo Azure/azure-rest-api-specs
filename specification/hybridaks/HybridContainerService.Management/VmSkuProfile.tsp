@@ -62,7 +62,6 @@ interface VmSkuProfiles {
   >;
 }
 
-@@doc(
-  VmSkuProfiles.createVMSkus::parameters.resource,
+@@doc(VmSkuProfiles.createVMSkus::parameters.resource,
   "VM SKUs resource definition"
 );

@@ -35,12 +35,43 @@ interface TomcatWebApplicationsController {
   /**
    * Updates the Tomcat web application tags.
    */
+  // Workaround for "Cannot pass in unknown to patch template"(https://github.com/Azure/typespec-azure/issues/4360)
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("TomcatWebApplicationsController")
-  @patch(#{ implicitOptionality: false })
-  update is Azure.ResourceManager.Legacy.CustomPatchSync<
-    TomcatWebApplications,
-    PatchModel = Record<unknown>
-  >;
+  @patch
+  update(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+    ...Azure.ResourceManager.Legacy.Provider,
+
+    /** Site name. */
+    @path
+    @segment("masterSites")
+    @key("siteName")
+    @pattern("^[a-zA-Z0-9-]{3,24}$")
+    siteName: string,
+
+    /** Web app site name. */
+    @path
+    @segment("webAppSites")
+    @key("webAppSiteName")
+    @pattern("^[a-zA-Z0-9-]{3,24}$")
+    webAppSiteName: string,
+
+    /** Web application name. */
+    @path
+    @segment("tomcatWebApplications")
+    @key("webApplicationName")
+    @pattern("^[a-zA-Z0-9-]{3,24}$")
+    webApplicationName: string,
+
+    /** Patch request body. */
+    @body
+    body: unknown,
+  ): TomcatWebApplications | ErrorResponse;
 
   /**
    * Method to get all Tomcat web application.
@@ -77,7 +108,6 @@ interface TomcatWebApplicationsController {
 }
 
 @@doc(TomcatWebApplications.name, "Web application name.");
-@@doc(
-  TomcatWebApplications.properties,
+@@doc(TomcatWebApplications.properties,
   "The resource-specific properties for this resource."
 );

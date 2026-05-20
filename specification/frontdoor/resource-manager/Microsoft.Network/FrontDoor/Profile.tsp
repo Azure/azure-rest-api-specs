@@ -52,17 +52,14 @@ interface Profiles {
   @tag("NetworkExperimentProfiles")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Profile,
-    Response =
-      | ArmResourceUpdatedResponse<Profile>
-      | ArmResourceCreatedResponse<
-          Profile,
-          ArmLroLocationHeader<FinalResult = Profile> &
-            Azure.Core.Foundations.RetryAfterHeader
-        >
-      | (ArmAcceptedLroResponse & {
-          @bodyRoot
-          _: Profile;
-        }),
+    Response = ArmResourceUpdatedResponse<Profile> | ArmResourceCreatedResponse<
+      Profile,
+      ArmLroLocationHeader<FinalResult = Profile> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > | (ArmAcceptedLroResponse & {
+      @bodyRoot
+      _: Profile;
+    }),
     Error = ErrorResponse
   >;
 
@@ -76,13 +73,11 @@ interface Profiles {
   update is ArmCustomPatchAsync<
     Profile,
     PatchModel = ProfileUpdateModel,
-    Response =
-      | ArmResponse<Profile>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Profile> &
-          Azure.Core.Foundations.RetryAfterHeader> & {
-          @bodyRoot
-          _: Profile;
-        }),
+    Response = ArmResponse<Profile> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Profile> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @bodyRoot
+      _: Profile;
+    }),
     Error = ErrorResponse
   >;
 
@@ -94,10 +89,7 @@ interface Profiles {
   @tag("NetworkExperimentProfiles")
   delete is ArmResourceDeleteWithoutOkAsync<
     Profile,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
     Error = ErrorResponse
   >;
 
@@ -139,13 +131,11 @@ interface Profiles {
   >;
 }
 
-@@doc(
-  Profile.name,
+@@doc(Profile.name,
   "The Profile identifier associated with the Tenant and Partner"
 );
 @@doc(Profile.properties, "The properties of a Profile");
-@@doc(
-  Profiles.createOrUpdate::parameters.resource,
+@@doc(Profiles.createOrUpdate::parameters.resource,
   "An Network Experiment Profile"
 );
 @@doc(Profiles.update::parameters.properties, "The Profile Update Model");

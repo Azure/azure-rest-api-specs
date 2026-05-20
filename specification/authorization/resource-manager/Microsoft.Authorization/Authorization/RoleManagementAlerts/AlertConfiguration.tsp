@@ -62,7 +62,6 @@ interface AlertConfigurations {
 
 @@doc(AlertConfiguration.name, "The name of the alert configuration to get.");
 @@doc(AlertConfiguration.properties, "Alert configuration properties.");
-@@doc(
-  AlertConfigurations.update::parameters.properties,
+@@doc(AlertConfigurations.update::parameters.properties,
   "Parameters for the alert configuration."
 );

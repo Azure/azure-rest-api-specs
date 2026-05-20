@@ -133,7 +133,6 @@ interface BySiteSlotOperationGroup {
 }
 
 @@doc(ResourceHealthMetadata.name, "");
-@@doc(
-  ResourceHealthMetadata.properties,
+@@doc(ResourceHealthMetadata.properties,
   "ResourceHealthMetadata resource specific properties"
 );

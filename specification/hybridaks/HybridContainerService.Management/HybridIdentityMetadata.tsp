@@ -60,7 +60,6 @@ interface HybridIdentityMetadataOperationGroup {
   >;
 }
 
-@@doc(
-  HybridIdentityMetadataOperationGroup.create::parameters.resource,
+@@doc(HybridIdentityMetadataOperationGroup.create::parameters.resource,
   "Hybrid Identity Metadata resource definition"
 );

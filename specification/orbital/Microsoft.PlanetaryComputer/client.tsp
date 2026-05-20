@@ -26,13 +26,6 @@ namespace Customizations;
 @@clientName(StacSearchParameters.datetime, "date_time", "python");
 @@clientName(SharedAccessSignature, "Sas", "python");
 
-// === Python snake_case parameter renames ===
-@@clientName(CollectionMosaicFilterQueryParameters.sortby, "sort_by", "python");
-@@clientName(BoundingBoxPathParameters.minx, "min_x", "python");
-@@clientName(BoundingBoxPathParameters.miny, "min_y", "python");
-@@clientName(BoundingBoxPathParameters.maxx, "max_x", "python");
-@@clientName(BoundingBoxPathParameters.maxy, "max_y", "python");
-
 // Disable convenient API for JSON-Merge patch operations
 @@convenientAPI(Ingestions.update, false, "csharp,java");
 @@convenientAPI(StacItems.update, false, "csharp,java");
@@ -51,20 +44,13 @@ namespace Customizations;
 // types are excluded until the pygen fix is released.
 
 // Address naming convention violations for C# SDK
-@@clientName(
-  TilerMosaicSearchRegistrationResponse,
+@@clientName(TilerMosaicSearchRegistrationResponse,
   "TilerMosaicSearchRegistrationResult",
   "csharp"
 );
 
 // Models ending with "Definition" - rename appropriately
 @@clientName(IngestionDefinition, "IngestionInformation", "csharp");
-
-// === Python API naming notes ===
-// All Python method naming (searches→search, list→get, _by_tms, _by_format,
-// geo_json removal) is now handled via interface member names below.
-// Language-specific @@clientName overrides can be added here when other
-// languages (C#, Java, JS) need different names from the Python defaults.
 
 // Models ending with "Operation" - rename to "Info"
 @@clientName(IngestionRunOperation, "IngestionRunInformation", "csharp");
@@ -138,7 +124,7 @@ interface Stac {
   getMosaic is StacCollectionMosaics.get;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
-  getMosaics is StacCollectionMosaics.getAll;
+  listMosaics is StacCollectionMosaics.getAll;
 
   // STAC Collections
   createCollection is StacCollections.create;
@@ -159,7 +145,7 @@ interface Stac {
   deleteRenderOption is StacCollectionRenderOptions.delete;
   getRenderOption is StacCollectionRenderOptions.get;
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
-  getRenderOptions is StacCollectionRenderOptions.getAll;
+  listRenderOptions is StacCollectionRenderOptions.getAll;
 
   // Collection Thumbnails
   getCollectionThumbnail is StacCollectionThumbnails.get;
@@ -169,7 +155,7 @@ interface Stac {
   replaceTileSettings is StacCollectionTileSettings.replace;
 
   // STAC Conformance
-  getConformanceClasses is StacConformanceClass.get;
+  getConformanceClass is StacConformanceClass.get;
 
   // STAC landing page
   getLandingPage is StacLandingPages.get;
@@ -194,7 +180,7 @@ interface Stac {
   deleteQueryable is StacQueryables.delete;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
-  getQueryables is StacQueryables.getAll;
+  listQueryables is StacQueryables.getAll;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
   getCollectionQueryables is StacQueryables.getAllByCollection;
@@ -212,7 +198,7 @@ interface Data {
   getTileMatrixDefinitions is TileMatrixDefinitions.get;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
-  getTileMatrices is TileMatrixList.get;
+  listTileMatrices is TileMatrixList.get;
 
   // Statistics
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
@@ -348,7 +334,7 @@ interface Data {
   // Item Tileset List and Metadata
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
   @added(Versions.v2026_04_15)
-  getTilesets is MosaicItemsTileSetList.get;
+  listTilesets is MosaicItemsTileSetList.get;
   @added(Versions.v2026_04_15)
   getTilesetMetadata is MosaicItemsTileSetMetadata.get;
 
@@ -372,17 +358,17 @@ interface Data {
   @added(Versions.v2026_04_15)
   getTileNoTmsByScaleAndFormat is MosaicItemsTilesScaleByFormat.getZxyScaleByFormat;
 
-  // Feature Crop (bare, no format)
+  // GeoJSON Feature (bare, no format)
   @added(Versions.v2026_04_15)
-  cropFeature is MosaicItemsFeatureGeoJson.crop;
+  cropFeatureGeoJson is MosaicItemsFeatureGeoJson.crop;
 
-  // Feature Crop with format
+  // GeoJSON Feature Crop with format
   @added(Versions.v2026_04_15)
-  cropFeatureByFormat is MosaicItemsFeatureGeoJsonFormat.cropFormat;
+  cropFeatureGeoJsonFormat is MosaicItemsFeatureGeoJsonFormat.cropFormat;
 
-  // Feature Crop with dimensions
+  // GeoJSON Feature Crop with dimensions
   @added(Versions.v2026_04_15)
-  cropFeatureWidthByHeight is MosaicItemsFeatureGeoJsonWidthByHeight.cropWidthByHeightFormat;
+  cropFeatureGeoJsonWidthByHeight is MosaicItemsFeatureGeoJsonWidthByHeight.cropWidthByHeightFormat;
 
   // Item Bounds, Info, Assets
   @added(Versions.v2026_04_15)
@@ -393,7 +379,7 @@ interface Data {
   getItemInfoGeoJson is MosaicItemsInfoGeoJson.get;
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
   @added(Versions.v2026_04_15)
-  getItemAvailableAssets is MosaicItemsAvailableAssets.getAll;
+  listItemAvailableAssets is MosaicItemsAvailableAssets.getAll;
 
   // Item Statistics
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
@@ -401,21 +387,21 @@ interface Data {
   getItemAssetStatistics is MosaicItemsAssetStatistics.getAll;
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
   @added(Versions.v2026_04_15)
-  getItemStatistics is MosaicItemsStatistics.getAll;
+  listItemStatistics is MosaicItemsStatistics.getAll;
   @added(Versions.v2026_04_15)
-  getItemFeatureStatistics is MosaicItemsGeoJsonStatistics.get;
+  getItemGeoJsonStatistics is MosaicItemsGeoJsonStatistics.get;
 
   // Item TileJSON
   @added(Versions.v2026_04_15)
   getItemTileJson is MosaicItemsTileJson.get;
   @added(Versions.v2026_04_15)
-  getItemTileJsonByTms is MosaicItemsTileMatrixSetsTileJson.get;
+  getItemTileJsonTms is MosaicItemsTileMatrixSetsTileJson.get;
 
   // Item WMTS
   @added(Versions.v2026_04_15)
   getItemWmtsCapabilities is MosaicItemsWmts.getCapabilitiesXml;
   @added(Versions.v2026_04_15)
-  getItemWmtsCapabilitiesByTms is MosaicItemsWmtsTileMatrixSets.getCapabilitiesXml;
+  getItemWmtsCapabilitiesTms is MosaicItemsWmtsTileMatrixSets.getCapabilitiesXml;
 
   // Item Point
   @added(Versions.v2026_04_15)
@@ -438,7 +424,7 @@ interface Data {
   // Collection Tileset List and Metadata
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
   @added(Versions.v2026_04_15)
-  getCollectionTilesets is MosaicCollectionsTileSetList.get;
+  listCollectionTilesets is MosaicCollectionsTileSetList.get;
   @added(Versions.v2026_04_15)
   getCollectionTilesetMetadata is MosaicCollectionsTileSetMetadata.get;
 
@@ -466,13 +452,13 @@ interface Data {
   @added(Versions.v2026_04_15)
   getCollectionTileJson is MosaicCollectionsTileJson.get;
   @added(Versions.v2026_04_15)
-  getCollectionTileJsonByTms is MosaicCollectionsTileMatrixSetsTileJson.get;
+  getCollectionTileJsonTms is MosaicCollectionsTileMatrixSetsTileJson.get;
 
   // Collection WMTS
   @added(Versions.v2026_04_15)
   getCollectionWmtsCapabilities is MosaicCollectionsWmts.getCapabilitiesXml;
   @added(Versions.v2026_04_15)
-  getCollectionWmtsCapabilitiesByTms is MosaicCollectionsWmtsTileMatrixSets.getCapabilitiesXml;
+  getCollectionWmtsCapabilitiesTms is MosaicCollectionsWmtsTileMatrixSets.getCapabilitiesXml;
 
   // Collection Assets
   @added(Versions.v2026_04_15)
@@ -492,11 +478,11 @@ interface Data {
   @added(Versions.v2026_04_15)
   getCollectionBboxCropWithDimensions is MosaicCollectionsBboxWithDimensions.getCroppedToBoundingBoxWidthByHeight;
   @added(Versions.v2026_04_15)
-  cropCollectionFeature is MosaicCollectionsFeatureGeoJson.crop;
+  cropCollectionFeatureGeoJson is MosaicCollectionsFeatureGeoJson.crop;
   @added(Versions.v2026_04_15)
-  cropCollectionFeatureByFormat is MosaicCollectionsFeatureGeoJsonFormat.cropFormat;
+  cropCollectionFeatureGeoJsonFormat is MosaicCollectionsFeatureGeoJsonFormat.cropFormat;
   @added(Versions.v2026_04_15)
-  cropCollectionFeatureWidthByHeight is MosaicCollectionsFeatureGeoJsonWidthByHeight.cropWidthByHeightFormat;
+  cropCollectionFeatureGeoJsonWidthByHeight is MosaicCollectionsFeatureGeoJsonWidthByHeight.cropWidthByHeightFormat;
 
   // Collection Point
   @added(Versions.v2026_04_15)
@@ -506,68 +492,67 @@ interface Data {
 
   // === Search-based mosaic endpoints (stable 2026-04-15) ===
 
-  // Search Tileset List and Metadata
+  // #1 - Searches Tileset List
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
   @added(Versions.v2026_04_15)
-  getSearchTilesets is MosaicSearchesTileSetList.get;
+  listSearchesTilesets is MosaicSearchesTileSetList.get;
+  // #2 - Searches Tileset Metadata
   @added(Versions.v2026_04_15)
-  getSearchTilesetMetadata is MosaicSearchesTileSetMetadata.get;
-  // Search Tiles with TileMatrixSetId (4 variants)
+  getSearchesTilesetMetadata is MosaicSearchesTileSetMetadata.get;
+  // #3 - Searches Tiles with TileMatrixSetId (4 variants)
   @added(Versions.v2026_04_15)
-  getSearchTileByScaleAndFormat is MosaicSearchesTileMatrixSets.getZxyScaleByFormat;
+  getSearchesTileByScaleAndFormat is MosaicSearchesTileMatrixSets.getZxyScaleByFormat;
   @added(Versions.v2026_04_15)
-  getSearchTile is MosaicSearchesTileMatrixSetsPlain.getZxy;
+  getSearchesTile is MosaicSearchesTileMatrixSetsPlain.getZxy;
   @added(Versions.v2026_04_15)
-  getSearchTileByFormat is MosaicSearchesTileMatrixSetsFormat.getZxyByFormat;
+  getSearchesTileByFormat is MosaicSearchesTileMatrixSetsFormat.getZxyByFormat;
   @added(Versions.v2026_04_15)
-  getSearchTileByScale is MosaicSearchesTileMatrixSetsScale.getZxyByScale;
-  // Search Assets for Tile (with TileMatrixSetId)
+  getSearchesTileByScale is MosaicSearchesTileMatrixSetsScale.getZxyByScale;
+  // #7 - Searches Assets for Tile (with TileMatrixSetId)
   @added(Versions.v2026_04_15)
-  getSearchAssetsForTile is MosaicSearchesAssetsForTileMatrixSets.getZxyAssets;
-  // Search TileJSON with TileMatrixSetId
+  getSearchesAssetsForTile is MosaicSearchesAssetsForTileMatrixSets.getZxyAssets;
+  // #5 - Searches TileJSON with TileMatrixSetId
   @added(Versions.v2026_04_15)
-  getSearchTileJsonByTms is MosaicSearchesTileMatrixSetsTileJson.get;
-  // Search WMTS with TileMatrixSetId
+  getSearchesTileJsonTms is MosaicSearchesTileMatrixSetsTileJson.get;
+  // #6 - Searches WMTS with TileMatrixSetId
   @added(Versions.v2026_04_15)
-  getSearchWmtsCapabilitiesByTms is MosaicSearchesWmtsTileMatrixSets.getCapabilitiesXml;
-  // Search Info
+  getSearchesWmtsCapabilitiesTms is MosaicSearchesWmtsTileMatrixSets.getCapabilitiesXml;
+  // #13 - Searches Info
   @added(Versions.v2026_04_15)
-  getSearchInfo is MosaicSearchesInfoSearch.get;
-  // Search Bbox Crop
+  getSearchesInfo is MosaicSearchesInfoSearch.get;
+  // #10 - Searches Bbox Crop (NEW)
   @added(Versions.v2026_04_15)
-  getSearchBboxCrop is MosaicSearchesBbox.getCroppedToBoundingBox;
+  getSearchesBboxCrop is MosaicSearchesBbox.getCroppedToBoundingBox;
   @added(Versions.v2026_04_15)
-  getSearchBboxCropWithDimensions is MosaicSearchesBboxWithDimensions.getCroppedToBoundingBoxWidthByHeight;
+  getSearchesBboxCropWithDimensions is MosaicSearchesBboxWithDimensions.getCroppedToBoundingBoxWidthByHeight;
   @added(Versions.v2026_04_15)
-  getSearchBboxAssets is MosaicSearchesAssetsForBbox.getBboxAssets;
-  // Search Feature Crop
+  getSearchesBboxAssets is MosaicSearchesAssetsForBbox.getBboxAssets;
   @added(Versions.v2026_04_15)
-  cropSearchFeature is MosaicSearchesFeatureGeoJson.crop;
+  cropSearchesFeatureGeoJson is MosaicSearchesFeatureGeoJson.crop;
   @added(Versions.v2026_04_15)
-  cropSearchFeatureByFormat is MosaicSearchesFeatureGeoJsonFormat.cropFormat;
+  cropSearchesFeatureGeoJsonFormat is MosaicSearchesFeatureGeoJsonFormat.cropFormat;
   @added(Versions.v2026_04_15)
-  cropSearchFeatureWidthByHeight is MosaicSearchesFeatureGeoJsonWidthByHeight.cropWidthByHeightFormat;
-  // Search WMTS and TileJSON (without TileMatrixSetId)
+  cropSearchesFeatureGeoJsonWidthByHeight is MosaicSearchesFeatureGeoJsonWidthByHeight.cropWidthByHeightFormat;
+  // Remaining /searches/ equivalents for consistency
   @added(Versions.v2026_04_15)
-  getSearchWmtsCapabilities is MosaicSearchesWmts.getCapabilitiesXml;
+  getSearchesWmtsCapabilities is MosaicSearchesWmts.getCapabilitiesXml;
   @added(Versions.v2026_04_15)
-  getSearchTileJson is MosaicSearchesTileJson.get;
-  // Search Tiles (without TileMatrixSetId)
+  getSearchesTileJson is MosaicSearchesTileJson.get;
   @added(Versions.v2026_04_15)
-  getSearchTileNoTms is MosaicSearchesTilesPlain.getZxy;
+  getSearchesTileNoTms is MosaicSearchesTilesPlain.getZxy;
   @added(Versions.v2026_04_15)
-  getSearchTileNoTmsByFormat is MosaicSearchesTilesFormat.getZxyByFormat;
+  getSearchesTileNoTmsByFormat is MosaicSearchesTilesFormat.getZxyByFormat;
   @added(Versions.v2026_04_15)
-  getSearchTileNoTmsByScale is MosaicSearchesTilesScale.getZxyByScale;
+  getSearchesTileNoTmsByScale is MosaicSearchesTilesScale.getZxyByScale;
   @added(Versions.v2026_04_15)
-  getSearchTileNoTmsByScaleAndFormat is MosaicSearchesTiles.getZxyScaleByFormat;
+  getSearchesTileNoTmsByScaleAndFormat is MosaicSearchesTiles.getZxyScaleByFormat;
   @added(Versions.v2026_04_15)
-  getSearchAssetsForTileNoTms is MosaicSearchesAssetsForTiles.getZxyAssets;
-  // Search Point
+  getSearchesAssetsForTileNoTms is MosaicSearchesAssetsForTiles.getZxyAssets;
+  // Searches Point
   @added(Versions.v2026_04_15)
-  getSearchPoint is MosaicSearchesPoint.getPoint;
+  getSearchesPoint is MosaicSearchesPoint.getPoint;
   @added(Versions.v2026_04_15)
-  getSearchPointWithAssets is MosaicSearchesPointWithAssets.getPointAssets;
+  getSearchesPointWithAssets is MosaicSearchesPointWithAssets.getPointAssets;
 }
 
 // === Shared Access Signature (SAS) ===
@@ -576,30 +561,9 @@ interface Data {
 @clientName("ManagedStorageSharedAccessSignatureClient", "csharp")
 interface SharedAccessSignature {
   // Sign HREF for read access
-  getUrl is Sas.getSign;
+  getSign is Sas.getSign;
 
   // SAS Tokens
   getToken is Sas.getToken;
   revokeToken is Sas.revokeToken;
 }
-
-// === ColorMapNames enum: fix digit-to-alpha word boundary splits ===
-@@clientName(ColorMapNames.`ai4g-lulc`, "AI4G_LULC", "python");
-@@clientName(ColorMapNames.`modis-10A1`, "MODIS_10A1", "python");
-@@clientName(ColorMapNames.`modis-10A2`, "MODIS_10A2", "python");
-@@clientName(ColorMapNames.`modis-13A1|Q1`, "MODIS_13A1_Q1", "python");
-@@clientName(ColorMapNames.`modis-14A1|A2`, "MODIS_14A1_A2", "python");
-@@clientName(ColorMapNames.`modis-15A2H|A3H`, "MODIS_15A2H_A3H", "python");
-@@clientName(ColorMapNames.`modis-16A3GF-ET`, "MODIS_16A3GF_ET", "python");
-@@clientName(ColorMapNames.`modis-16A3GF-PET`, "MODIS_16A3GF_PET", "python");
-@@clientName(ColorMapNames.`modis-17A2H|A2HGF`, "MODIS_17A2H_A2HGF", "python");
-@@clientName(ColorMapNames.`modis-17A3HGF`, "MODIS_17A3HGF", "python");
-@@clientName(ColorMapNames.`modis-64A1`, "MODIS_64A1", "python");
-@@clientName(ColorMapNames.tab20b, "TAB20B", "python");
-@@clientName(ColorMapNames.tab20b_r, "TAB20B_R", "python");
-@@clientName(ColorMapNames.tab20c, "TAB20C", "python");
-@@clientName(ColorMapNames.tab20c_r, "TAB20C_R", "python");
-@@clientName(ColorMapNames.`viirs-10a1`, "VIIRS_10A1", "python");
-@@clientName(ColorMapNames.`viirs-13a1`, "VIIRS_13A1", "python");
-@@clientName(ColorMapNames.`viirs-14a1`, "VIIRS_14A1", "python");
-@@clientName(ColorMapNames.`viirs-15a2H`, "VIIRS_15A2H", "python");

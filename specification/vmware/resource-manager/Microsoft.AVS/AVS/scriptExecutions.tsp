@@ -39,8 +39,7 @@ interface ScriptExecutions {
   ): ArmResponse<ScriptExecution> | ErrorResponse;
 }
 
-@@clientName(
-  ScriptExecutions.createOrUpdate::parameters.resource,
+@@clientName(ScriptExecutions.createOrUpdate::parameters.resource,
   "scriptExecution"
 );
 

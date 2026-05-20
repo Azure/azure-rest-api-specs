@@ -47,12 +47,10 @@ interface HealthBots {
   create is ArmResourceCreateOrReplaceAsync<
     HealthBot,
     Error = Error,
-    Response =
-      | ArmResourceUpdatedResponse<HealthBot>
-      | ArmResourceCreatedResponse<
-          HealthBot,
-          ArmAsyncOperationHeader & Azure.Core.Foundations.RetryAfterHeader
-        >
+    Response = ArmResourceUpdatedResponse<HealthBot> | ArmResourceCreatedResponse<
+      HealthBot,
+      ArmAsyncOperationHeader & Azure.Core.Foundations.RetryAfterHeader
+    >
   >;
 
   /**
@@ -63,13 +61,11 @@ interface HealthBots {
     HealthBot,
     PatchModel = HealthBotUpdateParameters,
     Error = Error,
-    Response =
-      | ArmResponse<HealthBot>
-      | ArmResourceCreatedResponse<
-          HealthBot,
-          ArmLroLocationHeader<FinalResult = HealthBot> &
-            Azure.Core.Foundations.RetryAfterHeader
-        >
+    Response = ArmResponse<HealthBot> | ArmResourceCreatedResponse<
+      HealthBot,
+      ArmLroLocationHeader<FinalResult = HealthBot> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >
   >;
 
   /**
@@ -78,10 +74,7 @@ interface HealthBots {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     HealthBot,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>
-      | ArmDeletedNoContentResponse,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> | ArmDeletedNoContentResponse,
     Error = Error
   >;
 
@@ -127,15 +120,12 @@ interface HealthBots {
 @@maxLength(HealthBot.name, 64);
 @@minLength(HealthBot.name, 2);
 @@doc(HealthBot.name, "The name of the Bot resource.");
-@@doc(
-  HealthBot.properties,
+@@doc(HealthBot.properties,
   "The set of properties specific to Azure Health Bot resource."
 );
-@@doc(
-  HealthBots.create::parameters.resource,
+@@doc(HealthBots.create::parameters.resource,
   "The parameters to provide for the created Azure Health Bot."
 );
-@@doc(
-  HealthBots.update::parameters.properties,
+@@doc(HealthBots.update::parameters.properties,
   "The parameters to provide for the required Azure Health Bot."
 );

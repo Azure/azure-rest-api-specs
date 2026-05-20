@@ -45,7 +45,6 @@ enum Versions {
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
-@@doc(
-  Operations.list,
+@@doc(Operations.list,
   "Lists all of the available PowerPlatform REST API operations."
 );

@@ -7,14 +7,12 @@ using TypeSpec.Versioning;
 using Microsoft.DeviceRegistry;
 
 // Java Client configuration
-@@clientNamespace(
-  Microsoft.DeviceRegistry,
+@@clientNamespace(Microsoft.DeviceRegistry,
   "com.azure.resourcemanager.deviceregistry",
   "java"
 );
 
-@@clientName(
-  Microsoft.DeviceRegistry,
+@@clientName(Microsoft.DeviceRegistry,
   "DeviceRegistryManagementClient",
   "java"
 );
@@ -31,13 +29,11 @@ using Microsoft.DeviceRegistry;
 @@clientName(AssetStatusDataset, "DeviceRegistryAssetStatusDataset", "csharp");
 @@clientName(AssetStatusError, "DeviceRegistryAssetStatusError", "csharp");
 @@clientName(AssetStatusEvent, "DeviceRegistryAssetStatusEvent", "csharp");
-@@clientName(
-  AssetEndpointProfile,
+@@clientName(AssetEndpointProfile,
   "DeviceRegistryAssetEndpointProfile",
   "csharp"
 );
-@@clientName(
-  AssetEndpointProfileProperties,
+@@clientName(AssetEndpointProfileProperties,
   "DeviceRegistryAssetEndpointProfileProperties",
   "csharp"
 );
@@ -45,13 +41,11 @@ using Microsoft.DeviceRegistry;
 @@clientName(DataPointBase, "DeviceRegistryDataPointBase", "csharp");
 @@clientName(Dataset, "DeviceRegistryDataset", "csharp");
 @@clientName(DiscoveredAsset, "DeviceRegistryDiscoveredAsset", "csharp");
-@@clientName(
-  DiscoveredAssetProperties,
+@@clientName(DiscoveredAssetProperties,
   "DeviceRegistryDiscoveredAssetProperties",
   "csharp"
 );
-@@clientName(
-  DiscoveredAssetEndpointProfile,
+@@clientName(DiscoveredAssetEndpointProfile,
   "DeviceRegistryDiscoveredAssetEndpointProfile",
   "csharp"
 );
@@ -61,15 +55,13 @@ using Microsoft.DeviceRegistry;
 @@clientName(Schema, "DeviceRegistrySchema", "csharp");
 @@clientName(SchemaProperties, "DeviceRegistrySchemaProperties", "csharp");
 @@clientName(SchemaRegistry, "DeviceRegistrySchemaRegistry", "csharp");
-@@clientName(
-  SchemaRegistryProperties,
+@@clientName(SchemaRegistryProperties,
   "DeviceRegistrySchemaRegistryProperties",
   "csharp"
 );
 @@clientName(SchemaType, "DeviceRegistrySchemaType", "csharp");
 @@clientName(SchemaVersion, "DeviceRegistrySchemaVersion", "csharp");
-@@clientName(
-  SchemaVersionProperties,
+@@clientName(SchemaVersionProperties,
   "DeviceRegistrySchemaVersionProperties",
   "csharp"
 );
@@ -80,14 +72,12 @@ using Microsoft.DeviceRegistry;
 @@clientName(ProvisioningState, "DeviceRegistryProvisioningState", "csharp");
 @@clientName(Authentication, "DeviceRegistryAuthentication", "csharp");
 @@clientName(Topic, "DeviceRegistryTopic", "csharp");
-@@clientName(
-  UsernamePasswordCredentials,
+@@clientName(UsernamePasswordCredentials,
   "DeviceRegistryUsernamePasswordCredentials",
   "csharp"
 );
 @@clientName(X509Credentials, "DeviceRegistryX509Credentials", "csharp");
-@@alternateType(
-  SchemaRegistryProperties.storageAccountContainerUrl,
+@@alternateType(SchemaRegistryProperties.storageAccountContainerUrl,
   url,
   "csharp"
 );
@@ -96,87 +86,71 @@ using Microsoft.DeviceRegistry;
 @@alternateType(BillingContainer.etag, Azure.Core.eTag, "csharp");
 @@alternateType(DiscoveredAssetProperties.manufacturerUri, url, "csharp");
 @@alternateType(DiscoveredAssetProperties.documentationUri, url, "csharp");
-@@alternateType(
-  SchemaRegistryProperties.storageAccountContainerUrl,
+@@alternateType(SchemaRegistryProperties.storageAccountContainerUrl,
   url,
   "csharp"
 );
 @@clientName(Namespace, "DeviceRegistryNamespace", "csharp");
-@@clientName(
-  NamespaceProperties,
+@@clientName(NamespaceProperties,
   "DeviceRegistryNamespaceProperties",
   "csharp"
 );
 @@clientName(NamespaceAsset, "DeviceRegistryNamespaceAsset", "csharp");
-@@clientName(
-  NamespaceAssetProperties,
+@@clientName(NamespaceAssetProperties,
   "DeviceRegistryNamespaceAssetProperties",
   "csharp"
 );
 @@clientName(NamespaceDevice, "DeviceRegistryNamespaceDevice", "csharp");
-@@clientName(
-  NamespaceDeviceProperties,
+@@clientName(NamespaceDeviceProperties,
   "DeviceRegistryNamespaceDeviceProperties",
   "csharp"
 );
-@@clientName(
-  NamespaceDiscoveredAsset,
+@@clientName(NamespaceDiscoveredAsset,
   "DeviceRegistryNamespaceDiscoveredAsset",
   "csharp"
 );
-@@clientName(
-  NamespaceDiscoveredAssetProperties,
+@@clientName(NamespaceDiscoveredAssetProperties,
   "DeviceRegistryNamespaceDiscoveredAssetProperties",
   "csharp"
 );
-@@clientName(
-  NamespaceDiscoveredDevice,
+@@clientName(NamespaceDiscoveredDevice,
   "DeviceRegistryNamespaceDiscoveredDevice",
   "csharp"
 );
-@@clientName(
-  NamespaceDiscoveredDeviceProperties,
+@@clientName(NamespaceDiscoveredDeviceProperties,
   "DeviceRegistryNamespaceDiscoveredDeviceProperties",
   "csharp"
 );
 @@clientName(ErrorDetails, "DeviceRegistryErrorDetails", "csharp");
-@@clientName(
-  NamespaceAssetStatus,
+@@clientName(NamespaceAssetStatus,
   "DeviceRegistryNamespaceAssetStatus",
   "csharp"
 );
-@@clientName(
-  NamespaceAssetStatusDataset,
+@@clientName(NamespaceAssetStatusDataset,
   "DeviceRegistryNamespaceAssetStatusDataset",
   "csharp"
 );
-@@clientName(
-  NamespaceAssetStatusEvent,
+@@clientName(NamespaceAssetStatusEvent,
   "DeviceRegistryNamespaceAssetStatusEvent",
   "csharp"
 );
-@@clientName(
-  NamespaceAssetStatusEventGroup,
+@@clientName(NamespaceAssetStatusEventGroup,
   "DeviceRegistryNamespaceAssetStatusEventGroup",
   "csharp"
 );
-@@clientName(
-  NamespaceAssetStatusManagementAction,
+@@clientName(NamespaceAssetStatusManagementAction,
   "DeviceRegistryNamespaceAssetStatusManagementAction",
   "csharp"
 );
-@@clientName(
-  NamespaceAssetStatusManagementGroup,
+@@clientName(NamespaceAssetStatusManagementGroup,
   "DeviceRegistryNamespaceAssetStatusManagementGroup",
   "csharp"
 );
-@@clientName(
-  NamespaceAssetStatusStream,
+@@clientName(NamespaceAssetStatusStream,
   "DeviceRegistryNamespaceAssetStatusStream",
   "csharp"
 );
-@@clientName(
-  NamespaceMessageSchemaReference,
+@@clientName(NamespaceMessageSchemaReference,
   "DeviceRegistryNamespaceMessageSchemaReference",
   "csharp"
 );
@@ -187,8 +161,7 @@ using Microsoft.DeviceRegistry;
 @@clientName(MqttDestinationQos, "MqttDestinationQo", "csharp");
 
 // JavaScript Client configuration
-@@clientName(
-  Microsoft.DeviceRegistry,
+@@clientName(Microsoft.DeviceRegistry,
   "DeviceRegistryManagementClient",
   "javascript"
 );
@@ -254,8 +227,7 @@ model PolicyUpdate {
   properties?: PolicyUpdateProperties;
 }
 
-@@alternateType(
-  Microsoft.DeviceRegistry.Policies.update::parameters.properties,
+@@alternateType(Microsoft.DeviceRegistry.Policies.update::parameters.properties,
   PolicyUpdate,
   "javascript"
 );

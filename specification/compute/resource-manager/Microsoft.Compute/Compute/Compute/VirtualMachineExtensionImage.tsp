@@ -92,7 +92,6 @@ interface VirtualMachineExtensionImages {
 }
 
 @@doc(VirtualMachineExtensionImage.name, "");
-@@doc(
-  VirtualMachineExtensionImage.properties,
+@@doc(VirtualMachineExtensionImage.properties,
   "Describes the properties of a Virtual Machine Extension Image."
 );

@@ -267,11 +267,9 @@ interface CertificateResponses {
 
 @@doc(CertificateResponse.name, "Name of the certificate to retrieve.");
 @@doc(CertificateResponse.properties, "properties of a certificate");
-@@doc(
-  CertificateResponses.createOrUpdate::parameters.resource,
+@@doc(CertificateResponses.createOrUpdate::parameters.resource,
   "The certificate body."
 );
-@@doc(
-  CertificateResponses.verifyCertificate::parameters.body,
+@@doc(CertificateResponses.verifyCertificate::parameters.body,
   "The name of the certificate"
 );

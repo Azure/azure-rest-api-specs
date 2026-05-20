@@ -70,8 +70,7 @@ interface ExtendedDatabaseBlobAuditingPolicies {
 
 @@doc(ExtendedDatabaseBlobAuditingPolicy.name, "");
 @@doc(ExtendedDatabaseBlobAuditingPolicy.properties, "Resource properties.");
-@@doc(
-  ExtendedDatabaseBlobAuditingPolicies.createOrUpdate::parameters.resource,
+@@doc(ExtendedDatabaseBlobAuditingPolicies.createOrUpdate::parameters.resource,
   "The extended database blob auditing policy."
 );
 

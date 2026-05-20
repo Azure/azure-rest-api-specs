@@ -54,7 +54,6 @@ interface InternetGatewayRules {
 }
 
 @@doc(InternetGatewayRules.create::parameters.resource, "Request payload.");
-@@doc(
-  InternetGatewayRules.update::parameters.properties,
+@@doc(InternetGatewayRules.update::parameters.properties,
   "Internet Gateway Rule properties to update."
 );

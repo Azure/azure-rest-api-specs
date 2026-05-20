@@ -64,7 +64,6 @@ interface BackupsLongTermRetentionOperations {
 }
 
 @@doc(BackupsLongTermRetentionOperation.name, "The name of the backup.");
-@@doc(
-  BackupsLongTermRetentionOperation.properties,
+@@doc(BackupsLongTermRetentionOperation.properties,
   "Long Term Retention Backup Operation Resource Properties"
 );

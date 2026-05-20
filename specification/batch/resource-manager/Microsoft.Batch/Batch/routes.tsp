@@ -93,7 +93,6 @@ alias CheckNameLocationParameter = {
   locationName: string;
 };
 
-@@doc(
-  LocationOperationGroup.checkNameAvailability::parameters.body,
+@@doc(LocationOperationGroup.checkNameAvailability::parameters.body,
   "Properties needed to check the availability of a name."
 );

@@ -40,7 +40,6 @@ interface PrivateLinkResources {
 }
 
 @@doc(PrivateLinkResource.name, "Private link resource name.");
-@@doc(
-  PrivateLinkResource.properties,
+@@doc(PrivateLinkResource.properties,
   "The resource-specific properties for this resource."
 );

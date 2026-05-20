@@ -14,25 +14,16 @@ namespace Microsoft.HealthcareApis;
 /**
  * IoT Connector definition.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Workspace)
 model IotConnector
-  is Azure.ResourceManager.ProxyResource<IotConnectorProperties> {
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<IotConnectorProperties> {
   ...ResourceNameParameter<
     Resource = IotConnector,
     KeyName = "iotConnectorName",
     SegmentName = "iotconnectors",
     NamePattern = ""
   >;
-
-  /** The common properties of tracked resources in the service. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  tags?: Record<string>;
-
-  /** The common properties for any location based resource, tracked or proxy. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  location?: string;
 
   /**
    * An etag associated with the resource, used for optimistic concurrency when editing it.
@@ -58,17 +49,14 @@ interface IotConnectors {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     IotConnector,
-    Response =
-      | ArmResourceUpdatedResponse<IotConnector>
-      | ArmResourceCreatedResponse<
-          IotConnector,
-          ArmLroLocationHeader<FinalResult = IotConnector> &
-            Azure.Core.Foundations.RetryAfterHeader
-        >
-      | (ArmAcceptedLroResponse & {
-          @bodyRoot
-          _: IotConnector;
-        }),
+    Response = ArmResourceUpdatedResponse<IotConnector> | ArmResourceCreatedResponse<
+      IotConnector,
+      ArmLroLocationHeader<FinalResult = IotConnector> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > | (ArmAcceptedLroResponse & {
+      @bodyRoot
+      _: IotConnector;
+    }),
     Error = ErrorDetails
   >;
 
@@ -86,8 +74,7 @@ interface IotConnectors {
 @@minLength(IotConnector.name, 3);
 @@doc(IotConnector.name, "The name of IoT Connector resource.");
 @@doc(IotConnector.properties, "IoT Connector configuration.");
-@@doc(
-  IotConnectors.createOrUpdate::parameters.resource,
+@@doc(IotConnectors.createOrUpdate::parameters.resource,
   "The parameters for creating or updating an IoT Connectors resource."
 );
 
@@ -120,17 +107,14 @@ interface IotConnectorOperationGroup {
     /** The parameters for updating an IoT Connector. */
     @body
     iotConnectorPatchResource: IotConnectorPatchResource,
-  ):
-    | ArmResponse<IotConnector>
-    | (ArmAcceptedLroResponse<
-        "Resource update request accepted.",
-        LroHeaders = ArmLroLocationHeader<FinalResult = IotConnector> &
-          Azure.Core.Foundations.RetryAfterHeader
-      > & {
-        @bodyRoot
-        _: IotConnector;
-      })
-    | ErrorDetails;
+  ): ArmResponse<IotConnector> | (ArmAcceptedLroResponse<
+    "Resource update request accepted.",
+    LroHeaders = ArmLroLocationHeader<FinalResult = IotConnector> &
+      Azure.Core.Foundations.RetryAfterHeader
+  > & {
+    @bodyRoot
+    _: IotConnector;
+  }) | ErrorDetails;
 
   /**
    * Deletes an IoT Connector.

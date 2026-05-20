@@ -26,8 +26,7 @@ model EmailConfigurationModel
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi"
-@@OpenAPI.extension(
-  EmailConfiguration.create::parameters.resource,
+@@OpenAPI.extension(EmailConfiguration.create::parameters.resource,
   "x-ms-client-name",
   "body"
 );
@@ -52,7 +51,6 @@ interface EmailConfiguration {
 }
 
 @@doc(EmailConfigurationModel.name, "The email configuration name.");
-@@doc(
-  EmailConfiguration.create::parameters.resource,
+@@doc(EmailConfiguration.create::parameters.resource,
   "EmailConfiguration model."
 );

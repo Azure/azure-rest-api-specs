@@ -64,7 +64,6 @@ interface KubernetesVersionProfiles {
   >;
 }
 
-@@doc(
-  KubernetesVersionProfiles.createKubernetesVersions::parameters.resource,
+@@doc(KubernetesVersionProfiles.createKubernetesVersions::parameters.resource,
   "Kubernetes Versions resource definition"
 );

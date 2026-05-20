@@ -65,7 +65,8 @@ interface Operations {
   @segment("operations")
   @get
   @list
-  list(...ApiVersionParameter, ...Azure.ResourceManager.Legacy.Provider):
-    | ArmResponse<OperationListResult>
-    | ResourceProviderDefaultErrorResponse;
+  list(
+    ...ApiVersionParameter,
+    ...Azure.ResourceManager.Legacy.Provider,
+  ): ArmResponse<OperationListResult> | ResourceProviderDefaultErrorResponse;
 }

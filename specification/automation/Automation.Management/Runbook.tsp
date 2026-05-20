@@ -42,7 +42,7 @@ alias RunbookOps = Azure.ResourceManager.Legacy.RoutedOperations<
     ...KeysOf<Runbook>;
   },
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runbooks/{runbookName}",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Automation/automationAccounts/{automationAccountName}/runbooks/{runbookName}",
   }
 >;
 
@@ -303,15 +303,12 @@ interface Runbooks {
 
 @@doc(Runbook.name, "The runbook name.");
 @@doc(Runbook.properties, "Gets or sets the runbook properties.");
-@@doc(
-  Runbooks.createOrUpdate::parameters.resource,
+@@doc(Runbooks.createOrUpdate::parameters.resource,
   "The create or update parameters for runbook. Provide either content link for a published runbook or draft, not both."
 );
-@@doc(
-  Runbooks.update::parameters.properties,
+@@doc(Runbooks.update::parameters.properties,
   "The update parameters for runbook."
 );
-@@doc(
-  Runbooks.create::parameters.body,
+@@doc(Runbooks.create::parameters.body,
   "The parameters supplied to the create test job operation."
 );

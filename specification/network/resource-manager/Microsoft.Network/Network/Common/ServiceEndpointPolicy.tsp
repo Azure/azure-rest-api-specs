@@ -43,7 +43,6 @@ model ServiceEndpointPolicy extends Resource {
 }
 
 @@doc(ServiceEndpointPolicy.name, "The name of the service endpoint policy.");
-@@doc(
-  ServiceEndpointPolicy.properties,
+@@doc(ServiceEndpointPolicy.properties,
   "Properties of the service end point policy."
 );

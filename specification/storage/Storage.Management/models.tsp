@@ -6346,66 +6346,6 @@ alias ETagHeader = {
 };
 
 /**
- * A Connector is a tracked ARM resource modeled as a sub-resource of a Storage Account.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "To match existing API shape"
-@added(Versions.v2025_08_01)
-model ConnectorUpdate extends TrackedResourceUpdate {
-  /**
-   * The properties of the Storage Connector.
-   */
-  properties?: StorageConnectorPropertiesUpdate;
-}
-
-/**
- * The storage connector properties
- */
-@added(Versions.v2025_08_01)
-model StorageConnectorPropertiesUpdate {
-  /**
-   * State - Active or Inactive. Whether or not the Storage Connector should start as active (default: Active)
-   * (While set to false on the Storage Connector, all data plane requests using this Storage Connector fail, and this Storage Connector is not billed if it would be otherwise.
-   */
-  state?: StorageConnectorState = StorageConnectorState.Active;
-
-  /**
-   * Arbitrary description of this Storage Connector. Max 250 characters.
-   */
-  @maxLength(250)
-  description?: string;
-
-  /**
-   * Test connection to backing data source before creating the storage connector.
-   */
-  @visibility(Lifecycle.Create, Lifecycle.Update)
-  testConnection?: boolean = false;
-
-  /**
-   * Information about how to communicate with and authenticate to the backing data store.
-   */
-  source?: StorageConnectorSourceUpdate;
-}
-
-/** The storage connector backing data source information */
-@added(Versions.v2025_08_01)
-@discriminator("type")
-model StorageConnectorSourceUpdate {
-  /** Type of the Storage Connector. Not mutable once the Storage Connector is created." */
-  type: StorageConnectorSourceType;
-}
-
-/** The managed identity auth properties for dataShare connection. */
-@added(Versions.v2025_08_01)
-model ManagedIdentityAuthPropertiesUpdate
-  extends StorageConnectorAuthPropertiesUpdate {
-  /** Discriminator value for ManagedIdentity */
-  type: StorageConnectorAuthType.ManagedIdentity;
-
-  /** ARM ResourceId of the managed identity that should be used to authenticate to the backing data source. */
-  identityResourceId?: string;
-}
-
-/**
  * The storage connector properties
  */
 @added(Versions.v2025_08_01)
@@ -6479,6 +6419,7 @@ model DataShareSource extends StorageConnectorSource {
   /**
    * The type for data share source
    */
+  @visibility(Lifecycle.Read)
   type: StorageConnectorSourceType.DataShare;
 
   /**
@@ -6491,24 +6432,6 @@ model DataShareSource extends StorageConnectorSource {
    * Details for how to authenticate to the backing data store.
    */
   authProperties: StorageConnectorAuthProperties;
-}
-
-/** The properties of data share source */
-@added(Versions.v2025_08_01)
-model DataShareSourceUpdate extends StorageConnectorSourceUpdate {
-  /** Discriminator value for DataShare */
-  type: StorageConnectorSourceType.DataShare;
-
-  /** Details for how to authenticate to the backing data store. */
-  authProperties?: StorageConnectorAuthPropertiesUpdate;
-}
-
-/** The authentication properties of the backing data source */
-@added(Versions.v2025_08_01)
-@discriminator("type")
-model StorageConnectorAuthPropertiesUpdate {
-  /** Type of the authentication properties. Controls the type of the authProperties object */
-  type: StorageConnectorAuthType;
 }
 
 /**
@@ -6531,6 +6454,7 @@ model DataShareConnection extends StorageConnectorConnection {
   /**
    * The type for data share connection
    */
+  @visibility(Lifecycle.Read)
   type: StorageConnectorConnectionType.DataShare;
 
   /**
@@ -6560,6 +6484,7 @@ model ManagedIdentityAuthProperties extends StorageConnectorAuthProperties {
   /**
    * The type of managed identity auth
    */
+  @visibility(Lifecycle.Read)
   type: StorageConnectorAuthType.ManagedIdentity;
 
   /**
@@ -6654,61 +6579,6 @@ model StorageDataShareProperties {
    */
   @visibility(Lifecycle.Read)
   provisioningState?: NativeDataSharingProvisioningState;
-}
-
-/**
- * A DataShare is a tracked ARM resource modeled as a sub-resource of a Storage Account.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "To match existing API shape"
-@added(Versions.v2025_08_01)
-model DataShareUpdate extends TrackedResourceUpdate {
-  /**
-   * The properties of the Storage DataShare.
-   */
-  properties?: StorageDataSharePropertiesUpdate;
-}
-
-/**
- * The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "To match existing API shape"
-@added(Versions.v2025_08_01)
-model TrackedResourceUpdate extends Azure.ResourceManager.CommonTypes.Resource {
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "To match existing API shape."
-  tags?: Record<string>;
-}
-
-/**
- * The storage datashare properties
- */
-@added(Versions.v2025_08_01)
-model StorageDataSharePropertiesUpdate {
-  /**
-   * Arbitrary description of this Data Share. Max 250 characters.
-   */
-  @maxLength(250)
-  description?: string;
-
-  /**
-   * List of access policies that specify the permission allowed to a managed identity.
-   * For Create - This property is required and cannot be null. If no access policies are provided at creation time, specify an empty array.
-   * For Update - This property is optional. If set to null or not passed, the existing access policies are left unchanged.
-   * If provided with a non-null value, the existing access policies are replaced with the specified list.
-   */
-  @identifiers(#[])
-  accessPolicies?: StorageDataShareAccessPolicy[];
-
-  /**
-   * List of assets that specify the properties of the shared resources.
-   * For Create - This property is required and cannot be null. If no assets are provided at creation time, specify an empty array.
-   * For Update - This property is optional. If set to null or not passed, the existing assets are left unchanged.
-   * If provided with a non-null value, the existing assets are replaced with the specified list.
-   */
-  @identifiers(#[])
-  assets?: StorageDataShareAsset[];
 }
 
 /**

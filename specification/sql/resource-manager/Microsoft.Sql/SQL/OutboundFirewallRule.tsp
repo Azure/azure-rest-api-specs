@@ -39,14 +39,11 @@ interface OutboundFirewallRules {
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     OutboundFirewallRule,
     Request = void,
-    Response =
-      | ArmResourceUpdatedResponse<OutboundFirewallRule>
-      | ArmResourceCreatedResponse<
-          OutboundFirewallRule,
-          ArmLroLocationHeader<FinalResult = OutboundFirewallRule> &
-            Azure.Core.Foundations.RetryAfterHeader
-        >
-      | ArmAcceptedLroResponse
+    Response = ArmResourceUpdatedResponse<OutboundFirewallRule> | ArmResourceCreatedResponse<
+      OutboundFirewallRule,
+      ArmLroLocationHeader<FinalResult = OutboundFirewallRule> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > | ArmAcceptedLroResponse
   >;
 
   /**
@@ -55,10 +52,7 @@ interface OutboundFirewallRules {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     OutboundFirewallRule,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**

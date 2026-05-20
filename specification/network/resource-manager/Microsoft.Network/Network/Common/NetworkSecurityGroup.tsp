@@ -34,7 +34,6 @@ model NetworkSecurityGroup extends Resource {
 }
 
 @@doc(NetworkSecurityGroup.name, "The name of the network security group.");
-@@doc(
-  NetworkSecurityGroup.properties,
+@@doc(NetworkSecurityGroup.properties,
   "Properties of the network security group."
 );

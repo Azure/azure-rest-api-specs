@@ -77,8 +77,7 @@ interface DatabaseBlobAuditingPolicies {
 
 @@doc(DatabaseBlobAuditingPolicy.name, "");
 @@doc(DatabaseBlobAuditingPolicy.properties, "Resource properties.");
-@@doc(
-  DatabaseBlobAuditingPolicies.createOrUpdate::parameters.resource,
+@@doc(DatabaseBlobAuditingPolicies.createOrUpdate::parameters.resource,
   "The database blob auditing policy."
 );
 

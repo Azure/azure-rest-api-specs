@@ -57,7 +57,6 @@ interface DetectorResponses {
 }
 
 @@doc(DetectorResponse.name, "The name of the detector.");
-@@doc(
-  DetectorResponse.properties,
+@@doc(DetectorResponse.properties,
   "The properties associated with the detector."
 );

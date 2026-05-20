@@ -124,8 +124,7 @@ interface Datastores {
 
 @@doc(Datastore.name, "Datastore name.");
 @@doc(Datastore.properties, "[Required] Additional attributes of the entity.");
-@@doc(
-  Datastores.createOrUpdate::parameters.resource,
+@@doc(Datastores.createOrUpdate::parameters.resource,
   "Datastore entity to create or update."
 );
 @@doc(Datastores.listSecrets::parameters.body, "Secret expiry information.");

@@ -44,8 +44,7 @@ interface ComputeOperations {
 }
 
 @@doc(ComputeOperationStatus.name, "The ID of the compute operation.");
-@@doc(
-  ComputeOperationStatus.properties,
+@@doc(ComputeOperationStatus.properties,
   "The properties of the compute operation status."
 );
 

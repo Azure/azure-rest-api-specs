@@ -251,7 +251,6 @@ interface HypervSites {
 }
 
 @@doc(HypervSite.name, "Site name");
-@@doc(
-  HypervSite.properties,
+@@doc(HypervSite.properties,
   "The resource-specific properties for this resource."
 );

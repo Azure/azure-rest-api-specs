@@ -37,7 +37,7 @@ interface DocumentationContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -51,7 +51,7 @@ interface DocumentationContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -68,21 +68,19 @@ interface DocumentationContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response =
-      | (ArmResponse<DocumentationContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag: string;
-        })
-      | (ArmResourceCreatedSyncResponse<DocumentationContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag: string;
-        })
+    Response = (ArmResponse<DocumentationContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmResourceCreatedSyncResponse<DocumentationContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
@@ -105,7 +103,7 @@ interface DocumentationContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -156,16 +154,13 @@ interface DocumentationContracts {
 
 @@maxLength(DocumentationContract.name, 256);
 @@minLength(DocumentationContract.name, 1);
-@@doc(
-  DocumentationContract.name,
+@@doc(DocumentationContract.name,
   "Documentation identifier. Must be unique in the current API Management service instance."
 );
 @@doc(DocumentationContract.properties, "Markdown Documentation details.");
-@@doc(
-  DocumentationContracts.createOrUpdate::parameters.resource,
+@@doc(DocumentationContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );
-@@doc(
-  DocumentationContracts.update::parameters.properties,
+@@doc(DocumentationContracts.update::parameters.properties,
   "Documentation Update parameters."
 );

@@ -34,10 +34,7 @@ interface Routes {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Route,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -49,7 +46,6 @@ interface Routes {
 
 @@doc(Route.name, "The name of the route.");
 @@doc(Route.properties, "Properties of the route.");
-@@doc(
-  Routes.createOrUpdate::parameters.resource,
+@@doc(Routes.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update route operation."
 );

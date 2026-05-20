@@ -97,7 +97,6 @@ interface ApplicationGatewayAvailableSslOptionsOperationGroup {
 }
 
 @@doc(ApplicationGatewayAvailableSslOptions.name, "");
-@@doc(
-  ApplicationGatewayAvailableSslOptions.properties,
+@@doc(ApplicationGatewayAvailableSslOptions.properties,
   "Properties of the application gateway available SSL options."
 );

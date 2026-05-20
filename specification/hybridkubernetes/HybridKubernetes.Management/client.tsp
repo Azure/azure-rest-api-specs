@@ -9,20 +9,16 @@ namespace Microsoft.Kubernetes;
 
 // This RP is using common-types v3, in which the type of this id is still string.
 @@scope(Operations.list, "!csharp");
-@@alternateType(
-  Azure.ResourceManager.CommonTypes.Resource.id,
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(
-  Azure.ResourceManager.CommonTypes.TrackedResource.location,
+@@alternateType(Azure.ResourceManager.CommonTypes.TrackedResource.location,
   azureLocation,
   "csharp"
 );
-@@alternateType(
-  ConnectedCluster.identity,
+@@alternateType(ConnectedCluster.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
 @@clientName(Microsoft.Kubernetes, "ConnectedKubernetesClient", "javascript");
-@@clientName(Microsoft.Kubernetes, "ConnectedKubernetesClient", "python");

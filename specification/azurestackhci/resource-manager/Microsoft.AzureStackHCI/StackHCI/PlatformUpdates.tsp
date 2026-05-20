@@ -14,7 +14,6 @@ namespace Microsoft.AzureStackHCI;
  */
 @parentResource(SubscriptionLocationResource)
 @added(Versions.v2026_04_01_preview)
-@removed(Versions.v2026_04_30)
 model PlatformUpdate
   is Azure.ResourceManager.ProxyResource<PlatformUpdateProperties> {
   ...ResourceNameParameter<
@@ -25,7 +24,6 @@ model PlatformUpdate
 
 @armResourceOperations
 @added(Versions.v2026_04_01_preview)
-@removed(Versions.v2026_04_30)
 interface PlatformUpdates {
   /**
    * Get a platform update.

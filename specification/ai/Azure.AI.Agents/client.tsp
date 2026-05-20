@@ -13,8 +13,7 @@ using Azure.AI.Agents;
 // Agents sub‐client
 // --------------------------------------------------------------------------------
 
-@@clientName(
-  Azure.AI.Agents,
+@@clientName(Azure.AI.Agents,
   "PersistentAgentsAdministrationClient",
   "csharp, java"
 );
@@ -27,8 +26,7 @@ using Azure.AI.Agents;
 // Files sub‐client (agent file operations)
 // --------------------------------------------------------------------------------
 @@clientName(Azure.AI.Agents.Files.listFiles, "list", "python");
-@@access(
-  Azure.AI.Agents.Files.uploadFile,
+@@access(Azure.AI.Agents.Files.uploadFile,
   Access.internal,
   "python, java, javascript"
 );
@@ -49,8 +47,7 @@ using Azure.AI.Agents;
 @@clientName(Azure.AI.Agents.Messages.updateMessage, "update", "python");
 
 @@access(Azure.AI.Agents.Messages.delete, Access.internal, "csharp, python");
-@@clientName(
-  Azure.AI.Agents.Messages.delete,
+@@clientName(Azure.AI.Agents.Messages.delete,
   "InternalDeleteMessage",
   "csharp"
 );
@@ -63,13 +60,11 @@ using Azure.AI.Agents;
 @@clientName(Azure.AI.Agents.Threads.getThread, "get", "python");
 @@clientName(Azure.AI.Agents.Threads.updateThread, "update", "python");
 
-@@access(
-  Azure.AI.Agents.Threads.deleteThread,
+@@access(Azure.AI.Agents.Threads.deleteThread,
   Access.internal,
   "csharp, python"
 );
-@@clientName(
-  Azure.AI.Agents.Threads.deleteThread,
+@@clientName(Azure.AI.Agents.Threads.deleteThread,
   "InternalDeleteThread",
   "csharp"
 );
@@ -78,8 +73,7 @@ using Azure.AI.Agents;
 // Runs sub‐client & createThreadAndRun
 // --------------------------------------------------------------------------------
 // top‐level op
-@@clientName(
-  Azure.AI.Agents.createThreadAndRun,
+@@clientName(Azure.AI.Agents.createThreadAndRun,
   "create_thread_and_run",
   "python"
 );
@@ -91,8 +85,7 @@ using Azure.AI.Agents;
 @@clientName(Azure.AI.Agents.Runs.listRuns, "list", "python");
 @@clientName(Azure.AI.Agents.Runs.getRun, "get", "python");
 @@clientName(Azure.AI.Agents.Runs.updateRun, "update", "python");
-@@clientName(
-  Azure.AI.Agents.Runs.submitToolOutputsToRun,
+@@clientName(Azure.AI.Agents.Runs.submitToolOutputsToRun,
   "submit_tool_outputs",
   "python"
 );
@@ -108,25 +101,21 @@ using Azure.AI.Agents;
 // VectorStores sub‐client
 // --------------------------------------------------------------------------------
 @@clientName(Azure.AI.Agents.VectorStores.listVectorStores, "list", "python");
-@@clientName(
-  Azure.AI.Agents.VectorStores.createVectorStore,
+@@clientName(Azure.AI.Agents.VectorStores.createVectorStore,
   "create",
   "python"
 );
 @@clientName(Azure.AI.Agents.VectorStores.getVectorStore, "get", "python");
-@@clientName(
-  Azure.AI.Agents.VectorStores.modifyVectorStore,
+@@clientName(Azure.AI.Agents.VectorStores.modifyVectorStore,
   "modify",
   "python"
 );
 
-@@access(
-  Azure.AI.Agents.VectorStores.deleteVectorStore,
+@@access(Azure.AI.Agents.VectorStores.deleteVectorStore,
   Access.internal,
   "csharp, python"
 );
-@@clientName(
-  Azure.AI.Agents.VectorStores.deleteVectorStore,
+@@clientName(Azure.AI.Agents.VectorStores.deleteVectorStore,
   "InternalDeleteVectorStore",
   "csharp"
 );
@@ -134,23 +123,19 @@ using Azure.AI.Agents;
 // --------------------------------------------------------------------------------
 // VectorStoreFileBatches sub‐client
 // --------------------------------------------------------------------------------
-@@clientName(
-  Azure.AI.Agents.VectorStoreFileBatches.createVectorStoreFileBatch,
+@@clientName(Azure.AI.Agents.VectorStoreFileBatches.createVectorStoreFileBatch,
   "create",
   "python"
 );
-@@clientName(
-  Azure.AI.Agents.VectorStoreFileBatches.getVectorStoreFileBatch,
+@@clientName(Azure.AI.Agents.VectorStoreFileBatches.getVectorStoreFileBatch,
   "get",
   "python"
 );
-@@clientName(
-  Azure.AI.Agents.VectorStoreFileBatches.cancelVectorStoreFileBatch,
+@@clientName(Azure.AI.Agents.VectorStoreFileBatches.cancelVectorStoreFileBatch,
   "cancel",
   "python"
 );
-@@clientName(
-  Azure.AI.Agents.VectorStoreFileBatches.listVectorStoreFileBatchFiles,
+@@clientName(Azure.AI.Agents.VectorStoreFileBatches.listVectorStoreFileBatchFiles,
   "list_files",
   "python"
 );
@@ -158,29 +143,24 @@ using Azure.AI.Agents;
 // --------------------------------------------------------------------------------
 // VectorStoreFiles sub‐client (under /vector_stores/{vectorStoreId}/files)
 // --------------------------------------------------------------------------------
-@@clientName(
-  Azure.AI.Agents.VectorStoreFiles.listVectorStoreFiles,
+@@clientName(Azure.AI.Agents.VectorStoreFiles.listVectorStoreFiles,
   "list",
   "python"
 );
-@@clientName(
-  Azure.AI.Agents.VectorStoreFiles.createVectorStoreFile,
+@@clientName(Azure.AI.Agents.VectorStoreFiles.createVectorStoreFile,
   "create",
   "python"
 );
-@@clientName(
-  Azure.AI.Agents.VectorStoreFiles.getVectorStoreFile,
+@@clientName(Azure.AI.Agents.VectorStoreFiles.getVectorStoreFile,
   "get",
   "python"
 );
 
-@@access(
-  Azure.AI.Agents.VectorStoreFiles.deleteVectorStoreFile,
+@@access(Azure.AI.Agents.VectorStoreFiles.deleteVectorStoreFile,
   Access.internal,
   "csharp, python"
 );
-@@clientName(
-  Azure.AI.Agents.VectorStoreFiles.deleteVectorStoreFile,
+@@clientName(Azure.AI.Agents.VectorStoreFiles.deleteVectorStoreFile,
   "InternalDeleteVectorStoreFile",
   "csharp"
 );
@@ -190,35 +170,29 @@ using Azure.AI.Agents;
 @@clientName(Agent, "PersistentAgent", "csharp,java");
 
 @@access(AgentsResponseFormat, Access.internal, "csharp");
-@@clientName(
-  AgentsResponseFormat,
+@@clientName(AgentsResponseFormat,
   "InternalPersistentAgentsResponseFormat",
   "csharp,java"
 );
-@@clientName(
-  AgentsResponseFormatMode,
+@@clientName(AgentsResponseFormatMode,
   "PersistentAgentsResponseFormatMode",
   "csharp,java"
 );
-@@clientName(
-  AgentsToolChoiceOptionMode,
+@@clientName(AgentsToolChoiceOptionMode,
   "PersistentAgentsToolChoiceOptionMode",
   "csharp,java"
 );
-@@clientName(
-  AgentsNamedToolChoice,
+@@clientName(AgentsNamedToolChoice,
   "PersistentAgentsNamedToolChoice",
   "csharp,java"
 );
-@@clientName(
-  AgentsNamedToolChoiceType,
+@@clientName(AgentsNamedToolChoiceType,
   "PersistentAgentsNamedToolChoiceType",
   "csharp,java"
 );
 @@clientName(AgentStreamEvent, "PersistentAgentStreamEvent", "csharp,java");
 @@clientName(AgentThread, "PersistentAgentThread", "csharp,java");
-@@clientName(
-  AgentThreadCreationOptions,
+@@clientName(AgentThreadCreationOptions,
   "PersistentAgentThreadCreationOptions",
   "csharp,java"
 );
@@ -232,14 +206,12 @@ using Azure.AI.Agents;
 @@access(FileDeletionStatus, Access.internal, "csharp");
 @@clientName(FileDeletionStatus, "InternalFileDeletionStatus", "csharp");
 @@access(VectorStoreFileDeletionStatus, Access.internal, "csharp");
-@@clientName(
-  VectorStoreFileDeletionStatus,
+@@clientName(VectorStoreFileDeletionStatus,
   "InternalVectorStoreFileDeletionStatus",
   "csharp"
 );
 @@access(VectorStoreDeletionStatus, Access.internal, "csharp");
-@@clientName(
-  VectorStoreDeletionStatus,
+@@clientName(VectorStoreDeletionStatus,
   "InternalVectorStoreDeletionStatus",
   "csharp"
 );
@@ -249,39 +221,33 @@ using Azure.AI.Agents;
 @@clientName(FunctionToolDefinition.function, "InternalFunction", "csharp");
 
 @@access(AzureFunctionDefinition, Access.internal);
-@@clientName(
-  AzureFunctionDefinition,
+@@clientName(AzureFunctionDefinition,
   "InternalAzureFunctionDefinition",
   "csharp"
 );
-@@clientName(
-  AzureFunctionToolDefinition.azureFunction,
+@@clientName(AzureFunctionToolDefinition.azureFunction,
   "InternalAzureFunction",
   "csharp"
 );
 @@access(AzureFunctionBinding, Access.public);
 
 @@access(SubmitToolOutputsDetails, Access.internal);
-@@clientName(
-  SubmitToolOutputsDetails,
+@@clientName(SubmitToolOutputsDetails,
   "InternalSubmitToolOutputsDetails",
   "csharp"
 );
-@@clientName(
-  SubmitToolOutputsAction.submitToolOutputs,
+@@clientName(SubmitToolOutputsAction.submitToolOutputs,
   "InternalDetails",
   "csharp"
 );
 
 @@access(RunStepFunctionToolCallDetails, Access.internal);
-@@clientName(
-  RunStepFunctionToolCallDetails,
+@@clientName(RunStepFunctionToolCallDetails,
   "InternalRunStepFunctionToolCallDetails",
   "csharp"
 );
 @@access(RequiredFunctionToolCallDetails, Access.internal);
-@@clientName(
-  RequiredFunctionToolCallDetails,
+@@clientName(RequiredFunctionToolCallDetails,
   "InternalRequiredFunctionToolCallDetails",
   "csharp"
 );
@@ -289,13 +255,11 @@ using Azure.AI.Agents;
 @@clientName(RunStepFunctionToolCall.function, "InternalDetails", "csharp");
 
 @@access(RunStepCodeInterpreterToolCallDetails, Access.internal);
-@@clientName(
-  RunStepCodeInterpreterToolCallDetails,
+@@clientName(RunStepCodeInterpreterToolCallDetails,
   "InternalCodeInterpreterToolCallDetails",
   "csharp"
 );
-@@clientName(
-  RunStepCodeInterpreterToolCall.codeInterpreter,
+@@clientName(RunStepCodeInterpreterToolCall.codeInterpreter,
   "InternalDetails",
   "csharp"
 );
@@ -305,32 +269,27 @@ using Azure.AI.Agents;
 @@clientName(MessageTextContent.text, "InternalDetails", "csharp");
 
 @@access(MessageTextFileCitationDetails, Access.internal);
-@@clientName(
-  MessageTextFileCitationDetails,
+@@clientName(MessageTextFileCitationDetails,
   "InternalMessageTextFileCitationDetails",
   "csharp"
 );
-@@clientName(
-  MessageTextFileCitationAnnotation.fileCitation,
+@@clientName(MessageTextFileCitationAnnotation.fileCitation,
   "InternalDetails",
   "csharp"
 );
 
 @@access(MessageTextFilePathDetails, Access.internal);
-@@clientName(
-  MessageTextFilePathDetails,
+@@clientName(MessageTextFilePathDetails,
   "InternalMessageTextFilePathDetails",
   "csharp"
 );
-@@clientName(
-  MessageTextFilePathAnnotation.filePath,
+@@clientName(MessageTextFilePathAnnotation.filePath,
   "InternalDetails",
   "csharp"
 );
 
 @@access(MessageImageFileDetails, Access.internal);
-@@clientName(
-  MessageImageFileDetails,
+@@clientName(MessageImageFileDetails,
   "InternalMessageImageFileDetails",
   "csharp"
 );
@@ -425,8 +384,7 @@ using Azure.AI.Agents;
 @@clientName(CreateRunOptions.instructions, "OverrideInstructions", "csharp");
 @@clientName(CreateRunOptions.tools, "OverrideTools", "csharp");
 @@clientName(CreateAndRunThreadOptions.`model`, "OverrideModelName", "csharp");
-@@clientName(
-  CreateAndRunThreadOptions.instructions,
+@@clientName(CreateAndRunThreadOptions.instructions,
   "OverrideInstructions",
   "csharp"
 );
@@ -434,19 +392,16 @@ using Azure.AI.Agents;
 @@clientName(FunctionName, "PersistentAgentsFunctionName", "csharp");
 @@clientName(VectorStore, "PersistentAgentsVectorStore", "csharp");
 @@clientName(ThreadMessage, "PersistentThreadMessage", "csharp");
-@@clientName(
-  MessageDeltaTextUrlCitationAnnotation,
+@@clientName(MessageDeltaTextUrlCitationAnnotation,
   "MessageDeltaTextUriCitationAnnotation",
   "csharp"
 );
-@@clientName(
-  MessageDeltaTextUrlCitationAnnotation.urlCitation,
+@@clientName(MessageDeltaTextUrlCitationAnnotation.urlCitation,
   "UriCitation",
   "csharp"
 );
 @@usage(MessageDeltaTextUrlCitationDetails, Usage.json);
-@@clientName(
-  MessageDeltaTextUrlCitationDetails,
+@@clientName(MessageDeltaTextUrlCitationDetails,
   "MessageDeltaTextUriCitationDetails",
   "csharp"
 );
@@ -456,81 +411,67 @@ using Azure.AI.Agents;
 @@clientName(MessageImageUrlParam.url, "Uri", "csharp");
 @@clientName(MessageInputImageUrlBlock, "MessageInputImageUriBlock", "csharp");
 @@clientName(MessageInputImageUrlBlock.imageUrl, "ImageUrl", "csharp");
-@@clientName(
-  MessageTextUrlCitationDetails,
+@@clientName(MessageTextUrlCitationDetails,
   "MessageTextUriCitationDetails",
   "csharp"
 );
 @@clientName(MessageTextUrlCitationDetails.url, "Uri", "csharp");
-@@clientName(
-  MessageTextUrlCitationAnnotation,
+@@clientName(MessageTextUrlCitationAnnotation,
   "MessageTextUriCitationAnnotation",
   "csharp"
 );
-@@clientName(
-  MessageTextUrlCitationAnnotation.urlCitation,
+@@clientName(MessageTextUrlCitationAnnotation.urlCitation,
   "UriCitation",
   "csharp"
 );
 // Run stream events
-@@clientName(
-  RunStepStreamEvent.ThreadRunStepCompleted,
+@@clientName(RunStepStreamEvent.ThreadRunStepCompleted,
   "RunStepCompleted",
   "csharp"
 );
-@@clientName(
-  RunStepStreamEvent.ThreadRunStepCreated,
+@@clientName(RunStepStreamEvent.ThreadRunStepCreated,
   "RunStepCreated",
   "csharp"
 );
 @@clientName(RunStepStreamEvent.ThreadRunStepDelta, "RunStepDelta", "csharp");
-@@clientName(
-  RunStepStreamEvent.ThreadRunStepExpired,
+@@clientName(RunStepStreamEvent.ThreadRunStepExpired,
   "RunStepExpired",
   "csharp"
 );
 @@clientName(RunStepStreamEvent.ThreadRunStepFailed, "RunStepFailed", "csharp");
-@@clientName(
-  RunStepStreamEvent.ThreadRunStepInProgress,
+@@clientName(RunStepStreamEvent.ThreadRunStepInProgress,
   "RunStepInProgress",
   "csharp"
 );
-@@clientName(
-  RunStepStreamEvent.ThreadRunStepCancelled,
+@@clientName(RunStepStreamEvent.ThreadRunStepCancelled,
   "RunStepCancelled",
   "csharp"
 );
 // Message stream events
-@@clientName(
-  MessageStreamEvent.ThreadMessageCompleted,
+@@clientName(MessageStreamEvent.ThreadMessageCompleted,
   "MessageCompleted",
   "csharp"
 );
-@@clientName(
-  MessageStreamEvent.ThreadMessageCreated,
+@@clientName(MessageStreamEvent.ThreadMessageCreated,
   "MessageCreated",
   "csharp"
 );
 @@clientName(MessageStreamEvent.ThreadMessageDelta, "MessageDelta", "csharp");
-@@clientName(
-  MessageStreamEvent.ThreadMessageIncomplete,
+@@clientName(MessageStreamEvent.ThreadMessageIncomplete,
   "MessageIncomplete",
   "csharp"
 );
-@@clientName(
-  MessageStreamEvent.ThreadMessageInProgress,
+@@clientName(MessageStreamEvent.ThreadMessageInProgress,
   "MessageInProgress",
   "csharp"
 );
 
 @@clientName(TruncationObject, "Truncation", "csharp");
-@@clientName(
-  VectorStoreAutoChunkingStrategyRequest,
+@@clientName(VectorStoreAutoChunkingStrategyRequest,
   "VectorStoreAutoChunkingStrategy",
   "csharp"
 );
-@@clientName(
-  VectorStoreChunkingStrategyRequest,
+@@clientName(VectorStoreChunkingStrategyRequest,
   "VectorStoreChunkingStrategy",
   "csharp"
 );

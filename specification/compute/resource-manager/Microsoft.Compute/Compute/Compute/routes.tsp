@@ -606,7 +606,6 @@ interface VirtualMachineRunCommandsOperationGroup {
   ): ArmResponse<RunCommandDocument> | CloudError;
 }
 
-@@doc(
-  LogAnalyticsOperationGroup.exportRequestRateByInterval::parameters.body,
+@@doc(LogAnalyticsOperationGroup.exportRequestRateByInterval::parameters.body,
   "Parameters supplied to the LogAnalytics getRequestRateByInterval Api."
 );

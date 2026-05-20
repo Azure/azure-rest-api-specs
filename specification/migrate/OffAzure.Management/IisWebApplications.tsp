@@ -77,7 +77,6 @@ interface IisWebApplicationsController {
 }
 
 @@doc(IisWebApplications.name, "Web application name.");
-@@doc(
-  IisWebApplications.properties,
+@@doc(IisWebApplications.properties,
   "The resource-specific properties for this resource."
 );

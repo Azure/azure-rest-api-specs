@@ -40,10 +40,8 @@ interface LongTermRetentionPolicies {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     LongTermRetentionPolicy,
-    Response =
-      | ArmResourceUpdatedResponse<LongTermRetentionPolicy>
-      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionPolicy> &
-          Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmResourceUpdatedResponse<LongTermRetentionPolicy> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionPolicy> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -52,12 +50,10 @@ interface LongTermRetentionPolicies {
   listByDatabase is ArmResourceListByParent<LongTermRetentionPolicy>;
 }
 
-@@doc(
-  LongTermRetentionPolicy.name,
+@@doc(LongTermRetentionPolicy.name,
   "The policy name. Should always be Default."
 );
 @@doc(LongTermRetentionPolicy.properties, "Resource properties.");
-@@doc(
-  LongTermRetentionPolicies.createOrUpdate::parameters.resource,
+@@doc(LongTermRetentionPolicies.createOrUpdate::parameters.resource,
   "The long term retention policy info."
 );

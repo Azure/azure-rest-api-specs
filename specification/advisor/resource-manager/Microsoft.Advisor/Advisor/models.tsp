@@ -7,7 +7,6 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
-using TypeSpec.Versioning;
 
 namespace Microsoft.Advisor;
 
@@ -162,22 +161,6 @@ union State {
 }
 
 /**
- * The state of the Recommendation applicable from v2026-02-01-preview.
- */
-@added(Versions.v2026_02_01_preview)
-union RecommendationStatus {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  New: "New",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Postponed: "Postponed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Dismissed: "Dismissed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Completed: "Completed",
-}
-
-/**
  * The reason the state of the Recommendation was changed.
  */
 union Reason {
@@ -194,28 +177,6 @@ union Reason {
   Unclear: "Unclear",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   RiskAccepted: "RiskAccepted",
-}
-
-/**
- * The reason for dismissing the Recommendation.
- */
-@added(Versions.v2026_02_01_preview)
-union RecommendationDismissReason {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  ExcessiveCostInvestmentRequired: "ExcessiveCostInvestmentRequired",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  TooComplexOrImpracticalToImplement: "TooComplexOrImpracticalToImplement",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  AnAlternativeSolutionIsAlreadyInPlace: "AnAlternativeSolutionIsAlreadyInPlace",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  IncompatibleWithTheCurrentConfiguration: "IncompatibleWithTheCurrentConfiguration",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  ImplementationStepsAreUnclear: "ImplementationStepsAreUnclear",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  RiskIsAcceptable: "RiskIsAcceptable",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Other: "Other",
 }
 
 /**
@@ -567,55 +528,10 @@ model RecommendationProperties {
   impactedValue?: string;
 
   /**
-   * The state of the Recommendation
-   */
-  @added(Versions.v2026_02_01_preview)
-  recommendationStatus?: RecommendationStatus;
-
-  /**
-   * The type of recommendation completion, which is either MarkedByUser or SystemVerified
-   */
-  @added(Versions.v2026_02_01_preview)
-  completionType?: string;
-
-  /**
-   * The reason the Recommendation was dismissed.
-   */
-  @added(Versions.v2026_02_01_preview)
-  recommendationDismissReason?: RecommendationDismissReason;
-
-  /**
-   * The time the Recommendation was postponed until.
-   */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  @added(Versions.v2026_02_01_preview)
-  postponedUntilDateTime?: utcDateTime;
-
-  /**
-   * The most recent time Advisor evaluated the recommendation for validity (re-ingested).
-   */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  @added(Versions.v2026_02_01_preview)
-  lastRefreshed?: utcDateTime;
-
-  /**
-   * The most recent time the recommendation state changed (manual or automated).
-   */
-  @added(Versions.v2026_02_01_preview)
-  lastUpdated?: utcDateTime;
-
-  /**
    * The most recent time that Advisor checked the validity of the recommendation.
    */
-  @renamedFrom(Versions.v2026_02_01_preview, "lastUpdated")
-  @removed(Versions.v2026_02_01_preview)
-  oldlastUpdated?: utcDateTime;
-
-  /**
-   * The created time of the recommendation.
-   */
-  @added(Versions.v2026_02_01_preview)
-  createdTime?: utcDateTime;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastUpdated?: utcDateTime;
 
   /**
    * The recommendation metadata.
@@ -641,14 +557,7 @@ model RecommendationProperties {
   /**
    * The list of snoozed and dismissed rules for the recommendation.
    */
-  @removed(Versions.v2026_02_01_preview)
   suppressionIds?: Azure.Core.uuid[];
-
-  /**
-   * The single snoozed or dismissed rule for the recommendation.
-   */
-  @added(Versions.v2026_02_01_preview)
-  suppressionId?: string;
 
   /**
    * Extended properties
@@ -702,7 +611,6 @@ model RecommendationProperties {
   /**
    * If the Recommendation has Tracking enabled.
    */
-  @removed(Versions.v2026_02_01_preview)
   tracked?: boolean;
 
   /**
@@ -729,38 +637,6 @@ model RecommendationProperties {
    * Additional notes for the Recommendation
    */
   notes?: string;
-}
-
-/**
- * The recommendation patch payload.
- */
-@added(Versions.v2026_02_01_preview)
-model RecommendationPatchPayload {
-  /**
-   * The properties for recommendation patch payload.
-   */
-  properties?: RecommendationStatePropertiesPayload;
-}
-
-/**
- * Properties for recommendation state patch payload.
- */
-@added(Versions.v2026_02_01_preview)
-model RecommendationStatePropertiesPayload {
-  /**
-   * The state of the recommendation.
-   */
-  recommendationStatus?: RecommendationStatus;
-
-  /**
-   * The reason the state of the Recommendation was changed.
-   */
-  recommendationDismissReason?: RecommendationDismissReason;
-
-  /**
-   * The time the Recommendation was postponed until.
-   */
-  postponedUntilDateTime?: utcDateTime;
 }
 
 /**
@@ -816,20 +692,17 @@ model TrackedRecommendationProperties {
   /**
    * The state of the Recommendation
    */
-  @removed(Versions.v2026_02_01_preview)
   state?: State;
 
   /**
    * The time the Recommendation was postponed until.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  @removed(Versions.v2026_02_01_preview)
   postponedTime?: utcDateTime;
 
   /**
    * The reason the state of the Recommendation was changed.
    */
-  @removed(Versions.v2026_02_01_preview)
   reason?: Reason;
 
   /**
@@ -1420,33 +1293,27 @@ model ConfigurationListResult is Azure.Core.Page<ConfigData>;
 
 model OperationEntityListResult is Azure.Core.Page<OperationEntity>;
 
-@@doc(
-  AdvisorScoreEntityProperties.lastRefreshedScore,
+@@doc(AdvisorScoreEntityProperties.lastRefreshedScore,
   "The details of latest available score."
 );
-@@doc(
-  AdvisorScoreEntityProperties.timeSeries,
+@@doc(AdvisorScoreEntityProperties.timeSeries,
   "The historic Advisor score data."
 );
 @@identifiers(OperationEntityListResult.value, #["name"]);
 @@doc(RecommendationPropertiesResourceWorkload.id, "The Id of the Workload");
-@@doc(
-  RecommendationPropertiesResourceWorkload.name,
+@@doc(RecommendationPropertiesResourceWorkload.name,
   "The Name of the Workload"
 );
 
 @@doc(RecommendationPropertiesReview.id, "The ARM Resource Id of the Review");
 @@doc(RecommendationPropertiesReview.name, "The Name of the Review");
-@@doc(
-  WorkloadListResult.value,
+@@doc(WorkloadListResult.value,
   "List of WorkloadListResult items on this page."
 );
-@@doc(
-  WorkloadListResult.nextLink,
+@@doc(WorkloadListResult.nextLink,
   "Url to get the next Page of WorkloadListResult items."
 );
 @@doc(TriageRecommendationCollection.value, "List of triage recommendations.");
-@@doc(
-  TriageRecommendationCollection.nextLink,
+@@doc(TriageRecommendationCollection.nextLink,
   "The URL to get the next set of triage recommendations, if there are any."
 );

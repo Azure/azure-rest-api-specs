@@ -20,6 +20,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.Chaos;
 
 @added(Microsoft.Chaos.Versions.v2026_05_01_preview)
+@removed(Microsoft.Chaos.Versions.v2025_01_01)
 @armResourceOperations
 interface ScenarioConfigurations {
   /**
@@ -91,7 +92,6 @@ interface ScenarioConfigurations {
 
 @@minLength(ScenarioConfiguration.name, 1);
 @@doc(ScenarioConfiguration.name, "Name of the scenario definition.");
-@@doc(
-  ScenarioConfiguration.properties,
+@@doc(ScenarioConfiguration.properties,
   "The properties of scenario definition."
 );

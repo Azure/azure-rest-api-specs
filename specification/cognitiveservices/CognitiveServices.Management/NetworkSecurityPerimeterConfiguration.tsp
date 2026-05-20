@@ -50,11 +50,9 @@ interface NetworkSecurityPerimeterConfigurations {
   >;
 }
 
-@@doc(
-  NetworkSecurityPerimeterConfiguration.name,
+@@doc(NetworkSecurityPerimeterConfiguration.name,
   "The name of the NSP Configuration."
 );
-@@doc(
-  NetworkSecurityPerimeterConfiguration.properties,
+@@doc(NetworkSecurityPerimeterConfiguration.properties,
   "NSP Configuration properties."
 );

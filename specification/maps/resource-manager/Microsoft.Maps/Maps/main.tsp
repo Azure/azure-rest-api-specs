@@ -46,7 +46,6 @@ enum Versions {
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@@doc(
-  Operations.list,
+@@doc(Operations.list,
   "List operations available for the Maps Resource Provider"
 );

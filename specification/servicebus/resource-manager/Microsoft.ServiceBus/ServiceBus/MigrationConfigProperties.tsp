@@ -87,15 +87,12 @@ interface MigrationConfigs {
   >;
 }
 
-@@doc(
-  MigrationConfigProperties.name,
+@@doc(MigrationConfigProperties.name,
   "The configuration name. Should always be $default."
 );
-@@doc(
-  MigrationConfigProperties.properties,
+@@doc(MigrationConfigProperties.properties,
   "Properties required to the Create Migration Configuration"
 );
-@@doc(
-  MigrationConfigs.createAndStartMigration::parameters.resource,
+@@doc(MigrationConfigs.createAndStartMigration::parameters.resource,
   "Parameters required to create Migration Configuration"
 );

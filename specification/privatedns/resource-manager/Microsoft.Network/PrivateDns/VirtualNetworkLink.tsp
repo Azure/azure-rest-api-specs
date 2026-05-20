@@ -74,14 +74,11 @@ interface VirtualNetworkLinks {
       @header("If-None-Match")
       IfNoneMatch?: string;
     },
-    Response =
-      | ArmResourceUpdatedResponse<VirtualNetworkLink>
-      | ArmResourceCreatedResponse<
-          VirtualNetworkLink,
-          ArmLroLocationHeader<FinalResult = VirtualNetworkLink> &
-            Azure.Core.Foundations.RetryAfterHeader
-        >
-      | ArmAcceptedLroResponse,
+    Response = ArmResourceUpdatedResponse<VirtualNetworkLink> | ArmResourceCreatedResponse<
+      VirtualNetworkLink,
+      ArmLroLocationHeader<FinalResult = VirtualNetworkLink> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > | ArmAcceptedLroResponse,
     Error = CloudError
   >;
 
@@ -117,10 +114,7 @@ interface VirtualNetworkLinks {
       @header("If-Match")
       IfMatch?: string;
     },
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -141,15 +135,12 @@ interface VirtualNetworkLinks {
 }
 
 @@doc(VirtualNetworkLink.name, "The name of the virtual network link.");
-@@doc(
-  VirtualNetworkLink.properties,
+@@doc(VirtualNetworkLink.properties,
   "Properties of the virtual network link to the Private DNS zone."
 );
-@@doc(
-  VirtualNetworkLinks.createOrUpdate::parameters.resource,
+@@doc(VirtualNetworkLinks.createOrUpdate::parameters.resource,
   "Parameters supplied to the CreateOrUpdate operation."
 );
-@@doc(
-  VirtualNetworkLinks.update::parameters.properties,
+@@doc(VirtualNetworkLinks.update::parameters.properties,
   "Parameters supplied to the Update operation."
 );

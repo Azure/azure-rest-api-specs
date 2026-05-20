@@ -26,8 +26,7 @@ interface GlobalReachConnections {
   delete is ArmResourceDeleteAsync<GlobalReachConnection>;
 }
 
-@@clientName(
-  GlobalReachConnections.createOrUpdate::parameters.resource,
+@@clientName(GlobalReachConnections.createOrUpdate::parameters.resource,
   "globalReachConnection"
 );
 

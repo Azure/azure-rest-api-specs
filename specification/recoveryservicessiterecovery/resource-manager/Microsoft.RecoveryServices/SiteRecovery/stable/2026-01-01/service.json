@@ -134,80 +134,6 @@
     }
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{virtualMachineName}/providers/Microsoft.RecoveryServices/replicationEligibilityResults": {
-      "get": {
-        "operationId": "ReplicationEligibilityResults_List",
-        "tags": [
-          "ReplicationEligibilityResults"
-        ],
-        "summary": "Gets the validation errors in case the VM is unsuitable for protection.",
-        "description": "Validates whether a given VM can be protected or not in which case returns list of errors.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ReplicationEligibilityResultsParentParam.virtualMachineName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ReplicationEligibilityResultsCollection"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Gets the validation errors in case the VM is unsuitable for protection.": {
-            "$ref": "./examples/ReplicationEligibilityResults_List.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{virtualMachineName}/providers/Microsoft.RecoveryServices/replicationEligibilityResults/default": {
-      "get": {
-        "operationId": "ReplicationEligibilityResults_Get",
-        "tags": [
-          "ReplicationEligibilityResults"
-        ],
-        "summary": "Gets the validation errors in case the VM is unsuitable for protection.",
-        "description": "Validates whether a given VM can be protected or not in which case returns list of errors.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ReplicationEligibilityResultsParentParam.virtualMachineName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ReplicationEligibilityResults"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Gets the validation errors in case the VM is unsuitable for protection.": {
-            "$ref": "./examples/ReplicationEligibilityResults_Get.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/operations": {
       "get": {
         "operationId": "Operations_List",
@@ -10835,6 +10761,80 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachines/{virtualMachineName}/providers/Microsoft.RecoveryServices/replicationEligibilityResults": {
+      "get": {
+        "operationId": "ReplicationEligibilityResults_List",
+        "tags": [
+          "ReplicationEligibilityResults"
+        ],
+        "summary": "Gets the validation errors in case the VM is unsuitable for protection.",
+        "description": "Validates whether a given VM can be protected or not in which case returns list of errors.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ReplicationEligibilityResultsParentParam.virtualMachineName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ReplicationEligibilityResultsCollection"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the validation errors in case the VM is unsuitable for protection.": {
+            "$ref": "./examples/ReplicationEligibilityResults_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachines/{virtualMachineName}/providers/Microsoft.RecoveryServices/replicationEligibilityResults/default": {
+      "get": {
+        "operationId": "ReplicationEligibilityResults_Get",
+        "tags": [
+          "ReplicationEligibilityResults"
+        ],
+        "summary": "Gets the validation errors in case the VM is unsuitable for protection.",
+        "description": "Validates whether a given VM can be protected or not in which case returns list of errors.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ReplicationEligibilityResultsParentParam.virtualMachineName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ReplicationEligibilityResults"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the validation errors in case the VM is unsuitable for protection.": {
+            "$ref": "./examples/ReplicationEligibilityResults_Get.json"
+          }
         }
       }
     }

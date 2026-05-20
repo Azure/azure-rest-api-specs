@@ -39,14 +39,11 @@ interface Secrets {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     Secret,
-    Response =
-      | ArmResourceUpdatedResponse<Secret>
-      | ArmResourceCreatedResponse<Secret>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Secret> &
-          ArmLroLocationHeader<FinalResult = Secret>> & {
-          @bodyRoot
-          _: Secret;
-        })
+    Response = ArmResourceUpdatedResponse<Secret> | ArmResourceCreatedResponse<Secret> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Secret> &
+      ArmLroLocationHeader<FinalResult = Secret>> & {
+      @bodyRoot
+      _: Secret;
+    })
   >;
 
   /**
@@ -56,12 +53,9 @@ interface Secrets {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     Secret,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-          ArmLroLocationHeader &
-          Azure.Core.Foundations.RetryAfterHeader>
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -72,8 +66,7 @@ interface Secrets {
 }
 
 @@doc(Secret.name, "Name of the Secret under the profile.");
-@@doc(
-  Secret.properties,
+@@doc(Secret.properties,
   "The JSON object that contains the properties of the Secret to create."
 );
 @@doc(Secrets.create::parameters.resource, "The Secret properties.");

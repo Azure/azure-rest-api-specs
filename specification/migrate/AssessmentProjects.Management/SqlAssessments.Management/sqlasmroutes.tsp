@@ -6,10 +6,14 @@ import "./WebModels/AssessedSqlMachineV3.tsp";
 import "./WebModels/SqlAssessmentV3Summary.tsp";
 import "./Normalized Contract/DataModels/DownloadUrl.tsp";
 import "./WebModels/SqlGraphAssessmentOptions.tsp";
+import "./WebModels/SqlGraphAssessmentOptions.tsp";
 
-using Http;
-using Versioning;
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.Core;
 using Azure.ResourceManager;
+using OpenAPI;
 
 namespace Microsoft.Migrate;
 

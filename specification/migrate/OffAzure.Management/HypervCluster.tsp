@@ -65,7 +65,6 @@ interface HypervClusters {
 }
 
 @@doc(HypervCluster.name, " Cluster ARM name");
-@@doc(
-  HypervCluster.properties,
+@@doc(HypervCluster.properties,
   "The resource-specific properties for this resource."
 );

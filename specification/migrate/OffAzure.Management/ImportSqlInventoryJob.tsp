@@ -43,7 +43,6 @@ interface ImportSqlInventoryJobs {
 }
 
 @@doc(ImportSqlInventoryJob.name, "Job Arm Name.");
-@@doc(
-  ImportSqlInventoryJob.properties,
+@@doc(ImportSqlInventoryJob.properties,
   "Gets or sets the import job properties."
 );

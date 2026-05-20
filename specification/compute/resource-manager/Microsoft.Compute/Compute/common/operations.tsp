@@ -27,9 +27,10 @@ op ComputeResourceCreateOrReplaceAsync<
   LroHeaders extends TypeSpec.Reflection.Model = ArmAsyncOperationHeader<FinalResult = Resource> &
     Azure.Core.Foundations.RetryAfterHeader,
   Parameters extends {} = {},
-  Response extends {} =
-    | ArmResourceUpdatedResponse<Resource>
-    | ArmResourceCreatedResponse<Resource, LroHeaders>,
+  Response extends {} = ArmResourceUpdatedResponse<Resource> | ArmResourceCreatedResponse<
+    Resource,
+    LroHeaders
+  >,
   Error extends {} = Common.CloudError
 > is ArmResourceCreateOrReplaceAsync<
   Resource,
@@ -76,9 +77,7 @@ op ComputeResourceCreateOrReplaceSync<
   Resource extends Foundations.Resource,
   BaseParameters = Foundations.DefaultBaseParameters<Resource>,
   Parameters extends {} = {},
-  Response extends {} =
-    | ArmResourceUpdatedResponse<Resource>
-    | ArmResourceCreatedSyncResponse<Resource>,
+  Response extends {} = ArmResourceUpdatedResponse<Resource> | ArmResourceCreatedSyncResponse<Resource>,
   Error extends {} = CloudError
 > is ArmResourceCreateOrReplaceSync<
   Resource,
@@ -127,9 +126,10 @@ op ComputeCustomPatchAsync<
   > &
     Azure.Core.Foundations.RetryAfterHeader,
   Parameters extends {} = {},
-  Response extends {} =
-    | ArmResponse<Resource>
-    | ArmAcceptedLroResponse<"Resource update request accepted.", LroHeaders>,
+  Response extends {} = ArmResponse<Resource> | ArmAcceptedLroResponse<
+    "Resource update request accepted.",
+    LroHeaders
+  >,
   Error extends {} = CloudError
 > is ArmCustomPatchAsync<
   Resource,
@@ -183,10 +183,7 @@ op ComputeResourceDeleteAsync<
   LroHeaders extends TypeSpec.Reflection.Model = ArmLroLocationHeader &
     Azure.Core.Foundations.RetryAfterHeader,
   Parameters extends {} = {},
-  Response extends {} =
-    | ArmDeletedResponse
-    | ArmDeleteAcceptedLroResponse<LroHeaders>
-    | ArmDeletedNoContentResponse,
+  Response extends {} = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders> | ArmDeletedNoContentResponse,
   Error extends {} = CloudError
 > is ArmResourceDeleteAsync<
   Resource,

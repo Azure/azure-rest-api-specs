@@ -44,9 +44,7 @@ interface DeploymentStackCommonOps<
     DeploymentStack,
     DeploymentStackValidateResult,
     OverrideResourceName = ResourceName,
-    Error =
-      | ErrorResponse
-      | ValidationBadRequestResponse<DeploymentStackValidateResult>
+    Error = ErrorResponse | ValidationBadRequestResponse<DeploymentStackValidateResult>
   >;
 
   /** Creates or updates a Deployment stack at the specified scope. */
@@ -63,10 +61,7 @@ interface DeploymentStackCommonOps<
     DeploymentStack,
     OverrideResourceName = ResourceName,
     Parameters = ActionOnUnmanageDeleteParameters,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /** Exports the template used to create the Deployment stack at the specified scope. */

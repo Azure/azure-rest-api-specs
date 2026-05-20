@@ -89,15 +89,12 @@ interface WorkspaceManagerConfigurations {
   >;
 }
 
-@@doc(
-  WorkspaceManagerConfiguration.name,
+@@doc(WorkspaceManagerConfiguration.name,
   "The name of the workspace manager configuration"
 );
-@@doc(
-  WorkspaceManagerConfiguration.properties,
+@@doc(WorkspaceManagerConfiguration.properties,
   "The workspace manager configuration object"
 );
-@@doc(
-  WorkspaceManagerConfigurations.createOrUpdate::parameters.resource,
+@@doc(WorkspaceManagerConfigurations.createOrUpdate::parameters.resource,
   "The workspace manager configuration"
 );

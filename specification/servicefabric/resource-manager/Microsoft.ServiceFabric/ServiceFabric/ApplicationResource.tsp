@@ -119,12 +119,10 @@ interface ApplicationResources {
 
 @@doc(ApplicationResource.name, "The name of the application resource.");
 @@doc(ApplicationResource.properties, "The application resource properties.");
-@@doc(
-  ApplicationResources.createOrUpdate::parameters.resource,
+@@doc(ApplicationResources.createOrUpdate::parameters.resource,
   "The application resource."
 );
-@@doc(
-  ApplicationResources.update::parameters.properties,
+@@doc(ApplicationResources.update::parameters.properties,
   "The application resource for patch operations."
 );
 

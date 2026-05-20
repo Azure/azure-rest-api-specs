@@ -62,11 +62,9 @@ interface Licenses {
   @tag("licenses")
   delete is ArmResourceDeleteWithoutOkAsync<
     License,
-    Response =
-      | (ArmDeletedResponse &
-          ArmLroLocationHeader &
-          Azure.Core.Foundations.RetryAfterHeader)
-      | ArmDeletedNoContentResponse
+    Response = (ArmDeletedResponse &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader) | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -90,11 +88,9 @@ interface Licenses {
 
 @@doc(License.name, "The name of the license.");
 @@doc(License.properties, "Hybrid Compute License properties");
-@@doc(
-  Licenses.createOrUpdate::parameters.resource,
+@@doc(Licenses.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create license operation."
 );
-@@doc(
-  Licenses.update::parameters.properties,
+@@doc(Licenses.update::parameters.properties,
   "Parameters supplied to the Update license operation."
 );

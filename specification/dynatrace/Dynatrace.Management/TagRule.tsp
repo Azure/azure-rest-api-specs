@@ -55,7 +55,6 @@ interface TagRules {
 }
 
 @@doc(TagRule.name, "Monitor resource name");
-@@doc(
-  TagRule.properties,
+@@doc(TagRule.properties,
   "The resource-specific properties for this resource."
 );

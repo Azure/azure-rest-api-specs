@@ -56,13 +56,11 @@ interface TaskRuns {
   update is ArmCustomPatchAsync<
     TaskRun,
     PatchModel = TaskRunUpdateParameters,
-    Response =
-      | TaskRun
-      | ArmResourceCreatedResponse<
-          TaskRun,
-          LroHeaders = ArmAsyncOperationHeader<FinalResult = TaskRun> &
-            Azure.Core.Foundations.RetryAfterHeader
-        >
+    Response = TaskRun | ArmResourceCreatedResponse<
+      TaskRun,
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = TaskRun> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >
   >;
 
   /**
@@ -89,15 +87,12 @@ interface TaskRuns {
 @@maxLength(TaskRun.name, 50);
 @@minLength(TaskRun.name, 5);
 @@doc(TaskRun.name, "The name of the task run.");
-@@doc(
-  TaskRun.properties,
+@@doc(TaskRun.properties,
   "The properties associated with the task run, i.e., request and result of the run"
 );
-@@doc(
-  TaskRuns.create::parameters.resource,
+@@doc(TaskRuns.create::parameters.resource,
   "The parameters of a run that needs to scheduled."
 );
-@@doc(
-  TaskRuns.update::parameters.properties,
+@@doc(TaskRuns.update::parameters.properties,
   "The parameters for updating a task run."
 );

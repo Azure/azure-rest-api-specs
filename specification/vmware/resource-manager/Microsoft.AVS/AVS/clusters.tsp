@@ -25,13 +25,11 @@ interface Clusters {
   update is ArmCustomPatchAsync<
     Cluster,
     ClusterUpdate,
-    Response =
-      | Cluster
-      | ArmResourceCreatedResponse<
-          Cluster,
-          LroHeaders = ArmLroLocationHeader<FinalResult = Cluster> &
-            Azure.Core.Foundations.RetryAfterHeader
-        >
+    Response = Cluster | ArmResourceCreatedResponse<
+      Cluster,
+      LroHeaders = ArmLroLocationHeader<FinalResult = Cluster> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >
   >;
 
   #suppress "deprecated"

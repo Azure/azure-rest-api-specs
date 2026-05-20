@@ -44,22 +44,20 @@ interface RuntimeRegistration {
       @path
       idScope: string;
     },
+    {
+      @statusCode _: 200;
+      @body body: RegistrationOperationStatus;
+    } | {
+      @statusCode _: 202;
 
-      | {
-          @statusCode _: 200;
-          @body body: RegistrationOperationStatus;
-        }
-      | {
-          @statusCode _: 202;
+      @header("retry-after")
+      retryAfter?: int32;
 
-          @header("retry-after")
-          retryAfter?: int32;
+      @header("Location")
+      location?: string;
 
-          @header("Location")
-          location?: string;
-
-          @body body: RegistrationOperationStatus;
-        },
+      @body body: RegistrationOperationStatus;
+    },
     {},
     ProvisioningServiceErrorDetails
   >;
@@ -95,22 +93,20 @@ interface RuntimeRegistration {
       @path
       idScope: string;
     },
+    {
+      @statusCode _: 200;
+      @body body: RegistrationOperationStatus;
+    } | {
+      @statusCode _: 202;
 
-      | {
-          @statusCode _: 200;
-          @body body: RegistrationOperationStatus;
-        }
-      | {
-          @statusCode _: 202;
+      @header("retry-after")
+      retryAfter?: int32;
 
-          @header("retry-after")
-          retryAfter?: int32;
+      @header("Location")
+      location?: string;
 
-          @header("Location")
-          location?: string;
-
-          @body body: RegistrationOperationStatus;
-        },
+      @body body: RegistrationOperationStatus;
+    },
     {},
     ProvisioningServiceErrorDetails
   >;
@@ -176,22 +172,20 @@ interface RuntimeRegistration {
       @bodyRoot
       body: DeviceRegistration;
     },
+    {
+      @statusCode _: 200;
+      @body body: RegistrationOperationStatus;
+    } | {
+      @statusCode _: 202;
 
-      | {
-          @statusCode _: 200;
-          @body body: RegistrationOperationStatus;
-        }
-      | {
-          @statusCode _: 202;
+      @header("retry-after")
+      retryAfter?: int32;
 
-          @header("retry-after")
-          retryAfter?: int32;
+      @header("Location")
+      location?: string;
 
-          @header("Location")
-          location?: string;
-
-          @body body: RegistrationOperationStatus;
-        },
+      @body body: RegistrationOperationStatus;
+    },
     {},
     ProvisioningServiceErrorDetails
   >;
@@ -227,22 +221,20 @@ interface RuntimeRegistration {
       @bodyRoot
       deviceRegistration: DeviceRegistration;
     },
+    {
+      @statusCode _: 200;
+      @body body: RegistrationOperationStatus;
+    } | {
+      @statusCode _: 202;
 
-      | {
-          @statusCode _: 200;
-          @body body: RegistrationOperationStatus;
-        }
-      | {
-          @statusCode _: 202;
+      @header("retry-after")
+      retryAfter?: int32;
 
-          @header("retry-after")
-          retryAfter?: int32;
+      @header("Location")
+      location?: string;
 
-          @header("Location")
-          location?: string;
-
-          @body body: RegistrationOperationStatus;
-        },
+      @body body: RegistrationOperationStatus;
+    },
     {},
     ProvisioningServiceErrorDetails
   >;

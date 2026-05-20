@@ -40,18 +40,15 @@ interface WorkloadNetworkDhcpConfigurations {
   delete is ArmResourceDeleteAsync<WorkloadNetworkDhcp>;
 }
 
-@@clientName(
-  WorkloadNetworkDhcpConfigurations.create::parameters.resource,
+@@clientName(WorkloadNetworkDhcpConfigurations.create::parameters.resource,
   "workloadNetworkDhcp"
 );
 
-@@clientName(
-  WorkloadNetworkDhcpConfigurations.update::parameters.properties,
+@@clientName(WorkloadNetworkDhcpConfigurations.update::parameters.properties,
   "workloadNetworkDhcp"
 );
 
-@@clientName(
-  WorkloadNetworkDhcpConfigurations.update::parameters.properties,
+@@clientName(WorkloadNetworkDhcpConfigurations.update::parameters.properties,
   "workloadNetworkDhcp"
 );
 

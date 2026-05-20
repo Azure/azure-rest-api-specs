@@ -56,7 +56,6 @@ interface ServiceRunners {
 }
 
 @@doc(ServiceRunner.name, "The name of the service runner.");
-@@doc(
-  ServiceRunners.createOrUpdate::parameters.resource,
+@@doc(ServiceRunners.createOrUpdate::parameters.resource,
   "A container for a managed identity to execute DevTest lab services."
 );

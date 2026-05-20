@@ -45,6 +45,7 @@ interface MosaicItemsTileSetList {
       itemId: string;
 
       ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
     },
     TileSetList
   >;
@@ -79,6 +80,7 @@ interface MosaicItemsTileSetMetadata {
       itemId: string;
 
       ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
 
       /**
        * Identifier selecting one of the TileMatrixSetId supported
@@ -145,6 +147,7 @@ interface MosaicItemsTileMatrixSetsPlain {
       ...MiscTileQueryParameters;
       ...TilePaddingQueryParameters;
       ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
     },
     TileResponse
   >;
@@ -207,6 +210,7 @@ interface MosaicItemsTileMatrixSetsFormat {
       ...MiscTileQueryParameters;
       ...TilePaddingQueryParameters;
       ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
     },
     TileResponse
   >;
@@ -271,6 +275,7 @@ interface MosaicItemsTileMatrixSetsScaleByFormat {
       ...MiscTileQueryParameters;
       ...TilePaddingQueryParameters;
       ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
     },
     TileResponse
   >;
@@ -331,6 +336,7 @@ interface MosaicItemsTileMatrixSetsScale {
       ...MiscTileQueryParameters;
       ...TilePaddingQueryParameters;
       ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
     },
     TileResponse
   >;
@@ -388,6 +394,7 @@ interface MosaicItemsTilesPlain {
       ...MiscTileQueryParameters;
       ...TilePaddingQueryParameters;
       ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
     },
     TileResponse
   >;
@@ -449,6 +456,7 @@ interface MosaicItemsTilesFormat {
       ...MiscTileQueryParameters;
       ...TilePaddingQueryParameters;
       ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
     },
     TileResponse
   >;
@@ -512,6 +520,7 @@ interface MosaicItemsTilesScaleByFormat {
       ...MiscTileQueryParameters;
       ...TilePaddingQueryParameters;
       ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
     },
     TileResponse
   >;
@@ -571,6 +580,7 @@ interface MosaicItemsTilesScale {
       ...MiscTileQueryParameters;
       ...TilePaddingQueryParameters;
       ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
     },
     TileResponse
   >;
@@ -628,14 +638,14 @@ interface MosaicItemsFeatureGeoJson {
       /**
        * Image output size limit if width and height limits are not set.
        */
-      @maxValue(2048)
       @query("max_size")
-      maxSize?: int32 = 2048;
+      maxSize?: int32 = 1024;
 
       ...DimensionsQueryParameters;
       ...MiscTileQueryParameters;
       ...DstCrsQueryParameter;
       ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
 
       /**
        * Output image format.
@@ -725,13 +735,13 @@ interface MosaicItemsBbox {
       /**
        * Image output size limit if width and height limits are not set.
        */
-      @maxValue(2048)
       @query("max_size")
-      maxSize?: int32 = 2048;
+      maxSize?: int32 = 1024;
 
       ...DimensionsQueryParameters;
       ...MiscTileQueryParameters;
       ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
     },
     TileResponse
   >;
@@ -817,12 +827,12 @@ interface MosaicItemsBboxWithDimensions {
       /**
        * Image output size limit if width and height limits are not set.
        */
-      @maxValue(2048)
       @query("max_size")
-      maxSize?: int32 = 2048;
+      maxSize?: int32 = 1024;
 
       ...MiscTileQueryParameters;
       ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
     },
     TileResponse
   >;
@@ -888,14 +898,14 @@ interface MosaicItemsFeatureGeoJsonFormat {
       /**
        * Image output size limit if width and height limits are not set.
        */
-      @maxValue(2048)
       @query("max_size")
-      maxSize?: int32 = 2048;
+      maxSize?: int32 = 1024;
 
       ...DimensionsQueryParameters;
       ...MiscTileQueryParameters;
       ...DstCrsQueryParameter;
       ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
 
       /**
        * Request GeoJson body.
@@ -939,6 +949,7 @@ interface MosaicItemsBounds {
       itemId: string;
 
       ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
     },
     StacItemBounds
   >;
@@ -977,6 +988,7 @@ interface MosaicItemsInfo {
       itemId: string;
 
       ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
 
       /**
        * Asset's names.
@@ -1018,6 +1030,7 @@ interface MosaicItemsInfoGeoJson {
       itemId: string;
 
       ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
 
       /**
        * Asset's names.
@@ -1063,6 +1076,7 @@ interface MosaicItemsAvailableAssets {
       itemId: string;
 
       ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
     },
     AvailableAssets
   >;
@@ -1143,6 +1157,7 @@ interface MosaicItemsAssetStatistics {
 
       ...StatisticsQueryParameters;
       ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
 
       /**
        * Per asset band expression.
@@ -1200,6 +1215,7 @@ interface MosaicItemsStatistics {
 
       ...StatisticsQueryParameters;
       ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
 
       /**
        * Algorithm name.
@@ -1268,6 +1284,7 @@ interface MosaicItemsGeoJsonStatistics {
       ...StatisticsQueryParameters;
       ...DstCrsQueryParameter;
       ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
 
       /**
        * Algorithm name.
@@ -1363,6 +1380,7 @@ interface MosaicItemsTileJson {
       ...MiscTileQueryParameters;
       ...TilePaddingQueryParameters;
       ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
     },
     TileJsonMetadata
   >;
@@ -1425,6 +1443,7 @@ interface MosaicItemsTileMatrixSetsTileJson {
       ...MiscTileQueryParameters;
       ...TilePaddingQueryParameters;
       ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
     },
     TileJsonMetadata
   >;
@@ -1489,6 +1508,7 @@ interface MosaicItemsWmts {
       ...MiscTileQueryParameters;
       ...TilePaddingQueryParameters;
       ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
     },
     WmtsCapabilitiesXmlResponse
   >;
@@ -1550,6 +1570,7 @@ interface MosaicItemsWmtsTileMatrixSets {
       ...MiscTileQueryParameters;
       ...TilePaddingQueryParameters;
       ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
     },
     WmtsCapabilitiesXmlResponse
   >;
@@ -1601,6 +1622,7 @@ interface MosaicItemsPoint {
 
       ...AssetQueryParameters;
       ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
 
       /**
        * Coordinate Reference System of the input coords. Default to `epsg:4326`.
@@ -1682,13 +1704,13 @@ interface MosaicItemsPreviewFormat {
       /**
        * Image output size limit if width and height limits are not set.
        */
-      @maxValue(2048)
       @query("max_size")
       maxSize?: int32 = 1024;
 
       ...DimensionsQueryParameters;
       ...MiscTileQueryParameters;
       ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
     },
     TileResponse
   >;
@@ -1752,13 +1774,13 @@ interface MosaicItemsPreview {
       /**
        * Image output size limit if width and height limits are not set.
        */
-      @maxValue(2048)
       @query("max_size")
       maxSize?: int32 = 1024;
 
       ...DimensionsQueryParameters;
       ...MiscTileQueryParameters;
       ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
     },
     TileResponse
   >;
@@ -1839,13 +1861,13 @@ interface MosaicItemsFeatureGeoJsonWidthByHeight {
       /**
        * Image output size limit if width and height limits are not set.
        */
-      @maxValue(2048)
       @query("max_size")
-      maxSize?: int32 = 2048;
+      maxSize?: int32 = 1024;
 
       ...MiscTileQueryParameters;
       ...DstCrsQueryParameter;
       ...SubDatasetQueryParameters;
+      ...CollectionQueryParameter;
 
       /**
        * Request GeoJson body.

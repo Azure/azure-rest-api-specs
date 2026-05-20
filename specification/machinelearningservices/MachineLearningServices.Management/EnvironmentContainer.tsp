@@ -70,19 +70,17 @@ interface EnvironmentContainers {
   @summary("Create or update container.")
   createOrUpdate is EnvironmentContainerOps.CreateOrUpdateAsync<
     EnvironmentContainer,
-    Response =
-      | ArmResourceUpdatedResponse<EnvironmentContainer>
-      | (ArmResourceCreatedResponse<
-          EnvironmentContainer,
-          LroHeaders = ArmAsyncOperationHeader<FinalResult = EnvironmentContainer> &
-            Azure.Core.Foundations.RetryAfterHeader
-        > & {
-          /**
-           * Timeout for the client to use when polling the asynchronous operation.
-           */
-          @header("x-ms-async-operation-timeout")
-          timeout: duration;
-        })
+    Response = ArmResourceUpdatedResponse<EnvironmentContainer> | (ArmResourceCreatedResponse<
+      EnvironmentContainer,
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = EnvironmentContainer> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    })
   >;
 
   /**
@@ -92,16 +90,13 @@ interface EnvironmentContainers {
   @summary("Delete container.")
   delete is EnvironmentContainerOps.DeleteWithoutOkAsync<
     EnvironmentContainer,
-    Response =
-      | ArmDeletedResponse
-      | (ArmDeleteAcceptedLroResponse & {
-          /**
-           * Timeout for the client to use when polling the asynchronous operation.
-           */
-          @header("x-ms-async-operation-timeout")
-          timeout: duration;
-        })
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+      /**
+       * Timeout for the client to use when polling the asynchronous operation.
+       */
+      @header("x-ms-async-operation-timeout")
+      timeout: duration;
+    }) | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -195,15 +190,12 @@ interface EnvironmentContainerOperationGroup {
 }
 
 @@doc(EnvironmentContainer.name, "Container name. This is case-sensitive.");
-@@doc(
-  EnvironmentContainer.properties,
+@@doc(EnvironmentContainer.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(
-  EnvironmentContainers.createOrUpdate::parameters.resource,
+@@doc(EnvironmentContainers.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );
-@@doc(
-  EnvironmentContainerOperationGroup.createOrUpdate::parameters.resource,
+@@doc(EnvironmentContainerOperationGroup.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );

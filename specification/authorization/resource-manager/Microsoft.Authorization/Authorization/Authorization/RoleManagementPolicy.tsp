@@ -72,12 +72,10 @@ interface RoleManagementPolicies {
   >;
 }
 
-@@doc(
-  RoleManagementPolicy.name,
+@@doc(RoleManagementPolicy.name,
   "The name (guid) of the role management policy to get."
 );
 @@doc(RoleManagementPolicy.properties, "Role management policy properties.");
-@@doc(
-  RoleManagementPolicies.update::parameters.properties,
+@@doc(RoleManagementPolicies.update::parameters.properties,
   "Parameters for the role management policy."
 );

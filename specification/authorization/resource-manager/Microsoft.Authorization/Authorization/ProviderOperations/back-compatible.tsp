@@ -6,11 +6,9 @@ using Microsoft.ProviderOperations;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ProviderOperation.properties);
 
-@@clientLocation(
-  ProviderOperationsMetadataOperationGroup.get,
+@@clientLocation(ProviderOperationsMetadataOperationGroup.get,
   "ProviderOperationsMetadata"
 );
-@@clientLocation(
-  ProviderOperationsMetadataOperationGroup.list,
+@@clientLocation(ProviderOperationsMetadataOperationGroup.list,
   "ProviderOperationsMetadata"
 );

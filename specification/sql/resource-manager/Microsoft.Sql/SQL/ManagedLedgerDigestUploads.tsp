@@ -42,10 +42,8 @@ interface ManagedLedgerDigestUploadsOperationGroup {
   @tag("ManagedLedgerDigestUploads")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ManagedLedgerDigestUploads,
-    Response =
-      | ArmResourceUpdatedResponse<ManagedLedgerDigestUploads>
-      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedLedgerDigestUploads> &
-          Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmResourceUpdatedResponse<ManagedLedgerDigestUploads> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedLedgerDigestUploads> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -67,7 +65,6 @@ interface ManagedLedgerDigestUploadsOperationGroup {
 
 @@doc(ManagedLedgerDigestUploads.name, "");
 @@doc(ManagedLedgerDigestUploads.properties, "Resource properties.");
-@@doc(
-  ManagedLedgerDigestUploadsOperationGroup.createOrUpdate::parameters.resource,
+@@doc(ManagedLedgerDigestUploadsOperationGroup.createOrUpdate::parameters.resource,
   "The Ledger Digest Storage Endpoint."
 );

@@ -79,10 +79,7 @@ interface ContainerAppsSourceControls {
       @query("deleteWorkflow")
       deleteWorkflow?: boolean;
     },
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
     Error = DefaultErrorResponse
   >;
 
@@ -99,7 +96,6 @@ interface ContainerAppsSourceControls {
 
 @@doc(SourceControl.name, "Name of the Container App SourceControl.");
 @@doc(SourceControl.properties, "SourceControl resource specific properties");
-@@doc(
-  ContainerAppsSourceControls.createOrUpdate::parameters.resource,
+@@doc(ContainerAppsSourceControls.createOrUpdate::parameters.resource,
   "Properties used to create a Container App SourceControl"
 );

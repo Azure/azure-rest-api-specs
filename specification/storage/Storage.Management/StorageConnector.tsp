@@ -43,7 +43,7 @@ interface Connectors {
   /**
    * Update a Storage Connector.
    */
-  update is ArmCustomPatchAsync<Connector, PatchModel = ConnectorUpdate>;
+  update is ArmResourcePatchAsync<Connector, StorageConnectorProperties>;
 
   /**
    * Delete a Storage Connector.

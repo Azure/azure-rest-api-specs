@@ -40,7 +40,6 @@ interface VmwareRunAsAccountResources {
 }
 
 @@doc(VmwareRunAsAccountResource.name, " RunAsAccounts name");
-@@doc(
-  VmwareRunAsAccountResource.properties,
+@@doc(VmwareRunAsAccountResource.properties,
   "The resource-specific properties for this resource."
 );

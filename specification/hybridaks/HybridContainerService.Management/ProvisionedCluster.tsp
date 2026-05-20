@@ -83,7 +83,6 @@ interface ProvisionedClusters {
   >;
 }
 
-@@doc(
-  ProvisionedClusters.createOrUpdate::parameters.resource,
+@@doc(ProvisionedClusters.createOrUpdate::parameters.resource,
   "Provisioned Cluster resource definition"
 );

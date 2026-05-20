@@ -72,7 +72,6 @@ interface VmwareMachineSoftwareInventories {
 }
 
 @@doc(VmwareMachineSoftwareInventory.name, "Default value.");
-@@doc(
-  VmwareMachineSoftwareInventory.properties,
+@@doc(VmwareMachineSoftwareInventory.properties,
   "The resource-specific properties for this resource."
 );

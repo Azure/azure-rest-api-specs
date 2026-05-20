@@ -57,7 +57,6 @@ interface ResourceTypeRegistrations {
 
 @@doc(ResourceTypeRegistration.name, "The resource type.");
 @@doc(ResourceTypeRegistration.properties, "");
-@@doc(
-  ResourceTypeRegistrations.createOrUpdate::parameters.resource,
+@@doc(ResourceTypeRegistrations.createOrUpdate::parameters.resource,
   "The required request body parameters supplied to the resource type registration CreateOrUpdate operation."
 );

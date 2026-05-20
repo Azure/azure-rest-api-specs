@@ -55,7 +55,6 @@ interface PolicySets {
 }
 
 @@doc(PolicySet.name, "The name of the policy set.");
-@@doc(
-  PolicySets.evaluatePolicies::parameters.body,
+@@doc(PolicySets.evaluatePolicies::parameters.body,
   "Request body for evaluating a policy set."
 );

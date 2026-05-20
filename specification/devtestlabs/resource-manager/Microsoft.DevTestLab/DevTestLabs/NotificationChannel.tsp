@@ -112,12 +112,10 @@ interface NotificationChannels {
 
 @@doc(NotificationChannel.name, "The name of the notification channel.");
 @@doc(NotificationChannel.properties, "The properties of the resource.");
-@@doc(
-  NotificationChannels.createOrUpdate::parameters.resource,
+@@doc(NotificationChannels.createOrUpdate::parameters.resource,
   "A notification."
 );
 @@doc(NotificationChannels.update::parameters.properties, "A notification.");
-@@doc(
-  NotificationChannels.notify::parameters.body,
+@@doc(NotificationChannels.notify::parameters.body,
   "Properties for generating a Notification."
 );

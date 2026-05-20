@@ -97,8 +97,7 @@ interface ProblemClassifications {
 }
 
 @@doc(ClassifyProblems.classifyProblems::parameters.body, "Input to check.");
-@@doc(
-  ClassifyProblemsNoSubscription.classifyProblems::parameters.body,
+@@doc(ClassifyProblemsNoSubscription.classifyProblems::parameters.body,
   "Input to check."
 );
 @@doc(ProblemClassification.name, "Name of problem classification.");

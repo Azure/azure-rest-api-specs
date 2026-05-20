@@ -80,8 +80,7 @@ interface Alerts {
 
 @@doc(Alert.name, "Alert ID");
 @@doc(Alert.properties, "Alert properties.");
-@@doc(
-  Alerts.dismiss::parameters.properties,
+@@doc(Alerts.dismiss::parameters.properties,
   "Parameters supplied to the Dismiss Alert operation."
 );
 @@path(Alert.name, #{ allowReserved: true });

@@ -75,7 +75,6 @@ interface WcfRelaysOps {
 @@minLength(WcfRelay.name, 1);
 @@doc(WcfRelay.name, "The relay name.");
 @@doc(WcfRelay.properties, "Properties of the WCF relay.");
-@@doc(
-  WcfRelaysOps.createOrUpdate::parameters.resource,
+@@doc(WcfRelaysOps.createOrUpdate::parameters.resource,
   "Parameters supplied to create a WCF relay."
 );
