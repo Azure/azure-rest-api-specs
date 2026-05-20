@@ -88,7 +88,7 @@ interface AIManagerNamespaces {
   >;
 
   @added(Versions.v2026_05_02_preview)
-  @doc("Returns the namespace-scoped LLM gateway endpoint and the API keys clients use to authenticate against it.")
+  @doc("Returns the namespace-scoped LLM gateway endpoint and the API keys clients use to authenticate against it. Always use `primaryKey` for new requests; `secondaryKey`, when present, is only valid during a rotation grace period (see `updateKeyRotationPolicy`).")
   @post
   @action("listAccessInfo")
   listAccessInfo is ArmResourceActionSync<
@@ -98,32 +98,48 @@ interface AIManagerNamespaces {
   >;
 
   @added(Versions.v2026_05_02_preview)
-  @doc("Rotates the API keys for the namespace-scoped LLM gateway. The current `secondaryKey` is promoted to become the new `primaryKey`, and a fresh `secondaryKey` is generated. This enables zero-downtime rotation: clients that have already switched to the previous secondary key continue to work, while the old primary key is invalidated. Returns the updated access information.")
+  @doc("""
+    Schedules a one-shot rotation of the namespace-scoped LLM gateway API keys and returns the persisted policy.
+
+    Rotation behavior: at `nextRotationTime`, the controller generates a brand-new key and installs it as the new `primaryKey`; the prior `primaryKey` is demoted to `secondaryKey` and remains valid for `gracePeriod` to allow clients to roll over without downtime. After `gracePeriod` elapses, the demoted key is revoked and `secondaryKey` is cleared.
+
+    Once the scheduled rotation has run, `nextRotationTime` is cleared (one-shot). Call this operation again to schedule the next rotation. Omit `nextRotationTime` to disable any pending scheduled rotation.
+    """)
   @post
-  @action("rotateKeys")
-  rotateKeys is ArmResourceActionAsync<
+  @action("updateKeyRotationPolicy")
+  updateKeyRotationPolicy is ArmResourceActionSync<
     AIManagerNamespace,
-    void,
-    NamespaceAccessInfo
+    KeyRotationPolicy,
+    ArmResponse<KeyRotationPolicy>
   >;
 }
 
 @added(Versions.v2026_05_02_preview)
 @doc("Access information for an AI Manager namespace, including the OpenAI-compatible gateway endpoint and the API keys used to authenticate against it.")
 model NamespaceAccessInfo {
-  @doc("OpenAI-compatible base URL, e.g. \"https://team-alpha.<cluster>.<region>.aksapp.io/v1\".")
+  @doc("Inference gateway URL. OpenAI-compatible base URL, e.g. \"https://team-alpha.<cluster>.<region>.aksapp.io/v1\".")
   endpoint: url;
 
   @secret
-  @doc("Primary API key. Send as `Authorization: Bearer <key>` (or `api-key: <key>`, depending on client). Treat as secret; do not log or persist in plaintext.")
+  @doc("Primary API key. Clients should always authenticate with this key (send as `Authorization: Bearer <key>` or `api-key: <key>`). Treat as secret; do not log or persist in plaintext.")
   primaryKey: string;
 
   @secret
-  @doc("Secondary API key, for zero-downtime rotation. Same usage as `primaryKey`.")
+  @doc("Secondary API key. Present only during a key-rotation grace period: it is the previous `primaryKey`, kept valid temporarily to allow clients to migrate to the new `primaryKey` without downtime. It is revoked once `gracePeriod` from the rotation elapses. Do not use for new requests; rotate clients to `primaryKey` as soon as possible.")
   secondaryKey?: string;
 
   @doc("UTC time the keys were last rotated. Clients can use this to detect rotation and refresh cached credentials.")
   lastRotatedAt?: utcDateTime;
+}
+
+@added(Versions.v2026_05_02_preview)
+@doc("One-shot key rotation policy for the namespace-scoped LLM gateway API keys.")
+model KeyRotationPolicy {
+  @doc("UTC time at which the controller will perform a one-shot rotation of the API keys. Once the rotation has completed, this value is cleared. Omit to disable any pending scheduled rotation.")
+  nextRotationTime?: utcDateTime;
+
+  @doc("Duration during which the previous primary key remains valid as `secondaryKey` after a rotation, enabling zero-downtime client migration. ISO 8601 duration (e.g. `PT24H`, `P7D`). Defaults to `PT24H`.")
+  gracePeriod?: duration;
 }
 
 @@maxLength(AIManagerNamespace.name, 63);

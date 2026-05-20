@@ -1215,7 +1215,7 @@
         "tags": [
           "AIManagerNamespaces"
         ],
-        "description": "Returns the namespace-scoped LLM gateway endpoint and the API keys clients use to authenticate against it.",
+        "description": "Returns the namespace-scoped LLM gateway endpoint and the API keys clients use to authenticate against it. Always use `primaryKey` for new requests; `secondaryKey`, when present, is only valid during a rotation grace period (see `updateKeyRotationPolicy`).",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1666,13 +1666,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers/{aiManagerName}/namespaces/{namespaceName}/rotateKeys": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers/{aiManagerName}/namespaces/{namespaceName}/updateKeyRotationPolicy": {
       "post": {
-        "operationId": "AIManagerNamespaces_RotateKeys",
+        "operationId": "AIManagerNamespaces_UpdateKeyRotationPolicy",
         "tags": [
           "AIManagerNamespaces"
         ],
-        "description": "Rotates the API keys for the namespace-scoped LLM gateway. The current `secondaryKey` is promoted to become the new `primaryKey`, and a fresh `secondaryKey` is generated. This enables zero-downtime rotation: clients that have already switched to the previous secondary key continue to work, while the old primary key is invalidated. Returns the updated access information.",
+        "description": "Schedules a one-shot rotation of the namespace-scoped LLM gateway API keys and returns the persisted policy.\n\nRotation behavior: at `nextRotationTime`, the controller generates a brand-new key and installs it as the new `primaryKey`; the prior `primaryKey` is demoted to `secondaryKey` and remains valid for `gracePeriod` to allow clients to roll over without downtime. After `gracePeriod` elapses, the demoted key is revoked and `secondaryKey` is cleared.\n\nOnce the scheduled rotation has run, `nextRotationTime` is cleared (one-shot). Call this operation again to schedule the next rotation. Omit `nextRotationTime` to disable any pending scheduled rotation.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1702,27 +1702,22 @@
             "minLength": 1,
             "maxLength": 63,
             "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The key rotation policy to apply.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KeyRotationPolicy"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/NamespaceAccessInfo"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
+              "$ref": "#/definitions/KeyRotationPolicy"
             }
           },
           "default": {
@@ -1733,14 +1728,10 @@
           }
         },
         "x-ms-examples": {
-          "AIManagerNamespaces_RotateKeys": {
-            "$ref": "./examples/AIManagerNamespaces_RotateKeys.json"
+          "AIManagerNamespaces_UpdateKeyRotationPolicy": {
+            "$ref": "./examples/AIManagerNamespaces_UpdateKeyRotationPolicy.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     }
   },
@@ -2317,6 +2308,22 @@
         "value"
       ]
     },
+    "KeyRotationPolicy": {
+      "type": "object",
+      "description": "One-shot key rotation policy for the namespace-scoped LLM gateway API keys.",
+      "properties": {
+        "nextRotationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC time at which the controller will perform a one-shot rotation of the API keys. Once the rotation has completed, this value is cleared. Omit to disable any pending scheduled rotation."
+        },
+        "gracePeriod": {
+          "type": "string",
+          "format": "duration",
+          "description": "Duration during which the previous primary key remains valid as `secondaryKey` after a rotation, enabling zero-downtime client migration. ISO 8601 duration (e.g. `PT24H`, `P7D`). Defaults to `PT24H`."
+        }
+      }
+    },
     "ManualScalingProfile": {
       "type": "object",
       "description": "Manual scaling configuration: fixed replica count.",
@@ -2712,18 +2719,18 @@
         "endpoint": {
           "type": "string",
           "format": "uri",
-          "description": "OpenAI-compatible base URL, e.g. \"https://team-alpha.<cluster>.<region>.aksapp.io/v1\"."
+          "description": "Inference gateway URL. OpenAI-compatible base URL, e.g. \"https://team-alpha.<cluster>.<region>.aksapp.io/v1\"."
         },
         "primaryKey": {
           "type": "string",
           "format": "password",
-          "description": "Primary API key. Send as `Authorization: Bearer <key>` (or `api-key: <key>`, depending on client). Treat as secret; do not log or persist in plaintext.",
+          "description": "Primary API key. Clients should always authenticate with this key (send as `Authorization: Bearer <key>` or `api-key: <key>`). Treat as secret; do not log or persist in plaintext.",
           "x-ms-secret": true
         },
         "secondaryKey": {
           "type": "string",
           "format": "password",
-          "description": "Secondary API key, for zero-downtime rotation. Same usage as `primaryKey`.",
+          "description": "Secondary API key. Present only during a key-rotation grace period: it is the previous `primaryKey`, kept valid temporarily to allow clients to migrate to the new `primaryKey` without downtime. It is revoked once `gracePeriod` from the rotation elapses. Do not use for new requests; rotate clients to `primaryKey` as soon as possible.",
           "x-ms-secret": true
         },
         "lastRotatedAt": {
