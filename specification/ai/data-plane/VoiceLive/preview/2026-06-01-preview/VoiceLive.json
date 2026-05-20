@@ -694,6 +694,114 @@
       ],
       "x-ms-discriminator-value": "azure-personal"
     },
+    "AzureRealtimeNativeVoice": {
+      "type": "object",
+      "description": "Azure realtime native voice configuration. These voices are natively\nsupported by the `azure-realtime` model and offer higher quality speech\nsynthesis than standard Azure voices. Only valid when using the\n`azure-realtime` model.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the voice.",
+          "enum": [
+            "azure-realtime-native"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "name": {
+          "$ref": "#/definitions/AzureRealtimeNativeVoiceName",
+          "description": "The name of the Azure realtime native voice."
+        }
+      },
+      "required": [
+        "type",
+        "name"
+      ]
+    },
+    "AzureRealtimeNativeVoiceName": {
+      "type": "string",
+      "description": "Supported voice names for the Azure realtime native voice type.",
+      "enum": [
+        "aarti",
+        "andrew",
+        "ava",
+        "denise",
+        "diya",
+        "elsa",
+        "florian",
+        "francisca",
+        "meera",
+        "xiaoxiao",
+        "yunxi",
+        "ximena"
+      ],
+      "x-ms-enum": {
+        "name": "AzureRealtimeNativeVoiceName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "aarti",
+            "value": "aarti",
+            "description": "Aarti voice."
+          },
+          {
+            "name": "andrew",
+            "value": "andrew",
+            "description": "Andrew voice."
+          },
+          {
+            "name": "ava",
+            "value": "ava",
+            "description": "Ava voice."
+          },
+          {
+            "name": "denise",
+            "value": "denise",
+            "description": "Denise voice."
+          },
+          {
+            "name": "diya",
+            "value": "diya",
+            "description": "Diya voice."
+          },
+          {
+            "name": "elsa",
+            "value": "elsa",
+            "description": "Elsa voice."
+          },
+          {
+            "name": "florian",
+            "value": "florian",
+            "description": "Florian voice."
+          },
+          {
+            "name": "francisca",
+            "value": "francisca",
+            "description": "Francisca voice."
+          },
+          {
+            "name": "meera",
+            "value": "meera",
+            "description": "Meera voice."
+          },
+          {
+            "name": "xiaoxiao",
+            "value": "xiaoxiao",
+            "description": "Xiaoxiao voice."
+          },
+          {
+            "name": "yunxi",
+            "value": "yunxi",
+            "description": "Yunxi voice."
+          },
+          {
+            "name": "ximena",
+            "value": "ximena",
+            "description": "Ximena voice."
+          }
+        ]
+      }
+    },
     "AzureSemanticDetection": {
       "type": "object",
       "description": "Azure semantic end-of-utterance detection (default).",
