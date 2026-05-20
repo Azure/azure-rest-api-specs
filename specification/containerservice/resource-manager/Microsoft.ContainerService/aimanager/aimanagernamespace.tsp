@@ -88,7 +88,7 @@ interface AIManagerNamespaces {
   >;
 
   @added(Versions.v2026_05_02_preview)
-  @doc("Returns the namespace-scoped LLM gateway endpoint and the API keys clients use to authenticate against it. Always use `primaryKey` for new requests; `secondaryKey`, when present, is only valid during a rotation grace period (see `updateKeyRotationPolicy`).")
+  @doc("Returns the namespace-scoped LLM gateway endpoint and the currently-valid API keys.")
   @post
   @action("listAccessInfo")
   listAccessInfo is ArmResourceActionSync<
@@ -100,10 +100,8 @@ interface AIManagerNamespaces {
   @added(Versions.v2026_05_02_preview)
   @doc("""
     Schedules a one-shot rotation of the namespace-scoped LLM gateway API keys and returns the persisted policy.
-
-    Rotation behavior: at `nextRotationTime`, the controller generates a brand-new key and installs it as the new `primaryKey`; the prior `primaryKey` is demoted to `secondaryKey` and remains valid for `gracePeriod` to allow clients to roll over without downtime. After `gracePeriod` elapses, the demoted key is revoked and `secondaryKey` is cleared.
-
-    Once the scheduled rotation has run, `nextRotationTime` is cleared (one-shot). Call this operation again to schedule the next rotation. Omit `nextRotationTime` to disable any pending scheduled rotation.
+    
+    At `nextRotationTime`, a new key is generated and installed as `primaryKey`; the previous `primaryKey` is retained as `secondaryKey` for `gracePeriod` so clients can roll over without downtime, then revoked. After the rotation runs, `nextRotationTime` is cleared; omit it to cancel any pending rotation.
     """)
   @post
   @action("updateKeyRotationPolicy")
@@ -121,24 +119,27 @@ model NamespaceAccessInfo {
   endpoint: url;
 
   @secret
-  @doc("Primary API key. Clients should always authenticate with this key (send as `Authorization: Bearer <key>` or `api-key: <key>`). Treat as secret; do not log or persist in plaintext.")
+  @doc("Primary API key. Send as `Authorization: Bearer <key>` or `api-key: <key>`. Treat as secret; do not log or persist in plaintext.")
   primaryKey: string;
 
   @secret
-  @doc("Secondary API key. Present only during a key-rotation grace period: it is the previous `primaryKey`, kept valid temporarily to allow clients to migrate to the new `primaryKey` without downtime. It is revoked once `gracePeriod` from the rotation elapses. Do not use for new requests; rotate clients to `primaryKey` as soon as possible.")
+  @doc("Previous `primaryKey`, retained temporarily after a rotation to allow clients to migrate to the new `primaryKey`. Revoked when `gracePeriod` elapses, after which this field is omitted. Do not use for new requests.")
   secondaryKey?: string;
 
   @doc("UTC time the keys were last rotated. Clients can use this to detect rotation and refresh cached credentials.")
   lastRotatedAt?: utcDateTime;
+
+  @doc("UTC time of the next scheduled key rotation; absent when none is scheduled. See `updateKeyRotationPolicy`.")
+  nextRotationTime?: utcDateTime;
 }
 
 @added(Versions.v2026_05_02_preview)
-@doc("One-shot key rotation policy for the namespace-scoped LLM gateway API keys.")
+@doc("One-shot key rotation policy for the namespace-scoped LLM gateway API keys. See `updateKeyRotationPolicy` for behavior.")
 model KeyRotationPolicy {
-  @doc("UTC time at which the controller will perform a one-shot rotation of the API keys. Once the rotation has completed, this value is cleared. Omit to disable any pending scheduled rotation.")
+  @doc("UTC time at which the controller will rotate the keys. Omit to cancel any pending rotation.")
   nextRotationTime?: utcDateTime;
 
-  @doc("Duration during which the previous primary key remains valid as `secondaryKey` after a rotation, enabling zero-downtime client migration. ISO 8601 duration (e.g. `PT24H`, `P7D`). Defaults to `PT24H`.")
+  @doc("Duration the previous `primaryKey` remains valid as `secondaryKey` after a rotation. ISO 8601 duration (e.g. `PT24H`, `P7D`). Defaults to `PT24H`.")
   gracePeriod?: duration;
 }
 
