@@ -37,6 +37,12 @@ union HciJobType {
    * Job to configure SDN (Software Defined Networking) integration for the cluster.
    */
   ConfigureSdnIntegration: "ConfigureSdnIntegration",
+ 
+  /** Job to open port to enable RDP Connection */
+  VmConnectProvision: "VmConnectProvision",
+
+  /** Job to close port to disable RDP Connection */
+  VmConnectRemove: "VmConnectRemove",
 }
 
 /**
@@ -9090,4 +9096,41 @@ model RemovePartitionGpuJobProperties extends EdgeMachineGpuJobProperties {
    * Virtual machine ID from which the GPU partition is removed.
    */
   vmId: string;
+}
+
+/**
+ * Details of vm connect job.
+ */
+@added(Versions.v2026_05_01_preview)
+model VmConnectJobDetails {
+  /** Name of the VM. */
+  vmName: string;
+
+  /** Name of the node the VM is on. */
+  nodeName?: string;
+
+  /** Name of the resource group of the VM. */
+  vmResourceGroupName?: string;
+}
+
+/** Properties for enabling VM Connect. */
+@added(Versions.v2026_05_01_preview)
+model VmConnectProvisionJobProperties extends ClusterJobProperties {
+  /** ClusterJob Type to support polymorphic resource. */
+  jobType: HciJobType.VmConnectProvision;
+
+  /** Details of VM needed to enable VM Connect */
+  @Azure.ResourceManager.identifiers(#[])
+  vmConnectProvisionJobDetails: VmConnectJobDetails[];
+}
+
+/** Properties for disabling VM Connect. */
+@added(Versions.v2026_05_01_preview)
+model VmConnectRemoveJobProperties extends ClusterJobProperties {
+  /** ClusterJob Type to support polymorphic resource. */
+  jobType: HciJobType.VmConnectRemove;
+
+  /** Details of VM needed to disable VM Connect */
+  @Azure.ResourceManager.identifiers(#[])
+  vmConnectRemoveJobDetails: VmConnectJobDetails[];
 }
