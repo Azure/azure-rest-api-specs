@@ -2275,7 +2275,7 @@
         }
       },
       "put": {
-        "operationId": "PutSchema",
+        "operationId": "CreateOrReplaceSchema",
         "summary": "Creates or updates a schema.",
         "description": "Creates or updates a schema.",
         "produces": [
@@ -2353,14 +2353,6 @@
             "schema": {
               "$ref": "#/definitions/Error"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Creates or updates a schema with If-Match header.": {
-            "$ref": "./examples/PutSchema_IfMatch.json"
-          },
-          "Creates or updates a schema.": {
-            "$ref": "./examples/PutSchema.json"
           }
         }
       },
@@ -3581,7 +3573,9 @@
         "json_schema": {
           "type": "object",
           "description": "The JSON Schema definition.",
-          "additionalProperties": {},
+          "additionalProperties": {
+            "type": "string"
+          },
           "x-ms-client-name": "jsonSchema"
         },
         "etag": {

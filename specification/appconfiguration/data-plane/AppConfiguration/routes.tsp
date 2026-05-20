@@ -549,7 +549,7 @@ op getSchema is AppConfigOperation<
 @route("/schemas/{schemaName}")
 @put
 @added(Versions.v2026_10_01_preview)
-op putSchema is AppConfigOperation<
+op createOrReplaceSchema is AppConfigOperation<
   {
     ...SchemaNamePathParam<"The name of the schema to create or update.">;
     ...SyncTokenHeader;

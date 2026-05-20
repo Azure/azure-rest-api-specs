@@ -126,11 +126,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Gets a list of keys.": {
-            "$ref": "./examples/GetKeys.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "@nextLink",
           "itemName": "items"
@@ -194,11 +189,6 @@
             "schema": {
               "$ref": "#/definitions/Error"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Check keys": {
-            "$ref": "./examples/CheckKeys.json"
           }
         }
       }
@@ -382,17 +372,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Gets a list of key-values using the If-Match header.": {
-            "$ref": "./examples/GetKeyValues_IfMatch.json"
-          },
-          "Gets a list of key-values using the If-None-Match header.": {
-            "$ref": "./examples/GetKeyValues_IfNoneMatch.json"
-          },
-          "Gets a list of key-values.": {
-            "$ref": "./examples/GetKeyValues.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "@nextLink",
           "itemName": "items"
@@ -570,17 +549,6 @@
               "$ref": "#/definitions/Error"
             }
           }
-        },
-        "x-ms-examples": {
-          "Requests the headers and status of the given resource using the If-Match header.": {
-            "$ref": "./examples/CheckKeyValues_IfMatch.json"
-          },
-          "Requests the headers and status of the given resource using the If-None-Match header.": {
-            "$ref": "./examples/CheckKeyValues_IfNoneMatch.json"
-          },
-          "Requests the headers and status of the given resource.": {
-            "$ref": "./examples/CheckKeyValues.json"
-          }
         }
       }
     },
@@ -755,17 +723,6 @@
               "$ref": "#/definitions/Error"
             }
           }
-        },
-        "x-ms-examples": {
-          "Gets a single key-value using the If-Match header.": {
-            "$ref": "./examples/GetKeyValue_IfMatch.json"
-          },
-          "Gets a single key-value using the If-None-Match header.": {
-            "$ref": "./examples/GetKeyValue_IfNoneMatch.json"
-          },
-          "Gets a single key-value.": {
-            "$ref": "./examples/GetKeyValue.json"
-          }
         }
       },
       "put": {
@@ -863,14 +820,6 @@
               "$ref": "#/definitions/Error"
             }
           }
-        },
-        "x-ms-examples": {
-          "Creates a key-value with the If-Match header.": {
-            "$ref": "./examples/PutKeyValue_IfMatch.json"
-          },
-          "Creates a key-value.": {
-            "$ref": "./examples/PutKeyValue.json"
-          }
         }
       },
       "delete": {
@@ -951,14 +900,6 @@
             "schema": {
               "$ref": "#/definitions/Error"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Deletes a key-value using If-Match header": {
-            "$ref": "./examples/DeleteKeyValue_IfMatch.json"
-          },
-          "Deletes a key-value.": {
-            "$ref": "./examples/DeleteKeyValue.json"
           }
         }
       },
@@ -1119,17 +1060,6 @@
               "$ref": "#/definitions/Error"
             }
           }
-        },
-        "x-ms-examples": {
-          "Requests the headers and status of the given resource using the If-Match header.": {
-            "$ref": "./examples/CheckKeyValue_IfMatch.json"
-          },
-          "Requests the headers and status of the given resource using the If-None-Match header.": {
-            "$ref": "./examples/CheckKeyValue_IfNoneMatch.json"
-          },
-          "Requests the headers and status of the given resource.": {
-            "$ref": "./examples/CheckKeyValue.json"
-          }
         }
       }
     },
@@ -1228,11 +1158,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Gets a list of labels.": {
-            "$ref": "./examples/GetLabels.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "@nextLink",
           "itemName": "items"
@@ -1323,11 +1248,6 @@
               "$ref": "#/definitions/Error"
             }
           }
-        },
-        "x-ms-examples": {
-          "Requests the headers and status of the given resource.": {
-            "$ref": "./examples/CheckLabels.json"
-          }
         }
       }
     },
@@ -1410,14 +1330,6 @@
               "$ref": "#/definitions/Error"
             }
           }
-        },
-        "x-ms-examples": {
-          "Locks a key-value using If-Match header.": {
-            "$ref": "./examples/PutLock_IfMatch.json"
-          },
-          "Locks a key-value.": {
-            "$ref": "./examples/PutLock.json"
-          }
         }
       },
       "delete": {
@@ -1498,14 +1410,6 @@
               "$ref": "#/definitions/Error"
             }
           }
-        },
-        "x-ms-examples": {
-          "Unlocks a key-value using If-Match header.": {
-            "$ref": "./examples/DeleteLock_IfMatch.json"
-          },
-          "Unlocks a key-value.": {
-            "$ref": "./examples/DeleteLock.json"
-          }
         }
       }
     },
@@ -1541,11 +1445,6 @@
             "schema": {
               "$ref": "#/definitions/Error"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Gets the state of a long running operation.": {
-            "$ref": "./examples/GetOperationStatus.json"
           }
         }
       }
@@ -1709,11 +1608,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Gets a list of key-value revisions.": {
-            "$ref": "./examples/GetRevisions.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "@nextLink",
           "itemName": "items"
@@ -1867,582 +1761,6 @@
             "schema": {
               "$ref": "#/definitions/Error"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Requests the headers and status of the given resource.": {
-            "$ref": "./examples/CheckRevisions.json"
-          }
-        }
-      }
-    },
-    "/schemas": {
-      "get": {
-        "operationId": "GetSchemas",
-        "summary": "Gets a list of schemas.",
-        "description": "Gets a list of schemas.",
-        "produces": [
-          "application/json",
-          "application/problem+json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "Sync-Token",
-            "in": "header",
-            "description": "Used to guarantee real-time consistency between requests.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "syncToken"
-          },
-          {
-            "name": "After",
-            "in": "query",
-            "description": "Instructs the server to return elements that appear after the element referred\nto by the specified token.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "after"
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "description": "Used to perform an operation only if the targeted resource's etag matches the\nvalue provided.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
-          },
-          {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "Used to perform an operation only if the targeted resource's etag does not\nmatch the value provided.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
-          },
-          {
-            "name": "$Select",
-            "in": "query",
-            "description": "Used to select what fields are present in the returned resource(s).",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "id",
-                "name",
-                "description",
-                "type",
-                "status",
-                "target",
-                "scope",
-                "tags",
-                "json_schema",
-                "etag"
-              ],
-              "x-ms-enum": {
-                "name": "SchemaFields",
-                "modelAsString": true,
-                "values": [
-                  {
-                    "name": "id",
-                    "value": "id",
-                    "description": "Id field."
-                  },
-                  {
-                    "name": "name",
-                    "value": "name",
-                    "description": "Name field."
-                  },
-                  {
-                    "name": "description",
-                    "value": "description",
-                    "description": "Description field."
-                  },
-                  {
-                    "name": "type",
-                    "value": "type",
-                    "description": "Type field."
-                  },
-                  {
-                    "name": "status",
-                    "value": "status",
-                    "description": "Status field."
-                  },
-                  {
-                    "name": "target",
-                    "value": "target",
-                    "description": "Target field."
-                  },
-                  {
-                    "name": "scope",
-                    "value": "scope",
-                    "description": "Scope field."
-                  },
-                  {
-                    "name": "tags",
-                    "value": "tags",
-                    "description": "Tags field."
-                  },
-                  {
-                    "name": "jsonSchema",
-                    "value": "json_schema",
-                    "description": "JSON schema field."
-                  },
-                  {
-                    "name": "etag",
-                    "value": "etag",
-                    "description": "Etag field."
-                  }
-                ]
-              }
-            },
-            "collectionFormat": "csv",
-            "x-ms-client-name": "select"
-          },
-          {
-            "name": "name",
-            "in": "query",
-            "description": "A filter for the name of the returned schemas.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "status",
-            "in": "query",
-            "description": "A filter for the status of the returned schemas.",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "enabled",
-              "disabled"
-            ],
-            "x-ms-enum": {
-              "name": "SchemaStatus",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "enabled",
-                  "value": "enabled",
-                  "description": "Enabled"
-                },
-                {
-                  "name": "disabled",
-                  "value": "disabled",
-                  "description": "Disabled"
-                }
-              ]
-            }
-          },
-          {
-            "name": "builtIn",
-            "in": "query",
-            "description": "Set to 'true' to return built-in schemas.",
-            "required": false,
-            "type": "boolean"
-          },
-          {
-            "name": "target",
-            "in": "query",
-            "description": "When set to 'kv', resolves the effective schema for a key/label.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "key",
-            "in": "query",
-            "description": "The key to use when resolving the effective schema (required when target=kv).",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "label",
-            "in": "query",
-            "description": "The label to use when resolving the effective schema (optional when target=kv).",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "tags",
-            "in": "query",
-            "description": "A filter used to query by tags.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/SchemaListResult"
-            },
-            "headers": {
-              "Sync-Token": {
-                "type": "string",
-                "description": "Used to guarantee real-time consistency between requests."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Gets a list of schemas.": {
-            "$ref": "./examples/GetSchemas.json"
-          },
-          "Gets the effective schema for a key-value.": {
-            "$ref": "./examples/GetSchemas_EffectiveSchema.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "@nextLink",
-          "itemName": "items"
-        }
-      }
-    },
-    "/schemas/{schemaName}": {
-      "get": {
-        "operationId": "GetSchema",
-        "summary": "Gets a single schema.",
-        "description": "Gets a single schema.",
-        "produces": [
-          "application/json",
-          "application/problem+json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "schemaName",
-            "in": "path",
-            "description": "The name of the schema to retrieve.",
-            "required": true,
-            "type": "string",
-            "maxLength": 256
-          },
-          {
-            "name": "Sync-Token",
-            "in": "header",
-            "description": "Used to guarantee real-time consistency between requests.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "syncToken"
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "description": "Used to perform an operation only if the targeted resource's etag matches the\nvalue provided.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
-          },
-          {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "Used to perform an operation only if the targeted resource's etag does not\nmatch the value provided.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
-          },
-          {
-            "name": "$Select",
-            "in": "query",
-            "description": "Used to select what fields are present in the returned resource(s).",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "id",
-                "name",
-                "description",
-                "type",
-                "status",
-                "target",
-                "scope",
-                "tags",
-                "json_schema",
-                "etag"
-              ],
-              "x-ms-enum": {
-                "name": "SchemaFields",
-                "modelAsString": true,
-                "values": [
-                  {
-                    "name": "id",
-                    "value": "id",
-                    "description": "Id field."
-                  },
-                  {
-                    "name": "name",
-                    "value": "name",
-                    "description": "Name field."
-                  },
-                  {
-                    "name": "description",
-                    "value": "description",
-                    "description": "Description field."
-                  },
-                  {
-                    "name": "type",
-                    "value": "type",
-                    "description": "Type field."
-                  },
-                  {
-                    "name": "status",
-                    "value": "status",
-                    "description": "Status field."
-                  },
-                  {
-                    "name": "target",
-                    "value": "target",
-                    "description": "Target field."
-                  },
-                  {
-                    "name": "scope",
-                    "value": "scope",
-                    "description": "Scope field."
-                  },
-                  {
-                    "name": "tags",
-                    "value": "tags",
-                    "description": "Tags field."
-                  },
-                  {
-                    "name": "jsonSchema",
-                    "value": "json_schema",
-                    "description": "JSON schema field."
-                  },
-                  {
-                    "name": "etag",
-                    "value": "etag",
-                    "description": "Etag field."
-                  }
-                ]
-              }
-            },
-            "collectionFormat": "csv",
-            "x-ms-client-name": "select"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Schema"
-            },
-            "headers": {
-              "ETag": {
-                "type": "string",
-                "description": "A value representing the current state of the resource."
-              },
-              "Sync-Token": {
-                "type": "string",
-                "description": "Used to guarantee real-time consistency between requests."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Gets a single schema with If-Match header.": {
-            "$ref": "./examples/GetSchema_IfMatch.json"
-          },
-          "Gets a single schema with If-None-Match header.": {
-            "$ref": "./examples/GetSchema_IfNoneMatch.json"
-          },
-          "Gets a single schema.": {
-            "$ref": "./examples/GetSchema.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "PutSchema",
-        "summary": "Creates or updates a schema.",
-        "description": "Creates or updates a schema.",
-        "produces": [
-          "application/json",
-          "application/problem+json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "schemaName",
-            "in": "path",
-            "description": "The name of the schema to create or update.",
-            "required": true,
-            "type": "string",
-            "maxLength": 256
-          },
-          {
-            "name": "Sync-Token",
-            "in": "header",
-            "description": "Used to guarantee real-time consistency between requests.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "syncToken"
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "description": "Used to perform an operation only if the targeted resource's etag matches the\nvalue provided.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
-          },
-          {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "Used to perform an operation only if the targeted resource's etag does not\nmatch the value provided.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "entity",
-            "in": "body",
-            "description": "The schema resource to create or update.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Schema"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Schema"
-            },
-            "headers": {
-              "ETag": {
-                "type": "string",
-                "description": "A value representing the current state of the resource."
-              },
-              "Sync-Token": {
-                "type": "string",
-                "description": "Used to guarantee real-time consistency between requests."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Creates or updates a schema with If-Match header.": {
-            "$ref": "./examples/PutSchema_IfMatch.json"
-          },
-          "Creates or updates a schema.": {
-            "$ref": "./examples/PutSchema.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "DeleteSchema",
-        "summary": "Deletes a schema.",
-        "description": "Deletes a schema.",
-        "produces": [
-          "application/json",
-          "application/problem+json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "schemaName",
-            "in": "path",
-            "description": "The name of the schema to delete.",
-            "required": true,
-            "type": "string",
-            "maxLength": 256
-          },
-          {
-            "name": "Sync-Token",
-            "in": "header",
-            "description": "Used to guarantee real-time consistency between requests.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "syncToken"
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "description": "Used to perform an operation only if the targeted resource's etag matches the\nvalue provided.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Schema"
-            },
-            "headers": {
-              "ETag": {
-                "type": "string",
-                "description": "A value representing the current state of the resource."
-              },
-              "Sync-Token": {
-                "type": "string",
-                "description": "Used to guarantee real-time consistency between requests."
-              }
-            }
-          },
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. ",
-            "headers": {
-              "Sync-Token": {
-                "type": "string",
-                "description": "Used to guarantee real-time consistency between requests."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Deletes a schema with If-Match header.": {
-            "$ref": "./examples/DeleteSchema_IfMatch.json"
-          },
-          "Deletes a schema.": {
-            "$ref": "./examples/DeleteSchema.json"
           }
         }
       }
@@ -2634,11 +1952,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Gets a list of key-value snapshots.": {
-            "$ref": "./examples/GetSnapshots.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "@nextLink",
           "itemName": "items"
@@ -2687,11 +2000,6 @@
             "schema": {
               "$ref": "#/definitions/Error"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Requests the headers and status of the given resource.": {
-            "$ref": "./examples/CheckSnapshots.json"
           }
         }
       }
@@ -2863,20 +2171,6 @@
               "$ref": "#/definitions/Error"
             }
           }
-        },
-        "x-ms-examples": {
-          "Gets a single key-value snapshot failed.": {
-            "$ref": "./examples/GetSnapshot_Failed.json"
-          },
-          "Gets a single key-value snapshot using If-Match header.": {
-            "$ref": "./examples/GetSnapshot_IfMatch.json"
-          },
-          "Gets a single key-value snapshot using If-None-Match header.": {
-            "$ref": "./examples/GetSnapshot_IfNoneMatch.json"
-          },
-          "Gets a single key-value snapshot.": {
-            "$ref": "./examples/GetSnapshot.json"
-          }
         }
       },
       "put": {
@@ -2953,11 +2247,6 @@
             "schema": {
               "$ref": "#/definitions/Error"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Creates a key-value snapshot.": {
-            "$ref": "./examples/CreateSnapshot.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -3051,14 +2340,6 @@
               "$ref": "#/definitions/Error"
             }
           }
-        },
-        "x-ms-examples": {
-          "Updates the state of a key-value snapshot using the If-Match header.": {
-            "$ref": "./examples/UpdateSnapshot_IfMatch.json"
-          },
-          "Updates the state of a key-value snapshot.": {
-            "$ref": "./examples/UpdateSnapshot.json"
-          }
         }
       },
       "head": {
@@ -3128,17 +2409,6 @@
             "schema": {
               "$ref": "#/definitions/Error"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Requests the headers and status of the given resource using If-Match header.": {
-            "$ref": "./examples/CheckSnapshot_IfMatch.json"
-          },
-          "Requests the headers and status of the given resource using If-None-Match header": {
-            "$ref": "./examples/CheckSnapshot_IfNoneMatch.json"
-          },
-          "Requests the headers and status of the given resource.": {
-            "$ref": "./examples/CheckSnapshot.json"
           }
         }
       }
@@ -3535,243 +2805,6 @@
         "id",
         "status"
       ]
-    },
-    "Schema": {
-      "type": "object",
-      "description": "A schema resource used for write-time validation of key-values.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The unique identifier of the schema.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the schema.",
-          "readOnly": true
-        },
-        "description": {
-          "type": "string",
-          "description": "A description of the schema."
-        },
-        "type": {
-          "$ref": "#/definitions/SchemaType",
-          "description": "The type of the schema.",
-          "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/SchemaStatus",
-          "description": "The status of the schema."
-        },
-        "target": {
-          "$ref": "#/definitions/SchemaTarget",
-          "description": "The target resource type for the schema. Required when scope is present."
-        },
-        "scope": {
-          "$ref": "#/definitions/SchemaScope",
-          "description": "The scope of the schema. Required when target is present."
-        },
-        "tags": {
-          "type": "object",
-          "description": "The tags of the schema.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "json_schema": {
-          "type": "object",
-          "description": "The JSON Schema definition.",
-          "additionalProperties": {},
-          "x-ms-client-name": "jsonSchema"
-        },
-        "etag": {
-          "type": "string",
-          "description": "A value representing the current state of the resource.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "name",
-        "json_schema"
-      ]
-    },
-    "SchemaFields": {
-      "type": "string",
-      "description": "Schema fields.",
-      "enum": [
-        "id",
-        "name",
-        "description",
-        "type",
-        "status",
-        "target",
-        "scope",
-        "tags",
-        "json_schema",
-        "etag"
-      ],
-      "x-ms-enum": {
-        "name": "SchemaFields",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "id",
-            "value": "id",
-            "description": "Id field."
-          },
-          {
-            "name": "name",
-            "value": "name",
-            "description": "Name field."
-          },
-          {
-            "name": "description",
-            "value": "description",
-            "description": "Description field."
-          },
-          {
-            "name": "type",
-            "value": "type",
-            "description": "Type field."
-          },
-          {
-            "name": "status",
-            "value": "status",
-            "description": "Status field."
-          },
-          {
-            "name": "target",
-            "value": "target",
-            "description": "Target field."
-          },
-          {
-            "name": "scope",
-            "value": "scope",
-            "description": "Scope field."
-          },
-          {
-            "name": "tags",
-            "value": "tags",
-            "description": "Tags field."
-          },
-          {
-            "name": "jsonSchema",
-            "value": "json_schema",
-            "description": "JSON schema field."
-          },
-          {
-            "name": "etag",
-            "value": "etag",
-            "description": "Etag field."
-          }
-        ]
-      }
-    },
-    "SchemaListResult": {
-      "type": "object",
-      "description": "The result of a schema list request.",
-      "properties": {
-        "items": {
-          "type": "array",
-          "description": "The collection value.",
-          "items": {
-            "$ref": "#/definitions/Schema"
-          }
-        },
-        "@nextLink": {
-          "type": "string",
-          "description": "The URI that can be used to request the next set of paged results."
-        }
-      }
-    },
-    "SchemaScope": {
-      "type": "object",
-      "description": "The scope of a schema resource.",
-      "properties": {
-        "key": {
-          "type": "string",
-          "description": "The key pattern for the schema scope."
-        },
-        "label": {
-          "type": "string",
-          "description": "The label pattern for the schema scope."
-        }
-      },
-      "required": [
-        "key"
-      ]
-    },
-    "SchemaStatus": {
-      "type": "string",
-      "description": "Schema status.",
-      "enum": [
-        "enabled",
-        "disabled"
-      ],
-      "x-ms-enum": {
-        "name": "SchemaStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "enabled",
-            "value": "enabled",
-            "description": "Enabled"
-          },
-          {
-            "name": "disabled",
-            "value": "disabled",
-            "description": "Disabled"
-          }
-        ]
-      }
-    },
-    "SchemaTarget": {
-      "type": "string",
-      "description": "Schema target type.",
-      "enum": [
-        "kv",
-        ""
-      ],
-      "x-ms-enum": {
-        "name": "SchemaTarget",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "kv",
-            "value": "kv",
-            "description": "Key-value target."
-          },
-          {
-            "name": "none",
-            "value": "",
-            "description": "No target."
-          }
-        ]
-      }
-    },
-    "SchemaType": {
-      "type": "string",
-      "description": "Schema type.",
-      "enum": [
-        "custom",
-        "builtIn"
-      ],
-      "x-ms-enum": {
-        "name": "SchemaType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "custom",
-            "value": "custom",
-            "description": "Custom user-defined schema."
-          },
-          {
-            "name": "builtIn",
-            "value": "builtIn",
-            "description": "Built-in system-provided schema."
-          }
-        ]
-      }
     },
     "Snapshot": {
       "type": "object",

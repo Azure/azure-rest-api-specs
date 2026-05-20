@@ -572,7 +572,7 @@ model Schema {
 
   @doc("The JSON Schema definition.")
   @encodedName("application/json", "json_schema")
-  jsonSchema: Record<unknown>;
+  jsonSchema: Record<string>;
 
   @doc("A value representing the current state of the resource.")
   @visibility(Lifecycle.Read)
