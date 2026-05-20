@@ -346,6 +346,8 @@ union DeploymentModelVersionUpgradeOption {
 /**
  * Scheduling priority for a VM managed compute deployment.
  */
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
 union ManagedComputeDeploymentPriority {
   string,
@@ -3272,6 +3274,8 @@ model SkuResource {
 /**
  * The object being used to update sku of a resource, in general used for PATCH operations.
  */
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
 model PatchResourceSku {
   /**
@@ -5684,6 +5688,8 @@ model RaiBlocklistItemsBulkDeleteRequest is Array<string>;
 /**
  * Properties of a Cognitive Services managed compute deployment.
  */
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
 model ManagedComputeDeploymentProperties {
   /**
@@ -5752,6 +5758,8 @@ model ManagedComputeDeploymentProperties {
 /**
  * Provisioning status details for a managed compute deployment.
  */
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
 model ManagedComputeDeploymentProvisioningDetails {
   /**
@@ -5769,6 +5777,8 @@ model ManagedComputeDeploymentProvisioningDetails {
  * Inference route paths for a managed compute deployment, relative to the account endpoint.
  * Populated when provisioningState is Succeeded.
  */
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
 model ManagedComputeDeploymentRoutes {
   /**
@@ -5790,6 +5800,8 @@ model ManagedComputeDeploymentRoutes {
 /**
  * Read-only backend projection details for a managed compute deployment.
  */
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
 model DeploymentBackendProperties {
   /**
@@ -5802,6 +5814,8 @@ model DeploymentBackendProperties {
 /**
  * Read-only VM managed compute backend projection details.
  */
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
 model VmManagedComputeBackendProperties {
   /**
@@ -5874,6 +5888,8 @@ model VmManagedComputeBackendProperties {
 /**
  * The list of managed compute deployments.
  */
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
 model ManagedComputeDeploymentListResult {
   /**

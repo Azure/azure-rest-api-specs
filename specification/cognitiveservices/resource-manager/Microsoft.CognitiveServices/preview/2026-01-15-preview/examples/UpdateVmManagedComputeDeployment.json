@@ -1,0 +1,70 @@
+{
+  "operationId": "ManagedComputeDeployments_Update",
+  "title": "UpdateVmManagedComputeDeployment",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroupName",
+    "accountName": "accountName",
+    "deploymentName": "myVmManagedComputeDeployment",
+    "api-version": "2026-01-15-preview",
+    "properties": {
+      "sku": {
+        "name": "VmManagedCompute",
+        "capacity": 2
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/managedComputeDeployments/myVmManagedComputeDeployment",
+        "name": "myVmManagedComputeDeployment",
+        "type": "Microsoft.CognitiveServices/accounts/managedComputeDeployments",
+        "sku": {
+          "name": "VmManagedCompute",
+          "capacity": 2
+        },
+        "priority": "High",
+        "backend": {
+          "vmManagedCompute": {
+            "singularityAccountName": "sg-managedcompute-eastus",
+            "singularityAccountResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/managedComputeResourceGroup/providers/Microsoft.Singularity/accounts/sg-managedcompute-eastus",
+            "templatedModelName": "myVmManagedComputeDeployment",
+            "templatedModelResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/managedComputeResourceGroup/providers/Microsoft.Singularity/accounts/sg-managedcompute-eastus/templatedModels/myVmManagedComputeDeployment",
+            "operationUri": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000001?api-version=2026-01-15-preview",
+            "endpointMode": "Managed",
+            "backendRegion": "eastus",
+            "publicIp": "20.50.1.2",
+            "hostFqdn": "myVmManagedComputeDeployment.eastus.inference.ml.azure.com",
+            "currentInstanceCount": 2,
+            "targetHostPool": "managedcompute-h100-pool"
+          }
+        },
+        "etag": "\"00000000-0000-0000-0000-000000000001\"",
+        "properties": {
+          "model": "azureml://registries/azureml-meta/models/Llama-3-8B-Instruct/versions/1",
+          "deploymentTemplate": "azureml://registries/azureml-meta/deploymenttemplates/Llama-3-8B-Instruct/versions/1",
+          "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/computes/myFoundryCompute",
+          "versionUpgradeOption": "OnceNewDefaultVersionAvailable",
+          "provisioningState": "Succeeded",
+          "provisioningDetails": {
+            "message": "Deployment updated successfully.",
+            "lastOperationTimestamp": "2026-03-15T13:00:00Z"
+          },
+          "routes": {
+            "chatCompletionsScoringPath": "/managedComputeDeployments/myVmManagedComputeDeployment/v1/chat/completions",
+            "swagger": "/managedComputeDeployments/myVmManagedComputeDeployment/swagger.json",
+            "messagesApiScoringPath": "/managedComputeDeployments/myVmManagedComputeDeployment/v1/messages"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000001?operationResultResponseType=Location&api-version=2026-01-15-preview",
+        "azure-asyncoperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000001?api-version=2026-01-15-preview",
+        "retry-after": "30"
+      }
+    }
+  }
+}
