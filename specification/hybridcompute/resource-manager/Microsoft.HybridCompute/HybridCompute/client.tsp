@@ -14,6 +14,12 @@ using Microsoft.HybridCompute;
 
 @@alternateType(Azure.ResourceManager.CommonTypes.Identity.type, string, "go");
 
+@@alternateType(Disk.id, Azure.Core.armResourceIdentifier, "csharp");
+
+@@alternateType(NetworkInterface.id, Azure.Core.armResourceIdentifier, "csharp");
+
+@@clientName(FirmwareProfile.type, "FirmwareProfileType", "csharp");
+
 /**
  * The network access policy to determine if Azure Arc agents can use public Azure Arc service endpoints. Defaults to disabled (access to Azure Arc services only via private link).
  */
