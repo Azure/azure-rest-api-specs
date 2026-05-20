@@ -61,6 +61,9 @@
       "name": "Device Capabilities"
     },
     {
+      "name": "Device Authentication Profiles"
+    },
+    {
       "name": "Device States"
     },
     {
@@ -721,6 +724,326 @@
         "x-ms-examples": {
           "Update fields on the update device state": {
             "$ref": "./examples/DeviceAttributes_Update.json"
+          }
+        }
+      }
+    },
+    "/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles": {
+      "get": {
+        "operationId": "DeviceAuthenticationProfiles_List",
+        "tags": [
+          "Device Authentication Profiles"
+        ],
+        "description": "List authentication profiles for a device.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDeviceAuthenticationProfile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List authentication profiles for a device": {
+            "$ref": "./examples/DeviceAuthenticationProfiles_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}": {
+      "get": {
+        "operationId": "DeviceAuthenticationProfiles_Get",
+        "tags": [
+          "Device Authentication Profiles"
+        ],
+        "description": "Get a device authentication profile.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authenticationProfileName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceAuthenticationProfile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a device authentication profile": {
+            "$ref": "./examples/DeviceAuthenticationProfiles_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DeviceAuthenticationProfiles_CreateOrReplace",
+        "tags": [
+          "Device Authentication Profiles"
+        ],
+        "description": "Create or replace a device authentication profile.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authenticationProfileName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceAuthenticationProfile"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceAuthenticationProfile"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/DeviceAuthenticationProfile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or replace a device authentication profile": {
+            "$ref": "./examples/DeviceAuthenticationProfiles_CreateOrReplace.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "DeviceAuthenticationProfiles_Update",
+        "tags": [
+          "Device Authentication Profiles"
+        ],
+        "description": "Update a device authentication profile.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authenticationProfileName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceAuthenticationProfileCreateOrUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceAuthenticationProfile"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/DeviceAuthenticationProfile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a device authentication profile": {
+            "$ref": "./examples/DeviceAuthenticationProfiles_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeviceAuthenticationProfiles_Delete",
+        "tags": [
+          "Device Authentication Profiles"
+        ],
+        "description": "Delete a device authentication profile.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authenticationProfileName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a device authentication profile": {
+            "$ref": "./examples/DeviceAuthenticationProfiles_Delete.json"
           }
         }
       }
@@ -1935,6 +2258,64 @@
         }
       }
     },
+    "AuthenticationProfileProperties": {
+      "type": "object",
+      "description": "Authentication information for the device.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/AuthenticationType",
+          "description": "The authentication type."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "AuthenticationProfilePropertiesCreateOrUpdate": {
+      "type": "object",
+      "description": "Authentication information for the device.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/AuthenticationType",
+          "description": "The authentication type."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "AuthenticationType": {
+      "type": "string",
+      "description": "The authentication type for IoT Hub.",
+      "enum": [
+        "SymmetricKey",
+        "CertificateAuthority",
+        "SelfSignedX509Certificate"
+      ],
+      "x-ms-enum": {
+        "name": "AuthenticationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SymmetricKey",
+            "value": "SymmetricKey",
+            "description": "Symmetric key authentication."
+          },
+          {
+            "name": "CertificateAuthority",
+            "value": "CertificateAuthority",
+            "description": "Certificate authority authentication."
+          },
+          {
+            "name": "SelfSignedX509Certificate",
+            "value": "SelfSignedX509Certificate",
+            "description": "Self-signed X.509 certificate authentication."
+          }
+        ]
+      }
+    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
@@ -2110,7 +2491,8 @@
       "type": "string",
       "description": "The type of a device capability.",
       "enum": [
-        "IoTHub"
+        "IoTHub",
+        "Update"
       ],
       "x-ms-enum": {
         "name": "CapabilityType",
@@ -2120,9 +2502,49 @@
             "name": "IoTHub",
             "value": "IoTHub",
             "description": "IoT Hub connection."
+          },
+          {
+            "name": "Update",
+            "value": "Update",
+            "description": "Device Update connection."
           }
         ]
       }
+    },
+    "CertificateAuthorityAuthenticationProfileProperties": {
+      "type": "object",
+      "description": "Authentication information for the device.",
+      "properties": {
+        "certificateAuthority": {
+          "$ref": "#/definitions/CertificateAuthorityCredentials",
+          "description": "Certificate authority credentials. Required when type is CertificateAuthority."
+        }
+      },
+      "required": [
+        "certificateAuthority"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthenticationProfileProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "CertificateAuthority"
+    },
+    "CertificateAuthorityAuthenticationProfilePropertiesCreateOrUpdate": {
+      "type": "object",
+      "description": "Authentication information for the device.",
+      "properties": {
+        "certificateAuthority": {
+          "$ref": "#/definitions/CertificateAuthorityCredentialsCreateOrUpdate",
+          "description": "Certificate authority credentials. Required when type is CertificateAuthority."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthenticationProfilePropertiesCreateOrUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "CertificateAuthority"
     },
     "CertificateAuthorityCredentials": {
       "type": "object",
@@ -2390,6 +2812,74 @@
             "description": "Reported by a customer."
           }
         ]
+      }
+    },
+    "DeviceAuthenticationProfile": {
+      "type": "object",
+      "description": "A device authentication resource.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "uuid": {
+          "type": "string",
+          "description": "The UUID of this capability resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "etag": {
+          "type": "string",
+          "description": "The entity tag for the resource.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/AuthenticationProfileProperties",
+          "description": "Authentication information for the device."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "DeviceAuthenticationProfileCreateOrUpdate": {
+      "type": "object",
+      "description": "A device authentication resource.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/AuthenticationProfilePropertiesCreateOrUpdate",
+          "description": "Authentication information for the device."
+        }
       }
     },
     "DeviceCapability": {
@@ -3448,90 +3938,13 @@
         "installableUpdates"
       ]
     },
-    "IotHubAuthentication": {
-      "type": "object",
-      "description": "Operational authentication information for device provisioning.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/IotHubAuthenticationType",
-          "description": "The authentication type."
-        },
-        "symmetricKey": {
-          "$ref": "#/definitions/SymmetricKeyCredentials",
-          "description": "Symmetric key details. Required when type is SymmetricKey."
-        },
-        "certificateAuthority": {
-          "$ref": "#/definitions/CertificateAuthorityCredentials",
-          "description": "Certificate authority credentials. Required when type is CertificateAuthority."
-        },
-        "selfSignedThumbprints": {
-          "$ref": "#/definitions/SelfSignedThumbprints",
-          "description": "Self-signed X.509 thumbprints. Required when type is SelfSignedX509Certificate."
-        }
-      },
-      "required": [
-        "type"
-      ]
-    },
-    "IotHubAuthenticationCreateOrUpdate": {
-      "type": "object",
-      "description": "Operational authentication information for device provisioning.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/IotHubAuthenticationType",
-          "description": "The authentication type."
-        },
-        "symmetricKey": {
-          "$ref": "#/definitions/SymmetricKeyCredentialsCreateOrUpdate",
-          "description": "Symmetric key details. Required when type is SymmetricKey."
-        },
-        "certificateAuthority": {
-          "$ref": "#/definitions/CertificateAuthorityCredentialsCreateOrUpdate",
-          "description": "Certificate authority credentials. Required when type is CertificateAuthority."
-        },
-        "selfSignedThumbprints": {
-          "$ref": "#/definitions/SelfSignedThumbprintsCreateOrUpdate",
-          "description": "Self-signed X.509 thumbprints. Required when type is SelfSignedX509Certificate."
-        }
-      }
-    },
-    "IotHubAuthenticationType": {
-      "type": "string",
-      "description": "The authentication type for IoT Hub.",
-      "enum": [
-        "SymmetricKey",
-        "CertificateAuthority",
-        "SelfSignedX509Certificate"
-      ],
-      "x-ms-enum": {
-        "name": "IotHubAuthenticationType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "SymmetricKey",
-            "value": "SymmetricKey",
-            "description": "Symmetric key authentication."
-          },
-          {
-            "name": "CertificateAuthority",
-            "value": "CertificateAuthority",
-            "description": "Certificate authority authentication."
-          },
-          {
-            "name": "SelfSignedX509Certificate",
-            "value": "SelfSignedX509Certificate",
-            "description": "Self-signed X.509 certificate authentication."
-          }
-        ]
-      }
-    },
     "IotHubDeviceCapabilityProperties": {
       "type": "object",
       "description": "The device capability properties for an IoTHub capability",
       "properties": {
-        "authentication": {
-          "$ref": "#/definitions/IotHubAuthentication",
-          "description": "IoT Hub's authentication information."
+        "authenticationProfileResourceId": {
+          "type": "string",
+          "description": "IoT Hub's authentication profile."
         },
         "endpoint": {
           "$ref": "#/definitions/IotHubEndpoint",
@@ -3539,7 +3952,7 @@
         }
       },
       "required": [
-        "authentication",
+        "authenticationProfileResourceId",
         "endpoint"
       ],
       "allOf": [
@@ -3553,9 +3966,9 @@
       "type": "object",
       "description": "The device capability properties for an IoTHub capability",
       "properties": {
-        "authentication": {
-          "$ref": "#/definitions/IotHubAuthenticationCreateOrUpdate",
-          "description": "IoT Hub's authentication information."
+        "authenticationProfileResourceId": {
+          "type": "string",
+          "description": "IoT Hub's authentication profile."
         },
         "endpoint": {
           "$ref": "#/definitions/IotHubEndpointCreateOrUpdate",
@@ -3778,6 +4191,27 @@
         "value"
       ]
     },
+    "PagedDeviceAuthenticationProfile": {
+      "type": "object",
+      "description": "Paged collection of DeviceAuthenticationProfile items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DeviceAuthenticationProfile items on this page",
+          "items": {
+            "$ref": "#/definitions/DeviceAuthenticationProfile"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "PagedDeviceCapability": {
       "type": "object",
       "description": "Paged collection of DeviceCapability items",
@@ -3854,7 +4288,7 @@
           "description": "The service endpoint identifier as returned by the GetNamespace API."
         },
         "authentication": {
-          "$ref": "#/definitions/IotHubAuthentication",
+          "$ref": "#/definitions/AuthenticationProfileProperties",
           "description": "Operational authentication configuration."
         },
         "deviceTwin": {
@@ -3895,24 +4329,6 @@
         "externalDeviceId",
         "messagingEndpointName"
       ]
-    },
-    "ProvisioningError": {
-      "type": "object",
-      "description": "Error information for provisioning failures.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message."
-        },
-        "target": {
-          "type": "string",
-          "description": "The error target."
-        }
-      }
     },
     "QueryDevicesRequest": {
       "type": "object",
@@ -4043,17 +4459,91 @@
         }
       }
     },
+    "SelfSignedX509CertificateAuthenticationProfileProperties": {
+      "type": "object",
+      "description": "Authentication information for the device.",
+      "properties": {
+        "selfSignedThumbprints": {
+          "$ref": "#/definitions/SelfSignedThumbprints",
+          "description": "Self-signed X.509 thumbprints. Required when type is SelfSignedX509Certificate."
+        }
+      },
+      "required": [
+        "selfSignedThumbprints"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthenticationProfileProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "SelfSignedX509Certificate"
+    },
+    "SelfSignedX509CertificateAuthenticationProfilePropertiesCreateOrUpdate": {
+      "type": "object",
+      "description": "Authentication information for the device.",
+      "properties": {
+        "selfSignedThumbprints": {
+          "$ref": "#/definitions/SelfSignedThumbprintsCreateOrUpdate",
+          "description": "Self-signed X.509 thumbprints. Required when type is SelfSignedX509Certificate."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthenticationProfilePropertiesCreateOrUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "SelfSignedX509Certificate"
+    },
+    "SymmetricKeyAuthenticationProfileProperties": {
+      "type": "object",
+      "description": "Authentication information for the device.",
+      "properties": {
+        "symmetricKey": {
+          "$ref": "#/definitions/SymmetricKeyCredentials",
+          "description": "Symmetric key details. Required when type is SymmetricKey."
+        }
+      },
+      "required": [
+        "symmetricKey"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthenticationProfileProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "SymmetricKey"
+    },
+    "SymmetricKeyAuthenticationProfilePropertiesCreateOrUpdate": {
+      "type": "object",
+      "description": "Authentication information for the device.",
+      "properties": {
+        "symmetricKey": {
+          "$ref": "#/definitions/SymmetricKeyCredentialsCreateOrUpdate",
+          "description": "Symmetric key details. Required when type is SymmetricKey."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthenticationProfilePropertiesCreateOrUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "SymmetricKey"
+    },
     "SymmetricKeyCredentials": {
       "type": "object",
       "description": "Symmetric key authentication details.",
       "properties": {
         "primaryKey": {
           "type": "string",
-          "description": "The primary symmetric key."
+          "format": "password",
+          "description": "The primary symmetric key.",
+          "x-ms-secret": true
         },
         "secondaryKey": {
           "type": "string",
-          "description": "The secondary symmetric key."
+          "format": "password",
+          "description": "The secondary symmetric key.",
+          "x-ms-secret": true
         }
       },
       "required": [
@@ -4067,11 +4557,15 @@
       "properties": {
         "primaryKey": {
           "type": "string",
-          "description": "The primary symmetric key."
+          "format": "password",
+          "description": "The primary symmetric key.",
+          "x-ms-secret": true
         },
         "secondaryKey": {
           "type": "string",
-          "description": "The secondary symmetric key."
+          "format": "password",
+          "description": "The secondary symmetric key.",
+          "x-ms-secret": true
         }
       }
     },
@@ -4205,6 +4699,41 @@
         }
       },
       "additionalProperties": {}
+    },
+    "UpdateDeviceCapabilityProperties": {
+      "type": "object",
+      "description": "The device capabilities properties for an update capability.",
+      "properties": {
+        "authenticationProfileResourceId": {
+          "type": "string",
+          "description": "Update's authentication profile."
+        }
+      },
+      "required": [
+        "authenticationProfileResourceId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeviceCapabilityProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Update"
+    },
+    "UpdateDeviceCapabilityPropertiesCreateOrUpdate": {
+      "type": "object",
+      "description": "The device capabilities properties for an update capability.",
+      "properties": {
+        "authenticationProfileResourceId": {
+          "type": "string",
+          "description": "Update's authentication profile."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeviceCapabilityPropertiesCreateOrUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "Update"
     },
     "UpdateId": {
       "type": "object",

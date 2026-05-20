@@ -61,59 +61,6 @@ union DeviceCapabilityActivationState {
   Disabled: "Disabled",
 }
 
-/** The authentication type for IoT Hub. */
-union IotHubAuthenticationType {
-  string,
-
-  /** Symmetric key authentication. */
-  SymmetricKey: "SymmetricKey",
-
-  /** Certificate authority authentication. */
-  CertificateAuthority: "CertificateAuthority",
-
-  /** Self-signed X.509 certificate authentication. */
-  SelfSignedX509Certificate: "SelfSignedX509Certificate",
-}
-
-/** Symmetric key authentication details. */
-model SymmetricKeyCredentials {
-  /** The primary symmetric key. */
-  primaryKey: string;
-
-  /** The secondary symmetric key. */
-  secondaryKey: string;
-}
-
-/** Self-signed X.509 certificate thumbprints for device authentication. */
-model SelfSignedThumbprints {
-  /** Primary certificate thumbprint. */
-  primaryThumbprint: string;
-
-  /** Secondary certificate thumbprint. */
-  secondaryThumbprint: string;
-}
-
-/** Certificate authority credentials for device provisioning. */
-model CertificateAuthorityCredentials {
-  /** ADR certificate policy resource ID. */
-  adrCertificatePolicyResourceId: string;
-}
-
-/** Operational authentication information for device provisioning. */
-model IotHubAuthentication {
-  /** The authentication type. */
-  type: IotHubAuthenticationType;
-
-  /** Symmetric key details. Required when type is SymmetricKey. */
-  symmetricKey?: SymmetricKeyCredentials;
-
-  /** Certificate authority credentials. Required when type is CertificateAuthority. */
-  certificateAuthority?: CertificateAuthorityCredentials;
-
-  /** Self-signed X.509 thumbprints. Required when type is SelfSignedX509Certificate. */
-  selfSignedThumbprints?: SelfSignedThumbprints;
-}
-
 /** IoT Hub endpoint target for device provisioning. */
 model IotHubEndpoint {
   /** Display name of the target endpoint. */
@@ -128,11 +75,20 @@ model IotHubDeviceCapabilityProperties extends DeviceCapabilityProperties {
   /** Discriminator for IoT Hub capability. */
   capabilityType: CapabilityType.IoTHub;
 
-  /** IoT Hub's authentication information. */
-  authentication: IotHubAuthentication;
+  /** IoT Hub's authentication profile. */
+  authenticationProfileResourceId: string;
 
   /** The IoT Hub's endpoint. */
   endpoint: IotHubEndpoint;
+}
+
+/** The device capabilities properties for an update capability. */
+model UpdateDeviceCapabilityProperties extends DeviceCapabilityProperties {
+  /** Discriminator for Update capability. */
+  capabilityType: CapabilityType.Update;
+
+  /** Update's authentication profile. */
+  authenticationProfileResourceId: string;
 }
 
 /** The provisioning state of a device capability. */
@@ -161,18 +117,9 @@ union CapabilityType {
 
   /** IoT Hub connection. */
   IoTHub: "IoTHub",
-}
 
-/** Error information for provisioning failures. */
-model ProvisioningError {
-  /** The error code. */
-  code?: string;
-
-  /** The error message. */
-  message?: string;
-
-  /** The error target. */
-  target?: string;
+  /** Device Update connection. */
+  Update: "Update",
 }
 
 // ──────────────────────────────────────────────

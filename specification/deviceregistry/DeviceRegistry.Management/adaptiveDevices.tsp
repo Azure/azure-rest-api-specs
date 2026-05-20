@@ -57,5 +57,5 @@ interface NamespaceAdaptiveDevices {
     NamespaceAdaptiveDeviceProperties
   >;
   delete is ArmResourceDeleteWithoutOkAsync<NamespaceAdaptiveDevice>;
-  listByResourceGroup is ArmResourceListByParent<NamespaceAdaptiveDevice>;
+  listByNamespace is ArmResourceListByParent<NamespaceAdaptiveDevice>;
 }

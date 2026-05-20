@@ -6,6 +6,7 @@ import "@azure-tools/typespec-azure-core";
 import "./models.tsp";
 import "../common/deviceTypes.tsp";
 import "./deviceCapabilities.tsp";
+import "./deviceAuthenticationProfiles.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -124,7 +125,7 @@ model ProvisionDeviceRequest {
   targetEndpoint: IotHubEndpoint;
 
   /** Operational authentication configuration. */
-  authentication: IotHubAuthentication;
+  authentication: AuthenticationProfileProperties;
 
   /** Initial device twin configuration to apply during provisioning. */
   deviceTwin?: DeviceTwin;
