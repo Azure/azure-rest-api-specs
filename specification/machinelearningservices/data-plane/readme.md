@@ -57,15 +57,6 @@ input-file:
   - DatasetDataplane/stable/1.5.0/dataset-dataplane.json
 ```
 
-### Tag: package-model-dataplane-2026-05-01
-
-These settings apply only when `--tag=package-model-dataplane-2026-05-01` is specified on the command line.
-
-```yaml $(tag) == 'package-model-dataplane-2026-05-01'
-input-file:
-  - ModelDataplane/stable/2026-05-01/model-dataplane.json
-```
-
 ### Tag: package-model-dataplane-1.0.0
 
 These settings apply only when `--tag=package-model-dataplane-1.0.0` is specified on the command line.
