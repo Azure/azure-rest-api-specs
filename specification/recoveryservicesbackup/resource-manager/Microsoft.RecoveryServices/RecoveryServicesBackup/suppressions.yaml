@@ -1,13 +1,3 @@
-- tool: ProvisioningStateMustBeReadOnly
-  path: ./preview/2026-03-31-preview/bms.json
-  reason: |
-    Cross-tenant restore (CTR) provisioningState uses a named union (CrossTenantProvisioningState)
-    per ARM guidance. The emitter writes `readOnly: true` as a sibling of `$ref` on the property,
-    but OpenAPI 2.0 JSON Reference resolution discards siblings of `$ref`, so the rule cannot
-    detect readOnly on the resolved schema. azurefleet emits the identical shape and passes only
-    because its existing resources predate the rule and are grandfathered into LintDiff's baseline;
-    this PR introduces net-new resources so the rule fires. Affects 5 response refs at L590, L651,
-    L657 (CrossTenantVaultMapping) and L1920, L1926 (VaultCredentialCertificateResponse).
 - tool: TypeSpecRequirement
   path: ./preview/2021-02-01-preview/*.json
   reason: Brownfield service not ready to migrate
