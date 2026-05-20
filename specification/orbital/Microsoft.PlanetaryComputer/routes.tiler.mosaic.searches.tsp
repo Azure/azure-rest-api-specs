@@ -31,7 +31,6 @@ interface MosaicSearchesTileSetList {
   get is Azure.Core.Foundations.Operation<
     {
       ...SubDatasetQueryParameters;
-      ...CollectionQueryParameter;
 
       /**
        * Search Id (pgSTAC Search Hash)
@@ -62,7 +61,6 @@ interface MosaicSearchesTileSetMetadata {
   get is Azure.Core.Foundations.Operation<
     {
       ...SubDatasetQueryParameters;
-      ...CollectionQueryParameter;
 
       /**
        * Search Id (pgSTAC Search Hash)
@@ -460,6 +458,7 @@ interface MosaicSearchesWmtsTileMatrixSets {
       tileScale?: int32 = 1;
 
       ...ZoomQueryParameters;
+      ...AssetQueryParameters;
     },
     WmtsCapabilitiesXmlResponse
   >;
@@ -547,8 +546,9 @@ interface MosaicSearchesBbox {
       /**
        * Image output size limit if width and height limits are not set.
        */
+      @maxValue(2048)
       @query("max_size")
-      maxSize?: int32 = 1024;
+      maxSize?: int32 = 2048;
 
       ...DimensionsQueryParameters;
       ...MosaicCropQueryParameters;
@@ -620,8 +620,9 @@ interface MosaicSearchesBboxWithDimensions {
       /**
        * Image output size limit if width and height limits are not set.
        */
+      @maxValue(2048)
       @query("max_size")
-      maxSize?: int32 = 1024;
+      maxSize?: int32 = 2048;
 
       ...MosaicCropQueryParameters;
       ...MiscTileQueryParameters;
@@ -656,7 +657,6 @@ interface MosaicSearchesAssetsForBbox {
 
       ...MosaicSearchQueryParameters;
       ...SubDatasetQueryParameters;
-      ...CollectionQueryParameter;
       ...BoundingBoxPathParameters;
 
       /**
@@ -707,8 +707,9 @@ interface MosaicSearchesFeatureGeoJson {
       /**
        * Image output size limit if width and height limits are not set.
        */
+      @maxValue(2048)
       @query("max_size")
-      maxSize?: int32 = 1024;
+      maxSize?: int32 = 2048;
 
       ...DimensionsQueryParameters;
       ...MosaicCropQueryParameters;
@@ -773,8 +774,9 @@ interface MosaicSearchesFeatureGeoJsonFormat {
       /**
        * Image output size limit if width and height limits are not set.
        */
+      @maxValue(2048)
       @query("max_size")
-      maxSize?: int32 = 1024;
+      maxSize?: int32 = 2048;
 
       ...DimensionsQueryParameters;
       ...MosaicCropQueryParameters;
@@ -845,8 +847,9 @@ interface MosaicSearchesFeatureGeoJsonWidthByHeight {
       /**
        * Image output size limit if width and height limits are not set.
        */
+      @maxValue(2048)
       @query("max_size")
-      maxSize?: int32 = 1024;
+      maxSize?: int32 = 2048;
 
       ...MosaicCropQueryParameters;
       ...MiscTileQueryParameters;
@@ -908,6 +911,7 @@ interface MosaicSearchesWmts {
       tileScale?: int32 = 1;
 
       ...ZoomQueryParameters;
+      ...AssetQueryParameters;
     },
     WmtsCapabilitiesXmlResponse
   >;
@@ -1227,7 +1231,6 @@ interface MosaicSearchesAssetsForTiles {
 
       ...MosaicSearchQueryParameters;
       ...SubDatasetQueryParameters;
-      ...CollectionQueryParameter;
       ...ZxyPathParameters;
 
       /** Identifier selecting one of the TileMatrixSetId supported (default: 'WebMercatorQuad') */
@@ -1256,7 +1259,6 @@ interface MosaicSearchesPoint {
     {
       ...MosaicSearchQueryParameters;
       ...SubDatasetQueryParameters;
-      ...CollectionQueryParameter;
 
       /**
        * Search Id (pgSTAC Search Hash)
@@ -1310,7 +1312,6 @@ interface MosaicSearchesPointWithAssets {
     {
       ...MosaicSearchQueryParameters;
       ...SubDatasetQueryParameters;
-      ...CollectionQueryParameter;
 
       /**
        * Search Id (pgSTAC Search Hash)

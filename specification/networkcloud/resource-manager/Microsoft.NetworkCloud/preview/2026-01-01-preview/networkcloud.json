@@ -18225,18 +18225,18 @@
       "type": "object",
       "description": "StorageApplianceProperties represents the properties of the storage appliance.",
       "properties": {
-        "rackId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The resource ID of the rack where this storage appliance resides.",
+        "administratorCredentials": {
+          "$ref": "#/definitions/AdministrativeCredentials",
+          "description": "The credentials of the administrative interface on this storage appliance.",
           "x-ms-mutability": [
             "read",
             "create"
           ]
         },
-        "storageApplianceSkuId": {
+        "rackId": {
           "type": "string",
-          "description": "The SKU for the storage appliance.",
+          "format": "arm-id",
+          "description": "The resource ID of the rack where this storage appliance resides.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -18257,9 +18257,9 @@
           "type": "string",
           "description": "The serial number for the storage appliance."
         },
-        "administratorCredentials": {
-          "$ref": "#/definitions/AdministrativeCredentials",
-          "description": "The credentials of the administrative interface on this storage appliance.",
+        "storageApplianceSkuId": {
+          "type": "string",
+          "description": "The SKU for the storage appliance.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -18355,11 +18355,11 @@
         }
       },
       "required": [
+        "administratorCredentials",
         "rackId",
-        "storageApplianceSkuId",
         "rackSlot",
         "serialNumber",
-        "administratorCredentials"
+        "storageApplianceSkuId"
       ]
     },
     "StorageApplianceProvisioningState": {
