@@ -118,7 +118,7 @@ union UpgradeChannel {
       For information on the behavior of update run for security patch upgrade,
       see https://learn.microsoft.com/en-us/azure/kubernetes-fleet/update-orchestration?tabs=azure-portal
     """)
-  @added(Versions.v2026_06_01_preview)
+  @added(Versions.v2026_06_02_preview)
   SecurityPatch: "SecurityPatch",
 }
 
@@ -228,6 +228,6 @@ model GenerateResponse {
 union GenerateUpdateRunResponse {
   GenerateResponse,
 
-  @added(Versions.v2026_06_01_preview)
+  @added(Versions.v2026_06_02_preview)
   ArmNoContentResponse,
 }
