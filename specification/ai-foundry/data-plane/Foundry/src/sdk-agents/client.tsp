@@ -147,6 +147,28 @@ using Azure.AI.Projects;
 // Rename listSessionFiles to getSessionFiles for better accuracy, since it's a GET operation and returns the list of files in the response.
 @@clientName(AgentSessionFiles.listSessionFiles, "getSessionFiles");
 
+@@clientName(AgentOptimizationJobs.create, "createOptimizationJob", "java");
+@@clientName(AgentOptimizationJobs.get, "getOptimizationJob", "java");
+@@clientName(AgentOptimizationJobs.list, "listOptimizationJobs", "java");
+@@clientName(AgentOptimizationJobs.cancel, "cancelOptimizationJob", "java");
+@@clientName(AgentOptimizationJobs.delete, "deleteOptimizationJob", "java");
+@@clientName(AgentOptimizationJobs.listCandidates,
+  "listOptimizationCandidates",
+  "java"
+);
+@@clientName(AgentOptimizationJobs.getCandidate,
+  "getOptimizationCandidate",
+  "java"
+);
+@@clientName(AgentOptimizationJobs.getCandidateConfig,
+  "getOptimizationCandidateConfig",
+  "java"
+);
+@@clientName(AgentOptimizationJobs.getCandidateResults,
+  "getOptimizationCandidateResults",
+  "java"
+);
+
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
 // --------------------------------------------------------------------------------
@@ -155,6 +177,7 @@ using Azure.AI.Projects;
 @@access(Agents.updateAgent, Access.internal);
 @@access(Agents.createAgentFromManifest, Access.internal);
 @@access(Agents.updateAgentFromManifest, Access.internal);
+@@access(Agents.createAgentFromCode, Access.internal);
 
 // making methods private to add a public shim using the OpenAI types.
 @@access(MemoryStores.searchMemories, Access.internal);
@@ -515,3 +538,17 @@ union WebSearchToolSearchContextSizeExpandable {
 // of our own, to prevent confusion.
 @@clientName(Conversations.listConversations, "listAgentConversations", "java");
 @@clientLocation(Conversations.listConversations, Agents);
+
+// --------------------------------------------------------------------------------
+// AgentOptimizationJobs: relocate operations onto the Agents sub-client
+// --------------------------------------------------------------------------------
+
+@@clientLocation(AgentOptimizationJobs.create, Agents);
+@@clientLocation(AgentOptimizationJobs.get, Agents);
+@@clientLocation(AgentOptimizationJobs.list, Agents);
+@@clientLocation(AgentOptimizationJobs.cancel, Agents);
+@@clientLocation(AgentOptimizationJobs.delete, Agents);
+@@clientLocation(AgentOptimizationJobs.listCandidates, Agents);
+@@clientLocation(AgentOptimizationJobs.getCandidate, Agents);
+@@clientLocation(AgentOptimizationJobs.getCandidateConfig, Agents);
+@@clientLocation(AgentOptimizationJobs.getCandidateResults, Agents);

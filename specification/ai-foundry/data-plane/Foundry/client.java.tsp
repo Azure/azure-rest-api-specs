@@ -16,6 +16,7 @@ import "./src/schedules/routes.tsp";
 import "./src/routines/routes.tsp";
 import "./src/skills/routes.tsp";
 import "./src/data_generation_jobs/routes.tsp";
+import "./src/evaluation-suites/routes.tsp";
 
 using Azure.ClientGenerator.Core;
 namespace Azure.AI.Projects;
