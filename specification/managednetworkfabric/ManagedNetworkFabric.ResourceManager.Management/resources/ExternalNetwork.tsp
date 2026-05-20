@@ -12,8 +12,7 @@ namespace Microsoft.ManagedNetworkFabric;
 @doc("Defines the External Network resource.")
 @parentResource(L3IsolationDomain)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(ExternalNetworkProperties)
-model ExternalNetwork extends Azure.ResourceManager.Foundations.ProxyResource {
+model ExternalNetwork is Azure.ResourceManager.ProxyResource<ExternalNetworkProperties> {
   @doc("Name of the External Network.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -21,10 +20,6 @@ model ExternalNetwork extends Azure.ResourceManager.Foundations.ProxyResource {
   @segment("externalNetworks")
   @visibility(Lifecycle.Read)
   name: string;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
-  @doc("External Network Properties")
-  properties: ExternalNetworkProperties;
 }
 
 @armResourceOperations

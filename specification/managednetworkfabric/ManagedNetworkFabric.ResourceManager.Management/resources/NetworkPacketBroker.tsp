@@ -9,10 +9,8 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The NetworkPacketBroker resource definition.")
-@Azure.ResourceManager.Private.armResourceInternal(NetworkPacketBrokerProperties)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model NetworkPacketBroker
-  extends Azure.ResourceManager.Foundations.TrackedResource {
+model NetworkPacketBroker is Azure.ResourceManager.TrackedResource<NetworkPacketBrokerProperties> {
   @doc("Name of the Network Packet Broker.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -20,10 +18,6 @@ model NetworkPacketBroker
   @segment("networkPacketBrokers")
   @visibility(Lifecycle.Read)
   name: string;
-
-  @doc("The NetworkPacketBroker properties")
-  properties: NetworkPacketBrokerProperties;
-
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
   @added(Versions.v2025_07_15)
   @doc("The managed service identities assigned to this resource.")

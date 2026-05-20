@@ -10,10 +10,8 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The L2 Isolation Domain resource definition.")
-@Azure.ResourceManager.Private.armResourceInternal(L2IsolationDomainProperties)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model L2IsolationDomain
-  extends Azure.ResourceManager.Foundations.TrackedResource {
+model L2IsolationDomain is Azure.ResourceManager.TrackedResource<L2IsolationDomainProperties> {
   @doc("Name of the L2 Isolation Domain.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -21,11 +19,6 @@ model L2IsolationDomain
   @segment("l2IsolationDomains")
   @visibility(Lifecycle.Read)
   name: string;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
-  @doc("The L2IsolationDomain properties")
-  properties: L2IsolationDomainProperties;
-
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
   @added(Versions.v2025_07_15)
   @doc("The managed service identities assigned to this resource.")

@@ -10,9 +10,8 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The Network Fabric resource definition.")
-@Azure.ResourceManager.Private.armResourceInternal(NetworkFabricProperties)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model NetworkFabric extends Azure.ResourceManager.Foundations.TrackedResource {
+model NetworkFabric is Azure.ResourceManager.TrackedResource<NetworkFabricProperties> {
   @doc("Name of the Network Fabric.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -20,18 +19,6 @@ model NetworkFabric extends Azure.ResourceManager.Foundations.TrackedResource {
   @segment("networkFabrics")
   @visibility(Lifecycle.Read)
   name: string;
-
-  /** The NetworkFabric Properties */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
-  @removed(Versions.v2025_07_15)
-  @renamedFrom(Versions.v2025_07_15, "properties")
-  propertiesDeprecated: NetworkFabricProperties;
-
-  /** The NetworkFabric Properties */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
-  @added(Versions.v2025_07_15)
-  properties: NetworkFabricProperties;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
   @added(Versions.v2024_06_15_preview)

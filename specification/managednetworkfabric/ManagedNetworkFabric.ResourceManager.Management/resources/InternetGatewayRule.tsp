@@ -10,10 +10,8 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The Internet Gateway Rule resource definition.")
-@Azure.ResourceManager.Private.armResourceInternal(InternetGatewayRuleProperties)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model InternetGatewayRule
-  extends Azure.ResourceManager.Foundations.TrackedResource {
+model InternetGatewayRule is Azure.ResourceManager.TrackedResource<InternetGatewayRuleProperties> {
   @doc("Name of the Internet Gateway rule.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -21,9 +19,6 @@ model InternetGatewayRule
   @segment("internetGatewayRules")
   @visibility(Lifecycle.Read)
   name: string;
-
-  @doc("The Internet Gateway Rule properties")
-  properties: InternetGatewayRuleProperties;
 }
 
 @armResourceOperations

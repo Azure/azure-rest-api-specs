@@ -10,9 +10,8 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The RoutePolicy resource definition.")
-@Azure.ResourceManager.Private.armResourceInternal(RoutePolicyProperties)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model RoutePolicy extends Azure.ResourceManager.Foundations.TrackedResource {
+model RoutePolicy is Azure.ResourceManager.TrackedResource<RoutePolicyProperties> {
   @doc("Name of the Route Policy.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -20,9 +19,6 @@ model RoutePolicy extends Azure.ResourceManager.Foundations.TrackedResource {
   @segment("routePolicies")
   @visibility(Lifecycle.Read)
   name: string;
-
-  @doc("The RoutePolicy properties")
-  properties: RoutePolicyProperties;
 }
 
 @armResourceOperations

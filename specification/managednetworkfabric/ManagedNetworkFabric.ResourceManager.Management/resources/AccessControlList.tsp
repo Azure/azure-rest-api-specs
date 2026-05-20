@@ -10,10 +10,8 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The Access Control List resource definition.")
-@Azure.ResourceManager.Private.armResourceInternal(AccessControlListProperties)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model AccessControlList
-  extends Azure.ResourceManager.Foundations.TrackedResource {
+model AccessControlList is Azure.ResourceManager.TrackedResource<AccessControlListProperties> {
   @doc("Name of the Access Control List.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -21,9 +19,6 @@ model AccessControlList
   @segment("accessControlLists")
   @visibility(Lifecycle.Read)
   name: string;
-
-  @doc("The Access ControlList properties.")
-  properties: AccessControlListProperties;
 }
 
 @armResourceOperations

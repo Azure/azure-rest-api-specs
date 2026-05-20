@@ -10,9 +10,8 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The Network Device resource definition.")
-@Azure.ResourceManager.Private.armResourceInternal(NetworkDeviceProperties)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model NetworkDevice extends Azure.ResourceManager.Foundations.TrackedResource {
+model NetworkDevice is Azure.ResourceManager.TrackedResource<NetworkDeviceProperties> {
   @doc("Name of the Network Device.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -20,11 +19,6 @@ model NetworkDevice extends Azure.ResourceManager.Foundations.TrackedResource {
   @segment("networkDevices")
   @visibility(Lifecycle.Read)
   name: string;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
-  @doc("The NetworkDevice properties")
-  properties: NetworkDeviceProperties;
-
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
   @added(Versions.v2025_07_15)
   @doc("The managed service identities assigned to this resource.")

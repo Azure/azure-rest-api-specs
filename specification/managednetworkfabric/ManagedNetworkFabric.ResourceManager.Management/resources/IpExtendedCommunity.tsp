@@ -9,10 +9,8 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The IP Extended Community resource definition.")
-@Azure.ResourceManager.Private.armResourceInternal(IpExtendedCommunityProperties)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model IpExtendedCommunity
-  extends Azure.ResourceManager.Foundations.TrackedResource {
+model IpExtendedCommunity is Azure.ResourceManager.TrackedResource<IpExtendedCommunityProperties> {
   @doc("Name of the IP Extended Community.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -20,9 +18,6 @@ model IpExtendedCommunity
   @segment("ipExtendedCommunities")
   @visibility(Lifecycle.Read)
   name: string;
-
-  @doc("The IpExtendedCommunity properties")
-  properties: IpExtendedCommunityProperties;
 }
 
 @armResourceOperations
