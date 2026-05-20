@@ -6,6 +6,17 @@ using Azure.ClientGenerator.Core.Legacy;
 using Azure.Core;
 using Microsoft.Storage;
 
+union CSharpManagementPolicyName {
+  Default: "default",
+}
+
+union CSharpBlobInventoryPolicyName {
+  Default: "default",
+}
+
+@@clientName(CSharpManagementPolicyName, "ManagementPolicyName", "csharp");
+@@clientName(CSharpBlobInventoryPolicyName, "BlobInventoryPolicyName", "csharp");
+
 @@clientName(ProvisioningState, "StorageAccountProvisioningState", "csharp");
 @@clientName(
   Azure.ResourceManager.CommonTypes.Resource,
@@ -208,6 +219,8 @@ using Microsoft.Storage;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This operation is pageable for .Net SDK"
 @@markAsPageable(TableServices.list, "csharp");
 @@clientName(ManagementPolicy, "StorageAccountManagementPolicy", "csharp");
+@@alternateType(ManagementPolicyName, CSharpManagementPolicyName, "csharp");
+@@alternateType(BlobInventoryPolicyName, CSharpBlobInventoryPolicyName, "csharp");
 @@clientName(
   PrivateEndpointConnection,
   "StoragePrivateEndpointConnection",
