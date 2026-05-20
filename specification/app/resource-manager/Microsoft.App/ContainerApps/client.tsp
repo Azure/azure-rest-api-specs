@@ -38,6 +38,14 @@ using Microsoft.App;
   "RuntimeJavaAgentLogging",
   "go,python"
 );
+@@clientName(RuntimeJavaJavaAgent, "ContainerAppRuntimeJavaAgent", "csharp");
+@@clientName(
+  RuntimeJavaJavaAgentLogging.loggerSettings,
+  "LoggerSettings",
+  "csharp"
+);
+@@clientName(LoggerSetting, "ContainerAppJavaLoggerSetting", "csharp");
+@@clientName(Level, "ContainerAppJavaLoggerLevel", "csharp");
 @@clientName(AvailableWorkloadProfilesOperationGroup.get, "list", "javascript");
 
 // C# compatibility replacement declarations used by the decorator blocks below.
