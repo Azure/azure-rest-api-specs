@@ -50,7 +50,7 @@ interface RestorePoints {
     RestorePoint,
     Response = ArmResourceCreatedResponse<
       RestorePoint,
-      ArmLroLocationHeader<FinalResult = void> &
+      ArmLroLocationHeader<FinalResult = RestorePoint> &
         Azure.Core.Foundations.RetryAfterHeader
     >
   >;
@@ -66,7 +66,6 @@ interface RestorePoints {
 
 @@doc(RestorePoint.name, "The name of the restore point.");
 @@doc(RestorePoint.properties, "The restore point properties.");
-@@doc(
-  RestorePoints.create::parameters.resource,
+@@doc(RestorePoints.create::parameters.resource,
   "Parameters supplied to the Create restore point operation."
 );
