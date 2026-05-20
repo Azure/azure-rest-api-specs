@@ -97,7 +97,7 @@ model CSharpDiagnosticsDefinition
 }
 
 /**
- * C# compatibility usage unit extensible enum.
+ * Unit of measurement for Container App usage values.
  */
 union UsageUnit {
   string,
@@ -107,7 +107,7 @@ union UsageUnit {
 }
 
 /**
- * C# compatibility custom OpenID Connect client credential method extensible enum.
+ * Method used to authenticate the custom OpenID Connect provider client credential.
  */
 union OpenIdConnectClientCredentialMethod {
   string,
