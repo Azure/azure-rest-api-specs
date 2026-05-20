@@ -193,7 +193,11 @@ using Microsoft.Storage;
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(BlobServiceProperties.properties);
-@@clientName(BlobServiceProperties.properties, "BlobServiceProperties");
+@@clientName(
+  BlobServiceProperties.properties,
+  "BlobServiceProperties",
+  "!javascript"
+);
 
 @@clientName(BlobContainers.create::parameters.resource, "blobContainer");
 @@clientName(BlobContainers.update::parameters.properties, "blobContainer");
@@ -202,7 +206,7 @@ using Microsoft.Storage;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(BlobContainer.properties);
-@@clientName(BlobContainer.properties, "ContainerProperties");
+@@clientName(BlobContainer.properties, "ContainerProperties", "!javascript");
 
 @@clientName(ContainerProperties.immutabilityPolicy, "ImmutabilityPolicy");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -214,14 +218,18 @@ using Microsoft.Storage;
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(FileServiceProperties.properties);
-@@clientName(FileServiceProperties.properties, "FileServiceProperties");
+@@clientName(
+  FileServiceProperties.properties,
+  "FileServiceProperties",
+  "!javascript"
+);
 
 @@clientName(FileShares.create::parameters.resource, "fileShare");
 @@clientName(FileShares.update::parameters.properties, "fileShare");
 @@clientName(FileShares.restore::parameters.body, "deletedShare");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(FileShare.properties);
-@@clientName(FileShare.properties, "FileShareProperties");
+@@clientName(FileShare.properties, "FileShareProperties", "!javascript");
 
 @@clientName(
   QueueServices.setServiceProperties::parameters.resource,
@@ -229,13 +237,17 @@ using Microsoft.Storage;
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(QueueServiceProperties.properties);
-@@clientName(QueueServiceProperties.properties, "QueueServiceProperties");
+@@clientName(
+  QueueServiceProperties.properties,
+  "QueueServiceProperties",
+  "!javascript"
+);
 
 @@clientName(StorageQueues.create::parameters.resource, "queue");
 @@clientName(StorageQueues.update::parameters.properties, "queue");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StorageQueue.properties);
-@@clientName(StorageQueue.properties, "QueueProperties");
+@@clientName(StorageQueue.properties, "QueueProperties", "!javascript");
 
 @@clientName(StorageAccounts.create::parameters.resource, "parameters");
 @@clientName(StorageAccounts.update::parameters.properties, "parameters");
@@ -259,7 +271,8 @@ using Microsoft.Storage;
 @@flattenProperty(StorageAccountMigration.properties);
 @@clientName(
   StorageAccountMigration.properties,
-  "StorageAccountMigrationDetails"
+  "StorageAccountMigrationDetails",
+  "!javascript"
 );
 
 @@clientName(
@@ -294,7 +307,11 @@ using Microsoft.Storage;
 @@clientName(EncryptionScopes.patch::parameters.properties, "encryptionScope");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(EncryptionScope.properties);
-@@clientName(EncryptionScope.properties, "EncryptionScopeProperties");
+@@clientName(
+  EncryptionScope.properties,
+  "EncryptionScopeProperties",
+  "!javascript"
+);
 
 @@clientName(
   TableServices.setServiceProperties::parameters.resource,
@@ -302,13 +319,17 @@ using Microsoft.Storage;
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(TableServiceProperties.properties);
-@@clientName(TableServiceProperties.properties, "TableServiceProperties");
+@@clientName(
+  TableServiceProperties.properties,
+  "TableServiceProperties",
+  "!javascript"
+);
 
 @@clientName(Tables.create::parameters.resource, "parameters");
 @@clientName(Tables.update::parameters.properties, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Table.properties);
-@@clientName(Table.properties, "TableProperties");
+@@clientName(Table.properties, "TableProperties", "!javascript");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(NetworkSecurityPerimeterConfiguration.properties);
 
