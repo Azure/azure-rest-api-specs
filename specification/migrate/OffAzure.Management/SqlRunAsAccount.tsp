@@ -40,6 +40,7 @@ interface SqlRunAsAccounts {
 }
 
 @@doc(SqlRunAsAccount.name, "SQL RunAsAccounts name");
-@@doc(SqlRunAsAccount.properties,
+@@doc(
+  SqlRunAsAccount.properties,
   "The resource-specific properties for this resource."
 );

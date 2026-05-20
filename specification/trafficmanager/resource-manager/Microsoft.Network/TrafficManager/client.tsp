@@ -49,77 +49,94 @@ op getReplace(
   @minItems(2)
   @maxItems(2)
   botRight?: float64[],
-): Azure.ResourceManager.ArmResponse<Microsoft.Network.HeatMapModel> | Microsoft.Network.CloudError;
+):
+  | Azure.ResourceManager.ArmResponse<Microsoft.Network.HeatMapModel>
+  | Microsoft.Network.CloudError;
 
 @@alternateType(HeatMapOpsResourceParameters.heatMapType, "default", "java");
 @@override(HeatMapModels.get, getReplace, "go");
 @@alternateType(getReplace::parameters.heatMapType, "default", "go");
-@@clientName(Microsoft.Network,
+@@clientName(
+  Microsoft.Network,
   "TrafficManagerManagementClient",
   "javascript,python,java"
 );
 
 // csharp configurations
 @@clientName(AlwaysServe, "TrafficManagerEndpointAlwaysServeStatus", "csharp");
-@@clientName(CheckTrafficManagerRelativeDnsNameAvailabilityParameters,
+@@clientName(
+  CheckTrafficManagerRelativeDnsNameAvailabilityParameters,
   "TrafficManagerRelativeDnsNameAvailabilityContent",
   "csharp"
 );
-@@clientName(CheckTrafficManagerRelativeDnsNameAvailabilityParameters.type,
+@@clientName(
+  CheckTrafficManagerRelativeDnsNameAvailabilityParameters.type,
   "ResourceType",
   "csharp"
 );
-@@clientName(EndpointPropertiesCustomHeadersItem,
+@@clientName(
+  EndpointPropertiesCustomHeadersItem,
   "TrafficManagerEndpointCustomHeaderInfo",
   "csharp"
 );
-@@clientName(EndpointPropertiesSubnetsItem,
+@@clientName(
+  EndpointPropertiesSubnetsItem,
   "TrafficManagerEndpointSubnetInfo",
   "csharp"
 );
 @@clientName(HeatMapModel, "TrafficManagerHeatMap", "csharp");
-@@clientName(MonitorConfigCustomHeadersItem,
+@@clientName(
+  MonitorConfigCustomHeadersItem,
   "TrafficManagerMonitorConfigCustomHeaderInfo",
   "csharp"
 );
-@@clientName(MonitorConfigExpectedStatusCodeRangesItem,
+@@clientName(
+  MonitorConfigExpectedStatusCodeRangesItem,
   "ExpectedStatusCodeRangeInfo",
   "csharp"
 );
-@@clientName(Microsoft.Network.ProxyResource,
+@@clientName(
+  Microsoft.Network.ProxyResource,
   "TrafficManagerProxyResourceData",
   "csharp"
 );
-@@clientName(Microsoft.Network.Resource,
+@@clientName(
+  Microsoft.Network.Resource,
   "TrafficManagerResourceData",
   "csharp"
 );
 @@clientName(QueryExperience, "TrafficManagerHeatMapQueryExperience", "csharp");
 @@clientName(TrafficFlow, "TrafficManagerHeatMapTrafficFlow", "csharp");
 @@clientName(TrafficFlow.sourceIp, "SourceIP", "csharp");
-@@clientName(Microsoft.Network.TrackedResource,
+@@clientName(
+  Microsoft.Network.TrackedResource,
   "TrafficManagerTrackedResourceData",
   "csharp"
 );
-@@clientName(TrafficManagerNameAvailability,
+@@clientName(
+  TrafficManagerNameAvailability,
   "TrafficManagerNameAvailabilityResult",
   "csharp"
 );
-@@clientName(TrafficManagerNameAvailability.nameAvailable,
+@@clientName(
+  TrafficManagerNameAvailability.nameAvailable,
   "IsNameAvailable",
   "csharp"
 );
-@@clientName(TrafficManagerNameAvailability.reason,
+@@clientName(
+  TrafficManagerNameAvailability.reason,
   "UnavailableReason",
   "csharp"
 );
 @@clientName(TrafficManagerNameAvailability.type, "ResourceType", "csharp");
 @@clientName(UserMetricsModel, "TrafficManagerUserMetric", "csharp");
-@@clientName(ProfilesOperationGroup.checkTrafficManagerRelativeDnsNameAvailability,
+@@clientName(
+  ProfilesOperationGroup.checkTrafficManagerRelativeDnsNameAvailability,
   "CheckTrafficManagerRelativeDnsNameAvailability",
   "csharp"
 );
-@@clientName(ProfilesOperationGroup.checkTrafficManagerNameAvailabilityV2,
+@@clientName(
+  ProfilesOperationGroup.checkTrafficManagerNameAvailabilityV2,
   "CheckTrafficManagerNameAvailabilityV2",
   "csharp"
 );
@@ -130,17 +147,20 @@ op getReplace(
 @@clientName(HeatMapEndpoint, "TrafficManagerHeatMapEndpoint", "csharp");
 @@clientName(Region, "TrafficManagerRegion", "csharp");
 @@clientName(EndpointType, "TrafficManagerEndpointType", "csharp");
-@@clientName(DeleteOperationResult,
+@@clientName(
+  DeleteOperationResult,
   "TrafficManagerDeleteOperationResult",
   "csharp"
 );
-@@clientName(EndpointMonitorStatus,
+@@clientName(
+  EndpointMonitorStatus,
   "TrafficManagerEndpointMonitorStatus",
   "csharp"
 );
 @@clientName(EndpointStatus, "TrafficManagerEndpointStatus", "csharp");
 @@clientName(MonitorProtocol, "TrafficManagerMonitorProtocol", "csharp");
-@@clientName(ProfileMonitorStatus,
+@@clientName(
+  ProfileMonitorStatus,
   "TrafficManagerProfileMonitorStatus",
   "csharp"
 );
@@ -149,40 +169,49 @@ op getReplace(
 @@clientName(MonitorProtocol.HTTPS, "Https", "csharp");
 @@clientName(MonitorProtocol.TCP, "Tcp", "csharp");
 @@clientName(Microsoft.Network.Resource.type, "ResourceType", "csharp");
-@@alternateType(TrafficManagerNameAvailability.type,
+@@alternateType(
+  TrafficManagerNameAvailability.type,
   Azure.Core.armResourceType,
   "csharp"
 );
 @@alternateType(TrafficFlow.sourceIp, Azure.Core.ipV4Address, "csharp");
-@@alternateType(EndpointPropertiesSubnetsItem.first,
+@@alternateType(
+  EndpointPropertiesSubnetsItem.first,
   Azure.Core.ipV4Address,
   "csharp"
 );
-@@alternateType(EndpointPropertiesSubnetsItem.last,
+@@alternateType(
+  EndpointPropertiesSubnetsItem.last,
   Azure.Core.ipV4Address,
   "csharp"
 );
-@@alternateType(CheckTrafficManagerRelativeDnsNameAvailabilityParameters.type,
+@@alternateType(
+  CheckTrafficManagerRelativeDnsNameAvailabilityParameters.type,
   Azure.Core.armResourceType,
   "csharp"
 );
-@@alternateType(EndpointProperties.targetResourceId,
+@@alternateType(
+  EndpointProperties.targetResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(Microsoft.Network.Resource.id,
+@@alternateType(
+  Microsoft.Network.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(Microsoft.Network.Resource.type,
+@@alternateType(
+  Microsoft.Network.Resource.type,
   Azure.Core.armResourceType,
   "csharp"
 );
-@@alternateType(HeatMapEndpoint.resourceId,
+@@alternateType(
+  HeatMapEndpoint.resourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(Microsoft.Network.TrackedResource.location,
+@@alternateType(
+  Microsoft.Network.TrackedResource.location,
   Azure.Core.azureLocation,
   "csharp"
 );

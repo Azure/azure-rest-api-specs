@@ -160,6 +160,7 @@ interface ElasticAccounts {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ElasticAccount>;
 
   /** Patch the specified NetApp Elastic Account */
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)

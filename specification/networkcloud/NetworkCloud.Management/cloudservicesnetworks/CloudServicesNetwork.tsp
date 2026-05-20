@@ -75,7 +75,9 @@ interface CloudServicesNetworks {
       ...IfMatchParameter;
       ...IfNoneMatchParameter;
     },
-    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -105,7 +107,8 @@ interface CloudServicesNetworks {
 
 @@doc(CloudServicesNetwork.name, "The name of the cloud services network.");
 @@doc(CloudServicesNetwork.properties, "The list of the resource properties.");
-@@doc(CloudServicesNetworks.createOrUpdate::parameters.resource,
+@@doc(
+  CloudServicesNetworks.createOrUpdate::parameters.resource,
   "The request body."
 );
 @@doc(CloudServicesNetworks.update::parameters.properties, "The request body.");

@@ -30,6 +30,97 @@ openapi-type: arm
 tag: package-2026-03-01
 ```
 
+### Tag: package-preview-2026-03-15-preview
+
+These settings apply only when `--tag=package-preview-2026-03-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-03-15-preview'
+input-file:
+  - Microsoft.MachineLearningServices/preview/2026-03-15-preview/openapi.json
+suppressions:
+  - code: DeleteResponseCodes
+    reason: Pre-existing API behavior, long-running delete operations return 200 in addition to 202/204.
+  - code: ProvisioningStateMustBeReadOnly
+    reason: Pre-existing API behavior, provisioningState properties are read-only in the API response.
+  - code: GetCollectionOnlyHasValueAndNextLink
+    reason: Pre-existing API behavior for list operations.
+  - code: PostResponseCodes
+    reason: Pre-existing API behavior for action operations.
+  - code: PatchIdentityProperty
+    reason: Pre-existing API behavior.
+  - code: PatchBodyParametersSchema
+    reason: Pre-existing API behavior.
+  - code: PathForResourceAction
+    reason: Pre-existing API behavior.
+  - code: ResourceNameRestriction
+    reason: Pre-existing API behavior, adding restriction would be a breaking change.
+  - code: CollectionObjectPropertiesNaming
+    reason: Pre-existing API behavior.
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: Pre-existing API behavior.
+  - code: PatchResponseCodes
+    reason: Pre-existing API behavior for Compute PATCH operation.
+  - code: PutResponseCodes
+    reason: Pre-existing API behavior, LRO PUT operations use 200+202 without 201.
+  - code: XmsPageableForListCalls
+    reason: Pre-existing API behavior, pagination is handled by the framework.
+  - code: AvoidAdditionalProperties
+    reason: Pre-existing API behavior across 78+ definitions that use additionalProperties for dynamic key-value dictionaries (environment variables, job I/O bindings, metadata bags, Spark configuration, monitoring signals, K8s infrastructure, traffic routing, model registries, polymorphic models, and diagnostics).
+  - code: XMSSecretInResponse
+    reason: Pre-existing API contract returns secret/token properties in response models for compute secrets and datastore credentials retrieved via dedicated listSecrets/listKeys operations.
+  - code: GuidUsage
+    reason: Azure.Core.uuid is a TypeSpec built-in type that compiles to format:uuid. This is the standard TypeSpec representation and cannot be changed at the service level.
+  - code: UnSupportedPatchProperties
+    reason: Pre-existing PATCH operation on managedNetworks resource accepts a body parameter with a properties envelope, matching the established contract pattern for this resource.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}"].patch.parameters.5
+  - code: NestedResourcesMustHaveListOperation
+    reason: Pre-existing API behavior, nested resources (CapabilityHost, CapabilityHostResource) do not yet have list operations. List API will be added when needed.
+  - code: DefinitionsPropertiesNamesCamelCase
+    reason: Pre-existing API behavior, property name uses acronym CMK (Customer Managed Key) which is industry standard.
+    where:
+      - $.definitions.WorkspaceProperties.properties.enableServiceSideCMKEncryption
+  - code: ParametersSchemaAsTypeObject
+    reason: Pre-existing API behavior, body parameters use type array for batch action payloads.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/customServices"].post.parameters[5].schema.type
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/updateDataMounts"].post.parameters[5].schema.type
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/addRaiBlocklistItems"].post.parameters[6].schema.type
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/deleteRaiBlocklistItems"].post.parameters[6].schema.type
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: These are list result models and action responses, not ARM resources. They do not require id/name/type properties.
+    where:
+      - $.definitions.AvailableQuota
+      - $.definitions.AvailableQuotaArmPaginatedResult
+      - $.definitions.EndpointModels
+      - $.definitions.ExternalFQDNResponse
+      - $.definitions.ListAmlUserFeatureResult
+      - $.definitions.ListUsagesResult
+      - $.definitions.ListWorkspaceQuotas
+      - $.definitions.SkuResourceArmPaginatedResult
+      - $.definitions.UsageAndQuotaDetailsArmPaginatedResult
+      - $.definitions.VirtualMachineSizeListResult
+  - code: ArmResourcePropertiesBag
+    reason: Pre-existing API contract uses type/name as discriminator property within the properties bag for polymorphic resources.
+    where:
+      - $.definitions.EndpointDeploymentResourcePropertiesBasicResource
+      - $.definitions.EndpointResourcePropertiesBasicResource
+      - $.definitions.OutboundRuleBasicResource
+      - $.definitions.RaiPolicyPropertiesBasicResource
+  - code: TrackedResourcePatchOperation
+    reason: Pre-existing API uses PUT for updates. PrivateEndpointConnection has location/tags but uses PUT, not PATCH.
+    where:
+      - $.definitions.PrivateEndpointConnection
+  - code: ConsistentPatchProperties
+    reason: Pre-existing API design for Compute resource where properties.properties is a known pattern.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}"].patch.parameters.5.schema
+  - code: LroPatch202
+    reason: Pre-existing API behavior for Compute update operations.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}"].patch.responses
+```
+
 ### Tag: package-2026-03-01
 
 These settings apply only when `--tag=package-2026-03-01` is specified on the command line.

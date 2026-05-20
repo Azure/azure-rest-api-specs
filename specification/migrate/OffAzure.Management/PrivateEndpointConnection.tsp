@@ -52,6 +52,7 @@ interface PrivateEndpointConnections {
 }
 
 @@doc(PrivateEndpointConnection.name, " Private link resource name.");
-@@doc(PrivateEndpointConnection.properties,
+@@doc(
+  PrivateEndpointConnection.properties,
   "The resource-specific properties for this resource."
 );

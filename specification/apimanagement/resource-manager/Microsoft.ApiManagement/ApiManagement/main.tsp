@@ -112,7 +112,8 @@ interface Operations
       ArmResponse<OperationListResult>,
       ErrorResponse
     > {}
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "Lists all of the available REST API operations of the Microsoft.ApiManagement provider."
 );
 @@tag(Operations.list, "ApiManagementOperations");
