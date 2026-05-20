@@ -1,27 +1,6 @@
 using TypeSpec.Http;
-using TypeSpec.Rest;
 
 namespace Azure.AI.Projects;
-
-@doc("A paginated list of items.")
-model SkillsPagedResult<T> {
-  @doc("The object type, which is always 'list'.")
-  object: "list";
-
-  @doc("The requested list of items.")
-  @pageItems
-  data: T[];
-
-  @doc("The first ID represented in this list.")
-  first_id?: string;
-
-  @doc("The last ID represented in this list.")
-  @continuationToken
-  last_id?: string;
-
-  @doc("Whether there are additional values available not captured in this list.")
-  has_more: boolean;
-}
 
 @doc("A skill name following the agentskills.io spec: lowercase letters, numbers, and hyphens only. Must not start or end with a hyphen or contain consecutive hyphens.")
 @maxLength(64)
@@ -93,17 +72,14 @@ model Skill {
   description: string;
 
   @doc("The Unix timestamp (seconds) when the skill was created.")
-  @encode("unixTimestamp", int32)
-  created_at: utcDateTime;
+  created_at: FoundryTimestamp;
 
-  @doc("The default version for the skill. Can be changed via updateSkillDefaultVersion.")
+  @doc("The default version for the skill. Can be changed via updateSkill.")
   default_version: string;
 
   @doc("The latest version for the skill.")
   latest_version: string;
 
-  @doc("The object type, which is always 'skill'.")
-  object: "skill";
 }
 
 @doc("A specific version of a skill.")
@@ -125,11 +101,7 @@ model SkillVersion {
   description: string;
 
   @doc("The Unix timestamp (seconds) when the skill version was created.")
-  @encode("unixTimestamp", int32)
-  created_at: utcDateTime;
-
-  @doc("The object type, which is always 'skill.version'.")
-  object: "skill.version";
+  created_at: FoundryTimestamp;
 }
 
 alias CreateSkillVersionRequest = {
@@ -178,14 +150,14 @@ alias GetSkillVersionContentRequest = {
   version: string;
 };
 
-model UpdateSkillRequest {
+alias UpdateSkillRequest = {
   @doc("The name of the skill to update.")
   @path
   name: SkillName;
 
   @doc("The version identifier that the skill should point to. When set, the skill's default version will resolve to this version instead of the latest.")
   default_version: string;
-}
+};
 
 alias DeleteSkillVersionRequest = {
   @doc("The name of the skill.")
@@ -207,9 +179,6 @@ model DeleteSkillResponse {
 
   @doc("Whether the skill was successfully deleted.")
   deleted: boolean;
-
-  @doc("The object type, which is always 'skill.deleted'.")
-  object: "skill.deleted";
 }
 
 @doc("A deleted skill version.")
@@ -225,9 +194,6 @@ model DeleteSkillVersionResponse {
 
   @doc("The version that was deleted.")
   version: string;
-
-  @doc("The object type, which is always 'skill.version.deleted'.")
-  object: "skill.version.deleted";
 }
 
 @doc("The response body for downloading a skill package.")

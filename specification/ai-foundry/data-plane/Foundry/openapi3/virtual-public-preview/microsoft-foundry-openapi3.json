@@ -15019,18 +15019,10 @@
                 "schema": {
                   "type": "object",
                   "required": [
-                    "object",
                     "data",
                     "has_more"
                   ],
                   "properties": {
-                    "object": {
-                      "type": "string",
-                      "enum": [
-                        "list"
-                      ],
-                      "description": "The object type, which is always 'list'."
-                    },
                     "data": {
                       "type": "array",
                       "items": {
@@ -15048,10 +15040,10 @@
                     },
                     "has_more": {
                       "type": "boolean",
-                      "description": "Whether there are additional values available not captured in this list."
+                      "description": "A value indicating whether there are additional values available not captured in this list."
                     }
                   },
-                  "description": "A paginated list of items."
+                  "description": "The response data for a requested list of items."
                 }
               }
             }
@@ -15150,7 +15142,13 @@
         "description": "Update a skill.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/UpdateSkillRequest.name"
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the skill to update.",
+            "schema": {
+              "$ref": "#/components/schemas/SkillName"
+            }
           },
           {
             "name": "Foundry-Features",
@@ -15205,7 +15203,16 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateSkillRequest"
+                "type": "object",
+                "properties": {
+                  "default_version": {
+                    "type": "string",
+                    "description": "The version identifier that the skill should point to. When set, the skill's default version will resolve to this version instead of the latest."
+                  }
+                },
+                "required": [
+                  "default_version"
+                ]
               }
             }
           }
@@ -15545,18 +15552,10 @@
                 "schema": {
                   "type": "object",
                   "required": [
-                    "object",
                     "data",
                     "has_more"
                   ],
                   "properties": {
-                    "object": {
-                      "type": "string",
-                      "enum": [
-                        "list"
-                      ],
-                      "description": "The object type, which is always 'list'."
-                    },
                     "data": {
                       "type": "array",
                       "items": {
@@ -15574,10 +15573,10 @@
                     },
                     "has_more": {
                       "type": "boolean",
-                      "description": "Whether there are additional values available not captured in this list."
+                      "description": "A value indicating whether there are additional values available not captured in this list."
                     }
                   },
-                  "description": "A paginated list of items."
+                  "description": "The response data for a requested list of items."
                 }
               }
             }
@@ -16594,15 +16593,6 @@
           "minLength": 1
         },
         "explode": false
-      },
-      "UpdateSkillRequest.name": {
-        "name": "name",
-        "in": "path",
-        "required": true,
-        "description": "The name of the skill to update.",
-        "schema": {
-          "$ref": "#/components/schemas/SkillName"
-        }
       },
       "UpdateToolboxRequest.name": {
         "name": "name",
@@ -22573,8 +22563,7 @@
         "required": [
           "id",
           "name",
-          "deleted",
-          "object"
+          "deleted"
         ],
         "properties": {
           "id": {
@@ -22592,13 +22581,6 @@
           "deleted": {
             "type": "boolean",
             "description": "Whether the skill was successfully deleted."
-          },
-          "object": {
-            "type": "string",
-            "enum": [
-              "skill.deleted"
-            ],
-            "description": "The object type, which is always 'skill.deleted'."
           }
         },
         "description": "A deleted skill."
@@ -22609,8 +22591,7 @@
           "id",
           "name",
           "deleted",
-          "version",
-          "object"
+          "version"
         ],
         "properties": {
           "id": {
@@ -22632,13 +22613,6 @@
           "version": {
             "type": "string",
             "description": "The version that was deleted."
-          },
-          "object": {
-            "type": "string",
-            "enum": [
-              "skill.version.deleted"
-            ],
-            "description": "The object type, which is always 'skill.version.deleted'."
           }
         },
         "description": "A deleted skill version."
@@ -50082,8 +50056,7 @@
           "description",
           "created_at",
           "default_version",
-          "latest_version",
-          "object"
+          "latest_version"
         ],
         "properties": {
           "id": {
@@ -50104,24 +50077,20 @@
             "description": "A human-readable description of the skill."
           },
           "created_at": {
-            "type": "integer",
-            "format": "unixtime",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
             "description": "The Unix timestamp (seconds) when the skill was created."
           },
           "default_version": {
             "type": "string",
-            "description": "The default version for the skill. Can be changed via updateSkillDefaultVersion."
+            "description": "The default version for the skill. Can be changed via updateSkill."
           },
           "latest_version": {
             "type": "string",
             "description": "The latest version for the skill."
-          },
-          "object": {
-            "type": "string",
-            "enum": [
-              "skill"
-            ],
-            "description": "The object type, which is always 'skill'."
           }
         },
         "description": "A skill resource."
@@ -50179,8 +50148,7 @@
           "name",
           "version",
           "description",
-          "created_at",
-          "object"
+          "created_at"
         ],
         "properties": {
           "id": {
@@ -50209,16 +50177,12 @@
             "description": "A human-readable description of the skill version."
           },
           "created_at": {
-            "type": "integer",
-            "format": "unixtime",
-            "description": "The Unix timestamp (seconds) when the skill version was created."
-          },
-          "object": {
-            "type": "string",
-            "enum": [
-              "skill.version"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
             ],
-            "description": "The object type, which is always 'skill.version'."
+            "description": "The Unix timestamp (seconds) when the skill version was created."
           }
         },
         "description": "A specific version of a skill."
@@ -51653,18 +51617,6 @@
           }
         },
         "description": "Request body for updating a model version. Only description and tags can be modified."
-      },
-      "UpdateSkillRequest": {
-        "type": "object",
-        "required": [
-          "default_version"
-        ],
-        "properties": {
-          "default_version": {
-            "type": "string",
-            "description": "The version identifier that the skill should point to. When set, the skill's default version will resolve to this version instead of the latest."
-          }
-        }
       },
       "UpdateToolboxRequest": {
         "type": "object",

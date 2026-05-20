@@ -8837,15 +8837,9 @@ paths:
               schema:
                 type: object
                 required:
-                  - object
                   - data
                   - has_more
                 properties:
-                  object:
-                    type: string
-                    enum:
-                      - list
-                    description: The object type, which is always 'list'.
                   data:
                     type: array
                     items:
@@ -8859,8 +8853,8 @@ paths:
                     description: The last ID represented in this list.
                   has_more:
                     type: boolean
-                    description: Whether there are additional values available not captured in this list.
-                description: A paginated list of items.
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
         default:
           description: An unexpected error response.
           content:
@@ -8920,7 +8914,12 @@ paths:
       operationId: updateSkill
       description: Update a skill.
       parameters:
-        - $ref: '#/components/parameters/UpdateSkillRequest.name'
+        - name: name
+          in: path
+          required: true
+          description: The name of the skill to update.
+          schema:
+            $ref: '#/components/schemas/SkillName'
         - name: Foundry-Features
           in: header
           required: true
@@ -8956,7 +8955,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateSkillRequest'
+              type: object
+              properties:
+                default_version:
+                  type: string
+                  description: The version identifier that the skill should point to. When set, the skill's default version will resolve to this version instead of the latest.
+              required:
+                - default_version
       x-ms-foundry-meta:
         conditional_previews:
           - Skills=V1Preview
@@ -9187,15 +9192,9 @@ paths:
               schema:
                 type: object
                 required:
-                  - object
                   - data
                   - has_more
                 properties:
-                  object:
-                    type: string
-                    enum:
-                      - list
-                    description: The object type, which is always 'list'.
                   data:
                     type: array
                     items:
@@ -9209,8 +9208,8 @@ paths:
                     description: The last ID represented in this list.
                   has_more:
                     type: boolean
-                    description: Whether there are additional values available not captured in this list.
-                description: A paginated list of items.
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
         default:
           description: An unexpected error response.
           content:
@@ -9891,13 +9890,6 @@ components:
         type: string
         minLength: 1
       explode: false
-    UpdateSkillRequest.name:
-      name: name
-      in: path
-      required: true
-      description: The name of the skill to update.
-      schema:
-        $ref: '#/components/schemas/SkillName'
     UpdateToolboxRequest.name:
       name: name
       in: path
@@ -13509,7 +13501,6 @@ components:
         - id
         - name
         - deleted
-        - object
       properties:
         id:
           type: string
@@ -13521,11 +13512,6 @@ components:
         deleted:
           type: boolean
           description: Whether the skill was successfully deleted.
-        object:
-          type: string
-          enum:
-            - skill.deleted
-          description: The object type, which is always 'skill.deleted'.
       description: A deleted skill.
     DeleteSkillVersionResponse:
       type: object
@@ -13534,7 +13520,6 @@ components:
         - name
         - deleted
         - version
-        - object
       properties:
         id:
           type: string
@@ -13549,11 +13534,6 @@ components:
         version:
           type: string
           description: The version that was deleted.
-        object:
-          type: string
-          enum:
-            - skill.version.deleted
-          description: The object type, which is always 'skill.version.deleted'.
       description: A deleted skill version.
     Deployment:
       type: object
@@ -33491,7 +33471,6 @@ components:
         - created_at
         - default_version
         - latest_version
-        - object
       properties:
         id:
           type: string
@@ -33505,20 +33484,15 @@ components:
           maxLength: 1024
           description: A human-readable description of the skill.
         created_at:
-          type: integer
-          format: unixtime
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
           description: The Unix timestamp (seconds) when the skill was created.
         default_version:
           type: string
-          description: The default version for the skill. Can be changed via updateSkillDefaultVersion.
+          description: The default version for the skill. Can be changed via updateSkill.
         latest_version:
           type: string
           description: The latest version for the skill.
-        object:
-          type: string
-          enum:
-            - skill
-          description: The object type, which is always 'skill'.
       description: A skill resource.
     SkillInlineContent:
       type: object
@@ -33563,7 +33537,6 @@ components:
         - version
         - description
         - created_at
-        - object
       properties:
         id:
           type: string
@@ -33583,14 +33556,9 @@ components:
           maxLength: 1024
           description: A human-readable description of the skill version.
         created_at:
-          type: integer
-          format: unixtime
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
           description: The Unix timestamp (seconds) when the skill version was created.
-        object:
-          type: string
-          enum:
-            - skill.version
-          description: The object type, which is always 'skill.version'.
       description: A specific version of a skill.
     Sku:
       type: object
@@ -34538,14 +34506,6 @@ components:
             type: string
           description: Tag dictionary. Tags can be added, removed, and updated.
       description: Request body for updating a model version. Only description and tags can be modified.
-    UpdateSkillRequest:
-      type: object
-      required:
-        - default_version
-      properties:
-        default_version:
-          type: string
-          description: The version identifier that the skill should point to. When set, the skill's default version will resolve to this version instead of the latest.
     UpdateToolboxRequest:
       type: object
       required:

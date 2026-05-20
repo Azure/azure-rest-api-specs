@@ -31,7 +31,7 @@ interface Skills {
   @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   listSkills is FoundryDataPlaneOperation<
     ListSkillsRequest & SkillsPreviewHeader,
-    SkillsPagedResult<Skill>
+    AgentsPagedResult<Skill>
   >;
 
   /**
@@ -108,7 +108,7 @@ interface Skills {
   @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   listSkillVersions is FoundryDataPlaneOperation<
     ListSkillVersionsRequest & SkillsPreviewHeader,
-    SkillsPagedResult<SkillVersion>
+    AgentsPagedResult<SkillVersion>
   >;
 
   /**
