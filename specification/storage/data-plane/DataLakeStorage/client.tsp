@@ -180,6 +180,8 @@ enum ListBlobsShowOnlyGo {
 }
 @@alternateType(ListBlobsShowOnly, ListBlobsShowOnlyGo, "go");
 @@alternateType(ContentMD5ResponseHeader.contentMD5, string, "go");
+@@alternateType(PathItem.eTag, string, "go");
+@@alternateType(BlobPropertiesInternal.etag, string, "go");
 @@clientName(PathItem, "Path", "go");
 @@clientName(BlobItem, "PathItemInternal", "go");
 @@clientName(BlobHierarchyListSegment.blobItems, "PathItems", "go");
@@ -192,7 +194,9 @@ enum ListBlobsShowOnlyGo {
   "ListPathsHierarchySegmentResponse",
   "go"
 );
+@@clientName(ListBlobsHierarchySegmentResponse.containerName, "FileSystemName", "go");
 @@clientName(BlobHierarchyListSegment, "PathHierarchyListSegment", "go");
+@@clientName(BlobHierarchyListSegment.blobPrefixes, "PathPrefixes", "go");
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(
   FileSystem.listBlobHierarchySegment,
@@ -202,3 +206,10 @@ enum ListBlobsShowOnlyGo {
 );
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(PathItem, "omitSerdeMethods", "all", "go");
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(
+  FileSystem.listBlobHierarchySegment,
+  "preserveContentTypeHeader",
+  true,
+  "go"
+);
