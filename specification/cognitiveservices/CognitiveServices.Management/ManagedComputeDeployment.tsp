@@ -20,10 +20,7 @@ namespace Microsoft.CognitiveServices;
 @added(Versions.v2026_03_15_preview)
 @parentResource(Account)
 model ManagedComputeDeployment
-  is Azure.ResourceManager.ProxyResource<
-    ManagedComputeDeploymentProperties,
-    false
-  > {
+  is Azure.ResourceManager.ProxyResource<ManagedComputeDeploymentProperties> {
   ...ResourceNameParameter<
     Resource = ManagedComputeDeployment,
     KeyName = "deploymentName",
@@ -35,7 +32,7 @@ model ManagedComputeDeployment
    * The resource model definition representing SKU
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "CogSvc defines its own Sku model — using ResourceSkuProperty causes duplicate-client-name errors in Java/Python SDK generation due to collision with ARM common-type Sku"
-  sku: ManagedComputeDeploymentSku;
+  sku?: Sku;
 
   /**
    * Resource Etag.
