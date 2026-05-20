@@ -66,10 +66,35 @@ interface BillingMetersOperationGroup {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @autoRoute
 @tag("Subscriptions")
+@sharedRoute
+@action("getCustomDomainVerificationId")
+@removed(Versions.v2026_01_01)
 op getCustomDomainVerificationId is ArmProviderActionSync<
   Response = OkResponse & {
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Need exact content types for produces field"
     @header("Content-Type") contentType: "text/plain" | "application/json";
+
+    @bodyRoot
+    customDomainVerificationId: CustomDomainVerificationId;
+  },
+  Scope = SubscriptionActionScope,
+  Error = DefaultErrorResponse
+>;
+
+/**
+ * Get the verification id of a subscription used for verifying custom domains
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Need operationId to match original swagger"
+@autoRoute
+@tag("Subscriptions")
+@sharedRoute
+@action("getCustomDomainVerificationId")
+@added(Versions.v2026_01_01)
+@operationId("GetCustomDomainVerificationId")
+op getCustomDomainVerificationIdStable is ArmProviderActionSync<
+  Response = OkResponse & {
+    @header("Content-Type") contentType: "application/json";
 
     @bodyRoot
     customDomainVerificationId: CustomDomainVerificationId;

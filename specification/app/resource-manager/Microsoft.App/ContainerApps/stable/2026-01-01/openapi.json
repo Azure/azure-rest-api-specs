@@ -242,10 +242,6 @@
           "Subscriptions"
         ],
         "description": "Get the verification id of a subscription used for verifying custom domains",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -7883,9 +7879,9 @@
             "pattern": "^[a-z][a-z0-9]*$"
           },
           {
-            "name": "sessionPoolEnvelope",
+            "name": "properties",
             "in": "body",
-            "description": "Properties used to create a session pool",
+            "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SessionPoolUpdatableProperties"
@@ -7905,6 +7901,9 @@
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string"
               },
               "Retry-After": {
                 "type": "integer",
@@ -13373,35 +13372,11 @@
           "default": "None",
           "enum": [
             "None",
-            "Main",
-            "Init",
-            "All"
+            "Main"
           ],
           "x-ms-enum": {
             "name": "IdentitySettingsLifeCycle",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "None",
-                "value": "None",
-                "description": "None"
-              },
-              {
-                "name": "Main",
-                "value": "Main",
-                "description": "Main"
-              },
-              {
-                "name": "Init",
-                "value": "Init",
-                "description": "Init"
-              },
-              {
-                "name": "All",
-                "value": "All",
-                "description": "All"
-              }
-            ]
+            "modelAsString": true
           }
         }
       },
