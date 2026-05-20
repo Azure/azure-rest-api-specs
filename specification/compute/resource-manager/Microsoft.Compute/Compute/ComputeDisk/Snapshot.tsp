@@ -121,9 +121,7 @@ interface Snapshots {
   >;
 
   /**
-   * Updates the immutability policy of a snapshot. Sets or extends an unlocked immutability policy
-   * with the specified duration and type. If the snapshot already has a locked policy, the request
-   * will be rejected. Use updateImmutabilityPolicyLock to lock an existing unlocked policy.
+   * Updates the immutability policy of a snapshot. Sets or extends an unlocked immutability policy with the specified duration and type. If the snapshot already has a locked policy, the request will be rejected. Use updateImmutabilityPolicyLock to lock an immutability policy.
    */
   @added(Versions.v2026_03_02)
   @action("updateImmutabilityPolicy")
@@ -137,9 +135,7 @@ interface Snapshots {
   >;
 
   /**
-   * Locks the immutability policy of a snapshot. Once locked, the policy cannot be modified or
-   * removed until the lock period expires. The snapshot must already have an unlocked immutability
-   * policy configured via updateImmutabilityPolicy before it can be locked.
+   * Locks the immutability policy of a snapshot. Once locked, the policy cannot be reduced or removed until the lock period expires.
    */
   @added(Versions.v2026_03_02)
   @action("updateImmutabilityPolicyLock")
