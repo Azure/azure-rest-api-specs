@@ -39,7 +39,7 @@ model PreparedImageSpecificationProperties {
   identityProfile?: PreparedImageSpecificationManagedIdentityProfile;
 
   @doc("The client-provided version of the prepared image specification.")
-  @pattern("^(?![.-])[A-Za-z0-9_.-]{1,128}$")
+  @pattern("^(?![.-])[A-Za-z0-9_.-]{1,63}$")
   version?: string;
 
   @visibility(Lifecycle.Read)
@@ -161,9 +161,9 @@ union ProvisioningState {
 @doc("A version of the Prepared Image Specification resource.")
 model PreparedImageSpecificationVersion
   is ProxyResource<PreparedImageSpecificationProperties> {
-  @pattern("^(?![.-])[A-Za-z0-9_.-]{1,128}$")
+  @pattern("^(?![.-])[A-Za-z0-9_.-]{1,63}$")
   @minLength(1)
-  @maxLength(128)
+  @maxLength(63)
   @doc("The version of the Prepared Image Specification.")
   @key("version")
   @path
