@@ -1139,8 +1139,9 @@ model GrantAccessData {
 }
 
 /**
- * The state of the immutability policy.
+ * The type of the immutability policy. 'Unlocked' allows the policy to be modified by privileged users; 'Locked' prevents reduction of the immutability duration but allows extension of the lock period.
  */
+@added(Versions.v2026_03_02)
 union ImmutabilityPolicyType {
   string,
 
@@ -1150,7 +1151,7 @@ union ImmutabilityPolicyType {
   Unlocked: "Unlocked",
 
   /**
-   * The snapshot immutability policy cannot be modified by any user until the lock period expires.
+   * The snapshot immutability policy duration cannot be reduced but can be extended. The policy cannot be removed until the lock period expires.
    */
   Locked: "Locked",
 }
@@ -1158,16 +1159,71 @@ union ImmutabilityPolicyType {
 /**
  * Data used for updating the immutability policy of a snapshot.
  */
+@added(Versions.v2026_03_02)
 model ImmutabilityPolicyData {
   /**
    * The immutability duration for the snapshot, in number of days.
    */
+  @minValue(1)
+  immutabilityDurationDays: int32;
+
+  /**
+   * The type of the immutability policy. 'Unlocked' allows the policy to be modified by privileged users; 'Locked' prevents reduction of the immutability duration but allows extension of the lock period.
+   */
+  type: ImmutabilityPolicyType;
+}
+
+/**
+ * Data used for locking the immutability policy of a snapshot.
+ */
+@added(Versions.v2026_03_02)
+model ImmutabilityPolicyLockData {
+  /**
+   * The immutability duration for the snapshot, in number of days.
+   */
+  @minValue(0)
+  immutabilityDurationDays: int32;
+
+  /**
+   * The type of the immutability policy. 'Unlocked' allows the policy to be modified by privileged users; 'Locked' prevents reduction of the immutability duration but allows extension of the lock period.
+   */
+  type: ImmutabilityPolicyType;
+}
+
+/**
+ * The immutability policy currently applied to a snapshot.
+ */
+@added(Versions.v2026_03_02)
+model ImmutabilityPolicy {
+  /**
+   * The immutability duration for the snapshot, in number of days.
+   */
+  @visibility(Lifecycle.Read)
   immutabilityDurationDays?: int32;
 
   /**
-   * The type of the immutability policy. Possible values include: 'Unlocked', 'Locked'.
+   * The type of the immutability policy.
    */
+  @visibility(Lifecycle.Read)
   type?: ImmutabilityPolicyType;
+
+  /**
+   * The time when the immutability policy was set on the snapshot.
+   */
+  @visibility(Lifecycle.Read)
+  policyStartTime?: utcDateTime;
+
+  /**
+   * The time when the immutability policy will expire on the snapshot.
+   */
+  @visibility(Lifecycle.Read)
+  policyExpirationTime?: utcDateTime;
+
+  /**
+   * Indicates whether the immutability policy has expired.
+   */
+  @visibility(Lifecycle.Read)
+  isPolicyExpired?: boolean;
 }
 
 /**
@@ -1815,6 +1871,13 @@ model SnapshotProperties {
   @visibility(Lifecycle.Read)
   @added(Versions.v2025_01_02)
   snapshotAccessState?: SnapshotAccessState;
+
+  /**
+   * The immutability policy currently applied to this snapshot. Present only when an immutability policy has been configured.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_03_02)
+  immutabilityPolicy?: ImmutabilityPolicy;
 }
 
 /**

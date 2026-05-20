@@ -121,25 +121,31 @@ interface Snapshots {
   >;
 
   /**
-   * Updates the immutability policy of a snapshot.
+   * Updates the immutability policy of a snapshot. Sets or extends an unlocked immutability policy with the specified duration and type. If the snapshot already has a locked policy, the request will be rejected. Use updateImmutabilityPolicyLock to lock an immutability policy.
    */
   @added(Versions.v2026_03_02)
   @action("updateImmutabilityPolicy")
   updateImmutabilityPolicy is ComputeResourceActionAsync<
     Snapshot,
     ImmutabilityPolicyData,
-    Snapshot
+    Snapshot,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = Snapshot> &
+      ArmLroLocationHeader<FinalResult = Snapshot> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
-   * Updates the immutability policy lock of a snapshot.
+   * Locks the immutability policy of a snapshot. Once locked, the policy cannot be reduced or removed until the lock period expires.
    */
   @added(Versions.v2026_03_02)
   @action("updateImmutabilityPolicyLock")
   updateImmutabilityPolicyLock is ComputeResourceActionAsync<
     Snapshot,
-    ImmutabilityPolicyData,
-    Snapshot
+    ImmutabilityPolicyLockData,
+    Snapshot,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = Snapshot> &
+      ArmLroLocationHeader<FinalResult = Snapshot> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 
@@ -162,3 +168,4 @@ interface Snapshots {
 @@doc(Snapshots.updateImmutabilityPolicyLock::parameters.body,
   "Immutability policy data supplied in the body of the update immutability policy lock operation."
 );
+
