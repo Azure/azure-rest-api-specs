@@ -814,7 +814,66 @@ namespace Azure.ResourceManager.Models {
   "IsPriorityReplicationEnabled",
   "csharp"
 );
+@@clientName(ObjectReplicationPolicyPropertiesTagsReplication.enabled,
+  "IsTagsReplicationEnabled",
+  "csharp"
+);
 
+// Native data sharing patch model naming
+@@clientName(TrackedResourceUpdate, "StorageTrackedResourcePatch", "csharp");
+@@clientName(StorageConnectorAuthPropertiesUpdate,
+  "StorageConnectorAuthPropertiesPatch",
+  "csharp"
+);
+@@clientName(StorageConnectorSourceUpdate,
+  "StorageConnectorSourcePatch",
+  "csharp"
+);
+@@clientName(DataShareSourceUpdate, "DataShareSourcePatch", "csharp");
+@@clientName(ManagedIdentityAuthPropertiesUpdate,
+  "ManagedIdentityAuthPropertiesPatch",
+  "csharp"
+);
+@@clientName(StorageConnectorPropertiesUpdate,
+  "StorageConnectorPropertiesPatch",
+  "csharp"
+);
+@@clientName(StorageDataSharePropertiesUpdate,
+  "StorageDataSharePropertiesPatch",
+  "csharp"
+);
+
+// Native data sharing property renames/types
+@@clientName(StorageConnectorProperties.testConnection,
+  "ShouldTestConnection",
+  "csharp"
+);
+@@alternateType(ManagedIdentityAuthProperties.identityResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(ManagedIdentityAuthPropertiesUpdate.identityResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+// Shared key access boolean property names
+@@clientName(StorageAccountSharedKeyAccessProperties.BlobEnabled,
+  "IsBlobEnabled",
+  "csharp"
+);
+@@clientName(StorageAccountSharedKeyAccessProperties.FileEnabled,
+  "IsFileEnabled",
+  "csharp"
+);
+@@clientName(StorageAccountSharedKeyAccessProperties.QueueEnabled,
+  "IsQueueEnabled",
+  "csharp"
+);
+@@clientName(StorageAccountSharedKeyAccessProperties.TableEnabled,
+  "IsTableEnabled",
+  "csharp"
+);
 // LocalUser property renames
 @@clientName(
   LocalUserProperties.allowAclAuthorization,
