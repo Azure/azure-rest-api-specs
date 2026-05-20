@@ -36,16 +36,16 @@ model ConnectorGatewayMcpServerConfigAccessPolicyPrincipal {
   tenantId?: string;
 }
 
-@added(Versions.v2026_05_01_preview)
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "MCP server config access policies are provisioned synchronously and intentionally omit provisioningState. This is asymmetric with connections/accessPolicies, where policy provisioning is async."
+@added(Versions.v2026_05_01_preview)
 @doc("The properties of an MCP server config access policy.")
 model ConnectorGatewayMcpServerConfigAccessPolicyProperties {
   @doc("""
-  The kind of Entra ID principal granted access. MCP server config access
-  policies do NOT carry a provisioning state — provisioning is synchronous.
-  This is intentionally asymmetric with connections/accessPolicies, where the
-  policy provisioning is async and carries a provisioning state.
-  """)
+    The kind of Entra ID principal granted access. MCP server config access
+    policies do NOT carry a provisioning state — provisioning is synchronous.
+    This is intentionally asymmetric with connections/accessPolicies, where the
+    policy provisioning is async and carries a provisioning state.
+    """)
   principalType?: ConnectorGatewayMcpServerConfigAccessPolicyPrincipalType;
 
   @doc("The Entra ID principal (user or group) granted access by this policy.")

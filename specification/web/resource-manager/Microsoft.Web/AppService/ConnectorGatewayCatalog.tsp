@@ -83,8 +83,8 @@ model MatchedOperationSummary {
   score?: float64;
 }
 
-@added(Versions.v2026_05_01_preview)
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Managed APIs are read-only catalog entries provisioned by Microsoft and intentionally omit provisioningState."
+@added(Versions.v2026_05_01_preview)
 @doc("Properties of a managed API catalog entry.")
 model ManagedApiProperties {
   @doc("Display metadata for the managed API.")
@@ -107,17 +107,17 @@ model ManagedApiProperties {
   isExportSupported?: boolean;
 
   @doc("""
-  Fuzzy-search relevance score (0..1). Only populated when fuzzy search is
-  enabled on the list endpoint; omitted otherwise.
-  """)
+    Fuzzy-search relevance score (0..1). Only populated when fuzzy search is
+    enabled on the list endpoint; omitted otherwise.
+    """)
   @minValue(0)
   @maxValue(1)
   searchScore?: float64;
 
   @doc("""
-  Operations matched by the fuzzy search query. Only populated when
-  operation-level fuzzy search is enabled; omitted otherwise.
-  """)
+    Operations matched by the fuzzy search query. Only populated when
+    operation-level fuzzy search is enabled; omitted otherwise.
+    """)
   @identifiers(#["operationId"])
   matchedOperations?: MatchedOperationSummary[];
 }
@@ -182,8 +182,8 @@ model ManagedMcpOperationApi {
   id?: string;
 }
 
-@added(Versions.v2026_05_01_preview)
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Managed MCP operations are read-only catalog entries provisioned by Microsoft and intentionally omit provisioningState."
+@added(Versions.v2026_05_01_preview)
 @doc("Properties of a managed MCP operation catalog entry.")
 model ManagedMcpOperationProperties {
   @doc("A brief summary of the MCP operation.")
@@ -237,10 +237,10 @@ model HostedMcpServerInputDefinition {
   isRequired?: boolean;
 
   @doc("""
-  Input type. Determines how the configuration value is serialised into the
-  sandbox. Common values include `string`, `secret`, `enum`, `int`, `bool`,
-  `file`.
-  """)
+    Input type. Determines how the configuration value is serialised into the
+    sandbox. Common values include `string`, `secret`, `enum`, `int`, `bool`,
+    `file`.
+    """)
   type?: string;
 
   @doc("Allowed values for enum-type inputs.")
@@ -253,8 +253,8 @@ model HostedMcpServerInputDefinition {
   fileName?: string;
 }
 
-@added(Versions.v2026_05_01_preview)
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Managed hosted MCP servers are read-only catalog entries provisioned by Microsoft and intentionally omit provisioningState."
+@added(Versions.v2026_05_01_preview)
 @doc("""
   Public catalog metadata for a managed hosted MCP server. The catalog
   response intentionally omits sandbox-internal fields (container image,
@@ -291,10 +291,10 @@ model ManagedHostedMcpServerProperties {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Configuration schema is a map of input name to input definition."
   @doc("""
-  Map of input name → input definition declaring what configuration values
-  may be supplied via `hostedMcpServerProperties.configuration` on the
-  consuming McpServerConfig.
-  """)
+    Map of input name → input definition declaring what configuration values
+    may be supplied via `hostedMcpServerProperties.configuration` on the
+    consuming McpServerConfig.
+    """)
   configurationSchema?: Record<HostedMcpServerInputDefinition>;
 }
 

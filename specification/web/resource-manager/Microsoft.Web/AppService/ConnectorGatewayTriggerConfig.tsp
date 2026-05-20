@@ -142,9 +142,9 @@ model TriggerRecurrence {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Free-form schedule shape mirroring Logic Apps JobRecurrenceSchedule."
   @doc("""
-  Optional fine-grained recurrence schedule (hours, minutes, week days,
-  etc.). Mirrors the Logic Apps JobRecurrenceSchedule.
-  """)
+    Optional fine-grained recurrence schedule (hours, minutes, week days,
+    etc.). Mirrors the Logic Apps JobRecurrenceSchedule.
+    """)
   schedule?: Record<unknown>;
 }
 
@@ -152,9 +152,9 @@ model TriggerRecurrence {
 @doc("A trigger condition expression.")
 model TriggerCondition {
   @doc("""
-  Workflow expression evaluated against trigger outputs. Must start with `@`.
-  The trigger fires only when **all** conditions evaluate to true.
-  """)
+    Workflow expression evaluated against trigger outputs. Must start with `@`.
+    The trigger fires only when **all** conditions evaluate to true.
+    """)
   expression: string;
 }
 
@@ -162,11 +162,11 @@ model TriggerCondition {
 @doc("Trigger configuration settings.")
 model TriggerConfigSettings {
   @doc("""
-  When true, the runtime does not apply splitOn to batch trigger payloads —
-  the entire payload is delivered as a single run. When false or null
-  (default), the runtime auto-injects a splitOn expression derived from the
-  swagger response schema so each element of the batch becomes its own run.
-  """)
+    When true, the runtime does not apply splitOn to batch trigger payloads —
+    the entire payload is delivered as a single run. When false or null
+    (default), the runtime auto-injects a splitOn expression derived from the
+    swagger response schema so each element of the batch becomes its own run.
+    """)
   disableSplitOn?: boolean;
 }
 
@@ -203,9 +203,9 @@ model ConnectorGatewayTriggerConfigProperties {
   recurrence?: TriggerRecurrence;
 
   @doc("""
-  Maximum delay before processing each time window. ISO-8601 duration
-  (e.g., PT5M). Applies to SlidingWindow triggers.
-  """)
+    Maximum delay before processing each time window. ISO-8601 duration
+    (e.g., PT5M). Applies to SlidingWindow triggers.
+    """)
   delay?: string;
 
   @doc("Conditions evaluated against trigger outputs. All must be true for a run to be created.")
@@ -318,10 +318,10 @@ model ConnectorGatewayRun {
 model ConnectorGatewayRunTriggerDetails {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Free-form trigger output payload; shape depends on the trigger operation."
   @doc("""
-  The trigger output payload (free-form JSON). The headers property on the
-  underlying outputs is stripped before being returned to avoid exposing
-  internal HTTP headers.
-  """)
+    The trigger output payload (free-form JSON). The headers property on the
+    underlying outputs is stripped before being returned to avoid exposing
+    internal HTTP headers.
+    """)
   outputs?: Record<unknown>;
 }
 
@@ -347,8 +347,8 @@ model ConnectorGatewayRunDetails {
   notification?: ConnectorGatewayRunNotificationDetails;
 }
 
-@added(Versions.v2026_05_01_preview)
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Trigger runs are read-only execution records and intentionally omit provisioningState."
+@added(Versions.v2026_05_01_preview)
 @doc("Properties of a single trigger run.")
 model ConnectorGatewayTriggerRunProperties {
   @doc("Run summary information.")
@@ -371,8 +371,8 @@ model ConnectorGatewayTriggerRun
   name: string;
 }
 
-@added(Versions.v2026_05_01_preview)
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Trigger status is a read-only diagnostic snapshot and intentionally omits provisioningState."
+@added(Versions.v2026_05_01_preview)
 @doc("Summary of the most recent execution of a trigger configuration's trigger.")
 model ConnectorGatewayTriggerStatusProperties {
   @doc("When the last trigger execution started.")
@@ -392,17 +392,17 @@ model ConnectorGatewayTriggerStatusProperties {
   lastExecutionError?: Record<unknown>;
 
   @doc("""
-  Whether the last execution actually fired a workflow run. False if the
-  trigger was skipped (no new data) or failed before producing a run.
-  """)
+    Whether the last execution actually fired a workflow run. False if the
+    trigger was skipped (no new data) or failed before producing a run.
+    """)
   lastExecutionIsFired?: boolean;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Free-form trigger output payload from the last execution."
   @doc("""
-  The trigger output payload from the last execution (free-form JSON). The
-  headers property is stripped before being returned to avoid exposing
-  internal HTTP headers.
-  """)
+    The trigger output payload from the last execution (free-form JSON). The
+    headers property is stripped before being returned to avoid exposing
+    internal HTTP headers.
+    """)
   lastExecutionOutputs?: Record<unknown>;
 }
 

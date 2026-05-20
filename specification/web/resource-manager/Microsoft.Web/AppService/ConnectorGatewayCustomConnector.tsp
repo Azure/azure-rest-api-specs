@@ -118,9 +118,9 @@ model ConnectorGatewayCustomConnectorProperties {
   wsdlDefinition?: Record<unknown>;
 
   @doc("""
-  Inline custom connector policy XML applied to the connector at runtime
-  (Logic Apps policy expressions).
-  """)
+    Inline custom connector policy XML applied to the connector at runtime
+    (Logic Apps policy expressions).
+    """)
   policies?: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Free-form content link pointer (e.g., blob URI)."
@@ -129,16 +129,16 @@ model ConnectorGatewayCustomConnectorProperties {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Free-form integration service environment reference."
   @doc("""
-  Optional reference to a Logic Apps Integration Service Environment that
-  hosts the connector runtime.
-  """)
+    Optional reference to a Logic Apps Integration Service Environment that
+    hosts the connector runtime.
+    """)
   integrationServiceEnvironment?: Record<unknown>;
 
   @doc("""
-  Whether dynamic per-call connections are allowed on this connector.
-  Mirrors the legacy `Microsoft.Web/connections` dynamic-connection flag;
-  defaults to false for new connectors.
-  """)
+    Whether dynamic per-call connections are allowed on this connector.
+    Mirrors the legacy `Microsoft.Web/connections` dynamic-connection flag;
+    defaults to false for new connectors.
+    """)
   isDynamicConnectionAllowed?: boolean;
 }
 

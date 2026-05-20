@@ -38,12 +38,12 @@ model ConnectorGatewayConnectionAccessPolicyPrincipal {
 @doc("The properties of a connection access policy.")
 model ConnectorGatewayConnectionAccessPolicyProperties {
   @doc("""
-  The provisioning state of the connection access policy. Connection access
-  policies carry a provisioning state because their provisioning is processed
-  asynchronously by the gateway runtime. This is intentionally asymmetric with
-  mcpServerConfigs/accessPolicies, which are synchronous and have no
-  provisioning state.
-  """)
+    The provisioning state of the connection access policy. Connection access
+    policies carry a provisioning state because their provisioning is processed
+    asynchronously by the gateway runtime. This is intentionally asymmetric with
+    mcpServerConfigs/accessPolicies, which are synchronous and have no
+    provisioning state.
+    """)
   @visibility(Lifecycle.Read)
   provisioningState?: Azure.ResourceManager.ResourceProvisioningState;
 
