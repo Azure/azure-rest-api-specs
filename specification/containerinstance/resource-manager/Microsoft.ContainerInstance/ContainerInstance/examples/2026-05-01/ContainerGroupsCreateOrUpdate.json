@@ -93,8 +93,8 @@
             "name": "volume1",
             "azureFile": {
               "shareName": "shareName",
-              "storageAccountName": "accountName",
-              "userManagedIdentityClientId": "00000000-0000-0000-0000-000000000000"
+              "storageAccountKey": "accountKey",
+              "storageAccountName": "accountName"
             }
           },
           {
@@ -202,8 +202,7 @@
               "name": "volume1",
               "azureFile": {
                 "shareName": "shareName",
-                "storageAccountName": "accountName",
-                "userManagedIdentityClientId": "00000000-0000-0000-0000-000000000000"
+                "storageAccountName": "accountName"
               }
             },
             {
@@ -215,16 +214,6 @@
               "secret": {}
             }
           ]
-        },
-        "identity": {
-          "userAssignedIdentities": {
-            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity-name": {
-              "principalId": "00000000-0000-0000-0000-000000000000",
-              "clientId": "00000000-0000-0000-0000-000000000000"
-            }
-          },
-          "tenantId": "00000000-0000-0000-0000-000000000000",
-          "type": "UserAssigned"
         },
         "zones": [
           "1"
@@ -307,8 +296,7 @@
               "name": "volume1",
               "azureFile": {
                 "shareName": "shareName",
-                "storageAccountName": "accountName",
-                "userManagedIdentityClientId": "00000000-0000-0000-0000-000000000000"
+                "storageAccountName": "accountName"
               }
             },
             {
@@ -321,16 +309,6 @@
             }
           ]
         },
-        "identity": {
-          "userAssignedIdentities": {
-            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity-name": {
-              "principalId": "00000000-0000-0000-0000-000000000000",
-              "clientId": "00000000-0000-0000-0000-000000000000"
-            }
-          },
-          "tenantId": "00000000-0000-0000-0000-000000000000",
-          "type": "UserAssigned"
-        },
         "zones": [
           "1"
         ]
@@ -338,5 +316,5 @@
     }
   },
   "operationId": "ContainerGroups_CreateOrUpdate",
-  "title": "ContainerGroupsCreateOrUpdateManagedIdentityAzureFileshare"
+  "title": "ContainerGroupsCreateOrUpdate"
 }
