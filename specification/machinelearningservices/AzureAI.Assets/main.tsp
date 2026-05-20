@@ -46,7 +46,4 @@ enum Versions {
 
   @doc("Azure Machine Learning Services api version 2024-05-01-preview.")
   `2024-05-01-preview`,
-
-  @doc("Azure Machine Learning Services api version 2026-05-01-preview.")
-  `2026-05-01-preview`,
 }
