@@ -280,17 +280,3 @@ using Microsoft.AppComplianceAutomation;
   "nestedResourceCheckNameAvailability",
   "java"
 );
-@@clientName(
-  Microsoft.AppComplianceAutomation,
-  "AppComplianceAutomationClient",
-  "java"
-);
-@@usage(Category, Usage.input, "java");
-@@usage(Control, Usage.input, "java");
-@@usage(Responsibility, Usage.input, "java");
-@@usage(Recommendation, Usage.input, "java");
-@@usage(RecommendationSolution, Usage.input, "java");
-@@usage(OverviewStatus, Usage.input, "java");
-@@usage(ResponsibilityResource, Usage.input, "java");
-@@usage(ControlFamily, Usage.input, "java");
-@@usage(ComplianceResult, Usage.input, "java");
