@@ -608,4 +608,22 @@ suppressions:
     code: ProvisioningStateSpecifiedForLROPut
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}"].put
     reason: The existing API contract is legacy code and not be able to change.
+  - from: bms.json
+    code: ProvisioningStateMustBeReadOnly
+    reason: |
+      provisioningState is modeled as a named union (CrossTenantProvisioningState) with @visibility(Lifecycle.Read)
+      in TypeSpec, but the Swagger emitter outputs $ref + sibling readOnly:true; per OpenAPI 2.0 / JSON Reference
+      semantics, siblings of $ref are stripped at resolution, so LintDiff's Spectral rule (which runs with
+      resolved:true) cannot observe the readOnly. The rule source
+      (azure-openapi-validator/.../provisioning-state-must-be-read-only.ts) checks for literal readOnly===true on
+      the resolved property -- there is no x-ms-mutability / @extension escape hatch, and decorators alone do not
+      inject readOnly into the union definition.
+      The only emitter-level fix is the autorest option `use-read-only-status-schema: true`, but enabling it
+      re-emits every stable api-version's bms.json (adds readOnly:true inside 4 pre-existing LRO-status unions
+      per file). That is out of scope for a preview-only PR; it will be picked up separately when an RSB stable
+      api-version is next regenerated.
+      The same emission shape exists in azurefleet.json (FleetProperties.provisioningState) and several other
+      RPs (playwrighttesting, newrelic, eventhub, cdn, eventgrid, ...); LintDiff is diff-only so those are
+      grandfathered. Net-new cross-tenant resources introduced by this PR (CrossTenantVaultMapping,
+      VaultCredentialCertificateResponse) trip the rule from scratch -- hence this suppression.
 ```
