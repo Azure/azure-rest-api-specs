@@ -111,8 +111,7 @@ interface HttpRouteConfigs {
   @summary("Deletes the specified Http Route Config.")
   @extension("x-ms-long-running-operation", true)
   @added(Versions.v2026_01_01)
-  @operationId("HttpRouteConfig_Delete")
-  deleteStable is ArmResourceDeleteWithoutOkAsync<
+  deleteV2 is ArmResourceDeleteWithoutOkAsync<
     HttpRouteConfig,
     Response =
       | HttpRouteConfigDeleteAcceptedResponse
