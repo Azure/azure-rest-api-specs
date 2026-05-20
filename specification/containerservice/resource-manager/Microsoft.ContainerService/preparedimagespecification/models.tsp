@@ -38,7 +38,7 @@ model PreparedImageSpecificationProperties {
     """)
   identityProfile?: PreparedImageSpecificationManagedIdentityProfile;
 
-  @doc("An auto-generated value that changes when the other fields of the image customization are changed.")
+  @doc("The client-provided version of the prepared image specification.")
   @pattern("^(?![.-])[A-Za-z0-9_.-]{1,128}$")
   version?: string;
 
@@ -140,7 +140,7 @@ model PreparedImageSpecificationPatchProperties {
   @doc("The identity used to execute prepared image specification tasks during image build time and provisioning time.")
   identityProfile?: PreparedImageSpecificationManagedIdentityProfileUpdate;
 
-  @doc("An auto-generated value that changes when the other fields of the image customization are changed.")
+  @doc("The client-provided version of the prepared image specification.")
   @pattern("^(?![.-])[A-Za-z0-9_.-]{1,128}$")
   version?: string;
 
