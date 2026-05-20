@@ -365,9 +365,11 @@ interface FileShareSnapshots {
     FileShareSnapshot,
     ResourceUpdateModel<FileShareSnapshot, FileShareSnapshotPatchProperties>,
     BaseParameters<FileShareSnapshot>,
-    Response = ArmResponse<FileShareSnapshot> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader<FinalResult = FileShareSnapshot> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResponse<FileShareSnapshot>
+      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+          ArmLroLocationHeader<FinalResult = FileShareSnapshot> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   @operationId("FileShareSnapshot_Delete")
@@ -397,10 +399,9 @@ interface Operations {
   @segment("operations")
   @get
   @list
-  list(
-    ...ApiVersionParameter,
-    ...Azure.ResourceManager.Legacy.Provider,
-  ): ArmResponse<OperationListResult> | ErrorResponse;
+  list(...ApiVersionParameter, ...Azure.ResourceManager.Legacy.Provider):
+    | ArmResponse<OperationListResult>
+    | ErrorResponse;
 }
 
 @doc("FileShareSnapshot resource")

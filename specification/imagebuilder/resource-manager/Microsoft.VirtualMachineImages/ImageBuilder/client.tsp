@@ -7,7 +7,8 @@ using Microsoft.VirtualMachineImages;
 @@clientName(ImageTemplateProperties.validate, "validation", "java");
 @@clientName(AutoRunState.AutoRunEnabled, "Enabled", "java");
 @@clientName(AutoRunState.AutoRunDisabled, "Disabled", "java");
-@@clientName(Microsoft.VirtualMachineImages,
+@@clientName(
+  Microsoft.VirtualMachineImages,
   "ImageBuilderClient",
   "javascript,python,java"
 );
