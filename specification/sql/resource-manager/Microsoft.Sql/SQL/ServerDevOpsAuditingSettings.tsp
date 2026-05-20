@@ -43,7 +43,9 @@ interface ServerDevOpsAuditSettings {
   @tag("ServerDevOpsAudit")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ServerDevOpsAuditingSettings,
-    Response = ArmResourceUpdatedResponse<ServerDevOpsAuditingSettings> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ServerDevOpsAuditingSettings>>
+    Response =
+      | ArmResourceUpdatedResponse<ServerDevOpsAuditingSettings>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ServerDevOpsAuditingSettings>>
   >;
 
   /**
@@ -58,6 +60,7 @@ interface ServerDevOpsAuditSettings {
 
 @@doc(ServerDevOpsAuditingSettings.name, "");
 @@doc(ServerDevOpsAuditingSettings.properties, "Resource properties.");
-@@doc(ServerDevOpsAuditSettings.createOrUpdate::parameters.resource,
+@@doc(
+  ServerDevOpsAuditSettings.createOrUpdate::parameters.resource,
   "Properties of DevOps audit settings"
 );

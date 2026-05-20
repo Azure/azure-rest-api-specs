@@ -8,75 +8,91 @@ namespace Microsoft.Resources.DeploymentStacks;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backwards compat with old swagger"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DeploymentStack.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  DeploymentStack.properties,
   "!java, !javascript"
 );
 
-@@clientName(DeploymentStacksAtResourceGroup.createOrUpdate::parameters.resource,
+@@clientName(
+  DeploymentStacksAtResourceGroup.createOrUpdate::parameters.resource,
   "deploymentStack"
 );
-@@clientName(DeploymentStacksAtSubscription.createOrUpdate::parameters.resource,
+@@clientName(
+  DeploymentStacksAtSubscription.createOrUpdate::parameters.resource,
   "deploymentStack"
 );
-@@clientName(DeploymentStacksAtManagementGroup.createOrUpdate::parameters.resource,
+@@clientName(
+  DeploymentStacksAtManagementGroup.createOrUpdate::parameters.resource,
   "deploymentStack"
 );
 
-@@clientName(DeploymentStacksAtResourceGroup.validateStack::parameters.body,
+@@clientName(
+  DeploymentStacksAtResourceGroup.validateStack::parameters.body,
   "deploymentStack"
 );
-@@clientName(DeploymentStacksAtSubscription.validateStack::parameters.body,
+@@clientName(
+  DeploymentStacksAtSubscription.validateStack::parameters.body,
   "deploymentStack"
 );
-@@clientName(DeploymentStacksAtManagementGroup.validateStack::parameters.body,
+@@clientName(
+  DeploymentStacksAtManagementGroup.validateStack::parameters.body,
   "deploymentStack"
 );
 
 // Client names and locations for ResourceGroup operations
 @@clientName(DeploymentStacksAtResourceGroup.get, "getAtResourceGroup");
 
-@@clientLocation(DeploymentStacksAtResourceGroup.get,
+@@clientLocation(
+  DeploymentStacksAtResourceGroup.get,
   "DeploymentStacks",
   "!csharp"
 );
 
 @@clientName(DeploymentStacksAtResourceGroup.list, "listAtResourceGroup");
 
-@@clientLocation(DeploymentStacksAtResourceGroup.list,
+@@clientLocation(
+  DeploymentStacksAtResourceGroup.list,
   "DeploymentStacks",
   "!csharp"
 );
 
-@@clientName(DeploymentStacksAtResourceGroup.validateStack,
+@@clientName(
+  DeploymentStacksAtResourceGroup.validateStack,
   "validateStackAtResourceGroup"
 );
 
-@@clientLocation(DeploymentStacksAtResourceGroup.validateStack,
+@@clientLocation(
+  DeploymentStacksAtResourceGroup.validateStack,
   "DeploymentStacks",
   "!csharp"
 );
 
-@@clientName(DeploymentStacksAtResourceGroup.createOrUpdate,
+@@clientName(
+  DeploymentStacksAtResourceGroup.createOrUpdate,
   "createOrUpdateAtResourceGroup"
 );
 
-@@clientLocation(DeploymentStacksAtResourceGroup.createOrUpdate,
+@@clientLocation(
+  DeploymentStacksAtResourceGroup.createOrUpdate,
   "DeploymentStacks",
   "!csharp"
 );
 
 @@clientName(DeploymentStacksAtResourceGroup.delete, "deleteAtResourceGroup");
 
-@@clientLocation(DeploymentStacksAtResourceGroup.delete,
+@@clientLocation(
+  DeploymentStacksAtResourceGroup.delete,
   "DeploymentStacks",
   "!csharp"
 );
 
-@@clientName(DeploymentStacksAtResourceGroup.exportTemplate,
+@@clientName(
+  DeploymentStacksAtResourceGroup.exportTemplate,
   "exportTemplateAtResourceGroup"
 );
 
-@@clientLocation(DeploymentStacksAtResourceGroup.exportTemplate,
+@@clientLocation(
+  DeploymentStacksAtResourceGroup.exportTemplate,
   "DeploymentStacks",
   "!csharp"
 );
@@ -84,48 +100,57 @@ namespace Microsoft.Resources.DeploymentStacks;
 // Client names and locations for Subscription operations
 @@clientName(DeploymentStacksAtSubscription.get, "getAtSubscription");
 
-@@clientLocation(DeploymentStacksAtSubscription.get,
+@@clientLocation(
+  DeploymentStacksAtSubscription.get,
   "DeploymentStacks",
   "!csharp"
 );
 
 @@clientName(DeploymentStacksAtSubscription.list, "listAtSubscription");
 
-@@clientLocation(DeploymentStacksAtSubscription.list,
+@@clientLocation(
+  DeploymentStacksAtSubscription.list,
   "DeploymentStacks",
   "!csharp"
 );
 
-@@clientName(DeploymentStacksAtSubscription.validateStack,
+@@clientName(
+  DeploymentStacksAtSubscription.validateStack,
   "validateStackAtSubscription"
 );
 
-@@clientLocation(DeploymentStacksAtSubscription.validateStack,
+@@clientLocation(
+  DeploymentStacksAtSubscription.validateStack,
   "DeploymentStacks",
   "!csharp"
 );
 
-@@clientName(DeploymentStacksAtSubscription.createOrUpdate,
+@@clientName(
+  DeploymentStacksAtSubscription.createOrUpdate,
   "createOrUpdateAtSubscription"
 );
 
-@@clientLocation(DeploymentStacksAtSubscription.createOrUpdate,
+@@clientLocation(
+  DeploymentStacksAtSubscription.createOrUpdate,
   "DeploymentStacks",
   "!csharp"
 );
 
 @@clientName(DeploymentStacksAtSubscription.delete, "deleteAtSubscription");
 
-@@clientLocation(DeploymentStacksAtSubscription.delete,
+@@clientLocation(
+  DeploymentStacksAtSubscription.delete,
   "DeploymentStacks",
   "!csharp"
 );
 
-@@clientName(DeploymentStacksAtSubscription.exportTemplate,
+@@clientName(
+  DeploymentStacksAtSubscription.exportTemplate,
   "exportTemplateAtSubscription"
 );
 
-@@clientLocation(DeploymentStacksAtSubscription.exportTemplate,
+@@clientLocation(
+  DeploymentStacksAtSubscription.exportTemplate,
   "DeploymentStacks",
   "!csharp"
 );
@@ -133,50 +158,60 @@ namespace Microsoft.Resources.DeploymentStacks;
 // Client names and locations for ManagementGroup operations
 @@clientName(DeploymentStacksAtManagementGroup.get, "getAtManagementGroup");
 
-@@clientLocation(DeploymentStacksAtManagementGroup.get,
+@@clientLocation(
+  DeploymentStacksAtManagementGroup.get,
   "DeploymentStacks",
   "!csharp"
 );
 
 @@clientName(DeploymentStacksAtManagementGroup.list, "listAtManagementGroup");
 
-@@clientLocation(DeploymentStacksAtManagementGroup.list,
+@@clientLocation(
+  DeploymentStacksAtManagementGroup.list,
   "DeploymentStacks",
   "!csharp"
 );
 
-@@clientName(DeploymentStacksAtManagementGroup.validateStack,
+@@clientName(
+  DeploymentStacksAtManagementGroup.validateStack,
   "validateStackAtManagementGroup"
 );
 
-@@clientLocation(DeploymentStacksAtManagementGroup.validateStack,
+@@clientLocation(
+  DeploymentStacksAtManagementGroup.validateStack,
   "DeploymentStacks",
   "!csharp"
 );
 
-@@clientName(DeploymentStacksAtManagementGroup.createOrUpdate,
+@@clientName(
+  DeploymentStacksAtManagementGroup.createOrUpdate,
   "createOrUpdateAtManagementGroup"
 );
 
-@@clientLocation(DeploymentStacksAtManagementGroup.createOrUpdate,
+@@clientLocation(
+  DeploymentStacksAtManagementGroup.createOrUpdate,
   "DeploymentStacks",
   "!csharp"
 );
 
-@@clientName(DeploymentStacksAtManagementGroup.delete,
+@@clientName(
+  DeploymentStacksAtManagementGroup.delete,
   "deleteAtManagementGroup"
 );
 
-@@clientLocation(DeploymentStacksAtManagementGroup.delete,
+@@clientLocation(
+  DeploymentStacksAtManagementGroup.delete,
   "DeploymentStacks",
   "!csharp"
 );
 
-@@clientName(DeploymentStacksAtManagementGroup.exportTemplate,
+@@clientName(
+  DeploymentStacksAtManagementGroup.exportTemplate,
   "exportTemplateAtManagementGroup"
 );
 
-@@clientLocation(DeploymentStacksAtManagementGroup.exportTemplate,
+@@clientLocation(
+  DeploymentStacksAtManagementGroup.exportTemplate,
   "DeploymentStacks",
   "!csharp"
 );

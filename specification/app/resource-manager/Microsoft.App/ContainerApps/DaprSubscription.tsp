@@ -80,9 +80,11 @@ interface DaprSubscriptions {
 }
 
 @@doc(DaprSubscription.name, "Name of the Dapr subscription.");
-@@doc(DaprSubscription.properties,
+@@doc(
+  DaprSubscription.properties,
   "Dapr PubSub Event Subscription resource specific properties"
 );
-@@doc(DaprSubscriptions.createOrUpdate::parameters.resource,
+@@doc(
+  DaprSubscriptions.createOrUpdate::parameters.resource,
   "Configuration details of the Dapr subscription."
 );

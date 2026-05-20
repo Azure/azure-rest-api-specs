@@ -93,15 +93,18 @@ interface EasmClient {
 @@clientName(Easm.Location, "ObservedLocationDetails", "csharp");
 @@clientName(Easm.Port, "PortDetails", "csharp");
 @@clientName(Easm.Port.port, "portName", "csharp");
-@@clientName(Easm.ReportAssetSnapshotExportRequest,
+@@clientName(
+  Easm.ReportAssetSnapshotExportRequest,
   "ReportAssetSnapshotExportPayload",
   "csharp"
 );
-@@clientName(Easm.ReportAssetSnapshotRequest,
+@@clientName(
+  Easm.ReportAssetSnapshotRequest,
   "ReportAssetSnapshotPayload",
   "csharp"
 );
-@@clientName(Easm.ReportAssetSummaryRequest,
+@@clientName(
+  Easm.ReportAssetSummaryRequest,
   "ReportAssetSummaryPayload",
   "csharp"
 );
@@ -115,15 +118,18 @@ interface EasmClient {
 @@clientName(Easm.TaskState, "TaskResourceState", "csharp");
 @@clientName(Easm.TaskPhase, "TaskResourcePhase", "csharp");
 @@clientName(Easm.DiscoSourceKind, "DiscoverySourceKind", "csharp");
-@@clientName(Easm.LogAnalyticsDataConnectionData,
+@@clientName(
+  Easm.LogAnalyticsDataConnectionData,
   "LogAnalyticsDataConnectionPayload",
   "csharp"
 );
-@@clientName(Easm.AzureDataExplorerDataConnectionData,
+@@clientName(
+  Easm.AzureDataExplorerDataConnectionData,
   "AzureDataExplorerDataConnectionPayload",
   "csharp"
 );
-@@clientName(Easm.DiscoGroupNameParameter,
+@@clientName(
+  Easm.DiscoGroupNameParameter,
   "DiscoveryGroupNameParameter",
   "csharp"
 );
@@ -134,7 +140,8 @@ interface EasmClient {
 @@clientName(Easm.DailyDeltaTypeResponse, "DailyDeltaTypeResult", "csharp");
 @@clientName(Easm.DeltaDetailsRequest, "DeltaDetailsRequestContent", "csharp");
 @@clientName(Easm.DeltaSummaryRequest, "DeltaSummaryRequestContent", "csharp");
-@@clientName(Easm.DiscoGroupSummaryResult,
+@@clientName(
+  Easm.DiscoGroupSummaryResult,
   "DiscoveryGroupSummaryResult",
   "csharp"
 );
@@ -143,7 +150,8 @@ interface EasmClient {
 @@clientName(EasmClient.getDiscoGroup, "GetDiscoveryGroup", "csharp");
 @@clientName(EasmClient.listDiscoGroup, "GetDiscoveryGroups", "csharp");
 @@clientName(EasmClient.listRuns, "GetDiscoveryGroupRuns", "csharp");
-@@clientName(EasmClient.createOrReplaceDiscoGroup,
+@@clientName(
+  EasmClient.createOrReplaceDiscoGroup,
   "CreateOrReplaceDiscoveryGroup",
   "csharp"
 );
@@ -157,7 +165,8 @@ interface EasmClient {
 @@clientName(EasmClient.validateDiscoGroup, "ValidateDiscoveryGroup", "csharp");
 
 // rename for duplicate model from Azure.Core.Foundations
-@@clientName(Azure.Core.Foundations.InnerError,
+@@clientName(
+  Azure.Core.Foundations.InnerError,
   "CoreInnerError",
   "java,go,python,csharp"
 );

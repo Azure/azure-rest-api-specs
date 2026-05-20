@@ -4,24 +4,28 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.PortalServices;
 
-@@clientName(Microsoft.PortalServices,
+@@clientName(
+  Microsoft.PortalServices,
   "PortalServicesCopilotMgmtClient",
   "python"
 );
 
-@@clientName(Microsoft.PortalServices,
+@@clientName(
+  Microsoft.PortalServices,
   "PortalServicesCopilotMgmtClient",
   "java"
 );
 
-@@clientName(Azure.ResourceManager.ResourceProvisioningState,
+@@clientName(
+  Azure.ResourceManager.ResourceProvisioningState,
   "PortalServicesResourceProvisioningState",
   "csharp"
 );
 
 @@clientName(CopilotSettingsResource, "PortalServicesCopilotSetting", "csharp");
 
-@@clientName(CopilotSettingsProperties,
+@@clientName(
+  CopilotSettingsProperties,
   "PortalServicesCopilotSettingsProperties",
   "csharp"
 );

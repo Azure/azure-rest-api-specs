@@ -84,6 +84,7 @@ interface ExtensionValueV2s {
 }
 
 @@doc(ExtensionValueV2.name, "The version of the Extension being received.");
-@@doc(ExtensionValueV2.properties,
+@@doc(
+  ExtensionValueV2.properties,
   "The single extension based on search criteria."
 );
