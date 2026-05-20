@@ -87,6 +87,7 @@ input-file:
   - preview/2022-01-01-preview/governanceAssignments.json
   - preview/2022-01-01-preview/governanceRules.json
   - preview/2022-07-01-preview/applications.json
+  - preview/2023-12-01-preview/securityContacts.json
   - preview/2023-01-01-preview/securityOperators.json
   - preview/2026-04-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
   - preview/2026-04-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
