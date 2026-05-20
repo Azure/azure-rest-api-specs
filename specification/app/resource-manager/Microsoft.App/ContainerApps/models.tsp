@@ -5095,10 +5095,7 @@ union SessionPoolIdentityLifeCycle {
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-enum name needed for backward compatibility"
 @extension(
   "x-ms-enum",
-  #{
-    name: "IdentitySettingsLifeCycle",
-    modelAsString: true,
-  }
+  #{ name: "IdentitySettingsLifeCycle", modelAsString: true }
 )
 union SessionPoolIdentityLifeCycleStable {
   string,

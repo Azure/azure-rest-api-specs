@@ -202,9 +202,18 @@ using Microsoft.App;
   MaintenanceConfigurations.createOrUpdateStable::parameters.resource,
   "maintenanceConfigurationEnvelope"
 );
-@@clientLocation(MaintenanceConfigurations.createOrUpdateStable, "MaintenanceConfigurations");
-@@clientLocation(MaintenanceConfigurations.deleteStable, "MaintenanceConfigurations");
-@@clientLocation(MaintenanceConfigurations.listStable, "MaintenanceConfigurations");
+@@clientLocation(
+  MaintenanceConfigurations.createOrUpdateStable,
+  "MaintenanceConfigurations"
+);
+@@clientLocation(
+  MaintenanceConfigurations.deleteStable,
+  "MaintenanceConfigurations"
+);
+@@clientLocation(
+  MaintenanceConfigurations.listStable,
+  "MaintenanceConfigurations"
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(MaintenanceConfigurationResource.properties);
