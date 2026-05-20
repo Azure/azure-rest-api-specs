@@ -45,6 +45,9 @@
       "AzureKey": []
     },
     {
+      "AzureKeyQuery": []
+    },
+    {
       "SasToken": []
     }
   ],
@@ -63,6 +66,12 @@
       "description": "This is a shared key that is provisioned when you [Create an Azure Maps account](https://docs.microsoft.com/azure/azure-maps/quick-demo-map-app#create-an-azure-maps-account) in the Azure portal or using PowerShell, CLI, Azure SDKs, or REST API.\n\nWith this key, any application can access all REST API. In other words, this key can be used as a master key in the account that they are issued in.\n\nFor publicly exposed applications, our recommendation is to use the [confidential client applications](https://docs.microsoft.com/azure/azure-maps/authentication-best-practices#confidential-client-applications) approach to access Azure Maps REST APIs so your key can be securely stored.",
       "name": "subscription-key",
       "in": "header"
+    },
+    "AzureKeyQuery": {
+      "type": "apiKey",
+      "description": "This is a shared key that is provisioned when you [Create an Azure Maps account](https://docs.microsoft.com/azure/azure-maps/quick-demo-map-app#create-an-azure-maps-account) in the Azure portal or using PowerShell, CLI, Azure SDKs, or REST API.\n\nWith this key, any application can access all REST API. In other words, this key can be used as a master key in the account that they are issued in.\n\nFor publicly exposed applications, our recommendation is to use the [confidential client applications](https://docs.microsoft.com/azure/azure-maps/authentication-best-practices#confidential-client-applications) approach to access Azure Maps REST APIs so your key can be securely stored.",
+      "name": "subscription-key",
+      "in": "query"
     },
     "SasToken": {
       "type": "apiKey",
