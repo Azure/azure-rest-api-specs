@@ -4644,29 +4644,29 @@
           "description": "Event Hubs Cluster properties supplied in responses in List or Get operations.",
           "x-ms-client-flatten": true
         },
+        "sku": {
+          "$ref": "#/definitions/ClusterSku",
+          "description": "Properties of the cluster SKU."
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "location": {
-          "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "sku": {
-          "$ref": "#/definitions/ClusterSku",
-          "description": "Properties of the cluster SKU."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -4946,21 +4946,6 @@
           "description": "Namespace properties supplied for create namespace operation.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "location": {
-          "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "Properties of sku resource"
@@ -4968,11 +4953,26 @@
         "identity": {
           "$ref": "#/definitions/Identity",
           "description": "Properties of BYOK Identity description"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
