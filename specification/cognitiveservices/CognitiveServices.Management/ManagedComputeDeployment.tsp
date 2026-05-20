@@ -35,13 +35,6 @@ model ManagedComputeDeployment
   sku?: Sku;
 
   /**
-   * Read-only backend projection details for VM managed compute deployments.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "CogSvc projects managed compute backend details on the resource envelope for VmManagedCompute deployments"
-  @visibility(Lifecycle.Read)
-  backend?: DeploymentBackendProperties;
-
-  /**
    * Resource Etag.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "CogSvc uses lowercase 'etag' field name — EntityTagProperty uses 'eTag' which would be a breaking change"

@@ -14848,17 +14848,6 @@
         }
       ]
     },
-    "DeploymentBackendProperties": {
-      "type": "object",
-      "description": "Read-only backend projection details for a managed compute deployment.",
-      "properties": {
-        "vmManagedCompute": {
-          "$ref": "#/definitions/VmManagedComputeBackendProperties",
-          "description": "VM managed compute backend details.",
-          "readOnly": true
-        }
-      }
-    },
     "DeploymentCapacitySettings": {
       "type": "object",
       "description": "Internal use only.",
@@ -16044,11 +16033,6 @@
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The resource model definition representing SKU"
-        },
-        "backend": {
-          "$ref": "#/definitions/DeploymentBackendProperties",
-          "description": "Read-only backend projection details for VM managed compute deployments.",
-          "readOnly": true
         },
         "etag": {
           "type": "string",
@@ -20054,68 +20038,6 @@
       "required": [
         "id"
       ]
-    },
-    "VmManagedComputeBackendProperties": {
-      "type": "object",
-      "description": "Read-only VM managed compute backend projection details.",
-      "properties": {
-        "singularityAccountName": {
-          "type": "string",
-          "description": "Singularity account name used for the templated model.",
-          "readOnly": true
-        },
-        "singularityAccountResourceId": {
-          "type": "string",
-          "description": "Singularity account ARM resource ID used for the templated model.",
-          "readOnly": true
-        },
-        "templatedModelName": {
-          "type": "string",
-          "description": "Singularity templated model name.",
-          "readOnly": true
-        },
-        "templatedModelResourceId": {
-          "type": "string",
-          "description": "Singularity templated model ARM resource ID.",
-          "readOnly": true
-        },
-        "operationUri": {
-          "type": "string",
-          "description": "Backend operation URI.",
-          "readOnly": true
-        },
-        "endpointMode": {
-          "type": "string",
-          "description": "Backend endpoint mode.",
-          "readOnly": true
-        },
-        "backendRegion": {
-          "type": "string",
-          "description": "Backend region where the VM managed compute deployment is provisioned.",
-          "readOnly": true
-        },
-        "publicIp": {
-          "type": "string",
-          "description": "Backend public IP address.",
-          "readOnly": true
-        },
-        "hostFqdn": {
-          "type": "string",
-          "description": "Backend host FQDN.",
-          "readOnly": true
-        },
-        "currentInstanceCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Current backend instance count.",
-          "readOnly": true
-        },
-        "targetHostPool": {
-          "type": "string",
-          "description": "Target backend host pool.",
-          "readOnly": true
-        }
-      }
     },
     "VmPriority": {
       "type": "string",
