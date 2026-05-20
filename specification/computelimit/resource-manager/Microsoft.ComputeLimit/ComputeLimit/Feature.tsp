@@ -64,8 +64,9 @@ interface Features {
   /** Enables a compute limit feature for the subscription at the specified location. */
   @action("enable")
   @removed(Versions.v2026_06_01)
+  @renamedFrom(Versions.v2026_06_01, "enable")
   @sharedRoute
-  enable is ArmResourceActionAsync<
+  enableLegacy is ArmResourceActionAsync<
     Feature,
     void,
     Azure.ResourceManager.Foundations.OperationStatusResult
@@ -75,7 +76,7 @@ interface Features {
   @action("enable")
   @added(Versions.v2026_06_01)
   @sharedRoute
-  enableV2 is ArmResourceActionAsync<
+  enable is ArmResourceActionAsync<
     Feature,
     FeatureEnableRequest,
     Azure.ResourceManager.Foundations.OperationStatusResult,
