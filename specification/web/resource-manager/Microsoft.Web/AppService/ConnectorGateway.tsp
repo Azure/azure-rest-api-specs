@@ -95,7 +95,7 @@ model AccessKeyRegenerateActionDefinition {
 interface ConnectorGateways {
   get is ArmResourceRead<ConnectorGateway>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<ConnectorGateway>;
-  patch is ArmTagsPatchSync<ConnectorGateway>;
+  update is ArmTagsPatchSync<ConnectorGateway>;
   delete is ArmResourceDeleteSync<ConnectorGateway>;
   listBySubscription is ArmListBySubscription<ConnectorGateway>;
   listByResourceGroup is ArmResourceListByParent<
