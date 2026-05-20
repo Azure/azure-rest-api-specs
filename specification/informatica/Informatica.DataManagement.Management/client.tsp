@@ -17,7 +17,6 @@ using Azure.ClientGenerator.Core;
 );
 
 namespace Informatica.DataManagement {
-
   @@clientName(
     InformaticaOrganizationResource,
     "InformaticaOrganization",

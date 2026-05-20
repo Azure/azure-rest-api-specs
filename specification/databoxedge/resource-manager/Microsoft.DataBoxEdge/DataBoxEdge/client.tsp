@@ -2123,7 +2123,6 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
 @@usage(NetworkSettings, Usage.input | Usage.output, "csharp");
 @@usage(UpdateSummary, Usage.input | Usage.output, "csharp");
 
-
 @@alternateType(
   DataBoxEdgeDeviceExtendedInfoProperties.clientSecretStoreUrl,
   url,
