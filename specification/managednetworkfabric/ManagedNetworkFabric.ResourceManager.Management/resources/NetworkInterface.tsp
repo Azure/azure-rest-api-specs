@@ -2,16 +2,14 @@ import "../models/common.tsp";
 import "./NetworkDevice.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-using TypeSpec.Http;
 
 namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("Defines the NetworkInterface resource.")
 @parentResource(NetworkDevice)
-@Http.Private.includeInapplicableMetadataInPayload(false)
 model NetworkInterface is Azure.ResourceManager.ProxyResource<NetworkInterfaceProperties> {
   @doc("Name of the Network Interface.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")

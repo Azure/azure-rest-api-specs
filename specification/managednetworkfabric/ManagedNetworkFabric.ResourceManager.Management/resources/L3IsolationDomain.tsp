@@ -1,17 +1,15 @@
 import "../models/common.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Private;
 using TypeSpec.Versioning;
-using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The L3 Isolation Domain resource definition.")
-@Http.Private.includeInapplicableMetadataInPayload(false)
 model L3IsolationDomain is Azure.ResourceManager.TrackedResource<L3IsolationDomainProperties> {
   @doc("Name of the L3 Isolation Domain.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")

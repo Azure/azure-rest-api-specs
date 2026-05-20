@@ -1,16 +1,14 @@
 import "../models/common.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Http;
 using Azure.ResourceManager;
 
-using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The Network Fabric Controller resource definition.")
-@Http.Private.includeInapplicableMetadataInPayload(false)
 model NetworkFabricController is Azure.ResourceManager.TrackedResource<NetworkFabricControllerProperties> {
   @doc("Name of the Network Fabric Controller.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")

@@ -2,16 +2,14 @@ import "../models/common.tsp";
 import "../models/NetworkMonitor.tsp";
 
 using TypeSpec.Rest;
-using Azure.ResourceManager;
 using TypeSpec.Http;
+using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The NetworkMonitor resource definition.")
 @added(Versions.v2024_06_15_preview)
-@Http.Private.includeInapplicableMetadataInPayload(false)
 model NetworkMonitor is Azure.ResourceManager.TrackedResource<NetworkMonitorProperties> {
   @doc("Name of the Network Monitor.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
