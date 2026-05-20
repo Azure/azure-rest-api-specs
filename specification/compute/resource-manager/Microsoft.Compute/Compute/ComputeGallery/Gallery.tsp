@@ -29,11 +29,12 @@ model Gallery is Azure.ResourceManager.TrackedResource<GalleryProperties> {
   identity?: GalleryIdentity;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface Galleries {
   /**
    * Retrieves information about a Shared Image Gallery.
    */
+  @tag("Galleries")
   get is ComputeResourceRead<
     Gallery,
     Parameters = {
@@ -56,6 +57,7 @@ interface Galleries {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @tag("Galleries")
   createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     Gallery,
     Response =
@@ -65,7 +67,10 @@ interface Galleries {
           ArmLroLocationHeader<FinalResult = Gallery> &
             Azure.Core.Foundations.RetryAfterHeader
         >
-      | (ArmAcceptedLroResponse & {
+      | (ArmAcceptedLroResponse<
+          LroHeaders = ArmLroLocationHeader<FinalResult = Gallery> &
+            Azure.Core.Foundations.RetryAfterHeader
+        > & {
           @bodyRoot
           _: Gallery;
         })
@@ -74,6 +79,7 @@ interface Galleries {
   /**
    * Update a Shared Image Gallery.
    */
+  @tag("Galleries")
   @patch(#{ implicitOptionality: false })
   update is ComputeCustomPatchAsync<
     Gallery,
@@ -87,6 +93,7 @@ interface Galleries {
    * Delete a Shared Image Gallery.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @tag("Galleries")
   delete is ComputeResourceDeleteAsync<
     Gallery,
     Response =
@@ -98,6 +105,7 @@ interface Galleries {
   /**
    * List galleries under a resource group.
    */
+  @tag("Galleries")
   listByResourceGroup is ComputeResourceListByParent<
     Gallery,
     Response = ArmResponse<GalleryList>
@@ -106,6 +114,7 @@ interface Galleries {
   /**
    * List galleries under a subscription.
    */
+  @tag("Galleries")
   list is ComputeListBySubscription<
     Gallery,
     Response = ArmResponse<GalleryList>
@@ -119,6 +128,7 @@ interface Galleries {
   @get
   @action("versions")
   @list
+  @tag("SoftDelete")
   @operationId("SoftDeletedResource_ListByArtifactName")
   listByArtifactName is ComputeResourceActionSync<
     Gallery,
@@ -149,6 +159,7 @@ interface Galleries {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body"
   @action("share")
+  @tag("GallerySharingUpdate")
   @operationId("GallerySharingProfile_Update")
   gallerySharingProfileUpdate is ComputeResourceActionAsyncBase<
     Gallery,
