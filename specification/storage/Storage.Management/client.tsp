@@ -667,19 +667,19 @@ namespace Azure.ResourceManager.Models {
 );
 
 // Shared key access boolean property names
-@@clientName(StorageAccountSharedKeyAccessProperties.isBlobEnabled,
+@@clientName(StorageAccountSharedKeyAccessProperties.BlobEnabled,
   "IsBlobEnabled",
   "csharp"
 );
-@@clientName(StorageAccountSharedKeyAccessProperties.isFileEnabled,
+@@clientName(StorageAccountSharedKeyAccessProperties.FileEnabled,
   "IsFileEnabled",
   "csharp"
 );
-@@clientName(StorageAccountSharedKeyAccessProperties.isQueueEnabled,
+@@clientName(StorageAccountSharedKeyAccessProperties.QueueEnabled,
   "IsQueueEnabled",
   "csharp"
 );
-@@clientName(StorageAccountSharedKeyAccessProperties.isTableEnabled,
+@@clientName(StorageAccountSharedKeyAccessProperties.TableEnabled,
   "IsTableEnabled",
   "csharp"
 );
