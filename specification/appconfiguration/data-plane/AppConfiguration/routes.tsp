@@ -577,12 +577,14 @@ op deleteSchema is AppConfigOperation<
     ...SyncTokenHeader;
     ...IfMatchHeader;
   },
-  (Body<Schema> &
-    AppConfigResponseHeaders &
-    ContentTypeHeader<"application/json">) | {
-    @statusCode
-    statusCode: 204;
 
-    ...SyncTokenHeader;
-  }
+    | (Body<Schema> &
+        AppConfigResponseHeaders &
+        ContentTypeHeader<"application/json">)
+    | {
+        @statusCode
+        statusCode: 204;
+
+        ...SyncTokenHeader;
+      }
 >;
