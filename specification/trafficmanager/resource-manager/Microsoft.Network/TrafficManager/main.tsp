@@ -30,7 +30,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.Network;
 
 /**
- * The available API versions.
+ * The available API versions for Microsoft.Network Traffic Manager.
  */
 enum Versions {
   /**
