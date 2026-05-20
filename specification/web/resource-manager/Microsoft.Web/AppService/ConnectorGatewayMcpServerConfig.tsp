@@ -71,9 +71,9 @@ model OperationParameter {
   @doc("Parameter display name.")
   displayName?: string;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Free-form parameter value; backend accepts any JSON primitive or complex shape."
-  @doc("Default parameter value. May be a primitive or complex JSON value.")
-  value?: Record<unknown>;
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Free-form parameter value; backend accepts any JSON primitive or complex shape."
+  @doc("Default parameter value. May be a primitive (string, boolean, integer, number) or a complex type (array, object).")
+  value?: unknown;
 
   @doc("Human-readable rendering of value, when applicable.")
   displayValue?: string;
@@ -98,7 +98,7 @@ model McpServerConfigOperation {
   @doc("Operation description.")
   description: string;
 
-  @doc("Connector-local identity used as the MCP-visible tool name instead of name. The backend prefixes the connector name and normalises special characters to produce the final MCP tool name.")
+  @doc("Connector-local identity used as the MCP-visible tool name instead of name. The backend prefixes the connector name and normalizes special characters to produce the final MCP tool name.")
   toolName?: string;
 
   @doc("Parameters with fixed values set by the user.")

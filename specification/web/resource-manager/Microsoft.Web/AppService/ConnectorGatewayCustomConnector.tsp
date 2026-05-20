@@ -106,8 +106,8 @@ model ConnectorGatewayCustomConnectorProperties {
   @doc("API Hub runtime endpoints for the connector.")
   runtimeUrls?: string[];
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Free-form pointers to externalised API definitions."
-  @doc("Pointers to externalised API definitions (e.g., swagger URLs stored in blob storage).")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Free-form pointers to externalized API definitions."
+  @doc("Pointers to externalized API definitions (e.g., swagger URLs stored in blob storage).")
   apiDefinitions?: Record<unknown>;
 
   @doc("API definition shape.")

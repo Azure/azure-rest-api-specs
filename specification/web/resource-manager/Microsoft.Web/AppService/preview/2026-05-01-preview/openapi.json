@@ -44039,7 +44039,7 @@
         },
         "apiDefinitions": {
           "type": "object",
-          "description": "Pointers to externalised API definitions (e.g., swagger URLs stored in blob storage).",
+          "description": "Pointers to externalized API definitions (e.g., swagger URLs stored in blob storage).",
           "additionalProperties": {}
         },
         "apiType": {
@@ -49118,7 +49118,7 @@
         },
         "type": {
           "type": "string",
-          "description": "Input type. Determines how the configuration value is serialised into the\nsandbox. Common values include `string`, `secret`, `enum`, `int`, `bool`,\n`file`."
+          "description": "Input type. Determines how the configuration value is serialized into the\nsandbox. Common values include `string`, `secret`, `enum`, `int`, `bool`,\n`file`."
         },
         "allowedValues": {
           "type": "array",
@@ -50769,7 +50769,7 @@
     },
     "ManagedHostedMcpServerProperties": {
       "type": "object",
-      "description": "Public catalog metadata for a managed hosted MCP server. The catalog\nresponse intentionally omits sandbox-internal fields (container image,\nmcpServerRoute, targetPort, cpu, memory) — those are sandbox\nimplementation details and are not exposed to clients.",
+      "description": "Public catalog metadata for a managed hosted MCP server. The catalog\nresponse intentionally omits sandbox-internal fields (container image,\nserver route, target port, cpu, memory) — those are sandbox\nimplementation details and are not exposed to clients.",
       "properties": {
         "displayName": {
           "type": "string",
@@ -51116,7 +51116,7 @@
         },
         "toolName": {
           "type": "string",
-          "description": "Connector-local identity used as the MCP-visible tool name instead of name. The backend prefixes the connector name and normalises special characters to produce the final MCP tool name."
+          "description": "Connector-local identity used as the MCP-visible tool name instead of name. The backend prefixes the connector name and normalizes special characters to produce the final MCP tool name."
         },
         "userParameters": {
           "type": "array",
@@ -52043,9 +52043,7 @@
           "description": "Parameter display name."
         },
         "value": {
-          "type": "object",
-          "description": "Default parameter value. May be a primitive or complex JSON value.",
-          "additionalProperties": {}
+          "description": "Default parameter value. May be a primitive (string, boolean, integer, number) or a complex type (array, object)."
         },
         "displayValue": {
           "type": "string",

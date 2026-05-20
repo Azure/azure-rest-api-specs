@@ -237,7 +237,7 @@ model HostedMcpServerInputDefinition {
   isRequired?: boolean;
 
   @doc("""
-    Input type. Determines how the configuration value is serialised into the
+    Input type. Determines how the configuration value is serialized into the
     sandbox. Common values include `string`, `secret`, `enum`, `int`, `bool`,
     `file`.
     """)
@@ -258,7 +258,7 @@ model HostedMcpServerInputDefinition {
 @doc("""
   Public catalog metadata for a managed hosted MCP server. The catalog
   response intentionally omits sandbox-internal fields (container image,
-  mcpServerRoute, targetPort, cpu, memory) — those are sandbox
+  server route, target port, cpu, memory) — those are sandbox
   implementation details and are not exposed to clients.
   """)
 model ManagedHostedMcpServerProperties {
