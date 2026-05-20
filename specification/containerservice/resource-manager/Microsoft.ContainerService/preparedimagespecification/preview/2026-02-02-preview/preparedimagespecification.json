@@ -808,6 +808,11 @@
           "$ref": "#/definitions/PreparedImageSpecificationManagedIdentityProfileUpdate",
           "description": "The identity used to execute prepared image specification tasks during image build time and provisioning time."
         },
+        "version": {
+          "type": "string",
+          "description": "An auto-generated value that changes when the other fields of the image customization are changed.",
+          "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,128}$"
+        },
         "customizationScripts": {
           "type": "array",
           "description": "The scripts to customize the node before or after image capture.",
@@ -836,8 +841,7 @@
         "version": {
           "type": "string",
           "description": "An auto-generated value that changes when the other fields of the image customization are changed.",
-          "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,128}$",
-          "readOnly": true
+          "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,128}$"
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -874,13 +878,11 @@
         },
         "scriptType": {
           "$ref": "#/definitions/ScriptType",
-          "description": "The runtime environment for the script (e.g. Bash).",
-          "example": "Bash"
+          "description": "The runtime environment for the script (e.g. Bash)."
         },
         "script": {
           "type": "string",
-          "description": "The script content to be executed in plain text. Do not include secrets.",
-          "example": "echo 'initializing node'"
+          "description": "The script content to be executed in plain text. Do not include secrets."
         },
         "postScriptAction": {
           "$ref": "#/definitions/PostScriptAction",
@@ -909,13 +911,11 @@
         },
         "scriptType": {
           "$ref": "#/definitions/ScriptType",
-          "description": "The runtime environment for the script (e.g. Bash).",
-          "example": "Bash"
+          "description": "The runtime environment for the script (e.g. Bash)."
         },
         "script": {
           "type": "string",
-          "description": "The script content to be executed in plain text. Do not include secrets.",
-          "example": "echo 'initializing node'"
+          "description": "The script content to be executed in plain text. Do not include secrets."
         },
         "postScriptAction": {
           "$ref": "#/definitions/PostScriptAction",
