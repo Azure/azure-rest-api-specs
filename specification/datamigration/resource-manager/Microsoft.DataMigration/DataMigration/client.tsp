@@ -651,11 +651,7 @@ using Microsoft.DataMigration;
   Azure.Core.azureLocation,
   "csharp"
 );
-@@alternateType(
-  Project.location,
-  Azure.Core.azureLocation,
-  "csharp"
-);
+@@alternateType(Project.location, Azure.Core.azureLocation, "csharp");
 @@alternateType(
   SqlMigrationService.location,
   Azure.Core.azureLocation,
