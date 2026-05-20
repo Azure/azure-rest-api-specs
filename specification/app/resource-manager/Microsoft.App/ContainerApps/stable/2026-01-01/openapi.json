@@ -237,7 +237,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.App/getCustomDomainVerificationId": {
       "post": {
-        "operationId": "GetCustomDomainVerificationId",
+        "operationId": "GetCustomDomainVerificationIdStable",
         "tags": [
           "Subscriptions"
         ],
@@ -262,11 +262,6 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List all operations": {
-            "$ref": "./examples/Subscriptions_GetCustomDomainVerificationId.json"
           }
         }
       }
@@ -396,7 +391,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.App/locations/{location}/usages": {
       "get": {
-        "operationId": "Usages_List",
+        "operationId": "Usages_ListStable",
         "tags": [
           "Usages"
         ],
@@ -429,11 +424,6 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List usages": {
-            "$ref": "./examples/Usages_List.json"
           }
         },
         "x-ms-pageable": {
@@ -2773,7 +2763,7 @@
         }
       },
       "put": {
-        "operationId": "LogicApps_CreateOrUpdate",
+        "operationId": "LogicApps_CreateOrUpdateStable",
         "tags": [
           "LogicApps"
         ],
@@ -2832,11 +2822,6 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Create logic app extension": {
-            "$ref": "./examples/LogicApps_Create.json"
           }
         }
       },
@@ -6074,7 +6059,7 @@
         }
       },
       "delete": {
-        "operationId": "HttpRouteConfigs_DeleteV2",
+        "operationId": "HttpRouteConfig_DeleteV2",
         "tags": [
           "HttpRouteConfig"
         ],
@@ -6488,7 +6473,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/maintenanceConfigurations": {
       "get": {
-        "operationId": "MaintenanceConfigurations_List",
+        "operationId": "MaintenanceConfigurations_ListStable",
         "tags": [
           "MaintenanceConfigurations"
         ],
@@ -6524,11 +6509,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ManagedEnvironmentMaintenanceConfigurationsList": {
-            "$ref": "./examples/ManagedEnvironment_MaintenanceConfigurations_List.json"
           }
         },
         "x-ms-pageable": {
@@ -6591,7 +6571,7 @@
         }
       },
       "put": {
-        "operationId": "MaintenanceConfigurations_CreateOrUpdate",
+        "operationId": "MaintenanceConfigurations_CreateOrUpdateStable",
         "tags": [
           "MaintenanceConfigurations"
         ],
@@ -6623,7 +6603,7 @@
             "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
-            "name": "resource",
+            "name": "maintenanceConfigurationEnvelope",
             "in": "body",
             "description": "Resource create parameters.",
             "required": true,
@@ -6651,15 +6631,10 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "ManagedEnvironmentMaintenanceConfigurationsCreateOrUpdate": {
-            "$ref": "./examples/ManagedEnvironment_MaintenanceConfigurations_CreateOrUpdate.json"
-          }
         }
       },
       "delete": {
-        "operationId": "MaintenanceConfigurations_Delete",
+        "operationId": "MaintenanceConfigurations_DeleteStable",
         "tags": [
           "MaintenanceConfigurations"
         ],
@@ -6703,11 +6678,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ManagedEnvironmentMaintenanceConfigurationsDelete": {
-            "$ref": "./examples/ManagedEnvironment_MaintenanceConfigurations_Delete.json"
           }
         }
       }
@@ -7842,7 +7812,7 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "ContainerAppsSessionPools_Update",
+        "operationId": "ContainerAppsSessionPools_UpdateStable",
         "tags": [
           "ContainerAppsSessionPools"
         ],
@@ -7869,7 +7839,7 @@
             "pattern": "^[a-z][a-z0-9]*$"
           },
           {
-            "name": "properties",
+            "name": "sessionPoolEnvelope",
             "in": "body",
             "description": "The resource properties to be updated.",
             "required": true,
@@ -7907,11 +7877,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Update Session Pool": {
-            "$ref": "./examples/SessionPools_Patch.json"
           }
         },
         "x-ms-long-running-operation-options": {

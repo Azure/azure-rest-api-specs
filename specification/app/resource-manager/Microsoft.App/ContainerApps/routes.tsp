@@ -85,13 +85,11 @@ op getCustomDomainVerificationId is ArmProviderActionSync<
  * Get the verification id of a subscription used for verifying custom domains
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Need operationId to match original swagger"
 @autoRoute
 @tag("Subscriptions")
 @sharedRoute
 @action("getCustomDomainVerificationId")
 @added(Versions.v2026_01_01)
-@operationId("GetCustomDomainVerificationId")
 op getCustomDomainVerificationIdStable is ArmProviderActionSync<
   Response = OkResponse & {
     @header("Content-Type") contentType: "application/json";
@@ -125,7 +123,6 @@ interface UsagesOperationGroup {
   /**
    * Gets, for the specified location, the current resource usage information as well as the limits under the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Need operationId to match original swagger"
   @autoRoute
   @get
   @list
@@ -133,7 +130,6 @@ interface UsagesOperationGroup {
   @tag("Usages")
   @sharedRoute
   @added(Versions.v2026_01_01)
-  @operationId("Usages_List")
   listStable is ArmProviderActionSync<
     Response = ListUsagesResult,
     Scope = SubscriptionActionScope,

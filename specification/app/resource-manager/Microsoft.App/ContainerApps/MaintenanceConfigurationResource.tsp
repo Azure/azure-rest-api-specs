@@ -92,10 +92,8 @@ interface MaintenanceConfigurations {
   /**
    * Create or update the maintenance configuration for Managed Environment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Need operationId to match original swagger"
   @sharedRoute
   @added(Versions.v2026_01_01)
-  @operationId("MaintenanceConfigurations_CreateOrUpdate")
   createOrUpdateStable is MaintenanceConfigurationResourceOps.CreateOrUpdateSync<MaintenanceConfigurationResource>;
 
   /**
@@ -108,10 +106,8 @@ interface MaintenanceConfigurations {
   /**
    * Deletes the maintenance configuration of a ManagedEnvironment .
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Need operationId to match original swagger"
   @sharedRoute
   @added(Versions.v2026_01_01)
-  @operationId("MaintenanceConfigurations_Delete")
   deleteStable is MaintenanceConfigurationResourceOps.DeleteSync<MaintenanceConfigurationResource>;
 
   /**
@@ -127,10 +123,8 @@ interface MaintenanceConfigurations {
   /**
    * Gets all maintenance configurations in the specified Managed Environment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Need operationId to match original swagger"
   @sharedRoute
   @added(Versions.v2026_01_01)
-  @operationId("MaintenanceConfigurations_List")
   listStable is MaintenanceConfigurationResourceOps.List<
     MaintenanceConfigurationResource,
     Response = ArmResponse<MaintenanceConfigurationCollection>

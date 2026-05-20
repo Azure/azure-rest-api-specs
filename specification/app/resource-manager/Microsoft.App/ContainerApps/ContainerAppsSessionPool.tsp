@@ -57,12 +57,10 @@ interface ContainerAppsSessionPools {
   /**
    * Patches a session pool using JSON merge patch
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Need operationId to match original swagger"
   @patch(#{ implicitOptionality: false })
   @summary("Update properties of a session pool")
   @sharedRoute
   @added(Versions.v2026_01_01)
-  @operationId("ContainerAppsSessionPools_Update")
   updateStable is ArmCustomPatchAsync<
     SessionPool,
     PatchModel = SessionPoolUpdatableProperties,
