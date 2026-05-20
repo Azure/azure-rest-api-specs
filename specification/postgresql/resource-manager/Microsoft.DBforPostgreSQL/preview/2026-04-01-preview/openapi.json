@@ -7207,7 +7207,7 @@
         "rescheduledFrom": {
           "type": "string",
           "format": "date-time",
-          "description": "The original scheduled start time before this event was rescheduled. Null if the event has never been rescheduled.",
+          "description": "The previous scheduled start time before the most recent reschedule (UTC). Null if the event has never been rescheduled.",
           "readOnly": true
         },
         "lastUpdatedTime": {
@@ -7219,10 +7219,18 @@
         "originalStartTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The original scheduled start time before this event was rescheduled.",
+          "description": "The initial scheduled start time before any reschedule (UTC). Equals startTime when the event has never been rescheduled.",
           "readOnly": true
         }
-      }
+      },
+      "required": [
+        "maintenanceType",
+        "status",
+        "startTime",
+        "endTime",
+        "deferrable",
+        "originalStartTime"
+      ]
     },
     "MaintenanceEventStatus": {
       "type": "string",
