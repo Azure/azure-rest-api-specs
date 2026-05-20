@@ -224,7 +224,6 @@ interface Jobs {
     DefaultBaseParameters<Job>,
     Error = DefaultErrorResponse
   >;
-
 }
 
 @armResourceOperations
@@ -298,10 +297,7 @@ interface JobDetectorProperties {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserve the existing OpenAPI operation id while modeling proxyGet as a resource read for C# generation."
   @summary("Get the properties for a given Container App Job.")
   @operationId("Jobs_ProxyGet")
-  get is JobDetectorPropertyOps.Read<
-    Job,
-    Response = ArmResponse<Job>
-  >;
+  get is JobDetectorPropertyOps.Read<Job, Response = ArmResponse<Job>>;
 }
 
 @@doc(Job.name, "Job Name");

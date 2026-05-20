@@ -40,7 +40,6 @@ using Microsoft.App;
 );
 @@clientName(AvailableWorkloadProfilesOperationGroup.get, "list", "javascript");
 
-
 // C# compatibility replacement declarations used by the decorator blocks below.
 // @@hierarchyBuilding cannot preserve the previous C# ResourceData base type for
 // DiagnosticsDefinition because that model is not structurally compatible with
@@ -94,6 +93,7 @@ model CSharpDiagnosticsDefinition
  */
 union UsageUnit {
   string,
+
   /** Count. */
   Count: "Count",
 }
@@ -103,6 +103,7 @@ union UsageUnit {
  */
 union OpenIdConnectClientCredentialMethod {
   string,
+
   /** Client secret post authentication. */
   ClientSecretPost: "ClientSecretPost",
 }
@@ -888,7 +889,11 @@ union OpenIdConnectClientCredentialMethod {
 
 @@clientName(ManagedEnvironmentCertificates.listCertificates, "List", "csharp");
 
-@@clientName(ManagedEnvironmentCertificates.deleteCertificates, "Delete", "csharp");
+@@clientName(
+  ManagedEnvironmentCertificates.deleteCertificates,
+  "Delete",
+  "csharp"
+);
 
 @@clientName(
   ManagedEnvironmentCertificates.createOrUpdateCertificates,
@@ -896,7 +901,11 @@ union OpenIdConnectClientCredentialMethod {
   "csharp"
 );
 
-@@clientName(ManagedEnvironmentCertificates.updateCertificates, "Update", "csharp");
+@@clientName(
+  ManagedEnvironmentCertificates.updateCertificates,
+  "Update",
+  "csharp"
+);
 
 @@clientName(
   ManagedEnvironmentProperties.zoneRedundant,
@@ -1204,7 +1213,10 @@ union OpenIdConnectClientCredentialMethod {
 @@markAsPageable(ContainerAppsRevisionReplicas.listReplicas, "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the previous pageable diagnostics SDK surface during MPG migration"
-@@markAsPageable(ContainerAppManagedEnvironmentDetectors.listDetectors, "csharp");
+@@markAsPageable(
+  ContainerAppManagedEnvironmentDetectors.listDetectors,
+  "csharp"
+);
 
 // C# @@scope customizations.
 @@scope(ContainerAppsLabelHistory.listLabelHistory, "!csharp");
@@ -1216,11 +1228,7 @@ union OpenIdConnectClientCredentialMethod {
 @@access(SessionPoolCollection, Access.internal, "csharp");
 
 // C# @@usage customizations.
-@@usage(
-  LogicAppProperties,
-  Azure.ClientGenerator.Core.Usage.input,
-  "csharp"
-);
+@@usage(LogicAppProperties, Azure.ClientGenerator.Core.Usage.input, "csharp");
 
 @@usage(
   ContainerAppAuthToken,
@@ -1240,11 +1248,7 @@ union OpenIdConnectClientCredentialMethod {
   "csharp"
 );
 
-@@usage(
-  BillingMeter,
-  Azure.ClientGenerator.Core.Usage.input,
-  "csharp"
-);
+@@usage(BillingMeter, Azure.ClientGenerator.Core.Usage.input, "csharp");
 
 @@usage(
   BillingMeterProperties,
@@ -1252,11 +1256,7 @@ union OpenIdConnectClientCredentialMethod {
   "csharp"
 );
 
-@@usage(
-  Diagnostics,
-  Azure.ClientGenerator.Core.Usage.input,
-  "csharp"
-);
+@@usage(Diagnostics, Azure.ClientGenerator.Core.Usage.input, "csharp");
 
 @@usage(
   DiagnosticsProperties,
@@ -1270,11 +1270,7 @@ union OpenIdConnectClientCredentialMethod {
   "csharp"
 );
 
-@@usage(
-  DiagnosticsStatus,
-  Azure.ClientGenerator.Core.Usage.input,
-  "csharp"
-);
+@@usage(DiagnosticsStatus, Azure.ClientGenerator.Core.Usage.input, "csharp");
 
 @@usage(
   DiagnosticDataProviderMetadata,
@@ -1300,11 +1296,7 @@ union OpenIdConnectClientCredentialMethod {
   "csharp"
 );
 
-@@usage(
-  DiagnosticRendering,
-  Azure.ClientGenerator.Core.Usage.input,
-  "csharp"
-);
+@@usage(DiagnosticRendering, Azure.ClientGenerator.Core.Usage.input, "csharp");
 
 @@usage(
   DiagnosticsDataApiResponse,
@@ -1318,35 +1310,15 @@ union OpenIdConnectClientCredentialMethod {
   "csharp"
 );
 
-@@usage(
-  EnvironmentAuthToken,
-  Azure.ClientGenerator.Core.Usage.input,
-  "csharp"
-);
+@@usage(EnvironmentAuthToken, Azure.ClientGenerator.Core.Usage.input, "csharp");
 
-@@usage(
-  PrivateLinkResource,
-  Azure.ClientGenerator.Core.Usage.input,
-  "csharp"
-);
+@@usage(PrivateLinkResource, Azure.ClientGenerator.Core.Usage.input, "csharp");
 
-@@usage(
-  Replica,
-  Azure.ClientGenerator.Core.Usage.input,
-  "csharp"
-);
+@@usage(Replica, Azure.ClientGenerator.Core.Usage.input, "csharp");
 
-@@usage(
-  ReplicaContainer,
-  Azure.ClientGenerator.Core.Usage.input,
-  "csharp"
-);
+@@usage(ReplicaContainer, Azure.ClientGenerator.Core.Usage.input, "csharp");
 
-@@usage(
-  Revision,
-  Azure.ClientGenerator.Core.Usage.input,
-  "csharp"
-);
+@@usage(Revision, Azure.ClientGenerator.Core.Usage.input, "csharp");
 
 @@usage(
   workloadProfileStates,
@@ -1366,11 +1338,7 @@ union OpenIdConnectClientCredentialMethod {
   "csharp"
 );
 
-@@usage(
-  WorkflowEnvelope,
-  Azure.ClientGenerator.Core.Usage.input,
-  "csharp"
-);
+@@usage(WorkflowEnvelope, Azure.ClientGenerator.Core.Usage.input, "csharp");
 
 @@usage(
   WorkflowEnvelopeProperties,
@@ -1378,23 +1346,11 @@ union OpenIdConnectClientCredentialMethod {
   "csharp"
 );
 
-@@usage(
-  WorkflowHealth,
-  Azure.ClientGenerator.Core.Usage.input,
-  "csharp"
-);
+@@usage(WorkflowHealth, Azure.ClientGenerator.Core.Usage.input, "csharp");
 
-@@usage(
-  ErrorEntity,
-  Azure.ClientGenerator.Core.Usage.input,
-  "csharp"
-);
+@@usage(ErrorEntity, Azure.ClientGenerator.Core.Usage.input, "csharp");
 
-@@usage(
-  UsageUnit,
-  Azure.ClientGenerator.Core.Usage.input,
-  "csharp"
-);
+@@usage(UsageUnit, Azure.ClientGenerator.Core.Usage.input, "csharp");
 
 @@usage(
   OpenIdConnectClientCredentialMethod,
