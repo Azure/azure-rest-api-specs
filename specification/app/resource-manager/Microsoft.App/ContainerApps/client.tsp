@@ -88,26 +88,6 @@ model CSharpDiagnosticsDefinition
   score?: float32;
 }
 
-/**
- * C# compatibility usage unit extensible enum.
- */
-union UsageUnit {
-  string,
-
-  /** Count. */
-  Count: "Count",
-}
-
-/**
- * C# compatibility custom OpenID Connect client credential method extensible enum.
- */
-union OpenIdConnectClientCredentialMethod {
-  string,
-
-  /** Client secret post authentication. */
-  ClientSecretPost: "ClientSecretPost",
-}
-
 // C# @@alternateType customizations.
 @@alternateType(DiagnosticsDefinition, CSharpDiagnosticsDefinition, "csharp");
 
