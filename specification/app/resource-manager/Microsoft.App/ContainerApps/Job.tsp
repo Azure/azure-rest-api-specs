@@ -31,6 +31,32 @@ model Job is Azure.ResourceManager.TrackedResource<JobProperties> {
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
+alias JobDetectorPropertyOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** Job Name */
+    @path
+    @segment("jobs")
+    @key
+    @pattern("^[-\\w\\._\\(\\)]+$")
+    jobName: string;
+  },
+  {
+    /** Proxy API Name for Container App Job. */
+    @path
+    @segment("detectorProperties")
+    @key
+    @pattern("^[-\\w\\._]+$")
+    apiName: string;
+  },
+  ErrorType = DefaultErrorResponse,
+  ResourceName = "ContainerAppJobDetectorProperty"
+>;
+
 @armResourceOperations(#{ omitTags: true })
 interface Jobs {
   /**
@@ -229,18 +255,7 @@ interface Jobs {
   @tag("Jobs")
   @tag("Diagnostics")
   @summary("Get the properties for a given Container App Job.")
-  proxyGet is ArmResourceRead<
-    Job,
-    Parameters = {
-      /** Proxy API Name for Container App Job. */
-      @path
-      @segment("detectorProperties")
-      @key
-      @pattern("^[-\\w\\._]+$")
-      apiName: string;
-    },
-    Error = DefaultErrorResponse
-  >;
+  proxyGet is JobDetectorPropertyOps.Read<Job, Response = ArmResponse<Job>>;
 
   /**
    * Get the list of diagnostics for a Container App Job.
