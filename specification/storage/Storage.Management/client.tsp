@@ -814,63 +814,76 @@ namespace Azure.ResourceManager.Models {
   "IsPriorityReplicationEnabled",
   "csharp"
 );
-@@clientName(ObjectReplicationPolicyPropertiesTagsReplication.enabled,
+@@clientName(
+  ObjectReplicationPolicyPropertiesTagsReplication.enabled,
   "IsTagsReplicationEnabled",
   "csharp"
 );
 
 // Native data sharing patch model naming
 @@clientName(TrackedResourceUpdate, "StorageTrackedResourcePatch", "csharp");
-@@clientName(StorageConnectorAuthPropertiesUpdate,
+@@clientName(
+  StorageConnectorAuthPropertiesUpdate,
   "StorageConnectorAuthPropertiesPatch",
   "csharp"
 );
-@@clientName(StorageConnectorSourceUpdate,
+@@clientName(
+  StorageConnectorSourceUpdate,
   "StorageConnectorSourcePatch",
   "csharp"
 );
 @@clientName(DataShareSourceUpdate, "DataShareSourcePatch", "csharp");
-@@clientName(ManagedIdentityAuthPropertiesUpdate,
+@@clientName(
+  ManagedIdentityAuthPropertiesUpdate,
   "ManagedIdentityAuthPropertiesPatch",
   "csharp"
 );
-@@clientName(StorageConnectorPropertiesUpdate,
+@@clientName(
+  StorageConnectorPropertiesUpdate,
   "StorageConnectorPropertiesPatch",
   "csharp"
 );
-@@clientName(StorageDataSharePropertiesUpdate,
+@@clientName(
+  StorageDataSharePropertiesUpdate,
   "StorageDataSharePropertiesPatch",
   "csharp"
 );
 
 // Native data sharing property renames/types
-@@clientName(StorageConnectorProperties.testConnection,
+@@clientName(
+  StorageConnectorProperties.testConnection,
   "ShouldTestConnection",
   "csharp"
 );
-@@alternateType(ManagedIdentityAuthProperties.identityResourceId,
+@@alternateType(
+  ManagedIdentityAuthProperties.identityResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ManagedIdentityAuthPropertiesUpdate.identityResourceId,
+@@alternateType(
+  ManagedIdentityAuthPropertiesUpdate.identityResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 
 // Shared key access boolean property names
-@@clientName(StorageAccountSharedKeyAccessProperties.BlobEnabled,
+@@clientName(
+  StorageAccountSharedKeyAccessProperties.blob,
   "IsBlobEnabled",
   "csharp"
 );
-@@clientName(StorageAccountSharedKeyAccessProperties.FileEnabled,
+@@clientName(
+  StorageAccountSharedKeyAccessProperties.file,
   "IsFileEnabled",
   "csharp"
 );
-@@clientName(StorageAccountSharedKeyAccessProperties.QueueEnabled,
+@@clientName(
+  StorageAccountSharedKeyAccessProperties.queue,
   "IsQueueEnabled",
   "csharp"
 );
-@@clientName(StorageAccountSharedKeyAccessProperties.TableEnabled,
+@@clientName(
+  StorageAccountSharedKeyAccessProperties.table,
   "IsTableEnabled",
   "csharp"
 );
