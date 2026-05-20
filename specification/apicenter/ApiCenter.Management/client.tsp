@@ -8,8 +8,6 @@ namespace Microsoft.ApiCenter;
 // Preserve legacy Java header property names for compatibility
 @@clientName(Azure.Core.EtagResponseEnvelope.etagHeader, "etag", "java");
 
-@@alternateType(TypeSpec.Http.OkResponse, void, "java");
-
 // Rename mapping for C# client
 @@clientName(ApiSources, "ApiCenterApiSource", "csharp");
 @@clientName(ApiSourceLinkState, "ApiCenterApiSourceLinkState", "csharp");
