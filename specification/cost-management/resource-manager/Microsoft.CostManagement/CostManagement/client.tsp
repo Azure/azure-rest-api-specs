@@ -212,9 +212,6 @@ op GetGenerateDetailedCostReportOperationStatusCustomized(
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the operation back to pageable for backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(Exports.list, "csharp");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the operation back to pageable for backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Settings.list, "csharp");
-
 @@clientName(DimensionProperties.filterEnabled, "IsFilterEnabled", "csharp");
 @@clientName(
   DimensionProperties.groupingEnabled,
