@@ -1,0 +1,129 @@
+{
+  "parameters": {
+    "api-version": "2026-06-01",
+    "parameters": {
+      "properties": {
+        "backupManagementType": "AzureWorkload",
+        "settings": {
+          "issqlcompression": false,
+          "isCompression": true,
+          "timeZone": "Pacific Standard Time",
+          "vdiSettings": {
+            "isMultiVdiSupportEnabled": true,
+            "noOfVdiStreams": 8
+          }
+        },
+        "subProtectionPolicy": [
+          {
+            "policyType": "Full",
+            "retentionPolicy": {
+              "retentionDuration": {
+                "count": 30,
+                "durationType": "Days"
+              },
+              "retentionPolicyType": "SimpleRetentionPolicy"
+            },
+            "schedulePolicy": {
+              "schedulePolicyType": "SimpleSchedulePolicy",
+              "scheduleRunDays": [
+                "Sunday"
+              ],
+              "scheduleRunFrequency": "Weekly",
+              "scheduleRunTimes": [
+                "2026-06-01T10:00:00Z"
+              ]
+            }
+          },
+          {
+            "policyType": "Log",
+            "retentionPolicy": {
+              "retentionDuration": {
+                "count": 7,
+                "durationType": "Days"
+              },
+              "retentionPolicyType": "SimpleRetentionPolicy"
+            },
+            "schedulePolicy": {
+              "scheduleFrequencyInMins": 60,
+              "schedulePolicyType": "LogSchedulePolicy"
+            }
+          }
+        ],
+        "workLoadType": "SQLDataBase"
+      }
+    },
+    "policyName": "sqlMultiVdiPolicy",
+    "resourceGroupName": "SwaggerTestRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "NetSDKTestRsVault"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sqlMultiVdiPolicy",
+        "type": "Microsoft.RecoveryServices/vaults/backupPolicies",
+        "id": "/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupPolicies/sqlMultiVdiPolicy",
+        "properties": {
+          "backupManagementType": "AzureWorkload",
+          "protectedItemsCount": 0,
+          "settings": {
+            "issqlcompression": false,
+            "isCompression": true,
+            "timeZone": "Pacific Standard Time",
+            "vdiSettings": {
+              "isMultiVdiSupportEnabled": true,
+              "noOfVdiStreams": 8
+            }
+          },
+          "subProtectionPolicy": [
+            {
+              "policyType": "Full",
+              "retentionPolicy": {
+                "retentionDuration": {
+                  "count": 30,
+                  "durationType": "Days"
+                },
+                "retentionPolicyType": "SimpleRetentionPolicy"
+              },
+              "schedulePolicy": {
+                "schedulePolicyType": "SimpleSchedulePolicy",
+                "scheduleRunDays": [
+                  "Sunday"
+                ],
+                "scheduleRunFrequency": "Weekly",
+                "scheduleRunTimes": [
+                  "2026-06-01T10:00:00Z"
+                ],
+                "scheduleWeeklyFrequency": 0
+              }
+            },
+            {
+              "policyType": "Log",
+              "retentionPolicy": {
+                "retentionDuration": {
+                  "count": 7,
+                  "durationType": "Days"
+                },
+                "retentionPolicyType": "SimpleRetentionPolicy"
+              },
+              "schedulePolicy": {
+                "scheduleFrequencyInMins": 60,
+                "schedulePolicyType": "LogSchedulePolicy"
+              }
+            }
+          ],
+          "workLoadType": "SQLDataBase"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupPolicies/sqlMultiVdiPolicy/operations/00000000-0000-0000-0000-000000000000?api-version=2026-06-01",
+        "Location": "https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupPolicies/sqlMultiVdiPolicy/operationResults/00000000-0000-0000-0000-000000000000?api-version=2026-06-01",
+        "Retry-After": 60
+      }
+    }
+  },
+  "operationId": "ProtectionPolicies_CreateOrUpdate",
+  "title": "Create or Update SQL Azure Workload Protection Policy with multi-VDI streaming enabled"
+}
