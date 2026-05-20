@@ -56,9 +56,11 @@ interface NginxDeploymentApiKeyResponses {
 }
 
 @@doc(NginxDeploymentApiKeyResponse.name, "The resource name of the API key");
-@@doc(NginxDeploymentApiKeyResponse.properties,
+@@doc(
+  NginxDeploymentApiKeyResponse.properties,
   "Nginx Deployment Api Key Response Properties"
 );
-@@doc(NginxDeploymentApiKeyResponses.createOrUpdate::parameters.resource,
+@@doc(
+  NginxDeploymentApiKeyResponses.createOrUpdate::parameters.resource,
   "The API Key object containing fields (e.g. secret text, expiration date) to upsert the key."
 );

@@ -4,7 +4,8 @@ using Azure.ClientGenerator.Core;
 using Microsoft.Purview;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(AccountUpdateParameters.properties,
+@@Legacy.flattenProperty(
+  AccountUpdateParameters.properties,
   "!javascript,!csharp"
 );
 
@@ -16,7 +17,8 @@ using Microsoft.Purview;
 
 @@clientName(Accounts.createOrUpdate::parameters.resource, "account");
 @@clientName(Accounts.update::parameters.properties, "accountUpdateParameters");
-@@clientName(Accounts.addRootCollectionAdmin::parameters.body,
+@@clientName(
+  Accounts.addRootCollectionAdmin::parameters.body,
   "collectionAdminUpdate"
 );
 @@clientLocation(Accounts.accountGet, "Features");
@@ -27,13 +29,15 @@ using Microsoft.Purview;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Account.properties);
 
-@@clientName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
+@@clientName(
+  PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "request"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(PrivateEndpointConnection.properties);
 
-@@clientName(KafkaConfigurations.createOrUpdate::parameters.resource,
+@@clientName(
+  KafkaConfigurations.createOrUpdate::parameters.resource,
   "kafkaConfiguration"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -51,12 +55,15 @@ using Microsoft.Purview;
 @@clientLocation(FeaturesOperationGroup.subscriptionGet, "Features");
 
 @@clientLocation(UsagesOperationGroup.get, "Usages");
-@@clientName(DefaultAccountsOperationGroup.set::parameters.body,
+@@clientName(
+  DefaultAccountsOperationGroup.set::parameters.body,
   "defaultAccountPayload"
 );
-@@clientName(AccountsOperationGroup.checkNameAvailability::parameters.body,
+@@clientName(
+  AccountsOperationGroup.checkNameAvailability::parameters.body,
   "checkNameAvailabilityRequest"
 );
-@@clientName(FeaturesOperationGroup.subscriptionGet::parameters.body,
+@@clientName(
+  FeaturesOperationGroup.subscriptionGet::parameters.body,
   "featureRequest"
 );

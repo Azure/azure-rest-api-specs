@@ -147,18 +147,23 @@ interface SAPVirtualInstances {
   >;
 }
 
-@@doc(SAPVirtualInstance.name,
+@@doc(
+  SAPVirtualInstance.name,
   "The name of the Virtual Instances for SAP solutions resource"
 );
-@@doc(SAPVirtualInstances.create::parameters.resource,
+@@doc(
+  SAPVirtualInstances.create::parameters.resource,
   "Virtual Instance for SAP solutions resource request body."
 );
-@@doc(SAPVirtualInstances.update::parameters.properties,
+@@doc(
+  SAPVirtualInstances.update::parameters.properties,
   "Request body to update a Virtual Instance for SAP solutions resource."
 );
-@@doc(SAPVirtualInstances.start::parameters.body,
+@@doc(
+  SAPVirtualInstances.start::parameters.body,
   "The Virtual Instance for SAP solutions resource start request body."
 );
-@@doc(SAPVirtualInstances.stop::parameters.body,
+@@doc(
+  SAPVirtualInstances.stop::parameters.body,
   "The Virtual Instance for SAP solutions resource stop request body."
 );

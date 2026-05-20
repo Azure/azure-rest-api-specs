@@ -2455,7 +2455,8 @@ model MHSMPrivateEndpointConnectionsListResult
  */
 model VaultListResult
   is Azure.Core.Page<Azure.ResourceManager.Foundations.TrackedResource>;
-@@doc(VaultListResult.nextLink,
+@@doc(
+  VaultListResult.nextLink,
   "The URL to get the next set of vault resources."
 );
 @@doc(VaultListResult.value, "The list of vault resources.");

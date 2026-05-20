@@ -268,6 +268,7 @@ interface ServerSiteResources {
 }
 
 @@doc(ServerSiteResource.name, "Site name");
-@@doc(ServerSiteResource.properties,
+@@doc(
+  ServerSiteResource.properties,
   "The resource-specific properties for this resource."
 );

@@ -265,85 +265,11 @@ interface RestorableDatabaseAccountGetResults {
   >;
 }
 
-alias RestorableMongodbCollectionsListParameters = {
-  /**
-   * The resource ID of the MongoDB database.
-   */
-  @query("restorableMongodbDatabaseRid")
-  restorableMongodbDatabaseRid?: string;
-
-  /**
-   * Restorable MongoDB collections event feed start time.
-   */
-  @query("startTime")
-  startTime?: string;
-
-  /**
-   * Restorable MongoDB collections event feed end time.
-   */
-  @query("endTime")
-  endTime?: string;
-};
-
-alias RestorableMongodbResourcesListParameters = {
-  /**
-   * The location where the restorable resources are located.
-   */
-  @query("restoreLocation")
-  restoreLocation?: string;
-
-  /**
-   * The timestamp when the restorable resources existed.
-   */
-  @query("restoreTimestampInUtc")
-  restoreTimestampInUtc?: string;
-};
-
-alias RestorableSqlResourcesListParameters = {
-  /**
-   * The location where the restorable resources are located.
-   */
-  @query("restoreLocation")
-  restoreLocation?: string;
-
-  /**
-   * The timestamp when the restorable resources existed.
-   */
-  @query("restoreTimestampInUtc")
-  restoreTimestampInUtc?: string;
-};
-
-alias RestorableGremlinResourcesListParameters = {
-  /**
-   * The location where the restorable resources are located.
-   */
-  @query("restoreLocation")
-  restoreLocation?: string;
-
-  /**
-   * The timestamp when the restorable resources existed.
-   */
-  @query("restoreTimestampInUtc")
-  restoreTimestampInUtc?: string;
-};
-
-alias RestorableTableResourcesListParameters = {
-  /**
-   * The location where the restorable resources are located.
-   */
-  @query("restoreLocation")
-  restoreLocation?: string;
-
-  /**
-   * The timestamp when the restorable resources existed.
-   */
-  @query("restoreTimestampInUtc")
-  restoreTimestampInUtc?: string;
-};
-
-@@doc(RestorableDatabaseAccountGetResult.name,
+@@doc(
+  RestorableDatabaseAccountGetResult.name,
   "The instanceId GUID of a restorable database account."
 );
-@@doc(RestorableDatabaseAccountGetResult.properties,
+@@doc(
+  RestorableDatabaseAccountGetResult.properties,
   "The properties of a restorable database account."
 );

@@ -13,7 +13,6 @@ namespace Microsoft.DocumentDB;
 /**
  * An Azure Cosmos DB database account.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DatabaseAccountGetResults
   is Azure.ResourceManager.ProxyResource<DatabaseAccountGetProperties> {
   ...ResourceNameParameter<
@@ -23,15 +22,14 @@ model DatabaseAccountGetResults
     NamePattern = "^[a-z0-9]+(-[a-z0-9]+)*"
   >;
 
-  /** Resource tags. */
+  /** The location of the resource group to which the resource belongs. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  location?: string;
+
+  /** Tags are a list of key-value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters. For example, the default experience for a template type is set with \"defaultExperience\": \"Cassandra\". Current \"defaultExperience\" values also include \"Table\", \"Graph\", \"DocumentDB\", and \"MongoDB\". */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
-
-  /** The geo-location where the resource lives */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
-  location?: Azure.Core.azureLocation;
 
   /**
    * Identity for the resource.
@@ -81,7 +79,9 @@ interface DatabaseAccounts {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     DatabaseAccountGetResults,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | NoContentResponse
+    Response =
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+      | NoContentResponse
   >;
 
   /**
@@ -107,8 +107,10 @@ interface DatabaseAccounts {
   failoverPriorityChange is ArmResourceActionAsyncBase<
     DatabaseAccountGetResults,
     Request = FailoverPolicies,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader> | NoContentResponse,
+    Response =
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | NoContentResponse,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<DatabaseAccountGetResults>
   >;
 
@@ -746,24 +748,37 @@ interface DatabaseAccounts {
 @@maxLength(DatabaseAccountGetResults.name, 50);
 @@minLength(DatabaseAccountGetResults.name, 3);
 @@doc(DatabaseAccountGetResults.name, "Cosmos DB database account name.");
-@@doc(DatabaseAccountGetResults.properties,
+@@doc(
+  DatabaseAccountGetResults.properties,
   "Properties for the database account."
 );
-@@doc(DatabaseAccounts.createOrUpdate::parameters.resource,
+@@doc(
+  DatabaseAccounts.createOrUpdate::parameters.resource,
   "The parameters to provide for the current database account."
 );
-@@doc(DatabaseAccounts.update::parameters.properties,
+@@doc(
+  DatabaseAccounts.update::parameters.properties,
   "The parameters to provide for the current database account."
 );
-@@doc(DatabaseAccounts.failoverPriorityChange::parameters.body,
+@@doc(
+  DatabaseAccounts.failoverPriorityChange::parameters.body,
   "The new failover policies for the database account."
 );
-@@doc(DatabaseAccounts.offlineRegion::parameters.body,
+@@doc(
+  DatabaseAccounts.offlineRegion::parameters.body,
   "Cosmos DB region to offline for the database account."
 );
-@@doc(DatabaseAccounts.onlineRegion::parameters.body,
+@@doc(
+  DatabaseAccounts.onlineRegion::parameters.body,
   "Cosmos DB region to online for the database account."
 );
-@@doc(DatabaseAccounts.regenerateKey::parameters.body,
+@@doc(
+  DatabaseAccounts.regenerateKey::parameters.body,
   "The name of the key to regenerate."
+);
+@@visibility(
+  DatabaseAccountGetResults.location,
+  Lifecycle.Read,
+  Lifecycle.Create,
+  Lifecycle.Update
 );
