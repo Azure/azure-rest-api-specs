@@ -5138,8 +5138,9 @@ model SavingsPlanOrderModelList is Azure.Core.Page<SavingsPlanOrderModel>;
 /**
  * List of savings plans
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model SavingsPlanModelListResult extends SavingsPlanModelList {
+model SavingsPlanModelListResult {
+  ...SavingsPlanModelList;
+
   /**
    * The roll out count summary of the savings plans
    */
