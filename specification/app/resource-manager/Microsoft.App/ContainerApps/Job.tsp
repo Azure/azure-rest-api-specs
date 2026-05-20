@@ -33,6 +33,32 @@ model Job is Azure.ResourceManager.TrackedResource<JobProperties> {
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
+alias JobDetectorPropertyOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** Job Name */
+    @path
+    @segment("jobs")
+    @key
+    @pattern("^[-\\w\\._\\(\\)]+$")
+    jobName: string;
+  },
+  {
+    /** Proxy API Name for Container App Job. */
+    @path
+    @segment("detectorProperties")
+    @key
+    @pattern("^[-\\w\\._]+$")
+    apiName: string;
+  },
+  ErrorType = DefaultErrorResponse,
+  ResourceName = "ContainerAppJobDetectorProperty"
+>;
+
 @armResourceOperations(#{ omitTags: true })
 interface Jobs {
   /**
