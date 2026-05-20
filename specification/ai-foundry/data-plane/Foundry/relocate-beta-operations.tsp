@@ -55,19 +55,20 @@ interface Evaluators {}
 @@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.cancel, Evaluators);
 @@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.delete, Evaluators);
 
-@@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.create, Evaluators);
-@@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.get, Evaluators);
-@@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.list, Evaluators);
-@@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.cancel, Evaluators);
-@@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.delete, Evaluators);
+// These were removed from v1:
+// @@clientLocation(Azure.AI.Projects.EvaluationSuites.listVersions, Evaluators);
+// @@clientLocation(Azure.AI.Projects.EvaluationSuites.listLatest, Evaluators);
+// @@clientLocation(Azure.AI.Projects.EvaluationSuites.getVersion, Evaluators);
+// @@clientLocation(Azure.AI.Projects.EvaluationSuites.deleteVersion, Evaluators);
+// @@clientLocation(Azure.AI.Projects.EvaluationSuites.createOrUpdateVersion, Evaluators);
+// @@clientLocation(Azure.AI.Projects.EvaluationSuites.createEvaluationSuiteVersion, Evaluators);
+// @@clientLocation(Azure.AI.Projects.EvaluationSuites.run, Evaluators);
 
-@@clientLocation(Azure.AI.Projects.EvaluationSuites.listVersions, Evaluators);
-@@clientLocation(Azure.AI.Projects.EvaluationSuites.listLatest, Evaluators);
-@@clientLocation(Azure.AI.Projects.EvaluationSuites.getVersion, Evaluators);
-@@clientLocation(Azure.AI.Projects.EvaluationSuites.deleteVersion, Evaluators);
-@@clientLocation(Azure.AI.Projects.EvaluationSuites.createOrUpdateVersion, Evaluators);
-@@clientLocation(Azure.AI.Projects.EvaluationSuites.createEvaluationSuiteVersion, Evaluators);
-@@clientLocation(Azure.AI.Projects.EvaluationSuites.run, Evaluators);
+// @@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.create, Evaluators);
+// @@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.get, Evaluators);
+// @@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.list, Evaluators);
+// @@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.cancel, Evaluators);
+// @@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.delete, Evaluators);
 
 interface Schedules {}
 @@clientLocation(Azure.AI.Projects.Schedules.delete, Schedules);
@@ -103,6 +104,16 @@ interface EvaluationTaxonomies {}
 @@clientLocation(Azure.AI.Projects.EvaluationTaxonomies.update,
   EvaluationTaxonomies
 );
+
+interface Toolboxes {}
+@@clientLocation(Azure.AI.Projects.Toolboxes.createToolboxVersion, Toolboxes);
+@@clientLocation(Azure.AI.Projects.Toolboxes.updateToolbox, Toolboxes);
+@@clientLocation(Azure.AI.Projects.Toolboxes.getToolbox, Toolboxes);
+@@clientLocation(Azure.AI.Projects.Toolboxes.listToolboxes, Toolboxes);
+@@clientLocation(Azure.AI.Projects.Toolboxes.listToolboxVersions, Toolboxes);
+@@clientLocation(Azure.AI.Projects.Toolboxes.getToolboxVersion, Toolboxes);
+@@clientLocation(Azure.AI.Projects.Toolboxes.deleteToolbox, Toolboxes);
+@@clientLocation(Azure.AI.Projects.Toolboxes.deleteToolboxVersion, Toolboxes);
 
 interface Skills {}
 @@clientLocation(Azure.AI.Projects.Skills.createSkill, Skills);
