@@ -608,12 +608,4 @@ suppressions:
     code: ProvisioningStateSpecifiedForLROPut
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}"].put
     reason: The existing API contract is legacy code and not be able to change.
-  - from: bms.json
-    code: ProvisioningStateMustBeReadOnly
-    reason: |
-      provisioningState is modeled as a named union (CrossTenantProvisioningState) with @visibility(Lifecycle.Read)
-      in TypeSpec, but the Swagger emitter outputs $ref + sibling readOnly:true; per OpenAPI 2.0 / JSON Reference
-      semantics, siblings of $ref are stripped at resolution, so LintDiff's Spectral rule cannot observe the readOnly.
-      Identical emission shape exists in azurefleet.json (FleetProperties.provisioningState, grandfathered).
-      Net-new cross-tenant resources (CrossTenantVaultMapping, VaultCredentialCertificateResponse) trip the rule from scratch.
 ```
