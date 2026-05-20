@@ -261,8 +261,19 @@ interface Jobs {
    */
   @tag("Jobs")
   @tag("Diagnostics")
-  @summary("Get the properties for a given Container App Job.")
-  proxyGet is JobDetectorPropertyOps.Read<Job, Response = ArmResponse<Job>>;
+  @summary("Get the properties of a Container App Job.")
+  proxyGet is ArmResourceRead<
+    Job,
+    Parameters = {
+      /** Proxy API Name for Container App Job. */
+      @path
+      @segment("detectorProperties")
+      @key
+      @pattern("^[-\\w\\._]+$")
+      apiName: string;
+    },
+    Error = DefaultErrorResponse
+  >;
 
   /**
    * Get the list of diagnostics for a Container App Job.

@@ -69,14 +69,13 @@ interface HttpRouteConfigs {
   /**
    * Get the specified Managed Http Route Config.
    */
-  @summary("Get the specified Managed Http Route Config.")
+  @summary("Get the specified Http Route Config.")
   get is HttpRouteConfigOps.Read<HttpRouteConfig>;
 
   /**
    * Create or Update a Http Route Config.
    */
   @summary("Create or Update a Http Route Config.")
-  @summary("Update tags of a manged http route object")
   createOrUpdate is HttpRouteConfigOps.CreateOrUpdateSync<
     HttpRouteConfig,
     OptionalRequestBody = true
@@ -86,7 +85,7 @@ interface HttpRouteConfigs {
    * Patches an http route config resource. Only patching of tags is supported
    */
   @patch(#{ implicitOptionality: false })
-  @summary("Update tags of a manged http route object")
+  @summary("Update tags of a Http Route Config object")
   update is ArmCustomPatchSync<
     HttpRouteConfig,
     PatchModel = HttpRouteConfig,
@@ -98,7 +97,7 @@ interface HttpRouteConfigs {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Custom response to match original swagger lowercase location header"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Need x-ms-long-running-operation to match original swagger"
-  @summary("Deletes the specified Managed Http Route.")
+  @summary("Deletes the specified Http Route Config.")
   @extension("x-ms-long-running-operation", true)
   delete is ArmResourceDeleteWithoutOkAsync<
     HttpRouteConfig,
@@ -110,7 +109,7 @@ interface HttpRouteConfigs {
   /**
    * Get the Managed Http Routes in a given managed environment.
    */
-  @summary("Get the Managed Http Routes in a given managed environment.")
+  @summary("List the Http Route Configs in a given managed environment.")
   list is HttpRouteConfigOps.List<
     HttpRouteConfig,
     Response = ArmResponse<HttpRouteConfigCollection>

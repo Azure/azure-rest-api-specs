@@ -42,12 +42,13 @@ interface ContainerAppsSessionPools {
   /**
    * Patches a session pool using JSON merge patch
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Original swagger uses azure-async-operation final state"
   @patch(#{ implicitOptionality: false })
   @summary("Update properties of a session pool")
   update is ArmCustomPatchAsync<
     SessionPool,
     PatchModel = SessionPoolUpdatableProperties,
-    LroHeaders = ArmLroLocationHeader<FinalResult = SessionPool> &
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = SessionPool> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 

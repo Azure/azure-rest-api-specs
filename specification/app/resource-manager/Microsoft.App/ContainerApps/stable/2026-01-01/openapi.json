@@ -4171,7 +4171,7 @@
           "Jobs",
           "Diagnostics"
         ],
-        "summary": "Get the properties for a given Container App Job.",
+        "summary": "Get the properties of a Container App Job.",
         "description": "Get the properties of a Container App Job.",
         "parameters": [
           {
@@ -5837,7 +5837,7 @@
         "tags": [
           "HttpRouteConfig"
         ],
-        "summary": "Get the Managed Http Routes in a given managed environment.",
+        "summary": "List the Http Route Configs in a given managed environment.",
         "description": "Get the Managed Http Routes in a given managed environment.",
         "parameters": [
           {
@@ -5888,7 +5888,7 @@
         "tags": [
           "HttpRouteConfig"
         ],
-        "summary": "Get the specified Managed Http Route Config.",
+        "summary": "Get the specified Http Route Config.",
         "description": "Get the specified Managed Http Route Config.",
         "parameters": [
           {
@@ -6021,7 +6021,7 @@
         "tags": [
           "HttpRouteConfig"
         ],
-        "summary": "Update tags of a manged http route object",
+        "summary": "Update tags of a Http Route Config object",
         "description": "Patches an http route config resource. Only patching of tags is supported",
         "parameters": [
           {
@@ -6085,7 +6085,7 @@
         "tags": [
           "HttpRouteConfig"
         ],
-        "summary": "Deletes the specified Managed Http Route.",
+        "summary": "Deletes the specified Http Route Config.",
         "description": "Deletes the specified Managed Http Route.",
         "parameters": [
           {
@@ -6433,7 +6433,7 @@
         "tags": [
           "JavaComponents"
         ],
-        "summary": "Delete a Java Component.",
+        "summary": "Delete.",
         "description": "Delete a Java Component.",
         "parameters": [
           {
@@ -7900,9 +7900,9 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+                "description": "A link to the status monitor"
               },
               "Retry-After": {
                 "type": "integer",
@@ -7924,7 +7924,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
+          "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/SessionPool"
         },
         "x-ms-long-running-operation": true
