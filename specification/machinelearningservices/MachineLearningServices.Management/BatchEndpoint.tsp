@@ -47,17 +47,19 @@ interface BatchEndpoints {
   @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     BatchEndpoint,
-    Response = ArmResourceUpdatedResponse<BatchEndpoint> | (ArmResourceCreatedResponse<
-      BatchEndpoint,
-      LroHeaders = ArmAsyncOperationHeader
-    > &
-      Azure.Core.Foundations.RetryAfterHeader & {
-        /**
-         * Timeout for the client to use when polling the asynchronous operation.
-         */
-        @header("x-ms-async-operation-timeout")
-        timeout: duration;
-      })
+    Response =
+      | ArmResourceUpdatedResponse<BatchEndpoint>
+      | (ArmResourceCreatedResponse<
+          BatchEndpoint,
+          LroHeaders = ArmAsyncOperationHeader
+        > &
+          Azure.Core.Foundations.RetryAfterHeader & {
+            /**
+             * Timeout for the client to use when polling the asynchronous operation.
+             */
+            @header("x-ms-async-operation-timeout")
+            timeout: duration;
+          })
   >;
 
   /**
@@ -68,14 +70,16 @@ interface BatchEndpoints {
   update is ArmCustomPatchAsync<
     BatchEndpoint,
     PatchModel = PartialMinimalTrackedResourceWithIdentity,
-    Response = BatchEndpoint | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BatchEndpoint>> &
-      Azure.Core.Foundations.RetryAfterHeader & {
-        /**
-         * Timeout for the client to use when polling the asynchronous operation.
-         */
-        @header("x-ms-async-operation-timeout")
-        timeout: duration;
-      })
+    Response =
+      | BatchEndpoint
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BatchEndpoint>> &
+          Azure.Core.Foundations.RetryAfterHeader & {
+            /**
+             * Timeout for the client to use when polling the asynchronous operation.
+             */
+            @header("x-ms-async-operation-timeout")
+            timeout: duration;
+          })
   >;
 
   /**
@@ -85,13 +89,16 @@ interface BatchEndpoints {
   @summary("Delete Batch Inference Endpoint (asynchronous).")
   delete is ArmResourceDeleteWithoutOkAsync<
     BatchEndpoint,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -125,18 +132,23 @@ interface BatchEndpoints {
 }
 
 @@doc(BatchEndpoint.name, "Name for the Batch Endpoint.");
-@@doc(BatchEndpoint.properties,
+@@doc(
+  BatchEndpoint.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(BatchEndpoints.createOrUpdate::parameters.resource,
+@@doc(
+  BatchEndpoints.createOrUpdate::parameters.resource,
   "Batch inference endpoint definition object."
 );
-@@doc(BatchEndpoints.update::parameters.properties,
+@@doc(
+  BatchEndpoints.update::parameters.properties,
   "Mutable batch inference endpoint definition object."
 );
-@@doc(BatchEndpoint.identity,
+@@doc(
+  BatchEndpoint.identity,
   "Managed service identity (system assigned and/or user assigned identities)"
 );
-@@doc(BatchEndpoint.sku,
+@@doc(
+  BatchEndpoint.sku,
   "Sku details required for ARM contract for Autoscaling."
 );

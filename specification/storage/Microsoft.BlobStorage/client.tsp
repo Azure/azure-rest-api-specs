@@ -9,8 +9,42 @@ using TypeSpec.Versioning;
 
 namespace Customizations;
 
+// Cross-language modifications: python,csharp,javascript,go
 @@alternateType(KeyInfo.start, string, "python,csharp,javascript,go");
 @@alternateType(KeyInfo.expiry, string, "python,csharp,javascript,go");
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing SDKs didn't output pageable operations format"
+@@Azure.ClientGenerator.Core.Legacy.disablePageable(
+  Service.listContainers,
+  "python,csharp,javascript,go"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing SDKs didn't output pageable operations format"
+@@Azure.ClientGenerator.Core.Legacy.disablePageable(
+  Service.findBlobsByTags,
+  "python,csharp,javascript,go"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing SDKs didn't output pageable operations format"
+@@Azure.ClientGenerator.Core.Legacy.disablePageable(
+  Container.findBlobsByTags,
+  "python,csharp,javascript,go"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing SDKs didn't output pageable operations format"
+@@Azure.ClientGenerator.Core.Legacy.disablePageable(
+  Container.listBlobs,
+  "python,csharp,javascript,go"
+);
+
+@@clientName(
+  FilteredBlobResponse,
+  "FilterBlobSegment",
+  "python,csharp,javascript,go"
+);
+@@clientName(FilteredBlobResponse.blobItems, "blobs", "javascript,go");
+@@clientName(
+  ListContainersResponse,
+  "ListContainersSegmentResponse",
+  "python,csharp,javascript,go"
+);
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
 @client(
@@ -114,6 +148,19 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   "rust"
 );
 
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(BlobServiceClient, "omitEndpointMethod", true, "rust");
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(BlobContainerClient, "omitEndpointMethod", true, "rust");
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(BlobClient, "omitEndpointMethod", true, "rust");
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(AppendBlobClient, "omitEndpointMethod", true, "rust");
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(BlockBlobClient, "omitEndpointMethod", true, "rust");
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(PageBlobClient, "omitEndpointMethod", true, "rust");
+
 @@usage(BlobName, Usage.output, "rust");
 
 @@alternateType(BlobItem.name, string, "rust");
@@ -145,6 +192,8 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@access(Storage.Blob.BlockBlob.upload, Access.internal, "rust");
 @@clientName(Storage.Blob.Blob.download, "download_internal", "rust");
 @@access(Storage.Blob.Blob.download, Access.internal, "rust");
+@@clientName(Storage.Blob.Service.findBlobsByTags, "findBlobsByTags", "rust");
+@@clientName(Storage.Blob.Container.findBlobsByTags, "findBlobsByTags", "rust");
 
 @@clientName(
   BlobProperties.customerProvidedKeySha256,
@@ -208,7 +257,11 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@clientName(UserDelegationKey.signedTid, "signedTenantId", "javascript");
 @@clientName(UserDelegationKey.signedStart, "signedStartsOn", "javascript");
 @@clientName(UserDelegationKey.signedExpiry, "signedExpiresOn", "javascript");
-@@clientName(FilterBlobResponse.nextMarker, "continuationToken", "javascript");
+@@clientName(
+  FilteredBlobResponse.nextMarker,
+  "continuationToken",
+  "javascript"
+);
 @@clientName(
   ListContainersResponse.NextMarker,
   "continuationToken",
@@ -220,12 +273,12 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@clientName(ListBlobsResponse.maxResults, "maxPageSize", "javascript");
 @@clientName(PageList.nextMarker, "continuationToken", "javascript");
 @@clientName(
-  ListBlobsHierarchySegmentResponse.nextMarker,
+  ListBlobsHierarchicalResponse.nextMarker,
   "continuationToken",
   "javascript"
 );
 @@clientName(
-  ListBlobsHierarchySegmentResponse.maxResults,
+  ListBlobsHierarchicalResponse.maxResults,
   "maxPageSize",
   "javascript"
 );
@@ -264,6 +317,13 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 
 @@alternateType(BlobProperties.contentLength, uint64, "rust");
 @@alternateType(BlobContentLengthRequired.size, uint64, "rust");
+@@alternateType(
+  BlobMetadata,
+  {
+    identity: "crate::models::BlobMetadata",
+  },
+  "rust"
+);
 @@alternateType(ContentLengthResponseHeader.contentLength, uint64, "rust");
 @@alternateType(ContentLengthParameter.contentLength, uint64, "rust");
 @@alternateType(
@@ -287,6 +347,16 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@scope(Storage.Blob.Service.submitBatch, "!rust");
 
 // GO SPECIFICATION
+
+/** The blob flat list segment. */
+model BlobFlatListSegment {
+  /** The blob items. */
+  @pageItems
+  @Xml.name("Blob")
+  @Xml.unwrapped
+  blobItems: BlobItem[];
+}
+
 /** The type of blob deletions. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum BlobDeleteTypeCustom {
@@ -532,6 +602,8 @@ alias MultipartBodyParameterGo = {
 /** Represents an array of signed identifiers */
 @clientName("SignedIdentifiers", "go")
 model SignedIdentifiersGo is Array<SignedIdentifier>;
+@@access(StorageErrorCode, Access.public, "go");
+@@usage(StorageErrorCode, Usage.output, "go");
 @@alternateType(AccessPolicy.start, utcDateTime, "go");
 @@alternateType(AccessPolicy.expiry, utcDateTime, "go");
 @@alternateType(BlobDeleteType, BlobDeleteTypeCustom, "go");
@@ -578,6 +650,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
   ListBlobsIncludeItemGo[],
   "go"
 );
+@@alternateType(ListBlobsResponse.blobItems, BlobFlatListSegment, "go");
 @@alternateType(UserDelegationKey.signedExpiry, utcDateTime, "go");
 @@alternateType(UserDelegationKey.signedStart, utcDateTime, "go");
 @@alternateType(UserDelegationKey.value, string, "go");
@@ -588,6 +661,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@clientName(BlobServiceClient, "ServiceClient", "go");
 @@clientName(BlobDeleteTypeCustom, "DeleteType", "go");
 @@clientName(BlobExpiryOptions, "ExpiryOptions", "go");
+@@clientName(BlobHierarchyList, "BlobHierarchyListSegment", "go");
 @@clientName(BlobItem.objectReplicationMetadata, "OrMetadata", "go");
 @@clientName(BlobPublicAccessResponseHeader.access, "BlobPublicAccess", "go");
 @@clientName(BlobServiceProperties, "StorageServiceProperties", "go");
@@ -614,6 +688,13 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@clientName(LeaseStatus, "LeaseStatusType", "go");
 @@clientName(ListBlobsIncludeItemGo, "ListBlobsIncludeItem", "go");
 @@clientName(ListBlobsResponse, "ListBlobsFlatSegmentResponse", "go");
+@@clientName(
+  ListBlobsHierarchicalResponse,
+  "ListBlobsHierarchySegmentResponse",
+  "go"
+);
+@@clientName(ListBlobsHierarchicalResponse.hierarchicalList, "segment", "go");
+@@clientName(ListBlobsResponse.blobItems, "segment", "go");
 @@clientName(Metrics.includeApis, "IncludeAPIs", "go");
 @@clientName(QueryType, "QueryFormatType", "go");
 @@clientName(Storage.Blob.Blob.setProperties, "SetHTTPHeaders", "go");
@@ -715,6 +796,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@scope(Storage.Blob.Blob.startCopyFromUrl, "!rust");
 @@scope(Storage.Blob.BlockBlob.query, "!rust");
 @@scope(Storage.Blob.PageBlob.copyIncremental, "!rust");
+@@scope(Storage.Blob.PageBlob.getPageRanges, "!rust");
 @@scope(Storage.Blob.PageBlob.getPageRangesDiff, "!rust");
 
 @@alternateType(Storage.Blob.UserDelegationKey.signedStart, string, "python");
@@ -837,6 +919,11 @@ model BlobServicePropertiesCsharp {
 @@clientName(BlobItem.objectReplicationMetadata, "OrMetadata", "csharp");
 @@clientName(Blob.setProperties, "SetHttpHeaders", "csharp");
 @@clientName(ListBlobsResponse, "ListBlobsFlatSegmentResponse", "csharp");
+@@clientName(
+  ListBlobsHierarchicalResponse,
+  "ListBlobsHierarchySegmentResponse",
+  "csharp"
+);
 @@clientName(Container.findBlobsByTags, "FilterBlobs", "csharp");
 @@clientName(Service.findBlobsByTags, "FilterBlobs", "csharp");
 @@clientName(Service.listContainers, "ListContainersSegment", "csharp");
@@ -998,6 +1085,138 @@ op setAccessPolicyRequiredContainerAcl is StorageOperationNoBody<
   setAccessPolicyRequiredContainerAcl,
   "rust"
 );
+
+/** ----- This section overrides operations for Rust to omit structured message parameters ----- */
+/** The Append Block operation commits a new block of data to the end of an append blob. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
+@put
+@sharedRoute
+@route("?comp=appendblock")
+op appendBlockNoStructuredMessage is StorageOperationRequestBody<
+  {
+    /** The data to upload. */
+    ...BodyParameter;
+
+    ...TimeoutParameter;
+    ...ContentLengthParameter;
+    ...ContentMd5Parameter;
+    ...ContentCrc64Parameter;
+    ...LeaseIdOptionalParameter;
+    ...BlobConditionMaxSizeParameter;
+    ...BlobConditionAppendPosParameter;
+    ...EncryptionKeyParameter;
+    ...EncryptionKeySha256Parameter;
+    ...EncryptionAlgorithmParameter;
+    ...EncryptionScopeParameter;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
+    ...IfNoneMatchParameter;
+    ...IfMatchParameter;
+    ...IfTagsParameter;
+  },
+  {
+    @statusCode statusCode: 201;
+    ...EtagResponseHeader;
+    ...LastModifiedResponseHeader;
+    ...ContentMd5ResponseHeader;
+    ...ContentCrc64ResponseHeader;
+    ...BlobAppendOffsetResponseHeader;
+    ...BlobCommittedBlockCountResponseHeader;
+    ...RequestServerEncryptedResponseHeader;
+    ...EncryptionKeySha256ResponseHeader;
+    ...EncryptionScopeResponseHeader;
+  },
+  "application/octet-stream"
+>;
+
+@@override(AppendBlob.appendBlock, appendBlockNoStructuredMessage, "rust");
+
+/** The Stage Block operation creates a new block to be committed as part of a blob. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
+@put
+@sharedRoute
+@route("?comp=block")
+op stageBlockNoStructuredMessage is StorageOperationRequestBody<
+  {
+    ...BlockIdParameter;
+    ...ContentLengthParameter;
+    ...ContentMd5Parameter;
+    ...ContentCrc64Parameter;
+    ...BodyParameter;
+    ...TimeoutParameter;
+    ...LeaseIdOptionalParameter;
+    ...EncryptionKeyParameter;
+    ...EncryptionKeySha256Parameter;
+    ...EncryptionAlgorithmParameter;
+    ...EncryptionScopeParameter;
+  },
+  {
+    @statusCode statusCode: 201;
+    ...ContentMd5ResponseHeader;
+    ...ContentCrc64ResponseHeader;
+    ...RequestServerEncryptedResponseHeader;
+    ...EncryptionKeySha256ResponseHeader;
+    ...EncryptionScopeResponseHeader;
+  },
+  "application/octet-stream"
+>;
+
+@@override(BlockBlob.stageBlock, stageBlockNoStructuredMessage, "rust");
+
+/** The Upload Pages operation writes a range of pages to a page blob. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
+@put
+@sharedRoute
+@route("?comp=page")
+op uploadPagesNoStructuredMessage is StorageOperationRequestBody<
+  {
+    /** The data to upload. */
+    ...BodyParameter;
+
+    ...ContentLengthParameter;
+    ...ContentMd5Parameter;
+    ...ContentCrc64Parameter;
+    ...TimeoutParameter;
+    ...RangeParameterRequired;
+    ...LeaseIdOptionalParameter;
+    ...EncryptionKeyParameter;
+    ...EncryptionKeySha256Parameter;
+    ...EncryptionAlgorithmParameter;
+    ...EncryptionScopeParameter;
+    ...IfSequenceNumberLessThanOrEqualToParameter;
+    ...IfSequenceNumberLessThanParameter;
+    ...IfSequenceNumberEqualToParameter;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
+    ...IfNoneMatchParameter;
+    ...IfMatchParameter;
+    ...IfTagsParameter;
+    ...PageWriteParameter<"update">;
+  },
+  {
+    @statusCode statusCode: 201;
+    ...EtagResponseHeader;
+    ...LastModifiedResponseHeader;
+    ...ContentMd5ResponseHeader;
+    ...ContentCrc64ResponseHeader;
+    ...BlobSequenceNumberResponseHeader;
+    ...RequestServerEncryptedResponseHeader;
+    ...EncryptionKeySha256ResponseHeader;
+    ...EncryptionScopeResponseHeader;
+  },
+  "application/octet-stream"
+>;
+
+@@override(PageBlob.uploadPages, uploadPagesNoStructuredMessage, "rust");
 
 /** An HTTP byte range, e.g. "bytes=0-1023". */
 @alternateType(

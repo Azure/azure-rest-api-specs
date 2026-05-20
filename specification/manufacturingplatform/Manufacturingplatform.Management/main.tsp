@@ -380,6 +380,7 @@ interface ManufacturingDataServices {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<MdsResource>;
   // update is ArmResourcePatchAsync<MdsResource, MdsResourceProperties>;
   //temporary fix until typespec fix the issue of generating update classes
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     MdsResource,
@@ -408,9 +409,9 @@ op ArmResourceListActionSync<
   TResource extends Azure.ResourceManager.Foundations.Resource,
   TResponse extends {},
   TBaseParameters = Azure.ResourceManager.Foundations.BaseParameters<TResource>
->(
-  ...ResourceInstanceParameters<TResource, TBaseParameters>,
-): ArmResponse<TResponse> | ErrorResponse;
+>(...ResourceInstanceParameters<TResource, TBaseParameters>):
+  | ArmResponse<TResponse>
+  | ErrorResponse;
 
 @doc("The list of available versions")
 model AvailableVersionListResult {

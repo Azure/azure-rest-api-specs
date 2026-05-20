@@ -211,6 +211,11 @@ stages:
         inputs:
           versionSpec: $(PythonVersion)
 
+      - template: /eng/common/pipelines/templates/steps/install-azsdk-cli.yml
+        parameters:
+          SourceRootPath: $(SpecRepoDirectory)
+          Condition: and(succeeded(), contains(variables['SdkRepoName'], 'rust'))
+
       - script: |
           set -euo pipefail  # Exit on error, undefined vars, and pipeline failures
           optional_params=""
@@ -266,7 +271,7 @@ stages:
         ${{ if eq(parameters.ForceCreateEvenWithFailures, true) }}:
           continueOnError: true
         env:
-          NPM_CONFIG_USERCONFIG: "$(Agent.TempDirectory)/gen-sdk/.npmrc"
+          npm_config_userconfig: "$(Agent.TempDirectory)/gen-sdk/.npmrc"
 
       - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
         parameters:
