@@ -9,7 +9,11 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 @doc("Defines the NetworkBootstrapInterface resource.")
 @parentResource(NetworkBootstrapDevice)
-model NetworkBootstrapInterface is Azure.ResourceManager.ProxyResource<NetworkBootstrapInterfaceProperties, false> {
+model NetworkBootstrapInterface
+  is Azure.ResourceManager.ProxyResource<
+    NetworkBootstrapInterfaceProperties,
+    false
+  > {
   @doc("Name of the Network Bootstrap Interface.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -19,7 +23,10 @@ model NetworkBootstrapInterface is Azure.ResourceManager.ProxyResource<NetworkBo
   name: string;
 }
 
-@@doc(NetworkBootstrapInterface.properties, "The NetworkBootstrapInterface properties");
+@@doc(
+  NetworkBootstrapInterface.properties,
+  "The NetworkBootstrapInterface properties"
+);
 @armResourceOperations
 @added(Versions.v2025_07_15)
 interface NetworkBootstrapInterfaces {

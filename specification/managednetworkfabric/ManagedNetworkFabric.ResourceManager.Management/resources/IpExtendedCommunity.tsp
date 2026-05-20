@@ -8,7 +8,11 @@ using TypeSpec.Versioning;
 namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 @doc("The IP Extended Community resource definition.")
-model IpExtendedCommunity is Azure.ResourceManager.TrackedResource<IpExtendedCommunityProperties, false> {
+model IpExtendedCommunity
+  is Azure.ResourceManager.TrackedResource<
+    IpExtendedCommunityProperties,
+    false
+  > {
   @doc("Name of the IP Extended Community.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path

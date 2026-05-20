@@ -23,11 +23,19 @@ using Microsoft.ManagedNetworkFabric;
 @@clientName(ConfigurationState, "NetworkFabricConfigurationState", "csharp");
 @@clientName(ConfigurationType, "NetworkFabricConfigurationType", "csharp");
 @@clientName(ControllerServices, "NetworkFabricControllerServices", "csharp");
-@@clientName(DestinationProperties, "NetworkTapPropertiesDestinationsItem", "csharp");
+@@clientName(
+  DestinationProperties,
+  "NetworkTapPropertiesDestinationsItem",
+  "csharp"
+);
 @@clientName(Encapsulation, "IsolationDomainEncapsulationType", "csharp");
 @@clientName(EncapsulationType, "NetworkTapEncapsulationType", "csharp");
 @@clientName(Extension, "StaticRouteConfigurationExtension", "csharp");
-@@clientName(ExternalNetworkPropertiesOptionAProperties, "ExternalNetworkOptionAProperties", "csharp");
+@@clientName(
+  ExternalNetworkPropertiesOptionAProperties,
+  "ExternalNetworkOptionAProperties",
+  "csharp"
+);
 @@clientName(FabricSkuType, "NetworkFabricSkuType", "csharp");
 @@clientName(GatewayType, "InternetGatewayType", "csharp");
 @@clientName(Action, "InternetGatewayRuleAction", "csharp");
@@ -38,93 +46,313 @@ using Microsoft.ManagedNetworkFabric;
 @@clientName(WellKnownCommunities, "WellKnownCommunity", "csharp");
 @@clientName(InterfaceType, "NetworkDeviceInterfaceType", "csharp");
 @@clientName(BgpConfiguration, "InternalNetworkBgpConfiguration", "csharp");
-@@clientName(StaticRouteConfiguration, "InternalNetworkStaticRouteConfiguration", "csharp");
-@@clientName(OptionBLayer3Configuration, "NetworkToNetworkInterconnectOptionBLayer3Configuration", "csharp");
+@@clientName(
+  StaticRouteConfiguration,
+  "InternalNetworkStaticRouteConfiguration",
+  "csharp"
+);
+@@clientName(
+  OptionBLayer3Configuration,
+  "NetworkToNetworkInterconnectOptionBLayer3Configuration",
+  "csharp"
+);
 @@clientName(NfcSku, "NetworkFabricControllerSKU", "csharp");
 @@clientName(PollingIntervalInSeconds, "PollingIntervalInSecond", "csharp");
 @@clientName(PollingType, "NetworkTapPollingType", "csharp");
 @@clientName(PortCondition, "NetworkFabricPortCondition", "csharp");
 @@clientName(PortType, "NetworkFabricPortType", "csharp");
 @@clientName(ProvisioningState, "NetworkFabricProvisioningState", "csharp");
-@@clientName(RedistributeConnectedSubnets, "RedistributeConnectedSubnet", "csharp");
+@@clientName(
+  RedistributeConnectedSubnets,
+  "RedistributeConnectedSubnet",
+  "csharp"
+);
 @@clientName(RedistributeStaticRoutes, "RedistributeStaticRoute", "csharp");
 @@clientName(RuleProperties, "InternetGatewayRules", "csharp");
-@@clientName(VpnOptionAProperties, "VpnConfigurationOptionAProperties", "csharp");
-@@clientName(VpnOptionAPatchProperties, "VpnConfigurationPatchableOptionAProperties", "csharp");
+@@clientName(
+  VpnOptionAProperties,
+  "VpnConfigurationOptionAProperties",
+  "csharp"
+);
+@@clientName(
+  VpnOptionAPatchProperties,
+  "VpnConfigurationPatchableOptionAProperties",
+  "csharp"
+);
 @@clientName(VpnOptionBProperties, "OptionBProperties", "csharp");
 @@clientName(ControlPlaneAclPortMatchType.Equals, "EqualTo", "csharp");
 @@clientName(ControlPlaneAclTtlMatchType.Equals, "EqualTo", "csharp");
-@@clientName(ActionIpCommunityProperties, "ActionIPCommunityProperties", "csharp");
-@@clientName(ActionIpExtendedCommunityProperties, "ActionIPExtendedCommunityProperties", "csharp");
+@@clientName(
+  ActionIpCommunityProperties,
+  "ActionIPCommunityProperties",
+  "csharp"
+);
+@@clientName(
+  ActionIpExtendedCommunityProperties,
+  "ActionIPExtendedCommunityProperties",
+  "csharp"
+);
 @@clientName(AnnotationResource, "AnnotationResourceProperties", "csharp");
-@@clientName(CommonPostActionResponseForDeviceUpdate, "DeviceUpdateCommonPostActionResult", "csharp");
-@@clientName(CommonPostActionResponseForStateUpdate, "StateUpdateCommonPostActionResult", "csharp");
-@@clientName(DestinationPatchProperties, "NetworkTapPatchableParametersDestinationsItem", "csharp");
+@@clientName(
+  CommonPostActionResponseForDeviceUpdate,
+  "DeviceUpdateCommonPostActionResult",
+  "csharp"
+);
+@@clientName(
+  CommonPostActionResponseForStateUpdate,
+  "StateUpdateCommonPostActionResult",
+  "csharp"
+);
+@@clientName(
+  DestinationPatchProperties,
+  "NetworkTapPatchableParametersDestinationsItem",
+  "csharp"
+);
 @@clientName(DestinationType, "NetworkTapDestinationType", "csharp");
-@@clientName(EnableDisableOnResources, "UpdateAdministrativeStateOnResources", "csharp");
+@@clientName(
+  EnableDisableOnResources,
+  "UpdateAdministrativeStateOnResources",
+  "csharp"
+);
 @@clientName(EnableDisableState, "AdministrativeEnableState", "csharp");
-@@clientName(ExternalNetworkPatchPropertiesOptionAProperties, "ExternalNetworkPatchOptionAProperties", "csharp");
+@@clientName(
+  ExternalNetworkPatchPropertiesOptionAProperties,
+  "ExternalNetworkPatchOptionAProperties",
+  "csharp"
+);
 @@clientName(IPAddressType, "NetworkFabricIPAddressType", "csharp");
 @@clientName(IpCommunityIdList, "IPCommunityIdList", "csharp");
 @@clientName(IpExtendedCommunityIdList, "IPExtendedCommunityIdList", "csharp");
-@@clientName(IpGroupProperties, "MatchConfigurationIPGroupProperties", "csharp");
+@@clientName(
+  IpGroupProperties,
+  "MatchConfigurationIPGroupProperties",
+  "csharp"
+);
 @@clientName(IpMatchCondition, "IPMatchCondition", "csharp");
 @@clientName(PrefixType, "IPMatchConditionPrefixType", "csharp");
 @@clientName(Layer3IpPrefixProperties, "Layer3IPPrefixProperties", "csharp");
-@@clientName(Layer3IpPrefixPatchProperties, "Layer3IPPrefixPatchProperties", "csharp");
-@@clientName(ManagementNetworkConfigurationProperties, "ManagementNetworkConfigurationPatchableProperties", "csharp");
-@@clientName(DeviceAdministrativeState, "NetworkDeviceAdministrativeState", "csharp");
-@@clientName(DeviceInterfaceProperties, "NetworkDeviceInterfaceProperties", "csharp");
+@@clientName(
+  Layer3IpPrefixPatchProperties,
+  "Layer3IPPrefixPatchProperties",
+  "csharp"
+);
+@@clientName(
+  ManagementNetworkConfigurationProperties,
+  "ManagementNetworkConfigurationPatchableProperties",
+  "csharp"
+);
+@@clientName(
+  DeviceAdministrativeState,
+  "NetworkDeviceAdministrativeState",
+  "csharp"
+);
+@@clientName(
+  DeviceInterfaceProperties,
+  "NetworkDeviceInterfaceProperties",
+  "csharp"
+);
 @@clientName(RebootProperties, "NetworkDeviceRebootContent", "csharp");
 @@clientName(RebootType, "NetworkDeviceRebootType", "csharp");
-@@clientName(TerminalServerConfiguration, "NetworkFabricPatchablePropertiesTerminalServerConfiguration", "csharp");
-@@clientName(TerminalServerPatchConfiguration, "TerminalServerPatchableProperties", "csharp");
-@@clientName(UpdateAdministrativeState, "UpdateAdministrativeStateContent", "csharp");
-@@clientName(UpdateDeviceAdministrativeState, "UpdateDeviceAdministrativeStateContent", "csharp");
+@@clientName(
+  TerminalServerConfiguration,
+  "NetworkFabricPatchablePropertiesTerminalServerConfiguration",
+  "csharp"
+);
+@@clientName(
+  TerminalServerPatchConfiguration,
+  "TerminalServerPatchableProperties",
+  "csharp"
+);
+@@clientName(
+  UpdateAdministrativeState,
+  "UpdateAdministrativeStateContent",
+  "csharp"
+);
+@@clientName(
+  UpdateDeviceAdministrativeState,
+  "UpdateDeviceAdministrativeStateContent",
+  "csharp"
+);
 @@clientName(UpdateVersion, "NetworkFabricUpdateVersionContent", "csharp");
 @@clientName(ValidateAction, "NetworkFabricValidateAction", "csharp");
-@@clientName(ValidateConfigurationProperties, "ValidateConfigurationContent", "csharp");
+@@clientName(
+  ValidateConfigurationProperties,
+  "ValidateConfigurationContent",
+  "csharp"
+);
 @@access(ConnectedSubnetRoutePolicy, Access.public, "csharp");
 @@access(PollingIntervalInSeconds, Access.public, "csharp");
-@@clientName(ArmConfigurationDiffOperationResponse, "ArmConfigurationDiffOperationResult", "csharp");
-@@clientName(CommitBatchStatusOperationResponse, "CommitBatchStatusOperationResult", "csharp");
+@@clientName(
+  ArmConfigurationDiffOperationResponse,
+  "ArmConfigurationDiffOperationResult",
+  "csharp"
+);
+@@clientName(
+  CommitBatchStatusOperationResponse,
+  "CommitBatchStatusOperationResult",
+  "csharp"
+);
 @@clientName(CommitBatchStatusRequest, "CommitBatchStatusContent", "csharp");
-@@clientName(CommitConfigurationRequest, "CommitConfigurationContent", "csharp");
-@@clientName(CommitConfigurationResponse, "CommitConfigurationResult", "csharp");
+@@clientName(
+  CommitConfigurationRequest,
+  "CommitConfigurationContent",
+  "csharp"
+);
+@@clientName(
+  CommitConfigurationResponse,
+  "CommitConfigurationResult",
+  "csharp"
+);
 @@clientName(CommonErrorResponse, "NetworkFabricErrorResult", "csharp");
-@@clientName(DiscardCommitBatchOperationResponse, "DiscardCommitBatchOperationResult", "csharp");
+@@clientName(
+  DiscardCommitBatchOperationResponse,
+  "DiscardCommitBatchOperationResult",
+  "csharp"
+);
 @@clientName(DiscardCommitBatchRequest, "DiscardCommitBatchContent", "csharp");
-@@clientName(ExternalNetworkUpdateBfdAdministrativeStateRequest, "ExternalNetworkUpdateBfdAdministrativeStateContent", "csharp");
-@@clientName(ExternalNetworkUpdateBfdAdministrativeStateResponse, "ExternalNetworkUpdateBfdAdministrativeStateResult", "csharp");
+@@clientName(
+  ExternalNetworkUpdateBfdAdministrativeStateRequest,
+  "ExternalNetworkUpdateBfdAdministrativeStateContent",
+  "csharp"
+);
+@@clientName(
+  ExternalNetworkUpdateBfdAdministrativeStateResponse,
+  "ExternalNetworkUpdateBfdAdministrativeStateResult",
+  "csharp"
+);
 @@clientName(GetTopologyResponse, "GetTopologyResult", "csharp");
-@@clientName(InternalNetworkUpdateBfdAdministrativeStateRequest, "InternalNetworkUpdateBfdAdministrativeStateContent", "csharp");
-@@clientName(InternalNetworkUpdateBfdAdministrativeStateResponse, "InternalNetworkUpdateBfdAdministrativeStateResult", "csharp");
-@@clientName(InternalNetworkUpdateBgpAdministrativeStateRequest, "InternalNetworkUpdateBgpAdministrativeStateContent", "csharp");
-@@clientName(InternalNetworkUpdateBgpAdministrativeStateResponse, "InternalNetworkUpdateBgpAdministrativeStateResult", "csharp");
-@@clientName(NeighborGroupResyncResponse, "NeighborGroupResyncResult", "csharp");
-@@clientName(NetworkBootstrapDeviceRebootResponse, "NetworkBootstrapDeviceRebootResult", "csharp");
-@@clientName(NetworkBootstrapDeviceRefreshConfigurationResponse, "NetworkBootstrapDeviceRefreshConfigurationResult", "csharp");
-@@clientName(NetworkBootstrapDeviceResyncPasswordsResponse, "NetworkBootstrapDeviceResyncPasswordsResult", "csharp");
-@@clientName(NetworkBootstrapDeviceUpdateAdministrativeStateResponse, "NetworkBootstrapDeviceUpdateAdministrativeStateResult", "csharp");
-@@clientName(NetworkBootstrapDeviceUpgradeResponse, "NetworkBootstrapDeviceUpgradeResult", "csharp");
-@@clientName(NetworkDeviceRefreshConfigurationResponse, "NetworkDeviceRefreshConfigurationResult", "csharp");
-@@clientName(NetworkDeviceResyncPasswordsResponse, "NetworkDeviceResyncPasswordsResult", "csharp");
-@@clientName(NetworkDeviceRunRwCommandResponse, "NetworkDeviceRunRwCommandResult", "csharp");
-@@clientName(NetworkDeviceUpdateAdministrativeStateResponse, "NetworkDeviceUpdateAdministrativeStateResult", "csharp");
-@@clientName(NetworkDeviceUpgradeRequest, "NetworkDeviceUpgradeContent", "csharp");
-@@clientName(NetworkDeviceUpgradeResponse, "NetworkDeviceUpgradeResult", "csharp");
+@@clientName(
+  InternalNetworkUpdateBfdAdministrativeStateRequest,
+  "InternalNetworkUpdateBfdAdministrativeStateContent",
+  "csharp"
+);
+@@clientName(
+  InternalNetworkUpdateBfdAdministrativeStateResponse,
+  "InternalNetworkUpdateBfdAdministrativeStateResult",
+  "csharp"
+);
+@@clientName(
+  InternalNetworkUpdateBgpAdministrativeStateRequest,
+  "InternalNetworkUpdateBgpAdministrativeStateContent",
+  "csharp"
+);
+@@clientName(
+  InternalNetworkUpdateBgpAdministrativeStateResponse,
+  "InternalNetworkUpdateBgpAdministrativeStateResult",
+  "csharp"
+);
+@@clientName(
+  NeighborGroupResyncResponse,
+  "NeighborGroupResyncResult",
+  "csharp"
+);
+@@clientName(
+  NetworkBootstrapDeviceRebootResponse,
+  "NetworkBootstrapDeviceRebootResult",
+  "csharp"
+);
+@@clientName(
+  NetworkBootstrapDeviceRefreshConfigurationResponse,
+  "NetworkBootstrapDeviceRefreshConfigurationResult",
+  "csharp"
+);
+@@clientName(
+  NetworkBootstrapDeviceResyncPasswordsResponse,
+  "NetworkBootstrapDeviceResyncPasswordsResult",
+  "csharp"
+);
+@@clientName(
+  NetworkBootstrapDeviceUpdateAdministrativeStateResponse,
+  "NetworkBootstrapDeviceUpdateAdministrativeStateResult",
+  "csharp"
+);
+@@clientName(
+  NetworkBootstrapDeviceUpgradeResponse,
+  "NetworkBootstrapDeviceUpgradeResult",
+  "csharp"
+);
+@@clientName(
+  NetworkDeviceRefreshConfigurationResponse,
+  "NetworkDeviceRefreshConfigurationResult",
+  "csharp"
+);
+@@clientName(
+  NetworkDeviceResyncPasswordsResponse,
+  "NetworkDeviceResyncPasswordsResult",
+  "csharp"
+);
+@@clientName(
+  NetworkDeviceRunRwCommandResponse,
+  "NetworkDeviceRunRwCommandResult",
+  "csharp"
+);
+@@clientName(
+  NetworkDeviceUpdateAdministrativeStateResponse,
+  "NetworkDeviceUpdateAdministrativeStateResult",
+  "csharp"
+);
+@@clientName(
+  NetworkDeviceUpgradeRequest,
+  "NetworkDeviceUpgradeContent",
+  "csharp"
+);
+@@clientName(
+  NetworkDeviceUpgradeResponse,
+  "NetworkDeviceUpgradeResult",
+  "csharp"
+);
 @@clientName(NetworkFabricLockRequest, "NetworkFabricLockContent", "csharp");
-@@clientName(NetworkFabricResyncCertificatesResponse, "NetworkFabricResyncCertificatesResult", "csharp");
-@@clientName(NetworkFabricResyncPasswordsResponse, "NetworkFabricResyncPasswordsResult", "csharp");
-@@clientName(NetworkFabricRotateCertificatesResponse, "NetworkFabricRotateCertificatesResult", "csharp");
-@@clientName(NetworkFabricRotatePasswordsResponse, "NetworkFabricRotatePasswordsResult", "csharp");
+@@clientName(
+  NetworkFabricResyncCertificatesResponse,
+  "NetworkFabricResyncCertificatesResult",
+  "csharp"
+);
+@@clientName(
+  NetworkFabricResyncPasswordsResponse,
+  "NetworkFabricResyncPasswordsResult",
+  "csharp"
+);
+@@clientName(
+  NetworkFabricRotateCertificatesResponse,
+  "NetworkFabricRotateCertificatesResult",
+  "csharp"
+);
+@@clientName(
+  NetworkFabricRotatePasswordsResponse,
+  "NetworkFabricRotatePasswordsResult",
+  "csharp"
+);
 @@clientName(NetworkTapResyncResponse, "NetworkTapResyncResult", "csharp");
-@@clientName(NetworkTapRuleResyncResponse, "NetworkTapRuleResyncResult", "csharp");
-@@clientName(NniUpdateBfdAdministrativeStateRequest, "NniUpdateBfdAdministrativeStateContent", "csharp");
-@@clientName(NniUpdateBfdAdministrativeStateResponse, "NniUpdateBfdAdministrativeStateResult", "csharp");
-@@clientName(UpdateAdministrativeStateResponse, "UpdateAdministrativeStateResult", "csharp");
-@@clientName(ValidateConfigurationResponse, "ValidateConfigurationResult", "csharp");
-@@clientName(ViewDeviceConfigurationOperationResponse, "ViewDeviceConfigurationOperationResult", "csharp");
+@@clientName(
+  NetworkTapRuleResyncResponse,
+  "NetworkTapRuleResyncResult",
+  "csharp"
+);
+@@clientName(
+  NniUpdateBfdAdministrativeStateRequest,
+  "NniUpdateBfdAdministrativeStateContent",
+  "csharp"
+);
+@@clientName(
+  NniUpdateBfdAdministrativeStateResponse,
+  "NniUpdateBfdAdministrativeStateResult",
+  "csharp"
+);
+@@clientName(
+  UpdateAdministrativeStateResponse,
+  "UpdateAdministrativeStateResult",
+  "csharp"
+);
+@@clientName(
+  ValidateConfigurationResponse,
+  "ValidateConfigurationResult",
+  "csharp"
+);
+@@clientName(
+  ViewDeviceConfigurationOperationResponse,
+  "ViewDeviceConfigurationOperationResult",
+  "csharp"
+);
 
 @@clientName(
   Microsoft.ManagedNetworkFabric.IPAddressType,
@@ -203,4 +431,3 @@ using Microsoft.ManagedNetworkFabric;
   "peerAsn",
   "java"
 );
-

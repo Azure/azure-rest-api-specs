@@ -9,7 +9,8 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 @doc("The Network Device resource definition.")
-model NetworkDevice is Azure.ResourceManager.TrackedResource<NetworkDeviceProperties, false> {
+model NetworkDevice
+  is Azure.ResourceManager.TrackedResource<NetworkDeviceProperties, false> {
   @doc("Name of the Network Device.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -17,6 +18,7 @@ model NetworkDevice is Azure.ResourceManager.TrackedResource<NetworkDeviceProper
   @segment("networkDevices")
   @visibility(Lifecycle.Read)
   name: string;
+
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
   @added(Versions.v2025_07_15)
   @doc("The managed service identities assigned to this resource.")

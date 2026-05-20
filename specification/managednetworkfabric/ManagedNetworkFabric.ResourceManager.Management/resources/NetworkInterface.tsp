@@ -10,7 +10,8 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 @doc("Defines the NetworkInterface resource.")
 @parentResource(NetworkDevice)
-model NetworkInterface is Azure.ResourceManager.ProxyResource<NetworkInterfaceProperties, false> {
+model NetworkInterface
+  is Azure.ResourceManager.ProxyResource<NetworkInterfaceProperties, false> {
   @doc("Name of the Network Interface.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -18,6 +19,7 @@ model NetworkInterface is Azure.ResourceManager.ProxyResource<NetworkInterfacePr
   @segment("networkInterfaces")
   @visibility(Lifecycle.Read)
   name: string;
+
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
   @added(Versions.v2025_07_15)
   @doc("The managed service identities assigned to this resource.")

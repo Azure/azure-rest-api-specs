@@ -9,7 +9,8 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 @doc("The Network Fabric SKU resource definition.")
 @subscriptionResource
-model NetworkFabricSku is Azure.ResourceManager.ProxyResource<NetworkFabricSkuProperties, false> {
+model NetworkFabricSku
+  is Azure.ResourceManager.ProxyResource<NetworkFabricSkuProperties, false> {
   @doc("Name of the Network Fabric SKU.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path

@@ -8,7 +8,8 @@ using TypeSpec.Versioning;
 namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 @doc("The Network Tap resource definition.")
-model NetworkTap is Azure.ResourceManager.TrackedResource<NetworkTapProperties, false> {
+model NetworkTap
+  is Azure.ResourceManager.TrackedResource<NetworkTapProperties, false> {
   @doc("Name of the Network Tap.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -16,6 +17,7 @@ model NetworkTap is Azure.ResourceManager.TrackedResource<NetworkTapProperties, 
   @segment("networkTaps")
   @visibility(Lifecycle.Read)
   name: string;
+
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
   @added(Versions.v2025_07_15)
   @doc("The managed service identities assigned to this resource.")

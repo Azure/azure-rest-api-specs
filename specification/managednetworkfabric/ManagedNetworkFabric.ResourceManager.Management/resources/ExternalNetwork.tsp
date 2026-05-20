@@ -10,7 +10,8 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 @doc("Defines the External Network resource.")
 @parentResource(L3IsolationDomain)
-model ExternalNetwork is Azure.ResourceManager.ProxyResource<ExternalNetworkProperties, false> {
+model ExternalNetwork
+  is Azure.ResourceManager.ProxyResource<ExternalNetworkProperties, false> {
   @doc("Name of the External Network.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path

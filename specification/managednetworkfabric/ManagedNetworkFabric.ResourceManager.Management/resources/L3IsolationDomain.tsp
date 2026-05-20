@@ -10,7 +10,8 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 @doc("The L3 Isolation Domain resource definition.")
-model L3IsolationDomain is Azure.ResourceManager.TrackedResource<L3IsolationDomainProperties, false> {
+model L3IsolationDomain
+  is Azure.ResourceManager.TrackedResource<L3IsolationDomainProperties, false> {
   @doc("Name of the L3 Isolation Domain.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -18,6 +19,7 @@ model L3IsolationDomain is Azure.ResourceManager.TrackedResource<L3IsolationDoma
   @segment("l3IsolationDomains")
   @visibility(Lifecycle.Read)
   name: string;
+
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
   @added(Versions.v2025_07_15)
   @doc("The managed service identities assigned to this resource.")

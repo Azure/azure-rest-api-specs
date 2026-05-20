@@ -8,7 +8,8 @@ using TypeSpec.Versioning;
 namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 @doc("The Network Rack resource definition.")
-model NetworkRack is Azure.ResourceManager.TrackedResource<NetworkRackProperties, false> {
+model NetworkRack
+  is Azure.ResourceManager.TrackedResource<NetworkRackProperties, false> {
   @doc("Name of the Network Rack.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path

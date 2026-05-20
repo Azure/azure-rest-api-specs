@@ -5,11 +5,11 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
-
 namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 @doc("Defines the Neighbor Group.")
-model NeighborGroup is Azure.ResourceManager.TrackedResource<NeighborGroupProperties, false> {
+model NeighborGroup
+  is Azure.ResourceManager.TrackedResource<NeighborGroupProperties, false> {
   @doc("Name of the Neighbor Group.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -17,6 +17,7 @@ model NeighborGroup is Azure.ResourceManager.TrackedResource<NeighborGroupProper
   @segment("neighborGroups")
   @visibility(Lifecycle.Read)
   name: string;
+
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
   @added(Versions.v2025_07_15)
   @doc("The managed service identities assigned to this resource.")

@@ -9,7 +9,11 @@ using TypeSpec.Versioning;
 namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 @doc("The Network Fabric Controller resource definition.")
-model NetworkFabricController is Azure.ResourceManager.TrackedResource<NetworkFabricControllerProperties, false> {
+model NetworkFabricController
+  is Azure.ResourceManager.TrackedResource<
+    NetworkFabricControllerProperties,
+    false
+  > {
   @doc("Name of the Network Fabric Controller.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -17,13 +21,17 @@ model NetworkFabricController is Azure.ResourceManager.TrackedResource<NetworkFa
   @segment("networkFabricControllers")
   @visibility(Lifecycle.Read)
   name: string;
+
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
   @added(Versions.v2025_07_15)
   @doc("The managed service identities assigned to this resource.")
   identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
-@@doc(NetworkFabricController.properties, "The NetworkFabricController Properties");
+@@doc(
+  NetworkFabricController.properties,
+  "The NetworkFabricController Properties"
+);
 @armResourceOperations
 interface NetworkFabricControllers {
   @doc("Shows the provisioning status of Network Fabric Controller.")
