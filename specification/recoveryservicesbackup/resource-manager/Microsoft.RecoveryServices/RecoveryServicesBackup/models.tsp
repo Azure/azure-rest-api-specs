@@ -8737,30 +8737,6 @@ model ClientDiscoveryResponse {
 // ============================================================
 
 /**
- * Provisioning state of cross-tenant resources. Wraps the standard
- * `ResourceProvisioningState` (Succeeded / Failed / Canceled) and adds the
- * non-terminal states emitted by the RP.
- */
-@Azure.Core.lroStatus
-@added(Versions.v2026_03_31_preview)
-union CrossTenantProvisioningState {
-  string,
-  ResourceProvisioningState,
-
-  /** Initial provisioning in progress. */
-  Provisioning: "Provisioning",
-
-  /** Update in progress. */
-  Updating: "Updating",
-
-  /** Deletion in progress. */
-  Deleting: "Deleting",
-
-  /** Request accepted, processing not yet started. */
-  Accepted: "Accepted",
-}
-
-/**
  * Cross-tenant vault mapping properties for cross-tenant restore.
  * Represents the configuration linking a source vault to a target vault across tenants.
  */
@@ -8801,8 +8777,22 @@ model CrossTenantVaultMappingProperties {
   /**
    * Provisioning state of the resource.
    */
+  // Anonymous inline union avoids Spectral's ProvisioningStateMustBeReadOnly false
+  // positive. A named union emits as $ref, and OpenAPI 2.0 ($ref) semantics drop
+  // the sibling `readOnly: true` after resolution. Inlining keeps `readOnly` on
+  // the property; semantic source-of-truth is `@visibility(Lifecycle.Read)`.
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Inline emission required to avoid Spectral $ref-sibling-drop on readOnly:true."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "False positive: getUnionAsEnum does not surface unnamed string-literal members; values Succeeded/Failed/Canceled are present."
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Server-set read-only field; closed set is intentional to ensure deterministic Spectral resolution."
   @visibility(Lifecycle.Read)
-  provisioningState?: CrossTenantProvisioningState;
+  provisioningState?:
+    | "Succeeded"
+    | "Failed"
+    | "Canceled"
+    | "Provisioning"
+    | "Updating"
+    | "Deleting"
+    | "Accepted";
 }
 
 /**
@@ -8976,6 +8966,17 @@ model VaultCredentialCertificateProperties {
   /**
    * Provisioning state of the vault credential certificate.
    */
+  // See CrossTenantVaultMappingProperties.provisioningState for rationale on inline union.
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Inline emission required to avoid Spectral $ref-sibling-drop on readOnly:true."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "False positive: getUnionAsEnum does not surface unnamed string-literal members; values Succeeded/Failed/Canceled are present."
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Server-set read-only field; closed set is intentional to ensure deterministic Spectral resolution."
   @visibility(Lifecycle.Read)
-  provisioningState?: CrossTenantProvisioningState;
+  provisioningState?:
+    | "Succeeded"
+    | "Failed"
+    | "Canceled"
+    | "Provisioning"
+    | "Updating"
+    | "Deleting"
+    | "Accepted";
 }
