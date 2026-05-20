@@ -532,7 +532,11 @@ model AzureAvatarVoiceSyncVoice extends AzureVoice {
   volume?: string;
 }
 
-/** Supported voice names for the Azure realtime native voice type. */
+/**
+ * Currently known voice names for the Azure realtime native voice type.
+ * This is an extensible enum; additional voice names may be accepted by the
+ * service in the future.
+ */
 @added(Versions.v2026_06_01_preview)
 union AzureRealtimeNativeVoiceName {
   string,
@@ -580,7 +584,6 @@ union AzureRealtimeNativeVoiceName {
  * synthesis than standard Azure voices. Only valid when using the
  * `azure-realtime` model.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @added(Versions.v2026_06_01_preview)
 @usage(DualUsage)
 model AzureRealtimeNativeVoice {
