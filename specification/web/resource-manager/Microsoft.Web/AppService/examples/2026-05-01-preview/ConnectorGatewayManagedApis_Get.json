@@ -1,0 +1,37 @@
+{
+  "operationId": "ConnectorGatewayManagedApis_Get",
+  "title": "GetManagedApi",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-05-01-preview",
+    "name": "connectorgateway1",
+    "apiName": "office365"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Web/connectorGateways/connectorgateway1/managedApis/office365",
+        "name": "office365",
+        "type": "Microsoft.Web/connectorGateways/managedApis",
+        "properties": {
+          "generalInformation": {
+            "displayName": "Office 365 Outlook",
+            "description": "Connector for Office 365 Outlook.",
+            "iconUri": "https://connectoricons-prod.azureedge.net/office365/icon_1.0.1568.2812.png",
+            "tier": "Standard",
+            "releaseTag": "GA"
+          },
+          "capabilities": [
+            "actions",
+            "triggers"
+          ],
+          "runtimeUrls": [
+            "https://prod-00.westus.logic.azure.com:443/apim/office365"
+          ],
+          "isExportSupported": true
+        }
+      }
+    }
+  }
+}

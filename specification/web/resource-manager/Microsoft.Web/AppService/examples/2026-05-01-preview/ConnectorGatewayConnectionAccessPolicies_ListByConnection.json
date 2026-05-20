@@ -1,0 +1,34 @@
+{
+  "operationId": "ConnectorGatewayConnectionAccessPolicies_ListByConnection",
+  "title": "ListConnectionAccessPoliciesByConnection",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-05-01-preview",
+    "name": "connectorgateway1",
+    "connectionName": "office365-conn"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Web/connectorGateways/connectorgateway1/connections/office365-conn/accessPolicies/policy1",
+            "name": "policy1",
+            "type": "Microsoft.Web/connectorGateways/connections/accessPolicies",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "principal": {
+                "type": "ActiveDirectory",
+                "identity": {
+                  "objectId": "11111111-2222-3333-4444-555555555555",
+                  "tenantId": "99999999-8888-7777-6666-555555555555"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

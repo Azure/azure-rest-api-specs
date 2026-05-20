@@ -93,6 +93,39 @@
       "name": "ConnectorGateways"
     },
     {
+      "name": "ConnectorGatewayMcpServerConfigs"
+    },
+    {
+      "name": "ConnectorGatewayConnections"
+    },
+    {
+      "name": "ConnectorGatewayConnectionAccessPolicies"
+    },
+    {
+      "name": "ConnectorGatewayMcpServerConfigAccessPolicies"
+    },
+    {
+      "name": "ConnectorGatewayTriggerConfigs"
+    },
+    {
+      "name": "ConnectorGatewayTriggerRuns"
+    },
+    {
+      "name": "ConnectorGatewayTriggerStatuses"
+    },
+    {
+      "name": "ConnectorGatewayCustomConnectors"
+    },
+    {
+      "name": "ConnectorGatewayManagedApis"
+    },
+    {
+      "name": "ConnectorGatewayManagedMcpOperations"
+    },
+    {
+      "name": "ConnectorGatewayManagedHostedMcpServers"
+    },
+    {
       "name": "WorkflowRuns"
     },
     {
@@ -900,7 +933,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/connectorgateways": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/connectorGateways": {
       "get": {
         "operationId": "ConnectorGateways_ListBySubscription",
         "tags": [
@@ -2594,7 +2627,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectorgateways": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectorGateways": {
       "get": {
         "operationId": "ConnectorGateways_ListByResourceGroup",
         "tags": [
@@ -2657,7 +2690,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectorgateways/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectorGateways/{name}": {
       "get": {
         "operationId": "ConnectorGateways_Get",
         "tags": [
@@ -2843,19 +2876,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
+          "200": {
+            "description": "Resource deleted successfully."
           },
           "204": {
             "description": "Resource does not exist."
@@ -2871,11 +2893,2277 @@
           "DeleteConnectorGateway": {
             "$ref": "./examples/ConnectorGateways_Delete.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectorGateways/{name}/connections": {
+      "get": {
+        "operationId": "ConnectorGatewayConnections_ListByConnectorGateway",
+        "tags": [
+          "ConnectorGatewayConnections"
+        ],
+        "description": "List ConnectorGatewayConnection resources by ConnectorGateway",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the connector gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+        "x-ms-examples": {
+          "ListConnectionsByConnectorGateway": {
+            "$ref": "./examples/ConnectorGatewayConnections_ListByConnectorGateway.json"
+          }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectorGateways/{name}/connections/{connectionName}": {
+      "get": {
+        "operationId": "ConnectorGatewayConnections_Get",
+        "tags": [
+          "ConnectorGatewayConnections"
+        ],
+        "description": "Get a ConnectorGatewayConnection",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the connector gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "description": "The name of the connection.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetConnection": {
+            "$ref": "./examples/ConnectorGatewayConnections_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ConnectorGatewayConnections_CreateOrUpdate",
+        "tags": [
+          "ConnectorGatewayConnections"
+        ],
+        "description": "Create a ConnectorGatewayConnection",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the connector gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "description": "The name of the connection.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ConnectorGatewayConnection' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayConnection"
+            }
+          },
+          "201": {
+            "description": "Resource 'ConnectorGatewayConnection' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateConnection": {
+            "$ref": "./examples/ConnectorGatewayConnections_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ConnectorGatewayConnections_Delete",
+        "tags": [
+          "ConnectorGatewayConnections"
+        ],
+        "description": "Delete a ConnectorGatewayConnection",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the connector gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "description": "The name of the connection.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteConnection": {
+            "$ref": "./examples/ConnectorGatewayConnections_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectorGateways/{name}/connections/{connectionName}/accessPolicies": {
+      "get": {
+        "operationId": "ConnectorGatewayConnectionAccessPolicies_ListByConnection",
+        "tags": [
+          "ConnectorGatewayConnectionAccessPolicies"
+        ],
+        "description": "List ConnectorGatewayConnectionAccessPolicy resources by ConnectorGatewayConnection",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the connector gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "description": "The name of the connection.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayConnectionAccessPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListConnectionAccessPoliciesByConnection": {
+            "$ref": "./examples/ConnectorGatewayConnectionAccessPolicies_ListByConnection.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectorGateways/{name}/connections/{connectionName}/accessPolicies/{accessPolicyName}": {
+      "get": {
+        "operationId": "ConnectorGatewayConnectionAccessPolicies_Get",
+        "tags": [
+          "ConnectorGatewayConnectionAccessPolicies"
+        ],
+        "description": "Get a ConnectorGatewayConnectionAccessPolicy",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the connector gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "description": "The name of the connection.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "accessPolicyName",
+            "in": "path",
+            "description": "The name of the access policy.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayConnectionAccessPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetConnectionAccessPolicy": {
+            "$ref": "./examples/ConnectorGatewayConnectionAccessPolicies_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ConnectorGatewayConnectionAccessPolicies_CreateOrUpdate",
+        "tags": [
+          "ConnectorGatewayConnectionAccessPolicies"
+        ],
+        "description": "Create a ConnectorGatewayConnectionAccessPolicy",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the connector gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "description": "The name of the connection.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "accessPolicyName",
+            "in": "path",
+            "description": "The name of the access policy.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayConnectionAccessPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ConnectorGatewayConnectionAccessPolicy' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayConnectionAccessPolicy"
+            }
+          },
+          "201": {
+            "description": "Resource 'ConnectorGatewayConnectionAccessPolicy' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayConnectionAccessPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateConnectionAccessPolicy": {
+            "$ref": "./examples/ConnectorGatewayConnectionAccessPolicies_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ConnectorGatewayConnectionAccessPolicies_Delete",
+        "tags": [
+          "ConnectorGatewayConnectionAccessPolicies"
+        ],
+        "description": "Delete a ConnectorGatewayConnectionAccessPolicy",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the connector gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "description": "The name of the connection.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "accessPolicyName",
+            "in": "path",
+            "description": "The name of the access policy.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteConnectionAccessPolicy": {
+            "$ref": "./examples/ConnectorGatewayConnectionAccessPolicies_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectorGateways/{name}/connections/{connectionName}/confirmConsentCode": {
+      "post": {
+        "operationId": "ConnectorGatewayConnections_ConfirmConsentCode",
+        "tags": [
+          "ConnectorGatewayConnections"
+        ],
+        "description": "Confirms an OAuth consent code returned from the redirect URL.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the connector gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "description": "The name of the connection.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfirmConsentCodeRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfirmConsentCodeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfirmConsentCodeForConnection": {
+            "$ref": "./examples/ConnectorGatewayConnections_ConfirmConsentCode.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectorGateways/{name}/connections/{connectionName}/dynamicInvoke": {
+      "post": {
+        "operationId": "ConnectorGatewayConnections_DynamicInvoke",
+        "tags": [
+          "ConnectorGatewayConnections"
+        ],
+        "description": "Forwards a dynamic HTTP invocation through the connection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the connector gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "description": "The name of the connection.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DynamicInvokeRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DynamicInvokeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DynamicInvokeOnConnection": {
+            "$ref": "./examples/ConnectorGatewayConnections_DynamicInvoke.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectorGateways/{name}/connections/{connectionName}/listConnectionKeys": {
+      "post": {
+        "operationId": "ConnectorGatewayConnections_ListConnectionKeys",
+        "tags": [
+          "ConnectorGatewayConnections"
+        ],
+        "description": "Lists the access keys for the connection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the connector gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "description": "The name of the connection.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionKeysResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListConnectionKeysForConnection": {
+            "$ref": "./examples/ConnectorGatewayConnections_ListConnectionKeys.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectorGateways/{name}/connections/{connectionName}/listConsentLinks": {
+      "post": {
+        "operationId": "ConnectorGatewayConnections_ListConsentLinks",
+        "tags": [
+          "ConnectorGatewayConnections"
+        ],
+        "description": "Lists OAuth consent links for the connection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the connector gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "description": "The name of the connection.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ListConsentLinksRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConsentLinkListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListConsentLinksForConnection": {
+            "$ref": "./examples/ConnectorGatewayConnections_ListConsentLinks.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectorGateways/{name}/customConnectors": {
+      "get": {
+        "operationId": "ConnectorGatewayCustomConnectors_ListByConnectorGateway",
+        "tags": [
+          "ConnectorGatewayCustomConnectors"
+        ],
+        "description": "List ConnectorGatewayCustomConnector resources by ConnectorGateway",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the connector gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayCustomConnectorListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListCustomConnectorsByConnectorGateway": {
+            "$ref": "./examples/ConnectorGatewayCustomConnectors_ListByConnectorGateway.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectorGateways/{name}/customConnectors/{customConnectorName}": {
+      "get": {
+        "operationId": "ConnectorGatewayCustomConnectors_Get",
+        "tags": [
+          "ConnectorGatewayCustomConnectors"
+        ],
+        "description": "Get a ConnectorGatewayCustomConnector",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the connector gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "customConnectorName",
+            "in": "path",
+            "description": "The name of the custom connector.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayCustomConnector"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetCustomConnector": {
+            "$ref": "./examples/ConnectorGatewayCustomConnectors_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ConnectorGatewayCustomConnectors_CreateOrUpdate",
+        "tags": [
+          "ConnectorGatewayCustomConnectors"
+        ],
+        "description": "Create a ConnectorGatewayCustomConnector",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the connector gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "customConnectorName",
+            "in": "path",
+            "description": "The name of the custom connector.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayCustomConnector"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ConnectorGatewayCustomConnector' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayCustomConnector"
+            }
+          },
+          "201": {
+            "description": "Resource 'ConnectorGatewayCustomConnector' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayCustomConnector"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateCustomConnector": {
+            "$ref": "./examples/ConnectorGatewayCustomConnectors_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ConnectorGatewayCustomConnectors_Delete",
+        "tags": [
+          "ConnectorGatewayCustomConnectors"
+        ],
+        "description": "Delete a ConnectorGatewayCustomConnector",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the connector gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "customConnectorName",
+            "in": "path",
+            "description": "The name of the custom connector.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteCustomConnector": {
+            "$ref": "./examples/ConnectorGatewayCustomConnectors_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectorGateways/{name}/listApiKey": {
+      "post": {
+        "operationId": "ConnectorGateways_ListApiKey",
+        "tags": [
+          "ConnectorGateways"
+        ],
+        "description": "Issues an API key for the connector gateway. The key may be scoped to a specific MCP server config or to the entire gateway.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the connector gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ListApiKeyRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayKeyDefinition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListApiKeyForConnectorGateway": {
+            "$ref": "./examples/ConnectorGateways_ListApiKey.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectorGateways/{name}/managedApis": {
+      "get": {
+        "operationId": "ConnectorGatewayManagedApis_ListByConnectorGateway",
+        "tags": [
+          "ConnectorGatewayManagedApis"
+        ],
+        "description": "List ConnectorGatewayManagedApi resources by ConnectorGateway",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the connector gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayManagedApiListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListManagedApisByConnectorGateway": {
+            "$ref": "./examples/ConnectorGatewayManagedApis_ListByConnectorGateway.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectorGateways/{name}/managedApis/{apiName}": {
+      "get": {
+        "operationId": "ConnectorGatewayManagedApis_Get",
+        "tags": [
+          "ConnectorGatewayManagedApis"
+        ],
+        "description": "Get a ConnectorGatewayManagedApi",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the connector gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "apiName",
+            "in": "path",
+            "description": "The connector name (e.g., office365).",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayManagedApi"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetManagedApi": {
+            "$ref": "./examples/ConnectorGatewayManagedApis_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectorGateways/{name}/managedHostedMcpServers": {
+      "get": {
+        "operationId": "ConnectorGatewayManagedHostedMcpServers_ListByConnectorGateway",
+        "tags": [
+          "ConnectorGatewayManagedHostedMcpServers"
+        ],
+        "description": "List ConnectorGatewayManagedHostedMcpServer resources by ConnectorGateway",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the connector gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayManagedHostedMcpServerListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListManagedHostedMcpServersByConnectorGateway": {
+            "$ref": "./examples/ConnectorGatewayManagedHostedMcpServers_ListByConnectorGateway.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectorGateways/{name}/managedHostedMcpServers/{hostedMcpServerName}": {
+      "get": {
+        "operationId": "ConnectorGatewayManagedHostedMcpServers_Get",
+        "tags": [
+          "ConnectorGatewayManagedHostedMcpServers"
+        ],
+        "description": "Get a ConnectorGatewayManagedHostedMcpServer",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the connector gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "hostedMcpServerName",
+            "in": "path",
+            "description": "The registry key for the hosted MCP server (used as hostedMcpServerId).",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayManagedHostedMcpServer"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetManagedHostedMcpServer": {
+            "$ref": "./examples/ConnectorGatewayManagedHostedMcpServers_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectorGateways/{name}/managedMcpOperations": {
+      "get": {
+        "operationId": "ConnectorGatewayManagedMcpOperations_ListByConnectorGateway",
+        "tags": [
+          "ConnectorGatewayManagedMcpOperations"
+        ],
+        "description": "List ConnectorGatewayManagedMcpOperation resources by ConnectorGateway",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the connector gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayManagedMcpOperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListManagedMcpOperationsByConnectorGateway": {
+            "$ref": "./examples/ConnectorGatewayManagedMcpOperations_ListByConnectorGateway.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectorGateways/{name}/managedMcpOperations/{operationName}": {
+      "get": {
+        "operationId": "ConnectorGatewayManagedMcpOperations_Get",
+        "tags": [
+          "ConnectorGatewayManagedMcpOperations"
+        ],
+        "description": "Get a ConnectorGatewayManagedMcpOperation",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the connector gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "operationName",
+            "in": "path",
+            "description": "The name of the managed MCP operation.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayManagedMcpOperation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetManagedMcpOperation": {
+            "$ref": "./examples/ConnectorGatewayManagedMcpOperations_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectorGateways/{name}/mcpServerConfigs": {
+      "get": {
+        "operationId": "ConnectorGatewayMcpServerConfigs_ListByConnectorGateway",
+        "tags": [
+          "ConnectorGatewayMcpServerConfigs"
+        ],
+        "description": "List ConnectorGatewayMcpServerConfig resources by ConnectorGateway",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the connector gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayMcpServerConfigListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListMcpServerConfigsByConnectorGateway": {
+            "$ref": "./examples/ConnectorGatewayMcpServerConfigs_ListByConnectorGateway.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectorGateways/{name}/mcpServerConfigs/{mcpServerConfigName}": {
+      "get": {
+        "operationId": "ConnectorGatewayMcpServerConfigs_Get",
+        "tags": [
+          "ConnectorGatewayMcpServerConfigs"
+        ],
+        "description": "Get a ConnectorGatewayMcpServerConfig",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the connector gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "mcpServerConfigName",
+            "in": "path",
+            "description": "The name of the MCP server config.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayMcpServerConfig"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetMcpServerConfig": {
+            "$ref": "./examples/ConnectorGatewayMcpServerConfigs_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ConnectorGatewayMcpServerConfigs_CreateOrUpdate",
+        "tags": [
+          "ConnectorGatewayMcpServerConfigs"
+        ],
+        "description": "Create a ConnectorGatewayMcpServerConfig",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the connector gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "mcpServerConfigName",
+            "in": "path",
+            "description": "The name of the MCP server config.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayMcpServerConfig"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ConnectorGatewayMcpServerConfig' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayMcpServerConfig"
+            }
+          },
+          "201": {
+            "description": "Resource 'ConnectorGatewayMcpServerConfig' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayMcpServerConfig"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateMcpServerConfig": {
+            "$ref": "./examples/ConnectorGatewayMcpServerConfigs_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ConnectorGatewayMcpServerConfigs_Delete",
+        "tags": [
+          "ConnectorGatewayMcpServerConfigs"
+        ],
+        "description": "Delete a ConnectorGatewayMcpServerConfig",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the connector gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "mcpServerConfigName",
+            "in": "path",
+            "description": "The name of the MCP server config.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteMcpServerConfig": {
+            "$ref": "./examples/ConnectorGatewayMcpServerConfigs_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectorGateways/{name}/mcpServerConfigs/{mcpServerConfigName}/accessPolicies": {
+      "get": {
+        "operationId": "ConnectorGatewayMcpServerConfigAccessPolicies_ListByMcpServerConfig",
+        "tags": [
+          "ConnectorGatewayMcpServerConfigAccessPolicies"
+        ],
+        "description": "List ConnectorGatewayMcpServerConfigAccessPolicy resources by ConnectorGatewayMcpServerConfig",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the connector gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "mcpServerConfigName",
+            "in": "path",
+            "description": "The name of the MCP server config.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayMcpServerConfigAccessPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListMcpServerConfigAccessPoliciesByMcpServerConfig": {
+            "$ref": "./examples/ConnectorGatewayMcpServerConfigAccessPolicies_ListByMcpServerConfig.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectorGateways/{name}/mcpServerConfigs/{mcpServerConfigName}/accessPolicies/{accessPolicyName}": {
+      "get": {
+        "operationId": "ConnectorGatewayMcpServerConfigAccessPolicies_Get",
+        "tags": [
+          "ConnectorGatewayMcpServerConfigAccessPolicies"
+        ],
+        "description": "Get a ConnectorGatewayMcpServerConfigAccessPolicy",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the connector gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "mcpServerConfigName",
+            "in": "path",
+            "description": "The name of the MCP server config.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "accessPolicyName",
+            "in": "path",
+            "description": "The name of the access policy.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayMcpServerConfigAccessPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetMcpServerConfigAccessPolicy": {
+            "$ref": "./examples/ConnectorGatewayMcpServerConfigAccessPolicies_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ConnectorGatewayMcpServerConfigAccessPolicies_CreateOrUpdate",
+        "tags": [
+          "ConnectorGatewayMcpServerConfigAccessPolicies"
+        ],
+        "description": "Create a ConnectorGatewayMcpServerConfigAccessPolicy",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the connector gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "mcpServerConfigName",
+            "in": "path",
+            "description": "The name of the MCP server config.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "accessPolicyName",
+            "in": "path",
+            "description": "The name of the access policy.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayMcpServerConfigAccessPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ConnectorGatewayMcpServerConfigAccessPolicy' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayMcpServerConfigAccessPolicy"
+            }
+          },
+          "201": {
+            "description": "Resource 'ConnectorGatewayMcpServerConfigAccessPolicy' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayMcpServerConfigAccessPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateMcpServerConfigAccessPolicy": {
+            "$ref": "./examples/ConnectorGatewayMcpServerConfigAccessPolicies_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ConnectorGatewayMcpServerConfigAccessPolicies_Delete",
+        "tags": [
+          "ConnectorGatewayMcpServerConfigAccessPolicies"
+        ],
+        "description": "Delete a ConnectorGatewayMcpServerConfigAccessPolicy",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the connector gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "mcpServerConfigName",
+            "in": "path",
+            "description": "The name of the MCP server config.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "accessPolicyName",
+            "in": "path",
+            "description": "The name of the access policy.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteMcpServerConfigAccessPolicy": {
+            "$ref": "./examples/ConnectorGatewayMcpServerConfigAccessPolicies_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectorGateways/{name}/regenerateAccessKey": {
+      "post": {
+        "operationId": "ConnectorGateways_RegenerateAccessKey",
+        "tags": [
+          "ConnectorGateways"
+        ],
+        "description": "Regenerates the primary or secondary access key on the connector gateway.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the connector gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccessKeyRegenerateActionDefinition"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayKeyDefinition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RegenerateAccessKeyForConnectorGateway": {
+            "$ref": "./examples/ConnectorGateways_RegenerateAccessKey.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectorGateways/{name}/triggerConfigs": {
+      "get": {
+        "operationId": "ConnectorGatewayTriggerConfigs_ListByConnectorGateway",
+        "tags": [
+          "ConnectorGatewayTriggerConfigs"
+        ],
+        "description": "List ConnectorGatewayTriggerConfig resources by ConnectorGateway",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the connector gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayTriggerConfigListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListTriggerConfigsByConnectorGateway": {
+            "$ref": "./examples/ConnectorGatewayTriggerConfigs_ListByConnectorGateway.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectorGateways/{name}/triggerConfigs/{triggerConfigName}": {
+      "get": {
+        "operationId": "ConnectorGatewayTriggerConfigs_Get",
+        "tags": [
+          "ConnectorGatewayTriggerConfigs"
+        ],
+        "description": "Get a ConnectorGatewayTriggerConfig",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the connector gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "triggerConfigName",
+            "in": "path",
+            "description": "The name of the trigger configuration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayTriggerConfig"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetTriggerConfig": {
+            "$ref": "./examples/ConnectorGatewayTriggerConfigs_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ConnectorGatewayTriggerConfigs_CreateOrUpdate",
+        "tags": [
+          "ConnectorGatewayTriggerConfigs"
+        ],
+        "description": "Create a ConnectorGatewayTriggerConfig",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the connector gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "triggerConfigName",
+            "in": "path",
+            "description": "The name of the trigger configuration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayTriggerConfig"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ConnectorGatewayTriggerConfig' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayTriggerConfig"
+            }
+          },
+          "201": {
+            "description": "Resource 'ConnectorGatewayTriggerConfig' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayTriggerConfig"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateTriggerConfig": {
+            "$ref": "./examples/ConnectorGatewayTriggerConfigs_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ConnectorGatewayTriggerConfigs_Delete",
+        "tags": [
+          "ConnectorGatewayTriggerConfigs"
+        ],
+        "description": "Delete a ConnectorGatewayTriggerConfig",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the connector gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "triggerConfigName",
+            "in": "path",
+            "description": "The name of the trigger configuration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteTriggerConfig": {
+            "$ref": "./examples/ConnectorGatewayTriggerConfigs_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectorGateways/{name}/triggerConfigs/{triggerConfigName}/runs": {
+      "get": {
+        "operationId": "ConnectorGatewayTriggerRuns_ListByTriggerConfig",
+        "tags": [
+          "ConnectorGatewayTriggerRuns"
+        ],
+        "description": "List ConnectorGatewayTriggerRun resources by ConnectorGatewayTriggerConfig",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the connector gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "triggerConfigName",
+            "in": "path",
+            "description": "The name of the trigger configuration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayTriggerRunListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListTriggerRunsByTriggerConfig": {
+            "$ref": "./examples/ConnectorGatewayTriggerRuns_ListByTriggerConfig.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectorGateways/{name}/triggerConfigs/{triggerConfigName}/runs/{runId}": {
+      "get": {
+        "operationId": "ConnectorGatewayTriggerRuns_Get",
+        "tags": [
+          "ConnectorGatewayTriggerRuns"
+        ],
+        "description": "Get a ConnectorGatewayTriggerRun",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the connector gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "triggerConfigName",
+            "in": "path",
+            "description": "The name of the trigger configuration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "runId",
+            "in": "path",
+            "description": "The run identifier.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayTriggerRun"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetTriggerRun": {
+            "$ref": "./examples/ConnectorGatewayTriggerRuns_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectorGateways/{name}/triggerConfigs/{triggerConfigName}/triggerStatuses/latest": {
+      "get": {
+        "operationId": "ConnectorGatewayTriggerStatuses_GetLatest",
+        "tags": [
+          "ConnectorGatewayTriggerStatuses"
+        ],
+        "description": "Get a ConnectorGatewayTriggerStatus",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the connector gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "triggerConfigName",
+            "in": "path",
+            "description": "The name of the trigger configuration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorGatewayTriggerStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetLatestTriggerStatus": {
+            "$ref": "./examples/ConnectorGatewayTriggerStatuses_GetLatest.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments": {
@@ -38433,6 +40721,43 @@
         }
       }
     },
+    "AccessKeyRegenerateActionDefinition": {
+      "type": "object",
+      "description": "Request body for regenerating a connector gateway access key.",
+      "properties": {
+        "keyType": {
+          "$ref": "#/definitions/AccessKeyType",
+          "description": "Type of access key to regenerate."
+        }
+      },
+      "required": [
+        "keyType"
+      ]
+    },
+    "AccessKeyType": {
+      "type": "string",
+      "description": "Type of access key to issue or regenerate.",
+      "enum": [
+        "Primary",
+        "Secondary"
+      ],
+      "x-ms-enum": {
+        "name": "AccessKeyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Primary",
+            "value": "Primary",
+            "description": "Primary access key."
+          },
+          {
+            "name": "Secondary",
+            "value": "Secondary",
+            "description": "Secondary access key."
+          }
+        ]
+      }
+    },
     "AddressResponse": {
       "type": "object",
       "description": "Describes main public IP address and any extra virtual IPs.",
@@ -38481,6 +40806,24 @@
           "x-ms-identifiers": [
             "virtualIP"
           ]
+        }
+      }
+    },
+    "AdminAppRegistrationDefinition": {
+      "type": "object",
+      "description": "Admin Entra ID application registration backing OBO/AppOnly auth.",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "Entra ID application (client) ID."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Entra ID tenant ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name of the application registration."
         }
       }
     },
@@ -39961,6 +42304,36 @@
       "format": "uuid",
       "description": "Universally Unique Identifier"
     },
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      }
+    },
     "AzureActiveDirectory": {
       "type": "object",
       "description": "The configuration settings of the Azure Active directory provider.",
@@ -41171,6 +43544,34 @@
         "modelAsString": false
       }
     },
+    "ConfirmConsentCodeRequest": {
+      "type": "object",
+      "description": "Request body for confirmConsentCode.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The consent code from the redirect URL."
+        },
+        "objectId": {
+          "type": "string",
+          "description": "The Entra ID object ID of the user."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The Entra ID tenant ID."
+        }
+      }
+    },
+    "ConfirmConsentCodeResponse": {
+      "type": "object",
+      "description": "Response for confirmConsentCode.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Authentication status after confirming consent."
+        }
+      }
+    },
     "ConnStringInfo": {
       "type": "object",
       "description": "Database connection string information.",
@@ -41206,6 +43607,18 @@
         "value",
         "type"
       ]
+    },
+    "ConnectionKeysResponse": {
+      "type": "object",
+      "description": "Response for listConnectionKeys.",
+      "properties": {
+        "connectionKey": {
+          "type": "string",
+          "format": "password",
+          "description": "The connection access key.",
+          "x-ms-secret": true
+        }
+      }
     },
     "ConnectionStringDictionary": {
       "type": "object",
@@ -41254,12 +43667,423 @@
         "properties": {
           "$ref": "#/definitions/ConnectorGatewayProperties",
           "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
         {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
+      ]
+    },
+    "ConnectorGatewayConnection": {
+      "type": "object",
+      "description": "A connection under a connector gateway.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConnectorGatewayConnectionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ConnectorGatewayConnectionAccessPolicy": {
+      "type": "object",
+      "description": "An access policy on a connector gateway connection.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConnectorGatewayConnectionAccessPolicyProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ConnectorGatewayConnectionAccessPolicyIdentity": {
+      "type": "object",
+      "description": "The Entra ID identity used in a connection access policy principal.",
+      "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "Entra ID object ID."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Entra ID tenant ID."
+        }
+      }
+    },
+    "ConnectorGatewayConnectionAccessPolicyListResult": {
+      "type": "object",
+      "description": "The response of a ConnectorGatewayConnectionAccessPolicy list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ConnectorGatewayConnectionAccessPolicy items on this page",
+          "items": {
+            "$ref": "#/definitions/ConnectorGatewayConnectionAccessPolicy"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ConnectorGatewayConnectionAccessPolicyPrincipal": {
+      "type": "object",
+      "description": "Principal definition for a connection access policy.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The principal type (e.g., ActiveDirectory)."
+        },
+        "identity": {
+          "$ref": "#/definitions/ConnectorGatewayConnectionAccessPolicyIdentity",
+          "description": "The Entra ID identity for this principal."
+        }
+      }
+    },
+    "ConnectorGatewayConnectionAccessPolicyProperties": {
+      "type": "object",
+      "description": "The properties of a connection access policy.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The provisioning state of the connection access policy. Connection access\npolicies carry a provisioning state because their provisioning is processed\nasynchronously by the gateway runtime. This is intentionally asymmetric with\nmcpServerConfigs/accessPolicies, which are synchronous and have no\nprovisioning state.",
+          "readOnly": true
+        },
+        "principal": {
+          "$ref": "#/definitions/ConnectorGatewayConnectionAccessPolicyPrincipal",
+          "description": "The Entra ID principal authorized by this access policy."
+        }
+      }
+    },
+    "ConnectorGatewayConnectionCreatedBy": {
+      "type": "object",
+      "description": "Identifies the user that created a connection.",
+      "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "Entra ID object ID of the user."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Entra ID tenant ID of the user."
+        }
+      }
+    },
+    "ConnectorGatewayConnectionListResult": {
+      "type": "object",
+      "description": "The response of a ConnectorGatewayConnection list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ConnectorGatewayConnection items on this page",
+          "items": {
+            "$ref": "#/definitions/ConnectorGatewayConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ConnectorGatewayConnectionProperties": {
+      "type": "object",
+      "description": "The properties of a connector gateway connection.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The provisioning state of the connection.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the connection."
+        },
+        "connectorName": {
+          "type": "string",
+          "description": "The managed API connector name (e.g., Office365)."
+        },
+        "connectionRuntimeUrl": {
+          "type": "string",
+          "description": "The API Hub runtime URL for this connection.",
+          "readOnly": true
+        },
+        "overallStatus": {
+          "$ref": "#/definitions/ConnectorGatewayConnectionStatus",
+          "description": "Overall connection status.",
+          "readOnly": true
+        },
+        "statuses": {
+          "type": "array",
+          "description": "Detailed status entries for the connection.",
+          "items": {
+            "$ref": "#/definitions/ConnectorGatewayConnectionStatusEntry"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "createdBy": {
+          "$ref": "#/definitions/ConnectorGatewayConnectionCreatedBy",
+          "description": "Identifies the user that created the connection.",
+          "readOnly": true
+        }
+      }
+    },
+    "ConnectorGatewayConnectionStatus": {
+      "type": "string",
+      "description": "Overall status of a connector gateway connection.",
+      "enum": [
+        "Connected",
+        "Unauthenticated",
+        "Error"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectorGatewayConnectionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Connected",
+            "value": "Connected",
+            "description": "Connection is established and healthy."
+          },
+          {
+            "name": "Unauthenticated",
+            "value": "Unauthenticated",
+            "description": "Connection requires user consent."
+          },
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "Connection is in an error state."
+          }
+        ]
+      }
+    },
+    "ConnectorGatewayConnectionStatusEntry": {
+      "type": "object",
+      "description": "Status entry for a connector gateway connection.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Status code or label."
+        }
+      }
+    },
+    "ConnectorGatewayConsentLink": {
+      "type": "object",
+      "description": "A single consent link entry.",
+      "properties": {
+        "link": {
+          "type": "string",
+          "description": "The OAuth consent URL to open in a browser."
+        },
+        "firstPartyLoginUri": {
+          "type": "string",
+          "description": "First-party login URI for the consent flow."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name for the consent link."
+        },
+        "status": {
+          "type": "string",
+          "description": "Consent flow status."
+        }
+      }
+    },
+    "ConnectorGatewayCustomConnector": {
+      "type": "object",
+      "description": "A custom connector under a connector gateway.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConnectorGatewayCustomConnectorProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "kind": {
+          "$ref": "#/definitions/ConnectorGatewayCustomConnectorKind",
+          "description": "The kind of custom connector (e.g., McpServer)."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ConnectorGatewayCustomConnectorKind": {
+      "type": "string",
+      "description": "The kind of custom connector.",
+      "enum": [
+        "McpServer"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectorGatewayCustomConnectorKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "McpServer",
+            "value": "McpServer",
+            "description": "An MCP server custom connector."
+          }
+        ]
+      }
+    },
+    "ConnectorGatewayCustomConnectorListResult": {
+      "type": "object",
+      "description": "The response of a ConnectorGatewayCustomConnector list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ConnectorGatewayCustomConnector items on this page",
+          "items": {
+            "$ref": "#/definitions/ConnectorGatewayCustomConnector"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ConnectorGatewayCustomConnectorProperties": {
+      "type": "object",
+      "description": "The properties of a connector gateway custom connector.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The provisioning state of the custom connector.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the custom connector."
+        },
+        "description": {
+          "type": "string",
+          "description": "Free-form description of the custom connector."
+        },
+        "mcpServerUrl": {
+          "type": "string",
+          "description": "MCP protocol endpoint URL (required when `kind` is `McpServer`)."
+        },
+        "backendService": {
+          "$ref": "#/definitions/CustomConnectorBackendService",
+          "description": "Backend service configuration."
+        },
+        "swagger": {
+          "type": "object",
+          "description": "OpenAPI / Swagger definition. Free-form JSON value matching the backend `Swagger` (JToken) shape.",
+          "additionalProperties": {}
+        },
+        "connectionParameters": {
+          "type": "object",
+          "description": "Connection authentication schema.",
+          "additionalProperties": {}
+        },
+        "connectionParameterSets": {
+          "type": "object",
+          "description": "Alternative connection parameter sets.",
+          "additionalProperties": {}
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "Connector capabilities (e.g., actions, triggers, tools).",
+          "items": {
+            "type": "string"
+          }
+        },
+        "iconUri": {
+          "type": "string",
+          "description": "URL to the connector icon."
+        },
+        "brandColor": {
+          "type": "string",
+          "description": "Brand color hex code (e.g., `#007ee5`)."
+        },
+        "supportedConnectionKinds": {
+          "$ref": "#/definitions/CustomConnectorSupportedConnectionKinds",
+          "description": "Bit-flag of supported connection kinds."
+        },
+        "runtimeUrls": {
+          "type": "array",
+          "description": "API Hub runtime endpoints for the connector.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "apiDefinitions": {
+          "type": "object",
+          "description": "Pointers to externalised API definitions (e.g., swagger URLs stored in blob storage).",
+          "additionalProperties": {}
+        },
+        "apiType": {
+          "$ref": "#/definitions/CustomConnectorApiType",
+          "description": "API definition shape."
+        },
+        "wsdlDefinition": {
+          "type": "object",
+          "description": "WSDL definition for SOAP custom connectors (when apiType is Soap).",
+          "additionalProperties": {}
+        },
+        "policies": {
+          "type": "string",
+          "description": "Inline custom connector policy XML applied to the connector at runtime\n(Logic Apps policy expressions)."
+        },
+        "policyContentLink": {
+          "type": "object",
+          "description": "External pointer to policy XML content (e.g., blob URI). Mirrors the shared ContentLinkDefinition shape.",
+          "additionalProperties": {}
+        },
+        "integrationServiceEnvironment": {
+          "type": "object",
+          "description": "Optional reference to a Logic Apps Integration Service Environment that\nhosts the connector runtime.",
+          "additionalProperties": {}
+        },
+        "isDynamicConnectionAllowed": {
+          "type": "boolean",
+          "description": "Whether dynamic per-call connections are allowed on this connector.\nMirrors the legacy `Microsoft.Web/connections` dynamic-connection flag;\ndefaults to false for new connectors."
+        }
+      }
+    },
+    "ConnectorGatewayKeyDefinition": {
+      "type": "object",
+      "description": "Response body for listApiKey.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "format": "password",
+          "description": "Opaque, base64url-encoded credential blob. Pass as the Authorization: Bearer <key> header (or via the ?api-key=<key> query string) when invoking the MCP runtime endpoint.",
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "key"
       ]
     },
     "ConnectorGatewayListResult": {
@@ -41283,14 +44107,396 @@
         "value"
       ]
     },
+    "ConnectorGatewayManagedApi": {
+      "type": "object",
+      "description": "A managed API connector exposed under a connector gateway. Read-only catalog entry.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedApiProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ConnectorGatewayManagedApiListResult": {
+      "type": "object",
+      "description": "The response of a ConnectorGatewayManagedApi list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ConnectorGatewayManagedApi items on this page",
+          "items": {
+            "$ref": "#/definitions/ConnectorGatewayManagedApi"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ConnectorGatewayManagedHostedMcpServer": {
+      "type": "object",
+      "description": "A managed hosted MCP server catalog entry under a connector gateway. Read-only.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedHostedMcpServerProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ConnectorGatewayManagedHostedMcpServerListResult": {
+      "type": "object",
+      "description": "The response of a ConnectorGatewayManagedHostedMcpServer list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ConnectorGatewayManagedHostedMcpServer items on this page",
+          "items": {
+            "$ref": "#/definitions/ConnectorGatewayManagedHostedMcpServer"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ConnectorGatewayManagedMcpOperation": {
+      "type": "object",
+      "description": "A managed MCP operation catalog entry under a connector gateway. Read-only.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedMcpOperationProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ConnectorGatewayManagedMcpOperationListResult": {
+      "type": "object",
+      "description": "The response of a ConnectorGatewayManagedMcpOperation list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ConnectorGatewayManagedMcpOperation items on this page",
+          "items": {
+            "$ref": "#/definitions/ConnectorGatewayManagedMcpOperation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ConnectorGatewayMcpServerConfig": {
+      "type": "object",
+      "description": "An MCP server config under a connector gateway.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConnectorGatewayMcpServerConfigProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "kind": {
+          "$ref": "#/definitions/McpServerConfigKind",
+          "description": "MCP server config kind. Controls how the runtime serves MCP requests."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ConnectorGatewayMcpServerConfigAccessPolicy": {
+      "type": "object",
+      "description": "An access policy on a connector gateway MCP server configuration.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConnectorGatewayMcpServerConfigAccessPolicyProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ConnectorGatewayMcpServerConfigAccessPolicyListResult": {
+      "type": "object",
+      "description": "The response of a ConnectorGatewayMcpServerConfigAccessPolicy list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ConnectorGatewayMcpServerConfigAccessPolicy items on this page",
+          "items": {
+            "$ref": "#/definitions/ConnectorGatewayMcpServerConfigAccessPolicy"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ConnectorGatewayMcpServerConfigAccessPolicyPrincipal": {
+      "type": "object",
+      "description": "Principal definition for an MCP server config access policy.",
+      "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "Entra ID object ID of the user or group principal."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Entra ID tenant ID."
+        }
+      }
+    },
+    "ConnectorGatewayMcpServerConfigAccessPolicyPrincipalType": {
+      "type": "string",
+      "description": "The principal type for an MCP server config access policy.",
+      "enum": [
+        "User",
+        "Group"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectorGatewayMcpServerConfigAccessPolicyPrincipalType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "User",
+            "value": "User",
+            "description": "The principal is a user."
+          },
+          {
+            "name": "Group",
+            "value": "Group",
+            "description": "The principal is a group."
+          }
+        ]
+      }
+    },
+    "ConnectorGatewayMcpServerConfigAccessPolicyProperties": {
+      "type": "object",
+      "description": "The properties of an MCP server config access policy.",
+      "properties": {
+        "principalType": {
+          "$ref": "#/definitions/ConnectorGatewayMcpServerConfigAccessPolicyPrincipalType",
+          "description": "The kind of Entra ID principal granted access. MCP server config access\npolicies do NOT carry a provisioning state — provisioning is synchronous.\nThis is intentionally asymmetric with connections/accessPolicies, where the\npolicy provisioning is async and carries a provisioning state."
+        },
+        "principal": {
+          "$ref": "#/definitions/ConnectorGatewayMcpServerConfigAccessPolicyPrincipal",
+          "description": "The Entra ID principal (user or group) granted access by this policy."
+        }
+      }
+    },
+    "ConnectorGatewayMcpServerConfigListResult": {
+      "type": "object",
+      "description": "The response of a ConnectorGatewayMcpServerConfig list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ConnectorGatewayMcpServerConfig items on this page",
+          "items": {
+            "$ref": "#/definitions/ConnectorGatewayMcpServerConfig"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ConnectorGatewayMcpServerConfigProperties": {
+      "type": "object",
+      "description": "The properties of an MCP server config.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The provisioning state of the MCP server config.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/McpServerConfigState",
+          "description": "The state of the MCP server config."
+        },
+        "description": {
+          "type": "string",
+          "description": "MCP server description for tool discovery."
+        },
+        "connectors": {
+          "type": "array",
+          "description": "Connectors exposed by this MCP server config.",
+          "items": {
+            "$ref": "#/definitions/McpServerConfigConnector"
+          }
+        },
+        "policies": {
+          "type": "array",
+          "description": "Policies that restrict parameter values for operations in this MCP server config.",
+          "items": {
+            "$ref": "#/definitions/McpServerConfigPolicy"
+          }
+        },
+        "settings": {
+          "$ref": "#/definitions/McpServerConfigSettings",
+          "description": "MCP server config settings."
+        },
+        "authenticationMode": {
+          "$ref": "#/definitions/McpAuthenticationMode",
+          "description": "Authentication mode applied to tool calls served by this MCP server config."
+        },
+        "disableApiKeyAuth": {
+          "type": "boolean",
+          "description": "When true, the MCP runtime endpoint rejects API-key authentication and only accepts Entra ID Bearer tokens."
+        },
+        "resourceAuth": {
+          "$ref": "#/definitions/ResourceAuthDefinition",
+          "description": "Resource authentication configuration. Required when authenticationMode is OnBehalfOfUserWithApp or AppOnly."
+        },
+        "hostedMcpServer": {
+          "$ref": "#/definitions/HostedMcpServerProperties",
+          "description": "Properties for an ADC-hosted MCP server. Used when kind = HostedMcpServer."
+        },
+        "mcpEndpointUrl": {
+          "type": "string",
+          "description": "The MCP protocol endpoint URL.",
+          "readOnly": true
+        }
+      }
+    },
     "ConnectorGatewayProperties": {
       "type": "object",
       "description": "The properties of a connector gateway.",
       "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The provisioning state of the connector gateway.",
+          "readOnly": true
+        },
+        "aiGatewayId": {
+          "type": "string",
+          "description": "System-assigned AI gateway identifier.",
+          "readOnly": true
+        },
         "connectorGatewayId": {
           "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The ID of the connector gateway resource.",
+          "description": "System-assigned connector gateway identifier.",
           "readOnly": true
+        },
+        "apiHubEnvironmentId": {
+          "type": "string",
+          "description": "Optional ARM ID of an existing API Hub environment to attach to on PUT (brownfield/passthrough scenarios). When omitted, the gateway creates a new API Hub environment."
+        }
+      }
+    },
+    "ConnectorGatewayRun": {
+      "type": "object",
+      "description": "A single workflow run created by a trigger configuration.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The run identifier (flow run sequence ID)."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the run started."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the run reached a terminal status. Null while the run is still in progress."
+        },
+        "status": {
+          "$ref": "#/definitions/FlowStatus",
+          "description": "Current status of the run."
+        },
+        "statusCode": {
+          "type": "string",
+          "description": "Status code reported by the run (e.g., HTTP status of the notification action)."
+        },
+        "error": {
+          "type": "object",
+          "description": "Error payload from the failed run, when applicable. Free-form JSON.",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "ConnectorGatewayRunDetails": {
+      "type": "object",
+      "description": "Full details for a single trigger run.",
+      "properties": {
+        "trigger": {
+          "$ref": "#/definitions/ConnectorGatewayRunTriggerDetails",
+          "description": "Trigger-side details for the run."
+        },
+        "notification": {
+          "$ref": "#/definitions/ConnectorGatewayRunNotificationDetails",
+          "description": "Notification action details. Null when no notification action ran for this run."
+        }
+      }
+    },
+    "ConnectorGatewayRunNotificationDetails": {
+      "type": "object",
+      "description": "Notification action details for a run.",
+      "properties": {
+        "inputs": {
+          "type": "object",
+          "description": "The notification action input payload (free-form JSON).",
+          "additionalProperties": {}
+        },
+        "outputs": {
+          "type": "object",
+          "description": "The notification action output payload (free-form JSON).",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "ConnectorGatewayRunTriggerDetails": {
+      "type": "object",
+      "description": "Trigger-side details for a run.",
+      "properties": {
+        "outputs": {
+          "type": "object",
+          "description": "The trigger output payload (free-form JSON). The headers property on the\nunderlying outputs is stripped before being returned to avoid exposing\ninternal HTTP headers.",
+          "additionalProperties": {}
         }
       }
     },
@@ -41304,6 +44510,325 @@
           "additionalProperties": {
             "type": "string"
           }
+        }
+      }
+    },
+    "ConnectorGatewayTriggerConfig": {
+      "type": "object",
+      "description": "A trigger configuration under a connector gateway.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConnectorGatewayTriggerConfigProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ConnectorGatewayTriggerConfigListResult": {
+      "type": "object",
+      "description": "The response of a ConnectorGatewayTriggerConfig list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ConnectorGatewayTriggerConfig items on this page",
+          "items": {
+            "$ref": "#/definitions/ConnectorGatewayTriggerConfig"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ConnectorGatewayTriggerConfigProperties": {
+      "type": "object",
+      "description": "The properties of a trigger configuration.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The provisioning state of the trigger configuration.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/ConnectorGatewayTriggerState",
+          "description": "The state of the trigger configuration."
+        },
+        "description": {
+          "type": "string",
+          "description": "Free-form description of the trigger configuration."
+        },
+        "connectionDetails": {
+          "$ref": "#/definitions/ConnectorGatewayTriggerConnectionDetails",
+          "description": "Connection reference for the trigger."
+        },
+        "operationName": {
+          "type": "string",
+          "description": "Trigger operation ID from the connector swagger."
+        },
+        "parameters": {
+          "type": "array",
+          "description": "Operation-specific parameters.",
+          "items": {
+            "$ref": "#/definitions/OperationParameter"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "notificationDetails": {
+          "$ref": "#/definitions/ConnectorGatewayTriggerNotificationDetails",
+          "description": "Callback configuration for push notifications."
+        },
+        "triggerType": {
+          "$ref": "#/definitions/ConnectorGatewayTriggerType",
+          "description": "Trigger type for standalone (non-connector) triggers."
+        },
+        "recurrence": {
+          "$ref": "#/definitions/TriggerRecurrence",
+          "description": "Recurrence configuration for Recurrence and SlidingWindow trigger types."
+        },
+        "delay": {
+          "type": "string",
+          "description": "Maximum delay before processing each time window. ISO-8601 duration\n(e.g., PT5M). Applies to SlidingWindow triggers."
+        },
+        "conditions": {
+          "type": "array",
+          "description": "Conditions evaluated against trigger outputs. All must be true for a run to be created.",
+          "items": {
+            "$ref": "#/definitions/TriggerCondition"
+          },
+          "x-ms-identifiers": [
+            "expression"
+          ]
+        },
+        "settings": {
+          "$ref": "#/definitions/TriggerConfigSettings",
+          "description": "Trigger configuration settings."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Arbitrary JSON metadata attached to the trigger configuration. No schema is enforced.",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "ConnectorGatewayTriggerConnectionDetails": {
+      "type": "object",
+      "description": "Connection reference for a trigger configuration.",
+      "properties": {
+        "connectorName": {
+          "type": "string",
+          "description": "The connector name (e.g., office365)."
+        },
+        "connectionName": {
+          "type": "string",
+          "description": "The name of the connection to use."
+        }
+      }
+    },
+    "ConnectorGatewayTriggerNotificationDetails": {
+      "type": "object",
+      "description": "Callback configuration for push notifications fired by a trigger.",
+      "properties": {
+        "callbackUrl": {
+          "type": "string",
+          "description": "Required. URL that receives push notifications."
+        },
+        "httpMethod": {
+          "$ref": "#/definitions/TriggerNotificationHttpMethod",
+          "description": "HTTP method for the callback. Defaults to POST."
+        },
+        "authentication": {
+          "type": "object",
+          "description": "Authentication configuration for the callback.",
+          "additionalProperties": {}
+        },
+        "body": {
+          "type": "object",
+          "description": "Optional body template for the callback.",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "ConnectorGatewayTriggerRun": {
+      "type": "object",
+      "description": "A single execution (run) of a trigger configuration.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConnectorGatewayTriggerRunProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ConnectorGatewayTriggerRunListResult": {
+      "type": "object",
+      "description": "The response of a ConnectorGatewayTriggerRun list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ConnectorGatewayTriggerRun items on this page",
+          "items": {
+            "$ref": "#/definitions/ConnectorGatewayTriggerRun"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ConnectorGatewayTriggerRunProperties": {
+      "type": "object",
+      "description": "Properties of a single trigger run.",
+      "properties": {
+        "summary": {
+          "$ref": "#/definitions/ConnectorGatewayRun",
+          "description": "Run summary information."
+        },
+        "details": {
+          "$ref": "#/definitions/ConnectorGatewayRunDetails",
+          "description": "Full run details. Returned by the GET operation."
+        }
+      }
+    },
+    "ConnectorGatewayTriggerState": {
+      "type": "string",
+      "description": "The state of a trigger configuration.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectorGatewayTriggerState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The trigger is enabled and will fire on its schedule."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The trigger is disabled and will not fire."
+          }
+        ]
+      }
+    },
+    "ConnectorGatewayTriggerStatus": {
+      "type": "object",
+      "description": "Latest trigger execution status. Singleton (name = `latest`).",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConnectorGatewayTriggerStatusProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ConnectorGatewayTriggerStatusProperties": {
+      "type": "object",
+      "description": "Summary of the most recent execution of a trigger configuration's trigger.",
+      "properties": {
+        "lastExecutionStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the last trigger execution started."
+        },
+        "lastExecutionEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the last trigger execution reached a terminal status."
+        },
+        "lastExecutionStatus": {
+          "$ref": "#/definitions/FlowStatus",
+          "description": "Status of the last trigger execution."
+        },
+        "lastExecutionStatusCode": {
+          "type": "string",
+          "description": "Status code reported by the last trigger execution."
+        },
+        "lastExecutionError": {
+          "type": "object",
+          "description": "Error payload from the last failed trigger execution. Free-form JSON.",
+          "additionalProperties": {}
+        },
+        "lastExecutionIsFired": {
+          "type": "boolean",
+          "description": "Whether the last execution actually fired a workflow run. False if the\ntrigger was skipped (no new data) or failed before producing a run."
+        },
+        "lastExecutionOutputs": {
+          "type": "object",
+          "description": "The trigger output payload from the last execution (free-form JSON). The\nheaders property is stripped before being returned to avoid exposing\ninternal HTTP headers.",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "ConnectorGatewayTriggerType": {
+      "type": "string",
+      "description": "Trigger type for standalone (non-connector) triggers. Use NotSpecified for\nconnector-based triggers (the default).",
+      "enum": [
+        "NotSpecified",
+        "Recurrence",
+        "SlidingWindow"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectorGatewayTriggerType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "Default value used by connector-based triggers."
+          },
+          {
+            "name": "Recurrence",
+            "value": "Recurrence",
+            "description": "Recurrence trigger."
+          },
+          {
+            "name": "SlidingWindow",
+            "value": "SlidingWindow",
+            "description": "Sliding-window trigger."
+          }
+        ]
+      }
+    },
+    "ConsentLinkListResult": {
+      "type": "object",
+      "description": "Response for listConsentLinks.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The consent link entries.",
+          "items": {
+            "$ref": "#/definitions/ConnectorGatewayConsentLink"
+          },
+          "x-ms-identifiers": [
+            "link"
+          ]
         }
       }
     },
@@ -42006,6 +45531,76 @@
       "required": [
         "value"
       ]
+    },
+    "CustomConnectorApiType": {
+      "type": "string",
+      "description": "The shape of the API definition.",
+      "enum": [
+        "NotSpecified",
+        "Rest",
+        "Soap"
+      ],
+      "x-ms-enum": {
+        "name": "CustomConnectorApiType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "API type is not specified."
+          },
+          {
+            "name": "Rest",
+            "value": "Rest",
+            "description": "REST API."
+          },
+          {
+            "name": "Soap",
+            "value": "Soap",
+            "description": "SOAP API."
+          }
+        ]
+      }
+    },
+    "CustomConnectorBackendService": {
+      "type": "object",
+      "description": "Backend service configuration for a custom connector.",
+      "properties": {
+        "serviceUrl": {
+          "type": "string",
+          "description": "Base URL of the backend API."
+        }
+      }
+    },
+    "CustomConnectorSupportedConnectionKinds": {
+      "type": "string",
+      "description": "Bit-flag of supported connection kinds.",
+      "enum": [
+        "V1",
+        "V2",
+        "V1AndV2"
+      ],
+      "x-ms-enum": {
+        "name": "CustomConnectorSupportedConnectionKinds",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "V1",
+            "value": "V1",
+            "description": "V1 connections only."
+          },
+          {
+            "name": "V2",
+            "value": "V2",
+            "description": "V2 connections only."
+          },
+          {
+            "name": "V1AndV2",
+            "value": "V1AndV2",
+            "description": "Both V1 and V2 connections."
+          }
+        ]
+      }
     },
     "CustomDnsSuffixConfiguration": {
       "type": "object",
@@ -43760,6 +47355,136 @@
         "modelAsString": false
       }
     },
+    "DynamicInvokeHttpMethod": {
+      "type": "string",
+      "description": "HTTP method for a dynamic-invoke request.",
+      "enum": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "x-ms-enum": {
+        "name": "DynamicInvokeHttpMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "GET",
+            "value": "GET",
+            "description": "HTTP GET method."
+          },
+          {
+            "name": "POST",
+            "value": "POST",
+            "description": "HTTP POST method."
+          },
+          {
+            "name": "PUT",
+            "value": "PUT",
+            "description": "HTTP PUT method."
+          },
+          {
+            "name": "PATCH",
+            "value": "PATCH",
+            "description": "HTTP PATCH method."
+          },
+          {
+            "name": "DELETE",
+            "value": "DELETE",
+            "description": "HTTP DELETE method."
+          },
+          {
+            "name": "HEAD",
+            "value": "HEAD",
+            "description": "HTTP HEAD method."
+          },
+          {
+            "name": "OPTIONS",
+            "value": "OPTIONS",
+            "description": "HTTP OPTIONS method."
+          }
+        ]
+      }
+    },
+    "DynamicInvokeRequest": {
+      "type": "object",
+      "description": "Request body for dynamicInvoke.",
+      "properties": {
+        "request": {
+          "$ref": "#/definitions/DynamicInvokeRequestDefinition",
+          "description": "The upstream HTTP request to forward."
+        }
+      },
+      "required": [
+        "request"
+      ]
+    },
+    "DynamicInvokeRequestDefinition": {
+      "type": "object",
+      "description": "Describes the upstream HTTP request to forward to the connector for dynamicInvoke.",
+      "properties": {
+        "method": {
+          "$ref": "#/definitions/DynamicInvokeHttpMethod",
+          "description": "HTTP method to use against the upstream connector."
+        },
+        "path": {
+          "type": "string",
+          "description": "Upstream request path, starting with /."
+        },
+        "queries": {
+          "type": "object",
+          "description": "Query string parameters as a string-to-string map.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "headers": {
+          "type": "object",
+          "description": "Extra request headers as a string-to-string map. Authentication headers are added by the gateway and should not be set here.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "body": {
+          "type": "object",
+          "description": "Optional request body. Any JSON value matching the upstream operation's content schema.",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "DynamicInvokeResponse": {
+      "type": "object",
+      "description": "Response envelope for dynamicInvoke.",
+      "properties": {
+        "response": {
+          "$ref": "#/definitions/DynamicInvokeResponseDefinition",
+          "description": "The upstream HTTP response."
+        }
+      }
+    },
+    "DynamicInvokeResponseDefinition": {
+      "type": "object",
+      "description": "Envelope describing the upstream HTTP response.",
+      "properties": {
+        "statusCode": {
+          "type": "string",
+          "description": "Upstream HTTP status code. May be a numeric code or the .NET HttpStatusCode enum member name."
+        },
+        "body": {
+          "type": "object",
+          "description": "Upstream response body — any JSON value.",
+          "additionalProperties": {}
+        },
+        "headers": {
+          "type": "object",
+          "description": "Upstream response headers. Modeled as an arbitrary JSON object because the backend may emit either a flat string-to-string map or a richer header collection.",
+          "additionalProperties": {}
+        }
+      }
+    },
     "EnabledConfig": {
       "type": "object",
       "description": "Enabled configuration.",
@@ -44063,6 +47788,30 @@
         }
       }
     },
+    "FederatedIdentityCredentialDefinition": {
+      "type": "object",
+      "description": "Federated identity credential issued by the gateway managed identity. Read-only — returned on GET only and must not be sent on PUT.",
+      "properties": {
+        "issuer": {
+          "type": "string",
+          "description": "Token issuer URL.",
+          "readOnly": true
+        },
+        "subject": {
+          "type": "string",
+          "description": "Subject identifier of the managed identity.",
+          "readOnly": true
+        },
+        "audiences": {
+          "type": "array",
+          "description": "Accepted audiences for the federated identity credential.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
     "FileSystemApplicationLogsConfig": {
       "type": "object",
       "description": "Application logs to file system configuration.",
@@ -44195,6 +47944,114 @@
           "$ref": "#/definitions/FlowEndpoints",
           "description": "The connector endpoints."
         }
+      }
+    },
+    "FlowStatus": {
+      "type": "string",
+      "description": "The status of a workflow run or trigger history entry. Maps 1:1 to the\nbackend Microsoft.Azure.Workflows.Common.Entities.FlowStatus enum.",
+      "enum": [
+        "NotSpecified",
+        "Paused",
+        "Running",
+        "Waiting",
+        "Succeeded",
+        "Skipped",
+        "Suspended",
+        "Cancelled",
+        "Failed",
+        "Faulted",
+        "TimedOut",
+        "Aborted",
+        "Ignored",
+        "Deleted",
+        "Terminated",
+        "HandedOff"
+      ],
+      "x-ms-enum": {
+        "name": "FlowStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "Status is not specified."
+          },
+          {
+            "name": "Paused",
+            "value": "Paused",
+            "description": "The run is paused."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The run is currently running."
+          },
+          {
+            "name": "Waiting",
+            "value": "Waiting",
+            "description": "The run is waiting for input."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The run completed successfully."
+          },
+          {
+            "name": "Skipped",
+            "value": "Skipped",
+            "description": "The run was skipped."
+          },
+          {
+            "name": "Suspended",
+            "value": "Suspended",
+            "description": "The run is suspended."
+          },
+          {
+            "name": "Cancelled",
+            "value": "Cancelled",
+            "description": "The run was cancelled."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The run failed."
+          },
+          {
+            "name": "Faulted",
+            "value": "Faulted",
+            "description": "The run faulted."
+          },
+          {
+            "name": "TimedOut",
+            "value": "TimedOut",
+            "description": "The run timed out."
+          },
+          {
+            "name": "Aborted",
+            "value": "Aborted",
+            "description": "The run was aborted."
+          },
+          {
+            "name": "Ignored",
+            "value": "Ignored",
+            "description": "The run was ignored."
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "The run was deleted."
+          },
+          {
+            "name": "Terminated",
+            "value": "Terminated",
+            "description": "The run was terminated."
+          },
+          {
+            "name": "HandedOff",
+            "value": "HandedOff",
+            "description": "The run was handed off."
+          }
+        ]
       }
     },
     "ForwardProxy": {
@@ -45245,6 +49102,54 @@
       "x-ms-enum": {
         "name": "HostType",
         "modelAsString": false
+      }
+    },
+    "HostedMcpServerInputDefinition": {
+      "type": "object",
+      "description": "A single configuration input declared by a hosted MCP server registry entry.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the input."
+        },
+        "isRequired": {
+          "type": "boolean",
+          "description": "Whether the input is required."
+        },
+        "type": {
+          "type": "string",
+          "description": "Input type. Determines how the configuration value is serialised into the\nsandbox. Common values include `string`, `secret`, `enum`, `int`, `bool`,\n`file`."
+        },
+        "allowedValues": {
+          "type": "array",
+          "description": "Allowed values for enum-type inputs.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "targetDirectory": {
+          "type": "string",
+          "description": "Target directory inside the sandbox where a file-type input is written. Only applicable when type = file."
+        },
+        "fileName": {
+          "type": "string",
+          "description": "File name to use when writing a file-type input into the sandbox. Only applicable when type = file."
+        }
+      }
+    },
+    "HostedMcpServerProperties": {
+      "type": "object",
+      "description": "Properties for an ADC-hosted MCP server. Used when McpServerConfig.kind = HostedMcpServer.",
+      "properties": {
+        "hostedMcpServerId": {
+          "type": "string",
+          "description": "Hosted MCP server identifier from the managed hosted-MCP-server registry."
+        },
+        "configuration": {
+          "type": "object",
+          "description": "Configuration key-value pairs for the hosted MCP server. Values are strings for regular inputs and base64-encoded content for file-type inputs.",
+          "additionalProperties": {}
+        }
       }
     },
     "HostingEnvironmentDeploymentInfo": {
@@ -46310,6 +50215,67 @@
         }
       }
     },
+    "ListApiKeyRequest": {
+      "type": "object",
+      "description": "Request body for listing an API key on a connector gateway.",
+      "properties": {
+        "keyType": {
+          "$ref": "#/definitions/AccessKeyType",
+          "description": "Type of access key to issue. Defaults to Primary when omitted."
+        },
+        "notAfter": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Absolute expiry time. Ignored when neverExpire is true. Defaults to now + 1 day if both notAfter and neverExpire are omitted."
+        },
+        "neverExpire": {
+          "type": "boolean",
+          "description": "When true, the issued key has no expiry. notAfter must be null or omitted in that case."
+        },
+        "scope": {
+          "type": "string",
+          "description": "Optional MCP server config name to scope the key to. When set, the key may only invoke the named MCP server config; when null or empty, the key may invoke any MCP server config on the gateway."
+        }
+      }
+    },
+    "ListConsentLinksParameter": {
+      "type": "object",
+      "description": "A consent parameter entry for listConsentLinks.",
+      "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "The Entra ID object ID of the user."
+        },
+        "parameterName": {
+          "type": "string",
+          "description": "The consent parameter name (e.g., token)."
+        },
+        "redirectUrl": {
+          "type": "string",
+          "description": "The URL to redirect to after consent."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The Entra ID tenant ID."
+        }
+      }
+    },
+    "ListConsentLinksRequest": {
+      "type": "object",
+      "description": "Request body for listing consent links on a connection.",
+      "properties": {
+        "parameters": {
+          "type": "array",
+          "description": "Consent parameter entries.",
+          "items": {
+            "$ref": "#/definitions/ListConsentLinksParameter"
+          },
+          "x-ms-identifiers": [
+            "objectId"
+          ]
+        }
+      }
+    },
     "LoadBalancingMode": {
       "type": "string",
       "description": "Specifies which endpoints to serve internally in the Virtual Network for the App Service Environment.",
@@ -46670,6 +50636,264 @@
         }
       }
     },
+    "ManagedApiConnectionInfo": {
+      "type": "object",
+      "description": "Connection parameter schemas needed to create a connection against this managed API.",
+      "properties": {
+        "connectionParameters": {
+          "type": "object",
+          "description": "Connection parameter schema. Free-form JSON.",
+          "additionalProperties": {}
+        },
+        "connectionParameterSets": {
+          "type": "object",
+          "description": "Alternative connection parameter sets. Free-form JSON.",
+          "additionalProperties": {}
+        },
+        "connectionAlternativeParameters": {
+          "type": "object",
+          "description": "Alternative connection parameters. Free-form JSON.",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "ManagedApiGeneralInformation": {
+      "type": "object",
+      "description": "Display metadata for a managed API connector.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the managed API."
+        },
+        "description": {
+          "type": "string",
+          "description": "Free-form description of the managed API."
+        },
+        "iconUri": {
+          "type": "string",
+          "description": "URL to the connector icon."
+        },
+        "tier": {
+          "$ref": "#/definitions/ManagedApiTier",
+          "description": "Connector tier."
+        },
+        "releaseTag": {
+          "type": "string",
+          "description": "Release stage (e.g., GA, Preview)."
+        }
+      }
+    },
+    "ManagedApiProperties": {
+      "type": "object",
+      "description": "Properties of a managed API catalog entry.",
+      "properties": {
+        "generalInformation": {
+          "$ref": "#/definitions/ManagedApiGeneralInformation",
+          "description": "Display metadata for the managed API."
+        },
+        "connection": {
+          "$ref": "#/definitions/ManagedApiConnectionInfo",
+          "description": "Connection parameter schemas needed to create a connection against this managed API."
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "Connector capabilities (e.g., actions, triggers, tools).",
+          "items": {
+            "type": "string"
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Free-form connector metadata. Any JSON value.",
+          "additionalProperties": {}
+        },
+        "runtimeUrls": {
+          "type": "array",
+          "description": "API Hub runtime endpoints for the connector.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isExportSupported": {
+          "type": "boolean",
+          "description": "Whether the connector swagger can be exported via `?export=true`."
+        },
+        "searchScore": {
+          "type": "number",
+          "format": "double",
+          "description": "Fuzzy-search relevance score (0..1). Only populated when fuzzy search is\nenabled on the list endpoint; omitted otherwise.",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "matchedOperations": {
+          "type": "array",
+          "description": "Operations matched by the fuzzy search query. Only populated when\noperation-level fuzzy search is enabled; omitted otherwise.",
+          "items": {
+            "$ref": "#/definitions/MatchedOperationSummary"
+          },
+          "x-ms-identifiers": [
+            "operationId"
+          ]
+        }
+      }
+    },
+    "ManagedApiTier": {
+      "type": "string",
+      "description": "Connector tier.",
+      "enum": [
+        "NotSpecified",
+        "Standard",
+        "Premium"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedApiTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "Tier is not specified."
+          },
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard tier connector."
+          },
+          {
+            "name": "Premium",
+            "value": "Premium",
+            "description": "Premium tier connector."
+          }
+        ]
+      }
+    },
+    "ManagedHostedMcpServerProperties": {
+      "type": "object",
+      "description": "Public catalog metadata for a managed hosted MCP server. The catalog\nresponse intentionally omits sandbox-internal fields (container image,\nmcpServerRoute, targetPort, cpu, memory) — those are sandbox\nimplementation details and are not exposed to clients.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Human-readable display name of the hosted MCP server."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the hosted MCP server."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "Publisher of the hosted MCP server."
+        },
+        "iconUrl": {
+          "type": "string",
+          "description": "URL of the icon for the hosted MCP server."
+        },
+        "category": {
+          "type": "string",
+          "description": "Category of the hosted MCP server (e.g., Productivity)."
+        },
+        "tags": {
+          "type": "array",
+          "description": "Tags associated with the hosted MCP server.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the hosted MCP server."
+        },
+        "documentationUrl": {
+          "type": "string",
+          "description": "URL to the documentation for the hosted MCP server."
+        },
+        "sourceUrl": {
+          "type": "string",
+          "description": "URL to the source code for the hosted MCP server."
+        },
+        "configurationSchema": {
+          "type": "object",
+          "description": "Map of input name → input definition declaring what configuration values\nmay be supplied via `hostedMcpServerProperties.configuration` on the\nconsuming McpServerConfig.",
+          "additionalProperties": {
+            "$ref": "#/definitions/HostedMcpServerInputDefinition"
+          }
+        }
+      }
+    },
+    "ManagedMcpOperationAnnotation": {
+      "type": "object",
+      "description": "Operational annotation metadata for a managed MCP operation.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The operational status (e.g., Production, Preview)."
+        },
+        "family": {
+          "type": "string",
+          "description": "The operation family identifier."
+        },
+        "revision": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The revision number of the operation."
+        }
+      }
+    },
+    "ManagedMcpOperationApi": {
+      "type": "object",
+      "description": "Managed API summary attached to a managed MCP operation.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the managed API."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the managed API."
+        },
+        "iconUri": {
+          "type": "string",
+          "description": "URL to the API's icon."
+        },
+        "brandColor": {
+          "type": "string",
+          "description": "Brand color for the API (hex format)."
+        },
+        "category": {
+          "type": "string",
+          "description": "The category of the API (e.g., Standard)."
+        },
+        "id": {
+          "type": "string",
+          "description": "The resource ID of the managed API."
+        }
+      }
+    },
+    "ManagedMcpOperationProperties": {
+      "type": "object",
+      "description": "Properties of a managed MCP operation catalog entry.",
+      "properties": {
+        "summary": {
+          "type": "string",
+          "description": "A brief summary of the MCP operation."
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of the operation."
+        },
+        "api": {
+          "$ref": "#/definitions/ManagedMcpOperationApi",
+          "description": "The managed API the operation belongs to."
+        },
+        "annotation": {
+          "$ref": "#/definitions/ManagedMcpOperationAnnotation",
+          "description": "Operational metadata (status, family, revision)."
+        },
+        "location": {
+          "type": "string",
+          "description": "The Azure region where the operation is available."
+        }
+      }
+    },
     "ManagedPipelineMode": {
       "type": "string",
       "description": "Managed pipeline mode.",
@@ -46723,6 +50947,69 @@
         "modelAsString": false
       }
     },
+    "MatchedOperationSummary": {
+      "type": "object",
+      "description": "Summary of an operation matched by fuzzy search.",
+      "properties": {
+        "operationId": {
+          "type": "string",
+          "description": "The matched operation ID."
+        },
+        "summary": {
+          "type": "string",
+          "description": "Operation summary text."
+        },
+        "score": {
+          "type": "number",
+          "format": "double",
+          "description": "Fuzzy-search relevance score (0..1).",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "McpAuthenticationMode": {
+      "type": "string",
+      "description": "Authentication mode applied to tool calls served by an MCP server config.",
+      "enum": [
+        "NotSpecified",
+        "DeveloperConnection",
+        "OnBehalfOfUser",
+        "OnBehalfOfUserWithApp",
+        "AppOnly"
+      ],
+      "x-ms-enum": {
+        "name": "McpAuthenticationMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "Treated as DeveloperConnection."
+          },
+          {
+            "name": "DeveloperConnection",
+            "value": "DeveloperConnection",
+            "description": "All tool calls execute under the connection owner's identity."
+          },
+          {
+            "name": "OnBehalfOfUser",
+            "value": "OnBehalfOfUser",
+            "description": "Per-user dynamic connection — tool calls execute under the calling user's identity."
+          },
+          {
+            "name": "OnBehalfOfUserWithApp",
+            "value": "OnBehalfOfUserWithApp",
+            "description": "OBO via a federated identity credential issued by the gateway managed identity against an admin app registration. Requires resourceAuth."
+          },
+          {
+            "name": "AppOnly",
+            "value": "AppOnly",
+            "description": "Client-credentials against an admin app registration via FIC. Requires resourceAuth."
+          }
+        ]
+      }
+    },
     "McpServerConfig": {
       "type": "object",
       "description": "Configuration for an individual MCP server.",
@@ -46750,6 +51037,204 @@
             "type": "string"
           }
         }
+      }
+    },
+    "McpServerConfigConnector": {
+      "type": "object",
+      "description": "A connector exposed by an MCP server config.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Managed API connector name (e.g., office365)."
+        },
+        "connectionName": {
+          "type": "string",
+          "description": "Name of the connection to use."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Connector display name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Connector description."
+        },
+        "operations": {
+          "type": "array",
+          "description": "Operations exposed by this connector.",
+          "items": {
+            "$ref": "#/definitions/McpServerConfigOperation"
+          }
+        }
+      }
+    },
+    "McpServerConfigKind": {
+      "type": "string",
+      "description": "MCP server config kind. Controls how the runtime serves MCP requests.",
+      "enum": [
+        "NotSpecified",
+        "ManagedMcpServer",
+        "HostedMcpServer"
+      ],
+      "x-ms-enum": {
+        "name": "McpServerConfigKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "Standard MCP server config behavior."
+          },
+          {
+            "name": "ManagedMcpServer",
+            "value": "ManagedMcpServer",
+            "description": "The runtime forwards all MCP requests to a downstream managed MCP server via the API connection."
+          },
+          {
+            "name": "HostedMcpServer",
+            "value": "HostedMcpServer",
+            "description": "The gateway provisions and manages the MCP server container via ADC. Requires properties.hostedMcpServer."
+          }
+        ]
+      }
+    },
+    "McpServerConfigOperation": {
+      "type": "object",
+      "description": "A single operation exposed by an MCP server config connector.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Source swagger operation ID used for API Hub invocation."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Operation display name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Operation description."
+        },
+        "toolName": {
+          "type": "string",
+          "description": "Connector-local identity used as the MCP-visible tool name instead of name. The backend prefixes the connector name and normalises special characters to produce the final MCP tool name."
+        },
+        "userParameters": {
+          "type": "array",
+          "description": "Parameters with fixed values set by the user.",
+          "items": {
+            "$ref": "#/definitions/OperationParameter"
+          }
+        },
+        "agentParameters": {
+          "type": "array",
+          "description": "Parameters filled by the AI agent at runtime.",
+          "items": {
+            "$ref": "#/definitions/OperationParameter"
+          }
+        },
+        "annotations": {
+          "type": "object",
+          "description": "Arbitrary JSON object for MCP-compatible metadata (e.g., x-relatedTools). Passed through to tools/list when present.",
+          "additionalProperties": {}
+        },
+        "outputSchema": {
+          "type": "object",
+          "description": "Optional JSON Schema describing the tool's successful response shape. Passed through to tools/list when present.",
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "name",
+        "displayName",
+        "description"
+      ]
+    },
+    "McpServerConfigPolicy": {
+      "type": "object",
+      "description": "A policy that restricts parameter values for operations in an MCP server config.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The policy name."
+        },
+        "type": {
+          "$ref": "#/definitions/McpServerConfigPolicyType",
+          "description": "The policy type."
+        },
+        "description": {
+          "type": "string",
+          "description": "Optional description of the policy."
+        },
+        "target": {
+          "$ref": "#/definitions/PolicyTarget",
+          "description": "Target of the policy."
+        },
+        "rules": {
+          "$ref": "#/definitions/ParameterValueRestrictionRules",
+          "description": "Restriction rules for the policy."
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "target",
+        "rules"
+      ]
+    },
+    "McpServerConfigPolicyType": {
+      "type": "string",
+      "description": "The type of an MCP server config policy.",
+      "enum": [
+        "ParameterValueRestriction"
+      ],
+      "x-ms-enum": {
+        "name": "McpServerConfigPolicyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ParameterValueRestriction",
+            "value": "ParameterValueRestriction",
+            "description": "Restricts the value of a parameter on operations exposed by the MCP server config."
+          }
+        ]
+      }
+    },
+    "McpServerConfigSettings": {
+      "type": "object",
+      "description": "Settings for an MCP server config.",
+      "properties": {
+        "textOnlyContent": {
+          "type": "boolean",
+          "description": "When true, all tool call responses use TextContent regardless of actual content type. When false or null (default), rich content types are used."
+        },
+        "enableConsentElicitation": {
+          "type": "boolean",
+          "description": "When true, the MCP runtime asks the calling client for explicit consent (via the MCP elicitation/create request) before invoking tools that require user authorization."
+        }
+      }
+    },
+    "McpServerConfigState": {
+      "type": "string",
+      "description": "The state of an MCP server config.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "McpServerConfigState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The MCP server config is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The MCP server config is disabled."
+          }
+        ]
       }
     },
     "McpSettings": {
@@ -47545,6 +52030,38 @@
         }
       }
     },
+    "OperationParameter": {
+      "type": "object",
+      "description": "Operation parameter definition shared between MCP server configs and trigger configs.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Parameter name."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Parameter display name."
+        },
+        "value": {
+          "type": "object",
+          "description": "Default parameter value. May be a primitive or complex JSON value.",
+          "additionalProperties": {}
+        },
+        "displayValue": {
+          "type": "string",
+          "description": "Human-readable rendering of value, when applicable."
+        },
+        "isRequired": {
+          "type": "boolean",
+          "description": "When true, the parameter name is added to the top-level inputSchema.required[] in the MCP tools/list response."
+        },
+        "schema": {
+          "type": "object",
+          "description": "JSON Schema for this parameter, typically extracted from the connector swagger.",
+          "additionalProperties": {}
+        }
+      }
+    },
     "OperationResult": {
       "type": "object",
       "description": "The operation result definition.",
@@ -47772,6 +52289,22 @@
         ]
       }
     },
+    "ParameterValueRestrictionRules": {
+      "type": "object",
+      "description": "Rules for restricting parameter values.",
+      "properties": {
+        "allowedValues": {
+          "type": "array",
+          "description": "When specified, the parameter value must be in this list.",
+          "items": {}
+        },
+        "deniedValues": {
+          "type": "array",
+          "description": "When specified, the parameter value must not be in this list.",
+          "items": {}
+        }
+      }
+    },
     "PerfMonCounterCollection": {
       "type": "object",
       "description": "Collection of performance monitor counters.",
@@ -47892,6 +52425,31 @@
           }
         ]
       }
+    },
+    "PolicyTarget": {
+      "type": "object",
+      "description": "Specifies which connector, operation, or parameter a policy applies to.",
+      "properties": {
+        "connectorName": {
+          "type": "string",
+          "description": "The connector name. When omitted, the policy applies to all connectors."
+        },
+        "operationName": {
+          "type": "string",
+          "description": "The operation name. When omitted, the policy applies to all operations."
+        },
+        "parameterName": {
+          "type": "string",
+          "description": "The parameter name. Required for parameter-level policies."
+        },
+        "propertyPath": {
+          "type": "string",
+          "description": "Dot-separated property path for targeting nested properties within complex parameter values. When omitted, the policy applies to the whole parameter value."
+        }
+      },
+      "required": [
+        "parameterName"
+      ]
     },
     "PremierAddOn": {
       "type": "object",
@@ -49762,6 +54320,79 @@
       "x-ms-enum": {
         "name": "ResolveStatus",
         "modelAsString": false
+      }
+    },
+    "ResourceAuthDefinition": {
+      "type": "object",
+      "description": "Resource authentication configuration for MCP server configs that broker downstream access via an admin application registration and a federated identity credential. Required when authenticationMode is OnBehalfOfUserWithApp or AppOnly.",
+      "properties": {
+        "adminAppRegistration": {
+          "$ref": "#/definitions/AdminAppRegistrationDefinition",
+          "description": "Admin Entra ID application registration."
+        },
+        "targetResource": {
+          "type": "string",
+          "description": "Target Azure resource URI for token acquisition."
+        },
+        "identity": {
+          "$ref": "#/definitions/ResourceAuthIdentityDefinition",
+          "description": "Managed identity configuration."
+        },
+        "federatedIdentityCredential": {
+          "$ref": "#/definitions/FederatedIdentityCredentialDefinition",
+          "description": "Federated identity credential details computed from the gateway managed identity. Returned on GET responses; must not be sent on PUT (server-managed).",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceAuthIdentityDefinition": {
+      "type": "object",
+      "description": "Identity configuration used to acquire downstream resource tokens.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ResourceAuthIdentityType",
+          "description": "Managed identity type used for token acquisition."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "ARM resource ID of the user-assigned managed identity. Required when type is UserAssigned (or SystemAssigned, UserAssigned)."
+        }
+      }
+    },
+    "ResourceAuthIdentityType": {
+      "type": "string",
+      "description": "Managed identity type used by resource auth.",
+      "enum": [
+        "None",
+        "SystemAssigned",
+        "UserAssigned",
+        "SystemAssigned, UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceAuthIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No managed identity."
+          },
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "System-assigned managed identity."
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "User-assigned managed identity."
+          },
+          {
+            "name": "SystemAssignedUserAssigned",
+            "value": "SystemAssigned, UserAssigned",
+            "description": "Both system-assigned and user-assigned managed identities."
+          }
+        ]
       }
     },
     "ResourceCollection": {
@@ -54883,6 +59514,165 @@
           "$ref": "#/definitions/BlobStorageTokenStore",
           "description": "The configuration settings of the storage of the tokens if blob storage is used."
         }
+      }
+    },
+    "TriggerCondition": {
+      "type": "object",
+      "description": "A trigger condition expression.",
+      "properties": {
+        "expression": {
+          "type": "string",
+          "description": "Workflow expression evaluated against trigger outputs. Must start with `@`.\nThe trigger fires only when **all** conditions evaluate to true."
+        }
+      },
+      "required": [
+        "expression"
+      ]
+    },
+    "TriggerConfigSettings": {
+      "type": "object",
+      "description": "Trigger configuration settings.",
+      "properties": {
+        "disableSplitOn": {
+          "type": "boolean",
+          "description": "When true, the runtime does not apply splitOn to batch trigger payloads —\nthe entire payload is delivered as a single run. When false or null\n(default), the runtime auto-injects a splitOn expression derived from the\nswagger response schema so each element of the batch becomes its own run."
+        }
+      }
+    },
+    "TriggerNotificationHttpMethod": {
+      "type": "string",
+      "description": "HTTP method for trigger notification callbacks.",
+      "enum": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "x-ms-enum": {
+        "name": "TriggerNotificationHttpMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "GET",
+            "value": "GET",
+            "description": "HTTP GET method."
+          },
+          {
+            "name": "POST",
+            "value": "POST",
+            "description": "HTTP POST method."
+          },
+          {
+            "name": "PUT",
+            "value": "PUT",
+            "description": "HTTP PUT method."
+          },
+          {
+            "name": "PATCH",
+            "value": "PATCH",
+            "description": "HTTP PATCH method."
+          },
+          {
+            "name": "DELETE",
+            "value": "DELETE",
+            "description": "HTTP DELETE method."
+          }
+        ]
+      }
+    },
+    "TriggerRecurrence": {
+      "type": "object",
+      "description": "Recurrence configuration for Recurrence and SlidingWindow trigger types.",
+      "properties": {
+        "frequency": {
+          "$ref": "#/definitions/TriggerRecurrenceFrequency",
+          "description": "How often the trigger fires."
+        },
+        "interval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of frequency units between firings.",
+          "minimum": 1
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "IANA time zone name (e.g., America/Los_Angeles)."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "First firing time. Subsequent firings derived from frequency + interval."
+        },
+        "schedule": {
+          "type": "object",
+          "description": "Optional fine-grained recurrence schedule (hours, minutes, week days,\netc.). Mirrors the Logic Apps JobRecurrenceSchedule.",
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "frequency",
+        "interval"
+      ]
+    },
+    "TriggerRecurrenceFrequency": {
+      "type": "string",
+      "description": "How often a recurrence trigger fires.",
+      "enum": [
+        "NotSpecified",
+        "Second",
+        "Minute",
+        "Hour",
+        "Day",
+        "Week",
+        "Month",
+        "Year"
+      ],
+      "x-ms-enum": {
+        "name": "TriggerRecurrenceFrequency",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "Frequency is not specified."
+          },
+          {
+            "name": "Second",
+            "value": "Second",
+            "description": "Fire every N seconds."
+          },
+          {
+            "name": "Minute",
+            "value": "Minute",
+            "description": "Fire every N minutes."
+          },
+          {
+            "name": "Hour",
+            "value": "Hour",
+            "description": "Fire every N hours."
+          },
+          {
+            "name": "Day",
+            "value": "Day",
+            "description": "Fire every N days."
+          },
+          {
+            "name": "Week",
+            "value": "Week",
+            "description": "Fire every N weeks."
+          },
+          {
+            "name": "Month",
+            "value": "Month",
+            "description": "Fire every N months."
+          },
+          {
+            "name": "Year",
+            "value": "Year",
+            "description": "Fire every N years."
+          }
+        ]
       }
     },
     "TriggerTypes": {

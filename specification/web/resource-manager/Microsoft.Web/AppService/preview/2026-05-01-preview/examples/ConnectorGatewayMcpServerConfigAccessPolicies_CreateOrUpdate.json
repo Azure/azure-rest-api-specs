@@ -1,0 +1,51 @@
+{
+  "operationId": "ConnectorGatewayMcpServerConfigAccessPolicies_CreateOrUpdate",
+  "title": "CreateOrUpdateMcpServerConfigAccessPolicy",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-05-01-preview",
+    "name": "connectorgateway1",
+    "mcpServerConfigName": "mcp1",
+    "accessPolicyName": "policy1",
+    "resource": {
+      "properties": {
+        "principalType": "User",
+        "principal": {
+          "objectId": "11111111-2222-3333-4444-555555555555",
+          "tenantId": "99999999-8888-7777-6666-555555555555"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Web/connectorGateways/connectorgateway1/mcpServerConfigs/mcp1/accessPolicies/policy1",
+        "name": "policy1",
+        "type": "Microsoft.Web/connectorGateways/mcpServerConfigs/accessPolicies",
+        "properties": {
+          "principalType": "User",
+          "principal": {
+            "objectId": "11111111-2222-3333-4444-555555555555",
+            "tenantId": "99999999-8888-7777-6666-555555555555"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Web/connectorGateways/connectorgateway1/mcpServerConfigs/mcp1/accessPolicies/policy1",
+        "name": "policy1",
+        "type": "Microsoft.Web/connectorGateways/mcpServerConfigs/accessPolicies",
+        "properties": {
+          "principalType": "User",
+          "principal": {
+            "objectId": "11111111-2222-3333-4444-555555555555",
+            "tenantId": "99999999-8888-7777-6666-555555555555"
+          }
+        }
+      }
+    }
+  }
+}

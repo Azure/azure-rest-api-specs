@@ -1,0 +1,40 @@
+{
+  "operationId": "ConnectorGatewayConnections_DynamicInvoke",
+  "title": "DynamicInvokeOnConnection",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-05-01-preview",
+    "name": "connectorgateway1",
+    "connectionName": "office365-conn",
+    "body": {
+      "request": {
+        "method": "GET",
+        "path": "/me",
+        "queries": {
+          "$select": "id,displayName,mail"
+        },
+        "headers": {
+          "Accept": "application/json"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "response": {
+          "statusCode": "200",
+          "headers": {
+            "Content-Type": "application/json"
+          },
+          "body": {
+            "id": "11111111-2222-3333-4444-555555555555",
+            "displayName": "Sample User",
+            "mail": "user@example.com"
+          }
+        }
+      }
+    }
+  }
+}

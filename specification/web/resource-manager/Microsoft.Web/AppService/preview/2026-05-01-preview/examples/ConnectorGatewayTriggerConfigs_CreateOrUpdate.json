@@ -1,0 +1,91 @@
+{
+  "operationId": "ConnectorGatewayTriggerConfigs_CreateOrUpdate",
+  "title": "CreateOrUpdateTriggerConfig",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-05-01-preview",
+    "name": "connectorgateway1",
+    "triggerConfigName": "newMailTrigger",
+    "resource": {
+      "properties": {
+        "state": "Enabled",
+        "description": "Trigger when a new mail arrives",
+        "connectionDetails": {
+          "connectorName": "office365",
+          "connectionName": "office365-conn"
+        },
+        "operationName": "OnNewEmail",
+        "parameters": [
+          {
+            "name": "folder",
+            "value": "Inbox"
+          }
+        ],
+        "notificationDetails": {
+          "callbackUrl": "https://example.com/webhook",
+          "httpMethod": "POST"
+        },
+        "triggerType": "NotSpecified"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Web/connectorGateways/connectorgateway1/triggerConfigs/newMailTrigger",
+        "name": "newMailTrigger",
+        "type": "Microsoft.Web/connectorGateways/triggerConfigs",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "state": "Enabled",
+          "description": "Trigger when a new mail arrives",
+          "connectionDetails": {
+            "connectorName": "office365",
+            "connectionName": "office365-conn"
+          },
+          "operationName": "OnNewEmail",
+          "parameters": [
+            {
+              "name": "folder",
+              "value": "Inbox"
+            }
+          ],
+          "notificationDetails": {
+            "callbackUrl": "https://example.com/webhook",
+            "httpMethod": "POST"
+          },
+          "triggerType": "NotSpecified"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Web/connectorGateways/connectorgateway1/triggerConfigs/newMailTrigger",
+        "name": "newMailTrigger",
+        "type": "Microsoft.Web/connectorGateways/triggerConfigs",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "state": "Enabled",
+          "description": "Trigger when a new mail arrives",
+          "connectionDetails": {
+            "connectorName": "office365",
+            "connectionName": "office365-conn"
+          },
+          "operationName": "OnNewEmail",
+          "parameters": [
+            {
+              "name": "folder",
+              "value": "Inbox"
+            }
+          ],
+          "notificationDetails": {
+            "callbackUrl": "https://example.com/webhook",
+            "httpMethod": "POST"
+          },
+          "triggerType": "NotSpecified"
+        }
+      }
+    }
+  }
+}
