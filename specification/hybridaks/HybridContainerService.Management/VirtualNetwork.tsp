@@ -67,9 +67,11 @@ interface VirtualNetworks {
   listBySubscription is ArmListBySubscription<VirtualNetwork>;
 }
 
-@@doc(VirtualNetworks.createOrUpdate::parameters.resource,
+@@doc(
+  VirtualNetworks.createOrUpdate::parameters.resource,
   "Virtual Network resource definition"
 );
-@@doc(VirtualNetworks.update::parameters.properties,
+@@doc(
+  VirtualNetworks.update::parameters.properties,
   "Virtual Network resource patch definition"
 );

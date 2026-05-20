@@ -9,7 +9,8 @@ using Microsoft.DataBox;
 
 @@clientName(JobDetails, "CommonJobDetails", "go");
 @@clientName(JobSecrets, "CommonJobSecrets", "go");
-@@clientName(ScheduleAvailabilityRequest,
+@@clientName(
+  ScheduleAvailabilityRequest,
   "CommonScheduleAvailabilityRequest",
   "go"
 );
@@ -20,95 +21,116 @@ using Microsoft.DataBox;
 @@clientName(JobResourceUpdateParameter, "DataBoxJobPatch", "csharp");
 @@clientName(JobResourceList, "DataBoxJobListResult", "csharp");
 @@clientName(CreateJobValidations, "CreateJobValidationContent", "csharp");
-@@clientName(CreateOrderLimitForSubscriptionValidationRequest,
+@@clientName(
+  CreateOrderLimitForSubscriptionValidationRequest,
   "CreateOrderLimitForSubscriptionValidationContent",
   "csharp"
 );
-@@clientName(CreateOrderLimitForSubscriptionValidationResponseProperties,
+@@clientName(
+  CreateOrderLimitForSubscriptionValidationResponseProperties,
   "CreateOrderLimitForSubscriptionValidationResult",
   "csharp"
 );
-@@clientName(DataTransferDetailsValidationResponseProperties,
+@@clientName(
+  DataTransferDetailsValidationResponseProperties,
   "DataTransferDetailsValidationResult",
   "csharp"
 );
-@@clientName(PreferencesValidationResponseProperties,
+@@clientName(
+  PreferencesValidationResponseProperties,
   "PreferencesValidationResult",
   "csharp"
 );
-@@clientName(SkuAvailabilityValidationResponseProperties,
+@@clientName(
+  SkuAvailabilityValidationResponseProperties,
   "SkuAvailabilityValidationResult",
   "csharp"
 );
-@@clientName(SubscriptionIsAllowedToCreateJobValidationResponseProperties,
+@@clientName(
+  SubscriptionIsAllowedToCreateJobValidationResponseProperties,
   "SubscriptionIsAllowedToCreateJobValidationResult",
   "csharp"
 );
 @@clientName(AddressValidationProperties, "AddressValidationResult", "csharp");
 @@clientName(ValidationInputResponse, "DataBoxValidationInputResult", "csharp");
-@@clientName(DataBoxCustomerDiskJobDetails.deliverToDcPackageDetails,
+@@clientName(
+  DataBoxCustomerDiskJobDetails.deliverToDcPackageDetails,
   "DeliverToDataCenterPackageDetails",
   "csharp"
 );
-@@clientName(DataBoxCustomerDiskJobDetails.exportDiskDetailsCollection,
+@@clientName(
+  DataBoxCustomerDiskJobDetails.exportDiskDetailsCollection,
   "ExportDiskDetails",
   "csharp"
 );
-@@clientName(DataBoxCustomerDiskJobDetails.importDiskDetailsCollection,
+@@clientName(
+  DataBoxCustomerDiskJobDetails.importDiskDetailsCollection,
   "ImportDiskDetails",
   "csharp"
 );
 @@clientName(DataBoxDiskJobSecrets.passKey, "Passkey", "csharp");
-@@clientName(DataBoxScheduleAvailabilityRequest,
+@@clientName(
+  DataBoxScheduleAvailabilityRequest,
   "DataBoxScheduleAvailabilityContent",
   "csharp"
 );
-@@clientName(DiskScheduleAvailabilityRequest,
+@@clientName(
+  DiskScheduleAvailabilityRequest,
   "DiskScheduleAvailabilityContent",
   "csharp"
 );
-@@clientName(HeavyScheduleAvailabilityRequest,
+@@clientName(
+  HeavyScheduleAvailabilityRequest,
   "HeavyScheduleAvailabilityContent",
   "csharp"
 );
-@@clientName(ScheduleAvailabilityRequest,
+@@clientName(
+  ScheduleAvailabilityRequest,
   "ScheduleAvailabilityContent",
   "csharp"
 );
 @@clientName(SkuInformation.enabled, "IsEnabled", "csharp");
-@@clientName(DatacenterAddressInstructionResponse,
+@@clientName(
+  DatacenterAddressInstructionResponse,
   "DataCenterAddressInstructionResult",
   "csharp"
 );
-@@clientName(DatacenterAddressLocationResponse,
+@@clientName(
+  DatacenterAddressLocationResponse,
   "DataCenterAddressLocationResult",
   "csharp"
 );
 @@clientName(DatacenterAddressResponse, "DataCenterAddressResult", "csharp");
 @@clientName(DatacenterAddressRequest, "DataCenterAddressContent", "csharp");
-@@clientName(DataTransferDetailsValidationRequest,
+@@clientName(
+  DataTransferDetailsValidationRequest,
   "DataTransferDetailsValidationContent",
   "csharp"
 );
-@@clientName(PreferencesValidationRequest,
+@@clientName(
+  PreferencesValidationRequest,
   "PreferencesValidationContent",
   "csharp"
 );
-@@clientName(SkuAvailabilityValidationRequest,
+@@clientName(
+  SkuAvailabilityValidationRequest,
   "SkuAvailabilityValidationContent",
   "csharp"
 );
-@@clientName(SubscriptionIsAllowedToCreateJobValidationRequest,
+@@clientName(
+  SubscriptionIsAllowedToCreateJobValidationRequest,
   "SubscriptionIsAllowedToCreateJobValidationContent",
   "csharp"
 );
 @@clientName(ValidateAddress, "DataBoxValidateAddressContent", "csharp");
 @@clientName(DcAccessSecurityCode, "DataCenterAccessSecurityCode", "csharp");
-@@clientName(DcAccessSecurityCode.forwardDCAccessCode,
+@@clientName(
+  DcAccessSecurityCode.forwardDCAccessCode,
   "ForwardDataCenterAccessCode",
   "csharp"
 );
-@@clientName(DcAccessSecurityCode.reverseDCAccessCode,
+@@clientName(
+  DcAccessSecurityCode.reverseDCAccessCode,
   "ReverseDataCenterAccessCode",
   "csharp"
 );
@@ -119,17 +141,20 @@ using Microsoft.DataBox;
 @@clientName(UserAssignedProperties, "DataBoxUserAssignedIdentity", "csharp");
 @@clientName(JobDetails, "DataBoxBasicJobDetails", "csharp");
 @@clientName(JobDetails.datacenterAddress, "DataCenterAddress", "csharp");
-@@clientName(JobDetails.expectedDataSizeInTeraBytes,
+@@clientName(
+  JobDetails.expectedDataSizeInTeraBytes,
   "ExpectedDataSizeInTerabytes",
   "csharp"
 );
 @@clientName(JobStages, "DataBoxJobStage", "csharp");
 @@clientName(Preferences, "DataBoxOrderPreferences", "csharp");
-@@clientName(RegionConfigurationRequest,
+@@clientName(
+  RegionConfigurationRequest,
   "RegionConfigurationContent",
   "csharp"
 );
-@@clientName(RegionConfigurationResponse,
+@@clientName(
+  RegionConfigurationResponse,
   "RegionConfigurationResult",
   "csharp"
 );
@@ -143,19 +168,23 @@ using Microsoft.DataBox;
 @@clientName(CancellationReason, "DataBoxJobCancellationReason", "csharp");
 @@clientName(ClassDiscriminator, "DataBoxOrderType", "csharp");
 @@clientName(TransferType, "DataBoxJobTransferType", "csharp");
-@@clientName(JobSecrets.dcAccessSecurityCode,
+@@clientName(
+  JobSecrets.dcAccessSecurityCode,
   "DataCenterAccessSecurityCode",
   "csharp"
 );
-@@clientName(MarkDevicesShippedRequest.deliverToDcPackageDetails,
+@@clientName(
+  MarkDevicesShippedRequest.deliverToDcPackageDetails,
   "DeliverToDataCenterPackageDetails",
   "csharp"
 );
-@@clientName(LastMitigationActionOnJob.actionDateTimeInUtc,
+@@clientName(
+  LastMitigationActionOnJob.actionDateTimeInUtc,
   "ActionPerformedOn",
   "csharp"
 );
-@@clientName(TransportAvailabilityRequest,
+@@clientName(
+  TransportAvailabilityRequest,
   "TransportAvailabilityContent",
   "csharp"
 );
@@ -172,7 +201,8 @@ using Microsoft.DataBox;
 @@clientName(AccessProtocol, "DataBoxAccessProtocol", "csharp");
 @@clientName(AccessProtocol.SMB, "Smb", "csharp");
 @@clientName(AccessProtocol.NFS, "Nfs", "csharp");
-@@clientName(AccountCredentialDetails,
+@@clientName(
+  AccountCredentialDetails,
   "DataBoxAccountCredentialDetails",
   "csharp"
 );
@@ -185,66 +215,79 @@ using Microsoft.DataBox;
 @@clientName(StageStatus, "DataBoxStageStatus", "csharp");
 @@clientName(StorageAccountDetails, "DataBoxStorageAccountDetails", "csharp");
 @@clientName(ValidationStatus, "DataBoxValidationStatus", "csharp");
-@@clientName(ValidationInputDiscriminator,
+@@clientName(
+  ValidationInputDiscriminator,
   "DataBoxValidationInputDiscriminator",
   "csharp"
 );
 @@clientName(StageName.AtAzureDC, "AtAzureDataCenter", "csharp");
-@@clientName(StageName.Failed_IssueDetectedAtAzureDC,
+@@clientName(
+  StageName.Failed_IssueDetectedAtAzureDC,
   "FailedIssueDetectedAtAzureDataCenter",
   "csharp"
 );
-@@clientName(StageName.ReadyToDispatchFromAzureDC,
+@@clientName(
+  StageName.ReadyToDispatchFromAzureDC,
   "ReadyToDispatchFromAzureDataCenter",
   "csharp"
 );
-@@clientName(StageName.ReadyToReceiveAtAzureDC,
+@@clientName(
+  StageName.ReadyToReceiveAtAzureDC,
   "ReadyToReceiveAtAzureDataCenter",
   "csharp"
 );
 @@clientName(StageName.ShippedToAzureDC, "ShippedToAzureDataCenter", "csharp");
-@@clientName(StageName.PreparingToShipFromAzureDC,
+@@clientName(
+  StageName.PreparingToShipFromAzureDC,
   "PreparingToShipFromAzureDataCenter",
   "csharp"
 );
 @@clientName(NotificationStageName.AtAzureDC, "AtAzureDataCenter", "csharp");
-@@clientName(DiskScheduleAvailabilityRequest.expectedDataSizeInTeraBytes,
+@@clientName(
+  DiskScheduleAvailabilityRequest.expectedDataSizeInTeraBytes,
   "ExpectedDataSizeInTerabytes",
   "csharp"
 );
-@@clientName(RegionConfigurationRequest.datacenterAddressRequest,
+@@clientName(
+  RegionConfigurationRequest.datacenterAddressRequest,
   "DataCenterAddressRequest",
   "csharp"
 );
-@@clientName(RegionConfigurationResponse.datacenterAddressResponse,
+@@clientName(
+  RegionConfigurationResponse.datacenterAddressResponse,
   "DataCenterAddressResponse",
   "csharp"
 );
 @@clientName(JobDetails.datacenterAddress, "DataCenterAddress", "csharp");
 @@clientName(ShareDestinationFormatType.HCS, "Hcs", "csharp");
 #suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Confirmed overload operations"
-@@clientName(ServiceOperationGroup.regionConfiguration,
+@@clientName(
+  ServiceOperationGroup.regionConfiguration,
   "GetRegionConfiguration",
   "csharp"
 );
-@@clientName(ServiceOperationGroup.validateAddress,
+@@clientName(
+  ServiceOperationGroup.validateAddress,
   "ValidateAddress",
   "csharp"
 );
 #suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Confirmed overload operations"
 @@clientName(ServiceOperationGroup.validateInputs, "ValidateInputs", "csharp");
-@@clientName(ServiceOperationGroup.listAvailableSkusByResourceGroup,
+@@clientName(
+  ServiceOperationGroup.listAvailableSkusByResourceGroup,
   "GetAvailableSkus",
   "csharp"
 );
 #suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Confirmed overload operations"
-@@clientName(ServiceOperationGroup.regionConfigurationByResourceGroup,
+@@clientName(
+  ServiceOperationGroup.regionConfigurationByResourceGroup,
   "GetRegionConfiguration",
   "csharp"
 );
 @@clientName(mitigate, "Mitigate", "csharp");
 #suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Confirmed overload operations"
-@@clientName(ServiceOperationGroup.validateInputsByResourceGroup,
+@@clientName(
+  ServiceOperationGroup.validateInputsByResourceGroup,
   "ValidateInputs",
   "csharp"
 );
@@ -252,93 +295,114 @@ using Microsoft.DataBox;
 @@clientName(MitigateJobRequest, "MitigateJobContent", "csharp");
 @@clientName(ShipmentPickUpRequest, "ShipmentPickUpContent", "csharp");
 @@clientName(MarkDevicesShippedRequest, "MarkDevicesShippedContent", "csharp");
-@@alternateType(KeyEncryptionKey.kekVaultResourceID,
+@@alternateType(
+  KeyEncryptionKey.kekVaultResourceID,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(UserAssignedProperties.resourceId,
+@@alternateType(
+  UserAssignedProperties.resourceId,
   armResourceIdentifier,
   "csharp"
 );
 @@alternateType(CopyProgress.accountId, armResourceIdentifier, "csharp");
-@@alternateType(DataBoxDiskGranularCopyLogDetails.accountId,
+@@alternateType(
+  DataBoxDiskGranularCopyLogDetails.accountId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(StorageAccountDetails.storageAccountId,
+@@alternateType(
+  StorageAccountDetails.storageAccountId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(GranularCopyProgress.accountId,
+@@alternateType(
+  GranularCopyProgress.accountId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ManagedDiskDetails.resourceGroupId,
+@@alternateType(
+  ManagedDiskDetails.resourceGroupId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ManagedDiskDetails.stagingStorageAccountId,
+@@alternateType(
+  ManagedDiskDetails.stagingStorageAccountId,
   armResourceIdentifier,
   "csharp"
 );
 @@alternateType(AvailableSkuRequest.location, azureLocation, "csharp");
-@@alternateType(SkuAvailabilityValidationRequest.location,
+@@alternateType(
+  SkuAvailabilityValidationRequest.location,
   azureLocation,
   "csharp"
 );
-@@alternateType(ScheduleAvailabilityRequest.storageLocation,
+@@alternateType(
+  ScheduleAvailabilityRequest.storageLocation,
   azureLocation,
   "csharp"
 );
-@@alternateType(DatacenterAddressRequest.storageLocation,
+@@alternateType(
+  DatacenterAddressRequest.storageLocation,
   azureLocation,
   "csharp"
 );
-@@alternateType(DatacenterAddressResponse.dataCenterAzureLocation,
+@@alternateType(
+  DatacenterAddressResponse.dataCenterAzureLocation,
   azureLocation,
   "csharp"
 );
-@@alternateType(DataLocationToServiceLocationMap.dataLocation,
+@@alternateType(
+  DataLocationToServiceLocationMap.dataLocation,
   azureLocation,
   "csharp"
 );
-@@alternateType(DataLocationToServiceLocationMap.serviceLocation,
+@@alternateType(
+  DataLocationToServiceLocationMap.serviceLocation,
   azureLocation,
   "csharp"
 );
 @@alternateType(KeyEncryptionKey.kekUrl, url, "csharp");
 @@alternateType(PackageShippingDetails.trackingUrl, url, "csharp");
 @@alternateType(SkuCost.meterId, uuid, "csharp");
-@@alternateType(JobProperties.error,
+@@alternateType(
+  JobProperties.error,
   Azure.ResourceManager.CommonTypes.ErrorDetail,
   "csharp"
 );
-@@alternateType(CloudError.details,
+@@alternateType(
+  CloudError.details,
   Azure.ResourceManager.CommonTypes.ErrorDetail,
   "csharp"
 );
-@@alternateType(ValidationInputResponse.error,
+@@alternateType(
+  ValidationInputResponse.error,
   Azure.ResourceManager.CommonTypes.ErrorDetail,
   "csharp"
 );
-@@alternateType(JobSecrets.error,
+@@alternateType(
+  JobSecrets.error,
   Azure.ResourceManager.CommonTypes.ErrorDetail,
   "csharp"
 );
-@@alternateType(CopyProgress.error,
+@@alternateType(
+  CopyProgress.error,
   Azure.ResourceManager.CommonTypes.ErrorDetail,
   "csharp"
 );
-@@alternateType(DataBoxDiskCopyProgress.error,
+@@alternateType(
+  DataBoxDiskCopyProgress.error,
   Azure.ResourceManager.CommonTypes.ErrorDetail,
   "csharp"
 );
-@@alternateType(GranularCopyProgress.error,
+@@alternateType(
+  GranularCopyProgress.error,
   Azure.ResourceManager.CommonTypes.ErrorDetail,
   "csharp"
 );
 
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
@@ -348,25 +412,30 @@ using Microsoft.DataBox;
 @@alternateType(AdditionalErrorInfo.info, unknown, "java");
 @@alternateType(JobStages.jobStageDetails, unknown, "java");
 
-@@clientName(KeyEncryptionKey.kekVaultResourceID,
+@@clientName(
+  KeyEncryptionKey.kekVaultResourceID,
   "kekVaultResourceId",
   "csharp"
 );
-@@alternateType(JobResource.identity,
+@@alternateType(
+  JobResource.identity,
   Azure.ResourceManager.Foundations.ManagedServiceIdentity,
   "csharp"
 );
-@@alternateType(JobResourceUpdateParameter.identity,
+@@alternateType(
+  JobResourceUpdateParameter.identity,
   Azure.ResourceManager.Foundations.ManagedServiceIdentity,
   "csharp"
 );
 
 // rename for duplicate model from Azure.ResourceManager.Foundations
-@@clientName(Azure.ResourceManager.CommonTypes.ErrorDetail,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ErrorDetail,
   "DataBoxErrorDetail",
   "!go"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.ErrorDetail,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ErrorDetail,
   "ArmErrorDetail",
   "go"
 );

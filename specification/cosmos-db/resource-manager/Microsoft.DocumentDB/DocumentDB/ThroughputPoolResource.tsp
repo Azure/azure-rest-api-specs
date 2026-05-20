@@ -53,7 +53,9 @@ interface ThroughputPoolResources {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     ThroughputPoolResource,
-    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -77,12 +79,15 @@ interface ThroughputPoolResources {
 @@maxLength(ThroughputPoolResource.name, 50);
 @@minLength(ThroughputPoolResource.name, 3);
 @@doc(ThroughputPoolResource.name, "Cosmos DB Throughput Pool name.");
-@@doc(ThroughputPoolResource.properties,
+@@doc(
+  ThroughputPoolResource.properties,
   "Properties to update Azure Cosmos DB throughput pool."
 );
-@@doc(ThroughputPoolResources.createOrUpdate::parameters.resource,
+@@doc(
+  ThroughputPoolResources.createOrUpdate::parameters.resource,
   "The parameters to provide for the current ThroughputPool."
 );
-@@doc(ThroughputPoolResources.update::parameters.properties,
+@@doc(
+  ThroughputPoolResources.update::parameters.properties,
   "The parameters to provide for the current Throughput Pool."
 );
