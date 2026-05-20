@@ -3956,7 +3956,7 @@ model MaintenanceEventResourceProperties {
 
   @doc("The maintenance type (e.g., 'PlannedMaintenance').")
   @visibility(Lifecycle.Read)
-  maintenanceType?: MaintenanceType;
+  maintenanceType: MaintenanceType;
 
   @doc("The human-readable description of the maintenance event.")
   @visibility(Lifecycle.Read)
@@ -3964,15 +3964,15 @@ model MaintenanceEventResourceProperties {
 
   @doc("The customer-facing status of the maintenance event.")
   @visibility(Lifecycle.Read)
-  status?: MaintenanceEventStatus;
+  status: MaintenanceEventStatus;
 
   @doc("The scheduled start time of the maintenance event (UTC).")
   @visibility(Lifecycle.Read)
-  startTime?: utcDateTime;
+  startTime: utcDateTime;
 
   @doc("The scheduled end time of the maintenance event (UTC).")
   @visibility(Lifecycle.Read)
-  endTime?: utcDateTime;
+  endTime: utcDateTime;
 
   @doc("The estimated downtime as an ISO 8601 duration string (e.g., 'PT60S' = 60 seconds).")
   @visibility(Lifecycle.Read)
@@ -3980,13 +3980,13 @@ model MaintenanceEventResourceProperties {
 
   @doc("A value indicating whether this maintenance event can be rescheduled by the customer.")
   @visibility(Lifecycle.Read)
-  deferrable?: boolean;
+  deferrable: boolean;
 
   @doc("The latest date/time this maintenance event can be postponed to (UTC). Present only when deferrable is true.")
   @visibility(Lifecycle.Read)
   deferralDeadline?: utcDateTime;
 
-  @doc("The original scheduled start time before this event was rescheduled. Null if the event has never been rescheduled.")
+  @doc("The previous scheduled start time before the most recent reschedule (UTC). Null if the event has never been rescheduled.")
   @visibility(Lifecycle.Read)
   rescheduledFrom?: utcDateTime;
 
@@ -3994,9 +3994,9 @@ model MaintenanceEventResourceProperties {
   @visibility(Lifecycle.Read)
   lastUpdatedTime?: utcDateTime;
 
-  @doc("The original scheduled start time before this event was rescheduled.")
+  @doc("The initial scheduled start time before any reschedule (UTC). Equals startTime when the event has never been rescheduled.")
   @visibility(Lifecycle.Read)
-  originalStartTime?: utcDateTime;
+  originalStartTime: utcDateTime;
 }
 
 @doc("Filter for maintenance event status.")
