@@ -276,12 +276,12 @@ model OptionBLayer3Configuration extends Layer3IpPrefixProperties {
   @doc("ASN of PE devices for CE/PE connectivity.Example : 28")
   @maxValue(4294967295)
   @minValue(1)
-  peerASN: int64;
+  peerASN?: int64;
 
   @doc("VLAN for CE/PE Layer 3 connectivity.Example : 501")
   @maxValue(4094)
   @minValue(100)
-  vlanId: int32;
+  vlanId?: int32;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
   @doc("ASN of CE devices for CE/PE connectivity.")

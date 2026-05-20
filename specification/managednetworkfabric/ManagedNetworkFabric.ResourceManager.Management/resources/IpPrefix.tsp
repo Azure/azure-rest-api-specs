@@ -9,6 +9,7 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The IP Prefix resource definition.")
+@Azure.ResourceManager.Private.armResourceInternal(IpPrefixProperties)
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model IpPrefix extends Azure.ResourceManager.Foundations.TrackedResource {
   @doc("Name of the IP Prefix.")

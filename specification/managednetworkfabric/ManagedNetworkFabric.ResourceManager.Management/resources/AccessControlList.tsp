@@ -10,6 +10,7 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The Access Control List resource definition.")
+@Azure.ResourceManager.Private.armResourceInternal(AccessControlListProperties)
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model AccessControlList
   extends Azure.ResourceManager.Foundations.TrackedResource {

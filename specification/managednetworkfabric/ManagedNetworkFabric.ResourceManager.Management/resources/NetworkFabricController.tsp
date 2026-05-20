@@ -10,6 +10,7 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The Network Fabric Controller resource definition.")
+@Azure.ResourceManager.Private.armResourceInternal(NetworkFabricControllerProperties)
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model NetworkFabricController
   extends Azure.ResourceManager.Foundations.TrackedResource {

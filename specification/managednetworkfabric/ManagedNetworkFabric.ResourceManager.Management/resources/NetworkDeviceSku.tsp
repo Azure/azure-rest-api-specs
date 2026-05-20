@@ -11,6 +11,7 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The NetworkDeviceSku resource definition.")
 @subscriptionResource
+@Azure.ResourceManager.Private.armResourceInternal(NetworkDeviceSkuProperties)
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model NetworkDeviceSku extends Azure.ResourceManager.Foundations.ProxyResource {
   @doc("Name of the Network Device SKU.")

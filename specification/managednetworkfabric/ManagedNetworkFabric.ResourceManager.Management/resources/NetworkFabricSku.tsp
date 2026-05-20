@@ -10,6 +10,7 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The Network Fabric SKU resource definition.")
 @subscriptionResource
+@Azure.ResourceManager.Private.armResourceInternal(NetworkFabricSkuProperties)
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model NetworkFabricSku extends Azure.ResourceManager.Foundations.ProxyResource {
   @doc("Name of the Network Fabric SKU.")

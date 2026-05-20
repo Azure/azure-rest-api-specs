@@ -9,6 +9,7 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The NetworkPacketBroker resource definition.")
+@Azure.ResourceManager.Private.armResourceInternal(NetworkPacketBrokerProperties)
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model NetworkPacketBroker
   extends Azure.ResourceManager.Foundations.TrackedResource {

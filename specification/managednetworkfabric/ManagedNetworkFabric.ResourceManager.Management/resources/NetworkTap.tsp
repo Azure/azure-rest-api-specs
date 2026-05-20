@@ -9,6 +9,7 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The Network Tap resource definition.")
+@Azure.ResourceManager.Private.armResourceInternal(NetworkTapProperties)
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model NetworkTap extends Azure.ResourceManager.Foundations.TrackedResource {
   @doc("Name of the Network Tap.")
