@@ -344,29 +344,6 @@ union DeploymentModelVersionUpgradeOption {
 }
 
 /**
- * Scheduling priority for a VM managed compute deployment.
- */
-@added(Versions.v2026_03_15_preview)
-union ManagedComputeDeploymentPriority {
-  string,
-
-  /**
-   * Low scheduling priority.
-   */
-  Low: "Low",
-
-  /**
-   * Medium scheduling priority.
-   */
-  Medium: "Medium",
-
-  /**
-   * High scheduling priority.
-   */
-  High: "High",
-}
-
-/**
  * The service tier for the deployment. Determines the pricing and performance level for request processing. Use 'Default' for standard pricing or 'Priority' for higher-priority processing with premium pricing. Note: Pause operations are only supported on Standard, DataZoneStandard, and GlobalStandard SKUs.
  */
 union ServiceTier {
@@ -5718,6 +5695,12 @@ model ManagedComputeDeploymentProperties {
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   computeId?: string;
+
+  /**
+   * Scheduling priority for VM-backed managed compute deployments. Immutable after creation.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  priority?: string;
 
   /**
    * Read-only. Number of accelerators (GPUs) consumed by each model instance, sourced from the deployment template.

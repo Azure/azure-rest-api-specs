@@ -16045,14 +16045,6 @@
           "$ref": "#/definitions/Sku",
           "description": "The resource model definition representing SKU"
         },
-        "priority": {
-          "$ref": "#/definitions/ManagedComputeDeploymentPriority",
-          "description": "The scheduling priority for VM managed compute deployments. Immutable after creation.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
         "backend": {
           "$ref": "#/definitions/DeploymentBackendProperties",
           "description": "Read-only backend projection details for VM managed compute deployments.",
@@ -16116,36 +16108,6 @@
         }
       }
     },
-    "ManagedComputeDeploymentPriority": {
-      "type": "string",
-      "description": "Scheduling priority for a VM managed compute deployment.",
-      "enum": [
-        "Low",
-        "Medium",
-        "High"
-      ],
-      "x-ms-enum": {
-        "name": "ManagedComputeDeploymentPriority",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Low",
-            "value": "Low",
-            "description": "Low scheduling priority."
-          },
-          {
-            "name": "Medium",
-            "value": "Medium",
-            "description": "Medium scheduling priority."
-          },
-          {
-            "name": "High",
-            "value": "High",
-            "description": "High scheduling priority."
-          }
-        ]
-      }
-    },
     "ManagedComputeDeploymentProperties": {
       "type": "object",
       "description": "Properties of a Cognitive Services managed compute deployment.",
@@ -16186,6 +16148,14 @@
         "computeId": {
           "type": "string",
           "description": "Foundry compute ARM resource ID for VM-backed managed compute deployments. Required when sku.name is VmManagedCompute; immutable after creation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "priority": {
+          "type": "string",
+          "description": "Scheduling priority for VM-backed managed compute deployments. Immutable after creation.",
           "x-ms-mutability": [
             "read",
             "create"
