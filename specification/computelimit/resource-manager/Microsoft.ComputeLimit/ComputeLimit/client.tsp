@@ -8,19 +8,22 @@ using Microsoft.ComputeLimit;
 
 @@clientName(GuestSubscription, "ComputeLimitGuestSubscription", "csharp");
 @@clientName(SharedLimit, "ComputeLimitSharedLimit", "csharp");
-@@clientName(Azure.ResourceManager.ResourceProvisioningState,
+@@clientName(
+  Azure.ResourceManager.ResourceProvisioningState,
   "ComputeLimitResourceProvisioningState",
   "csharp"
 );
 @@clientName(LimitName, "ComputeLimitLimitName", "csharp");
-@@clientName(SharedLimitProperties,
+@@clientName(
+  SharedLimitProperties,
   "ComputeLimitSharedLimitProperties",
   "csharp"
 );
 @@clientName(Feature, "ComputeLimitFeature", "csharp");
 @@clientName(FeatureProperties, "ComputeLimitFeatureProperties", "csharp");
 @@clientName(FeatureState, "ComputeLimitFeatureState", "csharp");
-@@clientName(FeatureEnableRequest,
+@@clientName(
+  FeatureEnableRequest,
   "ComputeLimitFeatureEnableRequest",
   "csharp"
 );
