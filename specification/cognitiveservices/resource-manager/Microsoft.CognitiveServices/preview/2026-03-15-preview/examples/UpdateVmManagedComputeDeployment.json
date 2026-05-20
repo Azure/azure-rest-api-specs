@@ -5,7 +5,7 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "resourceGroupName",
     "accountName": "accountName",
-    "deploymentName": "myVmManagedComputeDeployment",
+    "deploymentName": "gpt-oss-120b-byoc",
     "api-version": "2026-03-15-preview",
     "properties": {
       "sku": {
@@ -17,45 +17,27 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/managedComputeDeployments/myVmManagedComputeDeployment",
-        "name": "myVmManagedComputeDeployment",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/managedComputeDeployments/gpt-oss-120b-byoc",
+        "name": "gpt-oss-120b-byoc",
         "type": "Microsoft.CognitiveServices/accounts/managedComputeDeployments",
-        "sku": {
-          "name": "VmManagedCompute",
-          "capacity": 2
-        },
-        "priority": "High",
-        "backend": {
-          "vmManagedCompute": {
-            "singularityAccountName": "sg-managedcompute-eastus",
-            "singularityAccountResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/managedComputeResourceGroup/providers/Microsoft.Singularity/accounts/sg-managedcompute-eastus",
-            "templatedModelName": "myVmManagedComputeDeployment",
-            "templatedModelResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/managedComputeResourceGroup/providers/Microsoft.Singularity/accounts/sg-managedcompute-eastus/templatedModels/myVmManagedComputeDeployment",
-            "operationUri": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000001?api-version=2026-03-15-preview",
-            "endpointMode": "Managed",
-            "backendRegion": "eastus",
-            "publicIp": "20.50.1.2",
-            "hostFqdn": "myVmManagedComputeDeployment.eastus.inference.ml.azure.com",
-            "currentInstanceCount": 2,
-            "targetHostPool": "managedcompute-h100-pool"
-          }
-        },
-        "etag": "\"00000000-0000-0000-0000-000000000001\"",
+        "etag": "\"0x8D...\"",
         "properties": {
-          "model": "azureml://registries/azureml-meta/models/Llama-3-8B-Instruct/versions/1",
-          "deploymentTemplate": "azureml://registries/azureml-meta/deploymenttemplates/Llama-3-8B-Instruct/versions/1",
-          "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/computes/myFoundryCompute",
+          "model": "azureml://registries/azureml-openai-oss/models/gpt-oss-120b/versions/4",
+          "deploymentTemplate": "projects/my-project/deploymentTemplates/gpt-oss-120b-vllm-tuned/versions/2",
+          "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/computes/my-h100-pool",
           "versionUpgradeOption": "OnceNewDefaultVersionAvailable",
           "provisioningState": "Succeeded",
           "provisioningDetails": {
-            "message": "Deployment updated successfully.",
-            "lastOperationTimestamp": "2026-03-15T13:00:00Z"
+            "message": "Scale operation completed successfully.",
+            "lastOperationTimestamp": "2026-04-12T10:55:00Z"
           },
           "routes": {
-            "chatCompletionsScoringPath": "/managedComputeDeployments/myVmManagedComputeDeployment/v1/chat/completions",
-            "swagger": "/managedComputeDeployments/myVmManagedComputeDeployment/swagger.json",
-            "messagesApiScoringPath": "/managedComputeDeployments/myVmManagedComputeDeployment/v1/messages"
+            "chatCompletionsScoringPath": "/managed-deployments/gpt-oss-120b-byoc/v1/chat/completions"
           }
+        },
+        "sku": {
+          "name": "VmManagedCompute",
+          "capacity": 2
         }
       }
     },

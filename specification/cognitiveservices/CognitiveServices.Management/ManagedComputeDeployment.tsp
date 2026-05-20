@@ -88,7 +88,20 @@ interface ManagedComputeDeployments {
   /**
    * Deletes the specified managed compute deployment associated with the Cognitive Services account.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<ManagedComputeDeployment>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Managed compute deployment delete can complete synchronously with 200 OK, or asynchronously with 202 Accepted and LRO headers."
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ManagedComputeDeployment,
+    LroHeaders = ArmCombinedLroHeaders<ArmOperationStatus, void> &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<
+          ArmOperationStatus,
+          void
+        > &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Gets the managed compute deployments associated with the Cognitive Services account.
