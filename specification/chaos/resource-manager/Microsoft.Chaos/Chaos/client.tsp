@@ -56,8 +56,16 @@ using Microsoft.Chaos;
 @@clientName(Action, "ChaosAction", "csharp");
 @@clientName(ActionVersion, "ChaosActionVersion", "csharp");
 @@clientName(ActionKind, "ChaosActionKind", "csharp");
-@@clientName(ConfigurationExclusions, "ChaosScenarioConfigurationExclusions", "csharp");
-@@clientName(ConfigurationFilters, "ChaosScenarioConfigurationFilters", "csharp");
+@@clientName(
+  ConfigurationExclusions,
+  "ChaosScenarioConfigurationExclusions",
+  "csharp"
+);
+@@clientName(
+  ConfigurationFilters,
+  "ChaosScenarioConfigurationFilters",
+  "csharp"
+);
 @@clientName(OperationError, "ChaosOperationError", "csharp");
 @@clientName(ScenarioParameter.required, "IsRequired", "csharp");
 @@clientName(ParameterType, "ChaosScenarioParameterType", "csharp");
