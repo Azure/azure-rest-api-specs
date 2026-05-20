@@ -2,12 +2,14 @@
 
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
@@ -66,7 +68,8 @@ interface BillingMetersOperationGroup {
 @tag("Subscriptions")
 op getCustomDomainVerificationId is ArmProviderActionSync<
   Response = OkResponse & {
-    @header("Content-Type") contentType: "application/json";
+    #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Need exact content types for produces field"
+    @header("Content-Type") contentType: "text/plain" | "application/json";
 
     @bodyRoot
     customDomainVerificationId: CustomDomainVerificationId;
@@ -85,10 +88,31 @@ interface UsagesOperationGroup {
   @list
   @action("usages")
   @tag("Usages")
+  @sharedRoute
+  @removed(Versions.v2026_01_01)
   list is ArmProviderActionSync<
     Response = ListUsagesResult,
     Scope = SubscriptionActionScope,
     Parameters = LocationResourceParameter,
+    Error = DefaultErrorResponse
+  >;
+
+  /**
+   * Gets, for the specified location, the current resource usage information as well as the limits under the subscription.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Need operationId to match original swagger"
+  @autoRoute
+  @get
+  @list
+  @action("usages")
+  @tag("Usages")
+  @sharedRoute
+  @added(Versions.v2026_01_01)
+  @operationId("Usages_List")
+  listStable is ArmProviderActionSync<
+    Response = ListUsagesResult,
+    Scope = SubscriptionActionScope,
+    Parameters = AppLocationParameter,
     Error = DefaultErrorResponse
   >;
 }

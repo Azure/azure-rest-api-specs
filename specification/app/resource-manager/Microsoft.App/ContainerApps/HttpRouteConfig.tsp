@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./ManagedEnvironment.tsp";
 
@@ -9,6 +10,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.App;
 
@@ -95,11 +97,22 @@ interface HttpRouteConfigs {
   /**
    * Deletes the specified Managed Http Route.
    */
+  @sharedRoute
+  @summary("Deletes the specified Managed Http Route.")
+  @removed(Versions.v2026_01_01)
+  delete is ArmResourceDeleteWithoutOkAsync<HttpRouteConfig>;
+
+  /**
+   * Deletes the specified Managed Http Route.
+   */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Custom response to match original swagger lowercase location header"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Need x-ms-long-running-operation to match original swagger"
+  @sharedRoute
   @summary("Deletes the specified Http Route Config.")
   @extension("x-ms-long-running-operation", true)
-  delete is ArmResourceDeleteWithoutOkAsync<
+  @added(Versions.v2026_01_01)
+  @operationId("HttpRouteConfig_Delete")
+  deleteStable is ArmResourceDeleteWithoutOkAsync<
     HttpRouteConfig,
     Response =
       | HttpRouteConfigDeleteAcceptedResponse

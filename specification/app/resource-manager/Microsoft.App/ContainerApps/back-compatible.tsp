@@ -62,6 +62,10 @@ using Microsoft.App;
   "environmentEnvelope"
 );
 @@clientName(
+  ConnectedEnvironments.updateStable::parameters.properties,
+  "environmentEnvelope"
+);
+@@clientName(
   ConnectedEnvironments.checkNameAvailability::parameters.body,
   "checkNameAvailabilityRequest"
 );

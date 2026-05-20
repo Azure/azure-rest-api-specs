@@ -65,7 +65,18 @@ interface LogicApps {
   /**
    * Create or update a Logic App extension resource
    */
-  createOrUpdate is LogicAppOps.CreateOrUpdateSync<
+  @sharedRoute
+  @removed(Versions.v2026_01_01)
+  createOrUpdate is LogicAppOps.CreateOrUpdateSync<LogicApp>;
+
+  /**
+   * Create or update a Logic App extension resource
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Need operationId to match original swagger"
+  @sharedRoute
+  @added(Versions.v2026_01_01)
+  @operationId("LogicApps_CreateOrUpdate")
+  createOrUpdateStable is LogicAppOps.CreateOrUpdateSync<
     LogicApp,
     OptionalRequestBody = true
   >;

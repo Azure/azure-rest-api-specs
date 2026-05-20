@@ -257,7 +257,7 @@ interface Jobs {
   >;
 
   /**
-   * Get the properties of a Container App Job.
+   * Get the properties for a given Container App Job.
    */
   @tag("Jobs")
   @tag("Diagnostics")

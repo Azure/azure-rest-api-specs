@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.App;
 /**
@@ -49,7 +51,25 @@ interface ConnectedEnvironments {
    */
   @summary("Update connected Environment's properties.")
   @patch(#{ implicitOptionality: false })
+  @sharedRoute
+  @removed(Versions.v2026_01_01)
   update is Azure.ResourceManager.Legacy.CustomPatchSync<
+    ConnectedEnvironment,
+    PatchModel = ConnectedEnvironmentPatchResource,
+    OptionalRequestBody = true,
+    Error = DefaultErrorResponse
+  >;
+
+  /**
+   * Patches a Managed Environment. Only patching of tags is supported currently
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Need operationId to match original swagger"
+  @summary("Update connected Environment's properties.")
+  @patch(#{ implicitOptionality: false })
+  @sharedRoute
+  @added(Versions.v2026_01_01)
+  @operationId("ConnectedEnvironments_Update")
+  updateStable is Azure.ResourceManager.Legacy.CustomPatchSync<
     ConnectedEnvironment,
     PatchModel = ConnectedEnvironmentPatchResource,
     Error = DefaultErrorResponse

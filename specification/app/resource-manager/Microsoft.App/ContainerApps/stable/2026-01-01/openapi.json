@@ -242,6 +242,10 @@
           "Subscriptions"
         ],
         "description": "Get the verification id of a subscription used for verifying custom domains",
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -710,7 +714,7 @@
           {
             "name": "environmentEnvelope",
             "in": "body",
-            "description": "Configuration details of the connectedEnvironment.",
+            "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ConnectedEnvironmentPatchResource"
@@ -2407,7 +2411,6 @@
             "$ref": "./examples/Revisions_List1.json"
           }
         },
-        "x-ms-odata": "#/definitions/Revision",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -2813,7 +2816,7 @@
           {
             "name": "resource",
             "in": "body",
-            "description": "Logic app resource properties.",
+            "description": "Resource create parameters.",
             "required": false,
             "schema": {
               "$ref": "#/definitions/LogicApp"
@@ -3133,7 +3136,6 @@
             "$ref": "./examples/Revisions_List.json"
           }
         },
-        "x-ms-odata": "#/definitions/Revision",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -4172,7 +4174,7 @@
           "Diagnostics"
         ],
         "summary": "Get the properties of a Container App Job.",
-        "description": "Get the properties of a Container App Job.",
+        "description": "Get the properties for a given Container App Job.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -6635,9 +6637,9 @@
             "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
-            "name": "maintenanceConfigurationEnvelope",
+            "name": "resource",
             "in": "body",
-            "description": "Parameters to set the maintenance configuration for ManagedEnvironment .",
+            "description": "Resource create parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/MaintenanceConfigurationResource"
@@ -8027,8 +8029,20 @@
         "Deny"
       ],
       "x-ms-enum": {
-        "name": "action",
-        "modelAsString": true
+        "name": "Action",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Allow",
+            "value": "Allow",
+            "description": "Allow"
+          },
+          {
+            "name": "Deny",
+            "value": "Deny",
+            "description": "Deny"
+          }
+        ]
       }
     },
     "Affinity": {
@@ -8039,8 +8053,20 @@
         "none"
       ],
       "x-ms-enum": {
-        "name": "affinity",
-        "modelAsString": true
+        "name": "Affinity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "sticky",
+            "value": "sticky",
+            "description": "sticky"
+          },
+          {
+            "name": "none",
+            "value": "none",
+            "description": "none"
+          }
+        ]
       }
     },
     "AllowedAudiencesValidation": {
@@ -8189,8 +8215,8 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "Link to next page of resources.",
-          "readOnly": true
+          "format": "uri",
+          "description": "Link to next page of resources."
         }
       },
       "required": [
@@ -8257,9 +8283,13 @@
         },
         "nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "URL client should use to fetch the next page (per server side paging).\nIt's null for now, added for future use."
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "AvailableWorkloadProfile": {
       "type": "object",
@@ -8326,8 +8356,8 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "Link to next page of resources.",
-          "readOnly": true
+          "format": "uri",
+          "description": "Link to next page of resources."
         }
       },
       "required": [
@@ -8434,6 +8464,7 @@
       "properties": {
         "clientId": {
           "type": "string",
+          "format": "password",
           "description": "Client Id.",
           "x-ms-mutability": [
             "update",
@@ -8443,6 +8474,7 @@
         },
         "clientSecret": {
           "type": "string",
+          "format": "password",
           "description": "Client Secret.",
           "x-ms-mutability": [
             "update",
@@ -8452,6 +8484,7 @@
         },
         "tenantId": {
           "type": "string",
+          "format": "password",
           "description": "Tenant Id.",
           "x-ms-mutability": [
             "update",
@@ -8483,6 +8516,7 @@
         },
         "accountKey": {
           "type": "string",
+          "format": "password",
           "description": "Storage account key for azure file.",
           "x-ms-secret": true
         },
@@ -8638,8 +8672,25 @@
         "Auto"
       ],
       "x-ms-enum": {
-        "name": "bindingType",
-        "modelAsString": true
+        "name": "BindingType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Disabled"
+          },
+          {
+            "name": "SniEnabled",
+            "value": "SniEnabled",
+            "description": "SniEnabled"
+          },
+          {
+            "name": "Auto",
+            "value": "Auto",
+            "description": "Auto"
+          }
+        ]
       }
     },
     "BlobStorageTokenStore": {
@@ -8683,8 +8734,8 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "Link to next page of resources.",
-          "readOnly": true
+          "format": "uri",
+          "description": "Link to next page of resources."
         }
       },
       "required": [
@@ -8739,6 +8790,7 @@
         },
         "password": {
           "type": "string",
+          "format": "password",
           "description": "Certificate password.",
           "x-ms-mutability": [
             "create"
@@ -8760,7 +8812,7 @@
         },
         "value": {
           "type": "string",
-          "format": "byte",
+          "format": "password",
           "description": "PFX or PEM blob",
           "x-ms-mutability": [
             "create"
@@ -8978,10 +9030,13 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "Link to next page of resources.",
-          "readOnly": true
+          "format": "uri",
+          "description": "Link to next page of resources."
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "ConnectedEnvironmentPatchResource": {
       "type": "object",
@@ -9017,6 +9072,7 @@
         },
         "daprAIConnectionString": {
           "type": "string",
+          "format": "password",
           "description": "Application Insights connection string used by Dapr to export Service to Service communication telemetry",
           "x-ms-secret": true
         },
@@ -9263,6 +9319,7 @@
       "properties": {
         "token": {
           "type": "string",
+          "format": "password",
           "description": "Auth token value.",
           "readOnly": true,
           "x-ms-secret": true
@@ -9288,8 +9345,8 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "Link to next page of resources.",
-          "readOnly": true
+          "format": "uri",
+          "description": "Link to next page of resources."
         }
       },
       "required": [
@@ -9339,8 +9396,8 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "Link to next page of resources.",
-          "readOnly": true
+          "format": "uri",
+          "description": "Link to next page of resources."
         }
       },
       "required": [
@@ -9669,6 +9726,7 @@
         },
         "value": {
           "type": "string",
+          "format": "password",
           "description": "Secret Value.",
           "readOnly": true,
           "x-ms-secret": true
@@ -9881,12 +9939,13 @@
         },
         "certificateValue": {
           "type": "string",
-          "format": "byte",
+          "format": "password",
           "description": "PFX or PEM blob",
           "x-ms-secret": true
         },
         "certificatePassword": {
           "type": "string",
+          "format": "password",
           "description": "Certificate password",
           "x-ms-secret": true
         },
@@ -10111,8 +10170,20 @@
             "grpc"
           ],
           "x-ms-enum": {
-            "name": "appProtocol",
-            "modelAsString": true
+            "name": "AppProtocol",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "http",
+                "value": "http",
+                "description": "http"
+              },
+              {
+                "name": "grpc",
+                "value": "grpc",
+                "description": "grpc"
+              }
+            ]
           }
         },
         "appPort": {
@@ -10316,8 +10387,8 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "Link to next page of resources.",
-          "readOnly": true
+          "format": "uri",
+          "description": "Link to next page of resources."
         }
       },
       "required": [
@@ -10364,6 +10435,7 @@
         },
         "value": {
           "type": "string",
+          "format": "password",
           "description": "Secret Value.",
           "readOnly": true,
           "x-ms-secret": true
@@ -10547,8 +10619,7 @@
         "rows": {
           "type": "array",
           "description": "Rows in the table",
-          "items": {},
-          "x-ms-identifiers": []
+          "items": {}
         }
       }
     },
@@ -10619,8 +10690,8 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "Link to next page of resources.",
-          "readOnly": true
+          "format": "uri",
+          "description": "Link to next page of resources."
         }
       },
       "required": [
@@ -10691,7 +10762,7 @@
         },
         "score": {
           "type": "number",
-          "format": "double",
+          "format": "float",
           "description": "Authors' names of the detector",
           "readOnly": true
         }
@@ -10814,6 +10885,7 @@
       "properties": {
         "token": {
           "type": "string",
+          "format": "password",
           "description": "Auth token value.",
           "readOnly": true,
           "x-ms-secret": true
@@ -10974,12 +11046,12 @@
           "description": "The name of the extended location."
         },
         "type": {
-          "$ref": "#/definitions/ExtendedLocationType",
+          "$ref": "#/definitions/ExtendedLocationTypes",
           "description": "The type of the extended location."
         }
       }
     },
-    "ExtendedLocationType": {
+    "ExtendedLocationTypes": {
       "type": "string",
       "description": "The type of extendedLocation.",
       "enum": [
@@ -10987,7 +11059,14 @@
       ],
       "x-ms-enum": {
         "name": "ExtendedLocationTypes",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CustomLocation",
+            "value": "CustomLocation",
+            "description": "CustomLocation"
+          }
+        ]
       }
     },
     "Facebook": {
@@ -11096,6 +11175,7 @@
         },
         "githubPersonalAccessToken": {
           "type": "string",
+          "format": "password",
           "description": "One time Github PAT to configure github environment",
           "x-ms-mutability": [
             "update",
@@ -11220,8 +11300,8 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "Link to next page of resources.",
-          "readOnly": true
+          "format": "uri",
+          "description": "Link to next page of resources."
         }
       },
       "required": [
@@ -11525,9 +11605,9 @@
           "description": "Use to select the lifecycle stages of a Container App during which the Managed Identity should be available.",
           "default": "All",
           "enum": [
-            "Init",
-            "Main",
             "None",
+            "Main",
+            "Init",
             "All"
           ],
           "x-ms-enum": {
@@ -11535,24 +11615,24 @@
             "modelAsString": true,
             "values": [
               {
-                "name": "Init",
-                "value": "Init",
-                "description": "Use managed identity during the init stage of the Container App lifecycle."
+                "name": "None",
+                "value": "None",
+                "description": "None"
               },
               {
                 "name": "Main",
                 "value": "Main",
-                "description": "Use managed identity during the main stage of the Container App lifecycle."
+                "description": "Main"
               },
               {
-                "name": "None",
-                "value": "None",
-                "description": "Do not use managed identity during any lifecycle stage."
+                "name": "Init",
+                "value": "Init",
+                "description": "Init"
               },
               {
                 "name": "All",
                 "value": "All",
-                "description": "Use managed identity during all lifecycle stages of the Container App."
+                "description": "All"
               }
             ]
           }
@@ -12006,8 +12086,8 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "Link to next page of resources.",
-          "readOnly": true
+          "format": "uri",
+          "description": "Link to next page of resources."
         }
       },
       "required": [
@@ -12562,7 +12642,7 @@
         },
         "identity": {
           "type": "string",
-          "description": "The resource ID of a user-assigned managed identity that is assigned to the Container App, or 'system' for system-assigned identity."
+          "description": "The resource ID of a user-assigned managed identity that is assigned to the job, or 'system' for system-assigned identity."
         }
       }
     },
@@ -12638,8 +12718,8 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "Link to next page of resources.",
-          "readOnly": true
+          "format": "uri",
+          "description": "Link to next page of resources."
         }
       },
       "required": [
@@ -12685,8 +12765,20 @@
         "functionapp"
       ],
       "x-ms-enum": {
-        "name": "kind",
-        "modelAsString": true
+        "name": "Kind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "workflowapp",
+            "value": "workflowapp",
+            "description": "workflowapp"
+          },
+          {
+            "name": "functionapp",
+            "value": "functionapp",
+            "description": "functionapp"
+          }
+        ]
       }
     },
     "LifecycleConfiguration": {
@@ -12735,7 +12827,7 @@
     },
     "ListUsagesResult": {
       "type": "object",
-      "description": "Legacy page model for collection responses where value is optional and nextLink is not readOnly.",
+      "description": "Legacy page model for collection responses where value is required.",
       "properties": {
         "value": {
           "type": "array",
@@ -12749,9 +12841,13 @@
         },
         "nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "The URI to fetch the next page of compute resource usage information. Call ListNext() with this to fetch the next page of compute resource usage information."
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "LogAnalyticsConfiguration": {
       "type": "object",
@@ -12763,6 +12859,7 @@
         },
         "sharedKey": {
           "type": "string",
+          "format": "password",
           "description": "Log analytics customer key",
           "x-ms-mutability": [
             "update",
@@ -12782,8 +12879,30 @@
         "error"
       ],
       "x-ms-enum": {
-        "name": "logLevel",
-        "modelAsString": true
+        "name": "LogLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "info",
+            "value": "info",
+            "description": "info"
+          },
+          {
+            "name": "debug",
+            "value": "debug",
+            "description": "debug"
+          },
+          {
+            "name": "warn",
+            "value": "warn",
+            "description": "warn"
+          },
+          {
+            "name": "error",
+            "value": "error",
+            "description": "error"
+          }
+        ]
       }
     },
     "LogicApp": {
@@ -12875,10 +12994,13 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "Link for next page of results.",
-          "readOnly": true
+          "format": "uri",
+          "description": "Link for next page of results."
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "MaintenanceConfigurationResource": {
       "type": "object",
@@ -12924,8 +13046,8 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "Link to next page of resources.",
-          "readOnly": true
+          "format": "uri",
+          "description": "Link to next page of resources."
         }
       },
       "required": [
@@ -13039,11 +13161,13 @@
         },
         "daprAIInstrumentationKey": {
           "type": "string",
+          "format": "password",
           "description": "Azure Monitor instrumentation key used by Dapr to export Service to Service communication telemetry",
           "x-ms-secret": true
         },
         "daprAIConnectionString": {
           "type": "string",
+          "format": "password",
           "description": "Application Insights connection string used by Dapr to export Service to Service communication telemetry",
           "x-ms-secret": true
         },
@@ -13227,8 +13351,8 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "Link to next page of resources.",
-          "readOnly": true
+          "format": "uri",
+          "description": "Link to next page of resources."
         }
       },
       "required": [
@@ -13249,11 +13373,35 @@
           "default": "None",
           "enum": [
             "None",
-            "Main"
+            "Main",
+            "Init",
+            "All"
           ],
           "x-ms-enum": {
             "name": "IdentitySettingsLifeCycle",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "None",
+                "value": "None",
+                "description": "None"
+              },
+              {
+                "name": "Main",
+                "value": "Main",
+                "description": "Main"
+              },
+              {
+                "name": "Init",
+                "value": "Init",
+                "description": "Init"
+              },
+              {
+                "name": "All",
+                "value": "All",
+                "description": "All"
+              }
+            ]
           }
         }
       },
@@ -13314,7 +13462,6 @@
             "ClientSecretPost"
           ],
           "x-ms-enum": {
-            "name": "ClientCredentialMethod",
             "modelAsString": false
           }
         },
@@ -13494,10 +13641,13 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "PrivateEndpointConnectionProperties": {
       "type": "object",
@@ -13521,7 +13671,8 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/PrivateEndpointConnectionProvisioningState",
-          "description": "The provisioning state of the private endpoint connection resource."
+          "description": "The provisioning state of the private endpoint connection resource.",
+          "readOnly": true
         }
       },
       "required": [
@@ -13647,10 +13798,13 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "PrivateLinkResourceProperties": {
       "type": "object",
@@ -13793,8 +13947,7 @@
           "x-ms-mutability": [
             "update",
             "create"
-          ],
-          "x-ms-secret": true
+          ]
         }
       }
     },
@@ -13966,8 +14119,8 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "Link to next page of resources.",
-          "readOnly": true
+          "format": "uri",
+          "description": "Link to next page of resources."
         }
       },
       "required": [
@@ -14349,6 +14502,7 @@
         },
         "value": {
           "type": "string",
+          "format": "password",
           "description": "Secret Value.",
           "x-ms-mutability": [
             "update",
@@ -14575,8 +14729,8 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "Link to next page of resources.",
-          "readOnly": true
+          "format": "uri",
+          "description": "Link to next page of resources."
         }
       },
       "required": [
@@ -14718,6 +14872,7 @@
         },
         "value": {
           "type": "string",
+          "format": "password",
           "description": "Secret Value.",
           "x-ms-mutability": [
             "update",
@@ -14837,8 +14992,8 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "Link to next page of resources.",
-          "readOnly": true
+          "format": "uri",
+          "description": "Link to next page of resources."
         }
       },
       "required": [
@@ -15216,7 +15371,6 @@
             "Count"
           ],
           "x-ms-enum": {
-            "name": "UsageUnit",
             "modelAsString": false
           }
         },
@@ -15438,8 +15592,8 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "Link to next page of resources.",
-          "readOnly": true
+          "format": "uri",
+          "description": "Link to next page of resources."
         }
       },
       "required": [
@@ -15676,8 +15830,8 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "Link to next page of resources.",
-          "readOnly": true
+          "format": "uri",
+          "description": "Link to next page of resources."
         }
       },
       "required": [

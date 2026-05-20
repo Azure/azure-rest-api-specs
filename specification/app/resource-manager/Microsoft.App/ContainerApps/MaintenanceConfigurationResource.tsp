@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.App;
 /**
@@ -84,17 +85,53 @@ interface MaintenanceConfigurations {
   /**
    * Create or update the maintenance configuration for Managed Environment.
    */
-  createOrUpdate is MaintenanceConfigurationResourceOps.CreateOrUpdateSync<MaintenanceConfigurationResource>;
+  @sharedRoute
+  @removed(Versions.v2026_01_01)
+  createOrUpdate is MaintenanceConfigurationResourceCustomErrorOps.CreateOrUpdateSync<MaintenanceConfigurationResource>;
+
+  /**
+   * Create or update the maintenance configuration for Managed Environment.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Need operationId to match original swagger"
+  @sharedRoute
+  @added(Versions.v2026_01_01)
+  @operationId("MaintenanceConfigurations_CreateOrUpdate")
+  createOrUpdateStable is MaintenanceConfigurationResourceOps.CreateOrUpdateSync<MaintenanceConfigurationResource>;
 
   /**
    * Deletes the maintenance configuration of a ManagedEnvironment .
    */
-  delete is MaintenanceConfigurationResourceOps.DeleteSync<MaintenanceConfigurationResource>;
+  @sharedRoute
+  @removed(Versions.v2026_01_01)
+  delete is MaintenanceConfigurationResourceCustomErrorOps.DeleteSync<MaintenanceConfigurationResource>;
+
+  /**
+   * Deletes the maintenance configuration of a ManagedEnvironment .
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Need operationId to match original swagger"
+  @sharedRoute
+  @added(Versions.v2026_01_01)
+  @operationId("MaintenanceConfigurations_Delete")
+  deleteStable is MaintenanceConfigurationResourceOps.DeleteSync<MaintenanceConfigurationResource>;
 
   /**
    * Gets all maintenance configurations in the specified Managed Environment.
    */
-  list is MaintenanceConfigurationResourceOps.List<
+  @sharedRoute
+  @removed(Versions.v2026_01_01)
+  list is MaintenanceConfigurationResourceCustomErrorOps.List<
+    MaintenanceConfigurationResource,
+    Response = ArmResponse<MaintenanceConfigurationCollection>
+  >;
+
+  /**
+   * Gets all maintenance configurations in the specified Managed Environment.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Need operationId to match original swagger"
+  @sharedRoute
+  @added(Versions.v2026_01_01)
+  @operationId("MaintenanceConfigurations_List")
+  listStable is MaintenanceConfigurationResourceOps.List<
     MaintenanceConfigurationResource,
     Response = ArmResponse<MaintenanceConfigurationCollection>
   >;
