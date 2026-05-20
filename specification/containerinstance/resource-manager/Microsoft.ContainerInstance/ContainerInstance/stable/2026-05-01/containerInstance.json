@@ -849,6 +849,9 @@
           "ContainerGroupsCreateOrUpdate": {
             "$ref": "./examples/ContainerGroupsCreateOrUpdate.json"
           },
+          "ContainerGroupsCreateOrUpdateManagedIdentityAzureFileshare": {
+            "$ref": "./examples/ContainerGroupsCreateOrUpdateManagedIdentityAzureFileshare.json"
+          },
           "ContainerGroupsCreateOrUpdateSecretReference": {
             "$ref": "./examples/ContainerGroupsCreateOrUpdateSecretReference.json"
           },
@@ -889,7 +892,7 @@
             "description": "The container group resource with just the tags to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Resource"
+              "$ref": "#/definitions/ContainerGroupUpdate"
             }
           }
         ],
@@ -1950,10 +1953,6 @@
         "storageAccountKeyReference": {
           "type": "string",
           "description": "The reference to the storage account access key used to access the Azure File share."
-        },
-        "userManagedIdentityClientId": {
-          "type": "string",
-          "description": "The client id of the user managed identity which has access to the Azure File share."
         }
       },
       "required": [
@@ -2244,7 +2243,7 @@
       "properties": {
         "location": {
           "type": "string",
-          "description": "The resource location."
+          "description": "The resource location of the container group."
         },
         "tags": {
           "type": "object",
@@ -2979,6 +2978,45 @@
       "required": [
         "id"
       ]
+    },
+    "ContainerGroupUpdate": {
+      "type": "object",
+      "description": "The Resource model definition.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource id.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The resource name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource location."
+        },
+        "tags": {
+          "type": "object",
+          "description": "The resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "zones": {
+          "type": "array",
+          "description": "The zones for the container group.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     },
     "ContainerHttpGet": {
       "type": "object",
@@ -4611,46 +4649,6 @@
       "required": [
         "port"
       ]
-    },
-    "Resource": {
-      "type": "object",
-      "description": "The Resource model definition.",
-      "x-ms-azure-resource": true,
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The resource id.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The resource name.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The resource type.",
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "description": "The resource location."
-        },
-        "tags": {
-          "type": "object",
-          "description": "The resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "zones": {
-          "type": "array",
-          "description": "The zones for the container group.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
     },
     "ResourceIdentityType": {
       "type": "string",
