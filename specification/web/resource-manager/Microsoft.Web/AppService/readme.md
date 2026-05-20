@@ -35,6 +35,8 @@ title: AppServiceManagementClient
 description: AppService Management Client
 openapi-type: arm
 tag: package-2026-03
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ### Suppression
@@ -100,6 +102,53 @@ directive:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/extensions/MSDeploy"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/extensions/MSDeploy/log"]
     reason: MSDeploy is the intentional name matching the existing service API.
+
+  # ConnectorGateway (2026-05-01-preview) suppressions
+  - suppress: AvoidAdditionalProperties
+    from: openapi.json
+    reason: |
+      ConnectorGateway resources pass through free-form JSON payloads from the
+      backend connector runtime (swagger documents, connection parameters,
+      parameter values, runtime headers/bodies, WSDL definitions, integration
+      service environment refs, policy content links, dynamicInvoke payloads,
+      and MCP tool schemas/annotations). These shapes are inherently dynamic
+      and cannot be tightly typed in the resource manager surface; they mirror
+      the existing Logic Apps / Power Platform connector data plane.
+  - suppress: ProvisioningStateMustBeReadOnly
+    from: openapi.json
+    reason: |
+      The provisioningState property is correctly marked readOnly:true in all
+      ConnectorGateway resource property bags (ConnectorGatewayProperties,
+      ConnectorGatewayConnectionProperties,
+      ConnectorGatewayConnectionAccessPolicyProperties,
+      ConnectorGatewayCustomConnectorProperties,
+      ConnectorGatewayMcpServerConfigProperties,
+      ConnectorGatewayTriggerConfigProperties). This rule has a known
+      limitation following $ref chains through the TypeSpec-emitted property
+      bag pattern.
+  - suppress: GuidUsage
+    from: openapi.json
+    where: $.definitions.ConnectorGatewayProperties.properties.connectorGatewayId
+    reason: |
+      connectorGatewayId is intentionally a UUID/GUID. It is the system
+      assigned identifier persisted in the backend AI Gateway / Connector
+      Gateway service and is exposed to clients for correlation with backend
+      diagnostics and tooling.
+  - suppress: PatchIdentityProperty
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectorGateways/{name}"].patch
+    reason: |
+      Tags-only PATCH is intentional per the Connector Gateway API design.
+      identity is assigned at create time via PUT and is not mutable through
+      PATCH; only resource tags can be updated incrementally.
+  - suppress: PathForNestedResource
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectorGateways/{name}/triggerConfigs/{triggerConfigName}/triggerStatuses/latest"]
+    reason: |
+      triggerStatuses/latest is a singleton sub-resource (always named
+      "latest") that exposes the most recent execution status of a trigger
+      configuration. This singleton path shape is intentional per the
+      Connector Gateway design.
 ```
 
 ### Tag: package-2026-03

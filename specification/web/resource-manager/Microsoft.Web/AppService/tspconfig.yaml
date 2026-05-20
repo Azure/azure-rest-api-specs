@@ -54,5 +54,7 @@ options:
     head-as-boolean: true
     inject-spans: true
 linter:
+  disable:
+    "@azure-tools/typespec-client-generator-core/duplicate-client-name": "ConnectorGateway and AiGateway both consume the standard Azure.ResourceManager.ManagedServiceIdentityProperty (ManagedServiceIdentity, UserAssignedIdentity, ManagedServiceIdentityType) in 2026-03-01-preview and 2026-05-01-preview. The Python TCGC linter incorrectly flags this as a cross-version duplicate even though it's the same canonical common-types model. Suppressed pending TCGC fix."
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
