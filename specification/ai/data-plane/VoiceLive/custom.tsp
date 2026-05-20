@@ -532,6 +532,65 @@ model AzureAvatarVoiceSyncVoice extends AzureVoice {
   volume?: string;
 }
 
+/** Supported voice names for the Azure realtime native voice type. */
+@added(Versions.v2026_06_01_preview)
+union AzureRealtimeNativeVoiceName {
+  string,
+
+  /** Aarti voice. */
+  aarti: "aarti",
+
+  /** Andrew voice. */
+  andrew: "andrew",
+
+  /** Ava voice. */
+  ava: "ava",
+
+  /** Denise voice. */
+  denise: "denise",
+
+  /** Diya voice. */
+  diya: "diya",
+
+  /** Elsa voice. */
+  elsa: "elsa",
+
+  /** Florian voice. */
+  florian: "florian",
+
+  /** Francisca voice. */
+  francisca: "francisca",
+
+  /** Meera voice. */
+  meera: "meera",
+
+  /** Xiaoxiao voice. */
+  xiaoxiao: "xiaoxiao",
+
+  /** Yunxi voice. */
+  yunxi: "yunxi",
+
+  /** Ximena voice. */
+  ximena: "ximena",
+}
+
+/**
+ * Azure realtime native voice configuration. These voices are natively
+ * supported by the `azure-realtime` model and offer higher quality speech
+ * synthesis than standard Azure voices. Only valid when using the
+ * `azure-realtime` model.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_06_01_preview)
+@usage(DualUsage)
+model AzureRealtimeNativeVoice {
+  /** The type of the voice. */
+  type: "azure-realtime-native";
+
+  /** The name of the Azure realtime native voice. */
+  name: AzureRealtimeNativeVoiceName;
+}
+
 // --- Top-level Voice union -------------------------------------------------
 
 /** Union of all supported voice configurations. */
@@ -540,6 +599,9 @@ union Voice {
   OAIVoice,
   OpenAIVoice,
   AzureVoice, // includes AzureCustomVoice, AzureStandardVoice, AzurePersonalVoice, AzureAvatarVoiceSyncVoice
+
+  @added(Versions.v2026_06_01_preview)
+  AzureRealtimeNativeVoice,
 }
 
 /** Input audio format types supported. */
