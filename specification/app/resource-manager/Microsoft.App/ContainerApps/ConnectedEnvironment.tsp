@@ -63,13 +63,11 @@ interface ConnectedEnvironments {
   /**
    * Patches a Managed Environment. Only patching of tags is supported currently
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Need operationId to match original swagger"
   @summary("Update connected Environment's properties.")
   @patch(#{ implicitOptionality: false })
   @sharedRoute
   @added(Versions.v2026_01_01)
-  @operationId("ConnectedEnvironments_Update")
-  updateStable is Azure.ResourceManager.Legacy.CustomPatchSync<
+  updateV2 is Azure.ResourceManager.Legacy.CustomPatchSync<
     ConnectedEnvironment,
     PatchModel = ConnectedEnvironmentPatchResource,
     Error = DefaultErrorResponse

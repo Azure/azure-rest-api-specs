@@ -62,7 +62,7 @@ using Microsoft.App;
   "environmentEnvelope"
 );
 @@clientName(
-  ConnectedEnvironments.updateStable::parameters.properties,
+  ConnectedEnvironments.updateV2::parameters.properties,
   "environmentEnvelope"
 );
 @@clientName(
