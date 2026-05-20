@@ -29,11 +29,13 @@ interface WorkloadNetworkSegments {
   deleteSegment is ArmResourceDeleteAsync<WorkloadNetworkSegment>;
 }
 
-@@clientName(WorkloadNetworkSegments.create::parameters.resource,
+@@clientName(
+  WorkloadNetworkSegments.create::parameters.resource,
   "workloadNetworkSegment"
 );
 
-@@clientName(WorkloadNetworkSegments.update::parameters.properties,
+@@clientName(
+  WorkloadNetworkSegments.update::parameters.properties,
   "workloadNetworkSegment"
 );
 

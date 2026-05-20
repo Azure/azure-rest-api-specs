@@ -106,9 +106,11 @@ interface NspAccessRules {
 @@maxLength(NspAccessRule.name, 80);
 @@doc(NspAccessRule.name, "The name of the NSP access rule.");
 @@doc(NspAccessRule.properties, "Properties of the NSP access rule.");
-@@doc(NspAccessRules.createOrUpdate::parameters.resource,
+@@doc(
+  NspAccessRules.createOrUpdate::parameters.resource,
   "Parameters that hold the NspAccessRule resource to be created/updated."
 );
-@@doc(NspAccessRules.reconcile::parameters.body,
+@@doc(
+  NspAccessRules.reconcile::parameters.body,
   "Parameters for NSP access rule reconcile"
 );

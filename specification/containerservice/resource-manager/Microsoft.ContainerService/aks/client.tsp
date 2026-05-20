@@ -9,21 +9,25 @@ using Microsoft.ContainerService;
 @@clientName(Microsoft.ContainerService.IPFamily, "IpFamily", "javascript");
 
 // Java specific renaming for backward compatibility
-@@clientName(ManagedClusterAPIServerAccessProfile,
+@@clientName(
+  ManagedClusterAPIServerAccessProfile,
   "ManagedClusterApiServerAccessProfile",
   "java"
 );
-@@clientName(ManagedClusterHTTPProxyConfig,
+@@clientName(
+  ManagedClusterHTTPProxyConfig,
   "ManagedClusterHttpProxyConfig",
   "java"
 );
 @@clientName(ManagedClusterIngressProfile.gatewayAPI, "gatewayApi", "java");
-@@clientName(ManagedClusterWebAppRoutingGatewayAPIImplementations,
+@@clientName(
+  ManagedClusterWebAppRoutingGatewayAPIImplementations,
   "ManagedClusterWebAppRoutingGatewayApiImplementations",
   "java"
 );
 @@clientName(GatewayAPIIstioEnabled, "GatewayApiIstioEnabled", "java");
-@@clientName(ManagedClusterIngressProfileWebAppRouting.gatewayAPIImplementations,
+@@clientName(
+  ManagedClusterIngressProfileWebAppRouting.gatewayAPIImplementations,
   "gatewayApiImplementations",
   "java"
 );
@@ -45,34 +49,41 @@ using Microsoft.ContainerService;
 @@clientName(LocalDNSServeStale, "LocalDnsServeStale", "java");
 @@clientName(LocalDNSState, "LocalDnsState", "java");
 @@clientName(ManagedClusterAADProfile, "ManagedClusterAadProfile", "java");
-@@clientName(ManagedClusterLoadBalancerProfileOutboundIPPrefixes,
+@@clientName(
+  ManagedClusterLoadBalancerProfileOutboundIPPrefixes,
   "ManagedClusterLoadBalancerProfileOutboundIpPrefixes",
   "java"
 );
-@@clientName(ManagedClusterManagedOutboundIPProfile,
+@@clientName(
+  ManagedClusterManagedOutboundIPProfile,
   "ManagedClusterManagedOutboundIpProfile",
   "java"
 );
-@@clientName(ManagedClusterNATGatewayProfile,
+@@clientName(
+  ManagedClusterNATGatewayProfile,
   "ManagedClusterNatGatewayProfile",
   "java"
 );
-@@clientName(ManagedClusterOIDCIssuerProfile,
+@@clientName(
+  ManagedClusterOIDCIssuerProfile,
   "ManagedClusterOidcIssuerProfile",
   "java"
 );
 @@clientName(ManagedClusterSKU, "ManagedClusterSku", "java");
 @@clientName(ManagedClusterSKUName, "ManagedClusterSkuName", "java");
 @@clientName(ManagedClusterSKUTier, "ManagedClusterSkuTier", "java");
-@@clientName(ManagedClusterStorageProfileBlobCSIDriver,
+@@clientName(
+  ManagedClusterStorageProfileBlobCSIDriver,
   "ManagedClusterStorageProfileBlobCsiDriver",
   "java"
 );
-@@clientName(ManagedClusterStorageProfileDiskCSIDriver,
+@@clientName(
+  ManagedClusterStorageProfileDiskCSIDriver,
   "ManagedClusterStorageProfileDiskCsiDriver",
   "java"
 );
-@@clientName(ManagedClusterStorageProfileFileCSIDriver,
+@@clientName(
+  ManagedClusterStorageProfileFileCSIDriver,
   "ManagedClusterStorageProfileFileCsiDriver",
   "java"
 );
@@ -80,25 +91,29 @@ using Microsoft.ContainerService;
 @@clientName(PodIPAllocationMode, "PodIpAllocationMode", "java");
 
 @@clientName(Microsoft.ContainerService, "ContainerServiceClient", "python");
-@@clientName(ManagedClusterLoadBalancerProfileManagedOutboundIPs.countIPv6,
+@@clientName(
+  ManagedClusterLoadBalancerProfileManagedOutboundIPs.countIPv6,
   "count_ipv6",
   "python"
 );
 
-@@clientName(ManagedClusterPodIdentityProvisioningError.error,
+@@clientName(
+  ManagedClusterPodIdentityProvisioningError.error,
   "ErrorDetail",
   "csharp"
 );
 @@clientName(Code, "ContainerServiceStateCode", "csharp");
 @@clientName(Format, "KubeConfigFormat", "csharp");
 @@clientName(Expander, "AutoScaleExpander", "csharp");
-@@clientName(KubeletConfig.containerLogMaxSizeMB,
+@@clientName(
+  KubeletConfig.containerLogMaxSizeMB,
   "ContainerLogMaxSizeInMB",
   "csharp"
 );
 @@clientName(LinuxOSConfig.swapFileSizeMB, "SwapFileSizeInMB", "csharp");
 @@clientName(ManagedClusterAADProfile, "ManagedClusterAadProfile", "csharp");
-@@clientName(ManagedClusterAADProfile.adminGroupObjectIDs,
+@@clientName(
+  ManagedClusterAADProfile.adminGroupObjectIDs,
   "AdminGroupObjectIds",
   "csharp"
 );
@@ -106,22 +121,26 @@ using Microsoft.ContainerService;
 @@clientName(ManagedClusterAADProfile.serverAppID, "ServerAppId", "csharp");
 @@clientName(ManagedClusterAADProfile.tenantID, "TenantId", "csharp");
 @@clientName(ManagedClusterAADProfile.managed, "IsManagedAadEnabled", "csharp");
-@@clientName(ManagedClusterAADProfile.enableAzureRBAC,
+@@clientName(
+  ManagedClusterAADProfile.enableAzureRBAC,
   "IsAzureRbacEnabled",
   "csharp"
 );
-@@clientName(ConnectionStatus,
+@@clientName(
+  ConnectionStatus,
   "ContainerServicePrivateLinkServiceConnectionStatus",
   "csharp"
 );
 @@clientName(CredentialResults, "ManagedClusterCredentials", "csharp");
 @@clientName(CredentialResult, "ManagedClusterCredential", "csharp");
 @@clientName(LicenseType, "WindowsVmLicenseType", "csharp");
-@@clientName(ManagedClusterPropertiesAutoScalerProfile,
+@@clientName(
+  ManagedClusterPropertiesAutoScalerProfile,
   "ManagedClusterAutoScalerProfile",
   "csharp"
 );
-@@clientName(ManagedClusterPropertiesAutoScalerProfile.`scan-interval`,
+@@clientName(
+  ManagedClusterPropertiesAutoScalerProfile.`scan-interval`,
   "ScanIntervalInSeconds",
   "csharp"
 );
@@ -129,11 +148,13 @@ using Microsoft.ContainerService;
 @@clientName(SnapshotProperties.enableFIPS, "IsFipsEnabled", "csharp");
 @@clientName(SnapshotProperties.osSku, "OSSku", "csharp");
 @@clientName(SnapshotProperties.osType, "OSType", "csharp");
-@@clientName(PrivateLinkResource,
+@@clientName(
+  PrivateLinkResource,
   "ContainerServicePrivateLinkResourceData",
   "csharp"
 );
-@@clientName(PrivateLinkResource.privateLinkServiceID,
+@@clientName(
+  PrivateLinkResource.privateLinkServiceID,
   "PrivateLinkServiceId",
   "csharp"
 );
@@ -146,48 +167,59 @@ using Microsoft.ContainerService;
 @@clientName(TimeSpan.start, "StartOn", "csharp");
 @@clientName(TimeSpan.end, "EndOn", "csharp");
 @@clientName(KubeletConfig.failSwapOn, "ShouldFailStartWithSwapOn", "csharp");
-@@clientName(ManagedClusterStorageProfile.diskCSIDriver,
+@@clientName(
+  ManagedClusterStorageProfile.diskCSIDriver,
   "DiskCsiDriver",
   "csharp"
 );
-@@clientName(ManagedClusterStorageProfile.fileCSIDriver,
+@@clientName(
+  ManagedClusterStorageProfile.fileCSIDriver,
   "FileCsiDriver",
   "csharp"
 );
-@@clientName(ManagedClusterStorageProfile.blobCSIDriver,
+@@clientName(
+  ManagedClusterStorageProfile.blobCSIDriver,
   "BlobCsiDriver",
   "csharp"
 );
-@@clientName(ManagedClusterStorageProfileDiskCSIDriver,
+@@clientName(
+  ManagedClusterStorageProfileDiskCSIDriver,
   "ManagedClusterStorageProfileDiskCsiDriver",
   "csharp"
 );
-@@clientName(ManagedClusterStorageProfileDiskCSIDriver.enabled,
+@@clientName(
+  ManagedClusterStorageProfileDiskCSIDriver.enabled,
   "IsDiskCsiDriverEnabled",
   "csharp"
 );
-@@clientName(ManagedClusterStorageProfileFileCSIDriver,
+@@clientName(
+  ManagedClusterStorageProfileFileCSIDriver,
   "ManagedClusterStorageProfileFileCsiDriver",
   "csharp"
 );
-@@clientName(ManagedClusterStorageProfileFileCSIDriver.enabled,
+@@clientName(
+  ManagedClusterStorageProfileFileCSIDriver.enabled,
   "IsFileCsiDriverEnabled",
   "csharp"
 );
-@@clientName(ManagedClusterStorageProfileSnapshotController.enabled,
+@@clientName(
+  ManagedClusterStorageProfileSnapshotController.enabled,
   "IsSnapshotControllerEnabled",
   "csharp"
 );
-@@clientName(ManagedClusterStorageProfileBlobCSIDriver,
+@@clientName(
+  ManagedClusterStorageProfileBlobCSIDriver,
   "ManagedClusterStorageProfileBlobCsiDriver",
   "csharp"
 );
-@@clientName(ManagedClusterStorageProfileBlobCSIDriver.enabled,
+@@clientName(
+  ManagedClusterStorageProfileBlobCSIDriver.enabled,
   "IsBlobCsiDriverEnabled",
   "csharp"
 );
 @@clientName(KubeletConfig.cpuCfsQuota, "IsCpuCfsQuotaEnabled", "csharp");
-@@clientName(OutboundEnvironmentEndpointCollection,
+@@clientName(
+  OutboundEnvironmentEndpointCollection,
   "OutboundEnvironmentEndpointListResult",
   "csharp"
 );
@@ -199,75 +231,92 @@ using Microsoft.ContainerService;
 @@alternateType(ManagedClusterAADProfile.serverAppID, uuid, "csharp");
 @@alternateType(ManagedClusterAADProfile.clientAppID, uuid, "csharp");
 @@alternateType(ManagedClusterAADProfile.tenantID, uuid, "csharp");
-@@clientName(ManagedClusterSecurityProfileDefenderSecurityMonitoring.enabled,
+@@clientName(
+  ManagedClusterSecurityProfileDefenderSecurityMonitoring.enabled,
   "IsSecurityMonitoringEnabled",
   "csharp"
 );
-@@clientName(AzureKeyVaultKms,
+@@clientName(
+  AzureKeyVaultKms,
   "ManagedClusterSecurityProfileKeyVaultKms",
   "csharp"
 );
 @@clientName(AzureKeyVaultKms.enabled, "IsEnabled", "csharp");
-@@clientName(KeyVaultNetworkAccessTypes,
+@@clientName(
+  KeyVaultNetworkAccessTypes,
   "ManagedClusterKeyVaultNetworkAccessType",
   "csharp"
 );
-@@clientName(ManagedClusterOIDCIssuerProfile,
+@@clientName(
+  ManagedClusterOIDCIssuerProfile,
   "ManagedClusterOidcIssuerProfile",
   "csharp"
 );
 @@clientName(ManagedClusterOIDCIssuerProfile.enabled, "IsEnabled", "csharp");
-@@clientName(ManagedClusterOIDCIssuerProfile.issuerURL,
+@@clientName(
+  ManagedClusterOIDCIssuerProfile.issuerURL,
   "IssuerUriInfo",
   "csharp"
 );
-@@clientName(AbsoluteMonthlySchedule,
+@@clientName(
+  AbsoluteMonthlySchedule,
   "ContainerServiceMaintenanceAbsoluteMonthlySchedule",
   "csharp"
 );
-@@clientName(RelativeMonthlySchedule,
+@@clientName(
+  RelativeMonthlySchedule,
   "ContainerServiceMaintenanceRelativeMonthlySchedule",
   "csharp"
 );
-@@clientName(Type,
+@@clientName(
+  Type,
   "ContainerServiceMaintenanceRelativeMonthlyScheduleWeekIndex",
   "csharp"
 );
 @@clientName(Schedule, "ContainerServiceMaintenanceSchedule", "csharp");
-@@clientName(WeeklySchedule,
+@@clientName(
+  WeeklySchedule,
   "ContainerServiceMaintenanceWeeklySchedule",
   "csharp"
 );
-@@clientName(BackendPoolType,
+@@clientName(
+  BackendPoolType,
   "ManagedClusterLoadBalancerBackendPoolType",
   "csharp"
 );
-@@clientName(ManagedClusterAzureMonitorProfileKubeStateMetrics,
+@@clientName(
+  ManagedClusterAzureMonitorProfileKubeStateMetrics,
   "ManagedClusterMonitorProfileKubeStateMetrics",
   "csharp"
 );
-@@clientName(ManagedClusterAzureMonitorProfileMetrics,
+@@clientName(
+  ManagedClusterAzureMonitorProfileMetrics,
   "ManagedClusterMonitorProfileMetrics",
   "csharp"
 );
-@@clientName(ManagedClusterAzureMonitorProfileMetrics.enabled,
+@@clientName(
+  ManagedClusterAzureMonitorProfileMetrics.enabled,
   "IsEnabled",
   "csharp"
 );
-@@clientName(ManagedClusterSecurityProfileImageCleaner.enabled,
+@@clientName(
+  ManagedClusterSecurityProfileImageCleaner.enabled,
   "IsEnabled",
   "csharp"
 );
-@@clientName(ManagedClusterWorkloadAutoScalerProfileVerticalPodAutoscaler,
+@@clientName(
+  ManagedClusterWorkloadAutoScalerProfileVerticalPodAutoscaler,
   "ManagedClusterVerticalPodAutoscaler",
   "csharp"
 );
-@@clientName(ManagedClusterWorkloadAutoScalerProfileVerticalPodAutoscaler.enabled,
+@@clientName(
+  ManagedClusterWorkloadAutoScalerProfileVerticalPodAutoscaler.enabled,
   "IsVpaEnabled",
   "csharp"
 );
 @@clientName(AddonAutoscaling, "ManagedClusterAddonAutoscaling", "csharp");
-@@clientName(NodeOSUpgradeChannel,
+@@clientName(
+  NodeOSUpgradeChannel,
   "ManagedClusterNodeOSUpgradeChannel",
   "csharp"
 );
@@ -275,11 +324,13 @@ using Microsoft.ContainerService;
 @@clientName(Protocol, "AgentPoolNetworkPortProtocol", "csharp");
 @@clientName(Protocol.TCP, "Tcp", "csharp");
 @@clientName(Protocol.UDP, "Udp", "csharp");
-@@alternateType(ManagedClusterAgentPoolProfileProperties.capacityReservationGroupID,
+@@alternateType(
+  ManagedClusterAgentPoolProfileProperties.capacityReservationGroupID,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ManagedClusterAgentPoolProfileProperties.capacityReservationGroupID,
+@@alternateType(
+  ManagedClusterAgentPoolProfileProperties.capacityReservationGroupID,
   armResourceIdentifier,
   "csharp"
 );
@@ -287,100 +338,120 @@ using Microsoft.ContainerService;
 @@clientName(ManagedCluster.identity, "ClusterIdentity", "csharp");
 @@alternateType(Azure.ResourceManager.EntityTagProperty.eTag, eTag, "csharp");
 @@clientName(ManagedClusterProperties.resourceUID, "ResourceId", "csharp");
-@@alternateType(ManagedClusterProperties.resourceUID,
+@@alternateType(
+  ManagedClusterProperties.resourceUID,
   armResourceIdentifier,
   "csharp"
 );
-@@clientName(ManagedClusterProperties.diskEncryptionSetID,
+@@clientName(
+  ManagedClusterProperties.diskEncryptionSetID,
   "DiskEncryptionSetId",
   "csharp"
 );
 @@clientName(IstioEgressGateway.enabled, "IsEnabled", "csharp");
 @@clientName(IstioIngressGateway.enabled, "IsEnabled", "csharp");
-@@clientName(ManagedClusterWorkloadAutoScalerProfileKeda.enabled,
+@@clientName(
+  ManagedClusterWorkloadAutoScalerProfileKeda.enabled,
   "IsKedaEnabled",
   "csharp"
 );
-@@clientName(ManagedClusterSecurityProfileWorkloadIdentity.enabled,
+@@clientName(
+  ManagedClusterSecurityProfileWorkloadIdentity.enabled,
   "IsWorkloadIdentityEnabled",
   "csharp"
 );
-@@clientName(AgentPoolWindowsProfile.disableOutboundNat,
+@@clientName(
+  AgentPoolWindowsProfile.disableOutboundNat,
   "IsOutboundNatDisabled",
   "csharp"
 );
 @@clientName(ManagedNamespace, "ManagedClusterNamespace", "csharp");
-@@clientName(NamespaceProperties,
+@@clientName(
+  NamespaceProperties,
   "ManagedClusterNamespaceProperties",
   "csharp"
 );
 @@clientName(AdoptionPolicy, "NamespaceAdoptionPolicy", "csharp");
 @@clientName(AdvancedNetworking, "ManagedClusterAdvancedNetworking", "csharp");
 @@clientName(AdvancedNetworking.enabled, "IsEnabled", "csharp");
-@@clientName(AdvancedNetworkingPerformance,
+@@clientName(
+  AdvancedNetworkingPerformance,
   "ManagedClusterAdvancedNetworkingPerformance",
   "csharp"
 );
-@@clientName(AccelerationMode,
+@@clientName(
+  AccelerationMode,
   "ManagedClusterAdvancedNetworkingAccelerationMode",
   "csharp"
 );
-@@clientName(AdvancedNetworkingSecurity,
+@@clientName(
+  AdvancedNetworkingSecurity,
   "ManagedClusterAdvancedNetworkingSecurity",
   "csharp"
 );
-@@clientName(AdvancedNetworkPolicies,
+@@clientName(
+  AdvancedNetworkPolicies,
   "ManagedClusterAdvancedNetworkPolicy",
   "csharp"
 );
 @@clientName(AdvancedNetworkPolicies.FQDN, "Fqdn", "csharp");
-@@clientName(AdvancedNetworkingObservability.enabled,
+@@clientName(
+  AdvancedNetworkingObservability.enabled,
   "IsObservabilityEnabled",
   "csharp"
 );
-@@clientName(AgentPoolDeleteMachinesParameter,
+@@clientName(
+  AgentPoolDeleteMachinesParameter,
   "AgentPoolDeleteMachinesContent",
   "csharp"
 );
 @@clientName(AgentPoolSecurityProfile.enableVTPM, "IsVtpmEnabled", "csharp");
-@@clientName(AgentPoolSecurityProfile.enableSecureBoot,
+@@clientName(
+  AgentPoolSecurityProfile.enableSecureBoot,
   "IsSecureBootEnabled",
   "csharp"
 );
 @@clientName(AgentPoolSSHAccess, "AgentPoolSshAccess", "csharp");
-@@clientName(ManagedClusterStaticEgressGatewayProfile.enabled,
+@@clientName(
+  ManagedClusterStaticEgressGatewayProfile.enabled,
   "IsStaticEgressGatewayAddonEnabled",
   "csharp"
 );
 @@clientName(DeletePolicy, "NamespaceDeletePolicy", "csharp");
 @@clientName(GPUProfile, "AgentPoolGpuProfile", "csharp");
 @@clientName(GPUDriver, "AgentPoolGpuDriver", "csharp");
-@@clientName(NamespaceProvisioningState,
+@@clientName(
+  NamespaceProvisioningState,
   "ManagedClusterNamespaceProvisioningState",
   "csharp"
 );
 @@clientName(NetworkPolicies, "NamespaceNetworkPolicies", "csharp");
 @@clientName(PolicyRule, "NamespaceNetworkPolicyRule", "csharp");
 @@clientName(ResourceQuota, "NamespaceResourceQuota", "csharp");
-@@clientName(RestrictionLevel,
+@@clientName(
+  RestrictionLevel,
   "ManagedClusterNodeResourceGroupRestrictionLevel",
   "csharp"
 );
 @@clientName(VirtualMachineNodes, "AgentPoolVirtualMachineNodes", "csharp");
-@@clientName(ManagedClusterAIToolchainOperatorProfile.enabled,
+@@clientName(
+  ManagedClusterAIToolchainOperatorProfile.enabled,
   "IsAIToolchainOperatorEnabled",
   "csharp"
 );
-@@clientName(ManagedClusterCostAnalysis.enabled,
+@@clientName(
+  ManagedClusterCostAnalysis.enabled,
   "IsCostAnalysisEnabled",
   "csharp"
 );
 @@clientName(AdvancedNetworkingSecurity.enabled, "IsEnabled", "csharp");
-@@clientName(ManagedClusterIngressProfileWebAppRouting.enabled,
+@@clientName(
+  ManagedClusterIngressProfileWebAppRouting.enabled,
   "IsEnabled",
   "csharp"
 );
-@@clientName(ContainerServiceNetworkProfile.ipFamilies,
+@@clientName(
+  ContainerServiceNetworkProfile.ipFamilies,
   "NetworkIPFamilies",
   "csharp"
 );
@@ -391,22 +462,26 @@ using Microsoft.ContainerService;
 @@clientName(OSDiskType, "ContainerServiceOSDiskType", "csharp");
 @@clientName(OSSKU, "ContainerServiceOSSku", "csharp");
 @@clientName(OSSKU.CBLMariner, "CblMariner", "csharp");
-@@clientName(UserAssignedIdentity,
+@@clientName(
+  UserAssignedIdentity,
   "ContainerServiceUserAssignedIdentity",
   "csharp"
 );
 @@clientName(AgentPool, "ContainerServiceAgentPool", "csharp");
-@@clientName(MaintenanceConfiguration,
+@@clientName(
+  MaintenanceConfiguration,
   "ContainerServiceMaintenanceConfiguration",
   "csharp"
 );
 @@clientName(ManagedCluster, "ContainerServiceManagedCluster", "csharp");
-@@clientName(PublicNetworkAccess,
+@@clientName(
+  PublicNetworkAccess,
   "ContainerServicePublicNetworkAccess",
   "csharp"
 );
 @@clientName(CreationData, "ContainerServiceCreationData", "csharp");
-@@clientName(EndpointDependency,
+@@clientName(
+  EndpointDependency,
   "ContainerServiceEndpointDependency",
   "csharp"
 );
@@ -417,18 +492,21 @@ using Microsoft.ContainerService;
 @@clientName(NetworkMode, "ContainerServiceNetworkMode", "csharp");
 @@clientName(NetworkPlugin, "ContainerServiceNetworkPlugin", "csharp");
 @@clientName(NetworkPolicy, "ContainerServiceNetworkPolicy", "csharp");
-@@clientName(OutboundEnvironmentEndpoint,
+@@clientName(
+  OutboundEnvironmentEndpoint,
   "ContainerServiceOutboundEnvironmentEndpoint",
   "csharp"
 );
 @@clientName(OutboundType, "ContainerServiceOutboundType", "csharp");
 @@clientName(OutboundType.managedNATGateway, "ManagedNatGateway", "csharp");
 @@clientName(OutboundType.managedNATGatewayV2, "ManagedNatGatewayV2", "csharp");
-@@clientName(OutboundType.userAssignedNATGateway,
+@@clientName(
+  OutboundType.userAssignedNATGateway,
   "UserAssignedNatGateway",
   "csharp"
 );
-@@clientName(PrivateLinkResourcesListResult,
+@@clientName(
+  PrivateLinkResourcesListResult,
   "ContainerServicePrivateLinkResourcesListResult",
   "csharp"
 );
@@ -440,19 +518,23 @@ using Microsoft.ContainerService;
 @@clientName(MaintenanceWindow, "ContainerServiceMaintenanceWindow", "csharp");
 @@clientName(NetworkPluginMode, "ContainerServiceNetworkPluginMode", "csharp");
 @@clientName(TrustedAccessRole, "ContainerServiceTrustedAccessRole", "csharp");
-@@clientName(TrustedAccessRoleBinding,
+@@clientName(
+  TrustedAccessRoleBinding,
   "ContainerServiceTrustedAccessRoleBinding",
   "csharp"
 );
-@@clientName(TrustedAccessRoleRule,
+@@clientName(
+  TrustedAccessRoleRule,
   "ContainerServiceTrustedAccessRoleRule",
   "csharp"
 );
-@@clientName(TrustedAccessRoleRule.nonResourceURLs,
+@@clientName(
+  TrustedAccessRoleRule.nonResourceURLs,
   "NonResourceUrls",
   "csharp"
 );
-@@clientName(TrustedAccessRoleBindingProvisioningState,
+@@clientName(
+  TrustedAccessRoleBindingProvisioningState,
   "ContainerServiceTrustedAccessRoleBindingProvisioningState",
   "csharp"
 );
@@ -463,89 +545,110 @@ using Microsoft.ContainerService;
 @@clientName(MachineIpAddress.ip, "IP", "csharp");
 @@clientName(IPFamily, "ContainerServiceIPFamily", "csharp");
 @@clientName(JWTAuthenticator, "ManagedClusterJwtAuthenticator", "csharp");
-@@clientName(JWTAuthenticatorProperties,
+@@clientName(
+  JWTAuthenticatorProperties,
   "ManagedClusterJwtAuthenticatorProperties",
   "csharp"
 );
 @@clientName(LoadBalancer, "ManagedClusterLoadBalancer", "csharp");
-@@clientName(LoadBalancerProperties,
+@@clientName(
+  LoadBalancerProperties,
   "ManagedClusterLoadBalancerProperties",
   "csharp"
 );
-@@clientName(LabelSelector,
+@@clientName(
+  LabelSelector,
   "ManagedClusterLoadBalancerLabelSelector",
   "csharp"
 );
-@@clientName(LabelSelectorRequirement,
+@@clientName(
+  LabelSelectorRequirement,
   "ManagedClusterLoadBalancerLabelSelectorRequirement",
   "csharp"
 );
-@@clientName(ManagedClusterAgentPoolProfileProperties.type,
+@@clientName(
+  ManagedClusterAgentPoolProfileProperties.type,
   "AgentPoolType",
   "csharp"
 );
-@@clientName(ManagedClusterAgentPoolProfileProperties.osType,
+@@clientName(
+  ManagedClusterAgentPoolProfileProperties.osType,
   "OSType",
   "csharp"
 );
-@@clientName(ManagedClusterAgentPoolProfileProperties.enableFIPS,
+@@clientName(
+  ManagedClusterAgentPoolProfileProperties.enableFIPS,
   "IsFipsEnabled",
   "csharp"
 );
-@@clientName(ManagedClusterAgentPoolProfileProperties.enableAutoScaling,
+@@clientName(
+  ManagedClusterAgentPoolProfileProperties.enableAutoScaling,
   "IsAutoScalingEnabled",
   "csharp"
 );
-@@clientName(ManagedClusterAgentPoolProfileProperties.capacityReservationGroupID,
+@@clientName(
+  ManagedClusterAgentPoolProfileProperties.capacityReservationGroupID,
   "CapacityReservationGroupId",
   "csharp"
 );
-@@clientName(ManagedClusterAgentPoolProfileProperties.hostGroupID,
+@@clientName(
+  ManagedClusterAgentPoolProfileProperties.hostGroupID,
   "HostGroupId",
   "csharp"
 );
-@@clientName(ManagedClusterAgentPoolProfileProperties.nodePublicIPPrefixID,
+@@clientName(
+  ManagedClusterAgentPoolProfileProperties.nodePublicIPPrefixID,
   "NodePublicIPPrefixId",
   "csharp"
 );
-@@clientName(ManagedClusterAgentPoolProfileProperties.enableNodePublicIP,
+@@clientName(
+  ManagedClusterAgentPoolProfileProperties.enableNodePublicIP,
   "IsNodePublicIpEnabled",
   "csharp"
 );
-@@clientName(ManagedClusterAgentPoolProfileProperties.podSubnetID,
+@@clientName(
+  ManagedClusterAgentPoolProfileProperties.podSubnetID,
   "PodSubnetId",
   "csharp"
 );
-@@clientName(ManagedClusterAgentPoolProfileProperties.proximityPlacementGroupID,
+@@clientName(
+  ManagedClusterAgentPoolProfileProperties.proximityPlacementGroupID,
   "ProximityPlacementGroupId",
   "csharp"
 );
-@@clientName(ManagedClusterAgentPoolProfileProperties.vnetSubnetID,
+@@clientName(
+  ManagedClusterAgentPoolProfileProperties.vnetSubnetID,
   "VnetSubnetId",
   "csharp"
 );
-@@clientName(ManagedClusterAgentPoolProfileProperties.enableUltraSSD,
+@@clientName(
+  ManagedClusterAgentPoolProfileProperties.enableUltraSSD,
   "IsUltraSsdEnabled",
   "csharp"
 );
-@@clientName(ManagedClusterAgentPoolProfileProperties.enableEncryptionAtHost,
+@@clientName(
+  ManagedClusterAgentPoolProfileProperties.enableEncryptionAtHost,
   "IsEncryptionAtHostEnabled",
   "csharp"
 );
-@@clientName(ManagedClusterAgentPoolProfileProperties.localDNSProfile,
+@@clientName(
+  ManagedClusterAgentPoolProfileProperties.localDNSProfile,
   "LocalDnsProfile",
   "csharp"
 );
-@@clientName(ManagedClusterAgentPoolProfileProperties.osDiskSizeGB,
+@@clientName(
+  ManagedClusterAgentPoolProfileProperties.osDiskSizeGB,
   "OSDiskSizeInGB",
   "csharp"
 );
-@@clientName(ManagedClusterAgentPoolProfileProperties.osDiskType,
+@@clientName(
+  ManagedClusterAgentPoolProfileProperties.osDiskType,
   "OSDiskType",
   "csharp"
 );
 @@clientName(ManagedClusterAgentPoolProfileProperties.osSKU, "OSSku", "csharp");
-@@clientName(ManagedClusterAgentPoolProfileProperties.enableOSDiskFullCaching,
+@@clientName(
+  ManagedClusterAgentPoolProfileProperties.enableOSDiskFullCaching,
   "IsOSDiskFullCachingEnabled",
   "csharp"
 );
@@ -556,18 +659,21 @@ using Microsoft.ContainerService;
 @@clientName(MachineOSProfile.osDiskSizeGB, "OSDiskSizeInGB", "csharp");
 @@clientName(MachineOSProfile.osDiskType, "OSDiskType", "csharp");
 @@clientName(MachineOSProfile.enableFIPS, "IsFipsEnabled", "csharp");
-@@clientName(AgentPoolArtifactStreamingProfile.enabled,
+@@clientName(
+  AgentPoolArtifactStreamingProfile.enabled,
   "IsArtifactStreamingEnabled",
   "csharp"
 );
 @@clientName(MachineNetworkProperties.ipAddresses, "IPAddresses", "csharp");
 @@clientName(MachineNetworkProperties.vnetSubnetID, "VnetSubnetId", "csharp");
 @@clientName(MachineNetworkProperties.podSubnetID, "PodSubnetId", "csharp");
-@@clientName(MachineNetworkProperties.nodePublicIPPrefixID,
+@@clientName(
+  MachineNetworkProperties.nodePublicIPPrefixID,
   "NodePublicIpPrefixId",
   "csharp"
 );
-@@clientName(MachineNetworkProperties.enableNodePublicIP,
+@@clientName(
+  MachineNetworkProperties.enableNodePublicIP,
   "IsNodePublicIpEnabled",
   "csharp"
 );
@@ -578,85 +684,103 @@ using Microsoft.ContainerService;
 @@clientName(GPUInstanceProfile.MIG4g, "Mig4G", "csharp");
 @@clientName(GPUInstanceProfile.MIG7g, "Mig7G", "csharp");
 @@clientName(LocalDNSProfile, "LocalDnsProfile", "csharp");
-@@clientName(MaintenanceConfigurationProperties.timeInWeek,
+@@clientName(
+  MaintenanceConfigurationProperties.timeInWeek,
   "TimesInWeek",
   "csharp"
 );
-@@clientName(MaintenanceConfigurationProperties.notAllowedTime,
+@@clientName(
+  MaintenanceConfigurationProperties.notAllowedTime,
   "NotAllowedTimes",
   "csharp"
 );
-@@clientName(ManagedClusterAPIServerAccessProfile,
+@@clientName(
+  ManagedClusterAPIServerAccessProfile,
   "ManagedClusterApiServerAccessProfile",
   "csharp"
 );
-@@clientName(ManagedClusterAPIServerAccessProfile.enablePrivateClusterPublicFQDN,
+@@clientName(
+  ManagedClusterAPIServerAccessProfile.enablePrivateClusterPublicFQDN,
   "IsPrivateClusterPublicFqdnEnabled",
   "csharp"
 );
-@@clientName(ManagedClusterAPIServerAccessProfile.privateDNSZone,
+@@clientName(
+  ManagedClusterAPIServerAccessProfile.privateDNSZone,
   "PrivateDnsZone",
   "csharp"
 );
 @@clientName(ManagedClusterProperties.privateFQDN, "PrivateFqdn", "csharp");
-@@clientName(ManagedClusterProperties.azurePortalFQDN,
+@@clientName(
+  ManagedClusterProperties.azurePortalFQDN,
   "AzurePortalFqdn",
   "csharp"
 );
 @@clientName(ManagedClusterProperties.enableRBAC, "IsRbacEnabled", "csharp");
 @@clientName(ManagedClusterProperties.enableFIPS, "IsFipsEnabled", "csharp");
-@@clientName(ManagedClusterProperties.disableLocalAccounts,
+@@clientName(
+  ManagedClusterProperties.disableLocalAccounts,
   "IsLocalAccountsDisabled",
   "csharp"
 );
-@@clientName(ManagedClusterHostedSystemProfile.enabled,
+@@clientName(
+  ManagedClusterHostedSystemProfile.enabled,
   "IsHostedSystemAddonsEnabled",
   "csharp"
 );
 @@clientName(ManagedClusterSKU, "ManagedClusterSku", "csharp");
 @@clientName(ManagedClusterSKUName, "ManagedClusterSkuName", "csharp");
 @@clientName(ManagedClusterSKUTier, "ManagedClusterSkuTier", "csharp");
-@@clientName(PrivateEndpointConnection,
+@@clientName(
+  PrivateEndpointConnection,
   "ContainerServicePrivateEndpointConnection",
   "csharp"
 );
-@@clientName(PrivateEndpointConnectionProperties,
+@@clientName(
+  PrivateEndpointConnectionProperties,
   "ContainerServicePrivateEndpointConnectionProperties",
   "csharp"
 );
-@@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+@@clientName(
+  PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
   "ConnectionState",
   "csharp"
 );
 @@alternateType(PrivateEndpoint.id, armResourceIdentifier, "csharp");
-@@alternateType(ManagedCluster.extendedLocation,
+@@alternateType(
+  ManagedCluster.extendedLocation,
   Azure.ResourceManager.CommonTypes.ExtendedLocation,
   "csharp"
 );
 @@alternateType(MachineProperties.eTag, eTag, "csharp");
 @@alternateType(ManagedClusterAgentPoolProfileProperties.eTag, eTag, "csharp");
 @@clientName(ManagedClusters.listByResourceGroup, "GetAll", "csharp");
-@@clientName(ManagedClusters.list,
+@@clientName(
+  ManagedClusters.list,
   "GetContainerServiceManagedClusters",
   "csharp"
 );
-@@clientName(ManagedClusters.listClusterAdminCredentials,
+@@clientName(
+  ManagedClusters.listClusterAdminCredentials,
   "GetClusterAdminCredentials",
   "csharp"
 );
-@@clientName(ManagedClusters.listClusterUserCredentials,
+@@clientName(
+  ManagedClusters.listClusterUserCredentials,
   "GetClusterUserCredentials",
   "csharp"
 );
-@@clientName(ManagedClusters.listClusterMonitoringUserCredentials,
+@@clientName(
+  ManagedClusters.listClusterMonitoringUserCredentials,
   "GetClusterMonitoringUserCredentials",
   "csharp"
 );
-@@clientName(ManagedClusters.listOutboundNetworkDependenciesEndpoints,
+@@clientName(
+  ManagedClusters.listOutboundNetworkDependenciesEndpoints,
   "GetOutboundNetworkDependenciesEndpoints",
   "csharp"
 );
-@@clientName(ManagedClusters.getAvailableAgentPoolVersions,
+@@clientName(
+  ManagedClusters.getAvailableAgentPoolVersions,
   "GetAvailableAgentPoolVersions",
   "csharp"
 );
@@ -688,23 +812,27 @@ namespace Azure.ResourceManager.ContainerService.Models {
     location?: azureLocation;
   }
 
-  @@alternateType(ManagedClusterIdentity.delegatedResources,
+  @@alternateType(
+    ManagedClusterIdentity.delegatedResources,
     Record<ManagedClusterDelegatedIdentity>,
     "csharp"
   );
 }
 @@alternateType(ManagedClusterIdentity.principalId, uuid, "csharp");
 @@alternateType(ManagedClusterIdentity.tenantId, uuid, "csharp");
-@@alternateType(ManagedClusterIdentity.type,
+@@alternateType(
+  ManagedClusterIdentity.type,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType,
   "csharp"
 );
 @@clientName(ManagedClusterIdentity.type, "IdentityType", "csharp");
-@@clientName(ManagedClusterHTTPProxyConfig,
+@@clientName(
+  ManagedClusterHTTPProxyConfig,
   "ManagedClusterHttpProxyConfig",
   "csharp"
 );
-@@clientName(ManagedClusterHTTPProxyConfig.enabled,
+@@clientName(
+  ManagedClusterHTTPProxyConfig.enabled,
   "IsHttpProxyEnabled",
   "csharp"
 );
@@ -715,11 +843,13 @@ namespace Azure.ResourceManager.ContainerService.Models {
 @@clientName(LocalDNSProtocol, "LocalDnsProtocol", "csharp");
 @@clientName(LocalDNSProtocol.PreferUDP, "PreferUdp", "csharp");
 @@clientName(LocalDNSProtocol.ForceTCP, "ForceTcp", "csharp");
-@@clientName(LocalDNSForwardDestination,
+@@clientName(
+  LocalDNSForwardDestination,
   "LocalDnsForwardDestination",
   "csharp"
 );
-@@clientName(LocalDNSForwardDestination.ClusterCoreDNS,
+@@clientName(
+  LocalDNSForwardDestination.ClusterCoreDNS,
   "ClusterCoreDns",
   "csharp"
 );
@@ -730,32 +860,38 @@ namespace Azure.ResourceManager.ContainerService.Models {
 @@clientName(LocalDNSProfile.kubeDNSOverrides, "KubeDnsOverrides", "csharp");
 @@clientName(LocalDNSProfile.vnetDNSOverrides, "VnetDnsOverrides", "csharp");
 @@clientName(LocalDNSOverride, "LocalDnsOverride", "csharp");
-@@clientName(AgentPoolAvailableVersionsPropertiesAgentPoolVersionsItem,
+@@clientName(
+  AgentPoolAvailableVersionsPropertiesAgentPoolVersionsItem,
   "AgentPoolAvailableVersion",
   "csharp"
 );
-@@clientName(AgentPoolAvailableVersionsPropertiesAgentPoolVersionsItem.default,
+@@clientName(
+  AgentPoolAvailableVersionsPropertiesAgentPoolVersionsItem.default,
   "IsDefault",
   "csharp"
 );
 @@clientName(IdentityBinding, "ManagedClusterIdentityBinding", "csharp");
-@@clientName(IdentityBindingProperties,
+@@clientName(
+  IdentityBindingProperties,
   "ManagedClusterIdentityBindingProperties",
   "csharp"
 );
-@@clientName(IdentityBindingProvisioningState,
+@@clientName(
+  IdentityBindingProvisioningState,
   "ManagedClusterIdentityBindingProvisioningState",
   "csharp"
 );
 @@clientName(MeshMembership, "ManagedClusterMeshMembership", "csharp");
-@@clientName(MeshMembershipProperties,
+@@clientName(
+  MeshMembershipProperties,
   "ManagedClusterMeshMembershipProperties",
   "csharp"
 );
 @@clientName(AgentPoolRecentlyUsedVersion.timestamp, "LastUsedOn", "csharp");
 @@clientName(Component, "KubernetesVersionComponent", "csharp");
 @@clientName(ComponentsByRelease, "KubernetesVersionComponents", "csharp");
-@@clientName(ManagedClusterNATGatewayProfile,
+@@clientName(
+  ManagedClusterNATGatewayProfile,
   "ManagedClusterNatGatewayProfile",
   "csharp"
 );
@@ -763,62 +899,76 @@ namespace Azure.ResourceManager.ContainerService.Models {
 @@clientName(DriverType, "AgentPoolGpuDriverType", "csharp");
 @@clientName(DriverType.GRID, "Grid", "csharp");
 @@clientName(DriverType.CUDA, "Cuda", "csharp");
-@@clientName(InfrastructureEncryption,
+@@clientName(
+  InfrastructureEncryption,
   "KubernetesResourceObjectInfrastructureEncryption",
   "csharp"
 );
 @@clientName(IpvsScheduler, "ContainerServiceNetworkIpvsScheduler", "csharp");
-@@clientName(ContainerServiceNetworkProfileKubeProxyConfigIpvsConfig.tcpTimeoutSeconds,
+@@clientName(
+  ContainerServiceNetworkProfileKubeProxyConfigIpvsConfig.tcpTimeoutSeconds,
   "TcpTimeoutInSeconds",
   "csharp"
 );
-@@clientName(ContainerServiceNetworkProfileKubeProxyConfigIpvsConfig.tcpFinTimeoutSeconds,
+@@clientName(
+  ContainerServiceNetworkProfileKubeProxyConfigIpvsConfig.tcpFinTimeoutSeconds,
   "TcpFinTimeoutInSeconds",
   "csharp"
 );
-@@clientName(ContainerServiceNetworkProfileKubeProxyConfigIpvsConfig.udpTimeoutSeconds,
+@@clientName(
+  ContainerServiceNetworkProfileKubeProxyConfigIpvsConfig.udpTimeoutSeconds,
   "UdpTimeoutInSeconds",
   "csharp"
 );
-@@clientName(JWTAuthenticatorClaimMappings,
+@@clientName(
+  JWTAuthenticatorClaimMappings,
   "ManagedClusterJwtAuthenticatorClaimMappings",
   "csharp"
 );
-@@clientName(JWTAuthenticatorExtraClaimMappingExpression,
+@@clientName(
+  JWTAuthenticatorExtraClaimMappingExpression,
   "ManagedClusterJwtAuthenticatorExtraClaimMappingExpression",
   "csharp"
 );
-@@clientName(JWTAuthenticatorIssuer,
+@@clientName(
+  JWTAuthenticatorIssuer,
   "ManagedClusterJwtAuthenticatorIssuer",
   "csharp"
 );
-@@clientName(JWTAuthenticatorProvisioningState,
+@@clientName(
+  JWTAuthenticatorProvisioningState,
   "ManagedClusterJwtAuthenticatorProvisioningState",
   "csharp"
 );
-@@clientName(JWTAuthenticatorValidationRule,
+@@clientName(
+  JWTAuthenticatorValidationRule,
   "ManagedClusterJwtAuthenticatorValidationRule",
   "csharp"
 );
-@@clientName(ManagedClusterPodIdentityProvisioningErrorBody,
+@@clientName(
+  ManagedClusterPodIdentityProvisioningErrorBody,
   "ManagedClusterPodIdentityProvisioningErrorDetail",
   "csharp"
 );
 
-@@clientName(TrustedAccessRolesOperationGroup.list,
+@@clientName(
+  TrustedAccessRolesOperationGroup.list,
   "GetTrustedAccessRoles",
   "csharp"
 );
-@@clientName(ManagedClusters.privateLinkResourcesList,
+@@clientName(
+  ManagedClusters.privateLinkResourcesList,
   "GetPrivateLinkResources",
   "csharp"
 );
 @@clientName(ManagedClusters.resetAADProfile, "ResetAadProfile", "csharp");
-@@clientName(NodeProvisioningDefaultNodePools,
+@@clientName(
+  NodeProvisioningDefaultNodePools,
   "NodeProvisioningDefaultNodePool",
   "csharp"
 );
-@@clientName(ManagedClusterWindowsProfile.enableCSIProxy,
+@@clientName(
+  ManagedClusterWindowsProfile.enableCSIProxy,
   "IsCsiProxyEnabled",
   "csharp"
 );
@@ -828,171 +978,212 @@ namespace Azure.ResourceManager.ContainerService.Models {
 @@clientName(Mode.NFTABLES, "NFTables", "csharp");
 @@clientName(PodLinkLocalAccess.IMDS, "Imds", "csharp");
 @@clientName(ProxyRedirectionMechanism.CNIChaining, "CniChaining", "csharp");
-@@clientName(RebalanceLoadBalancersRequestBody,
+@@clientName(
+  RebalanceLoadBalancersRequestBody,
   "RebalanceLoadBalancersContent",
   "csharp"
 );
-@@clientName(SysctlConfig.netIpv4IpLocalPortRange,
+@@clientName(
+  SysctlConfig.netIpv4IpLocalPortRange,
   "NetIpv4IPLocalPortRange",
   "csharp"
 );
-@@clientName(SysctlConfig.netIpv4NeighDefaultGcThresh1,
+@@clientName(
+  SysctlConfig.netIpv4NeighDefaultGcThresh1,
   "NetIPv4NeighDefaultGcThresh1",
   "csharp"
 );
-@@clientName(SysctlConfig.netIpv4NeighDefaultGcThresh2,
+@@clientName(
+  SysctlConfig.netIpv4NeighDefaultGcThresh2,
   "NetIPv4NeighDefaultGcThresh2",
   "csharp"
 );
-@@clientName(SysctlConfig.netIpv4NeighDefaultGcThresh3,
+@@clientName(
+  SysctlConfig.netIpv4NeighDefaultGcThresh3,
   "NetIPv4NeighDefaultGcThresh3",
   "csharp"
 );
-@@clientName(SysctlConfig.netIpv4TcpFinTimeout,
+@@clientName(
+  SysctlConfig.netIpv4TcpFinTimeout,
   "NetIPv4TcpFinTimeout",
   "csharp"
 );
-@@clientName(SysctlConfig.netIpv4TcpkeepaliveIntvl,
+@@clientName(
+  SysctlConfig.netIpv4TcpkeepaliveIntvl,
   "NetIPv4TcpKeepaliveIntvl",
   "csharp"
 );
-@@clientName(SysctlConfig.netIpv4TcpKeepaliveProbes,
+@@clientName(
+  SysctlConfig.netIpv4TcpKeepaliveProbes,
   "NetIPv4TcpKeepaliveProbes",
   "csharp"
 );
-@@clientName(SysctlConfig.netIpv4TcpKeepaliveTime,
+@@clientName(
+  SysctlConfig.netIpv4TcpKeepaliveTime,
   "NetIPv4TcpKeepaliveTime",
   "csharp"
 );
-@@clientName(SysctlConfig.netIpv4TcpMaxSynBacklog,
+@@clientName(
+  SysctlConfig.netIpv4TcpMaxSynBacklog,
   "NetIPv4TcpMaxSynBacklog",
   "csharp"
 );
-@@clientName(SysctlConfig.netIpv4TcpMaxTwBuckets,
+@@clientName(
+  SysctlConfig.netIpv4TcpMaxTwBuckets,
   "NetIPv4TcpMaxTwBuckets",
   "csharp"
 );
-@@clientName(SysctlConfig.netIpv4IpLocalPortRange,
+@@clientName(
+  SysctlConfig.netIpv4IpLocalPortRange,
   "NetIPv4IPLocalPortRange ",
   "csharp"
 );
-@@clientName(SysctlConfig.netIpv4TcpTwReuse,
+@@clientName(
+  SysctlConfig.netIpv4TcpTwReuse,
   "IsNetIpv4TcpTwReuseEnabled",
   "csharp"
 );
 @@clientName(VmState, "ContainerServiceMachineVmState", "csharp");
 @@clientName(WorkloadRuntime.OCIContainer, "OciContainer", "csharp");
 @@clientName(UpgradeStrategy, "AgentPoolUpgradeStrategy", "csharp");
-@@clientName(ManagedClusterSecurityProfileImageIntegrity.enabled,
+@@clientName(
+  ManagedClusterSecurityProfileImageIntegrity.enabled,
   "IsImageIntegrityEnabled",
   "csharp"
 );
-@@clientName(ManagedClusterSecurityProfileNodeRestriction.enabled,
+@@clientName(
+  ManagedClusterSecurityProfileNodeRestriction.enabled,
   "IsNodeRestrictionEnabled",
   "csharp"
 );
-@@clientName(ContainerServiceNetworkProfileKubeProxyConfig.enabled,
+@@clientName(
+  ContainerServiceNetworkProfileKubeProxyConfig.enabled,
   "IsKubeProxyEnabled",
   "csharp"
 );
-@@clientName(ManagedClusterSecurityProfileDefenderSecurityGating.enabled,
+@@clientName(
+  ManagedClusterSecurityProfileDefenderSecurityGating.enabled,
   "IsSecurityGatingEnabled",
   "csharp"
 );
-@@clientName(ManagedClusterIngressDefaultDomainProfile.enabled,
+@@clientName(
+  ManagedClusterIngressDefaultDomainProfile.enabled,
   "IsDefaultDomainEnabled",
   "csharp"
 );
-@@clientName(ManagedClusterIngressProfileApplicationLoadBalancer.enabled,
+@@clientName(
+  ManagedClusterIngressProfileApplicationLoadBalancer.enabled,
   "IsApplicationLoadBalancerEnabled",
   "csharp"
 );
-@@clientName(ManagedClusterAzureMonitorProfileContainerInsights.enabled,
+@@clientName(
+  ManagedClusterAzureMonitorProfileContainerInsights.enabled,
   "IsContainerInsightsEnabled",
   "csharp"
 );
-@@clientName(ManagedClusterAzureMonitorProfileContainerInsights.disableCustomMetrics,
+@@clientName(
+  ManagedClusterAzureMonitorProfileContainerInsights.disableCustomMetrics,
   "IsCustomMetricsDisabled",
   "csharp"
 );
-@@clientName(ManagedClusterAzureMonitorProfileContainerInsights.disablePrometheusMetricsScraping,
+@@clientName(
+  ManagedClusterAzureMonitorProfileContainerInsights.disablePrometheusMetricsScraping,
   "IsPrometheusMetricsScrapingDisabled",
   "csharp"
 );
-@@clientName(ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryMetrics.enabled,
+@@clientName(
+  ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryMetrics.enabled,
   "IsAppMonitoringOpenTelemetryMetricsEnabled",
   "csharp"
 );
-@@clientName(ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryLogsAndTraces.enabled,
+@@clientName(
+  ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryLogsAndTraces.enabled,
   "IsAppMonitoringOpenTelemetryLogsAndTracesEnabled",
   "csharp"
 );
-@@clientName(ManagedClusterAzureMonitorProfileAppMonitoringAutoInstrumentation.enabled,
+@@clientName(
+  ManagedClusterAzureMonitorProfileAppMonitoringAutoInstrumentation.enabled,
   "IsAppMonitoringAutoInstrumentationEnabled",
   "csharp"
 );
-@@clientName(ManagedClusterAzureMonitorProfileAppMonitoringAutoInstrumentation.enabled,
+@@clientName(
+  ManagedClusterAzureMonitorProfileAppMonitoringAutoInstrumentation.enabled,
   "IsAppMonitoringAutoInstrumentationEnabled",
   "csharp"
 );
-@@clientName(LoadBalancerProperties.allowServicePlacement,
+@@clientName(
+  LoadBalancerProperties.allowServicePlacement,
   "IsServicePlacementAllowed",
   "csharp"
 );
 @@clientName(MachineSecurityProfile.enableVTPM, "IsVtpmEnabled", "csharp");
-@@clientName(MachineSecurityProfile.enableSecureBoot,
+@@clientName(
+  MachineSecurityProfile.enableSecureBoot,
   "IsSecureBootEnabled",
   "csharp"
 );
-@@clientName(MachineSecurityProfile.enableEncryptionAtHost,
+@@clientName(
+  MachineSecurityProfile.enableEncryptionAtHost,
   "IsEncryptionAtHostEnabled",
   "csharp"
 );
-@@clientName(ManagedClusterAPIServerAccessProfile.enablePrivateCluster,
+@@clientName(
+  ManagedClusterAPIServerAccessProfile.enablePrivateCluster,
   "IsPrivateClusterEnabled",
   "csharp"
 );
-@@clientName(ManagedClusterAPIServerAccessProfile.enableVnetIntegration,
+@@clientName(
+  ManagedClusterAPIServerAccessProfile.enableVnetIntegration,
   "IsVnetIntegrationEnabled",
   "csharp"
 );
-@@clientName(ManagedClusterAPIServerAccessProfile.disableRunCommand,
+@@clientName(
+  ManagedClusterAPIServerAccessProfile.disableRunCommand,
   "IsRunCommandDisabled",
   "csharp"
 );
-@@clientName(ManagedClusterLoadBalancerProfile.enableMultipleStandardLoadBalancers,
+@@clientName(
+  ManagedClusterLoadBalancerProfile.enableMultipleStandardLoadBalancers,
   "IsMultipleStandardLoadBalancersEnabled",
   "csharp"
 );
-@@clientName(ManagedClusterPodIdentityProfile.allowNetworkPluginKubenet,
+@@clientName(
+  ManagedClusterPodIdentityProfile.allowNetworkPluginKubenet,
   "IsKubenetNetworkPluginAllowed",
   "csharp"
 );
-@@clientName(ManagedClusterProperties.enableNamespaceResources,
+@@clientName(
+  ManagedClusterProperties.enableNamespaceResources,
   "IsNamespaceResourcesEnabled",
   "csharp"
 );
-@@clientName(ManagedClusterPropertiesAutoScalerProfile.`daemonset-eviction-for-empty-nodes`,
+@@clientName(
+  ManagedClusterPropertiesAutoScalerProfile.`daemonset-eviction-for-empty-nodes`,
   "IsDaemonsetEvictionForEmptyNodesEnabled",
   "csharp"
 );
-@@clientName(ManagedClusterPropertiesAutoScalerProfile.`daemonset-eviction-for-occupied-nodes`,
+@@clientName(
+  ManagedClusterPropertiesAutoScalerProfile.`daemonset-eviction-for-occupied-nodes`,
   "IsDaemonsetEvictionForOccupiedNodesEnabled",
   "csharp"
 );
-@@clientName(ManagedClusterPropertiesAutoScalerProfile.`ignore-daemonsets-utilization`,
+@@clientName(
+  ManagedClusterPropertiesAutoScalerProfile.`ignore-daemonsets-utilization`,
   "IsDaemonsetsUtilizationIgnored",
   "csharp"
 );
-@@clientName(ManagedClusterPropertiesForSnapshot.enableRbac,
+@@clientName(
+  ManagedClusterPropertiesForSnapshot.enableRbac,
   "IsRbacEnabled",
   "csharp"
 );
-@@clientName(ManagedClusterSecurityProfileDefenderSecurityGating.allowSecretAccess,
+@@clientName(
+  ManagedClusterSecurityProfileDefenderSecurityGating.allowSecretAccess,
   "IsSecretAccessAllowed",
   "csharp"
 );
-@@clientName(UpgradeOverrideSettings.forceUpgrade,
+@@clientName(
+  UpgradeOverrideSettings.forceUpgrade,
   "IsForceUpgradeEnabled",
   "csharp"
 );
@@ -1001,88 +1192,106 @@ namespace Azure.ResourceManager.ContainerService.Models {
 @@clientName(MachineStatus.creationTimestamp, "CreatedOn", "csharp");
 @@clientName(NvidiaGPUProfile, "AgentPoolNvidiaGpuProfile", "csharp");
 @@clientName(MachineProperties.localDNSProfile, "LocalDnsProfile", "csharp");
-@@clientName(ExtendedLocationTypes,
+@@clientName(
+  ExtendedLocationTypes,
   "ContainerServiceExtendedLocationType",
   "csharp"
 );
 @@clientName(GatewayAPIIstioEnabled, "GatewayApiIstioMode", "csharp");
 @@clientName(ManagedClusterAppRoutingIstio.mode, "IstioMode", "csharp");
-@@clientName(MachineHardwareProfile.ultraSsdEnabled,
+@@clientName(
+  MachineHardwareProfile.ultraSsdEnabled,
   "IsUltraSsdEnabled",
   "csharp"
 );
-@@clientName(ManagedClusterHealthMonitorProfile.enableContinuousControlPlaneAndAddonMonitor,
+@@clientName(
+  ManagedClusterHealthMonitorProfile.enableContinuousControlPlaneAndAddonMonitor,
   "IsContinuousControlPlaneAndAddonMonitorEnabled",
   "csharp"
 );
-@@clientName(ManagedClusterHealthMonitorProfile.enableOnDemandMonitor,
+@@clientName(
+  ManagedClusterHealthMonitorProfile.enableOnDemandMonitor,
   "IsOnDemandMonitorEnabled",
   "csharp"
 );
 @@clientName(ManagementMode, "GpuManagementMode", "csharp");
 @@clientName(MigStrategy, "MultiInstanceGpuStrategy", "csharp");
 @@clientName(ResourceSku, "ContainerServiceVmSku", "csharp");
-@@clientName(ResourceSkuCapabilities,
+@@clientName(
+  ResourceSkuCapabilities,
   "ContainerServiceVmSkuCapabilities",
   "csharp"
 );
 @@clientName(ResourceSkuCapacity, "ContainerServiceVmSkuCapacity", "csharp");
 @@clientName(ResourceSkuCosts, "ContainerServiceVmSkuCosts", "csharp");
-@@clientName(ResourceSkuLocationInfo,
+@@clientName(
+  ResourceSkuLocationInfo,
   "ContainerServiceVmSkuLocationInfo",
   "csharp"
 );
-@@clientName(ResourceSkuRestrictionInfo,
+@@clientName(
+  ResourceSkuRestrictionInfo,
   "ContainerServiceVmSkuRestrictionInfo",
   "csharp"
 );
-@@clientName(ResourceSkuRestrictions,
+@@clientName(
+  ResourceSkuRestrictions,
   "ContainerServiceVmSkuRestrictions",
   "csharp"
 );
-@@clientName(ResourceSkuZoneDetails,
+@@clientName(
+  ResourceSkuZoneDetails,
   "ContainerServiceVmSkuZoneDetails",
   "csharp"
 );
 @@clientName(ServiceAccountImagePullProfile.enabled, "IsEnabled", "csharp");
-@@clientName(TransitEncryptionType.mTLS,
+@@clientName(
+  TransitEncryptionType.mTLS,
   "ClientCertificateAuthentication",
   "csharp"
 );
 @@clientName(VmSkusOperationGroup.list, "GetVmSkus", "csharp");
-@@clientName(MachineHardwareProfile,
+@@clientName(
+  MachineHardwareProfile,
   "ContainerServiceMachineHardwareProfile",
   "csharp"
 );
-@@clientName(MachineKubernetesProfile,
+@@clientName(
+  MachineKubernetesProfile,
   "ContainerServiceMachineKubernetesProfile",
   "csharp"
 );
-@@clientName(MachineNetworkProperties,
+@@clientName(
+  MachineNetworkProperties,
   "ContainerServiceMachineNetworkProperties",
   "csharp"
 );
 @@clientName(MachineOSProfile, "ContainerServiceMachineOSProfile", "csharp");
-@@clientName(MachineOSProfileLinuxProfile,
+@@clientName(
+  MachineOSProfileLinuxProfile,
   "ContainerServiceMachineLinuxProfile",
   "csharp"
 );
-@@clientName(MachineSecurityProfile,
+@@clientName(
+  MachineSecurityProfile,
   "ContainerServiceMachineSecurityProfile",
   "csharp"
 );
 @@clientName(MachineStatus, "ContainerServiceMachineStatus", "csharp");
 @@clientName(AutoScaleProfile, "AgentPoolAutoScaleProfile", "csharp");
-@@clientName(NetworkProfileForSnapshot,
+@@clientName(
+  NetworkProfileForSnapshot,
   "ManagedClusterSnapshotNetworkProfile",
   "csharp"
 );
-@@clientName(ManagedClusterPropertiesForSnapshot,
+@@clientName(
+  ManagedClusterPropertiesForSnapshot,
   "ManagedClusterSnapshotInfo",
   "csharp"
 );
 @@clientName(ScaleProfile, "AgentPoolScaleProfile", "csharp");
-@@clientName(ManagedClustersOperationGroup.listKubernetesVersions,
+@@clientName(
+  ManagedClustersOperationGroup.listKubernetesVersions,
   "GetManagedClusterKubernetesVersions",
   "csharp"
 );
@@ -1093,7 +1302,8 @@ namespace Azure.ResourceManager.ContainerService.Models {
 @@markAsPageable(ManagedClusters.privateLinkResourcesList, "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Ensure backward compatibility for the .NET SDK"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(AgentPoolAvailableVersions,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  AgentPoolAvailableVersions,
   Azure.ResourceManager.Foundations.ProxyResource,
   "csharp"
 );
@@ -1111,106 +1321,129 @@ namespace Azure.ResourceManager.Models {
     id?: armResourceIdentifier;
   }
 }
-@@alternateType(ManagedClusterLoadBalancerProfile.effectiveOutboundIPs,
+@@alternateType(
+  ManagedClusterLoadBalancerProfile.effectiveOutboundIPs,
   Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
-@@alternateType(ManagedClusterLoadBalancerProfileOutboundIPPrefixes.publicIPPrefixes,
+@@alternateType(
+  ManagedClusterLoadBalancerProfileOutboundIPPrefixes.publicIPPrefixes,
   Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
-@@alternateType(ManagedClusterLoadBalancerProfileOutboundIPs.publicIPs,
+@@alternateType(
+  ManagedClusterLoadBalancerProfileOutboundIPs.publicIPs,
   Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
-@@alternateType(ManagedClusterNATGatewayProfile.effectiveOutboundIPs,
+@@alternateType(
+  ManagedClusterNATGatewayProfile.effectiveOutboundIPs,
   Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
 
 // Java: rename properties with uppercase acronyms for backward compatibility
 // ManagedClusterAgentPoolProfileProperties
-@@clientName(ManagedClusterAgentPoolProfileProperties.vnetSubnetID,
+@@clientName(
+  ManagedClusterAgentPoolProfileProperties.vnetSubnetID,
   "vnetSubnetId",
   "java"
 );
-@@clientName(ManagedClusterAgentPoolProfileProperties.podSubnetID,
+@@clientName(
+  ManagedClusterAgentPoolProfileProperties.podSubnetID,
   "podSubnetId",
   "java"
 );
-@@clientName(ManagedClusterAgentPoolProfileProperties.podIPAllocationMode,
+@@clientName(
+  ManagedClusterAgentPoolProfileProperties.podIPAllocationMode,
   "podIpAllocationMode",
   "java"
 );
 @@clientName(ManagedClusterAgentPoolProfileProperties.osSKU, "osSku", "java");
-@@clientName(ManagedClusterAgentPoolProfileProperties.enableNodePublicIP,
+@@clientName(
+  ManagedClusterAgentPoolProfileProperties.enableNodePublicIP,
   "enableNodePublicIp",
   "java"
 );
-@@clientName(ManagedClusterAgentPoolProfileProperties.nodePublicIPPrefixID,
+@@clientName(
+  ManagedClusterAgentPoolProfileProperties.nodePublicIPPrefixID,
   "nodePublicIpPrefixId",
   "java"
 );
-@@clientName(ManagedClusterAgentPoolProfileProperties.proximityPlacementGroupID,
+@@clientName(
+  ManagedClusterAgentPoolProfileProperties.proximityPlacementGroupID,
   "proximityPlacementGroupId",
   "java"
 );
-@@clientName(ManagedClusterAgentPoolProfileProperties.enableUltraSSD,
+@@clientName(
+  ManagedClusterAgentPoolProfileProperties.enableUltraSSD,
   "enableUltraSsd",
   "java"
 );
-@@clientName(ManagedClusterAgentPoolProfileProperties.enableFIPS,
+@@clientName(
+  ManagedClusterAgentPoolProfileProperties.enableFIPS,
   "enableFips",
   "java"
 );
-@@clientName(ManagedClusterAgentPoolProfileProperties.hostGroupID,
+@@clientName(
+  ManagedClusterAgentPoolProfileProperties.hostGroupID,
   "hostGroupId",
   "java"
 );
-@@clientName(ManagedClusterAgentPoolProfileProperties.capacityReservationGroupID,
+@@clientName(
+  ManagedClusterAgentPoolProfileProperties.capacityReservationGroupID,
   "capacityReservationGroupId",
   "java"
 );
 // AgentPoolNetworkProfile
-@@clientName(AgentPoolNetworkProfile.nodePublicIPTags,
+@@clientName(
+  AgentPoolNetworkProfile.nodePublicIPTags,
   "nodePublicIpTags",
   "java"
 );
 // AgentPoolGatewayProfile
-@@clientName(AgentPoolGatewayProfile.publicIPPrefixSize,
+@@clientName(
+  AgentPoolGatewayProfile.publicIPPrefixSize,
   "publicIpPrefixSize",
   "java"
 );
 // ContainerServiceNetworkProfile
-@@clientName(ContainerServiceNetworkProfile.dnsServiceIP,
+@@clientName(
+  ContainerServiceNetworkProfile.dnsServiceIP,
   "dnsServiceIp",
   "java"
 );
 // ManagedClusterLoadBalancerProfile
-@@clientName(ManagedClusterLoadBalancerProfile.outboundIPPrefixes,
+@@clientName(
+  ManagedClusterLoadBalancerProfile.outboundIPPrefixes,
   "outboundIpPrefixes",
   "java"
 );
 // ManagedClusterLoadBalancerProfileOutboundIPPrefixes
-@@clientName(ManagedClusterLoadBalancerProfileOutboundIPPrefixes.publicIPPrefixes,
+@@clientName(
+  ManagedClusterLoadBalancerProfileOutboundIPPrefixes.publicIPPrefixes,
   "publicIpPrefixes",
   "java"
 );
 // ManagedClusterNATGatewayProfile
-@@clientName(ManagedClusterNATGatewayProfile.managedOutboundIPProfile,
+@@clientName(
+  ManagedClusterNATGatewayProfile.managedOutboundIPProfile,
   "managedOutboundIpProfile",
   "java"
 );
-@@clientName(ManagedClusterNATGatewayProfile.outboundIPPrefixes,
+@@clientName(
+  ManagedClusterNATGatewayProfile.outboundIPPrefixes,
   "outboundIpPrefixes",
   "java"
 );
-@@clientName(ManagedClusterNATGatewayProfile.outboundIPs,
+@@clientName(
+  ManagedClusterNATGatewayProfile.outboundIPs,
   "outboundIps",
   "java"
 );
 // ManagedClusterAADProfile
-@@clientName(ManagedClusterAADProfile.enableAzureRBAC,
+@@clientName(
+  ManagedClusterAADProfile.enableAzureRBAC,
   "enableAzureRbac",
   "java"
 );
@@ -1220,36 +1453,43 @@ namespace Azure.ResourceManager.Models {
 // ManagedClusterProperties
 @@clientName(ManagedClusterProperties.enableRBAC, "enableRbac", "java");
 @@clientName(ManagedClusterProperties.enableFIPS, "enableFips", "java");
-@@clientName(ManagedClusterProperties.diskEncryptionSetID,
+@@clientName(
+  ManagedClusterProperties.diskEncryptionSetID,
   "diskEncryptionSetId",
   "java"
 );
 // ManagedClusterAPIServerAccessProfile
-@@clientName(ManagedClusterAPIServerAccessProfile.authorizedIPRanges,
+@@clientName(
+  ManagedClusterAPIServerAccessProfile.authorizedIPRanges,
   "authorizedIpRanges",
   "java"
 );
-@@clientName(ManagedClusterAPIServerAccessProfile.privateDNSZone,
+@@clientName(
+  ManagedClusterAPIServerAccessProfile.privateDNSZone,
   "privateDnsZone",
   "java"
 );
 // PrivateLinkResource
-@@clientName(PrivateLinkResource.privateLinkServiceID,
+@@clientName(
+  PrivateLinkResource.privateLinkServiceID,
   "privateLinkServiceId",
   "java"
 );
 // MachineNetworkProperties
 @@clientName(MachineNetworkProperties.vnetSubnetID, "vnetSubnetId", "java");
 @@clientName(MachineNetworkProperties.podSubnetID, "podSubnetId", "java");
-@@clientName(MachineNetworkProperties.nodePublicIPPrefixID,
+@@clientName(
+  MachineNetworkProperties.nodePublicIPPrefixID,
   "nodePublicIpPrefixId",
   "java"
 );
-@@clientName(MachineNetworkProperties.enableNodePublicIP,
+@@clientName(
+  MachineNetworkProperties.enableNodePublicIP,
   "enableNodePublicIp",
   "java"
 );
-@@clientName(MachineNetworkProperties.nodePublicIPTags,
+@@clientName(
+  MachineNetworkProperties.nodePublicIPTags,
   "nodePublicIpTags",
   "java"
 );
@@ -1263,7 +1503,8 @@ namespace Azure.ResourceManager.Models {
 // MeshMembershipProperties
 @@clientName(MeshMembershipProperties.managedMeshID, "managedMeshId", "java");
 // listNodeImageVersions
-@@clientLocation(ContainerServiceOperationGroup.listNodeImageVersions,
+@@clientLocation(
+  ContainerServiceOperationGroup.listNodeImageVersions,
   ManagedClusters,
   "java"
 );
@@ -1272,37 +1513,44 @@ namespace Azure.ResourceManager.Models {
 @@clientName(LocalDNSProfile.kubeDNSOverrides, "kubeDnsOverrides", "java");
 // ManagedClusterAgentPoolProfileProperties
 @@clientName(ManagedClusterAgentPoolProfileProperties.eTag, "etag", "java");
-@@clientName(ManagedClusterAgentPoolProfileProperties.localDNSProfile,
+@@clientName(
+  ManagedClusterAgentPoolProfileProperties.localDNSProfile,
   "localDnsProfile",
   "java"
 );
 // ManagedClusterStorageProfile
-@@clientName(ManagedClusterStorageProfile.diskCSIDriver,
+@@clientName(
+  ManagedClusterStorageProfile.diskCSIDriver,
   "diskCsiDriver",
   "java"
 );
-@@clientName(ManagedClusterStorageProfile.fileCSIDriver,
+@@clientName(
+  ManagedClusterStorageProfile.fileCSIDriver,
   "fileCsiDriver",
   "java"
 );
-@@clientName(ManagedClusterStorageProfile.blobCSIDriver,
+@@clientName(
+  ManagedClusterStorageProfile.blobCSIDriver,
   "blobCsiDriver",
   "java"
 );
 // ManagedClusterAPIServerAccessProfile
-@@clientName(ManagedClusterAPIServerAccessProfile.enablePrivateClusterPublicFQDN,
+@@clientName(
+  ManagedClusterAPIServerAccessProfile.enablePrivateClusterPublicFQDN,
   "enablePrivateClusterPublicFqdn",
   "java"
 );
 // AgentPoolSecurityProfile
 @@clientName(AgentPoolSecurityProfile.enableVTPM, "enableVtpm", "java");
 // ManagedClusterWindowsProfile
-@@clientName(ManagedClusterWindowsProfile.enableCSIProxy,
+@@clientName(
+  ManagedClusterWindowsProfile.enableCSIProxy,
   "enableCsiProxy",
   "java"
 );
 // TODO: drop the type replacement upon next major breaking change
-@@alternateType(ManagedClusterIdentity.type,
+@@alternateType(
+  ManagedClusterIdentity.type,
   global.ResourceIdentityType,
   "java"
 );
@@ -1329,7 +1577,8 @@ enum ResourceIdentityType {
 
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "https://github.com/Azure/typespec-azure/issues/4090"
 #suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "https://github.com/Azure/typespec-azure/issues/4090"
-@@clientOption(ManagedCluster,
+@@clientOption(
+  ManagedCluster,
   "resource-rbac-roles",
   #{
     AzureKubernetesServiceClusterAdminRole: "0ab0b1a8-8aac-4efd-b8c2-3ee1fb270be8",

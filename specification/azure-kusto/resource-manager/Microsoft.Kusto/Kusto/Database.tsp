@@ -67,15 +67,18 @@ interface Databases {
       @query("callerRole")
       callerRole?: CallerRole = CallerRole.Admin;
     },
-    Response = ArmResourceUpdatedResponse<Database> | ArmResourceCreatedResponse<
-      Database,
-      LroHeaders = ArmLroLocationHeader<FinalResult = Database>
-    > | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Database> &
-      ArmAsyncOperationHeader<FinalResult = Database> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: Database;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<Database>
+      | ArmResourceCreatedResponse<
+          Database,
+          LroHeaders = ArmLroLocationHeader<FinalResult = Database>
+        >
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Database> &
+          ArmAsyncOperationHeader<FinalResult = Database> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: Database;
+        })
   >;
 
   /**
@@ -94,17 +97,20 @@ interface Databases {
       @query("callerRole")
       callerRole?: CallerRole = CallerRole.Admin;
     },
-    Response = ArmResponse<Database> | ArmResourceCreatedResponse<
-      Database,
-      LroHeaders = ArmLroLocationHeader<FinalResult = Database> &
-        ArmAsyncOperationHeader<FinalResult = Database &
-          Azure.Core.Foundations.RetryAfterHeader>
-    > | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Database> &
-      ArmAsyncOperationHeader<FinalResult = Database &
-        Azure.Core.Foundations.RetryAfterHeader>> & {
-      @bodyRoot
-      _: Database;
-    })
+    Response =
+      | ArmResponse<Database>
+      | ArmResourceCreatedResponse<
+          Database,
+          LroHeaders = ArmLroLocationHeader<FinalResult = Database> &
+            ArmAsyncOperationHeader<FinalResult = Database &
+              Azure.Core.Foundations.RetryAfterHeader>
+        >
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Database> &
+          ArmAsyncOperationHeader<FinalResult = Database &
+            Azure.Core.Foundations.RetryAfterHeader>> & {
+          @bodyRoot
+          _: Database;
+        })
   >;
 
   /**
@@ -114,9 +120,12 @@ interface Databases {
   @tag("Databases")
   delete is ArmResourceDeleteWithoutOkAsync<
     Database,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
-      ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+          ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -213,12 +222,14 @@ interface Databases {
   dataConnectionValidation is ArmResourceActionAsyncBase<
     Database,
     DataConnectionValidation,
-    ArmAcceptedLroResponse<
-      "Data connection validation request accepted.",
-      LroHeaders = ArmLroLocationHeader<FinalResult = DataConnectionValidationListResult> &
-        ArmAsyncOperationHeader<FinalResult = DataConnectionValidationListResult> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmResponse<DataConnectionValidationListResult>,
+
+      | ArmAcceptedLroResponse<
+          "Data connection validation request accepted.",
+          LroHeaders = ArmLroLocationHeader<FinalResult = DataConnectionValidationListResult> &
+            ArmAsyncOperationHeader<FinalResult = DataConnectionValidationListResult> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmResponse<DataConnectionValidationListResult>,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<Database>
   >;
 
@@ -235,30 +246,39 @@ interface Databases {
 }
 
 @@doc(Database.name, "The name of the database in the Kusto cluster.");
-@@doc(Databases.createOrUpdate::parameters.resource,
+@@doc(
+  Databases.createOrUpdate::parameters.resource,
   "The database parameters supplied to the CreateOrUpdate operation."
 );
-@@doc(Databases.update::parameters.properties,
+@@doc(
+  Databases.update::parameters.properties,
   "The database parameters supplied to the Update operation."
 );
-@@doc(Databases.addPrincipals::parameters.body,
+@@doc(
+  Databases.addPrincipals::parameters.body,
   "List of database principals to add."
 );
-@@doc(Databases.removePrincipals::parameters.body,
+@@doc(
+  Databases.removePrincipals::parameters.body,
   "List of database principals to remove."
 );
-@@doc(Databases.inviteFollower::parameters.body,
+@@doc(
+  Databases.inviteFollower::parameters.body,
   "The follower invitation request parameters."
 );
-@@doc(Databases.checkNameAvailability::parameters.body,
+@@doc(
+  Databases.checkNameAvailability::parameters.body,
   "The name of the resource."
 );
-@@doc(Databases.scriptsCheckNameAvailability::parameters.body,
+@@doc(
+  Databases.scriptsCheckNameAvailability::parameters.body,
   "The name of the script."
 );
-@@doc(Databases.dataConnectionValidation::parameters.body,
+@@doc(
+  Databases.dataConnectionValidation::parameters.body,
   "The data connection parameters supplied to the CreateOrUpdate operation."
 );
-@@doc(Databases.dataConnectionsCheckNameAvailability::parameters.body,
+@@doc(
+  Databases.dataConnectionsCheckNameAvailability::parameters.body,
   "The name of the data connection."
 );
