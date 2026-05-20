@@ -1,0 +1,415 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "FoundryLocalManagementClient",
+    "description": "The Microsoft.FoundryLocal resource provider. Manages AI model deployments on Arc-connected Kubernetes clusters via K8sBridge.",
+    "version": "2026-05-20-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "security": [{ "azure_auth": ["user_impersonation"] }],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": { "user_impersonation": "impersonate your user account" }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.FoundryLocal/operations": {
+      "get": {
+        "tags": ["Operations"], "operationId": "Operations_List",
+        "description": "Lists all available operations for the Microsoft.FoundryLocal provider.",
+        "parameters": [{ "$ref": "#/parameters/ApiVersionParameter" }],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/OperationListResult" } },
+          "default": { "description": "Error", "schema": { "$ref": "#/definitions/ErrorResponse" } }
+        },
+        "x-ms-pageable": { "nextLinkName": "nextLink" },
+        "x-ms-examples": { "List": { "$ref": "./examples/Operations_List.json" } }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.FoundryLocal/modelDeployments": {
+      "get": {
+        "tags": ["ModelDeployments"], "operationId": "ModelDeployments_ListBySubscription",
+        "description": "Lists all model deployments in the subscription.",
+        "parameters": [{ "$ref": "#/parameters/SubscriptionIdParameter" }, { "$ref": "#/parameters/ApiVersionParameter" }],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/ModelDeploymentListResult" } },
+          "default": { "description": "Error", "schema": { "$ref": "#/definitions/ErrorResponse" } }
+        },
+        "x-ms-pageable": { "nextLinkName": "nextLink" },
+        "x-ms-examples": { "List": { "$ref": "./examples/ModelDeployments_ListBySubscription.json" } }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FoundryLocal/modelDeployments": {
+      "get": {
+        "tags": ["ModelDeployments"], "operationId": "ModelDeployments_ListByResourceGroup",
+        "description": "Lists all model deployments in a resource group.",
+        "parameters": [{ "$ref": "#/parameters/SubscriptionIdParameter" }, { "$ref": "#/parameters/ResourceGroupNameParameter" }, { "$ref": "#/parameters/ApiVersionParameter" }],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/ModelDeploymentListResult" } },
+          "default": { "description": "Error", "schema": { "$ref": "#/definitions/ErrorResponse" } }
+        },
+        "x-ms-pageable": { "nextLinkName": "nextLink" },
+        "x-ms-examples": { "List": { "$ref": "./examples/ModelDeployments_ListByResourceGroup.json" } }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FoundryLocal/modelDeployments/{modelDeploymentName}": {
+      "get": {
+        "tags": ["ModelDeployments"], "operationId": "ModelDeployments_Get", "description": "Gets a model deployment.",
+        "parameters": [{ "$ref": "#/parameters/SubscriptionIdParameter" }, { "$ref": "#/parameters/ResourceGroupNameParameter" }, { "$ref": "#/parameters/ModelDeploymentNameParameter" }, { "$ref": "#/parameters/ApiVersionParameter" }],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/ModelDeployment" } },
+          "default": { "description": "Error", "schema": { "$ref": "#/definitions/ErrorResponse" } }
+        },
+        "x-ms-examples": { "Get": { "$ref": "./examples/ModelDeployments_Get.json" } }
+      },
+      "put": {
+        "tags": ["ModelDeployments"], "operationId": "ModelDeployments_CreateOrUpdate",
+        "description": "Creates or updates a model deployment. Long-running operation.",
+        "parameters": [{ "$ref": "#/parameters/SubscriptionIdParameter" }, { "$ref": "#/parameters/ResourceGroupNameParameter" }, { "$ref": "#/parameters/ModelDeploymentNameParameter" }, { "$ref": "#/parameters/ApiVersionParameter" }, { "name": "body", "in": "body", "required": true, "schema": { "$ref": "#/definitions/ModelDeployment" } }],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/ModelDeployment" } },
+          "201": { "description": "Created", "schema": { "$ref": "#/definitions/ModelDeployment" } },
+          "default": { "description": "Error", "schema": { "$ref": "#/definitions/ErrorResponse" } }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": { "final-state-via": "azure-async-operation" },
+        "x-ms-examples": { "CreateOrUpdate": { "$ref": "./examples/ModelDeployments_CreateOrUpdate.json" } }
+      },
+      "patch": {
+        "tags": ["ModelDeployments"], "operationId": "ModelDeployments_Update", "description": "Updates tags on a model deployment.",
+        "parameters": [{ "$ref": "#/parameters/SubscriptionIdParameter" }, { "$ref": "#/parameters/ResourceGroupNameParameter" }, { "$ref": "#/parameters/ModelDeploymentNameParameter" }, { "$ref": "#/parameters/ApiVersionParameter" }, { "name": "body", "in": "body", "required": true, "schema": { "$ref": "#/definitions/ModelDeploymentPatch" } }],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/ModelDeployment" } },
+          "default": { "description": "Error", "schema": { "$ref": "#/definitions/ErrorResponse" } }
+        },
+        "x-ms-examples": { "Update": { "$ref": "./examples/ModelDeployments_Update.json" } }
+      },
+      "delete": {
+        "tags": ["ModelDeployments"], "operationId": "ModelDeployments_Delete",
+        "description": "Deletes a model deployment. Long-running operation.",
+        "parameters": [{ "$ref": "#/parameters/SubscriptionIdParameter" }, { "$ref": "#/parameters/ResourceGroupNameParameter" }, { "$ref": "#/parameters/ModelDeploymentNameParameter" }, { "$ref": "#/parameters/ApiVersionParameter" }],
+        "responses": {
+          "200": { "description": "OK - deleted." },
+          "202": { "description": "Accepted - deletion in progress." },
+          "204": { "description": "No Content." },
+          "default": { "description": "Error", "schema": { "$ref": "#/definitions/ErrorResponse" } }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": { "final-state-via": "location" },
+        "x-ms-examples": { "Delete": { "$ref": "./examples/ModelDeployments_Delete.json" } }
+      }
+    }
+  },
+  "definitions": {
+    "ModelDeployment": {
+      "type": "object",
+      "description": "A Foundry Local model deployment on an Arc-connected cluster.",
+      "x-ms-azure-resource": true,
+      "required": ["location", "extendedLocation"],
+      "properties": {
+        "id":         { "type": "string", "readOnly": true, "description": "Fully qualified ARM resource ID." },
+        "name":       { "type": "string", "readOnly": true, "description": "Resource name." },
+        "type":       { "type": "string", "readOnly": true, "description": "Resource type." },
+        "systemData": { "$ref": "#/definitions/SystemData", "readOnly": true, "description": "ARM metadata." },
+        "location":   { "type": "string", "description": "Azure region." },
+        "tags":       { "type": "object", "additionalProperties": { "type": "string" }, "description": "Resource tags." },
+        "extendedLocation": { "$ref": "#/definitions/ExtendedLocation", "description": "Custom Location targeting the Arc-connected cluster." },
+        "properties": { "$ref": "#/definitions/ModelDeploymentProperties", "description": "Properties of the model deployment." }
+      }
+    },
+    "ModelDeploymentPatch": {
+      "type": "object",
+      "description": "Patchable fields of a ModelDeployment.",
+      "properties": {
+        "tags": { "type": "object", "additionalProperties": { "type": "string" }, "description": "Resource tags." }
+      }
+    },
+    "ModelDeploymentListResult": {
+      "type": "object",
+      "description": "Paged list of ModelDeployment resources.",
+      "properties": {
+        "value":    { "type": "array", "items": { "$ref": "#/definitions/ModelDeployment" } },
+        "nextLink": { "type": "string" }
+      }
+    },
+    "ModelDeploymentProperties": {
+      "type": "object",
+      "description": "Properties of a Foundry Local model deployment.",
+      "required": ["model", "workloadType", "compute"],
+      "properties": {
+        "displayName":   { "type": "string", "maxLength": 256, "description": "Human-readable deployment name." },
+        "model":         { "$ref": "#/definitions/ModelReference", "description": "Model source. Exactly one of ref/catalog/custom must be set." },
+        "workloadType":  { "type": "string", "default": "generative", "enum": ["generative", "predictive"], "x-ms-enum": { "name": "WorkloadType", "modelAsString": true }, "description": "Type of inference workload." },
+        "compute":       { "type": "string", "enum": ["cpu", "gpu"], "x-ms-enum": { "name": "ComputeType", "modelAsString": true }, "description": "Compute type." },
+        "replicas":      { "type": "integer", "format": "int32", "minimum": 1, "maximum": 100, "default": 1, "description": "Number of pod replicas." },
+        "port":          { "type": "integer", "format": "int32", "minimum": 1024, "maximum": 65535, "default": 5000, "description": "Container port." },
+        "env":           { "type": "array", "items": { "$ref": "#/definitions/EnvVar" }, "description": "Environment variables." },
+        "resources":     { "$ref": "#/definitions/ResourceRequirements" },
+        "nodeSelector":  { "type": "object", "additionalProperties": { "type": "string" }, "description": "Node selector labels." },
+        "skipGpuResource": { "type": "boolean", "default": false, "description": "Allow GPU compute without nvidia.com/gpu (use with nodeSelector)." },
+        "tolerations":   { "type": "array", "items": { "$ref": "#/definitions/Toleration" } },
+        "endpoint":      { "$ref": "#/definitions/EndpointConfig" },
+        "runtime":       { "type": "string", "default": "onnx-genai", "enum": ["onnx-genai", "vllm"], "x-ms-enum": { "name": "Runtime", "modelAsString": true }, "description": "Inference runtime." },
+        "runtimeConfigurations": {
+          "type": "array",
+          "description": "Runtime-specific configuration (modeled on Arc Connected Cluster's arcAgentryConfigurations). Each entry pairs a feature with a settings map; the operator dispatches by feature name.",
+          "items": { "$ref": "#/definitions/RuntimeConfiguration" }
+        },
+        "modelCacheStorageGi": { "type": "integer", "format": "int32", "minimum": 1, "default": 100, "description": "Size of the model cache PVC in GiB." },
+        "provisioningState": { "type": "string", "readOnly": true, "enum": ["Provisioning", "Succeeded", "Failed", "Deleting", "Canceled"], "x-ms-enum": { "name": "ProvisioningState", "modelAsString": true }, "description": "ARM provisioning state." },
+        "status":        { "$ref": "#/definitions/ModelDeploymentStatus", "readOnly": true, "description": "Observed cluster-side state (synced via EventHub)." }
+      }
+    },
+    "ModelReference": {
+      "type": "object",
+      "description": "Model source. Exactly one of ref/catalog/custom must be specified.",
+      "properties": {
+        "ref":     { "type": "string", "minLength": 1, "maxLength": 253, "description": "Reference to an existing Model CR in the cluster namespace." },
+        "catalog": { "$ref": "#/definitions/CatalogModelRef" },
+        "custom":  { "$ref": "#/definitions/CustomModelRef" }
+      }
+    },
+    "CatalogModelRef": {
+      "type": "object", "required": ["name"],
+      "properties": {
+        "name":    { "type": "string", "minLength": 1, "maxLength": 253, "description": "Catalog model name." },
+        "version": { "type": "string", "default": "latest", "description": "Catalog model version." }
+      }
+    },
+    "CustomModelRef": {
+      "type": "object", "required": ["registry", "repository", "tag", "credentials"],
+      "properties": {
+        "registry":    { "type": "string", "minLength": 1, "maxLength": 253, "description": "Container registry URL." },
+        "repository":  { "type": "string", "minLength": 1, "maxLength": 253, "description": "Repository path." },
+        "tag":         { "type": "string", "minLength": 1, "maxLength": 128, "description": "Image/artifact tag." },
+        "credentials": { "$ref": "#/definitions/RegistryCredentials" }
+      }
+    },
+    "RegistryCredentials": {
+      "type": "object", "required": ["secretRef"],
+      "properties": { "secretRef": { "$ref": "#/definitions/SecretRef" } }
+    },
+    "SecretRef": {
+      "type": "object", "required": ["name"],
+      "properties": {
+        "name":        { "type": "string", "minLength": 1, "maxLength": 253 },
+        "usernameKey": { "type": "string", "default": "username" },
+        "passwordKey": { "type": "string", "default": "password" }
+      }
+    },
+    "EnvVar": {
+      "type": "object", "required": ["name", "value"],
+      "properties": {
+        "name":  { "type": "string", "minLength": 1 },
+        "value": { "type": "string" }
+      }
+    },
+    "ResourceRequirements": {
+      "type": "object",
+      "properties": {
+        "requests": { "$ref": "#/definitions/ResourceList" },
+        "limits":   { "$ref": "#/definitions/ResourceLimits" }
+      }
+    },
+    "ResourceList": {
+      "type": "object",
+      "properties": {
+        "cpu":    { "type": "string", "default": "2000m" },
+        "memory": { "type": "string", "default": "256Mi" }
+      }
+    },
+    "ResourceLimits": {
+      "type": "object",
+      "properties": {
+        "cpu":    { "type": "string", "default": "4000m" },
+        "memory": { "type": "string", "default": "1Gi" },
+        "gpu":    { "type": "integer", "format": "int32", "minimum": 0, "maximum": 8 }
+      }
+    },
+    "Toleration": {
+      "type": "object", "required": ["key", "operator", "effect"],
+      "properties": {
+        "key":               { "type": "string", "minLength": 1 },
+        "operator":          { "type": "string", "enum": ["Equal", "Exists"], "x-ms-enum": { "name": "TolerationOperator", "modelAsString": true } },
+        "value":             { "type": "string" },
+        "effect":            { "type": "string", "enum": ["NoSchedule", "PreferNoSchedule", "NoExecute"], "x-ms-enum": { "name": "TolerationEffect", "modelAsString": true } },
+        "tolerationSeconds": { "type": "integer", "format": "int32", "minimum": 0 }
+      }
+    },
+    "EndpointConfig": {
+      "type": "object",
+      "properties": {
+        "enabled":          { "type": "boolean", "default": false },
+        "host":             { "type": "string", "maxLength": 253 },
+        "path":             { "type": "string" },
+        "rewritePath":      { "type": "string" },
+        "pathType":         { "type": "string", "default": "ImplementationSpecific", "enum": ["Prefix", "Exact", "ImplementationSpecific"], "x-ms-enum": { "name": "PathType", "modelAsString": true } },
+        "ingressClassName": { "type": "string", "default": "nginx" },
+        "annotations":      { "type": "object", "additionalProperties": { "type": "string" } },
+        "tls":              { "$ref": "#/definitions/TlsConfig" }
+      }
+    },
+    "TlsConfig": {
+      "type": "object",
+      "properties": {
+        "enabled":    { "type": "boolean", "default": false },
+        "secretName": { "type": "string", "minLength": 1, "maxLength": 253 }
+      }
+    },
+    "RuntimeConfiguration": {
+      "type": "object",
+      "description": "A runtime-feature configuration block. Mirrors ArcAgentryConfigurations from Microsoft.Kubernetes/connectedClusters.",
+      "properties": {
+        "feature":           { "type": "string", "description": "Feature name (e.g. 'vllm', 'onnxGenai')." },
+        "settings":          { "type": "object", "additionalProperties": { "type": "string" }, "x-nullable": true, "description": "Non-sensitive settings." },
+        "protectedSettings": { "type": "object", "additionalProperties": { "type": "string" }, "x-nullable": true, "description": "Sensitive settings (write-only at the platform layer)." }
+      }
+    },
+    "ModelDeploymentStatus": {
+      "type": "object",
+      "description": "Observed state mirrored from the cluster.",
+      "properties": {
+        "state":            { "type": "string", "enum": ["Pending", "Creating", "Running", "Updating", "Error", "Terminating"], "x-ms-enum": { "name": "DeploymentState", "modelAsString": true } },
+        "message":          { "type": "string" },
+        "replicas":         { "$ref": "#/definitions/ReplicaStatus" },
+        "deploymentReady":  { "type": "boolean" },
+        "serviceReady":     { "type": "boolean" },
+        "internalEndpoint": { "type": "string" },
+        "endpointReady":    { "type": "boolean" },
+        "externalEndpoint": { "type": "string" },
+        "resolvedModel":    { "$ref": "#/definitions/ResolvedModel" },
+        "authentication":   { "$ref": "#/definitions/AuthenticationStatus" },
+        "conditions":       { "type": "array", "items": { "$ref": "#/definitions/StatusCondition" } },
+        "lastUpdated":      { "type": "string", "format": "date-time" }
+      }
+    },
+    "ReplicaStatus": {
+      "type": "object",
+      "properties": {
+        "desired":   { "type": "integer", "format": "int32", "minimum": 0 },
+        "ready":     { "type": "integer", "format": "int32", "minimum": 0 },
+        "available": { "type": "integer", "format": "int32", "minimum": 0 }
+      }
+    },
+    "ResolvedModel": {
+      "type": "object",
+      "properties": {
+        "name":    { "type": "string" },
+        "variant": { "type": "string" },
+        "image":   { "type": "string" }
+      }
+    },
+    "AuthenticationStatus": {
+      "type": "object",
+      "properties": {
+        "keysSecretName":          { "type": "string" },
+        "primaryKeyLastRotated":   { "type": "string", "format": "date-time" },
+        "secondaryKeyLastRotated": { "type": "string", "format": "date-time" }
+      }
+    },
+    "StatusCondition": {
+      "type": "object", "required": ["type", "status"],
+      "properties": {
+        "type":               { "type": "string", "enum": ["Available", "Progressing", "Degraded"], "x-ms-enum": { "name": "ConditionType", "modelAsString": true } },
+        "status":             { "type": "string", "enum": ["True", "False", "Unknown"], "x-ms-enum": { "name": "ConditionStatus", "modelAsString": true } },
+        "reason":             { "type": "string" },
+        "message":            { "type": "string" },
+        "lastTransitionTime": { "type": "string", "format": "date-time" }
+      }
+    },
+    "ExtendedLocation": {
+      "type": "object", "required": ["type", "name"],
+      "properties": {
+        "type": { "type": "string", "enum": ["CustomLocation"], "x-ms-enum": { "name": "ExtendedLocationType", "modelAsString": true }, "description": "The extended location type." },
+        "name": { "type": "string", "description": "The ARM resource ID of the Custom Location." }
+      }
+    },
+    "SystemData": {
+      "type": "object", "description": "Metadata pertaining to creation and last modification of the resource.",
+      "properties": {
+        "createdBy":          { "type": "string" },
+        "createdByType":      { "type": "string", "enum": ["User", "Application", "ManagedIdentity", "Key"], "x-ms-enum": { "name": "CreatedByType", "modelAsString": true } },
+        "createdAt":          { "type": "string", "format": "date-time" },
+        "lastModifiedBy":     { "type": "string" },
+        "lastModifiedByType": { "type": "string", "enum": ["User", "Application", "ManagedIdentity", "Key"], "x-ms-enum": { "name": "CreatedByType", "modelAsString": true } },
+        "lastModifiedAt":     { "type": "string", "format": "date-time" }
+      }
+    },
+    "OperationListResult": {
+      "type": "object",
+      "properties": {
+        "value":    { "type": "array", "items": { "$ref": "#/definitions/Operation" }, "readOnly": true },
+        "nextLink": { "type": "string", "readOnly": true }
+      }
+    },
+    "Operation": {
+      "type": "object",
+      "properties": {
+        "name":         { "type": "string", "readOnly": true },
+        "isDataAction": { "type": "boolean", "readOnly": true },
+        "display":      { "$ref": "#/definitions/OperationDisplay" },
+        "origin":       { "type": "string", "readOnly": true, "enum": ["user", "system", "user,system"], "x-ms-enum": { "name": "Origin", "modelAsString": true } },
+        "actionType":   { "type": "string", "readOnly": true, "enum": ["Internal"], "x-ms-enum": { "name": "ActionType", "modelAsString": true } }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "properties": {
+        "provider":    { "type": "string", "readOnly": true },
+        "resource":    { "type": "string", "readOnly": true },
+        "operation":   { "type": "string", "readOnly": true },
+        "description": { "type": "string", "readOnly": true }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "properties": { "error": { "$ref": "#/definitions/ErrorDetail" } }
+    },
+    "ErrorDetail": {
+      "type": "object",
+      "properties": {
+        "code":           { "type": "string", "readOnly": true },
+        "message":        { "type": "string", "readOnly": true },
+        "target":         { "type": "string", "readOnly": true },
+        "details":        { "type": "array", "items": { "$ref": "#/definitions/ErrorDetail" }, "readOnly": true },
+        "additionalInfo": { "type": "array", "items": { "$ref": "#/definitions/ErrorAdditionalInfo" }, "readOnly": true }
+      }
+    },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "properties": {
+        "type": { "type": "string", "readOnly": true },
+        "info": { "type": "object", "readOnly": true }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId", "in": "path", "required": true, "type": "string",
+      "description": "The Azure subscription ID."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName", "in": "path", "required": true, "type": "string",
+      "minLength": 1, "maxLength": 90, "x-ms-parameter-location": "method",
+      "description": "The name of the resource group."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version", "in": "query", "required": true, "type": "string",
+      "description": "The API version to use."
+    },
+    "ModelDeploymentNameParameter": {
+      "name": "modelDeploymentName", "in": "path", "required": true, "type": "string",
+      "minLength": 1, "maxLength": 63,
+      "pattern": "^[a-z]([a-z0-9]*(-[a-z0-9]+)*)?$",
+      "x-ms-parameter-location": "method",
+      "description": "DNS-1035 compliant model deployment name."
+    }
+  }
+}

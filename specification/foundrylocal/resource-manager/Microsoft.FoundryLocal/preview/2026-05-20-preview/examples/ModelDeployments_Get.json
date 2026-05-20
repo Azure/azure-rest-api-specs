@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2026-05-20-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "my-rg",
+    "modelDeploymentName": "phi-3-mini"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.FoundryLocal/modelDeployments/phi-3-mini",
+        "name": "phi-3-mini",
+        "type": "Microsoft.FoundryLocal/modelDeployments",
+        "location": "eastus",
+        "extendedLocation": {
+          "type": "CustomLocation",
+          "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/my-rg/providers/Microsoft.ExtendedLocation/customLocations/my-cl"
+        },
+        "properties": {
+          "displayName": "Phi-3 Mini",
+          "model": { "catalog": { "name": "phi-3", "version": "latest" } },
+          "workloadType": "generative",
+          "compute": "gpu",
+          "replicas": 1,
+          "runtime": "onnx-genai",
+          "provisioningState": "Succeeded",
+          "status": {
+            "state": "Running",
+            "deploymentReady": true,
+            "replicas": { "desired": 1, "ready": 1, "available": 1 },
+            "internalEndpoint": "http://phi-3-mini.foundry-local-operator.svc:5000"
+          }
+        }
+      }
+    }
+  }
+}
