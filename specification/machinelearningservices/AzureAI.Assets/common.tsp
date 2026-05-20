@@ -81,6 +81,7 @@ model ProbeSettings {
   httpMethod: string;
 }
 
+@added(Versions.`2024-05-01-preview`)
 @doc("Accelerator configuration for a model instance.")
 model AcceleratorMap {
   @doc("The type of accelerator (e.g. A100_80GB, H100_80GB).")
