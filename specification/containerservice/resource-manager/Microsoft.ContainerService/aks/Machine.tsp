@@ -46,8 +46,7 @@ model Machine is Azure.ResourceManager.ProxyResource<MachineProperties> {
 
 @@doc(Machine.name, "Host name of the machine.");
 @@doc(Machine.properties, "The properties of the machine");
-@@doc(
-  Machines.createOrUpdate::parameters.resource,
+@@doc(Machines.createOrUpdate::parameters.resource,
   "The machine to create or update."
 );
 
