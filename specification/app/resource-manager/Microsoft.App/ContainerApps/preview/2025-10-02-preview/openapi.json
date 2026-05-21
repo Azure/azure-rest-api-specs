@@ -314,10 +314,6 @@
           "Subscriptions"
         ],
         "description": "Get the verification id of a subscription used for verifying custom domains",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -485,7 +481,12 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "name": "location",
+            "in": "path",
+            "description": "The location for which resource usage is queried.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$"
           }
         ],
         "responses": {
@@ -1421,7 +1422,7 @@
             "name": "environmentEnvelope",
             "in": "body",
             "description": "Configuration details of the connectedEnvironment.",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/ConnectedEnvironmentPatchResource"
             }
@@ -9714,7 +9715,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -9840,7 +9841,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -9893,7 +9894,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -11083,6 +11084,9 @@
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string"
               },
               "Retry-After": {
                 "type": "integer",

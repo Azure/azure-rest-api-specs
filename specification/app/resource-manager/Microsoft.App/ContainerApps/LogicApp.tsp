@@ -65,19 +65,7 @@ interface LogicApps {
   /**
    * Create or update a Logic App extension resource
    */
-  @sharedRoute
-  @removed(Versions.v2026_01_01)
   createOrUpdate is LogicAppOps.CreateOrUpdateSync<LogicApp>;
-
-  /**
-   * Create or update a Logic App extension resource
-   */
-  @sharedRoute
-  @added(Versions.v2026_01_01)
-  createOrUpdateStable is LogicAppOps.CreateOrUpdateSync<
-    LogicApp,
-    OptionalRequestBody = true
-  >;
 
   /**
    * Deletes a Logic App extension resource

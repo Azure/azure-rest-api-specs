@@ -50,31 +50,6 @@ alias MaintenanceConfigurationResourceOps = Azure.ResourceManager.Legacy.LegacyO
   }
 >;
 
-alias MaintenanceConfigurationResourceCustomErrorOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
-
-    /** Name of the managed environment. */
-    @path
-    @segment("managedEnvironments")
-    @key
-    @pattern("^[-\\w\\._\\(\\)]+$")
-    environmentName: string;
-  },
-  {
-    /** Name of the Maintenance Configuration. */
-    @path
-    @segment("maintenanceConfigurations")
-    @key
-    @pattern("^[-\\w\\._\\(\\)]+$")
-    configName: string;
-  },
-  ErrorType = DefaultErrorResponse
->;
-
 @armResourceOperations
 interface MaintenanceConfigurations {
   /**
@@ -85,47 +60,17 @@ interface MaintenanceConfigurations {
   /**
    * Create or update the maintenance configuration for Managed Environment.
    */
-  @sharedRoute
-  @removed(Versions.v2026_01_01)
-  createOrUpdate is MaintenanceConfigurationResourceCustomErrorOps.CreateOrUpdateSync<MaintenanceConfigurationResource>;
-
-  /**
-   * Create or update the maintenance configuration for Managed Environment.
-   */
-  @sharedRoute
-  @added(Versions.v2026_01_01)
-  createOrUpdateStable is MaintenanceConfigurationResourceOps.CreateOrUpdateSync<MaintenanceConfigurationResource>;
+  createOrUpdate is MaintenanceConfigurationResourceOps.CreateOrUpdateSync<MaintenanceConfigurationResource>;
 
   /**
    * Deletes the maintenance configuration of a ManagedEnvironment .
    */
-  @sharedRoute
-  @removed(Versions.v2026_01_01)
-  delete is MaintenanceConfigurationResourceCustomErrorOps.DeleteSync<MaintenanceConfigurationResource>;
-
-  /**
-   * Deletes the maintenance configuration of a ManagedEnvironment .
-   */
-  @sharedRoute
-  @added(Versions.v2026_01_01)
-  deleteStable is MaintenanceConfigurationResourceOps.DeleteSync<MaintenanceConfigurationResource>;
+  delete is MaintenanceConfigurationResourceOps.DeleteSync<MaintenanceConfigurationResource>;
 
   /**
    * Gets all maintenance configurations in the specified Managed Environment.
    */
-  @sharedRoute
-  @removed(Versions.v2026_01_01)
-  list is MaintenanceConfigurationResourceCustomErrorOps.List<
-    MaintenanceConfigurationResource,
-    Response = ArmResponse<MaintenanceConfigurationCollection>
-  >;
-
-  /**
-   * Gets all maintenance configurations in the specified Managed Environment.
-   */
-  @sharedRoute
-  @added(Versions.v2026_01_01)
-  listStable is MaintenanceConfigurationResourceOps.List<
+  list is MaintenanceConfigurationResourceOps.List<
     MaintenanceConfigurationResource,
     Response = ArmResponse<MaintenanceConfigurationCollection>
   >;

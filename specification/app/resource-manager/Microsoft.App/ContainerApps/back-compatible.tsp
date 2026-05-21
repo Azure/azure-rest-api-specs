@@ -62,10 +62,6 @@ using Microsoft.App;
   "environmentEnvelope"
 );
 @@clientName(
-  ConnectedEnvironments.updateV2::parameters.properties,
-  "environmentEnvelope"
-);
-@@clientName(
   ConnectedEnvironments.checkNameAvailability::parameters.body,
   "checkNameAvailabilityRequest"
 );
@@ -191,28 +187,11 @@ using Microsoft.App;
   "httpRouteConfigEnvelope"
 );
 @@clientLocation(HttpRouteConfigs.delete, "HttpRouteConfig");
-@@clientLocation(HttpRouteConfigs.deleteV2, "HttpRouteConfig");
 @@clientLocation(HttpRouteConfigs.list, "HttpRouteConfig");
 
 @@clientName(
   MaintenanceConfigurations.createOrUpdate::parameters.resource,
   "maintenanceConfigurationEnvelope"
-);
-@@clientName(
-  MaintenanceConfigurations.createOrUpdateStable::parameters.resource,
-  "maintenanceConfigurationEnvelope"
-);
-@@clientLocation(
-  MaintenanceConfigurations.createOrUpdateStable,
-  "MaintenanceConfigurations"
-);
-@@clientLocation(
-  MaintenanceConfigurations.deleteStable,
-  "MaintenanceConfigurations"
-);
-@@clientLocation(
-  MaintenanceConfigurations.listStable,
-  "MaintenanceConfigurations"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -254,10 +233,6 @@ using Microsoft.App;
 
 @@clientName(
   ContainerAppsSessionPools.update::parameters.properties,
-  "sessionPoolEnvelope"
-);
-@@clientName(
-  ContainerAppsSessionPools.updateStable::parameters.properties,
   "sessionPoolEnvelope"
 );
 
@@ -326,12 +301,11 @@ using Microsoft.App;
   LogicApps.deployWorkflowArtifacts::parameters.body,
   "workflowArtifacts"
 );
-@@clientLocation(LogicApps.createOrUpdateStable, "LogicApps");
+@@clientLocation(LogicApps.createOrUpdate, "LogicApps");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(LogicApp.properties);
 
 @@clientLocation(UsagesOperationGroup.list, "Usages");
-@@clientLocation(UsagesOperationGroup.listStable, "Usages");
 
 @@clientLocation(
   ManagedEnvironmentUsagesOperationGroup.list,

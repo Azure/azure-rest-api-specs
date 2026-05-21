@@ -51,23 +51,7 @@ interface ConnectedEnvironments {
    */
   @summary("Update connected Environment's properties.")
   @patch(#{ implicitOptionality: false })
-  @sharedRoute
-  @removed(Versions.v2026_01_01)
   update is Azure.ResourceManager.Legacy.CustomPatchSync<
-    ConnectedEnvironment,
-    PatchModel = ConnectedEnvironmentPatchResource,
-    OptionalRequestBody = true,
-    Error = DefaultErrorResponse
-  >;
-
-  /**
-   * Patches a Managed Environment. Only patching of tags is supported currently
-   */
-  @summary("Update connected Environment's properties.")
-  @patch(#{ implicitOptionality: false })
-  @sharedRoute
-  @added(Versions.v2026_01_01)
-  updateV2 is Azure.ResourceManager.Legacy.CustomPatchSync<
     ConnectedEnvironment,
     PatchModel = ConnectedEnvironmentPatchResource,
     Error = DefaultErrorResponse

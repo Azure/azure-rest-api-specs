@@ -237,7 +237,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.App/getCustomDomainVerificationId": {
       "post": {
-        "operationId": "GetCustomDomainVerificationIdStable",
+        "operationId": "GetCustomDomainVerificationId",
         "tags": [
           "Subscriptions"
         ],
@@ -266,7 +266,7 @@
         },
         "x-ms-examples": {
           "List all operations": {
-            "$ref": "./examples/Subscriptions_GetCustomDomainVerificationIdStable.json"
+            "$ref": "./examples/Subscriptions_GetCustomDomainVerificationId.json"
           }
         }
       }
@@ -396,7 +396,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.App/locations/{location}/usages": {
       "get": {
-        "operationId": "Usages_ListStable",
+        "operationId": "Usages_List",
         "tags": [
           "Usages"
         ],
@@ -433,7 +433,7 @@
         },
         "x-ms-examples": {
           "List usages": {
-            "$ref": "./examples/Usages_ListStable.json"
+            "$ref": "./examples/Usages_List.json"
           }
         },
         "x-ms-pageable": {
@@ -684,7 +684,7 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "ConnectedEnvironments_UpdateV2",
+        "operationId": "ConnectedEnvironments_Update",
         "tags": [
           "ConnectedEnvironments"
         ],
@@ -710,7 +710,7 @@
           {
             "name": "environmentEnvelope",
             "in": "body",
-            "description": "The resource properties to be updated.",
+            "description": "Configuration details of the connectedEnvironment.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ConnectedEnvironmentPatchResource"
@@ -733,7 +733,7 @@
         },
         "x-ms-examples": {
           "Patch Managed Environment": {
-            "$ref": "./examples/ConnectedEnvironments_PatchV2.json"
+            "$ref": "./examples/ConnectedEnvironments_Patch.json"
           }
         }
       },
@@ -2778,7 +2778,7 @@
         }
       },
       "put": {
-        "operationId": "LogicApps_CreateOrUpdateStable",
+        "operationId": "LogicApps_CreateOrUpdate",
         "tags": [
           "LogicApps"
         ],
@@ -2812,8 +2812,8 @@
           {
             "name": "resource",
             "in": "body",
-            "description": "Resource create parameters.",
-            "required": false,
+            "description": "Logic app resource properties.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/LogicApp"
             }
@@ -2841,7 +2841,7 @@
         },
         "x-ms-examples": {
           "Create logic app extension": {
-            "$ref": "./examples/LogicApps_CreateStable.json"
+            "$ref": "./examples/LogicApps_Create.json"
           }
         }
       },
@@ -6079,11 +6079,11 @@
         }
       },
       "delete": {
-        "operationId": "HttpRouteConfig_DeleteV2",
+        "operationId": "HttpRouteConfig_Delete",
         "tags": [
           "HttpRouteConfig"
         ],
-        "summary": "Deletes the specified Http Route Config.",
+        "summary": "Deletes the specified Managed Http Route.",
         "description": "Deletes the specified Managed Http Route.",
         "parameters": [
           {
@@ -6115,11 +6115,16 @@
         ],
         "responses": {
           "202": {
-            "description": "Response model for HttpRouteConfig delete accepted (202) with lowercase location header",
+            "description": "Resource deletion accepted.",
             "headers": {
-              "location": {
+              "Location": {
                 "type": "string",
-                "description": "URL to check the status of the delete operation."
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -6135,9 +6140,13 @@
         },
         "x-ms-examples": {
           "Delete Certificate": {
-            "$ref": "./examples/HttpRouteConfig_DeleteV2.json"
+            "$ref": "./examples/HttpRouteConfig_Delete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/javaComponents": {
@@ -6497,7 +6506,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/maintenanceConfigurations": {
       "get": {
-        "operationId": "MaintenanceConfigurations_ListStable",
+        "operationId": "MaintenanceConfigurations_List",
         "tags": [
           "MaintenanceConfigurations"
         ],
@@ -6537,7 +6546,7 @@
         },
         "x-ms-examples": {
           "ManagedEnvironmentMaintenanceConfigurationsList": {
-            "$ref": "./examples/ManagedEnvironment_MaintenanceConfigurations_ListStable.json"
+            "$ref": "./examples/ManagedEnvironment_MaintenanceConfigurations_List.json"
           }
         },
         "x-ms-pageable": {
@@ -6600,7 +6609,7 @@
         }
       },
       "put": {
-        "operationId": "MaintenanceConfigurations_CreateOrUpdateStable",
+        "operationId": "MaintenanceConfigurations_CreateOrUpdate",
         "tags": [
           "MaintenanceConfigurations"
         ],
@@ -6634,7 +6643,7 @@
           {
             "name": "maintenanceConfigurationEnvelope",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "Parameters to set the maintenance configuration for ManagedEnvironment .",
             "required": true,
             "schema": {
               "$ref": "#/definitions/MaintenanceConfigurationResource"
@@ -6663,12 +6672,12 @@
         },
         "x-ms-examples": {
           "ManagedEnvironmentMaintenanceConfigurationsCreateOrUpdate": {
-            "$ref": "./examples/ManagedEnvironment_MaintenanceConfigurations_CreateOrUpdateStable.json"
+            "$ref": "./examples/ManagedEnvironment_MaintenanceConfigurations_CreateOrUpdate.json"
           }
         }
       },
       "delete": {
-        "operationId": "MaintenanceConfigurations_DeleteStable",
+        "operationId": "MaintenanceConfigurations_Delete",
         "tags": [
           "MaintenanceConfigurations"
         ],
@@ -6716,7 +6725,7 @@
         },
         "x-ms-examples": {
           "ManagedEnvironmentMaintenanceConfigurationsDelete": {
-            "$ref": "./examples/ManagedEnvironment_MaintenanceConfigurations_DeleteStable.json"
+            "$ref": "./examples/ManagedEnvironment_MaintenanceConfigurations_Delete.json"
           }
         }
       }
@@ -7851,7 +7860,7 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "ContainerAppsSessionPools_UpdateStable",
+        "operationId": "ContainerAppsSessionPools_Update",
         "tags": [
           "ContainerAppsSessionPools"
         ],
@@ -7880,7 +7889,7 @@
           {
             "name": "sessionPoolEnvelope",
             "in": "body",
-            "description": "The resource properties to be updated.",
+            "description": "Properties used to create a session pool",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SessionPoolUpdatableProperties"
@@ -7920,7 +7929,7 @@
         },
         "x-ms-examples": {
           "Update Session Pool": {
-            "$ref": "./examples/SessionPools_PatchStable.json"
+            "$ref": "./examples/SessionPools_Patch.json"
           }
         },
         "x-ms-long-running-operation-options": {

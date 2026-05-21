@@ -66,31 +66,8 @@ interface BillingMetersOperationGroup {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @autoRoute
 @tag("Subscriptions")
-@sharedRoute
 @action("getCustomDomainVerificationId")
-@removed(Versions.v2026_01_01)
 op getCustomDomainVerificationId is ArmProviderActionSync<
-  Response = OkResponse & {
-    #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Need exact content types for produces field"
-    @header("Content-Type") contentType: "text/plain" | "application/json";
-
-    @bodyRoot
-    customDomainVerificationId: CustomDomainVerificationId;
-  },
-  Scope = SubscriptionActionScope,
-  Error = DefaultErrorResponse
->;
-
-/**
- * Get the verification id of a subscription used for verifying custom domains
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@autoRoute
-@tag("Subscriptions")
-@sharedRoute
-@action("getCustomDomainVerificationId")
-@added(Versions.v2026_01_01)
-op getCustomDomainVerificationIdStable is ArmProviderActionSync<
   Response = OkResponse & {
     @header("Content-Type") contentType: "application/json";
 
@@ -111,26 +88,7 @@ interface UsagesOperationGroup {
   @list
   @action("usages")
   @tag("Usages")
-  @sharedRoute
-  @removed(Versions.v2026_01_01)
   list is ArmProviderActionSync<
-    Response = ListUsagesResult,
-    Scope = SubscriptionActionScope,
-    Parameters = LocationResourceParameter,
-    Error = DefaultErrorResponse
-  >;
-
-  /**
-   * Gets, for the specified location, the current resource usage information as well as the limits under the subscription.
-   */
-  @autoRoute
-  @get
-  @list
-  @action("usages")
-  @tag("Usages")
-  @sharedRoute
-  @added(Versions.v2026_01_01)
-  listStable is ArmProviderActionSync<
     Response = ListUsagesResult,
     Scope = SubscriptionActionScope,
     Parameters = AppLocationParameter,
