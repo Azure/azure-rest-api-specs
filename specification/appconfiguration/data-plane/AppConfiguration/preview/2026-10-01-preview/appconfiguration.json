@@ -2354,6 +2354,14 @@
               "$ref": "#/definitions/Error"
             }
           }
+        },
+        "x-ms-examples": {
+          "Creates or updates a schema with If-Match header.": {
+            "$ref": "./examples/PutSchema_IfMatch.json"
+          },
+          "Creates or updates a schema.": {
+            "$ref": "./examples/PutSchema.json"
+          }
         }
       },
       "delete": {
@@ -3573,9 +3581,7 @@
         "json_schema": {
           "type": "object",
           "description": "The JSON Schema definition.",
-          "additionalProperties": {
-            "type": "string"
-          },
+          "additionalProperties": {},
           "x-ms-client-name": "jsonSchema"
         },
         "etag": {
