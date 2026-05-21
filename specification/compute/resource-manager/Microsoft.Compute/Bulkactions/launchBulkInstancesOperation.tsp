@@ -32,16 +32,6 @@ alias LaunchLocationParameter = {
   location: azureLocation;
 };
 
-alias LaunchOperationParameter = {
-  /** The async operation id. */
-  @path
-  @minLength(1)
-  @segment("operations")
-  @key
-  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
-  id: string;
-};
-
 alias LaunchBulkInstancesOperationId = {
   /** The name of the LaunchBulkInstancesOperation. */
   @path
@@ -347,12 +337,25 @@ interface LaunchBulkInstancesOperation {
   >;
 
   @doc("Get the status of a LaunchBulkInstancesOperation.")
-  getOperationStatus is ArmResourceRead<
-    Resource = LocationBasedLaunchBulkInstancesOperation,
-    Parameters = LaunchOperationParameter,
-    Response = ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult>,
-    BaseParameters = LaunchSubscriptionParams
-  >;
+  @get
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/launchBulkInstancesOperations/asyncOperations/{asyncOperationId}")
+  getOperationStatus(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+
+    @doc("The location name.")
+    @path
+    @minLength(1)
+    location: azureLocation,
+
+    @doc("The async operation id.")
+    @path
+    @minLength(1)
+    @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+    asyncOperationId: string,
+  ):
+    | ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult>
+    | ErrorResponse;
 
   @doc("Creates or updates LaunchBulkInstancesOperations.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
