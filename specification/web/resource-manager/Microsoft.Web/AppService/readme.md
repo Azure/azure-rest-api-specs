@@ -128,7 +128,6 @@ directive:
       bag pattern.
   - suppress: GuidUsage
     from: openapi.json
-    where: $.definitions.ConnectorGatewayProperties.properties.connectorGatewayId
     reason: |
       connectorGatewayId is intentionally a UUID/GUID. It is the system
       assigned identifier persisted in the backend AI Gateway / Connector
@@ -136,7 +135,6 @@ directive:
       diagnostics and tooling.
   - suppress: PatchIdentityProperty
     from: openapi.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectorGateways/{name}"].patch
     reason: |
       Tags-only PATCH is intentional per the Connector Gateway API design.
       identity is assigned at create time via PUT and is not mutable through
