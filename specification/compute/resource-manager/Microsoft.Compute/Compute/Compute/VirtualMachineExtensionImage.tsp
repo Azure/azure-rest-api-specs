@@ -50,6 +50,7 @@ interface VirtualMachineExtensionImageTypeOps
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
+@tag("VirtualMachineExtensionImages")
 interface VirtualMachineExtensionImages {
   /**
    * Gets a virtual machine extension image.
