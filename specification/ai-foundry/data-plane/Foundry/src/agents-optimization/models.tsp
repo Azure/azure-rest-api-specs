@@ -6,13 +6,6 @@
 //   JobStatus — shared lifecycle union (queued/in_progress/succeeded/failed/cancelled)
 //   FoundryTimestamp — Unix epoch int32
 //   ApiError — standard error shape
-//
-// C# code changes required for Foundry alignment:
-//   - Status vocabulary: Pending/Running/Completed → queued/in_progress/succeeded
-//   - Timestamps: DateTimeOffset → unix epoch int32
-//   - ID field: OperationId → id
-//   - Route: /optimize → /agent_optimization_jobs
-//   - Response shape: multiple response types → single JobLike model
 
 import "../common/models.tsp";
 import "../openai-evaluations/models.tsp";
@@ -26,25 +19,28 @@ namespace Azure.AI.Projects;
 // Enums / unions
 // ---------------------------------------------------------------------------
 
-/** Optimization strategy dimension. */
-union OptimizationStrategy {
+/** Agent attribute that can be optimized. */
+union TargetAttribute {
   string,
 
-  @doc("Instruction-tuning strategy — rewrites agent system prompts.")
+  @doc("Instruction-tuning — rewrites agent system prompts.")
   instruction: "instruction",
 
-  @doc("Model-selection strategy — evaluates alternative LLM deployments.")
+  @doc("Model-selection — evaluates alternative LLM deployments.")
   `model`: "model",
 
-  @doc("Skill-tuning strategy — generates or modifies agent tool descriptions.")
+  @doc("Skill-tuning — generates or modifies agent skill descriptions.")
   skill: "skill",
+
+  @doc("Tool-tuning — optimizes function tool descriptions and parameter descriptions.")
+  tool: "tool",
 }
 
 /** Run mode for an optimization job. */
 union OptimizationMode {
   string,
 
-  @doc("Full optimization: baseline + mutation strategies.")
+  @doc("Full optimization: baseline + mutation target attributes.")
   optimize: "optimize",
 }
 
@@ -55,19 +51,22 @@ union OptimizationMode {
 @doc("The agent definition being optimized. Identifies the Foundry agent and optional configuration overrides.")
 model OptimizationAgentDefinition {
   @doc("Registered Foundry agent name. Required — bare-model mode is not supported.")
-  agent_name: string;
+  agentName: string;
 
   @doc("Pinned agent version. Defaults to latest if omitted.")
-  agent_version?: string;
+  agentVersion?: string;
 
-  @doc("Model deployment name (e.g., 'gpt-4o'). Optional when agent_name is set — the agent definition provides the model.")
+  @doc("Model deployment name (e.g., 'gpt-4o'). Optional when agentName is set — the agent definition provides the model.")
   `model`?: string;
 
   @doc("System prompt / instructions override. When set, used as the baseline instructions for the agent.")
-  system_prompt?: string;
+  systemPrompt?: string;
 
-  @doc("Optional named skills the optimizer may tune. Tool descriptions and parameters.")
+  @doc("Optional named skills the optimizer may tune.")
   skills?: OptimizationAgentSkill[];
+
+  @doc("Optional function tools available to the agent. When the 'tool' target attribute is active, tool descriptions are optimized. Schema fields (name, types, required) are immutable.")
+  tools?: AgentToolDefinition[];
 }
 
 @doc("A named skill on the agent that the optimizer may tune.")
@@ -75,29 +74,110 @@ model OptimizationAgentSkill {
   @doc("Skill name (matches the tool name on the agent).")
   name: string;
 
-  @doc("Free-form description used as the seed when tuning skill descriptions.")
+  @doc("Short description of what the skill does — used for discovery.")
   description?: string;
+
+  @doc("Full skill body — detailed instructions, rules, examples that the optimizer uses as the seed text to improve.")
+  body?: string;
 }
 
-@doc("A single evaluation task with input query, expected output, and evaluation criteria.")
+@doc("An OpenAI-format function tool definition. The optimizer mutates the function's description and per-parameter descriptions; schema fields (name, types, required) are immutable.")
+model AgentToolDefinition {
+  @doc("Tool type discriminator. Only 'function' is supported.")
+  type: string = "function";
+
+  @doc("The function definition (name, description, parameters schema).")
+  function: AgentToolFunction;
+}
+
+@doc("The inner function definition of an AgentToolDefinition.")
+model AgentToolFunction {
+  @doc("Function name — immutable, must match the executable function identifier.")
+  name: string;
+
+  @doc("Natural-language description shown to the model. Mutable during optimization.")
+  description?: string;
+
+  @doc("JSON Schema describing the function's arguments.")
+  parameters?: Record<unknown>;
+
+  @doc("Whether the provider should enforce strict JSON Schema validation.")
+  strict?: boolean;
+}
+
+@doc("A single evaluation task with input, expected output, and evaluation criteria.")
 model DatasetItem {
   @doc("Unique-within-the-dataset identifier for this task.")
   name: string;
 
-  @doc("The user query / input for the task.")
-  query: string;
+  @doc("The user input for the task (primary field name).")
+  prompt?: string;
+
+  @doc("The user query / input for the task (alias for prompt).")
+  query?: string;
 
   @doc("Optional ground truth used by reference-based evaluators.")
-  ground_truth?: string;
+  groundTruth?: string;
 
   @doc("Per-task evaluation criteria. Defaults to the job-level evaluators if unset.")
   criteria?: EvaluationCriterion[];
 
-  @doc("Pre-computed evaluation results in AOAI-compatible format. When provided together with `response_items`, the baseline run-and-evaluate phase is skipped.")
-  eval_results?: EvalRunOutputItemResult[];
+  @doc("Pre-computed evaluation results in AOAI-compatible format. When provided together with responseItems, the baseline run-and-evaluate phase is skipped.")
+  evalResults?: EvalResultItem[];
 
   @doc("Pre-computed agent response output items. Captures the full trajectory (function calls, tool outputs, messages) from a prior agent run.")
-  response_items?: OpenAI.OutputItem[];
+  responseItems?: ResponseOutputItem[];
+}
+
+@doc("A single evaluator result item — AOAI-compatible contract.")
+model EvalResultItem {
+  @doc("Evaluator type (e.g. 'azure_ai_evaluator', 'label_model').")
+  type: string;
+
+  @doc("Display name (e.g. 'Relevance', 'LabelModel').")
+  name?: string;
+
+  @doc("Metric key used for scoring (e.g. 'relevance').")
+  metric?: string;
+
+  @doc("Numeric score.")
+  score: float64;
+
+  @doc("Evaluator-assigned label (e.g. 'pass', 'fail').")
+  label?: string;
+
+  @doc("Evaluator-provided reason/explanation for the score.")
+  reason?: string;
+
+  @doc("Pass/fail threshold.")
+  threshold?: float64;
+
+  @doc("Whether the evaluator considered this a pass (score >= threshold).")
+  passed: boolean;
+}
+
+@doc("A single output item from the Responses API. Captures function calls, outputs, and messages in the agent trajectory.")
+model ResponseOutputItem {
+  @doc("Item type (e.g. 'function_call', 'function_call_output', 'message').")
+  type: string;
+
+  @doc("Message role (e.g. 'assistant').")
+  role?: string;
+
+  @doc("Text content of the item.")
+  text?: string;
+
+  @doc("Function name for function_call items.")
+  name?: string;
+
+  @doc("Serialized function arguments for function_call items.")
+  arguments?: string;
+
+  @doc("Call ID linking function_call to function_call_output.")
+  callId?: string;
+
+  @doc("Function output for function_call_output items.")
+  output?: string;
 }
 
 @doc("LLM-as-judge evaluation criterion applied to a single task.")
@@ -120,45 +200,47 @@ model DatasetRef {
 
 @doc("Tuning knobs and run-mode for an optimization job.")
 model OptimizationOptions {
-  @doc("Strategies to apply this run. Default: ['instruction'].")
-  strategies?: OptimizationStrategy[] = #[OptimizationStrategy.instruction];
+  @doc("Agent attributes to optimize (e.g. 'instruction', 'skill', 'model', 'tool'). When empty, auto-detected from the baseline config.")
+  targetAttributes?: TargetAttribute[];
 
-  @doc("Total candidate generation budget (number of candidates explored). Default: 10.")
-  budget?: int32 = 10;
+  @doc("Maximum optimization iterations per target attribute. Default: 5.")
+  maxIterations?: int32 = 5;
 
-  @doc("Maximum optimization iterations per strategy. Default: 5.")
-  max_iterations?: int32 = 5;
-
-  @doc("Tasks sampled per iteration (mutation step input). Default: service-decided (auto-computed).")
-  tasks_per_iteration?: int32;
+  @doc("Tasks sampled per iteration (mutation step input). Default: 0 means auto-compute.")
+  tasksPerIteration?: int32;
 
   @doc("Maximum tasks fed into the reflective-mutation LLM per iteration. Default: 5.")
-  max_reflection_tasks?: int32 = 5;
+  maxReflectionTasks?: int32 = 5;
 
   @doc("Minimum score improvement between iterations to continue (plateau detection). Default: 0.005.")
-  min_improvement?: float64 = 0.005;
+  minImprovement?: float64 = 0.005;
 
   @doc("Composite score threshold for a task to be considered passing. Default: 0.5.")
-  pass_threshold?: float64 = 0.5;
+  passThreshold?: float64 = 0.5;
 
   @doc("Target average score at which optimization stops early (quality ceiling). Default: 0.95.")
-  improvement_threshold?: float64 = 0.95;
+  improvementThreshold?: float64 = 0.95;
+
+  @doc("Max consecutive non-improving iterations before stopping. Default: 2.")
+  maxStaleIterations?: int32 = 2;
+
+  @doc("Per-target-attribute configuration overrides (e.g. model space for model optimization).")
+  targetConfig?: Record<unknown>;
 
   @doc("Run mode.")
   mode?: OptimizationMode;
 
   @doc("Foundry deployment name to use as the LLM-as-judge evaluation model. Required.")
-  eval_model?: string;
+  evalModel?: string;
 
-  @doc("Optional model deployment for strategy reflection (instruction rewriting, skill generation). Falls back to `eval_model` if unset.")
-  reflection_model?: string;
+  @doc("Optional model deployment for strategy reflection (instruction rewriting, skill generation). Falls back to evalModel if unset.")
+  reflectionModel?: string;
 
-  @doc("Per-task timeout for agent execution. Default: 300 seconds (5 minutes).")
-  @encode(DurationKnownEncoding.seconds, int32)
-  task_timeout_seconds?: duration = duration.fromISO("PT5M");
+  @doc("Per-task timeout for agent execution in seconds. Default: 300 (5 minutes).")
+  taskTimeoutSeconds?: int32 = 300;
 
   @doc("If true, retain temporary candidate-evaluation agent versions for inspection. Default: false.")
-  keep_versions?: boolean = false;
+  keepVersions?: boolean = false;
 }
 
 @doc("Caller-supplied inputs for an optimization job.")
@@ -166,19 +248,19 @@ model OptimizationJobInputs {
   @doc("The agent (and pinned version) being optimized.")
   agent: OptimizationAgentDefinition;
 
-  @doc("Inline evaluation dataset. Mutually exclusive with `train_dataset_reference`.")
+  @doc("Inline evaluation dataset. Mutually exclusive with trainDatasetReference.")
   dataset?: DatasetItem[];
 
-  @doc("Reference to a registered training dataset. Mutually exclusive with `dataset`.")
-  train_dataset_reference?: DatasetRef;
+  @doc("Reference to a registered training dataset. Mutually exclusive with dataset.")
+  trainDatasetReference?: DatasetRef;
 
   @doc("Optional held-out validation dataset for measuring generalization of the final candidate.")
-  validation_dataset_reference?: DatasetRef;
+  validationDatasetReference?: DatasetRef;
 
-  @doc("Job-level evaluators (referenced by `name`). Per-task `criteria` may override. Default: ['task_adherence'].")
+  @doc("Job-level evaluators (referenced by name). Per-task criteria may override. Default: ['task_adherence'].")
   evaluators?: string[];
 
-  @doc("Job-level evaluation criteria. Applied to all tasks unless overridden by per-task `criteria`.")
+  @doc("Job-level evaluation criteria. Applied to all tasks unless overridden by per-task criteria.")
   criteria?: EvaluationCriterion[];
 
   @doc("Tuning knobs and run-mode.")
@@ -189,32 +271,31 @@ model OptimizationJobInputs {
 // Progress / result models
 // ---------------------------------------------------------------------------
 
-@doc("In-flight progress; only populated while status is `queued` or `in_progress`.")
+@doc("In-flight progress; only populated while status is queued or in_progress.")
 model OptimizationJobProgress {
-  @doc("Strategy currently being explored.")
-  current_strategy: OptimizationStrategy;
+  @doc("Target attribute currently being explored.")
+  currentTargetAttribute: TargetAttribute;
 
   @doc("1-based current iteration index.")
-  current_iteration: int32;
+  currentIteration: int32;
 
   @doc("Tasks evaluated so far this iteration.")
-  tasks_completed: int32;
+  tasksCompleted: int32;
 
   @doc("Total tasks scheduled this iteration.")
-  tasks_total: int32;
+  tasksTotal: int32;
 
   @doc("Best score observed so far across all candidates.")
-  best_score: float64;
+  bestScore: float64;
 
-  @doc("Wall-clock time elapsed since the job began executing.")
-  @encode(DurationKnownEncoding.seconds, float64)
-  elapsed_seconds: duration;
+  @doc("Wall-clock time elapsed in seconds since the job began executing.")
+  elapsedSeconds: float64;
 }
 
 @doc("Aggregated evaluation result for a single candidate agent configuration across all tasks.")
 model OptimizationCandidate {
-  @doc("Server-assigned candidate identifier. Use with `GET /candidates/{id}` sub-endpoints.")
-  candidate_id?: string;
+  @doc("Server-assigned candidate identifier. Use with GET /candidates/{id} sub-endpoints.")
+  candidateId?: string;
 
   @doc("Display name of the candidate (e.g., 'baseline', 'instruction-v2').")
   name: string;
@@ -222,50 +303,53 @@ model OptimizationCandidate {
   @doc("The agent configuration that produced this candidate.")
   config: OptimizationAgentDefinition;
 
-  @doc("What was mutated from the baseline (e.g., {instructions: 'new prompt'}).")
+  @doc("What was mutated from the baseline (e.g., {systemPrompt: 'new prompt'}).")
   mutations: Record<unknown>;
 
-  @doc("Strategy rationale — why this candidate was generated.")
+  @doc("Rationale — why this candidate was generated.")
   rationale: string;
 
   @doc("Average composite score across all tasks.")
-  avg_score: float64;
+  avgScore: float64;
 
   @doc("Average token usage across all tasks.")
-  avg_tokens: float64;
+  avgTokens: float64;
 
   @doc("Fraction of tasks that met the pass threshold.")
-  pass_rate: float64;
+  passRate: float64;
 
   @doc("Individual task-level scores.")
-  task_scores: OptimizationTaskResult[];
+  taskScores: OptimizationTaskResult[];
 
   @doc("Whether this candidate is on the Pareto frontier (score vs cost).")
-  is_pareto_optimal: boolean;
+  isParetoOptimal: boolean;
 
   @doc("Average score from sampled evaluation (null if full dataset was used).")
-  sample_avg_score?: float64;
+  sampleAvgScore?: float64;
 
   @doc("Number of tasks in the sample (null if full dataset was used).")
-  sample_size?: int32;
+  sampleSize?: int32;
 
   @doc("'sample' if scored on a subset, 'full' if re-evaluated on the full dataset.")
-  evaluation_type?: string;
+  evaluationType?: string;
 
-  @doc("Identifies the strategy that produced this candidate.")
-  strategy?: OptimizationStrategy;
+  @doc("Identifies the target attribute that produced this candidate.")
+  targetAttribute?: TargetAttribute;
 
   @doc("Foundry evaluation identifier used to score this candidate.")
-  eval_id?: string;
+  evalId?: string;
 
   @doc("Foundry evaluation run identifier for this candidate's scoring run.")
-  eval_run_id?: string;
+  evalRunId?: string;
+
+  @doc("Promotion metadata. Null if the candidate has not been promoted.")
+  promotion?: PromotionInfo;
 }
 
 @doc("Per-task evaluation result for a single candidate.")
 model OptimizationTaskResult {
   @doc("Task name (from the dataset).")
-  task_name: string;
+  taskName: string;
 
   @doc("The user query / input for the task.")
   query?: string;
@@ -274,19 +358,19 @@ model OptimizationTaskResult {
   scores: Record<float64>;
 
   @doc("Composite score combining all evaluator scores.")
-  composite_score: float64;
+  compositeScore: float64;
 
   @doc("Total tokens consumed during the agent run for this task.")
   tokens: int32;
 
   @doc("Wall-clock seconds for this task's agent execution.")
-  duration_seconds: float64;
+  durationSeconds: float64;
 
   @doc("Whether the task met the pass threshold.")
   passed: boolean;
 
   @doc("Error message if the task failed during execution.")
-  error_message?: string;
+  errorMessage?: string;
 
   @doc("Per-evaluator reasoning keyed by evaluator name.")
   rationales?: Record<string>;
@@ -295,10 +379,10 @@ model OptimizationTaskResult {
   response?: string;
 
   @doc("Identifier of the agent run that produced this result.")
-  run_id?: string;
+  runId?: string;
 }
 
-@doc("Terminal-state result body. Populated when `status` is `succeeded` or `failed`.")
+@doc("Terminal-state result body. Populated when status is succeeded or failed.")
 model OptimizationJobResult {
   @doc("Evaluation scores for the original (un-optimized) agent configuration.")
   baseline?: OptimizationCandidate;
@@ -310,42 +394,108 @@ model OptimizationJobResult {
   candidates?: OptimizationCandidate[];
 
   @doc("Candidates on the Pareto frontier (maximize score, minimize cost).")
-  pareto_frontier?: OptimizationCandidate[];
+  paretoFrontier?: OptimizationCandidate[];
 
   @doc("Score of the best candidate on the held-out validation dataset. Null when no validation dataset was provided.")
-  validation_score?: OptimizationCandidate;
+  validationScore?: OptimizationCandidate;
 
   @doc("The options used for this optimization run.")
   options?: OptimizationOptions;
 
   @doc("Number of tasks sampled during optimization iterations (null if sampling was not used).")
-  sample_size?: int32;
+  sampleSize?: int32;
 
-  @doc("Non-fatal warnings from the optimization run (e.g., strategy failures that were skipped).")
+  @doc("Non-fatal warnings from the optimization run (e.g., target attribute failures that were skipped).")
   warnings?: string[];
 
-  @doc("True when all optimization strategies failed — only the baseline was evaluated.")
-  all_strategies_failed?: boolean;
+  @doc("True when all target attributes failed — only the baseline was evaluated.")
+  allTargetAttributesFailed?: boolean;
 }
 
 // ---------------------------------------------------------------------------
 // Job resource (uses shared JobLike template)
 // ---------------------------------------------------------------------------
 
-@doc("Agent optimization job resource — a long-running job that optimizes an agent's configuration (instructions, model, skills) to maximize evaluation scores. On success, the result contains scored candidates.")
+@doc("Agent optimization job resource — a long-running job that optimizes an agent's configuration (instructions, model, skills, tools) to maximize evaluation scores. On success, the result contains scored candidates.")
 model OptimizationJob
   is JobLike<OptimizationJobResult, OptimizationJobInputs> {
   @doc("The timestamp when the job was created, represented in Unix time.")
   @visibility(Lifecycle.Read)
-  created_at: FoundryTimestamp;
+  createdAt: FoundryTimestamp;
 
   @doc("The timestamp when the job was last updated, represented in Unix time.")
   @visibility(Lifecycle.Read)
-  updated_at?: FoundryTimestamp;
+  updatedAt?: FoundryTimestamp;
 
   @doc("Progress while in flight. Absent in terminal states.")
   @visibility(Lifecycle.Read)
   progress?: OptimizationJobProgress;
+
+  @doc("Metadata about the dataset used for this optimization job.")
+  @visibility(Lifecycle.Read)
+  dataset?: DatasetInfo;
+}
+
+// ---------------------------------------------------------------------------
+// Promotion models
+// ---------------------------------------------------------------------------
+
+@doc("Promotion metadata recorded when a candidate is deployed to a Foundry agent.")
+model PromotionInfo {
+  @doc("Timestamp when promotion occurred, represented in Unix time.")
+  promotedAt: FoundryTimestamp;
+
+  @doc("Name of the Foundry agent this candidate was promoted to.")
+  agentName: string;
+
+  @doc("Version of the Foundry agent this candidate was promoted to.")
+  agentVersion: string;
+}
+
+@doc("Request body for promoting a candidate to a Foundry agent version.")
+model PromoteCandidateRequest {
+  @doc("Name of the Foundry agent to promote to.")
+  agentName: string;
+
+  @doc("Version of the Foundry agent to promote to.")
+  agentVersion: string;
+}
+
+@doc("Response after successfully promoting a candidate.")
+model PromoteCandidateResponse {
+  @doc("The promoted candidate id.")
+  candidateId: string;
+
+  @doc("Status after promotion.")
+  status: string;
+
+  @doc("Timestamp when promotion occurred, represented in Unix time.")
+  promotedAt: FoundryTimestamp;
+
+  @doc("Name of the Foundry agent promoted to.")
+  agentName: string;
+
+  @doc("Version of the Foundry agent promoted to.")
+  agentVersion: string;
+}
+
+// ---------------------------------------------------------------------------
+// Dataset info model
+// ---------------------------------------------------------------------------
+
+@doc("Metadata about the dataset used for optimization, surfaced in the response.")
+model DatasetInfo {
+  @doc("Dataset name when using a registered dataset reference. Null for inline datasets.")
+  name?: string;
+
+  @doc("Dataset version when using a registered dataset reference. Null for inline datasets.")
+  version?: string;
+
+  @doc("Number of tasks/rows in the dataset.")
+  taskCount: int32;
+
+  @doc("True when the dataset was provided inline in the request body.")
+  isInline: boolean;
 }
 
 // ---------------------------------------------------------------------------
@@ -367,13 +517,61 @@ model CandidateDeployConfig {
 
   @doc("Optional skill overrides.")
   skills?: OptimizationAgentSkill[];
+
+  @doc("Optional tool overrides.")
+  tools?: AgentToolDefinition[];
 }
 
 @doc("Full per-task evaluation results for a candidate, returned by GET /candidates/{id}/results.")
 model CandidateResults {
   @doc("Owning candidate id.")
-  candidate_id: string;
+  candidateId: string;
 
   @doc("Per-task evaluation rows.")
   results: OptimizationTaskResult[];
+}
+
+@doc("Candidate metadata returned by GET /candidates/{id}.")
+model CandidateMetadata {
+  @doc("Server-assigned candidate identifier.")
+  candidateId: string;
+
+  @doc("Owning optimization job id.")
+  jobId: string;
+
+  @doc("Display name of the candidate.")
+  candidateName: string;
+
+  @doc("Candidate lifecycle status.")
+  status: string;
+
+  @doc("Candidate's aggregate score.")
+  score?: float64;
+
+  @doc("Whether detailed results are available for this candidate.")
+  hasResults: boolean;
+
+  @doc("Timestamp when the candidate was created, represented in Unix time.")
+  createdAt: FoundryTimestamp;
+
+  @doc("Timestamp when the candidate was last updated, represented in Unix time.")
+  updatedAt: FoundryTimestamp;
+
+  @doc("Promotion metadata. Null if not promoted.")
+  promotion?: PromotionInfo;
+
+  @doc("Files in the candidate's blob directory.")
+  files: CandidateFileInfo[];
+}
+
+@doc("File entry in a candidate's blob directory.")
+model CandidateFileInfo {
+  @doc("Relative path of the file.")
+  path: string;
+
+  @doc("File type category (e.g. 'config', 'results').")
+  type: string;
+
+  @doc("File size in bytes.")
+  sizeBytes: int64;
 }
