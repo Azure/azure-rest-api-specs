@@ -1147,61 +1147,6 @@ paths:
       x-ms-foundry-meta:
         required_previews:
           - AgentEndpoints=V1Preview
-  /agents/{agent_name}/endpoint/sessions/{session_id}:stop:
-    post:
-      operationId: Agents_stopSession
-      description: |-
-        Stops a session.
-        Returns 204 No Content when the stop succeeds.
-        Returns a failed session resource when the stop attempt fails.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - AgentEndpoints=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: session_id
-          in: path
-          required: true
-          description: The session identifier.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentSessionStopFailedResponse'
-        '204':
-          description: There is no content to send for this request, but the headers may be useful.
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agents
-      x-ms-foundry-meta:
-        required_previews:
-          - AgentEndpoints=V1Preview
   /agents/{agent_name}/import:
     post:
       operationId: Agents_updateAgentFromManifest
@@ -10736,30 +10681,10 @@ components:
             - idle
             - updating
             - failed
-            - stopping
             - deleting
             - deleted
             - expired
       description: The status of an agent session.
-      x-ms-foundry-meta:
-        required_previews:
-          - AgentEndpoints=V1Preview
-    AgentSessionStopFailedResponse:
-      type: object
-      required:
-        - session
-        - error
-      properties:
-        session:
-          allOf:
-            - $ref: '#/components/schemas/AgentSessionResource'
-          description: The session resource at the time of failure.
-          readOnly: true
-        error:
-          allOf:
-            - $ref: '#/components/schemas/OpenAI.Error'
-          description: Error details describing why the stop operation failed.
-      description: Response returned when stopping an agent session fails.
       x-ms-foundry-meta:
         required_previews:
           - AgentEndpoints=V1Preview
@@ -33489,7 +33414,9 @@ components:
         - type: string
           enum:
             - log
-      description: Additional event types may be introduced in future versions.
+      description: |-
+        Known SSE event types emitted by the hosted agent session log stream.
+        Additional event types may be introduced in future versions.
       x-ms-foundry-meta:
         required_previews:
           - HostedAgents=V1Preview

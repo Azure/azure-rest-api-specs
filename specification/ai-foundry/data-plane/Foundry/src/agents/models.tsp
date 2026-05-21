@@ -957,7 +957,7 @@ union AgentSessionStatus {
 
   /** Session is being stopped */
   Stopping: "stopping",
-
+  
   /** Session is being deleted (cleanup in progress). */
   Deleting: "deleting",
 
@@ -1057,7 +1057,9 @@ model CreateAgentSessionRequest {
   version_indicator: VersionIndicator;
 }
 
-/** Known SSE event types emitted by the hosted agent session log stream. */
+/**
+ * Known SSE event types emitted by the hosted agent session log stream.
+
 /** Response returned when stopping an agent session fails. */
 @doc("Response returned when stopping an agent session fails.")
 @extension(
