@@ -27,7 +27,8 @@ model RollingUpgradeStatusInfo
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
+@tag("VirtualMachineScaleSetRollingUpgrades")
 interface RollingUpgradeStatusInfos {
   /**
    * Gets the status of the latest virtual machine scale set rolling upgrade.
@@ -38,7 +39,6 @@ interface RollingUpgradeStatusInfos {
 }
 
 @@doc(RollingUpgradeStatusInfo.name, "");
-@@doc(
-  RollingUpgradeStatusInfo.properties,
+@@doc(RollingUpgradeStatusInfo.properties,
   "The status of the latest virtual machine scale set rolling upgrade."
 );

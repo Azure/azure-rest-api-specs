@@ -29,11 +29,12 @@ model Gallery is Azure.ResourceManager.TrackedResource<GalleryProperties> {
   identity?: GalleryIdentity;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface Galleries {
   /**
    * Retrieves information about a Shared Image Gallery.
    */
+  @tag("Galleries")
   get is ComputeResourceRead<
     Gallery,
     Parameters = {
@@ -56,24 +57,24 @@ interface Galleries {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @tag("Galleries")
   createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     Gallery,
-    Response =
-      | ArmResourceUpdatedResponse<Gallery>
-      | ArmResourceCreatedResponse<
-          Gallery,
-          ArmLroLocationHeader<FinalResult = Gallery> &
-            Azure.Core.Foundations.RetryAfterHeader
-        >
-      | (ArmAcceptedLroResponse & {
-          @bodyRoot
-          _: Gallery;
-        })
+    Response = ArmResourceUpdatedResponse<Gallery> | ArmResourceCreatedResponse<
+      Gallery,
+      ArmLroLocationHeader<FinalResult = Gallery> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Gallery> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @bodyRoot
+      _: Gallery;
+    })
   >;
 
   /**
    * Update a Shared Image Gallery.
    */
+  @tag("Galleries")
   @patch(#{ implicitOptionality: false })
   update is ComputeCustomPatchAsync<
     Gallery,
@@ -87,17 +88,16 @@ interface Galleries {
    * Delete a Shared Image Gallery.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @tag("Galleries")
   delete is ComputeResourceDeleteAsync<
     Gallery,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**
    * List galleries under a resource group.
    */
+  @tag("Galleries")
   listByResourceGroup is ComputeResourceListByParent<
     Gallery,
     Response = ArmResponse<GalleryList>
@@ -106,6 +106,7 @@ interface Galleries {
   /**
    * List galleries under a subscription.
    */
+  @tag("Galleries")
   list is ComputeListBySubscription<
     Gallery,
     Response = ArmResponse<GalleryList>
@@ -119,6 +120,7 @@ interface Galleries {
   @get
   @action("versions")
   @list
+  @tag("SoftDelete")
   @operationId("SoftDeletedResource_ListByArtifactName")
   listByArtifactName is ComputeResourceActionSync<
     Gallery,
@@ -149,36 +151,31 @@ interface Galleries {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body"
   @action("share")
+  @tag("GallerySharingUpdate")
   @operationId("GallerySharingProfile_Update")
   gallerySharingProfileUpdate is ComputeResourceActionAsyncBase<
     Gallery,
     SharingUpdate,
-
-      | ArmResponse<SharingUpdate>
-      | (ArmAcceptedLroResponse<
-          "Resource operation accepted.",
-          ArmLroLocationHeader<FinalResult = SharingUpdate> &
-            Azure.Core.Foundations.RetryAfterHeader
-        > & {
-          @bodyRoot _: SharingUpdate;
-        })
+    ArmResponse<SharingUpdate> | (ArmAcceptedLroResponse<
+      "Resource operation accepted.",
+      ArmLroLocationHeader<FinalResult = SharingUpdate> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > & {
+      @bodyRoot _: SharingUpdate;
+    })
   >;
 }
 
 @@doc(Gallery.name, "The name of the Shared Image Gallery.");
-@@doc(
-  Gallery.properties,
+@@doc(Gallery.properties,
   "Describes the properties of a Shared Image Gallery."
 );
-@@doc(
-  Galleries.createOrUpdate::parameters.resource,
+@@doc(Galleries.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update Shared Image Gallery operation."
 );
-@@doc(
-  Galleries.update::parameters.properties,
+@@doc(Galleries.update::parameters.properties,
   "Parameters supplied to the update Shared Image Gallery operation."
 );
-@@doc(
-  Galleries.gallerySharingProfileUpdate::parameters.body,
+@@doc(Galleries.gallerySharingProfileUpdate::parameters.body,
   "Parameters supplied to the update gallery sharing profile."
 );

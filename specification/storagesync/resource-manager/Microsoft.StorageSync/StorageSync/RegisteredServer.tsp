@@ -36,11 +36,11 @@ interface RegisteredServers {
     Response = RegisteredServer & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
-      correlationRequestId?: string;
+      xMsCorrelationRequestId?: string;
 
       @header("x-ms-request-id")
       @doc("request id.")
-      requestId?: string;
+      xMsRequestId?: string;
     },
     Error = StorageSyncError
   >;
@@ -58,21 +58,21 @@ interface RegisteredServers {
       | (ArmResourceUpdatedResponse<RegisteredServer> & {
           @header("x-ms-correlation-request-id")
           @doc("correlation request id.")
-          correlationRequestId?: string;
+          xMsCorrelationRequestId?: string;
 
           @header("x-ms-request-id")
           @doc("request id.")
-          requestId?: string;
+          xMsRequestId?: string;
         })
       | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = RegisteredServer> &
           Azure.Core.Foundations.RetryAfterHeader> & {
           @header("x-ms-correlation-request-id")
           @doc("correlation request id.")
-          correlationRequestId?: string;
+          xMsCorrelationRequestId?: string;
 
           @header("x-ms-request-id")
           @doc("request id.")
-          requestId?: string;
+          xMsRequestId?: string;
         }),
     Error = StorageSyncError
   >;
@@ -89,21 +89,21 @@ interface RegisteredServers {
       | (ArmResourceUpdatedResponse<RegisteredServer> & {
           @header("x-ms-correlation-request-id")
           @doc("correlation request id.")
-          correlationRequestId?: string;
+          xMsCorrelationRequestId?: string;
 
           @header("x-ms-request-id")
           @doc("request id.")
-          requestId?: string;
+          xMsRequestId?: string;
         })
       | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = RegisteredServer> &
           Azure.Core.Foundations.RetryAfterHeader> & {
           @header("x-ms-correlation-request-id")
           @doc("correlation request id.")
-          correlationRequestId?: string;
+          xMsCorrelationRequestId?: string;
 
           @header("x-ms-request-id")
           @doc("request id.")
-          requestId?: string;
+          xMsRequestId?: string;
         })
   >;
 
@@ -117,20 +117,20 @@ interface RegisteredServers {
       | (ArmDeletedResponse & {
           @header("x-ms-correlation-request-id")
           @doc("correlation request id.")
-          correlationRequestId?: string;
+          xMsCorrelationRequestId?: string;
 
           @header("x-ms-request-id")
           @doc("request id.")
-          requestId?: string;
+          xMsRequestId?: string;
         })
       | (ArmDeleteAcceptedLroResponse & {
           @header("x-ms-correlation-request-id")
           @doc("correlation request id.")
-          correlationRequestId?: string;
+          xMsCorrelationRequestId?: string;
 
           @header("x-ms-request-id")
           @doc("request id.")
-          requestId?: string;
+          xMsRequestId?: string;
         })
       | ArmDeletedNoContentResponse,
     Error = StorageSyncError
@@ -144,11 +144,11 @@ interface RegisteredServers {
     Response = ArmResponse<RegisteredServerArray> & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
-      correlationRequestId?: string;
+      xMsCorrelationRequestId?: string;
 
       @header("x-ms-request-id")
       @doc("request id.")
-      requestId?: string;
+      xMsRequestId?: string;
     },
     Error = StorageSyncError
   >;
@@ -165,21 +165,21 @@ interface RegisteredServers {
       | (OkResponse & {
           @header("x-ms-correlation-request-id")
           @doc("correlation request id.")
-          correlationRequestId?: string;
+          xMsCorrelationRequestId?: string;
 
           @header("x-ms-request-id")
           @doc("request id.")
-          requestId?: string;
+          xMsRequestId?: string;
         })
       | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
           Azure.Core.Foundations.RetryAfterHeader> & {
           @header("x-ms-correlation-request-id")
           @doc("correlation request id.")
-          correlationRequestId?: string;
+          xMsCorrelationRequestId?: string;
 
           @header("x-ms-request-id")
           @doc("request id.")
-          requestId?: string;
+          xMsRequestId?: string;
         }),
     Error = StorageSyncError
   >;
