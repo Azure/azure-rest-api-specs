@@ -1724,3 +1724,106 @@ model ClientEventOutputAudioBufferClear extends ClientEvent {
   /** The event type, must be `output_audio_buffer.clear`. */
   type: ClientEventType.output_audio_buffer_clear;
 }
+
+// -----------------------------------------------------------------------
+// WebRTC events added in v2026_06_01_preview
+//
+// Session flow:
+//   1. Client sends rtc.call.sdp.create (with SDP offer + optional session config)
+//   2. Server responds with rtc.call.sdp.created (SDP answer + call ID)
+//      — or rtc.call.error if something goes wrong
+//   3. Audio flows → output_audio_buffer.started / .stopped track playback state
+// -----------------------------------------------------------------------
+
+// --- 1. Session creation ---
+
+/** Sent by the client to initiate a WebRTC session with an SDP offer. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // snake_case to remain close to OpenAI style.
+@added(Versions.v2026_06_01_preview)
+@usage(RequestUsage)
+model ClientEventRtcCallSdpCreate extends ClientEvent {
+  /** The event type, must be `rtc.call.sdp.create`. */
+  type: ClientEventType.rtc_call_sdp_create;
+
+  /** The SDP offer from the client for WebRTC negotiation. */
+  sdp_offer: string;
+
+  /** Optional initial session configuration. If provided, applied before the session is established. */
+  session?: RequestSession;
+}
+
+/** Returned when the WebRTC SDP negotiation completes successfully. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // snake_case to remain close to OpenAI style.
+@added(Versions.v2026_06_01_preview)
+@usage(ResponseUsage)
+model ServerEventRtcCallSdpCreated extends ServerEvent {
+  /** The event type, must be `rtc.call.sdp.created`. */
+  type: ServerEventType.rtc_call_sdp_created;
+
+  /** The unique identifier for this RTC call session. */
+  rtc_call_id: string;
+
+  /** The SDP answer from the server for WebRTC negotiation. */
+  sdp_answer: string;
+}
+
+// --- 2. Errors ---
+
+/** Error details for RTC call errors. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // snake_case to remain close to OpenAI style.
+@added(Versions.v2026_06_01_preview)
+@usage(ResponseUsage)
+model RtcCallErrorDetails {
+  /** The error category: `invalid_request_error` or `server_error`. */
+  type: string;
+
+  /** A machine-readable error code. */
+  code?: string;
+
+  /** A human-readable error description. */
+  message: string;
+}
+
+/** Returned when a WebRTC call operation fails. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // snake_case to remain close to OpenAI style.
+@added(Versions.v2026_06_01_preview)
+@usage(ResponseUsage)
+model ServerEventRtcCallError extends ServerEvent {
+  /** The event type, must be `rtc.call.error`. */
+  type: ServerEventType.rtc_call_error;
+
+  /** The operation that caused the error (e.g., `rtc.call.sdp.create`). */
+  operation?: string;
+
+  /** The RTC call identifier, if available. */
+  rtc_call_id?: string;
+
+  /** The error details. */
+  error: RtcCallErrorDetails;
+}
+
+// --- 3. Audio playback state ---
+
+/** Returned when model audio output starts playing. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // snake_case to remain close to OpenAI style.
+@added(Versions.v2026_06_01_preview)
+@usage(ResponseUsage)
+model ServerEventOutputAudioBufferStarted extends ServerEvent {
+  /** The event type, must be `output_audio_buffer.started`. */
+  type: ServerEventType.output_audio_buffer_started;
+
+  /** The ID of the response whose audio started playing. */
+  response_id?: string;
+}
+
+/** Returned when model audio output finishes playing. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // snake_case to remain close to OpenAI style.
+@added(Versions.v2026_06_01_preview)
+@usage(ResponseUsage)
+model ServerEventOutputAudioBufferStopped extends ServerEvent {
+  /** The event type, must be `output_audio_buffer.stopped`. */
+  type: ServerEventType.output_audio_buffer_stopped;
+
+  /** The ID of the response whose audio stopped playing. */
+  response_id?: string;
+}
