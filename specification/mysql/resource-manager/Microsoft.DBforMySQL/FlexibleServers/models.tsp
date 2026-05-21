@@ -424,9 +424,11 @@ union replicationMode {
 @added(Versions.v2025_12_01_preview)
 union ReaderEndpointReplicaState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Replica is healthy and serving read traffic. */
   Healthy: "Healthy",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Replica is unhealthy and excluded from the reader endpoint. */
   Unhealthy: "Unhealthy",
 }
 
@@ -436,9 +438,11 @@ union ReaderEndpointReplicaState {
 @added(Versions.v2025_12_01_preview)
 union ReaderEndpointRoutingMethod {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Requests are distributed in a round-robin fashion across replicas. */
   Rotational: "Rotational",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Requests are routed to the replica with the best performance. */
   Performance: "Performance",
 }
 
@@ -448,9 +452,11 @@ union ReaderEndpointRoutingMethod {
 @added(Versions.v2025_12_01_preview)
 union FailoverOnPrimary {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Failover to the source server is enabled when replicas fail. */
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Failover to the source server is disabled. */
   Disabled: "Disabled",
 }
 
@@ -460,9 +466,11 @@ union FailoverOnPrimary {
 @added(Versions.v2025_12_01_preview)
 union AutoAddNewReplicas {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** New replicas are automatically added to the reader endpoint. */
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** New replicas are not automatically added to the reader endpoint. */
   Disabled: "Disabled",
 }
 
@@ -472,17 +480,23 @@ union AutoAddNewReplicas {
 @added(Versions.v2025_12_01_preview)
 union ReaderEndpointProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Provisioning has succeeded. */
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Provisioning: "Provisioning",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Initial creation in progress. */
+  Creating: "Creating",
+
+  /** Update in progress. */
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Deletion in progress. */
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Provisioning failed. */
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Provisioning was canceled. */
   Canceled: "Canceled",
 }
 

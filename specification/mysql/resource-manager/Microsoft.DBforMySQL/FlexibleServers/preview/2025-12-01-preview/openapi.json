@@ -3985,7 +3985,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/readerEndpoint": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/readerEndpoints": {
       "get": {
         "operationId": "ReaderEndpoints_List",
         "tags": [
@@ -4017,7 +4017,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ReaderEndpointList"
+              "$ref": "#/definitions/ReaderEndpointListResult"
             }
           },
           "default": {
@@ -4031,10 +4031,13 @@
           "Get list of server's Reader Endpoints": {
             "$ref": "./examples/ReaderEndpointsList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/readerEndpoint/{readerEndpointName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/readerEndpoints/{readerEndpointName}": {
       "get": {
         "operationId": "ReaderEndpoints_Get",
         "tags": [
@@ -4091,11 +4094,11 @@
         }
       },
       "put": {
-        "operationId": "ReaderEndpoints_UpdatePut",
+        "operationId": "ReaderEndpoints_CreateOrUpdate",
         "tags": [
           "ReaderEndpoints"
         ],
-        "description": "Creates a server's Reader Endpoint.",
+        "description": "Creates or updates a server's Reader Endpoint.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -4127,7 +4130,7 @@
           {
             "name": "resource",
             "in": "body",
-            "description": "The server's Reader Endpoint body to update.",
+            "description": "The server's Reader Endpoint body to create or update.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ReaderEndpoint"
@@ -4154,20 +4157,6 @@
               }
             }
           },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -4175,13 +4164,9 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Create a server's Reader Endpoint": {
-            "$ref": "./examples/ReaderEndpointCreate.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "original-uri",
+          "final-state-schema": "#/definitions/ReaderEndpoint"
         },
         "x-ms-long-running-operation": true
       },
@@ -4228,6 +4213,10 @@
                 "type": "string",
                 "description": "A link to the status monitor"
               },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -4251,7 +4240,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -4971,11 +4960,13 @@
         "values": [
           {
             "name": "Enabled",
-            "value": "Enabled"
+            "value": "Enabled",
+            "description": "New replicas are automatically added to the reader endpoint."
           },
           {
             "name": "Disabled",
-            "value": "Disabled"
+            "value": "Disabled",
+            "description": "New replicas are not automatically added to the reader endpoint."
           }
         ]
       }
@@ -5848,11 +5839,13 @@
         "values": [
           {
             "name": "Enabled",
-            "value": "Enabled"
+            "value": "Enabled",
+            "description": "Failover to the source server is enabled when replicas fail."
           },
           {
             "name": "Disabled",
-            "value": "Disabled"
+            "value": "Disabled",
+            "description": "Failover to the source server is disabled."
           }
         ]
       }
@@ -6966,9 +6959,9 @@
         }
       ]
     },
-    "ReaderEndpointList": {
+    "ReaderEndpointListResult": {
       "type": "object",
-      "description": "A list of the server's reader endpoints.",
+      "description": "The response of a ReaderEndpoint list operation.",
       "properties": {
         "value": {
           "type": "array",
@@ -7042,7 +7035,7 @@
       "description": "The current provisioning state.",
       "enum": [
         "Succeeded",
-        "Provisioning",
+        "Creating",
         "Updating",
         "Deleting",
         "Failed",
@@ -7054,27 +7047,33 @@
         "values": [
           {
             "name": "Succeeded",
-            "value": "Succeeded"
+            "value": "Succeeded",
+            "description": "Provisioning has succeeded."
           },
           {
-            "name": "Provisioning",
-            "value": "Provisioning"
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Initial creation in progress."
           },
           {
             "name": "Updating",
-            "value": "Updating"
+            "value": "Updating",
+            "description": "Update in progress."
           },
           {
             "name": "Deleting",
-            "value": "Deleting"
+            "value": "Deleting",
+            "description": "Deletion in progress."
           },
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "Provisioning failed."
           },
           {
             "name": "Canceled",
-            "value": "Canceled"
+            "value": "Canceled",
+            "description": "Provisioning was canceled."
           }
         ]
       }
@@ -7107,11 +7106,13 @@
         "values": [
           {
             "name": "Healthy",
-            "value": "Healthy"
+            "value": "Healthy",
+            "description": "Replica is healthy and serving read traffic."
           },
           {
             "name": "Unhealthy",
-            "value": "Unhealthy"
+            "value": "Unhealthy",
+            "description": "Replica is unhealthy and excluded from the reader endpoint."
           }
         ]
       }
@@ -7129,11 +7130,13 @@
         "values": [
           {
             "name": "Rotational",
-            "value": "Rotational"
+            "value": "Rotational",
+            "description": "Requests are distributed in a round-robin fashion across replicas."
           },
           {
             "name": "Performance",
-            "value": "Performance"
+            "value": "Performance",
+            "description": "Requests are routed to the replica with the best performance."
           }
         ]
       }

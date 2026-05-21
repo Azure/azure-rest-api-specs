@@ -21,7 +21,7 @@ model ReaderEndpoint
   ...ResourceNameParameter<
     Resource = ReaderEndpoint,
     KeyName = "readerEndpointName",
-    SegmentName = "readerEndpoint",
+    SegmentName = "readerEndpoints",
     NamePattern = "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
   >;
 }
@@ -35,35 +35,31 @@ interface ReaderEndpoints {
   get is ArmResourceRead<ReaderEndpoint>;
 
   /**
-   * Creates a server's Reader Endpoint.
+   * Creates or updates a server's Reader Endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  updatePut is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ReaderEndpoint,
-    Response = ArmResourceUpdatedResponse<ReaderEndpoint> | ArmResourceCreatedResponse<ReaderEndpoint> | ArmAcceptedLroResponse
+    Response = ArmResourceUpdatedResponse<ReaderEndpoint> | ArmResourceCreatedResponse<ReaderEndpoint>
   >;
 
   /**
    * Delete Reader Endpoint for a given server with specified reader endpoint name.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     ReaderEndpoint,
     LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Gets a list of server's Reader Endpoints.
    */
-  list is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
-    ReaderEndpoint,
-    Response = ArmResponse<ReaderEndpointList>
-  >;
+  list is ArmResourceListByParent<ReaderEndpoint>;
 }
 
 @@doc(ReaderEndpoint.name, "The name of the Reader Endpoint.");
 @@doc(ReaderEndpoint.properties, "Resource properties.");
-@@doc(ReaderEndpoints.updatePut::parameters.resource,
-  "The server's Reader Endpoint body to update."
+@@doc(ReaderEndpoints.createOrUpdate::parameters.resource,
+  "The server's Reader Endpoint body to create or update."
 );
