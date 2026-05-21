@@ -341,9 +341,11 @@ alias RestorableTableResourcesListParameters = {
   restoreTimestampInUtc?: string;
 };
 
-@@doc(RestorableDatabaseAccountGetResult.name,
+@@doc(
+  RestorableDatabaseAccountGetResult.name,
   "The instanceId GUID of a restorable database account."
 );
-@@doc(RestorableDatabaseAccountGetResult.properties,
+@@doc(
+  RestorableDatabaseAccountGetResult.properties,
   "The properties of a restorable database account."
 );

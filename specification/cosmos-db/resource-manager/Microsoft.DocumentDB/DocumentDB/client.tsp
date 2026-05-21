@@ -525,16 +525,19 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 @@clientName(BackupResource, "CassandraClusterBackupResourceInfo", "csharp");
 @@clientName(BackupSchedule, "CassandraClusterBackupSchedule", "csharp");
 @@clientName(BackupState, "CassandraClusterBackupState", "csharp");
-@@clientName(BackupStorageRedundancy,
+@@clientName(
+  BackupStorageRedundancy,
   "CosmosDBBackupStorageRedundancy",
   "csharp"
 );
 @@clientName(Certificate, "CassandraCertificate", "csharp");
-@@clientName(ClientEncryptionIncludedPath,
+@@clientName(
+  ClientEncryptionIncludedPath,
   "CosmosDBClientEncryptionIncludedPath",
   "csharp"
 );
-@@clientName(ClientEncryptionPolicy,
+@@clientName(
+  ClientEncryptionPolicy,
   "CosmosDBClientEncryptionPolicy",
   "csharp"
 );
