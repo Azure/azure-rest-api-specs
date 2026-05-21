@@ -340,7 +340,7 @@ using Microsoft.RecoveryServices;
 @@clientName(A2AVmManagedDiskInputDetails, "A2AVmManagedDiskDetails", "csharp");
 @@clientName(
   A2AProtectedManagedDiskDetails.allowedDiskLevelOperation,
-  "AllowedDiskLevelOperation",
+  "SiteRecoveryAllowedDiskLevelOperation",
   "csharp"
 );
 @@alternateType(
