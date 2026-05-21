@@ -2000,11 +2000,8 @@ model BuildToken {
   /**
    * Authentication token.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-secret extension for swagger fidelity"
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "using x-ms-secret extension for swagger fidelity"
   @visibility(Lifecycle.Read)
-  @extension("x-ms-secret", true)
-  @extension("format", "password")
+  @secret
   token?: string;
 
   /**
@@ -2051,10 +2048,7 @@ model ConnectedEnvironmentProperties {
    * Application Insights connection string used by Dapr to export Service to Service communication telemetry
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-secret extension for swagger fidelity"
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "using x-ms-secret extension for swagger fidelity"
-  @extension("x-ms-secret", true)
-  @extension("format", "password")
+  @secret
   daprAIConnectionString?: string;
 
   /**
@@ -2087,18 +2081,13 @@ model CustomDomainConfiguration {
   /**
    * PFX or PEM blob
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-secret needed with format:byte, @secret changes format to password"
-  @extension("x-ms-secret", true)
-  @extension("format", "password")
+  @secret
   certificateValue?: string;
 
   /**
    * Certificate password
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-secret extension for swagger fidelity"
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "using x-ms-secret extension for swagger fidelity"
-  @extension("x-ms-secret", true)
-  @extension("format", "password")
+  @secret
   certificatePassword?: string;
 
   /**
@@ -2184,11 +2173,8 @@ model CertificateProperties {
   /**
    * Certificate password.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-secret extension for swagger fidelity"
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "using x-ms-secret extension for swagger fidelity"
   @visibility(Lifecycle.Create)
-  @extension("x-ms-secret", true)
-  @extension("format", "password")
+  @secret
   password?: string;
 
   /**
@@ -2206,11 +2192,8 @@ model CertificateProperties {
   /**
    * PFX or PEM blob
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-secret extension for swagger fidelity"
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "using x-ms-secret extension for swagger fidelity"
   @visibility(Lifecycle.Create)
-  @extension("x-ms-secret", true)
-  @extension("format", "password")
+  @secret
   value?: string;
 
   /**
@@ -2420,11 +2403,8 @@ model DaprSecret {
   /**
    * Secret Value.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-secret extension for swagger fidelity"
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "using x-ms-secret extension for swagger fidelity"
   @visibility(Lifecycle.Read)
-  @extension("x-ms-secret", true)
-  @extension("format", "password")
+  @secret
   value?: string;
 }
 
@@ -2479,10 +2459,7 @@ model AzureFileProperties {
   /**
    * Storage account key for azure file.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-secret extension for swagger fidelity"
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "using x-ms-secret extension for swagger fidelity"
-  @extension("x-ms-secret", true)
-  @extension("format", "password")
+  @secret
   accountKey?: string;
 
   /**
@@ -2543,10 +2520,7 @@ model SmbStorage {
   /**
    * The password for the user.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-secret extension for swagger fidelity"
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "using x-ms-secret extension for swagger fidelity"
-  @extension("x-ms-secret", true)
-  @extension("format", "password")
+  @secret
   password?: string;
 
   /**
@@ -2574,20 +2548,14 @@ model ManagedEnvironmentProperties {
    * Azure Monitor instrumentation key used by Dapr to export Service to Service communication telemetry
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-secret extension for swagger fidelity"
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "using x-ms-secret extension for swagger fidelity"
-  @extension("x-ms-secret", true)
-  @extension("format", "password")
+  @secret
   daprAIInstrumentationKey?: string;
 
   /**
    * Application Insights connection string used by Dapr to export Service to Service communication telemetry
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-secret extension for swagger fidelity"
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "using x-ms-secret extension for swagger fidelity"
-  @extension("x-ms-secret", true)
-  @extension("format", "password")
+  @secret
   daprAIConnectionString?: string;
 
   /**
@@ -2778,11 +2746,8 @@ model LogAnalyticsConfiguration {
   /**
    * Log analytics customer key
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-secret extension for swagger fidelity"
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "using x-ms-secret extension for swagger fidelity"
   @visibility(Lifecycle.Create, Lifecycle.Update)
-  @extension("x-ms-secret", true)
-  @extension("format", "password")
+  @secret
   sharedKey?: string;
 
   /**
@@ -2799,10 +2764,7 @@ model AppInsightsConfiguration {
   /**
    * Application Insights connection string
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-secret extension for swagger fidelity"
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "using x-ms-secret extension for swagger fidelity"
-  @extension("x-ms-secret", true)
-  @extension("format", "password")
+  @secret
   connectionString?: string;
 }
 
@@ -2859,10 +2821,7 @@ model DataDogConfiguration {
   /**
    * The data dog api key
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-secret extension for swagger fidelity"
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "using x-ms-secret extension for swagger fidelity"
-  @extension("x-ms-secret", true)
-  @extension("format", "password")
+  @secret
   key?: string;
 }
 
@@ -3228,11 +3187,8 @@ model EnvironmentAuthTokenProperties {
   /**
    * Auth token value.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-secret extension for swagger fidelity"
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "using x-ms-secret extension for swagger fidelity"
   @visibility(Lifecycle.Read)
-  @extension("x-ms-secret", true)
-  @extension("format", "password")
+  @secret
   token?: string;
 
   /**
@@ -4921,20 +4877,6 @@ union SessionPoolProvisioningState {
 /**
  * Use to select the lifecycle stages of a Container App during which the Managed Identity should be available.
  */
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-enum name needed for backward compatibility"
-@extension(
-  "x-ms-enum",
-  #{
-    name: "IdentitySettingsLifeCycle",
-    modelAsString: true,
-    values: #[
-      #{ name: "None", value: "None", description: "None" },
-      #{ name: "Main", value: "Main", description: "Main" },
-      #{ name: "Init", value: "Init", description: "Init" },
-      #{ name: "All", value: "All", description: "All" }
-    ],
-  }
-)
 union IdentitySettingsLifeCycle {
   string,
 
@@ -4962,20 +4904,6 @@ union IdentitySettingsLifeCycle {
 /**
  * Use to select the lifecycle stages of a Session Pool during which the Managed Identity should be available.
  */
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-enum name needed for backward compatibility"
-@extension(
-  "x-ms-enum",
-  #{
-    name: "IdentitySettingsLifeCycle",
-    modelAsString: true,
-    values: #[
-      #{ name: "None", value: "None", description: "None" },
-      #{ name: "Main", value: "Main", description: "Main" },
-      #{ name: "Init", value: "Init", description: "Init" },
-      #{ name: "All", value: "All", description: "All" }
-    ],
-  }
-)
 union SessionPoolIdentityLifeCycle {
   string,
 
@@ -5074,21 +5002,6 @@ union SourceControlOperationState {
 /**
  * The type of extendedLocation.
  */
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-enum name needed for backward compatibility"
-@extension(
-  "x-ms-enum",
-  #{
-    name: "ExtendedLocationTypes",
-    modelAsString: true,
-    values: #[
-      #{
-        name: "CustomLocation",
-        value: "CustomLocation",
-        description: "CustomLocation",
-      }
-    ],
-  }
-)
 union ExtendedLocationTypes {
   string,
 
@@ -5101,22 +5014,6 @@ union ExtendedLocationTypes {
 /**
  * Metadata to represent the container app kind, representing if a container app is workflowapp or functionapp.
  */
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-enum name needed for backward compatibility"
-@extension(
-  "x-ms-enum",
-  #{
-    name: "Kind",
-    modelAsString: true,
-    values: #[
-      #{
-        name: "workflowapp",
-        value: "workflowapp",
-        description: "workflowapp",
-      },
-      #{ name: "functionapp", value: "functionapp", description: "functionapp" }
-    ],
-  }
-)
 union Kind {
   string,
 
@@ -5271,19 +5168,6 @@ union IngressTransportMethod {
 /**
  * Custom Domain binding type.
  */
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-enum name needed for backward compatibility"
-@extension(
-  "x-ms-enum",
-  #{
-    name: "BindingType",
-    modelAsString: true,
-    values: #[
-      #{ name: "Disabled", value: "Disabled", description: "Disabled" },
-      #{ name: "SniEnabled", value: "SniEnabled", description: "SniEnabled" },
-      #{ name: "Auto", value: "Auto", description: "Auto" }
-    ],
-  }
-)
 union BindingType {
   string,
 
@@ -5306,18 +5190,6 @@ union BindingType {
 /**
  * Allow or Deny rules to determine for incoming IP. Note: Rules can only consist of ALL Allow or ALL Deny
  */
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-enum name needed for backward compatibility"
-@extension(
-  "x-ms-enum",
-  #{
-    name: "Action",
-    modelAsString: true,
-    values: #[
-      #{ name: "Allow", value: "Allow", description: "Allow" },
-      #{ name: "Deny", value: "Deny", description: "Deny" }
-    ],
-  }
-)
 union Action {
   string,
 
@@ -5335,18 +5207,6 @@ union Action {
 /**
  * Sticky Session Affinity
  */
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-enum name needed for backward compatibility"
-@extension(
-  "x-ms-enum",
-  #{
-    name: "Affinity",
-    modelAsString: true,
-    values: #[
-      #{ name: "sticky", value: "sticky", description: "sticky" },
-      #{ name: "none", value: "none", description: "none" }
-    ],
-  }
-)
 union Affinity {
   string,
 
@@ -5403,18 +5263,6 @@ union IngressTargetPortHttpScheme {
 /**
  * Tells Dapr which protocol your application is using. Valid options are http and grpc. Default is http
  */
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-enum name needed for backward compatibility"
-@extension(
-  "x-ms-enum",
-  #{
-    name: "AppProtocol",
-    modelAsString: true,
-    values: #[
-      #{ name: "http", value: "http", description: "http" },
-      #{ name: "grpc", value: "grpc", description: "grpc" }
-    ],
-  }
-)
 union AppProtocol {
   string,
 
@@ -5432,20 +5280,6 @@ union AppProtocol {
 /**
  * Sets the log level for the Dapr sidecar. Allowed values are debug, info, warn, error. Default is info.
  */
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-enum name needed for backward compatibility"
-@extension(
-  "x-ms-enum",
-  #{
-    name: "LogLevel",
-    modelAsString: true,
-    values: #[
-      #{ name: "info", value: "info", description: "info" },
-      #{ name: "debug", value: "debug", description: "debug" },
-      #{ name: "warn", value: "warn", description: "warn" },
-      #{ name: "error", value: "error", description: "error" }
-    ],
-  }
-)
 union LogLevel {
   string,
 
@@ -6258,11 +6092,8 @@ model SessionPoolSecret {
   /**
    * Secret Value.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-secret extension for swagger fidelity"
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "using x-ms-secret extension for swagger fidelity"
   @visibility(Lifecycle.Create, Lifecycle.Update)
-  @extension("x-ms-secret", true)
-  @extension("format", "password")
+  @secret
   value?: string;
 }
 
@@ -6728,11 +6559,8 @@ model McpServerCredential {
   /**
    * The API key for the MCP server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-secret extension for swagger fidelity"
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "using x-ms-secret extension for swagger fidelity"
   @visibility(Lifecycle.Read)
-  @extension("x-ms-secret", true)
-  @extension("format", "password")
+  @secret
   apiKey?: string;
 }
 
@@ -6798,11 +6626,8 @@ model GithubActionConfiguration {
   /**
    * One time Github PAT to configure github environment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-secret extension for swagger fidelity"
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "using x-ms-secret extension for swagger fidelity"
   @visibility(Lifecycle.Create, Lifecycle.Update)
-  @extension("x-ms-secret", true)
-  @extension("format", "password")
+  @secret
   githubPersonalAccessToken?: string;
 
   /**
@@ -6867,31 +6692,22 @@ model AzureCredentials {
   /**
    * Client Id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-secret extension for swagger fidelity"
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "using x-ms-secret extension for swagger fidelity"
   @visibility(Lifecycle.Create, Lifecycle.Update)
-  @extension("x-ms-secret", true)
-  @extension("format", "password")
+  @secret
   clientId?: string;
 
   /**
    * Client Secret.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-secret extension for swagger fidelity"
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "using x-ms-secret extension for swagger fidelity"
   @visibility(Lifecycle.Create, Lifecycle.Update)
-  @extension("x-ms-secret", true)
-  @extension("format", "password")
+  @secret
   clientSecret?: string;
 
   /**
    * Tenant Id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-secret extension for swagger fidelity"
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "using x-ms-secret extension for swagger fidelity"
   @visibility(Lifecycle.Create, Lifecycle.Update)
-  @extension("x-ms-secret", true)
-  @extension("format", "password")
+  @secret
   tenantId?: string;
 
   /**
@@ -7202,11 +7018,8 @@ model Secret {
   /**
    * Secret Value.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-secret extension for swagger fidelity"
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "using x-ms-secret extension for swagger fidelity"
   @visibility(Lifecycle.Create, Lifecycle.Update)
-  @extension("x-ms-secret", true)
-  @extension("format", "password")
+  @secret
   value?: string;
 
   /**
@@ -8083,11 +7896,8 @@ model ContainerAppSecret {
   /**
    * Secret Value.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-secret extension for swagger fidelity"
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "using x-ms-secret extension for swagger fidelity"
   @visibility(Lifecycle.Read)
-  @extension("x-ms-secret", true)
-  @extension("format", "password")
+  @secret
   value?: string;
 
   /**
@@ -8122,11 +7932,8 @@ model ContainerAppAuthTokenProperties {
   /**
    * Auth token value.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-secret extension for swagger fidelity"
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "using x-ms-secret extension for swagger fidelity"
   @visibility(Lifecycle.Read)
-  @extension("x-ms-secret", true)
-  @extension("format", "password")
+  @secret
   token?: string;
 
   /**
@@ -9017,8 +8824,7 @@ model ErrorEntity {
 /**
  * The workflow filter.
  */
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-secret extension for swagger fidelity"
-@extension("x-ms-secret", true)
+@secret
 model WorkflowArtifacts {
   /**
    * Application settings of the workflow.
