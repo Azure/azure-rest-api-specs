@@ -451,7 +451,6 @@ interface Agents {
     NoContentResponse
   >;
 
-  
   /**
    * Stops a session.
    * Returns 204 No Content when the stop succeeds.
@@ -474,7 +473,7 @@ interface Agents {
       /** The session identifier. */
       @path session_id: string;
     },
-    NoContentResponse | AgentSessionStopFailedResponse
+    NoContentResponse
   >;
 
   /**
@@ -547,5 +546,5 @@ interface Agents {
       @path session_id: string;
     },
     SseResponseOf<SessionLogEvent>
-  >;  
+  >;
 }
