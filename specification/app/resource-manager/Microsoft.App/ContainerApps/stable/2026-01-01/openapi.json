@@ -2812,7 +2812,7 @@
           {
             "name": "resource",
             "in": "body",
-            "description": "Logic app resource properties.",
+            "description": "Resource create parameters.",
             "required": false,
             "schema": {
               "$ref": "#/definitions/LogicApp"
@@ -12910,22 +12910,11 @@
     "LogicApp": {
       "type": "object",
       "description": "A logic app extension resource",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/LogicAppProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        }
-      },
       "allOf": [
         {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
-    },
-    "LogicAppProperties": {
-      "type": "object",
-      "description": "The properties of logic apps extension."
     },
     "Login": {
       "type": "object",
@@ -13378,7 +13367,7 @@
             "Main"
           ],
           "x-ms-enum": {
-            "name": "SessionPoolIdentityLifeCycleStable",
+            "name": "SessionPoolIdentityLifeCycle",
             "modelAsString": true,
             "values": [
               {
@@ -13389,7 +13378,7 @@
               {
                 "name": "Main",
                 "value": "Main",
-                "description": "Use managed identity during the main stage of the Session Pool lifecycle."
+                "description": "Use managed identity during the main stage of the Container App lifecycle."
               }
             ]
           }

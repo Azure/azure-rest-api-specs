@@ -4912,34 +4912,7 @@ union SessionPoolIdentityLifeCycle {
   None: "None",
 
   /**
-   * Use managed identity during the main stage of the Session Pool lifecycle.
-   */
-  Main: "Main",
-
-  /**
-   * Use managed identity during the init stage of the Session Pool lifecycle.
-   */
-  Init: "Init",
-
-  /**
-   * Use managed identity during all lifecycle stages of the Session Pool.
-   */
-  All: "All",
-}
-
-/**
- * Use to select the lifecycle stages of a Session Pool during which the Managed Identity should be available (stable version with limited values).
- */
-union SessionPoolIdentityLifeCycleStable {
-  string,
-
-  /**
-   * Do not use managed identity during any lifecycle stage.
-   */
-  None: "None",
-
-  /**
-   * Use managed identity during the main stage of the Session Pool lifecycle.
+   * Use managed identity during the main stage of the Container App lifecycle.
    */
   Main: "Main",
 }
@@ -6473,8 +6446,8 @@ model ManagedIdentitySetting {
   /**
    * Use to select the lifecycle stages of a Session Pool during which the Managed Identity should be available.
    */
-  @typeChangedFrom(Versions.v2026_01_01, SessionPoolIdentityLifeCycle)
-  lifecycle?: SessionPoolIdentityLifeCycleStable = "None";
+  @typeChangedFrom(Versions.v2026_01_01, IdentitySettingsLifeCycle)
+  lifecycle?: SessionPoolIdentityLifeCycle = "None";
 }
 
 /**

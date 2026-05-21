@@ -4321,7 +4321,7 @@
             "name": "resource",
             "in": "body",
             "description": "Logic app resource properties.",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/LogicApp"
             }
@@ -18562,7 +18562,7 @@
             "All"
           ],
           "x-ms-enum": {
-            "name": "SessionPoolIdentityLifeCycle",
+            "name": "IdentitySettingsLifeCycle",
             "modelAsString": true,
             "values": [
               {
@@ -18573,17 +18573,17 @@
               {
                 "name": "Main",
                 "value": "Main",
-                "description": "Use managed identity during the main stage of the Session Pool lifecycle."
+                "description": "Use managed identity during the main stage of the Container App lifecycle."
               },
               {
                 "name": "Init",
                 "value": "Init",
-                "description": "Use managed identity during the init stage of the Session Pool lifecycle."
+                "description": "Use managed identity during the init stage of the Container App lifecycle."
               },
               {
                 "name": "All",
                 "value": "All",
-                "description": "Use managed identity during all lifecycle stages of the Session Pool."
+                "description": "Use managed identity during all lifecycle stages of the Container App."
               }
             ]
           }
