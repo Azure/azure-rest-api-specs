@@ -95,7 +95,8 @@ interface VirtualMachineScaleSetVMSOps
       }>
     > {}
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
+@tag("VirtualMachineScaleSetVMs")
 interface VirtualMachineScaleSetVMS {
   /**
    * Gets a virtual machine from a VM scale set.

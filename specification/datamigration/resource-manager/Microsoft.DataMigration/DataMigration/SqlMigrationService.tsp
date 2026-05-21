@@ -13,15 +13,24 @@ namespace Microsoft.DataMigration;
 /**
  * A SQL Migration Service.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SqlMigrationService
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<SqlMigrationServiceProperties> {
+  is Azure.ResourceManager.ProxyResource<SqlMigrationServiceProperties> {
   ...ResourceNameParameter<
     Resource = SqlMigrationService,
     KeyName = "sqlMigrationServiceName",
     SegmentName = "sqlMigrationServices",
     NamePattern = ""
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: string;
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
 }
 
 @armResourceOperations

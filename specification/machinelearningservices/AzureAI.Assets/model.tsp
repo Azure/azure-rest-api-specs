@@ -35,6 +35,9 @@ model AssetVersion {
 
 @doc("DeploymentTemplate resource definition")
 model DeploymentTemplate is AssetVersion {
+  @doc("The display name of the deployment template.")
+  displayName?: string;
+
   @doc("The type of deployment template.")
   deploymentTemplateType: string;
 
@@ -61,6 +64,9 @@ model DeploymentTemplate is AssetVersion {
 
   @doc("List of allowed instance types for the deployment.")
   allowedInstanceType: string[];
+
+  @doc("Accelerator configurations for the deployment template.")
+  acceleratorMaps?: AcceleratorMap[];
 
   @doc("Default instance type for the deployment.")
   defaultInstanceType: string;
