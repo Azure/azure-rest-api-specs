@@ -18,15 +18,18 @@ using Azure.ResourceManager;
 // projections collide on the canonical names. Force a single canonical
 // "Arm"-prefixed name for Python. Same approach used for
 // ResourceProvisioningState in EventGrid (PR #41644).
-@@clientName(Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "ArmManagedServiceIdentity",
   "python"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.UserAssignedIdentity,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.UserAssignedIdentity,
   "ArmUserAssignedIdentity",
   "python"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType,
   "ArmManagedServiceIdentityType",
   "python"
 );
