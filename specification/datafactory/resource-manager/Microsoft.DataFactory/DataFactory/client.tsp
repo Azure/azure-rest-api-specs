@@ -1426,16 +1426,45 @@ using Microsoft.DataFactory;
 
 // MPG migration: rename operations to match baseline AutoRest SDK method names so
 // downstream consumers compile against the regenerated client without source breaks.
-//
-// IntegrationRuntime operations
 @@clientName(
-  IntegrationRuntimeResources.refresh,
-  "RefreshIntegrationRuntimeObjectMetadata",
+  ExposureControlOperationGroup.getFeatureValue,
+  "GetFeatureValueExposureControl",
+  "csharp"
+);
+@@clientName(Factories.addDataFlow, "AddDataFlowToDebugSession", "csharp");
+@@clientName(Factories.cancel, "CancelPipelineRun", "csharp");
+@@clientName(Factories.create, "CreateDataFlowDebugSession", "csharp");
+@@clientName(
+  Factories.dataFlowDebugSessionDelete,
+  "DeleteDataFlowDebugSession",
   "csharp"
 );
 @@clientName(
-  IntegrationRuntimeResources.enableInteractiveQuery,
-  "EnableInteractiveQueryIntegrationRuntime",
+  Factories.executeCommand,
+  "ExecuteDataFlowDebugSessionCommand",
+  "csharp"
+);
+@@clientName(
+  Factories.getFeatureValueByFactory,
+  "GetExposureControlFeature",
+  "csharp"
+);
+@@clientName(Factories.pipelineRunsGet, "GetPipelineRun", "csharp");
+@@clientName(
+  Factories.privateLinkResourcesGet,
+  "GetPrivateLinkResources",
+  "csharp"
+);
+@@clientName(Factories.queryByPipelineRun, "GetActivityRun", "csharp");
+@@clientName(
+  Factories.queryFeatureValuesByFactory,
+  "GetExposureControlFeatures",
+  "csharp"
+);
+@@clientName(Factories.triggersQueryByFactory, "GetTriggers", "csharp");
+@@clientName(
+  FactoriesOperationGroup.configureFactoryRepo,
+  "ConfigureFactoryRepoInformation",
   "csharp"
 );
 @@clientName(
@@ -1444,13 +1473,18 @@ using Microsoft.DataFactory;
   "csharp"
 );
 @@clientName(
-  IntegrationRuntimeResources.integrationRuntimeNodesGet,
-  "GetIntegrationRuntimeNode",
+  IntegrationRuntimeResources.enableInteractiveQuery,
+  "EnableInteractiveQueryIntegrationRuntime",
   "csharp"
 );
 @@clientName(
   IntegrationRuntimeResources.integrationRuntimeNodesDelete,
   "DeleteIntegrationRuntimeNode",
+  "csharp"
+);
+@@clientName(
+  IntegrationRuntimeResources.integrationRuntimeNodesGet,
+  "GetIntegrationRuntimeNode",
   "csharp"
 );
 @@clientName(
@@ -1468,52 +1502,10 @@ using Microsoft.DataFactory;
   "GetOutboundNetworkDependencies",
   "csharp"
 );
-
-// Factory operations
-@@clientName(Factories.cancel, "CancelPipelineRun", "csharp");
-@@clientName(Factories.pipelineRunsGet, "GetPipelineRun", "csharp");
-@@clientName(Factories.queryByPipelineRun, "GetActivityRun", "csharp");
-@@clientName(Factories.triggersQueryByFactory, "GetTriggers", "csharp");
 @@clientName(
-  Factories.getFeatureValueByFactory,
-  "GetExposureControlFeature",
+  IntegrationRuntimeResources.refresh,
+  "RefreshIntegrationRuntimeObjectMetadata",
   "csharp"
 );
-@@clientName(
-  Factories.queryFeatureValuesByFactory,
-  "GetExposureControlFeatures",
-  "csharp"
-);
-@@clientName(Factories.create, "CreateDataFlowDebugSession", "csharp");
-@@clientName(Factories.addDataFlow, "AddDataFlowToDebugSession", "csharp");
-@@clientName(
-  Factories.executeCommand,
-  "ExecuteDataFlowDebugSessionCommand",
-  "csharp"
-);
-@@clientName(
-  Factories.dataFlowDebugSessionDelete,
-  "DeleteDataFlowDebugSession",
-  "csharp"
-);
-@@clientName(
-  Factories.privateLinkResourcesGet,
-  "GetPrivateLinkResources",
-  "csharp"
-);
-
-// Trigger operations
 @@clientName(TriggerResources.cancel, "CancelTriggerRun", "csharp");
 @@clientName(TriggerResources.rerun, "RerunTriggerRun", "csharp");
-
-// Subscription-scope operations
-@@clientName(
-  FactoriesOperationGroup.configureFactoryRepo,
-  "ConfigureFactoryRepoInformation",
-  "csharp"
-);
-@@clientName(
-  ExposureControlOperationGroup.getFeatureValue,
-  "GetFeatureValueExposureControl",
-  "csharp"
-);
