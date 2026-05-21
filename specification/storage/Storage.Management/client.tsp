@@ -113,10 +113,14 @@ using Microsoft.Storage;
 @@clientName(LeaseShareRequest, "LeaseShareContent", "csharp");
 @@clientName(ListAccountSasResponse, "GetAccountSasResult", "csharp");
 @@clientName(ListServiceSasResponse, "GetServiceSasResult", "csharp");
-@@clientName(TestConnectionResponse, "TestConnectionResult", "csharp");
+@@clientName(
+  TestConnectionResponse,
+  "StorageConnectorTestConnectionResult",
+  "csharp"
+);
 @@clientName(
   TestExistingConnectionRequest,
-  "TestExistingConnectionContent",
+  "StorageConnectorTestExistingConnectionContent",
   "csharp"
 );
 @@clientName(
@@ -834,8 +838,13 @@ namespace Azure.ResourceManager.Models {
 );
 @@clientName(DataShareSourceUpdate, "DataShareSourcePatch", "csharp");
 @@clientName(
+  ManagedIdentityAuthProperties,
+  "StorageConnectorManagedIdentityAuth",
+  "csharp"
+);
+@@clientName(
   ManagedIdentityAuthPropertiesUpdate,
-  "ManagedIdentityAuthPropertiesPatch",
+  "StorageConnectorManagedIdentityAuthPatch",
   "csharp"
 );
 @@clientName(
