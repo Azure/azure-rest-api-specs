@@ -3161,13 +3161,15 @@ model DataEncryption {
   @visibility(Lifecycle.Read)
   geoBackupEncryptionKeyStatus?: EncryptionKeyStatus;
 
+  #suppress "azure-core/no-guid-usage" "To be defined as GUID following recommendation by Azure Resource Manager guidelines."
   @doc("Client id of multi-tenant Microsoft Entra application.")
   @added(Versions.v2026_04_01)
-  primaryFederatedIdentityClientId?: string;
+  primaryFederatedIdentityClientId?: uuid;
 
+  #suppress "azure-core/no-guid-usage" "To be defined as GUID following recommendation by Azure Resource Manager guidelines."
   @doc("Client id of multi-tenant Microsoft Entra application for when it is configured to support geographically redundant backups.")
   @added(Versions.v2026_04_01)
-  geoBackupFederatedIdentityClientId?: string;
+  geoBackupFederatedIdentityClientId?: uuid;
 }
 
 /**
@@ -3950,7 +3952,7 @@ union MaintenanceEventStatus {
 @doc("Properties of a maintenance event resource.")
 @added(Versions.v2026_04_01)
 model MaintenanceEventResourceProperties {
-  @doc("The unique identifier of the maintenance event (e.g. 'op_123456789').")
+  @doc("A service-generated identifier for this maintenance event, assigned by the platform (e.g., 'YL1T-HFG'). The format is not contractual and clients should not attempt to parse or construct this value.")
   @visibility(Lifecycle.Read)
   maintenanceEventId?: string;
 

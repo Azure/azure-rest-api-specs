@@ -5288,6 +5288,11 @@
         }
       }
     },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "AzureManagedDiskPerformanceTier": {
       "type": "string",
       "description": "Storage tier of a server.",
@@ -6157,11 +6162,11 @@
           "readOnly": true
         },
         "primaryFederatedIdentityClientId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Client id of multi-tenant Microsoft Entra application."
         },
         "geoBackupFederatedIdentityClientId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Client id of multi-tenant Microsoft Entra application for when it is configured to support geographically redundant backups."
         }
       }
@@ -7158,7 +7163,7 @@
       "properties": {
         "maintenanceEventId": {
           "type": "string",
-          "description": "The unique identifier of the maintenance event (e.g. 'op_123456789').",
+          "description": "A service-generated identifier for this maintenance event, assigned by the platform (e.g., 'YL1T-HFG'). The format is not contractual and clients should not attempt to parse or construct this value.",
           "readOnly": true
         },
         "maintenanceType": {
