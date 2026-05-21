@@ -81,7 +81,7 @@ interface EHNamespaces {
     PatchModel = EHNamespace,
     Response =
       | ArmResponse<EHNamespace>
-      | ArmCreatedResponse<ResponseBody = EHNamespace, ExtraHeaders = {}>
+      | (CreatedResponse & EHNamespace)
       | AcceptedResponse,
     Error = ErrorResponse
   >;
