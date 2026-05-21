@@ -1110,6 +1110,25 @@
     }
   },
   "definitions": {
+    "AcceleratorMap": {
+      "type": "object",
+      "description": "Accelerator configuration for a model instance.",
+      "properties": {
+        "acceleratorType": {
+          "type": "string",
+          "description": "The type of accelerator (e.g. A100_80GB, H100_80GB)."
+        },
+        "numberOfAcceleratorsPerModelInstance": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of accelerators allocated per model instance."
+        }
+      },
+      "required": [
+        "acceleratorType",
+        "numberOfAcceleratorsPerModelInstance"
+      ]
+    },
     "AssetVersion": {
       "type": "object",
       "description": "AssetVersion Definition",
@@ -1249,6 +1268,10 @@
             "type": "string"
           }
         },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the deployment template."
+        },
         "deploymentTemplateType": {
           "type": "string",
           "description": "The type of deployment template."
@@ -1292,6 +1315,13 @@
           "description": "List of allowed instance types for the deployment.",
           "items": {
             "type": "string"
+          }
+        },
+        "acceleratorMaps": {
+          "type": "array",
+          "description": "Accelerator configurations for the deployment template.",
+          "items": {
+            "$ref": "#/definitions/AcceleratorMap"
           }
         },
         "defaultInstanceType": {
