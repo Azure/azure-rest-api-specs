@@ -620,10 +620,12 @@ suppressions:
       inject readOnly into the union definition.
       The only emitter-level fix is the autorest option `use-read-only-status-schema: true`, but enabling it
       re-emits every stable api-version's bms.json (adds readOnly:true inside 4 pre-existing LRO-status unions
-      per file). That is out of scope for a preview-only PR; it will be picked up separately when an RSB stable
-      api-version is next regenerated.
+      per file).
       The same emission shape exists in azurefleet.json (FleetProperties.provisioningState) and several other
       RPs (playwrighttesting, newrelic, eventhub, cdn, eventgrid, ...); LintDiff is diff-only so those are
       grandfathered. Net-new cross-tenant resources introduced by this PR (CrossTenantVaultMapping,
       VaultCredentialCertificateResponse) trip the rule from scratch -- hence this suppression.
+  - from: bms.json
+    code: GuidUsage
+    reason: GUIDs are used for sourceTenantId, aadTenantId, servicePrincipalClientId, and servicePrincipalObjectId under Cross Tenant Restore properties. Suppression added upon feedback from ARM reviewer.
 ```
