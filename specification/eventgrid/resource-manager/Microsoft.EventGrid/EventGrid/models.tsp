@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.Core;
 using Azure.ResourceManager.Foundations;
@@ -3574,6 +3576,35 @@ model NamespaceProperties {
    * Minimum TLS version of the publisher allowed to publish to this namespace. Only TLS version 1.2 is supported.
    */
   minimumTlsVersionAllowed?: TlsVersion;
+
+  /**
+   * Auto-scale configuration for the namespace resource.
+   */
+  @added(Versions.v2025_11_15_preview)
+  autoScaleConfiguration?: AutoScaleConfiguration;
+}
+
+/**
+ * Auto-scale configuration for the namespace resource. Controls whether the namespace
+ * automatically scales between minimumThroughputUnits and maximumThroughputUnits based on usage patterns.
+ */
+@added(Versions.v2025_11_15_preview)
+model AutoScaleConfiguration {
+  /**
+   * Indicates whether auto-scaling is enabled for the namespace. When enabled, the namespace
+   * will automatically scale between minimumThroughputUnits and maximumThroughputUnits based on usage patterns.
+   */
+  enableAutoScale?: boolean;
+
+  /**
+   * Minimum number of Throughput Units for auto-scaling. Valid only when enableAutoScale is true.
+   */
+  minimumThroughputUnits?: int64;
+
+  /**
+   * Maximum number of Throughput Units for auto-scaling. Valid only when enableAutoScale is true.
+   */
+  maximumThroughputUnits?: int64;
 }
 
 /**
@@ -3964,6 +3995,34 @@ model NamespaceUpdateParameterProperties {
    */
   @identifiers(#[])
   inboundIpRules?: InboundIpRule[];
+
+  /**
+   * Auto-scale configuration update properties for the namespace resource.
+   */
+  @added(Versions.v2025_11_15_preview)
+  autoScaleConfiguration?: UpdateAutoScaleConfiguration;
+}
+
+/**
+ * Auto-scale configuration update parameters for the namespace resource.
+ */
+@added(Versions.v2025_11_15_preview)
+model UpdateAutoScaleConfiguration {
+  /**
+   * Indicates whether auto-scaling is enabled for the namespace. When enabled, the namespace
+   * will automatically scale between minimumThroughputUnits and maximumThroughputUnits based on usage patterns.
+   */
+  enableAutoScale?: boolean;
+
+  /**
+   * Minimum number of Throughput Units for auto-scaling. Valid only when enableAutoScale is true.
+   */
+  minimumThroughputUnits?: int64;
+
+  /**
+   * Maximum number of Throughput Units for auto-scaling. Valid only when enableAutoScale is true.
+   */
+  maximumThroughputUnits?: int64;
 }
 
 /**
