@@ -37,6 +37,53 @@ These settings apply only when `--tag=package-2025-10-preview` is specified on t
 ```yaml $(tag) == 'package-2025-10-preview'
 input-file:
 - preview/2025-10-15-preview/EventGrid.json
+
+suppressions:
+  - code: PathContainsResourceType
+    reason: "The path for the CURD methods do not contain a resource type."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections"]
+
+  - code: PatchResponseCodes
+    reason: "Long-running PATCH operations must have responses with 200, 202 and default return codes. They also must not have other response codes."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerDestinations/{partnerDestinationName}"].patch
+
+  - code: DeleteResponseCodes
+    reason: "Long-running delete operations must have responses with 202, 204 and default return codes. They also must have no other response codes."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerDestinations/{partnerDestinationName}"].delete
+
+  - code: GuidUsage
+    reason: "Usage of Guid is not recommended. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board."
+    from: EventGrid.json
+    where: $.definitions.FederatedIdentityCredentialInfo.properties.federatedClientId.format
+
+  - code: GuidUsage
+    reason: "Usage of Guid is not recommended. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board."
+    from: EventGrid.json
+    where: $.definitions.Partner.properties.partnerRegistrationImmutableId.format
+
+  - code: GuidUsage
+    reason: "Usage of Guid is not recommended. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board."
+    from: EventGrid.json
+    where: $.definitions.PartnerDestinationProperties.properties.partnerRegistrationImmutableId.format
+
+  - code: GuidUsage
+    reason: "Usage of Guid is not recommended. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board."
+    from: EventGrid.json
+    where: $.definitions.PartnerRegistrationProperties.properties.partnerRegistrationImmutableId.format
+
+  - code: GuidUsage
+    reason: "Usage of Guid is not recommended. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board."
+    from: EventGrid.json
+    where: $.definitions.PartnerTopicProperties.properties.partnerRegistrationImmutableId.format
+
+  - code: GuidUsage
+    reason: "Usage of Guid is not recommended. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board."
+    from: EventGrid.json
+    where: $.definitions.VerifiedPartnerProperties.properties.partnerRegistrationImmutableId.format
+
 ```
 
 ### Tag: package-2025-07-preview
