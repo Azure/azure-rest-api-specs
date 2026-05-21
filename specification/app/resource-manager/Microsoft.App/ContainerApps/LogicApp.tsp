@@ -121,7 +121,7 @@ interface LogicApps {
   invoke is ArmResourceActionSync<
     LogicApp,
     void,
-    ArmResponse<unknown>,
+    ArmResponse<LogicAppCallResponseObject>,
     LogicAppParentParameter,
     Parameters = {
       /**

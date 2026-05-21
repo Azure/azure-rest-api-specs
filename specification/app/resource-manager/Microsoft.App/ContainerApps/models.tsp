@@ -15,6 +15,13 @@ using TypeSpec.Versioning;
 namespace Microsoft.App;
 
 /**
+ * Logic App call response object.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API returns untyped response object"
+@doc("Logic App call response object.")
+model LogicAppCallResponseObject is Record<unknown>;
+
+/**
  * Custom domain verification Id of a subscription
  */
 scalar CustomDomainVerificationId extends string;
