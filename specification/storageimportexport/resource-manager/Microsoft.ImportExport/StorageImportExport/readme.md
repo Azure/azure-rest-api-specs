@@ -29,14 +29,6 @@ openapi-type: arm
 tag: package-2016-11
 ```
 
-or
-
-``` yaml
-openapi-type: arm
-tag: package-preview-2021-01
-```
-
-
 ### Tag: package-preview-2021-01
 
 These settings apply only when `--tag=package-preview-2021-01` is specified on the command line.
@@ -74,13 +66,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
-  - repo: azure-sdk-for-node
-  - repo: azure-sdk-for-js
-  - repo: azure-cli-extensions
-  - repo: azure-resource-manager-schemas
-  - repo: azure-powershell
 ```
 
 ## Go
