@@ -51,6 +51,11 @@ enum Versions {
   v2024_11_01_preview: "2024-11-01-preview",
 
   /**
+   * The 2025-01-01 API version.
+   */
+  v2025_01_01: "2025-01-01",
+
+  /**
    * The 2026-05-01-preview API version.
    */
   v2026_05_01_preview: "2026-05-01-preview",
@@ -58,10 +63,6 @@ enum Versions {
   /**
    * The 2026-08-01-preview API version.
    */
+  @Azure.Core.previewVersion
   v2026_08_01_preview: "2026-08-01-preview",
-
-  /**
-   * The 2025-01-01 API version.
-   */
-  v2025_01_01: "2025-01-01",
 }
