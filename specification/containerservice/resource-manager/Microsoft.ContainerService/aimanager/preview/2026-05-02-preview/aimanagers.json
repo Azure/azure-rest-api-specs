@@ -2119,6 +2119,11 @@
           "format": "int32",
           "description": "Number of vms required to host one replica on this SKU."
         },
+        "maxAvailableReplicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of replicas the caller's subscription can deploy on this SKU today, computed from the available GPU quota in the target region."
+        },
         "vmHourlyPrice": {
           "type": "number",
           "format": "double",
@@ -2146,6 +2151,7 @@
       "required": [
         "vmSize",
         "vmsPerReplica",
+        "maxAvailableReplicas",
         "vmHourlyPrice",
         "feasible"
       ]

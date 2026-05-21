@@ -81,6 +81,9 @@ model CalculateCostPlan {
   @doc("Number of vms required to host one replica on this SKU.")
   vmsPerReplica: int32;
 
+  @doc("Maximum number of replicas the caller's subscription can deploy on this SKU today, computed from the available GPU quota in the target region.")
+  maxAvailableReplicas: int32;
+
   @doc("On-demand hourly price for a single vm of this SKU, in `currency`.")
   vmHourlyPrice: float64;
 
