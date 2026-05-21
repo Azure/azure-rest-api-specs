@@ -88,6 +88,15 @@ interface Alerts {
   >;
 }
 
+// NOTE: The 4th template argument ("ScopedServiceAlert") provides a distinct
+// `ResourceName` for this scope so that the MPG (C#) generator does not produce
+// duplicate `GetServiceAlertResource(ResourceIdentifier)` factory methods on
+// MockableAlertsManagementArmClient. The `Alert` model is registered as two ARM
+// resource entries (tenant scope via `Alerts`, extension scope via
+// `AlertOperationGroup`); generator policy requires distinct resource names per
+// entry. See Azure/azure-sdk-for-net#57645 and the @legacyExtensionResourceOperation
+// decorator's 3rd (OverrideResourceName) argument in
+// @azure-tools/typespec-azure-resource-manager.
 alias AlertOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {
     ...ApiVersionParameter;
@@ -105,7 +114,8 @@ alias AlertOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     providerNamespace: "Microsoft.AlertsManagement";
   },
   {},
-  AlertIdParameter
+  AlertIdParameter,
+  "ScopedServiceAlert"
 >;
 
 alias GetAllTenantOps = Azure.ResourceManager.Legacy.ExtensionOperations<

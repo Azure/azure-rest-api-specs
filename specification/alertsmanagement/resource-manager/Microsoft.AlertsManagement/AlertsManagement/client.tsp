@@ -73,25 +73,34 @@ model AlertsClientOptions {
 // C# renames for migration backward compatibility
 @@clientName(Alert, "ServiceAlert", "csharp");
 @@clientName(Alerts, "ServiceAlert", "csharp");
+
+// Drop the "Tenant" suffix on tenant-scope operations so the generated C# method
+// names match the v1.1.1 / previous-emitter API surface (ChangeState / GetHistory).
+// The extension-scope counterparts on AlertOperationGroup land on
+// ScopedServiceAlertResource (see Alert.tsp OverrideResourceName), so there is no clash.
+@@clientName(Alerts.changeStateTenant, "changeState", "csharp");
+@@clientName(Alerts.getHistoryTenant, "getHistory", "csharp");
+
 @@clientName(TimeRange, "TimeRangeFilter", "csharp");
 @@clientName(TimeRange.`1h`, "OneHour", "csharp");
 @@clientName(TimeRange.`1d`, "OneDay", "csharp");
 @@clientName(TimeRange.`7d`, "SevenDays", "csharp");
 @@clientName(TimeRange.`30d`, "ThirtyDays", "csharp");
 @@clientName(Severity, "ServiceAlertSeverity", "csharp");
-@@clientName(Alert, "ServiceAlert", "csharp");
 @@clientName(AlertState, "ServiceAlertState", "csharp");
 @@clientName(Essentials, "ServiceAlertEssentials", "csharp");
 @@clientName(SignalType, "ServiceAlertSignalType", "csharp");
 @@clientName(Identifier, "RetrievedInformationIdentifier", "csharp");
 @@clientName(AlertModificationEvent, "ServiceAlertModificationEvent", "csharp");
 @@clientName(NotificationResult.statusURL, "StatusUrl", "csharp");
-@@clientName(AlertModificationItem,
+@@clientName(
+  AlertModificationItem,
   "ServiceAlertModificationItemInfo",
   "csharp"
 );
 @@clientName(AlertModification, "ServiceAlertModification", "csharp");
-@@clientName(AlertModificationProperties,
+@@clientName(
+  AlertModificationProperties,
   "ServiceAlertModificationProperties",
   "csharp"
 );
@@ -99,7 +108,8 @@ model AlertsClientOptions {
 @@clientName(AlertsSortByFields, "ListServiceAlertsSortByField", "csharp");
 @@clientName(AlertsSummary, "ServiceAlertSummary", "csharp");
 @@clientName(AlertsSummaryGroupByFields, "AlertsSummaryGroupByField", "csharp");
-@@clientName(AlertsSummaryGroupItem,
+@@clientName(
+  AlertsSummaryGroupItem,
   "ServiceAlertSummaryGroupItemInfo",
   "csharp"
 );
@@ -107,7 +117,8 @@ model AlertsClientOptions {
 @@clientName(Comments, "ServiceAlertComments", "csharp");
 @@clientName(AlertEnrichmentResponse, "AlertEnrichmentResult", "csharp");
 @@clientName(AlertsMetaData, "ServiceAlertMetadata", "csharp");
-@@clientName(AlertsMetaDataProperties,
+@@clientName(
+  AlertsMetaDataProperties,
   "ServiceAlertMetadataProperties",
   "csharp"
 );
@@ -118,7 +129,8 @@ model AlertsClientOptions {
 @@clientName(Essentials.lastModifiedUserName, "lastModifiedBy", "csharp");
 @@clientName(MonitorService.SCOM, "Scom", "csharp");
 @@clientName(MonitorService.`VM Insights`, "VmInsights", "csharp");
-@@clientName(AlertsSortByFields.lastModifiedDateTime,
+@@clientName(
+  AlertsSortByFields.lastModifiedDateTime,
   "LastModifiedOn",
   "csharp"
 );
@@ -131,12 +143,14 @@ model AlertsClientOptions {
 @@clientName(Status, "AlertsManagementStatus", "csharp");
 @@clientName(RuleType, "AlertsManagementRuleType", "csharp");
 @@clientName(ResultStatus, "AlertsManagementResultStatus", "csharp");
-@@clientName(NotificationResult,
+@@clientName(
+  NotificationResult,
   "AlertsManagementNotificationResult",
   "csharp"
 );
 @@clientName(BaseDetails, "AlertsManagementBaseDetails", "csharp");
-@@clientName(AlertsOperationGroup.metaData,
+@@clientName(
+  AlertsOperationGroup.metaData,
   "GetServiceAlertMetadata",
   "csharp"
 );
@@ -159,12 +173,14 @@ model AlertsClientOptions {
 
 // Map local ProxyResource-based models to ResourceData for backward compatibility
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(AlertModification,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  AlertModification,
   Azure.ResourceManager.CommonTypes.ProxyResource,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(AlertsSummary,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  AlertsSummary,
   Azure.ResourceManager.CommonTypes.ProxyResource,
   "csharp"
 );
