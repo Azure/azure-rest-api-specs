@@ -116,8 +116,16 @@ using Azure.ClientGenerator.Core;
 @@access(VoiceLive.ServerEventRtcCallSdpCreated, Access.public, "python");
 @@access(VoiceLive.ServerEventRtcCallError, Access.public, "python");
 @@access(VoiceLive.RtcCallErrorDetails, Access.public, "python");
-@@access(VoiceLive.ServerEventOutputAudioBufferStarted, Access.public, "python");
-@@access(VoiceLive.ServerEventOutputAudioBufferStopped, Access.public, "python");
+@@access(
+  VoiceLive.ServerEventOutputAudioBufferStarted,
+  Access.public,
+  "python"
+);
+@@access(
+  VoiceLive.ServerEventOutputAudioBufferStopped,
+  Access.public,
+  "python"
+);
 
 @@access(VoiceLive.ToolChoice, Access.public, "python");
 
@@ -179,8 +187,16 @@ using Azure.ClientGenerator.Core;
 @@access(VoiceLive.ServerEventRtcCallSdpCreated, Access.public, "csharp");
 @@access(VoiceLive.ServerEventRtcCallError, Access.public, "csharp");
 @@access(VoiceLive.RtcCallErrorDetails, Access.public, "csharp");
-@@access(VoiceLive.ServerEventOutputAudioBufferStarted, Access.public, "csharp");
-@@access(VoiceLive.ServerEventOutputAudioBufferStopped, Access.public, "csharp");
+@@access(
+  VoiceLive.ServerEventOutputAudioBufferStarted,
+  Access.public,
+  "csharp"
+);
+@@access(
+  VoiceLive.ServerEventOutputAudioBufferStopped,
+  Access.public,
+  "csharp"
+);
 @@access(VoiceLive.VideoCrop.bottom_right, Access.internal, "csharp");
 @@access(VoiceLive.VideoCrop.top_left, Access.internal, "csharp");
 @@access(VoiceLive.Response.voice, Access.internal, "csharp");
