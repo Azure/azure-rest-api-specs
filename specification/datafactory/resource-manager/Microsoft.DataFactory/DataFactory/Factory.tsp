@@ -20,7 +20,6 @@ model Factory is Azure.ResourceManager.ProxyResource<FactoryProperties> {
     SegmentName = "factories",
     NamePattern = "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
   >;
-  ...Azure.ResourceManager.EntityTagProperty;
 
   /**
    * Resource tags.
@@ -43,6 +42,18 @@ model Factory is Azure.ResourceManager.ProxyResource<FactoryProperties> {
   identity?: FactoryIdentity;
 
   ...Record<unknown>;
+
+  /** The resource location. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: string;
+
+  /** The resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
+
+  ...Azure.ResourceManager.EntityTagProperty;
 }
 
 alias PipelineRunsOps = Azure.ResourceManager.Legacy.RoutedOperations<
