@@ -139,6 +139,7 @@ using Azure.ClientGenerator.Core;
   "ToolChoiceFunctionSelection",
   "python"
 );
+@@clientName(VoiceLive.AvatarConfig.type, "avatar_type", "python");
 
 @@access(VoiceLive.ServerEvent, Access.public, "csharp");
 @@access(VoiceLive.ServerEventSessionCreated, Access.public, "csharp");
@@ -1030,6 +1031,28 @@ using Azure.ClientGenerator.Core;
   "latencyThresholdInMs",
   "javascript"
 );
+
+@@clientName(
+  VoiceLive.TranscriptionWord.offset_milliseconds,
+  "offsetInMs",
+  "javascript"
+);
+@@clientName(
+  VoiceLive.TranscriptionWord.duration_milliseconds,
+  "durationInMs",
+  "javascript"
+);
+@@clientName(
+  VoiceLive.TranscriptionPhrase.offset_milliseconds,
+  "offsetInMs",
+  "javascript"
+);
+@@clientName(
+  VoiceLive.TranscriptionPhrase.duration_milliseconds,
+  "durationInMs",
+  "javascript"
+);
+@@clientName(VoiceLive.Response, "VoiceLiveResponse", "javascript");
 
 // Explicit client declaration for emitters that require at least one client (e.g. Python).
 // This service is WebSocket-only and has no HTTP operations, so a client must be declared explicitly.
