@@ -3326,7 +3326,7 @@ model VirtualMachineScaleSetExtensionProperties {
   type?: string;
 
   /**
-   * Specifies the version of the script handler.
+   * Specifies the Major.Minor version of the script handler. Customer is able to specify only the Major.Minor version of an extension, Azure platform will deliver the latest Patch.Hotfix version in the Major.Minor series.
    */
   typeHandlerVersion?: string;
 
@@ -5222,7 +5222,7 @@ model VirtualMachineExtensionHandlerInstanceView {
   type?: string;
 
   /**
-   * Specifies the version of the script handler.
+   * Specifies the Major.Minor.Patch.Hotfix version of the script handler. Azure platform will deliver the latest Patch.Hotfix version in the Major.Minor series.
    */
   typeHandlerVersion?: string;
 
@@ -5350,7 +5350,7 @@ model VirtualMachineExtensionInstanceView {
   type?: string;
 
   /**
-   * Specifies the version of the script handler.
+   * Specifies the Major.Minor.Patch.Hotfix version of the script handler. Azure platform will deliver the latest Patch.Hotfix version in the Major.Minor series.
    */
   typeHandlerVersion?: string;
 
@@ -6066,7 +6066,7 @@ model VirtualMachineExtensionProperties {
   type?: string;
 
   /**
-   * Specifies the version of the script handler.
+   * Specifies the Major.Minor version of the script handler. Customer is able to specify only the Major.Minor version of an extension, Azure platform will deliver the latest Patch.Hotfix version in the Major.Minor series.
    */
   typeHandlerVersion?: string;
 
@@ -6205,7 +6205,7 @@ model VirtualMachineExtensionUpdateProperties {
   type?: string;
 
   /**
-   * Specifies the version of the script handler.
+   * Specifies the Major.Minor version of the script handler. Customer is able to specify only the Major.Minor version of an extension, Azure platform will deliver the latest Patch.Hotfix version in the Major.Minor series.
    */
   typeHandlerVersion?: string;
 
