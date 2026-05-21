@@ -65,7 +65,12 @@ interface LogicApps {
   /**
    * Create or update a Logic App extension resource
    */
-  createOrUpdate is LogicAppOps.CreateOrUpdateSync<LogicApp>;
+  createOrUpdate is LogicAppOps.CreateOrUpdateSync<
+    LogicApp,
+    {},
+    ArmResourceUpdatedResponse<LogicApp> | ArmResourceCreatedSyncResponse<LogicApp>,
+    true
+  >;
 
   /**
    * Deletes a Logic App extension resource
