@@ -406,7 +406,7 @@ suppressions:
     from: ComputeRP.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}/hosts/{hostName}"].get.parameters
   - code: ParametersInPointGet
-    reason: Existing GET operation uses query parameters for backward compatibility.
+    reason: Consistent with established Compute RP patterns (e.g. DedicatedHost, VirtualMachine, CapacityReservation) for SDK and behavioral consistency.
     from: ComputeRP.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/interconnectBlocks/{interconnectBlockName}"].get.parameters
   - code: ParametersInPointGet
@@ -497,7 +497,7 @@ suppressions:
     from: ComputeRP.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}/hosts/{hostName}"].delete
   - code: DeleteResponseCodes
-    reason: Existing delete response codes maintained for backward compatibility.
+    reason: Consistent with established Compute RP delete response patterns for SDK and behavioral consistency.
     from: ComputeRP.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/interconnectBlocks/{interconnectBlockName}"].delete
   - code: DeleteResponseCodes

@@ -27,7 +27,7 @@ model InterconnectBlock
   /**
    * SKU of the resource for which capacity needs to be pre-allocated. Both `sku.name` and `sku.capacity` are required at create. After create, only `sku.capacity` can be updated.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Consistent with established Compute RP patterns (e.g. DedicatedHost, VirtualMachine, CapacityReservation) for SDK and behavioral consistency."
   sku: Sku;
 
   ...Azure.ResourceManager.AvailabilityZonesProperty;
@@ -35,7 +35,7 @@ model InterconnectBlock
   /**
    * Placement section specifies the user-defined constraints for Interconnect Block hardware placement. This property cannot be changed once Interconnect Block is provisioned.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Consistent with established Compute RP patterns (e.g. DedicatedHost, VirtualMachine, CapacityReservation) for SDK and behavioral consistency."
   placement?: Placement;
 }
 
@@ -79,7 +79,7 @@ interface InterconnectBlocks {
   /**
    * Deletes an Interconnect Block. The operation is only allowed when there are no virtual machines or VMSS VM instances associated with the Interconnect Block.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Consistent with established Compute RP delete response patterns for SDK and behavioral consistency."
   delete is ComputeResourceDeleteAsync<
     InterconnectBlock,
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
@@ -104,11 +104,9 @@ interface InterconnectBlocks {
 
 @@doc(InterconnectBlock.name, "The name of the Interconnect Block.");
 @@doc(InterconnectBlock.properties, "Properties of the Interconnect Block.");
-@@doc(
-  InterconnectBlocks.createOrUpdate::parameters.resource,
+@@doc(InterconnectBlocks.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Interconnect Block."
 );
-@@doc(
-  InterconnectBlocks.update::parameters.properties,
+@@doc(InterconnectBlocks.update::parameters.properties,
   "Parameters supplied to the Update Interconnect Block operation."
 );
