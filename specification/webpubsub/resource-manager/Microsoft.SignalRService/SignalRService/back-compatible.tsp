@@ -5,44 +5,54 @@ using Microsoft.SignalRService;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateLinkResource.properties
 );
 
-@@clientName(WebPubSubResources.createOrUpdate::parameters.resource,
+@@clientName(
+  WebPubSubResources.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(WebPubSubResources.update::parameters.properties, "parameters");
 @@clientName(WebPubSubResources.regenerateKey::parameters.body, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WebPubSubResource.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  WebPubSubResource.properties
 );
 
-@@clientName(PrivateEndpointConnections.update::parameters.resource,
+@@clientName(
+  PrivateEndpointConnections.update::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateEndpointConnection.properties
 );
 
-@@clientName(SharedPrivateLinkResources.createOrUpdate::parameters.resource,
+@@clientName(
+  SharedPrivateLinkResources.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(WebPubSubSharedPrivateLinkResources.createOrUpdate::parameters.resource,
+@@clientName(
+  WebPubSubSharedPrivateLinkResources.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SharedPrivateLinkResource.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  SharedPrivateLinkResource.properties
 );
 
-@@clientName(CustomCertificates.createOrUpdate::parameters.resource,
+@@clientName(
+  CustomCertificates.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CustomCertificate.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  CustomCertificate.properties
 );
 
 @@clientName(CustomDomains.createOrUpdate::parameters.resource, "parameters");
@@ -57,7 +67,8 @@ using Microsoft.SignalRService;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Replica.properties);
-@@clientName(WebPubSubOperationGroup.checkNameAvailability::parameters.body,
+@@clientName(
+  WebPubSubOperationGroup.checkNameAvailability::parameters.body,
   "parameters"
 );
 
@@ -73,26 +84,36 @@ using Microsoft.SignalRService;
 @@clientName(WebPubSubResources.update, "Update");
 @@clientLocation(WebPubSubResources.delete, "WebPubSub", "!csharp");
 @@clientName(WebPubSubResources.delete, "Delete");
-@@clientLocation(WebPubSubResources.listByResourceGroup,
+@@clientLocation(
+  WebPubSubResources.listByResourceGroup,
   "WebPubSub",
   "!csharp"
 );
-@@clientName(WebPubSubResources.listByResourceGroup, "ListByResourceGroup");
+@@clientName(
+  WebPubSubResources.listByResourceGroup,
+  "ListByResourceGroup",
+  "!csharp"
+);
 @@clientLocation(WebPubSubResources.listBySubscription, "WebPubSub", "!csharp");
-@@clientName(WebPubSubResources.listBySubscription, "ListBySubscription");
+@@clientName(
+  WebPubSubResources.listBySubscription,
+  "ListBySubscription",
+  "!csharp"
+);
 @@clientLocation(WebPubSubResources.listKeys, "WebPubSub", "!csharp");
-@@clientName(WebPubSubResources.listKeys, "ListKeys");
+@@clientName(WebPubSubResources.listKeys, "ListKeys", "!csharp");
 @@clientLocation(WebPubSubResources.regenerateKey, "WebPubSub", "!csharp");
 @@clientName(WebPubSubResources.regenerateKey, "RegenerateKey");
 @@clientLocation(WebPubSubResources.restart, "WebPubSub", "!csharp");
 @@clientName(WebPubSubResources.restart, "Restart");
 @@clientLocation(WebPubSubResources.listSkus, "WebPubSub", "!csharp");
-@@clientName(WebPubSubResources.listSkus, "ListSkus");
-@@clientLocation(WebPubSubResources.list,
+@@clientName(WebPubSubResources.listSkus, "ListSkus", "!csharp");
+@@clientLocation(
+  WebPubSubResources.list,
   "WebPubSubPrivateLinkResources",
   "!csharp"
 );
-@@clientName(WebPubSubResources.list, "List");
+@@clientName(WebPubSubResources.list, "List", "!csharp");
 
 // Replicas interface operations with WebPubSubReplicas_ prefix
 @@clientLocation(Replicas.get, "WebPubSubReplicas", "!csharp");
@@ -104,38 +125,43 @@ using Microsoft.SignalRService;
 @@clientLocation(Replicas.delete, "WebPubSubReplicas", "!csharp");
 @@clientName(Replicas.delete, "Delete");
 @@clientLocation(Replicas.list, "WebPubSubReplicas", "!csharp");
-@@clientName(Replicas.list, "List");
+@@clientName(Replicas.list, "List", "!csharp");
 @@clientLocation(Replicas.listReplicaSkus, "WebPubSub", "!csharp");
-@@clientName(Replicas.listReplicaSkus, "ListReplicaSkus");
+@@clientName(Replicas.listReplicaSkus, "ListReplicaSkus", "!csharp");
 @@clientLocation(Replicas.restart, "WebPubSubReplicas", "!csharp");
 @@clientName(Replicas.restart, "Restart");
 
 // CustomCertificates interface operations with WebPubSubCustomCertificates_ prefix
-@@clientLocation(CustomCertificates.get,
+@@clientLocation(
+  CustomCertificates.get,
   "WebPubSubCustomCertificates",
   "!csharp"
 );
 @@clientName(CustomCertificates.get, "Get");
-@@clientLocation(CustomCertificates.createOrUpdate,
+@@clientLocation(
+  CustomCertificates.createOrUpdate,
   "WebPubSubCustomCertificates",
   "!csharp"
 );
 @@clientName(CustomCertificates.createOrUpdate, "CreateOrUpdate");
-@@clientLocation(CustomCertificates.delete,
+@@clientLocation(
+  CustomCertificates.delete,
   "WebPubSubCustomCertificates",
   "!csharp"
 );
 @@clientName(CustomCertificates.delete, "Delete");
-@@clientLocation(CustomCertificates.list,
+@@clientLocation(
+  CustomCertificates.list,
   "WebPubSubCustomCertificates",
   "!csharp"
 );
-@@clientName(CustomCertificates.list, "List");
+@@clientName(CustomCertificates.list, "List", "!csharp");
 
 // CustomDomains interface operations with WebPubSubCustomDomains_ prefix
 @@clientLocation(CustomDomains.get, "WebPubSubCustomDomains", "!csharp");
 @@clientName(CustomDomains.get, "Get");
-@@clientLocation(CustomDomains.createOrUpdate,
+@@clientLocation(
+  CustomDomains.createOrUpdate,
   "WebPubSubCustomDomains",
   "!csharp"
 );
@@ -143,46 +169,53 @@ using Microsoft.SignalRService;
 @@clientLocation(CustomDomains.delete, "WebPubSubCustomDomains", "!csharp");
 @@clientName(CustomDomains.delete, "Delete");
 @@clientLocation(CustomDomains.list, "WebPubSubCustomDomains", "!csharp");
-@@clientName(CustomDomains.list, "List");
+@@clientName(CustomDomains.list, "List", "!csharp");
 
 // PrivateEndpointConnections interface operations with WebPubSubPrivateEndpointConnections_ prefix
-@@clientLocation(PrivateEndpointConnections.get,
+@@clientLocation(
+  PrivateEndpointConnections.get,
   "WebPubSubPrivateEndpointConnections",
   "!csharp"
 );
 @@clientName(PrivateEndpointConnections.get, "Get");
-@@clientLocation(PrivateEndpointConnections.update,
+@@clientLocation(
+  PrivateEndpointConnections.update,
   "WebPubSubPrivateEndpointConnections",
   "!csharp"
 );
 @@clientName(PrivateEndpointConnections.update, "Update");
-@@clientLocation(PrivateEndpointConnections.delete,
+@@clientLocation(
+  PrivateEndpointConnections.delete,
   "WebPubSubPrivateEndpointConnections",
   "!csharp"
 );
 @@clientName(PrivateEndpointConnections.delete, "Delete");
-@@clientLocation(PrivateEndpointConnections.list,
+@@clientLocation(
+  PrivateEndpointConnections.list,
   "WebPubSubPrivateEndpointConnections",
   "!csharp"
 );
-@@clientName(PrivateEndpointConnections.list, "List");
+@@clientName(PrivateEndpointConnections.list, "List", "!csharp");
 
 // SharedPrivateLinkResources interface operations with WebPubSubReplicaSharedPrivateLinkResources_ prefix
-@@clientLocation(SharedPrivateLinkResources.get,
+@@clientLocation(
+  SharedPrivateLinkResources.get,
   "WebPubSubReplicaSharedPrivateLinkResources",
   "!csharp"
 );
 @@clientName(SharedPrivateLinkResources.get, "Get");
-@@clientLocation(SharedPrivateLinkResources.createOrUpdate,
+@@clientLocation(
+  SharedPrivateLinkResources.createOrUpdate,
   "WebPubSubReplicaSharedPrivateLinkResources",
   "!csharp"
 );
 @@clientName(SharedPrivateLinkResources.createOrUpdate, "CreateOrUpdate");
-@@clientLocation(SharedPrivateLinkResources.list,
+@@clientLocation(
+  SharedPrivateLinkResources.list,
   "WebPubSubReplicaSharedPrivateLinkResources",
   "!csharp"
 );
-@@clientName(SharedPrivateLinkResources.list, "List");
+@@clientName(SharedPrivateLinkResources.list, "List", "!csharp");
 
 // WebPubSubSharedPrivateLinkResources interface operations with WebPubSubSharedPrivateLinkResources_ prefix
 @@clientName(WebPubSubSharedPrivateLinkResources.delete, "Delete");
@@ -191,14 +224,17 @@ using Microsoft.SignalRService;
 @@clientName(WebPubSubHubs.delete, "Delete");
 
 // WebPubSubOperationGroup interface operations with WebPubSub_ prefix
-@@clientLocation(WebPubSubOperationGroup.checkNameAvailability,
+@@clientLocation(
+  WebPubSubOperationGroup.checkNameAvailability,
   "WebPubSub",
   "!csharp"
 );
-@@clientName(WebPubSubOperationGroup.checkNameAvailability,
-  "CheckNameAvailability"
+@@clientName(
+  WebPubSubOperationGroup.checkNameAvailability,
+  "CheckNameAvailability",
+  "!csharp"
 );
 
 // UsagesOperationGroup interface operations with Usages_ prefix
 @@clientLocation(UsagesOperationGroup.list, "Usages", "!csharp");
-@@clientName(UsagesOperationGroup.list, "List");
+@@clientName(UsagesOperationGroup.list, "List", "!csharp");

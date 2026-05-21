@@ -28,13 +28,16 @@ model MaintenanceConfiguration
   >;
 }
 
-@@doc(MaintenanceConfiguration.name,
+@@doc(
+  MaintenanceConfiguration.name,
   "The name of the maintenance configuration. Supported values are 'default', 'aksManagedAutoUpgradeSchedule', or 'aksManagedNodeOSUpgradeSchedule'."
 );
-@@doc(MaintenanceConfiguration.properties,
+@@doc(
+  MaintenanceConfiguration.properties,
   "Properties of a default maintenance configuration."
 );
-@@doc(MaintenanceConfigurations.createOrUpdate::parameters.resource,
+@@doc(
+  MaintenanceConfigurations.createOrUpdate::parameters.resource,
   "The maintenance configuration to create or update."
 );
 

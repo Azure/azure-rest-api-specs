@@ -120,15 +120,19 @@ interface CustomLocations {
 @@maxLength(customLocation.name, 63);
 @@minLength(customLocation.name, 1);
 @@doc(customLocation.name, "Custom Locations name.");
-@@doc(customLocation.properties,
+@@doc(
+  customLocation.properties,
   "The set of properties specific to a Custom Location"
 );
-@@doc(CustomLocations.createOrUpdate::parameters.resource,
+@@doc(
+  CustomLocations.createOrUpdate::parameters.resource,
   "Parameters supplied to create or update a Custom Location."
 );
-@@doc(CustomLocations.update::parameters.properties,
+@@doc(
+  CustomLocations.update::parameters.properties,
   "The updatable fields of an existing Custom Location."
 );
-@@doc(CustomLocations.findTargetResourceGroup::parameters.body,
+@@doc(
+  CustomLocations.findTargetResourceGroup::parameters.body,
   "Parameters of the find target resource group request."
 );

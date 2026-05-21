@@ -85,9 +85,11 @@ interface MigrationServices {
 
 @@doc(MigrationService.name, "Name of the Migration Service.");
 @@doc(MigrationService.properties, "The Migration Service properties.");
-@@doc(MigrationServices.createOrUpdate::parameters.resource,
+@@doc(
+  MigrationServices.createOrUpdate::parameters.resource,
   "Details of MigrationService resource."
 );
-@@doc(MigrationServices.update::parameters.properties,
+@@doc(
+  MigrationServices.update::parameters.properties,
   "Details of MigrationService resource."
 );

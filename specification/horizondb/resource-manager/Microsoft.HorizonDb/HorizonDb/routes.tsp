@@ -29,8 +29,10 @@ interface HorizonDbClusters {
   @doc("Deletes a HorizonDb cluster.")
   delete is ArmResourceDeleteWithoutOkAsync<
     HorizonDbCluster,
-    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   @doc("Lists all HorizonDb clusters in a resource group.")
@@ -70,8 +72,10 @@ interface HorizonDbReplicas {
   @doc("Deletes a HorizonDb replica.")
   delete is ArmResourceDeleteWithoutOkAsync<
     HorizonDbReplica,
-    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 }
 
@@ -90,8 +94,10 @@ interface HorizonDbFirewallRules {
   @doc("Deletes a HorizonDb firewall rule.")
   delete is ArmResourceDeleteWithoutOkAsync<
     HorizonDbFirewallRule,
-    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 }
 
@@ -115,8 +121,10 @@ interface HorizonDbPrivateEndpointConnections {
   @doc("Deletes a private endpoint connection.")
   delete is HorizonDbPrivateEndpointOperations.DeleteAsync<
     PrivateEndpointConnectionResource,
-    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 }
 
@@ -147,8 +155,10 @@ interface HorizonDbParameterGroups {
   @doc("Deletes a HorizonDb parameter group.")
   delete is ArmResourceDeleteWithoutOkAsync<
     HorizonDbParameterGroup,
-    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   @doc("Lists all HorizonDb parameter groups in a resource group.")
