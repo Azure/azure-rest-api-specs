@@ -61,24 +61,18 @@ interface RuntimeCertIssuance {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing service contract; preserves wire compatibility for already-deployed clients calling raw REST."
   @summary("Issue operational certificates for IoT devices.")
   @tag("POST")
-  @route("/deviceCertificates/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/namespaces/{namespaceResourceName}/devices/{deviceResourceName}:issueCert")
+  @route("/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}:issueCert")
   @post
   @pollingOperation(RuntimeCertIssuance.OperationStatusLookup)
   issueCertificate(
-    /** Azure subscription ID. */
-    @path subscriptionId: string,
+    /** The unique identifier of the namespace. */
+    @path namespaceUuid: string,
 
-    /** Azure resource group name. */
-    @path resourceGroupName: string,
+    /** The name of the device. */
+    @path deviceName: string,
 
-    /** The resource provider name (e.g., microsoft.deviceregistry). */
-    @path providerName: string,
-
-    /** Azure Device Registry namespace ARM resource name. */
-    @path namespaceResourceName: string,
-
-    /** Azure Device Registry device ARM resource name. */
-    @path deviceResourceName: string,
+    /** The name of the device authentication profile. */
+    @path authenticationProfileName: string,
 
     /** Certificate issuance request. */
     @body certificateIssuance: CertificateIssuanceRequest,
@@ -86,24 +80,13 @@ interface RuntimeCertIssuance {
     /** The API version to use for this operation. */
     @query("api-version")
     apiVersion: string,
-
-    /**
-     * The name of the Azure Device Registry policy name to use for
-     * issuing the certificate. EX, contosoPolicy
-     */
-    @query("policy-name")
-    policyName: string,
-
-    /** The region of the Certificate Management Service. */
-    @query
-    region: string,
   ): {
     @statusCode statusCode: 202;
 
     /**
      * The location for monitoring the operation state. It contains the
      * absolute URL of the status monitor resource, including an api-version
-     * query parameter. EX "/deviceCertificates/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/namespaces/{namespaceResourceName}/devices/{deviceResourceName}/issueCertOperations/{operationId}?policyName={policyName}&api-version=20250701-preview".
+     * query parameter. EX "/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}/issueCertResults/{operationId}?api-version=2026-11-01-preview".
      */
     @header("Operation-Location")
     operationLocation: url;
@@ -129,23 +112,17 @@ interface RuntimeCertIssuance {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserves existing operationId for wire/SDK parity with shipped CMS spec."
   @summary("Gets the cert issuance operation status.")
   @tag("GET")
-  @route("/deviceCertificates/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/namespaces/{namespaceResourceName}/devices/{deviceResourceName}/issueCertOperations/{operationId}")
+  @route("/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}/issueCertResults/{operationId}")
   @get
   OperationStatusLookup(
-    /** Azure subscription ID. */
-    @path subscriptionId: string,
+    /** The unique identifier of the namespace. */
+    @path namespaceUuid: string,
 
-    /** Azure resource group name. */
-    @path resourceGroupName: string,
+    /** The name of the device. */
+    @path deviceName: string,
 
-    /** The resource provider name (e.g., microsoft.deviceregistry). */
-    @path providerName: string,
-
-    /** Azure Device Registry namespace ARM resource name. */
-    @path namespaceResourceName: string,
-
-    /** Azure Device Registry device ARM resource name. */
-    @path deviceResourceName: string,
+    /** The name of the device authentication profile. */
+    @path authenticationProfileName: string,
 
     /** Operation ID. */
     @path operationId: string,
@@ -153,17 +130,6 @@ interface RuntimeCertIssuance {
     /** The API version to use for this operation. */
     @query("api-version")
     apiVersion: string,
-
-    /**
-     * The name of the Azure Device Registry policy name to use for
-     * issuing the certificate. EX, contosoPolicy
-     */
-    @query("policy-name")
-    policyName: string,
-
-    /** The region of the Certificate Management Service. */
-    @query
-    region: string,
   ): {
     @statusCode statusCode: 200;
 

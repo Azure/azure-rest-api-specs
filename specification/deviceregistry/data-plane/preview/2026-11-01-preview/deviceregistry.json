@@ -86,247 +86,6 @@
     }
   ],
   "paths": {
-    "/deviceCertificates/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/namespaces/{namespaceResourceName}/devices/{deviceResourceName}:issueCert": {
-      "post": {
-        "operationId": "RuntimeCertIssuance_IssueCertificate",
-        "tags": [
-          "RuntimeCertIssuance",
-          "POST"
-        ],
-        "summary": "Issue operational certificates for IoT devices.",
-        "description": "Issue operational certificates for IoT devices.",
-        "parameters": [
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "Azure subscription ID.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Azure resource group name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "providerName",
-            "in": "path",
-            "description": "The resource provider name (e.g., microsoft.deviceregistry).",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "namespaceResourceName",
-            "in": "path",
-            "description": "Azure Device Registry namespace ARM resource name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "deviceResourceName",
-            "in": "path",
-            "description": "Azure Device Registry device ARM resource name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "description": "The API version to use for this operation.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "apiVersion"
-          },
-          {
-            "name": "policy-name",
-            "in": "query",
-            "description": "The name of the Azure Device Registry policy name to use for\nissuing the certificate. EX, contosoPolicy",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "policyName"
-          },
-          {
-            "name": "region",
-            "in": "query",
-            "description": "The region of the Certificate Management Service.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "certificateIssuance",
-            "in": "body",
-            "description": "Certificate issuance request.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CertificateIssuanceRequest"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "schema": {
-              "$ref": "#/definitions/CertificateIssuanceOperationStatus"
-            },
-            "headers": {
-              "Operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location for monitoring the operation state. It contains the\nabsolute URL of the status monitor resource, including an api-version\nquery parameter. EX \"/deviceCertificates/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/namespaces/{namespaceResourceName}/devices/{deviceResourceName}/issueCertOperations/{operationId}?policyName={policyName}&api-version=20250701-preview\"."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait\nbefore polling the operation status."
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Issue an operational certificate for an IoT device": {
-            "$ref": "./examples/RuntimeCertIssuance_IssueCertificate.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "operation-location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/deviceCertificates/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/namespaces/{namespaceResourceName}/devices/{deviceResourceName}/issueCertOperations/{operationId}": {
-      "get": {
-        "operationId": "RuntimeCertIssuance_OperationStatusLookup",
-        "tags": [
-          "RuntimeCertIssuance",
-          "GET"
-        ],
-        "summary": "Gets the cert issuance operation status.",
-        "description": "Gets the cert issuance operation status.",
-        "parameters": [
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "Azure subscription ID.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Azure resource group name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "providerName",
-            "in": "path",
-            "description": "The resource provider name (e.g., microsoft.deviceregistry).",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "namespaceResourceName",
-            "in": "path",
-            "description": "Azure Device Registry namespace ARM resource name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "deviceResourceName",
-            "in": "path",
-            "description": "Azure Device Registry device ARM resource name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "Operation ID.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "description": "The API version to use for this operation.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "apiVersion"
-          },
-          {
-            "name": "policy-name",
-            "in": "query",
-            "description": "The name of the Azure Device Registry policy name to use for\nissuing the certificate. EX, contosoPolicy",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "policyName"
-          },
-          {
-            "name": "region",
-            "in": "query",
-            "description": "The region of the Certificate Management Service.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/CertificateIssuanceOperationStatus"
-            },
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait\nbefore polling the operation status."
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get the status of a certificate issuance operation": {
-            "$ref": "./examples/RuntimeCertIssuance_OperationStatusLookup.json"
-          }
-        }
-      }
-    },
     "/namespaces/{namespaceUuid}:generateReport": {
       "post": {
         "operationId": "Namespaces_GenerateReport",
@@ -1044,6 +803,189 @@
         "x-ms-examples": {
           "Delete a device authentication profile": {
             "$ref": "./examples/DeviceAuthenticationProfiles_Delete.json"
+          }
+        }
+      }
+    },
+    "/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}:issueCert": {
+      "post": {
+        "operationId": "RuntimeCertIssuance_IssueCertificate",
+        "tags": [
+          "RuntimeCertIssuance",
+          "POST"
+        ],
+        "summary": "Issue operational certificates for IoT devices.",
+        "description": "Issue operational certificates for IoT devices.",
+        "parameters": [
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the device.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authenticationProfileName",
+            "in": "path",
+            "description": "The name of the device authentication profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "apiVersion"
+          },
+          {
+            "name": "certificateIssuance",
+            "in": "body",
+            "description": "Certificate issuance request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CertificateIssuanceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/CertificateIssuanceOperationStatus"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state. It contains the\nabsolute URL of the status monitor resource, including an api-version\nquery parameter. EX \"/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}/issueCertResults/{operationId}?api-version=2026-11-01-preview\"."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait\nbefore polling the operation status."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Issue an operational certificate for an IoT device": {
+            "$ref": "./examples/RuntimeCertIssuance_IssueCertificate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}/issueCertResults/{operationId}": {
+      "get": {
+        "operationId": "RuntimeCertIssuance_OperationStatusLookup",
+        "tags": [
+          "RuntimeCertIssuance",
+          "GET"
+        ],
+        "summary": "Gets the cert issuance operation status.",
+        "description": "Gets the cert issuance operation status.",
+        "parameters": [
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the device.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authenticationProfileName",
+            "in": "path",
+            "description": "The name of the device authentication profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Operation ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CertificateIssuanceOperationStatus"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait\nbefore polling the operation status."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the status of a certificate issuance operation": {
+            "$ref": "./examples/RuntimeCertIssuance_OperationStatusLookup.json"
           }
         }
       }
