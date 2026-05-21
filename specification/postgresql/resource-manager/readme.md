@@ -45,8 +45,12 @@ input-file:
 suppressions:
   - code: GuidUsage
     from: openapi.json
-    where: $.definitions.MajorVersionUpgradePrecheckResourceProperties.properties.subscriptionId
-    reason: The API contract for Major Version Upgrade requires showing the subscription ID.
+    where: $.definitions.DataEncryption.properties.primaryFederatedIdentityClientId
+    reason: To be defined as GUID following recommendation by Azure Resource Manager guidelines.
+  - code: GuidUsage
+    from: openapi.json
+    where: $.definitions.DataEncryption.properties.geoBackupFederatedIdentityClientId
+    reason: To be defined as GUID following recommendation by Azure Resource Manager guidelines.
 ```
 
 ### Tag: package-flexibleserver-2026-01-01-preview

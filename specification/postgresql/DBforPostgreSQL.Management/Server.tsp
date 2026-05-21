@@ -77,10 +77,8 @@ interface Servers {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     Server,
-    Response =
-      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-          Azure.Core.Foundations.RetryAfterHeader>
-      | ArmDeletedNoContentResponse
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -138,11 +136,10 @@ interface Servers {
   start is ArmResourceActionAsyncBase<
     Server,
     BackupsLongTermRetentionRequest,
-
-      | (BackupsLongTermRetentionResponse & RequestIdResponseHeader)
-      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = BackupsLongTermRetentionResponse> &
-          Azure.Core.Foundations.RetryAfterHeader> &
-          RequestIdResponseHeader),
+    (BackupsLongTermRetentionResponse &
+      RequestIdResponseHeader) | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = BackupsLongTermRetentionResponse> &
+      Azure.Core.Foundations.RetryAfterHeader> &
+      RequestIdResponseHeader),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Server>,
     Error = CustomErrorResponse
   >;
@@ -213,23 +210,22 @@ interface Servers {
   migrateNetworkMode is ArmResourceActionAsyncBase<
     Server,
     void,
-
-      | (MigrateNetworkStatus & RequestIdResponseHeader)
-      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = MigrateNetworkStatus> &
-          Azure.Core.Foundations.RetryAfterHeader> &
-          RequestIdResponseHeader),
+    (MigrateNetworkStatus &
+      RequestIdResponseHeader) | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = MigrateNetworkStatus> &
+      Azure.Core.Foundations.RetryAfterHeader> &
+      RequestIdResponseHeader),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Server>
   >;
 
-  @doc("Begin Major Version Upgrade Prechecks.")
+  @doc("Start Major Version Upgrade Prechecks.")
   @added(Versions.v2026_04_01)
-  @action("majorVersionUpgradePrecheck")
-  majorVersionUpgradePrecheck is ArmResourceActionAsyncBase<
+  @action("startMajorVersionUpgradePrecheck")
+  startMajorVersionUpgradePrecheck is ArmResourceActionAsyncBase<
     Server,
-    MajorVersionUpgradePrecheckCreateRequest,
-    ArmResponse<MajorVersionUpgradePrecheckResponse> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = MajorVersionUpgradePrecheckResponse> &
+    StartMajorVersionUpgradePrecheckRequest,
+    ArmResponse<StartMajorVersionUpgradePrecheckResponse> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = StartMajorVersionUpgradePrecheckResponse> &
       Azure.Core.Foundations.RetryAfterHeader>,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<MajorVersionUpgradePrecheckResponse>
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<StartMajorVersionUpgradePrecheckResponse>
   >;
 }
 
@@ -237,25 +233,20 @@ interface Servers {
 @@minLength(Server.name, 3);
 @@doc(Server.name, "The name of the server.");
 @@doc(Server.properties, "Properties of a server.");
-@@doc(
-  Servers.createOrUpdate::parameters.resource,
+@@doc(Servers.createOrUpdate::parameters.resource,
   "Parameters required to create a new server or to update an existing server."
 );
-@@doc(
-  Servers.update::parameters.properties,
+@@doc(Servers.update::parameters.properties,
   "Parameters required to update a server."
 );
-@@doc(
-  Servers.checkPrerequisites::parameters.body,
+@@doc(Servers.checkPrerequisites::parameters.body,
   "Request body for operation"
 );
 @@doc(Servers.start::parameters.body, "Request body for operation");
-@@doc(
-  Servers.checkNameAvailability::parameters.body,
+@@doc(Servers.checkNameAvailability::parameters.body,
   "Parameters required to check if a migration name is valid and available."
 );
 @@doc(Servers.restart::parameters.body, "Parameters to restart a server.");
-@@doc(
-  Servers.migrateNetworkMode::parameters.body,
+@@doc(Servers.migrateNetworkMode::parameters.body,
   "Parameters to migrate the network configuration of a server."
 );

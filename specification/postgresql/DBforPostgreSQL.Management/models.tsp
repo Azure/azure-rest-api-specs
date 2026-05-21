@@ -3161,13 +3161,15 @@ model DataEncryption {
   @visibility(Lifecycle.Read)
   geoBackupEncryptionKeyStatus?: EncryptionKeyStatus;
 
+  #suppress "azure-core/no-guid-usage" "To be defined as GUID following recommendation by Azure Resource Manager guidelines."
   @doc("Client id of multi-tenant Microsoft Entra application.")
   @added(Versions.v2026_04_01)
-  primaryFederatedIdentityClientId?: string;
+  primaryFederatedIdentityClientId?: uuid;
 
+  #suppress "azure-core/no-guid-usage" "To be defined as GUID following recommendation by Azure Resource Manager guidelines."
   @doc("Client id of multi-tenant Microsoft Entra application for when it is configured to support geographically redundant backups.")
   @added(Versions.v2026_04_01)
-  geoBackupFederatedIdentityClientId?: string;
+  geoBackupFederatedIdentityClientId?: uuid;
 }
 
 /**
@@ -3950,7 +3952,7 @@ union MaintenanceEventStatus {
 @doc("Properties of a maintenance event resource.")
 @added(Versions.v2026_04_01)
 model MaintenanceEventResourceProperties {
-  @doc("The unique identifier of the maintenance event (e.g. 'op_123456789').")
+  @doc("A service-generated identifier for this maintenance event, assigned by the platform (e.g., 'YL1T-HFG'). The format is not contractual and clients should not attempt to parse or construct this value.")
   @visibility(Lifecycle.Read)
   maintenanceEventId?: string;
 
@@ -4125,7 +4127,7 @@ model MajorVersionUpgradePrecheckResourceProperties {
   createTime?: utcDateTime;
 
   @doc("The status of the precheck validation.")
-  status?: string;
+  status?: MajorVersionUpgradePrecheckStatus;
 
   @doc("The detailed result of the precheck operation.")
   precheckResult?: PrecheckResult;
@@ -4138,16 +4140,16 @@ model MajorVersionUpgradePrecheckResourceProperties {
   policyDetails?: PolicyDetail[];
 }
 
-@doc("Request model for creating a major version upgrade precheck.")
+@doc("Request model for starting a major version upgrade precheck.")
 @added(Versions.v2026_04_01)
-model MajorVersionUpgradePrecheckCreateRequest {
+model StartMajorVersionUpgradePrecheckRequest {
   @doc("The target major version to upgrade to.")
   targetVersion: PostgresMajorVersion;
 }
 
-@doc("Response model for creating a major version upgrade precheck.")
+@doc("Response model for starting a major version upgrade precheck.")
 @added(Versions.v2026_04_01)
-model MajorVersionUpgradePrecheckResponse {
+model StartMajorVersionUpgradePrecheckResponse {
   @doc("The precheck validation ID.")
   name?: string;
 
@@ -4155,7 +4157,25 @@ model MajorVersionUpgradePrecheckResponse {
   createTime?: utcDateTime;
 
   @doc("The status of the precheck validation.")
-  status?: string;
+  status?: MajorVersionUpgradePrecheckStatus;
+}
+
+@doc("The status of the major version upgrade precheck.")
+@added(Versions.v2026_04_01)
+union MajorVersionUpgradePrecheckStatus {
+  string,
+
+  @doc("Executing prechecks against the source server")
+  Validating: "Validating",
+
+  @doc("Validation succeeded")
+  Succeeded: "Succeeded",
+
+  @doc("Validation failed")
+  Failed: "Failed",
+
+  @doc("Validation canceled")
+  Canceled: "Canceled",
 }
 
 @doc("Major version upgrade precheck resource for a PostgreSQL flexible server.")
