@@ -17,14 +17,13 @@ namespace Microsoft.App;
 /**
  * Legacy page model for collection responses where value is required.
  */
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "format extension for swagger fidelity"
 model LegacyPage<T> {
   /** Collection of resources. */
   @pageItems
   value: T[];
 
   /** Link to next page of resources. */
-  @extension("format", "uri")
+  @format("uri")
   @nextLink
   nextLink?: string;
 }
@@ -32,14 +31,13 @@ model LegacyPage<T> {
 /**
  * Legacy page model for collection responses where value is optional.
  */
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "format extension for swagger fidelity"
 model LegacyPageOptionalValue<T> {
   /** Collection of resources. */
   @pageItems
   value?: T[];
 
   /** Link to next page of resources. */
-  @extension("format", "uri")
+  @format("uri")
   @nextLink
   nextLink?: string;
 }
@@ -47,14 +45,13 @@ model LegacyPageOptionalValue<T> {
 /**
  * Legacy page model for collection responses where value is optional and nextLink is not readOnly.
  */
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "format extension for swagger fidelity"
 model LegacyPageSimple<T> {
   /** Collection of resources. */
   @pageItems
   value?: T[];
 
   /** Link to next page of resources. */
-  @extension("format", "uri")
+  @format("uri")
   @nextLink
   nextLink?: string;
 }
