@@ -87,7 +87,7 @@ interface HttpRouteConfigs {
   /**
    * Deletes the specified Managed Http Route.
    */
-  @summary("Deletes the specified Managed Http Route.")
+  @summary("Deletes the specified Http Route Config.")
   delete is ArmResourceDeleteWithoutOkAsync<HttpRouteConfig>;
 
   /**
