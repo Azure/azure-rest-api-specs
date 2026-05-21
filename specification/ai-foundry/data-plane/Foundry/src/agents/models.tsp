@@ -482,14 +482,6 @@ model HostedAgentDefinition extends AgentDefinition {
     """)
   tools?: OpenAI.Tool[];
 
-  @doc("The protocols that the agent supports for ingress communication of the containers.")
-  @example(#[
-    #{ protocol: "responses", version: "v0.1.1" },
-    #{ protocol: "invocations", version: "v0.0.1" },
-    #{ protocol: "a2a", version: "v0.3.0" }
-  ])
-  container_protocol_versions?: ProtocolVersionRecord[];
-
   /**
    * When specify the `cpu` and `memory`, the total CPU and memory allocated to all the containers in a container app must add up to one of the following combinations.
    * See [vCPU and memory allocation requirements](https://learn.microsoft.com/azure/container-apps/containers#allocations).
@@ -505,10 +497,6 @@ model HostedAgentDefinition extends AgentDefinition {
   @doc("Environment variables to set in the hosted agent container.")
   @example(#{ name: "LOG_LEVEL", value: "debug" })
   environment_variables?: Record<string>;
-
-  @doc("The image ID for the agent, applicable to image-based hosted agents.")
-  @example("my-registry.azurecr.io/my-hosted-agent:latest")
-  image?: string;
 
   @doc("Container-based deployment configuration. Provide this for image-based deployments. Mutually exclusive with code_configuration — the service validates that exactly one is set.")
   @extension(

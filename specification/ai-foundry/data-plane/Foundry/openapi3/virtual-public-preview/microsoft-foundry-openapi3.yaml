@@ -18004,18 +18004,6 @@ components:
           description: |-
             An array of tools the hosted agent's model may call while generating a response. You
             can specify which tool to use by setting the `tool_choice` parameter.
-        container_protocol_versions:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProtocolVersionRecord'
-          description: The protocols that the agent supports for ingress communication of the containers.
-          example:
-            - protocol: responses
-              version: v0.1.1
-            - protocol: invocations
-              version: v0.0.1
-            - protocol: a2a
-              version: v0.3.0
         cpu:
           type: string
           description: The CPU configuration for the hosted agent.
@@ -18032,10 +18020,6 @@ components:
           example:
             name: LOG_LEVEL
             value: debug
-        image:
-          type: string
-          description: The image ID for the agent, applicable to image-based hosted agents.
-          example: my-registry.azurecr.io/my-hosted-agent:latest
         container_configuration:
           allOf:
             - $ref: '#/components/schemas/ContainerConfiguration'
