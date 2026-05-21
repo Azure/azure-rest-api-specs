@@ -122,11 +122,9 @@ interface DedicatedHosts {
 
 @@doc(DedicatedHost.name, "The name of the dedicated host.");
 @@doc(DedicatedHost.properties, "Properties of the dedicated host.");
-@@doc(
-  DedicatedHosts.createOrUpdate::parameters.resource,
+@@doc(DedicatedHosts.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Dedicated Host."
 );
-@@doc(
-  DedicatedHosts.update::parameters.properties,
+@@doc(DedicatedHosts.update::parameters.properties,
   "Parameters supplied to the Update Dedicated Host operation."
 );
