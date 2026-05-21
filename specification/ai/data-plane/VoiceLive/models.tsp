@@ -1726,10 +1726,16 @@ model ClientEventOutputAudioBufferClear extends ClientEvent {
 }
 
 // -----------------------------------------------------------------------
-// WebRTC call events added in v2026_06_01_preview
+// WebRTC events added in v2026_06_01_preview
+//
+// Session flow:
+//   1. Client sends rtc.call.sdp.create (with SDP offer + optional session config)
+//   2. Server responds with rtc.call.sdp.created (SDP answer + call ID)
+//      — or rtc.call.error if something goes wrong
+//   3. Audio flows → output_audio_buffer.started / .stopped track playback state
 // -----------------------------------------------------------------------
 
-// Flow: Client sends SDP offer → Server responds with SDP answer → Errors
+// --- 1. Session creation ---
 
 /** Sent by the client to initiate a WebRTC session with an SDP offer. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // snake_case to remain close to OpenAI style.
@@ -1741,6 +1747,9 @@ model ClientEventRtcCallSdpCreate extends ClientEvent {
 
   /** The SDP offer from the client for WebRTC negotiation. */
   sdp_offer: string;
+
+  /** Optional initial session configuration. If provided, applied before the session is established. */
+  session?: RequestSession;
 }
 
 /** Returned when the WebRTC SDP negotiation completes successfully. */
@@ -1757,6 +1766,8 @@ model ServerEventRtcCallSdpCreated extends ServerEvent {
   /** The SDP answer from the server for WebRTC negotiation. */
   sdp_answer: string;
 }
+
+// --- 2. Errors ---
 
 /** Error details for RTC call errors. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // snake_case to remain close to OpenAI style.
@@ -1791,9 +1802,7 @@ model ServerEventRtcCallError extends ServerEvent {
   error: RtcCallErrorDetails;
 }
 
-// -----------------------------------------------------------------------
-// Output audio buffer events added in v2026_06_01_preview
-// -----------------------------------------------------------------------
+// --- 3. Audio playback state ---
 
 /** Returned when model audio output starts playing. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // snake_case to remain close to OpenAI style.
