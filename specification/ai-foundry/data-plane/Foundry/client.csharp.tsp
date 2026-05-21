@@ -11,6 +11,7 @@ import "./src/evaluators/routes.tsp";
 import "./src/insights/routes.tsp";
 import "./src/schedules/routes.tsp";
 import "./src/memory-stores/routes.tsp";
+import "./src/routines/routes.tsp";
 import "./src/data_generation_jobs/routes.tsp";
 
 using Azure.ClientGenerator.Core;
@@ -216,3 +217,9 @@ namespace Azure.AI.Projects;
 @@clientName(Models.createAsync, "createModelVersionAsync", "csharp");
 @@clientName(Models.startPendingUpload, "startModelPendingUpload", "csharp");
 @@clientName(Models.getCredentials, "getModelCredentials", "csharp");
+
+// --------------------------------------------------------------------------------
+// Routines sub‐client
+// --------------------------------------------------------------------------------
+@@clientName(Routines, "AIProjectRoutines");
+@@clientName(Routine, "ProjectsRoutine");

@@ -8,7 +8,7 @@ namespace Azure.AI.Projects;
 scalar SkillName extends string;
 
 const SkillsRequiredPreviews = #{
-  conditional_previews: #[FoundryFeaturesOptInKeys.skills_v1_preview],
+  required_previews: #[FoundryFeaturesOptInKeys.skills_v1_preview],
 };
 
 @doc("Inline content for defining a simple skill without uploading files. Follows the agentskills.io SKILL.md specification.")

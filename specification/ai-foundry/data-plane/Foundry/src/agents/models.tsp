@@ -10,7 +10,6 @@ namespace Azure.AI.Projects;
 const AllConditionalAgentDefinitionPreviews = #{
   conditional_previews: #[
     AgentDefinitionOptInKeys.hosted_agents_v1_preview,
-    AgentDefinitionOptInKeys.container_agents_v1_preview,
     AgentDefinitionOptInKeys.workflow_agents_v1_preview,
     AgentDefinitionOptInKeys.code_agents_v1_preview,
     AgentDefinitionOptInKeys.external_agents_v1_preview
@@ -340,7 +339,7 @@ model PromptAgentDefinition extends AgentDefinition {
 
   @doc("""
     What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
-    We generally recommend altering this or `top_p` but not both.
+    We generally recommend altering this or `top_p` but not both. Defaults to `1`.
     """)
   @minValue(0)
   @maxValue(2)
@@ -350,9 +349,8 @@ model PromptAgentDefinition extends AgentDefinition {
     An alternative to sampling with temperature, called nucleus sampling,
     where the model considers the results of the tokens with top_p probability
     mass. So 0.1 means only the tokens comprising the top 10% probability mass
-    are considered.
-    
-    We generally recommend altering this or `temperature` but not both.
+    are considered. We generally recommend altering this or `temperature` but not both.
+    Defaults to `1`.
     """)
   @minValue(0)
   @maxValue(1)
@@ -624,7 +622,7 @@ model StructuredInputDefinition {
   @doc("The JSON schema for the structured input (optional).")
   schema?: Record<unknown>;
 
-  @doc("Whether the input property is required when the agent is invoked.")
+  @doc("Whether the input property is required when the agent is invoked. Defaults to `false`.")
   required?: boolean = false;
 }
 
@@ -708,6 +706,9 @@ model AgentEndpointAuthorizationScheme {
 )
 model EntraAuthorizationScheme extends AgentEndpointAuthorizationScheme {
   type: AgentEndpointAuthorizationSchemeType.Entra;
+
+  @doc("The source from which the per-user isolation key is derived for requests authorized via this scheme. Defaults to Entra-based isolation when omitted.")
+  isolation_key_source?: IsolationKeySource;
 }
 
 @extension(
@@ -888,6 +889,7 @@ model AgentCard {
 
   @doc("The set of skills that an agent can perform.")
   @maxItems(16)
+  @minItems(1)
   skills: AgentCardSkill[];
 }
 

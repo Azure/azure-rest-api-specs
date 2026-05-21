@@ -217,6 +217,10 @@ namespace Azure.AI.Projects {
   @@access(Agents.patchAgentObject, Access.internal);
   @@access(Agents.getSessionLogStream, Access.internal);
 
+  @@usage(CreateAgentFromCodeContent, Usage.input);
+  @@access(CreateAgentFromCodeContent, Access.public);
+  @@clientName(CreateAgentFromCodeContent, "CreateAgentFromCodeOptions");
+
   // --------------------------------------------------------------------------------
   // Hide Agent administration opertaions, containing the foundry features
   // --------------------------------------------------------------------------------
