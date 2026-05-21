@@ -8888,6 +8888,17 @@ model VaultCredentialCertificateResponse
 }
 
 /**
+ * Authentication type used by the vault credential certificate.
+ */
+@added(Versions.v2026_03_31_preview)
+union AuthType {
+  string,
+
+  /** Microsoft Entra ID (Azure Active Directory) authentication. */
+  AzureActiveDirectory: "AzureActiveDirectory",
+}
+
+/**
  * Properties of the vault credential certificate including the certificate data
  * and AAD service principal identity details required by MARS agent.
  */
@@ -8896,7 +8907,7 @@ model VaultCredentialCertificateProperties {
   /**
    * Authentication type.
    */
-  authType?: string;
+  authType?: AuthType;
 
   /**
    * Base64-encoded certificate data.

@@ -6935,6 +6935,24 @@
         ]
       }
     },
+    "AuthType": {
+      "type": "string",
+      "description": "Authentication type used by the vault credential certificate.",
+      "enum": [
+        "AzureActiveDirectory"
+      ],
+      "x-ms-enum": {
+        "name": "AuthType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureActiveDirectory",
+            "value": "AzureActiveDirectory",
+            "description": "Microsoft Entra ID (Azure Active Directory) authentication."
+          }
+        ]
+      }
+    },
     "Azure.Core.azureLocation": {
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
@@ -16498,7 +16516,7 @@
       "description": "Properties of the vault credential certificate including the certificate data\nand AAD service principal identity details required by MARS agent.",
       "properties": {
         "authType": {
-          "type": "string",
+          "$ref": "#/definitions/AuthType",
           "description": "Authentication type."
         },
         "certificate": {
