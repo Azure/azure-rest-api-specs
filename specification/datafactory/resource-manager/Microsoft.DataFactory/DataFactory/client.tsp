@@ -373,6 +373,16 @@ using Microsoft.DataFactory;
 @@clientName(DatasetSchemaDataElement.name, "SchemaColumnName", "csharp");
 @@clientName(DatasetSchemaDataElement.type, "SchemaColumnType", "csharp");
 @@clientName(DatasetCompression.type, "DatasetCompressionType", "csharp");
+@@clientName(
+  AmazonMWSLinkedServiceTypeProperties.marketplaceID,
+  "MarketplaceId",
+  "csharp"
+);
+@@clientName(
+  AmazonMWSLinkedServiceTypeProperties.sellerID,
+  "SellerId",
+  "csharp"
+);
 @@clientName(ValueType, "DatasetSourceValueType", "csharp");
 @@clientName(DayOfWeek, "DataFactoryDayOfWeek", "csharp");
 @@clientName(DaysOfWeek, "DataFactoryDaysOfWeek", "csharp");
@@ -603,6 +613,12 @@ using Microsoft.DataFactory;
   "csharp"
 );
 @@alternateType(PrivateEndpoint.id, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(ArmIdWrapper.id, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(
+  PurviewConfiguration.purviewResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 @@clientName(
   managedPrivateEndpointListResponse,
   "DataFactoryPrivateEndpointListResult",
@@ -691,6 +707,8 @@ using Microsoft.DataFactory;
 @@clientName(WebActivityMethod.PUT, "Put", "csharp");
 @@clientName(WebActivityMethod.DELETE, "Delete", "csharp");
 @@clientName(SqlServerAuthenticationType.SQL, "Sql", "csharp");
+@@clientName(AzureSqlDatabaseAuthenticationType.SQL, "Sql", "csharp");
+@@clientName(AmazonRdsForSqlAuthenticationType.SQL, "Sql", "csharp");
 @@clientName(SparkThriftTransportProtocol.SASL, "Sasl", "csharp");
 @@clientName(SparkThriftTransportProtocol.`HTTP `, "Http", "csharp");
 @@clientName(RunQueryOrder.ASC, "Asc", "csharp");
@@ -1288,7 +1306,14 @@ using Microsoft.DataFactory;
 @@usage(OutputColumn, Usage.input | Usage.output, "csharp");
 @@usage(ScriptType, Usage.input | Usage.output, "csharp");
 @@usage(DatasetDataElement, Usage.input | Usage.output, "csharp");
+@@usage(
+  PrivateEndpointConnectionResource,
+  Usage.input | Usage.output,
+  "csharp"
+);
 @@usage(RemotePrivateEndpointConnection, Usage.input | Usage.output, "csharp");
+@@usage(DatasetSchemaDataElement, Usage.input | Usage.output, "csharp");
+@@access(DatasetSchemaDataElement, Access.public, "csharp");
 
 // MPG migration: enum value casing renames (back-compat with previously published SDK).
 @@clientName(AzureSqlDWAuthenticationType.SQL, "Sql", "csharp");
@@ -1396,5 +1421,99 @@ using Microsoft.DataFactory;
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   PrivateLinkConnectionApprovalRequestResource,
   Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+
+// MPG migration: rename operations to match baseline AutoRest SDK method names so
+// downstream consumers compile against the regenerated client without source breaks.
+//
+// IntegrationRuntime operations
+@@clientName(
+  IntegrationRuntimeResources.refresh,
+  "RefreshIntegrationRuntimeObjectMetadata",
+  "csharp"
+);
+@@clientName(
+  IntegrationRuntimeResources.enableInteractiveQuery,
+  "EnableInteractiveQueryIntegrationRuntime",
+  "csharp"
+);
+@@clientName(
+  IntegrationRuntimeResources.disableInteractiveQuery,
+  "DisableInteractiveQueryIntegrationRuntime",
+  "csharp"
+);
+@@clientName(
+  IntegrationRuntimeResources.integrationRuntimeNodesGet,
+  "GetIntegrationRuntimeNode",
+  "csharp"
+);
+@@clientName(
+  IntegrationRuntimeResources.integrationRuntimeNodesDelete,
+  "DeleteIntegrationRuntimeNode",
+  "csharp"
+);
+@@clientName(
+  IntegrationRuntimeResources.integrationRuntimeNodesUpdate,
+  "UpdateIntegrationRuntimeNode",
+  "csharp"
+);
+@@clientName(
+  IntegrationRuntimeResources.integrationRuntimeObjectMetadataGet,
+  "GetAllIntegrationRuntimeObjectMetadata",
+  "csharp"
+);
+@@clientName(
+  IntegrationRuntimeResources.listOutboundNetworkDependenciesEndpoints,
+  "GetOutboundNetworkDependencies",
+  "csharp"
+);
+
+// Factory operations
+@@clientName(Factories.cancel, "CancelPipelineRun", "csharp");
+@@clientName(Factories.pipelineRunsGet, "GetPipelineRun", "csharp");
+@@clientName(Factories.queryByPipelineRun, "GetActivityRun", "csharp");
+@@clientName(Factories.triggersQueryByFactory, "GetTriggers", "csharp");
+@@clientName(
+  Factories.getFeatureValueByFactory,
+  "GetExposureControlFeature",
+  "csharp"
+);
+@@clientName(
+  Factories.queryFeatureValuesByFactory,
+  "GetExposureControlFeatures",
+  "csharp"
+);
+@@clientName(Factories.create, "CreateDataFlowDebugSession", "csharp");
+@@clientName(Factories.addDataFlow, "AddDataFlowToDebugSession", "csharp");
+@@clientName(
+  Factories.executeCommand,
+  "ExecuteDataFlowDebugSessionCommand",
+  "csharp"
+);
+@@clientName(
+  Factories.dataFlowDebugSessionDelete,
+  "DeleteDataFlowDebugSession",
+  "csharp"
+);
+@@clientName(
+  Factories.privateLinkResourcesGet,
+  "GetPrivateLinkResources",
+  "csharp"
+);
+
+// Trigger operations
+@@clientName(TriggerResources.cancel, "CancelTriggerRun", "csharp");
+@@clientName(TriggerResources.rerun, "RerunTriggerRun", "csharp");
+
+// Subscription-scope operations
+@@clientName(
+  FactoriesOperationGroup.configureFactoryRepo,
+  "ConfigureFactoryRepoInformation",
+  "csharp"
+);
+@@clientName(
+  ExposureControlOperationGroup.getFeatureValue,
+  "GetFeatureValueExposureControl",
   "csharp"
 );
