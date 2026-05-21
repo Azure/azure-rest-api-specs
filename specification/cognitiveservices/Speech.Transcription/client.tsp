@@ -37,9 +37,21 @@ namespace Azure.Ai.Speech.Transcription;
   "javascript"
 );
 @@clientName(TranscribedPhrase.offsetMilliseconds, "offset", "java");
+@@clientName(TranscribedPhrase.offsetMilliseconds, "offsetInMs", "javascript");
 @@clientName(TranscribedPhrase.durationMilliseconds, "duration", "java");
+@@clientName(
+  TranscribedPhrase.durationMilliseconds,
+  "durationInMs",
+  "javascript"
+);
 @@clientName(TranscribedWord.offsetMilliseconds, "offset", "java");
+@@clientName(TranscribedWord.offsetMilliseconds, "offsetInMs", "javascript");
 @@clientName(TranscribedWord.durationMilliseconds, "duration", "java");
+@@clientName(
+  TranscribedWord.durationMilliseconds,
+  "durationInMs",
+  "javascript"
+);
 @@access(transcribe, Access.internal, "csharp");
 @@access(TranscriptionContent, Access.internal, "java");
 @@access(TranscriptionContent, Access.internal, "csharp");

@@ -26,13 +26,14 @@ model PrivateEndpointConnection
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface PrivateEndpointConnections {
   /**
    * Gets information about a private endpoint connection under a disk access resource.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the operation"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("DiskAccesses")
   @operationId("DiskAccesses_GetAPrivateEndpointConnection")
   getAPrivateEndpointConnection is ComputeResourceRead<PrivateEndpointConnection>;
 
@@ -43,6 +44,7 @@ interface PrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @tag("DiskAccesses")
   @operationId("DiskAccesses_UpdateAPrivateEndpointConnection")
   updateAPrivateEndpointConnection is ComputeResourceCreateOrReplaceAsync<
     PrivateEndpointConnection,
@@ -60,6 +62,7 @@ interface PrivateEndpointConnections {
   #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
+  @tag("DiskAccesses")
   @operationId("DiskAccesses_DeleteAPrivateEndpointConnection")
   deleteAPrivateEndpointConnection is ComputeResourceDeleteAsync<PrivateEndpointConnection>;
 
@@ -67,6 +70,7 @@ interface PrivateEndpointConnections {
    * List information about private endpoint connections under a disk access resource
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("DiskAccesses")
   @operationId("DiskAccesses_ListPrivateEndpointConnections")
   listPrivateEndpointConnections is ComputeResourceListByParent<
     PrivateEndpointConnection,

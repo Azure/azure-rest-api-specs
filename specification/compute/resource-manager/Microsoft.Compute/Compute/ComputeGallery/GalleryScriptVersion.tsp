@@ -34,7 +34,7 @@ namespace ComputeGallery {
    * Common LRO headers (Azure-AsyncOperation required Jan 2025). Keep Location + Retry-After for backward compatibility.
    */
   alias GalleryScriptVersionLroHeaders<FinalResult = GalleryScriptVersion> = ArmAsyncOperationHeader<FinalResult = FinalResult> &
-    ArmLroLocationHeader &
+    ArmLroLocationHeader<FinalResult = FinalResult> &
     Azure.Core.Foundations.RetryAfterHeader;
 
   @armResourceOperations

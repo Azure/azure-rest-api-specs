@@ -633,6 +633,7 @@ interface WorkItemConfigurationsOperationGroup {
   /**
    * Update a work item configuration for an Application Insights component.
    */
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/WorkItemConfigs/{workItemConfigId}")
   @patch(#{ implicitOptionality: true })
   updateItem(

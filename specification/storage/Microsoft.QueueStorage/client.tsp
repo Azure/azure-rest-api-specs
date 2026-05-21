@@ -53,19 +53,12 @@ interface QueueClient extends Queue {}
 @@clientNamespace(Queue, "Azure.Storage.Queues", "rust,go");
 
 @@clientName(MetadataHeaders.metadata, "metadata", "rust");
-@@clientName(SentMessage, "SentMessageInternal", "rust");
-
-@@alternateType(
-  ListOfSentMessage,
-  {
-    identity: "crate::models::SentMessage",
-  },
-  "rust"
-);
 
 @@scope(Service.getUserDelegationKey, "!rust");
 
 // Go customizations
+@@access(StorageErrorCode, Access.public, "go");
+@@usage(StorageErrorCode, Usage.output, "go");
 /**
  * List wrapper for EnqueuedMessage array
  */
@@ -83,12 +76,16 @@ model ReceivedMessagesGo is Array<ReceivedMessage>;
 model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@alternateType(AccessPolicy.start, utcDateTime, "go");
 @@alternateType(AccessPolicy.expiry, utcDateTime, "go");
+@@alternateType(KeyInfo.expiry, string, "go");
+@@alternateType(KeyInfo.start, string, "go");
 @@alternateType(ListOfSentMessage, ListOfSentMessageGo, "go");
 @@alternateType(PeekedMessages, PeekedMessagesGo, "go");
 @@alternateType(ReceivedMessages, ReceivedMessagesGo, "go");
 @@alternateType(SignedIdentifiers, SignedIdentifiersGo, "go");
 @@clientName(Metrics.includeApis, "includeAPIs", "go");
+@@clientName(ClientRequestIdParameter.clientRequestId, "RequestID", "go");
 @@clientName(CorsRule, "CORSRule", "go");
+@@clientName(KeyInfo.delegatedUserTid, "DelegatedUserTenantID", "go");
 @@clientName(ListQueuesResponse, "ListQueuesSegmentResponse", "go");
 @@clientName(ListQueuesResponse.queueItems, "Queues", "go");
 @@clientName(QueueItem, "Queue", "go");

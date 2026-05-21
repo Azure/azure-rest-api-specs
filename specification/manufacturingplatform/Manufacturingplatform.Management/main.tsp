@@ -380,6 +380,7 @@ interface ManufacturingDataServices {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<MdsResource>;
   // update is ArmResourcePatchAsync<MdsResource, MdsResourceProperties>;
   //temporary fix until typespec fix the issue of generating update classes
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     MdsResource,
