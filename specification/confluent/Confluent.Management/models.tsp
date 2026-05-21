@@ -2480,9 +2480,6 @@ model KafkaAzureSynapseAnalyticsSinkConnectorInfo extends PartnerInfoBase {
 }
 
 /**
- * Network Gateway Properties
- */
-/**
  * A key-value pair for extensibility.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
@@ -2522,7 +2519,7 @@ model NetworkGatewayProperties {
   /**
    * Additional properties for extensibility
    */
-  @identifiers(#[])
+  @identifiers(#["key"])
   dictionary?: KeyValuePair[];
 }
 
@@ -2548,7 +2545,7 @@ model AccessPointProperties {
   /**
    * IP ranges to route through your virtual network instead of Confluent's default path. Required for Kafka clients in peered VNets or on-premises networks (e.g., 10.0.0.0/8, 172.16.0.0/12).
    */
-  egressRoutes?: string;
+  egressRoutes?: string[];
 
   /**
    * Metadata of the record
@@ -2564,6 +2561,6 @@ model AccessPointProperties {
   /**
    * Additional properties for extensibility
    */
-  @identifiers(#[])
+  @identifiers(#["key"])
   dictionary?: KeyValuePair[];
 }

@@ -3598,8 +3598,11 @@
           "description": "VNet injection target (LiftrBase standard model). Contains the virtual network resource ID and the delegated subnet resource ID."
         },
         "egressRoutes": {
-          "type": "string",
-          "description": "IP ranges to route through your virtual network instead of Confluent's default path. Required for Kafka clients in peered VNets or on-premises networks (e.g., 10.0.0.0/8, 172.16.0.0/12)."
+          "type": "array",
+          "description": "IP ranges to route through your virtual network instead of Confluent's default path. Required for Kafka clients in peered VNets or on-premises networks (e.g., 10.0.0.0/8, 172.16.0.0/12).",
+          "items": {
+            "type": "string"
+          }
         },
         "metadata": {
           "$ref": "#/definitions/SCMetadataEntity",
@@ -3616,7 +3619,9 @@
           "items": {
             "$ref": "#/definitions/KeyValuePair"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "key"
+          ]
         }
       },
       "required": [
@@ -4840,7 +4845,7 @@
     },
     "KeyValuePair": {
       "type": "object",
-      "description": "Network Gateway PropertiesA key-value pair for extensibility.",
+      "description": "A key-value pair for extensibility.",
       "properties": {
         "key": {
           "type": "string",
@@ -5056,7 +5061,9 @@
           "items": {
             "$ref": "#/definitions/KeyValuePair"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "key"
+          ]
         }
       },
       "required": [
