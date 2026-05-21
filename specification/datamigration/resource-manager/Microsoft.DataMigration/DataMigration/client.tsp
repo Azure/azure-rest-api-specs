@@ -1320,3 +1320,34 @@ using Microsoft.DataMigration;
   "MigrationFromSqlServerToAzureVm",
   "csharp"
 );
+
+// --- Operation param name override ---
+@@clientName(
+  DatabaseMigrationSqlDbs.cancel::parameters.body,
+  "input",
+  "csharp"
+);
+
+@@clientName(
+  DatabaseMigrationSqlMis.cancel::parameters.body,
+  "input",
+  "csharp"
+);
+
+@@clientName(
+  DatabaseMigrationSqlMis.cutover::parameters.body,
+  "input",
+  "csharp"
+);
+
+@@clientName(
+  DatabaseMigrationSqlVms.cancel::parameters.body,
+  "input",
+  "csharp"
+);
+
+@@clientName(
+  DatabaseMigrationSqlVms.cutover::parameters.body,
+  "input",
+  "csharp"
+);
