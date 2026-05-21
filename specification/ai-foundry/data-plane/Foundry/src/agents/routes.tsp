@@ -164,7 +164,7 @@ interface Agents {
       /** The name of the agent to delete. */
       @path agent_name: string;
 
-      /** For Hosted Agents, if true, force-deletes the agent even if its versions have active sessions, cascading deletion to all associated sessions. This value is not relevant for other Agent types. Defaults to false. */
+      /** For Hosted Agents, if true, force-deletes the agent even if its versions have active sessions, cascading deletion to all associated sessions. Defaults to `false`. This value is not relevant for other Agent types. */
       @query force?: boolean = false;
     },
     DeleteAgentResponse
@@ -260,7 +260,7 @@ interface Agents {
       /** The version of the agent to delete */
       @path agent_version: string;
 
-      /** For Hosted Agents, if true, force-deletes the version even if it has active sessions, cascading deletion to all associated sessions. This value is not relevant for other Agent types. Defaults to false. */
+      /** For Hosted Agents, if true, force-deletes the version even if it has active sessions, cascading deletion to all associated sessions. Defaults to `false`. This value is not relevant for other Agent types. */
       @query force?: boolean = false;
     },
     DeleteAgentVersionResponse
