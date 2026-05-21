@@ -44,6 +44,14 @@ union OptimizationMode {
   optimize: "optimize",
 }
 
+/** Evaluation granularity for scoring candidates. */
+union EvaluationLevel {
+  string,
+
+  @doc("Per-conversation multi-turn simulation evaluation. Dataset items provide scenario seeds (id, testCaseDescription, desiredNumTurns) instead of single-turn prompts.")
+  conversation: "conversation",
+}
+
 // ---------------------------------------------------------------------------
 // Input models
 // ---------------------------------------------------------------------------
@@ -121,6 +129,15 @@ model DatasetItem {
 
   @doc("Per-task evaluation criteria. Defaults to the job-level evaluators if unset.")
   criteria?: EvaluationCriterion[];
+
+  @doc("Unique identifier for this scenario (simulation mode with evaluationLevel='conversation').")
+  id?: string;
+
+  @doc("Natural language description of what the simulated user should do (simulation mode).")
+  testCaseDescription?: string;
+
+  @doc("Desired number of conversation turns for this scenario (simulation mode). Defaults to 10 if not specified.")
+  desiredNumTurns?: int32;
 
   @doc("Pre-computed evaluation results in AOAI-compatible format. When provided together with responseItems, the baseline run-and-evaluate phase is skipped.")
   evalResults?: EvalResultItem[];
@@ -241,6 +258,9 @@ model OptimizationOptions {
 
   @doc("If true, retain temporary candidate-evaluation agent versions for inspection. Default: false.")
   keepVersions?: boolean = false;
+
+  @doc("Evaluation granularity. Null/omitted means per-item single-turn. Set to 'conversation' for per-conversation multi-turn simulation scoring. When set, dataset items provide scenario seeds (id, testCaseDescription, desiredNumTurns).")
+  evaluationLevel?: EvaluationLevel;
 }
 
 @doc("Caller-supplied inputs for an optimization job.")
