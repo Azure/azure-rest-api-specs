@@ -204,6 +204,73 @@ using Azure.AI.Projects;
 @@access(MemoryStoreSearchResponse, Access.public);
 @@usage(MemoryStoreSearchResponse, Usage.output);
 
+// Emit Azure-specific OutputItem subtypes as public Java classes
+@@access(BingGroundingToolCall, Access.public);
+@@usage(BingGroundingToolCall, Usage.input);
+
+@@access(BingGroundingToolCallOutput, Access.public);
+@@usage(BingGroundingToolCallOutput, Usage.input);
+
+@@access(SharepointGroundingToolCall, Access.public);
+@@usage(SharepointGroundingToolCall, Usage.input);
+
+@@access(SharepointGroundingToolCallOutput, Access.public);
+@@usage(SharepointGroundingToolCallOutput, Usage.input);
+
+@@access(AzureAISearchToolCall, Access.public);
+@@usage(AzureAISearchToolCall, Usage.input);
+
+@@access(AzureAISearchToolCallOutput, Access.public);
+@@usage(AzureAISearchToolCallOutput, Usage.input);
+
+@@access(BingCustomSearchToolCall, Access.public);
+@@usage(BingCustomSearchToolCall, Usage.input);
+
+@@access(BingCustomSearchToolCallOutput, Access.public);
+@@usage(BingCustomSearchToolCallOutput, Usage.input);
+
+@@access(OpenApiToolCall, Access.public);
+@@usage(OpenApiToolCall, Usage.input);
+
+@@access(OpenApiToolCallOutput, Access.public);
+@@usage(OpenApiToolCallOutput, Usage.input);
+
+@@access(BrowserAutomationToolCall, Access.public);
+@@usage(BrowserAutomationToolCall, Usage.input);
+
+@@access(BrowserAutomationToolCallOutput, Access.public);
+@@usage(BrowserAutomationToolCallOutput, Usage.input);
+
+@@access(FabricDataAgentToolCall, Access.public);
+@@usage(FabricDataAgentToolCall, Usage.input);
+
+@@access(FabricDataAgentToolCallOutput, Access.public);
+@@usage(FabricDataAgentToolCallOutput, Usage.input);
+
+@@access(AzureFunctionToolCall, Access.public);
+@@usage(AzureFunctionToolCall, Usage.input);
+
+@@access(AzureFunctionToolCallOutput, Access.public);
+@@usage(AzureFunctionToolCallOutput, Usage.input);
+
+@@access(A2AToolCall, Access.public);
+@@usage(A2AToolCall, Usage.input);
+
+@@access(A2AToolCallOutput, Access.public);
+@@usage(A2AToolCallOutput, Usage.input);
+
+@@access(MemorySearchToolCall, Access.public);
+@@usage(MemorySearchToolCall, Usage.input);
+
+@@access(MemoryCommandToolCall, Access.public);
+@@usage(MemoryCommandToolCall, Usage.input);
+
+@@access(MemoryCommandToolCallOutput, Access.public);
+@@usage(MemoryCommandToolCallOutput, Usage.input);
+
+@@access(ToolCallStatus, Access.public);
+@@usage(ToolCallStatus, Usage.input);
+
 @@access(FoundryFeaturesOptInKeys, Access.public);
 @@access(AgentDefinitionOptInKeys, Access.public);
 
@@ -282,6 +349,8 @@ using Azure.AI.Projects;
   },
   "java"
 );
+
+@@alternateType(OpenAI.OutputItem, unknown, "java");
 
 // TimeZone property override via model indirection
 @alternateType(
