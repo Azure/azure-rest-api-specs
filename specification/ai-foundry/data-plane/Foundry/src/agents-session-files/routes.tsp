@@ -27,12 +27,7 @@ interface AgentSessionFiles {
   #suppress "@azure-tools/typespec-azure-core/byos" "The file is targeting the per-session files mounted to a foundry agent"
   @put
   @route("/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files/content")
-  @extension(
-    "x-ms-foundry-meta",
-    #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
-  )
-  uploadSessionFile is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys.hosted_agents_v1_preview,
+  uploadSessionFile is FoundryDataPlaneOperation<
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -56,12 +51,7 @@ interface AgentSessionFiles {
    */
   @get
   @route("/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files/content")
-  @extension(
-    "x-ms-foundry-meta",
-    #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
-  )
-  downloadSessionFile is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys.hosted_agents_v1_preview,
+  downloadSessionFile is FoundryDataPlaneOperation<
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -81,12 +71,7 @@ interface AgentSessionFiles {
    */
   @get
   @route("/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files")
-  @extension(
-    "x-ms-foundry-meta",
-    #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
-  )
-  listSessionFiles is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys.hosted_agents_v1_preview,
+  listSessionFiles is FoundryDataPlaneOperation<
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -106,12 +91,7 @@ interface AgentSessionFiles {
    */
   @delete
   @route("/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files")
-  @extension(
-    "x-ms-foundry-meta",
-    #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
-  )
-  deleteSessionFile is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys.hosted_agents_v1_preview,
+  deleteSessionFile is FoundryDataPlaneOperation<
     {
       /** The name of the agent. */
       @path agent_name: string;

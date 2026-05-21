@@ -8,10 +8,6 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
-)
 model CreateOrUpdateManagedAgentIdentityBlueprintRequest {
   @doc("""
     The unique name that identifies the managed agent identity blueprint.

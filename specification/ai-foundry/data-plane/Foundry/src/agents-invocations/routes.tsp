@@ -6,12 +6,6 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
-alias AgentInvocationPreviewHeader = WithRequiredFoundryPreviewHeader<AgentDefinitionOptInKeys.hosted_agents_v1_preview>;
-
-const AgentInvocationRequiredPreviews = #{
-  required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview],
-};
-
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 @tag("Agent Invocations")
 interface AgentInvocations {
@@ -21,12 +15,11 @@ interface AgentInvocations {
    */
   @get
   @route("/agents/{agent_name}/endpoint/protocols/invocations/docs/openapi.json")
-  @extension("x-ms-foundry-meta", AgentInvocationRequiredPreviews)
   getAgentInvocationOpenApiSpec is FoundryDataPlaneOperation<
     {
       /** The name of the agent. */
       @path agent_name: string;
-    } & AgentInvocationPreviewHeader,
+    },
     {
       @header contentType: "application/json";
       @body spec: Record<unknown>;
@@ -38,7 +31,6 @@ interface AgentInvocations {
    */
   @post
   @route("/agents/{agent_name}/endpoint/protocols/invocations")
-  @extension("x-ms-foundry-meta", AgentInvocationRequiredPreviews)
   createAgentInvocation is FoundryDataPlaneOperation<
     {
       /** The name of the agent. */
@@ -52,7 +44,7 @@ interface AgentInvocations {
 
       /** The request body. */
       @body request: unknown;
-    } & AgentInvocationPreviewHeader,
+    },
     {
       /** Unique identifier for this invocation. */
       @header("x-agent-invocation-id") invocationId: string;
@@ -74,7 +66,6 @@ interface AgentInvocations {
    */
   @get
   @route("/agents/{agent_name}/endpoint/protocols/invocations/{invocation_id}")
-  @extension("x-ms-foundry-meta", AgentInvocationRequiredPreviews)
   getAgentInvocation is FoundryDataPlaneOperation<
     {
       /** The name of the agent. */
@@ -82,7 +73,7 @@ interface AgentInvocations {
 
       /** The unique identifier of the invocation. */
       @path invocation_id: string;
-    } & AgentInvocationPreviewHeader,
+    },
     {
       /** Session ID for this invocation. Returns the session ID associated with the invocation. */
       @header("x-agent-session-id") agentSessionId: string;
@@ -101,7 +92,6 @@ interface AgentInvocations {
    */
   @post
   @route("/agents/{agent_name}/endpoint/protocols/invocations/{invocation_id}/cancel")
-  @extension("x-ms-foundry-meta", AgentInvocationRequiredPreviews)
   cancelAgentInvocation is FoundryDataPlaneOperation<
     {
       /** The name of the agent. */
@@ -115,7 +105,7 @@ interface AgentInvocations {
 
       /** Optional request body. */
       @body request?: unknown;
-    } & AgentInvocationPreviewHeader,
+    },
     {
       /** Session ID for this invocation. Returns the session ID associated with the invocation. */
       @header("x-agent-session-id") agentSessionId: string;
