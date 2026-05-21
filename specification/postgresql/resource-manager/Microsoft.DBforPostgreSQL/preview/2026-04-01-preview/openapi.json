@@ -3071,86 +3071,6 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
-      },
-      "post": {
-        "operationId": "Servers_MajorVersionUpgradePrecheck",
-        "tags": [
-          "Servers"
-        ],
-        "description": "Begin Major Version Upgrade Prechecks.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the server.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MajorVersionUpgradePrecheckCreateRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/MajorVersionUpgradePrecheckResponse"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create a major version upgrade precheck validation for a PostgreSQL flexible server.": {
-            "$ref": "./examples/ServersMajorVersionUpgradePrecheck.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/MajorVersionUpgradePrecheckResponse"
-        },
-        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/majorVersionUpgradePrecheck/{precheckValidationId}": {
@@ -4305,6 +4225,88 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/BackupsLongTermRetentionResponse"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/startMajorVersionUpgradePrecheck": {
+      "post": {
+        "operationId": "Servers_StartMajorVersionUpgradePrecheck",
+        "tags": [
+          "Servers"
+        ],
+        "description": "Start Major Version Upgrade Prechecks.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StartMajorVersionUpgradePrecheckRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StartMajorVersionUpgradePrecheckResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Start a major version upgrade precheck validation for a PostgreSQL flexible server.": {
+            "$ref": "./examples/ServersStartMajorVersionUpgradePrecheck.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/StartMajorVersionUpgradePrecheckResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -7351,19 +7353,6 @@
         }
       }
     },
-    "MajorVersionUpgradePrecheckCreateRequest": {
-      "type": "object",
-      "description": "Request model for creating a major version upgrade precheck.",
-      "properties": {
-        "targetVersion": {
-          "$ref": "#/definitions/PostgresMajorVersion",
-          "description": "The target major version to upgrade to."
-        }
-      },
-      "required": [
-        "targetVersion"
-      ]
-    },
     "MajorVersionUpgradePrecheckResource": {
       "type": "object",
       "description": "Major version upgrade precheck resource for a PostgreSQL flexible server.",
@@ -7410,7 +7399,7 @@
           "description": "The time when the precheck was created."
         },
         "status": {
-          "type": "string",
+          "$ref": "#/definitions/MajorVersionUpgradePrecheckStatus",
           "description": "The status of the precheck validation."
         },
         "precheckResult": {
@@ -7433,23 +7422,40 @@
         }
       }
     },
-    "MajorVersionUpgradePrecheckResponse": {
-      "type": "object",
-      "description": "Response model for creating a major version upgrade precheck.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The precheck validation ID."
-        },
-        "createTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time when the precheck was created."
-        },
-        "status": {
-          "type": "string",
-          "description": "The status of the precheck validation."
-        }
+    "MajorVersionUpgradePrecheckStatus": {
+      "type": "string",
+      "description": "The status of the major version upgrade precheck.",
+      "enum": [
+        "Validating",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "MajorVersionUpgradePrecheckStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Validating",
+            "value": "Validating",
+            "description": "Executing prechecks against the source server"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Validation succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Validation failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Validation canceled"
+          }
+        ]
       }
     },
     "MetricSpecification": {
@@ -10117,6 +10123,38 @@
             "description": "Data migration must not start right away."
           }
         ]
+      }
+    },
+    "StartMajorVersionUpgradePrecheckRequest": {
+      "type": "object",
+      "description": "Request model for starting a major version upgrade precheck.",
+      "properties": {
+        "targetVersion": {
+          "$ref": "#/definitions/PostgresMajorVersion",
+          "description": "The target major version to upgrade to."
+        }
+      },
+      "required": [
+        "targetVersion"
+      ]
+    },
+    "StartMajorVersionUpgradePrecheckResponse": {
+      "type": "object",
+      "description": "Response model for starting a major version upgrade precheck.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The precheck validation ID."
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the precheck was created."
+        },
+        "status": {
+          "$ref": "#/definitions/MajorVersionUpgradePrecheckStatus",
+          "description": "The status of the precheck validation."
+        }
       }
     },
     "Storage": {

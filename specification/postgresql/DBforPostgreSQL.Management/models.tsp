@@ -4127,7 +4127,7 @@ model MajorVersionUpgradePrecheckResourceProperties {
   createTime?: utcDateTime;
 
   @doc("The status of the precheck validation.")
-  status?: string;
+  status?: MajorVersionUpgradePrecheckStatus;
 
   @doc("The detailed result of the precheck operation.")
   precheckResult?: PrecheckResult;
@@ -4140,16 +4140,16 @@ model MajorVersionUpgradePrecheckResourceProperties {
   policyDetails?: PolicyDetail[];
 }
 
-@doc("Request model for creating a major version upgrade precheck.")
+@doc("Request model for starting a major version upgrade precheck.")
 @added(Versions.v2026_04_01)
-model MajorVersionUpgradePrecheckCreateRequest {
+model StartMajorVersionUpgradePrecheckRequest {
   @doc("The target major version to upgrade to.")
   targetVersion: PostgresMajorVersion;
 }
 
-@doc("Response model for creating a major version upgrade precheck.")
+@doc("Response model for starting a major version upgrade precheck.")
 @added(Versions.v2026_04_01)
-model MajorVersionUpgradePrecheckResponse {
+model StartMajorVersionUpgradePrecheckResponse {
   @doc("The precheck validation ID.")
   name?: string;
 
@@ -4157,7 +4157,25 @@ model MajorVersionUpgradePrecheckResponse {
   createTime?: utcDateTime;
 
   @doc("The status of the precheck validation.")
-  status?: string;
+  status?: MajorVersionUpgradePrecheckStatus;
+}
+
+@doc("The status of the major version upgrade precheck.")
+@added(Versions.v2026_04_01)
+union MajorVersionUpgradePrecheckStatus {
+  string,
+
+  @doc("Executing prechecks against the source server")
+  Validating: "Validating",
+
+  @doc("Validation succeeded")
+  Succeeded: "Succeeded",
+
+  @doc("Validation failed")
+  Failed: "Failed",
+
+  @doc("Validation canceled")
+  Canceled: "Canceled",
 }
 
 @doc("Major version upgrade precheck resource for a PostgreSQL flexible server.")
