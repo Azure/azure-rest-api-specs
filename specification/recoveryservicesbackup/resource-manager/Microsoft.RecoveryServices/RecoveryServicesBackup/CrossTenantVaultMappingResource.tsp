@@ -351,7 +351,6 @@ interface ProtectedItemOperationResultsFromCrossTenantVault {
           "Accepted",
           ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
         >
-      | ArmNoContentResponse
   >;
 }
 
@@ -496,7 +495,6 @@ interface ValidateOperationResultFromCrossTenantVault {
           "Accepted",
           ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
         >
-      | ArmNoContentResponse
   >;
 }
 
@@ -676,7 +674,6 @@ interface CrossTenantVaultCredentialOperationResults {
           "Accepted",
           ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
         >
-      | ArmNoContentResponse
   >;
 }
 
