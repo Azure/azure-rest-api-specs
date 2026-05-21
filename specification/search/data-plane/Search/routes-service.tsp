@@ -925,6 +925,13 @@ interface KnowledgeSources {
       /** The content type of the request body. Must be application/octet-stream. */
       @header contentType: "application/octet-stream";
 
+      /**
+       * The Content-Disposition header specifying the filename of the uploaded file.
+       * Must follow the format: `attachment; filename="<filename>"`.
+       * For example: `attachment; filename="installation-guide.pdf"`.
+       */
+      @header("Content-Disposition") contentDisposition: string;
+
       /** The file content to upload. */
       @body file: bytes;
     },
