@@ -567,9 +567,10 @@ model Schema {
   @doc("The tags of the schema.")
   tags?: Record<string>;
 
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "json_schema stores arbitrary JSON Schema documents which require Record<unknown>"
   @doc("The JSON Schema definition.")
   @encodedName("application/json", "json_schema")
-  jsonSchema: Record<string>;
+  jsonSchema: Record<unknown>;
 
   @doc("A value representing the current state of the resource.")
   @visibility(Lifecycle.Read)
