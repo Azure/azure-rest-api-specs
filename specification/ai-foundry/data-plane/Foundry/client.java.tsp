@@ -16,7 +16,6 @@ import "./src/schedules/routes.tsp";
 import "./src/routines/routes.tsp";
 import "./src/skills/routes.tsp";
 import "./src/data_generation_jobs/routes.tsp";
-import "./src/evaluation-suites/routes.tsp";
 
 using Azure.ClientGenerator.Core;
 namespace Azure.AI.Projects;
@@ -116,36 +115,6 @@ namespace Azure.AI.Projects;
 @@clientName(EvaluatorGenerationJobs.list, "listEvaluatorGenerationJobs");
 @@clientName(EvaluatorGenerationJobs.cancel, "cancelEvaluatorGenerationJob");
 @@clientName(EvaluatorGenerationJobs.delete, "deleteEvaluatorGenerationJob");
-
-// Evaluation Suite operations
-@@clientName(EvaluationSuites.listVersions, "listEvaluationSuiteVersions");
-@@clientName(EvaluationSuites.listLatest, "listEvaluationSuites");
-@@clientName(EvaluationSuites.getVersion, "getEvaluationSuite");
-@@clientName(EvaluationSuites.deleteVersion, "deleteEvaluationSuite");
-@@clientName(EvaluationSuites.createOrUpdateVersion,
-  "createOrUpdateEvaluationSuite"
-);
-@@clientName(EvaluationSuites.createEvaluationSuiteVersion,
-  "createEvaluationSuite"
-);
-@@clientName(EvaluationSuites.run, "runEvaluationSuite");
-
-// Evaluation Suite Generation Jobs
-@@clientName(EvaluationSuiteGenerationJobs.create,
-  "createEvaluationSuiteGenerationJob"
-);
-@@clientName(EvaluationSuiteGenerationJobs.get,
-  "getEvaluationSuiteGenerationJob"
-);
-@@clientName(EvaluationSuiteGenerationJobs.list,
-  "listEvaluationSuiteGenerationJobs"
-);
-@@clientName(EvaluationSuiteGenerationJobs.cancel,
-  "cancelEvaluationSuiteGenerationJob"
-);
-@@clientName(EvaluationSuiteGenerationJobs.delete,
-  "deleteEvaluationSuiteGenerationJob"
-);
 
 // --------------------------------------------------------------------------------
 // Renames - models
@@ -294,17 +263,3 @@ model TimeZoneType {}
 @@clientLocation(EvaluatorGenerationJobs.list, Evaluators);
 @@clientLocation(EvaluatorGenerationJobs.cancel, Evaluators);
 @@clientLocation(EvaluatorGenerationJobs.delete, Evaluators);
-
-@@clientLocation(EvaluationSuites.listVersions, Evaluators);
-@@clientLocation(EvaluationSuites.listLatest, Evaluators);
-@@clientLocation(EvaluationSuites.getVersion, Evaluators);
-@@clientLocation(EvaluationSuites.deleteVersion, Evaluators);
-@@clientLocation(EvaluationSuites.createOrUpdateVersion, Evaluators);
-@@clientLocation(EvaluationSuites.createEvaluationSuiteVersion, Evaluators);
-@@clientLocation(EvaluationSuites.run, Evaluators);
-
-@@clientLocation(EvaluationSuiteGenerationJobs.create, Evaluators);
-@@clientLocation(EvaluationSuiteGenerationJobs.get, Evaluators);
-@@clientLocation(EvaluationSuiteGenerationJobs.list, Evaluators);
-@@clientLocation(EvaluationSuiteGenerationJobs.cancel, Evaluators);
-@@clientLocation(EvaluationSuiteGenerationJobs.delete, Evaluators);
