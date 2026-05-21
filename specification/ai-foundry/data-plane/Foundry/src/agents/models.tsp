@@ -1057,8 +1057,8 @@ model CreateAgentSessionRequest {
   version_indicator: VersionIndicator;
 }
 
-/** Known SSE event types emitted by the hosted agent session log stream. */
 /**
+ * Known SSE event types emitted by the hosted agent session log stream.
  * Additional event types may be introduced in future versions.
  */
 @extension(

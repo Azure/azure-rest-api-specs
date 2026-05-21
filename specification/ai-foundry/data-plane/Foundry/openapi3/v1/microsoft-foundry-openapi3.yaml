@@ -1143,12 +1143,13 @@ paths:
       x-ms-foundry-meta:
         required_previews:
           - AgentEndpoints=V1Preview
-  /agents/{agent_name}/endpoint/sessions/{session_id}/stop:
+  /agents/{agent_name}/endpoint/sessions/{session_id}:stop:
     post:
       operationId: Agents_stopSession
       description: |-
         Stops a session.
         Returns 204 No Content when the stop succeeds.
+        Returns a failed session resource when the stop attempt fails.
       parameters:
         - name: Foundry-Features
           in: header
@@ -8281,6 +8282,7 @@ components:
             - idle
             - updating
             - failed
+            - stopping
             - deleting
             - deleted
             - expired
