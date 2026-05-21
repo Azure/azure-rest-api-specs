@@ -3948,6 +3948,13 @@ model DeploymentStep {
    */
   @visibility(Lifecycle.Read)
   exception?: string[];
+
+  /**
+   * error details.
+   */
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Read)
+  error?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 
 /**
