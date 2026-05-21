@@ -224,41 +224,23 @@ namespace Microsoft.EventGrid {
     "csharp"
   );
   @@clientName(EventSubscriptions.getFullUrl, "GetFullUri", "csharp");
-  // The next 6 renames intentionally map both subscription-scope and resource-group-scope
-  // listings to the same legacy SDK method names. They land on different parent extension
-  // classes (MockableEventGridSubscriptionResource vs MockableEventGridResourceGroupResource),
-  // so duplicate-client-name warnings are expected and safe to suppress.
-  #suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Same legacy name restored on a different parent extension class."
-  @@clientName(
-    EventSubscriptionsOperationGroup.listGlobalByResourceGroupForTopicType,
-    "GetGlobalEventSubscriptionsDataForTopicType",
-    "csharp"
-  );
-  #suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Same legacy name restored on a different parent extension class."
+  // Only the subscription-scoped listings are renamed to the legacy SDK names.
+  // The resource-group-scoped variants keep their operation-default names
+  // (GetGlobalByResourceGroupForTopicType, GetRegionalByResourceGroup,
+  // GetRegionalByResourceGroupForTopicType) to match the previously published
+  // 1.1.0 surface and to avoid a generator name-collision that produces a
+  // mis-typed CollectionResult constructor when both scopes share the same
+  // C# name.
   @@clientName(
     EventSubscriptionsOperationGroup.listGlobalBySubscriptionForTopicType,
     "GetGlobalEventSubscriptionsDataForTopicType",
     "csharp"
   );
-  #suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Same legacy name restored on a different parent extension class."
-  @@clientName(
-    EventSubscriptionsOperationGroup.listRegionalByResourceGroup,
-    "GetRegionalEventSubscriptionsData",
-    "csharp"
-  );
-  #suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Same legacy name restored on a different parent extension class."
-  @@clientName(
-    EventSubscriptionsOperationGroup.listRegionalByResourceGroupForTopicType,
-    "GetRegionalEventSubscriptionsDataForTopicType",
-    "csharp"
-  );
-  #suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Same legacy name restored on a different parent extension class."
   @@clientName(
     EventSubscriptionsOperationGroup.listRegionalBySubscription,
     "GetRegionalEventSubscriptionsData",
     "csharp"
   );
-  #suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Same legacy name restored on a different parent extension class."
   @@clientName(
     EventSubscriptionsOperationGroup.listRegionalBySubscriptionForTopicType,
     "GetRegionalEventSubscriptionsDataForTopicType",
