@@ -335,8 +335,8 @@ using Azure.AI.Projects;
 @@clientName(Routines.deleteRoutine, "delete");
 @@clientName(Routines.listRoutineRuns, "list_runs", "python");
 @@clientName(Routines.listRoutineRuns, "listRuns", "javascript");
-@@clientName(Routines.dispatchRoutineAsync, "dispatch_async", "python");
-@@clientName(Routines.dispatchRoutineAsync, "dispatchAsync", "javascript");
+@@clientName(Routines.dispatchRoutineAsync, "dispatch");
+@@clientName(DispatchRoutineResponse, "DispatchRoutineResult", "python");
 
 // --------------------------------------------------------------------------------
 // Beta Evaluators sub‐client
@@ -431,6 +431,10 @@ using Azure.AI.Projects;
 @@clientName(Models.createOrUpdateVersion, "update");
 @@clientName(Models.startPendingUpload, "pendingUpload");
 @@clientName(Models.getCredentials, "getCredentials");
+@@clientName(Models.createAsync, "pendingCreateVersion");
+
+@@clientName(CreateModelVersionAsyncResponse, "ModelPendingCreateVersionResult", "python");
+@@clientName(CreateModelVersionAsyncResponse, "ModelPendingCreateVersionResponse", "javascript");
 
 // --------------------------------------------------------------------------------
 // Beta Schedules sub‐client
