@@ -277,6 +277,7 @@ using Azure.AI.Projects;
 @@clientName(MemoryStores.deleteMemoryStore, "delete");
 @@clientName(MemoryStoreSearchResponse, "MemoryStoreSearchResult", "python");
 @@clientName(DeleteMemoryStoreResponse, "DeleteMemoryStoreResult", "python");
+@@clientName(DeleteMemoryResponse, "DeleteMemoryResult", "python");
 @@clientName(MemoryStoreUpdateResponse, "MemoryStoreUpdateResult", "python");
 @@clientName(MemoryStoreDeleteScopeResponse,
   "MemoryStoreDeleteScopeResult",
