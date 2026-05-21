@@ -21470,7 +21470,7 @@
           },
           "default": {
             "type": "boolean",
-            "description": "Whether to set this version as the default."
+            "description": "Whether to set this version as the default. Defaults to false."
           }
         },
         "required": [
@@ -50128,8 +50128,11 @@
             "description": "Arbitrary key-value metadata for additional properties."
           },
           "allowed_tools": {
-            "type": "string",
-            "description": "Space-separated list of pre-approved tools the skill may use. Experimental."
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of pre-approved tools the skill may use. Experimental."
           }
         },
         "description": "Inline content for defining a simple skill without uploading files. Follows the agentskills.io SKILL.md specification."

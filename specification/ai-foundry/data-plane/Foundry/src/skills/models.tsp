@@ -30,8 +30,8 @@ model SkillInlineContent {
   @doc("Arbitrary key-value metadata for additional properties.")
   metadata?: Record<string>;
 
-  @doc("Space-separated list of pre-approved tools the skill may use. Experimental.")
-  allowed_tools?: string;
+  @doc("List of pre-approved tools the skill may use. Experimental.")
+  allowed_tools?: string[];
 }
 
 @doc("Multipart request body for creating a skill version from files. Accepts either a single zip file or multiple individual skill files (directory upload). For zip uploads, the server extracts and validates contents. For directory uploads, files are validated as-is.")
@@ -39,7 +39,7 @@ model CreateSkillVersionFromFilesBody {
   @doc("Skill files to upload. Upload a single zip file or multiple individual files with relative paths.")
   files: HttpPart<File>[];
 
-  @doc("Whether to set this version as the default.")
+  @doc("Whether to set this version as the default. Defaults to false.")
   default?: HttpPart<boolean>;
 }
 
