@@ -11,6 +11,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-liftr-base";
 import "@typespec/openapi";
 import "./models.tsp";
 import "./back-compatible.tsp";
@@ -59,6 +60,7 @@ enum Versions {
   /**
    * The 2026-05-01-preview API version.
    */
+  @useDependency(LiftrBase.Versions.v3_preview)
   v2026_05_01_preview: "2026-05-01-preview",
 }
 

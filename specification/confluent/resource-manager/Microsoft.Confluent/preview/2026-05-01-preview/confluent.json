@@ -3593,29 +3593,9 @@
           "type": "string",
           "description": "The cloud service provider region for the access point"
         },
-        "vnetId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The resource ID of the virtual network",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Network/virtualNetworks"
-              }
-            ]
-          }
-        },
-        "subnetId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The resource ID of the delegated subnet",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Network/virtualNetworks/subnets"
-              }
-            ]
-          }
+        "vnetInjection": {
+          "$ref": "#/definitions/LiftrBase.VnetInjectionDetails",
+          "description": "VNet injection target (LiftrBase standard model). Contains the virtual network resource ID and the delegated subnet resource ID."
         },
         "egressRoutes": {
           "type": "string",
@@ -3642,8 +3622,7 @@
       "required": [
         "accessPointName",
         "region",
-        "vnetId",
-        "subnetId"
+        "vnetInjection"
       ]
     },
     "AccessPointResource": {
@@ -4875,6 +4854,24 @@
       "required": [
         "key",
         "value"
+      ]
+    },
+    "LiftrBase.VnetInjectionDetails": {
+      "type": "object",
+      "description": "Details for VNet injection",
+      "properties": {
+        "virtualNetworkResourceId": {
+          "type": "string",
+          "description": "Resource ID of the virtual network"
+        },
+        "subnetResourceId": {
+          "type": "string",
+          "description": "Resource ID of the subnet"
+        }
+      },
+      "required": [
+        "virtualNetworkResourceId",
+        "subnetResourceId"
       ]
     },
     "LinkOrganization": {

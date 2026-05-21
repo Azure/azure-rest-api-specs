@@ -2,11 +2,13 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-liftr-base";
 import "@typespec/versioning";
 
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using LiftrBase;
 
 namespace Microsoft.Confluent;
 
@@ -2539,22 +2541,9 @@ model AccessPointProperties {
   region: string;
 
   /**
-   * The resource ID of the virtual network
+   * VNet injection target (LiftrBase standard model). Contains the virtual network resource ID and the delegated subnet resource ID.
    */
-  vnetId: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.Network/virtualNetworks";
-    }
-  ]>;
-
-  /**
-   * The resource ID of the delegated subnet
-   */
-  subnetId: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.Network/virtualNetworks/subnets";
-    }
-  ]>;
+  vnetInjection: VnetInjectionDetails;
 
   /**
    * IP ranges to route through your virtual network instead of Confluent's default path. Required for Kafka clients in peered VNets or on-premises networks (e.g., 10.0.0.0/8, 172.16.0.0/12).
