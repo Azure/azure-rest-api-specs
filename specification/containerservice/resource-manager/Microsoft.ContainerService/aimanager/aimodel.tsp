@@ -32,14 +32,14 @@ model AIModel is ProxyResource<AIModelProperties> {
 model AIModelProperties {
   @visibility(Lifecycle.Read)
   @doc("The Hugging Face model identifier in `<org>/<repo>` form, e.g. `microsoft/Phi-4-mini-instruct`. Uniquely identifies the upstream model that backs this catalog entry.")
-  modelId?: string;
+  modelId: string;
 
   @doc("An optional, free-form description of the model.")
   description?: string;
 
   @visibility(Lifecycle.Read)
   @doc("Specification of the model.")
-  spec?: ModelSpec;
+  spec: ModelSpec;
 }
 
 @added(Versions.v2026_05_02_preview)
