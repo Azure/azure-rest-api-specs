@@ -140,61 +140,10 @@ model DatasetItem {
   desiredNumTurns?: int32;
 
   @doc("Pre-computed evaluation results in AOAI-compatible format. When provided together with responseItems, the baseline run-and-evaluate phase is skipped.")
-  evalResults?: EvalResultItem[];
+  evalResults?: EvalRunOutputItemResult[];
 
   @doc("Pre-computed agent response output items. Captures the full trajectory (function calls, tool outputs, messages) from a prior agent run.")
-  responseItems?: ResponseOutputItem[];
-}
-
-@doc("A single evaluator result item — AOAI-compatible contract.")
-model EvalResultItem {
-  @doc("Evaluator type (e.g. 'azure_ai_evaluator', 'label_model').")
-  type: string;
-
-  @doc("Display name (e.g. 'Relevance', 'LabelModel').")
-  name?: string;
-
-  @doc("Metric key used for scoring (e.g. 'relevance').")
-  metric?: string;
-
-  @doc("Numeric score.")
-  score: float64;
-
-  @doc("Evaluator-assigned label (e.g. 'pass', 'fail').")
-  label?: string;
-
-  @doc("Evaluator-provided reason/explanation for the score.")
-  reason?: string;
-
-  @doc("Pass/fail threshold.")
-  threshold?: float64;
-
-  @doc("Whether the evaluator considered this a pass (score >= threshold).")
-  passed: boolean;
-}
-
-@doc("A single output item from the Responses API. Captures function calls, outputs, and messages in the agent trajectory.")
-model ResponseOutputItem {
-  @doc("Item type (e.g. 'function_call', 'function_call_output', 'message').")
-  type: string;
-
-  @doc("Message role (e.g. 'assistant').")
-  role?: string;
-
-  @doc("Text content of the item.")
-  text?: string;
-
-  @doc("Function name for function_call items.")
-  name?: string;
-
-  @doc("Serialized function arguments for function_call items.")
-  arguments?: string;
-
-  @doc("Call ID linking function_call to function_call_output.")
-  callId?: string;
-
-  @doc("Function output for function_call_output items.")
-  output?: string;
+  responseItems?: EvalRunOutputItemSampleOutput[];
 }
 
 @doc("LLM-as-judge evaluation criterion applied to a single task.")
