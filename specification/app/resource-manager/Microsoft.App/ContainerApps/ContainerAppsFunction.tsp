@@ -15,7 +15,6 @@ namespace Microsoft.App;
 /**
  * Container App Function.
  */
-@added(Versions.v2025_10_02_preview)
 @removed(Versions.v2026_01_01)
 @parentResource(Revision)
 model ContainerAppsFunction
@@ -85,7 +84,6 @@ alias ContainerAppsFunctionOperationGroupOps = Azure.ResourceManager.Legacy.Lega
   ErrorType = DefaultErrorResponse
 >;
 
-@added(Versions.v2025_10_02_preview)
 @removed(Versions.v2026_01_01)
 @armResourceOperations
 @tag("AzureFunctionsOnContainerApps")

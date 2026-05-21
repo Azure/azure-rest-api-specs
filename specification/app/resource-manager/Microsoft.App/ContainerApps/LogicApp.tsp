@@ -91,7 +91,6 @@ interface LogicApps {
   /**
    * Creates or updates the artifacts for the logic app
    */
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   deployWorkflowArtifacts is ArmResourceActionSync<
     LogicApp,
@@ -118,12 +117,11 @@ interface LogicApps {
    * Proxies a the API call to the logic app backed by the container app.
    */
   @summary("Proxies a the API call to the logic app backed by the container app.")
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   invoke is ArmResourceActionSync<
     LogicApp,
     void,
-    ArmResponse<Object>,
+    ArmResponse<unknown>,
     LogicAppParentParameter,
     Parameters = {
       /**

@@ -15,68 +15,6 @@ using TypeSpec.Versioning;
 namespace Microsoft.App;
 
 /**
- * Legacy page model for collection responses where value is required.
- */
-model LegacyPage<T> {
-  /** Collection of resources. */
-  @pageItems
-  value: T[];
-
-  /** Link to next page of resources. */
-  @format("uri")
-  @nextLink
-  nextLink?: string;
-}
-
-/**
- * Legacy page model for collection responses where value is optional.
- */
-model LegacyPageOptionalValue<T> {
-  /** Collection of resources. */
-  @pageItems
-  value?: T[];
-
-  /** Link to next page of resources. */
-  @format("uri")
-  @nextLink
-  nextLink?: string;
-}
-
-/**
- * Legacy page model for collection responses where value is optional and nextLink is not readOnly.
- */
-model LegacyPageSimple<T> {
-  /** Collection of resources. */
-  @pageItems
-  value?: T[];
-
-  /** Link to next page of resources. */
-  @format("uri")
-  @nextLink
-  nextLink?: string;
-}
-
-/**
- * Logic App call response object.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model Object {
-  ...Record<unknown>;
-}
-
-/**
- * Represents an object representing files in the form of { "<filename>" : "<filecontent>"}.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Matches original Object definition"
-model WorkflowFiles {}
-
-/**
- * Metadata properties to describe the scale rule.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Matches original swagger {type: object} without additionalProperties"
-model JobScaleRuleMetadata {}
-
-/**
  * Custom domain verification Id of a subscription
  */
 scalar CustomDomainVerificationId extends string;
@@ -1008,7 +946,7 @@ model AppResiliencyCollection is Azure.Core.Page<AppResiliency>;
 /**
  * AuthConfig collection ARM resource.
  */
-model AuthConfigCollection is LegacyPage<AuthConfig>;
+model AuthConfigCollection is Azure.Core.Page<AuthConfig>;
 
 /**
  * AuthConfig resource specific properties
@@ -1685,21 +1623,18 @@ model BlobStorageTokenStore {
   /**
    * The URI of the blob storage containing the tokens. Should not be used along with sasUrlSettingName.
    */
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   blobContainerUri?: string;
 
   /**
    * The Client ID of a User-Assigned Managed Identity. Should not be used along with managedIdentityResourceId.
    */
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   clientId?: string;
 
   /**
    * The Resource ID of a User-Assigned Managed Identity. Should not be used along with clientId.
    */
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   managedIdentityResourceId?: string;
 }
@@ -1803,7 +1738,7 @@ model EncryptionSettings {
  * Collection of available workload profiles in the location.
  */
 model AvailableWorkloadProfilesCollection
-  is LegacyPage<AvailableWorkloadProfile>;
+  is Azure.Core.Page<AvailableWorkloadProfile>;
 
 /**
  * A workload profile with specific hardware configure to run container apps.
@@ -2083,7 +2018,7 @@ model BuildToken {
 /**
  * Collection of connectedEnvironments
  */
-model ConnectedEnvironmentCollection is LegacyPage<ConnectedEnvironment>;
+model ConnectedEnvironmentCollection is Azure.Core.Page<ConnectedEnvironment>;
 
 /**
  * ConnectedEnvironment resource specific properties
@@ -2223,7 +2158,7 @@ model ResourceTags {
 /**
  * Collection of Certificates.
  */
-model CertificateCollection is LegacyPage<Certificate>;
+model CertificateCollection is Azure.Core.Page<Certificate>;
 
 /**
  * Certificate resource specific properties
@@ -2319,7 +2254,6 @@ model CertificateProperties {
   /**
    * The type of the certificate. Allowed values are `ServerSSLCertificate` and `ImagePullTrustedCA`
    */
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   certificateType?: CertificateType;
 }
@@ -2338,7 +2272,7 @@ model CertificatePatch {
 /**
  * Dapr Components ARM resource.
  */
-model DaprComponentsCollection is LegacyPage<DaprComponent>;
+model DaprComponentsCollection is Azure.Core.Page<DaprComponent>;
 
 /**
  * Dapr Component resource specific properties
@@ -2389,7 +2323,6 @@ model DaprComponentProperties {
   /**
    * List of container app services that are bound to the Dapr component
    */
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   @identifiers(#["name"])
   serviceComponentBind?: DaprComponentServiceBinding[];
@@ -2530,7 +2463,6 @@ model ConnectedEnvironmentStorageProperties {
   /**
    * SMB storage properties
    */
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   smb?: SmbStorage;
 }
@@ -2626,7 +2558,7 @@ model SmbStorage {
 /**
  * Collection of Environments
  */
-model ManagedEnvironmentsCollection is LegacyPage<ManagedEnvironment>;
+model ManagedEnvironmentsCollection is Azure.Core.Page<ManagedEnvironment>;
 
 /**
  * Managed environment resource specific properties
@@ -2679,7 +2611,6 @@ model ManagedEnvironmentProperties {
    * Private Link Default Domain Name for the environment
    */
   @visibility(Lifecycle.Read)
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   privateLinkDefaultDomain?: string;
 
@@ -2697,14 +2628,12 @@ model ManagedEnvironmentProperties {
   /**
    * Environment level Application Insights configuration
    */
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   appInsightsConfiguration?: AppInsightsConfiguration;
 
   /**
    * Environment Open Telemetry configuration
    */
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   openTelemetryConfiguration?: OpenTelemetryConfiguration;
 
@@ -2717,7 +2646,6 @@ model ManagedEnvironmentProperties {
   /**
    * The list of availability zones to use for managed environment
    */
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   availabilityZones?: string[];
 
@@ -2783,7 +2711,6 @@ model ManagedEnvironmentProperties {
   /**
    * Disk encryption configuration for the Managed Environment.
    */
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   diskEncryptionConfiguration?: DiskEncryptionConfiguration;
 }
@@ -2861,7 +2788,6 @@ model LogAnalyticsConfiguration {
   /**
    * Boolean indicating whether to parse json string log into dynamic json columns
    */
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   dynamicJsonColumns?: boolean;
 }
@@ -3033,7 +2959,6 @@ model WorkloadProfile {
   /**
    * Whether to use a FIPS-enabled OS. Supported only for dedicated workload profiles.
    */
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   enableFips?: boolean = false;
 
@@ -3282,7 +3207,7 @@ model ManagedCertificatePatch {
 /**
  * Collection of Managed Certificates.
  */
-model ManagedCertificateCollection is LegacyPage<ManagedCertificate>;
+model ManagedCertificateCollection is Azure.Core.Page<ManagedCertificate>;
 
 /**
  * Environment Auth Token.
@@ -3322,7 +3247,7 @@ model EnvironmentAuthTokenProperties {
  * Collection of workloadProfileStates
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model workloadProfileStatesCollection is LegacyPage<workloadProfileStates>;
+model workloadProfileStatesCollection is Azure.Core.Page<workloadProfileStates>;
 
 /**
  * Collection of all the workload Profile States for a Managed Environment..
@@ -3721,7 +3646,6 @@ model HttpRouteTarget {
   /**
    * Weighted routing
    */
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   @minValue(0)
   @maxValue(100)
@@ -3781,13 +3705,13 @@ model HttpRouteAction {
 /**
  * Collection of rule based Http Route Config resources.
  */
-model HttpRouteConfigCollection is LegacyPage<HttpRouteConfig>;
+model HttpRouteConfigCollection is Azure.Core.Page<HttpRouteConfig>;
 
 /**
  * The response of list maintenance configuration resources.
  */
 model MaintenanceConfigurationCollection
-  is LegacyPage<MaintenanceConfigurationResource>;
+  is Azure.Core.Page<MaintenanceConfigurationResource>;
 
 /**
  * List of maintenance schedules for a managed environment.
@@ -3872,7 +3796,7 @@ model NfsAzureFileProperties {
 /**
  * Container Apps Jobs collection ARM resource.
  */
-model JobsCollection is LegacyPage<Job>;
+model JobsCollection is Azure.Core.Page<Job>;
 
 /**
  * Container Apps Job resource specific properties.
@@ -3888,7 +3812,6 @@ model JobProperties {
    * Current running state of the job
    */
   @visibility(Lifecycle.Read)
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   runningState?: JobRunningState;
 
@@ -4078,8 +4001,7 @@ model JobScaleRule {
    * Metadata properties to describe the scale rule.
    */
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @typeChangedFrom(Versions.v2026_01_01, unknown)
-  metadata?: JobScaleRuleMetadata;
+  metadata?: unknown;
 
   /**
    * Authentication secrets for the scale rule.
@@ -4244,7 +4166,6 @@ model JobPatchProperties {
   /**
    * The complex type of the extended location.
    */
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   extendedLocation?: ExtendedLocation;
 
@@ -4364,7 +4285,7 @@ model JobExecutionBase {
 /**
  * Container App executions collection ARM resource.
  */
-model ContainerAppJobExecutions is LegacyPage<JobExecution>;
+model ContainerAppJobExecutions is Azure.Core.Page<JobExecution>;
 
 /**
  * Container Apps Job execution specific properties.
@@ -4397,7 +4318,6 @@ model JobExecutionProperties {
   /**
    * Detailed status of the job execution.
    */
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   detailedStatus?: ExecutionStatus;
 
@@ -4405,7 +4325,6 @@ model JobExecutionProperties {
    * Reason for the current condition of job execution.
    */
   @visibility(Lifecycle.Read)
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   reason?: string;
 
@@ -4413,7 +4332,6 @@ model JobExecutionProperties {
    * Human readable message indicating details about the current condition of the job execution.
    */
   @visibility(Lifecycle.Read)
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   message?: string;
 }
@@ -4612,7 +4530,7 @@ model Template {
 /**
  * Diagnostics data collection for a resource.
  */
-model DiagnosticsCollection is LegacyPage<Diagnostics>;
+model DiagnosticsCollection is Azure.Core.Page<Diagnostics>;
 
 /**
  * Diagnostics resource specific properties
@@ -4873,14 +4791,12 @@ union ContainerType {
   /**
    * Shell
    */
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   Shell: "Shell",
 
   /**
    * NodeLTS
    */
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   NodeLTS: "NodeLTS",
 }
@@ -5321,7 +5237,6 @@ union ActiveRevisionsMode {
   /**
    * Labels
    */
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   Labels: "Labels",
 }
@@ -5660,7 +5575,6 @@ union StorageType {
   /**
    * Smb
    */
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   Smb: "Smb",
 }
@@ -6061,14 +5975,12 @@ union JavaComponentType {
   /**
    * SpringCloudGateway
    */
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   SpringCloudGateway: "SpringCloudGateway",
 
   /**
    * Nacos
    */
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   Nacos: "Nacos",
 }
@@ -6229,7 +6141,7 @@ enum WorkflowHealthState {
 /**
  * Session pool collection Azure resource.
  */
-model SessionPoolCollection is LegacyPage<SessionPool>;
+model SessionPoolCollection is Azure.Core.Page<SessionPool>;
 
 /**
  * Container App session pool resource specific properties
@@ -6290,7 +6202,6 @@ model SessionPoolProperties {
   /**
    * The template status of the session pool, showing active template, or desired template during session pool update. This is only available if the containerType is CustomContainer.
    */
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   @visibility(Lifecycle.Read)
   templateUpdateStatus?: TemplateUpdateStatus;
@@ -6316,7 +6227,6 @@ model SessionPoolProperties {
   /**
    * The MCP (Model Context Protocol) server settings of the session pool.
    */
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   mcpServerSettings?: McpServerSettings;
 }
@@ -6471,7 +6381,6 @@ model SessionContainer {
    * List of probes for the container.
    */
   @identifiers(#["type"])
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   probes?: SessionProbe[];
 }
@@ -6830,7 +6739,7 @@ model McpServerCredential {
 /**
  * SourceControl collection ARM resource.
  */
-model SourceControlCollection is LegacyPage<SourceControl>;
+model SourceControlCollection is Azure.Core.Page<SourceControl>;
 
 /**
  * SourceControl resource specific properties
@@ -6883,7 +6792,6 @@ model GithubActionConfiguration {
   /**
    * Dockerfile path
    */
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   dockerfilePath?: string;
 
@@ -6925,7 +6833,6 @@ model GithubActionConfiguration {
   /**
    * List of environment variables to be passed to the build.
    */
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   @identifiers(#["name"])
   buildEnvironmentVariables?: EnvironmentVariable[];
@@ -7050,7 +6957,7 @@ model DefaultErrorResponseErrorDetailsItem {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ListUsagesResult is LegacyPage<Usage>;
+model ListUsagesResult is Azure.Core.Page<Usage>;
 
 /**
  * Describes Compute Resource Usage.
@@ -7095,7 +7002,7 @@ model UsageName {
 /**
  * Container App collection ARM resource.
  */
-model ContainerAppCollection is LegacyPage<ContainerApp>;
+model ContainerAppCollection is Azure.Core.Page<ContainerApp>;
 
 /**
  * The complex type of the extended location.
@@ -7132,7 +7039,6 @@ model ContainerAppProperties {
    * Any errors that occurred during deployment
    */
   @visibility(Lifecycle.Read)
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   deploymentErrors?: string;
 
@@ -7156,7 +7062,6 @@ model ContainerAppProperties {
   /**
    * Container App auto patch configuration.
    */
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   patchingConfiguration?: ContainerAppPropertiesPatchingConfiguration;
 
@@ -7236,7 +7141,6 @@ model Configuration {
   /**
    * Required in labels revisions mode. Label to apply to newly created revision.
    */
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   targetLabel?: string;
 
@@ -7269,7 +7173,6 @@ model Configuration {
   /**
    * Optional. The percent of the total number of replicas that must be brought up before revision transition occurs. Defaults to 100 when none is given. Value must be greater than 0 and less than or equal to 100.
    */
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   @maxValue(100)
   @minValue(1)
@@ -7394,7 +7297,6 @@ model Ingress {
   /**
    * Whether an http app listens on http or https
    */
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   targetPortHttpScheme?: IngressTargetPortHttpScheme;
 }
@@ -7634,7 +7536,6 @@ model Runtime {
   /**
    * .NET app configuration
    */
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   dotnet?: RuntimeDotnet;
 }
@@ -7651,7 +7552,6 @@ model RuntimeJava {
   /**
    * Diagnostic capabilities achieved by java agent
    */
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   javaAgent?: RuntimeJavaJavaAgent;
 }
@@ -7751,7 +7651,6 @@ model BaseContainer {
   /**
    * The type of the image. Set to CloudBuild to let the system manages the image, where user will not be able to update image through image field. Set to ContainerImage for user provided image.
    */
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   imageType?: ImageType;
 
@@ -7811,7 +7710,6 @@ model ContainerResources {
   /**
    * Required GPU in cores for GPU based app, e.g. 1.0
    */
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   gpu?: float64;
 }
@@ -8024,7 +7922,6 @@ model ServiceBind {
   /**
    * Type of the client to be used to connect to the service
    */
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   clientType?: string;
 
@@ -8032,7 +7929,6 @@ model ServiceBind {
    * Customized keys for customizing injected values to the app
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   customizedKeys?: Record<string>;
 }
@@ -8619,7 +8515,7 @@ model PatchSkipConfig {
 /**
  * Container App Revisions collection ARM resource.
  */
-model RevisionCollection is LegacyPage<Revision>;
+model RevisionCollection is Azure.Core.Page<Revision>;
 
 /**
  * Revision resource specific properties
@@ -8675,7 +8571,6 @@ model RevisionProperties {
   /**
    * List of labels assigned to this revision.
    */
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   @visibility(Lifecycle.Read)
   labels?: string[];
@@ -8799,7 +8694,6 @@ model ReplicaContainer {
    * Container debug endpoint
    */
   @visibility(Lifecycle.Read)
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   debugEndpoint?: string;
 }
@@ -8931,7 +8825,7 @@ model OperationDisplay {
 /**
  * Java Components ARM resource.
  */
-model JavaComponentsCollection is LegacyPage<JavaComponent>;
+model JavaComponentsCollection is Azure.Core.Page<JavaComponent>;
 
 /**
  * Java Component common properties.
@@ -9045,7 +8939,7 @@ model WorkflowEnvelopeProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses untyped object"
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @typeChangedFrom(Versions.v2026_01_01, unknown)
-  files?: WorkflowFiles;
+  files?: unknown;
 
   /**
    * Gets or sets the state of the workflow.
@@ -9147,7 +9041,6 @@ model WorkflowArtifacts {
 /**
  * Spring Cloud Gateway route definition
  */
-@added(Versions.v2025_10_02_preview)
 @removed(Versions.v2026_01_01)
 model ScgRoute {
   /**
@@ -9190,7 +9083,6 @@ model JavaComponentIngress {
 /**
  * Spring Cloud Gateway properties.
  */
-@added(Versions.v2025_10_02_preview)
 @removed(Versions.v2026_01_01)
 model SpringCloudGatewayComponent extends JavaComponentProperties {
   /**
@@ -9228,7 +9120,6 @@ model SpringBootAdminComponent extends JavaComponentProperties {
 /**
  * Nacos properties.
  */
-@added(Versions.v2025_10_02_preview)
 @removed(Versions.v2026_01_01)
 model NacosComponent extends JavaComponentProperties {
   /**
@@ -9270,7 +9161,7 @@ model SpringCloudConfigComponent extends JavaComponentProperties {
 /**
  * Available operations of the service
  */
-model AvailableOperations is LegacyPage<OperationDetail>;
+model AvailableOperations is Azure.Core.Page<OperationDetail>;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @error

@@ -45,7 +45,6 @@ interface ContainerAppsSourceControls {
        * Github personal access token used for SourceControl.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @added(Versions.v2025_10_02_preview)
       @removed(Versions.v2026_01_01)
       @header
       `x-ms-github-auxiliary`?: string;
@@ -67,7 +66,6 @@ interface ContainerAppsSourceControls {
        * Github personal access token used for SourceControl.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @added(Versions.v2025_10_02_preview)
       @removed(Versions.v2026_01_01)
       @header
       `x-ms-github-auxiliary`?: string;
@@ -75,7 +73,6 @@ interface ContainerAppsSourceControls {
       /**
        * Ignore Workflow Deletion Failure.
        */
-      @added(Versions.v2025_10_02_preview)
       @removed(Versions.v2026_01_01)
       @query("ignoreWorkflowDeletionFailure")
       ignoreWorkflowDeletionFailure?: boolean;
@@ -83,7 +80,6 @@ interface ContainerAppsSourceControls {
       /**
        * Delete workflow.
        */
-      @added(Versions.v2025_10_02_preview)
       @removed(Versions.v2026_01_01)
       @query("deleteWorkflow")
       deleteWorkflow?: boolean;

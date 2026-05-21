@@ -27,7 +27,6 @@ model Job is Azure.ResourceManager.TrackedResource<JobProperties> {
    * The complex type of the extended location.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   extendedLocation?: ExtendedLocation;
 
@@ -180,7 +179,6 @@ interface Jobs {
   @tag("Jobs")
   @summary("Resumes a suspended job")
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   resume is ArmResourceActionAsyncBase<
     Job,
@@ -199,7 +197,6 @@ interface Jobs {
   @tag("Jobs")
   @summary("Suspends a job")
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  @added(Versions.v2025_10_02_preview)
   @removed(Versions.v2026_01_01)
   suspend is ArmResourceActionAsyncBase<
     Job,

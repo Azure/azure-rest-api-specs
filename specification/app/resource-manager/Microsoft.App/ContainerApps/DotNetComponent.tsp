@@ -14,7 +14,6 @@ namespace Microsoft.App;
 /**
  * .NET Component.
  */
-@added(Versions.v2025_10_02_preview)
 @removed(Versions.v2026_01_01)
 @parentResource(ManagedEnvironment)
 model DotNetComponent
@@ -51,7 +50,6 @@ alias DotNetComponentOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
-@added(Versions.v2025_10_02_preview)
 @removed(Versions.v2026_01_01)
 @armResourceOperations
 interface DotNetComponents {

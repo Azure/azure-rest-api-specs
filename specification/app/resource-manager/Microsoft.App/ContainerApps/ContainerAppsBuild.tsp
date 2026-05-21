@@ -15,7 +15,6 @@ namespace Microsoft.App;
 /**
  * Information pertaining to an individual build.
  */
-@added(Versions.v2025_10_02_preview)
 @removed(Versions.v2026_01_01)
 @parentResource(ContainerApp)
 model ContainerAppsBuildResource
@@ -54,7 +53,6 @@ alias ContainerAppsBuildResourceOps = Azure.ResourceManager.Legacy.LegacyOperati
   }
 >;
 
-@added(Versions.v2025_10_02_preview)
 @removed(Versions.v2026_01_01)
 @armResourceOperations
 interface ContainerAppsBuilds {

@@ -15,7 +15,6 @@ namespace Microsoft.App;
 /**
  * Dapr Component Resiliency Policy.
  */
-@added(Versions.v2025_10_02_preview)
 @removed(Versions.v2026_01_01)
 @parentResource(DaprComponent)
 model DaprComponentResiliencyPolicy
@@ -59,7 +58,6 @@ alias DaprComponentResiliencyPolicyOps = Azure.ResourceManager.Legacy.LegacyOper
   ErrorType = DefaultErrorResponse
 >;
 
-@added(Versions.v2025_10_02_preview)
 @removed(Versions.v2026_01_01)
 @armResourceOperations
 interface DaprComponentResiliencyPolicies {
