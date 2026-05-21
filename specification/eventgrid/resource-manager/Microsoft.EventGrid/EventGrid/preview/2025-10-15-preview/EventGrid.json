@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "EventGridManagementClient",
-    "version": "2025-07-15-preview",
+    "version": "2025-10-15-preview",
     "description": "Azure EventGrid Management Client",
     "x-typespec-generated": [
       {
@@ -13644,6 +13644,10 @@
         "dataResidencyBoundary": {
           "$ref": "#/definitions/DataResidencyBoundary",
           "description": "Data Residency Boundary of the resource."
+        },
+        "trustedServiceAccessEnabled": {
+          "type": "boolean",
+          "description": "This is an optional property used to specify if trusted azure services should bypass network rules."
         }
       }
     },
@@ -13885,6 +13889,10 @@
         "eventTypeInfo": {
           "$ref": "#/definitions/EventTypeInfo",
           "description": "The eventTypeInfo for the domain."
+        },
+        "trustedServiceAccessEnabled": {
+          "type": "boolean",
+          "description": "This is an optional property used to specify if trusted azure services should bypass network rules."
         }
       }
     },
@@ -15319,6 +15327,10 @@
         "minimumTlsVersionAllowed": {
           "$ref": "#/definitions/TlsVersion",
           "description": "Minimum TLS version of the publisher allowed to publish to this namespace. Only TLS version 1.2 is supported."
+        },
+        "trustedServiceAccessEnabled": {
+          "type": "boolean",
+          "description": "This is an optional property used to specify if trusted azure services should bypass network rules."
         }
       }
     },
@@ -19178,7 +19190,8 @@
       "enum": [
         "1.0",
         "1.1",
-        "1.2"
+        "1.2",
+        "1.3"
       ],
       "x-ms-enum": {
         "name": "TlsVersion",
@@ -19198,6 +19211,11 @@
             "name": "1.2",
             "value": "1.2",
             "description": "1.2"
+          },
+          {
+            "name": "1.3",
+            "value": "1.3",
+            "description": "Tls version 1.3."
           }
         ]
       }
@@ -19380,6 +19398,10 @@
         "platformCapabilities": {
           "$ref": "#/definitions/PlatformCapabilities",
           "description": "Represents the platform capabilities of the resource, including Azure Confidential Compute related properties."
+        },
+        "trustedServiceAccessEnabled": {
+          "type": "boolean",
+          "description": "This is an optional property used to specify if trusted azure services should bypass network rules."
         }
       }
     },
@@ -19905,6 +19927,10 @@
         "eventTypeInfo": {
           "$ref": "#/definitions/EventTypeInfo",
           "description": "The eventTypeInfo for the topic."
+        },
+        "trustedServiceAccessEnabled": {
+          "type": "boolean",
+          "description": "This is an optional property used to specify if trusted azure services should bypass network rules."
         }
       }
     },

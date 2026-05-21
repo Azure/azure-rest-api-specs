@@ -8,6 +8,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.Core;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Microsoft.EventGrid;
 
@@ -557,6 +558,12 @@ union TlsVersion {
    * 1.2
    */
   `1.2`: "1.2",
+
+  /**
+   * Tls version 1.3.
+   */
+  @added(Versions.v2025_10_15_preview)
+  `1.3`: "1.3",
 }
 
 /**
@@ -2735,6 +2742,12 @@ model DomainProperties {
    * Data Residency Boundary of the resource.
    */
   dataResidencyBoundary?: DataResidencyBoundary;
+
+  /**
+   * This is an optional property used to specify if trusted azure services should bypass network rules.
+   */
+  @added(Versions.v2025_10_15_preview)
+  trustedServiceAccessEnabled?: boolean;
 }
 
 /**
@@ -2953,6 +2966,12 @@ model DomainUpdateParameterProperties {
    * The eventTypeInfo for the domain.
    */
   eventTypeInfo?: EventTypeInfo;
+
+  /**
+   * This is an optional property used to specify if trusted azure services should bypass network rules.
+   */
+  @added(Versions.v2025_10_15_preview)
+  trustedServiceAccessEnabled?: boolean;
 }
 
 /**
@@ -3574,6 +3593,12 @@ model NamespaceProperties {
    * Minimum TLS version of the publisher allowed to publish to this namespace. Only TLS version 1.2 is supported.
    */
   minimumTlsVersionAllowed?: TlsVersion;
+
+  /**
+   * This is an optional property used to specify if trusted azure services should bypass network rules.
+   */
+  @added(Versions.v2025_10_15_preview)
+  trustedServiceAccessEnabled?: boolean;
 }
 
 /**
@@ -5032,6 +5057,12 @@ model TopicProperties {
    * Represents the platform capabilities of the resource, including Azure Confidential Compute related properties.
    */
   platformCapabilities?: PlatformCapabilities;
+
+  /**
+   * This is an optional property used to specify if trusted azure services should bypass network rules.
+   */
+  @added(Versions.v2025_10_15_preview)
+  trustedServiceAccessEnabled?: boolean;
 }
 
 /**
@@ -5110,6 +5141,12 @@ model TopicUpdateParameterProperties {
    * The eventTypeInfo for the topic.
    */
   eventTypeInfo?: EventTypeInfo;
+
+  /**
+   * This is an optional property used to specify if trusted azure services should bypass network rules.
+   */
+  @added(Versions.v2025_10_15_preview)
+  trustedServiceAccessEnabled?: boolean;
 }
 
 /**
