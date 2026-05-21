@@ -1550,8 +1550,6 @@ model OpenIdConnectClientCredential {
   /**
    * The method that should be used to authenticate the user.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-enum name needed for backward compatibility"
-  @extension("x-ms-enum", #{ modelAsString: false })
   method?: "ClientSecretPost";
 
   /**
@@ -7061,8 +7059,6 @@ model Usage {
   /**
    * An enum describing the unit of usage measurement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-enum name needed for backward compatibility"
-  @extension("x-ms-enum", #{ modelAsString: false })
   unit: "Count";
 
   /**
