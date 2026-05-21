@@ -368,16 +368,30 @@ union Modes {
 }
 
 /**
- * Specifies the priority for a standalone virtual machine or the virtual machines in the scale set. 'Low' enum will be deprecated in the future, please use 'Spot' as the enum to deploy Azure Spot VM/VMSS.
+ * Specifies the priority for a standalone virtual machine or the virtual machines in the scale set.
  */
 union VirtualMachinePriorityTypes {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  @doc("""
+    Regular Priority for a standalone virtual machine or the virtual machines in the scale set.
+    This is the default priority and it will be used to deploy regular VM/VMSS.
+    """)
   Regular: "Regular",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  @doc("Low priority for a standalone virtual machine or the virtual machines in the scale set. Will be Deprecated, use Spot instead.")
   Low: "Low",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  @doc("Spot priority for a standalone virtual machine or the virtual machines in the scale set.")
   Spot: "Spot",
+
+  @doc("""
+    SpotPlus priority for a standalone virtual machine or the virtual machines in the scale set.
+    This is an enum value that will be used to deploy Azure Spot Plus VM/VMSS, which is the next
+    generation of Azure Spot VM/VMSS with more reliability and longer running time.
+    """)
+  @added(Versions.v2026_04_01)
+  SpotPlus: "SpotPlus",
 }
 
 /**
@@ -3312,7 +3326,7 @@ model VirtualMachineScaleSetExtensionProperties {
   type?: string;
 
   /**
-   * Specifies the version of the script handler.
+   * Specifies the Major.Minor version of the script handler. Customer is able to specify only the Major.Minor version of an extension, Azure platform will deliver the latest Patch.Hotfix version in the Major.Minor series.
    */
   typeHandlerVersion?: string;
 
@@ -5208,7 +5222,7 @@ model VirtualMachineExtensionHandlerInstanceView {
   type?: string;
 
   /**
-   * Specifies the version of the script handler.
+   * Specifies the Major.Minor.Patch.Hotfix version of the script handler. Azure platform will deliver the latest Patch.Hotfix version in the Major.Minor series.
    */
   typeHandlerVersion?: string;
 
@@ -5336,7 +5350,7 @@ model VirtualMachineExtensionInstanceView {
   type?: string;
 
   /**
-   * Specifies the version of the script handler.
+   * Specifies the Major.Minor.Patch.Hotfix version of the script handler. Azure platform will deliver the latest Patch.Hotfix version in the Major.Minor series.
    */
   typeHandlerVersion?: string;
 
@@ -6052,7 +6066,7 @@ model VirtualMachineExtensionProperties {
   type?: string;
 
   /**
-   * Specifies the version of the script handler.
+   * Specifies the Major.Minor version of the script handler. Customer is able to specify only the Major.Minor version of an extension, Azure platform will deliver the latest Patch.Hotfix version in the Major.Minor series.
    */
   typeHandlerVersion?: string;
 
@@ -6191,7 +6205,7 @@ model VirtualMachineExtensionUpdateProperties {
   type?: string;
 
   /**
-   * Specifies the version of the script handler.
+   * Specifies the Major.Minor version of the script handler. Customer is able to specify only the Major.Minor version of an extension, Azure platform will deliver the latest Patch.Hotfix version in the Major.Minor series.
    */
   typeHandlerVersion?: string;
 
