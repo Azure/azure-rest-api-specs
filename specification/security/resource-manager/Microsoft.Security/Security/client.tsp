@@ -243,7 +243,7 @@ op privateEndpointConnectionsListCustomization(
 @@Azure.ClientGenerator.Core.override(
   PrivateEndpointConnections.list,
   privateEndpointConnectionsListCustomization,
-  "!python,!java"
+  "!python,!java,!javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -388,7 +388,11 @@ op privateLinkResourcesGetCustomization(
   "ArmSecurityStandardProperties",
   "go"
 );
-@@usage(IoTSecurityAPI.CustomAlertRule, Usage.input | Usage.output, "go");
+@@usage(
+  IoTSecurityAPI.CustomAlertRule,
+  Usage.input | Usage.output,
+  "go,javascript"
+);
 
 @@clientName(
   Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo,
@@ -668,3 +672,46 @@ op alertsListResourceGroupLevelByRegionCustomized(
 );
 @@clientName(HealthReportsAPI.status, "HealthReportStatus", "java,go");
 @@clientName(SecuritySolutionsAPI.Status, "Status", "java");
+
+// JavaScript SDK visibility workaround for jitNetworkAccessPoliciesCreateOrUpdate:
+// JitNetworkAccessPolicy contains server-side read-only properties (location, provisioningState)
+// that conflict with visibility/required. These write-specific models omit those fields.
+// Pattern: https://github.com/Azure/azure-rest-api-specs/pull/40791
+
+/**
+ * JIT network access policy properties for create/update operations.
+ * Omits server-side read-only field: provisioningState.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Write-specific model"
+model JitNetworkAccessPolicyPropertiesCreate {
+  /**
+   * Configurations for Microsoft.Compute/virtualMachines resource type.
+   */
+  virtualMachines: JitNetworkAccessPolicyVirtualMachine[];
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Write-specific model"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Write-specific model"
+  requests?: JitNetworkAccessRequest[];
+}
+
+/**
+ * JIT network access policy resource for create/update operations.
+ * Omits server-side read-only fields: location, provisioningState.
+ */
+model JitNetworkAccessPolicyCreate {
+  /**
+   * Kind of the resource
+   */
+  kind?: string;
+
+  /**
+   * Properties of the JIT network access policy
+   */
+  properties: JitNetworkAccessPolicyPropertiesCreate;
+}
+
+@@alternateType(
+  JitNetworkAccessPolicies.createOrUpdate::parameters.resource,
+  JitNetworkAccessPolicyCreate,
+  "javascript"
+);
