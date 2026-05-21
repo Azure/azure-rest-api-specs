@@ -3047,7 +3047,6 @@ model PrivateEndpointConnectionProperties {
   /**
    * The provisioning state of the private endpoint connection resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "readOnly needed for swagger fidelity"
   @visibility(Lifecycle.Read)
   provisioningState?: PrivateEndpointConnectionProvisioningState;
 }
@@ -3280,8 +3279,6 @@ model PrivateLinkResourceListResult {
   value: PrivateLinkResource[];
 
   /** The link to the next page of items */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "format extension for swagger fidelity"
-  @extension("format", "uri")
   @nextLink
   nextLink?: string;
 }
@@ -3295,8 +3292,6 @@ model PrivateEndpointConnectionListResult {
   value: PrivateEndpointConnection[];
 
   /** The link to the next page of items */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "format extension for swagger fidelity"
-  @extension("format", "uri")
   @nextLink
   nextLink?: string;
 }
@@ -4622,8 +4617,6 @@ model DiagnosticDataTableResponseObject {
   /**
    * Rows in the table
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses untyped array items"
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Existing API has empty identifiers"
   rows?: unknown[];
 }
 
@@ -8722,8 +8715,6 @@ model WorkflowEnvelopeCollection {
   value: WorkflowEnvelope[];
 
   /** The link to the next page of items */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "format extension needed for backward compatibility"
-  @extension("format", "uri")
   @nextLink
   nextLink?: string;
 }
