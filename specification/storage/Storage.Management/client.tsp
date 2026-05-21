@@ -860,16 +860,6 @@ namespace Azure.ResourceManager.Models {
   "ShouldTestConnection",
   "csharp"
 );
-@@alternateType(
-  ManagedIdentityAuthProperties.identityResourceId,
-  Azure.Core.armResourceIdentifier,
-  "csharp"
-);
-@@alternateType(
-  ManagedIdentityAuthPropertiesUpdate.identityResourceId,
-  Azure.Core.armResourceIdentifier,
-  "csharp"
-);
 
 // LocalUser property renames
 @@clientName(
