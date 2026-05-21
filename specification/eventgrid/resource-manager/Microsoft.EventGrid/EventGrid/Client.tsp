@@ -224,16 +224,41 @@ namespace Microsoft.EventGrid {
     "csharp"
   );
   @@clientName(EventSubscriptions.getFullUrl, "GetFullUri", "csharp");
+  // The next 6 renames intentionally map both subscription-scope and resource-group-scope
+  // listings to the same legacy SDK method names. They land on different parent extension
+  // classes (MockableEventGridSubscriptionResource vs MockableEventGridResourceGroupResource),
+  // so duplicate-client-name warnings are expected and safe to suppress.
+  #suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Same legacy name restored on a different parent extension class."
+  @@clientName(
+    EventSubscriptionsOperationGroup.listGlobalByResourceGroupForTopicType,
+    "GetGlobalEventSubscriptionsDataForTopicType",
+    "csharp"
+  );
+  #suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Same legacy name restored on a different parent extension class."
   @@clientName(
     EventSubscriptionsOperationGroup.listGlobalBySubscriptionForTopicType,
     "GetGlobalEventSubscriptionsDataForTopicType",
     "csharp"
   );
+  #suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Same legacy name restored on a different parent extension class."
+  @@clientName(
+    EventSubscriptionsOperationGroup.listRegionalByResourceGroup,
+    "GetRegionalEventSubscriptionsData",
+    "csharp"
+  );
+  #suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Same legacy name restored on a different parent extension class."
+  @@clientName(
+    EventSubscriptionsOperationGroup.listRegionalByResourceGroupForTopicType,
+    "GetRegionalEventSubscriptionsDataForTopicType",
+    "csharp"
+  );
+  #suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Same legacy name restored on a different parent extension class."
   @@clientName(
     EventSubscriptionsOperationGroup.listRegionalBySubscription,
     "GetRegionalEventSubscriptionsData",
     "csharp"
   );
+  #suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Same legacy name restored on a different parent extension class."
   @@clientName(
     EventSubscriptionsOperationGroup.listRegionalBySubscriptionForTopicType,
     "GetRegionalEventSubscriptionsDataForTopicType",
@@ -278,6 +303,11 @@ namespace Microsoft.EventGrid {
   @@clientName(
     Partner.authorizationExpirationTimeInUtc,
     "AuthorizationExpireOn",
+    "csharp"
+  );
+  @@clientName(
+    PartnerDestinationProperties.expirationTimeIfNotActivatedUtc,
+    "ExpireOnIfNotActivated",
     "csharp"
   );
   @@clientName(
@@ -342,6 +372,7 @@ namespace Microsoft.EventGrid {
   );
   @@clientName(PublicNetworkAccess, "EventGridPublicNetworkAccess", "csharp");
   @@clientName(ReadinessState, "PartnerTopicReadinessState", "csharp");
+  @@clientName(ResourceMoveChangeHistory.changedTimeUtc, "ChangedOn", "csharp");
   @@clientName(
     ResourceProvisioningState,
     "EventGridResourceProvisioningState",
@@ -488,6 +519,11 @@ namespace Microsoft.EventGrid {
   @@alternateType(
     PartnerDestinationProperties.partnerRegistrationImmutableId,
     Azure.Core.uuid,
+    "csharp"
+  );
+  @@alternateType(
+    PartnerEventSubscriptionDestinationProperties.resourceId,
+    Azure.Core.armResourceIdentifier,
     "csharp"
   );
   @@alternateType(PartnerDetails.setupUri, url, "csharp");
