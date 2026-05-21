@@ -337,19 +337,21 @@ alias ProtectedItemOperationResultsFromCrossTenantVaultOps = Azure.ResourceManag
 interface ProtectedItemOperationResultsFromCrossTenantVault {
   /**
    * Fetches the result of any cross-tenant operation on the backup item.
+   * While the operation is in progress this returns 202 Accepted with Location/Retry-After
+   * headers pointing back at this same poll URL. When the operation completes it returns
+   * either 200 OK with the final ProtectedItemResource body, or 204 No Content if there
+   * is no body to return.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Phase 9 (PR #41694 issuecomment-4449163933): the .NET mgmt emitter's BuildExistsOperationPipelineProcessing NRE's when a 202 has no body. live1206 verified locally that giving the 202 a body matching the 200 fixes the crash. Wire is unchanged (BMS service still emits an empty 202 at runtime); spec is intentionally over-describing."
   @tag("CrossTenant")
   get is ProtectedItemOperationResultsFromCrossTenantVaultOps.Read<
     ProtectedItemResource,
     Response =
       | ArmResponse<ProtectedItemResource>
-      | {
-          ...AcceptedResponse;
-          @body body: ProtectedItemResource;
-          @header("Location") location?: string;
-          @header("Retry-After") retryAfter?: int32;
-        }
+      | ArmAcceptedResponse<
+          "Accepted",
+          ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmNoContentResponse
   >;
 }
 
@@ -480,19 +482,21 @@ alias ValidateOperationResultFromCrossTenantVaultOps = Azure.ResourceManager.Leg
 interface ValidateOperationResultFromCrossTenantVault {
   /**
    * Gets the result of a specific validate operation for cross-tenant restore scenarios.
+   * While the operation is in progress this returns 202 Accepted with Location/Retry-After
+   * headers pointing back at this same poll URL. When the operation completes it returns
+   * either 200 OK with the final ValidateOperationsResponse body, or 204 No Content if
+   * there is no body to return.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Phase 9 (PR #41694 issuecomment-4449163933): the .NET mgmt emitter's BuildExistsOperationPipelineProcessing NRE's when a 202 has no body. live1206 verified locally that giving the 202 a body matching the 200 fixes the crash. Wire is unchanged (BMS service still emits an empty 202 at runtime); spec is intentionally over-describing."
   @tag("CrossTenant")
   get is ValidateOperationResultFromCrossTenantVaultOps.Read<
     CrossTenantVaultMapping,
     Response =
       | ArmResponse<ValidateOperationsResponse>
-      | {
-          ...AcceptedResponse;
-          @body body: ValidateOperationsResponse;
-          @header("Location") location?: string;
-          @header("Retry-After") retryAfter?: int32;
-        }
+      | ArmAcceptedResponse<
+          "Accepted",
+          ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmNoContentResponse
   >;
 }
 
@@ -657,22 +661,22 @@ alias CrossTenantVaultCredentialOperationResultsOps = Azure.ResourceManager.Lega
 interface CrossTenantVaultCredentialOperationResults {
   /**
    * Gets the result of an async vault credential generation operation.
-   * Returns 202 Accepted while the TEE job is still in progress.
-   * Returns 200 OK with VaultCredentialCertificateResponse when the job completes.
+   * While the TEE job is in progress this returns 202 Accepted with Location/Retry-After
+   * headers pointing back at this same poll URL. When the job completes it returns either
+   * 200 OK with the generated VaultCredentialCertificateResponse body, or 204 No Content
+   * if there is no body to return.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Phase 9 (PR #41694 issuecomment-4449163933): the .NET mgmt emitter's BuildExistsOperationPipelineProcessing NRE's when a 202 has no body. live1206 verified locally that giving the 202 a body matching the 200 fixes the crash. Wire is unchanged (BMS service still emits an empty 202 at runtime); spec is intentionally over-describing."
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Phase 9 (PR #41694 issuecomment-4449163933): operation-result Read is templated against the parent CrossTenantVaultMapping resource (per live1206's suggested fix) so the .NET mgmt emitter resolves the resource type for Exists-pipeline generation; the 200 returns VaultCredentialCertificateResponse, which is the actual operation-result payload. RPC 008 (same schema across PUT/GET/PATCH/LIST) does not apply: this route is a polling GET, not a resource lifecycle operation."
   @tag("CrossTenant")
   get is CrossTenantVaultCredentialOperationResultsOps.Read<
     CrossTenantVaultMapping,
     Response =
       | ArmResponse<VaultCredentialCertificateResponse>
-      | {
-          ...AcceptedResponse;
-          @body body: VaultCredentialCertificateResponse;
-          @header("Location") location?: string;
-          @header("Retry-After") retryAfter?: int32;
-        }
+      | ArmAcceptedResponse<
+          "Accepted",
+          ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmNoContentResponse
   >;
 }
 

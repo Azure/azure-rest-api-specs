@@ -755,7 +755,7 @@
           "ProtectedItemOperationResultsFromCrossTenantVault",
           "CrossTenant"
         ],
-        "description": "Fetches the result of any cross-tenant operation on the backup item.",
+        "description": "Fetches the result of any cross-tenant operation on the backup item.\nWhile the operation is in progress this returns 202 Accepted with Location/Retry-After\nheaders pointing back at this same poll URL. When the operation completes it returns\neither 200 OK with the final ProtectedItemResource body, or 204 No Content if there\nis no body to return.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -818,19 +818,21 @@
             }
           },
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "schema": {
-              "$ref": "#/definitions/ProtectedItemResource"
-            },
+            "description": "Accepted",
             "headers": {
               "Location": {
-                "type": "string"
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
+          },
+          "204": {
+            "description": "Operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1570,7 +1572,7 @@
           "ValidateOperationResultFromCrossTenantVault",
           "CrossTenant"
         ],
-        "description": "Gets the result of a specific validate operation for cross-tenant restore scenarios.",
+        "description": "Gets the result of a specific validate operation for cross-tenant restore scenarios.\nWhile the operation is in progress this returns 202 Accepted with Location/Retry-After\nheaders pointing back at this same poll URL. When the operation completes it returns\neither 200 OK with the final ValidateOperationsResponse body, or 204 No Content if\nthere is no body to return.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1612,19 +1614,21 @@
             }
           },
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "schema": {
-              "$ref": "#/definitions/ValidateOperationsResponse"
-            },
+            "description": "Accepted",
             "headers": {
               "Location": {
-                "type": "string"
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
+          },
+          "204": {
+            "description": "Operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1873,7 +1877,7 @@
           "CrossTenantVaultCredentialOperationResults",
           "CrossTenant"
         ],
-        "description": "Gets the result of an async vault credential generation operation.\nReturns 202 Accepted while the TEE job is still in progress.\nReturns 200 OK with VaultCredentialCertificateResponse when the job completes.",
+        "description": "Gets the result of an async vault credential generation operation.\nWhile the TEE job is in progress this returns 202 Accepted with Location/Retry-After\nheaders pointing back at this same poll URL. When the job completes it returns either\n200 OK with the generated VaultCredentialCertificateResponse body, or 204 No Content\nif there is no body to return.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1922,19 +1926,21 @@
             }
           },
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "schema": {
-              "$ref": "#/definitions/VaultCredentialCertificateResponse"
-            },
+            "description": "Accepted",
             "headers": {
               "Location": {
-                "type": "string"
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
+          },
+          "204": {
+            "description": "Operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
