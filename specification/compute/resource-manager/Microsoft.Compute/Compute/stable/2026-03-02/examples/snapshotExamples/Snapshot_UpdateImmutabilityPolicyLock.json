@@ -18,7 +18,14 @@
             "sourceResourceId": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot1"
           },
           "diskSizeGB": 20,
-          "provisioningState": "Succeeded"
+          "provisioningState": "Succeeded",
+          "immutabilityPolicy": {
+            "immutabilityDurationDays": 30,
+            "type": "Locked",
+            "policyStartTime": "2026-05-21T12:00:00.0000000+00:00",
+            "policyExpirationTime": "2026-06-20T12:00:00.0000000+00:00",
+            "isPolicyExpired": false
+          }
         },
         "location": "West US",
         "name": "mySnapshot"
@@ -26,6 +33,7 @@
     },
     "202": {
       "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/operations/{operationId}?api-version=2026-03-02",
         "Location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/operations/{operationId}&monitor=true&api-version=2026-03-02"
       }
     }
