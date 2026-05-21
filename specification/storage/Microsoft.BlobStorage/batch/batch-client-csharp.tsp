@@ -44,21 +44,24 @@ model BatchBlobClientOptions {
   snapshot?: SnapshotParameter.snapshot;
 }
 
-@@clientInitialization(BlobBatchClient.BatchServiceClient,
+@@clientInitialization(
+  BlobBatchClient.BatchServiceClient,
   {
     initializedBy: InitializedBy.parent,
   },
   "csharp"
 );
 
-@@clientInitialization(BlobBatchClient.BatchContainerClient,
+@@clientInitialization(
+  BlobBatchClient.BatchContainerClient,
   {
     initializedBy: InitializedBy.parent,
   },
   "csharp"
 );
 
-@@clientInitialization(BlobBatchClient.BatchBlobClient,
+@@clientInitialization(
+  BlobBatchClient.BatchBlobClient,
   {
     parameters: BatchBlobClientOptions,
     initializedBy: InitializedBy.parent,
@@ -88,17 +91,19 @@ op containerSubmitBatchCsharp(
 
   /** The container name */
   @path containerName: string,
-): ({
-  @statusCode statusCode: 202;
+):
+  | ({
+      @statusCode statusCode: 202;
 
-  /** The media type of the body of the response. For batch requests, this is multipart/mixed; boundary=batchresponse_GUID */
-  #suppress "@typespec/http/content-type-ignored" "Template for existing API"
-  @header("Content-Type")
-  contentType: "multipart/mixed";
+      /** The media type of the body of the response. For batch requests, this is multipart/mixed; boundary=batchresponse_GUID */
+      #suppress "@typespec/http/content-type-ignored" "Template for existing API"
+      @header("Content-Type")
+      contentType: "multipart/mixed";
 
-  ...RequestIdResponseHeader;
-  ...ApiVersionHeader;
-} & MultipartBodyParameter) | Error;
+      ...RequestIdResponseHeader;
+      ...ApiVersionHeader;
+    } & MultipartBodyParameter)
+  | Error;
 
 /** If the storage account's soft delete feature is disabled then, when a blob is deleted, it is permanently removed from the storage account. If the storage account's soft delete feature is enabled, then, when a blob is deleted, it is marked for deletion and becomes inaccessible immediately. However, the blob service retains the blob or snapshot for the number of days specified by the DeleteRetentionPolicy section of [Storage service properties] (Set-Blob-Service-Properties.md). After the specified number of days has passed, the blob's data is permanently removed from the storage account. Note that you continue to be charged for the soft-deleted blob's storage until it is permanently removed. Use the List Blobs API and specify the \"include=deleted\" query parameter to discover which blobs and snapshots have been soft deleted. You can then use the Undelete Blob API to restore a soft-deleted blob. All other operations on a soft-deleted blob or snapshot causes the service to return an HTTP status code of 404 (ResourceNotFound). */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
@@ -177,7 +182,8 @@ op setTierCsharp is StorageOperationNoBody<
 >;
 
 @@clientName(BlobBatchClient.BatchServiceClient, "ServiceRestClient", "csharp");
-@@clientName(BlobBatchClient.BatchContainerClient,
+@@clientName(
+  BlobBatchClient.BatchContainerClient,
   "ContainerRestClient",
   "csharp"
 );

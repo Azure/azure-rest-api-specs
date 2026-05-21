@@ -77,6 +77,7 @@ interface ExtensionValues {
 }
 
 @@doc(ExtensionValue.name, "The version of the Extension being received.");
-@@doc(ExtensionValue.properties,
+@@doc(
+  ExtensionValue.properties,
   "The single extension based on search criteria"
 );

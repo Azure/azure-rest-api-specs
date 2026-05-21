@@ -13,15 +13,23 @@ namespace Microsoft.HealthcareApis;
 /**
  * Workspace resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model Workspace
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<WorkspaceProperties> {
+model Workspace is Azure.ResourceManager.ProxyResource<WorkspaceProperties> {
   ...ResourceNameParameter<
     Resource = Workspace,
     KeyName = "workspaceName",
     SegmentName = "workspaces",
     NamePattern = ""
   >;
+
+  /** The common properties of tracked resources in the service. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  tags?: Record<string>;
+
+  /** The common properties for any location based resource, tracked or proxy. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  location?: string;
 
   /**
    * An etag associated with the resource, used for optimistic concurrency when editing it.
@@ -44,14 +52,17 @@ interface Workspaces {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Workspace,
-    Response = ArmResourceUpdatedResponse<Workspace> | ArmResourceCreatedResponse<
-      Workspace,
-      ArmLroLocationHeader<FinalResult = Workspace> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | (ArmAcceptedLroResponse & {
-      @bodyRoot
-      _: Workspace;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<Workspace>
+      | ArmResourceCreatedResponse<
+          Workspace,
+          ArmLroLocationHeader<FinalResult = Workspace> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | (ArmAcceptedLroResponse & {
+          @bodyRoot
+          _: Workspace;
+        }),
     Error = ErrorDetails
   >;
 
@@ -64,14 +75,16 @@ interface Workspaces {
   update is ArmCustomPatchAsync<
     Workspace,
     PatchModel = WorkspacePatchResource,
-    Response = ArmResponse<Workspace> | (ArmAcceptedLroResponse<
-      "Resource update request accepted.",
-      LroHeaders = ArmLroLocationHeader<FinalResult = Workspace> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > & {
-      @bodyRoot
-      _: Workspace;
-    }),
+    Response =
+      | ArmResponse<Workspace>
+      | (ArmAcceptedLroResponse<
+          "Resource update request accepted.",
+          LroHeaders = ArmLroLocationHeader<FinalResult = Workspace> &
+            Azure.Core.Foundations.RetryAfterHeader
+        > & {
+          @bodyRoot
+          _: Workspace;
+        }),
     Error = ErrorDetails
   >;
 
@@ -81,7 +94,10 @@ interface Workspaces {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Workspace,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = Error
   >;
 
@@ -108,9 +124,11 @@ interface Workspaces {
 @@minLength(Workspace.name, 3);
 @@doc(Workspace.name, "The name of workspace resource.");
 @@doc(Workspace.properties, "Workspaces resource specific properties.");
-@@doc(Workspaces.createOrUpdate::parameters.resource,
+@@doc(
+  Workspaces.createOrUpdate::parameters.resource,
   "The parameters for creating or updating a healthcare workspace."
 );
-@@doc(Workspaces.update::parameters.properties,
+@@doc(
+  Workspaces.update::parameters.properties,
   "The parameters for updating a specified workspace."
 );

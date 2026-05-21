@@ -54,8 +54,10 @@ interface EncryptionProtectors {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     EncryptionProtector,
-    Response = ArmResourceUpdatedResponse<EncryptionProtector> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = EncryptionProtector> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<EncryptionProtector>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = EncryptionProtector> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -74,10 +76,12 @@ interface EncryptionProtectors {
   >;
 }
 
-@@doc(EncryptionProtector.name,
+@@doc(
+  EncryptionProtector.name,
   "The name of the encryption protector to be retrieved."
 );
 @@doc(EncryptionProtector.properties, "Resource properties.");
-@@doc(EncryptionProtectors.createOrUpdate::parameters.resource,
+@@doc(
+  EncryptionProtectors.createOrUpdate::parameters.resource,
   "The requested encryption protector resource state."
 );

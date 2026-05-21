@@ -38,6 +38,7 @@ interface CommunityGalleries {
 }
 
 @@doc(CommunityGallery.name, "The public name of the community gallery.");
-@@doc(CommunityGallery.properties,
+@@doc(
+  CommunityGallery.properties,
   "Describes the properties of a community gallery."
 );

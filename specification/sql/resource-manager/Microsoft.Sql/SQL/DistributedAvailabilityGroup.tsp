@@ -38,11 +38,14 @@ interface DistributedAvailabilityGroups {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     DistributedAvailabilityGroup,
-    Response = ArmResourceUpdatedResponse<DistributedAvailabilityGroup> | ArmResourceCreatedResponse<
-      DistributedAvailabilityGroup,
-      ArmLroLocationHeader<FinalResult = DistributedAvailabilityGroup> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<DistributedAvailabilityGroup>
+      | ArmResourceCreatedResponse<
+          DistributedAvailabilityGroup,
+          ArmLroLocationHeader<FinalResult = DistributedAvailabilityGroup> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -60,7 +63,10 @@ interface DistributedAvailabilityGroups {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     DistributedAvailabilityGroup,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -90,19 +96,24 @@ interface DistributedAvailabilityGroups {
   >;
 }
 
-@@doc(DistributedAvailabilityGroup.name,
+@@doc(
+  DistributedAvailabilityGroup.name,
   "The distributed availability group name."
 );
 @@doc(DistributedAvailabilityGroup.properties, "Resource properties.");
-@@doc(DistributedAvailabilityGroups.createOrUpdate::parameters.resource,
+@@doc(
+  DistributedAvailabilityGroups.createOrUpdate::parameters.resource,
   "The distributed availability group info."
 );
-@@doc(DistributedAvailabilityGroups.update::parameters.properties,
+@@doc(
+  DistributedAvailabilityGroups.update::parameters.properties,
   "The distributed availability group info."
 );
-@@doc(DistributedAvailabilityGroups.failover::parameters.body,
+@@doc(
+  DistributedAvailabilityGroups.failover::parameters.body,
   "The distributed availability group failover request parameters."
 );
-@@doc(DistributedAvailabilityGroups.setRole::parameters.body,
+@@doc(
+  DistributedAvailabilityGroups.setRole::parameters.body,
   "The distributed availability group set role request parameters."
 );
