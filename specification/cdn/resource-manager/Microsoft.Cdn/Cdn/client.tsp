@@ -1420,6 +1420,7 @@ using Azure.ResourceManager;
 // Python SDK customizations: preserve client name and enum member names from the
 // pre-migration Swagger SDK to avoid breaking changes for existing consumers.
 @@clientName(Microsoft.Cdn, "CdnManagementClient", "python");
+@@clientName(DeliveryRuleActionName, "DeliveryRuleActionEnum", "python");
 @@clientName(
   PolicySettingsDefaultCustomBlockResponseStatusCode.`200`,
   "TWO_HUNDRED",
