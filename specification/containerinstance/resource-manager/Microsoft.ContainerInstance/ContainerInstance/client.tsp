@@ -387,3 +387,37 @@ using Microsoft.ContainerInstance;
 @@clientName(AzureFileVolume.readOnly, "IsReadOnly", "csharp");
 @@clientName(VolumeMount.readOnly, "IsReadOnly", "csharp");
 @@clientName(SecurityContextDefinition.privileged, "IsPrivileged", "csharp");
+
+// Go-specific: restore swagger-compatible client/operation grouping.
+// back-compatible.tsp redirects ContainerGroupProfiles ops to CGProfile/CGProfiles
+// for other languages; override here so Go matches the historical swagger surface:
+//   ContainerGroupProfileClient  (singular) -> revision-related ops only (CGProfile interface)
+//   ContainerGroupProfilesClient (plural)   -> CRUD + list ops          (ContainerGroupProfiles interface)
+@@clientLocation(ContainerGroupProfiles.get, ContainerGroupProfiles, "go");
+@@clientLocation(
+  ContainerGroupProfiles.createOrUpdate,
+  ContainerGroupProfiles,
+  "go"
+);
+@@clientLocation(ContainerGroupProfiles.update, ContainerGroupProfiles, "go");
+@@clientLocation(ContainerGroupProfiles.delete, ContainerGroupProfiles, "go");
+@@clientLocation(
+  ContainerGroupProfiles.listBySubscription,
+  ContainerGroupProfiles,
+  "go"
+);
+@@clientLocation(
+  ContainerGroupProfiles.listByResourceGroup,
+  ContainerGroupProfiles,
+  "go"
+);
+
+// Rename singular interface (TSP `CGProfile`) -> `ContainerGroupProfile` for Go
+// so the generated client matches the historical swagger name.
+@@clientName(CGProfile, "ContainerGroupProfile", "go");
+
+// Map operation names to the swagger-historical names:
+//   update            -> Patch
+//   listBySubscription -> List (NewListPager)
+@@clientName(ContainerGroupProfiles.update, "Patch", "go");
+@@clientName(ContainerGroupProfiles.listBySubscription, "List", "go");
