@@ -3673,6 +3673,14 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "Content-Disposition",
+            "in": "header",
+            "description": "The Content-Disposition header specifying the filename of the uploaded file.\nMust follow the format: `attachment; filename=\"<filename>\"`.\nFor example: `attachment; filename=\"installation-guide.pdf\"`.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "contentDisposition"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
