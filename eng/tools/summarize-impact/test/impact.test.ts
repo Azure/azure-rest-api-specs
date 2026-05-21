@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { afterEach, beforeEach, describe, expect, it } from "vitest"; //vi
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { PRContext } from "../src/PRContext.js";
 import { evaluateImpact } from "../src/impact.js";
 import { LabelContext } from "../src/labelling-types.js";
@@ -197,5 +197,100 @@ describe("Impact Detection - default fixture", () => {
 
     const actualImpact = await evaluateImpact(prContext, labelContext, DEFAULT_MAIN_SPEC_FOLDERS);
     expect(actualImpact).toEqual(expectedImpact);
+  });
+});
+
+describe("Impact Detection - arm-leases folder behavior", () => {
+  let originalCwd: string;
+
+  beforeEach(() => {
+    originalCwd = process.cwd();
+    process.chdir(AFTER_REPO_FIXTURE);
+  });
+
+  afterEach(() => {
+    process.chdir(originalCwd);
+  });
+
+  it("should NOT flag rpaasRpNotInPrivateRepo when RP folder exists in arm-leases list", async () => {
+    // Simulate: PR adds a new RPaaS RP, but the RP folder exists in arm-leases
+    const changedFileDetails = {
+      additions: [
+        "specification/contosowidgermanager2/resource-manager/readme.md",
+        "specification/contosowidgermanager2/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
+      ],
+      modifications: [],
+      deletions: [],
+      renames: [],
+      total: 1,
+    };
+
+    const labelContext: LabelContext = {
+      present: new Set(),
+      toAdd: new Set(),
+      toRemove: new Set(),
+    };
+
+    const prContext = new PRContext(AFTER_REPO_FIXTURE, BEFORE_REPO_FIXTURE, labelContext, {
+      sha: "2bd8350d465081401a0f4f03e633eca41f0991de",
+      sourceBranch: "contosotest",
+      targetBranch: "main",
+      repo: "azure-rest-api-specs",
+      prNumber: "1",
+      owner: "Azure",
+      fileList: changedFileDetails,
+      isDraft: false,
+    });
+
+    // Include "contosowidgermanager2" in the arm-leases folder list (simulating it has an arm-lease)
+    const armLeasesFolders = [...DEFAULT_MAIN_SPEC_FOLDERS, "contosowidgermanager2"];
+
+    const actualImpact = await evaluateImpact(prContext, labelContext, armLeasesFolders);
+
+    // Should NOT be flagged because arm-lease exists
+    expect(actualImpact.rpaasRpNotInPrivateRepo).toBe(false);
+    expect(actualImpact.newRP).toBe(true);
+    expect(actualImpact.rpaasChange).toBe(true);
+  });
+
+  it("should flag rpaasRpNotInPrivateRepo when RP folder does NOT exist in arm-leases list", async () => {
+    // Simulate: PR adds a new RPaaS RP, and the RP folder does NOT exist in arm-leases
+    const changedFileDetails = {
+      additions: [
+        "specification/contosowidgermanager2/resource-manager/readme.md",
+        "specification/contosowidgermanager2/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
+      ],
+      modifications: [],
+      deletions: [],
+      renames: [],
+      total: 1,
+    };
+
+    const labelContext: LabelContext = {
+      present: new Set(),
+      toAdd: new Set(),
+      toRemove: new Set(),
+    };
+
+    const prContext = new PRContext(AFTER_REPO_FIXTURE, BEFORE_REPO_FIXTURE, labelContext, {
+      sha: "2bd8350d465081401a0f4f03e633eca41f0991de",
+      sourceBranch: "contosotest",
+      targetBranch: "main",
+      repo: "azure-rest-api-specs",
+      prNumber: "1",
+      owner: "Azure",
+      fileList: changedFileDetails,
+      isDraft: false,
+    });
+
+    // Do NOT include "contosowidgermanager2" in the arm-leases folder list
+    const armLeasesFolders = DEFAULT_MAIN_SPEC_FOLDERS;
+
+    const actualImpact = await evaluateImpact(prContext, labelContext, armLeasesFolders);
+
+    // Should be flagged because arm-lease does NOT exist
+    expect(actualImpact.rpaasRpNotInPrivateRepo).toBe(true);
+    expect(actualImpact.newRP).toBe(true);
+    expect(actualImpact.rpaasChange).toBe(true);
   });
 });

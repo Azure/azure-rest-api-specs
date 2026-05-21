@@ -664,31 +664,40 @@ export const getRPaaSFolderList = async (
   repoName: string,
 ): Promise<string[]> => {
   const branch = "main";
-  const folder = "specification";
+  const armLeasesFolder = ".github/arm-leases";
 
-  const res = await client.rest.repos.getContent({
-    owner,
-    repo: repoName,
-    path: folder,
-    ref: branch,
-  });
+  const folderNames: Set<string> = new Set();
 
-  console.log(
-    `Get RPSaaS folder list from ${owner}/${repoName}/${folder} successfully. status: ${res.status}`,
-  );
+  // Fetch folders from arm-leases directory to include RPs that have active leases
+  // (indicating they are already registered in RPSaaSMaster)
+  try {
+    const armLeasesRes = await client.rest.repos.getContent({
+      owner,
+      repo: repoName,
+      path: armLeasesFolder,
+      ref: branch,
+    });
 
-  // Extract folder names from the response
-  if (Array.isArray(res.data)) {
-    const folderNames = res.data
-      .filter((item: any) => item.type === "dir") // Only get directories
-      .map((item: any) => item.name); // Extract the name property
+    console.log(
+      `Get arm-leases folder list from ${owner}/${repoName}/${armLeasesFolder} successfully. status: ${armLeasesRes.status}`,
+    );
 
-    console.log(`Found ${folderNames.length} folders: ${folderNames.join(", ")}`);
-    return folderNames;
+    if (Array.isArray(armLeasesRes.data)) {
+      const armLeasesFolders = armLeasesRes.data
+        .filter((item: any) => item.type === "dir" && item.name !== "scripts")
+        .map((item: any) => item.name);
+
+      armLeasesFolders.forEach((name: string) => folderNames.add(name));
+      console.log(
+        `Found ${armLeasesFolders.length} arm-lease folders: ${armLeasesFolders.join(", ")}`,
+      );
+    }
+  } catch (error) {
+    console.log(`Failed to get folder list from ${armLeasesFolder}: ${error}`);
   }
 
-  console.log("No folders found or unexpected response format");
-  return [];
+  console.log(`Total unique RP folders: ${folderNames.size}`);
+  return Array.from(folderNames);
 };
 
 export function getRPRootFolderName(swaggerFile: string): string | undefined {
