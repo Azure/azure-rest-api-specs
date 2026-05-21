@@ -6137,8 +6137,7 @@
           "Delete Certificate": {
             "$ref": "./examples/HttpRouteConfig_DeleteV2.json"
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/javaComponents": {
@@ -13375,8 +13374,20 @@
             "Main"
           ],
           "x-ms-enum": {
-            "name": "IdentitySettingsLifeCycle",
-            "modelAsString": true
+            "name": "SessionPoolIdentityLifeCycleStable",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "None",
+                "value": "None",
+                "description": "Do not use managed identity during any lifecycle stage."
+              },
+              {
+                "name": "Main",
+                "value": "Main",
+                "description": "Use managed identity during the main stage of the Session Pool lifecycle."
+              }
+            ]
           }
         }
       },

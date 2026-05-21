@@ -5092,11 +5092,6 @@ union SessionPoolIdentityLifeCycle {
 /**
  * Use to select the lifecycle stages of a Session Pool during which the Managed Identity should be available (stable version with limited values).
  */
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-enum name needed for backward compatibility"
-@extension(
-  "x-ms-enum",
-  #{ name: "IdentitySettingsLifeCycle", modelAsString: true }
-)
 union SessionPoolIdentityLifeCycleStable {
   string,
 
