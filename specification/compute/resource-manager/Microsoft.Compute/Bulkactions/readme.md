@@ -83,7 +83,7 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/launchBulkInstancesOperations/{name}"].delete.parameters[?(@.name=='location')]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/launchBulkInstancesOperations/{name}/cancel"].post.parameters[?(@.name=='location')]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/launchBulkInstancesOperations/{name}/virtualMachines"].get.parameters[?(@.name=='location')]
-      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/operations/{id}"].get.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/launchBulkInstancesOperations/asyncOperations/{asyncOperationId}"].get.parameters[?(@.name=='location')]
       - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkCancel"].post.parameters[?(@.name=='location')]
       - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkCreate"].post.parameters[?(@.name=='location')]
       - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkDeallocate"].post.parameters[?(@.name=='location')]
@@ -106,4 +106,14 @@ suppressions:
       (cascade-delete VMs yes or no), so an enum would add no expressive power.
     from: Bulkactions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/launchBulkInstancesOperations/{name}"].delete.parameters[*]
+  - code: PathForNestedResource
+    reason: >
+      The GetOperationStatus endpoint is the async operation poller URL for
+      LaunchBulkInstancesOperation. The path intentionally uses the launchBulkInstancesOperations
+      collection name as a fixed segment followed by asyncOperations/{asyncOperationId} to mirror
+      the service-side routing contract. This is the documented exception case for the
+      PathForNestedResource rule (see
+      https://github.com/Azure/azure-openapi-validator/blob/main/docs/path-for-nested-resource.md#pathfornestedresource).
+    from: Bulkactions.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/launchBulkInstancesOperations/asyncOperations/{asyncOperationId}"]
 ```
