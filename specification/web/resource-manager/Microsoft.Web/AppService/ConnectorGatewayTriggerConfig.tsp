@@ -407,16 +407,15 @@ model ConnectorGatewayTriggerStatusProperties {
 }
 
 @added(Versions.v2026_05_01_preview)
-@singleton("latest")
 @parentResource(ConnectorGatewayTriggerConfig)
-@doc("Latest trigger execution status. Singleton (name = `latest`).")
+@doc("A trigger execution status entry for a connector gateway trigger configuration.")
 model ConnectorGatewayTriggerStatus
   is Azure.ResourceManager.ProxyResource<ConnectorGatewayTriggerStatusProperties> {
   @key("triggerStatusName")
   @segment("triggerStatuses")
-  @doc("The trigger status name. Always `latest`.")
+  @doc("The trigger status entry name.")
   @path
-  @pattern("^latest$")
+  @pattern("^[a-zA-Z0-9_.()-]{1,79}$")
   name: string;
 }
 
@@ -440,7 +439,8 @@ interface ConnectorGatewayTriggerRuns {
 
 @added(Versions.v2026_05_01_preview)
 @armResourceOperations
-@doc("Read operations for the latest trigger execution status.")
+@doc("Read operations for trigger execution status entries.")
 interface ConnectorGatewayTriggerStatuses {
-  getLatest is ArmResourceRead<ConnectorGatewayTriggerStatus>;
+  get is ArmResourceRead<ConnectorGatewayTriggerStatus>;
+  listByTriggerConfig is ArmResourceListByParent<ConnectorGatewayTriggerStatus>;
 }

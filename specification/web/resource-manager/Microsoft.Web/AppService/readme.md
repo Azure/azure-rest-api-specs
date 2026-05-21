@@ -139,14 +139,6 @@ directive:
       Tags-only PATCH is intentional per the Connector Gateway API design.
       identity is assigned at create time via PUT and is not mutable through
       PATCH; only resource tags can be updated incrementally.
-  - suppress: PathForNestedResource
-    from: openapi.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectorGateways/{name}/triggerConfigs/{triggerConfigName}/triggerStatuses/latest"]
-    reason: |
-      triggerStatuses/latest is a singleton sub-resource (always named
-      "latest") that exposes the most recent execution status of a trigger
-      configuration. This singleton path shape is intentional per the
-      Connector Gateway design.
 ```
 
 ### Tag: package-2026-03

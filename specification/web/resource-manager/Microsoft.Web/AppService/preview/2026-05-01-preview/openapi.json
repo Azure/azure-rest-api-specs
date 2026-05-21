@@ -5111,13 +5111,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectorGateways/{name}/triggerConfigs/{triggerConfigName}/triggerStatuses/latest": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectorGateways/{name}/triggerConfigs/{triggerConfigName}/triggerStatuses": {
       "get": {
-        "operationId": "ConnectorGatewayTriggerStatuses_GetLatest",
+        "operationId": "ConnectorGatewayTriggerStatuses_ListByTriggerConfig",
         "tags": [
           "ConnectorGatewayTriggerStatuses"
         ],
-        "description": "Get a ConnectorGatewayTriggerStatus",
+        "description": "List ConnectorGatewayTriggerStatus resources by ConnectorGatewayTriggerConfig",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -5149,6 +5149,72 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
+              "$ref": "#/definitions/ConnectorGatewayTriggerStatusListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListTriggerStatuses": {
+            "$ref": "./examples/ConnectorGatewayTriggerStatuses_ListByTriggerConfig.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connectorGateways/{name}/triggerConfigs/{triggerConfigName}/triggerStatuses/{triggerStatusName}": {
+      "get": {
+        "operationId": "ConnectorGatewayTriggerStatuses_Get",
+        "tags": [
+          "ConnectorGatewayTriggerStatuses"
+        ],
+        "description": "Get a ConnectorGatewayTriggerStatus",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the connector gateway",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "triggerConfigName",
+            "in": "path",
+            "description": "The name of the trigger configuration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          },
+          {
+            "name": "triggerStatusName",
+            "in": "path",
+            "description": "The trigger status entry name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.()-]{1,79}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
               "$ref": "#/definitions/ConnectorGatewayTriggerStatus"
             }
           },
@@ -5160,8 +5226,8 @@
           }
         },
         "x-ms-examples": {
-          "GetLatestTriggerStatus": {
-            "$ref": "./examples/ConnectorGatewayTriggerStatuses_GetLatest.json"
+          "GetTriggerStatus": {
+            "$ref": "./examples/ConnectorGatewayTriggerStatuses_Get.json"
           }
         }
       }
@@ -44735,7 +44801,7 @@
     },
     "ConnectorGatewayTriggerStatus": {
       "type": "object",
-      "description": "Latest trigger execution status. Singleton (name = `latest`).",
+      "description": "A trigger execution status entry for a connector gateway trigger configuration.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ConnectorGatewayTriggerStatusProperties",
@@ -44746,6 +44812,27 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "ConnectorGatewayTriggerStatusListResult": {
+      "type": "object",
+      "description": "The response of a ConnectorGatewayTriggerStatus list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ConnectorGatewayTriggerStatus items on this page",
+          "items": {
+            "$ref": "#/definitions/ConnectorGatewayTriggerStatus"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "ConnectorGatewayTriggerStatusProperties": {
