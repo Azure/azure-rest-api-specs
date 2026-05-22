@@ -11,33 +11,39 @@ using TypeSpec.Rest;
 // Type alternate types - fix property types for backward compatibility
 // ============================================================================
 
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 @@alternateType(VmssvmInfo.vmId, Azure.Core.uuid, "csharp");
 @@alternateType(VmssvmInfo.latestReportId, Azure.Core.uuid, "csharp");
-@@alternateType(VmssvmInfo.vmResourceId,
+@@alternateType(
+  VmssvmInfo.vmResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 @@alternateType(GuestConfigurationNavigation.contentUri, url, "csharp");
 @@alternateType(VMInfo.id, Azure.Core.armResourceIdentifier, "csharp");
 @@alternateType(VMInfo.uuid, Azure.Core.uuid, "csharp");
-@@alternateType(GuestConfigurationAssignmentProperties.latestReportId,
+@@alternateType(
+  GuestConfigurationAssignmentProperties.latestReportId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(AssignmentReport.id,
+@@alternateType(
+  AssignmentReport.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 @@alternateType(AssignmentReport.reportId, Azure.Core.uuid, "csharp");
-@@alternateType(GuestConfigurationAssignmentReport.id,
+@@alternateType(
+  GuestConfigurationAssignmentReport.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(GuestConfigurationAssignmentReportProperties.reportId,
+@@alternateType(
+  GuestConfigurationAssignmentReportProperties.reportId,
   Azure.Core.uuid,
   "csharp"
 );
@@ -49,15 +55,18 @@ using TypeSpec.Rest;
 // Type renaming - restore old SDK names for backward compatibility
 // ============================================================================
 
-@@clientName(ComplianceStatus,
+@@clientName(
+  ComplianceStatus,
   "AssignedGuestConfigurationMachineComplianceStatus",
   "csharp"
 );
-@@clientName(AssignmentReport,
+@@clientName(
+  AssignmentReport,
   "GuestConfigurationAssignmentReportInfo",
   "csharp"
 );
-@@clientName(ProvisioningState,
+@@clientName(
+  ProvisioningState,
   "GuestConfigurationProvisioningState",
   "csharp"
 );
@@ -65,21 +74,25 @@ using TypeSpec.Rest;
 @@clientName(ConfigurationParameter, "GuestConfigurationParameter", "csharp");
 @@clientName(ConfigurationSetting, "LcmConfigurationSetting", "csharp");
 @@clientName(VmssvmInfo, "GuestConfigurationVmssVmInfo", "csharp");
-@@clientName(VmssvmInfo.lastComplianceChecked,
+@@clientName(
+  VmssvmInfo.lastComplianceChecked,
   "LastComplianceCheckedOn",
   "csharp"
 );
-@@clientName(GuestConfigurationAssignmentProperties.vmssVMList,
+@@clientName(
+  GuestConfigurationAssignmentProperties.vmssVMList,
   "VmssVmList",
   "csharp"
 );
 @@clientName(AssignmentInfo, "GuestConfigurationAssignmentInfo", "csharp");
-@@clientName(AssignmentReportResource,
+@@clientName(
+  AssignmentReportResource,
   "AssignmentReportResourceInfo",
   "csharp"
 );
 @@clientName(VMInfo, "GuestConfigurationVmInfo", "csharp");
-@@clientName(AssignmentReportDetails,
+@@clientName(
+  AssignmentReportDetails,
   "GuestConfigurationAssignmentReportDetails",
   "csharp"
 );
@@ -93,31 +106,38 @@ using TypeSpec.Rest;
 // Property renaming - restore old SDK property names for backward compatibility
 // ============================================================================
 
-@@clientName(GuestConfigurationAssignmentProperties.lastComplianceStatusChecked,
+@@clientName(
+  GuestConfigurationAssignmentProperties.lastComplianceStatusChecked,
   "LastComplianceStatusCheckedOn",
   "csharp"
 );
-@@clientName(GuestConfigurationNavigation.configurationParameter,
+@@clientName(
+  GuestConfigurationNavigation.configurationParameter,
   "ConfigurationParameters",
   "csharp"
 );
-@@clientName(GuestConfigurationNavigation.configurationProtectedParameter,
+@@clientName(
+  GuestConfigurationNavigation.configurationProtectedParameter,
   "ConfigurationProtectedParameters",
   "csharp"
 );
-@@clientName(ConfigurationSetting.allowModuleOverwrite,
+@@clientName(
+  ConfigurationSetting.allowModuleOverwrite,
   "IsModuleOverwriteAllowed",
   "csharp"
 );
-@@clientName(ConfigurationSetting.configurationModeFrequencyMins,
+@@clientName(
+  ConfigurationSetting.configurationModeFrequencyMins,
   "ConfigurationModeFrequencyInMins",
   "csharp"
 );
-@@clientName(ConfigurationSetting.refreshFrequencyMins,
+@@clientName(
+  ConfigurationSetting.refreshFrequencyMins,
   "RefreshFrequencyInMins",
   "csharp"
 );
-@@clientName(AssignmentReportResource.resourceId,
+@@clientName(
+  AssignmentReportResource.resourceId,
   "AssignmentResourceSettingName",
   "csharp"
 );
@@ -127,64 +147,77 @@ using TypeSpec.Rest;
 // ============================================================================
 
 // VM operations (GuestConfigurationAssignments interface)
-@@clientName(GuestConfigurationAssignments.get,
+@@clientName(
+  GuestConfigurationAssignments.get,
   "GetForVirtualMachine",
   "csharp"
 );
-@@clientName(GuestConfigurationAssignments.createOrUpdate,
+@@clientName(
+  GuestConfigurationAssignments.createOrUpdate,
   "CreateOrUpdateForVirtualMachine",
   "csharp"
 );
-@@clientName(GuestConfigurationAssignments.delete,
+@@clientName(
+  GuestConfigurationAssignments.delete,
   "DeleteForVirtualMachine",
   "csharp"
 );
-@@clientName(GuestConfigurationAssignments.list,
+@@clientName(
+  GuestConfigurationAssignments.list,
   "GetAllForVirtualMachine",
   "csharp"
 );
 
 // HCRP operations (GuestConfigurationHCRPAssignments interface)
 @@clientName(GuestConfigurationHCRPAssignments.get, "GetForMachine", "csharp");
-@@clientName(GuestConfigurationHCRPAssignments.createOrUpdate,
+@@clientName(
+  GuestConfigurationHCRPAssignments.createOrUpdate,
   "CreateOrUpdateForMachine",
   "csharp"
 );
-@@clientName(GuestConfigurationHCRPAssignments.delete,
+@@clientName(
+  GuestConfigurationHCRPAssignments.delete,
   "DeleteForMachine",
   "csharp"
 );
-@@clientName(GuestConfigurationHCRPAssignments.list,
+@@clientName(
+  GuestConfigurationHCRPAssignments.list,
   "GetAllForMachine",
   "csharp"
 );
 
 // VMSS operations (GuestConfigurationAssignmentsVMSS interface)
 @@clientName(GuestConfigurationAssignmentsVMSS.get, "GetForVmss", "csharp");
-@@clientName(GuestConfigurationAssignmentsVMSS.createOrUpdate,
+@@clientName(
+  GuestConfigurationAssignmentsVMSS.createOrUpdate,
   "CreateOrUpdateForVmss",
   "csharp"
 );
-@@clientName(GuestConfigurationAssignmentsVMSS.delete,
+@@clientName(
+  GuestConfigurationAssignmentsVMSS.delete,
   "DeleteForVmss",
   "csharp"
 );
 @@clientName(GuestConfigurationAssignmentsVMSS.list, "GetAllForVmss", "csharp");
 
 // VMwarevSphere operations (GuestConfigurationConnectedVMwarevSphereAssignments interface)
-@@clientName(GuestConfigurationConnectedVMwarevSphereAssignments.get,
+@@clientName(
+  GuestConfigurationConnectedVMwarevSphereAssignments.get,
   "GetForConnectedVMwarevSphere",
   "csharp"
 );
-@@clientName(GuestConfigurationConnectedVMwarevSphereAssignments.createOrUpdate,
+@@clientName(
+  GuestConfigurationConnectedVMwarevSphereAssignments.createOrUpdate,
   "CreateOrUpdateForConnectedVMwarevSphere",
   "csharp"
 );
-@@clientName(GuestConfigurationConnectedVMwarevSphereAssignments.delete,
+@@clientName(
+  GuestConfigurationConnectedVMwarevSphereAssignments.delete,
   "DeleteForConnectedVMwarevSphere",
   "csharp"
 );
-@@clientName(GuestConfigurationConnectedVMwarevSphereAssignments.list,
+@@clientName(
+  GuestConfigurationConnectedVMwarevSphereAssignments.list,
   "GetAllForConnectedVMwarevSphere",
   "csharp"
 );
@@ -194,45 +227,54 @@ using TypeSpec.Rest;
 // ============================================================================
 
 // VM report operations
-@@clientName(GuestConfigurationAssignments.guestConfigurationAssignmentReportsList,
+@@clientName(
+  GuestConfigurationAssignments.guestConfigurationAssignmentReportsList,
   "GetReports",
   "csharp"
 );
-@@clientName(GuestConfigurationAssignments.guestConfigurationAssignmentReportsGet,
+@@clientName(
+  GuestConfigurationAssignments.guestConfigurationAssignmentReportsGet,
   "GetReport",
   "csharp"
 );
 
 // HCRP report operations
-@@clientName(GuestConfigurationHCRPAssignments.guestConfigurationHCRPAssignmentReportsList,
+@@clientName(
+  GuestConfigurationHCRPAssignments.guestConfigurationHCRPAssignmentReportsList,
   "GetReports",
   "csharp"
 );
-@@clientName(GuestConfigurationHCRPAssignments.guestConfigurationHCRPAssignmentReportsGet,
+@@clientName(
+  GuestConfigurationHCRPAssignments.guestConfigurationHCRPAssignmentReportsGet,
   "GetReport",
   "csharp"
 );
 
 // VMSS report operations
-@@clientName(GuestConfigurationAssignmentsVMSS.guestConfigurationAssignmentReportsVMSSList,
+@@clientName(
+  GuestConfigurationAssignmentsVMSS.guestConfigurationAssignmentReportsVMSSList,
   "GetReports",
   "csharp"
 );
-@@clientName(GuestConfigurationAssignmentsVMSS.guestConfigurationAssignmentReportsVMSSGet,
+@@clientName(
+  GuestConfigurationAssignmentsVMSS.guestConfigurationAssignmentReportsVMSSGet,
   "GetReport",
   "csharp"
 );
 
 // VMwarevSphere report operations
-@@clientName(GuestConfigurationConnectedVMwarevSphereAssignments.guestConfigurationConnectedVMwarevSphereAssignmentsReportsList,
+@@clientName(
+  GuestConfigurationConnectedVMwarevSphereAssignments.guestConfigurationConnectedVMwarevSphereAssignmentsReportsList,
   "GetReports",
   "csharp"
 );
-@@clientName(GuestConfigurationConnectedVMwarevSphereAssignments.guestConfigurationConnectedVMwarevSphereAssignmentsReportsGet,
+@@clientName(
+  GuestConfigurationConnectedVMwarevSphereAssignments.guestConfigurationConnectedVMwarevSphereAssignmentsReportsGet,
   "GetReport",
   "csharp"
 );
-@@clientName(GuestConfigurationAssignmentsOperationGroup.rGList,
+@@clientName(
+  GuestConfigurationAssignmentsOperationGroup.rGList,
   "GetGuestConfigurationAssignments",
   "csharp"
 );
@@ -242,15 +284,18 @@ using TypeSpec.Rest;
 // ============================================================================
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
-@@markAsPageable(GuestConfigurationAssignments.guestConfigurationAssignmentReportsList,
+@@markAsPageable(
+  GuestConfigurationAssignments.guestConfigurationAssignmentReportsList,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
-@@markAsPageable(GuestConfigurationHCRPAssignments.guestConfigurationHCRPAssignmentReportsList,
+@@markAsPageable(
+  GuestConfigurationHCRPAssignments.guestConfigurationHCRPAssignmentReportsList,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
-@@markAsPageable(GuestConfigurationConnectedVMwarevSphereAssignments.guestConfigurationConnectedVMwarevSphereAssignmentsReportsList,
+@@markAsPageable(
+  GuestConfigurationConnectedVMwarevSphereAssignments.guestConfigurationConnectedVMwarevSphereAssignmentsReportsList,
   "csharp"
 );
 
@@ -277,7 +322,9 @@ op guestConfigurationAssignmentReportsGetCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Void request body inherited from source operation."
   @body
   body: void,
-): Azure.ResourceManager.ArmResponse<GuestConfigurationAssignmentReport> | ErrorResponse;
+):
+  | Azure.ResourceManager.ArmResponse<GuestConfigurationAssignmentReport>
+  | ErrorResponse;
 
 /** List all reports for the guest configuration assignment, latest report first. */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "SDK customization override operation."
@@ -306,7 +353,9 @@ op guestConfigurationAssignmentReportsListCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Void request body inherited from source operation."
   @body
   body: void,
-): Azure.ResourceManager.ArmResponse<GuestConfigurationAssignmentReportList> | ErrorResponse;
+):
+  | Azure.ResourceManager.ArmResponse<GuestConfigurationAssignmentReportList>
+  | ErrorResponse;
 
 /** Creates an association between a VM and guest configuration */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "SDK customization override operation."
@@ -336,7 +385,10 @@ op guestConfigurationAssignmentsCreateOrUpdateCustomized(
   /** Parameters supplied to the create or update guest configuration assignment. */
   @body
   parameters: GuestConfigurationAssignment,
-): Azure.ResourceManager.ArmResourceUpdatedResponse<Microsoft.GuestConfiguration.GuestConfigurationAssignment> | Azure.ResourceManager.ArmResourceCreatedSyncResponse<Microsoft.GuestConfiguration.GuestConfigurationAssignment> | Microsoft.GuestConfiguration.ErrorResponse;
+):
+  | Azure.ResourceManager.ArmResourceUpdatedResponse<Microsoft.GuestConfiguration.GuestConfigurationAssignment>
+  | Azure.ResourceManager.ArmResourceCreatedSyncResponse<Microsoft.GuestConfiguration.GuestConfigurationAssignment>
+  | Microsoft.GuestConfiguration.ErrorResponse;
 
 /** Delete a guest configuration assignment */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "SDK customization override operation."
@@ -362,7 +414,9 @@ op guestConfigurationAssignmentsDeleteCustomized(
   @path
   @pattern("^[a-zA-Z0-9][-a-zA-Z0-9_.]*[a-zA-Z0-9]$")
   vmName: string,
-): Azure.ResourceManager.ArmDeletedResponse | Microsoft.GuestConfiguration.ErrorResponse;
+):
+  | Azure.ResourceManager.ArmDeletedResponse
+  | Microsoft.GuestConfiguration.ErrorResponse;
 
 /** Get information about a guest configuration assignment */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "SDK customization override operation."
@@ -387,7 +441,9 @@ op guestConfigurationAssignmentsGetCustomized(
   @path
   @pattern("^[a-zA-Z0-9][-a-zA-Z0-9_.]*[a-zA-Z0-9]$")
   vmName: string,
-): Azure.ResourceManager.ArmResponse<Microsoft.GuestConfiguration.GuestConfigurationAssignment> | Microsoft.GuestConfiguration.ErrorResponse;
+):
+  | Azure.ResourceManager.ArmResponse<Microsoft.GuestConfiguration.GuestConfigurationAssignment>
+  | Microsoft.GuestConfiguration.ErrorResponse;
 
 /** Get a report for the guest configuration assignment, by reportId. */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "SDK customization override operation."
@@ -414,7 +470,9 @@ op guestConfigurationHCRPAssignmentReportsGetCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Void request body inherited from source operation."
   @body
   body: void,
-): Azure.ResourceManager.ArmResponse<Microsoft.GuestConfiguration.GuestConfigurationAssignmentReport> | Microsoft.GuestConfiguration.ErrorResponse;
+):
+  | Azure.ResourceManager.ArmResponse<Microsoft.GuestConfiguration.GuestConfigurationAssignmentReport>
+  | Microsoft.GuestConfiguration.ErrorResponse;
 
 /** List all reports for the guest configuration assignment, latest report first. */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "SDK customization override operation."
@@ -447,7 +505,9 @@ op guestConfigurationHCRPAssignmentReportsListCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Void request body inherited from source operation."
   @body
   body: void,
-): Azure.ResourceManager.ArmResponse<Microsoft.GuestConfiguration.GuestConfigurationAssignmentReportList> | Microsoft.GuestConfiguration.ErrorResponse;
+):
+  | Azure.ResourceManager.ArmResponse<Microsoft.GuestConfiguration.GuestConfigurationAssignmentReportList>
+  | Microsoft.GuestConfiguration.ErrorResponse;
 
 /** Creates an association between a ARC machine and guest configuration */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "SDK customization override operation."
@@ -481,7 +541,10 @@ op guestConfigurationHCRPAssignmentsCreateOrUpdateCustomized(
   /** Parameters supplied to the create or update guest configuration assignment. */
   @body
   parameters: GuestConfigurationAssignment,
-): Azure.ResourceManager.ArmResourceUpdatedResponse<Microsoft.GuestConfiguration.GuestConfigurationAssignment> | Azure.ResourceManager.ArmResourceCreatedSyncResponse<Microsoft.GuestConfiguration.GuestConfigurationAssignment> | Microsoft.GuestConfiguration.ErrorResponse;
+):
+  | Azure.ResourceManager.ArmResourceUpdatedResponse<Microsoft.GuestConfiguration.GuestConfigurationAssignment>
+  | Azure.ResourceManager.ArmResourceCreatedSyncResponse<Microsoft.GuestConfiguration.GuestConfigurationAssignment>
+  | Microsoft.GuestConfiguration.ErrorResponse;
 
 /** Delete a guest configuration assignment */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "SDK customization override operation."
@@ -511,7 +574,9 @@ op guestConfigurationHCRPAssignmentsDeleteCustomized(
   @key
   @path
   machineName: string,
-): Azure.ResourceManager.ArmDeletedResponse | Microsoft.GuestConfiguration.ErrorResponse;
+):
+  | Azure.ResourceManager.ArmDeletedResponse
+  | Microsoft.GuestConfiguration.ErrorResponse;
 
 /** Get information about a guest configuration assignment */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "SDK customization override operation."
@@ -540,35 +605,47 @@ op guestConfigurationHCRPAssignmentsGetCustomized(
   @key
   @path
   machineName: string,
-): Azure.ResourceManager.ArmResponse<Microsoft.GuestConfiguration.GuestConfigurationAssignment> | Microsoft.GuestConfiguration.ErrorResponse;
+):
+  | Azure.ResourceManager.ArmResponse<Microsoft.GuestConfiguration.GuestConfigurationAssignment>
+  | Microsoft.GuestConfiguration.ErrorResponse;
 
-@@override(GuestConfigurationAssignments.guestConfigurationAssignmentReportsGet,
+@@override(
+  GuestConfigurationAssignments.guestConfigurationAssignmentReportsGet,
   guestConfigurationAssignmentReportsGetCustomized
 );
-@@override(GuestConfigurationAssignments.guestConfigurationAssignmentReportsList,
+@@override(
+  GuestConfigurationAssignments.guestConfigurationAssignmentReportsList,
   guestConfigurationAssignmentReportsListCustomized
 );
-@@override(GuestConfigurationAssignments.createOrUpdate,
+@@override(
+  GuestConfigurationAssignments.createOrUpdate,
   guestConfigurationAssignmentsCreateOrUpdateCustomized
 );
-@@override(GuestConfigurationAssignments.delete,
+@@override(
+  GuestConfigurationAssignments.delete,
   guestConfigurationAssignmentsDeleteCustomized
 );
-@@override(GuestConfigurationAssignments.get,
+@@override(
+  GuestConfigurationAssignments.get,
   guestConfigurationAssignmentsGetCustomized
 );
-@@override(GuestConfigurationHCRPAssignments.guestConfigurationHCRPAssignmentReportsGet,
+@@override(
+  GuestConfigurationHCRPAssignments.guestConfigurationHCRPAssignmentReportsGet,
   guestConfigurationHCRPAssignmentReportsGetCustomized
 );
-@@override(GuestConfigurationHCRPAssignments.guestConfigurationHCRPAssignmentReportsList,
+@@override(
+  GuestConfigurationHCRPAssignments.guestConfigurationHCRPAssignmentReportsList,
   guestConfigurationHCRPAssignmentReportsListCustomized
 );
-@@override(GuestConfigurationHCRPAssignments.createOrUpdate,
+@@override(
+  GuestConfigurationHCRPAssignments.createOrUpdate,
   guestConfigurationHCRPAssignmentsCreateOrUpdateCustomized
 );
-@@override(GuestConfigurationHCRPAssignments.delete,
+@@override(
+  GuestConfigurationHCRPAssignments.delete,
   guestConfigurationHCRPAssignmentsDeleteCustomized
 );
-@@override(GuestConfigurationHCRPAssignments.get,
+@@override(
+  GuestConfigurationHCRPAssignments.get,
   guestConfigurationHCRPAssignmentsGetCustomized
 );
