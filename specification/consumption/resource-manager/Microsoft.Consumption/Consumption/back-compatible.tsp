@@ -153,23 +153,6 @@ using TypeSpec.Http;
 
 @@clientName(Amount, "amount");
 
-@@clientName(
-  Azure.ResourceManager.CommonTypes.Resource,
-  "ArmResource",
-  "python"
-);
-@@clientName(
-  Azure.ResourceManager.CommonTypes.ProxyResource,
-  "ArmProxyResource",
-  "python"
-);
-@@clientName(
-  Azure.ResourceManager.CommonTypes.ErrorResponse,
-  "ArmErrorResponse",
-  "python"
-);
-
-@@clientName(BudgetOperatorType.In, "IN_ENUM", "python");
 @@clientName(Term.P1M, "P1_M", "python");
 @@clientName(Term.P1Y, "P1_Y", "python");
 @@clientName(Term.P3Y, "P3_Y", "python");

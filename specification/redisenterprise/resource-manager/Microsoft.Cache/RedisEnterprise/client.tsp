@@ -230,3 +230,8 @@ using Microsoft.Cache;
   "SystemAssignedUserAssigned",
   "javascript"
 );
+@@clientName(
+  Azure.ResourceManager.Legacy.ManagedServiceIdentityV4,
+  "ManagedServiceIdentity",
+  "javascript"
+);
