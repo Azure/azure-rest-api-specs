@@ -3,11 +3,13 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -19,7 +21,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-model VirtualRouter extends Resource {
+model VirtualRouter extends Common.Resource {
   properties?: VirtualRouterPropertiesFormat;
 
   @visibility(Lifecycle.Read)
@@ -69,7 +71,10 @@ interface VirtualRouters {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualRouter,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = Error
   >;
 
@@ -86,6 +91,7 @@ interface VirtualRouters {
 
 @@doc(VirtualRouter.name, "The name of the Virtual Router.");
 @@doc(VirtualRouter.properties, "Properties of the Virtual Router.");
-@@doc(VirtualRouters.createOrUpdate::parameters.resource,
+@@doc(
+  VirtualRouters.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update Virtual Router."
 );

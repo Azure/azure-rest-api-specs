@@ -1,0 +1,50 @@
+parameters:
+  "service-dir":
+    default: "sdk/domainservices"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "resource-manager"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    output-file: "{version-status}/{version}/openapi.json"
+    emit-lro-options: "all"
+    examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-domainservices"
+    namespace: "azure.mgmt.domainservices"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-domainservices"
+    namespace: "com.azure.resourcemanager.domainservices"
+    service-name: "DomainServices" # human-readable service name, whitespace allowed
+    flavor: azure
+    generate-samples: false
+    generate-tests: false
+  "@azure-tools/typespec-ts":
+    service-dir: sdk/domainservices
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-domainservices"
+    compatibility-lro: true
+    typespec-title-map:
+      AADClient: DomainServicesResourceProvider
+    flavor: "azure"
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-domainservices"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/domainservices"
+    emitter-output-dir: "{output-dir}/{service-dir}/armdomainservices"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armdomainservices"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

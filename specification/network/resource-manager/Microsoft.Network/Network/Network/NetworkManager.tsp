@@ -3,11 +3,13 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -19,7 +21,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkManager)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model NetworkManager extends Resource {
+model NetworkManager extends Common.Resource {
   properties?: NetworkManagerProperties;
 
   @visibility(Lifecycle.Read)
@@ -85,7 +87,10 @@ interface NetworkManagers {
       @query("force")
       force?: boolean;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -190,11 +195,13 @@ interface NetworkManagers {
   post is ArmResourceActionAsyncBase<
     NetworkManager,
     Request = NetworkManagerCommit,
-    Response = ArmResponse<NetworkManagerCommit> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkManagerCommit> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: NetworkManagerCommit;
-    }),
+    Response =
+      | ArmResponse<NetworkManagerCommit>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkManagerCommit> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: NetworkManagerCommit;
+        }),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkManager>,
     Error = CloudError
   >;
@@ -223,21 +230,27 @@ interface NetworkManagers {
 
 @@doc(NetworkManager.name, "The name of the network manager.");
 @@doc(NetworkManager.properties, "The network manager properties");
-@@doc(NetworkManagers.createOrUpdate::parameters.resource,
+@@doc(
+  NetworkManagers.createOrUpdate::parameters.resource,
   "Parameters supplied to specify which network manager is."
 );
-@@doc(NetworkManagers.patch::parameters.properties,
+@@doc(
+  NetworkManagers.patch::parameters.properties,
   "Parameters supplied to specify which network manager is."
 );
-@@doc(NetworkManagers.listActiveConnectivityConfigurations::parameters.body,
+@@doc(
+  NetworkManagers.listActiveConnectivityConfigurations::parameters.body,
   "Active Configuration Parameter."
 );
-@@doc(NetworkManagers.listActiveSecurityAdminRules::parameters.body,
+@@doc(
+  NetworkManagers.listActiveSecurityAdminRules::parameters.body,
   "Active Configuration Parameter."
 );
-@@doc(NetworkManagers.post::parameters.body,
+@@doc(
+  NetworkManagers.post::parameters.body,
   "Parameters supplied to specify which Managed Network commit is."
 );
-@@doc(NetworkManagers.networkManagerDeploymentStatusList::parameters.body,
+@@doc(
+  NetworkManagers.networkManagerDeploymentStatusList::parameters.body,
   "Parameters supplied to specify which Managed Network deployment status is."
 );

@@ -15,6 +15,7 @@ namespace Microsoft.AzureStackHCI;
  * EdgeMachine details.
  */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 model EdgeMachine
   is Azure.ResourceManager.TrackedResource<EdgeMachineProperties> {
   ...ResourceNameParameter<
@@ -27,6 +28,7 @@ model EdgeMachine
 }
 
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 @armResourceOperations
 interface EdgeMachines {
   /**

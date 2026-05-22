@@ -4,11 +4,13 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./NetworkManager.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -174,12 +176,15 @@ alias IpamPoolsListParameters = {
 };
 
 @@doc(IpamPool.name, "Pool resource name.");
-@@doc(IpamPool.properties,
+@@doc(
+  IpamPool.properties,
   "Properties of IpamPool resource properties which are specific to the Pool resource."
 );
-@@doc(IpamPools.create::parameters.resource,
+@@doc(
+  IpamPools.create::parameters.resource,
   "Pool resource object to create/update."
 );
-@@doc(IpamPools.update::parameters.properties,
+@@doc(
+  IpamPools.update::parameters.properties,
   "Pool resource object to update partially."
 );

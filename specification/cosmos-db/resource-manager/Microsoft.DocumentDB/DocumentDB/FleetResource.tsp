@@ -72,15 +72,19 @@ interface FleetResources {
 
 @@maxLength(FleetResource.name, 50);
 @@minLength(FleetResource.name, 3);
-@@doc(FleetResource.name,
+@@doc(
+  FleetResource.name,
   "Cosmos DB fleet name. Needs to be unique under a subscription."
 );
-@@doc(FleetResource.properties,
+@@doc(
+  FleetResource.properties,
   "Properties to update Azure Cosmos DB fleet resource."
 );
-@@doc(FleetResources.create::parameters.resource,
+@@doc(
+  FleetResources.create::parameters.resource,
   "The parameters to provide for the current fleet."
 );
-@@doc(FleetResources.update::parameters.properties,
+@@doc(
+  FleetResources.update::parameters.properties,
   "The parameters to provide for the current fleet."
 );

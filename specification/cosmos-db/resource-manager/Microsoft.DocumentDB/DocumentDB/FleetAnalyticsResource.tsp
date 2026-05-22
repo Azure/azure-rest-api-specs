@@ -60,6 +60,7 @@ interface FleetAnalyticsResources {
 @@minLength(FleetAnalyticsResource.name, 3);
 @@doc(FleetAnalyticsResource.name, "Cosmos DB fleetAnalytics name.");
 @@doc(FleetAnalyticsResource.properties, "");
-@@doc(FleetAnalyticsResources.create::parameters.resource,
+@@doc(
+  FleetAnalyticsResources.create::parameters.resource,
   "The parameters to provide for the current FleetAnalytics."
 );

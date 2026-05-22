@@ -14,6 +14,9 @@ using Microsoft.NetApp;
 @@flattenProperty(NetAppAccountPatch.properties, "!javascript");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@flattenProperty(NetAppAccountPatchStable.properties, "!javascript");
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(GetKeyVaultStatusResponse.properties, "!javascript");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
@@ -51,8 +54,16 @@ using Microsoft.NetApp;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(BackupPatch.properties, "!javascript");
 
-@@clientLocation(SubscriptionQuotaItems.get, "NetAppResourceQuotaLimits");
-@@clientLocation(SubscriptionQuotaItems.list, "NetAppResourceQuotaLimits");
+@@clientLocation(
+  SubscriptionQuotaItems.get,
+  "NetAppResourceQuotaLimits",
+  "!csharp"
+);
+@@clientLocation(
+  SubscriptionQuotaItems.list,
+  "NetAppResourceQuotaLimits",
+  "!csharp"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(QuotaItem.properties, "!javascript");
 
@@ -65,7 +76,9 @@ using Microsoft.NetApp;
 @@clientLocation(NetAppAccounts.createOrUpdate, "Accounts");
 @@clientName(NetAppAccounts.createOrUpdate::parameters.resource, "body");
 @@clientLocation(NetAppAccounts.update, "Accounts");
+@@clientLocation(NetAppAccounts.updatePrevious, "Accounts");
 @@clientName(NetAppAccounts.update::parameters.properties, "body");
+@@clientName(NetAppAccounts.updatePrevious::parameters.properties, "body");
 @@clientLocation(NetAppAccounts.delete, "Accounts");
 @@clientLocation(NetAppAccounts.list, "Accounts");
 @@clientLocation(NetAppAccounts.listBySubscription, "Accounts");
@@ -149,29 +162,37 @@ using Microsoft.NetApp;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(BucketPatch.properties, "!javascript");
 
-@@clientLocation(NetAppResourceOperationGroup.checkNameAvailability,
+@@clientLocation(
+  NetAppResourceOperationGroup.checkNameAvailability,
   "NetAppResource"
 );
-@@clientLocation(NetAppResourceOperationGroup.checkFilePathAvailability,
+@@clientLocation(
+  NetAppResourceOperationGroup.checkFilePathAvailability,
   "NetAppResource"
 );
-@@clientLocation(NetAppResourceOperationGroup.checkQuotaAvailability,
+@@clientLocation(
+  NetAppResourceOperationGroup.checkQuotaAvailability,
   "NetAppResource"
 );
-@@clientLocation(NetAppResourceOperationGroup.queryRegionInfo,
+@@clientLocation(
+  NetAppResourceOperationGroup.queryRegionInfo,
   "NetAppResource"
 );
-@@clientLocation(NetAppResourceOperationGroup.queryNetworkSiblingSet,
+@@clientLocation(
+  NetAppResourceOperationGroup.queryNetworkSiblingSet,
   "NetAppResource"
 );
-@@clientLocation(NetAppResourceOperationGroup.updateNetworkSiblingSet,
+@@clientLocation(
+  NetAppResourceOperationGroup.updateNetworkSiblingSet,
   "NetAppResource"
 );
 
-@@clientLocation(NetAppResourceUsagesOperationGroup.list,
+@@clientLocation(
+  NetAppResourceUsagesOperationGroup.list,
   "NetAppResourceUsages"
 );
-@@clientLocation(NetAppResourceUsagesOperationGroup.get,
+@@clientLocation(
+  NetAppResourceUsagesOperationGroup.get,
   "NetAppResourceUsages"
 );
 
@@ -180,7 +201,8 @@ using Microsoft.NetApp;
 @@clientName(Caches.createOrUpdate::parameters.resource, "body");
 @@clientName(Caches.update::parameters.properties, "body");
 
-@@clientName(ActiveDirectoryConfigs.createOrUpdate::parameters.resource,
+@@clientName(
+  ActiveDirectoryConfigs.createOrUpdate::parameters.resource,
   "body"
 );
 @@clientName(ActiveDirectoryConfigs.update::parameters.properties, "body");

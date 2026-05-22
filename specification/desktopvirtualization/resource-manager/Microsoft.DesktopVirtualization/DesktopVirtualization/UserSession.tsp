@@ -139,7 +139,8 @@ model SendMessageRequest {
 
 @@maxLength(UserSession.name, 24);
 @@minLength(UserSession.name, 1);
-@@doc(UserSession.name,
+@@doc(
+  UserSession.name,
   "The name of the user session within the specified session host"
 );
 @@doc(UserSession.properties, "Detailed properties for UserSession");

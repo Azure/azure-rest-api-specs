@@ -18,7 +18,8 @@ interface DbServers extends OracleReadOnlyResource<DbServer> {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(DbServers.get,
+@@Autorest.example(
+  DbServers.get,
   "./examples/dbServers_get.json",
   "Get DbServer by parent"
 );
