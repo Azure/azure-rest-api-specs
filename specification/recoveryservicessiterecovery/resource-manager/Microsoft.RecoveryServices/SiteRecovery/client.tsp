@@ -1089,7 +1089,7 @@ using Microsoft.RecoveryServices;
 @@clientName(RunAsAccount, "SiteRecoveryRunAsAccount", "csharp");
 @@clientName(ServiceError, "SiteRecoveryServiceError", "csharp");
 @@clientName(Severity, "SiteRecoveryErrorSeverity", "csharp");
-@@clientName(HealthError.innerHealthErrors, "InnerHealthErrors", "csharp");
+@@clientName(HealthError.innerHealthErrors, "SiteRecoveryInnerHealthErrorsList", "csharp");
 @@clientName(
   SqlServerLicenseType,
   "SiteRecoverySqlServerLicenseType",
