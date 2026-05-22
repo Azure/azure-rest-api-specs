@@ -1447,6 +1447,29 @@ using Azure.ResourceManager;
   "python"
 );
 
+// Preserve pre-migration Swagger enum names to avoid breaking changes for Python consumers.
+@@clientName(
+  IsDeviceMatchValue,
+  "IsDeviceMatchConditionParametersMatchValuesItem",
+  "python"
+);
+@@clientName(
+  RequestMethodMatchValue,
+  "RequestMethodMatchConditionParametersMatchValuesItem",
+  "python"
+);
+@@clientName(
+  RequestSchemeMatchValue,
+  "RequestSchemeMatchConditionParametersMatchValuesItem",
+  "python"
+);
+@@clientName(
+  KeyVaultSigningKeyParametersType,
+  "KeyVaultSigningKeyParametersTypeName",
+  "python"
+);
+@@clientName(MatchProcessingBehavior.Continue, "CONTINUE_ENUM", "python");
+
 // Mark CustomDomains.create as ARM CreateOrUpdate operation
 // so that the SDK generator produces CreateOrUpdate methods
 @@armResourceCreateOrUpdate(CustomDomains.create, CustomDomain);
