@@ -25,26 +25,31 @@ namespace Microsoft.ResourceGraph;
 
 // Move namespace-level operations off the merged root client so each generated
 // client carries a consistent apiVersions set.
-@@clientLocation(ResourceChanges.resourceChanges,
+@@clientLocation(
+  ResourceChanges.resourceChanges,
   "ResourceChangesOperations",
   "csharp"
 );
-@@clientLocation(ResourceChanges.resourceChangeDetails,
+@@clientLocation(
+  ResourceChanges.resourceChangeDetails,
   "ResourceChangesOperations",
   "csharp"
 );
-@@clientLocation(ResourceGraphApi.resources,
+@@clientLocation(
+  ResourceGraphApi.resources,
   "ResourceGraphOperations",
   "csharp"
 );
-@@clientLocation(ResourceHistory.resourcesHistory,
+@@clientLocation(
+  ResourceHistory.resourcesHistory,
   "ResourceHistoryOperations",
   "csharp"
 );
 
 // Follow the Azure SDK Get* prefix convention for read operations.
 @@clientName(ResourceChanges.resourceChanges, "GetResourceChanges", "csharp");
-@@clientName(ResourceChanges.resourceChangeDetails,
+@@clientName(
+  ResourceChanges.resourceChangeDetails,
   "GetResourceChangeDetails",
   "csharp"
 );
@@ -53,7 +58,8 @@ namespace Microsoft.ResourceGraph;
 // --- C# naming customizations to match GA SDK surface ---
 // Rename models to match existing GA API
 @@clientName(ResourceGraphApi.QueryRequest, "ResourceQueryContent", "csharp");
-@@clientName(ResourceGraphApi.QueryRequestOptions,
+@@clientName(
+  ResourceGraphApi.QueryRequestOptions,
   "ResourceQueryRequestOptions",
   "csharp"
 );
@@ -66,7 +72,8 @@ namespace Microsoft.ResourceGraph;
 
 // Rename GraphQueryResource to ResourceGraphQuery (the old name)
 @@clientName(GraphQueryApi.GraphQueryResource, "ResourceGraphQuery", "csharp");
-@@clientName(GraphQueryApi.GraphQueryProperties.timeModified,
+@@clientName(
+  GraphQueryApi.GraphQueryProperties.timeModified,
   "ModifiedOn",
   "csharp"
 );
@@ -75,7 +82,8 @@ namespace Microsoft.ResourceGraph;
 @@clientName(ResourceGraphApi.resources, "GetResources", "csharp");
 
 // Rename patch model
-@@clientName(GraphQueryApi.GraphQueryUpdateParameters,
+@@clientName(
+  GraphQueryApi.GraphQueryUpdateParameters,
   "ResourceGraphQueryPatch",
   "csharp"
 );
@@ -86,7 +94,8 @@ namespace Microsoft.ResourceGraph;
 // --- Type customizations for backward compatibility ---
 // Restore TrackedResourceData inheritance for GraphQueryResource (matches GA SDK base type)
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(GraphQueryApi.GraphQueryResource,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  GraphQueryApi.GraphQueryResource,
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
