@@ -4984,6 +4984,18 @@ union ExtendedLocationTypes {
 }
 
 /**
+ * The type of extendedLocation.
+ */
+union ExtendedLocationType {
+  string,
+
+  /**
+   * CustomLocation
+   */
+  CustomLocation: "CustomLocation",
+}
+
+/**
  * Metadata to represent the container app kind, representing if a container app is workflowapp or functionapp.
  */
 union Kind {
@@ -6804,7 +6816,8 @@ model ExtendedLocation {
   /**
    * The type of the extended location.
    */
-  type?: ExtendedLocationTypes;
+  @typeChangedFrom(Versions.v2026_01_01, ExtendedLocationTypes)
+  type?: ExtendedLocationType;
 }
 
 /**
