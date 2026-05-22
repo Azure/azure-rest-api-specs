@@ -78,7 +78,9 @@ model AlertsClientOptions {
 // names match the v1.1.1 / previous-emitter API surface (ChangeState / GetHistory).
 // The extension-scope counterparts on AlertOperationGroup land on
 // ScopedServiceAlertResource (see Alert.tsp OverrideResourceName), so there is no clash.
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@clientName(Alerts.changeStateTenant, "changeState", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@clientName(Alerts.getHistoryTenant, "getHistory", "csharp");
 
 @@clientName(TimeRange, "TimeRangeFilter", "csharp");
@@ -184,18 +186,56 @@ model AlertsClientOptions {
   "csharp"
 );
 
+// Add back the missing values through customization
+
 /**
  * Reason for the modification
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ServiceAlertModificationEvent {
+  /**
+   * AlertCreated
+   */
   AlertCreated,
+
+  /**
+   * StateChange
+   */
   StateChange,
+
+  /**
+   * MonitorConditionChange
+   */
   MonitorConditionChange,
+
+  /**
+   * SeverityChange
+   */
   SeverityChange,
+
+  /**
+   * ActionRuleTriggered
+   */
   ActionRuleTriggered,
+
+  /**
+   * ActionRuleSuppressed
+   */
   ActionRuleSuppressed,
+
+  /**
+   * ActionsTriggered
+   */
   ActionsTriggered,
+
+  /**
+   * ActionsSuppressed
+   */
   ActionsSuppressed,
+
+  /**
+   * ActionsFailed
+   */
   ActionsFailed,
 }
 
