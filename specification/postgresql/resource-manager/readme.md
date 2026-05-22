@@ -45,12 +45,16 @@ input-file:
 suppressions:
   - code: GuidUsage
     from: openapi.json
-    where: $.definitions.DataEncryption.properties.primaryFederatedIdentityClientId
-    reason: To be defined as GUID following recommendation by Azure Resource Manager guidelines.
-  - code: GuidUsage
+    where: $.definitions.Azure.Core.uuid
+    reason: To have primaryFederatedIdentityClientId and geoBackupFederatedIdentityClientId be defined as GUID following recommendation by Azure Resource Manager guidelines.
+  - suppress: EnumInsteadOfBoolean
     from: openapi.json
-    where: $.definitions.DataEncryption.properties.geoBackupFederatedIdentityClientId
-    reason: To be defined as GUID following recommendation by Azure Resource Manager guidelines.
+    where: $.definitions.PolicyDetail.properties.passed
+    reason: This is a simple pass/fail indicator.
+  - suppress: EnumInsteadOfBoolean
+    from: openapi.json
+    where: $.definitions.MaintenanceEventActionResponse.properties.deferrable
+    reason: This is a binary status indicator.
 ```
 
 ### Tag: package-flexibleserver-2026-01-01-preview
