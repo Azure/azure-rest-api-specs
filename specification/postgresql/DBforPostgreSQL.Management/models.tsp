@@ -3161,12 +3161,12 @@ model DataEncryption {
   @visibility(Lifecycle.Read)
   geoBackupEncryptionKeyStatus?: EncryptionKeyStatus;
 
-  #suppress "azure-core/no-guid-usage" "To be defined as GUID following recommendation by Azure Resource Manager guidelines."
+  #suppress "azure-core/no-guid-usage" "The client id of primary federated identity is to be defined as GUID following recommendation by Azure Resource Manager guidelines."
   @doc("Client id of multi-tenant Microsoft Entra application.")
   @added(Versions.v2026_04_01)
   primaryFederatedIdentityClientId?: uuid;
 
-  #suppress "azure-core/no-guid-usage" "To be defined as GUID following recommendation by Azure Resource Manager guidelines."
+  #suppress "azure-core/no-guid-usage" "The client id of backup federated identity is to be defined as GUID following recommendation by Azure Resource Manager guidelines."
   @doc("Client id of multi-tenant Microsoft Entra application for when it is configured to support geographically redundant backups.")
   @added(Versions.v2026_04_01)
   geoBackupFederatedIdentityClientId?: uuid;
