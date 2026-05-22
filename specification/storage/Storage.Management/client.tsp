@@ -228,7 +228,11 @@ union CSharpBlobInventoryPolicyName {
 }
 
 @@alternateType(ManagementPolicyName, CSharpManagementPolicyName, "csharp");
-@@alternateType(BlobInventoryPolicyName, CSharpBlobInventoryPolicyName, "csharp");
+@@alternateType(
+  BlobInventoryPolicyName,
+  CSharpBlobInventoryPolicyName,
+  "csharp"
+);
 @@clientName(
   PrivateEndpointConnection,
   "StoragePrivateEndpointConnection",
