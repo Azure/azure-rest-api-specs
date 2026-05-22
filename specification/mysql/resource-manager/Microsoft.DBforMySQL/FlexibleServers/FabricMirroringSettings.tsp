@@ -103,11 +103,14 @@ interface FabricMirroringSettings {
   @doc("Create or update Fabric Mirroring settings.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     FabricMirroringSetting,
-    Response = ArmResourceUpdatedResponse<FabricMirroringSetting> | ArmResourceCreatedResponse<
-      FabricMirroringSetting,
-      ArmAsyncOperationHeader<FinalResult = FabricMirroringSetting> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<FabricMirroringSetting>
+      | ArmResourceCreatedResponse<
+          FabricMirroringSetting,
+          ArmAsyncOperationHeader<FinalResult = FabricMirroringSetting> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   @doc("List Fabric Mirroring settings by server.")
