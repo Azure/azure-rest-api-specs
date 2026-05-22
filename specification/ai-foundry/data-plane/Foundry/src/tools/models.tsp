@@ -121,8 +121,12 @@ namespace Azure.AI.Projects {
   );
 
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@withoutOmittedProperties(OpenAI.FileSearchTool, "vector_store_ids");
   @@copyProperties(OpenAI.FileSearchTool,
     {
+      /** The IDs of the vector stores to search. */
+      vector_store_ids?: string[],
+
       ...ToolNameAndDescriptionExtension,
       ...ToolConfigExtension,
     }
