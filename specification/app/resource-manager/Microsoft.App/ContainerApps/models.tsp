@@ -6666,6 +6666,7 @@ model RegistryInfo {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Original swagger does not use format:password for this field"
   @visibility(Lifecycle.Create, Lifecycle.Update)
+  @secret
   registryPassword?: string;
 }
 
