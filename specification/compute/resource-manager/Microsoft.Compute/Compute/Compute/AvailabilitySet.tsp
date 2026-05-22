@@ -129,7 +129,8 @@ interface AvailabilitySets {
   convertToVirtualMachineScaleSet is ArmResourceActionAsyncBase<
     AvailabilitySet,
     Request = ConvertToVirtualMachineScaleSetInput,
-    Response = ArmAcceptedLroResponse,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AvailabilitySet>,
     Error = CloudError,
     OptionalRequestBody = true
