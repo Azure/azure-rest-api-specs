@@ -1,0 +1,36 @@
+{
+  "title": "Enrollments_List_MaximumSet",
+  "operationId": "Enrollments_List",
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-123456789012",
+    "resourceGroupName": "MyResourceGroup",
+    "usagePlanName": "myUsagePlan",
+    "api-version": "2026-04-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "serviceGroupId": "/providers/Microsoft.Management/serviceGroups/sg1",
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/MyResourceGroup/providers/Microsoft.AzureResilienceManagement/usagePlans/myUsagePlan/enrollments/sg1-enrollment",
+            "name": "sg1-enrollment",
+            "type": "Microsoft.AzureResilienceManagement/usagePlans/enrollments",
+            "systemData": {
+              "createdBy": "admin@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2025-06-01T10:00:00.000Z",
+              "lastModifiedBy": "admin@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2025-06-01T10:00:00.000Z"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/MyResourceGroup/providers/Microsoft.AzureResilienceManagement/usagePlans/myUsagePlan/enrollments?api-version=2026-04-01-preview&$skipToken=abc"
+      }
+    }
+  }
+}
