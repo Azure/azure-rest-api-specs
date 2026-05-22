@@ -4685,12 +4685,3 @@ using Microsoft.RecoveryServices;
   "SiteRecoveryDiskPublicNetworkAccess",
   "csharp"
 );
-
-// (5) Rule 4.5: NOT fixable via @@clientName. See `Custom/SiteRecoveryProtectionContainerResource.cs`
-// for the full rationale. Briefly: MPG synthesizes parent-resource accessor names from the child
-// resource model name (without the "Resource" suffix), while v1.x AutoRest included "Resource" in
-// the accessor verb. Trying to rename via @@clientName on `ReplicationProtectionClusterOperationGroup.listByReplicationProtectionContainers`
-// or `ReplicationProtectionClusters.get` does not affect the synthesized parent accessor; renaming
-// the model itself to end with "Resource" would cascade into the *Data / *Properties class names
-// (which v1.x kept without that suffix), introducing fresh ApiCompat breaks. The custom forwarders
-// are the least-bad option.
