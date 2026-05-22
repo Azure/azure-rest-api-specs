@@ -10247,6 +10247,24 @@
       "type": "object",
       "description": "Represents a azure blob retrieval activity record.",
       "properties": {
+        "knowledgeSourceName": {
+          "type": "string",
+          "description": "The knowledge source for the retrieval activity."
+        },
+        "queryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The query time for this retrieval activity."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of documents retrieved that were sufficiently relevant to pass the reranker threshold."
+        },
+        "imageServing": {
+          "$ref": "#/definitions/ImageServingStatistics",
+          "description": "Statistics about image serving for this retrieval activity"
+        },
         "azureBlobArguments": {
           "$ref": "#/definitions/KnowledgeBaseAzureBlobActivityArguments",
           "description": "The azure blob arguments for the retrieval activity."
@@ -10254,7 +10272,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/KnowledgeBaseRetrievalActivityRecord"
+          "$ref": "#/definitions/KnowledgeBaseActivityRecord"
         }
       ],
       "x-ms-discriminator-value": "azureBlob"
@@ -10368,6 +10386,24 @@
       "type": "object",
       "description": "Represents a Fabric Data Agent retrieval activity record.",
       "properties": {
+        "knowledgeSourceName": {
+          "type": "string",
+          "description": "The knowledge source for the retrieval activity."
+        },
+        "queryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The query time for this retrieval activity."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of documents retrieved that were sufficiently relevant to pass the reranker threshold."
+        },
+        "imageServing": {
+          "$ref": "#/definitions/ImageServingStatistics",
+          "description": "Statistics about image serving for this retrieval activity"
+        },
         "fabricDataAgentArguments": {
           "$ref": "#/definitions/KnowledgeBaseFabricDataAgentActivityArguments",
           "description": "The Fabric Data Agent arguments for the retrieval activity."
@@ -10375,7 +10411,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/KnowledgeBaseRetrievalActivityRecord"
+          "$ref": "#/definitions/KnowledgeBaseActivityRecord"
         }
       ],
       "x-ms-discriminator-value": "fabricDataAgent"
@@ -10414,6 +10450,24 @@
       "type": "object",
       "description": "Represents a Fabric Ontology retrieval activity record.",
       "properties": {
+        "knowledgeSourceName": {
+          "type": "string",
+          "description": "The knowledge source for the retrieval activity."
+        },
+        "queryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The query time for this retrieval activity."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of documents retrieved that were sufficiently relevant to pass the reranker threshold."
+        },
+        "imageServing": {
+          "$ref": "#/definitions/ImageServingStatistics",
+          "description": "Statistics about image serving for this retrieval activity"
+        },
         "fabricOntologyArguments": {
           "$ref": "#/definitions/KnowledgeBaseFabricOntologyActivityArguments",
           "description": "The Fabric Ontology arguments for the retrieval activity."
@@ -10421,7 +10475,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/KnowledgeBaseRetrievalActivityRecord"
+          "$ref": "#/definitions/KnowledgeBaseActivityRecord"
         }
       ],
       "x-ms-discriminator-value": "fabricOntology"
@@ -10460,6 +10514,24 @@
       "type": "object",
       "description": "Represents a File retrieval activity record.",
       "properties": {
+        "knowledgeSourceName": {
+          "type": "string",
+          "description": "The knowledge source for the retrieval activity."
+        },
+        "queryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The query time for this retrieval activity."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of documents retrieved that were sufficiently relevant to pass the reranker threshold."
+        },
+        "imageServing": {
+          "$ref": "#/definitions/ImageServingStatistics",
+          "description": "Statistics about image serving for this retrieval activity"
+        },
         "fileArguments": {
           "$ref": "#/definitions/KnowledgeBaseFileActivityArguments",
           "description": "The File arguments for the retrieval activity."
@@ -10467,7 +10539,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/KnowledgeBaseRetrievalActivityRecord"
+          "$ref": "#/definitions/KnowledgeBaseActivityRecord"
         }
       ],
       "x-ms-discriminator-value": "file"
@@ -10516,6 +10588,24 @@
       "type": "object",
       "description": "Represents a indexed OneLake retrieval activity record.",
       "properties": {
+        "knowledgeSourceName": {
+          "type": "string",
+          "description": "The knowledge source for the retrieval activity."
+        },
+        "queryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The query time for this retrieval activity."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of documents retrieved that were sufficiently relevant to pass the reranker threshold."
+        },
+        "imageServing": {
+          "$ref": "#/definitions/ImageServingStatistics",
+          "description": "Statistics about image serving for this retrieval activity"
+        },
         "indexedOneLakeArguments": {
           "$ref": "#/definitions/KnowledgeBaseIndexedOneLakeActivityArguments",
           "description": "The indexed OneLake arguments for the retrieval activity."
@@ -10523,7 +10613,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/KnowledgeBaseRetrievalActivityRecord"
+          "$ref": "#/definitions/KnowledgeBaseActivityRecord"
         }
       ],
       "x-ms-discriminator-value": "indexedOneLake"
@@ -10562,6 +10652,24 @@
       "type": "object",
       "description": "Represents a indexed SharePoint retrieval activity record.",
       "properties": {
+        "knowledgeSourceName": {
+          "type": "string",
+          "description": "The knowledge source for the retrieval activity."
+        },
+        "queryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The query time for this retrieval activity."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of documents retrieved that were sufficiently relevant to pass the reranker threshold."
+        },
+        "imageServing": {
+          "$ref": "#/definitions/ImageServingStatistics",
+          "description": "Statistics about image serving for this retrieval activity"
+        },
         "indexedSharePointArguments": {
           "$ref": "#/definitions/KnowledgeBaseIndexedSharePointActivityArguments",
           "description": "The indexed SharePoint arguments for the retrieval activity."
@@ -10569,7 +10677,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/KnowledgeBaseRetrievalActivityRecord"
+          "$ref": "#/definitions/KnowledgeBaseActivityRecord"
         }
       ],
       "x-ms-discriminator-value": "indexedSharePoint"
@@ -10608,6 +10716,24 @@
       "type": "object",
       "description": "Represents an indexed SQL retrieval activity record.",
       "properties": {
+        "knowledgeSourceName": {
+          "type": "string",
+          "description": "The knowledge source for the retrieval activity."
+        },
+        "queryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The query time for this retrieval activity."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of documents retrieved that were sufficiently relevant to pass the reranker threshold."
+        },
+        "imageServing": {
+          "$ref": "#/definitions/ImageServingStatistics",
+          "description": "Statistics about image serving for this retrieval activity"
+        },
         "indexedSqlArguments": {
           "$ref": "#/definitions/KnowledgeBaseIndexedSqlActivityArguments",
           "description": "The indexed SQL arguments for the retrieval activity."
@@ -10615,7 +10741,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/KnowledgeBaseRetrievalActivityRecord"
+          "$ref": "#/definitions/KnowledgeBaseActivityRecord"
         }
       ],
       "x-ms-discriminator-value": "indexedSql"
@@ -10655,6 +10781,24 @@
       "type": "object",
       "description": "Represents an MCP server retrieval activity record.",
       "properties": {
+        "knowledgeSourceName": {
+          "type": "string",
+          "description": "The knowledge source for the retrieval activity."
+        },
+        "queryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The query time for this retrieval activity."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of documents retrieved that were sufficiently relevant to pass the reranker threshold."
+        },
+        "imageServing": {
+          "$ref": "#/definitions/ImageServingStatistics",
+          "description": "Statistics about image serving for this retrieval activity"
+        },
         "mcpServerArguments": {
           "$ref": "#/definitions/KnowledgeBaseMcpServerActivityArguments",
           "description": "The MCP server arguments for the retrieval activity."
@@ -10662,7 +10806,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/KnowledgeBaseRetrievalActivityRecord"
+          "$ref": "#/definitions/KnowledgeBaseActivityRecord"
         }
       ],
       "x-ms-discriminator-value": "mcpServer"
@@ -11030,6 +11174,24 @@
       "type": "object",
       "description": "Represents a remote SharePoint retrieval activity record.",
       "properties": {
+        "knowledgeSourceName": {
+          "type": "string",
+          "description": "The knowledge source for the retrieval activity."
+        },
+        "queryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The query time for this retrieval activity."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of documents retrieved that were sufficiently relevant to pass the reranker threshold."
+        },
+        "imageServing": {
+          "$ref": "#/definitions/ImageServingStatistics",
+          "description": "Statistics about image serving for this retrieval activity"
+        },
         "remoteSharePointArguments": {
           "$ref": "#/definitions/KnowledgeBaseRemoteSharePointActivityArguments",
           "description": "The remote SharePoint arguments for the retrieval activity."
@@ -11037,7 +11199,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/KnowledgeBaseRetrievalActivityRecord"
+          "$ref": "#/definitions/KnowledgeBaseActivityRecord"
         }
       ],
       "x-ms-discriminator-value": "remoteSharePoint"
@@ -11065,12 +11227,8 @@
     },
     "KnowledgeBaseRetrievalActivityRecord": {
       "type": "object",
-      "description": "Represents a retrieval activity record.",
+      "description": "Common fields for retrieval activity records. Used via spread in concrete retrieval models.",
       "properties": {
-        "type": {
-          "type": "string",
-          "description": "Discriminator property for KnowledgeBaseRetrievalActivityRecord."
-        },
         "knowledgeSourceName": {
           "type": "string",
           "description": "The knowledge source for the retrieval activity."
@@ -11089,16 +11247,7 @@
           "$ref": "#/definitions/ImageServingStatistics",
           "description": "Statistics about image serving for this retrieval activity"
         }
-      },
-      "discriminator": "type",
-      "required": [
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeBaseActivityRecord"
-        }
-      ]
+      }
     },
     "KnowledgeBaseRetrievalPartialResponse": {
       "type": "object",
@@ -11252,6 +11401,24 @@
       "type": "object",
       "description": "Represents a search index retrieval activity record.",
       "properties": {
+        "knowledgeSourceName": {
+          "type": "string",
+          "description": "The knowledge source for the retrieval activity."
+        },
+        "queryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The query time for this retrieval activity."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of documents retrieved that were sufficiently relevant to pass the reranker threshold."
+        },
+        "imageServing": {
+          "$ref": "#/definitions/ImageServingStatistics",
+          "description": "Statistics about image serving for this retrieval activity"
+        },
         "searchIndexArguments": {
           "$ref": "#/definitions/KnowledgeBaseSearchIndexActivityArguments",
           "description": "The search index arguments for the retrieval activity."
@@ -11259,7 +11426,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/KnowledgeBaseRetrievalActivityRecord"
+          "$ref": "#/definitions/KnowledgeBaseActivityRecord"
         }
       ],
       "x-ms-discriminator-value": "searchIndex"
@@ -11315,6 +11482,24 @@
       "type": "object",
       "description": "Represents a web retrieval activity record.",
       "properties": {
+        "knowledgeSourceName": {
+          "type": "string",
+          "description": "The knowledge source for the retrieval activity."
+        },
+        "queryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The query time for this retrieval activity."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of documents retrieved that were sufficiently relevant to pass the reranker threshold."
+        },
+        "imageServing": {
+          "$ref": "#/definitions/ImageServingStatistics",
+          "description": "Statistics about image serving for this retrieval activity"
+        },
         "webArguments": {
           "$ref": "#/definitions/KnowledgeBaseWebActivityArguments",
           "description": "The web arguments for the retrieval activity."
@@ -11322,7 +11507,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/KnowledgeBaseRetrievalActivityRecord"
+          "$ref": "#/definitions/KnowledgeBaseActivityRecord"
         }
       ],
       "x-ms-discriminator-value": "web"
@@ -11362,6 +11547,24 @@
       "type": "object",
       "description": "Represents a WorkIQ retrieval activity record.",
       "properties": {
+        "knowledgeSourceName": {
+          "type": "string",
+          "description": "The knowledge source for the retrieval activity."
+        },
+        "queryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The query time for this retrieval activity."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of documents retrieved that were sufficiently relevant to pass the reranker threshold."
+        },
+        "imageServing": {
+          "$ref": "#/definitions/ImageServingStatistics",
+          "description": "Statistics about image serving for this retrieval activity"
+        },
         "workIQArguments": {
           "$ref": "#/definitions/KnowledgeBaseWorkIQActivityArguments",
           "description": "The WorkIQ arguments for the retrieval activity."
@@ -11369,7 +11572,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/KnowledgeBaseRetrievalActivityRecord"
+          "$ref": "#/definitions/KnowledgeBaseActivityRecord"
         }
       ],
       "x-ms-discriminator-value": "workIQ"

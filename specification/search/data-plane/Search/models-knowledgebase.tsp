@@ -447,11 +447,8 @@ model KnowledgeBaseActivityRecord {
   warning?: string;
 }
 
-/** Represents a retrieval activity record. */
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Inherits typed discriminator from base"
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-@discriminator("type")
-model KnowledgeBaseRetrievalActivityRecord extends KnowledgeBaseActivityRecord {
+/** Common fields for retrieval activity records. Used via spread in concrete retrieval models. */
+model KnowledgeBaseRetrievalActivityRecord {
   /** The knowledge source for the retrieval activity. */
   knowledgeSourceName?: string;
 
@@ -467,10 +464,10 @@ model KnowledgeBaseRetrievalActivityRecord extends KnowledgeBaseActivityRecord {
 }
 
 /** Represents a search index retrieval activity record. */
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-#suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
 model KnowledgeBaseSearchIndexActivityRecord
-  extends KnowledgeBaseRetrievalActivityRecord {
+  extends KnowledgeBaseActivityRecord {
+  ...KnowledgeBaseRetrievalActivityRecord;
+
   /** The discriminator value. */
   type: KnowledgeBaseActivityRecordType.searchIndex;
 
@@ -497,10 +494,9 @@ model KnowledgeBaseSearchIndexActivityArguments {
 }
 
 /** Represents a azure blob retrieval activity record. */
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-#suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
-model KnowledgeBaseAzureBlobActivityRecord
-  extends KnowledgeBaseRetrievalActivityRecord {
+model KnowledgeBaseAzureBlobActivityRecord extends KnowledgeBaseActivityRecord {
+  ...KnowledgeBaseRetrievalActivityRecord;
+
   /** The discriminator value. */
   type: KnowledgeBaseActivityRecordType.azureBlob;
 
@@ -515,12 +511,12 @@ model KnowledgeBaseAzureBlobActivityArguments {
 }
 
 /** Represents a indexed SharePoint retrieval activity record. */
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-#suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
 @added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model KnowledgeBaseIndexedSharePointActivityRecord
-  extends KnowledgeBaseRetrievalActivityRecord {
+  extends KnowledgeBaseActivityRecord {
+  ...KnowledgeBaseRetrievalActivityRecord;
+
   /** The discriminator value. */
   type: KnowledgeBaseActivityRecordType.indexedSharePoint;
 
@@ -537,10 +533,10 @@ model KnowledgeBaseIndexedSharePointActivityArguments {
 }
 
 /** Represents a indexed OneLake retrieval activity record. */
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-#suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
 model KnowledgeBaseIndexedOneLakeActivityRecord
-  extends KnowledgeBaseRetrievalActivityRecord {
+  extends KnowledgeBaseActivityRecord {
+  ...KnowledgeBaseRetrievalActivityRecord;
+
   /** The discriminator value. */
   type: KnowledgeBaseActivityRecordType.indexedOneLake;
 
@@ -555,10 +551,9 @@ model KnowledgeBaseIndexedOneLakeActivityArguments {
 }
 
 /** Represents a web retrieval activity record. */
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-#suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
-model KnowledgeBaseWebActivityRecord
-  extends KnowledgeBaseRetrievalActivityRecord {
+model KnowledgeBaseWebActivityRecord extends KnowledgeBaseActivityRecord {
+  ...KnowledgeBaseRetrievalActivityRecord;
+
   /** The discriminator value. */
   type: KnowledgeBaseActivityRecordType.web;
 
@@ -585,12 +580,12 @@ model KnowledgeBaseWebActivityArguments {
 }
 
 /** Represents a remote SharePoint retrieval activity record. */
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-#suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
 @added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model KnowledgeBaseRemoteSharePointActivityRecord
-  extends KnowledgeBaseRetrievalActivityRecord {
+  extends KnowledgeBaseActivityRecord {
+  ...KnowledgeBaseRetrievalActivityRecord;
+
   /** The discriminator value. */
   type: KnowledgeBaseActivityRecordType.remoteSharePoint;
 
@@ -610,12 +605,11 @@ model KnowledgeBaseRemoteSharePointActivityArguments {
 }
 
 /** Represents a WorkIQ retrieval activity record. */
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-#suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
 @added(Versions.v2026_05_01_preview)
-model KnowledgeBaseWorkIQActivityRecord
-  extends KnowledgeBaseRetrievalActivityRecord {
+model KnowledgeBaseWorkIQActivityRecord extends KnowledgeBaseActivityRecord {
+  ...KnowledgeBaseRetrievalActivityRecord;
+
   /** The discriminator value. */
   type: KnowledgeBaseActivityRecordType.workIQ;
 
@@ -633,11 +627,11 @@ model KnowledgeBaseWorkIQActivityArguments {
 }
 
 /** Represents a Fabric Data Agent retrieval activity record. */
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-#suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
 @added(Versions.v2026_05_01_preview)
 model KnowledgeBaseFabricDataAgentActivityRecord
-  extends KnowledgeBaseRetrievalActivityRecord {
+  extends KnowledgeBaseActivityRecord {
+  ...KnowledgeBaseRetrievalActivityRecord;
+
   /** The discriminator value. */
   type: KnowledgeBaseActivityRecordType.fabricDataAgent;
 
@@ -653,11 +647,11 @@ model KnowledgeBaseFabricDataAgentActivityArguments {
 }
 
 /** Represents a Fabric Ontology retrieval activity record. */
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-#suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
 @added(Versions.v2026_05_01_preview)
 model KnowledgeBaseFabricOntologyActivityRecord
-  extends KnowledgeBaseRetrievalActivityRecord {
+  extends KnowledgeBaseActivityRecord {
+  ...KnowledgeBaseRetrievalActivityRecord;
+
   /** The discriminator value. */
   type: KnowledgeBaseActivityRecordType.fabricOntology;
 
@@ -673,11 +667,10 @@ model KnowledgeBaseFabricOntologyActivityArguments {
 }
 
 /** Represents an MCP server retrieval activity record. */
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-#suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
 @added(Versions.v2026_05_01_preview)
-model KnowledgeBaseMcpServerActivityRecord
-  extends KnowledgeBaseRetrievalActivityRecord {
+model KnowledgeBaseMcpServerActivityRecord extends KnowledgeBaseActivityRecord {
+  ...KnowledgeBaseRetrievalActivityRecord;
+
   /** The discriminator value. */
   type: KnowledgeBaseActivityRecordType.mcpServer;
 
@@ -697,11 +690,10 @@ model KnowledgeBaseMcpServerActivityArguments {
 }
 
 /** Represents a File retrieval activity record. */
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-#suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
 @added(Versions.v2026_05_01_preview)
-model KnowledgeBaseFileActivityRecord
-  extends KnowledgeBaseRetrievalActivityRecord {
+model KnowledgeBaseFileActivityRecord extends KnowledgeBaseActivityRecord {
+  ...KnowledgeBaseRetrievalActivityRecord;
+
   /** The discriminator value. */
   type: KnowledgeBaseActivityRecordType.file;
 
@@ -717,11 +709,11 @@ model KnowledgeBaseFileActivityArguments {
 }
 
 /** Represents an indexed SQL retrieval activity record. */
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-#suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
 @added(Versions.v2026_05_01_preview)
 model KnowledgeBaseIndexedSqlActivityRecord
-  extends KnowledgeBaseRetrievalActivityRecord {
+  extends KnowledgeBaseActivityRecord {
+  ...KnowledgeBaseRetrievalActivityRecord;
+
   /** The discriminator value. */
   type: KnowledgeBaseActivityRecordType.indexedSql;
 
