@@ -495,7 +495,7 @@ namespace Azure.ResourceManager.Models {
   FileShare,
 
     | Azure.ClientGenerator.Core.Usage.input
-    | Azure.ClientGenerator.Core.Usage.input,
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 @@usage(
@@ -1308,7 +1308,13 @@ namespace Azure.ResourceManager.Models {
 @@alternateType(ListQueue, StorageQueue, "csharp");
 @@alternateType(ListContainerItem, BlobContainer, "csharp");
 
-@@usage(StorageAccount, Azure.ClientGenerator.Core.Usage.input, "java");
+@@usage(
+  StorageAccount,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "java"
+);
 
 // TODO: drop the type replacement upon next major breaking change
 @@alternateType(IPRule.action, Action, "java");
