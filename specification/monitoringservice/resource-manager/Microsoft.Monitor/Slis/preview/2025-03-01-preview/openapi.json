@@ -414,7 +414,7 @@
         },
         "value": {
           "type": "string",
-          "description": "Value used in filtering."
+          "description": "Value used in filtering. For most operators (eq, ne, lt, lte, gt, gte, startswith, notstartswith, contains, notcontains) this is a single value (for example \"GetContosoUsers\"). For the `in` and `notin` operators, multiple values must be joined by the delimiter `^^` (for example \"east^^west^^north\")."
         }
       },
       "required": [
@@ -476,12 +476,12 @@
           {
             "name": "In",
             "value": "in",
-            "description": "In operator."
+            "description": "Matches when `value` is one of the items in the `^^`-delimited list (for example, `value` = \"east^^west^^north\")."
           },
           {
             "name": "NotIn",
             "value": "notin",
-            "description": "Not in."
+            "description": "Matches when `value` is none of the items in the `^^`-delimited list (for example, `value` = \"east^^west^^north\")."
           },
           {
             "name": "StartsWith",

@@ -79,7 +79,9 @@ model Condition {
   @doc("Operator used in the filtering condition.")
   operator: ConditionOperator;
 
-  @doc("Value used in filtering.")
+  @doc("""
+    Value used in filtering. For most operators (eq, ne, lt, lte, gt, gte, startswith, notstartswith, contains, notcontains) this is a single value (for example "GetContosoUsers"). For the `in` and `notin` operators, multiple values must be joined by the delimiter `^^` (for example "east^^west^^north").
+    """)
   value: string;
 }
 
@@ -140,10 +142,10 @@ union ConditionOperator {
   @doc("Greater than or equal to.")
   GreaterThanOrEqual: "gte",
 
-  @doc("In operator.")
+  @doc("Matches when `value` is one of the items in the `^^`-delimited list (for example, `value` = \"east^^west^^north\").")
   In: "in",
 
-  @doc("Not in.")
+  @doc("Matches when `value` is none of the items in the `^^`-delimited list (for example, `value` = \"east^^west^^north\").")
   NotIn: "notin",
 
   @doc("Starts with.")
