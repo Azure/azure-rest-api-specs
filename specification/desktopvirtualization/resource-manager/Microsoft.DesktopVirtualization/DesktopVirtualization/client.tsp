@@ -945,3 +945,12 @@ using Microsoft.DesktopVirtualization;
   "ExpirationOn",
   "csharp"
 );
+
+@@clientName(MSIXImages, "MsixImages", "java");
+@@clientName(MSIXPackage, "MsixPackage", "java");
+@@clientName(MSIXPackages, "MsixPackages", "java");
+@@clientName(MSIXPackagePatch, "MsixPackagePatch", "java");
+@@clientName(MSIXPackageProperties, "MsixPackageProperties", "java");
+@@clientName(MSIXPackagePatchProperties, "MsixPackagePatchProperties", "java");
+@@clientName(MSIXImageURI, "MsixImageUri", "java");
+@@clientName(SSOSecretType, "SsoSecretType", "java");

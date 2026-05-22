@@ -12,6 +12,13 @@ options:
     emitter-output-dir: "{output-dir}/sdk/desktopvirtualization/{namespace}"
     namespace: "Azure.ResourceManager.DesktopVirtualization"
     enable-wire-path-attribute: true
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-desktopvirtualization"
+    namespace: "com.azure.resourcemanager.desktopvirtualization"
+    service-name: "Desktop Virtualization"
+    payload-flattening-threshold: 1
+    use-object-for-unknown: true
+    flavor: azure
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
