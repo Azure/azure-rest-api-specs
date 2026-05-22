@@ -1424,6 +1424,15 @@ using Microsoft.DataFactory;
   "csharp"
 );
 
+// MPG migration: make PrivateLinkResource (DataFactoryPrivateLinkResource) inherit from ResourceData
+// instead of the spec's local SubResource (back-compat with the previously shipped GA contract).
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  PrivateLinkResource,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+
 // MPG migration: rename operations to match baseline AutoRest SDK method names so
 // downstream consumers compile against the regenerated client without source breaks.
 @@clientName(
