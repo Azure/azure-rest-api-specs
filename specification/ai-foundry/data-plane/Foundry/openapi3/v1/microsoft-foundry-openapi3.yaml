@@ -1818,7 +1818,6 @@ paths:
       description: |-
         Stops a session.
         Returns 204 No Content when the stop succeeds.
-        Returns a failed session resource when the stop attempt fails.
       parameters:
         - name: Foundry-Features
           in: header
@@ -20413,7 +20412,6 @@ components:
       type: object
       required:
         - type
-        - vector_store_ids
       properties:
         type:
           type: string
@@ -20422,11 +20420,6 @@ components:
           description: The type of the file search tool. Always `file_search`.
           x-stainless-const: true
           default: file_search
-        vector_store_ids:
-          type: array
-          items:
-            type: string
-          description: The IDs of the vector stores to search.
         max_num_results:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
@@ -20453,6 +20446,11 @@ components:
             Per-tool configuration map. Keys are tool names or `*` (catch-all default).
             Resolution order: exact tool name match takes priority over `*`.
             Unknown tool names are silently ignored at runtime.
+        vector_store_ids:
+          type: array
+          items:
+            type: string
+          description: The IDs of the vector stores to search.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that searches for relevant content from uploaded files. Learn more about the [file search tool](https://platform.openai.com/docs/guides/tools-file-search).
