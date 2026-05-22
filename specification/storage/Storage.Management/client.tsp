@@ -203,6 +203,8 @@ using Microsoft.Storage;
 
 // Resource type renames for backward compatibility
 @@clientName(BlobServiceProperties, "BlobService", "csharp");
+@@clientName(StaticWebsite, "BlobServiceStaticWebsite", "csharp");
+@@clientName(StaticWebsite.enabled, "IsEnabled", "csharp");
 @@clientName(QueueServiceProperties, "QueueService", "csharp");
 @@clientName(TableServiceProperties, "TableService", "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This operation is pageable for .Net SDK"
