@@ -112,6 +112,21 @@ using Azure.ClientGenerator.Core;
 @@access(VoiceLive.ServerEventResponseTextDone, Access.public, "python");
 @@access(VoiceLive.ServerEventSessionUpdated, Access.public, "python");
 
+@@access(VoiceLive.ClientEventRtcCallSdpCreate, Access.public, "python");
+@@access(VoiceLive.ServerEventRtcCallSdpCreated, Access.public, "python");
+@@access(VoiceLive.ServerEventRtcCallError, Access.public, "python");
+@@access(VoiceLive.RtcCallErrorDetails, Access.public, "python");
+@@access(
+  VoiceLive.ServerEventOutputAudioBufferStarted,
+  Access.public,
+  "python"
+);
+@@access(
+  VoiceLive.ServerEventOutputAudioBufferStopped,
+  Access.public,
+  "python"
+);
+
 @@access(VoiceLive.ToolChoice, Access.public, "python");
 
 @@clientName(VoiceLive.Scene, "SceneParams", "csharp");
@@ -124,6 +139,7 @@ using Azure.ClientGenerator.Core;
   "ToolChoiceFunctionSelection",
   "python"
 );
+@@clientName(VoiceLive.AvatarConfig.type, "avatar_type", "python");
 
 @@access(VoiceLive.ServerEvent, Access.public, "csharp");
 @@access(VoiceLive.ServerEventSessionCreated, Access.public, "csharp");
@@ -168,6 +184,20 @@ using Azure.ClientGenerator.Core;
 @@access(VoiceLive.ClientEventResponseCreate, Access.internal, "csharp");
 @@access(VoiceLive.ClientEventSessionAvatarConnect, Access.internal, "csharp");
 @@access(VoiceLive.ClientEventSessionUpdate, Access.internal, "csharp");
+@@access(VoiceLive.ClientEventRtcCallSdpCreate, Access.internal, "csharp");
+@@access(VoiceLive.ServerEventRtcCallSdpCreated, Access.public, "csharp");
+@@access(VoiceLive.ServerEventRtcCallError, Access.public, "csharp");
+@@access(VoiceLive.RtcCallErrorDetails, Access.public, "csharp");
+@@access(
+  VoiceLive.ServerEventOutputAudioBufferStarted,
+  Access.public,
+  "csharp"
+);
+@@access(
+  VoiceLive.ServerEventOutputAudioBufferStopped,
+  Access.public,
+  "csharp"
+);
 @@access(VoiceLive.VideoCrop.bottom_right, Access.internal, "csharp");
 @@access(VoiceLive.VideoCrop.top_left, Access.internal, "csharp");
 @@access(VoiceLive.Response.voice, Access.internal, "csharp");
@@ -605,6 +635,13 @@ using Azure.ClientGenerator.Core;
 @@access(VoiceLive.ServerEventResponseTextDone, Access.public, "java");
 @@access(VoiceLive.ServerEventSessionUpdated, Access.public, "java");
 
+@@access(VoiceLive.ClientEventRtcCallSdpCreate, Access.public, "java");
+@@access(VoiceLive.ServerEventRtcCallSdpCreated, Access.public, "java");
+@@access(VoiceLive.ServerEventRtcCallError, Access.public, "java");
+@@access(VoiceLive.RtcCallErrorDetails, Access.public, "java");
+@@access(VoiceLive.ServerEventOutputAudioBufferStarted, Access.public, "java");
+@@access(VoiceLive.ServerEventOutputAudioBufferStopped, Access.public, "java");
+
 @@access(VoiceLive.ToolChoice, Access.public, "java");
 @@access(VoiceLive.Voice, Access.public, "java");
 
@@ -994,3 +1031,40 @@ using Azure.ClientGenerator.Core;
   "latencyThresholdInMs",
   "javascript"
 );
+
+@@clientName(
+  VoiceLive.TranscriptionWord.offset_milliseconds,
+  "offsetInMs",
+  "javascript"
+);
+@@clientName(
+  VoiceLive.TranscriptionWord.duration_milliseconds,
+  "durationInMs",
+  "javascript"
+);
+@@clientName(
+  VoiceLive.TranscriptionPhrase.offset_milliseconds,
+  "offsetInMs",
+  "javascript"
+);
+@@clientName(
+  VoiceLive.TranscriptionPhrase.duration_milliseconds,
+  "durationInMs",
+  "javascript"
+);
+@@clientName(VoiceLive.Response, "VoiceLiveResponse", "javascript");
+
+// Explicit client declaration for emitters that require at least one client (e.g. Python).
+// This service is WebSocket-only and has no HTTP operations, so a client must be declared explicitly.
+// Marked internal so it is not part of the public Python API surface; a hand-written client wraps it.
+@access(Access.internal, "python")
+@client(
+  {
+    name: "VoiceLiveClient",
+    service: VoiceLive,
+  },
+  "python"
+)
+namespace VoiceLiveClient {
+
+}

@@ -15,15 +15,23 @@ namespace Microsoft.DocumentDB;
 /**
  * Representation of a managed Cassandra cluster.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ClusterResource
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ClusterResourceProperties> {
+  is Azure.ResourceManager.ProxyResource<ClusterResourceProperties> {
   ...ResourceNameParameter<
     Resource = ClusterResource,
     KeyName = "clusterName",
     SegmentName = "cassandraClusters",
     NamePattern = "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$"
   >;
+
+  /** The location of the resource group to which the resource belongs. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  location?: string;
+
+  /** Tags are a list of key-value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters. For example, the default experience for a template type is set with \"defaultExperience\": \"Cassandra\". Current \"defaultExperience\" values also include \"Table\", \"Graph\", \"DocumentDB\", and \"MongoDB\". */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
 
   /**
    * Identity for the resource.
