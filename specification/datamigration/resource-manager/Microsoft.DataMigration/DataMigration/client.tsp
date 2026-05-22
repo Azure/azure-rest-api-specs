@@ -1327,31 +1327,28 @@ using Microsoft.DataMigration;
   "input",
   "csharp"
 );
-
 @@clientName(
   DatabaseMigrationSqlMis.cancel::parameters.body,
   "input",
   "csharp"
 );
-
 @@clientName(
   DatabaseMigrationSqlMis.cutover::parameters.body,
   "input",
   "csharp"
 );
-
 @@clientName(
   DatabaseMigrationSqlVms.cancel::parameters.body,
   "input",
   "csharp"
 );
-
 @@clientName(
   DatabaseMigrationSqlVms.cutover::parameters.body,
   "input",
   "csharp"
 );
-
 @@clientName(DatabaseMigrationSqlDb.name, "targetDBName", "csharp");
 @@clientName(DatabaseMigrationSqlMi.name, "targetDBName", "csharp");
 @@clientName(DatabaseMigrationSqlVm.name, "targetDBName", "csharp");
+@@clientName(MigrateMISyncCompleteCommandProperties.input, "Input", "csharp");
+@@clientName(MigrateMISyncCompleteCommandProperties.output, "Output", "csharp");
