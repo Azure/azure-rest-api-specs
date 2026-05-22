@@ -286,6 +286,9 @@ union AgentProtocol {
   responses: "responses",
   mcp: "mcp",
   invocations: "invocations",
+
+  @doc("WebSocket-based protocol for hosted voice and real-time streaming agents.")
+  invocations_ws: "invocations_ws",
 }
 
 union AgentEndpointProtocol {
@@ -297,7 +300,6 @@ union AgentEndpointProtocol {
   invocations: "invocations",
 
   @doc("WebSocket-based protocol for hosted voice and real-time streaming agents.")
-  @removed(Versions.v1)
   invocations_ws: "invocations_ws",
 }
 
