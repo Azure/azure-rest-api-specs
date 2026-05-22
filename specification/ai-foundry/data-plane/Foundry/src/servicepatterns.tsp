@@ -10,16 +10,9 @@ namespace Azure.AI.Projects;
 // Foundry Data Plane Operation Infrastructure
 // ============================================================================
 
-alias FoundryDataPlaneApiVersionParameter = {
-  @doc("The API version to use for this operation.")
-  @query("api-version")
-  apiVersion: string;
-};
-
 alias FoundryDataPlaneAzureTraits = Azure.Core.Traits.SupportsClientRequestId &
   Azure.Core.Traits.NoRepeatableRequests &
-  Azure.Core.Traits.NoConditionalRequests &
-  FoundryDataPlaneApiVersionParameter;
+  Azure.Core.Traits.NoConditionalRequests;
 
 alias FoundryAzureOperations<ExtraTraits> = Azure.Core.ResourceOperations<ExtraTraits &
   FoundryDataPlaneAzureTraits>;
@@ -30,7 +23,7 @@ op FoundryDataPlaneOperation<
   Params extends Reflection.Model,
   Response,
   ErrorResponse = ApiErrorResponse
->(...Params, ...FoundryDataPlaneApiVersionParameter): Response | ErrorResponse;
+>(...Params): Response | ErrorResponse;
 
 // ---- Feature opt-in keys & preview headers ----
 
@@ -51,9 +44,7 @@ union FoundryFeaturesOptInKeys {
   memory_stores_v1_preview: "MemoryStores=V1Preview",
 }
 
-alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends
-  | FoundryFeaturesOptInKeys
-  | AgentDefinitionOptInKeys> = {
+alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys> = {
   /**
    * A feature flag opt-in required when using preview operations or modifying persisted preview resources.
    */
@@ -61,9 +52,7 @@ alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends
   foundry_features: RequiredPreviewOptInHeader;
 };
 
-alias WithConditionalFoundryPreviewHeader<OptionalPreviewOptInHeader extends
-  | FoundryFeaturesOptInKeys
-  | AgentDefinitionOptInKeys> = {
+alias WithConditionalFoundryPreviewHeader<OptionalPreviewOptInHeader extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys> = {
   /**
    * A feature flag opt-in required when using preview operations or modifying persisted preview resources.
    */
@@ -445,9 +434,7 @@ op deleteJob is FoundryDataPlaneOperation<
 /** Delete a job (preview). Returns 204 No Content. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job templates are project-standard operations"
 @delete
-op deleteJobPreview<AreaPreviewLabel extends
-  | FoundryFeaturesOptInKeys
-  | AgentDefinitionOptInKeys> is FoundryDataPlanePreviewOperation<
+op deleteJobPreview<AreaPreviewLabel extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys> is FoundryDataPlanePreviewOperation<
   AreaPreviewLabel,
   {
     /** The ID of the job to delete. */
