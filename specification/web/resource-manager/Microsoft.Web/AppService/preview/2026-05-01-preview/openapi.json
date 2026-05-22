@@ -44347,11 +44347,11 @@
       "description": "Principal definition for an MCP server config access policy.",
       "properties": {
         "objectId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Entra ID object ID of the user or group principal."
         },
         "tenantId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Entra ID tenant ID."
         }
       }
@@ -44468,6 +44468,7 @@
         },
         "mcpEndpointUrl": {
           "type": "string",
+          "format": "uri",
           "description": "The MCP protocol endpoint URL.",
           "readOnly": true
         }
@@ -44670,6 +44671,7 @@
         },
         "delay": {
           "type": "string",
+          "format": "duration",
           "description": "Maximum delay before processing each time window. ISO-8601 duration\n(e.g., PT5M). Applies to SlidingWindow triggers."
         },
         "conditions": {

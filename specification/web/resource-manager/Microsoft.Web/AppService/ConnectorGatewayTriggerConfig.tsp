@@ -206,7 +206,7 @@ model ConnectorGatewayTriggerConfigProperties {
     Maximum delay before processing each time window. ISO-8601 duration
     (e.g., PT5M). Applies to SlidingWindow triggers.
     """)
-  delay?: string;
+  delay?: duration;
 
   @doc("Conditions evaluated against trigger outputs. All must be true for a run to be created.")
   @identifiers(#["expression"])

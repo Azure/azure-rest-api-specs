@@ -30,10 +30,10 @@ union ConnectorGatewayMcpServerConfigAccessPolicyPrincipalType {
 @doc("Principal definition for an MCP server config access policy.")
 model ConnectorGatewayMcpServerConfigAccessPolicyPrincipal {
   @doc("Entra ID object ID of the user or group principal.")
-  objectId?: string;
+  objectId?: Azure.Core.uuid;
 
   @doc("Entra ID tenant ID.")
-  tenantId?: string;
+  tenantId?: Azure.Core.uuid;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "MCP server config access policies are provisioned synchronously and intentionally omit provisioningState. This is asymmetric with connections/accessPolicies, where policy provisioning is async."

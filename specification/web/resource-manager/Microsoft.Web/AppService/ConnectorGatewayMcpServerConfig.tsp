@@ -326,7 +326,7 @@ model ConnectorGatewayMcpServerConfigProperties {
 
   @doc("The MCP protocol endpoint URL.")
   @visibility(Lifecycle.Read)
-  mcpEndpointUrl?: string;
+  mcpEndpointUrl?: url;
 }
 
 @added(Versions.v2026_05_01_preview)
