@@ -24,7 +24,7 @@ To see additional help and options, run:
 
 These are the global settings for the KeyVault API.
 
-``` yaml
+```yaml
 openapi-type: data-plane
 tag: package-preview-7.6-preview.1
 ```
@@ -33,7 +33,7 @@ tag: package-preview-7.6-preview.1
 
 These settings apply only when `--tag=package-preview-7.6-preview.1` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-7.6-preview.1'
+```yaml $(tag) == 'package-preview-7.6-preview.1'
 input-file:
   - preview/7.6-preview.1/backuprestore.json
   - preview/7.6-preview.1/certificates.json
@@ -50,7 +50,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-7.5-preview.1` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-7.5-preview.1'
+```yaml $(tag) == 'package-preview-7.5-preview.1'
 input-file:
   - preview/7.5-preview.1/backuprestore.json
   - preview/7.5-preview.1/certificates.json
@@ -67,7 +67,7 @@ input-file:
 
 These settings apply only when `--tag=package-7.4` is specified on the command line.
 
-``` yaml $(tag) == 'package-7.4'
+```yaml $(tag) == 'package-7.4'
 input-file:
   - stable/7.4/backuprestore.json
   - stable/7.4/certificates.json
@@ -84,7 +84,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-7.4-preview.1` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-7.4-preview.1'
+```yaml $(tag) == 'package-preview-7.4-preview.1'
 input-file:
   - preview/7.4-preview.1/backuprestore.json
   - preview/7.4-preview.1/certificates.json
@@ -101,7 +101,7 @@ input-file:
 
 These settings apply only when `--tag=package-7.3` is specified on the command line.
 
-``` yaml $(tag) == 'package-7.3'
+```yaml $(tag) == 'package-7.3'
 input-file:
   - stable/7.3/backuprestore.json
   - stable/7.3/certificates.json
@@ -117,7 +117,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-7.3-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-7.3-preview'
+```yaml $(tag) == 'package-preview-7.3-preview'
 input-file:
   - preview/7.3-preview/backuprestore.json
   - preview/7.3-preview/certificates.json
@@ -133,94 +133,94 @@ input-file:
 
 These settings apply only when `--tag=package-7.2` is specified on the command line.
 
-``` yaml $(tag) == 'package-7.2'
+```yaml $(tag) == 'package-7.2'
 input-file:
-- stable/7.2/certificates.json
-- stable/7.2/common.json
-- stable/7.2/keys.json
-- stable/7.2/rbac.json
-- stable/7.2/secrets.json
-- stable/7.2/storage.json
-- stable/7.2/backuprestore.json
-- stable/7.2/securitydomain.json
+  - stable/7.2/certificates.json
+  - stable/7.2/common.json
+  - stable/7.2/keys.json
+  - stable/7.2/rbac.json
+  - stable/7.2/secrets.json
+  - stable/7.2/storage.json
+  - stable/7.2/backuprestore.json
+  - stable/7.2/securitydomain.json
 ```
 
 ### Tag: package-7.2-preview
 
 These settings apply only when `--tag=package-7.2-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-7.2-preview'
+```yaml $(tag) == 'package-7.2-preview'
 input-file:
-- preview/7.2-preview/certificates.json
-- preview/7.2-preview/common.json
-- preview/7.2-preview/keys.json
-- preview/7.2-preview/rbac.json
-- preview/7.2-preview/secrets.json
-- preview/7.2-preview/storage.json
-- preview/7.2-preview/backuprestore.json
-- preview/7.2-preview/securitydomain.json
+  - preview/7.2-preview/certificates.json
+  - preview/7.2-preview/common.json
+  - preview/7.2-preview/keys.json
+  - preview/7.2-preview/rbac.json
+  - preview/7.2-preview/secrets.json
+  - preview/7.2-preview/storage.json
+  - preview/7.2-preview/backuprestore.json
+  - preview/7.2-preview/securitydomain.json
 ```
 
 ### Tag: package-7.1
 
 These settings apply only when `--tag=package-7.1` is specified on the command line.
 
-``` yaml $(tag) == 'package-7.1'
+```yaml $(tag) == 'package-7.1'
 input-file:
-- stable/7.1/certificates.json
-- stable/7.1/common.json
-- stable/7.1/keys.json
-- stable/7.1/secrets.json
-- stable/7.1/storage.json
+  - stable/7.1/certificates.json
+  - stable/7.1/common.json
+  - stable/7.1/keys.json
+  - stable/7.1/secrets.json
+  - stable/7.1/storage.json
 ```
 
 ### Tag: package-7.1-preview
 
 These settings apply only when `--tag=package-7.1-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-7.1-preview'
+```yaml $(tag) == 'package-7.1-preview'
 input-file:
-- preview/7.1-preview/certificates.json
-- preview/7.1-preview/common.json
-- preview/7.1-preview/keys.json
-- preview/7.1-preview/secrets.json
-- preview/7.1-preview/storage.json
+  - preview/7.1-preview/certificates.json
+  - preview/7.1-preview/common.json
+  - preview/7.1-preview/keys.json
+  - preview/7.1-preview/secrets.json
+  - preview/7.1-preview/storage.json
 ```
 
 ### Tag: package-7.0
 
 These settings apply only when `--tag=package-7.0` is specified on the command line.
 
-``` yaml $(tag) == 'package-7.0'
+```yaml $(tag) == 'package-7.0'
 input-file:
-- stable/7.0/keyvault.json
+  - stable/7.0/keyvault.json
 ```
 
 ### Tag: package-7.0-preview
 
 These settings apply only when `--tag=package-7.0-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-7.0-preview'
+```yaml $(tag) == 'package-7.0-preview'
 input-file:
-- preview/7.0-preview/keyvault.json
+  - preview/7.0-preview/keyvault.json
 ```
 
 ### Tag: package-2016-10
 
 These settings apply only when `--tag=package-2016-10` is specified on the command line.
 
-``` yaml $(tag) == 'package-2016-10'
+```yaml $(tag) == 'package-2016-10'
 input-file:
-- stable/2016-10-01/keyvault.json
+  - stable/2016-10-01/keyvault.json
 ```
 
 ### Tag: package-2015-06
 
 These settings apply only when `--tag=package-2015-06` is specified on the command line.
 
-``` yaml $(tag) == 'package-2015-06'
+```yaml $(tag) == 'package-2015-06'
 input-file:
-- stable/2015-06-01/keyvault.json
+  - stable/2015-06-01/keyvault.json
 ```
 
 ---
@@ -231,17 +231,17 @@ input-file:
 
 These transforms apply to any generator.
 
-``` yaml
+```yaml
 directive:
-# Rename models back to what they were before 7.4 for autorest-based code generators.
-# Generated names were disambiguated for generators not using autorest but still processing x-ms-enum.name.
-# See https://github.com/Azure/azure-rest-api-specs/pull/22435 for details.
-- from: certificates.json
-  where: $.definitions.Action
-  transform: $.properties.action_type["x-ms-enum"].name = "ActionType";
-- from: keys.json
-  where: $.definitions.LifetimeActionsType
-  transform: $.properties.type["x-ms-enum"].name = "ActionType";
+  # Rename models back to what they were before 7.4 for autorest-based code generators.
+  # Generated names were disambiguated for generators not using autorest but still processing x-ms-enum.name.
+  # See https://github.com/Azure/azure-rest-api-specs/pull/22435 for details.
+  - from: certificates.json
+    where: $.definitions.Action
+    transform: $.properties.action_type["x-ms-enum"].name = "ActionType";
+  - from: keys.json
+    where: $.definitions.LifetimeActionsType
+    transform: $.properties.type["x-ms-enum"].name = "ActionType";
 ```
 
 ## C#
@@ -249,7 +249,7 @@ directive:
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
 
-``` yaml $(csharp)
+```yaml $(csharp)
 csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
@@ -268,7 +268,7 @@ See configuration in [readme.go.md](./readme.go.md)
 These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
-``` yaml $(java)
+```yaml $(java)
 java:
   azure-arm: true
   namespace: com.microsoft.azure.keyvault
@@ -284,7 +284,7 @@ AutoRest V3 generators require the use of `--tag=all-api-versions` to select api
 
 This block is updated by an automatic script. Edits may be lost!
 
-``` yaml $(tag) == 'all-api-versions' /* autogenerated */
+```yaml $(tag) == 'all-api-versions' /* autogenerated */
 # include the azure profile definitions from the standard location
 require: $(this-folder)/../../../profiles/readme.md
 
@@ -320,20 +320,19 @@ input-file:
   - $(this-folder)/preview/7.0-preview/keyvault.json
   - $(this-folder)/stable/2016-10-01/keyvault.json
   - $(this-folder)/stable/2015-06-01/keyvault.json
-
 ```
 
 If there are files that should not be in the `all-api-versions` set,
-uncomment the  `exclude-file` section below and add the file paths.
+uncomment the `exclude-file` section below and add the file paths.
 
-``` yaml $(tag) == 'all-api-versions'
+```yaml $(tag) == 'all-api-versions'
 #exclude-file:
 #  - $(this-folder)/stable/2010-01-01/somefile.json
 ```
 
 ## Suppression
 
-``` yaml
+```yaml
 directive:
   - suppress: IntegerTypeMustHaveFormat
     from: securitydomain.json

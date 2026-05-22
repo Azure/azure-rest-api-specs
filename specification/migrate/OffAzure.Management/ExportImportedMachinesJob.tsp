@@ -72,6 +72,7 @@ interface ExportImportedMachinesJobs {
 }
 
 @@doc(ExportImportedMachinesJob.name, "Job Arm Name.");
-@@doc(ExportImportedMachinesJob.properties,
+@@doc(
+  ExportImportedMachinesJob.properties,
   "Gets or sets the export machines job properties."
 );

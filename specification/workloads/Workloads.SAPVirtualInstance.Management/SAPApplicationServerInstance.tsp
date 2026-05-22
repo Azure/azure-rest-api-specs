@@ -74,18 +74,23 @@ interface SAPApplicationServerInstances {
   >;
 }
 
-@@doc(SAPApplicationServerInstance.name,
+@@doc(
+  SAPApplicationServerInstance.name,
   "The name of SAP Application Server instance resource."
 );
-@@doc(SAPApplicationServerInstances.create::parameters.resource,
+@@doc(
+  SAPApplicationServerInstances.create::parameters.resource,
   "The SAP Application Server Instance resource request body."
 );
-@@doc(SAPApplicationServerInstances.update::parameters.properties,
+@@doc(
+  SAPApplicationServerInstances.update::parameters.properties,
   "The SAP Application Server Instance resource request body."
 );
-@@doc(SAPApplicationServerInstances.start::parameters.body,
+@@doc(
+  SAPApplicationServerInstances.start::parameters.body,
   "SAP Application server instance start request body."
 );
-@@doc(SAPApplicationServerInstances.stop::parameters.body,
+@@doc(
+  SAPApplicationServerInstances.stop::parameters.body,
   "SAP Application server instance stop request body."
 );

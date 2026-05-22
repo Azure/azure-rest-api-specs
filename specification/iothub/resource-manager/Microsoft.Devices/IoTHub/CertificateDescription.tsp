@@ -130,12 +130,15 @@ interface CertificateDescriptions {
 }
 
 @@doc(CertificateDescription.name, "The name of the certificate");
-@@doc(CertificateDescription.properties,
+@@doc(
+  CertificateDescription.properties,
   "The description of an X509 CA Certificate."
 );
-@@doc(CertificateDescriptions.createOrUpdate::parameters.resource,
+@@doc(
+  CertificateDescriptions.createOrUpdate::parameters.resource,
   "The certificate body."
 );
-@@doc(CertificateDescriptions.verify::parameters.body,
+@@doc(
+  CertificateDescriptions.verify::parameters.body,
   "The name of the certificate"
 );

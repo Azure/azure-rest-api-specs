@@ -12,6 +12,7 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.Chaos;
 @removed(Microsoft.Chaos.Versions.v2025_01_01)
+@added(Microsoft.Chaos.Versions.v2026_05_01_preview)
 @armResourceOperations
 interface PrivateEndpointConnections {
   /**
@@ -38,7 +39,8 @@ interface PrivateEndpointConnections {
   >;
 }
 
-@@doc(PrivateEndpointConnection.name,
+@@doc(
+  PrivateEndpointConnection.name,
   "The name of the private endpoint connection."
 );
 @@doc(PrivateEndpointConnection.properties, "Resource properties.");

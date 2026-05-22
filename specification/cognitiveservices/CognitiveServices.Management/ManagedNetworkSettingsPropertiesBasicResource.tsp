@@ -43,8 +43,10 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
     ManagedNetworkSettingsPropertiesBasicResource,
     LroHeaders = ArmLroLocationHeader<FinalResult = ManagedNetworkSettingsPropertiesBasicResource> &
       Azure.Core.Foundations.RetryAfterHeader,
-    Response = ArmResourceUpdatedResponse<ManagedNetworkSettingsPropertiesBasicResource> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedNetworkSettingsPropertiesBasicResource> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<ManagedNetworkSettingsPropertiesBasicResource>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedNetworkSettingsPropertiesBasicResource> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -101,42 +103,55 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
   >;
 }
 
-@@doc(ManagedNetworkSettingsPropertiesBasicResource.name,
+@@doc(
+  ManagedNetworkSettingsPropertiesBasicResource.name,
   "Name of the managedNetwork associated with the cognitive services account. Only 'default' is supported."
 );
-@@doc(ManagedNetworkSettingsPropertiesBasicResource.properties,
+@@doc(
+  ManagedNetworkSettingsPropertiesBasicResource.properties,
   "The properties of the managed network settings of a cognitive services account."
 );
-@@doc(ManagedNetworkSettingsPropertiesBasicResources.put::parameters.resource,
+@@doc(
+  ManagedNetworkSettingsPropertiesBasicResources.put::parameters.resource,
   "The Managed Network Settings object of the account."
 );
-@@doc(ManagedNetworkSettingsPropertiesBasicResources.patch::parameters.properties,
+@@doc(
+  ManagedNetworkSettingsPropertiesBasicResources.patch::parameters.properties,
   "The Managed Network Settings object of the account."
 );
-@@doc(ManagedNetworkSettingsPropertiesBasicResources.post::parameters.body,
+@@doc(
+  ManagedNetworkSettingsPropertiesBasicResources.post::parameters.body,
   "The Managed Network Settings object of the account."
 );
-@@summary(ManagedNetworkSettingsPropertiesBasicResources.list,
+@@summary(
+  ManagedNetworkSettingsPropertiesBasicResources.list,
   "List API for managed network settings of a cognitive services account."
 );
-@@summary(ManagedNetworkSettingsPropertiesBasicResources.get,
+@@summary(
+  ManagedNetworkSettingsPropertiesBasicResources.get,
   "Get API for managed network settings of a cognitive services account."
 );
-@@summary(ManagedNetworkSettingsPropertiesBasicResources.put,
+@@summary(
+  ManagedNetworkSettingsPropertiesBasicResources.put,
   "PUT API for managed network settings of a cognitive services account."
 );
-@@summary(ManagedNetworkSettingsPropertiesBasicResources.patch,
+@@summary(
+  ManagedNetworkSettingsPropertiesBasicResources.patch,
   "Patch API for managed network settings of a cognitive services account."
 );
-@@summary(ManagedNetworkSettingsPropertiesBasicResources.delete,
+@@summary(
+  ManagedNetworkSettingsPropertiesBasicResources.delete,
   "Delete API for managed network settings of a cognitive services account."
 );
-@@summary(ManagedNetworkSettingsPropertiesBasicResources.post,
+@@summary(
+  ManagedNetworkSettingsPropertiesBasicResources.post,
   "The POST API for updating the outbound rules of the managed network associated with the cognitive services account."
 );
-@@doc(ManagedNetworkSettingsPropertiesBasicResources.provisionManagedNetwork::parameters.body,
+@@doc(
+  ManagedNetworkSettingsPropertiesBasicResources.provisionManagedNetwork::parameters.body,
   "Managed Network Provisioning Options for a cognitive services account."
 );
-@@summary(ManagedNetworkSettingsPropertiesBasicResources.provisionManagedNetwork,
+@@summary(
+  ManagedNetworkSettingsPropertiesBasicResources.provisionManagedNetwork,
   "Provisions the managed network of a cognitive services account."
 );

@@ -7,7 +7,8 @@ using Azure.ResourceManager.Foundations;
 using Microsoft.StorageActions;
 
 @@clientName(Microsoft.StorageActions, "StorageActionsMgmtClient", "python");
-@@clientName(Microsoft.StorageActions,
+@@clientName(
+  Microsoft.StorageActions,
   "StorageActionsManagementClient",
   "javascript"
 );
@@ -21,12 +22,14 @@ using Microsoft.StorageActions;
 @@clientName(RunResult, "StorageTaskRunResult", "csharp");
 @@clientName(RunStatusEnum, "StorageTaskRunStatus", "csharp");
 @@clientName(StorageTaskProperties.enabled, "IsEnabled", "csharp");
-@@clientName(StorageTasks.storageTaskAssignmentList,
+@@clientName(
+  StorageTasks.storageTaskAssignmentList,
   "GetStorageTaskAssignments",
   "csharp"
 );
 @@clientName(StorageTasks.list, "GetStorageTasksReports", "csharp");
-@@clientName(StorageTasksOperationGroup.previewActions,
+@@clientName(
+  StorageTasksOperationGroup.previewActions,
   "PreviewActions",
   "csharp"
 );
@@ -40,7 +43,8 @@ namespace Azure.ResourceManager.Models {
   }
 }
 
-@@alternateType(Microsoft.StorageActions.StorageTaskAssignmentsListResult.value,
+@@alternateType(
+  Microsoft.StorageActions.StorageTaskAssignmentsListResult.value,
   Azure.ResourceManager.Models.SubResource[],
   "csharp"
 );
