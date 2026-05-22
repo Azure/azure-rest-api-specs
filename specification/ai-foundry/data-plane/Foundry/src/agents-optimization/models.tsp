@@ -234,9 +234,6 @@ model OptimizationJobInputs {
 
 @doc("In-flight progress; only populated while status is queued or in_progress.")
 model OptimizationJobProgress {
-  @doc("Target attribute currently being explored.")
-  currentTargetAttribute: TargetAttribute;
-
   @doc("1-based current iteration index.")
   currentIteration: int32;
 
