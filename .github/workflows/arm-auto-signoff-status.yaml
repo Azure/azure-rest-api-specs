@@ -11,11 +11,14 @@ on:
       - labeled
       - unlabeled
   workflow_run:
-    workflows:
-      [
+    workflows: [
         "ARM Auto SignOff - Analyze Code",
         "Swagger Avocado - Set Status",
         "Swagger LintDiff - Set Status",
+        # Trigger after Summarize Checks to re-evaluate when NotReadyForARMReview is removed
+        # (label changes by workflows don't trigger pull_request_target events).
+        # See: https://github.com/Azure/azure-rest-api-specs/pull/42239
+        "Summarize Checks",
       ]
     types: [completed]
 
