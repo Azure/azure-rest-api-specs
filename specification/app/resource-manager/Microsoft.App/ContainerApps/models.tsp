@@ -2088,7 +2088,7 @@ model CustomDomainConfiguration {
    * PFX or PEM blob
    */
   @secret
-  certificateValue?: string;
+  certificateValue?: bytes;
 
   /**
    * Certificate password
@@ -2200,7 +2200,7 @@ model CertificateProperties {
    */
   @visibility(Lifecycle.Create)
   @secret
-  value?: string;
+  value?: bytes;
 
   /**
    * Certificate issuer.
@@ -4971,18 +4971,6 @@ union ExtendedLocationTypes {
 }
 
 /**
- * The type of extendedLocation.
- */
-union ExtendedLocationType {
-  string,
-
-  /**
-   * CustomLocation
-   */
-  CustomLocation: "CustomLocation",
-}
-
-/**
  * Metadata to represent the container app kind, representing if a container app is workflowapp or functionapp.
  */
 union Kind {
@@ -6804,8 +6792,7 @@ model ExtendedLocation {
   /**
    * The type of the extended location.
    */
-  @typeChangedFrom(Versions.v2026_01_01, ExtendedLocationTypes)
-  type?: ExtendedLocationType;
+  type?: ExtendedLocationTypes;
 }
 
 /**
