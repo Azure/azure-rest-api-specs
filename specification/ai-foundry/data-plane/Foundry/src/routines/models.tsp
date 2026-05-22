@@ -48,7 +48,7 @@ model TimerRoutineTrigger extends RoutineTrigger {
   @doc("Trigger type discriminator.")
   type: RoutineTriggerType.Timer;
 
-  @doc("One-shot fire time in ISO 8601 format. Example: `\"2030-01-02T03:04:05Z\"`.")
+  @doc("One-shot fire time or delay. Supported values: ISO-8601 timestamp with explicit offset (e.g., `\"2030-01-02T03:04:05Z\"`), a local timestamp paired with `time_zone`, or a positive duration from now (e.g., `\"30m\"`, `\"2h\"`). The built-in `reminder` agent tool writes this field as `\"{minutes}m\"`.")
   at?: string;
 
   @doc("IANA/Windows time zone identifier. Example: `\"UTC\"` or `\"America/Los_Angeles\"`.")
@@ -105,8 +105,8 @@ model InvokeAgentResponsesApiRoutineAction extends RoutineAction {
   @doc("Agent endpoint target for endpoint-scoped protocol routes. Exactly one of `agent_id` or `agent_endpoint_id` must be provided.")
   agent_endpoint_id?: string;
 
-  @doc("Optional existing conversation ID to continue across scheduled fires.")
-  conversation_id?: string;
+  @doc("Optional existing conversation ID to continue across scheduled fires. Wire-format field name is `conversation`.")
+  conversation?: string;
 }
 
 @doc("Action that invokes a published agent via the endpoint invocations API.")
