@@ -3151,6 +3151,9 @@
         "x-ms-examples": {
           "PutDeployment": {
             "$ref": "./examples/PutDeployment.json"
+          },
+          "PutDeploymentWithSpeculativeDecoding": {
+            "$ref": "./examples/PutDeploymentWithSpeculativeDecoding.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -13221,6 +13224,10 @@
           "$ref": "#/definitions/DeploymentModel",
           "description": "Properties of Cognitive Services account deployment model."
         },
+        "speculativeDecoding": {
+          "$ref": "#/definitions/DeploymentSpeculativeDecoding",
+          "description": "Speculative decoding settings for the deployment. This configuration applies to Fireworks model formats."
+        },
         "scaleSettings": {
           "$ref": "#/definitions/DeploymentScaleSettings",
           "description": "Properties of Cognitive Services account deployment model. (Deprecated, please use Deployment.sku instead.)"
@@ -13458,6 +13465,26 @@
           ]
         }
       }
+    },
+    "DeploymentSpeculativeDecoding": {
+      "type": "object",
+      "description": "Speculative decoding settings for a deployment.",
+      "properties": {
+        "draftModel": {
+          "$ref": "#/definitions/DeploymentModel",
+          "description": "Draft model used to generate speculative decoding tokens."
+        },
+        "draftTokenCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of draft tokens attempted per speculation step.",
+          "default": 4,
+          "minimum": 1
+        }
+      },
+      "required": [
+        "draftModel"
+      ]
     },
     "DeploymentState": {
       "type": "string",
