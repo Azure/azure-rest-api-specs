@@ -104,9 +104,11 @@ interface InterconnectBlocks {
 
 @@doc(InterconnectBlock.name, "The name of the Interconnect Block.");
 @@doc(InterconnectBlock.properties, "Properties of the Interconnect Block.");
-@@doc(InterconnectBlocks.createOrUpdate::parameters.resource,
+@@doc(
+  InterconnectBlocks.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Interconnect Block."
 );
-@@doc(InterconnectBlocks.update::parameters.properties,
+@@doc(
+  InterconnectBlocks.update::parameters.properties,
   "Parameters supplied to the Update Interconnect Block operation."
 );
