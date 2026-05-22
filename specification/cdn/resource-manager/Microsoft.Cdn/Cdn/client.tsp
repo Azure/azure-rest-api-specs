@@ -1417,6 +1417,36 @@ using Azure.ResourceManager;
 @@clientName(Endpoints.listResourceUsage, "GetResourceUsages", "csharp");
 @@clientName(RuleSets.listResourceUsage, "GetResourceUsages", "csharp");
 
+// Python SDK customizations: preserve client name and enum member names from the
+// pre-migration Swagger SDK to avoid breaking changes for existing consumers.
+@@clientName(Microsoft.Cdn, "CdnManagementClient", "python");
+@@clientName(DeliveryRuleActionName, "DeliveryRuleActionEnum", "python");
+@@clientName(
+  PolicySettingsDefaultCustomBlockResponseStatusCode.`200`,
+  "TWO_HUNDRED",
+  "python"
+);
+@@clientName(
+  PolicySettingsDefaultCustomBlockResponseStatusCode.`403`,
+  "FOUR_HUNDRED_THREE",
+  "python"
+);
+@@clientName(
+  PolicySettingsDefaultCustomBlockResponseStatusCode.`405`,
+  "FOUR_HUNDRED_FIVE",
+  "python"
+);
+@@clientName(
+  PolicySettingsDefaultCustomBlockResponseStatusCode.`406`,
+  "FOUR_HUNDRED_SIX",
+  "python"
+);
+@@clientName(
+  PolicySettingsDefaultCustomBlockResponseStatusCode.`429`,
+  "FOUR_HUNDRED_TWENTY_NINE",
+  "python"
+);
+
 // Mark CustomDomains.create as ARM CreateOrUpdate operation
 // so that the SDK generator produces CreateOrUpdate methods
 @@armResourceCreateOrUpdate(CustomDomains.create, CustomDomain);
