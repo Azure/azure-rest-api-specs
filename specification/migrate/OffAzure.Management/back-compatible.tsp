@@ -703,3 +703,7 @@ using Microsoft.OffAzure;
   SiteHealthSummaryCollection.value,
   #["applianceName"]
 );
+@@clientName(
+  TomcatWebApplicationsController.update::parameters.properties,
+  "body"
+);
