@@ -20,6 +20,7 @@ tags:
   - name: Insights
   - name: Models
   - name: Memory Stores
+  - name: Chat
   - name: Conversations
   - name: Evals
   - name: Fine-Tuning
@@ -1908,7 +1909,6 @@ paths:
       description: |-
         Stops a session.
         Returns 204 No Content when the stop succeeds.
-        Returns a failed session resource when the stop attempt fails.
       parameters:
         - name: Foundry-Features
           in: header
@@ -7607,6 +7607,2017 @@ paths:
       x-ms-foundry-meta:
         required_previews:
           - Models=V1Preview
+  /openai/v1/chat/completions:
+    get:
+      operationId: Chat_listChatCompletions
+      summary: |
+        List stored Chat Completions. Only Chat Completions that have been stored
+        with the `store` parameter set to `true` will be returned.
+      parameters:
+        - name: model
+          in: query
+          required: false
+          description: The model used to generate the Chat Completions.
+          schema:
+            type: string
+        - name: metadata
+          in: query
+          required: false
+          description: |-
+            A list of metadata keys to filter the Chat Completions by. Example:
+            `metadata[key1]=value1&metadata[key2]=value2`
+          schema:
+            type: object
+            allOf:
+              - $ref: '#/components/schemas/OpenAI.Metadata'
+            nullable: true
+        - name: after
+          in: query
+          required: false
+          description: Identifier for the last chat completion from the previous pagination request.
+          schema:
+            type: string
+            x-ms-list-continuation-token: true
+          x-ms-list-continuation-token: true
+        - name: limit
+          in: query
+          required: false
+          description: Number of Chat Completions to retrieve.
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/OpenAI.integer'
+            default: 20
+        - name: order
+          in: query
+          required: false
+          description: Sort order for Chat Completions by timestamp. Use `asc` for ascending order or `desc` for descending order. Defaults to `asc`.
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/OpenAI.OrderEnum'
+            default: asc
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.ChatCompletionList'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.ErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.ErrorResponse'
+      tags:
+        - Chat
+      x-oaiMeta:
+        name: List Chat Completions
+        group: chat
+        returns: A list of [Chat Completions](/docs/api-reference/chat/list-object) matching the specified filters.
+        path: list
+        examples:
+          request:
+            curl: |
+              curl https://api.openai.com/v1/chat/completions \
+                -H "Authorization: Bearer $OPENAI_API_KEY" \
+                -H "Content-Type: application/json"
+            python: |-
+              import os
+              from openai import OpenAI
+
+              client = OpenAI(
+                  api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              )
+              page = client.chat.completions.list()
+              page = page.data[0]
+              print(page.id)
+            node.js: |-
+              import OpenAI from 'openai';
+
+              const client = new OpenAI({
+                apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              });
+
+              // Automatically fetches more pages as needed.
+              for await (const chatCompletion of client.chat.completions.list()) {
+                console.log(chatCompletion.id);
+              }
+            go: |
+              package main
+
+              import (
+              	"context"
+              	"fmt"
+
+              	"github.com/openai/openai-go"
+              	"github.com/openai/openai-go/option"
+              )
+
+              func main() {
+              	client := openai.NewClient(
+              		option.WithAPIKey("My API Key"),
+              	)
+              	page, err := client.Chat.Completions.List(context.TODO(), openai.ChatCompletionListParams{})
+              	if err != nil {
+              		panic(err.Error())
+              	}
+              	fmt.Printf("%+v
+              ", page)
+              }
+            java: |-
+              package com.openai.example;
+
+              import com.openai.client.OpenAIClient;
+              import com.openai.client.okhttp.OpenAIOkHttpClient;
+              import com.openai.models.chat.completions.ChatCompletionListPage;
+              import com.openai.models.chat.completions.ChatCompletionListParams;
+
+              public final class Main {
+                  private Main() {}
+
+                  public static void main(String[] args) {
+                      OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+
+                      ChatCompletionListPage page = client.chat().completions().list();
+                  }
+              }
+            ruby: |-
+              require "openai"
+
+              openai = OpenAI::Client.new(api_key: "My API Key")
+
+              page = openai.chat.completions.list
+
+              puts(page)
+          response: |
+            {
+              "object": "list",
+              "data": [
+                {
+                  "object": "chat.completion",
+                  "id": "chatcmpl-AyPNinnUqUDYo9SAdA52NobMflmj2",
+                  "model": "gpt-4.1-2025-04-14",
+                  "created": 1738960610,
+                  "request_id": "req_ded8ab984ec4bf840f37566c1011c417",
+                  "tool_choice": null,
+                  "usage": {
+                    "total_tokens": 31,
+                    "completion_tokens": 18,
+                    "prompt_tokens": 13
+                  },
+                  "seed": 4944116822809979520,
+                  "top_p": 1.0,
+                  "temperature": 1.0,
+                  "presence_penalty": 0.0,
+                  "frequency_penalty": 0.0,
+                  "system_fingerprint": "fp_50cad350e4",
+                  "input_user": null,
+                  "service_tier": "default",
+                  "tools": null,
+                  "metadata": {},
+                  "choices": [
+                    {
+                      "index": 0,
+                      "message": {
+                        "content": "Mind of circuits hum,
+            Learning patterns in silence—
+            Future's quiet spark.",
+                        "role": "assistant",
+                        "tool_calls": null,
+                        "function_call": null
+                      },
+                      "finish_reason": "stop",
+                      "logprobs": null
+                    }
+                  ],
+                  "response_format": null
+                }
+              ],
+              "first_id": "chatcmpl-AyPNinnUqUDYo9SAdA52NobMflmj2",
+              "last_id": "chatcmpl-AyPNinnUqUDYo9SAdA52NobMflmj2",
+              "has_more": false
+            }
+      x-ms-list: true
+    post:
+      operationId: Chat_createChatCompletion
+      summary: |
+        **Starting a new project?** We recommend trying [Responses](/docs/api-reference/responses)
+        to take advantage of the latest OpenAI platform features. Compare
+        [Chat Completions with Responses](/docs/guides/responses-vs-chat-completions?api-mode=responses).
+
+        ---
+
+        Creates a model response for the given chat conversation. Learn more in the
+        [text generation](/docs/guides/text-generation), [vision](/docs/guides/vision),
+        and [audio](/docs/guides/audio) guides.
+
+        Parameter support can differ depending on the model used to generate the
+        response, particularly for newer reasoning models. Parameters that are only
+        supported for reasoning models are noted below. For the current state of
+        unsupported parameters in reasoning models,
+        [refer to the reasoning guide](/docs/guides/reasoning).
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.CreateChatCompletionResponse'
+            text/event-stream:
+              schema:
+                type: string
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.ErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.ErrorResponse'
+      tags:
+        - Chat
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OpenAI.CreateChatCompletionRequest'
+      x-oaiMeta:
+        name: Create chat completion
+        group: chat
+        returns: |
+          Returns a [chat completion](/docs/api-reference/chat/object) object, or a streamed sequence of [chat completion chunk](/docs/api-reference/chat/streaming) objects if the request is streamed.
+        path: create
+        examples:
+          - title: Default
+            request:
+              curl: |
+                curl https://api.openai.com/v1/chat/completions \
+                  -H "Content-Type: application/json" \
+                  -H "Authorization: Bearer $OPENAI_API_KEY" \
+                  -d '{
+                    "model": "VAR_chat_model_id",
+                    "messages": [
+                      {
+                        "role": "developer",
+                        "content": "You are a helpful assistant."
+                      },
+                      {
+                        "role": "user",
+                        "content": "Hello!"
+                      }
+                    ]
+                  }'
+              python: |-
+                import os
+                from openai import OpenAI
+
+                client = OpenAI(
+                    api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+                )
+                chat_completion = client.chat.completions.create(
+                    messages=[{
+                        "content": "string",
+                        "role": "developer",
+                    }],
+                    model="gpt-4o",
+                )
+                print(chat_completion)
+              javascript: |
+                import OpenAI from "openai";
+
+                const openai = new OpenAI();
+
+                async function main() {
+                  const completion = await openai.chat.completions.create({
+                    messages: [{ role: "developer", content: "You are a helpful assistant." }],
+                    model: "VAR_chat_model_id",
+                    store: true,
+                  });
+
+                  console.log(completion.choices[0]);
+                }
+
+                main();
+              csharp: |
+                using System;
+                using System.Collections.Generic;
+
+                using OpenAI.Chat;
+
+                ChatClient client = new(
+                    model: "gpt-4.1",
+                    apiKey: Environment.GetEnvironmentVariable("OPENAI_API_KEY")
+                );
+
+                List<ChatMessage> messages =
+                [
+                    new SystemChatMessage("You are a helpful assistant."),
+                    new UserChatMessage("Hello!")
+                ];
+
+                ChatCompletion completion = client.CompleteChat(messages);
+
+                Console.WriteLine(completion.Content[0].Text);
+              node.js: |-
+                import OpenAI from 'openai';
+
+                const client = new OpenAI({
+                  apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+                });
+
+                const chatCompletion = await client.chat.completions.create({
+                  messages: [{ content: 'string', role: 'developer' }],
+                  model: 'gpt-4o',
+                });
+
+                console.log(chatCompletion);
+              go: |
+                package main
+
+                import (
+                	"context"
+                	"fmt"
+
+                	"github.com/openai/openai-go"
+                	"github.com/openai/openai-go/option"
+                	"github.com/openai/openai-go/shared"
+                )
+
+                func main() {
+                	client := openai.NewClient(
+                		option.WithAPIKey("My API Key"),
+                	)
+                	chatCompletion, err := client.Chat.Completions.New(context.TODO(), openai.ChatCompletionNewParams{
+                		Messages: []openai.ChatCompletionMessageParamUnion{{
+                			OfDeveloper: &openai.ChatCompletionDeveloperMessageParam{
+                				Content: openai.ChatCompletionDeveloperMessageParamContentUnion{
+                					OfString: openai.String("string"),
+                				},
+                			},
+                		}},
+                		Model: shared.ChatModelGPT4o,
+                	})
+                	if err != nil {
+                		panic(err.Error())
+                	}
+                	fmt.Printf("%+v
+                ", chatCompletion)
+                }
+              java: |-
+                package com.openai.example;
+
+                import com.openai.client.OpenAIClient;
+                import com.openai.client.okhttp.OpenAIOkHttpClient;
+                import com.openai.models.ChatModel;
+                import com.openai.models.chat.completions.ChatCompletion;
+                import com.openai.models.chat.completions.ChatCompletionCreateParams;
+
+                public final class Main {
+                    private Main() {}
+
+                    public static void main(String[] args) {
+                        OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+
+                        ChatCompletionCreateParams params = ChatCompletionCreateParams.builder()
+                            .addDeveloperMessage("string")
+                            .model(ChatModel.GPT_4O)
+                            .build();
+                        ChatCompletion chatCompletion = client.chat().completions().create(params);
+                    }
+                }
+              ruby: |-
+                require "openai"
+
+                openai = OpenAI::Client.new(api_key: "My API Key")
+
+                chat_completion = openai.chat.completions.create(messages: [{content: "string", role: :developer}], model: :"gpt-4o")
+
+                puts(chat_completion)
+            response: |
+              {
+                "id": "chatcmpl-B9MBs8CjcvOU2jLn4n570S5qMJKcT",
+                "object": "chat.completion",
+                "created": 1741569952,
+                "model": "gpt-4.1-2025-04-14",
+                "choices": [
+                  {
+                    "index": 0,
+                    "message": {
+                      "role": "assistant",
+                      "content": "Hello! How can I assist you today?",
+                      "refusal": null,
+                      "annotations": []
+                    },
+                    "logprobs": null,
+                    "finish_reason": "stop"
+                  }
+                ],
+                "usage": {
+                  "prompt_tokens": 19,
+                  "completion_tokens": 10,
+                  "total_tokens": 29,
+                  "prompt_tokens_details": {
+                    "cached_tokens": 0,
+                    "audio_tokens": 0
+                  },
+                  "completion_tokens_details": {
+                    "reasoning_tokens": 0,
+                    "audio_tokens": 0,
+                    "accepted_prediction_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                  }
+                },
+                "service_tier": "default"
+              }
+          - title: Image input
+            request:
+              curl: |
+                curl https://api.openai.com/v1/chat/completions \
+                  -H "Content-Type: application/json" \
+                  -H "Authorization: Bearer $OPENAI_API_KEY" \
+                  -d '{
+                    "model": "gpt-4.1",
+                    "messages": [
+                      {
+                        "role": "user",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "What is in this image?"
+                          },
+                          {
+                            "type": "image_url",
+                            "image_url": {
+                              "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gfp-wisconsin-madison-the-nature-boardwalk.jpg/2560px-Gfp-wisconsin-madison-the-nature-boardwalk.jpg"
+                            }
+                          }
+                        ]
+                      }
+                    ],
+                    "max_tokens": 300
+                  }'
+              python: |-
+                import os
+                from openai import OpenAI
+
+                client = OpenAI(
+                    api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+                )
+                chat_completion = client.chat.completions.create(
+                    messages=[{
+                        "content": "string",
+                        "role": "developer",
+                    }],
+                    model="gpt-4o",
+                )
+                print(chat_completion)
+              javascript: |
+                import OpenAI from "openai";
+
+                const openai = new OpenAI();
+
+                async function main() {
+                  const response = await openai.chat.completions.create({
+                    model: "gpt-4.1",
+                    messages: [
+                      {
+                        role: "user",
+                        content: [
+                          { type: "text", text: "What's in this image?" },
+                          {
+                            type: "image_url",
+                            image_url: {
+                              "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gfp-wisconsin-madison-the-nature-boardwalk.jpg/2560px-Gfp-wisconsin-madison-the-nature-boardwalk.jpg",
+                            },
+                          }
+                        ],
+                      },
+                    ],
+                  });
+                  console.log(response.choices[0]);
+                }
+                main();
+              csharp: |
+                using System;
+                using System.Collections.Generic;
+
+                using OpenAI.Chat;
+
+                ChatClient client = new(
+                    model: "gpt-4.1",
+                    apiKey: Environment.GetEnvironmentVariable("OPENAI_API_KEY")
+                );
+
+                List<ChatMessage> messages =
+                [
+                    new UserChatMessage(
+                    [
+                        ChatMessageContentPart.CreateTextPart("What's in this image?"),
+                        ChatMessageContentPart.CreateImagePart(new Uri("https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gfp-wisconsin-madison-the-nature-boardwalk.jpg/2560px-Gfp-wisconsin-madison-the-nature-boardwalk.jpg"))
+                    ])
+                ];
+
+                ChatCompletion completion = client.CompleteChat(messages);
+
+                Console.WriteLine(completion.Content[0].Text);
+              node.js: |-
+                import OpenAI from 'openai';
+
+                const client = new OpenAI({
+                  apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+                });
+
+                const chatCompletion = await client.chat.completions.create({
+                  messages: [{ content: 'string', role: 'developer' }],
+                  model: 'gpt-4o',
+                });
+
+                console.log(chatCompletion);
+              go: |
+                package main
+
+                import (
+                	"context"
+                	"fmt"
+
+                	"github.com/openai/openai-go"
+                	"github.com/openai/openai-go/option"
+                	"github.com/openai/openai-go/shared"
+                )
+
+                func main() {
+                	client := openai.NewClient(
+                		option.WithAPIKey("My API Key"),
+                	)
+                	chatCompletion, err := client.Chat.Completions.New(context.TODO(), openai.ChatCompletionNewParams{
+                		Messages: []openai.ChatCompletionMessageParamUnion{{
+                			OfDeveloper: &openai.ChatCompletionDeveloperMessageParam{
+                				Content: openai.ChatCompletionDeveloperMessageParamContentUnion{
+                					OfString: openai.String("string"),
+                				},
+                			},
+                		}},
+                		Model: shared.ChatModelGPT4o,
+                	})
+                	if err != nil {
+                		panic(err.Error())
+                	}
+                	fmt.Printf("%+v
+                ", chatCompletion)
+                }
+              java: |-
+                package com.openai.example;
+
+                import com.openai.client.OpenAIClient;
+                import com.openai.client.okhttp.OpenAIOkHttpClient;
+                import com.openai.models.ChatModel;
+                import com.openai.models.chat.completions.ChatCompletion;
+                import com.openai.models.chat.completions.ChatCompletionCreateParams;
+
+                public final class Main {
+                    private Main() {}
+
+                    public static void main(String[] args) {
+                        OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+
+                        ChatCompletionCreateParams params = ChatCompletionCreateParams.builder()
+                            .addDeveloperMessage("string")
+                            .model(ChatModel.GPT_4O)
+                            .build();
+                        ChatCompletion chatCompletion = client.chat().completions().create(params);
+                    }
+                }
+              ruby: |-
+                require "openai"
+
+                openai = OpenAI::Client.new(api_key: "My API Key")
+
+                chat_completion = openai.chat.completions.create(messages: [{content: "string", role: :developer}], model: :"gpt-4o")
+
+                puts(chat_completion)
+            response: |
+              {
+                "id": "chatcmpl-B9MHDbslfkBeAs8l4bebGdFOJ6PeG",
+                "object": "chat.completion",
+                "created": 1741570283,
+                "model": "gpt-4.1-2025-04-14",
+                "choices": [
+                  {
+                    "index": 0,
+                    "message": {
+                      "role": "assistant",
+                      "content": "The image shows a wooden boardwalk path running through a lush green field or meadow. The sky is bright blue with some scattered clouds, giving the scene a serene and peaceful atmosphere. Trees and shrubs are visible in the background.",
+                      "refusal": null,
+                      "annotations": []
+                    },
+                    "logprobs": null,
+                    "finish_reason": "stop"
+                  }
+                ],
+                "usage": {
+                  "prompt_tokens": 1117,
+                  "completion_tokens": 46,
+                  "total_tokens": 1163,
+                  "prompt_tokens_details": {
+                    "cached_tokens": 0,
+                    "audio_tokens": 0
+                  },
+                  "completion_tokens_details": {
+                    "reasoning_tokens": 0,
+                    "audio_tokens": 0,
+                    "accepted_prediction_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                  }
+                },
+                "service_tier": "default"
+              }
+          - title: Streaming
+            request:
+              curl: |
+                curl https://api.openai.com/v1/chat/completions \
+                  -H "Content-Type: application/json" \
+                  -H "Authorization: Bearer $OPENAI_API_KEY" \
+                  -d '{
+                    "model": "VAR_chat_model_id",
+                    "messages": [
+                      {
+                        "role": "developer",
+                        "content": "You are a helpful assistant."
+                      },
+                      {
+                        "role": "user",
+                        "content": "Hello!"
+                      }
+                    ],
+                    "stream": true
+                  }'
+              python: |-
+                import os
+                from openai import OpenAI
+
+                client = OpenAI(
+                    api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+                )
+                chat_completion = client.chat.completions.create(
+                    messages=[{
+                        "content": "string",
+                        "role": "developer",
+                    }],
+                    model="gpt-4o",
+                )
+                print(chat_completion)
+              javascript: |
+                import OpenAI from "openai";
+
+                const openai = new OpenAI();
+
+                async function main() {
+                  const completion = await openai.chat.completions.create({
+                    model: "VAR_chat_model_id",
+                    messages: [
+                      {"role": "developer", "content": "You are a helpful assistant."},
+                      {"role": "user", "content": "Hello!"}
+                    ],
+                    stream: true,
+                  });
+
+                  for await (const chunk of completion) {
+                    console.log(chunk.choices[0].delta.content);
+                  }
+                }
+
+                main();
+              csharp: |
+                using System;
+                using System.ClientModel;
+                using System.Collections.Generic;
+                using System.Threading.Tasks;
+
+                using OpenAI.Chat;
+
+                ChatClient client = new(
+                    model: "gpt-4.1",
+                    apiKey: Environment.GetEnvironmentVariable("OPENAI_API_KEY")
+                );
+
+                List<ChatMessage> messages =
+                [
+                    new SystemChatMessage("You are a helpful assistant."),
+                    new UserChatMessage("Hello!")
+                ];
+
+                AsyncCollectionResult<StreamingChatCompletionUpdate> completionUpdates = client.CompleteChatStreamingAsync(messages);
+
+                await foreach (StreamingChatCompletionUpdate completionUpdate in completionUpdates)
+                {
+                    if (completionUpdate.ContentUpdate.Count > 0)
+                    {
+                        Console.Write(completionUpdate.ContentUpdate[0].Text);
+                    }
+                }
+              node.js: |-
+                import OpenAI from 'openai';
+
+                const client = new OpenAI({
+                  apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+                });
+
+                const chatCompletion = await client.chat.completions.create({
+                  messages: [{ content: 'string', role: 'developer' }],
+                  model: 'gpt-4o',
+                });
+
+                console.log(chatCompletion);
+              go: |
+                package main
+
+                import (
+                	"context"
+                	"fmt"
+
+                	"github.com/openai/openai-go"
+                	"github.com/openai/openai-go/option"
+                	"github.com/openai/openai-go/shared"
+                )
+
+                func main() {
+                	client := openai.NewClient(
+                		option.WithAPIKey("My API Key"),
+                	)
+                	chatCompletion, err := client.Chat.Completions.New(context.TODO(), openai.ChatCompletionNewParams{
+                		Messages: []openai.ChatCompletionMessageParamUnion{{
+                			OfDeveloper: &openai.ChatCompletionDeveloperMessageParam{
+                				Content: openai.ChatCompletionDeveloperMessageParamContentUnion{
+                					OfString: openai.String("string"),
+                				},
+                			},
+                		}},
+                		Model: shared.ChatModelGPT4o,
+                	})
+                	if err != nil {
+                		panic(err.Error())
+                	}
+                	fmt.Printf("%+v
+                ", chatCompletion)
+                }
+              java: |-
+                package com.openai.example;
+
+                import com.openai.client.OpenAIClient;
+                import com.openai.client.okhttp.OpenAIOkHttpClient;
+                import com.openai.models.ChatModel;
+                import com.openai.models.chat.completions.ChatCompletion;
+                import com.openai.models.chat.completions.ChatCompletionCreateParams;
+
+                public final class Main {
+                    private Main() {}
+
+                    public static void main(String[] args) {
+                        OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+
+                        ChatCompletionCreateParams params = ChatCompletionCreateParams.builder()
+                            .addDeveloperMessage("string")
+                            .model(ChatModel.GPT_4O)
+                            .build();
+                        ChatCompletion chatCompletion = client.chat().completions().create(params);
+                    }
+                }
+              ruby: |-
+                require "openai"
+
+                openai = OpenAI::Client.new(api_key: "My API Key")
+
+                chat_completion = openai.chat.completions.create(messages: [{content: "string", role: :developer}], model: :"gpt-4o")
+
+                puts(chat_completion)
+            response: |
+              {"id":"chatcmpl-123","object":"chat.completion.chunk","created":1694268190,"model":"gpt-4o-mini", "system_fingerprint": "fp_44709d6fcb", "choices":[{"index":0,"delta":{"role":"assistant","content":""},"logprobs":null,"finish_reason":null}]}
+
+              {"id":"chatcmpl-123","object":"chat.completion.chunk","created":1694268190,"model":"gpt-4o-mini", "system_fingerprint": "fp_44709d6fcb", "choices":[{"index":0,"delta":{"content":"Hello"},"logprobs":null,"finish_reason":null}]}
+
+              ....
+
+              {"id":"chatcmpl-123","object":"chat.completion.chunk","created":1694268190,"model":"gpt-4o-mini", "system_fingerprint": "fp_44709d6fcb", "choices":[{"index":0,"delta":{},"logprobs":null,"finish_reason":"stop"}]}
+          - title: Functions
+            request:
+              curl: |
+                curl https://api.openai.com/v1/chat/completions \
+                -H "Content-Type: application/json" \
+                -H "Authorization: Bearer $OPENAI_API_KEY" \
+                -d '{
+                  "model": "gpt-4.1",
+                  "messages": [
+                    {
+                      "role": "user",
+                      "content": "What is the weather like in Boston today?"
+                    }
+                  ],
+                  "tools": [
+                    {
+                      "type": "function",
+                      "function": {
+                        "name": "get_current_weather",
+                        "description": "Get the current weather in a given location",
+                        "parameters": {
+                          "type": "object",
+                          "properties": {
+                            "location": {
+                              "type": "string",
+                              "description": "The city and state, e.g. San Francisco, CA"
+                            },
+                            "unit": {
+                              "type": "string",
+                              "enum": ["celsius", "fahrenheit"]
+                            }
+                          },
+                          "required": ["location"]
+                        }
+                      }
+                    }
+                  ],
+                  "tool_choice": "auto"
+                }'
+              python: |-
+                import os
+                from openai import OpenAI
+
+                client = OpenAI(
+                    api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+                )
+                chat_completion = client.chat.completions.create(
+                    messages=[{
+                        "content": "string",
+                        "role": "developer",
+                    }],
+                    model="gpt-4o",
+                )
+                print(chat_completion)
+              javascript: |
+                import OpenAI from "openai";
+
+                const openai = new OpenAI();
+
+                async function main() {
+                  const messages = [{"role": "user", "content": "What's the weather like in Boston today?"}];
+                  const tools = [
+                      {
+                        "type": "function",
+                        "function": {
+                          "name": "get_current_weather",
+                          "description": "Get the current weather in a given location",
+                          "parameters": {
+                            "type": "object",
+                            "properties": {
+                              "location": {
+                                "type": "string",
+                                "description": "The city and state, e.g. San Francisco, CA",
+                              },
+                              "unit": {"type": "string", "enum": ["celsius", "fahrenheit"]},
+                            },
+                            "required": ["location"],
+                          },
+                        }
+                      }
+                  ];
+
+                  const response = await openai.chat.completions.create({
+                    model: "gpt-4.1",
+                    messages: messages,
+                    tools: tools,
+                    tool_choice: "auto",
+                  });
+
+                  console.log(response);
+                }
+
+                main();
+              csharp: |
+                using System;
+                using System.Collections.Generic;
+
+                using OpenAI.Chat;
+
+                ChatClient client = new(
+                    model: "gpt-4.1",
+                    apiKey: Environment.GetEnvironmentVariable("OPENAI_API_KEY")
+                );
+
+                ChatTool getCurrentWeatherTool = ChatTool.CreateFunctionTool(
+                    functionName: "get_current_weather",
+                    functionDescription: "Get the current weather in a given location",
+                    functionParameters: BinaryData.FromString("""
+                        {
+                            "type": "object",
+                            "properties": {
+                                "location": {
+                                    "type": "string",
+                                    "description": "The city and state, e.g. San Francisco, CA"
+                                },
+                                "unit": {
+                                    "type": "string",
+                                    "enum": [ "celsius", "fahrenheit" ]
+                                }
+                            },
+                            "required": [ "location" ]
+                        }
+                    """)
+                );
+
+                List<ChatMessage> messages =
+                [
+                    new UserChatMessage("What's the weather like in Boston today?"),
+                ];
+
+                ChatCompletionOptions options = new()
+                {
+                    Tools =
+                    {
+                        getCurrentWeatherTool
+                    },
+                    ToolChoice = ChatToolChoice.CreateAutoChoice(),
+                };
+
+                ChatCompletion completion = client.CompleteChat(messages, options);
+              node.js: |-
+                import OpenAI from 'openai';
+
+                const client = new OpenAI({
+                  apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+                });
+
+                const chatCompletion = await client.chat.completions.create({
+                  messages: [{ content: 'string', role: 'developer' }],
+                  model: 'gpt-4o',
+                });
+
+                console.log(chatCompletion);
+              go: |
+                package main
+
+                import (
+                	"context"
+                	"fmt"
+
+                	"github.com/openai/openai-go"
+                	"github.com/openai/openai-go/option"
+                	"github.com/openai/openai-go/shared"
+                )
+
+                func main() {
+                	client := openai.NewClient(
+                		option.WithAPIKey("My API Key"),
+                	)
+                	chatCompletion, err := client.Chat.Completions.New(context.TODO(), openai.ChatCompletionNewParams{
+                		Messages: []openai.ChatCompletionMessageParamUnion{{
+                			OfDeveloper: &openai.ChatCompletionDeveloperMessageParam{
+                				Content: openai.ChatCompletionDeveloperMessageParamContentUnion{
+                					OfString: openai.String("string"),
+                				},
+                			},
+                		}},
+                		Model: shared.ChatModelGPT4o,
+                	})
+                	if err != nil {
+                		panic(err.Error())
+                	}
+                	fmt.Printf("%+v
+                ", chatCompletion)
+                }
+              java: |-
+                package com.openai.example;
+
+                import com.openai.client.OpenAIClient;
+                import com.openai.client.okhttp.OpenAIOkHttpClient;
+                import com.openai.models.ChatModel;
+                import com.openai.models.chat.completions.ChatCompletion;
+                import com.openai.models.chat.completions.ChatCompletionCreateParams;
+
+                public final class Main {
+                    private Main() {}
+
+                    public static void main(String[] args) {
+                        OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+
+                        ChatCompletionCreateParams params = ChatCompletionCreateParams.builder()
+                            .addDeveloperMessage("string")
+                            .model(ChatModel.GPT_4O)
+                            .build();
+                        ChatCompletion chatCompletion = client.chat().completions().create(params);
+                    }
+                }
+              ruby: |-
+                require "openai"
+
+                openai = OpenAI::Client.new(api_key: "My API Key")
+
+                chat_completion = openai.chat.completions.create(messages: [{content: "string", role: :developer}], model: :"gpt-4o")
+
+                puts(chat_completion)
+            response: |
+              {
+                "id": "chatcmpl-abc123",
+                "object": "chat.completion",
+                "created": 1699896916,
+                "model": "gpt-4o-mini",
+                "choices": [
+                  {
+                    "index": 0,
+                    "message": {
+                      "role": "assistant",
+                      "content": null,
+                      "tool_calls": [
+                        {
+                          "id": "call_abc123",
+                          "type": "function",
+                          "function": {
+                            "name": "get_current_weather",
+                            "arguments": "{
+              "location": "Boston, MA"
+              }"
+                          }
+                        }
+                      ]
+                    },
+                    "logprobs": null,
+                    "finish_reason": "tool_calls"
+                  }
+                ],
+                "usage": {
+                  "prompt_tokens": 82,
+                  "completion_tokens": 17,
+                  "total_tokens": 99,
+                  "completion_tokens_details": {
+                    "reasoning_tokens": 0,
+                    "accepted_prediction_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                  }
+                }
+              }
+          - title: Logprobs
+            request:
+              curl: |
+                curl https://api.openai.com/v1/chat/completions \
+                  -H "Content-Type: application/json" \
+                  -H "Authorization: Bearer $OPENAI_API_KEY" \
+                  -d '{
+                    "model": "VAR_chat_model_id",
+                    "messages": [
+                      {
+                        "role": "user",
+                        "content": "Hello!"
+                      }
+                    ],
+                    "logprobs": true,
+                    "top_logprobs": 2
+                  }'
+              python: |-
+                import os
+                from openai import OpenAI
+
+                client = OpenAI(
+                    api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+                )
+                chat_completion = client.chat.completions.create(
+                    messages=[{
+                        "content": "string",
+                        "role": "developer",
+                    }],
+                    model="gpt-4o",
+                )
+                print(chat_completion)
+              javascript: |
+                import OpenAI from "openai";
+
+                const openai = new OpenAI();
+
+                async function main() {
+                  const completion = await openai.chat.completions.create({
+                    messages: [{ role: "user", content: "Hello!" }],
+                    model: "VAR_chat_model_id",
+                    logprobs: true,
+                    top_logprobs: 2,
+                  });
+
+                  console.log(completion.choices[0]);
+                }
+
+                main();
+              csharp: |
+                using System;
+                using System.Collections.Generic;
+
+                using OpenAI.Chat;
+
+                ChatClient client = new(
+                    model: "gpt-4.1",
+                    apiKey: Environment.GetEnvironmentVariable("OPENAI_API_KEY")
+                );
+
+                List<ChatMessage> messages =
+                [
+                    new UserChatMessage("Hello!")
+                ];
+
+                ChatCompletionOptions options = new()
+                {
+                    IncludeLogProbabilities = true,
+                    TopLogProbabilityCount = 2
+                };
+
+                ChatCompletion completion = client.CompleteChat(messages, options);
+
+                Console.WriteLine(completion.Content[0].Text);
+              node.js: |-
+                import OpenAI from 'openai';
+
+                const client = new OpenAI({
+                  apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+                });
+
+                const chatCompletion = await client.chat.completions.create({
+                  messages: [{ content: 'string', role: 'developer' }],
+                  model: 'gpt-4o',
+                });
+
+                console.log(chatCompletion);
+              go: |
+                package main
+
+                import (
+                	"context"
+                	"fmt"
+
+                	"github.com/openai/openai-go"
+                	"github.com/openai/openai-go/option"
+                	"github.com/openai/openai-go/shared"
+                )
+
+                func main() {
+                	client := openai.NewClient(
+                		option.WithAPIKey("My API Key"),
+                	)
+                	chatCompletion, err := client.Chat.Completions.New(context.TODO(), openai.ChatCompletionNewParams{
+                		Messages: []openai.ChatCompletionMessageParamUnion{{
+                			OfDeveloper: &openai.ChatCompletionDeveloperMessageParam{
+                				Content: openai.ChatCompletionDeveloperMessageParamContentUnion{
+                					OfString: openai.String("string"),
+                				},
+                			},
+                		}},
+                		Model: shared.ChatModelGPT4o,
+                	})
+                	if err != nil {
+                		panic(err.Error())
+                	}
+                	fmt.Printf("%+v
+                ", chatCompletion)
+                }
+              java: |-
+                package com.openai.example;
+
+                import com.openai.client.OpenAIClient;
+                import com.openai.client.okhttp.OpenAIOkHttpClient;
+                import com.openai.models.ChatModel;
+                import com.openai.models.chat.completions.ChatCompletion;
+                import com.openai.models.chat.completions.ChatCompletionCreateParams;
+
+                public final class Main {
+                    private Main() {}
+
+                    public static void main(String[] args) {
+                        OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+
+                        ChatCompletionCreateParams params = ChatCompletionCreateParams.builder()
+                            .addDeveloperMessage("string")
+                            .model(ChatModel.GPT_4O)
+                            .build();
+                        ChatCompletion chatCompletion = client.chat().completions().create(params);
+                    }
+                }
+              ruby: |-
+                require "openai"
+
+                openai = OpenAI::Client.new(api_key: "My API Key")
+
+                chat_completion = openai.chat.completions.create(messages: [{content: "string", role: :developer}], model: :"gpt-4o")
+
+                puts(chat_completion)
+            response: |
+              {
+                "id": "chatcmpl-123",
+                "object": "chat.completion",
+                "created": 1702685778,
+                "model": "gpt-4o-mini",
+                "choices": [
+                  {
+                    "index": 0,
+                    "message": {
+                      "role": "assistant",
+                      "content": "Hello! How can I assist you today?"
+                    },
+                    "logprobs": {
+                      "content": [
+                        {
+                          "token": "Hello",
+                          "logprob": -0.31725305,
+                          "bytes": [72, 101, 108, 108, 111],
+                          "top_logprobs": [
+                            {
+                              "token": "Hello",
+                              "logprob": -0.31725305,
+                              "bytes": [72, 101, 108, 108, 111]
+                            },
+                            {
+                              "token": "Hi",
+                              "logprob": -1.3190403,
+                              "bytes": [72, 105]
+                            }
+                          ]
+                        },
+                        {
+                          "token": "!",
+                          "logprob": -0.02380986,
+                          "bytes": [
+                            33
+                          ],
+                          "top_logprobs": [
+                            {
+                              "token": "!",
+                              "logprob": -0.02380986,
+                              "bytes": [33]
+                            },
+                            {
+                              "token": " there",
+                              "logprob": -3.787621,
+                              "bytes": [32, 116, 104, 101, 114, 101]
+                            }
+                          ]
+                        },
+                        {
+                          "token": " How",
+                          "logprob": -0.000054669687,
+                          "bytes": [32, 72, 111, 119],
+                          "top_logprobs": [
+                            {
+                              "token": " How",
+                              "logprob": -0.000054669687,
+                              "bytes": [32, 72, 111, 119]
+                            },
+                            {
+                              "token": "<|end|>",
+                              "logprob": -10.953937,
+                              "bytes": null
+                            }
+                          ]
+                        },
+                        {
+                          "token": " can",
+                          "logprob": -0.015801601,
+                          "bytes": [32, 99, 97, 110],
+                          "top_logprobs": [
+                            {
+                              "token": " can",
+                              "logprob": -0.015801601,
+                              "bytes": [32, 99, 97, 110]
+                            },
+                            {
+                              "token": " may",
+                              "logprob": -4.161023,
+                              "bytes": [32, 109, 97, 121]
+                            }
+                          ]
+                        },
+                        {
+                          "token": " I",
+                          "logprob": -3.7697225e-6,
+                          "bytes": [
+                            32,
+                            73
+                          ],
+                          "top_logprobs": [
+                            {
+                              "token": " I",
+                              "logprob": -3.7697225e-6,
+                              "bytes": [32, 73]
+                            },
+                            {
+                              "token": " assist",
+                              "logprob": -13.596657,
+                              "bytes": [32, 97, 115, 115, 105, 115, 116]
+                            }
+                          ]
+                        },
+                        {
+                          "token": " assist",
+                          "logprob": -0.04571125,
+                          "bytes": [32, 97, 115, 115, 105, 115, 116],
+                          "top_logprobs": [
+                            {
+                              "token": " assist",
+                              "logprob": -0.04571125,
+                              "bytes": [32, 97, 115, 115, 105, 115, 116]
+                            },
+                            {
+                              "token": " help",
+                              "logprob": -3.1089056,
+                              "bytes": [32, 104, 101, 108, 112]
+                            }
+                          ]
+                        },
+                        {
+                          "token": " you",
+                          "logprob": -5.4385737e-6,
+                          "bytes": [32, 121, 111, 117],
+                          "top_logprobs": [
+                            {
+                              "token": " you",
+                              "logprob": -5.4385737e-6,
+                              "bytes": [32, 121, 111, 117]
+                            },
+                            {
+                              "token": " today",
+                              "logprob": -12.807695,
+                              "bytes": [32, 116, 111, 100, 97, 121]
+                            }
+                          ]
+                        },
+                        {
+                          "token": " today",
+                          "logprob": -0.0040071653,
+                          "bytes": [32, 116, 111, 100, 97, 121],
+                          "top_logprobs": [
+                            {
+                              "token": " today",
+                              "logprob": -0.0040071653,
+                              "bytes": [32, 116, 111, 100, 97, 121]
+                            },
+                            {
+                              "token": "?",
+                              "logprob": -5.5247097,
+                              "bytes": [63]
+                            }
+                          ]
+                        },
+                        {
+                          "token": "?",
+                          "logprob": -0.0008108172,
+                          "bytes": [63],
+                          "top_logprobs": [
+                            {
+                              "token": "?",
+                              "logprob": -0.0008108172,
+                              "bytes": [63]
+                            },
+                            {
+                              "token": "?
+              ",
+                              "logprob": -7.184561,
+                              "bytes": [63, 10]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "finish_reason": "stop"
+                  }
+                ],
+                "usage": {
+                  "prompt_tokens": 9,
+                  "completion_tokens": 9,
+                  "total_tokens": 18,
+                  "completion_tokens_details": {
+                    "reasoning_tokens": 0,
+                    "accepted_prediction_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                  }
+                },
+                "system_fingerprint": null
+              }
+  /openai/v1/chat/completions/{completion_id}:
+    delete:
+      operationId: Chat_deleteChatCompletion
+      summary: |
+        Delete a stored chat completion. Only Chat Completions that have been
+        created with the `store` parameter set to `true` can be deleted.
+      parameters:
+        - name: completion_id
+          in: path
+          required: true
+          description: The ID of the chat completion to delete.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.ChatCompletionDeleted'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.ErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.ErrorResponse'
+      tags:
+        - Chat
+      x-oaiMeta:
+        name: Delete chat completion
+        group: chat
+        returns: A deletion confirmation object.
+        examples:
+          request:
+            curl: |
+              curl -X DELETE https://api.openai.com/v1/chat/completions/chat_abc123 \
+                -H "Authorization: Bearer $OPENAI_API_KEY" \
+                -H "Content-Type: application/json"
+            python: |-
+              import os
+              from openai import OpenAI
+
+              client = OpenAI(
+                  api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              )
+              chat_completion_deleted = client.chat.completions.delete(
+                  "completion_id",
+              )
+              print(chat_completion_deleted.id)
+            node.js: |-
+              import OpenAI from 'openai';
+
+              const client = new OpenAI({
+                apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              });
+
+              const chatCompletionDeleted = await client.chat.completions.delete('completion_id');
+
+              console.log(chatCompletionDeleted.id);
+            go: |
+              package main
+
+              import (
+              	"context"
+              	"fmt"
+
+              	"github.com/openai/openai-go"
+              	"github.com/openai/openai-go/option"
+              )
+
+              func main() {
+              	client := openai.NewClient(
+              		option.WithAPIKey("My API Key"),
+              	)
+              	chatCompletionDeleted, err := client.Chat.Completions.Delete(context.TODO(), "completion_id")
+              	if err != nil {
+              		panic(err.Error())
+              	}
+              	fmt.Printf("%+v
+              ", chatCompletionDeleted.ID)
+              }
+            java: |-
+              package com.openai.example;
+
+              import com.openai.client.OpenAIClient;
+              import com.openai.client.okhttp.OpenAIOkHttpClient;
+              import com.openai.models.chat.completions.ChatCompletionDeleteParams;
+              import com.openai.models.chat.completions.ChatCompletionDeleted;
+
+              public final class Main {
+                  private Main() {}
+
+                  public static void main(String[] args) {
+                      OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+
+                      ChatCompletionDeleted chatCompletionDeleted = client.chat().completions().delete("completion_id");
+                  }
+              }
+            ruby: |-
+              require "openai"
+
+              openai = OpenAI::Client.new(api_key: "My API Key")
+
+              chat_completion_deleted = openai.chat.completions.delete("completion_id")
+
+              puts(chat_completion_deleted)
+          response: |
+            {
+              "object": "chat.completion.deleted",
+              "id": "chatcmpl-AyPNinnUqUDYo9SAdA52NobMflmj2",
+              "deleted": true
+            }
+    get:
+      operationId: Chat_getChatCompletion
+      summary: |
+        Get a stored chat completion. Only Chat Completions that have been created
+        with the `store` parameter set to `true` will be returned.
+      parameters:
+        - name: completion_id
+          in: path
+          required: true
+          description: The ID of the chat completion to retrieve.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.CreateChatCompletionResponse'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.ErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.ErrorResponse'
+      tags:
+        - Chat
+      x-oaiMeta:
+        name: Get chat completion
+        group: chat
+        returns: The [ChatCompletion](/docs/api-reference/chat/object) object matching the specified ID.
+        examples:
+          request:
+            curl: |
+              curl https://api.openai.com/v1/chat/completions/chatcmpl-abc123 \
+                -H "Authorization: Bearer $OPENAI_API_KEY" \
+                -H "Content-Type: application/json"
+            python: |-
+              import os
+              from openai import OpenAI
+
+              client = OpenAI(
+                  api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              )
+              chat_completion = client.chat.completions.retrieve(
+                  "completion_id",
+              )
+              print(chat_completion.id)
+            node.js: |-
+              import OpenAI from 'openai';
+
+              const client = new OpenAI({
+                apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              });
+
+              const chatCompletion = await client.chat.completions.retrieve('completion_id');
+
+              console.log(chatCompletion.id);
+            go: |
+              package main
+
+              import (
+              	"context"
+              	"fmt"
+
+              	"github.com/openai/openai-go"
+              	"github.com/openai/openai-go/option"
+              )
+
+              func main() {
+              	client := openai.NewClient(
+              		option.WithAPIKey("My API Key"),
+              	)
+              	chatCompletion, err := client.Chat.Completions.Get(context.TODO(), "completion_id")
+              	if err != nil {
+              		panic(err.Error())
+              	}
+              	fmt.Printf("%+v
+              ", chatCompletion.ID)
+              }
+            java: |-
+              package com.openai.example;
+
+              import com.openai.client.OpenAIClient;
+              import com.openai.client.okhttp.OpenAIOkHttpClient;
+              import com.openai.models.chat.completions.ChatCompletion;
+              import com.openai.models.chat.completions.ChatCompletionRetrieveParams;
+
+              public final class Main {
+                  private Main() {}
+
+                  public static void main(String[] args) {
+                      OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+
+                      ChatCompletion chatCompletion = client.chat().completions().retrieve("completion_id");
+                  }
+              }
+            ruby: |-
+              require "openai"
+
+              openai = OpenAI::Client.new(api_key: "My API Key")
+
+              chat_completion = openai.chat.completions.retrieve("completion_id")
+
+              puts(chat_completion)
+          response: |
+            {
+              "object": "chat.completion",
+              "id": "chatcmpl-abc123",
+              "model": "gpt-4o-2024-08-06",
+              "created": 1738960610,
+              "request_id": "req_ded8ab984ec4bf840f37566c1011c417",
+              "tool_choice": null,
+              "usage": {
+                "total_tokens": 31,
+                "completion_tokens": 18,
+                "prompt_tokens": 13
+              },
+              "seed": 4944116822809979520,
+              "top_p": 1.0,
+              "temperature": 1.0,
+              "presence_penalty": 0.0,
+              "frequency_penalty": 0.0,
+              "system_fingerprint": "fp_50cad350e4",
+              "input_user": null,
+              "service_tier": "default",
+              "tools": null,
+              "metadata": {},
+              "choices": [
+                {
+                  "index": 0,
+                  "message": {
+                    "content": "Mind of circuits hum,
+            Learning patterns in silence—
+            Future's quiet spark.",
+                    "role": "assistant",
+                    "tool_calls": null,
+                    "function_call": null
+                  },
+                  "finish_reason": "stop",
+                  "logprobs": null
+                }
+              ],
+              "response_format": null
+            }
+    post:
+      operationId: Chat_updateChatCompletion
+      summary: |
+        Modify a stored chat completion. Only Chat Completions that have been
+        created with the `store` parameter set to `true` can be modified. Currently,
+        the only supported modification is to update the `metadata` field.
+      parameters:
+        - name: completion_id
+          in: path
+          required: true
+          description: The ID of the chat completion to update.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.CreateChatCompletionResponse'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.ErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.ErrorResponse'
+      tags:
+        - Chat
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OpenAI.UpdateChatCompletionParametersBody'
+      x-oaiMeta:
+        name: Update chat completion
+        group: chat
+        returns: The [ChatCompletion](/docs/api-reference/chat/object) object matching the specified ID.
+        examples:
+          request:
+            curl: |
+              curl -X POST https://api.openai.com/v1/chat/completions/chat_abc123 \
+                -H "Authorization: Bearer $OPENAI_API_KEY" \
+                -H "Content-Type: application/json" \
+                -d '{"metadata": {"foo": "bar"}}'
+            python: |-
+              import os
+              from openai import OpenAI
+
+              client = OpenAI(
+                  api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              )
+              chat_completion = client.chat.completions.update(
+                  completion_id="completion_id",
+                  metadata={
+                      "foo": "string"
+                  },
+              )
+              print(chat_completion.id)
+            node.js: |-
+              import OpenAI from 'openai';
+
+              const client = new OpenAI({
+                apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              });
+
+              const chatCompletion = await client.chat.completions.update('completion_id', {
+                metadata: { foo: 'string' },
+              });
+
+              console.log(chatCompletion.id);
+            go: |
+              package main
+
+              import (
+              	"context"
+              	"fmt"
+
+              	"github.com/openai/openai-go"
+              	"github.com/openai/openai-go/option"
+              	"github.com/openai/openai-go/shared"
+              )
+
+              func main() {
+              	client := openai.NewClient(
+              		option.WithAPIKey("My API Key"),
+              	)
+              	chatCompletion, err := client.Chat.Completions.Update(
+              		context.TODO(),
+              		"completion_id",
+              		openai.ChatCompletionUpdateParams{
+              			Metadata: shared.Metadata{
+              				"foo": "string",
+              			},
+              		},
+              	)
+              	if err != nil {
+              		panic(err.Error())
+              	}
+              	fmt.Printf("%+v
+              ", chatCompletion.ID)
+              }
+            java: |-
+              package com.openai.example;
+
+              import com.openai.client.OpenAIClient;
+              import com.openai.client.okhttp.OpenAIOkHttpClient;
+              import com.openai.core.JsonValue;
+              import com.openai.models.chat.completions.ChatCompletion;
+              import com.openai.models.chat.completions.ChatCompletionUpdateParams;
+
+              public final class Main {
+                  private Main() {}
+
+                  public static void main(String[] args) {
+                      OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+
+                      ChatCompletionUpdateParams params = ChatCompletionUpdateParams.builder()
+                          .completionId("completion_id")
+                          .metadata(ChatCompletionUpdateParams.Metadata.builder()
+                              .putAdditionalProperty("foo", JsonValue.from("string"))
+                              .build())
+                          .build();
+                      ChatCompletion chatCompletion = client.chat().completions().update(params);
+                  }
+              }
+            ruby: |-
+              require "openai"
+
+              openai = OpenAI::Client.new(api_key: "My API Key")
+
+              chat_completion = openai.chat.completions.update("completion_id", metadata: {foo: "string"})
+
+              puts(chat_completion)
+          response: |
+            {
+              "object": "chat.completion",
+              "id": "chatcmpl-AyPNinnUqUDYo9SAdA52NobMflmj2",
+              "model": "gpt-4o-2024-08-06",
+              "created": 1738960610,
+              "request_id": "req_ded8ab984ec4bf840f37566c1011c417",
+              "tool_choice": null,
+              "usage": {
+                "total_tokens": 31,
+                "completion_tokens": 18,
+                "prompt_tokens": 13
+              },
+              "seed": 4944116822809979520,
+              "top_p": 1.0,
+              "temperature": 1.0,
+              "presence_penalty": 0.0,
+              "frequency_penalty": 0.0,
+              "system_fingerprint": "fp_50cad350e4",
+              "input_user": null,
+              "service_tier": "default",
+              "tools": null,
+              "metadata": {
+                "foo": "bar"
+              },
+              "choices": [
+                {
+                  "index": 0,
+                  "message": {
+                    "content": "Mind of circuits hum,
+            Learning patterns in silence—
+            Future's quiet spark.",
+                    "role": "assistant",
+                    "tool_calls": null,
+                    "function_call": null
+                  },
+                  "finish_reason": "stop",
+                  "logprobs": null
+                }
+              ],
+              "response_format": null
+            }
+  /openai/v1/chat/completions/{completion_id}/messages:
+    get:
+      operationId: Chat_getChatCompletionMessages
+      summary: |
+        Get the messages in a stored chat completion. Only Chat Completions that
+        have been created with the `store` parameter set to `true` will be
+        returned.
+      parameters:
+        - name: completion_id
+          in: path
+          required: true
+          description: The ID of the chat completion to retrieve messages from.
+          schema:
+            type: string
+        - name: after
+          in: query
+          required: false
+          description: Identifier for the last message from the previous pagination request.
+          schema:
+            type: string
+            x-ms-list-continuation-token: true
+          x-ms-list-continuation-token: true
+        - name: limit
+          in: query
+          required: false
+          description: Number of messages to retrieve.
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/OpenAI.integer'
+            default: 20
+        - name: order
+          in: query
+          required: false
+          description: Sort order for messages by timestamp. Use `asc` for ascending order or `desc` for descending order. Defaults to `asc`.
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/OpenAI.OrderEnum'
+            default: asc
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.ChatCompletionMessageList'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.ErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.ErrorResponse'
+      tags:
+        - Chat
+      x-oaiMeta:
+        name: Get chat messages
+        group: chat
+        returns: A list of [messages](/docs/api-reference/chat/message-list) for the specified chat completion.
+        examples:
+          request:
+            curl: |
+              curl https://api.openai.com/v1/chat/completions/chat_abc123/messages \
+                -H "Authorization: Bearer $OPENAI_API_KEY" \
+                -H "Content-Type: application/json"
+            python: |-
+              import os
+              from openai import OpenAI
+
+              client = OpenAI(
+                  api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              )
+              page = client.chat.completions.messages.list(
+                  completion_id="completion_id",
+              )
+              page = page.data[0]
+              print(page)
+            node.js: |-
+              import OpenAI from 'openai';
+
+              const client = new OpenAI({
+                apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              });
+
+              // Automatically fetches more pages as needed.
+              for await (const chatCompletionStoreMessage of client.chat.completions.messages.list(
+                'completion_id',
+              )) {
+                console.log(chatCompletionStoreMessage);
+              }
+            go: |
+              package main
+
+              import (
+              	"context"
+              	"fmt"
+
+              	"github.com/openai/openai-go"
+              	"github.com/openai/openai-go/option"
+              )
+
+              func main() {
+              	client := openai.NewClient(
+              		option.WithAPIKey("My API Key"),
+              	)
+              	page, err := client.Chat.Completions.Messages.List(
+              		context.TODO(),
+              		"completion_id",
+              		openai.ChatCompletionMessageListParams{},
+              	)
+              	if err != nil {
+              		panic(err.Error())
+              	}
+              	fmt.Printf("%+v
+              ", page)
+              }
+            java: |-
+              package com.openai.example;
+
+              import com.openai.client.OpenAIClient;
+              import com.openai.client.okhttp.OpenAIOkHttpClient;
+              import com.openai.models.chat.completions.messages.MessageListPage;
+              import com.openai.models.chat.completions.messages.MessageListParams;
+
+              public final class Main {
+                  private Main() {}
+
+                  public static void main(String[] args) {
+                      OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+
+                      MessageListPage page = client.chat().completions().messages().list("completion_id");
+                  }
+              }
+            ruby: |-
+              require "openai"
+
+              openai = OpenAI::Client.new(api_key: "My API Key")
+
+              page = openai.chat.completions.messages.list("completion_id")
+
+              puts(page)
+          response: |
+            {
+              "object": "list",
+              "data": [
+                {
+                  "id": "chatcmpl-AyPNinnUqUDYo9SAdA52NobMflmj2-0",
+                  "role": "user",
+                  "content": "write a haiku about ai",
+                  "name": null,
+                  "content_parts": null
+                }
+              ],
+              "first_id": "chatcmpl-AyPNinnUqUDYo9SAdA52NobMflmj2-0",
+              "last_id": "chatcmpl-AyPNinnUqUDYo9SAdA52NobMflmj2-0",
+              "has_more": false
+            }
+      x-ms-list: true
   /openai/v1/conversations:
     post:
       operationId: createConversation
@@ -19860,6 +21871,995 @@ components:
           $ref: '#/components/schemas/OpenAI.ContainerNetworkPolicyParam'
       description: Configuration for a code interpreter container. Optionally specify the IDs of the files to run the code on.
       title: Automatic Code Interpreter Tool Parameters
+    OpenAI.ChatCompletionAllowedTools:
+      type: object
+      required:
+        - mode
+        - tools
+      properties:
+        mode:
+          type: string
+          enum:
+            - auto
+            - required
+          description: |-
+            Constrains the tools available to the model to a pre-defined set.
+              `auto` allows the model to pick from among the allowed tools and generate a
+              message.
+              `required` requires the model to call one or more of the allowed tools.
+        tools:
+          type: array
+          items:
+            type: object
+            additionalProperties: {}
+          description: |-
+            A list of tool definitions that the model should be allowed to call.
+              For the Chat Completions API, the list of tool definitions might look like:
+              ```json
+              [
+                { "type": "function", "function": { "name": "get_weather" } },
+                { "type": "function", "function": { "name": "get_time" } }
+              ]
+              ```
+      description: Constrains the tools available to the model to a pre-defined set.
+      title: Allowed tools
+    OpenAI.ChatCompletionAllowedToolsChoice:
+      type: object
+      required:
+        - type
+        - allowed_tools
+      properties:
+        type:
+          type: string
+          enum:
+            - allowed_tools
+          description: Allowed tool configuration type. Always `allowed_tools`.
+          x-stainless-const: true
+        allowed_tools:
+          $ref: '#/components/schemas/OpenAI.ChatCompletionAllowedTools'
+      description: Constrains the tools available to the model to a pre-defined set.
+      title: Allowed tools
+    OpenAI.ChatCompletionDeleted:
+      type: object
+      required:
+        - object
+        - id
+        - deleted
+      properties:
+        object:
+          type: string
+          enum:
+            - chat.completion.deleted
+          description: The type of object being deleted.
+          x-stainless-const: true
+        id:
+          type: string
+          description: The ID of the chat completion that was deleted.
+        deleted:
+          type: boolean
+          description: Whether the chat completion was deleted.
+    OpenAI.ChatCompletionFunctionCallOption:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: The name of the function to call.
+      description: 'Specifying a particular function via `{"name": "my_function"}` forces the model to call that function.'
+    OpenAI.ChatCompletionFunctions:
+      type: object
+      required:
+        - name
+      properties:
+        description:
+          type: string
+          description: A description of what the function does, used by the model to choose when and how to call the function.
+        name:
+          type: string
+          description: The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
+        parameters:
+          $ref: '#/components/schemas/OpenAI.FunctionParameters'
+      deprecated: true
+    OpenAI.ChatCompletionList:
+      type: object
+      required:
+        - object
+        - data
+        - first_id
+        - last_id
+        - has_more
+      properties:
+        object:
+          type: string
+          enum:
+            - list
+          description: The type of this object. It is always set to "list".
+          x-stainless-const: true
+          default: list
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.CreateChatCompletionResponse'
+          description: An array of chat completion objects.
+          x-ms-list-page-items: true
+        first_id:
+          type: string
+          description: The identifier of the first chat completion in the data array.
+        last_id:
+          type: string
+          description: The identifier of the last chat completion in the data array.
+          x-ms-list-continuation-token: true
+        has_more:
+          type: boolean
+          description: Indicates whether there are more Chat Completions available.
+      description: An object representing a list of Chat Completions.
+      title: ChatCompletionList
+      x-oaiMeta:
+        name: The chat completion list object
+        group: chat
+        example: |
+          {
+            "object": "list",
+            "data": [
+              {
+                "object": "chat.completion",
+                "id": "chatcmpl-AyPNinnUqUDYo9SAdA52NobMflmj2",
+                "model": "gpt-4o-2024-08-06",
+                "created": 1738960610,
+                "request_id": "req_ded8ab984ec4bf840f37566c1011c417",
+                "tool_choice": null,
+                "usage": {
+                  "total_tokens": 31,
+                  "completion_tokens": 18,
+                  "prompt_tokens": 13
+                },
+                "seed": 4944116822809979520,
+                "top_p": 1.0,
+                "temperature": 1.0,
+                "presence_penalty": 0.0,
+                "frequency_penalty": 0.0,
+                "system_fingerprint": "fp_50cad350e4",
+                "input_user": null,
+                "service_tier": "default",
+                "tools": null,
+                "metadata": {},
+                "choices": [
+                  {
+                    "index": 0,
+                    "message": {
+                      "content": "Mind of circuits hum,
+          Learning patterns in silence—
+          Future's quiet spark.",
+                      "role": "assistant",
+                      "tool_calls": null,
+                      "function_call": null
+                    },
+                    "finish_reason": "stop",
+                    "logprobs": null
+                  }
+                ],
+                "response_format": null
+              }
+            ],
+            "first_id": "chatcmpl-AyPNinnUqUDYo9SAdA52NobMflmj2",
+            "last_id": "chatcmpl-AyPNinnUqUDYo9SAdA52NobMflmj2",
+            "has_more": false
+          }
+    OpenAI.ChatCompletionMessageCustomToolCall:
+      type: object
+      required:
+        - id
+        - type
+        - custom
+      properties:
+        id:
+          type: string
+          description: The ID of the tool call.
+        type:
+          type: string
+          enum:
+            - custom
+          description: The type of the tool. Always `custom`.
+          x-stainless-const: true
+        custom:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.ChatCompletionMessageCustomToolCallCustom'
+          description: The custom tool that the model called.
+      description: A call to a custom tool created by the model.
+      title: Custom tool call
+    OpenAI.ChatCompletionMessageCustomToolCallCustom:
+      type: object
+      required:
+        - name
+        - input
+      properties:
+        name:
+          type: string
+        input:
+          type: string
+    OpenAI.ChatCompletionMessageList:
+      type: object
+      required:
+        - object
+        - data
+        - first_id
+        - last_id
+        - has_more
+      properties:
+        object:
+          type: string
+          enum:
+            - list
+          description: The type of this object. It is always set to "list".
+          x-stainless-const: true
+          default: list
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.ChatCompletionMessageListData'
+          description: An array of chat completion message objects.
+          x-ms-list-page-items: true
+        first_id:
+          type: string
+          description: The identifier of the first chat message in the data array.
+        last_id:
+          type: string
+          description: The identifier of the last chat message in the data array.
+          x-ms-list-continuation-token: true
+        has_more:
+          type: boolean
+          description: Indicates whether there are more chat messages available.
+      description: An object representing a list of chat completion messages.
+      title: ChatCompletionMessageList
+      x-oaiMeta:
+        name: The chat completion message list object
+        group: chat
+        example: |
+          {
+            "object": "list",
+            "data": [
+              {
+                "id": "chatcmpl-AyPNinnUqUDYo9SAdA52NobMflmj2-0",
+                "role": "user",
+                "content": "write a haiku about ai",
+                "name": null,
+                "content_parts": null
+              }
+            ],
+            "first_id": "chatcmpl-AyPNinnUqUDYo9SAdA52NobMflmj2-0",
+            "last_id": "chatcmpl-AyPNinnUqUDYo9SAdA52NobMflmj2-0",
+            "has_more": false
+          }
+    OpenAI.ChatCompletionMessageListData:
+      type: object
+      required:
+        - content
+        - refusal
+        - role
+        - id
+      properties:
+        content:
+          type: string
+          nullable: true
+        refusal:
+          type: string
+          nullable: true
+        tool_calls:
+          $ref: '#/components/schemas/OpenAI.ChatCompletionMessageToolCallsItem'
+        annotations:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.ChatCompletionResponseMessageAnnotations'
+          description: |-
+            Annotations for the message, when applicable, as when using the
+              [web search tool](/docs/guides/tools-web-search?api-mode=chat).
+        role:
+          type: string
+          enum:
+            - assistant
+          description: The role of the author of this message.
+          x-stainless-const: true
+        function_call:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.ChatCompletionResponseMessageFunctionCall'
+          description: Deprecated and replaced by `tool_calls`. The name and arguments of a function that should be called, as generated by the model.
+          deprecated: true
+        audio:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.ChatCompletionResponseMessageAudio'
+          nullable: true
+        id:
+          type: string
+        content_parts:
+          type: array
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/OpenAI.ChatCompletionRequestMessageContentPartText'
+              - $ref: '#/components/schemas/OpenAI.ChatCompletionRequestMessageContentPartImage'
+          nullable: true
+    OpenAI.ChatCompletionMessageToolCall:
+      type: object
+      required:
+        - id
+        - type
+        - function
+      properties:
+        id:
+          type: string
+          description: The ID of the tool call.
+        type:
+          type: string
+          enum:
+            - function
+          description: The type of the tool. Currently, only `function` is supported.
+          x-stainless-const: true
+        function:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.ChatCompletionMessageToolCallFunction'
+          description: The function that the model called.
+      description: A call to a function tool created by the model.
+      title: Function tool call
+    OpenAI.ChatCompletionMessageToolCallFunction:
+      type: object
+      required:
+        - name
+        - arguments
+      properties:
+        name:
+          type: string
+        arguments:
+          type: string
+    OpenAI.ChatCompletionMessageToolCalls:
+      type: array
+      items:
+        anyOf:
+          - $ref: '#/components/schemas/OpenAI.ChatCompletionMessageToolCall'
+          - $ref: '#/components/schemas/OpenAI.ChatCompletionMessageCustomToolCall'
+      description: The tool calls generated by the model, such as function calls.
+    OpenAI.ChatCompletionMessageToolCallsItem:
+      type: array
+      items:
+        anyOf:
+          - $ref: '#/components/schemas/OpenAI.ChatCompletionMessageToolCall'
+          - $ref: '#/components/schemas/OpenAI.ChatCompletionMessageCustomToolCall'
+      description: The tool calls generated by the model, such as function calls.
+    OpenAI.ChatCompletionNamedToolChoice:
+      type: object
+      required:
+        - type
+        - function
+      properties:
+        type:
+          type: string
+          enum:
+            - function
+          description: For function calling, the type is always `function`.
+          x-stainless-const: true
+        function:
+          $ref: '#/components/schemas/OpenAI.ChatCompletionNamedToolChoiceFunction'
+      description: Specifies a tool the model should use. Use to force the model to call a specific function.
+      title: Function tool choice
+    OpenAI.ChatCompletionNamedToolChoiceCustom:
+      type: object
+      required:
+        - type
+        - custom
+      properties:
+        type:
+          type: string
+          enum:
+            - custom
+          description: For custom tool calling, the type is always `custom`.
+          x-stainless-const: true
+        custom:
+          $ref: '#/components/schemas/OpenAI.ChatCompletionNamedToolChoiceCustomCustom'
+      description: Specifies a tool the model should use. Use to force the model to call a specific custom tool.
+      title: Custom tool choice
+    OpenAI.ChatCompletionNamedToolChoiceCustomCustom:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+    OpenAI.ChatCompletionNamedToolChoiceFunction:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+    OpenAI.ChatCompletionRequestAssistantMessage:
+      type: object
+      required:
+        - role
+      properties:
+        content:
+          anyOf:
+            - type: string
+            - type: array
+              items:
+                $ref: '#/components/schemas/OpenAI.ChatCompletionRequestAssistantMessageContentPart'
+          nullable: true
+        refusal:
+          type: string
+          nullable: true
+        role:
+          type: string
+          enum:
+            - assistant
+          description: The role of the messages author, in this case `assistant`.
+          x-stainless-const: true
+        name:
+          type: string
+          description: An optional name for the participant. Provides the model information to differentiate between participants of the same role.
+        audio:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.ChatCompletionRequestAssistantMessageAudio'
+          nullable: true
+        tool_calls:
+          $ref: '#/components/schemas/OpenAI.ChatCompletionMessageToolCalls'
+        function_call:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.ChatCompletionRequestAssistantMessageFunctionCall'
+          nullable: true
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ChatCompletionRequestMessage'
+      description: Messages sent by the model in response to user messages.
+      title: Assistant message
+    OpenAI.ChatCompletionRequestAssistantMessageAudio:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+    OpenAI.ChatCompletionRequestAssistantMessageContentPart:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/OpenAI.ChatCompletionRequestAssistantMessageContentPartType'
+      discriminator:
+        propertyName: type
+        mapping:
+          refusal: '#/components/schemas/OpenAI.ChatCompletionRequestMessageContentPartRefusal'
+          text: '#/components/schemas/OpenAI.ChatCompletionRequestAssistantMessageContentPartChatCompletionRequestMessageContentPartText'
+    OpenAI.ChatCompletionRequestAssistantMessageContentPartChatCompletionRequestMessageContentPartText:
+      type: object
+      required:
+        - type
+        - text
+      properties:
+        type:
+          type: string
+          enum:
+            - text
+          description: The type of the content part.
+          x-stainless-const: true
+        text:
+          type: string
+          description: The text content.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ChatCompletionRequestAssistantMessageContentPart'
+      description: Learn about [text inputs](/docs/guides/text-generation).
+      title: Text content part
+    OpenAI.ChatCompletionRequestAssistantMessageContentPartType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - text
+            - refusal
+    OpenAI.ChatCompletionRequestAssistantMessageFunctionCall:
+      type: object
+      required:
+        - arguments
+        - name
+      properties:
+        arguments:
+          type: string
+        name:
+          type: string
+    OpenAI.ChatCompletionRequestDeveloperMessage:
+      type: object
+      required:
+        - content
+        - role
+      properties:
+        content:
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                $ref: '#/components/schemas/OpenAI.ChatCompletionRequestMessageContentPartText'
+          description: The contents of the developer message.
+        role:
+          type: string
+          enum:
+            - developer
+          description: The role of the messages author, in this case `developer`.
+          x-stainless-const: true
+        name:
+          type: string
+          description: An optional name for the participant. Provides the model information to differentiate between participants of the same role.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ChatCompletionRequestMessage'
+      description: |-
+        Developer-provided instructions that the model should follow, regardless of
+        messages sent by the user. With o1 models and newer, `developer` messages
+        replace the previous `system` messages.
+      title: Developer message
+    OpenAI.ChatCompletionRequestFunctionMessage:
+      type: object
+      required:
+        - role
+        - content
+        - name
+      properties:
+        role:
+          type: string
+          enum:
+            - function
+          description: The role of the messages author, in this case `function`.
+          x-stainless-const: true
+        content:
+          type: string
+          nullable: true
+        name:
+          type: string
+          description: The name of the function to call.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ChatCompletionRequestMessage'
+      title: Function message
+      deprecated: true
+    OpenAI.ChatCompletionRequestMessage:
+      type: object
+      required:
+        - role
+      properties:
+        role:
+          $ref: '#/components/schemas/OpenAI.ChatCompletionRequestMessageType'
+      discriminator:
+        propertyName: role
+        mapping:
+          assistant: '#/components/schemas/OpenAI.ChatCompletionRequestAssistantMessage'
+          developer: '#/components/schemas/OpenAI.ChatCompletionRequestDeveloperMessage'
+          function: '#/components/schemas/OpenAI.ChatCompletionRequestFunctionMessage'
+          system: '#/components/schemas/OpenAI.ChatCompletionRequestSystemMessage'
+          user: '#/components/schemas/OpenAI.ChatCompletionRequestUserMessage'
+          tool: '#/components/schemas/OpenAI.ChatCompletionRequestToolMessage'
+    OpenAI.ChatCompletionRequestMessageContentPartAudio:
+      type: object
+      required:
+        - type
+        - input_audio
+      properties:
+        type:
+          type: string
+          enum:
+            - input_audio
+          description: The type of the content part. Always `input_audio`.
+          x-stainless-const: true
+        input_audio:
+          $ref: '#/components/schemas/OpenAI.ChatCompletionRequestMessageContentPartAudioInputAudio'
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ChatCompletionRequestUserMessageContentPart'
+      description: Learn about [audio inputs](/docs/guides/audio).
+      title: Audio content part
+    OpenAI.ChatCompletionRequestMessageContentPartAudioInputAudio:
+      type: object
+      required:
+        - data
+        - format
+      properties:
+        data:
+          type: string
+        format:
+          type: string
+          enum:
+            - wav
+            - mp3
+    OpenAI.ChatCompletionRequestMessageContentPartFile:
+      type: object
+      required:
+        - type
+        - file
+      properties:
+        type:
+          type: string
+          enum:
+            - file
+          description: The type of the content part. Always `file`.
+          x-stainless-const: true
+        file:
+          $ref: '#/components/schemas/OpenAI.ChatCompletionRequestMessageContentPartFileFile'
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ChatCompletionRequestUserMessageContentPart'
+      description: Learn about [file inputs](/docs/guides/text) for text generation.
+      title: File content part
+    OpenAI.ChatCompletionRequestMessageContentPartFileFile:
+      type: object
+      properties:
+        filename:
+          type: string
+        file_data:
+          type: string
+        file_id:
+          type: string
+    OpenAI.ChatCompletionRequestMessageContentPartImage:
+      type: object
+      required:
+        - type
+        - image_url
+      properties:
+        type:
+          type: string
+          enum:
+            - image_url
+          description: The type of the content part.
+          x-stainless-const: true
+        image_url:
+          $ref: '#/components/schemas/OpenAI.ChatCompletionRequestMessageContentPartImageImageUrl'
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ChatCompletionRequestUserMessageContentPart'
+      description: Learn about [image inputs](/docs/guides/vision).
+      title: Image content part
+    OpenAI.ChatCompletionRequestMessageContentPartImageImageUrl:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          format: uri
+        detail:
+          type: string
+          enum:
+            - auto
+            - low
+            - high
+          default: auto
+    OpenAI.ChatCompletionRequestMessageContentPartRefusal:
+      type: object
+      required:
+        - type
+        - refusal
+      properties:
+        type:
+          type: string
+          enum:
+            - refusal
+          description: The type of the content part.
+          x-stainless-const: true
+        refusal:
+          type: string
+          description: The refusal message generated by the model.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ChatCompletionRequestAssistantMessageContentPart'
+      title: Refusal content part
+    OpenAI.ChatCompletionRequestMessageContentPartText:
+      type: object
+      required:
+        - type
+        - text
+      properties:
+        type:
+          type: string
+          enum:
+            - text
+          description: The type of the content part.
+          x-stainless-const: true
+        text:
+          type: string
+          description: The text content.
+      description: Learn about [text inputs](/docs/guides/text-generation).
+      title: Text content part
+    OpenAI.ChatCompletionRequestMessageType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - developer
+            - system
+            - user
+            - assistant
+            - tool
+            - function
+    OpenAI.ChatCompletionRequestSystemMessage:
+      type: object
+      required:
+        - content
+        - role
+      properties:
+        content:
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                $ref: '#/components/schemas/OpenAI.ChatCompletionRequestSystemMessageContentPart'
+          description: The contents of the system message.
+        role:
+          type: string
+          enum:
+            - system
+          description: The role of the messages author, in this case `system`.
+          x-stainless-const: true
+        name:
+          type: string
+          description: An optional name for the participant. Provides the model information to differentiate between participants of the same role.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ChatCompletionRequestMessage'
+      description: |-
+        Developer-provided instructions that the model should follow, regardless of
+        messages sent by the user. With o1 models and newer, use `developer` messages
+        for this purpose instead.
+      title: System message
+    OpenAI.ChatCompletionRequestSystemMessageContentPart:
+      $ref: '#/components/schemas/OpenAI.ChatCompletionRequestMessageContentPartText'
+    OpenAI.ChatCompletionRequestToolMessage:
+      type: object
+      required:
+        - role
+        - content
+        - tool_call_id
+      properties:
+        role:
+          type: string
+          enum:
+            - tool
+          description: The role of the messages author, in this case `tool`.
+          x-stainless-const: true
+        content:
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                $ref: '#/components/schemas/OpenAI.ChatCompletionRequestToolMessageContentPart'
+          description: The contents of the tool message.
+        tool_call_id:
+          type: string
+          description: Tool call that this message is responding to.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ChatCompletionRequestMessage'
+      title: Tool message
+    OpenAI.ChatCompletionRequestToolMessageContentPart:
+      $ref: '#/components/schemas/OpenAI.ChatCompletionRequestMessageContentPartText'
+    OpenAI.ChatCompletionRequestUserMessage:
+      type: object
+      required:
+        - content
+        - role
+      properties:
+        content:
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                $ref: '#/components/schemas/OpenAI.ChatCompletionRequestUserMessageContentPart'
+          description: The contents of the user message.
+        role:
+          type: string
+          enum:
+            - user
+          description: The role of the messages author, in this case `user`.
+          x-stainless-const: true
+        name:
+          type: string
+          description: An optional name for the participant. Provides the model information to differentiate between participants of the same role.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ChatCompletionRequestMessage'
+      description: |-
+        Messages sent by an end user, containing prompts or additional context
+        information.
+      title: User message
+    OpenAI.ChatCompletionRequestUserMessageContentPart:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/OpenAI.ChatCompletionRequestUserMessageContentPartType'
+      discriminator:
+        propertyName: type
+        mapping:
+          image_url: '#/components/schemas/OpenAI.ChatCompletionRequestMessageContentPartImage'
+          input_audio: '#/components/schemas/OpenAI.ChatCompletionRequestMessageContentPartAudio'
+          file: '#/components/schemas/OpenAI.ChatCompletionRequestMessageContentPartFile'
+          text: '#/components/schemas/OpenAI.ChatCompletionRequestUserMessageContentPartChatCompletionRequestMessageContentPartText'
+    OpenAI.ChatCompletionRequestUserMessageContentPartChatCompletionRequestMessageContentPartText:
+      type: object
+      required:
+        - type
+        - text
+      properties:
+        type:
+          type: string
+          enum:
+            - text
+          description: The type of the content part.
+          x-stainless-const: true
+        text:
+          type: string
+          description: The text content.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ChatCompletionRequestUserMessageContentPart'
+      description: Learn about [text inputs](/docs/guides/text-generation).
+      title: Text content part
+    OpenAI.ChatCompletionRequestUserMessageContentPartType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - text
+            - image_url
+            - input_audio
+            - file
+    OpenAI.ChatCompletionResponseMessage:
+      type: object
+      required:
+        - content
+        - refusal
+        - role
+      properties:
+        content:
+          type: string
+          nullable: true
+        refusal:
+          type: string
+          nullable: true
+        tool_calls:
+          $ref: '#/components/schemas/OpenAI.ChatCompletionMessageToolCallsItem'
+        annotations:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.ChatCompletionResponseMessageAnnotations'
+          description: |-
+            Annotations for the message, when applicable, as when using the
+              [web search tool](/docs/guides/tools-web-search?api-mode=chat).
+        role:
+          type: string
+          enum:
+            - assistant
+          description: The role of the author of this message.
+          x-stainless-const: true
+        function_call:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.ChatCompletionResponseMessageFunctionCall'
+          description: Deprecated and replaced by `tool_calls`. The name and arguments of a function that should be called, as generated by the model.
+          deprecated: true
+        audio:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.ChatCompletionResponseMessageAudio'
+          nullable: true
+      description: A chat completion message generated by the model.
+    OpenAI.ChatCompletionResponseMessageAnnotations:
+      type: object
+      required:
+        - type
+        - url_citation
+      properties:
+        type:
+          type: string
+          enum:
+            - url_citation
+          x-stainless-const: true
+        url_citation:
+          $ref: '#/components/schemas/OpenAI.ChatCompletionResponseMessageAnnotationsUrlCitation'
+    OpenAI.ChatCompletionResponseMessageAnnotationsUrlCitation:
+      type: object
+      required:
+        - end_index
+        - start_index
+        - url
+        - title
+      properties:
+        end_index:
+          $ref: '#/components/schemas/OpenAI.integer'
+        start_index:
+          $ref: '#/components/schemas/OpenAI.integer'
+        url:
+          type: string
+        title:
+          type: string
+    OpenAI.ChatCompletionResponseMessageAudio:
+      type: object
+      required:
+        - id
+        - expires_at
+        - data
+        - transcript
+      properties:
+        id:
+          type: string
+        expires_at:
+          type: integer
+          format: unixtime
+        data:
+          type: string
+        transcript:
+          type: string
+    OpenAI.ChatCompletionResponseMessageFunctionCall:
+      type: object
+      required:
+        - arguments
+        - name
+      properties:
+        arguments:
+          type: string
+        name:
+          type: string
+    OpenAI.ChatCompletionStreamOptions:
+      type: object
+      properties:
+        include_usage:
+          type: boolean
+          description: |-
+            If set, an additional chunk will be streamed before the `data: [DONE]`
+              message. The `usage` field on this chunk shows the token usage statistics
+              for the entire request, and the `choices` field will always be an empty
+              array.
+              All other chunks will also include a `usage` field, but with a null
+              value. **NOTE:** If the stream is interrupted, you may not receive the
+              final usage chunk which contains the total token usage for the request.
+        include_obfuscation:
+          type: boolean
+          description: |-
+            When true, stream obfuscation will be enabled. Stream obfuscation adds
+              random characters to an `obfuscation` field on streaming delta events to
+              normalize payload sizes as a mitigation to certain side-channel attacks.
+              These obfuscation fields are included by default, but add a small amount
+              of overhead to the data stream. You can set `include_obfuscation` to
+              false to optimize for bandwidth if you trust the network links between
+              your application and the OpenAI API.
+      description: 'Options for streaming response. Only set this when you set `stream: true`.'
+    OpenAI.ChatCompletionTokenLogprob:
+      type: object
+      required:
+        - token
+        - logprob
+        - bytes
+        - top_logprobs
+      properties:
+        token:
+          type: string
+          description: The token.
+        logprob:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.numeric'
+          description: The log probability of this token, if it is within the top 20 most likely tokens. Otherwise, the value `-9999.0` is used to signify that the token is very unlikely.
+        bytes:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.integer'
+          nullable: true
+        top_logprobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.ChatCompletionTokenLogprobTopLogprobs'
+          description: List of the most likely tokens and their log probability, at this token position. In rare cases, there may be fewer than the number of requested `top_logprobs` returned.
+    OpenAI.ChatCompletionTokenLogprobTopLogprobs:
+      type: object
+      required:
+        - token
+        - logprob
+        - bytes
+      properties:
+        token:
+          type: string
+        logprob:
+          $ref: '#/components/schemas/OpenAI.numeric'
+        bytes:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.integer'
+          nullable: true
     OpenAI.ChatCompletionTool:
       type: object
       required:
@@ -19876,6 +22876,23 @@ components:
           $ref: '#/components/schemas/OpenAI.FunctionObject'
       description: A function tool that can be used to generate a response.
       title: Function tool
+    OpenAI.ChatCompletionToolChoiceOption:
+      oneOf:
+        - type: string
+          enum:
+            - none
+            - auto
+            - required
+        - $ref: '#/components/schemas/OpenAI.ChatCompletionAllowedToolsChoice'
+        - $ref: '#/components/schemas/OpenAI.ChatCompletionNamedToolChoice'
+        - $ref: '#/components/schemas/OpenAI.ChatCompletionNamedToolChoiceCustom'
+      description: |-
+        Controls which (if any) tool is called by the model.
+        `none` means the model will not call any tool and instead generates a message.
+        `auto` means the model can pick between generating a message or calling one or more tools.
+        `required` means the model must call one or more tools.
+        Specifying a particular tool via `{"type": "function", "function": {"name": "my_function"}}` forces the model to call that tool.
+        `none` is the default when no tools are present. `auto` is the default if tools are present.
     OpenAI.ChatModel:
       type: string
       enum:
@@ -20163,6 +23180,52 @@ components:
       title: Comparison Filter
       x-oaiMeta:
         name: ComparisonFilter
+    OpenAI.CompletionUsage:
+      type: object
+      required:
+        - completion_tokens
+        - prompt_tokens
+        - total_tokens
+      properties:
+        completion_tokens:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.integer'
+          description: Number of tokens in the generated completion.
+        prompt_tokens:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.integer'
+          description: Number of tokens in the prompt.
+        total_tokens:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.integer'
+          description: Total number of tokens used in the request (prompt + completion).
+        completion_tokens_details:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.CompletionUsageCompletionTokensDetails'
+          description: Breakdown of tokens used in a completion.
+        prompt_tokens_details:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.CompletionUsagePromptTokensDetails'
+          description: Breakdown of tokens used in the prompt.
+      description: Usage statistics for the completion request.
+    OpenAI.CompletionUsageCompletionTokensDetails:
+      type: object
+      properties:
+        accepted_prediction_tokens:
+          $ref: '#/components/schemas/OpenAI.integer'
+        audio_tokens:
+          $ref: '#/components/schemas/OpenAI.integer'
+        reasoning_tokens:
+          $ref: '#/components/schemas/OpenAI.integer'
+        rejected_prediction_tokens:
+          $ref: '#/components/schemas/OpenAI.integer'
+    OpenAI.CompletionUsagePromptTokensDetails:
+      type: object
+      properties:
+        audio_tokens:
+          $ref: '#/components/schemas/OpenAI.integer'
+        cached_tokens:
+          $ref: '#/components/schemas/OpenAI.integer'
     OpenAI.CompoundFilter:
       type: object
       required:
@@ -21525,6 +24588,283 @@ components:
           description: The y-coordinate.
       description: 'An x/y coordinate pair, e.g. `{ x: 100, y: 200 }`.'
       title: Coordinate
+    OpenAI.CreateChatCompletionRequest:
+      type: object
+      required:
+        - messages
+        - model
+      properties:
+        metadata:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.Metadata'
+          nullable: true
+        top_logprobs:
+          type: integer
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.integer'
+          nullable: true
+        temperature:
+          type: number
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.numeric'
+          nullable: true
+          default: 1
+        top_p:
+          type: number
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.numeric'
+          nullable: true
+          default: 1
+        user:
+          type: string
+          description: |-
+            This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use `prompt_cache_key` instead to maintain caching optimizations.
+              A stable identifier for your end-users.
+              Used to boost cache hit rates by better bucketing similar requests and  to help OpenAI detect and prevent abuse. [Learn more](/docs/guides/safety-best-practices#safety-identifiers).
+          deprecated: true
+        safety_identifier:
+          type: string
+          description: |-
+            A stable identifier used to help detect users of your application that may be violating OpenAI's usage policies.
+              The IDs should be a string that uniquely identifies each user. We recommend hashing their username or email address, in order to avoid sending us any identifying information. [Learn more](/docs/guides/safety-best-practices#safety-identifiers).
+        prompt_cache_key:
+          type: string
+          description: Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the `user` field. [Learn more](/docs/guides/prompt-caching).
+        service_tier:
+          $ref: '#/components/schemas/OpenAI.ServiceTier'
+        prompt_cache_retention:
+          type: string
+          enum:
+            - in-memory
+            - 24h
+          nullable: true
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.ChatCompletionRequestMessage'
+          minItems: 1
+          description: |-
+            A list of messages comprising the conversation so far. Depending on the
+              [model](/docs/models) you use, different message types (modalities) are
+              supported, like [text](/docs/guides/text-generation),
+              [images](/docs/guides/vision), and [audio](/docs/guides/audio).
+        model:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.ModelIdsShared'
+          description: |-
+            Model ID used to generate the response, like `gpt-4o` or `o3`. OpenAI
+              offers a wide range of models with different capabilities, performance
+              characteristics, and price points. Refer to the [model guide](/docs/models)
+              to browse and compare available models.
+        modalities:
+          $ref: '#/components/schemas/OpenAI.ResponseModalities'
+        verbosity:
+          $ref: '#/components/schemas/OpenAI.Verbosity'
+        reasoning_effort:
+          $ref: '#/components/schemas/OpenAI.ReasoningEffort'
+        max_completion_tokens:
+          type: integer
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.integer'
+          nullable: true
+          description: An upper bound for the number of tokens that can be generated for a completion, including visible output tokens and [reasoning tokens](/docs/guides/reasoning).
+        frequency_penalty:
+          type: number
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.numeric'
+          nullable: true
+          minimum: -2
+          maximum: 2
+          description: |-
+            Number between -2.0 and 2.0. Positive values penalize new tokens based on
+              their existing frequency in the text so far, decreasing the model's
+              likelihood to repeat the same line verbatim.
+        presence_penalty:
+          type: number
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.numeric'
+          nullable: true
+          minimum: -2
+          maximum: 2
+          description: |-
+            Number between -2.0 and 2.0. Positive values penalize new tokens based on
+              whether they appear in the text so far, increasing the model's likelihood
+              to talk about new topics.
+        web_search_options:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.CreateChatCompletionRequestWebSearchOptions'
+          description: |-
+            This tool searches the web for relevant results to use in a response.
+              Learn more about the [web search tool](/docs/guides/tools-web-search?api-mode=chat).
+          title: Web search
+        response_format:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.CreateChatCompletionRequestResponseFormat'
+          description: |-
+            An object specifying the format that the model must output.
+              Setting to `{ "type": "json_schema", "json_schema": {...} }` enables
+              Structured Outputs which ensures the model will match your supplied JSON
+              schema. Learn more in the [Structured Outputs
+              guide](/docs/guides/structured-outputs).
+              Setting to `{ "type": "json_object" }` enables the older JSON mode, which
+              ensures the message the model generates is valid JSON. Using `json_schema`
+              is preferred for models that support it.
+        audio:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.CreateChatCompletionRequestAudio'
+          nullable: true
+          description: |-
+            Parameters for audio output. Required when audio output is requested with
+              `modalities: ["audio"]`. [Learn more](/docs/guides/audio).
+        store:
+          type: boolean
+          nullable: true
+          description: |-
+            Whether or not to store the output of this chat completion request for
+              use in our [model distillation](/docs/guides/distillation) or
+              [evals](/docs/guides/evals) products.
+              Supports text and image inputs. Note: image inputs over 8MB will be dropped.
+        stream:
+          type: boolean
+          nullable: true
+          description: |-
+            If set to true, the model response data will be streamed to the client
+              as it is generated using [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format).
+              See the [Streaming section below](/docs/api-reference/chat/streaming)
+              for more information, along with the [streaming responses](/docs/guides/streaming-responses)
+              guide for more information on how to handle the streaming events.
+        stop:
+          $ref: '#/components/schemas/OpenAI.StopConfiguration'
+        logit_bias:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/OpenAI.integer'
+          nullable: true
+          description: |-
+            Modify the likelihood of specified tokens appearing in the completion.
+              Accepts a JSON object that maps tokens (specified by their token ID in the
+              tokenizer) to an associated bias value from -100 to 100. Mathematically,
+              the bias is added to the logits generated by the model prior to sampling.
+              The exact effect will vary per model, but values between -1 and 1 should
+              decrease or increase likelihood of selection; values like -100 or 100
+              should result in a ban or exclusive selection of the relevant token.
+          x-oaiTypeLabel: map
+        logprobs:
+          type: boolean
+          nullable: true
+          description: |-
+            Whether to return log probabilities of the output tokens or not. If true,
+              returns the log probabilities of each output token returned in the
+              `content` of `message`.
+        max_tokens:
+          type: integer
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.integer'
+          nullable: true
+          description: |-
+            The maximum number of [tokens](/tokenizer) that can be generated in the
+              chat completion. This value can be used to control
+              [costs](https://openai.com/api/pricing/) for text generated via API.
+              This value is now deprecated in favor of `max_completion_tokens`, and is
+              not compatible with [o-series models](/docs/guides/reasoning).
+          deprecated: true
+        'n':
+          type: integer
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.integer'
+          nullable: true
+          minimum: 1
+          maximum: 128
+          description: How many chat completion choices to generate for each input message. Note that you will be charged based on the number of generated tokens across all of the choices. Keep `n` as `1` to minimize costs.
+          default: 1
+        prediction:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.PredictionContent'
+          description: |-
+            Configuration for a [Predicted Output](/docs/guides/predicted-outputs),
+              which can greatly improve response times when large parts of the model
+              response are known ahead of time. This is most common when you are
+              regenerating a file with only minor changes to most of the content.
+        seed:
+          type: integer
+          format: int64
+          nullable: true
+          description: |-
+            This feature is in Beta.
+              If specified, our system will make a best effort to sample deterministically, such that repeated requests with the same `seed` and parameters should return the same result.
+              Determinism is not guaranteed, and you should refer to the `system_fingerprint` response parameter to monitor changes in the backend.
+          deprecated: true
+          x-oaiMeta:
+            beta: true
+        stream_options:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.ChatCompletionStreamOptions'
+          nullable: true
+        tools:
+          type: array
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/OpenAI.ChatCompletionTool'
+              - $ref: '#/components/schemas/OpenAI.CustomToolChatCompletions'
+          description: |-
+            A list of tools the model may call. You can provide either
+              [custom tools](/docs/guides/function-calling#custom-tools) or
+              [function tools](/docs/guides/function-calling).
+        tool_choice:
+          $ref: '#/components/schemas/OpenAI.ChatCompletionToolChoiceOption'
+        parallel_tool_calls:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.ParallelToolCalls'
+          default: true
+        function_call:
+          oneOf:
+            - type: string
+              enum:
+                - none
+                - auto
+            - $ref: '#/components/schemas/OpenAI.ChatCompletionFunctionCallOption'
+          description: |-
+            Deprecated in favor of `tool_choice`.
+              Controls which (if any) function is called by the model.
+              `none` means the model will not call a function and instead generates a
+              message.
+              `auto` means the model can pick between generating a message or calling a
+              function.
+              Specifying a particular function via `{"name": "my_function"}` forces the
+              model to call that function.
+              `none` is the default when no functions are present. `auto` is the default
+              if functions are present.
+          deprecated: true
+        functions:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.ChatCompletionFunctions'
+          minItems: 1
+          maxItems: 128
+          description: |-
+            Deprecated in favor of `tools`.
+              A list of functions the model may generate JSON inputs for.
+          deprecated: true
+    OpenAI.CreateChatCompletionRequestAudio:
+      type: object
+      required:
+        - voice
+        - format
+      properties:
+        voice:
+          $ref: '#/components/schemas/OpenAI.VoiceIdsOrCustomVoice'
+        format:
+          type: string
+          enum:
+            - wav
+            - aac
+            - mp3
+            - flac
+            - opus
+            - pcm16
     OpenAI.CreateChatCompletionRequestResponseFormat:
       type: object
       required:
@@ -21535,6 +24875,7 @@ components:
       discriminator:
         propertyName: type
         mapping:
+          json_schema: '#/components/schemas/OpenAI.ResponseFormatJsonSchema'
           text: '#/components/schemas/OpenAI.CreateChatCompletionRequestResponseFormatResponseFormatText'
           json_object: '#/components/schemas/OpenAI.CreateChatCompletionRequestResponseFormatResponseFormatJsonObject'
       description: |-
@@ -21588,6 +24929,151 @@ components:
             - text
             - json_schema
             - json_object
+    OpenAI.CreateChatCompletionRequestWebSearchOptions:
+      type: object
+      properties:
+        user_location:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.CreateChatCompletionRequestWebSearchOptionsUserLocation'
+          nullable: true
+        search_context_size:
+          $ref: '#/components/schemas/OpenAI.WebSearchContextSize'
+    OpenAI.CreateChatCompletionRequestWebSearchOptionsUserLocation:
+      type: object
+      required:
+        - type
+        - approximate
+      properties:
+        type:
+          type: string
+          enum:
+            - approximate
+          x-stainless-const: true
+        approximate:
+          $ref: '#/components/schemas/OpenAI.WebSearchLocation'
+    OpenAI.CreateChatCompletionResponse:
+      type: object
+      required:
+        - id
+        - choices
+        - created
+        - model
+        - object
+      properties:
+        id:
+          type: string
+          description: A unique identifier for the chat completion.
+        choices:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.CreateChatCompletionResponseChoices'
+          description: A list of chat completion choices. Can be more than one if `n` is greater than 1.
+        created:
+          type: integer
+          format: unixtime
+          description: The Unix timestamp (in seconds) of when the chat completion was created.
+        model:
+          type: string
+          description: The model used for the chat completion.
+        service_tier:
+          $ref: '#/components/schemas/OpenAI.ServiceTier'
+        system_fingerprint:
+          type: string
+          description: |-
+            This fingerprint represents the backend configuration that the model runs with.
+              Can be used in conjunction with the `seed` request parameter to understand when backend changes have been made that might impact determinism.
+          deprecated: true
+        object:
+          type: string
+          enum:
+            - chat.completion
+          description: The object type, which is always `chat.completion`.
+          x-stainless-const: true
+        usage:
+          $ref: '#/components/schemas/OpenAI.CompletionUsage'
+      description: Represents a chat completion response returned by model, based on the provided input.
+      x-oaiMeta:
+        name: The chat completion object
+        group: chat
+        example: |
+          {
+            "id": "chatcmpl-B9MHDbslfkBeAs8l4bebGdFOJ6PeG",
+            "object": "chat.completion",
+            "created": 1741570283,
+            "model": "gpt-4o-2024-08-06",
+            "choices": [
+              {
+                "index": 0,
+                "message": {
+                  "role": "assistant",
+                  "content": "The image shows a wooden boardwalk path running through a lush green field or meadow. The sky is bright blue with some scattered clouds, giving the scene a serene and peaceful atmosphere. Trees and shrubs are visible in the background.",
+                  "refusal": null,
+                  "annotations": []
+                },
+                "logprobs": null,
+                "finish_reason": "stop"
+              }
+            ],
+            "usage": {
+              "prompt_tokens": 1117,
+              "completion_tokens": 46,
+              "total_tokens": 1163,
+              "prompt_tokens_details": {
+                "cached_tokens": 0,
+                "audio_tokens": 0
+              },
+              "completion_tokens_details": {
+                "reasoning_tokens": 0,
+                "audio_tokens": 0,
+                "accepted_prediction_tokens": 0,
+                "rejected_prediction_tokens": 0
+              }
+            },
+            "service_tier": "default",
+            "system_fingerprint": "fp_fc9f1d7035"
+          }
+    OpenAI.CreateChatCompletionResponseChoices:
+      type: object
+      required:
+        - finish_reason
+        - index
+        - message
+        - logprobs
+      properties:
+        finish_reason:
+          type: string
+          enum:
+            - stop
+            - length
+            - tool_calls
+            - content_filter
+            - function_call
+        index:
+          $ref: '#/components/schemas/OpenAI.integer'
+        message:
+          $ref: '#/components/schemas/OpenAI.ChatCompletionResponseMessage'
+        logprobs:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.CreateChatCompletionResponseChoicesLogprobs'
+          nullable: true
+    OpenAI.CreateChatCompletionResponseChoicesLogprobs:
+      type: object
+      required:
+        - content
+        - refusal
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.ChatCompletionTokenLogprob'
+          nullable: true
+        refusal:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.ChatCompletionTokenLogprob'
+          nullable: true
     OpenAI.CreateConversationBody:
       type: object
       properties:
@@ -22179,6 +25665,76 @@ components:
         - $ref: '#/components/schemas/OpenAI.CustomToolParamFormat'
       description: Unconstrained free-form text.
       title: Text format
+    OpenAI.CustomToolChatCompletions:
+      type: object
+      required:
+        - type
+        - custom
+      properties:
+        type:
+          type: string
+          enum:
+            - custom
+          description: The type of the custom tool. Always `custom`.
+          x-stainless-const: true
+        custom:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.CustomToolChatCompletionsCustom'
+          description: Properties of the custom tool.
+          title: Custom tool properties
+      description: A custom tool that processes input using a specified format.
+      title: Custom tool
+    OpenAI.CustomToolChatCompletionsCustom:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        format:
+          oneOf:
+            - $ref: '#/components/schemas/OpenAI.CustomToolChatCompletionsCustomFormatText'
+            - $ref: '#/components/schemas/OpenAI.CustomToolChatCompletionsCustomFormatGrammar'
+    OpenAI.CustomToolChatCompletionsCustomFormatGrammar:
+      type: object
+      required:
+        - type
+        - grammar
+      properties:
+        type:
+          type: string
+          enum:
+            - grammar
+          x-stainless-const: true
+        grammar:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.CustomToolChatCompletionsCustomFormatGrammarGrammar'
+          title: Grammar format
+    OpenAI.CustomToolChatCompletionsCustomFormatGrammarGrammar:
+      type: object
+      required:
+        - definition
+        - syntax
+      properties:
+        definition:
+          type: string
+        syntax:
+          type: string
+          enum:
+            - lark
+            - regex
+    OpenAI.CustomToolChatCompletionsCustomFormatText:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - text
+          x-stainless-const: true
     OpenAI.CustomToolParam:
       type: object
       required:
@@ -22378,6 +25934,13 @@ components:
         debugInfo:
           type: object
           additionalProperties: {}
+    OpenAI.ErrorResponse:
+      type: object
+      required:
+        - error
+      properties:
+        error:
+          $ref: '#/components/schemas/OpenAI.Error'
     OpenAI.EvalApiError:
       type: object
       required:
@@ -24145,9 +27708,9 @@ components:
       discriminator:
         propertyName: type
         mapping:
+          container_auto: '#/components/schemas/OpenAI.ContainerAutoParam'
           local: '#/components/schemas/OpenAI.FunctionShellToolParamEnvironmentLocalEnvironmentParam'
           container_reference: '#/components/schemas/OpenAI.FunctionShellToolParamEnvironmentContainerReferenceParam'
-          container_auto: '#/components/schemas/OpenAI.ContainerAutoParam'
     OpenAI.FunctionShellToolParamEnvironmentContainerReferenceParam:
       type: object
       required:
@@ -29421,6 +32984,11 @@ components:
         - $ref: '#/components/schemas/OpenAI.ComputerAction'
       description: A mouse move action.
       title: Move
+    OpenAI.OrderEnum:
+      type: string
+      enum:
+        - asc
+        - desc
     OpenAI.OutputContent:
       type: object
       required:
@@ -30386,6 +33954,37 @@ components:
           enum:
             - output_text
             - refusal
+    OpenAI.ParallelToolCalls:
+      type: boolean
+      description: Whether to enable [parallel function calling](/docs/guides/function-calling#configuring-parallel-function-calling) during tool use.
+    OpenAI.PredictionContent:
+      type: object
+      required:
+        - type
+        - content
+      properties:
+        type:
+          type: string
+          enum:
+            - content
+          description: |-
+            The type of the predicted content you want to provide. This type is
+              currently always `content`.
+          x-stainless-const: true
+        content:
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                $ref: '#/components/schemas/OpenAI.ChatCompletionRequestMessageContentPartText'
+          description: |-
+            The content that should be matched when generating a model response.
+              If generated tokens would match this content, the entire model response
+              can be returned much more quickly.
+      description: |-
+        Static predicted output content, such as the content of a text file that is
+        being regenerated.
+      title: Static Content
     OpenAI.Prompt:
       type: object
       required:
@@ -32346,6 +35945,22 @@ components:
             "output_index": 0,
             "item_id": "mcpl_682d4379df088191886b70f4ec39f90403937d5f622d7a90"
           }
+    OpenAI.ResponseModalities:
+      type: array
+      items:
+        type: string
+        enum:
+          - text
+          - audio
+      description: |-
+        Output types that you would like the model to generate.
+        Most models are capable of generating text, which is the default:
+        `["text"]`
+        The `gpt-4o-audio-preview` model can also be used to
+        [generate audio](/docs/guides/audio). To request that this model generate
+        both text and audio responses, you can use:
+        `["text", "audio"]`
+      nullable: true
     OpenAI.ResponseOutputItemAddedEvent:
       type: object
       required:
@@ -33381,6 +36996,18 @@ components:
         - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
       description: Forces the model to call the shell tool when a tool call is required.
       title: Specific shell tool choice
+    OpenAI.StopConfiguration:
+      oneOf:
+        - type: string
+          nullable: true
+        - type: array
+          items:
+            type: string
+      nullable: true
+      description: |-
+        Not supported with latest reasoning models `o3` and `o4-mini`.
+        Up to 4 sequences where the API will stop generating further tokens. The
+        returned text will not contain the stop sequence.
     OpenAI.SummaryTextContent:
       type: object
       required:
@@ -33887,6 +37514,16 @@ components:
         - $ref: '#/components/schemas/OpenAI.ComputerAction'
       description: An action to type in text.
       title: Type
+    OpenAI.UpdateChatCompletionParametersBody:
+      type: object
+      required:
+        - metadata
+      properties:
+        metadata:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.Metadata'
+          nullable: true
     OpenAI.UpdateConversationBody:
       type: object
       required:
@@ -33960,6 +37597,32 @@ components:
         more concise responses, while higher values will result in more verbose responses.
         Currently supported values are `low`, `medium`, and `high`.
       nullable: true
+    OpenAI.VoiceIdsOrCustomVoice:
+      anyOf:
+        - $ref: '#/components/schemas/OpenAI.VoiceIdsShared'
+        - type: object
+          properties:
+            id:
+              type: string
+          required:
+            - id
+      description: A built-in voice name or a custom voice reference.
+      title: Voice
+    OpenAI.VoiceIdsShared:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - alloy
+            - ash
+            - ballad
+            - coral
+            - echo
+            - sage
+            - shimmer
+            - verse
+            - marin
+            - cedar
     OpenAI.WaitParam:
       type: object
       required:
@@ -34085,6 +37748,37 @@ components:
           nullable: true
       description: The approximate location of the user.
       title: Web search approximate location
+    OpenAI.WebSearchContextSize:
+      type: string
+      enum:
+        - low
+        - medium
+        - high
+      description: |-
+        High level guidance for the amount of context window space to use for the
+        search. One of `low`, `medium`, or `high`. `medium` is the default.
+    OpenAI.WebSearchLocation:
+      type: object
+      properties:
+        country:
+          type: string
+          description: |-
+            The two-letter
+              [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1) of the user,
+              e.g. `US`.
+        region:
+          type: string
+          description: Free text input for the region of the user, e.g. `California`.
+        city:
+          type: string
+          description: Free text input for the city of the user, e.g. `San Francisco`.
+        timezone:
+          type: string
+          description: |-
+            The [IANA timezone](https://timeapi.io/documentation/iana-timezones)
+              of the user, e.g. `America/Los_Angeles`.
+      description: Approximate location parameters for the search.
+      title: Web search location
     OpenAI.WebSearchPreviewTool:
       type: object
       required:
