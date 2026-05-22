@@ -82,12 +82,21 @@ Also continue to skip the upstream `views/` directory, which is documentation-on
 
 ## Conventions and constraints
 
-- Never edit files outside `specification/ai-foundry/data-plane/Foundry/src`.
+- Never edit files outside `specification/ai-foundry/data-plane/Foundry/src`, **with one exception:** `specification/ai-foundry/data-plane/Foundry/main.tsp` must be updated to import any newly created TypeSpec file (see below).
 - Never edit `client.tsp`.
 - Do not overwrite existing `main.tsp` or `tspconfig.yaml`.
 - Match the existing file naming convention in sibling `openai-*` directories (e.g. `routes.tsp`, `models.tsp`).
 - Preserve formatting consistent with the rest of the project (run/respect existing Prettier/TypeSpec formatting where applicable).
 - Verify after editing that no operation has been double-defined across the `openai-*` directories.
+
+## Wiring new files into main.tsp
+
+Any TypeSpec file you create under `specification/ai-foundry/data-plane/Foundry/src` must be imported from `specification/ai-foundry/data-plane/Foundry/main.tsp` so the compiler picks it up.
+
+- For each new file (e.g. `src/openai-chat/routes.tsp`), add a line like `import "./src/openai-chat/routes.tsp";` to `main.tsp`.
+- Insert the import in a location consistent with the existing ordering of `openai-*` imports in that file.
+- Do not remove or reorder unrelated imports.
+- If a file with the same path is already imported, do not duplicate the import.
 
 ## Output
 
