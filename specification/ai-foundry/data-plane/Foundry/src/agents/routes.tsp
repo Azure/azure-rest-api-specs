@@ -454,7 +454,6 @@ interface Agents {
   /**
    * Stops a session.
    * Returns 204 No Content when the stop succeeds.
-   * Returns a failed session resource when the stop attempt fails.
    */
   @post
   @route("/agents/{agent_name}/endpoint/sessions/{session_id}:stop")
