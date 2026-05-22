@@ -456,87 +456,181 @@ namespace Azure.ResourceManager.Models {
 
 // C# @@usage decorators for backward-compatible setters on models
 // Resource types
-@@usage(StorageAccount, Azure.ClientGenerator.Core.Usage.input, "csharp");
-@@usage(BlobContainer, Azure.ClientGenerator.Core.Usage.input, "csharp");
-@@usage(BlobInventoryPolicy, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(
+  StorageAccount,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  BlobContainer,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  BlobInventoryPolicy,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
 @@usage(
   BlobServiceProperties,
-  Azure.ClientGenerator.Core.Usage.input,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-@@usage(DeletedAccount, Azure.ClientGenerator.Core.Usage.input, "csharp");
-@@usage(FileShare, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(
+  DeletedAccount,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(
+  FileShare,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
 @@usage(
   ObjectReplicationPolicy,
-  Azure.ClientGenerator.Core.Usage.input,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-@@usage(LocalUser, Azure.ClientGenerator.Core.Usage.input, "csharp");
-@@usage(ManagementPolicy, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(
+  LocalUser,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ManagementPolicy,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
 @@usage(
   StorageAccountMigration,
-  Azure.ClientGenerator.Core.Usage.input,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 @@usage(
   PrivateEndpointConnection,
-  Azure.ClientGenerator.Core.Usage.input,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
 // Non-resource models
 @@usage(
   BlobInventoryPolicyRule,
-  Azure.ClientGenerator.Core.Usage.input,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 @@usage(
   BlobInventoryPolicySchema,
-  Azure.ClientGenerator.Core.Usage.input,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-@@usage(ChangeFeed, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(
+  ChangeFeed,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
 @@usage(
   DeleteRetentionPolicy,
-  Azure.ClientGenerator.Core.Usage.input,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 @@usage(
   EncryptionScopeKeyVaultProperties,
-  Azure.ClientGenerator.Core.Usage.input,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 @@usage(
   ImmutableStorageAccount,
-  Azure.ClientGenerator.Core.Usage.input,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 @@usage(
   ImmutableStorageWithVersioning,
-  Azure.ClientGenerator.Core.Usage.input,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 @@usage(
   LastAccessTimeTrackingPolicy,
-  Azure.ClientGenerator.Core.Usage.input,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-@@usage(ManagementPolicyRule, Azure.ClientGenerator.Core.Usage.input, "csharp");
-@@usage(ProtocolSettings, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(
+  ManagementPolicyRule,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ProtocolSettings,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
 @@usage(
   RestorePolicyProperties,
-  Azure.ClientGenerator.Core.Usage.input,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-@@usage(SmbSetting, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(
+  SmbSetting,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
 @@usage(
   StorageAccountCreateParameters,
-  Azure.ClientGenerator.Core.Usage.input,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 @@usage(
   StorageAccountSkuConversionStatus,
-  Azure.ClientGenerator.Core.Usage.input,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 // SkuConversionStatus: prior GA had StartOn/EndOn (DateTimeOffset?)
@@ -544,39 +638,109 @@ namespace Azure.ResourceManager.Models {
 @@clientName(StorageAccountSkuConversionStatus.endTime, "EndOn", "csharp");
 @@usage(
   StorageAccountUpdateParameters,
-  Azure.ClientGenerator.Core.Usage.input,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 @@usage(
   StorageTaskAssignmentProperties,
-  Azure.ClientGenerator.Core.Usage.input,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 @@usage(
   StorageTaskReportInstance,
-  Azure.ClientGenerator.Core.Usage.input,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 @@usage(
   StorageTaskAssignmentUpdateProperties,
-  Azure.ClientGenerator.Core.Usage.input,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-@@usage(TagFilter, Azure.ClientGenerator.Core.Usage.input, "csharp");
-@@usage(IPRule, Azure.ClientGenerator.Core.Usage.input, "csharp");
-@@usage(KeyVaultProperties, Azure.ClientGenerator.Core.Usage.input, "csharp");
-@@usage(ResourceAccessRule, Azure.ClientGenerator.Core.Usage.input, "csharp");
-@@usage(VirtualNetworkRule, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(
+  TagFilter,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  IPRule,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  KeyVaultProperties,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ResourceAccessRule,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  VirtualNetworkRule,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
 @@usage(
   ActiveDirectoryProperties,
-  Azure.ClientGenerator.Core.Usage.input,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-@@usage(CustomDomain, Azure.ClientGenerator.Core.Usage.input, "csharp");
-@@usage(EncryptionService, Azure.ClientGenerator.Core.Usage.input, "csharp");
-@@usage(RoutingPreference, Azure.ClientGenerator.Core.Usage.input, "csharp");
-@@usage(AccessPolicy, Azure.ClientGenerator.Core.Usage.input, "csharp");
-@@usage(TableAccessPolicy, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(
+  CustomDomain,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  EncryptionService,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  RoutingPreference,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  AccessPolicy,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  TableAccessPolicy,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
 
 // C# property renames for backward compatibility (Is-prefix for boolean properties)
 @@clientName(ChangeFeed.enabled, "IsEnabled", "csharp");
