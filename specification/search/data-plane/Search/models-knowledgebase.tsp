@@ -467,6 +467,7 @@ model KnowledgeBaseRetrievalActivityRecord {
 model KnowledgeBaseSearchIndexActivityRecord
   extends KnowledgeBaseActivityRecord {
   ...KnowledgeBaseRetrievalActivityRecord;
+
   /** The discriminator value. */
   type: KnowledgeBaseActivityRecordType.searchIndex;
 
@@ -493,9 +494,9 @@ model KnowledgeBaseSearchIndexActivityArguments {
 }
 
 /** Represents a azure blob retrieval activity record. */
-model KnowledgeBaseAzureBlobActivityRecord
-  extends KnowledgeBaseActivityRecord {
+model KnowledgeBaseAzureBlobActivityRecord extends KnowledgeBaseActivityRecord {
   ...KnowledgeBaseRetrievalActivityRecord;
+
   /** The discriminator value. */
   type: KnowledgeBaseActivityRecordType.azureBlob;
 
@@ -515,6 +516,7 @@ model KnowledgeBaseAzureBlobActivityArguments {
 model KnowledgeBaseIndexedSharePointActivityRecord
   extends KnowledgeBaseActivityRecord {
   ...KnowledgeBaseRetrievalActivityRecord;
+
   /** The discriminator value. */
   type: KnowledgeBaseActivityRecordType.indexedSharePoint;
 
@@ -534,6 +536,7 @@ model KnowledgeBaseIndexedSharePointActivityArguments {
 model KnowledgeBaseIndexedOneLakeActivityRecord
   extends KnowledgeBaseActivityRecord {
   ...KnowledgeBaseRetrievalActivityRecord;
+
   /** The discriminator value. */
   type: KnowledgeBaseActivityRecordType.indexedOneLake;
 
@@ -548,9 +551,9 @@ model KnowledgeBaseIndexedOneLakeActivityArguments {
 }
 
 /** Represents a web retrieval activity record. */
-model KnowledgeBaseWebActivityRecord
-  extends KnowledgeBaseActivityRecord {
+model KnowledgeBaseWebActivityRecord extends KnowledgeBaseActivityRecord {
   ...KnowledgeBaseRetrievalActivityRecord;
+
   /** The discriminator value. */
   type: KnowledgeBaseActivityRecordType.web;
 
@@ -582,6 +585,7 @@ model KnowledgeBaseWebActivityArguments {
 model KnowledgeBaseRemoteSharePointActivityRecord
   extends KnowledgeBaseActivityRecord {
   ...KnowledgeBaseRetrievalActivityRecord;
+
   /** The discriminator value. */
   type: KnowledgeBaseActivityRecordType.remoteSharePoint;
 
@@ -603,9 +607,9 @@ model KnowledgeBaseRemoteSharePointActivityArguments {
 /** Represents a WorkIQ retrieval activity record. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
 @added(Versions.v2026_05_01_preview)
-model KnowledgeBaseWorkIQActivityRecord
-  extends KnowledgeBaseActivityRecord {
+model KnowledgeBaseWorkIQActivityRecord extends KnowledgeBaseActivityRecord {
   ...KnowledgeBaseRetrievalActivityRecord;
+
   /** The discriminator value. */
   type: KnowledgeBaseActivityRecordType.workIQ;
 
@@ -627,6 +631,7 @@ model KnowledgeBaseWorkIQActivityArguments {
 model KnowledgeBaseFabricDataAgentActivityRecord
   extends KnowledgeBaseActivityRecord {
   ...KnowledgeBaseRetrievalActivityRecord;
+
   /** The discriminator value. */
   type: KnowledgeBaseActivityRecordType.fabricDataAgent;
 
@@ -646,6 +651,7 @@ model KnowledgeBaseFabricDataAgentActivityArguments {
 model KnowledgeBaseFabricOntologyActivityRecord
   extends KnowledgeBaseActivityRecord {
   ...KnowledgeBaseRetrievalActivityRecord;
+
   /** The discriminator value. */
   type: KnowledgeBaseActivityRecordType.fabricOntology;
 
@@ -662,9 +668,9 @@ model KnowledgeBaseFabricOntologyActivityArguments {
 
 /** Represents an MCP server retrieval activity record. */
 @added(Versions.v2026_05_01_preview)
-model KnowledgeBaseMcpServerActivityRecord
-  extends KnowledgeBaseActivityRecord {
+model KnowledgeBaseMcpServerActivityRecord extends KnowledgeBaseActivityRecord {
   ...KnowledgeBaseRetrievalActivityRecord;
+
   /** The discriminator value. */
   type: KnowledgeBaseActivityRecordType.mcpServer;
 
@@ -685,9 +691,9 @@ model KnowledgeBaseMcpServerActivityArguments {
 
 /** Represents a File retrieval activity record. */
 @added(Versions.v2026_05_01_preview)
-model KnowledgeBaseFileActivityRecord
-  extends KnowledgeBaseActivityRecord {
+model KnowledgeBaseFileActivityRecord extends KnowledgeBaseActivityRecord {
   ...KnowledgeBaseRetrievalActivityRecord;
+
   /** The discriminator value. */
   type: KnowledgeBaseActivityRecordType.file;
 
@@ -707,6 +713,7 @@ model KnowledgeBaseFileActivityArguments {
 model KnowledgeBaseIndexedSqlActivityRecord
   extends KnowledgeBaseActivityRecord {
   ...KnowledgeBaseRetrievalActivityRecord;
+
   /** The discriminator value. */
   type: KnowledgeBaseActivityRecordType.indexedSql;
 
