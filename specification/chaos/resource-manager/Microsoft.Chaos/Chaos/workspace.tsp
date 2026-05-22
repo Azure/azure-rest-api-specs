@@ -28,7 +28,7 @@ interface Workspaces {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Workspace>;
 
   /**
-   * The operation to update a Workspace.
+   * Update a Workspace.
    */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<Workspace, WorkspaceUpdate>;
