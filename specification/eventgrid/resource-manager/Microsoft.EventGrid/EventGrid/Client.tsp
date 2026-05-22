@@ -82,6 +82,25 @@ namespace Microsoft.EventGrid {
   @@doc(Client.properties, "The properties of client.");
   @@doc(Clients.createOrUpdate::parameters.resource, "Client information.");
 
+  // 1.1.0 back-compat wrapper: EventGridPrivateLinkResourceData inherited from
+  // ResourceData. The spec PrivateLinkResource uses @customAzureResource and
+  // therefore the MPG generator does NOT emit `: ResourceData` automatically.
+  // Per §4.13 + §4.26(b) of mpg-api-diff: declare a wrapper that extends the
+  // common Resource type and swap via @@alternateType. The wrapper keeps the
+  // @customAzureResource decorator so per-parent expansion (EventGridDomain*,
+  // EventGridTopic*, EventGridPartnerNamespace*, EventGridNamespace*) keeps
+  // working.
+  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Required for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Required for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "Required for backward compatibility"
+  @Azure.ResourceManager.Legacy.customAzureResource
+  @doc("Information of the private link resource.")
+  model EventGridPrivateLinkResource
+    extends Azure.ResourceManager.CommonTypes.Resource {
+    ...OmitProperties<PrivateLinkResource, "id" | "name" | "type">;
+  }
+
   @@clientName(TlsVersion.`1.0`, "One0", "go,javascript,csharp");
   @@clientName(TlsVersion.`1.1`, "One1", "go,javascript,csharp");
   @@clientName(TlsVersion.`1.2`, "One2", "go,javascript,csharp");
@@ -344,8 +363,9 @@ namespace Microsoft.EventGrid {
     "EventGridPrivateEndpointConnection",
     "csharp"
   );
-  // PrivateLinkResource clientName - generates EventGridPrivateLinkResourceData (shared data class)
-  @@clientName(PrivateLinkResource, "EventGridPrivateLinkResource", "csharp");
+  // PrivateLinkResource — swap to the wrapper that inherits CommonTypes.Resource
+  // so the generated C# data class inherits ResourceData (1.1.0 baseline).
+  @@alternateType(PrivateLinkResource, EventGridPrivateLinkResource, "csharp");
   // Rename PrivateLinkServiceConnectionState back to ConnectionState for backward compat
   @@clientName(
     PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
