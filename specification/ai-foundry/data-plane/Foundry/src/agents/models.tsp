@@ -989,6 +989,9 @@ union AgentSessionStatus {
   /** Session initialization or lifecycle handling failed and requires delete to recover. */
   Failed: "failed",
 
+  /** Session is being stopped */
+  Stopping: "stopping",
+
   /** Session is being deleted (cleanup in progress). */
   Deleting: "deleting",
 
