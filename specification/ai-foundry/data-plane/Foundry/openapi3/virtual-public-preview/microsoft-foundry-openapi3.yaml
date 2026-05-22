@@ -1902,6 +1902,55 @@ paths:
       x-ms-foundry-meta:
         required_previews:
           - AgentEndpoints=V1Preview
+  /agents/{agent_name}/endpoint/sessions/{session_id}:stop:
+    post:
+      operationId: Agents_stopSession
+      description: |-
+        Stops a session.
+        Returns 204 No Content when the stop succeeds.
+        Returns a failed session resource when the stop attempt fails.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentEndpoints=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent.
+          schema:
+            type: string
+        - name: session_id
+          in: path
+          required: true
+          description: The session identifier.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agents
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentEndpoints=V1Preview
   /agents/{agent_name}/import:
     post:
       operationId: Agents_updateAgentFromManifest
@@ -10402,76 +10451,6 @@ paths:
       tags:
         - Schedules
   /skills:
-    post:
-      operationId: Skills_createSkill
-      description: Creates a skill.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Skills=V1Preview
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '201':
-          description: The request has succeeded and a new resource has been created as a result.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SkillObject'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Skills
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  maxLength: 63
-                  description: The unique name of the skill.
-                description:
-                  type: string
-                  maxLength: 1024
-                  description: A human-readable description of the skill.
-                instructions:
-                  type: string
-                  maxLength: 102400
-                  description: Instructions that define the behavior of the skill.
-                metadata:
-                  type: object
-                  additionalProperties:
-                    type: string
-                  description: |-
-                    Set of 16 key-value pairs that can be attached to an object. This can be
-                    useful for storing additional information about the object in a structured
-                    format, and querying for objects via API or the dashboard.
-
-                    Keys are strings with a maximum length of 64 characters. Values are strings
-                    with a maximum length of 512 characters.
-                  x-oaiTypeLabel: map
-              required:
-                - name
-      x-ms-foundry-meta:
-        required_previews:
-          - Skills=V1Preview
     get:
       operationId: Skills_listSkills
       description: Returns the list of all skills.
@@ -10545,7 +10524,7 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: '#/components/schemas/SkillObject'
+                      $ref: '#/components/schemas/Skill'
                     description: The requested list of items.
                   first_id:
                     type: string
@@ -10578,7 +10557,7 @@ paths:
           required: true
           description: The unique name of the skill.
           schema:
-            type: string
+            $ref: '#/components/schemas/SkillName'
         - name: Foundry-Features
           in: header
           required: true
@@ -10600,7 +10579,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SkillObject'
+                $ref: '#/components/schemas/Skill'
         default:
           description: An unexpected error response.
           content:
@@ -10613,15 +10592,15 @@ paths:
         required_previews:
           - Skills=V1Preview
     post:
-      operationId: Skills_updateSkill
-      description: Updates an existing skill.
+      operationId: updateSkill
+      description: Update a skill.
       parameters:
         - name: name
           in: path
           required: true
-          description: The unique name of the skill.
+          description: The name of the skill to update.
           schema:
-            type: string
+            $ref: '#/components/schemas/SkillName'
         - name: Foundry-Features
           in: header
           required: true
@@ -10643,7 +10622,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SkillObject'
+                $ref: '#/components/schemas/Skill'
         default:
           description: An unexpected error response.
           content:
@@ -10659,26 +10638,11 @@ paths:
             schema:
               type: object
               properties:
-                description:
+                default_version:
                   type: string
-                  maxLength: 1024
-                  description: A human-readable description of the skill.
-                instructions:
-                  type: string
-                  maxLength: 102400
-                  description: Instructions that define the behavior of the skill.
-                metadata:
-                  type: object
-                  additionalProperties:
-                    type: string
-                  description: |-
-                    Set of 16 key-value pairs that can be attached to an object. This can be
-                    useful for storing additional information about the object in a structured
-                    format, and querying for objects via API or the dashboard.
-
-                    Keys are strings with a maximum length of 64 characters. Values are strings
-                    with a maximum length of 512 characters.
-                  x-oaiTypeLabel: map
+                  description: The version identifier that the skill should point to. When set, the skill's default version will resolve to this version instead of the latest.
+              required:
+                - default_version
       x-ms-foundry-meta:
         required_previews:
           - Skills=V1Preview
@@ -10691,7 +10655,7 @@ paths:
           required: true
           description: The unique name of the skill.
           schema:
-            type: string
+            $ref: '#/components/schemas/SkillName'
         - name: Foundry-Features
           in: header
           required: true
@@ -10725,17 +10689,17 @@ paths:
       x-ms-foundry-meta:
         required_previews:
           - Skills=V1Preview
-  /skills/{name}:download:
+  /skills/{name}/content:
     get:
-      operationId: Skills_downloadSkill
-      description: Downloads a skill package.
+      operationId: getSkillContent
+      description: Download the zip content for the default version of a skill.
       parameters:
         - name: name
           in: path
           required: true
-          description: The unique name of the skill.
+          description: The name of the skill.
           schema:
-            type: string
+            $ref: '#/components/schemas/SkillName'
         - name: Foundry-Features
           in: header
           required: true
@@ -10770,11 +10734,122 @@ paths:
       x-ms-foundry-meta:
         required_previews:
           - Skills=V1Preview
-  /skills:import:
+  /skills/{name}/versions:
     post:
-      operationId: Skills_createSkillFromPackage
-      description: Creates a skill from a zip package.
+      operationId: createSkillVersion_createSkillVersionFromFiles
       parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the skill. If the skill does not exist, it will be created.
+          schema:
+            $ref: '#/components/schemas/SkillName'
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Skills=V1Preview
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      description: Creates a new version of a skill. If the skill does not exist, it will be created. Creates a new version of a skill from uploaded files via multipart form data.
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SkillVersion'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      x-ms-foundry-meta:
+        required_previews:
+          - Skills=V1Preview
+      tags:
+        - Skills
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                inline_content:
+                  allOf:
+                    - $ref: '#/components/schemas/SkillInlineContent'
+                  description: Inline skill content for simple skills without file uploads. Foundry-specific extension.
+                default:
+                  type: boolean
+                  description: Whether to set this version as the default.
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CreateSkillVersionFromFilesBody'
+            encoding:
+              files:
+                contentType: '*/*'
+              default:
+                contentType: text/plain
+    get:
+      operationId: listSkillVersions
+      description: List all versions of a skill.
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the skill to list versions for.
+          schema:
+            $ref: '#/components/schemas/SkillName'
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
         - name: Foundry-Features
           in: header
           required: true
@@ -10791,12 +10866,31 @@ paths:
             type: string
           explode: false
       responses:
-        '201':
-          description: The request has succeeded and a new resource has been created as a result.
+        '200':
+          description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SkillObject'
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SkillVersion'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
         default:
           description: An unexpected error response.
           content:
@@ -10805,14 +10899,156 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Skills
-      requestBody:
-        required: true
-        content:
-          application/zip:
-            schema:
-              type: string
-              format: binary
-        description: The zip package used to create the skill.
+      x-ms-foundry-meta:
+        required_previews:
+          - Skills=V1Preview
+  /skills/{name}/versions/{version}:
+    get:
+      operationId: getSkillVersion
+      description: Retrieve a specific version of a skill.
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the skill.
+          schema:
+            $ref: '#/components/schemas/SkillName'
+        - name: version
+          in: path
+          required: true
+          description: The version identifier to retrieve.
+          schema:
+            type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Skills=V1Preview
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SkillVersion'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Skills
+      x-ms-foundry-meta:
+        required_previews:
+          - Skills=V1Preview
+    delete:
+      operationId: deleteSkillVersion
+      description: Delete a specific version of a skill.
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the skill.
+          schema:
+            $ref: '#/components/schemas/SkillName'
+        - name: version
+          in: path
+          required: true
+          description: The version identifier to delete.
+          schema:
+            type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Skills=V1Preview
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteSkillVersionResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Skills
+      x-ms-foundry-meta:
+        required_previews:
+          - Skills=V1Preview
+  /skills/{name}/versions/{version}/content:
+    get:
+      operationId: getSkillVersionContent
+      description: Download the zip content for a specific version of a skill.
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the skill.
+          schema:
+            $ref: '#/components/schemas/SkillName'
+        - name: version
+          in: path
+          required: true
+          description: The version to download content for.
+          schema:
+            type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Skills=V1Preview
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The response body for downloading a skill package.
+          content:
+            application/zip:
+              schema:
+                type: string
+                format: binary
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Skills
       x-ms-foundry-meta:
         required_previews:
           - Skills=V1Preview
@@ -11051,6 +11287,11 @@ paths:
                   items:
                     $ref: '#/components/schemas/OpenAI.Tool'
                   description: The list of tools to include in this version.
+                skills:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ToolboxSkill'
+                  description: The list of skill sources to include in this version. A skill reference specifies a skill name and optionally a version. If version is omitted, the skill's default version is used.
                 policies:
                   allOf:
                     - $ref: '#/components/schemas/ToolboxPolicies'
@@ -12253,6 +12494,7 @@ components:
             - idle
             - updating
             - failed
+            - stopping
             - deleting
             - deleted
             - expired
@@ -14643,6 +14885,20 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - AgentEndpoints=V1Preview
+    CreateSkillVersionFromFilesBody:
+      type: object
+      properties:
+        files:
+          type: array
+          items:
+            type: string
+            format: binary
+          description: Skill files to upload. Upload a single zip file or multiple individual files with relative paths.
+        default:
+          type: boolean
+          description: Whether to set this version as the default. Defaults to false.
+      required:
+        - files
     CreatedBy:
       type: object
       properties:
@@ -15373,16 +15629,43 @@ components:
     DeleteSkillResponse:
       type: object
       required:
+        - id
         - name
         - deleted
       properties:
-        name:
+        id:
           type: string
+          description: The unique identifier of the deleted skill.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/SkillName'
           description: The unique name of the skill.
         deleted:
           type: boolean
           description: Whether the skill was successfully deleted.
-      description: A deleted skill Object
+      description: A deleted skill.
+    DeleteSkillVersionResponse:
+      type: object
+      required:
+        - id
+        - name
+        - deleted
+        - version
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the deleted skill version.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/SkillName'
+          description: The name of the skill.
+        deleted:
+          type: boolean
+          description: Whether the skill version was successfully deleted.
+        version:
+          type: string
+          description: The version that was deleted.
+      description: A deleted skill version.
     Deployment:
       type: object
       required:
@@ -18004,18 +18287,6 @@ components:
           description: |-
             An array of tools the hosted agent's model may call while generating a response. You
             can specify which tool to use by setting the `tool_choice` parameter.
-        container_protocol_versions:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProtocolVersionRecord'
-          description: The protocols that the agent supports for ingress communication of the containers.
-          example:
-            - protocol: responses
-              version: v0.1.1
-            - protocol: invocations
-              version: v0.0.1
-            - protocol: a2a
-              version: v0.3.0
         cpu:
           type: string
           description: The CPU configuration for the hosted agent.
@@ -18032,10 +18303,6 @@ components:
           example:
             name: LOG_LEVEL
             value: debug
-        image:
-          type: string
-          description: The image ID for the agent, applicable to image-based hosted agents.
-          example: my-registry.azurecr.io/my-hosted-agent:latest
         container_configuration:
           allOf:
             - $ref: '#/components/schemas/ContainerConfiguration'
@@ -36269,40 +36536,106 @@ components:
             - short_answer
             - long_answer
       description: The supported question types for SimpleQnA data generation jobs used for fine-tuning scenarios.
-    SkillObject:
+    Skill:
       type: object
       required:
-        - skill_id
-        - has_blob
+        - id
         - name
+        - description
+        - created_at
+        - default_version
+        - latest_version
       properties:
-        skill_id:
+        id:
           type: string
           description: The unique identifier of the skill.
-        has_blob:
-          type: boolean
-          description: Whether the skill was created from a zip blob package.
         name:
-          type: string
-          maxLength: 63
+          allOf:
+            - $ref: '#/components/schemas/SkillName'
           description: The unique name of the skill.
         description:
           type: string
           maxLength: 1024
           description: A human-readable description of the skill.
+        created_at:
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
+          description: The Unix timestamp (seconds) when the skill was created.
+        default_version:
+          type: string
+          description: The default version for the skill. Can be changed via updateSkill.
+        latest_version:
+          type: string
+          description: The latest version for the skill.
+      description: A skill resource.
+    SkillInlineContent:
+      type: object
+      required:
+        - description
+        - instructions
+      properties:
+        description:
+          type: string
+          maxLength: 1024
+          description: A human-readable description of what the skill does and when to use it.
+        instructions:
+          type: string
+          description: The skill instructions in markdown format. This is the body content of the SKILL.md file.
+        license:
+          type: string
+          description: License name or reference to a bundled license file.
+        compatibility:
+          type: string
+          maxLength: 500
+          description: Environment requirements or compatibility notes for the skill.
         metadata:
           type: object
           additionalProperties:
             type: string
-          description: |-
-            Set of 16 key-value pairs that can be attached to an object. This can be
-            useful for storing additional information about the object in a structured
-            format, and querying for objects via API or the dashboard.
-
-            Keys are strings with a maximum length of 64 characters. Values are strings
-            with a maximum length of 512 characters.
-          x-oaiTypeLabel: map
-      description: A skill object.
+          description: Arbitrary key-value metadata for additional properties.
+        allowed_tools:
+          type: array
+          items:
+            type: string
+          description: List of pre-approved tools the skill may use. Experimental.
+      description: Inline content for defining a simple skill without uploading files. Follows the agentskills.io SKILL.md specification.
+    SkillName:
+      type: string
+      maxLength: 64
+      pattern: ^[a-z0-9]([a-z0-9\-]*[a-z0-9])?$
+      description: 'A skill name following the agentskills.io spec: lowercase letters, numbers, and hyphens only. Must not start or end with a hyphen or contain consecutive hyphens.'
+    SkillVersion:
+      type: object
+      required:
+        - id
+        - skill_id
+        - name
+        - version
+        - description
+        - created_at
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the skill version.
+        skill_id:
+          type: string
+          description: The identifier of the parent skill.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/SkillName'
+          description: The name of the skill version.
+        version:
+          type: string
+          description: The version identifier. Skill versions are immutable.
+        description:
+          type: string
+          maxLength: 1024
+          description: A human-readable description of the skill version.
+        created_at:
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
+          description: The Unix timestamp (seconds) when the skill version was created.
+      description: A specific version of a skill.
     Sku:
       type: object
       required:
@@ -36880,6 +37213,40 @@ components:
         A tool for searching over the agent's toolbox.
         When present, deferred tools are hidden from `tools/list` and only
         discoverable via `search_tools` queries at runtime.
+    ToolboxSkill:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          description: The type of skill source.
+      discriminator:
+        propertyName: type
+        mapping:
+          skill_reference: '#/components/schemas/ToolboxSkillReference'
+      description: A skill source included in a toolbox.
+    ToolboxSkillReference:
+      type: object
+      required:
+        - type
+        - name
+      properties:
+        type:
+          type: string
+          enum:
+            - skill_reference
+          description: The type of skill source.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/SkillName'
+          description: The name of the skill.
+        version:
+          type: string
+          description: The version of the skill. If not specified, the skill's default version is used. When a version is specified, the reference is pinned to that immutable version.
+      allOf:
+        - $ref: '#/components/schemas/ToolboxSkill'
+      description: A reference to an existing skill to include in a toolbox.
     ToolboxVersionObject:
       type: object
       required:
@@ -36926,6 +37293,11 @@ components:
           items:
             $ref: '#/components/schemas/OpenAI.Tool'
           description: The list of tools contained in this toolbox version.
+        skills:
+          type: array
+          items:
+            $ref: '#/components/schemas/ToolboxSkill'
+          description: The list of skill sources included in this toolbox version.
         policies:
           allOf:
             - $ref: '#/components/schemas/ToolboxPolicies'
