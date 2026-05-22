@@ -217,6 +217,7 @@ using Microsoft.Storage;
  * The name of the blob inventory policy. It should always be 'default'.
  */
 @clientName("ManagementPolicyName", "csharp")
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The enum is made closed for .NET SDK in order to recognize the corresponding resource a singleton"
 union CSharpManagementPolicyName {
   /** Default. */
   Default: "default",
@@ -226,6 +227,7 @@ union CSharpManagementPolicyName {
  * The name of the blob inventory policy. It should always be 'default'.
  */
 @clientName("BlobInventoryPolicyName", "csharp")
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The enum is made closed for .NET SDK in order to recognize the corresponding resource a singleton"
 union CSharpBlobInventoryPolicyName {
   /** Default. */
   Default: "default",
