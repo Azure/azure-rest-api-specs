@@ -506,7 +506,6 @@ namespace Azure.ResourceManager.Models {
   Azure.ClientGenerator.Core.Usage.input,
   "csharp"
 );
-@@usage(FileServiceUsage, Azure.ClientGenerator.Core.Usage.input, "csharp");
 @@usage(
   ImmutableStorageAccount,
   Azure.ClientGenerator.Core.Usage.input,
