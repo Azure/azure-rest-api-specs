@@ -28,8 +28,8 @@ model ConnectorGatewayProperties {
   @visibility(Lifecycle.Read)
   connectorGatewayId?: Azure.Core.uuid;
 
-  @doc("Optional ARM ID of an existing API Hub environment to attach to on PUT (brownfield/passthrough scenarios). When omitted, the gateway creates a new API Hub environment.")
-  apiHubEnvironmentId?: Azure.Core.armResourceIdentifier;
+  @doc("Optional GUID of an existing API Hub environment to attach to on PUT (brownfield/passthrough scenarios). When omitted, the gateway creates a new API Hub environment.")
+  apiHubEnvironmentId?: Azure.Core.uuid;
 }
 
 @added(Versions.v2026_05_01_preview)

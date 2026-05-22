@@ -44493,9 +44493,8 @@
           "readOnly": true
         },
         "apiHubEnvironmentId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Optional ARM ID of an existing API Hub environment to attach to on PUT (brownfield/passthrough scenarios). When omitted, the gateway creates a new API Hub environment."
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Optional GUID of an existing API Hub environment to attach to on PUT (brownfield/passthrough scenarios). When omitted, the gateway creates a new API Hub environment."
         }
       }
     },
