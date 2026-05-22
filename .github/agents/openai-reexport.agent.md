@@ -51,20 +51,28 @@ For every OpenAI operation that is **not already present** in any `specification
 2. Add a TypeSpec file in that directory that re-exports the missing operations using the following template (`<group>` is the upstream directory name, e.g. `responses`, `chat`, `embeddings` — i.e. **without** the `openai-` prefix):
 
    ```tsp
-   import "@azure-tools/openai-typespec/<group>/operations";
+   import "@azure-tools/openai-typespec";
+
+   using TypeSpec.Http;
 
    namespace Azure.AI.Projects;
 
-   @route("openai/v1/<group>")
+   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
+   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
+   @route("openai/v1")
+   @tag("<Group>")
    interface <Group> {
      op health is OpenAI.health;
    }
    ```
 
    Apply this template literally in shape:
-   - A single `import` of the upstream library, scoped to the specific subpath `@azure-tools/openai-typespec/<group>/operations` to avoid pulling in unrelated operations and causing namespace conflicts.
+   - A single `import "@azure-tools/openai-typespec";` of the upstream library's root entry point. The package's current `exports` map only exposes `.` (the root) and `./models/*`, so subpath operation imports such as `@azure-tools/openai-typespec/<group>/operations` do **not** resolve and must not be used. If upstream later adds an exports entry for per-group operations, this template can be tightened.
+   - A `using TypeSpec.Http;` directive so the `@route` (and any other HTTP) decorators resolve.
    - `namespace Azure.AI.Projects;`.
-   - `@route("openai/v1/<group>")`, where `<group>` is the upstream directory name (e.g. `openai/v1/responses`).
+   - The two `#suppress` directives above the interface, exactly as shown, to silence the standard OpenAI re-export warnings (`operation-missing-api-version` and `use-standard-operations`). These match the pattern used by sibling `openai-*` interfaces in the repository.
+   - `@route("openai/v1")` — a fixed prefix shared by every re-exported interface. Each upstream operation already carries its own group-scoped sub-route (e.g. `/chat/completions`, `/responses/{response_id}`), so the final path becomes `openai/v1/<upstream-route>` without us repeating the group name.
+   - `@tag("<Group>")` matching the interface name, so the operations are grouped consistently in the emitted OpenAPI document.
    - An `interface` whose name matches the upstream directory name in PascalCase (e.g. `Responses`, `Chat`, `Embeddings`, `FineTuning` for `fine-tuning`).
    - One `op <name> is OpenAI.<name>;` line per missing operation.
 
