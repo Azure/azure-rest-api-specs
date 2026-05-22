@@ -53,145 +53,37 @@ input-file:
   - stable/2025-08-01/openapi.json
 suppressions:
   - code: ProvisioningStateSpecifiedForLROPut
-    from: AdministratorsMicrosoftEntra.json
+    from: openapi.json
     reason: The existing API contract is like this and not be able to change.
   - code: PutGetPatchResponseSchema
-    from: AdministratorsMicrosoftEntra.json
+    from: openapi.json
     reason: The existing API contract is like this and not be able to change.
   - code: PutResponseCodes
-    from: AdministratorsMicrosoftEntra.json
+    from: openapi.json
     reason: The existing API contract is like this and not be able to change.
   - code: AllProxyResourcesShouldHaveDelete
-    from: AdvancedThreatProtectionSettings.json
-    reason: The existing API contract is like this and not be able to change.
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: AdvancedThreatProtectionSettings.json
-    reason: The existing API contract is like this and not be able to change.
-  - code: PutGetPatchResponseSchema
-    from: AdvancedThreatProtectionSettings.json
-    reason: The existing API contract is like this and not be able to change.
-  - code: PutResponseCodes
-    from: AdvancedThreatProtectionSettings.json
-    reason: The existing API contract is like this and not be able to change.
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: BackupsAutomaticAndOnDemand.json
-    reason: The existing API contract is like this and not be able to change.
-  - code: PutGetPatchResponseSchema
-    from: BackupsAutomaticAndOnDemand.json
-    reason: The existing API contract is like this and not be able to change.
-  - code: PutResponseCodes
-    from: BackupsAutomaticAndOnDemand.json
+    from: openapi.json
     reason: The existing API contract is like this and not be able to change.
   - code: RequiredPropertiesMissingInResourceModel
-    from: Capabilities.json
-    where: $.definitions.CapabilityList
+    from: openapi.json
     reason: The existing API contract is like this and not be able to change.
   - code: PatchResponseCodes
-    from: Configurations.json
-    reason: The existing API contract is like this and not be able to change.
-  - code: PutGetPatchResponseSchema
-    from: Configurations.json
-    reason: The existing API contract is like this and not be able to change.
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: Configurations.json
-    reason: The existing API contract is like this and not be able to change.
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: Configurations.json
-    reason: The existing API contract is like this and not be able to change.
-  - code: PutResponseCodes
-    from: Configurations.json
-    reason: The existing API contract is like this and not be able to change.
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: Databases.json
-    reason: The existing API contract is like this and not be able to change.
-  - code: PutGetPatchResponseSchema
-    from: Databases.json
-    reason: The existing API contract is like this and not be able to change.
-  - code: PutResponseCodes
-    from: Databases.json
-    reason: The existing API contract is like this and not be able to change.
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: FirewallRules.json
-    reason: The existing API contract is like this and not be able to change.
-  - code: PutGetPatchResponseSchema
-    from: FirewallRules.json
-    reason: The existing API contract is like this and not be able to change.
-  - code: PutResponseCodes
-    from: FirewallRules.json
+    from: openapi.json
     reason: The existing API contract is like this and not be able to change.
   - code: AvoidAdditionalProperties
-    from: Migrations.json
+    from: openapi.json
     reason: The existing API contract is like this and not be able to change.
   - code: DeleteResponseBodyEmpty
-    from: Migrations.json
-    reason: The existing API contract is like this and not be able to change.
-  - code: AvoidAdditionalProperties
-    from: Operations.json
+    from: openapi.json
     reason: The existing API contract is like this and not be able to change.
   - code: OperationsApiSchemaUsesCommonTypes
-    from: Operations.json
-    reason: The existing API contract is like this and not be able to change.
-  - code: RequiredPropertiesMissingInResourceModel
-    from: Operations.json
-    where: $.definitions.OperationList
-    reason: The existing API contract is like this and not be able to change.
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: PrivateEndpointConnections.json
-    reason: The existing API contract is like this and not be able to change.
-  - code: PutGetPatchResponseSchema
-    from: PrivateEndpointConnections.json
-    reason: The existing API contract is like this and not be able to change.
-  - code: PutResponseCodes
-    from: PrivateEndpointConnections.json
-    reason: The existing API contract is like this and not be able to change.
-  - code: RequiredPropertiesMissingInResourceModel
-    from: QuotaUsages.json
-    where: $.definitions.QuotaUsageList
-    reason: The existing API contract is like this and not be able to change.
-  - code: AvoidAdditionalProperties
-    from: Servers.json
-    reason: The existing API contract is like this and not be able to change.
-  - code: PatchResponseCodes
-    from: Servers.json
+    from: openapi.json
     reason: The existing API contract is like this and not be able to change.
   - code: ProvisioningStateSpecifiedForLROPatch
-    from: Servers.json
-    reason: The existing API contract is like this and not be able to change.
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: Servers.json
-    reason: The existing API contract is like this and not be able to change.
-  - code: PutGetPatchResponseSchema
-    from: Servers.json
-    reason: The existing API contract is like this and not be able to change.
-  - code: PutResponseCodes
-    from: Servers.json
+    from: openapi.json
     reason: The existing API contract is like this and not be able to change.
   - code: TrackedResourcesMustHavePut
-    from: Servers.json
-    where: $.definitions.Server
-    reason: The existing API contract is like this and not be able to change.
-  - code: RequiredPropertiesMissingInResourceModel
-    from: TuningOptions.json
-    where: $.definitions.TuningOptionsList
-    reason: The existing API contract is like this and not be able to change.
-  - code: ProvisioningStateSpecifiedForLROPatch
-    from: VirtualEndpoints.json
-    reason: The existing API contract is like this and not be able to change.
-  - code: ProvisioningStateSpecifiedForLROPut
-    from: VirtualEndpoints.json
-    reason: The existing API contract is like this and not be able to change.
-  - code: PatchResponseCodes
-    from: VirtualEndpoints.json
-    reason: The existing API contract is like this and not be able to change.
-  - code: PutGetPatchResponseSchema
-    from: VirtualEndpoints.json
-    reason: The existing API contract is like this and not be able to change.
-  - code: RequiredPropertiesMissingInResourceModel
-    from: VirtualEndpoints.json
-    where: $.definitions.VirtualEndpointsList
-    reason: The existing API contract is like this and not be able to change.
-  - code: PutResponseCodes
-    from: VirtualEndpoints.json
+    from: openapi.json
     reason: The existing API contract is like this and not be able to change.
 ```
 
