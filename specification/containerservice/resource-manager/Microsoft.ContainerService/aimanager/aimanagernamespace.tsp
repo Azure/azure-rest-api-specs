@@ -90,8 +90,8 @@ interface AIManagerNamespaces {
   @added(Versions.v2026_05_02_preview)
   @doc("Returns the namespace-scoped LLM gateway endpoint and the currently-valid API keys.")
   @post
-  @action("listAccessInfo")
-  listAccessInfo is ArmResourceActionSync<
+  @action("listAccessKeys")
+  listAccessKeys is ArmResourceActionSync<
     AIManagerNamespace,
     void,
     ArmResponse<NamespaceAccessInfo>
