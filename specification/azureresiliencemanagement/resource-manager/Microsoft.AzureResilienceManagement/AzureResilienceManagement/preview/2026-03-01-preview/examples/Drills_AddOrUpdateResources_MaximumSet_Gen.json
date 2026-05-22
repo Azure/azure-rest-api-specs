@@ -1,0 +1,126 @@
+{
+  "title": "Drills_AddOrUpdateResources_MaximumSet",
+  "operationId": "Drills_AddOrUpdateResources",
+  "parameters": {
+    "serviceGroupName": "sampleServiceGroupName",
+    "api-version": "2026-03-01-preview",
+    "operation-id": "qmn",
+    "drillName": "drill1",
+    "body": {
+      "faultDurationInMin": 0,
+      "resourceLists": {
+        "includeResources": [
+          {
+            "faultProperties": {
+              "customFault": {
+                "faultName": "umofuzwgczqwyzcoakmrdrkjknykdonhypxibwrweggltsmjayvnlzroxdfalwkfsqvuqtfwhhzcnemndbgxdiciqs",
+                "scriptResourceId": "/subscriptions/191973cd-9c54-41e0-ac19-25dd9a92d5a8/resourceGroups/abhinkRG/providers/Microsoft.Automation/automationAccounts/abhinkAcc/runbooks/viveksi"
+              },
+              "defaultFault": {
+                "faultUrn": "urn:csci:microsoft:virtualMachine:shutdown/1.0",
+                "faultName": "shutdown",
+                "targetResourceId": "/subscriptions/f2edfd5d-5496-4683-b94f-b3588c579009/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/vm1"
+              },
+              "overriddenDefaultFault": {
+                "faultUrn": "urn:csci:microsoft:virtualMachine:shutdown/1.0",
+                "faultName": "shutdown",
+                "targetResourceId": "/subscriptions/f2edfd5d-5496-4683-b94f-b3588c579009/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/vm1"
+              }
+            },
+            "id": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName/providers/Microsoft.AzureResilienceManagement/drills/drill1/drillResources/2c9b3a1f-f96e-42c2-98fe-15005da8a133"
+          }
+        ],
+        "excludeResources": [
+          "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName/providers/Microsoft.AzureResilienceManagement/drills/drill1/drillResources/c2191964-be24-4849-8faf-d9569576c708"
+        ],
+        "updateResources": [
+          {
+            "faultProperties": {
+              "customFault": {
+                "faultName": "umofuzwgczqwyzcoakmrdrkjknykdonhypxibwrweggltsmjayvnlzroxdfalwkfsqvuqtfwhhzcnemndbgxdiciqs",
+                "scriptResourceId": "/subscriptions/191973cd-9c54-41e0-ac19-25dd9a92d5a8/resourceGroups/abhinkRG/providers/Microsoft.Automation/automationAccounts/abhinkAcc/runbooks/viveksi"
+              },
+              "defaultFault": {
+                "faultUrn": "urn:csci:microsoft:virtualMachine:shutdown/1.0",
+                "faultName": "shutdown",
+                "targetResourceId": "/subscriptions/f2edfd5d-5496-4683-b94f-b3588c579009/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/vm1"
+              },
+              "overriddenDefaultFault": {
+                "faultUrn": "urn:csci:microsoft:virtualMachine:shutdown/1.0",
+                "faultName": "shutdown",
+                "targetResourceId": "/subscriptions/f2edfd5d-5496-4683-b94f-b3588c579009/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/vm1"
+              }
+            },
+            "id": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName/providers/Microsoft.AzureResilienceManagement/drills/drill1/drillResources/c26bea42-c34c-4e6f-8cf4-15043e18c8bc"
+          }
+        ]
+      },
+      "forceInclusionAndUpdate": "Enable"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "failedIncludeResourceList": [
+          {
+            "resourceId": "/subscriptions/191973cd-9c54-41e0-ac19-25dd9a92d5a8/resourceGroups/abhinkRG/providers/Microsoft.Compute/virtualMachines/vm1",
+            "rbacAssignmentError": {
+              "code": "rgquxfnsulfgutc",
+              "message": "vftwvnutpraic"
+            },
+            "id": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName/providers/Microsoft.AzureResilienceManagement/drills/drill1/drillResources/2c9b3a1f-f96e-42c2-98fe-15005da8a133",
+            "targetAndCapabilityAssignmentError": {
+              "code": "vvshlmzbebdzgnlvnamethssaglu",
+              "message": "qhddwdoutlatykgs"
+            },
+            "targetResourceAssignmentError": {
+              "code": "101001",
+              "message": "Unable to assign Chaos resource RBAC on target resource."
+            }
+          }
+        ],
+        "failedExcludeResourceList": [
+          {
+            "resourceId": "/subscriptions/191973cd-9c54-41e0-ac19-25dd9a92d5a8/resourceGroups/abhinkRG/providers/Microsoft.Compute/virtualMachines/vm2",
+            "rbacAssignmentError": {
+              "code": "rgquxfnsulfgutc",
+              "message": "vftwvnutpraic"
+            },
+            "id": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName/providers/Microsoft.AzureResilienceManagement/drills/drill1/drillResources/c2191964-be24-4849-8faf-d9569576c708",
+            "targetAndCapabilityAssignmentError": {
+              "code": "vvshlmzbebdzgnlvnamethssaglu",
+              "message": "qhddwdoutlatykgs"
+            },
+            "targetResourceAssignmentError": {
+              "code": "101001",
+              "message": "Unable to assign Chaos resource RBAC on target resource."
+            }
+          }
+        ],
+        "failedUpdateResourceList": [
+          {
+            "resourceId": "/subscriptions/191973cd-9c54-41e0-ac19-25dd9a92d5a8/resourceGroups/abhinkRG/providers/Microsoft.Compute/virtualMachines/vm3",
+            "rbacAssignmentError": {
+              "code": "rgquxfnsulfgutc",
+              "message": "vftwvnutpraic"
+            },
+            "id": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName/providers/Microsoft.AzureResilienceManagement/drills/drill1/drillResources/c26bea42-c34c-4e6f-8cf4-15043e18c8bc",
+            "targetAndCapabilityAssignmentError": {
+              "code": "vvshlmzbebdzgnlvnamethssaglu",
+              "message": "qhddwdoutlatykgs"
+            },
+            "targetResourceAssignmentError": {
+              "code": "101001",
+              "message": "Unable to assign Chaos resource RBAC on target resource."
+            }
+          }
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}
