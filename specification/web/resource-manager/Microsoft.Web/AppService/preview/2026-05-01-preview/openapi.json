@@ -40880,11 +40880,11 @@
       "description": "Admin Entra ID application registration backing OBO/AppOnly auth.",
       "properties": {
         "clientId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Entra ID application (client) ID."
         },
         "tenantId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Entra ID tenant ID."
         },
         "name": {
@@ -43619,11 +43619,11 @@
           "description": "The consent code from the redirect URL."
         },
         "objectId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The Entra ID object ID of the user."
         },
         "tenantId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The Entra ID tenant ID."
         }
       }
@@ -43780,11 +43780,11 @@
       "description": "The Entra ID identity used in a connection access policy principal.",
       "properties": {
         "objectId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Entra ID object ID."
         },
         "tenantId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Entra ID tenant ID."
         }
       }
@@ -43844,11 +43844,11 @@
       "description": "Identifies the user that created a connection.",
       "properties": {
         "objectId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Entra ID object ID of the user."
         },
         "tenantId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Entra ID tenant ID of the user."
         }
       }
@@ -43893,6 +43893,7 @@
         },
         "connectionRuntimeUrl": {
           "type": "string",
+          "format": "uri",
           "description": "The API Hub runtime URL for this connection.",
           "readOnly": true
         },
@@ -43963,10 +43964,12 @@
       "properties": {
         "link": {
           "type": "string",
+          "format": "uri",
           "description": "The OAuth consent URL to open in a browser."
         },
         "firstPartyLoginUri": {
           "type": "string",
+          "format": "uri",
           "description": "First-party login URI for the consent flow."
         },
         "displayName": {
@@ -44056,6 +44059,7 @@
         },
         "mcpServerUrl": {
           "type": "string",
+          "format": "uri",
           "description": "MCP protocol endpoint URL (required when `kind` is `McpServer`)."
         },
         "backendService": {
@@ -44086,6 +44090,7 @@
         },
         "iconUri": {
           "type": "string",
+          "format": "uri",
           "description": "URL to the connector icon."
         },
         "brandColor": {
@@ -44100,7 +44105,8 @@
           "type": "array",
           "description": "API Hub runtime endpoints for the connector.",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "uri"
           }
         },
         "apiDefinitions": {
@@ -44477,7 +44483,7 @@
           "readOnly": true
         },
         "aiGatewayId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "System-assigned AI gateway identifier.",
           "readOnly": true
         },
@@ -44488,6 +44494,7 @@
         },
         "apiHubEnvironmentId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Optional ARM ID of an existing API Hub environment to attach to on PUT (brownfield/passthrough scenarios). When omitted, the gateway creates a new API Hub environment."
         }
       }
@@ -45655,6 +45662,7 @@
       "properties": {
         "serviceUrl": {
           "type": "string",
+          "format": "uri",
           "description": "Base URL of the backend API."
         }
       }
@@ -47881,6 +47889,7 @@
       "properties": {
         "issuer": {
           "type": "string",
+          "format": "uri",
           "description": "Token issuer URL.",
           "readOnly": true
         },
@@ -50330,7 +50339,7 @@
       "description": "A consent parameter entry for listConsentLinks.",
       "properties": {
         "objectId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The Entra ID object ID of the user."
         },
         "parameterName": {
@@ -50339,10 +50348,11 @@
         },
         "redirectUrl": {
           "type": "string",
+          "format": "uri",
           "description": "The URL to redirect to after consent."
         },
         "tenantId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The Entra ID tenant ID."
         }
       }
@@ -50758,6 +50768,7 @@
         },
         "iconUri": {
           "type": "string",
+          "format": "uri",
           "description": "URL to the connector icon."
         },
         "tier": {
@@ -50798,7 +50809,8 @@
           "type": "array",
           "description": "API Hub runtime endpoints for the connector.",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "uri"
           }
         },
         "isExportSupported": {
@@ -50872,6 +50884,7 @@
         },
         "iconUrl": {
           "type": "string",
+          "format": "uri",
           "description": "URL of the icon for the hosted MCP server."
         },
         "category": {
@@ -50887,14 +50900,16 @@
         },
         "version": {
           "type": "string",
-          "description": "The version of the hosted MCP server."
+          "description": "The version of the hosted MCP server. Semantic version format (`MAJOR.MINOR.PATCH`) when provided by the publisher."
         },
         "documentationUrl": {
           "type": "string",
+          "format": "uri",
           "description": "URL to the documentation for the hosted MCP server."
         },
         "sourceUrl": {
           "type": "string",
+          "format": "uri",
           "description": "URL to the source code for the hosted MCP server."
         },
         "configurationSchema": {
@@ -50939,6 +50954,7 @@
         },
         "iconUri": {
           "type": "string",
+          "format": "uri",
           "description": "URL to the API's icon."
         },
         "brandColor": {
@@ -50951,6 +50967,7 @@
         },
         "id": {
           "type": "string",
+          "format": "arm-id",
           "description": "The resource ID of the managed API."
         }
       }
@@ -54440,7 +54457,15 @@
         },
         "resourceId": {
           "type": "string",
-          "description": "ARM resource ID of the user-assigned managed identity. Required when type is UserAssigned (or SystemAssigned, UserAssigned)."
+          "format": "arm-id",
+          "description": "ARM resource ID of the user-assigned managed identity. Required when type is UserAssigned (or SystemAssigned, UserAssigned).",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
         }
       }
     },

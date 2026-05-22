@@ -27,7 +27,7 @@ union ConnectorGatewayCustomConnectorKind {
 @doc("Backend service configuration for a custom connector.")
 model CustomConnectorBackendService {
   @doc("Base URL of the backend API.")
-  serviceUrl?: string;
+  serviceUrl?: url;
 }
 
 @added(Versions.v2026_05_01_preview)
@@ -74,7 +74,7 @@ model ConnectorGatewayCustomConnectorProperties {
   description?: string;
 
   @doc("MCP protocol endpoint URL (required when `kind` is `McpServer`).")
-  mcpServerUrl?: string;
+  mcpServerUrl?: url;
 
   @doc("Backend service configuration.")
   backendService?: CustomConnectorBackendService;
@@ -95,7 +95,7 @@ model ConnectorGatewayCustomConnectorProperties {
   capabilities?: string[];
 
   @doc("URL to the connector icon.")
-  iconUri?: string;
+  iconUri?: url;
 
   @doc("Brand color hex code (e.g., `#007ee5`).")
   brandColor?: string;
@@ -104,7 +104,7 @@ model ConnectorGatewayCustomConnectorProperties {
   supportedConnectionKinds?: CustomConnectorSupportedConnectionKinds;
 
   @doc("API Hub runtime endpoints for the connector.")
-  runtimeUrls?: string[];
+  runtimeUrls?: url[];
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Free-form pointers to externalized API definitions."
   @doc("Pointers to externalized API definitions (e.g., swagger URLs stored in blob storage).")

@@ -43,7 +43,7 @@ model ManagedApiGeneralInformation {
   description?: string;
 
   @doc("URL to the connector icon.")
-  iconUri?: string;
+  iconUri?: url;
 
   @doc("Connector tier.")
   tier?: ManagedApiTier;
@@ -101,7 +101,7 @@ model ManagedApiProperties {
   metadata?: Record<unknown>;
 
   @doc("API Hub runtime endpoints for the connector.")
-  runtimeUrls?: string[];
+  runtimeUrls?: url[];
 
   @doc("Whether the connector swagger can be exported via `?export=true`.")
   isExportSupported?: boolean;
@@ -170,7 +170,7 @@ model ManagedMcpOperationApi {
   displayName?: string;
 
   @doc("URL to the API's icon.")
-  iconUri?: string;
+  iconUri?: url;
 
   @doc("Brand color for the API (hex format).")
   brandColor?: string;
@@ -179,7 +179,7 @@ model ManagedMcpOperationApi {
   category?: string;
 
   @doc("The resource ID of the managed API.")
-  id?: string;
+  id?: Azure.Core.armResourceIdentifier;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Managed MCP operations are read-only catalog entries provisioned by Microsoft and intentionally omit provisioningState."
@@ -272,7 +272,7 @@ model ManagedHostedMcpServerProperties {
   publisher?: string;
 
   @doc("URL of the icon for the hosted MCP server.")
-  iconUrl?: string;
+  iconUrl?: url;
 
   @doc("Category of the hosted MCP server (e.g., Productivity).")
   category?: string;
@@ -280,14 +280,14 @@ model ManagedHostedMcpServerProperties {
   @doc("Tags associated with the hosted MCP server.")
   tags?: string[];
 
-  @doc("The version of the hosted MCP server.")
+  @doc("The version of the hosted MCP server. Semantic version format (`MAJOR.MINOR.PATCH`) when provided by the publisher.")
   version?: string;
 
   @doc("URL to the documentation for the hosted MCP server.")
-  documentationUrl?: string;
+  documentationUrl?: url;
 
   @doc("URL to the source code for the hosted MCP server.")
-  sourceUrl?: string;
+  sourceUrl?: url;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Configuration schema is a map of input name to input definition."
   @doc("""

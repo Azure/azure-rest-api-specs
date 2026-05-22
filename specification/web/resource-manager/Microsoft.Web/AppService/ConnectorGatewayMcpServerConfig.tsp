@@ -216,10 +216,10 @@ model HostedMcpServerProperties {
 @doc("Admin Entra ID application registration backing OBO/AppOnly auth.")
 model AdminAppRegistrationDefinition {
   @doc("Entra ID application (client) ID.")
-  clientId?: string;
+  clientId?: Azure.Core.uuid;
 
   @doc("Entra ID tenant ID.")
-  tenantId?: string;
+  tenantId?: Azure.Core.uuid;
 
   @doc("Display name of the application registration.")
   name?: string;
@@ -250,7 +250,11 @@ model ResourceAuthIdentityDefinition {
   type?: ResourceAuthIdentityType;
 
   @doc("ARM resource ID of the user-assigned managed identity. Required when type is UserAssigned (or SystemAssigned, UserAssigned).")
-  resourceId?: string;
+  resourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
 }
 
 @added(Versions.v2026_05_01_preview)
@@ -258,7 +262,7 @@ model ResourceAuthIdentityDefinition {
 model FederatedIdentityCredentialDefinition {
   @doc("Token issuer URL.")
   @visibility(Lifecycle.Read)
-  issuer?: string;
+  issuer?: url;
 
   @doc("Subject identifier of the managed identity.")
   @visibility(Lifecycle.Read)

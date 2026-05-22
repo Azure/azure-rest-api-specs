@@ -40,10 +40,10 @@ model ConnectorGatewayConnectionStatusEntry {
 @doc("Identifies the user that created a connection.")
 model ConnectorGatewayConnectionCreatedBy {
   @doc("Entra ID object ID of the user.")
-  objectId?: string;
+  objectId?: Azure.Core.uuid;
 
   @doc("Entra ID tenant ID of the user.")
-  tenantId?: string;
+  tenantId?: Azure.Core.uuid;
 }
 
 @added(Versions.v2026_05_01_preview)
@@ -61,7 +61,7 @@ model ConnectorGatewayConnectionProperties {
 
   @doc("The API Hub runtime URL for this connection.")
   @visibility(Lifecycle.Read)
-  connectionRuntimeUrl?: string;
+  connectionRuntimeUrl?: url;
 
   @doc("Overall connection status.")
   @visibility(Lifecycle.Read)
@@ -94,16 +94,16 @@ model ConnectorGatewayConnection
 @doc("A consent parameter entry for listConsentLinks.")
 model ListConsentLinksParameter {
   @doc("The Entra ID object ID of the user.")
-  objectId?: string;
+  objectId?: Azure.Core.uuid;
 
   @doc("The consent parameter name (e.g., token).")
   parameterName?: string;
 
   @doc("The URL to redirect to after consent.")
-  redirectUrl?: string;
+  redirectUrl?: url;
 
   @doc("The Entra ID tenant ID.")
-  tenantId?: string;
+  tenantId?: Azure.Core.uuid;
 }
 
 @added(Versions.v2026_05_01_preview)
@@ -118,10 +118,10 @@ model ListConsentLinksRequest {
 @doc("A single consent link entry.")
 model ConnectorGatewayConsentLink {
   @doc("The OAuth consent URL to open in a browser.")
-  link?: string;
+  link?: url;
 
   @doc("First-party login URI for the consent flow.")
-  firstPartyLoginUri?: string;
+  firstPartyLoginUri?: url;
 
   @doc("Display name for the consent link.")
   displayName?: string;
@@ -145,10 +145,10 @@ model ConfirmConsentCodeRequest {
   code?: string;
 
   @doc("The Entra ID object ID of the user.")
-  objectId?: string;
+  objectId?: Azure.Core.uuid;
 
   @doc("The Entra ID tenant ID.")
-  tenantId?: string;
+  tenantId?: Azure.Core.uuid;
 }
 
 @added(Versions.v2026_05_01_preview)

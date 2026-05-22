@@ -18,10 +18,10 @@ namespace Microsoft.Web;
 @doc("The Entra ID identity used in a connection access policy principal.")
 model ConnectorGatewayConnectionAccessPolicyIdentity {
   @doc("Entra ID object ID.")
-  objectId?: string;
+  objectId?: Azure.Core.uuid;
 
   @doc("Entra ID tenant ID.")
-  tenantId?: string;
+  tenantId?: Azure.Core.uuid;
 }
 
 @added(Versions.v2026_05_01_preview)

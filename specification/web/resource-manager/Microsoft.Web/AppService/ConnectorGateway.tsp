@@ -22,14 +22,14 @@ model ConnectorGatewayProperties {
 
   @doc("System-assigned AI gateway identifier.")
   @visibility(Lifecycle.Read)
-  aiGatewayId?: string;
+  aiGatewayId?: Azure.Core.uuid;
 
   @doc("System-assigned connector gateway identifier.")
   @visibility(Lifecycle.Read)
   connectorGatewayId?: Azure.Core.uuid;
 
   @doc("Optional ARM ID of an existing API Hub environment to attach to on PUT (brownfield/passthrough scenarios). When omitted, the gateway creates a new API Hub environment.")
-  apiHubEnvironmentId?: string;
+  apiHubEnvironmentId?: Azure.Core.armResourceIdentifier;
 }
 
 @added(Versions.v2026_05_01_preview)
