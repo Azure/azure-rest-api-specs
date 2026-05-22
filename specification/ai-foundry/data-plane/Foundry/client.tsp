@@ -233,9 +233,12 @@ using Azure.AI.Projects;
 @@usage(SessionFileWriteResponse, Usage.output);
 @@access(SessionFileWriteResponse, Access.public);
 
-// Exclude these operations entirely from emitted SDK
+// Exclude these operations entirely from emitted SDK. These are convenience REST APIs that we don't think bring
+// real value on SDK surface. We can do everything using createAgentVersionFromCode.
 @@scope(Agents.createAgentFromCode, "!(python, javascript)");
 @@scope(Agents.updateAgentFromCode, "!(python, javascript)");
+
+@@clientName(Agents.downloadAgentCode, "download_code", "python");
 
 @@clientName(Agents.createAgentVersionFromCode, "create_version_from_code", "python");
 @@clientName(Agents.createAgentVersionFromCode, "createVersionFromCode", "javascript");
@@ -274,6 +277,7 @@ using Azure.AI.Projects;
 @@clientName(MemoryStores.deleteMemoryStore, "delete");
 @@clientName(MemoryStoreSearchResponse, "MemoryStoreSearchResult", "python");
 @@clientName(DeleteMemoryStoreResponse, "DeleteMemoryStoreResult", "python");
+@@clientName(DeleteMemoryResponse, "DeleteMemoryResult", "python");
 @@clientName(MemoryStoreUpdateResponse, "MemoryStoreUpdateResult", "python");
 @@clientName(MemoryStoreDeleteScopeResponse,
   "MemoryStoreDeleteScopeResult",
@@ -315,8 +319,6 @@ using Azure.AI.Projects;
 // Rename models ending with 'Object' to end with 'Details' for Python
 @@clientName(MemoryStoreObject, "MemoryStoreDetails", "python");
 
-@@clientName(PendingUploadResponse, "PendingUploadResult", "python");
-
 // Remove 'Object' suffix for JS client
 @@clientName(MemoryStoreObject, "MemoryStore", "javascript");
 
@@ -333,8 +335,8 @@ using Azure.AI.Projects;
 @@clientName(Routines.deleteRoutine, "delete");
 @@clientName(Routines.listRoutineRuns, "list_runs", "python");
 @@clientName(Routines.listRoutineRuns, "listRuns", "javascript");
-@@clientName(Routines.dispatchRoutineAsync, "dispatch_async", "python");
-@@clientName(Routines.dispatchRoutineAsync, "dispatchAsync", "javascript");
+@@clientName(Routines.dispatchRoutineAsync, "dispatch");
+@@clientName(DispatchRoutineResponse, "DispatchRoutineResult", "python");
 
 // --------------------------------------------------------------------------------
 // Beta Evaluators sub‐client
@@ -429,6 +431,10 @@ using Azure.AI.Projects;
 @@clientName(Models.createOrUpdateVersion, "update");
 @@clientName(Models.startPendingUpload, "pendingUpload");
 @@clientName(Models.getCredentials, "getCredentials");
+@@clientName(Models.createAsync, "pendingCreateVersion");
+
+@@clientName(CreateModelVersionAsyncResponse, "ModelPendingCreateVersionResult", "python");
+@@clientName(CreateModelVersionAsyncResponse, "ModelPendingCreateVersionResponse", "javascript");
 
 // --------------------------------------------------------------------------------
 // Beta Schedules sub‐client
