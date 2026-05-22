@@ -181,6 +181,11 @@ op regenerateKeyCustom(
   "csharp"
 );
 @@clientName(AssignedIdentity, "CognitiveServicesAssignedIdentity", "csharp");
+@@clientName(
+  UserAssignedIdentity,
+  "CognitiveServicesUserAssignedIdentity",
+  "csharp"
+);
 @@clientName(AgentDeployment, "CognitiveServicesAgentDeployment", "csharp");
 @@clientName(
   AgentDeploymentProperties,
