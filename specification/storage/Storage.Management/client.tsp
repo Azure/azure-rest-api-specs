@@ -488,7 +488,7 @@ namespace Azure.ResourceManager.Models {
   DeletedAccount,
 
     | Azure.ClientGenerator.Core.Usage.input
-    | Azure.ClientGenerator.Core.Usage.input,
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 @@usage(
