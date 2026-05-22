@@ -91,7 +91,6 @@ model AlertsClientOptions {
 @@clientName(Essentials, "ServiceAlertEssentials", "csharp");
 @@clientName(SignalType, "ServiceAlertSignalType", "csharp");
 @@clientName(Identifier, "RetrievedInformationIdentifier", "csharp");
-@@clientName(AlertModificationEvent, "ServiceAlertModificationEvent", "csharp");
 @@clientName(NotificationResult.statusURL, "StatusUrl", "csharp");
 @@clientName(
   AlertModificationItem,
@@ -182,5 +181,26 @@ model AlertsClientOptions {
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   AlertsSummary,
   Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+
+/**
+ * Reason for the modification
+ */
+enum ServiceAlertModificationEvent {
+  AlertCreated,
+  StateChange,
+  MonitorConditionChange,
+  SeverityChange,
+  ActionRuleTriggered,
+  ActionRuleSuppressed,
+  ActionsTriggered,
+  ActionsSuppressed,
+  ActionsFailed,
+}
+
+@@alternateType(
+  AlertModificationItem.modificationEvent,
+  ServiceAlertModificationEvent,
   "csharp"
 );
