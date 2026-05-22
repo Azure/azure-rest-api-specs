@@ -66,10 +66,9 @@ interface OpenAIIntegrationRPModels {
    */
   createOrUpdate is OpenAiCreateOrUpdateResourceOps.CreateOrUpdateAsync<
     OpenAIIntegrationRPModel,
-    Response = ArmResourceUpdatedResponse<OpenAIIntegrationRPModel> | ArmResourceCreatedResponse<
-      OpenAIIntegrationRPModel,
-      LroHeaders = {}
-    >,
+    Response =
+      | ArmResourceUpdatedResponse<OpenAIIntegrationRPModel>
+      | ArmResourceCreatedResponse<OpenAIIntegrationRPModel, LroHeaders = {}>,
     OptionalRequestBody = true
   >;
 

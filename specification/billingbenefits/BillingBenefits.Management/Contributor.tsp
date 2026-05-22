@@ -40,7 +40,8 @@ interface Contributors {
   >;
 }
 
-@@doc(Contributor.name,
+@@doc(
+  Contributor.name,
   "Unique name of contributor in the format {contributorCloudSubId}_{resourceGroupName}_{nameInContributorTenant}."
 );
 @@doc(Contributor.properties, "MACC contributor properties");

@@ -131,12 +131,15 @@ interface PrivateEndpointConnections {
   >;
 }
 
-@@doc(PrivateEndpointConnection.name,
+@@doc(
+  PrivateEndpointConnection.name,
   "The name of the private endpoint connection to the Azure AI Search service with the specified resource group."
 );
-@@doc(PrivateEndpointConnection.properties,
+@@doc(
+  PrivateEndpointConnection.properties,
   "Describes the properties of an existing private endpoint connection to the Azure AI Search service."
 );
-@@doc(PrivateEndpointConnections.update::parameters.resource,
+@@doc(
+  PrivateEndpointConnections.update::parameters.resource,
   "The definition of the private endpoint connection to update."
 );

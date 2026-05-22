@@ -51,6 +51,7 @@ interface FileServiceUsageOperationGroup {
 }
 
 @@doc(FileServiceUsage.name, "");
-@@doc(FileServiceUsage.properties,
+@@doc(
+  FileServiceUsage.properties,
   "File service usage in storage account including account limits, file share limits and constants used in recommendations and bursting formula."
 );

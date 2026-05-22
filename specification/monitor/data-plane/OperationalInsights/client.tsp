@@ -7,12 +7,14 @@ using MonitorQueryLogs;
 @TypeSpec.Versioning.useDependency(Versions.V1)
 namespace ClientCustomizations;
 
-@@clientDoc(BatchQueryRequest.path,
+@@clientDoc(
+  BatchQueryRequest.path,
   "The path for the batch query request.",
   DocumentationMode.replace
 );
 @@alternateType(BatchQueryRequest.path, "/query");
-@@clientDoc(BatchQueryRequest.method,
+@@clientDoc(
+  BatchQueryRequest.method,
   "The method of a single request in a batch.",
   DocumentationMode.replace
 );
@@ -56,11 +58,13 @@ interface Client {
 }
 
 // Java configuration
-@@clientNamespace(MonitorQueryLogs,
+@@clientNamespace(
+  MonitorQueryLogs,
   "com.azure.monitor.query.logs.implementation",
   "java"
 );
-@@clientNamespace(ClientCustomizations,
+@@clientNamespace(
+  ClientCustomizations,
   "com.azure.monitor.query.logs.implementation",
   "java"
 );
@@ -87,7 +91,8 @@ interface Client {
 @@clientName(ColumnDataType, "_ColumnType", "python");
 @@access(MonitorQueryLogsClient.batch, Access.internal, "python");
 @@access(MonitorQueryLogsClient.execute, Access.internal, "python");
-@@access(MonitorQueryLogsClient.executeWithResourceId,
+@@access(
+  MonitorQueryLogsClient.executeWithResourceId,
   Access.internal,
   "python"
 );

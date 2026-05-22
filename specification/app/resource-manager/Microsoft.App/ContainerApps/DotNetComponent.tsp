@@ -89,12 +89,15 @@ interface DotNetComponents {
 }
 
 @@doc(DotNetComponent.name, "Name of the .NET Component.");
-@@doc(DotNetComponent.properties,
+@@doc(
+  DotNetComponent.properties,
   ".NET Component resource specific properties"
 );
-@@doc(DotNetComponents.createOrUpdate::parameters.resource,
+@@doc(
+  DotNetComponents.createOrUpdate::parameters.resource,
   "Configuration details of the .NET Component."
 );
-@@doc(DotNetComponents.update::parameters.properties,
+@@doc(
+  DotNetComponents.update::parameters.properties,
   "Configuration details of the .NET Component."
 );
