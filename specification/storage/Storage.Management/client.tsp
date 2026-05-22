@@ -113,10 +113,14 @@ using Microsoft.Storage;
 @@clientName(LeaseShareRequest, "LeaseShareContent", "csharp");
 @@clientName(ListAccountSasResponse, "GetAccountSasResult", "csharp");
 @@clientName(ListServiceSasResponse, "GetServiceSasResult", "csharp");
-@@clientName(TestConnectionResponse, "TestConnectionResult", "csharp");
+@@clientName(
+  TestConnectionResponse,
+  "StorageConnectorTestConnectionResult",
+  "csharp"
+);
 @@clientName(
   TestExistingConnectionRequest,
-  "TestExistingConnectionContent",
+  "StorageConnectorTestExistingConnectionContent",
   "csharp"
 );
 @@clientName(
@@ -199,6 +203,8 @@ using Microsoft.Storage;
 
 // Resource type renames for backward compatibility
 @@clientName(BlobServiceProperties, "BlobService", "csharp");
+@@clientName(StaticWebsite, "BlobServiceStaticWebsite", "csharp");
+@@clientName(StaticWebsite.enabled, "IsEnabled", "csharp");
 @@clientName(QueueServiceProperties, "QueueService", "csharp");
 @@clientName(TableServiceProperties, "TableService", "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This operation is pageable for .Net SDK"
@@ -812,6 +818,57 @@ namespace Azure.ResourceManager.Models {
 @@clientName(
   ObjectReplicationPolicyPropertiesPriorityReplication.enabled,
   "IsPriorityReplicationEnabled",
+  "csharp"
+);
+@@clientName(
+  ObjectReplicationPolicyPropertiesTagsReplication.enabled,
+  "IsTagsReplicationEnabled",
+  "csharp"
+);
+
+// Native data sharing patch model naming
+@@clientName(TrackedResourceUpdate, "StorageTrackedResourcePatch", "csharp");
+@@clientName(
+  StorageConnectorAuthPropertiesUpdate,
+  "StorageConnectorAuthPropertiesPatch",
+  "csharp"
+);
+@@clientName(
+  StorageConnectorSourceUpdate,
+  "StorageConnectorSourcePatch",
+  "csharp"
+);
+@@clientName(DataShareSourceUpdate, "DataShareSourcePatch", "csharp");
+@@clientName(
+  ManagedIdentityAuthProperties,
+  "StorageConnectorManagedIdentityAuth",
+  "csharp"
+);
+@@clientName(
+  ManagedIdentityAuthPropertiesUpdate,
+  "StorageConnectorManagedIdentityAuthPatch",
+  "csharp"
+);
+@@clientName(
+  StorageConnectorPropertiesUpdate,
+  "StorageConnectorPropertiesPatch",
+  "csharp"
+);
+@@clientName(
+  StorageDataSharePropertiesUpdate,
+  "StorageDataSharePropertiesPatch",
+  "csharp"
+);
+
+// Native data sharing property renames/types
+@@clientName(
+  StorageConnectorProperties.testConnection,
+  "ShouldTestConnection",
+  "csharp"
+);
+@@clientName(
+  StorageConnectorPropertiesUpdate.testConnection,
+  "ShouldTestConnection",
   "csharp"
 );
 
