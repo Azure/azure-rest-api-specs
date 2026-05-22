@@ -19,7 +19,7 @@ model ManagedEnvironment
     Resource = ManagedEnvironment,
     KeyName = "environmentName",
     SegmentName = "managedEnvironments",
-    NamePattern = ""
+    NamePattern = "^[-\\w\\._\\(\\)]+$"
   >;
 
   /**

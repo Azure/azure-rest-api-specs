@@ -3290,19 +3290,6 @@ model PrivateLinkResourceListResult {
 }
 
 /**
- * List of private endpoint connections for a managed environment.
- */
-model PrivateEndpointConnectionListResult {
-  /** The PrivateEndpointConnection items on this page */
-  @pageItems
-  value: PrivateEndpointConnection[];
-
-  /** The link to the next page of items */
-  @nextLink
-  nextLink?: string;
-}
-
-/**
  * Dapr Component Resiliency Policies ARM resource.
  */
 model DaprComponentResiliencyPoliciesCollection
