@@ -21,7 +21,7 @@ interface FineTuning {
   @route("jobs")
   @post
   @operationId("createFineTuningJob")
-  createFineTuningJob is FoundryDataPlaneOperation<
+  createFineTuningJob is OpenAIOperation<
     OpenAI.CreateFineTuningJobRequest,
     OpenAI.FineTuningJob
   >;
@@ -34,7 +34,7 @@ interface FineTuning {
   @route("jobs")
   @get
   @operationId("listPaginatedFineTuningJobs")
-  listPaginatedFineTuningJobs is FoundryDataPlaneOperation<
+  listPaginatedFineTuningJobs is OpenAIOperation<
     {
       /** Identifier for the last job from the previous pagination request. */
       @query after?: string;
@@ -55,7 +55,7 @@ interface FineTuning {
   @route("jobs/{fine_tuning_job_id}")
   @get
   @operationId("retrieveFineTuningJob")
-  retrieveFineTuningJob is FoundryDataPlaneOperation<
+  retrieveFineTuningJob is OpenAIOperation<
     {
       /** The ID of the fine-tuning job. */
       @path fine_tuning_job_id: string;
@@ -71,7 +71,7 @@ interface FineTuning {
   @route("jobs/{fine_tuning_job_id}/cancel")
   @post
   @operationId("cancelFineTuningJob")
-  cancelFineTuningJob is FoundryDataPlaneOperation<
+  cancelFineTuningJob is OpenAIOperation<
     {
       /** The ID of the fine-tuning job to cancel. */
       @path fine_tuning_job_id: string;
@@ -87,7 +87,7 @@ interface FineTuning {
   @route("jobs/{fine_tuning_job_id}/pause")
   @post
   @operationId("pauseFineTuningJob")
-  pauseFineTuningJob is FoundryDataPlaneOperation<
+  pauseFineTuningJob is OpenAIOperation<
     {
       /** The ID of the fine-tuning job to pause. */
       @path fine_tuning_job_id: string;
@@ -103,7 +103,7 @@ interface FineTuning {
   @route("jobs/{fine_tuning_job_id}/resume")
   @post
   @operationId("resumeFineTuningJob")
-  resumeFineTuningJob is FoundryDataPlaneOperation<
+  resumeFineTuningJob is OpenAIOperation<
     {
       /** The ID of the fine-tuning job to resume. */
       @path fine_tuning_job_id: string;
@@ -119,7 +119,7 @@ interface FineTuning {
   @route("jobs/{fine_tuning_job_id}/checkpoints")
   @get
   @operationId("listFineTuningJobCheckpoints")
-  listFineTuningJobCheckpoints is FoundryDataPlaneOperation<
+  listFineTuningJobCheckpoints is OpenAIOperation<
     {
       /** The ID of the fine-tuning job to get checkpoints for. */
       @path fine_tuning_job_id: string;
@@ -141,7 +141,7 @@ interface FineTuning {
   @route("jobs/{fine_tuning_job_id}/events")
   @get
   @operationId("listFineTuningJobEvents")
-  listFineTuningJobEvents is FoundryDataPlaneOperation<
+  listFineTuningJobEvents is OpenAIOperation<
     {
       /** The ID of the fine-tuning job to get events for. */
       @path fine_tuning_job_id: string;

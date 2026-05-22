@@ -10,9 +10,16 @@ namespace Azure.AI.Projects;
 // Foundry Data Plane Operation Infrastructure
 // ============================================================================
 
+alias FoundryDataPlaneApiVersionParameter = {
+  @doc("The API version to use for this operation.")
+  @query("api-version")
+  apiVersion: string;
+};
+
 alias FoundryDataPlaneAzureTraits = Azure.Core.Traits.SupportsClientRequestId &
   Azure.Core.Traits.NoRepeatableRequests &
-  Azure.Core.Traits.NoConditionalRequests;
+  Azure.Core.Traits.NoConditionalRequests &
+  FoundryDataPlaneApiVersionParameter;
 
 alias FoundryAzureOperations<ExtraTraits> = Azure.Core.ResourceOperations<ExtraTraits &
   FoundryDataPlaneAzureTraits>;
@@ -23,7 +30,7 @@ op FoundryDataPlaneOperation<
   Params extends Reflection.Model,
   Response,
   ErrorResponse = ApiErrorResponse
->(...Params): Response | ErrorResponse;
+>(...Params, ...FoundryDataPlaneApiVersionParameter): Response | ErrorResponse;
 
 // ---- Feature opt-in keys & preview headers ----
 
