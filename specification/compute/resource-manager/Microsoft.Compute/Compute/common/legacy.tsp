@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Legacy {
   interface ComputeOperations {
     #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "LEGACY - DO NOT COPY - FIX ME"
     #suppress "@azure-tools/typespec-azure-core/no-private-usage"
-    @tag("Operations")
+    @tag("ComputeOperations")
     @autoRoute
     @doc("List the operations for the provider")
     @segment("operations")
