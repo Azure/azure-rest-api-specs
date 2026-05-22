@@ -954,3 +954,9 @@ using Microsoft.DesktopVirtualization;
 @@clientName(MSIXPackagePatchProperties, "MsixPackagePatchProperties", "java");
 @@clientName(MSIXImageURI, "MsixImageUri", "java");
 @@clientName(SSOSecretType, "SsoSecretType", "java");
+@@clientName(
+  AppAttachPackagePatchProperties.keyVaultURL,
+  "keyVaultUri",
+  "java"
+);
+@@clientName(AppAttachPackageProperties.keyVaultURL, "keyVaultUri", "java");
