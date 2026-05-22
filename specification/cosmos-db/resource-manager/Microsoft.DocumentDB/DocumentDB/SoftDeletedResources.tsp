@@ -273,7 +273,9 @@ interface SoftDeletedDatabaseAccounts {
     @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
     @path
     accountName: string,
-  ): ArmResponse<SoftDeletedDatabaseAccountGetResult> | Azure.ResourceManager.CommonTypes.ErrorResponse;
+  ):
+    | ArmResponse<SoftDeletedDatabaseAccountGetResult>
+    | Azure.ResourceManager.CommonTypes.ErrorResponse;
 
   /**
    * Lists all the soft-deleted Azure Cosmos DB database accounts available under the subscription and in a region. This call requires 'Microsoft.DocumentDB/locations/softDeletedDatabaseAccounts/read' permission.
@@ -287,7 +289,9 @@ interface SoftDeletedDatabaseAccounts {
     ...Azure.ResourceManager.ApiVersionParameter,
     ...Azure.ResourceManager.SubscriptionIdParameter,
     ...Azure.ResourceManager.LocationResourceParameter,
-  ): ArmResponse<SoftDeletedDatabaseAccountsListResult> | Azure.ResourceManager.CommonTypes.ErrorResponse;
+  ):
+    | ArmResponse<SoftDeletedDatabaseAccountsListResult>
+    | Azure.ResourceManager.CommonTypes.ErrorResponse;
 
   /**
    * Lists all the soft-deleted Azure Cosmos DB database accounts available under the given resource group and in a region. This call requires 'Microsoft.DocumentDB/locations/softDeletedDatabaseAccounts/read' permission.
@@ -301,7 +305,9 @@ interface SoftDeletedDatabaseAccounts {
     ...Azure.ResourceManager.ResourceGroupParameter,
     ...Azure.ResourceManager.LocationResourceParameter,
     ...Azure.ResourceManager.ApiVersionParameter,
-  ): ArmResponse<SoftDeletedDatabaseAccountsListResult> | Azure.ResourceManager.CommonTypes.ErrorResponse;
+  ):
+    | ArmResponse<SoftDeletedDatabaseAccountsListResult>
+    | Azure.ResourceManager.CommonTypes.ErrorResponse;
 
   /**
    * Restores a soft-deleted Azure Cosmos DB database account.
@@ -331,7 +337,10 @@ interface SoftDeletedDatabaseAccounts {
      */
     @query("softDeleteActionKind")
     softDeleteActionKind?: SoftDeleteActionKind,
-  ): ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse | Azure.ResourceManager.CommonTypes.ErrorResponse;
+  ):
+    | ArmDeleteAcceptedLroResponse
+    | ArmDeletedNoContentResponse
+    | Azure.ResourceManager.CommonTypes.ErrorResponse;
 
   /**
    * Permanently deletes (purges) a soft-deleted Azure Cosmos DB database account.
@@ -361,7 +370,10 @@ interface SoftDeletedDatabaseAccounts {
      */
     @query("softDeleteActionKind")
     softDeleteActionKind?: SoftDeleteActionKind,
-  ): ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse | Azure.ResourceManager.CommonTypes.ErrorResponse;
+  ):
+    | ArmDeleteAcceptedLroResponse
+    | ArmDeletedNoContentResponse
+    | Azure.ResourceManager.CommonTypes.ErrorResponse;
 }
 
 // ──────────────────────────────────────────────
@@ -398,7 +410,9 @@ interface SoftDeletedSqlDatabases {
     @pattern("^[^/\\\\#?]+$")
     @path
     databaseName: string,
-  ): ArmResponse<SoftDeletedSqlDatabaseGetResult> | Azure.ResourceManager.CommonTypes.ErrorResponse;
+  ):
+    | ArmResponse<SoftDeletedSqlDatabaseGetResult>
+    | Azure.ResourceManager.CommonTypes.ErrorResponse;
 
   /**
    * Lists all the soft-deleted Azure Cosmos DB SQL databases under a soft-deleted database account. This call requires 'Microsoft.DocumentDB/locations/softDeletedDatabaseAccounts/softDeletedSqlDatabases/read' permission.
@@ -421,7 +435,9 @@ interface SoftDeletedSqlDatabases {
     @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
     @path
     accountName: string,
-  ): ArmResponse<SoftDeletedSqlDatabasesListResult> | Azure.ResourceManager.CommonTypes.ErrorResponse;
+  ):
+    | ArmResponse<SoftDeletedSqlDatabasesListResult>
+    | Azure.ResourceManager.CommonTypes.ErrorResponse;
 
   /**
    * Restores a soft-deleted Azure Cosmos DB SQL database.
@@ -458,7 +474,10 @@ interface SoftDeletedSqlDatabases {
      */
     @query("softDeleteActionKind")
     softDeleteActionKind?: SoftDeleteActionKind,
-  ): ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse | Azure.ResourceManager.CommonTypes.ErrorResponse;
+  ):
+    | ArmDeleteAcceptedLroResponse
+    | ArmDeletedNoContentResponse
+    | Azure.ResourceManager.CommonTypes.ErrorResponse;
 
   /**
    * Permanently deletes a soft-deleted Azure Cosmos DB SQL database.
@@ -495,7 +514,10 @@ interface SoftDeletedSqlDatabases {
      */
     @query("softDeleteActionKind")
     softDeleteActionKind?: SoftDeleteActionKind,
-  ): ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse | Azure.ResourceManager.CommonTypes.ErrorResponse;
+  ):
+    | ArmDeleteAcceptedLroResponse
+    | ArmDeletedNoContentResponse
+    | Azure.ResourceManager.CommonTypes.ErrorResponse;
 }
 
 // ──────────────────────────────────────────────
@@ -539,7 +561,9 @@ interface SoftDeletedSqlContainers {
     @pattern("^[^/\\\\#?]+$")
     @path
     containerName: string,
-  ): ArmResponse<SoftDeletedSqlContainerGetResult> | Azure.ResourceManager.CommonTypes.ErrorResponse;
+  ):
+    | ArmResponse<SoftDeletedSqlContainerGetResult>
+    | Azure.ResourceManager.CommonTypes.ErrorResponse;
 
   /**
    * Lists all the soft-deleted Azure Cosmos DB SQL containers under a soft-deleted SQL database. This call requires 'Microsoft.DocumentDB/locations/softDeletedDatabaseAccounts/softDeletedSqlDatabases/softDeletedSqlContainers/read' permission.
@@ -569,7 +593,9 @@ interface SoftDeletedSqlContainers {
     @pattern("^[^/\\\\#?]+$")
     @path
     databaseName: string,
-  ): ArmResponse<SoftDeletedSqlContainersListResult> | Azure.ResourceManager.CommonTypes.ErrorResponse;
+  ):
+    | ArmResponse<SoftDeletedSqlContainersListResult>
+    | Azure.ResourceManager.CommonTypes.ErrorResponse;
 
   /**
    * Restores a soft-deleted Azure Cosmos DB SQL container to active state.
@@ -613,7 +639,10 @@ interface SoftDeletedSqlContainers {
      */
     @query("softDeleteActionKind")
     softDeleteActionKind?: SoftDeleteActionKind,
-  ): ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse | Azure.ResourceManager.CommonTypes.ErrorResponse;
+  ):
+    | ArmDeleteAcceptedLroResponse
+    | ArmDeletedNoContentResponse
+    | Azure.ResourceManager.CommonTypes.ErrorResponse;
 
   /**
    * Permanently deletes a soft-deleted Azure Cosmos DB SQL container.
@@ -657,5 +686,8 @@ interface SoftDeletedSqlContainers {
      */
     @query("softDeleteActionKind")
     softDeleteActionKind?: SoftDeleteActionKind,
-  ): ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse | Azure.ResourceManager.CommonTypes.ErrorResponse;
+  ):
+    | ArmDeleteAcceptedLroResponse
+    | ArmDeletedNoContentResponse
+    | Azure.ResourceManager.CommonTypes.ErrorResponse;
 }
