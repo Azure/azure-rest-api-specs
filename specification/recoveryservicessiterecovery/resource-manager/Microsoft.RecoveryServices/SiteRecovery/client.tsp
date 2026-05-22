@@ -1090,6 +1090,7 @@ using Microsoft.RecoveryServices;
 @@clientName(ServiceError, "SiteRecoveryServiceError", "csharp");
 @@clientName(Severity, "SiteRecoveryErrorSeverity", "csharp");
 @@clientName(HealthError.innerHealthErrors, "SiteRecoveryInnerHealthErrorsList", "csharp");
+@@clientName(ReplicationJobsOperationGroup.export, "exportSiteRecoveryJob", "csharp");
 @@clientName(
   SqlServerLicenseType,
   "SiteRecoverySqlServerLicenseType",
