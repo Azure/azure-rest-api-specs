@@ -81,8 +81,3 @@ namespace ClientCustomizations;
   "listSubscriptionsUnderManagementGroup",
   "javascript"
 );
-@@clientName(
-  OperationDisplayProperties,
-  "OperationDisplayProperties",
-  "javascript"
-);
