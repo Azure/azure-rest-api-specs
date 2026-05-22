@@ -88,7 +88,6 @@ interface MaintenanceWindows {
  * Properties of a maintenance window.
  * For more information, see https://aka.ms/aks/maintenance-windows.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "AKS uses custom provisioning states beyond standard ARM states. Using string type for forward compatibility."
 @added(Versions.v2026_04_02_preview)
 model MaintenanceWindowResourceProperties {
   /**
