@@ -786,8 +786,8 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 
 @@scope(Storage.Blob.RetentionPolicy.allowPermanentDelete, "!javascript");
 
-@@scope(Storage.Blob.Service.getUserDelegationKey, "!rust");
-@@scope(Storage.Blob.Container.listBlobHierarchySegment, "!rust");
+@@scope(Storage.Blob.Service.getUserDelegationKey, "rust");
+@@scope(Storage.Blob.Container.listBlobHierarchySegment, "rust");
 @@scope(Storage.Blob.Container.rename, "!rust");
 @@scope(Storage.Blob.Container.restore, "!rust");
 @@scope(Storage.Blob.Blob.abortCopyFromUrl, "!rust");
