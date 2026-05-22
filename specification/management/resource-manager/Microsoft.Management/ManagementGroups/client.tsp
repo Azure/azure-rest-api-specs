@@ -14,54 +14,75 @@ namespace ClientCustomizations;
 @@usage(CreateManagementGroupChildInfo, Usage.input, "javascript,go");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(SubscriptionUnderManagementGroupsParameters.`Cache-Control`,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  SubscriptionUnderManagementGroupsParameters.`Cache-Control`,
   "no-cache",
   "javascript"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(ManagementGroupsListParameters.`Cache-Control`,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  ManagementGroupsListParameters.`Cache-Control`,
   "no-cache",
   "javascript"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(EntitiesListParameters.`Cache-Control`,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  EntitiesListParameters.`Cache-Control`,
   "no-cache",
   "javascript"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(ManagementGroupsGetParameters.`Cache-Control`,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  ManagementGroupsGetParameters.`Cache-Control`,
   "no-cache",
   "javascript"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(ManagementGroupsParameters.`Cache-Control`,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  ManagementGroupsParameters.`Cache-Control`,
   "no-cache",
   "javascript"
 );
 
 // Python: Restore "no-cache" default for cache_control parameters
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(SubscriptionUnderManagementGroupsParameters.`Cache-Control`,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  SubscriptionUnderManagementGroupsParameters.`Cache-Control`,
   "no-cache",
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(ManagementGroupsListParameters.`Cache-Control`,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  ManagementGroupsListParameters.`Cache-Control`,
   "no-cache",
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(EntitiesListParameters.`Cache-Control`,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  EntitiesListParameters.`Cache-Control`,
   "no-cache",
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(ManagementGroupsGetParameters.`Cache-Control`,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  ManagementGroupsGetParameters.`Cache-Control`,
   "no-cache",
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(ManagementGroupsParameters.`Cache-Control`,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  ManagementGroupsParameters.`Cache-Control`,
   "no-cache",
   "python"
+);
+@@clientName(ManagementGroups.getDescendants, "listDescendants", "javascript");
+@@clientName(
+  SubscriptionUnderManagementGroups.getSubscriptionsUnderManagementGroup,
+  "listSubscriptionsUnderManagementGroup",
+  "javascript"
+);
+@@clientName(
+  OperationDisplayProperties,
+  "OperationDisplayProperties",
+  "javascript"
 );
