@@ -139,6 +139,7 @@ model SandboxGroupAccessToken {
 
 @armResourceOperations
 @added(Versions.v2026_06_01_preview)
+@removed(Versions.v2026_07_01)
 interface SandboxGroups {
   /**
    * List SandboxGroup resources by subscription ID
