@@ -373,15 +373,19 @@ interface SiteConfigSnapshotSlotResourceOperationGroup {
 
 @@doc(SiteConfigResource.name, "");
 @@doc(SiteConfigResource.properties, "Core resource properties");
-@@doc(SiteConfigResources.createOrUpdateConfiguration::parameters.resource,
+@@doc(
+  SiteConfigResources.createOrUpdateConfiguration::parameters.resource,
   "JSON representation of a SiteConfig object. See example."
 );
-@@doc(SiteConfigResources.updateConfiguration::parameters.properties,
+@@doc(
+  SiteConfigResources.updateConfiguration::parameters.properties,
   "JSON representation of a SiteConfig object. See example."
 );
-@@doc(SiteConfigSlotResourceOperationGroup.createOrUpdateConfigurationSlot::parameters.resource,
+@@doc(
+  SiteConfigSlotResourceOperationGroup.createOrUpdateConfigurationSlot::parameters.resource,
   "JSON representation of a SiteConfig object. See example."
 );
-@@doc(SiteConfigSlotResourceOperationGroup.updateConfigurationSlot::parameters.properties,
+@@doc(
+  SiteConfigSlotResourceOperationGroup.updateConfigurationSlot::parameters.properties,
   "JSON representation of a SiteConfig object. See example."
 );

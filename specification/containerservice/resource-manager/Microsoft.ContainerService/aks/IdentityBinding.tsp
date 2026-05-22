@@ -34,10 +34,12 @@ model IdentityBinding
 @@maxLength(IdentityBinding.name, 63);
 @@minLength(IdentityBinding.name, 1);
 @@doc(IdentityBinding.name, "The name of the identity binding.");
-@@doc(IdentityBinding.properties,
+@@doc(
+  IdentityBinding.properties,
   "The resource-specific properties for this resource."
 );
-@@doc(IdentityBindings.createOrUpdate::parameters.resource,
+@@doc(
+  IdentityBindings.createOrUpdate::parameters.resource,
   "The identity binding to create or update."
 );
 

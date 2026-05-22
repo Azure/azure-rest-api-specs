@@ -49,11 +49,13 @@ interface Subscriptions {
   update is ArmCustomPatchAsync<
     Subscription,
     PatchModel = SubscriptionUpdateParameters,
-    Response = ArmResponse<Subscription> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Subscription> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: Subscription;
-    })
+    Response =
+      | ArmResponse<Subscription>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Subscription> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: Subscription;
+        })
   >;
 
   /**
@@ -63,7 +65,10 @@ interface Subscriptions {
   @summary("Delete an event subscription of a namespace topic.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Subscription,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -113,9 +118,11 @@ interface Subscriptions {
 @@minLength(Subscription.name, 3);
 @@doc(Subscription.name, "Name of the event subscription to be found.");
 @@doc(Subscription.properties, "Properties of the event subscription.");
-@@doc(Subscriptions.createOrUpdate::parameters.resource,
+@@doc(
+  Subscriptions.createOrUpdate::parameters.resource,
   "Event subscription properties containing the delivery mode, filter information, and others."
 );
-@@doc(Subscriptions.update::parameters.properties,
+@@doc(
+  Subscriptions.update::parameters.properties,
   "Updated event subscription information."
 );

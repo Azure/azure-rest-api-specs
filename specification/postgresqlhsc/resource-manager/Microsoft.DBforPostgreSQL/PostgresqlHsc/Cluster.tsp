@@ -53,10 +53,12 @@ interface Clusters {
   update is ArmCustomPatchAsync<
     Cluster,
     PatchModel = ClusterForUpdate,
-    Response = ArmResponse<Cluster> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Cluster>> & {
-      @bodyRoot
-      _: Cluster;
-    })
+    Response =
+      | ArmResponse<Cluster>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Cluster>> & {
+          @bodyRoot
+          _: Cluster;
+        })
   >;
 
   /**
@@ -65,7 +67,10 @@ interface Clusters {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     Cluster,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -131,12 +136,15 @@ interface Clusters {
 @@minLength(Cluster.name, 3);
 @@doc(Cluster.name, "The name of the cluster.");
 @@doc(Cluster.properties, "Properties of the cluster.");
-@@doc(Clusters.create::parameters.resource,
+@@doc(
+  Clusters.create::parameters.resource,
   "The required parameters for creating or updating a cluster."
 );
-@@doc(Clusters.update::parameters.properties,
+@@doc(
+  Clusters.update::parameters.properties,
   "The parameters for updating a cluster."
 );
-@@doc(Clusters.promoteReadReplica::parameters.body,
+@@doc(
+  Clusters.promoteReadReplica::parameters.body,
   "The parameter for enabling geo-redundant backup while promoting read replica."
 );

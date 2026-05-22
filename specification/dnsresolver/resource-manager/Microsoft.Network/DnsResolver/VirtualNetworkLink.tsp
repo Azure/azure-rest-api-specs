@@ -13,7 +13,6 @@ namespace Microsoft.Network;
 /**
  * Describes a virtual network link.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy TrackedResourceWithOptionalLocation for back compatibility"
 @parentResource(DnsForwardingRuleset)
 model VirtualNetworkLink
   is Azure.ResourceManager.ProxyResource<VirtualNetworkLinkProperties, false> {
@@ -54,11 +53,14 @@ interface VirtualNetworkLinks {
       @header
       ifNoneMatch?: string;
     },
-    Response = ArmResourceUpdatedResponse<VirtualNetworkLink> | ArmResourceCreatedResponse<
-      VirtualNetworkLink,
-      ArmLroLocationHeader<FinalResult = VirtualNetworkLink> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse,
+    Response =
+      | ArmResourceUpdatedResponse<VirtualNetworkLink>
+      | ArmResourceCreatedResponse<
+          VirtualNetworkLink,
+          ArmLroLocationHeader<FinalResult = VirtualNetworkLink> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse,
     Error = CloudError
   >;
 
@@ -92,7 +94,10 @@ interface VirtualNetworkLinks {
       @header
       ifMatch?: string;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -114,9 +119,11 @@ interface VirtualNetworkLinks {
 
 @@doc(VirtualNetworkLink.name, "The name of the virtual network link.");
 @@doc(VirtualNetworkLink.properties, "Properties of the virtual network link.");
-@@doc(VirtualNetworkLinks.createOrUpdate::parameters.resource,
+@@doc(
+  VirtualNetworkLinks.createOrUpdate::parameters.resource,
   "Parameters supplied to the CreateOrUpdate operation."
 );
-@@doc(VirtualNetworkLinks.update::parameters.properties,
+@@doc(
+  VirtualNetworkLinks.update::parameters.properties,
   "Parameters supplied to the Update operation."
 );
