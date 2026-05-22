@@ -351,6 +351,7 @@ using Azure.AI.Projects;
 );
 
 @@alternateType(OpenAI.OutputItem, unknown, "java");
+@@alternateType(OpenAI.InputItem, unknown, "java");
 
 // TimeZone property override via model indirection
 @alternateType(
