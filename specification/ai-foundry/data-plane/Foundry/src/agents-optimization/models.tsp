@@ -44,14 +44,6 @@ union OptimizationMode {
   optimize: "optimize",
 }
 
-/** Evaluation granularity for scoring candidates. */
-union EvaluationLevel {
-  string,
-
-  @doc("Per-conversation multi-turn simulation evaluation. Dataset items provide scenario seeds (id, testCaseDescription, desiredNumTurns) instead of single-turn prompts.")
-  conversation: "conversation",
-}
-
 // ---------------------------------------------------------------------------
 // Input models
 // ---------------------------------------------------------------------------
