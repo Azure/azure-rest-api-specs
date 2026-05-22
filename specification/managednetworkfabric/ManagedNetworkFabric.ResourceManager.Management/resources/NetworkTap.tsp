@@ -6,7 +6,6 @@ using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 @doc("The Network Tap resource definition.")
 model NetworkTap
   is Azure.ResourceManager.TrackedResource<NetworkTapProperties, false> {

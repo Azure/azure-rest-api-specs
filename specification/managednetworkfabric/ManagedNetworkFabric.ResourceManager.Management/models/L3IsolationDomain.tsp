@@ -209,9 +209,8 @@ model L3ExportRoutePolicy {
 @doc("Array of ARM Resource ID of the RoutePolicies.")
 model L3ExportRoutePolicyPatch is L3ExportRoutePolicy;
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spread to avoid breaking changes"
 @doc("The L3 Isolation Domain patch resource definition.")
-model L3IsolationDomainPatch extends TagsUpdate {
+model L3IsolationDomainPatch extends NetworkRackPatch {
   @doc("L3 Isolation Domain resource patch properties.")
   properties?: L3IsolationDomainPatchProperties;
 

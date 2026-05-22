@@ -517,7 +517,6 @@ model Resource {
   systemData?: SystemData;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common EnableDisableOnResources instead of spread operator"
 @doc("Update administrative state on list of resources.")
 model UpdateAdministrativeState extends EnableDisableOnResources {
   @doc("Administrative state.")
@@ -530,7 +529,6 @@ model EnableDisableOnResources {
   resourceIds?: string[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common error response"
 @doc("Common response for the state updates.")
 model CommonPostActionResponseForStateUpdate extends CommonErrorResponse {
   @doc("Gets the configuration state.")
@@ -538,7 +536,6 @@ model CommonPostActionResponseForStateUpdate extends CommonErrorResponse {
   configurationState?: ConfigurationState;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common error response"
 @doc("The response of the action validate configuration.")
 model ValidateConfigurationResponse extends CommonErrorResponse {
   @doc("Gets the configuration state.")
@@ -549,7 +546,6 @@ model ValidateConfigurationResponse extends CommonErrorResponse {
   url?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common error response instead of spread"
 @doc("Common response for device updates.")
 model CommonPostActionResponseForDeviceUpdate extends CommonErrorResponse {
   @doc("Gets the configuration state.")
@@ -577,7 +573,6 @@ model DeviceRoCommand {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common error response"
 @doc("The current status of an async operation.")
 model CommonPostActionResponseForDeviceROCommandsOperationStatusResult
   extends CommonErrorResponse {
@@ -613,7 +608,6 @@ model CommonPostActionResponseForDeviceROCommandsOperationStatusResult
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common error response"
 @doc("Common response for device Ro Commands.")
 @removed(Versions.v2024_06_15_preview)
 @renamedFrom(
@@ -656,7 +650,6 @@ model DeviceRwCommand {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common error response instead of spread"
 @doc("Common response for device Rw Commands.")
 model CommonPostActionResponseForDeviceRWCommands extends CommonErrorResponse {
   @doc("Gets the configuration state.")

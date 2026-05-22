@@ -58,9 +58,8 @@ model IpExtendedCommunityRule {
   routeTargets: string[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spreading to avoid breaking changes in patch model"
 @doc("The IP Extended Communities patch resource definition.")
-model IpExtendedCommunityPatch extends TagsUpdate {
+model IpExtendedCommunityPatch extends NetworkRackPatch {
   @doc("IP Extended Community patchable properties.")
   properties?: IpExtendedCommunityPatchProperties;
 }

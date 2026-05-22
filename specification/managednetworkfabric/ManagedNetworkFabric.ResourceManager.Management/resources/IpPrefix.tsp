@@ -6,7 +6,6 @@ using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 @doc("The IP Prefix resource definition.")
 model IpPrefix
   is Azure.ResourceManager.TrackedResource<IpPrefixProperties, false> {
@@ -20,6 +19,7 @@ model IpPrefix
 }
 
 @@doc(IpPrefix.properties, "The IP Prefix properties");
+
 @armResourceOperations
 interface IpPrefixes {
   @doc("Implements IP Prefix GET method.")

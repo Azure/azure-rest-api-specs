@@ -73,9 +73,8 @@ model NeighborGroupDestination {
 @doc("An array of destination IPv4 Addresses or IPv6 Addresses.")
 model NeighborGroupDestinationPatch is NeighborGroupDestination;
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spreading to avoid breaking changes in patch model"
 @doc("The Neighbor Group Patch definition.")
-model NeighborGroupPatch extends TagsUpdate {
+model NeighborGroupPatch extends NetworkRackPatch {
   @doc("Neighbor Group Patch properties.")
   properties?: NeighborGroupPatchProperties;
 

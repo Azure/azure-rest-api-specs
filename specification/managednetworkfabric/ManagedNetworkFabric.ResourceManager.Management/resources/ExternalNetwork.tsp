@@ -7,7 +7,6 @@ using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 @doc("Defines the External Network resource.")
 @parentResource(L3IsolationDomain)
 model ExternalNetwork
@@ -22,6 +21,7 @@ model ExternalNetwork
 }
 
 @@doc(ExternalNetwork.properties, "External Network Properties");
+
 @armResourceOperations
 interface ExternalNetworks {
   @doc("Implements ExternalNetworks GET method.")

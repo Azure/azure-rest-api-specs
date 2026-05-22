@@ -8,7 +8,6 @@ using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.ManagedNetworkFabric;
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 @doc("Defines the Internal Network resource.")
 @parentResource(L3IsolationDomain)
 model InternalNetwork
@@ -23,6 +22,7 @@ model InternalNetwork
 }
 
 @@doc(InternalNetwork.properties, "The Internal Network Properties");
+
 @armResourceOperations
 interface InternalNetworks {
   @doc("Gets a InternalNetworks.")

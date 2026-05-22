@@ -7,7 +7,6 @@ using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 @doc("The Internet Gateway resource definition.")
 model InternetGateway
   is Azure.ResourceManager.TrackedResource<InternetGatewayProperties, false> {
@@ -21,6 +20,7 @@ model InternetGateway
 }
 
 @@doc(InternetGateway.properties, "The Internet Gateway Properties");
+
 @armResourceOperations
 interface InternetGateways {
   @doc("Implements Gateway GET method.")

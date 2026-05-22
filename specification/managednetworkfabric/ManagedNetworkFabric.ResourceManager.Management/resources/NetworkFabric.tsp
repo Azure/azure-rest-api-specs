@@ -7,7 +7,6 @@ using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 @doc("The Network Fabric resource definition.")
 @added(Versions.v2025_07_15)
 model NetworkFabric

@@ -6,7 +6,6 @@ using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 @doc("The IP Community resource definition.")
 model IpCommunity
   is Azure.ResourceManager.TrackedResource<IpCommunityProperties, false> {
@@ -20,6 +19,7 @@ model IpCommunity
 }
 
 @@doc(IpCommunity.properties, "The IP Community Properties");
+
 @armResourceOperations
 interface IpCommunities {
   @doc("Implements an IP Community GET method.")

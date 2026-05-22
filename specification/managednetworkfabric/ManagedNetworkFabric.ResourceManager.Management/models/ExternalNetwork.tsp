@@ -126,9 +126,8 @@ model L3OptionBProperties {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
 @doc("option A properties object")
-model ExternalNetworkPropertiesOptionAProperties {
-  ...Layer3IpPrefixProperties;
-
+model ExternalNetworkPropertiesOptionAProperties
+  extends Layer3IpPrefixProperties {
   @doc("MTU to use for option A peering.")
   @maxValue(9200)
   @minValue(64)
@@ -279,8 +278,8 @@ model ExternalNetworkPatchProperties {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
 @doc("option A properties object")
-model ExternalNetworkPatchPropertiesOptionAProperties {
-  ...Layer3IpPrefixPatchProperties;
+model ExternalNetworkPatchPropertiesOptionAProperties
+  extends Layer3IpPrefixProperties {
   ...L3OptionAProperties;
 
   @doc("Ingress Acl. ARM resource ID of Access Control Lists.")
@@ -378,7 +377,6 @@ model ExternalNetworkBfdAdministrativeStateRequest {
   administrativeState?: BfdAdministrativeState;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common error response for ExternalNetwork BFD Administrative State response"
 @doc("External Network Administrative State response")
 @added(Versions.v2024_06_15_preview)
 model ExternalNetworkBfdAdministrativeStateResponse

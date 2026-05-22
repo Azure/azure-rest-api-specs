@@ -7,7 +7,6 @@ using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.ManagedNetworkFabric;
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 @doc("The Network Device resource definition.")
 model NetworkDevice
   is Azure.ResourceManager.TrackedResource<NetworkDeviceProperties, false> {

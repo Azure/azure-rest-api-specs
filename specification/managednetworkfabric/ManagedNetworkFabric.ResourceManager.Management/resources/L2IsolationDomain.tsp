@@ -7,7 +7,6 @@ using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.ManagedNetworkFabric;
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 @doc("The L2 Isolation Domain resource definition.")
 model L2IsolationDomain
   is Azure.ResourceManager.TrackedResource<L2IsolationDomainProperties, false> {
@@ -26,6 +25,7 @@ model L2IsolationDomain
 }
 
 @@doc(L2IsolationDomain.properties, "The L2IsolationDomain properties");
+
 @armResourceOperations
 interface L2IsolationDomains {
   @doc("Implements L2 Isolation Domain GET method.")

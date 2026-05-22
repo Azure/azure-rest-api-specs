@@ -4,7 +4,6 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spreading to avoid breaking changes in patch model"
 @doc("Network Interface Properties defines the properties of the resource.")
 model NetworkInterfaceProperties extends AnnotationResource {
   @doc("Physical Identifier of the network interface.")
@@ -80,7 +79,6 @@ model NetworkInterfacePatch {
   identity?: ManagedServiceIdentityPatch;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spreading to avoid breaking changes in patch model"
 @doc("Network Interface Patch properties.")
 model NetworkInterfacePatchProperties extends AnnotationResource {
   @added(Versions.v2024_06_15_preview)

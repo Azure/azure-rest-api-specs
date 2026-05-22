@@ -52,9 +52,8 @@ model InternetGatewayPatchableProperties {
   ]>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spreading to avoid breaking changes in patch model"
 @doc("The Internet Gateway patch resource definition.")
-model InternetGatewayPatch extends TagsUpdate {
+model InternetGatewayPatch extends NetworkRackPatch {
   @doc("Resource properties.")
   properties?: InternetGatewayPatchProperties;
 }

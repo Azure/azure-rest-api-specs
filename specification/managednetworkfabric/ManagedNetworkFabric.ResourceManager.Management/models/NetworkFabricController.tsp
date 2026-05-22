@@ -110,9 +110,8 @@ model ExpressRouteConnectionInformation {
   expressRouteAuthorizationKey: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spread to avoid breaking changes in patch models"
 @doc("The Network Fabric Controller Patch payload definition.")
-model NetworkFabricControllerPatch extends TagsUpdate {
+model NetworkFabricControllerPatch extends NetworkRackPatch {
   @doc("Network Fabric Controller patch properties.")
   properties?: NetworkFabricControllerPatchProperties;
 

@@ -9,7 +9,6 @@ using TypeSpec.Http;
 
 namespace Microsoft.ManagedNetworkFabric;
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 @doc("The Network To Network Interconnect resource definition.")
 @parentResource(NetworkFabric)
 model NetworkToNetworkInterconnect

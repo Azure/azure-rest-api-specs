@@ -8,7 +8,6 @@ using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.ManagedNetworkFabric;
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 @doc("The L3 Isolation Domain resource definition.")
 model L3IsolationDomain
   is Azure.ResourceManager.TrackedResource<L3IsolationDomainProperties, false> {

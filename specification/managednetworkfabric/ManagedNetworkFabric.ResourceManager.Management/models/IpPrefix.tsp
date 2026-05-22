@@ -66,9 +66,8 @@ model IpPrefixRule {
   subnetMaskLength?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spreading to avoid breaking changes in patch model"
 @doc("The IP Prefix patch resource definition.")
-model IpPrefixPatch extends TagsUpdate {
+model IpPrefixPatch extends NetworkRackPatch {
   @doc("IP Prefix patchable properties.")
   properties?: IpPrefixPatchProperties;
 }

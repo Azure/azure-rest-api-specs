@@ -7,7 +7,6 @@ using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.ManagedNetworkFabric;
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance is required here to maintain compatibility with existing API structure"
 @doc("The Network Bootstrap Device resource definition.")
 model NetworkBootstrapDevice
   is Azure.ResourceManager.TrackedResource<

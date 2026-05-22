@@ -6,7 +6,6 @@ using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 @doc("Defines the NetworkBootstrapInterface resource.")
 @parentResource(NetworkBootstrapDevice)
 model NetworkBootstrapInterface

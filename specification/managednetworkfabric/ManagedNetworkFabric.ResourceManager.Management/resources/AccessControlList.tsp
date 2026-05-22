@@ -7,7 +7,6 @@ using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 @doc("The Access Control List resource definition.")
 model AccessControlList
   is Azure.ResourceManager.TrackedResource<AccessControlListProperties, false> {
@@ -21,6 +20,7 @@ model AccessControlList
 }
 
 @@doc(AccessControlList.properties, "The Access ControlList properties.");
+
 @armResourceOperations
 interface AccessControlLists {
   @doc("Implements Access Control List GET method.")
