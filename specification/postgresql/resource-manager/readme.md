@@ -45,7 +45,6 @@ input-file:
 suppressions:
   - code: GuidUsage
     from: openapi.json
-    where: $.definitions.Azure.Core.uuid
     reason: To have primaryFederatedIdentityClientId and geoBackupFederatedIdentityClientId be defined as GUID following recommendation by Azure Resource Manager guidelines.
   - code: EnumInsteadOfBoolean
     from: openapi.json
@@ -53,7 +52,15 @@ suppressions:
     reason: This is a simple pass/fail indicator.
   - code: EnumInsteadOfBoolean
     from: openapi.json
+    where: $.definitions.MaintenanceEventResourceProperties.properties.deferrable
+    reason: This is a binary status indicator.
+  - code: EnumInsteadOfBoolean
+    from: openapi.json
     where: $.definitions.MaintenanceEventActionResponse.properties.deferrable
+    reason: This is a binary status indicator.
+  - code: EnumInsteadOfBoolean
+    from: openapi.json
+    where: $.definitions.MaintenanceEventActionResponse.properties.appliedNow
     reason: This is a binary status indicator.
 ```
 
