@@ -103,3 +103,4 @@ namespace Microsoft.ResourceGraph;
 // Change etag properties from string to Azure.ETag
 @@alternateType(GraphQueryApi.GraphQueryResource.etag, eTag, "csharp");
 @@alternateType(GraphQueryApi.GraphQueryUpdateParameters.etag, eTag, "csharp");
+@@alternateType(ResourceHistory.ResourcesHistoryResult, unknown);
