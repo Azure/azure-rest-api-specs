@@ -469,3 +469,4 @@ namespace ReservationsClient;
   Quota.QuotaRequestListBaseParam.subscriptionId,
   Quota.QuotaRequestStatus.list
 );
+@@scope(Operation.list, "!csharp");
