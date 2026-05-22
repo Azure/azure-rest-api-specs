@@ -47,11 +47,11 @@ suppressions:
     from: openapi.json
     where: $.definitions.Azure.Core.uuid
     reason: To have primaryFederatedIdentityClientId and geoBackupFederatedIdentityClientId be defined as GUID following recommendation by Azure Resource Manager guidelines.
-  - suppress: EnumInsteadOfBoolean
+  - code: EnumInsteadOfBoolean
     from: openapi.json
     where: $.definitions.PolicyDetail.properties.passed
     reason: This is a simple pass/fail indicator.
-  - suppress: EnumInsteadOfBoolean
+  - code: EnumInsteadOfBoolean
     from: openapi.json
     where: $.definitions.MaintenanceEventActionResponse.properties.deferrable
     reason: This is a binary status indicator.
