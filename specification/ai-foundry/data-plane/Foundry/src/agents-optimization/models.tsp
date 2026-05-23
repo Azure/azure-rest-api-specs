@@ -233,12 +233,30 @@ model OptimizationJobResult {
 }
 
 // ---------------------------------------------------------------------------
-// Job resource (uses shared JobLike template)
+// Job resource — flat request body (no `inputs` wrapper) to match vienna contract
 // ---------------------------------------------------------------------------
 
 @doc("Agent optimization job resource — a long-running job that optimizes an agent's configuration (instructions, model, skills, tools) to maximize evaluation scores. On success, the result contains scored candidates.")
-model OptimizationJob
-  is JobLike<OptimizationJobResult, OptimizationJobInputs> {
+model OptimizationJob {
+  @doc("Server-assigned unique identifier.")
+  @visibility(Lifecycle.Read)
+  id: string;
+
+  @doc("Current lifecycle status.")
+  @visibility(Lifecycle.Read)
+  status: JobStatus;
+
+  @doc("Error details — populated only on failure.")
+  @visibility(Lifecycle.Read)
+  error?: ApiError;
+
+  @doc("Result produced on success.")
+  @visibility(Lifecycle.Read)
+  result?: OptimizationJobResult;
+
+  // --- Inputs (flat, not nested under 'inputs') ---
+  ...OptimizationJobInputs;
+
   @doc("The timestamp when the job was created, represented in Unix time.")
   @visibility(Lifecycle.Read)
   createdAt: FoundryTimestamp;
