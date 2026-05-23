@@ -217,34 +217,71 @@ using Azure.AI.Projects;
 );
 
 // Evaluation Suite Generation Jobs — unscoped names (fixes AllScopes conflict)
-@@clientName(EvaluationSuiteGenerationJobs.create, "create_generation_suite_job");
+@@clientName(EvaluationSuiteGenerationJobs.create,
+  "create_generation_suite_job"
+);
 @@clientName(EvaluationSuiteGenerationJobs.get, "get_generation_suite_job");
 @@clientName(EvaluationSuiteGenerationJobs.list, "list_generation_suite_jobs");
-@@clientName(EvaluationSuiteGenerationJobs.cancel, "cancel_generation_suite_job");
-@@clientName(EvaluationSuiteGenerationJobs.delete, "delete_generation_suite_job");
+@@clientName(EvaluationSuiteGenerationJobs.cancel,
+  "cancel_generation_suite_job"
+);
+@@clientName(EvaluationSuiteGenerationJobs.delete,
+  "delete_generation_suite_job"
+);
 
 // Evaluation Suite Generation Jobs — renamed for JavaScript SDK discoverability
-@@clientName(EvaluationSuiteGenerationJobs.create, "createGenerationSuiteJob", "javascript");
-@@clientName(EvaluationSuiteGenerationJobs.get, "getGenerationSuiteJob", "javascript");
-@@clientName(EvaluationSuiteGenerationJobs.list, "listGenerationSuiteJobs", "javascript");
-@@clientName(EvaluationSuiteGenerationJobs.cancel, "cancelGenerationSuiteJob", "javascript");
-@@clientName(EvaluationSuiteGenerationJobs.delete, "deleteGenerationSuiteJob", "javascript");
+@@clientName(EvaluationSuiteGenerationJobs.create,
+  "createGenerationSuiteJob",
+  "javascript"
+);
+@@clientName(EvaluationSuiteGenerationJobs.get,
+  "getGenerationSuiteJob",
+  "javascript"
+);
+@@clientName(EvaluationSuiteGenerationJobs.list,
+  "listGenerationSuiteJobs",
+  "javascript"
+);
+@@clientName(EvaluationSuiteGenerationJobs.cancel,
+  "cancelGenerationSuiteJob",
+  "javascript"
+);
+@@clientName(EvaluationSuiteGenerationJobs.delete,
+  "deleteGenerationSuiteJob",
+  "javascript"
+);
 
 // EvaluationSuites versioned operations
 @@clientName(EvaluationSuites.listVersions, "list_evaluation_suite_versions");
 @@clientName(EvaluationSuites.listLatest, "list_evaluation_suites");
 @@clientName(EvaluationSuites.getVersion, "get_evaluation_suite");
 @@clientName(EvaluationSuites.deleteVersion, "delete_evaluation_suite");
-@@clientName(EvaluationSuites.createOrUpdateVersion, "create_or_update_evaluation_suite");
-@@clientName(EvaluationSuites.createEvaluationSuiteVersion, "create_evaluation_suite");
+@@clientName(EvaluationSuites.createOrUpdateVersion,
+  "create_or_update_evaluation_suite"
+);
+@@clientName(EvaluationSuites.createEvaluationSuiteVersion,
+  "create_evaluation_suite"
+);
 @@clientName(EvaluationSuites.run, "run_evaluation_suite");
 
-@@clientName(EvaluationSuites.listVersions, "listEvaluationSuiteVersions", "javascript");
+@@clientName(EvaluationSuites.listVersions,
+  "listEvaluationSuiteVersions",
+  "javascript"
+);
 @@clientName(EvaluationSuites.listLatest, "listEvaluationSuites", "javascript");
 @@clientName(EvaluationSuites.getVersion, "getEvaluationSuite", "javascript");
-@@clientName(EvaluationSuites.deleteVersion, "deleteEvaluationSuite", "javascript");
-@@clientName(EvaluationSuites.createOrUpdateVersion, "createOrUpdateEvaluationSuite", "javascript");
-@@clientName(EvaluationSuites.createEvaluationSuiteVersion, "createEvaluationSuite", "javascript");
+@@clientName(EvaluationSuites.deleteVersion,
+  "deleteEvaluationSuite",
+  "javascript"
+);
+@@clientName(EvaluationSuites.createOrUpdateVersion,
+  "createOrUpdateEvaluationSuite",
+  "javascript"
+);
+@@clientName(EvaluationSuites.createEvaluationSuiteVersion,
+  "createEvaluationSuite",
+  "javascript"
+);
 @@clientName(EvaluationSuites.run, "runEvaluationSuite", "javascript");
 // EvaluatorVersion datetime fields are typed as string in the spec but carry ISO-8601 timestamps
 @@alternateType(EvaluatorVersion.created_at, utcDateTime, "python");
@@ -443,11 +480,26 @@ model AIProjectClientOptions {
 @@clientName(EvaluatorGenerationJobs.cancel, "cancel_generation_job", "python");
 @@clientName(EvaluatorGenerationJobs.delete, "delete_generation_job", "python");
 // Evaluation Suite Generation Jobs — unique names to avoid collision with evaluator gen methods
-@@clientName(EvaluationSuiteGenerationJobs.create, "create_generation_suite_job", "python");
-@@clientName(EvaluationSuiteGenerationJobs.get, "get_generation_suite_job", "python");
-@@clientName(EvaluationSuiteGenerationJobs.list, "list_generation_suite_jobs", "python");
-@@clientName(EvaluationSuiteGenerationJobs.cancel, "cancel_generation_suite_job", "python");
-@@clientName(EvaluationSuiteGenerationJobs.delete, "delete_generation_suite_job", "python");
+@@clientName(EvaluationSuiteGenerationJobs.create,
+  "create_generation_suite_job",
+  "python"
+);
+@@clientName(EvaluationSuiteGenerationJobs.get,
+  "get_generation_suite_job",
+  "python"
+);
+@@clientName(EvaluationSuiteGenerationJobs.list,
+  "list_generation_suite_jobs",
+  "python"
+);
+@@clientName(EvaluationSuiteGenerationJobs.cancel,
+  "cancel_generation_suite_job",
+  "python"
+);
+@@clientName(EvaluationSuiteGenerationJobs.delete,
+  "delete_generation_suite_job",
+  "python"
+);
 
 // Agent optimization jobs — renamed for Python SDK discoverability
 @@clientName(AgentOptimizationJobs.create, "create_optimization_job", "python");
@@ -455,18 +507,51 @@ model AIProjectClientOptions {
 @@clientName(AgentOptimizationJobs.list, "list_optimization_jobs", "python");
 @@clientName(AgentOptimizationJobs.cancel, "cancel_optimization_job", "python");
 @@clientName(AgentOptimizationJobs.delete, "delete_optimization_job", "python");
-@@clientName(AgentOptimizationJobs.listCandidates, "list_optimization_candidates", "python");
-@@clientName(AgentOptimizationJobs.getCandidate, "get_optimization_candidate", "python");
-@@clientName(AgentOptimizationJobs.getCandidateConfig, "get_optimization_candidate_config", "python");
-@@clientName(AgentOptimizationJobs.getCandidateResults, "get_optimization_candidate_results", "python");
+@@clientName(AgentOptimizationJobs.listCandidates,
+  "list_optimization_candidates",
+  "python"
+);
+@@clientName(AgentOptimizationJobs.getCandidate,
+  "get_optimization_candidate",
+  "python"
+);
+@@clientName(AgentOptimizationJobs.getCandidateConfig,
+  "get_optimization_candidate_config",
+  "python"
+);
+@@clientName(AgentOptimizationJobs.getCandidateResults,
+  "get_optimization_candidate_results",
+  "python"
+);
 
 // Agent optimization jobs — renamed for JavaScript SDK discoverability
-@@clientName(AgentOptimizationJobs.create, "createOptimizationJob", "javascript");
+@@clientName(AgentOptimizationJobs.create,
+  "createOptimizationJob",
+  "javascript"
+);
 @@clientName(AgentOptimizationJobs.get, "getOptimizationJob", "javascript");
 @@clientName(AgentOptimizationJobs.list, "listOptimizationJobs", "javascript");
-@@clientName(AgentOptimizationJobs.cancel, "cancelOptimizationJob", "javascript");
-@@clientName(AgentOptimizationJobs.delete, "deleteOptimizationJob", "javascript");
-@@clientName(AgentOptimizationJobs.listCandidates, "listOptimizationCandidates", "javascript");
-@@clientName(AgentOptimizationJobs.getCandidate, "getOptimizationCandidate", "javascript");
-@@clientName(AgentOptimizationJobs.getCandidateConfig, "getOptimizationCandidateConfig", "javascript");
-@@clientName(AgentOptimizationJobs.getCandidateResults, "getOptimizationCandidateResults", "javascript");
+@@clientName(AgentOptimizationJobs.cancel,
+  "cancelOptimizationJob",
+  "javascript"
+);
+@@clientName(AgentOptimizationJobs.delete,
+  "deleteOptimizationJob",
+  "javascript"
+);
+@@clientName(AgentOptimizationJobs.listCandidates,
+  "listOptimizationCandidates",
+  "javascript"
+);
+@@clientName(AgentOptimizationJobs.getCandidate,
+  "getOptimizationCandidate",
+  "javascript"
+);
+@@clientName(AgentOptimizationJobs.getCandidateConfig,
+  "getOptimizationCandidateConfig",
+  "javascript"
+);
+@@clientName(AgentOptimizationJobs.getCandidateResults,
+  "getOptimizationCandidateResults",
+  "javascript"
+);
