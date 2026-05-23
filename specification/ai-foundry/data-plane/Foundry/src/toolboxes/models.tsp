@@ -28,21 +28,6 @@ model ToolConfig {
 }
 
 /**
- * A web search configuration for bing custom search
- */
-model WebSearchConfiguration {
-  /**
-   * Project connection id for grounding with bing custom search
-   */
-  project_connection_id: string;
-
-  /**
-   * Name of the custom configuration instance given to config.
-   */
-  instance_name: string;
-}
-
-/**
  * Optional tool configuration extension for controlling tool visibility and search behavior.
  */
 alias ToolConfigExtension = {

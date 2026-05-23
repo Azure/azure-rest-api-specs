@@ -61,6 +61,31 @@ namespace Azure.AI.Projects {
   };
 
   /**
+   * A web search configuration for Bing custom search.
+   */
+  model WebSearchConfiguration {
+    /**
+     * Project connection ID for grounding with Bing custom search.
+     */
+    project_connection_id: string;
+
+    /**
+     * Name of the custom configuration instance given to config.
+     */
+    instance_name: string;
+  }
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(OpenAI.WebSearchTool,
+    {
+      /**
+       * Custom search configuration for domain-restricted web search.
+       */
+      custom_search_configuration?: WebSearchConfiguration,
+    }
+  );
+
+  /**
    * The input definition information for a bing grounding search tool as used to configure an agent.
    */
   model BingGroundingTool extends OpenAI.Tool {
