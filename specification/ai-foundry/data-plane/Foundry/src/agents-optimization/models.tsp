@@ -48,13 +48,34 @@ union OptimizationMode {
 // Input models
 // ---------------------------------------------------------------------------
 
-@doc("Identifies the registered Foundry agent to optimize. Skills, tools, and systemPrompt are specified in options.optimizationConfig.")
+@doc("Identifies the registered Foundry agent to optimize (request-only). Skills, tools, and systemPrompt are specified in options.optimizationConfig.")
 model OptimizationAgentDefinition {
   @doc("Registered Foundry agent name (required).")
   agentName: string;
 
   @doc("Pinned agent version. Defaults to latest if omitted.")
   agentVersion?: string;
+}
+
+@doc("Agent definition returned in response payloads (includes resolved config).")
+model AgentDefinitionResponse {
+  @doc("Agent name.")
+  agentName?: string;
+
+  @doc("Agent version.")
+  agentVersion?: string;
+
+  @doc("Model deployment name.")
+  `model`?: string;
+
+  @doc("System prompt / instructions.")
+  systemPrompt?: string;
+
+  @doc("Agent skills.")
+  skills?: Record<unknown>[];
+
+  @doc("Agent tools.")
+  tools?: Record<unknown>[];
 }
 
 @doc("Reference to a registered dataset in the Foundry Dataset Service.")
@@ -68,17 +89,11 @@ model DatasetRef {
 
 @doc("Tuning knobs and run-mode for an optimization job.")
 model OptimizationOptions {
-  @doc("Agent attributes to optimize (e.g. 'instruction', 'skill', 'model', 'tool'). When empty, auto-detected from the baseline config.")
-  targetAttributes?: TargetAttribute[];
-
   @doc("Maximum optimization iterations per strategy. Must be >= 1. Default: 5.")
   maxIterations?: int32 = 5;
 
   @doc("Per-target-attribute configuration overrides. Contains skills, tools, systemPrompt for the agent, plus model space for model optimization.")
   optimizationConfig?: Record<unknown>;
-
-  @doc("If true, retain temporary candidate-evaluation agent versions for inspection. Default: false.")
-  keepVersions?: boolean = false;
 
   @doc("Model deployment used for evaluation. Defaults to server config (typically 'gpt-4o').")
   evalModel?: string;
@@ -133,7 +148,7 @@ model OptimizationCandidate {
   name: string;
 
   @doc("The agent configuration that produced this candidate.")
-  config: OptimizationAgentDefinition;
+  config: AgentDefinitionResponse;
 
   @doc("What was mutated from the baseline (e.g., {systemPrompt: 'new prompt'}).")
   mutations: Record<unknown>;
@@ -152,9 +167,6 @@ model OptimizationCandidate {
 
   @doc("Whether this candidate is on the Pareto frontier (score vs cost).")
   isParetoOptimal: boolean;
-
-  @doc("Identifies the target attribute that produced this candidate.")
-  targetAttribute?: TargetAttribute;
 
   @doc("Foundry evaluation identifier used to score this candidate.")
   evalId?: string;
@@ -213,17 +225,8 @@ model OptimizationJobResult {
   @doc("All evaluated candidates including baseline.")
   candidates?: OptimizationCandidate[];
 
-  @doc("Candidates on the Pareto frontier (maximize score, minimize cost).")
-  paretoFrontier?: OptimizationCandidate[];
-
-  @doc("Score of the best candidate on the held-out validation dataset. Null when no validation dataset was provided.")
-  validationScore?: OptimizationCandidate;
-
   @doc("The options used for this optimization run.")
   options?: OptimizationOptions;
-
-  @doc("Number of tasks sampled during optimization iterations (null if sampling was not used).")
-  sampleSize?: int32;
 
   @doc("Non-fatal warnings from the optimization run (e.g., target attribute failures that were skipped).")
   warnings?: string[];
