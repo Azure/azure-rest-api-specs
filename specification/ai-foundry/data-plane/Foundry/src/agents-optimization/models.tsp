@@ -49,7 +49,7 @@ union OptimizationMode {
 // ---------------------------------------------------------------------------
 
 @doc("Identifies the registered Foundry agent to optimize (request-only). Skills, tools, and systemPrompt are specified in options.optimizationConfig.")
-model OptimizationAgentDefinition {
+model AgentIdentifier {
   @doc("Registered Foundry agent name (required).")
   agentName: string;
 
@@ -58,7 +58,7 @@ model OptimizationAgentDefinition {
 }
 
 @doc("Agent definition returned in response payloads (includes resolved config).")
-model AgentDefinitionResponse {
+model OptimizationAgentDefinition {
   @doc("Agent name.")
   agentName?: string;
 
@@ -108,7 +108,7 @@ model OptimizationOptions {
 @doc("Caller-supplied inputs for an optimization job.")
 model OptimizationJobInputs {
   @doc("The agent (and pinned version) being optimized.")
-  agent: OptimizationAgentDefinition;
+  agent: AgentIdentifier;
 
   @doc("Reference to a registered training dataset (required).")
   trainDatasetReference: DatasetRef;
@@ -148,7 +148,7 @@ model OptimizationCandidate {
   name: string;
 
   @doc("The agent configuration that produced this candidate.")
-  config: AgentDefinitionResponse;
+  config: OptimizationAgentDefinition;
 
   @doc("What was mutated from the baseline (e.g., {systemPrompt: 'new prompt'}).")
   mutations: Record<unknown>;
