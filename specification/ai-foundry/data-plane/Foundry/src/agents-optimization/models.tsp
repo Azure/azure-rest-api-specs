@@ -48,103 +48,13 @@ union OptimizationMode {
 // Input models
 // ---------------------------------------------------------------------------
 
-@doc("The agent definition being optimized. Identifies the Foundry agent and optional configuration overrides.")
+@doc("Identifies the registered Foundry agent to optimize. Skills, tools, and systemPrompt are specified in options.optimizationConfig.")
 model OptimizationAgentDefinition {
-  @doc("Registered Foundry agent name. Required — bare-model mode is not supported.")
+  @doc("Registered Foundry agent name (required).")
   agentName: string;
 
   @doc("Pinned agent version. Defaults to latest if omitted.")
   agentVersion?: string;
-
-  @doc("Model deployment name (e.g., 'gpt-4o'). Optional when agentName is set — the agent definition provides the model.")
-  `model`?: string;
-
-  @doc("System prompt / instructions override. When set, used as the baseline instructions for the agent.")
-  systemPrompt?: string;
-
-  @doc("Optional named skills the optimizer may tune.")
-  skills?: OptimizationAgentSkill[];
-
-  @doc("Optional function tools available to the agent. When the 'tool' target attribute is active, tool descriptions are optimized. Schema fields (name, types, required) are immutable.")
-  tools?: AgentToolDefinition[];
-}
-
-@doc("A named skill on the agent that the optimizer may tune.")
-model OptimizationAgentSkill {
-  @doc("Skill name (matches the tool name on the agent).")
-  name: string;
-
-  @doc("Short description of what the skill does — used for discovery.")
-  description?: string;
-
-  @doc("Full skill body — detailed instructions, rules, examples that the optimizer uses as the seed text to improve.")
-  body?: string;
-}
-
-@doc("An OpenAI-format function tool definition. The optimizer mutates the function's description and per-parameter descriptions; schema fields (name, types, required) are immutable.")
-model AgentToolDefinition {
-  @doc("Tool type discriminator. Only 'function' is supported.")
-  type: string = "function";
-
-  @doc("The function definition (name, description, parameters schema).")
-  function: AgentToolFunction;
-}
-
-@doc("The inner function definition of an AgentToolDefinition.")
-model AgentToolFunction {
-  @doc("Function name — immutable, must match the executable function identifier.")
-  name: string;
-
-  @doc("Natural-language description shown to the model. Mutable during optimization.")
-  description?: string;
-
-  @doc("JSON Schema describing the function's arguments.")
-  parameters?: Record<unknown>;
-
-  @doc("Whether the provider should enforce strict JSON Schema validation.")
-  strict?: boolean;
-}
-
-@doc("A single evaluation task with input, expected output, and evaluation criteria.")
-model DatasetItem {
-  @doc("Unique-within-the-dataset identifier for this task.")
-  name: string;
-
-  @doc("The user input for the task (primary field name).")
-  prompt?: string;
-
-  @doc("The user query / input for the task (alias for prompt).")
-  query?: string;
-
-  @doc("Optional ground truth used by reference-based evaluators.")
-  groundTruth?: string;
-
-  @doc("Per-task evaluation criteria. Defaults to the job-level evaluators if unset.")
-  criteria?: EvaluationCriterion[];
-
-  @doc("Unique identifier for this scenario (simulation mode with evaluationLevel='conversation').")
-  id?: string;
-
-  @doc("Natural language description of what the simulated user should do (simulation mode).")
-  testCaseDescription?: string;
-
-  @doc("Desired number of conversation turns for this scenario (simulation mode). Defaults to 10 if not specified.")
-  desiredNumTurns?: int32;
-
-  @doc("Pre-computed evaluation results in AOAI-compatible format. When provided together with responseItems, the baseline run-and-evaluate phase is skipped.")
-  evalResults?: EvalRunOutputItemResult[];
-
-  @doc("Pre-computed agent response output items. Captures the full trajectory (function calls, tool outputs, messages) from a prior agent run.")
-  responseItems?: EvalRunOutputItemSampleOutput[];
-}
-
-@doc("LLM-as-judge evaluation criterion applied to a single task.")
-model EvaluationCriterion {
-  @doc("Criterion name (referenced in evaluation result rows).")
-  name: string;
-
-  @doc("Natural-language instruction passed to the judge LLM.")
-  instruction: string;
 }
 
 @doc("Reference to a registered dataset in the Foundry Dataset Service.")
@@ -161,46 +71,22 @@ model OptimizationOptions {
   @doc("Agent attributes to optimize (e.g. 'instruction', 'skill', 'model', 'tool'). When empty, auto-detected from the baseline config.")
   targetAttributes?: TargetAttribute[];
 
-  @doc("Maximum optimization iterations per target attribute. Default: 5.")
+  @doc("Maximum optimization iterations per strategy. Must be >= 1. Default: 5.")
   maxIterations?: int32 = 5;
 
-  @doc("Tasks sampled per iteration (mutation step input). Default: 0 means auto-compute.")
-  tasksPerIteration?: int32;
-
-  @doc("Maximum tasks fed into the reflective-mutation LLM per iteration. Default: 5.")
-  maxReflectionTasks?: int32 = 5;
-
-  @doc("Minimum score improvement between iterations to continue (plateau detection). Default: 0.005.")
-  minImprovement?: float64 = 0.005;
-
-  @doc("Composite score threshold for a task to be considered passing. Default: 0.5.")
-  passThreshold?: float64 = 0.5;
-
-  @doc("Target average score at which optimization stops early (quality ceiling). Default: 0.95.")
-  improvementThreshold?: float64 = 0.95;
-
-  @doc("Max consecutive non-improving iterations before stopping. Default: 2.")
-  maxStaleIterations?: int32 = 2;
-
-  @doc("Per-target-attribute configuration overrides (e.g. model space for model optimization).")
-  targetConfig?: Record<unknown>;
-
-  @doc("Run mode.")
-  mode?: OptimizationMode;
-
-  @doc("Foundry deployment name to use as the LLM-as-judge evaluation model. Required.")
-  evalModel?: string;
-
-  @doc("Optional model deployment for strategy reflection (instruction rewriting, skill generation). Falls back to evalModel if unset.")
-  reflectionModel?: string;
-
-  @doc("Per-task timeout for agent execution in seconds. Default: 300 (5 minutes).")
-  taskTimeoutSeconds?: int32 = 300;
+  @doc("Per-target-attribute configuration overrides. Contains skills, tools, systemPrompt for the agent, plus model space for model optimization.")
+  optimizationConfig?: Record<unknown>;
 
   @doc("If true, retain temporary candidate-evaluation agent versions for inspection. Default: false.")
   keepVersions?: boolean = false;
 
-  @doc("Evaluation granularity. Null/omitted means per-item single-turn. Set to 'conversation' for per-conversation multi-turn simulation scoring. When set, dataset items provide scenario seeds (id, testCaseDescription, desiredNumTurns).")
+  @doc("Per-evaluator model deployment mapping. Keys are evaluator names or '*' for default. Values are deployment names (e.g. 'gpt-4o').")
+  evalModel?: Record<string>;
+
+  @doc("Model deployment for optimization reasoning (must be gpt-5 family). Falls back to the default eval model when not set.")
+  optimizationModel?: string;
+
+  @doc("Evaluation granularity. Null/omitted means per-item single-turn. Set to 'conversation' for per-conversation multi-turn simulation scoring.")
   evaluationLevel?: EvaluationLevel;
 }
 
@@ -209,20 +95,14 @@ model OptimizationJobInputs {
   @doc("The agent (and pinned version) being optimized.")
   agent: OptimizationAgentDefinition;
 
-  @doc("Inline evaluation dataset. Mutually exclusive with trainDatasetReference.")
-  dataset?: DatasetItem[];
-
-  @doc("Reference to a registered training dataset. Mutually exclusive with dataset.")
-  trainDatasetReference?: DatasetRef;
+  @doc("Reference to a registered training dataset (required).")
+  trainDatasetReference: DatasetRef;
 
   @doc("Optional held-out validation dataset for measuring generalization of the final candidate.")
   validationDatasetReference?: DatasetRef;
 
   @doc("Job-level evaluators (referenced by name). Per-task criteria may override. Default: ['task_adherence'].")
   evaluators?: string[];
-
-  @doc("Job-level evaluation criteria. Applied to all tasks unless overridden by per-task criteria.")
-  criteria?: EvaluationCriterion[];
 
   @doc("Tuning knobs and run-mode.")
   options?: OptimizationOptions;
@@ -236,12 +116,6 @@ model OptimizationJobInputs {
 model OptimizationJobProgress {
   @doc("1-based current iteration index.")
   currentIteration: int32;
-
-  @doc("Tasks evaluated so far this iteration.")
-  tasksCompleted: int32;
-
-  @doc("Total tasks scheduled this iteration.")
-  tasksTotal: int32;
 
   @doc("Best score observed so far across all candidates.")
   bestScore: float64;
@@ -264,9 +138,6 @@ model OptimizationCandidate {
   @doc("What was mutated from the baseline (e.g., {systemPrompt: 'new prompt'}).")
   mutations: Record<unknown>;
 
-  @doc("Rationale — why this candidate was generated.")
-  rationale: string;
-
   @doc("Average composite score across all tasks.")
   avgScore: float64;
 
@@ -281,15 +152,6 @@ model OptimizationCandidate {
 
   @doc("Whether this candidate is on the Pareto frontier (score vs cost).")
   isParetoOptimal: boolean;
-
-  @doc("Average score from sampled evaluation (null if full dataset was used).")
-  sampleAvgScore?: float64;
-
-  @doc("Number of tasks in the sample (null if full dataset was used).")
-  sampleSize?: int32;
-
-  @doc("'sample' if scored on a subset, 'full' if re-evaluated on the full dataset.")
-  evaluationType?: string;
 
   @doc("Identifies the target attribute that produced this candidate.")
   targetAttribute?: TargetAttribute;
@@ -474,10 +336,10 @@ model CandidateDeployConfig {
   temperature?: float32;
 
   @doc("Optional skill overrides.")
-  skills?: OptimizationAgentSkill[];
+  skills?: Record<unknown>[];
 
   @doc("Optional tool overrides.")
-  tools?: AgentToolDefinition[];
+  tools?: Record<unknown>[];
 }
 
 @doc("Full per-task evaluation results for a candidate, returned by GET /candidates/{id}/results.")
