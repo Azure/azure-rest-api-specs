@@ -100,7 +100,7 @@ interface Models
 
       @doc("Model version to create.")
       @bodyRoot
-      body: ModelVersion;
+      model_version: ModelVersion;
     },
     CreateModelVersionAsyncResponse
   >;
@@ -123,7 +123,7 @@ interface Models
       version: string;
 
       @bodyRoot
-      body: ModelPendingUploadRequest;
+      pending_upload_request: ModelPendingUploadRequest;
     },
     ModelPendingUploadResponse
   >;
@@ -146,7 +146,7 @@ interface Models
       version: string;
 
       @bodyRoot
-      body: ModelCredentialRequest;
+      credential_request: ModelCredentialRequest;
     },
     AssetCredentialResponse
   >;

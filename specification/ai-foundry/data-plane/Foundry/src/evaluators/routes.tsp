@@ -5,8 +5,6 @@ import "./models.tsp";
 namespace Azure.AI.Projects;
 using Http;
 using OpenAPI;
-using Rest;
-using TypeSpec.Versioning;
 
 alias EvaluatorsPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
 
@@ -99,7 +97,7 @@ interface Evaluators {
       ...EvaluatorsPreviewHeader;
 
       @Http.bodyRoot
-      evaluatorVersion: EvaluatorVersion;
+      evaluator_version: EvaluatorVersion;
     },
     Azure.Core.Foundations.ResourceCreatedResponse<EvaluatorVersion>
   >;
@@ -121,7 +119,7 @@ interface Evaluators {
 
       @doc("Evaluator resource")
       @Http.bodyRoot
-      evaluatorVersion: EvaluatorVersion;
+      evaluator_version: EvaluatorVersion;
     },
     Azure.Core.Foundations.ResourceOkResponse<EvaluatorVersion>
   >;
@@ -147,7 +145,7 @@ interface Evaluators {
 
       @doc("The pending upload request parameters")
       @Http.bodyRoot
-      pendingUploadRequest: PendingUploadRequest;
+      pending_upload_request: PendingUploadRequest;
     },
     PendingUploadResponse
   >;
@@ -169,7 +167,7 @@ interface Evaluators {
 
       @doc("The credential request parameters")
       @Http.bodyRoot
-      credentialRequest: EvaluatorCredentialRequest;
+      credential_request: EvaluatorCredentialRequest;
 
       @doc("The specific version id of the EvaluatorVersion to operate on.")
       @Rest.segment("versions")
@@ -185,7 +183,7 @@ interface Evaluators {
 // ============================================================================
 
 const EvaluatorGenerationJobsRequiredPreviews = #{
-  conditional_previews: #[
+  required_previews: #[
     FoundryFeaturesOptInKeys.evaluations_v1_preview
   ],
 };
@@ -226,12 +224,7 @@ interface EvaluatorGenerationJobs {
   @extension("x-ms-foundry-meta", EvaluatorGenerationJobsRequiredPreviews)
   list is listJobsPreview<
     FoundryFeaturesOptInKeys.evaluations_v1_preview,
-    EvaluatorGenerationJob,
-    {
-      @doc("Filter evaluator generation jobs by category.")
-      @query
-      category?: EvaluatorCategory;
-    }
+    EvaluatorGenerationJob
   >;
 
   /**

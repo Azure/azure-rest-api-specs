@@ -26,7 +26,7 @@ import "./src/toolboxes/routes.tsp";
 import "./src/skills/routes.tsp";
 import "./src/agents-session-files/routes.tsp";
 import "./src/data_generation_jobs/routes.tsp";
-import "./src/evaluation-suites/routes.tsp";
+//import "./src/evaluation-suites/routes.tsp";
 import "./src/agents-optimization/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
@@ -46,6 +46,18 @@ using Azure.AI.Projects;
 
 // To fix circular dependency in Python, remaining OpenAI types are emitted as Azure.AI.Projects
 @@clientNamespace(OpenAI, "azure.ai.projects", "python");
+
+
+// ********************************************************************************
+// ********************************************************************************
+// ********************************************************************************
+//
+//                       PART 1 - RELATED TO GA OPERATIONS
+//
+// ********************************************************************************
+// ********************************************************************************
+// ********************************************************************************
+
 
 // --------------------------------------------------------------------------------
 // Agents sub‐client
@@ -346,21 +358,6 @@ using Azure.AI.Projects;
 @@clientName(Indexes.createOrUpdateVersion, "createOrUpdate");
 
 // --------------------------------------------------------------------------------
-// Schedules sub‐client
-// --------------------------------------------------------------------------------
-
-@@clientName(SchedulesCreateOrUpdateParams.resource, "schedule");
-@@clientName(Schedule.id, "schedule_id");
-
-// Schedule trigger datetime fields are typed as string in the spec but carry ISO-8601 timestamps
-@@alternateType(RecurrenceTrigger.startTime, utcDateTime, "python");
-@@alternateType(RecurrenceTrigger.endTime, utcDateTime, "python");
-@@alternateType(OneTimeTrigger.triggerAt, utcDateTime, "python");
-@@alternateType(CronTrigger.startTime, utcDateTime, "python");
-@@alternateType(CronTrigger.endTime, utcDateTime, "python");
-@@alternateType(ScheduleRun.triggerTime, utcDateTime, "python");
-
-// --------------------------------------------------------------------------------
 // Toolboxes sub-client
 // --------------------------------------------------------------------------------
 
@@ -372,22 +369,6 @@ using Azure.AI.Projects;
 @@clientName(Toolboxes.listToolboxVersions, "list_versions");
 @@clientName(Toolboxes.deleteToolbox, "delete");
 @@clientName(Toolboxes.deleteToolboxVersion, "delete_version");
-
-// --------------------------------------------------------------------------------
-// Skills sub-client
-// --------------------------------------------------------------------------------
-
-@@clientName(Skills.createSkill, "create");
-@@clientName(Skills.createSkillFromPackage, "create_from_package");
-@@clientName(Skills.getSkill, "get");
-@@clientName(Skills.downloadSkill, "download");
-@@clientName(Skills.listSkills, "list");
-@@clientName(Skills.updateSkill, "update");
-@@clientName(Skills.deleteSkill, "delete");
-
-@@clientName(SkillObject, "SkillDetails", "python");
-@@clientName(DeleteSkillResponse, "DeleteSkillResult", "python");
-@@clientName(DownloadSkillResponse, "DownloadSkillResult", "python");
 
 // --------------------------------------------------------------------------------
 // Connections sub‐client
@@ -406,16 +387,70 @@ using Azure.AI.Projects;
 @@clientName(Sku, "ModelDeploymentSku");
 
 // --------------------------------------------------------------------------------
+// Other
+// --------------------------------------------------------------------------------
+
+// Rename OpenAI.Error to avoid conflict with Azure.Core.Foundations.Error.
+// OpenAI.Error is the object type of the `error` properties in `ApiErrorResponse`
+// and `MemoryStoreUpdateResponse`.
+@@clientName(OpenAI.Error, "ApiError");
+
+
+// ********************************************************************************
+// ********************************************************************************
+// ********************************************************************************
+//
+//                       PART 2 - RELATED TO BETA OPERATIONS
+//
+// ********************************************************************************
+// ********************************************************************************
+// ********************************************************************************
+
+
+// --------------------------------------------------------------------------------
 // Beta Agents sub-client
 // --------------------------------------------------------------------------------
+
+@@clientName(AgentOptimizationJobs.create, "create_optimization_job", "python");
+@@clientName(AgentOptimizationJobs.get, "get_optimization_job", "python");
+@@clientName(AgentOptimizationJobs.list, "list_optimization_jobs", "python");
+@@clientName(AgentOptimizationJobs.cancel, "cancel_optimization_job", "python");
+@@clientName(AgentOptimizationJobs.delete, "delete_optimization_job", "python");
+@@clientName(AgentOptimizationJobs.listCandidates, "list_optimization_candidates", "python");
+@@clientName(AgentOptimizationJobs.getCandidate, "get_optimization_candidate", "python");
+@@clientName(AgentOptimizationJobs.getCandidateConfig, "get_optimization_candidate_config", "python");
+@@clientName(AgentOptimizationJobs.getCandidateResults, "get_optimization_candidate_results", "python");
+
+@@clientName(AgentOptimizationJobs.create, "createOptimizationJob", "javascript");
+@@clientName(AgentOptimizationJobs.get, "getOptimizationJob", "javascript");
+@@clientName(AgentOptimizationJobs.list, "listOptimizationJobs", "javascript");
+@@clientName(AgentOptimizationJobs.cancel, "cancelOptimizationJob", "javascript");
+@@clientName(AgentOptimizationJobs.delete, "deleteOptimizationJob", "javascript");
+@@clientName(AgentOptimizationJobs.listCandidates, "listOptimizationCandidates", "javascript");
+@@clientName(AgentOptimizationJobs.getCandidate, "getOptimizationCandidate", "javascript");
+@@clientName(AgentOptimizationJobs.getCandidateConfig, "getOptimizationCandidateConfig", "javascript");
+@@clientName(AgentOptimizationJobs.getCandidateResults, "getOptimizationCandidateResults", "javascript");
+
+// DatasetItem model has a property `response_items?: OpenAI.OutputItem[]`. It is used
+// to define Agent optimization request. If emitted as-is, it pulls in a lot of
+// OpenAI responses classes. We want Foundry SDK to be free of those, therefore for the
+// time being we define output item as a generic dictionary.
+@@alternateType(OpenAI.OutputItem, Record<unknown>);
 
 // Make this method internal, since it's patched with a new one that supports either binary or file-path input
 @@access(AgentSessionFiles.uploadSessionFile, Access.internal, "python");
 @@usage(SessionFileWriteResponse, Usage.output);
 @@access(SessionFileWriteResponse, Access.public);
 
-// Exclude these operations entirely from emitted Python SDK
-@@scope(Agents.createAgentFromCode, "!(python)");
+// Exclude these operations entirely from emitted SDK. These are convenience REST APIs that we don't think bring
+// real value on SDK surface. We can do everything using createAgentVersionFromCode.
+@@scope(Agents.createAgentFromCode, "!(python, javascript)");
+@@scope(Agents.updateAgentFromCode, "!(python, javascript)");
+
+@@clientName(Agents.downloadAgentCode, "download_code", "python");
+
+@@clientName(Agents.createAgentVersionFromCode, "create_version_from_code", "python");
+@@clientName(Agents.createAgentVersionFromCode, "createVersionFromCode", "javascript");
 
 @@clientName(DownloadAgentCodeResponse, "DownloadAgentCodeResult", "python");
 @@clientName(SessionDirectoryListResponse,
@@ -425,7 +460,224 @@ using Azure.AI.Projects;
 @@clientName(SessionFileWriteResponse, "SessionFileWriteResult", "python");
 
 // --------------------------------------------------------------------------------
-// Evaluation Taxonomies sub-client
+// Class renames related to Responses
+// --------------------------------------------------------------------------------
+
+// Allow assigning a `dict[str, Any]` object directly to the "schema" property of TextResponseFormatJsonSchema
+@@alternateType(OpenAI.ResponseFormatJsonSchemaSchema, Record<unknown>);
+
+// Note there is also OpenAI.TextResponseFormatJsonSchema (which extends OpenAI.TextResponseFormatConfiguration). It already has a good name.
+@@clientName(OpenAI.TextResponseFormatConfiguration, "TextResponseFormat");
+@@clientName(OpenAI.TextResponseFormatConfigurationResponseFormatText,
+  "TextResponseFormatText"
+);
+@@clientName(OpenAI.TextResponseFormatConfigurationResponseFormatJsonObject,
+  "TextResponseFormatJsonObject"
+);
+
+// --------------------------------------------------------------------------------
+// Beta Memories sub-client
+// --------------------------------------------------------------------------------
+
+@@clientName(MemoryStores.createMemoryStore, "create");
+@@clientName(MemoryStores.updateMemoryStore, "update");
+@@clientName(MemoryStores.getMemoryStore, "get");
+@@clientName(MemoryStores.listMemoryStores, "list");
+@@clientName(MemoryStores.deleteMemoryStore, "delete");
+@@clientName(MemoryStoreSearchResponse, "MemoryStoreSearchResult", "python");
+@@clientName(DeleteMemoryStoreResponse, "DeleteMemoryStoreResult", "python");
+@@clientName(DeleteMemoryResponse, "DeleteMemoryResult", "python");
+@@clientName(MemoryStoreUpdateResponse, "MemoryStoreUpdateResult", "python");
+@@clientName(MemoryStoreDeleteScopeResponse,
+  "MemoryStoreDeleteScopeResult",
+  "python"
+);
+
+// For Python and JS, Memory Stores update and search operations are the only Foundry operations that
+// define OpenAI.InputItem as inputs. This pulls in ~100 OpenAI classes related to input items. We want the
+// Foundry SDK to be free of those, therefore for the time being we define input item as a generic dictionary.
+@@alternateType(OpenAI.InputItem, Record<unknown>);
+
+// Note the doc string replacement below is for JavaScript only, because for Python we hand-write the
+// relevant methods with proper doc strings (see `begin_update_memories` and `search_memories` methods)
+@@clientDoc(MemoryStoreUpdateRequest.items,
+  "A list of messages to store in memory, each one represented as an object with `role`, `content` and `type` keys. Similar to how OpenAI defines input items in Responses operations. Example of an item: {\"role\": \"user\", \"type\": \"message\", \"content\": \"my user message\"}. Only messages with `type` equals `message` are currently processed. Others are ignored.",
+  DocumentationMode.replace,
+  "javascript"
+);
+@@clientDoc(MemoryStoreSearchRequest.items,
+  "A list of messages used to extract relevant memories, each one represented as an object with `role`, `content` and `type` keys. Similar to how OpenAI defines input items in Responses operations. Example of an item: {\"role\": \"user\", \"type\": \"message\", \"content\": \"my user message\"}. Only messages with `type` equals `message` are currently processed. Others are ignored.",
+  DocumentationMode.replace,
+  "javascript"
+);
+
+// The Python SDK will have custom code to handle LRO memory updates, and
+// new input "items" specified via OpenAI classes.
+@@access(MemoryStores.updateMemories, Access.internal, "python");
+@@scope(MemoryStores.getUpdateResult, "!(python)");
+@@usage(MemoryStoreUpdateCompletedResult, Usage.output);
+@@access(MemoryStoreUpdateCompletedResult, Access.public);
+@@usage(MemoryStoreUpdateResponse, Usage.output);
+@@access(MemoryStoreUpdateResponse, Access.public);
+
+// The Python SDK will have custom code to handle memory search, with
+// new input "items" specified via OpenAI classes.
+@@access(MemoryStores.searchMemories, Access.internal, "python");
+@@access(MemoryStoreSearchResponse, Access.public, "python");
+
+// Rename models ending with 'Object' to end with 'Details' for Python
+@@clientName(MemoryStoreObject, "MemoryStoreDetails", "python");
+
+// Remove 'Object' suffix for JS client
+@@clientName(MemoryStoreObject, "MemoryStore", "javascript");
+
+// --------------------------------------------------------------------------------
+// Beta Routines sub-client
+// --------------------------------------------------------------------------------
+
+@@clientName(Routines.createOrUpdateRoutine, "create_or_update", "python");
+@@clientName(Routines.createOrUpdateRoutine, "createOrUpdate", "javascript");
+@@clientName(Routines.getRoutine, "get");
+@@clientName(Routines.enableRoutine, "enable");
+@@clientName(Routines.disableRoutine, "disable");
+@@clientName(Routines.listRoutines, "list");
+@@clientName(Routines.deleteRoutine, "delete");
+@@clientName(Routines.listRoutineRuns, "list_runs", "python");
+@@clientName(Routines.listRoutineRuns, "listRuns", "javascript");
+@@clientName(Routines.dispatchRoutineAsync, "dispatch");
+@@clientName(DispatchRoutineResponse, "DispatchRoutineResult", "python");
+
+// --------------------------------------------------------------------------------
+// Beta Evaluators sub‐client
+// --------------------------------------------------------------------------------
+
+// Need to explicitly mention both languages to avoid compile error
+@@clientName(Evaluators.listLatestVersions, "list", "python, javascript");
+
+// Evaluator pending upload
+@@clientName(Evaluators.startPendingUpload, "pendingUpload");
+
+// Evaluator generation jobs — unscoped names (fixes AllScopes conflict)
+@@clientName(EvaluatorGenerationJobs.create, "create_generation_job");
+@@clientName(EvaluatorGenerationJobs.get, "get_generation_job");
+@@clientName(EvaluatorGenerationJobs.list, "list_generation_jobs");
+@@clientName(EvaluatorGenerationJobs.cancel, "cancel_generation_job");
+@@clientName(EvaluatorGenerationJobs.delete, "delete_generation_job");
+
+// Evaluator generation jobs — renamed for JavaScript SDK discoverability
+@@clientName(EvaluatorGenerationJobs.create,
+  "createGenerationJob",
+  "javascript"
+);
+@@clientName(EvaluatorGenerationJobs.get, "getGenerationJob", "javascript");
+@@clientName(EvaluatorGenerationJobs.list, "listGenerationJobs", "javascript");
+@@clientName(EvaluatorGenerationJobs.cancel,
+  "cancelGenerationJob",
+  "javascript"
+);
+@@clientName(EvaluatorGenerationJobs.delete,
+  "deleteGenerationJob",
+  "javascript"
+);
+
+// EvaluatorVersion datetime fields are typed as string in the spec but carry ISO-8601 timestamps
+@@alternateType(EvaluatorVersion.created_at, utcDateTime, "python");
+@@alternateType(EvaluatorVersion.modified_at, utcDateTime, "python");
+
+// Evaluator generation jobs — renamed for Python SDK discoverability
+@@clientName(EvaluatorGenerationJobs.create, "create_generation_job", "python");
+@@clientName(EvaluatorGenerationJobs.get, "get_generation_job", "python");
+@@clientName(EvaluatorGenerationJobs.list, "list_generation_jobs", "python");
+@@clientName(EvaluatorGenerationJobs.cancel, "cancel_generation_job", "python");
+@@clientName(EvaluatorGenerationJobs.delete, "delete_generation_job", "python");
+
+// // EvaluationSuites versioned operations
+// @@clientName(EvaluationSuites.listVersions, "list_evaluation_suite_versions");
+// @@clientName(EvaluationSuites.listLatest, "list_evaluation_suites");
+// @@clientName(EvaluationSuites.getVersion, "get_evaluation_suite");
+// @@clientName(EvaluationSuites.deleteVersion, "delete_evaluation_suite");
+// @@clientName(EvaluationSuites.createOrUpdateVersion, "create_or_update_evaluation_suite");
+// @@clientName(EvaluationSuites.createEvaluationSuiteVersion, "create_evaluation_suite");
+// @@clientName(EvaluationSuites.run, "run_evaluation_suite");
+
+// @@clientName(EvaluationSuites.listVersions, "listEvaluationSuiteVersions", "javascript");
+// @@clientName(EvaluationSuites.listLatest, "listEvaluationSuites", "javascript");
+// @@clientName(EvaluationSuites.getVersion, "getEvaluationSuite", "javascript");
+// @@clientName(EvaluationSuites.deleteVersion, "deleteEvaluationSuite", "javascript");
+// @@clientName(EvaluationSuites.createOrUpdateVersion, "createOrUpdateEvaluationSuite", "javascript");
+// @@clientName(EvaluationSuites.createEvaluationSuiteVersion, "createEvaluationSuite", "javascript");
+// @@clientName(EvaluationSuites.run, "runEvaluationSuite", "javascript");
+
+// // Evaluation Suite Generation Jobs — unscoped names (fixes AllScopes conflict)
+// @@clientName(EvaluationSuiteGenerationJobs.create, "create_generation_suite_job");
+// @@clientName(EvaluationSuiteGenerationJobs.get, "get_generation_suite_job");
+// @@clientName(EvaluationSuiteGenerationJobs.list, "list_generation_suite_jobs");
+// @@clientName(EvaluationSuiteGenerationJobs.cancel, "cancel_generation_suite_job");
+// @@clientName(EvaluationSuiteGenerationJobs.delete, "delete_generation_suite_job");
+
+// // Evaluation Suite Generation Jobs — renamed for JavaScript SDK discoverability
+// @@clientName(EvaluationSuiteGenerationJobs.create, "createGenerationSuiteJob", "javascript");
+// @@clientName(EvaluationSuiteGenerationJobs.get, "getGenerationSuiteJob", "javascript");
+// @@clientName(EvaluationSuiteGenerationJobs.list, "listGenerationSuiteJobs", "javascript");
+// @@clientName(EvaluationSuiteGenerationJobs.cancel, "cancelGenerationSuiteJob", "javascript");
+// @@clientName(EvaluationSuiteGenerationJobs.delete, "deleteGenerationSuiteJob", "javascript");
+
+// --------------------------------------------------------------------------------
+// Beta Insights sub‐client
+// --------------------------------------------------------------------------------
+@@clientName(Azure.AI.Projects.Insight.id, "insight_id");
+@@clientName(InsightsGetParams.id, "insight_id");
+
+// --------------------------------------------------------------------------------
+// Beta Models sub‐client
+// --------------------------------------------------------------------------------
+
+// Shorter method names for SDK models operations
+@@clientName(Models.listLatest, "list");
+@@clientName(Models.listVersions, "listVersions");
+@@clientName(Models.getVersion, "get");
+@@clientName(Models.deleteVersion, "delete");
+@@clientName(Models.createOrUpdateVersion, "update");
+@@clientName(Models.startPendingUpload, "pendingUpload");
+@@clientName(Models.getCredentials, "getCredentials");
+@@clientName(Models.createAsync, "pendingCreateVersion");
+
+@@clientName(CreateModelVersionAsyncResponse, "ModelPendingCreateVersionResult", "python");
+@@clientName(CreateModelVersionAsyncResponse, "ModelPendingCreateVersionResponse", "javascript");
+
+// --------------------------------------------------------------------------------
+// Beta Schedules sub‐client
+// --------------------------------------------------------------------------------
+
+@@clientName(SchedulesCreateOrUpdateParams.resource, "schedule");
+@@clientName(Schedule.id, "schedule_id");
+
+// Schedule trigger datetime fields are typed as string in the spec but carry ISO-8601 timestamps
+@@alternateType(RecurrenceTrigger.startTime, utcDateTime, "python");
+@@alternateType(RecurrenceTrigger.endTime, utcDateTime, "python");
+@@alternateType(OneTimeTrigger.triggerAt, utcDateTime, "python");
+@@alternateType(CronTrigger.startTime, utcDateTime, "python");
+@@alternateType(CronTrigger.endTime, utcDateTime, "python");
+@@alternateType(ScheduleRun.triggerTime, utcDateTime, "python");
+
+// --------------------------------------------------------------------------------
+// Beta Skills sub-client
+// --------------------------------------------------------------------------------
+
+@@clientName(Skills.createSkill, "create");
+@@clientName(Skills.createSkillFromPackage, "create_from_package");
+@@clientName(Skills.getSkill, "get");
+@@clientName(Skills.downloadSkill, "download");
+@@clientName(Skills.listSkills, "list");
+@@clientName(Skills.updateSkill, "update");
+@@clientName(Skills.deleteSkill, "delete");
+
+@@clientName(SkillObject, "SkillDetails", "python");
+@@clientName(DeleteSkillResponse, "DeleteSkillResult", "python");
+@@clientName(DownloadSkillResponse, "DownloadSkillResult", "python");
+
+// --------------------------------------------------------------------------------
+// Beta Evaluation Taxonomies sub-client
 // --------------------------------------------------------------------------------
 
 // Note that we can't rename it in src\openai-evaluations\models.tsp, since in
@@ -464,14 +716,7 @@ model AIProjectClientOptions {
   "python"
 );
 
-// --------------------------------------------------------------------------------
-// Other
-// --------------------------------------------------------------------------------
 
-// Rename OpenAI.Error to avoid conflict with Azure.Core.Foundations.Error.
-// OpenAI.Error is the object type of the `error` properties in `ApiErrorResponse`
-// and `MemoryStoreUpdateResponse`.
-@@clientName(OpenAI.Error, "ApiError");
 
 // Evaluator generation jobs — renamed for Python SDK discoverability
 @@clientName(EvaluatorGenerationJobs.create, "create_generation_job", "python");
