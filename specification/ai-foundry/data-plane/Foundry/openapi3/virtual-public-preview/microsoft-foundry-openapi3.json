@@ -26918,8 +26918,7 @@
       "FileSearchToolbox": {
         "type": "object",
         "required": [
-          "type",
-          "vector_store_ids"
+          "type"
         ],
         "properties": {
           "type": {
@@ -26927,8 +26926,7 @@
             "enum": [
               "file_search"
             ],
-            "description": "The type of the tool. Always `file_search`.",
-            "default": "file_search"
+            "description": "The type of the tool. Always `file_search`."
           },
           "vector_store_ids": {
             "type": "array",
@@ -48227,25 +48225,24 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "code_interpreter": "#/components/schemas/OpenAI.CodeInterpreterTool",
-            "file_search": "#/components/schemas/OpenAI.FileSearchTool",
-            "web_search": "#/components/schemas/OpenAI.WebSearchTool",
-            "mcp": "#/components/schemas/OpenAI.MCPTool",
-            "azure_ai_search": "#/components/schemas/AzureAISearchTool",
-            "openapi": "#/components/schemas/OpenApiTool",
-            "a2a_preview": "#/components/schemas/A2APreviewTool",
-            "work_iq_preview": "#/components/schemas/WorkIQPreviewTool",
-            "fabric_iq_preview": "#/components/schemas/FabricIQPreviewTool",
-            "toolbox_search_preview": "#/components/schemas/ToolboxSearchPreviewTool",
             "bing_grounding": "#/components/schemas/BingGroundingTool",
             "fabric_dataagent_preview": "#/components/schemas/MicrosoftFabricPreviewTool",
             "sharepoint_grounding_preview": "#/components/schemas/SharepointPreviewTool",
+            "azure_ai_search": "#/components/schemas/AzureAISearchTool",
+            "openapi": "#/components/schemas/OpenApiTool",
             "bing_custom_search_preview": "#/components/schemas/BingCustomSearchPreviewTool",
             "browser_automation_preview": "#/components/schemas/BrowserAutomationPreviewTool",
             "azure_function": "#/components/schemas/AzureFunctionTool",
             "capture_structured_outputs": "#/components/schemas/CaptureStructuredOutputsTool",
+            "a2a_preview": "#/components/schemas/A2APreviewTool",
+            "work_iq_preview": "#/components/schemas/WorkIQPreviewTool",
+            "fabric_iq_preview": "#/components/schemas/FabricIQPreviewTool",
             "memory_search_preview": "#/components/schemas/MemorySearchPreviewTool",
             "memory_search": "#/components/schemas/MemorySearchTool",
+            "code_interpreter": "#/components/schemas/OpenAI.CodeInterpreterTool",
+            "file_search": "#/components/schemas/OpenAI.FileSearchTool",
+            "web_search": "#/components/schemas/OpenAI.WebSearchTool",
+            "mcp": "#/components/schemas/OpenAI.MCPTool",
             "function": "#/components/schemas/OpenAI.FunctionTool",
             "computer_use_preview": "#/components/schemas/OpenAI.ComputerUsePreviewTool",
             "image_generation": "#/components/schemas/OpenAI.ImageGenTool",
@@ -48598,7 +48595,6 @@
               "memory_search_preview",
               "work_iq_preview",
               "fabric_iq_preview",
-              "toolbox_search_preview",
               "azure_ai_search",
               "azure_function",
               "bing_grounding",
@@ -53099,35 +53095,6 @@
         },
         "description": "Policy configuration for a toolbox, including content safety and other governance settings."
       },
-      "ToolboxSearchPreviewTool": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "toolbox_search_preview"
-            ],
-            "description": "The type of the tool. Always `toolbox_search_preview`."
-          },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "A tool for searching over the agent's toolbox.\nWhen present, deferred tools are hidden from `tools/list` and only\ndiscoverable via `search_tools` queries at runtime."
-      },
       "ToolboxSearchPreviewToolbox": {
         "type": "object",
         "required": [
@@ -53140,14 +53107,6 @@
               "toolbox_search_preview"
             ],
             "description": "The type of the tool. Always `toolbox_search_preview`."
-          },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
           }
         },
         "allOf": [
@@ -54095,8 +54054,7 @@
             "enum": [
               "web_search"
             ],
-            "description": "The type of the tool. Always `web_search`.",
-            "default": "web_search"
+            "description": "The type of the tool. Always `web_search`."
           },
           "filters": {
             "type": "object",
