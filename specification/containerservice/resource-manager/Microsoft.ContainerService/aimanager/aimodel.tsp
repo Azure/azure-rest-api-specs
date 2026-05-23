@@ -123,13 +123,13 @@ model ServingPerformanceEstimation {
   @minValue(0)
   @maxValue(1)
   @doc("Relative inference latency coefficient in `[0, 1]`. Higher is better (`1` matches the best-performing SKU's latency for this model).")
-  latency: float32;
+  relativeLatency: float32;
 
   @visibility(Lifecycle.Read)
   @minValue(0)
   @maxValue(1)
   @doc("Relative inference throughput coefficient in `[0, 1]`. Higher is better (`1` matches the best-performing SKU's throughput for this model).")
-  throughput: float32;
+  relativeThroughput: float32;
 }
 
 @added(Versions.v2026_05_02_preview)

@@ -2771,7 +2771,7 @@
       "type": "object",
       "description": "Estimated relative inference performance of a single model replica on a given GPU SKU. Each metric is a scaling coefficient in the range `[0, 1]` relative to the best-performing SKU for this model, which scores `1`.",
       "properties": {
-        "latency": {
+        "relativeLatency": {
           "type": "number",
           "format": "float",
           "description": "Relative inference latency coefficient in `[0, 1]`. Higher is better (`1` matches the best-performing SKU's latency for this model).",
@@ -2779,7 +2779,7 @@
           "maximum": 1,
           "readOnly": true
         },
-        "throughput": {
+        "relativeThroughput": {
           "type": "number",
           "format": "float",
           "description": "Relative inference throughput coefficient in `[0, 1]`. Higher is better (`1` matches the best-performing SKU's throughput for this model).",
@@ -2789,8 +2789,8 @@
         }
       },
       "required": [
-        "latency",
-        "throughput"
+        "relativeLatency",
+        "relativeThroughput"
       ]
     }
   },
