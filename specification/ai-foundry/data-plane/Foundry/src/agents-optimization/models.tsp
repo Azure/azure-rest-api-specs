@@ -258,8 +258,7 @@ model OptimizationJob {
   result?: OptimizationJobResult;
 
   // --- Inputs (nested in response, echoing caller-supplied config) ---
-  @doc("Caller-supplied inputs echoed back in the response.")
-  @visibility(Lifecycle.Read)
+  @doc("Caller-supplied inputs.")
   inputs?: OptimizationJobInputs;
 
   @doc("The timestamp when the job was created, represented in Unix time.")
