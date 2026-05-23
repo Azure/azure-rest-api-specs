@@ -19,7 +19,6 @@ namespace Azure.AI.Projects {
     memory_search_preview: "memory_search_preview",
     work_iq_preview: "work_iq_preview",
     fabric_iq_preview: "fabric_iq_preview",
-    toolbox_search_preview: "toolbox_search_preview",
   }
 
   // General availability tools:
@@ -45,39 +44,6 @@ namespace Azure.AI.Projects {
   @@copyVariants(OpenAI.IncludeEnum, Azure.AI.Projects._AgentIncludable);
 
   /**
-   * Per-tool configuration that controls tool visibility and search behavior.
-   */
-  model ToolConfig {
-    /**
-     * When true, the tool is always included in agent context and visible in `tools/list`.
-     * When false (default), the tool is hidden from `tools/list` and only discoverable via `tool_search`.
-     */
-    pin?: boolean;
-
-    /**
-     * Additional text indexed for tool_search. Supplements the native tool description
-     * to improve discoverability. Does not alter `tools/list` output.
-     */
-    @maxLength(1000)
-    additional_search_text?: string;
-  }
-
-  /**
-   * A web search configuration for bing custom search
-   */
-  model WebSearchConfiguration {
-    /**
-     * Project connection id for grounding with bing custom search
-     */
-    project_connection_id: string;
-
-    /**
-     * Name of the custom configuration instance given to config.
-     */
-    instance_name: string;
-  }
-
-  /**
    * Optional name and description fields for tool definitions and nested tool configurations.
    */
   alias ToolNameAndDescriptionExtension = {
@@ -91,181 +57,6 @@ namespace Azure.AI.Projects {
      */
     description?: string;
   };
-
-  /**
-   * Optional tool configuration extension for controlling tool visibility and search behavior.
-   */
-  alias ToolConfigExtension = {
-    /**
-     * Per-tool configuration map. Keys are tool names or `*` (catch-all default).
-     * Resolution order: exact tool name match takes priority over `*`.
-     * Unknown tool names are silently ignored at runtime.
-     */
-    tool_configs?: Record<ToolConfig>;
-  };
-
-  /**
-   * Supported tool types for tools stored in a toolbox.
-   */
-  union ToolboxToolType {
-    code_interpreter: "code_interpreter",
-    file_search: "file_search",
-    web_search: "web_search",
-    mcp: "mcp",
-    azure_ai_search: "azure_ai_search",
-    openapi: "openapi",
-    a2a_preview: "a2a_preview",
-    work_iq_preview: "work_iq_preview",
-    fabric_iq_preview: "fabric_iq_preview",
-    toolbox_search_preview: "toolbox_search_preview",
-  }
-
-  /**
-   * An abstract representation of a tool stored in a toolbox.
-   */
-  @discriminator("type")
-  model ToolboxTool {
-    /**
-     * The type of tool.
-     */
-    type: ToolboxToolType;
-
-    ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
-  }
-
-  /**
-   * A code interpreter tool stored in a toolbox.
-   */
-  model CodeInterpreterToolbox extends ToolboxTool {
-    /**
-     * The type of the tool. Always `code_interpreter`.
-     */
-    type: "code_interpreter";
-  }
-
-  /**
-   * A file search tool stored in a toolbox.
-   */
-  model FileSearchToolbox extends ToolboxTool {
-    /**
-     * The type of the tool. Always `file_search`.
-     */
-    type: "file_search" = "file_search";
-  }
-
-  /**
-   * A web search tool stored in a toolbox.
-   */
-  model WebSearchToolbox extends ToolboxTool {
-    /**
-     * The type of the tool. Always `web_search`.
-     */
-    type: "web_search" = "web_search";
-  }
-
-  /**
-   * An MCP tool stored in a toolbox.
-   */
-  model MCPToolbox extends ToolboxTool {
-    /**
-     * The type of the tool. Always `mcp`.
-     */
-    type: "mcp";
-  }
-
-  /**
-   * An Azure AI Search tool stored in a toolbox.
-   */
-  model AzureAISearchToolbox extends ToolboxTool {
-    /**
-     * The type of the tool. Always `azure_ai_search`.
-     */
-    type: "azure_ai_search";
-  }
-
-  /**
-   * An OpenAPI tool stored in a toolbox.
-   */
-  model OpenApiToolbox extends ToolboxTool {
-    /**
-     * The type of the tool. Always `openapi`.
-     */
-    type: "openapi";
-  }
-
-  /**
-   * An A2A tool stored in a toolbox.
-   */
-  model A2APreviewToolbox extends ToolboxTool {
-    /**
-     * The type of the tool. Always `a2a_preview`.
-     */
-    type: "a2a_preview";
-  }
-
-  /**
-   * A WorkIQ tool stored in a toolbox.
-   */
-  model WorkIQPreviewToolbox extends ToolboxTool {
-    /**
-     * The type of the tool. Always `work_iq_preview`.
-     */
-    type: "work_iq_preview";
-  }
-
-  /**
-   * A FabricIQ tool stored in a toolbox.
-   */
-  model FabricIQPreviewToolbox extends ToolboxTool {
-    /**
-     * The type of the tool. Always `fabric_iq_preview`.
-     */
-    type: "fabric_iq_preview";
-  }
-
-  /**
-   * A toolbox search tool stored in a toolbox.
-   */
-  model ToolboxSearchPreviewToolbox extends ToolboxTool {
-    /**
-     * The type of the tool. Always `toolbox_search_preview`.
-     */
-    type: "toolbox_search_preview";
-  }
-
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-  @@copyProperties(CodeInterpreterToolbox, OpenAI.CodeInterpreterTool);
-
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-  @@copyProperties(FileSearchToolbox, OpenAI.FileSearchTool);
-
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-  @@copyProperties(WebSearchToolbox, OpenAI.WebSearchTool);
-
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-  @@copyProperties(WebSearchToolbox,
-    {
-      /**
-       * The project connections attached to this tool. There can be a maximum of 1 connection
-       * resource attached to the tool.
-       */
-      custom_search_configuration?: WebSearchConfiguration,
-    }
-  );
-
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-  @@copyProperties(MCPToolbox, OpenAI.MCPTool);
-
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-  @@copyProperties(MCPToolbox,
-    {
-      /**
-       * The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
-       */
-      project_connection_id?: string,
-    }
-  );
 
   /**
    * The input definition information for a bing grounding search tool as used to configure an agent.
@@ -1020,38 +811,6 @@ namespace Azure.AI.Projects {
      */
     update_delay?: int32 = 300;
   }
-
-  /**
-   * A tool for searching over the agent's toolbox.
-   * When present, deferred tools are hidden from `tools/list` and only
-   * discoverable via `search_tools` queries at runtime.
-   */
-  model ToolboxSearchPreviewTool extends OpenAI.Tool {
-    /**
-     * The type of the tool. Always `toolbox_search_preview`.
-     */
-    type: "toolbox_search_preview";
-
-    ...ToolNameAndDescriptionExtension;
-  }
-
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-  @@copyProperties(AzureAISearchToolbox, AzureAISearchTool);
-
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-  @@copyProperties(OpenApiToolbox, OpenApiTool);
-
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-  @@copyProperties(A2APreviewToolbox, A2APreviewTool);
-
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-  @@copyProperties(WorkIQPreviewToolbox, WorkIQPreviewTool);
-
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-  @@copyProperties(FabricIQPreviewToolbox, FabricIQPreviewTool);
-
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-  @@copyProperties(ToolboxSearchPreviewToolbox, ToolboxSearchPreviewTool);
 
   // ==============================================================================
   // Grounding Tool Call Status and Document Models
