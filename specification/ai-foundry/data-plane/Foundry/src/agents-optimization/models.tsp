@@ -80,8 +80,8 @@ model OptimizationOptions {
   @doc("If true, retain temporary candidate-evaluation agent versions for inspection. Default: false.")
   keepVersions?: boolean = false;
 
-  @doc("Per-evaluator model deployment mapping. Keys are evaluator names or '*' for default. Values are deployment names (e.g. 'gpt-4o').")
-  evalModel?: Record<string>;
+  @doc("Model deployment used for evaluation. Defaults to server config (typically 'gpt-4o').")
+  evalModel?: string;
 
   @doc("Model deployment for optimization reasoning (must be gpt-5 family). Falls back to the default eval model when not set.")
   optimizationModel?: string;
