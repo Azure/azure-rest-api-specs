@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Migrate Migration Service",
-    "version": "2026-02-01-preview",
+    "version": "2026-06-01-preview",
     "description": "Azure Migrate Resource Provider management API.",
     "x-typespec-generated": [
       {
@@ -85,16 +85,131 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Operations_List_MaximumSet": {
-            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
-          },
-          "Operations_List_MinimumSet": {
-            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/createWavesFromPlan": {
+      "post": {
+        "operationId": "MigrateProjects_CreateWavesFromPlan",
+        "tags": [
+          "MigrateProjects"
+        ],
+        "summary": "Create Waves From Plan",
+        "description": "Creates Wave resources from the latest Active wave plan for the supplied (assessmentArmId, migrationPath) tuple.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateWavesFromPlanRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CreateWavesFromPlanResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MigrateProjects_CreateWavesFromPlan_MaximumSet": {
+            "$ref": "./examples/MigrateProjects_CreateWavesFromPlan_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/fetchSASUri": {
+      "post": {
+        "operationId": "MigrateProjects_FetchSasUri",
+        "tags": [
+          "MigrateProjects"
+        ],
+        "summary": "Fetch Upload SAS URI",
+        "description": "Mints a short-lived write-targeted SAS URL pointing into a server-managed CSV staging container. Callers PUT a wave-plan CSV to this URL and then reference the same URL on importWavePlan. Empty request body; synchronous (no LRO).",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FetchSasUriResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MigrateProjects_FetchSasUri_MaximumSet": {
+            "$ref": "./examples/MigrateProjects_FetchSasUri_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -172,6 +287,138 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/getWavePlans": {
+      "post": {
+        "operationId": "MigrateProjects_GetWavePlans",
+        "tags": [
+          "MigrateProjects"
+        ],
+        "summary": "Get Wave Plans",
+        "description": "Lists wave plans for an assessment. When migrationPath is supplied, restricts results to that (assessmentArmId, migrationPath) combination. Returns the entire result set in a single page; ordered by wavePlanVersion descending within each migration path.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetWavePlansRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GetWavePlansResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MigrateProjects_GetWavePlans_MaximumSet": {
+            "$ref": "./examples/MigrateProjects_GetWavePlans_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/importWavePlan": {
+      "post": {
+        "operationId": "MigrateProjects_ImportWavePlan",
+        "tags": [
+          "MigrateProjects"
+        ],
+        "summary": "Import Wave Plan",
+        "description": "Imports a customer-authored wave plan from a CSV upload as a new wave plan resource; supersedes any existing plan for the (assessmentArmId, migrationPath) tuple.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "Migrate Project Name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>&:\\?/#]{1,260}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImportWavePlanRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ImportWavePlanResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MigrateProjects_ImportWavePlan_MaximumSet": {
+            "$ref": "./examples/MigrateProjects_ImportWavePlan_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{projectName}/migrationEntities": {
       "get": {
         "operationId": "MigrationEntities_ListByParent",
@@ -210,11 +457,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "MigrationEntities_ListByParent_MaximumSet": {
-            "$ref": "./examples/MigrationEntities_ListByParent_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -268,11 +510,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "MigrationEntities_Get_MaximumSet": {
-            "$ref": "./examples/MigrationEntities_Get_MaximumSet_Gen.json"
           }
         }
       },
@@ -349,11 +586,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "MigrationEntities_Create_MaximumSet": {
-            "$ref": "./examples/MigrationEntities_Create_MaximumSet_Gen.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -417,11 +649,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "MigrationEntities_Delete_MaximumSet": {
-            "$ref": "./examples/MigrationEntities_Delete_MaximumSet_Gen.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -466,11 +693,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "MigrationEntityGroups_ListByParent_MaximumSet": {
-            "$ref": "./examples/MigrationEntityGroups_ListByParent_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -524,11 +746,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "MigrationEntityGroups_Get_MaximumSet": {
-            "$ref": "./examples/MigrationEntityGroups_Get_MaximumSet_Gen.json"
           }
         }
       },
@@ -605,11 +822,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "MigrationEntityGroups_Create_MaximumSet": {
-            "$ref": "./examples/MigrationEntityGroups_Create_MaximumSet_Gen.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -671,11 +883,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "MigrationEntityGroups_Delete_MaximumSet": {
-            "$ref": "./examples/MigrationEntityGroups_Delete_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -748,11 +955,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "MigrateProjects_RefreshEntities_MaximumSet": {
-            "$ref": "./examples/MigrateProjects_RefreshEntities_MaximumSet_Gen.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -807,11 +1009,6 @@
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Tasks_GetSummary_MaximumSet": {
-            "$ref": "./examples/Tasks_GetSummary_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -853,11 +1050,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Tasks_ListByParent_MaximumSet": {
-            "$ref": "./examples/Tasks_ListByParent_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -911,11 +1103,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Tasks_Get_MaximumSet": {
-            "$ref": "./examples/Tasks_Get_MaximumSet_Gen.json"
           }
         }
       },
@@ -992,11 +1179,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Tasks_Create_MaximumSet": {
-            "$ref": "./examples/Tasks_Create_MaximumSet_Gen.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -1060,11 +1242,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Tasks_Delete_MaximumSet": {
-            "$ref": "./examples/Tasks_Delete_MaximumSet_Gen.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1109,11 +1286,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Waves_ListByParent_MaximumSet": {
-            "$ref": "./examples/Waves_ListByParent_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1167,11 +1339,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Waves_Get_MaximumSet": {
-            "$ref": "./examples/Waves_Get_MaximumSet_Gen.json"
           }
         }
       },
@@ -1248,11 +1415,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Waves_Create_MaximumSet": {
-            "$ref": "./examples/Waves_Create_MaximumSet_Gen.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -1316,11 +1478,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Waves_Delete_MaximumSet": {
-            "$ref": "./examples/Waves_Delete_MaximumSet_Gen.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1374,11 +1531,6 @@
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Waves_Refresh_MaximumSet": {
-            "$ref": "./examples/Waves_Refresh_MaximumSet_Gen.json"
-          }
         }
       }
     }
@@ -1408,6 +1560,102 @@
         }
       }
     },
+    "CreateWavesFromPlanRequest": {
+      "type": "object",
+      "description": "Request body for the createWavesFromPlan action.",
+      "properties": {
+        "assessmentArmId": {
+          "type": "string",
+          "description": "ARM Id of the source assessment. Used together with migrationPath so the server can resolve the latest Active wave plan for the (assessmentArmId, migrationPath) tuple at LRO start."
+        },
+        "migrationPath": {
+          "type": "string",
+          "description": "Migration path of the wave plan to create waves from. Allowed values include PaaSPreferred, PaaSCentric, IaaSCentric, RecommendedPath, AzureVM, Avs, SqlDatabase, SqlMI, AzureSQLVM, AzureAppService, AzureAppServiceContainer, AKS, Modernize, LiftAndShift."
+        },
+        "waveSelection": {
+          "type": "array",
+          "description": "Optional subset of waves from the resolved plan to create, identified by waveName plus the desired waveDisplayName for each. When omitted, all waves in the resolved plan are created.",
+          "items": {
+            "$ref": "#/definitions/WaveSelectionItem"
+          },
+          "x-ms-identifiers": [
+            "waveName"
+          ]
+        }
+      },
+      "required": [
+        "assessmentArmId",
+        "migrationPath"
+      ]
+    },
+    "CreateWavesFromPlanResponse": {
+      "type": "object",
+      "description": "Response body for the createWavesFromPlan action. Top-level counters describe the outcome; when at least one wave failed, sasUri and expirationTime carry a pointer to a per-invocation outcome-report CSV. On all-success or all-skipped runs both fields are omitted.",
+      "properties": {
+        "totalWaves": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of waves the operation attempted to create.",
+          "readOnly": true
+        },
+        "succeededWaves": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of waves that were created successfully.",
+          "readOnly": true
+        },
+        "failedWaves": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of waves that failed to create.",
+          "readOnly": true
+        },
+        "skippedWaves": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of waves that were skipped (for example, a wave with the same name already existed and the conflict policy was skip).",
+          "readOnly": true
+        },
+        "sasUri": {
+          "type": "string",
+          "description": "Time-bound, read-only SAS URL to a per-invocation outcome-report CSV enumerating each failed wave with a failureReason and remediation column. Present only when failedWaves is greater than zero.",
+          "readOnly": true
+        },
+        "expirationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC instant after which sasUri ceases to be valid. Present only when sasUri is present.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "totalWaves",
+        "succeededWaves",
+        "failedWaves",
+        "skippedWaves"
+      ]
+    },
+    "FetchSasUriResponse": {
+      "type": "object",
+      "description": "Response body for the fetchSASUri action.",
+      "properties": {
+        "sasUri": {
+          "type": "string",
+          "description": "Write-targeted short-lived SAS URL pointing into the server-managed CSV staging container. Callers PUT their wave-plan CSV payload to this URL and then pass the same URL verbatim as the sasUri field on importWavePlan.",
+          "readOnly": true
+        },
+        "expirationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC instant after which sasUri ceases to be valid.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "sasUri",
+        "expirationTime"
+      ]
+    },
     "GenerateWavePlanRequest": {
       "type": "object",
       "description": "Request body for the generateWavePlan action.",
@@ -1436,9 +1684,145 @@
           "format": "date-time",
           "description": "UTC instant after which sasUri ceases to be valid.",
           "readOnly": true
+        },
+        "wavePlanName": {
+          "type": "string",
+          "description": "Server-allocated friendly identifier for the wave plan. Output-only.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation on the wave plan.",
+          "readOnly": true
+        },
+        "planSource": {
+          "$ref": "#/definitions/PlanSource",
+          "description": "How the wave plan was produced. Always SystemGenerated for plans produced by generateWavePlan.",
+          "readOnly": true
+        },
+        "assessmentArmId": {
+          "type": "string",
+          "description": "ARM Id of the source assessment the wave plan was generated from. Echoed from the request.",
+          "readOnly": true
+        },
+        "migrationPath": {
+          "type": "string",
+          "description": "Migration path the wave plan was generated for. Echoed from the request. Allowed values include PaaSPreferred, PaaSCentric, IaaSCentric, RecommendedPath, AzureVM, Avs, SqlDatabase, SqlMI, AzureSQLVM, AzureAppService, AzureAppServiceContainer, AKS, Modernize, LiftAndShift.",
+          "readOnly": true
         }
       },
       "required": [
+        "sasUri",
+        "expirationTime",
+        "wavePlanName",
+        "provisioningState",
+        "planSource",
+        "assessmentArmId"
+      ]
+    },
+    "GetWavePlansRequest": {
+      "type": "object",
+      "description": "Request body for the getWavePlans action.",
+      "properties": {
+        "assessmentArmId": {
+          "type": "string",
+          "description": "ARM Id of the source assessment. Required."
+        },
+        "migrationPath": {
+          "type": "string",
+          "description": "Optional migration path. When provided, restricts results to the supplied (assessmentArmId, migrationPath) combination; when omitted, returns wave plans across every migration path that has plans for the assessment. Allowed values include PaaSPreferred, PaaSCentric, IaaSCentric, RecommendedPath, AzureVM, Avs, SqlDatabase, SqlMI, AzureSQLVM, AzureAppService, AzureAppServiceContainer, AKS, Modernize, LiftAndShift."
+        }
+      },
+      "required": [
+        "assessmentArmId"
+      ]
+    },
+    "GetWavePlansResponse": {
+      "type": "object",
+      "description": "Response body for the getWavePlans action.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of wave plan summary items. Returned in a single page; ordered by wavePlanVersion descending within each migration path.",
+          "items": {
+            "$ref": "#/definitions/WavePlanSummary"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ImportWavePlanRequest": {
+      "type": "object",
+      "description": "Request body for the importWavePlan action.",
+      "properties": {
+        "assessmentArmId": {
+          "type": "string",
+          "description": "ARM Id of the source assessment. Must belong to the same subscription, resource group, and migrate project as the request URL."
+        },
+        "migrationPath": {
+          "type": "string",
+          "description": "Migration path that the supplied wave plan applies to. Allowed values include PaaSPreferred, PaaSCentric, IaaSCentric, RecommendedPath, AzureVM, Avs, SqlDatabase, SqlMI, AzureSQLVM, AzureAppService, AzureAppServiceContainer, AKS, Modernize, LiftAndShift."
+        },
+        "sasUri": {
+          "type": "string",
+          "description": "SAS-signed URL to the customer-uploaded CSV. The recommended way to obtain this URL is to call fetchSASUri, PUT the CSV payload to the URL it returns, then pass that same URL verbatim here. The URL is fetched once during import and is neither persisted on the resulting wave plan nor echoed back on read."
+        }
+      },
+      "required": [
+        "assessmentArmId",
+        "migrationPath",
+        "sasUri"
+      ]
+    },
+    "ImportWavePlanResponse": {
+      "type": "object",
+      "description": "Response body for the importWavePlan action.",
+      "properties": {
+        "wavePlanName": {
+          "type": "string",
+          "description": "Server-allocated friendly identifier for the imported wave plan. Output-only.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation on the wave plan.",
+          "readOnly": true
+        },
+        "planSource": {
+          "$ref": "#/definitions/PlanSource",
+          "description": "How the wave plan was produced. Always Imported for plans produced by importWavePlan.",
+          "readOnly": true
+        },
+        "assessmentArmId": {
+          "type": "string",
+          "description": "ARM Id of the source assessment the wave plan was imported for. Echoed from the request.",
+          "readOnly": true
+        },
+        "migrationPath": {
+          "type": "string",
+          "description": "Migration path the wave plan was imported for. Echoed from the request. Allowed values include PaaSPreferred, PaaSCentric, IaaSCentric, RecommendedPath, AzureVM, Avs, SqlDatabase, SqlMI, AzureSQLVM, AzureAppService, AzureAppServiceContainer, AKS, Modernize, LiftAndShift.",
+          "readOnly": true
+        },
+        "sasUri": {
+          "type": "string",
+          "description": "Time-bound SAS URL to the parsed wave-plan JSON. Expires at expirationTime; never persisted on the wave-plan document.",
+          "readOnly": true
+        },
+        "expirationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC instant after which sasUri ceases to be valid.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "wavePlanName",
+        "planSource",
+        "assessmentArmId",
+        "migrationPath",
         "sasUri",
         "expirationTime"
       ]
@@ -1965,6 +2349,30 @@
           {
             "name": "ServerMigration",
             "value": "ServerMigration"
+          }
+        ]
+      }
+    },
+    "PlanSource": {
+      "type": "string",
+      "description": "Identifies how a wave plan was produced.",
+      "enum": [
+        "SystemGenerated",
+        "Imported"
+      ],
+      "x-ms-enum": {
+        "name": "PlanSource",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SystemGenerated",
+            "value": "SystemGenerated",
+            "description": "The wave plan was produced by the system solver."
+          },
+          {
+            "name": "Imported",
+            "value": "Imported",
+            "description": "The wave plan was uploaded by the customer."
           }
         ]
       }
@@ -2626,6 +3034,56 @@
         "value"
       ]
     },
+    "WavePlanSummary": {
+      "type": "object",
+      "description": "Summary metadata for a single wave plan returned by getWavePlans, plus a time-bound SAS URL to stream the wave-plan JSON.",
+      "properties": {
+        "wavePlanName": {
+          "type": "string",
+          "description": "Server-allocated friendly identifier for the wave plan.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation on the wave plan.",
+          "readOnly": true
+        },
+        "planSource": {
+          "$ref": "#/definitions/PlanSource",
+          "description": "How the wave plan was produced.",
+          "readOnly": true
+        },
+        "assessmentArmId": {
+          "type": "string",
+          "description": "ARM Id of the source assessment.",
+          "readOnly": true
+        },
+        "migrationPath": {
+          "type": "string",
+          "description": "Migration path the wave plan was produced for. Allowed values include PaaSPreferred, PaaSCentric, IaaSCentric, RecommendedPath, AzureVM, Avs, SqlDatabase, SqlMI, AzureSQLVM, AzureAppService, AzureAppServiceContainer, AKS, Modernize, LiftAndShift.",
+          "readOnly": true
+        },
+        "sasUri": {
+          "type": "string",
+          "description": "Time-bound SAS URL to the wave-plan JSON for this item. Minted on demand on every response; never persisted on the wave-plan document.",
+          "readOnly": true
+        },
+        "expirationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC instant after which sasUri ceases to be valid.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "wavePlanName",
+        "planSource",
+        "assessmentArmId",
+        "migrationPath",
+        "sasUri",
+        "expirationTime"
+      ]
+    },
     "WaveProperties": {
       "type": "object",
       "description": "Migration Wave Properties class.",
@@ -2678,6 +3136,24 @@
         "displayName",
         "arg",
         "plannedStartDate"
+      ]
+    },
+    "WaveSelectionItem": {
+      "type": "object",
+      "description": "Identifies a single wave from the resolved wave plan to create, together with the display name that should be applied to the resulting wave resource.",
+      "properties": {
+        "waveName": {
+          "type": "string",
+          "description": "Name of the wave in the resolved wave plan to create. Must match a wave entry produced by the source plan."
+        },
+        "waveDisplayName": {
+          "type": "string",
+          "description": "Display name to assign to the wave resource that is created. Free-form, human-readable label surfaced in tooling."
+        }
+      },
+      "required": [
+        "waveName",
+        "waveDisplayName"
       ]
     }
   },
