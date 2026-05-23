@@ -231,7 +231,7 @@
         "tags": [
           "AIModels"
         ],
-        "description": "Calculates projected hourly compute cost for deploying this model on the GPU SKUs available to the caller subscription. No Kubernetes or Azure resources are provisioned.",
+        "description": "Returns a ranked list of GPU SKU pricing plans for deploying this model in the target region, each annotated with feasibility, per-replica hourly cost, and estimated relative performance. No Azure or Kubernetes resources are provisioned.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1215,7 +1215,7 @@
         "tags": [
           "AIManagerNamespaces"
         ],
-        "description": "Returns the namespace-scoped LLM gateway endpoint and the currently-valid API keys.",
+        "description": "Returns the namespace-scoped LLM gateway endpoint and the current API keys.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1666,13 +1666,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers/{aiManagerName}/namespaces/{namespaceName}/updateKeyRotationPolicy": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers/{aiManagerName}/namespaces/{namespaceName}/rotateKeys": {
       "post": {
-        "operationId": "AIManagerNamespaces_UpdateKeyRotationPolicy",
+        "operationId": "AIManagerNamespaces_RotateKeys",
         "tags": [
           "AIManagerNamespaces"
         ],
-        "description": "Schedules a one-shot rotation of the namespace-scoped LLM gateway API keys and returns the persisted policy.\n\nAt `nextRotationTime`, a new key is generated and installed as `primaryKey`; the previous `primaryKey` is retained as `secondaryKey` for `gracePeriod` so clients can roll over without downtime, then revoked. After the rotation runs, `nextRotationTime` is cleared; omit it to cancel any pending rotation.",
+        "description": "Rotates the namespace-scoped LLM gateway API keys. A new key is generated and installed as `primaryKey`, and the previous `primaryKey` overwrites `secondaryKey` so clients can roll over without downtime. Returns the updated access info.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1702,22 +1702,13 @@
             "minLength": 1,
             "maxLength": 63,
             "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/KeyRotationPolicy"
-            }
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/KeyRotationPolicy"
+              "$ref": "#/definitions/NamespaceAccessInfo"
             }
           },
           "default": {
@@ -1728,8 +1719,8 @@
           }
         },
         "x-ms-examples": {
-          "AIManagerNamespaces_UpdateKeyRotationPolicy": {
-            "$ref": "./examples/AIManagerNamespaces_UpdateKeyRotationPolicy.json"
+          "AIManagerNamespaces_RotateKeys": {
+            "$ref": "./examples/AIManagerNamespaces_RotateKeys.json"
           }
         }
       }
@@ -2029,7 +2020,8 @@
         },
         "description": {
           "type": "string",
-          "description": "An optional, free-form description of the model."
+          "description": "An optional, free-form description of the model.",
+          "readOnly": true
         },
         "spec": {
           "$ref": "#/definitions/ModelSpec",
@@ -2108,48 +2100,62 @@
     },
     "CalculateCostPlan": {
       "type": "object",
-      "description": "A GPU SKU pricing plan returned by the `calculateCost` action.",
+      "description": "A GPU SKU pricing plan returned by the `calculateCost` action. Describes the cost of running a single model replica on the specified `vmSize`. To estimate the cost of running multiple replicas, scale `totalHourlyPrice` by the desired replica count, bounded by `maxAvailableReplicas`.",
       "properties": {
         "vmSize": {
           "type": "string",
-          "description": "Azure VM SKU, e.g. \"Standard_ND96isr_H100_v5\". Matches the value accepted by `ModelDeploymentProperties.vmSize`."
+          "description": "Azure VM SKU, e.g. \"Standard_ND96isr_H100_v5\". Matches the value accepted by `ModelDeploymentProperties.vmSize`.",
+          "readOnly": true
         },
         "quantization": {
           "type": "string",
-          "description": "Resolved quantization on this SKU."
+          "description": "Resolved quantization on this SKU.",
+          "readOnly": true
         },
         "vmsPerReplica": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of vms required to host one replica on this SKU."
+          "description": "Number of VMs required to host one replica on this SKU.",
+          "readOnly": true
         },
         "maxAvailableReplicas": {
           "type": "integer",
           "format": "int32",
-          "description": "Maximum number of replicas the caller's subscription can deploy on this SKU today, computed from the available GPU quota in the target region."
+          "description": "Maximum number of replicas the caller's subscription can deploy on this SKU today, computed from the available GPU quota in the target region.",
+          "readOnly": true
+        },
+        "servingPerformanceEstimation": {
+          "$ref": "#/definitions/ServingPerformanceEstimation",
+          "description": "Estimated relative inference performance of a single model replica on this SKU. Omitted when an estimate is unavailable.",
+          "readOnly": true
         },
         "vmHourlyPrice": {
           "type": "number",
           "format": "double",
-          "description": "On-demand hourly price for a single vm of this SKU, in `currency`."
+          "description": "On-demand hourly price for a single VM of this SKU, in `currency`.",
+          "readOnly": true
         },
         "totalHourlyPrice": {
           "type": "number",
           "format": "double",
-          "description": "Projected hourly cost for one replica (`vmsPerReplica` vms), in `currency`. Omitted when the plan is infeasible."
+          "description": "Projected hourly cost for one replica (`vmsPerReplica` VMs), in `currency`. Omitted when `feasible` is `false`.",
+          "readOnly": true
         },
         "priceAsOf": {
           "type": "string",
           "format": "date-time",
-          "description": "UTC timestamp of the price snapshot used for this plan. Overrides any response-level snapshot if present."
+          "description": "UTC timestamp of the price snapshot used for this plan.",
+          "readOnly": true
         },
         "feasible": {
           "type": "boolean",
-          "description": "Whether the caller can actually deploy this plan today (region availability, GPU quota, model fit, ...)."
+          "description": "Whether the caller can actually deploy this plan today (region availability, GPU quota, model fit, etc.).",
+          "readOnly": true
         },
         "infeasibleError": {
           "$ref": "#/definitions/InfeasibleError",
-          "description": "Error detail explaining why the plan is not deployable. Omitted when `feasible=true`."
+          "description": "Error detail explaining why the plan is not deployable. Omitted when `feasible` is `true`.",
+          "readOnly": true
         }
       },
       "required": [
@@ -2166,7 +2172,8 @@
       "properties": {
         "currency": {
           "type": "string",
-          "description": "ISO 4217 currency code, e.g. \"USD\"."
+          "description": "ISO 4217 currency code, e.g. \"USD\".",
+          "readOnly": true
         },
         "plans": {
           "type": "array",
@@ -2174,6 +2181,7 @@
           "items": {
             "$ref": "#/definitions/CalculateCostPlan"
           },
+          "readOnly": true,
           "x-ms-identifiers": [
             "vmSize"
           ]
@@ -2276,7 +2284,7 @@
           {
             "name": "InefficientDeployment",
             "value": "InefficientDeployment",
-            "description": "The deployment can start successfully on this SKU, but its measured runtime performance falls below the acceptable threshold for serving this model."
+            "description": "The deployment can start successfully on this SKU, but its estimated runtime performance falls below the acceptable threshold for serving this model."
           }
         ]
       }
@@ -2287,11 +2295,13 @@
       "properties": {
         "code": {
           "$ref": "#/definitions/InfeasibleCode",
-          "description": "Machine-readable reason code."
+          "description": "Machine-readable reason code.",
+          "readOnly": true
         },
         "message": {
           "type": "string",
-          "description": "Human-readable message accompanying `code`."
+          "description": "Human-readable message accompanying `code`.",
+          "readOnly": true
         }
       },
       "required": [
@@ -2317,22 +2327,6 @@
       "required": [
         "value"
       ]
-    },
-    "KeyRotationPolicy": {
-      "type": "object",
-      "description": "One-shot key rotation policy for the namespace-scoped LLM gateway API keys. See `updateKeyRotationPolicy` for behavior.",
-      "properties": {
-        "nextRotationTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "UTC time at which the controller will rotate the keys. Omit to cancel any pending rotation."
-        },
-        "gracePeriod": {
-          "type": "string",
-          "format": "duration",
-          "description": "Duration the previous `primaryKey` remains valid as `secondaryKey` after a rotation. ISO 8601 duration (e.g. `PT24H`, `P7D`). Defaults to `PT24H`."
-        }
-      }
     },
     "ManualScalingProfile": {
       "type": "object",
@@ -2729,34 +2723,34 @@
         "endpoint": {
           "type": "string",
           "format": "uri",
-          "description": "Inference gateway URL. OpenAI-compatible base URL, e.g. \"https://team-alpha.<cluster>.<region>.aksapp.io/v1\"."
+          "description": "OpenAI-compatible inference gateway base URL (for example, `https://team-alpha.<cluster>.<region>.aksapp.io/v1`).",
+          "readOnly": true
         },
         "primaryKey": {
           "type": "string",
           "format": "password",
           "description": "Primary API key. Send as `Authorization: Bearer <key>` or `api-key: <key>`. Treat as secret; do not log or persist in plaintext.",
+          "readOnly": true,
           "x-ms-secret": true
         },
         "secondaryKey": {
           "type": "string",
           "format": "password",
-          "description": "Previous `primaryKey`, retained temporarily after a rotation to allow clients to migrate to the new `primaryKey`. Revoked when `gracePeriod` elapses, after which this field is omitted. Do not use for new requests.",
+          "description": "Secondary API key, accepted by the gateway in the same headers as `primaryKey`. Generated independently when the namespace is created, then overwritten by the previous `primaryKey` on each `rotateKeys` call so clients can roll over without downtime. Treat as secret; do not log or persist in plaintext.",
+          "readOnly": true,
           "x-ms-secret": true
         },
         "lastRotatedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "UTC time the keys were last rotated. Clients can use this to detect rotation and refresh cached credentials."
-        },
-        "nextRotationTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "UTC time of the next scheduled key rotation; absent when none is scheduled. See `updateKeyRotationPolicy`."
+          "description": "UTC time the keys were last rotated by `rotateKeys`. Absent until the first rotation. Clients can use this to detect rotation and refresh cached credentials.",
+          "readOnly": true
         }
       },
       "required": [
         "endpoint",
-        "primaryKey"
+        "primaryKey",
+        "secondaryKey"
       ]
     },
     "ScalingProfile": {
@@ -2772,6 +2766,32 @@
           "description": "Autoscaling configuration. Mutually exclusive with `manual`."
         }
       }
+    },
+    "ServingPerformanceEstimation": {
+      "type": "object",
+      "description": "Estimated relative inference performance of a single model replica on a given GPU SKU. Each metric is a scaling coefficient in the range `[0, 1]` relative to the best-performing SKU for this model, which scores `1`.",
+      "properties": {
+        "latency": {
+          "type": "number",
+          "format": "float",
+          "description": "Relative inference latency coefficient in `[0, 1]`. Higher is better (`1` matches the best-performing SKU's latency for this model).",
+          "minimum": 0,
+          "maximum": 1,
+          "readOnly": true
+        },
+        "throughput": {
+          "type": "number",
+          "format": "float",
+          "description": "Relative inference throughput coefficient in `[0, 1]`. Higher is better (`1` matches the best-performing SKU's throughput for this model).",
+          "minimum": 0,
+          "maximum": 1,
+          "readOnly": true
+        }
+      },
+      "required": [
+        "latency",
+        "throughput"
+      ]
     }
   },
   "parameters": {}

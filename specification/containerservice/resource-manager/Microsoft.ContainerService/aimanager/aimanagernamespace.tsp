@@ -88,7 +88,7 @@ interface AIManagerNamespaces {
   >;
 
   @added(Versions.v2026_05_02_preview)
-  @doc("Returns the namespace-scoped LLM gateway endpoint and the currently-valid API keys.")
+  @doc("Returns the namespace-scoped LLM gateway endpoint and the current API keys.")
   @post
   @action("listAccessKeys")
   listAccessKeys is ArmResourceActionSync<
@@ -98,49 +98,36 @@ interface AIManagerNamespaces {
   >;
 
   @added(Versions.v2026_05_02_preview)
-  @doc("""
-    Schedules a one-shot rotation of the namespace-scoped LLM gateway API keys and returns the persisted policy.
-    
-    At `nextRotationTime`, a new key is generated and installed as `primaryKey`; the previous `primaryKey` is retained as `secondaryKey` for `gracePeriod` so clients can roll over without downtime, then revoked. After the rotation runs, `nextRotationTime` is cleared; omit it to cancel any pending rotation.
-    """)
+  @doc("Rotates the namespace-scoped LLM gateway API keys. A new key is generated and installed as `primaryKey`, and the previous `primaryKey` overwrites `secondaryKey` so clients can roll over without downtime. Returns the updated access info.")
   @post
-  @action("updateKeyRotationPolicy")
-  updateKeyRotationPolicy is ArmResourceActionSync<
+  @action("rotateKeys")
+  rotateKeys is ArmResourceActionSync<
     AIManagerNamespace,
-    KeyRotationPolicy,
-    ArmResponse<KeyRotationPolicy>
+    void,
+    ArmResponse<NamespaceAccessInfo>
   >;
 }
 
 @added(Versions.v2026_05_02_preview)
 @doc("Access information for an AI Manager namespace, including the OpenAI-compatible gateway endpoint and the API keys used to authenticate against it.")
 model NamespaceAccessInfo {
-  @doc("Inference gateway URL. OpenAI-compatible base URL, e.g. \"https://team-alpha.<cluster>.<region>.aksapp.io/v1\".")
+  @visibility(Lifecycle.Read)
+  @doc("OpenAI-compatible inference gateway base URL (for example, `https://team-alpha.<cluster>.<region>.aksapp.io/v1`).")
   endpoint: url;
 
+  @visibility(Lifecycle.Read)
   @secret
   @doc("Primary API key. Send as `Authorization: Bearer <key>` or `api-key: <key>`. Treat as secret; do not log or persist in plaintext.")
   primaryKey: string;
 
+  @visibility(Lifecycle.Read)
   @secret
-  @doc("Previous `primaryKey`, retained temporarily after a rotation to allow clients to migrate to the new `primaryKey`. Revoked when `gracePeriod` elapses, after which this field is omitted. Do not use for new requests.")
-  secondaryKey?: string;
+  @doc("Secondary API key, accepted by the gateway in the same headers as `primaryKey`. Generated independently when the namespace is created, then overwritten by the previous `primaryKey` on each `rotateKeys` call so clients can roll over without downtime. Treat as secret; do not log or persist in plaintext.")
+  secondaryKey: string;
 
-  @doc("UTC time the keys were last rotated. Clients can use this to detect rotation and refresh cached credentials.")
+  @visibility(Lifecycle.Read)
+  @doc("UTC time the keys were last rotated by `rotateKeys`. Absent until the first rotation. Clients can use this to detect rotation and refresh cached credentials.")
   lastRotatedAt?: utcDateTime;
-
-  @doc("UTC time of the next scheduled key rotation; absent when none is scheduled. See `updateKeyRotationPolicy`.")
-  nextRotationTime?: utcDateTime;
-}
-
-@added(Versions.v2026_05_02_preview)
-@doc("One-shot key rotation policy for the namespace-scoped LLM gateway API keys. See `updateKeyRotationPolicy` for behavior.")
-model KeyRotationPolicy {
-  @doc("UTC time at which the controller will rotate the keys. Omit to cancel any pending rotation.")
-  nextRotationTime?: utcDateTime;
-
-  @doc("Duration the previous `primaryKey` remains valid as `secondaryKey` after a rotation. ISO 8601 duration (e.g. `PT24H`, `P7D`). Defaults to `PT24H`.")
-  gracePeriod?: duration;
 }
 
 @@maxLength(AIManagerNamespace.name, 63);

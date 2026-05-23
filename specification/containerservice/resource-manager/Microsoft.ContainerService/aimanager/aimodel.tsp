@@ -34,6 +34,7 @@ model AIModelProperties {
   @doc("The Hugging Face model identifier in `<org>/<repo>` form, e.g. `microsoft/Phi-4-mini-instruct`. Uniquely identifies the upstream model that backs this catalog entry.")
   modelId: string;
 
+  @visibility(Lifecycle.Read)
   @doc("An optional, free-form description of the model.")
   description?: string;
 
@@ -61,51 +62,84 @@ model ModelSpec {
 @added(Versions.v2026_05_02_preview)
 @doc("Response body for the AI model `calculateCost` action.")
 model CalculateCostResponse {
+  @visibility(Lifecycle.Read)
   @doc("ISO 4217 currency code, e.g. \"USD\".")
   currency: string;
 
+  @visibility(Lifecycle.Read)
   @doc("Ranked list of GPU SKU pricing plans. Feasible plans first, ordered by `totalHourlyPrice` ascending; infeasible plans last.")
   @identifiers(#["vmSize"])
   plans: CalculateCostPlan[];
 }
 
 @added(Versions.v2026_05_02_preview)
-@doc("A GPU SKU pricing plan returned by the `calculateCost` action.")
+@doc("A GPU SKU pricing plan returned by the `calculateCost` action. Describes the cost of running a single model replica on the specified `vmSize`. To estimate the cost of running multiple replicas, scale `totalHourlyPrice` by the desired replica count, bounded by `maxAvailableReplicas`.")
 model CalculateCostPlan {
+  @visibility(Lifecycle.Read)
   @doc("Azure VM SKU, e.g. \"Standard_ND96isr_H100_v5\". Matches the value accepted by `ModelDeploymentProperties.vmSize`.")
   vmSize: string;
 
+  @visibility(Lifecycle.Read)
   @doc("Resolved quantization on this SKU.")
   quantization?: string;
 
-  @doc("Number of vms required to host one replica on this SKU.")
+  @visibility(Lifecycle.Read)
+  @doc("Number of VMs required to host one replica on this SKU.")
   vmsPerReplica: int32;
 
+  @visibility(Lifecycle.Read)
   @doc("Maximum number of replicas the caller's subscription can deploy on this SKU today, computed from the available GPU quota in the target region.")
   maxAvailableReplicas: int32;
 
-  @doc("On-demand hourly price for a single vm of this SKU, in `currency`.")
+  @visibility(Lifecycle.Read)
+  @doc("Estimated relative inference performance of a single model replica on this SKU. Omitted when an estimate is unavailable.")
+  servingPerformanceEstimation?: ServingPerformanceEstimation;
+
+  @visibility(Lifecycle.Read)
+  @doc("On-demand hourly price for a single VM of this SKU, in `currency`.")
   vmHourlyPrice: float64;
 
-  @doc("Projected hourly cost for one replica (`vmsPerReplica` vms), in `currency`. Omitted when the plan is infeasible.")
+  @visibility(Lifecycle.Read)
+  @doc("Projected hourly cost for one replica (`vmsPerReplica` VMs), in `currency`. Omitted when `feasible` is `false`.")
   totalHourlyPrice?: float64;
 
-  @doc("UTC timestamp of the price snapshot used for this plan. Overrides any response-level snapshot if present.")
+  @visibility(Lifecycle.Read)
+  @doc("UTC timestamp of the price snapshot used for this plan.")
   priceAsOf?: utcDateTime;
 
-  @doc("Whether the caller can actually deploy this plan today (region availability, GPU quota, model fit, ...).")
+  @visibility(Lifecycle.Read)
+  @doc("Whether the caller can actually deploy this plan today (region availability, GPU quota, model fit, etc.).")
   feasible: boolean;
 
-  @doc("Error detail explaining why the plan is not deployable. Omitted when `feasible=true`.")
+  @visibility(Lifecycle.Read)
+  @doc("Error detail explaining why the plan is not deployable. Omitted when `feasible` is `true`.")
   infeasibleError?: InfeasibleError;
+}
+
+@added(Versions.v2026_05_02_preview)
+@doc("Estimated relative inference performance of a single model replica on a given GPU SKU. Each metric is a scaling coefficient in the range `[0, 1]` relative to the best-performing SKU for this model, which scores `1`.")
+model ServingPerformanceEstimation {
+  @visibility(Lifecycle.Read)
+  @minValue(0)
+  @maxValue(1)
+  @doc("Relative inference latency coefficient in `[0, 1]`. Higher is better (`1` matches the best-performing SKU's latency for this model).")
+  latency: float32;
+
+  @visibility(Lifecycle.Read)
+  @minValue(0)
+  @maxValue(1)
+  @doc("Relative inference throughput coefficient in `[0, 1]`. Higher is better (`1` matches the best-performing SKU's throughput for this model).")
+  throughput: float32;
 }
 
 @added(Versions.v2026_05_02_preview)
 @doc("Error detail explaining why a `CalculateCostPlan` is not deployable.")
 model InfeasibleError {
+  @visibility(Lifecycle.Read)
   @doc("Machine-readable reason code.")
   code: InfeasibleCode;
 
+  @visibility(Lifecycle.Read)
   @doc("Human-readable message accompanying `code`.")
   message: string;
 }
@@ -121,7 +155,7 @@ union InfeasibleCode {
   @doc("The VM SKU is not available in the target region.")
   RegionUnavailable: "RegionUnavailable",
 
-  @doc("The deployment can start successfully on this SKU, but its measured runtime performance falls below the acceptable threshold for serving this model.")
+  @doc("The deployment can start successfully on this SKU, but its estimated runtime performance falls below the acceptable threshold for serving this model.")
   InefficientDeployment: "InefficientDeployment",
 }
 
@@ -133,7 +167,7 @@ interface AIModels {
 
   list is ArmResourceListByParent<AIModel>;
 
-  @doc("Calculates projected hourly compute cost for deploying this model on the GPU SKUs available to the caller subscription. No Kubernetes or Azure resources are provisioned.")
+  @doc("Returns a ranked list of GPU SKU pricing plans for deploying this model in the target region, each annotated with feasibility, per-replica hourly cost, and estimated relative performance. No Azure or Kubernetes resources are provisioned.")
   @post
   @action("calculateCost")
   calculateCost is ArmResourceActionSync<
