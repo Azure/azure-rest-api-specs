@@ -44723,6 +44723,14 @@
             ],
             "description": "High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default.",
             "default": "medium"
+          },
+          "custom_search_configuration": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/WebSearchConfiguration"
+              }
+            ],
+            "description": "Custom search configuration for domain-restricted web search."
           }
         },
         "allOf": [
@@ -49541,14 +49549,14 @@
         "properties": {
           "project_connection_id": {
             "type": "string",
-            "description": "Project connection id for grounding with bing custom search"
+            "description": "Project connection ID for grounding with Bing custom search."
           },
           "instance_name": {
             "type": "string",
             "description": "Name of the custom configuration instance given to config."
           }
         },
-        "description": "A web search configuration for bing custom search"
+        "description": "A web search configuration for Bing custom search."
       },
       "WebSearchToolbox": {
         "type": "object",
@@ -49597,7 +49605,7 @@
                 "$ref": "#/components/schemas/WebSearchConfiguration"
               }
             ],
-            "description": "The project connections attached to this tool. There can be a maximum of 1 connection\nresource attached to the tool."
+            "description": "Custom search configuration for domain-restricted web search."
           }
         },
         "allOf": [
